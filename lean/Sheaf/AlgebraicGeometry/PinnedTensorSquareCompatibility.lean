@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import Sheaf.AlgebraicGeometry.PinnedStalkTensor
+import Sheaf.AlgebraicGeometry.PinnedTensorSquareComponent
 
 /-! # Stalk compatibility of a specified tensor pullback chain map
 
@@ -28,19 +29,19 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-local instance pinnedTensorSquareCompatibilityInstance1 (Y : Scheme.{u}) :
+local instance pinnedTensorSquareCompatibilityT2Instance1 (Y : Scheme.{u}) :
     MonoidalCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
   pullbackDescentModuleTensor Y
 
-local instance pinnedTensorSquareCompatibilityInstance2 (Y : Scheme.{u}) :
+local instance pinnedTensorSquareCompatibilityT2Instance2 (Y : Scheme.{u}) :
     MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
   modulePreadditive Y
 
-local instance pinnedTensorSquareCompatibilityInstance3
+local instance pinnedTensorSquareCompatibilityT2Instance3
     (Y : Scheme.{u}) : (curriedTensor Y.Modules).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor Y.sheaf
 
-local instance pinnedTensorSquareCompatibilityInstance4 (Y : Scheme.{u}) (M : Y.Modules) :
+local instance pinnedTensorSquareCompatibilityT2Instance4 (Y : Scheme.{u}) (M : Y.Modules) :
     ((curriedTensor Y.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf M
 
@@ -119,6 +120,9 @@ theorem pinned_tensor_pullback_stalk_compatibility
           (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z
             (pullbackTensorTotal X P Q)).hom ≫
           S.map (χ.hom ≫ HomologicalComplex.mapBifunctorMap (𝟙 _) a (curriedTensor _) (.up ℤ)) =
-        (Functor.Monoidal.μIso F U V).inv ≫ (F.obj U ◁ t) ≫ ρ.hom := by sorry
+        (Functor.Monoidal.μIso F U V).inv ≫ (F.obj U ◁ t) ≫ ρ.hom := by
+  apply HomologicalComplex.hom_ext
+  intro n
+  exact pinned_tensor_pullback_stalk_component f f' g g' sq P Q N a χ hχ z n
 
 end AlgebraicGeometry

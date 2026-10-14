@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-module-pinned-tensor-stalk-square",
+ "kind": "statement",
+ "title": "Canonical module tensor pullback square on stalks",
+ "statement": "Let f:X→Y be a morphism of schemes, x∈X, and M,N arbitrary sheaves of modules on Y. Set SX=moduleStalkFunctor(X,x), SY=moduleStalkFunctor(Y,f(x)), E=extendScalars(f.stalkMap(x)), and H=tensorPullback(f). Let p:H;SX≅SY;E be the specific natural isomorphism chosen from exists_tensorPullback_stalk_iso [lem-weil-pbc-module-stalk-pullback]. Let tx and ty be the canonical tensor stalk comparisons chosen from stalkTensorIso on (X,x) and (Y,f(x)) [lem-pc-ringed-space-module-stalk-tensor], and c the canonical module pullback tensor comparison chosen from module_pullback_tensor(f) [lem-weil-pbc-module-pullback-tensor]. Then μ_E(SY M,SY N).hom;E(ty(M,N).inv);p.inv_(M tensor N);SX(c(M,N).hom);tx(HM,HN).hom = p.inv_M tensor p.inv_N. This is a statement about modules, with no cochain complexes, totalizations, cartesian square, derived categories, or auxiliary chain map. Zero stalk rings and zero modules are allowed.",
+ "stmt_deps": [
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex; literature/stacks-project/sheaves.tex",
+  "place": "Tags 01CD and 01CB; Tag 0098; generator calculation omitted in 01CD"
+ },
+ "proof": [
+  {
+   "text": "Set l=p_(M tensor N);E(ty(M,N)) and r=tx(HM,HN);(p_M tensor p_N). To show l.inv;SX(c);r.hom=μ_E.inv, use ModuleCat.ExtendScalars.hom_ext, then TensorProduct.induction_on. Additivity settles zero and sums. For a pure tensor of two stalk vectors, represent both by sections on a common neighborhood, obtained by intersection. The source tensor stalk germ formula and pullback stalk germ formula compute l.hom on the pulled-back tensor germ as one tensor the tensor of the original germs. Apply l.inv to this equality. The module pullback tensor germ formula sends that pulled-back tensor section to the tensor of the two pulled-back sections. The target tensor stalk formula and the two pullback stalk formulas then compute r.hom as the tensor of one tensor each original germ, exactly μ_E.inv on the generator. Thus the maps agree on all generators. Precompose by μ_E.hom and cancel p_M tensor p_N to obtain the displayed equation.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-pc-ringed-space-module-stalk-tensor",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/modules.tex; literature/stacks-project/sheaves.tex",
+  "place": "Explicit generator proof filling the omission in Tags 01CD and 01CB, following the proved isIso_tensorPullback_of_tmul calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degree component equality HomologicalComplex.hom_ext tensor stalk pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.hom_ext tensor pullback stalk component",
+   "results": "Unknown identifier / no matching theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pinned_tensor_pullback_stalk_component|tensor pullback stalk component",
+   "results": "No declaration in Mathlib or the project supplies this equation.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the tensor comparison between pullback sheaves and their stalks, checked on germs of local sections",
+   "results": "Eight presheaf germ/stalk pullback formulas, including germ_stalkPullbackHom and germ_stalkPullbackInv. These provide constituent germ formulas, not the module tensor square or the total-tensor summand normalization.",
+   "date": "2026-10-14",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(monoidal|tensorator)|tensor.*stalk.*naturality",
+   "results": "No Mathlib matches. Local review read TensorPullbackTensorIsIso, TensorPullbackStalk, StalkTensor, PinnedStalkTensor and MapHomologicalComplex. The first contains the generator calculation inside an isomorphism criterion, but no reusable equality theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PinnedTensorSquareCompatibility",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-tensor-stalk-chain-coordinates",
+   "place": "Tag 0DJA(1), tensorStalkIso and module_pullback_tensor generator calculation",
+   "via": [
+    "lem-pc-pinned-tensor-square-compatibility",
+    "lem-pc-pinned-tensor-square-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModulePinnedTensorStalkSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePinnedTensorStalkSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.module_pinned_tensor_stalk_square",
+  "statement": "theorem module_pinned_tensor_stalk_square {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (x : X) (M N : Y.Modules) :\n    let SX := RingedSpace.moduleStalkFunctor X.toRingedSpace x\n    let SY := RingedSpace.moduleStalkFunctor Y.toRingedSpace (f x)\n    let E := ModuleCat.extendScalars.{u, u, u} (f.stalkMap x).hom\n    let p := Classical.choose (exists_tensorPullback_stalk_iso f x)\n    let tx := Classical.choose (SheafOfModules.stalkTensorIso X.toRingedSpace x)\n    let ty := Classical.choose (SheafOfModules.stalkTensorIso Y.toRingedSpace (f x))\n    let c := Classical.choose (module_pullback_tensor f)\n    (Functor.Monoidal.μIso E (SY.obj M) (SY.obj N)).hom ≫\n        E.map (ty M N).inv ≫ p.inv.app (M ⊗ N) ≫ SX.map (c M N).hom ≫\n        (tx ((tensorPullback f).obj M) ((tensorPullback f).obj N)).hom =\n      p.inv.app M ⊗ₘ p.inv.app N",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e5d4b",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T013045-L-3417693",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e5d4b",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T013045-L-3417693",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and direct importer compile cleanly; target and declaration signatures match, proof axioms are permitted with only the named left-summand sorry, DAG/report/change records agree, and all review points pass."
+ }
+}

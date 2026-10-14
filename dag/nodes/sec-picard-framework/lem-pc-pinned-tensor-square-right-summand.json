@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-pinned-tensor-square-right-summand",
+ "kind": "statement",
+ "title": "Right route on a pinned tensor summand",
+ "statement": "Fix schemes $X,X',S,S'$, morphisms $f:X\\to S$, $f':X'\\to S'$, $g:S'\\to S$, $g':X'\\to X$, and a cartesian square $sq:\\operatorname{IsPullback}(g',f',f,g)$. Assume the derived-category instances of the module-sheaf categories. Let $P,Q$ be arbitrary integer cochain complexes of module sheaves on $X$, $N$ such a complex on $X'$, $H_0=\\operatorname{tensorPullback}(g')$ the module pullback functor, $H$ its degreewise extension, and $a:HQ\\to N$ a chain map. At $z\\in X'$ put $R=\\mathcal O_{S,f(g'z)}$, $A=\\mathcal O_{X,g'z}$, $B=\\mathcal O_{S',f'z}$, $C=\\mathcal O_{X',z}$, with the algebra maps induced by the square [def-pc-single-complex-base-change-stalk-condition]. Let $b:A\\to A\\otimes_R B\\to C$ be the resulting composite ring map, $G=\\operatorname{extendScalars}(b)$, $F=G$ applied degreewise, $T$ the stalk functor at $g'z$ on $X$, $S$ the stalk functor at $z$ on $X'$ applied degreewise, $U=T(P)$ and $V=T(Q)$. Write $\\kappa_L=\\operatorname{tensorStalkIso}(f,f',g,g',sq,z,L):F(TL)\\cong S(HL)$ for the specified pullback-stalk comparison. Let $e_{L,M}:T\\operatorname{Tot}(L\\otimes M)\\cong TL\\otimes TM$ and $e'_{L,M}:S\\operatorname{Tot}(L\\otimes M)\\cong SL\\otimes SM$ be the chosen pinned stalk tensor comparisons [lem-pc-tensor-pullback-stalk-square], characterized on each summand by the canonical module tensor-stalk comparison. Define $t=\\kappa_Q;S(a)$ and $\\rho=(\\kappa_P\\otimes1_{SN});(e'_{HP,N})^{-1}$. For integers $n,p,q$ with $p+q=n$, let $j=G(\\iota_{U,V}^{p,q,n})$. Then $j;(\\mu_F^{-1};(1\\otimes t);\\rho)_n=\\delta_G(U^p,V^q);(\\kappa_{P,p}\\otimes\\kappa_{Q,q});(1\\otimes S(a)_q);\\iota_{SHP,SN}^{p,q,n};(e'_{HP,N})^{-1}_n$.",
+ "stmt_deps": [
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-tensor-pullback-stalk-square"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), local tensor comparison calculation using Tag 0BYJ"
+ },
+ "proof": [
+  {
+   "text": "Expand the complex tensorator as the oplax total-complex comparison. Its summand formula is δ_G followed by the summand injection. Apply the whiskerLeft summand formula and the mapBifunctorMap summand formula to κ_P tensor identity. Expand the module tensor hom, distribute whiskerLeft over composition, commute the two whiskerings using whisker_exchange twice, and cancel identity whiskerings. The result is exactly the displayed explicit map.",
+   "uses": [
+    "lem-pc-tensor-pullback-stalk-square",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-pullback-stalk-square",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), normalization of the right summand route"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor coproduct summand scalar extension tensorator stalk pullback naturality",
+   "results": "8 hits;  PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorObjMap, π_tensor_id_preserves_coequalizer_inv_colimMap_desc, id_tensor_π_preserves_coequalizer_inv_colimMap_desc, PresheafOfModules.Monoidal.tensorObj, id_tensor_π_preserves_coequalizer_inv_desc, π_tensor_id_preserves_coequalizer_inv_desc, CommRingCat.pushout_inl_tensorProdObjIsoPushoutObj_inv_right",
+   "date": "2026-10-14",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ιTensorObj",
+   "results": "3 hits;  HomologicalComplex.ιTensorObj, HomologicalComplex.rightUnitor'_inv, HomologicalComplex.leftUnitor'_inv",
+   "date": "2026-10-14",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHom_f|ι_mapBifunctorMap",
+   "results": "2 hits;  Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/Bifunctor.lean",
+   "date": "2026-10-14",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension tensorator naturality on tensor summand injections and stalks of pullback modules",
+   "results": "Service unavailable: Internal Server Error; no hits or verdict. The completed leanfinder, loogle and grep searches are recorded separately.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PinnedTensorSquareCompatibility",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-tensor-stalk-chain-coordinates",
+   "place": "Check the tensor square degreewise after each total tensor summand injection",
+   "via": [
+    "lem-pc-pinned-tensor-square-compatibility",
+    "lem-pc-pinned-tensor-square-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PinnedTensorSquareRightSummand",
+  "file": "lean/Sheaf/AlgebraicGeometry/PinnedTensorSquareRightSummand.lean",
+  "declaration": "AlgebraicGeometry.pinned_tensor_square_right_summand",
+  "statement": "theorem pinned_tensor_square_right_summand [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (N : CochainComplex (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) ℤ) (a : ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj Q ⟶ N) (z : X') (n p q : ℤ) (h : p + q = n) : letI := SingleComplexBaseChange.leftAlgebra f g' z letI := SingleComplexBaseChange.rightAlgebra f f' g g' sq z letI := (SingleComplexBaseChange.tensorMap f f' g g' sq z).toAlgebra letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.R f g' z)) letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B f' z)) let R := SingleComplexBaseChange.R f g' z let A := SingleComplexBaseChange.A g' z let B := SingleComplexBaseChange.B f' z let C := SingleComplexBaseChange.C z let F := (ModuleCat.extendScalars.{u, u, u} ((algebraMap (TensorProduct R A B) C).comp (algebraMap A (TensorProduct R A B)))).mapHomologicalComplex (.up ℤ) let S := (RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex (.up ℤ) let U := SingleComplexBaseChange.stalkComplex g' z P let V := SingleComplexBaseChange.stalkComplex g' z Q let t := (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z Q).hom ≫ S.map a let H := (Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ) let e' := Classical.choose (exists_pinned_stalk_tensor X' z) let ρ : F.obj U ⊗ S.obj N ≅ S.obj (pullbackTensorTotal X' (H.obj P) N) := tensorIso (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z P) (Iso.refl (S.obj N)) ≪≫ (e' (H.obj P) N).symm let G := ModuleCat.extendScalars.{u, u, u} ((algebraMap (TensorProduct R A B) C).comp (algebraMap A (TensorProduct R A B))) let ι := G.map (HomologicalComplex.ιMapBifunctor U V (curriedTensor _) (.up ℤ) p q n h) ι ≫ ((Functor.Monoidal.μIso F U V).inv ≫ (F.obj U ◁ t) ≫ ρ.hom).f n = Functor.OplaxMonoidal.δ G (U.X p) (V.X q) ≫ ((SingleComplexBaseChange.tensorStalkIso f f' g g' sq z P).hom.f p ⊗ₘ (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z Q).hom.f q) ≫ (𝟙 _ ⊗ₘ (S.map a).f q) ≫ HomologicalComplex.ιMapBifunctor (S.obj (H.obj P)) (S.obj N) (curriedTensor _) (.up ℤ) p q n h ≫ (e' (H.obj P) N).inv.f n",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e5d4b",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T013045-L-3417693",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e5d4b",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261014T013045-L-3417693",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and direct importer compile cleanly; target and declaration signatures match, proof axioms are permitted with only the named left-summand sorry, DAG/report/change records agree, and all review points pass."
+ }
+}
