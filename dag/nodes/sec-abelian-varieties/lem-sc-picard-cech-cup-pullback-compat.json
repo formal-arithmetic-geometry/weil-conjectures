@@ -1,240 +1,266 @@
 {
-  "id": "lem-sc-picard-cech-cup-pullback-compat",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "proof of Tag 0BF3: invoke Varieties Lemma varieties-lemma-kunneth on the special fibre",
-      "via": [
-        "lem-sc-picard-kunneth-qcoh"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-picard-cech-cup-pullback-compat",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof of Tag 0BF3: invoke Varieties Lemma varieties-lemma-kunneth on the special fibre",
+   "via": [
+    "lem-sc-picard-kunneth-qcoh"
+   ]
   },
-  "kind": "statement",
-  "title": "Cech cup products and pullback",
-  "statement": "Let f:X' \\to X be a morphism of schemes [def-pc-scheme], let U be an arbitrary open cover of X, and let U' be an open cover of X' together with a specified refinement map U' \\to f^{-1}U in the sense of Stacks Tag 01FD. Let F and G be quasi-coherent modules on X [pqf-def-coherent], and write f^*F and f^*G for their pullbacks to X' [def-pc-module-pullback]. (a) The refinement cochain map from the Cech complex of (X,U,F) to that of (X',U',f^*F) is compatible with the usual pullback map H^p(X,F) \\to H^p(X',f^*F) under the canonical maps from Cech cohomology to cohomology, \\check H^p(U,F) \\to H^p(X,F) and \\check H^p(U',f^*F) \\to H^p(X',f^*F), which exist for every open cover. (b) For an arbitrary open cover U of X, the signed Cech cup-product cochain map of Tag 07MB, Tot(Cech(U,F) \\otimes Cech(U,G)) \\to Cech(U,F\\otimes G), induces on cohomology a map \\check H^p(U,F) \\otimes \\check H^q(U,G) \\to \\check H^{p+q}(U,F\\otimes G) that is compatible with the sheaf cup product H^p(X,F) \\otimes H^q(X,G) \\to H^{p+q}(X,F\\otimes G) under the canonical maps \\check H^n(U,-) \\to H^n(X,-) (Stacks Tag 0FKV, cohomology-lemma-diagrams-commute); in particular, when these canonical maps are isomorphisms (for instance for a finite affine cover of a scheme with affine diagonal and quasi-coherent F, G), the Cech cup product is the sheaf cup product. Both assertions are natural in F,G and f.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cech cup products and pullback",
+ "statement": "Let f:X' \\to X be a morphism of schemes [def-pc-scheme], let U be an arbitrary open cover of X, and let U' be an open cover of X' together with a specified refinement map U' \\to f^{-1}U in the sense of Stacks Tag 01FD. Let F and G be quasi-coherent modules on X [pqf-def-coherent], and write f^*F and f^*G for their pullbacks to X' [def-pc-module-pullback]. (a) The refinement cochain map from the Cech complex of (X,U,F) to that of (X',U',f^*F) is compatible with the usual pullback map H^p(X,F) \\to H^p(X',f^*F) under the canonical maps from Cech cohomology to cohomology, \\check H^p(U,F) \\to H^p(X,F) and \\check H^p(U',f^*F) \\to H^p(X',f^*F), which exist for every open cover. (b) For an arbitrary open cover U of X, the signed Cech cup-product cochain map of Tag 07MB, Tot(Cech(U,F) \\otimes Cech(U,G)) \\to Cech(U,F\\otimes G), induces on cohomology a map \\check H^p(U,F) \\otimes \\check H^q(U,G) \\to \\check H^{p+q}(U,F\\otimes G) that is compatible with the sheaf cup product H^p(X,F) \\otimes H^q(X,G) \\to H^{p+q}(X,F\\otimes G) under the canonical maps \\check H^n(U,-) \\to H^n(X,-) (Stacks Tag 0FKV, cohomology-lemma-diagrams-commute); in particular, when these canonical maps are isomorphisms (for instance for a finite affine cover of a scheme with affine diagonal and quasi-coherent F, G), the Cech cup product is the sheaf cup product. Both assertions are natural in F,G and f.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FD (cohomology-lemma-functoriality-cech), 07MB (cohomology-equation-needs-signs) and 0FKV (cohomology-lemma-diagrams-commute: the signed Cech cup product is compatible with the cup product on RGamma via the canonical maps, for every open covering)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-sc-cech-comparison-natural",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-cech-cup-product",
+  "def-sc-module-cohomology-cup-product",
+  "def-sc-module-cech-comparison",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Apply cechRefinement_comparison_square [lem-sc-cech-refinement-comparison-square] to the given canonical comparisons and specified refinement. This is exactly the first conjunct, without any comparison-isomorphism hypothesis.",
+   "uses": [
+    "lem-sc-cech-refinement-comparison-square"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 01FD (cohomology-lemma-functoriality-cech), 07MB (cohomology-equation-needs-signs) and 0FKV (cohomology-lemma-diagrams-commute: the signed Cech cup product is compatible with the cup product on RGamma via the canonical maps, for every open covering)"
+    "place": "Tag 01FD, cohomology-lemma-functoriality-cech"
+   }
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "pqf-def-coherent",
-    "def-pc-module-pullback",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves",
-    "lem-sc-cech-comparison-map-naturality",
-    "lem-sc-cech-comparison-natural",
-    "def-weil-pbc-module-cohomology-fmap",
-    "def-sc-cech-refinement-cochain-map",
-    "def-sc-cech-cup-product",
-    "def-sc-module-cohomology-cup-product",
-    "def-sc-module-cech-comparison",
-    "def-sc-ringed-space-module-cohomology",
-    "lem-weil-pbc-module-pullback-tensor"
-  ],
-  "proof": [
-    {
-      "text": "Apply cechRefinement_comparison_square [lem-sc-cech-refinement-comparison-square] to the given canonical comparisons and specified refinement. This is exactly the first conjunct, without any comparison-isomorphism hypothesis.",
-      "uses": [
-        "lem-sc-cech-refinement-comparison-square"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Tag 01FD, cohomology-lemma-functoriality-cech"
-      }
-    },
-    {
-      "text": "For the two Cech complexes and the sheaf tensor product, form the total tensor complex using d(a tensor b)=d(a) tensor b+(-1)^(deg a) a tensor d(b). The Cech cup map of Tag 07MB restricts the two factors to common intersections and inserts the total-complex signs; expanding the alternating restriction differential gives the Leibniz identity, with omitted-vertex terms cancelling in adjacent pairs. For sheaves in degree zero this specializes to the ordinary Cech cup product.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Tag 07MB, cohomology-equation-needs-signs"
-      }
-    },
-    {
-      "text": "Lift the two Cech homology classes to kernel cocycles using surjectivity of the cycle-class map (Mathlib ModuleCat.epi_iff_surjective and the homology projection). Leibniz constructs their cup cocycle [def-sc-cech-cup-product]. Apply cechCup_resolution_representatives [lem-sc-cech-cup-resolution-representatives] to obtain a computing pairing and global cocycles whose three classes are the canonical images. The characterizations IsCechCupProduct and IsModuleCupProduct [def-sc-module-cohomology-cup-product] then identify the two products. When all comparisons are isomorphisms, apply injectivity of cFG to the product equality evaluated on the two inverse images; inv_hom_id cancels the comparisons.",
-      "uses": [
-        "def-sc-cech-cup-product",
-        "lem-sc-cech-cup-resolution-representatives",
-        "def-sc-module-cohomology-cup-product"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Tag 0FKV, cohomology-lemma-diagrams-commute"
-      }
-    },
-    {
-      "text": "The refinement map in Step 1 carries a cup cochain to the cup cochain of the pulled-back factors: on each intersection this is f^*(s tensor t)=f^*s tensor f^*t, and the total-complex sign depends only on the degrees. Thus the refinement square commutes with the cup map. Combining this identity with Step 3 proves compatibility of cup products with pullback. The same restriction and tensor identities commute with morphisms of F and G, and refinement functions compose, proving naturality. The Lean delivery V3 proves three naturality declarations directly: cech_coefficient_apply transports a coefficient morphism through the Cech product projections and the intersection equivalence. Unit naturality and Hom.app_presheaf_map then prove cechRefinement_coefficient_naturality. For cechCup_coefficient_naturality, first prove the cochain coefficient identity by tensorHom_app_tmulSection and restriction naturality. Represent both homology classes by concrete kernel cycles (the cycle-class map is an epimorphism). Leibniz gives their cup cycle. Transport cycles and cycle classes along the cochain coefficient maps using Mathlib cyclesMap_i and homologypi_naturality, and apply the IsCechCupProduct characterization to the source and target cycles. Finally, cechCup_refinement_naturality follows tuplewise from the section formula of lem-weil-pbc-module-pullback-tensor, tensor-section restriction, and the unit restriction square on each front/back face. The resolution comparisons are now reduced to the two D4 intermediate statements; the sheaf-cup naturalities remain unproved. The successive-refinement composition is formalized in the next step.",
-      "uses": [
-        "lem-sc-cech-comparison-map-naturality",
-        "def-sc-cech-refinement-cochain-map",
-        "def-sc-cech-cup-product",
-        "lem-weil-pbc-module-pullback-tensor"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Tags 01FD, 07MB and 0FKV"
-      }
-    },
-    {
-      "text": "R3 proves cechRefinement_composition_naturality without new intermediate holes. The definition tensorSectionsComp in [lem-sc-etale-qcoherent-presheaf-functorial] is the conjugate of pushforwardComp; Mathlib unit_conjugateEquiv_symm gives its adjunction-unit equation. On each tuple of refined indices expand the two IsCechRefinementMap formulas [def-sc-cech-refinement-cochain-map]. Naturality of the second adjunction unit moves the first restriction through it. Compose the resulting restrictions in the presheaf, move the coefficient comparison through the last restriction, and evaluate the conjugate-unit equation on the original intersection section. Injectivity of the tuple equivalence proves the cochain-composition equality. For the composite comparison square, use the first clause of cechCupPullbackCompat already stated in this module, specialized to G=F and q=0. The extra canonical comparisons exist by [lem-sc-cech-comparison-map-naturality] and the auxiliary products exist by [def-sc-cech-cup-product] and [def-sc-module-cohomology-cup-product]; their values are not used. Apply Mathlib homologyMap_comp to the cochain equality and mapHomologyIso_hom_naturality to its final coefficient map. Cancel the intermediate forgetting-scalars homology isomorphisms to identify the threefold homology composite with the composite refinement homology map. The existing composite refinement comparison gives the second conjunct. Finally the adjunction-unit equation is exactly the hypothesis of moduleCohomologyPullback_comp in [lem-weil-pbc-module-cohomology-fmap-functorial], which gives the third conjunct. This leaves the first clause of cechCupPullbackCompat as an existing dependency; it does not claim to prove it or introduce a circular proof.",
-      "uses": [
-        "lem-sc-etale-qcoherent-presheaf-functorial",
-        "def-sc-cech-refinement-cochain-map",
-        "lem-sc-cech-comparison-map-naturality",
-        "def-sc-cech-cup-product",
-        "def-sc-module-cohomology-cup-product",
-        "lem-weil-pbc-module-cohomology-fmap-functorial"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Tags 01FD (cohomology-lemma-functoriality-cech), 07MB (cohomology-equation-needs-signs) and 0FKV (cohomology-lemma-diagrams-commute: the signed Cech cup product is compatible with the cup product on RGamma via the canonical maps, for every open covering)"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-sc-cech-refinement-comparison-square",
+  {
+   "text": "For the two Cech complexes and the sheaf tensor product, form the total tensor complex using d(a tensor b)=d(a) tensor b+(-1)^(deg a) a tensor d(b). The Cech cup map of Tag 07MB restricts the two factors to common intersections and inserts the total-complex signs; expanding the alternating restriction differential gives the Leibniz identity, with omitted-vertex terms cancelling in adjacent pairs. For sheaves in degree zero this specializes to the ordinary Cech cup product.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 07MB, cohomology-equation-needs-signs"
+   }
+  },
+  {
+   "text": "Lift the two Cech homology classes to kernel cocycles using surjectivity of the cycle-class map (Mathlib ModuleCat.epi_iff_surjective and the homology projection). Leibniz constructs their cup cocycle [def-sc-cech-cup-product]. Apply cechCup_resolution_representatives [lem-sc-cech-cup-resolution-representatives] to obtain a computing pairing and global cocycles whose three classes are the canonical images. The characterizations IsCechCupProduct and IsModuleCupProduct [def-sc-module-cohomology-cup-product] then identify the two products. When all comparisons are isomorphisms, apply injectivity of cFG to the product equality evaluated on the two inverse images; inv_hom_id cancels the comparisons.",
+   "uses": [
     "def-sc-cech-cup-product",
     "lem-sc-cech-cup-resolution-representatives",
-    "def-sc-module-cohomology-cup-product",
+    "def-sc-module-cohomology-cup-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FKV, cohomology-lemma-diagrams-commute"
+   }
+  },
+  {
+   "text": "The refinement map in Step 1 carries a cup cochain to the cup cochain of the pulled-back factors: on each intersection this is f^*(s tensor t)=f^*s tensor f^*t, and the total-complex sign depends only on the degrees. Thus the refinement square commutes with the cup map. Combining this identity with Step 3 proves compatibility of cup products with pullback. The same restriction and tensor identities commute with morphisms of F and G, and refinement functions compose, proving naturality. The Lean delivery V3 proves three naturality declarations directly: cech_coefficient_apply transports a coefficient morphism through the Cech product projections and the intersection equivalence. Unit naturality and Hom.app_presheaf_map then prove cechRefinement_coefficient_naturality. For cechCup_coefficient_naturality, first prove the cochain coefficient identity by tensorHom_app_tmulSection and restriction naturality. Represent both homology classes by concrete kernel cycles (the cycle-class map is an epimorphism). Leibniz gives their cup cycle. Transport cycles and cycle classes along the cochain coefficient maps using Mathlib cyclesMap_i and homologypi_naturality, and apply the IsCechCupProduct characterization to the source and target cycles. Finally, cechCup_refinement_naturality follows tuplewise from the section formula of lem-weil-pbc-module-pullback-tensor, tensor-section restriction, and the unit restriction square on each front/back face. The resolution comparisons use the two D4 intermediate statements. The sheaf-cup naturalities are formalized in Steps 6 and 7 below. The successive-refinement composition is formalized in the next step.",
+   "uses": [
     "lem-sc-cech-comparison-map-naturality",
     "def-sc-cech-refinement-cochain-map",
-    "lem-weil-pbc-module-pullback-tensor",
-    "lem-sc-etale-qcoherent-presheaf-functorial",
-    "lem-weil-pbc-module-cohomology-fmap-functorial"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-sc-cech-cup-product",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 01FD, 07MB and 0FKV; V3 formalizes the coefficient and refinement naturalities of Step 4 using the existing section-normalized tensor-pullback theorem and the Cech Leibniz theorem, with explicit kernel-to-homology transports; R3 formalizes successive-refinement composition by the conjugate-unit equation, tuplewise restriction naturality, homology functoriality, and the existing cohomology-pullback composition theorem; its comparison-square conjunct uses the existing first clause of cechCupPullbackCompat; D4 reduces the comparison and cup conjuncts to a refinement comparison square and compatible resolution representatives, and proves the inverse clause by injectivity."
+    "place": "Tags 01FD, 07MB and 0FKV"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Cech cup product compatible with pullback and cohomology comparison",
-      "results": "group cohomology functoriality hits; no Cech cup-product comparison theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "cochain cup product Cech",
-      "results": "0 hits; unknown identifier cochain",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "cup.*Cech|Cech.*cup|needs.signs in Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
-      "results": "0 hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Cech cup product functorial pullback",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-sc-picard-kunneth-qcoh",
-    "by": "worker",
-    "date": "2026-10-11"
+  {
+   "text": "R3 proves cechRefinement_composition_naturality without new intermediate holes. The definition tensorSectionsComp in [lem-sc-etale-qcoherent-presheaf-functorial] is the conjugate of pushforwardComp; Mathlib unit_conjugateEquiv_symm gives its adjunction-unit equation. On each tuple of refined indices expand the two IsCechRefinementMap formulas [def-sc-cech-refinement-cochain-map]. Naturality of the second adjunction unit moves the first restriction through it. Compose the resulting restrictions in the presheaf, move the coefficient comparison through the last restriction, and evaluate the conjugate-unit equation on the original intersection section. Injectivity of the tuple equivalence proves the cochain-composition equality. For the composite comparison square, use the first clause of cechCupPullbackCompat already stated in this module, specialized to G=F and q=0. The extra canonical comparisons exist by [lem-sc-cech-comparison-map-naturality] and the auxiliary products exist by [def-sc-cech-cup-product] and [def-sc-module-cohomology-cup-product]; their values are not used. Apply Mathlib homologyMap_comp to the cochain equality and mapHomologyIso_hom_naturality to its final coefficient map. Cancel the intermediate forgetting-scalars homology isomorphisms to identify the threefold homology composite with the composite refinement homology map. The existing composite refinement comparison gives the second conjunct. Finally the adjunction-unit equation is exactly the hypothesis of moduleCohomologyPullback_comp in [lem-weil-pbc-module-cohomology-fmap-functorial], which gives the third conjunct. This leaves the first clause of cechCupPullbackCompat as an existing dependency; it does not claim to prove it or introduce a circular proof.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "def-sc-cech-refinement-cochain-map",
+    "lem-sc-cech-comparison-map-naturality",
+    "def-sc-cech-cup-product",
+    "def-sc-module-cohomology-cup-product",
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 01FD (cohomology-lemma-functoriality-cech), 07MB (cohomology-equation-needs-signs) and 0FKV (cohomology-lemma-diagrams-commute: the signed Cech cup product is compatible with the cup product on RGamma via the canonical maps, for every open covering)"
+   }
   },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "statement_change": {
-    "date": "2026-10-11",
-    "by": "L",
-    "what": "clauses (a) and (b) made precise after H1's abandonment at 02:07 ('clause (b) falsely identifies arbitrary-cover Cech cup products with sheaf cup products'): for an arbitrary cover the Cech cup product is compatible with the sheaf cup product under the canonical maps Cech cohomology -> cohomology, which always exist (Stacks Tag 0FKV); it identifies the two only when those maps are isomorphisms, as in the citer's affine covers; (a) likewise reads 'compatible under the canonical maps' instead of 'whenever the comparison maps exist'",
-    "old_statement": "Let f:X' \\to X be a morphism of schemes [def-pc-scheme], let U be an arbitrary open cover of X, and let U' be an open cover of X' together with a specified refinement map U' \\to f^{-1}U in the sense of Stacks Tag 01FD. Let F and G be quasi-coherent modules on X [pqf-def-coherent], and write f^*F and f^*G for their pullbacks to X' [def-pc-module-pullback]. (a) The refinement cochain map from the Cech complex of (X,U,F) to that of (X',U',f^*F) induces the usual pullback map H^p(X,F) \\to H^p(X',f^*F) under the Cech comparison maps whenever the comparison maps exist. (b) For arbitrary covers, the signed Cech cup-product cochain map induces the sheaf cup product H^p(X,F) \\otimes H^q(X,G) \\to H^{p+q}(X,F\\otimes G), as in Tag 07MB. Both assertions are natural in F,G and f."
+  {
+   "text": "For moduleCup_coefficient_naturality, take simultaneous computing pairings D,E and coefficient cochain maps l,r,t from moduleCup_coefficient_resolution_maps. Each resolution class map is surjective: its cycle-class projection is epi and both comparison maps are isomorphisms. Lift the two input classes to global kernel cocycles a,b. The Leibniz identity constructs the paired cocycle c with prescribed section D.pair(a,b). Transport a,b,c through global sections of l,r,t using the existing kernel-cycle transport. The resolution-map class equations identify the three target classes with H(phi), H(psi), H(phi tensor psi) of the source classes. The strict section pairing equation identifies the transported c with E.pair of the transported a,b. Apply IsModuleCupProduct for D and E and rewrite the three class equations to obtain the coefficient naturality equality.",
+   "uses": [
+    "lem-sc-module-cup-coefficient-resolution-maps",
+    "def-sc-module-cohomology-cup-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0FKU",
+    "place": "Section 20.31: naive cup product and its compatibility with the derived product; functorial Godement resolutions, Tag 0FKS"
+   }
   },
-  "lead_notes": [
-    "L (02:17 UTC): restated after H1's abandonment (02:07). Clause (b) as first written was ambiguous ('induces'); the true statement, Stacks Tag 0FKV, is the compatibility of the signed Cech cup product with the cup product on RGamma(X,-) under the canonical maps Tot(Cech(U,K)) -> RGamma(X,K) of cohomology-lemma-cech-complex-complex, for every open covering; the citer lem-sc-picard-kunneth-qcoh (step 3) uses finite affine covers, where the canonical maps are isomorphisms by lem-sc-cech-comparison-map-iso-affine. A worker proves (b) by citing or splitting Tag 0FKV and (a) by Tag 01FD; no cup-product definition node exists yet (cite def-pc-tensor-complex-sheaves for the signs and state the sheaf cup product inline, or create a definition node)."
-  ],
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-picard-cech-cup-pullback-compat",
-    "worker": "stage1",
-    "summary": "Split the item into the refinement cochain argument, the signed cup-product differential calculation, comparison-map naturality, and the termwise pullback compatibility. Reused the existing comparison-map nodes and created no new nodes because further nodes would restate the item's clauses.",
-    "blueprint": "The item is reached through thm-sc-theorem-of-cube via lem-sc-picard-kunneth-qcoh; the four steps realize the Cech compatibility lemma invoked in the Kunneth proof.",
-    "tool_uses": [
-      {
-        "node": "lem-sc-cech-comparison-map-naturality",
-        "why": "The Cech pullback step needs the canonical comparison transformation and its naturality, which are generic tools from the Cech comparison unit and are not supplied by the theorem-of-the-cube route."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sc-cech-comparison-map-naturality"
-  ],
-  "reviewed": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-ccp0242",
-    "group": "J1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccp0242 (reviewer sub-agent of L); spot-checked: Statement identical to the lead's 02:17 restatement. Citer lem-sc-picard-kunneth-qcoh steps 3/8 use exactly (a),(b) with affine covers (C4 ok). 10-file stat vs sheaf-dag is base drift; delivery itself changes only the item and its report. Mathlib grep for Cech cup: none. FIX more, RETURN less: (1) C4 step 1: lem-sc-cech-comparison-map-naturality is for one scheme and one cover, not cross-scheme refinement; rewrote step 1 as the faithful 01FD argument (gamma, resolutions J, I, J', beta, double complexes B, B', B'', A) with the node used only for the definition of the canonical maps. (2) C4/D step 3: coefficient-naturality squares do not yield cup compatibility, and lem-sc-cech-comparison-natural is affine-only; rewrote step 3 as Tag 0FKV (item's own source) for K=F, M=G in degree 0, stating the sheaf cup product inline via mu and def-pc-tensor-complex-sheaves, with the 0FKV square and its Godement/flasque proof; dropped lem-sc-cech-comparison-natural from steps 3-4, proof_deps and tool_uses; proof_deps now the union of uses. Second reading missed fault (2).; 1 file(s) fixed by the reviewer"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "lean": {
-    "module": "Sheaf.Paper.CechCupPullbackCompat",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.cechCupPullbackCompat",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Modules.cechCupPullbackCompat",
-      "AlgebraicGeometry.Scheme.Modules.moduleCup_coefficient_naturality",
-      "AlgebraicGeometry.Scheme.Modules.moduleCup_pullback_naturality",
-      "AlgebraicGeometry.Scheme.Modules.cechRefinement_coefficient_naturality",
-      "AlgebraicGeometry.Scheme.Modules.cechCup_coefficient_naturality",
-      "AlgebraicGeometry.Scheme.Modules.cechRefinement_composition_naturality",
-      "AlgebraicGeometry.Scheme.Modules.cechCup_refinement_naturality"
-    ],
-    "statement": "theorem cechCupPullbackCompat (X X' : Scheme.{v}) (f : X' ⟶ X) {ι ι' : Type v} (U : ι → X.Opens) (hU : iSup U = ⊤) (U' : ι' → X'.Opens) (hU' : iSup U' = ⊤) (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i)) (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] (p q : ℕ) (cF : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) (hcF : IsModuleCechComparison U F p cF) (cF' : ((cechComplexFunctor U').obj ((tensorPullback f).obj F).presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X'.toRingedSpace p).obj ((tensorPullback f).obj F)) (hcF' : IsModuleCechComparison U' ((tensorPullback f).obj F) p cF') (gamma : ((forget₂ (ModuleCat.{v} Γ(X, ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex (ComplexShape.up ℕ)).obj ((cechComplexFunctor U).obj F.presheafModuleCat) ⟶ ((forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex (ComplexShape.up ℕ)).obj ((cechComplexFunctor U').obj ((tensorPullback f).obj F).presheafModuleCat)) (hgamma : IsCechRefinementMap f U U' refine hrefine F gamma) (cG : ((cechComplexFunctor U).obj G.presheafModuleCat).homology q ⟶ (RingedSpace.moduleCohomology X.toRingedSpace q).obj G) (hcG : IsModuleCechComparison U G q cG) (cFG : ((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).homology (p + q) ⟶ (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G))) (hcFG : IsModuleCechComparison U (F ⊗ G) (p + q) cFG) (cup : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p →ₗ[Γ(X, ⊤)] ((cechComplexFunctor U).obj G.presheafModuleCat).homology q →ₗ[Γ(X, ⊤)] ((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).homology (p + q)) (hcup : IsCechCupProduct U F G p q cup) (sheafCup : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace q).obj G →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G))) (hsheafCup : IsModuleCupProduct F G p q sheafCup) : (cechRefinementHomology gamma p ≫ (forget₂ _ AddCommGrpCat).map cF' = (forget₂ _ AddCommGrpCat).map cF ≫ moduleCohomologyPullback f F p) ∧ (∀ a b, cFG (cup a b) = sheafCup (cF a) (cG b)) ∧ (∀ (hF : IsIso cF) (hG : IsIso cG) (hFG : IsIso cFG) a b, cup (inv (I := hF) cF a) (inv (I := hG) cG b) = inv (I := hFG) cFG (sheafCup a b))",
-    "by": "T1",
-    "date": "2026-10-11",
-    "file": "lean/Sheaf/Paper/CechCupPullbackCompat.lean",
-    "branch": "sheaf-dag",
-    "existing": false,
-    "note": "Includes cechRefinement_composition_naturality: specified successive refinements compose through tensorSectionsComp, with the composite comparison square and the equality of successive and composite cohomology pullbacks."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "X-96a81",
-    "group": "T1",
-    "result": "pass",
-    "note": "independent Codex review: Matched arbitrary covers, specified refinement, quasi-coherent coefficients, canonical comparisons, cup compatibility, inverse-comparison identification, and coefficient/pullback/composition naturality to the node; all three new definitions match their formulas. Both earlier-return points are repaired. Scratch compilation passed cleanly in 23.7 seconds."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "X-c6cfc",
-    "group": "D4",
-    "result": "pass",
-    "landing": "20261013T161727-L-1459870",
-    "kind": "interface",
-    "note": "independent Codex review: Matched the proof, new theorem signatures, DAG records, sources, and report; existing signatures remain unchanged, all three delivered modules and all three direct importers compile cleanly, and axiom checks pass with recorded sorry dependencies."
+  {
+   "text": "For moduleCup_pullback_naturality, take computing pairings D on X and E on X-prime together with the three additive global-section cochain maps from moduleCup_pullback_resolution_maps. Lift the two cohomology classes through the surjective class maps of D.left and D.right, and construct their paired kernel cocycle by Leibniz. An additive cochain map, even across different scalar rings, sends a kernel cocycle to a kernel cocycle: evaluate its differential commutation equation and use map_zero. Apply this to the three cycles. The strict pairing equation makes the transported target cycle their E-pair. The three class equations give the two pullbacks and the tensor-comparison coefficient map following the target pullback. Apply the cup characterization for D and E and rewrite these class equations. No new intermediate hole and no comparison-isomorphism, flatness or cover assumption is used.",
+   "uses": [
+    "lem-sc-module-cup-pullback-resolution-maps",
+    "def-sc-module-cohomology-cup-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0FKU",
+    "place": "Section 20.31, naive cup compatibility; Tags 0FKS and 01FD for the functorial resolution maps"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-sc-cech-refinement-comparison-square",
+  "def-sc-cech-cup-product",
+  "lem-sc-cech-cup-resolution-representatives",
+  "def-sc-module-cohomology-cup-product",
+  "lem-sc-cech-comparison-map-naturality",
+  "def-sc-cech-refinement-cochain-map",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-sc-module-cup-coefficient-resolution-maps",
+  "lem-sc-module-cup-pullback-resolution-maps"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FD, 07MB and 0FKV; V3 formalizes the coefficient and refinement naturalities of Step 4 using the existing section-normalized tensor-pullback theorem and the Cech Leibniz theorem, with explicit kernel-to-homology transports; R3 formalizes successive-refinement composition by the conjugate-unit equation, tuplewise restriction naturality, homology functoriality, and the existing cohomology-pullback composition theorem; its comparison-square conjunct uses the existing first clause of cechCupPullbackCompat; D4 reduces the comparison and cup conjuncts to a refinement comparison square and compatible resolution representatives, and proves the inverse clause by injectivity.; Q4 completes both sheaf-cup naturalities from the existing coefficient and pullback computing-resolution map theorems, surjective cycle-class maps, Leibniz and the cup characterization, with no new holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech cup product compatible with pullback and cohomology comparison",
+   "results": "group cohomology functoriality hits; no Cech cup-product comparison theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "cochain cup product Cech",
+   "results": "0 hits; unknown identifier cochain",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cup.*Cech|Cech.*cup|needs.signs in Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cup product functorial pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-picard-kunneth-qcoh",
+  "by": "worker",
+  "date": "2026-10-11"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "L",
+  "what": "clauses (a) and (b) made precise after H1's abandonment at 02:07 ('clause (b) falsely identifies arbitrary-cover Cech cup products with sheaf cup products'): for an arbitrary cover the Cech cup product is compatible with the sheaf cup product under the canonical maps Cech cohomology -> cohomology, which always exist (Stacks Tag 0FKV); it identifies the two only when those maps are isomorphisms, as in the citer's affine covers; (a) likewise reads 'compatible under the canonical maps' instead of 'whenever the comparison maps exist'",
+  "old_statement": "Let f:X' \\to X be a morphism of schemes [def-pc-scheme], let U be an arbitrary open cover of X, and let U' be an open cover of X' together with a specified refinement map U' \\to f^{-1}U in the sense of Stacks Tag 01FD. Let F and G be quasi-coherent modules on X [pqf-def-coherent], and write f^*F and f^*G for their pullbacks to X' [def-pc-module-pullback]. (a) The refinement cochain map from the Cech complex of (X,U,F) to that of (X',U',f^*F) induces the usual pullback map H^p(X,F) \\to H^p(X',f^*F) under the Cech comparison maps whenever the comparison maps exist. (b) For arbitrary covers, the signed Cech cup-product cochain map induces the sheaf cup product H^p(X,F) \\otimes H^q(X,G) \\to H^{p+q}(X,F\\otimes G), as in Tag 07MB. Both assertions are natural in F,G and f."
+ },
+ "lead_notes": [
+  "L (02:17 UTC): restated after H1's abandonment (02:07). Clause (b) as first written was ambiguous ('induces'); the true statement, Stacks Tag 0FKV, is the compatibility of the signed Cech cup product with the cup product on RGamma(X,-) under the canonical maps Tot(Cech(U,K)) -> RGamma(X,K) of cohomology-lemma-cech-complex-complex, for every open covering; the citer lem-sc-picard-kunneth-qcoh (step 3) uses finite affine covers, where the canonical maps are isomorphisms by lem-sc-cech-comparison-map-iso-affine. A worker proves (b) by citing or splitting Tag 0FKV and (a) by Tag 01FD; no cup-product definition node exists yet (cite def-pc-tensor-complex-sheaves for the signs and state the sheaf cup product inline, or create a definition node)."
+ ],
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-picard-cech-cup-pullback-compat",
+  "worker": "stage1",
+  "summary": "Split the item into the refinement cochain argument, the signed cup-product differential calculation, comparison-map naturality, and the termwise pullback compatibility. Reused the existing comparison-map nodes and created no new nodes because further nodes would restate the item's clauses.",
+  "blueprint": "The item is reached through thm-sc-theorem-of-cube via lem-sc-picard-kunneth-qcoh; the four steps realize the Cech compatibility lemma invoked in the Kunneth proof.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-cech-comparison-map-naturality",
+    "why": "The Cech pullback step needs the canonical comparison transformation and its naturality, which are generic tools from the Cech comparison unit and are not supplied by the theorem-of-the-cube route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-cech-comparison-map-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ccp0242",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccp0242 (reviewer sub-agent of L); spot-checked: Statement identical to the lead's 02:17 restatement. Citer lem-sc-picard-kunneth-qcoh steps 3/8 use exactly (a),(b) with affine covers (C4 ok). 10-file stat vs sheaf-dag is base drift; delivery itself changes only the item and its report. Mathlib grep for Cech cup: none. FIX more, RETURN less: (1) C4 step 1: lem-sc-cech-comparison-map-naturality is for one scheme and one cover, not cross-scheme refinement; rewrote step 1 as the faithful 01FD argument (gamma, resolutions J, I, J', beta, double complexes B, B', B'', A) with the node used only for the definition of the canonical maps. (2) C4/D step 3: coefficient-naturality squares do not yield cup compatibility, and lem-sc-cech-comparison-natural is affine-only; rewrote step 3 as Tag 0FKV (item's own source) for K=F, M=G in degree 0, stating the sheaf cup product inline via mu and def-pc-tensor-complex-sheaves, with the 0FKV square and its Godement/flasque proof; dropped lem-sc-cech-comparison-natural from steps 3-4, proof_deps and tool_uses; proof_deps now the union of uses. Second reading missed fault (2).; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CechCupPullbackCompat",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cechCupPullbackCompat",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.cechCupPullbackCompat",
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_coefficient_naturality",
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_pullback_naturality",
+   "AlgebraicGeometry.Scheme.Modules.cechRefinement_coefficient_naturality",
+   "AlgebraicGeometry.Scheme.Modules.cechCup_coefficient_naturality",
+   "AlgebraicGeometry.Scheme.Modules.cechRefinement_composition_naturality",
+   "AlgebraicGeometry.Scheme.Modules.cechCup_refinement_naturality"
+  ],
+  "statement": "theorem cechCupPullbackCompat (X X' : Scheme.{v}) (f : X' ⟶ X) {ι ι' : Type v} (U : ι → X.Opens) (hU : iSup U = ⊤) (U' : ι' → X'.Opens) (hU' : iSup U' = ⊤) (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i)) (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] (p q : ℕ) (cF : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) (hcF : IsModuleCechComparison U F p cF) (cF' : ((cechComplexFunctor U').obj ((tensorPullback f).obj F).presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X'.toRingedSpace p).obj ((tensorPullback f).obj F)) (hcF' : IsModuleCechComparison U' ((tensorPullback f).obj F) p cF') (gamma : ((forget₂ (ModuleCat.{v} Γ(X, ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex (ComplexShape.up ℕ)).obj ((cechComplexFunctor U).obj F.presheafModuleCat) ⟶ ((forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex (ComplexShape.up ℕ)).obj ((cechComplexFunctor U').obj ((tensorPullback f).obj F).presheafModuleCat)) (hgamma : IsCechRefinementMap f U U' refine hrefine F gamma) (cG : ((cechComplexFunctor U).obj G.presheafModuleCat).homology q ⟶ (RingedSpace.moduleCohomology X.toRingedSpace q).obj G) (hcG : IsModuleCechComparison U G q cG) (cFG : ((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).homology (p + q) ⟶ (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G))) (hcFG : IsModuleCechComparison U (F ⊗ G) (p + q) cFG) (cup : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p →ₗ[Γ(X, ⊤)] ((cechComplexFunctor U).obj G.presheafModuleCat).homology q →ₗ[Γ(X, ⊤)] ((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).homology (p + q)) (hcup : IsCechCupProduct U F G p q cup) (sheafCup : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace q).obj G →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G))) (hsheafCup : IsModuleCupProduct F G p q sheafCup) : (cechRefinementHomology gamma p ≫ (forget₂ _ AddCommGrpCat).map cF' = (forget₂ _ AddCommGrpCat).map cF ≫ moduleCohomologyPullback f F p) ∧ (∀ a b, cFG (cup a b) = sheafCup (cF a) (cG b)) ∧ (∀ (hF : IsIso cF) (hG : IsIso cG) (hFG : IsIso cFG) a b, cup (inv (I := hF) cF a) (inv (I := hG) cG b) = inv (I := hFG) cFG (sheafCup a b))",
+  "by": "T1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/Paper/CechCupPullbackCompat.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "note": "Includes cechRefinement_composition_naturality: specified successive refinements compose through tensorSectionsComp, with the composite comparison square and the equality of successive and composite cohomology pullbacks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-96a81",
+  "group": "T1",
+  "result": "pass",
+  "note": "independent Codex review: Matched arbitrary covers, specified refinement, quasi-coherent coefficients, canonical comparisons, cup compatibility, inverse-comparison identification, and coefficient/pullback/composition naturality to the node; all three new definitions match their formulas. Both earlier-return points are repaired. Scratch compilation passed cleanly in 23.7 seconds."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261014T104041-L-1454139",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
