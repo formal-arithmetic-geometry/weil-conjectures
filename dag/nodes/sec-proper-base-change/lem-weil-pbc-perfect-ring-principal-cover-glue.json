@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-finite-extension",
-   "place": "Proof, first sentence 'Choose an integral lattice for K': algebraic perfectness test for the reconstructed integral model, via the residue-field and inverse-limit lifting lemmas",
+   "place": "Proof, first sentence “Choose an integral lattice for K”: local pseudo-coherence and finite Tor-amplitude of the localized complexes descend across a finite principal cover.",
    "via": [
     "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
     "lem-weil-pbc-rlim-perfect-complete",
@@ -29,9 +29,90 @@
   "lem-pur-derived-change-of-rings",
   "def-pc-perfect-ring-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the ring-module use of the sheaf results below, take the site with one object, only its identity morphism, and the topology whose only covering sieve is the maximal sieve. Evaluation at its object identifies sheaves of rings with rings and sheaves of modules with modules; termwise tensor products and cohomology are then the ordinary ones. Choose a complex $K^\\bullet$ representing $C$. Localization $R\\to R_{f_i}$ is flat by [lem-weil-pbc-localization-flat]. Tensoring with it is exact by [lem-weil-pbc-flat-tensor-exact], so cohomology commutes with localization and quasi-isomorphisms remain quasi-isomorphisms: exactness preserves kernels and images, giving $H^n(K^\\bullet\\otimes_R R_{f_i})\\cong H^n(K^\\bullet)\\otimes_R R_{f_i}$. Consequently the termwise localized complex $K^\\bullet\\otimes_R R_{f_i}$ represents $C\\otimes_R^{\\mathbf L}R_{f_i}$: apply the computation of derived scalar extension [lem-pur-derived-change-of-rings] to a K-flat resolution supplied by [lem-pc-kflat-resolution] on this site; exact localization preserves its quasi-isomorphism to $K^\\bullet$. Thus the local perfectness assumptions apply to these ordinary localized complexes.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066Y: passage between the complex formulation and derived scalar extension"
+   }
+  },
+  {
+   "text": "For each $i$, unpack [def-pc-perfect-ring-complex] to choose a bounded finite-projective representative $P_i^\\bullet$ of the localization. Apply [lem-pc-finite-projective-complex-free-model] over $R_{f_i}$ to replace it by a bounded-above finite-free complex. This witnesses pseudo-coherence in the sense of [def-pc-ring-pseudo-coherent-complex]. The pseudo-coherent clause of [lem-pc-ring-pseudo-coherent-localization-glue] applied to $K^\\bullet$ now proves that $C$ is pseudo-coherent.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-pc-finite-projective-complex-free-model",
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-ring-pseudo-coherent-localization-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066Y proof; Tags 064U (3) implies (1), 066D"
+   }
+  },
+  {
+   "text": "For each $i$, choose integers $a_i\\le b_i$ outside which the bounded representative $P_i^\\bullet$ is zero. Its terms are flat by [lem-weil-pbc-projective-module-flat]. The bounded-flat-model implication of [lem-pc-module-tor-amplitude-flat-model], over the ring $R_{f_i}$ and with this very representative, gives Tor amplitude in $[a_i,b_i]$ for the localized complex. Put $a=\\min(\\{0\\}\\cup\\{a_i\\}_i)$ and $b=\\max(\\{0\\}\\cup\\{b_i\\}_i)$. These finite nonempty sets have extrema, $a\\le a_i\\le b_i\\le b$, and $a\\le b$. If $n\\notin[a,b]$, then $n\\notin[a_i,b_i]$, so every localized complex has Tor amplitude in $[a,b]$. For the empty family take $a=b=0$; the assertion about localizations is vacuous.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-tor-amplitude-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066Y proof via Tags 0658 and 0654 (lemma-tor-amplitude), bounded-flat-model implication"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-tor-amplitude-principal-cover-glue] to $K^\\bullet$, the given unit-ideal family, and the common bounds $a,b$ from the preceding step. This gives $H^n(C\\otimes_R^{\\mathbf L}M)=0$ for every $R$-module $M$ and every $n\\notin[a,b]$, which is finite Tor dimension over $R$.",
+   "uses": [
+    "lem-weil-pbc-tor-amplitude-principal-cover-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066N, lemma-glue-tor-amplitude"
+   }
+  },
+  {
+   "text": "The bounded-above finite-free model obtained in step 2 is also a bounded-above finite-projective model: a finite free module is finitely generated by its finite basis and is a direct summand of itself, with zero complement. Thus it meets precisely the pseudo-coherence hypothesis stated in [lem-pc-ring-pseudo-coherent-finite-tor-perfect]. Apply that lemma to $C$ and the global Tor bounds. Its conclusion supplies a bounded finite-projective representative of $C$, exactly the perfectness required by [def-pc-perfect-ring-complex].",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0658, lemma-perfect"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "def-pc-perfect-ring-complex",
+  "lem-pc-finite-projective-complex-free-model",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pc-ring-pseudo-coherent-localization-glue",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-weil-pbc-tor-amplitude-principal-cover-glue",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 066Y, 066N, and 0658"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,15 +169,128 @@
    "results": "8 hits: Module.projective_of_localization_maximal, Module.projective_of_isLocalizedModule, Module.projective_of_localization_maximal', Module.basicOpen_subset_freeLocus_iff, Module.freeLocus_eq_univ_iff, Module.FinitePresentation.exists_lift_equiv_of_isLocalizedModule, CochainComplex.isKProjective_of_projective, exists_bijective_map_powers",
    "date": "2026-10-14",
    "verdict": "no match: localization of projective modules and generic complex homotopies do not glue bounded finite-projective derived representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of a complex descends from a finite principal localization cover",
+   "results": "8 hits: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.IsLE",
+   "date": "2026-10-14",
+   "verdict": "no match: cohomological bounds and module Tor functors do not state Tor-amplitude descent across a finite ring localization cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "TorAmplitude, Localization",
+   "results": "0 hits: ; loogle: unknown identifier 'TorAmplitude'",
+   "date": "2026-10-14",
+   "verdict": "no match: cohomological bounds and module Tor functors do not state Tor-amplitude descent across a finite ring localization cover"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.?amplitude|TorAmplitude",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: cohomological bounds and module Tor functors do not state Tor-amplitude descent across a finite ring localization cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor complex has tor amplitude locally after finite principal localizations",
+   "results": "8 hits: CategoryTheory.Tor_obj, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: cohomological bounds and module Tor functors do not state Tor-amplitude descent across a finite ring localization cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsGE, DerivedCategory.IsLE",
+   "results": "2 hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-14",
+   "verdict": "no match: cohomological bounds and module Tor functors do not state Tor-amplitude descent across a finite ring localization cover"
+  },
+  {
+   "tool": "grep",
+   "query": "Perfect|perfect",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: cohomological bounds and module Tor functors do not state Tor-amplitude descent across a finite ring localization cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes glue over principal localization cover",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-perfect-ring-principal-cover-glue",
+  "worker": "stage1",
+  "summary": "Following Tag 066Y, first identify termwise and derived localizations by flatness, replace local finite-projective representatives by bounded-above finite-free models, and invoke the existing pseudo-coherence descent. Explicit bounded flat tensor models give local Tor intervals; choose common finite minima and maxima and descend via the new statement-only Tag 066N node. The existing Tag 0658 criterion concludes. No statement correction.",
+  "blueprint": "Realizes the ancestor thm-weil-pbc-finite-extension proof sentence about reconstructing a perfect object from local perfectizations.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Generic derived change-of-rings computation for the one-point site identifies ordinary flat localization with derived localization; this is an algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic derived change-of-rings computation for the one-point site identifies ordinary flat localization with derived localization; this is an algebraic tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic derived change-of-rings computation for the one-point site identifies ordinary flat localization with derived localization; this is an algebraic tool."
+   },
+   {
+    "node": "lem-pc-finite-projective-complex-free-model",
+    "why": "Converts a bounded finite-projective ring complex to the bounded-above finite-free witness required by pseudo-coherence; the proper-base-change unit has no algebraic free-model replacement theorem."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-localization-glue",
+    "why": "Descends pseudo-coherence of a ring complex across a finite principal cover; this is a generic algebraic descent tool, not a replacement of a proper-base-change step."
+   },
+   {
+    "node": "lem-weil-pbc-projective-module-flat",
+    "why": "Generic derived change-of-rings computation for the one-point site identifies ordinary flat localization with derived localization; this is an algebraic tool."
+   },
+   {
+    "node": "lem-pc-module-tor-amplitude-flat-model",
+    "why": "Its bounded-flat-model implication gives each localized ring complex its Tor interval; the unit has no ring Tor-amplitude model theorem."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+    "why": "Combines the established ring pseudo-coherence and finite Tor dimension to obtain a bounded finite-projective representative; no proper-base-change argument is substituted."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "On the one-object site this supplies a K-flat resolution of an arbitrary ring complex, needed to compute derived localization; the unit has no such algebraic resolution construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-finite-projective-complex-free-model",
+  "lem-pc-ring-pseudo-coherent-localization-glue",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-1df560efb",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-1df560efb (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources: all five steps and the sole new Tor-descent statement are sound; no duplicate or circular split found. Corrected the child's missing arbitrary-module derived-tensor citation and creation/audit fields. Checked edge cases and the exact master coefficient category and base-change morphism. Detailed checks are in review.md; corrected JSON is under fixes/dag/nodes.; 1 file(s) fixed by the reviewer"
+ }
 }
