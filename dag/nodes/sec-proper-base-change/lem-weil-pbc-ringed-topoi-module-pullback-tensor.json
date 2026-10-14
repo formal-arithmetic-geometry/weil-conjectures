@@ -22,37 +22,99 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=u^{-1}$, $P=u_*$, $A=LR$, $X=LM$, $Y=LN$, and let $H$ be any $S$-module sheaf, also regarded as an $A$-module via $c$. Give $PH$ the $R$-action specified in the module adjunction node. That adjunction followed by the sheaf tensor universal property gives bijections $\\operatorname{Hom}_S(u^*(M\\otimes_RN),H)\\cong\\operatorname{Hom}_R(M\\otimes_RN,PH)\\cong\\mathrm{Bilin}_R(M\\times N,PH)$, natural in $H$. The hypotheses of the adjunction node are exactly the given geometric morphism and ring map.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
+   }
+  },
+  {
+   "text": "Let $\\lambda_{V,W}:L(V\\times W)\\xrightarrow{\\sim}LV\\times LW$ be the finite-product comparison and $\\eta,\\varepsilon$ the set adjunction unit and counit. The group/ring lifting node identifies the operations on the inverse images with the images of the operations through these comparisons; the unit and counit respect the group/ring operations. For a sheaf map $b:M\\times N\\to PH$ define $\\beta=\\varepsilon_H\\circ Lb\\circ\\lambda_{M,N}^{-1}:X\\times Y\\to H$. Conversely send $\\beta$ to $P\\beta\\circ\\langle\\eta_M,\\eta_N\\rangle$. Naturality of $\\eta$ and the two triangle identities show that these are inverse: this is the set adjunction bijection for $M\\times N$, with $\\eta_{M\\times N}$ identified with the pair of units by its projections.",
+   "uses": [
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
+   }
+  },
+  {
+   "text": "This bijection restricts to bilinear maps. Indeed transpose the first additivity equation $b\\circ(+_M\\times\\mathrm{id}_N)=+_{PH}\\circ\\langle b\\circ(p_1,p_3),b\\circ(p_2,p_3)\\rangle$, whose domain is $M\\times M\\times N$. Preservation of this triple product and naturality of the counit turn it into $\\beta(x+x\\prime,y)=\\beta(x,y)+\\beta(x\\prime,y)$. The equation on $M\\times N\\times N$ gives second-variable additivity. Zero equations use the terminal-object comparison. For the scalar equation on $R\\times M\\times N$, transposition sends the $R$-action on $PH$ to the $A$-action on $H$: the former is induced by $R\\xrightarrow{\\eta_R}PA\\xrightarrow{Pc}PS$ and the latter by $c:A\\to S$, and $\\varepsilon_S\\circ L(Pc\\circ\\eta_R)=c$ by naturality and a triangle identity. Consequently $b(rm,n)=r b(m,n)$ transposes to $\\beta(ax,y)=c(a)\\beta(x,y)$, and the second-variable equation transposes in the same way. Because transposition is injective, these implications are equivalences. Thus $\\mathrm{Bilin}_R(M\\times N,PH)\\cong\\mathrm{Bilin}_A(X\\times Y,H)$, naturally in $H,M,N$. This calculation uses only the finite-product comparisons and operations supplied by the cited lifting statement, rather than assuming a module or bilinear version of that statement.",
+   "uses": [
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
+   }
+  },
+  {
+   "text": "An $A$-bilinear map $\\beta:X\\times Y\\to H$ extends uniquely to an $S$-bilinear map $\\widetilde\\beta:(S\\otimes_AX)\\times(S\\otimes_AY)\\to H$ by $\\widetilde\\beta(s\\otimes x,t\\otimes y)=st\\beta(x,y)$. The balancing relation in the first factor is respected because $sc(a)t\\beta(x,y)=st\\beta(ax,y)$; the second uses $stc(a)\\beta(x,y)=st\\beta(x,ay)$. Additivity follows from that of $\\beta$ and distributivity in $S$. For clarity, form the sectionwise presheaves $E(U)=S(U)\\otimes_{A(U)}X(U)$ and $F(U)=S(U)\\otimes_{A(U)}Y(U)$. The formula defines a restriction-compatible $S$-bilinear presheaf map $E\\times F\\to H$. Its sheafification gives the asserted bilinear map on $E^\\#\\times F^\\#$: sheafification of sets preserves products, so the universal set-sheafification map extends it uniquely, and sheafifying the addition and scalar equations preserves those equations. The underlying sets of the module sheafification are the set sheafification here: the sheafification notion explicitly permits sets and abelian groups, and the module-sheafification definition gives its unique induced action. Equivalently one may build the abelian sheafification by sheafifying the group-operation diagrams as in the lifting node. Thus by the definition of the sheaf tensor product $E^\\#=S\\otimes_AX$, $F^\\#=S\\otimes_AY$. Conversely restrict an $S$-bilinear map along $x\\mapsto1\\otimes x$, $y\\mapsto1\\otimes y$. The two operations are inverse by $S$-bilinearity and uniqueness in the tensor universal property. Commutativity of $S$ is used for the product $st$. Applying that property once more identifies these maps with $\\operatorname{Hom}_S(u^*M\\otimes_Su^*N,H)$.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
+   }
+  },
+  {
+   "text": "Let $B=u^*(M\\otimes_RN)$ and $T=u^*M\\otimes_Su^*N$. Composing the preceding bijections gives $\\Phi_H:\\operatorname{Hom}_S(B,H)\\xrightarrow{\\sim}\\operatorname{Hom}_S(T,H)$ natural in $H$. Set $a=\\Phi_B(\\mathrm{id}_B):T\\to B$ and $d=\\Phi_T^{-1}(\\mathrm{id}_T):B\\to T$. Naturality gives $\\Phi_H(f)=f\\circ a$. Hence $d\\circ a=\\mathrm{id}_T$, and injectivity of $\\Phi_B$ applied to $a\\circ d$ and $\\mathrm{id}_B$ gives $a\\circ d=\\mathrm{id}_B$. Thus $d$ is the required $S$-linear isomorphism; no stalk or enough-points hypothesis is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
+   }
+  },
+  {
+   "text": "Each bijection commutes with precomposition in $M,N$: the module adjunction is natural, tensor factorization is unique, set transposition uses natural unit/counit, and the extension formula sends $(s\\otimes x,t\\otimes y)$ to $st\\beta(x,y)$. Therefore for maps $f:M\\to M\\prime$, $g:N\\to N\\prime$ both composites of the comparison with $u^*(f\\otimes g)$ and with $u^*f\\otimes u^*g$ correspond to the same bilinear map. Explicitly the comparison is adjoint to $(m,n)\\mapsto(1\\otimes\\eta_M(m))\\otimes(1\\otimes\\eta_N(n))$, with the set units interpreted before extension of scalars; both routes replace $m,n$ by $f(m),g(n)$. The adjunction and tensor bijections detect equality, proving simultaneous naturality and fixing the canonical normalization.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
+ },
  "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Pullback of module sheaves along a morphism of ringed topoi commutes with tensor product",
-   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullback",
-   "date": "2026-10-14",
-   "verdict": "no match: hits give ordinary pullback composition or presheaf tensor construction, not this tensor comparison for arbitrary ringed topoi"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Inverse image followed by extension of scalars preserves tensor products of sheaves of modules",
-   "results": "8 hits: PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, PresheafOfModules.Monoidal.tensorObj_map_tmul, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso",
-   "date": "2026-10-14",
-   "verdict": "no match: hits give ordinary pullback composition or presheaf tensor construction, not this tensor comparison for arbitrary ringed topoi"
-  },
-  {
-   "tool": "loogle",
-   "query": "SheafOfModules.pullback, \"tensor\"",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: hits give ordinary pullback composition or presheaf tensor construction, not this tensor comparison for arbitrary ringed topoi"
-  },
   {
    "tool": "grep",
    "query": "tensor.*pullback|pullback.*tensor",
    "results": "0 hits: ; subdirectory Algebra/Category/ModuleCat/Sheaf",
    "date": "2026-10-14",
-   "verdict": "no match: hits give ordinary pullback composition or presheaf tensor construction, not this tensor comparison for arbitrary ringed topoi"
+   "verdict": "no match: ordinary site pullback/composition, presheaf tensor or ring-module scalar adjunction, not tensor-formula pullback on arbitrary ringed topoi"
   },
   {
    "tool": "leansearch",
@@ -60,15 +122,65 @@
    "results": "0 hits: ; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of module sheaves along a morphism of ringed topoi commutes with tensor product",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullback",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary site pullback/composition, presheaf tensor or ring-module scalar adjunction, not tensor-formula pullback on arbitrary ringed topoi"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary site pullback/composition, presheaf tensor or ring-module scalar adjunction, not tensor-formula pullback on arbitrary ringed topoi"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars and inverse image of sheaves preserve bilinear maps and tensor products",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObjMap, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, PresheafOfModules.Monoidal.tensorObj_map_tmul, SheafOfModules.restrictScalars_map_val, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary site pullback/composition, presheaf tensor or ring-module scalar adjunction, not tensor-formula pullback on arbitrary ringed topoi"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "worker": "stage1",
+  "summary": "Expanded the Hom/Bilin argument of Stacks 03EL, including the finite-product transposition of scalar equations, the two scalar-extension balancing relations, and the explicit inverse comparison. Reused existing adjunction, algebraic-structure lifting and sheaf bilinear universal-property nodes; no new nodes.",
+  "blueprint": "def-weil-pbc-four-corners statement, sentence \"On these representatives the comparison is the natural tensor map\": supplies its degreewise tensor comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic tensor universal property for module sheaves on any site, needed for the Hom/Bilin chain; not a replacement of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Generic finite-product preservation needed to extend sectionwise bilinear maps to the two sheafified tensor factors."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-e4ba748bb",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-e4ba748bb (reviewer sub-agent of L); spot-checked: Read the item, route, cited nodes, and Stacks sources in full. The ringed-topos orientation, base-change map, coefficient category, Hom/bilinear proof, naturality, edge cases, and DAG uniqueness checks all pass. Review written to review.md."
+ }
 }
