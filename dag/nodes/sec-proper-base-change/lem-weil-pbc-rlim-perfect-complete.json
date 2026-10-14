@@ -29,9 +29,96 @@
   "def-weil-derived-limit",
   "def-weil-point-derived-complete-module-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a bounded finite-projective complex $B^\\bullet$ representing $K_1$ by [def-pc-perfect-ring-complex], supported in some $[a,b]$. It also admits a bounded-above finite-free representative: proceeding downwards from degree $b$, choose a finite-projective complement $Q$ making the current top unprocessed term free, and add the contractible two-term complex $Q\\xrightarrow{1}Q$ in that degree and the degree immediately below. Repeat downwards. Each degree is changed at only two consecutive stages, all terms remain finite projective until processed, and the sum of the added two-term complexes is termwise finite and has the direct-sum contracting homotopy. The resulting bounded-above finite-free complex is homotopy equivalent to $B^\\bullet$. Thus $K_1$ is pseudo-coherent by [def-pc-ring-pseudo-coherent-complex].",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09AW and Tag 0658, lemma-perfect, perfect implies pseudo-coherent; explicit complement construction"
+   }
+  },
+  {
+   "text": "Put $A_n=A/I^n$. Quotient maps $A_{n+1}\\to A_n$ are surjective and have square-zero kernel $I^n/I^{n+1}$, since $2n\\geq n+1$. Completeness [def-weil-pbc-adic-completion] identifies $A$ with their inverse limit. The transition-induced derived reduction isomorphisms are precisely the hypothesis of [lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction], and step 1 supplies its pseudo-coherent first term. Apply it to obtain a bounded-above finite-free limit complex $P^\\bullet$ representing $K$, finite-free complexes $P_n^\\bullet$ representing $K_n$, and projection-induced chain isomorphisms $q_n:P^\\bullet\\otimes_A A_n\\simeq P_n^\\bullet$. In particular $K$ is pseudo-coherent and all its canonical derived reductions are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0CQF, 0CQG and 09AW; apply pseudo-coherent reconstruction to the square-zero quotient tower"
+   }
+  },
+  {
+   "text": "Every maximal ideal $\\mathfrak m$ of $A$ contains $I$ by [lem-weil-pbc-adic-complete-jacobson-radical]. Indeed the completeness hypothesis used there is exactly the bijectivity of $A\\to\\varprojlim A/I^n$ in this item. Set $\\kappa=A/\\mathfrak m$, so the coefficient map factors through $A_1$. View module complexes as sheaves on the one-object site with only the identity covering. Finite projectives are flat, because they are direct summands of finite free modules and tensoring a finite free module is a finite sum of the identity exact functor. Thus $P^\\bullet$, $P_1^\\bullet$, and the bounded complex $B^\\bullet$ of step 1 are K-flat by [lem-pc-kflat-closure]. By [lem-pur-derived-change-of-rings], ordinary tensor with $\\kappa$ computes their respective derived scalar extensions. The chain map $q_1$ gives the chain isomorphism\n$$P^\\bullet\\otimes_A\\kappa\\simeq (P^\\bullet\\otimes_A A_1)\\otimes_{A_1}\\kappa\\simeq P_1^\\bullet\\otimes_{A_1}\\kappa,$$\nwhere the first map sends $x\\otimes c$ to $(x\\otimes1)\\otimes c$ and its inverse sends $(x\\otimes u)\\otimes c$ to $x\\otimes uc$. Both $P_1^\\bullet$ and $B^\\bullet$ represent $K_1$, so their derived extensions are isomorphic. Since $B^\\bullet\\otimes_{A_1}\\kappa$ has zero terms outside the same interval $[a,b]$ for every $\\mathfrak m$, $H^i(K\\otimes_A^L\\kappa)=0$ outside that interval, uniformly over all maximal ideals.",
+   "uses": [
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "lem-pc-kflat-closure",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQG, lemma-Rlim-perfect-gives-perfect, residue-field argument; Tags 06YT and 06YY for the K-flat computation"
+   }
+  },
+  {
+   "text": "The reconstruction in step 2 makes $K$ pseudo-coherent; the interval in step 3 is independent of the maximal ideal. Apply [lem-weil-pbc-pseudocoherent-maximal-fibre-perfect] to $R=A$, $C=K$ and this interval. It gives perfectness of $K$ without imposing any Noetherian, finite-generation-of-$I$, or regularity hypothesis.",
+   "uses": [
+    "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 068V and 0CQG, last sentence of proof"
+   }
+  },
+  {
+   "text": "After restriction of scalars to $A$, multiplication by $f^n$ is zero on $K_n$ for every $f\\in I$: this scalar has zero image in $A/I^n$, and hence acts as the zero endomorphism of every complex representing $K_n$. Apply [lem-weil-pbc-nilpotent-torsion-derived-limit-complete] with $L_n=K_n$ and exponent $e=n$. It proves derived $I$-completeness in the sense of the vanishing definition [def-weil-point-derived-complete-module-complex], not merely an identification with the limit of ordinary reductions.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-torsion-derived-limit-complete",
+    "def-weil-point-derived-complete-module-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 091W and 09AV, completeness argument used by 09AW"
+   }
+  },
+  {
+   "text": "Finally let $m\\geq n$. For the strict complexes supplied by [lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction], the composite $P^\\bullet\\to P_m^\\bullet\\to P_n^\\bullet$ is the projection $P^\\bullet\\to P_n^\\bullet$ by the definition of termwise inverse limit. The reduction isomorphism $q_n$ sends $x\\otimes u$ to $u$ times that projection of $x$. Consequently applying the chain transition to $q_m(x\\otimes u)$ gives $q_n(x\\otimes\\bar u)$. Pure tensors generate every term, so this proves the equality of the chain maps, and repeated transitions give the same equality for any $m\\geq n$. The chosen markings represent the supplied maps $K_m\\to K_n$, and the reconstruction identifies $q_n$ with the projection-induced derived comparison, so these equalities are exactly the compatibility with transitions asserted in the item.",
+   "uses": [
+    "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, compatible finite-free models and their projections; Tag 09AW, final assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-pbc-adic-completion",
+  "lem-pc-kflat-closure",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-nilpotent-torsion-derived-limit-complete",
+  "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
+  "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+  "def-weil-point-derived-complete-module-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09AW, expanded through the proof of Tag 0CQG and its pseudo-coherent reconstruction (0CQF), pointwise criterion (068V), and torsion completeness (091W)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -116,10 +203,45 @@
    "results": "0 hits: ",
    "date": "2026-10-14",
    "verdict": "no match: ring completion structures, formal smoothness lifting and ordinary flatness do not assert derived perfect reconstruction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes over an adically complete ring reconstructed from compatible ideal power reductions",
+   "results": "8 hits: IsAdicComplete.toIsPrecomplete, IsAdicComplete, AdicCompletion, Hausdorffification, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.of_apply, AdicCompletion.ext_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary completion, K-projective complexes and Tor vanishing do not reconstruct perfect normalized derived towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible perfect derived quotient complexes have a perfect derived inverse limit over the complete ring",
+   "results": "8 hits: BDeRhamPlus, Hausdorffification, instCommRingBDeRhamPlus, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.map_exact, AdicCompletion, IsAdicComplete",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary completion, K-projective complexes and Tor vanishing do not reconstruct perfect normalized derived towers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"HomologicalComplex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary completion, K-projective complexes and Tor vanishing do not reconstruct perfect normalized derived towers"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*derived.*limit|HomologicalComplex.*IsAdicComplete",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary completion, K-projective complexes and Tor vanishing do not reconstruct perfect normalized derived towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect inverse limit reconstruction over an adically complete ring",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-residue-lisse-perfect-lift",
   "by": "worker",
@@ -135,5 +257,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-rlim-perfect-complete",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded 09AW through nilpotent quotient reconstruction, a uniform residue-field bound, and elementwise torsion completeness. Distinguished arbitrary complete rings from the existing Noetherian reconstruction node. Wrote out finite-free stabilization and transition equalities. Three new statement-only general ingredients; no Mathlib leaves or Lean edits.",
+  "blueprint": "thm-weil-pbc-finite-extension, original Proof first sentence: choose an integral lattice. This algebraic reconstruction makes the compatible perfect lattice models used by the intervening residue-lisse lift precise; it does not replace the rationalization or geometric base-change unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Generic module-complex tool used for residue-field computation of the integral lattice; the proper-base-change unit has no such algebraic statement."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic module-complex tool used for residue-field computation of the integral lattice; the proper-base-change unit has no such algebraic statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-closure",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-a6228cf92",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-a6228cf92 (reviewer sub-agent of L); spot-checked: Read all four nodes and cited mathematics in full. Checked 09AW, 0CQF, 068V and 091W, all six proof steps, edge cases, duplicates, dependencies, unit route, and the exact archived condensed-coefficient target and exchange direction. No mathematical repair needed. Accepted both declared K-flat/change-of-rings tool uses. Detailed findings are in review.md."
  }
 }
