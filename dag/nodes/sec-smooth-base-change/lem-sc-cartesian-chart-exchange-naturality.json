@@ -1,0 +1,92 @@
+{
+  "id": "lem-sc-cartesian-chart-exchange-naturality",
+  "kind": "statement",
+  "title": "lem-sc-cartesian-chart-exchange-naturality",
+  "statement": "theorem cartesianChartCohomologyLift_exchange {S X : Scheme.{u}} (f : X ⟶ S) {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (i : I) (V : (D.obj i).left.Etale) (U : c.pt.left.Etale) (r : U.left ⟶ V.left) (hr : IsPullback r U.hom V.hom (c.π.app i).left) (j : Over i) (x : restrictedOverCohomology (pullback.snd f (D.obj i).hom) (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartDiagram f D i).obj j) V) : cartesianChartCohomologyLift f D c F q i V U r hr j x ≫ (shiftFunctor _ (q : ℤ)).map (cartesianDerivedImageMap f (D.obj j.left).hom c.pt.hom (c.π.app j.left).left (Over.w (c.π.app j.left)).symm ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) = (cartesianChartCohomologyIso f (D.obj i).hom (c.π.app i).left c.pt.hom (Over.w (c.π.app i)).symm F q V U r hr).hom (restrictedOverCohomologyMap (pullback.snd f (D.obj i).hom) (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartCone f D c i).π.app j) V x)",
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0EYM",
+    "place": "canonical construction and exchange square"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "Apply the naturality theorem for raw restricted cohomology comparison to the cone leg and its coefficient map; expand the canonical raw transport and chart-class pullback maps. Pullback uniqueness and inverse-image composition identify the source and coefficient maps. Take derived adjoints and use the defining mate equation for cartesianDerivedImageMap, then cancel the adjunction unit/counit by the triangle identities. The remaining factors are exactly the restrictedOverCohomologyMap and the canonical apex cohomology isomorphism.",
+      "uses": [
+        "lem-sbc-raw-restricted-cohomology-comparison-naturality",
+        "def-sc-cartesian-derived-image-map",
+        "lem-sbc-abelian-higher-direct-image-class-compatibility"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-sbc-raw-restricted-cohomology-comparison-naturality",
+    "def-sc-cartesian-derived-image-map",
+    "lem-sbc-abelian-higher-direct-image-class-compatibility"
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "document": "https://stacks.math.columbia.edu/tag/0EYM",
+    "place": "canonical exchange square and derived adjunction mate calculation"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "cartesian chart derived adjunction raw cohomology",
+      "results": "searched library; no direct declaration",
+      "date": "2026-10-15",
+      "verdict": "No complete direct match; generic mate API found."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "adjunction mate exchange chart pullback",
+      "results": "generic mate and pullback APIs found",
+      "date": "2026-10-15"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"mateEquiv\", \"counit\"",
+      "results": "CategoryTheory.mateEquiv_counit found",
+      "date": "2026-10-15"
+    },
+    {
+      "tool": "grep",
+      "query": "upperStarComp and derived adjunction in Mathlib source",
+      "results": "No direct theorem; generic composition lemmas used.",
+      "date": "2026-10-15",
+      "verdict": "No direct match."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.CartesianHigherImageChartComparison",
+    "date": "2026-10-15",
+    "group": "V1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-cartesian-higher-image-chart-comparison",
+      "place": "canonical chart comparison route",
+      "via": []
+    },
+    "same_as": []
+  },
+  "chapter": "sec-smooth-base-change",
+  "unit": "sk-thm-vanishing",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality",
+    "file": "lean/Sheaf/AlgebraicGeometry/CartesianChartExchangeNaturality.lean",
+    "declaration": "AlgebraicGeometry.Etale.cartesianChartCohomologyLift_exchange",
+    "declarations": [
+      "cartesianChartCohomologyLift_exchange"
+    ],
+    "branch": "sheaf-dag",
+    "by": "V1",
+    "date": "2026-10-15",
+    "statement": "theorem cartesianChartCohomologyLift_exchange {S X : Scheme.{u}} (f : X ⟶ S) {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (i : I) (V : (D.obj i).left.Etale) (U : c.pt.left.Etale) (r : U.left ⟶ V.left) (hr : IsPullback r U.hom V.hom (c.π.app i).left) (j : Over i) (x : restrictedOverCohomology (pullback.snd f (D.obj i).hom) (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartDiagram f D i).obj j) V) : cartesianChartCohomologyLift f D c F q i V U r hr j x ≫ (shiftFunctor _ (q : ℤ)).map (cartesianDerivedImageMap f (D.obj j.left).hom c.pt.hom (c.π.app j.left).left (Over.w (c.π.app j.left)).symm ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) = (cartesianChartCohomologyIso f (D.obj i).hom (c.π.app i).left c.pt.hom (Over.w (c.π.app i)).symm F q V U r hr).hom (restrictedOverCohomologyMap (pullback.snd f (D.obj i).hom) (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartCone f D c i).π.app j) V x)"
+  }
+}
