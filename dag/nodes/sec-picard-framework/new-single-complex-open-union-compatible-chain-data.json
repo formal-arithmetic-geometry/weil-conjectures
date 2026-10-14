@@ -17,40 +17,35 @@
  },
  "proof": [
   {
-   "text": "Resolve both coefficients on the union and its inverse image by functorial injective-term K-injective complexes. Form the exact restriction pair/difference rows; gluing gives the kernel and flasqueness gives surjectivity on the overlap. Apply derived direct image and base pullback with resolutions of the finite diagrams (K-flat for pullback). The transposed coefficient morphism and restriction naturality give the comparison of resolved diagrams, including a specified homotopy of the first square.",
+   "text": "Set W=U union V and restrict the cartesian square and both coefficient objects to W. Its inverse-image opens A and B cover W. Apply relativeMV_cover_rows to this cover and the explicitly restricted coefficient morphism, obtaining a morphism m between short exact rows P and P′, with its three prescribed localized components.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-open-union-image-complex-exact"
+    "lem-pc-relative-mv-cover-rows"
    ],
    "elementary": false
   },
   {
-   "text": "Retain the specified homotopy in the cone map, and rectify the first square by a cylinder. Transport the middle and cone comparisons along the resulting homotopy equivalences. This produces a strict square whose functorial cone map still represents the original overlap comparison.",
+   "text": "For Z=U,V,U intersection V, identify the nested comparison with the ambient comparison using the canonical isomorphism of nested open schemes and the pullback-pasting isomorphism on inverse images. The coefficient coherence theorem verifies the hypothesis of exists_derivedBaseChange_source_iso. The global row arrow is definitionally the ambient comparison on W, so needs no transport. These are isomorphisms of arrows, retaining the prescribed coefficient morphism.",
    "uses": [
-    "lem-pc-homotopy-square-cone-rectification"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Identify the six vertices by exact open restriction, direct-image composition and the additive biproduct comparison. Expand the base-change mate and the restricted coefficient arrow. Pullback pasting, composite counits and adjunction triangle identities identify the first, middle and cone components with the canonical union, member-biproduct and overlap arrows. Nested coefficient coherence identifies restrictions made on the union with the ambient restrictions. Empty opens and zero coefficients give zero diagrams; repeated or contained opens give split diagrams.",
-   "uses": [
-    "lem-pc-derived-direct-image-composition",
+    "lem-pc-derived-base-change-source-iso",
     "lem-pc-single-complex-nested-coefficient-coherence"
    ],
    "elementary": false
+  },
+  {
+   "text": "Take t=P.f, t′=P′.f, alpha=m.τ₁, beta=m.τ₂ and the strict square from m.comm₁₂. Mathlib CochainComplex.mappingCone.quasiIso_descShortComplex identifies the cones with P.X₃ and P′.X₃ after localization. Its map_descShortComplex naturality identity identifies the cone map with Q(m.τ₃). Transport the six vertex isomorphisms along the arrow isomorphisms of the preceding step. Biproduct projection extensionality combines the two middle component identities, and biproduct map naturality transports their sum. These calculations yield exactly all three required equalities.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pc-open-union-image-complex-exact",
-  "lem-pc-homotopy-square-cone-rectification",
-  "lem-pc-derived-direct-image-composition",
+  "lem-pc-relative-mv-cover-rows",
+  "lem-pc-derived-base-change-source-iso",
   "lem-pc-single-complex-nested-coefficient-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/08HZ; https://stacks.math.columbia.edu/tag/08HY; https://stacks.math.columbia.edu/tag/0DJ9; https://stacks.math.columbia.edu/tag/013N",
-  "place": "Chain-level realization of the relative Mayer–Vietoris comparison, before the short exact cylinder step; read online 2026-10-14."
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+  "place": "Tags 08HZ, 08HY, 0DJ9 via the existing cover-row and coefficient-coherence declarations; Mathlib quasiIso_descShortComplex and map_descShortComplex for the cone comparison. U3, 2026-10-14."
  },
  "mathlib_searches": [
   {
@@ -132,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-da0d4",
-  "group": "J2",
+  "reviewer": "COMPILER",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261014T063818-L-2814065",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proof routes with the nodes and change record; verified clean compilation, axioms, the sole direct importer, and the original importer’s reported failure against changed dependencies."
+  "landing": "20261014T074217-L-3520746",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
