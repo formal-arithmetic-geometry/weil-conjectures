@@ -5,8 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.AlgebraicGeometry.DirectImageSquareUnitTransport
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.NormalizedDirectImageSquarePaste
 /-! # Right-derived unit normalization of direct-image squares
 
 Source: Stacks Project, Cohomology, Tag 0D5T.
@@ -14,7 +13,9 @@ Source: Stacks Project, Cohomology, Tag 0D5T.
 -/
 
 @[expose] public section
+noncomputable section
 set_option autoImplicit false
+set_option cleanup.letToHave false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
@@ -23,6 +24,10 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+local instance (Z : Scheme.{u}) : Category Z.Modules :=
+  inferInstanceAs (Category (SheafOfModules.{u} (moduleRings Z.toRingedSpace)))
+local instance (Z : Scheme.{u}) : Abelian Z.Modules :=
+  inferInstanceAs (Abelian (SheafOfModules.{u} (moduleRings Z.toRingedSpace)))
 local instance (Z : Scheme.{u}) : HasDerivedCategory.{w} Z.Modules :=
   inferInstanceAs (HasDerivedCategory.{w}
     (SheafOfModules.{u} (moduleRings Z.toRingedSpace)))
@@ -34,6 +39,11 @@ local instance (Z : Scheme.{u}) : Abelian.HasKInjectiveResolutions Z.Modules :=
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
+  DerivedCategory.Qh
+
+set_option maxHeartbeats 800000 in
+-- The explicit categorical carrier conversions require the larger elaboration budget.
 /-- The normalized right-adjoint square is determined by the pasted right-derived
 units of its two ordinary direct-image paths.
 Source: Stacks Project, Cohomology, Tag 0D5T; the determining equation in
@@ -69,5 +79,19 @@ theorem normalizedDirectImageSquare_unit
     Functor.whiskerRight (NatTrans.mapHomotopyCategory e₀.hom (.up ℤ))
       DerivedCategory.Qh ≫
       Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward f')
-        (Scheme.Modules.pushforward g) := by sorry
+        (Scheme.Modules.pushforward g) := by
+  dsimp only
+  apply NatTrans.ext
+  funext K
+  have h₁ := normalizedDirectImageCompUnit gX f K
+  have h₂ := normalizedDirectImageCompUnit f' g K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app]
+  erw [Functor.whiskerLeft_app]
+  erw [Iso.trans_hom, Iso.trans_hom, Iso.symm_hom]
+  erw [NatTrans.comp_app, NatTrans.comp_app]
+  simp only [eqToIso.hom]
+  exact normalizedDirectImageSquare_component f f' g gX h K h₁ h₂
+    (directImageSquare_unit_transport gX f f' g h K)
+
+
 end AlgebraicGeometry

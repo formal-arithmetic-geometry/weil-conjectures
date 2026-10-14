@@ -15,35 +15,39 @@
  },
  "proof": [
   {
-   "text": "On a complex I, expand rightDerivedFunctorCompUnit. Its homotopy composition comparison is the image of an identity. The component is the second unit at the first functor applied to I followed by the second derived functor of the first unit.",
-   "uses": [],
+   "text": "Apply the fixed composition-unit normalization theorem to the two paths, obtaining h₁ and h₂ for the two normalized comparisons.",
+   "uses": [
+    "lem-pc-normalized-direct-image-square-unit-comp-normalization"
+   ],
    "elementary": true
   },
   {
-   "text": "Use the determining inverse-unit equations for the two fixed composition comparisons. Use equality transport of the single unit across h, identifying the ordinary square with directImageSquareIso.",
+   "text": "Apply directImageSquare_unit_transport to obtain the equality-transport equation for the single direct-image unit.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-direct-image-composition",
     "lem-pc-direct-image-square-unit-transport"
    ],
    "elementary": true
   },
   {
-   "text": "Paste the two composition equations and the equality-transport equation, cancelling only the adjacent isomorphism and inverse. Surjectivity of the homotopy quotient on objects and natural-transformation extensionality give the equation for every homotopy object.",
-   "uses": [],
+   "text": "Use the component assembly theorem to paste h₁, h₂ and the transport equation; natural-transformation extensionality gives the displayed equality.",
+   "uses": [
+    "lem-pc-normalized-direct-image-square-unit-component-assembly"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-direct-image-square-unit-transport",
-  "lem-pc-ringed-spaces-derived-direct-image-composition"
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-normalized-direct-image-square-unit-comp-normalization",
+  "lem-pc-normalized-direct-image-square-unit-component-assembly"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "H2",
+  "by": "worker",
+  "group": "D2",
   "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0D5T; determining equation in exists_derivedModuleDirectImageComposition, and directImageSquare_unit_transport",
-  "note": "Elementary normalization and categorical assembly from the named source equations; source tags read online."
+  "place": "Tag 0D5T; fixed comparison unit normalization and categorical pasting."
  },
  "mathlib_searches": [
   {
@@ -183,11 +187,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-1a815",
-  "group": "H2",
+  "reviewer": "X-e3cf2",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261014T052439-L-1913452",
+  "landing": "20261014T170737-L-2555945",
   "kind": "interface",
-  "note": "independent Codex review: Packet statements and DAG nodes matched delivered Lean declarations; all delivered modules compiled cleanly and mechanical findings were empty."
+  "note": "independent Codex review: The delivered Lean files, DAG nodes, report, change record, compilation artifacts, and interface review match the stage-3 requirements and preserve the target statement."
  }
 }

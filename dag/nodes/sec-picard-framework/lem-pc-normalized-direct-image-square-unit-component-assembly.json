@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-normalized-direct-image-square-unit-component-assembly",
+ "kind": "statement",
+ "title": "Component assembly for the normalized direct-image square",
+ "statement": "theorem normalizedDirectImageSquare_component\n    {X Y X' Y' : Scheme.{u}}\n    (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (gX : X' ⟶ X)\n    (h : gX ≫ f = f' ≫ g)\n    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) (.up ℤ))\n    (h₁ : (RingedSpace.moduleDirectImage (gX ≫ f).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫\n      (schemeNormalizedDirectImageCompIso gX f).inv.app (DerivedCategory.Qh.obj K) =\n      (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward gX)\n        (Scheme.Modules.pushforward f)).app K)\n    (h₂ : (RingedSpace.moduleDirectImage (f' ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫\n      (schemeNormalizedDirectImageCompIso f' g).inv.app (DerivedCategory.Qh.obj K) =\n      (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward f')\n        (Scheme.Modules.pushforward g)).app K)\n    (ht : (RingedSpace.moduleDirectImage (gX ≫ f).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫\n      (eqToHom (congrArg (fun v ↦ schemeDerivedDirectImage v) h)).app\n        (DerivedCategory.Qh.obj K) =\n      DerivedCategory.Qh.map\n        ((NatTrans.mapHomotopyCategory\n          (directImageSquareIso gX f f' g h).hom (.up ℤ)).app K) ≫\n        (RingedSpace.moduleDirectImage (f' ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app K) :\n    (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward gX)\n      (Scheme.Modules.pushforward f)).app K ≫\n      (schemeNormalizedDirectImageCompIso gX f).hom.app (DerivedCategory.Qh.obj K) ≫\n      (eqToHom (congrArg (fun v ↦ schemeDerivedDirectImage v) h)).app\n        (DerivedCategory.Qh.obj K) ≫\n      (schemeNormalizedDirectImageCompIso f' g).inv.app (DerivedCategory.Qh.obj K) =\n    DerivedCategory.Qh.map\n      ((NatTrans.mapHomotopyCategory\n        (Scheme.Modules.pushforwardComp gX f ≪≫ Scheme.Modules.pushforwardCongr h ≪≫\n          (Scheme.Modules.pushforwardComp f' g).symm).hom (.up ℤ)).app K) ≫\n      (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward f')\n        (Scheme.Modules.pushforward g)).app K := by sorry",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T, pasting the two composition comparisons with equality transport."
+ },
+ "proof": [
+  {
+   "text": "Paste the two inverse-unit equations and the equality-transport equation in the derived category. Associativity and cancellation of the comparison isomorphisms yield the target component equation; unfold only the ordinary square comparison to identify its map.",
+   "uses": "lem-pc-direct-image-square-unit-transport",
+   "elementary": false
+  }
+ ],
+ "proof_deps": "lem-pc-direct-image-square-unit-transport",
+ "proof_origin": {
+  "by": "worker",
+  "group": "D2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T, pasting the two composition comparisons with equality transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "component of right-derived functor composition unit",
+   "results": "Generic right-derived composition APIs; no exact scheme direct-image normalization theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctorCompUnit",
+   "results": "Functor.rightDerivedFunctorCompUnit; component formula requires explicit homotopy-category identity normalization.",
+   "date": "2026-10-14",
+   "verdict": "generic declaration only"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedDirectImageCompUnit|normalizedDirectImageSquare_component",
+   "results": "No existing declaration before this delivery.",
+   "date": "2026-10-14",
+   "verdict": "new intermediate statements"
+  },
+  {
+   "tool": "leansearch",
+   "query": "categorical pasting of right-derived composition units",
+   "results": "No exact specialized theorem; generic categorical associativity is used in the proof.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-normalized-direct-image-square-unit",
+   "place": "proof steps: normalization and component assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalizedDirectImageSquarePaste",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedDirectImageSquarePaste.lean",
+  "declaration": "AlgebraicGeometry.normalizedDirectImageSquare_component",
+  "statement": "theorem normalizedDirectImageSquare_component {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (gX : X' ⟶ X) (h : gX ≫ f = f' ≫ g) (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) (.up ℤ)) (h₁ : (RingedSpace.moduleDirectImage (gX ≫ f).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫ (schemeNormalizedDirectImageCompIso gX f).inv.app (DerivedCategory.Qh.obj K) = (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward gX) (Scheme.Modules.pushforward f)).app K) (h₂ : (RingedSpace.moduleDirectImage (f' ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫ (schemeNormalizedDirectImageCompIso f' g).inv.app (DerivedCategory.Qh.obj K) = (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward f') (Scheme.Modules.pushforward g)).app K) (ht : (RingedSpace.moduleDirectImage (gX ≫ f).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫ (eqToHom (congrArg (fun v ↦ schemeDerivedDirectImage v) h)).app (DerivedCategory.Qh.obj K) = DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory (directImageSquareIso gX f f' g h).hom (.up ℤ)).app K) ≫ (RingedSpace.moduleDirectImage (f' ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app K) : (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward gX) (Scheme.Modules.pushforward f)).app K ≫ (schemeNormalizedDirectImageCompIso gX f).hom.app (DerivedCategory.Qh.obj K) ≫ (eqToHom (congrArg (fun v ↦ schemeDerivedDirectImage v) h)).app (DerivedCategory.Qh.obj K) ≫ (schemeNormalizedDirectImageCompIso f' g).inv.app (DerivedCategory.Qh.obj K) = DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory (Scheme.Modules.pushforwardComp gX f ≪≫ Scheme.Modules.pushforwardCongr h ≪≫ (Scheme.Modules.pushforwardComp f' g).symm).hom (.up ℤ)).app K) ≫ (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward f') (Scheme.Modules.pushforward g)).app K",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e3cf2",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T170737-L-2555945",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e3cf2",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T170737-L-2555945",
+  "kind": "interface",
+  "note": "independent Codex review: The delivered Lean files, DAG nodes, report, change record, compilation artifacts, and interface review match the stage-3 requirements and preserve the target statement."
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-normalized-direct-image-square-unit-comp-normalization",
+ "kind": "statement",
+ "title": "Normalization of a derived direct-image composition unit",
+ "statement": "theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C)\n    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :\n    (RingedSpace.moduleDirectImage (s ≫ t).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫\n      (schemeNormalizedDirectImageCompIso s t).inv.app (DerivedCategory.Qh.obj K) =\n    (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s)\n      (Scheme.Modules.pushforward t)).app K := by sorry",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T, the determining equation in exists_derivedModuleDirectImageComposition."
+ },
+ "proof": [
+  {
+   "text": "Apply the determining equation for the chosen ringed-space comparison. For the component of the generic pasted right-derived unit, represent the homotopy-category object by a complex, simplify the composition-unit formula, and use the identity comparison equation to reduce the comparison inverse to the identity. This identifies the fixed scheme comparison unit with the ringed-space unit equation.",
+   "uses": "lem-pc-ringed-spaces-derived-direct-image-composition",
+   "elementary": false
+  }
+ ],
+ "proof_deps": "lem-pc-ringed-spaces-derived-direct-image-composition",
+ "proof_origin": {
+  "by": "worker",
+  "group": "D2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T, the determining equation in exists_derivedModuleDirectImageComposition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "component of right-derived functor composition unit",
+   "results": "Generic right-derived composition APIs; no exact scheme direct-image normalization theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctorCompUnit",
+   "results": "Functor.rightDerivedFunctorCompUnit; component formula requires explicit homotopy-category identity normalization.",
+   "date": "2026-10-14",
+   "verdict": "generic declaration only"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedDirectImageCompUnit|normalizedDirectImageSquare_component",
+   "results": "No existing declaration before this delivery.",
+   "date": "2026-10-14",
+   "verdict": "new intermediate statements"
+  },
+  {
+   "tool": "leansearch",
+   "query": "categorical pasting of right-derived composition units",
+   "results": "No exact specialized theorem; generic categorical associativity is used in the proof.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-normalized-direct-image-square-unit",
+   "place": "proof steps: normalization and component assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalizedDirectImageCompUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedDirectImageCompUnit.lean",
+  "declaration": "AlgebraicGeometry.normalizedDirectImageCompUnit",
+  "statement": "theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C) (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) : (RingedSpace.moduleDirectImage (s ≫ t).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫ (schemeNormalizedDirectImageCompIso s t).inv.app (DerivedCategory.Qh.obj K) = (Functor.rightDerivedFunctorCompUnit (Scheme.Modules.pushforward s) (Scheme.Modules.pushforward t)).app K",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e3cf2",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T170737-L-2555945",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-e3cf2",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261014T170737-L-2555945",
+  "kind": "interface",
+  "note": "independent Codex review: The delivered Lean files, DAG nodes, report, change record, compilation artifacts, and interface review match the stage-3 requirements and preserve the target statement."
+ }
+}
