@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-standard-single-open-stalk-arrow",
+ "kind": "statement",
+ "title": "Open restriction conjugates the canonical base-change stalk arrow",
+ "statement": "Let $Y,B,A$ be schemes [def-pc-scheme], $p:Y\\to B$ a quasi-compact and quasi-separated morphism, $M$ an $\\mathcal O_Y$-module sheaf, $g:A\\to B$ a morphism, and $a\\in A$. Let $S\\subset B$ and $V\\subset A$ be open subschemes with $a\\in V$ and $V\\subset g^{-1}(S)$. Put $p_S=p|_S$, $M_S=M|_{p^{-1}(S)}$, $j=g|_V:V\\to S$, and $x_V=(a,a\\in V)$. Let $F$ be the stalk functor at $x_V$ followed by restriction of scalars along the inverse $\\mathcal O_{V,x_V}\\simeq\\mathcal O_{A,a}$. Write $b=\\operatorname{standardSingleBaseChangeMap}(p,M,g)$ and $b_S=\\operatorname{standardSingleBaseChangeMap}(p_S,M_S,j)$ [def-pc-standard-single-base-change-map]. For every $n\\in\\mathbf Z$ there are $\\mathcal O_{A,a}$-linear isomorphisms $s:(H^n(\\operatorname{source}(b)))_a\\simeq F(H^n(\\operatorname{source}(b_S)))$ and $t:F(H^n(\\operatorname{target}(b_S)))\\simeq(H^n(\\operatorname{target}(b)))_a$. They satisfy $(H^n(b))_a=t\\circ F(H^n(b_S))\\circ s$. All derived categories are the standard localizations [def-pc-derived-category]; stalk functors are [def-pc-module-stalk-functor]. No flatness, quasi-coherence, affineness, or presentation is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-module-stalk-functor",
+  "def-pc-standard-single-base-change-map"
+ ],
+ "source": {
+  "document": "Stacks Project, perfect.tex and cohomology.tex",
+  "place": "perfect-lemma-single-complex-base-change (Tag 0DJ9), locality paragraph; cohomology-lemma-restrict-direct-image-open (Tag 08FE); perfect-equation-bc (Tag 0DJ7)"
+ },
+ "proof": [
+  {
+   "text": "Use derived direct-image restriction on the full inverse images of S and V to identify the restricted direct images. The existing derived open base-change compatibility theorem supplies the source and target comparisons; specialize its coefficient comparisons to the pinned single maps.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply restricted_base_change_compatibility to the pullback square and the pinned coefficient counits. Unfold the canonical single comparison: its adjunction comparison cancels with its inverse, giving picardTermwiseSingleMap. Hence the resulting square is precisely the square for standardSingleBaseChangeMap. The ordinary restriction and pinned-counit identities justify those coefficient identifications.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-pc-single-complex-open-counit-compatibility",
+    "def-pc-standard-single-base-change-map",
+    "lem-pc-canonical-module-base-change-open-comparison-compat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply degree-n homology. Exact open restriction commutes with homology. The natural open module-stalk restriction comparison identifies the resulting stalks after restricting scalars along the inverse open-stalk ring isomorphism. Compose these comparisons to obtain s and t, and apply their naturality to the restricted arrow equation.",
+   "uses": [
+    "lem-sc-open-module-stalk-restriction-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-standard-single-base-change-map",
+  "lem-pc-canonical-module-base-change-open-comparison-compat",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-single-complex-open-counit-compatibility",
+  "lem-sc-open-module-stalk-restriction-comparison",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M3",
+  "date": "2026-10-14",
+  "document": "Stacks Project, perfect.tex and cohomology.tex",
+  "place": "perfect-lemma-single-complex-base-change (Tag 0DJ9), locality paragraph; cohomology-lemma-restrict-direct-image-open (Tag 08FE); perfect-equation-bc (Tag 0DJ7)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived base change map open restriction stalk conjugacy",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of derived direct image base change maps to open subsets",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Hom.appLE_map, AlgebraicGeometry.Scheme.Hom.map_appLE, AlgebraicGeometry.morphismRestrict_app, AlgebraicGeometry.Scheme.restrict_presheaf_map, AlgebraicGeometry.Scheme.ofRestrict_appLE",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkPullbackIso|restrictStalkIso",
+   "date": "2026-10-14",
+   "results": "17 hits: Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/Stalks.lean, Mathlib/Geometry/RingedSpace/Stalks.lean, Mathlib/Geometry/RingedSpace/Stalks.lean",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationHomology",
+  "date": "2026-10-14",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "original model proof Step 4: take stalks of the local flat presentation and transport its counit equation; Open restriction conjugates the canonical base-change stalk arrow",
+   "via": [
+    "lem-pc-standard-single-flat-counit-localization-homology",
+    "lem-pc-standard-single-flat-counit-localization-completion",
+    "lem-pc-standard-single-flat-counit-localization",
+    "lem-pc-standard-single-stalk-flat-counit-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleOpenStalkArrow",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleOpenStalkArrow.lean",
+  "declaration": "AlgebraicGeometry.standardSingle_open_stalk_arrow",
+  "statement": "theorem standardSingle_open_stalk_arrow {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p] (M : Y.Modules) (g : A ⟶ B) (a : A) (S : B.Opens) (V : A.Opens) (hV : a ∈ V) (hVS : V ≤ g ⁻¹ᵁ S) : letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard (SheafOfModules.{u} (moduleRings X.toRingedSpace)) let xV : V.toScheme := ⟨a, hV⟩ let F := RingedSpace.moduleStalkFunctor V.toScheme.toRingedSpace xV ⋙ ModuleCat.restrictScalars (V.stalkIso xV).inv.hom let pS := p ∣_ S let MS := M.restrict (p ⁻¹ᵁ S).ι let j := g.resLE S V hVS ∀ n : ℤ, ∃ (s : (RingedSpace.moduleStalkFunctor A.toRingedSpace a).obj ((DerivedCategory.homologyFunctor _ n).obj ((derivedPullback g).obj ((schemeDerivedDirectImage p).obj ((DerivedCategory.singleFunctor _ 0).obj M)))) ≅ F.obj ((DerivedCategory.homologyFunctor _ n).obj ((derivedPullback j).obj ((schemeDerivedDirectImage pS).obj ((DerivedCategory.singleFunctor _ 0).obj MS))))) (t : F.obj ((DerivedCategory.homologyFunctor _ n).obj ((schemeDerivedDirectImage (pullback.snd pS j)).obj ((DerivedCategory.singleFunctor _ 0).obj (Scheme.Modules.tensorPullbackObj (pullback.fst pS j) MS)))) ≅ (RingedSpace.moduleStalkFunctor A.toRingedSpace a).obj ((DerivedCategory.homologyFunctor _ n).obj ((schemeDerivedDirectImage (pullback.snd p g)).obj ((DerivedCategory.singleFunctor _ 0).obj (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))))), (RingedSpace.moduleStalkFunctor A.toRingedSpace a).map ((DerivedCategory.homologyFunctor _ n).map (standardSingleBaseChangeMap p M g)) = s.hom ≫ F.map ((DerivedCategory.homologyFunctor _ n).map (standardSingleBaseChangeMap pS MS j)) ≫ t.hom",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T023935-L-15101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T023935-L-15101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,18 +10,45 @@
  },
  "proof": [
   {
-   "text": "Construct the stalk scalar-extension pair and transport the localized presentation equation through exact stalks and homology.",
-   "uses": [],
+   "text": "Take exactly K=Classical.choose hpres and the transported termwise stalk P specified in the statement. Unpack choose_spec to get the bound and flatness of K. Zero-morphism preservation of stalks and scalar restriction sends each zero term to zero. Flat stalks are flat over the local ring; a bijective ring map is flat, and Module.Flat.trans transfers flatness through the inverse open-stalk map.",
+   "uses": [
+    "lem-pc-flat-sheaf-stalk-flat"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Obtain the universal scalar-extension pair from the existing localization-pair theorem for this P.",
+   "uses": [
+    "lem-pc-standard-single-flat-counit-localization-pair"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree n, obtain the open source and target isomorphisms and original-to-local arrow equation, and the generic local-flat-complex counit comparison for K and the chosen pair.",
+   "uses": [
+    "lem-pc-standard-single-open-stalk-arrow",
+    "lem-pc-open-flat-complex-stalk-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the presentation isomorphisms e and t through derived pullback, homology, the local stalk and scalar restriction. Set eL=s followed by the mapped e and l, and eR=r followed by the mapped t and the open target isomorphism. Rewrite by the presentation equation, distribute the functors over composition, substitute the local counit equation, and reassociate. P′=P is rfl; no arbitrary replacement complex is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-flat-sheaf-stalk-flat",
+  "lem-pc-open-flat-complex-stalk-counit",
+  "lem-pc-standard-single-flat-counit-localization-pair",
+  "lem-pc-standard-single-open-stalk-arrow"
+ ],
  "proof_origin": {
-  "by": "A3 repair",
-  "group": "B2",
+  "by": "agent",
+  "group": "M3",
   "date": "2026-10-14",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 0DJ9, 06YB and 0D5S"
+  "document": "Stacks Project, perfect.tex and cohomology.tex",
+  "place": "perfect-lemma-single-complex-base-change (0DJ9), locality paragraph; cohomology-lemma-check-K-flat-stalks (06YB); cohomology-lemma-derived-pullback-composition (0D5S)"
  },
  "mathlib_searches": [
   {
@@ -88,12 +115,12 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-24010",
-  "group": "A3",
+  "reviewer": "COMPILER",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261014T020504-L-3808923",
+  "landing": "20261014T023935-L-15101",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and node; adapted and original importer modules compiled, with only the documented named sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-14",

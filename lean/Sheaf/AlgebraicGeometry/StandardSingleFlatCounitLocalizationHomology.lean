@@ -1,5 +1,10 @@
 module
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
+import Sheaf.AlgebraicGeometry.FlatSheafStalk
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationPair
+import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.AlgebraicGeometry.StandardSingleOpenStalkArrow
+import Sheaf.AlgebraicGeometry.OpenFlatComplexStalkCounit
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -7,6 +12,25 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+
+private theorem flat_restrict_iso {R T : CommRingCat.{u}} (e : R ≅ T)
+    (N : ModuleCat.{u} R) (hN : Module.Flat R N) :
+    Module.Flat T ((ModuleCat.restrictScalars e.inv.hom).obj N) := by
+  let : Algebra T R := e.inv.hom.toAlgebra
+  let : Module.Flat T R := RingHom.Flat.of_bijective
+    (ConcreteCategory.bijective_of_isIso e.inv)
+  let : Module.Flat R N := hN
+  let N' := (ModuleCat.restrictScalars e.inv.hom).obj N
+  let : Module R N' := inferInstanceAs (Module R N)
+  let : Module.Flat R N' := hN
+  change Module.Flat T N'
+  let : IsScalarTower T R ((ModuleCat.restrictScalars e.inv.hom).obj N) :=
+    ⟨fun r s m ↦ by change (e.inv.hom r * s) • m = _; simp [mul_smul]⟩
+  exact Module.Flat.trans T R _
+
+set_option maxHeartbeats 800000 in
+-- The ring and derived-category transports require additional elaboration heartbeats.
+set_option linter.unusedVariables false in
 /-- Homology identifications and counit compatibility for fixed stalk data.
 Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
 Proof: unpack Classical.choose_spec hpres into the upper bound, termwise flatness,
@@ -80,5 +104,59 @@ theorem standardSingleFlatCounit_localization_homology
                 ((DerivedCategory.homologyFunctor _ n).map (standardSingleBaseChangeMap p M g)) =
               eL.hom ≫ (DerivedCategory.homologyFunctor _ n).map
                 (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P')) ≫ eR.hom  := by
-  sorry
+  let := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  let R := B.presheaf.stalk (g a)
+  let T := A.presheaf.stalk a
+  let := HasDerivedCategory.standard (ModuleCat.{u} R)
+  let := HasDerivedCategory.standard (ModuleCat.{u} T)
+  let K := Classical.choose hpres
+  let xS : S.toScheme := ⟨g a, hS⟩
+  let xV : V.toScheme := ⟨a, hV⟩
+  let P := ((ModuleCat.restrictScalars (S.stalkIso xS).inv.hom).mapHomologicalComplex
+    (.up ℤ)).obj
+    (((RingedSpace.moduleStalkFunctor S.toScheme.toRingedSpace xS).mapHomologicalComplex
+      (.up ℤ)).obj K)
+  obtain ⟨hbound, hflat, e, t, heq⟩ := Classical.choose_spec hpres
+  have hPbound : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i) := by
+    obtain ⟨b, hb⟩ := hbound
+    refine ⟨b, fun i hi ↦ ?_⟩
+    exact (ModuleCat.restrictScalars (S.stalkIso xS).inv.hom).map_isZero
+      ((RingedSpace.moduleStalkFunctor S.toScheme.toRingedSpace xS).map_isZero (hb i hi))
+  have hPflat : ∀ i : ℤ, Module.Flat R (P.X i) := by
+    intro i
+    exact flat_restrict_iso (S.stalkIso xS)
+      ((RingedSpace.moduleStalkFunctor S.toScheme.toRingedSpace xS).obj (K.X i))
+      (RingedSpace.flat_stalk_of_isFlat _ _ (hflat i) xS)
+  obtain ⟨LF, ε, hLF⟩ :=
+    standardSingleFlatCounit_localization_pair h_affine p M hM g a P hPbound hPflat
+  refine ⟨P, rfl, hPbound, hPflat, LF, ε, hLF, ?_⟩
+  intro n
+  let F := RingedSpace.moduleStalkFunctor V.toScheme.toRingedSpace xV ⋙
+    ModuleCat.restrictScalars (V.stalkIso xV).inv.hom
+  let H := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) n
+  let j := g.resLE S V hVS
+  obtain ⟨s, v, hv⟩ := standardSingle_open_stalk_arrow p M g a S V hV hVS n
+  obtain ⟨l, r, hc⟩ := openFlatComplex_stalk_counit g a S V hS hV hVS K
+    hbound hflat LF ε hLF n
+  let e' := F.mapIso (H.mapIso ((derivedPullback j).mapIso e))
+  let t' := F.mapIso (H.mapIso t)
+  refine ⟨s ≪≫ e' ≪≫ l, r ≪≫ t' ≪≫ v, ?_⟩
+  have heq' := congrArg (fun f ↦ F.map (H.map f)) heq
+  have hc' : F.map (H.map ((SingleComplexBaseChange.counit j).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj K))) =
+      l.hom ≫ (DerivedCategory.homologyFunctor _ n).map
+        (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ r.hom := hc
+  calc
+    _ = s.hom ≫ F.map (H.map
+          (standardSingleBaseChangeMap (p ∣_ S) (M.restrict (p ⁻¹ᵁ S).ι) j)) ≫
+        v.hom := hv
+    _ = _ := by
+      rw [heq']
+      simp only [Functor.map_comp, Iso.trans_hom, Functor.mapIso_hom,
+        Category.assoc, e', t']
+      rw [hc']
+      simp only [Category.assoc]
+      rfl
 end AlgebraicGeometry

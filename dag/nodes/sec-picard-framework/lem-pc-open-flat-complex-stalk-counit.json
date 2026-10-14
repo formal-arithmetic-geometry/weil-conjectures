@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-open-flat-complex-stalk-counit",
+ "kind": "statement",
+ "title": "Counit comparison for a flat complex on a base open",
+ "statement": "Let $B,A$ be schemes [def-pc-scheme], $g:A\\to B$ a morphism and $a\\in A$. Let $S\\subset B$ and $V\\subset A$ be opens with $g(a)\\in S$, $a\\in V$ and $V\\subset g^{-1}(S)$, and put $j=g|_V:V\\to S$. Let $K$ be a bounded-above complex of flat $\\mathcal O_S$-module sheaves [def-pc-flat-sheaf-modules]. Put $R=\\mathcal O_{B,g(a)}$, $T=\\mathcal O_{A,a}$, $x_S=(g(a),g(a)\\in S)$, $x_V=(a,a\\in V)$, $P=K_{x_S}$ with scalars transported along the inverse $\\mathcal O_{S,x_S}\\simeq R$, and let $F$ be the stalk functor at $x_V$ followed by scalar restriction along the inverse $\\mathcal O_{V,x_V}\\simeq T$. Let $LF:D(R)\\to D(T)$ and $\\varepsilon:LF\\circ Q_h\\to Q_h\\circ\\operatorname{extendScalars}(g_a)$ be any universal left-derived pair for extension along the stalk map $g_a:R\\to T$. For each $n\\in\\mathbf Z$ there are $T$-linear isomorphisms $l:F(H^n(Lj^*(Q_h(K))))\\simeq H^n(LF(Q_h(P)))$ and $r:H^n(Q_h(\\operatorname{extendScalars}(g_a)(P)))\\simeq F(H^n(Q_h(j^*K)))$. They satisfy $F(H^n(\\operatorname{counit}_j(K)))=r\\circ H^n(\\varepsilon_P)\\circ l$. Here $Q_h$ includes passage to the homotopy category, $j^*$ is ordinary tensor pullback, and $\\operatorname{counit}_j$ is its fixed left-derived comparison [def-pc-standard-single-flat-counit-presentation]. All derived categories are standard [def-pc-derived-category]; stalks are [def-pc-module-stalk-functor]. This statement involves no direct image or coefficient module.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-module-stalk-functor",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-standard-single-flat-counit-presentation"
+ ],
+ "source": {
+  "document": "Stacks Project, cohomology.tex and perfect.tex",
+  "place": "cohomology-lemma-check-K-flat-stalks (Tag 06YB); cohomology-lemma-derived-pullback-composition (Tag 0D5S); perfect-equation-bc (Tag 0DJ7)"
+ },
+ "proof": [
+  {
+   "text": "Bounded-above flatness gives K-flatness; the stalk criterion gives K-flatness of its stalk. Restriction through a ring isomorphism preserves acyclicity and the tensor criterion, so the constructed P remains K-flat.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-kflat-stalk-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the derived stalk-extension comparison to j and the given universal pair, transporting the stalk rings along S and V. The resLE composition equation makes the transported ring map the original g.stalkMap. The natural open module-stalk restriction comparison and pinned open-counit compatibility preserve the representative equation. The K-flat scalar-extension counit is invertible on P.",
+   "uses": [
+    "lem-pc-stalk-derived-extension-comparison-intermediate",
+    "lem-sc-open-module-stalk-restriction-comparison",
+    "lem-pc-single-complex-open-counit-compatibility",
+    "lem-pc-kflat-scalar-extension-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply degree-n homology to the derived comparison. Exact stalk homology comparison and the ordinary tensor-stalk formula give the endpoints of l and r. The representative counit equation from the comparison gives their displayed equality; reassociate compositions and cancel inverse localization factors.",
+   "uses": [
+    "lem-pc-stalk-comparison-source-transport",
+    "lem-pc-stalk-derived-extension-comparison-intermediate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-kflat-scalar-extension-counit",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-single-complex-open-counit-compatibility",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-stalk-derived-extension-comparison-intermediate",
+  "lem-sc-open-module-stalk-restriction-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M3",
+  "date": "2026-10-14",
+  "document": "Stacks Project, cohomology.tex and perfect.tex",
+  "place": "cohomology-lemma-check-K-flat-stalks (Tag 06YB); cohomology-lemma-derived-pullback-composition (Tag 0D5S); perfect-equation-bc (Tag 0DJ7)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded above flat sheaf complex pullback stalk derived scalar extension counit",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded above flat sheaf complex scalar extension stalk counit compatibility",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.Flat.stalkMap, smoothSheafCommRing.ι_forgetStalk_hom, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, smoothSheafCommRing.ι_forgetStalk_hom_assoc, smoothSheafCommRing.forgetStalk_hom_comp_evalHom, smoothSheafCommRing.forgetStalk_hom_comp_evalHom_apply, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, smoothSheafCommRing.ι_forgetStalk_inv_assoc",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|leftDerivedNatIso|stalkPullbackIso",
+   "date": "2026-10-14",
+   "results": "3 hits: Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/Topology/Sheaves/Stalks.lean",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationHomology",
+  "date": "2026-10-14",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "original model proof Step 4: take stalks of the local flat presentation and transport its counit equation; Counit comparison for a flat complex on a base open",
+   "via": [
+    "lem-pc-standard-single-flat-counit-localization-homology",
+    "lem-pc-standard-single-flat-counit-localization-completion",
+    "lem-pc-standard-single-flat-counit-localization",
+    "lem-pc-standard-single-stalk-flat-counit-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenFlatComplexStalkCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenFlatComplexStalkCounit.lean",
+  "declaration": "AlgebraicGeometry.openFlatComplex_stalk_counit",
+  "statement": "theorem openFlatComplex_stalk_counit {B A : Scheme.{u}} (g : A ⟶ B) (a : A) (S : B.Opens) (V : A.Opens) (hS : g a ∈ S) (hV : a ∈ V) (hVS : V ≤ g ⁻¹ᵁ S) (K : CochainComplex (SheafOfModules.{u} (moduleRings S.toScheme.toRingedSpace)) ℤ) (hbound : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i)) (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) : letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard (SheafOfModules.{u} (moduleRings X.toRingedSpace)) let R := B.presheaf.stalk (g a) let T := A.presheaf.stalk a letI := HasDerivedCategory.standard (ModuleCat.{u} R) letI := HasDerivedCategory.standard (ModuleCat.{u} T) let xS : S.toScheme := ⟨g a, hS⟩ let xV : V.toScheme := ⟨a, hV⟩ let P := ((ModuleCat.restrictScalars (S.stalkIso xS).inv.hom).mapHomologicalComplex (.up ℤ)).obj (((RingedSpace.moduleStalkFunctor S.toScheme.toRingedSpace xS).mapHomologicalComplex (.up ℤ)).obj K) let F := RingedSpace.moduleStalkFunctor V.toScheme.toRingedSpace xV ⋙ ModuleCat.restrictScalars (V.stalkIso xV).inv.hom let j := g.resLE S V hVS let qK := (HomotopyCategory.quotient _ (.up ℤ)).obj K ∀ (LF : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} T)) (ε : DerivedCategory.Qh ⋙ LF ⟶ (ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) (hLF : LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ))) (n : ℤ), ∃ (l : F.obj ((DerivedCategory.homologyFunctor _ n).obj ((derivedPullback j).obj (DerivedCategory.Qh.obj qK))) ≅ (DerivedCategory.homologyFunctor _ n).obj (LF.obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))) (r : (DerivedCategory.homologyFunctor _ n).obj (DerivedCategory.Qh.obj (((ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≅ F.obj ((DerivedCategory.homologyFunctor _ n).obj (DerivedCategory.Qh.obj (((Scheme.Modules.tensorPullback j).mapHomotopyCategory (.up ℤ)).obj qK)))), F.map ((DerivedCategory.homologyFunctor _ n).map ((SingleComplexBaseChange.counit j).app qK)) = l.hom ≫ (DerivedCategory.homologyFunctor _ n).map (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ r.hom",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T023935-L-15101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T023935-L-15101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
