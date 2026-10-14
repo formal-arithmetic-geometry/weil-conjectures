@@ -24,9 +24,76 @@
   "def-weil-derived-limit",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restrict each $P_n^\\bullet$ along the projection $A\\to A_n$. If $a=(a_m)_m\\in A$, then $t_n(a_{n+1}x)=a_n t_n(x)$ by the given $A_{n+1}$-linearity and compatibility of $a$. Thus all transitions are $A$-linear. Put $B^i=\\prod_{n\\geq1}P_n^i$, $d_B((x_n))=(d_nx_n)$, $j^i:P^i\\to B^i$ the inclusion of compatible tuples, and $u^i((x_n))=(x_n-t_n(x_{n+1}))$. The equations $d_n t_n=t_n d_{n+1}$ imply $d_Bu=ud_B$ and $d_Bj=jd_P$; componentwise $d_B^2=d_P^2=0$. These give complexes and chain maps $P^\\bullet\\xrightarrow{j}B^\\bullet\\xrightarrow{u}B^\\bullet$ in the sense of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQD, lemma-distinguished-triangle-Rlim-modules, proof via lemma-distinguished-triangle-Rlim, first paragraph; Tag 091D, lemma-compute-Rlim-modules"
+   }
+  },
+  {
+   "text": "For each integer $i$, $\\ker u^i$ consists exactly of tuples satisfying $x_n=t_n(x_{n+1})$, hence equals $j^i(P^i)$ and $j^i$ is injective. Given $y=(y_n)\\in B^i$, set $x_1=0$ and recursively choose $x_{n+1}$ with $t_n^i(x_{n+1})=x_n-y_n$; this is possible by surjectivity. Then $u^i(x)=y$. The choices need not be linear or commute with differentials: they prove only surjectivity of $u^i$. Consequently $0\\to P^\\bullet\\xrightarrow{j}B^\\bullet\\xrightarrow{u}B^\\bullet\\to0$ is a degreewise short exact sequence of complexes. This is the short exact sequence used in the first paragraph of the proof of Stacks Tag 0CQD, with its surjectivity here proved directly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQD, lemma-distinguished-triangle-Rlim-modules, proof via lemma-distinguished-triangle-Rlim, first paragraph; Tag 091D, lemma-compute-Rlim-modules"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-cone-short-exact-quasi-iso] to the short exact sequence in step 2. It gives a quasi-isomorphism $q:C(j)\\to B^\\bullet$, equal to $u$ on the unshifted $B^\\bullet$ summand and zero on the shifted $P^\\bullet$ summand. If $i:B^\\bullet\\to C(j)$ is the cone inclusion, then $qi=u$. By [def-weil-abstract-derived-category], $Q(q)$ is invertible and the cone triangle $Q(P^\\bullet)\\xrightarrow{Q(j)}Q(B^\\bullet)\\xrightarrow{Q(i)}Q(C(j))\\xrightarrow{-Q(p)}Q(P^\\bullet)[1]$ is distinguished. Set $\\delta=-Q(p)Q(q)^{-1}$. The triple $(\\mathrm{id}_{Q(P)},\\mathrm{id}_{Q(B)},Q(q))$ is an isomorphism of triangles: its first square is the identity, its second square is $Q(q)Q(i)=Q(u)$, and its last square is $\\delta Q(q)=-Q(p)$. All three components are invertible. Hence the isomorphism-closure axiom in [def-weil-triangulated-category] applies. This gives the distinguished triangle $Q(P^\\bullet)\\xrightarrow{Q(j)}Q(B^\\bullet)\\xrightarrow{Q(u)}Q(B^\\bullet)\\xrightarrow{-Q(p)Q(q)^{-1}}Q(P^\\bullet)[1]$, with the first two arrows unchanged.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor, formula for the connecting morphism and preceding cone comparison"
+   }
+  },
+  {
+   "text": "The category of $A$-modules has exact countable products: for any family of short exact sequences the product kernel is the product of the kernels (checked componentwise), and a tuple in the product of the quotients has a tuple of preimages by choosing a preimage in each factor. Products and the zero object carry the componentwise module structures. Apply [lem-weil-derived-limit-products-core] to this abelian module category and the countable family of complexes $P_n^\\bullet$. Its assertion that the image under $Q$ of every termwise product cone is limiting identifies $Q(B^\\bullet)$, with the maps $Q(\\mathrm{pr}_n)$, as $\\prod_n Q(P_n^\\bullet)$ in $D(A)$. No boundedness, finite generation, or surjectivity of the ring transitions is needed.",
+   "uses": [
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC, lemma-products, clauses (1) and (2); referenced immediately before Tag 0CQD in more-algebra.tex"
+   }
+  },
+  {
+   "text": "The equality $\\mathrm{pr}_n u=\\mathrm{pr}_n-t_n\\mathrm{pr}_{n+1}$ of chain maps remains true under the additive localization $Q$. Under the product identification of step 4, $Q(u)$ is therefore precisely the morphism $1-s$ specified in [def-weil-derived-limit]. Moreover $Q(\\mathrm{pr}_n)Q(j)=Q(p_n)$, where $p_n:P^\\bullet\\to P_n^\\bullet$ is the original projection. Thus the distinguished triangle of step 3 is the asserted Roos triangle, with the specified projections, and the definition [def-weil-derived-limit] proves the claim.",
+   "uses": [
+    "def-weil-derived-limit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQD, lemma-distinguished-triangle-Rlim-modules, proof via lemma-distinguished-triangle-Rlim, first paragraph; Tag 091D, lemma-compute-Rlim-modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-weil-triangulated-category",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQD, lemma-distinguished-triangle-Rlim-modules, proof via lemma-distinguished-triangle-Rlim, first paragraph; Tag 091D, lemma-compute-Rlim-modules"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,15 +136,51 @@
    "results": "1 hits; top: Mathlib/Algebra/Homology/CochainComplexPlus.lean; directory Algebra/Homology",
    "date": "2026-10-14",
    "verdict": "no match: ordinary limits of complexes and finite limits of bounded below complexes do not compute derived inverse limits"
+  },
+  {
+   "tool": "grep",
+   "query": "Rlim|derived.*inverse.*limit|homotopyLimit|Mittag",
+   "results": "1 hits: Mathlib/Algebra/Homology/CochainComplexPlus.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary complex limits and localization facts do not state the Roos triangle computation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective inverse sequence of chain complexes has homotopy limit quasi isomorphic to its ordinary limit",
+   "results": "8 hits: HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences, HomotopyCategory.quotient_map_mem_quasiIso_iff, HomotopyCategory.quasiIso_eq_quasiIso_map_quotient, homotopyEquivalences_le_quasiIso, HomotopyCategory.instEssSurjHomologicalComplexQuotient, HomotopyEquiv.quasiIsoAt_inv, HomotopyEquiv.quasiIso_inv, HomologicalComplexUpToQuasiIso.quotientCompQhIso",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary complex limits and localization facts do not state the Roos triangle computation"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective.*(tower|sequence)|shortExact.*quasiIso|quasiIso.*shortExact",
+   "results": "17 hits; inspected returned adic-completion, scalar-tower, and homology-sequence declarations; none states the surjective complex-tower Roos triangle.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-surjective-module-complex-tower-limit",
+  "worker": "stage1",
+  "summary": "Verified Stacks 091D and 0CQD for varying coefficient rings, restricted to the single limit ring, and expanded the degreewise Roos short exact sequence and cone comparison. Reused the existing termwise derived-product theorem and cone quasi-isomorphism leaf; no new nodes. All projections are retained.",
+  "blueprint": "Realizes proof (c), TOW of thm-weil-pbc-amplification-proper, through the pseudocoherent normalized algebra tower: the termwise-surjective local models represent their derived limit."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-da606dff7",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-da606dff7 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. All five steps are valid: scalar restriction, recursive surjectivity, cone comparison with correct sign, unbounded derived products, and projection compatibility. No new nodes, duplicate, cycle, missing hypothesis or repair found. Detailed checks are in review.md."
+ }
 }
