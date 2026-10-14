@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-standard-single-base-change-top-restriction",
+ "kind": "statement",
+ "title": "Single-module base change under the top-open isomorphism",
+ "statement": "Let $p:Y\\to B$ and $g:A\\to B$ be morphisms of schemes, $M$ a sheaf of modules on $Y$, $j:Y|_\\top\\to Y$ the top-open inclusion and $N=j^*M$ its ordinary restriction. Use the standard derived categories and the canonical single-module comparison $\\beta(p,M,g)$ of [def-pc-standard-single-base-change-map]. There exist isomorphisms $e:Rp_*(M[0])\\simeq R(pj)_*(N[0])$ on $B$ and $t:R\\operatorname{pr}_{A,*}((\\operatorname{pr}_{Y|_\\top}^*N)[0])\\simeq R\\operatorname{pr}_{A,*}((\\operatorname{pr}_Y^*M)[0])$ on $A$, where the two fibre products are $(Y|_\\top)\\times_B A$ and $Y\\times_B A$ respectively, such that $\\beta(p,M,g)=Lg^*(e)\\circ\\beta(pj,N,g)\\circ t$ in left-to-right composition order. In particular the source comparison is an isomorphism before applying $Lg^*$, not an arbitrary isomorphism between the pulled-back objects. No quasi-coherence, relative flatness, quasi-compactness or affineness is assumed.",
+ "stmt_deps": [
+  "def-pc-standard-single-base-change-map"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "cohomology.tex, Tag 08HY (Remark, base-change counit construction); Tag 0D5S (Lemma, composition of derived pullback)"
+ },
+ "proof": [
+  {
+   "text": "The top-open inclusion j is an isomorphism. Its exact restriction agrees with tensor pullback by uniqueness of left adjoints. On single complexes, the pinned derived counit and the single comparison therefore give an isomorphism alpha:Lj*(M[0]) to N[0]. The composition and identity comparisons exhibit Lj* as an equivalence, so its pinned derived adjunction unit is invertible. Compose Rp_* of this unit, the inverse right-adjoint mate of the pullback composition comparison for j,p, and R(pj)_* of alpha. This constructs e on B before applying Lg*.",
+   "uses": [
+    "lem-pc-isomorphism-pullback-counit",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the source-open unit naturality equation to U=top, K=M[0], Kprime=(pr_Y^*M)[0], and phi the pinned single pullback map. Both inserted units are invertible, since j and its base change are isomorphisms. The single pullback composition equation identifies the restricted coefficient arrow with the ordinary pullback of N, after the canonical tensor composition isomorphisms. This substitutes alpha into the source and gives the corresponding single target isomorphism. Use the apex-isomorphism comparison to identify the iterated pullback in the source-open equation with the canonical pullback of pj and g. Compose the resulting target comparisons inversely to obtain t. The source-open equation then reads beta(p,M,g)=Lg*(e);beta(pj,N,g);t. Naturality, inverse cancellation and associativity justify this reassociation. This construction also applies to empty schemes and zero modules.",
+   "uses": [
+    "lem-pc-single-complex-open-unit-naturality",
+    "lem-sc-picard-termwise-single-map-composition",
+    "lem-pc-open-pinned-single-degree-zero-apex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-isomorphism-pullback-counit",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-single-complex-open-unit-naturality",
+  "lem-sc-picard-termwise-single-map-composition",
+  "lem-pc-open-pinned-single-degree-zero-apex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 08HY and 0D5S, specialization of the counit construction to the top-open source isomorphism"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived base change on a single sheaf of modules is invariant under the top open immersion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change on a single sheaf of modules is invariant under restricting the source to its top open, with source comparison induced before derived pullback",
+   "results": "Eight hits: SheafOfModules pullback/free and pullback construction comparisons; no derived single-module source-coordinate equation.",
+   "date": "2026-10-14",
+   "verdict": "no exact match among returned results"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictFunctorId\"",
+   "results": "Scheme.Modules.restrictFunctorId and its two component formulas; identity restriction only.",
+   "date": "2026-10-14",
+   "verdict": "does not give derived base-change compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "singleComplexOpenComparison_unit_naturality|BaseChange.*source.*iso|topRestriction",
+   "results": "No Mathlib hits. Repository rg found DerivedBaseChangeSourceIso and SingleComplexOpenUnitNaturality; the former returns an arbitrary source isomorphism after Lg*, and the latter needs single-coefficient and canonical-pullback transport.",
+   "date": "2026-10-14",
+   "verdict": "no existing theorem with the required before-pullback source comparison and single endpoints"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationPresentationData",
+  "date": "2026-10-14",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-standard-single-flat-counit-localization",
+   "place": "localization proof: remove the redundant top-open source restriction while preserving the single comparison equation",
+   "via": [
+    "lem-pc-standard-single-flat-counit-localization-presentation-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleBaseChangeTopRestriction.lean",
+  "declaration": "AlgebraicGeometry.standardSingleBaseChange_topRestriction_comparison",
+  "statement": "theorem standardSingleBaseChange_topRestriction_comparison\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let j := (⊤ : Y.Opens).ι\n    let N := M.restrict j\n    ∃ (e : (schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n        (schemeDerivedDirectImage (j ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj N))\n      (t : (schemeDerivedDirectImage (pullback.snd (j ≫ p) g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj (pullback.fst (j ≫ p) g) N)) ≅\n        (schemeDerivedDirectImage (pullback.snd p g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))),\n      standardSingleBaseChangeMap p M g =\n        (derivedPullback g).map e.hom ≫\n          standardSingleBaseChangeMap (j ≫ p) N g ≫ t.hom",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261014T001731-L-2554345",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261014T001731-L-2554345",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

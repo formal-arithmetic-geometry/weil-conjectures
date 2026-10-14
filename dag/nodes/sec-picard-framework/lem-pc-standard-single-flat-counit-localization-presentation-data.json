@@ -13,20 +13,40 @@
  },
  "proof": [
   {
-   "text": "Choose affine neighborhoods S and V inside g⁻¹(S). Restrict p and M to p⁻¹(S); qcqs, quasi-coherence and relative flatness restrict. Apply the affine hypothesis on the top source open; transport across its isomorphism with the source, preserving the canonical mate equation. The result stays on S. Detailed proof in the Lean docstring.",
+   "text": "Choose S containing g(a) from the affine-open basis of B. Choose V containing a from the affine-open basis of A inside g inverse-image S. These witnesses give the membership, affine and containment clauses. Quasi-compactness and quasi-separatedness of p restricted to S, and quasi-coherence of the restricted module, are supplied by the open-restriction instances.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove relative flatness on the restricted base by evaluating hM on the images of affine subopens under the two open inclusions. morphismRestrict_appLE and the open inclusion appIso formula identify the section modules and scalar actions literally. The same image calculation proves flatness under a source-only restriction, and applies in particular to the top-open inclusion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply h_affine to p restricted to S and g.resLE S V. Evaluate its StandardSingleFlatCounitOnOpen predicate on the top restriction of the restricted module and the flatness just proved. Unpack K, its bound and termwise flatness, the two identifications, and the presentation equation.",
    "uses": [
     "def-pc-standard-single-flat-counit-presentation-on-open"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply the top-restriction comparison to this restricted source. Keep the same K, bound and flatness witnesses; compose the base direct-image identification with e and the ordinary-pullback identification with t. Functoriality of derived pullback and associativity combine the two equations into precisely the required presentation equation.",
+   "uses": [
+    "lem-pc-standard-single-base-change-top-restriction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-standard-single-flat-counit-presentation-on-open"
+  "def-pc-standard-single-flat-counit-presentation-on-open",
+  "lem-pc-standard-single-base-change-top-restriction"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "Q4",
+  "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Tags 0DJ9, 06YB and 0D5S, affine localization and exact stalks"
+  "place": "Tags 0DJ9, 06YB and 0D5S; explicit affine basis and restriction-flatness calculations, followed by top-open comparison"
  },
  "mathlib_searches": [
   {
@@ -97,13 +117,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-8b1c4",
-  "group": "M2",
+  "reviewer": "COMPILER",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T234516-L-2164817",
+  "landing": "20261014T001731-L-2554345",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile; original caller fails against changed completion as reported; adapted caller and direct importer compile; signatures, change record, nodes, report, and sorry declarations satisfy the review brief."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
