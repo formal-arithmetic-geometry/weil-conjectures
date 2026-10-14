@@ -33,55 +33,163 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian: its only ideals are $0$ and $k$. Thus $\\operatorname{Spec}k$ is Noetherian, and $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-weil-pbc-chow-noetherian] to $X\\to\\operatorname{Spec}k$, obtaining $N$, $\\pi_0:Z\\to X$ proper surjective, an immersion $j_0:Z\\to\\mathbf P^N_k$ over $k$, and a dense open $U_0\\subset X$ over which $\\pi_0$ is an isomorphism. Since $X$ is integral it is nonempty, so $U_0$ is nonempty; choose a nonempty affine open $U\\subset U_0$. It remains dense because $X$ is irreducible. Properness implies finite type, and composition preserves finite type (compose the affine-local finite algebra generating sets and quasi-compact maps). Hence $Z$ is finite type over $k$ and Noetherian by [lem-weil-pbc-finite-type-over-noetherian].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-chow-noetherian",
+    "def-pc-integral-scheme",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0200, lemma-chow-Noetherian; Tag 0201, remark-chow-Noetherian (2),(3)"
+   }
+  },
+  {
+   "text": "Identify $V=\\pi_0^{-1}(U)$ with $U$ and let $h:V\\hookrightarrow Z$ be its open immersion. The scheme $Z$ is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; since $V$ is affine, $h$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence]. Let $c:Y\\hookrightarrow Z$ be its scheme-theoretic image. By [lemma-nagata-scheme-image-ideal-qc], $V$ factors through $Y$ and $|Y|$ is the closure of $V$ in $Z$. By [lemma-nagata-scheme-image-restrict-open], restriction to $V$ gives the scheme-theoretic image of $\\mathrm{id}_V$, which is $V$ (its defining kernel is zero). Thus $c^{-1}(V)\\to V$ is an isomorphism, and $V$ is a dense nonempty open subscheme of $Y$.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lemma-nagata-scheme-image-restrict-open",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0201, remark-chow-Noetherian (2); Morphisms Tag 01R8, lemma-quasi-compact-scheme-theoretic-image"
+   }
+  },
+  {
+   "text": "The closure of the irreducible space $V\\simeq U$ is irreducible: if covered by two closed subsets, intersect with $V$; one contains all of $V$, hence its closure. To check reducedness, on every affine open $B\\subset Z$ the ideal of $Y\\cap B$ is $I_B=\\ker(\\mathcal O_Z(B)\\to\\mathcal O_V(B\\cap V))$ by [lem-weil-pbc-scheme-image-qc-kernel]. Every local ring of the integral $V$ is a domain by [lem-sc-integral-scheme-stalks-in-function-field]; consequently a nilpotent section of $\\mathcal O_V$ is zero, since every germ is zero. Thus $a^r\\in I_B$ implies $a\\in I_B$, so each $\\mathcal O_Z(B)/I_B$ is reduced. These affines cover $Y$, proving it reduced. The equivalence in [def-pc-integral-scheme] now proves $Y$ integral. This writes out the reducedness assertion of Remark 0201 (3), rather than assuming arbitrary Chow modifications integral.",
+   "uses": [
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0201, remark-chow-Noetherian (2),(3)"
+   }
+  },
+  {
+   "text": "Put $\\pi=\\pi_0\\circ c$ and $j=j_0\\circ c$. A closed immersion is proper and proper morphisms compose by [lem-weil-pbc-proper-fp-permanence], so $\\pi$ is proper. Its image is closed by the definition of properness, and contains the dense open $U$ because $\\pi^{-1}(U)=c^{-1}(V)\\simeq V\\simeq U$; therefore it is all of $X$. The map $j$ is an immersion by the composition clause of the same permanence lemma. Since $\\pi$ and $X\\to\\operatorname{Spec}k$ are separated, their composite is separated. They are of finite type, so their composite is of finite type as in step 1. This supplies all the asserted geometric properties of $Y,\\pi,j,U$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0201, remark-chow-Noetherian (2),(3)"
+   }
+  },
+  {
+   "text": "Form $a=(j,\\pi):Y\\to\\mathbf P^N_k\\times_k X=\\mathbf P^N_X$. It is an immersion by [lem-chow-tuple-immersion], applied to the two $k$-morphisms $j$ and $\\pi$. The projection $q:\\mathbf P^N_X\\to X$ is proper by [lemma-nagata-projective-space-base-change-proper], hence separated. As $q\\circ a=\\pi$ is proper, [lem-weil-pbc-proper-over-separated] proves that $a$ is proper. Thus [lem-weil-pbc-proper-immersion-closed] proves that $a$ is a closed immersion. Only $\\pi$, not $X\\to\\operatorname{Spec}k$, was required to be proper.",
+   "uses": [
+    "lem-chow-tuple-immersion",
+    "def-nagata-projective-space-base-change",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0201, remark-chow-Noetherian (1); Morphisms Tag 01W6, lemma-image-proper-scheme-closed (2)"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-projective-space-standard-charts] with the finite nonempty coordinate set $\\{0,\\ldots,N\\}$. Its clauses (a),(b) provide the covering by the pulled-back opens $D_+(T_i)$ and free generators $T_i$ of the pullback of the Proj twist from $\\mathbf P^N_{\\mathbf Z}$, with $T_i=(T_i/T_j)T_j$ on overlaps. Over $\\operatorname{Spec}k$, clause (c) identifies these charts with $\\operatorname{Spec}k[T_l/T_i:l\\ne i]$. On their overlaps, sending the generator $e_i^{(1)}$ in [def-pc-projective-space-twist] to $T_i$ respects exactly the relation $e_i^{(1)}=(T_i/T_j)e_j^{(1)}$; the resulting local isomorphisms therefore glue. This identifies the line bundle used in the statement with the pullback of the Proj twist from $\\mathbf P^N_{\\mathbf Z}$. For $r:\\mathbf P^N_X\\to\\mathbf P^N_k$ the second projection, the projections $\\rho_X:\\mathbf P^N_X\\to\\mathbf P^N_{\\mathbf Z}$ and $\\rho_k:\\mathbf P^N_k\\to\\mathbf P^N_{\\mathbf Z}$ satisfy $\\rho_k\\circ r=\\rho_X$, by the fibre-product universal property. Thus pullback composition [def-pc-module-pullback] gives $r^*\\mathcal O_{\\mathbf P^N_k}(1)\\cong\\rho_X^*\\mathcal O_{\\mathbf P^N_{\\mathbf Z}}(1)=\\mathcal O_{\\mathbf P^N_X}(1)$ and, since $r\\circ a=j$, $\\mathcal L\\cong a^*\\mathcal O_{\\mathbf P^N_X}(1)$. The chart generators also prove invertibility. For every affine open $W=\\operatorname{Spec}A\\subset X$, the base change $a_W:\\pi^{-1}(W)\\to\\mathbf P^N_A$ of the closed immersion $a$ is a closed immersion by [lem-weil-pbc-proper-fp-permanence] (b). Its composite with the structural projection is the restriction of $\\pi$. The same equality of projections to $\\mathbf P^N_{\\mathbf Z}$ and pullback composition identify $a_W^*\\mathcal O_{\\mathbf P^N_A}(1)$ with $\\mathcal L|_{\\pi^{-1}(W)}$, using exactly the definition of the twist in [lem-weil-pbc-projective-ample-invertible]. That theorem now proves this restriction invertible and ample. Since $W$ is arbitrary this is the required relative ampleness. For the empty affine open the inverse image is empty, quasi-compactness holds, and the affine nonvanishing-cover condition is vacuous.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0201, remark-chow-Noetherian (1); Morphisms Tag 02NR, lemma-characterize-ample-on-finite-type, implication (2) to (1); Properties Tag 01PU, lemma-ample-on-closed"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-theoretic-image",
+  "def-pc-integral-scheme",
+  "def-pc-module-pullback",
+  "def-pc-projective-space-twist",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-chow-tuple-immersion",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-restrict-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0200 lemma-chow-Noetherian and Tag 0201 remark-chow-Noetherian (1)-(3), as used in etale-cohomology.tex Tag 0A3M"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "An integral separated finite type scheme over a field admits a proper birational modification immersed in projective space with pullback O(1) relatively ample",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}",
+   "query": "Integral varieties admit proper birational quasi-projective modifications by Chow lemma",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-compact. This morphism is constructed by gluing local normalization maps defined via integral closure\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}",
    "date": "2026-10-14",
-   "verdict": "no match: properness of Proj, normalization and affine-space facts do not construct a birational Chow modification or its relatively ample line bundle"
+   "verdict": "no match: hits do not assert the Chow modification with integral source and relatively ample twist"
   },
   {
    "tool": "leanfinder",
-   "query": "Chow lemma for nonproper integral varieties with a relatively ample invertible sheaf on the modification",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.IsAffine Y],\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).IsIntegral\", \"doc\": \"If $ f: X \\\\to Y $ is a universally closed morphism of schemes and $ Y $ is affine, then the induced ring homomorphism on global sections $ \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ is in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}",
+   "query": "Chow lemma integral scheme relatively ample line bundle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegralHom_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsIntegralHom f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"For any schemes $X$ and $Y$ and a morphism $f : X \\to Y$, $f$ is an integral morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the induced ring homomorphism\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsIntegralHom fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).IsIntegral\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.IsAffine Y],\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).IsIntegral\", \"doc\": \"If $ f: X \\\\to Y $ is a universally closed morphism of schemes and $ Y $ is affine, then the induced ring homomorphism on global sections $ \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ is in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}",
    "date": "2026-10-14",
-   "verdict": "no match: properness of Proj, normalization and affine-space facts do not construct a birational Chow modification or its relatively ample line bundle"
+   "verdict": "no match: hits do not assert the Chow modification with integral source and relatively ample twist"
   },
   {
    "tool": "loogle",
    "query": "\"IsProper\", \"IsImmersion\"",
    "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-14",
-   "verdict": "no match: properness of Proj, normalization and affine-space facts do not construct a birational Chow modification or its relatively ample line bundle"
-  },
-  {
-   "tool": "grep",
-   "query": "chow|relativelyAmple|RelativelyAmple",
-   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Topology/MetricSpace/Sequences.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2018 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Sequences.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Patrick Massot, Yury Kudryashov\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Restrict.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo, Yury Kudryashov, Frédéric Dupuis,\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/ContinuousLinearMap/PiProd.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo, Yury Kudryashov, Frédéric Dupuis,\"}\n  {\"file\": \"Mathlib/Topology/Defs/Sequences.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2018 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Topology/Defs/Sequences.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Patrick Massot, Yury Kudryashov\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo, Yury Kudryashov, Frédéric Dupuis,\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/Basic.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo, Yury Kudryashov, Frédéric Dupuis,\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/Equiv.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo, Yury Kudryashov, Frédéric Dupuis,\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/Determinant.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo, Yury Kudryashov, Frédéric Dupuis,\"}\n  {\"file\": \"Mathlib/Topology/Sequences.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2018 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Topology/Sequences.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Patrick Massot, Yury Kudryashov\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Completeness.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Completeness.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Mul.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Mul.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Prod.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Prod.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Asymptotics.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Asymptotics.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/NormedSpace.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/NormedSpace.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Bilinear.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Bilinear.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Basic.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}",
-   "date": "2026-10-14",
-   "verdict": "no match: properness of Proj, normalization and affine-space facts do not construct a birational Chow modification or its relatively ample line bundle"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Integral Chow modification with relatively ample pullback of projective space O(1)",
-   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
+   "verdict": "no match: hits do not assert the Chow modification with integral source and relatively ample twist"
   },
   {
    "tool": "grep",
    "query": "Chow|relativelyAmple|RelativelyAmple",
-   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-14",
-   "verdict": "no match"
+   "verdict": "no match: hits do not assert the Chow modification with integral source and relatively ample twist"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chow modification of an integral variety with relatively ample pullback O(1)",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-top-coherent-cohomology-finite",
   "by": "worker",
@@ -97,5 +205,49 @@
    "state": "none"
   }
  },
- "merged_into": null
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-integral-chow-relatively-ample",
+  "worker": "stage1",
+  "summary": "Reused the general Chow lemma; took the schematic closure of an affine dense integral open to secure integrality, and used the proper graph immersion into projective space over X to prove ampleness on every affine inverse image. No properness of X or new nodes.",
+  "blueprint": "Realizes the Chow modification and twisting input to Tag 0A3M in the finite-dimensionality input beneath lemma-weil-pbc-smooth-curve-artin-schreier; retains the unit curve-calculation route.",
+  "tool_uses": [
+   {
+    "node": "lem-chow-tuple-immersion",
+    "why": "Generic scheme-theoretic-image, projective-space or morphism tool used exactly as stated; the curve-calculation unit supplies no replacement for this geometric input."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic scheme-theoretic-image, projective-space or morphism tool used exactly as stated; the curve-calculation unit supplies no replacement for this geometric input."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Generic scheme-theoretic-image, projective-space or morphism tool used exactly as stated; the curve-calculation unit supplies no replacement for this geometric input."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-restrict-open",
+    "why": "Generic scheme-theoretic-image, projective-space or morphism tool used exactly as stated; the curve-calculation unit supplies no replacement for this geometric input."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic chart and twist interface: clauses (a),(b),(c) identify the glued twist over k with the pullback of the Proj twist over Z. The curve-calculation unit has no chart theorem; this does not replace its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-chow-tuple-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-3e713d9a7",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-3e713d9a7 (reviewer sub-agent of L); spot-checked: Read all six steps, cited statements and sources, route, duplicate candidates, and edge cases. Repaired C1 in step 6 by citing the existing projective-space chart theorem and explicitly identifying the glued twist with the Proj pullback. Statement unchanged; nonproper X remains covered. Corrected JSON and review.md written. Dependency checks found no cycles, missing references, or merged citations.; 1 file(s) fixed by the reviewer"
+ }
 }
