@@ -1,6 +1,6 @@
 # Work queue
 
-68 items; claim with `tools/claim.py next <group> [--stage N]`.
+69 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (68)
+## Stage 3: modules to prove (69)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -29,6 +29,7 @@
 | `Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore` | 18 | 0 | repair |
 | `Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling` | 12 | 0 | repair |
 | `Sheaf.AlgebraicGeometry.SheafZeroStalks` | 14 | 0 | repair |
+| `Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker` | 9 | 0 | repair |
 | `Sheaf.Topology.RingedModuleSkyscraper` | 10 | 0 | repair |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed` | 8 | 0 | repair |
 | `Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf` | 10 | 0 | repair |
@@ -42,6 +43,7 @@
 | `Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation` | 23 | 1 | proof |
+| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts` | 24 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AlgebraTensorPullbackComparison` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization` | 24 | 1 | proof |
@@ -53,7 +55,6 @@
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapSingleChartRestriction` | 26 | 1 | proof |
-| `Sheaf.Paper.ModuleCupPullbackFlasqueComplexes` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCounitNormalization` | 27 | 1 | proof |
 | `Sheaf.Paper.CechRefinementPushforwardTotal` | 27 | 1 | proof |
 | `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
