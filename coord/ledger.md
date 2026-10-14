@@ -14787,3 +14787,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:27 L: returned deliver/N4/Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula (reviewer RETURN: (reviewer X-9ecc3, head 9ecc3450e) A3: Unforced changes to unclaimed modules. The delivery-base originals of HigherDirec)
 
 - 17:27 L: batch 20261014T092317 dependency take-out
+- 09:29 L: merged deliver/XR33076d633fce5c89/Sheaf.Algebra.Homology.KInjectiveProducts (stage 3; reviewer PASS; first push; landing 20261014T092934-L-608757 (proof); batch 20261014T092932; modules 1; new nodes 0; change records: coord/changes/KInjectiveProducts-retired-imports.md)
