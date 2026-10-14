@@ -7,11 +7,11 @@
    "place": "its statement (a notion the statement uses)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Composition of derived pro-etale module pullbacks",
- "statement": "Let $h:Z\\to W$ and $k:W\\to V$ be morphisms of schemes, with small pro-etale sites [def-weil-pbc-proetale-site] and inverse images $h^{-1},k^{-1},(kh)^{-1}$ [def-weil-proetale-inverse-image]. Let $R_V,R_W,R_Z$ be sheaves of rings on $V_{\\mathrm{proet}},W_{\\mathrm{proet}},Z_{\\mathrm{proet}}$ with identifications $k^{-1}R_V\\cong R_W$ and $h^{-1}R_W\\cong R_Z$, and give $(kh)^{-1}R_V$ the identification with $R_Z$ obtained through the canonical isomorphism $(kh)^{-1}\\cong h^{-1}k^{-1}$. With the derived module pullbacks $Lh^*,Lk^*,L(kh)^*$ of [def-weil-pbc-proetale-operations] there is a canonical isomorphism of functors\n\n$$\n c_{h,k}:L(k\\circ h)^*\\xrightarrow{\\ \\sim\\ }Lh^*\\circ Lk^*:\\ D(V_{\\mathrm{proet}},R_V)\\longrightarrow D(Z_{\\mathrm{proet}},R_Z),\n$$\n\nwhich on a K-flat complex $\\mathcal K^\\bullet$ of $R_V$-modules with flat terms is the class of the termwise canonical isomorphism of module pullbacks $(kh)^*\\mathcal K^\\bullet\\cong h^*k^*\\mathcal K^\\bullet$ (here $k^*\\mathcal K^\\bullet$ is again K-flat with flat terms, so it computes $Lk^*$ and $h^*k^*\\mathcal K^\\bullet$ computes $Lh^*Lk^*$).",
+ "statement": "Let $h:Z\\to W$ and $k:W\\to V$ be morphisms of schemes, with small pro-etale sites [def-weil-pbc-proetale-site] and inverse images $h^{-1},k^{-1},(kh)^{-1}$ [def-weil-proetale-inverse-image]. Let $R_V,R_W,R_Z$ be sheaves of commutative rings on $V_{\\mathrm{proet}},W_{\\mathrm{proet}},Z_{\\mathrm{proet}}$ with identifications $k^{-1}R_V\\cong R_W$ and $h^{-1}R_W\\cong R_Z$, and give $(kh)^{-1}R_V$ the identification with $R_Z$ obtained through the canonical isomorphism $(kh)^{-1}\\cong h^{-1}k^{-1}$. With the derived module pullbacks $Lh^*,Lk^*,L(kh)^*$ of [def-weil-pbc-proetale-operations] there is a canonical isomorphism of functors\n\n$$\n c_{h,k}:L(k\\circ h)^*\\xrightarrow{\\ \\sim\\ }Lh^*\\circ Lk^*:\\ D(V_{\\mathrm{proet}},R_V)\\longrightarrow D(Z_{\\mathrm{proet}},R_Z),\n$$\n\nwhich on a K-flat complex $\\mathcal K^\\bullet$ of $R_V$-modules with flat terms is the class of the termwise canonical isomorphism of module pullbacks $(kh)^*\\mathcal K^\\bullet\\cong h^*k^*\\mathcal K^\\bullet$ (here $k^*\\mathcal K^\\bullet$ is again K-flat with flat terms, so it computes $Lk^*$ and $h^*k^*\\mathcal K^\\bullet$ computes $Lh^*Lk^*$).",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma 0D6D (lemma-derived-pullback-composition), for morphisms of ringed topoi; specialized to the ringed pro-etale topoi of schemes"
@@ -19,11 +19,63 @@
  "stmt_deps": [
   "def-weil-pbc-proetale-site",
   "def-weil-proetale-inverse-image",
-  "def-weil-pbc-proetale-operations"
+  "def-weil-pbc-proetale-operations",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First construct the ordinary module comparison. By [def-weil-pbc-proetale-operations], each module pullback is left adjoint to its module direct image. On a pro-etale object T over V the direct images of an R_Z-module M have values M(Z×_V T) and M(Z×_W(W×_V T)). The canonical fibre-product isomorphism sends (z,(w,t)) to (z,t), and its inverse inserts h(z); the maps commute with arrows of T. The compatible coefficient identifications in the hypothesis give the same R_V action on these sections, since their structure maps are the adjuncts of the same composite coefficient map. Thus there is a natural module-direct-image isomorphism (kh)_*≅k_*h_*. Form the composite module adjunction using [def-weil-pbc-composite-adjunction] and apply [lem-weil-pbc-conjugate-iso-unit-equation] to obtain the canonical natural module isomorphism a:(kh)^*≅h^*k^*. This is the ordinary module pullback comparison: its adjunct carries the single pullback unit to the two successive units. Write c_h:h^{-1}R_W→R_Z for the given coefficient identification. In the inverse-image/tensor presentations it sends m⊗r to (m⊗1)⊗r, and the inverse sends (m⊗s)⊗r to m⊗c_h(h^{-1}s)r, after the canonical inverse-image identification. The inverse after the forward map sends m⊗r to m⊗r because c_h(1)=1. The forward after the inverse sends (m⊗s)⊗r to (m⊗1)⊗c_h(h^{-1}s)r=(m⊗s)⊗r by balancing over h^{-1}R_W. Both maps are balanced over the other coefficient ring because the composite coefficient map is c_h composed with h^{-1}c_k under the inverse-image identification. They commute with restrictions and module maps; these calculations identify the adjunction comparison with the stated canonical termwise map.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0D6D final identity; Modules on Sites Lemma 03D8 (lemma-push-pull-composition-modules)"
+   }
+  },
+  {
+   "text": "In the identified-coefficient case of the item, all three module pullbacks are exact and their derived functors are induced by applying them termwise, as explicitly specified in [def-weil-pbc-proetale-operations]. Their termwise functors therefore invert quasi-isomorphisms. Apply [lem-weil-pbc-localization-universal-property] (2) to the natural isomorphism a of step 1, composed with localization to D(R_Z). It descends to a unique natural isomorphism c_{h,k}:L(kh)^*≅Lh^*Lk^*. The endpoint identifications are those of the derived operations: the latter composite applied to a complex is the class of h^*k^* of that complex. This establishes naturality on all derived morphisms, including inverses of quasi-isomorphisms, rather than merely on chosen resolutions.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0D6D; derived functor construction of Lemma 06YY"
+   }
+  },
+  {
+   "text": "For any complex representing an input derived object choose a quasi-isomorphism P→K from a K-flat complex with flat terms by [lem-pc-kflat-resolution], applied to the small site V_proet and the commutative ring sheaf R_V. The computation clause of [def-weil-pbc-proetale-operations] identifies Lk^*K with k^*P and L(kh)^*K with (kh)^*P. Apply [lem-weil-pbc-ringed-pullback-preserves-kflat] to k, using its specified ring isomorphism as the ring map: k^*P is K-flat with flat terms over R_W. Hence it also computes Lh^*Lk^*K. The component of the descended comparison from step 2, under these identifications, is exactly the class of the termwise comparison (kh)^*P≅h^*k^*P. For an input already K-flat with flat terms take the identity resolution; this gives precisely the normalization asserted in the item. No boundedness, properness, or flatness of a scheme morphism has been used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0D6D proof; Lemmas 06YS, 06YY, 0G7E"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0D6D"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -45,10 +97,38 @@
    "results": "AlgebraicGeometry/Sites/Proetale.lean (the pro-etale topology), ElladicCohomology.lean; no derived module pullbacks",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of derived pullbacks of sheaves of modules on ringed topoi computed by K-flat complexes",
+   "results": "Internal Server Error; no absence conclusion drawn from this service. Authentic search record: searches/leansearch/searches.jsonl; digest 4f53cda18c2baa0c.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackComp\"",
+   "results": "12 results concern categorical pullback comparison (CategoryTheory.Limits.pullbackComparison and related lemmas), not derived module inverse images. Authentic search record: searches/loogle/searches.jsonl; digest d62fb51a228eee11.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical composition isomorphism for derived pullback of sheaves of modules on pro etale sites with varying sheaves of commutative rings",
+   "results": "SheafOfModules.pullbackComp, pullback_assoc and conjugateEquiv_pullbackComp_inv in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Scheme.Modules.pullbackComp and pseudofunctor lemmas; pullback free-module lemmas. Read PullbackContinuous.lean:150-200: underived adjunction comparisons only, with no K-flat normalization or derived pro-etale ring-sheaf statement. Authentic search record: searches/leanfinder/searches.jsonl; digest 52828b68b02ec2fb.",
+   "date": "2026-10-14",
+   "verdict": "candidate only"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|pullbackComp|leftDerivedFunctorCompIso [Mathlib/Algebra/Category/ModuleCat/Sheaf]",
+   "results": "5 hits in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167,177,180,194,195. Read the declaration and context: underived pullback composition, not the full derived theorem. Authentic search record: searches/grep/searches.jsonl; digest daaea333ed416dc8.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +148,29 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-derived-pullback-composition",
+  "worker": "stage1",
+  "summary": "Reused the existing general ringed-topos K-flat preservation and K-flat resolution nodes. Constructed ordinary module composition from the composite adjunction, descended it using exactness and localization, and checked the full K-flat normalization. No new nodes. Maintainer reader repair: completed the missing search kinds using the msearch search implementation with review-local logs; LeanSearch was unavailable, and LeanFinder/Loogle plus source inspection found no exact match.",
+  "blueprint": "Realizes the composition isomorphisms used by the statement of def-weil-pbc-ambient-ringed-exchange, before its mate construction.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General ringed-site flat-resolution existence for the specified K-flat normalization; no proper-base-change unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-25a93f1ca",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-25a93f1ca (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. All three steps agree with Stacks 03D8, 06YY, 06YS, 0G7E and 0D6D; coefficient compatibility, localization naturality and K-flat normalization check out. Repaired missing search kinds in the corrected item JSON; LeanSearch unavailability is recorded honestly. No new nodes or target weakening. Master condensed categories remain distinct; no comparison theorem is certified. Detailed checks and accepted resolution tool use are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
