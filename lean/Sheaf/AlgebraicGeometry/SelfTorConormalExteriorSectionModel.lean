@@ -7,7 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
-import Sheaf.AlgebraicGeometry.AffineConormalSections
+import Sheaf.AlgebraicGeometry.SelfTorConormalExteriorTensor
+import Sheaf.AlgebraicGeometry.SelfTorAffineTensorSections
 
 /-! # The algebraic exterior of conormal sections and the affine model
 
@@ -57,6 +58,14 @@ theorem exists_selfTor_conormal_exterior_section_model
           (fun j ↦ ((Classical.choose
             (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
               i.ker.toModules).val.app (op U.1) (b j))) =
-          selfTorAffineSection i U M (selfTorIdealWedge i U n b) := by sorry
+          selfTorAffineSection i U M (selfTorIdealWedge i U n b) := by
+  let : Algebra Γ(Y, U.1) Γ(Z, i ⁻¹ᵁ U.1) := (i.app U.1).hom.toAlgebra
+  let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n
+  obtain ⟨e₁, h₁⟩ := exists_selfTor_conormal_exterior_tensor i n U
+  obtain ⟨e₂, h₂⟩ := exists_selfTor_affine_tensor_sections i U M
+  refine ⟨e₁.trans e₂, ?_⟩
+  intro b
+  change e₂ (e₁ _) = _
+  rw [h₁ b, h₂, one_smul]
 
 end AlgebraicGeometry
