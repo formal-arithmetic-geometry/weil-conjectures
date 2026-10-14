@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.Compactification.Defs
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 
 /-!
 
@@ -41,7 +41,7 @@ open immersion, `g` proper), the lower shriek on small pro-étale sites is the c
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` is
   defined along the base change functor, which exists for an *arbitrary* morphism `g` — in
   contrast to the localization functor `MorphismProperty.Over.map ⊤ h` of
-  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Defs`, which
+  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs`, which
   requires `WeaklyEtale g`. This is essential for compactifications, whose structure morphism is
   proper and in general is not weakly étale.
 - The open immersion of a compactification is weakly étale, being étale, so the extension

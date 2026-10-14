@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 # The derived adjunction `j_! ⊣ j^*` along an open immersion, on module objects
 
 This is the module-object counterpart of
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenImmersionLowerShriek`, for
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek`, for
 the coefficient ring objects `Λ_X = p_X^* Λ` of a commutative condensed ring `Λ`.
 
 For an open immersion `j : U ⟶ X` both halves of the adjunction

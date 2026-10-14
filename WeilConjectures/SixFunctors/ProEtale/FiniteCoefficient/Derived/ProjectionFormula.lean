@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Ration
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekProjection
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjectionComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
@@ -63,7 +63,7 @@ projection formula asserts that the former is an isomorphism on the relevant obj
 
 As in the blueprint, every stage is reduced to the étale projection formula along `ν^*`: the
 comparison carries the étale projection map of `Rg_*` to the pro-étale one
-(`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjectionComparison`) and
+(`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison`) and
 `ν^*` commutes with extension by zero. The étale inputs are
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite` at the finite
 stages (`sk-thm-sf-pf-finite`) and
@@ -80,7 +80,7 @@ constructibility is étale origin); at the `ℓ`-adic stages they are isomorphis
 `ℚ̄_ℓ` is covered through the finite stages `E` at which its objects are represented. The
 compatibility with the scalar extensions `𝒪_E ⟶ 𝒪_{E'}` (the projection map over `E'` at scalar
 extensions of `𝒪_E`-objects is an isomorphism) is
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormulaExtendScalars`.
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionExtendScalars`.
 The statement cannot be made directly with the discrete coefficients
 `AlgebraicGeometry.WeilCoefficients` (`ℚ̄_ℓ`-modules): there `ν^*` commutes with `Rg_*` on
 bounded below complexes, so the projection formula for objects of étale origin would be the

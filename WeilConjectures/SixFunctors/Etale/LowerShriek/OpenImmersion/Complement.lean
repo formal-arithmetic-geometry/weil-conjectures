@@ -60,7 +60,7 @@ and `CategoryTheory.Sheaf.isInitialOfIsZeroObj` — a sheaf whose sections are a
 zero) is terminal (resp. zero, hence initial), for an arbitrary site and coefficient category —
 in `WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf`. Both are shared with the pro-étale
 counterpart
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Complement`.
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Complement`.
 -/
 
 @[expose] public section

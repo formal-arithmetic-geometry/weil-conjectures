@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersionUpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek
 
 /-!
 # The direct image along a closed immersion is fully faithful at every coefficient stage

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjectionComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 

@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
 
 /-!
 
@@ -63,7 +63,7 @@ below objects in general, so it does not restrict to `D⁺`.
   out of it and `Di^*`.
 * The derived adjunction `Di_! ⊣ Di^*` goes through the total left derived functor of `i_!`,
   which is why the K-flat hypotheses on the coefficient category `A` of
-  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenImmersionLowerShriek` are
+  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek` are
   needed for the adjunctions of this file, though not for the definition of `Rf^!` itself.
 * There is no underived `f^!`, but the notation still carries the `R` of `R(f)_![A]` and
   `R((g)_*[A])`, to mark that it lives on derived categories rather than on sheaves.

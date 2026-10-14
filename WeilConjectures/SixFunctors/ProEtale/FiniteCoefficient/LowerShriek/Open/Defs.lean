@@ -26,7 +26,7 @@ functor `j_f^*`.
 When `f` is moreover an open immersion (in particular a monomorphism), `j_{f!}` is the
 *extension by zero* functor. It is then exact and fully faithful; fully faithfulness is
 `AlgebraicGeometry.ProEtale.fullyFaithfulOpenImmersionLowerShriek` in
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.FullyFaithful`,
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful`,
 proved from the adjoint triple `ProEtale.localizationAdjunctionTriple` below.
 
 ## Main definitions
