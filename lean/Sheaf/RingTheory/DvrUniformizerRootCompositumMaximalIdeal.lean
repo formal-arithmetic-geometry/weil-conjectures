@@ -10,6 +10,10 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.Unramified.Basic
+import Sheaf.RingTheory.DvrMapMaximalIdealOfFormallyUnramified
+
 
 /-! # Weak unramifiedness over a uniformizer-root base
 
@@ -25,7 +29,7 @@ namespace RingTheory
 
 Source: Stacks Project, Tag 0BRM, the paragraphs after the unit-root claim,
 with Tags 09EV (uniformizer root), 09EQ (further base change), and 09E7.
-(blueprint: lem-sbc-dvr-uniformizer-root-compositum-maximal-ideal)
+(blueprint: lem-sbc-dvr-uniformizer-root-compositum-formally-unramified-data)
 
 Proof: The ring maps to the specified fraction fields are injective. Embed
 Frac(B) into Frac(A) compatibly with B and let K0 be the intermediate field
@@ -50,6 +54,36 @@ local, and a proper overring of a DVR in its fraction field is the field itself.
 Consequently the image of an A-uniformizer generates the maximal ideal of T. The tensor argument
 works for any DVR A containing theta, without finiteness of A over B. When e=1,
 B[theta]=B and the same argument is just weakly unramified base change. -/
+theorem dvr_uniformizer_root_compositum_formallyUnramifiedData
+    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
+    (pi : B) (hpi : Irreducible pi)
+    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
+    [Algebra B A]
+    (U : Type u) [CommRing U] [IsDomain U] [IsDiscreteValuationRing U]
+    [Algebra B U] [IsLocalHom (algebraMap B U)]
+    (e : ℕ) (he : IsUnit (e : B))
+    (theta : A) (hroot : theta ^ e = algebraMap B A pi)
+    (hindexU : (IsLocalRing.maximalIdeal B).map (algebraMap B U) =
+      IsLocalRing.maximalIdeal U ^ e)
+    (hsep : Algebra.IsSeparable (IsLocalRing.ResidueField B) (IsLocalRing.ResidueField U))
+    (E : Type u) [Field E] [Algebra (FractionRing B) E]
+    [Algebra B E] [IsScalarTower B (FractionRing B) E]
+    [FiniteDimensional (FractionRing B) E] [Algebra.IsSeparable (FractionRing B) E]
+    [Algebra U E] [IsFractionRing U E] [IsScalarTower B U E]
+    (F : Type u) [Field F] [Algebra A F] (iE : E →+* F)
+    (hcomm : ∀ b : B, iE (algebraMap B E b) =
+      algebraMap A F (algebraMap B A b))
+    (hgen : Algebra.adjoin A (Set.range iE) = ⊤)
+    (T : Type u) [CommRing T] [IsDomain T] [IsDiscreteValuationRing T]
+    [Algebra A T] [IsLocalHom (algebraMap A T)]
+    [Algebra T F] [IsFractionRing T F] [IsScalarTower A T F]
+    (j : U →+* T) (hj : IsLocalHom j)
+    (hjB : ∀ b : B, j (algebraMap B U b) =
+      algebraMap A T (algebraMap B A b))
+    (hjE : ∀ c : U, algebraMap T F (j c) = iE (algebraMap U E c)) :
+    Algebra.EssFiniteType A T ∧ Algebra.FormallyUnramified A T := by sorry
+
+
 theorem dvr_uniformizer_root_compositum_map_maximalIdeal
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi)
@@ -77,6 +111,14 @@ theorem dvr_uniformizer_root_compositum_map_maximalIdeal
     (hjB : ∀ b : B, j (algebraMap B U b) =
       algebraMap A T (algebraMap B A b))
     (hjE : ∀ c : U, algebraMap T F (j c) = iE (algebraMap U E c)) :
-    (IsLocalRing.maximalIdeal A).map (algebraMap A T) = IsLocalRing.maximalIdeal T := by sorry
+    (IsLocalRing.maximalIdeal A).map (algebraMap A T) = IsLocalRing.maximalIdeal T := by
+  have h := dvr_uniformizer_root_compositum_formallyUnramifiedData B pi hpi A U e he theta hroot
+    hindexU hsep E F iE hcomm hgen T j hj hjB hjE
+  set_option linter.style.haveILetI false in
+    haveI : Algebra.EssFiniteType A T := h.1
+  set_option linter.style.haveILetI false in
+    haveI : Algebra.FormallyUnramified A T := h.2
+  exact dvr_map_maximalIdeal_of_formallyUnramified A T
+
 
 end RingTheory

@@ -14610,3 +14610,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:16 L: returned deliver/E4/Sheaf.Paper.CechRefinementPushforwardTotal (reviewer RETURN: (reviewer X-4af66, head 4af6606ad) F / brief point 7: Correct coord/reports/E4/Sheaf.Paper.CechRefinementPushforwardTota)
 - 05:16 L: returned deliver/F2/Sheaf.Algebra.Homology.TensorBicomplex (reviewer RETURN: (reviewer X-ecbb6, head ecbb6f584) F1: coord/changes/tensor-bicomplex-canonical-map.md line 1 lacks the declaration head)
 - 05:17 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux (reviewer RETURN: (reviewer X-dcde2, head dcde20b64) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.St)
+- 05:19 L: merged deliver/H3/Sheaf.RingTheory.DvrUniformizerRootCompositumMaximalIdeal (stage 3; reviewer PASS; first push; landing 20261014T051907-L-1850074 (interface); batch 20261014T051906; modules 2; new nodes 2)

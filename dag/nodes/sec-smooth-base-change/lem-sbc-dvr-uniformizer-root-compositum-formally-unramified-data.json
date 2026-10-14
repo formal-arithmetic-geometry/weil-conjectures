@@ -1,0 +1,98 @@
+{
+ "id": "lem-sbc-dvr-uniformizer-root-compositum-formally-unramified-data",
+ "kind": "statement",
+ "title": "Formal unramifiedness data for the normalized root compositum",
+ "statement": "Under the hypotheses of the uniformizer-root compositum theorem, the selected DVR T is an essentially finite type formally unramified A-algebra.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BRM, 09EV, 09EQ and 09E7"
+ },
+ "proof": [
+  {
+   "text": "Construct the intermediate root normalization, prove the unit-root etale calculation over U, use multiplicativity of ramification indices and residue separability, then descend through the arbitrary DVR base change A and identify the selected local factor with T.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "H3",
+  "document": "Stacks Project",
+  "place": "Tags 0BRM, 09EV, 09EQ and 09E7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "formally unramified maximal ideal local ring",
+   "date": "2026-10-14",
+   "results": "No exact match for the full theorem.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formally unramified maximal ideal map",
+   "date": "2026-10-14",
+   "results": "Found the Mathlib criterion used by the proof.",
+   "verdict": "Used only for the smaller criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "map_maximalIdeal formally unramified",
+   "date": "2026-10-14",
+   "results": "Located Algebra.FormallyUnramified.map_maximalIdeal.",
+   "verdict": "Used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DvrUniformizerRootCompositumMaximalIdeal",
+  "date": "2026-10-14",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-dvr-uniformizer-root-compositum-maximal-ideal",
+   "place": "formal unramifiedness substep",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DvrUniformizerRootCompositumMaximalIdeal",
+  "file": "lean/Sheaf/RingTheory/DvrUniformizerRootCompositumMaximalIdeal.lean",
+  "declaration": "RingTheory.dvr_uniformizer_root_compositum_formallyUnramifiedData",
+  "statement": "theorem dvr_uniformizer_root_compositum_formallyUnramifiedData (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] (pi : B) (hpi : Irreducible pi) (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [Algebra B A] (U : Type u) [CommRing U] [IsDomain U] [IsDiscreteValuationRing U] [Algebra B U] [IsLocalHom (algebraMap B U)] (e : ℕ) (he : IsUnit (e : B)) (theta : A) (hroot : theta ^ e = algebraMap B A pi) (hindexU : (IsLocalRing.maximalIdeal B).map (algebraMap B U) = IsLocalRing.maximalIdeal U ^ e) (hsep : Algebra.IsSeparable (IsLocalRing.ResidueField B) (IsLocalRing.ResidueField U)) (E : Type u) [Field E] [Algebra (FractionRing B) E] [Algebra B E] [IsScalarTower B (FractionRing B) E] [FiniteDimensional (FractionRing B) E] [Algebra.IsSeparable (FractionRing B) E] [Algebra U E] [IsFractionRing U E] [IsScalarTower B U E] (F : Type u) [Field F] [Algebra A F] (iE : E →+* F) (hcomm : ∀ b : B, iE (algebraMap B E b) = algebraMap A F (algebraMap B A b)) (hgen : Algebra.adjoin A (Set.range iE) = ⊤) (T : Type u) [CommRing T] [IsDomain T] [IsDiscreteValuationRing T] [Algebra A T] [IsLocalHom (algebraMap A T)] [Algebra T F] [IsFractionRing T F] [IsScalarTower A T F] (j : U →+* T) (hj : IsLocalHom j) (hjB : ∀ b : B, j (algebraMap B U b) = algebraMap A T (algebraMap B A b)) (hjE : ∀ c : U, algebraMap T F (j c) = iE (algebraMap U E c)) : Algebra.EssFiniteType A T ∧ Algebra.FormallyUnramified A T",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T051907-L-1850074",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T051907-L-1850074",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
