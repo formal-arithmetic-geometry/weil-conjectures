@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-field-scalar-extension-mono",
+ "kind": "lemma",
+ "title": "Sheaf scalar extension preserves monomorphisms over a field",
+ "statement": "For a field k, a topological space X, a sheaf R of rings and alpha:k -> R(X), the scalar-extension functor [def-sc-field-scalar-extension] preserves monomorphisms. The module universe is Type(max u v). No commutativity of R or centrality of alpha is needed.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-field",
+  "def-sc-field-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
+  "place": "Sheaves on Spaces, Tags 0095 and 0096; Modules, Tag 02N4. Canonical online tag pages consulted; noncommutative presheaf construction and universe bookkeeping made explicit by M2."
+ },
+ "proof": [
+  {
+   "text": "The inclusion of sheaves into presheaves preserves monomorphisms. Conversion to constant-ring modules [def-sc-module-presheaf-constant-modules] preserves monomorphisms because f_U is monic in ModuleCat k at every U, hence injective, and the converted morphism has the same component functions. Apply PresheafOfModules.mono_of_injective.",
+   "uses": [
+    "def-sc-module-presheaf-constant-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
+    "place": "Sheaves on Spaces, Tags 0095 and 0096; Modules, Tag 02N4. Canonical online tag pages consulted; noncommutative presheaf construction and universe bookkeeping made explicit by M2."
+   }
+  },
+  {
+   "text": "Presheaf scalar extension preserves monomorphisms by [lem-sc-field-scalar-presheaf-pullback-mono]. Module sheafification preserves finite limits in Mathlib, hence preserves monomorphisms. Install the larger-universe sheafification instances proved with [def-sc-field-scalar-extension] and compose these preservation instances.",
+   "uses": [
+    "lem-sc-field-scalar-presheaf-pullback-mono",
+    "def-sc-field-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
+    "place": "Sheaves on Spaces, Tags 0095 and 0096; Modules, Tag 02N4. Canonical online tag pages consulted; noncommutative presheaf construction and universe bookkeeping made explicit by M2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-scalar-extension",
+  "def-sc-module-presheaf-constant-modules",
+  "lem-sc-field-scalar-presheaf-pullback-mono"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
+  "place": "Sheaves on Spaces, Tags 0095 and 0096; Modules, Tag 02N4. Canonical online tag pages consulted; noncommutative presheaf construction and universe bookkeeping made explicit by M2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scalar extension of sheaves over a field preserves monomorphisms",
+   "results": "Service unavailable: Internal Server Error. Other searches and source inspection used.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheafification of module presheaves preserves monomorphisms",
+   "results": "PresheafOfModules.mono_of_injective and injective_of_mono found. PresheafOfModules.sheafification preserves finite limits in Mathlib, which is used for the final sheafification step.",
+   "date": "2026-10-14",
+   "verdict": "no exact match; existing components used"
+  },
+  {
+   "tool": "grep",
+   "query": "const|constant|forgetToPresheaf|pullback|PreservesFiniteLimits|preservesMonomorphisms|adjunction in Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Presheaf/Pullback.lean, Presheaf/Sheafification.lean, Sheaf/PullbackContinuous.lean; rg in both library roots",
+   "results": "PresheafOfModules.mono_of_injective and injective_of_mono found. PresheafOfModules.sheafification preserves finite limits in Mathlib, which is used for the final sheafification step.",
+   "date": "2026-10-14",
+   "verdict": "no exact match; existing components used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FieldScalarRestrictionInjectives",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "The scalar-restricted injective-resolution comparison in the field-linear cohomology argument: Sheaf scalar extension preserves monomorphisms over a field.",
+   "via": [
+    "lem-sc-field-scalar-restriction-injectives",
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FieldScalarExtensionMono",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldScalarExtensionMono.lean",
+  "declaration": "SheafOfModules.fieldScalarExtension_preservesMonomorphisms",
+  "statement": "theorem fieldScalarExtension_preservesMonomorphisms\n    {k : Type u} [Field k] (X : TopCat.{u})\n    (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})\n    (α : k →+* R.obj.obj (op ⊤)) :\n    (fieldScalarExtension.{u, v} X R α).PreservesMonomorphisms",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T023934-L-14799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T023934-L-14799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

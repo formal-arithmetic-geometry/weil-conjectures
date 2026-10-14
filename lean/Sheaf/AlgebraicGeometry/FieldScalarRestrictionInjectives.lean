@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import Sheaf.AlgebraicGeometry.FieldScalarExtensionAdjunction
+import Sheaf.AlgebraicGeometry.FieldScalarExtensionMono
 
 /-! # Restricting module sheaves to a field preserves injectives
 
@@ -30,25 +32,28 @@ Source: Stacks Project, Cohomology, Tag 02N5; Modules, Tag 02N4;
 Homology, Tag 015Z.
 (blueprint: lem-sc-field-scalar-restriction-injectives).
 
-Proof: Write O for R and let k act through α on global sections and hence on every
-open by restriction. The left adjoint to the displayed functor sends a sheaf V of
-k-vector spaces to the sheafification of U ↦ O(U) ⊗[k] V(U). Its restriction maps
-send a ⊗ v to a|W ⊗ v|W. The tensor universal property gives the adjunction on
-presheaves, and the sheafification adjunction gives it on sheaves. At a point x,
-this left adjoint has stalk O_x ⊗[k] V_x: tensor and stalks commute with the
-filtered colimits of sections. Tensoring over a field is exact, so this left
-adjoint preserves monomorphisms, as tested on stalks. Given a monomorphism of
-k-sheaves and a map to the restricted injective module sheaf, transpose the map,
-extend it across the resulting module-sheaf monomorphism by injectivity, and
-transpose back. This proves injectivity of its restriction. The empty space and
-zero ring sheaf cause no exception; there are no points to test in the former
-case and all module sheaves are zero in the latter. No Ext assertion is used. -/
+Proof: construct the map from the constant ring presheaf k to R by restricting α
+from the terminal open. Regard vector-valued presheaves as modules over that
+constant presheaf. Presheaf pullback followed by module sheafification gives a
+left adjoint to the displayed scalar-restriction functor. The hom bijection and
+its naturality are proved by composing the presheaf-pullback and sheafification
+adjunctions. The inclusion of sheaves into presheaves preserves monomorphisms;
+so do conversion to constant-ring modules, presheaf scalar extension over a field,
+and module sheafification. Thus the left adjoint preserves monomorphisms, and
+Mathlib's adjunction criterion proves that the right adjoint preserves injectives.
+The presheaf tensor uses R(U) as a right k-module by r · c = r α_U(c), so neither
+commutativity of R nor centrality of α is assumed. The construction and argument
+work in every module universe admitted by the original statement, and include
+the empty space and the zero ring sheaf. No stalk or Ext comparison is used. -/
 theorem fieldScalarRestriction_preservesInjectives
     {k : Type u} [Field k] (X : TopCat.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
     (α : k →+* R.obj.obj (op ⊤)) :
     Functor.PreservesInjectiveObjects
       (forgetToSheafModuleCat.{u} R (op ⊤) isTerminalTop.op ⋙
-        sheafCompose (Opens.grothendieckTopology X) (ModuleCat.restrictScalars α)) := by sorry
+        sheafCompose (Opens.grothendieckTopology X) (ModuleCat.restrictScalars α)) := by
+  have := fieldScalarExtension_preservesMonomorphisms X R α
+  obtain ⟨adj⟩ := nonempty_fieldScalarExtensionAdjunction X R α
+  exact Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms adj
 
 end SheafOfModules
