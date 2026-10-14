@@ -26,6 +26,8 @@ connected (Stacks, Algebra, Lemma 10.48.4).
   nontrivial idempotents.
 - `IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable`: an algebraic extension of a
   separably closed field is purely inseparable (blueprint `lem-pc-kbar-pure-insep`).
+- `isPurelyInseparable_iff_exists_algebraMap_eq_pow`: `E / F` is purely inseparable iff every
+  `α ∈ E` has `α ^ (q ^ n) ∈ F` for some `n` (blueprint `def-pc-field-tower`).
 -/
 
 @[expose] public section
@@ -165,3 +167,23 @@ theorem IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable [IsSepClosed 
   exact ⟨n, ha ▸ isSeparable_algebraMap a⟩
 
 end KBar
+
+section PowMem
+
+variable (F : Type*) {E : Type*} [Field F] [Field E] [Algebra F E] (q : ℕ) [ExpChar F q]
+
+/-- **Purely inseparable extensions.** A field extension `E / F` of exponential characteristic
+`q` is purely inseparable if and only if every `α ∈ E` satisfies `α ^ (q ^ n) ∈ F` for some `n`.
+In characteristic `0` we have `q = 1`, and this says `E = F`. This is
+`isPurelyInseparable_iff_pow_mem`, stated with an explicit preimage.
+
+The other notions of the blueprint definition are those of Mathlib: `Module.Finite F E`
+(finite), `Algebra.IsAlgebraic F E` (algebraic), `Algebra.IsSeparable F E` (separable), and
+`IsAlgClosure F E` (algebraic closure: `E` is algebraically closed and algebraic over `F`).
+
+(blueprint: `def-pc-field-tower`) -/
+theorem isPurelyInseparable_iff_exists_algebraMap_eq_pow :
+    IsPurelyInseparable F E ↔ ∀ α : E, ∃ n : ℕ, ∃ a : F, algebraMap F E a = α ^ q ^ n :=
+  isPurelyInseparable_iff_pow_mem F q
+
+end PowMem

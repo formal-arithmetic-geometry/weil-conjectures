@@ -36,6 +36,13 @@ open Scheme
 
 namespace Etale
 
+-- Give instance search the canonical larger-universe model of the small étale site.
+local instance essentiallySmall_etale_projectionExchange (X : Scheme.{u}) :
+    EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 -- Search the braiding of `ModuleCat Λ` through its symmetric structure, as in the generic
@@ -84,6 +91,11 @@ section Exchange
 
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint ModuleCat.hasColimitsOfShape
   ModuleCat.hasColimitsOfSize
+
+-- The generic compatibility theorems specialised below braid étale sheaves through
+-- `Etale.sheafBraidedCategory`; use it here as well so that the specialisations match them
+-- syntactically rather than up to an expensive unfolding of the symmetric structure.
+attribute [local instance 20000] Etale.sheafBraidedCategory
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
   (sq : CommSq g' f' f g) (c : Compactification f) (c' : Compactification f') (q : c'.Z ⟶ c.Z)

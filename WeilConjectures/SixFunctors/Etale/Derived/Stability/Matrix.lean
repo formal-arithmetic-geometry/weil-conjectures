@@ -15,8 +15,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriekConstructible
-public import WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Stability
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
 
 /-!
 # The preservation matrix of the six operations
