@@ -26,7 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Abelian.Ext
 
--- Retained for downstream modules that import this namespace with `import all`.
+-- Retained for HigherDirectImageRawPullbackIdentity, which imports this module with `all`.
+
 /-- Shift compatibility descends along localization: check the square after precomposition,
 then cancel the image of the localization functor's shift comparison. -/
 private theorem commShift_of_localization
@@ -64,6 +65,8 @@ theorem exactFunctorIdentityComparison
     (e : F ≅ 𝟭 C) {X Y : C} {n : ℕ} (x : Ext.{w} X Y n) :
     (x.mapExactFunctor F).comp (Ext.mk₀ (e.hom.app Y)) (add_zero n) =
       (Ext.mk₀ (e.hom.app X)).comp x (zero_add n) := by
+  -- The pinned Ext.Map has no mapExactFunctor_eq_of_iso or mapExactFunctor_id API.
+  -- Use its localization comparison directly, without an EnoughInjectives hypothesis.
   let := HasDerivedCategory.standard C
   let Q := DerivedCategory.Q (C := C)
   let η := NatIso.mapHomologicalComplex e (ComplexShape.up ℤ) ≪≫
