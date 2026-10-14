@@ -44,7 +44,6 @@ theorem zariskisMainProperty_of_isQuasiFiniteAtPrime
   let p := q.comap (algebraMap R S)
   let e := PrimeSpectrum.preimageHomeomorphFiber R S p
   apply QuasiFiniteAt.of_isOpen_singleton_fiber q
-  rw [← e.isOpen_image, Set.image_singleton]
-  exact hq
+  rwa [← e.isOpen_image, Set.image_singleton]
 
 end Algebra
