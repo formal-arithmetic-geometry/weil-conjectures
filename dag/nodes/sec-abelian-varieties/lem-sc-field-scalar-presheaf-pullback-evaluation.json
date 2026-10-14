@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-field-scalar-presheaf-pullback-evaluation",
+ "kind": "lemma",
+ "title": "Evaluation of scalar extension from a constant ring presheaf",
+ "statement": "Let C be a small category and k a ring in universe u. Let R:C opposite -> RingCat be a presheaf of possibly noncommutative rings, and phi:const(k) -> Id.op followed by R a morphism of ring presheaves. Suppose presheaf scalar restriction along phi is a right adjoint. For every object U of C opposite and module carrier universe Type(max u v), presheaf pullback along phi followed by evaluation on U is naturally isomorphic to evaluation on U followed by the balanced ordinary scalar extension [def-pod-ring-scalar-extension] along phi_U. No field, sheafification, commutativity or centrality hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pod-ring-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 006R, lemma-adjointness-tensor-restrict-presheaves. Canonical tag page read at https://stacks.math.columbia.edu/tag/006R. Presheaf-only, noncommutative and larger-universe formulation of the sectionwise adjunction."
+ },
+ "proof": [
+  {
+   "text": "Use the ordinary scalar-extension adjunction of [def-pod-ring-scalar-extension] at every object U. Define E(M)(U)=ModuleCat.ringExtendScalars(phi_U)(M(U)). Define restriction by transposing M(U) -> M(V) followed by the scalar-extension unit at V; naturality of phi gives the required k-linearity. The adjunction implies restriction(eta_U(m))=eta_V(res(m)). Equality of maps out of E(M)(U) can be tested on eta_U, because the Hom equivalence is injective. This verifies identity and composition. Extend component maps by ringExtendScalars.map; unit naturality verifies their compatibility with restriction, and functoriality gives a functor E. These are fully proved private definitions and helpers in the delivered module.",
+   "uses": [
+    "def-pod-ring-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 006R, lemma-adjointness-tensor-restrict-presheaves. Canonical tag page read at https://stacks.math.columbia.edu/tag/006R. Presheaf-only, noncommutative and larger-universe formulation of the sectionwise adjunction."
+   }
+  },
+  {
+   "text": "Build a natural Hom equivalence (E(M) -> N) equivalent to (M -> pushforward(phi)(N)) by applying the ordinary scalar-extension adjunction at each object. The forward map sends m to f_U(eta_U(m)). The inverse is the component transpose; its value on eta_U(m) is h_U(m). The proved restriction-unit formula verifies presheaf naturality in both directions. The component Hom equivalences give inverse laws and naturality in both M and N, yielding an actual adjunction E left-adjoint to pushforward(phi).",
+   "uses": [
+    "def-pod-ring-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 006R, lemma-adjointness-tensor-restrict-presheaves. Canonical tag page read at https://stacks.math.columbia.edu/tag/006R. Presheaf-only, noncommutative and larger-universe formulation of the sectionwise adjunction."
+   }
+  },
+  {
+   "text": "PresheafOfModules.pullbackPushforwardAdjunction and the constructed adjunction have the same right adjoint. Apply Adjunction.leftAdjointUniq and Functor.isoWhiskerRight with evaluation at U. By construction E followed by evaluation is definitionally evaluation followed by ordinary ringExtendScalars(phi_U), so the inverse evaluated comparison is exactly the asserted natural isomorphism. The proof uses no nonzero modules, no nonempty site, and no commutativity; all carriers have the required Type(max u v) universe.",
+   "uses": [
+    "def-pod-ring-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 006R, lemma-adjointness-tensor-restrict-presheaves. Canonical tag page read at https://stacks.math.columbia.edu/tag/006R. Presheaf-only, noncommutative and larger-universe formulation of the sectionwise adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-ring-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A4",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 006R, presheaf scalar extension adjunction. Complete Lean proof from the ordinary arbitrary-ring scalar-extension adjunction; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of identity site presheaf pullback of modules is naturally isomorphic to extension of scalars of the evaluated module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of presheaf pullback along an identity site is scalar extension on sections",
+   "results": "PresheafOfModules.pullbackId; SheafOfModules.pullbackId; PresheafOfModules.pullback_id_comp; PresheafOfModules.pullback_comp_id; AlgebraicGeometry.Scheme.Modules.pullbackId; SheafOfModules.pullback_id_comp; PresheafOfModules.map_id; SheafOfModules.pullback_comp_id",
+   "date": "2026-10-14",
+   "verdict": "No exact match; pullbackId is the identity ring map case, not arbitrary scalar extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.pullback, PresheafOfModules.evaluation",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "No exact match; pullbackId is the identity ring map case, not arbitrary scalar extension."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*evaluation|evaluation.*pullback",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "No exact match; pullbackId is the identity ring map case, not arbitrary scalar extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FieldScalarPresheafPullbackMono",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Scalar-restricted injective-resolution comparison: the sectionwise representing-object comparison in step 1 of lem-sc-field-scalar-presheaf-pullback-mono.",
+   "via": [
+    "lem-sc-field-scalar-presheaf-pullback-mono",
+    "lem-sc-field-scalar-restriction-injectives",
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.PresheafPullbackEvaluation",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/PresheafPullbackEvaluation.lean",
+  "declaration": "PresheafOfModules.nonempty_pullbackEvaluationIso",
+  "statement": "theorem nonempty_pullbackEvaluationIso\n    [(PresheafOfModules.pushforward.{max u v} φ).IsRightAdjoint] (U : Cᵒᵖ) :\n    Nonempty (PresheafOfModules.pullback.{max u v} φ ⋙\n      PresheafOfModules.evaluation R U ≅\n      PresheafOfModules.evaluation ((Functor.const Cᵒᵖ).obj (RingCat.of k)) U ⋙\n        ModuleCat.ringExtendScalars.{u, v} (φ.app U).hom)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T030640-L-341427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T030640-L-341427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

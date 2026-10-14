@@ -14358,3 +14358,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:03 L: batch 20261014T025133 dependency take-out
 - 03:03 L: returned deliver/T4/Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates (reviewer RETURN: (reviewer X-8fbc1, head 8fbc16ec3) C6: The new main-node proof_deps edge to new-lem-pc-affine-tensor-pullback-stalk-coor)
 - 03:05 L: returned deliver/N1/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation (reviewer RETURN: (reviewer X-f9ba3, head f9ba314c9) E2/E7, brief point 4: tensorGradedPresentation_core_multiply remains an admitted FALS)
+- 03:06 L: merged deliver/A4/Sheaf.AlgebraicGeometry.FieldScalarPresheafPullbackMono (stage 3; reviewer PASS; first push; landing 20261014T030640-L-341427 (interface); batch 20261014T030639; modules 2; new nodes 1)
