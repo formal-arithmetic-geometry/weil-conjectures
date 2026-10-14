@@ -14,11 +14,31 @@
  ],
  "proof": [
   {
-   "text": "compare e with sectionwise internal-Hom reindexing. Its quotient is\nan internal-Hom automorphism natural in both variables. On global morphisms,\nits value on identities gives endomorphisms z with alpha(f)=z_B f=f z_A.\nFor each open V, use the extension by zero of O_V and its map to O, which is\nidentity on V. Its endomorphism is multiplication by the restriction of\nz_O(1). Every local section is represented by a map from this extension by\nzero, so every z_A is multiplication by the same scalar t. Apply the same\nargument to the adjoint map from the extension by zero of A restricted to V\nto obtain alpha(phi)=t phi for local Hom sections. The scalar is invertible\nbecause alpha on Hom(O,O) is invertible. The normalized tensorator is the\ncanonical reindexing tensorator: test local pure tensors with the two maps\nfrom the extension by zero of O_V, reduce by naturality to the unit-unit\ncomponent, and use the unit coherence law and hunit. Local sums of pure\ntensors determine maps from the sheaf tensor product. On a local tensor\nb tensor w the two curried maps send x to k(t * v(h(w))(x) • b); linearity\nallows t to move between the two factors. Symmetry and associativity place\nthese factors in the displayed order. Substitute hv and hk in this equation.\nThe output map k is handled by\nnaturality in the target, and the input h by tensor-Hom naturality.\nThus the maps agree on local tensors, hence on their sheafification.\nThe argument includes zero modules, empty opens and the zero ring.",
+   "text": "For each object T of the thin localized open site, take the free presheaf of modules on the representable yoneda(T). The map sending each basis vector to 1 in the structure presheaf is injective: each representable section set is empty or a singleton. Sheafification preserves this monomorphism, giving a subobject G_T of the tensor unit. For every local section b of a module B, the free-presheaf universal property and the sheafification adjunction give a map G_T to B taking its distinguished section to b. This also works over the zero ring and for empty representable section sets.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Natural transformations from tensorRight(V) to a monomorphism-preserving functor H are determined by their component at the tensor unit. Naturality along G_T to the unit and monicity of its H-image give equality at G_T. Naturality along G_T to B then gives equality on every local pure tensor b tensor v. The presheaf tensor extensionality lemma and the sheafification adjunction give equality on the sheaf tensor product. Apply this with H = internal Hom from A, which preserves monomorphisms since it is a right adjoint.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define contraction c_B by the displayed tensor-Hom transpose before the final output map k. Prove its naturality in B and in its dual input directly from the tensor-Hom naturality, braiding naturality, associator naturality and right unitor naturality. At the tensor unit, c_unit = leftUnitor(V).hom followed by v, by the unit and symmetry coherence identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Put w = L(v) followed by e(A,unit).hom and internal Hom applied to the inverse unit comparison. Compare the natural family c_B with the family obtained by pulling target contraction back through the inverse tensorator and inverse e using fullness of L. Tensorator naturality and he make the latter family natural in B. The families agree at the unit by the preceding unit contraction identity and m.left_unitality. The natural-transformation extensionality result makes them equal for all B; faithfulness and the comparison isomorphisms yield the required core transport equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply naturality in the dual input to the arbitrary map h and substitute hunit and hv. Use tensor-Hom naturality in the output, he and hk to postcompose with the arbitrary output map k. This gives precisely the unchanged displayed statement. No scalar classification, canonical reindexing comparison, or uniqueness theorem for tensorators is required; the extra symmetry hypothesis is retained in the signature.",
    "uses": [
     "def-pc-ordinary-evaluation-data"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -26,11 +46,11 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "A4",
+  "group": "N3",
   "date": "2026-10-14",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EO, tensor-Hom adjunction; open-site reindexing and the scalar naturality argument written in the parent proof; Tags 08DL and 08DQ motivate compatibility with restriction and dual evaluation.",
-  "description": "The corresponding part of the parent proof, isolated as a module-level transport equation."
+  "place": "Tag 03EO (tensor-Hom adjunction); free representable modules, sheafification and the local section argument recorded in the Lean proof.",
+  "description": "Complete proof using subobjects of the unit to determine a natural contraction family; all private supporting lemmas are proved without sorry."
  },
  "mathlib_searches": [
   {
@@ -141,11 +161,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A4",
+  "reviewer": "X-592b8",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261014T100433-L-1021472",
+  "landing": "20261014T113604-L-2119567",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered theorem with the node’s recorded signature and proof route; compilation is clean, helpers and attributes are private/local, and all checked axioms are standard."
  }
 }
