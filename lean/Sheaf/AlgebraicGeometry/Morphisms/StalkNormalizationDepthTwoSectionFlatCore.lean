@@ -82,7 +82,8 @@ theorem stalk_normalization_depth_two_section_flat_core
         (A := L.presheaf.stalk (p (g w))) (B := E.presheaf.stalk (g w))
         (C := (pullback p t).presheaf.stalk w)
     change g w = z at hw
-    rwa [hw] at hp
+    rw [hw] at hp
+    exact hp
   · apply Flat.of_stalkMap
     intro z
     exact (RingHom.Flat.respectsIso.arrow_mk_iso_iff
