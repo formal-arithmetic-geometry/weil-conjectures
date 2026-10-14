@@ -1,0 +1,127 @@
+{
+ "id": "lem-grothendieck-derived-has-coproducts",
+ "kind": "statement",
+ "title": "Coproducts in an abelian derived category with K-injective resolutions",
+ "statement": "Let C be an abelian category with an ordinary unbounded derived category [def-weil-abstract-derived-category], and assume every cochain complex has a quasi-isomorphism to a K-injective complex [def-pur-kinjective-complex]. If C has coproducts indexed by every set in universe s, then D(C) has coproducts of the same size. No AB4 or Grothendieck hypothesis is required once the K-injective resolution hypothesis is given.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/07D9",
+  "place": "Lemma 19.13.4, clauses (1)-(2), and its Hom computation; the proof only uses the explicitly assumed coproducts and K-injective resolutions"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a complex K_i representing each object E_i of D(C), using essential surjectivity of DerivedCategory.Q. Form the degreewise coproduct K = coproduct K_i, which is a cochain complex because coproducts in the cochain-complex category are computed degreewise.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any target Y choose a K-injective resolution L and identify Y with Q(L). Morphisms to Q(L) are chain maps modulo homotopy, by the K-injective localization Hom bijection. The already-proved generic private helpers derived_map_surjective and derived_map_homotopy in Sheaf.CategoryTheory.DerivedModuleDirectSums implement these two consequences without specializing C to modules.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble any family of chain maps K_i to L into a unique chain map from K using Sigma.desc. If two derived maps from K agree on the coprojections, represent them by chain maps to L; their restrictions are homotopic. Assemble these homotopies degreewise by coproduct_homotopy (the generic proved helper in DerivedModuleDirectSums) to conclude the derived maps are equal. This proves the universal property for Q(K).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport its coprojections by the isomorphisms Q(K_i) to E_i, and apply hasCoproducts_of_colimit_cofans for every indexing type. The construction includes the empty family.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/CategoryTheory/GrothendieckDerivedCoproducts.lean",
+  "place": "Proof in words and complete Lean proof; V3, 2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coproducts in the derived category of an abelian category with K-injective resolutions",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "verdict": "service unavailable; other search kinds completed",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of an abelian category with K-injective resolutions has coproducts constructed termwise",
+   "results": "Eight generic derived-category definition hits; no coproduct theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\"",
+   "results": "Twelve K-injective definitions and homotopy-zero lemmas; the localization Hom API is used through existing proved helpers.",
+   "verdict": "supporting API only; no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_hasCoproducts|coproduct_homotopy|derived_map_surjective",
+   "results": "No Mathlib hits for these names. Local project search was also checked; its supporting declarations are described in the proof and report.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleProperDerivedDirectImageAdjoint",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Proof, first paragraph: proper derived direct image preserves coproducts and Brown representability applies",
+   "via": [
+    "lem-etale-proper-derived-direct-image-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GrothendieckDerivedCoproducts",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckDerivedCoproducts.lean",
+  "declaration": "CategoryTheory.derived_hasCoproducts",
+  "statement": "theorem derived_hasCoproducts\n    {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]\n    [Abelian.HasKInjectiveResolutions C] [HasCoproducts.{s} C] :\n    HasCoproducts.{s} (DerivedCategory C)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T140638-L-118915",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T140638-L-118915",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

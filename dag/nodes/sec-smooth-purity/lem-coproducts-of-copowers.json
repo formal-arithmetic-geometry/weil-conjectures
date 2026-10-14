@@ -1,0 +1,115 @@
+{
+ "id": "lem-coproducts-of-copowers",
+ "kind": "statement",
+ "title": "Coproduct preservation follows from copower preservation",
+ "statement": "Let C be a category with zero morphisms, D any category, I a set, and F : C → D a functor. Suppose both C and D have all I-indexed coproducts. If F preserves the coproduct of the constant I-indexed family on S for every object S of C, then F preserves every I-indexed coproduct. F need not be additive or preserve zero morphisms.",
+ "source": {
+  "document": "lean/Sheaf/CategoryTheory/CoproductsOfCopowers.lean",
+  "place": "Elementary arrow-retract argument written by V3; uses Mathlib MorphismProperty.of_retract and coproduct comparisons"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For any family K_i let S be its coproduct. Let j_i : K_i → S be its coprojection and p_i : S → K_i be the map equal to the identity on summand i and zero on all others. The coproduct equations give j_i followed by p_i equal to the identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The arrows sigmaComparison F K and sigmaComparison F (constant S) form an arrow retract. Its source maps are coproducts of F(j_i) and F(p_i); its target maps are F of the coproducts of j_i and p_i. Naturality of sigmaComparison gives the two commuting squares. Functoriality and j_i p_i = id give the retraction identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The constant-family comparison is invertible by the hypothesis. Isomorphisms are stable under arrow retracts, so sigmaComparison F K is invertible. Apply PreservesCoproduct.of_iso_comparison and preservesColimitsOfShape_of_discrete. No zero-preservation of F was used. If I is empty the same comparison retraction is the identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/CategoryTheory/CoproductsOfCopowers.lean",
+  "place": "Proof in words and complete Lean proof; V3, 2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor from a category with zero morphisms preserves coproducts when it preserves copowers",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "verdict": "service unavailable; other search kinds completed",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between categories with zero morphisms preserves coproducts if it preserves all coproducts of copies of each fixed object",
+   "results": "Eight finite-coproduct preservation results; none gives the copower reduction.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sigmaComparison\"",
+   "results": "sigmaComparison, PreservesCoproduct.of_iso_comparison and isomorphism comparison APIs; no copower reduction.",
+   "verdict": "supporting API only; no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesCopowers|projectionFormula.*[Cc]oproduct|derived_hasCoproducts",
+   "results": "No Mathlib hits for these names. Local project search was also checked; its supporting declarations are described in the proof and report.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleProperDerivedDirectImageAdjoint",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Proof, first paragraph: proper derived direct image preserves coproducts and Brown representability applies",
+   "via": [
+    "lem-etale-proper-derived-direct-image-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CoproductsOfCopowers",
+  "file": "lean/Sheaf/CategoryTheory/CoproductsOfCopowers.lean",
+  "declaration": "CategoryTheory.preservesCoproducts_of_preservesCopowers",
+  "statement": "theorem preservesCoproducts_of_preservesCopowers\n    {C : Type uC} [Category.{vC} C] [HasZeroMorphisms C]\n    {D : Type uD} [Category.{vD} D]\n    (F : C ⥤ D) (I : Type s)\n    [HasCoproductsOfShape I C] [HasCoproductsOfShape I D]\n    (hF : ∀ S : C, PreservesColimit (Discrete.functor (fun _ : I ↦ S)) F) :\n    PreservesColimitsOfShape (Discrete I) F",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T140638-L-118915",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T140638-L-118915",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

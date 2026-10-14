@@ -19,24 +19,28 @@
  ],
  "proof": [
   {
-   "text": "Work on a quasi-compact affine open of Y. Properness makes its inverse image quasi-compact and quasi-separated. Finite type gives a finite bound e for geometric fibre dimensions. Proper base change and the torsion cohomological-dimension theorem give R^q g_* F = 0 for q > 2e. The geometric fibres are quasi-compact and quasi-separated, so their cohomology commutes with filtered colimits. The stalk formula and conservative geometric stalks imply that all higher direct images commute with filtered colimits and hence with coproducts.",
+   "text": "The étale module-sheaf categories are Grothendieck abelian. Install their coproducts at the common indexing universe u+1. K-injective resolutions and these coproducts give coproducts of both unbounded derived categories by derived_hasCoproducts.",
    "uses": [
-    "cor-weil-pbc-geometric-fiber-finite",
-    "thm-sc-finite-type-torsion-cd",
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-grothendieck-derived-has-coproducts"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the finite-amplitude unbounded coproduct argument on each affine open. The restriction of derived direct image to such an open is the derived direct image of the restricted proper map: restriction to an open is exact and preserves injectives, because it has an exact extension-by-zero left adjoint. Thus the global coproduct comparison restricts to an isomorphism on every affine open. Restriction detects isomorphisms of cohomology sheaves, and therefore of derived objects; hence Rg_* preserves coproducts globally. This argument needs only local finite amplitude, not a uniform global fibre-dimension bound.",
+   "text": "Derived inverse image F = Lg^* is a left adjoint via derivedUpperStarLowerStarAdjunction, hence preserves coproducts. Its tensor-unit isomorphism is leftDerivedUpperStarUnitIso. The source library theorem isIso_rightDerivedLowerStarProjectionMap_of_finite Λ g gives the unbounded proper projection formula for finite coefficients, the finite-ring specialization of Stacks Tag 0F0G. View it directly as an isomorphism of bifunctors via asIso; it requires no Noetherian or quasi-compact hypothesis.",
    "uses": [
-    "lem-exc-direct-image-coproducts"
+    "lem-etale-proper-projection-formula-finite"
    ],
    "elementary": false
   },
   {
-   "text": "The source is the unbounded derived category of a Grothendieck abelian category of étale module sheaves. Apply Stacks Project Tag 0F5Y, injectives-proposition-brown, to the exact coproduct-preserving Rg_*. Objectwise representability of Hom(Rg_*(-), K), followed by Yoneda, gives its right adjoint. This is the remaining Brown-representability part of the proper-factor argument.",
+   "text": "Apply preservesCoproducts_of_projectionFormula to F = Lg^* and G = Rg_*. For every indexing set it first proves preservation of sums of copies of each object by tensoring the sum of units, then uses the copower retract argument to obtain all coproducts.",
+   "uses": [
+    "lem-projection-formula-preserves-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing triangulated right-derived-functor API gives exactness of Rg_*. Apply grothendieckDerived_hasRightAdjoint to this exact functor from the Grothendieck derived category, using the coproduct preservation just established. Its conclusion is precisely that Rg_* is a left adjoint, that is, admits a right adjoint.",
    "uses": [
     "lem-grothendieck-derived-brown-right-adjoint"
    ],
@@ -44,17 +48,15 @@
   }
  ],
  "proof_deps": [
-  "cor-weil-pbc-geometric-fiber-finite",
-  "thm-sc-finite-type-torsion-cd",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-exc-direct-image-coproducts",
+  "lem-grothendieck-derived-has-coproducts",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-projection-formula-preserves-coproducts",
   "lem-grothendieck-derived-brown-right-adjoint"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean",
-  "place": "docstring of isLeftAdjoint_rightDerivedLowerShriek, proper factor; Stacks Project Tag 0F5Y, injectives-proposition-brown"
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/EtaleProperDerivedDirectImageAdjoint.lean",
+  "place": "V3 proof, 2026-10-14: finite-coefficient unbounded proper projection formula (Stacks 0F0G), categorical copower retract argument, and Brown representability (Stacks 0F5Y)"
  },
  "mathlib_searches": [
   {
@@ -124,13 +126,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-4c761",
-  "group": "B2",
+  "reviewer": "COMPILER",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T150349-L-808767",
+  "landing": "20261014T140638-L-118915",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the packet and compile successfully; signatures, DAG records, sorry inventory, report, and axioms satisfy the stage-3 review rules."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

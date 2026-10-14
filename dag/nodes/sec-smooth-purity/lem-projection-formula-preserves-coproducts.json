@@ -1,0 +1,124 @@
+{
+ "id": "lem-projection-formula-preserves-coproducts",
+ "kind": "statement",
+ "title": "An invertible projection formula forces coproduct preservation",
+ "statement": "Let C and D be monoidal closed categories and suppose C has zero morphisms. Let I be a set for which C and D have all I-indexed coproducts. Let F : D → C preserve these coproducts and let F(1_D) be isomorphic to 1_C. Let G : C → D be a functor equipped with a natural bifunctor isomorphism G(M) ⊗ N ≅ G(M ⊗ F(N)). Then G preserves all I-indexed coproducts. No adjunction, additivity of G, or compatibility of the specified unit isomorphism with F is needed.",
+ "source": {
+  "document": "lean/Sheaf/CategoryTheory/ProjectionFormulaCoproducts.lean",
+  "place": "Categorical projection-formula argument written by V3, followed by the proved copower retract theorem"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For fixed M in C let Q be F followed by left tensoring with M. Tensoring preserves coproducts because the monoidal categories are closed; therefore Q preserves coproducts. The bifunctor projection isomorphism identifies Q followed by G with left tensoring by G(M), so Q followed by G also preserves coproducts.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the I-indexed coproduct cocone on the constant family of units in D. Q sends this to a colimit cocone, and Q followed by G also sends it to a colimit cocone. Thus G preserves the colimit of the diagram Q(unit).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The given unit isomorphism and the right unitor identify Q(unit) = M tensor F(unit) with M. Transport preservation along this constant-diagram isomorphism. Hence G preserves every I-indexed copower of every M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the copower retract theorem to conclude that G preserves arbitrary I-indexed coproducts. Its use of zero morphisms is only in C. Empty families are included.",
+   "uses": [
+    "lem-coproducts-of-copowers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coproducts-of-copowers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/CategoryTheory/ProjectionFormulaCoproducts.lean",
+  "place": "Proof in words and complete Lean proof; V3, 2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible projection formula implies preservation of coproducts in monoidal closed categories",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "verdict": "service unavailable; other search kinds completed",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In monoidal closed categories an invertible projection formula and coproduct preserving pullback imply pushforward preserves coproducts",
+   "results": "Eight unrelated extensive-category and distributivity results; no exact theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointProjectionMap\"",
+   "results": "No Mathlib results; the project has geometric projection-map APIs but not this abstract consequence.",
+   "verdict": "supporting API only; no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula.*[Cc]oproduct|preservesCoproducts_of_projection",
+   "results": "No Mathlib hits for these names. Local project search was also checked; its supporting declarations are described in the proof and report.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleProperDerivedDirectImageAdjoint",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Proof, first paragraph: proper derived direct image preserves coproducts and Brown representability applies",
+   "via": [
+    "lem-etale-proper-derived-direct-image-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ProjectionFormulaCoproducts",
+  "file": "lean/Sheaf/CategoryTheory/ProjectionFormulaCoproducts.lean",
+  "declaration": "CategoryTheory.preservesCoproducts_of_projectionFormula",
+  "statement": "theorem preservesCoproducts_of_projectionFormula\n    {C : Type uC} [Category.{vC} C] [MonoidalCategory C] [MonoidalClosed C]\n    [HasZeroMorphisms C]\n    {D : Type uD} [Category.{vD} D] [MonoidalCategory D] [MonoidalClosed D]\n    (F : D ⥤ C) (G : C ⥤ D) (I : Type s)\n    [HasCoproductsOfShape I C] [HasCoproductsOfShape I D]\n    [PreservesColimitsOfShape (Discrete I) F]\n    (e : F.obj (𝟙_ D) ≅ 𝟙_ C)\n    (p : G ⋙ curriedTensor D ≅\n      (Functor.postcompose₂.obj G).obj\n        ((((Functor.whiskeringLeft₂ C).obj (𝟭 C)).obj F).obj (curriedTensor C))) :\n    PreservesColimitsOfShape (Discrete I) G",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T140638-L-118915",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261014T140638-L-118915",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
