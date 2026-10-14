@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-localization-derived-fractions",
+ "kind": "statement",
+ "title": "Fraction representatives for the derived localization unit before model transport",
+ "statement": "Let R, A, Aq, B be commutative rings in one universe, with the compatible algebra structures and derived categories in the recorded Lean signature. Let S be a submonoid of A, with Aq a localization at S. Let F: D(R) -> D(B) be any left derived extension-of-scalars functor with its universal counit. For any A-complex Q and its termwise localization unit uQ, every degree-i homology class y in F(restrict_R(Aq tensor_A Q)) has a numerator x in H^i(F(restrict_R Q)) and denominator s in S: applying H^i(F) to multiplication by algebraMap(A,Aq)(s) on the localized input sends y to H^i(F(uQ))(x). No cohomology model, tensor-coefficient action, or choice of a second derived functor occurs in this statement.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06Y6 and 0DJ8, derived change of rings and the affine cohomology localization identity"
+ },
+ "stmt_deps": [
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Compute left derived extension to B on Q using a K-flat R-resolution of B[0]; the balanced calculation is natural in Q and scalar endomorphisms.",
+   "uses": [
+    "lem-pc-balanced-derived-tensor-model",
+    "lem-pc-derived-tensor-action-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact localization and tensor-product localization identify the localized total complex. A cycle z/s has localized differential zero; choose t killing dz. Then tz is a cycle and ts is the required denominator. Transport through the universal-counit comparison to the supplied functor F.",
+   "uses": [
+    "lem-pc-balanced-derived-tensor-model",
+    "lem-pc-derived-tensor-action-naturality",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-balanced-derived-tensor-model",
+  "lem-pc-derived-tensor-action-naturality",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 06Y6 and 0DJ8; balanced derived tensor calculation followed by localization of cycles"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The homology of a derived tensor product commutes with localization and every element is represented by a fraction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left derived extension of scalars sends a localization unit to a map on homology whose elements admit fractions",
+   "results": [
+    "IsLocalizedModule.mapExtendScalars",
+    "IsLocalizedModule.mapExtendScalars_apply_apply",
+    "ModuleCat.localizedModule_functor",
+    "IsLocalizedModule.is_universal",
+    "LinearMap.extendScalarsOfIsLocalization",
+    "ModuleCat.localizedModule_functor_map",
+    "ModuleCat.localizedModuleMap",
+    "Module.FinitePresentation.linearEquivMapExtendScalars_apply"
+   ],
+   "verdict": "Ordinary localization or categorical derived-functor tools only; no derived unit fraction theorem. Also searched both library roots with rg; model-level base-change results import the denominator theorem and would give a cycle.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": [
+    "IsLocalization.tensorRight",
+    "IsLocalization.tensor",
+    "IsLocalization.algebraLid",
+    "IsLocalization.algebraTensorEquiv",
+    "IsLocalization.moduleLid",
+    "IsLocalization.moduleTensorEquiv",
+    "IsLocalization.mk'_tmul",
+    "IsLocalization.tmul_mk'"
+   ],
+   "verdict": "Ordinary localization or categorical derived-functor tools only; no derived unit fraction theorem. Also searched both library roots with rg; model-level base-change results import the denominator theorem and would give a cycle.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*(localiz|fraction)|homology.*denominator|fraction.*homology",
+   "results": [
+    "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+    "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+    "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+    "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+    "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+    "Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean"
+   ],
+   "verdict": "Ordinary localization or categorical derived-functor tools only; no derived unit fraction theorem. Also searched both library roots with rg; model-level base-change results import the denominator theorem and would give a cycle.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizationModelDenominators",
+  "date": "2026-10-14",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-first-localization-cohomology-denominators",
+   "place": "The cycle fraction calculation, before transport to L and K"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizationDerivedFractions",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizationDerivedFractions.lean",
+  "declaration": "RingTensorCohomology.derivedLocalization_fractions",
+  "statement": "theorem derivedLocalization_fractions (R A Aq B : Type u) [CommRing R] [CommRing A] [CommRing Aq] [CommRing B] [Algebra R A] [Algebra R Aq] [Algebra R B] [Algebra A Aq] [IsScalarTower R A Aq] [HasDerivedCategory.{w} (ModuleCat.{u} R)] [HasDerivedCategory.{w} (ModuleCat.{u} B)] (S : Submonoid A) [IsLocalization S Aq] (F : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B)) (ε : DerivedCategory.Qh ⋙ F ⟶ (ModuleCat.extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) [F.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ))] (i : ℤ) (Q : CochainComplex (ModuleCat.{u} A) ℤ) (uQ : (restrict R A).obj Q ⟶ (restrict R Aq).obj ((extend A Aq).obj Q)) (huQ : ∀ (j : ℤ) (x : Q.X j), uQ.f j x = (1 : Aq) ⊗ₜ[A,algebraMap A Aq] x) (y : (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).obj (F.obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj ((restrict R Aq).obj ((extend A Aq).obj Q)))))) : ∃ (x : (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).obj (F.obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj ((restrict R A).obj Q))))) (s : S), (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map (F.map (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map ((restrict R Aq).map ((algebraMap A Aq (s : A)) • 𝟙 ((extend A Aq).obj Q)))))) y = (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map (F.map (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map uQ))) x",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261014T010852-L-3167473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261014T010852-L-3167473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
