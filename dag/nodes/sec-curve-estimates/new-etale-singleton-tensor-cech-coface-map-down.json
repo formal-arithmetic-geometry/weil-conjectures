@@ -40,16 +40,26 @@
  ],
  "proof": [
   {
-   "text": "Unfold the opposite forgetful functor, sheafCompose, etaleTensorSectionsSheaf and etaleTensorSectionsPresheaf: the map at f.op is AddCommGrpCat.uliftFunctor.map (etaleTensorSectionsRestriction F f.left). The categorical source families displayed on both sides are definitionally the same. Evaluation of the lifted homomorphism followed by ULift.down is the original homomorphism applied to the downstairs section. This remains a proof plan: its Lean theorem is still sorry.",
+   "text": "Identify the lifted presheaf map at the opposite over-category arrow with AddCommGrpCat.uliftFunctor.map of etaleTensorSectionsRestriction at its left arrow; this is the defining map equation of the opposite forgetful functor, sheafCompose and the tensor-section presheaf.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary additive section map r and a lifted map a equal to uliftFunctor.map r, compare the constant product projections by reflexivity, substitute a, and apply the generic ULift-down evaluation equation. Parameterize this calculation by the caller's Small instance for the index type, so the chosen categorical product and its projections use precisely the same smallness witness upon specialization.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the proved private calculation to I = Fin (n+1) → Fin 1, its constant-zero tuple, a = G.map f.op, and r = etaleTensorSectionsRestriction F f.left, using the defining map equation from the first step. This proves the displayed equation without changing any definition or public statement.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "U1 stage 3 second reading",
+  "by": "S1 stage 3 worker",
   "document": "Stacks Project",
-  "place": "Tags 03P2 and 03DR; explicit categorical calculation using Mathlib Pi.lift_π_apply and the library tensor-section definitions. The map-down calculation remains open."
+  "place": "Tags 03P2 and 03DR; defining tensor-section restriction equation and elementary universe-lift/product evaluation. Formalized completely, with the product smallness witness shared explicitly."
  },
  "mathlib_searches": [
   {
@@ -86,13 +96,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U1",
+  "reviewer": "X-4200a",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T222418-L-1228233",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261014T010853-L-3167585",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module and importer compile cleanly; public signatures and target statements unchanged; proofs use only allowed axioms."
  }
 }
