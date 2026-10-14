@@ -1,6 +1,6 @@
 # Work queue
 
-75 items; claim with `tools/claim.py next <group> [--stage N]`.
+76 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (75)
+## Stage 3: modules to prove (76)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -34,6 +34,7 @@
 | `Sheaf.Topology.RingedModuleSkyscraper` | 10 | 0 | repair |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed` | 8 | 0 | repair |
 | `Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf` | 10 | 0 | repair |
+| `Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf` | 11 | 0 | repair |
 | `Sheaf.CategoryTheory.SiteSystemStrictificationData` | 10 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 20 | 1 | disputed |
 | `Sheaf.RingTheory.ColimitFlatRelationDescent` | 26 | 1 | disputed |
@@ -48,6 +49,7 @@
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation` | 22 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedQuotientMultiply` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorSectionProductComparison` | 22 | 1 | proof |
+| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorBoundaryKernelMapLocalMultiplication` | 24 | 1 | proof |
@@ -57,7 +59,6 @@
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestrictionAux` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorHomogeneousKernelAction` | 25 | 1 | proof |
-| `Sheaf.Paper.ModuleCupPullbackAugmentedPairings` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit` | 26 | 1 | proof |
 | `Sheaf.Paper.CechPushforwardLambdaColumns` | 27 | 1 | proof |
 | `Sheaf.Paper.CechRefinementPushforwardTotal` | 27 | 1 | proof |
