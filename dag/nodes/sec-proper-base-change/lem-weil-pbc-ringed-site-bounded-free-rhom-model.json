@@ -30,9 +30,104 @@
   "def-pur-hom-complex",
   "def-pur-sheaf-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The category $\\Mod(\\mathcal O)$ is Grothendieck by [prop-pur-kinjective-resolutions-exist], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Apply [lem-weil-pbc-dplus-injective-representative] to $QN$, whose cohomology vanishes below $a$, to obtain a complex $I$ of injectives with $I^j=0$ for $j<a$, an isomorphism $QN\\cong QI$, and K-injectivity of $I$. By [lem-weil-pbc-kinjective-hom-derived] this isomorphism lifts to a homotopy class represented by a chain map $\\alpha:N\\to I$. Since cohomology factors through localization [def-weil-abstract-derived-category], every $H^j(\\alpha)$ is an isomorphism, so $\\alpha$ is a quasi-isomorphism. This supplies an actual bounded-below replacement map, not just an isomorphism of derived objects.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
+   }
+  },
+  {
+   "text": "For a finite free sheaf $F=\\mathcal O^{\\oplus r}$, evaluation on its basis on every slice gives $\\mathcal Hom(F,M)\\cong M^{\\oplus r}$ naturally in $M$, by [def-pur-sheaf-hom]. Thus $\\mathcal Hom(F,\\alpha)$ is a quasi-isomorphism: kernels, images and their quotients in a finite biproduct are the finite biproducts of the respective kernels, images and quotients. Choose splitting maps exhibiting $P^i$ as a summand of such an $F$, so $F\\cong P^i\\oplus T$. The Hom complexes and their cohomology split into the two corresponding summands. The inverse of the cohomology map for $F$ commutes with the splitting idempotent (the map itself commutes with it), and therefore restricts to an inverse on the $P^i$ summand. Consequently $\\mathcal Hom(P^i,\\alpha)$ is a quasi-isomorphism for every $i$. This is internal sheaf Hom, and makes no assertion that $P^i$ is projective for global Hom.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
+   }
+  },
+  {
+   "text": "Put $c=a-b$. For $M=N$ or $I$ form the first-quadrant double complex $D_M^{u,v}=\\mathcal Hom(P^{b-u},M^{a+v})$ for $u,v\\geq0$, and zero elsewhere [def-sp-double-complex-total]. Its horizontal differential is precomposition by $d_P^{b-u-1}$ and its vertical differential is postcomposition by $d_M^{a+v}$; they commute and both square to zero. In translated total degree $n=u+v+c$ the Hom differential [def-pur-hom-complex] is postcomposition by $d_M$ plus $(-1)^{n+1}$ times precomposition by $d_P$. The standard total differential is horizontal plus $(-1)^u$ vertical. Multiplication on the $(u,v)$ summand by $s(u,v)=(-1)^{uv+u(u-1)/2+u(c+1)}$ identifies this standard total, with degrees translated by $c$, with the Hom complex: $s(u,v+1)=(-1)^u s(u,v)$ verifies the vertical term and $s(u+1,v)=(-1)^{u+v+c+1}s(u,v)$ verifies the horizontal term. All signs are units even in characteristic two. Translation here leaves the differential unchanged and merely renames degree $t$ as $t+c$, so it also merely renames the cohomology degree.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
+   }
+  },
+  {
+   "text": "Postcomposition with $\\alpha$ gives a double-complex map $D_N\\to D_I$ commuting with both differentials. For each fixed $u$, the vertical complex is $\\mathcal Hom(P^{b-u},M^{a+\\bullet})$, and the induced map is a quasi-isomorphism by step 2. Apply [lem-sc-first-quadrant-total-column-comparison] in the abelian category $\\Mod(\\mathcal O)$ [def-weil-sheaf-of-modules-category]. Its first-quadrant and column hypotheses are exactly those just checked. Hence the total map is a quasi-isomorphism. The summand signs in step 3 depend only on $u,v,a,b$, so commute with postcomposition by $\\alpha$ and identify this total map with $\\mathcal Hom^\\bullet(P,\\alpha)$. Translating degrees preserves kernels and images. Therefore $\\mathcal Hom^\\bullet(P,N)\\to\\mathcal Hom^\\bullet(P,I)$ is a quasi-isomorphism. The arrow is in this direction, contrary to the reversed arrow in one sentence of the source proof.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
+   }
+  },
+  {
+   "text": "By [def-pur-derived-internal-hom], the Hom complex into a K-injective replacement computes $R\\mathcal Hom(QP,QN)$. Thus the quasi-isomorphism in step 4 gives the claimed derived isomorphism. Its canonicity can also be checked directly: for two K-injective replacements $\\alpha:N\\to I$, $\\alpha':N\\to J$, [lem-weil-pbc-kinjective-hom-derived] lifts the derived morphism $Q\\alpha'\\,(Q\\alpha)^{-1}:QI\\to QJ$ to a chain map $h:I\\to J$, unique up to homotopy. Injectivity of the same localization bijection with source $N$ and target $J$ implies that $h\\alpha$ is homotopic to $\\alpha'$. Applying internal Hom from $P$ preserves target homotopies: for a homotopy $k$ the degree-minus-one map on Hom families is $f\\mapsto kf$, and expansion of the Hom differential gives $d(kf)+k(df)=(d_Jk+kd_I)f$. Therefore the two comparison diagrams commute in the derived category [def-weil-abstract-derived-category]. The comparison of replacements is a quasi-isomorphism since its localization is $Q\\alpha'\\,(Q\\alpha)^{-1}$; [lem-pur-rhom-well-defined] gives the quasi-isomorphism on internal Hom. This identifies the isomorphism with the resolution-independent canonical one, rather than a chosen unrelated isomorphism.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
+   }
+  },
+  {
+   "text": "Finally the degree-$n$ product of [def-pur-hom-complex] has a nonzero factor only when $i\\leq b$ and $i+n\\geq a$, equivalently $a-n\\leq i\\leq b$. Removing zero factors leaves a finite product, canonically the finite biproduct, giving the displayed direct sum. If the interval is empty it is the zero object. The differential is exactly $d_Nf-(-1)^nf d_P$ from that definition; no change of signs is made in the asserted model.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-double-complex-total",
+  "def-pur-hom-complex",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -117,10 +212,45 @@
    "results": "25 hits; top: Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
    "date": "2026-10-14",
    "verdict": "no match: single-sheaf Ext, external Hom from globally projective objects, underived module morphisms and presheaf Hom do not state this sheaf-valued derived Hom model."
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedInternalHom|bounded.*[Hh]om",
+   "results": "25 hits: Mathlib/CategoryTheory/MarkovCategory/Positive.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits are underived sheaf Hom, external Hom, Ext, cohomological bounds or unrelated functor/monoidal Hom; none computes derived internal sheaf Hom by this finite-diagonal model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf valued derived Hom computed by finite projective complexes with finite diagonals",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of module sheaves sends bounded below quasi-isomorphisms to quasi-isomorphisms for bounded above finite free source",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CategoryTheory.Sheaf.H, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-14",
+   "verdict": "no match: hits are underived sheaf Hom, external Hom, Ext, cohomological bounds or unrelated functor/monoidal Hom; none computes derived internal sheaf Hom by this finite-diagonal model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal sheaf Hom on a ringed site is computed by a bounded above complex of finite projective sheaves and bounded below target",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, SheafOfModules.instAbelian, CategoryTheory.sheafHom, AlgebraicGeometry.Scheme.Modules.instAbelian, Ext, SheafOfModules.instCategory",
+   "date": "2026-10-14",
+   "verdict": "no match: hits are underived sheaf Hom, external Hom, Ext, cohomological bounds or unrelated functor/monoidal Hom; none computes derived internal sheaf Hom by this finite-diagonal model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Hom\"",
+   "results": "12 hits: PresheafOfModules.Hom, PresheafOfModules.instAddCommGroupHom, PresheafOfModules.instAddHom, PresheafOfModules.instNegHom, PresheafOfModules.instSubHom, PresheafOfModules.instZeroHom, PresheafOfModules.unitHomEquiv, PresheafOfModules.Hom.app",
+   "date": "2026-10-14",
+   "verdict": "no match: hits are underived sheaf Hom, external Hom, Ext, cohomological bounds or unrelated functor/monoidal Hom; none computes derived internal sheaf Hom by this finite-diagonal model."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation",
   "by": "worker",
@@ -137,5 +267,84 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "worker": "stage1",
+  "summary": "Split Tag 08JI using existing Grothendieck-category, bounded-below injective, K-injective localization and first-quadrant total comparison nodes. Wrote the direct-summand cohomology argument and explicit totalization signs; corrected the reversed comparison arrow in the source proof without changing the statement. No new nodes.",
+  "blueprint": "Realizes the local derived-morphism model needed by thm-weil-pbc-amplification-proper proof (c), through the existing ancestor chain; no replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   },
+   {
+    "node": "def-pur-sheaf-hom",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   },
+   {
+    "node": "def-sp-double-complex-total",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   },
+   {
+    "node": "def-pur-hom-complex",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   },
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic ringed-site/homological algebra input in the Tag 08JI proof, not a substitute for the proper-base-change unit route; its statement is applied as quoted in citations.json."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-double-complex-total",
+  "def-pur-hom-complex",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-4dffaa356",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-4dffaa356 (reviewer sub-agent of L); spot-checked: Read the item and all six steps, every cited statement, relevant sources, and chapter/unit route. Stacks 08JI hypotheses, finite diagonals, signs, injective replacement, and canonicity check out; the source’s reversed comparison arrow is correctly repaired. No new nodes or delivery-specific faults. Exact master target categories and base-change maps were checked without assuming seeded comparisons. Inherited DAG cycles are documented in review.md."
  }
 }
