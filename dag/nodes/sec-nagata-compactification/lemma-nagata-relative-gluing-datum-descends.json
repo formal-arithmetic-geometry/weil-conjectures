@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-relative-gluing-datum-descends",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Property of the descended finite affine presentation",
@@ -17,24 +17,143 @@
  ],
  "proof": [
   {
-   "text": "Apply the corresponding property lemma to each finite-presentation chart,\nquasi-compact overlap, and overlap morphism. There are only finitely many\nobjects, and the common upper bound transports all of them to one stage\nwithout changing their base changes.",
-   "uses": [],
-   "elementary": null
+   "text": "Retain the fixed presentation and all the choices of [def-nagata-relative-gluing-datum-descent]. Let $F$ be its finite set of chosen stages and put $r=\\lambda_{\\mathrm{raw}}=u(F)$. By [lemma-nagata-directed-finite-upper-bound], each stage in $F$ is at most $r$. In particular every transported chart, overlap open and overlap morphism used below is defined at $r$. We use only these fixed choices, not independence of the lifts.",
+   "uses": [
+    "def-nagata-relative-gluing-datum-descent",
+    "lemma-nagata-directed-finite-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-relative-gluing-datum-descends.md",
+    "place": "## Proof; Stacks Tag 01ZM, limits.tex, lemma-descend-finite-presentation, proof of (1), stages i_2 through i_4"
+   }
+  },
+  {
+   "text": "Write $p_\\lambda:S\\to S_\\lambda$ and $s_{\\lambda r}:S_r\\to S_\\lambda$. For any chosen model $Z_\\lambda\\to S_\\lambda$, the universal property of [def-pc-fibre-product] identifies $(Z_\\lambda\\times_{S_\\lambda}S_r)\\times_{S_r}S$ with $Z_\\lambda\\times_{S_\\lambda}S$: send a compatible triple $(z,t,s)$ to $(z,s)$, and send $(z,s)$ back to $(z,p_r(s),s)$. These formulas mean the unique morphisms with the indicated projections; they are well defined because $s_{\\lambda r}p_r=p_\\lambda$ by [def-nagata-basechanged-system], and their composites fix both projections, hence are identities. For a morphism $h:Z_\\lambda\\to T_\\lambda$ over $S_\\lambda$, either order of these identifications and base change has projections $h(z)$ and $s$; uniqueness therefore shows that the identification commutes with $h$. This proves the transport compatibility used in the next three steps directly from the universal property.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-nagata-basechanged-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-relative-gluing-datum-descends.md",
+    "place": "## Proof; Stacks Tag 01ZM, limits.tex, lemma-descend-finite-presentation, proof of (1), stages i_2 through i_4"
+   }
+  },
+  {
+   "text": "For each chart algebra $B$, [lemma-nagata-affine-fp-descends] says that its chosen comparison $\\beta_B:B_{\\lambda_B}\\otimes_{A_{\\lambda_B}}A\\to B$ is an isomorphism. By [lem-weil-pbc-fibre-product-affine-spectra], the inverse of $\\operatorname{Spec}(\\beta_B)$ identifies the base-changed affine chart with the named chart $\\operatorname{Spec}B$ over the chosen base open. The raw chart at $r$ is precisely the base change of this chosen model, by [def-nagata-relative-gluing-datum-descent]. Applying Step 2 with $\\lambda=\\lambda_B$ gives its comparison with the same named chart. The projections in the cited affine fibre-product statement show that the comparison respects the structure map to the base chart.",
+   "uses": [
+    "lemma-nagata-affine-fp-descends",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-nagata-relative-gluing-datum-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-relative-gluing-datum-descends.md",
+    "place": "## Proof; Stacks Tag 01ZM, limits.tex, lemma-descend-finite-presentation, proof of (1), stages i_2 through i_4"
+   }
+  },
+  {
+   "text": "For each chosen overlap open $W$ in a chart, write $\\omega$ for its own chosen descent stage (before the common overlap stage). [lemma-nagata-qc-open-descends] gives $p_{Y,\\omega}^{-1}(W_{\\omega})=W$. In the raw datum the later open is the inverse image $W_r=t_{r\\omega}^{-1}(W_{\\omega})$ under the chart transition $t_{r\\omega}$, by [def-nagata-relative-gluing-datum-descent]. Compatibility of the chart projections gives $t_{r\\omega}p_{Y,r}=p_{Y,\\omega}$; hence $p_{Y,r}^{-1}(W_r)=p_{Y,\\omega}^{-1}(W_{\\omega})=W$ by composition of inverse images. This is the asserted recovery of the named open in the chart comparison of Step 3. Its open subscheme comparison is the restricted chart comparison, with the same projections as in Step 2.",
+   "uses": [
+    "lemma-nagata-qc-open-descends",
+    "def-nagata-relative-gluing-datum-descent",
+    "def-nagata-basechanged-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-relative-gluing-datum-descends.md",
+    "place": "## Proof; Stacks Tag 01ZM, limits.tex, lemma-descend-finite-presentation, proof of (1), stages i_2 through i_4"
+   }
+  },
+  {
+   "text": "Let $w=\\lambda_W$ be the common overlap stage in [def-nagata-relative-gluing-datum-descent]. It is above the chart stages and hence above $\\lambda_0$. The transition $S_w\\to S_{\\lambda_0}$ is affine, so it is quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence] (3). Since $S_{\\lambda_0}$ is qcqs, [lem-weil-pbc-qcqs-morphism-permanence] (2) shows that $S_w$ is qcqs.\nEach chart at $w$ is affine with a finitely presented algebra $B$ over its affine base chart: use the finite-presentation clause of [lemma-nagata-affine-fp-descends], the affine tensor comparison of Step 3, and preservation under base change in [lem-weil-pbc-qcqs-morphism-permanence] (3). On a principal open its algebra is $B_h=B[t]/(ht-1)$, still finitely presented over the same base ring. Thus each overlap open is locally of finite presentation over $S_w$ by [def-sbc-locally-finite-presentation]. At its individual descent stage $\\omega$ the open is quasi-compact by [lemma-nagata-qc-open-descends]. The chart transition to $\\omega$ is the base change of an affine transition of the bases, hence affine and quasi-compact by [lem-weil-pbc-affine-morphism-permanence] (1),(3). Its inverse image, the overlap open at $w$, is therefore quasi-compact by [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open]. The ambient affine chart is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Cover the overlap open by affine opens; the intersection of any two is quasi-compact by [lem-weil-pbc-quasi-separated-affine-cover-criterion] (1), applied in that chart, and clause (2) makes the overlap open quasi-separated. Applying [lem-weil-pbc-qcqs-morphism-permanence] (1) to its structure map to the quasi-separated $S_w$ now makes that map quasi-compact and quasi-separated. Together with local finite presentation, this is finite presentation by [def-sbc-locally-finite-presentation].\nThe construction places the source and target overlap models at this same stage before descending both directions of each overlap map. Thus [lemma-nagata-morphism-descends] applies to these finitely presented models over the qcqs $S_w$, with the chosen lifts of [def-nagata-relative-gluing-datum-descent], and says the base change of the chosen morphism at $\\lambda_\\varphi$ to $S$ is the original named $\\varphi$. The raw map at $r$ is its base change along $S_r\\to S_{\\lambda_\\varphi}$. Step 2 identifies its further base change to $S$ with the base change at $\\lambda_\\varphi$, using exactly the source and target identifications of Steps 3 and 4; the two composites have identical projections. Apply this separately to both directions of every overlap map. Since the raw diagram consists exactly of these charts, opens and maps, Steps 3--5 give all claimed component comparisons. No inverse or cocycle equality at $r$ is asserted.",
+   "uses": [
+    "lemma-nagata-morphism-descends",
+    "def-nagata-relative-gluing-datum-descent",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "lemma-nagata-qc-open-descends",
+    "lemma-nagata-affine-fp-descends",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-relative-gluing-datum-descends.md",
+    "place": "## Proof; Stacks Tag 01ZM, limits.tex, lemma-descend-finite-presentation, proof of (1), stages i_2 through i_4"
+   }
   }
  ],
  "proof_deps": [
+  "def-nagata-relative-gluing-datum-descent",
+  "lemma-nagata-directed-finite-upper-bound",
+  "def-pc-fibre-product",
+  "def-nagata-basechanged-system",
   "lemma-nagata-affine-fp-descends",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lemma-nagata-qc-open-descends",
   "lemma-nagata-morphism-descends",
-  "lemma-nagata-qc-open-descends"
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-relative-gluing-datum-descends.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*(assoc|map)|baseChange.*(comp|trans)|gluing.*descend",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; generic comparisons only, not the fixed raw descent datum.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Charts opens and morphisms descended to a common finite stage recover the original finite gluing datum after base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms, AlgebraicGeometry.Scheme.Cover.gluedCover_t', AlgebraicGeometry.Scheme.GlueData.openCover_f, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover_f, AlgebraicGeometry.Scheme.Cover.glueMorphisms, AlgebraicGeometry.Scheme.Pullback.gluing_t, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map, AlgebraicGeometry.Scheme.Pullback.gluing_J; generic comparisons only, not the fixed raw descent datum.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite diagram of schemes descended along an inverse limit recovers its charts overlap opens and maps after base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback, AlgebraicGeometry.Scheme",
+   "results": "12 hits: AlgebraicGeometry.IsOpenImmersion.isPullback, AlgebraicGeometry.IsOpenImmersion.isPullback_lift_id, AlgebraicGeometry.IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback, AlgebraicGeometry.Scheme.stalkMapIsoOfIsPullback, AlgebraicGeometry.isPullback_opens_inf, AlgebraicGeometry.isPullback_opens_inf_le, AlgebraicGeometry.isPullback_morphismRestrict, AlgebraicGeometry.Scheme.Hom.isPullback_resLE; generic comparisons only, not the fixed raw descent datum.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackRightPullbackFstIso|pullbackLeftPullbackSndIso|pullbackAssoc",
+   "results": "12 hits: Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean, Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean, Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean; generic comparisons only, not the fixed raw descent datum.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated base change of schemes is canonically isomorphic to direct base change and this identification commutes with morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, WeierstrassCurve.map_baseChange, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc; generic comparisons only, not the fixed raw descent datum.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -74,5 +193,34 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-nagata-relative-gluing-datum-descends",
+  "worker": "stage1",
+  "summary": "Expanded the finite-stage bookkeeping into the common-stage bound, an explicit natural iterated-fibre-product comparison, chart recovery, inverse-image recovery of opens, and both directions of overlap-map recovery. Reused all existing descent property nodes and the affine fibre-product Mathlib leaf. No statement change or new nodes. Second reading made the morphism-descent input hypotheses explicit and distinguished individual open stages from the common stage.",
+  "blueprint": "Realizes both sentences of the blueprint proof: the three corresponding property lemmas, then the finite common-stage transport with explicit compatibility. This is the raw-data segment i_2--i_4 of the unit route, not the later gluing-axiom stage.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "The generic fibre-product universal property gives the explicit inverse and naturality of iterated base change; no unit-specific theorem replaces this definition."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "The affine tensor-product description converts the chart algebra comparison into the scheme comparison, with the specified projections; no Nagata-unit node states this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-fa1b690b0",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-fa1b690b0 (reviewer sub-agent of L); spot-checked: Read the full mathematics and master blueprint/Stacks 01ZM route. Repaired two C1 citation gaps in Step 5 concerning qcqs of the later base and compactness/quasi-separatedness of transported overlaps, using existing nodes. Statement unchanged; no new nodes, duplicates, cycles, or target weakening. Corrected JSON and concrete source-by-source checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
