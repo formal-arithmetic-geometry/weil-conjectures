@@ -19,10 +19,10 @@ compatible with the two representations.
 - `CategoryTheory.Functor.RepresentableBy.existsUnique_iso`: two representing objects of a functor
   are isomorphic through a unique isomorphism compatible with the representations (blueprints
   `lem-sc-jacobian-unique`, `lem-pc-representable-unique`).
-- `CategoryTheory.Functor.isRepresentable_iff_exists_nonempty_iso`: a presheaf is representable
-  iff it is isomorphic to a functor of points (blueprint `def-pc-representable-functor`).
 - `CategoryTheory.bijective_yoneda_app_id`: the Yoneda bijection `τ ↦ τ_X(𝟙 X)` and its
   naturality (blueprint `lem-pc-yoneda`).
+- `CategoryTheory.Functor.isRepresentable_iff_exists_nonempty_iso`: a presheaf is representable
+  iff it is isomorphic to a functor of points (blueprint `def-pc-representable-functor`).
 -/
 
 @[expose] public section
@@ -78,22 +78,6 @@ theorem existsUnique_iso (e : F.RepresentableBy Y) (e' : F.RepresentableBy Y') :
 
 end CategoryTheory.Functor.RepresentableBy
 
-namespace CategoryTheory.Functor
-
-/-- **Representable functors.** A presheaf `F : Cᵒᵖ ⥤ Type v` is representable
-(`CategoryTheory.Functor.IsRepresentable`) if and only if it is isomorphic to the functor of
-points `h_P = yoneda.obj P = Hom(-, P)` of some object `P`. For `C` the category `Over S` of
-schemes over `S`, this is representability of `F` by a scheme over `S`; a representing object
-is unique up to unique isomorphism
-(`CategoryTheory.Functor.RepresentableBy.existsUnique_iso`).
-
-(blueprint: `def-pc-representable-functor`) -/
-theorem isRepresentable_iff_exists_nonempty_iso {C : Type u} [Category.{v} C]
-    (F : Cᵒᵖ ⥤ Type v) : F.IsRepresentable ↔ ∃ P : C, Nonempty (yoneda.obj P ≅ F) :=
-  ⟨fun _ ↦ ⟨F.reprX, ⟨F.reprW⟩⟩, fun ⟨_, ⟨e⟩⟩ ↦ IsRepresentable.mk' e⟩
-
-end CategoryTheory.Functor
-
 namespace CategoryTheory
 
 variable {C : Type u} [Category.{v} C]
@@ -118,3 +102,19 @@ theorem bijective_yoneda_app_id {X : C} {F : Cᵒᵖ ⥤ Type v} :
     fun τ η ↦ yonedaEquiv_comp τ η⟩
 
 end CategoryTheory
+
+namespace CategoryTheory.Functor
+
+/-- **Representable functors.** A presheaf `F : Cᵒᵖ ⥤ Type v` is representable
+(`CategoryTheory.Functor.IsRepresentable`) if and only if it is isomorphic to the functor of
+points `h_P = yoneda.obj P = Hom(-, P)` of some object `P`. For `C` the category `Over S` of
+schemes over `S`, this is representability of `F` by a scheme over `S`; a representing object
+is unique up to unique isomorphism
+(`CategoryTheory.Functor.RepresentableBy.existsUnique_iso`).
+
+(blueprint: `def-pc-representable-functor`) -/
+theorem isRepresentable_iff_exists_nonempty_iso {C : Type u} [Category.{v} C]
+    (F : Cᵒᵖ ⥤ Type v) : F.IsRepresentable ↔ ∃ P : C, Nonempty (yoneda.obj P ≅ F) :=
+  ⟨fun _ ↦ ⟨F.reprX, ⟨F.reprW⟩⟩, fun ⟨_, ⟨e⟩⟩ ↦ IsRepresentable.mk' e⟩
+
+end CategoryTheory.Functor
