@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sbc-def-base-change-square",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-weil-pbc-cartesian-square"
+  ]
  },
  "kind": "definition",
  "title": "Base-change square",
@@ -19,9 +21,66 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "base change square of schemes Cartesian square inverse image functors",
+   "results": "AlgebraicGeometry.pullbackSpecIso_inv_fst', AlgebraicGeometry.pullbackSpecIso_inv_snd, AlgebraicGeometry.pullbackSpecIso_inv_fst, AlgebraicGeometry.pullbackSpecIso_inv_snd_assoc, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc, AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the full definition, including small-etale inverse-image comparison and coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme pullback square inverse image functor",
+   "results": "loogle: Unknown identifier `Scheme`",
+   "date": "2026-10-14",
+   "verdict": "invalid query: loogle: Unknown identifier `Scheme`"
+  },
+  {
+   "tool": "grep",
+   "query": "base.change.square|pullback.*Scheme",
+   "results": "none (searched Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the full definition, including small-etale inverse-image comparison and coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical isomorphism between compositions of inverse image functors for a commutative square of schemes on small etale sites",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Hom.inv_app, AlgebraicGeometry.Scheme.inv_app",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the full definition, including small-etale inverse-image comparison and coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback",
+   "results": "CategoryTheory.IsPullback, CategoryTheory.IsPullback.cone, CategoryTheory.IsPullback.hasPullback, CategoryTheory.IsPullback.flip, CategoryTheory.IsPullback.toCommSq, CategoryTheory.IsPullback.flip_iff, CategoryTheory.IsPullback.of_hasPullback, CategoryTheory.IsPullback.isoPullback",
+   "date": "2026-10-14",
+   "verdict": "partial match: Cartesian-square data only; no small-etale inverse-image comparison or coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullbackIso|compIso|baseChange",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean (searched AlgebraicGeometry/Sites)",
+   "date": "2026-10-14",
+   "verdict": "no exact match for the full definition, including small-etale inverse-image comparison and coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "commutative square of schemes inverse image sheaves composition canonical isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CommSq",
+   "results": "CategoryTheory.CommSq, CategoryTheory.CommSq.HasLift, CategoryTheory.CommSq.LiftStruct, CategoryTheory.CommSq.of_arrow, CategoryTheory.CommSq.eq_of_epi, CategoryTheory.CommSq.eq_of_mono, CategoryTheory.CommSq.flip, CategoryTheory.CommSq.subsingleton_liftStruct_of_epi",
+   "date": "2026-10-14",
+   "verdict": "partial match: commutativity only, not chosen Cartesian identification and coherent small-etale inverse-image comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -46,5 +105,20 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-def-bc"
+ "unit": "sk-def-bc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-def-base-change-square",
+  "worker": "stage1",
+  "summary": "Checked the definition against its source, the chapter and unit, and both statement dependencies. This is the existing Cartesian-square definition with corners renamed and its inverse-image comparison inverted. The statement and two statement dependencies are retained; no proof is required for a definition, and no new nodes are needed. Project source supplies a comparison for a commutative square but no single declaration packages every clause of this chosen Cartesian datum. Mathlib searches found generic pullback-square data, not the whole definition.",
+  "blueprint": "The entire definition in sbc-def-base-change-square.md: the diagram and chosen Cartesian identification are def-weil-pbc-cartesian-square with (X_prime,X,Y_prime,Y) renamed (Y,X,T,S); the displayed theta is the inverse of that node's comparison, and identity/pasting compatibility is inherited under inversion. Scheme/morphism conventions are the other retained dependency. No proof paragraphs occur in this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-226ae7ea8",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-226ae7ea8 (reviewer sub-agent of L); spot-checked: Read the full definition, cited statements, blueprint sources, report, and unit/chapter route. Verified inverse-comparison orientation, identity/pasting coherence, edge cases, and the exact master's étale coefficient categories and unit–square–counit morphism. No new nodes, cycles, repairable delivery faults, or accepted tool_uses. Detailed findings in review.md."
+ }
 }
