@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-derived-stalk-conservative",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Conservativity of geometric stalks on the derived category",
@@ -14,48 +14,114 @@
  },
  "stmt_deps": [
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-etale-site"
+  "def-weil-pbc-geometric-stalks"
  ],
  "proof": [
   {
-   "text": "By [def-weil-pbc-derived-categories] the category $\\Dplus(T_{\\Et})$ is the\nfull subcategory of the Verdier localization of the complex category at the\nquasi-isomorphisms consisting of the bounded-below complexes, so a morphism\nof complexes is an isomorphism of $\\Dplus(T_{\\Et})$ precisely when it is a\nquasi-isomorphism, that is, precisely when it induces an isomorphism on every\ncohomology sheaf.",
+   "text": "Write $\\mathcal A=\\Ab(T_{\\Et})$. By [def-weil-pbc-derived-categories], $D^+(T_{\\Et})$ is a strictly full subcategory of $D(\\mathcal A)$, so invertibility of a morphism between its objects is the same in these two categories. By [def-weil-abstract-derived-category], the functors $H^i$ on $D(\\mathcal A)$ factor the cohomology of complexes, and a complex map is a quasi-isomorphism exactly when all its $H^i$ maps are invertible. For a complex map $f$, if all $H^i(f)$ are invertible, then $Q(f)$ is invertible by localization. Conversely, if $Q(f)$ is invertible, applying each functor $H^i$ shows $H^i(f)$ invertible. This criterion also holds for an arbitrary derived morphism $u$: the calculus of fractions in [lem-pc-quasi-isomorphisms-multiplicative-system] writes it as $Q(f)\\circ Q(s)^{-1}$ for a roof $K\\xleftarrow{s}M\\xrightarrow{f}L$ with $s$ a quasi-isomorphism. Thus $H^i(f)=H^i(u)\\circ H^i(s)$ under the stated factorization identifications. If every $H^i(u)$ is invertible, $f$ is a quasi-isomorphism, and $u^{-1}=Q(s)\\circ Q(f)^{-1}$. The reverse implication follows by applying the functors $H^i$ to $u$ and its inverse.",
    "uses": [
-    "def-weil-pbc-derived-categories"
+    "def-weil-pbc-derived-categories",
+    "def-weil-abstract-derived-category",
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RT (lemma-acyclic) and 05RU (definition-unbounded-derived-category); calculus-of-fractions application to the first blueprint proof paragraph"
+   }
   },
   {
-   "text": "Assume that $\\mathcal H^i(K)_{\\bar t}\\to\\mathcal H^i(L)_{\\bar t}$ is an\nisomorphism for every geometric point $\\bar t$ and every $i$. By\n[prop-weil-pbc-geometric-stalks-exact] the stalk functor is exact, so it\ncommutes with the formation of cohomology sheaves and the stalk of the\nmorphism $\\mathcal H^i(K)\\to\\mathcal H^i(L)$ of sheaves of\n[def-weil-pbc-etale-sheaves] at $\\bar t$ is the displayed isomorphism. By\n[lemma-weil-pbc-geometric-stalk-conservative] each $\\mathcal H^i(K)\\to\\mathcal\nH^i(L)$ is therefore an isomorphism of sheaves, so $K\\to L$ is a\nquasi-isomorphism, hence an isomorphism of $\\Dplus(T_{\\Et})$.",
+   "text": "Assume all displayed maps are isomorphisms. For each integer $i$, $H^i(u)$ is a morphism in the abelian etale sheaf category of [def-weil-pbc-etale-sheaves], by [def-weil-pbc-derived-categories]. Its geometric stalk maps are exactly the maps in the hypothesis; no interchange of stalks with cohomology of a stalk complex is needed because the display already takes the stalk of the cohomology sheaf. Apply [lemma-weil-pbc-geometric-stalk-conservative] to $H^i(u)$: it is an isomorphism of sheaves. Step 1 then proves $u$ invertible in $D^+(T_{\\Et})$.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
     "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-derived-categories",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-derived-stalk-conservative.md",
+    "place": "Proof, second paragraph; apply sheaf conservativity directly to the displayed cohomology-sheaf maps"
+   }
   },
   {
-   "text": "Conversely, an isomorphism of $\\Dplus(T_{\\Et})$ is a quasi-isomorphism, so it\ninduces isomorphisms $\\mathcal H^i(K)\\to\\mathcal H^i(L)$ for all $i$;\napplying the exact stalk functor of\n[prop-weil-pbc-geometric-stalks-exact] gives the asserted isomorphisms on\ngeometric stalks.",
+   "text": "If $u$ is invertible, the cohomology functors of [def-weil-abstract-derived-category] carry $u$ and its inverse to mutually inverse sheaf maps $H^i(u)$ and $H^i(u^{-1})$. Taking the geometric stalks of [def-weil-pbc-geometric-stalks] carries their two identity composites to identity composites: the maps of stalks are induced by the maps on sections in the defining colimit, which respect identity and composition. Hence each displayed stalk map is an isomorphism, with inverse the stalk of $H^i(u^{-1})$.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact"
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-derived-stalk-conservative.md",
+    "place": "Proof, third paragraph; functoriality gives the inverse explicitly"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-derived-categories",
-  "prop-weil-pbc-geometric-stalks-exact",
+  "def-weil-abstract-derived-category",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
   "def-weil-pbc-etale-sheaves",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-geometric-stalks"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-derived-stalk-conservative.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived category morphism isomorphism if and only if cohomology sheaf stalk maps are isomorphisms",
+   "results": "DerivedCategory.isIso_Q_map_iff_quasiIso (Mathlib/Algebra/Homology/DerivedCategory/Basic); TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso (Mathlib/Topology/Sheaves/Stalks); no single theorem combining derived and etale geometric stalks",
+   "date": "2026-10-14",
+   "verdict": "generalization: separate derived quasi-isomorphism and topological stalk criteria"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, homologyFunctor, sheafFiber, IsIso",
+   "results": "0 hits; unknown identifier homologyFunctor",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived category.*stalk|stalk.*cohomology in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category morphism detected by geometric stalks of cohomology sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalkwise criterion for isomorphism in bounded below derived category of sheaves",
+   "results": "TopCat.Presheaf.isIso_of_stalkFunctor_map_iso and isIso_iff_stalkFunctor_map_iso; no bounded-below derived etale theorem",
+   "date": "2026-10-14",
+   "verdict": "generalization: topological sheaf stalk criterion only"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isIso_Q_map_iff_quasiIso",
+   "results": "DerivedCategory.isIso_Q_map_iff_quasiIso (Mathlib/Algebra/Homology/DerivedCategory/Basic)",
+   "date": "2026-10-14",
+   "verdict": "match: derived-category quasi-isomorphism clause"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_Q_map_iff_quasiIso|stalkFunctor_map_iso in Mathlib/Algebra Mathlib/Topology",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -85,5 +151,21 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-weil-pbc-derived-stalk-conservative",
+  "worker": "stage1",
+  "summary": "Repair: retained status split against the current DAG baseline; expanded the localization criterion using the existing abstract-derived-category and calculus-of-fractions nodes, including roofs for arbitrary derived morphisms. Applied geometric-stalk conservativity directly to cohomology sheaves; removed the unnecessary exactness dependency because the statement already displays stalks of cohomology sheaves. Added sources to every step and regenerated substantive verbatim citations. No statement change, new node or unit realization.",
+  "blueprint": "First paragraph: the cohomology isomorphism criterion, now proved through the cited localization and roof calculus; second paragraph: stalk conservativity on each cohomology sheaf; third paragraph: apply cohomology and stalk functoriality to the inverse.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-ce4f2a6fa",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-ce4f2a6fa (reviewer sub-agent of L); spot-checked: Read the complete item, source, unit/chapter route, cited DAG statements, Stacks tags 05RT/05RU, report, and delivery instructions. Verified hypotheses, roof localization argument, stalk conservativity, coefficient category, edge cases, citations, searches, route, and duplicate checks. Wrote review.md."
+ }
 }
