@@ -687,6 +687,177 @@ theorem continuous_graph (x : Spec (.of K)) :
   rw [← key g]
   exact Iff.rfl
 
+omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- Two endomorphisms of the fibre functor agreeing at the points `a_j` agree. -/
+lemma natTrans_ext_point {η η' : fiber y ⟶ fiber y}
+    (h : ∀ j, η.app ((obj y).obj j) (point y j) = η'.app ((obj y).obj j) (point y j)) :
+    η = η' := by
+  ext P x
+  obtain ⟨j, φ, rfl⟩ := exists_hom_point y P x
+  have e₁ := ConcreteCategory.congr_hom (η.naturality φ) (point y j)
+  have e₂ := ConcreteCategory.congr_hom (η'.naturality φ) (point y j)
+  simp only [FintypeCat.comp_apply] at e₁ e₂
+  rw [e₁, e₂, h j]
+
+omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- The automorphism of the Galois cover `A_j` through which a loop `g` acts on the point `a_j`:
+the unique `σ` with `σ⁻¹ a_j = g⁻¹ a_j`. -/
+lemma existsUnique_autAt (j : Index y) (g : Aut (fiber y)) :
+    ∃! σ : Aut ((obj y).obj j),
+      (fiber y).map σ.inv (point y j) = g.inv.app ((obj y).obj j) (point y j) := by
+  obtain ⟨τ, hτ, hu⟩ := (evaluation_aut_bijective_of_isGalois (fiber y) ((obj y).obj j)
+    (point y j)).existsUnique (g.inv.app ((obj y).obj j) (point y j))
+  refine ⟨τ.symm, hτ, fun σ hσ ↦ ?_⟩
+  have := hu σ.symm hσ
+  rw [← this]
+  rfl
+
+/-- The automorphism of `A_j` through which a loop acts on the point `a_j`. -/
+noncomputable def autAt (j : Index y) (g : Aut (fiber y)) : Aut ((obj y).obj j) :=
+  (existsUnique_autAt y j g).exists.choose
+
+omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
+lemma autAt_spec (j : Index y) (g : Aut (fiber y)) :
+    (fiber y).map (autAt y j g).inv (point y j) = g.inv.app ((obj y).obj j) (point y j) :=
+  (existsUnique_autAt y j g).exists.choose_spec
+
+omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- A loop acts on the point `a_j` through `autAt`. -/
+lemma hom_app_point (j : Index y) (g : Aut (fiber y)) :
+    g.hom.app ((obj y).obj j) (point y j) = (fiber y).map (autAt y j g).hom (point y j) := by
+  have e := ConcreteCategory.congr_hom (g.inv.naturality (autAt y j g).hom) (point y j)
+  simp only [FintypeCat.comp_apply] at e
+  rw [← autAt_spec] at e
+  have e₁ := ConcreteCategory.congr_hom ((fiber y).mapIso (autAt y j g)).inv_hom_id (point y j)
+  simp only [Functor.mapIso_inv, Functor.mapIso_hom, FintypeCat.comp_apply,
+    FintypeCat.id_apply] at e₁
+  rw [e₁] at e
+  calc g.hom.app ((obj y).obj j) (point y j)
+      = g.hom.app _ (g.inv.app _ ((fiber y).map (autAt y j g).hom (point y j))) := by rw [e]
+    _ = _ := inv_app_hom_app g.symm _ _
+
+/-- The graph `x ↦ (x, g x)` of the transport along a loop. -/
+noncomputable abbrev loopGraph (g : Aut (fiber y)) :
+    cover y ⟶ Limits.pullback (proj y) (proj y) :=
+  Limits.pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g).hom
+    (by rw [Category.id_comp, transport_hom, transportHom_proj])
+
+/-- The graph of the transport along a loop `g` at the stage `A_j`: the graph of `autAt j g`. -/
+lemma loopGraph_comp_pairCone (g : Aut (fiber y)) (j : Index y) :
+    loopGraph y g ≫ (pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j =
+      limit.π (diagram y) j ≫ (autAt y j g).inv.hom.left ≫
+        Limits.pullback.lift (f := p y j) (g := p y j) (autAt y j g).hom.hom.left (𝟙 _)
+          (by rw [Category.id_comp]; exact hom_left_comp (autAt y j g).hom) := by
+  have hinvhom : (autAt y j g).inv.hom.left ≫ (autAt y j g).hom.hom.left = 𝟙 _ :=
+    congrArg (fun ψ ↦ ψ.hom.left) (autAt y j g).inv_hom_id
+  refine Limits.pullback.hom_ext ?_ ?_
+  · simp only [Category.assoc, Limits.pullback.lift_fst,
+      Limits.pullback.lift_fst_assoc, Category.id_comp]
+    rw [hinvhom]
+    exact (Category.comp_id _).symm
+  · simp only [Category.assoc, Limits.pullback.lift_snd,
+      Limits.pullback.lift_snd_assoc, Category.comp_id]
+    have h2 := π_comp_eq_toObj y j (autAt y j g).inv
+    rw [autAt_spec] at h2
+    rw [h2]
+    change (transport g).hom ≫ limit.π (diagram y) j = _
+    rw [π_eq_toObj y j, transport_hom, transportHom_toObj]
+
+/-- **The loop of a point of `Ỹ_y ×_Y Ỹ_y` is unique**: the graphs of the transports along
+distinct loops are disjoint. -/
+lemma eq_of_loopGraph_eq {g g' : Aut (fiber y)} {x x' : cover y}
+    (h : (loopGraph y g).base x = (loopGraph y g').base x') : g = g' := by
+  have hj (j : Index y) : autAt y j g = autAt y j g' := by
+    have e : (loopGraph y g ≫ (pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j).base
+        x = (loopGraph y g' ≫ (pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j).base
+          x' := by
+      simp only [Scheme.Hom.comp_apply, h]
+    rw [loopGraph_comp_pairCone, loopGraph_comp_pairCone] at e
+    simp only [Scheme.Hom.comp_apply] at e
+    exact aut_eq_of_pullback_lift_eq y _ _ _ _ _ e
+  have hinv : g.inv = g'.inv := natTrans_ext_point y fun j ↦ by
+    rw [← autAt_spec, ← autAt_spec, hj j]
+  exact Iso.ext (by rw [← Iso.inv_eq_inv]; exact hinv)
+
+/-- The loop `g ∈ π₁(Y, y)` of a point `q = (x, g x)` of `Ỹ_y ×_Y Ỹ_y`. -/
+noncomputable def loop (q : (Limits.pullback (proj y) (proj y) : Scheme.{u})) : Aut (fiber y) :=
+  (exists_graph y q).choose
+
+/-- The loop of `(x, g x)` is `g`. -/
+lemma loop_loopGraph (g : Aut (fiber y)) (x : cover y) : loop y ((loopGraph y g).base x) = g :=
+  eq_of_loopGraph_eq y (exists_graph y ((loopGraph y g).base x)).choose_spec.choose_spec
+
+/-- The automorphism of `A_j ×_Y A_j = ∐_{σ ∈ Aut A_j} A_j` indexing the summand of a point. -/
+noncomputable def pairIndex (j : Index y)
+    (w : (Limits.pullback (p y j) (p y j) : Scheme.{u})) : Aut ((obj y).obj j) :=
+  (exists_aut_of_mem_pullback y ((obj y).obj j) w).choose
+
+omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- The summand index is locally constant. -/
+lemma isLocallyConstant_pairIndex (j : Index y) : IsLocallyConstant (pairIndex y j) := by
+  let gr (σ : Aut ((obj y).obj j)) : (diagram y).obj j ⟶ Limits.pullback (p y j) (p y j) :=
+    Limits.pullback.lift (f := p y j) (g := p y j) σ.hom.hom.left (𝟙 _)
+      (by rw [Category.id_comp]; exact hom_left_comp σ.hom)
+  have : IsIso (Sigma.desc fun m : ULift.{u + 1} (Aut ((obj y).obj j)) ↦ gr m.down) :=
+    isIso_graphDesc y ((obj y).obj j)
+  have hgr (σ : Aut ((obj y).obj j)) : IsOpenImmersion (gr σ) := by
+    rw [← Sigma.ι_desc (fun m : ULift.{u + 1} (Aut ((obj y).obj j)) ↦ gr m.down) ⟨σ⟩]
+    infer_instance
+  have h (σ : Aut ((obj y).obj j)) : pairIndex y j ⁻¹' {σ} = Set.range (gr σ).base := by
+    ext w
+    constructor
+    · intro hw
+      have := (exists_aut_of_mem_pullback y ((obj y).obj j) w).choose_spec.choose_spec
+      rw [Set.mem_preimage, Set.mem_singleton_iff] at hw
+      refine ⟨(exists_aut_of_mem_pullback y ((obj y).obj j) w).choose_spec.choose, ?_⟩
+      rw [← hw]
+      exact this
+    · rintro ⟨z, rfl⟩
+      exact aut_eq_of_pullback_lift_eq y _ _ _ _ _
+        (exists_aut_of_mem_pullback y ((obj y).obj j) ((gr σ).base z)).choose_spec.choose_spec
+  intro s
+  rw [← Set.biUnion_preimage_singleton]
+  exact isOpen_biUnion fun σ _ ↦ h σ ▸ (gr σ).isOpenEmbedding.isOpen_range
+
+/-- The automorphism of `A_j` of the loop of a point is the summand index of its image in
+`A_j ×_Y A_j`. -/
+lemma autAt_loop (j : Index y) (q : (Limits.pullback (proj y) (proj y) : Scheme.{u})) :
+    autAt y j (loop y q) = pairIndex y j
+      (((pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j).base q) := by
+  obtain ⟨x, hx⟩ := (exists_graph y q).choose_spec
+  have e := congrArg (fun h ↦ h.base x) (loopGraph_comp_pairCone y (loop y q) j)
+  simp only [Scheme.Hom.comp_apply] at e
+  change (loopGraph y (loop y q)).base x = q at hx
+  rw [hx] at e
+  have hw := (exists_aut_of_mem_pullback y ((obj y).obj j)
+    (((pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j).base q)).choose_spec
+  replace hw := hw.choose_spec
+  exact aut_eq_of_pullback_lift_eq y _ _ _ _ _ (e.symm.trans hw.symm)
+
+/-- **The loop of a point of `Ỹ_y ×_Y Ỹ_y` depends continuously on the point.** -/
+theorem continuous_loop : Continuous (loop y) := by
+  refine continuous_induced_rng.2 (continuous_pi fun P ↦ ?_)
+  refine IsLocallyConstant.continuous ?_
+  have hx (x : (fiber y).obj P) : IsLocallyConstant fun q ↦ (loop y q).hom.app P x := by
+    obtain ⟨j, φ, rfl⟩ := exists_hom_point y P x
+    have h (q : (Limits.pullback (proj y) (proj y) : Scheme.{u})) :
+        (loop y q).hom.app P ((fiber y).map φ (point y j)) = (fiber y).map φ ((fiber y).map
+          (pairIndex y j (((pairCone (diagram y) (p y) (map_p y) (proj y)
+            (π_p y)).π.app j).base q)).hom (point y j)) := by
+      have e := ConcreteCategory.congr_hom ((loop y q).hom.naturality φ) (point y j)
+      simp only [FintypeCat.comp_apply] at e
+      rw [e, hom_app_point, autAt_loop]
+    simp only [h]
+    exact (((isLocallyConstant_pairIndex y j).comp_continuous
+      (((pairCone (diagram y) (p y) (map_p y) (proj y) (π_p y)).π.app j).base.hom.continuous)).comp
+        fun σ ↦ (fiber y).map φ ((fiber y).map σ.hom (point y j)))
+  rw [IsLocallyConstant.iff_eventually_eq]
+  intro q₀
+  filter_upwards [Filter.eventually_all.2 fun x ↦ (IsLocallyConstant.iff_eventually_eq _).1
+    (hx x) q₀] with q hq
+  change (loop y q).app P = (loop y q₀).app P
+  exact Iso.ext (ConcreteCategory.hom_ext _ _ hq)
+
 end Graph
 
 end QCQS

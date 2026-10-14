@@ -111,6 +111,16 @@ structure UniversalCovers where
     Continuous fun g : Aut (fiber y) ↦ (pullback.lift (f := proj y) (g := proj y) (pt y)
       (pt y ≫ (transport g).hom)
       (by rw [Category.assoc, transport_proj])).base x
+  /-- The loop `g ∈ π₁(Y, y)` of a point `(x, g x)` of `Ỹ_y ×_Y Ỹ_y`. -/
+  loop (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
+    (pullback (proj y) (proj y) : Scheme.{u}) → Aut (fiber y)
+  /-- The loop of a point of `Ỹ_y ×_Y Ỹ_y` depends continuously on the point. -/
+  continuous_loop (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : Continuous (loop y)
+  /-- The loop of `(x, g x)` is `g`: the graphs of the transports along distinct loops are
+  disjoint. -/
+  loop_graph (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (fiber y)) (x : cover y) :
+    loop y ((pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g).hom
+      (by rw [Category.id_comp, transport_proj])).base x) = g
 
 /-- **Existence of universal profinite étale covers** over a connected quasi-compact
 quasi-separated scheme: the limits `Ỹ_y = lim A` over the pointed Galois finite étale `Y`-schemes
@@ -136,6 +146,9 @@ theorem nonempty_universalCovers [ConnectedSpace Y] [CompactSpace Y] [QuasiSepar
      pt_map := UniversalCover.pt_map
      map_transport := UniversalCover.map_transport
      exists_graph y q := UniversalCover.exists_graph y q
-     continuous_graph y x := UniversalCover.continuous_graph y x }⟩
+     continuous_graph y x := UniversalCover.continuous_graph y x
+     loop y := UniversalCover.loop y
+     continuous_loop y := UniversalCover.continuous_loop y
+     loop_graph y g x := by exact UniversalCover.loop_loopGraph y g x }⟩
 
 end AlgebraicGeometry.Scheme
