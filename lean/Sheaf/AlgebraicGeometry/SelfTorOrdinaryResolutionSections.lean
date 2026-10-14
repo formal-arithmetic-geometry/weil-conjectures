@@ -14,11 +14,8 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
-import Sheaf.AlgebraicGeometry.AffineChartTotalTensor
-import Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison
+import Sheaf.AlgebraicGeometry.SelfTorOrdinaryLocalizedComparisons
+import Sheaf.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
 
 /-! # Affine sections of ordinary tensor with a K-flat quotient resolution
 
@@ -32,6 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Comparing the two lifts requires elaboration of restricted tensor complexes.
 /-- Affine tensor-resolution homology computes the sections of the ordinary total tensor
 with a global K-flat resolution. This is a statement entirely about complexes and homology;
 no derived tensor or existence of algebraic resolution lifts occurs in its conclusion.
@@ -112,6 +111,23 @@ theorem exists_selfTor_ordinary_resolution_sections
             let e := ((TC.obj R.complex).sc n).mapHomologyIso
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
-            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by sorry
+            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
+  obtain ⟨c, hc⟩ := exists_selfTor_ordinary_localized_comparisons i K q hK hq n
+  refine ⟨c, ?_⟩
+  intro V U h hbasic A C I J φ P R TA TC ψ a k hψ ha hk
+  obtain ⟨ψ₀, a₀, k₀, hψ₀, ha₀, hk₀, hc₀⟩ := hc V U h hbasic
+  have hψeq : ψ₀ = ψ := by
+    apply RingHom.ext
+    intro y
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective y
+    exact (hψ₀ x).trans (hψ x).symm
+  subst ψ₀
+  obtain ⟨H⟩ := ModuleCat.quotient_tensor_resolution_lift_homotopy
+    (i.ker.ideal U) (i.ker.ideal V) (Y.presheaf.map (homOfLE h).op).hom
+    (projectiveResolution _) (projectiveResolution _) ψ a₀ a k₀ k hψ ha₀ ha hk₀ hk
+  have heq := H.homologyMap_eq n
+  intro e x
+  simpa only [heq] using hc₀ x
+
 
 end AlgebraicGeometry

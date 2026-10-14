@@ -1,0 +1,175 @@
+{
+ "id": "new-h3-self-tor-ordinary-localized-comparisons",
+ "kind": "statement",
+ "title": "Ordinary affine tensor coordinates compatible with one chosen comparison",
+ "statement": "Let i:Z→Y be a closed immersion of schemes [def-weil-closed-immersion, def-pc-scheme]. Put B=i_*O_Z, and let q:K→B[0] be a quasi-isomorphism [def-pc-quasi-iso-modules] from a K-flat complex of O_Y-modules [def-pc-kflat-complex]. For n≥0 set Q=H^{-n}(Tot(K⊗B[0])), using ordinary total tensor [def-pc-tensor-complex-sheaves]. On every affine U put A_U=Γ(Y,U), I_U=ker(i^sharp)(U), P_U the chosen projective resolution of A_U/I_U and T_U=P_U⊗(A_U/I_U) [def-weil-pbc-module-chain-complex-homology]. There are A_U-linear equivalences c_U:H_n(T_U)≃Γ(U,Q) such that for each basic inclusion V⊆U there exist a quotient ring map psi and chain maps a:P_U→Res_phi(P_V), k:T_U→Res_phi(T_V), satisfying psi(mk(x))=mk(phi(x)), pi_V a_0=psi pi_U and k_j(x⊗y)=a_j(x)⊗psi(y). For these chosen maps, restriction sends c_U(x) to c_V(e(H_n(k)(x))) for all x. Here phi is ring restriction and e is the exact restriction-of-scalars homology isomorphism. Compatibility with other augmented lifts is not asserted.",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-pc-quasi-iso-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), affine tensor calculation; Tags 06YG and 06YB for K-flat comparison, 01I9 for affine sections, and 00LS(1) for choosing augmented resolution lifts"
+ },
+ "proof": [
+  {
+   "text": "Restrict K,q to each affine chart. Canonically identify the restricted closed structure sheaf with tilde(A/I). Sheafify the chosen projective quotient resolution and its augmentation, then extend it along embeddingDownNat to nonpositive cochain degrees. Exactness of tilde and extension gives a quasi-isomorphism to B[0]. Projectivity implies module flatness; localization gives flat tilde stalks. The resulting bounded-above flat sheaf complex is K-flat, while restriction of K is K-flat.",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-kflat-open-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let L_U denote the sheafified and extended quotient resolution. Use the explicitly augmented tensor zigzag K|U tensor B|U[0] ← K|U tensor L_U → B|U[0] tensor L_U → L_U tensor B|U[0]. The first two arrows are the tensors of the local augmentation and restricted q; the last is braiding. The acyclic-cone K-flat tensor comparison, as in the open K-flat tensor homology comparison argument, makes the first two arrows quasi-isomorphisms. Thus their induced homology maps are invertible. The underived affine chart total tensor comparison identifies the last tensor with tilde of the extended quotient tensor resolution. Exact tilde commutes with homology, embeddingDownNat identifies degree -n with chain degree n, and the tilde affine-section unit gives d_U.",
+   "uses": [
+    "lem-pc-open-kflat-tensor-homology-comparison",
+    "lem-pc-affine-chart-total-tensor",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each basic V inside U, use ideal restriction and new-p4-quotient-resolution-tensor-comparison to obtain one quotient homomorphism psi, augmented resolution comparison a, and tensor comparison k. Use the tilde adjunction to associate the scalar-extended sheaf map to a. Its augmentation square commutes by the augmentation equation and full faithfulness of tilde. Pure-tensor extensionality identifies the associated tensor map with k. Compare the U zigzag restricted to V with the V zigzag. All squares commute by tensor functoriality, the augmentation square and naturality of braiding. Take homology and invert the quasi-isomorphism legs. Naturality of the section unit and exact restriction-of-scalars homology gives the section equation for this chosen comparison only. Do not prove independence from other lifts in this step.",
+   "uses": [
+    "new-p4-quotient-resolution-tensor-comparison",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-affine-chart-total-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-chart-total-tensor",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-kflat-open-restriction",
+  "lem-pc-open-kflat-tensor-homology-comparison",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "new-p4-quotient-resolution-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Affine model argument for 08DX(2), retaining only compatibility with one chosen augmented comparison; existence of the comparison follows the projective version of the proof of 00LS(1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine homology sections of ordinary tensor with K-flat quotient resolution natural for one chosen augmented comparison",
+   "results": "Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Scheme.Hom.flat_appLE; AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-14",
+   "verdict": "Flat tensor exactness APIs, no coherent affine sheaf-resolution comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveResolution.lift\"",
+   "results": "ProjectiveResolution.lift, lift_commutes_zero, liftIdHomotopy, liftCompHomotopy",
+   "date": "2026-10-14",
+   "verdict": "Algebraic comparison only. Restriction-of-scalars target need not have projective terms; use the existing quotient-resolution comparison theorem for that step."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary.*localized.*comparison|selfTor.*ordinary",
+   "results": "Search service: no hits. Local rg: SelfTorAmbientLocalizedComparisons computes derived tensor and imports the assigned item, hence cannot be used here. AffineQuotientResolutionSheafification and AffineChartTotalTensor supply components, but no natural ordinary section comparison. Whole-blueprint search for self Tor returned no matching imported node.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate or shorter theorem; geometric compatibility for one comparison remains the new subproblem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine tensor homology section comparison for K-flat sheaf resolution of quotient compatible with augmented projective resolution maps",
+   "results": "service unavailable: Internal Server Error",
+   "status": "unavailable",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorOrdinaryResolutionSections",
+  "date": "2026-10-14",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Ordinary affine self-Tor calculation in the local Koszul computation: affine coordinates and compatibility with one chosen augmented resolution comparison, before homotopy independence.",
+   "via": [
+    "new-b3-self-tor-ordinary-resolution-sections",
+    "new-h2-self-tor-ambient-localized-comparisons",
+    "new-a3-self-tor-ambient-section-coordinates",
+    "lem-pc-self-tor-ambient-resolution-charts",
+    "new-p4-self-tor-augmented-resolution-charts",
+    "new-q1-self-tor-chosen-resolution-charts",
+    "new-t2-self-tor-target-restriction-coordinates",
+    "new-t2-self-tor-target-basic-localization",
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorOrdinaryLocalizedComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorOrdinaryLocalizedComparisons.lean",
+  "declaration": "AlgebraicGeometry.exists_selfTor_ordinary_localized_comparisons",
+  "statement": "theorem exists_selfTor_ordinary_localized_comparisons\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [IsClosedImmersion i]\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (q : K ⟶ (CochainComplex.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n        ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)))\n    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) (hq : QuasiIso q) (n : ℕ) :\n    letI := SheafOfModules.monoidalCategory Y.sheaf\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := CochainComplex.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let Q := (CochainComplex.mapBifunctor K (S.obj B)\n      (curriedTensor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).homology\n        (-(n : ℤ))\n    ∃ c : ∀ U : Y.affineOpens,\n        ((((tensorRight (ModuleCat.of (Γ(Y, U.1) : Type u)\n          ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).mapHomologicalComplex (.down ℕ)).obj\n            (projectiveResolution (ModuleCat.of (Γ(Y, U.1) : Type u)\n              ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).complex).homology n) ≃ₗ[Γ(Y, U.1)]\n              Q.val.obj (op U.1),\n      ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n        (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1),\n          let A := (Γ(Y, U.1) : Type u)\n          let C := (Γ(Y, V.1) : Type u)\n          let I := i.ker.ideal U\n          let J := i.ker.ideal V\n          let φ := (Y.presheaf.map (homOfLE h).op).hom\n          let P := projectiveResolution (ModuleCat.of A (A ⧸ I))\n          let R := projectiveResolution (ModuleCat.of C (C ⧸ J))\n          let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n            (.down ℕ)\n          let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex\n            (.down ℕ)\n          ∃ (ψ : (A ⧸ I) →+* (C ⧸ J))\n            (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj R.complex)\n            (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj (TC.obj R.complex)),\n            (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) ∧\n            (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) ∧\n            (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n              k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) ∧\n            let e := ((TC.obj R.complex).sc n).mapHomologyIso\n              (ModuleCat.restrictScalars φ)\n          ∀ x, Q.val.map (homOfLE h).op (c U x) =\n            c V (e.hom (HomologicalComplex.homologyMap k n x))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T045611-L-1573488",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T045611-L-1573488",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
