@@ -1,0 +1,111 @@
+{
+ "id": "new-lem-pc-affine-tensor-pullback-stalk-coordinates-at",
+ "kind": "statement",
+ "title": "Pointwise affine tensor pullback stalk coordinate",
+ "statement": "The displayed affine tensor pullback stalk coordinate equation for each localized class y.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8"
+ },
+ "stmt_deps": [
+  "lem-pc-affine-tensor-pullback-stalk-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Expand the canonical localization and stalk coordinates and verify the affine localization identity.",
+   "uses": [
+    "lem-pc-affine-tensor-pullback-stalk-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-tensor-pullback-stalk-coordinates"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "stalk localization map homology affine tensor pullback",
+   "results": "No exact declaration.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "affineDerivedCohomologyStalkIso map_comp",
+   "results": "No exact match.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "affineTensorPullbackHomologyStalkIso_counit_coordinate",
+   "results": "No prior declaration.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine tensor pullback stalk coordinate localization",
+   "results": "No exact match.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-tensor-pullback-stalk-coordinates",
+   "place": "pointwise decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTensorPullbackStalkCoordinates.lean",
+  "declaration": "AlgebraicGeometry.affineTensorPullbackHomologyStalkIso_counit_coordinate",
+  "statement": "theorem affineTensorPullbackHomologyStalkIso_counit_coordinate\n    (A A' : Type u) [CommRing A] [CommRing A'] (φg' : A →+* A')\n    (K : schemeDerivedCategory (Spec (.of A)))\n    (hL : schemeDerivedQCohProperty (Spec (.of A'))\n      ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K))\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (e : DerivedCategory.Q.obj\n      ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n        (@id (ModuleCat.{u} A ⥤\n          SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) ≅ K)\n    (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app\n      ((HomotopyCategory.quotient _ (.up ℤ)).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n        (@id (ModuleCat.{u} A ⥤\n          SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)))) (i : ℤ)\n    (p : PrimeSpectrum A') :\n    let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩\n    let b := affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i\n    let P := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n      (@id (ModuleCat.{u} A ⥤\n        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i\n    let s := RingedSpace.moduleStalkFunctor (Spec (.of A')).toRingedSpace p\n    let z := fun y => s.map (H.map (inv ((SingleComplexBaseChange.counit\n      (Spec.map (CommRingCat.ofHom φg'))).app\n        ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))\n      (affineTensorPullbackHomologyStalkIso A A' φg' M p i y)\n    ∀ y, affineDerivedCohomologyStalkIso A' i p L\n        (LocalizedModule.map p.asIdeal.primeCompl b.hom.hom y) =\n      s.map (H.map ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).map e.hom))\n        (z y)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T004108-L-2836343",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261014T004108-L-2836343",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -25,11 +25,6 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The canonical localization coordinate for the ordinary tensor pullback complex.
-Source: Stacks Project, Tags 01I9, 01HV and 0DJ8.
-(blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates).
-This is constructed from exact tilde, tilde stalk localization, the termwise tensor
-pullback isomorphism and the derived homology factorization. -/
 def affineTensorPullbackHomologyStalkIso
     (A A' : Type u) [CommRing A] [CommRing A'] (φ : A →+* A')
     (M : CochainComplex (ModuleCat.{u} A) ℤ) (p : PrimeSpectrum A') (i : ℤ) :
@@ -91,6 +86,50 @@ def affineTensorPullbackHomologyStalkIso
   exact l.toAddEquiv.trans (s.mapIso d).toLinearEquiv.toAddEquiv
 
 
+/-- Affine localization identifies the base-change coordinate with the stalk map
+of the inverse ordinary pullback counit.  This is the geometric localization
+identity from Stacks Tag 0DJ8; the remaining supplied representative isomorphism
+is handled by functoriality in the main theorem.
+(blueprint: new-lem-pc-affine-tensor-pullback-stalk-coordinates-at).
+Proof: expand affine localization and stalk coordinates; the adjunction triangle and
+naturality of the localization germ map identify the inverse counit component. Apply
+the supplied representative isomorphism by functoriality. This works for arbitrary
+complexes and degrees, including zero objects. -/
+theorem affineTensorPullbackHomologyStalkIso_counit_coordinate
+    (A A' : Type u) [CommRing A] [CommRing A'] (φg' : A →+* A')
+    (K : schemeDerivedCategory (Spec (.of A)))
+    (hL : schemeDerivedQCohProperty (Spec (.of A'))
+      ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K))
+    (M : CochainComplex (ModuleCat.{u} A) ℤ)
+    (e : DerivedCategory.Q.obj
+      ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+        (@id (ModuleCat.{u} A ⥤
+          SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) ≅ K)
+    (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+        (@id (ModuleCat.{u} A ⥤
+          SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)))) (i : ℤ)
+    (p : PrimeSpectrum A') :
+    let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩
+    let b := affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i
+    let P := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+      (@id (ModuleCat.{u} A ⥤
+        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)
+    let H := DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i
+    let s := RingedSpace.moduleStalkFunctor (Spec (.of A')).toRingedSpace p
+    let z := fun y => s.map (H.map (inv ((SingleComplexBaseChange.counit
+      (Spec.map (CommRingCat.ofHom φg'))).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))
+      (affineTensorPullbackHomologyStalkIso A A' φg' M p i y)
+    ∀ y, affineDerivedCohomologyStalkIso A' i p L
+        (LocalizedModule.map p.asIdeal.primeCompl b.hom.hom y) =
+      s.map (H.map ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).map e.hom))
+        (z y) := by
+  sorry
 
 
 /-- The canonical target coordinate commutes with stalk localization.
@@ -139,6 +178,11 @@ theorem affineTensorPullbackHomologyStalkIso_coordinates
         (Spec.map (CommRingCat.ofHom φg'))).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
             (derivedPullback (Spec.map (CommRingCat.ofHom φg'))).map e.hom))
-        (affineTensorPullbackHomologyStalkIso A A' φg' M p i y) := by sorry
+        (affineTensorPullbackHomologyStalkIso A A' φg' M p i y) := by
+  dsimp only
+  intro y
+  rw [affineTensorPullbackHomologyStalkIso_counit_coordinate A A' φg' K hL M e hc i p y]
+  simp only [Functor.map_comp]
+  rfl
 
 end AlgebraicGeometry
