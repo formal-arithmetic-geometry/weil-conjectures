@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitData
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Order.Antisymmetrization
+import Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentationsTail
+import Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentationsIso
 
 /-! # Ring presentations of affine upper-tail charts
 
@@ -110,6 +112,11 @@ theorem affine_chart_section_ring_presentations
         ∃ (ρₓ : ↑(F.obj x) ≃+* Γ((U.pullback₁ q).X a, ⊤)),
           (∀ b, ρₓ (r (s.appTop b)) = (U.pullbackHom q a).appTop b) ∧
           IsAffine (Uk.X a) ∧
-          (∀ b, v.appTop (ρ₀ (r₁ b)) = (Uk.pullbackHom p a).appTop (ρₓ b)) := by sorry
+          (∀ b, v.appTop (ρ₀ (r₁ b)) = (Uk.pullbackHom p a).appTop (ρₓ b)) := by
+  classical
+  intro rep g F t kₜ s r₀ q₀
+  have hi := affine_chart_section_ring_presentations_iso R j g
+  have ht := affine_chart_section_ring_presentations_tail R c hc i f j hij U a ha
+  exact ⟨hi, ht⟩
 
 end AlgebraicGeometry

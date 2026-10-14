@@ -1,0 +1,94 @@
+{
+ "id": "new-affine-chart-section-ring-presentations-iso",
+ "kind": "statement",
+ "title": "new-affine-chart-section-ring-presentations-iso",
+ "statement": "theorem affine_chart_section_ring_presentations_iso\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (j : I) {A : Scheme.{u}}\n    (g : A ⟶ Spec (R.obj j)) :\n    IsIso (pullback.snd (Spec.map (R.map (homOfLE\n      ((OrderEmbedding.ofAntisymmetrization (α := {k : I // j ≤ k})).monotone.functor.obj\n        (toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k}))).property))) g)",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01ZR"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Follows from the affine chart construction described in Tag 01ZR.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J3",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tag 01ZR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine scheme pullback isomorphism",
+   "results": "supporting API",
+   "verdict": "supporting"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso pullback.snd",
+   "results": "supporting API",
+   "verdict": "supporting"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeMap pullback",
+   "results": "supporting API",
+   "verdict": "supporting"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentations",
+  "date": "2026-10-14",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-chart-section-ring-presentations",
+   "place": "proof decomposition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentationsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartSectionRingPresentationsIso.lean",
+  "declaration": "AlgebraicGeometry.affine_chart_section_ring_presentations_iso",
+  "statement": "theorem affine_chart_section_ring_presentations_iso\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (j : I) {A : Scheme.{u}}\n    (g : A ⟶ Spec (R.obj j)) :\n    IsIso (pullback.snd (Spec.map (R.map (homOfLE\n      ((OrderEmbedding.ofAntisymmetrization (α := {k : I // j ≤ k})).monotone.functor.obj\n        (toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k}))).property))) g)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261014T004103-L-2834548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261014T004103-L-2834548",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

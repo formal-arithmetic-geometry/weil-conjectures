@@ -1,0 +1,94 @@
+{
+ "id": "new-affine-chart-section-ring-presentations-tail",
+ "kind": "statement",
+ "title": "new-affine-chart-section-ring-presentations-tail",
+ "statement": "theorem affine_chart_section_ring_presentations_tail\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    (a : U.I₀) (ha : IsAffine (U.X a))\n    :\n    let rep := (OrderEmbedding.ofAntisymmetrization\n      (α := {k : I // j ≤ k})).monotone.functor\n    let g := U.f a ≫ pullback.snd f (Spec.map (R.map (homOfLE hij)))\n    let F := rep ⋙ (upperTailChartDiagram R j g).rightOp ⋙ Scheme.Γ\n    let t := toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k})\n    let kₜ := rep.obj t\n    let s := pullback.snd (Spec.map (R.map (homOfLE kₜ.property))) g\n    let r₀ := (colimit.ι F t).hom\n    let q₀ := baseChangeMap f\n      (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n      (T' := Over.mk (c.π.app (op i)))\n      (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n    IsAffine ((U.pullback₁ q₀).X a) ∧\n    ∃ (ρ₀ : ↑(colimit F) ≃+* Γ((U.pullback₁ q₀).X a, ⊤)),\n      (∀ b, ρ₀ (r₀ (s.appTop b)) = (U.pullbackHom q₀ a).appTop b) ∧\n      ∀ (x : Antisymmetrization {k : I // j ≤ k} (· ≤ ·)) (htx : t ≤ x),\n        let k := (rep.obj x).val\n        let hjk := (rep.obj x).property\n        let q := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n            (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n        let p := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))\n        let q₀ := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n        let w : p ≫ q = q₀ := by\n          rw [← baseChangeMap_comp]\n          congr 1\n          ext\n          simpa using c.w (homOfLE hjk).op\n        let r := (F.map (homOfLE htx)).hom\n        let r₁ := (colimit.ι F x).hom\n        let Uk : (pullback f (Spec.map\n          (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} := U.pullback₁ q\n        let V : (pullback f (c.π.app (op i))).OpenCover.{u} := Uk.pullback₁ p\n        let v : V.X a ⟶ (U.pullback₁ q₀).X a := pullback.lift (V.f a)\n          (Uk.pullbackHom p a ≫ U.pullbackHom q a)\n          (by\n            dsimp only [V]\n            rw [Category.assoc, U.pullbackHom_map,\n              ← Category.assoc, Uk.pullbackHom_map, Category.assoc, w])\n        ∃ (ρₓ : ↑(F.obj x) ≃+* Γ((U.pullback₁ q).X a, ⊤)),\n          (∀ b, ρₓ (r (s.appTop b)) = (U.pullbackHom q a).appTop b) ∧\n          IsAffine (Uk.X a) ∧\n          (∀ b, v.appTop (ρ₀ (r₁ b)) = (Uk.pullbackHom p a).appTop (ρₓ b))",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01ZR"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Follows from the affine chart construction described in Tag 01ZR.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J3",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tag 01ZR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine scheme pullback isomorphism",
+   "results": "supporting API",
+   "verdict": "supporting"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso pullback.snd",
+   "results": "supporting API",
+   "verdict": "supporting"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeMap pullback",
+   "results": "supporting API",
+   "verdict": "supporting"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentations",
+  "date": "2026-10-14",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-chart-section-ring-presentations",
+   "place": "proof decomposition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentationsTail",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartSectionRingPresentationsTail.lean",
+  "declaration": "AlgebraicGeometry.affine_chart_section_ring_presentations_tail",
+  "statement": "theorem affine_chart_section_ring_presentations_tail\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    (a : U.I₀) (ha : IsAffine (U.X a))\n    :\n    let rep := (OrderEmbedding.ofAntisymmetrization\n      (α := {k : I // j ≤ k})).monotone.functor\n    let g := U.f a ≫ pullback.snd f (Spec.map (R.map (homOfLE hij)))\n    let F := rep ⋙ (upperTailChartDiagram R j g).rightOp ⋙ Scheme.Γ\n    let t := toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k})\n    let kₜ := rep.obj t\n    let s := pullback.snd (Spec.map (R.map (homOfLE kₜ.property))) g\n    let r₀ := (colimit.ι F t).hom\n    let q₀ := baseChangeMap f\n      (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n      (T' := Over.mk (c.π.app (op i)))\n      (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n    IsAffine ((U.pullback₁ q₀).X a) ∧\n    ∃ (ρ₀ : ↑(colimit F) ≃+* Γ((U.pullback₁ q₀).X a, ⊤)),\n      (∀ b, ρ₀ (r₀ (s.appTop b)) = (U.pullbackHom q₀ a).appTop b) ∧\n      ∀ (x : Antisymmetrization {k : I // j ≤ k} (· ≤ ·)) (htx : t ≤ x),\n        let k := (rep.obj x).val\n        let hjk := (rep.obj x).property\n        let q := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n            (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n        let p := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))\n        let q₀ := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n        let w : p ≫ q = q₀ := by\n          rw [← baseChangeMap_comp]\n          congr 1\n          ext\n          simpa using c.w (homOfLE hjk).op\n        let r := (F.map (homOfLE htx)).hom\n        let r₁ := (colimit.ι F x).hom\n        let Uk : (pullback f (Spec.map\n          (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} := U.pullback₁ q\n        let V : (pullback f (c.π.app (op i))).OpenCover.{u} := Uk.pullback₁ p\n        let v : V.X a ⟶ (U.pullback₁ q₀).X a := pullback.lift (V.f a)\n          (Uk.pullbackHom p a ≫ U.pullbackHom q a)\n          (by\n            dsimp only [V]\n            rw [Category.assoc, U.pullbackHom_map,\n              ← Category.assoc, Uk.pullbackHom_map, Category.assoc, w])\n        ∃ (ρₓ : ↑(F.obj x) ≃+* Γ((U.pullback₁ q).X a, ⊤)),\n          (∀ b, ρₓ (r (s.appTop b)) = (U.pullbackHom q a).appTop b) ∧\n          IsAffine (Uk.X a) ∧\n          (∀ b, v.appTop (ρ₀ (r₁ b)) = (Uk.pullbackHom p a).appTop (ρₓ b))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261014T004103-L-2834548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261014T004103-L-2834548",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
