@@ -14558,3 +14558,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:56 L: merged deliver/F2/Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap (stage 3; reviewer PASS; first push; landing 20261014T045608-L-1572273 (proof); batch 20261014T045603; modules 1; new nodes 0)
 - 04:56 L: merged deliver/F2/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261014T045608-L-1572413 (proof); batch 20261014T045603; modules 1; new nodes 0)
 - 04:56 L: merged deliver/G1/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T045609-L-1572722 (proof); batch 20261014T045603; modules 1; new nodes 0)
+- 04:56 L: merged deliver/G2/Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeDescent (stage 3; reviewer PASS; first push; landing 20261014T045609-L-1572865 (interface); batch 20261014T045603; modules 2; new nodes 1)

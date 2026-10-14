@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-affine-kinjective-reverse-comparison-isIso",
+ "kind": "statement",
+ "title": "Invertibility of the affine K-injective reverse homology comparison",
+ "statement": "Let A and B be commutative rings, phi:B to A a ring homomorphism, f=Spec(phi), and i an integer. In the derived scheme-module categories [def-pc-derived-category], let I be an unbounded integer-indexed complex of structure-sheaf modules on Spec A [def-pc-cochain-complex-modules], assume I is K-injective [def-pur-kinjective-complex] and Q(I) has quasi-coherent cohomology. Put P=f_* [def-pc-ringed-spaces-derived-direct-image], with its finite-limit preservation. Then the specified reverse comparison H^i(P I) to P(H^i(I)), defined as leftExactHomologyComparison(I.sc i,P) [def-pc-left-exact-homology-comparison], is an isomorphism. No descended transformation or uniqueness assertion is assumed.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-kinjective-complex",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-left-exact-homology-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/06Z0; https://stacks.math.columbia.edu/tag/01I9",
+  "place": "0AVW, proof, affine cohomology display; 06Z0, affine derived equivalence; 01I9(2), pushforward of associated module sheaves."
+ },
+ "proof": [
+  {
+   "text": "Construct the ordinary natural isomorphism res_phi followed by tilde_B to tilde_A followed by P from the tilde/global-sections unit, pushforward/global-sections comparison and the tilde/global-sections counit. The latter counit is invertible on affine pushforwards of associated sheaves. Exact tilde and exact restriction of scalars imply that tilde_A followed by P preserves homology. The normalization identity for the explicit reverse homology comparison then makes that comparison invertible on every complex obtained by termwise tilde.",
+   "uses": [
+    "lem-weil-pbc-pushforward-spec-global-sections",
+    "lem-weil-pbc-pushforward-tilde-spec",
+    "def-pc-affine-base-change-tilde-coordinates",
+    "def-pc-left-exact-homology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the affine derived equivalence to represent Q(I) by Q(J), where J is termwise tilde of a complex of A-modules. Bijectivity of Qh on maps into the K-injective target I lifts this isomorphism to a homotopy class J to I. Fullness of the homotopy quotient gives a chain map s. Naturality of the quotient/localization isomorphism identifies Q(s) with the chosen representative isomorphism; hence s is a quasi-isomorphism. Every term of J is quasi-coherent.",
+   "uses": [
+    "new-affine-qcoh-derived-equivalence-core",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine resolution theorem applies to s:J to I and shows that termwise affine pushforward P(s) is a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-affine-pushforward-resolution-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of the explicit reverse homology comparison to s. Its square has invertible source comparison by step 1, invertible mapped homology map because s is a quasi-isomorphism, and invertible termwise pushforward homology map by step 3. Cancelling the latter proves invertibility of the specified reverse comparison at I.",
+   "uses": [
+    "def-pc-left-exact-homology-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-left-exact-homology-comparison",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-pushforward-spec-global-sections",
+  "lem-weil-pbc-pushforward-tilde-spec",
+  "new-affine-qcoh-derived-equivalence-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/06Z0; https://stacks.math.columbia.edu/tag/01I9",
+  "place": "0AVW, proof, affine cohomology display; 06Z0, affine derived equivalence; 01I9(2), pushforward of associated module sheaves.",
+  "note": "Implemented completely: use affine derived representatives and the existing affine pushforward resolution theorem, then the proved naturality and exact-functor normalization of the specified reverse comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An affine pushforward preserves the homology of a K injective complex with quasi coherent cohomology",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine pushforward preserves the homology of a K injective complex with quasi coherent cohomology",
+   "results": "Eight hits: derived homology is homological, injective Yoneda preserves homology, shifts of K-injectives, negative Ext vanishing, bounded-below injective K-injectivity, vanishing on injectives, the K-injective definition and a factorization quasi-isomorphism. No direct affine comparison theorem.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "leftExactHomologyComparison",
+   "results": "msearch grep returned zero indexed hits. Local rg found the existing explicit comparison and its naturality/normalization in Sheaf.Algebra.Homology.LeftExactHomologyComparison. Concept searches found the existing affine resolution and affine derived-equivalence core; these are reused.",
+   "date": "2026-10-14",
+   "verdict": "Existing ingredients reused; no duplicate affine invertibility theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeDescent",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine cohomology edge: invertibility of the specified reverse cycle-class comparison in the descent step.",
+   "via": [
+    "lem-pc-affine-derived-pushforward-sheaf-edge-descent",
+    "lem-pc-affine-derived-pushforward-sheaf-edge-compatibility-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineKInjectiveReverseComparisonIsIso",
+  "file": "lean/Sheaf/Algebra/Homology/AffineKInjectiveReverseComparisonIsIso.lean",
+  "declaration": "AlgebraicGeometry.affineKInjective_leftExactHomologyComparison_isIso",
+  "statement": "theorem affineKInjective_leftExactHomologyComparison_isIso (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) [PreservesFiniteLimits (RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom)] (I : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) [I.IsKInjective] (hI : schemeDerivedQCohProperty (Spec (.of A)) (DerivedCategory.Q.obj I)) : IsIso ((I.sc i).leftExactHomologyComparison (RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T045609-L-1572865",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T045609-L-1572865",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

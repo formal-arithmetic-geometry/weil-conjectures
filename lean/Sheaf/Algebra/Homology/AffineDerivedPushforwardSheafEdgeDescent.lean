@@ -8,6 +8,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.Algebra.Homology.LeftExactHomologyComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+import Sheaf.Algebra.Homology.AffineKInjectiveReverseComparisonIsIso
 
 /-! # Descent of the affine reverse comparison from K-injectives
 
@@ -22,6 +23,66 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 noncomputable section
 namespace AlgebraicGeometry
+private lemma exists_reverseComparison
+    {C : Type*} [Category C] [Abelian C]
+    {D : Type*} [Category D] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [Abelian.HasKInjectiveResolutions C]
+    (P : C ⥤ D) [P.Additive] [PreservesFiniteLimits P] (i : ℤ) :
+    ∃ α : P.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor D i ⟶
+        DerivedCategory.homologyFunctor C i ⋙ P,
+      ∀ (I : CochainComplex C ℤ) [I.IsKInjective],
+        α.app (DerivedCategory.Q.obj I) =
+          (DerivedCategory.homologyFunctor D i).map (P.rightDerivedFunctorObjQIso I).hom ≫
+          ((DerivedCategory.homologyFunctorFactors D i).app
+            ((P.mapHomologicalComplex (.up ℤ)).obj I)).hom ≫
+          (I.sc i).leftExactHomologyComparison P ≫
+          P.map (((DerivedCategory.homologyFunctorFactors C i).app I).inv) := by
+  let κ := CochainComplex.KInjectives.ι (C := C)
+  let L := κ ⋙ DerivedCategory.Q
+  let H := DerivedCategory.homologyFunctor D i
+  let F := P.rightDerivedFunctor ⋙ H
+  let G := DerivedCategory.homologyFunctor C i ⋙ P
+  let β : P.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+      DerivedCategory.Q ⋙ P.rightDerivedFunctor :=
+    (Functor.isoWhiskerLeft (P.mapHomologicalComplex (.up ℤ))
+      (DerivedCategory.quotientCompQhIso D)).inv ≫
+    Functor.whiskerLeft (HomotopyCategory.quotient C (.up ℤ))
+      P.rightDerivedFunctorUnit ≫
+    (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso C)
+      P.rightDerivedFunctor).hom
+  have hβ : IsIso (Functor.whiskerLeft κ β) := by
+    have (I : CochainComplex.KInjectives C) : IsIso ((Functor.whiskerLeft κ β).app I) := by
+      have : I.obj.IsKInjective := I.property
+      dsimp [β, κ]
+      infer_instance
+    exact NatIso.isIso_of_isIso_app _
+  let γ : P.mapHomologicalComplex (.up ℤ) ⋙
+        HomologicalComplex.homologyFunctor D (.up ℤ) i ⟶
+      HomologicalComplex.homologyFunctor C (.up ℤ) i ⋙ P :=
+    { app := fun I ↦ (I.sc i).leftExactHomologyComparison P
+      naturality := fun I J f ↦
+        ShortComplex.leftExactHomologyComparison_naturality
+          ((HomologicalComplex.shortComplexFunctor C (.up ℤ) i).map f) P }
+  let δ : L ⋙ F ⟶ L ⋙ G :=
+    Functor.whiskerRight (asIso (Functor.whiskerLeft κ β)).inv H ≫
+    Functor.whiskerLeft (κ ⋙ P.mapHomologicalComplex (.up ℤ))
+      (DerivedCategory.homologyFunctorFactors D i).hom ≫
+    Functor.whiskerLeft κ γ ≫
+    Functor.whiskerLeft κ (Functor.whiskerRight (DerivedCategory.homologyFunctorFactors C i).inv P)
+  let ff := Localization.fullyFaithfulWhiskeringLeft L
+    (CochainComplex.KInjectives.quasiIso C) D
+  refine ⟨ff.preimage δ, ?_⟩
+  intro I hI
+  have he := congr_app (ff.map_preimage δ) (CochainComplex.KInjectives.mk I)
+  change (ff.preimage δ).app (DerivedCategory.Q.obj I) = _ at he
+  rw [he]
+  dsimp only [δ, NatTrans.comp_app, Functor.whiskerRight_app, asIso_inv]
+  rw [NatIso.isIso_inv_app]
+  dsimp [β, γ, κ, L, F, G, H, Functor.rightDerivedFunctorObjQIso]
+  simp only [IsIso.inv_comp, ← Functor.map_inv, NatIso.inv_hom_app,
+    NatIso.inv_inv_app, Functor.map_comp, Category.assoc]
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
@@ -55,6 +116,24 @@ def affineKInjectiveReverseComparison
       ((P.mapHomologicalComplex (.up ℤ)).obj I)).hom ≫
     (I.sc i).leftExactHomologyComparison P ≫
     P.map (((DerivedCategory.homologyFunctorFactors _ i).app I).inv)
+
+private lemma reverseComparison_ext (X : Scheme.{u})
+    {D : Type*} [Category D]
+    {F G : schemeDerivedQCohCategory X ⥤ D} (α β : F ⟶ G)
+    (h : ∀ (I : CochainComplex
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) [I.IsKInjective]
+        (hI : schemeDerivedQCohProperty X (DerivedCategory.Q.obj I)),
+        α.app ⟨_, hI⟩ = β.app ⟨_, hI⟩) : α = β := by
+  ext M
+  obtain ⟨I, hI, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective M.obj
+  let := hI
+  have hq : schemeDerivedQCohProperty X (DerivedCategory.Q.obj I) := by
+    intro n
+    exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+      ((DerivedCategory.homologyFunctor _ n).mapIso e) (M.property n)
+  let e' : M ≅ ⟨_, hq⟩ := (schemeDerivedQCohProperty X).isoMk e
+  apply (cancel_mono (G.map e'.hom)).1
+  rw [← α.naturality, ← β.naturality, h I hq]
 
 /-- The explicit reverse comparisons on K-injectives descend to a unique natural
 isomorphism on the quasi-coherent derived category.
@@ -90,5 +169,32 @@ theorem existsUnique_affineDerivedPushforwardReverseComparison
         [I.IsKInjective]
         (hI : schemeDerivedQCohProperty (Spec (.of A)) (DerivedCategory.Q.obj I)),
         τ.hom.app ⟨_, hI⟩ = affineKInjectiveReverseComparison A B φ i I := by
-  sorry
+  let X := Spec (.of A)
+  let P := RingedSpace.moduleDirectImage (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom
+  obtain ⟨α, hα⟩ := exists_reverseComparison P i
+  let β := Functor.whiskerLeft (schemeDerivedQCohProperty X).ι α
+  have hβ (I : CochainComplex
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) [I.IsKInjective]
+      (hI : schemeDerivedQCohProperty X (DerivedCategory.Q.obj I)) :
+      β.app ⟨_, hI⟩ = affineKInjectiveReverseComparison A B φ i I := hα I
+  have hi : ∀ M, IsIso (β.app M) := by
+    intro M
+    obtain ⟨I, hI, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective M.obj
+    let := hI
+    have hq : schemeDerivedQCohProperty X (DerivedCategory.Q.obj I) := by
+      intro n
+      exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+        ((DerivedCategory.homologyFunctor _ n).mapIso e) (M.property n)
+    have hc := affineKInjective_leftExactHomologyComparison_isIso A B φ i I hq
+    have : IsIso (β.app ⟨_, hq⟩) := by
+      rw [hβ I hq]
+      dsimp only [affineKInjectiveReverseComparison]
+      infer_instance
+    exact (NatTrans.isIso_app_iff_of_iso β ((schemeDerivedQCohProperty X).isoMk e)).mpr
+      this
+  have : IsIso β := NatIso.isIso_of_isIso_app β
+  refine ⟨asIso β, hβ, ?_⟩
+  intro τ hτ
+  apply Iso.ext
+  exact reverseComparison_ext X τ.hom β (fun I _ hI ↦ (hτ I hI).trans (hβ I hI).symm)
 end AlgebraicGeometry

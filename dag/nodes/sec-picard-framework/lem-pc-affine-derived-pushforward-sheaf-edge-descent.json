@@ -14,25 +14,25 @@
  },
  "proof": [
   {
-   "text": "Kernel/cokernel universal properties make the explicit comparison natural for chain maps. Homotopic maps agree on homology, so this descends to the K-injective homotopy category.",
+   "text": "On the full subcategory of K-injective complexes form the natural transformation given by the inverse right-derived unit, the target localization/homology factor, the explicit left exact reverse comparison, and the mapped inverse source localization/homology factor. The explicit comparison is natural for chain maps. The restricted localization is a localization at quasi-isomorphisms, so its fully faithful precomposition functor descends this natural transformation to the whole derived category. The map_preimage identity gives precisely the specified formula on every K-injective complex.",
    "uses": [
-    "def-pc-left-exact-homology-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On each affine open V of Spec B, its inverse image W is affine. Apply the degree-i lower-truncation comparison for derived sections on W and the upper-truncation comparison for the left exact section functor. These remove the two tails in degree i. Track the canonical truncation maps through the kernel-lift and homology-projection formulas proved in def-pc-left-exact-homology-comparison; their universal properties identify the resulting comparison with the displayed reverse map. Affine acyclicity makes this comparison invertible. Invertibility on the affine basis implies invertibility of the sheaf morphism.",
-   "uses": [
-    "lem-pc-affine-morphism-hi",
-    "lem-sc-affine-open-derived-truncation-comparison",
-    "lem-sc-left-exact-upper-truncation-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The K-injective homotopy category is equivalent to the derived category. Transport the reverse comparison through this equivalence and the right-derived-unit computation. All objects admit K-injective representatives; naturality with those representative isomorphisms determines every component and proves uniqueness.",
-   "uses": [
+    "def-pc-left-exact-homology-comparison",
     "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict this natural transformation to D_QCoh(Spec A). Its component at a K-injective representative is the specified affineKInjectiveReverseComparison. The middle reverse homology comparison is invertible by the affine K-injective comparison theorem; all other factors are functor images of isomorphisms.",
+   "uses": [
+    "lem-pc-affine-kinjective-reverse-comparison-isIso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every derived object admits a K-injective representative. Transport quasi-coherence along its homology isomorphisms and lift the representative isomorphism to the full quasi-coherent subcategory. Naturality transports invertibility from the representative to the original component. Thus the descended natural transformation is a natural isomorphism. For uniqueness, two normalized natural isomorphisms agree at all K-injective representatives; naturality and cancellation along each representative isomorphism give equality of every component, then equality of their hom natural transformations and of the natural isomorphisms.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "prop-pur-kinjective-resolutions-exist"
    ],
    "elementary": false
   }
@@ -40,17 +40,16 @@
  "proof_deps": [
   "def-pc-left-exact-homology-comparison",
   "def-pc-ringed-spaces-derived-direct-image",
-  "lem-pc-affine-morphism-hi",
-  "lem-sc-affine-open-derived-truncation-comparison",
-  "lem-sc-left-exact-upper-truncation-comparison"
+  "lem-pc-affine-kinjective-reverse-comparison-isIso",
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "G4",
+  "group": "G2",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
   "place": "0AVW, proof, affine cohomology display; 08D4, bound-one truncation comparison on inverse images of affine opens.",
-  "note": "Independent canonical reverse comparison; the exact-family compatibility equation is not an input."
+  "note": "Descent and uniqueness implemented using fully faithful localization precomposition and K-injective representatives. Affine component invertibility proved in a separate sorry-free module using existing affine derived-equivalence and resolution statements. No exact-family compatibility equation is an input."
  },
  "mathlib_searches": [
   {
@@ -126,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-60d19",
-  "group": "G4",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261014T041057-L-1059047",
+  "landing": "20261014T045609-L-1572865",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with corrected nodes, change record, sources, and repaired C4 citations; seven modules and the direct importer compile cleanly; all 19 axiom probes contain only permitted axioms and the two reported sorry dependencies."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
