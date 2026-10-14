@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShift
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
+import Sheaf.AlgebraicGeometry.SchemeTensorShiftBinaryLocalizationSquare
 
 /-! # Normalizing tensor-shift composites through localization
 Source: Stacks Project, Tag 06YH, K-flat total tensor localization.
@@ -18,9 +19,87 @@ Source: Stacks Project, Tag 06YH, K-flat total tensor localization.
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-universe u v w
+universe u v w u' v'
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
+
+private theorem first_generic
+    {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
+    [MonoidalCategory C] [MonoidalCategory D] [HasShift C ℤ] [HasShift D ℤ]
+    (F : C ⥤ D) [F.LaxMonoidal] [F.CommShift ℤ]
+    [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive]
+    [(curriedTensor D).CommShift₂Int]
+    (P T U : C) (σ : P⟦(1 : ℤ)⟧ ⊗ (T ⊗ U) ⟶ (P ⊗ (T ⊗ U))⟦(1 : ℤ)⟧)
+    (hs : ((tensorRight (F.obj (T ⊗ U))).commShiftIso (1 : ℤ)).hom.app (F.obj P) ≫
+      (Functor.LaxMonoidal.μ F P (T ⊗ U))⟦(1 : ℤ)⟧' ≫
+      (F.commShiftIso (1 : ℤ)).inv.app (P ⊗ (T ⊗ U)) =
+      ((F.commShiftIso (1 : ℤ)).inv.app P) ▷ F.obj (T ⊗ U) ≫
+      Functor.LaxMonoidal.μ F (P⟦(1 : ℤ)⟧) (T ⊗ U) ≫ F.map σ) :
+    (α_ (F.obj P⟦(1 : ℤ)⟧) (F.obj T) (F.obj U)).hom ≫
+      ((tensorRight (F.obj T ⊗ F.obj U)).commShiftIso (1 : ℤ)).hom.app (F.obj P) ≫
+      (F.obj P ◁ Functor.LaxMonoidal.μ F T U ≫
+        Functor.LaxMonoidal.μ F P (T ⊗ U))⟦(1 : ℤ)⟧' ≫
+      (F.commShiftIso (1 : ℤ)).inv.app (P ⊗ (T ⊗ U)) =
+    (((F.commShiftIso (1 : ℤ)).inv.app P) ▷ F.obj T) ▷ F.obj U ≫
+      (Functor.LaxMonoidal.μ F (P⟦(1 : ℤ)⟧) T) ▷ F.obj U ≫
+      Functor.LaxMonoidal.μ F (P⟦(1 : ℤ)⟧ ⊗ T) U ≫
+      F.map ((α_ (P⟦(1 : ℤ)⟧) T U).hom ≫ σ) := by
+  have hn := NatTrans.shift_app_comm
+    ((curriedTensor D).flip.map (Functor.LaxMonoidal.μ F T U)) (1 : ℤ) (F.obj P)
+  change ((tensorRight (F.obj T ⊗ F.obj U)).commShiftIso (1 : ℤ)).hom.app (F.obj P) ≫
+      (F.obj P ◁ Functor.LaxMonoidal.μ F T U)⟦(1 : ℤ)⟧' =
+    F.obj P⟦(1 : ℤ)⟧ ◁ Functor.LaxMonoidal.μ F T U ≫
+      ((tensorRight (F.obj (T ⊗ U))).commShiftIso (1 : ℤ)).hom.app (F.obj P) at hn
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hn, hs, whisker_exchange_assoc,
+    ← associator_naturality_left_assoc]
+  simp only [Functor.comp_obj]
+  rw [← Functor.LaxMonoidal.associativity_assoc F (P⟦(1 : ℤ)⟧) T U]
+
+private theorem second_generic
+    {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
+    [MonoidalCategory C] [MonoidalCategory D] [HasShift C ℤ] [HasShift D ℤ]
+    (F : C ⥤ D) [F.LaxMonoidal] [F.CommShift ℤ]
+    [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive]
+    [(curriedTensor D).CommShift₂Int]
+    (P T U : C) (σ₁ : P⟦(1 : ℤ)⟧ ⊗ T ⟶ (P ⊗ T)⟦(1 : ℤ)⟧)
+    (σ₂ : (P ⊗ T)⟦(1 : ℤ)⟧ ⊗ U ⟶ ((P ⊗ T) ⊗ U)⟦(1 : ℤ)⟧)
+    (hs₁ : ((tensorRight (F.obj T)).commShiftIso (1 : ℤ)).hom.app (F.obj P) ≫
+      (Functor.LaxMonoidal.μ F P T)⟦(1 : ℤ)⟧' ≫
+      (F.commShiftIso (1 : ℤ)).inv.app (P ⊗ T) =
+      ((F.commShiftIso (1 : ℤ)).inv.app P) ▷ F.obj T ≫
+      Functor.LaxMonoidal.μ F (P⟦(1 : ℤ)⟧) T ≫ F.map σ₁)
+    (hs₂ : ((tensorRight (F.obj U)).commShiftIso (1 : ℤ)).hom.app (F.obj (P ⊗ T)) ≫
+      (Functor.LaxMonoidal.μ F (P ⊗ T) U)⟦(1 : ℤ)⟧' ≫
+      (F.commShiftIso (1 : ℤ)).inv.app ((P ⊗ T) ⊗ U) =
+      ((F.commShiftIso (1 : ℤ)).inv.app (P ⊗ T)) ▷ F.obj U ≫
+      Functor.LaxMonoidal.μ F ((P ⊗ T)⟦(1 : ℤ)⟧) U ≫ F.map σ₂) :
+    (((tensorRight (F.obj T)).commShiftIso (1 : ℤ)).hom.app (F.obj P)) ▷ F.obj U ≫
+      ((tensorRight (F.obj U)).commShiftIso (1 : ℤ)).hom.app (F.obj P ⊗ F.obj T) ≫
+      (α_ (F.obj P) (F.obj T) (F.obj U)).hom⟦(1 : ℤ)⟧' ≫
+      (F.obj P ◁ Functor.LaxMonoidal.μ F T U ≫
+        Functor.LaxMonoidal.μ F P (T ⊗ U))⟦(1 : ℤ)⟧' ≫
+      (F.commShiftIso (1 : ℤ)).inv.app (P ⊗ (T ⊗ U)) =
+    (((F.commShiftIso (1 : ℤ)).inv.app P) ▷ F.obj T) ▷ F.obj U ≫
+      (Functor.LaxMonoidal.μ F (P⟦(1 : ℤ)⟧) T) ▷ F.obj U ≫
+      Functor.LaxMonoidal.μ F (P⟦(1 : ℤ)⟧ ⊗ T) U ≫
+      F.map (σ₁ ▷ U ≫ σ₂ ≫ (α_ P T U).hom⟦(1 : ℤ)⟧') := by
+  have hn := (tensorRight (F.obj U)).commShiftIso_hom_naturality
+    (Functor.LaxMonoidal.μ F P T) (1 : ℤ)
+  change (Functor.LaxMonoidal.μ F P T)⟦(1 : ℤ)⟧' ▷ F.obj U ≫
+      ((tensorRight (F.obj U)).commShiftIso (1 : ℤ)).hom.app (F.obj (P ⊗ T)) =
+    ((tensorRight (F.obj U)).commShiftIso (1 : ℤ)).hom.app (F.obj P ⊗ F.obj T) ≫
+      (Functor.LaxMonoidal.μ F P T ▷ F.obj U)⟦(1 : ℤ)⟧' at hn
+  have ha := congrArg (fun f ↦ (shiftFunctor D (1 : ℤ)).map f)
+    (Functor.LaxMonoidal.associativity F P T U)
+  simp only [Functor.map_comp] at ha
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% ha, ← reassoc_of% hn,
+    F.commShiftIso_inv_naturality (α_ P T U).hom (1 : ℤ), reassoc_of% hs₂]
+  have hw := congrArg (fun f ↦ f ▷ F.obj U) hs₁
+  simp only [comp_whiskerRight] at hw
+  rw [reassoc_of% hw, Functor.LaxMonoidal.μ_natural_left_assoc]
+
 
 open Functor.LaxMonoidal in
 private theorem tensorator_isIso
@@ -73,6 +152,36 @@ local instance : DerivedCategory.Qh.HasDerivedMonoidalCategory
     (HomotopyCategory.quasiIso
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :=
   DerivedCategory.hasDerivedMonoidalCategory _
+
+local instance (A B : GradedObject ℤ
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))) : A.HasTensor B := inferInstance
+
+local instance (A B C D : GradedObject ℤ
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))) :
+    GradedObject.HasTensor₄ObjExt A B C D := inferInstance
+
+local instance (A B C : GradedObject ℤ
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))) :
+    GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
+
+local instance (A B C : GradedObject ℤ
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))) :
+    GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
+
+local instance (A B : CochainComplex
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
+    CochainComplex.HasMapBifunctor A B
+      (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) := inferInstance
+
+noncomputable local instance : MonoidalCategory
+    (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) := inferInstance
+
+noncomputable local instance : MonoidalCategory (schemeDerivedCategory X) :=
+  schemeDerivedTensorMonoidal X
+
+noncomputable local instance :
+    (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).LaxMonoidal :=
+  Functor.LaxMonoidal.ofIso (DerivedCategory.quotientCompQhIso _)
 
 omit [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
 private theorem upstreamKFlat
@@ -139,6 +248,7 @@ theorem schemeTensorShift_targetComparison_isIso
   dsimp only [schemeTensorShiftTargetComparison]
   infer_instance
 
+set_option linter.unusedVariables false in
 /-- Expanded first normalization coherence intermediate.
 The proof unfolds all local abbreviations in the localization calculation.
 (blueprint: aux-sc-target-comparison-first-core). -/
@@ -158,7 +268,15 @@ theorem schemeTensorShift_first_normalization_core
       schemeTensorShiftSourceComparison X P T U ≫
       DerivedCategory.Q.map ((α_ (P⟦(1 : ℤ)⟧) T U).hom ≫
         (CochainComplex.mapBifunctorShift₁Iso P (T ⊗ U)
-          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom) := by sorry
+          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom) := by
+  let := schemeCanonicalTensorShift X
+  let : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
+    fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B
+  simpa only [schemeTensorShiftTargetComparison, schemeTensorShiftSourceComparison,
+    Category.assoc] using first_generic DerivedCategory.Q P T U
+    (CochainComplex.mapBifunctorShift₁Iso P (T ⊗ U)
+      (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom
+    (schemeTensorShift_binary_localization_square X P (T ⊗ U) (upstreamKFlat X P hP))
 
 theorem schemeTensorShift_first_normalization
     (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
@@ -180,6 +298,7 @@ theorem schemeTensorShift_first_normalization
           (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom) := by
   simpa using schemeTensorShift_first_normalization_core X P T U hP hT hU
 
+set_option linter.unusedVariables false in
 /-- Second route normalization component.  Apply the localization shift square
 first to `P,T` and then to `P ⊗ T,U`; K-flatness is preserved by tensoring.
 Use lax monoidal associativity and naturality of the shift comparison to move
@@ -208,7 +327,23 @@ theorem schemeTensorShift_second_normalization
           (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ▷ U ≫
         (CochainComplex.mapBifunctorShift₁Iso (P ⊗ T) U
           (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ≫
-        (α_ P T U).hom⟦(1 : ℤ)⟧') := by sorry
+        (α_ P T U).hom⟦(1 : ℤ)⟧') := by
+  let := schemeCanonicalTensorShift X
+  let : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
+    fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B
+  have hp := upstreamKFlat X P hP
+  have ht := upstreamKFlat X T hT
+  have hpt : (HomologicalComplex.quasiIso
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).kFlat (P ⊗ T) :=
+    ObjectProperty.prop_tensor hp ht
+  have hs₁ := schemeTensorShift_binary_localization_square X P T hp
+  have hs₂ := schemeTensorShift_binary_localization_square X (P ⊗ T) U hpt
+  simpa only [schemeTensorShiftTargetComparison, schemeTensorShiftSourceComparison,
+    Category.assoc] using second_generic DerivedCategory.Q P T U
+    (CochainComplex.mapBifunctorShift₁Iso P T
+      (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom
+    (CochainComplex.mapBifunctorShift₁Iso (P ⊗ T) U
+      (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom hs₁ hs₂
 
 theorem schemeTensorShift_localization_normalization
     (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-scheme-tensor-shift-binary-localization-square",
+ "kind": "statement",
+ "title": "Binary localization square for the canonical first tensor shift",
+ "statement": "Let X be a scheme and Q the localization of cochain complexes of O_X-modules into its derived category with the recorded tensor [def-pc-scheme-derived-tensor-structure] and canonical integer tensor shift [def-sc-scheme-canonical-tensor-shift]. Let P and T be cochain complexes, with P K-flat (tensoring with P on either side preserves quasi-isomorphisms). Let mu be the lax monoidal tensorator of Q, eta(V): Q(V[1]) -> Q(V)[1] the localization shift comparison, and s_c and s_d the first-variable tensor shifts. Then s_d(Q(P),Q(T));mu(P,T)[1];eta(P tensor T)^(-1) = (eta(P)^(-1) tensor id);mu(P[1],T);Q(s_c(P,T)).",
+ "stmt_deps": [
+  "def-sc-scheme-canonical-tensor-shift",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "Derived tensor localization; explicit binary comparison in the parent normalization proof"
+ },
+ "proof": [
+  {
+   "text": "Restrict the first input to the full subcategory of K-flat complexes and use the explicit localization liftingIsoHom. Apply Functor.CommShift₂OfLocalization.commShift_liftingIsoApp to the flipped bifunctor at T. Its evaluated shift equation compares the derived first shift and the total-complex first shift. Expand the commShift comparison of the K-flat inclusion and cancel it by tensorator naturality. This yields the binary equation for the composite quotient followed by Qh. Transport the equation along quotientCompQhIso, using its monoidal and shift compatibility, to obtain the displayed equation for Q. This argument is binary and uses no associator coherence.",
+   "uses": [
+    "def-sc-scheme-canonical-tensor-shift",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-scheme-canonical-tensor-shift",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "Explicit binary step in the parent proof, expanded using the proved library localization construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of localization tensorator with the first variable tensor shift isomorphism on K-flat cochain complexes",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.LocalizerMorphism.instCommShiftLocalizationHomFunctorIsoFunctorQLocalizedFunctor, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app, CategoryTheory.Functor.commShiftOfLocalization.iso, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_inv_app, CategoryTheory.Functor.commShiftOfLocalization",
+   "verdict": "Ingredients found, no exact binary square for the canonical scheme tensor shift."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShiftIso_hom_naturality\"",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Functor.commShiftIso_hom_naturality, CategoryTheory.Functor.commShiftIso_hom_naturality_assoc",
+   "verdict": "Ingredients found, no exact binary square for the canonical scheme tensor shift."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first variable tensor shift commutes with the lax monoidal localization tensorator for K-flat complexes",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftOfLocalization|shift_app_comm",
+   "date": "2026-10-14",
+   "results": "Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean",
+   "verdict": "Ingredients found, no exact binary square for the canonical scheme tensor shift."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
+  "date": "2026-10-14",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Binary first-variable localization shift square used by both normalization calculations",
+   "via": [
+    "lem-sc-scheme-tensor-shift-localization-normalization",
+    "lem-sc-scheme-canonical-tensor-shift-associator-kflat-one",
+    "lem-sc-scheme-canonical-tensor-shift-associator",
+    "lem-sc-scheme-canonical-shift-unit-associativity",
+    "lem-sc-derived-pullback-canonical-tensor-shift-one",
+    "lem-sc-derived-monoidal-pullback-unital-shift",
+    "lem-sc-pinned-projection-counit-exact-shift",
+    "lem-sc-right-adjoint-tensor-compatible-exact-structures",
+    "lem-sc-right-adjoint-tensor-comparison-triangle",
+    "lem-sc-right-adjoint-tensor-comparison-diagrams",
+    "lem-sc-right-adjoint-tensor-locus-triangles",
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeTensorShiftBinaryLocalizationSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeTensorShiftBinaryLocalizationSquare.lean",
+  "declaration": "AlgebraicGeometry.schemeTensorShift_binary_localization_square",
+  "statement": "theorem schemeTensorShift_binary_localization_square\n    (P T : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : (HomologicalComplex.quasiIso\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).kFlat P) :\n    letI := schemeCanonicalTensorShift X\n    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=\n      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B\n    ((tensorRight (DerivedCategory.Q.obj T)).commShiftIso (1 : ℤ)).hom.app\n        (DerivedCategory.Q.obj P) ≫\n      (Functor.LaxMonoidal.μ DerivedCategory.Q P T)⟦(1 : ℤ)⟧' ≫\n      (DerivedCategory.Q.commShiftIso (1 : ℤ)).inv.app (P ⊗ T) =\n    ((DerivedCategory.Q.commShiftIso (1 : ℤ)).inv.app P) ▷ DerivedCategory.Q.obj T ≫\n      Functor.LaxMonoidal.μ DerivedCategory.Q (P⟦(1 : ℤ)⟧) T ≫\n      DerivedCategory.Q.map (CochainComplex.mapBifunctorShift₁Iso P T\n        (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8f3e6",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261014T004107-L-2836183",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-8f3e6",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261014T004107-L-2836183",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the node statements and compile cleanly; direct importer also compiles, with allowed axioms only."
+ }
+}
