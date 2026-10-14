@@ -3,80 +3,173 @@
  "blueprint": {
   "is": "lem-weil-derived-direct-image-composition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Composition of derived direct images",
- "statement": "Let $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ be morphisms of schemes on which\n$\\ell$ is invertible, and use the derived direct images of\n[def-weil-derived-direct-image]. There is a canonical isomorphism\n\n$$\n c_{g,f}:R(g\\circ f)_*\\xrightarrow{\\ \\sim\\ }Rg_*\\circ Rf_*\n$$\n\nat each coefficient stage of that definition:\n\n1. at finite level $A_{E,n}$, as functors\n$D(X_{\\mathrm{proet}},A_{E,n})\\to D(Z_{\\mathrm{proet}},A_{E,n})$;\n1. for $\\Lambda=\\mathcal O_E$, on those $K\\in D^b_c(X,\\mathcal O_E)$ with\n$Rf_*K\\in D^b_c(Y,\\mathcal O_E)$ (so that the right side is defined);\n1. for $\\Lambda=E$, on the rationalized category of\n[def-weil-rationalization-karoubi], for the same $K$;\n1. for $\\Lambda=\\Qlb$, on the common-stage category of\n[def-weil-algebraically-closed-coefficients], for objects $(E,K)$ with $K$\nas in (3);\n1. on the small étale site, for any ring $A$, as functors\n$D(X_{\\mathrm{et}},A)\\to D(Z_{\\mathrm{et}},A)$ between the ordinary\nderived categories of étale sheaves of $A$-modules.\n\nThe isomorphism $c_{g,f}$ is natural in $K$, is the identity when $f$ or $g$\nis an identity, and is associative: for a further morphism $h:Z\\to W$ the\ntwo isomorphisms $R(hgf)_*\\cong Rh_*Rg_*Rf_*$ built from $c$ agree. In\nparticular it is compatible with transport of structure along automorphisms\nof $X,Y,Z$ commuting with $f$ and $g$ (such as Frobenius), since the direct\nimage along an automorphism $\\sigma$ is the inverse image along\n$\\sigma^{-1}$.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$. Let $X\\xrightarrow f Y\\xrightarrow g Z$ be morphisms of schemes on which $\\ell$ is invertible. Use the finite derived direct images of [def-weil-derived-direct-image]. For the integral formula in that definition, specify its functorial realization as follows: form the strict reduction tower on a K-flat representative as in [def-weil-integral-reduction-tower], restrict each term to the completed coefficient sheaf [def-weil-completed-integral-coefficients], apply ordinary total derived direct image on the strict tower category, and then total derived inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. This chooses a functorial derived-limit realization; an arbitrary Roos triangle alone is not the meaning of the integral functor here.\n\nThere is a canonical natural isomorphism\n$$c_{g,f}:R(gf)_*\\xrightarrow{\\sim}Rg_*Rf_*$$\nwith the following domains and codomains:\n1. At finite level, on all of $D(X_{\\mathrm{proet}},A_{E,n})$, valued in $D(Z_{\\mathrm{proet}},A_{E,n})$.\n2. Integrally, on the full subcategory of $D^b_c(X,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed] consisting of $K$ with $Rf_*K\\in D^b_c(Y,\\mathcal O_E)$, valued in the ambient $D(Z_{\\mathrm{proet}},\\mathcal O_E)$.\n3. Rationally [def-weil-rationalization-karoubi], on the scalar localization of the full subcategory in (2) whose objects also satisfy $R(gf)_*K\\in D^b_c(Z,\\mathcal O_E)$, valued in $D^b_c(Z,E)$.\n4. In the common-stage category [def-weil-algebraically-closed-coefficients], on pairs $(E,K)$ with $K$ in (3), valued in $D^b_c(Z,\\overline{\\mathbf Q}_\\ell)$. The domain is the full common-stage subcategory; the conditions are preserved on extending the coefficient field.\n5. On the small etale site with any commutative ring $A$, on all of the ordinary unbounded $D(X_{\\mathrm{et}},A)$, valued in $D(Z_{\\mathrm{et}},A)$.\n\nUnder the canonical identity identifications the comparison is the identity if either map is an identity. For $h:Z\\to W$, the two composites from $R(hgf)_*K$ to $Rh_*Rg_*Rf_*K$ agree whenever all intermediate integral applications are defined (and, at the rational and common stages, all displayed values are bounded constructible). It respects transport along automorphisms of the diagram; direct image along $\\sigma$ identifies with inverse image along $\\sigma^{-1}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-derived-direct-image-composition.md",
   "place": "node lem-weil-derived-direct-image-composition, order 1470"
  },
  "stmt_deps": [
   "def-weil-derived-direct-image",
+  "def-weil-integral-reduction-tower",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-derived-complete-integral-detailed",
   "def-weil-rationalization-karoubi",
   "def-weil-algebraically-closed-coefficients"
  ],
  "proof": [
   {
-   "text": "*Finite level.* Put $A=A_{E,n}$. The constant sheaves satisfy\n$f^{-1}A_Y=A_X$, so the sheaf-level inverse image $f^{-1}$ of\n[def-weil-derived-pullback-tensor-hom] is an exact left adjoint of\n$f_*:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(Y_{\\mathrm{proet}},A)$. Hence $f_*$\ncarries K-injective complexes [def-weil-pbc-kinjective-resolutions] to\nK-injective complexes: for an acyclic $B$ one has\n$\\operatorname{Hom}(B,f_*I)=\\operatorname{Hom}(f^{-1}B,I)$, and $f^{-1}B$ is\nacyclic. This is the argument of\n[lem-weil-pbc-direct-image-preserves-injectives], applied to complexes and\non the pro-etale site. If $K\\to I$ is a K-injective resolution, then $f_*I$\nis a K-injective complex computing $Rf_{*,n}K$, so\n$Rg_{*,n}Rf_{*,n}K=g_*f_*I=(gf)_*I=R(gf)_{*,n}K$. By the well-definedness\nand functoriality of K-injective resolutions\n([lem-sp-kinjective-computes], part (1)), the resulting isomorphism does not\ndepend on $I$ and is natural in $K$. Identity and associativity hold because\n$(hg)f=h(gf)$ already holds for the sheaf-level functors on the same\nrepresentative $I$. The same argument applies verbatim on the small étale site with any\ncoefficient ring (item (5)) and to sheaves of abelian groups, and for $\\widehat{\\mathcal O}_E$-modules it gives the composition\nisomorphism for the derived functor $Rh^{\\wedge}_*$ of\n$h_*:\\Sh(-,\\mathcal O_E)\\to\\Sh(-,\\mathcal O_E)$ in the following form. The\nderived direct image of modules over a sheaf of rings is computed on the\nunderlying abelian sheaves, since a K-injective complex of modules is K-limp\nand so acyclic for the direct image of abelian sheaves. The canonical map\n$R(gf)^{\\wedge}_*\\to Rg^{\\wedge}_*Rf^{\\wedge}_*$ given by the universal\nproperty of right derived functors therefore becomes the abelian-sheaf\nisomorphism after the forgetful functor to abelian sheaves. That functor\nreflects isomorphisms, so the map is an isomorphism.",
+   "text": "At finite level the exact inverse image with identified constant coefficients is the one in [def-weil-derived-pullback-tensor-hom]. Choose an unbounded K-injective representative $K\\to I$ using [prop-pur-kinjective-resolutions-exist]. For an acyclic $B$, the complex adjunction gives $\\operatorname{Hom}^{\\bullet}(B,f_*I)=\\operatorname{Hom}^{\\bullet}(f^{-1}B,I)$; hence $f_*I$ is K-injective. Therefore the normalized comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] is represented by $(gf)_*I=g_*f_*I$. This is natural by that lemma. The identical argument holds for ordinary etale modules. For arbitrary structural ring maps, including completed coefficients, retain that lemma's general comparison $\\kappa_{g,f}$, without asserting that inverse image of the completed ring is the source completed ring. To check associativity, resolve $f_*I\\to J$ and $g_*J\\to H$; both composites on three maps are represented by $h_*g_*f_*I\\to h_*g_*J\\to h_*H$. A comparison to any resolution of $g_*f_*I$ is unique up to homotopy by [lem-weil-pbc-kinjective-hom-derived], so gives this same class. For identity maps choose identity resolutions. These checks apply also to morphisms of the tower ringed topoi.",
    "uses": [
     "def-weil-derived-pullback-tensor-hom",
-    "def-weil-pbc-kinjective-resolutions",
-    "lem-weil-pbc-direct-image-preserves-injectives",
-    "lem-sp-kinjective-computes"
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-kinjective-hom-derived"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; normalized K-injective representatives"
+   }
   },
   {
-   "text": "*Integral stage.* Let $h$ be any of $f,g,gf$ and let $K$ be derived complete\n[def-weil-derived-complete]. First, $Rh^{\\wedge}_*$ commutes with\n$\\operatorname{Res}_n$: the functor $\\operatorname{Res}_n$ is exact\n([lem-weil-restriction-of-scalars-exact]) and commutes with $h_*$ on sheaves.\nBoth $\\operatorname{Res}_nRh_{*,n}$ and $Rh^{\\wedge}_*\\operatorname{Res}_n$\nare computed on underlying abelian sheaves by the previous paragraph, so the\ncanonical comparison\n$\\operatorname{Res}_nRh_{*,n}\\to Rh^{\\wedge}_*\\operatorname{Res}_n$ is an\nisomorphism. Second, $Rh^{\\wedge}_*$ commutes with countable products,\nbecause a product of K-injective complexes is K-injective and $h_*$\ncommutes with products termwise. It is also exact, so it carries the Roos\ntriangle of [def-weil-derived-limit] for the system\n$(\\operatorname{Res}_nK_n)$ to a Roos triangle for\n$(Rh^{\\wedge}_*\\operatorname{Res}_nK_n)$. Combining these facts with\nderived completeness $K\\xrightarrow{\\sim}R\\varprojlim_n\\operatorname{Res}_nK_n$\ngives\n\n$$\n Rh_*K=R\\varprojlim_n\\operatorname{Res}_nRh_{*,n}K_n\n \\cong R\\varprojlim_nRh^{\\wedge}_*\\operatorname{Res}_nK_n\n \\cong Rh^{\\wedge}_*R\\varprojlim_n\\operatorname{Res}_nK_n\n \\cong Rh^{\\wedge}_*K ,\n$$\n\nso the direct image of [def-weil-derived-direct-image] is the derived functor\n$Rh^{\\wedge}_*$ on derived-complete objects. For $K\\in D^b_c(X,\\mathcal O_E)$\nwith $Rf_*K\\in D^b_c(Y,\\mathcal O_E)$, both $K$ and $Rf_*K$ are derived\ncomplete ([def-weil-derived-complete-integral-detailed]). Applying this\nidentification for $h=gf$, $f$ and $g$ therefore gives\n\n$$\n R(gf)_*K\\cong R(gf)^{\\wedge}_*K\\cong Rg^{\\wedge}_*Rf^{\\wedge}_*K\n \\cong Rg_*Rf_*K,\n$$\n\nthe middle step being the composition isomorphism for $\\widehat{\\mathcal\nO}_E$-modules. Naturality, identity and associativity are inherited from the\nmodule level.",
+   "text": "For any $u:U\\to V$, write $F_u$ for ordinary unbounded pushforward of completed-ring modules, using the structural map $\\widehat{\\mathcal O}_{E,V}\\to u_*\\widehat{\\mathcal O}_{E,U}$ induced by finite quotient maps and their inverse limit. If $r_{T,n}$ is restriction from $A_{E,n}$ to the completed ring, its derived functor is itself, by [lem-weil-restriction-of-scalars-exact]. The two composites of ringed-topos morphisms, through $(U,\\widehat{\\mathcal O}_{E,U})$ and through $(V,(A_{E,n})_V)$, have identical direct images on module sheaves. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to these two composites: it gives $F_u r_{U,n}\\cong r_{V,n}Ru_{*,n}$. Thus no uncited comparison with underlying abelian sheaves is needed. This identifies each evaluation of $RF_u^{\\operatorname{Tow}}$ on the restricted reduction tower with the term appearing in the imported integral formula. The transition maps correspond because they are the same coefficient quotient morphisms in the composite ringed topoi. The evaluation identifications are supplied by [lem-weil-ringed-tower-pushforward-limit-comparison].",
    "uses": [
-    "def-weil-derived-complete",
     "lem-weil-restriction-of-scalars-exact",
-    "def-weil-derived-limit",
-    "def-weil-derived-direct-image",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-derived-direct-image-composition.md",
+    "place": "Proof, integral stage: restriction-of-scalars comparison"
+   }
+  },
+  {
+   "text": "The strict construction in [def-weil-integral-reduction-tower] is used before passing to individual derived levels: on K-flat representatives send $P$ to $(\\operatorname{Res}_n(P\\otimes_R(A_{E,n})_U))_n$, where $R=\\widehat{\\mathcal O}_{E,U}$. A map of representatives induces a strict map commuting with every quotient transition. A quasi-isomorphism between K-flat representatives induces a quasi-isomorphism at every level by [lem-pur-derived-change-of-rings], clause (1), hence a quasi-isomorphism in the tower category because its cohomology is levelwise. The K-flat localization construction of clause (2) therefore applies to this single tower-valued functor as well: all its quasi-isomorphism checks are precisely these levelwise checks. This defines $T_E$ on derived morphisms, rather than merely on systems in the derived category.\n\nOn the pro-etale site countable products of completed-ring modules are exact [lem-weil-proetale-countable-products-exact]. Thus the product-cone construction on strict tower complexes preserves levelwise quasi-isomorphisms. To compare it to total derived inverse limit, take a tower K-injective resolution with injective terms. The strict-tower construction of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] computes the latter by its termwise limit; the inclusion of that limit into the product cone is a quasi-isomorphism, since $1-s$ is degreewise surjective on an injective tower. Concretely the injective tower transitions are surjective on sections, and successive lifting solves $x_n-t_nx_{n+1}=y_n$. The resolution induces a quasi-isomorphism between the two product cones by exactness of products. This identifies the strict total derived limit with the cone model naturally in strict tower maps, including their projections. A strictly compatible map from $P$ to its quotient tower goes to the cone with zero shifted-product component; the resolution and cone comparison carry this same map to the total derived limit. Consequently the specified unit in [lem-weil-finite-free-completed-scalar-comparison] at $L=E$ is a natural map to $L_ET_E(K)$ under this identification.\n\nLet $T_E(K)$ be the strict reduction tower of [def-weil-integral-reduction-tower] and $L_E$ the strict total derived inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Write $C(K)=L_E T_E(K)$. The specialization $L=E$ of [lem-weil-finite-free-completed-scalar-comparison] gives a specified natural isomorphism $\\eta_K:K\\to C(K)$ for every derived-complete $K$, not an arbitrary lift of the map to the product. Apply the new general strict-tower comparison to obtain $a_u:F_u C(K)\\xrightarrow{\\sim}L_E RF_u^{\\operatorname{Tow}}T_E(K)=\\mathcal R_u(K)$. Set $b_u(K)=a_u(K)F_u(\\eta_K):F_uK\\xrightarrow{\\sim}\\mathcal R_uK$. This is natural. Step 2 identifies $\\mathcal R_u$ with the specified realization of the integral formula. The hypothesis $\\mathcal R_fK\\in D^b_c(Y,\\mathcal O_E)$ ensures both $K$ and $\\mathcal R_fK$ are derived complete by [def-weil-derived-complete-integral-detailed], so $b_g(\\mathcal R_fK)$ is available. No bounded-below comparison has been applied to an unbounded complex.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-derived-direct-image-composition.md",
+    "place": "Proof, integral stage: replace unspecified Roos maps by strict towers and canonical completion unit; strict localization and cone comparison: Stacks sites-cohomology.tex Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change), 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "Define the integral compositor by the explicit conjugation\n$$\\mathcal R_{gf}K\\xrightarrow{b_{gf}^{-1}}F_{gf}K\\xrightarrow{\\kappa_{g,f}}F_gF_fK\\xrightarrow{F_g(b_f)}F_g\\mathcal R_fK\\xrightarrow{b_g}\\mathcal R_g\\mathcal R_fK.$$\nAll arrows are the natural isomorphisms constructed above. For identity maps the construction is $C$ with unit $\\eta$; use $\\eta^{-1}$ as the identity-functor identification, under which this formula is the identity. In a triple composite, expand the two formulas: each adjacent $b_u^{-1}b_u$ cancels. Naturality moves the remaining $b$ past $\\kappa$, leaving the two ordinary composites of Step 1, which agree. This proves associativity without assuming uniqueness of morphisms between Roos triangles. Coefficient multiplication commutes with every resolution comparison and tower projection, so each $b$ and the compositor is $\\mathcal O_E$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-derived-direct-image-composition.md",
+    "place": "Proof, integral stage: explicit naturality, identity and associativity"
+   }
+  },
+  {
+   "text": "Let $\\mathcal A_{g,f,E}$ be the full integral subcategory with both $\\mathcal R_fK$ and $\\mathcal R_{gf}K$ bounded constructible. The isomorphism just proved places $\\mathcal R_g\\mathcal R_fK$ in the same bounded constructible codomain. Rationalization [def-weil-rationalization-karoubi] keeps these objects and replaces each Hom group by its tensor with $E$. For a pure tensor $u\\otimes a$, naturality is the integral naturality equation multiplied by $a$; linear combinations give all morphisms. The images of inverse components remain inverses. The identity and associativity equations survive the Hom localization. This proves clause (3) with its corrected output condition.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
     "def-weil-derived-complete-integral-detailed"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-derived-direct-image-composition.md",
+    "place": "Proof, rational stage"
+   }
   },
   {
-   "text": "*Rational stage.* By [def-weil-rationalization-karoubi], $D^b_c(-,E)$ has the\nsame objects as $D^b_c(-,\\mathcal O_E)$ and\n$\\operatorname{Hom}\\otimes_{\\mathcal O_E}E$ as morphisms, and $Rf_*$ on it is\nthe $\\mathcal O_E$-linear integral functor followed by $-\\otimes_{\\mathcal\nO_E}E$ on morphisms. The integral isomorphism $c_{g,f}$ is a natural\nisomorphism of $\\mathcal O_E$-linear functors, so its image is a natural\nisomorphism of the rationalized functors. The identity and associativity\nequations are preserved.",
+   "text": "For $E\\subset L$, [lem-weil-finite-free-completed-scalar-comparison] identifies integral scalar extension of a complete object with ordinary tensor by the finite-free completed $\\mathcal O_L$ sheaf. Fix an $\\mathcal O_E$-basis of $\\mathcal O_L$; the same basis identifies its completed sheaf on every scheme with $d$ copies of the completed $\\mathcal O_E$ sheaf. After forgetting the $L$-action, scalar extension is a finite direct sum. Restriction is exact and conservative: a complex is acyclic exactly when its underlying abelian cohomology sheaves vanish. The coefficient restriction/direct-image comparison is obtained by the two equal ringed-topos composites as in Step 2, now with completed $E,L$ rings, using [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Under the chosen basis the canonical tensor/direct-image comparison sends $s\\otimes x$ to $s$ times the image of $x$ and is the direct sum of the identity comparisons for $F_u$. Hence it is invertible. The same check applies to $\\kappa$ and $a_u$: the underived maps defining their comparisons are identical block matrices. For $\\eta$ and its scalar comparison use the zero shifted-product component in the specified completion unit of [lem-weil-finite-free-completed-scalar-comparison]; finite sums commute with the products and cone differential, so these units correspond too. Consequently the explicit conjugation of Step 4 commutes with scalar extension. The argument concerns the canonical tensor maps, so the basis is used only to check invertibility and equality, not to choose a comparison. For successive extensions the maps on pure tensors send $m\\otimes(l\\otimes x)$ to $ml\\otimes x$ on both routes, with the canonical associator [lem-weil-scalar-extension-composition]. Constructibility of all extended values follows from [lem-weil-integral-scalar-extension-constructible]; the direct-image comparisons just proved show that the domain conditions survive extension.",
    "uses": [
-    "def-weil-rationalization-karoubi"
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-integral-scalar-extension-constructible"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-derived-direct-image-composition.md",
+    "place": "Proof, algebraically closed stage: finite-free tensor and coefficient-change compatibility"
+   }
   },
   {
-   "text": "*Algebraically closed stage.* In the common-stage category of\n[def-weil-algebraically-closed-coefficients], an object $(E,K)$ has direct\nimage $(E,Rf_*K)$, and a morphism is represented at some finite $L\\supset E$\nafter scalar extension. Take $c_{g,f}$ at stage $E$ on objects. It is\ncompatible with scalar extension to $L$, which is what naturality for\nmorphisms represented at $L$ requires. Indeed, on integral representatives\n$-\\otimes_{\\mathcal O_E}\\mathcal O_L$ is, as an $\\widehat{\\mathcal\nO}_E$-module, a finite direct sum of copies of the identity ($\\mathcal O_L$\nbeing finite free over $\\mathcal O_E$). The derived functors $Rh^{\\wedge}_*$\nand the composition isomorphism commute with finite direct sums and with the\nforgetful functors along $\\widehat{\\mathcal O}_E\\to\\widehat{\\mathcal O}_L$,\nsince all of them are computed on underlying abelian sheaves. The iterated\nextensions agree by [lem-weil-scalar-extension-composition]. Hence $c_{g,f}$\nat stage $E$ and at stage $L$ correspond under scalar extension, giving a\nnatural isomorphism in $D^b_c(Z,\\Qlb)$ with the stated identity and\nassociativity properties.\n\nFinally, for an automorphism $\\sigma$ the direct image $R\\sigma_*$ is\ninverse to $R(\\sigma^{-1})_*$ by the identity and associativity properties.\nAn automorphism of the diagram $X\\to Y\\to Z$ therefore transports $c_{g,f}$\nto itself by associativity, which is the asserted compatibility with\ntransport of structure.",
+   "text": "A common-stage morphism is represented by $u$ at a finite coefficient field $L$ [def-weil-algebraically-closed-coefficients]. Step 6 identifies the comparison components after extension to $L$, and rational naturality from Step 5 proves naturality for $u$. If another representative agrees at $M\\supset L$, Step 6's associator equation gives the same resulting class at $M$, so the comparison descends. Identity and associativity are equalities at a common finite stage and therefore in the colimit. For an automorphism $\\sigma$, underived direct image is inverse image by $\\sigma^{-1}$ and is exact; identity resolutions compute its derived functor. Reassociate the composites for a commuting automorphism of $X\\to Y\\to Z$ using Step 4; both routes are the same compositor, proving automorphism transport.",
    "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "lem-weil-scalar-extension-composition"
+    "def-weil-algebraically-closed-coefficients"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-derived-direct-image-composition.md",
+    "place": "Proof, algebraically closed stage and final automorphism paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-pbc-kinjective-resolutions",
-  "lem-weil-pbc-direct-image-preserves-injectives",
-  "lem-sp-kinjective-computes",
-  "def-weil-derived-complete",
-  "lem-weil-restriction-of-scalars-exact",
-  "def-weil-derived-limit",
-  "def-weil-derived-direct-image",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-rationalization-karoubi",
   "def-weil-algebraically-closed-coefficients",
-  "lem-weil-scalar-extension-composition"
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-reduction-tower",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-restriction-of-scalars-exact",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-scalar-extension-composition",
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-derived-direct-image-composition.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of derived direct images via K-injective resolutions",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; related right-derived injective-resolution lemmas in Mathlib/CategoryTheory/Abelian/RightDerived",
+   "date": "2026-10-14",
+   "verdict": "generalization: abstract right-derived functor naturality, but no theorem for this pro-etale multi-stage construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedFunctor, KInjective, comp",
+   "results": "0 hits; unknown identifier 'CategoryTheory.DerivedFunctor'",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*direct.*image|K.injective.*composition [Mathlib/CategoryTheory]",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition isomorphism for derived direct images of sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -109,5 +202,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-derived-direct-image-composition",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: specified a strict-tower functorial realization of the integral formula because arbitrary Roos triangles provide no canonical maps. Added the necessary final-output constructibility condition only to rational/common-stage clauses; kept integral output ambient and finite/etale clauses unbounded. Replaced bounded-below and uncited underlying-abelian comparisons by general ringed-topos comparison, canonical finite-free completion unit, and one general strict-tower pushforward/limit comparison. Wrote explicit conjugation and cancellation for coherence and finite-free coefficient compatibility. Removed incorrect whole-unit realization.",
+  "blueprint": "Finite paragraph via K-injective normalization; integral paragraph via strict tower comparison and canonical completion unit; rational paragraph on the corrected constructible domain; common-stage paragraph via canonical finite-free coefficient comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "General unbounded ringed-topos comparison, also for coefficient restriction and tower topoi; the unit has no such general lemma."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Unbounded uniqueness up to homotopy for normalization and associativity; replaces the bounded-below computation lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "General strict-tower triangulated inverse-limit functor, not arbitrary Roos cones; needed to give the integral formula its functorial realization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-b0d741189",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-b0d741189 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Supplied corrected JSON files fixing new-node metadata, explicit tower-object quantification, and Step 3’s strict-tower localization/cone-unit justification. Checked all seven steps, edge cases, duplicate candidates, and exact master coefficient categories/base-change morphism; no target weakened. Details in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
