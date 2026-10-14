@@ -4,12 +4,12 @@
   "is": null,
   "from": {
    "node": "def-weil-rationalization-karoubi",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement: the displayed formula Hom_C[1/varpi_E](K,L) = Hom_C(K,L) tensor_{O_E} E, and the sentence that this is raw scalar localization without Karoubi completion",
    "via": [
     "def-weil-linear-scalar-localization"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The scalar localization of a linear category is a linear category",
@@ -24,9 +24,80 @@
   "def-weil-module-base-change",
   "def-weil-linear-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=R[1/\\varpi]$. Its ring map $R\\to A$ and commutative ring structure are supplied by [def-weil-ring-localization-away]. Composition $\\beta(f,g)=f\\circ g$ in $\\mathcal C$ is $R$-bilinear by [def-weil-linear-category]. Apply the bilinear extension clause of [def-weil-module-base-change] to the three Hom modules. It gives exactly the unique $A$-bilinear composition with $(f\\otimes a)\\circ(g\\otimes b)=(f\\circ g)\\otimes ab$, proving (1).",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-linear-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CX (algebra-lemma-tensor-product), 05G4 (algebra-definition-base-change); application to the raw Hom tensor product in def-weil-rationalization-karoubi"
+   }
+  },
+  {
+   "text": "For the remaining calculations, every tensor is a finite sum of pure tensors: from the defining presentation of a tensor product as the free $R$-module on pairs modulo the additive and balancing relations (Stacks 00CX), a representative is a finite sum $\\sum_i r_i(m_i\\otimes a_i)=\\sum_i m_i\\otimes (r_i a_i)$. Thus additivity extends an equality on pure tensors to all inputs, one input at a time. For $u=\\sum_i f_i\\otimes a_i$, $v=\\sum_j g_j\\otimes b_j$, $w=\\sum_k h_k\\otimes c_k$ with consecutive sources and targets, $(u\\circ v)\\circ w=\\sum_{i,j,k}((f_i\\circ g_j)\\circ h_k)\\otimes((a_i b_j)c_k)$ and $u\\circ(v\\circ w)=\\sum_{i,j,k}(f_i\\circ(g_j\\circ h_k))\\otimes(a_i(b_j c_k))$. These are equal termwise by associativity in $\\mathcal C$ and $A$. The identities give $(\\mathrm{id}_L\\otimes1)\\circ(\\sum_i f_i\\otimes a_i)=\\sum_i f_i\\otimes a_i$ and $(\\sum_i f_i\\otimes a_i)\\circ(\\mathrm{id}_K\\otimes1)=\\sum_i f_i\\otimes a_i$ by the two identity laws in $\\mathcal C$. The Hom modules and the bilinearity from step 1 now meet precisely the definition of an $A$-linear category, proving (2).",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CX (algebra-lemma-tensor-product), 05G4 (algebra-definition-base-change); application to the raw Hom tensor product in def-weil-rationalization-karoubi"
+   }
+  },
+  {
+   "text": "The canonical maps on Hom modules $f\\mapsto f\\otimes1$ are $R$-linear by [def-weil-module-base-change], where $R$ acts through $R\\to A$. With the identity object map they preserve identities by the chosen identities, and $Q(f\\circ g)=(f\\circ g)\\otimes1=(f\\otimes1)\\circ(g\\otimes1)$ since $1\\cdot1=1$. These equations give a functor, and its Hom maps satisfy the definition of an $R$-linear functor. This proves (3).",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CX (algebra-lemma-tensor-product), 05G4 (algebra-definition-base-change); application to the raw Hom tensor product in def-weil-rationalization-karoubi"
+   }
+  },
+  {
+   "text": "For each $K,L$, $T$ gives an $R$-linear Hom map by [def-weil-linear-functor]. Its base change [def-weil-module-base-change] is a well-defined $A$-linear map $T_{K,L}\\otimes_R A$ sending $f\\otimes a$ to $T(f)\\otimes a$. Use these maps and the object assignment $K\\mapsto T(K)$. They send $\\mathrm{id}_K\\otimes1$ to $\\mathrm{id}_{T(K)}\\otimes1$. On pure tensors they send $(f\\circ g)\\otimes ab$ to $T(f\\circ g)\\otimes ab=(T(f)\\circ T(g))\\otimes ab=(T(f)\\otimes a)\\circ(T(g)\\otimes b)$. For arbitrary finite sums both sides are $\\sum_{i,j}(T(f_i)\\circ T(g_j))\\otimes a_i b_j$. Thus they define an $A$-linear functor $T\\prime$.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CX (algebra-lemma-tensor-product), 05G4 (algebra-definition-base-change); application to the raw Hom tensor product in def-weil-rationalization-karoubi"
+   }
+  },
+  {
+   "text": "Here automorphism means a functor with a strict inverse $S=T^{-1}$ as in the statement. That inverse is $R$-linear: for $u,v:T(K)\\to T(L)$ and $r\\in R$, applying the bijective Hom map of $T$ to $S(u+v)$ and $S(u)+S(v)$ gives $u+v$ in both cases; applying it to $S(ru)$ and $rS(u)$ gives $ru$ in both cases. Every pair of objects has this form because $T$ is bijective on objects. Apply the construction in step 4 to $S$. On objects $S\\prime T\\prime$ and $T\\prime S\\prime$ are identities; on $\\sum_i f_i\\otimes a_i$, their maps are respectively $\\sum_i S(T(f_i))\\otimes a_i=\\sum_i f_i\\otimes a_i$ and $\\sum_i T(S(f_i))\\otimes a_i=\\sum_i f_i\\otimes a_i$. Consequently $S\\prime$ is the inverse of $T\\prime$. Finally both $Q\\circ T$ and $T\\prime\\circ Q$ send $K$ to $T(K)$ and $f$ to $T(f)\\otimes1$, establishing the stated equality and (4).",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CX (algebra-lemma-tensor-product), 05G4 (algebra-definition-base-change); application to the raw Hom tensor product in def-weil-rationalization-karoubi"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-linear-category",
+  "def-weil-module-base-change",
+  "def-weil-linear-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+  "place": "Explicit category-law and automorphism calculations for the displayed raw scalar localization; tensor construction checked in Stacks 00CV/00CX and 05G4."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -41,10 +112,52 @@
    "results": "Localization/Linear.lean:54-66 Linear R W.Localization and W.Q linear; Shift/Linear.lean:33 shift functors on a linear localization are linear; the localization at W={ϖ^n·id} is equivalent to C[1/ϖ] but its Hom modules are not identified with Hom ⊗_R R[1/ϖ], and its scalars stay R",
    "date": "2026-10-09",
    "verdict": "generalization not in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a linear category with hom modules tensor a commutative algebra and composition on pure tensors",
+   "results": "ModuleCat.instMonoidalLinear; ModuleCat.CoextendScalars.obj'; ModuleCat.coextendScalars; CommRingCat.moduleCatExtendScalarsPseudofunctor_map; ModuleCat.extendScalars; ModuleCat.ExtendScalars.map'; ModuleCat.ExtendScalars.obj'; ModuleCat.ExtendScalars.map_tmul; 8 hits read",
+   "date": "2026-10-14",
+   "verdict": "no match: module-category scalar extension and enriched-category structure do not supply this raw tensor-Hom category with all four clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Linear, TensorProduct",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: module-category scalar extension and enriched-category structure do not supply this raw tensor-Hom category with all four clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension|extendScalars|TensorProduct|baseChange",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: module-category scalar extension and enriched-category structure do not supply this raw tensor-Hom category with all four clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a linear category by tensoring its morphism modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings for enriched linear categories composition tensor products of hom spaces",
+   "results": "CategoryTheory.eHomEquiv_comp; CategoryTheory.EnrichedOrdinaryCategory.homEquiv_comp; CategoryTheory.ForgetEnrichment.homTo_comp; CategoryTheory.eHomEquiv_comp_assoc; CategoryTheory.ForgetEnrichment.homOf_comp; CategoryTheory.Iso.eHomCongr_comp_assoc; CategoryTheory.Iso.eHomCongr_comp; CategoryTheory.EnrichedCategory.comp; 8 hits read",
+   "date": "2026-10-14",
+   "verdict": "no match: module-category scalar extension and enriched-category structure do not supply this raw tensor-Hom category with all four clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|extendScalars|scalarExtension",
+   "results": "Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/MorphismProperty/Local.lean; Mathlib/CategoryTheory/MorphismProperty/Local.lean; Mathlib/CategoryTheory/MorphismProperty/Ind.lean; 25 hits read",
+   "date": "2026-10-14",
+   "verdict": "no match: module-category scalar extension and enriched-category structure do not supply this raw tensor-Hom category with all four clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +177,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-linear-scalar-localization-category",
+  "worker": "stage1",
+  "summary": "Kept all four clauses and their hypotheses. Reused the existing module-base-change Mathlib leaf for the unique bilinear extension and induced linear Hom maps. Expanded associativity, identities, functoriality, inverse linearity and compatibility with Q as explicit tensor finite-sum computations. No new nodes. No exact project attachment found; the Verdier rationalization declarations assume triangulated structure and do not state the raw tensor-Hom construction.",
+  "blueprint": "Realizes the category structure implicit in the displayed raw scalar localization formula of def-weil-rationalization-karoubi, with no Karoubi completion."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-a4047069c",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-a4047069c (reviewer sub-agent of L); spot-checked: Read the complete delivery, DAG route, cited nodes, blueprint, Stacks sources, Mathlib base-change declarations, and archived target source. Verified all five proof steps, coefficient restriction, base-change morphism, finite-sum calculations, strict automorphism case, edge cases, acyclicity, dependency closure, and searches. No repair needed; review.md records the checks."
+ }
 }
