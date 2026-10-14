@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-weak-etale-tor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Flat diagonal and Tor groups",
@@ -13,28 +13,187 @@
   "place": "node lem-weil-pbc-weak-etale-tor, order 1216"
  },
  "stmt_deps": [
-  "def-weil-pbc-ind-etale-algebra"
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map"
  ],
  "proof": [
   {
-   "text": "Take free $B$-module resolutions $P\\to M$, $Q\\to N$, in nonnegative\nhomological degrees. They are flat resolutions over $A$, by the flatness\ncondition in [def-weil-pbc-ind-etale-algebra]. The double complex\n$P\\otimes_AQ$ therefore computes $\\operatorname{Tor}^A(M,N)$. The two factors\ngive it an action of $B\\otimes_AB$. Tensoring over that ring with $B$ is\nexact, by the other flatness condition. It commutes with homology and\nidentifies the double complex with $P\\otimes_BQ$, which computes the left\nside. This proves the formula. The bound follows from the usual\ncharacterization of flat dimension by vanishing of Tor.",
+   "text": "Write $T=B\\otimes_A B$ and $\\mu:T\\to B$, $b_1\\otimes b_2\\mapsto b_1b_2$. All rings are commutative and all homological degrees are nonnegative. Construct a free $B$-resolution $P_\\bullet\\to M$: $P_0$ is the free module on the underlying set of $M$, mapping its basis element $[m]$ to $m$; Set $L_0=\\ker(P_0\\to M)$. Recursively, $P_{j+1}$ is free on the underlying set of $L_j$, the surjection $P_{j+1}\\to L_j$ maps $[x]$ to $x$, and $L_{j+1}$ is its kernel. The differential $P_{j+1}\\to P_j$ is that surjection followed by the inclusion $L_j\\hookrightarrow P_j$. Thus its image equals the kernel of the preceding differential (or augmentation at $j=0$), so the augmented complex is exact. This works for arbitrary modules, including the zero module, without a finite generation assumption.",
    "uses": [
-    "def-weil-pbc-ind-etale-algebra"
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-tor-modules"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LY (section-tor), free resolution; the free-on-elements construction writes out its existence"
+   }
+  },
+  {
+   "text": "By the weakly etale hypothesis $B$ is flat over $A$ and is flat over $T$ via $\\mu$. Each $P_j\\cong B^{(I_j)}$ is flat over $A$: for an exact sequence $U\\to V\\to W$ of $A$-modules, its tensor with $B$ is exact by the flat-tensor-exact node; its direct sum over $I_j$ remains exact, since every element has finite support and preimages can be chosen for its finitely many coordinates. The canonical identification $B^{(I_j)}\\otimes_A U\\cong (B\\otimes_A U)^{(I_j)}$ sends $e_i b\\otimes u$ to the $i$-th coordinate $b\\otimes u$, with inverse the sum of these coordinate inclusions. Hence $P$ is an $A$-flat resolution. Put $C=P_\\bullet\\otimes_A N$, with the $T$-action $(b_1\\otimes b_2)(p\\otimes n)=b_1p\\otimes b_2n$; the differentials are $T$-linear.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-chain-complex-tensor-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HB (definition-flat), 00HD (lemma-flat); direct-sum verification written here"
+   }
+  },
+  {
+   "text": "There is a canonical natural $T$-linear identification $H_i(C)\\cong\\operatorname{Tor}^A_i(M,N)$, not merely an isomorphism of underlying groups. To verify it and its naturality, take a free $A$-resolution $Q\\to N$ by the construction of step 1 and form $D_{j,k}=P_j\\otimes_A Q_k$, with horizontal differential $d_P\\otimes1$ and vertical differential $1\\otimes d_Q$. On a pure tensor their two composites both give $d_P(p)\\otimes d_Q(q)$, and each differential squares to zero; hence this is the commuting double complex required by the cited node. Its rows are exact in positive degrees because each $Q_k$ is flat, and its columns are exact in positive degrees because each $P_j$ is $A$-flat (step 2); use flat-tensor-exact in both cases. Tensor-right-exact identifies its row-cokernel complex with $M\\otimes_A Q$ via $p\\otimes q\\mapsto\\varepsilon_P(p)\\otimes q$, and its column-cokernel complex with $P\\otimes_A N$ via $p\\otimes q\\mapsto p\\otimes\\varepsilon_Q(q)$. The functorial double-complex-cokernel-homology isomorphism identifies their homologies. The factor swap $m\\otimes q\\mapsto q\\otimes m$, the definition of Tor using $Q$, and Tor symmetry identify the former homology with $\\operatorname{Tor}^A_i(M,N)$. For $B$-linear maps $f:M\\to M'$ and $g:N\\to N'$, free modules are projective, so the projective-resolution-lift node gives a $B$-linear lift $a:P\\to P'$ of $f$ and an $A$-linear lift $b:Q\\to Q'$ of $g$. The maps $a_j\\otimes b_k$ commute with both differentials; the displayed augmentation formulas show that they induce $f\\otimes b$ and $a\\otimes g$ on the two cokernel complexes. Functoriality of the double-complex isomorphism, the Tor-map-via-resolution-lift node, and naturality of Tor symmetry prove the claimed naturality, independent of the lifts. In particular apply this to multiplication by each $b_1$ on $M$ and each $b_2$ on $N$: these are $B$-linear maps, lifted on $P$ by multiplication and on $Q$ by a resolution lift. Thus the comparison intertwines both commuting $B$-actions, giving exactly the stated $T$-linearity.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-free-module-projective",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-double-complex-cokernel-homology-iso",
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-projective-resolution-lift",
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00M1 (lemma-no-spectral-sequence), 00M3 (lemma-tor-left-right), 00LZ (lemma-tor-welldefined), 00LS (lemma-compare-resolutions); same double-complex argument with P only A-flat"
+   }
+  },
+  {
+   "text": "Because $B$ is $T$-flat, the canonical map $B\\otimes_T H_i(C)\\to H_i(B\\otimes_T C)$, $b\\otimes[z]\\mapsto[b\\otimes z]$, is an isomorphism. Explicitly put $Z_i=\\ker d_i$ and $J_i=\\operatorname{im}d_{i+1}$. Tensor the short exact sequences $0\\to Z_i\\to C_i\\to J_{i-1}\\to0$ and $0\\to J_i\\to Z_i\\to H_i(C)\\to0$ using flat-tensor-exact and tensor-right-exact. The injection $J_{i-1}\\to C_{i-1}$ remains injective, so the new cycles are $B\\otimes_T Z_i$. The surjection $C_{i+1}\\to J_i$ remains surjective and the injection $J_i\\to C_i$ remains injective, so the new boundaries are $B\\otimes_T J_i$. The second sequence identifies their quotient with $B\\otimes_T H_i(C)$. For $i=0$ take $C_{-1}=J_{-1}=0$. All inclusions and quotient maps commute with chain maps, so this isomorphism is natural.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HB, 00HD; kernel/image/quotient argument for flat tensor and homology written explicitly"
+   }
+  },
+  {
+   "text": "There is a chain isomorphism $B\\otimes_T(P_\\bullet\\otimes_A N)\\cong P_\\bullet\\otimes_B N$, with degreewise map $b\\otimes(p\\otimes n)\\mapsto bp\\otimes n$ and inverse $p\\otimes n\\mapsto1\\otimes(p\\otimes n)$. The first map is $T$-balanced: acting by $b_1\\otimes b_2$ on the second factor gives $bb_1p\\otimes b_2n=bb_1b_2p\\otimes n$, equal to its action through $\\mu$ on the first factor. The inverse is $B$-balanced because $1\\otimes(b p\\otimes n)=b\\otimes(p\\otimes n)=1\\otimes(p\\otimes b n)$, using the two elements $b\\otimes1$ and $1\\otimes b$ of $T$. The two maps are inverse on pure tensors, commute with differentials, and commute with maps $a\\otimes g$ from step 3. Since $P$ is a free $B$-resolution, its tensor with $N$ computes $\\operatorname{Tor}^B_i(M,N)$ by the Tor definition. Combining steps 3 and 4 with this chain isomorphism yields the displayed formula as a natural $B$-module isomorphism. Naturality on the $B$-Tor side is precisely the Tor-map-via-resolution-lift statement applied to $a$ and $g$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tor-map-via-resolution-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LY and Tag 00LZ; diagonal balancing calculation is the blueprint proof sentence identifying the tensors"
+   }
+  },
+  {
+   "text": "Suppose $d\\ge0$ bounds the flat resolution length of every $A$-module. For any $B$-modules $M,N$, their underlying $A$-modules satisfy $\\operatorname{Tor}^A_i(M,N)=0$ for $i>d$: choose a flat resolution of $M$ of length at most $d$, extend it by zero, and apply the flat-resolution-tor-comparison node; its tensor with $N$ has zero terms, hence zero homology, above $d$. The formula already proved gives $\\operatorname{Tor}^B_i(M,N)=0$ for $i>d$ and every $N$.",
+   "uses": [
+    "lem-pc-flat-resolution-tor-comparison",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066F (lemma-tor-dimension), forward implication; Tor computation by flat resolutions from Algebra Tags 00LY, 00M1, 00M3"
+   }
+  },
+  {
+   "text": "Fix any $B$-module $M$ and the free resolution $P$ of step 1. Let $K_0=M$ and, for $d\\ge1$, let $K_d=\\ker(P_{d-1}\\to P_{d-2})$, taking $P_{-1}=M$ and the map from $P_0$ to be the augmentation. The tail $\\cdots\\to P_{d+1}\\to P_d\\to K_d\\to0$ is a free resolution. For any ideal $I\\subseteq B$, the Tor definition identifies $\\operatorname{Tor}^B_1(K_d,B/I)$ with the degree-one homology of that tail tensored with $B/I$, which is exactly $H_{d+1}(P\\otimes_B B/I)=\\operatorname{Tor}^B_{d+1}(M,B/I)=0$ by step 6: the three terms and the two differentials defining these homologies are identical. This also holds for $d=0$, when the tail is $P$ itself. The flat-tor-ideal-criterion node makes $K_d$ flat. Each $P_j$ is flat by projective-module-flat, so for $d\\ge1$ the exact truncated sequence $0\\to K_d\\to P_{d-1}\\to\\cdots\\to P_0\\to M\\to0$ is a flat resolution of length $d$. For $d=0$, $M=K_0$ is flat and gives a length-zero resolution. Thus the original common bound holds for every $B$-module.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-projective-module-flat",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066F (lemma-tor-dimension), converse and truncation; Algebra Tag 00M5 (lemma-characterize-flat)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-ind-etale-algebra"
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-chain-complex-tensor-module",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-free-module-projective",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-double-complex-cokernel-homology-iso",
+  "lem-weil-pbc-tor-symmetry",
+  "lem-weil-pbc-projective-resolution-lift",
+  "lem-weil-pbc-tor-map-via-resolution-lift",
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-pc-flat-resolution-tor-comparison",
+  "lem-weil-pbc-flat-tor-ideal-criterion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-weak-etale-tor.md",
-  "place": "## Proof"
+  "place": "## Proof, expanded using Stacks 00M1, 00M3, 00HD, 00M5, 066F; one free resolution plus the other module replaces the redundant total tensor"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a weakly etale ring map A to B the Tor groups of B modules are obtained from Tor over A by tensoring over B tensor A B with B",
+   "results": "8 hits: Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.baseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Extension.tensorCotangentSpace, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Tor comparison or the bound for arbitrary degrees"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor, Module.Flat",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Tor comparison or the bound for arbitrary degrees"
+  },
+  {
+   "tool": "grep",
+   "query": "WeaklyEtale|weakly.etale|flat.*diagonal",
+   "results": "15 hits: Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Tor comparison or the bound for arbitrary degrees"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor comparison for weakly etale ring maps with flat diagonal",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat ring homomorphism with flat multiplication B tensor A B to B preserves weak global dimension and compares derived tensor products",
+   "results": "8 hits: Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct, RingHom.Flat, Module.FaithfullyFlat.instTensorProduct, RingHom.FaithfullyFlat, Module.FaithfullyFlat, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_injective",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Tor comparison or the bound for arbitrary degrees"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*(baseChange|change|flat)|flat.*Tor|homology.*[tT]ensor",
+   "results": "1 hits: Mathlib/Algebra/Homology/LeftResolution/Basic.lean (directory Algebra/Homology)",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Tor comparison or the bound for arbitrary degrees"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher Tor comparison for restriction of scalars along a flat algebra whose multiplication map is flat",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.isBaseChange, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.Flat.trans, Module.Flat.iff_flat_tensorProduct, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+   "date": "2026-10-14",
+   "verdict": "no match: preservation of exactness and flatness statements do not state this higher Tor identification or arbitrary common bound"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -56,5 +215,29 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-weak-etale-tor",
+  "worker": "stage1",
+  "summary": "Kept the statement and expanded its flat-resolution proof, with explicit diagonal balancing, canonical two-factor action and naturality, and a syzygy truncation proving the common flat-resolution bound including d=0. Reused the existing DAG for every non-elementary input; no new nodes.",
+  "blueprint": "Steps 1–3 realize the first three sentences of ## Proof (free B-resolutions restricted to A and computation of Tor); steps 4–5 realize exact diagonal tensor, homology and the identification with tensor over B; steps 6–7 write out the final flat-dimension sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-resolution-tor-comparison",
+    "why": "Generic computation of Tor by an arbitrary flat resolution, used only for the vanishing above the given A-resolution bound; no node of this unit states that computation, and the unit route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-resolution-tor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-46b5fa49a",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-46b5fa49a (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route, and cited Stacks sources. All seven steps check: natural two-factor Tor action, flat diagonal tensor, balancing maps, and syzygy truncation including d=0. No new nodes or repairs. Accepted lem-pc-flat-resolution-tor-comparison as the generic tool for step 6. Concrete checks and source locations are recorded in review.md."
+ }
 }
