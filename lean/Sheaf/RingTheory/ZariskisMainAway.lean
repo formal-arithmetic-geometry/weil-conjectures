@@ -6,10 +6,9 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.RingTheory.QuasiFinite.Basic
-public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
-# Zariski's main theorem: compatibility imports
+# Zariski's main theorem: retired wrapper
 
 Source: Stacks Project, Algebra, Tags 00PK, 00PL and 00Q9
 (blueprint: lem-weil-pbc-integral-closure-zariski-main-away).
@@ -18,8 +17,9 @@ The duplicate Sheaf declaration has been removed. Callers transport their open
 fibre singleton through `PrimeSpectrum.preimageHomeomorphFiber`, obtain the
 `Algebra.QuasiFiniteAt` instance with Mathlib's
 `Algebra.QuasiFiniteAt.of_isOpen_singleton_fiber`, and apply
-`Algebra.ZariskisMainProperty.of_finiteType` directly. This module preserves its
-public imports for compatibility; no caller needs to import it for a proof.
+`Algebra.ZariskisMainProperty.of_finiteType` directly. This compatibility module
+exposes Mathlib alone; it no longer imports the project-specific fibre predicate.
+Its former callers import the definitions and Mathlib results they use directly.
 -/
 
 @[expose] public section
