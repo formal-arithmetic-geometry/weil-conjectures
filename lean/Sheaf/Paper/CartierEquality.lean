@@ -95,6 +95,7 @@ theorem cartier_equality
     rw [htrdeg, ← Nat.cast_add, hdim]
   refine ⟨hΩ, hH, heq, ?_⟩
   intro hfinite
+  -- Finite extensions have zero transcendence degree.
   have hzero : Algebra.trdeg k K = 0 := trdeg_eq_zero
   rw [hzero, zero_add] at heq
   exact_mod_cast heq.symm
