@@ -27,9 +27,78 @@
   "def-weil-pbc-sheafification",
   "def-sp-left-exact-additive"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put B(W)=W\\times_VU. The continuity lemma makes u_*R_U a sheaf of rings and u_*F a sheaf of abelian groups. The maps R\\to R_U(B(W)) commute with restrictions, since they are components of the constant-presheaf sheafification morphism. Hence they give a morphism of ring presheaves from the constant presheaf R to u_*R_U. The universal property of the constant sheaf R_V (sheafification in rings) extends this uniquely to a morphism of ring sheaves \\rho:R_V\\to u_*R_U. In particular \\rho_{W_1}(a|_{W_1})=\\rho_{W_2}(a)|_{B(W_1)} for every g:W_1\\to W_2 and a\\in R_V(W_2).",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV (section-sheaves-modules), definition-sheaf-modules; constant-ring specialization of the scalar map in pushforward; blueprint def-weil-pbc-direct-image, module-sheaves sentence"
+   }
+  },
+  {
+   "text": "For a\\in R_V(W) and s\\in F(B(W)), define a\\cdot s=\\rho_W(a)s. The module axioms follow by substituting the ring homomorphism \\rho_W into the R_U(B(W))-module axioms. For g:W_1\\to W_2, semilinearity of F and naturality of \\rho give (\\rho_{W_2}(a)s)|_{B(W_1)}=\\rho_{W_1}(a|_{W_1})s|_{B(W_1)}. Thus the underlying abelian sheaf u_*F with this action is an R_V-module sheaf. If \\varphi is R_U-linear, then \\varphi_{B(W)}(\\rho_W(a)s)=\\rho_W(a)\\varphi_{B(W)}(s), so u_*\\varphi is R_V-linear. Identities and compositions hold componentwise. Forgetting the action leaves exactly F(B(W)) and \\varphi_{B(W)}, proving the claimed equality of composites with forgetful functors.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV, definition-sheaf-modules; pushforward construction preceding Tag 03DC, lemma-exactness-pushforward-pullback"
+   }
+  },
+  {
+   "text": "Addition of module-sheaf morphisms is componentwise, since the sum of two linear maps is linear and its restrictions commute. Consequently (u_*(\\varphi+\\psi))_W=(\\varphi+\\psi)_{B(W)}=\\varphi_{B(W)}+\\psi_{B(W)}=(u_*\\varphi+u_*\\psi)_W, and u_*0=0. This proves additivity on morphisms.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D9, section-kernels, paragraph defining addition on morphisms"
+   }
+  },
+  {
+   "text": "Apply the sectionwise module-sheaf limits lemma on U_Et with O=R_U and on V_Et with O=R_V. For a finite family (F_i), its product has sections \\prod_i F_i(B(W)) and componentwise scalar action. The canonical comparison u_*(\\prod_i F_i)\\to\\prod_i u_*F_i is therefore the identity on these tuples at W, and both R_V(W)-actions send (s_i)_i to (\\rho_W(a)s_i)_i. It is an isomorphism of module sheaves, including for the empty product, whose sections are zero. For \\varphi:F\\to F^{\\prime}, the same lemma computes its kernel sectionwise: both u_*(\\ker\\varphi)(W) and (\\ker u_*\\varphi)(W) are {s\\in F(B(W)): \\varphi_{B(W)}(s)=0}, with the same restrictions and scalar action. The canonical kernel comparison is thus an isomorphism of module sheaves. This proves preservation of finite products and kernels.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits), and 03DC (lemma-exactness-pushforward-pullback), clause (1)"
+   }
+  },
+  {
+   "text": "By the definition of left exact additive functor, step 4 gives left exactness. Explicitly, an exact sequence $0\\to F_1\\xrightarrow{a}F_2\\xrightarrow{b}F_3$ identifies $a$ with a kernel of $b$: the induced map $F_1\\to\\ker b$ is an isomorphism. A functor sends an isomorphism and its inverse to inverse maps. Applying $u_*$ to this identification and composing with the canonical kernel comparison isomorphism of step 4 therefore identifies $u_*a$ with the kernel inclusion of $u_*b$. This is precisely exactness of $0\\to u_*F_1\\to u_*F_2\\to u_*F_3$.",
+   "uses": [
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), Tag 03DC (lemma-exactness-pushforward-pullback), clause (1); etale-cohomology Tag 03PV, paragraph after Definition 03PY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-base-change-continuous",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CV (definition-sheaf-modules), 03D9 (section-kernels), 03DA (lemma-abelian), 03DB (lemma-limits-colimits), 03DC (lemma-exactness-pushforward-pullback); direct sectionwise proof for the constant-ring specialization"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +120,59 @@
    "results": "none in Mathlib; none in slopmaster2 (its etale sheaves of modules are ModuleCat R-valued sheaves, for which AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar with A = ModuleCat R is the analogue, a different model of Mod(T_Et,R))",
    "date": "2026-10-10",
    "verdict": "no match; candidate for clause (1): SheafOfModules.pushforward with phi = rho; clause (2) not in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pushforward of sheaves of modules along a morphism of sites is additive and preserves finite limits",
+   "results": "SheafOfModules.pushforward; SheafOfModules.pushforward_obj_val; SheafOfModules.pushforwardNatTrans; SheafOfModules.pushforward_map_val; SheafOfModules.pushforwardNatIso; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforwardSections",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item; pushforward data at PushforwardContinuous.lean:44-50 matches clause (1), but does not state additivity/left exactness. PullbackContinuous.lean:103-104 right-adjoint instance requires a presheaf right-adjoint instance and sheafification hypotheses, not a one-line match to the full item."
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesFiniteLimits, SheafOfModules.pushforward",
+   "results": "loogle: unknown identifier 'PreservesFiniteLimits'",
+   "date": "2026-10-14",
+   "verdict": "invalid pattern (unknown identifier), superseded by second Loogle search"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*module|preservesFiniteLimits.*lowerStar",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "direct image of sheaves of modules is left exact and additive",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of scalars pushforward sheaves modules kernels products additive functor",
+   "results": "PresheafOfModules.pushforward_obj_obj; PresheafOfModules.pushforward; PresheafOfModules.pushforward_map_app_apply'; PresheafOfModules.pushforward_obj_map_apply'; PresheafOfModules.pushforward_map_app_apply; PresheafOfModules.pushforward_obj_map_apply; SheafOfModules.restrictScalars; SheafOfModules.pushforwardSections",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item; pushforward data at PushforwardContinuous.lean:44-50 matches clause (1), but does not state additivity/left exactness. PullbackContinuous.lean:103-104 right-adjoint instance requires a presheaf right-adjoint instance and sheafification hypotheses, not a one-line match to the full item."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "SheafOfModules.pushforwardId; SheafOfModules.pushforward; SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver; SheafOfModules.overPushforwardOverAdj; SheafOfModules.isLeftAdjoint_pushforward_of_isIso; SheafOfModules.pushforwardCongr; SheafOfModules.pushforwardNatIso; SheafOfModules.pushforwardNatTrans",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "instance|def pushforward|theorem",
+   "results": "44; 106; 112; 139; 192",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,5 +192,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-module-direct-image-left-exact",
+  "worker": "stage1",
+  "summary": "Explicit scalar action, restriction compatibility, linearity and additivity; sectionwise finite products and kernels from the existing Mathlib limits leaf; exact sequences from kernel preservation. No new nodes or statement changes.",
+  "blueprint": "Realizes the final module-sheaves sentence of def-weil-pbc-direct-image: the action through rho, underlying abelian functor, additivity, and left exactness."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-36b6049c4",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-36b6049c4 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, route, report, and cited literature in full. All five steps are valid: scalar restriction defines the module functor; sectionwise products and kernels establish additive left exactness. No new nodes, circular dependencies, target weakening, or silent coefficient-category comparison. Edge cases checked; no repairs or tool_uses needed. Detailed findings are in review.md."
+ }
 }
