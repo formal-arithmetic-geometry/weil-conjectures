@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-exc-closed-lift-units",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Units of the ind-etale lift",
@@ -17,26 +17,128 @@
  ],
  "proof": [
   {
-   "text": "Represent the element by $b\\in B$ at a stage of the filtered colimit of\n[def-exc-ind-etale-closed-lift], [lem-exc-closed-lift-filtered]. Since the\nimage of $b$ is invertible in $\\overline C$, the localization $B_b$, with\nits extended map to $\\overline C$, is another object of the indexing\ncategory. The transition $B\\to B_b$ makes the given element invertible in\nthe colimit.",
+   "text": "Write $H=H_A(\\overline C)$, with cocone maps $\\iota_B:B\\to H$ and induced map $\\rho:H\\to\\overline C$, as in [def-exc-ind-etale-closed-lift]. Work on a small skeleton of the indexing category: finite presentations $A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ form a set, their maps to the fixed ring $\\overline C$ form sets, and every indexing object is isomorphic to one of these presentations. By [lem-exc-closed-lift-filtered] this category is filtered. The algebra colimit is also its ring colimit: any compatible family of ring maps from the stages to a ring $R$ has a common restriction $A\\to R$, since any two stages have a common successor; giving $R$ that $A$-algebra structure reduces its universal property to the defining algebra colimit. Now [lem-pc-filtered-colimit-commrings-elementwise] (1) gives, for the element $h\\in H$ under consideration, a stage $(B,\\beta:B\\to\\overline C)$ and $b\\in B$ with $h=\\iota_B(b)$. Thus $\\rho(h)=\\beta(b)$ is a unit.",
    "uses": [
     "def-exc-ind-etale-closed-lift",
-    "lem-exc-closed-lift-filtered"
+    "lem-exc-closed-lift-filtered",
+    "lem-pc-filtered-colimit-commrings-elementwise"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-lift-units.md",
+    "place": "Proof, first sentence: choose a stage representative"
+   }
+  },
+  {
+   "text": "Form $B_b=B[1/b]$ using [def-weil-ring-localization-away], with $\\lambda:B\\to B_b$. Every $\\beta(b^n)=\\beta(b)^n$ is a unit. Apply [lem-weil-pbc-ring-localization-universal-property] to the multiplicative subset $\\{b^n:n\\geq0\\}$: it supplies a ring map $\\beta_b:B_b\\to\\overline C$ satisfying $\\beta_b(c/b^n)=\\beta(c)\\beta(b)^{-n}$ and $\\beta_b\\lambda=\\beta$. This is an $A$-algebra map because its restriction along $A\\to B\\to B_b$ is the given structural map $A\\to\\overline C$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-lift-units.md",
+    "place": "Proof, second sentence: extend the map to the localization; Stacks 00CP"
+   }
+  },
+  {
+   "text": "The stage $B$ is etale of finite presentation over $A$ by [def-exc-ind-etale-closed-lift]. Apply [lem-weil-pbc-etale-algebra-finite-presentation-localization] (2) to $s=b$ to see that $B_b$ is etale over $A$, and its clause (1), applied to $B_b$, gives finite presentation over $A$. Therefore $(B_b,\\beta_b)$ is an object of $\\mathcal N_A(\\overline C)$ and $\\lambda$ is a morphism from $(B,\\beta)$ to it, since $\\beta_b\\lambda=\\beta$.",
+   "uses": [
+    "def-exc-ind-etale-closed-lift",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-lift-units.md",
+    "place": "Proof, second sentence: the localization is another indexing object; Stacks 00U1, 00U2"
+   }
+  },
+  {
+   "text": "In $B_b$ let $u=1/b$, whose defining fraction relations give $(b/1)u=u(b/1)=1$ by [def-weil-ring-localization-away]. Cocone compatibility from [def-exc-ind-etale-closed-lift] gives $\\iota_{B_b}(b/1)=\\iota_B(b)=h$. Applying the ring homomorphism $\\iota_{B_b}$ to the two product identities yields $h\\,\\iota_{B_b}(u)=\\iota_{B_b}(u)h=1$. Hence $h$ is invertible, as required.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-exc-ind-etale-closed-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-lift-units.md",
+    "place": "Proof, final sentence: exhibit the inverse in the colimit"
+   }
   }
  ],
  "proof_deps": [
   "def-exc-ind-etale-closed-lift",
-  "lem-exc-closed-lift-filtered"
+  "lem-exc-closed-lift-filtered",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-lift-units.md",
-  "place": "## Proof"
+  "place": "Proof: representative, principal localization, transition, inverse; expanded with Stacks 00CP, 00U1, 00U2 and the existing filtered-ring-colimit leaf"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An element of the filtered colimit of etale algebras mapping to C is a unit if its image in C is a unit",
+   "results": "StandardEtalePresentation.hasMap; StandardEtalePair.HasMap; StandardEtalePair.hasMap_X; Algebra.instIsStandardEtaleRing; StandardEtalePair.HasMap.isUnit_derivative_f; RingHom.etale_algebraMap; StandardEtalePair.instEtaleRing; StandardEtalePair.homEquiv",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; localization hits are supporting lemmas, already present in the DAG"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Localization.Away",
+   "results": "Algebra.Etale.instAway; Algebra.basicOpen_subset_etaleLocus_iff_etale; Algebra.exists_etale_of_isEtaleAt; HasStandardEtaleSurjectionOn.isStandardEtale; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; localization hits are supporting lemmas, already present in the DAG"
+  },
+  {
+   "tool": "grep",
+   "query": "Etale.*[Ll]ocal|[Ll]ocal.*Etale",
+   "results": "Mathlib/RingTheory/Smooth/Fiber.lean; Mathlib/RingTheory/Smooth/Fiber.lean; Mathlib/RingTheory/Smooth/Fiber.lean; Mathlib/RingTheory/RingHom/Etale.lean; Mathlib/RingTheory/RingHom/Etale.lean; Mathlib/RingTheory/RingHom/Etale.lean; Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/Unramified/LocalStructure.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; localization hits are supporting lemmas, already present in the DAG"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An element of an ind etale lift is invertible if its image is invertible",
+   "results": "none; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A principal localization of an etale algebra is etale over the base ring",
+   "results": "Algebra.Etale.of_isLocalizationAway; Algebra.Etale.of_isLocalization_Away; Algebra.IsStandardEtale.of_isLocalizationAway; RingHom.Etale.ofLocalizationSpan; Algebra.exists_etale_of_isEtaleAt; RingHom.Etale.ofLocalizationSpanTarget; Algebra.FormallyEtale.localization_base; Algebra.basicOpen_subset_etaleLocus_iff_etale",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; localization hits are supporting lemmas, already present in the DAG"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"instAway\", Algebra.Etale",
+   "results": "Algebra.Etale.instAway",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; localization hits are supporting lemmas, already present in the DAG"
+  },
+  {
+   "tool": "grep",
+   "query": "instance \\(s : A\\).*Etale|class Etale",
+   "results": "Mathlib/RingTheory/Etale/Basic.lean; Mathlib/RingTheory/Etale/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; localization hits are supporting lemmas, already present in the DAG"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring homomorphism from the colimit of all finite presentation etale algebras over A mapping to C reflects units",
+   "results": "RingHom.Etale.toAlgebra; RingHom.etale_algebraMap; RingHom.Etale; RingHom.IsStandardSmooth.exists_etale_mvPolynomial; RingHom.Etale.of_bijective; StandardEtalePresentation.lift_bijective; RingHom.Etale.propertyIsLocal; RingHom.Etale.ofLocalizationSpan",
+   "date": "2026-10-14",
+   "verdict": "no match for the item; localization hits are supporting lemmas, already present in the DAG"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +161,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-exc-closed-lift-units",
+  "worker": "stage1",
+  "summary": "Expanded the localization proof into four steps, reusing the existing filtered ring colimit, localization universal property, and etale finite-presentation localization leaves. Made a small skeleton and the underlying-ring universal property explicit. No statement change or new nodes. No exact project attachment was found.",
+  "blueprint": "Step 1 realizes the first sentence; steps 2 and 3 realize the extended localization object in the second sentence; step 4 realizes the last sentence by writing an inverse.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-736a9de40",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-736a9de40 (reviewer sub-agent of L); spot-checked: Read the full item, report, six cited statements, unit/chapter route, and cited blueprint, Stacks, and Mathlib sources. All four steps are valid, including the underlying-ring colimit reduction, étale finitely presented localization, and explicit inverse. Checked zero-ring cases, duplicate candidates, and dependency cycles. No repairs or exceptional tool_uses needed; review.md records the checks."
+ }
 }
