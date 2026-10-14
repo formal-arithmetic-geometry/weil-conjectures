@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-finite-extension",
-   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; identification and restriction of the integral and rational coefficients in that lattice passage.",
+   "place": "Proof, first sentence: choose an integral lattice for K; the coefficient sheaves and their restriction to locally closed immersions.",
    "via": [
     "lem-weil-pbc-lisse-e-constructible-integral-lattice",
     "lem-weil-pbc-condensed-e-realization",
@@ -32,11 +32,113 @@
   "def-weil-proetale-inverse-image",
   "def-weil-pbc-constant-sheaf",
   "pqf-def-locnoeth",
-  "def-weil-pbc-quasi-compact-scheme"
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pur-sheaf-inverse-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply fpqc descent for continuous abelian functions to the additive topological groups of $A$ and $E$; their addition and negation are continuous for the valuation topology. A covering in the small pro-etale site is an fpqc covering, with the same fibre products, so the same equalizer condition proves sheafhood on that site. Pointwise ring operations commute with restrictions; the underlying-set criterion for algebraic sheaves makes both sheaves commutative ring sheaves.",
+   "uses": [
+    "lem-cbc-continuous-functions-fpqc-sheaf",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12; Definition 6.8.1"
+   }
+  },
+  {
+   "text": "For a discrete finite quotient $B=A/\\varpi^n$, the same argument gives the sheaf $F_B(U)=C(|U|,B)$. The map from the constant presheaf $B$ sends $b$ to the constant function $b$. Any section $f$ of $F_B$ is constant on each open fibre $f^{-1}(b)$; these fibres cover $U$. Apply the open-immersion case and composition assertion (1) of [lem-weil-proetale-weakly-etale-localization] over $U$: each fibre is weakly etale over $U$, and hence over $X$. Thus it is a site object. On each affine open of $U$, quasi-compactness gives a finite subcover by fibres, refined by affine opens, so this is a covering in the stated fpqc sense. For any ring sheaf $G$ and presheaf map from the constant presheaf $B$ to $G$, define its value on $f$ by gluing the images of $b$ on the open fibres $f^{-1}(b)$. Intersections of distinct fibres are empty, whose sheaf section is unique, so the gluing is compatible. Refining fibres shows that this map commutes with restriction and pointwise ring operations. Every extension must have these values on fibres, so it is unique. Thus $F_B$ has the defining universal property of the sheafification, and is the constant ring sheaf $\\underline B$, preserving constant sections. This identification is natural in ring maps $B\\to B\\prime$: both maps send $f$ to its pointwise coefficient image.",
+   "uses": [
+    "lem-cbc-continuous-functions-fpqc-sheaf",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, discrete-target clause"
+   }
+  },
+  {
+   "text": "Compute the inverse limit sectionwise. Given compatible continuous residue functions $f_n:|U|\\to A/\\varpi^n$, choose at each point $x$ lifts $a_n\\in A$ of $f_n(x)$. Compatibility gives $|a_m-a_n|_E\\leq|\\varpi|_E^n$ for $m\\geq n$. Completeness of $E$ gives a unique limit $a(x)\\in A$ (the closed unit ball), independent of lifts, with all prescribed residues. Put $r=|\\varpi|_E$. The uniformizer is nonzero and lies in the maximal ideal, so $0<r<1$. For $a\\ne0$, write $a=u\\varpi^k$ with $|u|_E=1$. Then $|a|_E=r^k$, and $a\\in\\varpi^nA$ exactly when $k\\geq n$, equivalently $|a|_E\\leq r^n$; zero satisfies both conditions. Nonarchimedean balls of this radius are open: if $|b-a|_E<r^n$, then $a$ and $b$ belong to the same radius-$r^n$ ball by the ultrametric inequality. Since $r^n\\to0$, the congruence cosets form an open neighbourhood basis in $A$. Their inverse images under $a$ are the open fibres of the $f_n$; hence $a$ is continuous. Conversely reducing a continuous $A$-valued function gives that compatible family, and uniqueness proves both composites are identities. All maps preserve pointwise ring operations and restrictions. This proves $A_X\\cong\\varprojlim_n\\underline{A/\\varpi^n}$, with precisely the transition maps of step 2.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), explicit inverse to the displayed continuous-function limit map"
+   }
+  },
+  {
+   "text": "For every object $U$, the map $C(|U|,A)[1/\\varpi]\\to C(|U|,E)$ is injective: if $f/\\varpi^m$ maps to zero, then $f(x)=0$ for every $x$, so $f=0$. For $g:|U|\\to E$ continuous, the open subsets $U_m=g^{-1}(\\varpi^{-m}A)$, $m\\geq0$, cover $U$, since every nonzero element of $E$ is a unit times an integral power of $\\varpi$. Each inclusion $U_m\\to U$ is open, hence weakly etale, and assertion (1) of [lem-weil-proetale-weakly-etale-localization] makes its composite to $X$ a site object. Every affine open of $U$ has a finite subcover refined by affine opens, so the $U_m$ form a site covering. On $U_m$ the function $\\varpi^m g$ takes values continuously in $A$, giving the fraction $(\\varpi^m g)/\\varpi^m$. The fractions agree on overlaps by the injectivity just proved. This proves the localization map is locally bijective; the glued local inverses and the sheafification universal property give $A_X[1/\\varpi]\\cong E_X$. This argument uses open-fibre covers, not a global bound on a non-quasi-compact object. To compare with the paper's localization at $\\ell$, write $\\ell=u\\varpi^e$ using the DVR decomposition: since $|\\ell|_E=\\ell^{-1}<1$, $e>0$. Inverting $\\varpi$ inverts $\\ell$; inverting $\\ell$ inverts $\\varpi$, with inverse $u\\varpi^{e-1}/\\ell$. Thus the two localizations coincide canonically.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-pbc-sheafification",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(2), finite-extension localization clause; local denominator argument"
+   }
+  },
+  {
+   "text": "For $h:Z\\to X$ locally closed, use the existing immersion limit-preservation theorem on the countable tower in step 3 on underlying abelian sheaves. The resulting comparison preserves multiplication and the unit: after each residue projection, the identities are those of the ring comparison at that level, and the projections jointly determine sections. Apply the finite-quotients lemma to the nonarchimedean valued field $E$ and its DVR $A$ with finite residue field, as supplied by the coefficient datum. Each quotient is therefore a finite discrete ring, and the finite constant-ring comparison gives $h^{-1}\\underline{A/\\varpi^n}_X\\cong\\underline{A/\\varpi^n}_Z$. These comparisons preserve constant sections, and hence commute with reduction maps by their defining uniqueness. Consequently $h^{-1}A_X\\cong\\varprojlim_n\\underline{A/\\varpi^n}_Z\\cong A_Z$. Step 3 applies equally to $Z$; in particular the original noetherian hypothesis on $X$ has not been dropped. The comparison is the continuous-function pullback map: after projecting to each quotient both maps send a locally constant residue function to its precomposition, by the open-fibre construction in step 2; limit projections determine the map.",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(1), via its stated limit-preservation argument; applied only to the item's noetherian scheme and its locally closed subschemes"
+   }
+  },
+  {
+   "text": "The sheafified sectionwise localization $R[1/s]$ has the following universal property: maps to a ring sheaf $H$ are maps $R\\to H$ inverting the specified global section $s$. Given the latter map, on every object send $a/s^m$ to the image of $a$ times the $m$-th power of the inverse of $s$; the fraction relations prove this is well defined, and these maps commute with restrictions. Sheafification extends them uniquely. Thus inverse image commutes with localization at the specified constant section $\\varpi$. Indeed, use the ring-valued adjunction in the current [def-weil-proetale-inverse-image], with direct image evaluated on $Z\\times_X V$ and the same unit and counit as the underlying set adjunction. By that ring-sheaf adjunction, morphisms from $h^{-1}(A_X[1/\\varpi])$ to a ring sheaf $G$ on $Z$ correspond to maps $A_X[1/\\varpi]\\to h_*G$, and thus to maps $A_X\\to h_*G$ carrying $\\varpi$ to an invertible section. Under the adjunction these are exactly maps $h^{-1}A_X\\to G$ inverting the pulled-back $\\varpi$; its inverse is uniquely determined and corresponds under the same adjunction. The localization universal property therefore gives $h^{-1}(A_X[1/\\varpi])\\cong(h^{-1}A_X)[1/\\varpi]$. Combine steps 4 and 5 to obtain $h^{-1}E_X\\cong E_Z$. The coefficient square commutes because both maps send an integral function $f$ to its pullback, and a fraction $f/\\varpi^m$ to the pulled-back numerator divided by the same constant power. For composable immersions the integral comparisons agree after every quotient projection (successive precomposition equals precomposition with the composite); their rational localizations then agree by uniqueness. This proves both requested compatibilities.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Paragraph preceding Definition 6.8.6; explicit localization and compatibility argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets",
+  "lem-cbc-continuous-functions-fpqc-sheaf",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-valued-dvr-finite-quotients",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 4.2.12, 6.5.8(1), 6.8.2(1),(2), paragraph before Definition 6.8.6; expanded elementary construction of the inverse-limit and localization maps"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -82,12 +184,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "worker": "stage1",
+  "summary": "Repair: removed the unsupported arbitrary-topological-ring immersion theorem and the arbitrary-scheme adic black box. Prove completion, localization, restriction and compatibility in the item using existing limit-preservation and finite constant-ring comparisons. The only new node is the exact Mathlib fpqc continuous-function sheaf leaf. Restored the noetherian definition dependencies. The item statement is unchanged. Landing-return repair: revalidated current weakly-etale localization and inverse-image statements; explicitly checked site membership and fpqc open covers in steps 2 and 4, used the current ring adjunction in step 6, and refreshed all changed citation quotes. Fresh second reading: removed the redundant new continuous-functions node, reusing the existing abelian fpqc Mathlib leaf; wrote the valuation-ball and localization universal-property arguments explicitly.",
+  "blueprint": "Realizes the coefficient identification and immersion restriction needed in the integral-lattice passage of thm-weil-pbc-finite-extension, first proof sentence; follows the detailed Bhatt-Scholze route rather than moving clauses into new nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Finite-extension valuation-ring structure is a generic coefficient-field tool; the proper-base-change unit has no internal substitute for this statement."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Open subschemes are weakly etale site objects and open restriction is slice restriction; this generic site tool is not supplied by the proper-base-change unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-bc423ff73",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-bc423ff73 (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements and source locations, report, and unit/chapter route. Verified all six steps against Bhatt–Scholze 4.2.12, 6.5.8(1), 6.8.2 and Stacks 09AA; checked empty cases, ramification, local denominators, and restriction coherence. Zero new nodes; no missing citations or cycles. Checked the exact master coefficient category and base-change morphism without assuming the separate realization comparison. Accepted both declared generic tool uses. Detailed checks are in review.md; no repairs needed."
+ }
 }
