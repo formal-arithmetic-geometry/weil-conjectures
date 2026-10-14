@@ -14139,3 +14139,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/S3/Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso (stage 3; reviewer PASS; first push; landing 20261014T010853-L-3167784 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/T4/Sheaf.RingTheory.ZariskisMainAway (stage 3; reviewer PASS; first push; landing 20261014T010853-L-3168054 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/U2/Sheaf.AlgebraicGeometry.AffineBaseChangeModelIsosOfSchemeComparisons (stage 3; reviewer PASS; first push; landing 20261014T010854-L-3168155 (interface); batch 20261014T010832; modules 3; new nodes 2)
+- 01:08 L: merged deliver/U2/Sheaf.AlgebraicGeometry.AffineChartSectionRingPresentationsTail (stage 3; reviewer PASS; first push; landing 20261014T010854-L-3168297 (proof); batch 20261014T010832; modules 1; new nodes 0)
