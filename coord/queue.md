@@ -1,6 +1,6 @@
 # Work queue
 
-115 items; claim with `tools/claim.py next <group> [--stage N]`.
+116 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (115)
+## Stage 3: modules to prove (116)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -123,6 +123,7 @@
 | `Sheaf.AlgebraicGeometry.SelfTorAffineTensorSections` | 40 | 1 | proof |
 | `Sheaf.LinearAlgebra.ExteriorPowerLocalization` | 40 | 1 | proof |
 | `Sheaf.Paper.LimitTowerOverLocalSystem` | 40 | 1 | proof |
+| `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAux` | 40 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
 | `Sheaf.RingTheory.LimitModuleModuleData` | 42 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectHomOpenTestBijective` | 46 | 1 | proof |
