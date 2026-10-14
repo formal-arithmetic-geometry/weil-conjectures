@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Strict-local models with a separably closed coefficient field and algebraic residue extensions",
- "statement": "Let $K$ be a field, let $Y$ be a scheme of finite type over $K$ [def-weil-scheme-over-base], [def-weil-finite-type-morphism], and let $\\bar y$ be a geometric point with underlying point $y$ [def-weil-geometric-point]. Put $b=\\operatorname{trdeg}_K\\kappa(y)$ [def-kun-transcendence-degree], [def-weil-residue-field], and $S=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ [def-weil-pbc-strict-henselization-limit]. There exist an affine open neighbourhood $U$ of $y$ in $Y$, a separably closed field extension $L/K$ with $\\operatorname{trdeg}_K L=b$ [def-kun-separably-closed], and a small cofiltered inverse system (the opposite index category is filtered as defined in [def-weil-pbc-category-colimit]) $(V_i\\to U)$ of nonempty affine schemes with affine transition morphisms over $U$ [def-pc-scheme], such that each $V_i$ is of finite type over $L$, the maps $V_i\\to U$ are $K$-morphisms, and $S\\cong\\varprojlim_i V_i$ over $U$ (that is, the compatible maps $S\\to V_i$ are universal among compatible cones). For every $i$ and every point $v\\in V_i$ with image $u\\in U$, the induced extension $\\kappa(v)/\\kappa(u)$ is algebraic (each element satisfies a nonzero polynomial over $\\kappa(u)$).",
+ "statement": "Let $K$ be a field, let $Y$ be a scheme of finite type over $K$ [def-weil-scheme-over-base], [def-weil-finite-type-morphism], and let $\\bar y$ be a geometric point with underlying point $y$ [def-weil-geometric-point]. Put $b=\\operatorname{trdeg}_K\\kappa(y)$ [def-kun-transcendence-degree], [def-weil-residue-field], and $S=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ [def-weil-pbc-strict-henselization-limit]. There exist an affine open neighbourhood $U$ of $y$ in $Y$, a separably closed field extension $L/K$ with $\\operatorname{trdeg}_K L=b$ [def-kun-separably-closed], and a small cofiltered inverse system (the opposite index category is filtered as defined in [def-weil-pbc-category-colimit]) $(V_i\\to U)$ of nonempty affine schemes with affine transition morphisms [pqf-def-affine-morphism] over $U$ [def-pc-scheme], such that each $V_i$ is of finite type over $L$, the maps $V_i\\to U$ are $K$-morphisms, and $S\\cong\\varprojlim_i V_i$ over $U$ (that is, the compatible maps $S\\to V_i$ are universal among compatible cones). For every $i$ and every point $v\\in V_i$ with image $u\\in U$, the induced extension $\\kappa(v)/\\kappa(u)$ is algebraic (each element satisfies a nonzero polynomial over $\\kappa(u)$).",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 0F0U, lemma-strictly-henselian, proof with compatible etale models; Tag 0F0X, lemma-interlude-I, second paragraph (refined residue-field-control input)"
@@ -27,11 +27,143 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-kun-separably-closed",
   "def-pc-scheme",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-affine-spectrum",
+  "pqf-def-affine-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite-type affine chart $U_0=\\operatorname{Spec}A_0$ containing $y$, using the finite affine cover in [def-weil-finite-type-morphism]. If $\\mathfrak p_0$ represents $y$, then $\\kappa(y)=\\operatorname{Frac}(A_0/\\mathfrak p_0)$ is finitely generated as a field over $K$: the images of a finite list of $K$-algebra generators generate its fraction field. Apply [lem-weil-pbc-finitely-generated-field-finite-transcendence-basis] to obtain a finite basis $\\bar t_1,\\ldots,\\bar t_b$; its size is $b$ by [def-kun-transcendence-degree]. Write these elements as fractions of images of elements of $A_0$ and invert the product of their denominators, which is not in $\\mathfrak p_0$. This gives a principal affine neighbourhood $U=\\operatorname{Spec}A$ of $y$, still finite type over $K$ (adjoin one inverse), with lifts $t_1,\\ldots,t_b\\in A$. The map $R=K[T_1,\\ldots,T_b]\\to A$, $T_i\\mapsto t_i$, is injective: a polynomial in its kernel vanishes on the algebraically independent $\\bar t_i$. The image of $y$ in $\\operatorname{Spec}R$ is the generic point, and its residue field is $F=K(T_1,\\ldots,T_b)$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof and footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  },
+  {
+   "text": "Write $\\bar y:\\operatorname{Spec}\\Omega\\to U$ and let $\\bar\\eta$ be its image in $\\operatorname{Spec}R$. Let $L$ be the separable algebraic closure of $F$ inside $\\Omega$, as in [def-weil-pbc-relative-separable-closure]; it is a separably closed algebraic extension of $F$. Apply [lem-weil-pbc-etale-local-ring-triples](3) with the identity affine chart of $\\operatorname{Spec}R$. It identifies the pointed-neighbourhood ring colimit with the etale residue-triple colimit, compatibly with the coprojections. The strict henselization of $R$ at $\\bar\\eta$ is therefore $L$: apply [lem-weil-pbc-strict-henselization-triples] with prime $(0)$ and residue field $F$. Its colimit is a local ring whose maximal ideal is $(0)$ and whose residue field is $L$, so the residue quotient is the ring itself. Apply [lem-weil-pbc-strict-henselization-functoriality](3) to $U\\to\\operatorname{Spec}R$ to obtain a unital $K$-algebra map $h:L\\to B=\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ compatible with $R\\to A\\to B$. The same functoriality statement (1) makes $B$ a nonzero local ring, so $h$ is injective. To identify the ring over $U$ with the required ring over $Y$, apply [lem-weil-pbc-etale-local-ring-triples](2) to the affine chart $U\\subset Y$. The affine pointed neighbourhoods factoring through $U$ give the same ring colimit as all affine pointed neighbourhoods of $Y$; as pointed $U$-neighbourhoods they are precisely the diagram defining $\\mathcal O^{\\mathrm{sh}}_{U,\\bar y}$. The identification respects the coprojections, in particular the map from $A$ and the geometric residue embedding. Thus $B$ and its $A$-structure are the requested ones. Finally, [lem-kun-transcendence-degree-tower] gives $\\operatorname{trdeg}_K L=\\operatorname{trdeg}_K F=b$, since $L/F$ is algebraic.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-kun-transcendence-degree-tower",
+    "lem-weil-pbc-etale-local-ring-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof and footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-strict-henselization-limit] for the two pointed affine schemes $\\operatorname{Spec}R$ and $U$ to choose small filtered ring diagrams $D:I\\to\\mathbf{CRing}$ and $E:J\\to\\mathbf{CRing}$ with $L=\\varinjlim_iD_i$ and $B=\\varinjlim_jE_j$. The maps $R\\to D_i$ and $A\\to E_j$ are etale, and both diagrams and their colimits are over $R$. Choose the representative subcategories to include the identity neighbourhoods $D_{i_0}=R$ and $E_{j_0}=A$; these are initial objects in the ring-indexed categories. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], every $D_i$ is finitely presented over $R$ and every $E_j$ is finitely presented over $A$. In particular $E_j$ is finite type over $K$ and over $R$, because $A$ is finite type over $K$ and the image of $R$ contains $K$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof and footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  },
+  {
+   "text": "Here is the finite-presentation calculation needed for the compatible models. For any finitely presented $R$-algebra $P=R[X_1,\\ldots,X_n]/(f_1,\\ldots,f_m)$ and any $R$-algebra map $P\\to B$, [lem-pc-filtered-colimit-commrings-elementwise](1) lifts the images of the $X_r$ into some $E_j$. Move finitely many representatives to a common object using filteredness. Evaluate the finitely many relations there; their images in $B$ are zero. Part (2) of the same node and filteredness move these equalities to one later object, giving an $R$-algebra map $P\\to E_k$ factoring the original map. Two maps from a finitely generated $R$-algebra to stages of $E$ that induce the same map to $B$ agree after a common refinement: apply part (2) to their finitely many generator images and combine the finitely many equalities. If the resulting witnesses give different arrows out of a stage, equalize those arrows using filteredness, so that all equalities use the same transition. This calculation uses the full small filtered category $J$, not an assumed directed poset.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof and footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  },
+  {
+   "text": "Define a small category $T$ whose objects are triples $\\tau=(i,j,\\psi)$ with $\\psi:D_i\\to E_j$ an $R$-algebra map satisfying $\\beta_j\\psi=h\\alpha_i$, where $\\alpha_i:D_i\\to L$ and $\\beta_j:E_j\\to B$ are the coprojections. A morphism to $(i',j',\\psi')$ is a pair $(a:i\\to i',c:j\\to j')$ with $E(c)\\psi=\\psi'D(a)$. It is small because $I,J$ are small and each set of ring maps is a set. It is nonempty: $(i_0,j_0,R\\to A)$ is an object. To give a successor of two triples, first choose a common $i'$ in $I$. Apply the finite-presentation calculation of step 4 to $D_{i'}\\to L\\xrightarrow h B$ to obtain a lift into some $E_k$. Choose a common successor in $J$ of $k$ and the two old $j$'s. The composites from each old $D_i$ to that stage and to $B$ agree; the eventual-equality calculation of step 4, applied to the finite generators of both old $D_i$, gives a further stage where both compatibility squares commute. For two parallel arrows of triples, equalize their $I$ components by $i'\\to i''$ and their $J$ components by $j'\\to j''$. Lift $D_{i''}\\to B$ to a stage of $E$ and then refine $j''$ so that its restriction along $D_{i'}\\to D_{i''}$ agrees with the old $\\psi'$; step 4 gives precisely this equality. The resulting morphism out of the target triple equalizes the original pair in both components. These are all three filteredness axioms of [def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof and footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  },
+  {
+   "text": "For $\\tau=(i,j,\\psi)$ put $C_\\tau=E_j\\otimes_{D_i,\\psi}L$. A morphism $(a,c)$ of triples induces $e\\otimes\\ell\\mapsto E(c)(e)\\otimes\\ell$; the compatibility square makes this well-defined. The maps $\\gamma_\\tau:C_\\tau\\to B$, $e\\otimes\\ell\\mapsto\\beta_j(e)h(\\ell)$, are compatible unital maps. The ring $C_\\tau$ is finite type over $L$: take any finite set of $R$-algebra generators of $E_j$ from step 3; their tensors with $1$ generate $C_\\tau$ over $L$. Also $C_\\tau$ is nonzero because it maps unitally to the nonzero ring $B$. More explicitly, composing $\\gamma_\\tau$ with the residue map from $B$ to its residue field gives a unital map to a field; its kernel is a proper prime ideal of $C_\\tau$, since a product mapping to zero in a field has a factor mapping to zero. This prime is a point of $V_\\tau$, proving nonemptiness without invoking existence of maximal ideals. All these maps preserve the given $A$-algebra structures, hence their spectra are $K$-morphisms over $U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof and footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  },
+  {
+   "text": "We verify the colimit, including its universal property, rather than assuming that the $C_\\tau$ are subalgebras of $B$. Let $m_\\tau:C_\\tau\\to M$ be any compatible cocone of commutative rings. For every $j$, $(i_0,j,R\\to E_j)$ is a triple, so $e\\mapsto m_{(i_0,j)}(e\\otimes1)$ defines compatible maps $E_j\\to M$, and hence a unique ring map $f:B\\to M$. The triple $(i_0,j_0)$ maps to every triple, so all restrictions $\\ell\\mapsto m_\\tau(1\\otimes\\ell)$ are the same map $g:L\\to M$. For any $\\ell\\in L$, [lem-pc-filtered-colimit-commrings-elementwise](1) gives $d\\in D_i$ with $\\alpha_i(d)=\\ell$; step 4 supplies a triple $(i,j,\\psi)$. The tensor relation $\\psi(d)\\otimes1=1\\otimes\\alpha_i(d)$ then gives $f(h(\\ell))=g(\\ell)$. There is a morphism $(i_0,j)\\to(i,j,\\psi)$, so $m_\\tau(e\\otimes1)=f(\\beta_j(e))$. Since $C_\\tau$ is generated as a ring by these elements and $1\\otimes L$, these two equations give $m_\\tau=f\\gamma_\\tau$. Uniqueness follows from the colimit presentation $B=\\varinjlim E_j$. Thus $B=\\varinjlim_T C_\\tau$ as rings and as $A$-algebras. By [lem-weil-pbc-spec-small-colimit-limit], the compatible maps from $S=\\operatorname{Spec}B$ to $V_\\tau=\\operatorname{Spec}C_\\tau$ are a limit cone in schemes; the compatibility with $A$ makes it a limit over $U$ as well.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-spec-small-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof and footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  },
+  {
+   "text": "Fix a prime $q$ of $C_\\tau$ and let $w$ and $u$ be its contractions to $E_j$ and $A$, respectively. Since $A\\to E_j$ is etale, [lem-weil-pbc-etale-algebra-residue-field-separable] gives a finite separable extension $\\kappa(w)/\\kappa(u)$. Let $p_i$ be the kernel of $D_i\\to L$. This is also the contraction of $w$ to $D_i$: in $C_\\tau/q$ the two images of $D_i$ agree, and the unital map from the field $L$ to $\\kappa(q)$ is injective. The induced field embeddings $\\kappa(p_i)\\to L$ and $\\kappa(p_i)\\to\\kappa(w)$ are therefore compatible in $\\kappa(q)$. Since $R\\to L$ is injective, $p_i$ contracts to $(0)$ in $R$. Apply [lem-weil-pbc-etale-algebra-residue-field-separable] to $R\\to D_i$ to obtain $\\kappa(p_i)/F$ finite separable. In particular $L/\\kappa(p_i)$ is algebraic: every polynomial witnessing algebraicity over $F$ also witnesses algebraicity over this intermediate field. The field $\\kappa(q)$ is generated by the images of $\\kappa(w)$ and $L$, because $C_\\tau$ is generated by $E_j$ and $L$ and $\\kappa(q)=\\operatorname{Frac}(C_\\tau/q)$. Consequently $\\kappa(q)/\\kappa(w)$ is algebraic. Explicitly, any one of its elements is a rational expression in finitely many elements of $L$ with coefficients in $\\kappa(w)$; those elements are algebraic over $\\kappa(w)$, so their successive simple adjunctions are finite-dimensional fields (use their monic minimal polynomials). The expression belongs to this finite extension. As $\\kappa(w)/\\kappa(u)$ is finite, the same element is algebraic over $\\kappa(u)$: the finite-dimensional tower is finite-dimensional, and its powers are linearly dependent. This proves the required residue algebraicity for every point, without a lifting-to-$S$ assumption.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-residue-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof and footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  },
+  {
+   "text": "The schemes $V_\\tau$ are nonempty by step 6 and are affine and finite type over $L$. Their inverse index category is the small cofiltered category $T^{\\mathrm{op}}$ by step 5. Their transition maps are affine by [lem-weil-pbc-morphism-affine-schemes-affine], since both their source and target are affine. Thus steps 2, 6, 7 and 8 establish every asserted clause, including the limit over $U$ and every residue extension. When $b=0$ use $R=F=K$ and the empty list of $t_i$; all the constructions and arguments still apply.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof and footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-kun-transcendence-degree-tower",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-morphism-affine-schemes-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0U, lemma-strictly-henselian, proof and footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +199,52 @@
    "results": "8 hits: FunctionField, functionField_iff, FunctionField.ringOfIntegers.not_isField, FunctionField.instFieldFqtInfty, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, FunctionField.instInhabitedFqtInfty, FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial, FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc",
    "date": "2026-10-14",
    "verdict": "no match: results do not state this lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization compatible etale models finite type over a separably closed coefficient field with algebraic residue extensions",
+   "results": "8 hits: Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.finitePresentation, StandardEtalePair.instEtaleRing, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, StandardEtalePair.instFormallyEtaleRing, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.instEtaleOfIsStandardEtale, RingHom.Etale.toAlgebra",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits do not state the strict-local coefficient-model and residue-algebraicity assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StrictHenselization\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits do not state the strict-local coefficient-model and residue-algebraicity assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|strictlyHensel",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits do not state the strict-local coefficient-model and residue-algebraicity assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization approximation over separably closed field with algebraic residue field extensions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type models over the separable closure of a rational function field for a strict local ring of a scheme",
+   "results": "8 hits: FunctionField, functionField_iff, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.ValuativeCommSq.field, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, AlgebraicGeometry.Scheme.functionField",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits do not state the strict-local coefficient-model and residue-algebraicity assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme strict localization is an inverse limit of affine schemes of finite type over a separable closure of a rational function field, with algebraic extensions at all residue fields",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCommSq.field, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.ValuativeCommSq.isFractionRing, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField",
+   "date": "2026-10-14",
+   "verdict": "no match: valuative squares, field-valued points, rational maps and normalization diagrams do not state the strict-local model assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-affine-direct-image-support-bound",
   "by": "worker",
@@ -86,5 +260,64 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-strict-local-algebraic-residue-models",
+  "worker": "stage1",
+  "summary": "Realized the compatible etale-model construction of 0F0U and supplied the finite-presentation, filteredness, colimit and residue-field details needed by 0F0X. No new nodes: all non-elementary tools already occur in the DAG. Kept the statement, covered b=0, and did not assume models inject into the strict local ring.",
+  "blueprint": "lem-kun-0f10 proof, affine clause (1): support estimate 0F0X; steps 1-3 construct the 0F0U coefficient field, steps 4-7 realize the compatible-model footnote, and step 8 supplies the algebraic-residue inference of 0F0X.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "why": "Finite basis for a finitely generated residue field; a generic field-theory tool not stated in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Computes the strict henselization at the generic prime as its separable residue field; a generic strict-local-ring tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Supplies the map between strict local rings and nonzero local structure; the unit has no such functoriality statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "why": "Supplies finite presentations of affine etale neighbourhood rings; a generic affine etale tool."
+   },
+   {
+    "node": "lem-pc-filtered-colimit-commrings-elementwise",
+    "why": "Supplies representatives and eventual equality in arbitrary small filtered ring diagrams, used to fill the compatible-model footnote."
+   },
+   {
+    "node": "lem-weil-pbc-spec-small-colimit-limit",
+    "why": "Converts the explicitly proved small ring colimit into the scheme limit; a generic spectrum tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "why": "Supplies finite residue extensions for the two etale maps; the coefficient-model route requires this generic etale tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Generic chart-invariance and pointed-neighbourhood/triple-colimit comparison (04HX); fills the identification needed by the prescribed coefficient-field construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-etale-local-ring-triples"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-b5f8edfc5",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-b5f8edfc5 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and sources. All nine steps pass, including filteredness, the tensor-model colimit and residue algebraicity at every prime. Checked edge cases, DAG reuse, unit route and exact upstream coefficient categories and exchange direction. Accepted all eight proposed tool uses. No repairs needed; details in review.md."
  }
 }
