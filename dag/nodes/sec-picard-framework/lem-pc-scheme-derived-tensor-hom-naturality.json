@@ -12,23 +12,25 @@
  ],
  "proof": [
   {
-   "text": "Unfold the chosen canonical family and apply the first conjunct of IsCanonicalDerivedTensorHom.",
+   "text": "Write $e_{K,L,M}$ for the family of [def-pc-canonical-derived-tensor-hom-bijection] on $D(\\mathcal O_X)$ for a scheme $X$. That definition chooses a family natural in all three variables. Explicitly, for $a:K\\to K_0$, $b:L\\to L_0$, $c:M_0\\to M$ and $f:K_0\\to R\\mathcal Hom(L_0,M_0)$, naturality is the equality $e_{K,L,M}(R\\mathcal Hom(b,c)\\circ f\\circ a)=c\\circ e_{K_0,L_0,M_0}(f)\\circ(a\\otimes^L b)$. Both sides are morphisms $K\\otimes^L L\\to M$. Thus this equality is the naturality property already required of the chosen canonical family, with no further existence assertion. For the first variable, set $b=1_L$ and $c=1_M$ to obtain $e_{K,L,M}(f\\circ a)=e_{K_0,L,M}(f)\\circ(a\\otimes^L1_L)$. For the second, set $a=1_K$ and $c=1_M$ to obtain $e_{K,L,M}(R\\mathcal Hom(b,1_M)\\circ f)=e_{K,L_0,M}(f)\\circ(1_K\\otimes^L b)$. For the third, set $a=1_K$ and $b=1_L$ to obtain $e_{K,L,M}(R\\mathcal Hom(1_L,c)\\circ f)=c\\circ e_{K,L,M_0}(f)$. These substitutions use the identity laws for the tensor and internal-Hom functors; the displayed simultaneous formula proves compatibility for arbitrary $a,b,c$.",
    "uses": [
     "def-pc-canonical-derived-tensor-hom-bijection"
    ],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DJ, lemma-internal-hom, functoriality in K, L, M"
+   }
   }
  ],
  "proof_deps": [
   "def-pc-canonical-derived-tensor-hom-bijection"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "K3",
-  "date": "2026-10-14",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DJ, naturality of the canonical tensor-Hom map",
-  "description": "The localization transport uses this three-variable coherence identity."
+  "place": "Tag 08DJ, lemma-internal-hom, functoriality in K, L, M",
+  "description": "Extract the naturality property from the defining normalized natural family; existence remains the dependency of that definition."
  },
  "mathlib_searches": [
   {
@@ -56,9 +58,65 @@
    "results": "Found explicit schemeTensorHomUncurry and its component and localized-naturality theorems. No ordinary evaluation associativity calculation.",
    "verdict": "no exact match",
    "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|schemeDerivedTensorHom",
+   "date": "2026-10-14",
+   "results": "Hits: Mathlib/CategoryTheory/CodiscreteCategory.lean, Mathlib/CategoryTheory/CodiscreteCategory.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+   "verdict": "no exact match for the pinned normalized scheme derived tensor-Hom family; general adjunction naturality needs identification with that family"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "date": "2026-10-14",
+   "results": "Hits: CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "verdict": "no exact match for the pinned normalized scheme derived tensor-Hom family; general adjunction naturality needs identification with that family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the canonical derived tensor Hom equivalence for sheaves of modules in all three variables",
+   "date": "2026-10-14",
+   "results": "Hits: PresheafOfModules.Monoidal.tensorHom, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorHom_app, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, LightCondensed.ihomPoints_symm_comp, SheafOfModules.pullbackObjFreeIso_hom_naturality, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.unitHomEquiv_comp_apply",
+   "verdict": "no exact match for the pinned normalized scheme derived tensor-Hom family; general adjunction naturality needs identification with that family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor internal Hom equivalence naturality for a scheme",
+   "date": "2026-10-14",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A parametrized tensor internal Hom adjunction has a Hom bijection natural contravariantly in both inputs and covariantly in the output",
+   "date": "2026-10-14",
+   "results": "Hits: CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.homEquiv_apply_eq, CategoryTheory.MonoidalClosed.pre, CategoryTheory.ihom.adjunction, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.uncurry, ModuleCat.monoidalClosedHomEquiv, CategoryTheory.exp.adjunction",
+   "verdict": "no exact match for the pinned normalized scheme derived tensor-Hom family; general adjunction naturality needs identification with that family"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality.*|naturality.*homEquiv",
+   "date": "2026-10-14",
+   "results": "25 hits; ; top: Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/Topology/Category/UniformSpace.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/PullbackObjObj.lean",
+   "verdict": "No exact match for the chosen normalized scheme family. ParametrizedAdjunction requires an identified adjunction; its abstract Hom equivalence is not this pinned family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bifunctor adjunction hom equivalence naturality in the parameter and source and target morphisms",
+   "date": "2026-10-14",
+   "results": "8 hits; ; top: CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_three, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_two, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_two_assoc, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_three_assoc, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one_assoc, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one, CategoryTheory.ParametrizedAdjunction.homEquiv_symm_naturality_two_assoc, CategoryTheory.ParametrizedAdjunction.homEquiv_symm_naturality_three",
+   "verdict": "No exact match for the chosen normalized scheme family. ParametrizedAdjunction requires an identified adjunction; its abstract Hom equivalence is not this pinned family."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ParametrizedAdjunction.homEquiv_naturality",
+   "date": "2026-10-14",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.ParametrizedAdjunction.homEquiv_naturality'; top: ",
+   "verdict": "No exact match for the chosen normalized scheme family. ParametrizedAdjunction requires an identified adjunction; its abstract Hom equivalence is not this pinned family."
   }
  ],
- "status": "proved",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization",
@@ -68,8 +126,24 @@
  "blueprint": {
   "is": null,
   "from": {
-   "node": "lem-pc-scheme-ordinary-evaluation-localization",
-   "place": "Proof step 2, canonical three-variable naturality"
+   "node": "lem-sc-finite-duality",
+   "place": "Proof, final paragraph: tensor-Hom identification for finite locally free modules; canonical three-variable naturality used in ordinary evaluation localization step 2",
+   "via": [
+    "lem-pc-scheme-ordinary-evaluation-localization",
+    "lem-pc-kinjective-scheme-evaluation-models",
+    "lem-pc-exact-source-kinjective-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
   },
   "same_as": []
  },
@@ -88,12 +162,10 @@
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
+  "reviewer": "NT-Codex-NL-89c0b359a",
+  "group": "NL",
   "result": "pass",
-  "landing": "20261014T001726-L-2552299",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-89c0b359a (reviewer sub-agent of L); spot-checked: Read the item, cited definition, unit/chapter route, Tag 08DJ source, and reports in full. The three-variable naturality formula has correct variance, typing, identity specializations, coefficient category, and edge cases. No new nodes or repairs are needed; no cycle is introduced by this delivery."
  },
  "reviewed_proof": {
   "date": "2026-10-14",
@@ -104,5 +176,12 @@
   "landing": "20261014T001726-L-2552299",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-pc-scheme-derived-tensor-hom-naturality",
+  "worker": "stage1",
+  "summary": "Expanded the defining three-variable naturality into a type-checked composition formula and the three identity specializations. No new nodes; no Lean attachment in the designated source. The imported status proved is not corroborated by an available project declaration in WeilConjectures.",
+  "blueprint": "Realizes the canonical tensor-Hom compatibility underlying the final paragraph of lem-sc-finite-duality (tensor-Hom for finite locally free modules), through the existing ordinary evaluation localization step 2. Repaired inherited from.node by tracing its intermediate created nodes to the imported ancestor."
  }
 }
