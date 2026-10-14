@@ -25,9 +25,71 @@
   "lem-pc-derived-adjoint-functors",
   "lem-weil-pbc-exact-functor-derived-factorization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $u,u_0$ for the underived units, to distinguish them from $\\eta,\\eta_0$. Exactness of $L,L_0$ and [lem-weil-pbc-exact-functor-derived-functor] identify their left derived functors, including the comparison maps, with $D(L),D(L_0)$. For a complex $X$, naturality of $u$ with respect to each differential gives $R(L(d_X^i))u_{X^i}=u_{X^{i+1}}d_X^i$, so $C(u)_X$ is a chain map. Additive functors preserve the equation defining a chain homotopy, so these maps and the termwise adjunction descend to the homotopy categories used in [lem-pc-pre-derived-adjoint-functors-general]. In its canonical Hom formula, take $K=C(L)X$, $M=X$, both quasi-isomorphisms $s,t$ to be identities, and $f=C(u)_X:X\\to C(R)C(L)X$. The representing right-derived cocone at the identity is $\\gamma_{C(L)X}$; the left-derived cone at the identity is the exact localization identification. The underived adjunct of $f$ is $1_{C(L)X}$ (the triangle identity, degree by degree). Thus the inverse of the canonical Hom bijection sends $1_{D(L)Q_{\\mathcal B}X}$ to $\\gamma_{C(L)X}Q_{\\mathcal B}(C(u)_X)$. By the definition of the unit of an adjunction this proves\n$$\\eta_{Q_{\\mathcal B}X}=\\gamma_{C(L)X}Q_{\\mathcal B}(C(u)_X).$$\nThe same substitution for $L_0\\dashv R_0$ gives $\\eta_{0,Q_{\\mathcal B_0}Y}=\\gamma^0_{C(L_0)Y}Q_{\\mathcal B_0}(C(u_0)_Y)$. All formulas use the exact-functor localization identifications fixed in the statement.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 0FND (lemma-pre-derived-adjoint-functors-general); agent square calculation from their canonical Hom formula"
+   }
+  },
+  {
+   "text": "Apply the stipulated underived adjunct compatibility to $t=1_{LM}$. Since its adjunct is $u_M$, and the adjunct under $L_0\\dashv R_0$ of $a_M^{-1}:L_0WM\\to VLM$ is $R_0(a_M^{-1})u_{0,WM}$, it gives $c_{LM}W(u_M)=R_0(a_M^{-1})u_{0,WM}$. Apply this equality in every degree of a complex $X$ of $\\mathcal B$ and localize. Using Step 1 and the defining equation for $b$ at $P=C(L)X$, the left side of the desired derived-unit equation is\n$$b_{D(L)QX}D(W)(\\eta_{QX})=\\gamma^0_{C(V)C(L)X}Q_{\\mathcal B_0}(C(c)_{C(L)X})Q_{\\mathcal B_0}(C(W)C(u)_X)$$\n$$=\\gamma^0_{C(V)C(L)X}Q_{\\mathcal B_0}(C(R_0)(C(a)_X^{-1}))Q_{\\mathcal B_0}(C(u_0)_{C(W)X})$$\n$$=RR_0(Q_{\\mathcal A_0}(C(a)_X^{-1}))\\gamma^0_{C(L_0)C(W)X}Q_{\\mathcal B_0}(C(u_0)_{C(W)X})$$\n$$=RR_0((a^D_{QX})^{-1})\\eta_{0,D(W)QX}.$$\nHere $Q=Q_{\\mathcal B}$ in subscripts. The third equality is precisely naturality of $\\gamma^0$ for the complex isomorphism $C(a)_X^{-1}:C(L_0)C(W)X\\to C(V)C(L)X$, and the last equality is Step 1 for $Y=C(W)X$. This is an equality of composites, not cancellation of $\\gamma$ or an assumption that it is invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 0FND (lemma-pre-derived-adjoint-functors-general); agent square calculation from their canonical Hom formula"
+   }
+  },
+  {
+   "text": "Both expressions $M\\mapsto b_{D(L)M}D(W)(\\eta_M)$ and $M\\mapsto RR_0((a^D_M)^{-1})\\eta_{0,D(W)M}$ are natural transformations from $D(W)$ to $RR_0D(V)D(L)$, by naturality of the displayed units, $a^D$ and $b$. Step 2 says their restrictions along the localization $Q_{\\mathcal B}$ agree. Clause (3) of [lem-weil-pbc-localization-universal-property] therefore makes them equal on $D(\\mathcal B)$. This proves the asserted derived-unit identity for every $M$.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 0FND (lemma-pre-derived-adjoint-functors-general); agent square calculation from their canonical Hom formula"
+   }
+  },
+  {
+   "text": "For $t:D(L)M\\to N$, the adjunctions of [lem-pc-derived-adjoint-functors] give $t^\\sharp=RR(t)\\eta_M$. The adjunct under the second adjunction of $D(V)(t)(a^D_M)^{-1}$ is consequently\n$$RR_0(D(V)(t))RR_0((a^D_M)^{-1})\\eta_{0,D(W)M}\n=RR_0(D(V)(t))b_{D(L)M}D(W)(\\eta_M)\n=b_ND(W)(RR(t))D(W)(\\eta_M)=b_ND(W)(t^\\sharp).$$\nThe first equality uses Step 3, and the second uses naturality of $b$ for $t$. The adjunct formula itself follows from the definition of the unit and functoriality of the Hom bijection.",
+   "uses": [
+    "lem-pc-derived-adjoint-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 0FND (lemma-pre-derived-adjoint-functors-general); agent square calculation from their canonical Hom formula"
+   }
+  },
+  {
+   "text": "Take $M=RRN$ and $t=\\varepsilon_N$ in Step 4. The triangle identity gives $t^\\sharp=1_{RRN}$, so the adjunct of $D(V)(\\varepsilon_N)(a^D_{RRN})^{-1}$ is $b_N$. Applying the inverse Hom bijection, which sends $h$ to $\\varepsilon_{0,D(V)N}D(L_0)(h)$, and composing on the right with $a^D_{RRN}$ yields\n$$D(V)(\\varepsilon_N)=\\varepsilon_{0,D(V)N}D(L_0)(b_N)a^D_{RRN}.$$\nConversely the adjunct statement specialized to $t=1_{D(L)M}$ gives the unit equation; hence the displayed formulations are equivalent, as claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 0FND (lemma-pre-derived-adjoint-functors-general); agent square calculation from their canonical Hom formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-derived-adjoint-functors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 0FND (lemma-pre-derived-adjoint-functors-general); agent square calculation from their canonical Hom formula"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,10 +146,59 @@
    "date": "2026-10-14",
    "results": "Second reading: 0 hits; none. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:78-133; the hits express a single derived adjunction, without the two-adjunction comparison square.",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison of total right derived functors is the mate of a commuting square of exact left adjoints",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'. Read Derived/Adjunction.lean:44-133, Derived/RightDerived.lean:190-208 and Localization/DerivabilityStructure/PointwiseRightDerived.lean:110-125. These are single-adjunction formulas, constructions of derived functors or a comparison invertibility criterion with derivability assumptions, not this adjoint-square theorem.",
+   "verdict": "no match for the complete adjoint-square statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"unit\"",
+   "date": "2026-10-14",
+   "results": "12 hits: CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Functor.totalRightDerivedUnit, CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnithQuasiIso, CategoryTheory.Functor.instIsRightDerivedFunctorPlusPlusRightDerivedFunctorPlusRightDerivedFunctorPlusUnitQuasiIso, CategoryTheory.Functor.rightDerivedFunctorPlusUnith, CategoryTheory.Functor.rightDerivedFunctorPlusUnit. Read Derived/Adjunction.lean:44-133, Derived/RightDerived.lean:190-208 and Localization/DerivabilityStructure/PointwiseRightDerived.lean:110-125. These are single-adjunction formulas, constructions of derived functors or a comparison invertibility criterion with derivability assumptions, not this adjoint-square theorem.",
+   "verdict": "no match for the complete adjoint-square statement"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(mate|square)|comparison.*(unit|counit)",
+   "date": "2026-10-14",
+   "results": "18 hits: Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Monad/Monadicity.lean, Mathlib/CategoryTheory/Monad/Monadicity.lean, Mathlib/CategoryTheory/Monad/Monadicity.lean, Mathlib/CategoryTheory/Monad/Monadicity.lean, Mathlib/CategoryTheory/Monad/Monadicity.lean. Read Derived/Adjunction.lean:44-133, Derived/RightDerived.lean:190-208 and Localization/DerivabilityStructure/PointwiseRightDerived.lean:110-125. These are single-adjunction formulas, constructions of derived functors or a comparison invertibility criterion with derivability assumptions, not this adjoint-square theorem.",
+   "verdict": "no match for the complete adjoint-square statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical right derived comparison preserves the units and counits in an adjoint square",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived adjunction with respect to compatible exact vertical functors and right derived functor comparison",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived'_counit. Read Derived/Adjunction.lean:44-133, Derived/RightDerived.lean:190-208 and Localization/DerivabilityStructure/PointwiseRightDerived.lean:110-125. These are single-adjunction formulas, constructions of derived functors or a comparison invertibility criterion with derivability assumptions, not this adjoint-square theorem.",
+   "verdict": "no match for the complete adjoint-square statement"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugate.*derived|derived.*conjugate|derived.*naturality",
+   "date": "2026-10-14",
+   "results": "Independent second reader: 10 hits: Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:35-133; these describe a single derived adjunction. The grep hits concern projective/injective resolution naturality, not two unbounded derived adjunctions.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley mate transformation between localized adjunctions agrees with right derived natural transformation",
+   "date": "2026-10-14",
+   "results": "Independent second reader: 8 hits: CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.derived_unit. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:35-133; these describe a single derived adjunction. The grep hits concern projective/injective resolution naturality, not two unbounded derived adjunctions.",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-unbounded-abelian-exchange-comparison",
   "by": "worker",
@@ -103,5 +214,44 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-derived-adjoint-square-comparison",
+  "worker": "stage1",
+  "summary": "Proved the square compatibility explicitly from the existing identity-fraction Hom formula: derive each unit, compute the comparison on complexes, descend the unit equality, then compute arbitrary adjuncts and counits. Statement unchanged. Reused generic categorical tools; no new nodes and no K-injective preservation hypothesis.",
+  "blueprint": "Realizes the coefficient-reduction compatibility of forgetting with the proper-base-change adjunction, introduced below lem-kun-0f0g through lem-kun-unbounded-abelian-exchange-comparison; the ancestor blueprint itself has no explicit square lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Its exact-functor clause identifies the left derived functors and comparison maps without resolutions; no node of the Kunneth unit states this generic localization fact."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Its explicit identity-fraction Hom formula determines each derived unit from the underived unit; the Kunneth unit contains no such generic Hom formula."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Clause (3) extends an equality of natural transformations checked on complexes to the derived category; this generic localization uniqueness is not a Kunneth-unit theorem."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Its canonical functorial Hom bijection supplies the two derived adjunctions; this is a categorical tool underlying the coefficient-forgetting comparison, not a replacement of the Kunneth proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-derived-adjoint-functors"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-08c34039a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-08c34039a (reviewer sub-agent of L); spot-checked: Read the complete mathematics and wrote review.md. Verified all five steps against cited DAG statements and Stacks 0FND/0DVC/09T5/015F; checked localization uniqueness, morphism orientations, small cases, duplicate candidates, dependency closure, unit/chapter route, and exact master target morphisms and coefficient categories. Accepted the four declared generic tool uses. No new nodes, repairs, circular dependencies, or target weakening."
  }
 }
