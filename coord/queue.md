@@ -89,9 +89,9 @@
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison` | 29 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineBaseChangeTildeMateFactorization` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore` | 30 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
 | `Sheaf.Paper.ModuleCupAdjunctionPolygon` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalPullback` | 31 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardExternalCechCupLeibniz` | 31 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedHomologyInjective` | 31 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedModuleRankOneCompact` | 31 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineDirectLocalizedTensorSquareCore` | 32 | 1 | proof |
