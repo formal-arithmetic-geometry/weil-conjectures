@@ -71,7 +71,7 @@ private noncomputable def equivarianceSubfunctor
       N.ρ g (s (c.sectionRestriction f.unop x))
     rw [← Scheme.Hom.comp_apply, restriction_action c,
       Scheme.Hom.comp_apply]
-    exact hs g (c.sectionRestriction f.unop x)
+    exact hs g _
 
 private theorem equivarianceSubfunctor_isSheaf
     {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]
