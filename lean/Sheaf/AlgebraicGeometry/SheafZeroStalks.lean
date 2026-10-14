@@ -61,3 +61,5 @@ This compatibility module intentionally contains no declarations after duplicate
 
 -- Verification (V2, 2026-10-14): clean compatibility compile; no declarations or holes.
 -- This stale repair assignment closes no holes and certifies no absent upstream theorem.
+
+-- B4 stage-3 verification: the prior duplicate-removal repair leaves this module declaration-free.
