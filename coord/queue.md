@@ -1,6 +1,6 @@
 # Work queue
 
-41 items; claim with `tools/claim.py next <group> [--stage N]`.
+43 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (41)
+## Stage 3: modules to prove (43)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -18,7 +18,8 @@
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex` | 28 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality` | 10 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage` | 11 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.UpperStarCoefficientSquare` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleAbelianHomSourceFormula` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula` | 19 | 1 | proof |
@@ -44,15 +45,16 @@
 | `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate` | 33 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization` | 35 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CompactFlatTelescopeBarEnlargement` | 36 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatTelescopeConeNormalizationDescent` | 36 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation` | 37 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CompactFlatGeneratorRelativeExtension` | 37 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FlatTelescopeSumComparisonIsIso` | 37 | 1 | proof |
 | `Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport` | 37 | 1 | proof |
-| `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons` | 42 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CompactFlatFiniteSubcomplexDiagrams` | 38 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FlatTelescopeSumModels` | 38 | 1 | proof |
+| `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionExists` | 39 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence` | 43 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit` | 48 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.DerivedSelfTorChosenAffineCoordinates` | 49 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
 
 Waiting, not claimable: 14 modules whose proof uses a node that has no Lean declaration yet.
 
