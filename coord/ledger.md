@@ -14751,3 +14751,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:29 L: merged deliver/K3/Sheaf.AlgebraicGeometry.RecordedPerfectHomNormalization (stage 3; reviewer PASS; first push; landing 20261014T082919-L-4066280 (proof); batch 20261014T082917; modules 1; new nodes 0)
 
 - 16:33 L: batch 20261014T082917 dependency take-out
+- 08:36 L: returned deliver/K3/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (reviewer RETURN: (reviewer X-e7410, head e7410e349) G1/H3 (review point 6): In dag/nodes/sec-picard-framework/new-determinant-split-restr)
