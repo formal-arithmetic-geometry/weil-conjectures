@@ -26,9 +26,74 @@
   "def-weil-extension-by-zero-presheaf",
   "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $J=j_{U!}$. The cited ringed-site adjunction lemma gives that $J$ is exact for the very sheafified direct-sum construction in the statement. Thus, if $\\operatorname{im}(a)=\\ker(b)$, applying $J$ preserves this equality: kernels are finite limits, cokernels are finite colimits, and the image of $a$ is the kernel of its cokernel. This proves the forward implication without assuming that epimorphisms are surjective on sections.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8G (lemma-j-shriek-reflects-exactness), first paragraph; lemma-extension-by-zero-exact"
+   }
+  },
+  {
+   "text": "For any $\\mathcal O_U$-module $\\mathcal G$ define $\\eta_{\\mathcal G}:\\mathcal G\\to (J\\mathcal G)|_U$ as follows. At $(V,\\varphi:V\\to U)$ send $s$ into the $\\varphi$-summand of $P_{\\mathcal G}(V)$ and then into its sheafification. Under $h:V^{\\prime}\\to V$ this summand maps to the $\\varphi h$-summand, so the maps commute with restriction and are module-linear. Suppose $\\eta_{\\mathcal G}(s)=0$. The module sheafification interface identifies its underlying abelian sheaf with abelian sheafification; the underlying-sets comparison therefore permits the local-equality criterion for set sheafification. There is a cover $\\{h_i:V_i\\to V\\}$ on which the element supported in the $\\varphi h_i$-summand is zero in $P_{\\mathcal G}(V_i)$. Inclusion into a direct sum is injective (project back to that coordinate), so $s|_{(V_i,\\varphi h_i)}=0$. These maps cover $(V,\\varphi)$ in the localized topology; separatedness of the sheaf $\\mathcal G$ gives $s=0$. Consequently $\\eta_{\\mathcal G}$ is sectionwise injective, hence a monomorphism. This also works for an empty cover, because a sheaf has only the zero section on an object covered by the empty family.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-pur-localized-ringed-site",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8G (lemma-j-shriek-reflects-exactness), unit-injection paragraph, filling the omitted details; Tag 03CY; sites.tex Tags 00YR and 00WK"
+   }
+  },
+  {
+   "text": "The preceding injection detects zero objects: if $J\\mathcal H=0$, restriction is zero sectionwise, so the injection $\\eta_{\\mathcal H}:\\mathcal H\\to (J\\mathcal H)|_U=0$ forces every section of $\\mathcal H$ to vanish, hence $\\mathcal H=0$. No assertion that the unit is an isomorphism is needed.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8G (lemma-j-shriek-reflects-exactness), final paragraph"
+   }
+  },
+  {
+   "text": "For the converse put $\\mathcal K=\\ker(b)$ and let $\\bar a:\\mathcal G_1\\to\\mathcal K$ be the factorization of $a$ (which exists because $ba=0$). Let $\\mathcal H=\\operatorname{coker}(\\bar a)$, so the original complex is exact precisely when $\\mathcal H=0$. Exactness of $J$ identifies $J\\mathcal K$ with $\\ker(Jb)$, identifies $J\\bar a$ with the factorization of $Ja$ through that kernel, and identifies $J\\mathcal H$ with its cokernel. If the extended complex is exact, that factorization is an epimorphism, so $J\\mathcal H=0$. Step 3 gives $\\mathcal H=0$, and hence $\\operatorname{im}(a)=\\ker(b)$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8G (lemma-j-shriek-reflects-exactness), reflection argument, expressed through the middle homology quotient"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-extension-by-zero-presheaf",
+  "def-pur-localized-ringed-site",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8G (lemma-j-shriek-reflects-exactness), with explicit local proof of the unit injection and middle-homology quotient argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +129,45 @@
    "results": "Returned: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, HomologicalComplex.exact_of_degreewise_exact, HomologicalComplex.exact_iff_degreewise_exact, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.Abelian.Ext.covariantSequence_exact, HomologicalComplex.shortExact_of_degreewise_shortExact, ModuleCat.localizedModule_functor_map_exact (8 hits). ",
    "date": "2026-10-14",
    "verdict": "no match: read returned signatures; no assertion about sheafified extension by zero for modules over a varying ring sheaf on an arbitrary slice site."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|localizationLowerShriek|jShriek",
+   "results": "Returned 0 hits: . Read returned signatures.",
+   "date": "2026-10-14",
+   "verdict": "no match: no returned declaration states preservation and reflection by sheafified direct-sum extension on arbitrary ringed sites; abstract exactness and module sheafification results alone do not specialize in one line to this functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero reflects exactness on arbitrary ringed site modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero on a ringed site slice preserves and reflects exactness of module sheaf complexes",
+   "results": "Returned 8 hits: ModuleCat.localizedModule_functor_map_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, Profinite.NobelingProof.succ_exact, HomologicalComplex.exact_of_degreewise_exact, HomologicalComplex.exact_iff_degreewise_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, HomologicalComplex.IsSupportedOutside.exactAt, HomologicalComplex.extend_exactAt. Read returned signatures.",
+   "date": "2026-10-14",
+   "verdict": "no match: no returned declaration states preservation and reflection by sheafified direct-sum extension on arbitrary ringed sites; abstract exactness and module sheafification results alone do not specialize in one line to this functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"exact\"",
+   "results": "Returned 0 hits: . Read returned signatures.",
+   "date": "2026-10-14",
+   "verdict": "no match: no returned declaration states preservation and reflection by sheafified direct-sum extension on arbitrary ringed sites; abstract exactness and module sheafification results alone do not specialize in one line to this functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified direct sum extension from a slice site is an exact faithful functor for modules over a sheaf of rings",
+   "results": "Returned 8 hits: SheafOfModules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, instAbelianLightCondMod, PresheafOfModules.sheafification, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, LightCondensed.free. Read returned signatures.",
+   "date": "2026-10-14",
+   "verdict": "no match: no returned declaration states preservation and reflection by sheafified direct-sum extension on arbitrary ringed sites; abstract exactness and module sheafification results alone do not specialize in one line to this functor."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-slice-restriction-flat",
   "by": "worker",
@@ -87,5 +187,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-slice-extension-exactness",
+  "worker": "stage1",
+  "summary": "Reused the existing ringed-site exact adjunction and sheafification interfaces. Filled the omitted unit-injection argument by local equality and the distinguished direct-sum coordinate, then reflected vanishing of the middle homology quotient. No new nodes and no change of statement or coefficient category.",
+  "blueprint": "Realizes the preservation and reflection of exactness used for restriction-flatness in the final Stacks comparison recorded by blueprint.from.place, under def-weil-pbc-completed-pullback. The archived ancestor text discusses completed pullback; this subsidiary argument is the Tag 0E8G input to Tag 0E8J, not an alteration of that definition.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact sheafified extension on arbitrary ringed sites is a generic categorical tool; it is the same construction and coefficients, and the completed-pullback unit has no separate statement of it."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "The generic module sheafification interface supplies the underlying abelian sheafification, needed to apply local equality on arbitrary sites; no statement of this interface lies in the completed-pullback unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-317b0c2d5",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-317b0c2d5 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources and route. Verified all four steps against Stacks 0E8G, including local unit injection and homology-based reflection; checked edge cases and duplicates. No new nodes or repairs. Accepted declared generic tool uses. review.md records three inherited dependency cycles; none involves this item."
  }
 }
