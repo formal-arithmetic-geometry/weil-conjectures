@@ -1,6 +1,6 @@
 # Work queue
 
-41 items; claim with `tools/claim.py next <group> [--stage N]`.
+39 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (41)
+## Stage 3: modules to prove (39)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -37,10 +37,8 @@
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates` | 32 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapHomPresentation` | 32 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RecordedPerfectHomNormalization` | 32 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate` | 33 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization` | 35 | 1 | proof |
