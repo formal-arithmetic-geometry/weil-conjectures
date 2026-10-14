@@ -14356,3 +14356,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:01 L: returned deliver/T2/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedBoundaryProjection (reviewer RETURN: (reviewer X-701dc, head 701dc67aa) H10: lean/Sheaf/AlgebraicGeometry/SquareZeroTensorGradedBoundaryProjection.lean fails)
 
 - 11:03 L: batch 20261014T025133 dependency take-out
+- 03:03 L: returned deliver/T4/Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates (reviewer RETURN: (reviewer X-8fbc1, head 8fbc16ec3) C6: The new main-node proof_deps edge to new-lem-pc-affine-tensor-pullback-stalk-coor)
