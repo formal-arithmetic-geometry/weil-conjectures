@@ -188,7 +188,7 @@ theorem perfect_descend_morphisms
       have hfl : perfectLimitMap R c s _ fl = φ := by
         rw [perfectLimitMap_stage, hf']
       apply (homMap_eq_iff _ _ _ _).2
-      exact hfl
+      simpa [perfectLimitMap] using hfl
     · obtain ⟨j, hij, f, hf⟩ := surj i le_rfl φ
       refine ⟨j, hij, f, ?_, fun h ↦ (hφ h).elim⟩
       exact (homMap_eq_iff _ _ _ _).2 hf
