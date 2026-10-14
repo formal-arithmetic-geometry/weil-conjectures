@@ -1,0 +1,146 @@
+{
+ "id": "new-b3-derived-self-tor-chosen-affine-coordinates",
+ "kind": "statement",
+ "title": "Intrinsic affine self-Tor coordinates compatible with one canonical quotient lift",
+ "statement": "Let i:Z→Y be a closed immersion [def-weil-closed-immersion, def-pc-scheme]. Use the standard derived category [def-pc-derived-category] and the fixed derived tensor [def-pc-scheme-derived-tensor-structure]. Put B=i_*O_Z, D=Q(B[0]), and Q_n=H^{-n}(D tensor-derived D), for n≥0. On each affine U put A_U=Gamma(Y,U), I_U=ker(i)(U), P_U the chosen projective resolution of A_U/I_U, and T_U=P_U tensor A_U/I_U [def-weil-pbc-module-chain-complex-homology]. There exist A_U-linear equivalences c_U:H_n(T_U)≃Gamma(U,Q_n). For each basic inclusion V⊆U, let phi be ring restriction and psi the canonical Ideal.quotientMap, using ideal restriction. There exist one augmented chain map a:P_U→Res_phi(P_V) and one tensor chain map k:T_U→Res_phi(T_V), with pi_V(a_0(x))=psi(pi_U(x)) and k_j(x tensor y)=a_j(x) tensor psi(y), such that restriction(c_U(x))=c_V(e(H_n(k)(x))) for every x. Here e is exact restriction-of-scalars homology comparison. This asserts existence of a compatible lift, not compatibility with every supplied lift.",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), affine derived tensor construction; Tags 06YH, 01I9(2) and 00LS(1), normalized coefficient sheaf, derived tensor, and existence of augmented resolution lifts."
+ },
+ "proof": [
+  {
+   "text": "On an affine U construct the coefficient identification by the quotient section map Gamma(Y,U)/ker(i)(U) to Gamma(i inverse U,O_Z), using surjectivity for a closed immersion with affine target (Mathlib IsClosedImmersion.isAffine_surjective_of_isAffine) and kerLift. Apply the tilde adjunction, normalized by that map; the affine quotient sheaf identification proves it is invertible. Extend the projective quotient resolution by embeddingDownNat. Its augmentation is a quasi-isomorphism, and its terms are flat by Module.Flat.of_projective, so bounded-flat K-flatness applies. Restrict intrinsic derived tensor to U and apply the affine derived tensor chart comparison to this specific resolution. This identifies it with the tilde of the algebraic total tensor.",
+   "uses": [
+    "lem-sc-affine-quotient-restricted-iso",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-open-restriction-natural",
+    "lem-pc-affine-derived-tensor-chart-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact tilde homology comparison. Tensoring with the single quotient complex and extending the nonnegative tensor complex agree: in degree -j there is only the ( -j,0 ) summand, with differential d tensor id; positive degrees are zero. The extension homology isomorphism at -n identifies the homology with H_n(P tensor A/I). Compose with the normalized tilde section unit and with exact open restriction homology to obtain c_U. Each component is an isomorphism, so c_U is a linear equivalence. All equivalences use the same quotient section normalization.",
+   "uses": [
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a basic inclusion, ideal restriction gives the canonical quotient map Ideal.quotientMap. The augmented quotient-resolution tensor comparison constructs one augmented lift a and its pure-tensor map k. Sheafify this lift, identify its augmentation with the coefficient restriction by the quotient normalization, and cancel the invertible augmentations after derived localization. Naturality of the derived tensor counit, affine tensor comparison, exact homology, extension comparison and tilde section unit gives the coordinate restriction equation for this one lift. No independence from arbitrary supplied lifts is claimed here; the parent proves that separately by quotient tensor lift homotopy.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-affine-chart-total-tensor",
+    "lem-pc-derived-tensor-open-restriction-natural",
+    "new-p4-quotient-resolution-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-chart-total-tensor",
+  "lem-pc-affine-derived-tensor-chart-comparison",
+  "lem-pc-derived-tensor-open-restriction-natural",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-sc-affine-quotient-restricted-iso",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "new-affine-derived-tilde-homology-comparison",
+  "new-p4-quotient-resolution-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Original parent plan steps 1–2 and the existence/naturality portion of step 3, with the quotient map specified as Ideal.quotientMap. Arbitrary-lift independence remains in the parent and is proved there."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Associated quotient sheaf projective resolution derived tensor affine restriction coordinates compatible with one augmented lift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural affine coordinates for homology of derived self tensor of a closed immersion quotient sheaf",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app",
+   "date": "2026-10-14",
+   "verdict": "No intrinsic affine derived self-tensor theorem with a chosen normalized quotient-resolution restriction square. Homology and extension tools only; inspected local geometric comparison declarations and found that the self-Tor chart modules reach the assigned parent and cannot be imported."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.extendHomologyIso",
+   "results": "11 hits: HomologicalComplex.extendHomologyIso, HomologicalComplex.extendHomologyIso_hom_homologyι, HomologicalComplex.extendHomologyIso_inv_homologyι, HomologicalComplex.homologyπ_extendHomologyIso_hom, HomologicalComplex.homologyπ_extendHomologyIso_inv, HomologicalComplex.extendHomologyIso_hom_homologyι_assoc, HomologicalComplex.extendHomologyIso_inv_homologyι_assoc, HomologicalComplex.homologyπ_extendHomologyIso_hom_assoc",
+   "date": "2026-10-14",
+   "verdict": "No intrinsic affine derived self-tensor theorem with a chosen normalized quotient-resolution restriction square. Homology and extension tools only; inspected local geometric comparison declarations and found that the self-Tor chart modules reach the assigned parent and cannot be imported."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*resolution|resolution.*quotient|homologyMap_eq",
+   "results": "15 hits: Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/QuasiIso.lean, Mathlib/Algebra/Homology/ShortComplex/QuasiIso.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean",
+   "date": "2026-10-14",
+   "verdict": "No intrinsic affine derived self-tensor theorem with a chosen normalized quotient-resolution restriction square. Homology and extension tools only; inspected local geometric comparison declarations and found that the self-Tor chart modules reach the assigned parent and cannot be imported."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedSelfTorAffineCoordinates",
+  "date": "2026-10-14",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-p1-derived-self-tor-affine-coordinates",
+   "place": "Affine coordinate construction and restriction equation for a single normalized augmented comparison; arbitrary comparison independence is retained and proved in the parent.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedSelfTorChosenAffineCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedSelfTorChosenAffineCoordinates.lean",
+  "declaration": "AlgebraicGeometry.exists_derived_selfTor_chosen_affine_coordinates",
+  "statement": "theorem exists_derived_selfTor_chosen_affine_coordinates\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ) :\n    letI := HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := CochainComplex.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let D := DerivedCategory.Q.obj (S.obj B)\n    let Q := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj (D ⊗ D)\n    ∃ c : ∀ U : Y.affineOpens,\n        ((((tensorRight (ModuleCat.of (Γ(Y, U.1) : Type u)\n          ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).mapHomologicalComplex (.down ℕ)).obj\n            (projectiveResolution (ModuleCat.of (Γ(Y, U.1) : Type u)\n              ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).complex).homology n) ≃ₗ[Γ(Y, U.1)]\n              Q.val.obj (op U.1),\n      ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n        (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1),\n          let A := (Γ(Y, U.1) : Type u)\n          let C := (Γ(Y, V.1) : Type u)\n          let I := i.ker.ideal U\n          let J := i.ker.ideal V\n          let φ := (Y.presheaf.map (homOfLE h).op).hom\n          let P := projectiveResolution (ModuleCat.of A (A ⧸ I))\n          let R := projectiveResolution (ModuleCat.of C (C ⧸ J))\n          let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n            (.down ℕ)\n          let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex\n            (.down ℕ)\n          let ψ := Ideal.quotientMap J φ\n            (fun x hx ↦ i.ker.ideal_le_comap_ideal h hx)\n          ∃ (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj R.complex)\n            (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n              (.down ℕ)).obj (TC.obj R.complex)),\n            (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) ∧\n            (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n              k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) ∧\n            let e := ((TC.obj R.complex).sc n).mapHomologyIso\n              (ModuleCat.restrictScalars φ)\n          ∀ x, Q.val.map (homOfLE h).op (c U x) =\n            c V (e.hom (HomologicalComplex.homologyMap k n x))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261014T075952-L-3719039",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261014T075952-L-3719039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

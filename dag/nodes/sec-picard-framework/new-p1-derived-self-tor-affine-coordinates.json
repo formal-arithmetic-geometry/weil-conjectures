@@ -16,53 +16,35 @@
  },
  "proof": [
   {
-   "text": "On an affine U construct the coefficient identification by the quotient section map Gamma(Y,U)/ker(i)(U) to Gamma(i inverse U,O_Z), using surjectivity for a closed immersion with affine target (Mathlib IsClosedImmersion.isAffine_surjective_of_isAffine) and kerLift. Apply the tilde adjunction, normalized by that map; the affine quotient sheaf identification proves it is invertible. Extend the projective quotient resolution by embeddingDownNat. Its augmentation is a quasi-isomorphism, and its terms are flat by Module.Flat.of_projective, so bounded-flat K-flatness applies. Restrict intrinsic derived tensor to U and apply the affine derived tensor chart comparison to this specific resolution. This identifies it with the tilde of the algebraic total tensor.",
+   "text": "Obtain a coordinate family compatible with one augmented lift of the canonical quotient restriction on each basic inclusion from new-b3-derived-self-tor-chosen-affine-coordinates. Keep this family unchanged.",
    "uses": [
-    "lem-sc-affine-quotient-restricted-iso",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-derived-tensor-open-restriction-natural",
-    "lem-pc-affine-derived-tensor-chart-comparison"
+    "new-b3-derived-self-tor-chosen-affine-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "Apply exact tilde homology comparison. Tensoring with the single quotient complex and extending the nonnegative tensor complex agree: in degree -j there is only the ( -j,0 ) summand, with differential d tensor id; positive degrees are zero. The extension homology isomorphism at -n identifies the homology with H_n(P tensor A/I). Compose with the normalized tilde section unit and with exact open restriction homology to obtain c_U. Each component is an isomorphism, so c_U is a linear equivalence. All equivalences use the same quotient section normalization.",
-   "uses": [
-    "new-affine-derived-tilde-homology-comparison",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false
+   "text": "Given an arbitrary supplied quotient map psi, surjectivity of Ideal.Quotient.mk and its normalization equation identify psi with the canonical Ideal.quotientMap. Rewrite the chosen augmentation and pure-tensor equations using this equality.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For a basic inclusion and supplied psi,a,k, associate a to a map of the two sheafified resolutions using tilde adjunction. The augmentation formula makes its image under derived localization the coefficient restriction map: invert the augmentations and cancel them in the commuting square. The formula on pure tensors identifies the associated map of k with the tensor comparison map. Naturality of the derived tensor counit, the canonical affine tensor comparison, exact homology and the tilde section unit gives the displayed element equation after the restriction-of-scalars homology isomorphism. If different augmented lifts are used, the proved quotient tensor lift homotopy and Homotopy.homologyMap_eq give the same homology map. No lifting existence is asserted or needed in this lemma.",
+   "text": "Apply the proved quotient tensor resolution lift homotopy to the chosen lift and the arbitrary supplied lift over this common quotient map. Homotopy.homologyMap_eq gives equality of the two homology maps in degree n. Substitute this equality into the chosen restriction equation and then apply the same exact restriction-of-scalars homology comparison. This proves the required equation for every supplied lift.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-pc-affine-chart-total-tensor",
-    "lem-pc-derived-tensor-open-restriction-natural",
     "new-h2-quotient-tensor-resolution-lift-homotopy"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-chart-total-tensor",
-  "lem-pc-affine-derived-tensor-chart-comparison",
-  "lem-pc-derived-tensor-open-restriction-natural",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-sc-affine-quotient-restricted-iso",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "new-affine-derived-tilde-homology-comparison",
+  "new-b3-derived-self-tor-chosen-affine-coordinates",
   "new-h2-quotient-tensor-resolution-lift-homotopy"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "P1",
+  "group": "B3",
   "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/08DX",
-  "place": "Affine tensor construction of (2), made explicit for closed-immersion quotients and supplied augmented lifts, using 06YH, 01I9 and 00LS(2)."
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Tag 00LS(2): reduce arbitrary augmented lift compatibility to one lift, use quotient surjectivity to fix the quotient map, and tensor the comparison homotopy. The geometric construction and chosen-lift square are a separate strictly smaller obligation."
  },
  "mathlib_searches": [
   {
@@ -172,9 +154,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261014T073557-L-3451455",
+  "landing": "20261014T075952-L-3719039",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
