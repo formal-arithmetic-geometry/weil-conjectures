@@ -16,53 +16,46 @@
  },
  "proof": [
   {
-   "text": "On an affine U construct the coefficient identification by the quotient section map Gamma(Y,U)/ker(i)(U) to Gamma(i inverse U,O_Z), using surjectivity for a closed immersion with affine target (Mathlib IsClosedImmersion.isAffine_surjective_of_isAffine) and kerLift. Apply the tilde adjunction, normalized by that map; the affine quotient sheaf identification proves it is invertible. Extend the projective quotient resolution by embeddingDownNat. Its augmentation is a quasi-isomorphism, and its terms are flat by Module.Flat.of_projective, so bounded-flat K-flatness applies. Restrict intrinsic derived tensor to U and apply the affine derived tensor chart comparison to this specific resolution. This identifies it with the tilde of the algebraic total tensor.",
+   "text": "For every affine U use i.ker_apply and i.app_surjective to form the canonical quotient section linear equivalence s_U: A_U/I_U -> Gamma(U,i_*O_Z), normalized by s_U(mk x)=i.app U x. RingHom.lift_injective_of_ker_le_ideal and Ideal.Quotient.lift_surjective_of_surjective prove bijectivity, and map_mul proves A_U-linearity. The proved source Scheme.Modules.isQuasicoherent_pushforward_of_isClosedImmersion applied to the quasi-coherent unit proves B is quasi-coherent. These are direct applications of the existing ring quotient and closed-immersion APIs, with no new geometric assumption.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take a global K-flat resolution q:K -> B[0]. Apply the natural K-flat derived tensor comparison to constant singleton families K and B[0]. Q(q) is invertible. Tensor its inverse with the identity and compose with the comparison to obtain D tensor D -> Q(Tot(K tensor B[0])). Apply degree -n homology and homologyFunctorFactors, and invert to obtain a global sheaf isomorphism e from ordinary tensor homology to intrinsic self-Tor.",
    "uses": [
-    "lem-sc-affine-quotient-restricted-iso",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-derived-tensor-open-restriction-natural",
-    "lem-pc-affine-derived-tensor-chart-comparison"
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-derived-tensor-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply exact tilde homology comparison. Tensoring with the single quotient complex and extending the nonnegative tensor complex agree: in degree -j there is only the ( -j,0 ) summand, with differential d tensor id; positive degrees are zero. The extension homology isomorphism at -n identifies the homology with H_n(P tensor A/I). Compose with the normalized tilde section unit and with exact open restriction homology to obtain c_U. Each component is an isomorphism, so c_U is a linear equivalence. All equivalences use the same quotient section normalization.",
+   "text": "Apply the ordinary quasi-coherent tensor-resolution coordinate theorem to B,B, the normalized quotient section coordinates s,s, and the chosen algebraic projective resolutions. Compose its c_U with the linear equivalence on sections of the global e. For every basic inclusion construct psi0,a,k using the proved quotient-resolution tensor comparison. Quotient surjectivity and the formula on mk identify psi0 with the required Ideal.quotientMap.",
    "uses": [
-    "new-affine-derived-tilde-homology-comparison",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a basic inclusion, ideal restriction gives the canonical quotient map Ideal.quotientMap. The augmented quotient-resolution tensor comparison constructs one augmented lift a and its pure-tensor map k. Sheafify this lift, identify its augmentation with the coefficient restriction by the quotient normalization, and cancel the invertible augmentations after derived localization. Naturality of the derived tensor counit, affine tensor comparison, exact homology, extension comparison and tilde section unit gives the coordinate restriction equation for this one lift. No independence from arbitrary supplied lifts is claimed here; the parent proves that separately by quotient tensor lift homotopy.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-pc-affine-chart-total-tensor",
-    "lem-pc-derived-tensor-open-restriction-natural",
+    "new-j1-qcoh-ordinary-tensor-resolution-coordinates",
     "new-p4-quotient-resolution-tensor-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Regard the canonical quotient homomorphism as the semilinear coefficient map b. Reduce its coordinate restriction equation to representatives mk x by quotient surjectivity; s_U(mk x)=i.app U x and i.naturality give exactly the required equation. The augmentation equation for a then gives the first-coefficient restriction equation. Apply the ordinary coordinate naturality to b,a,k and these equations. Finally PresheafOfModules.naturality_apply e.hom transports this equality to intrinsic self-Tor. This last assembly is explicitly proved in Lean and uses no new hole.",
+   "uses": [
+    "new-j1-qcoh-ordinary-tensor-resolution-coordinates"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-chart-total-tensor",
-  "lem-pc-affine-derived-tensor-chart-comparison",
-  "lem-pc-derived-tensor-open-restriction-natural",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-sc-affine-quotient-restricted-iso",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "new-affine-derived-tilde-homology-comparison",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "new-j1-qcoh-ordinary-tensor-resolution-coordinates",
   "new-p4-quotient-resolution-tensor-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "B3",
+  "group": "J1",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/08DX",
-  "place": "Original parent plan steps 1–2 and the existence/naturality portion of step 3, with the quotient map specified as Ideal.quotientMap. Arbitrary-lift independence remains in the parent and is proved there."
+  "place": "K-flat representative computation (2), with ordinary affine comparison separated from derived localization and quotient augmentation construction; canonical quotient normalization proved from Mathlib."
  },
  "mathlib_searches": [
   {
@@ -137,9 +130,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261014T075952-L-3719039",
+  "landing": "20261014T084701-L-89097",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

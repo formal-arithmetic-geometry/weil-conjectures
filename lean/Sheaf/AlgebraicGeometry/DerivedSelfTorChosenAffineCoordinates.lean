@@ -16,14 +16,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
-import Sheaf.AlgebraicGeometry.AffineQuotientRestrictedIso
-import Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison
-import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionNatural
-import Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
+import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
+import Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates
+
 import Sheaf.AlgebraicGeometry.QuotientResolutionTensorComparison
-import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
 /-! # Intrinsic affine self-Tor for one chosen augmented lift
 
@@ -37,6 +35,36 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
+private theorem quotient_section_coordinates
+    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (U : Y.affineOpens) :
+    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+    ∃ s : ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U) ≃ₗ[Γ(Y, U.1)]
+        B.val.obj (op U.1),
+      ∀ x : Γ(Y, U.1), s (Ideal.Quotient.mk _ x) = i.app U.1 x := by
+  let φ := (i.app U.1).hom
+  have hI : i.ker.ideal U = RingHom.ker φ := i.ker_apply U
+  let q := Ideal.Quotient.lift (i.ker.ideal U) φ (by
+    intro x hx
+    have hx' : x ∈ RingHom.ker φ := by simpa only [hI] using hx
+    exact hx')
+  have hq : Function.Bijective q := by
+    exact ⟨RingHom.lift_injective_of_ker_le_ideal _ _ (by rw [hI]),
+      Ideal.Quotient.lift_surjective_of_surjective _ _ (i.app_surjective U.1 U.2)⟩
+  let l : ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U) →ₗ[Γ(Y, U.1)]
+      ((Scheme.Modules.pushforward i).obj
+        (SheafOfModules.unit Z.ringCatSheaf)).val.obj (op U.1) :=
+    { toFun := q
+      map_add' := q.map_add
+      map_smul' := by
+        intro r x
+        change q (Ideal.Quotient.mk _ r * x) = φ r * q x
+        exact q.map_mul _ _ }
+  exact ⟨LinearEquiv.ofBijective l hq, fun _ ↦ rfl⟩
+
+set_option linter.unusedVariables false in
+-- Retain the existing binder names in the theorem signature.
+set_option maxHeartbeats 800000 in
+-- Affine scalar structures and tensor localization need additional elaboration fuel.
 /-- Intrinsic self-Tor has affine resolution coordinates compatible with one augmented
 lift of the canonical quotient restriction on each basic inclusion.
 This theorem only constructs one compatible augmented lift on each basic inclusion;
@@ -119,6 +147,66 @@ theorem exists_derived_selfTor_chosen_affine_coordinates
             let e := ((TC.obj R.complex).sc n).mapHomologyIso
               (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
-            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by sorry
+            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
+  classical
+  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+  let : (SheafOfModules.unit Z.ringCatSheaf).IsQuasicoherent :=
+    SheafOfModules.isQuasicoherent_unit (R := Z.ringCatSheaf)
+  have : B.IsQuasicoherent :=
+    Scheme.Modules.isQuasicoherent_pushforward_of_isClosedImmersion i _
+  let MA := fun U : Y.affineOpens ↦ ModuleCat.of (Γ(Y, U.1) : Type u)
+    ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U)
+  choose s hs using quotient_section_coordinates i
+  let P := fun U : Y.affineOpens ↦ projectiveResolution (MA U)
+  let M := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let := HasDerivedCategory.standard M
+  let := SheafOfModules.monoidalCategory Y.sheaf
+  let N := (CochainComplex.singleFunctor M 0).obj B
+  obtain ⟨K, q, hK, _, hq, _⟩ := CochainComplex.exists_isKFlatResolution N
+  have : QuasiIso q := hq
+  obtain ⟨comparison⟩ := kFlat_derivedTensor_comparison_natIso Y
+    ((Functor.const (Discrete Unit)).obj K)
+    ((Functor.const (Discrete Unit)).obj N) (fun _ ↦ hK)
+  let d := asIso (DerivedCategory.Q.map q)
+  let H := DerivedCategory.homologyFunctor M (-(n : ℤ))
+  let e := (H.mapIso ((tensorIso d (Iso.refl _)).symm ≪≫
+    (comparison.app ⟨()⟩).app ⟨()⟩) ≪≫
+      (DerivedCategory.homologyFunctorFactors M (-(n : ℤ))).app _).symm
+  obtain ⟨c₀, hc⟩ := exists_qcoh_ordinary_tensor_resolution_coordinates
+    Y B B MA MA s s P K q hK hq n
+  let c := fun U : Y.affineOpens ↦
+    (c₀ U).trans (Scheme.Modules.appLinearEquivOfIso e U.1)
+  refine ⟨c, ?_⟩
+  intro V U h hbasic A C I J φ PU PV TA TC ψ
+  have hI : ∀ x ∈ I, φ x ∈ J := fun x hx ↦ i.ker.ideal_le_comap_ideal h hx
+  obtain ⟨ψ₀, a, k, hψ₀, ha, hk⟩ := exists_quotient_resolution_tensor_comparison
+    A C I J φ hI PU PV
+  have hψeq : ψ₀ = ψ := by
+    apply RingHom.ext
+    intro y
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective y
+    exact hψ₀ x
+  subst ψ₀
+  let b : (A ⧸ I) →ₛₗ[φ] (C ⧸ J) :=
+    { toFun := ψ
+      map_add' := ψ.map_add
+      map_smul' := by
+        intro r y
+        change ψ (Ideal.Quotient.mk I r * y) = Ideal.Quotient.mk J (φ r) * ψ y
+        exact ψ.map_mul _ _ }
+  have hb : ∀ y : A ⧸ I,
+      s V (b y) = B.val.map (homOfLE h).op (s U y) := by
+    intro y
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective y
+    change s V (Ideal.Quotient.mk J (φ x)) =
+      B.val.map (homOfLE h).op (s U (Ideal.Quotient.mk I x))
+    rw [hs U, hs V]
+    exact ConcreteCategory.congr_hom (i.naturality (homOfLE h).op) x
+  refine ⟨a, k, ha, hk, ?_⟩
+  have hn := hc V U h hbasic b a k (fun x ↦ by rw [ha]; exact hb _) hb hk
+  intro es x
+  have he := PresheafOfModules.naturality_apply e.hom.val (homOfLE h).op (c₀ U x)
+  change _ = e.hom.val.app (op V.1) _
+  exact he.symm.trans (congrArg (e.hom.val.app (op V.1)) (hn x))
 
 end AlgebraicGeometry
