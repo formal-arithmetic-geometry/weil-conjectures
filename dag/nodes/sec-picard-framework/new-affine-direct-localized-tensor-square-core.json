@@ -14,19 +14,23 @@
  ],
  "proof": [
   {
-   "text": "Construct a common intermediate derived tensor model by first localizing the A-factor and then the base and second factor, and transport it through the affine stalk scalar-extension coordinates.",
+   "text": "Use stalkMap_toStalk and the two tensor-algebra restriction hypotheses to construct psi:Aq tensor_R Rprime to D as the tensor-product lift of the actual Aq-to-D stalk map and kappa composed with phi_fprime. Its two restrictions are proved by lift_tmul. Supply the compatible scalar towers.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing affine stalk scalar-extension coordinates chi to identify Aq tensor_A M with Q=stalkComplex(P). Choose the existing base-derived model k on Aq tensor_A M and m on Q, both over the original base R and second ring Rprime. Apply first-factor localization to n and k. Transport k to m along chi using the existing quasi-isomorphism comparison theorem; compose the D-linear source isomorphisms. Tensor associativity gives b, and the equality of the original coefficient maps gives delta. Set beta=delta inverse followed by b followed by extension of chi. Prove its numerator action from the three existing pure-tensor formulas, and compose the comparison squares to prove a followed by H(beta)=e1 followed by m.localizedComparison.",
    "uses": [
     "lem-pc-affine-stalk-scalar-extension-coordinates",
     "lem-pc-derived-tensor-first-localization-models",
-    "lem-pc-derived-tensor-base-second-localization-models"
+    "lem-pc-base-derived-tensor-model-quasiiso-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Compose the two localizedComparison equations and identify the coefficient chain map by its pure-tensor action; taking homology yields the fixed-prime comparison equation.",
+   "text": "Apply the base and second-factor affine localization comparison to m, psi and beta. Its equation for each compatible tau uses H(beta inverse followed by tau). Compose the two source isomorphisms, use beta.hom followed by beta.inv followed by tau.hom equals tau.hom, apply homologyMap_comp, and combine the two comparison equations by associativity.",
    "uses": [
-    "lem-pc-derived-tensor-first-localization-models",
-    "lem-pc-derived-tensor-base-second-localization-models"
+    "new-affine-stalk-base-second-localization-comparison"
    ],
    "elementary": false
   }
@@ -34,14 +38,15 @@
  "proof_deps": [
   "lem-pc-affine-stalk-scalar-extension-coordinates",
   "lem-pc-derived-tensor-first-localization-models",
-  "lem-pc-derived-tensor-base-second-localization-models"
+  "lem-pc-base-derived-tensor-model-quasiiso-comparison",
+  "new-affine-stalk-base-second-localization-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "G2",
+  "group": "H4",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0DJ8",
-  "place": "Tag 0DJ8, affine displayed localization identity and comparison compatibility; Tags 06Y6 and 01I9."
+  "place": "Affine localization identity, factored into first-factor localization and base/second-factor localization; Tag 06Y6 for derived-model comparison."
  },
  "mathlib_searches": [
   {
@@ -110,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G2",
+  "reviewer": "X-4b9b1",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261014T001718-L-2549631",
+  "landing": "20261014T022545-L-4045719",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched Lean signatures, proof calls and remaining localization statement with their nodes, dependency APIs and sources; both delivered modules and scratch axiom/importer checks compiled cleanly."
  }
 }
