@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-finrepair-composition-c",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Composition for constructibility alone",
@@ -17,13 +17,51 @@
  ],
  "proof": [
   {
-   "text": "For a constructible $F$, the terms\n$E_2^{a,b}=R^ag_*R^bf_*F$ are constructible by the two hypotheses\nof [def-finrepair-property-c].\nThe composition spectral sequence of\n[lem-weil-pbc-grothendieck-spectral-sequence] converges to\n$R^{a+b}(gf)_*F$.\nFor a fixed total degree the first-quadrant sequence stabilizes and\nhas a finite filtration on its abutment.\nEach page uses kernels and cokernels between constructible sheaves,\nand that finite filtration uses extensions. Thus\n[thm-constructible-serre] proves the assertion.",
+   "text": "Fix composable $f:X\\to Y$ and $g:Y\\to Z$ in the domain of [def-finrepair-property-c], and a constructible $\\Lambda$-sheaf $F$ on $X_{\\Et}$. The coefficient ring is finite and commutative. For every $b\\ge0$, $\\mathcal C(f)$ makes $R^bf_*F$ constructible on $Y_{\\Et}$; applying $\\mathcal C(g)$ to this sheaf makes $R^ag_*(R^bf_*F)$ constructible on $Z_{\\Et}$ for every $a\\ge0$. This is just the two quantified hypotheses in [def-finrepair-property-c], applied successively.",
    "uses": [
-    "def-finrepair-property-c",
-    "lem-weil-pbc-grothendieck-spectral-sequence",
-    "thm-constructible-serre"
+    "def-finrepair-property-c"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-composition-c.md",
+    "place": "Proof, first sentence: constructibility of the E_2 terms"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-grothendieck-spectral-sequence] to the two scheme morphisms and the commutative ring $\\Lambda$. It supplies a spectral sequence of $\\Lambda$-module sheaves on $Z_{\\Et}$ with $E_2^{a,b}=R^ag_*R^bf_*F$, zero terms outside the first quadrant, $d_r$ of bidegree $(r,1-r)$, and $E_{r+1}$ equal to the cohomology of $d_r$. Its abutment in degree $n$ is $H^n=R^n(gf)_*F$, with a finite filtration whose graded pieces are $E_\\infty^{p,n-p}$. No acyclicity hypothesis on the constructible sheaf $F$ and no uniform cohomological-dimension bound are required by the cited statement.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0734, lemma-relative-Leray; finite filtration from literature/stacks-project/derived.tex, Tag 015N, lemma-grothendieck-spectral-sequence"
+   }
+  },
+  {
+   "text": "Induct on the integer $r\\ge2$ to show that every term $E_r^{a,b}$ is constructible. For $r=2$ this is step 1 in the first quadrant; outside it the terms are zero, which is finite locally constant on the single stratum $Z$. Suppose all terms of $E_r$ are constructible. For any bidegree put $K=\\ker(d_r:E_r^{a,b}\\to E_r^{a+r,b-r+1})$. The kernel clause of [thm-constructible-serre] makes $K$ constructible. Since $d_r^2=0$, the incoming differential factors through $K$, giving $E_r^{a-r,b+r-1}\\to K$. The cokernel clause of [thm-constructible-serre] makes its cokernel constructible. This cokernel is $E_{r+1}^{a,b}$ by the page-cohomology formula of [lem-weil-pbc-grothendieck-spectral-sequence]. Thus the induction advances. Only kernels and cokernels of morphisms between constructible sheaves have been used; no closure under arbitrary subsheaves is assumed.",
+   "uses": [
+    "thm-constructible-serre",
+    "lem-weil-pbc-grothendieck-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RZ, lemma-constructible-abelian (3), kernel and cokernel clauses; page-cohomology formula as supplied by the relative Leray sequence, Tag 0734"
+   }
+  },
+  {
+   "text": "Fix $n\\ge0$. For each $0\\le p\\le n$, choose an integer $r>\\max(p,n-p+1)$. The stabilization assertion of [lem-weil-pbc-grothendieck-spectral-sequence] identifies $E_\\infty^{p,n-p}$ with $E_r^{p,n-p}$, so step 3 makes this graded piece constructible. The same cited statement gives $H^n=F^0H^n\\supseteq\\cdots\\supseteq F^{n+1}H^n=0$ and $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,n-p}$. Descend on $p$ from $n+1$ to $0$: the base $F^{n+1}H^n=0$ is constructible; if $F^{p+1}H^n$ is constructible, the short exact sequence $0\\to F^{p+1}H^n\\to F^pH^n\\to E_\\infty^{p,n-p}\\to0$ and the extension clause of [thm-constructible-serre] make $F^pH^n$ constructible. Hence $H^n$ is constructible. As $n$ and $F$ were arbitrary, this is $\\mathcal C(gf)$ by [def-finrepair-property-c]. The bound on $r$ depends on the bidegree; the argument never bounds all higher direct images at once.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-spectral-sequence",
+    "thm-constructible-serre",
+    "def-finrepair-property-c"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015N, lemma-grothendieck-spectral-sequence, finite filtration on each H^n; extension closure: literature/stacks-project/etale-cohomology.tex, Tag 03RZ, lemma-constructible-abelian (3)"
+   }
   }
  ],
  "proof_deps": [
@@ -34,11 +72,61 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-composition-c.md",
-  "place": "## Proof"
+  "place": "Proof: explicit page induction and finite-filtration induction, using Stacks Tags 0734, 015N and 03RZ"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If all higher direct images along f and g preserve constructible etale sheaves then higher direct images along their composite preserve constructible sheaves",
+   "results": "CategoryTheory.GrothendieckTopology.HasSheafCompose; CategoryTheory.Functor.sheafPushforwardContinuousComp'; CategoryTheory.GrothendieckTopology.HasSheafCompose.isSheaf; CategoryTheory.Functor.sheafPushforwardCocontinuous; AlgebraicGeometry.Scheme.Modules.pushforwardComp; CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app; CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits; CategoryTheory.isCocontinuous_comp",
+   "date": "2026-10-14",
+   "verdict": "no match: underived sheaf composition, topological constructible subsets or general homological algebra; no higher-direct-image constructibility composition theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(higher|derived|pushforward)|((higher|derived).*constructible)",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of morphisms preserving constructible sheaves under every higher direct image preserves constructibility",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"constructible\"",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-14",
+   "verdict": "invalid query: loogle: unknown identifier 'AlgebraicGeometry'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A convergent first quadrant spectral sequence whose second page consists of constructible sheaves has constructible abutment because constructible sheaves are closed under kernels cokernels and extensions",
+   "results": "Topology.IsLocallyConstructible.isConstructible; Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover; LightCondensed.instIsGrothendieckAbelianLightCondMod; DerivedCategory.isGE_Q_obj_iff; HomologicalComplex.ab5OfSize; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat; Topology.IsLocallyConstructible.isConstructible_of_subset_of_isCompact",
+   "date": "2026-10-14",
+   "verdict": "no match: underived sheaf composition, topological constructible subsets or general homological algebra; no higher-direct-image constructibility composition theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "Topology.IsConstructible; Topology.IsLocallyConstructible; Topology.IsConstructible.univ; Topology.IsLocallyConstructible.univ; Topology.IsConstructible.empty; Topology.IsLocallyConstructible.empty; Topology.IsConstructible.isLocallyConstructible; IsRetrocompact.isConstructible",
+   "date": "2026-10-14",
+   "verdict": "no match: underived sheaf composition, topological constructible subsets or general homological algebra; no higher-direct-image constructibility composition theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectral\", \"sequence\"",
+   "results": "12 hits: CategoryTheory.Abelian.SpectralObject kernelSequenceCycles, kernelSequenceOpcycles, cokernelSequenceCycles, cokernelSequenceOpcycles and their exactness/object declarations in Mathlib.Algebra.Homology.SpectralObject.Cycles",
+   "date": "2026-10-14",
+   "verdict": "no match: short complexes for spectral-object cycles, not constructibility preservation under composite higher direct images"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -62,5 +150,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-finrepair-composition-c",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint into four steps, with simultaneous induction over all bidegrees on each page and descending induction on the finite abutment filtration. Reused the existing module-valued relative Leray statement, including its explicit degreewise stabilization and finite-filtration clauses, and the kernel/cokernel/extension clauses of constructible Serre closure. No new nodes and no statement change.",
+  "blueprint": "Proof sentences 1 (step 1), 2 (step 2), 3 (step 4), and 4-5 (steps 3-4).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-grothendieck-spectral-sequence",
+    "why": "Generic relative Leray tool, explicitly prescribed by this blueprint proof; its statement gives the module-valued pages, stabilization and finite filtration, which no node of this unit supplies."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic closure theorem, explicitly prescribed by this blueprint proof; its statement gives kernels, cokernels and extensions for the finite coefficient ring, which no node of this unit supplies."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-grothendieck-spectral-sequence",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-554ccedec",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-554ccedec (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, blueprint route, and Stacks 0734/015N/03RZ passages. Verified both inductions, stabilization bounds, coefficient hypotheses, small cases, and archived target categories and exchange directions. Accepted both generic tool uses; found no duplicates, cycles, missing citations, or needed repairs. Detailed checks are in review.md."
+ }
 }
