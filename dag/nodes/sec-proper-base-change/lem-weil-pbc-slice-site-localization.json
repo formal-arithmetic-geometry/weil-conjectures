@@ -23,62 +23,129 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A covering in $\\mathcal D/V$ is a covering in $\\mathcal D$ with all arrows over $V$. Its image under $u_V$ is a covering in $\\mathcal C/U$ because $u$ preserves coverings. The pullback of a covering arrow along an arrow over $V$ is its underlying pullback in $\\mathcal D$, equipped with the induced map to $V$; continuity of $u$ identifies its image with the corresponding pullback over $U$. Thus $u_V$ satisfies both continuity conditions. The cited adjunction supplies $L_V\\dashv R_V$, where $R_V=(f_V)_*$ is precomposition with $u_V$. For a sheaf $G$ on $\\mathcal C$ and $a:T\\to V$, both $(j_V^{-1}f_*G)(a)$ and $(R_Vj_U^{-1}G)(a)$ are $G(u(T))$, with the same restriction and natural-transformation maps. This gives the canonical direct-image comparison, before any assertion of left exactness.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism, first paragraph of proof; continuity definitions 00WV, 00WX"
+   }
+  },
+  {
+   "text": "Put $L=f^{-1}$ and $R=f_*$. Let $A=h_V^\\#$ and $B=h_U^\\#$, where $h_V(T)=\\operatorname{Hom}_{\\mathcal D}(T,V)$ and $h_U(X)=\\operatorname{Hom}_{\\mathcal C}(X,U)$. Sheafification, the adjunction $L\\dashv R$ and the general Yoneda bijection give, naturally in $G\\in\\Sh(\\mathcal C)$,\n$$\\operatorname{Hom}(LA,G)\\cong\\operatorname{Hom}(A,RG)\\cong RG(V)=G(U)\\cong\\operatorname{Hom}(B,G).$$\nThe cited covariant Yoneda result gives an isomorphism $\\theta:B\\to LA$; take its inverse $c:LA\\to B$. Equivalently, $c$ is the element of $\\operatorname{Hom}(LA,B)$ corresponding to $\\mathrm{id}_B$ under the displayed bijection at $G=B$. The adjoint $t:A\\to RB$ of $c$ has, on a representable section $a:T\\to V$, value $\\eta_U(u(a))$ in $B(u(T))$: the displayed Hom bijection is evaluation at $\\mathrm{id}_V$, and naturality in $T$ restricts this section along $u(a)$. This specifies the unit map used below even when the topology is not subcanonical.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04D3, lemma-pullback-representable-sheaf, proved here from its universal property; used in 03CF"
+   }
+  },
+  {
+   "text": "Use the equivalences $E_V$ and $E_U$ of the cited localized-sheaves lemma. Define $\\overline L:\\Sh(\\mathcal D)/A\\to\\Sh(\\mathcal C)/B$ by $(H\\xrightarrow p A)\\mapsto(LH\\xrightarrow{c\\circ Lp}B)$. Its right adjoint sends $(G\\xrightarrow q B)$ to\n$$\\overline R(G,q)=(RG\\times_{RB} A\\to A),$$\nwhere the maps to $RB$ are $Rq$ and $t$. The pullback is a sheaf and is computed sectionwise by the cited limits result. Indeed a map $LH\\to G$ over $B$ corresponds under $L\\dashv R$ to a map $H\\to RG$ satisfying $Rq\\circ\\alpha=t\\circ p$; pairing it with $p$ gives exactly a map $H\\to RG\\times_{RB}A$ over $A$, and projection reverses this operation. All bijections are natural. At $a:T\\to V$, the fibre description of $E_V^{-1}\\overline R(G,q)$ is\n$$\\{s\\in G(u(T)):q_{u(T)}(s)=t_T(\\eta_V(a))\\}=\\{s\\in G(u(T)):q_{u(T)}(s)=\\eta_U(u(a))\\}.$$\nThis is exactly $(R_V E_U^{-1}(G,q))(a)$, including the restriction maps. Consequently $E_U^{-1}\\overline L E_V$ and $L_V$ are left adjoints of the same functor $R_V$. Their adjunction Hom bijections, followed by the cited covariant Yoneda result, yield a natural isomorphism $L_V\\cong E_U^{-1}\\overline L E_V$.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism, middle diagram and description of localized inverse image; adjunction calculation elaborates this description"
+   }
+  },
+  {
+   "text": "The final object of $\\Sh(\\mathcal D)/A$ is $\\mathrm{id}_A$, carried by $\\overline L$ to $c:LA\\xrightarrow{\\sim}B$, a final object of $\\Sh(\\mathcal C)/B$. A pullback over $A$ of $H_1\\to H_0\\leftarrow H_2$ has underlying sheaf $H_1\\times_{H_0}H_2$ with its induced map to $A$. Since $L$ preserves finite limits by hypothesis, its image with the map induced by $c$ is the pullback over $B$ of the image span. Thus $\\overline L$ preserves terminal objects and pullbacks, and hence finite limits: products are pullbacks over the terminal object and equalizers are the pullback of the diagonal along the pair of maps. Explicitly, the limit of a finite diagram $M:I\\to\\Sh(\\mathcal D)/A$ is the equalizer of the two maps $\\prod_{i\\in\\operatorname{Ob}(I)}M(i)\\rightrightarrows\\prod_{a:i\\to j}M(j)$ whose $a$-components are respectively $M(a)\\circ\\mathrm{pr}_i$ and $\\mathrm{pr}_j$; the equalizer equations are exactly the cone equations. Empty products are terminal objects. Thus the preceding constructions prove preservation for every finite diagram, including the empty one. Equivalences preserve and reflect these universal properties by their inverse Hom bijections, so the isomorphism in step 3 proves that $L_V$ preserves finite limits. With step 1 this makes $u_V$ a morphism of sites $f_V$, whose inverse image is $L_V$. To check the finite-colimit part of exactness in the cited definition, let $Q$ be a colimit of any finite diagram $M$ on the localized site. The adjunction $L_V\\dashv R_V$ identifies maps $L_VQ\\to G$ with maps $Q\\to R_VG$, hence with compatible families $M(i)\\to R_VG$, hence with compatible families $L_VM(i)\\to G$. This is the colimit universal property for $L_VQ$, naturally in $G$; therefore $L_V$ also preserves finite colimits.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-localized-sheaves-over-representable"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism, finite-limit argument after the middle diagram"
+   }
+  },
+  {
+   "text": "For any sheaf $K$ on $\\mathcal D$, the quasi-inverse fibre formula identifies $E_V(j_V^{-1}K)$ with $(K\\times A\\xrightarrow{\\mathrm{pr}_2}A)$: its fibre at $a:T\\to V$ consists of pairs $(s,\\eta_V(a))$, naturally bijective to $K(T)$. Applying $\\overline L$ and the product-preservation hypothesis identifies this object with $(LK\\times B\\xrightarrow{\\mathrm{pr}_2}B)$ using $c:LA\\cong B$. Its image under $E_U^{-1}$ has at $b:X\\to U$ fibre consisting of pairs $(s,\\eta_U(b))$, naturally bijective to $LK(X)$, which is $j_U^{-1}LK$. The restriction maps send $s$ to its restriction, and a morphism $K\\to K'$ acts by its image under $L$ on the first coordinate. Combining this natural identification with step 3 proves $(f_V)^{-1}j_V^{-1}\\cong j_U^{-1}f^{-1}$. Together with step 1, these are precisely both required comparisons.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF, lemma-localize-morphism, final paragraph; product description of Tag 03EE, lemma-compute-j-shriek-restrict, derived here from the fibre formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF, lemma-localize-morphism: same slice-category route, with the inverse-image identification established by an explicit slice adjunction rather than the technical-up calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "slice-site localization of continuous functor induced morphism of topo",
-   "results": "CategoryTheory.GrothendieckTopology.instIsContinuousOverMapOver; iterated slice continuity results; no declaration for arbitrary continuous u_V comparison",
+   "query": "Localization of a morphism of sites induces a morphism of slice sites commuting with restriction of sheaves",
+   "results": "8 hits: CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, CategoryTheory.Functor.IsCoverDense.Types.appHom_restrict, CategoryTheory.Functor.IsCoverDense.Types.naturality, CategoryTheory.Functor.IsCoverDense.Types.naturality_apply, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'; read relevant source: Over.lean (427-459, 518-524), DenseSubsite/SheafEquiv.lean (14-23), Comma/Presheaf/Basic.lean (presheaves only).",
    "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.GrothendieckTopology.instIsContinuousOverMapOver",
-   "results": "instIsContinuousOverMapOver, Sheaf.pushforwardOverMapIso, overMapPullback and composition isomorphisms",
-   "date": "2026-10-14",
-   "verdict": "generalization: only maps internal to one site, not a morphism induced by arbitrary continuous u"
+   "verdict": "no match: results concern presheaves, dense subsites, trivial topology, or internal Over.map restriction; none supplies the stated equivalence for arbitrary sites and possibly non-sheaf representables."
   },
   {
    "tool": "grep",
-   "query": "overMapPullback|instIsContinuousOverMapOver in Mathlib/CategoryTheory/",
-   "results": "Mathlib/CategoryTheory/Sites/Over.lean lines 427-441 and 512-520; these concern Over.map and sheaf restriction",
+   "query": "over.*[Ee]quiv|[Ee]quiv.*over|sheaf.*[Cc]ompos",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/SubcanonicalOver.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean; read relevant source: Over.lean (427-459, 518-524), DenseSubsite/SheafEquiv.lean (14-23), Comma/Presheaf/Basic.lean (presheaves only).",
    "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "geometric morphism induced functor on over categories restriction sheaves",
-   "results": "8 hits: CategoryTheory.GrothendieckTopology.overMapPullback, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.PresheafedSpace.restrict_presheaf, AlgebraicGeometry.PresheafedSpace.ofRestrict, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, AlgebraicGeometry.Scheme.Modules.restrictFunctor, CategoryTheory.Sheaf.over, CategoryTheory.GrothendieckTopology.overPullback",
-   "date": "2026-10-14",
-   "verdict": "no match: overMap and overPullback are internal to one site; no general arbitrary-site slice morphism and inverse-image square"
-  },
-  {
-   "tool": "grep",
-   "query": "mapSlice|slice.*[Cc]ontinuous|[Cc]ontinuous.*slice",
-   "results": "5 hits: Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: overMap and overPullback are internal to one site; no general arbitrary-site slice morphism and inverse-image square"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Sheaf\", \"pushforward\", \"over\"",
-   "results": "11 hits: CategoryTheory.Functor.IsCoverDense.faithful_sheafPushforwardContinuous, CategoryTheory.Functor.IsCoverDense.full_sheafPushforwardContinuous, CategoryTheory.Sheaf.pushforwardOverMapIso, CategoryTheory.Sheaf.toPushforwardOverPullback, CategoryTheory.Sheaf.toPushforwardOverPullback_hom_app, CategoryTheory.Sheaf.pushforwardOverMapIso_hom_hom_app, CategoryTheory.Sheaf.pushforwardOverMapIso_inv_hom_app, SheafOfModules.overMapPushforwardAdj",
-   "date": "2026-10-14",
-   "verdict": "no match: overMap and overPullback are internal to one site; no general arbitrary-site slice morphism and inverse-image square"
+   "verdict": "no match: results concern presheaves, dense subsites, trivial topology, or internal Over.map restriction; none supplies the stated equivalence for arbitrary sites and possibly non-sheaf representables."
   },
   {
    "tool": "leansearch",
-   "query": "Localization of a morphism of sites induces a morphism between slice sites and commutes with restriction of sheaves",
-   "results": "Service returned Internal Server Error; no usable search result. Reviewer ran msearch.py NG lem-weil-pbc-localize-ringed-site-morphism with its log destination redirected into the review directory.",
+   "query": "Localization of a morphism of sites commutes with restriction of sheaves",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of sets on a localized site C over U are equivalent to sheaves on C over the sheafification of the representable U",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, CategoryTheory.Equivalence.hasSheafify, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor, CategoryTheory.GrothendieckTopology.W_eq_isLocal_range_sheafToPresheaf_obj, CategoryTheory.Equivalence.transportAndSheafify, CategoryTheory.GrothendieckTopology.W_eq_W_range_sheafToPresheaf_obj, CategoryTheory.Functor.IsDenseSubsite.sheafEquivSheafificationCompatibility; read relevant source: Over.lean (427-459, 518-524), DenseSubsite/SheafEquiv.lean (14-23), Comma/Presheaf/Basic.lean (presheaves only).",
+   "date": "2026-10-14",
+   "verdict": "no match: results concern presheaves, dense subsites, trivial topology, or internal Over.map restriction; none supplies the stated equivalence for arbitrary sites and possibly non-sheaf representables."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheaf\", \"Over\"",
+   "results": "12 hits: CategoryTheory.OverPresheafAux.unitBackward, CategoryTheory.OverPresheafAux.unitForward, CategoryTheory.OverPresheafAux.unitAuxAuxAux, CategoryTheory.OverPresheafAux.unitAuxAux, CategoryTheory.OverPresheafAux.YonedaCollection, CategoryTheory.OverPresheafAux.yonedaCollectionPresheaf, CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst, CategoryTheory.OverPresheafAux.YonedaCollection.map₂; read relevant source: Over.lean (427-459, 518-524), DenseSubsite/SheafEquiv.lean (14-23), Comma/Presheaf/Basic.lean (presheaves only).",
+   "date": "2026-10-14",
+   "verdict": "no match: results concern presheaves, dense subsites, trivial topology, or internal Over.map restriction; none supplies the stated equivalence for arbitrary sites and possibly non-sheaf representables."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-localize-ringed-site-morphism",
   "by": "worker",
@@ -94,5 +161,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-slice-site-localization",
+  "worker": "stage1",
+  "summary": "Read Stacks 03CF and 00Y1. Kept the statement unchanged. Continuity and the direct-image comparison are sectionwise; representable pullback follows from existing sheafification and Yoneda results. Wrote the slice adjunction and its sectionwise fibres explicitly, then terminal/pullback preservation and the product calculation. One genuinely smaller new statement-only node is 00Y1, not a clause of the item; no attachment or exact Mathlib match.",
+  "blueprint": "Realizes the locality-on-target prerequisite of the detailed proof of lemma-weil-pbc-perfect-projection-formula (Stacks 0944), through the existing ringed-restriction/localize-morphism chain. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Generic sheaf/site tool for the slice construction; no node of this unit states this supporting fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-72c070863",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-72c070863 (reviewer sub-agent of L); spot-checked: Read the complete mathematics and verified all five steps against Stacks 03CF, the new slice equivalence against 00Y1, and target morphisms and coefficient categories against master source. Repaired only missing created.by/date in the new node. Full checks, edge cases, duplicate searches and inherited-cycle observations are recorded in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
