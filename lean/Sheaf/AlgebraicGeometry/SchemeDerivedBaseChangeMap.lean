@@ -13,6 +13,7 @@ import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 
 /-!
+REPAIR H10: restored the repository inline mate body and default recursion settings.
 REPAIR: Construct schemeDerivedBaseChangeMap with fixed canonical data; follow
 coord/hollow-definitions.md (class 2), claim/adapt users and record the definition change.
  # The derived base-change morphism of O-modules
