@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-ideal-kernel-element-descent",
  "kind": "statement",
  "title": "A single ideal multiplication-kernel element dies at a later stage",
- "statement": "Let $\\Lambda$ be a nonempty directed preorder and $A,B:\\Lambda\\to\\mathrm{CommRing}$, $N:\\Lambda\\to\\mathrm{Ab}$ functors with specified categorical colimits [def-weil-pbc-category-colimit]. Write $\\alpha_f,\\beta_f,\\eta_f$ for their transition maps and $a_i,b_i,n_i$ for their coprojections. Give each $N_i$ a $B_i$-module structure satisfying $\\eta_f(bx)=\\beta_f(b)\\eta_f(x)$. Let $\\varphi_i:A_i\\to B_i$ satisfy $\\beta_f\\varphi_i=\\varphi_j\\alpha_f$, and let $\\psi:A_\\infty\\to B_\\infty$ satisfy $\\psi a_i=b_i\\varphi_i$. Give $N_\\infty$ a $B_\\infty$-module structure with $n_i(bx)=b_i(b)n_i(x)$, and assume it is flat over $A_\\infty$ through $\\psi$ [def-weil-pbc-flat-ring-map]. Fix $i$, any ideal $I\\subset A_i$, and any $k\\in I\\otimes_{A_i}N_i$ whose multiplication in $N_i$ is zero. There exist $j$, $f:i\\to j$, and an additive map $\\theta:I\\otimes_{A_i}N_i\\to (I.\\mathrm{map}(\\alpha_f))\\otimes_{A_j}N_j$ such that $\\theta(a\\otimes x)=\\alpha_f(a)\\otimes\\eta_f(x)$ for every $a\\in I$, $x\\in N_i$, and $\\theta(k)=0$. The $A_i,A_j$ actions are through $\\varphi_i,\\varphi_j$. No Noetherian, local-ring or finite-module assumption is imposed.",
+ "statement": "Let $\\Lambda$ be a nonempty directed preorder and $A,B:\\Lambda\\to\\mathrm{CommRing}$, $N:\\Lambda\\to\\mathrm{Ab}$ functors with specified categorical colimits [def-weil-pbc-category-colimit]. Write $\\alpha_f,\\beta_f,\\eta_f$ for their transition maps and $a_i,b_i,n_i$ for their coprojections. Give each $N_i$ a $B_i$-module structure satisfying $\\eta_f(bx)=\\beta_f(b)\\eta_f(x)$. Let $\\varphi_i:A_i\\to B_i$ satisfy $\\beta_f\\varphi_i=\\varphi_j\\alpha_f$, and let $\\psi:A_\\infty\\to B_\\infty$ satisfy $\\psi a_i=b_i\\varphi_i$. Give $N_\\infty$ a $B_\\infty$-module structure with $n_i(bx)=b_i(b)n_i(x)$, and assume it is flat over $A_\\infty$ through $\\psi$ [def-weil-pbc-flat-ring-map]. Fix $i$, any ideal $I\\subset A_i$, and any $k\\in I\\otimes_{A_i}N_i$ whose multiplication in $N_i$ is zero. There exist $j$, $f:i\\to j$, and an additive map $\\theta:I\\otimes_{A_i}N_i\\to (I.\\mathrm{map}(\\alpha_f))\\otimes_{A_j}N_j$ such that $\\theta(a\\otimes x)=\\alpha_f(a)\\otimes\\eta_f(x)$ for every $a\\in I$, $x\\in N_i$, and $\\theta(k)=0$. The $A_i,A_j$ actions are through $\\varphi_i,\\varphi_j$. No Noetherian, local-ring or finite-module assumption is imposed. Assume additionally that the forgetful functor from commutative rings to sets preserves the specified colimit of A; thus the ring colimit is algebraic even for independent indexing and ring universes.",
  "stmt_deps": [
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-flat-ring-map"
@@ -13,12 +13,12 @@
  },
  "proof": [
   {
-   "text": "Write k as sum_p a_p tensor x_p using TensorProduct.exists_sum_tmul_eq. The multiplication-zero hypothesis becomes sum_p phi_i(a_p)*x_p=0.",
+   "text": "Write k as sum_p a_p tensor x_p using TensorProduct.exists_sum_tmul_eq. The multiplication-zero hypothesis becomes sum_p phi_i(a_p)*x_p=0. Retain the ring forgetful preservation hypothesis throughout the finite-stage descent argument.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-colimit-flat-relation-descent] to this finite relation. Obtain j, f, coefficients c_pq in A_j and y_q in N_j with eta_f(x_p)=sum_q phi_j(c_pq)*y_q and sum_p alpha_f(a_p)*c_pq=0 for all q.",
+   "text": "Apply the corrected common-universe finite-relation descent theorem to the multiplication relation. Obtain a later stage, row expressions, and column relations.",
    "uses": [
     "lem-weil-pbc-colimit-flat-relation-descent"
    ],
@@ -104,7 +104,7 @@
   "module": "Sheaf.RingTheory.IdealKernelElementDescent",
   "file": "lean/Sheaf/RingTheory/IdealKernelElementDescent.lean",
   "declaration": "RingTheory.exists_stage_ideal_kernel_element_vanishes",
-  "statement": "theorem exists_stage_ideal_kernel_element_vanishes\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})\n    (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]\n    [∀ i, Module (B.obj i) (N.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (hcomm : ∀ (i j : Λ) (f : i ⟶ j),\n      (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)\n    (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),\n      (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)\n    (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w}))\n    (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))\n    [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})]\n    (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),\n      (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)\n    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ\n      Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z}))\n    (i : Λ) (I : Ideal (A.obj i)) :\n    letI := Module.compHom (N.obj i) (φ i)\n    ∀ (k : I ⊗[A.obj i] N.obj i),\n      TensorProduct.lift ((LinearMap.lsmul (A.obj i) (N.obj i)).comp I.subtype) k = 0 →\n    ∃ (j : Λ) (f : i ⟶ j),\n      letI := Module.compHom (N.obj i) (φ i)\n      letI := Module.compHom (N.obj j) (φ j)\n      ∃ θ : I ⊗[A.obj i] N.obj i →+\n          (I.map (A.map f).hom) ⊗[A.obj j] N.obj j,\n        (∀ (a : I) (x : N.obj i), θ (a ⊗ₜ[A.obj i] x) =\n          (⟨(A.map f).hom a, Ideal.mem_map_of_mem (A.map f).hom a.property⟩ :\n            I.map (A.map f).hom) ⊗ₜ[A.obj j] (N.map f).hom x) ∧\n        θ k = 0",
+  "statement": "theorem exists_stage_ideal_kernel_element_vanishes\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (A : Λ ⥤ CommRingCat.{u}) (B : Λ ⥤ CommRingCat.{u})\n    (N : Λ ⥤ AddCommGrpCat.{u}) [HasColimit A] [HasColimit B] [HasColimit N]\n    [∀ i, Module (B.obj i) (N.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (hcomm : ∀ (i j : Λ) (f : i ⟶ j),\n      (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)\n    (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),\n      (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)\n    (ψ : (colimit A : CommRingCat.{u}) →+* (colimit B : CommRingCat.{u}))\n    (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))\n    [Module (colimit B : CommRingCat.{u}) (colimit N : AddCommGrpCat.{u})]\n    (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),\n      (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)\n    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{u}) ψ\n      Module.Flat (colimit A : CommRingCat.{u}) (colimit N : AddCommGrpCat.{u}))\n    (i : Λ) (I : Ideal (A.obj i)) :\n    letI := Module.compHom (N.obj i) (φ i)\n    ∀ (k : I ⊗[A.obj i] N.obj i),\n      TensorProduct.lift ((LinearMap.lsmul (A.obj i) (N.obj i)).comp I.subtype) k = 0 →\n    ∃ (j : Λ) (f : i ⟶ j),\n      letI := Module.compHom (N.obj i) (φ i)\n      letI := Module.compHom (N.obj j) (φ j)\n      ∃ θ : I ⊗[A.obj i] N.obj i →+\n          (I.map (A.map f).hom) ⊗[A.obj j] N.obj j,\n        (∀ (a : I) (x : N.obj i), θ (a ⊗ₜ[A.obj i] x) =\n          (⟨(A.map f).hom a, Ideal.mem_map_of_mem (A.map f).hom a.property⟩ :\n            I.map (A.map f).hom) ⊗ₜ[A.obj j] (N.map f).hom x) ∧\n        θ k = 0",
   "branch": "sheaf-dag",
   "by": "G1",
   "date": "2026-10-13"
@@ -120,13 +120,49 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-7d0bf",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261013T115023-L-3323872",
+  "landing": "20261014T045611-L-1573613",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered modules, corrected node statements, change records, and report matched; both compiled, permitted axioms only, and the original/adapted caller interface gate behaved as recorded."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "P1 stage 2",
+  "old_statement": "Let $\\Lambda$ be a nonempty directed preorder and $A,B:\\Lambda\\to\\mathrm{CommRing}$, $N:\\Lambda\\to\\mathrm{Ab}$ functors with specified categorical colimits [def-weil-pbc-category-colimit]. Write $\\alpha_f,\\beta_f,\\eta_f$ for their transition maps and $a_i,b_i,n_i$ for their coprojections. Give each $N_i$ a $B_i$-module structure satisfying $\\eta_f(bx)=\\beta_f(b)\\eta_f(x)$. Let $\\varphi_i:A_i\\to B_i$ satisfy $\\beta_f\\varphi_i=\\varphi_j\\alpha_f$, and let $\\psi:A_\\infty\\to B_\\infty$ satisfy $\\psi a_i=b_i\\varphi_i$. Give $N_\\infty$ a $B_\\infty$-module structure with $n_i(bx)=b_i(b)n_i(x)$, and assume it is flat over $A_\\infty$ through $\\psi$ [def-weil-pbc-flat-ring-map]. Fix $i$, any ideal $I\\subset A_i$, and any $k\\in I\\otimes_{A_i}N_i$ whose multiplication in $N_i$ is zero. There exist $j$, $f:i\\to j$, and an additive map $\\theta:I\\otimes_{A_i}N_i\\to (I.\\mathrm{map}(\\alpha_f))\\otimes_{A_j}N_j$ such that $\\theta(a\\otimes x)=\\alpha_f(a)\\otimes\\eta_f(x)$ for every $a\\in I$, $x\\in N_i$, and $\\theta(k)=0$. The $A_i,A_j$ actions are through $\\varphi_i,\\varphi_j$. No Noetherian, local-ring or finite-module assumption is imposed.",
+  "what": "Launcher-authorized correction: place the indexing type, A, B, and N in the common universe Type u so the finite-stage elementwise descent theorem applies; retain the original tensor proof.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Algebra, Tags 00R6 and 00HK, descent of one kernel element and equational flatness."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-finite-ideal-kernel-descent",
+    "holds": false,
+    "note": "Independent-universe downstream theorem still requires its own statement correction; not authorized for this two-module delivery."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Write k as sum_p a_p tensor x_p using TensorProduct.exists_sum_tmul_eq. The multiplication-zero hypothesis becomes sum_p phi_i(a_p)*x_p=0.",
+    "uses": [],
+    "elementary": true
+   },
+   {
+    "text": "Apply [lem-weil-pbc-colimit-flat-relation-descent] to this finite relation. Obtain j, f, coefficients c_pq in A_j and y_q in N_j with eta_f(x_p)=sum_q phi_j(c_pq)*y_q and sum_p alpha_f(a_p)*c_pq=0 for all q.",
+    "uses": [
+     "lem-weil-pbc-colimit-flat-relation-descent"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Construct the canonical tensor map by TensorProduct.map on the semilinear ideal map and module map. Expanding its value on k and using the row equations gives sum_p sum_q alpha_f(a_p) tensor phi_j(c_pq)*y_q. Tensor balancing moves c_pq to the ideal factor. Interchange the finite sums and use additivity in the ideal factor: each q-term becomes (sum_p c_pq*alpha_f(a_p)) tensor y_q. Commutativity and the column equations make each ideal factor zero. Thus theta(k)=0.",
+    "uses": [],
+    "elementary": true
+   }
+  ]
  }
 }

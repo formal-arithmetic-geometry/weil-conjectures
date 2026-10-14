@@ -11,6 +11,9 @@ public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.Flat.Basic
 
+import Sheaf.RingTheory.ColimitFlatRelationDescentElementwise
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+
 /-!
 # Finite relation factorization at a stage of a flat colimit
 
@@ -20,11 +23,13 @@ Source: Stacks Project, Tags 00HK and 00R6, equational flatness and finite-data 
 
 @[expose] public section
 
-universe u v w z t
+universe u t
 open CategoryTheory CategoryTheory.Limits
 namespace RingTheory
 
 /-- A relation from a stage becomes a trivial relation at a later stage.
+The indexing type, rings and additive groups lie in the same universe, so
+filtered colimits are algebraic and finite equations descend elementwise.
 Source: Stacks Project, Tags 00HK and 00R6.
 (blueprint: lem-weil-pbc-colimit-flat-relation-descent)
 
@@ -44,32 +49,31 @@ maps, additive maps and scalar compatibility preserve them. These descended
 coefficients and vectors give the stated factorization. Empty row or column
 sets are allowed, with empty sums equal to zero. No tensor-colimit or finite
 presentation theorem, nor Noetherian or local hypothesis, is needed. -/
--- STATEMENT-DISPUTED: For independent indexing and ring universes, HasColimit A does
--- not supply elementwise ring equality descent; a categorical colimit in the smaller
--- ring universe need not be the algebraic direct limit. See report.md for a valuation
--- domain counterexample and the proved, explicitly elementwise variant.
 theorem exists_stage_flat_relation_factorization
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
-    (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})
-    (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]
+    (A : Λ ⥤ CommRingCat.{u}) (B : Λ ⥤ CommRingCat.{u})
+    (N : Λ ⥤ AddCommGrpCat.{u}) [HasColimit A] [HasColimit B] [HasColimit N]
     [∀ i, Module (B.obj i) (N.obj i)]
     (φ : ∀ i, A.obj i →+* B.obj i)
     (hcomm : ∀ (i j : Λ) (f : i ⟶ j),
       (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)
     (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),
       (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)
-    (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w}))
+    (ψ : (colimit A : CommRingCat.{u}) →+* (colimit B : CommRingCat.{u}))
     (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))
-    [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})]
+    [Module (colimit B : CommRingCat.{u}) (colimit N : AddCommGrpCat.{u})]
     (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),
       (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)
-    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ
-      Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z}))
+    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{u}) ψ
+      Module.Flat (colimit A : CommRingCat.{u}) (colimit N : AddCommGrpCat.{u}))
     (i : Λ) {ι : Type t} [Fintype ι] (a : ι → A.obj i) (x : ι → N.obj i)
     (hx : ∑ p, (φ i) (a p) • x p = 0) :
     ∃ (j : Λ) (f : i ⟶ j) (m : ℕ)
       (c : ι → Fin m → A.obj j) (y : Fin m → N.obj j),
       (∀ p, (N.map f).hom (x p) = ∑ q, (φ j) (c p q) • y q) ∧
-      (∀ q, ∑ p, (A.map f).hom (a p) * c p q = 0) := by sorry
+      (∀ q, ∑ p, (A.map f).hom (a p) * c p q = 0) := by
+  let : IsFiltered Λ := inferInstance
+  exact exists_stage_flat_relation_factorization_of_preserves
+    A B N φ hcomm hscalar ψ hψ hlimitScalar hflat i a x hx
 
 end RingTheory
