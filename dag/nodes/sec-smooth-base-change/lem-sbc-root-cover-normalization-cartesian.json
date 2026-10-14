@@ -13,26 +13,34 @@
  ],
  "proof": [
   {
-   "text": "Identify B with the stalk of Spec H at (g) by uniqueness of localization. Use the supplied root localization and AdjoinRoot.map to identify the localized root chart with Spec A0. Paste hT and hbranch, then pullback associativity, to identify the localized original cover with a0; D(pi) is the fraction-field spectrum because pi is irreducible in the DVR.",
-   "uses": [],
-   "elementary": false
+   "text": "Use the proved root_cover_generic_pullback to construct m and its cartesian square before normalization. It uses only the coefficient formula, the generic principal open of the DVR, and hbranch and hT.",
+   "uses": [
+    "lem-sbc-root-cover-generic-pullback"
+   ],
+   "elementary": true
   },
   {
-   "text": "The original a is qcqs: p is finite and the principal open inclusion is affine. Apply relative normalization stalk base change to q and a. Transport its normalization comparison through the root-chart and cover identifications, compose with the first pullback projection, and obtain the claimed cartesian square.",
+   "text": "Transport hrootloc from F.map to the displayed root polynomial by equality elimination. Give A0 the AdjoinRoot.map algebra structure, use localization flatness, and transport the localization to global sections via both GammaSpecIso ring equivalences. Apply the proved affine-localization normalization comparison to a and beta. The original a is qcqs from finite p and the principal open inclusion.",
    "uses": [
-    "lem-sbc-normalization-stalk-base-change"
+    "lem-sbc-normalization-affine-localization"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The cartesian square identifies a0 with pullback.snd a beta. The universal property normalizationDesc constructs mutually inverse isomorphisms of their relative normalizations over Spec A0, with inverseness proved by normalization.hom_ext. Compose this isomorphism with the canonical normalizationPullback isomorphism and the first pullback projection. Its second-projection equation proves the desired cartesian square by IsPullback.of_iso_pullback.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-normalization-stalk-base-change"
+  "lem-sbc-root-cover-generic-pullback",
+  "lem-sbc-normalization-affine-localization"
  ],
  "proof_origin": {
   "kind": "written-by-agent",
-  "by": "C2",
+  "by": "V4",
   "document": "Stacks Project; Mathlib.AlgebraicGeometry.Normalization",
-  "place": "Tag 0307 (lemma-integral-closure-localize); affine normalization and localization of the root chart"
+  "place": "Tag 0307; explicit DVR generic-open pullback construction and affine localization of integral closure"
  },
  "mathlib_searches": [
   {
@@ -112,9 +120,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261014T030641-L-341778",
+  "landing": "20261014T033116-L-607960",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

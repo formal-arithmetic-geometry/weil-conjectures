@@ -1,0 +1,119 @@
+{
+ "id": "lem-sbc-root-cover-generic-pullback",
+ "kind": "statement",
+ "title": "The generic root-cover model is a pullback",
+ "statement": "Let i:U→L be a morphism of schemes and W→U a finite Galois G-cover [def-sbc-normal-dominant-galois]. Let H→B be a ring algebra, B a domain and discrete valuation ring, g∈H with (g) prime, and B its localization at (g); assume pi, the image of g, is irreducible. Write K=Frac(B), j:Spec K→Spec B, b:Spec B→Spec H, and choose ψ:Spec H→L and k:Spec K→U such that k i=j b ψ and the square (k,id,i,j b ψ) is cartesian. Let T→Spec K be a G-cover and ρ:T→W with (ρ,T.π,W.π,k) cartesian. Write A=H[t]/(t^{|G|}-g), N=Spec A, q:N→Spec H, V=D(g)⊆N, p:W×_L V→V, a=p followed by V→N. Write A0=B[t]/(t^{|G|}-pi), q0:Spec A0→Spec B, and a0:T×_{Spec B}Spec A0→Spec A0. Let beta:Spec A0→N be Spec of the coefficient map AdjoinRoot.map. Then there exists m:T×_{Spec B}Spec A0→W×_L V such that (m,a0,a,beta) is cartesian [def-pc-fibre-product]. No normalization, Noetherian or finiteness-of-p assumption is needed.",
+ "source": {
+  "document": "Stacks Project; Mathlib.RingTheory.DiscreteValuationRing.Basic; Mathlib.AlgebraicGeometry.OpenImmersion",
+  "place": "Tag 00PD (algebra-lemma-characterize-dvr); root-cover-normalization-cartesian step 1; generic principal open and pullback universal properties"
+ },
+ "stmt_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "By associated_pow_irreducible every nonzero denominator in B divides a power of pi. IsLocalization.iff_of_le_of_exists_dvd identifies Frac(B) with B[1/pi]. Its Spec is an open immersion of image D(pi). AdjoinRoot.map_of gives beta q=q0 b and beta inverse-image of V equals q0 inverse-image of this generic open. These statements are proved directly using Mathlib, including the localization criterion and localization_away_comap_range.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift a0 beta to V using its generic image. Compose the model cover projection with rho and pair it with this lift to obtain m into W×_L V; hk and hT give the compatibility equation. For any cone to a and beta, lift its Spec B projection uniquely to Spec K. The cartesian square hbranch makes the corresponding U-map the original cover projection, and hT supplies a unique lift to T. Pair that lift with the Spec A0 projection. The two open-immersion monomorphisms and both supplied pullback universal properties prove uniqueness. Thus this is a limiting pullback cone. The full lift construction and both uniqueness equations are written in Lean.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "V4",
+  "document": "Stacks Project; Mathlib.RingTheory.DiscreteValuationRing.Basic; Mathlib.AlgebraicGeometry.OpenImmersion",
+  "place": "Tag 00PD (algebra-lemma-characterize-dvr); root-cover-normalization-cartesian step 1; generic principal open and pullback universal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative normalization commutes with localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "AdjoinRoot coefficient base change is a pushout and DVR uniformizer generic open is fraction field spectrum",
+   "results": "FractionRing polynomial pushout instances, standard-open-immersion base change, and unrelated etale APIs; no exact cover assembly",
+   "date": "2026-10-14",
+   "verdict": "No exact public match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot.map",
+   "results": "AdjoinRoot.map, map_root, map_of, map_comp_map",
+   "date": "2026-10-14",
+   "verdict": "No exact statement"
+  },
+  {
+   "tool": "grep",
+   "query": "punctured_root_base_change|fractionRing_away_uniformizer|root_pushout",
+   "results": "msearch grep returned zero hits; direct repository rg found the private affine localization proof and private DVR away-localization proofs, used as the starting point for the delivered proofs.",
+   "date": "2026-10-14",
+   "verdict": "Public criterion and geometric assembly are proved in this delivery"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootCoverNormalizationCartesian",
+  "date": "2026-10-14",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Root-normalization local computation: The generic root-cover model is a pullback",
+   "via": [
+    "lem-sbc-root-cover-normalization-cartesian",
+    "lem-sbc-root-normalization-localization-comparison",
+    "lem-sbc-root-normalization-dvr-comparison",
+    "lem-sbc-root-normalization-root-not-square",
+    "lem-sbc-root-normalization-cotangent-root"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootCoverGenericPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootCoverGenericPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.root_cover_generic_pullback",
+  "statement": "theorem root_cover_generic_pullback\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (H B : CommRingCat.{u}) [Algebra H B] (g : H)\n    [(Ideal.span {g}).IsPrime] [IsLocalization.AtPrime B (Ideal.span {g})]\n    [IsDomain B] [IsDiscreteValuationRing B]\n    (hpi : Irreducible (algebraMap H B g))\n    (ψ : Spec H ⟶ L)\n    (k : Spec (CommRingCat.of (FractionRing B)) ⟶ U)\n    (hk : k ≫ i = Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H B)) ≫ ψ)\n    (hbranch : IsPullback k (𝟙 _) i\n      (Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫\n        Spec.map (CommRingCat.ofHom (algebraMap H B)) ≫ ψ))\n    (T : GaloisCover G (Spec (CommRingCat.of (FractionRing B))))\n    (ρ : T.P ⟶ W.P) (hT : IsPullback ρ T.π W.π k) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ ψ)\n    let a := p ≫ V.ι\n    let pi := algebraMap H B g\n    let A0 := AdjoinRoot\n      ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)\n    let q0 := Spec.map (CommRingCat.ofHom (algebraMap B A0))\n    let j0 := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))\n    let a0 := pullback.snd (T.π ≫ j0) q0\n    let γ := AdjoinRoot.map (algebraMap H B)\n      ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n      ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi) (by simp [pi])\n    ∃ m : pullback (T.π ≫ j0) q0 ⟶\n        pullback (W.π ≫ i) (V.ι ≫ q ≫ ψ),\n      IsPullback m a0 a (Spec.map (CommRingCat.ofHom γ))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261014T033116-L-607960",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261014T033116-L-607960",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
