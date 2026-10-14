@@ -1,0 +1,102 @@
+{
+ "id": "lem-pd-pointwise-pullback-limit",
+ "kind": "statement",
+ "title": "Limits of pointwise fibre products",
+ "statement": "In a category with pullbacks, let two diagrams indexed by a nonempty category have limiting cones and compatible natural transformations to a fixed object S. The cone obtained by taking their pointwise fibre products over S is limiting, with vertex the fibre product over S of their limiting vertices.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 002L; universal properties of limits and pullbacks"
+ },
+ "proof": [
+  {
+   "text": "Taking fibre products over a fixed object commutes with a nonempty limit.\n Construct the two maps to the limiting object from the projections of a cone. Their\n composites to the fixed base agree at any chosen index, so they lift to its double fibre\n product. Factorization and uniqueness are checked on the two projections and then at every\n index. This is the universal-property proof that limits commute with limits.\n\nSource: universal properties of limits and fibre products (Stacks Project, Tag 002L).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 002L; universal properties of limits and pullbacks; T4 formal universal-property argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Fibre products over a fixed base commute with nonempty limits",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"combineIsLimit\"",
+   "date": "2026-10-14",
+   "results": [
+    "CategoryTheory.Limits.PullbackCone.combineIsLimit"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isLimit.*Pullback.*Connected|combineIsLimit",
+   "date": "2026-10-14",
+   "results": [
+    "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+    "Mathlib/CategoryTheory/Limits/Shapes/Pullback/Connected.lean",
+    "Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Pullbacks.lean"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pd-finite-level",
+   "place": "Finite model and descent datum construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PointwisePullbackLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointwisePullbackLimit.lean",
+  "declaration": "CategoryTheory.Limits.isLimit_pointwisePullback",
+  "statement": "def isLimit_pointwisePullback {C : Type u} [Category.{v} C] [HasPullbacks C] {I : Type w} [Category.{w'} I] [Nonempty I] (D₁ D₂ : I ⥤ C) {S : C} (t₁ : D₁ ⟶ (Functor.const I).obj S) (t₂ : D₂ ⟶ (Functor.const I).obj S) (c₁ : Cone D₁) (c₂ : Cone D₂) (hc₁ : IsLimit c₁) (hc₂ : IsLimit c₂) (f₁ : c₁.pt ⟶ S) (f₂ : c₂.pt ⟶ S) (hf₁ : ∀ i, c₁.π.app i ≫ t₁.app i = f₁) (hf₂ : ∀ i, c₂.π.app i ≫ t₂.app i = f₂) : let E : I ⥤ C := { obj i := pullback (t₁.app i) (t₂.app i) map {i j} g := pullback.map _ _ _ _ (D₁.map g) (D₂.map g) (𝟙 S) (by simp only [t₁.naturality, Functor.const_obj_map]) (by simp only [t₂.naturality, Functor.const_obj_map]) map_id i := by apply pullback.hom_ext <;> simp map_comp g h := by apply pullback.hom_ext <;> simp [Category.assoc] } let e : Cone E := { pt := pullback f₁ f₂ π := { app i := pullback.map _ _ _ _ (c₁.π.app i) (c₂.π.app i) (𝟙 S) (by simp [hf₁]) (by simp [hf₂]) naturality i j g := by apply pullback.hom_ext <;> simp [E, Category.assoc] } } IsLimit e",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

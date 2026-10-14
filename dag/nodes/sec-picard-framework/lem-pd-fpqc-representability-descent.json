@@ -1,0 +1,123 @@
+{
+ "id": "lem-pd-fpqc-representability-descent",
+ "kind": "statement",
+ "title": "Representation by a compatible fpqc descent",
+ "statement": "Let p:X to Y be flat, surjective and quasi-compact [def-weil-pbc-fpqc-covering]. Let F be an fpqc sheaf on schemes over Y. Suppose its restriction to X is represented by V, with canonical transport [lem-pd-canonical-descent-datum]. Let J be a Y-scheme and q:V to J exhibit V as its cartesian base change [def-pc-base-change]. If q is invariant under the canonical transport, then J represents F.",
+ "stmt_deps": [
+  "lem-pd-canonical-descent-datum",
+  "def-pc-base-change",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02W0; Yoneda and the fpqc sheaf condition"
+ },
+ "proof": [
+  {
+   "text": "An fpqc sheaf represented over a faithfully flat quasi-compact base change is represented\n by a compatible effective descent of the representing scheme.\n\nProof: the identity of the representing scheme supplies a local universal section. Transport\n invariance and the cartesian square make this section compatible on overlaps, so the sheaf\n condition glues it. Yoneda gives a map from the descended represented functor to the sheaf.\n This map is bijective over the covering base, hence locally bijective. Since both functors\n are sheaves, it is an isomorphism.\n\nSource: Stacks Project, Tag 02W0.",
+   "uses": [
+    "lem-pd-canonical-descent-datum",
+    "def-pc-base-change",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-canonical-descent-datum",
+  "def-pc-base-change",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 02W0; Yoneda and the fpqc sheaf condition; T4 formal universal-property argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An fpqc sheaf represented after faithfully flat base change is represented by an effective compatible descent of its representing scheme",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isSheafFor_singleton\"",
+   "date": "2026-10-14",
+   "results": [
+    "CategoryTheory.Presieve.isSheafFor_singleton_iso",
+    "CategoryTheory.Presieve.isSheafFor_singleton",
+    "CategoryTheory.Equalizer.Presieve.isSheafFor_singleton_iff_of_hasPullback",
+    "CategoryTheory.Equalizer.Presieve.isSheafFor_singleton_iff",
+    "CategoryTheory.Presieve.isSheafFor_singleton_iff_of_iso"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  },
+  {
+   "tool": "grep",
+   "query": "RepresentableBy.*descent|isSheafFor_singleton",
+   "date": "2026-10-14",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean",
+    "Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean",
+    "Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean",
+    "Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean",
+    "Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean",
+    "Mathlib/CategoryTheory/Sites/IsSheafFor.lean",
+    "Mathlib/CategoryTheory/Sites/IsSheafFor.lean",
+    "Mathlib/CategoryTheory/Sites/IsSheafFor.lean"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-jacobian-general-field",
+   "place": "Step 7 (functorial identification): descent of the representing isomorphism",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FpqcRepresentabilityDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcRepresentabilityDescent.lean",
+  "declaration": "AlgebraicGeometry.nonempty_representableBy_of_effective_fpqc_descent",
+  "statement": "theorem nonempty_representableBy_of_effective_fpqc_descent {X Y : Scheme.{u}} (p : X ⟶ Y) [Flat p] [Surjective p] [QuasiCompact p] (F : (Over Y)ᵒᵖ ⥤ Type (u + 1)) (hF : Presheaf.IsSheaf (Scheme.fpqcTopology.over Y) F) (V : Over X) (r : ((Over.map p).op ⋙ F).RepresentableBy V) (J : Over Y) (q : V.left ⟶ J.left) (hq : IsPullback q V.hom J.hom p) (hinv : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V), (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q) : Nonempty (F.RepresentableBy J)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

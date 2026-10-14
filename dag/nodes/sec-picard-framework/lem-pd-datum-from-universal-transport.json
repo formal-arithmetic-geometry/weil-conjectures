@@ -1,0 +1,115 @@
+{
+ "id": "lem-pd-datum-from-universal-transport",
+ "kind": "statement",
+ "title": "Faithfully flat testing of transport axioms",
+ "statement": "Let X prime to X be flat and surjective, p:X to Y, V over X, and V prime its cartesian base change. Suppose E is a descent datum on V prime relative to X prime to Y [def-pd-descent-datum]. A morphism t:V times_Y X to V over the second X-factor, whose transport on all X prime-valued test points agrees with E, determines a descent datum D on V relative to X to Y. The cartesian projection identifies D after base change [def-pc-base-change] with E.",
+ "stmt_deps": [
+  "def-pd-descent-datum",
+  "def-pc-base-change"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 023V; Tag 02VW; faithful-flat epimorphism cancellation"
+ },
+ "proof": [
+  {
+   "text": "A natural universal transport morphism compatible with an actual descent datum after a\n flat surjective base change already satisfies the identity and cocycle axioms. Lift the\n finitely many base maps to the covering scheme by iterated pullbacks. The resulting map to\n the test scheme is flat and surjective, hence epi. Pullback points lift uniquely by the\n cartesian square. Compatibility transfers the identity and cocycle equations from `E`;\n cancel the covering epimorphism to obtain them before base change. Naturality follows from\n the universal property of the pullback defining the universal transport.\n\nSource: Stacks Project, Tags 023V and 02VW.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pd-descent-datum",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 023V; Tag 02VW; faithful-flat epimorphism cancellation; T4 formal universal-property argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A descent datum on a scheme is determined by a natural transport morphism and its equations can be tested after faithfully flat base change",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"epi_of_flat_of_surjective\"",
+   "date": "2026-10-14",
+   "results": [
+    "AlgebraicGeometry.Flat.epi_of_flat_of_surjective",
+    "AlgebraicGeometry.isRegularEpi_of_flat_of_surjective_of_isAffine"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  },
+  {
+   "tool": "grep",
+   "query": "DescentDatum|epi_of_flat_of_surjective",
+   "date": "2026-10-14",
+   "results": [
+    "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+    "Mathlib/AlgebraicGeometry/EffectiveEpi.lean",
+    "Mathlib/AlgebraicGeometry/EffectiveEpi.lean",
+    "Mathlib/AlgebraicGeometry/EffectiveEpi.lean",
+    "Mathlib/AlgebraicGeometry/EffectiveEpi.lean",
+    "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pd-finite-level",
+   "place": "Finite model and descent datum construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DescentDatumFromUniversalTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescentDatumFromUniversalTransport.lean",
+  "declaration": "AlgebraicGeometry.exists_descentDatum_of_universalTransport",
+  "statement": "theorem exists_descentDatum_of_universalTransport {X X' Y : Scheme.{u}} {p : X ⟶ Y} {ι : X' ⟶ X} [Flat ι] [Surjective ι] {p' : X' ⟶ Y} (hp : ι ≫ p = p') (V : Over X) (V' : Over X') (q : V'.left ⟶ V.left) (hq : IsPullback q V'.hom V.hom ι) (E : Over.DescentDatum p' V') (t : pullback (V.hom ≫ p) p ⟶ V.left) (ht : t ≫ V.hom = pullback.snd (V.hom ≫ p) p) (hcompat : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X') (h : f₁ ≫ p' = f₂ ≫ p') (a : Over.mk f₁ ⟶ V'), pullback.lift (a.left ≫ q) (f₂ ≫ ι) (by calc (a.left ≫ q) ≫ (V.hom ≫ p) = (a.left ≫ V'.hom) ≫ (ι ≫ p) := by rw [Category.assoc, ← Category.assoc q, hq.w] simp only [Category.assoc] _ = f₁ ≫ p' := by simp only [Over.w a, Over.mk_hom, hp] _ = (f₂ ≫ ι) ≫ p := by rw [Category.assoc, hp, h]) ≫ t = (E.transport f₁ f₂ h a).left ≫ q) : ∃ D : Over.DescentDatum p V, D.IsBaseChange hp hq.w E",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

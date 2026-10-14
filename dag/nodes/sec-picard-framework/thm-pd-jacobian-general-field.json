@@ -67,26 +67,28 @@
    "elementary": false
   },
   {
-   "text": "*Step 5 (the group structure).* The group law of the abelian variety\n$J_s$ is defined over $K$ at the finite level, because it is part of the\nfunctor $\\operatorname{Pic}^0_{C/k}$ restricted to $K$, and it is compatible\nwith the descent datum by construction. [lem-pd-group-scheme-descent]\ntherefore descends it, so that $J$ is a $k$-group scheme in the sense of\n[def-sc-group-scheme], with $J_K$ the given group scheme.",
+   "text": "*Step 5 (the group structure, after Step 7).* The degree-zero Picard functor is group-valued by [def-pd-degree-morphism] and [def-pc-picard-functor]. Once Step 7 identifies it with the represented functor of J, Yoneda transports multiplication, unit and inverse to J; their equations follow by Yoneda faithfulness. This is AlgebraicGeometry.exists_commGrpObj_isPicardZeroMul, applied in the Lean proof, and makes J a commutative group scheme [def-sc-group-scheme]. No group law on the finite model is assumed.",
    "uses": [
-    "lem-pd-group-scheme-descent",
+    "def-pd-degree-morphism",
+    "def-pc-picard-functor",
     "def-sc-group-scheme"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "*Step 6 (the geometric properties).* The scheme $J_K=J\\times_kK$ is\nsmooth over $K$ and proper over $K$, and it is connected, because it is the\nbase change of the abelian variety $J_s$ of Step 1 along\n$\\Spec(k_s)/\\Spec(K)$ and an abelian variety is a variety, hence connected\n([def-sc-abelian-variety]). By\n[thm-pd-fpqc-local-properties] the scheme $J$ is therefore of finite type,\nsmooth and proper over $k$, and connected. By\n[lem-pc-dim-base-change] applied to the flat extension $k\\subseteq K$,\n$\\dim J=\\dim J_K=\\dim J_s=g$, the last equality by Step 1. By Stacks Project,\nRemark 39.9.12, Tag\n[0H2U](https://stacks.math.columbia.edu/tag/0H2U), a group scheme over a\nfield which is proper, connected and smooth is an abelian variety; hence $J$\nis an abelian variety over $k$ of dimension $g$ in the sense of\n[def-sc-abelian-variety].",
+   "text": "*Step 6 (the geometric properties).* Paste the two cartesian squares to identify J_s with the base change of J along k_s/k. Apply [thm-pd-fpqc-local-properties] directly to this square and the proper, smooth-of-relative-dimension-g, geometrically integral J_s from [thm-pd-geometric-pic0]. This is AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback. The descended relative dimension is already g; no separate dimension comparison is used. Together with Step 5 this makes J an abelian variety [def-sc-abelian-variety].",
    "uses": [
-    "def-sc-abelian-variety",
     "thm-pd-fpqc-local-properties",
-    "lem-pc-dim-base-change"
+    "thm-pd-geometric-pic0",
+    "def-sc-abelian-variety"
    ],
    "elementary": false
   },
   {
-   "text": "*Step 7 (the functorial identification).* By Steps 1 and 4 the scheme\n$J$ satisfies $J\\times_kk_s\\cong J_s$, and $J_s$ represents\n$\\operatorname{Pic}^0_{C_{k_s}/k_s}$, which by\n[cor-pd-pic0-base-change] is the base change of\n$\\operatorname{Pic}^0_{C/k}$. The two functors\n$h_J=\\operatorname{Hom}_k(-,J)$ and $\\operatorname{Pic}^0_{C/k}$ on\n$(\\mathit{Sch}/k)_{fppf}$ therefore become isomorphic after base change along\nthe faithfully flat morphism $\\Spec(k_s)\\to\\Spec(k)$; an fppf sheaf is\ndetermined by its base change along a faithfully flat cover, so\n$h_J\\cong\\operatorname{Pic}^0_{C/k}$. Concretely, the isomorphism is the one\nwhose base change to $k_s$ is the representing isomorphism of $J_s$; it is\ncanonical because the representing isomorphism is. In the vocabulary of\n[def-sc-jacobian] this says that $J$ is a Jacobian of $C$ over $k$.",
+   "text": "Step 7 (functorial identification). The degree-zero Picard functor is an fpqc sheaf by [lem-pd-degree-picard-sheaf-fpqc]. The field extension gives a faithfully flat quasi-compact covering, and the descended scheme has the required cartesian square. Apply [lem-pd-fpqc-representability-descent]: transport invariance glues the local universal section, and the resulting Yoneda map is bijective locally, hence an isomorphism of sheaves. Thus the descended scheme represents the original degree-zero Picard functor. This supplies the representing object in [def-sc-jacobian].",
    "uses": [
-    "cor-pd-pic0-base-change",
+    "lem-pd-degree-picard-sheaf-fpqc",
+    "lem-pd-fpqc-representability-descent",
     "def-sc-jacobian"
    ],
    "elementary": false
@@ -135,11 +137,11 @@
   "def-pd-descent-datum",
   "cor-pd-finite-level",
   "thm-pd-effective-descent",
-  "lem-pd-group-scheme-descent",
   "def-sc-group-scheme",
-  "def-sc-abelian-variety",
   "thm-pd-fpqc-local-properties",
-  "lem-pc-dim-base-change",
+  "def-sc-abelian-variety",
+  "lem-pd-degree-picard-sheaf-fpqc",
+  "lem-pd-fpqc-representability-descent",
   "def-sc-jacobian",
   "lem-pc-rational-hyp",
   "thm-pc-pic-split",
@@ -151,7 +153,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian-descent/thm-pd-jacobian-general-field.md",
-  "place": "## Proof"
+  "place": "Original Steps 1-11; Step 7 corrected to fpqc descent by T4, 2026-10-14 (Stacks 0D24, 023T, 02W0); Steps 5 and 6 aligned with the existing Lean proof by the second reader"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -429,5 +431,15 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian-descent"
+ "unit": "sk-prop-jacobian-descent",
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

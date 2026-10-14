@@ -1,0 +1,125 @@
+{
+ "id": "lem-pd-degree-picard-sheaf-fpqc",
+ "kind": "statement",
+ "title": "The degree part of the Picard functor is an fpqc sheaf",
+ "statement": "Let k be a field, f:C to Spec k a smooth proper geometrically integral curve, and d an integer. Let S be the subfunctor of the relative Picard presheaf whose classes have fibrewise degree d at every point [lem-pd-degree-locally-constant]. Its fppf sheafification is a sheaf also for the fpqc topology. This uses normalized invertible-module descent [lem-pc-fpqc-descent], the universally trivial direct image [lem-pc-rational-hyp], and the normalized splitting after a finite separable point extension [thm-pc-pic-split].",
+ "stmt_deps": [
+  "lem-pc-fpqc-descent",
+  "lem-pc-rational-hyp",
+  "thm-pc-pic-split",
+  "lem-pd-degree-locally-constant"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Lemmas 99.11.4 and 99.11.7 (Tags 0D28 and 0D2B); Tag 023T"
+ },
+ "proof": [
+  {
+   "text": "The fppf sheafification of the fibrewise degree-`d` Picard presheaf of a smooth proper\n geometrically integral curve is an fpqc sheaf.\n\nProof: geometric integrality makes the curve nonempty. By [lem-pc-dense-separable-points],\n smoothness supplies a closed point with finite separable residue field. Base change to\n that field supplies a rational point. This extension is an fppf covering. Over it the relative\n Picard sheaf identifies with the normalized Picard functor, since the structure sheaf has\n universally trivial direct image. The degree part identifies with the normalized classes\n having fibrewise degree `d`: twisting by a class from the base has degree zero, and fppf-local\n representatives give exactly this condition.\n\nFor a normalized class choose a trivialization along the section. Normalize each overlap\n isomorphism to preserve this trivialization. Such an isomorphism is unique because every\n global unit on the curve over any test scheme comes from that scheme. Uniqueness implies\n the cocycle equation. Fpqc descent of invertible modules and their morphisms therefore glues\n normalized classes uniquely. Fibrewise degree descends too: a covering is jointly surjective,\n and degree is unchanged by extension of residue fields. Thus the normalized degree part is\n an fpqc sheaf.\n\nTo descend this assertion from the finite extension, pull a compatible family for an fpqc\n covering back to that extension and glue it there. Its two restrictions on the double\n overlap agree after the original fpqc covering, by separatedness of the normalized degree\n functor there. Hence fppf descent along the finite extension glues the resulting section\n over the original test scheme. Equality with the original family and uniqueness can be\n tested after the same finite fppf cover. This proves the asserted fpqc sheaf condition.\n\nSource: Stacks Project, Lemmas 99.11.4 and 99.11.7 (Tags 0D28 and 0D2B), and fpqc descent\n of invertible modules, Tag 023T. The degree criterion uses residue-field base change.",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "lem-pc-rational-hyp",
+    "thm-pc-pic-split",
+    "lem-pd-degree-locally-constant",
+    "lem-pc-dense-separable-points"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fpqc-descent",
+  "lem-pc-rational-hyp",
+  "thm-pc-pic-split",
+  "lem-pd-degree-locally-constant",
+  "lem-pc-dense-separable-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Lemmas 99.11.4 and 99.11.7 (Tags 0D28 and 0D2B); Tag 023T; T4 formal universal-property argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The fppf sheafification of the fibrewise degree zero Picard presheaf of a smooth proper geometrically integral curve is an fpqc sheaf",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"picard\"",
+   "date": "2026-10-14",
+   "results": [
+    "ODE.picard",
+    "IsPicardLindelof",
+    "ODE.picard_apply₀",
+    "IsPicardLindelof.weaken_lipschitz",
+    "ODE.picard_apply",
+    "IsPicardLindelof.lipschitzOnWith",
+    "IsPicardLindelof.continuousOn",
+    "IsPicardLindelof.norm_le"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*[Pp]icard|[Pp]icard.*fpqc|[Ss]heaf.*[Dd]egree",
+   "date": "2026-10-14",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean",
+    "Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-jacobian-general-field",
+   "place": "Step 7 (functorial identification): descent of the representing isomorphism",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqc",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDegreeSheafFpqc.lean",
+  "declaration": "AlgebraicGeometry.isSheaf_fpqc_sheafify_picardDegree",
+  "statement": "theorem isSheaf_fpqc_sheafify_picardDegree {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] (d : ℤ) (S : Subfunctor (picardPresheaf f)) (hS : ∀ (T : Over (Spec (.of k))) (L : (picardPresheaf f).obj (op T)), L ∈ S.obj (op T) ↔ ∀ t, picardPresheafDegree f L t = d) : Presheaf.IsSheaf (Scheme.fpqcTopology.over (Spec (.of k))) ((presheafToSheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1))).obj S.toFunctor).obj",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

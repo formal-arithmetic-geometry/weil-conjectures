@@ -20,38 +20,48 @@
  ],
  "proof": [
   {
-   "text": "The datum $(J_s,\\varphi)$ of [lem-pd-canonical-descent-datum] and\n[lem-pd-descent-cocycle] is a\n[def-pd-descent-datum] over $\\Spec(k_s)/\\Spec(k)$ with $k_s$ the\n[def-pd-separable-closure]. Write\n$k_s=\\colim_{K/k\\ \\text{finite separable}}K$ and $S_i=\\Spec(K_i)$ for the\nfinite separable subextensions, an inverse system with affine transition\nmorphisms and affine (hence quasi-compact and quasi-separated) terms, whose\nlimit is $S=\\Spec(k_s)$; all fibre products below are the finite-presentation\nones of [def-pc-morphism-conventions]. The scheme $J_s$ is of finite\npresentation over $k_s$: it is smooth over the field $k_s$ and of finite type,\nby [thm-pd-geometric-pic0]. By\n[thm-pd-spreading-out](1) there are $i$ and a scheme $J_i$ of finite\npresentation over $K_i$ with $J_i\\times_{K_i}k_s\\cong J_s$; enlarge $i$ if\nnecessary so that the $\\varphi$ and the cocycle equation, which are morphisms\nand equalities of morphisms of finite presentation between finitely presented\nschemes, spread out as well, using [thm-pd-spreading-out](2) and\n[thm-pd-spreading-out](3); the spread-out isomorphism is the descent\ndatum $\\varphi_K$ over $\\Spec(K)/\\Spec(k)$, whose base change to $\\Spec(k_s)$\nis $\\varphi$ by the very form of [def-pc-base-change]. To obtain\nprojectivity, apply [thm-pd-spreading-out](2) to a closed immersion\n$J_s\\hookrightarrow\\mathbf{P}^N_{k_s}$, which exists because $J_s$ is an\nabelian variety by [thm-pd-geometric-pic0] and abelian varieties are\nprojective by [lem-sc-abelian-variety-projective]; the target\n$\\mathbf{P}^N_{k_s}$ is the base change of $\\mathbf{P}^N_{K_i}$, so the\nimmersion descends to a closed immersion $J_{i'}\\hookrightarrow \\mathbf{P}^N_{K_{i'}}$ for some $i'\\geq i$, exhibiting $J_{i'}$ as a\n[def-pc-projective-morphism] over $K_{i'}$. Put\n$K=K_{i'}$ and $J_K=J_{i'}$.",
+   "text": "Base change the curve to ks and use its geometric degree-zero Picard representation. Its representing scheme Js is smooth, proper and geometrically integral. The existing Picard group law makes it an abelian variety, hence it admits a projective embedding.",
    "uses": [
-    "lem-pd-canonical-descent-datum",
-    "lem-pd-descent-cocycle",
-    "def-pd-descent-datum",
-    "def-pd-separable-closure",
-    "def-pc-morphism-conventions",
     "thm-pd-geometric-pic0",
-    "thm-pd-spreading-out",
-    "def-pc-base-change",
-    "lem-sc-abelian-variety-projective",
-    "def-pc-projective-morphism"
+    "cor-pd-pic0-base-change",
+    "lem-sc-abelian-variety-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite-presentation spreading to Js, obtaining a finite separable model JK. Apply universal-transport spreading and faithfully flat testing to refine JK to JL carrying the canonical descent datum of Js. The identity and cocycle are checked by epimorphism cancellation, without spreading equality constraints to a later stage.",
+   "uses": [
+    "lem-pd-finite-separable-scheme-model",
+    "lem-pd-finite-separable-datum-refinement",
+    "lem-pd-canonical-descent-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend properness from Js to JL. Descend quasi-projectivity by the existing field-base-change theorem (whose proof uses very-ample descent); properness makes its immersion into projective space closed. Pull back an affine basic open obtained by graded prime avoidance to contain any prescribed finite subset.",
+   "uses": [
+    "lem-pc-proper-descends-field",
+    "lem-pc-very-ample-descends",
+    "lem-pd-projective-finite-affine-neighbourhood"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pd-canonical-descent-datum",
-  "lem-pd-descent-cocycle",
-  "def-pd-descent-datum",
-  "def-pd-separable-closure",
-  "def-pc-morphism-conventions",
   "thm-pd-geometric-pic0",
-  "thm-pd-spreading-out",
-  "def-pc-base-change",
+  "cor-pd-pic0-base-change",
   "lem-sc-abelian-variety-projective",
-  "def-pc-projective-morphism"
+  "lem-pd-finite-separable-scheme-model",
+  "lem-pd-finite-separable-datum-refinement",
+  "lem-pd-canonical-descent-datum",
+  "lem-pc-proper-descends-field",
+  "lem-pc-very-ample-descends",
+  "lem-pd-projective-finite-affine-neighbourhood"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian-descent/cor-pd-finite-level.md",
-  "place": "## Proof"
+  "document": "Stacks Project",
+  "place": "Tags 01ZM (1),(2), 023V, 02L1, 0BDE, 01ZY, 00JS; T4 faithfully flat testing route, 2026-10-14"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -120,5 +130,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

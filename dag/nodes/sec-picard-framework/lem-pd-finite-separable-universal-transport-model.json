@@ -1,0 +1,121 @@
+{
+ "id": "lem-pd-finite-separable-universal-transport-model",
+ "kind": "statement",
+ "title": "A finite model of universal transport",
+ "statement": "Let k be a field, ks its separable closure, K a finite separable intermediate field, JK a finitely presented quasi-separated K-scheme, and Js its ks-base change. Given a descent datum E on Js relative to ks/k [def-pd-descent-datum], there is a finite separable enlargement L containing K. On JL = JK times_K L there is a universal transport morphism JL times_k Spec L to JL over the second L-factor. Its base change agrees on every pair of test-scheme points with the transport of E. The maps from Js to JL and from JL to JK are cartesian and compose to the original map.",
+ "stmt_deps": [
+  "def-pd-descent-datum"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01ZM (2); Tag 023V"
+ },
+ "proof": [
+  {
+   "text": "The universal transport of a descent datum is a single morphism over the double base\n product. It descends to a finite separable enlargement of a given finite model.\n\nProof: write `ks` as the filtered colimit of its finitely generated `k`-subalgebras,\n all of which are finite separable fields. Restrict the inverse system of their spectra to\n fields containing `K`. Its base change along `JK → Spec K` has limit `Js`. Take fibre\n products over `Spec k` with the original system. The pointwise pullback limit theorem\n identifies the new limit with `Js ×_k Spec ks`; the transition maps are affine and the\n terms are quasi-compact and quasi-separated. Compose the universal transport of `E` with\n `q:Js → JK`. This is a morphism over `Spec K`, using the second base factor. The\n finite-presentation morphism-factorization theorem descends it to a stage `L`. Pair this\n morphism with the second projection to construct `t:JL ×_k Spec L → JL`. Its being over\n the second base factor gives the structure-map equation. The factorization equality and\n naturality of `E` give pointwise compatibility, by factoring each pair of points through\n the universal double product. Pullback pasting gives `r`, `qL`, the cartesian squares and\n their composite. No identity or cocycle equation is required at this step; those equations\n are proved by faithfully flat testing in the consuming theorem.\n\nSource: Stacks Project, Tag 01ZM (2), and Tag 023V.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-pd-pointwise-pullback-limit",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "lem-pd-pointwise-pullback-limit",
+  "def-pd-descent-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 01ZM (2); Tag 023V; T4 formal universal-property argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism between finitely presented schemes descends along a filtered limit of double products of finite separable intermediate fields",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesColimit_yoneda\"",
+   "date": "2026-10-14",
+   "results": [
+    "CategoryTheory.Limits.exists_hom_of_preservesColimit_yoneda",
+    "CategoryTheory.Limits.exists_eq_of_preservesColimit_yoneda_self",
+    "CategoryTheory.Limits.exists_eq_of_preservesColimit_yoneda",
+    "AlgebraicGeometry.Scheme.preservesColimit_yoneda",
+    "CategoryTheory.Limits.exists_eq_isLimitMap_of_preservesColimit_yoneda"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_pullback_hom|DescentDatum|IsSepClosure",
+   "date": "2026-10-14",
+   "results": [
+    "Mathlib/FieldTheory/SeparableClosure.lean",
+    "Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean",
+    "Mathlib/FieldTheory/IsSepClosed.lean",
+    "Mathlib/FieldTheory/IsSepClosed.lean",
+    "Mathlib/FieldTheory/IsSepClosed.lean",
+    "Mathlib/FieldTheory/IsSepClosed.lean",
+    "Mathlib/FieldTheory/IsSepClosed.lean",
+    "Mathlib/FieldTheory/IsPerfectClosure.lean"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pd-finite-level",
+   "place": "Finite model and descent datum construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteSeparableUniversalTransportModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSeparableUniversalTransportModel.lean",
+  "declaration": "AlgebraicGeometry.exists_finiteSeparable_universalTransportModel",
+  "statement": "theorem exists_finiteSeparable_universalTransportModel {k ks : Type u} [Field k] [Field ks] [Algebra k ks] [IsSepClosure k ks] (K : IntermediateField k ks) [FiniteDimensional k K] [Algebra.IsSeparable k K] (JK : Over (Spec (.of K))) [LocallyOfFinitePresentation JK.hom] [QuasiCompact JK.hom] [QuasiSeparated JK.hom] (Js : Over (Spec (.of ks))) (q : Js.left ⟶ JK.left) (hq : IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks)))) (E : Over.DescentDatum (Spec.map (CommRingCat.ofHom (algebraMap k ks))) Js) : ∃ (L : IntermediateField k ks), FiniteDimensional k L ∧ Algebra.IsSeparable k L ∧ ∃ (hKL : K ≤ L) (JL : Over (Spec (.of L))) (r : JL.left ⟶ JK.left), IsPullback r JL.hom JK.hom (Spec.map (CommRingCat.ofHom (IntermediateField.inclusion hKL).toRingHom)) ∧ ∃ (qL : Js.left ⟶ JL.left) (hqL : IsPullback qL Js.hom JL.hom (Spec.map (CommRingCat.ofHom (algebraMap L ks)))) (t : pullback (JL.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k L))) ⟶ JL.left), qL ≫ r = q ∧ t ≫ JL.hom = pullback.snd (JL.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k L))) ∧ ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of ks)) (h : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k ks)) = f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k ks))) (a : Over.mk f₁ ⟶ Js), pullback.lift (a.left ≫ qL) (f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap L ks))) (by calc (a.left ≫ qL) ≫ (JL.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k L))) = (a.left ≫ Js.hom) ≫ (Spec.map (CommRingCat.ofHom (algebraMap L ks)) ≫ Spec.map (CommRingCat.ofHom (algebraMap k L))) := by rw [Category.assoc, ← Category.assoc qL, hqL.w] simp only [Category.assoc] _ = f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k ks)) := by rw [Over.w a, ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq] rfl _ = (f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap L ks))) ≫ Spec.map (CommRingCat.ofHom (algebraMap k L)) := by rw [Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq, h]) ≫ t = (E.transport f₁ f₂ h a).left ≫ qL",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

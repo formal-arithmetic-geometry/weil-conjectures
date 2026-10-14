@@ -27,6 +27,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.AlgebraicGeometry.FpqcRepresentabilityDescent
+import Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqc
+import Sheaf.AlgebraicGeometry.FiniteSeparableSchemeModel
+import Sheaf.AlgebraicGeometry.FiniteSeparableDescentDatumRefinement
+import Sheaf.AlgebraicGeometry.ProjectiveFiniteAffineNeighbourhood
+import Sheaf.AlgebraicGeometry.IsProperOfFieldBaseChange
 import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.Morphisms.Projective
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective
@@ -1755,11 +1761,11 @@ subextension `K` of `k_s/k`, a `K`-scheme `J_K` with `J_K ×_K k_s ≅ J_s`, and
 `φ_K` on `J_K` relative to `Spec K ⟶ Spec k` whose base change to `k_s` is `φ`. Moreover every
 finite set of points of `J_K` lies in an affine open, `J_K` being projective over `K`.
 
-The proof spreads `J_s`, the isomorphism `φ` and a closed immersion `J_s ⟶ ℙ^N` out to a finite
-level (Stacks 01ZM: `AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`,
-`AlgebraicGeometry.Scheme.exists_pullback_hom_of_isLimit` and
-`AlgebraicGeometry.Scheme.exists_pullback_fst_comp_eq_of_isLimit`), the cocycle condition
-holding at a finite level because it holds over `k_s`.
+The proof spreads `J_s` and its universal transport morphism to a finite separable level
+(Stacks 01ZM (1), (2)). Faithfully flat cancellation proves the identity and cocycle equations
+at that level. Properness and quasi-projectivity descend from `J_s`, yielding a projective
+embedding. Graded prime avoidance gives an affine open containing any prescribed finite set
+(Stacks 00JS, 01ZY).
 
 (blueprint: `cor-pd-finite-level`) -/
 theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra k ks]
@@ -1775,7 +1781,65 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
         D.IsBaseChange (specMap_algebraMap_comp_specMap_algebraMap k K ks) hq.w
             rs.overDescentDatum ∧
           ∀ s : Set JK.left, s.Finite → ∃ U : JK.left.Opens, IsAffineOpen U ∧ s ⊆ U :=
-  sorry
+  by
+    classical
+    let f := C ↘ Spec (.of k)
+    let p := Spec.map (CommRingCat.ofHom (algebraMap k ks))
+    let Cs := pullback f p
+    let : Cs.Over (Spec (.of ks)) := ⟨pullback.snd f p⟩
+    have hCs : IsPullback (pullback.fst f p) (pullback.snd f p) f p :=
+      IsPullback.of_hasPullback f p
+    obtain ⟨hSmooth, hProper, hGeom, hInt⟩ :=
+      smoothOfRelativeDimension_and_isProper_and_geometricallyIntegral_pullback_snd f ks
+    let : IsSepClosed ks := IsSepClosure.sep_closed k
+    let : SmoothOfRelativeDimension 1 (Cs ↘ Spec (.of ks)) := hSmooth
+    let : IsProper (Cs ↘ Spec (.of ks)) := hProper
+    let : GeometricallyIntegral (Cs ↘ Spec (.of ks)) := hGeom
+    obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback
+      (K := ks) (C := C) (C' := Cs) (pullback.fst f p) hCs 0
+    let r := rs.ofIso e
+    have : IsProper Js.hom := isProper_of_representableBy_picardFunctorDegree 0 Js r
+    have : SmoothOfRelativeDimension (arithmeticGenus ks Cs) Js.hom :=
+      smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 Js r
+    have : Smooth Js.hom :=
+      SmoothOfRelativeDimension.smooth (arithmeticGenus ks Cs) Js.hom
+    have : GeometricallyIntegral Js.hom :=
+      geometricallyIntegral_of_representableBy_picardFunctorDegree 0 Js r
+    have : IsIntegral Js.left := GeometricallyIntegral.isIntegral_of_subsingleton Js.hom
+    obtain ⟨_, _⟩ := exists_commGrpObj_isPicardZeroMul (Cs ↘ Spec (.of ks)) r
+    have : IsAbelianVariety Js := ⟨⟩
+    obtain ⟨α, _, js, hjs, hjsS⟩ :=
+      IsAbelianVariety.exists_isClosedImmersion_projectiveSpace Js
+    obtain ⟨K, hK, hKs, JK, qK, hqK, hfpK, hqcK, hqsK⟩ :=
+      exists_finiteSeparable_schemeModel (k := k) (ks := ks) Js
+    have := hK
+    have := hKs
+    have := hfpK
+    have := hqcK
+    have := hqsK
+    obtain ⟨L, hL, hLs, hKL, JL, rL, hrL, qL, hqL, D, hcomp, hD⟩ :=
+      exists_finiteSeparable_descentDatum_refinement K JK Js qK hqK rs.overDescentDatum
+    have : LocallyOfFinitePresentation JL.hom :=
+      MorphismProperty.of_isPullback (P := @LocallyOfFinitePresentation) hrL hfpK
+    have : QuasiCompact JL.hom :=
+      MorphismProperty.of_isPullback (P := @QuasiCompact) hrL hqcK
+    have : IsProper (pullback.snd JL.hom
+        (Spec.map (CommRingCat.ofHom (algebraMap L ks)))) := by
+      rw [← hqL.isoPullback_inv_snd]
+      infer_instance
+    have : IsProper JL.hom := isProper_of_field_baseChange (K := ks) JL.hom
+    let j := hqL.isoPullback.inv ≫ js
+    have : IsImmersion j := inferInstance
+    have hj : j ≫ ℙ(α; Spec (.of ks)) ↘ Spec (.of ks) =
+        pullback.snd JL.hom (Spec.map (CommRingCat.ofHom (algebraMap L ks))) := by
+      simp [j, hjsS]
+    obtain ⟨β, _, i, hi, hiS⟩ :=
+      exists_isImmersion_projectiveSpace_of_pullback JL.hom j hj
+    have : IsProper (i ≫ ℙ(β; Spec (.of L)) ↘ Spec (.of L)) := hiS ▸ inferInstance
+    have : IsClosedImmersion i :=
+      IsClosedImmersion.of_comp_of_isSeparated i (ℙ(β; Spec (.of L)) ↘ Spec (.of L))
+    refine ⟨L, hL, hLs, JL, qL, hqL, D, hD, ?_⟩
+    exact fun s hs ↦ exists_isAffineOpen_of_finite_projective i s hs
 
 /-- **`Pic^0_{C/k}` is represented by the descended scheme.** Let `K/k` be a field extension, let
 `J_K` represent the restriction of `Pic^0_{C/k}` to schemes over `K`, and let `J` be a `k`-scheme
@@ -1786,10 +1850,11 @@ Then `J` represents `Pic^0_{C/k}`.
 This is Step 7 of the proof of `AlgebraicGeometry.exists_jacobian_descent`, applied with
 `K = k_s`. The morphism `Spec K ⟶ Spec k` is faithfully flat and quasi-compact but in general not
 locally of finite presentation, so this does not follow from the fppf sheaf property of
-`Pic^0_{C/k}` alone. Since `Pic^0_{C/k}` and `J` are locally of finite presentation, the
-identification of `Pic^0_{C/k}` with `h_J` over `K` is defined over a finitely generated
-subalgebra `A ⊆ K` (Stacks 01ZC), along which fppf descent of sections applies; equivalently, by
-fpqc descent of morphisms (Stacks 02W0) it agrees with the representing object of `Pic^0_{C/k}`.
+`Pic^0_{C/k}` alone. The degree part is an fpqc sheaf by normalized descent of invertible modules
+(`AlgebraicGeometry.isSheaf_fpqc_sheafify_picardDegree`). Transport invariance glues the local
+universal section. Yoneda gives a map from the functor represented by `J` to this sheaf;
+its restriction to schemes over `K` is bijective, so it is locally bijective and hence an
+isomorphism of fpqc sheaves. This is effective descent of the representing isomorphism.
 
 (blueprint: `thm-pd-jacobian-general-field`, Step 7) -/
 theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} [Field K]
@@ -1805,7 +1870,19 @@ theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} 
         f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K))) (a : Over.mk f₁ ⟶ JK),
       (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q) :
     Nonempty ((picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J) :=
-  sorry
+  by
+    let p := Spec.map (CommRingCat.ofHom (algebraMap k K))
+    have : Flat p := by
+      rw [Flat.SpecMap_iff]
+      exact RingHom.flat_algebraMap_iff.mpr inferInstance
+    have : Surjective p := ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
+    have : QuasiCompact p := inferInstanceAs (QuasiCompact (Spec.map _))
+    have hF : Presheaf.IsSheaf (Scheme.fpqcTopology.over (Spec (.of k)))
+        (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj :=
+      isSheaf_fpqc_sheafify_picardDegree (C ↘ Spec (.of k)) 0
+        (picardSubfunctorDegree (C ↘ Spec (.of k)) 0)
+        (fun T L ↦ mem_picardSubfunctorDegree_iff (C ↘ Spec (.of k)) 0 L)
+    exact nonempty_representableBy_of_effective_fpqc_descent p _ hF JK r J q hq hinv
 
 /-- **The geometric points of `Pic^0_{C₀/k₀}`.** Let `C₀` be a smooth projective geometrically
 integral curve over `k₀`, let `K` be an algebraically closed extension of `k₀` and let `C` be the

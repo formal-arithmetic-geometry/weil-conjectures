@@ -1,0 +1,114 @@
+{
+ "id": "lem-pd-finite-separable-scheme-model",
+ "kind": "statement",
+ "title": "Finite separable scheme models",
+ "statement": "Let k be a field, ks a separable closure of k, and Js a finitely presented quasi-separated ks-scheme. There is a finite separable intermediate field K and a finitely presented quasi-separated K-scheme JK with a cartesian map Js to JK.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01ZM (1)"
+ },
+ "proof": [
+  {
+   "text": "Every finitely presented scheme over a separable closure has a finitely presented model\n over a finite separable intermediate field. Write the separable closure as the filtered\n colimit of finitely generated subalgebras; these are fields because the extension is\n algebraic, finite because they are finitely generated, and separable because they lie in a\n separable extension. Apply finite-presentation descent to the spectra of that system.\n\nSource: Stacks Project, Tag 01ZM (1).",
+   "uses": [
+    "thm-pd-spreading-out",
+    "def-pd-separable-closure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "def-pd-separable-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 01ZM (1); T4 formal universal-property argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A scheme of finite presentation over a separable closure descends to a finite separable intermediate field",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSepClosure\"",
+   "date": "2026-10-14",
+   "results": [
+    "IsSepClosure.self_of_isSepClosed",
+    "IsSepClosure",
+    "IsSepClosure.sep_closed",
+    "IsSepClosure.isGalois",
+    "IsSepClosure.isSeparable",
+    "IsSepClosure.separable",
+    "IsSepClosure.mk",
+    "isSepClosure_iff"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*descend|exists_isPullback_of_finitePresentation",
+   "date": "2026-10-14",
+   "results": [
+    "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+    "Mathlib/RingTheory/Finiteness/Descent.lean"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pd-finite-level",
+   "place": "Finite model and descent datum construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteSeparableSchemeModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSeparableSchemeModel.lean",
+  "declaration": "AlgebraicGeometry.exists_finiteSeparable_schemeModel",
+  "statement": "theorem exists_finiteSeparable_schemeModel {k ks : Type u} [Field k] [Field ks] [Algebra k ks] [IsSepClosure k ks] (Js : Over (Spec (.of ks))) [LocallyOfFinitePresentation Js.hom] [QuasiCompact Js.hom] [QuasiSeparated Js.hom] : ∃ K : IntermediateField k ks, FiniteDimensional k K ∧ Algebra.IsSeparable k K ∧ ∃ (JK : Over (Spec (.of K))) (q : Js.left ⟶ JK.left), IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks))) ∧ LocallyOfFinitePresentation JK.hom ∧ QuasiCompact JK.hom ∧ QuasiSeparated JK.hom",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

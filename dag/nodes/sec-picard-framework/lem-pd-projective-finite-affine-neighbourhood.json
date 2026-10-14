@@ -1,0 +1,123 @@
+{
+ "id": "lem-pd-projective-finite-affine-neighbourhood",
+ "kind": "statement",
+ "title": "Affine neighbourhoods of finite projective sets",
+ "statement": "Let S be an affine scheme, alpha an arbitrary type of homogeneous coordinates, and j:X to projective space over S an affine morphism. Every finite subset of the points of X is contained in an affine open of X. In particular this applies to a projective embedding [def-pc-projective-morphism]; the proof uses graded prime avoidance [lem-sc-graded-prime-avoidance].",
+ "stmt_deps": [
+  "lem-sc-graded-prime-avoidance",
+  "def-pc-projective-morphism"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01ZY and 00JS"
+ },
+ "proof": [
+  {
+   "text": "A scheme admitting an affine morphism into projective space over an affine base has an\n affine open containing any finite set of its points. In particular this applies to a closed\n immersion into projective space over a field.\n\nProof: map the finite set to the integral projective spectrum. Graded prime avoidance supplies\n a homogeneous form of positive degree missing all these primes. Its basic open is affine.\n The projection from relative projective space to the integral model is affine over an affine\n base, so pulling this open back twice gives the required affine open.\n\nSource: Stacks Project, Tags 01ZY and 00JS.",
+   "uses": [
+    "lem-sc-graded-prime-avoidance",
+    "def-pc-projective-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-graded-prime-avoidance",
+  "def-pc-projective-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01ZY and 00JS; T4 formal universal-property argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every finite subset of a projective scheme is contained in an affine open",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineOpen\"",
+   "date": "2026-10-14",
+   "results": [
+    "AlgebraicGeometry.IsAffineOpen",
+    "AlgebraicGeometry.IsAffineOpen.Spec_basicOpen",
+    "AlgebraicGeometry.isAffineOpen_opensRange",
+    "AlgebraicGeometry.IsAffineOpen.isCompact",
+    "AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion",
+    "AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion",
+    "AlgebraicGeometry.isAffineOpen_top",
+    "AlgebraicGeometry.IsAffineOpen.preimage_of_isIso"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*AffineOpen.*finite|finite.*projective",
+   "date": "2026-10-14",
+   "results": [
+    "Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean",
+    "Mathlib/NumberTheory/Height/Projectivization.lean",
+    "Mathlib/NumberTheory/Height/Projectivization.lean",
+    "Mathlib/NumberTheory/Height/Projectivization.lean",
+    "Mathlib/MeasureTheory/Constructions/Projective.lean",
+    "Mathlib/MeasureTheory/Constructions/Projective.lean",
+    "Mathlib/MeasureTheory/Constructions/Projective.lean",
+    "Mathlib/LinearAlgebra/Contraction.lean"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pd-finite-level",
+   "place": "Finite model and descent datum construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveFiniteAffineNeighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveFiniteAffineNeighbourhood.lean",
+  "declaration": "AlgebraicGeometry.exists_isAffineOpen_of_finite_projective",
+  "statement": "theorem exists_isAffineOpen_of_finite_projective {S X : Scheme.{u}} [IsAffine S] {α : Type u} (j : X ⟶ ℙ(α; S)) [IsAffineHom j] (s : Set X) (hs : s.Finite) : ∃ U : X.Opens, IsAffineOpen U ∧ s ⊆ U",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "id": "lem-pd-finite-separable-datum-refinement",
+ "kind": "statement",
+ "title": "Refinement carrying a descent datum",
+ "statement": "Let $k$ be a field, $k_s$ a separable closure, and $K\\subseteq k_s$ a finite separable intermediate field. Let $J_K$ be a finitely presented, quasi-separated $K$-scheme, and let $J_s$ be a $k_s$-scheme with a specified cartesian map $q:J_s\\to J_K$ [def-pc-base-change]. Given a descent datum $E$ on $J_s$ relative to $\\operatorname{Spec}(k_s)\\to\\operatorname{Spec}(k)$ [def-pd-descent-datum], there are a finite separable intermediate field $L$ containing $K$, a cartesian refinement $r:J_L\\to J_K$, a cartesian map $q_L:J_s\\to J_L$, and a descent datum $D$ on $J_L$ relative to $\\operatorname{Spec}(L)\\to\\operatorname{Spec}(k)$ such that $r\\circ q_L=q$ and the base change of $D$ is $E$.",
+ "stmt_deps": [
+  "def-pd-descent-datum",
+  "def-pc-base-change",
+  "def-pd-separable-closure",
+  "def-pc-morphism-conventions"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01ZM (2), 023V, 02VW"
+ },
+ "proof": [
+  {
+   "text": "Enlarge a finite separable model to carry a descended transport datum.\n\nProof: spread the universal transport morphism over the double base product. It is natural\n by pullback functoriality. The identity and cocycle equations are checked after successively\n lifting the one or three base maps along `Spec ks → Spec L`. These pullbacks are faithfully\n flat, hence epimorphisms, so their cancellation proves the equations over `L` itself.\n\nSource: Stacks Project, Tags 01ZM (2), 023V and 02VW.",
+   "uses": [
+    "lem-pd-finite-separable-universal-transport-model",
+    "lem-pd-datum-from-universal-transport",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-finite-separable-universal-transport-model",
+  "lem-pd-datum-from-universal-transport",
+  "def-pd-descent-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01ZM (2), 023V, 02VW; T4 formal universal-property argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite separable model of a scheme carrying descent data can be enlarged so that the descent data descend",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentData\"",
+   "date": "2026-10-14",
+   "results": [
+    "CategoryTheory.Pseudofunctor.DescentData",
+    "CategoryTheory.Pseudofunctor.DescentData.instCategory",
+    "CategoryTheory.Pseudofunctor.DescentData.Hom",
+    "CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj",
+    "CategoryTheory.Pseudofunctor.DescentData.pullFunctor",
+    "CategoryTheory.Pseudofunctor.DescentData.pullFunctorIdIso",
+    "CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj",
+    "CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence"
+   ],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  },
+  {
+   "tool": "grep",
+   "query": "DescentData.*limit|DescentDatum.*finite",
+   "date": "2026-10-14",
+   "results": [],
+   "verdict": "No exact match; the listed results provide ingredients, not this complete statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pd-finite-level",
+   "place": "Finite model and descent datum construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteSeparableDescentDatumRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSeparableDescentDatumRefinement.lean",
+  "declaration": "AlgebraicGeometry.exists_finiteSeparable_descentDatum_refinement",
+  "statement": "theorem exists_finiteSeparable_descentDatum_refinement {k ks : Type u} [Field k] [Field ks] [Algebra k ks] [IsSepClosure k ks] (K : IntermediateField k ks) [FiniteDimensional k K] [Algebra.IsSeparable k K] (JK : Over (Spec (.of K))) [LocallyOfFinitePresentation JK.hom] [QuasiCompact JK.hom] [QuasiSeparated JK.hom] (Js : Over (Spec (.of ks))) (q : Js.left ⟶ JK.left) (hq : IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks)))) (E : Over.DescentDatum (Spec.map (CommRingCat.ofHom (algebraMap k ks))) Js) : ∃ (L : IntermediateField k ks), FiniteDimensional k L ∧ Algebra.IsSeparable k L ∧ ∃ (hKL : K ≤ L) (JL : Over (Spec (.of L))) (r : JL.left ⟶ JK.left), IsPullback r JL.hom JK.hom (Spec.map (CommRingCat.ofHom (IntermediateField.inclusion hKL).toRingHom)) ∧ ∃ (qL : Js.left ⟶ JL.left) (hqL : IsPullback qL Js.hom JL.hom (Spec.map (CommRingCat.ofHom (algebraMap L ks)))) (D : Over.DescentDatum (Spec.map (CommRingCat.ofHom (algebraMap k L))) JL), qL ≫ r = q ∧ D.IsBaseChange (by rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq]) hqL.w E",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261014T143903-L-496752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
