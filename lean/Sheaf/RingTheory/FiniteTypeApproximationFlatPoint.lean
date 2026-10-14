@@ -19,7 +19,6 @@ import Sheaf.RingTheory.LocalizedApproximationBaseChange
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Localization.Finiteness
 import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Sheaf.RingTheory.ColimitEventuallyFlat
 import Sheaf.RingTheory.FlatModuleAtPrime
 

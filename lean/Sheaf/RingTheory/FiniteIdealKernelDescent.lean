@@ -9,11 +9,10 @@ public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.CategoryTheory.Limits.HasLimits
-public import Mathlib.CategoryTheory.Limits.Preserves.Basic
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.Ideal.Maps
 
-import Sheaf.RingTheory.ColimitFlatRelationDescentElementwise
+import Sheaf.RingTheory.ColimitFlatRelationDescent
 
 /-!
 # Descent of finite subsets of an ideal multiplication kernel
@@ -47,7 +46,6 @@ private theorem exists_ideal_tensor_map
   exact ⟨(TensorProduct.map g h).toAddMonoidHom, fun _ _ ↦ rfl⟩
 
 /-- Any finite subset of an ideal multiplication kernel dies at a common later stage.
-The forgetful functor to sets preserves the specified colimit of the first ring diagram.
 Source: Stacks Project, Algebra, Tag 00R6, descent of finitely many generators xi.
 (blueprint: lem-weil-pbc-finite-ideal-kernel-descent)
 
@@ -64,11 +62,13 @@ in the preorder, and tensor induction gives equality on every tensor.
 Thus an element killed at its witness stage remains zero at l. The canonical
 map to l kills all elements of the finite subset and has the required formula.
 No flatness argument is repeated here and no generation assumption is used. -/
+-- STATEMENT-DISPUTED: The independent-universe statement still depends on the disputed
+-- independent-universe finite-relation theorem. The common-universe single-element
+-- theorem cannot justify this signature; its further correction is a separate item.
 theorem exists_stage_finite_ideal_kernel_vanishes
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})
     (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]
-    [PreservesColimit A (forget CommRingCat.{v})]
     [∀ i, Module (B.obj i) (N.obj i)]
     (φ : ∀ i, A.obj i →+* B.obj i)
     (hcomm : ∀ (i j : Λ) (f : i ⟶ j),
@@ -119,8 +119,7 @@ theorem exists_stage_finite_ideal_kernel_vanishes
       rw [heq, map_sum] at hk
       simpa only [TensorProduct.lift.tmul, LinearMap.comp_apply, LinearMap.lsmul_apply,
         Submodule.subtype_apply] using hk
-    obtain ⟨j, f, m, c, y, hx, hc⟩ :=
-      exists_stage_flat_relation_factorization_of_preserves
+    obtain ⟨j, f, m, c, y, hx, hc⟩ := exists_stage_flat_relation_factorization
       A B N φ hcomm hscalar ψ hψ hlimitScalar hflat i (fun p ↦ (a p : A.obj i)) x hrel
     let := Module.compHom (N.obj j) (φ j)
     obtain ⟨θ, ht⟩ := exists_ideal_tensor_map (A.map f).hom I

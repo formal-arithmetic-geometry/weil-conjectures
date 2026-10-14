@@ -15,7 +15,6 @@ public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
 import Sheaf.RingTheory.NoetherianApproximationLocalizedDiagrams
 import Mathlib.RingTheory.FiniteType
-import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Sheaf.RingTheory.ColimitEventuallyFlat
 
 /-! # Descent of one flat point in a supplied integer approximation

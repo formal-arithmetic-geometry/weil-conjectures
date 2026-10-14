@@ -9,7 +9,6 @@ public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.CategoryTheory.Limits.HasLimits
-public import Mathlib.CategoryTheory.Limits.Preserves.Basic
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
@@ -36,9 +35,7 @@ open scoped TensorProduct
 
 namespace RingTheory
 
-/-- A flat colimit is flat at some stage.
-The forgetful functor to sets preserves the specified colimit of `A`.
-Source: Stacks Project, Algebra, Tag 00R6,
+/-- A flat colimit is flat at some stage. Source: Stacks Project, Algebra, Tag 00R6,
 with Noetherian local stages and localization as in Tag 00MO.
 (blueprint: lem-weil-pbc-colimit-eventually-flat)
 
@@ -74,7 +71,6 @@ theorem exists_flat_stage
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})
     (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]
-    [PreservesColimit A (forget CommRingCat.{v})]
     [∀ i, IsLocalRing (A.obj i)] [∀ i, IsLocalRing (B.obj i)]
     [∀ i, IsNoetherianRing (A.obj i)] [∀ i, IsNoetherianRing (B.obj i)]
     [∀ i, Module (B.obj i) (N.obj i)] [∀ i, Module.Finite (B.obj i) (N.obj i)]

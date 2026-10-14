@@ -9,7 +9,6 @@ public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.CategoryTheory.Limits.HasLimits
-public import Mathlib.CategoryTheory.Limits.Preserves.Basic
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
@@ -36,8 +35,7 @@ open scoped TensorProduct
 namespace RingTheory
 
 /-- The maximal-ideal multiplication kernel at any fixed stage dies after base change
-at a later stage. The forgetful functor to sets preserves the colimit of `A`.
-Source: Stacks Project, Algebra, Tag 00R6, proof preceding the
+at a later stage. Source: Stacks Project, Algebra, Tag 00R6, proof preceding the
 application of Tag 00MO; ideal-tensor description in Remark 00M6.
 (blueprint: lem-weil-pbc-colimit-maximal-kernel-descent)
 
@@ -65,7 +63,6 @@ theorem exists_stage_maximal_kernel_vanishes
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})
     (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]
-    [PreservesColimit A (forget CommRingCat.{v})]
     [∀ i, IsLocalRing (A.obj i)]
     [∀ i, IsNoetherianRing (A.obj i)] [∀ i, IsNoetherianRing (B.obj i)]
     [∀ i, Module (B.obj i) (N.obj i)] [∀ i, Module.Finite (B.obj i) (N.obj i)]
