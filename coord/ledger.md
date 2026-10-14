@@ -14945,3 +14945,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:51 L: merged deliver/H2/Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex (stage 3; reviewer PASS; after a return; landing 20261014T205125-L-2659034 (interface); batch 20261014T205123; modules 7; new nodes 0; change records: coord/changes/picard-residue-unused-wrapper-withdrawal.md)
 
 - 04:58 L: batch 20261014T205621 dependency take-out
+- 21:06 L: merged deliver/K4/Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality (stage 3; reviewer PASS; first push; landing 20261014T210609-L-2851656 (interface); batch 20261014T210607; modules 4; new nodes 4; change records: coord/changes/PicardDerivedFibreNaturality.md)

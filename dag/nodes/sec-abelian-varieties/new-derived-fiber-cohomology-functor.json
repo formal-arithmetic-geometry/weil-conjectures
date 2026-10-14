@@ -1,0 +1,102 @@
+{
+ "id": "new-derived-fiber-cohomology-functor",
+ "kind": "definition",
+ "title": "Functorial derived residue cohomology",
+ "statement": "For a scheme W, its point w and an integer i, form the functor D(O_W) -> ModuleCat(kappa(w)) by derived pullback along the canonical residue point, degree-i homology, terminal evaluation and restriction of scalars along GammaSpecIso.inv. Its object is derivedFiberCohomology [def-sc-derived-fiber-betti].",
+ "stmt_deps": [
+  "def-sc-derived-fiber-betti"
+ ],
+ "source": {
+  "document": "Stacks Project; Mathlib and the existing Lean library",
+  "place": "Tags 06YJ and 0BDI"
+ },
+ "proof": [
+  {
+   "text": "Compose the four actual functors in the definition. Functoriality supplies identities and composition on derived arrows.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 06YJ and 0BDI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functor taking homology of a derived pullback followed by evaluation of sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor taking homology of a derived pullback followed by evaluation of sections",
+   "results": "8 hits: SheafOfModules.pullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.instIsLeftAdjointPullback, PresheafOfModules.pullback, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory.homologyFunctor",
+   "results": "loogle: unknown identifier 'CategoryTheory.DerivedCategory.homologyFunctor'",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "def homologyFunctor",
+   "results": "17 hits: Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean, Mathlib/Algebra/Homology/Localization.lean",
+   "date": "2026-10-14",
+   "verdict": "The listed framework results are used or inspected; no complete matching comparison theorem was returned."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality",
+  "date": "2026-10-15",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-picard-residue-homology-geometric-naturality-fixed-per-index"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedFiberCohomologyFunctor",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedFiberCohomologyFunctor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derivedFiberCohomologyFunctor",
+  "statement": "def derivedFiberCohomologyFunctor (W : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toRingedSpace))] (w : W) (i : ℤ) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec (W.residueField w)).toRingedSpace))] : schemeDerivedCategory W ⥤ ModuleCat.{u} (W.residueField w)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261014T210609-L-2851656",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261014T210609-L-2851656",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
