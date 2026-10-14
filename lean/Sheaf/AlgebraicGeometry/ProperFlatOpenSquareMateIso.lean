@@ -187,6 +187,7 @@ theorem proper_flat_openSquare_mate_isIso
         (Classical.choose_spec exists_derivedPullbackComposition))) (pullback.fst f W.ι))))
     PX.fullyFaithfulι PX'.fullyFaithfulι
     (PX'.liftCompιIso _ _).symm (PX.liftCompιIso _ _).symm
+  change IsIso ((mateEquiv adjf adjf' (inv β)).app K)
   rw [← secondMate_formula adjf adjf' adjgX adjg β K]
   -- Recover the ambient adjunction used by the canonical restricted unit.
   let adjJ := Classical.choose (exists_schemeDerivedAdjunction W.ι

@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-internal-hom-mate-counit-transport",
+ "kind": "statement",
+ "title": "Evaluation mate unchanged under simultaneous adjunction and tensor transport",
+ "statement": "Let C and D be monoidal categories, H:C^{op} \\times C \\to C a functor, F:D\\to C and R:C\\to D functors, and p:F\\dashv R an adjunction. Let t be a natural isomorphism F(A\\otimes B)\\cong F(A)\\otimes F(B). Suppose e_{A,L,M}:Hom(A,H(L,M))\\cong Hom(A\\otimes L,M) is natural in A: e(a\\circ g)=(a\\otimes id_L)\\circ e(g), writing composition in diagrammatic order. For an arbitrary natural automorphism \\delta:F\\cong F, put p'=p.ofNatIsoLeft(\\delta) and t'_{A,B}=\\delta^{-1}_{A\\otimes B}\\circ t_{A,B}\\circ(\\delta_A\\otimes\\delta_B), with composition still in diagrammatic order. For every L,M\\in C, A\\in D and \\alpha:A\\to R(H(L,M)), the evaluation mate p'.homEquiv(t'_{A,R(L)}\\circ(id\\otimes p'.counit_L)\\circ e((p'.homEquiv)^{-1}(\\alpha))) equals p.homEquiv(t_{A,R(L)}\\circ(id\\otimes p.counit_L)\\circ e((p.homEquiv)^{-1}(\\alpha))).",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08I3 and 08I4, construction from evaluation and the adjunction counit; Tag 06YJ, derived-pullback presentation independence; formal transport calculation"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Mathlib Adjunction.homEquiv_ofNatIsoLeft_apply and homEquiv_ofNatIsoLeft_symm_apply express the transported equivalence and its inverse by precomposition with delta and delta inverse. The transported counit is delta inverse at R(L) followed by the original counit. Substitute these formulas into the evaluation mate.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the assumed test-object naturality of e to move delta inverse at A through evaluation. Expand the transported tensorator. The input delta followed by delta inverse cancels. Merge the successive tensor morphisms by tensorHom_comp_tensorHom_assoc: the second factor cancels delta at R(L) with its inverse from the counit, and the first factor cancels delta at A with its inverse from evaluation. Iso identities and category identity laws give the original mate.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "R2 formal calculation of simultaneous presentation transport in the evaluation construction of Tags 08I3 and 08I4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation mate internal Hom comparison invariant under transport of left adjoint and monoidal tensorator by natural isomorphism",
+   "results": "Generic mateEquiv and rightAdjointLaxMonoidal declarations; none states the simultaneous internal-Hom evaluation-mate transport equation.",
+   "date": "2026-10-14",
+   "verdict": "generic infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoLeft",
+   "results": "ofNatIsoLeft, its unit and counit formulas, and homEquiv_ofNatIsoLeft_apply and homEquiv_ofNatIsoLeft_symm_apply; these transport formulas are used in the proof.",
+   "date": "2026-10-14",
+   "verdict": "generic infrastructure used"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_ofNatIsoLeft|internalHomMate.*transport|originalCounit.*Mate",
+   "results": "Mathlib/CategoryTheory/Adjunction/Basic.lean lines 509 and 515 give the two homEquiv transport equations. No internal-Hom mate invariance theorem was found.",
+   "date": "2026-10-14",
+   "verdict": "generic infrastructure used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom evaluation mate unchanged after transporting an adjunction and tensorator by the same natural isomorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso",
+  "date": "2026-10-14",
+  "group": "XRd4f549ddc0d8d578"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Global Hom adjunction used in finite duality: normalization of the counit-induced evaluation mate, via lem-pc-global-hom-adjunction",
+   "via": [
+    "lem-pc-global-hom-adjunction",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InternalHomMateCounitTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/InternalHomMateCounitTransport.lean",
+  "declaration": "AlgebraicGeometry.internalHomMate_counit_transport",
+  "statement": "theorem internalHomMate_counit_transport\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [MonoidalCategory C] [MonoidalCategory D]\n    (H : Cᵒᵖ × C ⥤ C) (F : D ⥤ C) (R : C ⥤ D) (p : F ⊣ R)\n    (t : tensor D ⋙ F ≅ F.prod F ⋙ tensor C)\n    (ex : ∀ A L M : C, (A ⟶ H.obj (op L, M)) ≃ (A ⊗ L ⟶ M))\n    (hx : ∀ (A A' L M : C) (a : A' ⟶ A) (g : A ⟶ H.obj (op L, M)),\n      ex A' L M (a ≫ g) = (a ⊗ₘ 𝟙 L) ≫ ex A L M g)\n    (δ : F ≅ F) (L M : C) (A : D) (α : A ⟶ R.obj (H.obj (op L, M))) :\n    let p' := p.ofNatIsoLeft δ\n    let t' := Functor.isoWhiskerLeft (tensor D) δ.symm ≪≫ t ≪≫\n      Functor.isoWhiskerRight (NatIso.prod δ δ) (tensor C)\n    p'.homEquiv _ M (t'.hom.app (A, R.obj L) ≫\n      (𝟙 _ ⊗ₘ p'.counit.app L) ≫ ex _ L M ((p'.homEquiv _ _).symm α)) =\n    p.homEquiv _ M (t.hom.app (A, R.obj L) ≫\n      (𝟙 _ ⊗ₘ p.counit.app L) ≫ ex _ L M ((p.homEquiv _ _).symm α))",
+  "branch": "sheaf-dag",
+  "by": "XRd4f549ddc0d8d578",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "XREPAIR-d4f549ddc0d8d578",
+  "group": "XRd4f549ddc0d8d578",
+  "result": "pass",
+  "landing": "20261014T173546-L-2996755",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "XREPAIR-d4f549ddc0d8d578",
+  "group": "XRd4f549ddc0d8d578",
+  "result": "pass",
+  "landing": "20261014T173546-L-2996755",
+  "kind": "interface",
+  "note": "\nREADY: Fixed the consumer’s mate rewrite with one proof-only `change` line. All three affected modules compile individually within 60 seconds. Statements and docstrings preserved; report and change record updated.\nDELIVERED: checks and fix"
+ }
+}

@@ -1,209 +1,218 @@
 {
-  "id": "lem-pc-global-hom-adjunction",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "Tag 0B6I (Lemma 48.1.1): global RHom adjunction for the right adjoint",
-      "via": [
-        "lem-sc-proper-flat-right-adjoint-affine-basechange"
-      ]
-    },
-    "same_as": []
+ "id": "lem-pc-global-hom-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0B6I (Lemma 48.1.1): global RHom adjunction for the right adjoint",
+   "via": [
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
   },
-  "kind": "statement",
-  "title": "Global derived Hom adjunction",
-  "statement": "Let X and Y be quasi-compact and quasi-separated schemes, and let f:X\\to Y be a quasi-compact and quasi-separated morphism [def-pc-scheme]. Let Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y) [def-pc-derived-category, def-pc-derived-direct-image] have its right adjoint a, whose existence is supplied by [lem-pc-qcqs-derived-direct-image-right-adjoint]. For P\\in D_{\\mathrm{QCoh}}(X) and K\\in D_{\\mathrm{QCoh}}(Y), there is a natural isomorphism of global derived Hom complexes $$R\\operatorname{Hom}_X(P,a(K))\\cong R\\operatorname{Hom}_Y(Rf_*P,K)$$ [def-pc-global-derived-rhom].",
-  "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0B6I (Lemma 48.6.3, lemma-iso-global-hom), global Hom adjunction; the earlier place 'Tag 0AA8' was duality-lemma-more-base-change"
-  },
-  "stmt_deps": [
-    "def-pc-derived-category",
-    "def-pc-derived-direct-image",
-    "lem-pc-qcqs-derived-direct-image-right-adjoint",
-    "def-pc-global-derived-rhom"
-  ],
-  "proof": [
-    {
-      "text": "Obtain the natural comparison family tau from exists_canonicalPullbackTensorComparison. Apply canonicalPullbackTensor_monoidal_realization, the proved statement of lem-pc-canonical-pullback-tensor-monoidal-realization, to obtain a core-monoidal structure whose inverse tensorator at every pair is tau. Package tau as a natural transformation using the naturality clause of its canonical predicate. Rewrite each component as that inverse tensorator to prove it is invertible, and package the transformation as NatIso.ofComponents. Its hom components are definitionally tau, so the canonical predicate is unchanged. Reconstruct schemeHomTensorPullbackIso componentwise with the same hom components; Iso.ext identifies it with the original chosen iso. The existing IsCanonicalPullbackTensorComparison.unique fixes this family for the shared counit. This shorter route replaces the private model-map and counit-invertibility helpers and the repeated K-flat resolution argument, without adding holes.",
-      "uses": [
-        "def-pc-derived-pullback-tensor-comparison",
-        "lem-pc-canonical-pullback-tensor-monoidal-realization"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Tag 079U, proof on K-flat representatives; Tags 06YH, 079R and 06YC"
-      }
-    },
-    {
-      "text": "Construct the evaluation-mate comparison by applying the fixed tensor-Hom inverse to the transpose of pullback tensor comparison, identity tensor the pullback counit, and evaluation of the pullback counit at internal Hom. Naturality of the canonical tensor-Hom bijections proves its mate equation on every test map; naturality in both entries follows from naturality of the tensor comparison and the adjunction counit. The generic Lean helpers internalHomMate_exists and tensorAdjunctionCore implement these calculations without new assumptions. Use the canonical pullback tensor isomorphism constructed in the preceding step; no new assumptions are introduced.",
-      "uses": [
-        "def-pc-canonical-derived-tensor-hom-bijection",
-        "def-pc-derived-pullback-tensor-comparison",
-        "def-pc-derived-base-change-map",
-        "def-pc-derived-pullback",
-        "def-pc-scheme-derived-tensor-structure"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Tag 08I3, evaluation-mate comparison; Tag 08DJ, tensor-Hom naturality"
-      }
-    },
-    {
-      "text": "The qcqs hypotheses ensure that the restricted derived direct image preserves D_{\\mathrm{QCoh}} and has right adjoint a, with counit (the sheafy trace) Rf_*a(K)\\to K, by [lem-pc-qcqs-derived-direct-image-right-adjoint]. Use the counit-induced internal-Hom comparison stated in [lem-pc-qcqs-sheaf-rhom-adjunction]; that node records the canonical map and says that after applying the coherator DQ_Y it is an isomorphism. Its construction from the counit is natural in P and K.",
-      "uses": [
-        "lem-pc-qcqs-derived-direct-image-right-adjoint",
-        "lem-pc-qcqs-sheaf-rhom-adjunction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/duality.tex",
-        "place": "Tag 0B6I (Lemma 48.1.1), sheaf-Hom comparison"
-      }
-    },
-    {
-      "text": "Construct the derived Leray comparison from [lem-pc-direct-image-global-sections-kinjective-acyclic]. The underived comparison f_* followed by Γ(Y,-) equals Γ(X,-) followed by restriction of scalars, acting identically on sections. The generic helper lerayCore builds the two right-derived units. The acyclicity theorem makes the composite Rf_* followed by RΓ(Y,-) a right-derived functor; exact scalar restriction makes RΓ(X,-) followed by restriction another right-derived functor of the same underived composite. The universal right-derived comparison is invertible and gives precisely the stated unit equation. Since the map becomes an isomorphism after DQ_Y, [lem-pc-dq-coherator-adjunction] (Y is quasi-compact and quasi-separated) gives a quasi-isomorphism on R\\Gamma(Y,-): in each degree use H^i(Y,E)=Hom(\\mathcal O_Y[-i],DQ_Y E), with \\mathcal O_Y[-i] quasi-coherent. This also gives naturality in P and K. The proved bridge lem-pc-dq-coherator-derived-global-sections transports the existing K-injective detection statement to an arbitrary derived morphism using representative isomorphisms, the fully faithful K-injective model and the right-derived unit. Applying it to the coherated sheaf comparison and composing with the inverse Leray comparison proves invertibility of the actual map. Map the sheaf comparison naturality equation through global sections and use inverse Leray naturality to prove the second clause.",
-      "uses": [
-        "def-pc-global-derived-rhom",
-        "lem-pc-qcqs-sheaf-rhom-adjunction",
-        "lem-pc-dq-coherator-adjunction",
-        "lem-pc-direct-image-global-sections-kinjective-acyclic",
-        "lem-pc-dq-coherator-derived-global-sections"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/duality.tex",
-        "place": "Tag 0B6I (Lemma 48.1.1), global Hom adjunction"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Global derived Hom adjunction",
+ "statement": "Let X and Y be quasi-compact and quasi-separated schemes, and let f:X\\to Y be a quasi-compact and quasi-separated morphism [def-pc-scheme]. Let Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y) [def-pc-derived-category, def-pc-derived-direct-image] have its right adjoint a, whose existence is supplied by [lem-pc-qcqs-derived-direct-image-right-adjoint]. For P\\in D_{\\mathrm{QCoh}}(X) and K\\in D_{\\mathrm{QCoh}}(Y), there is a natural isomorphism of global derived Hom complexes $$R\\operatorname{Hom}_X(P,a(K))\\cong R\\operatorname{Hom}_Y(Rf_*P,K)$$ [def-pc-global-derived-rhom].",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0B6I (Lemma 48.6.3, lemma-iso-global-hom), global Hom adjunction; the earlier place 'Tag 0AA8' was duality-lemma-more-base-change"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "def-pc-global-derived-rhom"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the natural comparison family tau from exists_canonicalPullbackTensorComparison. Apply canonicalPullbackTensor_monoidal_realization, the proved statement of lem-pc-canonical-pullback-tensor-monoidal-realization, to obtain a core-monoidal structure whose inverse tensorator at every pair is tau. Package tau as a natural transformation using the naturality clause of its canonical predicate. Rewrite each component as that inverse tensorator to prove it is invertible, and package the transformation as NatIso.ofComponents. Its hom components are definitionally tau, so the canonical predicate is unchanged. Reconstruct schemeHomTensorPullbackIso componentwise with the same hom components; Iso.ext identifies it with the original chosen iso. The existing IsCanonicalPullbackTensorComparison.unique fixes this family for the shared counit. This shorter route replaces the private model-map and counit-invertibility helpers and the repeated K-flat resolution argument, without adding holes.",
+   "uses": [
     "def-pc-derived-pullback-tensor-comparison",
-    "lem-pc-canonical-pullback-tensor-monoidal-realization",
+    "lem-pc-canonical-pullback-tensor-monoidal-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, proof on K-flat representatives; Tags 06YH, 079R and 06YC"
+   }
+  },
+  {
+   "text": "Construct the evaluation-mate comparison by applying the fixed tensor-Hom inverse to the transpose of pullback tensor comparison, identity tensor the pullback counit, and evaluation of the pullback counit at internal Hom. Naturality of the canonical tensor-Hom bijections proves its mate equation on every test map; naturality in both entries follows from naturality of the tensor comparison and the adjunction counit. The generic Lean helpers internalHomMate_exists and tensorAdjunctionCore implement these calculations without new assumptions. Use the canonical pullback tensor isomorphism constructed in the preceding step; no new assumptions are introduced.",
+   "uses": [
     "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pc-derived-pullback-tensor-comparison",
     "def-pc-derived-base-change-map",
     "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08I3, evaluation-mate comparison; Tag 08DJ, tensor-Hom naturality"
+   }
+  },
+  {
+   "text": "The qcqs hypotheses ensure that the restricted derived direct image preserves D_{\\mathrm{QCoh}} and has right adjoint a, with counit (the sheafy trace) Rf_*a(K)\\to K, by [lem-pc-qcqs-derived-direct-image-right-adjoint]. Use the counit-induced internal-Hom comparison stated in [lem-pc-qcqs-sheaf-rhom-adjunction]; that node records the canonical map and says that after applying the coherator DQ_Y it is an isomorphism. Its construction from the counit is natural in P and K.",
+   "uses": [
     "lem-pc-qcqs-derived-direct-image-right-adjoint",
-    "lem-pc-qcqs-sheaf-rhom-adjunction",
+    "lem-pc-qcqs-sheaf-rhom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0B6I (Lemma 48.1.1), sheaf-Hom comparison"
+   }
+  },
+  {
+   "text": "Construct the derived Leray comparison from [lem-pc-direct-image-global-sections-kinjective-acyclic]. The underived comparison f_* followed by Γ(Y,-) equals Γ(X,-) followed by restriction of scalars, acting identically on sections. The generic helper lerayCore builds the two right-derived units. The acyclicity theorem makes the composite Rf_* followed by RΓ(Y,-) a right-derived functor; exact scalar restriction makes RΓ(X,-) followed by restriction another right-derived functor of the same underived composite. The universal right-derived comparison is invertible and gives precisely the stated unit equation. Since the map becomes an isomorphism after DQ_Y, [lem-pc-dq-coherator-adjunction] (Y is quasi-compact and quasi-separated) gives a quasi-isomorphism on R\\Gamma(Y,-): in each degree use H^i(Y,E)=Hom(\\mathcal O_Y[-i],DQ_Y E), with \\mathcal O_Y[-i] quasi-coherent. This also gives naturality in P and K. The proved bridge lem-pc-dq-coherator-derived-global-sections transports the existing K-injective detection statement to an arbitrary derived morphism using representative isomorphisms, the fully faithful K-injective model and the right-derived unit. Applying it to the coherated sheaf comparison and composing with the inverse Leray comparison proves invertibility of the actual map. Map the sheaf comparison naturality equation through global sections and use inverse Leray naturality to prove the second clause.",
+   "uses": [
     "def-pc-global-derived-rhom",
+    "lem-pc-qcqs-sheaf-rhom-adjunction",
     "lem-pc-dq-coherator-adjunction",
     "lem-pc-direct-image-global-sections-kinjective-acyclic",
     "lem-pc-dq-coherator-derived-global-sections"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0B6I with the explicit evaluation mate calculation of cohomology Tag 08I3; implemented by R3; Leray reduction via global-sections acyclicity implemented and second-read by G3; canonical tensor-isomorphism proof on K-flat pairs and naturality transport implemented by V2, 2026-10-13; Q3 second reading: use the proved monoidal-realization theorem for canonical tensor component invertibility, preserve chosen iso by componentwise reconstruction and Iso.ext, 2026-10-14"
+    "place": "Tag 0B6I (Lemma 48.1.1), global Hom adjunction"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "global derived Hom adjunction right adjoint pushforward RHom",
-      "results": "generic sheaf pushforward right-adjoint instances and derived adjunction declarations; no scheme QCoh RHom theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Adjunction derived RHom pushforward",
-      "results": "generic derived adjunction only",
-      "date": "2026-10-11",
-      "verdict": "generalization: generic adjunction, not this QCoh scheme statement"
-    },
-    {
-      "tool": "grep",
-      "query": "RHom.*right.adjoint|derived.*Hom.*pushforward Mathlib/AlgebraicGeometry",
-      "results": "none",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-sc-proper-flat-right-adjoint-affine-basechange",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-global-hom-adjunction",
-    "worker": "stage1",
-    "summary": "Repair R-gha2726: replaced the false uncohered sheaf-Hom isomorphism by the Tag 0A9Q comparison after DQ_Y, added the coherator adjunction/detection node, named the counit trace, and supplied the Leray and global-sections argument from Tag 0B6I.",
-    "blueprint": "The two steps realize Tag 0B6I (Lemma 48.1.1): first construct the counit-induced sheaf trace comparison and apply DQ_Y, then use the derived Leray identity and DQ_Y detection to obtain global RHom.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-gha2932",
-    "group": "C1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gha2932 (reviewer sub-agent of L); spot-checked: R-gha2856 points: (1) lem-pc-dq-coherator-adjunction now has Y qcqs, matching perfect.tex lemma-better-coherator; (2) item and lem-pc-qcqs-sheaf-rhom-adjunction now state X, Y qcqs and f qcqs as 0B6I/0A9Q and the right-adjoint node, change named with reason in report (E7); citers lem-sc-flat-precompose-pus (qcqs square) and lem-sc-proper-flat-right-adjoint-affine-basechange (f proper over affine Y, so X qcqs) still match, def-sc-duality-equation-base-change-map does not cite the item (C4); (3) Leray now cited. Both Second reading edits present at head (Step 1 rewritten to cite stated counit comparison; child nodes and Tag 0B6I proof_origin). FIX more, RETURN less: C4 in Step 2: lem-pc-derived-direct-image-composition (schemes, via Spec Z) does not reach RGamma = Rp_* to the one-point ringed space of def-pc-global-derived-rhom; replaced by lem-pc-ringed-spaces-derived-direct-image-composition (same unit) applied to p_Y o f = r o p_X with r_* exact restriction of scalars, in Step 2 uses and proof_deps; dropped the now unneeded cross-unit tool_use.; 1 file(s) fixed by the reviewer"
-  },
-  "lead_notes": [
-    "2026-10-10 22:49 UTC L: source place corrected from Tag 0AA8 (lemma-more-base-change) to Tag 0B6I (lemma-iso-global-hom) per literature/stacks-project/tags, on reviewer R-gha2932's note."
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso",
-    "declaration": "AlgebraicGeometry.schemeGlobalHomAdjunctionMap_isIso",
-    "file": "lean/Sheaf/AlgebraicGeometry/GlobalHomAdjunctionIso.lean",
-    "statement": "theorem schemeGlobalHomAdjunctionMap_isIso {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (f : X ⟶ Y) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst E.obj E.property) ⊣ a) : (∀ (P : schemeDerivedQCohCategory X) (K : schemeDerivedQCohCategory Y), IsIso (schemeGlobalHomAdjunctionMap f a adj P K)) ∧ (∀ (P P' : schemeDerivedQCohCategory X) (K K' : schemeDerivedQCohCategory Y) (s : P' ⟶ P) (t : K ⟶ K'), (schemeGlobalScalarRestriction f).map ((schemeGlobalDerivedHom X).map (s.hom.op, (a.map t).hom)) ≫ schemeGlobalHomAdjunctionMap f a adj P' K' = schemeGlobalHomAdjunctionMap f a adj P K ≫ (schemeGlobalDerivedHom Y).map (((schemeDerivedDirectImage f).map s.hom).op, t.hom))",
-    "branch": "sheaf-dag",
-    "by": "V1",
-    "date": "2026-10-12",
-    "existing": false,
-    "note": "The former Nonempty natural iso supplies no canonical component map, and the first worker replaced it with data assuming the iso. This module constructs the evaluation-mate comparison and counit-induced global Hom map, proves its invertibility and naturality as the dependency states, and defines its iso using that proof. Derived Leray and pullback tensor helpers specify its construction; no arbitrary iso is an input. Morphism qcqs properties are derivable from the two qcqs schemes, as in the recorded right-adjoint definition.",
-    "declarations": [
-      "AlgebraicGeometry.schemeGlobalScalarRestriction",
-      "AlgebraicGeometry.exists_schemeGlobalSectionsDirectImageIso",
-      "AlgebraicGeometry.schemeGlobalSectionsDirectImageIso",
-      "AlgebraicGeometry.schemeHomPullbackAdjunction",
-      "AlgebraicGeometry.exists_schemeHomTensorPullbackIso",
-      "AlgebraicGeometry.schemeHomTensorPullbackIso",
-      "AlgebraicGeometry.exists_schemeHomDirectImageComparison",
-      "AlgebraicGeometry.schemeGlobalHomDirectImageMap",
-      "AlgebraicGeometry.schemeGlobalHomAdjunctionMap",
-      "AlgebraicGeometry.schemeGlobalHomAdjunctionMap_isIso",
-      "AlgebraicGeometry.schemeGlobalHomAdjunctionIso"
-    ]
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "X-b2c81",
-    "group": "V1",
-    "result": "pass",
-    "note": "independent Codex review: Matched the item’s hypotheses, objects, c-map, and both explicit A-linear composite factors to the node; verified the pinned tensor–Hom family replaces prior arbitrary choices and all four modules compile together cleanly."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "AUTO",
-    "group": "P2",
-    "result": "pass",
-    "landing": "20261014T050530-L-1686441",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-    "sorry_before": [],
-    "sorry_after": []
+  {
+   "text": "For any natural automorphism delta of the fixed derived pullback, simultaneously transport the shared adjunction by Adjunction.ofNatIsoLeft delta and conjugate the tensor iso by delta inverse on the input and delta tensor delta on its outputs. The test-object naturality of the fixed tensor-Hom equivalence follows from its full naturality with identity maps in the last two entries. Apply lem-pc-internal-hom-mate-counit-transport and the existing evaluation-mate specification: the SAME chosen direct-image comparison satisfies the transported mate equation. This proves compatibility needed for original-counit normalization without changing the legacy base-change normalization. The transported adjunction also satisfies the underived representative Hom equation for any new counit epsilon with delta(Qh N) composed with epsilon(N) equal to the composition counit: expand homEquiv_ofNatIsoLeft_apply, replace the counit composite using that equation, and apply the original chosen adjunction specification. This gives a normalized adjunction directly by transport, without another existential choice.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-pc-internal-hom-mate-counit-transport"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-canonical-pullback-tensor-monoidal-realization",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-pc-qcqs-sheaf-rhom-adjunction",
+  "def-pc-global-derived-rhom",
+  "lem-pc-dq-coherator-adjunction",
+  "lem-pc-direct-image-global-sections-kinjective-acyclic",
+  "lem-pc-dq-coherator-derived-global-sections",
+  "lem-pc-internal-hom-mate-counit-transport"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0B6I with the explicit evaluation mate calculation of cohomology Tag 08I3; implemented by R3; Leray reduction via global-sections acyclicity implemented and second-read by G3; canonical tensor-isomorphism proof on K-flat pairs and naturality transport implemented by V2, 2026-10-13; Q3 second reading: use the proved monoidal-realization theorem for canonical tensor component invertibility, preserve chosen iso by componentwise reconstruction and Iso.ext, 2026-10-14; R2: evaluation-mate invariance and representative adjunction normalization under simultaneous counit transport, 2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "global derived Hom adjunction right adjoint pushforward RHom",
+   "results": "generic sheaf pushforward right-adjoint instances and derived adjunction declarations; no scheme QCoh RHom theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction derived RHom pushforward",
+   "results": "generic derived adjunction only",
+   "date": "2026-10-11",
+   "verdict": "generalization: generic adjunction, not this QCoh scheme statement"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom.*right.adjoint|derived.*Hom.*pushforward Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-proper-flat-right-adjoint-affine-basechange",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-global-hom-adjunction",
+  "worker": "stage1",
+  "summary": "Repair R-gha2726: replaced the false uncohered sheaf-Hom isomorphism by the Tag 0A9Q comparison after DQ_Y, added the coherator adjunction/detection node, named the counit trace, and supplied the Leray and global-sections argument from Tag 0B6I.",
+  "blueprint": "The two steps realize Tag 0B6I (Lemma 48.1.1): first construct the counit-induced sheaf trace comparison and apply DQ_Y, then use the derived Leray identity and DQ_Y detection to obtain global RHom.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gha2932",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gha2932 (reviewer sub-agent of L); spot-checked: R-gha2856 points: (1) lem-pc-dq-coherator-adjunction now has Y qcqs, matching perfect.tex lemma-better-coherator; (2) item and lem-pc-qcqs-sheaf-rhom-adjunction now state X, Y qcqs and f qcqs as 0B6I/0A9Q and the right-adjoint node, change named with reason in report (E7); citers lem-sc-flat-precompose-pus (qcqs square) and lem-sc-proper-flat-right-adjoint-affine-basechange (f proper over affine Y, so X qcqs) still match, def-sc-duality-equation-base-change-map does not cite the item (C4); (3) Leray now cited. Both Second reading edits present at head (Step 1 rewritten to cite stated counit comparison; child nodes and Tag 0B6I proof_origin). FIX more, RETURN less: C4 in Step 2: lem-pc-derived-direct-image-composition (schemes, via Spec Z) does not reach RGamma = Rp_* to the one-point ringed space of def-pc-global-derived-rhom; replaced by lem-pc-ringed-spaces-derived-direct-image-composition (same unit) applied to p_Y o f = r o p_X with r_* exact restriction of scalars, in Step 2 uses and proof_deps; dropped the now unneeded cross-unit tool_use.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_notes": [
+  "2026-10-10 22:49 UTC L: source place corrected from Tag 0AA8 (lemma-more-base-change) to Tag 0B6I (lemma-iso-global-hom) per literature/stacks-project/tags, on reviewer R-gha2932's note."
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso",
+  "declaration": "AlgebraicGeometry.schemeGlobalHomAdjunctionMap_isIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalHomAdjunctionIso.lean",
+  "statement": "theorem schemeGlobalHomAdjunctionMap_isIso {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (f : X ⟶ Y) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst E.obj E.property) ⊣ a) : (∀ (P : schemeDerivedQCohCategory X) (K : schemeDerivedQCohCategory Y), IsIso (schemeGlobalHomAdjunctionMap f a adj P K)) ∧ (∀ (P P' : schemeDerivedQCohCategory X) (K K' : schemeDerivedQCohCategory Y) (s : P' ⟶ P) (t : K ⟶ K'), (schemeGlobalScalarRestriction f).map ((schemeGlobalDerivedHom X).map (s.hom.op, (a.map t).hom)) ≫ schemeGlobalHomAdjunctionMap f a adj P' K' = schemeGlobalHomAdjunctionMap f a adj P K ≫ (schemeGlobalDerivedHom Y).map (((schemeDerivedDirectImage f).map s.hom).op, t.hom))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "The former Nonempty natural iso supplies no canonical component map, and the first worker replaced it with data assuming the iso. This module constructs the evaluation-mate comparison and counit-induced global Hom map, proves its invertibility and naturality as the dependency states, and defines its iso using that proof. Derived Leray and pullback tensor helpers specify its construction; no arbitrary iso is an input. Morphism qcqs properties are derivable from the two qcqs schemes, as in the recorded right-adjoint definition.",
+  "declarations": [
+   "AlgebraicGeometry.schemeGlobalScalarRestriction",
+   "AlgebraicGeometry.exists_schemeGlobalSectionsDirectImageIso",
+   "AlgebraicGeometry.schemeGlobalSectionsDirectImageIso",
+   "AlgebraicGeometry.schemeHomPullbackAdjunction",
+   "AlgebraicGeometry.exists_schemeHomTensorPullbackIso",
+   "AlgebraicGeometry.schemeHomTensorPullbackIso",
+   "AlgebraicGeometry.exists_schemeHomDirectImageComparison",
+   "AlgebraicGeometry.schemeGlobalHomDirectImageMap",
+   "AlgebraicGeometry.schemeGlobalHomAdjunctionMap",
+   "AlgebraicGeometry.schemeGlobalHomAdjunctionMap_isIso",
+   "AlgebraicGeometry.schemeGlobalHomAdjunctionIso",
+   "AlgebraicGeometry.schemeHomDirectImageComparison_counit_transport",
+   "AlgebraicGeometry.schemeHomPullbackAdjunction_counit_transport"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-b2c81",
+  "group": "V1",
+  "result": "pass",
+  "note": "independent Codex review: Matched the item’s hypotheses, objects, c-map, and both explicit A-linear composite factors to the node; verified the pinned tensor–Hom family replaces prior arbitrary choices and all four modules compile together cleanly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "XREPAIR-d4f549ddc0d8d578",
+  "group": "XRd4f549ddc0d8d578",
+  "result": "pass",
+  "landing": "20261014T173546-L-2996755",
+  "kind": "interface",
+  "note": "\nREADY: Fixed the consumer’s mate rewrite with one proof-only `change` line. All three affected modules compile individually within 60 seconds. Statements and docstrings preserved; report and change record updated.\nDELIVERED: checks and fix"
+ }
 }
