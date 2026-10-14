@@ -18,7 +18,8 @@ Source: Stacks Project, Derived Categories, Tag 06XU; Cohomology on Sites, Tag 0
 
 This implementation follows the explicit generator lifting construction.
 The witness conclusion contains the vanishing equation directly; it has no
-vacuous existential proof witness or ``True`` padding.
+vacuous existential proof witness or ``True`` padding. The conclusion was
+corrected in response to upstream review #1428.
 -/
 
 @[expose] public section
