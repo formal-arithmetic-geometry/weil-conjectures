@@ -14327,3 +14327,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:43 L: returned deliver/S3/Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap (reviewer RETURN: (reviewer X-503ae, head 503ae87e1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Du)
 - 02:43 L: returned deliver/D2/Sheaf.Algebra.Homology.TensorBicomplex (reviewer RETURN: (reviewer X-ae6f7, head ae6f73591) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Ten)
 - 02:44 L: returned deliver/N1/Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation (reviewer RETURN: (reviewer X-31297, head 31297db4d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Sq)
+- 02:45 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (reviewer RETURN: (reviewer X-ac9bc, head ac9bce15d) F (brief points 5 and 7): In coord/reports/Y3/Sheaf.AlgebraicGeometry.Curve.PicProper)
