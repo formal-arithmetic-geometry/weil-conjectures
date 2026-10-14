@@ -20,11 +20,21 @@
  },
  "proof": [
   {
-   "text": "Put P = F_h(I), beta = F.rightDerivedFunctorUnit(I), and let v be the homotopy tensor adjunction counit at I. Apply the pinned derived Hom-equivalence compatibility to the homotopy morphism v. The homotopy adjunction sends v to the identity of P, so its localized image followed by beta is beta itself. Injectivity of the derived Hom equivalence, whose inverse sends beta to Lf(beta) followed by the derived counit, gives Lf(beta) followed by a_f.counit = epsilon_f(P) followed by Qh(v). Let S be the composite natural isomorphism formed by the five displayed factors. Its naturality at beta moves Lf0(rY(beta)) from before S to rX(Lf(beta)) after S. First distribute Lf0 over the composite with the inverse source factorization. Then substitute this naturality equation, combine the two successive rX images, apply the normalized counit identity, and distribute rX over its two factors. Associativity gives exactly the displayed intermediate composite. This uses no tensor comparison cancellation, no boundedness, and no inverse of beta; hence it also applies to empty opens and the zero complex.",
+   "text": "Apply the compatibility property of the exact adjunction family named by singleComplexOpenPinnedAdjunction to the homotopy tensor adjunction counit at I. Its homEquiv image is the identity on the direct-image homotopy complex P. Applying the inverse derived Hom equivalence gives Lf.map(beta) followed by the derived adjunction counit equal to epsilon_f(P) followed by Qh of the homotopy counit.",
    "uses": [
     "def-pc-t2-open-pinned-adjunction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Construct the natural isomorphism S from the five existing functor comparisons: whisker the inverse open-pullback comparison on Y by Lf0, compose with c(f0,V.iota), transport by congrArg derivedPullback along morphismRestrict_iota, compose with inverse c(U.iota,f), and whisker the open-pullback comparison on X by Lf. Its naturality at beta moves Lf0(rY(beta)) to rX(Lf(beta)) after S.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Distribute Lf0 over the composite with the inverse source factorization, apply S naturality, combine the consecutive rX images, substitute the normalized counit identity, and distribute rX over its two factors. A private proved categorical helper performs exactly these map_comp and associativity rewrites; expanding S and eqToHom_app yields the displayed statement. No tensor restriction comparison or its compatibility is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -33,7 +43,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
-  "place": "Stage-3 decomposition of the existing factorization argument."
+  "place": "R3 Lean proof of the pinned adjunction normalization and naturality calculation, 2026-10-14."
  },
  "mathlib_searches": [
   {
@@ -112,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-0a5e1",
-  "group": "M3",
+  "reviewer": "X-71fee",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261014T054053-L-2107491",
+  "landing": "20261014T063822-L-2815434",
   "kind": "interface",
-  "note": "independent Codex review: Matched all three Lean signatures with their node records, the transitivity proof with its dependencies, and both split arguments with the pinned compatibility declarations; all delivered modules compile cleanly and axiom checks pass."
+  "note": "independent Codex review: Matched the unchanged Lean signature to its node and base version, and the proof to pinned adjunction compatibility and naturality; delivered module and sole direct importer SingleComplexOpenPullbackCounitHomotopyFactorization compile cleanly against the delivery; both proved declarations use only standard axioms."
  }
 }
