@@ -5,7 +5,6 @@ Authors: SHEAF group T1
 -/
 module
 
-import Sheaf.Paper.CechComparisonMapNaturality
 public import Sheaf.Paper.CechRefinementCochainMap
 public import Sheaf.Paper.CechCupProduct
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
@@ -13,6 +12,8 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.Paper.CechRefinementComparisonSquare
 import Sheaf.Paper.CechCupResolutionRepresentatives
+import Sheaf.Paper.ModuleCupCoefficientResolutionMaps
+import Sheaf.Paper.ModuleCupPullbackResolutionMaps
 
 /-! # Cech cup products and pullback
 
@@ -220,6 +221,62 @@ private def cup_cycle {X : Scheme.{v}} {ι : Type v} (U : ι → X.Opens)
   rw [(ComplexShape.up ℕ).next_eq' (show p + q + 1 = p + q + 1 from rfl)]
   exact hz
 
+private theorem resolution_class_surjective {X : Scheme.{v}} {F : X.Modules}
+    (D : CupAcyclicResolution F) (n : ℕ) : Function.Surjective (D.class n) := by
+  let : EnoughInjectives X.Modules :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  let := RingedSpace.globalSectionsFunctor_additive X.toRingedSpace
+  let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+    (ComplexShape.up ℕ)
+  have : IsIso (HomologicalComplex.homologyMap (T.map D.comparison) n) := D.computes n
+  exact ((ModuleCat.epi_iff_surjective
+    (D.I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) n).inv).mp
+      inferInstance).comp
+    (((ModuleCat.epi_iff_surjective
+      (HomologicalComplex.homologyMap (T.map D.comparison) n)).mp inferInstance).comp
+        (cycle_class_surjective (T.obj D.K) n))
+
+private theorem resolution_pair_cycle {X : Scheme.{v}} {F G : X.Modules}
+    (D : CupResolutionPairing F G) (p q : ℕ)
+    (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)
+    (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K) :
+    ∃ c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K,
+      c.val = D.pair p q ⊤ a.val b.val := by
+  have ha := a.property
+  have hb := b.property
+  change (D.left.K.d p ((ComplexShape.up ℕ).next p)).val.app (op ⊤) a.val = 0 at ha
+  change (D.right.K.d q ((ComplexShape.up ℕ).next q)).val.app (op ⊤) b.val = 0 at hb
+  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
+    (ComplexShape.up ℕ).Rel p (p + 1))] at ha
+  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
+    (ComplexShape.up ℕ).Rel q (q + 1))] at hb
+  refine ⟨⟨D.pair p q ⊤ a.val b.val, ?_⟩, rfl⟩
+  change (D.target.K.d (p + q) ((ComplexShape.up ℕ).next (p + q))).val.app (op ⊤)
+    (D.pair p q ⊤ a.val b.val) = 0
+  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
+    (ComplexShape.up ℕ).Rel (p + q) (p + q + 1))]
+  rw [D.leibniz, ha, hb]
+  simp
+
+private def map_add_cycle {R S : Type v} [Ring R] [Ring S]
+    (K : CochainComplex (ModuleCat.{v} R) ℕ)
+    (L : CochainComplex (ModuleCat.{v} S) ℕ)
+    (φ : ((forget₂ (ModuleCat.{v} R) AddCommGrpCat.{v}).mapHomologicalComplex
+        (ComplexShape.up ℕ)).obj K ⟶
+      ((forget₂ (ModuleCat.{v} S) AddCommGrpCat.{v}).mapHomologicalComplex
+        (ComplexShape.up ℕ)).obj L)
+    (n : ℕ) (a : (K.sc n).moduleCatLeftHomologyData.K) :
+    (L.sc n).moduleCatLeftHomologyData.K := by
+  refine ⟨φ.f n a.val, ?_⟩
+  have h := ConcreteCategory.congr_hom (φ.comm n ((ComplexShape.up ℕ).next n)) a.val
+  change L.d n ((ComplexShape.up ℕ).next n) (φ.f n a.val) =
+    φ.f ((ComplexShape.up ℕ).next n) (K.d n ((ComplexShape.up ℕ).next n) a.val) at h
+  rw [cycle_val_d K n ((ComplexShape.up ℕ).next n) a, map_zero] at h
+  exact h
+
 /-- Refinement pullback and the signed Cech cup product commute with the canonical
 Cech-to-module-cohomology comparisons. If these comparisons are isomorphisms, the
 products identify through them. Coefficient and pullback naturality are stated below.
@@ -336,8 +393,27 @@ theorem moduleCup_coefficient_naturality (X : Scheme.{v})
         (@id (F ⊗ G ⟶ F₁ ⊗ G₁) (φ ⊗ₘ ψ)) (cup a b) =
       cup₁ ((RingedSpace.moduleCohomology X.toRingedSpace p).map φ a)
         ((RingedSpace.moduleCohomology X.toRingedSpace q).map ψ b) := by
-  sorry
+  obtain ⟨D, E, l, r, t, hl, hr, ht, hpair⟩ :=
+    moduleCup_coefficient_resolution_maps X F G F₁ G₁ φ ψ
+  intro x y
+  obtain ⟨a, rfl⟩ := resolution_class_surjective D.left p x
+  obtain ⟨b, rfl⟩ := resolution_class_surjective D.right q y
+  obtain ⟨c, hcval⟩ := resolution_pair_cycle D p q a b
+  let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+    (ComplexShape.up ℕ)
+  let a' := map_cycle (T.map l) p a
+  let b' := map_cycle (T.map r) q b
+  let c' := map_cycle (T.map t) (p + q) c
+  have ha' : a'.val = (l.f p).val.app (op ⊤) a.val := map_cycle_val _ _ _
+  have hb' : b'.val = (r.f q).val.app (op ⊤) b.val := map_cycle_val _ _ _
+  have hc' : c'.val = (t.f (p + q)).val.app (op ⊤) c.val := map_cycle_val _ _ _
+  rw [hc D a b c hcval, ← ht (p + q) c c' hc',
+    ← hl p a a' ha', ← hr q b b' hb']
+  apply (hc₁ E a' b' c' ?_).symm
+  rw [hc', hcval, hpair, ha', hb']
 
+set_option maxHeartbeats 800000 in
+-- Transporting three cycles between different scalar rings requires extra elaboration.
 /-- Pullback carries the sheaf cup product to the product of pulled-back classes,
 using the canonical tensor-pullback comparison on the coefficient sheaves.
 Source: Stacks Project, Tags 01FD, 07MB and 0FKV
@@ -367,7 +443,26 @@ theorem moduleCup_pullback_naturality (X X' : Scheme.{v}) (f : X' ⟶ X)
         ((Classical.choose (module_pullback_tensor f)) F G).hom
         (moduleCohomologyPullback f (@id X.Modules (F ⊗ G)) (p + q) (cup a b)) =
       cup' (moduleCohomologyPullback f F p a) (moduleCohomologyPullback f G q b) := by
-  sorry
+  obtain ⟨D, E, l, r, t, hl, hr, ht, hpair⟩ :=
+    moduleCup_pullback_resolution_maps X X' f F G
+  intro x y
+  obtain ⟨a, rfl⟩ := resolution_class_surjective D.left p x
+  obtain ⟨b, rfl⟩ := resolution_class_surjective D.right q y
+  obtain ⟨c, hcval⟩ := resolution_pair_cycle D p q a b
+  let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+    (ComplexShape.up ℕ)
+  let T' := (RingedSpace.globalSectionsFunctor X'.toRingedSpace).mapHomologicalComplex
+    (ComplexShape.up ℕ)
+  let a' := map_add_cycle (T.obj D.left.K) (T'.obj E.left.K) l p a
+  let b' := map_add_cycle (T.obj D.right.K) (T'.obj E.right.K) r q b
+  let c' := map_add_cycle (T.obj D.target.K) (T'.obj E.target.K) t (p + q) c
+  have ha' : a'.val = l.f p a.val := rfl
+  have hb' : b'.val = r.f q b.val := rfl
+  have hcv : c'.val = t.f (p + q) c.val := rfl
+  rw [hc D a b c hcval, ← ht (p + q) c c' hcv,
+    ← hl p a a' ha', ← hr q b b' hb']
+  apply (hc' E a' b' c' ?_).symm
+  rw [show c'.val = t.f (p + q) c.val from rfl, hcval, hpair, ha', hb']
 
 /-- Refinement of Cech cochains is natural in the coefficient module.
 Source: Stacks Project, Tag 01FD
@@ -628,13 +723,8 @@ theorem cechRefinement_composition_naturality
     exact congrArg (C.presheaf.map k.op) hs.symm
   refine ⟨hcochain, ?_, (moduleCohomologyPullback_comp f₁ f F
     ((tensorSectionsComp f₁ f).hom.app F) hunit p).symm⟩
-  obtain ⟨c₀, hc₀⟩ := ((cechComparisonMapNaturality X U hU).2 0).1 F
-  obtain ⟨c₂, hc₂⟩ := ((cechComparisonMapNaturality X U hU).2 (p + 0)).1 (F ⊗ F)
-  obtain ⟨cup, hcup, _⟩ := exists_unique_cechCupProduct U F F p 0
-  obtain ⟨sheafCup, hsheafCup, _⟩ := exists_unique_moduleCupProduct F F p 0
-  have hcomparison := (cechCupPullbackCompat X X'' (f₁ ≫ f) U hU U'' hU''
-    (refine ∘ refine₁) hrefineComp F F p 0 c hc cComp hcComp gammaComp hgammaComp
-    c₀ hc₀ c₂ hc₂ cup hcup sheafCup hsheafCup).1
+  have hcomparison := cechRefinement_comparison_square X X'' (f₁ ≫ f) U hU U'' hU''
+    (refine ∘ refine₁) hrefineComp F p c hc cComp hcComp gammaComp hgammaComp
   set_option backward.isDefEq.respectTransparency false in
     let τ := (cechComplexFunctor U'').map
       ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
