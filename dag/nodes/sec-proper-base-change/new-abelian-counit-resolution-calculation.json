@@ -16,42 +16,32 @@
  ],
  "proof": [
   {
-   "text": "Forget the module resolution J. Its augmentation is a quasi-isomorphism, and its terms are section-acyclic. The source Ext comparison is therefore the concrete abelianResolutionIso. Inverse image is exact, so its applied augmentation is also a quasi-isomorphism. Use the explicit descOfQuasiIso lift of the coefficient counit to the fixed abelian injective resolution R.",
+   "text": "The chosen counit lift satisfies its augmentation square by descOfQuasiIso_commutes. The sections isomorphism has the prescribed top-open components by construction. Apply the cocycle calculation to the source module resolution J and the standard abelian injective target.",
    "uses": [
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "new-module-cohomology-ext-resolution-normalization",
+    "new-abelian-counit-cocycle-calculation",
     "def-pc-flat-cohomology-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Compute Ext as cocycles in Hom from the constant integer sheaf. Exact inverse image and postcomposition with the lift compute the two Ext operations. Evaluation on the free integer generator identifies Hom with sections. The adjunction identifies the resulting map with sections of counitResolutionAdjoint, followed by restriction along f-inverse(Y)=X. The constant-source identification is constIso(f).symm. These identifications commute with differentials and boundaries. Taking homology gives the equation, including degree zero.",
+   "text": "The forgotten resolution map satisfies its augmentation square by descOfQuasiIso_commutes. Apply the target-resolution comparison evaluation to I and the standard abelian resolution. Compose the two pointwise equalities, reversing the second.",
    "uses": [
-    "new-module-cohomology-ext-resolution-normalization",
-    "def-pc-flat-cohomology-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The target acyclic-resolution comparison is the standard abelian-resolution comparison followed by the inverse homology map of r. The section map of r is a quasi-isomorphism by the section-acyclicity of its source and target terms. Compose the comparison with this map on homology: inverse followed by hom cancels. This gives exactly the displayed expression on the supplied resolution I.",
-   "uses": [
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "new-module-cohomology-ext-resolution-normalization",
-    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+    "new-abelian-resolution-comparison-evaluation",
+    "new-module-cohomology-ext-resolution-normalization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-flat-cohomology-comparison",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
-  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "new-abelian-counit-cocycle-calculation",
+  "new-abelian-resolution-comparison-evaluation",
   "new-module-cohomology-ext-resolution-normalization"
  ],
  "proof_origin": {
-  "by": "U2 worker",
+  "by": "G2 stage-3 worker",
   "document": "https://stacks.math.columbia.edu/tag/01F7",
-  "place": "Lemma 01F8 and equation 01F9, functoriality via the adjoint coefficient map; Tag 06XR, injective-resolution computation; Tag 03FD, forgotten module injectives are acyclic."
+  "place": "Adjoint cocycle calculation, followed by target acyclic-resolution comparison; augmentation squares proved using descOfQuasiIso_commutes."
  },
  "mathlib_searches": [
   {
@@ -143,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U2",
+  "reviewer": "X-ce57b",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261014T040543-L-1001509",
+  "landing": "20261014T085851-L-233567",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures, definitions and proof with the nodes, change record, sources and report; compiled all three delivered modules and all three direct importers; checked axioms."
  }
 }

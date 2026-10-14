@@ -1,0 +1,204 @@
+{
+ "id": "new-abelian-counit-cocycle-calculation",
+ "kind": "statement",
+ "title": "Cocycle calculation with an abelian injective target",
+ "statement": "For schemes X and Y and a morphism f:X → Y [def-pc-scheme], module sheaves A on Y and F on X [def-weil-sheaf-of-modules-category], a module injective resolution J of A [def-sp-injective-resolutions], an abelian injective resolution R of the underlying sheaf of F [def-sp-injective-resolutions], and an augmentation-compatible lift L of a coefficient map c from f⁻¹A to F, the adjoint of L on global sections computes inverse image on Ext followed by c [def-pc-flat-cohomology-comparison] under abelianResolutionIso(Y,J) [new-module-cohomology-ext-resolution-normalization] and abelianInjectiveResolutionIso(X,F,R). The sections identification is prescribed by top-open restriction. There is no target module resolution I or comparison map from I.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "Tag 01F8 (lemma-functorial-derived) and equation 01F9 (equation-functorial-derived); Tag 06XR (lemma-ext-compute) for Ext computed with an injective resolution; Tag 03FD for the source acyclic resolution."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-pc-flat-cohomology-comparison",
+  "new-module-cohomology-ext-resolution-normalization"
+ ],
+ "proof": [
+  {
+   "text": "The forgotten module resolution J is a resolution by section-acyclic abelian sheaves. Write K for its underlying abelian cochain complex. Its canonical comparison computes Ext from the constant integer sheaf by the section cocycles of K. Exact inverse image followed by the augmentation-compatible L computes the coefficient map after inverse image on Ext.",
+   "uses": [
+    "new-module-cohomology-ext-resolution-normalization",
+    "def-pc-flat-cohomology-comparison",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-sc-injective-module-abelian-acyclic-zariski"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposition on the constant source is constIso(f).symm. Evaluation on the free integer generator identifies Hom cocycles with sections. The abelian adjunction identifies the inverse-image cocycle followed by L with its adjoint, the unit followed by f_*L. The component equation for s gives the top-open restriction. These additive chain maps preserve boundaries. Passing to homology gives the stated equation. Naturality of the identity comparison lift identifies the target canonical acyclic comparison for the injective augmentation with the usual injective computation. There is no target module resolution or change to one in this step.",
+   "uses": [
+    "new-module-cohomology-ext-resolution-normalization",
+    "def-pc-flat-cohomology-comparison",
+    "lem-sc-acyclic-comparison-natural"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-sc-acyclic-comparison-natural",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lemma-weil-pbc-leray-acyclicity",
+  "new-module-cohomology-ext-resolution-normalization"
+ ],
+ "proof_origin": {
+  "by": "G2 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "Tag 01F8 (lemma-functorial-derived) and equation 01F9 (equation-functorial-derived); Tag 06XR (lemma-ext-compute) for Ext computed with an injective resolution; Tag 03FD for the source acyclic resolution."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image followed by the coefficient counit on sheaf cohomology is computed on injective resolutions by the adjoint section map",
+   "results": "8 hits. CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CochainComplex.isKInjective_of_injective_aux, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the inverse-image/counit cocycle identity; the resolution comparison lemmas are useful for the separate target normalization step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoRightDerivedObj_hom_naturality\"",
+   "results": "2 hits. CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the inverse-image/counit cocycle identity; the resolution comparison lemmas are useful for the separate target normalization step."
+  },
+  {
+   "tool": "grep",
+   "query": "descOfQuasiIso|rightDerivedObjIsoOfResolution",
+   "results": "0 hits. ",
+   "date": "2026-10-14",
+   "verdict": "No exact match for the inverse-image/counit cocycle identity; the resolution comparison lemmas are useful for the separate target normalization step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext cohomology of sheaves computed by global sections of an injective resolution is natural for inverse image and an adjoint coefficient morphism",
+   "results": "Service unavailable: Internal Server Error; no conclusion.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology comparison from acyclic complex to an injective resolution commutes with augmentation compatible morphisms",
+   "results": "Available: 8 hits; CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.desc_commutes_assoc, CategoryTheory.InjectiveResolution.desc_commutes, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom', CategoryTheory.InjectiveResolution.descFOne_zero_comm, CategoryTheory.InjectiveResolution.Hom.ι_comp_hom_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality",
+   "date": "2026-10-14",
+   "verdict": "Second reading: no exact duplicate. acyclicComparison_naturality in the project supplies the categorical target comparison; cross-site cocycle compatibility is not supplied by these hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedObjIsoOfResolution\"",
+   "results": "Available: 0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "Second reading: no exact duplicate. acyclicComparison_naturality in the project supplies the categorical target comparison; cross-site cocycle compatibility is not supplied by these hits."
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|cocycle|resolution|naturality",
+   "results": "Available: 25 hits; Mathlib/Logic/Function/FiberPartition.lean, Mathlib/NumberTheory/ModularForms/SlashActions.lean, Mathlib/Data/Vector/Basic.lean, Mathlib/Data/Vector/Basic.lean, Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Transform.lean, Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Transform.lean, Mathlib/Data/Rat/Defs.lean, Mathlib/Data/Tree/Traversable.lean",
+   "date": "2026-10-14",
+   "verdict": "Second reading: no exact duplicate. acyclicComparison_naturality in the project supplies the categorical target comparison; cross-site cocycle compatibility is not supplied by these hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback sheaf cohomology map equals derived global sections map induced by adjunction unit",
+   "results": "Available: 8 hits; SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, TopCat.Sheaf.pullbackIso",
+   "date": "2026-10-14",
+   "verdict": "Second reading: no exact duplicate. acyclicComparison_naturality in the project supplies the categorical target comparison; cross-site cocycle compatibility is not supplied by these hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ΓHomEquiv_naturality\"",
+   "results": "Available: 4 hits; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm",
+   "date": "2026-10-14",
+   "verdict": "Second reading: no exact duplicate. acyclicComparison_naturality in the project supplies the categorical target comparison; cross-site cocycle compatibility is not supplied by these hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap\", \"iso\"",
+   "results": "Available: 12 hits; CategoryTheory.ShortComplex.leftHomologyMapIso, CategoryTheory.ShortComplex.leftHomologyMapIso', CategoryTheory.ShortComplex.isIso_leftHomologyMap'_of_isIso, CategoryTheory.ShortComplex.isIso_leftHomologyMap_of_iso, CategoryTheory.ShortComplex.leftHomologyMapIso'_hom, CategoryTheory.ShortComplex.leftHomologyMapIso'_inv, CategoryTheory.ShortComplex.leftHomologyMapIso_hom, CategoryTheory.ShortComplex.leftHomologyMapIso_inv",
+   "date": "2026-10-14",
+   "verdict": "Current independent reading: supporting homology and injective-resolution APIs, no exact duplicate of either displayed equation. Local library naturality supplies the same-scheme categorical reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of acyclic resolution comparison with an injective target and identity augmentation",
+   "results": "Available: 8 hits; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.iso_inv_naturality, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+   "date": "2026-10-14",
+   "verdict": "Current independent reading: supporting homology and injective-resolution APIs, no exact duplicate of either displayed equation. Local library naturality supplies the same-scheme categorical reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedObjIsoOfResolution.*naturality",
+   "results": "Available: 0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "Current independent reading: supporting homology and injective-resolution APIs, no exact duplicate of either displayed equation. Local library naturality supplies the same-scheme categorical reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "The abelian counit resolution calculation, cocycle/adjunction step before comparison with a target module resolution.",
+   "via": [
+    "new-abelian-counit-resolution-calculation",
+    "new-standard-abelian-ext-section-diagram",
+    "new-module-cohomology-ext-section-diagram",
+    "new-module-cohomology-ext-resolution-edge",
+    "new-module-cohomology-ext-edge-comparison",
+    "new-module-cohomology-ext-pullback-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianCounitCocycleCalculation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.abelian_counit_cocycle_calculation",
+  "statement": "theorem abelian_counit_cocycle_calculation {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (A : Y.Modules) (F : X.Modules) (J : InjectiveResolution A)\n    (c : (invImage f).obj\n      ((SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)).obj A) ⟶\n      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F))\n    (R : InjectiveResolution\n      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F))\n    (L : ((invImage f).mapHomologicalComplex (.up ℕ)).obj\n      (((SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)).mapHomologicalComplex\n        (.up ℕ)).obj J.cocomplex) ⟶ R.cocomplex)\n    (hL : (HomologicalComplex.singleMapHomologicalComplex (invImage f) (.up ℕ) 0).inv.app\n      ((SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)).obj A) ≫\n      ((invImage f).mapHomologicalComplex (.up ℕ)).map\n        ((HomologicalComplex.singleMapHomologicalComplex\n          (SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)) (.up ℕ) 0).inv.app A ≫\n          ((SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)).mapHomologicalComplex\n            (.up ℕ)).map J.ι) ≫ L = (CochainComplex.single₀ _).map c ≫ R.ι)\n    (s : abelianPushforward f ⋙ abelianSections Y ≅ abelianSections X)\n    (hs : ∀ G, s.hom.app G = G.obj.map\n      (eqToHom (by simp) : op (f ⁻¹ᵁ (⊤ : Y.Opens)) ⟶ op (⊤ : X.Opens)))\n    (p : ℕ) (x : H A p) :\n    ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map\n      (((abelianSections Y).mapHomologicalComplex (.up ℕ)).map\n        ((NatTrans.mapHomologicalComplex (abelianAdjunction f).unit (.up ℕ)).app\n          (((SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)).mapHomologicalComplex\n            (.up ℕ)).obj J.cocomplex) ≫\n          ((abelianPushforward f).mapHomologicalComplex (.up ℕ)).map L) ≫\n        (NatTrans.mapHomologicalComplex s.hom (.up ℕ)).app R.cocomplex))\n      ((abelianResolutionIso Y J p).hom x) =\n    (abelianInjectiveResolutionIso X F R p).hom\n      (Sheaf.H.map c p (Sheaf.H.mapFunctor (invImage f) (constIso f).symm\n        ((SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)).obj A) p x))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-ce57b",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T085851-L-233567",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-ce57b",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261014T085851-L-233567",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, definitions and proof with the nodes, change record, sources and report; compiled all three delivered modules and all three direct importers; checked axioms."
+ }
+}

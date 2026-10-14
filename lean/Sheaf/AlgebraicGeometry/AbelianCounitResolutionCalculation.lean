@@ -5,8 +5,8 @@ Authors: SHEAF group U2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
-public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation
+import Sheaf.AlgebraicGeometry.AbelianResolutionComparisonEvaluation
 
 /-! # The abelian counit on a resolution
 
@@ -22,19 +22,10 @@ set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory CategoryTheory.Limits Opposite
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
-
-/-- Abelian direct image, with the site categories fixed before instance search.
-Source: Stacks, Tag 01F7. -/
-abbrev abelianPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤
-      Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u} :=
-  TopCat.Sheaf.pushforward AddCommGrpCat.{u} f.base
-
-/-- The inverse-image/direct-image adjunction on the fixed site categories.
-Source: Stacks, Tag 01F7. -/
-def abelianAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    invImage f ⊣ abelianPushforward f :=
-  TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} f.base
+attribute [local instance] AlgebraicGeometry.Scheme.Modules.instAddCommGroupH
+attribute [local irreducible] abelianResolutionIso
+attribute [local irreducible] Functor.rightDerivedObjIsoOfResolution
+attribute [local irreducible] siteSectionsObjIso
 
 local instance abelianPushforward_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (abelianPushforward f).Additive :=
@@ -164,6 +155,34 @@ theorem abelian_counit_resolution_calculation {X Y : Scheme.{u}} (f : X ⟶ Y)
         (forgottenResolutionMap X I)))
       ((abelianResolutionIso X I p).hom (Sheaf.H.map (coeff f (𝟙 ((pushforward f).obj F))) p
         (Sheaf.H.mapFunctor (invImage f) (constIso f).symm
-          ((SheafOfModules.toSheaf Y.ringCatSheaf).obj ((pushforward f).obj F)) p x))) := by sorry
+          ((SheafOfModules.toSheaf Y.ringCatSheaf).obj ((pushforward f).obj F)) p x))) := by
+  have hL : counitSourceAugmentation f F J ≫ counitResolutionLift f F J =
+      (CochainComplex.single₀ _).map (coeff f (𝟙 ((pushforward f).obj F))) ≫
+        (standardAbelianResolution X F).ι := by
+    delta counitResolutionLift
+    exact InjectiveResolution.descOfQuasiIso_commutes _ _ _
+  have hs : ∀ G, (abelianPushforwardSectionsIso f).hom.app G = G.obj.map
+      (eqToHom (by simp) : op (f ⁻¹ᵁ (⊤ : Y.Opens)) ⟶ op (⊤ : X.Opens)) := by
+    intro G
+    rfl
+  simp only [counitSourceAugmentation, forgottenAugmentation] at hL
+  simp only [Category.assoc] at hL
+  have hc := abelian_counit_cocycle_calculation f ((pushforward f).obj F) F J
+    (coeff f (𝟙 ((pushforward f).obj F)))
+    (standardAbelianResolution X F) (counitResolutionLift f F J) hL
+    (abelianPushforwardSectionsIso f) hs p x
+  have hφ : forgottenAugmentation X I ≫ forgottenResolutionMap X I =
+      (standardAbelianResolution X F).ι := by
+    delta forgottenResolutionMap
+    simp only [InjectiveResolution.descOfQuasiIso_commutes,
+      CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [forgottenAugmentation, Category.assoc] at hφ
+  have hz := abelian_resolution_comparison_evaluation X F I
+    (standardAbelianResolution X F) (forgottenResolutionMap X I) hφ p
+    (Sheaf.H.map (coeff f (𝟙 ((pushforward f).obj F))) p
+      (Sheaf.H.mapFunctor (invImage f) (constIso f).symm
+        ((SheafOfModules.toSheaf Y.ringCatSheaf).obj ((pushforward f).obj F)) p x))
+  unfold counitSectionMap counitResolutionAdjoint
+  exact hc.trans hz.symm
 
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
