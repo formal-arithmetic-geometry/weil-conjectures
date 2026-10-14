@@ -1,0 +1,163 @@
+{
+ "id": "new-abelian-injective-counit-cocycle",
+ "kind": "statement",
+ "title": "Counit cocycle calculation for genuine abelian injective resolutions",
+ "statement": "For schemes X,Y and f:X→Y, module sheaves A,F, genuine abelian injective resolutions I,R of their underlying sheaves [def-sp-injective-resolutions], an inverse-image coefficient c and a lift L satisfying the degree-zero augmentation equation [def-pc-flat-cohomology-comparison], and the prescribed top-open section restriction s, the adjoint section chain map computes inverse image on sheaf Ext followed by c under the fixed comparisons [def-pc-abelian-counit-cocycle-comparisons]. No hypothesis of injectivity is imposed on forgotten module injectives.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Tags 01F7, 01F8, 01F9 and 06XR; the existing exact-functor resolution-cocycle theorem and the defining Zariski constant-sheaf comparison."
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-pc-flat-cohomology-comparison",
+  "def-pc-abelian-counit-cocycle-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Convert a section cycle into a closed Hom cocycle from the constant integer sheaf using the constant-sheaf adjunction and the integer generator. Precompose terminalSourceIso and apply the proved fixed site-sections normalization. This gives the source representative identity.",
+   "uses": [
+    "new-terminal-source-sections-evaluation",
+    "new-abelian-ext-sections-cocycle-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exactFunctor_resolution_cocycle to inverse image, the coefficient c and the supplied degree-zero lift equation. Precomposition by constIso(f).inv computes the constant-source change. Compute its adjunction transpose on the actual Zariski sites and use the specified equation for s to identify the section cycle with cyclesMap of the adjoint chain map.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-resolution-cocycle",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the target fixed normalization. The source and target representative identities imply the cohomology equality for every class by surjectivity of the homology projection.",
+   "uses": [
+    "new-terminal-source-sections-evaluation",
+    "new-abelian-ext-sections-cocycle-normalization",
+    "new-abelian-cycle-representative-transfer"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-weil-pbc-exact-functor-resolution-cocycle",
+  "new-abelian-cycle-representative-transfer",
+  "new-abelian-ext-sections-cocycle-normalization",
+  "new-terminal-source-sections-evaluation"
+ ],
+ "proof_origin": {
+  "by": "H3 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Tags 01F7, 01F8, 01F9 and 06XR; the existing exact-functor resolution-cocycle theorem and the defining Zariski constant-sheaf comparison.",
+  "note": "Complete Lean proof; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical Ext to derived sections comparison sends an injective resolution cocycle to its homology class",
+   "results": "Unavailable: Internal Server Error; no conclusion.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extEquivCohomologyClass_extMk\"",
+   "results": "Two hits: InjectiveResolution.extEquivCohomologyClass_extMk and ProjectiveResolution.extEquivCohomologyClass_extMk.",
+   "date": "2026-10-15",
+   "verdict": "Supporting cocycle normalization API; no match for the fixed site-sections or cross-site counit equality."
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass_extMk|homologyπ_naturality|extRightDerivedHomObjIso|mk₀_comp_extMk",
+   "results": "Read Mathlib Algebra/Homology, lean/WeilConjectures/CategoryTheory and lean/Sheaf/CategoryTheory. Found the injective Ext cocycle API, homology projection naturality, fixed Ext/right-derived-Hom constructor and existing exact-functor cocycle theorem.",
+   "date": "2026-10-15",
+   "verdict": "These proved ingredients supply the proof; the prescribed site normalization and its Zariski adjunction evaluation require the explicit calculations delivered here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation",
+  "date": "2026-10-15",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-abelian-counit-cocycle-calculation",
+   "place": "Counit cocycle calculation for genuine abelian injective resolutions",
+   "via": [
+    "new-abelian-counit-resolution-calculation",
+    "new-standard-abelian-ext-section-diagram",
+    "new-module-cohomology-ext-section-diagram",
+    "new-module-cohomology-ext-resolution-edge",
+    "new-module-cohomology-ext-edge-comparison",
+    "new-module-cohomology-ext-pullback-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "mathlib": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianInjectiveCounitCocycle",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianInjectiveCounitCocycle.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.abelian_injective_counit_cocycle_calculation",
+  "statement": "theorem abelian_injective_counit_cocycle_calculation\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (A : SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n    (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (I : InjectiveResolution\n      ((SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)).obj A))\n    (c : (invImage f).obj\n      ((SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)).obj A) ⟶\n      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F))\n    (R : InjectiveResolution\n      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F))\n    (L : ((invImage f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ R.cocomplex)\n    (hL : (invImage f).map (I.ι.f 0) ≫ L.f 0 = c ≫ R.ι.f 0)\n    (s : abelianPushforward f ⋙ abelianSections Y ≅\n      abelianSections X)\n    (hs : ∀ G, s.hom.app G = G.obj.map\n      (eqToHom (by simp) : op (f ⁻¹ᵁ (⊤ : Y.Opens)) ⟶ op (⊤ : X.Opens)))\n    (p : ℕ) (x : H A p) :\n    ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map\n      (((abelianSections Y).mapHomologicalComplex (.up ℕ)).map\n        ((NatTrans.mapHomologicalComplex (abelianAdjunction f).unit (.up ℕ)).app\n          I.cocomplex ≫\n          ((abelianPushforward f).mapHomologicalComplex (.up ℕ)).map L) ≫\n        (NatTrans.mapHomologicalComplex s.hom (.up ℕ)).app R.cocomplex))\n      ((abelianInjectiveResolutionIso Y A I p).hom x) =\n    (abelianInjectiveResolutionIso X F R p).hom\n      (Sheaf.H.map c p (Sheaf.H.mapFunctor (invImage f) (constIso f).symm\n        ((SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)).obj A) p x))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f2446",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T223541-L-4125412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f2446",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T223541-L-4125412",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled successfully, required importers compiled, original adapted module failed with the expected duplicate declaration, adapted module passed, and target/node statements are unchanged."
+ }
+}

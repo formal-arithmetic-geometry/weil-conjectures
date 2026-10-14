@@ -1,0 +1,135 @@
+{
+ "id": "new-abelian-cycle-representative-transfer",
+ "kind": "statement",
+ "title": "Passing a cocycle computation to all homology classes",
+ "statement": "Let K and B be cochain complexes of abelian groups [def-sp-abelian], t:K→B, and p a nonnegative degree. Let e:E→Hᵖ(K) be injective, e′:E′→Hᵖ(B) and g:E→E′ arbitrary functions. Suppose repr assigns an element of E to each cycle z in K, with e(repr(z))=πK(z) and e′(g(repr(z)))=πB(cyclesMap(t)(z)). Then Hᵖ(t)(e(x))=e′(g(x)) for every x:E.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Mathlib HomologicalComplex.homologyπ_naturality and AddCommGrpCat.epi_iff_surjective; elementary passage from cycle representatives to homology."
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Lift e(x) through the surjective homology projection πK. The first representative identity and injectivity of e identify x with repr(z). Substitute this equality, then apply naturality of the homology projection and the second representative identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "H3 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Mathlib HomologicalComplex.homologyπ_naturality and AddCommGrpCat.epi_iff_surjective; elementary passage from cycle representatives to homology.",
+  "note": "Complete Lean proof; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical Ext to derived sections comparison sends an injective resolution cocycle to its homology class",
+   "results": "Unavailable: Internal Server Error; no conclusion.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extEquivCohomologyClass_extMk\"",
+   "results": "Two hits: InjectiveResolution.extEquivCohomologyClass_extMk and ProjectiveResolution.extEquivCohomologyClass_extMk.",
+   "date": "2026-10-15",
+   "verdict": "Supporting cocycle normalization API; no match for the fixed site-sections or cross-site counit equality."
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass_extMk|homologyπ_naturality|extRightDerivedHomObjIso|mk₀_comp_extMk",
+   "results": "Read Mathlib Algebra/Homology, lean/WeilConjectures/CategoryTheory and lean/Sheaf/CategoryTheory. Found the injective Ext cocycle API, homology projection naturality, fixed Ext/right-derived-Hom constructor and existing exact-functor cocycle theorem.",
+   "date": "2026-10-15",
+   "verdict": "These proved ingredients supply the proof; the prescribed site normalization and its Zariski adjunction evaluation require the explicit calculations delivered here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation",
+  "date": "2026-10-15",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-abelian-counit-cocycle-calculation",
+   "place": "Passing a cocycle computation to all homology classes",
+   "via": [
+    "new-abelian-counit-resolution-calculation",
+    "new-standard-abelian-ext-section-diagram",
+    "new-module-cohomology-ext-section-diagram",
+    "new-module-cohomology-ext-resolution-edge",
+    "new-module-cohomology-ext-edge-comparison",
+    "new-module-cohomology-ext-pullback-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "mathlib": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianExtSectionsCocycleNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianExtSectionsCocycleNormalization.lean",
+  "declaration": "CategoryTheory.homology_transfer_of_cycle_representatives",
+  "statement": "theorem homology_transfer_of_cycle_representatives\n    {E E' : Type*} (K B : CochainComplex AddCommGrpCat.{u} ℕ) (t : K ⟶ B) (p : ℕ)\n    (e : E → K.homology p) (he : Function.Injective e)\n    (e' : E' → B.homology p) (g : E → E')\n    (repr : K.cycles p → E)\n    (hsource : ∀ z, e (repr z) = K.homologyπ p z)\n    (htarget : ∀ z, e' (g (repr z)) =\n      B.homologyπ p (HomologicalComplex.cyclesMap t p z)) (x : E) :\n    ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map t) (e x) =\n      e' (g x)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f2446",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T223541-L-4125412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f2446",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T223541-L-4125412",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled successfully, required importers compiled, original adapted module failed with the expected duplicate declaration, adapted module passed, and target/node statements are unchanged."
+ }
+}

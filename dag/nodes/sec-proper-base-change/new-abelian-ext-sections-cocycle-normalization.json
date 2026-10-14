@@ -1,0 +1,152 @@
+{
+ "id": "new-abelian-ext-sections-cocycle-normalization",
+ "kind": "statement",
+ "title": "Fixed site-sections comparison on Ext cocycles",
+ "statement": "For a small site with abelian sheafification and Ext, the prescribed siteSectionsObjIso [new-module-cohomology-ext-resolution-naturality], followed by I.isoRightDerivedObj of sections for an injective resolution I [def-sp-injective-resolutions], sends I.extMk(a) to π(z) whenever a is a closed Hom cocycle from the free abelian sheaf on an object U and the sections comparison sends a to the included section cycle z. This is equality for the fixed comparison in every nonnegative degree and for every injective resolution.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Tag 06XR; Mathlib InjectiveResolution.extEquivCohomologyClass_extMk, HomComplex.leftHomologyData and rightDerived_app_eq; the actual siteSectionsObjIso definition."
+ },
+ "stmt_deps": [
+  "new-module-cohomology-ext-resolution-naturality",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "For the chosen resolution, expand extRightDerivedHomObjIso. Its two derived-resolution comparison factors cancel, leaving the explicit Ext-to-Hom-complex class equivalence. Apply extEquivCohomologyClass_extMk, unfold the left homology data, and use cycles and homology naturality to compute the representative. This gives the actual fixed map, not an existential equivalence.",
+   "uses": [
+    "new-module-cohomology-ext-resolution-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary injective resolution, compare it with the chosen one. The Ext cocycle and usual derived-comparison naturality formulas give the same class after the comparison. Cancel its homology map, which is an isomorphism.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Transport the Hom-complex calculation through the sections natural isomorphism. Right-derived naturality and the defining siteSectionsObjIso formula identify the resulting map with the prescribed comparison.",
+   "uses": [
+    "new-module-cohomology-ext-resolution-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-module-cohomology-ext-resolution-naturality"
+ ],
+ "proof_origin": {
+  "by": "H3 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Tag 06XR; Mathlib InjectiveResolution.extEquivCohomologyClass_extMk, HomComplex.leftHomologyData and rightDerived_app_eq; the actual siteSectionsObjIso definition.",
+  "note": "Complete Lean proof; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical Ext to derived sections comparison sends an injective resolution cocycle to its homology class",
+   "results": "Unavailable: Internal Server Error; no conclusion.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extEquivCohomologyClass_extMk\"",
+   "results": "Two hits: InjectiveResolution.extEquivCohomologyClass_extMk and ProjectiveResolution.extEquivCohomologyClass_extMk.",
+   "date": "2026-10-15",
+   "verdict": "Supporting cocycle normalization API; no match for the fixed site-sections or cross-site counit equality."
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass_extMk|homologyπ_naturality|extRightDerivedHomObjIso|mk₀_comp_extMk",
+   "results": "Read Mathlib Algebra/Homology, lean/WeilConjectures/CategoryTheory and lean/Sheaf/CategoryTheory. Found the injective Ext cocycle API, homology projection naturality, fixed Ext/right-derived-Hom constructor and existing exact-functor cocycle theorem.",
+   "date": "2026-10-15",
+   "verdict": "These proved ingredients supply the proof; the prescribed site normalization and its Zariski adjunction evaluation require the explicit calculations delivered here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation",
+  "date": "2026-10-15",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-abelian-counit-cocycle-calculation",
+   "place": "Fixed site-sections comparison on Ext cocycles",
+   "via": [
+    "new-abelian-counit-resolution-calculation",
+    "new-standard-abelian-ext-section-diagram",
+    "new-module-cohomology-ext-section-diagram",
+    "new-module-cohomology-ext-resolution-edge",
+    "new-module-cohomology-ext-edge-comparison",
+    "new-module-cohomology-ext-pullback-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "mathlib": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianExtSectionsCocycleNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianExtSectionsCocycleNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.canonical_site_sections_cocycle",
+  "statement": "theorem canonical_site_sections_cocycle\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]\n    (U : C) (F : Sheaf J AddCommGrpCat.{u}) (I : InjectiveResolution F) (p : ℕ)\n    (a : (presheafToSheaf J AddCommGrpCat.{u}).obj\n      (yoneda.obj U ⋙ AddCommGrpCat.free) ⟶ I.cocomplex.X p)\n    (ha : a ≫ I.cocomplex.d p (p + 1) = 0)\n    (c : (((sheafToPresheaf J AddCommGrpCat.{u} ⋙\n      (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).mapHomologicalComplex (.up ℕ)).obj\n      I.cocomplex).cycles p)\n    (hc : (((sheafToPresheaf J AddCommGrpCat.{u} ⋙\n      (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).mapHomologicalComplex (.up ℕ)).obj\n      I.cocomplex).iCycles p c = (sectionsIso J U).hom.app (I.cocomplex.X p) a) :\n    ((siteSectionsObjIso J U F p).hom ≫\n      (I.isoRightDerivedObj (sheafToPresheaf J AddCommGrpCat.{u} ⋙\n        (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)) p).hom)\n      (I.extMk a (p + 1) rfl ha) =\n    (((sheafToPresheaf J AddCommGrpCat.{u} ⋙\n      (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).mapHomologicalComplex (.up ℕ)).obj\n      I.cocomplex).homologyπ p c",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f2446",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T223541-L-4125412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f2446",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T223541-L-4125412",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled successfully, required importers compiled, original adapted module failed with the expected duplicate declaration, adapted module passed, and target/node statements are unchanged."
+ }
+}

@@ -16,36 +16,42 @@
  ],
  "proof": [
   {
-   "text": "The forgotten module resolution J is a resolution by section-acyclic abelian sheaves. Write K for its underlying abelian cochain complex. Its canonical comparison computes Ext from the constant integer sheaf by the section cocycles of K. Exact inverse image followed by the augmentation-compatible L computes the coefficient map after inverse image on Ext.",
+   "text": "The forgotten augmentation is a quasi-isomorphism. Lift it to a genuine abelian injective resolution I of the underlying source. The existing evaluation theorem identifies the prescribed source comparison with the comparison through I.",
    "uses": [
     "new-module-cohomology-ext-resolution-normalization",
-    "def-pc-flat-cohomology-comparison",
-    "lemma-weil-pbc-leray-acyclicity",
-    "lem-sc-injective-module-abelian-acyclic-zariski"
+    "new-abelian-resolution-comparison-evaluation"
    ],
    "elementary": false
   },
   {
-   "text": "Precomposition on the constant source is constIso(f).symm. Evaluation on the free integer generator identifies Hom cocycles with sections. The abelian adjunction identifies the inverse-image cocycle followed by L with its adjoint, the unit followed by f_*L. The component equation for s gives the top-open restriction. These additive chain maps preserve boundaries. Passing to homology gives the stated equation. Naturality of the identity comparison lift identifies the target canonical acyclic comparison for the injective augmentation with the usual injective computation. There is no target module resolution or change to one in this step.",
+   "text": "Exact inverse image preserves the augmentation quasi-isomorphism. Lift c from inverse image of I to R. Its composite with the source comparison and the supplied L agree after the augmentation. Extend by zero to integer complexes, apply homotopy uniqueness into the injective target and restrict back. Mapping this homotopy through direct image, adjunction unit and sections gives equal homology maps.",
    "uses": [
-    "new-module-cohomology-ext-resolution-normalization",
     "def-pc-flat-cohomology-comparison",
-    "lem-sc-acyclic-comparison-natural"
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved genuine-injective counit cocycle calculation. Naturality of the adjunction unit factors the replacement section map through the mapped source comparison. Homology functoriality, the source evaluation identity and the homotopy equality give the original assertion with arbitrary R and L.",
+   "uses": [
+    "new-abelian-injective-counit-cocycle",
+    "new-abelian-resolution-comparison-evaluation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-flat-cohomology-comparison",
-  "lem-sc-acyclic-comparison-natural",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
-  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "new-abelian-injective-counit-cocycle",
+  "new-abelian-resolution-comparison-evaluation",
   "new-module-cohomology-ext-resolution-normalization"
  ],
  "proof_origin": {
-  "by": "G2 stage-3 worker",
-  "document": "https://stacks.math.columbia.edu/tag/01F7",
-  "place": "Tag 01F8 (lemma-functorial-derived) and equation 01F9 (equation-functorial-derived); Tag 06XR (lemma-ext-compute) for Ext computed with an injective resolution; Tag 03FD for the source acyclic resolution."
+  "by": "H3 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Canonical resolution-cocycle normalization, source replacement and homotopy uniqueness; Tags 01F7, 01F8, 01F9 and 015E.",
+  "note": "Complete Lean proof with unchanged leaf signature, no new sorry, and preserved unit route."
  },
  "mathlib_searches": [
   {
@@ -194,11 +200,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-ce57b",
-  "group": "G2",
+  "reviewer": "X-f2446",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261014T085851-L-233567",
+  "landing": "20261014T223541-L-4125412",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, definitions and proof with the nodes, change record, sources and report; compiled all three delivered modules and all three direct importers; checked axioms."
+  "note": "independent Codex review: Delivered files compiled successfully, required importers compiled, original adapted module failed with the expected duplicate declaration, adapted module passed, and target/node statements are unchanged."
  }
 }

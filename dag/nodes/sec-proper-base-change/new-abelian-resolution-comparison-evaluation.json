@@ -23,17 +23,25 @@
     "new-module-cohomology-ext-resolution-normalization"
    ],
    "elementary": false
+  },
+  {
+   "text": "Rewrite the computational injective constructor by its proved equality with the original acyclic constructor. The existing naturality and cancellation proof then applies unchanged.",
+   "uses": [
+    "new-abelian-injective-resolution-comparison-normalization"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-acyclic-comparison-natural",
   "lem-sc-injective-module-abelian-acyclic-zariski",
+  "new-abelian-injective-resolution-comparison-normalization",
   "new-module-cohomology-ext-resolution-normalization"
  ],
  "proof_origin": {
-  "by": "G2 stage-3 worker",
-  "document": "Stacks Project",
-  "place": "Tags 03FD, 015E, 06XR"
+  "by": "H3 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/015E",
+  "place": "Existing acyclic comparison evaluation, moved below the leaf and adapted using equality of the constructors."
  },
  "mathlib_searches": [
   {
@@ -161,13 +169,13 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AbelianResolutionComparisonEvaluation",
-  "file": "lean/Sheaf/AlgebraicGeometry/AbelianResolutionComparisonEvaluation.lean",
+  "module": "Sheaf.AlgebraicGeometry.AbelianCounitCocycleDefinitions",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianCounitCocycleDefinitions.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.abelian_resolution_comparison_evaluation",
   "statement": "theorem abelian_resolution_comparison_evaluation (X : Scheme.{u})\n    (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (I : InjectiveResolution F)\n    (R : InjectiveResolution\n      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F))\n    (φ : ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).mapHomologicalComplex\n      (.up ℕ)).obj I.cocomplex ⟶ R.cocomplex)\n    (hφ : (HomologicalComplex.singleMapHomologicalComplex\n      (SheafOfModules.toSheaf (moduleRings X.toRingedSpace)) (.up ℕ) 0).inv.app F ≫\n      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).mapHomologicalComplex\n        (.up ℕ)).map I.ι ≫ φ = R.ι)\n    (p : ℕ) (z : H F p) :\n    ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) p).map\n      (((abelianSections X).mapHomologicalComplex (.up ℕ)).map φ))\n      ((abelianResolutionIso X I p).hom z) =\n    (abelianInjectiveResolutionIso X F R p).hom z",
   "branch": "sheaf-dag",
-  "by": "G2",
-  "date": "2026-10-14"
+  "by": "H3",
+  "date": "2026-10-15"
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -182,15 +190,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-5340b",
-  "group": "G4",
+  "reviewer": "X-f2446",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261014T122435-L-2705369",
+  "landing": "20261014T223541-L-4125412",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged evaluation statement and naturality proof to the node; verified old/new comparison equality, clean compilation of both delivered modules and both direct importers, and standard axioms only.",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.abelian_resolution_comparison_evaluation"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Delivered files compiled successfully, required importers compiled, original adapted module failed with the expected duplicate declaration, adapted module passed, and target/node statements are unchanged."
  }
 }

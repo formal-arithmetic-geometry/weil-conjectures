@@ -1,0 +1,141 @@
+{
+ "id": "new-abelian-injective-acyclic-comparison",
+ "kind": "statement",
+ "title": "Injective resolution agrees with its acyclic comparison",
+ "statement": "Let C and D be abelian categories [def-sp-abelian], with injective resolutions in C [def-sp-injective-resolutions]. If F:C→D is additive and preserves finite limits, then the canonical acyclic-resolution comparison for an injective resolution I of X equals I.isoRightDerivedObj F in every nonnegative degree.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Tags 015E and 06XR; InjectiveResolution.isoRightDerivedObj_hom_naturality and the defining acyclic-resolution comparison."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Lift the identity from I to the chosen resolution R. Naturality of I.isoRightDerivedObj identifies the homology map of this lift with the usual resolution comparison. Both complexes have right-acyclic terms, so mapping the lift by F preserves its quasi-isomorphism.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The acyclic constructor is the target comparison composed with the inverse of that homology map. Substitute the naturality identity and cancel the homology isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "H3 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Tags 015E and 06XR; InjectiveResolution.isoRightDerivedObj_hom_naturality and the defining acyclic-resolution comparison.",
+  "note": "Complete Lean proof; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical Ext to derived sections comparison sends an injective resolution cocycle to its homology class",
+   "results": "Unavailable: Internal Server Error; no conclusion.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extEquivCohomologyClass_extMk\"",
+   "results": "Two hits: InjectiveResolution.extEquivCohomologyClass_extMk and ProjectiveResolution.extEquivCohomologyClass_extMk.",
+   "date": "2026-10-15",
+   "verdict": "Supporting cocycle normalization API; no match for the fixed site-sections or cross-site counit equality."
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass_extMk|homologyπ_naturality|extRightDerivedHomObjIso|mk₀_comp_extMk",
+   "results": "Read Mathlib Algebra/Homology, lean/WeilConjectures/CategoryTheory and lean/Sheaf/CategoryTheory. Found the injective Ext cocycle API, homology projection naturality, fixed Ext/right-derived-Hom constructor and existing exact-functor cocycle theorem.",
+   "date": "2026-10-15",
+   "verdict": "These proved ingredients supply the proof; the prescribed site normalization and its Zariski adjunction evaluation require the explicit calculations delivered here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation",
+  "date": "2026-10-15",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-abelian-counit-cocycle-calculation",
+   "place": "Injective resolution agrees with its acyclic comparison",
+   "via": [
+    "new-abelian-counit-resolution-calculation",
+    "new-standard-abelian-ext-section-diagram",
+    "new-module-cohomology-ext-section-diagram",
+    "new-module-cohomology-ext-resolution-edge",
+    "new-module-cohomology-ext-edge-comparison",
+    "new-module-cohomology-ext-pullback-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "mathlib": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianExtSectionsCocycleNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianExtSectionsCocycleNormalization.lean",
+  "declaration": "CategoryTheory.acyclic_comparison_of_injective",
+  "statement": "theorem acyclic_comparison_of_injective\n    {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]\n    [Abelian C] [HasInjectiveResolutions C] [Abelian D]\n    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]\n    {X : C} (I : InjectiveResolution X) (p : ℕ) :\n    F.rightDerivedObjIsoOfResolution I.ι\n      (fun n ↦ Functor.rightAcyclic_of_injective (I.cocomplex.X n)) p =\n    I.isoRightDerivedObj F p",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f2446",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T223541-L-4125412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f2446",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T223541-L-4125412",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled successfully, required importers compiled, original adapted module failed with the expected duplicate declaration, adapted module passed, and target/node statements are unchanged."
+ }
+}
