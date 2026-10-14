@@ -14737,6 +14737,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: returned deliver/S3/Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization (reviewer RETURN: (reviewer X-734c6, head 734c6ec07) G1/C5: The earlier duplication return remains unresolved. In lean/Sheaf/AlgebraicGeom)
 - 08:13 L: merged deliver/E1/Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationUnshiftedIsIso (stage 3; reviewer PASS; first push; landing 20261014T081307-L-3872586 (interface); batch 20261014T081306; modules 2; new nodes 1)
 - 08:13 L: merged deliver/G1/Sheaf.AlgebraicGeometry.FlatTelescopeTargetRefinement (stage 3; reviewer PASS; first push; landing 20261014T081308-L-3872922 (interface); batch 20261014T081306; modules 3; new nodes 2)
-- 08:13 L: merged deliver/G3/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (stage 3; reviewer PASS; after a return; landing 20261014T081308-L-3873111 (interface); batch 20261014T081306; modules 2; new nodes 1; change records: coord/changes/picard-scalar-cech-core-cover-hypotheses.md)
 - 08:13 L: returned deliver/G2/Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation (reviewer RETURN: (reviewer X-83b37, head 83b372ab4) B2/B3: Repair the two new node statements and their definition dependencies. In dag/n)
 - 08:14 L: returned deliver/H2/Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate (reviewer RETURN: (reviewer X-7ade3, head 7ade39e6e) B2: dag/nodes/sec-picard-framework/lem-pc-affine-tilde-tensor-source-comparison.json:)
+
+- 16:16 L: batch 20261014T081306 dependency take-out
