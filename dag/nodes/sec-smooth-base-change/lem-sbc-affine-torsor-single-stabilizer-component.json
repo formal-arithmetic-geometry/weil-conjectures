@@ -12,22 +12,24 @@
  ],
  "proof": [
   {
-   "text": "localize at h = algebraMap H C (ι g). Finite faithful flatness and\netaleness give a connected finite etale cover of D(ι g); unique rotations make it\nGalois with deck group G. Pull delta back along k. Connectedness makes the deck\npermutation on sections equal to its label at the zero prime. The exact stabilizer\nof the chosen label is K, so the associated transitive subcover is V/K and its map\ninto the original cover is an open-and-closed immersion. The affine quotient ring\nis C[1/h]^K. It equals (C^K)[1/h]: an invariant fraction a/h^n has invariant numerator,\nbecause h is fixed and localization of the domain C is injective. Conversely an\ninvariant numerator gives an invariant fraction. Under the basic-open localization\nidentification the quotient map is the restriction q of Spec(F -> C). Descending\nthe chosen section gives f, with q followed by f and projection to Y equal to that\nsection. All quotient maps are over Spec H, giving the projection equation.\nNo completeness or distinctness of a family of representatives is used.",
+   "text": "Obtain s and its two equations from the repaired section-descent lemma. Put b=U->Spec H and f=pullback.lift s b hsbase. The pullback equations give f followed by the second projection equal to b, and q followed by f and the first projection equal to the selected section. Apply the conditional exact-stabilizer openness criterion to this f. Package the resulting open immersion with the required equations.",
    "uses": [
-    "lem-sbc-affine-torsor-split-label-laws"
+    "lem-sbc-affine-torsor-single-stabilizer-component-section",
+    "lem-sbc-affine-torsor-stabilizer-section-open"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-affine-torsor-split-label-laws"
+  "lem-sbc-affine-torsor-single-stabilizer-component-section",
+  "lem-sbc-affine-torsor-stabilizer-section-open"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "E3",
+  "group": "C3",
   "document": "Stacks Project",
   "place": "Tag 03SF",
-  "note": "Isolated part of orbit-component descent; not a restatement of the coproduct isomorphism."
+  "note": "Repair of X-c85ad: separate descent of the selected section from conditional openness; no dependency on the parent theorem."
  },
  "mathlib_searches": [
   {
@@ -76,7 +78,7 @@
   "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSingleStabilizerComponent",
   "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorSingleStabilizerComponent.lean",
   "declaration": "AlgebraicGeometry.Scheme.affine_torsor_single_stabilizer_component",
-  "statement": "theorem affine_torsor_single_stabilizer_component (R H : CommRingCat.{u}) (g : R) (ι : R →+* H) (C : Type u) [CommRing C] [Algebra H C] [IsDomain C] [Module.Finite H C] [Module.FaithfullyFlat H C] (G : Type u) [Group G] [Finite G] (ρ : G → C →ₐ[H] C) (hρone : ρ 1 = AlgHom.id H C) (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b)) (hne : algebraMap H C (ι g) ≠ 0) {Y : Scheme.{u}} (p : Y ⟶ Spec R) (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g)) (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p) [IsFinite j] [Etale j] (hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫ Spec.map (CommRingCat.ofHom (algebraMap H C)))) (hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω), a.comp (algebraMap H C) = b.comp (algebraMap H C) → a (algebraMap H C (ι g)) ≠ 0 → ∃! ζ : G, a.comp (ρ ζ).toRingHom = b) (d : ℕ) (T : Scheme.{u}) (t : T ⟶ Spec R) (k : Scheme.Opens.toScheme (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ⟶ T) (hk : k ≫ t = Scheme.Opens.ι (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫ Spec.map (CommRingCat.ofHom (algebraMap H C)) ≫ Spec.map (CommRingCat.ofHom ι)) (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T) (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t) (x : Fin d) (K : Subgroup G) (hK : ∀ ζ, ζ ∈ K ↔ fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne p T t k hk d δ hδ ζ x = x) : let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C) let U : (Spec (CommRingCat.of F)).Opens := PrimeSpectrum.basicOpen (algebraMap H F (ι g)) let q := (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE U (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) (by change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤ PrimeSpectrum.basicOpen (algebraMap H C (ι g)) rfl) ∃ f : Scheme.Opens.toScheme (X := Spec (CommRingCat.of F)) U ⟶ pullback p (Spec.map (CommRingCat.ofHom ι)), IsOpenImmersion f ∧ f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι)) = Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫ Spec.map (CommRingCat.ofHom (algebraMap H F)) ∧ q ≫ f ≫ pullback.fst p (Spec.map (CommRingCat.ofHom ι)) = fixedSplitSection p t k d δ x",
+  "statement": "theorem affine_torsor_single_stabilizer_component\n    (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)\n    (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]\n    [Module.Finite H C] [Module.FaithfullyFlat H C]\n    (G : Type u) [Group G] [Finite G]\n    (ρ : G → C →ₐ[H] C)\n    (hρone : ρ 1 = AlgHom.id H C)\n    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))\n    (hne : algebraMap H C (ι g) ≠ 0)\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g))\n    (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)\n    [IsFinite j] [Etale j]\n    (hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C))\n      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H C))))\n    (hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),\n      a.comp (algebraMap H C) = b.comp (algebraMap H C) →\n      a (algebraMap H C (ι g)) ≠ 0 →\n      ∃! ζ : G, a.comp (ρ ζ).toRingHom = b)\n    (d : ℕ)\n    (T : Scheme.{u}) (t : T ⟶ Spec R)\n    (k : Scheme.Opens.toScheme (X := Spec (CommRingCat.of C))\n      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ⟶ T)\n    (hk : k ≫ t = Scheme.Opens.ι (X := Spec (CommRingCat.of C))\n      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H C)) ≫\n      Spec.map (CommRingCat.ofHom ι))\n    (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)\n    (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t)\n    (x : Fin d) (K : Subgroup G)\n    (hK : ∀ ζ, ζ ∈ K ↔\n      fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne\n        p T t k hk d δ hδ ζ x = x) :\n    let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)\n    let U : (Spec (CommRingCat.of F)).Opens := PrimeSpectrum.basicOpen (algebraMap H F (ι g))\n    let q := (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE\n      U (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) (by\n        change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤\n          PrimeSpectrum.basicOpen (algebraMap H C (ι g))\n        rfl)\n    ∃ f : Scheme.Opens.toScheme (X := Spec (CommRingCat.of F)) U ⟶\n        pullback p (Spec.map (CommRingCat.ofHom ι)),\n      IsOpenImmersion f ∧\n      f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι)) =\n        Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫\n          Spec.map (CommRingCat.ofHom (algebraMap H F)) ∧\n      q ≫ f ≫ pullback.fst p (Spec.map (CommRingCat.ofHom ι)) =\n        fixedSplitSection p t k d δ x",
   "branch": "sheaf-dag",
   "by": "E3",
   "date": "2026-10-14"
@@ -94,18 +96,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "X-f73fe",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261014T004111-L-2837364",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.affine_torsor_single_stabilizer_component"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.affine_torsor_single_stabilizer_component_open",
-   "AlgebraicGeometry.Scheme.affine_torsor_single_stabilizer_component_section"
-  ]
+  "landing": "20261014T020507-L-3809926",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean signatures to their nodes, the statement repair to its change record, and the proofs to their dependencies; both delivered modules and AffineTorsorOrbitComponentDescent compile cleanly, with only permitted axioms plus sorryAx from the two reported holes."
  }
 }

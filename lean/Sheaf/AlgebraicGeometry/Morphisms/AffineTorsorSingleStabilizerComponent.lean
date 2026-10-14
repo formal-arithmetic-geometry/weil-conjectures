@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Limits
-public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
+
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionOpen
 
 /-! # Stabilizer components of a split affine torsor cover -/
 
@@ -19,11 +19,27 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Open/base-map part of stabilizer descent.
+/-- The selected split section descends to a map from the stabilizer quotient.
 
-Proof: finite étale quotient construction of the stabilizer component.
-(blueprint: lem-sbc-affine-torsor-single-stabilizer-component-open) -/
-theorem affine_torsor_single_stabilizer_component_open
+Source: Stacks Project, Tag 03SF, finite Galois covers and permutation sets.
+Proof: put V = D(h) and B = D(ι g). Finite faithful flatness makes V -> B
+surjective and finite, and hEt makes it etale. The domain assumption makes V
+connected. The unique rotation hypothesis makes it a Galois cover with deck group G.
+Pull delta back to V. The selected section is fixed by K: deck precomposition
+has the label given by fixedPunctureDescentAction, and a section on the connected
+nonempty V is determined by that label. The Galois equivalence descends this
+K-invariant section to V/K, giving a map to Y over Spec R. The quotient is affine,
+with coordinate ring C[1/h]^K. This is (C^K)[1/h]: the denominator h is fixed;
+invariance of a/h^n implies invariance of a because localization of the domain C
+at nonzero h is injective. Thus V/K is the displayed basic open of Spec F and its
+quotient map is q. The descent factorization gives q followed by s equal to the
+selected section; descent over B gives the displayed base equation.
+This assertion constructs a factorization only; openness is a separate step.
+(blueprint: lem-sbc-affine-torsor-single-stabilizer-component-section) -/
+-- STATEMENT-DISPUTED: Arbitrary f may select a component different from x; take the trivial
+-- torsor over ℚ and the two-point split cover. The former universal assertion is replaced
+-- below by existence of a factorization of the selected section.
+theorem affine_torsor_single_stabilizer_component_section
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
     [Module.Finite H C] [Module.FaithfullyFlat H C]
@@ -64,19 +80,19 @@ theorem affine_torsor_single_stabilizer_component_open
         change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤
           PrimeSpectrum.basicOpen (algebraMap H C (ι g))
         rfl)
-    ∃ f : Scheme.Opens.toScheme (X := Spec (CommRingCat.of F)) U ⟶
-        pullback p (Spec.map (CommRingCat.ofHom ι)),
-      IsOpenImmersion f ∧
-      f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι)) =
-        Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫
-          Spec.map (CommRingCat.ofHom (algebraMap H F)) := by sorry
+    ∃ s : Scheme.Opens.toScheme (X := Spec (CommRingCat.of F)) U ⟶ Y,
+      s ≫ p = (Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫
+        Spec.map (CommRingCat.ofHom (algebraMap H F))) ≫
+          Spec.map (CommRingCat.ofHom ι) ∧
+      q ≫ s = fixedSplitSection p t k d δ x := by sorry
 
 
-/-- Section identity for the descended stabilizer component.
+/-- Open/base-map part of stabilizer descent.
 
-Proof: the quotient restriction calculation identifies the chosen component with the split section.
-(blueprint: lem-sbc-affine-torsor-single-stabilizer-component-section) -/
-theorem affine_torsor_single_stabilizer_component_section
+Proof: descend the selected section and form its pullback lift; the exact stabilizer
+criterion gives openness and pullback.lift_snd gives the base equation.
+(blueprint: lem-sbc-affine-torsor-single-stabilizer-component-open) -/
+theorem affine_torsor_single_stabilizer_component_open
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
     [Module.Finite H C] [Module.FaithfullyFlat H C]
@@ -94,34 +110,62 @@ theorem affine_torsor_single_stabilizer_component_section
       Spec.map (CommRingCat.ofHom (algebraMap H C))))
     (hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),
       a.comp (algebraMap H C) = b.comp (algebraMap H C) →
-      a (algebraMap H C (ι g)) ≠ 0 → ∃! ζ : G, a.comp (ρ ζ).toRingHom = b)
-    (d : ℕ) (T : Scheme.{u}) (t : T ⟶ Spec R)
+      a (algebraMap H C (ι g)) ≠ 0 →
+      ∃! ζ : G, a.comp (ρ ζ).toRingHom = b)
+    (d : ℕ)
+    (T : Scheme.{u}) (t : T ⟶ Spec R)
     (k : Scheme.Opens.toScheme (X := Spec (CommRingCat.of C))
       (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ⟶ T)
     (hk : k ≫ t = Scheme.Opens.ι (X := Spec (CommRingCat.of C))
       (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫
-      Spec.map (CommRingCat.ofHom (algebraMap H C)) ≫ Spec.map (CommRingCat.ofHom ι))
+      Spec.map (CommRingCat.ofHom (algebraMap H C)) ≫
+      Spec.map (CommRingCat.ofHom ι))
     (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
     (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t)
     (x : Fin d) (K : Subgroup G)
-    (hK : ∀ ζ, ζ ∈ K ↔ fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne
-      p T t k hk d δ hδ ζ x = x)
-    (F : Subalgebra H C)
-    (f : Scheme.Opens.toScheme (X := Spec (CommRingCat.of F))
-      (PrimeSpectrum.basicOpen (algebraMap H F (ι g))) ⟶
-      pullback p (Spec.map (CommRingCat.ofHom ι))) :
-    (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE
-      (PrimeSpectrum.basicOpen (algebraMap H F (ι g)))
-      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) (by
+    (hK : ∀ ζ, ζ ∈ K ↔
+      fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne
+        p T t k hk d δ hδ ζ x = x) :
+    let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)
+    let U : (Spec (CommRingCat.of F)).Opens := PrimeSpectrum.basicOpen (algebraMap H F (ι g))
+    let _q := (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE
+      U (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) (by
         change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤
-          PrimeSpectrum.basicOpen (algebraMap H C (ι g)); rfl) ≫ f ≫
-      pullback.fst p (Spec.map (CommRingCat.ofHom ι)) =
-      fixedSplitSection p t k d δ x := by sorry
-
+          PrimeSpectrum.basicOpen (algebraMap H C (ι g))
+        rfl)
+    ∃ f : Scheme.Opens.toScheme (X := Spec (CommRingCat.of F)) U ⟶
+        pullback p (Spec.map (CommRingCat.ofHom ι)),
+      IsOpenImmersion f ∧
+      f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι)) =
+        Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫
+          Spec.map (CommRingCat.ofHom (algebraMap H F)) := by
+  classical
+  dsimp only
+  let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)
+  let U : (Spec (CommRingCat.of F)).Opens :=
+    PrimeSpectrum.basicOpen (algebraMap H F (ι g))
+  let b := Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫
+    Spec.map (CommRingCat.ofHom (algebraMap H F))
+  obtain ⟨s, hsbase, hssection⟩ := affine_torsor_single_stabilizer_component_section
+    R H g ι C G ρ hρone hρmul hne p j hj hEt hrot d T t k hk δ hδ x K hK
+  let f := pullback.lift s b hsbase
+  have hbase : f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι)) = b := by
+    exact pullback.lift_snd s b hsbase
+  have hsection : (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE
+      U (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) (by
+        change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤
+          PrimeSpectrum.basicOpen (algebraMap H C (ι g))
+        rfl) ≫ f ≫ pullback.fst p (Spec.map (CommRingCat.ofHom ι)) =
+      fixedSplitSection p t k d δ x := by
+    simpa only [f, pullback.lift_fst] using hssection
+  have hopen : IsOpenImmersion f := affine_torsor_stabilizer_section_open
+    R H g ι C G ρ hρone hρmul hne p j hj hEt hrot d T t k hk δ hδ x K hK f hbase hsection
+  exact ⟨f, hopen, hbase⟩
 
 /-- A single representative section descends to an open component.
 
-Proof: combine the open component construction with the section identity.
+Proof: descend the selected section, construct the pullback lift, and apply the
+exact-stabilizer openness criterion. The pullback equations give both required identities.
 (blueprint: lem-sbc-affine-torsor-single-stabilizer-component) -/
 theorem affine_torsor_single_stabilizer_component
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
@@ -174,12 +218,25 @@ theorem affine_torsor_single_stabilizer_component
         fixedSplitSection p t k d δ x := by
   classical
   dsimp only
-  obtain ⟨f, hopen, hbase⟩ := affine_torsor_single_stabilizer_component_open
+  let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)
+  let U : (Spec (CommRingCat.of F)).Opens :=
+    PrimeSpectrum.basicOpen (algebraMap H F (ι g))
+  let b := Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫
+    Spec.map (CommRingCat.ofHom (algebraMap H F))
+  obtain ⟨s, hsbase, hssection⟩ := affine_torsor_single_stabilizer_component_section
     R H g ι C G ρ hρone hρmul hne p j hj hEt hrot d T t k hk δ hδ x K hK
-  refine ⟨f, hopen, hbase, ?_⟩
-  simpa only using affine_torsor_single_stabilizer_component_section
-    R H g ι C G ρ hρone hρmul hne p j hj hEt hrot d T t k hk δ hδ x K hK
-      (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C) f
-
+  let f := pullback.lift s b hsbase
+  have hbase : f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι)) = b := by
+    exact pullback.lift_snd s b hsbase
+  have hsection : (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE
+      U (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) (by
+        change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤
+          PrimeSpectrum.basicOpen (algebraMap H C (ι g))
+        rfl) ≫ f ≫ pullback.fst p (Spec.map (CommRingCat.ofHom ι)) =
+      fixedSplitSection p t k d δ x := by
+    simpa only [f, pullback.lift_fst] using hssection
+  have hopen : IsOpenImmersion f := affine_torsor_stabilizer_section_open
+    R H g ι C G ρ hρone hρmul hne p j hj hEt hrot d T t k hk δ hδ x K hK f hbase hsection
+  exact ⟨f, hopen, hbase, hsection⟩
 
 end AlgebraicGeometry.Scheme

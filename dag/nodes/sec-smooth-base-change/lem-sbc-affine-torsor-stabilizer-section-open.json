@@ -1,0 +1,110 @@
+{
+ "id": "lem-sbc-affine-torsor-stabilizer-section-open",
+ "kind": "lemma",
+ "title": "Openness criterion for a descended stabilizer section",
+ "statement": "Let R,H,g,ι,C,G,ρ,p,j,T,t,k,δ,x,K satisfy the finite faithful flat domain, finite etale, unique rotation and exact label stabilizer hypotheses of [lem-sbc-affine-torsor-split-label-laws]. Let F=C^K as the intersection of equalizer subalgebras, U=D(algebraMap H F (ι g)), and q:D(algebraMap H C (ι g))->U the restriction of Spec(F->C). For every f:U->Y×Spec H whose second projection is the canonical map U->Spec H and for which q followed by f and the first projection is the selected x-th split section, f is an open immersion. This is conditional on an already given f and both equations; it asserts no existence of a descended section or component.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03SF, finite Galois covers and permutation sets; stabilizer quotient argument"
+ },
+ "stmt_deps": [
+  "lem-sbc-affine-torsor-split-label-laws"
+ ],
+ "proof": [
+  {
+   "text": "Proof: let V = D(h), B = D(ι g), and E = Y × Spec H restricted over B.\nV -> B is a connected finite etale Galois cover: finiteness and surjectivity come\nfrom finite faithful flatness, etaleness from hEt, connectedness from the domain,\nand the Galois property from the unique rotation hypothesis on geometric points.\nE is finite etale over B by base change of j. Pull delta back along k to split E\non V. The section equation says the given f induces the chosen label x. Under the\nGalois equivalence, the map V/K -> E is the map from the transitive permutation\nset G/K to the labels, sending the identity coset to x. The exact stabilizer\nhypothesis hK makes this map injective: equal translated labels differ by K.\nIts image is a union of orbits, hence the corresponding finite etale subcover is\nopen and closed. Therefore f is an open immersion into E and into Y × Spec H.\nHere V/K is U because C[1/h]^K = (C^K)[1/h]: h is fixed and localization of the\ndomain is injective, so invariance of a fraction implies invariance of its numerator.\nThe base equation ensures f lies over B; the section equation fixes its label.\nFor G trivial this selects exactly one summand, not an arbitrary summand. For d=0\nthere is no x. No existence of f or of a descended section is asserted here.",
+   "uses": [
+    "lem-sbc-affine-torsor-split-label-laws"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-affine-torsor-split-label-laws"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C3",
+  "document": "Stacks Project",
+  "place": "Tag 03SF",
+  "note": "Repair of X-c85ad: separate descent of the selected section from conditional openness; no dependency on the parent theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A section of a split finite etale cover descends through its stabilizer invariant subring",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.FormallyEtale.iff_exists_algEquiv_prod, StandardEtalePair.homEquiv, StandardEtalePair.homEquiv_symm_apply, IsFractionRing.stabilizerHom_surjective, StandardEtalePair.lift, IsFractionRing.stabilizerHom",
+   "date": "2026-10-14",
+   "verdict": "Related ingredients only; no theorem about openness of a descended stabilizer quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion",
+   "results": "AlgebraicGeometry.isOpenImmersion_isMultiplicative, AlgebraicGeometry.isOpenImmersion_isStableUnderComposition, AlgebraicGeometry.isOpenImmersion_respectsIso, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Hom.opensRange, AlgebraicGeometry.IsOpenImmersion.mono",
+   "date": "2026-10-14",
+   "verdict": "Related ingredients only; no theorem about openness of a descended stabilizer quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer|invariant.*subring",
+   "results": "Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/Modular.lean, Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean, Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean, Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean, Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean",
+   "date": "2026-10-14",
+   "verdict": "Related ingredients only; no theorem about openness of a descended stabilizer quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale Galois stabilizer quotient is an open immersion into a finite etale cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSingleStabilizerComponent",
+  "date": "2026-10-14",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-torsor-single-stabilizer-component",
+   "place": "Exact stabilizer implies injectivity of the permutation-set map, hence openness, after section descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorStabilizerSectionOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_torsor_stabilizer_section_open",
+  "statement": "theorem affine_torsor_stabilizer_section_open\n    (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)\n    (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]\n    [Module.Finite H C] [Module.FaithfullyFlat H C]\n    (G : Type u) [Group G] [Finite G]\n    (ρ : G → C →ₐ[H] C)\n    (hρone : ρ 1 = AlgHom.id H C)\n    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))\n    (hne : algebraMap H C (ι g) ≠ 0)\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g))\n    (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)\n    [IsFinite j] [Etale j]\n    (hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C))\n      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H C))))\n    (hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),\n      a.comp (algebraMap H C) = b.comp (algebraMap H C) →\n      a (algebraMap H C (ι g)) ≠ 0 →\n      ∃! ζ : G, a.comp (ρ ζ).toRingHom = b)\n    (d : ℕ)\n    (T : Scheme.{u}) (t : T ⟶ Spec R)\n    (k : Scheme.Opens.toScheme (X := Spec (CommRingCat.of C))\n      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ⟶ T)\n    (hk : k ≫ t = Scheme.Opens.ι (X := Spec (CommRingCat.of C))\n      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H C)) ≫\n      Spec.map (CommRingCat.ofHom ι))\n    (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)\n    (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t)\n    (x : Fin d) (K : Subgroup G)\n    (hK : ∀ ζ, ζ ∈ K ↔\n      fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne\n        p T t k hk d δ hδ ζ x = x) :\n    let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)\n    let U : (Spec (CommRingCat.of F)).Opens := PrimeSpectrum.basicOpen (algebraMap H F (ι g))\n    let q := (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE\n      U (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) (by\n        change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤\n          PrimeSpectrum.basicOpen (algebraMap H C (ι g))\n        rfl)\n    ∀ (f : Scheme.Opens.toScheme (X := Spec (CommRingCat.of F)) U ⟶\n        pullback p (Spec.map (CommRingCat.ofHom ι))),\n      f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι)) =\n        Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫\n          Spec.map (CommRingCat.ofHom (algebraMap H F)) →\n      q ≫ f ≫ pullback.fst p (Spec.map (CommRingCat.ofHom ι)) =\n        fixedSplitSection p t k d δ x →\n      IsOpenImmersion f",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f73fe",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261014T020507-L-3809926",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f73fe",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261014T020507-L-3809926",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean signatures to their nodes, the statement repair to its change record, and the proofs to their dependencies; both delivered modules and AffineTorsorOrbitComponentDescent compile cleanly, with only permitted axioms plus sorryAx from the two reported holes."
+ }
+}
