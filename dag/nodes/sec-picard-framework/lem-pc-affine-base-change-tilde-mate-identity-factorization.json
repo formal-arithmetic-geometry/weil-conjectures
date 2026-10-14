@@ -1,0 +1,174 @@
+{
+ "id": "lem-pc-affine-base-change-tilde-mate-identity-factorization",
+ "kind": "statement",
+ "title": "Affine derived mate factorization for the identity tilde representative",
+ "statement": "Let $R,A,B,D$ be commutative rings, with $R$-algebra structures on $A,B$ and an $(A\\otimes_R B)$-algebra structure on $D$. Set $E=A\\otimes_R B$, $\\alpha:E\\to D$, $j:B\\to E$, and let $\\phi:A\\to D$ and $\\psi:B\\to D$ be the two restrictions of $\\alpha$. Assume the spectrum square with maps $f:\\operatorname{Spec}A\\to\\operatorname{Spec}R$, $g:\\operatorname{Spec}B\\to\\operatorname{Spec}R$, $p:\\operatorname{Spec}D\\to\\operatorname{Spec}A$, $f':\\operatorname{Spec}D\\to\\operatorname{Spec}B$ commutes. Assume the sheaf derived categories [def-pc-derived-category] and module derived categories over $R,B$ exist. Let $M$ be an unbounded $A$-K-flat complex [def-pc-module-kflat-complex], let $K\\in D_{QCoh}(\\operatorname{Spec}A)$, and take $K=Q(\\widetilde M)$ with $e$ its identity isomorphism. Assume the derived p-pullback counit on the homotopy object of $\\widetilde M$ is invertible. Fix $i\\in\\mathbb Z$ and the fixed tensor model $m$ [def-pc-base-derived-tensor-cohomology-model]. Let $C=D\\otimes_A M$ formed with the restriction of $\\alpha$ to $A$, and $C_g=D\\otimes_{A,\\phi}M$. Let $c_E$ be $m.comparison(i)$ followed by homology of $m.ordinaryToLocalized$ followed by the exact-restriction homology isomorphism. Let $\\rho:\\operatorname{res}_\\psi\\cong\\operatorname{res}_j\\operatorname{res}_\\alpha$ be the identity-on-carriers scalar comparison. Put $s=\\operatorname{res}_j(c_E)\\circ\\rho_{H^i(C)}^{-1}$ and let $z_0:H^i(C)\\to H^i(C_g)$ be the equality transport from the specified restriction of $\\alpha$ to $\\phi$. Define $t:Q(\\widetilde{C_g})\\cong Lp^*K$ to be the inverse of the unit-normalized termwise tensor-pullback isomorphism, followed by the inverse derived pullback counit and $Lp^*e$ [def-pc-affine-base-change-tilde-coordinates; lem-weil-pbc-tilde-pullback-base-change]. With $T=\\widetilde{(-)}$ on $B$-modules, $H=H^i$ on sheaves over $\\operatorname{Spec}B$, and the explicit ordinary-to-derived pushforward map $q_{C_g}$ [lem-pc-affine-tilde-pushforward-cohomology-normalization], there is an isomorphism $e_C:T(\\operatorname{res}_j(m.cohomology(i)))\\cong H(Lg^*Rf_*K)$ such that $e_C\\circ H(\\beta_K)=T(s)\\circ T(\\operatorname{res}_\\psi z_0)\\circ q_{C_g}\\circ H(Rf'_*t)$, in diagrammatic order, where $\\beta$ is the pinned derived mate [def-pc-derived-base-change-map]. This is a factorization through the ordinary pushforward complex; it asserts no natural target cohomology presentation. No quasi-coherence assumption on $Lp^*K$, cartesian assumption, or coefficient-map invertibility is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4; https://stacks.math.columbia.edu/tag/0DJ8; https://stacks.math.columbia.edu/tag/08HY; https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "perfect.tex, lemma-single-complex-base-change-condition (Tag 0DJ8), affine proof and equation-bc; more-algebra.tex, lemma-derived-base-change (Tag 06Y6); cohomology.tex, remark-base-change (Tag 08HY), pinned mate construction for commuting squares."
+ },
+ "stmt_deps": [
+  "def-pc-module-kflat-complex",
+  "def-pc-derived-base-change-map",
+  "def-pc-affine-base-change-tilde-representative-iso",
+  "def-pc-derived-category",
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof": [
+  {
+   "text": "Take a flat K-flat resolution P of the restriction of M to R using lem-pc-source-module-kflat-resolution. The universal derived scalar extension and counit in m identify its value on M with scalar extension of P to B. Exact tilde, the affine derived-pullback formula and the affine pushforward cohomology calculation identify its cohomology with H^i(Lg^*Rf_*K). Compose with m.cohomologyIso to obtain eC. The source does not depend on D and no cartesian assumption is needed.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+    "lem-pc-affine-morphism-hi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the pinned derived base-change compatibility with the right-derived units on the common K-flat span. The unit-normalized tensor-pullback comparison sends the ordinary mate to the scalar-extension augmentation followed by the coefficient map E to D. Apply cohomology. The equation m.comparison_eq identifies the first factor with m.comparison, and homology of the termwise coefficient map followed by the exact-restriction homology isomorphism gives cE. This uses only the commuting square, not invertibility of the coefficient map or of the base-change mate.",
+   "uses": [
+    "lem-pc-derived-base-change-unit-compatibility",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural identity-on-carriers scalar comparison transports res_j res_alpha to res_psi through the supplied equality, giving rho.inv after res_j c_E. Transport C to C_g through the equality of the two A-to-D maps. The ordinary tensor pullback/tilde comparison, lifted to complexes, followed by the right-derived pushforward unit is exactly q_Cg, including its exact-homology and Q/homology factors. The inverse pullback counit and e give the explicitly constructed t. Apply naturality to these maps and reassociate the equation from the preceding step; cancellation of the counit gives the claimed factorization. No natural cohomology presentation d occurs in this calculation.",
+   "uses": [
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+    "def-pc-affine-base-change-tilde-coordinates",
+    "lem-pc-derived-base-change-unit-compatibility",
+    "lem-weil-pbc-tilde-pullback-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-base-change-map",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+  "lem-pc-derived-base-change-unit-compatibility",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-14",
+  "document": "Stacks Project, Tags 0DJ8, 06Y6 and 08HY",
+  "place": "perfect.tex, lemma-single-complex-base-change-condition (Tag 0DJ8), affine proof and equation-bc; more-algebra.tex, lemma-derived-base-change (Tag 06Y6); cohomology.tex, remark-base-change (Tag 08HY), pinned mate construction for commuting squares.",
+  "note": "Separates the identity representative calculation from the proved transport to an arbitrary representative."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange.*unit|rightDerivedFunctorUnit|map_comp",
+   "results": "Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/Logic/Function/Iterate.lean, Mathlib/Logic/Function/Defs.lean, Mathlib/Logic/Function/Defs.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/Logic/Function/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "Functor.map_comp supports the transport calculation; no exact affine identity-mate factorization found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine derived base change factorization for the identity representative of a K flat module complex",
+   "results": "AlgebraicGeometry.Scheme.Hom.flat_appLE, RingHom.Flat.id, AlgebraicGeometry.Flat.flat_appLE, KaehlerDifferential.tensorKaehlerEquiv_left_inv, RingHom.Flat.containsIdentities, Module.Flat.isBaseChange, RingHom.Flat.isStableUnderBaseChange, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex",
+   "date": "2026-10-14",
+   "verdict": "Functor.map_comp supports the transport calculation; no exact affine identity-mate factorization found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.mk, PresheafOfModulesOfCommRing.mk, AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "date": "2026-10-14",
+   "verdict": "Functor.map_comp supports the transport calculation; no exact affine identity-mate factorization found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine derived base change mate for the identity K flat complex tilde representative",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable: service returned Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*(extendScalars|tensorPullback)|mate.*natural|exchange.*homology",
+   "results": "Mathlib/Combinatorics/Additive/ApproximateSubgroup.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/Data/Rat/NatSqrt/Defs.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Sites/Limits.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean",
+   "date": "2026-10-14",
+   "verdict": "Second reading: adjunction naturality supports the proved transport; no affine identity-case factorization found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "date": "2026-10-14",
+   "verdict": "Second reading: adjunction naturality supports the proved transport; no affine identity-case factorization found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology scalar extension affine sheaf exchange morphism factorization",
+   "results": "AlgebraicGeometry.AffineSpace.comp_homOfVector, AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc, AlgebraicGeometry.AffineSpace.homOfVector_over_assoc, AlgebraicGeometry.Scheme.Modules.map_smul, SheafOfModules.unitHomEquiv_comp_apply, ModuleCat.Tilde.toOpen_res, SheafOfModules.unitHomEquiv_symm_comp, AlgebraicGeometry.AffineSpace.homOfVector_over",
+   "date": "2026-10-14",
+   "verdict": "Second reading: adjunction naturality supports the proved transport; no affine identity-case factorization found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineBaseChangeTildeMateFactorization",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-base-change-tilde-mate-factorization",
+   "place": "Identity representative calculation and transport in proof steps 1–3"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineBaseChangeTildeMateIdentityFactorization",
+  "file": "lean/Sheaf/Algebra/Homology/AffineBaseChangeTildeMateIdentityFactorization.lean",
+  "declaration": "AlgebraicGeometry.exists_affineBaseChangeTildeMateIdentityFactorization",
+  "declarations": [
+   "AlgebraicGeometry.exists_affineBaseChangeTildeMateIdentityFactorization"
+  ],
+  "statement": "theorem exists_affineBaseChangeTildeMateIdentityFactorization\n    (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']\n    [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']\n    [HasDerivedCategory.{wM} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{wM} (ModuleCat.{u} R')]\n    (φg' : A →+* A') (φf' : R' →+* A')\n    (hφg' : (algebraMap (A ⊗[R] R') A').comp\n      (algebraMap A (A ⊗[R] R')) = φg')\n    (hφf' : (algebraMap (A ⊗[R] R') A').comp\n      Algebra.TensorProduct.includeRight.toRingHom = φf')\n    (hw : Spec.map (CommRingCat.ofHom φg') ≫\n        Spec.map (CommRingCat.ofHom (algebraMap R A)) =\n      Spec.map (CommRingCat.ofHom φf') ≫\n        Spec.map (CommRingCat.ofHom (algebraMap R R')))\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (hM : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat M)\n    (hK : schemeDerivedQCohProperty (Spec (.of A))\n      (DerivedCategory.Q.obj\n        (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)))\n    (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app\n      ((HomotopyCategory.quotient _ (.up ℤ)).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n        (@id (ModuleCat.{u} A ⥤\n          SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)))) (i : ℤ)\n :\n    let K := DerivedCategory.Q.obj\n      (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)\n    let e := Iso.refl K\n    let m := ModuleCat.baseDerivedTensorCohomologyModel R A R' M A'\n    let α := algebraMap (A ⊗[R] R') A'\n    let j : R' →+* A ⊗[R] R' := Algebra.TensorProduct.includeRight.toRingHom\n    let T := tilde.functor (.of R')\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i\n    let C := (((ModuleCat.extendScalars (α.comp\n      (algebraMap A (A ⊗[R] R')))).mapHomologicalComplex (.up ℤ)).obj M)\n    let Cg := ((ModuleCat.extendScalars φg').mapHomologicalComplex (.up ℤ)).obj M\n    let cE := m.comparison i ≫ HomologicalComplex.homologyMap m.ordinaryToLocalized i ≫\n      ((C.sc i).mapHomologyIso (ModuleCat.restrictScalars α)).hom\n    let ρ := ModuleCat.restrictScalarsComp' j α φf' hφf'.symm\n    let s := (ModuleCat.restrictScalars j).map cE ≫ ρ.inv.app (C.homology i)\n    let z₀ := (HomologicalComplex.homologyFunctor (ModuleCat.{u} A') (.up ℤ) i).map\n      (eqToHom (by dsimp only [C, α]; rw [hφg'] : C = Cg))\n    let t := affineBaseChangeTildeRepresentativeIso A A' φg' K M e hc\n    ∃ eC : T.obj ((ModuleCat.restrictScalars j).obj (m.cohomology i)) ≅\n        H.obj ((derivedPullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).obj\n          ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom (algebraMap R A)))).obj K)),\n      eC.hom ≫ H.map (schemeDerivedBaseChangeMap\n        (Spec.map (CommRingCat.ofHom (algebraMap R A)))\n        (Spec.map (CommRingCat.ofHom φf'))\n        (Spec.map (CommRingCat.ofHom (algebraMap R R')))\n        (Spec.map (CommRingCat.ofHom φg')) hw K) =\n      T.map s ≫ T.map ((ModuleCat.restrictScalars φf').map z₀) ≫\n        affineTildePushforwardCohomologyMap A' R' φf' Cg i ≫\n        H.map ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf'))).map t.hom)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-d9e24",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T025137-L-156195",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-d9e24",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T025137-L-156195",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, moved definition body, identity-case reduction, DAG records and report; all three delivered modules and direct importer AffineBaseChangeTildeOrdinaryComparison compile cleanly; axiom probes show only standard axioms plus sorryAx for the named remaining hole."
+ }
+}
