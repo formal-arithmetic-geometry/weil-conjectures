@@ -14958,3 +14958,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 07:23 L: batch 20261014T231845 dependency take-out
 - 23:46 L: merged deliver/K1/Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData (stage 3; reviewer PASS; first push; landing 20261014T234607-L-1023500 (interface); batch 20261014T234605; modules 1; new nodes 0; change records: coord/changes/perfect_overlap_object_realization_core_data_imports.md)
+- 23:55 L: returned deliver/K1/Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility (reviewer RETURN: (reviewer X-727e3, head 727e38081) H9:9: In lean/Sheaf/AlgebraicGeometry/ScalarizedModuleCupRealization.lean, change `pu)
