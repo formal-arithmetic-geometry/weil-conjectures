@@ -14591,3 +14591,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:05 L: merged deliver/P2/Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison (stage 3; reviewer PASS; first push; landing 20261014T050530-L-1686598 (proof); batch 20261014T050523; modules 1; new nodes 0)
 - 05:05 L: merged deliver/P2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T050531-L-1686796 (proof); batch 20261014T050523; modules 1; new nodes 0)
 - 05:05 L: returned deliver/V2/Sheaf.AlgebraicGeometry.PerfectDescendMorphisms (reviewer RETURN: (reviewer X-b8681, head b868151bb) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pe)
+- 05:10 L: merged deliver/N2/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T051040-L-1749855 (proof); batch 20261014T051038; modules 1; new nodes 0)

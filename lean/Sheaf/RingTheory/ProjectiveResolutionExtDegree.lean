@@ -12,7 +12,9 @@ import Mathlib.Init
 
 The Ext criterion is supplied by Mathlib's `CategoryTheory.hasProjectiveDimensionLT_iff`.
 The distinct comparison with actual bounded resolutions is in
-`Sheaf.RingTheory.BoundedProjectiveResolutionDimension`. This module exports no declaration.
+`Sheaf.RingTheory.BoundedProjectiveResolutionDimension`.
+This retired compatibility module exports no declaration.
+Callers use the comparison module.
 -/
 
 @[expose] public section
