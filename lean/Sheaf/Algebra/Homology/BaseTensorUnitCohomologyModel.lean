@@ -2,6 +2,8 @@ module
 
 public import Sheaf.Algebra.Homology.LocalizationModelSemilinear
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Sheaf.Algebra.Homology.MixedTotalTensorScalarExtension
+import Sheaf.Algebra.Homology.BalancedTensorUnitModelComparison
 
 @[expose] public section
 
@@ -55,6 +57,33 @@ theorem exists_baseTensorUnitCohomologyModel (i : ℤ)
         e'.hom (localizationModelMap R A Aq B D i Q L K uQ x) =
           (HomologicalComplex.homologyMap
             (((ModuleCat.extendRestrictScalarsAdj (algebraMap A Aq)).mapHomologicalComplex
-              (.up ℤ)).unit.app C) i) (e.hom x) := by sorry
+              (.up ℤ)).unit.app C) i) (e.hom x) := by
+  classical
+  let E := (CochainComplex.singleFunctor (ModuleCat.{u} R) (0 : ℤ)).obj (ModuleCat.of R B)
+  let Λ := flatResolution R
+  let F := Λ.resolutionFunctor.obj E
+  let f := Λ.resolutionNatTrans.app E
+  have hf : QuasiIso f := inferInstance
+  have hF := Λ.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le E
+  obtain ⟨θ, hθ⟩ := exists_mixedTotalTensor_scalarExtension R A Aq Q F
+  obtain ⟨e, eq, he⟩ :=
+    exists_balancedTensorUnitModelComparison R A Aq B D i Q L K uQ huQ F f hf hF θ hθ
+  let C := ((ModuleCat.mixedTotalTensor (algebraMap R A)).obj Q).obj F
+  let H := HomologicalComplex.homologyFunctor (ModuleCat.{u} A) (.up ℤ) i
+  let t := H.mapIso ((restrict A Aq).mapIso θ)
+  refine ⟨C, e, eq ≪≫ t.symm, ?_⟩
+  intro x
+  have hx := he x
+  dsimp only [Iso.trans_hom, Iso.symm_hom]
+  change t.inv (eq.hom (localizationModelMap R A Aq B D i Q L K uQ x)) = _
+  rw [hx, HomologicalComplex.homologyMap_comp]
+  change t.inv (t.hom
+    ((HomologicalComplex.homologyMap
+      (((ModuleCat.extendRestrictScalarsAdj (algebraMap A Aq)).mapHomologicalComplex
+        (.up ℤ)).unit.app C) i) (e.hom x))) = _
+  exact congrArg (fun k ↦ k
+    ((HomologicalComplex.homologyMap
+      (((ModuleCat.extendRestrictScalarsAdj (algebraMap A Aq)).mapHomologicalComplex
+        (.up ℤ)).unit.app C) i) (e.hom x))) t.hom_inv_id
 
 end RingTensorCohomology

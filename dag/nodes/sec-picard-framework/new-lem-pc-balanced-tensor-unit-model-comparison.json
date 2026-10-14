@@ -1,0 +1,141 @@
+{
+ "id": "new-lem-pc-balanced-tensor-unit-model-comparison",
+ "kind": "statement",
+ "title": "Natural comparisons for fixed balanced tensor complexes",
+ "statement": "Let R,A,Aq,B,D be commutative rings in one universe with compatible R -> A -> Aq algebra structures, R -> B, algebra structures (A tensor_R B) -> D and (Aq tensor_R B) -> D, and derived categories for R-modules and B-modules. Let Q be an A-module cochain complex, L a base-derived R-to-B tensor cohomology model for Q, and K one for Aq tensor_A Q [def-pc-base-derived-tensor-cohomology-model]. Let uQ be the R-linear degreewise unit x -> 1 tensor x [lem-pc-first-localization-cohomology-semilinear]. Supply a quasi-isomorphism f:F -> B[0] with F an R-K-flat cochain complex [def-pc-module-kflat-complex]. Set C=Tot(Q tensor_R F) and Cq=Tot((Aq tensor_A Q) tensor_R F) using the explicit mixed total tensors [def-pc-mixed-total-tensor]. Supply an Aq-linear chain isomorphism theta:Aq tensor_A C -> Cq which sends 1 tensor (x tensor (1 tensor y)) to (1 tensor x) tensor (1 tensor y) on each diagonal summand. For every integer i there are A-linear isomorphisms e from L.cohomology(i), restricted along A -> A tensor_R B, to H^i(C), and eq from K.cohomology(i), restricted along A -> Aq -> Aq tensor_R B, to H^i(restrict_A Cq). They satisfy eq(localizationModelMap(x))=H^i(unit_C followed by restrict_A(theta))(e(x)). The complexes C and Cq are these fixed constructions, not arbitrary complexes with the same cohomology. The termwise extension and restriction functors are those of def-pc-ring-tensor-cohomology.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 064L and 06Y6; explicit step of new-lem-pc-base-tensor-unit-cohomology-model"
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-first-localization-cohomology-semilinear",
+  "def-pc-module-kflat-complex",
+  "def-pc-mixed-total-tensor",
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Compute the derived tensor using the supplied K-flat F. Resolve the underlying R-complex of each first factor by P. K-flatness of F identifies Tot(P tensor_R F) with Tot(Q tensor_R F); K-flatness of P identifies it with Tot(P tensor_R B[0]). The latter is ordinary extension to B. The universal counits compare this with L.derived and K.derived. The counit on the R-K-flat resolution P is invertible by lem-pc-kflat-scalar-extension-counit; naturality for P -> Q transports the comparison. P here resolves the underlying R-complex, not an A-K-flat complex mistakenly regarded as R-K-flat.",
+   "uses": [
+    "lem-pc-balanced-derived-tensor-model",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-kflat-scalar-extension-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality for multiplication by a in A, together with the cohomologyIso_smul fields, upgrades the comparisons to A-linear isomorphisms. The pure-tensor formula shows unit_C followed by theta is uQ tensored with F. Naturality of the resolution comparisons and uniqueness of the universal-counit comparison identify its cohomology map with localizationModelMap.",
+   "uses": [
+    "lem-pc-derived-tensor-action-naturality",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-balanced-derived-tensor-model",
+  "lem-pc-derived-tensor-action-naturality",
+  "lem-pc-kflat-scalar-extension-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 064L and 06Y6; explicit mixed-complex assembly and universal-counit comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of cohomology comparison for balanced derived tensor models",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat resolution of the second tensor factor computes a universal left derived tensor functor naturally in the first complex",
+   "date": "2026-10-14",
+   "results": [
+    "CategoryTheory.Tor'",
+    "CategoryTheory.Tor'_obj_obj",
+    "CategoryTheory.Tor",
+    "CategoryTheory.Tor_obj",
+    "CategoryTheory.Tor'_map_app",
+    "CategoryTheory.Tor_map",
+    "CategoryTheory.Tor'_obj_map",
+    "CategoryTheory.NatTrans.leftDerived"
+   ],
+   "verdict": "General infrastructure only; no direct theorem for these explicit mixed total tensor complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedNatIso\"",
+   "date": "2026-10-14",
+   "results": [
+    "CategoryTheory.Functor.leftDerivedNatIso",
+    "CategoryTheory.Functor.leftDerivedNatIso_hom",
+    "CategoryTheory.Functor.leftDerivedNatIso_inv"
+   ],
+   "verdict": "General infrastructure only; no direct theorem for these explicit mixed total tensor complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*mixedTotalTensor|mixedTotalTensor.*extend; Mathlib.Algebra.Homology and ModuleCat monoidal sources",
+   "date": "2026-10-14",
+   "results": "No mixed total tensor scalar-extension theorem. ModuleCat.Monoidal.Adjunction gives the module-level monoidal extension. HomologicalComplex.mapBifunctor and source-library HomologicalComplex2.mapTotalIso give total-complex infrastructure.",
+   "verdict": "Components found, but no direct theorem with the required explicit-complex comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseTensorUnitCohomologyModel",
+  "date": "2026-10-14",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-first-localization-cohomology-kernel",
+   "place": "balanced-complex computation of the scalar extension unit",
+   "via": [
+    "new-lem-pc-base-tensor-unit-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BalancedTensorUnitModelComparison",
+  "file": "lean/Sheaf/Algebra/Homology/BalancedTensorUnitModelComparison.lean",
+  "declaration": "RingTensorCohomology.exists_balancedTensorUnitModelComparison",
+  "statement": "theorem exists_balancedTensorUnitModelComparison (i : ℤ)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)\n    (K : ModuleCat.BaseDerivedTensorCohomologyModel R Aq B ((extend A Aq).obj Q) D)\n    (uQ : (restrict R A).obj Q ⟶ (restrict R Aq).obj ((extend A Aq).obj Q))\n    (huQ : ∀ (j : ℤ) (x : Q.X j), uQ.f j x = (1 : Aq) ⊗ₜ[A,algebraMap A Aq] x)\n    (F : CochainComplex (ModuleCat.{u} R) ℤ)\n    (f : F ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} R) (0 : ℤ)).obj\n      (ModuleCat.of R B))\n    (hf : QuasiIso f)\n    (hF : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat F)\n    (θ : (extend A Aq).obj\n        (((ModuleCat.mixedTotalTensor (algebraMap R A)).obj Q).obj F) ≅\n      ((ModuleCat.mixedTotalTensor (algebraMap R Aq)).obj ((extend A Aq).obj Q)).obj F)\n    (hθ :\n    ∀ (p q n : ℤ) (h : p + q = n) (x : Q.X p) (y : F.X q),\n      θ.hom.f n ((1 : Aq) ⊗ₜ[A,algebraMap A Aq]\n        ((HomologicalComplex.ιMapBifunctor Q F\n          (ModuleCat.mixedTensor (algebraMap R A)) (.up ℤ) p q n h)\n            (x ⊗ₜ[A] ((1 : A) ⊗ₜ[R,algebraMap R A] y)))) =\n      (HomologicalComplex.ιMapBifunctor ((extend A Aq).obj Q) F\n        (ModuleCat.mixedTensor (algebraMap R Aq)) (.up ℤ) p q n h)\n          (((1 : Aq) ⊗ₜ[A,algebraMap A Aq] x) ⊗ₜ[Aq]\n            ((1 : Aq) ⊗ₜ[R,algebraMap R Aq] y))) :\n    let C := ((ModuleCat.mixedTotalTensor (algebraMap R A)).obj Q).obj F\n    let Cq := ((ModuleCat.mixedTotalTensor (algebraMap R Aq)).obj\n      ((extend A Aq).obj Q)).obj F\n    ∃ (e : (ModuleCat.restrictScalars\n        (Algebra.TensorProduct.includeLeft (S := R) : A →ₐ[R] A ⊗[R] B).toRingHom).obj\n          (L.cohomology i) ≅ C.homology i)\n      (eq : (ModuleCat.restrictScalars\n        ((Algebra.TensorProduct.includeLeft (S := R) : Aq →ₐ[R] Aq ⊗[R] B).toRingHom.comp\n          (algebraMap A Aq))).obj (K.cohomology i) ≅ ((restrict A Aq).obj Cq).homology i),\n      ∀ x : L.cohomology i,\n        eq.hom (localizationModelMap R A Aq B D i Q L K uQ x) =\n          (HomologicalComplex.homologyMap\n            ((((ModuleCat.extendRestrictScalarsAdj (algebraMap A Aq)).mapHomologicalComplex\n              (.up ℤ)).unit.app C) ≫ (restrict A Aq).map θ.hom) i) (e.hom x)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261014T020513-L-3812179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261014T020513-L-3812179",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
