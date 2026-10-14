@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **864**, closure **42**, holes in definitions **6**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **849**, closure **29**, holes in definitions **6**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -22,23 +22,23 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 639 | 33 |
-| WeilConjectures | 225 | 9 |
+| Sheaf | 626 | 19 |
+| WeilConjectures | 223 | 10 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2167 | 106 | 2061 | 4 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 2109 | 104 | 2005 | 4 | 1 |
-| 660345513 (Application of proof-dependency imports) | closure | 1974 | 33 | 1941 | 3 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2169 | 93 | 2076 | 4 | 1 |
+| 660345513 (Application of proof-dependency imports) | library | 2111 | 91 | 2020 | 4 | 1 |
+| 660345513 (Application of proof-dependency imports) | closure | 1976 | 19 | 1957 | 3 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3335 |
+| proved | 3348 |
 | decomposed | 47 |
-| moved | 3882 |
-| pruned | 117 |
+| moved | 3883 |
+| pruned | 118 |
 | other | 457 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
@@ -55,7 +55,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | C2 | 110 | 103 | 74 | 29 | 50/110 (45.5%) |
 | C3 | 107 | 106 | 74 | 32 | 52/107 (48.6%) |
 | C4 | 39 | 33 | 28 | 5 | 18/39 (46.2%) |
-| D2 | 126 | 125 | 86 | 39 | 58/126 (46.0%) |
+| D2 | 127 | 125 | 86 | 39 | 59/127 (46.5%) |
 | D3 | 96 | 101 | 66 | 35 | 47/96 (49.0%) |
 | D4 | 50 | 45 | 41 | 4 | 25/50 (50.0%) |
 | E1 | 142 | 157 | 102 | 55 | 78/142 (54.9%) |
@@ -68,7 +68,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | F4 | 49 | 43 | 36 | 7 | 25/49 (51.0%) |
 | G1 | 135 | 136 | 111 | 25 | 74/135 (54.8%) |
 | G2 | 131 | 131 | 88 | 43 | 60/131 (45.8%) |
-| G3 | 96 | 99 | 66 | 33 | 45/96 (46.9%) |
+| G3 | 97 | 100 | 66 | 34 | 45/97 (46.4%) |
 | G4 | 52 | 44 | 28 | 16 | 18/52 (34.6%) |
 | H1 | 130 | 128 | 105 | 23 | 73/130 (56.2%) |
 | H2 | 108 | 106 | 88 | 18 | 64/108 (59.3%) |
@@ -91,8 +91,8 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | N3 | 86 | 81 | 65 | 16 | 45/86 (52.3%) |
 | N4 | 53 | 51 | 48 | 3 | 29/53 (54.7%) |
 | P1 | 116 | 136 | 91 | 45 | 65/116 (56.0%) |
-| P2 | 128 | 120 | 79 | 41 | 54/128 (42.2%) |
-| P3 | 99 | 93 | 81 | 12 | 52/99 (52.5%) |
+| P2 | 129 | 121 | 79 | 42 | 54/129 (41.9%) |
+| P3 | 100 | 93 | 81 | 12 | 52/100 (52.0%) |
 | P4 | 51 | 47 | 39 | 8 | 26/51 (51.0%) |
 | Q1 | 103 | 104 | 74 | 30 | 54/103 (52.4%) |
 | Q2 | 103 | 106 | 79 | 27 | 52/103 (50.5%) |
@@ -102,26 +102,26 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | R2 | 120 | 120 | 75 | 45 | 52/120 (43.3%) |
 | R3 | 93 | 90 | 65 | 25 | 42/93 (45.2%) |
 | R4 | 55 | 46 | 41 | 5 | 26/55 (47.3%) |
-| S1 | 117 | 119 | 103 | 16 | 67/117 (57.3%) |
+| S1 | 120 | 122 | 103 | 19 | 67/120 (55.8%) |
 | S2 | 121 | 125 | 98 | 27 | 63/121 (52.1%) |
 | S3 | 102 | 97 | 63 | 34 | 48/102 (47.1%) |
 | S4 | 43 | 41 | 32 | 9 | 22/43 (51.2%) |
 | T1 | 107 | 107 | 80 | 27 | 55/107 (51.4%) |
 | T2 | 131 | 153 | 97 | 56 | 64/131 (48.9%) |
 | T3 | 98 | 93 | 75 | 18 | 52/98 (53.1%) |
-| T4 | 60 | 52 | 37 | 15 | 24/60 (40.0%) |
+| T4 | 63 | 55 | 37 | 18 | 24/63 (38.1%) |
 | U1 | 125 | 126 | 92 | 34 | 62/125 (49.6%) |
 | U2 | 135 | 129 | 92 | 37 | 63/135 (46.7%) |
 | U3 | 95 | 97 | 69 | 28 | 49/95 (51.6%) |
 | U4 | 51 | 45 | 40 | 5 | 28/51 (54.9%) |
 | V1 | 112 | 105 | 85 | 20 | 55/112 (49.1%) |
 | V2 | 125 | 122 | 89 | 33 | 61/125 (48.8%) |
-| V3 | 104 | 108 | 74 | 34 | 55/104 (52.9%) |
+| V3 | 106 | 110 | 74 | 36 | 55/106 (51.9%) |
 | V4 | 49 | 43 | 36 | 7 | 24/49 (49.0%) |
 | W2 | 113 | 118 | 78 | 40 | 54/113 (47.8%) |
 | W3 | 83 | 83 | 58 | 25 | 40/83 (48.2%) |
-| W4 | 41 | 37 | 32 | 5 | 23/41 (56.1%) |
-| X2 | 115 | 111 | 93 | 18 | 62/115 (53.9%) |
+| W4 | 42 | 38 | 32 | 6 | 23/42 (54.8%) |
+| X2 | 117 | 114 | 93 | 21 | 62/117 (53.0%) |
 | X3 | 98 | 93 | 62 | 31 | 43/98 (43.9%) |
 | XR33076d633fce5c89 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XR916f3f6fae119923 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
@@ -143,24 +143,24 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 |---|---:|---:|---|
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty | 0 | 1 | ORCHESTRA |
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine | 0 | 1 | ORCHESTRA |
-| Sheaf.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus | 3 | 1 | X2 |
-| WeilConjectures.ConstructibleSheaf.FinitePushforward | 3 | 4 | X2 |
+| WeilConjectures.ConstructibleSheaf.FinitePushforward | 3 | 2 | Q3 |
 | Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic | 6 | 1 | X2 |
+| Sheaf.CategoryTheory.SiteSystemStrictificationData | 7 | 1 | M4 |
 | Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange | 8 | 1 | X2 |
 | Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero | 8 | 1 | S1 |
-| Sheaf.AlgebraicGeometry.BaseChangeSourceImageLimitDescent | 8 | 1 | S1 |
-| Sheaf.AlgebraicGeometry.BaseChangeSourceTransitionThickening | 8 | 1 | S1 |
-| Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionThickening | 8 | 1 | S1 |
 | WeilConjectures.AlgebraicGeometry.Picard.Jacobian | 8 | 2 | T4 |
-| Sheaf.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities | 9 | 1 | T4 |
-| Sheaf.AlgebraicGeometry.EtaleRestrictScalarsPullbackSquare | 9 | 1 | T4 |
 | Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality | 10 | 1 | N1 |
-| Sheaf.CategoryTheory.SiteSystemStrictificationData | 10 | 1 | M4 |
-| Sheaf.RingTheory.HopfAlgebra.AugmentationHeight | 13 | 1 | T4 |
-| Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare | 19 | 1 | W4 |
 | Sheaf.AlgebraicGeometry.RawModuleScalarPullbackModuleFormula | 20 | 1 | W4 |
-| WeilConjectures.SixFunctors.Etale.Derived.UpperShriek | 20 | 1 | V2 |
-| Sheaf.AlgebraicGeometry.EtaleProperDerivedDirectImageAdjoint | 21 | 1 | V3 |
+| WeilConjectures.SixFunctors.Etale.Derived.UpperShriek | 20 | 1 | T1 |
+| WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula | 22 | 3 | Q1 |
+| Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization | 23 | 1 | N3 |
+| Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation | 24 | 1 | G4 |
+| Sheaf.Paper.ModuleCupEqualDerivedMapsClass | 27 | 1 | E2 |
+| Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex | 28 | 1 | H4 |
+| Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows | 29 | 1 | W3 |
+| Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate | 30 | 1 | XR32ae8835ad92617e |
+| Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility | 30 | 1 | B2 |
+| Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization | 33 | 1 | B2 |
 
 Modules pruned since the imports baseline:
 
@@ -474,6 +474,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.DVRValuationRingCharacterization`
 - `Sheaf.RingTheory.DirectedUnionSubringsFlatModule`
 - `Sheaf.RingTheory.Etale.QuasiFiniteAtPrime`
+- `Sheaf.RingTheory.EtaleColimitNormalLocalDomain`
 - `Sheaf.RingTheory.EtaleFiniteFactorDecomposition`
 - `Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting`
 - `Sheaf.RingTheory.ExistsNegativeValuationOfTensorSurjective`
@@ -546,7 +547,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.Topology.SurjectionKernelPairCoequalizer`
 - `WeilConjectures.AlgebraicGeometry.Cohomology.Projective`
 - `WeilConjectures.AlgebraicGeometry.Curve.DivisorSequence`
-- `WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit`
 
 Scanner limitations: macro-generated declarations, elaborated anonymous/private names, and tactic dependencies cannot be recovered from source. Synthetic names are source keys, not elaborated names.
 
