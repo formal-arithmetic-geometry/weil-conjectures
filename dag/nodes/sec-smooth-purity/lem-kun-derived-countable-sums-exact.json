@@ -21,67 +21,200 @@
   "def-weil-pbc-category-colimit",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form $S^r=\\bigoplus_i K_i^r$ in $\\mathcal A$. By the coproduct universal property define $d_S^r$ by $d_S^r\\iota_i^r=\\iota_i^{r+1}d_i^r$. Then $d_S^{r+1}d_S^r\\iota_i^r=\\iota_i^{r+2}d_i^{r+1}d_i^r=0$, hence $d_S^{r+1}d_S^r=0$ for every r and each $\\iota_i$ is a chain map. Degreewise assembly of a family of chain maps gives a chain map out of S, uniquely, since the chain-map equations can be checked on every coprojection. This also works in the homotopy category: representatives assemble degreewise, and component homotopies $h_i^r:K_i^r\\to T^{r-1}$ assemble to $h^r:S^r\\to T^{r-1}$. The homotopy equation $f-g=d_T h+h d_S$ holds if and only if it holds on all coprojections. Thus S with its coprojections is a coproduct in $K(\\mathcal A)$ as well. Write $\\overline Q:K(\\mathcal A)\\to D(\\mathcal A)$ for the induced localization; on a chain map its value is Q of that chain map.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-category-colimit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A5L (lemma-direct-sums), proof"
+   }
+  },
+  {
+   "text": "Exact countable sums imply the following cohomology computation, directly from the hypothesis. Put $Z_i^r=\\ker d_i^r$ and $B_i^r=\\operatorname{im}d_i^{r-1}$. Sum the short exact sequences $0\\to Z_i^r\\to K_i^r\\to B_i^{r+1}\\to0$ and $0\\to B_i^{r+1}\\to K_i^{r+1}\\to K_i^{r+1}/B_i^{r+1}\\to0$. Since $d_S^r$ factors through the resulting epimorphism to $\\bigoplus_i B_i^{r+1}$ and its monomorphism into $S^{r+1}$, these identify $\\ker d_S^r=\\bigoplus_i Z_i^r$ and $\\operatorname{im}d_S^{r-1}=\\bigoplus_i B_i^r$. Summing $0\\to B_i^r\\to Z_i^r\\to H^r(K_i)\\to0$ now gives $H^r(S)\\cong\\bigoplus_i H^r(K_i)$. For a family of chain maps $c_i:K_i\\to L_i$, the equalities $d_{L_i}c_i=c_i d_{K_i}$ induce maps $Z_i^r(K)\\to Z_i^r(L)$ and $B_i^r(K)\\to B_i^r(L)$. The summed maps commute with the summed inclusions into $S^r$ by checking each coprojection, and therefore with their quotient maps by the cokernel universal property. Thus under the displayed identification $H^r(\\bigoplus_i c_i)$ is $\\bigoplus_i H^r(c_i)$. Consequently a countable direct sum of quasi-isomorphisms is a quasi-isomorphism: its cohomology maps identify with sums of isomorphisms, whose inverses are the sums of the inverses. Also quasi-isomorphisms satisfy two-out-of-three, by applying each $H^r$ and two-out-of-three for isomorphisms.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A5L (lemma-direct-sums), proof"
+   }
+  },
+  {
+   "text": "For a target complex L and maps $\\alpha_i:Q(K_i)\\to Q(L)$, use the right calculus for quasi-isomorphisms and right-fraction representation to choose $s_i:M_i\\to K_i$ quasi-isomorphisms and $f_i:M_i\\to L$ in $K(\\mathcal A)$ with $\\alpha_i=\\overline Q(f_i)\\overline Q(s_i)^{-1}$. Choose chain representatives. Step 1 assembles $f:\\bigoplus_i M_i\\to L$ and $s=\\bigoplus_i s_i:\\bigoplus_i M_i\\to S$; step 2 makes s a quasi-isomorphism. Define $\\alpha=Q(f)Q(s)^{-1}$. For the coprojection $j_i:M_i\\to\\bigoplus_i M_i$, the equality $s j_i=\\iota_i s_i$ gives $Q(s)^{-1}Q(\\iota_i)=Q(j_i)Q(s_i)^{-1}$, hence $\\alpha Q(\\iota_i)=Q(f_i)Q(s_i)^{-1}=\\alpha_i$. Every derived target is represented by a complex, or is isomorphic to its image under Q, so existence for these targets suffices.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A5L (lemma-direct-sums), proof"
+   }
+  },
+  {
+   "text": "We record exactly the equality criterion needed below, as a specialization of common refinement, not as an additional lemma. If $u,v:X\\to Y$ in $K(\\mathcal A)$ satisfy $\\overline Q(u)=\\overline Q(v)$, apply common refinement to the two right fractions $(1_X,u)$ and $(1_X,v)$. It supplies $a,b:N\\to X$ with $1_Xa=1_Xb\\in\\mathrm{Qis}$ and $u a=v b$. Thus $a=b$ is a quasi-isomorphism and $u a=v a$ in the homotopy category.",
+   "uses": [
+    "lem-pc-right-fraction-common-refinement",
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VJ (lemma-equality-morphisms-right-localization); right-fraction equivalence relation"
+   }
+  },
+  {
+   "text": "For uniqueness, let $\\alpha,\\beta:Q(S)\\to Q(L)$ have equal restrictions. Right-fraction representation gives roofs $(s_1:M_1\\to S,f_1:M_1\\to L)$ and $(s_2:M_2\\to S,f_2:M_2\\to L)$. Use the right-calculus square axiom RMS2 for $s_1$ and $s_2$: there are $u:N\\to M_2$ quasi-isomorphic and $v:N\\to M_1$ with $s_1v=s_2u$. The latter composite is a quasi-isomorphism by composition, and v is one by two-out-of-three from step 2. Therefore put $s=s_1v=s_2u$, $f=f_1v$, $g=f_2u$. Functoriality and cancellation of the inverted denominators give $\\alpha=\\overline Q(f)\\overline Q(s)^{-1}$ and $\\beta=\\overline Q(g)\\overline Q(s)^{-1}$, with a common denominator $s:N\\to S$.",
+   "uses": [
+    "lem-pc-right-fraction-representation",
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 04VC (definition-multiplicative-system), RMS2; Tag 04VI (lemma-morphisms-right-localization)"
+   }
+  },
+  {
+   "text": "For each i, apply RMS2 to $s:N\\to S$ and $\\iota_i:K_i\\to S$. It gives $t_i:P_i\\to K_i$ quasi-isomorphic and $b_i:P_i\\to N$ with $s b_i=\\iota_i t_i$ in $K(\\mathcal A)$. Consequently $\\alpha Q(\\iota_i)\\overline Q(t_i)=\\overline Q(f b_i)$ and $\\beta Q(\\iota_i)\\overline Q(t_i)=\\overline Q(g b_i)$. Equal restrictions imply equality of these two localized numerators. Step 4 supplies a quasi-isomorphism $v_i:T_i\\to P_i$ with $f b_i v_i=g b_i v_i$ in $K(\\mathcal A)$. Set $a_i=b_i v_i$ and $q_i=t_i v_i$. Then $s a_i=\\iota_i q_i$, $f a_i=g a_i$, and $q_i$ is a quasi-isomorphism. All choices are indexed by the original countable set I.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 04VC (definition-multiplicative-system), RMS2; Tag 04VJ (lemma-equality-morphisms-right-localization)"
+   }
+  },
+  {
+   "text": "Assemble $a:\\bigoplus_i T_i\\to N$ from the $a_i$ and $q:\\bigoplus_i T_i\\to S$ from $\\iota_i q_i$, in the homotopy category by step 1. Choose chain representatives of $s,f,g,a_i,q_i$. The equalities in step 6 give degree-minus-one homotopies $h_i$ with $s a_i-\\iota_i q_i=d_S h_i+h_i d_{T_i}$ and $k_i$ with $f a_i-g a_i=d_L k_i+k_i d_{T_i}$. For every r assemble $h^r:(\\bigoplus_i T_i)^r\\to S^{r-1}$ and $k^r:(\\bigoplus_i T_i)^r\\to L^{r-1}$. Checking each coprojection gives $s a-q=d_S h+h d_{\\bigoplus T_i}$ and $f a-g a=d_L k+k d_{\\bigoplus T_i}$. Hence $s a=q$ and $f a=g a$ in $K(\\mathcal A)$. Step 2 says q is a quasi-isomorphism. Hence a is a quasi-isomorphism by two-out-of-three, since s is one. Applying the localization to $f a=g a$ and cancelling the invertible $\\overline Q(a)$ proves $\\overline Q(f)=\\overline Q(g)$, and therefore $\\alpha=\\beta$. This fills the uniqueness verification omitted by Tag 0A5L.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A5L (lemma-direct-sums), proof"
+   }
+  },
+  {
+   "text": "Existence in step 3 and uniqueness in steps 4–7 give exactly the coproduct universal property for $Q(S)$ and the specified $Q(\\iota_i)$. For $I=\\varnothing$, degreewise coproducts in $\\mathcal A$ are zero objects, S is the zero complex, and assembly in step 1 gives a unique homotopy-class map out of S. In steps 3 and 7 the empty sums s and q are the unique maps between the chosen zero complexes. Their degreewise inverses are the unique maps in the reverse direction, since each composite is the unique endomorphism of a zero object and hence its identity. Thus s and q are quasi-isomorphisms and the existence and cancellation arguments apply. Thus the empty coproduct is included, without a boundedness hypothesis.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A5L (lemma-direct-sums), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-right-fraction-common-refinement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A5L (lemma-direct-sums), proof; omitted uniqueness expanded using categories.tex Definition 04VC (RMS2), Tags 04VI and 04VJ"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "preserves.*(coproduct|colimit)|coproduct|direct.sum",
-   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "tool": "leanfinder",
+   "query": "Localization from unbounded complexes to the derived category preserves countable coproducts if countable sums are exact",
+   "results": "8 hits: HomologicalComplex.isGrothendieckAbelian, HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HomologicalComplex.ab5OfSize, CategoryTheory.IsGrothendieckAbelian.hasExt, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, CategoryTheory.CountableAB4.of_countableAB5",
    "date": "2026-10-14",
-   "verdict": "no match: localization and AB4 infrastructure do not give the derived coproduct universal property"
+   "verdict": "no match: returned localization/additivity/Grothendieck infrastructure does not assert the countable derived coproduct universal property under only exact countable sums"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory.Q\", \"PreservesColimitsOfShape\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned localization/additivity/Grothendieck infrastructure does not assert the countable derived coproduct universal property under only exact countable sums"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct|PreservesColimitsOfShape",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned localization/additivity/Grothendieck infrastructure does not assert the countable derived coproduct universal property under only exact countable sums"
   },
   {
    "tool": "leansearch",
-   "query": "Localization from complexes to the derived category preserves countable coproducts when countable sums are exact",
-   "results": "service unavailable: Internal Server Error",
+   "query": "Exact countable sums of unbounded complexes give coproducts in the derived category",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
    "date": "2026-10-14",
    "verdict": "unavailable"
   },
   {
-   "tool": "loogle",
-   "query": "DerivedCategory, PreservesColimitsOfShape",
-   "results": "loogle: unknown identifier 'PreservesColimitsOfShape'",
-   "date": "2026-10-14",
-   "verdict": "no match: localization and AB4 infrastructure do not give the derived coproduct universal property"
-  },
-  {
    "tool": "leanfinder",
-   "query": "In an abelian category with exact countable coproducts the derived localization sends termwise countable direct sums of unbounded complexes to coproducts in the derived category",
-   "results": "HomologicalComplex.isGrothendieckAbelian, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HasDerivedCategory.standard, HasDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, HomologicalComplexUpToQuasiIso.Q, DerivedCategory.Q, HomologicalComplex.ab5OfSize",
+   "query": "An additive localization with a calculus of fractions preserves coproducts when its denominators are closed under coproducts",
+   "results": "8 hits: CategoryTheory.Localization.instAdditiveLocalizationQ, CategoryTheory.Localization.instAdditiveLocalization'Q', CategoryTheory.Localization.Preadditive.add', CategoryTheory.Localization.instPreadditiveLocalization, CategoryTheory.Localization.instPreadditiveLocalization', CategoryTheory.Localization.Preadditive.add'_eq, CategoryTheory.Localization.functor_additive, CategoryTheory.Localization.Preadditive.add_eq",
    "date": "2026-10-14",
-   "verdict": "no match: localization and AB4 infrastructure do not give the derived coproduct universal property"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "If an abelian category satisfies AB4 for countable families, the direct sum of complexes represents their coproduct after inverting quasi-isomorphisms",
-   "results": "HomologicalComplex.isGrothendieckAbelian, HomologicalComplex.ab5OfSize, CategoryTheory.CountableAB4.of_countableAB5, CategoryTheory.CountableAB4.of_hasExactColimitsOfShape_nat, CategoryTheory.IsGrothendieckAbelian.ab4OfSize, CategoryTheory.NonPreadditiveAbelian.has_finite_coproducts, HomologicalComplex.instHasColimitDiscreteWalkingPairCompPairEval, CategoryTheory.CountableAB4Star.of_countableAB5Star",
-   "date": "2026-10-14",
-   "verdict": "no match: localization and AB4 infrastructure do not give the derived coproduct universal property"
-  },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory.Q",
-   "results": "DerivedCategory.Q, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.instCommShiftCochainComplexIntQ, DerivedCategory.instAdditiveCochainComplexIntQ, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.Q_obj_single_obj",
-   "date": "2026-10-14",
-   "verdict": "no match: localization and AB4 infrastructure do not give the derived coproduct universal property"
+   "verdict": "no match: returned localization/additivity/Grothendieck infrastructure does not assert the countable derived coproduct universal property under only exact countable sums"
   },
   {
    "tool": "grep",
-   "query": "PreservesCoproducts|preservesColimits.*[Qq]|[Qq].*preservesColimits|coproduct.*[Ll]ocaliz",
-   "results": "No hits",
+   "query": "preservesColimit|preserves_colimit|PreservesColimit|coproduct|AB4",
+   "results": "0 hits: ",
    "date": "2026-10-14",
-   "verdict": "no match: localization and AB4 infrastructure do not give the derived coproduct universal property"
+   "verdict": "no match: hits concern finite (co)limits, finite products, or local objects; none gives countable coproduct preservation for this localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization functor preserves colimits of a discrete diagram if the inverted morphism property admits right fractions and is stable under these coproducts",
+   "results": "8 hits: ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor, CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q', CategoryTheory.MorphismProperty.instIsClosedUnderColimitsOfShapeIsColocal, CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ, CategoryTheory.Localization.preservesFiniteProducts, CategoryTheory.Localization.hasProductsOfShape, CategoryTheory.Localization.hasFiniteProducts, CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern finite (co)limits, finite products, or local objects; none gives countable coproduct preservation for this localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"colimit\"",
+   "results": "3 hits: ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModuleFunctor, CategoryTheory.ObjectProperty.SerreClassLocalization.preservesFiniteColimits, CategoryTheory.ObjectProperty.SerreClassLocalization.preservesFiniteColimits_comp_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern finite (co)limits, finite products, or local objects; none gives countable coproduct preservation for this localization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-complex-colimit-hocolim",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-derived-countable-sums-exact",
+  "worker": "stage1",
+  "summary": "Kept the statement and its general exact-countable-sums hypotheses. Constructed sums and homotopies degreewise, computed cohomology from three summed short exact sequences, followed the source roof construction, and supplied the omitted uniqueness proof by common denominators, componentwise refinements, and their countable sum. Reused the three existing Mathlib fraction leaves; no new nodes.",
+  "blueprint": "lem-kun-complex-colimit-hocolim, final inference identifying the cone triangle as a homotopy colimit: justifies that its degreewise sums and actual coprojections are derived coproducts.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-81ee2f8d7",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-81ee2f8d7 (reviewer sub-agent of L); spot-checked: Read the item, all eight proof steps, six cited statements, sources, and unit/chapter route in full. Stacks 0A5L agrees with the hypotheses; the expanded uniqueness proof correctly uses RMS2, common refinements, summed homotopies, and cancellation. Empty and unbounded cases pass. No duplicate, cycle, coefficient-category substitution, or repair found. Concrete checks recorded in review.md; no new nodes or tool_uses."
+ }
 }
