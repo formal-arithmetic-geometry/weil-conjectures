@@ -67,6 +67,7 @@ theorem exactFunctorIdentityComparison
   let Q := DerivedCategory.Q (C := C)
   let η := NatIso.mapHomologicalComplex e (ComplexShape.up ℤ) ≪≫
     Functor.mapHomologicalComplexIdIso C (ComplexShape.up ℤ)
+  -- Check the composite termwise comparison before whiskering by the localization.
   have : NatTrans.CommShift η.hom ℤ := by
     constructor
     intro m
