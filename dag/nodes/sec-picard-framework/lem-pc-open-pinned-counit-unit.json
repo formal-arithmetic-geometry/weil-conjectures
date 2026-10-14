@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-open-pinned-counit-unit",
+ "kind": "statement",
+ "title": "Shared pinned derived counit normalization",
+ "statement": "For a scheme morphism f:X→Y [def-pc-scheme], with the supplied derived-category family [def-pc-derived-category], let I be any homotopy complex on X. Let F be module direct image [def-pc-ringed-spaces-derived-direct-image], a_f the pinned adjunction [def-pc-t2-open-pinned-adjunction], and ε_f the left-derived counit supplied by the common derived pullback composition data [lem-pc-ringed-spaces-derived-pullback-composition]. Then derivedPullback(f).map(F.rightDerivedFunctorUnit(I)) followed by a_f.counit(Qh I) equals ε_f(F_h I) followed by Qh of the homotopy tensor-pullback adjunction counit at I [lem-pc-module-pullback-adjunction]. This holds without K-injectivity or an invertible right-derived unit.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-t2-open-pinned-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY; shared extraction of SingleComplexOpenCounitCompatibility.pinned_counit_unit"
+ },
+ "proof": [
+  {
+   "text": "Apply injectivity of the derived Hom equivalence. Its inverse sends the right-derived unit to pullback of that unit followed by the derived counit. The pinned Hom-equivalence compatibility applied to the underived homotopy counit identifies the other image with Qh of the identity followed by the right-derived unit: homEquiv_symm_id and apply_symm_apply give the identity. Functor.map_id and id_comp identify the two images. The private categorical helper carries out this calculation for general compatible adjunctions and localizations, and specialization uses exactly exists_schemeDerivedAdjunction with the already chosen data.",
+   "uses": [
+    "def-pc-t2-open-pinned-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-t2-open-pinned-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY; extract the existing pinned counit calculation once for reuse"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "CategoryTheory.Adjunction.homEquiv_counit",
+   "date": "2026-10-14",
+   "verdict": "generic Hom-equivalence tools; no scheme-specific pinned formula"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_counit|derivedε_fac_app",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean",
+   "date": "2026-10-14",
+   "verdict": "generic Hom-equivalence tools; no scheme-specific pinned formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pinned derived adjunction counit factors through the right derived unit and localized underived counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "CategoryTheory.Adjunction.homEquiv_counit",
+   "date": "2026-10-14",
+   "verdict": "generic Hom-equivalence tools; no scheme-specific pinned formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization",
+  "date": "2026-10-14",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 locality on the target: normalize the pinned derived counit at a homotopy representative",
+   "via": [
+    "lem-pc-k3-open-unit-square-factorization",
+    "lem-pc-e2-open-pullback-counit-representative-postcomp",
+    "lem-pc-e2-open-pullback-counit-representative",
+    "lem-pc-t2-open-counit-compatibility",
+    "lem-pc-k3-open-counit-homotopy-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenPinnedCounitUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenPinnedCounitUnit.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpen_pinned_counit_unit",
+  "statement": "theorem singleComplexOpen_pinned_counit_unit\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (I : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :\n    let _ := (Classical.choose exists_derivedPullbackComposition) f\n    let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom\n    let a := @singleComplexOpenPinnedAdjunction.{u, w} _\n    let ε := @Classical.choose _ _\n      (Classical.choose_spec exists_derivedPullbackComposition)\n    (derivedPullback f).map (F.rightDerivedFunctorUnit.app I) ≫\n        (a f).counit.app (DerivedCategory.Qh.obj I) =\n      (ε f).app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫\n        DerivedCategory.Qh.map\n          (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))\n            |>.mapHomotopyCategory (.up ℤ)).counit.app I)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-21011",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261014T130427-L-3287621",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-21011",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261014T130427-L-3287621",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, shared extraction with the original implementation, and preserved interfaces with all direct importers; compilation and axiom checks pass."
+ }
+}

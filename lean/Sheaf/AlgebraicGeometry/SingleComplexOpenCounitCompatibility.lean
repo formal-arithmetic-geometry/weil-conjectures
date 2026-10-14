@@ -5,6 +5,7 @@ public import Sheaf.AlgebraicGeometry.SingleComplexOpenBaseChangeComparisons
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenPinnedComposition
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenPinnedAdjunction
 import Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitRepresentative
+import Sheaf.AlgebraicGeometry.SingleComplexOpenPinnedCounitUnit
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-! # Open pullback squares and restricted counits
@@ -47,61 +48,6 @@ noncomputable def singleComplexOpenPullbackSquareIso
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.mapIso_hom,
     eqToIso.hom, eqToHom_app, Category.assoc] using d.hom.naturality v
-
-private theorem counit_factorization
-    {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂] [Category D₁] [Category D₂]
-    {G : C₁ ⥤ C₂} {H : C₂ ⥤ C₁} {L : D₁ ⥤ D₂} {R : D₂ ⥤ D₁}
-    (Q₁ : C₁ ⥤ D₁) (Q₂ : C₂ ⥤ D₂) (b : G ⊣ H) (a : L ⊣ R)
-    (ε : Q₁ ⋙ L ⟶ G ⋙ Q₂) (η : H ⋙ Q₁ ⟶ Q₂ ⋙ R)
-    (h : ∀ (M : C₁) (K : C₂) (v : G.obj M ⟶ K),
-      a.homEquiv (Q₁.obj M) (Q₂.obj K) (ε.app M ≫ Q₂.map v) =
-        Q₁.map (b.homEquiv M K v) ≫ η.app K) (I : C₂) :
-    L.map (η.app I) ≫ a.counit.app (Q₂.obj I) =
-      ε.app (H.obj I) ≫ Q₂.map (b.counit.app I) := by
-  apply (a.homEquiv (Q₁.obj (H.obj I)) (Q₂.obj I)).injective
-  have h₁ := (a.homEquiv (Q₁.obj (H.obj I)) (Q₂.obj I)).apply_symm_apply (η.app I)
-  have h₂ := (b.homEquiv (H.obj I) I).apply_symm_apply (𝟙 (H.obj I))
-  simp only [a.homEquiv_counit] at h₁
-  simp only [b.homEquiv_symm_id] at h₂
-  rw [h₁, h, h₂, Q₁.map_id, Category.id_comp]
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
--- Elaborating the pinned derived functor data requires additional heartbeats.
-private theorem pinned_counit_unit
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (I : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :
-    let _ := (Classical.choose exists_derivedPullbackComposition) f
-    let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
-    let a := @singleComplexOpenPinnedAdjunction.{u, w} _
-    let ε := @Classical.choose _ _
-      (Classical.choose_spec exists_derivedPullbackComposition)
-    (derivedPullback f).map (F.rightDerivedFunctorUnit.app I) ≫
-        (a f).counit.app (DerivedCategory.Qh.obj I) =
-      (ε f).app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫
-        DerivedCategory.Qh.map
-          (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))
-            |>.mapHomotopyCategory (.up ℤ)).counit.app I) := by
-  classical
-  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-  have : (Scheme.Modules.tensorPullback f).Additive :=
-    (Classical.choose exists_derivedPullbackComposition) f
-  exact counit_factorization
-    (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
-    (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))
-    ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))
-      |>.mapHomotopyCategory (.up ℤ))
-    (singleComplexOpenPinnedAdjunction f)
-    ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f)
-    (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit
-    (Classical.choose_spec (exists_schemeDerivedAdjunction f
-      (hAdd := (Classical.choose exists_derivedPullbackComposition) f)
-      ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f)
-      ((Classical.choose (Classical.choose_spec
-        (Classical.choose_spec exists_derivedPullbackComposition))) f))) I
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -175,7 +121,7 @@ theorem singleComplexOpen_counit_compatibility
     simp only [Category.assoc]
     erw [(a (f ∣_ V)).counit.naturality (rX.mapDerivedCategoryFactorsh.inv.app J)]
     simp only [Functor.id_map]
-    erw [reassoc_of% (pinned_counit_unit (f ∣_ V)
+    erw [reassoc_of% (singleComplexOpen_pinned_counit_unit (f ∣_ V)
       ((rX.mapHomotopyCategory (.up ℤ)).obj J))]
     have hp := singleComplexOpen_pullback_counit_representative f V J
     simpa only [singleComplexOpenPullbackSquareIso, β, t, NatTrans.comp_app,

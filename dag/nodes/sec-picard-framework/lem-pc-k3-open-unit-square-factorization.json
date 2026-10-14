@@ -1,122 +1,127 @@
 {
-  "id": "lem-pc-k3-open-unit-square-factorization",
-  "kind": "statement",
-  "title": "Pinned derived unit normalization through the open square",
-  "statement": "Let f:X→Y be a scheme morphism [def-pc-scheme], V an open of Y, U=f⁻¹V, f₀=f|V, and I any homotopy complex on X. Use the common supplied family of derived categories and the additive tensor-pullback instances and left-derived counits ε chosen by exists_derivedPullbackComposition [lem-pc-ringed-spaces-derived-pullback-composition]. Write P=f_*h(I) [def-pc-ringed-spaces-derived-direct-image], rY and rX for exact open restriction [def-pc-derived-open-restriction-maps], a for the pinned derived adjunction [def-pc-t2-open-pinned-adjunction], c for the pinned pullback composition [def-pc-t2-open-pinned-composition], Qh for localization [def-weil-abstract-derived-category], kY and kX for mapDerivedCategoryFactorsh, v for the homotopy tensor adjunction counit at I [lem-pc-module-pullback-adjunction], and t for the homotopy tensor restriction comparison at P [def-pc-open-pinned-single-tensor-restriction-iso]. For each derived object E on Y, S(E) is the composite of Lf₀ applied to the inverse open comparison on Y at E, c(f₀,V.ι) at E, transport along f₀≫V.ι=U.ι≫f, inverse c(U.ι,f) at E, and the open comparison on X at Lf(E). Let β be the right-derived direct-image unit at I. Then Lf₀.map(kY.inv(P) ≫ rY.map(β)) ≫ S.hom(Rf(Qh I)) ≫ rX.map(a_f.counit(Qh I)) ≫ kX.hom(I) equals Lf₀.map(kY.inv(P)) ≫ S.hom(Qh P) ≫ rX.map(ε_f(P)) ≫ rX.map(Qh.map(v)) ≫ kX.hom(I).",
-  "stmt_deps": [
-    "def-pc-derived-open-restriction-maps",
-    "def-pc-open-pinned-single-tensor-restriction-iso",
-    "def-pc-ringed-spaces-derived-direct-image",
-    "def-pc-scheme",
-    "def-pc-t2-open-pinned-adjunction",
-    "def-pc-t2-open-pinned-composition",
-    "def-weil-abstract-derived-category",
-    "lem-pc-module-pullback-adjunction",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-  ],
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/08HY",
-    "place": "Derived compatibility steps of lem-pc-e2-open-pullback-counit-representative-postcomp"
+ "id": "lem-pc-k3-open-unit-square-factorization",
+ "kind": "statement",
+ "title": "Pinned derived unit normalization through the open square",
+ "statement": "Let f:X→Y be a scheme morphism [def-pc-scheme], V an open of Y, U=f⁻¹V, f₀=f|V, and I any homotopy complex on X. Use the common supplied family of derived categories and the additive tensor-pullback instances and left-derived counits ε chosen by exists_derivedPullbackComposition [lem-pc-ringed-spaces-derived-pullback-composition]. Write P=f_*h(I) [def-pc-ringed-spaces-derived-direct-image], rY and rX for exact open restriction [def-pc-derived-open-restriction-maps], a for the pinned derived adjunction [def-pc-t2-open-pinned-adjunction], c for the pinned pullback composition [def-pc-t2-open-pinned-composition], Qh for localization [def-weil-abstract-derived-category], kY and kX for mapDerivedCategoryFactorsh, v for the homotopy tensor adjunction counit at I [lem-pc-module-pullback-adjunction], and t for the homotopy tensor restriction comparison at P [def-pc-open-pinned-single-tensor-restriction-iso]. For each derived object E on Y, S(E) is the composite of Lf₀ applied to the inverse open comparison on Y at E, c(f₀,V.ι) at E, transport along f₀≫V.ι=U.ι≫f, inverse c(U.ι,f) at E, and the open comparison on X at Lf(E). Let β be the right-derived direct-image unit at I. Then Lf₀.map(kY.inv(P) ≫ rY.map(β)) ≫ S.hom(Rf(Qh I)) ≫ rX.map(a_f.counit(Qh I)) ≫ kX.hom(I) equals Lf₀.map(kY.inv(P)) ≫ S.hom(Qh P) ≫ rX.map(ε_f(P)) ≫ rX.map(Qh.map(v)) ≫ kX.hom(I).",
+ "stmt_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-scheme",
+  "def-pc-t2-open-pinned-adjunction",
+  "def-pc-t2-open-pinned-composition",
+  "def-weil-abstract-derived-category",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Derived compatibility steps of lem-pc-e2-open-pullback-counit-representative-postcomp"
+ },
+ "proof": [
+  {
+   "text": "Apply the shared theorem singleComplexOpen_pinned_counit_unit at f and I. It normalizes pullback of the right-derived unit followed by the pinned derived counit as the left-derived counit followed by the localized homotopy counit. The calculation is implemented once in SingleComplexOpenPinnedCounitUnit and also used by SingleComplexOpenCounitCompatibility.",
+   "uses": [
+    "lem-pc-open-pinned-counit-unit"
+   ],
+   "elementary": false
   },
-  "proof": [
-    {
-      "text": "Put P = F_h(I), beta = F.rightDerivedFunctorUnit(I), and let v be the homotopy tensor adjunction counit at I. Apply the pinned derived Hom-equivalence compatibility to the homotopy morphism v. The homotopy adjunction sends v to the identity of P, so its localized image followed by beta is beta itself. Injectivity of the derived Hom equivalence, whose inverse sends beta to Lf(beta) followed by the derived counit, gives Lf(beta) followed by a_f.counit = epsilon_f(P) followed by Qh(v). Let S be the composite natural isomorphism formed by the five displayed factors. Its naturality at beta moves Lf0(rY(beta)) from before S to rX(Lf(beta)) after S. First distribute Lf0 over the composite with the inverse source factorization. Then substitute this naturality equation, combine the two successive rX images, apply the normalized counit identity, and distribute rX over its two factors. Associativity gives exactly the displayed intermediate composite. This uses no tensor comparison cancellation, no boundedness, and no inverse of beta; hence it also applies to empty opens and the zero complex.",
-      "uses": [
-        "def-pc-t2-open-pinned-adjunction"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-pc-t2-open-pinned-adjunction"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "https://stacks.math.columbia.edu/tag/08HY",
-    "place": "Stage-3 decomposition of the existing factorization argument."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Left derived counit factorization of pullback composition and exact open restriction",
-      "date": "2026-10-14",
-      "results": "Internal Server Error",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "derived adjunction counit composed with pullback of right derived unit equals left derived counit and homotopy counit",
-      "date": "2026-10-14",
-      "results": "Adjunction.derived_counit, Adjunction.derivedε_fac_app, Adjunction.derivedε_fac_app_assoc. Generic derived adjunction formulas; the pinned choices and explicit restriction square still require compatibility and naturality.",
-      "verdict": "generic tools; no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.homEquiv_counit",
-      "date": "2026-10-14",
-      "results": "CategoryTheory.Adjunction.homEquiv_counit",
-      "verdict": "generic Hom-equivalence tool"
-    },
-    {
-      "tool": "grep",
-      "query": "counit_factorization|pinned_counit_unit",
-      "date": "2026-10-14",
-      "results": "No Mathlib matches.",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization",
-    "date": "2026-10-14",
-    "group": "M3"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-pc-rf-perfect-base-change",
-      "place": "Tag 0DJ9 locality on the target: sectionwise mate calculation for the open counit compatibility",
-      "via": [
-        "lem-pc-e2-open-pullback-counit-representative-postcomp",
-        "lem-pc-e2-open-pullback-counit-representative",
-        "lem-pc-t2-open-counit-compatibility",
-        "lem-pc-k3-open-counit-homotopy-factorization"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-semicon",
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization",
-    "declaration": "AlgebraicGeometry.singleComplexOpen_unit_square_factorization",
-    "existing": false,
-    "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenUnitSquareFactorization.lean",
-    "statement": "theorem singleComplexOpen_unit_square_factorization\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens)\n    (I : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :\n    let _ : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),\n      (Scheme.Modules.tensorPullback k).Additive :=\n      @Classical.choose _ _ exists_derivedPullbackComposition\n    let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom\n    let F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom\n    let rY := schemeOpenRestriction Y V\n    let rX := schemeOpenRestriction X (f ⁻¹ᵁ V)\n    let a := @singleComplexOpenPinnedAdjunction.{u, w} _\n    let c := @singleComplexOpenPinnedComposition.{u, w} _\n    let ε := @Classical.choose _ _\n      (Classical.choose_spec exists_derivedPullbackComposition)\n    (derivedPullback (f ∣_ V)).map\n        (rY.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫\n          rY.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app I)) ≫\n      ((derivedPullback (f ∣_ V)).mapIso\n          ((singleComplexOpenPullbackIso Y V).symm.app\n            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I))) ≪≫\n        (c (f ∣_ V) V.ι).app ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)) ≪≫\n        eqToIso (congrArg\n          (fun k ↦ (derivedPullback k).obj\n            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)))\n          (morphismRestrict_ι f V)) ≪≫\n        (c (f ⁻¹ᵁ V).ι f).symm.app\n          ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)) ≪≫\n        (singleComplexOpenPullbackIso X (f ⁻¹ᵁ V)).app\n          ((derivedPullback f).obj\n            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)))).hom ≫\n      rX.mapDerivedCategory.map ((a f).counit.app (DerivedCategory.Qh.obj I)) ≫\n      rX.mapDerivedCategoryFactorsh.hom.app I =\n    (derivedPullback (f ∣_ V)).map\n      (rY.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≫\n      ((derivedPullback (f ∣_ V)).mapIso\n          ((singleComplexOpenPullbackIso Y V).symm.app\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I))) ≪≫\n        (c (f ∣_ V) V.ι).app (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≪≫\n        eqToIso (congrArg\n          (fun k ↦ (derivedPullback k).obj\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)))\n          (morphismRestrict_ι f V)) ≪≫\n        (c (f ⁻¹ᵁ V).ι f).symm.app\n          (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≪≫\n        (singleComplexOpenPullbackIso X (f ⁻¹ᵁ V)).app\n          ((derivedPullback f).obj\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)))).hom ≫\n      rX.mapDerivedCategory.map ((ε f).app ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≫\n      rX.mapDerivedCategory.map (DerivedCategory.Qh.map\n        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))\n          |>.mapHomotopyCategory (.up ℤ)).counit.app I)) ≫\n      rX.mapDerivedCategoryFactorsh.hom.app I",
-    "branch": "sheaf-dag",
-    "by": "M3",
-    "date": "2026-10-14"
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "X-0a5e1",
-    "group": "M3",
-    "result": "pass",
-    "landing": "20261014T054053-L-2107491",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "X-0a5e1",
-    "group": "M3",
-    "result": "pass",
-    "landing": "20261014T054053-L-2107491",
-    "kind": "interface",
-    "note": "independent Codex review: Matched all three Lean signatures with their node records, the transitivity proof with its dependencies, and both split arguments with the pinned compatibility declarations; all delivered modules compile cleanly and axiom checks pass."
+  {
+   "text": "Form the five-factor natural isomorphism S. The private square_factorization calculation uses S.hom.naturality at beta, functor map_comp, the counit equation, and associativity. Instantiate it with exact restriction, its source factorization and target factorization. Expand only component formulas and derived direct-image aliases. Keep singleComplexOpenPullbackIso, derivedPullback, and Functor.mapDerivedCategory locally irreducible, and respect transparency during the square calculation. Only the final transport conversion compares the underlying category instances with transparency disabled.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-pc-open-pinned-counit-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Repair X-734c6 G1/C5: reuse the shared pinned counit normalization, then naturality of the open square; remove both duplicated private counit declarations, preserving the original signature and public imports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Left derived counit factorization of pullback composition and exact open restriction",
+   "date": "2026-10-14",
+   "results": "Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived adjunction counit composed with pullback of right derived unit equals left derived counit and homotopy counit",
+   "date": "2026-10-14",
+   "results": "Adjunction.derived_counit, Adjunction.derivedε_fac_app, Adjunction.derivedε_fac_app_assoc. Generic derived adjunction formulas; the pinned choices and explicit restriction square still require compatibility and naturality.",
+   "verdict": "generic tools; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Adjunction.homEquiv_counit",
+   "verdict": "generic Hom-equivalence tool"
+  },
+  {
+   "tool": "grep",
+   "query": "counit_factorization|pinned_counit_unit",
+   "date": "2026-10-14",
+   "results": "No Mathlib matches.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization",
+  "date": "2026-10-14",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 locality on the target: sectionwise mate calculation for the open counit compatibility",
+   "via": [
+    "lem-pc-e2-open-pullback-counit-representative-postcomp",
+    "lem-pc-e2-open-pullback-counit-representative",
+    "lem-pc-t2-open-counit-compatibility",
+    "lem-pc-k3-open-counit-homotopy-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization",
+  "declaration": "AlgebraicGeometry.singleComplexOpen_unit_square_factorization",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenUnitSquareFactorization.lean",
+  "statement": "theorem singleComplexOpen_unit_square_factorization\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens)\n    (I : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :\n    let _ : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),\n      (Scheme.Modules.tensorPullback k).Additive :=\n      @Classical.choose _ _ exists_derivedPullbackComposition\n    let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom\n    let F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom\n    let rY := schemeOpenRestriction Y V\n    let rX := schemeOpenRestriction X (f ⁻¹ᵁ V)\n    let a := @singleComplexOpenPinnedAdjunction.{u, w} _\n    let c := @singleComplexOpenPinnedComposition.{u, w} _\n    let ε := @Classical.choose _ _\n      (Classical.choose_spec exists_derivedPullbackComposition)\n    (derivedPullback (f ∣_ V)).map\n        (rY.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫\n          rY.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app I)) ≫\n      ((derivedPullback (f ∣_ V)).mapIso\n          ((singleComplexOpenPullbackIso Y V).symm.app\n            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I))) ≪≫\n        (c (f ∣_ V) V.ι).app ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)) ≪≫\n        eqToIso (congrArg\n          (fun k ↦ (derivedPullback k).obj\n            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)))\n          (morphismRestrict_ι f V)) ≪≫\n        (c (f ⁻¹ᵁ V).ι f).symm.app\n          ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)) ≪≫\n        (singleComplexOpenPullbackIso X (f ⁻¹ᵁ V)).app\n          ((derivedPullback f).obj\n            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)))).hom ≫\n      rX.mapDerivedCategory.map ((a f).counit.app (DerivedCategory.Qh.obj I)) ≫\n      rX.mapDerivedCategoryFactorsh.hom.app I =\n    (derivedPullback (f ∣_ V)).map\n      (rY.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≫\n      ((derivedPullback (f ∣_ V)).mapIso\n          ((singleComplexOpenPullbackIso Y V).symm.app\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I))) ≪≫\n        (c (f ∣_ V) V.ι).app (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≪≫\n        eqToIso (congrArg\n          (fun k ↦ (derivedPullback k).obj\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)))\n          (morphismRestrict_ι f V)) ≪≫\n        (c (f ⁻¹ᵁ V).ι f).symm.app\n          (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≪≫\n        (singleComplexOpenPullbackIso X (f ⁻¹ᵁ V)).app\n          ((derivedPullback f).obj\n            (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj I)))).hom ≫\n      rX.mapDerivedCategory.map ((ε f).app ((F.mapHomotopyCategory (.up ℤ)).obj I)) ≫\n      rX.mapDerivedCategory.map (DerivedCategory.Qh.map\n        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))\n          |>.mapHomotopyCategory (.up ℤ)).counit.app I)) ≫\n      rX.mapDerivedCategoryFactorsh.hom.app I",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-0a5e1",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T054053-L-2107491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-21011",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261014T130427-L-3287621",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, shared extraction with the original implementation, and preserved interfaces with all direct importers; compilation and axiom checks pass."
+ }
 }
