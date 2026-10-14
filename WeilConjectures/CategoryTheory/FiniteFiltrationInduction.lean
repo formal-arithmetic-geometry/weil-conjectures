@@ -31,47 +31,37 @@ noncomputable def restriction {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
     (A.filtration.F p : C) ⟶ (B.filtration.F p : C) :=
   Classical.choose (f.preserves p)
 
-/-- Blueprint: lem-sp-finite-filtration-induction. -/
+lemma restriction_arrow {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
+    restriction f p ≫ (B.filtration.F p).arrow = (A.filtration.F p).arrow ≫ f.hom :=
+  Classical.choose_spec (f.preserves p)
+
+lemma restriction_naturality {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
+    Subobject.ofLE (A.filtration.F (p + 1)) (A.filtration.F p)
+        (A.filtration.antitone (by omega)) ≫ restriction f p =
+      restriction f (p + 1) ≫ Subobject.ofLE (B.filtration.F (p + 1))
+        (B.filtration.F p) (B.filtration.antitone (by omega)) := by
+  rw [← cancel_mono (B.filtration.F p).arrow]
+  simp only [Category.assoc, restriction_arrow, Subobject.ofLE_arrow]
+  rw [← Category.assoc, Subobject.ofLE_arrow]
+
+/-- The map `gr_p A ⟶ gr_p B` induced by a morphism of filtered objects: the restriction
+`F_p A ⟶ F_p B` sends `F_{p+1} A` into `F_{p+1} B`, so it descends to the cokernels
+(lem-sp-finite-filtration-induction). -/
+noncomputable def gradedMap {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
+    A.filtration.gr p ⟶ B.filtration.gr p :=
+  cokernel.desc _ (restriction f p ≫ cokernel.π _) (by
+    rw [← Category.assoc, restriction_naturality, Category.assoc, cokernel.condition,
+      comp_zero])
+
+/-- The graded map is compatible with the projections `F_p ⟶ gr_p`
+(blueprint: lem-sp-finite-filtration-induction). -/
 theorem exists_gradedMap (A B : FilteredObject C) (f : Hom A B) (p : ℤ) :
     ∃ g : A.filtration.gr p ⟶ B.filtration.gr p,
       cokernel.π (Subobject.ofLE (A.filtration.F (p + 1))
         (A.filtration.F p) (A.filtration.antitone (by omega))) ≫ g =
         restriction f p ≫ cokernel.π (Subobject.ofLE (B.filtration.F (p + 1))
-          (B.filtration.F p) (B.filtration.antitone (by omega))) := by
-  sorry
-
-/-- lem-sp-finite-filtration-induction. -/
-noncomputable def gradedMap {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
-    A.filtration.gr p ⟶ B.filtration.gr p :=
-by
-  have restriction_arrow {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
-      restriction f p ≫ (B.filtration.F p).arrow =
-        (A.filtration.F p).arrow ≫ f.hom :=
-    Classical.choose_spec (f.preserves p)
-  have restriction_naturality {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
-      Subobject.ofLE (A.filtration.F (p + 1)) (A.filtration.F p)
-          (A.filtration.antitone (by omega)) ≫ restriction f p =
-        restriction f (p + 1) ≫ Subobject.ofLE (B.filtration.F (p + 1))
-          (B.filtration.F p) (B.filtration.antitone (by omega)) := by
-    rw [← cancel_mono (B.filtration.F p).arrow]
-    simp only [Category.assoc, restriction_arrow, Subobject.ofLE_arrow]
-    rw [← Category.assoc, Subobject.ofLE_arrow]
-  have exists_gradedMap (A B : FilteredObject C) (f : Hom A B) (p : ℤ) :
-      ∃ g : A.filtration.gr p ⟶ B.filtration.gr p,
-        cokernel.π (Subobject.ofLE (A.filtration.F (p + 1))
-          (A.filtration.F p) (A.filtration.antitone (by omega))) ≫ g =
-          restriction f p ≫ cokernel.π (Subobject.ofLE (B.filtration.F (p + 1))
-            (B.filtration.F p) (B.filtration.antitone (by omega))) := by
-    let iA := Subobject.ofLE (A.filtration.F (p + 1)) (A.filtration.F p)
-      (A.filtration.antitone (by omega))
-    let iB := Subobject.ofLE (B.filtration.F (p + 1)) (B.filtration.F p)
-      (B.filtration.antitone (by omega))
-    have hw : iA ≫ (restriction f p ≫ cokernel.π iB) = 0 := by
-      rw [← Category.assoc, restriction_naturality, Category.assoc, cokernel.condition,
-        comp_zero]
-    exact ⟨cokernel.desc iA (restriction f p ≫ cokernel.π iB) hw,
-      cokernel.π_desc _ _ _⟩
-  exact Classical.choose (exists_gradedMap A B f p)
+          (B.filtration.F p) (B.filtration.antitone (by omega))) :=
+  ⟨gradedMap f p, cokernel.π_desc _ _ _⟩
 
 /-- Blueprint: lem-sp-finite-filtration-induction. -/
 theorem finite_filtration_induction (A B : FilteredObject C) (f : Hom A B)
