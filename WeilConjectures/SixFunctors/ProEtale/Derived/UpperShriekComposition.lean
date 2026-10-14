@@ -219,7 +219,7 @@ isomorphism `e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of left adjoints whose mate
 `Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` carries the adjunction `R(f ≫ g)_! ⊣ R(f ≫ g)^!` to the composite
 adjunction `Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`: the unit and counit of the composite adjunction are the
 pasted ones. -/
-theorem exists_rightDerivedUpperShriekAdjunction_comp_eq :
+theorem exists_rightDerivedUpperShriekAdjunction_comp_eq [CompactSpace Y] [CompactSpace Z] :
     ∃ e : PZ.lift (PX.ι ⋙ R(f ≫ g)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hfg₁ _ K.property) ≅
         PY.lift (PX.ι ⋙ R(f)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hf₁ _ K.property) ⋙
           PZ.lift (PY.ι ⋙ R(g)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hg₁ _ K.property),
@@ -272,7 +272,7 @@ exceptional adjunctions of blueprint `sk-prop-sf-existence` (c), is an isomorphi
 That it is the mate, with the pasted unit and counit, is
 `AlgebraicGeometry.ProEtale.exists_rightDerivedUpperShriekAdjunction_comp_eq` for the objects of
 étale origin over `X` and `Y` and the bounded below objects over `Z`. -/
-theorem nonempty_iso_rightDerivedUpperShriekPlus_comp :
+theorem nonempty_iso_rightDerivedUpperShriekPlus_comp [CompactSpace Y] [CompactSpace Z] :
     Nonempty (R(f ≫ g)^![ModuleCat.{u + 1} Λ]+ ≅
       R(g)^![ModuleCat.{u + 1} Λ]+ ⋙ R(f)^![ModuleCat.{u + 1} Λ]+) := by
   have hle := DerivedCategory.plusEtaleOrigin_le_plus (ModuleCat.{u + 1} Λ)
@@ -302,6 +302,7 @@ isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the restricted functors is an is
 `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` of functors `Dctf(Z) ⥤ Dctf(X)` carrying the adjunction of `f ≫ g` to
 the composite adjunction. -/
 theorem exists_rightDerivedUpperShriekAdjunction_comp_eq_of_finiteTor
+    [CompactSpace Y] [CompactSpace Z]
     (hf₁ : ∀ K, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
       DerivedCategory.constructibleFiniteTor _ Y ((R(f)_![ModuleCat.{u + 1} Λ]).obj K))
     (hf₂ : ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L →

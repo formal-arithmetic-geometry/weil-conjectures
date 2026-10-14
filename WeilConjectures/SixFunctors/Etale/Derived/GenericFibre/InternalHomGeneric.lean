@@ -101,7 +101,7 @@ lemma isIso_derivedUpperStarLowerStarAdjunction_counit_of_isOpenImmersion
 omit [Finite Λ] in
 /-- For a closed immersion `i`, the counit of `Li^* ⊣ Ri_*` is invertible: `Ri_*` is fully
 faithful. -/
-lemma isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion
+lemma isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion_generic
     {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :
     IsIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit := by
@@ -186,8 +186,8 @@ lemma isIso_derivedHomUpperStarComparison_rightDerivedLowerStar_of_isClosedImmer
       ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K) X)) :
     IsIso (derivedHomUpperStarComparison (ModuleCat.{u + 1} Λ) gZ K
       ((R((i)_*[ModuleCat.{u + 1} Λ])).obj X)) := by
-  have := isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion Λ i
-  have := isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion Λ i'
+  have := isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion_generic Λ i
+  have := isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion_generic Λ i'
   have : IsIso (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sqW.toCommSq) :=
     isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sqW
   let eA := (L((gZ)^*[ModuleCat.{u + 1} Λ])).mapIso

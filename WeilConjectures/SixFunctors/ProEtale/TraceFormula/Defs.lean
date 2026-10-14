@@ -237,6 +237,7 @@ categories `Dᵇctf`, whenever both functors preserve `Dᵇctf`. It is
 `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction`: every object of `Dᵇctf` is
 bounded below of étale origin. -/
 noncomputable def ctfExceptionalAdjunction (f : X ⟶ Y) [HasCompactification f]
+    [Etale.HasBoundedBelowUpperShriek A f]
     (h₁ : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
       DerivedCategory.constructibleFiniteTor A Y ((rightDerivedLowerShriek A f).obj K))
     (h₂ : ∀ L, DerivedCategory.constructibleFiniteTor A Y L →
@@ -350,8 +351,13 @@ categories `Dᵇctf(X, A)` of bounded constructible objects of finite Tor amplit
 `Rf^!` and, for `f` proper, `Rf_*`. These are the stability theorems of the six functors chapter
 (blueprint `sk-thm-sf-ctf-stability`, `sk-prop-sf-rf-shriek-preservation`), which hold at the
 finite coefficient stages `A = 𝒪_E/ϖⁿ` over a field in which `ℓ` is invertible. A scheme `X` is
-geometric when `𝟙 X` is a morphism of geometric schemes. -/
+geometric when `𝟙 X` is a morphism of geometric schemes. The base `s` is quasi-compact, as is the
+base field of the blueprint, so that the geometric schemes over it are quasi-compact and their
+exceptional inverse images preserve bounded below objects
+(`AlgebraicGeometry.Etale.HasBoundedBelowUpperShrieks`). -/
 structure GeometricCoefficients (s : Scheme.{u}) : Prop where
+  /-- the base `s` is quasi-compact. -/
+  compactSpace : CompactSpace s
   /-- `A_X` lies in `Dᵇctf(X)`. -/
   ctf_unit {X : Scheme.{u}} (hX : IsGeometricHom s (𝟙 X)) :
     DerivedCategory.constructibleFiniteTor A X (𝟙_ _)
@@ -393,6 +399,16 @@ namespace GeometricCoefficients
 
 variable {A} {s : Scheme.{u}} (G : GeometricCoefficients A s)
 
+include G in
+/-- The exceptional inverse image along a morphism of geometric schemes preserves bounded below
+objects: its target is quasi-compact, being of finite type over the quasi-compact base. -/
+lemma hasBoundedBelowUpperShriek {X Y : Scheme.{u}} {f : X ⟶ Y} [HasCompactification f]
+    (hf : IsGeometricHom s f) : Etale.HasBoundedBelowUpperShriek A f := by
+  obtain ⟨aY, _, -⟩ := hf
+  have := G.compactSpace
+  have := QuasiCompact.compactSpace_of_compactSpace aY
+  infer_instance
+
 /-- `Dᵇctf(X, A)`, the bounded constructible objects of finite Tor amplitude of `D(X, A)`
 (`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`). It does not depend on
 `G`; the argument is there for the dot notation `G.ctf`. -/
@@ -429,6 +445,7 @@ noncomputable abbrev lowerStarCtf (f : X ⟶ Y) (hf : IsGeometricHom s f) [IsPro
 categories `Dᵇctf` of geometric schemes. -/
 noncomputable abbrev exceptionalAdjunction (f : X ⟶ Y) (hf : IsGeometricHom s f)
     [HasCompactification f] : G.lowerShriekCtf f hf ⊣ G.upperShriekCtf f hf :=
+  haveI := G.hasBoundedBelowUpperShriek hf
   ctfExceptionalAdjunction f _ _
 
 /-- The counit `Rf_! Rf^! L ⟶ L` of the exceptional adjunction at `L ∈ Dᵇctf(Y)`, as a
@@ -530,7 +547,7 @@ whose last map is the exceptional adjoint of
 adjunction at the objects `pX^* M ⊗ᴸ pY^* ω` and `M` of `Dᵇctf`.
 `GeometricOperations.kunnethVerdierMap` instantiates it with the package data. -/
 noncomputable def kunnethVerdierMapOf {X Y Z : Scheme.{u}} {pX : Z ⟶ X} {pY : Z ⟶ Y}
-    [HasCompactification pX]
+    [HasCompactification pX] [Etale.HasBoundedBelowUpperShriek A pX]
     (h₁ : ∀ K, DerivedCategory.constructibleFiniteTor A Z K →
       DerivedCategory.constructibleFiniteTor A X ((rightDerivedLowerShriek A pX).obj K))
     (h₂ : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
@@ -941,6 +958,7 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
       (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A))
       (hN : DerivedCategory.constructibleFiniteTor A Y N) :
     haveI : IsGeometric (pY ≫ aY) := IsGeometric.of_eq sq.w
+    haveI := toGeometricCoefficients.hasBoundedBelowUpperShriek (f := pX) (.mk (aY := aX) rfl)
     IsIso (kunnethVerdierMapOf A
       (fun _ hK ↦ toGeometricCoefficients.ctf_lowerShriek pX (.mk (aY := aX) rfl) hK)
       (fun _ hK ↦ toGeometricCoefficients.ctf_upperStar pX (.mk (aY := aX) rfl) hK)
@@ -1160,6 +1178,7 @@ noncomputable def kunnethVerdierMap {Z X Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y 
       (ihom (((upperStar A pY).leftDerivedFunctor).obj N)).obj
         ((rightDerivedUpperShriek A pX).obj M) :=
   haveI : IsGeometric (pY ≫ aY) := IsGeometric.of_eq sq.w
+  haveI := G.hasBoundedBelowUpperShriek (f := pX) (.mk (aY := aX) rfl)
   kunnethVerdierMapOf A (fun _ hK ↦ G.ctf_lowerShriek pX (.mk (aY := aX) rfl) hK)
     (fun _ hK ↦ G.ctf_upperStar pX (.mk (aY := aX) rfl) hK) (G.upperStarMonoidal pY)
     (G.projectionFormula pX (.mk (aY := aX) rfl)) (G.exceptionalTrace sq)
