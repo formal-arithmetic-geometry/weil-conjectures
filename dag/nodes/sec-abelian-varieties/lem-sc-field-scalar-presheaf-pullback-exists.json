@@ -13,26 +13,30 @@
  },
  "proof": [
   {
-   "text": "For the structural map [def-sc-field-scalar-presheaf-ring-map], regard R(U) as a right k-module via r*c=r*alpha_U(c), commuting with its left R(U)-action. For any constant-k module presheaf V construct at U the balanced tensor R(U) tensor_k V(U), and give it the left R(U)-action on the first factor. This works for arbitrary rings k and noncommutative rings R(U).",
+   "text": "At each open U construct the free left R(U)-module on the underlying set of V(U), as finitely supported functions V(U) -> R(U). Quotient by the R(U)-submodule spanned by [m+n]-[m]-[n] and [c m]-alpha_U(c)[m]. The quotient is in Type(max u v). Its generators are additive and k-linear, and every additive k-linear map into a restricted R(U)-module extends uniquely to an R(U)-linear map. Lean helpers relations, generator_add, generator_smul, extensionLift and extension_hom_ext prove these claims directly from the Finsupp and submodule quotient APIs.",
    "uses": [
     "def-sc-field-scalar-presheaf-ring-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
-    "place": "Sheaves on Spaces, Tags 0095 and 0096; Modules, Tag 02N4. Canonical online tag pages consulted; noncommutative presheaf construction and universe bookkeeping made explicit by M2."
-   }
+   "elementary": false
   },
   {
-   "text": "Restrictions send r tensor m to res(r) tensor res(m). They respect the balanced relations since alpha is natural; identity and composition follow on pure tensors. On morphisms tensor each component with the identity. A natural k-linear map V -> restriction(M) extends by r tensor m -> r times its image. Conversely an R-linear map out of the tensor presheaf restricts along m -> 1 tensor m. The two constructions are inverse and natural, giving a left adjoint. Tensor products can be constructed as quotients of free abelian groups on pairs, so the carriers remain in Type(max u v). The usual Mathlib choice of a left adjoint is uniquely naturally isomorphic to this tensor construction.",
+   "text": "Define restriction along U -> W by extending the map m -> [res(m)] into the quotient at W, regarded as an R(U)-module via the ring restriction. The naturality of alpha from the structural map gives the required balancing identity. Identity and composition hold on generators, hence everywhere by the quotient free-module extensionality lemma. This defines extensionObj with carriers in Type(max u v).",
    "uses": [
     "def-sc-field-scalar-presheaf-ring-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
-    "place": "Sheaves on Spaces, Tags 0095 and 0096; Modules, Tag 02N4. Canonical online tag pages consulted; noncommutative presheaf construction and universe bookkeeping made explicit by M2."
-   }
+   "elementary": false
+  },
+  {
+   "text": "The generators give extensionUnit from V to scalar restriction of extensionObj V. A natural map from V to scalar restriction of N gives extensionDesc by the sectionwise universal property. Its naturality is checked on generators. These operations are inverse: extension followed by restriction agrees on generators, and restriction followed by extension agrees on every section of V. Thus extensionHomEquiv is the hom bijection, natural in N.",
+   "uses": [
+    "def-sc-field-scalar-presheaf-ring-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply CategoryTheory.Adjunction.adjunctionOfEquivLeft to extensionHomEquiv. Naturality in N follows componentwise by function composition. Its isRightAdjoint property is the required conclusion.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -40,10 +44,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "M2",
+  "group": "M3",
   "date": "2026-10-14",
-  "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
-  "place": "Sheaves on Spaces, Tags 0095 and 0096; Modules, Tag 02N4. Canonical online tag pages consulted; noncommutative presheaf construction and universe bookkeeping made explicit by M2."
+  "document": "Stacks Project, Sheaves on Spaces, Tag 0096; Mathlib Finsupp and submodule quotient APIs",
+  "place": "The original node tensor-adjunction route, realized by a free-module balanced quotient for arbitrary rings and module universe max u v."
  },
  "mathlib_searches": [
   {
@@ -129,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
+  "reviewer": "X-b99b3",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261014T023934-L-14799",
+  "landing": "20261014T033107-L-604106",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged public theorem to its node and the quotient-adjunction proof to the recorded proof steps; only proof and proof_origin changed. Delivery and both direct importers (FieldScalarExtension, FieldScalarPresheafPullbackMono) compile cleanly. All added declarations use only propext, Classical.choice and Quot.sound; no sorry remains."
  }
 }
