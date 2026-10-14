@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-recorded-perfect-hom-normalization",
+ "kind": "statement",
+ "title": "Change of counit normalization for conjugated Hom maps",
+ "statement": "Assume the shared module-sheaf derived-category instances for every scheme [def-pc-derived-category], and write $L_p=Lp^*$ [def-pc-derived-pullback]. Use the old counit-pinned composition system [lem-pc-ringed-spaces-derived-pullback-composition, lem-pc-perfect-hom-transport] and the explicit original-counit composition system [lem-pc-recorded-pullback-composition, lem-pc-recorded-perfect-hom-transport]. There is a family of natural automorphisms $e_p:L_p\\cong L_p$, indexed by every scheme arrow $p$, with the following property. For every $s:X\\to S$, every arrow $g:T'\\to T$ of schemes over $S$, every $P,Q\\in D(\\mathcal O_X)$, and every $a:L_{p_T}P\\to L_{p_T}Q$, where $p_T:X\\times_ST\\to X$ and $p_{T'}:X\\times_ST'\\to X$ are projections, the recorded conjugated Hom map equals $e_{p_{T'}}(P)$ followed by the old Hom map applied to $e_{p_T}(P)^{-1}$ followed by $a$ followed by $e_{p_T}(Q)$, followed by $e_{p_{T'}}(Q)^{-1}$. No perfectness, geometric finiteness, directedness or colimit hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "lem-pc-recorded-pullback-composition",
+  "lem-pc-recorded-perfect-hom-transport",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof": [
+  {
+   "text": "Use leftDerivedUnique to identify the two counits on each fixed derived pullback. Its factorization equation pins the natural automorphism e_p. Rewrite the two composition counits with these equations; naturality of e_f at the old counit of g and functoriality identify their composites. Apply leftDerived_ext to obtain the composition-comparison change-of-counit equation.",
+   "uses": [
+    "lem-pc-recorded-pullback-composition",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+   }
+  },
+  {
+   "text": "Apply the comparison equation and its inverse to the conjugated Hom maps. Naturality of the base-change automorphism cancels its two components. The remaining projection automorphisms give the stated formula. Equality induction transports it through baseChangeMap_fst.",
+   "uses": [
+    "lem-pc-recorded-perfect-hom-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-recorded-pullback-composition",
+  "lem-pc-recorded-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "uniqueness comparison between two left derived functor counits",
+   "results": "CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Functor.leftDerived_ext, CategoryTheory.Functor.rightDerivedUnique, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Functor.rightDerived_ext, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.leftDerived_fac_app",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedLift",
+   "results": "loogle: unknown identifier 'Functor.leftDerivedLift'",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|leftDerived_ext",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "change of counit in left derived functor composition gives conjugate Hom maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDescendMorphisms",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-descend-morphisms",
+   "place": "Repair of the canonical composition comparison used in the Tag 09RE argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RecordedPerfectHomNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/RecordedPerfectHomNormalization.lean",
+  "declaration": "AlgebraicGeometry.exists_recordedPerfectHom_normalization",
+  "declarations": [
+   "AlgebraicGeometry.exists_recordedPerfectHom_normalization"
+  ],
+  "statement": "theorem exists_recordedPerfectHom_normalization : ∃ e : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), derivedPullback f ≅ derivedPullback f, ∀ {X S : Scheme.{u}} (s : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) (P Q : schemeDerivedCategory X) (a : (derivedPullback (pullback.fst s T.hom)).obj P ⟶ (derivedPullback (pullback.fst s T.hom)).obj Q), recordedPerfectHomMap s g a = (e (pullback.fst s T'.hom)).hom.app P ≫ perfectHomMap s g ((e (pullback.fst s T.hom)).inv.app P ≫ a ≫ (e (pullback.fst s T.hom)).hom.app Q) ≫ (e (pullback.fst s T'.hom)).inv.app Q",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-97aa0",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T080233-L-3750342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-97aa0",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T080233-L-3750342",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matches the nodes and declared interface changes; all five modules and the unchanged direct importer compile cleanly, and every axiom probe matches the disclosed normalization sorry."
+ }
+}

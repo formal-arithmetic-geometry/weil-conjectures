@@ -25,10 +25,10 @@
  ],
  "proof": [
   {
-   "text": "Apply cofinal-tail Hom continuity to lift the given limit morphism to a finite stage. If it is invertible, apply the same continuity with Q,P at a tail beginning at that stage to lift its inverse. Transport the first lift to the inverse's stage; limit-stage compatibility identifies its limit image with the original morphism.",
+   "text": "Apply cofinal-tail Hom continuity transported to the original-counit normalization to lift the given limit morphism to a finite stage. If it is invertible, apply the same continuity with Q,P at a tail beginning at that stage to lift its inverse. Transport the first lift to the inverse's stage; limit-stage compatibility identifies its limit image with the original morphism.",
    "uses": [
-    "lem-pc-perfect-hom-continuity",
-    "lem-pc-perfect-hom-transport"
+    "lem-pc-recorded-perfect-hom-continuity",
+    "lem-pc-recorded-perfect-hom-transport"
    ],
    "elementary": false,
    "source": {
@@ -37,10 +37,10 @@
    }
   },
   {
-   "text": "Transport preserves identity and composition by functoriality and cancellation of the fixed comparison components. The two lifted composites have the same limit images as the identities. Apply tail equality for P,P and Q,Q, and directedness to satisfy the two inverse identities at a common stage. These identities define an IsIso instance on the transported lift. Cancel the comparison components to recover the exact representation equation of the original statement.",
+   "text": "Transport preserves identity and composition by functoriality and cancellation of the explicit original-counit comparison components. The two lifted composites have the same limit images as the identities. Apply tail equality for P,P and Q,Q, and directedness to satisfy the two inverse identities at a common stage. These identities define an IsIso instance on the transported lift. Cancel the comparison components to recover the exact representation equation of the original statement.",
    "uses": [
-    "lem-pc-perfect-hom-continuity",
-    "lem-pc-perfect-hom-transport"
+    "lem-pc-recorded-perfect-hom-continuity",
+    "lem-pc-recorded-perfect-hom-transport"
    ],
    "elementary": true,
    "source": {
@@ -49,10 +49,10 @@
    }
   },
   {
-   "text": "For each equality in the finite family, conjugate the raw pullback equation by the fixed comparison components and apply tail equality. Choose an upper bound of the finite set of resulting stages and then a common upper bound with the starting stage. At this stage every equality holds. Cancel the comparison components to get the raw pullback equalities required by the original statement. When the family is empty the starting stage ensures a valid witness.",
+   "text": "For each equality in the finite family, conjugate the raw pullback equation by the explicit original-counit comparison components and apply tail equality. Choose an upper bound of the finite set of resulting stages and then a common upper bound with the starting stage. At this stage every equality holds. Cancel the comparison components to get the raw pullback equalities required by the original statement. When the family is empty the starting stage ensures a valid witness.",
    "uses": [
-    "lem-pc-perfect-hom-continuity",
-    "lem-pc-perfect-hom-transport"
+    "lem-pc-recorded-perfect-hom-continuity",
+    "lem-pc-recorded-perfect-hom-transport"
    ],
    "elementary": true,
    "source": {
@@ -62,13 +62,13 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-hom-continuity",
-  "lem-pc-perfect-hom-transport"
+  "lem-pc-recorded-perfect-hom-continuity",
+  "lem-pc-recorded-perfect-hom-transport"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RE, Hom continuity and the inverse/equality argument"
+  "place": "Tag 09RE, inverse and finite-equality argument; normalization repair using the original derived-pullback counits (Tags 06YJ, 0D5S)"
  },
  "mathlib_searches": [
   {
@@ -170,7 +170,7 @@
   "by": "J1",
   "date": "2026-10-11",
   "existing": false,
-  "note": "The comparison specializes the counit-pinned coherent family of exists_derivedPullbackComposition. Derived pullback and its newly landed composition node are added as statement dependencies; the mathematical statement is unchanged."
+  "note": "Comparison repaired using the explicit original-counit composition lift and equality transport; its expression is definitionally the recordedPerfectHomComparison expression. Signature and visibility unchanged; original public API retained."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -195,13 +195,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-c947a",
-  "group": "A2",
+  "reviewer": "X-97aa0",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261014T022539-L-4043198",
+  "landing": "20261014T080233-L-3750342",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean matches the node and unchanged baseline declarations; removed imports remain publicly exported through PerfectHomTransport. Delivery and both direct importers compile cleanly; axioms match the report.",
-  "sorry_before": [],
-  "sorry_after": []
+  "note": "independent Codex review: Delivered Lean matches the nodes and declared interface changes; all five modules and the unchanged direct importer compile cleanly, and every axiom probe matches the disclosed normalization sorry."
  }
 }

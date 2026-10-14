@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-recorded-perfect-hom-transport",
+ "kind": "statement",
+ "title": "Coherence of Hom transport with the original counits",
+ "statement": "Assume shared derived-category instances for the module category of every scheme [def-pc-derived-category]. For a scheme morphism $s:X\\to S$, put $p_T:X\\times_S T\\to X$ for the projection associated to an object $T\\to S$ of $\\mathrm{Over}(S)$. For an arrow $g:T'\\to T$ over $S$ and $P,Q\\in D(\\mathcal O_X)$, use equality $p_T\\circ\\operatorname{baseChangeMap}(s,g)=p_{T'}$ and the inverse original-counit composition lift [lem-pc-recorded-pullback-composition] to define $C_g:Lp_{T'}^*\\cong Lg_X^*\\circ Lp_T^*$, where $g_X=\\operatorname{baseChangeMap}(s,g)$ and derived pullback is [def-pc-derived-pullback]. Define $M_g(a)=C_g(P)\\,Lg_X^*(a)\\,C_g(Q)^{-1}$ for $a:Lp_T^*P\\to Lp_T^*Q$. These maps preserve identity and composition; $M_g(a)=M_g(b)$ if and only if $Lg_X^*(a)=Lg_X^*(b)$; and $M_h(M_g(a))=M_{g\\circ h}(a)$ for every $h:T''\\to T'$ over $S$. In particular, let $I$ be preordered, $R:I\\to\\mathrm{CommRing}$ a diagram and $c$ a cocone with vertex $A$. For $i\\leq j\\leq k$ and $s:X\\to\\operatorname{Spec}(R_i)$, the induced maps from $j$ to $k$ and from stages to $A$ satisfy $M_{kA}(M_{jk}(a))=M_{jA}(a)$ for every morphism between the stage-$j$ pullbacks of $P,Q$. No colimit, directedness, perfectness or finite-presentation assumption is needed for this identity.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "lem-pc-recorded-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Specialize derivedPullbackComposition_coherence to the retained original counits, their universal and K-flat properties, and the explicit composition lifts. The required comparison factorization is reflexivity, so the theorem supplies associativity for exactly these constructed comparisons.",
+   "uses": [
+    "lem-pc-recorded-pullback-composition",
+    "lem-pc-derived-pullback-comparison-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+   }
+  },
+  {
+   "text": "Evaluate associativity on P and Q. Naturality at the transported morphism and cancellation of comparison inverses yield composition of conjugated Hom maps. Equality transport handles baseChangeMap_fst, and baseChangeMap_comp identifies successive base-change arrows. Functor map laws prove identity/composition and invertible conjugation proves equality detection. The private recordedTr and recordedTrTo constructions explicitly use recordedPerfectHomComposition; their associativity and equality-transport lemmas concern these original-counit lifts, not the old chosen perfectHomComposition. Distinct helper names and explicit derived-category binders keep the two constructions unambiguous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+   }
+  },
+  {
+   "text": "Specialize to finite-stage and limit arrows and use the cocone equation to identify the two composites of base-change maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-recorded-pullback-composition",
+  "lem-pc-derived-pullback-comparison-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "uniqueness comparison between two left derived functor counits",
+   "results": "CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Functor.leftDerived_ext, CategoryTheory.Functor.rightDerivedUnique, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Functor.rightDerived_ext, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.leftDerived_fac_app",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedLift",
+   "results": "loogle: unknown identifier 'Functor.leftDerivedLift'",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|leftDerived_ext",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "change of counit in left derived functor composition gives conjugate Hom maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDescendMorphisms",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-descend-morphisms",
+   "place": "Repair of the canonical composition comparison used in the Tag 09RE argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RecordedPerfectHomTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/RecordedPerfectHomTransport.lean",
+  "declaration": "AlgebraicGeometry.recordedPerfectLimitMap_stage",
+  "declarations": [
+   "AlgebraicGeometry.recordedPerfectHomComposition",
+   "AlgebraicGeometry.recordedPerfectHomComparison",
+   "AlgebraicGeometry.recordedPerfectHomMap",
+   "AlgebraicGeometry.recordedPerfectHomMap_id",
+   "AlgebraicGeometry.recordedPerfectHomMap_comp",
+   "AlgebraicGeometry.recordedPerfectHomMap_eq_iff",
+   "AlgebraicGeometry.recordedPerfectHomMap_trans",
+   "AlgebraicGeometry.recordedPerfectStageMap",
+   "AlgebraicGeometry.recordedPerfectLimitMap",
+   "AlgebraicGeometry.recordedPerfectStageMap_id",
+   "AlgebraicGeometry.recordedPerfectLimitMap_id",
+   "AlgebraicGeometry.recordedPerfectLimitMap_stage"
+  ],
+  "statement": "theorem recordedPerfectLimitMap_stage {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i)) {j k : I} (hij : i ≤ j) (hjk : j ≤ k) {P Q : schemeDerivedCategory X} (f : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj P ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj Q) : recordedPerfectLimitMap R c s (hij.trans hjk) (recordedPerfectStageMap R s hij hjk f) = recordedPerfectLimitMap R c s hij f",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-97aa0",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T080233-L-3750342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-97aa0",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T080233-L-3750342",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matches the nodes and declared interface changes; all five modules and the unchanged direct importer compile cleanly, and every axiom probe matches the disclosed normalization sorry."
+ }
+}

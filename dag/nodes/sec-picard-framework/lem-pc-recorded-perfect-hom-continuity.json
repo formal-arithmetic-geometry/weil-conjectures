@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-recorded-perfect-hom-continuity",
+ "kind": "statement",
+ "title": "Hom continuity for the recorded original-counit comparisons",
+ "statement": "Let $I$ be a preordered set directed under $\\leq$, let $R:I\\to\\mathrm{CommRing}$ be a diagram, and let $(A,c)$ be a colimit cocone. Fix $i\\in I$, a scheme $X$, and a locally finitely presented, quasi-compact and quasi-separated morphism $s:X\\to\\operatorname{Spec}(R_i)$. Assume the shared derived-category instances [def-pc-derived-category] for every scheme and for the module categories over every open of $X$. Let $P,Q\\in D(\\mathcal O_X)$ be perfect [def-pc-perfect-complex]. For $j\\geq i$ put $X_j=X\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(R_j)$ and $X_A=X\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(A)$, with projections $p_j,p_A$ to $X$, and put $P_j=Lp_j^*P$, $Q_j=Lp_j^*Q$, $P_A=Lp_A^*P$, $Q_A=Lp_A^*Q$ [def-pc-derived-pullback]. Use the original-counit conjugated stage maps $M_{jk}$ and limit maps $M_{jA}$ [lem-pc-recorded-perfect-hom-transport]. For every $j_0\\geq i$ and $\\varphi:P_A\\to Q_A$ there are $j\\geq j_0$ and $a:P_j\\to Q_j$ with $M_{jA}(a)=\\varphi$. For every $j\\geq i$ and $a,b:P_j\\to Q_j$ with $M_{jA}(a)=M_{jA}(b)$ there is $k\\geq j$ such that $M_{jl}(a)=M_{jl}(b)$ for every $l\\geq k$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Hom continuity; transported between universal counit normalizations using Tag 0D5S; checked online 2026-10-14"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-recorded-perfect-hom-transport"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalization automorphisms. Conjugate the limit morphism by the inverse automorphism at its source and the forward automorphism at its target. Apply the existing cofinal-tail continuity theorem and conjugate the stage lift in the opposite direction. The normalization equation and cancellation prove the desired limit image.",
+   "uses": [
+    "lem-pc-recorded-perfect-hom-normalization",
+    "lem-pc-perfect-hom-continuity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, Hom continuity; transported between universal counit normalizations using Tag 0D5S; checked online 2026-10-14"
+   }
+  },
+  {
+   "text": "The normalization equation cancels outer automorphisms in the equality of recorded limit images. Apply the old continuity equality clause to the conjugated stage pair. Use normalization at every later stage to transport the resulting tail equality back.",
+   "uses": [
+    "lem-pc-recorded-perfect-hom-normalization",
+    "lem-pc-perfect-hom-continuity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, Hom continuity; transported between universal counit normalizations using Tag 0D5S; checked online 2026-10-14"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-recorded-perfect-hom-normalization",
+  "lem-pc-perfect-hom-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Hom continuity; transported between universal counit normalizations using Tag 0D5S; checked online 2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "uniqueness comparison between two left derived functor counits",
+   "results": "CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Functor.leftDerived_ext, CategoryTheory.Functor.rightDerivedUnique, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Functor.rightDerived_ext, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.leftDerived_fac_app",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedLift",
+   "results": "loogle: unknown identifier 'Functor.leftDerivedLift'",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|leftDerived_ext",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "change of counit in left derived functor composition gives conjugate Hom maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDescendMorphisms",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-descend-morphisms",
+   "place": "Repair of the canonical composition comparison used in the Tag 09RE argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RecordedPerfectHomContinuity",
+  "file": "lean/Sheaf/AlgebraicGeometry/RecordedPerfectHomContinuity.lean",
+  "declaration": "AlgebraicGeometry.recorded_perfect_hom_continuity",
+  "declarations": [
+   "AlgebraicGeometry.recorded_perfect_hom_continuity"
+  ],
+  "statement": "theorem recorded_perfect_hom_continuity {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I) (X : Scheme.{u}) (s : X ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (P Q : schemeDerivedCategory X) (hP : X.IsPerfect P) (hQ : X.IsPerfect Q) : (∀ (j₀ : I) (hij₀ : i ≤ j₀) (φ : (derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj P ⟶ (derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj Q), ∃ (j : I) (hj₀j : j₀ ≤ j) (f : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE (hij₀.trans hj₀j)))))).obj P ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE (hij₀.trans hj₀j)))))).obj Q), recordedPerfectLimitMap R c s (hij₀.trans hj₀j) f = φ) ∧ (∀ (j : I) (hij : i ≤ j) (a b : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj P ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj Q), recordedPerfectLimitMap R c s hij a = recordedPerfectLimitMap R c s hij b → ∃ (k : I) (hjk : j ≤ k), ∀ (l : I) (hkl : k ≤ l), recordedPerfectStageMap R s hij (hjk.trans hkl) a = recordedPerfectStageMap R s hij (hjk.trans hkl) b)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-97aa0",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T080233-L-3750342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-97aa0",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T080233-L-3750342",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matches the nodes and declared interface changes; all five modules and the unchanged direct importer compile cleanly, and every axiom probe matches the disclosed normalization sorry."
+ }
+}

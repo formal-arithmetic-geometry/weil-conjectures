@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-recorded-pullback-composition",
+ "kind": "statement",
+ "title": "Invertibility of the composition lift from the original derived-pullback counits",
+ "statement": "Assume the shared module-sheaf derived-category instances [def-pc-derived-category] for every scheme, and let $Q_{h,X}$ be the localization from the homotopy category of module sheaves on $X$ to $D(\\mathcal O_X)$. For each scheme arrow $p:X\\to Y$, write $L_p=\\operatorname{derivedPullback}(p)$ [def-pc-derived-pullback] and retain its original universal presentation: the underived tensor functor $E_p$, its additivity, and the universal counit $\\varepsilon_p:L_p\\circ Q_{h,Y}\\to Q_{h,X}\\circ E_p$, invertible on $K$-flat complexes. The object and map equations of the presentation give $E_p=\\operatorname{tensorPullback}(p)$; transport the counit and its properties along this equality. For scheme arrows $f:X\\to Y$ and $g:Y\\to Z$, form $\\beta_{f,g}:L_f\\circ L_g\\circ Q_{h,Z}\\to Q_{h,X}\\circ E_f\\circ E_g\\to Q_{h,X}\\circ E_{g\\circ f}$ from the successive transported counits and the canonical underived tensor composition comparison, inserting functor associators. Define $c_{f,g}:L_f\\circ L_g\\to L_{g\\circ f}$ as the universal left-derived lift of $\\beta_{f,g}$ through $\\varepsilon_{g\\circ f}$. Then $c_{f,g}$ is invertible. The isomorphism recordedDerivedPullbackComposition is the asIso of this explicit lift.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Project the original derived-pullback witness, retaining its underived functor, additivity, counit, universal property and K-flat equation as one structure. The object and morphism equations identify the underived functor with the fixed tensor formula. Transport the counit along that equality, and transport its universal and K-flat properties using equality induction.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+   }
+  },
+  {
+   "text": "Construct the composite counit with functor associators, whiskering and the canonical underived tensor comparison. Define its derived map by leftDerivedLift. Apply isIso_derivedPullbackCompositionLift to the retained counits, their universal properties and their K-flat computation, and take asIso of the explicitly constructed lift.",
+   "uses": [
+    "lem-pc-derived-pullback-comparison-is-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "lem-pc-derived-pullback-comparison-is-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YJ and 0D5S; original K-flat derived presentation and composition on K-flat representatives; checked online 2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "uniqueness comparison between two left derived functor counits",
+   "results": "CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Functor.leftDerived_ext, CategoryTheory.Functor.rightDerivedUnique, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Functor.rightDerived_ext, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.leftDerived_fac_app",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedLift",
+   "results": "loogle: unknown identifier 'Functor.leftDerivedLift'",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|leftDerived_ext",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "library primitives used; no direct matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "change of counit in left derived functor composition gives conjugate Hom maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDescendMorphisms",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-descend-morphisms",
+   "place": "Repair of the canonical composition comparison used in the Tag 09RE argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackRecordedComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackRecordedComposition.lean",
+  "declaration": "AlgebraicGeometry.recordedDerivedPullbackCompositionLift_isIso",
+  "declarations": [
+   "AlgebraicGeometry.RecordedPullbackData",
+   "AlgebraicGeometry.recordedPullbackData",
+   "AlgebraicGeometry.recordedPullbackData_E",
+   "AlgebraicGeometry.recordedPullbackData_additive",
+   "AlgebraicGeometry.recordedTransportCounit",
+   "AlgebraicGeometry.recordedDerivedPullbackCounit",
+   "AlgebraicGeometry.recordedDerivedPullbackCounit_universal",
+   "AlgebraicGeometry.recordedDerivedPullbackCounit_kFlat",
+   "AlgebraicGeometry.recordedDerivedPullbackCompositionLift",
+   "AlgebraicGeometry.recordedDerivedPullbackCompositionLift_isIso",
+   "AlgebraicGeometry.recordedDerivedPullbackComposition"
+  ],
+  "statement": "theorem recordedDerivedPullbackCompositionLift_isIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) : IsIso (recordedDerivedPullbackCompositionLift f g)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-97aa0",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T080233-L-3750342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-97aa0",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261014T080233-L-3750342",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matches the nodes and declared interface changes; all five modules and the unchanged direct importer compile cleanly, and every axiom probe matches the disclosed normalization sorry."
+ }
+}
