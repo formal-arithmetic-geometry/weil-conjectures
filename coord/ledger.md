@@ -14294,3 +14294,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 10:35 L: batch 20261014T022537 dependency take-out
 - 02:39 L: merged deliver/XRa0a656f89c54729e/Sheaf.Paper.ModuleCupDerivedClassComparison (stage 3; reviewer PASS; first push; landing 20261014T023930-L-13515 (proof); batch 20261014T023929; modules 1; new nodes 1; change records: coord/changes/ModuleCupDerivedClassComparisonRestore.md)
+- 02:39 L: merged deliver/B2/Sheaf.AlgebraicGeometry.HigherDirectImageOverMapCoefficient (stage 3; reviewer PASS; first push; landing 20261014T023931-L-13619 (interface); batch 20261014T023929; modules 1; new nodes 0; change records: coord/changes/B2-coefficient-structural-congruence.md)
