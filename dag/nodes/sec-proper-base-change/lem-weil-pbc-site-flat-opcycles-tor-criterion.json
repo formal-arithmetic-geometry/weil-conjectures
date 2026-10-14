@@ -27,62 +27,181 @@
   "def-pc-acyclic-complex-modules",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "opcycles.*flat|flat.*opcycles|cokernel.*flat",
-   "results": "{\"t\": \"2026-10-13T23:39:16Z\", \"tool\": \"grep\", \"query\": \"opcycles.*flat|flat.*opcycles|cokernel.*flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-14",
-   "verdict": "no match: module flatness declarations do not assert the arbitrary ringed-site opcycle criterion"
+   "text": "Put $B=P^{n-1}$, $D=P^n$, $R=P^{n-2}$, $e=d^{n-2}:R\\to B$, $d=d^{n-1}:B\\to D$, and $q:D\\to Q=\\operatorname{coker}d$. Thus $de=0$ and $qd=0$. Regard each test module $N$ as a complex concentrated in degree zero. The total tensor complex in the hypothesis has the single summand $N\\otimes P^j$ in degree $j$, with differential $1_N\\otimes d^j$ (the other differential is zero). The symmetry from the tensor-closed node identifies this with $P^j\\otimes N$, naturally and compatibly with differentials. Consequently $R\\otimes N\\xrightarrow{e_N}B\\otimes N\\xrightarrow{d_N}D\\otimes N$ is exact in the middle for every $N$. Here $e_N=e\\otimes1_N$ and similarly for $d_N,q_N$.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-acyclic-complex-modules",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G0 (lemma-last-one-flat), first displayed tensor sequence; direct specialization to degree-zero test complexes"
+   }
   },
   {
+   "text": "Tensoring with any fixed module preserves cokernels: by the natural tensor–Hom bijection, a map out of $N\\otimes D$ annihilating $1_N\\otimes d$ corresponds precisely to a map $D\\to\\mathcal Hom(N,-)$ annihilating $d$, which factors uniquely through $q$. Applying the bijection back gives the unique factorization through $1_N\\otimes q$. Symmetry gives the same assertion in the other variable. Hence $B\\otimes N\\xrightarrow{d_N}D\\otimes N\\xrightarrow{q_N}Q\\otimes N\\to0$ is exact for every $N$, and tensoring any epimorphism is again an epimorphism: an epimorphism in an abelian category is the cokernel of its kernel. This is right exactness, with no flatness requirement on the fixed tensor factor.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO (lemma-internal-hom-adjoint-tensor), adjunction; Tag 03EP (lemma-tensor-commute-colimits), cokernel specialization"
+   }
+  },
+  {
+   "text": "We will use exactness on local sections, rather than exactness on all sections over an object. For an exact sequence $X\\xrightarrow{f}Y\\xrightarrow{g}Z$, exactness means $\\operatorname{im}f=\\ker g$. Thus the induced map $X\\to\\ker g$ is epic; forgetting module structure preserves this epimorphism by the exact forgetful-functor node. The abelian-sheaf epimorphism node supplies local lifts of every section of $\\ker g$. Kernels are sectionwise by the module-category node, so every section $y$ killed by $g$ locally equals $f(x)$. The same epimorphism node supplies local lifts for any module epimorphism. These implications apply over every object and after every restriction; successive covering refinements are composed using the site covering axioms. Monomorphisms of module sheaves are injective on sections because their sectionwise kernel is zero.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), exact forgetful functor; Tag 03CN (lemma-abelian-abelian), parts (2), (3), (5), (6)"
+   }
+  },
+  {
+   "text": "Fix an arbitrary short exact sequence $0\\to N_1\\xrightarrow{i}N_2\\xrightarrow{p}N_3\\to0$ and an object $V$. Write $X_i=1_X\\otimes i$ and $X_p=1_X\\otimes p$. Let $x\\in(Q\\otimes N_1)(V)$ satisfy $Q_i(x)=0$. Since $q_{N_1}$ is epic by step 2, locally lift $x$ to $y\\in(D\\otimes N_1)(V)$. Naturality gives $q_{N_2}(D_i y)=Q_i(q_{N_1}y)=0$. Exactness of the cokernel sequence of step 2 and the local criterion of step 3 give, after another covering refinement, $z\\in(B\\otimes N_2)(V)$ with $d_{N_2}z=D_i y$. All letters henceforth denote these restricted sections; no global lift is claimed.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G0 (lemma-last-one-flat), cokernel-flatness argument; agent expansion by local diagram chase"
+   }
+  },
+  {
+   "text": "The section $B_p z$ is a cycle: $d_{N_3}(B_p z)=D_p(d_{N_2}z)=D_pD_i y=0$, because $pi=0$. Step 1 applied to $N_3$ and the local criterion give a local section $w\\in(R\\otimes N_3)(V)$ with $e_{N_3}w=B_pz$. Tensoring the epimorphism $p$ with $R$ is epic by step 2, even without using flatness of $R$. Locally lift $w$ to $\\widetilde w\\in(R\\otimes N_2)(V)$. Set $z_0=z-e_{N_2}\\widetilde w$. Then $B_pz_0=B_pz-e_{N_3}R_p\\widetilde w=0$, whereas $d_{N_2}z_0=d_{N_2}z$ since $de=0$.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-acyclic-complex-modules",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G0 (lemma-last-one-flat), tensor exactness in degree n-1; agent expansion of the obstruction and boundary correction"
+   }
+  },
+  {
+   "text": "Flatness of $B=P^{n-1}$, by its defining exactness property, makes $0\\to B\\otimes N_1\\xrightarrow{B_i}B\\otimes N_2\\xrightarrow{B_p}B\\otimes N_3\\to0$ exact. Thus the local criterion supplies $v\\in(B\\otimes N_1)(V)$ with $B_i v=z_0$. Naturality and the correction identity give $D_i(d_{N_1}v)=d_{N_2}B_i v=d_{N_2}z_0=d_{N_2}z=D_i y$. Flatness of $D=P^n$ makes $D_i$ monic and therefore sectionwise injective; hence $y=d_{N_1}v$. It follows that $x=q_{N_1}y=q_{N_1}d_{N_1}v=0$ on the resulting cover. The sheaf separatedness axiom gives $x=0$ on the original $V$. Since $V$ and $x$ were arbitrary, $Q_i$ is monic.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G0 (lemma-last-one-flat), conclusion of cokernel-flatness argument; agent expansion using exactly the flat terms in degrees n-1 and n"
+   }
+  },
+  {
+   "text": "By step 2, $Q\\otimes-$ is additive and preserves cokernels, so it sends the chosen short exact sequence to a right exact sequence. Step 6 supplies injectivity at the left, so that sequence is short exact. This holds for every short exact sequence. Write $T=Q\\otimes-$. For an arbitrary sequence $A\\xrightarrow{f}B\\xrightarrow{g}C$ exact at $B$, set $I=\\operatorname{im}f=\\ker g$ and $J=\\operatorname{im}g$. Factor $f$ as the epimorphism $A\\to I$ followed by $I\\hookrightarrow B$, and $g$ as $B\\to J$ followed by $J\\hookrightarrow C$. Preservation of $0\\to I\\to B\\to J\\to0$ gives $\\operatorname{im}T(I\\hookrightarrow B)=\\ker T(B\\to J)$. Right exactness makes $T(A\\to I)$ epic, so $\\operatorname{im}T(f)=\\operatorname{im}T(I\\hookrightarrow B)$. Applying the short-exact preservation already proved to $0\\to J\\to C\\to C/J\\to0$ makes $T(J\\hookrightarrow C)$ monic, so $\\ker T(g)=\\ker T(B\\to J)$. Combining these three equalities proves exactness at $T(B)$. Thus $Q\\otimes-$ is exact. Tensor symmetry identifies it with $-\\otimes Q$, and the flat-sheaf definition proves that $Q=Q^n$ is flat.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-weil-pbc-exact-sequence",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G0 (lemma-last-one-flat), final flatness conclusion; direct exact-functor definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-acyclic-complex-modules",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08G0 (lemma-last-one-flat), cokernel/Tor criterion; direct local diagram chase replacing the Tor formalism, with Tag 03EO and Tag 03CN"
+ },
+ "mathlib_searches": [
+  {
    "tool": "leanfinder",
-   "query": "In a monoidal abelian category the cokernel of a differential between flat objects is flat if tensoring the complex with any object is exact in the preceding degree",
-   "results": "{\"t\": \"2026-10-13T23:39:17Z\", \"tool\": \"leanfinder\", \"query\": \"In a monoidal abelian category the cokernel of a differential between flat objects is flat if tensoring the complex with any object is exact in the preceding degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_lTensor_exact\"], \"digest\": \"4f422d6c1d17130a\"}",
+   "query": "A complex of flat sheaves on a ringed site whose tensor with every module is exact in degree n minus one has flat cokernel in degree n",
+   "results": "{\"t\": \"2026-10-14T01:33:55Z\", \"tool\": \"leanfinder\", \"query\": \"A complex of flat sheaves on a ringed site whose tensor with every module is exact in degree n minus one has flat cokernel in degree n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_rTensor_exact\"], \"digest\": \"2e002fe838caa231\"}",
    "date": "2026-10-14",
-   "verdict": "no match: module flatness declarations do not assert the arbitrary ringed-site opcycle criterion"
+   "verdict": "no match: module-over-one-ring criteria do not state the arbitrary ringed-site universal-tensor opcycle criterion"
   },
   {
    "tool": "loogle",
    "query": "\"opcycles\", \"flat\"",
-   "results": "{\"t\": \"2026-10-13T23:39:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"opcycles\\\", \\\"flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-14T01:33:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"opcycles\\\", \\\"flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-14",
-   "verdict": "no match: module flatness declarations do not assert the arbitrary ringed-site opcycle criterion"
-  },
-  {
-   "tool": "leansearch",
-   "query": "For a ringed site, a complex of flat sheaves whose tensor with every module is exact has flat cycles",
-   "results": "{\"top\": [], \"note\": \"service unavailable: Internal Server Error\", \"n_hits\": 0, \"ok\": false}",
-   "date": "2026-10-13",
-   "verdict": "unavailable"
+   "verdict": "no match: module-over-one-ring criteria do not state the arbitrary ringed-site universal-tensor opcycle criterion"
   },
   {
    "tool": "grep",
-   "query": "flat.*(opcycles|cokernel)|exactAt.*flat|flat_opcycles",
-   "results": "{\"t\": \"2026-10-14T00:23:38Z\", \"tool\": \"grep\", \"query\": \"flat.*(opcycles|cokernel)|exactAt.*flat|flat_opcycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "flat.*opcycles|opcycles.*flat|tensor.*rightExact",
+   "results": "{\"t\": \"2026-10-14T01:33:56Z\", \"tool\": \"grep\", \"query\": \"flat.*opcycles|opcycles.*flat|tensor.*rightExact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/QuotSMulTop.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/Ideal/Quotient/ChineseRemainder.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Index.lean\", \"Mathlib/RingTheory/FiniteStability.lean\", \"Mathlib/RingTheory/PolynomialLaw/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\"], \"digest\": \"bce86e81b3bfbc82\"}",
    "date": "2026-10-14",
-   "verdict": "no match: returned module flatness criteria concern a single ring, not arbitrary ringed-site cokernels"
+   "verdict": "no match: module-over-one-ring criteria do not state the arbitrary ringed-site universal-tensor opcycle criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal vanishing of tensor homology in one degree implies flatness of a cokernel of a differential",
+   "results": "{\"t\": \"2026-10-14T01:35:02Z\", \"tool\": \"leanfinder\", \"query\": \"Universal vanishing of tensor homology in one degree implies flatness of a cokernel of a differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\"], \"digest\": \"ee6b355fe2c975ba\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: module-over-one-ring criteria do not state the arbitrary ringed-site universal-tensor opcycle criterion"
   },
   {
    "tool": "loogle",
    "query": "\"flat\", \"cokernel\"",
-   "results": "{\"t\": \"2026-10-14T00:23:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"flat\\\", \\\"cokernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-14T01:35:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"flat\\\", \\\"cokernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-14",
-   "verdict": "no match: returned module flatness criteria concern a single ring, not arbitrary ringed-site cokernels"
+   "verdict": "no match: module-over-one-ring criteria do not state the arbitrary ringed-site universal-tensor opcycle criterion"
   },
   {
-   "tool": "leanfinder",
-   "query": "Flat objects in an abelian tensor category: universal exactness at the middle term implies the cokernel is flat",
-   "results": "{\"t\": \"2026-10-14T00:23:39Z\", \"tool\": \"leanfinder\", \"query\": \"Flat objects in an abelian tensor category: universal exactness at the middle term implies the cokernel is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_lTensor_exact\"], \"digest\": \"2b46a3da38037e53\"}",
+   "tool": "leansearch",
+   "query": "Flat opcycles of an universally tensor exact complex of sheaves",
+   "results": "{\"t\": \"2026-10-14T01:35:03Z\", \"tool\": \"leansearch\", \"query\": \"Flat opcycles of an universally tensor exact complex of sheaves\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-14",
-   "verdict": "no match: returned module flatness criteria concern a single ring, not arbitrary ringed-site cokernels"
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(opcycles|cokernel)|flat_opcycles",
+   "results": "{\"t\": \"2026-10-14T01:35:03Z\", \"tool\": \"grep\", \"query\": \"flat.*(opcycles|cokernel)|flat_opcycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: module-over-one-ring criteria do not state the arbitrary ringed-site universal-tensor opcycle criterion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-site-acyclic-kflat-cycles-flat",
   "by": "worker",
@@ -110,5 +229,44 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-site-flat-opcycles-tor-criterion",
+  "worker": "stage1",
+  "summary": "Statement retained. Expanded the universal tensor-exactness criterion into a local diagram chase, deriving tensor right exactness directly from the existing tensor–Hom adjunction and using existing exact-forgetful and local-epimorphism nodes. No boundedness, enough-points, or global section-surjectivity assumption is used; no new nodes.",
+  "blueprint": "Realizes the inherited ancestor def-weil-pbc-completed-pullback, Detailed form first strict-tower pullback functor, via the recorded 0G7E acyclic-case cycle/cokernel-flatness argument. This node carries the cokernel criterion itself; no step of the proper-base-change unit is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Tensor–Hom adjunction and symmetric additive tensor structure on the same arbitrary ringed site; the proper-base-change unit does not restate this generic module-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Exactness of forgetting module structure, used solely to obtain local lifts of module epimorphisms; this generic ringed-site tool is not a replacement for any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Local section lifts for epimorphisms of abelian sheaves on arbitrary sites; the small-etale-only version is insufficient."
+   },
+   {
+    "node": "def-weil-pbc-exact-sequence",
+    "why": "Meaning of exactness and short exact sequences in the abelian module category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-04e19a24a",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-04e19a24a (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, Stacks 08G0/03EO/03EP/03CN/03DA/03ER passages, and blueprint route. All seven proof steps and edge cases check out; no new nodes or applicable duplicates. Accepted generic tool uses are documented in review.md. Inherited infrastructure cycles are recorded separately; this delivery introduces no cycle or coefficient comparison."
  }
 }
