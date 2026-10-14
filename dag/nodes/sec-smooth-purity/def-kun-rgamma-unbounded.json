@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-kun-rgamma-unbounded",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Unbounded derived global sections",
- "statement": "For a scheme $T$, a commutative ring $\\Lambda$ and\n$K\\in D(T_{\\Et},\\Lambda)$, choose a K-injective resolution in the\nsense of [def-weil-pbc-kinjective-resolutions],\n$K\\to I$ (which exists by\n[prop-weil-pbc-kinjective-resolutions-exist]) and put\n\n$$\n\\RGamma(T_{\\Et},K)=\\Gamma(T_{\\Et},I),\n\\qquad\nH^q(T_{\\Et},K)=\\mathcal H^q(\\RGamma(T_{\\Et},K)).\n$$\n\nThe independence of the result of the chosen resolution is\nrecorded with the other properties of this construction, and for\n$K\\in\\Dplus(T_{\\Et},\\Lambda)$ its agreement with the functor\n$\\RGamma(T_{\\Et},-)$ of\n[def-weil-pbc-etale-cohomology] is\nalso recorded with those properties.",
+ "statement": "For a scheme $T$ and a commutative ring $\\Lambda$, use the category $\\Mod(T_{\\Et},\\Lambda)$ of sheaves of modules over the constant ring sheaf $\\Lambda_T$, and its unbounded derived category $D(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories]. Given $K\\in D(T_{\\Et},\\Lambda)$, choose a cochain complex $C$ representing $K$ and a K-injective resolution $C\\to I$ in this module-sheaf category [def-weil-pbc-kinjective-resolutions], which exists by [prop-weil-pbc-kinjective-resolutions-exist]. For a module sheaf $M$, put $\\Gamma(T_{\\Et},M)=M(T)$ with its $\\Lambda$-module structure [def-weil-sheaf-of-modules-category]; this is sections at the terminal object, as in [def-weil-pbc-global-sections-functor], applied termwise to complexes. Define\n\n$$\n\\RGamma(T_{\\Et},K)=\\Gamma(T_{\\Et},I)\\in D(\\Lambda),\n\\qquad\nH^q(T_{\\Et},K)=\\mathcal H^q(\\RGamma(T_{\\Et},K))\\quad(q\\in\\mathbf Z),\n$$\n\nwhere the complex of sections is viewed in the derived category of $\\Lambda$-modules and $\\mathcal H^q$ is its cohomology module [def-weil-abstract-derived-category].\n\nIndependence of the chosen representative and resolution is recorded with the other properties of this construction. For $K\\in\\Dplus(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories], agreement with the bounded-below K-injective recipe of [def-weil-pbc-etale-cohomology], carried out in $\\Mod(T_{\\Et},\\Lambda)$, is also recorded there. For $\\Lambda=\\mathbf Z$ this is exactly that abelian-sheaf definition; for general $\\Lambda$ the resolutions and sections in the recipe retain their $\\Lambda$-module structures.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-rgamma-unbounded.md",
   "place": "node def-kun-rgamma-unbounded, order 1661"
@@ -15,14 +15,68 @@
  "stmt_deps": [
   "def-weil-pbc-kinjective-resolutions",
   "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-derived-categories",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unbounded derived global sections computed by a K-injective resolution",
+   "results": "CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; CochainComplex.IsKInjective; CochainComplex.isKInjective_of_injective; no exact etale RGamma definition",
+   "date": "2026-10-15",
+   "verdict": "generalization only"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedGlobalSections, DerivedCategory.homologyFunctor",
+   "results": "0 hits; unknown identifier rightDerivedGlobalSections",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedGlobalSections|RGamma|K-injective Mathlib/CategoryTheory Mathlib/Algebra/Homology",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unbounded derived global sections and cohomology via K-injective resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections functor on etale sheaves",
+   "results": "CategoryTheory.HasGlobalSectionsFunctor and generic SheafedSpace.Γ_def; no exact derived etale construction",
+   "date": "2026-10-15",
+   "verdict": "generalization only"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "DerivedCategory.homologyFunctor and homology sequence declarations",
+   "date": "2026-10-15",
+   "verdict": "generalization only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedGlobalSections|cohomology Mathlib/CategoryTheory/Abelian Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -45,5 +99,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "def-kun-rgamma-unbounded",
+  "worker": "stage1",
+  "summary": "Audited the imported definition against its blueprint, dependencies, and the slopmaster2 source. The source declarations rightDerivedGlobalSections and cohomology are generic functors for any Grothendieck abelian coefficient category; they do not state the item’s explicit commutative-ring K-injective-resolution construction, so the earlier attachment was rejected. The definition is split with no new nodes because all three notions it cites already exist in the DAG. Maintainer review clarified the representing complex, module-valued termwise sections, D(Lambda) and its cohomology, adding their existing definition dependencies. The bounded-below reference is explicitly the same recipe in module sheaves, literally the cited abelian-sheaf definition when Lambda=Z.",
+  "blueprint": "The item is the blueprint definition itself; its displayed clauses define RGamma and H^q by choosing a K-injective resolution and taking termwise global sections, with independence and D+ agreement deferred to other properties.",
+  "same_as_search": "python3 tools/blueprint_refs.py search 'unbounded derived global sections' found only this item; search 'K-injective resolution Gamma' found none."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-c1c9de5aa",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-c1c9de5aa (reviewer sub-agent of L); spot-checked: Read the definition, cited statements, master blueprint sources, Stacks K-injective passages, and unit/chapter route. Corrected missing definition citations and clarified that the bounded-below recipe retains Lambda-module coefficients; the cited cohomology definition literally covers abelian sheaves. No new nodes or target changes. Corrected whole JSON and concrete checks are recorded in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
