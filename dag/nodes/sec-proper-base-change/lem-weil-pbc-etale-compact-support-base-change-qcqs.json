@@ -11,7 +11,9 @@
     "lem-weil-pbc-etale-proper-direct-image-finiteness"
    ]
   },
-  "same_as": []
+  "same_as": [
+   "thm-cbc-finite-torsion"
+  ]
  },
  "kind": "statement",
  "title": "Arbitrary base change for qcqs etale compact support",
@@ -30,60 +32,199 @@
   "def-pc-fibre-product",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\overline X'=\\overline X\\times_Y Y'$ and let $\\overline g:\\overline X'\\to\\overline X$ be the projection. The inverse image $W=\\overline g^{-1}(j(X))$, equipped with the restricted structure sheaf, is an open subscheme of $\\overline X'$ by [def-weil-open-immersion]. A morphism $a:S\\to\\overline X'$ factors uniquely through $W$ exactly when $\\overline g a$ factors through $j:X\\to\\overline X$: both factorizations are the restriction of the map of locally ringed spaces to that open. Thus $W$ represents $X\\times_{\\overline X}\\overline X'$. By [def-pc-fibre-product], maps to this fibre product are precisely pairs of maps to $X$ and $Y'$ whose composites to $Y$ agree, so it is canonically $X'=X\\times_Y Y'$. This gives an open immersion $j':X'\\to\\overline X'$, the two cartesian squares with vertical maps $(j,j')$ and $(p,p')$, and $f'=p'j'$. Properness of $p'$ follows from [lem-weil-pbc-proper-fp-permanence](b), and quasi-compactness of $j'$ from [lem-weil-pbc-qcqs-morphism-permanence](3). Part (1) of the latter node makes $g:Y'\\to Y$ quasi-compact and quasi-separated, since $Y,Y'$ are qcqs; part (3) then makes its base change $g':X'\\to X$ quasi-compact and quasi-separated, and part (2), with qcqs target $X$, makes $X'$ qcqs. The separated finite-type hypothesis for $f'$ follows from [lem-pod-separated-finite-type-base-change]. Consequently $c'=(j',p')$ is a compactification in exactly the sense of [def-weil-pbc-projection-compactification].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pod-separated-finite-type-base-change",
+    "def-weil-pbc-projection-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, label lemma-base-change-shriek, first proof paragraph"
+   }
+  },
+  {
+   "text": "The finite additive sequence $0,1,2\\cdot1,\\ldots$ in $\\Lambda$ repeats, so there is $N>0$ with $N1_\\Lambda=0$. Every section $m$ of every $\\Lambda$-module sheaf satisfies $Nm=(N1_\\Lambda)m=0$; the same holds for its subquotients and hence cohomology sheaves. Extension by zero carries quasi-isomorphisms to quasi-isomorphisms by [lem-weil-pbc-extension-by-zero-exact]. Its exactness and [lem-sp-exact-functor-preserves-homology](c) give $\\mathcal H^q(j_!K)=j_!\\mathcal H^q(K)$, so $L=j_!K$ is bounded below. The exact inverse-image functors of [prop-weil-pbc-inverse-image-modules-exact] likewise commute with homology and preserve this lower bound. All complexes to which we apply proper base change therefore lie in the stated bounded-below categories, and $\\operatorname{For}L$ has torsion cohomology.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, label lemma-base-change-shriek, first proof paragraph"
+   }
+  },
+  {
+   "text": "Apply [thm-weil-pbc-bounded-below] to the cartesian square $(p,p',g,\\overline g)$ and the bounded-below torsion abelian complex $\\operatorname{For}L$ from step 2. Its exchange morphism is an isomorphism, with no condition on $g$. By [lem-weil-pbc-exchange-forget-coefficients](1)--(3), forgetting coefficients identifies the module exchange map with that abelian exchange, and the final assertion of that node detects its invertibility. The abelian exchange is natural in $K$ by [def-weil-pbc-derived-exchange]; the module exchange in clause (3) is the same mate construction with the module adjunctions. Its displayed composite of the natural unit, square isomorphism and counit is therefore natural as well. We obtain the natural isomorphism $g^{-1}Rp_*j_!K\\xrightarrow{\\sim}Rp'_*\\overline g^{-1}j_!K$ in the derived category of $\\Lambda$-module sheaves. This is proper base change on small etale sites, without any change to pro-etale or structure-sheaf coefficients.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, label lemma-base-change-shriek, first proof paragraph"
+   }
+  },
+  {
+   "text": "Apply [cor-cbc-derived-extension-zero-base-change] to the open-immersion square $(j,j',\\overline g,g')$ of step 1 and the finite commutative ring $\\Lambda$. It supplies a natural isomorphism $\\overline g^{-1}j_!K\\xrightarrow{\\sim}j'_!g'^{-1}K$ for every $K\\in D^+(X_{\\Et},\\Lambda)$. Apply the functor $Rp'_*$ to this isomorphism. A functor sends an isomorphism and its inverse to inverse morphisms, so we obtain $Rp'_*\\overline g^{-1}j_!K\\xrightarrow{\\sim}Rp'_*j'_!g'^{-1}K$.",
+   "uses": [
+    "cor-cbc-derived-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, label lemma-base-change-shriek, first proof paragraph"
+   }
+  },
+  {
+   "text": "Compose the isomorphisms of steps 3 and 4. Substituting $Rf_!^c=Rp_*j_!$ and $Rf'_!^{c'}=Rp'_*j'_!$ from [def-weil-pbc-projection-compactification] gives $g^{-1}Rf_!^cK\\cong Rf'_!^{c'}g'^{-1}K$. Both factors are natural in $K$, so their composite is natural: for any morphism $a:K\\to K_1$, compose the two commuting naturality squares along their common edge. The item fixes $c$ and its pullback $c'$; no independence of compactification or pasting assertion is needed for its conclusion.",
+   "uses": [
+    "def-weil-pbc-projection-compactification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, label lemma-base-change-shriek, first proof paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "def-weil-pbc-projection-compactification",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-weil-pbc-bounded-below",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "def-weil-pbc-derived-exchange",
+  "cor-cbc-derived-extension-zero-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7L, label lemma-base-change-shriek, first proof paragraph"
+ },
  "mathlib_searches": [
   {
-   "tool": "loogle",
-   "query": "\"shriek\"",
-   "results": "; No hits. Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
+   "tool": "leanfinder",
+   "query": "Arbitrary base change for derived compact support of etale module sheaves via a fixed compactification",
+   "results": "8 hits: KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme. Read returned hits: algebraic etale loci, sheaf pushforward composition, precoverage sheaf conditions, and geometric permanence do not state derived compact-support base change.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"constructible\", \"sheaf\"",
-   "results": "; No hits. Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
+   "query": "\"shriek\"",
+   "results": "0 hits: . Read returned hits: algebraic etale loci, sheaf pushforward composition, precoverage sheaf conditions, and geometric permanence do not state derived compact-support base change.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "shriek|compactSupport.*constructible|constructible.*cohomology",
-   "results": "; No hits. Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
+   "query": "shriek|compactSupport.*baseChange",
+   "results": "0 hits: . Read returned hits: algebraic etale loci, sheaf pushforward composition, precoverage sheaf conditions, and geometric permanence do not state derived compact-support base change.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Derived etale compact support preserves locally constant sheaves on open subsets of relative affine line",
-   "results": "service unavailable: Internal Server Error; No hits. Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
+   "query": "Etale cohomology with compact support commutes with arbitrary base change",
+   "results": "service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
   },
   {
    "tool": "leanfinder",
-   "query": "Base change of derived compact support pushforward of torsion etale module sheaves along arbitrary maps of qcqs schemes",
-   "results": "; Hits: AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforward_map_val Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
+   "query": "Exceptional direct image Rp pushforward composed with extension by zero commutes with inverse image for torsion sheaves",
+   "results": "8 hits: SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardNatIso, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardNatIso_hom. Read returned hits: algebraic etale loci, sheaf pushforward composition, precoverage sheaf conditions, and geometric permanence do not state derived compact-support base change.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
-   "tool": "leanfinder",
-   "query": "Exceptional direct image commutes with pullback and localization in small etale torsion derived categories",
-   "results": "; Hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, SheafOfModules.pullbackComp, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.isHomological_of_localization Read returned signatures: none states the etale compact-support assertion or the generic-finiteness neighborhood theorem; ordinary structure-sheaf pushforward, constructible subsets, derived-category localization, and the implication finite morphism implies finite fibers do not suffice.",
+   "tool": "loogle",
+   "query": "\"baseChange\", \"Sheaf\"",
+   "results": "2 hits: CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small, CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange. Read returned hits: algebraic etale loci, sheaf pushforward composition, precoverage sheaf conditions, and geometric permanence do not state derived compact-support base change.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|proper.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*proper",
+   "results": "25 hits: Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Over.lean, Mathlib/AlgebraicGeometry/LimitsOver.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean. Read returned hits: algebraic etale loci, sheaf pushforward composition, precoverage sheaf conditions, and geometric permanence do not state derived compact-support base change.",
    "date": "2026-10-14",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-etale-compact-support-base-change-qcqs",
+  "worker": "stage1",
+  "summary": "Checked Tag 0F7L for the fixed-compactification candidate, all base-change and bounded-below hypotheses, and coefficient forgetting. Split its first proof paragraph using existing nodes only; no statement change and no new nodes.",
+  "blueprint": "Realizes the arbitrary-base-change input in the approximation paragraph (0GKZ) serving the classical 0GL0 constructibility input of thm-weil-pbc-direct-image-finiteness-proper. The two arrows are precisely the first proof paragraph of Tag 0F7L.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic Permanence of proper, separated, finite type, finitely presented morphisms and of immersions input used with its stated hypotheses in the fixed-compactification construction of Tag 0F7L; it does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change input used with its stated hypotheses in the fixed-compactification construction of Tag 0F7L; it does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic Separated finite-type morphisms are stable under base change input used with its stated hypotheses in the fixed-compactification construction of Tag 0F7L; it does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic Extension by zero is exact (étale site) input used with its stated hypotheses in the fixed-compactification construction of Tag 0F7L; it does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact input used with its stated hypotheses in the fixed-compactification construction of Tag 0F7L; it does not replace any step of the proper-base-change unit route."
+   },
+   {
+    "node": "cor-cbc-derived-extension-zero-base-change",
+    "why": "Generic Derived extension-by-zero base change input used with its stated hypotheses in the fixed-compactification construction of Tag 0F7L; it does not replace any step of the proper-base-change unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "cor-cbc-derived-extension-zero-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-3b64d408b",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-3b64d408b (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, literature locations, and unit/chapter route. Verified all five steps against Tags 0F7L, 0DDE, 03S6, and coefficient-forgetting comparisons; checked hypotheses, edge cases, duplicates, cycles, and archived target declarations. Accepted the declared tool uses. No new nodes or repairs. Detailed checks are in review.md."
+ }
 }
