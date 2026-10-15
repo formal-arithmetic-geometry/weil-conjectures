@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-finite-global-presentation-internal-hom-colimit",
+ "kind": "statement",
+ "title": "Internal Hom from a finite global presentation preserves filtered colimits",
+ "statement": "Let C be a category with objects in universe u+1 and morphisms in u, equipped with a Grothendieck topology J. Assume sheafification of abelian groups in u+1 exists and that J-equivalences are exactly locally bijective maps, on J and on every slice J/U. Assume composition with the forgetful functor from commutative rings to rings preserves sheaves. Let A be a sheaf of commutative rings on J and let P be a sheaf of A-modules [def-weil-sheaf-of-modules-category] with a global presentation $\\operatorname{free} K \\to \\operatorname{free} G \\to P \\to 0$, with G and K finite. For every small filtered diagram N of A-module sheaves indexed by I in universe u+1, internalHom_A(P,-) [def-pur-sheaf-hom] preserves the colimit of N, with its canonical comparison colimit.post.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMZ, lemma-hom-finite-presentation-colimit, proof"
+ },
+ "proof": [
+  {
+   "text": "For the unit module, evaluate a local linear map on 1. Its inverse sends a section n over U to the compatible family r ↦ r times the restriction of n. This gives internalHom(unit,N) ≅ N, naturally in N. The calculation adapts the unit proof in WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit to objects in Type (u+1) and morphisms in universe u. The source unit lemmas require coincident object and morphism universes, so the two private unit-calculation lemmas state all their differing category, ring and module binders explicitly. The source general additivity lemma is reused directly. Additivity and the biproduct/coproduct comparison then identify internalHom(free K,N) with the finite biproduct of copies of N. This is naturally a colimit of a constant discrete diagram, so internalHom(free K,-) preserves colimits. Empty K is included.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to a slice preserves finite colimits: forget to abelian sheaves, use Over.forget.sheafAdjunctionCocontinuous, and reflect colimits through the faithful module forgetful functor. These preservation instances are proved in WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification. Sections of internal Hom in the first variable are naturally restriction.op followed by yoneda. Yoneda preserves limits, hence internal Hom sends finite colimits in its first variable to finite limits. Limits of sheaves and module presheaves are detected by their evaluations.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Presentation.isColimit expresses P as the cokernel of free K → free G, where K and G are the finite relation and generator types. Pass to the opposite kernel cone and map it by homFunctor A. The previous step gives a limit cone in the functor category, with vertex internalHom(P,-) and the two other vertices internalHom(free G,-), internalHom(free K,-).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Filtered colimits of abelian groups are exact (Mathlib.Algebra.Category.Grp.AB), and exactness passes to sheaves and module sheaves via the forgetful functor, which preserves colimits and finite limits and reflects isomorphisms. Use HasExactColimitsOfShape.domain_of_functor. Colimit therefore preserves the finite limit cone from the preceding step. More explicitly, compare the cone evaluated at colimit N with the colimit of the cone precomposed by N: the comparisons at the free vertices are isomorphisms by step 1. Their induced cone morphism has component colimit.post N internalHom(P,-), so uniqueness of limits makes this component an isomorphism. This proves preservation with the canonical coprojections.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMZ, lemma-hom-finite-presentation-colimit, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"homFunctor\", \"PreservesColimitsOfShape\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Presentation\", \"PreservesColimit\"",
+   "results": "CommRingCat.preservesColimit_coyoneda_of_finitePresentation in Mathlib.Algebra.Category.Ring.FinitePresentation; inspected source: finitely presented algebras over one ring, not sheaves of modules.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom_preserves_filteredColimit|homFunctor.*PreservesColimit|finitePresentation.*homObj",
+   "results": "msearch grep: no hits. Local source HomFinitePresentationKernel is restricted to modules on topological spaces; source InternalHomUnit unit isomorphism requires Category.{u} on Type u. Neither applies to Category.{u} on Type (u+1). General additivity and slice restriction from the source library are reused.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules with a global finite presentation has internal Hom preserving filtered colimits of sheaves",
+   "results": "Eight hits, including SheafOfModules.IsFinitePresentation.exists_quasicoherentData, Presentation.map, isFinitePresentation, QuasicoherentData.IsFinitePresentation; inspected presentations: no preservation theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from a locally finitely presented sheaf of modules on a site preserves filtered colimits of sheaves",
+   "results": "Eight hits: finite presentation and presentation transport definitions, not internal Hom continuity.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom from a finitely presented sheaf of modules preserves filtered colimits",
+   "results": "Service unavailable: Internal Server Error. The search tool records this kind as unavailable; no verdict is asserted.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
+   "place": "Proof, finite-presentation internal Hom kernel calculation and the local reduction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteGlobalPresentationInternalHomColimit",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FiniteGlobalPresentationInternalHomColimit.lean",
+  "declaration": "SheafOfModules.internalHom_preserves_filteredColimit_of_finitePresentation",
+  "statement": "theorem internalHom_preserves_filteredColimit_of_finitePresentation\n    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]\n    [HasSheafify J AddCommGrpCat.{u + 1}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]\n    [∀ U, HasSheafify (J.over U) AddCommGrpCat.{u + 1}]\n    [∀ U, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{u + 1}]\n    (A : Sheaf J CommRingCat.{u + 1})\n    (P : SheafOfModules.{u + 1}\n      ((sheafCompose J (forget₂ CommRingCat RingCat.{u + 1})).obj A))\n    (p : P.Presentation) [p.IsFinite]\n    (I : Type (u + 1)) [SmallCategory I] [IsFiltered I]\n    (N : I ⥤ SheafOfModules.{u + 1}\n      ((sheafCompose J (forget₂ CommRingCat RingCat.{u + 1})).obj A)) :\n    PreservesColimit N ((homFunctor A).obj (op P))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T194910-L-1227453",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T194910-L-1227453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
