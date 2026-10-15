@@ -18,9 +18,42 @@
   "lem-exc-closed-lift-filtered",
   "lem-weil-pbc-ind-etale-stability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the coordinate algebra of V use the composite A -> Gamma(Spec A) -> Gamma(V). A morphism f : V -> W satisfies f.left composed with W.hom equals V.hom. Apply global sections to this triangle after composition with Spec(A/I) -> Spec A, and precompose with GammaSpecIso.inv. Evaluation at a in A gives closedSiteCoordinates_commutes and hence the contravariant A-algebra map.",
+   "uses": [
+    "def-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The existing Algebra.ClosedLift.indEtale instance uses the filtered category Algebra.ClosedLift.Index and its displayed colimit presentation by etale algebras. Apply RingHom.IndEtale.algebraMap_iff and proAffineEtale_Spec_iff to obtain closedSiteLift_mem. No separate use of the general varying-base filtered-colimit stability theorem is necessary. Base change uses the existing proAffineEtale pullback functor.",
+   "uses": [
+    "def-exc-ind-etale-closed-lift",
+    "lem-exc-closed-lift-filtered",
+    "def-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The closed-lift algebra map commutes with the structural maps from A, by AlgHom.commutes. Applying contravariant Spec proves that its opposite is a morphism over Spec A. For identities and composition, compare the induced algebra maps after precomposition with each colimit structure map using colimit.hom_ext and Algebra.ClosedLift.iota_map (Lean name: Algebra.ClosedLift.ι_map). Postcomposition of index objects with the identity leaves each object unchanged; successive postcomposition with phi and psi is postcomposition with psi composed with phi. These identities are definitional for the explicit presentation model. Thus the closed-lift algebra maps preserve identities and composition. Coordinate maps reverse composition and Spec reverses it once more, giving the two functor laws. Assemble the object and morphism constructors into closedSiteLift.",
+   "uses": [
+    "def-exc-ind-etale-closed-lift",
+    "def-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-basis",
+  "def-exc-ind-etale-closed-lift",
+  "lem-exc-closed-lift-filtered"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/def-exc-closed-site-lift.md",
+  "place": "C4 stage 3: coordinate triangle, existing closed-lift ind-etale instance, and colimit hom-extensionality for functor laws"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -170,5 +203,15 @@
   "by": "NA",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T174647-L-626895",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

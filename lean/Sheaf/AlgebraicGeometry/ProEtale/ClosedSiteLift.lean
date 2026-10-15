@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 public import Sheaf.RingTheory.ProEtale.ClosedLiftMap
-import Sheaf.RingTheory.IndEtaleStability
 
 /-! # Lifting the affine closed site
 
@@ -48,7 +47,13 @@ Proof: apply global sections to the commuting triangle defining f, and compose w
 theorem closedSiteCoordinates_commutes
     {V W : (Spec (.of (A ⧸ I))).AffineProEt} (f : V ⟶ W) (a : A) :
     f.left.appTop.hom (algebraMap A (closedSiteCoordinates A I W) a) =
-      algebraMap A (closedSiteCoordinates A I V) a := sorry
+      algebraMap A (closedSiteCoordinates A I V) a := by
+  have h := CategoryTheory.MorphismProperty.Over.w f
+  have h' := congrArg (fun q ↦ ((Scheme.ΓSpecIso (.of A)).inv ≫ q.appTop).hom a)
+    (show f.left ≫ (W.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) =
+      V.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)) from by
+      rw [← Category.assoc, h])
+  exact h'
 
 /-- The coordinate map reverses a morphism in the affine basis.
 Source: blueprint order 1843 (blueprint: def-exc-closed-site-lift). -/
@@ -63,7 +68,10 @@ consists of etale A-algebras. Thus its colimit is ind-etale, by the filtered-col
 clause of lem-weil-pbc-ind-etale-stability. Apply proAffineEtale_Spec_iff. -/
 theorem closedSiteLift_mem (V : (Spec (.of (A ⧸ I))).AffineProEt) :
     proAffineEtale (Spec.map (CommRingCat.ofHom
-      (algebraMap A (Algebra.ClosedLift A (closedSiteCoordinates A I V))))) := sorry
+      (algebraMap A (Algebra.ClosedLift A (closedSiteCoordinates A I V))))) := by
+  apply proAffineEtale_Spec_iff.mpr
+  -- The existing closed-lift instance already packages its filtered etale presentation.
+  exact (RingHom.IndEtale.algebraMap_iff _ _).mpr inferInstance
 
 /-- Lift an affine closed-site object by taking Spec of its closed-lift algebra.
 Source: blueprint order 1843 (blueprint: def-exc-closed-site-lift). -/
@@ -79,7 +87,12 @@ theorem closedSiteLiftMap_over
     {V W : (Spec (.of (A ⧸ I))).AffineProEt} (f : V ⟶ W) :
     Spec.map (CommRingCat.ofHom
       (Algebra.ClosedLift.map (closedSiteCoordinatesMap A I f)).toRingHom) ≫
-      (closedSiteLiftObj A I W).hom = (closedSiteLiftObj A I V).hom := sorry
+      (closedSiteLiftObj A I W).hom = (closedSiteLiftObj A I V).hom := by
+  change Spec.map _ ≫ Spec.map _ = Spec.map _
+  rw [← Spec.map_comp]
+  congr 1
+  ext a
+  exact (Algebra.ClosedLift.map (closedSiteCoordinatesMap A I f)).commutes a
 
 /-- Lift a map by the opposite of the induced closed-lift algebra map.
 Source: blueprint order 1843 (blueprint: def-exc-closed-site-lift). -/
@@ -90,13 +103,46 @@ def closedSiteLiftMap {V W : (Spec (.of (A ⧸ I))).AffineProEt} (f : V ⟶ W) :
       (Algebra.ClosedLift.map (closedSiteCoordinatesMap A I f)).toRingHom))
     (closedSiteLiftMap_over A I f)
 
+private theorem closedLift_map_id (C : Type u) [CommRing C] [Algebra A C] :
+    Algebra.ClosedLift.map (AlgHom.id A C) = AlgHom.id A (Algebra.ClosedLift A C) := by
+  apply CommAlgCat.hom_ext_iff.mp
+  apply colimit.hom_ext (F := Algebra.ClosedLift.diagram A C)
+  intro X
+  apply CommAlgCat.hom_ext
+  change (Algebra.ClosedLift.map (AlgHom.id A C)).comp _ = _
+  exact Algebra.ClosedLift.ι_map (AlgHom.id A C) X
+
 /-- The lift preserves identities.
 Source: blueprint order 1843 (blueprint: def-exc-closed-site-lift).
 Proof: the coordinate identity is the identity algebra map. The colimit-induced
 closed-lift map is the identity by its values on every colimit structure map;
 contravariant Spec preserves identities. -/
 theorem closedSiteLiftMap_id (V : (Spec (.of (A ⧸ I))).AffineProEt) :
-    closedSiteLiftMap A I (𝟙 V) = 𝟙 (closedSiteLiftObj A I V) := sorry
+    closedSiteLiftMap A I (𝟙 V) = 𝟙 (closedSiteLiftObj A I V) := by
+  apply CategoryTheory.MorphismProperty.Over.Hom.ext
+  change Spec.map _ = 𝟙 _
+  have h : closedSiteCoordinatesMap A I (𝟙 V) =
+      AlgHom.id A (closedSiteCoordinates A I V) := by
+    ext x
+    rfl
+  rw [h, closedLift_map_id]
+  exact Spec.map_id _
+
+private theorem closedLift_map_comp {C D E : Type u} [CommRing C] [CommRing D]
+    [CommRing E] [Algebra A C] [Algebra A D] [Algebra A E]
+    (φ : C →ₐ[A] D) (ψ : D →ₐ[A] E) :
+    Algebra.ClosedLift.map (ψ.comp φ) =
+      (Algebra.ClosedLift.map ψ).comp (Algebra.ClosedLift.map φ) := by
+  apply CommAlgCat.hom_ext_iff.mp
+  apply colimit.hom_ext (F := Algebra.ClosedLift.diagram A C)
+  intro X
+  apply CommAlgCat.hom_ext
+  change (Algebra.ClosedLift.map (ψ.comp φ)).comp _ =
+    ((Algebra.ClosedLift.map ψ).comp (Algebra.ClosedLift.map φ)).comp _
+  have h₁ := Algebra.ClosedLift.ι_map (ψ.comp φ) X
+  have h₂ := Algebra.ClosedLift.ι_map φ X
+  have h₃ := Algebra.ClosedLift.ι_map ψ ((Algebra.ClosedLift.postcomp φ).obj X)
+  exact h₁.trans ((congrArg (fun q ↦ (Algebra.ClosedLift.map ψ).comp q) h₂).trans h₃).symm
 
 /-- The lift preserves composition.
 Source: blueprint order 1843 (blueprint: def-exc-closed-site-lift).
@@ -105,8 +151,15 @@ postcomposition twice agrees with postcomposition by the composite, so the induc
 closed-lift algebra maps compose accordingly. Spec reverses composition again. -/
 theorem closedSiteLiftMap_comp
     {V W T : (Spec (.of (A ⧸ I))).AffineProEt} (f : V ⟶ W) (g : W ⟶ T) :
-    closedSiteLiftMap A I (f ≫ g) = closedSiteLiftMap A I f ≫ closedSiteLiftMap A I g :=
-  sorry
+    closedSiteLiftMap A I (f ≫ g) = closedSiteLiftMap A I f ≫ closedSiteLiftMap A I g := by
+  apply CategoryTheory.MorphismProperty.Over.Hom.ext
+  change Spec.map _ = Spec.map _ ≫ Spec.map _
+  have h : closedSiteCoordinatesMap A I (f ≫ g) =
+      (closedSiteCoordinatesMap A I f).comp (closedSiteCoordinatesMap A I g) := by
+    ext x
+    rfl
+  rw [h, closedLift_map_comp, ← Spec.map_comp]
+  rfl
 
 /-- The functor v from the affine closed-site basis to the affine basis over A:
 V = Spec C is sent to Spec H_A(C), and maps are the opposite induced algebra maps.
