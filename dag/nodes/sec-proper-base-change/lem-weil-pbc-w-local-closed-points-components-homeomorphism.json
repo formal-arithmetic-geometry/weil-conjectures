@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-w-local-closed-points-components-homeomorphism",
+ "kind": "statement",
+ "title": "Closed points and connected components of a w-local space",
+ "statement": "Let $X$ be a spectral space [def-weil-spectral-space]. Let $X^c$ be its subspace of closed points [def-weil-closed-points]. Assume that $X^c$ is closed and that whenever a point specializes to two closed points, those closed points are equal. Let $\\pi_0(X)$ be the set of connected components, with its quotient topology. Then the canonical map $X^c\\to\\pi_0(X)$, sending a point to its connected component, is a homeomorphism.",
+ "source": {
+  "document": "Stacks Project, proetale.tex (https://stacks.math.columbia.edu/tag/0968)",
+  "place": "Tag 0968, lemma-spectral-split: final assertion and proof of (2) implies (1), first sentence; source-library WLocal/ConnectedComponents.lean:31-87"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-closed-points"
+ ],
+ "proof": [
+  {
+   "text": "This is the already proved source-library theorem WLocalSpace.isHomeomorph_connectedComponents_closedPoints. Its hypotheses are precisely the WLocalSpace class: spectrality, closedness of the closed-point subset, and uniqueness of closed specializations. Its bundled homeomorphism is WLocalSpace.closedPointsHomeomorph. The source proof establishes injectivity by separating closed points using clopen generalization hulls, surjectivity by taking a closed specialization, and continuity plus compact-to-Hausdorff bijectivity gives the homeomorphism.",
+   "uses": [
+    "def-weil-spectral-space",
+    "def-weil-closed-points"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-spectral-space",
+  "def-weil-closed-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, proetale.tex (https://stacks.math.columbia.edu/tag/0968)",
+  "place": "Attachment of an already proved source theorem; no new proof obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a w-local space closed points are homeomorphic to connected components and clopen subsets correspond",
+   "results": "isClopen_connectedComponent, connectedComponent_eq_iInter_isClopen, IsClopen.biUnion_connectedComponentIn, IsClopen.biUnion_connectedComponent_eq, loc_compact_Haus_tot_disc_of_zero_dim, compact_exists_isClopen_in_isOpen, IsClopen.connectedComponent_subset, connectedComponent_subset_iInter_isClopen",
+   "date": "2026-10-15",
+   "verdict": "No exact Mathlib theorem. The proved source-library theorem WLocalSpace.isHomeomorph_connectedComponents_closedPoints is exact."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClopen, Continuous",
+   "results": "continuous_bool_rng, continuous_boolIndicator_iff_isClopen, IsClopen.preimage, IsClopen.continuous_indicator, IsClopen.continuous_mulIndicator",
+   "date": "2026-10-15",
+   "verdict": "No exact Mathlib theorem. The proved source-library theorem WLocalSpace.isHomeomorph_connectedComponents_closedPoints is exact."
+  },
+  {
+   "tool": "grep",
+   "query": "closedPointsHomeomorph|t2Space_withConstructibleTopology",
+   "results": "No Mathlib match.",
+   "date": "2026-10-15",
+   "verdict": "No exact Mathlib theorem. The proved source-library theorem WLocalSpace.isHomeomorph_connectedComponents_closedPoints is exact."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a w-local spectral space the closed points are homeomorphic to the connected components",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.WLocalClopenPartitions",
+  "date": "2026-10-15",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-w-local-partition",
+   "place": "Proof, second paragraph: unique closed point of each component; third paragraph: restriction of clopens to closed points",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "WLocalSpace.isHomeomorph_connectedComponents_closedPoints",
+    "WLocalSpace.closedPointsHomeomorph",
+    "WLocalSpace.closedPoints_eq_of_mk_eq"
+   ],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Topology.SpectralSpace.WLocal.ConnectedComponents",
+  "declaration": "WLocalSpace.isHomeomorph_connectedComponents_closedPoints",
+  "declarations": [
+   "WLocalSpace.isHomeomorph_connectedComponents_closedPoints",
+   "WLocalSpace.closedPointsHomeomorph",
+   "WLocalSpace.closedPoints_eq_of_mk_eq"
+  ],
+  "statement": "lemma WLocalSpace.isHomeomorph_connectedComponents_closedPoints (X : Type*) [TopologicalSpace X] [WLocalSpace X] : IsHomeomorph (ConnectedComponents.mk ∘ ((↑) : closedPoints X → X))",
+  "branch": "slopmaster2",
+  "by": "E2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T154206-L-163185",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T154206-L-163185",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
