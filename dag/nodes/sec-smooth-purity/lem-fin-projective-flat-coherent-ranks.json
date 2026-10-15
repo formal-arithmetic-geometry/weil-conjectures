@@ -236,5 +236,23 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-6c5e248f3 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, report, all cited node statements, Stacks Tags 0BDN/0BDI and supporting source locations, plus archived target declarations. All five proof steps are valid with stated hypotheses; residue-field extension, constructibility, edge cases, duplicate search, and coefficient-category distinctions check out. No new nodes or repairs are needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveFlatCoherentRanks",
+  "declaration": "AlgebraicGeometry.projectiveFlatCoherent_geometricCohomology_constructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveFlatCoherentRanks.lean",
+  "statement": "theorem projectiveFlatCoherent_geometricCohomology_constructible {X S : Scheme.{u}} (f : X ⟶ S) [IsProjective f] [IsLocallyNoetherian S] [CompactSpace S] (G : X.Modules) (hG : RingedSpace.IsCoherent X.toRingedSpace G) (hflat : G.IsFlatOver f) (r : ℕ) : ∃ β : S → ℕ, (∀ s : S, β s = Module.finrank (AlgebraicClosure (S.residueField s)) ((RingedSpace.moduleCohomology (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).toRingedSpace r ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of (AlgebraicClosure (S.residueField s)))).inv ≫ (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).appTop).hom).obj ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s))).obj G))) ∧ (Set.range β).Finite ∧ ∀ n : ℕ, Topology.IsConstructible {s : S | β s = n}",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1744dbc2f",
+  "group": "NW",
+  "result": "pass",
+  "note": "Verified immutable files, all nine statement dependencies, source correspondence, edge cases, exact signature, and pilot gates. Server-only compilation passed in 1.6 seconds. No fixes required."
  }
 }
