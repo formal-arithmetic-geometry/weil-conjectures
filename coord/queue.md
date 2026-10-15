@@ -1,6 +1,6 @@
 # Work queue
 
-56 items; claim with `tools/claim.py next <group> [--stage N]`.
+44 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (56)
+## Stage 3: modules to prove (44)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -47,26 +47,14 @@
 | `WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension` | 7 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 8 | 1 | proof |
-| `Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedCounit` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleRingedLocalizationSequence` | 9 | 1 | proof |
-| `Sheaf.CategoryTheory.RingedSliceExtensionExactness` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedSliceExtensionTensor` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnitComparison` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit` | 10 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleCohomologyClassDescent` | 12 | 1 | proof |
-| `Sheaf.Paper.FiniteSplitHypercoverRefinement` | 13 | 2 | proof |
-| `Sheaf.Paper.EtaleHypercoverHomotopyEqualizer` | 14 | 1 | proof |
-| `Sheaf.Paper.EtaleHypercoverProduct` | 14 | 1 | proof |
-| `Sheaf.Paper.FiniteHypercoverDescentParts` | 14 | 3 | proof |
-| `Sheaf.Paper.FiniteSplitHypercoverReplacement` | 14 | 1 | proof |
-| `Sheaf.Paper.HypercoverCohomologyModule` | 14 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.MatchingObjectFibreProduct` | 15 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember` | 15 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.HypercoverCohomology` | 15 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.HypercoverFreeResolution` | 16 | 4 | proof |
+| `Sheaf.CategoryTheory.RingedSliceExtensionPreservesExact` | 10 | 1 | proof |
+| `Sheaf.CategoryTheory.RingedSliceExtensionReflectsExact` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
 Also listed above and claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
