@@ -26,14 +26,25 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
 
 /-- Tensor localization is monoidal after transporting the site to its small model in
-the coefficient universe. Source: Stacks Project, Modules on Sites, Section 03EK. -/
+the coefficient universe. Source: Stacks Project, Modules on Sites, Section 03EK.
+
+Proof: transport the topology, ring sheaf, and module presheaves along the equivalence
+with the small model in universe `w`. There the sectionwise tensor/internal-Hom
+adjunction shows that tensoring a locally bijective map induces bijections into every
+module sheaf. The sheafification adjunction makes its tensor an isomorphism. Symmetry
+handles the other variable, and transport preserves these properties. -/
 theorem isMonoidal_W_independentCoefficients :
     (J.W.inverseImage (PresheafOfModules.toPresheaf.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj)).IsMonoidal := by
   sorry
 
 /-- Tensoring a zero morphism on the left is zero for module sheaves over a relatively
-small site. Source: Stacks Project, Cohomology on Sites, Tag 06YN. -/
+small site. Source: Stacks Project, Cohomology on Sites, Tag 06YN.
+
+Proof: the zero module sheaf has zero underlying presheaf. Sectionwise tensoring it
+with any module presheaf gives zero; sheafification preserves the zero object as a
+left adjoint between additive categories. Factor a zero morphism through the zero
+sheaf and tensor both factors. -/
 theorem preservesZeroMorphisms_curriedTensor_independentCoefficients :
     letI := isMonoidal_W_independentCoefficients R
     letI := monoidalCategory R
@@ -42,7 +53,11 @@ theorem preservesZeroMorphisms_curriedTensor_independentCoefficients :
   sorry
 
 /-- Tensoring a zero morphism on the right is zero, by symmetry of the tensor product.
-Source: Stacks Project, Cohomology on Sites, Tag 06YN. -/
+Source: Stacks Project, Cohomology on Sites, Tag 06YN.
+
+Proof: conjugate the left-variable statement by the symmetry isomorphism of the
+sheafified tensor product. Naturality of that isomorphism carries `0 ▷ M` to
+`M ◁ 0`, and conjugation preserves zero morphisms. -/
 theorem preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
     (M : SheafOfModules.{w} ((sheafCompose J
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) :
@@ -83,8 +98,13 @@ def IsKFlatResolutionIndependentCoefficients
   QuasiIso f ∧ K.IsKFlatIndependentCoefficients
 
 /-- In the live K-flat universe, the independent predicate is the live predicate.
-The two definitions use the same total tensor and differ only in how its instances
-are supplied. -/
+Source: Stacks Project, Cohomology on Sites, Tag 06YN.
+
+Proof: unfold both predicates. The underlying module categories and tensor functors
+are definitionally the same at `w = max u v`. The two local witnesses for monoidality
+and preservation of zero morphisms are proofs of propositions, so proof irrelevance
+identifies the resulting total tensor complexes. Both predicates quantify over the
+same acyclic complexes. -/
 theorem isKFlatIndependentCoefficients_iff_isKFlat
     {C : Type u} [Category.{v} C] [EssentiallySmall.{max u v} C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{max u v}}
@@ -94,7 +114,12 @@ theorem isKFlatIndependentCoefficients_iff_isKFlat
   sorry
 
 /-- The independent resolution predicate specializes to the live resolution predicate
-when the coefficient universe is the maximum of the site universes. -/
+when the coefficient universe is the maximum of the site universes.
+Source: Stacks Project, Cohomology on Sites, Tag 06YS.
+
+Proof: unfold both resolution predicates. Their quasi-isomorphism conjuncts are
+identical, and the K-flat conjuncts agree by
+`isKFlatIndependentCoefficients_iff_isKFlat`. -/
 theorem isKFlatResolutionIndependentCoefficients_iff_isKFlatResolution
     {C : Type u} [Category.{v} C] [EssentiallySmall.{max u v} C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{max u v}}
