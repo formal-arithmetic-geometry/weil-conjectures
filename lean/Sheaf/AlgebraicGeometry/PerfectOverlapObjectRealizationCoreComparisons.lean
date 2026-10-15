@@ -524,6 +524,23 @@ theorem perfectOverlapRestrictionBeta_hom_app
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id]
 
+/-- Inverse component of the restriction/pullback comparison. The two
+associators have identity components; the inverse open-pullback comparison
+is followed by the open-site return map. -/
+theorem perfectOverlapRestrictionBeta_inv_app
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (W : Y.Opens) (T : X.Opens)
+    (hT : T ≤ g ⁻¹ᵁ W) (E : schemeDerivedCategory Y) :
+    (perfectOverlapRestrictionBeta g W T hT).inv.app E =
+      (overlapSiteInverse T).mapDerivedCategory.map
+        ((openPullbackRestrictionIso g T W hT).inv.app E) ≫
+          (openSiteReturnIso X T).hom.app ((derivedPullback g).obj E) := by
+  unfold perfectOverlapRestrictionBeta
+  simp only [Iso.trans_inv, NatTrans.comp_app, Iso.symm_inv,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id]
+
 end
 
 end AlgebraicGeometry
