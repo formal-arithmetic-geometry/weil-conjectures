@@ -146,29 +146,23 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-7a84b96d3",
-  "group": "NB",
+  "reviewer": "NT-stage2-Codex-11ddb111d",
+  "group": "NM",
   "result": "pass",
-  "note": "Wrote review.md. Checked the immutable statement, all dependencies and declarations, sources, edge cases, uniqueness, docstrings, and report sections. Server-only compile reproduced cleanly in 3.4 seconds; no delivery errors or missing framework dependencies found."
+  "note": "Wrote review.md. Both immutable modules compile cleanly through scompile.py. Checked source, all statement dependencies, exact signatures, universe bounds, edge cases, docstrings, report sections, and the justified §1(B) interface repair. No corrections needed."
  },
  "lean": {
-  "module": "Sheaf.Paper.ProEtaleLocallyConstantSheaf",
-  "declaration": "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleModuleSheaf",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleConstantModulePresheaf",
-   "AlgebraicGeometry.Scheme.proEtaleConstantRingUnit_locallyBijective",
-   "AlgebraicGeometry.Scheme.proEtaleConstantModuleSheaf",
-   "AlgebraicGeometry.Scheme.proEtaleConstantRingUnit_over_locallyBijective",
-   "AlgebraicGeometry.Scheme.proEtaleConstantModuleSheafOver",
-   "AlgebraicGeometry.Scheme.IsConstantProEtaleModuleSheaf",
-   "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleModuleSheaf"
-  ],
-  "file": "lean/Sheaf/Paper/ProEtaleLocallyConstantSheaf.lean",
-  "statement": "def IsLocallyConstantProEtaleModuleSheaf (Y : Scheme.{t}) (A : Type t) [CommRing A] (F : SheafOfModules.{t + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj ((constantSheaf (ProEt.topology Y) CommRingCat.{t + 1}).obj (CommRingCat.of (ULift.{t + 1, t} A))))) : Prop",
+  "module": "Sheaf.Paper.ProEtaleFixedModuleLocalConstancy",
+  "declaration": "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleFixedModuleSheaf",
+  "file": "lean/Sheaf/Paper/ProEtaleFixedModuleLocalConstancy.lean",
+  "statement": "def IsLocallyConstantProEtaleFixedModuleSheaf (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop",
   "branch": "newtargets-dag",
-  "by": "NB",
+  "by": "NM",
   "date": "2026-10-15",
   "existing": false,
-  "note": "Includes explicit constant module presheaf and sheaf constructions, the localized construction, global constancy, and two named local-bijectivity proof obligations needed by module sheafification. The ring and universe conventions are those of proEtaleDerivedCategory."
+  "note": "The recorded predicate accepts only SheafOfModules over the constant ring of ULift A with A : Type u. The recorded canonical module comparison accepts Sheaf (ModuleCat A) with A : Type (u+1), so that interface cannot state local constancy for its objects. This module retains the original ringed-site definitions by public import and supplies the same coverwise constant-module notion in fixed coefficients, with no finiteness or freeness assumptions.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleFixedModuleSheaf"
+  ]
  }
 }

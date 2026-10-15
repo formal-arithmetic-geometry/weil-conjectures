@@ -156,5 +156,30 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-0fe8c6d36 (reviewer sub-agent of L); spot-checked: Reviewed item, both proof steps, all cited nodes and source locations, coefficient categories, base-change adjunction, DAG route, and edge cases. No defects found; review.md written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleComparisonSections",
+  "declaration": "AlgebraicGeometry.proEtaleComparisonSectionsModules",
+  "declarations": [
+   "AlgebraicGeometry.proEtaleComparisonSectionsCocone",
+   "AlgebraicGeometry.proEtaleBasisPulledBackSection",
+   "AlgebraicGeometry.proEtaleComparisonSectionsModules",
+   "AlgebraicGeometry.proEtaleComparisonSectionsSets"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleComparisonSections.lean",
+  "statement": "theorem proEtaleComparisonSectionsModules {X : Scheme.{u}} [IsAffine X] (U : X.AffineProEt) (Λ : Type (u + 1)) [CommRing Λ] : ∃ e : ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X ⋙ sheafToPresheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) ⋙ (evaluation X.ProEtᵒᵖ (ModuleCat.{u + 1} Λ)).obj (op ((Scheme.AffineProEt.toProEt X).obj U)) ≅ Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom ⋙ sheafToPresheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙ (evaluation U.left.Etaleᵒᵖ (ModuleCat.{u + 1} Λ)).obj (op (Scheme.Etale.mk (𝟙 U.left))), ∀ (I : Type u) [SmallCategory I] [IsCofiltered I] (D : I ⥤ X.Etale) [∀ i, IsAffine (D.obj i).left] (π : (Functor.const I).obj ((Scheme.AffineProEt.toProEt X).obj U) ⟶ D ⋙ Scheme.toProEt X), IsLimit (Cone.mk U.left (Functor.whiskerRight π (Scheme.ProEt.forget X ⋙ Over.forget X))) → ∀ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), Nonempty (IsColimit (proEtaleComparisonSectionsCocone D ((Scheme.AffineProEt.toProEt X).obj U) π F ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj F) ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) X).unit.app F))) ∧ ∀ i : I, (proEtaleComparisonSectionsCocone D ((Scheme.AffineProEt.toProEt X).obj U) π F ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj F) ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) X).unit.app F)).ι.app (op i) ≫ e.hom.app F = proEtaleBasisPulledBackSection U (D.obj i) (π.app i) F ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom).obj F) ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) U.hom).unit.app F)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The module states both the module-valued and set-valued formulas. Each is a natural isomorphism in the sheaf together with the colimit universal property for the actual unit-and-restriction cocone, normalized against scheme inverse image on every stage. The two auxiliary definitions construct those canonical maps with real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-672bae709",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, source places, canonical maps, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py checks passed cleanly in 2.4 s and 2.5 s. No findings or fixes; branch head unchanged."
  }
 }
