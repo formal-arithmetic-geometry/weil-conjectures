@@ -15067,3 +15067,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:42 L: merged deliver/G1/Sheaf.RingTheory.WeaklyEtaleField (stage 3; reviewer PASS; first push; landing 20261015T154213-L-164905 (proof); batch 20261015T154146; modules 1; new nodes 0)
 - 15:43 L: returned deliver/C3/Sheaf.AlgebraicGeometry.FiniteRangeComparison (reviewer RETURN: (reviewer X-c9f56, head c9f565358) H9: In lean/Sheaf/AlgebraicGeometry/FiniteRangeComparison.lean, replace `public impor)
 - 16:10 L: returned deliver/B2/Sheaf.AlgebraicGeometry.BoundedAllowableTorsionSmoothBaseChange (reviewer RETURN: (the landing tools, head 48554c0d5) the delivery did not land: lean/Sheaf/AlgebraicGeometry/BaseChangeMapAbelianAndSets.)
+- 16:10 L: returned deliver/C4/Sheaf.CategoryTheory.TruncationCoupleExact (reviewer RETURN: (the landing tools, head 6b726bf2b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
