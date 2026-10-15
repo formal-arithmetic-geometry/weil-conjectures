@@ -45,4 +45,18 @@ theorem equivalence_return_cancel
   rw [hdrop, hn]
   rw [Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
+/-- Paste a two-step return triangle with its terminal cancellation.
+The proof is associativity followed by the two supplied equations. -/
+theorem paste_return_triangle
+    {C : Type*} [Category* C] {A B D E F G : C}
+    {a : A ⟶ B} {b : B ⟶ D} {c : D ⟶ G}
+    {p : A ⟶ E} {q : E ⟶ F} {r : F ⟶ D} {s : F ⟶ G}
+    (htriangle : a ≫ b = p ≫ q ≫ r) (hcancel : r ≫ c = s) :
+    a ≫ b ≫ c = p ≫ q ≫ s := by
+  calc
+    a ≫ b ≫ c = (a ≫ b) ≫ c := (Category.assoc a b c).symm
+    _ = (p ≫ q ≫ r) ≫ c := congrArg (fun z ↦ z ≫ c) htriangle
+    _ = p ≫ q ≫ (r ≫ c) := by simp only [Category.assoc]
+    _ = p ≫ q ≫ s := by rw [hcancel]
+
 end AlgebraicGeometry
