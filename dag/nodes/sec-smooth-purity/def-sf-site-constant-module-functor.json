@@ -77,18 +77,19 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-comparison",
  "lean": {
-  "module": "Sheaf.CategoryTheory.SiteConstantModuleFunctor",
-  "declaration": "CategoryTheory.siteConstantModuleFunctor",
+  "module": "Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral",
+  "declaration": "CategoryTheory.siteConstantModuleFunctorGeneral",
   "declarations": [
-   "CategoryTheory.siteConstantModulePresheaf",
-   "CategoryTheory.siteConstantModuleFunctor"
+   "CategoryTheory.siteConstantModulePresheafGeneral",
+   "CategoryTheory.siteConstantModuleFunctorGeneral"
   ],
-  "file": "lean/Sheaf/CategoryTheory/SiteConstantModuleFunctor.lean",
-  "statement": "def siteConstantModuleFunctor : ModuleCat.{u} Λ ⥤ SheafOfModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))",
+  "file": "lean/Sheaf/CategoryTheory/SiteConstantModuleFunctorGeneral.lean",
+  "statement": "def siteConstantModuleFunctorGeneral : ModuleCat.{max u v} Λ ⥤ SheafOfModules.{max u v} ((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ))",
   "branch": "newtargets-dag",
-  "by": "NP",
+  "by": "ND",
   "date": "2026-10-15",
-  "existing": false
+  "existing": false,
+  "note": "The recorded functor requires C : Type u with Category.{u} C. It cannot be applied to the small pro-etale site with object universe t+1 and morphism universe t. This module gives the same constant-presheaf/module-sheafification construction with independent site universes. The generalized presheaf is also used with the commutative constant-ring sheafification unit, keeping the exact coefficient ring used by proEtaleDerivedCategory."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -101,9 +102,9 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-fe43fdcae",
-  "group": "NP",
+  "reviewer": "NT-stage2-Codex-3eb447f6c",
+  "group": "ND",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical comparison, universes, edge cases, definitions, docstrings, and report sections. Both snapshot modules reproduced cleanly through server-only scompile.py. No delivery errors or fixes required; branch head unchanged."
+  "note": "Reviewed the immutable node, source, dependencies, Lean modules, report, edge cases, universes, cone signs, and pilot gates. Both delivered files compiled cleanly via scompile.py; no substantive or mechanical errors found."
  }
 }
