@@ -246,5 +246,45 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-81724f7b3",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Wrote review.md. Hypotheses, conclusions, canonical constructions, dependencies, universes, edge cases, report sections, and verbatim signatures checked. Both immutable Lean files compiled cleanly through scompile.py; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedConstantSheafReduction",
+  "declaration": "AlgebraicGeometry.Scheme.CompletedConstantReduction.completed_constant_sheaf_reduction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.base_exists",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.base",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.completedModule",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.residue",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.reduction_exists",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.reduction",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.reductionComplex",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.IsFiniteRetract",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.constant_additive",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.constantComplex",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.constantAugmentation",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.completed_constant_sheaf_reduction",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.systemComparison_naturality",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.systemComparison",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.completedComparison",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteResidue",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReduction_exists",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReduction",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReductionComplex",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.finite_coefficient_identification"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedConstantSheafReduction.lean",
+  "statement": "theorem completed_constant_sheaf_reduction (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) : SheafOfModules.IsFlatOnSite (completedModule T I) ∧ (∀ n : ℕ, IsIso (reduction T I n)) ∧ (∀ (n : ℕ) (P : CochainComplex (SheafOfModules.{u + 1} ((adicLisseForget T).obj (adicLisseConstantRing T A))) ℤ) (f : P ⟶ (CochainComplex.singleFunctor _ 0).obj ((adicLisseConstantModules T A).obj (ModuleCat.of A (A ⧸ I ^ (n + 1))))), CochainComplex.IsKFlat (R := adicLisseConstantRing T A) P → QuasiIso f → QuasiIso (reductionComplex T I n P f)) ∧ (∀ (n : ℕ) (F : CochainComplex (ModuleCat.{u + 1} A) ℤ) (f : F ⟶ (CochainComplex.singleFunctor _ 0).obj (ModuleCat.of A (A ⧸ I ^ (n + 1)))) (a b : ℤ), QuasiIso f → (∀ i : ℤ, Module.Finite A (F.X i) ∧ Module.Projective A (F.X i)) → (∀ i : ℤ, i < a ∨ b < i → IsZero (F.X i)) → QuasiIso (reductionComplex T I n ((constantComplex T A).obj F) (constantAugmentation T I n F f)) ∧ (∀ i : ℤ, IsFiniteRetract T I ((completedAdicChange T (base T I)).obj (((constantComplex T A).obj F).X i))) ∧ (∀ i : ℤ, i < a ∨ b < i → IsZero ((completedAdicChange T (base T I)).obj (((constantComplex T A).obj F).X i))))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
