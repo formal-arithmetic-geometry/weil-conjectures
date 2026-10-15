@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-raw-derived-class-affine-descent",
+ "kind": "statement",
+ "title": "Affine finite-stage descent of a raw derived class",
+ "statement": "Let k be a field and D:I→Over(Spec k) a small cofiltered diagram with qcqs structure maps and affine transitions. Let c be a cone whose underlying scheme cone is limiting, with qcqs apex. Fix q≥0, i∈I, affine etale V over c.pt, K in the bounded-below derived category of abelian etale sheaves over D_i, and z:Z[V][0]→c_i*K[q]. There are j∈I, affine etale W over D_j, a specified pullback square V→W over c_j, an object l of Over j, b:l.left→i, and y:Z[(D(l.hom))*W][0]→(D(b))*K[q] whose specified cartesianChartClassPullback equals z followed by the shift of the canonical inverse-image-composition isomorphism. All coefficient identifications are the canonical ones of [def-weil-pbc-derived-inverse-image].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0EYL and 0GIT: affine etale model descent and continuity for a fixed bounded-below coefficient complex; first proof step of lem-sc-cartesian-raw-class-chart-representative"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the original diagram to Over i. The initial forgetful functor preserves its limit, so the affine etale model theorem gives a stage j over i and an affine etale model W of V.",
+   "uses": [
+    "lem-sc-cofiltered-affine-etale-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over Over j form the actual pullbacks W×_(D_j)D_l, with transition maps rawAffineRestrictedMap. Apply Over.pullback W.hom to the limiting slice cone. The symmetry isomorphisms of pullbacks identify this with the constructed diagram and cone. Every stage is affine, hence qcqs, and the transitions are affine by pullbackMap. The projections to D_i give a coherent fixed-coefficient system.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing proved exists_fixedDerivedCohomologyDiagram for this system. Apply derivedEtaleCohomology_limit; preservation of filtered colimits by the forgetful functor to types and joint surjectivity of a type colimit yield a stage cohomology element mapping to the evaluation of the original class transported by the free-representable pullback square.",
+   "uses": [
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the fixed raw evaluation at that stage to obtain y. Cocone compatibility identifies its cohomology pullback with the original evaluation. Fixed raw evaluation naturality and injectivity at the apex then identify the corresponding raw derived pullback with the transported original class.",
+   "uses": [
+    "lem-sc-raw-fixed-derived-comparison-is-iso",
+    "lem-sc-raw-fixed-derived-comparison-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose this equality with the free-representable square isomorphism and postcompose with the inverse shifted coefficient isomorphism. Cancel the two pairs of inverse maps; the remaining composite is exactly cartesianChartClassPullback. Cone equations supply b and the displayed coefficient comparison. This includes empty V and q=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cofiltered-affine-etale-model",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-sc-raw-fixed-derived-comparison-is-iso",
+  "lem-sc-raw-fixed-derived-comparison-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0EYL and 0GIT: affine etale model descent and continuity for a fixed bounded-below coefficient complex; first proof step of lem-sc-cartesian-raw-class-chart-representative; A2 implements the canonical comparison identities and the continuity argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical evaluation of a derived morphism from a free representable sheaf commutes with derived inverse image and composition of pullbacks",
+   "date": "2026-10-15",
+   "results": "Eight hits for free sheaf pullback and sheaf Hom/sections equivalences; no derived fixed-coefficient comparison or its pullback square.",
+   "verdict": "No exact match; use the existing library raw evaluation and prove the comparison square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryCompIso\"",
+   "date": "2026-10-15",
+   "results": "Seven hits for generic derived composition and its single/shift compatibility.",
+   "verdict": "Generic composition infrastructure is useful; no etale raw-class descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rawRestrictedDerivedComparison|presentationDerivedMap|rawFixedDerivedComparison",
+   "date": "2026-10-15",
+   "results": "No Mathlib matches. Local library search finds raw derived evaluation, restricted-section pullback, and generic derived composition coherence.",
+   "verdict": "Use these existing library APIs and prove their fixed-coefficient compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of derived Hom from a free represented etale sheaf identifies fixed-coefficient hypercohomology, commutes with pullback, and allows descent along an inverse limit of qcqs schemes with affine transitions",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hypercohomology classes with a bounded below coefficient complex pulled back from a stage descend along a cofiltered inverse limit of quasi compact quasi separated schemes with affine transition morphisms",
+   "date": "2026-10-15",
+   "results": "Second reading: eight hits, including exists_appTop_π_eq_of_isLimit and exists_app_map_eq_zero_of_isLimit in Mathlib.AlgebraicGeometry.AffineTransitionLimit. These concern sections of the structure sheaf, not derived etale coefficients. Repository grep for exists_.*DerivedClass and fixed/raw comparison APIs found the item and the already used raw evaluation APIs.",
+   "verdict": "No exact shorter route; retain existing derived etale continuity and affine-model argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawDerivedClassAffineDescent",
+  "date": "2026-10-15",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cartesian-raw-class-chart-representative",
+   "place": "First proof step: descent of a raw class with a fixed bounded-below coefficient complex.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawDerivedClassAffineDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawDerivedClassAffineDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_rawDerivedClass_affine_descent",
+  "statement": "theorem exists_rawDerivedClass_affine_descent\n    {k : Type u} [Field k]\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Over (Spec (.of k)))\n    [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]\n    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    (q : ℕ) (i : I) (V : c.pt.left.Etale) [IsAffine V.left]\n    (K : DerivedCategory.Plus (Sheaf (D.obj i).left.smallEtaleTopology\n      AddCommGrpCat.{u + 1}))\n    (z : (DerivedCategory.Plus.singleFunctor _ 0).obj\n      ((abelianComparisonFree c.pt.left).obj V) ⟶\n        ((D+(((c.π.app i).left)^*[AddCommGrpCat.{u + 1}])).obj K)⟦(q : ℤ)⟧) :\n    ∃ (j : I) (W : (D.obj j).left.Etale) (_ : IsAffine W.left)\n      (r : V.left ⟶ W.left)\n      (hr : IsPullback r V.hom W.hom (c.π.app j).left)\n      (l : Over j) (b : l.left ⟶ i)\n      (y : (DerivedCategory.Plus.singleFunctor _ 0).obj\n        ((((D.map l.hom).left)^*[AddCommGrpCat.{u + 1}]).obj\n          ((abelianComparisonFree (D.obj j).left).obj W)) ⟶\n        ((D+(((D.map b).left)^*[AddCommGrpCat.{u + 1}])).obj K)⟦(q : ℤ)⟧),\n      z ≫ (shiftFunctor _ (q : ℤ)).map\n          ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1}\n            (c.π.app l.left).left (D.map b).left (c.π.app i).left\n            (congrArg (fun t ↦ t.left) (c.w b)).symm).hom.app K) =\n        cartesianChartClassPullback (D.map l.hom).left (c.π.app l.left).left\n          (c.π.app j).left (congrArg (fun t ↦ t.left) (c.w l.hom)).symm\n          W V r hr _ (q : ℤ) y",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-15"
+ },
+ "tool_uses": [
+  {
+   "node": "lem-weil-pbc-derived-etale-cohomology-limit",
+   "why": "Generic fixed-coefficient cohomology continuity is applied as a black box after constructing the limiting affine chart diagram."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cfccf",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T154148-L-157560",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cfccf",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T154148-L-157560",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proofs match all four nodes; five delivered modules and both direct importers compile cleanly; six declarations use only permitted axioms. The recorded unclaimed-module change is definitionally equal by rfl."
+ }
+}

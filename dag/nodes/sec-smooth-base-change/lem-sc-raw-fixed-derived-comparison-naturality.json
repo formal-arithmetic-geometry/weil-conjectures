@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-raw-fixed-derived-comparison-naturality",
+ "kind": "statement",
+ "title": "Fixed-coefficient raw evaluation commutes with pullback",
+ "statement": "Let B,T,Y,Yprime be schemes, a:Yprime→Y, h:Y→B, hprime:Yprime→B with a≫h=hprime, g:Y→T and gprime:Yprime→T with gprime=a≫g. Let K be a bounded-below derived abelian etale sheaf on T, q any integer, U etale over B, and z:Z[h*U][0]→g*K[q]. Pullback of [def-sc-raw-fixed-derived-comparison](z) along the canonical map U×_B Yprime→U×_B Y equals [def-sc-raw-fixed-derived-comparison] applied to rawRestrictedDerivedPullback(z), with coefficient morphism the inverse of the specified comparison gprime*K≅a*g*K. The cohomology pullback is presentationDerivedMap from [lem-weil-pbc-etale-complex-pullback-transport].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q8, 0D6F and 0GIT: canonical evaluation, restriction and inverse-image composition"
+ },
+ "stmt_deps": [
+  "def-sc-raw-fixed-derived-comparison",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-etale-complex-pullback-transport"
+ ],
+ "proof": [
+  {
+   "text": "Lift upperStarComp_assoc to derived categories using the proved generic mapDerivedCategoryNatIso whiskering and composition coherence lemmas. Cancel the two composition isomorphisms to obtain the coefficient comparison square.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the canonical restricted derived section pullback and its shift comparison. The proved restrictedSectionPullback_commShift and transport_homology identity identify its shifted zeroth-homology conjugate with homology in degree q of the unshifted pullback.",
+   "uses": [
+    "lem-sbc-restricted-derived-sections-shift-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand presentationDerivedMap into the derived-section pullback followed by inverse-image composition. Move the coefficient comparison through this natural transformation and use the coefficient square. The bounded-below inclusion sends upperStarCompDerivedPlus.inv to the same derived comparison.",
+   "uses": [
+    "lem-weil-pbc-etale-complex-pullback-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing proved rawRestrictedDerivedComparison_pullback to z with the inverse coefficient-composition morphism. Substitute the preceding cohomology-square identity; this gives the asserted equality of elements.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-sbc-restricted-derived-sections-shift-transport",
+  "lem-weil-pbc-etale-complex-pullback-transport"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q8, 0D6F and 0GIT: canonical evaluation, restriction and inverse-image composition; A2 implements the canonical comparison identities and the continuity argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical evaluation of a derived morphism from a free representable sheaf commutes with derived inverse image and composition of pullbacks",
+   "date": "2026-10-15",
+   "results": "Eight hits for free sheaf pullback and sheaf Hom/sections equivalences; no derived fixed-coefficient comparison or its pullback square.",
+   "verdict": "No exact match; use the existing library raw evaluation and prove the comparison square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryCompIso\"",
+   "date": "2026-10-15",
+   "results": "Seven hits for generic derived composition and its single/shift compatibility.",
+   "verdict": "Generic composition infrastructure is useful; no etale raw-class descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rawRestrictedDerivedComparison|presentationDerivedMap|rawFixedDerivedComparison",
+   "date": "2026-10-15",
+   "results": "No Mathlib matches. Local library search finds raw derived evaluation, restricted-section pullback, and generic derived composition coherence.",
+   "verdict": "Use these existing library APIs and prove their fixed-coefficient compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of derived Hom from a free represented etale sheaf identifies fixed-coefficient hypercohomology, commutes with pullback, and allows descent along an inverse limit of qcqs schemes with affine transitions",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawDerivedClassAffineDescent",
+  "date": "2026-10-15",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cartesian-raw-class-chart-representative",
+   "place": "First proof step: descent of a raw class with a fixed bounded-below coefficient complex.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawFixedDerivedComparisonNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawFixedDerivedComparisonNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawFixedDerivedComparison_naturality",
+  "statement": "theorem rawFixedDerivedComparison_naturality {B T Y Y' : Scheme.{u}}\n    (a : Y' ⟶ Y) (h : Y ⟶ B) (h' : Y' ⟶ B) (w : a ≫ h = h')\n    (g : Y ⟶ T) (g' : Y' ⟶ T) (wg : g' = a ≫ g)\n    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}))\n    (q : ℤ) (U : B.Etale)\n    (z : (DerivedCategory.Plus.singleFunctor _ 0).obj\n      (((h)^*[AddCommGrpCat.{u + 1}]).obj ((abelianComparisonFree B).obj U)) ⟶\n      ((D+((g)^*[AddCommGrpCat.{u + 1}])).obj K)⟦q⟧) :\n    presentationDerivedMap (rawAffineRestrictedMap a h h' w U)\n        (pullback.snd U.hom h ≫ g) (pullback.snd U.hom h' ≫ g')\n        (by simp [rawAffineRestrictedMap, wg, Category.assoc]) K.obj q\n        (rawFixedDerivedComparison h g K q U z) =\n      rawFixedDerivedComparison h' g' K q U\n        (rawRestrictedDerivedPullback a h h' w _ _\n          ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} a g g' wg).inv.app K)\n          q U z)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cfccf",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T154148-L-157560",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cfccf",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T154148-L-157560",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proofs match all four nodes; five delivered modules and both direct importers compile cleanly; six declarations use only permitted axioms. The recorded unclaimed-module change is definitionally equal by rfl."
+ }
+}

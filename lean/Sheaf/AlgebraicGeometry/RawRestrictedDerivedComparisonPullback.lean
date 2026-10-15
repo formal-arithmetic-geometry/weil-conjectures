@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.RawRestrictedDerivedComparison
+public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 import Sheaf.AlgebraicGeometry.RestrictedComparisonGeneratorPullback
 import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionPullbackCommShift
 public import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionZeroComparison
@@ -27,13 +28,13 @@ noncomputable def rawRestrictedDerivedPullback {S Y Y' : Scheme.{u}}
     (q : ℤ) (U : S.Etale)
     (z : (DerivedCategory.Plus.singleFunctor _ 0).obj
       ((upperStar AddCommGrpCat.{u + 1} h).obj
-        (RawRestrictedComparison.freeSheaf S U)) ⟶ K⟦q⟧) :
+        ((abelianComparisonFree S).obj U)) ⟶ K⟦q⟧) :
     (DerivedCategory.Plus.singleFunctor _ 0).obj
       ((upperStar AddCommGrpCat.{u + 1} h').obj
-        (RawRestrictedComparison.freeSheaf S U)) ⟶ K'⟦q⟧ :=
+        ((abelianComparisonFree S).obj U)) ⟶ K'⟦q⟧ :=
   (DerivedCategory.Plus.singleFunctor _ 0).map
       ((upperStarComp AddCommGrpCat.{u + 1} a h h' w.symm).hom.app
-        (RawRestrictedComparison.freeSheaf S U)) ≫
+        ((abelianComparisonFree S).obj U)) ≫
     ((upperStar AddCommGrpCat.{u + 1} a).mapDerivedCategoryPlusSingleFunctor 0).inv.app _ ≫
     (D+((a)^*[AddCommGrpCat.{u + 1}])).map z ≫
     ((D+((a)^*[AddCommGrpCat.{u + 1}])).commShiftIso q).hom.app K ≫
@@ -88,7 +89,7 @@ theorem rawRestrictedDerivedComparison_pullback {S Y Y' : Scheme.{u}}
     (q : ℤ) (U : S.Etale)
     (z : (DerivedCategory.Plus.singleFunctor _ 0).obj
       ((upperStar AddCommGrpCat.{u + 1} h).obj
-        (RawRestrictedComparison.freeSheaf S U)) ⟶ K⟦q⟧) :
+        ((abelianComparisonFree S).obj U)) ⟶ K⟦q⟧) :
     rawRestrictedDerivedCohomologyPullback a h h' w K K' φ q U
         (rawRestrictedDerivedComparison h q K U z) =
       rawRestrictedDerivedComparison h' q K' U
@@ -98,9 +99,9 @@ theorem rawRestrictedDerivedComparison_pullback {S Y Y' : Scheme.{u}}
   let W := (MorphismProperty.Over.pullback @Etale ⊤ h).obj U
   let W' := (MorphismProperty.Over.pullback @Etale ⊤ h').obj U
   let G := (upperStar AddCommGrpCat.{u + 1} h).obj
-    (RawRestrictedComparison.freeSheaf S U)
+    ((abelianComparisonFree S).obj U)
   let G' := (upperStar AddCommGrpCat.{u + 1} h').obj
-    (RawRestrictedComparison.freeSheaf S U)
+    ((abelianComparisonFree S).obj U)
   let e : (upperStar AddCommGrpCat.{u + 1} a).obj G ≅ G' :=
     (upperStarComp AddCommGrpCat.{u + 1} a h h' w.symm).symm.app _
   let A := (DerivedCategory.Plus.singleFunctor _ 0).obj G
