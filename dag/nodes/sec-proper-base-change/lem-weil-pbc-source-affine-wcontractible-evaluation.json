@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-source-affine-wcontractible-evaluation",
+ "kind": "statement",
+ "title": "Closed full-site evaluation at a geometrically w-contractible affine object",
+ "statement": "Let T be a scheme [def-pc-scheme], W an object of the small pro-etale site of T [def-weil-pbc-proetale-site], and R a commutative ring. Suppose W.left is isomorphic to Spec R [def-weil-affine-spectrum] and R is geometrically w-contractible: Spec R is w-local, every maximal localization is strictly henselian, and its connected-component space is extremally disconnected (the source class IsWContractibleRing R). Then for any universe w, every locally surjective morphism F to G of sheaves valued in Type w is surjective on W-sections. Equivalently W satisfies the source predicate (ProEt.topology T).IsWeaklyContractible. In the section universe u+1 this applies to every epimorphism, by the site sheaf-sets epi/local-surjectivity equivalence [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]. No nonempty or nontrivial hypothesis is imposed.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/WeaklyContractible.lean",
+  "place": "isWeaklyContractible_of_iso, lines 130-168; Stacks 0990 and 098H"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+ ],
+ "proof": [
+  {
+   "text": "This is the closed source-library isWeaklyContractible_of_iso theorem. A covering sieve contains a quasi-compact weakly etale cover. Since W.left is affine, refine this by finitely many affine schemes. Their coproduct is affine; its map to Spec R is weakly etale and surjective, hence corresponds to a faithfully flat weakly etale algebra map. The w-contractible retraction property gives a section of this coproduct map. Pulling back coproduct components along the section gives a covering by disjoint open immersions lying in the sieve. A locally surjective sheaf map has lifts on this refined covering. The lifts agree on same-component overlaps by monomorphy and on distinct-component overlaps because the test scheme is empty. Glue them by the sheaf axiom, and use separatedness to verify that the glued section maps to the given one. The source proof packages this as GrothendieckTopology.isWeaklyContractible_of_forall_mem, valid for arbitrary section universe w. The entire source theorem is closed, as confirmed also by the axiom check of the delivered theorem that uses it.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-proetale-site",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/WeaklyContractible.lean",
+  "place": "isWeaklyContractible_of_iso, lines 130-168; Stacks 0990 and 098H"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every ring admits a faithfully flat ind etale w contractible algebra; its spectrum is weakly contractible in the small pro etale site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every affine ind etale scheme has a weakly contractible ind etale covering, evaluation of sheaves preserves epimorphisms",
+   "results": "['AlgebraicGeometry.Scheme.etaleTopology', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S', 'AlgebraicGeometry.Scheme.smallEtaleTopology', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D', 'AlgebraicGeometry.Scheme.smallEtalePretopology', 'AlgebraicGeometry.Scheme.etalePretopology', 'AlgebraicGeometry.Scheme.Etale', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X']",
+   "date": "2026-10-16",
+   "verdict": "No matching Mathlib construction or contractibility theorem; reuse the closed source library."
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyContractible|WeaklyContractible",
+   "results": "[]",
+   "date": "2026-10-16",
+   "verdict": "No matching Mathlib construction or contractibility theorem; reuse the closed source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IndEtaleBasisWeaklyContractibleCover",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-reconstruction-uniform-tower",
+   "place": "Proof first sentence: restrict the derived limit to local models; subordinate affine closed-immersion input, where the lower-shriek construction needs covering generators inside the affine ind-etale site (09BL proof of clause (3)). This closed source-library input supplies the affine ind-etale covering construction.",
+   "via": [
+    "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
+    "lem-weil-pbc-affine-closed-inverse-image-left-adjoint",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.ProEt.isWeaklyContractible_of_iso",
+     "module": "WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible"
+    }
+   ]
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.isWeaklyContractible_of_iso",
+  "statement": "theorem isWeaklyContractible_of_iso {T : Scheme.{u}} {W : T.ProEt} {R : CommRingCat.{u}} [IsWContractibleRing R] (e : W.left ≅ Spec R) : (topology T).IsWeaklyContractible.{w} W",
+  "branch": "slopmaster2",
+  "by": "F1",
+  "date": "2026-10-16",
+  "note": "Exact already-proved source theorem. Axiom check uses only propext, Classical.choice and Quot.sound. No Lean file added."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-c1894",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261015T182203-L-785521",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-c1894",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261015T182203-L-785521",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proof match the node; both source attachments match Lean declarations. Module and sole direct importer compile cleanly; axiom checks show only propext, Classical.choice, Quot.sound. DAG changes and import pruning satisfy the brief."
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-source-wcontractible-extension",
+ "kind": "statement",
+ "title": "Closed source construction of a w-contractible ind-etale extension",
+ "statement": "For every commutative ring R in Type u, there are a commutative ring D in Type u and an R-algebra structure such that D is ind-etale over R [def-weil-pbc-ind-etale-algebra], faithfully flat as an R-module [def-weil-pbc-faithfully-flat-ring-map], and w-contractible in the geometric sense: Spec D is w-local, the localizations at all maximal ideals are strictly henselian, and the connected-component space of Spec D is extremally disconnected. These last conditions are precisely the source-library class IsWContractibleRing D. Universes follow [def-weil-size-convention]; no nontriviality hypothesis is imposed.",
+ "source": {
+  "document": "lean/WeilConjectures/RingTheory/ProEtale/WContractible.lean",
+  "place": "exists_isWContractibleRing, lines 800-811; IsWContractibleRing, lines 38-42; Stacks 0983"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "This is the already-proved exists_isWContractibleRing theorem. Its construction first takes WStrictLocalization R. For a w-strictly-local ring, take a projective compact Hausdorff presentation of the profinite connected-component space; its source T is extremally disconnected and the presentation is surjective. Pull back the spectrum along T by WContractification.PullbackProfinite. The result D is ind-Zariski and faithfully flat over the strict localization. Its spectrum is w-local, its maximal local rings identify with strictly henselian maximal local rings of the strict localization, and its component space identifies with T. Thus D is w-contractible. Compose algebra structures with R to the strict localization; ind-etaleness and faithful flatness compose. All objects are constructed in Type u. This theorem is closed in the source library, so no further proof obligations are introduced.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-size-convention"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/RingTheory/ProEtale/WContractible.lean",
+  "place": "exists_isWContractibleRing, lines 800-811; IsWContractibleRing, lines 38-42; Stacks 0983"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every ring admits a faithfully flat ind etale w contractible algebra; its spectrum is weakly contractible in the small pro etale site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every affine ind etale scheme has a weakly contractible ind etale covering, evaluation of sheaves preserves epimorphisms",
+   "results": "['AlgebraicGeometry.Scheme.etaleTopology', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S', 'AlgebraicGeometry.Scheme.smallEtaleTopology', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D', 'AlgebraicGeometry.Scheme.smallEtalePretopology', 'AlgebraicGeometry.Scheme.etalePretopology', 'AlgebraicGeometry.Scheme.Etale', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X']",
+   "date": "2026-10-16",
+   "verdict": "No matching Mathlib construction or contractibility theorem; reuse the closed source library."
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyContractible|WeaklyContractible",
+   "results": "[]",
+   "date": "2026-10-16",
+   "verdict": "No matching Mathlib construction or contractibility theorem; reuse the closed source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IndEtaleBasisWeaklyContractibleCover",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-reconstruction-uniform-tower",
+   "place": "Proof first sentence: restrict the derived limit to local models; subordinate affine closed-immersion input, where the lower-shriek construction needs covering generators inside the affine ind-etale site (09BL proof of clause (3)). This closed source-library input supplies the affine ind-etale covering construction.",
+   "via": [
+    "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
+    "lem-weil-pbc-affine-closed-inverse-image-left-adjoint",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [
+    {
+     "name": "exists_isWContractibleRing",
+     "module": "WeilConjectures.RingTheory.ProEtale.WContractible"
+    }
+   ]
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
+  "declaration": "exists_isWContractibleRing",
+  "statement": "theorem exists_isWContractibleRing (R : Type u) [CommRing R] : ∃ (S : Type u) (_ : CommRing S) (_ : Algebra R S), Algebra.IndEtale R S ∧ Module.FaithfullyFlat R S ∧ IsWContractibleRing S",
+  "branch": "slopmaster2",
+  "by": "F1",
+  "date": "2026-10-16",
+  "note": "Exact already-proved source theorem. Axiom check uses only propext, Classical.choice and Quot.sound. No Lean file added."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-c1894",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261015T182203-L-785521",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-c1894",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261015T182203-L-785521",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proof match the node; both source attachments match Lean declarations. Module and sole direct importer compile cleanly; axiom checks show only propext, Classical.choice, Quot.sound. DAG changes and import pruning satisfy the brief."
+ }
+}

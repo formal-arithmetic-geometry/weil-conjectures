@@ -27,102 +27,50 @@
  ],
  "proof": [
   {
-   "text": "Write $U=\\operatorname{Spec}A$. Choose an infinite cardinal $\\kappa\\geq |A|$ in the object universe. The bounded ring-extension lemma supplies a faithfully flat ind-etale $A\\to D$, with $|D|\\leq\\kappa^{2^{2^{2^\\kappa}}}$, such that every faithfully flat weakly etale map out of $D$ has a retraction, and $V=\\operatorname{Spec}D\\to U$ is a singleton pro-etale covering. The ind-etale composition clause makes $V\\to U\\to S$ ind-etale, since $U\\to S$ is ind-etale by the basis definition. Thus $V$ is affine and lies in $\\mathcal B_S$. The displayed cardinal is still in the Grothendieck object universe, which is closed under power sets and function sets; after replacing by its skeleton representative, $V$ remains an allowed object. The induced-covering definition then makes $\\{V\\to U\\}$ a covering in $S_{\\mathrm{app}}$.",
+   "text": "Apply exists_isWContractibleRing to A = Γ(U.left, top). The closed source theorem supplies D : Type u, its ring and A-algebra structures, ind-etaleness, faithful flatness and IsWContractibleRing D. No cardinal bound or arbitrary data definition is needed; the existential witness is eliminated inside this theorem proof.",
+   "uses": [
+    "lem-weil-pbc-source-wcontractible-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set p = Spec(algebraMap A D) followed by U.left.isoSpec.inv. The spectrum/ind-etale equivalence and proAffineEtale composition show p and then p followed by U.hom are pro-affine etale. Define V as this basis object and f : V to U with underlying map p. Faithful flatness makes the spectrum map surjective; isomorphism composition preserves surjectivity. The map p is weakly etale and has affine source and target, so Scheme.Hom.singleton_mem_propQCPrecoverage gives its singleton pro-etale covering. The defining comap for basis precoverage and Presieve.map_singleton transfer this to the singleton f, represented by PUnit in Type (u+1).",
    "uses": [
     "def-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-wcontractible-ring-extension",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-size-convention"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 0983 (proposition-find-w-contractible), 0984 (remark-size-w-contractible), 098I (lemma-get-many-weakly-contractible), and 0990 (lemma-proetale-enough-w-contractible), affine ind-etale case"
-   }
-  },
-  {
-   "text": "Fix an epimorphism $\\varphi:P\\to Q$ of sheaves of sets on $S_{\\mathrm{app}}$ and $s\\in Q(V)$. Apply the site-general epimorphism/local-surjectivity equivalence to this site, obtaining a covering $\\{f_i:T_i\\to V\\}_{i\\in I}$ and $t_i\\in P(T_i)$ with $\\varphi(t_i)=s|_{T_i}$. By the induced-covering definition this is also a pro-etale covering of schemes. The retraction property of $D$ from step 1 is precisely the hypothesis of the covering-section lemma. It supplies $\\sigma:V\\to C=\\coprod_i T_i$ with $p\\circ\\sigma=\\mathrm{id}_V$, where $p$ restricts to $f_i$ on the $i$th component. Here $C$ is only a scheme; it is not asserted to be an object of the affine basis.",
-   "uses": [
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "def-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-wcontractible-cover-section"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098H (lemma-w-contractible-is-weakly-contractible), (3) implies (2), local lifting; Tag 098F (lemma-w-contractible-proetale-cover), covering section; Sites Tags 00WM and 00WN"
-   }
-  },
-  {
-   "text": "The coproduct lemma says its component images are pairwise disjoint clopen subsets covering $C$. Their inverse images $O_i=\\sigma^{-1}(T_i)$ therefore form a disjoint open covering of $V$. The restriction $\\sigma_i:O_i\\to T_i$ has $f_i\\circ\\sigma_i:O_i\\to V$ equal to the open inclusion. Each $O_i$ is an object of the full small pro-etale site: its inclusion in $V$ is an open immersion, hence etale and flat; its diagonal is an isomorphism, hence flat on local rings, so it is weakly etale. Composition with $V\\to S$ is weakly etale by composition stability. Opens do not enlarge the universe. The family $\\{O_i\\to V\\}$ is a pro-etale covering: for an affine test open $W\\subseteq V$, take affine neighborhoods subordinate to the open covering $(W\\cap O_i)_i$; quasi-compactness of the affine $W$ gives finitely many of these affine opens with union $W$, exactly the required witnesses in the covering definition. No $O_i$ is assumed affine or ind-etale.",
-   "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-open-immersion-etale",
-    "def-weil-etale-morphism",
-    "def-weil-weakly-etale-morphism",
-    "def-weil-flat-morphism",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "def-pc-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098F, inverse images of the coproduct components; Tag 098H, disjoint open covering in (3) implies (2); Tag 0989, definition-fpqc-covering"
-   }
-  },
-  {
-   "text": "Apply the basis-refinement clause to the full-site covering $\\{O_i\\to V\\}$ of the basis object $V$. Obtain a finite covering $\\{a_k:W_k\\to V\\}_{k\\in K}$ with every $W_k\\in\\mathcal B_S$, and refinement maps $b_k:W_k\\to O_{i(k)}$ such that $a_k$ is the inclusion of $O_{i(k)}$ composed with $b_k$. Put $h_k=\\sigma_{i(k)}\\circ b_k:W_k\\to T_{i(k)}$. Then $f_{i(k)}\\circ h_k=a_k$. The maps $h_k$ are $S$-morphisms between basis objects, hence are morphisms in the full subcategory $S_{\\mathrm{app}}$. Thus $u_k=P(h_k)(t_{i(k)})$ is defined entirely on this site, and naturality gives $\\varphi(u_k)=Q(a_k)(s)$.",
-   "uses": [
-    "lem-weil-pbc-ind-etale-basis",
-    "def-weil-pbc-ind-etale-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0990, affine S_app clause, with the refinement of Tag 098H open-and-closed lifts by Tag 098X (lemma-affine-alternative)"
-   }
-  },
-  {
-   "text": "The same basis lemma puts $W_k\\times_V W_l$ in the basis. If $i(k)\\ne i(l)$, this fibre product is empty because $O_{i(k)}$ and $O_{i(l)}$ are disjoint. The empty scheme belongs to the basis (its ring is the zero ring, a principal localization at zero), and its empty covering makes the sheaf equalizer the map to an empty product, so $P(\\varnothing)=Q(\\varnothing)=\\{*\\}$ up to the unique bijection. In particular the two restrictions on an empty overlap coincide. If $i(k)=i(l)=i$, the two maps from the fibre product into $T_i$ agree: both are the factorization into the $i$th open component of $\\sigma\\circ a_k\\circ\\operatorname{pr}_k=\\sigma\\circ a_l\\circ\\operatorname{pr}_l$. Since that component is an open subscheme, this factorization is unique. Hence the two restrictions of $u_k,u_l$ agree, both being the pullback of $t_i$ along that map. The sheaf equalizer axiom glues the $u_k$ to $u\\in P(V)$. Naturality and the equalizer injectivity for $Q$ give $\\varphi(u)=s$, since they have identical restrictions on the covering. Thus $V$ is weakly contractible on $S_{\\mathrm{app}}$. This applies to every $U$ by step 1, including the empty $U$: an empty basis refinement gives the unique glued section. The argument used no extension of $P$ or $Q$ to the full site.",
-   "uses": [
-    "lem-weil-pbc-ind-etale-basis",
-    "def-weil-pbc-sites-and-cohomology",
     "def-weil-pbc-ind-etale-algebra",
     "def-weil-pbc-proetale-site"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098H, sheaf gluing in proof of (3) implies (2); Tag 0990, affine S_app clause; Sites Tag 090K condition (2)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "V.left is literally Spec D, so isWeaklyContractible_of_iso at the identity isomorphism proves that the corresponding full-site object is weakly contractible in section universe u+1.",
+   "uses": [
+    "lem-weil-pbc-source-affine-wcontractible-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction R from full-site sheaves to basis-site sheaves is an equivalence E. For a basis-site epimorphism φ : P to Q, put φ′ = E.inverse.map φ; this remains epi. Given s in Q(V), apply the inverse of the evaluated counit at Q to obtain a full-site section. Weak contractibility and Sheaf.isLocallySurjective_iff_epi supply a preimage q under φ′. The evaluated counit at P sends q to a section over V. Counit naturality gives φ(counit_P(q)) = counit_Q(φ′(q)), which equals s by the chosen lift and the inverse/hom identity. This is the fully proved private helper surjective_evaluation_of_full_site. Apply it to every index of the singleton cover. The construction and transport use no nontriviality; zero rings and empty U obey the same proof.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-weil-etale-morphism",
-  "def-weil-flat-morphism",
   "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-ind-etale-basis",
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-size-convention",
-  "def-weil-weakly-etale-morphism",
-  "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-open-immersion-etale",
-  "lem-weil-pbc-scheme-coproduct-family",
   "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "lem-weil-pbc-wcontractible-cover-section",
-  "lem-weil-pbc-wcontractible-ring-extension",
-  "lem-weil-pbc-weakly-etale-composition-base-change"
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "lem-weil-pbc-source-wcontractible-extension"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 0983, 0984, 098F, 098H, 098I, 098X and 0990; the basis refinement writes out the S_app restriction of the clopen-gluing proof"
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/IndEtaleBasisWeaklyContractibleCover.lean",
+  "place": "F1 stage 3, 2026-10-16: reuse the closed source-library w-contractible construction and full-site theorem (Stacks 0983, 098H, 0990), then transport explicit section lifts by the basis restriction equivalence and evaluated counit. No unit-level route change."
  },
  "mathlib_searches": [
   {
@@ -265,5 +213,15 @@
   "by": "NN",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-c1894",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261015T182203-L-785521",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proof match the node; both source attachments match Lean declarations. Module and sole direct importer compile cleanly; axiom checks show only propext, Classical.choice, Quot.sound. DAG changes and import pruning satisfy the brief."
  }
 }
