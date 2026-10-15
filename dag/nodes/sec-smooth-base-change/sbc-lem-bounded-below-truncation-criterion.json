@@ -17,7 +17,8 @@
   "sbc-def-derived-categories-with-allowable-torsion",
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-derived-inverse-image"
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-hypercohomology-filtrations"
  ],
  "proof": [
   {
@@ -213,5 +214,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-7813eb7c2 (reviewer sub-agent of L); spot-checked: Read the full item, report, all cited statements and source places. All four steps prove the canonical maps with valid hypotheses; coefficient categories and square domains agree with source context. Checked edge cases, DAG generalizations, and absence of cycles. No new nodes or repairs; accepted all six declared tool uses. Detailed checks written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9b6459671",
+  "group": "NM",
+  "result": "pass",
+  "note": "Wrote review.md. All clauses, dependencies, sources, edge cases, universes, docstrings, and statement records checked. Server-only compile passed in 1.8 seconds without diagnostics. No findings or fixes; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedBelowTruncationCriterion",
+  "declaration": "AlgebraicGeometry.Etale.boundedBelow_truncation_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedBelowTruncationCriterion.lean",
+  "statement": "theorem boundedBelow_truncation_criterion {Y T X S : Scheme.{u}} (g : T ⟶ S) (f : X ⟶ S) (e : Y ⟶ T) (h : Y ⟶ X) (_sq : ChosenCartesianSquare e h g f) (P : Set ℕ) (K : AbelianDerivedCategoryPlusTorsionOfPrimes T P) (n : ℤ) : IsIso ((DerivedCategory.homologyFunctor _ n).map ((hypercohomologyFirstFunctor g).map ((DerivedCategory.TStructure.t.truncLEι n).app K.obj))) ∧ IsIso ((DerivedCategory.homologyFunctor _ n).map ((hypercohomologyBaseChangeFunctor g f).map ((DerivedCategory.TStructure.t.truncLEι n).app K.obj))) ∧ IsIso ((DerivedCategory.homologyFunctor _ n).map ((hypercohomologySecondFunctor h e).map ((DerivedCategory.TStructure.t.truncLEι n).app K.obj))) ∧ (∀ L : CochainComplex.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}), Nonempty (DerivedCategory.Q.obj L.obj ≅ K.obj) → ∀ (r : ℕ) (q : ℤ), 2 ≤ r → n < q → IsZero ((hypercohomologyCouple (hypercohomologyFirstFunctor g) L).page r (n - q) q) ∧ IsZero ((hypercohomologyCouple (hypercohomologyBaseChangeFunctor g f) L).page r (n - q) q) ∧ IsZero ((hypercohomologyCouple (hypercohomologySecondFunctor h e) L).page r (n - q) q))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

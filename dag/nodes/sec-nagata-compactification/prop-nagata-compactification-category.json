@@ -19,7 +19,8 @@
   "def-pc-fibre-product",
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
-  "def-weil-flat-morphism"
+  "def-weil-flat-morphism",
+  "def-nagata-compactification-base-change"
  ],
  "proof": [
   {
@@ -305,5 +306,24 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-72cbd636c (reviewer sub-agent of L); spot-checked: Read the full item, all eleven proof steps, cited statements and source locations, report, and unit/chapter route. Verified the equalizer, comparison direction SIm(a′)→SIm(a)×SS′, flat isomorphism, and nonflat density counterexample. No new nodes or repairs needed. The reported image-definition error is explicitly corrected locally. Concrete checks are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a69942492",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all statement clauses, eight dependencies, canonical constructions, universes, edge cases, docstrings, report sections, and signature agreement. Server-only compilation passed in 1.5 seconds without warnings. The inherited image-definition wording error is explicitly resolved by the item; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactificationCategory",
+  "declaration": "AlgebraicGeometry.Compactification.compactificationCategory_properties",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactificationCategory.lean",
+  "statement": "theorem compactificationCategory_properties {X S : Scheme.{u}} (f : X ⟶ S) [CompactSpace S] [QuasiSeparatedSpace S] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : Nonempty (Compactification f) ∧ (∀ c : Compactification f, QuasiCompact c.i) ∧ (∀ c d : Compactification f, (inf c d).Z = (graph c d).image ∧ IsSchemeTheoreticallyDominant (inf c d).i ∧ Nonempty ((inf c d) ⟶ c) ∧ Nonempty ((inf c d) ⟶ d)) ∧ (∀ (I : Type v) [Finite I] (c : I → Compactification f), ∃ e : Compactification f, ∀ i : I, Nonempty (e ⟶ c i)) ∧ (∀ (c d : Compactification f) (r s : c ⟶ d), ∃ (e : Compactification f) (h : e ⟶ c), h ≫ r = h ≫ s) ∧ IsCofiltered (Compactification f) ∧ (∀ (T : Scheme.{u}) (t : T ⟶ S), (∀ c : Compactification f, QuasiCompact (c.baseChange t).i) ∧ (∀ (c d : Compactification f) (r : c ⟶ d), IsProper (r.baseChange t).hom) ∧ (∀ (c d : Compactification f) (e : Compactification f) (r : e ⟶ c) (s : e ⟶ d), Nonempty ((baseChangeFunctor t).obj e ⟶ (baseChangeFunctor t).obj c) ∧ Nonempty ((baseChangeFunctor t).obj e ⟶ (baseChangeFunctor t).obj d)) ∧ (∀ (c d e : Compactification f) (r s : c ⟶ d) (h : e ⟶ c), h ≫ r = h ≫ s → (baseChangeFunctor t).map h ≫ (baseChangeFunctor t).map r = (baseChangeFunctor t).map h ≫ (baseChangeFunctor t).map s) ∧ (∀ c d : Compactification f, IsClosedImmersion (infBaseChange c d t).hom ∧ (infBaseChange c d t).comp ((infFst c d).baseChange t) = infFst (c.baseChange t) (d.baseChange t) ∧ (infBaseChange c d t).comp ((infSnd c d).baseChange t) = infSnd (c.baseChange t) (d.baseChange t) ∧ (Flat t → IsIso (infBaseChange c d t).hom)) ∧ (Flat t → ∀ c : Compactification f, IsSchemeTheoreticallyDominant c.i → IsSchemeTheoreticallyDominant (c.baseChange t).i)) ∧ (∃ (X₀ S₀ T₀ : Scheme.{u}) (f₀ : X₀ ⟶ S₀) (t₀ : T₀ ⟶ S₀) (c₀ : Compactification f₀), CompactSpace S₀ ∧ QuasiSeparatedSpace S₀ ∧ IsSeparated f₀ ∧ LocallyOfFiniteType f₀ ∧ QuasiCompact f₀ ∧ QuasiCompact c₀.i ∧ IsSchemeTheoreticallyDominant c₀.i ∧ ¬ IsSchemeTheoreticallyDominant (c₀.baseChange t₀).i)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Combined statement uses the upstream category, graph-image inf, baseChangeFunctor and infBaseChange without duplicating them. Compactification omits quasi-compactness in its general definition, but this agrees exactly here since QuasiCompact f implies QuasiCompact c.i; this is stated explicitly. Includes the existential failure of arbitrary-base-change density absent from the upstream results."
  }
 }
