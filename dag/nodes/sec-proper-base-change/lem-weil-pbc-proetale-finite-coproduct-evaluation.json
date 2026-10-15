@@ -185,5 +185,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEvaluation",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.finite_coproduct_evaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/ProEtaleFiniteCoproductEvaluation.lean",
+  "statement": "theorem finite_coproduct_evaluation (X : Scheme.{u}) (I : Type v) [Finite I] (V : I → X.ProEt) (hqc : ∀ i, CompactSpace (V i).left) (hqs : ∀ i, QuasiSeparatedSpace (V i).left) : ∃ (W : X.ProEt) (ι : ∀ i, V i ⟶ W) (e : (∐ fun i ↦ (V i).left) ≅ W.left), (∀ i, Sigma.ι (fun i ↦ (V i).left) i ≫ e.hom = (ι i).left) ∧ CompactSpace W.left ∧ QuasiSeparatedSpace W.left ∧ ((∀ i, IsAffine (V i).left) → IsAffine W.left) ∧ Nonempty (IsColimit (Cofan.mk ((topology X).uliftYoneda.{max (u + 1) w}.obj W) (fun i ↦ (topology X).uliftYoneda.{max (u + 1) w}.map (ι i)))) ∧ (∀ (c : Cofan (fun i ↦ (topology X).uliftYoneda.{max (u + 1) w}.obj (V i))) (hc : IsColimit c), IsIso (hc.desc (Cofan.mk ((topology X).uliftYoneda.{max (u + 1) w}.obj W) (fun i ↦ (topology X).uliftYoneda.{max (u + 1) w}.map (ι i))))) ∧ (∀ F : Sheaf (topology X) (Type (max (u + 1) w)), Function.Bijective (fun s : F.obj.obj (op W) ↦ fun i ↦ F.obj.map (ι i).op s)) ∧ (∀ (F G : Sheaf (topology X) (Type (max (u + 1) w))) (η : F ⟶ G) (s : F.obj.obj (op W)) (i : I), G.obj.map (ι i).op (η.hom.app (op W) s) = η.hom.app (op (V i)) (F.obj.map (ι i).op s)) ∧ (IsEmpty I → IsEmpty W.left ∧ ∀ F : Sheaf (topology X) (Type (max (u + 1) w)), Nonempty (Unique (F.obj.obj (op W))))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d827366af",
+  "group": "NN",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all six statement dependencies, sources, declarations, docstrings, universes and empty-family cases. Signature matches verbatim; server-only overlay compile passed in 1.5 seconds. No delivery errors found; repositories and branch head unchanged."
  }
 }
