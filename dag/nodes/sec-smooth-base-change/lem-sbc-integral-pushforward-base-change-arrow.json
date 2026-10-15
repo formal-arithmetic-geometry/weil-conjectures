@@ -254,5 +254,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a31af2b28",
+  "group": "NS",
+  "result": "pass",
+  "note": "Immutable files verified against commit; statement, dependencies, edge cases, docstrings, report sections, and pilot gates checked. Server-only compile passed; no delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralPushforwardBaseChangeArrow",
+  "declaration": "AlgebraicGeometry.Etale.integralPushforward_baseChange_arrow",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralPushforwardBaseChangeArrow.lean",
+  "statement": "theorem integralPushforward_baseChange_arrow {X' S' S'' X'' T Y : Scheme.{u}} {f' : X' ⟶ S'} {f'' : X'' ⟶ S''} {π' : X'' ⟶ X'} {g' : T ⟶ S''} {h' : Y ⟶ X''} {e : Y ⟶ T} (π : S'' ⟶ S') [IsIntegralHom π] [QuasiCompact g'] [QuasiSeparated g'] (sqπ : ChosenCartesianSquare π' f'' f' π) (sq : ChosenCartesianSquare h' e f'' g') (q : ℕ) : Nonempty (Arrow.mk (Functor.whiskerRight (Functor.whiskerLeft (DerivedCategory.Plus.singleFunctor _ 0) (Functor.whiskerRight (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq.flip) (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)))) (lowerStar AddCommGrpCat.{u + 1} π')) ≅ Arrow.mk (Functor.whiskerLeft (DerivedCategory.Plus.singleFunctor _ 0) (Functor.whiskerRight (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (sq.toCommSq.flip.vert_comp sqπ.toCommSq.flip)) (DerivedCategory.Plus.homologyFunctor _ (q : ℤ))))) ∧ ∀ (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}), IsIso ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq.flip).app ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) → IsIso ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (sq.toCommSq.flip.vert_comp sqπ.toCommSq.flip)).app ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "An arrow isomorphism in the functor category gives the two endpoint natural isomorphisms and their arrow compatibility. Uses abelian sheaves directly and the recorded exchange in its bounded-below presentation, with cohomology in nonnegative degree. The second conjunct states the final isomorphism implication explicitly."
  }
 }
