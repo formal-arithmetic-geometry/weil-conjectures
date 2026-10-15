@@ -220,6 +220,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mon
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
