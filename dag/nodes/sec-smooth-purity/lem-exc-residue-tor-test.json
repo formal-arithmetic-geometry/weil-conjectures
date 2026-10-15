@@ -3,49 +3,288 @@
  "blueprint": {
   "is": "lem-exc-residue-tor-test",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Testing finite Tor amplitude at the residue field",
- "statement": "Let $A=\\mathcal O_E/\\varpi_E^n$, let $\\kappa=A/(\\varpi_E)$,\nand let $K$ be a bounded complex with\nconstructible cohomology\non a small etale site. Then $K$ has\nTor amplitude in $[a,b]$\nif and only if its\nderived tensor product\n$K\\otimes_A^L\\kappa$ has cohomology in $[a,b]$.\nThe derived category is the ordinary one of\n[def-weil-pbc-derived-categories].",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension]. Let $n\\geq1$, put $A=\\mathcal O_E/\\varpi_E^n$ and $\\kappa=A/(\\varpi_E)$, and let $T$ be a scheme. Write $A_T,\\kappa_T$ for the constant sheaves [def-weil-pbc-constant-sheaf] on the small etale site of $T$. Let $K\\in D(T_{\\Et},A)$ in the ordinary derived category [def-weil-pbc-derived-categories] have bounded constructible cohomology [def-weil-pbc-constructible-complexes]. For integers $a,b$, $K$ has Tor amplitude in $[a,b]$ [def-kun-tor-amplitude] if and only if\n$$\n\\mathcal H^i(K\\otimes_A^L\\kappa_T)=0\\qquad(i\\notin[a,b]),\n$$\nwhere derived tensor is the etale construction [def-kun-derived-tensor].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/lem-exc-residue-tor-test.md",
   "place": "node lem-exc-residue-tor-test, order 1823"
  },
  "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-constructible-complexes"
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-kun-derived-tensor"
  ],
  "proof": [
   {
-   "text": "One direction is the definition in [def-weil-finite-tor-amplitude],\nwith the constant sheaf $\\kappa$ as test module.\nFor the converse, take any geometric stalk. It is a bounded complex\nwith finitely generated cohomology over the Artinian local ring $A$.\nThe elementary minimal-resolution construction gives a bounded-above\ncomplex of finite free modules representing it, with every differential\nhaving entries in the maximal ideal. To obtain this construction, take\nfinite free covers of successive kernels and cancel any invertible matrix\nentry, which splits off a contractible two-term free summand.\nAfter tensoring with $\\kappa$, all differentials of this minimal\ncomplex are zero. Hence the assumed vanishing and Nakayama's lemma\nforce all its terms outside $[a,b]$ to be zero. Each stalk thus has\na finite free representative in this same interval.",
+   "text": "By [lem-weil-l-adic-extension-integers-dvr], $\\mathcal O_E$ has maximal ideal $(\\varpi_E)$ and finite residue field. By [lem-weil-valued-dvr-finite-quotients], $A$ is finite local with maximal ideal $(\\varpi_E)/(\\varpi_E^n)$. Thus $\\kappa$ is the field $\\mathcal O_E/(\\varpi_E)$, and $\\varpi_E^n=0$ in $A$. The constant-sheaf construction [def-weil-pbc-constant-sheaf] and exactness of sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact], applied to the constant-presheaf sequence $A\\xrightarrow{\\varpi_E}A\\to\\kappa\\to0$, identify $A_T/\\varpi_E A_T$ with $\\kappa_T$. A sheaf of $A_T$-modules killed by $\\varpi_E$ therefore has a unique $\\kappa_T$-module structure: locally write a section of the quotient ring as the image of a section of $A_T$ and let it act using that lift; different lifts differ by $\\varpi_E A_T$ and act identically.",
    "uses": [
-    "def-weil-finite-tor-amplitude"
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI, lemma-sheafification-exact; elementary quotient-ring action"
+   }
   },
   {
-   "text": "For an arbitrary module sheaf $M$, stalks commute with the derived\ntensor product of [def-weil-derived-tensor], since they are exact\ntensor functors preserving flat resolutions. The stalk of\n$K\\otimes_A^L M$ is consequently zero outside $[a,b]$.\nConservativity in [lemma-weil-pbc-geometric-stalk-conservative]\nproves the required uniform sheafwise Tor bound. This proof applies\nto etale stalks; it does not assert their conservativity on the entire\npro-etale topos.",
+   "text": "If $K$ has Tor amplitude in $[a,b]$, take $\\mathcal M=\\kappa_T$ in the definition [def-kun-tor-amplitude]. This gives exactly the asserted cohomology vanishing.",
    "uses": [
-    "def-weil-derived-tensor",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "def-kun-tor-amplitude"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ, definition-tor-amplitude, clause (1)"
+   }
+  },
+  {
+   "text": "Conversely assume the asserted vanishing. Apply [lem-pc-kflat-resolution] on the ringed site $(T_{\\Et},A_T)$ to a representative of $K$, obtaining a K-flat resolution $P\\to K$ with every term $P^q$ flat. By [def-kun-derived-tensor], for any $A_T$-module sheaf $M$ in degree zero, $P\\otimes_{A_T}M$ represents $K\\otimes_A^L M$. Put $C=P\\otimes_{A_T}\\kappa_T$, a complex of $\\kappa_T$-modules. The hypothesis says $\\mathcal H^i(C)=0$ outside $[a,b]$. No boundedness of $P$ or $C$ is assumed.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 06YU, definition-derived-tor"
+   }
+  },
+  {
+   "text": "Let $N$ be any $\\kappa_T$-module sheaf. Regard $C^q$ and $N$ as presheaves of modules over the constant presheaf $U\\mapsto\\kappa$. For each $U$, tensoring $\\kappa$-vector spaces with $N(U)$ is exact: a short exact sequence splits after lifting a basis of its quotient, and its tensor is again a split sequence. The tensor functor is additive, so these split sequences identify kernels and images after tensoring. Apply this to $0\\to Z^i\\to C^i(U)\\to B^{i+1}\\to0$ and $0\\to B^i\\to Z^i\\to H^i(C(U))\\to0$, with $Z^i$ and $B^i$ the cycles and boundaries of $C(U)$. It follows that the canonical map $[z]\\otimes y\\mapsto[z\\otimes y]$ is an isomorphism\n$$H^i(C(U))\\otimes_\\kappa N(U)\\simeq H^i(C(U)\\otimes_\\kappa N(U)).$$\nThis map is natural in restrictions even though the splittings used to prove bijectivity need not be. By [lem-pc-sites-module-sheafification-tensor], sheafifying the sectionwise tensor over the constant presheaf $\\kappa$ gives $C\\otimes_{\\kappa_T}N$. By [lem-weil-pbc-site-module-presheaf-sheafification-exact], sheafification commutes with cohomology. Sheafify the displayed isomorphism and apply the tensor comparison again, obtaining\n$$\\mathcal H^i(C\\otimes_{\\kappa_T}N)\\simeq\\mathcal H^i(C)\\otimes_{\\kappa_T}N.$$\nIn particular this vanishes outside $[a,b]$. The balanced maps $(x\\otimes t)\\otimes y\\mapsto x\\otimes ty$ and $x\\otimes y\\mapsto(x\\otimes1)\\otimes y$ are balanced over the indicated rings and commute with restrictions and differentials. Sections of a sheaf tensor product are locally sums of pure tensors, so these formulas define local maps on generators; balancing makes them independent of representatives, and sheafification glues them. Their composites fix each pure tensor, hence every local section; the sheaf tensor construction [def-pur-sheaf-tensor-product] therefore gives an isomorphism of complexes\n$$(P\\otimes_{A_T}\\kappa_T)\\otimes_{\\kappa_T}N\\simeq P\\otimes_{A_T}N.$$\nThus $\\mathcal H^i(P\\otimes_{A_T}N)=0$ outside $[a,b]$. The calculation uses the field $\\kappa$, not the generally non-field ring $\\kappa_T(U)$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW, lemma-sheafification-tensor; Tag 03EI, lemma-sheafification-exact; the sectionwise vector-space calculation is written here"
+   }
+  },
+  {
+   "text": "For an arbitrary $A_T$-module sheaf $M$ put $F_sM=\\operatorname{im}(\\varpi_E^s:M\\to M)$, $0\\leq s\\leq n$. Then $F_0M=M$ and $F_nM=0$. Write $G_s=F_sM/F_{s+1}M$. Multiplication by $\\varpi_E$ sends $F_sM$ into $F_{s+1}M$: locally its section is $\\varpi_E^s m$, and its product is $\\varpi_E^{s+1}m$. Hence $G_s$ is killed by $\\varpi_E$, so step 1 makes it a $\\kappa_T$-module sheaf and step 4 applies to $G_s$. This is a finite filtration for every $M$, including sheaves without any finiteness or constructibility condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Elementary image/quotient filtration by powers of the scalar; coefficient quotient identified in step 1"
+   }
+  },
+  {
+   "text": "For $0\\leq s<n$, tensor the short exact sequence $0\\to F_{s+1}M\\to F_sM\\to G_s\\to0$ termwise with $P$. Each $P^q$ is flat, so [def-pc-flat-sheaf-modules], with the elementary symmetry $x\\otimes y\\mapsto y\\otimes x$, gives a short exact sequence of complexes. By [lem-weil-pbc-complex-ses-homology-long-exact],\n$$\\mathcal H^i(P\\otimes F_{s+1}M)\\longrightarrow\\mathcal H^i(P\\otimes F_sM)\\longrightarrow\\mathcal H^i(P\\otimes G_s)$$\nis exact. Fix $i\\notin[a,b]$. Descending induction on $s$ starts at $F_nM=0$. At the induction step the left group is zero by induction and the right group is zero by step 4, so the middle group is zero. At $s=0$ this proves $\\mathcal H^i(P\\otimes M)=0$. By [def-kun-derived-tensor] this is $\\mathcal H^i(K\\otimes_A^L M)=0$. Since $M$ and $i\\notin[a,b]$ were arbitrary, [def-kun-tor-amplitude] proves the converse with exactly the same interval.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-kun-derived-tensor",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117, lemma-long-exact-sequence-cochain; explicit descending induction on the filtration"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-finite-tor-amplitude",
-  "def-weil-derived-tensor",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "def-kun-tor-amplitude",
+  "lem-pc-kflat-resolution",
+  "def-kun-derived-tensor",
+  "lem-pc-sites-module-sheafification-tensor",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/lem-exc-residue-tor-test.md",
-  "place": "## Proof"
+  "place": "Replacement of node-level Proof by a nilpotent scalar filtration; ringed-site ingredients from Stacks Tags 06YS, 06YU, 0GMW, 03EI and 0117"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "HasTorAmplitude, IsLocalRing",
+   "results": "No hits; loogle: unknown identifier 'HasTorAmplitude'",
+   "date": "2026-10-15",
+   "verdict": "inconclusive: invalid Loogle identifier; valid replacement searches recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*(tor.amplitude|minimal.complex)|tor.amplitude.*residue|minimal.*free.*complex",
+   "results": "No hits",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded constructible complex of sheaves over an Artinian local ring on the small etale site, Tor amplitude is detected by derived tensor with the residue field",
+   "results": "DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; CategoryTheory.isZero_Tor'_succ_of_projective; CategoryTheory.isZero_Tor_succ_of_projective; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isGE_iff; DerivedCategory.isLE_iff; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude of a complex over an Artinian local ring is detected by tensoring with the residue field",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a ring with a nilpotent ideal whose quotient is a field, if the derived reduction of a complex vanishes outside an interval then tensoring with any module vanishes outside that interval",
+   "results": "Rep.isZero_Tor_succ_of_projective; CategoryTheory.isZero_Tor'_succ_of_projective; CategoryTheory.isZero_Tor_succ_of_projective; HomologicalComplex.tensor_unit_d₂; Profinite.NobelingProof.succ_exact; Algebra.Generators.H1Cotangent.exact_δ_map; Algebra.FormallySmooth.iff_injective_lTensor_residueField; HomologicalComplex.extend.d_comp_eq_zero_iff",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor, IsLocalRing.ResidueField",
+   "results": "No hits",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|tor_amplitude|nilpotent.*tensor|tensor.*nilpotent",
+   "results": "Mathlib/Algebra/Lie/Nilpotent.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Nilpotent/Exp.lean",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_Tor.*projective|isGE_iff|isLE_iff",
+   "results": "Mathlib/CategoryTheory/Monoidal/Tor.lean; Mathlib/CategoryTheory/Monoidal/Tor.lean; Mathlib subdirectory: CategoryTheory/Monoidal",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nilpotent ideal filtration proves Tor amplitude can be tested modulo the maximal ideal for complexes of sheaves of modules",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|tor.amplitude|residue.*derived.*tensor|tensor.*residue.*amplitude",
+   "results": "No hits",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude is detected by derived reduction modulo a nilpotent maximal ideal",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor, IsLocalRing.ResidueField",
+   "results": "No hits",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude for a complex of sheaves over a finite local ring is detected by derived tensor product with its residue field",
+   "results": "DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff; CategoryTheory.isZero_Tor_succ_of_projective; DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_Tor.*projective",
+   "results": "Mathlib/CategoryTheory/Monoidal/Tor.lean; Mathlib/CategoryTheory/Monoidal/Tor.lean; Mathlib subdirectory: CategoryTheory/Monoidal",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "isGE_Q_obj_iff|isLE_Q_obj_iff|isGE_iff|isLE_iff",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib subdirectory: Algebra/Homology/DerivedCategory",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"ResidueField\"",
+   "results": "ValuationSubring.ker_unitGroupToResidueFieldUnits; ValuationSubring.unitGroupToResidueFieldUnits; ValuationSubring.surjective_unitGroupToResidueFieldUnits; ValuationSubring.coe_unitGroupToResidueFieldUnits_apply; Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex over a ring with nilpotent maximal ideal has uniform derived tensor vanishing for every module if its residue field reduction has that vanishing",
+   "results": "Rep.isZero_Tor_succ_of_projective; Algebra.FormallySmooth.iff_injective_lTensor_residueField; CategoryTheory.isZero_Tor'_succ_of_projective; CategoryTheory.isZero_Tor_succ_of_projective; isNilpotent_tensor_residueField_iff; Module.free_of_lTensor_residueField_injective; Module.mem_support_iff_nontrivial_residueField_tensorProduct; IsLocalRing.split_injective_iff_lTensor_residueField_injective",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*tensor|tensor.*nilpotent|minimal.*free.*complex|residue.*Tor",
+   "results": "No hits; Mathlib subdirectory: Algebra/Homology",
+   "date": "2026-10-15",
+   "verdict": "no match: these hits do not detect Tor amplitude of complexes of etale module sheaves by residue-field reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|tor_amplitude|residue.*derived.*tensor",
+   "results": "No hits",
+   "date": "2026-10-15",
+   "verdict": "no match: cohomological-bound, projective-Tor, finite-module or finite-algebra results do not detect the Tor amplitude of a sheaf complex by residue-field reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves of modules over a finite local ring has Tor amplitude in an interval if its derived reduction to the residue field has cohomology only in that interval",
+   "results": "DerivedCategory.isLE_iff; DerivedCategory.isGE_iff; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; DerivedCategory.isZero_of_isLE",
+   "date": "2026-10-15",
+   "verdict": "no match: cohomological-bound, projective-Tor, finite-module or finite-algebra results do not detect the Tor amplitude of a sheaf complex by residue-field reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor, IsLocalRing.ResidueField",
+   "results": "No hits",
+   "date": "2026-10-15",
+   "verdict": "no match: cohomological-bound, projective-Tor, finite-module or finite-algebra results do not detect the Tor amplitude of a sheaf complex by residue-field reduction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude of a complex of sheaves can be tested at the residue field of an Artinian local ring",
+   "results": "No hits; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*tensor|tensor.*nilpotent|minimal.*free.*complex|residue.*Tor",
+   "results": "No hits; Mathlib subdirectory: Algebra/Homology",
+   "date": "2026-10-15",
+   "verdict": "no match: cohomological-bound, projective-Tor, finite-module or finite-algebra results do not detect the Tor amplitude of a sheaf complex by residue-field reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a ring has nilpotent maximal ideal and residue field k, the Tor amplitude of a complex is detected by derived tensor with k, using the finite ideal filtration of every test module",
+   "results": "CategoryTheory.isZero_Tor'_succ_of_projective; CategoryTheory.isZero_Tor_succ_of_projective; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Rep.isZero_Tor_succ_of_projective; Module.mem_support_iff_nontrivial_residueField_tensorProduct; Module.free_of_lTensor_residueField_injective; isNilpotent_tensor_residueField_iff; IsLocalRing.split_injective_iff_lTensor_residueField_injective",
+   "date": "2026-10-15",
+   "verdict": "no match: cohomological-bound, projective-Tor, finite-module or finite-algebra results do not detect the Tor amplitude of a sheaf complex by residue-field reduction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -74,5 +313,54 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-trace-perfectness"
+ "unit": "sk-prop-sf-trace-perfectness",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-residue-tor-test",
+  "worker": "stage1",
+  "summary": "Made the implicit coefficient datum, scheme, positive level and integer endpoints explicit; retained bounded constructibility and the ordinary etale category. STATEMENT-DISPUTED: the imported proof uses pro-etale-only tensor/Tor definitions for an etale object; replaced them by existing etale definitions without changing the intended assertion. Completed the earlier sandbox filtration proof, explicitly recording the field-section calculation, tensor symmetry and finite descending induction. No new nodes or Mathlib leaves; all cited statements were read and verbatim excerpts recorded in citations.json. Re-ran the prescribed Mathlib searches with two phrasings and recorded invalid queries and the unavailable LeanSearch service honestly.",
+  "blueprint": "Realizes the forward implication of the first paragraph and the uniform sheafwise converse of the second paragraph of lem-exc-residue-tor-test, Proof. Below the unchanged unit sk-prop-sf-trace-perfectness (which has no proof steps), the minimal-resolution and stalk calculation is replaced by the written scalar filtration and sectionwise field calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Coefficient-ring fact: the valuation ring has maximal ideal generated by the chosen uniformizer and finite residue field; no node of this unit supplies coefficient algebra."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Coefficient-ring quotient is finite local; generic coefficient tool, without changing the unit route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of a K-flat resolution with flat terms on the actual etale ringed site, used as generic homological algebra."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "General presheaf/sheaf tensor comparison over the constant field presheaf, used on the etale site."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "why": "Exact sheafification commutes with cohomology and identifies the coefficient quotient; a generic ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Long exact cohomology sequence of a degreewise short exact sequence, used for the finite filtration induction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-pc-kflat-resolution",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-N3-8feba4f5c",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-8feba4f5c (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source locations, and unit/chapter route. All six proof steps check out, including tensor/sheafification compatibility and uniform filtration bounds. Small cases and dependency-cycle checks passed. No new nodes, repairs, target weakening, or unsupported coefficient-category comparison. Written review.md with accepted tool uses."
+ }
 }
