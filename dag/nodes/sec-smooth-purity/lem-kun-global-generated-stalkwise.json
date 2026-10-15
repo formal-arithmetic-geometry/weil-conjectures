@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-global-generated-stalkwise",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Global generation is stalkwise surjectivity",
@@ -14,32 +14,128 @@
  },
  "stmt_deps": [
   "def-kun-global-generated",
-  "def-kun-constant-sheaf"
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-geometric-stalks"
  ],
  "proof": [
   {
-   "text": "The stalk functors are exact by\n[prop-weil-pbc-geometric-stalks-exact], so the geometric stalks of\nthe cokernel of the evaluation morphism are the cokernels of its maps\non stalks. By [lemma-weil-pbc-geometric-stalk-conservative] a\nsheaf is zero if and only if all its geometric stalks are zero, so the\ncokernel vanishes – that is, the evaluation morphism is an\nepimorphism, the defining condition of\n[def-kun-global-generated] – exactly when that morphism is\nsurjective on every geometric stalk.",
+   "text": "Let $e:E\\to F$ be the evaluation morphism of [def-kun-global-generated], where $E=\\bigoplus_{s\\in\\Gamma(T_{\\Et},F)}\\underline\\Lambda$. Form its cokernel $C$ in the abelian category of $\\Lambda_T$-module sheaves. Apply [lem-weil-pbc-module-sheaves-colimits-forgetful] to the small etale site and $\\mathcal O=\\Lambda_T$: the functor $U$ forgetting scalars preserves cokernels, so $U(C)=\\operatorname{coker}(U(e))$. Moreover $C$ is zero precisely when $U(C)$ is zero: in either case all section groups are trivial, and the unique maps to and from the zero sheaf are automatically linear. By [lem-weil-pbc-preadditive-epi-iff-cokernel-zero] in the module-sheaf category, $e$ is epic precisely when $C$ is zero. Thus global generation is equivalent to $U(C)=0$.",
+   "uses": [
+    "def-kun-global-generated",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-preadditive-epi-iff-cokernel-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian; combined with homology.tex Tags 010B (definition-injective-surjective), 010C (lemma-characterize-injective), and the blueprint proof, cokernel criterion"
+   }
+  },
+  {
+   "text": "For every geometric point $\\bar t$, apply [prop-weil-pbc-geometric-stalks-exact] to the abelian sheaf map $U(e)$. It identifies $U(C)_{\\bar t}$ with the cokernel of $U(e)_{\\bar t}$. Explicitly, a stalk element of a module sheaf $M$ is a germ $[V,\\bar v,a]$ with $a\\in M(V)$; two representatives are equal when their restrictions agree on a common pointed refinement, as in [def-weil-pbc-geometric-stalks]. Forgetting scalars leaves these representatives and this equality relation unchanged. Addition is addition of restrictions on a common refinement, and $\\lambda[V,\\bar v,a]=[V,\\bar v,\\lambda a]$ for $\\lambda\\in\\Lambda$. The map on germs sends $[V,\\bar v,a]$ to $[V,\\bar v,e_V(a)]$ before and after forgetting scalars; hence the underlying group map of $e_{\\bar t}$ is $U(e)_{\\bar t}$. A homomorphism of modules is surjective precisely when its underlying group homomorphism is surjective; its group cokernel is the quotient by its image and is zero precisely in that case. Consequently $e_{\\bar t}$ is surjective if and only if $U(C)_{\\bar t}=0$.",
    "uses": [
     "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-kun-global-generated"
+    "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PT, lemma-stalk-exact, part (3); blueprint proof, first sentence"
+   }
+  },
+  {
+   "text": "Apply [lemma-weil-pbc-geometric-stalk-conservative] to the morphism $U(C)\\to0$ of abelian etale sheaves. The stalk of the zero sheaf is zero (the colimit of the zero section groups), so this morphism is an isomorphism precisely when $U(C)_{\\bar t}=0$ for every geometric point. Its being an isomorphism is precisely $U(C)=0$. Combining this with steps 1 and 2 proves both implications of the asserted equivalence.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PU, theorem-exactness-stalks; blueprint proof, second sentence"
+   }
   }
  ],
  "proof_deps": [
+  "def-kun-global-generated",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-preadditive-epi-iff-cokernel-zero",
   "prop-weil-pbc-geometric-stalks-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "def-kun-global-generated"
+  "def-weil-pbc-geometric-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-global-generated-stalkwise.md",
-  "place": "## Proof"
+  "place": "## Proof, with coefficient-forgetting and categorical cokernel steps made explicit using Stacks Tags 03DA, 03PT, 03PU, 010B and 010C"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "global generation of an etale sheaf is equivalent to surjectivity on every geometric stalk",
+   "results": "8 hits: AlgebraicGeometry.SurjectiveOnStalks and surjectiveOnStalks_iff concern scheme morphisms; TopCat.Presheaf.app_surjective_of_stalkFunctor_map_bijective and locally_surjective_iff_surjective_on_stalks concern topological presheaves. None is the etale evaluation criterion.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiber",
+   "results": "12 hits, including sheafFiber, its finite-limit preservation instance, sheafFiberCompIso, instIsLeftAdjointSheafSheafFiber and instPreservesFiniteColimitsSheafSheafFiber. These give stalk infrastructure, not the complete globally-generated evaluation criterion.",
+   "date": "2026-10-16",
+   "verdict": "related infrastructure, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "epi_iff|surjective|cokernel",
+   "results": "25 hits in CategoryTheory/Sites/Point: Conservative.lean:121-126 jointly_reflect_isLocallySurjective is a sufficient condition for presheaf local surjectivity; read also jointlyReflectEpimorphisms at lines 96-100. Neither by itself states the evaluation criterion with the etale-point and module-coefficient identifications. Other hits are jointly-surjective fiber constructors.",
+   "date": "2026-10-16",
+   "verdict": "related general tools; no exact item declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "global generation of an etale sheaf is equivalent to surjectivity on geometric stalks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an epimorphism of sheaves on the small etale site of a scheme is exactly a morphism surjective on all geometric stalks",
+   "results": "8 hits: Sheaf.epi_of_isLocallySurjective and epi_of_isLocallySurjective' (one implication) and Sheaf.isLocallySurjective_iff_epi (Type-valued sheaves, LocallySurjective.lean:378-387); other hits concern sheafed spaces or scheme stalk maps. Read the local declarations; none directly supplies the module-valued etale criterion.",
+   "date": "2026-10-16",
+   "verdict": "related general tools, no exact item declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category of sheaves a morphism is epi if all of its fibers at a conservative family of points are surjective",
+   "results": "8 hits, including Sheaf.epi_of_isLocallySurjective, Sheaf.isLocallySurjective_iff_epi, and Sheaf.isLocallySurjective_iff_epi'. Read LocallySurjective.lean:378-387 and EpiMono.lean:118-137. These relate local surjectivity to categorical epimorphisms; they do not alone state the module-valued geometric-stalk evaluation criterion.",
+   "date": "2026-10-16",
+   "verdict": "related infrastructure, no exact item declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "jointlyReflectEpimorphisms|epi_iff.*(fiber|stalk)|isLocallySurjective_iff_epi",
+   "results": "9 hits in CategoryTheory/Sites, including Point/Conservative.lean:94-98, LocallySurjective.lean:378 and EpiMono.lean:124. Read all three declarations: point conservativity must still be supplied for the etale site, and local surjectivity must still be identified with geometric-stalk surjectivity.",
+   "date": "2026-10-16",
+   "verdict": "general tools; no exact item declaration"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.IsConservativeFamilyOfPoints.jointlyReflectEpimorphisms",
+   "results": "0 hits; unknown identifier (incorrect namespace). Retried with CategoryTheory.ObjectProperty below.",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier, no mathematical verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsConservativeFamilyOfPoints.jointlyReflectEpimorphisms",
+   "results": "1 hit: CategoryTheory.ObjectProperty.IsConservativeFamilyOfPoints.jointlyReflectEpimorphisms, Mathlib/CategoryTheory/Sites/Point/Conservative.lean:94-98. It gives joint reflection of epimorphisms assuming a conservative family of site points and coefficient-category hypotheses. Instantiation still requires the etale-point and module-sheaf identifications, and the forward preservation implication.",
+   "date": "2026-10-16",
+   "verdict": "related general tool, not a one-line specialization of the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -67,5 +163,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-global-generated-stalkwise",
+  "worker": "stage1",
+  "summary": "Repaired returned delivery on the current DAG: removed the stale unit realization from the sandbox; reread every cited statement and its source; expanded the cokernel proof into three steps, citing the existing faithful exact coefficient-forgetting theorem and epi/zero-cokernel criterion rather than applying abelian-stalk results silently to module sheaves. Regenerated verbatim citations and reran genuine Mathlib searches. No new nodes and no statement weakening.",
+  "blueprint": "The single blueprint proof paragraph is realized by steps 1 (evaluation and zero-cokernel criterion), 2 (exact stalks), and 3 (conservative stalks). The chapter and Kunneth unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Its clause (1) supplies the generic exact forgetful functor from module sheaves to abelian sheaves needed to apply the two existing abelian-stalk results; this unit has no replacement for that coefficient comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-777e27298",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-777e27298 (reviewer sub-agent of L); spot-checked: Read all required instructions, the item, cited nodes, blueprint/unit route, and Stacks/Mathlib sources. The module-to-abelian coefficient comparison, cokernel criterion, exact stalk argument, and conservative stalk conclusion are correct with unchanged hypotheses and target. No new nodes, duplicates, cycles, route departures, or statement weakening; edge cases pass. Wrote review.md."
+ }
 }
