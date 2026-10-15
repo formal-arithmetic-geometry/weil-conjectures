@@ -1,6 +1,6 @@
 # Work queue
 
-61 items; claim with `tools/claim.py next <group> [--stage N]`.
+60 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (61)
+## Stage 3: modules to prove (60)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -71,7 +71,6 @@
 | `Sheaf.AlgebraicGeometry.ProEtaleRepresentableEpiLocalLifting` | 9 | 1 | proof |
 | `WeilConjectures.WeilSheaf.GrothendieckLefschetz` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf` | 10 | 1 | proof |
-| `Sheaf.Paper.SiteCoveringMorphismsSameH0Map` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
 Also listed above and claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
