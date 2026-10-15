@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 
 /-! # Transport of matching families to fpqc descent data
 

@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.AlgebraicInverseImageOfUniverses
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
 # Flatness under algebraic inverse image

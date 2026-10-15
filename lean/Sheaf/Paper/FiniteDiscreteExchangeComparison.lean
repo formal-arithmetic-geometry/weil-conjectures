@@ -8,6 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.Paper.ConstantInternalModuleSheafEquivalence
 
 /-! # Finite discrete internal coefficients and etale exchange
 

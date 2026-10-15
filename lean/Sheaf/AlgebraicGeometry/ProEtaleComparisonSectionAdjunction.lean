@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
+import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 
 /-! # The adjunction for the section-valued comparison sheaf
 

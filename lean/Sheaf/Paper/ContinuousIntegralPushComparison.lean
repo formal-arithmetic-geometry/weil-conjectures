@@ -6,6 +6,9 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.Paper.ContinuousIntegralScalarExact
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.Paper.CondensedQcqsPushforwardContinuity
+import Sheaf.Paper.ContinuousIntegralCoefficients
 
 /-! # Integral localization commutes with bounded qcqs derived pushforward -/
 
