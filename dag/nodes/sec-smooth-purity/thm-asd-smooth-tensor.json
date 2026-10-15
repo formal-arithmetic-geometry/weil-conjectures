@@ -20,7 +20,8 @@
   "def-weil-pbc-inverse-image",
   "thm-amb-etale-exceptional-adjoint",
   "def-amb-etale-compact-support",
-  "def-constructible-locally-constant"
+  "def-constructible-locally-constant",
+  "def-kun-projection-formula-map"
  ],
  "proof": [
   {
@@ -376,5 +377,28 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-7678e8e28 (reviewer sub-agent of L); spot-checked: Read all seven steps, both new nodes, cited statements, and source passages. The unbounded ordinary étale coefficient argument and canonical counit calculations pass. Added def-kun-unbounded-exchange to the new P¹ node’s base-change clause and statement dependencies; corrected JSON and concrete checks are in fixes/ and review.md. No target was weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8e7c6dc68",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all nine statement dependencies, source, canonical constructions, hypotheses, conclusions, universes, edge cases, docstrings, report sections, and verbatim signature. Immutable module compiled cleanly through scompile.py in both forms. No fixes required; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothTensorDuality",
+  "declaration": "AlgebraicGeometry.Etale.smooth_tensor_duality",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smooth_tensor_duality",
+   "AlgebraicGeometry.Etale.smoothTensorCanonicalDerivedBraiding",
+   "AlgebraicGeometry.Etale.smoothTensorDualityMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothTensorDuality.lean",
+  "statement": "theorem smooth_tensor_duality (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) {X S : Scheme.{u}} [IsNoetherian S] (hInvertible : ∀ s : S, IsUnit (N : S.presheaf.stalk s)) (f : X ⟶ S) [IsSeparated f] [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f] : (∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A), Nonempty ((dualizingComplex (ModuleCat.{u + 1} A) f) ⟦-(2 * (d : ℤ))⟧ ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj L) ∧ ∃ cover : Scheme.Cover.{u} Scheme.etalePrecoverage X, ∀ i : cover.I₀, Nonempty (L.over (cover.etalePrecoverageToEtale i) ≅ (constantSheaf (X.smallEtaleTopology.over (cover.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A))) ∧ ∀ K : DerivedCategoryModule A S, IsIso (smoothTensorDualityMap (ModuleCat.{u + 1} A) f (isIso_projectionMap_of_finite A f) K)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
