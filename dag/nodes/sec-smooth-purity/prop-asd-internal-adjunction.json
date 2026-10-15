@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Internal ambient adjunction",
- "statement": "For a compactifiable morphism $f:X\\to S$ between\nNoetherian schemes, and arbitrary complexes $M$ on\n$X$ and $K$ on $S$, there is a canonical isomorphism\n\n$$\nRf_*R\\mathcal Hom_A(M,f^\\times K)\n\\xrightarrow{\\sim}R\\mathcal Hom_A(Rf_!M,K).\n$$\n\nThe notation refers to derived pullback and internal Hom, and ordinary etale compact supports.",
+ "statement": "Let $A$ be a finite commutative ring. For a compactifiable morphism $f:X\\to S$ between\nNoetherian schemes, and arbitrary complexes $M$ on\n$X$ and $K$ on $S$, there is a canonical isomorphism\n\n$$\nRf_*R\\mathcal Hom_A(M,f^\\times K)\n\\xrightarrow{\\sim}R\\mathcal Hom_A(Rf_!M,K).\n$$\n\nThe notation refers to derived pullback and internal Hom, and ordinary etale compact supports.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/prop-asd-internal-adjunction.md",
   "place": "node prop-asd-internal-adjunction, order 1576"
@@ -351,5 +351,51 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-96d2909b1 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, cited node statements, source passages, and unit/chapter route in full. Verified unbounded adjunctions, open/proper projection maps, coefficient categories, counit orientation, and edge cases. No new nodes, duplicates, missing direct citations, or cycle through the item. Accepted generic tool uses are documented in review.md; no repairs needed."
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "ND stage 2",
+  "old_statement": "For a compactifiable morphism $f:X\\to S$ between\nNoetherian schemes, and arbitrary complexes $M$ on\n$X$ and $K$ on $S$, there is a canonical isomorphism\n\n$$\nRf_*R\\mathcal Hom_A(M,f^\\times K)\n\\xrightarrow{\\sim}R\\mathcal Hom_A(Rf_!M,K).\n$$\n\nThe notation refers to derived pullback and internal Hom, and ordinary etale compact supports.",
+  "what": "The coefficient ring A was not introduced. Make explicit the finite commutative coefficient ring of the exceptional-adjoint dependency and the finite-level etale setting of the containing blueprint unit; this is also the coefficient scope of the published canonical internal adjunction. No boundedness restriction is added.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/_section.md",
+   "place": "finite-stage etale coefficient scope; prop-asd-internal-adjunction displayed adjunction, with the finite coefficient scope of thm-amb-etale-exceptional-adjoint"
+  },
+  "citers": [
+   {
+    "id": "prop-coef-integral-dualizing",
+    "holds": true,
+    "note": "Uses the adjunction only at finite coefficient levels A_n before taking the derived limit."
+   },
+   {
+    "id": "lem-weil-delta-proper-pushforward",
+    "holds": true,
+    "note": "Already assumes finite coefficients invertible in the base field."
+   },
+   {
+    "id": "lem-asd-smooth-generic-direct-image",
+    "holds": true,
+    "note": "Applies the adjunction with the finite field F_ell."
+   }
+  ]
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.TensorHom",
+  "declaration": "AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIsoOfFinite",
+  "statement": "noncomputable def derivedHomRightDerivedLowerShriekIsoOfFinite :\n    RHom(X)[ModuleCat.{u + 1} Λ] ⋙\n        (Functor.whiskeringLeft _ _ _).obj R(f)^![ModuleCat.{u + 1} Λ] ⋙\n          (Functor.whiskeringRight _ _ _).obj R((f)_*[ModuleCat.{u + 1} Λ]) ≅\n      (R(f)_![ModuleCat.{u + 1} Λ]).op ⋙ RHom(Y)[ModuleCat.{u + 1} Λ]",
+  "branch": "slopmaster2",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Published source read with scompile.py --source. Surrounding explicit binders are (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]. This is the canonical isomorphism of bifunctors on the entire unbounded ordinary etale ModuleCat-valued derived categories, whose (op M,K) component is precisely the displayed arrow. Restrict the scheme parameters to the node’s Noetherian schemes. Its body specializes derivedHomRightDerivedLowerShriekIso using isIso_projectionMap_of_finite, so the isomorphism is the specified projection-formula/adjunction mate, not an arbitrary choice. Rf_! uses the chosen compactification and Rf^! its right adjoint. The existing interface uses the same ModuleCat encoding as def-weil-pbc-derived-categories and def-kun-derived-tensor; derivedHom is the internal Hom right adjoint to this derived tensor. No new module or duplicate definition is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a803e4294",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable statements, all eight dependencies, source-based correction and all three citers, canonical construction, verbatim signature, universes, edge cases, and maintainer gates. Local side-overlay compilation passed both checks without warnings. No fixes needed or repository mutations performed.",
+  "statement_corrected": true
  }
 }
