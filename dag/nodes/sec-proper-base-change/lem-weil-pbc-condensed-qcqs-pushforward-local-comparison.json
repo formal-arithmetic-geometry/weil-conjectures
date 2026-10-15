@@ -1,0 +1,183 @@
+{
+ "id": "lem-weil-pbc-condensed-qcqs-pushforward-local-comparison",
+ "kind": "statement",
+ "title": "Sectionwise condensed pushforward continuity",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+   "place": "Proof steps 1-5, ending with the comparison on one affine weakly contractible target object",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "Let Λ be a condensed commutative ring, let f : X → Y be a quasi-compact and quasi-separated morphism of schemes, and let D be a filtered diagram of cochain complexes of internal Λ_X-module sheaves on the pro-etale site of X. Assume an integer a satisfies H^n(D_i) = 0 for every i and every n < a. Put E_i = τ_{≥a} D_i and let E be their termwise colimit. For every integer q and every affine pro-etale Y-object V whose evaluation on set-valued sheaves takes epimorphisms to surjections, the component at V of the underlying abelian-sheaf map colim_i H^q(Rf_* QD_i) → H^q(Rf_* QE) is an isomorphism of abelian groups. Here Q is localization to the derived category, and the map is the universal colimit map with legs obtained by applying H^q Rf_* Q to D_i → E_i → E. The conclusion concerns one evaluation of this comparison.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-category-colimit",
+  "def-pc-cochain-complex-modules",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $E_i=\\tau_{\\geq a}K_i$ and $E=\\varinjlim_i E_i$, termwise in module sheaves. These complexes vanish below $a$. The endpoint term is $\\operatorname{coker}(d^{a-1})$, so its degree-$a$ cycles are $\\ker(d^a)/\\operatorname{im}(d^{a-1})$; above $a$ the cohomology calculation is unchanged. The natural maps $K_i\\to E_i$ induce isomorphisms on all cohomology because $H^r(K_i)=0$ for $r<a$. Exact filtered colimits give $H^r(E)=\\varinjlim_i H^r(E_i)$: apply exactness to the kernel/image sequences defining cycles, boundaries and their quotient. The same calculation shows that a natural transformation of diagrams which is a quasi-isomorphism at every stage induces a quasi-isomorphism of their termwise colimits. Thus it suffices to prove the comparison for the strict diagram $E_i$. No functorial bounded-below injective replacement of the entire diagram is assumed.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  },
+  {
+   "text": "Fix the given affine weakly contractible target object V. Its inverse image W under base change along f is quasi-compact and quasi-separated: these properties of f are stable under base change, and an affine scheme is qcqs. No new target covering family is chosen for this local statement.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  },
+  {
+   "text": "For each qcqs object $W$ of $X_{\\mathrm{proet}}$, choose $U_\\bullet\\to W$ with affine weakly contractible terms. The hypercover computation identifies $R\\Gamma(W,QE_i)$ and $R\\Gamma(W,QE)$ naturally with the total complexes having terms $E_i^t(U_p)$ and $E^t(U_p)$. The evaluation lemma gives $E^t(U_p)=\\varinjlim_i E_i^t(U_p)$. In total degree $r$ only $0\\leq p\\leq r-a$, $t=r-p$, occur. Exchanging this finite direct sum with the colimit gives an isomorphism of complexes $\\varinjlim_i\\operatorname{Tot}(E_i(U_\\bullet))\\cong\\operatorname{Tot}(E(U_\\bullet))$. On the $(p,t)$ summand the differentials on both sides are $\\sum_j(-1)^j d_j^*+(-1)^p d_E$, so these degreewise identifications commute with differentials and with the original cocone legs. For internal module objects, construct the section rings and their module actions from the monoid object and transport the ringed-module hypercover comparison along the equivalence with sectionwise module sheaves; the underlying abelian sections and maps are unchanged.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  },
+  {
+   "text": "Filtered colimits of $\\Lambda_X(W)$-modules are exact. Applying this to cycles, boundaries and their quotient in the total complexes of step 3 gives $\\varinjlim_i H^q(R\\Gamma(W,QE_i))\\cong H^q(R\\Gamma(W,QE))$ for every $q$. These are the canonical maps: the hypercover isomorphisms are natural in the chain maps $E_i\\to E$, and the complex isomorphism of step 3 has exactly their colimit cocone legs. This proves the needed derived evaluation comparison without putting that comparison into a new node.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  },
+  {
+   "text": "For a test object $V$ from step 2, exact evaluation at $V$ commutes with the kernels, images and cokernels defining cohomology sheaves. Choose a bounded-below injective resolution $E_i\\to J_i$ and $E\\to J$. These are K-injective, so $Rf_*QE_i$ is represented by $f_*J_i$ and $Rf_*QE$ by $f_*J$. The defining pushforward formula gives $(f_*J_i)(V)=J_i(W)$ and $(f_*J)(V)=J(W)$, where $W=X\\times_Y V$. Hence $H^q(Rf_*QE_i)(V)=H^q(R\\Gamma(W,QE_i))$ and the corresponding equality holds for $E$. These equalities are natural in derived morphisms: compute a morphism into the K-injective resolution by a chain map and apply the same section formula; homotopic maps give the same cohomology map. The evaluation lemma also identifies $(\\varinjlim_i H^q(Rf_*QE_i))(V)$ with $\\varinjlim_i H^q(Rf_*QE_i)(V)$. Step 4 therefore makes the specified pushforward comparison an isomorphism on every test object.",
+   "uses": [
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+    "lem-sc-bounded-below-injective-resolution",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), its proof by w-contractible affine hypercovers, and the first paragraph of the proof explaining derived global sections; translated to strict bounded-below diagrams and their termwise sheaf colimits."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-scheme-conventions",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+  "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), proof by w-contractible affine hypercovers"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "At an affine weakly contractible proetale target object, cohomology of derived direct image of internal condensed modules commutes with uniformly bounded below filtered colimits",
+   "results": "Eight condensed-module and sheaf-construction results; none is the required derived sectionwise comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"colimit\", \"IsIso\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "condensed.*local.*comparison|weaklyContractible.*continuity",
+   "results": "No Mathlib hits. Searches of both project roots found the original continuity statement and ordinary ringed-module hypercover results, but no internal-module sectionwise comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward evaluated at an affine weakly contractible proetale object commutes with uniformly bounded below filtered colimits of condensed module sheaves",
+   "results": "Service unavailable: Internal Server Error; the other search kinds and direct source rg were used.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardContinuity",
+  "date": "2026-10-16",
+  "group": "D4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQcqsPushforwardLocalComparison",
+  "file": "lean/Sheaf/Paper/CondensedQcqsPushforwardLocalComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_qcqs_pushforward_local_comparison",
+  "statement": "theorem condensed_qcqs_pushforward_local_comparison\n    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]\n    (D : I ⥤ CochainComplex\n      (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})\n        (condensedRingObj Λ X)) ℤ)\n    (a : ℤ) (ha : ∀ (i : I) (n : ℤ), n < a → IsZero ((D.obj i).homology n))\n    (q : ℤ) (V : Y.ProEt) (hV : IsAffine V.left)\n    (hweak : ∀ (F G : Sheaf (Scheme.ProEt.topology Y) (Type (u + 1))) (g : F ⟶ G),\n      Epi g → Function.Surjective (g.hom.app (op V))) :\n    IsIso (((Mod.forget (condensedRingObj Λ Y)).map\n      (colimit.desc\n        (D ⋙ (DerivedCategory.Q ⋙ (CondensedRing.lowerStar Λ f).rightDerivedFunctor ⋙\n          DerivedCategory.homologyFunctor _ q))\n        ((DerivedCategory.Q ⋙ (CondensedRing.lowerStar Λ f).rightDerivedFunctor ⋙\n          DerivedCategory.homologyFunctor _ q).mapCocone\n          ((Cocone.precompose (Functor.whiskerLeft D\n            ((ComplexShape.embeddingUpIntGE a).πTruncGENatTrans _))).obj\n              (colimit.cocone\n                (D ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor _)))))).hom.app\n                  (op V))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261015T212900-L-2064267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261015T212900-L-2064267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

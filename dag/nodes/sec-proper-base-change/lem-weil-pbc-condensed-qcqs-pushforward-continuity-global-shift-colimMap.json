@@ -12,20 +12,22 @@
  },
  "proof": [
   {
-   "text": "Use the bounded-below hypercover calculation, reindexing by the integral shift or applying homology to the representative leg equation. Exact filtered colimits identify cycles and boundaries, and the canonical comparison is an isomorphism.",
+   "text": "Use the shift commutation of Q and the right derived functor from [lem-pc-right-derived-functor-triangulated], followed by the standard homology shiftIso, to identify shiftFunctor s ⋙ Q ⋙ RF ⋙ H^q with Q ⋙ RF ⋙ H^(s+q). The functor naturality of the canonical continuity comparison conjugates its map by this natural isomorphism. Apply the corresponding unshifted continuity theorem of [lem-weil-pbc-condensed-qcqs-pushforward-continuity] at s+q. Its isomorphism makes the image of the continuity cocone a colimit; IsFiltered.isConnected and isIso_colimMap_ι give precisely the assertion about its legs.",
    "uses": [
-    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-pc-right-derived-functor-triangulated"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-right-derived-functor-triangulated",
   "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Lemma 5.3(1)"
+  "place": "Lemma 5.3(1), formal comparison compatibility; D4 uses generic shift and exact-colimit APIs"
  },
  "mathlib_searches": [
   {
@@ -93,10 +95,10 @@
   "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261015T190717-L-966474",
-  "kind": "proof",
+  "landing": "20261015T212900-L-2064267",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

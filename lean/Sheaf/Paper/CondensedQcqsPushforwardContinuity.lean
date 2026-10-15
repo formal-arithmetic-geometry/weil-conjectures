@@ -8,18 +8,14 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.AlgebraicGeometry.ProEtaleOperations
-import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
 import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
-import Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercover
-import Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.Algebra.Category.ModuleCat.AB
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
+import Sheaf.Paper.CondensedQcqsPushforwardLocalComparison
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.Algebra.Category.Grp.EpiMono
+import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-!
 # Continuity of ordinary condensed-coefficient pushforward
@@ -133,6 +129,47 @@ noncomputable abbrev condensedModuleSections
       (evaluation X.ProEtᵒᵖ AddCommGrpCat.{u + 1}).obj
         (Opposite.op (Scheme.ProEt.mk (𝟙 X)))
 
+private theorem isIso_of_weaklyContractible_sections (X : Scheme.{u})
+    {M N : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}} (f : M ⟶ N)
+    (hf : ∀ (V : X.ProEt), IsAffine V.left →
+      (∀ (F G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) (g : F ⟶ G),
+        Epi g → Function.Surjective (g.hom.app (Opposite.op V))) →
+      IsIso (f.hom.app (Opposite.op V))) : IsIso f := by
+  have hinj (V : X.ProEtᵒᵖ) : Function.Injective (f.hom.app V) := by
+    intro x y hxy
+    obtain ⟨I, W, g, hcov, haff, hweak⟩ :=
+      Scheme.ProEt.exists_affine_weaklyContractible_covering_family X V.unop
+    have hcover : Sieve.ofArrows W g ∈ Scheme.ProEt.topology X V.unop :=
+      Precoverage.generate_mem_toGrothendieck hcov
+    apply Sheaf.isSeparated M V.unop _ hcover x y
+    rintro Z h ⟨_, b, _, ⟨i⟩, rfl⟩
+    have := hf (W i) (haff i) (hweak i)
+    have hi : Function.Injective (f.hom.app (Opposite.op (W i))) :=
+      (AddCommGrpCat.mono_iff_injective _).1 inferInstance
+    have heq : M.obj.map (g i).op x = M.obj.map (g i).op y := by
+      apply hi
+      rw [f.hom.naturality_apply, f.hom.naturality_apply, hxy]
+    rw [op_comp, Functor.map_comp, ConcreteCategory.comp_apply,
+      ConcreteCategory.comp_apply, heq]
+  have hsurj : Presheaf.IsLocallySurjective (Scheme.ProEt.topology X) f.hom := by
+    constructor
+    intro V x
+    obtain ⟨I, W, g, hcov, haff, hweak⟩ :=
+      Scheme.ProEt.exists_affine_weaklyContractible_covering_family X V
+    apply (Scheme.ProEt.topology X).superset_covering _
+      (Precoverage.generate_mem_toGrothendieck hcov)
+    rintro Z h ⟨_, b, _, ⟨i⟩, rfl⟩
+    have := hf (W i) (haff i) (hweak i)
+    have hs : Function.Surjective (f.hom.app (Opposite.op (W i))) :=
+      (AddCommGrpCat.epi_iff_surjective _).1 inferInstance
+    obtain ⟨y, hy⟩ := hs (N.obj.map (g i).op x)
+    refine ⟨M.obj.map b.op y, ?_⟩
+    rw [f.hom.naturality_apply, hy, op_comp, Functor.map_comp]
+    rfl
+  apply (Sheaf.isLocallyBijective_iff_isIso f).1
+  exact ⟨(Sheaf.isLocallyInjective_iff_injective f).2 hinj, hsurj⟩
+
+
 set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for the internal module category needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
@@ -173,7 +210,14 @@ theorem condensed_qcqs_pushforward_continuity
     IsIso (condensedContinuityComparison D a
       (DerivedCategory.Q ⋙ (CondensedRing.lowerStar Λ f).rightDerivedFunctor ⋙
         DerivedCategory.homologyFunctor _ q)) := by
-  sorry
+  have : IsIso ((Mod.forget (condensedRingObj Λ Y)).map
+      (condensedContinuityComparison D a
+        (DerivedCategory.Q ⋙ (CondensedRing.lowerStar Λ f).rightDerivedFunctor ⋙
+          DerivedCategory.homologyFunctor _ q))) := by
+    apply isIso_of_weaklyContractible_sections Y
+    intro V hV hweak
+    exact condensed_qcqs_pushforward_local_comparison Λ f D a ha q V hV hweak
+  exact isIso_of_reflects_iso _ (Mod.forget (condensedRingObj Λ Y))
 
 set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for the internal module category needs a larger search budget.
@@ -203,6 +247,39 @@ theorem condensed_qcqs_globalSections_continuity
         DerivedCategory.homologyFunctor _ q)) := by
   sorry
 
+private theorem condensedContinuityComparison_isIso_of_iso
+    {A : Type v} [Category.{w} A] [Abelian A]
+    {B : Type u} [Category.{z} B]
+    {I : Type x} [Category.{y} I] [IsConnected I]
+    (D : I ⥤ CochainComplex A ℤ) (a : ℤ)
+    (T S : CochainComplex A ℤ ⥤ B) (e : T ≅ S)
+    [HasColimit (D ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor A)]
+    [HasColimit (D ⋙ T)] [HasColimit (D ⋙ S)]
+    (h : IsIso (condensedContinuityComparison D a S)) :
+    IsIso (colimMap ((T.mapCocone (condensedContinuityCocone D a)).ι)) := by
+  have := h
+  have hf := condensedContinuityComparison_functor_naturality D a T S e.hom
+  have : IsIso (condensedContinuityComparison D a T ≫
+      e.hom.app (condensedContinuityCocone D a).pt) := by
+    rw [← hf]
+    infer_instance
+  have ht : IsIso (condensedContinuityComparison D a T) :=
+    IsIso.of_isIso_comp_right _ (e.hom.app (condensedContinuityCocone D a).pt)
+  have hc : IsColimit (T.mapCocone (condensedContinuityCocone D a)) :=
+    IsColimit.ofPointIso (colimit.isColimit (D ⋙ T)) (i := ht)
+  exact hc.isIso_colimMap_ι
+
+private noncomputable def condensedContinuityShiftIso
+    {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{w} A]
+    {B : Type u} [Category.{z} B] [Abelian B] [HasDerivedCategory.{z} B]
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] (s q : ℤ) :
+    shiftFunctor _ s ⋙ (DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor B q) ≅
+      DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor B (s + q) :=
+  Functor.isoWhiskerRight ((DerivedCategory.Q ⋙ F).commShiftIso s)
+      (DerivedCategory.homologyFunctor B q) ≪≫
+    Functor.isoWhiskerLeft (DerivedCategory.Q ⋙ F)
+      ((DerivedCategory.homologyFunctor B 0).shiftIso s q (s + q) rfl)
+
 set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for the internal module category needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
@@ -212,10 +289,12 @@ Q(colim τ≥a D). Under the standard shift comparisons its universal colimit ma
 the shifted original comparison, with lower bound a-s and cohomology degree q+s.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(1)
 (blueprint: lem-weil-pbc-condensed-qcqs-pushforward-continuity-shift-colimMap).
-Proof: shift the bounded-below hypercover calculation. Reindex total degree r by r+s
-and use the signed shift differential. The comparison on every colimit leg agrees
-with the original one under the canonical derived shift identifications. The
-universal property determines the comparison uniquely. -/
+Proof: commutation of Q and the right derived functor with shifts, followed by
+the homology shift isomorphism, identifies the shifted output functor with the
+unshifted output functor in degree s+q. Naturality of the continuity comparison
+transports invertibility from the unshifted theorem. Its mapped cocone is therefore
+colimiting. Since the filtered indexing category is connected, colimMap of the
+cocone legs is an isomorphism. -/
 theorem condensed_qcqs_pushforward_continuity_shift_colimMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -229,7 +308,10 @@ theorem condensed_qcqs_pushforward_continuity_shift_colimMap
     IsIso (colimMap (((DerivedCategory.Q ⋙ (CondensedRing.lowerStar Λ f).rightDerivedFunctor ⋙
       DerivedCategory.homologyFunctor _ q).mapCocone
         ((shiftFunctor _ s).mapCocone (condensedContinuityCocone D a))).ι)) := by
-  sorry
+  let _ : IsConnected I := IsFiltered.isConnected I
+  exact condensedContinuityComparison_isIso_of_iso D a _ _
+    (condensedContinuityShiftIso (CondensedRing.lowerStar Λ f).rightDerivedFunctor s q)
+    (condensed_qcqs_pushforward_continuity Λ f D a ha (s + q))
 
 set_option synthInstance.maxHeartbeats 100000 in
 -- Needed for colimit inference in the internal module category.
@@ -260,10 +342,12 @@ Q(colim τ≥a D). Under the standard shift comparisons its universal colimit ma
 the shifted original comparison, with lower bound a-s and cohomology degree q+s.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(1)
 (blueprint: lem-weil-pbc-condensed-qcqs-pushforward-continuity-global-shift-colimMap).
-Proof: shift the bounded-below hypercover calculation. Reindex total degree r by r+s
-and use the signed shift differential. The comparison on every colimit leg agrees
-with the original one under the canonical derived shift identifications. The
-universal property determines the comparison uniquely. -/
+Proof: commutation of Q and the right derived functor with shifts, followed by
+the homology shift isomorphism, identifies the shifted output functor with the
+unshifted output functor in degree s+q. Naturality of the continuity comparison
+transports invertibility from the unshifted theorem. Its mapped cocone is therefore
+colimiting. Since the filtered indexing category is connected, colimMap of the
+cocone legs is an isomorphism. -/
 theorem condensed_qcqs_globalSections_continuity_shift_colimMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -277,7 +361,10 @@ theorem condensed_qcqs_globalSections_continuity_shift_colimMap
     IsIso (colimMap (((DerivedCategory.Q ⋙ (condensedModuleSections Λ X).rightDerivedFunctor ⋙
       DerivedCategory.homologyFunctor _ q).mapCocone
         ((shiftFunctor _ s).mapCocone (condensedContinuityCocone D a))).ι)) := by
-  sorry
+  let _ : IsConnected I := IsFiltered.isConnected I
+  exact condensedContinuityComparison_isIso_of_iso D a _ _
+    (condensedContinuityShiftIso (condensedModuleSections Λ X).rightDerivedFunctor s q)
+    (condensed_qcqs_globalSections_continuity Λ X D a ha (s + q))
 
 set_option synthInstance.maxHeartbeats 100000 in
 -- Needed for colimit inference in the internal module category.
@@ -307,8 +394,10 @@ comparison step.
 Proof: apply the homology functor to the leg equation, transport along the componentwise
 isomorphism `e`, and identify the target using `ε`. Naturality and the colimit universal
 property identify the resulting map with the canonical continuity comparison, which is an
-isomorphism by the hypothesis `h`. This is the strictly smaller homology-level statement
-used to prove the representative quasi-isomorphism below.
+isomorphism by the hypothesis `h`. Exact colimits commute with complex homology;
+cancel this invertible homology-colimit comparison and the isomorphism induced by `e`
+to obtain the asserted homology map. This is the homology-level statement used to prove
+the representative quasi-isomorphism below.
 -/
 theorem condensedContinuityComparison_representatives_homology
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{w} A]
@@ -330,7 +419,43 @@ theorem condensedContinuityComparison_representatives_homology
     (hι : ∀ i : I, e.hom.app i ≫ DerivedCategory.Q.map (ι.app i) =
       F.map (DerivedCategory.Q.map ((condensedContinuityCocone D a).ι.app i)) ≫ ε.hom) :
     ∀ q : ℤ, IsIso (HomologicalComplex.homologyMap (colimit.desc P (Cocone.mk L ι)) q) := by
-  sorry
+  intro q
+  let H := HomologicalComplex.homologyFunctor B (ComplexShape.up ℤ) q
+  let H' := DerivedCategory.homologyFunctor B q
+  let e' : D ⋙ (DerivedCategory.Q ⋙ F ⋙ H') ≅ P ⋙ H :=
+    Functor.isoWhiskerRight e H' ≪≫
+      Functor.isoWhiskerLeft P (DerivedCategory.homologyFunctorFactors B q)
+  let ε' : H'.obj (F.obj (DerivedCategory.Q.obj (condensedContinuityCocone D a).pt)) ≅
+      H.obj L :=
+    H'.mapIso ε ≪≫ (DerivedCategory.homologyFunctorFactors B q).app L
+  let k := colimit.desc P (Cocone.mk L ι)
+  have hk : colimMap e'.hom ≫ colimit.post P H ≫ H.map k =
+      condensedContinuityComparison D a (DerivedCategory.Q ⋙ F ⋙ H') ≫ ε'.hom := by
+    apply colimit.hom_ext
+    intro i
+    simp only [ι_colimMap_assoc, colimit.ι_post_assoc, ← H.map_comp,
+      condensedContinuityComparison, colimit.ι_desc_assoc]
+    rw [show colimit.ι P i ≫ k = ι.app i from colimit.ι_desc _ i]
+    dsimp only [e', ε', Iso.trans_hom, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+      NatTrans.comp_app, Functor.mapIso_hom, H, H']
+    simp only [Category.assoc]
+    change H'.map (e.hom.app i) ≫
+      (DerivedCategory.homologyFunctorFactors B q).hom.app (P.obj i) ≫
+        HomologicalComplex.homologyMap (ι.app i) q =
+      H'.map (F.map (DerivedCategory.Q.map
+        ((condensedContinuityCocone D a).ι.app i))) ≫ H'.map ε.hom ≫
+          (DerivedCategory.homologyFunctorFactors B q).hom.app L
+    rw [← DerivedCategory.homologyFunctorFactors_hom_naturality,
+      ← Category.assoc, ← Functor.map_comp, hι i, Functor.map_comp, Category.assoc]
+    rfl
+  have := h q
+  have : IsIso (colimMap e'.hom ≫ colimit.post P H ≫ H.map k) := by
+    rw [hk]
+    infer_instance
+  have : IsIso (colimit.post P H ≫ H.map k) :=
+    IsIso.of_isIso_comp_left (colimMap e'.hom) _
+  exact IsIso.of_isIso_comp_left (colimit.post P H) (H.map k)
 
 /-- The representative form of continuity, independent of the choice of functorial
 quasi-isomorphic representatives. The equation on each leg requires the specified

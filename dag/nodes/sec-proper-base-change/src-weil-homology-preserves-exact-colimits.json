@@ -1,0 +1,101 @@
+{
+ "id": "src-weil-homology-preserves-exact-colimits",
+ "kind": "statement",
+ "title": "Homology preserves exact colimits of complexes",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity-representatives-homology",
+   "place": "Representative comparison: homology of the termwise colimit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "For an abelian category C, a category I, and a complex shape c on an index type ι, if C has colimits of shape I and those colimits are exact, then for every i : ι, HomologicalComplex.homologyFunctor C c i preserves colimits of shape I. This holds without a filteredness assumption.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/DegreewiseLimits.lean",
+  "place": "lines 76-89 and 142-144, exact-colimit homology instances"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The already-proved source instance identifies complex homology with short-complex homology. In the functor category homology is computed pointwise. Exactness of colim preserves the short-complex homology data and its kernel/cokernel maps. Transport the resulting colimit comparison along homologyFunctorIso. This node attaches the existing source proof and adds no Lean obligation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/DegreewiseLimits.lean",
+  "place": "lines 142-144, homology preserves exact colimits"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The homology functor on complexes preserves colimits of any shape whose colimits are exact in an abelian category",
+   "results": "Eight results include colim.exact_mapShortComplex and the AddCommGrpCat colim PreservesHomology instance; the exact general complex result is in the cited source library.",
+   "date": "2026-10-16",
+   "verdict": "source declaration matched"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"PreservesColimitsOfShape\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimitsOfShape.*homologyFunctor",
+   "results": "No Mathlib hits. Direct rg of the source library found the instance at DegreewiseLimits.lean:142. A local #synth verified its declaration name.",
+   "date": "2026-10-16",
+   "verdict": "source declaration matched"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homology functor on complexes preserves colimits whose colimit functor is exact in an abelian category",
+   "results": "Service unavailable: Internal Server Error; the other search kinds and direct source rg were used.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardContinuity",
+  "date": "2026-10-16",
+  "group": "D4"
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits",
+  "declaration": "HomologicalComplex.instPreservesColimitsOfShapeHomologyFunctorOfHasExactColimitsOfShape_weilConjectures",
+  "statement": "instance [HasColimitsOfShape J C] [HasExactColimitsOfShape J C] (i : ι) :\n    PreservesColimitsOfShape J (homologyFunctor C c i)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261015T212900-L-2064267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261015T212900-L-2064267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
