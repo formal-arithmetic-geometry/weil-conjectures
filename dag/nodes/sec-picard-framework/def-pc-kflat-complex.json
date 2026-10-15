@@ -143,10 +143,10 @@
   "file": "lean/Sheaf/Algebra/Homology/KFlat.lean",
   "statement": "def IsKFlat (K : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) : Prop",
   "branch": "newtargets-dag",
-  "by": "NK",
+  "by": "NC",
   "date": "2026-10-15",
   "existing": false,
-  "note": "The published independent-coefficient K-flat interface is required for the pro-etale site and coefficient universe max u (t+1). The compiler still resolves an older live artifact with coefficient universe max(site-object,site-morphism), causing the recorded general derived-change-of-rings dependency to fail before reaching the consumer. Supply the recorded generalized module in the sibling overlay; retain all definitions and source statements unchanged.",
+  "note": "H3 supporting repair under §1(B): the old coefficient universe was exactly max u v, so it could not express one ambient coefficient universe for independently sized sites. Independent coefficient w and EssentiallySmall.{w} C now express relative smallness without any universe equality. The acyclic-total-tensor and quasi-isomorphism-resolution definitions are unchanged. Named sheafification, local-bijection, tensor-localization and tensor-zero helper theorems have full source/proof docstrings and postponed proofs; no private definition or hollow data is introduced. This delivery retains that published generalized mathematical interface corrects the tensor-zero proof docstring to use preservation of the zero object rather than infer preservation of zero morphisms from a bare left adjoint, and supplies its module in the sibling overlay because the compiler still resolves the older live artifact otherwise. NC supplies this exact published generalized interface in the sibling overlay, because the compiler resolves the older live KFlat artifact otherwise; no notion is changed. The IsKFlat docstring now explicitly documents independent site and coefficient universes and relative smallness; every declaration signature and body is unchanged.",
   "declarations": [
    "CochainComplex.IsKFlat",
    "CochainComplex.IsKFlatResolution",
@@ -160,10 +160,10 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-a59b5e062",
-  "group": "NK",
+  "reviewer": "NT-stage2-Codex-56d06e0b5",
+  "group": "NC",
   "result": "pass",
-  "note": "Wrote review.md. Checked all statement dependencies, source correspondence, canonical constructions, unit normalization, universes, edge cases, docstrings, and signatures. All three immutable Lean modules compile cleanly through scompile.py. No fixes needed; branch head unchanged."
+  "note": "Verified clauses, dependencies, canonical maps, universes, edge cases, docstrings and verbatim signatures. Both files passed scompile.py. Only an inherited Stacks filename typo was observed; no delivery errors found."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

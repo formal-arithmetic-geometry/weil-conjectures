@@ -21,7 +21,8 @@
   "def-weil-integral-derived-restriction-of-scalars",
   "def-pc-kflat-complex",
   "def-pur-sheaf-tensor-product",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-derived-reduction"
  ],
  "proof": [
   {
@@ -223,5 +224,42 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-65c5abe19 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources: all four steps prove the augmented tower equations correctly. Restored the permitted K-flat replacement tool declaration in split_report. Documented the inherited source-path typo and its maintainer-owned-field limitation. No new nodes, cycles, weakened targets, or coefficient-category identifications. Concrete checks and repairs are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-56d06e0b5",
+  "group": "NC",
+  "result": "pass",
+  "note": "Verified clauses, dependencies, canonical maps, universes, edge cases, docstrings and verbatim signatures. Both files passed scompile.py. Only an inherited Stacks filename typo was observed; no delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralReductionTowerWellDefined",
+  "declaration": "WeilConjectures.integralReductionTowerWellDefined",
+  "declarations": [
+   "WeilConjectures.integralTowerRestrictionAdditive",
+   "WeilConjectures.integralTowerRestrictionLimits",
+   "WeilConjectures.integralTowerRestrictionColimits",
+   "WeilConjectures.integralTowerFiniteComplex",
+   "WeilConjectures.integralTowerComplex",
+   "WeilConjectures.integralTowerTensorSection",
+   "WeilConjectures.integralTowerResolutionIso",
+   "WeilConjectures.integralTowerFiniteComparison",
+   "WeilConjectures.integralTowerComparison",
+   "WeilConjectures.integralTowerUnitCondition",
+   "WeilConjectures.integralTowerTransitionCondition",
+   "WeilConjectures.integralTowerMaps_existUnique",
+   "WeilConjectures.integralTowerUnit",
+   "WeilConjectures.integralTowerTransition",
+   "WeilConjectures.integralTowerAugmentationIso",
+   "WeilConjectures.integralReductionTowerWellDefined"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralReductionTowerWellDefined.lean",
+  "statement": "theorem integralReductionTowerWellDefined {P P' K : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ} (q : P ⟶ K) (q' : P' ⟶ K) (hq : CochainComplex.IsKFlatResolution (J := AlgebraicGeometry.Scheme.ProEt.topology Y) (R := completedIntegralCommRingSheaf l E Y D hl) q) (hq' : CochainComplex.IsKFlatResolution (J := AlgebraicGeometry.Scheme.ProEt.topology Y) (R := completedIntegralCommRingSheaf l E Y D hl) q') : (∀ n : ℕ, (integralTowerAugmentationIso l E Y D hl q hq).inv ≫ DerivedCategory.Q.map (integralTowerUnit l E Y D hl P n) ≫ (integralTowerComparison l E Y D hl n q q' hq hq').hom = (integralTowerAugmentationIso l E Y D hl q' hq').inv ≫ DerivedCategory.Q.map (integralTowerUnit l E Y D hl P' n)) ∧ (∀ n : ℕ, DerivedCategory.Q.map (integralTowerTransition l E Y D hl P n) ≫ (integralTowerComparison l E Y D hl n q q' hq hq').hom = (integralTowerComparison l E Y D hl (n + 1) q q' hq hq').hom ≫ DerivedCategory.Q.map (integralTowerTransition l E Y D hl P' n))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Uses the landed integral-derived-reduction definition and its canonical resolution isomorphisms. The unique chain-level unit and transition maps are specified by sheafified pure tensors; choosing them from a unique-existence theorem determines the maps up to equality, not an arbitrary choice. Restriction comparisons use mapDerivedCategoryFactors."
  }
 }
