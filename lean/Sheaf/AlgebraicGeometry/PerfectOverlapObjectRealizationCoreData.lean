@@ -1076,6 +1076,24 @@ constructing and comparing the three overlap diagram components. -/
       Functor.isoWhiskerRight (openPullbackRestrictionIso g T W hT) _ ≪≫
       Functor.associator _ _ _
 
+/-- Component equation for the named restriction/pullback comparison.
+Source: Stacks Project, Tags 08DW and 08BV. The two associators have identity
+components, so the comparison first returns from the over-site and then
+applies the cartesian open-pullback comparison under the inverse site functor. -/
+theorem perfectOverlapRestrictionBeta_hom_app
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (W : Y.Opens) (T : X.Opens)
+    (hT : T ≤ g ⁻¹ᵁ W) (E : schemeDerivedCategory Y) :
+    (perfectOverlapRestrictionBeta g W T hT).hom.app E =
+      (openSiteReturnIso X T).inv.app ((derivedPullback g).obj E) ≫
+        (overlapSiteInverse T).mapDerivedCategory.map
+          ((openPullbackRestrictionIso g T W hT).hom.app E) := by
+  unfold perfectOverlapRestrictionBeta
+  simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id]
+
 /-- Construct a simultaneous diagram from restricted pullbacks and site equivalences.
 Open restriction is a localization, so its fully faithful precomposition functor lifts
 both overlap comparisons and their coherence from the global restriction diagram. -/
