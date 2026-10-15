@@ -276,6 +276,78 @@ theorem perfectOverlapCartesianComponentOver
       _ = m ≫ eK.inv ≫ (f ⁻¹ᵁ W).ι ≫ pK := by
         simpa only [Category.assoc] using congrArg (fun z ↦ m ≫ z) hKsnd.symm
 
+/-- The two canonical overlap object comparisons packaged without expanding
+the stagewise transport record. The branch equations are exactly the
+comparison, transported local identification, and site restriction maps. -/
+noncomputable def perfectOverlapPsiFromDiagram
+    {C D A B W P Q T : Type*}
+    [Category* C] [Category* D] [Category* A] [Category* B]
+    [Category* W] [Category* P] [Category* Q] [Category* T]
+    {L : C ⥤ D} {TU : C ⥤ A} {TV : C ⥤ B} {TW : C ⥤ W}
+    {SU : A ⥤ W} {SV : B ⥤ W}
+    {RU : D ⥤ P} {RV : D ⥤ Q} {RW : D ⥤ T}
+    {SP : P ⥤ T} {SQ : Q ⥤ T}
+    {αU : TU ⋙ SU ≅ TW} {αV : TV ⋙ SV ≅ TW}
+    {τU : RU ⋙ SP ≅ RW} {τV : RV ⋙ SQ ≅ RW}
+    (d : TwoOpenComparisonDiagram L TU TV TW SU SV RU RV RW SP SQ
+      αU αV τU τV)
+    (A' : A) (B' : B) (E : D)
+    (θU : d.HU.obj A' ≅ RU.obj E)
+    (θV : d.HV.obj B' ≅ RV.obj E)
+    (b : Bool) :
+    d.HW.obj (if b then SV.obj B' else SU.obj A') ≅ RW.obj E :=
+  match b with
+  | false => d.γU.symm.app A' ≪≫ SP.mapIso θU ≪≫ τU.app E
+  | true => d.γV.symm.app B' ≪≫ SQ.mapIso θV ≪≫ τV.app E
+
+/-- The first component of the canonical overlap object comparison.
+Source: Stacks Project, Tags 08DW and 0D5S. On the first open, invert the
+intersection comparison `γU`, map the transported local identification through
+the smaller-open restriction, then use `τU` to identify the two site restrictions.
+This is exactly the false branch of the defining comparison. -/
+@[simp] theorem perfectOverlapPsiFromDiagram_false
+    {C D A B W P Q T : Type*}
+    [Category* C] [Category* D] [Category* A] [Category* B]
+    [Category* W] [Category* P] [Category* Q] [Category* T]
+    {L : C ⥤ D} {TU : C ⥤ A} {TV : C ⥤ B} {TW : C ⥤ W}
+    {SU : A ⥤ W} {SV : B ⥤ W}
+    {RU : D ⥤ P} {RV : D ⥤ Q} {RW : D ⥤ T}
+    {SP : P ⥤ T} {SQ : Q ⥤ T}
+    {αU : TU ⋙ SU ≅ TW} {αV : TV ⋙ SV ≅ TW}
+    {τU : RU ⋙ SP ≅ RW} {τV : RV ⋙ SQ ≅ RW}
+    (d : TwoOpenComparisonDiagram L TU TV TW SU SV RU RV RW SP SQ
+      αU αV τU τV)
+    (A' : A) (B' : B) (E : D)
+    (θU : d.HU.obj A' ≅ RU.obj E)
+    (θV : d.HV.obj B' ≅ RV.obj E) :
+    perfectOverlapPsiFromDiagram d A' B' E θU θV false =
+      d.γU.symm.app A' ≪≫ SP.mapIso θU ≪≫ τU.app E := by
+  rfl
+
+/-- The second component of the canonical overlap object comparison.
+Source: Stacks Project, Tags 08DW and 0D5S. On the second open, invert the
+intersection comparison `γV`, map the transported local identification through
+the smaller-open restriction, then use `τV` to identify the two site restrictions.
+This is exactly the true branch of the defining comparison. -/
+@[simp] theorem perfectOverlapPsiFromDiagram_true
+    {C D A B W P Q T : Type*}
+    [Category* C] [Category* D] [Category* A] [Category* B]
+    [Category* W] [Category* P] [Category* Q] [Category* T]
+    {L : C ⥤ D} {TU : C ⥤ A} {TV : C ⥤ B} {TW : C ⥤ W}
+    {SU : A ⥤ W} {SV : B ⥤ W}
+    {RU : D ⥤ P} {RV : D ⥤ Q} {RW : D ⥤ T}
+    {SP : P ⥤ T} {SQ : Q ⥤ T}
+    {αU : TU ⋙ SU ≅ TW} {αV : TV ⋙ SV ≅ TW}
+    {τU : RU ⋙ SP ≅ RW} {τV : RV ⋙ SQ ≅ RW}
+    (d : TwoOpenComparisonDiagram L TU TV TW SU SV RU RV RW SP SQ
+      αU αV τU τV)
+    (A' : A) (B' : B) (E : D)
+    (θU : d.HU.obj A' ≅ RU.obj E)
+    (θV : d.HV.obj B' ≅ RV.obj E) :
+    perfectOverlapPsiFromDiagram d A' B' E θU θV true =
+      d.γV.symm.app B' ≪≫ SQ.mapIso θV ≪≫ τV.app E := by
+  rfl
+
 /-- Geometric object comparisons and their natural compatibility with apex pullback.
 The transition functors and their fixed conjugation formula are recorded explicitly;
 the Hom pin will be derived from naturality, rather than included as a field.
