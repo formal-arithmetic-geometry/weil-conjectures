@@ -1,6 +1,6 @@
 # Work queue
 
-35 items; claim with `tools/claim.py next <group> [--stage N]`.
+34 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (35)
+## Stage 3: modules to prove (34)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -44,14 +44,12 @@
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonMatchingTransport` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 10 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnitComparison` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
-Also listed above and claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
+Also listed above and claimable: 2 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
 | `Sheaf.Paper.IntegralReductionConservative` | 2 | 1 |
 | `Sheaf.Paper.ContinuousConstructibleIntegralModel` | 3 | 1 |
-| `Sheaf.Paper.FiniteDiscreteExchangeComparison` | 4 | 1 |
