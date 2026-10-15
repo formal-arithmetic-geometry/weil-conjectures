@@ -28,7 +28,7 @@ base-change morphism `ProEtale.CondensedRing.boundedConstructibleLowerShriekBase
 As for the bounded constructible six functors
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), all schemes
 are separated and of finite type over a field `k` of characteristic `p > 0` with `p ≠ ℓ`, and all
-morphisms are morphisms over `Spec k`.
+morphisms are morphisms of `Over (Spec (.of k))`.
 
 ## Main definitions
 
@@ -54,13 +54,11 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-  (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-  [IsSeparated (X ↘ Spec (.of k))]
-  [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
-  [IsSeparated (Y ↘ Spec (.of k))]
-  {f : X ⟶ Y} [f.IsOver (Spec (.of k))]
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {f : X ⟶ Y}
 
 /-- The *independence of the lower shriek from the compactification* for bounded constructible
 `E`-sheaves: for two compactifications `c₁` and `c₂` of `f`, the isomorphism
@@ -68,9 +66,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 The isomorphism is currently `sorry`. -/
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekOfCompactificationIso
-    (c₁ c₂ : Compactification f) :
-    boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ k c₁ ≅
-      boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ k c₂ :=
+    (c₁ c₂ : Compactification f.left) :
+    boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c₁ ≅
+      boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c₂ :=
   sorry
 
 /-- The *independence of the lower shriek from the compactification* for bounded constructible
@@ -79,9 +77,9 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso
 `sorry`. -/
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl
-    (c₁ c₂ : Compactification f) :
-    boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ k c₁ ≅
-      boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ k c₂ :=
+    (c₁ c₂ : Compactification f.left) :
+    boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c₁ ≅
+      boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c₂ :=
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing
