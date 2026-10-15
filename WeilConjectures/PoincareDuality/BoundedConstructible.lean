@@ -29,8 +29,7 @@ comparison maps of `Lf^*`.
 
 ## Implementation notes
 
-The monoidal unit of the subcategory is `⟨𝟙_ _, _⟩`; it is
-`ProEtale.CondensedRing.boundedConstructibleUnit`.
+The monoidal unit of the subcategory is `⟨𝟙_ _, _⟩`, the constant coefficient object `Λ_X`.
 
 -/
 
