@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-wlocal-stalk-isomorphism-retraction-section",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-wlocal-stalk-isomorphism-retraction",
+   "place": "Step 1: projectivity of the extremally disconnected compact target supplies a continuous section.",
+   "via": [
+    "lem-weil-pbc-wlocal-stalk-isomorphism-retraction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Continuous section of a surjection onto an extremally disconnected compact space",
+ "statement": "Let α and β be compact Hausdorff topological spaces, with α extremally disconnected. Every continuous surjection f : β → α admits a continuous section ρ : α → β.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AZ, proof of (3) implies (1), paragraph invoking projectivity of an extremally disconnected compact space"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the projectivity theorem for compact Hausdorff extremally disconnected spaces to the identity map of α and the continuous surjection f. The theorem is universe-polymorphic in the source and target spaces, so it gives a continuous section ρ with f ∘ ρ = id.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AZ, projectivity argument"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AZ, projectivity argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CompactT2.ExtremallyDisconnected.projective",
+   "results": "Mathlib theorem exists; its available compiled specialization is same-universe, while this helper records the universe-polymorphic form used by the target.",
+   "date": "2026-10-15",
+   "verdict": "candidate requires universe-polymorphic transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "ExtremallyDisconnected projective continuous section surjective",
+   "results": "Projectivity theorem found; no direct polymorphic wrapper.",
+   "date": "2026-10-15",
+   "verdict": "candidate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous section surjection extremally disconnected compact Hausdorff different universes",
+   "results": "No direct declaration.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous section of a continuous surjection onto an extremally disconnected compact Hausdorff space",
+   "results": "No direct result; service unavailable. The projectivity theorem is handled by the ULift transport in this helper.",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.WLocalStalkIsomorphismRetraction",
+  "date": "2026-10-15",
+  "group": "F4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.WLocalStalkIsomorphismRetraction",
+  "file": "lean/Sheaf/RingTheory/WLocalStalkIsomorphismRetraction.lean",
+  "declaration": "RingHom.exists_continuous_section_of_surjective",
+  "statement": "theorem exists_continuous_section_of_surjective {α : Type u} {β : Type v} [TopologicalSpace α] [TopologicalSpace β] [CompactSpace α] [T2Space α] [ExtremallyDisconnected α] [CompactSpace β] [T2Space β] (f : β → α) (hf : Continuous f) (hs : Function.Surjective f) : ∃ ρ : α → β, Continuous ρ ∧ ∀ x, f (ρ x) = x",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-31d77",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T161025-L-260241",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-31d77",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T161025-L-260241",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched against packet, node metadata, baseline declarations, compilation, and direct importer Sheaf.RingTheory.WContractibleGeometricCriterion"
+ }
+}
