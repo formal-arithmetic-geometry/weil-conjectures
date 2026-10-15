@@ -26,160 +26,75 @@
  ],
  "proof": [
   {
-   "text": "For any finite-quotient presentation $S=\\varprojlim S_i$ and ring $R$, the pullback maps exhibit $\\operatorname{LC}(S,R)=\\varinjlim R^{S_i}$ as rings. Indeed [lem-weil-pbc-profinite-limit-function-factorization] factors every locally constant function through a stage. Two representatives at different stages can be pulled back to a common stage by cofilteredness; if their pullbacks to $S$ agree, they agree there because its quotient projection is surjective. This proves the colimit universal property, including addition and multiplication. The same assertion holds for the directed system of all finite clopen partitions of $S$: the values of a locally constant function give a finite clopen partition, since compactness makes its image finite. These partitions are a small directed set under refinement. They separate points by [lem-weil-pbc-profinite-clopen-basis] and Hausdorffness; a compatible choice of nonempty partition cells has nonempty intersection by compactness, so $S$ is their topological limit. For $S=\\varnothing$ the unique partition has no cells.",
-   "uses": [
-    "lem-weil-pbc-profinite-limit-function-factorization",
-    "lem-weil-pbc-profinite-clopen-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering)"
-   }
-  },
-  {
-   "text": "First form the inverse system $X[P]=\\coprod_{p\\in P}X$ over the directed set of finite clopen partitions $P$ of $S$. Adjoin $X$ as a least stage, with the structure maps $X[P]\\to X$; this also works when $S$ is empty. On an affine open $U=\\operatorname{Spec}R\\subset X$, the inverse image of $U$ in $X[P]$ is $\\coprod_P\\operatorname{Spec}R=\\operatorname{Spec}(R^P)$ by [lem-weil-pbc-finite-affine-coproduct-spectrum]. The same calculation on each target component shows that every transition is affine: the preimage of a copy of an affine open is a finite coproduct of that affine open. Apply [lem-weil-pbc-morphism-affine-schemes-affine] on each such affine target open and [pqf-lem-affine-local-target] to conclude affineness globally. Thus [lem-weil-pbc-limit-affine-transition-core] supplies a scheme limit, with a map to the adjoined stage $X$; call it $X[S]$. A cone in schemes to this augmented diagram is exactly a cone of $X$-schemes to the original diagram, so it is also the required relative limit.",
-   "uses": [
-    "lem-weil-pbc-finite-affine-coproduct-spectrum",
-    "lem-weil-pbc-limit-affine-transition-core",
-    "lem-weil-pbc-morphism-affine-schemes-affine",
-    "pqf-lem-affine-local-target"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tags 01YX (lemma-directed-inverse-system-has-limit) and 01YW (lemma-directed-inverse-system-affine-schemes-has-limit)"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-limit-cone-affine-projections-opens] to the least stage $X$: the structure map $X[S]\\to X$ is affine, and its inverse image $U[S]$ over every affine open $U=\\operatorname{Spec}R$ is the limit of $\\operatorname{Spec}(R^P)$. Step 1 and [lem-weil-pbc-spec-small-colimit-limit] therefore identify it canonically with $\\operatorname{Spec}\\operatorname{LC}(S,R)$. For any other small cofiltered finite-quotient presentation $(S_i)$, step 1 and that same spectrum theorem show that this identical affine scheme is the limit of $\\coprod_{S_i}U$. The compatible cone legs glue over the affine opens of $X$ by [lem-weil-pbc-scheme-morphism-gluing]. Given a competing cone over $X$, restrict its source to the preimages of these affine opens. The local limit properties give unique factorization maps; on intersections they agree by further restriction to affine opens and uniqueness. The same gluing theorem gives a unique global factorization. Thus $X[S]$ is the limit for every such presentation, canonically and compatibly with the cone legs. No quasi-compactness or quasi-separatedness of $X$ was used.",
-   "uses": [
-    "lem-weil-pbc-limit-cone-affine-projections-opens",
-    "lem-weil-pbc-spec-small-colimit-limit",
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tags 01YX and 01YW, restriction to opens and affine computation"
-   }
-  },
-  {
-   "text": "For a continuous map $f:S\\to T$, precomposition is a ring map $\\operatorname{LC}(T,R)\\to\\operatorname{LC}(S,R)$, giving the local map $U[S]\\to U[T]$ by [def-weil-affine-spectrum]. These maps agree on overlaps: for each finite clopen partition of $T$, its preimage partition of $S$ prescribes the map to the corresponding finite coproduct of the overlap, and uniqueness of the local limit determines the map. [lem-weil-pbc-scheme-morphism-gluing] gives $X[f]$. On functions $(g f)^*=f^*g^*$ and $\\mathrm{id}^*=\\mathrm{id}$, so the induced maps satisfy identity and composition laws. This also proves independence is natural in $S$. With $X=\\operatorname{Spec}\\mathbf Z$, step 3 is the required functorial identification with $\\operatorname{Spec}\\operatorname{LC}(S,\\mathbf Z)$.",
+   "text": "Use the existing concrete functors in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic: profiniteToScheme is Spec of locally constant integer-valued functions, profiniteToProEt equips this scheme with its weakly etale structure morphism, and profiniteToProEtOf X is its base change along X → Spec Z. The existing source declarations weaklyEtale_toSpecZ_profiniteToScheme and preservesFiniteLimits_profiniteToProEt supply weak etaleness and finite-limit preservation over Spec Z. They are reused as stated obligations, not reproved or asserted to be closed here. MorphismProperty.Over.pullback preserves finite limits, so composition proves the finite-limit clause for every X.",
    "uses": [
     "def-weil-affine-spectrum",
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
-   }
-  },
-  {
-   "text": "The algebra formulas needed for products can be checked on finite partitions. For a ring map $R\\to A$, the map $A\\otimes_R\\operatorname{LC}(S,R)\\to\\operatorname{LC}(S,A)$ sends $a\\otimes h$ to $(s\\mapsto a h(s))$. A function constant with value $a_P$ on partition cells has inverse $\\sum_P a_P\\otimes 1_P$; refinement does not change this sum since $1_P=\\sum_{Q\\subset P}1_Q$. Conversely a tensor is a finite sum, so one common partition for its finitely many functions verifies the inverse identity. Likewise $\\operatorname{LC}(S,R)\\otimes_R\\operatorname{LC}(T,R)\\cong\\operatorname{LC}(S\\times T,R)$ sends $h\\otimes k$ to $(s,t)\\mapsto h(s)k(t)$. The product is compact by [lem-weil-pbc-tychonoff-product-quasi-compact], and clopen rectangles form a basis by [lem-weil-pbc-profinite-clopen-basis]. A finite rectangular cover on which a function is constant refines to the cells of the product of two finite clopen partitions; its inverse is $\\sum_{P,Q}a_{PQ}1_P\\otimes1_Q$. The same refinement identity verifies both inverses. The empty-space cases give the zero ring. Applying [lem-weil-pbc-spec-small-colimit-limit] to the ring pushout diagram (the tensor product, by its ring-homomorphism universal property) identifies its spectrum with the scheme fibre product. Hence $U[S\\times T]\\cong U[S]\\times_U U[T]$, and these identifications glue over $X$ by [lem-weil-pbc-scheme-morphism-gluing].",
-   "uses": [
-    "lem-weil-pbc-tychonoff-product-quasi-compact",
-    "lem-weil-pbc-profinite-clopen-basis",
-    "lem-weil-pbc-spec-small-colimit-limit",
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
-   }
-  },
-  {
-   "text": "For a closed subset $E\\subset S$, restriction $\\operatorname{LC}(S,R)\\to\\operatorname{LC}(E,R)$ is surjective. A function on $E$ has finitely many values by compactness. Each value fibre is compact and relatively clopen; [lem-weil-pbc-profinite-clopen-basis] supplies a finite union of clopen neighbourhoods in $S$ whose intersection with $E$ is that fibre. Disjointify these finitely many clopens, and give the complement value $0$. This extends the function. Its kernel consists of functions whose clopen support misses $E$. For continuous $f,g:S\\to T$, let $E=\\{s:f(s)=g(s)\\}$, which is closed since $T$ is Hausdorff. The ideal $I$ generated by $f^*h-g^*h$ for $h\\in\\operatorname{LC}(T,R)$ is exactly this kernel. At $s\\notin E$, choose a clopen of $T$ separating $f(s),g(s)$; for its characteristic function the difference is $1$ or $-1$ on a clopen neighbourhood $W$ of $s$ contained in $S\\setminus E$. Multiplying by $1_W$ shows $1_W\\in I$. Cover the compact support of any kernel function by finitely many such $W$, disjointify, and multiply their characteristic functions by the function to express it in $I$. Therefore $\\operatorname{LC}(E,R)=\\operatorname{LC}(S,R)/I$. The quotient is the coequalizer of the two ring maps by the elementary ring-homomorphism universal property; [lem-weil-pbc-spec-small-colimit-limit] makes its spectrum their scheme equalizer. Glue these equalizers over $X$ by [lem-weil-pbc-scheme-morphism-gluing]. Together with step 5 and $\\operatorname{LC}(*,R)=R$, this proves finite-limit preservation: every finite cone is the equalizer of the two maps between the product over its objects and the product over its arrows, so terminal objects, binary products and equalizers suffice.",
-   "uses": [
-    "lem-weil-pbc-profinite-clopen-basis",
-    "lem-weil-pbc-spec-small-colimit-limit",
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-locally-constant-prime-spectrum], points of $U[S]=\\operatorname{Spec}\\operatorname{LC}(S,R)$ are $(s,\\mathfrak p)$ with prime ideal $Q=\\{h:h(s)\\in\\mathfrak p\\}$. Its local ring is $R_{\\mathfrak p}$. Indeed [lem-weil-pbc-affine-open-stalk-localization] computes the stalk as $\\operatorname{LC}(S,R)_Q$. Evaluation induces the map to $R_{\\mathfrak p}$, and constants give an inverse: each fraction $h/k$ agrees with the constant fraction $h(s)/k(s)$ after multiplication by the characteristic function of a clopen neighbourhood where both $h,k$ are constant. This characteristic function is outside $Q$ and becomes $1$ in the localization, since it is idempotent and invertible. Conversely, if a constant numerator becomes zero in $R_{\\mathfrak p}$, it is killed by a constant denominator outside $Q$. Thus the maps are mutually inverse. Under $X[f]$ points map as $(s,\\mathfrak p)\\mapsto(f(s),\\mathfrak p)$, directly from the displayed evaluation ideals, and the local-ring map becomes the identity of $R_{\\mathfrak p}$. It is therefore flat by [def-weil-flat-morphism], as the rank-one free module over itself. The same argument for $S\\to *$ proves $X[S]\\to X$ flat.",
-   "uses": [
-    "lem-weil-pbc-locally-constant-prime-spectrum",
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "def-weil-flat-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
-   }
-  },
-  {
-   "text": "For any $f:S\\to T$, form $E=S\\times_T S$. It is a closed subspace of $S\\times S$, hence compact; it is Hausdorff and totally disconnected as a subspace, so profinite. Step 6 identifies $X[E]=X[S]\\times_{X[T]}X[S]$. The diagonal of $X[f]$ is precisely $X[\\delta]$ for $\\delta:S\\to E$, since both of its projections are identities. Step 7 applies to this continuous map and makes the diagonal flat. By [def-weil-weakly-etale-morphism], $X[f]$ is weakly etale. In particular take $T=*$: the structure morphism is weakly etale, so $X[S]$ is an object and $X[f]$ a morphism of [def-weil-pbc-proetale-site]. The finite limits proved above are also limits in this full subcategory of $X$-schemes, because their vertices are now known to be weakly etale.",
-   "uses": [
     "def-weil-weakly-etale-morphism",
     "def-weil-pbc-proetale-site"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
-   }
+   "elementary": false
   },
   {
-   "text": "For a finite jointly surjective family $f_a:S_a\\to T$, step 7 makes the images of $U[S_a]\\to U[T]$ jointly cover: every $(t,\\mathfrak p)$ lifts to $(s,\\mathfrak p)$ once $f_a(s)=t$. Each arrow is affine. On $U[T]$ this follows from the explicit spectra in step 3; on an arbitrary affine open $V\\subset X[T]$, cover $V$ by affine opens $W$ contained in such $U[T]$: for each point of the affine $V$, choose a principal open contained in its intersection with one member of the open cover by the $U[T]$. Their preimages are affine: every morphism between affine schemes is affine, and affineness is local on the target, by [lem-weil-pbc-morphism-affine-schemes-affine] and [pqf-lem-affine-local-target]. Thus the inverse image of $V$ in each $X[S_a]$ is an affine open. Together with flatness from step 7 these finitely many affine opens verify the precise covering criterion in [def-weil-pbc-fpqc-covering]. By [def-weil-pbc-proetale-site] and weak étaleness from step 8, this is a pro-etale covering. If the family is empty then joint surjectivity forces $T=\\varnothing$; its test object is empty, so the criterion is vacuous.",
+   "text": "Prove the fpqc-covering assertion first over Spec Z. The closed spectrum theorem identifies each point of Spec LC(T,Z) with (t,p). Given a finite jointly surjective family S_a → T, choose a preimage s of t and use the point (s,p). The formula for evaluation shows directly that its image is (t,p). Each spectrum map is weakly etale: both structure maps to the terminal scheme are weakly etale, and cancel the target structure map using MorphismProperty.of_postcomp. Hence each map is flat. Maps of affine schemes are affine and therefore quasi-compact. A finite jointly surjective family of these quasi-compact flat maps is an fpqc family by QuasiCompactCover.of_finite. Pull back this covering to X using Precoverage.mem_coverings_of_isPullback and the pullback squares of MorphismProperty.Over.pullback. This also handles the empty family without a nonemptiness assumption.",
    "uses": [
-    "pqf-def-affine-morphism",
-    "def-weil-pbc-fpqc-covering",
-    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-locally-constant-prime-spectrum",
     "lem-weil-pbc-morphism-affine-schemes-affine",
-    "pqf-lem-affine-local-target"
+    "pqf-def-affine-morphism",
+    "def-weil-flat-morphism",
+    "def-weil-weakly-etale-morphism",
+    "def-weil-pbc-fpqc-covering"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
-   }
+   "elementary": false
   },
   {
-   "text": "Finally, restriction to the summands is the ring isomorphism $\\operatorname{LC}(S\\sqcup T,R)=\\operatorname{LC}(S,R)\\times\\operatorname{LC}(T,R)$: the inverse joins the two functions. [lem-weil-pbc-finite-affine-coproduct-spectrum] identifies its spectrum with $U[S]\\sqcup U[T]$, and [lem-weil-pbc-scheme-morphism-gluing] glues these identifications over $X$. For the empty union $\\operatorname{LC}(\\varnothing,R)=0$, whose spectrum is empty, so finite disjoint unions, including the nullary one, are preserved.",
+   "text": "The covering argument over Spec Z, together with weak etaleness of each arrow, proves CoverPreserving for profiniteToProEt directly. A coherent covering sieve of a profinite space contains a finite effective-epimorphic family; Profinite.effectiveEpiFamily_tfae identifies this with joint surjectivity. Push forward that family into the pro-etale precoverage and enlarge its generated sieve. Finite-limit preservation gives representable flatness, hence continuity. Compose with the proved continuity of pro-etale base change to obtain continuity of profiniteToProEtOf X. For any representable of its subcanonical target site, continuity pulls it back to a coherent sheaf, hence to an extensive sheaf, since the extensive topology is below the coherent topology. Mathlib identifies extensive sheaves with finite-product-preserving presheaves. Yoneda then turns these product-preservation statements into preservation of all finite coproducts by the original functor. Apply the same argument after the forgetful functor to Over X.",
    "uses": [
-    "lem-weil-pbc-finite-affine-coproduct-spectrum",
-    "lem-weil-pbc-scheme-morphism-gluing"
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-fpqc-covering"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
-   }
+   "elementary": false
+  },
+  {
+   "text": "A finite discrete profinite space S is the coproduct of its points, each a copy of the one-point profinite space. Construct its coproduct cocone explicitly by the constant point inclusions; a map out is obtained by evaluating the chosen component map at the unique point. The preceding coproduct-preservation result gives the unique comparison isomorphism from the coproduct of copies of F(*) to F(S), for F = profiniteToProEtOf X followed by forgetting to Over X. Naturality follows by composing with every coproduct inclusion. Finite-limit preservation identifies F(*) with the terminal object id_X of Over X. Whisker this identification with sigmaConst to obtain exactly the stated natural isomorphism on FintypeCat.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any cofiltered profinite limit cone with surjective projections, locally constant integer-valued functions form the filtered colimit of the rings at its stages. Profinite.exists_locallyConstant gives the representative at a stage. If two representatives at the same stage agree after pullback, surjectivity of that projection makes them equal already there; this is precisely the injectivity criterion in Types.FilteredColimit.isColimitOf'. The forgetful functor from commutative rings reflects this filtered colimit. Passing to opposites gives a limiting cone of opposite rings, and Scheme.Spec preserves this limit. Since the indexing category is connected, Over.forget (Spec Z) reflects this limiting cone. Ordinary base change Over.pullback preserves all limits, giving the required limiting cone in Over X. The proof applies in particular to the finite-quotient presentations in the statement.",
+   "uses": [
+    "lem-weil-pbc-profinite-limit-function-factorization",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unique structure morphism Spec Z → Spec Z is the identity by terminality. Rewrite base change along it using MorphismProperty.Over.pullbackCongr and pullbackId, and whisker with the forgetful functors. This gives the stated functorial identification over Spec Z with profiniteToScheme, whose maps were defined by precomposition from the outset.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-profinite-limit-function-factorization",
-  "lem-weil-pbc-profinite-clopen-basis",
-  "lem-weil-pbc-finite-affine-coproduct-spectrum",
-  "lem-weil-pbc-limit-affine-transition-core",
-  "lem-weil-pbc-morphism-affine-schemes-affine",
-  "pqf-lem-affine-local-target",
-  "lem-weil-pbc-limit-cone-affine-projections-opens",
-  "lem-weil-pbc-spec-small-colimit-limit",
-  "lem-weil-pbc-scheme-morphism-gluing",
   "def-weil-affine-spectrum",
-  "lem-weil-pbc-tychonoff-product-quasi-compact",
-  "lem-weil-pbc-locally-constant-prime-spectrum",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "def-weil-flat-morphism",
   "def-weil-weakly-etale-morphism",
   "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
   "pqf-def-affine-morphism",
-  "def-weil-pbc-fpqc-covering"
+  "def-weil-flat-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-profinite-limit-function-factorization",
+  "lem-weil-pbc-spec-small-colimit-limit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Details of the finite-quotient argument in RefactorInstruction Section 4 lem:XS; related Tag 097D"
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4, finite-XI, XS and Lemma lem:XS; stage-3 F1 proof of 2026-10-15 using the concrete base-change implementation and the existing source declarations weaklyEtale_toSpecZ_profiniteToScheme and preservesFiniteLimits_profiniteToProEt. The former construction and finite-limit input remain existing source-library obligations. New arguments for coverings, finite coproducts, natural finite-set comparison and cofiltered limits are fully proved in Sheaf.Paper.ProfiniteTestObjectFunctor."
  },
  "mathlib_searches": [
   {
@@ -280,5 +195,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Wrote review.md. Checked every statement clause, dependencies, exact framework declarations, edge cases, docstrings, and verbatim signature. Server-only compilation reproduced successfully in 1.6 seconds without diagnostics. No delivery errors found; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261015T154208-L-163705",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

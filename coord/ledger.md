@@ -15052,3 +15052,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:42 L: merged deliver/E4/Sheaf.AlgebraicGeometry.QcqsHigherImagesPrimeTorsion (stage 3; reviewer PASS; first push; landing 20261015T154207-L-163402 (interface); batch 20261015T154146; modules 1; new nodes 0; change records: coord/changes/qcqs-prime-torsion-proof-scope.md)
 - 15:42 L: merged deliver/F1/Sheaf.AlgebraicGeometry.TruncationExchangeCouple (stage 3; reviewer PASS; first push; landing 20261015T154207-L-163503 (proof); batch 20261015T154146; modules 1; new nodes 0)
 - 15:42 L: merged deliver/F1/Sheaf.CategoryTheory.SiteFiniteBasisHypercoverExistence (stage 3; reviewer PASS; first push; landing 20261015T154208-L-163604 (interface); batch 20261015T154146; modules 2; new nodes 1)
+- 15:42 L: merged deliver/F1/Sheaf.Paper.ProfiniteTestObjectFunctor (stage 3; reviewer PASS; first push; landing 20261015T154208-L-163705 (proof); batch 20261015T154146; modules 1; new nodes 0)
