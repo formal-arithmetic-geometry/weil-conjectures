@@ -1,0 +1,152 @@
+{
+ "id": "lem-pur-polynomial-field-pid",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-affine-punctured-line-algebra",
+   "place": "Proof, opening sentence: 'The rings k[T] and k[T,T^{-1}] are Euclidean, hence principal ideal domains' (the polynomial-ring input).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The polynomial ring over a field is a principal ideal domain",
+ "statement": "Let $k$ be a field [def-weil-field], and let $k[T]$ be the polynomial ring in one variable [def-weil-polynomial-ring]. Then $k[T]$ is a principal ideal domain: it is an integral domain, and every ideal $I\\subseteq k[T]$ has the form $I=(f)$ for some $f\\in k[T]$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 030A, algebra-lemma-polynomial-domain-normal, first sentence of the proof (the field case: K[x] is Euclidean and hence a principal ideal domain)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The polynomial ring in one variable over a field is a principal ideal domain",
+   "results": "Ideal.IsField.of_isPrincipalIdealRing_polynomial; Polynomial.idealX; Polynomial.idealX_span; Ideal.polynomial_not_isField; AdjoinRoot.span_maximal_of_irreducible; Polynomial.instEuclideanDomain; Polynomial.uniqueFactorizationMonoid; Polynomial.not_isField",
+   "date": "2026-10-16",
+   "verdict": "match: Polynomial.instEuclideanDomain, with EuclideanDomain.to_principal_ideal_domain in the pinned source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial division with remainder over a field: for polynomials f and nonzero g, f = q*g+r with r zero or degree r less than degree g",
+   "results": "Polynomial.div_eq_quo_add_rem_div; Polynomial.mod; Polynomial.instDiv; Polynomial.instMod; Polynomial.mod_def; Polynomial.div_modByMonic_unique; Polynomial.X_sub_C_mul_divByMonic_eq_sub_modByMonic; Polynomial.div",
+   "date": "2026-10-16",
+   "verdict": "related: division algorithm; the subsequent source search found the EuclideanDomain instance"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial, EuclideanDomain",
+   "results": "Polynomial.instEuclideanDomain",
+   "date": "2026-10-16",
+   "verdict": "match: Polynomial.instEuclideanDomain"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The polynomial ring over any field is a Euclidean domain with division algorithm",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*EuclideanDomain|Polynomial.instEuclideanDomain",
+   "results": "Mathlib/Algebra/Polynomial/FieldDivision.lean (Mathlib/Algebra/Polynomial)",
+   "date": "2026-10-16",
+   "verdict": "match: Mathlib/Algebra/Polynomial/FieldDivision.lean:357"
+  },
+  {
+   "tool": "grep",
+   "query": "instance \\(R\\).*IsGCDMonoid|theorem mk_eq_one_iff|IsBezout.of_isPrincipalIdealRing|EuclideanDomain.to_principal_ideal_domain",
+   "results": "Mathlib/RingTheory/PrincipalIdealDomain.lean; Mathlib/RingTheory/PrincipalIdealDomain.lean; Mathlib/RingTheory/PrincipalIdealDomain.lean; Mathlib/RingTheory/PrincipalIdealDomain.lean; Mathlib/RingTheory/DiscreteValuationRing/Basic.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean (Mathlib/RingTheory)",
+   "date": "2026-10-16",
+   "verdict": "match: EuclideanDomain.to_principal_ideal_domain, Mathlib/RingTheory/PrincipalIdealDomain.lean:287"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial algebra over a field has all its ideals principal and its Euclidean structure uses polynomial degree",
+   "results": "Polynomial.instEuclideanDomain; Ideal.IsField.of_isPrincipalIdealRing_polynomial; Ideal.polynomial_not_isField; Polynomial.instMod; Polynomial.idealX; Polynomial.Monic.finite_quotient; Polynomial.cardPowDegree_isEuclidean; Polynomial.wfDvdMonoid (8 hits; subdirectory all)",
+   "date": "2026-10-16",
+   "verdict": "match: Polynomial.instEuclideanDomain; the other hits do not supply the required principality."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPrincipalIdealRing.*Polynomial|to_principal_ideal_domain|instEuclideanDomain",
+   "results": "Mathlib/Algebra/Polynomial/FieldDivision.lean (1 hits; subdirectory Algebra/Polynomial)",
+   "date": "2026-10-16",
+   "verdict": "match: FieldDivision.lean:357; the inferred PID instance was separately read."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial, IsPrincipalIdealRing",
+   "results": "Ideal.IsField.of_isPrincipalIdealRing_polynomial; FunctionField.classNumber_eq_one_iff; Polynomial.isPrimitive_iff_forall_gaussNorm_eq_one (3 hits; subdirectory all)",
+   "date": "2026-10-16",
+   "verdict": "related: three hits; the first is the converse field criterion, and none directly supplies the desired instance."
+  },
+  {
+   "tool": "loogle",
+   "query": "EuclideanDomain, IsDomain",
+   "results": "EuclideanDomain.instIsDomain; IsDiscreteValuationRing.toEuclideanDomain; ClassGroup.normBound; ClassGroup.cardM; ClassGroup.finsetApprox; ClassGroup.normBound_pos; ClassGroup.distinctElems; ClassGroup.fintypeOfAdmissibleOfAlgebraic (12 hits; subdirectory all)",
+   "date": "2026-10-16",
+   "verdict": "match: EuclideanDomain.instIsDomain, confirmed at Basic.lean:213-218."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDomain R|to_principal_ideal_domain",
+   "results": "Mathlib/Algebra/EuclideanDomain/Basic.lean; Mathlib/Algebra/EuclideanDomain/Basic.lean (2 hits; subdirectory Algebra/EuclideanDomain)",
+   "date": "2026-10-16",
+   "verdict": "match: EuclideanDomain/Basic.lean:213,218."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial algebras in a single indeterminate over division fields have principal ideals",
+   "results": "Ideal.IsField.of_isPrincipalIdealRing_polynomial; Polynomial.idealX_span; Polynomial.idealX; AdjoinRoot.span_maximal_of_irreducible; Ideal.polynomial_not_isField; Polynomial.adjoin_X; Polynomial.Monic.finite_quotient; Ideal.isDomain_map_C_quotient (8 hits; subdirectory all)",
+   "date": "2026-10-15",
+   "verdict": "related: individual polynomial ideals and the converse field criterion; no full node match in these eight hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"instEuclideanDomain\"",
+   "results": "Polynomial.instEuclideanDomain; instEuclideanDomainSubtypeMemSubalgebraAdjoinSingletonSetOfFactTranscendental; GaussianInt.instEuclideanDomain (3 hits; subdirectory all)",
+   "date": "2026-10-15",
+   "verdict": "match: Polynomial.instEuclideanDomain, read at FieldDivision.lean:357-367."
+  },
+  {
+   "tool": "grep",
+   "query": "to_principal_ideal_domain|instSubsingletonPicOfIsDomainOfIsGCDMonoid|mk_eq_one_iff",
+   "results": "Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/UniqueFactorizationDomain/ClassGroup.lean; Mathlib/RingTheory/Ideal/Quotient/Defs.lean; Mathlib/RingTheory/PrincipalIdealDomain.lean (16 hits; subdirectory RingTheory)",
+   "date": "2026-10-15",
+   "verdict": "match: EuclideanDomain.to_principal_ideal_domain, read at PrincipalIdealDomain.lean:287-310."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.instEuclideanDomain, EuclideanDomain.to_principal_ideal_domain, EuclideanDomain.instIsDomain",
+  "file": "Mathlib/Algebra/Polynomial/FieldDivision.lean",
+  "how": "specializes in one line: infer the principal-ideal-ring instance on k[T] from Polynomial.instEuclideanDomain (FieldDivision.lean:357-367) and EuclideanDomain.to_principal_ideal_domain (Mathlib/RingTheory/PrincipalIdealDomain.lean:287-310); the integral-domain clause is the inferred EuclideanDomain.instIsDomain (Mathlib/Algebra/EuclideanDomain/Basic.lean:213-218), rather than a field of the EuclideanDomain structure. All three source passages were read.",
+  "line": 357
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-pur-affine-punctured-line-algebra",
+  "by": "worker",
+  "date": "2026-10-15"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
