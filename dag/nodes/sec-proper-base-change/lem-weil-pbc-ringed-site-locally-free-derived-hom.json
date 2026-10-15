@@ -31,107 +31,80 @@
  ],
  "proof": [
   {
-   "text": "For any module sheaf $F$, define $a_F:P^\\vee\\otimes_R F\\to\\mathcal Hom_R(P,F)$ by $\\lambda\\otimes f\\mapsto(p\\mapsto\\lambda(p)f)$. The formula is balanced and restriction-compatible, so descends through tensor sheafification. On a slice where $P\\cong R^{\\oplus r}$, let $e_j,e_j^\\vee$ be the basis and dual basis. The inverse sends $h$ to $\\sum_{j=1}^r e_j^\\vee\\otimes h(e_j)$; both composites are the identity. Thus $a_F$ is locally bijective and hence an isomorphism of sheaves, with an $R$-linear inverse. In particular $P^\\vee$ is locally finite free. This construction uses evaluation, and applies termwise to complexes since $a_F$ commutes with maps of $F$.",
+   "text": "Use the canonical closed-category comparison P-dual tensor N to internal Hom(P,N). The generic-site comparison theorem identifies it with sheafification of the presheaf evaluation map. A finite local generating family for P gives a finite free presentation on covering objects; the existing dual-basis bijectivity theorem proves sectionwise bijectivity after every restriction over a covering object. Local injectivity and surjectivity imply the presheaf map belongs to the sheafification localizer, so sheafification makes it invertible. This works also for rank zero and varying local ranks.",
+   "uses": [
+    "lem-ag-dual-tensor-hom-comparison",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, label lemma-dual-perfect-complex, the final displayed global Hom formula, specialized to the perfect object P[0]; local finite freeness identifies the derived tensor with termwise tensor."
+   }
+  },
+  {
+   "text": "Internal Hom(P,-) is right adjoint to tensor(P,-). Tensor(P-dual,-) is naturally isomorphic to it by step 1, hence preserves limits, and is itself a left adjoint, hence preserves colimits. It is therefore exact. Apply the same argument to the locally finite free dual of P and use the canonical bidual isomorphism to show tensor(P,-) exact. The tensor-Hom adjunction with exact left adjoint makes internal Hom(P,-) preserve K-injective complexes. Transport this property to tensor(P-dual,-). These are the existing sheaf tensor-Hom adjunction, dual local-freeness and bidual APIs, and Mathlib preservation-of-K-injectives API.",
    "uses": [
     "def-pur-sheaf-hom",
-    "def-pur-sheaf-tensor-product",
-    "lem-galois-set-sheaf-local-bijection-isomorphism"
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, lemma-dual-perfect-complex, final finite-free evaluation calculation"
+    "place": "Tag 08JJ, label lemma-dual-perfect-complex, the final displayed global Hom formula, specialized to the perfect object P[0]; local finite freeness identifies the derived tensor with termwise tensor."
    }
   },
   {
-   "text": "The functor $T(F)=\\mathcal Hom_R(P,F)$ is exact. Restriction to a slice is exact by [lem-pur-site-restriction-module-adjunction-exact]. On each trivializing slice the cited finite-free Hom statement identifies an applied short exact sequence with its finite direct sum, which is exact. Exactness descends from these slices: kernels are sectionwise, and images and cokernels are sheafifications of sectionwise images and cokernels; a kernel section lifts to an image section locally on each slice, and the composite coverings give the required local lift on the original object. Vanishing of a kernel or cokernel is detected by the sheaf uniqueness axiom on those coverings. Therefore $T$ preserves kernels, images and cohomology of complexes; specifically $H^j(TA)=T(H^j(A))$. Step 1 identifies $T$ with $P^\\vee\\otimes_R-$, so this tensor functor is exact. Repeating the finite-free argument for $P^\\vee$ identifies $\\mathcal Hom_R(P^\\vee,F)$ with $P\\otimes_R F$ (the local bidual map sends $e_j$ to its double dual), hence $P\\otimes_R-$ is exact as well. Consequently $P[0]$ is K-flat: its total tensor with an acyclic complex $A$ has terms $A^j\\otimes_RP$ and zero cohomology by exactness.",
+   "text": "For any abelian category, identify the Hom complex from the complex concentrated in degree zero at P with the ordinary complex Hom(P,K^i), using Mathlib Cochain.fromSingleEquiv and its differential formula. Mathlib CohomologyClass.homAddEquiv identifies its zeroth homology additively with homotopy classes of maps P[0] to K. Prove the cycle formula using the canonical cycles-to-cohomology-class map. Prove naturality by lifting a homology class to a cycle, representing its class by a chain map, and applying the cycle formula after precomposition and postcomposition.",
    "uses": [
-    "lem-sc-finite-free-internal-hom-exact",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact",
-    "def-pc-kflat-complex",
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, final finite-free calculation; Tag 03DA, sites-modules-lemma-abelian, for the local kernel/cokernel test; Tag 06YN, definition-K-flat"
+    "place": "Tag 08JJ, label lemma-dual-perfect-complex, the final displayed global Hom formula, specialized to the perfect object P[0]; local finite freeness identifies the derived tensor with termwise tensor."
    }
   },
   {
-   "text": "Choose a quasi-isomorphism $s:K\\to I$ with $I$ bounded below and degreewise injective, hence K-injective, by the cited resolution theorem. Exactness in step 2 makes $T(s):T(K)\\to T(I)$ a quasi-isomorphism: $H^j(T(s))=T(H^j(s))$. Since $P$ is in degree zero, the Hom-complex definition gives $J=\\mathcal Hom^\\bullet(P[0],I)=T(I)$, with $J^j=\\mathcal Hom_R(P,I^j)$ and differential $h\\mapsto d_Ih$. The cited K-flat-to-K-injective Hom lemma applies to $P[0]$ and $I$, and shows that $J$ is K-injective. It is also bounded below. Thus the composite $P^\\vee\\otimes_R K\\xrightarrow{a_K}T(K)\\xrightarrow{T(s)}J$ represents the desired complex by a bounded-below K-injective complex.",
+   "text": "For K-injective K, the evaluation isomorphisms of step 1 give an isomorphism of complexes from global cochains of P-dual tensor K to Hom(P,K). Tensor(P-dual,-) preserves K-injectives by step 2, so the ordinary-to-derived global cohomology comparison is invertible by the existing right-derived-functor fully-faithfulness theorem. Mathlib Qh_map_bijective identifies homotopy maps into K with derived maps. Their composite gives the desired additive equivalence for K-injectives. The cycle formula of step 3 proves the stipulated evaluation normalization, and functoriality of the comparison proves naturality in both variables. The Lean argument is formulated for an abstract abelian monoidal category with additive tensor functors, comparison isomorphisms and exact tensor by P; specializing these inputs to sheaves avoids expanding sheafification during the homological proof.",
    "uses": [
-    "lem-sc-bounded-below-injective-resolution",
-    "def-pur-hom-complex",
-    "lem-pur-hom-kflat-into-kinjective"
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "def-pur-sheaf-hom"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A96 (lemma-RHom-from-K-flat-into-K-injective) and 0A8X (section-hom-complexes); bounded-below injective resolution as in Tag 07A5"
+    "place": "Tag 08JJ, label lemma-dual-perfect-complex, the final displayed global Hom formula, specialized to the perfect object P[0]; local finite freeness identifies the derived tensor with termwise tensor."
    }
   },
   {
-   "text": "The computation by $J$ agrees with the stipulated bounded-below injective computation of derived global sections. Indeed choose $J\\to B$ with $B$ bounded below and degreewise injective by the cited resolution theorem. Both $J$ and $B$ are K-injective, so their quasi-isomorphism is a homotopy equivalence by the cited derived-Hom comparison. Applying $\\Gamma$ preserves the homotopy equations termwise. Hence $H^n(R\\Gamma(\\mathcal C,P^\\vee\\otimes_RK))$ is canonically $H^n(\\Gamma(\\mathcal C,J))$, for every integer $n$, and is independent of the choices. No assertion that $J$ is degreewise injective, and no exactness of global sections, is needed.",
+   "text": "Use the existing constructed functorial K-injective resolution I and its natural quasi-isomorphism eta. Define the equivalence for arbitrary K by postcomposition with Q(eta_K), followed by the K-injective equivalence for I(K), followed by the inverse of hypercohomology applied to Q(tensor(P-dual,eta_K)). Exactness from step 2 makes the last morphism invertible. Naturality of eta and the termwise tensor square prove naturality of this composite. If K is already K-injective, naturality of the K-injective equivalence along eta_K proves equality with the equivalence of step 4, so its cycle normalization follows. No boundedness hypothesis is needed in the construction; specialize to the original bounded-below statement. Applying the degree-zero statement to shifts is exactly the formulation used by the unchanged target.",
    "uses": [
-    "lem-sc-bounded-below-injective-resolution",
-    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-functorial-existence",
     "def-pur-ringed-site-zeroth-hypercohomology"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 070I, derived-lemma-K-injective; Tag 07A5, sites-cohomology-section-unbounded"
-   }
-  },
-  {
-   "text": "By [def-pur-sheaf-hom], $\\Gamma(\\mathcal C,J^j)=\\operatorname{Hom}_R(P,I^j)$, with differential given by postcomposition with $d_I$. A degree-$n$ cycle in $\\Gamma J$ is an $R$-linear map $f:P\\to I^n$ with $d_If=0$, and a boundary is $d_Ih$ for $h:P\\to I^{n-1}$. This is precisely a chain map $P[0]\\to I[n]$ modulo chain homotopy: the differential in $I[n]$ is $(-1)^n d_I$, so the boundaries from homotopies differ only by the invertible sign $(-1)^n$. Addition of cycles corresponds to addition of maps. Therefore $H^n(\\Gamma J)\\cong\\operatorname{Hom}_{K(R)}(P[0],I[n])$ additively. The cited shift theorem says $I[n]$ is K-injective, and the derived-Hom comparison identifies this group with $\\operatorname{Hom}_{D(R)}(P[0],QI[n])$. Postcompose with $(Qs[n])^{-1}$ to obtain $\\operatorname{Hom}_{D(R)}(P[0],QK[n])$. Compose with step 4 and invert to get the isomorphism in the statement.",
-   "uses": [
-    "def-pur-hom-complex",
-    "lem-weil-pbc-kinjective-shift",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A8Z, equation-global-cohomology-hom-complex; Tag 070I, derived-lemma-K-injective"
-   }
-  },
-  {
-   "text": "For $u:P\\to P'$ and a target chain map $v:I\\to I'$, a cycle $f:P'\\to I^n$ is sent to $v^n f u$. On tensors this same map is $u^\\vee\\otimes v$: for local sections $\\lambda$ of $(P')^\\vee$ and $x$ of $I^n$, evaluating $u^\\vee(\\lambda)\\otimes v^n(x)$ at a local section $p$ of $P$ gives $\\lambda(u(p))v^n(x)$, which equals $v^n(\\lambda(u(p))x)$ by $R$-linearity. Thus the evaluation comparison and the cycle-to-chain-map identification commute with both variables. For a derived morphism $g:QK\\to QK'$, the derived-Hom comparison gives a unique homotopy class $v:I\\to I'$ representing $Qs'\\,g\\,(Qs)^{-1}$; if $v-w=d_{I'}h+h d_I$, then $T(v)-T(w)=T(d_{I'})T(h)+T(h)T(d_I)$ because $T$ is additive and preserves composition. Applying $\\Gamma$ gives the same homotopy equation, so the two maps induce identical maps on cohomology. This also proves choice independence and naturality for derived morphisms. For a shift $m$, use $s[m]:K[m]\\to I[m]$, a K-injective resolution by the shift theorem: $T(I[m])=T(I)[m]$ termwise and both differentials are $(-1)^m T(d_I)$. Reindexing a cycle $P\\to I^{n+m}$ therefore gives the same map under $H^n(R\\Gamma(TK[m]))=H^{n+m}(R\\Gamma(TK))$ and $(QK[m])[n]\\cong QK[n+m]$. These equations give the claimed compatibility with shifts and show the canonical isomorphism is induced by evaluation.",
-   "uses": [
-    "def-pur-hom-complex",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-shift"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A8X and 0A8Z, Hom differential and global chain-map formula; Tag 070I, derived-lemma-K-injective; Tag 08JJ, evaluation comparison"
+    "place": "Tag 08JJ, label lemma-dual-perfect-complex, the final displayed global Hom formula, specialized to the perfect object P[0]; local finite freeness identifies the derived tensor with termwise tensor."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
-  "def-pur-hom-complex",
   "def-pur-ringed-site-zeroth-hypercohomology",
   "def-pur-sheaf-hom",
   "def-pur-sheaf-tensor-product",
   "def-weil-sheaf-of-modules-category",
-  "lem-galois-set-sheaf-local-bijection-isomorphism",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sc-bounded-below-injective-resolution",
-  "lem-sc-finite-free-internal-hom-exact",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-shift",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact"
+  "lem-ag-dual-tensor-hom-comparison",
+  "lem-weil-pbc-kinjective-functorial-existence"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "C4",
+  "date": "2026-10-16",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08JJ, lemma-dual-perfect-complex, finite-free evaluation calculation; Tags 0A96 and 0A8Z and derived Tag 070I provide its resolution-level specialization to P[0]."
+  "place": "Tag 08JJ, finite locally free evaluation formula; implemented via exact adjoints, Mathlib HomComplexSingle and KInjective localization, and the existing constructed functorial K-injective resolution."
  },
  "mathlib_searches": [
   {
@@ -315,11 +288,30 @@
   "module": "Sheaf.Algebra.Homology.LocallyFreeDerivedHom",
   "declaration": "CategoryTheory.locallyFree_derivedHom",
   "declarations": [
+   "CategoryTheory.locallyFreePairingEvaluate",
+   "CategoryTheory.locallyFreeDerivedComparison",
+   "CategoryTheory.genericDualTensor",
+   "CategoryTheory.genericDualTensor_additive",
+   "CategoryTheory.genericDualTensorMap",
+   "CategoryTheory.genericSections",
+   "CategoryTheory.genericSections_additive",
+   "CategoryTheory.genericTensorSections",
+   "CategoryTheory.genericEvaluate",
+   "CategoryTheory.genericHypercohomology",
+   "CategoryTheory.genericSectionsComparison",
+   "CategoryTheory.locallyFreeHasSheafCompose",
+   "CategoryTheory.locallyFreeModuleAbelian",
+   "CategoryTheory.locallyFreeModulePreadditive",
+   "CategoryTheory.proofMonoidal",
+   "CategoryTheory.proofClosed",
    "CategoryTheory.locallyFreeDualTensor",
+   "CategoryTheory.locallyFreeDualTensor_additive",
    "CategoryTheory.locallyFreeDualTensorMap",
    "CategoryTheory.locallyFreeSections",
+   "CategoryTheory.locallyFreeSections_additive",
    "CategoryTheory.locallyFreeTensorSections",
    "CategoryTheory.locallyFreeEvaluate",
+   "CategoryTheory.locallyFreeDerivedPreadditive",
    "CategoryTheory.locallyFreeSectionsComparison",
    "CategoryTheory.locallyFree_derivedHom"
   ],
@@ -329,5 +321,15 @@
   "by": "NC",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-1f3b2",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T214542-L-2274697",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean module and DAG node matched against packet and published versions; all files and direct importer compiled successfully."
  }
 }
