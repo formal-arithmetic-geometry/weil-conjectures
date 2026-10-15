@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "Work with the same bounded schemes in the universes of [def-weil-pbc-proetale-site], and first with concrete objects rather than independently chosen skeleta [def-weil-size-convention]. By [lem-weil-pbc-weakly-etale-composition-base-change], $V\\to W$ weakly etale implies $V\\to X$ weakly etale. Conversely an object $(V\\to X,a:V\\to W)$ of the slice satisfies $j\\circ a=V\\to X$, and [lem-trf-weakly-etale-between-objects] applied over $X$ shows that $a$ is weakly etale, since both $V\\to X$ and $W\\to X$ are weakly etale. These assignments preserve the underlying scheme and arrow, and are inverse on objects. A morphism on either side is exactly a scheme map $b:V\\to V^{\\prime}$ with $a^{\\prime}\\circ b=a$; this also gives its required triangle over $X$. They are therefore inverse on morphisms and preserve identity and composition. Passing to small skeleta gives the stated canonical equivalence, rather than an equality of independently chosen object sets.",
+   "text": "Compose weakly etale morphisms using [lem-weil-pbc-weakly-etale-composition-base-change]. For an object T of the slice, its triangle gives T.hom.left followed by W.hom equal to T.left.hom, so cancellation [lem-trf-weakly-etale-between-objects] proves that T.hom.left is weakly etale. The private functors sliceTo and sliceFrom preserve the underlying scheme and scheme maps. Their unit and counit have identity underlying scheme maps, producing sliceEquiv. These are the concrete universe-bounded categories of [def-weil-pbc-proetale-site], with the universe convention [def-weil-size-convention] stated in Lean.",
    "uses": [
     "def-weil-pbc-proetale-site",
     "def-weil-size-convention",
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "By [def-weil-pbc-proetale-site], a covering of an object $V\\to W$ is a family of weakly etale arrows $V_i\\to V$ satisfying the fpqc finite-affine-cover condition on every affine open of $V$. This condition mentions only those arrows and their images in $V$, not the ultimate base $W$ or $X$. In the slice the underlying objects are the same schemes by step 1, and by [def-pur-localized-ringed-site] the covering families are exactly their coverings over $X$. Hence both sites have precisely the same covering families. Precomposition with the inverse assignments sends the sheaf matching/gluing condition to the identical condition; applying these precompositions successively gives the identity. This explicitly identifies the sheaf categories (up to the skeleton equivalences), proving the rest of (1).",
+   "text": "Use the covering-preserving property of the composition functor from W_proet to X_proet, supplied by AlgebraicGeometry.Scheme.ProEt.coverPreserving_overMap in the existing source library. For cover lifting, express a covering sieve on the slice by a covering presieve on the underlying X-object. Reindex its arrows as objects over W by composing their underlying maps with the structure map to W; weaklyEtale_left_comp supplies their weak etaleness. The image under the scheme forgetful functor is exactly the original family, hence it covers for [def-weil-pbc-proetale-site]. Identity maps of underlying schemes identify the resulting slice arrows, so they lie in the given sieve. This proves cover lifting. Full faithfulness and the identity pullback of a pushed-forward sieve give sliceDense, and Mathlib Equivalence.sheafCongr gives the sheaf equivalence with the required literal precomposition formula. The slice topology and restriction are [def-pur-localized-ringed-site].",
    "uses": [
     "def-weil-pbc-proetale-site",
     "def-pur-localized-ringed-site"
@@ -51,7 +51,7 @@
    }
   },
   {
-   "text": "Put $\\mathcal C=X_{\\mathrm{proet}}$ and let $P$ be the constant ring presheaf with value $A$. Its restriction to $\\mathcal C/W$ is again the constant ring presheaf with identity transition maps. By [def-weil-pbc-constant-sheaf], $P^\\#=A_X$, and by step 2 the sheafification of $P|_W$ is $A_W$. Apply [lem-pur-ring-presheaf-sheafification-localization] to $P$ and $W$: its ring-sheaf isomorphism is $A_W\\to A_X|_W$, and its unit identity says that each constant section $a$ maps to the same constant section $a$. Uniqueness among maps with this property follows from the universal property [def-weil-pbc-sheafification]: such a map has prescribed composite with the constant-presheaf unit at every object. This establishes (2) as an isomorphism of rings, including multiplication and identity, without inferring a ring assertion merely from a module-valued assertion.",
+   "text": "Let G be the composition functor W_proet to X_proet. The existing source library proves it continuous and cocontinuous. Apply the generic Mathlib declarations recorded by [lem-pur-ring-presheaf-sheafification-localization] directly to G and the constant ring presheaf: pushforwardContinuousSheafificationCompatibility constructs the ring-sheaf isomorphism, and toSheafify_pullbackSheafificationCompatibility gives its unit identity. Its target is definitionally precomposition with sliceEquiv.inverse of the restricted ambient constant sheaf [def-weil-pbc-constant-sheaf]. If a second morphism has the same prescribed composites, combine the heterogeneous component equalities and apply sheafify_hom_ext, the uniqueness in [def-weil-pbc-sheafification].",
    "uses": [
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-sheafification",
@@ -64,7 +64,7 @@
    }
   },
   {
-   "text": "For an $A_X$-module sheaf $F$, [def-pur-localized-ringed-site] gives the sheaf $F|_W$ with its sectionwise $A_X(V)$-module action and sends a sheaf morphism $\\varphi$ to its same component $\\varphi_V$. Pull this action back along the ring isomorphism of step 3: for $a\\in A_W(V)$ and $s\\in F(V)$ put $a\\cdot s=e_{P,V}(a)s$. For an arrow $T\\to V$, the old semilinearity and naturality of $e_P$ give $(e_{P,V}(a)s)|_T=e_{P,V}(a)|_T\\,s|_T=e_{P,T}(a|_T)s|_T$, the required restriction identity in [def-weil-sheaf-of-modules-category]. For example $e_{P,V}(ab)s=e_{P,V}(a)e_{P,V}(b)s$ and $e_{P,V}(1)s=s$ give the associative and unit action laws; the additive laws follow by distributing the ring homomorphism and the old action. A restricted module morphism remains linear; identities and compositions are unchanged componentwise. Using $e_P^{-1}$ reverses the change of ring actions: the two composites act by $e_{P,V}(e_{P,V}^{-1}(b))s=bs$ and $e_{P,V}^{-1}(e_{P,V}(a))s=as$, and leave every underlying morphism unchanged. Combined with the site identification from step 2, these mutually inverse operations identify the two module-sheaf categories and give exactly the restriction functor in (3).",
+   "text": "For the ring comparison c, construct the reverse ring map by precomposing c.inverse along the opposite of sliceEquiv.functor and composing with the opposite equivalence unit. Naturality of c.inverse, the inverse identities of c, and the triangle identity of sliceEquiv prove the two compatibility equations of Mathlib SheafOfModules.pushforwardPushforwardEquivalence. Apply that construction to sliceEquiv.symm. Its forward functor has exactly the underlying PresheafOfModules.pushforward in the statement, by reflexivity, including all morphism components. This is the change of ring actions for the module sheaves [def-weil-sheaf-of-modules-category] on the localized ringed site [def-pur-localized-ringed-site]. The presheaf equality hR is transported through the fully faithful sheaf-to-presheaf functor.",
    "uses": [
     "def-pur-localized-ringed-site",
     "def-weil-sheaf-of-modules-category"
@@ -76,7 +76,7 @@
    }
   },
   {
-   "text": "Assume $j$ is an open immersion. By [lem-weil-pbc-open-immersion-monomorphism], if $a,b:V\\to W$ give the same composite $V\\to X$, then $a=b$. Existence of such an $X$-morphism is exactly the factorization equation by definition. If it exists then its underlying point map has image in the open image of $W$. Conversely, if the image of $V\\to X$ is contained in that open image, identify $W$ with this open subscheme by [def-weil-open-immersion] and apply [lem-weil-pbc-morphism-factors-through-open-subscheme] to obtain the factorization. Thus existence is equivalent to the asserted set-theoretic condition, and uniqueness has already been proved. Step 1 also ensures that this factorization is an object of $W_{\\mathrm{proet}}$. This proves (4).",
+   "text": "For the open immersion [def-weil-open-immersion], obtain Mono W.hom from [lem-weil-pbc-open-immersion-monomorphism]. Cancel W.hom in the two triangle equations to prove subsingleton morphisms V to W. A slice morphism gives its underlying scheme map and triangle, while a scheme map with that triangle gives MorphismProperty.Over.homMk. Existence implies containment of the image by evaluating the triangle on each point. Conversely [lem-weil-pbc-morphism-factors-through-open-subscheme], implemented by IsOpenImmersion.lift and lift_fac, constructs the required scheme map from image containment, hence the morphism of pro-etale objects.",
    "uses": [
     "lem-weil-pbc-open-immersion-monomorphism",
     "def-weil-open-immersion",
@@ -106,7 +106,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Localization required by Definition 09AE, expanded using 094T, 0951, 00XZ, ring-valued sheafification compatibility, 04IX and 01HI/01L7"
+  "place": "The original five-step route, implemented and kernel-checked by B4 using the existing source-library pro-etale covering API and Mathlib sheafification and module equivalences; Stacks Tags 098K, 094T, 0951, 00XZ, 04IX, 01HI and 01L7."
  },
  "mathlib_searches": [
   {
@@ -206,5 +206,15 @@
   "by": "NF",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-5816d",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T183129-L-811377",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, DAG node, report, proof axioms, and all 14 direct importers matched the stage-3 requirements and compiled cleanly."
  }
 }
