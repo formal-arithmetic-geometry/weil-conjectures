@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-localization-kan-discrete-lifts",
+ "kind": "statement",
+ "title": "Discrete lifts finally index the opposite localization Kan extension",
+ "statement": "Let P be a property of morphisms of schemes [def-pc-scheme], containing identities and closed under composition, with right cancellation: if P(f) and P(a followed by f), then P(a). For a scheme B, write C_P(B) for schemes T with a structure morphism T -> B satisfying P, with all B-morphisms as arrows. Let f : Y -> X satisfy P and let W be an object of C_P(X). Composition with f defines L : C_P(Y) -> C_P(X). Then there exist a small type I and a final functor s from the discrete category on I to the costructured-arrow category (L^op down W^op), such that every structure arrow L^op(s(i).left) -> W^op is an isomorphism. One may take I to be the type of X-morphisms W -> Y. The statement covers arbitrary f satisfying P, without a monomorphism assumption, and also the empty type of lifts.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/HasLeftKanExtension.lean",
+  "place": "section LiftIndex and theorem AlgebraicGeometry.SmallSite.exists_final_discrete_costructuredArrow_overMap (lines 89-285); the categorical construction underlying the coproduct over lifts used in Stacks Tag 09AG"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Define I as the subtype of arrows alpha : W.left -> Y with alpha followed by f equal to W.hom. Cancellation for P makes alpha an object W_alpha of C_P(Y). The identity of W.left gives an isomorphism W -> L(W_alpha). Its opposite defines a comma object s(alpha); these objects define the functor s from the discrete category I.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Every comma object c is an object T of C_P(Y) with an X-arrow a : W -> L(T), and hence induces the lift a.left followed by T.hom. This induced lift is unchanged under comma morphisms. For a fixed lift alpha, a comma morphism c -> s(alpha) exists exactly when c induces alpha: its arrow in C_P(Y), after unop, must be a.left. The comma equation forces this arrow uniquely, and the equality of induced lifts is precisely the condition that it is over Y. Thus sending c to its induced lift is left adjoint to s.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A right adjoint is final, so s is final. Each s(alpha) has invertible structure arrow because its underlying arrow is the identity of W.left. If I is empty, the construction still works: there are no comma objects, since each would induce a lift. This is exactly the existing source proof, whose axiom check contains only propext, Classical.choice and Quot.sound.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/HasLeftKanExtension.lean",
+  "place": "LiftIndex.toDiscreteAdjunction, LiftIndex.final_discreteFunctor, and exists_final_discrete_costructuredArrow_overMap",
+  "note": "D2 transcribes the existing, fully proved source-library construction; no theorem or sorry is added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For schemes over a base, the comma category of the opposite localization functor is finally indexed by the discrete set of lifts through the localization morphism.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The comma category for the opposite localization functor of schemes over a base has a final functor from the discrete category of lifts",
+   "results": "CategoryTheory.Comma.final_fst, CategoryTheory.Functor.final_of_final_costructuredArrowToOver, CategoryTheory.Comma.map_final, CategoryTheory.Comma.final_snd, CategoryTheory.Grothendieck.final_pre, CategoryTheory.Grothendieck.final_map, CategoryTheory.StructuredArrow.final_map, CategoryTheory.Presheaf.final_toCostructuredArrow_comp_pre",
+   "date": "2026-10-16",
+   "verdict": "No exact Mathlib match. The needed scheme-localization result is already proved in the source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CostructuredArrow\", \"Discrete\"",
+   "results": "CategoryTheory.Discrete.costructuredArrowEquivalenceOfUnique, CategoryTheory.CostructuredArrow.closedUnderLimitsOfShape_discrete_empty, Condensed.instFinalOppositeDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceCostructuredArrowFintypeCatProfiniteOpToProfiniteOpPtAsLimitConeFunctorOp",
+   "date": "2026-10-16",
+   "verdict": "No exact Mathlib match. The needed scheme-localization result is already proved in the source library."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n final_discrete_costructuredArrow_overMap|LiftIndex Mathlib/AlgebraicGeometry Mathlib/CategoryTheory",
+   "results": "No Mathlib hits. The source library contains AlgebraicGeometry.SmallSite.exists_final_discrete_costructuredArrow_overMap and its explicit LiftIndex construction in WeilConjectures/CategoryTheory/GrothendieckAbelian/HasLeftKanExtension.lean.",
+   "date": "2026-10-16",
+   "verdict": "Existing source-library theorem; no new Lean statement or proof is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleShriekSpecializationZero",
+  "date": "2026-10-16",
+  "group": "D2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: descent formula. Kan-extension computation in the closed-neighbourhood shriek-vanishing step; a generic already-proved tool, preserving the proper-base-change unit route.",
+   "via": [
+    "lem-weil-pbc-proetale-shriek-specialization-zero",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.SmallSite.exists_final_discrete_costructuredArrow_overMap",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+     "lines": [
+      280,
+      285
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "library": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+  "declaration": "AlgebraicGeometry.SmallSite.exists_final_discrete_costructuredArrow_overMap",
+  "statement": "theorem exists_final_discrete_costructuredArrow_overMap (h : P f) (W : P.Over ⊤ U) : ∃ (ι : Type u) (s : Discrete ι ⥤ CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W)), s.Final ∧ ∀ i, IsIso (s.obj i).hom",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Source context: {P : MorphismProperty Scheme.{u}} {V U : Scheme.{u}} [P.IsMultiplicative] [P.HasOfPostcompProperty P] {f : V ⟶ U}. Existing declaration, no source file delivered."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-6d767",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T182201-L-784816",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-6d767",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T182201-L-784816",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, DAG records, change record, report, target signature, compilation, and direct importer match the stage-3 requirements; all checks pass."
+ }
+}

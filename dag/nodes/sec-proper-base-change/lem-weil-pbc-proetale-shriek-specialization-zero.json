@@ -20,96 +20,87 @@
  ],
  "proof": [
   {
-   "text": "Write $P$ for the displayed direct-sum presheaf. The local-sections theorem applies first to its underlying set presheaf. Its set sheafification acquires addition by choosing local representatives for two sections on a common refinement and adding them in $P$; local equality of representatives makes this independent of choices. Negation sends a local representative $p$ to $-p$; local equality makes it well-defined. Zero is the image of $0\\in P(W)$ on each object $W$. Restricting any of these representatives gives the representative of the restricted operation, so these operations define an abelian presheaf structure. The group identities hold on local representatives and therefore hold globally by sheaf uniqueness. Any map of abelian presheaves from $P$ to an abelian sheaf factors through the set sheafification and respects these operations locally, hence globally. By the universal property this is the abelian sheafification $j_!G$. Thus every section of $j_!G$ is locally the image of a section of $P$.",
+   "text": "Let P be the opposite localization functor's left Kan extension of G, F its abelian sheafification, and eta : P -> F the sheafification map. Mathlib's Presheaf.IsLocallySurjective instance for eta says that the sieve of arrows on which a section s of F(V) has a representative in P is covering (Presheaf.imageSieve_mem). The underlying set presheaf of F is a sheaf by Presheaf.isSheaf_iff_isSheaf_forget and isSheaf_iff_isSheaf_of_type. Thus we may work directly with abelian sheafification, without constructing its group operations anew.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
     "def-weil-pbc-sheafification",
     "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AG, lemma-jshriek-zero, proof"
+    "place": "Tag 09AG, lemma-jshriek-zero"
    }
   },
   {
-   "text": "Fix $s\\in(j_!G)(V)$ and choose a covering on which it is represented in $P$ as in step 1. The covering definition, applied to the affine $V$, refines it to finitely many affine arrows $T_a\\to V$ whose images cover $V$. Pull back the representatives to these affines. By stability of closed immersions under base change, $C_a=Z\\times_XT_a\\to T_a$ is a closed immersion; write $T_a=\\operatorname{Spec}A_a$ and $C_a=\\operatorname{Spec}(A_a/I_a)$ using the affine description of a closed immersion. No finiteness of $I_a$ is asserted. Open immersions are weakly etale and composing with the original covering arrows remains weakly etale, as stated in the weakly etale localization lemma.",
+   "text": "Given any covering sieve on affine V, extract a generating pro-etale covering family and refine it to finitely many affine open pieces A_j -> V using QuasiCompactCover.exists_isAffineOpen_of_isCompact. These maps are weakly etale by cancellation against V -> X and composition with open immersions. The inverse image C_j of the closed image of i : Z -> X is a closed subset of A_j. Transport C_j across A_j.isoSpec and use PrimeSpectrum.isClosed_iff_zeroLocus_ideal to obtain its arbitrary defining ideal I_j in Gamma(A_j,top). This only needs the closed image of i, not a presentation of the pulled-back closed immersion.",
    "uses": [
     "def-weil-pbc-proetale-covering",
-    "lem-weil-pbc-closed-immersion-base-change",
     "def-weil-closed-immersion",
-    "lem-weil-proetale-weakly-etale-localization"
+    "def-weil-weakly-etale-morphism",
+    "def-weil-affine-spectrum"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AG, lemma-jshriek-zero, proof"
+    "place": "Tag 09AG, lemma-jshriek-zero"
    }
   },
   {
-   "text": "For each $a$, form $W_a=\\operatorname{Spec}(S_a^{-1}A_a)$ with $S_a$ the elements invertible modulo $I_a$. The localization lemma makes $W_a\\to T_a$ weakly etale, with image the points specializing to $C_a$, and makes every point of $W_a$ specialize within $W_a$ to a point over $C_a$. Composition gives an object $W_a\\to V\\to X$ of the pro-etale site. To see that the $W_a\\to V$ cover, choose any $v\\in V$ and a specialization $z\\in V_Z$ of $v$. Some $t\\in T_a$ lies above $z$ because the $T_a$ cover. It belongs to $C_a$. The map $T_a\\to V$ is flat since it is weakly etale, so generalization lifting supplies $t\\prime$ specializing to $t$ and mapping to $v$. Hence $t\\prime$ is in the image of $W_a$, and $v$ is in the image of $W_a\\to V$. To check the covering definition on every affine open $H\\subseteq V$, use the affine-transition assertion of the spectrum-colimit lemma on the two-object directed ring diagram $\\Gamma(V,\\mathcal O_V)\\to\\Gamma(W_a,\\mathcal O_{W_a})$. It says $W_a\\to V$ is affine. By the definition of an affine morphism, the inverse image $W_{a,H}$ of $H$ is an affine open of $W_a$. The finite family of these opens has images with union $H$, by the surjectivity just proved. Thus the affine-open condition holds for every $H$, and the weakly etale arrows $W_a\\to V$ are a pro-etale covering.",
+   "text": "Construct B_j = Spec(Localization S_j), where S_j is the inverse image of the unit submonoid of Gamma(A_j,top)/I_j. The affine closed-specialization localization theorem makes b_j : B_j -> A_j weakly etale, ensures that its image contains every point specializing into C_j, and ensures that every point of B_j specializes inside B_j to a point over C_j. No scheme is chosen from an unproved existence assertion: B_j and b_j are these explicit localizations and spectrum maps. To cover v in V, choose a specialization z in V times_X Z, choose an affine piece A_j over its projection, then use Flat.generalizingMap for A_j -> V to lift the generalization v to a point specializing into C_j. This point lifts to B_j. Hence the finite family B_j -> V is jointly surjective. Its maps are spectral because source and target are affine, so IsCompactOpenCovered.of_finite_of_isSpectralMap verifies the quasi-compact covering condition on each quasi-compact open. Thus it is a pro-etale covering refining the original sieve. Scheme.Pullback.exists_preimage_pullback converts each point over C_j into a point of B_j times_X Z; the specialization property therefore persists in the precise form needed.",
    "uses": [
     "lem-weil-pbc-affine-closed-specialization-localization",
     "lem-weil-pbc-flat-generalizations-lift",
     "def-weil-weakly-etale-morphism",
-    "lem-weil-proetale-weakly-etale-localization",
     "def-weil-pbc-small-proetale-site",
     "def-weil-pbc-proetale-covering",
-    "lem-weil-pbc-spec-colimit-limit",
-    "pqf-def-affine-morphism"
+    "pqf-def-affine-morphism",
+    "def-pc-fibre-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AG, lemma-jshriek-zero, proof"
+    "place": "Tag 09AG, lemma-jshriek-zero"
    }
   },
   {
-   "text": "If $W_a$ is nonempty and an $X$-morphism $W_a\\to U$ existed, choose a point of $W_a$ and then its specialization lying over $C_a$. Write $q$ for that latter point and $\\mathfrak q$ for its prime in $S_a^{-1}A_a$. Its contraction contains $I_a$, so the canonical map $A_a\\to\\kappa(q)$ annihilates $I_a$ and factors through $A_a/I_a$. Applying $\\operatorname{Spec}$ gives a morphism $\\operatorname{Spec}\\kappa(q)\\to C_a\\to Z$ compatible over $X$ with $\\operatorname{Spec}\\kappa(q)\\to W_a\\to U$. The fiber-product universal property gives a morphism from this nonempty one-point spectrum to $U\\times_XZ=\\varnothing$, a contradiction. Thus the indexing set for $P(W_a)$ is empty, and $P(W_a)=0$. If $W_a=\\varnothing$, it has a unique map to $U$; the empty covering and the sheaf axiom give $G(\\varnothing\\to U)=0$, so again $P(W_a)=0$.",
+   "text": "For any object W with this specialization property, a lift a : W -> U over X forces W to be empty: a point of W supplies a point of W times_X Z, and the pullback universal property maps that point to the assumed-empty U times_X Z. To show P(W) is zero, use the already-proved final discrete indexing theorem for the pointwise Kan extension. Each canonical comma object has an invertible structure map and induces a lift of W to U. Consequently W is empty and, by that isomorphism, so is the corresponding object T over U. The empty covering makes G(T) zero (isTerminalSectionsOfIsEmpty). The diagram after restriction to the final discrete indexing category is therefore zero, and its colimit P(W) is zero by Functor.Final.isColimitWhiskerEquiv and IsColimit.isZero_pt. This includes empty W without a separate nonempty assumption.",
    "uses": [
     "def-pc-fibre-product",
-    "def-weil-extension-by-zero-presheaf",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-proetale-covering",
-    "def-weil-affine-spectrum",
-    "def-weil-closed-immersion"
+    "lem-weil-pbc-localization-kan-discrete-lifts",
+    "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AG, lemma-jshriek-zero, proof"
+    "place": "Tag 09AG, lemma-jshriek-zero"
    }
   },
   {
-   "text": "The representatives of $s$ on $T_a$ restrict to elements of $P(W_a)=0$. Naturality of the sheafification map therefore gives $s|_{W_a}=0$ for all $a$. Since step 3 gives a covering, sheaf uniqueness implies $s=0$. Every section is zero, as required. If $V$ is empty, its empty cover gives the same conclusion directly.",
+   "text": "Apply the refinement from steps 2 and 3 to the image sieve of s from step 1. On each B_j the representative p_j is zero by step 4. Naturality and preservation of zero by the sheafification map give s restricted to B_j = 0. The separatedness part of the underlying set sheaf condition on this covering gives s = 0. Thus every two sections coincide. The finite-family argument also admits the empty family, so empty V is covered.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AG, lemma-jshriek-zero, proof"
+    "place": "Tag 09AG, lemma-jshriek-zero"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-sheafification-sections-local",
   "def-weil-pbc-sheafification",
   "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets",
   "def-weil-pbc-proetale-covering",
-  "lem-weil-pbc-closed-immersion-base-change",
   "def-weil-closed-immersion",
-  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-affine-spectrum",
   "lem-weil-pbc-affine-closed-specialization-localization",
   "lem-weil-pbc-flat-generalizations-lift",
-  "def-weil-weakly-etale-morphism",
   "def-weil-pbc-small-proetale-site",
-  "lem-weil-pbc-spec-colimit-limit",
   "pqf-def-affine-morphism",
   "def-pc-fibre-product",
-  "def-weil-extension-by-zero-presheaf",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-affine-spectrum"
+  "lem-weil-pbc-localization-kan-discrete-lifts",
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "status": "split",
  "mathlib_searches": [
@@ -167,7 +158,8 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AG, lemma-jshriek-zero, proof"
+  "place": "Tag 09AG, lemma-jshriek-zero, proof",
+  "note": "D2 formalization follows the same affine-localization and sheaf-uniqueness route. Mathlib local surjectivity replaces a manual construction of abelian sheafification; the source library's proved final-discrete Kan-extension theorem replaces an explicit coproduct comparison."
  },
  "merged_into": null,
  "lean_audit": {
@@ -233,5 +225,15 @@
   "by": "NO",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-6d767",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T182201-L-784816",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, DAG records, change record, report, target signature, compilation, and direct importer match the stage-3 requirements; all checks pass."
  }
 }
