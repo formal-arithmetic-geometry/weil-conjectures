@@ -2,6 +2,10 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionHomologyCoherence
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # K-flat chart comparison naturality
 

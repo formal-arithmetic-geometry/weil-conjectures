@@ -2,6 +2,7 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartModel
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionTotalCoherence
+import Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor
 
 /-! # Affine tensor-homology naturality
 
