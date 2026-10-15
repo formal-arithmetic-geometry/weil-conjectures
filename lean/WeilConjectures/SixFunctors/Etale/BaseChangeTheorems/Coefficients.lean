@@ -190,9 +190,15 @@ theorem Etale.hasTorsionBaseChange_of_forall_prime {X Y : Scheme.{u}} (f : X ⟶
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ g' f' K n q hq) K hK
 
 
-/-- Injective acyclicity over all prime quotients implies the base change property. -/
+/-- **Injective acyclicity implies the base change property.** If a proper morphism
+`f : X ⟶ Y` has injective acyclicity with `Λ ⧸ pΛ`-coefficients for every prime `p`, then it
+satisfies the base change property with `Λ`-coefficients: for the torsion rings `Λ ⧸ pΛ` this is
+`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`, and the passage to
+`Λ` is `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_forall_prime`.
+(blueprint: `lemma-weil-pbc-property-iff-acyclicity`, `IA_r(f)` for every prime `r` implies
+`PBC(f)`) -/
 @[stacks 0A4B]
-theorem Etale.hasTorsionBaseChange_of_allPrimeInjectiveAcyclicity {X Y : Scheme.{u}} (f : X ⟶ Y)
+theorem Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f]
     (hf : ∀ p : ℕ, p.Prime →
       Etale.HasInjectiveAcyclicity (Λ ⧸ Ideal.span {(p : Λ)}) f) :

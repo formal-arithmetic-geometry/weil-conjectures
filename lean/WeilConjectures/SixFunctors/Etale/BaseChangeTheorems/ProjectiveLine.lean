@@ -28,7 +28,8 @@ Both halves are stated here and combined into
 ## The proof of the projective-line case
 
 By `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity` it suffices to
-prove injective acyclicity for the projection, which is
+prove injective acyclicity for the projection with `Λ ⧸ pΛ`-coefficients for every prime `p`,
+which is
 `AlgebraicGeometry.Etale.hasInjectiveAcyclicity_projectiveLine` of
 `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk`. The
 Lean proof checks that the exchange morphism is an isomorphism at every geometric point, since
@@ -118,7 +119,7 @@ docstring, and Stacks Project, Tag 095T, whose proof it is.
 (blueprint: `prop:weil-pbc-projective-line`) -/
 theorem Etale.hasTorsionBaseChange_projectiveLine (S : Scheme.{u}) :
     Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S) :=
-  Etale.hasTorsionBaseChange_of_allPrimeInjectiveAcyclicity Λ _ fun _ _ ↦
+  Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity Λ _ fun _ _ ↦
     Etale.hasInjectiveAcyclicity_projectiveLine _ S
 
 /-- **Reduction of proper base change to the projective line**: if the projection

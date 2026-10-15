@@ -34,10 +34,10 @@ statements verbatim, with `sorry` proofs (`stages/2-statements.md` §4):
 4. `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`,
    `WeilConjectures.AlgebraicGeometry.Curve.FieldExtension`, line 120;
 5. `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity`,
-   `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty`, line 321.
+   `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients`, line 201.
 
-(The line is that of the `theorem` keyword.) Target 5 is **not locked** until the upstream side
-answers (proposal (c′), `GOAL.md`).
+(The line is that of the `theorem` keyword.) Target 5 follows the corrected upstream
+prime-quotient statement.
 
 When the five are proved, the earlier target (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`
 and `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring` in
@@ -216,16 +216,14 @@ theorem AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAl
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
   sorry
 
-/-- **Target 5 — NOT LOCKED until the upstream side answers** (decision of the human,
-2026-10-12 04:20 +08: the human takes it to the upstream side with proposal (c′), which re-proves
-`AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveLine` without it so that it leaves the
-earlier target's closure). **Injective acyclicity implies the base change property**, over an
-arbitrary coefficient ring: a proper morphism with injective acyclicity satisfies the base change
-property for torsion coefficients. Verbatim from
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` (line 321 at
-`7d675a263`).
+/-- **Target 5. Injective acyclicity implies the base change property**, with prime quotient
+coefficients: if a proper morphism has injective acyclicity over `Λ ⧸ pΛ` for every prime `p`,
+then it satisfies the base change property over `Λ`. Verbatim from
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients`.
 (blueprint: `lemma-weil-pbc-property-iff-acyclicity`; Stacks 0A4B) -/
 theorem AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f]
-    (hf : Etale.HasInjectiveAcyclicity Λ f) : Etale.HasTorsionBaseChange Λ f :=
+    (hf : ∀ p : ℕ, p.Prime →
+      Etale.HasInjectiveAcyclicity (Λ ⧸ Ideal.span {(p : Λ)}) f) :
+    Etale.HasTorsionBaseChange Λ f :=
   sorry

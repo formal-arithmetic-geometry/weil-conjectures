@@ -27,8 +27,7 @@ the source repository (branch `slopmaster2` at `7d675a263`):
   `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`
   (`WeilConjectures.AlgebraicGeometry.Curve.FieldExtension`);
 - `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity`
-  (`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty`; not locked until
-  the upstream side answers).
+  (`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients`).
 -/
 
 @[expose] public section
