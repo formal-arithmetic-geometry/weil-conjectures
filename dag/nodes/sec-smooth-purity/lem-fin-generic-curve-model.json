@@ -496,5 +496,23 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-026e47ffd (reviewer sub-agent of L); spot-checked: Read the full item, report, unit/chapter route, all cited DAG statements, and cited literature. Steps 1–11 check correctly, including descent, reduction, smooth spreading, dimensions, finiteness, base-change morphisms, coefficient categories, boundary finiteness, and edge cases. The source’s nilpotent-exponent error is correctly repaired without changing the target. No new nodes, duplicates, cycles, or repairs needed. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGenericCurveModel",
+  "declaration": "AlgebraicGeometry.exists_finite_generic_curve_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGenericCurveModel.lean",
+  "statement": "theorem exists_finite_generic_curve_model (k : Type u) [Field k] (X S : Scheme.{u}) [S.Over (Spec (.of k))] [IsIntegral S] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (f : X ⟶ S) [IsProjective f] (h_dim : ∀ s : S, topologicalKrullDim (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s) : Scheme.{u}) ≤ 1) : ∃ U : S.Opens, Nonempty U ∧ ∃ (S' : Scheme.{u}) (p : S' ⟶ U.toScheme), IsIntegral S' ∧ IsFinite p ∧ Surjective p ∧ ∃ (n : ℕ) (Y : Fin n → Scheme.{u}) (g : ∀ i : Fin n, Y i ⟶ S') (ν : (∐ Y) ⟶ (pullback f (p ≫ U.ι)).nilradical.subscheme), IsFinite ν ∧ Surjective ν ∧ (∀ i : Fin n, (SmoothOfRelativeDimension 1 (g i) ∧ IsProjective (g i)) ∨ (IsFinite (g i) ∧ Etale (g i))) ∧ Sigma.desc g = ν ≫ (pullback f (p ≫ U.ι)).nilradical.subschemeι ≫ pullback.snd f (p ≫ U.ι) ∧ ∃ (D : Scheme.{u}) (d : D ⟶ (pullback f (p ≫ U.ι)).nilradical.subscheme), IsClosedImmersion d ∧ IsFinite (d ≫ (pullback f (p ≫ U.ι)).nilradical.subschemeι ≫ pullback.snd f (p ≫ U.ι)) ∧ ∃ V : (pullback f (p ≫ U.ι)).nilradical.subscheme.Opens, (∀ x, x ∈ V ↔ x ∉ Set.range d) ∧ IsIso (pullback.snd ν V.ι)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2acf6a6bf",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, dependencies, source, edge cases, docstrings, and verbatim signature. Server-only compile passed in 1.7 seconds. No defects found; branch head unchanged."
  }
 }
