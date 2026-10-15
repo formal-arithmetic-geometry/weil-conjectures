@@ -48,4 +48,27 @@ theorem openSiteReturn_counit_app
   exact equivalence_return_cancel e.mapDerivedCategory (R.mapDerivedCategory.obj E)
     (PU.obj E) ((Functor.mapDerivedCategoryCompIso R e.functor).app E)
 
+/-- The apex equivalence maps the open-site return and composition maps to
+the site counit on the overlap scheme. This is the component form used in
+the canonical overlap object pin. -/
+theorem perfectOverlapApex_siteReturn_comp
+    {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
+    (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)
+    (U V : Y.Opens) (E : schemeDerivedCategory X) :
+    let W := g ⁻¹ᵁ U ⊓ g ⁻¹ᵁ V
+    let e : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W) ≌
+      SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) :=
+      Scheme.Modules.overEquiv W
+    let Rw := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W
+    let cart := perfectOverlapStageEquivalence g pX pY b hg U V
+    (perfectOverlapApexEquivalence g pX pY b hg U V).functor.map
+        ((openSiteReturnIso X W).hom.app E) ≫
+      cart.functor.map ((Functor.mapDerivedCategoryCompIso Rw e.functor).symm.hom.app E) =
+        cart.functor.map (e.mapDerivedCategory.counitIso.hom.app
+          ((schemeOpenRestriction X W).mapDerivedCategory.obj E)) := by
+  intro W e Rw cart
+  have h := congrArg cart.functor.map (openSiteReturn_counit_app X W E)
+  simp only [Functor.map_comp] at h
+  exact h
+
 end AlgebraicGeometry
