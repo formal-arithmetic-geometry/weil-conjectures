@@ -1,0 +1,162 @@
+{
+ "id": "lem-sc-cartesian-chart-restricted-map-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of the restricted chart cone map",
+ "statement": "Let f:X→S be any scheme morphism, D:I→Over(S) a diagram of schemes, c a cone over D, i∈I and j an object of Over(i). Put B=D(i), P=X×_S B, Q_j=D(j.left)×_B P and Q_∞=c.pt×_B P. Let l:Q_∞→Q_j be the underlying canonical chart cone leg and assume its displayed second-projection equality l≫pr_P=pr_P. For an abelian étale sheaf F on X and q≥0, let G_j and G_∞ be its pullbacks along Q_j→P→X and Q_∞→P→X. Choose V étale over B, U étale over c.pt, and a specified pullback square U→V over c.pt→B. Let x be a restricted degree-q cohomology class on V×_B Q_j with coefficients G_j. Let z be the uniquely specified inverse image of x under the canonical raw cohomology comparison, and let z' be its raw pullback along l with the inverse upperStarComp coefficient identification. Then the apex chart cohomology comparison applied to the restricted-over cohomology cone map of x equals the specified single-free-representable pullback map for U→V followed by the apex raw-adjunction comparison applied to z'. No exchange map or stage lift occurs in this identity.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Second proof, evaluation side of the canonical comparison square; Tag 03Q8 for the raw cohomology comparison."
+ },
+ "stmt_deps": [
+  "def-sc-cartesian-higher-image-chart-system",
+  "def-sc-raw-restricted-cohomology-class",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-sc-cartesian-chart-restricted-raw-class"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing chartRestrictedMap_eq_rawAffine to the chart cone leg and its displayed second-projection equality. That theorem is proved by reflexivity: restrictedOverCohomologyMap and rawAffineRestrictedCohomologyMap have the same literal derived-pullback and coefficient formulas; their commutativity proof arguments agree by proof irrelevance.",
+   "uses": [
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply rawRestrictedCohomologyClass_map to the canonical inverse-evaluation class of x. It identifies the raw affine map with evaluation of its raw pullback z'.",
+   "uses": [
+    "def-sc-raw-restricted-cohomology-class"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved defining equation cartesianChartRestrictedRawClass_eq to replace the raw pullback by the cached apex class. Apply the existing chartCohomologyIso_eval to that class, and compose with the preceding evaluation identity by congruence and transitivity. Neither exchange nor the stage lift occurs in this calculation.",
+   "uses": [
+    "lem-sc-cartesian-chart-cohomology-evaluation",
+    "def-sc-cartesian-chart-restricted-raw-class"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-sc-cartesian-chart-restricted-raw-class",
+  "def-sc-raw-restricted-cohomology-class",
+  "lem-sc-cartesian-chart-cohomology-evaluation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Second proof, canonical comparison square, evaluation side. Complete Lean proof using the existing literal-map bridge, rawRestrictedCohomologyClass_map, the defining cached-class equation, and chartCohomologyIso_eval."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "evaluation of cohomology restriction through raw derived adjunction",
+   "results": "LeanSearch unavailable in this session; the project-specific raw evaluation API was found in the library.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id_apply",
+   "results": "One generic inverse-isomorphism evaluation lemma, Mathlib.CategoryTheory.Elementwise. No statement specific to the chart cone.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "grep",
+   "query": "cartesianChartRestrictedCohomologyMap_eval",
+   "results": "No existing declaration with this name; reused library chartCohomologyIso_eval and rawRestrictedCohomologyComparison_naturality.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of evaluation under adjunction and inverse isomorphism, pullback cohomology naturality",
+   "results": "Eight generic evaluation/adjunction hits, including ExponentiableMorphism.ev_naturality and Sheaf.ΓHomEquiv_naturality_right. No specialized chart-cone statement.",
+   "date": "2026-10-15",
+   "verdict": "Reuse existing library ingredients; the specialized evaluation equation is proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.hom_inv_id_apply",
+   "results": "One generic cancellation lemma in Mathlib.CategoryTheory.Elementwise; no chart-cone result.",
+   "date": "2026-10-15",
+   "verdict": "Reuse existing library ingredients; the specialized evaluation equation is proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictedOverCohomologyMap|rawAffineRestrictedCohomologyMap|chartCohomologyIso_eval",
+   "results": "Mathlib search returned no hits. Local rg in lean/Sheaf and lean/WeilConjectures found the proved chartRestrictedMap_eq_rawAffine, restrictedOverCohomologyMap_eq_rawAffine, and chartCohomologyIso_eval. These existing ingredients are reused; the complete specialized evaluation equation was absent.",
+   "date": "2026-10-15",
+   "verdict": "Reuse existing library ingredients; the specialized evaluation equation is proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality",
+  "date": "2026-10-15",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "Proof by affine inverse limits: the geometric continuity comparison square for cartesian higher direct images.",
+   "via": [
+    "lem-sc-cartesian-chart-exchange-naturality",
+    "lem-sc-cartesian-higher-image-chart-comparison",
+    "lem-sc-cartesian-higher-image-germ-descent",
+    "lem-sc-limit-higher-direct-image-exchange",
+    "lem-sc-algclosed-extension-injective-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianChartRestrictedMapEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianChartRestrictedMapEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Etale.cartesianChartRestrictedCohomologyMap_eval",
+  "declarations": [
+   "AlgebraicGeometry.Etale.cartesianChartRestrictedCohomologyMap_eval"
+  ],
+  "statement": "theorem cartesianChartRestrictedCohomologyMap_eval {S X : Scheme.{u}} (f : X ⟶ S) {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (i : I) (V : (D.obj i).left.Etale) (U : c.pt.left.Etale) (r : U.left ⟶ V.left) (hr : IsPullback r U.hom V.hom (c.π.app i).left) (j : Over i) (x : restrictedOverCohomology (pullback.snd f (D.obj i).hom) (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartDiagram f D i).obj j) V) (hl₂ : ((cartesianChartCone f D c i).π.app j).left ≫ pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) = pullback.snd (c.π.app i).left (pullback.snd f (D.obj i).hom)) : (cartesianChartCohomologyIso f (D.obj i).hom (c.π.app i).left c.pt.hom (Over.w (c.π.app i)).symm F q V U r hr).hom (restrictedOverCohomologyMap (pullback.snd f (D.obj i).hom) (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F) (q : ℤ) ((cartesianChartCone f D c i).π.app j) V x) = (DerivedCategory.Plus.singleFunctor _ 0).map (abelianFreeRepresentablePullbackSquareIso (c.π.app i).left V U r hr).hom ≫ (cartesianChartRawAdjunctionIso f (D.obj i).hom (c.π.app i).left c.pt.hom (Over.w (c.π.app i)).symm F q V).hom (cartesianChartRestrictedRawClass f D c F q i V U r hr j x hl₂)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-15"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb23a",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261015T081231-L-3876910",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb23a",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261015T081231-L-3876910",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged exchange theorem and all new constructions with their DAG statements and proof routes; all three modules compile cleanly, and all eight declarations use only propext, Classical.choice, and Quot.sound."
+ }
+}

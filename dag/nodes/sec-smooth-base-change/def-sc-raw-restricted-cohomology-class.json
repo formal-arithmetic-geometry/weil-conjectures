@@ -1,0 +1,138 @@
+{
+ "id": "def-sc-raw-restricted-cohomology-class",
+ "kind": "definition",
+ "title": "Canonical inverse-evaluation class and its pullback equations",
+ "statement": "For schemes $S,Y$, a morphism $h:Y\\to S$, an abelian etale sheaf $G$ on $Y$, $q\\in\\mathbf N$, and an etale $V\\to S$, let $c$ be the evaluation comparison of [def-sbc-raw-restricted-cohomology-comparison-map]. For $x$ in the restricted cohomology group of [def-sbc-raw-affine-restricted-cohomology], define its raw class by $c^{-1}(x)$, using [lem-sbc-raw-restricted-cohomology-comparison-is-iso]. Evaluation of this class equals $x$. For every commuting triangle and coefficient map as in [lem-sbc-raw-restricted-cohomology-comparison-naturality], the raw pullback of this class is the inverse-evaluation class of the restricted cohomology pullback. The inverse is uniquely determined, rather than chosen from mere existence.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Second proof, canonical comparison square; evaluation uses Tag 03Q8."
+ },
+ "stmt_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
+  "lem-sbc-raw-restricted-cohomology-comparison-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Define the raw class as the inverse of the specified evaluation isomorphism. The inverse-hom identity proves that evaluation recovers the original class. Its inverse is unique, so this construction chooses no arbitrary representative.",
+   "uses": [
+    "lem-sbc-raw-restricted-cohomology-comparison-is-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply naturality of evaluation to that inverse class and substitute the inverse-hom identity. This proves rawRestrictedCohomologyClass_map. Evaluation at the target is injective because it is an isomorphism; applying this injectivity proves rawRestrictedCohomologyClass_naturality. These arguments work in degree zero and on empty test objects.",
+   "uses": [
+    "lem-sbc-raw-restricted-cohomology-comparison-naturality",
+    "lem-sbc-raw-restricted-cohomology-comparison-is-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
+  "lem-sbc-raw-restricted-cohomology-comparison-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Second proof, canonical comparison square for the affine inverse-limit argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse of an additive evaluation isomorphism commutes with pullback when the evaluation square commutes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inv_hom_id_apply\"",
+   "results": "4 hits: CategoryTheory.Iso.inv_hom_id_apply, CategoryTheory.IsIso.inv_hom_id_apply, TopCat.inv_hom_id_apply, FintypeCat.inv_hom_id_apply",
+   "date": "2026-10-15",
+   "verdict": "Generic API only; no complete specialized match in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "rawRestrictedCohomologyClass|rawClassOfRestrictedCohomology",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "Generic API only; no complete specialized match in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality",
+  "date": "2026-10-15",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "Proof by affine inverse limits: the geometric continuity comparison square for cartesian higher direct images.",
+   "via": [
+    "lem-sc-cartesian-chart-exchange-naturality",
+    "lem-sc-cartesian-higher-image-chart-comparison",
+    "lem-sc-cartesian-higher-image-germ-descent",
+    "lem-sc-limit-higher-direct-image-exchange",
+    "lem-sc-algclosed-extension-injective-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawRestrictedCohomologyClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedCohomologyClass.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawRestrictedCohomologyClass",
+  "declarations": [
+   "AlgebraicGeometry.Etale.rawRestrictedCohomologyClass",
+   "AlgebraicGeometry.Etale.rawRestrictedCohomologyClass_spec",
+   "AlgebraicGeometry.Etale.rawRestrictedCohomologyClass_map",
+   "AlgebraicGeometry.Etale.rawRestrictedCohomologyClass_naturality"
+  ],
+  "statement": "def rawRestrictedCohomologyClass {S Y : Scheme.{u}} (h : Y ⟶ S) (q : ℕ) (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (V : S.Etale) (x : rawAffineRestrictedCohomology h q G V) : (abelianHigherDirectImageRawPresheaf h q G).obj (op V)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-15"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb23a",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261015T081231-L-3876910",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb23a",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261015T081231-L-3876910",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged exchange theorem and all new constructions with their DAG statements and proof routes; all three modules compile cleanly, and all eight declarations use only propext, Classical.choice, and Quot.sound."
+ }
+}

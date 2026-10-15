@@ -10,24 +10,32 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Apply the naturality theorem for raw restricted cohomology comparison to the cone leg and its coefficient map; expand the canonical raw transport and chart-class pullback maps. Pullback uniqueness and inverse-image composition identify the source and coefficient maps. Take derived adjoints and use the defining mate equation for cartesianDerivedImageMap, then cancel the adjunction unit/counit by the triangle identities. The remaining factors are exactly the restrictedOverCohomologyMap and the canonical apex cohomology isomorphism.",
+   "text": "Apply the existing proved chartRawAdj_classPullback to the cone leg. It is the raw-adjunction pullback identity precomposed with the specified free-representable pullback isomorphism, hence relates chart-class pullback followed by exchange to the apex raw adjunct.",
    "uses": [
-    "lem-sbc-raw-restricted-cohomology-comparison-naturality",
-    "def-sc-cartesian-derived-image-map",
-    "lem-sbc-abelian-higher-direct-image-class-compatibility"
+    "lem-sc-cartesian-chart-raw-adjunction-pullback",
+    "def-sc-cartesian-chart-restricted-raw-class"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved evaluation-side identity to the restricted cone map. Unfold the original chart lift and use the defining canonical raw-class equation, whose inverse-evaluation formulas coincide. Combine the raw-adjunction identity and the evaluation identity by transitivity. All lower statements used here are proved; no new sorry remains.",
+   "uses": [
+    "lem-sc-cartesian-chart-restricted-map-evaluation",
+    "def-sc-raw-restricted-cohomology-class"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-raw-restricted-cohomology-comparison-naturality",
-  "def-sc-cartesian-derived-image-map",
-  "lem-sbc-abelian-higher-direct-image-class-compatibility"
+  "def-sc-cartesian-chart-restricted-raw-class",
+  "def-sc-raw-restricted-cohomology-class",
+  "lem-sc-cartesian-chart-raw-adjunction-pullback",
+  "lem-sc-cartesian-chart-restricted-map-evaluation"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/0EYM",
-  "place": "canonical exchange square and derived adjunction mate calculation"
+  "place": "Second proof, canonical comparison square for the affine inverse-limit argument."
  },
  "mathlib_searches": [
   {
@@ -100,5 +108,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb23a",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261015T081231-L-3876910",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged exchange theorem and all new constructions with their DAG statements and proof routes; all three modules compile cleanly, and all eight declarations use only propext, Classical.choice, and Quot.sound."
  }
 }

@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-cartesian-chart-raw-adjunction-pullback",
+ "kind": "statement",
+ "title": "Chart raw adjunction commutes with pullback and exchange",
+ "statement": "lemma chartRawAdj_classPullback {S X B T T' : Scheme.{u}}\n    (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S) (wg' : g' = a ≫ g)\n    (b : T' ⟶ T) (a' : T' ⟶ B) (ha : a' = b ≫ a)\n    (g'' : T' ⟶ S) (wg'' : g'' = a' ≫ g) (wb : g'' = b ≫ g')\n    (l : pullback a' (pullback.snd f g) ⟶ pullback a (pullback.snd f g))\n    (hl₁ : l ≫ pullback.fst a (pullback.snd f g) =\n      pullback.fst a' (pullback.snd f g) ≫ b)\n    (hl₂ : l ≫ pullback.snd a (pullback.snd f g) = pullback.snd a' (pullback.snd f g))\n    (hw : l ≫ (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g) =\n      pullback.snd a' (pullback.snd f g) ≫ pullback.snd f g)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) (V : B.Etale)\n    (U : T'.Etale) (r : U.left ⟶ V.left)\n    (hr : IsPullback r U.hom V.hom a')\n    (z : (abelianHigherDirectImageRawPresheaf\n      (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g) n\n      (((pullback.snd a (pullback.snd f g))^*[AddCommGrpCat.{u + 1}]).obj\n        (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F))).obj (op V))\n    (z' : (abelianHigherDirectImageRawPresheaf\n      (pullback.snd a' (pullback.snd f g) ≫ pullback.snd f g) n\n      (((pullback.snd a' (pullback.snd f g))^*[AddCommGrpCat.{u + 1}]).obj\n        (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F))).obj (op V))\n    (hz' : z' = abelianHigherDirectImageRawPullback l\n      (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g)\n      (pullback.snd a' (pullback.snd f g) ≫ pullback.snd f g) hw n _ _\n      ((upperStarComp AddCommGrpCat.{u + 1} l\n        (pullback.snd a (pullback.snd f g)) (pullback.snd a' (pullback.snd f g))\n        hl₂.symm).inv.app (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F)) V z) :\n    cartesianChartClassPullback a b a' ha V U r hr _ (n : ℤ)\n      ((cartesianChartRawAdjunctionIso f g a g' wg' F n V).hom z) ≫\n      (shiftFunctor _ (n : ℤ)).map\n        (cartesianDerivedImageMap f g' g'' b wb\n          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) =\n    (DerivedCategory.Plus.singleFunctor _ 0).map\n      (abelianFreeRepresentablePullbackSquareIso a' V U r hr).hom ≫\n      (cartesianChartRawAdjunctionIso f g a' g'' wg'' F n V).hom z'",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Second proof, canonical comparison square; evaluation uses Tag 03Q8."
+ },
+ "stmt_deps": [
+  "def-sc-cartesian-derived-image-map",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "lem-sbc-abelian-higher-direct-image-class-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Use the two pullback projection equalities to identify the apex-to-stage map with the cartesian image projection after the chart source identifications. Inverse-image composition associativity and naturality identify its coefficient map with the chart leg coefficient map. Raw pullback composition then identifies the transported raw class with the specified apex raw pullback.",
+   "uses": [
+    "lem-sbc-abelian-raw-pullback-composition",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write the cartesian exchange as the mate of the inverse-image square isomorphism under the two derived adjunctions. Transpose the pulled-back chart adjunct. The unit/counit triangle identity and naturality of the single-functor and shift comparisons identify the transpose followed by exchange with the adjunct of the transported raw class. Replace that transported class by the result of the preceding step. This is the existing chartRawAdj_pullback proof, including its explicit hw and z-prime arguments.",
+   "uses": [
+    "def-sc-cartesian-derived-image-map",
+    "def-weil-pbc-adjunction-mate",
+    "prop-weil-pbc-derived-inverse-image-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the raw-adjunction pullback identity with the single-functor image of the specified free-representable pullback isomorphism, using chartClassPullback_postcomp. Unfolding cartesianChartClassPullback and associativity give the stated identity. This is the existing chartRawAdj_classPullback theorem in CartesianChartExchangeConclusion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cartesian-derived-image-map",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sbc-abelian-raw-pullback-composition",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Second proof, canonical comparison square. Reuse chartRawAdj_classPullback, which composes the existing raw-adjunction calculation with the specified free-source transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The adjoint of a pulled back derived Hom class followed by a base change mate equals the adjoint of its raw pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived adjunction under base change, compatibility of the mate with pulling back a derived Hom class",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.Adjunction.derivedη",
+   "date": "2026-10-15",
+   "verdict": "Generic API only; no complete specialized match in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "chartRawAdj_pullback|chartCohomologyIso_eval|cartesianChartCohomologyLift_exchange",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "Generic API only; no complete specialized match in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality",
+  "date": "2026-10-15",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "Proof by affine inverse limits: the geometric continuity comparison square for cartesian higher direct images.",
+   "via": [
+    "lem-sc-cartesian-chart-exchange-naturality",
+    "lem-sc-cartesian-higher-image-chart-comparison",
+    "lem-sc-cartesian-higher-image-germ-descent",
+    "lem-sc-limit-higher-direct-image-exchange",
+    "lem-sc-algclosed-extension-injective-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.CartesianChartExchangeConclusion",
+  "declaration": "AlgebraicGeometry.Etale.chartRawAdj_classPullback",
+  "statement": "lemma chartRawAdj_classPullback {S X B T T' : Scheme.{u}}\n    (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S) (wg' : g' = a ≫ g)\n    (b : T' ⟶ T) (a' : T' ⟶ B) (ha : a' = b ≫ a)\n    (g'' : T' ⟶ S) (wg'' : g'' = a' ≫ g) (wb : g'' = b ≫ g')\n    (l : pullback a' (pullback.snd f g) ⟶ pullback a (pullback.snd f g))\n    (hl₁ : l ≫ pullback.fst a (pullback.snd f g) =\n      pullback.fst a' (pullback.snd f g) ≫ b)\n    (hl₂ : l ≫ pullback.snd a (pullback.snd f g) = pullback.snd a' (pullback.snd f g))\n    (hw : l ≫ (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g) =\n      pullback.snd a' (pullback.snd f g) ≫ pullback.snd f g)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) (V : B.Etale)\n    (U : T'.Etale) (r : U.left ⟶ V.left)\n    (hr : IsPullback r U.hom V.hom a')\n    (z : (abelianHigherDirectImageRawPresheaf\n      (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g) n\n      (((pullback.snd a (pullback.snd f g))^*[AddCommGrpCat.{u + 1}]).obj\n        (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F))).obj (op V))\n    (z' : (abelianHigherDirectImageRawPresheaf\n      (pullback.snd a' (pullback.snd f g) ≫ pullback.snd f g) n\n      (((pullback.snd a' (pullback.snd f g))^*[AddCommGrpCat.{u + 1}]).obj\n        (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F))).obj (op V))\n    (hz' : z' = abelianHigherDirectImageRawPullback l\n      (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g)\n      (pullback.snd a' (pullback.snd f g) ≫ pullback.snd f g) hw n _ _\n      ((upperStarComp AddCommGrpCat.{u + 1} l\n        (pullback.snd a (pullback.snd f g)) (pullback.snd a' (pullback.snd f g))\n        hl₂.symm).inv.app (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F)) V z) :\n    cartesianChartClassPullback a b a' ha V U r hr _ (n : ℤ)\n      ((cartesianChartRawAdjunctionIso f g a g' wg' F n V).hom z) ≫\n      (shiftFunctor _ (n : ℤ)).map\n        (cartesianDerivedImageMap f g' g'' b wb\n          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) =\n    (DerivedCategory.Plus.singleFunctor _ 0).map\n      (abelianFreeRepresentablePullbackSquareIso a' V U r hr).hom ≫\n      (cartesianChartRawAdjunctionIso f g a' g'' wg'' F n V).hom z'",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-15",
+  "note": "Existing proved library theorem. Its proof applies chartClassPullback_postcomp to chartRawAdj_pullback; reused by a proof-only import, with no library source change."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb23a",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261015T081231-L-3876910",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb23a",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261015T081231-L-3876910",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged exchange theorem and all new constructions with their DAG statements and proof routes; all three modules compile cleanly, and all eight declarations use only propext, Classical.choice, and Quot.sound."
+ }
+}

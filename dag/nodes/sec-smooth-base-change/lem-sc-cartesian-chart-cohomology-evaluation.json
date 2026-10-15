@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-cartesian-chart-cohomology-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of the canonical chart cohomology comparison",
+ "statement": "For morphisms f:X→S, g:B→S, a:T→B and g′:T→S with g′=a≫g, an abelian étale sheaf F on X, n≥0, an étale B-scheme V, an étale T-scheme U, and a specified pullback square U→V over a, let z be a raw degree-n class for the sheaf pulled to T×_B(X×_S B), evaluated at V. The canonical chart cohomology comparison applied to the raw evaluation of z equals precomposition by the single-functor image of the specified free-representable pullback isomorphism followed by the canonical chart raw-adjunction comparison of z.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Second proof, evaluation of the canonical comparison square; Tag 03Q8 for raw evaluation."
+ },
+ "stmt_deps": [
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-sbc-raw-restricted-cohomology-comparison-is-iso"
+ ],
+ "proof": [
+  {
+   "text": "Unfold cartesianChartCohomologyIso, which is the inverse raw-evaluation comparison followed by the chart raw-adjunction comparison and the free-source transport. Evaluate the two composed isomorphisms, cancel raw evaluation with its inverse by Iso.hom_inv_id_apply, and evaluate the Yoneda source isomorphism as precomposition. The remaining expression is definitionally the displayed raw-adjunction comparison. This is the existing proved chartCohomologyIso_eval calculation and also covers n=0 and empty test objects.",
+   "uses": [
+    "lem-sbc-raw-restricted-cohomology-comparison-is-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-raw-restricted-cohomology-comparison-is-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Attach the existing proved chartCohomologyIso_eval; its proof unfolds the specified isomorphisms and cancels inverse evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation under an isomorphism followed by its inverse cancels, and Yoneda maps act by precomposition",
+   "results": "Eight generic Yoneda hits including yonedaEquiv_symm_naturality_left and yonedaEquiv_symm_map; the exact project-specific result is already proved in CartesianChartExchangeEvaluation.",
+   "date": "2026-10-15",
+   "verdict": "Reuse the existing library theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.hom_inv_id_apply",
+   "results": "One hit, Mathlib.CategoryTheory.Elementwise: Iso.hom_inv_id_apply, the cancellation API used by the existing proof.",
+   "date": "2026-10-15",
+   "verdict": "Generic ingredient, not the chart statement."
+  },
+  {
+   "tool": "grep",
+   "query": "chartCohomologyIso_eval|yoneda_mapIso_apply",
+   "results": "No Mathlib search hit. Reading lean/Sheaf/AlgebraicGeometry/CartesianChartExchangeEvaluation.lean found the exact proved private theorem chartCohomologyIso_eval.",
+   "date": "2026-10-15",
+   "verdict": "Reuse rather than restate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation under an isomorphism followed by its inverse cancels, and Yoneda maps act by precomposition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality",
+  "date": "2026-10-15",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "Proof by affine inverse limits: the geometric continuity comparison square for cartesian higher direct images.",
+   "via": [
+    "lem-sc-cartesian-chart-exchange-naturality",
+    "lem-sc-cartesian-higher-image-chart-comparison",
+    "lem-sc-cartesian-higher-image-germ-descent",
+    "lem-sc-limit-higher-direct-image-exchange",
+    "lem-sc-algclosed-extension-injective-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.CartesianChartExchangeEvaluation",
+  "declaration": "AlgebraicGeometry.Etale.chartCohomologyIso_eval",
+  "declarations": [
+   "AlgebraicGeometry.Etale.chartCohomologyIso_eval"
+  ],
+  "statement": "theorem chartCohomologyIso_eval {S X B T : Scheme.{u}}\n    (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S) (w : g' = a ≫ g)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ)\n    (V : B.Etale) (U : T.Etale) (r : U.left ⟶ V.left)\n    (hr : IsPullback r U.hom V.hom a)\n    (z : (abelianHigherDirectImageRawPresheaf\n      (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g) n\n      (((pullback.snd a (pullback.snd f g))^*[AddCommGrpCat.{u + 1}]).obj\n        (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F))).obj (op V)) :\n    (cartesianChartCohomologyIso f g a g' w F n V U r hr).hom\n      (rawRestrictedCohomologyComparison _ n _ V z) =\n    (DerivedCategory.Plus.singleFunctor _ 0).map\n        (abelianFreeRepresentablePullbackSquareIso a V U r hr).hom ≫\n      (cartesianChartRawAdjunctionIso f g a g' w F n V).hom z",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-15"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb23a",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261015T081231-L-3876910",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb23a",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261015T081231-L-3876910",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged exchange theorem and all new constructions with their DAG statements and proof routes; all three modules compile cleanly, and all eight declarations use only propext, Classical.choice, and Quot.sound."
+ }
+}
