@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.PoincareDuality.Abstract
-public import WeilConjectures.PoincareDuality.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
 
@@ -27,7 +27,7 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
    `Lg^* ⊣ Rg_*`, the mate of `Lg^* (Rg_* A ⊗ᴸ B) ≅ Lg^* Rg_* A ⊗ᴸ Lg^* B ⟶ A ⊗ᴸ Lg^* B`
    (`CategoryTheory.Adjunction.projectionMorphism`, using the monoidal structure of `Lg^*` of
    `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal`, restricted to `Dᵇc` in
-   `WeilConjectures.PoincareDuality.BoundedConstructible`), at
+   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), at
    `A = Di_! K`;
 2. the *inverse* of the projection comparison
    `q_{i,M,N} : Di_! (M ⊗ᴸ Li^* N) ⟶ Di_! M ⊗ᴸ N` of the adjunction `Di_! ⊣ Li^*` along the open
