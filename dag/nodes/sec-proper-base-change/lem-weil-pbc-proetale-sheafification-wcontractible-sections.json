@@ -31,66 +31,51 @@
  ],
  "proof": [
   {
-   "text": "Put $P=P_F$. By [lem-weil-pbc-point-lan-affine-evaluation], $P(\\coprod_iV_i)\\cong\\prod_iP(V_i)$ for every finite family of affines, also for the empty family. This is a property of this particular Kan presheaf; it does not hold for arbitrary presheaves.",
-   "uses": [
-    "lem-weil-pbc-point-lan-affine-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "/home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex; literature/stacks-project/sites.tex",
-    "place": "lem:point-eval, proof, sheafification sentence; Tags 00WK (lemma-sections-sheafification), 00WB (theorem-plus), 00WT (lemma-covering-surjective-after-sheafification)."
-   }
-  },
-  {
-   "text": "Every covering of the affine $U$ refines to finitely many affine arrows $V_i\\to U$, by the covering definition [def-weil-pbc-proetale-site]. Let $V=\\coprod_iV_i$. By [lem-weil-pbc-proetale-finite-coproduct-evaluation] the coproduct of the representable sheaves $h_{V_i}$ is $h_V$. The map $h_V\\to h_U$ is an epimorphism: for any sheaf $H$, two maps $h_U\\to H$ agreeing after $h_V\\to h_U$ correspond, by Yoneda, to sections of $H(U)$ agreeing on all $V_i$, hence are equal by the sheaf uniqueness axiom. Weak contractibility now lifts $\\operatorname{id}_U\\in h_U(U)$ to a map $\\sigma:U\\to V$ with $p\\sigma=\\operatorname{id}_U$. In particular the lift lands in the scheme coproduct, not necessarily in one summand. This argument also applies to the empty cover of the empty scheme.",
+   "text": "Given a covering sieve S of the affine U, extract a pro-etale precoverage family and apply Mathlib QuasiCompactCover.exists_hom to obtain a finite affine refinement. For each affine Spec A in that refinement, apply [lem-weil-pbc-affine-contractible-extension-full-site] to replace it by a singleton pro-etale affine cover Spec D -> Spec A, weakly contractible on the full small site of X. Compose these covers. The resulting finite family W_i -> U lies in S, covers U, and every W_i is affine and weakly contractible. Reindex the finite family by ULift (Fin (Nat.card I)) in Type u; surjective reindexing leaves the generated sieve unchanged. The argument includes the empty family.",
    "uses": [
     "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-affine-contractible-extension-full-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-finite-coproduct-evaluation] to W_i. It gives a coproduct V in the site (by reflection of colimits along the fully faithful universe-lifted Yoneda functor), the represented-sheaf coproduct, and the restriction-product bijection for every set sheaf on V. Let p:V -> U be the coproduct of the covering arrows. The map h_V -> h_U is epi: maps h_U -> H agreeing after p correspond to sections agreeing on the covering W_i -> U, hence are equal by sheaf separatedness and Yoneda. Apply the given weak contractibility of U to this epi and the identity section of h_U(U). The resulting actual site morphism sigma:U -> V satisfies sigma p=id_U. No clopen inheritance lemma is used.",
+   "uses": [
     "lem-weil-pbc-proetale-finite-coproduct-evaluation",
-    "lem-weil-pbc-proetale-subcanonical"
+    "lem-weil-pbc-proetale-subcanonical",
+    "def-weil-pbc-proetale-site"
    ],
-   "elementary": true,
-   "source": {
-    "document": "/home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex; literature/stacks-project/sites.tex",
-    "place": "lem:point-eval, proof, sheafification sentence; Tags 00WK (lemma-sections-sheafification), 00WB (theorem-plus), 00WT (lemma-covering-surjective-after-sheafification)."
-   }
+   "elementary": false
   },
   {
-   "text": "Let $t\\in P^\\#(U)$. The local-sections theorem [lem-weil-pbc-site-sheafification-sections-local] gives a covering and representatives in $P$; refine it as in step 2. Write these representatives as $s_i\\in P(V_i)$, and combine them using step 1 into $s\\in P(V)$. Naturality of the unit $\\eta$ gives $\\eta(s)|_{V_i}=t|_{V_i}$, so sheaf uniqueness and [lem-weil-pbc-proetale-finite-coproduct-evaluation] give $\\eta(s)=p^*t$. Pulling back along $\\sigma$ gives $\\eta(\\sigma^*s)=\\sigma^*p^*t=t$. Thus $\\eta_U$ is surjective. If $\\eta_U(x)=\\eta_U(y)$, the same local-sections theorem gives a cover on which $x=y$. Refine and split as in step 2. Step 1 makes $p^*x=p^*y$ in $P(V)$; applying $\\sigma^*$ gives $x=y$. Thus $\\eta_U$ is injective.",
+   "text": "For a Kan presheaf P, the last clause of [lem-weil-pbc-point-lan-affine-evaluation] makes its restriction fan over the finite weakly contractible affine W_i a limit fan at some coproduct. Transfer it to the chosen V using uniqueness of coproducts. The forgetful functor of each coefficient category preserves finite limits, so the underlying restriction map is bijective. Mathlib Sites.LocallyBijective gives covering equalizer and image sieves for the sheafification unit. For injectivity, refine the equalizer sieve as above, use injectivity of the restriction map on P(V), then pull back along sigma. For surjectivity, refine the image sieve, choose local representatives in P(W_i), combine them into s in P(V), and use the set-sheaf restriction bijection and unit naturality to show eta_V(s)=p^*t. Then sigma^*s maps to t because sigma p=id_U.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-weil-pbc-proetale-finite-coproduct-evaluation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "/home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex; literature/stacks-project/sites.tex",
-    "place": "lem:point-eval, proof, sheafification sentence; Tags 00WK (lemma-sections-sheafification), 00WB (theorem-plus), 00WT (lemma-covering-surjective-after-sheafification)."
-   }
-  },
-  {
-   "text": "For algebra-valued $P$, use the set sheafification of its underlying presheaf: define each operation on local representatives by applying the operation in $P$. Local equality of representatives, supplied by [lem-weil-pbc-site-sheafification-sections-local], makes the result independent of representatives; sheaf uniqueness glues it. Every algebraic identity holds locally on representatives, hence globally. A map to an algebra sheaf factors uniquely through the set sheafification and respects operations locally, hence globally, so this is the algebra sheafification by [def-weil-pbc-sheafification]. Consequently the bijection in step 3 is an algebra isomorphism. Naturality of the unit gives $\\eta_W P(f)=P^\\#(f)\\eta_U$ for $f:W\\to U$ and $\\eta_G P(\\alpha)=P^\\#(\\alpha)\\eta_F$ for $\\alpha:F\\to G$; since the relevant components are invertible these equations prove both claimed naturalities.",
-   "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-point-lan-affine-evaluation",
     "def-weil-pbc-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "/home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex; literature/stacks-project/sites.tex",
-    "place": "lem:point-eval, proof, sheafification sentence; Tags 00WK (lemma-sections-sheafification), 00WB (theorem-plus), 00WT (lemma-covering-surjective-after-sheafification)."
-   }
+   "elementary": false
+  },
+  {
+   "text": "The preceding argument is written once for a concrete coefficient category whose forgetful functor preserves finite limits and reflects isomorphisms, and whose sheafification unit is locally bijective. Mathlib supplies these instances for Type (u+1), AddCommGrpCat and CommRingCat. The unit is already a morphism in the coefficient category, so its underlying bijectivity gives an isomorphism preserving all operations without constructing a separate algebra sheafification. The two naturality equations are respectively naturality of toSheafify as a presheaf morphism and the component of toSheafify_naturality for beta. Instantiate the generic proof with the three clauses of point_lan_affine_evaluation.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-point-lan-affine-evaluation"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-point-lan-affine-evaluation",
   "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-affine-contractible-extension-full-site",
   "lem-weil-pbc-proetale-finite-coproduct-evaluation",
   "lem-weil-pbc-proetale-subcanonical",
-  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-point-lan-affine-evaluation",
   "def-weil-pbc-sheafification"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "/home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex; literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Explicit finite-affine-refinement and local-sections argument expanding RefactorInstruction.tex label lem:point-eval, sheafification sentence. BS 4.2.13 proves the stronger qcqs evaluation by a different descent argument."
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites.tex; lean/Sheaf/AlgebraicGeometry/ProEtaleAffineContractibleExtension.lean",
+  "place": "E2 stage 3, 2026-10-16: finite affine refinement and singleton contractible extensions (Tags 0983, 098H, 0990), covering coproduct splitting by projectivity, and local bijectivity of sheafification (Tags 00WK, 00WB). Implements the original coproduct-section argument with weakly contractible affine covering pieces, avoiding the later clopen refinement plan."
  },
  "mathlib_searches": [
   {
@@ -179,5 +164,15 @@
   "group": "NM",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical maps, universes, edge cases, report sections, and verbatim signature. The repaired clopen-refinement proof plan is valid. Local scompile.py verification passed for both sandbox and library names without diagnostics. Branch and project clones unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-38467",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T183130-L-811809",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module and direct importer compiled cleanly; target/signatures unchanged, proof and DAG dependencies agree, and public import removal is transitively preserved."
  }
 }
