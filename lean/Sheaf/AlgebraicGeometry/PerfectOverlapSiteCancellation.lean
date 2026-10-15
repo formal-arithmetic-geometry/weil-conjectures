@@ -179,4 +179,32 @@ theorem perfectOverlapApex_nestedCounit_cancel_for
   simp only [Functor.map_comp] at hc
   exact hc
 
+/-- The first-open form uses the same inclusion and projection terms as the
+canonical object comparison. It is the specialization of the general counit
+transport equation to `inf_le_left`. -/
+theorem perfectOverlapApex_nestedCounit_cancel_U
+    {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
+    (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)
+    (U V : Y.Opens) (E : schemeDerivedCategory X) :
+    let P := g ⁻¹ᵁ U
+    let Q := g ⁻¹ᵁ V
+    let i : P ⊓ Q ⟶ P := homOfLE inf_le_left
+    let PU := (schemeOpenRestriction X P).mapDerivedCategory
+    let SU := (schemeOpenOverlapRestriction X i).mapDerivedCategory
+    let PW := (schemeOpenRestriction X (P ⊓ Q)).mapDerivedCategory
+    let σ := schemeDerivedOpenRestrictionCompIso X i
+    let eW : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (P ⊓ Q)) ≌
+      SheafOfModules.{u} (moduleRings (P ⊓ Q).toScheme.toRingedSpace) :=
+      Scheme.Modules.overEquiv (P ⊓ Q)
+    let LW := eW.inverse.mapDerivedCategory
+    let cart := perfectOverlapStageEquivalence g pX pY b hg U V
+    let apex := perfectOverlapApexEquivalence g pX pY b hg U V
+    apex.functor.map (LW.map (σ.hom.app E)) ≫
+        cart.functor.map (eW.mapDerivedCategory.counitIso.hom.app (PW.obj E)) ≫
+          cart.functor.map (σ.inv.app E) =
+      cart.functor.map (eW.mapDerivedCategory.counitIso.hom.app
+        (SU.obj (PU.obj E))) := by
+  exact perfectOverlapApex_nestedCounit_cancel_for g pX pY b hg
+    U V U inf_le_left E
+
 end AlgebraicGeometry
