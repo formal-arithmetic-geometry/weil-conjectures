@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\operatorname{Arrows}(\\mathcal C)$ and $O=\\operatorname{Ob}(\\mathcal C)$. The pairs $(U,T)$ with $U\\in O$ and $T\\subseteq\\{a\\in A:\\operatorname{target}(a)=U\\}$ form a set. By Separation take the subset $P$ of pairs that occur as the target and arrow support of a family in $\\operatorname{Cov}$. For each $p\\in P$ there is a set-coded witnessing family; the ZFC Collection axiom gives a set of such witnesses, and Choice selects one for each $p$. Thus obtain a set $R\\subseteq\\operatorname{Cov}$ representing every target/support pair. Recording the target separately is necessary for empty families. Equal supports at equal targets give the required equivalence (one chooses an occurrence of each arrow in each family); no reindexing or removal of repetitions is asserted to preserve membership in the original class.",
+   "text": "Use the small type of pairs (X,R), where X is an object and R is a presieve on X. Take its subtype of pairs realized by some family in Cov, and use Choice to select one such family for each realized pair. The range of this choice map is small, is contained in Cov, and represents every family with exactly the same target and presieve. Including the target separately handles empty families. This is the proved private lemma exists_small_covering_representatives.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -37,10 +37,8 @@
    }
   },
   {
-   "text": "Let $B_0$ be the union of $R$, $\\operatorname{Cov}_0$, and the standard singleton families of all isomorphisms. It is a set contained in $\\operatorname{Cov}$. Choose an infinite cardinal $\\kappa$ bounding $|A|$, $|O|$ and every index cardinal of a family in $B_0$ (take the supremum of this set of cardinals and $\\aleph_0$). For a set $K$ of cardinality $\\kappa$, [lem-weil-pbc-finite-list-cardinality] gives $|\\operatorname{List}(K)|\\leq\\kappa$. The map $(x,y)\\mapsto[x,y]$ is injective, so $|K\\times K|\\leq\\kappa$. Consequently if $|I|\\leq\\kappa$ and all $|J_i|\\leq\\kappa$, choose injections into $K$ to inject $\\coprod_i J_i$ into $K\\times K$, giving cardinality at most $\\kappa$.",
-   "uses": [
-    "lem-weil-pbc-finite-list-cardinality"
-   ],
+   "text": "For the closure lemma, work inside the subtype A of families in Cov. The initial small subset B_0 consists of the prescribed families and the singleton isomorphisms; the latter are the image of the small type of pairs of objects and isomorphism arrows. The cardinalities of the initial index types have a common bound because their range is small. Enlarge the bound to an infinite cardinal kappa. For compositions, Cardinal.mk_sigma and Cardinal.sum_le_sum bound the new index cardinal by |I| times kappa, and Cardinal.mul_eq_self gives kappa times kappa = kappa. This uses direct infinite-cardinal arithmetic in place of the finite-list argument.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sets.tex",
@@ -48,10 +46,8 @@
    }
   },
   {
-   "text": "Let $\\theta$ be the least ordinal of cardinality greater than $\\kappa$. It is nonzero and a limit: adjoining one element to an infinite set of size at most $\\kappa$ preserves that bound (encode it in $K\\times K$), so it cannot be a successor. Every $\\gamma<\\theta$ has size at most $\\kappa$. If a cofinal subset $T\\subseteq\\theta$ had size at most $\\kappa$, the equality $\\theta=\\bigcup_{t\\in T}t$ and the disjoint-union estimate in step 2 would imply $|\\theta|\\leq\\kappa$, a contradiction. Thus $\\operatorname{cf}(\\theta)>\\kappa$. Cofinality means the least size of a cofinal subset, where cofinal means every earlier ordinal is at most some member.",
-   "uses": [
-    "lem-weil-pbc-finite-list-cardinality"
-   ],
+   "text": "Set theta to the initial ordinal of the successor cardinal of kappa. Mathlib Cardinal.isRegular_succ gives regularity of that successor cardinal, so its le_cof_ord field gives kappa < cf(theta). Cardinal.isSuccLimit_ord shows theta is a nonzero limit ordinal. These are the Mathlib form of the large-cofinality argument of Sets Tag 05N3.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sets.tex",
@@ -59,10 +55,9 @@
    }
   },
   {
-   "text": "Use [lem-weil-pbc-transfinite-recursion] on the set of stages $\\gamma\\leq\\theta$ to define increasing sets $B_\\gamma$. Start with the $B_0$ of step 2. At a successor add to $B_\\gamma$ every composite of an outer family in $B_\\gamma$ and a choice of a family in $B_\\gamma$ on each of its domains, and, for each family in $B_\\gamma$ and arrow of $A$, one chosen pullback family supplied by the site axiom (Choice selects one such fibre-product presentation for each pair). At a nonzero limit take the union of the earlier stages. These successor additions form sets: for each outer index set $I$, all choices of inner families lie in the set of maps $I\\to B_\\gamma$; all selected base-change data are indexed by $B_\\gamma\\times A$, with the pullback objects and projections in the fixed sets $O,A$. Induction proves $B_\\gamma\\subseteq\\operatorname{Cov}$ by the given axioms and proves every family has index cardinal at most $\\kappa$ by step 2; pullbacks retain the index set and composites have index set $\\coprod_iJ_i$.",
+   "text": "For a small S contained in A, let T(S) contain S, every indexed composition with outer and inner families in S, and one chosen covering pullback of each family in S along each arrow to its target. Choose pullback data from the proved hypothesis IsCoveringClass Cov, retaining the original index type. Each fixed-target fiber of S injects into S. Thus the composition parameters form a small dependent sum of dependent function types, the pullback parameters form a small dependent sum, and T(S) is small. The index-cardinality bound kappa is preserved by T. Using WellFoundedLT.fix, define B_alpha = B_0 union the union of T(B_beta) over beta < alpha. Well-founded induction proves smallness and the cardinal bound at every stage. Since T contains its argument, the stages are monotone and T(B_alpha) is contained in B_beta whenever alpha < beta. These are fully proved private helpers.",
    "uses": [
-    "lem-weil-pbc-transfinite-recursion",
-    "lem-weil-pbc-finite-list-cardinality"
+    "lem-weil-pbc-transfinite-recursion"
    ],
    "elementary": false,
    "source": {
@@ -71,7 +66,7 @@
    }
   },
   {
-   "text": "Set $\\operatorname{Cov}\\prime=B_\\theta=\\bigcup_{\\gamma<\\theta}B_\\gamma$, a set. It contains $\\operatorname{Cov}_0$ and all singleton isomorphisms and is contained in $\\operatorname{Cov}$. If a family belongs to it, it belongs to some $B_\\gamma$ with $\\gamma<\\theta$; the selected pullback family supplied by the original class axiom belongs to $B_{\\gamma+1}\\subseteq B_\\theta$, since $\\theta$ is a limit. The existence of the fibre products and the covering property for this selected choice are exactly the original class axiom. This proves the identity and base-change axioms.",
+   "text": "Let S be the union of B_alpha for alpha < theta, and let Cov_prime be its image under the subtype inclusion A into all families. Smallness follows from smallness of the type of ordinals below theta and of every stage. Cov_prime contains the prescribed families and singleton isomorphisms and is contained in Cov. A family in S lies in some B_alpha with alpha < theta; its chosen covering pullback lies in T(B_alpha), hence in B_(alpha+1), still below theta because theta is a limit. The chosen pullback data supply exactly the pullback-existence clause of IsCoveringClass, without claiming closure under other choices.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -80,7 +75,7 @@
    }
   },
   {
-   "text": "For the composition axiom take an outer family $\\mathcal U\\in B_\\theta$, indexed by $I$, and inner families $\\mathcal W_i\\in B_\\theta$. Choose $\\gamma_0<\\theta$ and $\\gamma_i<\\theta$ with $\\mathcal U\\in B_{\\gamma_0}$ and $\\mathcal W_i\\in B_{\\gamma_i}$. Since $|I|\\leq\\kappa<\\operatorname{cf}(\\theta)$, [lem-weil-pbc-cofinality-small-family-bound] gives $\\sup_i\\gamma_i<\\theta$. Put $\\gamma=\\max(\\gamma_0,\\sup_i\\gamma_i)<\\theta$. Monotonicity places the outer and every inner family in $B_\\gamma$, so their composite lies in $B_{\\gamma+1}\\subseteq B_\\theta$. If $I$ is empty its supremum is $0$, and the same argument works. Finally $R\\subseteq B_0\\subseteq B_\\theta$ ensures every original family has an equivalent representative, proving the last clause.",
+   "text": "For a composite, choose a stage alpha for its outer family and a stage beta_i for every inner family. The index set has cardinal at most kappa < cf(theta), so Ordinal.iSup_lt_of_lt_cof gives sup_i beta_i < theta, also for empty index sets. Set delta = max(alpha, sup_i beta_i). Monotonicity puts the outer family and every inner family in B_delta, and their composite is in T(B_delta), hence in B_(delta+1) and S. This proves the closure lemma exists_small_covering_closure. Finally apply that lemma to the union of Cov_0 and the representatives R from step 1. Inclusion of R transports its exact-presieve representatives into Cov_prime and proves the final clause of the theorem.",
    "uses": [
     "lem-weil-pbc-cofinality-small-family-bound"
    ],
@@ -92,14 +87,13 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-list-cardinality",
   "lem-weil-pbc-transfinite-recursion",
   "lem-weil-pbc-cofinality-small-family-bound"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sets.tex",
-  "place": "Tag 000X (lemma-coverings-site), support selection and transfinite closure proof; direct stage sets adaptation, with Tag 05N3 argument written out"
+  "place": "Tag 000X and Tag 05N3; complete Lean proof by S3, 2026-10-16. Direct small-stage closure with WellFoundedLT.fix; direct infinite-cardinal multiplication and regularity of the successor cardinal replace the finite-list detour and the expanded cofinality argument. Public statement and unit route unchanged."
  },
  "mathlib_searches": [
   {
@@ -275,5 +269,15 @@
   "by": "NH",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261015T211230-L-1891878",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
