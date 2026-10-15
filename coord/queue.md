@@ -1,6 +1,6 @@
 # Work queue
 
-76 items; claim with `tools/claim.py next <group> [--stage N]`.
+62 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (76)
+## Stage 3: modules to prove (62)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -21,7 +21,7 @@
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardLocalComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
-| `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 6 | proof |
+| `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 3 | proof |
 | `Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedCoefficientComplexPresentation` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison` | 5 | 1 | proof |
@@ -62,31 +62,17 @@
 | `Sheaf.Paper.EtaleHypercoverHomotopyEqualizer` | 14 | 1 | proof |
 | `Sheaf.Paper.EtaleHypercoverProduct` | 14 | 1 | proof |
 | `Sheaf.Paper.FiniteHypercoverDescentParts` | 14 | 3 | proof |
-| `Sheaf.Paper.FiniteSplitHypercoverExistence` | 14 | 1 | proof |
 | `Sheaf.Paper.FiniteSplitHypercoverReplacement` | 14 | 1 | proof |
 | `Sheaf.Paper.HypercoverCohomologyAbelian` | 14 | 1 | proof |
 | `Sheaf.Paper.HypercoverCohomologyModule` | 14 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MatchingObjectFibreProduct` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember` | 15 | 1 | proof |
 | `Sheaf.Paper.HypercoverFreeResolution` | 15 | 4 | proof |
-| `Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SimplicialHomObject` | 16 | 1 | proof |
 | `Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison` | 16 | 1 | proof |
 | `Sheaf.CategoryTheory.MatchingObjectCoskeleton` | 16 | 2 | proof |
 | `Sheaf.Paper.CechNerveFreeHomology` | 16 | 1 | proof |
-| `Sheaf.Paper.SimplicialSetAddSimplices` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SimplicialHomObjectExists` | 17 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SimplicialHomObjectPushout` | 17 | 2 | proof |
-| `Sheaf.AlgebraicGeometry.SimplicialHomStandardSimplex` | 17 | 2 | proof |
 | `Sheaf.AlgebraicTopology.CoskeletalMapTrivialKan` | 17 | 1 | proof |
-| `Sheaf.AlgebraicTopology.GlueSimplex` | 17 | 1 | proof |
-| `Sheaf.CategoryTheory.CoskeletonMatchingTuples` | 17 | 1 | proof |
-| `Sheaf.CategoryTheory.TruncatedCoskeletonFiniteLimits` | 17 | 1 | proof |
 | `Sheaf.Paper.ImagePresheafSheafificationIso` | 17 | 1 | proof |
-| `Sheaf.Paper.TrivialKanHomotopyEquivalence` | 17 | 1 | proof |
-| `Sheaf.AlgebraicTopology.SimplicialIndexFiniteInitial` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
 Also listed above and claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
