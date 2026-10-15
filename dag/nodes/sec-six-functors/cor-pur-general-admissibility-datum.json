@@ -3,45 +3,172 @@
  "blueprint": {
   "is": "cor-pur-general-admissibility-datum",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Preservation for a general separated finite-type morphism",
- "statement": "In the purity conventions of this chapter\n([def-pur-conventions] fixed setting), let $f:X\\to Y$ be a\nseparated finite-type\nmorphism. The\nambient exceptional right\nadjoint datum of [def-weil-ambient-exceptional-adjoint] was the\nhypothesis under which this corollary was formerly stated; on the bounded\nconstructible and finite-Tor coefficients of its two clauses it is the theorem\n[cor-sf-ambient-adjoint-discharge], so it is not assumed, and the two\nclauses below hold without it. Then $f$\nsatisfies the two preservation clauses of\n[def-weil-exceptional-adjoint-admissibility]: with the affine charts\n$U\\subseteq f^{-1}(V)$ and the integers $d_U$ of\n[thm-pur-general-admissibility], put\n$D=\\max_Ud_U$ and $c_U=2\\,(d_U+\\dim Y)$. Then $Rf^!$ carries\n$D_c^{[a,b]}(Y,A)$ into $D_c^{[a-2D,b-2D+c]}(X,A)$ for\n$c=\\max_U\\bigl(c_U+1+2(D-d_U)\\bigr)$, and it carries finite Tor\namplitude in $[a,b]$ to finite Tor amplitude in $[a-2D,b-2D+c]$.",
+ "statement": "Fix the purity coefficient conventions [def-pur-conventions]:\n$k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$,\na finite extension $E/\\mathbf Q_\\ell$, and $n\\geq1$, with\n$A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $X,Y$ be finite-type\n$k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism\n[def-weil-finite-type-morphism, def-weil-proper-morphism]. Use the\nconstructible exceptional inverse image $Rf^!$ of\n[def-weil-exceptional-inverse-image], whose adjunction relative to the\nbounded constructible coefficient class is supplied by\n[cor-sf-ambient-adjoint-discharge]; no unrestricted ambient exceptional\nright adjoint datum is assumed. Then the analogues of the two preservation\nclauses (2) and (3) of [def-weil-exceptional-adjoint-admissibility] hold\nfor this functor, with the following bounds.\n\nIf $X$ is nonempty, choose the finite affine charts\n$U\\subseteq f^{-1}(V)$ and closed presentations\n$U\\hookrightarrow\\mathbf A^{d_U}_V$ of\n[thm-pur-general-admissibility], with affine space understood as in\n[def-sbc-affine-space], omitting empty charts. Put\n$$\nD=\\max_U d_U,\\qquad c_U=2(d_U+\\dim Y),\\qquad\nc=\\max_U\\bigl(c_U+1+2(D-d_U)\\bigr).\n$$\nHere dimension is Krull dimension [def-kun-topological-krull-dimension].\nIf $X$ is empty, put $D=c=0$ instead; there are no chart constants\n$c_U$ to form (in particular no dimension of an empty $Y$ is needed).\nFor every pair of integers $a\\leq b$:\n\n1. $Rf^!$ carries $D_c^{[a,b]}(Y,A)$ into\n$D_c^{[a-2D,b-2D+c]}(X,A)$, with constructible intervals as in\n[def-weil-constructible-intervals].\n2. If $K\\in D^b_{ctf}(Y,A)$ has Tor amplitude in $[a,b]$, then\n$Rf^!K\\in D^b_{ctf}(X,A)$ has Tor amplitude in\n$[a-2D,b-2D+c]$, in the sense of [def-weil-finite-tor-amplitude].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-general-admissibility-datum.md",
   "place": "node cor-pur-general-admissibility-datum, order 2079"
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "def-weil-ambient-exceptional-adjoint",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-exceptional-inverse-image",
   "cor-sf-ambient-adjoint-discharge",
   "def-weil-exceptional-adjoint-admissibility",
   "thm-pur-general-admissibility",
-  "def-weil-scheme-morphism-properties"
+  "def-sbc-affine-space",
+  "def-kun-topological-krull-dimension",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof": [
   {
-   "text": "For each chart the target $\\mathbf A^{d_U}_V$ of the chartwise\npresentation is of finite type over $k$ of dimension\n$d_U+\\dim V\\leq d_U+\\dim Y$. The open complement $W_U$ of $U$ in it\ntherefore satisfies the open-complement condition with constant\n$2(d_U+\\dim V)$ by [lem-exc-open-complement-known], hence also with\nthe larger constant $c_U=2(d_U+\\dim Y)$, the condition being monotone\nin its constant. The hypothesis of\n[thm-pur-general-admissibility] is thus satisfied with these\nconstants, and its conclusion is the assertion.",
+   "text": "The functor throughout is the constructible exceptional inverse\nimage, not an adjoint on all pro-etale complexes. The statement of\n[cor-sf-ambient-adjoint-discharge] supplies precisely the adjunction\nrelative to the bounded constructible coefficient class at $A=A_{E,n}$\nand explicitly excludes the unrestricted ambient datum. Thus no\nall-sheaf pro-etale adjunction is used when applying the preservation\ntheorem below.",
    "uses": [
-    "lem-exc-open-complement-known",
+    "cor-sf-ambient-adjoint-discharge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-general-admissibility-datum.md",
+    "place": "Statement: bounded constructible and finite-Tor scope of the two clauses"
+   }
+  },
+  {
+   "text": "First handle $X=\\varnothing$. In the small pro-etale site of\n[def-weil-pbc-proetale-site], every object over $X$ is empty and is\ncovered by the empty family: for its empty affine open, the empty\nfinite family of affine opens has union equal to that open. The\nsheaf axiom therefore forces its module of sections to\nhave one element. Every module sheaf and hence every complex on $X$ is\nzero. The zero cohomology sheaves are constructible (use the empty\nstratification, or the single empty stratum), and their support in\ndegrees is empty. The definitions [def-weil-constructible-intervals]\nand [def-weil-finite-tor-amplitude] then put the zero output in every\nrequired interval: its tensor product with any module sheaf is zero.\nThis proves both clauses with $D=c=0$, including $Y=\\varnothing$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-constructible-intervals",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-general-admissibility-datum.md",
+    "place": "Statement: maxima over the affine charts; empty-source completion"
+   }
+  },
+  {
+   "text": "Now let $X$ be nonempty, so $Y$ is nonempty too. Use the\nnonempty finite family of charts of [thm-pur-general-admissibility].\nThe chart clause in the statement of\n[thm-pur-open-complement-unconditional] explicitly supplies the\nopen-complement condition for\n$(W_U,\\mathbf A^{d_U}_V)$ at $A=A_{E,n}$ with\n$b_U=2(d_U+\\dim V)$, and states the inequality\n$d_U+\\dim V\\leq d_U+\\dim Y$ for these charts. This is precisely the\nchartwise open-complement bound prescribed by the source. Use this explicitly stated finite-stage specialization at\n$A=A_{E,n}$ over $k=\\overline{\\mathbf F}_q$; no separate\ncoefficient-ring reduction is required.",
+   "uses": [
+    "thm-pur-general-admissibility",
+    "thm-pur-open-complement-unconditional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-general-admissibility-datum.md",
+    "place": "Proof, chartwise open-complement bound; same-unit theorem at order 2080"
+   }
+  },
+  {
+   "text": "For each chart $b_U\\leq c_U=2(d_U+\\dim Y)$. By\n[def-exc-open-complement-bound], its condition with bound $b_U$\nhas two clauses. If $q>c_U$, then $q>b_U$, so the first clause gives\n$R^qj_*M=0$ for every $A$-module sheaf $M$. Its second clause,\nconstructibility of $R^qj_*F$ for every constructible $F$ and every\ninteger $q$, does not involve the bound at all. These are precisely\nthe two clauses of the same condition with bound $c_U$. Thus every\nchart satisfies the hypothesis with the constants in the statement.",
+   "uses": [
+    "def-exc-open-complement-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-general-admissibility-datum.md",
+    "place": "Proof, hence also with the larger constant c_U; monotonicity written out"
+   }
+  },
+  {
+   "text": "Apply [thm-pur-general-admissibility] to $f$ and these same\nfinite affine charts, with the constants $c_U$ established above.\nIts hypotheses are the present separated finite-type morphism and the\nchartwise open-complement conditions; its adjoints are used only on\nthe bounded constructible and finite-Tor coefficients as its statement\nspecifies. Its definitions of $D=\\max_U d_U$ and\n$c=\\max_U(c_U+1+2(D-d_U))$ are identical to ours. Its first clause\ntherefore gives the asserted constructible cohomological interval\nfor every $a\\leq b$, and its second gives the asserted Tor interval\nand membership in $D^b_{ctf}(X,A)$. This proves both conclusions\nwithout assuming an ambient admissibility datum.",
+   "uses": [
     "thm-pur-general-admissibility"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-general-admissibility-datum.md",
+    "place": "Proof, final sentence: its conclusion is the assertion"
+   }
   }
  ],
  "proof_deps": [
-  "lem-exc-open-complement-known",
-  "thm-pur-general-admissibility"
+  "cor-sf-ambient-adjoint-discharge",
+  "def-weil-pbc-proetale-site",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude",
+  "thm-pur-general-admissibility",
+  "thm-pur-open-complement-unconditional",
+  "def-exc-open-complement-bound"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-general-admissibility-datum.md",
-  "place": "## Proof"
+  "place": "Proof paragraph, expanded using same-unit thm-pur-open-complement-unconditional and with scope and empty-source corrections"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriek|constructibleTorAmplitudeIn|ExceptionalAdjoint",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a separated finite type morphism preserves constructible cohomological intervals and finite Tor amplitude under an exceptional right adjoint",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedUpperShriek, constructibleTorAmplitudeIn, separated finite type",
+   "results": "0 hits: ; loogle: unknown identifier 'rightDerivedUpperShriek'",
+   "date": "2026-10-15",
+   "verdict": "invalid pattern: unknown identifier; superseded by the successful CategoryTheory.Adjunction, CategoryTheory.Functor search below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "preservation for a general separated finite-type morphism exceptional right adjoint admissibility datum",
+   "results": "8 hits: CategoryTheory.isRightAdjoint_of_preservesLimits_of_isCoseparating; CategoryTheory.adhesive_of_reflective; CategoryTheory.adhesive_of_preserves_and_reflects; CategoryTheory.finitaryExtensive_of_reflective; CategoryTheory.isLeftAdjoint_of_preservesColimits_of_isSeparating; CategoryTheory.Adjunction.hasExactColimitsOfShape; CategoryTheory.adhesive_of_preserves_and_reflects_isomorphism; CategoryTheory.Adjunction.hasExactLimitsOfShape",
+   "date": "2026-10-15",
+   "verdict": "no match: hits concern general adjunctions, adhesive categories and exactness; none states constructible exceptional-inverse-image preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleTorAmplitudeIn|rightDerivedUpperShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible exceptional inverse image finite Tor amplitude separated finite type scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.IsFinite.of_comp; AlgebraicGeometry.Proj.isSeparated; AlgebraicGeometry.LocallyQuasiFinite; AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated; PrimeSpectrum.isConstructible_comap_image; AlgebraicGeometry.QuasiSeparated",
+   "date": "2026-10-15",
+   "verdict": "no match: returned signatures concern constructible subsets and morphism properties, not sheaf complexes and exceptional inverse images"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor, AlgebraicGeometry",
+   "results": "0 hits: ; loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-15",
+   "verdict": "invalid pattern: unknown identifier; superseded by the successful CategoryTheory.Adjunction, CategoryTheory.Functor search below"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Adjunction; CategoryTheory.Adjunction.isLeftAdjoint; CategoryTheory.Adjunction.isRightAdjoint; CategoryTheory.Adjunction.mk'; CategoryTheory.Adjunction.mkOfHomEquiv; CategoryTheory.Adjunction.mkOfUnitCounit; CategoryTheory.Adjunction.ofIsLeftAdjoint; CategoryTheory.Adjunction.ofIsRightAdjoint",
+   "date": "2026-10-15",
+   "verdict": "no match: generic adjunction structures and constructors do not supply the geometric preservation theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|TorAmplitude|upperShriek",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-15",
+   "verdict": "no match: Chevalley locally constructible image of a subset, read at FinitePresentation.lean:117-124, not a theorem on module sheaf complexes",
+   "subdirectory": "AlgebraicGeometry"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -75,5 +202,30 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation"
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "cor-pur-general-admissibility-datum",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint argument into five steps using only existing nodes. Corrected the misleading claim about the unrestricted ambient datum to the bounded-class constructible-adjoint interpretation, made the fixed finite-type and coefficient setting explicit, and supplied the empty-source convention D=c=0. Reused the same-unit unconditional open-complement theorem whose statement includes the precise chartwise bound, wrote monotonicity out from the definition, and applied the existing conditional preservation theorem. No new nodes or Mathlib leaves.",
+  "blueprint": "Steps 1-2 repair the scope sentence and undefined empty maxima; steps 3-4 realize the proof paragraph through the chartwise version of the existing open-complement result and explicit enlargement of the cutoff; step 5 is its final application of thm-pur-general-admissibility. Imported blueprint.from remains null; same_as=[] after whole-blueprint searches.",
+  "statement_change": "STATEMENT-DISPUTED: the source wording calls the unrestricted ambient datum a theorem, but current cor-sf-ambient-adjoint-discharge explicitly denies it (elliptic curve counterexample). Rephrased only its adjoint scope to the constructible, class-restricted functor used by the unit. Also X=empty admits an empty chart family, making max_U undefined; added D=c=0 for this zero-category case. Both original preservation bounds for nonempty X are unchanged. No target statement is modified.",
+  "tool_uses": [
+   {
+    "node": "cor-sf-ambient-adjoint-discharge",
+    "why": "Supplies only the existing bounded-class adjunction scope explicitly named by the item, with no preservation assertion; the unit proves preservation rather than constructing the adjoint."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-sf-ambient-adjoint-discharge"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q17-9ff2caf81",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-9ff2caf81 (reviewer sub-agent of L); spot-checked: Read the complete item, report, required governance files, unit/chapter route, master source, and every cited DAG statement. All five proof steps are mathematically valid: bounded-class adjunction scope, empty-source zero case, chartwise open-complement bounds, monotonicity, and final preservation application. Checked coefficient category, base-change context, endpoint arithmetic, empty and zero cases, chart dimensions, and no target weakening. No new nodes, attachments, duplicate, circular, or citation faults. Wrote review.md."
+ }
 }
