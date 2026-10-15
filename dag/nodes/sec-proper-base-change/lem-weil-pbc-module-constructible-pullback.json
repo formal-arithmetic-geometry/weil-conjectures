@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-module-constructible-pullback",
+ "kind": "statement",
+ "title": "Pullback of constructible condensed-coefficient module objects",
+ "statement": "Let Λ be any commutative ring object in abelian sheaves on profinite sets with coherent topology. For each scheme T put Λ_T = p_T^*Λ, using the geometric inverse image and coefficient comparison of [def-weil-pbc-condensed-e-module-category], with the same construction for Λ in place of the particular coefficient E. An internal Λ_T-module is constructible when there is a finite stratification by locally closed subschemes with constructible underlying subsets and its restrictions are pro-étale locally cokernels of maps between finite sums of Λ_T. For every morphism f : X → Y and constructible Λ_Y-module M, f_c^*M = Λ_X ⊗_(f^*Λ_Y) f^*M is a constructible Λ_X-module. There is no noetherianity, characteristic, finiteness or coefficient homological-dimension hypothesis.",
+ "source": {
+  "document": "WeilConjectures/ConstructibleSheaf/ProEtaleModule/Def.lean and WeilConjectures/ConstructibleSheaf/Pullback.lean",
+  "place": "IsLocallyFinitelyPresented, IsConstructibleModuleObject, and Scheme.Stratification.pullback; elementary transport of their finite presentations"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "An additive finite-colimit-preserving functor on internal modules which takes each finite free module to the corresponding finite free module preserves finite presentation. Apply it to a cokernel presentation, compare the image cokernel with the cokernel of the image map, and transport its source and target by the finite-free comparison. Pullback of abelian pro-étale sheaves has these properties; its lax monoidal structure identifies the image of the regular module with the regular image-ring module.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pull back a pro-étale presentation cover along f. For each pulled-back covering map compare the two successive inverse images with the inverse image of their composite, as module functors, using the monoidal composition comparison. The pullback-square equation identifies the composites. Transport scalars through these ring isomorphisms and apply the preceding finite-presentation argument. This proves preservation of local finite presentation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pull back the finite stratification using Scheme.Stratification.pullback from [lemma-constructible-pullback-stratification]. Repeat the composition comparison on each stratum and apply local finite-presentation preservation to its pulled-back module. Hence the underlying module inverse image is constructible over f^*Λ_Y.",
+   "uses": [
+    "lemma-constructible-pullback-stratification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prescribed coefficient map f^*Λ_Y → Λ_X is an isomorphism. Extension of scalars along an isomorphism is isomorphic to restriction of scalars along its inverse. Such scalar transport carries finite free presentations, their local versions, and stratifications to the corresponding presentations over Λ_X. Apply this isomorphism and invariance of constructibility under module isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-constructible-pullback-stratification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "WeilConjectures/ConstructibleSheaf/ProEtaleModule/Def.lean and WeilConjectures/ConstructibleSheaf/Pullback.lean",
+  "place": "IsLocallyFinitelyPresented, IsConstructibleModuleObject, and Scheme.Stratification.pullback; elementary transport of their finite presentations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of sheaves of modules preserves bounded constructible complexes",
+   "results": "8 results: LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, instAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, Condensed.instAB4StarCondensedMod, CategoryTheory.Sheaf.instIsGrothendieckAbelian, Condensed.instAB5CondensedMod, SheafOfModules.instAbelian. None states constructibility preservation for internal sheaf modules.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleModuleObject|IsLocallyFinitelyPresented|extensionByZero",
+   "results": "No matches in Mathlib.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of constructible sheaves of modules preserves finite presentations on strata",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "date": "2026-10-15",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof paragraph choosing an integral lattice and rationalizing: constructible modules and functors in the archived condensed-coefficient receiving category; supporting the bounded-constructible six-functor restrictions reached through this item.",
+   "via": [
+    "def-weil-pbc-condensed-e-module-category",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleConstructiblePullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isConstructibleModuleObject_upperStar",
+  "statement": "theorem isConstructibleModuleObject_upperStar (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (hM : IsConstructibleModuleObject (condensedRingObj Λ Y) M) : IsConstructibleModuleObject (condensedRingObj Λ X) ((f)^*⟦Λ⟧.obj M)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-15",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.isConstructibleModuleObject_upperStar",
+   "localFinitePresentation_of_iso",
+   "localFinitePresentation_of_comap",
+   "constructible_of_iso",
+   "constructible_comap",
+   "AlgebraicGeometry.ProEtale.upperStarComp_inv_monoidal"
+  ],
+  "note": "The four proved scalar/isomorphism transport helpers are public so the extension-by-zero module and bounded-constructible item reuse these proofs. All other presentation helpers remain private. The proved monoidal pullback-composition instance is shared as well."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-4fdeb",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261015T181522-L-748402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-4fdeb",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261015T181522-L-748402",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery files, DAG nodes, proofs, imports, and direct importers matched the stage-3 brief and compiled successfully."
+ }
+}

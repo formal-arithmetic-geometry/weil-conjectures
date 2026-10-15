@@ -6,12 +6,14 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Restrict
-public import WeilConjectures.Compactification.NagataCompactification
+import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 
@@ -42,8 +44,6 @@ particular every such morphism has a compactification, by Nagata's theorem
 | `Lf^* = L((f)^*⟦Λ⟧)` | `boundedConstructibleUpperStar` |
 | `Rf_* = R((f)_*⟦Λ⟧)` | `boundedConstructibleLowerStar` |
 | `j_! = D((j)_!open⟦Λ⟧)`, `j` an open immersion | `boundedConstructibleOpenImmersionLowerShriek` |
-| `- ⊗ᴸ -` | `boundedConstructibleTensor` |
-| `RHom(-, -)` | `boundedConstructibleHom` |
 
 Each restriction is the `ObjectProperty.lift` of the composite of the inclusion with the functor
 on the ambient derived category, so it is compatible with the inclusions by construction
@@ -58,9 +58,8 @@ complexes out of the functors above. For a compactification `c = (X ⟶[i] Z ⟶
 (`boundedConstructibleLowerShriekOfCompactificationCompatibility`,
 `boundedConstructibleLowerShriekCompatibility`).
 
-The adjunctions `Lf^* ⊣ Rf_*`, `j_! ⊣ j^*` and
-`K ⊗ᴸ - ⊣ RHom(K, -)` restrict along the fully faithful inclusions
-(`Adjunction.restrictFullyFaithful`), and so does the composition isomorphism
+The adjunctions `Lf^* ⊣ Rf_*` and `j_! ⊣ j^*` restrict along the fully faithful
+inclusions (`Adjunction.restrictFullyFaithful`), and so does the composition isomorphism
 `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`).
 
 The exceptional inverse image `Rf^!` is not the restriction of a functor on the ambient derived
@@ -68,16 +67,15 @@ category: it is constructed on bounded constructible complexes directly, for the
 coefficient rings `E̲` and `ℚ̲̄_ℓ`, in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek`.
 
-## Sorried input
+## Preservation results and disputed input
 
-That the six functors preserve bounded constructible complexes is `sorry`ed:
-`boundedConstructible_leftDerivedUpperStar_obj`, `boundedConstructible_rightDerivedLowerStar_obj`,
-`boundedConstructible_openImmersionLowerShriek_obj`, `boundedConstructible_derivedTensor_obj` and
-`boundedConstructible_derivedHom_obj`.
+Pullback and extension by zero preserve bounded constructibility for the stated arbitrary
+commutative condensed coefficient ring. Their proofs use finite presentations on strata and
+exactness of the underlying functors.
 
-These are theorems for the `ℓ`-adic coefficient rings, the condensed rings `E̲` of a finite
-extension `E` of `ℚ_ℓ` and `ℚ̲̄_ℓ` (Deligne's finiteness theorems, Bhatt–Scholze, Section 6.8);
-`Λ` is kept general here, the coefficient ring being an input of the statements.
+The pushforward preservation statement remains `sorry` and is disputed below: its present
+signature imposes no coefficient finiteness or homological dimension hypothesis. The geometric
+hypotheses on `k` and `ℓ` do not constrain `Λ`.
 
 -/
 
@@ -128,6 +126,14 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 scoped notation "Dᵇc(" X ")⟦" Λ "⟧" =>
   AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj Λ X)
 
+private lemma boundedConstructible_of_iso {X : Scheme.{u}}
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)}
+    (e : K ≅ L) (hK : boundedConstructible R K) : boundedConstructible R L := by
+  refine ⟨(DerivedCategory.TStructure.t.bounded).prop_of_iso e hK.1, fun n ↦ ?_⟩
+  exact _root_.constructible_of_iso (R := R)
+    ((DerivedCategory.homologyFunctor _ n).mapIso e) (hK.2 n)
+
 /-! ### The pullback and the pushforward -/
 
 section UpperLowerStar
@@ -140,14 +146,22 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
   [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
   (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
 
+set_option linter.unusedSectionVars false in
 /-- The derived pullback `Lf^*` on module objects over `Λ` preserves bounded constructible
-complexes. -/
+complexes. Identify the derived pullback with the functor induced by the exact module
+pullback. Its cohomology is the pullback of the original cohomology, which is constructible
+by finite presentations on the pulled-back stratification. Exactness also preserves the
+cohomological bounds. -/
 lemma boundedConstructible_leftDerivedUpperStar_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y)))
     (hK : boundedConstructible (condensedRingObj Λ Y) K) :
-    boundedConstructible (condensedRingObj Λ X) ((L((f)^*⟦Λ⟧)).obj K) :=
-  sorry
+    boundedConstructible (condensedRingObj Λ X) ((L((f)^*⟦Λ⟧)).obj K) := by
+  apply boundedConstructible_of_iso _
+    ((leftDerivedUpperStarIsoMapDerivedCategory Λ f).app K).symm
+  refine ⟨(f)^*⟦Λ⟧.bounded_mapDerivedCategory_obj hK.1, fun n ↦ ?_⟩
+  exact _root_.constructible_of_iso (((f)^*⟦Λ⟧.mapDerivedCategoryHomologyFunctorIso n).app K)
+    (isConstructibleModuleObject_upperStar Λ f _ (hK.2 n))
 
 /-- The derived pullback `Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible complexes: the
 restriction of `L((f)^*⟦Λ⟧)`. -/
@@ -180,6 +194,10 @@ noncomputable def boundedConstructibleUpperStarComp {Z : Scheme.{u}} [Z.Over (Sp
 
 /-- The derived pushforward `Rf_*` on module objects over `Λ` preserves bounded constructible
 complexes. -/
+/- STATEMENT-DISPUTED: the hypotheses do not constrain Λ. Take k algebraically closed of
+characteristic p, ℓ ≠ p, Λ the discrete condensed ring F_p, f : A¹_k ⟶ Spec k and the
+constant rank-one module in degree zero. Artin–Schreier gives H¹(A¹_k, F_p) =
+k[t] / {a^p - a}, an infinite-dimensional F_p-space, so Rf_* is not constructible. -/
 lemma boundedConstructible_rightDerivedLowerStar_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
@@ -223,14 +241,26 @@ variable {U X : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))]
   [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
   (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))]
 
+set_option linter.unusedSectionVars false in
 /-- The extension by zero `j_!` along an open immersion, applied levelwise to complexes of
-module objects over `Λ`, preserves bounded constructible complexes. -/
+module objects over `Λ`, preserves bounded constructible complexes. Quasi-compactness of `j`
+follows from that of its composite with the structure morphism. The exact induced derived
+functor preserves cohomological bounds, and its cohomology sheaves are the extensions by zero
+of the original cohomology sheaves. These are constructible by the open–closed stratification
+argument. -/
 lemma boundedConstructible_openImmersionLowerShriek_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
       (condensedRingObj Λ U)))
     (hK : boundedConstructible (condensedRingObj Λ U) K) :
-    boundedConstructible (condensedRingObj Λ X) ((D((j)_!open⟦Λ⟧)).obj K) :=
-  sorry
+    boundedConstructible (condensedRingObj Λ X) ((D((j)_!open⟦Λ⟧)).obj K) := by
+  have : QuasiCompact (j ≫ (X ↘ Spec (.of k))) := by
+    rw [comp_over j (Spec (.of k))]
+    infer_instance
+  have := QuasiCompact.of_comp j (X ↘ Spec (.of k))
+  refine ⟨(j)_!open⟦Λ⟧.bounded_mapDerivedCategory_obj hK.1, fun n ↦ ?_⟩
+  exact _root_.constructible_of_iso
+    (((j)_!open⟦Λ⟧.mapDerivedCategoryHomologyFunctorIso n).app K)
+    (isConstructibleModuleObject_openImmersionLowerShriek Λ j _ (hK.2 n))
 
 /-- The extension by zero `j_! : Dᵇc(U)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` along an open immersion on bounded
 constructible complexes: the restriction of the levelwise functor `D((j)_!open⟦Λ⟧)`. -/
@@ -331,80 +361,5 @@ noncomputable def boundedConstructibleLowerShriekCompatibility :
 
 end Shriek
 
-
-/-! ### The derived tensor product and the derived hom -/
-
-section TensorHom
-
-include ℓ k
-
-variable (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
-  [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
-
-/-- The derived tensor product of module objects over `Λ` preserves bounded constructible
-complexes. -/
-lemma boundedConstructible_derivedTensor_obj
-    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))}
-    (hK : boundedConstructible (condensedRingObj Λ X) K)
-    (hL : boundedConstructible (condensedRingObj Λ X) L) :
-    boundedConstructible (condensedRingObj Λ X) (((-⊗ᴸ-(X)⟦Λ⟧).obj K).obj L) :=
-  sorry
-
-/-- The derived hom of module objects over `Λ` preserves bounded constructible
-complexes. -/
-lemma boundedConstructible_derivedHom_obj
-    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))}
-    (hK : boundedConstructible (condensedRingObj Λ X) K)
-    (hL : boundedConstructible (condensedRingObj Λ X) L) :
-    boundedConstructible (condensedRingObj Λ X) (((RHom(X)⟦Λ⟧).obj (op K)).obj L) :=
-  sorry
-
-/-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded
-constructible complexes: the restriction of `-⊗ᴸ-(X)⟦Λ⟧` in both variables. -/
-noncomputable def boundedConstructibleTensor : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ :=
-  Functor.curry.obj ((boundedConstructible _).lift
-    (((boundedConstructible _).ι.prod (boundedConstructible _).ι) ⋙
-      Functor.uncurry.obj -⊗ᴸ-(X)⟦Λ⟧)
-    fun KL ↦ boundedConstructible_derivedTensor_obj Λ ℓ k X KL.1.property KL.2.property)
-
-/-- The derived hom `RHom(-, -) : Dᵇc(X)⟦Λ⟧ᵒᵖ ⥤ Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible
-complexes: the restriction of `RHom(X)⟦Λ⟧` in both variables. -/
-noncomputable def boundedConstructibleHom : (Dᵇc(X)⟦Λ⟧)ᵒᵖ ⥤ Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ :=
-  Functor.curry.obj ((boundedConstructible _).lift
-    (((boundedConstructible _).ι.op.prod (boundedConstructible _).ι) ⋙
-      Functor.uncurry.obj RHom(X)⟦Λ⟧)
-    fun KL ↦ boundedConstructible_derivedHom_obj Λ ℓ k X KL.1.unop.property KL.2.property)
-
-variable {X}
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
-inclusions. -/
-noncomputable def boundedConstructibleTensorObjCompatibility (K : Dᵇc(X)⟦Λ⟧) :
-    (boundedConstructibleTensor Λ ℓ k X).obj K ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ (-⊗ᴸ-(X)⟦Λ⟧).obj K.obj :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp [boundedConstructibleTensor]
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the restricted functor `RHom(K, -)` is compatible with the
-inclusions. -/
-noncomputable def boundedConstructibleHomObjCompatibility (K : Dᵇc(X)⟦Λ⟧) :
-    (boundedConstructibleHom Λ ℓ k X).obj (op K) ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ (RHom(X)⟦Λ⟧).obj (op K.obj) :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp [boundedConstructibleHom]
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` on bounded constructible
-complexes: the restriction of `ProEtale.CondensedRing.derivedTensorHomAdjunction` along the
-fully faithful inclusions. -/
-noncomputable def boundedConstructibleTensorHomAdjunction (K : Dᵇc(X)⟦Λ⟧) :
-    (boundedConstructibleTensor Λ ℓ k X).obj K ⊣ (boundedConstructibleHom Λ ℓ k X).obj (op K) :=
-  Adjunction.restrictFullyFaithful (derivedTensorHomAdjunction Λ K.obj)
-    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
-    (boundedConstructibleTensorObjCompatibility Λ ℓ k K).symm
-    (boundedConstructibleHomObjCompatibility Λ ℓ k K).symm
-
-end TensorHom
 
 end AlgebraicGeometry.ProEtale.CondensedRing

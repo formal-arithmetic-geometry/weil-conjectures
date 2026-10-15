@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-module-constructible-extension-zero",
+ "kind": "statement",
+ "title": "Extension by zero of constructible condensed-coefficient module objects",
+ "statement": "Let Λ be any commutative ring object in abelian sheaves on profinite sets with coherent topology, and put Λ_T = p_T^*Λ on the pro-étale site of any scheme T, with the coefficient comparison of [def-weil-pbc-condensed-e-module-category] applied to Λ. Let j : U → X be a quasi-compact open immersion. If M is an internal Λ_U-module admitting a finite constructible locally closed stratification on which it has pro-étale local finite presentations, then the coefficient-linear extension by zero j_!M admits such a stratification and is constructible as an internal Λ_X-module. Empty schemes and the zero module are allowed.",
+ "source": {
+  "document": "WeilConjectures/ConstructibleSheaf/OpenClosed.lean and WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/LowerShriek/Open/Defs.lean",
+  "place": "Scheme.Stratification.openClosed; the open-immersion adjunction triple; elementary vanishing on disjoint supports and transport to internal module objects"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "The unit of abelian-sheaf extension by zero followed by restriction to the open is an isomorphism. Indeed the existing adjunction triple identifies this with the isomorphism counit of restriction followed by open direct image. It follows that extension by zero is fully faithful and its adjunction unit for geometric inverse image is invertible. The unit of the coefficient-linearized adjunction has this underlying abelian-sheaf map; the module forgetful functor reflects isomorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a scheme map g : Z → X with image disjoint from j, restrict g_*F to the open. Its sections on any pro-étale U-object are sections of F on the fibre product, which is empty by disjointness; a sheaf has zero sections there. The two inverse-image/direct-image and extension-by-zero/restriction adjunctions therefore show g^*j_!G is initial, hence zero. Apply this with the closed complement, and use faithfulness of module forgetful to obtain the same vanishing for internal modules.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A zero module is the cokernel of the identity of the rank-zero finite free module, so it is locally finitely presented using the identity pro-étale cover and constructible using the trivial stratification. On the open, transport the given constructible M by the coefficient isomorphism and the invertible linear adjunction unit. Thus both complementary restrictions are constructible. The constructibility transport lemmas are reused from the pullback module rather than reproved here.",
+   "uses": [
+    "lem-weil-pbc-module-constructible-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Concatenate their finite stratifications using Scheme.Stratification.openClosed, the construction recorded in [prop-constructible-open-closed]. Quasi-compactness of j is precisely what makes images of the open and closed constructible strata constructible in X. The module pullback composition comparison, together with invertible scalar transport, identifies the resulting local presentations with the presentations on the two restrictions. This gives constructibility of j_!M. The local finite-presentation transport lemmas are reused from that same module.",
+   "uses": [
+    "prop-constructible-open-closed",
+    "lem-weil-pbc-module-constructible-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-constructible-open-closed",
+  "lem-weil-pbc-module-constructible-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "WeilConjectures/ConstructibleSheaf/OpenClosed.lean and WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/LowerShriek/Open/Defs.lean",
+  "place": "Scheme.Stratification.openClosed; the open-immersion adjunction triple; elementary vanishing on disjoint supports and transport to internal module objects"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsConstructibleModuleObject|IsLocallyFinitelyPresented|extensionByZero",
+   "results": "No matches in Mathlib.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along a quasi-compact open immersion preserves constructible sheaves of modules",
+   "results": "8 results: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage. None states constructibility preservation for internal sheaf modules.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero preserves constructible sheaves of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "date": "2026-10-15",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof paragraph choosing an integral lattice and rationalizing: constructible modules and functors in the archived condensed-coefficient receiving category; supporting the bounded-constructible six-functor restrictions reached through this item.",
+   "via": [
+    "def-weil-pbc-condensed-e-module-category",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleConstructibleExtensionByZero.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isConstructibleModuleObject_openImmersionLowerShriek",
+  "statement": "theorem isConstructibleModuleObject_openImmersionLowerShriek (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)) (hM : IsConstructibleModuleObject (condensedRingObj Λ U) M) : IsConstructibleModuleObject (condensedRingObj Λ X) ((j)_!open⟦Λ⟧.obj M)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-15"
+ },
+ "tool_uses": [
+  "prop-constructible-open-closed"
+ ],
+ "note": "Only the generic concatenation construction of stratifications is reused; no finite-coefficient étale extension-by-zero theorem is substituted for the internal-module statement. The unit route is unchanged.",
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-4fdeb",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261015T181522-L-748402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-4fdeb",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261015T181522-L-748402",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery files, DAG nodes, proofs, imports, and direct importers matched the stage-3 brief and compiled successfully."
+ }
+}
