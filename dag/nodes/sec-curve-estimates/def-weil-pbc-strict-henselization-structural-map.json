@@ -121,17 +121,18 @@
   }
  },
  "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Sites/StrictHenselization.lean",
-  "declaration": "AlgebraicGeometry.Scheme.strictLocalizationToBase",
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap",
   "declarations": [
-   "AlgebraicGeometry.Scheme.strictLocalizationToBase",
-   "AlgebraicGeometry.Scheme.strictLocalizationCone_π_app_hom"
+   "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap",
+   "AlgebraicGeometry.Scheme.exists_strictHenselizationStructuralMap"
   ],
-  "branch": "slopmaster2",
-  "date": "2026-10-13",
+  "statement": "def strictHenselizationStructuralMap {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : strictHenselizationScheme s ⟶ S",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
   "existing": true,
-  "note": "Upstream canonical structure map; SHEAF keeps only an abbreviation and the formula for its small affine representative legs."
+  "note": "The recorded upstream strictLocalizationToBase has source Scheme.strictLocalization, whereas the limit dependency records Scheme.strictHenselizationScheme. These are separate colimit constructions, not definitionally equal. Reuse the existing project structural map on the recorded strictHenselizationScheme: it is characterized by exactly the composites of the small affine representative limit legs in this node. No new definition or module is introduced."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -142,12 +143,12 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "R-gps",
-  "group": "P1",
-  "result": "fix",
-  "note": "qcqs f, geometric point (Ω alg. closed), S_(s)=strictHenselizationScheme, p=pullback.fst f (structural map), canonical p^{-1}Gm->Gm = upstream upperStarGmSheafToGmSheaf (adjoint of units pullback, Etale.upperStar), IsIso; new node = canonical S_(s)->S, absent in Mathlib/slopmaster2 7d675a263/landed; fixed its module (import after docstring did not compile), node statement/citations, stale ρ/hρ docstring and record note"
+  "reviewer": "NT-stage2-Codex-1ab6e8498",
+  "group": "NA",
+  "result": "pass",
+  "note": "Checked source clauses, all dependencies, canonical maps, edge cases, signatures, records and pilot gates. Immutable module compiled cleanly through server-only scompile.py in 3.6 seconds. No repository or branch changes."
  },
  "reviewed_proof": {
   "date": "2026-10-12",
