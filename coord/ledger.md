@@ -15156,3 +15156,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:07 L: merged deliver/F1/WeilConjectures.WeilSheaf.LowerShriekFunctoriality (stage 3; reviewer PASS; first push; landing 20261015T190717-L-966338 (proof); batch 20261015T190714; modules 1; new nodes 0)
 - 19:07 L: merged deliver/F4/Sheaf.Paper.CondensedQcqsPushforwardContinuity (stage 3; reviewer PASS; first push; landing 20261015T190717-L-966474 (proof); batch 20261015T190714; modules 1; new nodes 3)
 - 19:07 L: returned deliver/C3/Sheaf.AlgebraicGeometry.FiniteRangeComparison (reviewer RETURN: (reviewer X-d8f91, head d8f916d90) F/G1: In dag/nodes/sec-smooth-base-change/sbc-lem-finite-range-comparison.json, remov)
+- 19:13 L: returned deliver/D2/Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections (reviewer RETURN: (the landing tools, head 69b26541a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
