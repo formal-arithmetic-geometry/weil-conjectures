@@ -25,20 +25,16 @@
  ],
  "proof": [
   {
-   "text": "Choose a local refinement cover over every member of the original cover and form the sigma-indexed family of composite morphisms. The indexed composition axiom makes this family a pro-etale cover, and each composite member carries the local finite-free isomorphism.",
-   "uses": [
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": false
+   "text": "Use Classical.skolem to choose a local cover C_i and its member property for each member of the original cover. Mathlib CategoryTheory.Precoverage.ZeroHypercover.bind composes these into a pro-etale cover, using the IsStableUnderComposition instance for Scheme.proetalePrecoverage. Its index type is the sigma type of pairs (i,j), its objects are C_i.X j, and its maps are C_i.f j followed by the original covering map. The local property therefore holds on every composite member by its chosen proof. The Lean proof first performs this construction with the member property as an abstract predicate, then specializes it to the displayed finite-free existence property; both parts are proved in the same module.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-proetale-site"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "covering composition axiom for a pretopology"
+  "place": "Definition 7.6.2 (Tag 00VH), axiom (2); Mathlib CategoryTheory.Precoverage.ZeroHypercover.bind"
  },
  "mathlib_searches": [
   {
@@ -103,11 +99,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
+  "reviewer": "X-0174d",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261015T201714-L-1447338",
+  "landing": "20261015T212907-L-2067624",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature with the node and lean.statement, the proof with Mathlib cover bind, and the documented import changes with clean direct-importer compilation."
  }
 }

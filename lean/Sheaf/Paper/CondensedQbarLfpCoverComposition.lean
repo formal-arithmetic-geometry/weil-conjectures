@@ -1,9 +1,7 @@
 module
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 @[expose] public section
 universe u
 open CategoryTheory
@@ -15,6 +13,19 @@ namespace AlgebraicGeometry.ProEtale
 The theorem packages the categorical composition of the original presentation cover
 with a chosen refinement over each member.
 -/
+-- Keep the member property abstract when checking the dependent cover construction.
+private theorem exists_cover_of_local_property
+    {X : Scheme.{u}} (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X)
+    (Q : ∀ Y : Scheme.{u}, (Y ⟶ X) → Prop)
+    (hQ : ∀ i : 𝒰.I₀,
+      ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage (𝒰.X i),
+        ∀ j : C.I₀, Q (C.X j) (C.f j ≫ 𝒰.f i)) :
+    ∃ 𝒲 : Scheme.Cover.{u} Scheme.proetalePrecoverage X,
+      ∀ i : 𝒲.I₀, Q (𝒲.X i) (𝒲.f i) := by
+  classical
+  obtain ⟨C, hC⟩ := Classical.skolem.mp hQ
+  exact ⟨𝒰.bind C, fun i ↦ hC i.1 i.2⟩
+
 /-- Compose local finite-free refinements into one pro-etale cover.
 
 Source: Stacks Project, Sites, covering composition; RefactorInstruction.tex, Section 4
@@ -36,5 +47,8 @@ theorem exists_condensedQbar_refinement_of_local
       ∃ r : ℕ, Nonempty
         ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (𝒲.f i)).obj P ≅
           Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (𝒲.X i)) r) := by
-  sorry
+  exact exists_cover_of_local_property 𝒰
+    (fun Y f ↦ ∃ r : ℕ, Nonempty
+      ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) f).obj P ≅
+        Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) r)) hC
 end AlgebraicGeometry.ProEtale
