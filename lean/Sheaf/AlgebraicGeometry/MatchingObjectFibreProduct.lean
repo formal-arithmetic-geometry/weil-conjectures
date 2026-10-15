@@ -7,7 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Sheaf.CategoryTheory.ProperFaceMatchingObject
-import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 
 /-!
 # Matching schemes of termwise fibre products
@@ -75,6 +74,115 @@ theorem matching_object_fibre_product
       μW ≫ prod.lift Mp Mq =
         prod.lift (p.app (op (SimplexCategory.mk n)) ≫ μU)
           (q.app (op (SimplexCategory.mk n)) ≫ μV) := by
-  sorry
+  let cU : Cone (properFaceDiagram U n) :=
+    { pt := MW.pt
+      π :=
+        { app := fun a ↦ MW.π.app a ≫ p.app (op a.unop.obj.left)
+          naturality := by
+            intro i j f
+            dsimp [properFaceDiagram]
+            simp only [Category.id_comp, Category.assoc]
+            rw [← p.naturality]
+            have hMW : MW.π.app i ≫ W.map (Over.Hom.left f.unop.hom).op =
+                MW.π.app j := by
+              simpa [properFaceDiagram] using (MW.π.naturality f).symm
+            rw [← Category.assoc, hMW] } }
+  let cV : Cone (properFaceDiagram V n) :=
+    { pt := MW.pt
+      π :=
+        { app := fun a ↦ MW.π.app a ≫ q.app (op a.unop.obj.left)
+          naturality := by
+            intro i j f
+            dsimp [properFaceDiagram]
+            simp only [Category.id_comp, Category.assoc]
+            rw [← q.naturality]
+            have hMW : MW.π.app i ≫ W.map (Over.Hom.left f.unop.hom).op =
+                MW.π.app j := by
+              simpa [properFaceDiagram] using (MW.π.naturality f).symm
+            rw [← Category.assoc, hMW] } }
+  let Mp : MW.pt ⟶ MU.pt := _hMU.lift cU
+  let Mq : MW.pt ⟶ MV.pt := _hMV.lift cV
+  have hMp (a : ProperFaceCategory n) :
+      Mp ≫ MU.π.app (op a) = MW.π.app (op a) ≫ p.app (op a.obj.left) := by
+    exact _hMU.fac cU (op a)
+  have hMq (a : ProperFaceCategory n) :
+      Mq ≫ MV.π.app (op a) = MW.π.app (op a) ≫ q.app (op a.obj.left) := by
+    exact _hMV.fac cV (op a)
+  have hIso : IsIso (prod.lift Mp Mq) := by
+    let r (a : (ProperFaceCategory n)ᵒᵖ) : MU.pt ⨯ MV.pt ⟶
+        W.obj (op a.unop.obj.left) :=
+      BinaryFan.IsLimit.lift (_hW (op a.unop.obj.left))
+        (prod.fst ≫ MU.π.app a) (prod.snd ≫ MV.π.app a)
+    have hrp (a : (ProperFaceCategory n)ᵒᵖ) :
+        r a ≫ p.app (op a.unop.obj.left) = prod.fst ≫ MU.π.app a :=
+      BinaryFan.IsLimit.lift_fst (_hW _) _ _
+    have hrq (a : (ProperFaceCategory n)ᵒᵖ) :
+        r a ≫ q.app (op a.unop.obj.left) = prod.snd ≫ MV.π.app a :=
+      BinaryFan.IsLimit.lift_snd (_hW _) _ _
+    let c : Cone (properFaceDiagram W n) :=
+      { pt := MU.pt ⨯ MV.pt
+        π :=
+          { app := r
+            naturality := by
+              intro i j f
+              dsimp [properFaceDiagram]
+              rw [Category.id_comp]
+              symm
+              apply BinaryFan.IsLimit.hom_ext (_hW (op j.unop.obj.left))
+              · change (r i ≫ W.map (Over.Hom.left f.unop.hom).op) ≫
+                  p.app (op j.unop.obj.left) = r j ≫ p.app (op j.unop.obj.left)
+                rw [Category.assoc, p.naturality, ← Category.assoc, hrp, hrp, Category.assoc]
+                exact congrArg (fun k ↦ prod.fst ≫ k) (MU.π.naturality f).symm
+              · change (r i ≫ W.map (Over.Hom.left f.unop.hom).op) ≫
+                  q.app (op j.unop.obj.left) = r j ≫ q.app (op j.unop.obj.left)
+                rw [Category.assoc, q.naturality, ← Category.assoc, hrq, hrq, Category.assoc]
+                exact congrArg (fun k ↦ prod.snd ≫ k) (MV.π.naturality f).symm } }
+    let inv : MU.pt ⨯ MV.pt ⟶ MW.pt := _hMW.lift c
+    have hinv (a : (ProperFaceCategory n)ᵒᵖ) : inv ≫ MW.π.app a = r a :=
+      _hMW.fac c a
+    refine ⟨⟨inv, ?_, ?_⟩⟩
+    · apply _hMW.hom_ext
+      intro a
+      rw [Category.assoc, hinv]
+      apply BinaryFan.IsLimit.hom_ext (_hW (op a.unop.obj.left))
+      · change (prod.lift Mp Mq ≫ r a) ≫ p.app (op a.unop.obj.left) =
+          (𝟙 MW.pt ≫ MW.π.app a) ≫ p.app (op a.unop.obj.left)
+        rw [Category.assoc, hrp, ← Category.assoc, prod.lift_fst, Category.id_comp]
+        exact hMp a.unop
+      · change (prod.lift Mp Mq ≫ r a) ≫ q.app (op a.unop.obj.left) =
+          (𝟙 MW.pt ≫ MW.π.app a) ≫ q.app (op a.unop.obj.left)
+        rw [Category.assoc, hrq, ← Category.assoc, prod.lift_snd, Category.id_comp]
+        exact hMq a.unop
+    · apply prod.hom_ext
+      · simp only [Category.assoc, prod.lift_fst, Category.id_comp]
+        apply _hMU.hom_ext
+        intro a
+        rw [Category.assoc, hMp a.unop, ← Category.assoc, hinv, hrp]
+        rfl
+      · simp only [Category.assoc, prod.lift_snd, Category.id_comp]
+        apply _hMV.hom_ext
+        intro a
+        rw [Category.assoc, hMq a.unop, ← Category.assoc, hinv, hrq]
+        rfl
+  refine ⟨Mp, Mq, hMp, hMq, hIso, ?_⟩
+  apply BinaryFan.IsLimit.hom_ext (prodIsProd MU.pt MV.pt)
+  · change μW ≫ prod.lift Mp Mq ≫ prod.fst =
+      prod.lift (p.app (op (SimplexCategory.mk n)) ≫ μU)
+        (q.app (op (SimplexCategory.mk n)) ≫ μV) ≫ prod.fst
+    simp only [prod.lift_fst]
+    apply _hMU.hom_ext
+    intro a
+    rw [Category.assoc, Category.assoc, hMp a.unop, ← Category.assoc, _hμW a.unop]
+    rw [_hμU a.unop]
+    exact p.naturality a.unop.obj.hom.op
+  · change μW ≫ prod.lift Mp Mq ≫ prod.snd =
+      prod.lift (p.app (op (SimplexCategory.mk n)) ≫ μU)
+        (q.app (op (SimplexCategory.mk n)) ≫ μV) ≫ prod.snd
+    simp only [prod.lift_snd]
+    apply _hMV.hom_ext
+    intro a
+    rw [Category.assoc, Category.assoc, hMq a.unop, ← Category.assoc, _hμW a.unop]
+    rw [_hμV a.unop]
+    exact q.naturality a.unop.obj.hom.op
 
 end AlgebraicGeometry
