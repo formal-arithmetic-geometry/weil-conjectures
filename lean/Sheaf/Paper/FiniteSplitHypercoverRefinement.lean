@@ -10,6 +10,7 @@ import Sheaf.Paper.EtaleHypercoverProduct
 import Sheaf.Paper.FiniteSplitHypercoverExistence
 import Sheaf.Paper.FiniteSplitHypercoverReplacement
 import Sheaf.Paper.EtaleHypercoverHomotopyEqualizer
+import Sheaf.Paper.SemiRepresentableHypercoverEtale
 
 /-!
 # Finite refinements and local lifting
@@ -122,6 +123,9 @@ theorem exists_truncated_refinement
     ∃ V : FiniteSplitEtaleHypercover X,
       Nonempty ((SimplicialObject.truncation r).obj V.simplicial ⟶
           (SimplicialObject.truncation r).obj K) := by
-  sorry
+  have hK' : IsEtaleHypercover K :=
+    AlgebraicGeometry.Scheme.semiRepresentableHypercover_isEtaleHypercover K hK
+  obtain ⟨V, ⟨f⟩⟩ := exists_finite_split_replacement K hK'
+  exact ⟨V, ⟨(SimplicialObject.truncation r).map f⟩⟩
 
 end AlgebraicGeometry.FiniteSplitEtaleHypercover
