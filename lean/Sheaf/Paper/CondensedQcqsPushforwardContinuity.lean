@@ -80,7 +80,21 @@ theorem condensedContinuityComparison_naturality
       condensedContinuityComparison D a T ≫
         T.map (colimMap (Functor.whiskerRight α
           ((ComplexShape.embeddingUpIntGE a).truncGEFunctor A))) := by
-  sorry
+  apply colimit.hom_ext
+  intro i
+  simp only [condensedContinuityComparison, colimit.ι_desc_assoc]
+  rw [colimit.map_desc, colimit.ι_desc]
+  dsimp [condensedContinuityCocone]
+  rw [← T.map_comp, ← T.map_comp]
+  congr 1
+  rw [Category.assoc]
+  have hnat := ((ComplexShape.embeddingUpIntGE a).πTruncGENatTrans A).naturality
+    (α.app i)
+  dsimp at hnat
+  rw [← Category.assoc, hnat, Category.assoc]
+  congr 1
+  exact (ι_colimMap
+    (Functor.whiskerRight α ((ComplexShape.embeddingUpIntGE a).truncGEFunctor A)) i).symm
 
 /-- The canonical comparison respects natural transformations of the output functor.
 Together with the shifted cocone statements below, this specifies the comparison under
@@ -98,7 +112,12 @@ theorem condensedContinuityComparison_functor_naturality
     [HasColimit (D ⋙ T)] [HasColimit (D ⋙ S)] :
     colimMap (Functor.whiskerLeft D β) ≫ condensedContinuityComparison D a S =
       condensedContinuityComparison D a T ≫ β.app (condensedContinuityCocone D a).pt := by
-  sorry
+  apply colimit.hom_ext
+  intro i
+  simp only [condensedContinuityComparison, colimit.ι_desc_assoc]
+  rw [colimit.map_desc, colimit.ι_desc]
+  dsimp [condensedContinuityCocone]
+  rw [← β.naturality]
 
 /-- Evaluation of the underlying abelian sheaf at the terminal pro-etale object.
 Its right derived functor is ordinary uncompleted derived global sections of modules.
