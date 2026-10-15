@@ -1,6 +1,6 @@
 # Work queue
 
-32 items; claim with `tools/claim.py next <group> [--stage N]`.
+30 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (32)
+## Stage 3: modules to prove (30)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -25,7 +25,6 @@
 | `Sheaf.Paper.CondensedStratumModelAssembly` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 5 | proof |
 | `Sheaf.Paper.GeometricFieldProEtaleEvaluation` | 5 | 1 | proof |
@@ -39,7 +38,6 @@
 | `Sheaf.Algebra.Homology.FunctorialObjectResolution` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedCounit` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleClosedAbelianFilteredColimits` | 7 | 1 | proof |
-| `Sheaf.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSpecializationAffineCoordinates` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSpecializationUnitComparison` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.GeometricModuleConstruction` | 9 | 1 | proof |
