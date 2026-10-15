@@ -161,5 +161,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nfp1909 (reviewer sub-agent of L); spot-checked: No cycle (item cites nothing created from lem-pc-projective-noetherian-rf-perfect; kflat node from another item). Hypotheses Noetherian/bounded/flat/finite cohomology used in steps 2-4; construction (064T-style finite free resolution, Tor_1 vanishing at the left tail, flat f.p. cokernel projective) correct; termwise flat-finite clause not needed (F terms not finite), Q handled by the existing Mathlib leaf. lem-pc-noetherian-finite-kernels-cokernels kept (real lemma, no single Mathlib decl; grep of Mathlib for Module.Finite ker found only local haves). FIX more, RETURN less: (1) B class (b)/(d): lem-pc-flat-tor-criterion is the special case N=A/I of existing lem-weil-pbc-flat-tor-ideal-criterion (Stacks 00M5, generic tool from sk-thm-p1, declared tool_use); step 4 now cites it with N=A/I folded in, duplicate dropped. (2) C1: step 3 identifies H^{a-1}(P tensor N) with Tor_1 without citing def-weil-pbc-tor-modules; cited. (3) C4: step 3 now says the ringed-space kflat node is applied on the one-point ringed space with ring A.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-22be08c46",
+  "group": "NI",
+  "result": "pass",
+  "note": "Wrote review.md. Verified the immutable statement, dependencies, source, docstrings, report sections, edge cases, universes, and verbatim signature. Server-only compilation reproduced cleanly in 1.4 seconds. No delivery errors found; no repository or branch head changed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.NoetherianFlatComplexPerfect",
+  "declaration": "DerivedCategory.exists_bounded_finite_projective_model_of_flat_of_finite_homology",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/NoetherianFlatComplexPerfect.lean",
+  "statement": "theorem exists_bounded_finite_projective_model_of_flat_of_finite_homology {A : Type u} [CommRing A] [IsNoetherianRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)] (C : DerivedCategory (ModuleCat.{u} A)) (hflat : ∃ F : CochainComplex (ModuleCat.{u} A) ℤ, (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (F.X n)) ∧ (∀ n : ℤ, Module.Flat A (F.X n)) ∧ Nonempty (Q.obj F ≅ C)) (hfinite : ∀ i : ℤ, Module.Finite A ((homologyFunctor (ModuleCat.{u} A) i).obj C)) : ∃ P : CochainComplex (ModuleCat.{u} A) ℤ, (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) ∧ (∀ n : ℤ, Module.Finite A (P.X n)) ∧ (∀ n : ℤ, Module.Projective A (P.X n)) ∧ Nonempty (Q.obj P ≅ C)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
