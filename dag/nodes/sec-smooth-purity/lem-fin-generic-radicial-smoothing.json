@@ -237,5 +237,23 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-ae9ede8a1 (reviewer sub-agent of L); spot-checked: Read the full mathematics and sources; all five proof steps and both new statements pass. Corrected two records: added the actual logged unavailable LeanSearch attempt and the verified density theorem attachment. Its 19 recorded dependencies are sorry-free. Statements and proofs are unchanged; review.md documents sources, edge cases, duplicate checks, and accepted tool uses.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGenericRadicialSmoothing",
+  "declaration": "AlgebraicGeometry.exists_finite_generic_radicial_smoothing",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGenericRadicialSmoothing.lean",
+  "statement": "theorem exists_finite_generic_radicial_smoothing (k : Type u) [Field k] (S : Scheme.{u}) [IsIntegral S] [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (X : Scheme.{u}) (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] [Nonempty X] (F : Option (Sheaf X.smallEtaleTopology (Type (u + 1)))) (hF : ∀ E ∈ F, Scheme.IsConstructibleEtaleSheafOfSets E) : ∃ U : S.Opens, (U : Set S).Nonempty ∧ ∃ (T : Scheme.{u}) (q : T ⟶ U.toScheme), IsFinite q ∧ UniversallyInjective q ∧ Surjective q ∧ ∃ V : (pullback f (q ≫ U.ι)).nilradical.subscheme.Opens, Dense (V : Set (pullback f (q ≫ U.ι)).nilradical.subscheme) ∧ Smooth (V.ι ≫ (pullback f (q ≫ U.ι)).nilradical.subschemeι ≫ pullback.snd f (q ≫ U.ι)) ∧ (∀ E ∈ F, Scheme.IsLocallyConstantEtaleSheafOfSets ((Scheme.etaleSetPullback (V.ι ≫ (pullback f (q ≫ U.ι)).nilradical.subschemeι ≫ pullback.fst f (q ≫ U.ι))).obj E)) ∧ ∀ η : T, IsGenericPoint η Set.univ → ∀ Z : Set {y : (pullback f (q ≫ U.ι)).nilradical.subscheme | ((pullback f (q ≫ U.ι)).nilradical.subschemeι ≫ pullback.snd f (q ≫ U.ι)) y = η ∧ y ∉ V}, Z ∈ irreducibleComponents _ → ∀ (C : Set ↥(pullback f (q ≫ U.ι))), C ∈ irreducibleComponents ↥(pullback f (q ≫ U.ι)) → (∀ z ∈ Z, (pullback f (q ≫ U.ι)).nilradical.subschemeι z.1 ∈ C) → topologicalKrullDim Z < topologicalKrullDim C",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9bd113733",
+  "group": "ND",
+  "result": "pass",
+  "note": "Reviewed immutable statement, all six dependencies, sources, declarations, docstrings, report and edge cases. Signature matches lean.statement verbatim; scompile.py passed both checks without diagnostics. No faults found. Wrote review.md; snapshot and branch head unchanged."
  }
 }
