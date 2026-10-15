@@ -192,5 +192,23 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-a4047069c (reviewer sub-agent of L); spot-checked: Read the complete delivery, DAG route, cited nodes, blueprint, Stacks sources, Mathlib base-change declarations, and archived target source. Verified all five proof steps, coefficient restriction, base-change morphism, finite-sum calculations, strict automorphism case, edge cases, acyclicity, dependency closure, and searches. No repair needed; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LinearScalarLocalization",
+  "declaration": "CategoryTheory.exists_linear_scalarLocalization_category",
+  "file": "lean/Sheaf/CategoryTheory/LinearScalarLocalization.lean",
+  "statement": "theorem exists_linear_scalarLocalization_category (R : Type r) [CommRing R] (C : Type u) [Category.{v} C] [Preadditive C] [Linear R C] (p : R) : (∀ K L M : C, ∃! β : (Localization.Away p ⊗[R] (L ⟶ M)) →ₗ[Localization.Away p] (Localization.Away p ⊗[R] (K ⟶ L)) →ₗ[Localization.Away p] (Localization.Away p ⊗[R] (K ⟶ M)), ∀ (f : L ⟶ M) (g : K ⟶ L) (a b : Localization.Away p), β (a ⊗ₜ[R] f) (b ⊗ₜ[R] g) = (a * b) ⊗ₜ[R] (g ≫ f)) ∧ ∃ d : Category.{max r v} (ULift.{0} C), (fun [catInst : Category.{max r v} (ULift.{0} C)] ↦ ∃ a : Preadditive (ULift.{0} C), (fun [addInst : Preadditive (ULift.{0} C)] ↦ ∃ l : Linear (Localization.Away p) (ULift.{0} C), (fun [linInst : Linear (Localization.Away p) (ULift.{0} C)] ↦ ∃ e : ∀ K L : C, (Localization.Away p ⊗[R] (K ⟶ L)) ≃ₗ[Localization.Away p] (ULift.up K ⟶ ULift.up L), (∀ K : C, e K K (1 ⊗ₜ[R] 𝟙 K) = 𝟙 (ULift.up K)) ∧ (∀ (K L M : C) (f : L ⟶ M) (g : K ⟶ L) (a b : Localization.Away p), e K L (b ⊗ₜ[R] g) ≫ e L M (a ⊗ₜ[R] f) = e K M ((a * b) ⊗ₜ[R] (g ≫ f))) ∧ ∃ lr : Linear R (ULift.{0} C), (fun [rlinInst : Linear R (ULift.{0} C)] ↦ (∀ (K L : ULift.{0} C) (r : R) (f : K ⟶ L), r • f = (algebraMap R (Localization.Away p) r) • f) ∧ ∃ Q : C ⥤ ULift.{0} C, (∀ K : C, Q.obj K = ULift.up K) ∧ (∀ (K L : C) (f : K ⟶ L), HEq (Q.map f) (e K L (1 ⊗ₜ[R] f))) ∧ Q.Additive ∧ Q.Linear R ∧ ∀ (T S : C ⥤ C) [T.Additive] [T.Linear R], T ⋙ S = 𝟭 C → S ⋙ T = 𝟭 C → ∃ T' S' : ULift.{0} C ⥤ ULift.{0} C, T'.Additive ∧ T'.Linear (Localization.Away p) ∧ S'.Additive ∧ S'.Linear (Localization.Away p) ∧ (∀ K : C, T'.obj (ULift.up K) = ULift.up (T.obj K)) ∧ (∀ K : C, S'.obj (ULift.up K) = ULift.up (S.obj K)) ∧ (∀ (K L : C) (f : K ⟶ L) (a : Localization.Away p), HEq (T'.map (e K L (a ⊗ₜ[R] f))) (e (T.obj K) (T.obj L) (a ⊗ₜ[R] T.map f))) ∧ (∀ (K L : C) (f : K ⟶ L) (a : Localization.Away p), HEq (S'.map (e K L (a ⊗ₜ[R] f))) (e (S.obj K) (S.obj L) (a ⊗ₜ[R] S.map f))) ∧ T' ⋙ S' = 𝟭 (ULift.{0} C) ∧ S' ⋙ T' = 𝟭 (ULift.{0} C) ∧ T ⋙ Q = Q ⋙ T' ) (rlinInst := lr) ) (linInst := l)) (addInst := a)) (catInst := d)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0d3c6d039",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all clauses, dependencies, sources, edge cases, docstrings, universes, and verbatim signature. Server-only compilation passed cleanly in 1.2 seconds. No delivery errors; repositories and branch unchanged."
  }
 }
