@@ -16,26 +16,41 @@
  ],
  "proof": [
   {
-   "text": "Use the canonical cartesian square for the overlap and the inverse open-site equivalences to define the transition and base comparison. Restriction and composition coherence gives the natural comparison, and the supplied stagewise theta equations give the object pin for each Boolean object.",
+   "text": "Substitute the canonical comparison-family equality. Define the finite-stage, apex, and transition base-change arrows. Cocone naturality and baseChangeMap_comp give gk ≫ fk = gj. The two cartesian projection equations prove that their restricted overlap maps obey the component square equation.",
+   "uses": [
+    "def-pc-perfect-overlap-stage-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the stage and apex object isomorphisms by perfectOverlapStageObjectIso and perfectOverlapApexObjectIso. Set transition to derived pullback along the overlapLimitArrow base change and baseComparison to perfectHomComparison. The defining perfectHomMap conjugation equation proves transition_pin.",
    "uses": [
     "def-pc-perfect-overlap-stage-equivalence",
-    "def-pc-two-open-comparison-diagram",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct comparison with perfectOverlapNaturalComparisonOfSquare using the component square. Cache the four explicitly constructed comparison families through a proved equality interface. Apply the canonical composite object-pin identity to each stage and Boolean branch, then assemble the seven fields into PerfectHomObjectRealizationCore in a private theorem with scheme maps as parameters. Instantiate that construction with the base-change schemes. All fields except this component identity are constructed and checked in Lean.",
+   "uses": [
+    "def-pc-perfect-overlap-stage-equivalence",
+    "lem-pc-perfect-overlap-composite-object-pin"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-perfect-overlap-stage-equivalence",
-  "def-pc-two-open-comparison-diagram",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-perfect-overlap-composite-object-pin"
  ],
  "proof_origin": {
-  "by": "worker",
-  "agent": "A4",
+  "by": "agent",
+  "agent": "G2",
   "date": "2026-10-15",
   "document": "https://stacks.math.columbia.edu/tag/09RE",
-  "note": "The cartesian composition and restriction calculation is isolated as an intermediate theorem."
+  "place": "Restriction and composition comparisons in the first proof paragraph.",
+  "note": "Concrete fieldwise construction; only the generic canonical composite object identity remains as an intermediate theorem."
  },
  "mathlib_searches": [
   {
@@ -89,12 +104,12 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapObjectRealizationCoreData.lean",
+  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreOfData",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapObjectRealizationCoreOfData.lean",
   "declaration": "AlgebraicGeometry.perfect_overlap_object_realization_core_of_data",
-  "statement": "theorem perfect_overlap_object_realization_core_of_data {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} ((SheafOfModules.{u}) ((moduleRings Z.toRingedSpace).over U))] (j : I) (hij : i ≤ j) (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens), ∃ k : I, j ≤ k) : let Yj := pullback t (Spec.map (R.map (homOfLE hij))) let X := pullback t (Spec.map (c.ι.app i)) let gj := baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∀ (U V : Yj.Opens) (hcover : U ⊔ V = ⊤) (hU : IsCompact (U : Set Yj)) (hV : IsCompact (V : Set Yj)) (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme) (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B) (E : schemeDerivedCategory X), let instP : Category (schemeDerivedCategory (gj ⁻¹ᵁ U).toScheme) := inferInstance let instQ : Category (schemeDerivedCategory (gj ⁻¹ᵁ V).toScheme) := inferInstance let instX : Category (schemeDerivedCategory X) := inferInstance let PU : schemeDerivedCategory X ⥤ schemeDerivedCategory (gj ⁻¹ᵁ U).toScheme := (schemeOpenRestriction X (gj ⁻¹ᵁ U)).mapDerivedCategory let PV : schemeDerivedCategory X ⥤ schemeDerivedCategory (gj ⁻¹ᵁ V).toScheme := (schemeOpenRestriction X (gj ⁻¹ᵁ V)).mapDerivedCategory ∀ (φU : (derivedPullback (gj ∣_ U)).obj A ≅ PU.obj E) (φV : (derivedPullback (gj ∣_ V)).obj B ≅ PV.obj E), let P := gj ⁻¹ᵁ U let Q := gj ⁻¹ᵁ V let RU := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) P).mapDerivedCategory let RV := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) Q).mapDerivedCategory let RW := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (P ⊓ Q)).mapDerivedCategory let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (show P ⊓ Q ≤ P from inf_le_left))).mapDerivedCategory let SQ := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (show P ⊓ Q ≤ Q from inf_le_right))).mapDerivedCategory let τU : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) (homOfLE (show P ⊓ Q ≤ P from inf_le_left))) let τV : RV ⋙ SQ ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) (homOfLE (show P ⊓ Q ≤ Q from inf_le_right))) ∀ (data : (k : I) → (hjk : j ≤ k) → perfectOverlapComparisonDataType R c hc i Z t j hij hstage U V hcover hU hV A B hA hB E φU φV k hjk), Nonempty ( let K := {k : I // j ≤ k} let C : K → Type (u + 1) := fun k ↦ let Yk := pullback t (Spec.map (R.map (homOfLE (hij.trans k.property)))) let f := baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans k.property))))) (Over.homMk (Spec.map (R.map (homOfLE k.property))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) let U' := f ⁻¹ᵁ U let V' := f ⁻¹ᵁ V schemeDerivedCategory (U' ⊓ V').toScheme let F : (k : K) → Bool → C k := fun k b ↦ let Yk := pullback t (Spec.map (R.map (homOfLE (hij.trans k.property)))) let f := baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans k.property))))) (Over.homMk (Spec.map (R.map (homOfLE k.property))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) let U' := f ⁻¹ᵁ U let V' := f ⁻¹ᵁ V let A' : schemeDerivedCategory U'.toScheme := (derivedPullback (f ∣_ U)).obj A let B' : schemeDerivedCategory V'.toScheme := (derivedPullback (f ∣_ V)).obj B let SU : schemeDerivedCategory U'.toScheme ⥤ schemeDerivedCategory (U' ⊓ V').toScheme := (schemeOpenOverlapRestriction Yk (homOfLE (show U' ⊓ V' ≤ U' from inf_le_left))).mapDerivedCategory let SV : schemeDerivedCategory V'.toScheme ⥤ schemeDerivedCategory (U' ⊓ V').toScheme := (schemeOpenOverlapRestriction Yk (homOfLE (show U' ⊓ V' ≤ V' from inf_le_right))).mapDerivedCategory if b then SV.obj B' else SU.obj A' let G : (k : K) → C k ⥤ DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (P ⊓ Q))) := fun k ↦ (data k.val k.property).d.toDiagram.HW let ψ : ∀ k b, (G k).obj (F k b) ≅ RW.obj E := fun k b ↦ let Yk := pullback t (Spec.map (R.map (homOfLE (hij.trans k.property)))) let f := baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans k.property))))) (Over.homMk (Spec.map (R.map (homOfLE k.property))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) let U' := f ⁻¹ᵁ U let V' := f ⁻¹ᵁ V let A' : schemeDerivedCategory U'.toScheme := (derivedPullback (f ∣_ U)).obj A let B' : schemeDerivedCategory V'.toScheme := (derivedPullback (f ∣_ V)).obj B let d := (data k.val k.property).d let θU := (data k.val k.property).θU let θV := (data k.val k.property).θV match b with | true => d.toDiagram.γV.symm.app B' ≪≫ SQ.mapIso θV ≪≫ τV.app E | false => d.toDiagram.γU.symm.app A' ≪≫ SP.mapIso θU ≪≫ τU.app E let stageEquiv : ∀ k : K, C k ≌ schemeDerivedCategory (pullback ((U ⊓ V).ι ≫ pullback.snd t (Spec.map (R.map (homOfLE hij)))) (Spec.map (R.map (homOfLE k.property)))) := fun k ↦ let arrow : Over.mk (Spec.map (R.map (homOfLE (hij.trans k.property)))) ⟶ Over.mk (Spec.map (R.map (homOfLE hij))) := Over.homMk (Spec.map (R.map (homOfLE k.property))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl) perfectOverlapStageEquivalence (baseChangeMap t arrow) (pullback.snd t (Spec.map (R.map (homOfLE (hij.trans k.property))))) (pullback.snd t (Spec.map (R.map (homOfLE hij)))) (Spec.map (R.map (homOfLE k.property))) (isPullback_baseChangeMap t arrow) U V let apexEquiv : DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (P ⊓ Q))) ≌ schemeDerivedCategory (pullback ((U ⊓ V).ι ≫ pullback.snd t (Spec.map (R.map (homOfLE hij)))) (Spec.map (c.ι.app j))) := let arrow : Over.mk (Spec.map (c.ι.app i)) ⟶ Over.mk (Spec.map (R.map (homOfLE hij))) := Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]) perfectOverlapApexEquivalence gj (pullback.snd t (Spec.map (c.ι.app i))) (pullback.snd t (Spec.map (R.map (homOfLE hij)))) (Spec.map (c.ι.app j)) (isPullback_baseChangeMap t arrow) U V PerfectHomObjectRealizationCore R c j C F _ (fun _ ↦ RW.obj E) G ψ (U ⊓ V).toScheme ((U ⊓ V).ι ≫ pullback.snd t (Spec.map (R.map (homOfLE hij)))) (fun b ↦ if b then (derivedPullback (Yj.homOfLE (inf_le_right : U ⊓ V ≤ V))).obj B else (derivedPullback (Yj.homOfLE (inf_le_left : U ⊓ V ≤ U))).obj A) stageEquiv apexEquiv)",
+  "statement": "theorem perfect_overlap_object_realization_core_of_data\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u}\n        ((moduleRings Z.toRingedSpace).over U))]\n    (j : I) (hij : i ≤ j)\n    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),\n      ∃ k : I, j ≤ k) :\n    perfectOverlapCoreOfDataStatement R c hc i Z t j hij hstage",
   "branch": "sheaf-dag",
-  "by": "A4",
+  "by": "G2",
   "date": "2026-10-15"
  },
  "reviewed": {
@@ -108,21 +123,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "X-22ce9",
-  "group": "K1",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261014T234607-L-1023500",
+  "landing": "20261015T165631-L-431359",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean module compiles cleanly; pointwise theorem, DAG node, imports, and report agree with the stated delivery and interface checks.",
-  "sorry_before": [
-   "AlgebraicGeometry.perfect_overlap_object_realization_core_data_at",
-   "AlgebraicGeometry.perfect_overlap_object_realization_core_of_data"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.perfect_overlap_object_realization_core_of_data"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
