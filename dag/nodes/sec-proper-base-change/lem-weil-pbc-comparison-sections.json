@@ -21,48 +21,43 @@
  ],
  "proof": [
   {
-   "text": "Define $P_F(U)=\\Gamma(U_{\\Et},F|_U)$, with restrictions induced by scheme inverse image. Choose a stage $i_0$ of the given presentation and pass to its cofinal upper tail. Apply [lem-weil-pbc-etale-section-continuity] with schemes $U_i$, initial sheaf $F|_{U_{i_0}}$, and terminal etale object $W_{i_0}=U_{i_0}$. All schemes are affine, hence qcqs, and their transitions are affine. By [lem-weil-pbc-etale-inverse-image-restriction], the stage sections are $F(U_i)$, and the units give precisely the restriction transition maps. Thus $P_F(U)=\\varinjlim_i F(U_i)$ naturally in $F$. For sets use [lem-weil-pbc-sets-etale-section-continuity] and [lem-weil-pbc-sets-etale-inverse-image-restriction] with the identical choices.\n\nWe check the sheaf condition on the basis. By [lem-weil-pbc-ind-etale-basis] it suffices to check finite basis coverings $\\{V_a\\to U\\}_{a=1}^m$. Every $V_a\\to U$ is ind-etale by the assertion about maps between ind-etale algebras in [lem-weil-pbc-ind-etale-stability]. The definition [def-weil-pbc-ind-etale-algebra] gives $V_a=\\varprojlim_\\lambda V_{a,\\lambda}$ with $V_{a,\\lambda}\\to U$ affine etale of finite presentation. The product of the finitely many filtered stage index categories is filtered. At every tuple of stages the family $\\{V_{a,\\lambda_a}\\to U\\}_a$ covers $U$: a point of $U$ lifts to some $V_a$ and hence to that stage $V_{a,\\lambda_a}$. For each pair $(a,b)$, its fibre products have limit $V_a\\times_U V_b$, by the universal property of the fibre product and limit. They and all stages are affine. Apply the same section-continuity lemmas to $F|_U$ on each of these systems. The sheaf equalizer at each stage has left term $\\Gamma(U_{\\Et},F|_U)$, middle term $\\prod_a\\Gamma((V_{a,\\lambda_a})_{\\Et},F|_{V_{a,\\lambda_a}})$ and right term the product over $(a,b)$ of the sections on the fibre products, as in [def-weil-pbc-cover-cech].\n\nHere is the finite-limit calculation on underlying sets. Finitely many representatives can be moved to one common stage. If their images under the two arrows agree in the colimit, finitely many equalities hold at a common later stage; the stage sheaf equalizer then supplies a unique section over $U$. If two such sections become equal on every $V_a$, these finitely many equalities also hold at a common stage, where separatedness makes the sections equal. This proves the required equalizer, both for sets and modules (the bijection respects the sectionwise module operations). The empty cover can only cover empty $U$, where the sheaf section set is a singleton and the module is zero. The basis lemma now extends this basis sheaf uniquely to the full pro-etale site.",
+   "text": "Use the canonical comparison adjunction from [def-weil-pbc-site-comparison-morphism]. For modules, the existing source-library theorem ProEtale.isColimit_comparisonUpperStar_mapCocone_of_isAffine gives continuity of the comparison inverse image on the specified affine etale presentation. Its unit is invertible on etale objects, by ProEtale.isIso_comparisonAdjunction_unit. Precompose its colimit cocone by the natural isomorphism obtained from this unit at the stages. IsColimit.precomposeHomEquiv then gives exactly the unit-and-restriction cocone proEtaleComparisonSectionsCocone, with no choice of section representatives.",
    "uses": [
-    "def-weil-pbc-cover-cech",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-etale-section-continuity",
-    "lem-weil-pbc-sets-etale-section-continuity",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-sets-etale-inverse-image-restriction",
-    "lem-weil-pbc-ind-etale-stability"
+    "def-weil-pbc-site-comparison-morphism"
    ],
    "elementary": false
   },
   {
-   "text": "Identify this sheaf with $\nu_X^*F$ by its adjunction [def-weil-pbc-site-comparison-morphism]. Given $\\alpha:F\\to\nu_{X,*}G$, each presentation gives compatible maps $F(U_i)\\xrightarrow{\\alpha_{U_i}}G(U_i)\\to G(U)$ and hence $P_F(U)\\to G(U)$.\n\nFor completeness the naturality and independence of presentations require the following finite-stage argument. Write $X=\\operatorname{Spec}A$ and $U=\\operatorname{Spec}(\\varinjlim_i B_i)$. For an affine finite-presentation $X$-scheme $T=\\operatorname{Spec}C$, a map $U\\to T$ corresponds to $C\\to\\varinjlim_i B_i$. It factors through a $B_i$ by [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit]. Two factorizations with the same limit map agree at a later stage: move their finitely many algebra generators to a common stage, then move to a further stage where their images agree; agreement on generators implies agreement on the entire algebra. Thus for $h:U\\to V$ and a stage $V_j$ of a presentation of $V$, $U\\to V\\to V_j$ factors as $U\\to U_i\\to V_j$. A section $t\\in F(V_j)$ consequently restricts to the representative $t|_{U_i}$ of its image in $P_F(U)$. Naturality of $\\alpha$ and restriction in $G$ makes the resulting square commute. Eventual equality makes this independent of the factorization, and applying the construction to the identity map between two presentations proves independence of the presentation. This also checks the identity and composition laws for the colimit description of $P_F$.\n\nConversely a morphism $\\beta:P_F\\to G$ restricts to $F\\to\nu_{X,*}G$ on affine etale finite-presentation objects, where the restriction lemmas of step 1 identify $P_F(T)=F(T)$. By [lem-weil-pbc-affine-etale-site-topos] these affine objects determine sheaves and their morphisms on the etale site. Since $X$ is affine, an affine etale $X$-scheme is of finite presentation: its morphism is affine (hence quasi-compact and quasi-separated) and etale (hence locally of finite presentation). Thus the morphism extends uniquely to that site. Starting with $\\alpha$, the constant presentation of $T$ recovers $\\alpha_T$. Starting with $\\beta$, every section on a basis $U$ comes from a stage $U_i$, and naturality of $\\beta$ along $U\\to U_i$ recovers its original value on that representative. The constructions are therefore inverse, naturally in $F$ and $G$. Uniqueness of the left adjoint identifies $P_F$ with $\nu_X^*F$. This proves both equalities; for sets the same adjunction argument uses the set-valued continuity already established in step 1.",
+   "text": "For sets, specialize the coefficient-independent arguments of the source modules Comparison/FullyFaithful and Comparison/Continuity. A left Kan extension along the opposite etale-to-pro-etale inclusion preserves the filtered colimit attached to an affine etale presentation: the representable Hom functors preserve it by Scheme.preservesColimit_yoneda (finite presentation and affine transitions), and hence so does the left Kan extension. On the affine pro-etale basis [lem-weil-pbc-ind-etale-basis], apply Presheaf.isSheaf_of_generates_of_isRelativelyPresentable to AffineProEt.minimalPrecoverage. The basis precoverage is finite and relatively presentable, its generating topology is the affine pro-etale topology, and filtered colimits in Type commute with finite limits. Thus this Kan extension of an etale sheaf is already a sheaf on that basis. Density shows that sheafification is invertible at affine pro-etale objects. The comparison unit is the Kan-extension unit followed by sheafification; full faithfulness of the etale inclusion makes the former invertible at every etale object. Consequently the comparison unit is invertible at every affine etale object. Transfer the Kan-extension colimit across sheafification at the limit and the stages, then precompose by the stage units as in step 1. These are the private, completely proved helpers setLanRelative, setLanSheaf, setIsColimitLan, setIsIsoToSheafify, setComparisonUnit, setComparisonUnit_isIso, setIsColimitComparison and setComparisonCocone_isColimit.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-sets-etale-inverse-image-restriction",
-    "lem-weil-pbc-affine-etale-site-topos"
+    "lem-weil-pbc-ind-etale-basis"
    ],
    "elementary": false
+  },
+  {
+   "text": "For either coefficient category, localize the pro-etale site at the weakly etale map U to X, using ProEtale.localizationRestriction and its adjunction to direct image. Evaluation at U identifies with evaluation of this localization at the terminal object over U. Direct images commute with comparison, via ProEtale.lowerStarCompComparisonLowerStarIso. Taking its left-adjoint mate with conjugateIsoEquiv identifies the localization of the comparison inverse image with the comparison inverse image of the scheme inverse image on U. Evaluate at the terminal object and invert the comparison unit there (for modules use the source full-faithfulness theorem, for sets the affine unit result of step 2). This constructs modulesSectionsIso and setsSectionsIso, naturally in F, between the exact two section functors in the statement.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the constructed isomorphisms against the required maps, rather than merely asserting an unspecified section isomorphism. Apply unit_conjugateEquiv_symm to the two composite adjunctions in step 3. Evaluate this identity at an etale object W and use naturality along the graph U to W times_X U. Its projection to W is the given morphism h, by pullback.lift_fst. Naturality of the comparison unit at the terminal object, followed by cancellation of that invertible unit, gives exactly modulesSectionsIso_leg or setsSectionsIso_leg: the comparison unit at W followed by restriction along h and the section isomorphism equals the scheme inverse-image unit followed by graph restriction. Apply this identity with W = D_i and h = pi_i, and combine with the colimit from step 1 or step 2. This proves both original existential statements, including every displayed cocone-leg equality. Empty affine objects cause no exception: the constructions use only the stated adjunctions, naturality and limit hypotheses, with no point or nonempty scheme chosen.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-cover-cech",
-  "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-section-continuity",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-  "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-sets-etale-inverse-image-restriction",
-  "lem-weil-pbc-sets-etale-section-continuity",
-  "lem-weil-pbc-affine-etale-site-topos"
+  "lem-weil-pbc-ind-etale-basis"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-sections.md",
-  "place": "## Proof"
+  "document": "lean/Sheaf/AlgebraicGeometry/ProEtaleComparisonSections.lean",
+  "place": "U3 stage-3 proof, 2026-10-16: source comparison continuity and full faithfulness; Type-valued Kan-extension specialization; localization and the adjunction-mate unit identity"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -181,5 +176,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, dependencies, source places, canonical maps, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py checks passed cleanly in 2.4 s and 2.5 s. No findings or fixes; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261015T212950-L-2073991",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

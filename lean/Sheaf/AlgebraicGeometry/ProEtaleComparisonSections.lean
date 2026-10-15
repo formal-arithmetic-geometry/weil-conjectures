@@ -9,13 +9,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
-import Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import Sheaf.RingTheory.IndPrincipalZariski
-import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
+import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
+import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Sections of the etale to pro-etale comparison inverse image
@@ -86,6 +82,349 @@ noncomputable def proEtaleBasisPulledBackSection {X : Scheme.{u}}
         Scheme.Etale.mk (𝟙 U.left) ⟶
           (MorphismProperty.Over.pullback @Etale ⊤ U.hom).obj W).op
 
+/- The following lemmas specialize the coefficient-independent proofs in
+Comparison/FullyFaithful and Comparison/Continuity to sets. Filtered colimits of
+sets commute with finite limits, so the same affine-basis sheaf argument applies. -/
+open Scheme in
+private theorem setLanRelative (S : Scheme.{u}) (F : S.Etaleᵒᵖ ⥤ (Type (u + 1))) :
+    Functor.PreservesRelativeFilteredColimits.{u} (AffineEtale.toAffineProEt S)
+      ((AffineProEt.toProEt S).op ⋙ (Scheme.toProEt S).op.lan.obj F) := by
+  constructor
+  intro I _ _ K c hc
+  -- The limit cone in the pro-étale site.
+  have hc₁ : IsLimit ((AffineProEt.toProEt S).mapCone c) := isLimitOfPreserves _ hc
+  -- The limit cone in `Over S`, obtained by reflecting the `Scheme`-level limit cone
+  -- along `Over.forget S`.
+  have hcOver : IsLimit ((ProEt.forget S).mapCone ((AffineProEt.toProEt S).mapCone c)) :=
+    isLimitOfReflects (CategoryTheory.Over.forget S)
+      (((AffineProEt.isLimitMapConeToSchemeOfIsLimit c hc).ofIsoLimit
+        (Functor.mapConeMapCone c).symm).ofIsoLimit (Functor.mapConeMapCone _).symm)
+  -- The comparison of the two relevant diagrams in the pro-étale site.
+  have e : (K ⋙ AffineEtale.toAffineProEt S) ⋙ AffineProEt.toProEt S ≅
+      (K ⋙ AffineEtale.Spec S) ⋙ Scheme.toProEt S :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft K (AffineEtale.toAffineProEtCompToProEtIso S) ≪≫
+      (Functor.associator _ _ _).symm
+  -- Mapping into an étale `S`-scheme commutes with the cofiltered limit, by
+  -- `Scheme.preservesColimit_yoneda`.
+  have hpres : ∀ (X : S.Etaleᵒᵖ),
+      PreservesColimit ((K ⋙ AffineEtale.Spec S).op ⋙ (Scheme.toProEt S).op)
+        (coyoneda.obj (Opposite.op ((Scheme.toProEt S).op.obj X))) := by
+    intro X
+    have h₁ : ∀ {i j : I} (f : i ⟶ j), IsAffineHom
+        ((((K ⋙ AffineEtale.toAffineProEt S) ⋙ AffineProEt.toProEt S) ⋙
+          ProEt.forget S).map f).left :=
+      fun f ↦ inferInstanceAs
+        (IsAffineHom ((AffineEtale.toAffineProEt S).map (K.map f)).left)
+    have h₂ : ∀ (i : I), CompactSpace
+        ((((K ⋙ AffineEtale.toAffineProEt S) ⋙ AffineProEt.toProEt S) ⋙
+          ProEt.forget S).obj i).left :=
+      fun i ↦ inferInstanceAs (CompactSpace ((AffineEtale.toAffineProEt S).obj (K.obj i)).left)
+    have h₃ : ∀ (i : I), QuasiSeparatedSpace
+        ((((K ⋙ AffineEtale.toAffineProEt S) ⋙ AffineProEt.toProEt S) ⋙
+          ProEt.forget S).obj i).left :=
+      fun i ↦ inferInstanceAs
+        (QuasiSeparatedSpace ((AffineEtale.toAffineProEt S).obj (K.obj i)).left)
+    have h₄ : LocallyOfFinitePresentation
+        ((ProEt.forget S).obj ((Scheme.toProEt S).obj X.unop)).hom :=
+      inferInstanceAs (LocallyOfFinitePresentation X.unop.hom)
+    have := Scheme.preservesColimit_yoneda
+      (((K ⋙ AffineEtale.toAffineProEt S) ⋙ AffineProEt.toProEt S) ⋙ ProEt.forget S)
+      ((ProEt.forget S).obj ((Scheme.toProEt S).obj X.unop))
+    have hyon : IsColimit
+        ((yoneda.obj ((ProEt.forget S).obj ((Scheme.toProEt S).obj X.unop))).mapCocone
+          ((ProEt.forget S).mapCone ((AffineProEt.toProEt S).mapCone c)).op) :=
+      isColimitOfPreserves _ hcOver.op
+    have hy : IsColimit ((yoneda.obj ((Scheme.toProEt S).obj X.unop)).mapCocone
+        ((AffineProEt.toProEt S).mapCone c).op) :=
+      IsColimit.mapCoconeEquiv (ProEt.forgetOpCompYonedaIso ((Scheme.toProEt S).obj X.unop))
+        (by exact hyon)
+    have hco : IsColimit ((coyoneda.obj (Opposite.op ((Scheme.toProEt S).op.obj X))).mapCocone
+        ((AffineProEt.toProEt S).mapCone c).op) :=
+      IsColimit.mapCoconeEquiv (Coyoneda.objOpOp _).symm hy
+    let : PreservesColimit ((K ⋙ AffineEtale.toAffineProEt S) ⋙ AffineProEt.toProEt S).op
+        (coyoneda.obj (Opposite.op ((Scheme.toProEt S).op.obj X))) :=
+      preservesColimit_of_preserves_colimit_cocone hc₁.op hco
+    exact preservesColimit_of_iso_diagram _ (NatIso.op e).symm
+  let : PreservesColimit ((K ⋙ AffineEtale.Spec S).op ⋙ (Scheme.toProEt S).op)
+      ((Scheme.toProEt S).op.leftKanExtension F) := inferInstance
+  have e' : (K ⋙ AffineEtale.Spec S).op ⋙ (Scheme.toProEt S).op ≅
+      ((K ⋙ AffineEtale.toAffineProEt S) ⋙ AffineProEt.toProEt S).op := NatIso.op e
+  let : PreservesColimit ((K ⋙ AffineEtale.toAffineProEt S) ⋙ AffineProEt.toProEt S).op
+      ((Scheme.toProEt S).op.leftKanExtension F) :=
+    preservesColimit_of_iso_diagram _ e'
+  exact ⟨isColimitOfPreserves ((Scheme.toProEt S).op.leftKanExtension F) hc₁.op⟩
+
+open Scheme in
+private theorem setLanSheaf (S : Scheme.{u}) (F : S.Etaleᵒᵖ ⥤ (Type (u + 1)))
+    (hF : Presheaf.IsSheaf (smallEtaleTopology S) F) :
+    Presheaf.IsSheaf (AffineProEt.topology S)
+      ((AffineProEt.toProEt S).op ⋙ (Scheme.toProEt S).op.lan.obj F) := by
+  let := setLanRelative S F
+  have : HasFilteredColimitsOfSize.{u, u} (Type (u + 1)) :=
+    hasFilteredColimitsOfSize_of_univLE.{u, u, u + 1, u + 1}
+  have : AB5OfSize.{u, u} (Type (u + 1)) := AB5OfSize_of_univLE.{u, u, u + 1, u + 1} (Type (u + 1))
+  apply Presheaf.isSheaf_of_generates_of_isRelativelyPresentable
+      (AffineEtale.toAffineProEt S) (AffineProEt.minimalPrecoverage S)
+      (AffineEtale.topology S)
+  · let iso : (AffineEtale.toAffineProEt S).op ⋙
+        (AffineProEt.toProEt S).op ⋙ S.toProEt.op.lan.obj F ≅
+        (AffineEtale.Spec S).op ⋙ F :=
+      (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (Functor.opComp _ _).symm _ ≪≫
+        Functor.isoWhiskerRight (NatIso.op (AffineEtale.toAffineProEtCompToProEtIso S).symm) _ ≪≫
+        Functor.isoWhiskerRight (Functor.opComp _ _) _ ≪≫
+        Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft _ (asIso <| ((Scheme.toProEt S).op.lanUnit.app F)).symm
+    rw [Presheaf.isSheaf_of_iso_iff iso]
+    exact Functor.op_comp_isSheaf_of_isSheaf _ _ _ _ hF
+  · exact AffineProEt.generates_minimalPrecoverage S
+  · exact AffineProEt.minimalPrecoverage_le_relativelyPresentable S
+  · exact AffineProEt.minimalPrecoverage_le_finite S
+
+open Scheme in
+private theorem setIsColimitLan {S : Scheme.{u}} (F : S.Etaleᵒᵖ ⥤ (Type (u + 1)))
+    {J : Type u} [SmallCategory J] [IsCofiltered J] (K : J ⥤ S.Etale)
+    [∀ j, CompactSpace (K.obj j).left] [∀ j, QuasiSeparatedSpace (K.obj j).left]
+    [∀ {i j} (g : i ⟶ j), IsAffineHom (K.map g).left]
+    (c : Cone (K ⋙ toProEt S))
+    (hc : IsLimit ((ProEt.forget S ⋙ CategoryTheory.Over.forget S).mapCone c)) :
+    Nonempty (IsColimit (((toProEt S).op.lan.obj F).mapCocone c.op)) := by
+  have hc₁ : IsLimit c := ProEtale.isLimitOfIsLimitMapCone c hc
+  have hcOver : IsLimit ((ProEt.forget S).mapCone c) :=
+    isLimitOfReflects (CategoryTheory.Over.forget S)
+      (hc.ofIsoLimit (Functor.mapConeMapCone c).symm)
+  have hpres (X : S.Etaleᵒᵖ) : PreservesColimit (K.op ⋙ (toProEt S).op)
+      (coyoneda.obj (op ((toProEt S).op.obj X))) := by
+    have h₁ {i j : J} (f : i ⟶ j) :
+        IsAffineHom (((K ⋙ toProEt S) ⋙ ProEt.forget S).map f).left :=
+      inferInstanceAs (IsAffineHom (K.map f).left)
+    have h₂ (i : J) : CompactSpace (((K ⋙ toProEt S) ⋙ ProEt.forget S).obj i).left :=
+      inferInstanceAs (CompactSpace (K.obj i).left)
+    have h₃ (i : J) : QuasiSeparatedSpace (((K ⋙ toProEt S) ⋙ ProEt.forget S).obj i).left :=
+      inferInstanceAs (QuasiSeparatedSpace (K.obj i).left)
+    have h₄ : LocallyOfFinitePresentation ((ProEt.forget S).obj ((toProEt S).obj X.unop)).hom :=
+      inferInstanceAs (LocallyOfFinitePresentation X.unop.hom)
+    have hyon : IsColimit ((yoneda.obj ((ProEt.forget S).obj ((toProEt S).obj X.unop))).mapCocone
+        ((ProEt.forget S).mapCone c).op) :=
+      isColimitOfPreserves _ hcOver.op
+    have hy : IsColimit ((yoneda.obj ((toProEt S).obj X.unop)).mapCocone c.op) :=
+      IsColimit.mapCoconeEquiv (ProEt.forgetOpCompYonedaIso ((toProEt S).obj X.unop))
+        (by exact hyon)
+    exact preservesColimit_of_preserves_colimit_cocone hc₁.op
+      (IsColimit.mapCoconeEquiv (Coyoneda.objOpOp _).symm hy)
+  have : PreservesColimit (K ⋙ toProEt S).op ((toProEt S).op.leftKanExtension F) :=
+    inferInstanceAs (PreservesColimit (K.op ⋙ (toProEt S).op) _)
+  exact ⟨isColimitOfPreserves ((toProEt S).op.leftKanExtension F) hc₁.op⟩
+
+open Scheme in
+private theorem setIsIsoToSheafify {S : Scheme.{u}}
+    (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (Y : S.ProEt) (hY : proAffineEtale Y.hom) :
+    IsIso ((toSheafify (ProEt.topology S) ((toProEt S).op.lan.obj F.obj)).app (op Y)) := by
+  have : HasLimitsOfSize.{u, u + 1} (Type (u + 1)) :=
+    hasLimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} (Type (u + 1))
+  have h2 : IsIso ((AffineProEt.toProEt S).op.whiskerLeft
+      (toSheafify (ProEt.topology S) ((toProEt S).op.lan.obj F.obj))) :=
+    Functor.IsDenseSubsite.isIso_whiskerLeft_toSheafify
+      (AffineProEt.topology S) _ _ (Type (u + 1)) _
+      (setLanSheaf S F.obj F.property)
+  exact inferInstanceAs (IsIso (((AffineProEt.toProEt S).op.whiskerLeft
+    (toSheafify (ProEt.topology S) ((toProEt S).op.lan.obj F.obj))).app
+      (op (AffineProEt.mk Y.hom hY))))
+
+open Scheme in
+private theorem setComparisonUnit (X : Scheme.{u})
+    (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
+    ((Scheme.proEtaleSiteComparison X).unit.app F).hom =
+      (toProEt X).op.lanUnit.app F.obj ≫
+        (toProEt X).op.whiskerLeft
+          (toSheafify _ ((toProEt X).op.lan.obj F.obj)) := by
+  change (sheafToPresheaf _ (Type (u + 1))).map
+    ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous _ _ _ _).unit.app F) = _
+  rw [Functor.sheafPullbackConstruction.sheafAdjunctionContinuous,
+    Adjunction.map_restrictFullyFaithful_unit_app]
+  simp
+
+open Scheme in
+private theorem setComparisonUnit_isIso (X : Scheme.{u})
+    (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (W : X.Etale)
+    [IsAffine W.left] :
+    IsIso (((Scheme.proEtaleSiteComparison X).unit.app F).hom.app (op W)) := by
+  rw [setComparisonUnit]
+  have : IsIso ((toSheafify (ProEt.topology X) ((toProEt X).op.lan.obj F.obj)).app
+      (op ((toProEt X).obj W))) :=
+    setIsIsoToSheafify F ((toProEt X).obj W)
+      (@proAffineEtale.of_isAffine _ _ (inferInstanceAs (IsAffine W.left)) W.hom
+        (inferInstanceAs (Etale W.hom)))
+  change IsIso (((toProEt X).op.lanUnit.app F.obj).app (op W) ≫
+    (toSheafify (ProEt.topology X) ((toProEt X).op.lan.obj F.obj)).app
+      (op ((toProEt X).obj W)))
+  infer_instance
+
+-- Localize the comparison adjunction at U, commute scheme base change with the
+-- comparison direct image, and evaluate the resulting isomorphism at the terminal
+-- object. The comparison unit there is invertible.
+private noncomputable def modulesSectionsIso {X : Scheme.{u}}
+    (U : X.AffineProEt) (Λ : Type (u + 1)) [CommRing Λ] :
+    ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X ⋙
+      sheafToPresheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) ⋙
+        (evaluation X.ProEtᵒᵖ (ModuleCat.{u + 1} Λ)).obj
+          (op ((Scheme.AffineProEt.toProEt X).obj U)) ≅
+    Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom ⋙
+      sheafToPresheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙
+        (evaluation U.left.Etaleᵒᵖ (ModuleCat.{u + 1} Λ)).obj
+          (op (Scheme.Etale.mk (𝟙 U.left))) := by
+  let A := ModuleCat.{u + 1} Λ
+  let V := (Scheme.AffineProEt.toProEt X).obj U
+  let T := Scheme.ProEt.mk (𝟙 U.left)
+  let E := sheafToPresheaf (Scheme.ProEt.topology U.left) A ⋙
+    (evaluation U.left.ProEtᵒᵖ A).obj (op T)
+  let j := ProEtale.localizationRestriction A U.hom V.prop
+  let r : V ≅ (MorphismProperty.Over.map ⊤ V.prop).obj T :=
+    MorphismProperty.Over.isoMk (Iso.refl _) (by exact Category.id_comp _)
+  let e₀ : (sheafToPresheaf (Scheme.ProEt.topology X) A ⋙
+      (evaluation X.ProEtᵒᵖ A).obj (op V)) ≅ j ⋙ E :=
+    NatIso.ofComponents (fun G ↦ G.obj.mapIso r.symm.op)
+      (fun φ ↦ (φ.hom.naturality r.inv.op).symm)
+  let e₁ := (conjugateIsoEquiv
+    ((Etale.upperStarLowerStarAdjunction A U.hom).comp
+      (ProEtale.comparisonAdjunction A U.left))
+    ((ProEtale.comparisonAdjunction A X).comp
+      (ProEtale.localizationRestrictionLowerStarAdjunction A U.hom V.prop))).symm
+      (ProEtale.lowerStarCompComparisonLowerStarIso U.hom A).symm
+  let e₂ := asIso (Functor.whiskerRight
+    (ProEtale.comparisonAdjunction A U.left).unit
+    (sheafToPresheaf U.left.smallEtaleTopology A ⋙
+      (evaluation U.left.Etaleᵒᵖ A).obj (op (Scheme.Etale.mk (𝟙 U.left)))))
+  exact Functor.isoWhiskerLeft _ e₀ ≪≫
+    (Functor.associator _ _ E).symm ≪≫ Functor.isoWhiskerRight e₁ E ≪≫
+    Functor.associator _ _ E ≪≫ Functor.isoWhiskerLeft _ e₂.symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem modulesSectionsIso_leg {X : Scheme.{u}}
+    (U : X.AffineProEt) (Λ : Type (u + 1)) [CommRing Λ]
+    (W : X.Etale)
+    (h : (Scheme.AffineProEt.toProEt X).obj U ⟶ (Scheme.toProEt X).obj W)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) X).unit.app F).hom.app
+        (op W) ≫
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj F).obj.map h.op ≫
+        (modulesSectionsIso U Λ).hom.app F =
+      proEtaleBasisPulledBackSection U W h F
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom).obj F)
+        ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) U.hom).unit.app F) := by
+  let A := ModuleCat.{u + 1} Λ
+  let V := (Scheme.AffineProEt.toProEt X).obj U
+  let T := Scheme.ProEt.mk (𝟙 U.left)
+  let j := ProEtale.localizationRestriction A U.hom V.prop
+  let adj₁ := (Etale.upperStarLowerStarAdjunction A U.hom).comp
+    (ProEtale.comparisonAdjunction A U.left)
+  let adj₂ := (ProEtale.comparisonAdjunction A X).comp
+    (ProEtale.localizationRestrictionLowerStarAdjunction A U.hom V.prop)
+  let e₁ := (conjugateIsoEquiv adj₁ adj₂).symm
+    (ProEtale.lowerStarCompComparisonLowerStarIso U.hom A).symm
+  -- Compatibility of conjugate adjunctions with their units, followed by the
+  -- graph of h, identifies the isomorphism on each canonical section map.
+  have hu := unit_conjugateEquiv_symm adj₁ adj₂
+    (ProEtale.lowerStarCompComparisonLowerStarIso U.hom A).inv F
+  have hw := congrArg (fun f ↦ f.hom.app (op W)) hu
+  dsimp [adj₁, adj₂] at hw
+  simp only [Adjunction.comp_unit_app] at hw
+  let H := (Etale.upperStar A U.hom).obj F
+  let Q := (ProEtale.comparisonUpperStar A U.left).obj H
+  have he : ((ProEtale.lowerStarCompComparisonLowerStarIso U.hom A).inv.app Q).hom.app
+      (op W) = 𝟙 _ := by
+    change 𝟙 _ ≫ Q.obj.map (𝟙 _) ≫ 𝟙 _ = 𝟙 _
+    exact (Category.id_comp _).trans ((Category.comp_id _).trans (Q.obj.map_id _))
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] at hw
+  rw [he] at hw
+  erw [Category.comp_id] at hw
+  let P := (ProEtale.comparisonUpperStar A X).obj F
+  let WU := (MorphismProperty.Over.pullback @Etale ⊤ U.hom).obj W
+  let δ : Scheme.Etale.mk (𝟙 U.left) ⟶ WU :=
+    MorphismProperty.Over.homMk
+      (pullback.lift h.left (𝟙 U.left)
+        (by exact (MorphismProperty.Over.w h).trans (Category.id_comp U.hom).symm))
+      (by exact pullback.lift_snd _ _ _)
+  let φ := (Scheme.toProEt U.left).map δ
+  let q := (e₁.hom.app F).hom
+  let ηU := ((ProEtale.comparisonAdjunction A U.left).unit.app H).hom
+  let ηX := ((ProEtale.comparisonAdjunction A X).unit.app F).hom
+  let ηg := ((Etale.upperStarLowerStarAdjunction A U.hom).unit.app F).hom
+  let r : V ≅ (MorphismProperty.Over.map ⊤ V.prop).obj T :=
+    MorphismProperty.Over.isoMk (Iso.refl _) (by exact Category.id_comp _)
+  let a := (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ U.hom V.prop
+    trivial).counit.app ((Scheme.toProEt X).obj W)
+  change ηg.app (op W) ≫ ηU.app (op WU) =
+    (ηX.app (op W) ≫ P.obj.map a.op) ≫ q.app (op ((Scheme.toProEt U.left).obj WU)) at hw
+  have hn := q.naturality φ.op
+  have hη := ηU.naturality δ.op
+  have ha : (MorphismProperty.Over.map ⊤ V.prop).map φ ≫ a = r.inv ≫ h := by
+    apply MorphismProperty.Over.Hom.ext
+    change pullback.lift h.left (𝟙 U.left) _ ≫ pullback.fst W.hom U.hom =
+      𝟙 _ ≫ h.left
+    exact (pullback.lift_fst _ _ _).trans (Category.id_comp _).symm
+  have hmaps : P.obj.map a.op ≫ P.obj.map
+      ((MorphismProperty.Over.map ⊤ V.prop).map φ).op =
+      P.obj.map h.op ≫ P.obj.map r.inv.op :=
+    (P.obj.map_comp _ _).symm.trans
+      ((congrArg P.obj.map (congrArg Quiver.Hom.op ha)).trans (P.obj.map_comp _ _))
+  have hmain : (ηg.app (op W) ≫ H.obj.map δ.op) ≫
+      ηU.app (op (Scheme.Etale.mk (𝟙 U.left))) =
+      (ηX.app (op W) ≫ P.obj.map h.op ≫ P.obj.map r.inv.op) ≫ q.app (op T) := by
+    calc
+      _ = ηg.app (op W) ≫ (ηU.app (op WU) ≫ Q.obj.map φ.op) :=
+        (Category.assoc _ _ _).trans (congrArg (ηg.app (op W) ≫ ·) hη)
+      _ = ((ηX.app (op W) ≫ P.obj.map a.op) ≫
+          q.app (op ((Scheme.toProEt U.left).obj WU))) ≫ Q.obj.map φ.op :=
+        (Category.assoc _ _ _).symm.trans (congrArg (· ≫ Q.obj.map φ.op) hw)
+      _ = (ηX.app (op W) ≫ P.obj.map a.op) ≫
+          (P.obj.map ((MorphismProperty.Over.map ⊤ V.prop).map φ).op ≫ q.app (op T)) :=
+        (Category.assoc _ _ _).trans
+          (congrArg ((ηX.app (op W) ≫ P.obj.map a.op) ≫ ·) hn.symm)
+      _ = _ := by
+        simp only [Category.assoc]
+        exact congrArg (ηX.app (op W) ≫ ·)
+          ((Category.assoc _ _ _).symm.trans
+            ((congrArg (· ≫ q.app (op T)) hmaps).trans (Category.assoc _ _ _)))
+  let z := ηU.app (op (Scheme.Etale.mk (𝟙 U.left)))
+  have hz : IsIso z := inferInstance
+  apply (cancel_mono z).mp
+  change (ηX.app (op W) ≫ P.obj.map h.op ≫ (modulesSectionsIso U Λ).hom.app F) ≫ z =
+    (ηg.app (op W) ≫ H.obj.map δ.op) ≫ z
+  rw [hmain]
+  simp only [modulesSectionsIso, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Iso.symm_hom, Functor.associator_hom_app, Functor.associator_inv_app,
+    NatIso.ofComponents_hom_app, Functor.mapIso_hom, Iso.op_hom,
+    asIso_inv, NatIso.isIso_inv_app]
+  change (ηX.app (op W) ≫ P.obj.map h.op ≫
+    (P.obj.map r.inv.op ≫ 𝟙 _ ≫ q.app (op T) ≫ 𝟙 _ ≫ inv z)) ≫ z = _
+  simp only [Category.assoc, Category.id_comp, IsIso.inv_hom_id, Category.comp_id]
+
+
+private theorem comparisonCocone_isColimit {X : Scheme.{u}}
+    (U : X.AffineProEt) (Λ : Type (u + 1)) [CommRing Λ]
+    {I : Type u} [SmallCategory I] [IsCofiltered I]
+    (D : I ⥤ X.Etale) [∀ i, IsAffine (D.obj i).left]
+    (π : (Functor.const I).obj ((Scheme.AffineProEt.toProEt X).obj U) ⟶
+      D ⋙ Scheme.toProEt X)
+    (hc : IsLimit (Cone.mk U.left
+      (Functor.whiskerRight π (Scheme.ProEt.forget X ⋙ Over.forget X))))
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Nonempty (IsColimit (proEtaleComparisonSectionsCocone D
+      ((Scheme.AffineProEt.toProEt X).obj U) π F
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj F)
+      ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) X).unit.app F))) := by
+  let c : Cone (D ⋙ Scheme.toProEt X) := Cone.mk _ π
+  obtain ⟨h⟩ := ProEtale.isColimit_comparisonUpperStar_mapCocone_of_isAffine
+    (ModuleCat.{u + 1} Λ) F D c hc
+  let η := (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) X).unit.app F
+  let e := asIso (Functor.whiskerLeft D.op η.hom)
+  exact ⟨(IsColimit.precomposeHomEquiv e _).2 h⟩
+
 /-- The section formula for module sheaves over any fixed coefficient ring.
 The first equality is a natural isomorphism in the sheaf. The second equality says
 that the canonical unit-and-restriction cocone for every affine etale
@@ -149,7 +488,219 @@ theorem proEtaleComparisonSectionsModules {X : Scheme.{u}} [IsAffine X]
               proEtaleBasisPulledBackSection U (D.obj i) (π.app i) F
                 ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom).obj F)
                 ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) U.hom).unit.app F) := by
-  sorry
+  refine ⟨modulesSectionsIso U Λ, ?_⟩
+  intro I _ _ D _ π hc F
+  refine ⟨comparisonCocone_isColimit U Λ D π hc F, ?_⟩
+  intro i
+  exact (Category.assoc _ _ _).trans (modulesSectionsIso_leg U Λ (D.obj i) (π.app i) F)
+
+private noncomputable abbrev setComparisonPullback (X : Scheme.{u}) :=
+  Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X)
+    (Type (u + 1)) X.smallEtaleTopology (Scheme.ProEt.topology X)
+
+private noncomputable def setEtaleAdjunction {X Y : Scheme.{u}} (g : Y ⟶ X) :
+    Scheme.etaleSetPullback g ⊣ Etale.lowerStar (Type (u + 1)) g :=
+  Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.pullback @Etale ⊤ g) (Type (u + 1))
+    (X.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)
+
+private noncomputable def setsSectionsIso {X : Scheme.{u}}
+    (U : X.AffineProEt) :
+    setComparisonPullback X ⋙
+      sheafToPresheaf (Scheme.ProEt.topology X) (Type (u + 1)) ⋙
+        (evaluation X.ProEtᵒᵖ (Type (u + 1))).obj
+          (op ((Scheme.AffineProEt.toProEt X).obj U)) ≅
+    Scheme.etaleSetPullback U.hom ⋙
+      sheafToPresheaf U.left.smallEtaleTopology (Type (u + 1)) ⋙
+        (evaluation U.left.Etaleᵒᵖ (Type (u + 1))).obj
+          (op (Scheme.Etale.mk (𝟙 U.left))) := by
+  let A := Type (u + 1)
+  let V := (Scheme.AffineProEt.toProEt X).obj U
+  let T := Scheme.ProEt.mk (𝟙 U.left)
+  let E := sheafToPresheaf (Scheme.ProEt.topology U.left) A ⋙
+    (evaluation U.left.ProEtᵒᵖ A).obj (op T)
+  let j := ProEtale.localizationRestriction A U.hom V.prop
+  let r : V ≅ (MorphismProperty.Over.map ⊤ V.prop).obj T :=
+    MorphismProperty.Over.isoMk (Iso.refl _) (by exact Category.id_comp _)
+  let e₀ : (sheafToPresheaf (Scheme.ProEt.topology X) A ⋙
+      (evaluation X.ProEtᵒᵖ A).obj (op V)) ≅ j ⋙ E :=
+    NatIso.ofComponents (fun G ↦ G.obj.mapIso r.symm.op)
+      (fun φ ↦ (φ.hom.naturality r.inv.op).symm)
+  let e₁ := (conjugateIsoEquiv
+    ((setEtaleAdjunction U.hom).comp
+      (Scheme.proEtaleSiteComparison U.left))
+    ((Scheme.proEtaleSiteComparison X).comp
+      (ProEtale.localizationRestrictionLowerStarAdjunction A U.hom V.prop))).symm
+      (ProEtale.lowerStarCompComparisonLowerStarIso U.hom A).symm
+  have : IsIso (Functor.whiskerRight
+      (Scheme.proEtaleSiteComparison U.left).unit
+      (sheafToPresheaf U.left.smallEtaleTopology A ⋙
+        (evaluation U.left.Etaleᵒᵖ A).obj (op (Scheme.Etale.mk (𝟙 U.left))))) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro H
+    exact @setComparisonUnit_isIso U.left H (Scheme.Etale.mk (𝟙 U.left))
+      (inferInstanceAs (IsAffine U.left))
+  let e₂ := asIso (Functor.whiskerRight
+    (Scheme.proEtaleSiteComparison U.left).unit
+    (sheafToPresheaf U.left.smallEtaleTopology A ⋙
+      (evaluation U.left.Etaleᵒᵖ A).obj (op (Scheme.Etale.mk (𝟙 U.left)))))
+  exact Functor.isoWhiskerLeft _ e₀ ≪≫
+    (Functor.associator _ _ E).symm ≪≫ Functor.isoWhiskerRight e₁ E ≪≫
+    Functor.associator _ _ E ≪≫ Functor.isoWhiskerLeft _ e₂.symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem setsSectionsIso_leg {X : Scheme.{u}}
+    (U : X.AffineProEt)
+    (W : X.Etale)
+    (h : (Scheme.AffineProEt.toProEt X).obj U ⟶ (Scheme.toProEt X).obj W)
+    (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
+    ((Scheme.proEtaleSiteComparison X).unit.app F).hom.app
+        (op W) ≫
+      ((setComparisonPullback X).obj F).obj.map h.op ≫
+        (setsSectionsIso U).hom.app F =
+      proEtaleBasisPulledBackSection U W h F
+        ((Scheme.etaleSetPullback U.hom).obj F)
+        ((setEtaleAdjunction U.hom).unit.app F) := by
+  let A := Type (u + 1)
+  let V := (Scheme.AffineProEt.toProEt X).obj U
+  let T := Scheme.ProEt.mk (𝟙 U.left)
+  let j := ProEtale.localizationRestriction A U.hom V.prop
+  let adj₁ := (setEtaleAdjunction U.hom).comp
+    (Scheme.proEtaleSiteComparison U.left)
+  let adj₂ := (Scheme.proEtaleSiteComparison X).comp
+    (ProEtale.localizationRestrictionLowerStarAdjunction A U.hom V.prop)
+  let e₁ := (conjugateIsoEquiv adj₁ adj₂).symm
+    (ProEtale.lowerStarCompComparisonLowerStarIso U.hom A).symm
+  -- Compatibility of conjugate adjunctions with their units, followed by the
+  -- graph of h, identifies the isomorphism on each canonical section map.
+  have hu := unit_conjugateEquiv_symm adj₁ adj₂
+    (ProEtale.lowerStarCompComparisonLowerStarIso U.hom A).inv F
+  have hw := congrArg (fun f ↦ f.hom.app (op W)) hu
+  dsimp [adj₁, adj₂] at hw
+  simp only [Adjunction.comp_unit_app] at hw
+  let H := (Scheme.etaleSetPullback U.hom).obj F
+  let Q := (setComparisonPullback U.left).obj H
+  have he : ((ProEtale.lowerStarCompComparisonLowerStarIso U.hom A).inv.app Q).hom.app
+      (op W) = 𝟙 _ := by
+    change 𝟙 _ ≫ Q.obj.map (𝟙 _) ≫ 𝟙 _ = 𝟙 _
+    exact (Category.id_comp _).trans ((Category.comp_id _).trans (Q.obj.map_id _))
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] at hw
+  rw [he] at hw
+  erw [Category.comp_id] at hw
+  let P := (setComparisonPullback X).obj F
+  let WU := (MorphismProperty.Over.pullback @Etale ⊤ U.hom).obj W
+  let δ : Scheme.Etale.mk (𝟙 U.left) ⟶ WU :=
+    MorphismProperty.Over.homMk
+      (pullback.lift h.left (𝟙 U.left)
+        (by exact (MorphismProperty.Over.w h).trans (Category.id_comp U.hom).symm))
+      (by exact pullback.lift_snd _ _ _)
+  let φ := (Scheme.toProEt U.left).map δ
+  let q := (e₁.hom.app F).hom
+  let ηU := ((Scheme.proEtaleSiteComparison U.left).unit.app H).hom
+  let ηX := ((Scheme.proEtaleSiteComparison X).unit.app F).hom
+  let ηg := ((setEtaleAdjunction U.hom).unit.app F).hom
+  let r : V ≅ (MorphismProperty.Over.map ⊤ V.prop).obj T :=
+    MorphismProperty.Over.isoMk (Iso.refl _) (by exact Category.id_comp _)
+  let a := (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ U.hom V.prop
+    trivial).counit.app ((Scheme.toProEt X).obj W)
+  change ηg.app (op W) ≫ ηU.app (op WU) =
+    (ηX.app (op W) ≫ P.obj.map a.op) ≫ q.app (op ((Scheme.toProEt U.left).obj WU)) at hw
+  have hn := q.naturality φ.op
+  have hη := ηU.naturality δ.op
+  have ha : (MorphismProperty.Over.map ⊤ V.prop).map φ ≫ a = r.inv ≫ h := by
+    apply MorphismProperty.Over.Hom.ext
+    change pullback.lift h.left (𝟙 U.left) _ ≫ pullback.fst W.hom U.hom =
+      𝟙 _ ≫ h.left
+    exact (pullback.lift_fst _ _ _).trans (Category.id_comp _).symm
+  have hmaps : P.obj.map a.op ≫ P.obj.map
+      ((MorphismProperty.Over.map ⊤ V.prop).map φ).op =
+      P.obj.map h.op ≫ P.obj.map r.inv.op :=
+    (P.obj.map_comp _ _).symm.trans
+      ((congrArg P.obj.map (congrArg Quiver.Hom.op ha)).trans (P.obj.map_comp _ _))
+  have hmain : (ηg.app (op W) ≫ H.obj.map δ.op) ≫
+      ηU.app (op (Scheme.Etale.mk (𝟙 U.left))) =
+      (ηX.app (op W) ≫ P.obj.map h.op ≫ P.obj.map r.inv.op) ≫ q.app (op T) := by
+    calc
+      _ = ηg.app (op W) ≫ (ηU.app (op WU) ≫ Q.obj.map φ.op) :=
+        (Category.assoc _ _ _).trans (congrArg (ηg.app (op W) ≫ ·) hη)
+      _ = ((ηX.app (op W) ≫ P.obj.map a.op) ≫
+          q.app (op ((Scheme.toProEt U.left).obj WU))) ≫ Q.obj.map φ.op :=
+        (Category.assoc _ _ _).symm.trans (congrArg (· ≫ Q.obj.map φ.op) hw)
+      _ = (ηX.app (op W) ≫ P.obj.map a.op) ≫
+          (P.obj.map ((MorphismProperty.Over.map ⊤ V.prop).map φ).op ≫ q.app (op T)) :=
+        (Category.assoc _ _ _).trans
+          (congrArg ((ηX.app (op W) ≫ P.obj.map a.op) ≫ ·) hn.symm)
+      _ = _ := by
+        simp only [Category.assoc]
+        exact congrArg (ηX.app (op W) ≫ ·)
+          ((Category.assoc _ _ _).symm.trans
+            ((congrArg (· ≫ q.app (op T)) hmaps).trans (Category.assoc _ _ _)))
+  let z := ηU.app (op (Scheme.Etale.mk (𝟙 U.left)))
+  have hz : IsIso z :=
+    @setComparisonUnit_isIso U.left H (Scheme.Etale.mk (𝟙 U.left))
+      (inferInstanceAs (IsAffine U.left))
+  apply (cancel_mono z).mp
+  change (ηX.app (op W) ≫ P.obj.map h.op ≫ (setsSectionsIso U).hom.app F) ≫ z =
+    (ηg.app (op W) ≫ H.obj.map δ.op) ≫ z
+  rw [hmain]
+  simp only [setsSectionsIso, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Iso.symm_hom, Functor.associator_hom_app, Functor.associator_inv_app,
+    NatIso.ofComponents_hom_app, Functor.mapIso_hom, Iso.op_hom,
+    asIso_inv, NatIso.isIso_inv_app]
+  change (ηX.app (op W) ≫ P.obj.map h.op ≫
+    (P.obj.map r.inv.op ≫ 𝟙 _ ≫ q.app (op T) ≫ 𝟙 _ ≫ inv z)) ≫ z = _
+  simp only [Category.assoc, Category.id_comp, IsIso.inv_hom_id, Category.comp_id]
+
+
+open Scheme in
+private theorem setIsColimitComparison {S : Scheme.{u}}
+    (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
+    {J : Type u} [SmallCategory J] [IsCofiltered J] (K : J ⥤ S.Etale)
+    [∀ j, IsAffine (K.obj j).left] (c : Cone (K ⋙ toProEt S))
+    (hc : IsLimit ((ProEt.forget S ⋙ CategoryTheory.Over.forget S).mapCone c)) :
+    Nonempty (IsColimit (((setComparisonPullback S).obj F).obj.mapCocone c.op)) := by
+  obtain ⟨hL⟩ := setIsColimitLan F.obj K c hc
+  have hpt : proAffineEtale c.pt.hom :=
+    ⟨J, inferInstance, inferInstance, (K ⋙ toProEt S) ⋙ ProEt.forget S ⋙ Over.forget S,
+      Functor.whiskerLeft ((K ⋙ toProEt S) ⋙ ProEt.forget S) (Over.forgetCocone S).ι,
+      ((ProEt.forget S ⋙ Over.forget S).mapCone c).π, hc, fun j ↦
+        ⟨⟨inferInstanceAs (Etale (K.obj j).hom), ⟨inferInstanceAs (IsAffine (K.obj j).left),
+          trivial⟩⟩, Over.w ((ProEt.forget S).map (c.π.app j))⟩⟩
+  have (j : Jᵒᵖ) : IsIso ((toSheafify (ProEt.topology S) ((toProEt S).op.lan.obj F.obj)).app
+      ((K ⋙ toProEt S).op.obj j)) :=
+    setIsIsoToSheafify F ((toProEt S).obj (K.obj j.unop))
+      (@proAffineEtale.of_isAffine _ _ (inferInstanceAs (IsAffine (K.obj j.unop).left))
+        (K.obj j.unop).hom (inferInstanceAs (Etale (K.obj j.unop).hom)))
+  have : IsIso ((toSheafify (ProEt.topology S) ((toProEt S).op.lan.obj F.obj)).app c.op.pt) :=
+    setIsIsoToSheafify F c.pt hpt
+  exact ⟨ProEtale.isColimitMapCoconeOfNatTrans _ _
+    (toSheafify (ProEt.topology S) ((toProEt S).op.lan.obj F.obj)) _ hL⟩
+
+
+private theorem setComparisonCocone_isColimit {X : Scheme.{u}}
+    (U : X.AffineProEt)
+    {I : Type u} [SmallCategory I] [IsCofiltered I]
+    (D : I ⥤ X.Etale) [∀ i, IsAffine (D.obj i).left]
+    (π : (Functor.const I).obj ((Scheme.AffineProEt.toProEt X).obj U) ⟶
+      D ⋙ Scheme.toProEt X)
+    (hc : IsLimit (Cone.mk U.left
+      (Functor.whiskerRight π (Scheme.ProEt.forget X ⋙ Over.forget X))))
+    (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
+    Nonempty (IsColimit (proEtaleComparisonSectionsCocone D
+      ((Scheme.AffineProEt.toProEt X).obj U) π F
+      ((setComparisonPullback X).obj F)
+      ((Scheme.proEtaleSiteComparison X).unit.app F))) := by
+  let c : Cone (D ⋙ Scheme.toProEt X) := Cone.mk _ π
+  obtain ⟨h⟩ := setIsColimitComparison F D c hc
+  let η := (Scheme.proEtaleSiteComparison X).unit.app F
+  have : ∀ i : Iᵒᵖ, IsIso ((Functor.whiskerLeft D.op η.hom).app i) :=
+    fun i ↦ setComparisonUnit_isIso X F (D.obj i.unop)
+  have : IsIso (Functor.whiskerLeft D.op η.hom) := NatIso.isIso_of_isIso_app _
+  let e := asIso (Functor.whiskerLeft D.op η.hom)
+  exact ⟨(IsColimit.precomposeHomEquiv e _).2 h⟩
 
 /-- The section formula for sheaves of sets.
 The first equality is a natural isomorphism in the sheaf. The second equality says
@@ -221,6 +772,10 @@ theorem proEtaleComparisonSectionsSets {X : Scheme.{u}} [IsAffine X]
                   (X.smallGrothendieckTopology @Etale)
                   (U.left.smallGrothendieckTopology @Etale)
                   (Etale.isContinuous_overPullback U.hom) _ _).unit.app F) := by
-  sorry
+  refine ⟨setsSectionsIso U, ?_⟩
+  intro I _ _ D _ π hc F
+  refine ⟨setComparisonCocone_isColimit U D π hc F, ?_⟩
+  intro i
+  exact (Category.assoc _ _ _).trans (setsSectionsIso_leg U (D.obj i) (π.app i) F)
 
 end AlgebraicGeometry
