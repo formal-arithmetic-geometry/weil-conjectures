@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-pur-a1-invariance",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Invariance along the affine line",
@@ -13,71 +13,247 @@
   "place": "node prop-pur-a1-invariance, order 1961"
  },
  "stmt_deps": [
-  "def-pur-conventions"
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-etale-morphism",
+  "def-coefficient-twists-detailed"
  ],
  "proof": [
   {
-   "text": "Throughout, pullback along an etale morphism, restriction to an\nopen subscheme, and the pullbacks $i_0^*,i_1^*,a^*$ are the exact\nderived pullbacks of [def-weil-derived-pullback-tensor-hom]; they\ncommute with the cohomology sheaves of\n[def-weil-derived-cohomology-sheaves] and with one another up to the\ncanonical isomorphisms, which are used without comment. The base\nchanges $\\{\\mathbf A^1_{Y_\\alpha}\\to\\mathbf A^1_Y\\}$ of the given\ncover form again an etale covering family, hence a covering family\nof the site of [def-weil-pbc-proetale-site], etale morphisms being\nweakly etale ([def-weil-scheme-morphism-properties]).",
-   "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Step 1: reduction to one shift. For a point $y\\in Y$ and an index\n$\\alpha$ with $y$ in the image of $u_\\alpha$, the object $F$ has, at\nevery geometric point of $\\mathbf A^1_Y$ over $y$, nonzero\ncohomology in exactly the degree $-n_\\alpha$, because\n$\\mathcal L_\\alpha(m_\\alpha)$ is a sheaf with nonzero stalks\n(rank one, and a twist of a finite locally constant rank-one sheaf\nis again one, as $\\Lambda(m)$ is invertible in the conventions of\n[def-pur-conventions]). Hence $n(y):=n_\\alpha$ is independent of\n$\\alpha$, and it is constant on the image of each connected component\nof $Y_\\alpha$, an open subset of $Y$ since etale morphisms are open.\nSo $n:Y\\to\\mathbf Z$ is locally constant. The scheme $Y$ is Noetherian,\nso it is the finite disjoint union of its connected components $Y_c$,\nwhich are open and closed, and $n$ is constant on each of them; by\n[lem-pur-a1-components](1) the connected components of\n$\\mathbf A^1_Y$ are the $\\mathbf A^1_{Y_c}$. All data in the statement\nrestrict to each $Y_c$, and a morphism over $\\mathbf A^1_Y$ (resp.\n$Y$) is the same as a family of morphisms over the open and closed\npieces $\\mathbf A^1_{Y_c}$ (resp. $Y_c$). We may therefore assume\nthat $n_\\alpha=n$ for all $\\alpha$ and a fixed integer $n$.",
+   "text": "Work at the finite coefficient level $\\Lambda=A=A_{E,n}$ prescribed for this chapter by [def-pur-conventions]; its integral and field versions are coefficient transports, not an identification with ordinary finite sheaves. Put $X=\\mathbf A^1_Y$ and $X_\\alpha=\\mathbf A^1_{Y_\\alpha}$. The base-changed families over $X$, any open subscheme of $Y$, and any overlap are etale covers by [lem-weil-pbc-etale-covering-base-change]. The inclusion in [def-weil-pbc-site-comparison-morphism] makes etale objects weakly etale. These families satisfy the pro-etale covering condition of [def-weil-pbc-proetale-site]: over an affine test open, choose affine opens in the sources covering all its points; their images are open by [lem-weil-pbc-etale-morphism-open-map], and quasi-compactness gives finitely many of them. Restrictions along these objects are exact restrictions on localized sites by [lem-weil-pbc-proetale-restriction-injectives]. All the constant-coefficient derived pullbacks are termwise inverse images by [def-weil-derived-pullback-tensor-hom]; therefore they preserve $\\ker d/\\operatorname{im}d$, commute with $\\mathcal H^r$ and with shifts. Use the canonical composition comparisons of [lem-weil-pbc-proetale-derived-pullback-composition] throughout.",
    "uses": [
     "def-pur-conventions",
-    "lem-pur-a1-components"
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.md",
+    "place": "Proof preliminary paragraph, with the covering and exactness arguments supplied"
+   }
   },
   {
-   "text": "Step 2: reduction to sheaves. With $n$ fixed, the cohomology sheaves\n$\\mathcal H^q(F)$ vanish for $q\\neq-n$ after restriction to every\nmember of a covering family, hence vanish, a sheaf which vanishes\nlocally being zero; and\n$\\mathcal L:=\\mathcal H^{-n}(F)$ restricts on\n$\\mathbf A^1_{Y_\\alpha}$ to $\\mathcal L_\\alpha(m_\\alpha)$, so it is a\nfinite locally constant sheaf of rank one. The truncations of\nthe standard t-structure of [def-weil-derived-cohomology-sheaves]\nthen identify $F$ with $\\mathcal L[n]$, a complex with a single\nnonzero cohomology sheaf being isomorphic to that sheaf placed in its\ndegree. Likewise $C|_{Y_\\alpha}\\cong i_1^*a^*C|_{Y_\\alpha}\n\\cong i_1^*F|_{Y_\\alpha}$ via $\\kappa_\\alpha$ and $\\theta$, so $C$\nhas the single nonzero cohomology sheaf\n$\\mathcal M:=\\mathcal H^{-n}(C)$, again finite locally constant of\nrank one, and $C\\cong\\mathcal M[n]$,\n$a^*C\\cong(a^*\\mathcal M)[n]$. Morphisms in the derived category\nbetween two objects concentrated in the single degree $-n$ are the\nmorphisms of the corresponding sheaves, the heart of the standard\nt-structure being the abelian category of sheaves. Thus\n$\\kappa_\\alpha$ and $\\theta$ are, after the shift $[n]$ is removed,\nisomorphisms of finite locally constant sheaves\n$$\n\\kappa_\\alpha:\\mathcal L|_{\\mathbf A^1_{Y_\\alpha}}\\xrightarrow{\\sim}\na^*\\mathcal M|_{\\mathbf A^1_{Y_\\alpha}},\n\\qquad\n\\theta:i_1^*\\mathcal L\\xrightarrow{\\sim}\\mathcal M,\n$$\nand everything to be proved is a statement about morphisms of\nsheaves; no descent of objects or morphisms of a derived category\nis used.",
+   "text": "The finite-level twist $A(1)$ is a locally constant locally free rank-one sheaf by [lem-pur-twist-sheaf-locally-free](3). The powers and dual powers defining $A(m)$ in [def-coefficient-twists-detailed] are also such sheaves: on a common trivializing cover, tensoring and taking the dual of the free rank-one module gives the free rank-one module. They are flat, so tensoring with them has no higher derived tensor terms. Thus $L'_\\alpha:=\\mathcal L_\\alpha(m_\\alpha)$ is a finite locally constant rank-one sheaf. Pulling the given shape isomorphism along $t=1$ and then applying $\\theta$ identifies $C|_{Y_\\alpha}$ with $i_1^*L'_\\alpha[n_\\alpha]$, where $i_1^*L'_\\alpha$ is again locally free of rank one. No common twist is assumed or removed globally.",
    "uses": [
-    "def-weil-derived-cohomology-sheaves"
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed",
+    "def-weil-derived-pullback-tensor-hom"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.md",
+    "place": "Proof Step 1: the nonzero rank-one sheaf underlying each shift"
+   }
   },
   {
-   "text": "Step 3: agreement on the overlaps. Put\n$Y_{\\alpha\\beta}=Y_\\alpha\\times_YY_\\beta$, a separated finite-type\n$k$-scheme, and restrict $\\kappa_\\alpha$ and $\\kappa_\\beta$ to\n$\\mathbf A^1_{Y_{\\alpha\\beta}}$. Their restrictions along the unit\nsection both equal $\\theta|_{Y_{\\alpha\\beta}}$. By the second\nassertion of [lem-pur-lisse-uniqueness], applied over the base\n$Y_{\\alpha\\beta}$ to the restrictions of the two sheaf morphisms to\n$\\mathbf G_{m,Y_{\\alpha\\beta}}$, through which the unit section\nfactors, they agree on $\\mathbf G_{m,Y_{\\alpha\\beta}}$; by the first\nassertion of the same lemma they then agree on all of\n$\\mathbf A^1_{Y_{\\alpha\\beta}}$.",
+   "text": "For each integer $n$ put $Y_n=\\bigcup_{n_\\alpha=n}\\operatorname{im}(u_\\alpha)$. These subsets are open by [lem-weil-pbc-etale-morphism-open-map]. If a point $y$ lies in two such images, choose a geometric point over $y$. The more precise assertion of [lem-weil-pbc-etale-cover-geometric-point-lift], applied to a point over $y$ in each member, gives lifts with the same geometric-point field to both etale neighbourhoods. Stalks of the restrictions of $\\mathcal H^r(C)$ are the same stalk at this geometric point: in the colimit of [def-weil-proetale-geometric-stalk], the pointed neighbourhoods admitting the chosen lift are cofinal, since one refines any neighbourhood by its fibre product with that etale neighbourhood. Exactness of this stalk functor is [lem-cbc-proetale-classical-stalk]. The preceding local description of $C$ then gives a nonzero free rank-one $A$-module in degree $-n_\\alpha$ and zero in all other degrees; $A\\ne0$ because the exponent of $\\varpi_E$ in its coefficient datum is at least $1$. Hence two indices whose images meet have the same shift. The $Y_n$ are consequently disjoint and cover $Y$, and each is closed as the complement of the union of the others. Only finitely many are nonempty: $C$ has only finitely many nonzero cohomology sheaves by [def-weil-finite-torsion-constructibility], and a nonempty $Y_n$ forces $\\mathcal H^{-n}(C)\\ne0$. Empty covering members can be discarded. The inverse images $X_n=a^{-1}Y_n=\\mathbf A^1_{Y_n}$ give a finite clopen partition of $X$. Every $Y_n$ is separated and finite type over $k$: choose a finite affine cover $\\operatorname{Spec}R_j$ of $Y$ with $R_j$ finitely generated over $k$, as in [def-weil-finite-type-morphism]. By [lem-weil-pbc-spec-clopen-idempotent], its intersection with $Y_n$ is $D(e_j)$ for an idempotent $e_j$, with ring $R_j[e_j^{-1}]=R_j/(1-e_j)$, again finitely generated. These finitely many affines cover $Y_n$. Its diagonal is the restriction of the closed diagonal of $Y$, so it is separated by [def-weil-proper-morphism]. The corresponding charts $R_j[e_j^{-1}][t]$ show that $X_n$ is finite type; its diagonal is closed since the diagonal of $Y_n$ is closed and equality of the two polynomial coordinates is cut out by $t_1-t_2$.",
    "uses": [
-    "lem-pur-lisse-uniqueness"
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-weil-proetale-geometric-stalk",
+    "lem-cbc-proetale-classical-stalk",
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.md",
+    "place": "Proof Step 1: partition by the shift, using boundedness instead of connected-component finiteness"
+   }
   },
   {
-   "text": "Step 4: gluing, and (1). Morphisms of sheaves form a sheaf\n$\\mathcal Hom(\\mathcal L,a^*\\mathcal M)$ on the site, so by Step 3\nthe $\\kappa_\\alpha$ glue to a unique morphism\n$\\kappa:\\mathcal L\\to a^*\\mathcal M$ restricting to each\n$\\kappa_\\alpha$. The inverses $\\kappa_\\alpha^{-1}$ agree on overlaps\nas well, and glue to a two-sided inverse of $\\kappa$, since the\ncomposites restrict to identities on every member of the cover. Hence\n$\\kappa$ is an isomorphism; shifting back by $[n]$ gives (1).",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Step 5: (2) and (3). The restriction $i_1^*\\kappa$ and $\\theta$ are\ntwo morphisms $i_1^*\\mathcal L\\to\\mathcal M$ of sheaves on $Y$ which\nagree after restriction to every $Y_\\alpha$, by the normalization of\n$\\kappa_\\alpha$; hence they are equal. If\n$\\kappa':F\\xrightarrow{\\sim}a^*C$ is another isomorphism with\n$i_1^*\\kappa'=\\theta$, then, by Step 2 applied to $\\kappa'$, both are\nsheaf morphisms $\\mathcal L\\to a^*\\mathcal M$ after the shift is\nremoved; their restrictions to $\\mathbf G_{m,Y}$ agree along the unit\nsection, hence agree by the second assertion of\n[lem-pur-lisse-uniqueness], and then $\\kappa'=\\kappa$ by its first\nassertion. This proves (2); in particular two covers with normalized\nlocal comparisons produce the same $\\kappa$, both having restriction\n$\\theta$ at $t=1$. For (3), apply $i_0^*$ and $i_1^*$ to $\\kappa$\nand use $a\\circ i_0=a\\circ i_1=\\operatorname{id}_Y$; the resulting\nidentification $i_0^*F\\cong C\\cong i_1^*F$ is canonical because\n$\\kappa$ is, by (2).",
+   "text": "Here is the componentwise sheaf argument needed for this finite clopen partition, not a descent assertion for arbitrary derived maps. For any finite clopen partition $T=\\coprod T_n$, restriction to the localized sites is the sheaf restriction of [lem-weil-proetale-weakly-etale-localization]. A family of module sheaves $G_n$ is reconstructed by $G(V)=\\prod_n G_n(V\\times_TT_n)$ for $V\\to T$; covering and the sheaf equalizer axiom hold componentwise. Conversely the finite disjoint covering $\\{V\\times_TT_n\\to V\\}$ gives precisely this formula for any sheaf $G$. The same formula applies to maps and to scalar actions, so these are mutually inverse additive equivalences of abelian module-sheaf categories. An additive equivalence preserves kernels and cokernels by their universal properties, hence is exact. In particular the extension $E_nG_n$ with value $G_n(V\\times_TT_n)$, zero on all other pieces, and each restriction are exact.",
    "uses": [
-    "lem-pur-lisse-uniqueness"
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-proetale-site"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.md",
+    "place": "Proof Step 1: expand the assertion that sheaves and maps are componentwise on clopen pieces (Sites 00XZ)"
+   }
+  },
+  {
+   "text": "Apply these exact functors termwise to complexes. They preserve cohomology and quasi-isomorphisms, so [lem-weil-pbc-localization-universal-property](1)-(2) induces functors on the derived categories and lifts their natural isomorphisms. More explicitly, for complexes on $T$ the sheaf identity $K\\cong\\bigoplus_n E_n(K|_{T_n})$ is an identity degreewise compatible with differentials; its natural isomorphism descends through localization. The inverse on a family of derived objects is $\\bigoplus_n D(E_n)(K_n)$. Restricting it to $T_m$ gives $K_m$, since $E_n$ restricts to zero for $n\\ne m$ and to the identity for $n=m$; these identities also descend. Thus derived objects, maps, equality of maps, and invertibility are all recovered componentwise on this finite clopen partition. For the empty scheme the empty sheaf cover forces every module sheaf to be zero, so all derived Hom sets are singletons. We may prove the assertions separately on each nonempty $Y_n$ and $X_n$ and reassemble them by these functors. The restricted objects still lie in $D^b_{ctf}$, as required for the concentration lemma in Step 6: a finite constructible stratification intersects a clopen piece in a finite constructible stratification, and exact restriction preserves the cohomological bounds of [def-weil-finite-torsion-constructibility]. The sheaf equivalence of Step 4 also preserves tensor products, by their universal property for bilinear maps; hence tensor products of complexes are componentwise. A K-flat complex restricts to a K-flat complex, since any acyclic complex on a piece extends by the exact $E_n$ and the tensor test is then the corresponding component of the global tensor test. Consequently derived tensor is componentwise too. For any module sheaf $N$ on $T_n$, extend it by $E_n$; the $n$th component of $K\\otimes_A^L E_nN$ is $(K|_{T_n})\\otimes_A^L N$. The global Tor interval therefore bounds this tensor product, which is exactly [def-weil-finite-tor-amplitude].",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.md",
+    "place": "Proof Step 1: justify the clopen reduction on derived morphisms by localization (Derived Categories 05RU)"
+   }
+  },
+  {
+   "text": "Fix one nonempty piece and write its shift as $n$. On its covering members $F$ is a sheaf shifted by $[n]$, and the same holds for $C$ by Step 2. Exact restriction and [lem-cbc-proetale-stalk-conservative](1) imply $\\mathcal H^q(F)=\\mathcal H^q(C)=0$ for $q\\ne-n$: their restrictions vanish on a covering. Set $\\mathcal L=\\mathcal H^{-n}(F)$ and $\\mathcal M=\\mathcal H^{-n}(C)$. They are finite locally constant rank-one sheaves; their restrictions are $L'_\\alpha$ and $i_1^*L'_\\alpha$, so concatenate the covers trivializing those sheaves, which is exactly local constancy in [def-weil-proetale-locally-constant-sheaf]. Clause (1) of [lem-pur-concentrated-complex-shift] supplies canonical $F\\cong\\mathcal L[n]$ and $C\\cong\\mathcal M[n]$. They are compatible with all the exact restrictions here, since truncation is computed by the kernels and quotients of complexes and these restrictions preserve them. By [lem-weil-pbc-derived-single-fully-faithful], followed by the invertible shift, all maps between these objects are uniquely ordinary sheaf maps. This correspondence is precisely $\\mathcal H^{-n}$ and commutes with the pullbacks, since they act termwise. Thus the given comparisons and normalization become sheaf isomorphisms $\\kappa_\\alpha:\\mathcal L|_{X_\\alpha}\\to a^*\\mathcal M|_{X_\\alpha}$ and $\\theta:i_1^*\\mathcal L\\to\\mathcal M$, satisfying the same restriction equation.",
+   "uses": [
+    "lem-cbc-proetale-stalk-conservative",
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-pur-concentrated-complex-shift",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.md",
+    "place": "Proof Step 2: canonical concentration and fully faithful single embedding, with all hypotheses checked"
+   }
+  },
+  {
+   "text": "On the overlap $B=Y_\\alpha\\times_YY_\\beta$ the two comparison maps have the same domain and codomain, both finite locally constant sheaves on $\\mathbf A^1_B$, and have equal restrictions along $t=1$. The overlap is separated finite type over $k$: by [def-weil-proper-morphism] it is the closed subscheme pulled back from the diagonal of separated $Y$ in $Y_\\alpha\\times_kY_\\beta$. On the finitely many product affine charts its rings are quotients of $R_\\alpha\\otimes_kR_\\beta$, finitely generated $k$-algebras, which verifies [def-weil-finite-type-morphism]. Its diagonal is the restriction of the closed diagonal of the separated product. If it is empty there is nothing to check. Otherwise restrict the maps first to $\\mathbf G_{m,B}$. The second assertion of [lem-pur-lisse-uniqueness] makes these restrictions equal because the unit section factors through $\\mathbf G_{m,B}$; its first assertion then makes the maps equal on $\\mathbf A^1_B$. This proves compatibility on every overlap.",
+   "uses": [
+    "lem-pur-lisse-uniqueness",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.md",
+    "place": "Proof Step 3: the two successive sheaf uniqueness statements"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-sheaf-hom-cover-gluing] to the pro-etale site of $X$, its constant ring sheaf $A_X$, its final object $X$, the covering $\\{X_\\alpha\\to X\\}$, and the sheaves $\\mathcal L,a^*\\mathcal M$. Its fibre products are the scheme fibre products already used in Step 7, identified with localized sites in Step 1. It gives a unique sheaf map $\\kappa$ restricting to the given maps. Their inverses agree on overlaps because the original maps do, and the same gluing lemma gives a map in the reverse direction. The composites restrict to the identity on every covering member, so uniqueness in that lemma makes them identities. Hence $\\kappa$ is an isomorphism. The fully faithful correspondence of Step 6 shifts it back to $F\\cong a^*C$. Uniqueness of sheaf gluing gives the uniqueness for these prescribed local comparisons.",
+   "uses": [
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.md",
+    "place": "Proof Step 4: ordinary sheaf-map gluing and gluing the inverse; Stacks 03EM/04TQ"
+   }
+  },
+  {
+   "text": "The sheaf maps $i_1^*\\kappa$ and $\\theta$ agree on every $Y_\\alpha$ by the given normalization. The uniqueness assertion of [lem-pur-sheaf-hom-cover-gluing], now on $Y$, makes them equal. For any other derived isomorphism $\\kappa':F\\to a^*C$ with this restriction, Step 6 gives another sheaf map $\\mathcal L\\to a^*\\mathcal M$ after cancelling $[n]$. The second and then the first assertions of [lem-pur-lisse-uniqueness], applied over the current $Y_n$ as in Step 7, give equality with $\\kappa$. Faithfulness of [lem-weil-pbc-derived-single-fully-faithful] gives equality of the derived maps. Reassemble the finitely many $X_n$ by Step 5. This proves global gluing and uniqueness, including independence of the cover and of its normalized comparisons: any such construction has the same restriction $\\theta$.",
+   "uses": [
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-pur-lisse-uniqueness",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.md",
+    "place": "Proof Step 5: normalization, global uniqueness, and independence"
+   }
+  },
+  {
+   "text": "Finally apply the two pullback functors to the unique $\\kappa$. The composition isomorphisms of [lem-weil-pbc-proetale-derived-pullback-composition], together with $a i_0=a i_1=\\operatorname{id}_Y$, identify $i_0^*a^*C$ and $i_1^*a^*C$ with $C$. Hence the identification between the two fibres is explicitly $\\theta^{-1}\\circ i_0^*\\kappa:i_0^*F\\to i_1^*F$, under these composition identifications. Its right-hand comparison is $\\theta$, by Step 9. Its canonicity follows from uniqueness of $\\kappa$.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.md",
+    "place": "Proof Step 5: the final restriction formula, clause (3)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-derived-cohomology-sheaves",
-  "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties",
   "def-pur-conventions",
-  "lem-pur-a1-components",
-  "lem-pur-lisse-uniqueness"
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "def-weil-proetale-geometric-stalk",
+  "lem-cbc-proetale-classical-stalk",
+  "def-weil-finite-torsion-constructibility",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-finite-tor-amplitude",
+  "lem-cbc-proetale-stalk-conservative",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-pur-concentrated-complex-shift",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-pur-lisse-uniqueness",
+  "lem-pur-sheaf-hom-cover-gluing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.md",
-  "place": "## Proof"
+  "place": "Proof preliminary paragraph and Steps 1-5, expanded with existing generic tools; finite clopen shift partition replaces the connected-component bookkeeping"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "locallyConstant|FiniteLocallyConstant|DerivedCategory|upperStar",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: none states affine-line normalized gluing; single-functor, free-sheaf pullback and scheme-gluing hits are only generic ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a derived-category object on an affine line locally a shifted twisted rank-one locally constant sheaf is uniquely identified with a pullback from the base by its restriction at the unit section; normalized local comparisons glue",
+   "results": "8 hits: AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, CompHausLike.LocallyConstant.presheaf_ext, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.OpenCover.ext_elem",
+   "date": "2026-10-16",
+   "verdict": "no match: none states affine-line normalized gluing; single-functor, free-sheaf pullback and scheme-gluing hits are only generic ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsIso, Sheaf, locally constant, pullback, restriction",
+   "results": "loogle: unknown identifier 'IsIso'; 0 hits:",
+   "date": "2026-10-16",
+   "verdict": "no match: none states affine-line normalized gluing; single-functor, free-sheaf pullback and scheme-gluing hits are only generic ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category affine line invariance pullback from base restriction unit section locally constant rank one sheaf",
+   "results": "service unavailable: Internal Server Error; 0 hits:",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized comparisons of lisse rank-one complexes on the relative affine line glue uniquely from an etale cover of the base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.inj, AlgebraicGeometry.Scheme.Cover.gluedCover_t', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Cover.hom_ext, AlgebraicGeometry.Scheme.GlueData.ι_eq_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: none states affine-line normalized gluing; single-functor, free-sheaf pullback and scheme-gluing hits are only generic ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: none states affine-line normalized gluing; single-functor, free-sheaf pullback and scheme-gluing hits are only generic ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "affineLine|oneSection|FiniteLocallyConstant|locallyConstantSheaf",
+   "results": "0 hits:",
+   "date": "2026-10-16",
+   "verdict": "no match: none states affine-line normalized gluing; single-functor, free-sheaf pullback and scheme-gluing hits are only generic ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\"",
+   "results": "12 hits: CategoryTheory.SingleFunctors, CategoryTheory.SingleFunctors.instCategory, CategoryTheory.SingleFunctors.functor, CategoryTheory.SingleFunctors.Hom, CategoryTheory.SingleFunctors.Hom.id, CategoryTheory.SingleFunctors.evaluation, CategoryTheory.SingleFunctors.postcomp, CategoryTheory.SingleFunctors.Hom.comp",
+   "date": "2026-10-16",
+   "verdict": "no match: none states affine-line normalized gluing; single-functor, free-sheaf pullback and scheme-gluing hits are only generic ingredients"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -108,5 +284,64 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-inv"
+ "unit": "sk-prop-a1-inv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "prop-pur-a1-invariance",
+  "worker": "stage1",
+  "summary": "Read the original blueprint and the Lean AffineLine file. No exact attachment: Lean explicitly lacks gluing and its uniqueness uses an invertibility hypothesis. Kept the statement. Replaced unsupported definition-only citations with the existing cover, stalk exactness, concentration, single full faithfulness and module-map gluing statements. Wrote out the finite clopen decomposition and its derived localization to handle varying shifts, absorbed twists locally, and supplied inverse gluing, normalization and the final fibre formula. No new nodes. All non-elementary tools are existing nodes and verbatim citation quotes are provided. Second reading supplied the geometric-point lift and affine clopen-idempotent citations, wrote the finite-type affine calculations, and checked preservation of the Dctf hypotheses on clopen pieces using componentwise tensor products.",
+  "blueprint": "The preliminary paragraph is step 1; original Step 1 is steps 2-5 (partition by shift rather than by connected components); original Step 2 is step 6; original Step 3 is step 7; original Step 4 is step 8; original Step 5 is steps 9-10. This realizes unit sk-prop-a1-inv Proof (ii), with its lisse uniqueness input (i) unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "Exact localization of constant-coefficient module sheaves, needed to identify the sites and preserve cohomology; no node of this unit states the generic restriction result."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "The canonical composition comparison for constant-coefficient pullbacks, needed for normalization and the two sections; no node of this unit supplies this functoriality."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "The finite-level twist is a sheaf locally free of rank one, needed before treating a twist-shift as a single sheaf; the unit conventions define twists but do not prove this."
+   },
+   {
+    "node": "lem-cbc-proetale-classical-stalk",
+    "why": "Exactness of the specified pro-etale geometric stalk, used only on the locally rank-one cohomology sheaves to compare shifts; no assertion of conservativity on arbitrary pro-etale sheaves is used."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Explicit localized-site restriction formula for clopen components; no node of this unit identifies the module sheaf categories on these slices."
+   },
+   {
+    "node": "lem-cbc-proetale-stalk-conservative",
+    "why": "Cover-local vanishing of a sheaf, clause (1) only; the argument never uses arbitrary pro-etale geometric stalk conservativity."
+   },
+   {
+    "node": "lem-pur-concentrated-complex-shift",
+    "why": "Canonical single-degree realization, clause (1) only, to expand the unit's reduction to sheaf maps. It depends on no affine-line invariance result."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Gluing actual module-sheaf maps on a cover, including uniqueness. This expands exactly the unit's ordinary sheaf axiom step and does not replace its lisse uniqueness route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-cbc-proetale-classical-stalk",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-pur-concentrated-complex-shift",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-1a2c658e1",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-1a2c658e1 (reviewer sub-agent of L); spot-checked: Read the full item, unit, cited DAG statements, blueprint sources, and supporting literature. The statement and coefficient conventions match the master source; all ten proof steps have appropriate cited dependencies, valid clopen shift reduction, sheaf-map gluing, overlap compatibility, normalization, and fibre identification. Edge cases and delivery-errors A–F checks pass. Review written to review.md; no repairs needed."
+ }
 }
