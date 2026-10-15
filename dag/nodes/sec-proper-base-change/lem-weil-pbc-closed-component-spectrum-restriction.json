@@ -30,73 +30,57 @@
  ],
  "proof": [
   {
-   "text": "Let $\\pi:\\operatorname{Spec}A\\to P=\\pi_0(\\operatorname{Spec}A)$ be the quotient by connected components, and put $T=\\pi(E)$. Since $E$ is a union of components, $\\pi^{-1}(T)=E$: a point with component in $\\pi(E)$ lies in the same component as some point of $E$, hence lies in $E$. The quotient-topology definition makes $T$ closed because its inverse image is the given closed subset $E$.",
+   "text": "Put T = ConnectedComponents.mk(E). If x maps into T, choose y in E with the same connected component. Then x lies in connectedComponent y and hence in E by component saturation. Conversely every point of E maps into T. Thus the inverse image of T is E, and the quotient-topology criterion makes T closed.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097C, lemma-construct, proof; Tag 096T, lemma-ind-zariski-implies"
+    "place": "Tag 097C, lemma-construct, applied to a closed union of components; Topology Tag 04PL, lemma-closed-union-connected-components, identifies it as an intersection of clopens; Tag 096T, lemma-ind-zariski-implies, gives the induced local-ring isomorphisms"
    }
   },
   {
-   "text": "Use the clopen-localization diagram and the ring $B=\\operatorname{Restriction}_A(T)$ specified by the restriction surjectivity statement. Its index is a set, is nonempty because the whole spectrum contains $E$, and is directed by intersection. That statement supplies the canonical surjective map $v:A\\to B$.",
+   "text": "Use the actual ring B = WContractification.Restriction T and its canonical algebra map v. The restriction surjectivity theorem gives surjectivity of v. The construction and its algebra structure are those already defined in the source library; no witness is chosen from a mere existence theorem.",
    "uses": [
     "lem-weil-pbc-restriction-algebraMap-surjective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097C, lemma-construct, proof; Tag 096T, lemma-ind-zariski-implies"
+    "place": "Tag 097C, lemma-construct, applied to a closed union of components; Topology Tag 04PL, lemma-closed-union-connected-components, identifies it as an intersection of clopens; Tag 096T, lemma-ind-zariski-implies, gives the induced local-ring isomorphisms"
    }
   },
   {
-   "text": "Apply the general surjective-spectrum theorem to $v$. It identifies $\\operatorname{Spec}B$ homeomorphically with $V(\\ker v)$, its image, with the subspace topology. The restriction range theorem applies because step 1 proved $T$ closed; it identifies this image with $\\pi^{-1}(T)=E$. Substitution gives the required homeomorphism onto $E$.",
+   "text": "The restriction spectrum-range theorem identifies the range of Spec(v) with the inverse image of T, hence with E. A surjective ring map induces an embedding of spectra by PrimeSpectrum.isEmbedding_comap_of_surjective, the embedding part of the general quotient-spectrum theorem. Its canonical homeomorphism onto its range, followed by Homeomorph.setCongr for this range equality, gives the required homeomorphism onto E. The underlying function is definitionally Spec(v).",
    "uses": [
-    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
     "lem-weil-pbc-restriction-spectrum-range"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097C, lemma-construct, proof; Tag 096T, lemma-ind-zariski-implies"
+    "place": "Tag 097C, lemma-construct, applied to a closed union of components; Topology Tag 04PL, lemma-closed-union-connected-components, identifies it as an intersection of clopens; Tag 096T, lemma-ind-zariski-implies, gives the induced local-ring isomorphisms"
    }
   },
   {
-   "text": "The diagram from step 2 is itself a small filtered presentation: its objects form a set, the full spectrum is an object, and $W_1\\cap W_2$ receives arrows from $W_1$ and $W_2$ in reverse inclusion; parallel arrows in this poset are equal. For $C_W=A_{e_W}$ and any prime $q\\subset C_W$, take $g=1\\notin q$ and $f=e_W$. The fraction map $(C_W)_1\\to C_W$, $c/1^n\\mapsto c$, has inverse $c\\mapsto c/1$, so $(C_W)_1\\cong A_{e_W}$ as $A$-algebras. Thus every term satisfies exactly the neighborhood condition in the filtered-local-isomorphism stalk theorem.",
-   "uses": [
-    "def-weil-ring-localization-away",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097C, lemma-construct, proof; Tag 096N, definition-ind-zariski"
-   }
-  },
-  {
-   "text": "Apply the filtered-local-isomorphism stalk theorem to the presentation checked in step 4. For every prime $q\\subset B$ it says that the canonical induced map $A_{v^{-1}(q)}\\to B_q$ is an isomorphism. This is the map required in the conclusion.",
+   "text": "The source-library instance WContractification.Restriction.indZariski already proves that this restriction ring is an ind-Zariski A-algebra: its clopen-neighborhood diagram is filtered, and each idempotent localization is a standard open immersion and hence a local isomorphism. Apply Algebra.IndZariski.bijectiveOnStalks_algebraMap and its localRingHom projection at q.asIdeal. This is exactly the canonical local-ring map in the conclusion, with no transport or change of algebra map.",
    "uses": [
     "lem-weil-pbc-ind-zariski-bijective-on-stalks"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097C, lemma-construct, proof; Tag 096T, lemma-ind-zariski-implies"
+    "place": "Tag 097C, lemma-construct, applied to a closed union of components; Topology Tag 04PL, lemma-closed-union-connected-components, identifies it as an intersection of clopens; Tag 096T, lemma-ind-zariski-implies, gives the induced local-ring isomorphisms"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
-  "def-weil-ring-localization-away",
   "lem-weil-pbc-ind-zariski-bijective-on-stalks",
   "lem-weil-pbc-restriction-algebraMap-surjective",
-  "lem-weil-pbc-restriction-spectrum-range",
-  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+  "lem-weil-pbc-restriction-spectrum-range"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 097C, lemma-construct, proof; Tag 096T, lemma-ind-zariski-implies"
+  "place": "Tag 097C, lemma-construct, and Tag 096T, lemma-ind-zariski-implies; Lean assembly by D4 from the existing Restriction construction, its indZariski instance, surjectivity and range API, plus the quotient-spectrum embedding API."
  },
  "mathlib_searches": [
   {
@@ -324,5 +308,15 @@
   "by": "NU",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261015T154202-L-161318",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

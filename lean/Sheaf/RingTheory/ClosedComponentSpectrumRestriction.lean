@@ -9,10 +9,6 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Topology.Connected.Clopen
 
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.GroupTheory.MonoidLocalization.Away
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import WeilConjectures.RingTheory.ProEtale.IndZariski
 import WeilConjectures.RingTheory.ProEtale.WContractible
 
 /-!
@@ -60,6 +56,26 @@ theorem exists_closed_component_restriction (A : Type u) [CommRing A]
         (∀ q : PrimeSpectrum B, (h q).val = PrimeSpectrum.comap v q) ∧
         ∀ q : PrimeSpectrum B, Function.Bijective
           (Localization.localRingHom (q.asIdeal.comap v) q.asIdeal v rfl) := by
-  sorry
+  classical
+  let T : Set (ConnectedComponents (PrimeSpectrum A)) := ConnectedComponents.mk '' E
+  have hpre : ConnectedComponents.mk ⁻¹' T = E := by
+    apply Set.Subset.antisymm
+    · rintro x ⟨y, hy, hxy⟩
+      exact hcomponents y hy (ConnectedComponents.coe_eq_coe'.mp hxy.symm)
+    · exact Set.subset_preimage_image _ _
+  have hT : IsClosed T := by
+    apply ConnectedComponents.isQuotientMap_coe.isClosed_preimage.mp
+    rwa [hpre]
+  let B := WContractification.Restriction T
+  have hsurj : Function.Surjective (algebraMap A B) :=
+    WContractification.Restriction.algebraMap_surjective T
+  have hrange : Set.range (PrimeSpectrum.comap (algebraMap A B)) = E :=
+    (WContractification.Restriction.range_algebraMap_specComap hT).trans hpre
+  have hemb := PrimeSpectrum.isEmbedding_comap_of_surjective B (algebraMap A B) hsurj
+  let h : PrimeSpectrum B ≃ₜ E :=
+    hemb.toHomeomorph.trans (Homeomorph.setCongr hrange)
+  refine ⟨CommRingCat.of B, algebraMap A B, hsurj, h, fun _ ↦ rfl, ?_⟩
+  intro q
+  exact (Algebra.IndZariski.bijectiveOnStalks_algebraMap A B).localRingHom q.asIdeal
 
 end PrimeSpectrum
