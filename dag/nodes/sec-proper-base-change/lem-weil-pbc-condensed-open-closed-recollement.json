@@ -33,160 +33,69 @@
  ],
  "proof": [
   {
-   "text": "Set $R=\\Lambda_X$. The monoidal composition comparisons of [lem-weil-pbc-profinite-point-pullback], evaluated at the arbitrary condensed ring $\\Lambda$, identify $i^{-1}R\\cong\\Lambda_Z$ and $j^{-1}R\\cong\\Lambda_U$. Apply [lem-weil-pbc-proetale-ringed-open-closed] to $R$: it gives the sheaf short exact sequence, exact $i_*$, $i^*i_*\\cong\\mathrm{id}$ and $j^*i_*=0$. The operations adjunction $i^*\\dashv i_*$ and its invertible counit imply full faithfulness of $i_*$. Part (1) of [lem-weil-proetale-weakly-etale-localization] identifies $U_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/U$; its topological identification restricts any ring sheaf $R$, without using the constant-ring clauses (2)-(3). Hence [lem-pur-site-restriction-module-adjunction-exact] supplies exact $j_!$ and $j_!\\dashv j^*$. The operations input gives exact $i^*,j^*$ and their direct-image adjunctions. Finally, for every $V\\to U$, $(j^*j_*G)(V)=G(U\\times_X V)=G(V)$, since $j$ is a monomorphism; these identifications are the open counit and commute with restrictions and the $R_U$-action. Thus $j^*j_*\\to\\mathrm{id}$ is an isomorphism. No constant or discrete coefficient identification is made.",
+   "text": "Use [lem-weil-pbc-proetale-abelian-closed-support], whose supported-unit half is proved by joint restriction conservativity from the smaller closed-counit input. Lift the counit and supported-unit isomorphisms through the monoidal adjunction on module objects and the scalar-change equivalence. The coefficient pullback comparisons of [lem-weil-pbc-profinite-point-pullback] identify the underlying inverse-image functors for [def-weil-pbc-condensed-e-module-category]. The open extension unit is invertible because the fully faithful abelian extension by zero linearizes, and scalar change is an equivalence.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-proetale-abelian-closed-support",
     "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-proetale-weakly-etale-localization"
+    "def-weil-pbc-condensed-e-module-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "(3.3)-(3.4), Lemma 3.4; Stacks proetale open/closed localization; Stacks 09BN (lemma-open-immersion); master Basic.lean upperStarFromPointComp"
-   }
+   "elementary": false
   },
   {
-   "text": "Construct the sheaf exceptional inverse image instead of assuming it: put $S(F)=\\ker(F\\to j_*j^*F)$ and $i^!F=i^*S(F)$. Exact $j^*$ and $j^*j_*\\cong\\mathrm{id}$ give $j^*S(F)=0$, so the sheaf short exact sequence gives $S(F)\\cong i_*i^*S(F)$. For a sheaf $G$ on $Z$, $\\operatorname{Hom}(i_*G,j_*j^*F)=\\operatorname{Hom}(j^*i_*G,j^*F)=0$. Thus every map $i_*G\\to F$ factors uniquely through $S(F)$. Full faithfulness of $i_*$ identifies these factors with maps $G\\to i^!F$, naturally. This proves $i_*\\dashv i^!$. In particular $i^!$ is additive and left exact. It preserves injectives: an extension problem into $i^!I$ is, by adjunction, one into $I$ along $i_*$ of a monomorphism, which is monic by exactness.",
+   "text": "Prove j* i_* = 0 by evaluating the underlying abelian direct image on the empty base change of every object over U. Derive i* j_! = 0 by the two adjunction Hom equivalences. The supported-unit assertion makes i* and j* jointly detect zero objects. For an epimorphism on Z, the cokernel of its direct image is killed by both restrictions: i* kills it by the invertible closed counit and j* kills it by j* i_* = 0. Hence direct image preserves epimorphisms, and its existing left exactness makes it exact.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-proetale-operations"
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "lem-weil-pbc-profinite-point-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "(3.3); sheaf kernel construction underlying the closed right adjoint"
-   }
+   "elementary": false
   },
   {
-   "text": "The small-site module categories are Grothendieck by the ringed-site resolution theorem. Their functorial injective embeddings and the generic bounded-resolution input give functorial resolutions $K\\to I(K)$ whose terms vanish below every lower bound of $K$. Bounded-below injective complexes are K-injective. An object cohomologically in degrees $\\geq a$ has a representative with injective terms zero below $a$, by the prescribed-bound representative theorem; thus a diagram of representing complexes with this common cohomological bound can first be replaced, naturally in its chain maps, by the canonical good truncation $\\tau_{\\geq a}$ and then resolved by the same functor. This supplies common-bound models without taking an unbounded replacement and assuming it preserves bounds. Explicitly, the common-bound truncation $T_aK$ has terms zero for $n<a$, $\\operatorname{coker}(d_K^{a-1})$ for $n=a$, and $K^n$ for $n>a$, with the induced differential at $a$. The quotient maps define a chain map $K\\to T_aK$, natural in chain maps. The formula $H^n=\\ker d^n/\\operatorname{im}d^{n-1}$ shows that this map preserves $H^n$ for $n\\geq a$; its target has zero cohomology below $a$, so it is a quasi-isomorphism when $H^n(K)=0$ there. This proves the asserted functorial common-bound replacement directly.",
+   "text": "For a module sheaf F construct S(F)=ker(F→j_*j*F), with maps given by kernel.map. Exact open restriction and the invertible open counit show j*S(F)=0. Closed support identifies S(F) with i_*i*S(F). Put i!F=i*S(F). Every map i_*B→F has zero composite with F→j_*j*F by the adjunction and j*i_*B=0. Its unique kernel factorization and full faithfulness of i_* yield the natural Hom equivalence Hom(B,i!F)≃Hom(i_*B,F). This constructs the right adjoint, which is additive and left exact.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
-    "lem-weil-pbc-functorial-bounded-injective-resolution",
-    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-proetale-abelian-closed-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved source-library bounded-below derived adjunction API to derive the exact adjunctions and the two right adjoints. Exact derived composition and counit isomorphisms give full faithfulness of closed pushforward and open extension. The right derived functors have shift structures induced by their left adjoints, with shift-compatible adjunctions. For the exact adjunctions, restrict the shift-compatible unbounded adjunction along the fully faithful bounded-below inclusions and use the canonical comparison isomorphisms. Right-derived homology vanishing proves left t-exactness.",
+   "uses": [
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Stacks bounded-below resolutions; functorial common-bound models"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply exact derived factorization to $j_!,j^*,i^*,i_*$. The K-injective total-derived theorem constructs $Ri^!$ from the additive sheaf functor in step 2; the operations input constructs $Rj_*$. All are everywhere defined on the unbounded derived categories since module sheaves have K-injective resolutions, and restrict to $D^+$ using step 3. The general derived-adjunction theorem applied to each sheaf adjunction gives $j_!\\dashv j^*\\dashv Rj_*$ and $i^*\\dashv i_*\\dashv Ri^!$. Its exact-functor hypotheses hold by step 1. On a resolution zero below $a$, both $j_*I$ and $i^!I$ vanish below $a$, so $Rj_*$ and $Ri^!$ preserve $D^{\\geq a}$. In particular the latter is left t-exact. The sheaf identity $i^*i_*\\cong\\mathrm{id}$ remains an identity of exact termwise derived functors, so $i_*$ remains fully faithful.",
+   "text": "Exact derived inverse images commute with homology. Therefore the two zero composites and joint detection of zero pass from sheaves to D+. Complete the closed unit, respectively the open counit, to a distinguished triangle. Each restriction kills the cone because it inverts the relevant arrow, so joint zero detection kills that cone. Thus ker(j*) is the essential image of derived i_* and ker(i*) is the essential image of derived j_!.",
    "uses": [
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "prop-pur-kinjective-resolutions-exist",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "(3.3)-(3.4); derived adjunction and left t-exactness"
-   }
+   "elementary": false
   },
   {
-   "text": "Represent $K$ by a bounded-below complex. Apply the sheaf sequence of step 1 in each degree; naturality makes its three terms complexes and its arrows chain maps. The existing generic complex-SES triangle lemma gives the distinguished triangle $j_!j^*K\\to K\\to i_*i^*K\\to j_!j^*K[1]$. Exact derived factorization identifies its terms with the stated functors, without resolutions. Its first two maps are exactly the sheaf counit and unit localized, hence the derived counit and unit. The generic lemma also gives naturality under maps of these sequences.",
+   "text": "Apply the proved source-library theorem Pretriangulated.Recollement.existsUnique_distTriang_counit_unit twice, once with embedding j_! and once with embedding i_*. It supplies the connecting arrows for exactly the prescribed units and counits. The triangle-morphism axiom, together with uniqueness of those connecting arrows, proves naturality. Transport each triangle by the signed shift functor. The commutation isomorphisms and shift-compatible adjunctions identify its first two arrows with the prescribed shifted unit and counit; uniqueness identifies the third. The symmetry of shiftFunctorComm checks the sign in NatTrans.CommShift.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-weil-pbc-exact-functor-derived-factorization"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 3.4; Stacks derived canonical delta-functor"
-   }
+   "elementary": false
   },
   {
-   "text": "For the second triangle choose the functorial bounded-below injective model $I=I(K)$. Since $j^*$ is right adjoint to exact $j_!$, it preserves K-injectives; since $j_*$ is right adjoint to exact $j^*$ it does too. Thus $j_*j^*I$ computes $Rj_*j^*K$, with unit represented by the actual chain map $u:I\\to j_*j^*I$. Form the explicit complex $L=\\operatorname{Cone}(u)[-1]$ and its rotated cone triangle $L\\to I\\to j_*j^*I\\to L[1]$. Applying exact $j^*$ gives the cone of an isomorphism (the restriction of $u$ is inverse to the open counit). That cone is contractible, so $j^*L=0$ in the derived category. Apply the first triangle, already proved, to $L$: its first term vanishes, and the unit $L\\to i_*i^*L$ is an isomorphism. Notice $L^n$ is a direct sum of $I^n$ and $(j_*j^*I)^{n-1}$, so it is zero for $n<a$ whenever $I$ is.",
+   "text": "Construct functorial injective embeddings using the proved source-library K-injective replacement of complexes concentrated in degree zero and degree-zero evaluation; its augmentation is monic and its terms are injective. Apply [lem-weil-pbc-functorial-bounded-injective-resolution]. For a common cohomological lower bound a, first apply the canonical good truncation at a. Its projection is a quasi-isomorphism on such inputs and all its terms below a vanish. The resolution theorem preserves that strict bound. Injective complexes are right-acyclic for either left exact functor, so the actual right-derived resolution unit is invertible. Inverse images preserve small colimits by their ordinary adjunctions.",
    "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-hom-into-triangle-exact"
+    "lem-weil-pbc-functorial-bounded-injective-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "(3.3)-(3.4); explicit fibre of the open unit"
-   }
-  },
-  {
-   "text": "Write $A=i^*L$ and identify $L$ with $i_*A$ by the unit of step 6. For any $B\\in D^+(Z,\\Lambda)$ and any integer $n$, derived adjunction and $j^*i_*=0$ give $\\operatorname{Hom}(i_*B,Rj_*j^*K[n])=0$. Apply exactness of Hom into the cone triangle and its inverse rotation: the vanishing for $n=0,-1$ makes $\\operatorname{Hom}(i_*B,L)\\to\\operatorname{Hom}(i_*B,K)$ a bijection. Full faithfulness of $i_*$ makes this $\\operatorname{Hom}(B,A)\\cong\\operatorname{Hom}(i_*B,K)$, naturally in $B$. Hence $A$ represents the same functor as $Ri^!K$ from step 4. The canonical representing isomorphism identifies $i_*A\\to K$ with its counit (both correspond to the identity of the right-adjoint object). Replacing $L$ by $i_*Ri^!K$ in the cone triangle proves the second asserted triangle, including its maps.",
-   "uses": [
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "def-weil-pbc-proetale-operations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "(3.3); identify the fibre by its adjunction, rather than posit a fibre-identification input"
-   }
-  },
-  {
-   "text": "The cone construction on the functorial models is natural in chain maps. Quasi-isomorphisms between their K-injective replacements are homotopy equivalences; the additive functors $j^*,j_*$ preserve those equivalences, so their localized maps are isomorphisms. The concrete cone maps are morphisms of distinguished triangles with those two isomorphisms; the generic triangle-morphism isomorphism lemma makes the third map an isomorphism too. The triangle therefore descends naturally to the derived category; the representing identification in step 7 is natural in $K$ as well. Exact termwise functors commute with shifts by the identity on the shifted components. For right derived functors, resolution comparison gives the shift isomorphisms by the generic derived-triangulated theorem; the Hom bijections arise from the termwise adjunction, which commutes with simultaneous shifts, so these comparisons commute with units and counits. The two triangles commute with shifts with the standard cone/rotated-triangle signs; no choice of arbitrary cones in a triangulated category is being asserted to be functorial.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-sf-triangle-morphism-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "(3.3)-(3.4); naturality and shift comparisons of the concrete models"
-   }
-  },
-  {
-   "text": "Finally the sheaf pullbacks preserve small colimits directly from their adjunctions: maps from $j^*(\\operatorname{colim}F_d)$ to $G$ are maps from $\\operatorname{colim}F_d$ to $j_*G$, hence compatible families of maps $j^*F_d\\to G$; the identical calculation with $i_*$ proves the claim for $i^*$. Colimits here exist in the small-site module categories. Step 3 gives common-bound functorial injective models for both right derived functors, while step 4 shows their images still have the same bound. All clauses of the statement now hold.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "prop-pur-kinjective-resolutions-exist"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 3.4 and bounded-below model construction"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
   "def-weil-pbc-condensed-e-module-category",
-  "def-weil-pbc-proetale-operations",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-triangle-morphism-iso",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-functorial-bounded-injective-resolution",
-  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-proetale-weakly-etale-localization",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "lem-weil-pbc-profinite-point-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Detailed ordinary-derived-category construction of (3.3)-(3.4), using Lemma 3.4, Stacks ringed-site localization and bounded-injective resolutions"
+  "place": "D3 formal proof of the original statement: abelian closed support proved from the closed counit and finite-family conservativity, explicit kernel right adjoint, proved bounded-below derived APIs, and the source-library unique recollement triangle theorem; HRS (3.3)-(3.4), Lemma 3.4; Stacks 09AA, 09AH and bounded injective resolutions."
  },
  "mathlib_searches": [
   {
@@ -329,5 +238,15 @@
   "by": "NE",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T192617-L-1080598",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

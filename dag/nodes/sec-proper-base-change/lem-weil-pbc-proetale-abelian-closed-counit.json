@@ -1,0 +1,168 @@
+{
+ "id": "lem-weil-pbc-proetale-abelian-closed-counit",
+ "kind": "statement",
+ "title": "The closed counit on abelian pro-etale sheaves",
+ "statement": "Use [def-weil-size-convention], the pro-etale site [def-weil-pbc-proetale-site] and inverse image [def-weil-proetale-inverse-image]. Let i:Z→X be an arbitrary closed immersion of schemes. On sheaves of abelian groups, the actual inverse-image/direct-image adjunction counit i*i_*→id is an isomorphism. Equivalently i_* is fully faithful. There is no quasi-compact-open-complement, qcqs-base, reducedness, or finite-presentation hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BL and 09BK: closed immersions, affine closed-site lift and counit."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Invertibility of the counit is local for affine open coverings of X and their inverse images in Z. Direct image commutes with open restriction by its base-change formula on sections. Identify the inverse images by adjunction; the mate comparisons transport the actual counit. Thus take X=Spec A and identify the closed immersion with Spec(A/I)→Spec A.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-weil-pbc-ind-etale-basis] to replace both pro-etale sites by their ind-etale affine bases, with the actual restriction equivalences on sheaves. These commute with the base-change direct images. The cocontinuous lift v and base change u of [lem-weil-pbc-affine-closed-site-functor-properties] satisfy v⊣u and have invertible unit by [lem-exc-closed-site-adjunction]. The opposite adjunction computes left Kan extension along u.op as precomposition with v.op, since in each indexing category the adjunction supplies the universal stage. Its subsequent sheafification is therefore inverse image. The resulting inverse-image comparison is the mate of the direct-image comparison and preserves the canonical counit.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-affine-closed-site-functor-properties",
+    "lem-exc-closed-site-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a closed-basis abelian sheaf G the presheaf computing i*i_*G is V↦G(u(v(V))). The inverse of the site unit identifies it naturally with G, via the contravariant sheaf map. It is already a sheaf. The canonical sheafification comparison is invertible, and the adjunction triangle identity identifies the induced map with the actual counit. Thus that counit is invertible on the basis and hence on the affine pro-etale site. All maps are additive, so the argument works directly for abelian sheaves.",
+   "uses": [
+    "lem-exc-closed-site-adjunction",
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine inverse counits agree on overlaps by naturality and uniqueness of inverses. Glue them to an inverse of the global counit. The empty closed scheme and nonreduced closed thickenings are included: the site unit and sheafification argument use neither points nor a radical or finitely generated defining ideal.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-exc-closed-site-adjunction",
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "lem-weil-pbc-ind-etale-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA and 09BL: affine basis, opposite closed-site adjunction and sheafification of G∘u.op∘v.op; global counit by affine descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion of schemes the counit on abelian proetale sheaves is an isomorphism",
+   "results": "Service unavailable: Internal Server Error; 0 hits.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of schemes the direct image on abelian sheaves on the proetale site is fully faithful and the inverse image direct image counit is invertible",
+   "results": "8 hits including Scheme.Modules.instFullPushforward, instIsIsoFunctorCounitRestrictAdjunction and restrictFunctorAdjCounitIso. They concern open Zariski restriction on structure-sheaf modules, not closed pro-etale direct image.",
+   "date": "2026-10-16",
+   "verdict": "No exact matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.IsIso",
+   "results": "12 generic adjunction hits, including fullyFaithfulROfIsIsoCounit and counit_isIso_of_R_fully_faithful.",
+   "date": "2026-10-16",
+   "verdict": "No geometric closed-site assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*counit|counit.*closed",
+   "results": "5 hits in Mathlib monoidal-closed Pi and groupoid functor categories; none concern closed immersions. Blueprint Tag 09BL search: zero; closed-support search finds only distinct finite-ring Noetherian derived assertions, and the existing closed fully-faithful node is for finite constant module coefficients with no compatible current Lean attachment.",
+   "date": "2026-10-16",
+   "verdict": "No Mathlib match or existing identical abelian statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion induces a fully faithful pushforward functor on sheaves of abelian groups for the pro-etale topology",
+   "results": "Second reading: 8 hits. Cover-dense subsite full pushforward, open Zariski module pushforward, and sheaf composition results; none gives this closed geometric statement.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, CategoryTheory.IsIso",
+   "results": "Second reading: 12 hits, including counit_isIso_of_R_fully_faithful and isIso_of_fully_faithful. These require full faithfulness as input and do not establish the geometry.",
+   "date": "2026-10-16",
+   "verdict": "Formal consequences only."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*counit|counit.*sheaf",
+   "results": "Second reading: 25 Mathlib hits, concerning constant sheaves, module sheafification, Zariski spaces and skyscrapers. Local repository search found the older ModuleCat closed counit is still sorry and uses the incompatible legacy inverse-image API.",
+   "date": "2026-10-16",
+   "verdict": "No exact proved replacement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedOpenClosedRecollement",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: the descent formula preserves the finite-stage property through the common-stage colimit; derived Hom continuity needed for this descent, as made precise by master TwoColimit.lean, Sorried input (Hom).",
+   "via": [
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAbelianClosedCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.abelian_closed_counit",
+  "statement": "theorem abelian_closed_counit {X Z : Scheme.{u}}\n    (i : Z ⟶ X) [IsClosedImmersion i] :\n    IsIso (upperStarLowerStarAdjunction Ab.{u + 1} i).counit",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16"
+ },
+ "tool_uses": [
+  "lem-exc-closed-site-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T192617-L-1080598",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T192617-L-1080598",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

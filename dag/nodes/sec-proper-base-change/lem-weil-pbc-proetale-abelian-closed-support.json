@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-proetale-abelian-closed-support",
+ "kind": "statement",
+ "title": "Closed support for abelian pro-etale sheaves",
+ "statement": "Use [def-weil-size-convention] and the pro-etale site [def-weil-pbc-proetale-site]. Let i:Z→X be a closed immersion of schemes and j:U→X its quasi-compact open complement. For inverse image i* and direct image i_* on sheaves of abelian groups, as in [def-weil-proetale-inverse-image], the counit i*i_*→id is an isomorphism. For every abelian sheaf F on X with j*F zero, the actual unit F→i_*i*F is an isomorphism. There is no qcqs assumption on X and no restriction on the coefficient abelian sheaves.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA (closed immersion counit) and 09AH (short exact sequence for a quasi-compact complementary open); Modules on Sites, integral coefficient action."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-proetale-abelian-closed-counit] for the closed counit. Independently prove the supported-unit assertion by joint conservativity of the two restrictions, as follows.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-closed-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Suppose a section maps to zero under inverse image for a scheme map g. Inverse image is sheafification of a left Kan extension. Local injectivity of sheafification gives a pro-etale cover on which that equality holds in the Kan extension. The relevant comma category is filtered, and the underlying-set functor of abelian groups preserves its colimit, so the equality holds at a stage: locally the section vanishes after restriction along an object over X whose base change receives that member of the cover. This is the explicit private lemma abLocalVanish; it adapts the proved source module UpperLowerStar.Detection to abelian groups and the current finite-coefficient API.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite quasi-compact jointly surjective family g_k, choose those covers for every k. The source theorem QuasiCompactCover.of_comp_factor says their weakly-etale neighborhoods together are a quasi-compact covering family over the original object. Joint surjectivity follows by lifting a point to a fibre product and then to a covering member. Each neighborhood is weakly etale over the base by cancellation from its structural map. Thus this is a pro-etale cover. The original section vanishes by the separated sheaf condition. Apply this to each section in the image of a sheaf morphism and use naturality of the inverse-image unit to prove joint faithfulness.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Take the two-element family formed by i and j. Closed immersions are quasi-compact, and the ranges cover X by the complement hypothesis. If both restrictions of F are zero, both restrictions of its identity morphism vanish; joint faithfulness implies that identity is zero. Since inverse images are exact, apply this zero detection to the kernel and cokernel of a morphism to obtain joint detection of isomorphisms. These are the proved private lemmas abJointZero and abDetectIso.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the unit F→i_*i*F, its closed restriction is invertible because its composite with the invertible closed counit is the identity by the adjunction triangle identity. If j*F is zero, its open restriction has zero source and target: the target j*i_*i*F has sections of i*F on empty base changes, hence is zero. The sheaf condition for the empty cover supplies the terminal, thus zero, sections. Joint detection of isomorphisms now proves the actual closed unit invertible. No ringed-module comparison or localization sequence is assumed.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-closed-counit",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-proetale-abelian-closed-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Closed counit from Tags 09AA/09BL; supported units proved directly by local injectivity of sheafification, filtered Kan-extension stages, quasi-compact covering factorization and joint restriction conservativity. Formal adaptation of the proved source Detection and ClosedImmersion arguments to Ab."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For abelian sheaves on the proetale site a closed immersion has invertible counit and the unit is invertible on sheaves supported on the closed complement",
+   "results": "Service unavailable: Internal Server Error; 0 hits.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For abelian sheaves on the proetale site a closed immersion has invertible counit and the unit is invertible on sheaves supported on the closed complement",
+   "results": "8 hits including AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, restrictFunctorAdjCounitIso, restrictAdjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; these concern Zariski restrictions or different site morphisms.",
+   "date": "2026-10-16",
+   "verdict": "No exact pro-etale closed-support statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.IsIso",
+   "results": "12 hits, including generic adjunction fullyFaithfulROfIsIsoCounit and counit_isIso_of_R_fully_faithful.",
+   "date": "2026-10-16",
+   "verdict": "Generic formal consequences only; no closed-site geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarLowerStarAdjunction|closed.*support",
+   "results": "25 hits on the Mathlib search service, none giving pro-etale closed support. Local Mathlib module/sheaf searches found ZModuleEquivalence and general pushforward equivalences but no sheaf comparison for the integral ring sheaf. Blueprint searches for closed support, 09AA and 09AH found no duplicate with this abelian signature.",
+   "date": "2026-10-16",
+   "verdict": "No matching Mathlib theorem. The proof uses the smaller abelian closed counit and direct joint conservativity; the arbitrary-ringed localization theorem is not used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion induces a fully faithful pushforward functor on sheaves of abelian groups for the pro-etale topology",
+   "results": "Second reading: 8 hits, including fully faithful sheaf pushforward for cover-dense subsites and open Zariski module pushforward. None is the closed pro-etale geometric assertion. Local source search found the older ModuleCat closed counit is itself sorry and imports the incompatible legacy UpperLowerStar API.",
+   "date": "2026-10-16",
+   "verdict": "No exact proved replacement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedOpenClosedRecollement",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: the descent formula preserves the finite-stage property through the common-stage colimit; derived Hom continuity needed for this descent, as made precise by master TwoColimit.lean, Sorried input (Hom).",
+   "via": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAbelianClosedSupport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.abelian_closed_support",
+  "statement": "theorem abelian_closed_support {X U Z : Scheme.{u}}\n    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)\n    [IsOpenImmersion j] [QuasiCompact j]\n    (hij : Set.range j = (Set.range i)ᶜ) :\n    IsIso (upperStarLowerStarAdjunction Ab.{u + 1} i).counit ∧\n    ∀ F : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1},\n      IsZero ((upperStar Ab.{u + 1} j).obj F) →\n      IsIso ((upperStarLowerStarAdjunction Ab.{u + 1} i).unit.app F)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T192617-L-1080598",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T192617-L-1080598",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

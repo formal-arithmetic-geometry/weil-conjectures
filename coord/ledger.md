@@ -15166,3 +15166,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:21 L: merged deliver/C4/Sheaf.Paper.CondensedSheafExtContinuity (stage 3; reviewer PASS; first push; landing 20261015T192134-L-1051130 (interface); batch 20261015T192132; modules 6; new nodes 6)
 - 19:21 L: merged deliver/E1/Sheaf.Paper.PointLanFiniteProducts (stage 3; reviewer PASS; after a return; landing 20261015T192134-L-1051309 (interface); batch 20261015T192132; modules 1; new nodes 0; change records: coord/changes/point-lan-finite-products-redundant-import.md)
 - 19:22 L: returned deliver/C2/Sheaf.Paper.CondensedQbarLfpLocalTriviality (reviewer RETURN: (reviewer X-c7b77, head c7b77d1e4) E1: CondensedQbarLfpMatrixRefinement.lean invokes flat going-down in its recorded arg)
+- 19:26 L: merged deliver/D3/Sheaf.Paper.CondensedOpenClosedRecollement (stage 3; reviewer PASS; first push; landing 20261015T192617-L-1080598 (interface); batch 20261015T192615; modules 3; new nodes 2)
