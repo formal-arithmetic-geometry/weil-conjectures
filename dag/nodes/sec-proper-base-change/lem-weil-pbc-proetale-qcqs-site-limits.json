@@ -25,7 +25,8 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-proetale-covering",
   "def-weil-pbc-sites-and-cohomology",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-qcqs-subsite"
  ],
  "proof": [
   {
@@ -141,5 +142,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6db169480",
+  "group": "NN",
+  "result": "pass",
+  "note": "Reviewed immutable statements, dependencies, sources, definitions, docstrings, and edge cases. Both modules reproduced clean server-only compilation at 1.4 seconds each. No blocking findings; review.md written. Branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleQcqsSiteLimits",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.qcqs_site_limits",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.qcqs_site_limits"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleQcqsSiteLimits.lean",
+  "statement": "theorem qcqs_site_limits (X : Scheme.{u}) : ∃ h : HasPullbacks (Qcqs X), ∃ J : @Pretopology (Qcqs X) inferInstance h, J.toPrecoverage = qcqsPrecoverage X ∧ PreservesLimitsOfShape WalkingCospan (qcqsInclusion X) ∧ PreservesLimitsOfShape WalkingCospan (qcqsInclusion X ⋙ ProEt.forget X ⋙ Over.forget X) ∧ (∀ (T : Qcqs X) (R : Presieve T), R ∈ qcqsPrecoverage X T → R.map (qcqsInclusion X) ∈ precoverage X ((qcqsInclusion X).obj T)) ∧ (∀ T : Qcqs X, HasFiniteLimits (Over T) ∧ PreservesFiniteLimits (Over.post (X := T) (qcqsInclusion X ⋙ ProEt.forget X) ⋙ Over.iteratedSliceForward ((qcqsInclusion X ⋙ ProEt.forget X).obj T))) ∧ (CompactSpace X → QuasiSeparatedSpace X → HasFiniteLimits (Qcqs X) ∧ PreservesFiniteLimits (qcqsInclusion X ⋙ ProEt.forget X)) ∧ (∀ (T : Qcqs X) (R S : Presieve T), R ∈ qcqsPrecoverage X T → S ∈ Precoverage.finite (Qcqs X) T → R ⊔ S ∈ qcqsPrecoverage X T)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
