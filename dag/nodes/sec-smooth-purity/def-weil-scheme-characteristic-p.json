@@ -4,44 +4,87 @@
   "is": null,
   "from": {
    "node": "def-weil-frobenius-detailed",
-   "place": "its statement (a notion the statement uses)",
+   "place": "the clause in its statement defining a scheme of characteristic p, used by the absolute q-power Frobenius clause of def-weil-frobenius-detailed",
    "via": [
     "def-weil-absolute-frobenius-scheme"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Scheme of characteristic p",
- "statement": "Let $p$ be a prime number. A scheme $X$ is *of characteristic $p$* (also: *has characteristic $p$*, *is in characteristic $p$*) if $p$ is zero in $\\mathcal O_X$, i.e. $p\\cdot1=0$ in the ring of global sections $\\Gamma(X,\\mathcal O_X)$; equivalently $p\\cdot1=0$ in $\\mathcal O_X(U)$ for every open $U\\subseteq X$ (restriction from $X$ to $U$ is a ring homomorphism), equivalently in every stalk $\\mathcal O_{X,x}$, equivalently $X\\to\\operatorname{Spec}\\mathbf Z$ factors (uniquely) through $\\operatorname{Spec}\\mathbf F_p$. The empty scheme is of characteristic $p$ for every $p$.",
+ "statement": "Let $p$ be a prime number. A scheme $X$ [def-pc-scheme] is *of characteristic $p$* (also: *has characteristic $p$*, *is in characteristic $p$*) if $p$ is zero in its structure sheaf [def-weil-locally-ringed-space-morphism]: for every open subset $U\\subseteq X$, the section $p\\cdot1_{\\mathcal O_X(U)}$ is zero in the ring $\\mathcal O_X(U)$. The empty scheme satisfies this condition for every $p$.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Varieties, Section 33.36 'Frobenii' (tag 0CC6), first paragraph, before Definition 33.36.1"
  },
  "stmt_deps": [
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-weil-locally-ringed-space-morphism"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rln 'CharP\\|ExpChar' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Geometry/RingedSpace/",
-   "results": "only AlgebraicGeometry/EllipticCurve/{{IsomOfJ,Weierstrass,NormalForms}}.lean (CharP of the coefficient ring of a Weierstrass curve); no characteristic of a scheme or of a ringed space",
-   "date": "2026-10-09",
+   "tool": "leanfinder",
+   "query": "a scheme is of characteristic p when p times 1 is zero in its structure sheaf or global sections",
+   "results": "Perfection.charP, ExpChar.exists, FirstOrder.Field.charP_of_model_fieldOfChar, ringChar.charP, split_by_characteristic_domain, ringExpChar.expChar, split_by_characteristic, split_by_characteristic_localRing; all concern ring-level characteristic, not a scheme predicate",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CharP, Scheme, Γ, characteristic p",
+   "results": "0 hits; Loogle reports unknown identifier 'Scheme'",
+   "date": "2026-10-16",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'instance.*CharP.*Presheaf\\|CharP.*TopCat\\|CharP (X.presheaf\\|CharP Γ\\|CharP.*\\.obj' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-   "results": "none",
-   "date": "2026-10-09",
+   "query": "CharP|ExpChar|characteristic.*scheme|Scheme.*CharP [subdirectory AlgebraicGeometry]",
+   "results": "15 hits, all CharP uses in Mathlib/AlgebraicGeometry/EllipticCurve/{IsomOfJ,Weierstrass,NormalForms}.lean; no scheme or ringed-space characteristic predicate",
+   "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "scheme of characteristic p defined by p = 0 in global sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "CharP on the ring of global sections of a scheme and factorization through Spec ZMod p",
+   "results": "AffineSpace.toSpecMvPolyIntEquiv and related affine-space/Spec map declarations; none states a scheme-characteristic predicate",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CharP, ringChar, AlgebraicGeometry.Scheme",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CharP.*Γ|CharP.*Scheme|ringChar.*Γ|Spec.*ZMod [subdirectory .]",
+   "results": "15 unrelated hits in number-theory and ZMod files; no scheme-characteristic definition",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "CharP global sections scheme Spec ZMod",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +104,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": null
+ "unit": null,
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-weil-scheme-characteristic-p",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks Section 33.36, tag 0CC6, first paragraph. Kept the prime hypothesis and the condition that p vanishes on every structure-sheaf section ring, including the empty scheme. Removed the imported explanatory equivalence package, named the existing scheme and locally-ringed-space notions, filled the blueprint references, and recorded the required Mathlib searches. No proof route or unit realization changes.",
+  "blueprint": "Realizes the notion of a scheme in characteristic p used by the clause defining the absolute Frobenius in def-weil-frobenius-detailed; the source definition is Stacks Section 33.36, first paragraph before Definition 33.36.1. No proof route or unit realization changes."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-e1fba031c",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-e1fba031c (reviewer sub-agent of L); spot-checked: Reviewed the complete stage-1 delivery, item, cited nodes, chapter route, Stacks tag 0CC6 source, edge cases, DAG duplicates, dependencies, and Mathlib searches. The definition is source-faithful, acyclic, and needs no repairs; review.md records all checks."
+ }
 }
