@@ -23,7 +23,8 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-constructible-finite"
  ],
  "proof": [
   {
@@ -172,5 +173,28 @@
  "unit": "sk-thm-properbasechange",
  "tool_uses": [
   "lem-kun-leray-bdd"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricFiberFinite",
+  "declaration": "AlgebraicGeometry.Etale.isIso_geometricFiber_finite",
+  "declarations": [
+   "AlgebraicGeometry.Etale.isIso_geometricFiber_finite",
+   "AlgebraicGeometry.Etale.geometricFiber_finite_stalk_formula"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricFiberFinite.lean",
+  "statement": "theorem isIso_geometricFiber_finite (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) (K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) (IsPullback.of_hasPullback f y).toCommSq).app K)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Two clauses of the corollary: derived exchange and its cohomological geometric-stalk formula. The latter explicitly supplies endpoint comparison isomorphisms and transports the specified degree-q exchange map. Uses the existing finite-sheaf node def-constructible-finite, added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9de99aa9e",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement dependencies, source passages, exact signatures, edge cases, and pilot gates. Server-only compilation reproduced cleanly in 3.9 seconds. No corrections required."
+ }
 }
