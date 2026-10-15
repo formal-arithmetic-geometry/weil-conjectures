@@ -13,16 +13,17 @@
  },
  "kind": "statement",
  "title": "Pro-etale Tor amplitude and bounded flat model",
- "statement": "Let A be a commutative ring, let X be a scheme, let a b : ℤ with a ≤ b, and let K be an object of the derived category of sheaves of A-modules on the small pro-etale site of X such that K is bounded constructible. Then K has Tor amplitude in [a,b] if and only if there exists a cochain complex P of such sheaves with every term flat, with P^q zero for q outside [a,b], and with K isomorphic to the image of P in the derived category. Here the site and bounded constructibility are as in [def-weil-pbc-proetale-site] and [def-weil-finite-torsion-constructibility], and Tor amplitude is [def-weil-finite-tor-amplitude].",
+ "statement": "Let $X : \\mathrm{Scheme}^{u}$ and let $\\mathcal A : \\mathrm{Type}\\,u'$ be a concrete Grothendieck abelian category [def-sp-grothendieck-abelian] whose morphisms and underlying sets lie in universe $u+1$. Assume $\\mathcal A$ has a symmetric monoidal closed structure, the tensor product is additive in both variables, and $\\mathcal A$ admits functorial flat resolutions. Use $\\mathcal A$-valued sheaves on the small pro-etale site [def-weil-pbc-small-proetale-site], and the derived category [def-weil-abstract-derived-category] $D(\\mathrm{Sh}(X_{\\mathrm{proet}},\\mathcal A))$. Let $a\\le b$ be integers and $K$ an object of this derived category satisfying the etale-origin bounded constructibility predicate [def-sf-categorical-proetale-constructibility]. Then $K$ has Tor amplitude in $[a,b]$ in the categorical sense [def-sf-categorical-proetale-tor-amplitude] if and only if there exists a cochain complex $P$ of $\\mathcal A$-valued pro-etale sheaves such that every $P^q$ is flat (tensoring with it preserves monomorphisms), $P^q$ is zero whenever $q<a$ or $b<q$, and $K$ is isomorphic to $Q(P)$ in the derived category. Here $Q$ is localization of cochain complexes at quasi-isomorphisms. Bounded constructibility here means precisely the source's etale-origin predicate; no identification with the intrinsic finite-torsion constructibility predicate is asserted for arbitrary coefficients.",
  "source": {
   "document": "WeilConjectures/SixFunctors/ProEtale/Derived/FlatModel.lean",
   "place": "theorem torAmplitudeIn_iff_exists_flatModel, lines 56-70"
  },
  "stmt_deps": [
-  "def-weil-finite-tor-amplitude",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-pbc-proetale-site",
-  "lem-exc-constant-inverse-image-flat"
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-sf-categorical-proetale-constructibility",
+  "def-sf-categorical-proetale-tor-amplitude"
  ],
  "proof": [],
  "proof_deps": [],
@@ -60,11 +61,14 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-sf-flat-model",
  "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.FlatModel",
+  "declaration": "AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_iff_exists_flatModel",
+  "statement": "theorem torAmplitudeIn_iff_exists_flatModel (a b : ℤ) (_hab : a ≤ b)\n    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))\n    (_hK : DerivedCategory.boundedConstructible A X K) :\n    torAmplitudeIn A X a b K ↔\n      ∃ P : CochainComplex (Sheaf (Scheme.ProEt.topology X) A) ℤ,\n        ((∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧ ∀ q : ℤ, ObjectProperty.flat (P.X q)) ∧\n          Nonempty (K ≅ (_root_.DerivedCategory.Q).obj P)",
   "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_iff_exists_flatModel"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-14 23:58 UTC for group NR, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_7d675a26.jsonl.gz: The declaration gives the Tor-amplitude equivalence and exactly the bounded flat complex and derived-category isomorphism clauses."
+  "by": "Q21",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact existing source theorem, with all ambient binders stated in the corrected node: A is a concrete Grothendieck abelian coefficient CATEGORY, not a ring. Its monoidal and functorial-flat-resolution hypotheses are explicit. boundedConstructible is precisely the source etale-origin essential image, not the recorded intrinsic finite-torsion predicate. The two new definition records reuse the exact source predicates, without any copied definitions or claimed coefficient-encoding equivalence. See statement_change and its complete citer audit."
  },
  "lean_audit": {
   "master": {
@@ -91,5 +95,37 @@
    "missing": [],
    "open": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-16",
+  "by": "Q21 stage 2",
+  "old_statement": "Let A be a commutative ring, let X be a scheme, let a b : ℤ with a ≤ b, and let K be an object of the derived category of sheaves of A-modules on the small pro-etale site of X such that K is bounded constructible. Then K has Tor amplitude in [a,b] if and only if there exists a cochain complex P of such sheaves with every term flat, with P^q zero for q outside [a,b], and with K isomorphic to the image of P in the derived category. Here the site and bounded constructibility are as in [def-weil-pbc-proetale-site] and [def-weil-finite-torsion-constructibility], and Tor amplitude is [def-weil-finite-tor-amplitude].",
+  "what": "The node changed the source coefficient category into a commutative ring and silently identified the source etale-origin boundedConstructible with def-weil-finite-torsion-constructibility, which is intrinsic and defined only at specified finite-torsion coefficient rings. Its cited finite-Tor node also does not supply the arbitrary-coefficient categorical interval predicate. Reading the full source binders and Constructible.lean shows explicit concrete Grothendieck abelian, symmetric monoidal closed, additive tensor and functorial-flat-resolution assumptions. Correct the internal source-attachment node to that exact source statement, preserving every conclusion and all source cases; do not narrow the theorem to finite rings or assert an unproved encoding identification.",
+  "source": {
+   "document": "WeilConjectures/SixFunctors/ProEtale/Derived/FlatModel.lean",
+   "place": "theorem torAmplitudeIn_iff_exists_flatModel, lines 56-70"
+  },
+  "citers": [
+   {
+    "id": "lem-sf-flat-model",
+    "holds": false,
+    "note": "The parent statement is unchanged and not refuted. Its claimed direct exact application is not justified: it uses intrinsic finite-torsion constructibility and the recorded constant-ring SheafOfModules category, whereas this source theorem uses etale-origin categorical sheaves and explicit flat-resolution structure. A finite-stage constructibility and coefficient-encoding bridge is required (cf. lem-sf-proetale-constructible-origin). The old node already hid this mismatch."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-finite-tor-amplitude",
+   "def-weil-finite-torsion-constructibility",
+   "def-weil-pbc-proetale-site",
+   "lem-exc-constant-inverse-image-flat"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0452626c0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Wrote review.md. Verified source signatures, hypotheses, universes, dependencies, new predicates, edge cases, and complete citer audit. Independent scompile local-overlay checks passed. The sole citer’s required coefficient/constructibility bridge is explicitly flagged holds:false; no delivery repair is needed.",
+  "statement_corrected": true
  }
 }

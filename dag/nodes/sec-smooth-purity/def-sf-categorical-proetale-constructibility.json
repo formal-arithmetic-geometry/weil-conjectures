@@ -1,0 +1,99 @@
+{
+ "id": "def-sf-categorical-proetale-constructibility",
+ "kind": "definition",
+ "title": "Etale-origin constructibility for categorical pro-etale coefficients",
+ "status": "split",
+ "statement": "Let $X : \\mathrm{Scheme}^{u}$ and $\\mathcal A : \\mathrm{Type}\\,u'$ be a concrete Grothendieck abelian category [def-sp-grothendieck-abelian], with morphisms and underlying sets in universe $u+1$. Use the small etale site [def-weil-pbc-etale-site], the small pro-etale site [def-weil-pbc-small-proetale-site], and derived categories [def-weil-abstract-derived-category] of $\\mathcal A$-valued sheaves. Let $\\nu^*$ be the canonical comparison inverse image, the left Kan extension along the inclusion of the etale site into the pro-etale site followed by sheafification, and $D(\\nu^*)$ its termwise induced derived functor. An object $K\\in D(\\mathrm{Sh}(X_{\\mathrm{proet}},\\mathcal A))$ satisfies categorical etale-origin bounded constructibility if there exist $L\\in D(\\mathrm{Sh}(X_{\\mathrm{et}},\\mathcal A))$ and an isomorphism $D(\\nu^*)L\\cong K$, where $L$ has bounded cohomology and every cohomology sheaf has a finite partition of $X$ by constructible locally closed immersed subschemes, on each of which its pullback is etale locally constant with finitely generated geometric stalks. Finitely generated here is ConcreteCategory.IsFinitelyGenerated for the specified concrete category; it does not mean finite underlying set for arbitrary coefficients. The finite partition may be different in each cohomological degree. Constructible subsets and locally closed subsets mean [def-weil-constructible-subset] and [def-weil-locally-closed-subset]. This is the source's essential-image definition for arbitrary categorical coefficients, not an identification with intrinsic pro-etale constructibility.",
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-constructible-subset",
+  "def-weil-locally-closed-subset"
+ ],
+ "source": {
+  "document": "WeilConjectures/SixFunctors/ProEtale/Derived/Constructible.lean",
+  "place": "DerivedCategory.boundedConstructible, lines 78-88; CategoryTheory/DerivedCategory/Constructible.lean; ConstructibleSheaf/Defs.lean, IsConstructibleSheaf"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded constructible pro-etale complexes defined as the essential image of bounded constructible etale complexes",
+   "results": "Service unavailable (Internal Server Error), recorded by msearch.py. No mathematical verdict inferred.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible objects of etale origin in derived category of pro-etale sheaves",
+   "results": "Eight hits for smallEtaleTopology, etaleTopology and other site definitions; no bounded-constructibility predicate.",
+   "date": "2026-10-16",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|torAmplitudeIn|plusEtaleOrigin",
+   "results": "msearch.py: no Mathlib hits. Direct rg of the DAG, Sheaf and upstream sources found the exact generic predicates in ProEtale/Derived/Constructible.lean and TorAmplitude.lean; existing DAG predicates concern fixed-ring or ringed-site finite coefficients and are not these generic definitions.",
+   "date": "2026-10-16",
+   "verdict": "existing upstream declarations; no new Lean definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-proetale-flat-model",
+  "date": "2026-10-16",
+  "group": "Q21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-flat-model",
+   "place": "The categorical pro-etale flat-model source theorem: Etale-origin constructibility for categorical pro-etale coefficients",
+   "via": [
+    "lem-sf-proetale-flat-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-flat-model",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.Constructible",
+  "declaration": "AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible",
+  "statement": "def DerivedCategory.boundedConstructible :\n    ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))",
+  "branch": "slopmaster2",
+  "by": "Q21",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Reuses the exact generic source definition. The DAG has intrinsic finite-torsion and finite-ring etale-origin predicates, but neither is this arbitrary concrete-category essential image. The source warns explicitly against identifying these notions at arbitrary coefficients. No module or duplicate definition is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0452626c0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0452626c0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Wrote review.md. Verified source signatures, hypotheses, universes, dependencies, new predicates, edge cases, and complete citer audit. Independent scompile local-overlay checks passed. The sole citer’s required coefficient/constructibility bridge is explicitly flagged holds:false; no delivery repair is needed."
+ }
+}

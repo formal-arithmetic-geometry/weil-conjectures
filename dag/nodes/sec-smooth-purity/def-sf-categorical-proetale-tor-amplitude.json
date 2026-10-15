@@ -1,0 +1,96 @@
+{
+ "id": "def-sf-categorical-proetale-tor-amplitude",
+ "kind": "definition",
+ "title": "Tor amplitude for categorical pro-etale coefficients",
+ "status": "split",
+ "statement": "Let $X : \\mathrm{Scheme}^{u}$ and $\\mathcal A : \\mathrm{Type}\\,u'$ be a Grothendieck abelian category [def-sp-grothendieck-abelian] with morphisms in universe $u+1$, equipped with a symmetric monoidal closed structure, additive tensor product in both variables and functorial flat resolutions. On $\\mathcal C=\\mathrm{Sh}(X_{\\mathrm{proet}},\\mathcal A)$, using the small pro-etale site [def-weil-pbc-small-proetale-site], sheafify the objectwise tensor and derive it using K-flat resolutions; this is the source's canonical derived tensor on $D(\\mathcal C)$ [def-weil-abstract-derived-category]. For arbitrary integers $a,b$, define categorical Tor amplitude in $[a,b]$ for $K\\in D(\\mathcal C)$ by requiring that for every $F\\in\\mathcal C$, the cohomology of $K\\otimes^L F[0]$ is zero in every degree $q<a$ or $b<q$. No order hypothesis $a\\le b$ belongs to this predicate (the flat-model theorem assumes it separately), and the test sheaf is arbitrary, without constructibility or flatness assumptions.",
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "WeilConjectures/SixFunctors/ProEtale/Derived/TorAmplitude.lean",
+  "place": "abbrev torAmplitudeIn, lines 73-77; CategoryTheory/DerivedCategory/TorAmplitude.lean, def torAmplitudeIn"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complex of sheaves has Tor amplitude in an integer interval if and only if it is isomorphic to a bounded complex of flat sheaves",
+   "results": "Service unavailable (Internal Server Error), recorded by msearch.py; no mathematical verdict inferred.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded resolution by flat sheaves and vanishing derived tensor outside an interval",
+   "results": "Derived-category support and projective Tor-vanishing lemmas only; no categorical Tor-amplitude definition. Exact generic upstream specialization found by direct source search.",
+   "date": "2026-10-16",
+   "verdict": "no Mathlib match; reuse exact upstream declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|torAmplitudeIn|plusEtaleOrigin",
+   "results": "msearch.py: no Mathlib hits. Direct rg of the DAG, Sheaf and upstream sources found the exact generic predicates in ProEtale/Derived/Constructible.lean and TorAmplitude.lean; existing DAG predicates concern fixed-ring or ringed-site finite coefficients and are not these generic definitions.",
+   "date": "2026-10-16",
+   "verdict": "existing upstream declarations; no new Lean definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-proetale-flat-model",
+  "date": "2026-10-16",
+  "group": "Q21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-flat-model",
+   "place": "The categorical pro-etale flat-model source theorem: Tor amplitude for categorical pro-etale coefficients",
+   "via": [
+    "lem-sf-proetale-flat-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-flat-model",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude",
+  "declaration": "AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn",
+  "statement": "abbrev torAmplitudeIn (a b : ℤ) :\n    ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))",
+  "branch": "slopmaster2",
+  "by": "Q21",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact source specialization of DerivedCategory.torAmplitudeIn to categorical pro-etale sheaves, with the source derived tensor. Existing def-weil-proetale-tor-amplitude instead uses the recorded constant-ring SheafOfModules encoding and universal cochain representatives; it is not this definition on arbitrary monoidal coefficient categories. No second implementation is written."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0452626c0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0452626c0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Wrote review.md. Verified source signatures, hypotheses, universes, dependencies, new predicates, edge cases, and complete citer audit. Independent scompile local-overlay checks passed. The sole citer’s required coefficient/constructibility bridge is explicitly flagged holds:false; no delivery repair is needed."
+ }
+}

@@ -20,7 +20,8 @@
   "lem-pur-derived-change-of-rings",
   "lem-pc-pre-derived-adjoint-functors-general",
   "def-weil-pbc-derived-inverse-limit",
-  "def-weil-pbc-adic-coefficient-datum"
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-restriction-of-scalars-exact"
  ],
  "proof": [],
  "proof_deps": [],
@@ -135,5 +136,43 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-36de1cf3d (reviewer sub-agent of L); spot-checked: Read the full definition, all eight dependency statements, cited sources, report, and unit/chapter route. Verified finite-level tensor adjunctions, quotient cocycle, completed-coefficient tower witness, small cases, and exact master coefficient categories/base-change morphisms. No repairs or new nodes needed. review.md records the checks and inherited DAG cycles outside this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedDVRTower",
+  "declaration": "WeilConjectures.NormalizedDVRTower",
+  "file": "lean/Sheaf/Paper/NormalizedDVRTower.lean",
+  "statement": "structure NormalizedDVRTower (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.normalizedDVRRestrictionCompIso",
+   "WeilConjectures.normalizedDVRQuotient",
+   "WeilConjectures.normalizedDVRModules",
+   "WeilConjectures.normalizedDVRDerived",
+   "WeilConjectures.normalizedDVRModuleRes",
+   "WeilConjectures.normalizedDVRModuleRes_exact",
+   "WeilConjectures.normalizedDVRModuleRes_limits",
+   "WeilConjectures.normalizedDVRModuleRes_colimits",
+   "WeilConjectures.normalizedDVRRes",
+   "WeilConjectures.normalizedDVRResUnit",
+   "WeilConjectures.normalizedDVRResComp",
+   "WeilConjectures.normalizedDVRDerivedTowers",
+   "WeilConjectures.normalizedDVRResCompleted",
+   "WeilConjectures.normalizedDVRResCompletedComp",
+   "WeilConjectures.normalizedDVRTowerEvaluation",
+   "WeilConjectures.normalizedDVRTowerTransition",
+   "WeilConjectures.NormalizedDVRTower"
+  ],
+  "note": "Second reading replaces arbitrary restriction/tensor fields and unrelated towerLevel by canonical quotient restrictions, their normalized derived comparisons, actual derived evaluation and transition compatibility. Normalization is the equivalent universal Hom property for the specified transition under the canonical derived tensor-restriction adjunction. The named finite-restriction exactness helper states the explicit exactness clause of this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-78a806643",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all nine dependencies, source correspondence, canonical maps, normalization equivalence, tower coherence, universes, edge cases, docstrings, and verbatim signature. Immutable module compiled successfully through scompile.py. No fixes needed; branch head unchanged."
  }
 }

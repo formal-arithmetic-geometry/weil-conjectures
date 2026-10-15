@@ -15,7 +15,16 @@
  "stmt_deps": [
   "lem-sf-proetale-flat-model",
   "lem-sf-etale-flat-model",
-  "lem-sf-etale-flat-constructible"
+  "lem-sf-etale-flat-constructible",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-pbc-proetale-site",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-etale-constructible-sheaf"
  ],
  "proof": [
   {
@@ -114,5 +123,30 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-78f0f9d2a (reviewer sub-agent of L); spot-checked: The three source theorems and all hypotheses were read and verified. Repairable faults: all three new nodes lacked complete created provenance; both étale nodes cited pro-étale site/constructibility definitions for étale statements. Corrected whole-node JSON files are under fixes/dag/nodes/sec-smooth-purity/, with étale dependencies and complete metadata.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCoefficientFlatModel",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCoefficient_torAmplitude_iff_flatModel",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteCoefficient_torAmplitude_iff_flatModel",
+   "AlgebraicGeometry.Etale.finiteCoefficient_hasTorAmplitude_iff_flatModel",
+   "AlgebraicGeometry.Etale.finiteCoefficient_exists_flatConstructibleModel",
+   "AlgebraicGeometry.Etale.finiteCoefficient_exists_boundedFlatConstructibleModel"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCoefficientFlatModel.lean",
+  "statement": "theorem finiteCoefficient_torAmplitude_iff_flatModel (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u}) [∀ x : T, Invertible (l : T.residueField x)] (K : proEtaleDerivedCategory T (Padic.coefficientExtensionRing l E n)) (_hK : intrinsicFiniteTorsionConstructible l E n hn T K) (a b : ℤ) (_hab : a ≤ b) : HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E n) K a b ↔ ∃ P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T (Padic.coefficientExtensionRing l E n))) ℤ, (∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology T) (R := proEtaleConstantRing T (Padic.coefficientExtensionRing l E n)) (P.X q)) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧ Nonempty (K ≅ DerivedCategory.Q.obj P)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Four sorry-only declarations render the pro-etale equivalence, the etale equivalence, the Noetherian constructible variant, and its finite-Tor consequence. Uses the recorded ringed-site pro-etale category, intrinsic finite-torsion constructibility, and HasProEtaleTorAmplitude. The etale clauses use the canonical ULift of the same A_{E,n} to meet the established ModuleCat universe convention. Only already landed definition nodes were added to stmt_deps; no mathematical statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-64851430d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all clauses, dependency declarations, sources, universes, edge cases, docstrings, sorry-only proofs, and verbatim statement metadata. Immutable module compiled cleanly through scompile.py in sandbox and library modes. No correction needed; project clones and branch head unchanged."
  }
 }

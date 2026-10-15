@@ -295,5 +295,42 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-fdd348e78 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked all seven steps and three new nodes against Stacks 0991, 0993, 0GLZ and 0F6D. Verified edge cases, cited statements, nonredundancy and coefficient scope; no new circular dependency found. Repaired required metadata in all three new-node JSON files. Mathematical statements unchanged. Detailed checks and accepted tool uses are in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleStalkConservative",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficient_cover_detection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCoefficientSliceRestriction_exact",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientSliceRestriction_additive",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientSliceRestriction_limits",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientSliceRestriction_colimits",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientSlice_hasDerivedCategory",
+   "AlgebraicGeometry.ProEtale.finiteCoefficient_cover_detection",
+   "AlgebraicGeometry.ProEtale.finiteCoefficient_affine_basis_detection",
+   "AlgebraicGeometry.ProEtale.finiteCoefficient_affine_open_basis_detection",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientCohomologyStalk",
+   "AlgebraicGeometry.ProEtale.finiteCoefficient_etale_origin_stalk_detection",
+   "AlgebraicGeometry.Scheme.proEtale_abelian_cover_zero_detection",
+   "AlgebraicGeometry.Scheme.proEtale_abelian_affine_basis_zero_detection",
+   "AlgebraicGeometry.Scheme.proEtaleAllFunctionsPresheaf",
+   "AlgebraicGeometry.Scheme.proEtaleConstantsToAllFunctions",
+   "AlgebraicGeometry.Scheme.proEtaleFunctionsQuotient",
+   "AlgebraicGeometry.Scheme.proEtaleFunctionsQuotient_counterexample"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleStalkConservative.lean",
+  "statement": "theorem finiteCoefficient_cover_detection {ι : Type v} (U : ι → T.ProEt) (hU : Presieve.ofArrows (fun i ↦ (U i).left) (fun i ↦ (U i).hom) ∈ Scheme.proetalePrecoverage T) : (∀ (F G : FiniteCoefficientDerivedCategory T Λ) (f : F ⟶ G), IsIso f ↔ ∀ i : ι, IsIso ((SheafOfModules.overFunctor.{u + 1} (finiteCoefficientRingSheaf T Λ) (U i)).mapDerivedCategory.map f)) ∧ (∀ K : CochainComplex (FiniteCoefficientModules T Λ) ℤ, K.Acyclic ↔ ∀ n : ℤ, IsZero (K.homology n)) ∧ (∀ H : FiniteCoefficientModules T Λ, IsZero H ↔ ∀ i : ι, IsZero ((SheafOfModules.overFunctor.{u + 1} (finiteCoefficientRingSheaf T Λ) (U i)).obj H))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "All four numbered clauses are stated by the listed theorems: covering locality and acyclicity; affine and affine-open-cover cohomology-sheaf section tests; geometric-stalk detection on etale-origin D+ and arbitrary ambient Dbc morphisms; and the constructed all-functions quotient counterexample. Slice restriction and functorial cohomology stalks are canonical helper constructions for these clauses. No statement correction or new node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8bcb918d5",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all four clauses, seven statement dependencies, source passages, exact declarations, universes, edge cases, and pilot gates. Verbatim statement matches. Immutable module compiled cleanly through scompile.py in both modes. No findings or fixes; branch unchanged."
  }
 }
