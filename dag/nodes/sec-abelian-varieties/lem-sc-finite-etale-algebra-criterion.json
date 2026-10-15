@@ -100,11 +100,25 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-def-av-group-scheme",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Defs",
+  "declaration": "AlgebraicGeometry.etale_SpecMap_algebraMap_tfae",
   "declarations": [
    "AlgebraicGeometry.etale_SpecMap_algebraMap_tfae",
    "AlgebraicGeometry.Scheme.Hom.etale_iff_etale_ΓAlgebra_of_isFinite"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-15 02:44 UTC for group NL, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_7d675a26.jsonl.gz: The first gives the three equivalent conditions for a finite algebra over a field; the second gives the"
+  "statement": "theorem etale_SpecMap_algebraMap_tfae (A : Type u) [CommRing A] [Algebra K A]\n    [Module.Finite K A] :\n    List.TFAE [Etale (Spec.map (CommRingCat.ofHom (algebraMap K A))), Subsingleton Ω[A⁄K],\n      ∃ (I : Type u) (_ : Finite I) (L : I → Type u) (_ : ∀ i, Field (L i))\n        (_ : ∀ i, Algebra K (L i)) (_ : A ≃ₐ[K] Π i, L i),\n        ∀ i, Module.Finite K (L i) ∧ Algebra.IsSeparable K (L i)]",
+  "branch": "slopmaster2",
+  "by": "NS",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "The first declaration states all three equivalent conditions for a finite commutative algebra over a field. The second specializes to every finite scheme over that field, hence in particular every finite group scheme, using the canonical structure-map algebra on global sections; Algebra.Etale.iff_exists_algEquiv_prod identifies its algebraic condition with the finite separable product condition. Both existing signatures and docstrings were read; no duplicate module is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fd05a8dc5",
+  "group": "NS",
+  "result": "pass",
+  "note": "Exact declarations match the node; dependencies, edge cases, docstrings, statement text, and server-only compilation verified. No fixes required."
  }
 }

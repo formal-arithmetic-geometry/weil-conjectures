@@ -243,5 +243,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_immersion_inverseImage_preservesLimits",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleImmersionLimitPreservation.lean",
+  "statement": "theorem proEtale_immersion_inverseImage_preservesLimits {X Y : Scheme.{u}} (f : Y ⟶ X) [IsImmersion f] : PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage f (Type (u + 1))) ∧ PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}) ∧ ∀ R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}, ∃ (_ : (proEtaleModuleInverseImage f R).Additive), PreservesFiniteLimits (proEtaleModuleInverseImage f R) ∧ PreservesFiniteColimits (proEtaleModuleInverseImage f R) ∧ PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleModuleInverseImage f R) ∧ Nonempty (proEtaleModuleInverseImage f R ⋙ SheafOfModules.toSheaf _ ≅ SheafOfModules.toSheaf _ ⋙ proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}) ∧ (∃ (eR : (proEtaleSheafInverseImage f (Type (u + 1))).obj ((sheafCompose (ProEt.topology X) (CategoryTheory.forget CommRingCat.{u + 1})).obj R) ≅ (sheafCompose (ProEt.topology Y) (CategoryTheory.forget CommRingCat.{u + 1})).obj ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)) (eM : proEtaleModuleInverseImage f R ⋙ SheafOfModules.toSheaf _ ⋙ sheafCompose (ProEt.topology Y) (CategoryTheory.forget AddCommGrpCat.{u + 1}) ≅ (SheafOfModules.toSheaf _ ⋙ sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})) ⋙ proEtaleSheafInverseImage f (Type (u + 1))), ∀ (M : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) (T : Sheaf (ProEt.topology X) (Type (u + 1))) (a : T ⟶ (sheafCompose (ProEt.topology X) (CategoryTheory.forget CommRingCat.{u + 1})).obj R) (b t : T ⟶ (SheafOfModules.toSheaf _ ⋙ sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj M), (∀ (U : X.ProEtᵒᵖ) (x : T.obj.obj U), @id (M.val.obj U) (t.hom.app U x) = @id (R.obj.obj U) (a.hom.app U x) • @id (M.val.obj U) (b.hom.app U x)) → ∀ (V : Y.ProEtᵒᵖ) (x : ((proEtaleSheafInverseImage f (Type (u + 1))).obj T).obj.obj V), @id (((proEtaleModuleInverseImage f R).obj M).val.obj V) ((eM.inv.app M).hom.app V (((proEtaleSheafInverseImage f (Type (u + 1))).map t).hom.app V x)) = @id (((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R).obj.obj V) (eR.hom.hom.app V (((proEtaleSheafInverseImage f (Type (u + 1))).map a).hom.app V x)) • @id (((proEtaleModuleInverseImage f R).obj M).val.obj V) ((eM.inv.app M).hom.app V (((proEtaleSheafInverseImage f (Type (u + 1))).map b).hom.app V x))) ∧ ∀ (S : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S), ∃ (P : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) ⥤ SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)) (hobj : ∀ M, P.obj M = SheafOfModules.changeOfRings.{u, u + 1, u + 1} c.hom ((proEtaleModuleInverseImage f R).obj M)), (∀ (M N : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) (a : M ⟶ N), P.map a = eqToHom (hobj M) ≫ SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} c.hom ((proEtaleModuleInverseImage f R).obj M) ((proEtaleModuleInverseImage f R).map a) ≫ eqToHom (hobj N).symm) ∧ ∃ (_ : P.Additive), PreservesFiniteLimits P ∧ PreservesFiniteColimits P ∧ PreservesLimitsOfSize.{u + 1, u + 1} P",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-45a20d434",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, seven dependencies, sources, universes, edge cases, docstrings, report sections, and verbatim signature. Server-only compilation against the side overlay passed cleanly in 2.9 seconds. No substantive or mechanical faults found; branch head unchanged."
  }
 }
