@@ -4,13 +4,10 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **826**, closure **6**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **842**, closure **5**, holes in definitions **1**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
-- `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup::<anonymous:instance : (derivedIdeal I).IsHopfIdeal k>` (instance, line 403)
-- `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup::<anonymous:instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I))>` (instance, line 411)
-- `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie::AlgebraicGeometry.GeneralLinearGroup.toMatrixLieHom` (def, line 110)
 - `WeilConjectures.RingTheory.ProEtale.ClosedLift::Algebra.ClosedLift.isFiltered_index` (instance, line 142)
 
 Definitions with undetermined data (class-1 exceptions in `coord/hollow-definitions.md`):
@@ -20,24 +17,24 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 616 | 6 |
-| WeilConjectures | 210 | 0 |
+| Sheaf | 616 | 5 |
+| WeilConjectures | 226 | 0 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2179 | 83 | 2096 | 7 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 2121 | 81 | 2040 | 7 | 1 |
-| 660345513 (Application of proof-dependency imports) | closure | 1980 | 6 | 1974 | 5 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2251 | 225 | 2026 | 61 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2193 | 223 | 1970 | 61 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1958 | 5 | 1953 | 28 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3374 |
+| proved | 3379 |
 | decomposed | 48 |
-| moved | 3910 |
+| moved | 3918 |
 | pruned | 119 |
-| other | 474 |
+| other | 508 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -64,10 +61,10 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | F1 | 134 | 135 | 103 | 32 | 69/134 (51.5%) |
 | F2 | 133 | 134 | 98 | 36 | 61/133 (45.9%) |
 | F3 | 86 | 87 | 56 | 31 | 40/86 (46.5%) |
-| F4 | 50 | 43 | 36 | 7 | 25/50 (50.0%) |
+| F4 | 51 | 44 | 36 | 8 | 25/51 (49.0%) |
 | G1 | 135 | 136 | 111 | 25 | 74/135 (54.8%) |
-| G2 | 132 | 131 | 88 | 43 | 60/132 (45.5%) |
-| G3 | 97 | 100 | 66 | 34 | 45/97 (46.4%) |
+| G2 | 135 | 133 | 89 | 44 | 61/135 (45.2%) |
+| G3 | 99 | 102 | 66 | 36 | 45/99 (45.5%) |
 | G4 | 52 | 44 | 28 | 16 | 18/52 (34.6%) |
 | H1 | 130 | 128 | 105 | 23 | 73/130 (56.2%) |
 | H2 | 109 | 106 | 88 | 18 | 64/109 (58.7%) |
@@ -77,7 +74,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | J2 | 102 | 104 | 70 | 34 | 51/102 (50.0%) |
 | J3 | 117 | 123 | 77 | 46 | 54/117 (46.2%) |
 | J4 | 59 | 51 | 39 | 12 | 26/59 (44.1%) |
-| K1 | 116 | 129 | 87 | 42 | 58/116 (50.0%) |
+| K1 | 117 | 130 | 87 | 43 | 59/117 (50.4%) |
 | K2 | 119 | 117 | 83 | 34 | 64/119 (53.8%) |
 | K3 | 106 | 106 | 75 | 31 | 55/106 (51.9%) |
 | K4 | 60 | 44 | 35 | 9 | 24/60 (40.0%) |
@@ -102,25 +99,25 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | R3 | 93 | 90 | 65 | 25 | 42/93 (45.2%) |
 | R4 | 56 | 47 | 41 | 6 | 26/56 (46.4%) |
 | S1 | 123 | 125 | 104 | 21 | 68/123 (55.3%) |
-| S2 | 121 | 125 | 98 | 27 | 63/121 (52.1%) |
+| S2 | 123 | 127 | 101 | 26 | 65/123 (52.8%) |
 | S3 | 102 | 97 | 63 | 34 | 48/102 (47.1%) |
 | S4 | 45 | 43 | 35 | 8 | 24/45 (53.3%) |
 | T1 | 108 | 108 | 80 | 28 | 55/108 (50.9%) |
 | T2 | 131 | 153 | 97 | 56 | 64/131 (48.9%) |
-| T3 | 98 | 93 | 75 | 18 | 52/98 (53.1%) |
-| T4 | 65 | 58 | 38 | 20 | 24/65 (36.9%) |
+| T3 | 99 | 94 | 77 | 17 | 53/99 (53.5%) |
+| T4 | 66 | 58 | 38 | 20 | 24/66 (36.4%) |
 | U1 | 125 | 126 | 92 | 34 | 62/125 (49.6%) |
 | U2 | 135 | 129 | 92 | 37 | 63/135 (46.7%) |
 | U3 | 95 | 97 | 69 | 28 | 49/95 (51.6%) |
 | U4 | 51 | 45 | 40 | 5 | 28/51 (54.9%) |
-| V1 | 112 | 105 | 85 | 20 | 55/112 (49.1%) |
+| V1 | 113 | 105 | 85 | 20 | 55/113 (48.7%) |
 | V2 | 125 | 122 | 89 | 33 | 61/125 (48.8%) |
 | V3 | 106 | 110 | 74 | 36 | 55/106 (51.9%) |
 | V4 | 49 | 43 | 36 | 7 | 24/49 (49.0%) |
 | W2 | 113 | 118 | 78 | 40 | 54/113 (47.8%) |
 | W3 | 83 | 83 | 58 | 25 | 40/83 (48.2%) |
 | W4 | 48 | 43 | 36 | 7 | 27/48 (56.2%) |
-| X2 | 119 | 116 | 94 | 22 | 63/119 (52.9%) |
+| X2 | 120 | 117 | 95 | 22 | 64/120 (53.3%) |
 | X3 | 100 | 95 | 62 | 33 | 43/100 (43.0%) |
 | XR33076d633fce5c89 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XR701758115908ba19 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
@@ -138,21 +135,21 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Y2 | 108 | 110 | 98 | 12 | 59/108 (54.6%) |
 | Y3 | 103 | 90 | 56 | 34 | 45/103 (43.7%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
-| launcher prover | 7 | 6 | 3 | 3 | 3/7 (42.9%) |
+| launcher prover | 41 | 9 | 7 | 2 | 5/41 (12.2%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
 
 | module | distance | holes | group |
 |---|---:|---:|---|
-| Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawClassVanishing | 15 | 1 | H3 |
-| Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality | 16 | 1 | F2 |
-| Sheaf.AlgebraicGeometry.PicardH1ProductSpanningBypass | 16 | 1 | — |
-| Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueBridge | 24 | 1 | X2 |
-| Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 34 | 1 | F2 |
-| Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates | 50 | 1 | T4 |
+| Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality | 16 | 1 | T3 |
+| Sheaf.AlgebraicGeometry.CartesianRawClassChartRepresentative | 17 | 1 | R4 |
+| Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 37 | 1 | E4 |
+| Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonNaturality | 51 | 1 | H4 |
+| Sheaf.AlgebraicGeometry.QCohTensorResolutionChartHomologyNaturality | 51 | 1 | H4 |
 
 Modules pruned since the imports baseline:
 
+- `Sheaf.Algebra.Category.ModuleCat.RingScalarExtension`
 - `Sheaf.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel`
 - `Sheaf.Algebra.Category.ModuleCat.Sheaf.HomIsSheaf`
 - `Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels`
@@ -188,86 +185,163 @@ Modules pruned since the imports baseline:
 - `Sheaf.Algebra.Module.QuotientPrimaryComponentNoTorsion`
 - `Sheaf.Algebra.ProjectiveDimensionWellDefined`
 - `Sheaf.Algebra.Schanuel`
+- `Sheaf.Algebra.TorDimensionShifting`
+- `Sheaf.AlgebraicGeometry.AbelianSheavesGModules`
 - `Sheaf.AlgebraicGeometry.AffineCohomologyLocalization`
+- `Sheaf.AlgebraicGeometry.AffineComplementFiniteOnIntegralCurve`
+- `Sheaf.AlgebraicGeometry.AffineDerivedConcentration`
 - `Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit`
 - `Sheaf.AlgebraicGeometry.AffineKoszulHomAlternatingCech`
+- `Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal`
 - `Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent`
 - `Sheaf.AlgebraicGeometry.AffineTruncationKernelFiniteLocallyFree`
 - `Sheaf.AlgebraicGeometry.AffineTruncationKernelFlat`
+- `Sheaf.AlgebraicGeometry.AmpleFiniteAffineCover`
+- `Sheaf.AlgebraicGeometry.AmpleFinitePrincipalAffine`
+- `Sheaf.AlgebraicGeometry.AmpleFiniteSetAffine`
+- `Sheaf.AlgebraicGeometry.AmpleIdealSection`
+- `Sheaf.AlgebraicGeometry.AmpleOnReductionNoetherian`
+- `Sheaf.AlgebraicGeometry.AmpleProjCanonicalMap`
+- `Sheaf.AlgebraicGeometry.AmpleProjLocalChart`
+- `Sheaf.AlgebraicGeometry.AmpleProjOpen`
+- `Sheaf.AlgebraicGeometry.AmpleSquareZeroThickening`
 - `Sheaf.AlgebraicGeometry.AssociatedModule`
 - `Sheaf.AlgebraicGeometry.AssociatedModuleHom`
 - `Sheaf.AlgebraicGeometry.AssociatedModulePullback`
 - `Sheaf.AlgebraicGeometry.AssociatedSectionsLocalize`
+- `Sheaf.AlgebraicGeometry.BoundaryCechLocalLifts`
 - `Sheaf.AlgebraicGeometry.BoundsFiberDegreesFieldPoints`
+- `Sheaf.AlgebraicGeometry.CechH1Injective`
+- `Sheaf.AlgebraicGeometry.CechH1MapNatural`
+- `Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal`
+- `Sheaf.AlgebraicGeometry.CoherentProjRepresentation`
+- `Sheaf.AlgebraicGeometry.ComponentIntersectionsFinite`
 - `Sheaf.AlgebraicGeometry.ConductorIdealRestriction`
+- `Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection`
+- `Sheaf.AlgebraicGeometry.ConductorSections`
+- `Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact`
+- `Sheaf.AlgebraicGeometry.ConstantExtensionCover`
 - `Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural`
 - `Sheaf.AlgebraicGeometry.ConstantSubsheafGeneric`
-- `Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension`
+- `Sheaf.AlgebraicGeometry.Curve.PicAffineQuotient`
+- `Sheaf.AlgebraicGeometry.Curve.ProperCohomology`
 - `Sheaf.AlgebraicGeometry.Curve.ProperProjective`
 - `Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietoris`
 - `Sheaf.AlgebraicGeometry.DerivedInverseImageComposition`
 - `Sheaf.AlgebraicGeometry.DerivedSectionsPushforwardComparison`
 - `Sheaf.AlgebraicGeometry.DiagonalBaseChangeUpperShriek`
+- `Sheaf.AlgebraicGeometry.DimOneQuasiProjective`
 - `Sheaf.AlgebraicGeometry.DivisorClassCurve`
 - `Sheaf.AlgebraicGeometry.DivisorModuleLocal`
 - `Sheaf.AlgebraicGeometry.DvrFieldExtensionOrder`
 - `Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity`
 - `Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen`
+- `Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields`
+- `Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints`
+- `Sheaf.AlgebraicGeometry.EtaleFieldGsets`
 - `Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear`
 - `Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives`
 - `Sheaf.AlgebraicGeometry.EtaleNormalComponents`
 - `Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent`
 - `Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings`
 - `Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf`
+- `Sheaf.AlgebraicGeometry.EtaleSheaves`
+- `Sheaf.AlgebraicGeometry.EtaleShortExactLocalLift`
 - `Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres`
 - `Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar`
 - `Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear`
+- `Sheaf.AlgebraicGeometry.ExistsAmpleOfDimLEOne`
+- `Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated`
+- `Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne`
+- `Sheaf.AlgebraicGeometry.ExtEvaluation`
 - `Sheaf.AlgebraicGeometry.FibreProductLimit`
 - `Sheaf.AlgebraicGeometry.FieldDiscreteModules`
+- `Sheaf.AlgebraicGeometry.FindGloballyGenerated`
 - `Sheaf.AlgebraicGeometry.FiniteAffineFibreSections`
 - `Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen`
 - `Sheaf.AlgebraicGeometry.FiniteDiscreteSeparatedAffine`
+- `Sheaf.AlgebraicGeometry.FiniteEtaleTrace`
+- `Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree`
+- `Sheaf.AlgebraicGeometry.FiniteFlatDualityEvaluation`
+- `Sheaf.AlgebraicGeometry.FiniteGaloisTensorCoproduct`
+- `Sheaf.AlgebraicGeometry.FiniteGaloisTensorDecomposition`
 - `Sheaf.AlgebraicGeometry.FiniteIsolatedPointsOfFiniteType`
+- `Sheaf.AlgebraicGeometry.FiniteLocallyFreeDerivedHom`
 - `Sheaf.AlgebraicGeometry.FiniteLocallyFreeStructureSheaf`
 - `Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints`
+- `Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree`
+- `Sheaf.AlgebraicGeometry.FiniteSectionsCover`
 - `Sheaf.AlgebraicGeometry.FiniteSeparableMultiplicationEtale`
 - `Sheaf.AlgebraicGeometry.FlatBoundedComplexDescent`
 - `Sheaf.AlgebraicGeometry.FlatPrecomposePus`
 - `Sheaf.AlgebraicGeometry.FpqcAffineDescent`
 - `Sheaf.AlgebraicGeometry.FpqcAffineStandardRefinement`
+- `Sheaf.AlgebraicGeometry.FpqcDescendQuasiCompact`
 - `Sheaf.AlgebraicGeometry.FpqcFinerThanEtale`
 - `Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion`
+- `Sheaf.AlgebraicGeometry.FpqcMorphismsDescend`
 - `Sheaf.AlgebraicGeometry.FpqcTensorSections`
+- `Sheaf.AlgebraicGeometry.FunctionField`
 - `Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence`
 - `Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizer`
+- `Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection`
+- `Sheaf.AlgebraicGeometry.GlobalGenerationNonvanishingCover`
 - `Sheaf.AlgebraicGeometry.GlobalHomPullbackAdjunction`
 - `Sheaf.AlgebraicGeometry.GlobalSectionsLeftExact`
+- `Sheaf.AlgebraicGeometry.GlueComponentLineBundles`
+- `Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections`
+- `Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle`
 - `Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy`
+- `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image`
+- `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift`
 - `Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting`
 - `Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex`
+- `Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule`
+- `Sheaf.AlgebraicGeometry.InjectiveEtaleModuleCechH1`
+- `Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1`
+- `Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres`
+- `Sheaf.AlgebraicGeometry.IntegralDimOneAmple`
+- `Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower`
+- `Sheaf.AlgebraicGeometry.InvertibleSectionRing`
 - `Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent`
+- `Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover`
+- `Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange`
 - `Sheaf.AlgebraicGeometry.KInjectiveResolutions`
 - `Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist`
 - `Sheaf.AlgebraicGeometry.LftOverFieldIsolatedPointResidueFinite`
 - `Sheaf.AlgebraicGeometry.MatchingObjectFibreProduct`
 - `Sheaf.AlgebraicGeometry.ModuleCechVanishingBasis`
+- `Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary`
 - `Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit`
 - `Sheaf.AlgebraicGeometry.Modules.ModuleSkyscraperStalkAdjunction`
 - `Sheaf.AlgebraicGeometry.Morphisms.FpqcIntegralDescent`
 - `Sheaf.AlgebraicGeometry.Morphisms.FpqcOpenImmersionDescent`
 - `Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFpqcCover`
+- `Sheaf.AlgebraicGeometry.Morphisms.Projective`
 - `Sheaf.AlgebraicGeometry.Morphisms.UnramifiedDescent`
 - `Sheaf.AlgebraicGeometry.NagataFinitePresentationEnvelope`
 - `Sheaf.AlgebraicGeometry.NagataFixedBaseSeparatedStage`
+- `Sheaf.AlgebraicGeometry.NormalGenericConstant`
 - `Sheaf.AlgebraicGeometry.NormalizationProperties`
 - `Sheaf.AlgebraicGeometry.PerfectDerivedTensorHom`
 - `Sheaf.AlgebraicGeometry.PerfectGenerationOpenInduction`
+- `Sheaf.AlgebraicGeometry.PicardH1RestrictionCompatibility`
+- `Sheaf.AlgebraicGeometry.PicardLift`
+- `Sheaf.AlgebraicGeometry.PositiveTensorFamily`
 - `Sheaf.AlgebraicGeometry.PresheafModuleStalkFilteredColimit`
+- `Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart`
+- `Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist`
 - `Sheaf.AlgebraicGeometry.ProjStandardOpenBasis`
+- `Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism`
+- `Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists`
+- `Sheaf.AlgebraicGeometry.ProjectiveLineTwistMultiplication`
+- `Sheaf.AlgebraicGeometry.ProjectiveSpace.KoszulResolution`
 - `Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts`
 - `Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistGluedIdentification`
 - `Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistingSheafCharts`
+- `Sheaf.AlgebraicGeometry.ProperBasic`
 - `Sheaf.AlgebraicGeometry.ProperDerivedDirectImageComposition`
+- `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange`
 - `Sheaf.AlgebraicGeometry.ProperGlobalSectionsFlatBaseChange`
 - `Sheaf.AlgebraicGeometry.QuasiCoherentMayerVietorisOpenCover`
 - `Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersection`
@@ -275,15 +349,22 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember`
 - `Sheaf.AlgebraicGeometry.SchemeModulesFunctorialInjectiveEmbeddings`
 - `Sheaf.AlgebraicGeometry.SchemeTheoreticUnion`
+- `Sheaf.AlgebraicGeometry.SectionAffineOpenKillsCohomology`
 - `Sheaf.AlgebraicGeometry.SectionsMorphismToProjPolynomialRing`
 - `Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence`
 - `Sheaf.AlgebraicGeometry.SemiRepresentableObject`
+- `Sheaf.AlgebraicGeometry.SemilocalDimOneConductor`
+- `Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjective`
+- `Sheaf.AlgebraicGeometry.SerreSectionModuleComparison`
+- `Sheaf.AlgebraicGeometry.SerreSectionModuleFinite`
 - `Sheaf.AlgebraicGeometry.SimplicialHomObject`
 - `Sheaf.AlgebraicGeometry.SimplicialHomObjectExists`
 - `Sheaf.AlgebraicGeometry.SimplicialHomObjectPushout`
 - `Sheaf.AlgebraicGeometry.SimplicialHomStandardSimplex`
 - `Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint`
+- `Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants`
 - `Sheaf.AlgebraicGeometry.Sites.FiniteEtaleCoproductSections`
+- `Sheaf.AlgebraicGeometry.Sites.FiniteGaloisSectionsDescent`
 - `Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings`
 - `Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension`
 - `Sheaf.AlgebraicGeometry.SmoothProjectiveCurve`
@@ -294,11 +375,17 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.StandardSmoothAffineDiagonalGenerators`
 - `Sheaf.AlgebraicGeometry.TensorGeneratingSections`
 - `Sheaf.AlgebraicGeometry.TensorGloballyGenerated`
+- `Sheaf.AlgebraicGeometry.TensorSectionAffineOpen`
+- `Sheaf.AlgebraicGeometry.TorsionFilteredUnion`
 - `Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover`
 - `Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct`
 - `Sheaf.AlgebraicGeometry.UpperShriekRightAdjoint`
+- `Sheaf.AlgebraicGeometry.Variety`
 - `Sheaf.AlgebraicGeometry.ZariskiOpenRestrictionInjectives`
+- `Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction`
 - `Sheaf.AlgebraicGeometry.ZeroDimIntegralPoint`
+- `Sheaf.AlgebraicGeometry.ZeroDimNoetherianAffine`
+- `Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete`
 - `Sheaf.AlgebraicTopology.CoskeletalMapTrivialKan`
 - `Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison`
 - `Sheaf.AlgebraicTopology.GlueSimplex`
@@ -356,6 +443,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.HomotopyHomExactOfInjective`
 - `Sheaf.CategoryTheory.HomotopyLimitVanishing`
 - `Sheaf.CategoryTheory.HorizontalComparisonLift`
+- `Sheaf.CategoryTheory.ImageFiltration`
 - `Sheaf.CategoryTheory.InjectiveIffExtendsSubobjectGenerator`
 - `Sheaf.CategoryTheory.InjectiveResolutionSESComplexes`
 - `Sheaf.CategoryTheory.InternalModule`
@@ -392,6 +480,8 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.Sites.SheafificationPlusTheorem`
 - `Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf`
 - `Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation`
+- `Sheaf.CategoryTheory.Sites.TorsorExtensionPushforward`
+- `Sheaf.CategoryTheory.Sites.TorsorH1BoundaryRepresentative`
 - `Sheaf.CategoryTheory.Sites.TorsorH1Functoriality`
 - `Sheaf.CategoryTheory.Sites.ZariskiContractedPowerExtension`
 - `Sheaf.CategoryTheory.Sites.ZariskiContractedPowerExtensionPresentation`
@@ -404,9 +494,12 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.TruncatedCoskeletonFiniteLimits`
 - `Sheaf.CategoryTheory.TruncationCoupleExact`
 - `Sheaf.CategoryTheory.TruncationDescends`
+- `Sheaf.FieldTheory.EtaleFieldGaloisClassification`
 - `Sheaf.FieldTheory.FiniteSeparableTensorFieldReduced`
+- `Sheaf.FieldTheory.OpenSubgroupFixedField`
 - `Sheaf.FieldTheory.SeparableRootPthPower`
 - `Sheaf.FieldTheory.SeparatingTranscendenceBasisFiniteSubextension`
+- `Sheaf.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings`
 - `Sheaf.LinearAlgebra.IdempotentEndomorphismCharpolyField`
 - `Sheaf.LinearAlgebra.SplitExtensionFreePresentation`
 - `Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings`
@@ -418,6 +511,9 @@ Modules pruned since the imports baseline:
 - `Sheaf.NumberTheory.Padics.LatticeStabilizerOpen`
 - `Sheaf.Paper.AdicTowerReconstruction`
 - `Sheaf.Paper.AffineProjectiveComplexDerivedHom`
+- `Sheaf.Paper.BoundaryCechCompatibility`
+- `Sheaf.Paper.BoundaryCechInjectiveMiddle`
+- `Sheaf.Paper.BoundaryDerivationSquareZero`
 - `Sheaf.Paper.CartanEilenbergLeftExactCohomology`
 - `Sheaf.Paper.CechNerveFreeHomology`
 - `Sheaf.Paper.ColimitSitesInjectiveSystem`
@@ -425,6 +521,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.ConstantSheafOpenMaps`
 - `Sheaf.Paper.CyclicExtensionCocycle`
 - `Sheaf.Paper.DerivationExtendsFiniteType`
+- `Sheaf.Paper.EtaleFiniteDataDescent`
 - `Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial`
 - `Sheaf.Paper.EtaleHypercover`
 - `Sheaf.Paper.EtaleHypercoverProduct`
@@ -466,10 +563,14 @@ Modules pruned since the imports baseline:
 - `Sheaf.RepresentationTheory.ContinuousCochainsDerivedInvariants`
 - `Sheaf.RepresentationTheory.ContinuousCochainsShortExact`
 - `Sheaf.RepresentationTheory.DiscreteContinuousCohomology`
+- `Sheaf.RepresentationTheory.DiscreteContinuousFunctorialInjectives`
 - `Sheaf.RepresentationTheory.DiscreteContinuousInjectives`
+- `Sheaf.RepresentationTheory.DiscreteContinuousRep`
 - `Sheaf.RepresentationTheory.DiscreteRep`
 - `Sheaf.RepresentationTheory.LAdic`
+- `Sheaf.RepresentationTheory.OpenStabilizerAdjunction`
 - `Sheaf.RepresentationTheory.ProfiniteStableLattice`
+- `Sheaf.RepresentationTheory.SylowModuleFiltration`
 - `Sheaf.RingTheory.AnnihilatorLocalizationAway`
 - `Sheaf.RingTheory.AssociatedPrimeLocalizeAtPrime`
 - `Sheaf.RingTheory.ColimitCategoryFpAlgebras`
@@ -482,20 +583,36 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.EtaleFiniteFactorDecomposition`
 - `Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting`
 - `Sheaf.RingTheory.ExistsNegativeValuationOfTensorSurjective`
+- `Sheaf.RingTheory.FiniteHomogeneousGenerators`
 - `Sheaf.RingTheory.FiniteIffFormalGlueing`
+- `Sheaf.RingTheory.FiniteIntegralConductor`
+- `Sheaf.RingTheory.FiniteLengthGlobalSubmodule`
+- `Sheaf.RingTheory.FiniteMaximalsOverElement`
 - `Sheaf.RingTheory.FinitePresentationAndFlatOfFiniteFreeStandardCover`
 - `Sheaf.RingTheory.FiniteProjectiveOfStandardCover`
 - `Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit`
 - `Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes`
 - `Sheaf.RingTheory.GradedAlgebra.ShortExactGradedComponent`
+- `Sheaf.RingTheory.GradedKernelFinite`
+- `Sheaf.RingTheory.GradedNakayamaFree`
+- `Sheaf.RingTheory.GradedNakayamaGeneration`
+- `Sheaf.RingTheory.GradedPrimeAvoidance`
+- `Sheaf.RingTheory.GradedSubmoduleFinite`
+- `Sheaf.RingTheory.GradedSyzygy`
 - `Sheaf.RingTheory.HenselianFiniteEtaleEquivalence`
 - `Sheaf.RingTheory.HenselianFiniteTypeProductDecomposition`
 - `Sheaf.RingTheory.IsolatedPrimeResidueFinite`
+- `Sheaf.RingTheory.JacobsonDenominatorFunctionField`
 - `Sheaf.RingTheory.KaehlerDifferentialsModPowerIdeal`
+- `Sheaf.RingTheory.KrullAkizukiNoetherian`
 - `Sheaf.RingTheory.KrullIntersectionLocalization`
 - `Sheaf.RingTheory.LocalCompleteIntersectionFieldChange`
 - `Sheaf.RingTheory.LocalDimensionZeroHenselian`
+- `Sheaf.RingTheory.LocalDomainDimOnePrincipalLocalization`
+- `Sheaf.RingTheory.MinimalGradedPresentation`
+- `Sheaf.RingTheory.MinimalPresentationTor`
 - `Sheaf.RingTheory.ModuleLocalizationFilteredColimit`
+- `Sheaf.RingTheory.MvPolynomial.TwoVariableSyzygy`
 - `Sheaf.RingTheory.NotQuasiFiniteAtPrimeOfReducedStronglyTranscendental`
 - `Sheaf.RingTheory.NotQuasiFiniteAtPrimeOfStronglyTranscendental`
 - `Sheaf.RingTheory.PolynomialDistinctLinearCRT`
@@ -514,6 +631,8 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.ReducedIdealsZeroIntersection`
 - `Sheaf.RingTheory.RegularSequenceShortExactSequence`
 - `Sheaf.RingTheory.RegularSequenceSwapTwo`
+- `Sheaf.RingTheory.SemilocalDedekindDvrReduction`
+- `Sheaf.RingTheory.SemilocalNormalizationDimOne`
 - `Sheaf.RingTheory.SeparablePolynomialQuotientReduced`
 - `Sheaf.RingTheory.SplitInjectionAfterCompletion`
 - `Sheaf.RingTheory.TorStrictlyProZero`
@@ -523,9 +642,11 @@ Modules pruned since the imports baseline:
 - `Sheaf.Topology.BasisSheafSectionsGerms`
 - `Sheaf.Topology.ClosedPushforwardBoundaryNaturality`
 - `Sheaf.Topology.ClosedPushforwardConstantRestriction`
+- `Sheaf.Topology.ContinuousOpenNormalStabilizer`
 - `Sheaf.Topology.ExistsUniqueIsGenericPointOfFinite`
 - `Sheaf.Topology.FilteredInjectiveCechAcyclic`
 - `Sheaf.Topology.InverseImageClosedPushforwardConstant`
+- `Sheaf.Topology.NoetherianCohomologyDimOne`
 - `Sheaf.Topology.SetsExtensionByEmpty`
 - `Sheaf.Topology.SetsExtensionByEmptyAdjunction`
 - `Sheaf.Topology.SetsInverseImageComposition`
@@ -552,14 +673,14 @@ Modules pruned since the imports baseline:
 - `WeilConjectures.AlgebraicGeometry.Cohomology.Projective`
 - `WeilConjectures.AlgebraicGeometry.Curve.DivisorSequence`
 - `WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit`
+- `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine`
 - `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension`
+- `WeilConjectures.SixFunctors.Finite.GlobalSections`
 
 Scanner limitations: macro-generated declarations, elaborated anonymous/private names, and tactic dependencies cannot be recovered from source. Synthetic names are source keys, not elaborated names.
 
 Diagnostics:
 
-- WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup: anonymous holed declaration: <anonymous:instance : (derivedIdeal I).IsHopfIdeal k>
-- WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup: anonymous holed declaration: <anonymous:instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I))>
 - WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat: duplicate source declaration: <anonymous:instance : (quasiIso A (.up ℤ)).kFlat.ContainsZero>
 - WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat: duplicate source declaration: <anonymous:instance : (quasiIso A (.up ℤ)).kFlat.IsStableUnderRetracts>
 - WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat: duplicate source declaration: <anonymous:instance : (quasiIso A (.up ℤ)).kFlat.IsStableUnderShift ℤ>
