@@ -1,0 +1,128 @@
+{
+ "kind": "statement",
+ "stmt_deps": [],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/ModuleObjects/GrothendieckAbelian.lean",
+  "place": "Module docstring: inheritance of closedness and the free-module functorial flat-resolution argument; the colimit tensor functor is constructed in lean/WeilConjectures/CategoryTheory/Monoidal/Mod/Tensor.lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Modules over a commutative algebra object in a Grothendieck abelian closed symmetric monoidal category are monoidal closed and admit functorial flat resolutions",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-15",
+   "verdict": "unavailable; source searches and LeanFinder/Loogle used instead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of modules over a commutative monoid object in a closed symmetric monoidal category is monoidal closed",
+   "results": "ModuleCat.instMonoidalClosed, Rep.instMonoidalClosed, LightCondensed.instMonoidalClosedLightCondMod; these are concrete categories, not arbitrary internal modules.",
+   "date": "2026-10-15",
+   "verdict": "no generic match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.isLeftAdjoint_of_preservesColimits_of_isSeparating",
+   "results": "Exact special adjoint functor theorem found.",
+   "date": "2026-10-15",
+   "verdict": "used after proving colimit preservation for the actual relative tensor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free modules on flat objects admit a functorial flat resolution in an abelian monoidal category",
+   "results": "Module.Flat.of_projective, ModuleCat.projectiveResolution, Module.Flat.of_free; concrete module results only.",
+   "date": "2026-10-15",
+   "verdict": "no generic internal-module match"
+  },
+  {
+   "tool": "grep",
+   "query": "free.*flat|tensorLeft.*IsLeftAdjoint|isLeftAdjoint_of_preservesColimits_of_isSeparating",
+   "results": "Mathlib special adjoint theorem; no generic internal-module flatness lemma. Repository search found the proved older coequalizer tensor functor in Monoidal.Mod.Tensor and right-action laws in TensorRegular. Blueprint searches for flat resolution and closed monoidal found no identical generic statement. The ringed-space tensor-Hom adjunction node concerns a different, concrete category.",
+   "date": "2026-10-15",
+   "verdict": "reuse old tensor functor and prove the comparison and free-flat argument"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
+  "date": "2026-10-15",
+  "group": "F2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof paragraph choosing an integral lattice and rationalizing: generic module-category and flat-resolution infrastructure for the condensed receiving category of def-weil-pbc-condensed-e-module-category.",
+   "via": [
+    "def-weil-pbc-condensed-e-module-category",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-weil-pbc-module-relative-tensor-adjoint",
+ "title": "Relative tensor functors on internal modules have right adjoints",
+ "statement": "Let C be a locally v-small Grothendieck abelian category with an additive closed symmetric monoidal structure, and R a commutative monoid object of C. Let Mod(C,R) be the category of left internal R-modules, with its relative tensor product defined as the coequalizer of the two R-actions. For every M in Mod(C,R), the functor M tensor_R (-) has a right adjoint. Consequently Mod(C,R) is monoidal closed.",
+ "proof": [
+  {
+   "text": "For M,N form the cofork in internal modules whose source is the ordinary tensor M.X tensor N.X with the action on M. Its parallel arrows are the left action on N and the right action on M transported across the associator. The quotient map is linear by whiskerLeft_tensorπ_smul. Reflect the coequalizer along forget R and construct its descent using the defining ambient coequalizer of the monoidal tensor. Associator inverse cancellation identifies the two relations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compare this coequalizer with the previously constructed Mod.tensorLeft N using diagramIsoParallelPair and uniqueness of colimits. Naturality follows by colimit.hom_ext and naturality of the tensor quotient map. The older functor preserves colimits, so the actual monoidal tensorRight N does too; the braiding transports this to tensorLeft N.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The already proved Mod.isGrothendieckAbelian provides a separator in Mod(C,R). Apply Mathlib isLeftAdjoint_of_preservesColimits_of_isSeparating to tensorLeft M. Its right adjoint and Adjunction.ofIsLeftAdjoint give the required Closed instance for each M.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/ModuleObjects/GrothendieckAbelian.lean",
+  "place": "Existing module-docstring argument for free flat modules, with the explicit coequalizer comparison and special adjoint theorem route formalized by F2; all steps are now proved."
+ },
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
+  "file": "lean/WeilConjectures/CategoryTheory/ModuleObjects/GrothendieckAbelian.lean",
+  "declaration": "CategoryTheory.Mod.relativeTensor_isLeftAdjoint",
+  "statement": "theorem relativeTensor_isLeftAdjoint (M : Mod C R) : (MonoidalCategory.tensorLeft M).IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-15",
+  "note": "New DAG attachment in the delivered source module; existing instance signatures are unchanged.",
+  "declarations": [
+   "CategoryTheory.Mod.relativeTensor_isLeftAdjoint",
+   "CategoryTheory.Mod.monoidalClosed"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-6a485",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261015T154210-L-164098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-6a485",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261015T154210-L-164098",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module compiled cleanly; printed axioms are limited to propext, Classical.choice, Quot.sound; mechanical findings are none; direct importer DerivedCategory also compiles; statements and signatures are unchanged."
+ }
+}
