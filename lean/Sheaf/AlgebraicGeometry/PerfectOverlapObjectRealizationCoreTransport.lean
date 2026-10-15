@@ -119,6 +119,26 @@ theorem schemeComparisonFromRestrictions_betaW
       perfectOverlapRestrictionBeta g (U ⊓ V) (P ⊓ Q) hW := by
   rfl
 
+/-- The first-open functor of the comparison diagram is restricted pullback
+followed by the inverse open-site equivalence. -/
+theorem schemeComparisonFromRestrictions_HU
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (U V : Y.Opens) (P Q : X.Opens)
+    (hP : P ≤ g ⁻¹ᵁ U) (hQ : Q ≤ g ⁻¹ᵁ V) :
+    (schemeComparisonFromRestrictions g U V P Q hP hQ).toDiagram.HU =
+      derivedPullback (g.resLE U P hP) ⋙ (overlapSiteInverse P).mapDerivedCategory := by
+  rfl
+
+/-- The intersection functor of the comparison diagram is the fixed
+restricted pullback followed by the inverse open-site equivalence. -/
+theorem schemeComparisonFromRestrictions_HW
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (U V : Y.Opens) (P Q : X.Opens)
+    (hP : P ≤ g ⁻¹ᵁ U) (hQ : Q ≤ g ⁻¹ᵁ V) :
+    let hW : P ⊓ Q ≤ g ⁻¹ᵁ (U ⊓ V) := fun _ hx ↦ ⟨hP hx.1, hQ hx.2⟩
+    (schemeComparisonFromRestrictions g U V P Q hP hQ).toDiagram.HW =
+      derivedPullback (g.resLE (U ⊓ V) (P ⊓ Q) hW) ⋙
+        (overlapSiteInverse (P ⊓ Q)).mapDerivedCategory := by
+  rfl
+
 /-- The fixed pullback-composition comparison on a restricted two-step map.
 The named definition keeps the geometric equality and its derived transport
 outside the larger two-open transport record. -/
