@@ -26,65 +26,30 @@
  ],
  "proof": [
   {
-   "text": "The extending absolute value is nonarchimedean by [lem-weil-l-adic-extension-absolute-value]. Regard E with the resulting normed-field and valued-field structures. Since Q_l is locally compact and E is finite-dimensional over Q_l, [lem-weil-l-adic-extension-proper] gives ProperSpace E.",
+   "text": "Apply the core valuation-ring theorem to obtain O and m with the ring, DVR, fraction-field, finite-residue and maximal-value-generator clauses.",
    "uses": [
-    "lem-weil-l-adic-extension-absolute-value",
-    "lem-weil-l-adic-extension-proper"
+    "lem-weil-l-adic-extension-integers-dvr-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
-    "place": "order 411, finite extension coefficient construction"
-   }
+   "elementary": false
   },
   {
-   "text": "Applying [lem-weil-l-adic-extension-dvr-finite-residue] to the proper valued field E gives completeness, that O_E is a discrete valuation ring with maximal ideal m_E, and that O_E/m_E is finite. The definitions of O_E and m_E agree with the valuation-ring and maximal-ideal definitions in that result.",
+   "text": "Apply the DVR factorization existence and association theorem, then the uniqueness theorem, and package existence plus uniqueness into the final ∃! clause for each uniformizer.",
    "uses": [
-    "lem-weil-l-adic-extension-dvr-finite-residue"
+    "lem-weil-l-adic-extension-integers-dvr-factorization",
+    "lem-weil-l-adic-extension-integers-dvr-factorization-unique"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
-    "place": "order 411, claims that O_E is a DVR with finite residue field"
-   }
-  },
-  {
-   "text": "For x,y in O_E, the ultrametric inequality and multiplicativity show that x+y and xy lie in O_E, and if a in m_E and b in O_E then ab lies in m_E; hence O_E is a subring and m_E an ideal. For x in O_E, x is a unit exactly when |x|_E=1: if |x|_E=1 then x^{-1} has value 1, while if |x|_E<1 then x^{-1} is not in O_E. Thus m_E is the unique maximal ideal and E is the fraction field of O_E, since x in E^× is either in O_E or has inverse in m_E.",
-   "uses": [
-    "lem-weil-l-adic-extension-absolute-value",
-    "lem-weil-l-adic-extension-dvr-finite-residue"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
-    "place": "order 411, valuation-ring and unit clauses"
-   }
-  },
-  {
-   "text": "Because O_E is a DVR, choose a generator varpi of its nonzero maximal ideal m_E, using [def-sc-discrete-valuation-ring]. The existing DVR factorization [lem-weil-pbc-dvr-unit-times-uniformizer-power] gives b=u varpi^n for every nonzero b in O_E, with u a unit and n>=0. By Step 3, |u|_E=1, while |varpi|_E<1 because varpi is a nonunit; hence the nonzero values in m_E are exactly |varpi|_E^n for n>=1, and |varpi|_E is their largest element. Thus an element of O_E generates m_E exactly when it is nonzero and has that largest value: factor it as u varpi^n and use |u|_E=1 to force n=1. Writing any x in E^× as a quotient of two nonzero elements of O_E gives x=u varpi^m with m in Z. Comparing absolute values forces m to be unique, and then cancellation in the domain O_E forces u to be unique; two uniformizers therefore differ by a unit.",
-   "uses": [
-    "lem-weil-l-adic-extension-dvr-finite-residue",
-    "def-sc-discrete-valuation-ring",
-    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra Definition 00IE and Lemma 00PD, DVR value group and factorization"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-absolute-value",
-  "lem-weil-l-adic-extension-proper",
-  "lem-weil-l-adic-extension-dvr-finite-residue",
-  "def-sc-discrete-valuation-ring",
-  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+  "lem-weil-l-adic-extension-integers-dvr-core",
+  "lem-weil-l-adic-extension-integers-dvr-factorization",
+  "lem-weil-l-adic-extension-integers-dvr-factorization-unique"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra Lemma 00PD and Definition 00IE, together with the finite-extension route in the blueprint"
+  "place": "Algebra Definition 00IE and Lemma 00PD, with the core finite-extension valued-field route"
  },
  "mathlib_searches": [
   {
@@ -157,5 +122,15 @@
   "group": "C1",
   "result": "pass",
   "note": "l:ℕ [Fact l.Prime], ℚ_[l], [Algebra ℚ_[l] E] [FiniteDimensional], abv:AbsoluteValue E ℝ with h_ext = ‖·‖ (padicNormE); O/m existential with carriers abv≤1 / abv<1 (exact node sets, no private def); clause1 units/local/unique max/IsFractionRing; clause2 IsDVR+PID+m≠⊥+unique nonzero prime; clause3 Finite (O⧸m); clause4 attained max r, span{π}=m ↔ π≠0∧abv π=r, existence, unit association; clause5 ∃! (Oˣ×ℤ) zpow in E for fixed π; no landed ℚ_[l] Lean to keep consistent with; node diff only adds lean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T190212-L-946793",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

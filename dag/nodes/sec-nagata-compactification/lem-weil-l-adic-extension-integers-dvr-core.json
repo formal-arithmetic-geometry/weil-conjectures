@@ -1,0 +1,108 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-l-adic-extension-integers-dvr",
+   "place": "strict decomposition of the valuation-ring theorem into core ring properties and uniformizer factorization",
+   "via": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+  "place": "order 411, split of the valuation-ring theorem"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension",
+  "lem-weil-l-adic-extension-absolute-value"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.NumberTheory.Padics.ExtensionIntegersDvr",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-prop-nagata-sketch-comp-category",
+ "id": "lem-weil-l-adic-extension-integers-dvr-core",
+ "title": "Core valuation-ring properties for a finite p-adic extension",
+ "statement": "The valuation ring and maximal ideal in the first fourteen clauses of [lem-weil-l-adic-extension-integers-dvr] exist with all displayed ring, DVR, fraction-field and finite-residue properties, through the existence of a generator of the maximal ideal.",
+ "proof": [
+  {
+   "text": "Apply the proper finite-dimensional valued-field criterion and identify the integer and maximal-ideal predicates with the absolute-value inequalities; the standard proper-valued-field theorem supplies the DVR and finite residue field, and elementary unit and fraction-field arguments supply the remaining displayed clauses.",
+   "uses": [
+    "lem-weil-l-adic-extension-proper",
+    "lem-weil-l-adic-extension-dvr-finite-residue"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-proper",
+  "lem-weil-l-adic-extension-dvr-finite-residue"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+  "place": "order 411"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.NumberTheory.Padics.ExtensionIntegersDvrCore",
+  "file": "lean/Sheaf/NumberTheory/Padics/ExtensionIntegersDvrCore.lean",
+  "declaration": "Padic.extension_integers_dvr_core",
+  "statement": "theorem extension_integers_dvr_core (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (abv : AbsoluteValue E ℝ) (h_ext : ∀ a : ℚ_[l], abv (algebraMap ℚ_[l] E a) = ‖a‖) : ∃ O : Subring E, ∃ m : Ideal O, (∀ x : E, x ∈ O ↔ abv x ≤ 1) ∧ (∀ x : O, x ∈ m ↔ abv (x : E) < 1) ∧ (∀ x : O, IsUnit x ↔ abv (x : E) = 1) ∧ IsLocalRing O ∧ m.IsMaximal ∧ (∀ J : Ideal O, J.IsMaximal → J = m) ∧ IsFractionRing O E ∧ IsDiscreteValuationRing O ∧ IsPrincipalIdealRing O ∧ m ≠ ⊥ ∧ (∀ J : Ideal O, J.IsPrime ∧ J ≠ ⊥ ↔ J = m) ∧ Finite (O ⧸ m) ∧ (∃ r : ℝ, (∃ y : O, y ∈ m ∧ y ≠ 0 ∧ abv (y : E) = r) ∧ (∀ y : O, y ∈ m → y ≠ 0 → abv (y : E) ≤ r) ∧ (∀ π : O, Ideal.span ({π} : Set O) = m ↔ π ≠ 0 ∧ abv (π : E) = r)) ∧ (∃ π : O, Ideal.span ({π} : Set O) = m)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite extension p-adic valuation ring discrete valuation ring",
+   "results": "no single theorem; proper valued-field criterion found",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing maximalIdeal finite residue field",
+   "results": "properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField",
+   "date": "2026-10-16",
+   "verdict": "component match"
+  },
+  {
+   "tool": "grep",
+   "query": "DiscreteValuationRing eq_unit_mul_pow_irreducible zpow fraction field",
+   "results": "IsDiscreteValuationRing.exists_units_eq_smul_zpow_of_irreducible and associated_of_irreducible",
+   "date": "2026-10-16",
+   "verdict": "component match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T190212-L-946793",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T190212-L-946793",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,6 +10,9 @@ public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import Mathlib.NumberTheory.Padics.PadicNumbers
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvrCore
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvrFactorization
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
 
 /-!
 # The ring of integers of a finite extension of the p-adic numbers
@@ -74,6 +77,18 @@ theorem extension_integers_dvr (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
         Ideal.span ({π'} : Set O) = m → ∃ v : Oˣ, π' = (v : O) * π) ∧
       (∀ π : O, Ideal.span ({π} : Set O) = m → ∀ x : Eˣ,
         ∃! p : Oˣ × ℤ, (x : E) = ((p.1 : O) : E) * (π : E) ^ p.2) := by
-  sorry
+  obtain ⟨O, m, hcore⟩ := extension_integers_dvr_core l E abv h_ext
+  rcases hcore with ⟨hO, hm, hu, hlocal, hmax, hmax_unique, hfrac, hdvr,
+    hpid, hm0, hprime, hfinite, hr, hgen⟩
+  obtain ⟨hassoc, hexists⟩ :=
+    extension_integers_dvr_factorization E O m hdvr hm0 hmax hfrac hgen
+  have hunique := extension_integers_dvr_factorization_unique E O m hdvr hmax hfrac
+  refine ⟨O, m, hO, hm, hu, hlocal, hmax, hmax_unique, hfrac, hdvr, hpid, hm0,
+    hprime, hfinite, hr, hgen, hassoc, ?_⟩
+  intro π hπ x
+  obtain ⟨p, hp⟩ := hexists π hπ x
+  refine ⟨p, hp, ?_⟩
+  intro q hq
+  exact (hunique π hπ x p q hp hq).symm
 
 end Padic
