@@ -97,7 +97,7 @@
 | `Sheaf.RingTheory.FiniteSpectrumMaximalPrimes` | 10 | 1 | proof |
 | `Sheaf.Topology.Spectral.ConstructibleTopologyHausdorff` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawDerivedClassAffineDescent` | 19 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 37 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreOfData` | 38 | 1 | proof |
 
 Also listed above and claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
 
