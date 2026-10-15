@@ -1,116 +1,133 @@
 {
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-weil-pbc-functorial-bounded-injective-resolution",
-      "place": "Proof steps 5–8: bicomplex totalization, quasi-isomorphism, injective terms, and preservation of lower bounds.",
-      "via": []
-    },
-    "same_as": []
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-functorial-bounded-injective-resolution",
+   "place": "Proof steps 5–8: bicomplex totalization, quasi-isomorphism, injective terms, and preservation of lower bounds.",
+   "via": []
   },
-  "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141, construction and verification of the total complex I(K)"
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0141, construction and verification of the total complex I(K)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category",
+  "lem-sc-first-quadrant-column-augmentation"
+ ],
+ "proof_origin": {
+  "by": "D4 stage 3 proof",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0141, assertion (1); finite diagonal totalization and finite-column comparison using WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "functorial injective resolution of bounded below cochain complexes",
+   "results": "No exact result; service search returned no usable theorem for this general statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
   },
-  "stmt_deps": [
-    "def-sp-abelian",
-    "def-sp-double-complex-total",
-    "def-weil-abstract-derived-category",
-    "lem-sc-first-quadrant-column-augmentation"
-  ],
-  "proof_origin": {
-    "by": "D4 stage 3",
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141, assertion (1), totalization of the functorial object resolutions"
+  {
+   "tool": "leanfinder",
+   "query": "totalization of a functorial injective resolution of bounded below cochain complexes",
+   "results": "No exact match; returned generic total complex and K-injective APIs.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "functorial injective resolution of bounded below cochain complexes",
-      "results": "No exact result; service search returned no usable theorem for this general statement.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "totalization of a functorial injective resolution of bounded below cochain complexes",
-      "results": "No exact match; returned generic total complex and K-injective APIs.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "quasiIso_of_column_augmentation",
-      "results": "Existing Sheaf first-quadrant column augmentation theorem, but no bounded-below injective totalization theorem.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "bounded.*injective.*total|functorial.*bounded",
-      "results": "No existing theorem with the required functor and all lower bounds.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution",
-    "date": "2026-10-16",
-    "group": "D4"
+  {
+   "tool": "loogle",
+   "query": "quasiIso_of_column_augmentation",
+   "results": "Existing Sheaf first-quadrant column augmentation theorem, but no bounded-below injective totalization theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution",
-    "file": "lean/Sheaf/Algebra/Homology/FunctorialBoundedInjectiveResolution.lean",
-    "declaration": "CochainComplex.exists_functorial_bounded_injective_resolution_of_object_resolution",
-    "branch": "sheaf-dag",
-    "by": "D4",
-    "date": "2026-10-16",
-    "statement": "theorem exists_functorial_bounded_injective_resolution_of_object_resolution {C : Type u} [Category.{v} C] [Abelian C] (E : C ⥤ CochainComplex C ℕ) (ε : (CochainComplex.single₀ C) ⟶ E) (hε : ∀ A : C, QuasiIso (ε.app A)) (hEzero : ∀ (A B : C), E.map (0 : A ⟶ B) = 0) (hEobjzero : IsZero (E.obj (0 : C))) (hE : ∀ (A : C) (n : ℕ), Injective ((E.obj A).X n)) : ∃ (I : Plus C ⥤ Plus C) (α : Plus.ι C ⟶ I ⋙ Plus.ι C), (∀ K : Plus C, QuasiIso (α.app K)) ∧ (∀ (K : Plus C) (n : ℤ), Injective (((I.obj K).obj).X n)) ∧ (∀ (K : Plus C) (a : ℤ), K.obj.IsStrictlyGE a → (I.obj K).obj.IsStrictlyGE a)"
-  },
-  "id": "lem-weil-pbc-functorial-bounded-injective-resolution-totalization",
-  "kind": "statement",
-  "title": "Totalization of functorial object injective resolutions",
-  "statement": "Given a functor E : C ⥤ CochainComplex C ℕ with a natural quasi-isomorphic augmentation from single₀ C, with E mapping zero morphisms to zero, E.obj 0 a zero complex, and with injective terms, there exist a functor I : Plus C ⥤ Plus C and a natural quasi-isomorphism Plus.ι C ⟶ I ⋙ Plus.ι C whose terms are injective and which preserves every strict lower bound.",
-  "proof": [
-    {
-      "text": "Apply E degreewise to a bounded-below integer-indexed complex to form the bicomplex with resolution degree nonnegative and complex degree integer. Use finite biproducts on each diagonal and the standard signed total differential to define I functorially. The first-quadrant column augmentation theorem gives a quasi-isomorphism after choosing a lower bound only for verification; finite biproducts of injectives and the zero terms below the bound give the remaining assertions uniformly in the bound.",
-      "uses": [
-        "def-sp-abelian",
-        "def-sp-double-complex-total",
-        "lem-sc-first-quadrant-column-augmentation"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-sp-abelian",
-    "def-sp-double-complex-total",
-    "lem-sc-first-quadrant-column-augmentation"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "X-5078e",
-    "group": "D4",
-    "result": "pass",
-    "landing": "20261015T190716-L-966222",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "X-5078e",
-    "group": "D4",
-    "result": "pass",
-    "landing": "20261015T190716-L-966222",
-    "kind": "interface",
-    "note": "independent Codex review: Packet, delivered Lean/DAG files, and direct importer matched; all compiled successfully."
+  {
+   "tool": "grep",
+   "query": "bounded.*injective.*total|functorial.*bounded",
+   "results": "No existing theorem with the required functor and all lower bounds.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution",
+  "date": "2026-10-16",
+  "group": "D4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution",
+  "file": "lean/Sheaf/Algebra/Homology/FunctorialBoundedInjectiveResolution.lean",
+  "declaration": "CochainComplex.exists_functorial_bounded_injective_resolution_of_object_resolution",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-16",
+  "statement": "theorem exists_functorial_bounded_injective_resolution_of_object_resolution {C : Type u} [Category.{v} C] [Abelian C] (E : C ⥤ CochainComplex C ℕ) (ε : (CochainComplex.single₀ C) ⟶ E) (hε : ∀ A : C, QuasiIso (ε.app A)) (hEzero : ∀ (A B : C), E.map (0 : A ⟶ B) = 0) (hEobjzero : IsZero (E.obj (0 : C))) (hE : ∀ (A : C) (n : ℕ), Injective ((E.obj A).X n)) : ∃ (I : Plus C ⥤ Plus C) (α : Plus.ι C ⟶ I ⋙ Plus.ι C), (∀ K : Plus C, QuasiIso (α.app K)) ∧ (∀ (K : Plus C) (n : ℤ), Injective (((I.obj K).obj).X n)) ∧ (∀ (K : Plus C) (a : ℤ), K.obj.IsStrictlyGE a → (I.obj K).obj.IsStrictlyGE a)"
+ },
+ "id": "lem-weil-pbc-functorial-bounded-injective-resolution-totalization",
+ "kind": "statement",
+ "title": "Totalization of functorial object injective resolutions",
+ "statement": "Given a functor E : C ⥤ CochainComplex C ℕ with a natural quasi-isomorphic augmentation from single₀ C, with E mapping zero morphisms to zero, E.obj 0 a zero complex, and with injective terms, there exist a functor I : Plus C ⥤ Plus C and a natural quasi-isomorphism Plus.ι C ⟶ I ⋙ Plus.ι C whose terms are injective and which preserves every strict lower bound.",
+ "proof": [
+  {
+   "text": "Extend each nonnegative resolution E(A) by zero to integer degrees. Identify the extension of single₀(A) with the integer single complex, obtaining a natural augmented integer resolution. Apply the zero-preserving extension functor to the original complex K degreewise using mapHomologicalComplex. The outer index p is the degree of K and the inner index q is the resolution degree; its natural augmentation comes from singleRow₀(K).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any bound a of K, all terms with p<a or q<0 are zero. Use hasTotal_of_boundedBelow to obtain each diagonal coproduct. The canonical Mathlib total complex and total.map define a replacement functor independently of a. Compose the inverse of singleRow₀ObjTotal with the totalized augmentation; the naturality and composition identities for total.map prove its naturality.",
+   "uses": [
+    "lem-weil-pbc-total-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove comparison for bicomplexes bounded below in both indices by truncating outer columns above x=n−b+1 when checking homology in degree n. The projection to this truncation is an isomorphism in degrees n−1,n,n+1 because any omitted term has inner degree below b. For the truncated map, transport columnwise quasi-isomorphisms along the truncation isomorphisms and apply the existing finite-column total comparison. The naturality square and the two-out-of-three property on degree-n homology prove comparison for the original map. Apply this to the augmented resolutions; extendMap preserves their quasi-isomorphisms and singleRow₀ObjTotal is an isomorphism.",
+   "uses": [
+    "lem-sc-integer-finite-column-total-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree n, use the finite interval a≤p≤n to index all possibly nonzero diagonal terms, with q=n−p. They are injective by the hypothesis on E and extension by zero. Their finite biproduct is injective and is isomorphic to the chosen diagonal coproduct by its universal property. If n<a, every diagonal term is zero, so the coproduct identity is zero by its hom-ext principle. This proves preservation of each lower bound, including the empty diagonal case.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-total-bounded-below",
+  "lem-sc-integer-finite-column-total-comparison",
+  "def-sp-injective-resolutions"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-5078e",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261015T190716-L-966222",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "XREPAIR-d9718f5111d65eef",
+  "group": "XRd9718f5111d65eef",
+  "result": "pass",
+  "landing": "20261015T205051-L-1693599",
+  "kind": "interface",
+  "note": "\nREADY: Added the missing proof-only Serre-closure import to TwoColimit. Both Lean files passed single-file checks within 60 seconds. Report and change record updated; no delivery or push.\nDELIVERED: checks and fix"
+ }
 }

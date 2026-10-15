@@ -1,221 +1,221 @@
 {
-  "id": "lem-weil-pbc-functorial-bounded-injective-resolution",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-qbar",
-      "place": "Proof, first sentence: common-stage descent; bounded-below resolution models for the derived Hom recollement input.",
-      "via": [
-        "lem-weil-pbc-condensed-open-closed-recollement",
-        "lem-weil-pbc-condensed-sheaf-ext-continuity",
-        "prop-weil-pbc-qbar-condensed-two-colimit",
-        "nt-target-proetale-qbar"
-      ]
-    },
-    "same_as": []
+ "id": "lem-weil-pbc-functorial-bounded-injective-resolution",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: common-stage descent; bounded-below resolution models for the derived Hom recollement input.",
+   "via": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
   },
-  "kind": "statement",
-  "title": "Functorial injective resolutions preserving lower bounds",
-  "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] equipped with functorial injective embeddings: a functor $J:\\mathcal A\\to\\mathcal A$ and a natural monomorphism $\\mathrm{id}\\to J$, with every $J(A)$ injective [def-sp-injective-resolutions]. On the category of bounded-below integer-indexed cochain complexes [def-weil-abstract-derived-category], there exist a functor $I$ and a natural quasi-isomorphism $K\\to I(K)$ such that every term of $I(K)$ is injective and, for every integer $a$, if $K^n=0$ for all $n<a$, then $I(K)^n=0$ for all $n<a$. The same functor $I$ works for all lower bounds and all diagrams of bounded-below complexes.",
-  "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141 (lemma-functorial-injective-resolutions), assertion (1) and its construction with J(0)=0 and I^{p,q}=0 for p<a or q<0"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Functorial injective resolutions preserving lower bounds",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] equipped with functorial injective embeddings: a functor $J:\\mathcal A\\to\\mathcal A$ and a natural monomorphism $\\mathrm{id}\\to J$, with every $J(A)$ injective [def-sp-injective-resolutions]. On the category of bounded-below integer-indexed cochain complexes [def-weil-abstract-derived-category], there exist a functor $I$ and a natural quasi-isomorphism $K\\to I(K)$ such that every term of $I(K)$ is injective and, for every integer $a$, if $K^n=0$ for all $n<a$, then $I(K)^n=0$ for all $n<a$. The same functor $I$ works for all lower bounds and all diagrams of bounded-below complexes.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0141 (lemma-functorial-injective-resolutions), assertion (1) and its construction with J(0)=0 and I^{p,q}=0 for p<a or q<0"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Obtain E and its natural augmentation from the functorial objectwise injective resolution theorem, including preservation of zero morphisms and objects and injectivity in every degree.",
+   "uses": [
+    "lem-weil-pbc-functorial-object-resolution"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-sp-abelian",
-    "def-sp-injective-resolutions",
-    "def-weil-abstract-derived-category"
-  ],
-  "proof": [
-    {
-      "text": "Obtain the functorial objectwise injective resolution E and augmentation ε from the supplied functorial embedding using the normalization and recursive cokernel construction.",
-      "uses": [
-        "lem-weil-pbc-functorial-object-resolution"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply the totalization theorem to E and ε. It constructs one functor on all bounded-below complexes, a natural quasi-isomorphism, injective terms, and preservation of every lower bound by finite diagonal totalization and the first-quadrant column augmentation criterion.",
-      "uses": [
-        "lem-weil-pbc-functorial-bounded-injective-resolution-totalization"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-functorial-object-resolution",
+  {
+   "text": "Apply the proved totalization theorem to E and its augmentation. It constructs one functor on all bounded-below complexes, a natural quasi-isomorphism, injective terms, and preservation of every lower bound. Its comparison argument uses finite column truncations of the integer-indexed bicomplex.",
+   "uses": [
     "lem-weil-pbc-functorial-bounded-injective-resolution-totalization"
-  ],
-  "proof_origin": {
-    "by": "D4 stage 3 decomposition",
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141, split into objectwise resolution and totalization steps"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "For an abelian category with functorial injective embeddings bounded below complexes admit functorial injective resolutions preserving every lower bound",
-      "results": "0 hits: ; service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Functorial bounded below injective resolution of complexes preserving the lower bound",
-      "results": "8 hits: CategoryTheory.InjectiveResolution.of_def, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex, CategoryTheory.InjectiveResolution.of, CategoryTheory.InjectiveResolution.instHasInjectiveResolutions, CategoryTheory.InjectiveResolution.instHasInjectiveResolution, CategoryTheory.injectiveResolution, CategoryTheory.HasInjectiveResolutions.out, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; ",
-      "date": "2026-10-14",
-      "verdict": "no match: the returned object resolutions, Mayer-Vietoris free sheaves or scheme-module functors do not state this assertion"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"InjectiveResolution\"",
-      "results": "12 hits: CategoryTheory.HasInjectiveResolutions, CategoryTheory.HasInjectiveResolution, CategoryTheory.InjectiveResolution, CategoryTheory.InjectiveResolution.self, CategoryTheory.HasInjectiveResolutions.mk, CategoryTheory.HasInjectiveResolutions.out, CategoryTheory.HasInjectiveResolution.mk, CategoryTheory.HasInjectiveResolution.out; ",
-      "date": "2026-10-14",
-      "verdict": "no match: the returned object resolutions, Mayer-Vietoris free sheaves or scheme-module functors do not state this assertion"
-    },
-    {
-      "tool": "grep",
-      "query": "functorial.*injective|injective.*resolution",
-      "results": "2 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; ",
-      "date": "2026-10-14",
-      "verdict": "no match: the returned object resolutions, Mayer-Vietoris free sheaves or scheme-module functors do not state this assertion"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Resolution functor for bounded below complexes of a Grothendieck abelian category with all terms zero below the same integer",
-      "results": "8 hits: CategoryTheory.InjectiveResolution.of_def, CategoryTheory.Abelian.LeftResolution.chainComplex, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.of, CategoryTheory.Abelian.LeftResolution.chainComplexXIso, CategoryTheory.injectiveResolution; ",
-      "date": "2026-10-14",
-      "verdict": "no match: the returned object resolutions, Mayer-Vietoris free sheaves or scheme-module functors do not state this assertion"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Functorial injective resolution of bounded below cochain complexes preserving all lower bounds",
-      "results": "{\"t\": \"2026-10-14T00:39:40Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial injective resolution of bounded below cochain complexes preserving all lower bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\", \"CategoryTheory.InjectiveResolution.of_def\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.I_X\"], \"digest\": \"f732f5ceb877a9f1\"}",
-      "date": "2026-10-14",
-      "verdict": "no match: object resolutions or generic support/factorization APIs, not a strictly functorial lower-bound-preserving resolution of complexes"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"InjectiveResolution\"",
-      "results": "{\"t\": \"2026-10-14T00:39:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"InjectiveResolution\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.HasInjectiveResolutions\", \"CategoryTheory.HasInjectiveResolution\", \"CategoryTheory.InjectiveResolution\", \"CategoryTheory.InjectiveResolution.self\", \"CategoryTheory.HasInjectiveResolutions.mk\", \"CategoryTheory.HasInjectiveResolutions.out\", \"CategoryTheory.HasInjectiveResolution.mk\", \"CategoryTheory.HasInjectiveResolution.out\"], \"digest\": \"bb7af3745eb8f165\"}",
-      "date": "2026-10-14",
-      "verdict": "no match: object resolutions or generic support/factorization APIs, not a strictly functorial lower-bound-preserving resolution of complexes"
-    },
-    {
-      "tool": "grep",
-      "query": "functorial.*injective|injective.*functorial",
-      "results": "{\"t\": \"2026-10-14T00:39:42Z\", \"tool\": \"grep\", \"query\": \"functorial.*injective|injective.*functorial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Epi.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"Mathlib/Topology/Sheaves/LocallySurjective.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Concrete.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Concrete.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Concrete.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Concrete.lean\"], \"digest\": \"7c38942f4fd1f401\"}",
-      "date": "2026-10-14",
-      "verdict": "no match: object resolutions or generic support/factorization APIs, not a strictly functorial lower-bound-preserving resolution of complexes"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Functorial injective resolution of bounded below complexes preserving lower bounds",
-      "results": "{\"t\": \"2026-10-14T00:39:42Z\", \"tool\": \"leansearch\", \"query\": \"Functorial injective resolution of bounded below complexes preserving lower bounds\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A zero preserving functorial injective embedding yields a natural termwise injective replacement functor on bounded below complexes",
-      "results": "{\"t\": \"2026-10-14T00:40:00Z\", \"tool\": \"leanfinder\", \"query\": \"A zero preserving functorial injective embedding yields a natural termwise injective replacement functor on bounded below complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.Embedding.instFaithfulHomologicalComplexExtendFunctor\", \"HomologicalComplex.map_isStrictlySupported\", \"ComplexShape.Embedding.instPreservesZeroMorphismsHomologicalComplexRestrictionFunctor\", \"CochainComplex.cm5b.I_X\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"HomologicalComplex.IsSupported\", \"ComplexShape.Embedding.extendFunctor\", \"ComplexShape.Embedding.extendFunctor_obj\"], \"digest\": \"5a6f140bef022c6a\"}",
-      "date": "2026-10-14",
-      "verdict": "no match: object resolutions or generic support/factorization APIs, not a strictly functorial lower-bound-preserving resolution of complexes"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An abelian category with a functor to injective objects admits a natural quasi-isomorphic replacement of bounded below cochain complexes with the same vanishing degrees",
-      "results": "{\"t\": \"2026-10-14T00:43:38Z\", \"tool\": \"leanfinder\", \"query\": \"An abelian category with a functor to injective objects admits a natural quasi-isomorphic replacement of bounded below cochain complexes with the same vanishing degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CochainComplex.isKInjective_iff_rightOrthogonal\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.isKInjective_of_iso\", \"CochainComplex.IsKInjective.rightOrthogonal\"], \"digest\": \"18d1e81a87148835\"}",
-      "date": "2026-10-14",
-      "verdict": "no match: second-reader search returned object resolutions in the homotopy category, K-injectivity criteria, or unrelated functor declarations; none states this strict bound-preserving complex replacement"
-    },
-    {
-      "tool": "grep",
-      "query": "injectiveResolutions|Injective.*[Ff]unctor|[Ff]unctor.*Injective",
-      "results": "{\"t\": \"2026-10-14T00:43:38Z\", \"tool\": \"grep\", \"query\": \"injectiveResolutions|Injective.*[Ff]unctor|[Ff]unctor.*Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\"], \"digest\": \"72ece66c0afeb4f3\"}",
-      "date": "2026-10-14",
-      "verdict": "no match: second-reader search returned object resolutions in the homotopy category, K-injectivity criteria, or unrelated functor declarations; none states this strict bound-preserving complex replacement"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"injectiveResolutions\"",
-      "results": "{\"t\": \"2026-10-14T00:43:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"injectiveResolutions\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.HasInjectiveResolutions\", \"CategoryTheory.HasInjectiveResolutions.mk\", \"CategoryTheory.HasInjectiveResolutions.out\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolutions\", \"CategoryTheory.injectiveResolutions\"], \"digest\": \"3e1b9efb6762d9ac\"}",
-      "date": "2026-10-14",
-      "verdict": "no match: second-reader search returned object resolutions in the homotopy category, K-injectivity criteria, or unrelated functor declarations; none states this strict bound-preserving complex replacement"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-weil-pbc-condensed-open-closed-recollement",
-    "by": "worker",
-    "date": "2026-10-14"
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "merged_into": null,
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-weil-pbc-functorial-bounded-injective-resolution",
-    "worker": "stage1",
-    "summary": "Checked Stacks 0141 and 0133, normalized the embedding without assuming additivity, expanded the recursive functorial construction and finite-diagonal totalization, and reused the first-quadrant column augmentation lemma after explicit reindexing. No new nodes or statement changes.",
-    "blueprint": "Refines the existing from.place supporting bounded-below resolution models for the derived Hom recollement input below thm-weil-pbc-qbar; no chapter or unit route changed.",
-    "tool_uses": [
-      {
-        "node": "lem-sc-first-quadrant-column-augmentation",
-        "why": "Generic first-quadrant augmentation-to-total quasi-isomorphism theorem; the proper-base-change unit supplies no homological-algebra totalization comparison theorem."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sc-first-quadrant-column-augmentation"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NA-b92a66f84",
-    "group": "NA",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-b92a66f84 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. Corrected the item provenance (`created.item` named another item) and marked substantive steps 1–6 and 8 as non-elementary. Repair written under fixes/dag/nodes/sec-proper-base-change/; review.md records all source, route, edge-case, target coefficient, and tool-use checks.; 1 file(s) fixed by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-ba81ab286",
-    "group": "NK",
-    "result": "pass",
-    "note": "Wrote review.md. Verified immutable files, every statement clause, exact dependencies, source construction, edge cases, docstrings, and verbatim signature. Server-only compile passed in 0.9 seconds without diagnostics. No defects found; branch head unchanged."
-  },
-  "lean": {
-    "module": "Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution",
-    "declaration": "CochainComplex.exists_functorial_bounded_injective_resolution",
-    "file": "lean/Sheaf/Algebra/Homology/FunctorialBoundedInjectiveResolution.lean",
-    "statement": "theorem exists_functorial_bounded_injective_resolution {C : Type u} [Category.{v} C] [Abelian C] (J : C ⥤ C) (η : 𝟭 C ⟶ J) (hη : ∀ A : C, Mono (η.app A)) (hJ : ∀ A : C, Injective (J.obj A)) : ∃ (I : Plus C ⥤ Plus C) (α : Plus.ι C ⟶ I ⋙ Plus.ι C), (∀ K : Plus C, QuasiIso (α.app K)) ∧ (∀ (K : Plus C) (n : ℤ), Injective (((I.obj K).obj).X n)) ∧ (∀ (K : Plus C) (a : ℤ), K.obj.IsStrictlyGE a → (I.obj K).obj.IsStrictlyGE a)",
-    "branch": "newtargets-dag",
-    "by": "NK",
-    "date": "2026-10-15",
-    "existing": false
-  },
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "X-5078e",
-    "group": "D4",
-    "result": "pass",
-    "landing": "20261015T190716-L-966222",
-    "kind": "interface",
-    "note": "independent Codex review: Packet, delivered Lean/DAG files, and direct importer matched; all compiled successfully."
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-functorial-object-resolution",
+  "lem-weil-pbc-functorial-bounded-injective-resolution-totalization"
+ ],
+ "proof_origin": {
+  "by": "D4 stage 3 proof",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0141, assertion (1); assemble the existing object-resolution statement and the proved totalization construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an abelian category with functorial injective embeddings bounded below complexes admit functorial injective resolutions preserving every lower bound",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial bounded below injective resolution of complexes preserving the lower bound",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.of_def, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex, CategoryTheory.InjectiveResolution.of, CategoryTheory.InjectiveResolution.instHasInjectiveResolutions, CategoryTheory.InjectiveResolution.instHasInjectiveResolution, CategoryTheory.injectiveResolution, CategoryTheory.HasInjectiveResolutions.out, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned object resolutions, Mayer-Vietoris free sheaves or scheme-module functors do not state this assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\"",
+   "results": "12 hits: CategoryTheory.HasInjectiveResolutions, CategoryTheory.HasInjectiveResolution, CategoryTheory.InjectiveResolution, CategoryTheory.InjectiveResolution.self, CategoryTheory.HasInjectiveResolutions.mk, CategoryTheory.HasInjectiveResolutions.out, CategoryTheory.HasInjectiveResolution.mk, CategoryTheory.HasInjectiveResolution.out; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned object resolutions, Mayer-Vietoris free sheaves or scheme-module functors do not state this assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "functorial.*injective|injective.*resolution",
+   "results": "2 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned object resolutions, Mayer-Vietoris free sheaves or scheme-module functors do not state this assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolution functor for bounded below complexes of a Grothendieck abelian category with all terms zero below the same integer",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.of_def, CategoryTheory.Abelian.LeftResolution.chainComplex, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.of, CategoryTheory.Abelian.LeftResolution.chainComplexXIso, CategoryTheory.injectiveResolution; ",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned object resolutions, Mayer-Vietoris free sheaves or scheme-module functors do not state this assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial injective resolution of bounded below cochain complexes preserving all lower bounds",
+   "results": "{\"t\": \"2026-10-14T00:39:40Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial injective resolution of bounded below cochain complexes preserving all lower bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\", \"CategoryTheory.InjectiveResolution.of_def\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.I_X\"], \"digest\": \"f732f5ceb877a9f1\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: object resolutions or generic support/factorization APIs, not a strictly functorial lower-bound-preserving resolution of complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\"",
+   "results": "{\"t\": \"2026-10-14T00:39:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"InjectiveResolution\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.HasInjectiveResolutions\", \"CategoryTheory.HasInjectiveResolution\", \"CategoryTheory.InjectiveResolution\", \"CategoryTheory.InjectiveResolution.self\", \"CategoryTheory.HasInjectiveResolutions.mk\", \"CategoryTheory.HasInjectiveResolutions.out\", \"CategoryTheory.HasInjectiveResolution.mk\", \"CategoryTheory.HasInjectiveResolution.out\"], \"digest\": \"bb7af3745eb8f165\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: object resolutions or generic support/factorization APIs, not a strictly functorial lower-bound-preserving resolution of complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "functorial.*injective|injective.*functorial",
+   "results": "{\"t\": \"2026-10-14T00:39:42Z\", \"tool\": \"grep\", \"query\": \"functorial.*injective|injective.*functorial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Epi.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"Mathlib/Topology/Sheaves/LocallySurjective.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Concrete.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Concrete.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Concrete.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Concrete.lean\"], \"digest\": \"7c38942f4fd1f401\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: object resolutions or generic support/factorization APIs, not a strictly functorial lower-bound-preserving resolution of complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial injective resolution of bounded below complexes preserving lower bounds",
+   "results": "{\"t\": \"2026-10-14T00:39:42Z\", \"tool\": \"leansearch\", \"query\": \"Functorial injective resolution of bounded below complexes preserving lower bounds\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A zero preserving functorial injective embedding yields a natural termwise injective replacement functor on bounded below complexes",
+   "results": "{\"t\": \"2026-10-14T00:40:00Z\", \"tool\": \"leanfinder\", \"query\": \"A zero preserving functorial injective embedding yields a natural termwise injective replacement functor on bounded below complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.Embedding.instFaithfulHomologicalComplexExtendFunctor\", \"HomologicalComplex.map_isStrictlySupported\", \"ComplexShape.Embedding.instPreservesZeroMorphismsHomologicalComplexRestrictionFunctor\", \"CochainComplex.cm5b.I_X\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"HomologicalComplex.IsSupported\", \"ComplexShape.Embedding.extendFunctor\", \"ComplexShape.Embedding.extendFunctor_obj\"], \"digest\": \"5a6f140bef022c6a\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: object resolutions or generic support/factorization APIs, not a strictly functorial lower-bound-preserving resolution of complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian category with a functor to injective objects admits a natural quasi-isomorphic replacement of bounded below cochain complexes with the same vanishing degrees",
+   "results": "{\"t\": \"2026-10-14T00:43:38Z\", \"tool\": \"leanfinder\", \"query\": \"An abelian category with a functor to injective objects admits a natural quasi-isomorphic replacement of bounded below cochain complexes with the same vanishing degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CochainComplex.isKInjective_iff_rightOrthogonal\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.isKInjective_of_iso\", \"CochainComplex.IsKInjective.rightOrthogonal\"], \"digest\": \"18d1e81a87148835\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: second-reader search returned object resolutions in the homotopy category, K-injectivity criteria, or unrelated functor declarations; none states this strict bound-preserving complex replacement"
+  },
+  {
+   "tool": "grep",
+   "query": "injectiveResolutions|Injective.*[Ff]unctor|[Ff]unctor.*Injective",
+   "results": "{\"t\": \"2026-10-14T00:43:38Z\", \"tool\": \"grep\", \"query\": \"injectiveResolutions|Injective.*[Ff]unctor|[Ff]unctor.*Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\"], \"digest\": \"72ece66c0afeb4f3\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: second-reader search returned object resolutions in the homotopy category, K-injectivity criteria, or unrelated functor declarations; none states this strict bound-preserving complex replacement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"injectiveResolutions\"",
+   "results": "{\"t\": \"2026-10-14T00:43:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"injectiveResolutions\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.HasInjectiveResolutions\", \"CategoryTheory.HasInjectiveResolutions.mk\", \"CategoryTheory.HasInjectiveResolutions.out\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolutions\", \"CategoryTheory.injectiveResolutions\"], \"digest\": \"3e1b9efb6762d9ac\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: second-reader search returned object resolutions in the homotopy category, K-injectivity criteria, or unrelated functor declarations; none states this strict bound-preserving complex replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-weil-pbc-condensed-open-closed-recollement",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-functorial-bounded-injective-resolution",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0141 and 0133, normalized the embedding without assuming additivity, expanded the recursive functorial construction and finite-diagonal totalization, and reused the first-quadrant column augmentation lemma after explicit reindexing. No new nodes or statement changes.",
+  "blueprint": "Refines the existing from.place supporting bounded-below resolution models for the derived Hom recollement input below thm-weil-pbc-qbar; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-first-quadrant-column-augmentation",
+    "why": "Generic first-quadrant augmentation-to-total quasi-isomorphism theorem; the proper-base-change unit supplies no homological-algebra totalization comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-first-quadrant-column-augmentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-b92a66f84",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-b92a66f84 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. Corrected the item provenance (`created.item` named another item) and marked substantive steps 1–6 and 8 as non-elementary. Repair written under fixes/dag/nodes/sec-proper-base-change/; review.md records all source, route, edge-case, target coefficient, and tool-use checks.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ba81ab286",
+  "group": "NK",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, every statement clause, exact dependencies, source construction, edge cases, docstrings, and verbatim signature. Server-only compile passed in 0.9 seconds without diagnostics. No defects found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution",
+  "declaration": "CochainComplex.exists_functorial_bounded_injective_resolution",
+  "file": "lean/Sheaf/Algebra/Homology/FunctorialBoundedInjectiveResolution.lean",
+  "statement": "theorem exists_functorial_bounded_injective_resolution {C : Type u} [Category.{v} C] [Abelian C] (J : C ⥤ C) (η : 𝟭 C ⟶ J) (hη : ∀ A : C, Mono (η.app A)) (hJ : ∀ A : C, Injective (J.obj A)) : ∃ (I : Plus C ⥤ Plus C) (α : Plus.ι C ⟶ I ⋙ Plus.ι C), (∀ K : Plus C, QuasiIso (α.app K)) ∧ (∀ (K : Plus C) (n : ℤ), Injective (((I.obj K).obj).X n)) ∧ (∀ (K : Plus C) (a : ℤ), K.obj.IsStrictlyGE a → (I.obj K).obj.IsStrictlyGE a)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "XREPAIR-d9718f5111d65eef",
+  "group": "XRd9718f5111d65eef",
+  "result": "pass",
+  "landing": "20261015T205051-L-1693599",
+  "kind": "interface",
+  "note": "\nREADY: Added the missing proof-only Serre-closure import to TwoColimit. Both Lean files passed single-file checks within 60 seconds. Report and change record updated; no delivery or push.\nDELIVERED: checks and fix"
+ }
 }
