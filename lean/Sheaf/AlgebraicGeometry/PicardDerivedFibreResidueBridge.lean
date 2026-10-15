@@ -16,7 +16,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Fiber
-import Sheaf.AlgebraicGeometry.PicardH1CommonMinimalModel
+import Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueModelData
+import Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueBridgeCore
 
 /-! A common affine residue model bridge for the derived fibre comparison.
 
@@ -30,6 +31,10 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+set_option linter.unusedVariables false in
+set_option linter.style.haveILetI false in
+set_option maxHeartbeats 1600000 in
+-- Model selection and its nested derived-category terms exceed the default heartbeat limit.
 /-- Choose common affine residue models and representatives for the finite family.
 Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.
 (blueprint: new-picard-derived-fibre-residue-bridge)
@@ -104,6 +109,16 @@ theorem picard_derived_fibre_residue_bridge
                   (((Over.pullback (S.fromSpecResidueField s)).map
                     (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                       (ui i) (hui i))).left) 1 (eKg z)) := by
-  sorry
+  classical
+  dsimp only
+  obtain ⟨U, hwU, hU, p, hp, hpEq, K, C, hK, hC, hE, hCi⟩ :=
+    picard_derived_fibre_residue_model_data f Xi fi ui hui L W k w s hw τ
+  letI : p.IsPrime := hp
+  obtain ⟨eK, eC, eKg, eCg, hnat⟩ :=
+    picard_derived_fibre_residue_bridge_core f Xi fi ui hui L W k w s hw τ
+      U hwU hU p hpEq K C hK hC hE hCi
+  exact ⟨U, hwU, hU, p, hp, hpEq, K, C, hK, hC, hE, hCi,
+    eK, eC, eKg, eCg, hnat⟩
+
 
 end AlgebraicGeometry.Scheme
