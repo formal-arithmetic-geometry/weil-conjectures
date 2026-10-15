@@ -7,10 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.SimplicialMatchingObject
-import Sheaf.AlgebraicGeometry.ProEtaleQcAffineContractibleCover
-import Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry
-import Sheaf.CategoryTheory.SiteFiniteBasisHypercoverExistence
-import Sheaf.CategoryTheory.SiteHypercoverDisjointUnion
+import Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverGeometry
+import Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverWeak
 
 /-!
 # Affine weakly contractible pro-etale hypercovers
@@ -74,6 +72,9 @@ theorem exists_affine_weaklyContractible_hypercover
         ∃ μ : U _⦋n + 2⦌ ⟶ c.pt,
           (∀ i : Fin (n + 3), μ ≫ c.π.app (WalkingMulticospan.left i) = U.δ i) ∧
           Epi ((topology X).yoneda.map μ.left)) := by
-  sorry
+  obtain ⟨U, hAff, hComp, hzero, hone, hhigher⟩ :=
+    exists_affine_hypercover_geometry X W
+  refine ⟨U, hAff, ?_, hzero, hone, hhigher⟩
+  exact weaklyContractible_of_components X W U hComp
 
 end AlgebraicGeometry.Scheme.ProEt

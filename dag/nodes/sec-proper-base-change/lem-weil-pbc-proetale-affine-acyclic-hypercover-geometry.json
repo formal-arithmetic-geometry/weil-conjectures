@@ -1,0 +1,117 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+   "place": "geometric and component-evaluation part of its proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A1, proof of clause (2)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the finite-basis hypercover construction in the qcqs subsite, realize each finite formal coproduct in the full pro-etale slice, and transport matching epimorphisms and component evaluation bijections through the representable coproduct comparison.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "lem-weil-pbc-site-finite-basis-hypercover-existence",
+    "lem-weil-pbc-site-hypercover-disjoint-union"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-weil-pbc-site-finite-basis-hypercover-existence",
+  "lem-weil-pbc-site-hypercover-disjoint-union"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A1, proof of clause (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hypercover weaklyContractible finite coproduct evaluation",
+   "results": "No exact existing declaration; only generic simplicial matching APIs.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "weaklyContractible hypercover",
+   "results": "No exact match.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine weakly contractible pro-etale hypercover",
+   "results": "No exact match.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercover",
+  "date": "2026-10-15",
+  "group": "C3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "merged_into": null,
+ "id": "lem-weil-pbc-proetale-affine-acyclic-hypercover-geometry",
+ "title": "Geometric realization and component evaluations for the affine hypercover",
+ "statement": "For every qcqs pro-etale object W over X there is a simplicial object U over W with affine terms, finite component evaluation bijections and weakly contractible component evaluations, and epimorphic degree-zero and higher matching arrows. The conclusion includes all clauses of the affine weakly contractible hypercover theorem except the assembled weak-contractibility clause, together with the finite component decomposition data used to prove that clause.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverGeometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAffineAcyclicHypercoverGeometry.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.exists_affine_hypercover_geometry",
+  "statement": "theorem exists_affine_hypercover_geometry (X : Scheme.{u}) (W : X.ProEt) [CompactSpace W.left] [QuasiSeparatedSpace W.left] : ∃ U : SimplicialObject (Over W), (∀ n : ℕ, IsAffine (U _⦋n⦌).left.left) ∧ (∀ n : ℕ, ∃ (I : Type (u + 1)) (V : I → X.ProEt) (maps : ∀ i : I, V i ⟶ (U _⦋n⦌).left), (∀ F : Sheaf (topology X) (Type (u + 1)), Function.Bijective (fun s : F.obj.obj (op (U _⦋n⦌).left) ↦ fun i ↦ F.obj.map (maps i).op s)) ∧ (∀ (i : I) (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (V i))))) ∧ Epi ((topology X).yoneda.map (U _⦋0⦌).hom) ∧ (∃ c : Fan (fun _ : Fin 2 ↦ U _⦋0⦌), Nonempty (IsLimit c) ∧ ∃ μ : U _⦋1⦌ ⟶ c.pt, (∀ i : Fin 2, μ ≫ c.proj i = U.δ i) ∧ Epi ((topology X).yoneda.map μ.left)) ∧ (∀ n : ℕ, ∃ c : Cone (SimplicialObject.matchingBoundaryIndex U n).multicospan, Nonempty (IsLimit c) ∧ ∃ μ : U _⦋n + 2⦌ ⟶ c.pt, (∀ i : Fin (n + 3), μ ≫ c.π.app (WalkingMulticospan.left i) = U.δ i) ∧ Epi ((topology X).yoneda.map μ.left))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T161024-L-259778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T161024-L-259778",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

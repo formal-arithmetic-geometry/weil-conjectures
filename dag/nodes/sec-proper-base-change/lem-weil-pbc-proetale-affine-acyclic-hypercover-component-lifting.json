@@ -1,0 +1,109 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+   "place": "geometric and component-evaluation part of its proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A1, proof of clause (2)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For each component, choose a preimage using the assumed surjectivity. Assemble these preimages by the evaluation bijection for the source sheaf, then use naturality and injectivity of the target evaluation bijection to verify that the assembled section maps to the prescribed section.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A1, proof of clause (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hypercover weaklyContractible finite coproduct evaluation",
+   "results": "No exact existing declaration; only generic simplicial matching APIs.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "weaklyContractible hypercover",
+   "results": "No exact match.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine weakly contractible pro-etale hypercover",
+   "results": "No exact match.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercover",
+  "date": "2026-10-15",
+  "group": "C3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "merged_into": null,
+ "id": "lem-weil-pbc-proetale-affine-acyclic-hypercover-component-lifting",
+ "title": "Componentwise lifting on finite coproduct evaluations",
+ "statement": "Given a simplicial object U over W and, in every degree, a finite family of component objects whose evaluation maps are bijective and on which every sheaf epimorphism evaluates surjectively, every sheaf epimorphism evaluates surjectively on U in that degree.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverWeak",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAffineAcyclicHypercoverWeak.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.weaklyContractible_of_components",
+  "statement": "theorem weaklyContractible_of_components (X : Scheme.{u}) (W : X.ProEt) (U : SimplicialObject (Over W)) (hcomponents : ∀ n : ℕ, ∃ (I : Type (u + 1)) (V : I → X.ProEt) (maps : (i : I) → V i ⟶ (U.obj (op (SimplexCategory.mk n))).left), (∀ F : Sheaf (topology X) (Type (u + 1)), Function.Bijective (fun s : F.obj.obj (op (U.obj (op (SimplexCategory.mk n))).left) ↦ fun i ↦ F.obj.map (maps i).op s)) ∧ (∀ (i : I) (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (V i))))) : ∀ (n : ℕ) (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (U.obj (op (SimplexCategory.mk n))).left))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T161024-L-259778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T161024-L-259778",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
