@@ -24,6 +24,7 @@ import WeilConjectures.Compactification.BaseChange
 import WeilConjectures.Compactification.Constructions
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+import WeilConjectures.Compactification.Defs
 
 /-!
 # The compactification category and base change

@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Field.ULift
+import Sheaf.AlgebraicGeometry.GenericOpenImmersionConstructibility
 
 /-!
 # Higher open direct images over a field

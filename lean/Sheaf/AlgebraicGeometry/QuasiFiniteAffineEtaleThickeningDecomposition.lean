@@ -22,6 +22,10 @@ import Sheaf.RingTheory.ReducedIdealsZeroIntersection
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.PullbackCarrier
+import Sheaf.AlgebraicGeometry.DescendQuasiFiniteAffine
+import Sheaf.AlgebraicGeometry.FiniteAffineSectionCover
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
+import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 
 /-!
 # Finite etale thickenings after surjective affine base change

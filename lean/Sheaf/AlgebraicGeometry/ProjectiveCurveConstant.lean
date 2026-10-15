@@ -29,6 +29,9 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
+import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
+import Sheaf.AlgebraicGeometry.ProjectiveSmoothCurveFiniteness
 
 /-!
 # Constant coefficients on projective families of dimension at most one

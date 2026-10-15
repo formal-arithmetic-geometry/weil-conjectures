@@ -11,6 +11,8 @@ import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.RingTheory.IndPrincipalZariski
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
 
 /-!
 # Inverse image of profinite coefficient rings

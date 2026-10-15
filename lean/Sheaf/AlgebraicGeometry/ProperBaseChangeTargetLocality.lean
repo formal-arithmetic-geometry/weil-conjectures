@@ -14,6 +14,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.BaseChange.Derived
 import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
 import WeilConjectures.SixFunctors.BaseChange.Square
+import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 
 /-!
 # Target locality of proper base change

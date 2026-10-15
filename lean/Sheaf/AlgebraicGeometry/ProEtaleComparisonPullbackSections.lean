@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
 import Sheaf.AlgebraicGeometry.EtaleSectionsFpqcDescent
 import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 
 /-!
 # Sections of the etale-to-pro-etale inverse image

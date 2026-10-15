@@ -18,6 +18,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionGeneral
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Paper.ProjectionFormulaProjectiveSummand
 
 /-!
 # Signed totalization of the perfect projection formula

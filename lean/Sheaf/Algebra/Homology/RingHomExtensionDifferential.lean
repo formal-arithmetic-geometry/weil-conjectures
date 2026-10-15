@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Homology.RingHomExtensionDefs
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-! # Differential compatibility for normalized Hom degree maps
 

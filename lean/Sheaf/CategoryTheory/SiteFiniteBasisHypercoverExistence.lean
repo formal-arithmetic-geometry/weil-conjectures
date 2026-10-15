@@ -9,6 +9,8 @@ public import Mathlib.CategoryTheory.Sites.Precoverage
 public import Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic
 public import Sheaf.CategoryTheory.ProperFaceMatchingObject
 import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.Paper.SiteHypercoverFiniteExtension
 
 /-!
 # Hypercovers finite in each degree from a finite covering basis

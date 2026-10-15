@@ -24,6 +24,9 @@ import Sheaf.AlgebraicGeometry.DescendClosedImmersion
 import Sheaf.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
 import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
+import Sheaf.AlgebraicGeometry.NagataRelativeGluingAxiomsEventually
+import Sheaf.AlgebraicGeometry.NormalityPerfectClosureTest
+import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
 
 /-!
 # Geometrically normal normalization after purely inseparable extension

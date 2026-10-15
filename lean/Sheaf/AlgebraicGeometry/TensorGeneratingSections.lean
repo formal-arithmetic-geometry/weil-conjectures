@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
 # Tensor products of generating sections

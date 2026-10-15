@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.SimplicialMatchingObject
+import Sheaf.AlgebraicGeometry.ProEtaleQcAffineContractibleCover
+import Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry
+import Sheaf.CategoryTheory.SiteFiniteBasisHypercoverExistence
+import Sheaf.CategoryTheory.SiteHypercoverDisjointUnion
 
 /-!
 # Affine weakly contractible pro-etale hypercovers

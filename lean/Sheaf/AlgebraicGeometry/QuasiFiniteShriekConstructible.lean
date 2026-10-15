@@ -16,6 +16,11 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.SixFunctors.Finite.Exact
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.AlgebraicGeometry.FiniteFinitePresentationPushforwardConstructible
+import Sheaf.AlgebraicGeometry.Morphisms.QuasiFiniteFpFiniteFactorization
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Constructible cohomology under quasi-finite lower shriek

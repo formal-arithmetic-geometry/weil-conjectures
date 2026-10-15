@@ -26,6 +26,8 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
+import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
 
 /-!
 # Proper direct-image bound for torsion étale sheaves

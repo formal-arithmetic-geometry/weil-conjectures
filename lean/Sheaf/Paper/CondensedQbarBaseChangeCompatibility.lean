@@ -16,6 +16,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.AlgebraicGeometry.ProEtaleBoundedBelowCoproducts
+import Sheaf.Paper.ProfinitePointPullback
 
 /-!
 # Condensed finite-to-algebraic-closure coefficient change and exchange

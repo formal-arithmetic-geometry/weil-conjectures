@@ -19,6 +19,10 @@ import Sheaf.Paper.SiteSheafificationSectionsLocal
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.AlgebraicGeometry.Sites.Etale
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # The sheaf of integral lattices

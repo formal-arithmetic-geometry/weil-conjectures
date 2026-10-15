@@ -16,6 +16,9 @@ import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # From affine to global torsion cohomological dimension

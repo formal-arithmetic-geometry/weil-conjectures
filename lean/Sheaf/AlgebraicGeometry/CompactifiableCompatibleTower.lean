@@ -14,6 +14,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import WeilConjectures.Compactification.Constructions
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+import WeilConjectures.Compactification.CategoryBaseChange
 
 /-!
 # Compatible compactification towers over arbitrary bases

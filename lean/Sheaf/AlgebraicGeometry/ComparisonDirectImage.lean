@@ -16,6 +16,8 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 import Sheaf.AlgebraicGeometry.DerivedCohomologyContinuity
 import Sheaf.RingTheory.IndEtaleStability
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
 
 /-!
 # The canonical comparison for bounded below direct images

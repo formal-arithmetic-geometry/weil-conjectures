@@ -15,6 +15,11 @@ import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
+import Sheaf.AlgebraicGeometry.AffineSepclosedEtaleAcyclic
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.RingTheory.WeaklyEtaleField
 
 /-!
 # Affine sections of functions modulo the constant pro-etale sheaf

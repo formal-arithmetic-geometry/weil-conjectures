@@ -15,6 +15,9 @@ import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Derived pullback on ringed topoi

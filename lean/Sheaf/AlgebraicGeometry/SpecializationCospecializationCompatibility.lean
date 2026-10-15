@@ -13,6 +13,14 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
 import Sheaf.AlgebraicGeometry.UnderivedGlobalGermExchange
 import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
+import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
+import Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreUnit
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
+import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-!
 # Specialization and cospecialization commute with fibre maps

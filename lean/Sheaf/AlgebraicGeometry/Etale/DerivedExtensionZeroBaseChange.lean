@@ -17,6 +17,10 @@ import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import WeilConjectures.SixFunctors.OpenClosed.Complex
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Derived extension-by-zero base change

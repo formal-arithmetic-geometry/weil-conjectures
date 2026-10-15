@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProperOpenComparison
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.OpenSectionClopen
 
 /-!
 # The section and open pullback for a proper morphism

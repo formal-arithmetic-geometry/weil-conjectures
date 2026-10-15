@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedBaseChangeNaturality
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
+import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 
 /-! # Statements of the new targets (batch 2) about `DerivedBaseChangeNaturality`
 

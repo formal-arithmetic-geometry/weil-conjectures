@@ -8,6 +8,11 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.AlgebraicGeometry.CompatibleCompactificationTriangle
+import Sheaf.AlgebraicGeometry.EtaleOpenProperInterchange
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Composition of qcqs etale compact-support candidates

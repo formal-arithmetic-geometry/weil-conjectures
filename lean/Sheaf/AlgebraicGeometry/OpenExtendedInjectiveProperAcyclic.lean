@@ -21,6 +21,8 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import Sheaf.AlgebraicGeometry.TorsionAssembly
+import Sheaf.AlgebraicGeometry.GeometricStalkCohomology
+import Sheaf.AlgebraicGeometry.OpenImmersionExtensionZeroBaseChange
 
 /-!
 # Acyclicity of open extensions in proper commutative squares

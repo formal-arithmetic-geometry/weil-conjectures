@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Geometric stalks on the small pro-etale site

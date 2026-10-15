@@ -26,6 +26,9 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ClosedSubschemeBaseChangeIdealImage
 import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
+import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import Sheaf.AlgebraicGeometry.EtaleLocalityBaseChange
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
 
 /-!
 # Detection of failure of base change over a field

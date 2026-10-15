@@ -14,6 +14,7 @@ import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
 import Sheaf.RingTheory.SmoothNormalRing
 import Sheaf.RingTheory.FilteredColimitNormalRing
 import Mathlib.RingTheory.Localization.BaseChange
+import Sheaf.RingTheory.NormalRingFieldExtensionDescent
 
 /-!
 # Perfect-closure criterion for geometric normality

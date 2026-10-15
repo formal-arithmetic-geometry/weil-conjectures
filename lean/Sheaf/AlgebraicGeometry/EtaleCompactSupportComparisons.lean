@@ -15,6 +15,15 @@ import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
+import Sheaf.AlgebraicGeometry.EtaleOpenProperInterchange
+import Sheaf.AlgebraicGeometry.ProperOpenComparisonComposition
+import Sheaf.AlgebraicGeometry.ProperOpenComparisonIso
+import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Canonical comparisons for ordinary etale compact support

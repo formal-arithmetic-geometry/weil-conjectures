@@ -25,6 +25,8 @@ import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
 import Sheaf.Paper.CohomologyInWeakSerreSubcategory
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
+import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 
 /-!
 # Bounded constructible pro-etale complexes form a triangulated subcategory

@@ -18,6 +18,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.CategoryTheory.Sites.Point.Basic
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Finite torsion Tate twists are étale locally free lines

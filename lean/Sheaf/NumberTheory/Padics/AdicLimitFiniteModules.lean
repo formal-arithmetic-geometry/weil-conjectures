@@ -13,6 +13,7 @@ public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Sheaf.Paper.AdicTowerReconstruction
 import Sheaf.RingTheory.FiniteModuleComplete
 import Sheaf.RingTheory.FiniteOverCompleteRing
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 
 /-!
 # Adic systems of finite modules over p-adic coefficient rings

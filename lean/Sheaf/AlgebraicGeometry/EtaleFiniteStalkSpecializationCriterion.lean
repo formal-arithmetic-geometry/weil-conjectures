@@ -13,6 +13,8 @@ import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.AlgebraicGeometry.GeometricStalkComparisonConstant
 import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.GeometricSpecializationStrictLocalLift
+import Sheaf.AlgebraicGeometry.StrictHenselization
 
 /-! # Finite stalks and specialization imply finite local constancy
 

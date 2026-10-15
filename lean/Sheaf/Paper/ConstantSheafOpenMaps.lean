@@ -2,6 +2,7 @@ module
 
 public import Sheaf.Topology.LocallyConstantMapsPresheaf
 public import Mathlib.Topology.Sheaves.Sheaf
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Maps out of the sheaf of locally constant maps on a space

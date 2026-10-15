@@ -22,6 +22,8 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Derived Hom from a locally finite free module on a ringed site
 

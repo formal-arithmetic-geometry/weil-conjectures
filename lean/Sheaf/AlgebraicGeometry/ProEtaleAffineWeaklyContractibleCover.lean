@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.RingTheory.IndEtaleStability
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.WContractibleAffineEvaluation
+import Sheaf.RingTheory.BoundedWContractibleExtension
 
 /-!
 # Affine weakly contractible covering families on the small pro-etale site

@@ -18,6 +18,10 @@ import Mathlib.RingTheory.FiniteType
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import Sheaf.AlgebraicGeometry.FiniteInseparableGeometricReduction
+import Sheaf.AlgebraicGeometry.GenericQuasiSeparatedness
+import Sheaf.AlgebraicGeometry.ReductionGenericFibre
+import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
 
 /-! # Preparing a geometrically reduced generic fibre
 

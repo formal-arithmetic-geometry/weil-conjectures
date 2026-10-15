@@ -22,6 +22,7 @@ import Mathlib.Topology.Spectral.Basic
 import Sheaf.Topology.NoetherianTopologicalCohomologyVanishing
 import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.Topology.ModuleMayerVietoris
+import Sheaf.Topology.PuncturedNeighborhoodCohomologyColimit
 
 /-! # Surjectivity of top-degree cohomology restriction
 

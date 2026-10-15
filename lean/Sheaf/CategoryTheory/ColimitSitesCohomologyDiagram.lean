@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.ColimitSites
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-! # Cohomology diagrams on colimit sites.
 

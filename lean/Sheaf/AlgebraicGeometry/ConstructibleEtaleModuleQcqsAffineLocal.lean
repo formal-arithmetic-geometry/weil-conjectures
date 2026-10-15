@@ -19,6 +19,9 @@ import Mathlib.CategoryTheory.Adjunction.Basic
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
 import Mathlib.AlgebraicGeometry.AffineScheme
+import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Affine locality of constructible etale module sheaves on qcqs schemes

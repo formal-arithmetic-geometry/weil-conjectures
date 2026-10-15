@@ -15,6 +15,7 @@ import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion
 import Sheaf.Paper.SiteSheafificationSectionsLocal
 import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
 # Pullback of flat modules along morphisms of ringed topoi

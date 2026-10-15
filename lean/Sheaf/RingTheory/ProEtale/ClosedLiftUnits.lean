@@ -10,6 +10,7 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.RingTheory.Etale.Basic
+import WeilConjectures.RingTheory.ProEtale.ClosedLift
 
 /-! # Units of the ind-etale closed lift
 

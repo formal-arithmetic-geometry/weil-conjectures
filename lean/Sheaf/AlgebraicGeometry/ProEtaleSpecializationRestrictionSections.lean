@@ -20,6 +20,9 @@ import Sheaf.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEvaluation
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Sheaf.Paper.SiteSheafificationSectionsLocal
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation
+import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Sections on a closed specialization neighbourhood in the pro-etale site

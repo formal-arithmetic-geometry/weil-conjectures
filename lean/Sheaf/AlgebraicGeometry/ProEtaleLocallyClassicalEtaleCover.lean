@@ -11,6 +11,9 @@ import Sheaf.RingTheory.IndPrincipalZariski
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 
 /-!
 # Locally classical pro-etale sheaves and etale-local sections

@@ -21,6 +21,11 @@ import WeilConjectures.ConstructibleSheaf.Defs
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.Paper.InverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.ExchangeStrictLocalCohomology
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
+import Sheaf.AlgebraicGeometry.StrictLocalGeometricFibreTest
+import Sheaf.AlgebraicGeometry.StrictlyHenselianConstantCohomology
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
 
 /-!
 # Smooth morphisms are universally locally acyclic

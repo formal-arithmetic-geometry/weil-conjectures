@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.CategoryTheory.ColimitSites
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-! # Representatives in one inverse-image sheaf on a colimit site.
 

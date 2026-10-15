@@ -18,6 +18,7 @@ import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.Paper.SiteRestrictionExact
 import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Etale locality of base change

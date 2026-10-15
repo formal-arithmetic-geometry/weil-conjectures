@@ -13,6 +13,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionByZeroAdjunction
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Comparison of extension by zero on the etale and pro-etale sites

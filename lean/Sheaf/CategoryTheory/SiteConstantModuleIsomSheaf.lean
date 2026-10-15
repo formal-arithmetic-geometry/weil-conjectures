@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Mathlib.CategoryTheory.Sites.CoverLifting
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Isomorphisms between constant finitely presented module sheaves

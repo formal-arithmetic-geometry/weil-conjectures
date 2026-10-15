@@ -14,6 +14,7 @@ public import Mathlib.Topology.KrullDimension
 import Sheaf.Paper.ReducedSourceFactors
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Sheaf.AlgebraicGeometry.FiniteOverProjective
 
 /-!
 # Normalizations of the components of a projective scheme

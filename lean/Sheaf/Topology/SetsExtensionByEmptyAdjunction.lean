@@ -2,6 +2,7 @@ module
 
 public import Sheaf.Topology.SetsExtensionByEmpty
 public import Mathlib.Topology.Sheaves.Functors
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Extension by the empty set: adjunction and stalks

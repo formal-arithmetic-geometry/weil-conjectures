@@ -21,6 +21,10 @@ import WeilConjectures.ConstructibleSheaf.OpenClosed
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+import Sheaf.AlgebraicGeometry.FiniteReflectsBoundedConstructible
+import Sheaf.AlgebraicGeometry.OpenClosedRecollement
+import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Recovering bounded constructibility at a finite boundary

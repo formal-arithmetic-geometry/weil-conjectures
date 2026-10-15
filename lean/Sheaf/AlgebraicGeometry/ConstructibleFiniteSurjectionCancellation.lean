@@ -21,6 +21,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.CategoryTheory.CartanEilenbergExists
 import Sheaf.CategoryTheory.HypercohomologyFirstPage
 import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.AlgebraicGeometry.FiniteConstructibleDirectImage
 
 /-!
 # Constructibility descends through a finite surjection

@@ -14,6 +14,9 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! # Exact condensed coefficient changes and their derived tensor calculus
 

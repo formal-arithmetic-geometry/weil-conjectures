@@ -15,6 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import Sheaf.AlgebraicGeometry.ProperTorsionProjectionFormula
 
 /-!
 # The proper projection formula with the base factor first

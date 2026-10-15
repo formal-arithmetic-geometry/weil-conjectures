@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.ConstructibleSurjectivePullback
 
 /-!
 # Descent of constructibility along a surjective morphism

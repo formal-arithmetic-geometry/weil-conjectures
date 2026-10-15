@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
 import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Exact countable products of pro-etale module sheaves

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Topology.Sheaves.Limits
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Surjections as coequalizers of kernel-pair covers

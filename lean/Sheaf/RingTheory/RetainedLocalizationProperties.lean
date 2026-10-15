@@ -13,6 +13,10 @@ import Sheaf.RingTheory.IndEtaleStability
 import Mathlib.Topology.Homeomorph.Lemmas
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.IsIso
+import Sheaf.AlgebraicGeometry.ZeroDimensionalSpectrumProfinite
+import Sheaf.RingTheory.IndPrincipalZariski
+import Sheaf.RingTheory.PrincipalWLocalization
+import WeilConjectures.RingTheory.ProEtale.WLocal
 
 /-! # Properties of the retained localization
 

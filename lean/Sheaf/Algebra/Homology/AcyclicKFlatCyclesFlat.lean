@@ -9,6 +9,8 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.Algebra.Homology.AcyclicKFlatTensor
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Homology.SiteFlatOpcyclesTorCriterion
 
 /-!
 # Flat cycles of an acyclic K-flat complex

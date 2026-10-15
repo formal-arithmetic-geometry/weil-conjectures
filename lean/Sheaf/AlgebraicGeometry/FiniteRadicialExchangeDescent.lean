@@ -20,6 +20,7 @@ import WeilConjectures.ConstructibleSheaf.Defs
 import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Descent of open direct image and exchange along finite radicial covers

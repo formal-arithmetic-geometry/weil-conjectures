@@ -11,6 +11,8 @@ public import Mathlib.CategoryTheory.Comma.Over.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.CategoryTheory.MorphismProperty.Limits
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Site axioms and limits for the qcqs pro-etale subsite

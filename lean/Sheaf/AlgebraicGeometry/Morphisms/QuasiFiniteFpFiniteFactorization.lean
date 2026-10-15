@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.ClosedLimitLfpStabilization
+import Sheaf.AlgebraicGeometry.FiniteClosedFpApproximation
 
 /-!
 # Finitely presented Zariski main finite factorization

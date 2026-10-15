@@ -11,6 +11,8 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Sites.Limits
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable
 
 /-!
 # Localization of a continuous site morphism

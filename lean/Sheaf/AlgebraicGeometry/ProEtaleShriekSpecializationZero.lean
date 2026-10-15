@@ -13,6 +13,8 @@ import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.Paper.SiteSheafificationSectionsLocal
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+import Sheaf.AlgebraicGeometry.AffineClosedSpecializationLocalization
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Vanishing of pro-etale shriek sections near a disjoint closed subset

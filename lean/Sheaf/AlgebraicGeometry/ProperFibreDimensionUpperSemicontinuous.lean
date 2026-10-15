@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Topology.KrullDimension
 import Sheaf.Topology.DimensionSupremumLocalDimensions
+import Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen
 
 /-!
 # Upper semicontinuity of proper fibre dimension

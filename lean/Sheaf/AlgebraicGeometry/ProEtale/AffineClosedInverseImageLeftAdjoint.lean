@@ -14,6 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 import Sheaf.AlgebraicGeometry.IndEtaleBasisWeaklyContractibleCover
 import Sheaf.CategoryTheory.Sites.LowerShriekCoveringGenerators
+import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
 
 /-!
 # An extra left adjoint for affine closed pro-etale inverse image

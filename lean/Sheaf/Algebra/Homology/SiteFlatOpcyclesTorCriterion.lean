@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.Algebra.Homology.ExactSequence
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 
 /-!
 # Flat opcycles from universal ordinary tensor exactness

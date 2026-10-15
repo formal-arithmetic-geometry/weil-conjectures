@@ -16,6 +16,7 @@ import Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension
 import Sheaf.AlgebraicGeometry.GeometricallyConnectedAlgebraicClosure
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.Mathlib.Topology.KrullDimension
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Clopen dimension loci in proper smooth connected families

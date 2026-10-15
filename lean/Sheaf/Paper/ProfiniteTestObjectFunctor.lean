@@ -18,6 +18,7 @@ import Mathlib.AlgebraicGeometry.Gluing
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 
 /-!
 # Relative profinite test schemes

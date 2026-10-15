@@ -19,6 +19,7 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.Algebra.Homology.DerivedCategory.Plus
+import Sheaf.AlgebraicGeometry.ProperOpenSection
 
 /-!
 # Proper pushforward of extension by zero

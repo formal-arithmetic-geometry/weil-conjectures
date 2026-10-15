@@ -14,6 +14,8 @@ import Mathlib.FieldTheory.SeparableClosure
 import Sheaf.RingTheory.EtaleHenselianRingLift
 import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.IndEtaleAffineStrictLocalBaseChange
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 
 /-! # Strict localizations above the closed point of a strict-local base change
 

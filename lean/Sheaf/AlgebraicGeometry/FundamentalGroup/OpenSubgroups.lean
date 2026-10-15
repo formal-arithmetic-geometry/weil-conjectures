@@ -13,6 +13,7 @@ import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
 import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 
 /-!
 # Open subgroups and connected finite étale covers

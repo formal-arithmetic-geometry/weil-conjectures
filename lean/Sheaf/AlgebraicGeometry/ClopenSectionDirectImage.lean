@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Direct image from an open and closed section

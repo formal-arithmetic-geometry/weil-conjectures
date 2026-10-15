@@ -10,6 +10,7 @@ import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
 
 /-!
 # Projection-formula coherence for a square of ringed topoi

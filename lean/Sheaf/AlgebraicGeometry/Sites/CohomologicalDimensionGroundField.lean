@@ -29,6 +29,8 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
+import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 
 /-!
 # Descent of a geometric cohomological dimension bound

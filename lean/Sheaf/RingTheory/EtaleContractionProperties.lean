@@ -20,6 +20,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.RingTheory.TensorProduct.Basic
 import WeilConjectures.RingTheory.ProEtale.RetractionsStrictlyHenselian
+import Sheaf.RingTheory.DirectedColimitFaithfullyFlatAlgebras
 
 /-!
 # Properties of the étale contraction

@@ -18,6 +18,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry
 import Sheaf.RingTheory.IndPrincipalZariski
 import Sheaf.RingTheory.IndEtaleStability
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
 
 /-!
 # Inverse-image evaluation for an affine closed immersion

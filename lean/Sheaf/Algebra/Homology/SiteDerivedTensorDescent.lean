@@ -17,6 +17,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Derived tensor descent on a ringed site

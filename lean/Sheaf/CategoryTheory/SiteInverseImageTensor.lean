@@ -23,6 +23,7 @@ public import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Functor.Flat
 import Mathlib.CategoryTheory.Adjunction.Limits
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
 # Exact symmetric monoidal inverse image on a site

@@ -21,6 +21,9 @@ import Sheaf.Paper.SiteRestrictionExact
 import Sheaf.Paper.ExtendedCechCompletionModel
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 import Sheaf.Paper.FlatExtendedCechComparison
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.Paper.RestrictionLocalCompleteness
 
 /-!
 # Flat ringed-site equivalence on locally derived complete objects

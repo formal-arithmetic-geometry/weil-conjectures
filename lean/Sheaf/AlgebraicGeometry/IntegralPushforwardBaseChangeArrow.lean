@@ -17,6 +17,9 @@ import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.Paper.ExchangeIdentityPasting
 import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import Sheaf.AlgebraicGeometry.IntegralEtaleDirectImageExact
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Integral pushforward and the base-change arrow

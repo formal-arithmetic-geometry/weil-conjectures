@@ -12,6 +12,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 import Mathlib.CategoryTheory.MorphismProperty.Limits
+import Sheaf.AlgebraicGeometry.Sites.ArbitraryCurveCohomologicalDimension
+import Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit
 
 /-!
 # Torsion étale cohomological dimension of a one-variable field

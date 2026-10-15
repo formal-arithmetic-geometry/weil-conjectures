@@ -14,6 +14,7 @@ import Mathlib.RingTheory.FinitePresentation
 import Mathlib.CategoryTheory.Limits.HasLimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+import WeilConjectures.RingTheory.ProEtale.ClosedLift
 
 /-! # The closed-lift adjunction on ind-etale algebras
 

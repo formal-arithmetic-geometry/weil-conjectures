@@ -15,6 +15,7 @@ import Mathlib.CategoryTheory.Sites.LeftExact
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
 import Sheaf.Paper.SiteSheafificationSectionsLocal
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Disjoint unions of semirepresentable hypercovers

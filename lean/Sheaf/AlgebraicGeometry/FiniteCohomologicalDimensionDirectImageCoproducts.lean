@@ -18,6 +18,7 @@ import Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
 
 /-!
 # Finite cohomological dimension and coproducts of derived direct images

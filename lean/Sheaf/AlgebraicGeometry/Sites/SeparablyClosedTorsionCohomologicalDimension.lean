@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
 public import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Torsion cohomological dimension of a separably closed field

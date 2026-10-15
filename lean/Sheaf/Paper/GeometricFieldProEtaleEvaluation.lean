@@ -20,6 +20,7 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 import Sheaf.RingTheory.WeaklyEtaleField
+import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
 
 /-!
 # Pro-etale evaluation over an algebraically closed field

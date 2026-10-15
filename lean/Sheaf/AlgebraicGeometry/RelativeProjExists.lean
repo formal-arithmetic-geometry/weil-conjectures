@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RelativeProjData
 import Mathlib.AlgebraicGeometry.Gluing
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 
 /-! # Existence and affine compatibility of relative Proj
 

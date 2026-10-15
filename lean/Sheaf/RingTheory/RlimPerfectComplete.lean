@@ -15,6 +15,10 @@ public import Sheaf.RingTheory.DerivedCompleteModuleComplex
 public import Sheaf.Algebra.Homology.DerivedChangeOfRings
 import Sheaf.RingTheory.RingPseudoCoherent
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
+import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+import Sheaf.RingTheory.NilpotentTorsionDerivedLimitComplete
+import Sheaf.RingTheory.PseudoCoherentInverseRingReconstruction
+import Sheaf.RingTheory.PseudoCoherentMaximalFibrePerfect
 
 /-!
 # Perfect inverse-limit reconstruction over a complete ring

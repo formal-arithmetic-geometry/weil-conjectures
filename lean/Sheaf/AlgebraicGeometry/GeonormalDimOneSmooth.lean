@@ -14,6 +14,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
 import WeilConjectures.AlgebraicGeometry.Regular
+import Sheaf.AlgebraicGeometry.GeometricRegularitySmoothFieldCriterion
 
 /-!
 # Geometrically normal schemes of dimension at most one

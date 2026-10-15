@@ -18,6 +18,13 @@ import Sheaf.RingTheory.FiniteRingMapQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
+import Sheaf.AlgebraicGeometry.CompactificationCategory
+import Sheaf.AlgebraicGeometry.EtaleCompactSupportBaseChangeQcqs
+import Sheaf.AlgebraicGeometry.EtaleCompactSupportOpenClosedTriangle
+import Sheaf.AlgebraicGeometry.LisseOpenRelativeLineConstructibility
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
+import Sheaf.AlgebraicGeometry.QuasiFiniteShriekConstructible
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 
 /-!
 # Constructibility for compact support on a relative affine line

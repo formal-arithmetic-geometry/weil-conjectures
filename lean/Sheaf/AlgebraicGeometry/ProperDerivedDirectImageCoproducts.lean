@@ -13,6 +13,10 @@ import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 import Sheaf.AlgebraicGeometry.ProperBasic
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import Sheaf.AlgebraicGeometry.FiniteCohomologicalDimensionDirectImageCoproducts
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import Sheaf.AlgebraicGeometry.ProperTorsionDirectImageBound
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Coproducts and proper derived direct image

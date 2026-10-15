@@ -27,6 +27,7 @@ import Sheaf.Paper.ProfinitePointPullback
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
 
 /-!
 # Recollement with arbitrary condensed coefficients

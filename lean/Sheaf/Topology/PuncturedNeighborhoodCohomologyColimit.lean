@@ -12,6 +12,7 @@ public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 import Sheaf.Topology.SpectralDirectedLimit
+import Sheaf.Topology.SpectralLimitCohomology
 
 /-! # Cohomology of punctured generalization neighborhoods
 

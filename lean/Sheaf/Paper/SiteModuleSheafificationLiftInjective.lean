@@ -2,6 +2,8 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.Paper.SiteSheafificationSectionsLocal
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-! # A locally injective map into a sheaf induces an injective map on sheafification
 

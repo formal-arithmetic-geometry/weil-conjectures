@@ -14,6 +14,7 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.FieldTheory.IsSepClosed
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.CategoryTheory.Sites.Localization
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 
 /-! # Sheafification preserves pro-etale geometric stalks
 

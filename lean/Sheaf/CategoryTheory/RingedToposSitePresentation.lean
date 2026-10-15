@@ -12,6 +12,8 @@ public import Mathlib.CategoryTheory.Sites.Continuous
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import Sheaf.CategoryTheory.SheafSubcategoryComparison
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Presenting a morphism of ringed topoi by a morphism of sites

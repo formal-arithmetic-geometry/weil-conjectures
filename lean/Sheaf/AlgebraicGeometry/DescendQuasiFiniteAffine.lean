@@ -16,6 +16,8 @@ import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBound
+import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
 
 /-!
 # Quasi-finiteness descends for a finitely presented affine model

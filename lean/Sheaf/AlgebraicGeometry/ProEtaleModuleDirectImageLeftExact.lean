@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Left exactness of pro-etale module direct image

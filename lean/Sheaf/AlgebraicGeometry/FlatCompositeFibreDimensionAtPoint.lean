@@ -2,6 +2,9 @@ import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.CompositeFibreLocalModels
+import Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!
 # Pointwise fibre dimension is additive for a flat first morphism

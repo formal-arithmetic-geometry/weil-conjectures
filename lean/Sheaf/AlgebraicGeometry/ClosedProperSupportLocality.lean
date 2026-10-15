@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Sites.Etale
+import Sheaf.AlgebraicGeometry.ProperMorphismFpqcDescent
 
 /-!
 # Base change and étale descent of closed proper supports

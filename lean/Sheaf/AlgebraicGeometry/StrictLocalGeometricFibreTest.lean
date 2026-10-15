@@ -16,6 +16,12 @@ import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
 import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
 import Sheaf.Paper.InverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.AffineSepclosedEtaleAcyclic
+import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
+import Sheaf.AlgebraicGeometry.ZeroDimensionalSpectrumProfinite
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Testing a strict-local comparison on every geometric strict-local fibre
 

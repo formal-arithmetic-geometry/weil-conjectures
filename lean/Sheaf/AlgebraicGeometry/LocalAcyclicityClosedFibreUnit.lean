@@ -15,6 +15,10 @@ import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.AlgebraicGeometry.StrictBaseClosedPointLocalizations
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Local acyclicity and the closed-fibre restriction of the derived unit

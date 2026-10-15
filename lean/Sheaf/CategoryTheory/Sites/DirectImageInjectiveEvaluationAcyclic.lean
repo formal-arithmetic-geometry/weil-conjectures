@@ -14,6 +14,9 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
 import Sheaf.CategoryTheory.SiteCechVanishingCriterion
 import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.CategoryTheory.SiteCechComplex
 
 /-!
 # Object evaluation acyclicity of direct images of injective modules

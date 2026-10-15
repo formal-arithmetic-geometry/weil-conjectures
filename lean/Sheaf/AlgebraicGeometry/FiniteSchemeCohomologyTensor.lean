@@ -15,6 +15,8 @@ import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.Paper.EulerCharacteristicWellDefined
 import Sheaf.Paper.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-! # Cohomology and tensor invariance on a finite scheme
 

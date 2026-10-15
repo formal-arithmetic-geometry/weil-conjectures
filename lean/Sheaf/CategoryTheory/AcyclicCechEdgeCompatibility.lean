@@ -28,6 +28,8 @@ import Sheaf.CategoryTheory.SiteCohomologyPullback
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.CategoryTheory.SiteCechComplex
 
 /-!
 # Canonical acyclic Čech edges and their compatibility

@@ -9,6 +9,7 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtension
 public import Mathlib.Topology.Algebra.Module.Equiv
 public import Mathlib.Topology.CompactOpen
 public import Mathlib.LinearAlgebra.Basis.Defs
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 
 /-!
 # Openness of a p-adic lattice stabilizer

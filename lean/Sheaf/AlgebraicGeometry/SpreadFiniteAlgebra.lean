@@ -27,6 +27,7 @@ import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
 import Sheaf.AlgebraicGeometry.ModulePullbackTensor
 import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 
 /-! # Spreading finite algebras from the generic fibre
 

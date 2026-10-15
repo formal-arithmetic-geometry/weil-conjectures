@@ -9,6 +9,9 @@ public import Sheaf.RingTheory.PrincipalWLocalization
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.RingTheory.IndPrincipalZariski
+import Sheaf.RingTheory.WLocalClopenPartitions
+import WeilConjectures.RingTheory.ProEtale.WLocal
 
 /-! # Points and components of the principal w-localization
 

@@ -17,6 +17,7 @@ import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.RingTheory.SymmetricAlgebraFinitePresentation
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-! # Quasi-coherent algebras as directed colimits of finite type subalgebras
 

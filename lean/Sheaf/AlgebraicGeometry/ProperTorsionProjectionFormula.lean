@@ -16,6 +16,7 @@ import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
 
 /-!
 # The proper projection formula with torsion coefficients

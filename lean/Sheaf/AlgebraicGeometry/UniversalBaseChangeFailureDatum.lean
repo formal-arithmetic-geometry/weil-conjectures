@@ -19,6 +19,10 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.CoefficientHigherDirectImageZero
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
 import Sheaf.AlgebraicGeometry.IntegralPushforwardBaseChangeArrow
+import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import Sheaf.AlgebraicGeometry.FieldFailureOfCumulativeBaseChange
+import Sheaf.AlgebraicGeometry.IntegralSurjectiveTargetBaseChange
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
 
 /-!
 # A universal base-change failure over a geometric generic point

@@ -11,6 +11,7 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Inverse image of constant modules and complexes

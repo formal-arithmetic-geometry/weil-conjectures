@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
 import Sheaf.Paper.PowerSetComplexContractible
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Exactness of the free presheaf Čech complex

@@ -26,6 +26,7 @@ import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.AlgebraicGeometry.EtaleShriekQcqsComposition
 
 /-!
 # Relative Mayer--Vietoris for etale compact support

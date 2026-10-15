@@ -16,6 +16,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.CategoryTheory.Triangulated.Triangulated
+import Sheaf.Algebra.Homology.SurjectiveModuleComplexTowerLimit
+import Sheaf.RingTheory.NilpotentMarkedFreeComplexLift
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Pseudo-coherent reconstruction over a tower of nilpotent quotients

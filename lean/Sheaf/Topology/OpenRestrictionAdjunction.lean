@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Topology.Sheaves.Module
 public import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # The sectionwise open-restriction adjunction for module sheaves

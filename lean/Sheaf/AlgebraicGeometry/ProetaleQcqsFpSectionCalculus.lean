@@ -17,6 +17,7 @@ import Sheaf.Paper.SiteSheafificationSectionsLocal
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Paper.SiteRestrictionExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.AlgebraicGeometry.ProEtaleQcqsSiteLimits
 
 /-!
 # Finite-presentation section calculus on the qcqs pro-etale site

@@ -16,6 +16,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.CategoryTheory.DoubleComplexTotal
 import Sheaf.Algebra.Homology.FirstQuadrantTotalComparison
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-!
 # Bounded-above finite-projective internal Hom on a ringed site

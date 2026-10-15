@@ -12,6 +12,7 @@ import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.Modules.ModuleSkyscraperStalkAdjunction
 import Sheaf.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Functorial injective embeddings of modules on a scheme

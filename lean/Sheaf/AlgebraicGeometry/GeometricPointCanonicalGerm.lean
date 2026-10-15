@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
 public import Sheaf.AlgebraicGeometry.DerivedGlobalGerm
 import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # The canonical germ at the identity geometric point

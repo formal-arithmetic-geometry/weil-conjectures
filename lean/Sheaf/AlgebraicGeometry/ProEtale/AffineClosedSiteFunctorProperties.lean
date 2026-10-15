@@ -24,6 +24,8 @@ import Mathlib.RingTheory.Ideal.GoingDown
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Sheaf.RingTheory.IndEtaleStability
 import Mathlib.RingTheory.Ideal.Maximal
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
 
 /-! # Affine closed-immersion site functor properties
 

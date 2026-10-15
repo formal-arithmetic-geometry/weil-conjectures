@@ -9,6 +9,8 @@ public import WeilConjectures.RingTheory.ProEtale.WLocal
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Topology.Spectral.ConstructibleTopologyHausdorff
+import Sheaf.AlgebraicGeometry.ZeroDimensionalSpectrumProfinite
+import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
 
 /-!
 # Clopen partitions of a w-local affine spectrum

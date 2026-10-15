@@ -24,6 +24,7 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 
 /-!
 # Extended Cech complex and the strict Koszul dual limit

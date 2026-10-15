@@ -20,6 +20,8 @@ import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
 import Mathlib.AlgebraicGeometry.Sites.Etale
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimitStatement
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
 
 /-!
 # Affine vanishing for comparison pullbacks of injective abelian sheaves

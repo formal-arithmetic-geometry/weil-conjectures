@@ -16,6 +16,8 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
 # Tensoring K-injectives with bounded split-projective complexes

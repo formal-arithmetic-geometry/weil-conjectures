@@ -13,6 +13,7 @@ import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.Algebra.Homology.TowerEvaluationKInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Derived direct image and strict tower limits

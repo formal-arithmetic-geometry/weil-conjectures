@@ -14,6 +14,8 @@ import Sheaf.FieldTheory.SeparableExtension
 import Mathlib.FieldTheory.SeparablyGenerated
 import Mathlib.AlgebraicGeometry.FunctionField
 import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.RingTheory.NormalAlgebraSeparableScalarExtension
+import Sheaf.RingTheory.NormalRingFieldExtensionDescent
 
 /-!
 # Testing geometric normality over a perfect purely inseparable extension

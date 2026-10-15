@@ -31,6 +31,9 @@ import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
+import Sheaf.AlgebraicGeometry.ProperSmoothConnectedFibreDimensionLoci
+import Sheaf.AlgebraicGeometry.ProperSmoothCurvesPrimeCoefficients
+import Sheaf.AlgebraicGeometry.QuasiFiniteShriekConstructible
 
 /-!
 # Constructibility for proper smooth families of curves with finite coefficients

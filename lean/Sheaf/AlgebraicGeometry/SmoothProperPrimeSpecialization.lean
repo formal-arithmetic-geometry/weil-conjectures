@@ -12,6 +12,10 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 public import Sheaf.Paper.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import Sheaf.AlgebraicGeometry.LocallyConstantTorsionLocalAcyclicity
+import Sheaf.AlgebraicGeometry.ProperLocallyAcyclicSpecialization
+import Sheaf.AlgebraicGeometry.SmoothLocalAcyclicity
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Prime-to-characteristic specialization for smooth proper morphisms

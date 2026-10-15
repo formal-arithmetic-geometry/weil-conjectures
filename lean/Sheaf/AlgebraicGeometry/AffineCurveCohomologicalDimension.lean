@@ -15,6 +15,8 @@ import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # Cohomology of a smooth affine curve

@@ -13,6 +13,7 @@ public import Mathlib.SetTheory.Cardinal.Finite
 
 import Sheaf.FieldTheory.CommonExtensionFields
 import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.AlgebraicGeometry.SepClosedFieldComponentsBijection
 
 /-!
 # Geometric component counts and base change

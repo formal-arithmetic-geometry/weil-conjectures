@@ -29,6 +29,7 @@ public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 
 /-!
 # Localization complexes and derived internal Hom on a ringed site

@@ -10,6 +10,13 @@ public import Sheaf.CategoryTheory.ModulePullbackTensorIso
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.CategoryTheory.Adjunction.Limits
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatTelescopeClosure
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.Paper.RingedTopoiDerivedPullback
 
 /-!
 # Canonical representative comparison for tensor pullback

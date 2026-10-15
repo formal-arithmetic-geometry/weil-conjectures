@@ -20,6 +20,10 @@ import Sheaf.CategoryTheory.SiteMorphismComposition
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.CategoryTheory.SitePullbackAbelianUnderlying
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageLeftAdjoint
+import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Limits under inverse image along a pro-etale immersion

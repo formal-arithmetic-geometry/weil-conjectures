@@ -9,6 +9,10 @@ public import Sheaf.RingTheory.IndPrincipalZariski
 public import WeilConjectures.RingTheory.ProEtale.WLocal
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.ClosedComponentSpectrumRestriction
+import Sheaf.RingTheory.IndPrincipalZariskiOfLocalRingIso
+import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
 
 /-! # Profinite change of components of a w-local affine ring
 

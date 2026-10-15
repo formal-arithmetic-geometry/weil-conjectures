@@ -17,6 +17,11 @@ import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.RingTheory.Ideal.GoingDown
 import Mathlib.Topology.NoetherianSpace
+import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
+import Sheaf.Paper.CondensedPointBasisEvaluation
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
 
 /-!
 # Local triviality for bounded-image condensed algebraic-closure coefficients

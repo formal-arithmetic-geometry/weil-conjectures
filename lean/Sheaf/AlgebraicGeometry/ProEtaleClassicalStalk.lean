@@ -24,6 +24,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Classical pro-etale stalks

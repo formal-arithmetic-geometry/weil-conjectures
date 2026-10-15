@@ -16,6 +16,8 @@ import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.AcyclicKFlatTensor
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 
 /-!
 # Nilpotent derived reduction detects an upper cohomological bound

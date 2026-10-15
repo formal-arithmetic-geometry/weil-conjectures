@@ -15,6 +15,7 @@ import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.RingTheory.NakayamaNilpotent
 import Mathlib.Algebra.Module.Projective
 import Mathlib.RingTheory.Flat.Basic
+import Sheaf.RingTheory.NilpotentProjectiveComplexLift
 
 /-!
 # Pseudo-coherence across a nilpotent quotient

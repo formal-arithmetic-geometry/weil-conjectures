@@ -27,6 +27,8 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 import Sheaf.Paper.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.ClosedProperSupportLocality
+import Sheaf.AlgebraicGeometry.ProperSupportGeometricStalk
 
 /-!
 # Composition and base change for sections with proper support

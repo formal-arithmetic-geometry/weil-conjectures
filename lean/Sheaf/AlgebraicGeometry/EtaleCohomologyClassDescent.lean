@@ -13,6 +13,7 @@ import Sheaf.Paper.FiniteHypercoverDescent
 import Sheaf.Paper.FiniteSplitHypercoverRefinement
 import Sheaf.Paper.HypercoverCohomology
 import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
+import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
 
 /-!
 # Descent of an etale cohomology class to a finite stage

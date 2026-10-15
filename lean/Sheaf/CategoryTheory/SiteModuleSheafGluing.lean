@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Module.Equiv.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Gluing module sheaves on an arbitrary covering of a site

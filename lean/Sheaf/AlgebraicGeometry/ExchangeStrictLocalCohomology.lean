@@ -22,6 +22,7 @@ import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 import WeilConjectures.SixFunctors.BaseChange.Square
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 
 /-! # Testing exchange on strict-local cohomology
 

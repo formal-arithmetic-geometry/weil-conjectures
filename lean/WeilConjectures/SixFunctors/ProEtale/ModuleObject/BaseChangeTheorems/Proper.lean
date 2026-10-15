@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.Paper.CondensedQbarBaseChangeCompatibility
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 
 /-!
 

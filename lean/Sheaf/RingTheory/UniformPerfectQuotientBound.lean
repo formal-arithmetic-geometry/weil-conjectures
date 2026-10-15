@@ -22,6 +22,7 @@ import Mathlib.RingTheory.LocalProperties.ProjectiveDimension
 import Sheaf.RingTheory.ProjectiveResolutionExtCharacterization
 import Sheaf.RingTheory.ProjectiveResolutionKernelProjective
 import Sheaf.RingTheory.FiniteProjectiveDimensionOfTorBound
+import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 
 /-!
 # A uniform finite projective resolution bound for perfect ideal-power quotients

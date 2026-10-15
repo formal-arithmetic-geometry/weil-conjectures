@@ -20,6 +20,8 @@ import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.WeaklyEtaleField
 import Mathlib.AlgebraicGeometry.Stalk
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 
 /-!
 # Lifting geometric specializations to strict local schemes

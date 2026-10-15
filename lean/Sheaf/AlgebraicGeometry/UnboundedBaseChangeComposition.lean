@@ -13,6 +13,9 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Base change for a composite square on unbounded derived categories

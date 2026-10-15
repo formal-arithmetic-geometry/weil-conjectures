@@ -15,6 +15,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
 # Tensor pullback and induced pushforward for an arbitrary geometric morphism

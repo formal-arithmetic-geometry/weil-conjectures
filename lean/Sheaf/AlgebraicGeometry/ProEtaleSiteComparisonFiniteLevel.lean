@@ -13,6 +13,9 @@ import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Exactness, the unit, and injective acyclicity of finite-coefficient comparison

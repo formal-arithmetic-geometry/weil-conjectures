@@ -39,6 +39,8 @@ import Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.AlgebraicGeometry.SupportDimensionUnion
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 
 /-!
 # The affine torsion cohomological dimension bound

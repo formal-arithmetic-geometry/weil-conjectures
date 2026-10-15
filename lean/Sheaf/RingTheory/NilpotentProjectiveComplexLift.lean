@@ -16,6 +16,9 @@ public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Sheaf.Algebra.Homology.DerivedChangeOfRings
 import Sheaf.AlgebraicGeometry.ComplexLiftClassProjective
+import Sheaf.Algebra.Homology.BoundedAboveProjectiveModel
+import Sheaf.Algebra.Homology.NilpotentDerivedUpperBound
+import Sheaf.RingTheory.NilpotentProjectiveModuleLift
 
 /-!
 # Lifting a prescribed projective complex through a nilpotent quotient

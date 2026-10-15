@@ -12,6 +12,7 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 
 @[expose] public section
 

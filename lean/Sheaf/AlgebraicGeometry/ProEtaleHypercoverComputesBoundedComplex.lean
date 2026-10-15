@@ -14,6 +14,8 @@ import Sheaf.CategoryTheory.DoubleComplexTotal
 import Sheaf.Algebra.Homology.FirstQuadrantTotalComparison
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.CategoryTheory.Sites.LocallySurjective
+import Sheaf.CategoryTheory.RingedHypercoverInjectiveAugmentation
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Bounded-below derived evaluation by weakly contractible hypercovers

@@ -29,6 +29,7 @@ import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 import WeilConjectures.ConstructibleSheaf.Defs
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly
+import Sheaf.AlgebraicGeometry.ProjectiveFlatCoherentRanks
 
 /-!
 # Betti cardinalities of smooth projective curve families

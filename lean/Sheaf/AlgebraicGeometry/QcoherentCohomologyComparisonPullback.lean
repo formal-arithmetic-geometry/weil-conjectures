@@ -31,6 +31,7 @@ import Sheaf.AlgebraicGeometry.ModuleCechBetaAffineQuasiIso
 import Sheaf.CategoryTheory.DoubleComplexTotal
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageExact
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.CategoryTheory.RingedSiteCechRefinementSquare
 
 /-! # Quasi-coherent cohomology comparison and pullback
 

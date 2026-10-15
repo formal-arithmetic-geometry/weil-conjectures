@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Topology.ExtremallyDisconnected
+import Sheaf.RingTheory.ProfiniteComponentRingPullback
+import Sheaf.RingTheory.WLocalClosedComponentRetraction
 
 /-!
 # Retractions of w-local maps identifying local rings

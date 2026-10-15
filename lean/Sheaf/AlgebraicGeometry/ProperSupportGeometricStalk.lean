@@ -17,6 +17,11 @@ import WeilConjectures.SixFunctors.OpenClosed.Complex
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 import Sheaf.AlgebraicGeometry.ProperGeometricPointExchange
 import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
+import Sheaf.AlgebraicGeometry.ClosedProperSupportLocality
+import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
+import Sheaf.AlgebraicGeometry.OpenImmersionExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-! # Geometric stalks of a proper-support subsheaf
 

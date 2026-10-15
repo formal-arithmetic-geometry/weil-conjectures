@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Linearity of the composition comparisons on constant-ring etale modules

@@ -23,6 +23,9 @@ import Sheaf.AlgebraicGeometry.OpenSectionClopen
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 /-!
 # Normalization of compact supports for an etale morphism

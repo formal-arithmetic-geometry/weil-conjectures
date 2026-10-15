@@ -13,6 +13,9 @@ import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.CategoryTheory.Sites.CoverLifting
 import Mathlib.RingTheory.Noetherian.Basic
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.Paper.ConstantModuleSectionProperties
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-!
 # Finite type locally constant module sheaves form a weak Serre subcategory

@@ -19,6 +19,8 @@ import Sheaf.CategoryTheory.SiteMorphismComposition
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
 
 /-!
 # The geometric inverse image from the profinite point

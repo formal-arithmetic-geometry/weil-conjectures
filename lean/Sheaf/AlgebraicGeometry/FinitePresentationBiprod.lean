@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.Topology.ModuleColimitRestriction
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Finite presentation of a binary direct sum of module sheaves

@@ -11,6 +11,10 @@ import Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Mathlib.Algebra.Homology.DerivedCategory.Plus
+import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Exchange and forgetting coefficients

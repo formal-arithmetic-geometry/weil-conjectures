@@ -30,6 +30,8 @@ import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
 /-!
 # Finite Tate sheaves and inverse image
 Source: Stacks Project, Etale Cohomology, Tags 03PK and 03Q1; Modules on Sites,

@@ -18,6 +18,8 @@ import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Mathlib.FieldTheory.SeparablyGenerated
+import Sheaf.RingTheory.NormalAlgebraSeparableScalarExtension
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # Geometry and separable field change of reduced algebraic normalization

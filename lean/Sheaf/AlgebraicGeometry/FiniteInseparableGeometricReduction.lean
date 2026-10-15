@@ -15,6 +15,8 @@ import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.FieldTheory.MakeSeparable
 import Sheaf.FieldTheory.SeparableExtension
 import Sheaf.FieldTheory.SeparablyGeneratedTensorReduced
+import Sheaf.AlgebraicGeometry.GeometricReducednessFromGenericStalks
+import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
 
 /-!
 # Geometric reducedness after a finite purely inseparable extension

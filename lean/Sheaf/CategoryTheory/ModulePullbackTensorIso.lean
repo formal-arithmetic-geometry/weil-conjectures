@@ -18,6 +18,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-! # Tensor pullback on arbitrary ringed topoi
 

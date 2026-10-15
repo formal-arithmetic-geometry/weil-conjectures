@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 
 /-! # Ind-etale affine strict-local base change
 

@@ -12,6 +12,7 @@ import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 import Mathlib.CategoryTheory.Localization.Triangulated
+import Sheaf.CategoryTheory.LinearScalarLocalization
 
 /-! # Triangulation of scalar localization
 

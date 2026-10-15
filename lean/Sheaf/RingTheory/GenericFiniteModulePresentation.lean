@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.Algebra.Module.FinitePresentation
 
 import Mathlib.RingTheory.Noetherian.Basic
+import Sheaf.RingTheory.FinitelyPresentedAlgebraModuleGenericFreeness
 
 /-!
 # Generic finite presentation of finite modules

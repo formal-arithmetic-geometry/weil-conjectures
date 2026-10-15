@@ -15,6 +15,10 @@ import Sheaf.Paper.SiteSheafificationSectionsLocal
 import Mathlib.Algebra.Homology.ExactSequence
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Local equational criterion for flat module sheaves

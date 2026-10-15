@@ -10,6 +10,7 @@ import Sheaf.AlgebraicGeometry.RelativeFiniteAffinePresentation
 import Sheaf.Order.DirectedFiniteUpperBound
 import Sheaf.AlgebraicGeometry.NagataMorphismEqEventually
 import Sheaf.AlgebraicGeometry.NagataQCOpenEqEventually
+import Sheaf.AlgebraicGeometry.NagataRelativeGluingDatumDescends
 
 /-!
 # Relative gluing axioms at the selected stage

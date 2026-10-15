@@ -25,6 +25,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 import Sheaf.CategoryTheory.Galois.AbstractEquivalence
 import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading
+import Sheaf.AlgebraicGeometry.AffineCurveCohomologicalDimension
 
 /-! # Vanishing in the universal curve test
 

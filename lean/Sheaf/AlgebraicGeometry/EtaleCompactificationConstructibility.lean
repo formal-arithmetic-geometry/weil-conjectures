@@ -15,6 +15,15 @@ import Sheaf.CategoryTheory.TruncationHypercohomology
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleQcqsAffineLocal
+import Sheaf.AlgebraicGeometry.EtaleAffineLineShriekSheafConstructible
+import Sheaf.AlgebraicGeometry.EtaleShriekQcqsComposition
+import Sheaf.AlgebraicGeometry.EtaleShriekRelativeMayerVietoris
+import Sheaf.AlgebraicGeometry.QuasiFiniteShriekConstructible
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Constructibility of the etale compact-support candidate

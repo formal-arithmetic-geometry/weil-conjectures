@@ -24,6 +24,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.Algebra.Homology.TowerEvaluationKInjective
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Total derived inverse limits of strict towers on a ringed site

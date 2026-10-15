@@ -4,6 +4,7 @@ public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Agreement with bounded derived global sections

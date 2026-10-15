@@ -12,6 +12,8 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover
+import Sheaf.Paper.LatticeSheafLocallyConstant
 
 /-!
 # Etale-local integral lattices in lisse coefficient sheaves

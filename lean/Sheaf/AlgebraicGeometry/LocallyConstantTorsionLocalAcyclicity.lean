@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 
 /-!
 # Local acyclicity for locally constant torsion coefficients

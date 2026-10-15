@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
 public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 
 /-!
 # Morphisms between specified derived limits

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.ProjectionFormulaArrows
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
+import Sheaf.Paper.ProjectionFormulaFiniteFree
 
 /-!
 # Finite-projective summand equations

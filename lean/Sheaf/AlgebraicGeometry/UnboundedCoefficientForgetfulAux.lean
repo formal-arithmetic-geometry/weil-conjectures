@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+import Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison
 
 @[expose] public section
 

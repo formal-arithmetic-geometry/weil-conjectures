@@ -19,6 +19,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
 
 /-!
 # Smooth base change with ring-order-invertible coefficients

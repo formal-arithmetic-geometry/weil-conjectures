@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.CategoryTheory.Sites.Subcanonical
 import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Finite disjoint unions in the pro-etale site

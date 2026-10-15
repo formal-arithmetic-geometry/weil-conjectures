@@ -15,6 +15,11 @@ import Sheaf.RingTheory.RetainedLocalization
 import Sheaf.RingTheory.IndEtaleStability
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleIndEtale
+import Sheaf.RingTheory.RetainedLocalizationProperties
+import Sheaf.RingTheory.WLocalStalkIsomorphismRetraction
+import Sheaf.RingTheory.WeakEtaleRefinementProperties
+import Sheaf.RingTheory.WeaklyEtaleField
+import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 
 /-! # Geometric sufficient criterion for splitting weakly etale covers
 

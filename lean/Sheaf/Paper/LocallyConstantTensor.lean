@@ -19,6 +19,11 @@ import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.RingTheory.RingPseudoCoherent
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.CategoryTheory.RingedSliceExtensionTensor
+import Sheaf.Paper.SiteBoundedConstantModel
+import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 
 /-! # Derived tensor preserves locally constant finite type cohomology
 

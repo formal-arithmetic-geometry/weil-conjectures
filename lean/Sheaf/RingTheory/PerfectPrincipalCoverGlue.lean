@@ -19,6 +19,8 @@ import Sheaf.RingTheory.RingPseudoCoherent
 import Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue
 import Sheaf.Algebra.Homology.TorAmplitudeFlatModel
 import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
+import Sheaf.Algebra.Homology.TorAmplitudePrincipalCover
+import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 
 /-!
 # Perfect complexes glue over finite principal covers

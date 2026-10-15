@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.RingTheory.Noetherian.Basic
 import Sheaf.RingTheory.FiniteFreeResolution
+import Sheaf.RingTheory.PseudoCoherentOfCohomology
 
 /-!
 # The Noetherian cohomology criterion for pseudo-coherence

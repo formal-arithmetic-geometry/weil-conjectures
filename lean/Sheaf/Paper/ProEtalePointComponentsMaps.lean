@@ -10,6 +10,7 @@ public import Mathlib.Topology.Connected.TotallyDisconnected
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.Topology.Spectral.Basic
 import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
+import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
 
 /-!
 # Maps to relative profinite test schemes

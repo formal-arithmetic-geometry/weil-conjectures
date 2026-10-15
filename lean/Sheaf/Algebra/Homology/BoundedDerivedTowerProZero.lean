@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Functor.OfSequence
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
+import Sheaf.CategoryTheory.Triangulated.ProZeroMiddle
 
 /-!
 # Uniformly bounded derived towers with pro-zero cohomology

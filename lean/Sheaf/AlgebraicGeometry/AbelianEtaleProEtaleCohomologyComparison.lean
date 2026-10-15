@@ -17,6 +17,8 @@ import Sheaf.CategoryTheory.SiteCohomologyPullback
 import Sheaf.CategoryTheory.SiteLerayDegenerate
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
+import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-!
 # Abelian etale–pro-etale cohomology comparison

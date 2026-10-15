@@ -24,6 +24,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Qcqs higher direct images preserve a fixed set of torsion primes

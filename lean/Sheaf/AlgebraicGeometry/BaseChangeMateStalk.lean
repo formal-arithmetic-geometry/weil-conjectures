@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.OpenImmersionSquare
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Geometric stalks of the extension-by-zero base-change mate

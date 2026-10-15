@@ -23,6 +23,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.Paper.HigherDirectImageSheafifiedPresheaf
 import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.AffineDirectImageSupportBound
+import Sheaf.AlgebraicGeometry.EtaleHigherDirectImageStalkCriterion
+import Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine
+import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedPointCohomologicalDimension
 
 /-!
 # Finiteness of torsion étale cohomological dimension

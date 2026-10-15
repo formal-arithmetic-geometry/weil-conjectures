@@ -17,6 +17,8 @@ import Sheaf.Paper.ConstantSheafSectionsLocallyConstant
 import Sheaf.CategoryTheory.RingedSiteModules
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.SixFunctors.Finite.Exact
+import Sheaf.AlgebraicGeometry.ConstructibleAbelianSheaf
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Finite direct images of constructible module sheaves

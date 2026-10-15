@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.RingTheory.GeometricallyNormalTensorNormal
+import Sheaf.FieldTheory.SeparableFieldGeometricallyNormal
 
 /-!
 # Normal algebras under separable scalar extension

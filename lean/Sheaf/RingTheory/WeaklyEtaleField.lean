@@ -19,6 +19,7 @@ import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Sheaf.RingTheory.FiniteTypeAlgebraFiniteSpectrum
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
+import Sheaf.RingTheory.WeaklyEtaleTor
 
 /-! # Weakly étale algebras over a field
 

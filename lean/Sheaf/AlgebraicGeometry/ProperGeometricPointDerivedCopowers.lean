@@ -10,6 +10,8 @@ import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
+import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
+import Sheaf.CategoryTheory.FiniteCohomologicalDimensionAcyclicComplex
 
 /-! # Copowers for proper geometric-point derived direct image
 

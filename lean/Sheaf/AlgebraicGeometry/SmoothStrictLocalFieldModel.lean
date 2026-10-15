@@ -33,6 +33,7 @@ import Sheaf.RingTheory.IndPrincipalZariski
 import Mathlib.FieldTheory.Separable
 import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 import Sheaf.RingTheory.HenselianLocalRootLifting
+import Sheaf.AlgebraicGeometry.StrictHenselization
 
 /-! # Coefficient fields of smooth strict localizations
 

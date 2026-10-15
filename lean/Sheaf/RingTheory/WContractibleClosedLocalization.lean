@@ -9,6 +9,7 @@ public import Sheaf.RingTheory.IndPrincipalZariski
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.AlgebraicGeometry.Sites.WContractibleCoverSection
 
 /-! # Closed localization of a w-contractible ring
 

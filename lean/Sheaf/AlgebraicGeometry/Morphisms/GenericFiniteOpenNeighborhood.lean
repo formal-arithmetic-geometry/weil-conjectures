@@ -23,6 +23,7 @@ import Mathlib.GroupTheory.MonoidLocalization.Away
 import Sheaf.AlgebraicGeometry.FiniteDiscreteFiber
 import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Sheaf.RingTheory.MinimalPrimeFiniteTypeFiniteAway
 
 /-!
 # Finiteness over an open containing all component generic points

@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ConstructibleHigherDirectImages
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 import Sheaf.AlgebraicGeometry.ProjectiveConstructibilityFromLine
+import Sheaf.AlgebraicGeometry.ProjectiveLineConstructible
 
 /-!
 # Projective direct-image constructibility

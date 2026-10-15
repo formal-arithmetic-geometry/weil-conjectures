@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Sheaf.AlgebraicGeometry.DivisorModuleLocal
 import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-! # Tensor compatibility of the explicit divisor module
 

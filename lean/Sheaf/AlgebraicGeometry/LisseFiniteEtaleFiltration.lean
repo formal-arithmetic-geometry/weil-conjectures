@@ -24,6 +24,7 @@ import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.GroupTheory.Sylow
 import Mathlib.RingTheory.Spectrum.Prime.Topology
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Prime-to-primary finite étale filtration covers

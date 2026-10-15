@@ -27,6 +27,7 @@ import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.RingTheory.Flat.Localization
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Paper.FiniteOrderedFlasqueCechComparison
 
 /-!
 # Functorial augmented ring complexes

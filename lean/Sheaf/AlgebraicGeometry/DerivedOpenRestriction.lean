@@ -12,6 +12,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Derived direct image restricted to an open

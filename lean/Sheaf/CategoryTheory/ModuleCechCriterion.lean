@@ -18,6 +18,8 @@ import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Homology.HomologySequence
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import WeilConjectures.CategoryTheory.SiteCechComplex
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-!
 # Injectives and the module Čech acyclicity criterion

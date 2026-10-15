@@ -9,6 +9,7 @@ public import Sheaf.Paper.PointLanAffineEvaluation
 public import Mathlib.CategoryTheory.Sites.LeftExact
 import Sheaf.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEvaluation
 import Sheaf.Paper.SiteSheafificationSectionsLocal
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 
 /-!
 # Sheafification on weakly contractible affine objects

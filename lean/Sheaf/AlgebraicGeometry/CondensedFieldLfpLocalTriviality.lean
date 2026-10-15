@@ -17,6 +17,11 @@ import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Mathlib.RingTheory.Ideal.GoingDown
 import Mathlib.AlgebraicGeometry.Properties
+import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
+import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
+import Sheaf.Paper.CondensedPointBasisEvaluation
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.ProfinitePointPullback
 
 /-!
 # Local triviality over continuous p-adic field coefficients

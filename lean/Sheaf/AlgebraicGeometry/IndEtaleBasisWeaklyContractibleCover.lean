@@ -19,6 +19,9 @@ import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Mathlib.CategoryTheory.MorphismProperty.Composition
 import Mathlib.CategoryTheory.MorphismProperty.Limits
+import Sheaf.AlgebraicGeometry.Sites.WContractibleCoverSection
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.RingTheory.BoundedWContractibleExtension
 
 /-!
 # Weakly contractible covers in the affine ind-etale basis

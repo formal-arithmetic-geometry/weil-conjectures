@@ -18,6 +18,8 @@ import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.CofilteredEtaleCohomologyContinuity
+import Sheaf.AlgebraicGeometry.AffineSupportVanishing
+import Sheaf.AlgebraicGeometry.StrictLocalAlgebraicResidueModels
 
 /-!
 # Support bounds for affine higher direct images

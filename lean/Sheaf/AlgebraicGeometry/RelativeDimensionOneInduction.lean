@@ -11,6 +11,8 @@ public import Sheaf.AlgebraicGeometry.CumulativeUniversalBaseChangeProperty
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Limits
+import Sheaf.AlgebraicGeometry.UniversalBaseChangeFailureDatum
+import Sheaf.AlgebraicGeometry.UniversalCurveTestVanishing
 
 /-!
 # The induction step in relative dimension one

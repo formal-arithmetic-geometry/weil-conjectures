@@ -16,6 +16,7 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.RingTheory.PrimePowerAdditionSubring
 
 /-!
 # Power-generated ring maps induce universal homeomorphisms

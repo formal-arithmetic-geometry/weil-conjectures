@@ -4,6 +4,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.Algebra.Category.Grp.Colimits
+import Sheaf.CategoryTheory.RingedSiteModules
 
 @[expose] public section
 

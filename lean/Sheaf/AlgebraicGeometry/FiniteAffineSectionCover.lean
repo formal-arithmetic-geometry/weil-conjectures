@@ -16,6 +16,7 @@ import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Mathlib.RingTheory.AdjoinRoot
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.LinearAlgebra.TensorProduct.Basis
+import Sheaf.AlgebraicGeometry.FiniteFreeAlgebraSpectrum
 
 /-!
 # Finite affine morphisms and finite covers by closed sections

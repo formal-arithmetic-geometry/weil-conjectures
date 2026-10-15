@@ -12,6 +12,9 @@ public import Mathlib.Algebra.Homology.QuasiIso
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-! # Flat comparison of extended localization Čech complexes
 

@@ -18,6 +18,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
 import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.AlgebraicGeometry.BoundedAllowableTorsionSmoothBaseChange
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeMapNaturality
 
 /-!
 # Bounded-below derived smooth base change

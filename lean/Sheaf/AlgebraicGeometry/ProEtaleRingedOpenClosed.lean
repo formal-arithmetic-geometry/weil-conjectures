@@ -29,6 +29,10 @@ import Sheaf.AlgebraicGeometry.ProEtaleShriekSpecializationZero
 import Sheaf.AlgebraicGeometry.WContractibleAffineEvaluation
 import Sheaf.RingTheory.WContractibleClosedLocalization
 import Sheaf.RingTheory.BoundedWContractibleExtension
+import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Ringed pro-etale open-closed localization

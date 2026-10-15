@@ -6,6 +6,8 @@ Authors: SHEAF group NF
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
+import Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry
 
 /-!
 # An affine weakly contractible singleton cover

@@ -12,6 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 import WeilConjectures.Mathlib.RingTheory.Etale.Field
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
+import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
 # Refining a smooth projective base through a finite separable extension

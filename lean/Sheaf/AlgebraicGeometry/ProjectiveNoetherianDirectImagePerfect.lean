@@ -14,6 +14,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.CechResolution
 import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
 import Mathlib.RingTheory.Flat.Localization
+import Sheaf.CategoryTheory.DerivedCategory.NoetherianFlatComplexPerfect
 
 /-! # Perfect direct image for a projective Noetherian family
 

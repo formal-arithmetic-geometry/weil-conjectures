@@ -17,6 +17,11 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.CategoryTheory.TruncationHypercohomology
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import Sheaf.AlgebraicGeometry.ProperCaseConstructibility
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Proper direct image of bounded constructible complexes

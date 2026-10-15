@@ -14,6 +14,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
+import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 
 /-!
 # Geometric stalks as inverse images

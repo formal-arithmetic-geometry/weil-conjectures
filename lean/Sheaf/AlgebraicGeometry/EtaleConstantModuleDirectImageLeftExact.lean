@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Preadditive.LeftExact
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Direct image of modules over the constant ring on the small étale site

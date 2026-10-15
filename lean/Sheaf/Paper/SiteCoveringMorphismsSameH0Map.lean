@@ -1,6 +1,7 @@
 module
 
 public import Mathlib.CategoryTheory.Sites.Hypercover.Homotopy
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-! # Two covering morphisms induce the same zeroth Cech map
 

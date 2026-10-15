@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleExtensionByZero
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # The adjunction for pro-etale extension by zero

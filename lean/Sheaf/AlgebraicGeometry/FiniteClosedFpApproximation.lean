@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.EventuallyFinite
+import Sheaf.AlgebraicGeometry.LocallyFiniteTypeLimitClosedFp
 
 /-!
 # Finite schemes as limits of finite finitely presented closed models

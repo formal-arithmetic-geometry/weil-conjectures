@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-! # Short exact Mayer--Vietoris sequence for extension by zero
 

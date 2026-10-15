@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Sites.Hypercover.Zero
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Sheaf.CategoryTheory.SiteCoveringsCommonRefinement
 import Sheaf.Paper.SiteCoveringMorphismsSameH0Map
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-! # The plus construction is a presheaf
 

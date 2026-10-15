@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Yoneda
 import Sheaf.CategoryTheory.Sites.SheafificationPlusTheorem
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Limits.HasLimits
+import Sheaf.CategoryTheory.Sites.CoveringRepresentableCoequalizer
 
 /-!
 # A left adjoint from corepresentable evaluations on covering generators

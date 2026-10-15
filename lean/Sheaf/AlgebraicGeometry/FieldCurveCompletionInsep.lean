@@ -25,6 +25,12 @@ import Sheaf.AlgebraicGeometry.GlobalSectionsProperVariety
 import Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable
 import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
 import Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields
+import Sheaf.AlgebraicGeometry.CurveProjectiveDenseCompletion
+import Sheaf.AlgebraicGeometry.FiniteSeparableBaseRefinement
+import Sheaf.AlgebraicGeometry.GeonormalDimOneSmooth
+import Sheaf.AlgebraicGeometry.NormalizationGeonormalInsep
+import Sheaf.AlgebraicGeometry.NormalizationProjectiveComponents
+import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
 
 /-!
 # Smooth projective completions after an inseparable field extension

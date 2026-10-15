@@ -14,6 +14,13 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
+import Sheaf.AlgebraicGeometry.ClopenSectionDirectImage
+import Sheaf.AlgebraicGeometry.DerivedOpenRestriction
+import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProperOpenSection
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Composition and identity of proper-open comparison maps

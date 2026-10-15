@@ -19,6 +19,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import Sheaf.AlgebraicGeometry.Sites.FibrewiseCohomologicalDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.ProperConstructibleHigherDirectImages
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Constructibility and vanishing in the proper case

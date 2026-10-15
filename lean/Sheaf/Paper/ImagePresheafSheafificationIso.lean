@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Sites.LocallyBijective
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Mathlib.CategoryTheory.Subfunctor.Image
 import Sheaf.Paper.SiteSheafificationSectionsLocal
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Image presheaf and sheafification

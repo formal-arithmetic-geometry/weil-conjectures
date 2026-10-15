@@ -21,6 +21,7 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Mathlib.CategoryTheory.Sites.Limits
 import Sheaf.Paper.SiteSheafificationSectionsLocal
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Injective module sheaves on a ringed-site hypercover

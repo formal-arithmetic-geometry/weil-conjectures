@@ -30,6 +30,7 @@ import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.CategoryTheory.Triangulated.Triangulated
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
 # Internal derived Hom calculus on small ringed sites

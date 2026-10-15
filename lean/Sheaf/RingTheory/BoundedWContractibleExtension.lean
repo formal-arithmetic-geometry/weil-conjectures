@@ -14,6 +14,12 @@ import Sheaf.RingTheory.IndEtaleStability
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.RingTheory.ProfiniteComponentRingPullback
+import Sheaf.RingTheory.StrictWCover
+import Sheaf.RingTheory.StrictWCoverProperties
+import Sheaf.RingTheory.StrictWCoverSize
+import Sheaf.RingTheory.WContractibleGeometricCriterion
+import Sheaf.Topology.BoundedExtremallyDisconnectedCover
 
 /-! # Bounded w-contractible extensions
 

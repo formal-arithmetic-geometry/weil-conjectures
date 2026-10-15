@@ -5,6 +5,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 import Sheaf.Paper.SiteModuleSheafificationLiftInjective
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-! # Injectivity of extension by zero into direct image
 

@@ -21,6 +21,8 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Sheaf.Paper.SiteSheafificationSectionsLocal
 import Sheaf.CategoryTheory.DerivedModuleDirectSums
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Pro-etale direct image and uniformly bounded-below coproducts

@@ -20,6 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 
 /-!
 # Degree-zero flat base change for étale sheaves of sets

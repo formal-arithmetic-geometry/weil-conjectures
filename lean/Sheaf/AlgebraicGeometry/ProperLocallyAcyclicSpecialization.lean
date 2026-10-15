@@ -23,6 +23,11 @@ import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
+import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
+import Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreUnit
+import Sheaf.AlgebraicGeometry.SpecializationCospecializationCompatibility
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 
 /-!
 # Proper locally acyclic specialization

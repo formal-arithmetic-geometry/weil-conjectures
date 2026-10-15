@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
 import Sheaf.CategoryTheory.ModuleDirectedColimitUnderlyingSets
 import Sheaf.Topology.SheavesDirectedColimitSections
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Maps from finitely presented module sheaves into directed colimits

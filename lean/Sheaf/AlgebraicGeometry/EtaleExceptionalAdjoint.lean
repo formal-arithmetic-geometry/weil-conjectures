@@ -17,6 +17,7 @@ import Sheaf.AlgebraicGeometry.ProperDerivedDirectImageCoproducts
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
 
 /-! # The ordinary ambient exceptional adjoint
 

@@ -15,6 +15,10 @@ import WeilConjectures.SixFunctors.Integral.BaseChange
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.Paper.ExchangeIdentityPasting
+import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import Sheaf.AlgebraicGeometry.IntegralEtaleDirectImageExact
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Integral surjective base change on the target

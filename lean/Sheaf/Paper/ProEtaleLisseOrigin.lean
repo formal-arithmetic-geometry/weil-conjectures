@@ -17,6 +17,10 @@ import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
 import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 
 /-!
 # Lisse pro-etale module sheaves have etale origin

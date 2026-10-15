@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-! # Cohomology boundary diagrams from short exact systems -/
 

@@ -14,6 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import Mathlib.RingTheory.LocalProperties.Exactness
 import Mathlib.RingTheory.Ideal.Maximal
+import Sheaf.Algebra.Homology.FreeComplexResidueDegreeCancellation
+import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+import Sheaf.RingTheory.PerfectPrincipalCoverGlue
 
 /-!
 # Perfectness detected by uniformly bounded maximal residue fibres

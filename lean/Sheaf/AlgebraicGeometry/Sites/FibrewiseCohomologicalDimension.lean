@@ -12,6 +12,8 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
+import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # Fibrewise cohomological dimension over an algebraically closed field

@@ -15,6 +15,7 @@ import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.Sites.WContractibleCoverSection
 
 /-!
 # Evaluation at a w-contractible affine pro-etale object

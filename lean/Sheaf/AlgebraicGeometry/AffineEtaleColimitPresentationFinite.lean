@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Category.Cat
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Sites.Pullback
 import Sheaf.AlgebraicGeometry.AffineEtaleDescentData
+import WeilConjectures.CategoryTheory.FinitePrecoverage
 
 /-!
 # Finite affine étale colimit presentation

@@ -24,6 +24,8 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
+import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
 
 /-!
 # Duals of bounded finite locally constant complexes over a prime field

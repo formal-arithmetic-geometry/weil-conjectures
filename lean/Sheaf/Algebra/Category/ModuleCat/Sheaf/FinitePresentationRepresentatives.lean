@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.Topology.GlueSheavesOfModules
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # A set of representatives of finite-presentation module sheaves

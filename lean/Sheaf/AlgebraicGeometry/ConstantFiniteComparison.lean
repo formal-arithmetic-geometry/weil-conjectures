@@ -29,6 +29,8 @@ import Sheaf.AlgebraicGeometry.EtaleGrothendieckSpectralSequence
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import Sheaf.AlgebraicGeometry.FiniteConstructibleDirectImage
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 
 /-!
 # Constant coefficients under a finite comparison

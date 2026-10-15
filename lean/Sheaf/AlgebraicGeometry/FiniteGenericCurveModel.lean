@@ -38,6 +38,10 @@ import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Sheaf.AlgebraicGeometry.FiniteOverProjective
+import Sheaf.AlgebraicGeometry.ProjectiveGenericallyFinite
+import Sheaf.AlgebraicGeometry.SpreadFiniteAlgebra
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # A generic curve model with finite comparison boundary

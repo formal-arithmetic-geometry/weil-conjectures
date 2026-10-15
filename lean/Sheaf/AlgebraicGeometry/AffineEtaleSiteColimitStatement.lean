@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeSystem
 import Sheaf.AlgebraicGeometry.AffineEtaleDescentData
 import Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentation
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite
 
 /-! # Statements of the new targets (batch 2) about `AffineEtaleSiteColimit`
 

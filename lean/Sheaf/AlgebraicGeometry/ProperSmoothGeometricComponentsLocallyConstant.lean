@@ -17,6 +17,8 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import Sheaf.AlgebraicGeometry.FieldExtensionFpqcCover
 import Sheaf.AlgebraicGeometry.GeometricallyConnectedAlgebraicClosure
+import Sheaf.AlgebraicGeometry.FlatProperComponentCountLowerSemicontinuous
+import Sheaf.AlgebraicGeometry.ProperReducedGlobalSectionsProduct
 
 /-!
 # Geometric component counts in proper smooth families

@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.AlgebraicGeometry.Descent
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # FPQC descent of sections of a tensor pullback

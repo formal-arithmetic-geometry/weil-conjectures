@@ -16,6 +16,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.RingTheory.Etale.Basic
 import Mathlib.RingTheory.Etale.Pi
 import Sheaf.RingTheory.FilteredColimitOfFactorization
+import Sheaf.RingTheory.WLocalClopenPartitions
 
 /-! # Local-ring identifications with w-local target
 

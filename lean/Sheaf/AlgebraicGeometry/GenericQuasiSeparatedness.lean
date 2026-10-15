@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.Properties
 
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.FinitelyPresentedSupportComplement
+import Sheaf.RingTheory.GenericFiniteModulePresentation
 
 /-! # Generic quasi-separatedness
 

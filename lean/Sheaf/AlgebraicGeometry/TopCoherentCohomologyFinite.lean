@@ -33,6 +33,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 import Sheaf.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison
 import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
 import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
+import Sheaf.AlgebraicGeometry.TopDegreeOpenRestrictionSurjective
 
 /-! # Finite-dimensional top coherent cohomology
 

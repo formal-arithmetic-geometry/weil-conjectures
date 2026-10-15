@@ -15,6 +15,8 @@ import Sheaf.Algebra.Homology.HomComplex
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.Paper.LocalHomTowerCriterion
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Localization detects vanishing of the multiplication tower

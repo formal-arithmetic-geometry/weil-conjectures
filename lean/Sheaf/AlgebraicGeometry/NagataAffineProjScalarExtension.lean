@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.RingTheory.HomogeneousLocalizationScalarExtension
+import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-!
 # Scalar extension of affine Proj with its chart maps

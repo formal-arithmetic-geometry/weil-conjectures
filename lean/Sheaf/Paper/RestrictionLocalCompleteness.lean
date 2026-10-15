@@ -11,6 +11,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.Paper.LocalHomTowerCriterion
 import Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal
+import Sheaf.Algebra.Homology.DerivedInternalHom
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Restriction of scalars preserves and reflects local derived completeness

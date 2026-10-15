@@ -14,6 +14,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
 import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import Sheaf.AlgebraicGeometry.EtaleShriekQcqsComposition
+import Sheaf.AlgebraicGeometry.OpenClosedRecollement
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Open-closed localization for relative etale compact support

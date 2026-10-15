@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
 public import Mathlib.Algebra.Homology.Additive
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Exact extension by zero and arbitrary base change

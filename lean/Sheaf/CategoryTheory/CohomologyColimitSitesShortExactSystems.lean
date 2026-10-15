@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.Paper.ColimitSitesInjectiveSystem
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-! # Compatible short exact systems -/
 

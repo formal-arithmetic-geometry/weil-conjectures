@@ -9,6 +9,9 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.LeftExact
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.CategoryTheory.RingedSliceExtensionExactness
+import Sheaf.CategoryTheory.RingedSliceExtensionTensor
 
 /-!
 # Flatness under restriction to a slice site

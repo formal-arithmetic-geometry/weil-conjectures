@@ -13,6 +13,13 @@ public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
+import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
+import Sheaf.AlgebraicGeometry.LerayBounded
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Finite-coefficient geometric-fibre formula

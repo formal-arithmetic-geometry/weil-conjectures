@@ -21,6 +21,7 @@ import Mathlib.CategoryTheory.Sites.Point.Basic
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
 
 /-!
 # Etale-to-pro-etale comparison on geometric stalks

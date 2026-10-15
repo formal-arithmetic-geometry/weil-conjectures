@@ -20,6 +20,8 @@ import Sheaf.Algebra.Homology.DerivedInternalHom
 import Sheaf.AlgebraicGeometry.CompactBoundedConstructibleBaseChange
 import Sheaf.AlgebraicGeometry.FiniteLisseFieldDual
 import WeilConjectures.Compactification.BaseChange
+import Sheaf.AlgebraicGeometry.SmoothTensorDuality
+import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 
 /-!
 # Generic direct images from a smooth source

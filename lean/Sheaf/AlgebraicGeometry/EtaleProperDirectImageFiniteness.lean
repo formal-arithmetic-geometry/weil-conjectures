@@ -24,6 +24,8 @@ import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import Sheaf.AlgebraicGeometry.GeometricPointCohomology
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import Sheaf.AlgebraicGeometry.EtaleCompactificationConstructibility
+import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
 
 /-!
 # Finiteness of proper direct images on the small etale site

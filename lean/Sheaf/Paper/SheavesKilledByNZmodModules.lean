@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.Data.ZMod.Basic
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Abelian sheaves killed by n are sheaves of Z/n-modules

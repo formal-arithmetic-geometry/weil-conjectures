@@ -14,6 +14,7 @@ public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import Mathlib.RingTheory.Filtration
+import Sheaf.Algebra.Homology.BoundedDerivedTowerProZero
 
 /-!
 # Pro-zero cones of the Noetherian Koszul augmentation

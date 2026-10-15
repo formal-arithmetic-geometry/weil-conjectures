@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Sheafification
 import Sheaf.Paper.SiteSheafificationSectionsLocal
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Localized sheaves over a sheafified representable

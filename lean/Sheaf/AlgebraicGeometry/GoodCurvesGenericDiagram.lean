@@ -31,6 +31,12 @@ import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.DescendClosedImmersion
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
 import Mathlib.AlgebraicGeometry.Properties
+import Sheaf.AlgebraicGeometry.DescendSmoothQcqs
+import Sheaf.AlgebraicGeometry.FieldCurveCompletionInsep
+import Sheaf.AlgebraicGeometry.OpenImmersionInverseLimitDescent
+import Sheaf.AlgebraicGeometry.ProperFibreDimensionUpperSemicontinuous
+import Sheaf.AlgebraicGeometry.ProperSmoothGeometricComponentsLocallyConstant
+import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
 
 /-!
 # Good curve diagrams near a generic point

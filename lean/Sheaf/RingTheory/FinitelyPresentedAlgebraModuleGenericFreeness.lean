@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 
 import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.RingTheory.NoetherianAlgebraModuleGenericFreeness
 
 /-!
 # Generic freeness for finitely presented algebra-module pairs

@@ -13,6 +13,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.ConstructibleSheaf.Pullback
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedDetection
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Detection by pro-etale covers of finitely many locally closed strata

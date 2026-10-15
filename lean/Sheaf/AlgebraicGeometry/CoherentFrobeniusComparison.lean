@@ -33,6 +33,8 @@ import Sheaf.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.CategoryTheory.AcyclicCechEdgeCompatibility
+import WeilConjectures.CategoryTheory.SiteCechComplex
 
 /-!
 # Frobenius and the canonical coherent-etale comparisons

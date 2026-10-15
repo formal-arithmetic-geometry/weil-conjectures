@@ -17,6 +17,7 @@ import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.Algebra.Homology.HomologySequence
+import Sheaf.Algebra.Homology.DerivedTensor
 
 /-!
 # The residue test on the small pro-etale site

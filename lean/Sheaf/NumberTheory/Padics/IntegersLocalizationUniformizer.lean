@@ -8,6 +8,7 @@ module
 public import Sheaf.NumberTheory.Padics.CoefficientExtension
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 
 /-!
 # Inverting a coefficient-field uniformizer

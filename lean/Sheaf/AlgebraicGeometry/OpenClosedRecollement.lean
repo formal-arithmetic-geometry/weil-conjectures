@@ -13,6 +13,8 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Functorial open-closed recollement

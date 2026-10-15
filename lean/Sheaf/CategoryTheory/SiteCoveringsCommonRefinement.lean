@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.CategoryTheory.Sites.Hypercover.Zero
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Common refinements of coverings of a site

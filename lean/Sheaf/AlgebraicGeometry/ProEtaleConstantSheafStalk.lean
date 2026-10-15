@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
 public import Sheaf.Paper.ProEtaleLocallyConstantSheaf
 import Mathlib.CategoryTheory.Limits.Connected
+import Sheaf.AlgebraicGeometry.ProEtaleSheafificationGeometricStalk
+import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 
 /-!
 # Stalks of constant module sheaves on the pro-etale site

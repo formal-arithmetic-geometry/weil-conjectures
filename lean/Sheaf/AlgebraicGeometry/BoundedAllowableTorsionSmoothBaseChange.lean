@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.QcqsHigherImagesPrimeTorsion
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
 
 /-!
 # Bounded allowable-torsion smooth base change
