@@ -69,20 +69,25 @@ def prune(m, imports, memo):
     for i in sorted(list(keep), key=lambda x: len(covers[x])):       # drop imports whose needs other kept imports cover
         others = set().union(*(covers[j] for j in keep if j != i)) if len(keep) > 1 else set()
         if covers[i] <= others: keep.remove(i)
-    drop = [i for i in cur if i not in keep]
-    if not drop: return None, "all imports used"
-    new = "\n".join(l for k, l in enumerate(lines) if not (k in imp_idx and IMP.match(l).group(4) in drop))
-    p.write_text(new)
+    cand = [i for i in cur if i not in keep]
+    if not cand: return None, "all imports used"
+    # #min_imports misses uses through dot notation and instances, so each candidate is tried on its own: it is
+    # dropped only if the file still compiles without it (and without those dropped before it).
+    dropped, text = [], old
     try:
-        rc, out = lean_file(p, 60)
-        if rc: return None, "pruned file does not compile: " + next((l for l in out.splitlines() if "error" in l), "")[-200:]
-        o = SB / f"PruneOld_{m.replace('.', '_')}.lean"; o.write_text(old)
+        for i in cand:
+            trial = "\n".join(l for l in text.split("\n") if not (IMP.match(l) and IMP.match(l).group(4) == i))
+            p.write_text(trial)
+            rc, out = lean_file(p, 60)
+            if rc == 0: dropped.append(i); text = trial
+        if not dropped: return None, "no candidate could be dropped (" + ", ".join(cand) + ")"
+        o = SB / f"PruneOld_{m.replace('.', '_')}.lean"; o.write_text(old); p.write_text(text)
         c = subprocess.run([sys.executable, "tools/import_prune_check.py", m, str(o), str(p)], cwd=R, capture_output=True, text=True, timeout=600)
         o.unlink(missing_ok=True)
         if c.returncode: return None, "downstream relies on a removed import: " + c.stdout.strip().replace("\n", " ")[:200]
     finally:
         p.write_text(old)
-    return new, "drop " + ", ".join(drop)
+    return text, "drop " + ", ".join(dropped)
 
 
 def commit(done):
