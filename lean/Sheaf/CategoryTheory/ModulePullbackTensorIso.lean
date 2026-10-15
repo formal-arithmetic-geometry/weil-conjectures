@@ -7,8 +7,17 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.CategoryTheory.RingedSiteModules
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.CategoryTheory.ModulePullbackTensorIsoE
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
