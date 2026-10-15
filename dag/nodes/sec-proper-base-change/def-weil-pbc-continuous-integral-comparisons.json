@@ -1,0 +1,122 @@
+{
+ "id": "def-weil-pbc-continuous-integral-comparisons",
+ "kind": "definition",
+ "title": "Canonical bounded constructible comparisons for integral localization",
+ "statement": "Use the integral coefficients of [def-weil-pbc-continuous-integral-coefficients], the derived coefficient comparisons of [def-weil-pbc-condensed-e-module-category], and the exactness of [lem-weil-pbc-continuous-integral-scalar-exact]. Restrict scalar extension to bounded constructible complexes. For separated finite-type schemes over a positive-characteristic field k with characteristic different from ℓ, restrict derivedPullIso and derivedPushHom along any map over k. Define the source comparison for an exchange square as the pull comparison for g followed by g-pullback of the push comparison for f. Define its target comparison as the push comparison for f′ followed by f′-pushforward of the pull comparison for g′. All data are the actual existing coefficient morphisms and adjunction mates, with no choices of witnesses.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, coefficient comparisons; source ChangeOfCoefficients.lean"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Exactness and boundedConstructible_leftDerivedExtendScalars_obj restrict actual derived scalar extension to the full bounded constructible subcategories. ObjectProperty.isoMk and homMk restrict the actual derivedPullIso and derivedPushHom. Compose the indicated pull and push components to define source and target comparisons.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+    "def-weil-pbc-condensed-e-module-category",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, coefficient comparisons; source ChangeOfCoefficients.lean",
+  "note": "A2: the Lean proof and remaining named obligations follow these steps, using the actual integral coefficient functor. No proper base change assumption is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coefficient extension commutes with the base change transformation by the pasting theorem for mates",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_square",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.mateEquiv_square",
+   "verdict": "Mate-pasting infrastructure, not a theorem about the specified coefficient comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_square|pullIsoOfComapIso|pushHomOfComapIso",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "verdict": "Mate infrastructure exists; the scheme/coefficient comparison must still be instantiated and normalized."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousExchangeIntegralModel",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, second paragraph: uniqueness in rational transport identifies the specified rational exchange with the integral extension; comparison with actual continuous-E coefficients",
+   "via": [
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralComparisons",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralComparisons.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralScalarConstructible",
+  "statement": "def integralScalarConstructible (X : Scheme.{u}) :\n    integralConstructible ℓ E X ⥤\n      ProEtale.BoundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) X)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralScalarConstructible",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructiblePullIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructiblePullHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructiblePushHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructibleSourceHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructibleTargetHom"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

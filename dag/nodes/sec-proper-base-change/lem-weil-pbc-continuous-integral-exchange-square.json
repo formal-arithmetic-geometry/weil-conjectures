@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-continuous-integral-exchange-square",
+ "kind": "statement",
+ "title": "Canonical endpoint isomorphisms for the integral/E exchange square",
+ "statement": "For the coefficients and comparisons of [def-weil-pbc-continuous-integral-coefficients] and [def-weil-pbc-continuous-integral-comparisons], a Cartesian square of separated finite-type k-schemes with proper f, and a bounded constructible integral M whose actual E scalar extension is the specified bounded constructible object N, there are source and target isomorphisms between scalar extensions of the integral exchange endpoints and the E exchange endpoints at N. They make the two specified exchange arrows commute. Neither exchange is assumed invertible.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; integral localization and the specified exchange"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-continuous-integral-comparisons",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Properness is stable under base change, so f′ is proper. Apply the qcqs push comparison theorem at M and at g′-pullback of M. Reflect isomorphisms along the full bounded constructible inclusions. The pull comparisons are already isomorphisms, so source and target composite comparisons are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-push-comparison",
+    "def-weil-pbc-continuous-integral-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take asIso of the two specified comparison morphisms and apply the fully faithful inclusions to obtain endpoint isomorphisms in the full E derived category. The underlying hom equation is exactly the already proved coefficient/exchange equation.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-exchange-equality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-integral-push-comparison",
+  "def-weil-pbc-continuous-integral-comparisons",
+  "lem-weil-pbc-continuous-integral-exchange-equality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; integral localization and the specified exchange",
+  "note": "A2: the Lean proof and remaining named obligations follow these steps, using the actual integral coefficient functor. No proper base change assumption is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coefficient extension commutes with the base change transformation by the pasting theorem for mates",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow.isoMk",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.Arrow.isoMk; CategoryTheory.Arrow.isoMk_hom_left; CategoryTheory.Arrow.isoMk_hom_right; CategoryTheory.Arrow.isoMk_inv_left; CategoryTheory.Arrow.isoMk_inv_right",
+   "verdict": "Use Arrow.isoMk for the final transport; it does not supply coefficient comparison isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPushHom|derivedPullIso|integralScalarExtension",
+   "date": "2026-10-16",
+   "results": "No hits.",
+   "verdict": "No Mathlib hit; actual comparison definitions are in the source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousExchangeIntegralModel",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, second paragraph: uniqueness in rational transport identifies the specified rational exchange with the integral extension; comparison with actual continuous-E coefficients",
+   "via": [
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralExchangeSquare",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralExchangeSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousIntegral_exchange_square",
+  "statement": "theorem continuousIntegral_exchange_square [IsProper f]\n    (sq : IsPullback g' f' f g) (M : integralConstructible ℓ E X)\n    (hM : ProEtale.boundedConstructible\n      (condensedRingObj (Profinite.continuousMapRingObj E) X)\n        ((integralScalarExtension ℓ E X).obj M.obj)) :\n    let N : ProEtale.BoundedConstructible\n      (condensedRingObj (Profinite.continuousMapRingObj E) X) :=\n      ⟨(integralScalarExtension ℓ E X).obj M.obj, hM⟩\n    ∃ (s : (integralScalarExtension ℓ E Y').obj\n          (((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f ⋙\n            boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g).obj M).obj) ≅\n        ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f ⋙\n          boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj N).obj)\n      (t : (integralScalarExtension ℓ E Y').obj\n          (((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g' ⋙\n            boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f').obj M).obj) ≅\n        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g' ⋙\n          boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f').obj N).obj),\n      s.hom ≫ ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k\n          sq.toCommSq).app N).hom =\n        (integralScalarExtension ℓ E Y').map\n          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq.toCommSq).app M).hom ≫\n            t.hom",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

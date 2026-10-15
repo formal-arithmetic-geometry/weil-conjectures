@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-continuous-integral-push-comparison",
+ "kind": "statement",
+ "title": "Integral localization commutes with bounded qcqs pushforward",
+ "statement": "For the coefficient inclusion of [def-weil-pbc-continuous-integral-coefficients], any qcqs map f:X→Y of schemes, and any bounded constructible integral complex K on X, the specified component derivedPushHom(a,f).app K is an isomorphism. Pushforward is ordinary and uncompleted, and no proper base change assertion is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1); Bhatt–Scholze Lemma 6.8.2, localization telescope"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "The compact-test localization and exact inverse image identify scalar extension with the ℓ-localization telescope. Exactness allows termwise calculation on a good truncation of a representative of K. The sequential diagram has one uniform lower cohomological bound.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-weil-pbc-continuous-integral-scalar-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply condensed_qcqs_pushforward_continuity degree by degree. Its canonical cohomology map is the restriction of derivedPushHom: on each localization leg the adjoint definition is the same unit map followed by division by ℓⁿ. Homology detects isomorphisms, and exact faithful restriction reflects them.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1); Bhatt–Scholze Lemma 6.8.2, localization telescope",
+  "note": "A2: the Lean proof and remaining named obligations follow these steps, using the actual integral coefficient functor. No proper base change assumption is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "qcqs derived pushforward commutes with bounded below filtered colimits and localization",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.mateEquiv",
+   "date": "2026-10-16",
+   "results": "No hits.",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*colimit|pushforward.*localization",
+   "date": "2026-10-16",
+   "results": "Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean",
+   "verdict": "Hits about unrelated presheafed-space colimits; use the project continuity theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousExchangeIntegralModel",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, second paragraph: uniqueness in rational transport identifies the specified rational exchange with the integral extension; comparison with actual continuous-E coefficients",
+   "via": [
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralPushComparison",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralPushComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralScalarPushHom_isIso",
+  "statement": "theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [QuasiCompact f] [QuasiSeparated f] (K : integralConstructible ℓ E X) :\n    IsIso ((derivedPushHom (integralScalarMap ℓ E) f).app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

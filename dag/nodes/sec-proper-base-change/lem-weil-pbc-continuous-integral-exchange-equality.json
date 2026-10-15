@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-continuous-integral-exchange-equality",
+ "kind": "statement",
+ "title": "Integral scalar localization preserves the specified exchange arrow",
+ "statement": "For the canonical bounded constructible comparisons of [def-weil-pbc-continuous-integral-comparisons] and a commutative square of separated finite-type k-schemes with characteristic different from ℓ, the source comparison followed by the specified continuous E exchange at scalar extension of K equals scalar extension of the specified integral exchange at K followed by the target comparison. No exchange or push comparison is inverted; properness and Cartesianity are not required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, compatibility with adjunctions and base change"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-comparisons",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Prove abstractly that the push mate and the inverse pull conjugate have the same adjunct, using iterated_mateEquiv_conjugateEquiv and mateEquiv_counit. Restrict the identity to the bounded constructible adjunctions using their actual counits.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor balancing proves coherence of the underived pull comparisons. Exact scalar extension and inverse image derive it, and the derived composition constraints identify the pull-comparison cube. For arbitrary adjunctions the specified exchange has adjunct equal to the square comparison followed by the counit. The private proved mating and exchange lemmas give the formal combination; restriction and normalization for the specified concrete bounded functors remain.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-comparisons",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, compatibility with adjunctions and base change",
+  "note": "A2: the Lean proof and remaining named obligations follow these steps, using the actual integral coefficient functor. No proper base change assumption is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coefficient extension commutes with the base change transformation by the pasting theorem for mates",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_square",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.mateEquiv_square",
+   "verdict": "Mate-pasting infrastructure, not a theorem about the specified coefficient comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_square|pullIsoOfComapIso|pushHomOfComapIso",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "verdict": "Mate infrastructure exists; the scheme/coefficient comparison must still be instantiated and normalized."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousExchangeIntegralModel",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, second paragraph: uniqueness in rational transport identifies the specified rational exchange with the integral extension; comparison with actual continuous-E coefficients",
+   "via": [
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralExchangeEquality",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralExchangeEquality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructible_exchange_equality",
+  "statement": "theorem integralConstructible_exchange_equality\n    (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :\n    integralConstructibleSourceHom ℓ E k f g K ≫\n        (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k sq).app\n          ((integralScalarConstructible ℓ E X).obj K) =\n      (integralScalarConstructible ℓ E Y').map\n          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq).app K) ≫\n        integralConstructibleTargetHom ℓ E k f' g' K",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

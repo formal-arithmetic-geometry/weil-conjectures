@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-continuous-integral-scalar-exact",
+ "kind": "statement",
+ "title": "Exactness of integral continuous scalar localization",
+ "statement": "For prime ℓ and a normed ℚ_ℓ-algebra E which is a field, let a:O_E→E be the closed-unit-ball inclusion of [def-weil-pbc-continuous-integral-coefficients]. On every scheme X, the actual extension-of-scalars functor along coefficientMap(a,X) between internal module sheaves preserves finite limits.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, localization on compact profinite tests"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "In presheaves on profinite sets construct the sequential diagram of regular integral modules with transition multiplication by ℓ and nth cocone leg a↦a/ℓⁿ. The compact-test localization theorem proves surjectivity, and division by the nonzero ℓⁿ proves injectivity, giving the colimit universal property.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply monoidal sheafification and inverse image from the point to this colimit; explicit coefficient isomorphisms identify its stages with the regular integral module and its vertex with the restricted regular E module. Filtered colimits of flat internal modules are flat. The extension/forget/tensor comparison and reflection along the faithful forgetful functor give preservation of finite limits.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, localization on compact profinite tests",
+  "note": "A2: the Lean proof and remaining named obligations follow these steps, using the actual integral coefficient functor. No proper base change assumption is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact scalar extension along a localization of a ring object is a left exact functor",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits, CategoryTheory.Functor",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.Limits.PreservesFiniteLimits; CategoryTheory.Limits.instPreservesFiniteProductsOfPreservesFiniteLimits; CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits; CategoryTheory.Limits.PreservesLimitsOfSize.preservesFiniteLimits; CategoryTheory.Limits.PreservesLimitsOfSize0.preservesFiniteLimits; CategoryTheory.Limits.preservesFiniteLimits_of_preservesFiniteLimitsOfSize; CategoryTheory.Limits.preservesLimitsOfShapeOfPreservesFiniteLimits; CategoryTheory.Limits.PreservesFiniteLimits.preservesFiniteLimits",
+   "verdict": "Generic exactness infrastructure is available, but not this coefficient localization."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalization.*flat|flat.*isLocalization|flat.*colimit",
+   "date": "2026-10-16",
+   "results": "Mathlib/RingTheory/Regular/Flat.lean; Mathlib/RingTheory/Flat/Stability.lean; Mathlib/RingTheory/RingHom/Flat.lean; Mathlib/RingTheory/RingHom/Flat.lean; Mathlib/RingTheory/Flat/Localization.lean; Mathlib/RingTheory/Flat/Localization.lean; Mathlib/RingTheory/Flat/Localization.lean; Mathlib/RingTheory/Flat/Localization.lean",
+   "verdict": "Ordinary ring/module flat-localization lemmas do not directly concern internal modules. Use the actual localization colimit and internal flat_colimit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousExchangeIntegralModel",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, second paragraph: uniqueness in rational transport identifies the specified rational exchange with the integral extension; comparison with actual continuous-E coefficients",
+   "via": [
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralScalarExact",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralScalarExact.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralScalarExtension_exact",
+  "statement": "theorem integralScalarExtension_exact (X : Scheme.{u}) :\n    PreservesFiniteLimits\n      (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-continuous-constructible-integral-model",
+ "kind": "statement",
+ "title": "Integral models for bounded constructible continuous E complexes",
+ "statement": "For prime ℓ and finite normed E/ℚ_ℓ, use the integral coefficient ring, constructible categories and actual derived scalar extension of [def-weil-pbc-continuous-integral-coefficients]. On every scheme X with Noetherian underlying topological space, every bounded constructible continuous E complex K is isomorphic in the full E derived category to integralScalarExtension(M), for some bounded constructible integral complex M. No global lisseness of M is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 and Proposition 6.8.14(2), constructible integral lattices and rationalization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Use constructible integral lattices on refined locally closed strata, extend by zero, and clear denominators in the finitely many extension classes in bounded truncation triangles. The rationalization equivalence identifies the resulting complex with K. The compact-test localization calculation and inverse image from the point identify its rationalization with the actual derived integralScalarExtension.",
+   "uses": [
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+  "lem-weil-pbc-condensed-e-realization",
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 and Proposition 6.8.14(2), constructible integral lattices and rationalization",
+  "note": "A2: the Lean proof and remaining named obligations follow these steps, using the actual integral coefficient functor. No proper base change assumption is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded constructible continuous E sheaves admit integral constructible lattice complexes",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible continuous E object is scalar extension of integral constructible object",
+   "date": "2026-10-16",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; Condensed.profiniteSolid; CondensedMod.IsSolid; PrimeSpectrum.isConstructible_comap_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; PrimeSpectrum.isConstructible_comap_C; ChevalleyThm.chevalley_polynomialC; PrimeSpectrum.BasicConstructibleSetData.map",
+   "verdict": "No integral-model theorem; hits concern constructibility of images."
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*lattice|lattice.*integral|constructible.*localization",
+   "date": "2026-10-16",
+   "results": "Mathlib/MeasureTheory/Function/L1Space/HasFiniteIntegral.lean; Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean; Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean; Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean; Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean; Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean; Mathlib/LinearAlgebra/RootSystem/OfBilinear.lean; Mathlib/Analysis/BoxIntegral/Partition/Basic.lean",
+   "verdict": "Only unrelated lattice/integration results; no constructible-sheaf realization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousExchangeIntegralModel",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, second paragraph: uniqueness in rational transport identifies the specified rational exchange with the integral extension; comparison with actual continuous-E coefficients",
+   "via": [
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousConstructibleIntegralModel",
+  "file": "lean/Sheaf/Paper/ContinuousConstructibleIntegralModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousConstructible_integral_model",
+  "statement": "theorem continuousConstructible_integral_model (X : Scheme.{u})\n    [TopologicalSpace.NoetherianSpace X]\n    (K : ProEtale.BoundedConstructible\n      (condensedRingObj (Profinite.continuousMapRingObj E) X)) :\n    ∃ M : integralConstructible ℓ E X,\n      Nonempty ((integralScalarExtension ℓ E X).obj M.obj ≅ K.obj)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2884881",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
