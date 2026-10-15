@@ -12,6 +12,6 @@
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
-| `Sheaf.AlgebraicGeometry.CartesianRawClassChartRepresentative` | 17 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CartesianChartLiftNaturality` | 19 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.RawDerivedClassAffineDescent` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 37 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.QCohTensorResolutionChartHomologyNaturality` | 51 | 1 | proof |
