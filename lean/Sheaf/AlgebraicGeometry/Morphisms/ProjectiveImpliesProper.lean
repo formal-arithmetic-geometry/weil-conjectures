@@ -1,0 +1,55 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group NN
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+
+/-!
+# Projective morphisms are proper
+
+Source: the Weil conjectures blueprint, chapter `sec-smooth-purity`, unit
+`sk-prop-sf-kunneth-ordinary`, lemma of order 1708; Stacks Project, Tag 01WC
+(blueprint: lem-kun-projective-implies-proper).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory
+
+namespace AlgebraicGeometry
+
+/-- Every projective morphism in the blueprint's finite projective-space embedding convention
+is proper. The other conjuncts record the three properness facts in the parenthetical clause:
+projective-space projections are proper, closed immersions are proper, and proper morphisms
+are closed under composition.
+
+Source: the Weil conjectures blueprint, `sk-prop-sf-kunneth-ordinary`, lemma of order 1708;
+Stacks Project, Tag 01WC (blueprint: lem-kun-projective-implies-proper).
+
+Proof: Choose a natural number `N` and a closed immersion `i` with `i ≫ q = f` using
+`def-kun-projective` (`IsHProjective.exists_closedImmersion`). The projection `q` is that of
+`def-nagata-projective-space-base-change` with the finite homogeneous-coordinate type
+`ULift (Fin (N + 1))`. It is proper by `lemma-nagata-projective-space-base-change-proper`
+(`ProjectiveSpace.instIsProper`). The closed immersion `i` is proper by clause (a) of
+`lem-weil-pbc-closed-immersion-proper` (`IsClosedImmersion.iff_isProper_and_mono`). Compose
+these two proper morphisms using `lem-weil-pbc-proper-composition`
+(`IsProper.instCompScheme`) and transport along the factorization equality to obtain
+properness of `f`. The same three cited results give the remaining three conjuncts. -/
+theorem hProjective_properness :
+    (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsHProjective f → IsProper f) ∧
+    (∀ (N : ℕ) (Y : Scheme.{u}),
+      IsProper (ℙ(ULift.{u} (Fin (N + 1)); Y) ↘ Y)) ∧
+    (∀ {X Y : Scheme.{u}} (i : X ⟶ Y), IsClosedImmersion i → IsProper i) ∧
+    (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),
+      IsProper f → IsProper g → IsProper (f ≫ g)) := by
+  sorry
+
+end AlgebraicGeometry
