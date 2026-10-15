@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-extension-by-zero-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Exactness of extension by zero",
@@ -20,28 +20,122 @@
  ],
  "proof": [
   {
-   "text": "In the presheaf construction of [def-weil-extension-by-zero], kernels are\ncomputed objectwise: on an object over $U$ this is the kernel of the\ncorresponding section map, and on other objects it is zero. Sheafification of\nmodule presheaves is exact, so $j_!$ preserves kernels on the module sheaves\nof [def-weil-finite-torsion-constructibility]. For an epimorphism $M\\to N$, a\nsection of $P_N(V)$ is either zero or a section of $N(V)$ with $V$ over $U$.\nIn the latter case it lifts on a covering of $V$ in $U_{\\mathrm{proet}}$.\nThis is also a covering in the ambient site of\n[def-weil-pbc-proetale-site]. Thus $P_M\\to P_N$ is locally\nsurjective; after sheafification it is an epimorphism. Preservation of\nkernels and epimorphisms proves exactness.",
+   "text": "Apply [lem-weil-proetale-weakly-etale-localization] to the open immersion $j:U\\hookrightarrow\\overline X$ and the commutative ring $A$. It identifies $U_{\\mathrm{proet}}$ with $\\overline X_{\\mathrm{proet}}/U$, including their coverings, and identifies $A_U$ with $A_{\\overline X}|_U$. Thus the source module category is the category of $A_{\\overline X}|_U$-module sheaves on this localized site. Moreover every ambient object has at most one map to $U$, and such a map exists exactly when it factors through $U$.",
    "uses": [
-    "def-weil-extension-by-zero",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-pbc-proetale-site"
+    "lem-weil-proetale-weakly-etale-localization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-extension-by-zero.md",
+    "place": "Localization and coefficient identifications used in the definition; made explicit by lem-weil-proetale-weakly-etale-localization."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-site-restriction-module-adjunction-exact] with $\\mathcal C=\\overline X_{\\mathrm{proet}}$, $\\mathcal O=A_{\\overline X}$ and the object $U$. Its extension-by-zero presheaf [def-weil-extension-by-zero-presheaf] has, on $V$, a direct sum indexed by maps $V\\to U$. By Step 1 this is the zero module if no map exists, and otherwise the single module $M(V\\to U)$; its action and restriction maps are precisely those of [def-weil-extension-by-zero]. Its module sheafification is therefore the functor $j_!$ in the statement. The cited theorem says this functor is exact. This applies to every finite commutative $A$ in the statement, hence also to each stated finite-torsion coefficient ring.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero",
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact), specialized to the open-immersion localization."
+   }
   }
  ],
  "proof_deps": [
   "def-weil-extension-by-zero",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-pbc-proetale-site"
+  "def-weil-extension-by-zero-presheaf",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-extension-by-zero-exact.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact), using the existing pro-etale localization and coefficient-identification lemma."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of extension by zero for sheaves of modules on the small pro-etale site over a finite commutative ring",
+   "results": "Top hits were unrelated exactness/preservation declarations (Profinite.NobelingProof.succ_exact, MayerVietorisSquare.shortComplex_exact, ModuleCat.localizedModule_functor_map_exact, and general abelian-category instances); no exact pro-etale extension-by-zero result.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesFiniteLimits PreservesFiniteColimits openImmersionLowerShriek",
+   "results": "0 hits; query also reported unknown identifier PreservesFiniteLimits.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive query error"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.?by.?zero|openImmersionLowerShriek|PreservesFiniteLimits",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The extension by zero functor on sheaves of modules on a small pro-etale site is exact for a finite commutative coefficient ring",
+   "results": "Internal Server Error from service.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion lower shriek preserves finite limits and finite colimits for module sheaves",
+   "results": "General restriction/sheafification/pushforward preservation and adjunction declarations; no exact item statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits _",
+   "results": "12 general finite-limit preservation declarations, including PreservesLimits.preservesFiniteLimits and related infrastructure; none about extension by zero.",
+   "date": "2026-10-16",
+   "verdict": "general infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek|extension by zero",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact extension by zero sheaves modules open immersion",
+   "results": "Internal Server Error from service.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact left adjoint to restriction of module sheaves to a localized Grothendieck site",
+   "results": "8 hits; PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, PresheafOfModules.sheafificationAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.sheafifyHomEquiv', LightCondensed.freeForgetAdjunction, PresheafOfModules.sheafification, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-15",
+   "verdict": "No exact match: sheafification adjunctions and generic sheaf-module pullback adjunction, without the pro-etale localization, coefficient identification and extension-presheaf comparison required here."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "3 hits; SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv",
+   "date": "2026-10-15",
+   "verdict": "Restriction definition and compatibility isomorphisms only; no exactness theorem for this extension-by-zero functor."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|PreservesFiniteLimits.*pullback",
+   "results": "25 hits; Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean, Mathlib/CategoryTheory/Limits/MorphismProperty.lean, Mathlib/CategoryTheory/Limits/MorphismProperty.lean, Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean, Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean",
+   "date": "2026-10-15",
+   "verdict": "Generic sheaf-pullback finite-limit preservation and module restriction; identifying the functor and its constant-ring module categories needs the existing DAG localization and module theorems, so these are not a one-line leaf."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +160,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-extension-by-zero-exact",
+  "worker": "stage1",
+  "summary": "Second reading replaces the cross-unit pro-etale extension theorem by the existing same-unit localized-module exactness and pro-etale localization statements; identifies the explicit extension-by-zero presheaf before applying exactness. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the complete blueprint proof paragraph: exactness of the defining sheafified extension-by-zero presheaf. Step 1 identifies sites and coefficients; Step 2 identifies the zero-or-one-summand presheaf and invokes the existing localized-module exactness theorem.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q23-70292f3e7",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-70292f3e7 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route and Stacks 03DI/03DJ proofs. Verified site and constant-ring module identifications, defining functor compatibility, exactness, edge cases and absence of dependency cycles. No new nodes, repairs or accepted tool_uses. Detailed checks recorded in review.md."
+ }
 }
