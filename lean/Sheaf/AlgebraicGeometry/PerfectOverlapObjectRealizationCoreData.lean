@@ -1060,6 +1060,22 @@ noncomputable def perfectOverlapOpenLiftIso
       using β.app M
   exact β' ≪≫ (derivedPullback (f ∣_ U)).mapIso e
 
+/-- The fixed restriction/pullback comparison on one open. Its implementation
+contains the derived open-site return, associator, and cartesian pullback
+comparison; keeping this composition named avoids unfolding it while
+constructing and comparing the three overlap diagram components. -/
+@[irreducible] noncomputable def perfectOverlapRestrictionBeta
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (W : Y.Opens) (T : X.Opens)
+    (hT : T ≤ g ⁻¹ᵁ W) :
+    derivedPullback g ⋙
+        (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) T).mapDerivedCategory ≅
+      (schemeOpenRestriction Y W).mapDerivedCategory ⋙
+        (derivedPullback (g.resLE W T hT) ⋙ (overlapSiteInverse T).mapDerivedCategory) :=
+  Functor.isoWhiskerLeft _ (openSiteReturnIso X T).symm ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (openPullbackRestrictionIso g T W hT) _ ≪≫
+      Functor.associator _ _ _
+
 /-- Construct a simultaneous diagram from restricted pullbacks and site equivalences.
 Open restriction is a localization, so its fully faithful precomposition functor lifts
 both overlap comparisons and their coherence from the global restriction diagram. -/
@@ -1079,10 +1095,7 @@ noncomputable def schemeComparisonFromRestrictions
       derivedPullback g ⋙
           (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) T).mapDerivedCategory ≅
         (schemeOpenRestriction Y W).mapDerivedCategory ⋙ H W T hT :=
-    Functor.isoWhiskerLeft _ (openSiteReturnIso X T).symm ≪≫
-      (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (openPullbackRestrictionIso g T W hT) _ ≪≫
-      Functor.associator _ _ _
+    perfectOverlapRestrictionBeta g W T hT
   let TU := (schemeOpenRestriction Y U).mapDerivedCategory
   let TV := (schemeOpenRestriction Y V).mapDerivedCategory
   let T := DerivedCategory (SheafOfModules.{u}
