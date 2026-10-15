@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-frobenius-coefficient-twists",
-   "place": "its statement (a notion the statement uses)",
+   "place": "Original blueprint statement, sentence beginning \"On Spec k_0 and its geometric fiber\": \"its natural Weil isomorphism is induced by the geometric Frobenius convention\". The expanded DAG ancestor makes the finite-level comparisons explicit in clause 2 (The Tate line); this item supplies their transition compatibility, coefficient semilinearity and isomorphism for the Frobenius scheme isomorphism.",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Roots-of-unity comparison: transition compatibility and isomorphism along isomorphisms",
@@ -23,9 +23,105 @@
   "def-weil-proetale-inverse-image",
   "lem-weil-proetale-isomorphism-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\beta^f_M:\\mu_{M,Y}\\to f_*\\mu_{M,X}$ for the map whose adjoint is $c^f_{\\mu_M}$. Put $k=N'/N$, an integer since $N\\mid N'$. For every $V\\to Y$ and $v\\in\\mu_{N',Y}(V)$ the ring map on global sections gives\n$$\\beta^f_N(V)(v^k)=\\mathrm{pr}_V^\\sharp(v^k)=\\bigl(\\mathrm{pr}_V^\\sharp v\\bigr)^k.$$\nThese are sections of $\\mu_{N,X}(X\\times_YV)$: their $N$-th powers are $1$, since $kN=N'$. Thus equality on all sections gives the sheaf-map identity\n$$f_*(t^X_{N',N})\\circ\\beta^f_{N'}=\\beta^f_N\\circ t^Y_{N',N}.$$\nHere the restrictions and the transition maps are exactly those in the two roots-of-unity definitions, not transitions of constant sheaves.",
+   "uses": [
+    "def-pur-roots-of-unity-inverse-image",
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-proetale-structure-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK, section-kummer, opening definition of the functor mu_n; elementary power calculation for the comparison defined in def-pur-roots-of-unity-inverse-image"
+   }
+  },
+  {
+   "text": "The adjunction $L=f^{-1}\\dashv R=f_*$ sends a map $a:L\\mathcal F\\to\\mathcal G$ to $R(a)\\circ\\eta_{\\mathcal F}$. For $a=t^X_{N',N}\\circ c^f_{\\mu_{N'}}$ its image is $R(t^X_{N',N})\\circ\\beta^f_{N'}$. For $b=c^f_{\\mu_N}\\circ L(t^Y_{N',N})$ its image is $\\beta^f_N\\circ t^Y_{N',N}$, because $RL(t^Y_{N',N})\\circ\\eta_{\\mu_{N',Y}}=\\eta_{\\mu_{N,Y}}\\circ t^Y_{N',N}$. Step 1 equates these images, so injectivity of the adjunction bijection gives clause 1. Taking $N=\\ell^r$ and $N'=\\ell^{r+1}$ makes each square of the two inverse systems commute; hence these comparisons form the asserted morphism of inverse systems.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pur-roots-of-unity-inverse-image",
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WX, lemma-adjoint-sheaves; naturality and injectivity of the defining adjunction, applied to step 1"
+   }
+  },
+  {
+   "text": "For clause 2 put $R_Y=(\\mathbf Z/N\\mathbf Z)_Y$, $R_X=(\\mathbf Z/N\\mathbf Z)_X$, $A=f^{-1}R_Y$, $H=f^{-1}\\mu_{N,Y}$, and $G=\\mu_{N,X}$. The inverse-image construction supplies the stated $A$-module structure on $H$. Apply the constant-ring comparison proposition to the finite discrete commutative ring $\\mathbf Z/N\\mathbf Z$: it says exactly that the structure map $c=c^f_{\\mathbf Z/N}:A\\to R_X$ used here is an isomorphism. Let $q=c^{-1}$. Give $H$ an $R_X$-action by $b\\star h=q(b)\\cdot h$. The ring-map and module axioms verify the module axioms for $\\star$, and restriction compatibility follows from that of $q$ and the original action. Since $q$ is unital, for every integer $m$ the constant class $\\overline m$ acts by $q(\\overline m)=m1_A$, hence by $mh$ in the underlying abelian group. In particular $Nh=0$, because $\\overline N=0$. These statements hold over every object, including the empty object and when $N=1$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pur-roots-of-unity-sheaf",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J, example-constant-sheaf, and proetale.tex Tag 09A5, section-morphism; constant-ring comparison is the existing proposition, while restriction of scalars is checked explicitly"
+   }
+  },
+  {
+   "text": "The torsion-sheaf lemma (1) identifies the $R_X$-module structure $\\star$ from step 3 with the unique constant-coefficient structure on the $N$-torsion abelian sheaf $H$, because its constant sections act by integer representatives. The same lemma identifies the module structure on $G$ from the roots-of-unity definition. The comparison $c^f_{\\mu_N}:H\\to G$ is already a morphism of abelian sheaves by its definition, so part (2) of that lemma makes it $R_X$-linear for $\\star$. For local sections $a\\in A(U)$ and $h\\in H(U)$ substitute $b=c(a)$ and use $q(c(a))=a$ to obtain\n$$c^f_{\\mu_N}(a\\cdot h)=c^f_{\\mu_N}(c(a)\\star h)=c(a)\\cdot c^f_{\\mu_N}(h).$$\nThis proves clause 2 for all local sections of the inverse-image ring, rather than only the constant ones.",
+   "uses": [
+    "lem-pur-torsion-sheaf-constant-module",
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-roots-of-unity-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; application of clauses (1) and (2) of lem-pur-torsion-sheaf-constant-module to the transported action"
+   }
+  },
+  {
+   "text": "Now assume $f$ is an isomorphism. The site-isomorphism lemma (1) says that $\\Phi_f(U\\xrightarrow{u}X)=(U\\xrightarrow{fu}Y)$ is a covering-preserving equivalence and describes inverse image by this change of structure map. To fix its canonical normalization, use the comma-category construction of inverse image. For $U\\to X$ let $V_0=(U\\xrightarrow{fu}Y)$ and $\\gamma=(u,\\mathrm{id}_U):U\\to X\\times_Y V_0$. The pair $(V_0,\\gamma)$ is initial in $\\mathcal I_U$: for $(V,\\phi)$ the unique possible map $V_0\\to V$ is $h=\\mathrm{pr}_V\\phi$, and $(\\mathrm{id}_X\\times_Yh)\\gamma=\\phi$ because both projections agree. Uniqueness follows by composing this equality with $\\mathrm{pr}_V$. Thus it is terminal in $\\mathcal I_U^{\\mathrm{op}}$. Explicitly the maps $\\mathcal F(V)\\xrightarrow{\\mathcal F(h)}\\mathcal F(V_0)$ form a cocone, and its map from the colimit is inverse to the coprojection from $\\mathcal F(V_0)$: one composite is the identity at $V_0$, and the other is the identity on every coprojection by the cocone relation. This identifies $u_{f,p}\\mathcal F(U)$ with $\\mathcal F(V_0)$, naturally in $U$. For a covering $\\{U_i\\to U\\}$ over $X$, the covering $\\{\\Phi_f(U_i)\\to\\Phi_f(U)\\}$ over $Y$ has the same underlying schemes and overlap schemes. Thus a matching family for $U\\mapsto\\mathcal F(\\Phi_f(U))$ is exactly a matching family for $\\mathcal F$ on that covering; its unique gluing proves that this presheaf is a sheaf. The sheafification universal property therefore leaves it unchanged. This is precisely the canonical identification in clause 3.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism, with sites.tex Tag 00WX, lemma-adjoint-sheaves; elementary computation of the comma category for the equivalence in lem-weil-proetale-isomorphism-inverse-image (1)"
+   }
+  },
+  {
+   "text": "For an arbitrary $(V,\\phi)$ the presheaf map adjoint to $\\beta^f_N$ sends the coprojection of $v\\in\\mu_{N,Y}(V)$ to $\\phi^\\sharp(\\mathrm{pr}_V^\\sharp v)$. Indeed, for an arrow $a:(V,\\phi)\\to(V^{\\prime},\\phi^{\\prime})$ of $\\mathcal I_U$ we have $\\phi^{\\prime}=(\\mathrm{id}_X\\times_Ya)\\phi$, so for $v^{\\prime}\\in\\mu_{N,Y}(V^{\\prime})$ functoriality gives $\\phi^{\\prime\\sharp}\\mathrm{pr}_{V^{\\prime}}^\\sharp(v^{\\prime})=\\phi^\\sharp\\mathrm{pr}_V^\\sharp(a^\\sharp v^{\\prime})$, the required cocone relation. Restriction along $b:U^{\\prime}\\to U$ gives $(\\phi b)^\\sharp\\mathrm{pr}_V^\\sharp(v)=b^\\sharp\\phi^\\sharp\\mathrm{pr}_V^\\sharp(v)$, proving naturality in $U$. On $U=X\\times_YV$, $\\phi=\\mathrm{id}$ the formula recovers $\\beta^f_N(V)$; this verifies its adjunction characterization. They extend uniquely through sheafification. At the distinguished pair $(V_0,\\gamma)$ of step 5, this value is\n$$\\gamma^\\sharp\\mathrm{pr}_{V_0}^\\sharp(v)=(\\mathrm{pr}_{V_0}\\gamma)^\\sharp(v)=v,$$\nsince $\\mathrm{pr}_{V_0}\\gamma=\\mathrm{id}_U$. The coprojection at this pair is the inverse of the identification in step 5, so $c^f_{\\mu_N}(U)$ is the identity on $\\{v\\in\\Gamma(U,\\mathcal O_U)^\\times:v^N=1\\}$ under that identification. These identities are natural in $U$ and give inverse sheaf morphisms; hence $c^f_{\\mu_N}$ is an isomorphism of abelian sheaves. This proves every assertion of clause 3 without choosing a root of unity or assuming that $N$ is invertible on $X$.",
+   "uses": [
+    "def-pur-roots-of-unity-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-proetale-structure-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK, section-kummer, functorial definition of mu_n; sites.tex Tag 00WX, lemma-adjoint-sheaves; explicit adjunct and identity-projection calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-roots-of-unity-inverse-image",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-proetale-structure-sheaf",
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-torsion-sheaf-constant-module",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK (etale-cohomology-section-kummer), combined with sites.tex Tags 00WX (sites-lemma-adjoint-sheaves), 0H7J (sites-example-constant-sheaf), 00YV (sites-proposition-functoriality-algebraic-structures-topoi), proetale.tex Tag 09A5 (proetale-section-morphism), and sites-modules.tex Tag 03CY (sites-modules-lemma-sheafification-presheaf-modules). Original compatibility proof written by NM. Second reader read the local TeX, tag-label index, original blueprint and Deligne (2.2), pp. 280-281, under /home/ubuntu/weil-launcher-nt/literature; see report."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -40,10 +136,80 @@
    "results": "SheafOfModules.pullback, pullbackIso, pullbackComp for sheaves of modules along continuous functors; nothing about sheaves of roots of unity or the structure sheaf of the pro-etale site",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|roots.of.unity",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern roots of unity of a single monoid or general module pullback, not this pro-etale comparison and its three compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image comparison for roots of unity sheaves is semilinear over the constant coefficient ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "rootsOfUnity, MonoidHom",
+   "results": "map_rootsOfUnity; IsCyclic.monoidHom_mulEquiv_rootsOfUnity; IsCyclic.monoidHomMulEquivRootsOfUnityOfGenerator; restrictRootsOfUnity; restrictRootsOfUnity_coe_apply; IsPrimitiveRoot.coe_autToPow_apply; rootsOfUnityEquivOfPrimitiveRoots_apply_coe_inv_val; rootsOfUnitytoCircle",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern roots of unity of a single monoid or general module pullback, not this pro-etale comparison and its three compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback comparison for sheaves of roots of unity commutes with power transition maps and is an isomorphism for a scheme isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.pullbackCongr; SheafOfModules.pullbackObjFreeIso_hom_naturality; TopCat.Sheaf.pullbackIso; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern roots of unity of a single monoid or general module pullback, not this pro-etale comparison and its three compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|roots.of.unity",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern roots of unity of a single monoid or general module pullback, not this pro-etale comparison and its three compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\"",
+   "results": "rootsOfUnity; rootsOfUnity_one; rootsOfUnity_zero; rootsOfUnity_inf_rootsOfUnity; rootsOfUnity_eq_ker; ker_zpowGroupHom_eq_rootsOfUnity; rootsOfUnity_le_of_dvd; instSubsingletonSubtypeUnitsMemSubgroupRootsOfUnityOfNatNat",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern roots of unity of a single monoid or general module pullback, not this pro-etale comparison and its three compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial pullback of finite torsion multiplicative group sheaves is compatible with scalar multiplication and with change of the torsion exponent",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAdditivePullback; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern roots of unity of a single monoid or general module pullback, not this pro-etale comparison and its three compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "map_zsmul|preserves.*[Cc]onstant|[Cc]onstant.*[Pp]ullback",
+   "results": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-15",
+   "verdict": "no match: condensed locally constant modules and constant sheaf equivalences do not state the pro-etale roots-of-unity comparison or its three clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving finite products maps a module action to an action, and natural maps of abelian sheaves annihilated by n are linear over the constant ZMod n sheaf",
+   "results": "CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule; CompHausLike.LocallyConstantModule.functor_map_val; instAbelianCondensedMod; LightCondMod.LocallyConstant.functor; instAbelianLightCondMod; CompHausLike.LocallyConstantModule.functor; CondensedMod.LocallyConstant.functor; CondensedMod.LocallyConstant.functorToPresheaves",
+   "date": "2026-10-15",
+   "verdict": "no match: condensed locally constant modules and constant sheaf equivalences do not state the pro-etale roots-of-unity comparison or its three clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesFiniteProducts\", \"Module\"",
+   "results": "none",
+   "date": "2026-10-15",
+   "verdict": "no match: condensed locally constant modules and constant sheaf equivalences do not state the pro-etale roots-of-unity comparison or its three clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +229,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv"
+ "unit": "sk-def-purity-conv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-roots-of-unity-inverse-image-iso",
+  "worker": "stage1",
+  "summary": "Kept all three clauses and all hypotheses unchanged. Wrote the power-pullback calculation and its adjunction transpose; proved semilinearity by the existing constant-ring comparison isomorphism and the existing N-torsion sheaf/module characterization; normalized the isomorphism-site identification by an explicit initial comma object and computed the comparison as the identity. No new nodes, no Lean changes and no builds. Read and quoted every cited statement; checked no cited dependency reaches this item. Second reader verified the local literature and original blueprint, corrected the blueprint place, and expanded the covering/gluing and cocone/restriction verifications. Repair reading 2026-10-16: confirmed statement and stmt_deps are identical to the shared stage-1 baseline; documented each stage-2 return point and the stage mismatch in the report, preserving a stage-1-only delivery with no fabricated lean or statement_change record. Rechecked all 21 literal statement quotations and the sole direct citer.",
+  "blueprint": "Original def-weil-frobenius-coefficient-twists blueprint, sentence \"its natural Weil isomorphism is induced by the geometric Frobenius convention\": the finite roots-of-unity comparisons construct that isomorphism. The expanded DAG ancestor spells this out in clause 2 (The Tate line), whose transition compatibility, coefficient semilinearity and isomorphism assertions are proved here. The unit sk-def-purity-conv is a conventions remark with no proof steps; no unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic constant-ring comparison, specialized to the finite ring Z/N on the same small pro-etale sites; needed to transport the inverse-image coefficient action. The conventions unit supplies no proof of it."
+   },
+   {
+    "node": "lem-pur-torsion-sheaf-constant-module",
+    "why": "Generic characterization of N-torsion abelian sheaves and their additive morphisms as modules over the constant ring sheaf; supplies uniqueness and linearity after coefficient transport."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic covering-preserving site equivalence for a scheme isomorphism, already named in the item statement; the comparison map itself is computed in steps 5-6."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pur-torsion-sheaf-constant-module",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-7dbd01568",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-7dbd01568 (reviewer sub-agent of L); spot-checked: Reviewed the complete stage-1 split, all six proof steps, nine cited node statements, blueprint/unit route, Deligne and Stacks sources, searches, edge cases, coefficient category, base-change map, and direct citer. No mathematical or DAG fault found; review.md written."
+ }
 }
