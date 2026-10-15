@@ -36,11 +36,10 @@
    }
   },
   {
-   "text": "Case $1\\leq k\\leq n$. Put $x=b_k(\\mathrm{id}_{[k]})\\in U_k$; by naturality of $b$, $b_m(\\varphi)=b_m(\\Delta[k](\\varphi)(\\mathrm{id}_{[k]}))=U(\\varphi)(x)$ for every $\\varphi:[m]\\to[k]$. By (1) (if $k<n$) or (2) (if $k=n$) choose $y\\in V_k$ with $f_k(y)=x$, and define $c_m(\\varphi)=V(\\varphi)(y)$ for $\\varphi\\in\\Delta[k]_m$; since $V(\\varphi\\circ\\psi)=V(\\psi)\\circ V(\\varphi)$, $c:\\Delta[k]\\to V$ is a morphism of simplicial sets. Then $f_m(c_m(\\varphi))=f_m(V(\\varphi)(y))=U(\\varphi)(f_k(y))=U(\\varphi)(x)=b_m(\\varphi)$, so $f\\circ c=b$. For $c\\circ\\iota=a$, let $\\varphi:[m]\\to[k]$ be non-surjective, choose $i\\in[k]$ outside its image and write $\\varphi=\\delta_i\\circ\\psi$ with $\\psi:[m]\\to[k-1]$ by [lem-weil-pbc-simplex-face-factorization]. Since $\\delta_i\\in\\partial\\Delta[k]_{k-1}$ and $a$ is natural, $a_m(\\varphi)=V(\\psi)(a_{k-1}(\\delta_i))$, while $c_m(\\varphi)=V(\\psi)(V(\\delta_i)(y))$. So it suffices that $a_{k-1}(\\delta_i)=V(\\delta_i)(y)$ in $V_{k-1}$. Both have the same image under $f_{k-1}$: $f_{k-1}(a_{k-1}(\\delta_i))=b_{k-1}(\\delta_i)=U(\\delta_i)(x)=U(\\delta_i)(f_k(y))=f_{k-1}(V(\\delta_i)(y))$. As $k-1<n$, $f_{k-1}$ is injective by (1), so they are equal. (This is the source's 'the diagram will commute as the other nondegenerate simplices of $\\Delta[k]$ are in degrees $<k$ where $f$ is an isomorphism'.)",
+   "text": "Case $1\\leq k\\leq n$. Put $x=b_k(\\mathrm{id}_{[k]})\\in U_k$; by naturality of $b$, $b_m(\\varphi)=b_m(\\Delta[k](\\varphi)(\\mathrm{id}_{[k]}))=U(\\varphi)(x)$ for every $\\varphi:[m]\\to[k]$. By (1) (if $k<n$) or (2) (if $k=n$) choose $y\\in V_k$ with $f_k(y)=x$, and define $c_m(\\varphi)=V(\\varphi)(y)$ for $\\varphi\\in\\Delta[k]_m$; then $c:\\Delta[k]\\to V$ is a morphism and $f\\circ c=b$ by naturality. To check $c\\circ\\iota=a$, use Mathlib's boundary hom-extensionality: in positive degree it reduces each face to the corresponding degree $k-1$ map, where the two values have equal images under $f_{k-1}$ and hence are equal by injectivity; degree zero is the empty-boundary extensionality lemma. (This is the source's tacit face-factorization check.)",
    "uses": [
     "def-weil-pbc-simplicial-set",
-    "def-weil-pbc-trivial-kan-fibration",
-    "lem-weil-pbc-simplex-face-factorization"
+    "def-weil-pbc-trivial-kan-fibration"
    ],
    "elementary": false,
    "source": {
@@ -93,10 +92,9 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-trivial-kan-fibration",
+  "def-weil-pbc-simplicial-coskeleton",
   "def-weil-pbc-simplicial-set",
-  "lem-weil-pbc-simplex-face-factorization",
-  "def-weil-pbc-simplicial-coskeleton"
+  "def-weil-pbc-trivial-kan-fibration"
  ],
  "proof_origin": {
   "by": "document",
@@ -201,5 +199,15 @@
   "group": "M1",
   "result": "pass",
   "note": "V U : SSet.{u}, f : V ⟶ U, n : ℕ (n=0 allowed); (1) hbij f.app (op [i]) bijective ∀ i<n; (2) hsurj at [n]; (3)/(4) IsIso of SSet.coskAdj n unit (truncation n ⊣ Truncated.cosk n, = canonical K→cosk_n sk_n K per dep mathlib_match) for U and V; conclusion modelCategoryQuillen.I.rlp f = recorded trivial-Kan predicate (I = ofHoms ∂Δ[n].ι all n, degree 0 = f_0 surjective); #check confirmed SSet.coskAdj resolution; no landed lean/Sheaf hypercover/cosk material"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261015T221039-L-2564929",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
