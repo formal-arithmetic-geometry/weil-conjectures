@@ -73,4 +73,40 @@ theorem equivalence_counit_transport_cancel
   rw [← Category.assoc, hn]
   simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
+/-- A natural comparison followed by an equivalence counit ignores transport
+along an isomorphism of its input. Proof: naturality moves the input map
+through the comparison, and counit naturality moves it back; the inverse
+input map then cancels. This is the local-object cancellation in either
+canonical overlap branch. -/
+theorem equivalence_comparison_counit_transport
+    {A C D E : Type*} [Category* A] [Category* C] [Category* D] [Category* E]
+    (e : C ≌ D) (cart : D ⥤ E) (H : A ⥤ C) (S : A ⥤ D)
+    (ω : H ≅ S ⋙ e.inverse) {a b : A} (φ : a ≅ b) :
+    let apex := e.functor ⋙ cart
+    apex.map (H.map φ.hom) ≫ apex.map (ω.hom.app b) ≫
+        cart.map (e.counitIso.hom.app (S.obj b)) ≫ cart.map (S.map φ.inv) =
+      apex.map (ω.hom.app a) ≫ cart.map (e.counitIso.hom.app (S.obj a)) := by
+  intro apex
+  have hω := ω.hom.naturality φ.hom
+  simp only [Functor.comp_map] at hω
+  have hε := equivalence_counit_transport_cancel e (S.mapIso φ)
+  simp only [Functor.mapIso_hom, Functor.mapIso_inv] at hε
+  calc
+    apex.map (H.map φ.hom) ≫ apex.map (ω.hom.app b) ≫
+        cart.map (e.counitIso.hom.app (S.obj b)) ≫ cart.map (S.map φ.inv) =
+      apex.map (H.map φ.hom ≫ ω.hom.app b) ≫
+        cart.map (e.counitIso.hom.app (S.obj b)) ≫ cart.map (S.map φ.inv) := by
+          simp only [Functor.map_comp, Category.assoc]
+    _ = apex.map (ω.hom.app a ≫ e.inverse.map (S.map φ.hom)) ≫
+        cart.map (e.counitIso.hom.app (S.obj b)) ≫ cart.map (S.map φ.inv) := by
+          rw [hω]
+    _ = apex.map (ω.hom.app a) ≫ cart.map
+          (e.functor.map (e.inverse.map (S.map φ.hom))) ≫
+            cart.map (e.counitIso.hom.app (S.obj b)) ≫ cart.map (S.map φ.inv) := by
+          dsimp only [apex, Functor.comp_map]
+          simp only [Functor.map_comp, Category.assoc]
+    _ = apex.map (ω.hom.app a) ≫ cart.map (e.counitIso.hom.app (S.obj a)) := by
+          simp only [← Functor.map_comp]
+          rw [hε]
+
 end AlgebraicGeometry
