@@ -22,7 +22,8 @@
   "def-pur-sheaf-tensor-product",
   "def-constructible-locally-constant",
   "def-pc-scheme",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-asd-finite-etale-tate-twist"
  ],
  "proof": [
   {
@@ -321,5 +322,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine",
+  "declaration": "AlgebraicGeometry.Scheme.finite_etale_torsion_twist_line",
+  "statement": "theorem finite_etale_torsion_twist_line (T : Scheme.{u}) (N : ℕ) (hN : 0 < N) (hInvertible : ∀ t : T, IsUnit (N : T.presheaf.stalk t)) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (r : ℕ) : (∃ cover : Cover.{u} etalePrecoverage T, ∀ i : cover.I₀, Nonempty ((finiteEtaleTateTwist T N A hA r).over (cover.etalePrecoverageToEtale i) ≅ (constantSheaf (T.smallEtaleTopology.over (cover.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A))) ∧ IsLocallyConstantSheaf (finiteEtaleTateTwist T N A hA r) ∧ PreservesFiniteLimits (@MonoidalCategory.tensorLeft _ _ (Sheaf.monoidalCategory T.smallEtaleTopology (ModuleCat.{u + 1} A)) (finiteEtaleTateTwist T N A hA r)) ∧ PreservesFiniteColimits (@MonoidalCategory.tensorLeft _ _ (Sheaf.monoidalCategory T.smallEtaleTopology (ModuleCat.{u + 1} A)) (finiteEtaleTateTwist T N A hA r))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-15",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTwistLine.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0db1520ed",
+  "group": "NK",
+  "result": "pass",
+  "note": "Checked statements, dependencies, sources, constructions, edge cases, docstrings and verbatim signatures. Both delivered modules reproduced clean server compiles. No fixes required."
  }
 }
