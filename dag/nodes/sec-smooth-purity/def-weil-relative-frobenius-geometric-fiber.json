@@ -4,14 +4,16 @@
   "is": null,
   "from": {
    "node": "def-weil-frobenius-detailed",
-   "place": "its statement (a notion the statement uses)",
+   "place": "Clarification of def-weil-frobenius-detailed, final paragraph: “This is distinct from the absolute $q$-power morphism of $Y$”; current DAG parent item 4 spells out the relative endomorphism Fr^{(q)}_{Y_0} ×_{k_0} id_k, following Deligne (1.1.14).",
    "via": []
   },
-  "same_as": null
+  "same_as": [
+   "def-trf-scheme-frobenius"
+  ]
  },
  "kind": "definition",
  "title": "Relative q-power Frobenius of Y_0 ×_{k_0} k",
- "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber]. Let $Y_0$ be a $k_0$-scheme [def-weil-scheme-over-base] of finite type [def-weil-finite-type-morphism] and let $Y=Y_0\\times_{k_0}k$ be its geometric fiber. Since $p=0$ in $k_0$, $Y_0$ is of characteristic $p$; its absolute $q$-power Frobenius $\\operatorname{Fr}^{(q)}_{Y_0}:Y_0\\to Y_0$ [def-weil-absolute-frobenius-scheme] is a morphism of $k_0$-schemes, because the absolute Frobenius commutes with the structure morphism $Y_0\\to\\operatorname{Spec}k_0$ (Stacks, Lemma 33.36.2, tag 0CC8) and $\\operatorname{Fr}^{(q)}_{\\operatorname{Spec}k_0}=\\operatorname{id}$ as $c^q=c$ for $c\\in k_0$. The *relative ($q$-power) Frobenius* of $Y$ over $k$ is its base change [def-pc-base-change] to $k$,\n\n$$\n F_Y=\\operatorname{Fr}^{(q)}_{Y_0}\\times_{k_0}\\operatorname{id}_k:Y\\longrightarrow Y,\n$$\n\na morphism of $k$-schemes; on an affine open $\\operatorname{Spec}A_0\\subseteq Y_0$ it is $\\operatorname{Spec}$ of the $k$-algebra endomorphism $a\\otimes b\\mapsto a^q\\otimes b$ of $A_0\\otimes_{k_0}k$.",
+ "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber]. Let $Y_0$ be a $k_0$-scheme [def-weil-scheme-over-base] of finite type [def-weil-finite-type-morphism] and let $Y=Y_0\\times_{k_0}k$ be its geometric fiber. Since $p=0$ in $k_0$, $Y_0$ is of characteristic $p$ [def-weil-scheme-characteristic-p]; its absolute $q$-power Frobenius $\\operatorname{Fr}^{(q)}_{Y_0}:Y_0\\to Y_0$ [def-weil-absolute-frobenius-scheme] is a morphism of $k_0$-schemes, because the absolute Frobenius commutes with the structure morphism $Y_0\\to\\operatorname{Spec}k_0$ and $\\operatorname{Fr}^{(q)}_{\\operatorname{Spec}k_0}=\\operatorname{id}$ as $c^q=c$ for $c\\in k_0$ [lem-weil-finite-field-pow-card]. The *relative ($q$-power) Frobenius* of $Y$ over $k$ is its base change [def-pc-base-change] to $k$,\n\n$$\n F_Y=\\operatorname{Fr}^{(q)}_{Y_0}\\times_{k_0}\\operatorname{id}_k:Y\\longrightarrow Y,\n$$\n\na morphism of $k$-schemes; on an affine open $\\operatorname{Spec}A_0\\subseteq Y_0$ [def-weil-affine-spectrum], its inverse image in $Y$ is $\\operatorname{Spec}(A_0\\otimes_{k_0}k)$ [lem-weil-pbc-fibre-product-affine-spectra], and the restriction of $F_Y$ is $\\operatorname{Spec}$ of the $k$-algebra endomorphism $a\\otimes b\\mapsto a^q\\otimes b$ of $A_0\\otimes_{k_0}k$.",
  "source": {
   "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
   "place": "(1.1.14), p. 153 (pdf p. 18): 'F : X → X est l'endomorphisme de Frobenius de X, déduit par extension des scalaires de l'endomorphisme de Frobenius x ↦ x^q de X_0 (lequel est F_q-linéaire)'; cf. Stacks, Varieties, Definition 33.36.4 (tag 0CC9), of which F_Y is the $q$-power version composed with $Y^{(q/k)}\\cong Y$"
@@ -20,8 +22,12 @@
   "def-weil-finite-field-fiber",
   "def-weil-scheme-over-base",
   "def-weil-finite-type-morphism",
+  "def-weil-scheme-characteristic-p",
   "def-weil-absolute-frobenius-scheme",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-weil-affine-spectrum",
+  "lem-weil-finite-field-pow-card",
+  "lem-weil-pbc-fibre-product-affine-spectra"
  ],
  "proof": [],
  "proof_deps": [],
@@ -47,10 +53,178 @@
    "results": "line 270 pullback.map: the base change of a morphism, which builds $F_Y$ once the absolute Frobenius exists",
    "date": "2026-10-09",
    "verdict": "generalization: base change of morphisms only; the Frobenius is missing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative q-power Frobenius morphism of the geometric fiber of a finite type scheme over a finite field",
+   "results": "FiniteField.frobeniusAlgEquiv_apply (Mathlib/FieldTheory/Finite/Basic), FiniteField.frobeniusAlgHom_apply (same), WittVector Frobenius declarations; none is a scheme relative Frobenius",
+   "date": "2026-10-16",
+   "verdict": "no match; field/ring Frobenius only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme relative Frobenius, Scheme.Hom, pullback.map, Frobenius",
+   "results": "0 hits; unknown identifier Scheme",
+   "date": "2026-10-16",
+   "verdict": "invalid query; unknown identifier, not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|relative.*Frobenius|frobeniusTwist|iterateFrobenius in Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "definition of relative Frobenius for a scheme over a finite field and its base change to an algebraic closure",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "q-power Frobenius on Y₀ ×_{k₀} k induced by base change",
+   "results": "WeierstrassCurve baseChange/map_baseChange declarations only; no scheme Frobenius",
+   "date": "2026-10-16",
+   "verdict": "no match; unrelated curve base-change"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom, AlgebraicGeometry.Scheme.pullback, frobenius",
+   "results": "0 hits; unknown identifier AlgebraicGeometry.Scheme.pullback",
+   "date": "2026-10-16",
+   "verdict": "invalid query; unknown identifier, not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius in Mathlib/AlgebraicGeometry/",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change of absolute Frobenius scheme morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|frob|pow.*[Pp]ullback|[Pp]ullback.*pow",
+   "results": "0 hits in Mathlib/AlgebraicGeometry for the recorded expression.",
+   "date": "2026-10-15",
+   "verdict": "no match for the scheme definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"baseChange\"",
+   "results": "0 hits; query accepted without identifier errors.",
+   "date": "2026-10-15",
+   "verdict": "no match for the scheme definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Endomorphism of a scheme obtained by extension of scalars of Frobenius over a finite field, acting trivially on the base field",
+   "results": "FiniteField.frobeniusAlgHom and its apply/coe lemmas (Mathlib/FieldTheory/Finite/Basic.lean:333–345), purely inseparable scalar maps, Witt-vector and linear Frobenius maps; none constructs the scheme endomorphism after scalar extension.",
+   "date": "2026-10-15",
+   "verdict": "no match for the scheme definition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius endomorphism of an algebra over a finite field followed by scalar extension to an algebraic closure, as a morphism of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|frobeniusTwist|iterateFrobenius|frobenius",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change to an algebraic closure of the q-power Frobenius endomorphism of a scheme over a finite field, fixing the scalar factor",
+   "results": "FiniteField.frobeniusAlgEquiv, WittVector.StandardOneDimIsocrystal.frobenius_apply, FiniteField.frobeniusAlgEquiv_apply, IsPurelyInseparable.iterateFrobeniusₛₗ, FiniteField.frobeniusAlgHom_apply, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, WittVector.exists_frobenius_solution_fractionRing, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base",
+   "date": "2026-10-15",
+   "verdict": "no match for the scheme endomorphism; hits are ring, field, linear or Witt-vector constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative q-power Frobenius of a scheme obtained by scalar extension from a finite-field model",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"baseChange\"",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The absolute Frobenius of a scheme in characteristic p as a morphism of schemes, and its iteration",
+   "results": "iterateFrobeniusEquiv_eq_pow, LinearMap.iterateFrobenius, LinearMap.iterateFrobenius_def, iterateFrobeniusEquiv_def, coe_iterateFrobenius, RingHom.iterate_map_frobenius, iterateFrobeniusEquiv_apply, coe_iterateFrobeniusEquiv",
+   "date": "2026-10-15",
+   "verdict": "no match for the scheme endomorphism; hits are ring, field, linear or Witt-vector constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|frobeniusTwist|iterateFrobenius|frobenius",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"baseChange\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change to an algebraic closure of the q-power Frobenius endomorphism of a scheme over a finite field, fixing the scalar factor",
+   "results": "FiniteField.frobeniusAlgEquiv, WittVector.StandardOneDimIsocrystal.frobenius_apply, FiniteField.frobeniusAlgEquiv_apply, IsPurelyInseparable.iterateFrobeniusₛₗ, FiniteField.frobeniusAlgHom_apply, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, WittVector.exists_frobenius_solution_fractionRing, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base",
+   "date": "2026-10-16",
+   "verdict": "no match for the scheme scalar-extension endomorphism; returned hits concern rings, fields, linear maps or Witt vectors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The absolute Frobenius of a scheme in characteristic p as a morphism of schemes, and its iteration",
+   "results": "iterateFrobeniusEquiv_eq_pow, LinearMap.iterateFrobenius, LinearMap.iterateFrobenius_def, iterateFrobeniusEquiv_def, coe_iterateFrobenius, RingHom.iterate_map_frobenius, iterateFrobeniusEquiv_apply, coe_iterateFrobeniusEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match for the scheme scalar-extension endomorphism; returned hits concern rings, fields, linear maps or Witt vectors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative q-power Frobenius of a scheme obtained by scalar extension from a finite-field model",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|frobenius.*base[Cc]hange|base[Cc]hange.*frobenius",
+   "results": "0 hits; source scope: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme endomorphism induced by tensoring a finite field algebra Frobenius with the identity on an algebraically closed extension",
+   "results": "FiniteField.frobeniusAlgEquivOfAlgebraic, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, FiniteField.frobeniusAlgEquiv, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquiv_apply",
+   "date": "2026-10-15",
+   "verdict": "no match for the scheme scalar-extension endomorphism; semantic hits concern field automorphisms and topological prime spectra"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -96,5 +270,20 @@
   "group": "N9",
   "result": "pass",
   "note": "Statements, dependencies, source alignment, edge cases, docs, and recorded compilation checked; no substantive defects found."
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-weil-relative-frobenius-geometric-fiber",
+  "worker": "stage1",
+  "summary": "Repair of the lock-failed delivery 736943d6d8b4. Rebased the split-owned fields onto the current shared DAG, preserving its Lean and review records. Compared all nine dependency records with the approved delivery snapshot and reread all nine statements. The changed characteristic-p definition now specifies vanishing on every open; this is exactly the condition used here and needs no removed equivalences. The absolute-Frobenius statement is unchanged although its Lean metadata is new. Rechecked Deligne (1.1.14), Stacks 03SM/0CC7/0CC9, the blueprint overlap and the sole direct citer; repeated five logged Mathlib searches and retained the same scalar-extended endomorphism and affine formula. No new nodes, Lean work, compilation or push.",
+  "blueprint": "Makes precise the distinction in the final paragraph of the imported def-weil-frobenius-detailed, and realizes item 4 of its current DAG statement. The same definition also appears as the Φ clause of blueprint def-trf-scheme-frobenius (order 2071); that node depends on def-weil-frobenius-detailed, so it cannot be used here without a cycle."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-288fb2378",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-288fb2378 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all nine dependencies, Deligne (1.1.14), Stacks 03SM/0CC7/0CC9 and affine fibre-product tags. Verified hypotheses, base-change morphism, k-coefficient category, affine tensor formula, edge cases, searches, blueprint route, overlap/citer, and graph integrity. No new nodes or repairs are needed; review.md records the checks."
  }
 }
