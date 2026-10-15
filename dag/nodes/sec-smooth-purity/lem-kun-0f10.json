@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Finite cohomological dimension of finite-type morphisms",
- "statement": "Let $K$ be a field and let $f:X\\to Y$ be a morphism between\nschemes of finite type over $K$.\n\n1. **(1)** $\\kuncd(f)<\\infty$.\n1. **(2)** If $K$ is separably\nclosed, then $\\kuncd(X)<\\infty$ for every scheme $X$ of finite type\nover $K$.\n\nClause (1) and clause (2) are the classical finiteness of the\ncohomological dimension of a scheme of finite type over a field, which\nthis manuscript already imports elsewhere: the finiteness chain of\nthe constructibility chapter uses it in [sbc-thm-finiteness-finite-type], and\nthe Jacobian chapter proves the curve case in\nlem:sc-cohomological-dimension, so that the curve and proper\ninstances are internal to the blueprint. The affine bound\n$\\kuncd(X)\\le\\kuncd(K)+\\kundim X$ for affine $X$ of finite type over\n$K$, which is Tag [0F0V](https://stacks.math.columbia.edu/tag/0F0V)\nof the Stacks Project, is not needed in this chapter.\n(*Source:* Stacks Project, Lemma 59.96.2,\n[Tag `0F10`](https://stacks.math.columbia.edu/tag/0F10), in\nSection 59.96 (finite cohomological dimension): clause (1) is assertion\n(1) of that lemma, and clause (2) is\nits assertion (2) — which assumes $\\kuncd(K)<\\infty$ — combined with\n[lem-kun-cd-sep-closed-point], where the cohomological dimension of a\nseparably closed point is computed to be $0$.) In the Stacks Project the proof uses the induction principle of\nCohomology of Schemes, Lemma 30.4.1,\n[Tag `08DR`](https://stacks.math.columbia.edu/tag/08DR),\nwith the affine cases Lemma 59.95.8,\n[Tag `0F0X`](https://stacks.math.columbia.edu/tag/0F0X), for\nclause (1) and Proposition 59.95.6,\n[Tag `0F0V`](https://stacks.math.columbia.edu/tag/0F0V), for\nclause (2), together with the Mayer–Vietoris sequences Lemma 59.50.2,\n[Tag `0EYK`](https://stacks.math.columbia.edu/tag/0EYK), and\nLemma 59.50.1, [Tag\n`0A50`](https://stacks.math.columbia.edu/tag/0A50).",
+ "statement": "Let $K$ be a field and let $f:X\\to Y$ be a $K$-morphism between\nschemes of finite type over $K$, with their structure morphisms and compatibility\nas in [def-weil-scheme-over-base].\n\n1. **(1)** $\\kuncd(f)<\\infty$.\n1. **(2)** If $K$ is separably\nclosed, then $\\kuncd(X)<\\infty$ for every scheme $X$ of finite type\nover $K$.\n\nClause (1) and clause (2) are the classical finiteness of the\ncohomological dimension of a scheme of finite type over a field, which\nthis manuscript already imports elsewhere: the finiteness chain of\nthe constructibility chapter uses it in \\texttt{sbc-thm-finiteness-finite-type}, and\nthe Jacobian chapter proves the curve case in\nlem:sc-cohomological-dimension, so that the curve and proper\ninstances are internal to the blueprint. The affine bound\n$\\kuncd(X)\\le\\kuncd(K)+\\kundim X$ for affine $X$ of finite type over\n$K$, which is Tag [0F0V](https://stacks.math.columbia.edu/tag/0F0V)\nof the Stacks Project, is not needed in this chapter.\n(*Source:* Stacks Project, Lemma 59.96.2,\n[Tag `0F10`](https://stacks.math.columbia.edu/tag/0F10), in\nSection 59.96 (finite cohomological dimension): clause (1) is assertion\n(1) of that lemma, and clause (2) is\nits assertion (2) — which assumes $\\kuncd(K)<\\infty$ — combined with\n\\texttt{lem-kun-cd-sep-closed-point}, where the cohomological dimension of a\nseparably closed point is computed to be $0$.) In the Stacks Project the proof uses the induction principle of\nCohomology of Schemes, Lemma 30.4.1,\n[Tag `08DR`](https://stacks.math.columbia.edu/tag/08DR),\nwith the affine cases Lemma 59.95.8,\n[Tag `0F0X`](https://stacks.math.columbia.edu/tag/0F0X), for\nclause (1) and Proposition 59.95.6,\n[Tag `0F0V`](https://stacks.math.columbia.edu/tag/0F0V), for\nclause (2), together with the Mayer–Vietoris sequences Lemma 59.50.2,\n[Tag `0EYK`](https://stacks.math.columbia.edu/tag/0EYK), and\nLemma 59.50.1, [Tag\n`0A50`](https://stacks.math.columbia.edu/tag/0A50).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f10.md",
   "place": "node lem-kun-0f10, order 1731",
@@ -349,5 +349,72 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-ce5d3e7d8 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Stacks 0F10/0F0X, Mayer–Vietoris, shifted gluing bounds and coefficient categories check out. Corrected direct definition citations and new-node metadata in fixes/. No duplicate, clause restatement or cycle through the item found. Full checks and accepted tool_uses are recorded in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-92c08d115",
+  "group": "NM",
+  "result": "fix",
+  "note": "Reviewed the immutable delivery, dependencies, sources, and all seven citers. Complete merge-compatible fixes remove signature-local proofs and update the Lean record and report. Original and replacement modules compile cleanly via server-only scompile.py. Findings recorded in review.md; branch head unchanged.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "NM stage 2",
+  "old_statement": "Let $K$ be a field and let $f:X\\to Y$ be a morphism between\nschemes of finite type over $K$.\n\n1. **(1)** $\\kuncd(f)<\\infty$.\n1. **(2)** If $K$ is separably\nclosed, then $\\kuncd(X)<\\infty$ for every scheme $X$ of finite type\nover $K$.\n\nClause (1) and clause (2) are the classical finiteness of the\ncohomological dimension of a scheme of finite type over a field, which\nthis manuscript already imports elsewhere: the finiteness chain of\nthe constructibility chapter uses it in [sbc-thm-finiteness-finite-type], and\nthe Jacobian chapter proves the curve case in\nlem:sc-cohomological-dimension, so that the curve and proper\ninstances are internal to the blueprint. The affine bound\n$\\kuncd(X)\\le\\kuncd(K)+\\kundim X$ for affine $X$ of finite type over\n$K$, which is Tag [0F0V](https://stacks.math.columbia.edu/tag/0F0V)\nof the Stacks Project, is not needed in this chapter.\n(*Source:* Stacks Project, Lemma 59.96.2,\n[Tag `0F10`](https://stacks.math.columbia.edu/tag/0F10), in\nSection 59.96 (finite cohomological dimension): clause (1) is assertion\n(1) of that lemma, and clause (2) is\nits assertion (2) — which assumes $\\kuncd(K)<\\infty$ — combined with\n[lem-kun-cd-sep-closed-point], where the cohomological dimension of a\nseparably closed point is computed to be $0$.) In the Stacks Project the proof uses the induction principle of\nCohomology of Schemes, Lemma 30.4.1,\n[Tag `08DR`](https://stacks.math.columbia.edu/tag/08DR),\nwith the affine cases Lemma 59.95.8,\n[Tag `0F0X`](https://stacks.math.columbia.edu/tag/0F0X), for\nclause (1) and Proposition 59.95.6,\n[Tag `0F0V`](https://stacks.math.columbia.edu/tag/0F0V), for\nclause (2), together with the Mayer–Vietoris sequences Lemma 59.50.2,\n[Tag `0EYK`](https://stacks.math.columbia.edu/tag/0EYK), and\nLemma 59.50.1, [Tag\n`0A50`](https://stacks.math.columbia.edu/tag/0A50).",
+  "what": "The phrase morphism between finite-type K-schemes left compatibility with the K-structure maps ambiguous. The first Lean statement omitted it entirely. Specify a K-morphism, as required by the proof of Stacks 0F10 via 0F0X: its affine closed-immersion diagram into affine spaces over K commutes only for K-morphisms. This clarifies the source meaning rather than replacing it with an unrelated finiteness assumption. The two theorem names in the unchanged provenance explanation are rendered as text rather than bracketed statement-dependency citations; they do not introduce notions needed to type the statement.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 0F10, lemma-finite-cd (1), and Tag 0F0X, lemma-interlude-I, first diagram in the proof"
+  },
+  "citers": [
+   {
+    "id": "lem-sf-integral-direct-image-constructible",
+    "holds": true,
+    "note": "The statement explicitly assumes f is a K_0-morphism; its use of clause (1) remains valid."
+   },
+   {
+    "id": "lem-kun-kunneth-map-agrees",
+    "holds": true,
+    "note": "The relative map in (b) is the fibre-product projection over k; absolute finiteness uses unchanged clause (2)."
+   },
+   {
+    "id": "lem-kun-0f0g",
+    "holds": true,
+    "note": "Uses only unchanged clause (2) for the proper geometric fibre over the algebraically closed field Omega."
+   },
+   {
+    "id": "lem-kun-0f1n",
+    "holds": true,
+    "note": "The commutative diagram is over Spec K; g and h commute with the induced K-structure maps."
+   },
+   {
+    "id": "thm-kun-0f1p",
+    "holds": true,
+    "note": "The product projection is a k-morphism, and the absolute clause is unchanged."
+   },
+   {
+    "id": "lem-kun-0f14b",
+    "holds": true,
+    "note": "The product projection is a k-morphism; absolute finiteness for Y is unchanged."
+   },
+   {
+    "id": "lem-pur-ordinary-kunneth-finite-ring",
+    "holds": true,
+    "note": "Uses unchanged clause (2) on X, Y and their product over the algebraically closed field k."
+   }
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension",
+  "declaration": "AlgebraicGeometry.torsionEtaleCohomologicalDimension_finite_of_finiteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/FiniteTorsionEtaleCohomologicalDimension.lean",
+  "statement": "theorem torsionEtaleCohomologicalDimension_finite_of_finiteType (K : Type u) [Field K] (X Y : Scheme.{u}) [X.Over (Spec (.of K))] [Y.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] [LocallyOfFiniteType (Y ↘ Spec (.of K))] [QuasiCompact (Y ↘ Spec (.of K))] (f : X ⟶ Y) [f.IsOver (Spec (.of K))] : (@Scheme.Hom.torsionEtaleCohomologicalDimension _ _ f (@quasiCompact_of_compactSpace X Y f ((quasiCompact_iff_compactSpace (X ↘ Spec (.of K))).mp inferInstance) (@IsLocallyNoetherian.quasiSeparatedSpace Y (LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of K))))) (@QuasiSeparated.of_quasiSeparatedSpace X Y f (@IsLocallyNoetherian.quasiSeparatedSpace X (LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of K)))))) < ⊤ ∧ (IsSepClosed K → (@Scheme.torsionEtaleCohomologicalDimension X ((quasiCompact_iff_compactSpace (X ↘ Spec (.of K))).mp inferInstance) (@IsLocallyNoetherian.quasiSeparatedSpace X (LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of K))))) < ⊤)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-15",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-92c08d115"
  }
 }
