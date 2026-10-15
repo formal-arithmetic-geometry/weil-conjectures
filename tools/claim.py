@@ -119,6 +119,12 @@ def handoff_return(who, m):
                 + 'The previous worker ended with: ' + nr.get('note', '')
                 + '\n\nCompiler messages and attribution:\n' + nr.get('reason', '') + '\n')
 
+
+def _delivered(who, m):
+    import subprocess
+    return subprocess.run(["git", "rev-parse", "-q", "--verify", f"refs/heads/deliver/{who}/{m}"], cwd=str(ROOT) if "ROOT" in globals() else None,
+                          capture_output=True).returncode == 0
+
 def take(who, m, quiet=False) -> bool:
     if stage2_parked(m):   # launcher's order 2026-10-11 05:50 UTC: parked for every group until L resolves it
         if not quiet:
@@ -128,7 +134,9 @@ def take(who, m, quiet=False) -> bool:
         if not quiet:
             print(f"{m} is already split, matched or attached; nothing to claim")
         return False
-    if len(held_by(who)) >= LIMIT:
+    # 2026-10-16: a held item already delivered (its branch waits for review) does not count toward the cap, so a
+    # group keeps working while its deliveries wait; the cap limits items in work, not deliveries in review
+    if len([x for x in held_by(who) if not _delivered(who, x)]) >= LIMIT:
         if not quiet:
             print(f"{who} already holds {LIMIT} claims; deliver or release one first")
         return False
