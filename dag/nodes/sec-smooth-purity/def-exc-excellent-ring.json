@@ -11,7 +11,7 @@
  },
  "kind": "definition",
  "title": "Excellent and quasi-excellent commutative rings",
- "statement": "Let $R$ be a commutative ring. It is *quasi-excellent* if it is Noetherian [def-weil-pbc-noetherian-ring], a G-ring [def-weil-pbc-g-ring], and J-2. Here J-2 means that for every finite type $R$-algebra $A$ [def-weil-pbc-finite-type-algebra], the set of prime ideals $\\mathfrak p$ for which $A_{\\mathfrak p}$ is regular local [def-weil-regular-scheme] is open in $\\operatorname{Spec}A$ [def-weil-affine-spectrum]. It is *excellent* if it is quasi-excellent and universally catenary. Universally catenary means that every finite type $R$-algebra $A$ is catenary: for any primes $\\mathfrak p\\subseteq\\mathfrak q$ of $A$, the lengths of all finite chains of primes between them have a common finite upper bound, and all saturated chains between them have the same length. A chain is saturated when no prime can be inserted strictly between consecutive members; its length is its number of strict inclusions.",
+ "statement": "Let $R$ be a commutative ring. It is *quasi-excellent* if it is Noetherian [def-weil-pbc-noetherian-ring], a G-ring [def-weil-pbc-g-ring], and J-2. Here J-2 means that for every finite type $R$-algebra $A$ [def-weil-pbc-finite-type-algebra], the set of prime ideals $\\mathfrak p$ for which $A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] is regular local [def-weil-regular-scheme] is open in $\\operatorname{Spec}A$ [def-weil-affine-spectrum]. It is *excellent* if it is quasi-excellent and universally catenary. For a Noetherian $R$, universally catenary means that every finite type $R$-algebra $A$ is catenary: for any primes $\\mathfrak p\\subseteq\\mathfrak q$ of $A$, the lengths of all finite chains of primes between them have a common finite upper bound, and all saturated chains between them have the same length. A chain is saturated when no prime can be inserted strictly between consecutive members; its length is its number of strict inclusions.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 07QT, definition-excellent; J-2 is expanded as in Tag 07P7, definition-J (more-algebra.tex). Catenary and universally catenary are expanded as in algebra.tex Tags 00NI, definition-catenary, and 00NL, definition-universally-catenary."
@@ -20,6 +20,7 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-g-ring",
   "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
   "def-weil-regular-scheme",
   "def-weil-affine-spectrum"
  ],
@@ -67,16 +68,94 @@
    "query": "Noetherian G ring with open regular loci in every finitely generated algebra and catenary finite type algebras",
    "results": "{\"t\": \"2026-10-15T20:19:26Z\", \"tool\": \"leanfinder\", \"query\": \"Noetherian G ring with open regular loci in every finitely generated algebra and catenary finite type algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isNoetherianRing_of_away\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"IsNoetherianRing.of_isLocalization_maximal\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.isNoetherian_Spec\", \"Algebra.QuasiFiniteAt\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\"], \"digest\": \"2a4b3ebce56fe4f1\"}",
    "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search; candidates do not state the excellent-ring notion or the reduced-ring parameter existence assertion"
+   "verdict": "no match: independent second-reader search; candidates do not state the excellent-ring notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative ring is quasi-excellent if it is Noetherian, a G-ring, and J-2, and excellent if additionally universally catenary",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  [IsPrincipalIdealRing R, ValuationRing R, IsDedekindDomain R,\\n      IsIntegrallyClosed R ∧ ∀ (P : Ideal R), P ≠ ⊥ → P.IsPrime → P = IsLocalRing.maximalIdeal R,\\n      Submodule.IsPrincipal (IsL\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, and an integral domain, the following are equivalent: (1) $ R $ is a principal ideal ring; (2) $ R $ is a valuation ring; (3) $ R $ is a Dedekin\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherianRing_of_away\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Finset R),\\n  Ideal.span ↑S = ⊤ → (∀ (s : ↥S), IsNoetherianRing (Localization.Away ↑s)) → IsNoetherianRing R\", \"doc\": \"If the localization of a commutative ring $ R $ away from an element $ x $ forms a Noetherian ring, then $ R $ itself is a Noetherian ring. This follows from the property that every ideal in $ R $ is \"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n  {\"name\": \"IsNoetherianRing.of_prime\", \"module\": \"Mathlib/RingTheory/Noetherian/OfPrime\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R], (∀ (I : Ideal R), I.IsPrime → I.FG) → IsNoetherianRing R\", \"doc\": \"If every prime ideal in a commutative ring $ R $ is finitely generated, then $ R $ is a Noetherian ring.\"}\n  {\"name\": \"Polynomial.not_quasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : Ideal (Polynomial R)) [inst_1 : P.IsPrime], ¬Algebra.QuasiFiniteAt R P\", \"doc\": \"For any prime ideal $ P $ in the polynomial ring $ R[X] $, the localization of $ R[X] $ at the complement of $ P $ is not a quasi-finite algebra over the base commutative ring $ R $. This means the lo\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: no returned declaration defines excellent or quasi-excellent rings; Noetherian, smooth, and quasi-finite notions cover only different or partial properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian ring with geometrically regular formal fibres is excellent when every finite type algebra has open regular locus and equal length saturated prime chains",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherianRing_of_away\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Finset R),\\n  Ideal.span ↑S = ⊤ → (∀ (s : ↥S), IsNoetherianRing (Localization.Away ↑s)) → IsNoetherianRing R\", \"doc\": \"If the localization of a commutative ring $ R $ away from an element $ x $ forms a Noetherian ring, then $ R $ itself is a Noetherian ring. This follows from the property that every ideal in $ R $ is \"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  [IsPrincipalIdealRing R, ValuationRing R, IsDedekindDomain R,\\n      IsIntegrallyClosed R ∧ ∀ (P : Ideal R), P ≠ ⊥ → P.IsPrime → P = IsLocalRing.maximalIdeal R,\\n      Submodule.IsPrincipal (IsL\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, and an integral domain, the following are equivalent: (1) $ R $ is a principal ideal ring; (2) $ R $ is a valuation ring; (3) $ R $ is a Dedekin\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Polynomial.not_quasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : Ideal (Polynomial R)) [inst_1 : P.IsPrime], ¬Algebra.QuasiFiniteAt R P\", \"doc\": \"For any prime ideal $ P $ in the polynomial ring $ R[X] $, the localization of $ R[X] $ at the complement of $ P $ is not a quasi-finite algebra over the base commutative ring $ R $. This means the lo\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: no returned declaration defines excellent or quasi-excellent rings; Noetherian, smooth, and quasi-finite notions cover only different or partial properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Excellent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: no returned declaration defines excellent or quasi-excellent rings; Noetherian, smooth, and quasi-finite notions cover only different or partial properties"
+  },
+  {
+   "tool": "grep",
+   "query": "excellent|quasiExcellent|catenary|IsJTwo|J2Ring",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/InvariantForm.lean\", \"line\": \"32\", \"text\": \"We follow the short and excellent paper [dieudonne1953].\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: no returned declaration defines excellent or quasi-excellent rings; Noetherian, smooth, and quasi-finite notions cover only different or partial properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Excellent rings and quasi-excellent rings defined by regular formal fibres, open regular loci, and universal catenarity",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?excellent|universally.?catenary|J.?two|J.?2|G.?ring",
+   "results": "{\"t\": \"2026-10-15T23:03:32Z\", \"tool\": \"grep\", \"query\": \"quasi.?excellent|universally.?catenary|J.?two|J.?2|G.?ring\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Basic.lean\", \"Mathlib/RingTheory/RamificationInertia/Inertia.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\"], \"digest\": \"e2519df50209647f\"}",
+   "date": "2026-10-16",
+   "verdict": "inconclusive broad grep: the 25 returned lines are unrelated ring homomorphisms, indices or comments; followed by a word-boundary search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define a universally catenary Noetherian algebra whose local completions have geometrically regular fibres and all finitely generated algebras have open regular locus",
+   "results": "{\"t\": \"2026-10-15T23:03:32Z\", \"tool\": \"leanfinder\", \"query\": \"Define a universally catenary Noetherian algebra whose local completions have geometrically regular fibres and all finitely generated algebras have open regular locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.QuasiFiniteAt\", \"AlgebraicGeometry.isNoetherianRing_of_away\", \"IsNoetherianRing.of_isLocalization_maximal\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"Algebra.IsSmoothAt\", \"Algebra.smoothLocus\"], \"digest\": \"2fdd5c189c47ce32\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits are Noetherianity, smoothness or quasi-finiteness, not excellence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"catenary\"",
+   "results": "{\"t\": \"2026-10-15T23:03:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"catenary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(excellent|quasiexcel[a-z]*|catenary|IsJTwo|J2Ring|IsGRing)\\b",
+   "results": "{\"t\": \"2026-10-15T23:03:39Z\", \"tool\": \"grep\", \"query\": \"\\\\b(excellent|quasiexcel[a-z]*|catenary|IsJTwo|J2Ring|IsGRing)\\\\b\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/InvariantForm.lean\"], \"digest\": \"371d3433061e241b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: sole hit is the adjective excellent in a bibliographic comment"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-punctured-curve-branches",
   "by": "worker",
   "date": "2026-10-15"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-exc-excellent-ring",
+  "worker": "stage1",
+  "summary": "Checked the excellent/quasi-excellent predicates against Stacks 07QT, the inline J-2 clause against 07P7, and the inline catenary/universally catenary clauses against 00NI/00NL, reading the online tag pages and TeX labels because the local literature checkout is absent. The original mathematical statement is retained, with an added direct reference to the existing localization-at-a-prime definition. All six statement dependencies were opened and supply exactly the notions used; J-2 and chain conditions are explicitly defined inline and require no new nodes or well-definedness theorem. Project-source searches found no attachment. Fresh logged Mathlib searches in two semantic phrasings, Loogle, grep, and unavailable LeanSearch found no full definition match. No proof steps are required for these predicates. Independent second reading read the four upstream TeX labels again and made the Noetherian domain of the universally-catenary terminology explicit, without changing the excellence predicate. Fresh differently phrased searches again found no Mathlib match.",
+  "blueprint": "Serves the statement phrase \"reduced excellent one-dimensional strictly henselian local ring\" and proof paragraph 1 of blueprint ancestor lem-exc-punctured-curve-branches. It supplies the meaning of excellence only; the stability and Nagata assertions are separate existing nodes. Whole-blueprint searches for excellent, catenary, J-2, and excellent universally catenary found no other blueprint node stating this definition; same_as remains []."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q44-e50ce9ef4",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-e50ce9ef4 (reviewer sub-agent of L); spot-checked: Read the full item, report, dependencies, unit/chapter route, ancestor blueprint and cited Stacks definitions. Excellence, J-2 and catenarity match the sources; small cases and dependency-cycle checks pass. No new nodes, duplicate definitions, hidden proof claims or repairs. Written review.md."
+ }
 }
