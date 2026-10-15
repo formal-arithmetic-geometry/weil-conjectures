@@ -3,46 +3,242 @@
  "blueprint": {
   "is": "thm-cbc-finite-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compact-support base change over a finite extension",
- "statement": "For every finite $E/\\Ql$, every\ncompact-support\nbase-change square with $f$ separated of finite type and $g$\narbitrary, and every $K\\in\\Dbc(X,E)$ (in the sense of\n[def-weil-pbc-rational-category]), whose reductions satisfy the\nconstructibility and amplitude conditions of\n[prop-finite-compact-support-constructibility],\n\n$$\nLg^*Rf_!K\\xrightarrow{\\ \\sim\\ }Rf'_!Lg'^*K\n\\quad\\text{in }\\Dbc(Y',E).\n$$\n\nThis is independent of the integral lattice and natural and coherent\nfor identities and pasted squares.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $A=\\mathcal O_E$, a uniformizer $\\varpi$, and $I=(\\varpi)$, using the adic datum of [def-weil-pbc-adic-coefficient-datum]. Let\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\nbe a compact-support base-change square [def-cbc-compact-support-square], with $f$ separated of finite type. Require that all four schemes are noetherian and finite-dimensional and that $\\ell$ is invertible on them. No smoothness, properness or finite-type hypothesis on $g$ is imposed.\n\nWrite $\\mathcal C_T=\\Dbc(T_{\\Proet},A)$ for the completed integral category of [def-weil-pbc-bounded-constructible-complete], and use its raw rationalization $\\Dbc(T,E)=\\mathcal C_T[1/\\varpi]$ [def-weil-pbc-rational-category]. The integral operations are completed pullback [def-weil-pbc-completed-pullback] and compact-support direct image $Rf_!=Rp_*j_!$ for a compactification of $f$ [def-weil-pbc-projection-compactification], and their base-changed versions. On the rational categories use their $E$-linear extensions [prop-weil-pbc-rational-transport]. Define the rational compact-support exchange to be the extension of the specified completed integral exchange [def-cbc-completed-exchange-map]. Then for every $K\\in\\Dbc(X,E)$ its component is an isomorphism\n$$\n\\Ex_{!,E}(K):Lg^*Rf_!K\\xrightarrow{\\sim}Rf'_!Lg'^*K\n\\quad\\text{in }\\Dbc(Y',E).\n$$\nIt is natural in every rational morphism. For integral representatives $M,N$ equipped with a rational isomorphism identifying them, the two components agree under the isomorphisms induced by the two composite functors; this is independence of the integral lattice. Identity and pasted-square coherence hold for squares whose schemes lie in the stated category domains.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
   "place": "node thm-cbc-finite-extension, order 1644"
  },
  "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-compact-support-square",
+  "def-weil-pbc-bounded-constructible-complete",
   "def-weil-pbc-rational-category",
-  "prop-finite-compact-support-constructibility",
-  "def-cbc-compact-support-square"
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-projection-compactification",
+  "prop-weil-pbc-rational-transport",
+  "def-cbc-completed-exchange-map"
  ],
  "proof": [
   {
-   "text": "Choose an integral lattice for $K$. The isomorphism of\n[thm-cbc-complete-proetale] is an isomorphism of\n$\\mathcal O_E$-linear functors on the integral constructible\ncategories, so by [prop-weil-pbc-rational-transport] it remains\nan isomorphism after the rationalization of\n[def-weil-pbc-rational-category]; the constructible landing is\nthe finite-level condition of the statement. Independence of the\nlattice (both sides are lattice-independent by\n[lem-weil-compact-support-representative-independence]) and\ncoherence are inherited from the integral level.",
+   "text": "By [lem-pod-separated-finite-type-base-change], $f'$ is separated and of finite type. Apply [lem-cbc-integral-compact-support-uniform-restriction] to $f$ and to its base change $f'$ using the compactification and its pullback in [def-cbc-compact-support-square]. This gives exact $A$-linear restrictions of $Rf_!$ and $Rf'_!$ to the precise categories $\\mathcal C_T$. For an integral object $M\\in\\mathcal C_T$, [lem-weil-pbc-integral-stratified-perfect-characterization] gives boundedness; choose its cohomological interval $[a,b]$. The two-term free resolution of $A/I^n$ in [lem-weil-pbc-standard-quotients-perfect], extended to the flat completed coefficient sheaf by [lem-weil-pbc-constant-completion-equivalence], computes $M_n$ as the cone of $\\varpi^n:M\\to M$. Its cohomology is zero outside $[a-1,b]$, independently of $n$. For any of the horizontal morphisms $u:T'\\to T$, apply [prop-weil-pbc-preservation-constructible] to the cartesian square with vertical maps $\\mathrm{id}_T,\\mathrm{id}_{T'}$ and both horizontal maps $u$. For this auxiliary square take $X=Y=T$, $X'=Y'=T'$, and $g=g'=u$. Both vertical identities are proper; their nonempty geometric fibres are points, and empty fibres also have dimension at most zero. Thus take $e=0$ and $N=\\ell$: the residue field $A/I$ has characteristic $\\ell$, so $N(A/I)=0$, and $N$ is invertible on both schemes by hypothesis. Its third conclusion gives $Lu^*_{\\mathrm{comp}}M\\in\\mathcal C_{T'}$ for every $M\\in\\mathcal C_T$, using the common reduction interval just established. The construction in [def-weil-pbc-completed-pullback] is the composite of the reduction-tower functor, derived tower pullback and derived inverse limit. The first two are exact by their resolving-class constructions [def-weil-pbc-adic-coefficient-datum, lem-pur-left-derived-from-kflat-class], and the last is exact by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Each sends a scalar multiple $a v$ to $a$ times the image of $v$: tensor, pullback, and the limit of scalar-linear compatible maps all do so, and this equality persists on localizing quasi-isomorphisms. Thus the restricted completed pullbacks are exact $A$-linear functors as well. All these restrictions use the inherited triangulations of [lem-weil-pbc-uniform-complete-triangulated].",
+   "uses": [
+    "lem-cbc-integral-compact-support-uniform-restriction",
+    "def-cbc-compact-support-square",
+    "prop-weil-pbc-preservation-constructible",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
+    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-rational-category], the raw rational category has the same objects as its integral category. Thus regard $K$ as an integral object $K_0\\in\\mathcal C_X$, without any lattice-existence assertion. By [def-weil-pbc-bounded-constructible-complete], $K_0$ is derived $I$-complete and its reductions have compatible etale-origin witnesses. The adic datum and compact-support square are assumed, so [thm-cbc-complete-proetale] applies and gives the specified integral exchange $\\eta_{K_0}:F(K_0)\\xrightarrow{\\sim}G(K_0)$, where $F=Lg^*_{\\mathrm{comp}}Rf_!$ and $G=Rf'_!Lg'^*_{\\mathrm{comp}}$. Its endpoints belong to $\\mathcal C_{Y'}$ by step 1. Since this is a full subcategory, the ambient inverse is a morphism in it and still satisfies both inverse equations. It is natural and coherent for identities and pasted squares as asserted by that theorem.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "def-weil-pbc-bounded-constructible-complete",
+    "thm-cbc-complete-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
+    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
+   }
+  },
+  {
+   "text": "Apply the general functor-and-transformation assertion of [prop-weil-pbc-rational-transport] to the four exact $A$-linear integral functors and to $\\eta:F\\Rightarrow G$. This gives the rational functors and the extended exchange with component $\\eta_{K_0}\\otimes1$. It is the displayed exchange by its definition in the statement. The extension of a composite agrees with the composite of extensions: for a pure tensor $u\\otimes a$ both send it to $F_1(F_2(u))\\otimes a$, since the extensions are $E$-linear and agree on integral maps. Such pure tensors generate each Hom module by [def-weil-linear-scalar-localization]. Thus the transformation has exactly the indicated source and target functors.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
+    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
+   }
+  },
+  {
+   "text": "Let $v=\\eta_{K_0}^{-1}$. The composition and identity formulas of [def-weil-linear-scalar-localization] give\n$$(v\\otimes1)\\circ(\\eta_{K_0}\\otimes1)=(v\\circ\\eta_{K_0})\\otimes1=\\mathrm{id}\\otimes1,$$\nwhile $(\\eta_{K_0}\\otimes1)\\circ(v\\otimes1)=(\\eta_{K_0}\\circ v)\\otimes1=\\mathrm{id}\\otimes1$. Hence $v\\otimes1$ is an inverse in the raw rational category on $Y'$, proving the claimed isomorphism for every $K$.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
+    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
+   }
+  },
+  {
+   "text": "Write $F_E,G_E$ for the rational composites. Integral naturality says $G(u)\\eta_M=\\eta_NF(u)$ for an integral map $u:M\\to N$. Using the bilinear composition of [def-weil-linear-scalar-localization], tensoring this equation with $a\\in E$ gives $G_E(u\\otimes a)(\\eta_M\\otimes1)=(\\eta_N\\otimes1)F_E(u\\otimes a)$. By addition it holds for every rational map, including a rational isomorphism $h:M\\to N$ specifying the identification of two integral representatives. Since a functor sends inverse pairs to inverse pairs, $F_E(h)$ and $G_E(h)$ are isomorphisms. The equation therefore identifies the two components under precisely these induced identifications, proving lattice independence without requiring an integral lift of $h$.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
+    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
+   }
+  },
+  {
+   "text": "The integral identity and pasting diagrams commute by [thm-cbc-complete-proetale]. Apply the localization functor $Q$ to every component and comparison in those diagrams. By [def-weil-linear-scalar-localization], $Q(vu)=Q(v)Q(u)$ and $Q(\\mathrm{id})=\\mathrm{id}$. Step 3 identifies the rational composite functors with the extensions of the integral composites. Whiskering is also respected: if $H$ is one of the integral functors and $t$ a comparison component, its rational extension satisfies $H_E(Q(t))=Q(H(t))$ by [prop-weil-pbc-rational-transport]. Therefore every edge and every path in a rational identity or pasting diagram is the image of its integral counterpart. The integral equalities remain equalities after $Q$, giving the claimed coherence for all identity and pasted squares within the stated category domains.",
    "uses": [
     "thm-cbc-complete-proetale",
-    "prop-weil-pbc-rational-transport",
-    "def-weil-pbc-rational-category",
-    "lem-weil-compact-support-representative-independence"
+    "def-weil-linear-scalar-localization",
+    "prop-weil-pbc-rational-transport"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
+    "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
+   }
   }
  ],
  "proof_deps": [
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "def-cbc-compact-support-square",
+  "prop-weil-pbc-preservation-constructible",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pod-separated-finite-type-base-change",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-bounded-constructible-complete",
   "thm-cbc-complete-proetale",
   "prop-weil-pbc-rational-transport",
-  "def-weil-pbc-rational-category",
-  "lem-weil-compact-support-representative-independence"
+  "def-weil-linear-scalar-localization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
-  "place": "## Proof"
+  "place": "Proof, sole paragraph; integral constructible landing and scalar-localization argument made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compact-support base change over a finite extension after rationalization",
+   "results": "Algebra.IsAlgebraic.isBaseChange_of_isFractionRing; IsBaseChange.finitePow; RingHom.QuasiFinite.isStableUnderBaseChange; WeierstrassCurve.baseChange_integralModel_eq; RingHom.EssFiniteType.isStableUnderBaseChange; IsBaseChange.finsuppPow; IsBaseChange.of_fintype_basis; RingHom.finite_isStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match: no complete statement for the specified compact-support exchange on raw rationalized constructible categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "isIso compact support base change rationalization",
+   "results": "0 hits | loogle: Unknown identifier `isIso`",
+   "date": "2026-10-16",
+   "verdict": "unavailable: query reported an unknown identifier; superseded by the later valid baseChange query"
+  },
+  {
+   "tool": "grep",
+   "query": "rationalization|compact.support|base.change",
+   "results": "0 hits; subdirectory argument was incorrectly prefixed by Mathlib/, so the effective path does not exist; superseded by corrected CategoryTheory and AlgebraicGeometry searches",
+   "date": "2026-10-16",
+   "verdict": "unavailable: invalid local search root, not evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compact support base change isomorphism for rationalized constructible complexes over a finite extension",
+   "results": "0 hits | service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact functorial compactly supported direct image base change on rationalized bounded constructible pro-etale complexes",
+   "results": "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; CategoryTheory.Functor.sheafPushforwardCocontinuous; SheafOfModules.pushforwardNatIso; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso; SheafOfModules.pushforwardPushforwardAdj; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+   "date": "2026-10-16",
+   "verdict": "no match: no complete statement for the specified compact-support exchange on raw rationalized constructible categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.linear",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no complete statement for the specified compact-support exchange on raw rationalized constructible categories"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support|LowerShriek|Rationalization",
+   "results": "0 hits; subdirectory argument was incorrectly prefixed by Mathlib/, so the effective path does not exist; superseded by corrected CategoryTheory and AlgebraicGeometry searches",
+   "date": "2026-10-16",
+   "verdict": "unavailable: invalid local search root, not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support|LowerShriek|Rationalization",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no complete statement for the specified compact-support exchange on raw rationalized constructible categories"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*base.?change|base.?change.*constructible|pro.?etale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: no complete statement for the specified compact-support exchange on raw rationalized constructible categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", CategoryTheory.IsIso",
+   "results": "CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact; CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact; CategoryTheory.TwoSquare.isIso_lanBaseChange_app; CategoryTheory.TwoSquare.isIso_ranBaseChange_app; CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff; CategoryTheory.TwoSquare.isIso_ranBaseChange_app_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: no complete statement for the specified compact-support exchange on raw rationalized constructible categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between linear functors remains an isomorphism after scalar localization of the Hom modules",
+   "results": "CategoryTheory.Localization.functor_linear_iff; CategoryTheory.Localization.linear; CategoryTheory.Localization.functor_linear; CategoryTheory.Localization.instLinearLocalizationQ; CategoryTheory.Localization.instLinearLocalization'Q'; CategoryTheory.Localization.instLinearLocalization'; CategoryTheory.Localization.instLinearLocalization; CategoryTheory.Shift.linear_of_localization",
+   "date": "2026-10-16",
+   "verdict": "no match: no complete statement for the specified compact-support exchange on raw rationalized constructible categories"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|Constructible",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no theorem for completed pro-etale compact-support images on compatible uniform constructible towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported pushforward preserves bounded constructible adic complexes with uniform constructible reductions over a complete discrete valuation ring",
+   "results": "AdicCompletion.map_exact; localCohomology; AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; AdicCompletion.exists_smodEq_pow_add_one_smul; ChevalleyThm.chevalley_polynomialC; IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq; localCohomology.ofSelfLERadical",
+   "date": "2026-10-16",
+   "verdict": "no match: no theorem for completed pro-etale compact-support images on compatible uniform constructible towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a separated finite type morphism of noetherian finite dimensional schemes compact support direct image preserves derived complete constructible integral adic complexes",
+   "results": "0 hits | service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", CategoryTheory.Functor",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no theorem for completed pro-etale compact-support images on compatible uniform constructible towers"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -72,5 +268,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-cbc-finite-extension",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: made explicit the noetherian finite-dimensional domain of the rational categories and their completed-coefficient operations. Second reading removed the first draft's blanket integral restriction hypotheses. One strictly smaller integral compact-support preservation lemma supplies the missing input; existing proper-preservation applied to identity vertical squares supplies arbitrary completed pullback preservation. Integral exchange, scalar extension, both inverse identities, rational naturality/lattice independence and identity/pasting coherence are proved in six steps. Repair after the merge-lock refusal: revalidated all current dependency statements and 22 citation quotes; expanded the identity-vertical square, its annihilator and fibre hypotheses, and the full-subcategory inverse argument. Removed worker-recorded tool-use metadata under C8; requested tools are explained only in report.md. Renewed the integral-lemma searches with a second semantic phrasing and broader source grep.",
+  "blueprint": "Realizes the sole proof paragraph: integral constructible functors and landing (step 1), integral representative and completed exchange (step 2), rational transport (step 3), invertibility (step 4), lattice independence (step 5), coherence (step 6). The finite-level constructibility requirement is handled by integral preservation, not replaced by an additional hypothesis."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q39-fe47c004c",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-fe47c004c (reviewer sub-agent of L); spot-checked: Read the full item, new lemma, route, cited statements, sources, and report. Verified all six proof steps, coefficient category, completed exchange morphism, domain hypotheses, compactification base change, Mathlib searches, duplicate checks, and edge cases. Review written to review.md."
+ }
 }
