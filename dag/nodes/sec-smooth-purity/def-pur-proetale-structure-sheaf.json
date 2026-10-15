@@ -4,26 +4,86 @@
   "is": null,
   "from": {
    "node": "def-coefficient-twists-detailed",
-   "place": "its statement (a notion the statement uses)",
+   "place": "The first displayed roots-of-unity formula in def-coefficient-twists-detailed: the values Γ(U, O_U) of the structure sheaf, made explicit through def-pur-roots-of-unity-sheaf.",
    "via": [
     "def-pur-roots-of-unity-sheaf"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The structure sheaf of rings on the small pro-etale site",
- "statement": "Let $S$ be a scheme and $S_{\\mathrm{proet}}$ its small pro-etale site\n[def-weil-pbc-small-proetale-site]. The *structure sheaf* $\\mathcal O_S$ on\n$S_{\\mathrm{proet}}$ is the presheaf of commutative rings\n\n$$\n \\mathcal O_S(U)=\\Gamma(U,\\mathcal O_U)\\qquad(U\\to S\\text{ weakly etale}),\n$$\n\nwhose restriction map along a morphism $h:V\\to U$ over $S$ is the ring map\n$h^\\sharp:\\Gamma(U,\\mathcal O_U)\\to\\Gamma(V,\\mathcal O_V)$ on global sections. It is a\nsheaf of rings on $S_{\\mathrm{proet}}$: as a presheaf of sets it is isomorphic to\n$U\\mapsto\\operatorname{Mor}(U,\\operatorname{Spec}\\mathbf Z[t])$ (a morphism to\n$\\operatorname{Spec}\\mathbf Z[t]$ is a ring map $\\mathbf Z[t]\\to\\Gamma(U,\\mathcal O_U)$,\ni.e. a global section), hence it is representable on schemes and satisfies the sheaf\ncondition for fpqc coverings; the coverings of $S_{\\mathrm{proet}}$ are fpqc coverings,\nand the sheaf condition for a presheaf of rings is that of its underlying presheaf of\nsets.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $S_{\\mathrm{proet}}$ its small pro-etale site\n[def-weil-pbc-small-proetale-site]. The *structure sheaf* $\\mathcal O_S$ on\n$S_{\\mathrm{proet}}$ is the presheaf of commutative rings\n\n$$\n \\mathcal O_S(U)=\\Gamma(U,\\mathcal O_U)\\qquad(U\\to S\\text{ weakly etale}),\n$$\n\nwhose restriction map along a morphism $h:V\\to U$ over $S$ is the ring map\n$h^\\sharp:\\Gamma(U,\\mathcal O_U)\\to\\Gamma(V,\\mathcal O_V)$ on global sections. Here $\\Gamma(U,\\mathcal O_U)=\\mathcal O_U(U)$ is the ring of sections over the whole scheme $U$, and $h^\\sharp$ is the component over $U$ of the morphism of structure sheaves of $h$. It is a\nsheaf of rings on $S_{\\mathrm{proet}}$: as a presheaf of sets it is isomorphic to\n$U\\mapsto\\operatorname{Mor}(U,\\operatorname{Spec}\\mathbf Z[t])$ (a morphism to\n$\\operatorname{Spec}\\mathbf Z[t]$ is a ring map $\\mathbf Z[t]\\to\\Gamma(U,\\mathcal O_U)$,\ni.e. a global section), where $\\operatorname{Spec}$ is the spectrum construction [def-weil-affine-spectrum]; hence it is representable on schemes and satisfies the sheaf\ncondition for fpqc coverings; the coverings of $S_{\\mathrm{proet}}$ are fpqc coverings,\nand the sheaf condition for a presheaf of rings is that of its underlying presheaf of\nsets.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Definition 03P4 (1) (etale-cohomology-definition-additive-sheaf: the sheaf $T\\mapsto\\Gamma(T,\\mathcal O_T)$, denoted $\\mathcal O_S$ or $\\mathbf G_a$) and Definition 04HS (etale-cohomology-definition-structure-sheaf); the sheaf property by Lemma 03O3 (etale-cohomology-lemma-representable-sheaf-fpqc: representable presheaves are fpqc sheaves) or Theorem 03OJ (etale-cohomology-theorem-quasi-coherent)"
  },
  "stmt_deps": [
-  "def-weil-pbc-small-proetale-site"
+  "def-pc-scheme",
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the objects and morphisms of [def-weil-pbc-small-proetale-site]. For each scheme $U$ [def-pc-scheme] take the ring $\\mathcal O_U(U)$; for a morphism $h:V\\to U$, take the component $\\mathcal O_U(U)\\to\\mathcal O_V(h^{-1}U)=\\mathcal O_V(V)$ of its morphism of structure sheaves. It is a ring homomorphism by the definition of a scheme morphism. The identity morphism gives the identity component, and for $k:W\\to V$ the component for $h\\circ k$ is $k^\\sharp\\circ h^\\sharp$ by the definition of composition of ringed-space morphisms. Thus these values and restrictions form the required presheaf of commutative rings.",
+   "uses": [
+    "def-weil-pbc-small-proetale-site",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definitions 03P4 (definition-additive-sheaf), part (1), and 04HS (definition-structure-sheaf); definition of scheme morphism; small-site objects from 098K (proetale.tex, definition-big-small-proetale)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-morphism-into-affine-scheme] to the arbitrary scheme $U$ and the commutative ring $\\mathbf Z[t]$. It gives a bijection between morphisms $U\\to\\operatorname{Spec}\\mathbf Z[t]$ and ring maps $\\mathbf Z[t]\\to\\Gamma(U,\\mathcal O_U)$. Evaluation at $t$ identifies the latter with $\\Gamma(U,\\mathcal O_U)$: the inverse sends $s$ to the map $\\sum a_jt^j\\mapsto\\sum a_js^j$. For $h:V\\to U$ the element corresponding to $a\\circ h$ is $h^\\sharp(a^\\sharp(t))$, because pullback of global sections respects composition. Thus the bijections commute with every restriction map. This proves representability on the category of all schemes and the claimed natural identification on the small site; it does not assert that the representing affine line is itself a weakly etale object over $S$.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine); polynomial evaluation, applied to the presheaf of 03P4 (1)"
+   }
+  },
+  {
+   "text": "Let $\\{f_i:U_i\\to U\\}$ be a covering family of the small site, and let $s_i\\in\\Gamma(U_i,\\mathcal O_{U_i})$ be a matching family. Its overlaps $U_i\\times_U U_j$ are objects of the small site: the projection to $U_i$ is the base change of the weakly etale map $f_j$ and is weakly etale; its composite to $S$ is weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change]. The maps $f_j$ are weakly etale by the morphism clause of [def-weil-pbc-small-proetale-site]. Step 2 turns the $s_i$ into maps $a_i:U_i\\to\\operatorname{Spec}\\mathbf Z[t]$ whose two restrictions to each overlap agree. The covering is fpqc by [def-weil-pbc-small-proetale-site], so [lem-weil-pbc-fpqc-representable-descent], with $T=U$ and $X=\\operatorname{Spec}\\mathbf Z[t]$, gives a unique map $a:U\\to X$ restricting to the $a_i$. Step 2 then gives a unique section $s$ restricting to all $s_i$. This proves existence and uniqueness of gluing on each covering family.",
+   "uses": [
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-pbc-small-proetale-site",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "03O3 (lemma-representable-sheaf-fpqc), equivalently descent.tex 023Q (lemma-fpqc-universal-effective-epimorphisms); more-morphisms.tex 094T (lemma-composition-weakly-etale) and 094U (lemma-base-change-weakly-etale)"
+   }
+  },
+  {
+   "text": "The gluing just proved is compatible with rings: if $s_i$ and $t_i$ glue to $s,t$, the sum $s+t$ restricts to $s_i+t_i$, the product $st$ to $s_it_i$, and $0,1$ restrict to $0,1$. Uniqueness therefore makes the inverse of the restriction-to-matching-families bijection a ring homomorphism. Equivalently, for any commutative ring $R$, glue a matching family of ring maps $R\\to\\mathcal O_S(U_i)$ one element at a time; the same separatedness calculation proves that the glued function preserves $+,\\cdot,0,1$, and is unique. Hence the presheaf satisfies the ring-valued sheaf condition on these covering families. To verify every covering sieve, let $\\mathscr R$ cover $U$ and let $(x_h)$ be a matching family on it. By [def-weil-pbc-small-proetale-site], choose a covering family $f_i:U_i\\to U$ contained in $\\mathscr R$, and glue $(x_{f_i})$ to $s$. For $h:V\\to U$ in $\\mathscr R$, the pullback along $h$ of the sieve generated by $(f_i)$ covers $V$ by the pullback axiom of a Grothendieck topology. Choose a covering family $g_j:V_j\\to V$ contained in that pullback sieve, again using the cited description of covering sieves. Each $h\\circ g_j$ factors as $f_{i(j)}\\circ q_j$ for some $q_j:V_j\\to U_{i(j)}$. Functoriality and the matching-family equations give $g_j^\\sharp(h^\\sharp(s))=q_j^\\sharp(f_{i(j)}^\\sharp(s))=q_j^\\sharp(x_{f_{i(j)}})=x_{h\\circ g_j}=g_j^\\sharp(x_h)$. Separatedness from step 3 applied to $(g_j)$ gives $h^\\sharp(s)=x_h$. Uniqueness follows by restricting to $(f_i)$. Thus the presheaf satisfies the sheaf condition for every covering sieve.",
+   "uses": [
+    "def-weil-pbc-small-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Definitions 03P4 (1), 04HS; elementary gluing verification for commutative rings, with the covering-sieve convention of the small-site definition 098K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-small-proetale-site",
+  "def-pc-scheme",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definitions 03P4 (1), 04HS and Lemma 03O3, with Lemma 01I1 and descent 023Q/weakly-etale 094T/094U for the expanded proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -38,10 +98,108 @@
    "results": "`instance : (ProEt.topology S).Subcanonical` (Proetale.lean:175), `proetaleTopology.Subcanonical` (Proetale.lean:85); `GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable` used in ConstantSheaf.lean:65 and Fpqc.lean:91 for `continuousMapPresheaf`; nothing for the structure sheaf",
    "date": "2026-10-09",
    "verdict": "no match; the pieces (subcanonical pro-etale topology, representability of Γ by Spec ℤ[t] via ΓSpec.adjunction) are in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "small pro-etale structure sheaf of rings U maps to global sections Gamma U O_U",
+   "results": "Etale locus results and Scheme.Etale.forget only; no pro-etale structure-sheaf construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.ProEt, Scheme.Γ, isSheaf",
+   "results": "0 hits: loogle: unknown identifier 'Scheme.ProEt'",
+   "date": "2026-10-16",
+   "verdict": "no match in this index; unknown identifier is not proof of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "structure sheaf|continuousMapPresheaf|isSheaf_Γ",
+   "results": "7 hits in ConstantSheaf.lean and ElladicCohomology.lean for continuousMapPresheaf and its abelian version; these are continuous functions to a fixed topological space, not scheme section rings. Search subdirectory: Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a presheaf on the small pro-etale site sending U to Gamma(U, O_U) is a sheaf of commutative rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections of schemes represented by affine line Spec Z[t] and sheaf for fpqc topology",
+   "results": "8 hits, including AffineSpace.toSpecMvPolyIntEquiv, its apply formula, homOverEquiv, homOfVector and AffineScheme.Γ. Read AffineSpace.lean:73-96: equivalence with tuples of global sections and naturality under composition; a representation ingredient only.",
+   "date": "2026-10-16",
+   "verdict": "partial match for the underlying-set representation; no small-pro-etale ring sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "isSheaf_of_isRepresentable",
+   "results": "0 hits: loogle: unknown identifier 'isSheaf_of_isRepresentable'",
+   "date": "2026-10-16",
+   "verdict": "no match in this index; unknown identifier is not proof of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "Scheme.Γ|ΓSpec|isSheaf_Γ|ProEt.*topology",
+   "results": "25 hits in AlgebraicGeometry, including ΓSpec.adjunction uses and GammaSpecAdjunction docstrings. These supply ingredients only. Search subdirectory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the whole definition"
+  },
+  {
+   "tool": "grep",
+   "query": "def Γ|map_comp|map_id",
+   "results": "5 hits (command truncates per file), including Scheme.Spec.map_id at Scheme.lean:483. Read Scheme.lean:572-590 separately: Scheme.Γ and Γ_map give the required section-ring functor and pullback. Search subdirectory: Mathlib/AlgebraicGeometry/Scheme.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match: Scheme.Γ is on all schemes, with no small-site sheaf interface"
+  },
+  {
+   "tool": "grep",
+   "query": "toSpecMvPolyIntEquiv|homOverEquiv|toSpecMvPolyIntEquiv_comp",
+   "results": "AffineSpace.lean:79 toSpecMvPolyIntEquiv and :95-96 toSpecMvPolyIntEquiv_comp; natural equivalence between maps to Spec Z[n] and n-tuples of global sections. Search subdirectory: Mathlib/AlgebraicGeometry/AffineSpace.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match for representability; specializes at a singleton variable"
+  },
+  {
+   "tool": "grep",
+   "query": "def adjunction|adjunction_homEquiv_apply|ext_to_Spec",
+   "results": "GammaSpecAdjunction.lean:399 ΓSpec.adjunction, :411 ext_to_Spec, :418 adjunction_homEquiv_apply; also locally ringed space adjunction formulas. Read :399-418. Search subdirectory: Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match; existing lem-weil-pbc-morphism-into-affine-scheme carries this result"
+  },
+  {
+   "tool": "grep",
+   "query": "Subcanonical|proetaleTopology_le_fpqcTopology",
+   "results": "Proetale.lean:82 proetaleTopology_le_fpqcTopology and :85 subcanonical instance, with Subcanonical imports. Search subdirectory: Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match: topology and subcanonicity only"
+  },
+  {
+   "tool": "grep",
+   "query": "Subcanonical|EffectiveEpi",
+   "results": "Fpqc.lean:87 instance fpqcTopology.Subcanonical, plus imports and module documentation. Search subdirectory: Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match; existing lem-weil-pbc-fpqc-representable-descent carries descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of the global sections functor on schemes to weakly etale schemes is a sheaf for the proetale topology",
+   "results": "8 hits: Scheme.etaleTopology, Scheme.smallEtaleTopology, Scheme.Etale.forget, Scheme.instCategoryEtale, IsEtale.of_comp, Scheme.Etale.forgetFullyFaithful, Scheme.smallEtalePretopology, and the IsEtale postcomposition-property instance. All concern the etale site or morphisms; none states the complete pro-etale structure-sheaf construction.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEt.forget|ProEt.*Γ|isSheaf.*[Ss]tructure|structurePresheaf",
+   "results": "22 hits in Mathlib/AlgebraicGeometry: spectrum/projective-spectrum structure presheaves, module structure presheaves, Scheme.Spec IsSheaf, the continuousMap sheaf pushforward in Sites/ElladicCohomology.lean:65, and ProEt.forget/finite-limit/flatness declarations in Sites/Proetale.lean:125-141. Read Proetale.lean:100-190, Scheme.lean:572-590 and GammaSpecAdjunction.lean:399-425 separately. These give ingredients, not the full small pro-etale ring sheaf.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +219,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-pur-proetale-structure-sheaf",
+  "worker": "stage1",
+  "summary": "Checked the scheme-section construction against Stacks 03P4 (1) and 04HS, the affine-target correspondence 01I1, fpqc descent 03O3/023Q and the small-site definition 098K. Retained the statement mathematically, adding definition citations and an explicit explanation of global sections. Corrected the earlier sketch: the non-elementary affine-target correspondence is now cited as lem-weil-pbc-morphism-into-affine-scheme, and overlap closure uses the existing weakly etale composition/base-change leaf. Wrote ring-valued and covering-sieve gluing out explicitly. No new nodes. Local source files are absent, recorded as WANTED in the report; online sources were read, so proof_origin is agent. Independent second reading expands step 4 into the explicit pulled-back-sieve factorization and matching equations; it confirms the statements and retains all existing dependencies.",
+  "blueprint": "Realizes the first displayed structure-sheaf clause in def-coefficient-twists-detailed, through def-pur-roots-of-unity-sheaf; the steps make explicit the Γ(U,O_U) construction used by that clause.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "The generic affine-target/global-sections bijection supplies the non-elementary part of step 2; it is an existing Mathlib leaf and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Existing Mathlib leaf supplying closure of overlap schemes under base change and composition in step 3."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Existing Mathlib leaf supplying unique gluing of scheme maps over an arbitrary fpqc family in step 3; the unit has no competing descent route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q33-c91047f6e",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-c91047f6e (reviewer sub-agent of L); spot-checked: Mathematics and all four proof steps pass. The cited Stacks files exist locally, but proof_origin incorrectly says agent-written and the report says sources are absent. A corrected full DAG JSON is in fixes/dag/nodes/sec-smooth-purity/def-pur-proetale-structure-sheaf.json.; 1 file(s) fixed by the reviewer"
+ }
 }
