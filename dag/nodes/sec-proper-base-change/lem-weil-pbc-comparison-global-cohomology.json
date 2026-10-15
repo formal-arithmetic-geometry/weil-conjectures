@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Comparison of global cohomology",
- "statement": "For a scheme $T$, finite $\\Lambda$ and $K\\in\\Dplus(T_{\\Et},\\Lambda)$, the derived unit\ninduces a natural isomorphism\n\n$$\n R\\Gamma(T_{\\Et},K)\\xrightarrow{\\sim}\n R\\Gamma(T_{\\Proet},\\nu_T^*K).\n$$\n\nBoth functors are ordinary derived sections.",
+ "statement": "Let $T$ be a scheme and $\\Lambda$ a finite discrete ring, with left $\\Lambda$-module sheaves. For $K\\in\\Dplus(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories], the unit $\\eta_K:K\\to R\\nu_{T,*}\\nu_T^*K$ of the bounded-below derived comparison adjunction [def-weil-pbc-site-comparison-morphism] induces a natural isomorphism\n$$\n R\\Gamma(T_{\\Et},K)\\xrightarrow{\\sim}\n R\\Gamma(T_{\\Proet},\\nu_T^*K).\n$$\nThis is the composite of $R\\Gamma(T_{\\Et},\\eta_K)$ with the canonical final-object comparison $R\\Gamma(T_{\\Et},R\\nu_{T,*}\\nu_T^*K)\\cong R\\Gamma(T_{\\Proet},\\nu_T^*K)$ [lem-weil-pbc-derived-sections-pushforward]. Both section functors are ordinary right-derived sections at the terminal objects, with the etale construction of [def-weil-pbc-etale-cohomology].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-global-cohomology.md",
   "place": "node lem-weil-pbc-comparison-global-cohomology, order 1287"
@@ -15,7 +15,8 @@
  "stmt_deps": [
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-site-comparison-morphism"
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-derived-sections-pushforward"
  ],
  "proof": [
   {
@@ -102,5 +103,55 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-385aceae8 (reviewer sub-agent of L); spot-checked: The mathematics and source route check out. Repair the new node’s incorrect citation of the étale derived-category definition for a pro-étale complex, add the exact pro-étale module dependency, define both derived section functors at terminal objects, and add complete created metadata. Corrected JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-derived-sections-pushforward.json; full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComparisonGlobalCohomology",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_comparisonGlobalSections",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.comparisonGlobalSections",
+   "AlgebraicGeometry.ProEtale.isIso_comparisonGlobalSections"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonGlobalCohomology.lean",
+  "statement": "theorem isIso_comparisonGlobalSections (T : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] : IsIso (comparisonGlobalSections T Λ)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-13dd591b2",
+  "group": "ND",
+  "result": "pass",
+  "note": "Reviewed immutable statements, dependencies, canonical map, source correction and both citers, universes, edge cases, docstrings, and report sections. Per-file scompile.py reproduced cleanly. No delivery errors found; checks recorded in review.md.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "ND stage 2",
+  "old_statement": "For a scheme $T$, finite $\\Lambda$ and $K\\in\\Dplus(T_{\\Et},\\Lambda)$, the derived unit\ninduces a natural isomorphism\n\n$$\n R\\Gamma(T_{\\Et},K)\\xrightarrow{\\sim}\n R\\Gamma(T_{\\Proet},\\nu_T^*K).\n$$\n\nBoth functors are ordinary derived sections.",
+  "what": "The text only said finite Lambda, without introducing its ring structure or the left-module convention. The recorded etale coefficient definition is commutative-ring-valued, while the finite-level comparison and its source context allow arbitrary finite rings and left modules. The corrected text explicitly fixes that coefficient convention and specifies the previously unnamed canonical final-object comparison used after the derived unit, adding its existing DAG node to statement dependencies. This changes no mathematical hypothesis relative to the source context and imposes no commutativity assumption.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-global-cohomology.md",
+   "place": "Statement and final proof sentence, read with the finite-ring module comparison of def-weil-pbc-site-comparison-morphism and thm-weil-pbc-site-comparison in the same unit"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "holds": true,
+    "note": "Its finite commutative coefficients specialize the explicit finite-ring statement, and its canonical mate calculation uses the same derived-unit comparison."
+   },
+   {
+    "id": "prop-weil-pbc-comparison-direct-image",
+    "holds": true,
+    "note": "Both applications to derived sections in its proof use the same bounded-below comparison and its canonical restriction maps; no hypothesis changes."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-derived-categories",
+   "def-weil-pbc-etale-cohomology",
+   "def-weil-pbc-site-comparison-morphism"
+  ]
  }
 }
