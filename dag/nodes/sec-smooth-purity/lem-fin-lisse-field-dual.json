@@ -18,7 +18,8 @@
   "def-pur-derived-internal-hom",
   "def-pur-sheaf-hom",
   "def-weil-pbc-inverse-image",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-constructible-finite-locally-constant"
  ],
  "proof": [
   {
@@ -311,5 +312,27 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-44d6eafdf (reviewer sub-agent of L); spot-checked: Read all six steps, cited statements and source locations. Repaired doubled TeX escapes and replaced the ambiguous pro-étale-bound triangle citation with the existing generic ringed-site lemma. Statement unchanged; local duality, shifts and canonical pullback comparison check out. review.md and corrected whole JSON written.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5ca7f2097",
+  "group": "NC",
+  "result": "pass",
+  "note": "Review recorded in review.md. Checked the immutable statement, all seven dependencies, sources, exact constructions, universes, edge cases, docstrings, and verbatim signature. Server-only compilation passed cleanly in 6.3 seconds. No delivery errors found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLisseFieldDual",
+  "declaration": "AlgebraicGeometry.Etale.finiteLisseFieldDual",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteLisseDualPullbackComparison",
+   "AlgebraicGeometry.Etale.finiteLisseFieldDual"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLisseFieldDual.lean",
+  "statement": "theorem finiteLisseFieldDual (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) (_hℓ : IsUnit (ℓ : Γ(T, ⊤))) (C : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) T) (_hbounded : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj C)) (_hlisse : ∀ i : ℤ, Scheme.IsFiniteLocallyConstantSheaf ((_root_.DerivedCategory.homologyFunctor _ i).obj C)) : (∀ q : ℤ, Scheme.IsFiniteLocallyConstantSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) T).obj (op C)).obj (constantComplex (ULift.{u + 1} (ZMod ℓ)) T)))) ∧ (∀ q : ℤ, Nonempty ((_root_.DerivedCategory.homologyFunctor _ q).obj (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) T).obj (op C)).obj (constantComplex (ULift.{u + 1} (ZMod ℓ)) T)) ≅ (ihom ((_root_.DerivedCategory.homologyFunctor _ (-q)).obj C)).obj (𝟙_ (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))))) ∧ (∀ (T' : Scheme.{u}) (v : T' ⟶ T), IsIso (finiteLisseDualPullbackComparison v C))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
