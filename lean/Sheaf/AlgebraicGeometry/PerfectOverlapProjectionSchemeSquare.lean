@@ -62,4 +62,49 @@ theorem perfectOverlapRestrictionSquareV
     Scheme.Hom.resLE_comp_ι]
   rw [← Category.assoc, Scheme.homOfLE_ι]
 
+/-- The first-open composite maps from the overlap agree. This is the scheme
+equation used by the derived-pullback composition prism. -/
+theorem perfectOverlapRestrictionCompositeU
+    {X K Y : Scheme.{u}} (g : X ⟶ Y) (gk : X ⟶ K) (f : K ⟶ Y)
+    (hgf : gk ≫ f = g) (U V : Y.Opens) :
+    let P := g ⁻¹ᵁ U
+    let Q := g ⁻¹ᵁ V
+    let hPU : P ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ U) := by rw [← Scheme.Hom.comp_preimage, hgf]
+    let hPV : Q ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ V) := by rw [← Scheme.Hom.comp_preimage, hgf]
+    let hPW : P ⊓ Q ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V) :=
+      fun _ hx ↦ ⟨hPU hx.1, hPV hx.2⟩
+    (gk.resLE (f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V) (P ⊓ Q) hPW) ≫
+        (K.homOfLE (inf_le_left : f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V ≤ f ⁻¹ᵁ U) ≫
+          (f ∣_ U)) =
+      X.homOfLE (inf_le_left : P ⊓ Q ≤ P) ≫ (g ∣_ U) := by
+  intro P Q hPU hPV hPW
+  rw [← Category.assoc, perfectOverlapRestrictionSquareU g gk f hgf U V]
+  have hr : gk.resLE (f ⁻¹ᵁ U) P hPU ≫ (f ∣_ U) = g ∣_ U := by
+    apply (cancel_mono U.ι).1
+    simp only [Category.assoc, morphismRestrict_ι]
+    rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, hgf]
+  rw [Category.assoc, hr]
+
+/-- The same composite equation for the second open. -/
+theorem perfectOverlapRestrictionCompositeV
+    {X K Y : Scheme.{u}} (g : X ⟶ Y) (gk : X ⟶ K) (f : K ⟶ Y)
+    (hgf : gk ≫ f = g) (U V : Y.Opens) :
+    let P := g ⁻¹ᵁ U
+    let Q := g ⁻¹ᵁ V
+    let hPU : P ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ U) := by rw [← Scheme.Hom.comp_preimage, hgf]
+    let hPV : Q ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ V) := by rw [← Scheme.Hom.comp_preimage, hgf]
+    let hPW : P ⊓ Q ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V) :=
+      fun _ hx ↦ ⟨hPU hx.1, hPV hx.2⟩
+    (gk.resLE (f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V) (P ⊓ Q) hPW) ≫
+        (K.homOfLE (inf_le_right : f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V ≤ f ⁻¹ᵁ V) ≫
+          (f ∣_ V)) =
+      X.homOfLE (inf_le_right : P ⊓ Q ≤ Q) ≫ (g ∣_ V) := by
+  intro P Q hPU hPV hPW
+  rw [← Category.assoc, perfectOverlapRestrictionSquareV g gk f hgf U V]
+  have hr : gk.resLE (f ⁻¹ᵁ V) Q hPV ≫ (f ∣_ V) = g ∣_ V := by
+    apply (cancel_mono V.ι).1
+    simp only [Category.assoc, morphismRestrict_ι]
+    rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, hgf]
+  rw [Category.assoc, hr]
+
 end AlgebraicGeometry
