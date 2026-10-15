@@ -15230,3 +15230,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:01 L: merged deliver/E1/Sheaf.AlgebraicTopology.SimplicialIndexFiniteInitial (stage 3; reviewer PASS; first push; landing 20261015T220111-L-2441985 (proof); batch 20261015T220101; modules 1; new nodes 0)
 - 22:01 L: merged deliver/M1/Sheaf.Paper.FiniteSplitHypercoverExistence (stage 3; reviewer PASS; first push; landing 20261015T220121-L-2447701 (proof); batch 20261015T220101; modules 1; new nodes 0)
 - 22:01 L: merged deliver/N4/Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting (stage 3; reviewer PASS; first push; landing 20261015T220132-L-2450589 (proof); batch 20261015T220101; modules 1; new nodes 0)
+- 22:01 L: merged deliver/Q1/Sheaf.CategoryTheory.FilteredHomotopySpectralSequence (stage 3; reviewer PASS; first push; landing 20261015T220146-L-2452575 (proof); batch 20261015T220101; modules 1; new nodes 2)
