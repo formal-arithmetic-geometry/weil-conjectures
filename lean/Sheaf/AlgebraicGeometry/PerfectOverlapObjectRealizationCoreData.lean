@@ -379,6 +379,37 @@ theorem overlapDiagram_gammaU_inv_on_image
       simp only [Category.assoc]
       rw [d.coherenceU F]
 
+/-- Invert the second-open coherence square at a global object.
+Source: Stacks Project, Tag 08DW. Compose the defining second-open square
+with the inverses of `αV`, `βW`, and `γV`. The inverse laws cancel these
+isomorphisms and leave the displayed expression for the inverse component. -/
+theorem overlapDiagram_gammaV_inv_on_image
+    {C D A B W P Q T : Type*}
+    [Category* C] [Category* D] [Category* A] [Category* B]
+    [Category* W] [Category* P] [Category* Q] [Category* T]
+    {L : C ⥤ D} {TU : C ⥤ A} {TV : C ⥤ B} {TW : C ⥤ W}
+    {SU : A ⥤ W} {SV : B ⥤ W}
+    {RU : D ⥤ P} {RV : D ⥤ Q} {RW : D ⥤ T}
+    {SP : P ⥤ T} {SQ : Q ⥤ T}
+    {αU : TU ⋙ SU ≅ TW} {αV : TV ⋙ SV ≅ TW}
+    {τU : RU ⋙ SP ≅ RW} {τV : RV ⋙ SQ ≅ RW}
+    (d : TwoOpenComparisonDiagram L TU TV TW SU SV RU RV RW SP SQ
+      αU αV τU τV) (F : C) :
+    d.γV.inv.app (TV.obj F) =
+      d.HW.map (αV.hom.app F) ≫ d.βW.inv.app F ≫
+        τV.inv.app (L.obj F) ≫ SQ.map (d.βV.hom.app F) := by
+  apply (cancel_mono (d.γV.hom.app (TV.obj F))).1
+  calc
+    d.γV.inv.app (TV.obj F) ≫ d.γV.hom.app (TV.obj F) = 𝟙 _ := by simp
+    _ = d.HW.map (αV.hom.app F) ≫ d.βW.inv.app F ≫
+          (d.βW.hom.app F ≫ d.HW.map (αV.inv.app F)) := by simp
+    _ = (d.HW.map (αV.hom.app F) ≫ d.βW.inv.app F ≫
+          τV.inv.app (L.obj F) ≫ SQ.map (d.βV.hom.app F)) ≫
+          d.γV.hom.app (TV.obj F) := by
+      simp only [Category.assoc]
+      rw [d.coherenceV F]
+
+
 
 /-- Geometric object comparisons and their natural compatibility with apex pullback.
 The transition functors and their fixed conjugation formula are recorded explicitly;
