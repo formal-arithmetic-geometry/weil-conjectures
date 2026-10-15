@@ -31,90 +31,44 @@
  ],
  "proof": [
   {
-   "text": "Apply [thm-weil-pbc-weak-etale-refinement] to $R\\to B$, obtaining $B\\to E$ faithfully flat and ind-etale and $R\\to E$ ind-etale. The composite $R\\to E$ is faithfully flat: tensoring an $R$-module complex first with $B$ and then with $E$ preserves and reflects exactness at both stages, as required by [def-weil-pbc-faithfully-flat-ring-map]. It is weakly etale by [lem-weil-pbc-ind-etale-stability]. It suffices to split a further $R$-algebra of $E$, since composing its retraction with $B\\to E$ gives the desired map.",
-   "uses": [
-    "thm-weil-pbc-weak-etale-refinement",
-    "def-weil-pbc-faithfully-flat-ring-map",
-    "lem-weil-pbc-ind-etale-stability"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected, proof of (3) to (1)"
-   }
-  },
-  {
-   "text": "Let $I=\\bigcap_{\\mathfrak m\\in\\operatorname{MaxSpec}R}\\mathfrak m$. W-locality says that the maximal-point subset is Zariski closed, so it equals $V(I)$ by the ideal-zero-locus correspondence. Set $T=V(IE)$. If $q\\in T$, its contraction contains $I$ and hence is maximal, say $m$. By base-change stability [lem-weil-pbc-ind-etale-stability], $E\\otimes_R\\kappa(m)$ is weakly etale over the field $\\kappa(m)$. Its residue field at $q$ is algebraic by [lem-weil-pbc-weak-etale-field]; indeed all its finitely generated subalgebras are finite etale, so its quotient corresponding to $q$ is an algebraic domain over $\\kappa(m)$, hence a field. Since $m$ is maximal this quotient is $E/q$. Thus $q$ is maximal in $E$. Form $S=E_{[T]}$ using [def-weil-pbc-retained-localization]. By [lem-weil-pbc-retained-localization], $E\\to S$ is ind-Zariski, $\\operatorname{Spec}S$ is w-local, and its closed points are the pairs $(q,q)$ with $q\\in T$. A pair $(q,p)$ lies in $V(IS)$ exactly when $I\\subseteq p\\cap R$. Then $IE\\subseteq p\\subseteq q$ and both $p,q$ are maximal by the argument just given, so $p=q$. Therefore $V(IS)$ is precisely the closed-point subset of $\\operatorname{Spec}S$. Composition gives $R\\to S$ ind-etale and weakly etale.",
+   "text": "Package the w-locality and strictly henselian maximal-localization hypotheses as IsWStrictlyLocalRing and then the extremal-disconnectedness hypothesis as IsWContractibleRing. These classes contain exactly the stated hypotheses.",
    "uses": [
     "def-weil-pbc-w-local",
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-weak-etale-field",
-    "def-weil-pbc-retained-localization",
-    "lem-weil-pbc-retained-localization"
+    "def-weil-pbc-henselian-terminology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected, proof of (3) to (1)"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $n$ be a maximal ideal of $S$. By step 2, its contraction $m$ in $R$ is maximal. The local map $R_m\\to S_n$ is weakly etale: localization is ind-Zariski, and base change and composition preserve weak etaleness [lem-weil-pbc-ind-etale-stability]. The base $R_m$ is strictly henselian by hypothesis, so [thm-weil-pbc-weak-etale-strict-local] makes this canonical map an isomorphism. For an arbitrary prime $p\\subset S$, choose a maximal $n\\supseteq p$. Localizing $R_m\\cong S_n$ at the corresponding primes identifies $R_{p\\cap R}\\cong S_p$; fractions send $r/t$ to $g(r)/g(t)$, so the isomorphism is the canonical local map [def-weil-pbc-localization-at-prime]. Thus $R\\to S$ identifies every local ring.",
+   "text": "In a common ring universe apply the existing existential weakly-etale refinement theorem to f, obtaining g : B to E with g faithfully flat and (g comp f) ind-etale. The composite is faithfully flat because faithfully flatness composes. Apply the existing w-contractible ind-etale splitting theorem to obtain s : E to R with s comp (g comp f) = id. Then s comp g retracts f by ring-homomorphism associativity.",
    "uses": [
-    "lem-weil-pbc-ind-etale-stability",
-    "thm-weil-pbc-weak-etale-strict-local",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-existing-wcontractible-indetale-retraction",
+    "lem-weil-pbc-existing-weakly-etale-indetale-refinement",
+    "def-weil-pbc-faithfully-flat-ring-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected, proof of (3) to (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "The map $R\\to S$ is weakly etale by step 2, hence flat by the two-flatness definition [def-weil-pbc-ind-etale-algebra]. To prove surjectivity on spectra, take any prime $p$ of $R$ and a maximal $m\\supseteq p$. Faithful flatness of $R\\to E$ and [lem-weil-pbc-faithfully-flat-surjective-spectrum] give a prime $q$ of $E$ above $m$. It is in $T$, so the retained point $(q,q)$ is a maximal point $n$ of $S$ over $m$. The isomorphism $R_m\\cong S_n$ of step 3 carries the prime $pR_m$ to a prime of $S_n$, hence to a prime of $S$ contracting to $p$. Consequently [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] makes $R\\to S$ faithfully flat. If $R=0$, then $B=E=S=0$ and the same conclusion holds with empty spectra.",
+   "text": "For independent universes, lift R and B to ULift in their common maximum universe. A ring equivalence preserves w-locality by its surjectivity, identifies maximal ideals and their localizations, and induces a homeomorphism on connected components; hence it preserves the class just constructed. Weak etaleness of the lifted map is Algebra.WeaklyEtale.ulift_iff. Its flatness is RingHom.Flat.ulift_iff; its spectrum map is surjective by transporting the surjectivity of Spec f across the two spectrum homeomorphisms. Thus it is faithfully flat. Apply the preceding common-universe proof and conjugate the retraction by ULift.ringEquiv. Evaluation at ULift.up x and application of ULift.down prove the required equality. The transport arguments are fully proved private helpers in the item, introduce no assumptions and include zero rings.",
    "uses": [
-    "def-weil-pbc-ind-etale-algebra",
     "lem-weil-pbc-faithfully-flat-surjective-spectrum",
     "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected, proof of (3) to (1)"
-   }
-  },
-  {
-   "text": "Now apply [lem-weil-pbc-wlocal-stalk-isomorphism-retraction] to $R\\to S$. W-locality and the closed-point ideals are supplied by step 2, all local-ring isomorphisms by step 3, and faithful flatness by step 4; extremal disconnectedness is the hypothesis on $R$. Obtain $s:S\\to R$ with $s\\circ(R\\to S)=\\mathrm{id}_R$. If $h:E\\to S$ and $j:B\\to E$ are the construction maps, put $r=s\\circ h\\circ j$. Then $r\\circ f=s\\circ(h\\circ j\\circ f)=\\mathrm{id}_R$ by associativity.",
-   "uses": [
-    "lem-weil-pbc-wlocal-stalk-isomorphism-retraction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected, proof of (3) to (1)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-faithfully-flat-ring-map",
-  "def-weil-pbc-ind-etale-algebra",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-retained-localization",
+  "def-weil-pbc-henselian-terminology",
   "def-weil-pbc-w-local",
+  "lem-weil-pbc-existing-wcontractible-indetale-retraction",
+  "lem-weil-pbc-existing-weakly-etale-indetale-refinement",
   "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-retained-localization",
-  "lem-weil-pbc-weak-etale-field",
-  "lem-weil-pbc-wlocal-stalk-isomorphism-retraction",
-  "thm-weil-pbc-weak-etale-refinement",
-  "thm-weil-pbc-weak-etale-strict-local"
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 0982, proof of implication (3) to (1)"
+  "place": "Tags 0982 (3) to (2) and 097Z, via their already proved source-library declarations; explicit ULift ring-equivalence transport preserves both original universe parameters."
  },
  "mathlib_searches": [
   {
@@ -213,5 +167,15 @@
   "by": "NQ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T154212-L-164601",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
