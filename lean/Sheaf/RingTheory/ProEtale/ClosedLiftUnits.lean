@@ -6,11 +6,6 @@ Authors: SHEAF group NS
 module
 
 public import Sheaf.RingTheory.ProEtale.ClosedLiftMap
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Etale.Basic
-import WeilConjectures.RingTheory.ProEtale.ClosedLift
 
 /-! # Units of the ind-etale closed lift
 
@@ -44,6 +39,37 @@ theorem isUnit_of_isUnit_toAlgHom
     {A C : Type u} [CommRing A] [CommRing C] [Algebra A C]
     (I : Ideal A) [Algebra (A ⧸ I) C] [IsScalarTower A (A ⧸ I) C]
     [Algebra.IndEtale (A ⧸ I) C] (h : Algebra.ClosedLift A C)
-    (hh : IsUnit (toAlgHom A C h)) : IsUnit h := sorry
+    (hh : IsUnit (toAlgHom A C h)) : IsUnit h := by
+  classical
+  obtain ⟨X, b, hb⟩ : ∃ (X : Index A C) (b : X.alg),
+      (CategoryTheory.Limits.colimit.ι (diagram A C) X).hom b = h :=
+    CategoryTheory.Limits.Concrete.colimit_exists_rep (diagram A C) h
+  have hbC : IsUnit (X.toC b) := by
+    have he : toAlgHom A C ((CategoryTheory.Limits.colimit.ι (diagram A C) X).hom b) = X.toC b :=
+      DFunLike.congr_fun (congrArg CommAlgCat.Hom.hom
+        (CategoryTheory.Limits.colimit.ι_desc (coconeC A C) X)) b
+    exact ((congrArg (toAlgHom A C) hb).symm.trans he) ▸ hh
+  let B := Localization.Away b
+  let β : B →ₐ[A] C := IsLocalization.Away.liftAlgHom b hbC
+  obtain ⟨n, f, hf⟩ := Algebra.FiniteType.iff_quotient_mvPolynomial''.mp
+    (inferInstance : Algebra.FiniteType A B)
+  let e : (MvPolynomial (Fin n) A ⧸ RingHom.ker f.toRingHom) ≃ₐ[A] B :=
+    Ideal.quotientKerAlgEquivOfSurjective hf
+  let Y : Index A C :=
+    ⟨n, RingHom.ker f.toRingHom, Algebra.Etale.of_equiv e.symm, β.comp e.toAlgHom⟩
+  let loc : X.alg →ₐ[A] B := IsScalarTower.toAlgHom A X.alg B
+  let g : Index.Hom X Y := ⟨e.symm.toAlgHom.comp loc, by
+    ext x
+    change β (e (e.symm (algebraMap X.alg B x))) = X.toC x
+    rw [e.apply_symm_apply]
+    exact IsLocalization.Away.lift_eq b hbC x⟩
+  have hu : IsUnit (g.hom b) :=
+    (IsLocalization.Away.algebraMap_isUnit b (S := B)).map e.symm.toAlgHom
+  have hw := CategoryTheory.ConcreteCategory.congr_hom
+    (CategoryTheory.Limits.colimit.w (diagram A C) g) b
+  change (CategoryTheory.Limits.colimit.ι (diagram A C) Y).hom (g.hom b) =
+    (CategoryTheory.Limits.colimit.ι (diagram A C) X).hom b at hw
+  rw [← hb, ← hw]
+  exact hu.map (CategoryTheory.Limits.colimit.ι (diagram A C) Y).hom
 
 end Algebra.ClosedLift

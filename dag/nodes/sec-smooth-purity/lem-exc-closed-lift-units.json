@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Write $H=H_A(\\overline C)$, with cocone maps $\\iota_B:B\\to H$ and induced map $\\rho:H\\to\\overline C$, as in [def-exc-ind-etale-closed-lift]. Work on a small skeleton of the indexing category: finite presentations $A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ form a set, their maps to the fixed ring $\\overline C$ form sets, and every indexing object is isomorphic to one of these presentations. By [lem-exc-closed-lift-filtered] this category is filtered. The algebra colimit is also its ring colimit: any compatible family of ring maps from the stages to a ring $R$ has a common restriction $A\\to R$, since any two stages have a common successor; giving $R$ that $A$-algebra structure reduces its universal property to the defining algebra colimit. Now [lem-pc-filtered-colimit-commrings-elementwise] (1) gives, for the element $h\\in H$ under consideration, a stage $(B,\\beta:B\\to\\overline C)$ and $b\\in B$ with $h=\\iota_B(b)$. Thus $\\rho(h)=\\beta(b)$ is a unit.",
+   "text": "Use the existing small category Algebra.ClosedLift.Index A C and its filteredness [lem-exc-closed-lift-filtered]. The existing CommAlgCat forgetful-functor instance preserves filtered colimits, so Concrete.colimit_exists_rep (the representative clause of [lem-pc-filtered-colimit-commrings-elementwise]) gives X and b in X.alg whose colimit image is h. Applying colimit.ι_desc to the defining coconeC identifies the retained map of this representative with X.toC b. Therefore X.toC b is a unit.",
    "uses": [
     "def-exc-ind-etale-closed-lift",
     "lem-exc-closed-lift-filtered",
@@ -30,7 +30,7 @@
    }
   },
   {
-   "text": "Form $B_b=B[1/b]$ using [def-weil-ring-localization-away], with $\\lambda:B\\to B_b$. Every $\\beta(b^n)=\\beta(b)^n$ is a unit. Apply [lem-weil-pbc-ring-localization-universal-property] to the multiplicative subset $\\{b^n:n\\geq0\\}$: it supplies a ring map $\\beta_b:B_b\\to\\overline C$ satisfying $\\beta_b(c/b^n)=\\beta(c)\\beta(b)^{-n}$ and $\\beta_b\\lambda=\\beta$. This is an $A$-algebra map because its restriction along $A\\to B\\to B_b$ is the given structural map $A\\to\\overline C$.",
+   "text": "Let B = Localization.Away b [def-weil-ring-localization-away]. IsLocalization.Away.liftAlgHom, the algebra version of [lem-weil-pbc-ring-localization-universal-property], extends X.toC to an A-algebra map β : B → C. Its value on algebraMap X.alg B x is X.toC x, by IsLocalization.Away.lift_eq.",
    "uses": [
     "def-weil-ring-localization-away",
     "lem-weil-pbc-ring-localization-universal-property"
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "The stage $B$ is etale of finite presentation over $A$ by [def-exc-ind-etale-closed-lift]. Apply [lem-weil-pbc-etale-algebra-finite-presentation-localization] (2) to $s=b$ to see that $B_b$ is etale over $A$, and its clause (1), applied to $B_b$, gives finite presentation over $A$. Therefore $(B_b,\\beta_b)$ is an object of $\\mathcal N_A(\\overline C)$ and $\\lambda$ is a morphism from $(B,\\beta)$ to it, since $\\beta_b\\lambda=\\beta$.",
+   "text": "By [lem-weil-pbc-etale-algebra-finite-presentation-localization], B is etale and hence finitely generated over A. Algebra.FiniteType.iff_quotient_mvPolynomial'' supplies a surjection f from A[Fin n] to B. The first isomorphism theorem gives an A-algebra equivalence e : A[Fin n]/ker f ≃ B. Transport etaleness along e.symm and form the index Y with map β composed with e. The algebra map e.symm composed with the localization map defines a morphism g : X → Y: compatibility with C follows from e.apply_symm_apply and the localization lift equation.",
    "uses": [
     "def-exc-ind-etale-closed-lift",
     "lem-weil-pbc-etale-algebra-finite-presentation-localization"
@@ -54,7 +54,7 @@
    }
   },
   {
-   "text": "In $B_b$ let $u=1/b$, whose defining fraction relations give $(b/1)u=u(b/1)=1$ by [def-weil-ring-localization-away]. Cocone compatibility from [def-exc-ind-etale-closed-lift] gives $\\iota_{B_b}(b/1)=\\iota_B(b)=h$. Applying the ring homomorphism $\\iota_{B_b}$ to the two product identities yields $h\\,\\iota_{B_b}(u)=\\iota_{B_b}(u)h=1$. Hence $h$ is invertible, as required.",
+   "text": "The image of b in Localization.Away b is a unit by IsLocalization.Away.algebraMap_isUnit [def-weil-ring-localization-away]. Mapping this unit along e.symm proves that g.hom b is a unit in Y.alg. The cocone equation colimit.w for g identifies its image in the colimit with the image of b, namely h [def-exc-ind-etale-closed-lift]. Mapping the unit along the colimit injection therefore proves IsUnit h.",
    "uses": [
     "def-weil-ring-localization-away",
     "def-exc-ind-etale-closed-lift"
@@ -77,7 +77,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-lift-units.md",
-  "place": "Proof: representative, principal localization, transition, inverse; expanded with Stacks 00CP, 00U1, 00U2 and the existing filtered-ring-colimit leaf"
+  "place": "Proof: representative, principal localization, transition, inverse; Lean implementation by F2 uses the existing forgetful-functor preservation instance and transports the localization to the small presentation model with the polynomial-quotient first isomorphism theorem."
  },
  "mathlib_searches": [
   {
@@ -195,5 +195,15 @@
   "by": "NS",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261015T181523-L-748844",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
