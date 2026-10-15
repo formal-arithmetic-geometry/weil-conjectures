@@ -43,7 +43,9 @@ theorem SimplicialHomFamily.precomp_compatible {X : Scheme.{u}}
     {K : SimplicialObject (FormalCoproduct.{w} X.Etale)} {S : SSet.{t}}
     {W W' : FormalCoproduct.{w} X.Etale} (f : SimplicialHomFamily K S W) (g : W' ⟶ W) :
     ∀ (m n : ℕ) (φ : ⦋m⦌ ⟶ ⦋n⦌) (s : S.obj (op ⦋n⦌)),
-      (g ≫ f.val n s) ≫ K.map φ.op = g ≫ f.val m (S.map φ.op s) := by sorry
+      (g ≫ f.val n s) ≫ K.map φ.op = g ≫ f.val m (S.map φ.op s) := by
+  intro m n φ s
+  rw [Category.assoc, f.property m n φ s]
 
 /-- Precomposition of compatible families. Source: Stacks, Tag 017J
 (blueprint: def-weil-pbc-simplicial-hom-object). -/
