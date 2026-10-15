@@ -1,6 +1,6 @@
 # Work queue
 
-71 items; claim with `tools/claim.py next <group> [--stage N]`.
+70 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (71)
+## Stage 3: modules to prove (70)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -19,7 +19,6 @@
 | `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 3 | 5 | proof |
 | `Sheaf.Paper.IntegralFiniteExchangeComparison` | 3 | 1 | proof |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 1 | proof |
@@ -27,6 +26,7 @@
 | `Sheaf.Paper.CondensedLocalPieceHomContinuity` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 6 | proof |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 4 | 1 | proof |
 | `Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients` | 5 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 5 | 1 | proof |
 | `Sheaf.Algebra.Homology.SiteDerivedTensorDescent` | 5 | 1 | proof |
@@ -79,7 +79,6 @@
 | `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence` | 11 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy` | 12 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy` | 13 | 1 | proof |
-| `Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly` | 14 | 1 | proof |
 | `Sheaf.CategoryTheory.FilteredHomologyTowerDifferential` | 19 | 1 | proof |
 | `Sheaf.CategoryTheory.FilteredHomologyTowerQuotients` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
