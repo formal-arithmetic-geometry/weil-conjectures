@@ -210,5 +210,23 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-ec800769a (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, and source passages. All five steps establish finiteness with the required hypotheses; edge cases pass. Accepted both declared tool uses. No new nodes, duplicate splits, or repairs. Exact master target morphisms and condensed pro-étale coefficient categories remain unchanged; no comparison theorem is certified. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f44fd4dde",
+  "group": "ND",
+  "result": "pass",
+  "note": "Checked all statement clauses, dependencies, canonical constructions, sources, universes, edge cases, docstrings, report sections and verbatim signature. Per-file compilation reproduced cleanly; no project clones or branch heads changed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveCoordinateBoundary",
+  "declaration": "AlgebraicGeometry.exists_isFinite_projective_coordinate_boundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveCoordinateBoundary.lean",
+  "statement": "theorem exists_isFinite_projective_coordinate_boundary (A : Type u) [CommRing A] [IsNoetherianRing A] [IsIntegral (Spec (CommRingCat.of A))] {Y : Scheme.{u}} (f : Y ⟶ Spec (CommRingCat.of A)) [IsProjective f] (ι : Type v) [Finite ι] (U : ι → Y.affineOpens) (hcover : (⨆ i : ι, (U i).1) = ⊤) (m : ι → ℕ) (hm : ∀ i, 1 ≤ m i) (e : ∀ i, (U i).1.toScheme ⟶ AffineSpace (ULift.{u} (Fin (m i))) (Spec (CommRingCat.of A))) [he : ∀ i, IsClosedImmersion (e i)] (hover : ∀ i, e i ≫ AffineSpace (ULift.{u} (Fin (m i))) (Spec (CommRingCat.of A)) ↘ Spec (CommRingCat.of A) = (U i).1.ι ≫ f) (V : ∀ i, Fin (m i) → (AffineSpace (ULift.{u} (Fin 1)) (Spec (CommRingCat.of A))).Opens) (hV : ∀ i r, Dense (V i r : Set (AffineSpace (ULift.{u} (Fin 1)) (Spec (CommRingCat.of A))))) : ∃ a : A, Nonempty (PrimeSpectrum.basicOpen a) ∧ ∃ T : TopologicalSpace.Closeds (pullback f (Scheme.Opens.ι (X := Spec (CommRingCat.of A)) (PrimeSpectrum.basicOpen a)) : Scheme.{u}), (T : Set (pullback f (Scheme.Opens.ι (X := Spec (CommRingCat.of A)) (PrimeSpectrum.basicOpen a)) : Scheme.{u})) = {x | ¬ ∃ (i : ι) (r : Fin (m i)) (y : (U i).1.toScheme), (U i).1.ι y = pullback.fst f (Scheme.Opens.ι (X := Spec (CommRingCat.of A)) (PrimeSpectrum.basicOpen a)) x ∧ (e i ≫ AffineSpace.reindex (fun _ : ULift.{u} (Fin 1) ↦ (ULift.up r : ULift.{u} (Fin (m i)))) (Spec (CommRingCat.of A))) y ∈ V i r} ∧ IsFinite ((Scheme.IdealSheafData.vanishingIdeal T).subschemeι ≫ pullback.snd f (Scheme.Opens.ι (X := Spec (CommRingCat.of A)) (PrimeSpectrum.basicOpen a)))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
