@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuityData
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreBase
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
+public import Sheaf.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
@@ -227,6 +228,30 @@ theorem transportDataOfComposite_kappaU
         Functor.isoWhiskerRight (perfectOverlapCompositeLocalIso f g gf hgf U)
           (overlapSiteInverse (gf ⁻¹ᵁ U)).mapDerivedCategory := by
   rfl
+
+/-- At the first local object, the transport component is the inverse-site
+image of the named restricted-composite comparison. -/
+theorem transportDataOfComposite_kappaU_hom_app
+    {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
+    (hgf : g ≫ f = gf) (U V : Y₀.Opens)
+    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)
+    (E : schemeDerivedCategory X)
+    (φU : (derivedPullback (gf ∣_ U)).obj A ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ U)).mapDerivedCategory.obj E)
+    (φV : (derivedPullback (gf ∣_ V)).obj B ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ V)).mapDerivedCategory.obj E) :
+    ((transportDataOfComposite f g gf hgf U V A B E φU φV).κU.app A).hom =
+      (overlapSiteInverse (gf ⁻¹ᵁ U)).mapDerivedCategory.map
+        ((perfectOverlapCompositeLocalIso f g gf hgf U).hom.app A) := by
+  have h := congrArg (fun z => z.hom.app A)
+    (transportDataOfComposite_kappaU f g gf hgf U V A B E φU φV)
+  exact h.trans (associator_symm_whiskerRight_hom_app
+    (derivedPullback (f ∣_ U))
+    (derivedPullback (g.resLE (f ⁻¹ᵁ U) (gf ⁻¹ᵁ U)
+      (by rw [← Scheme.Hom.comp_preimage, hgf])))
+    (overlapSiteInverse (gf ⁻¹ᵁ U)).mapDerivedCategory
+    (derivedPullback (gf ∣_ U))
+    (perfectOverlapCompositeLocalIso f g gf hgf U) A)
 
 /-- The first site field is the fixed return comparison for the inverse-image open.
 This follows by projecting the first site component of the composite transport
