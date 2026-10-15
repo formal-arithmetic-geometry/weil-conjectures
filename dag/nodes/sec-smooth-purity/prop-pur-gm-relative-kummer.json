@@ -418,5 +418,33 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-b1fdf1891 (reviewer sub-agent of L); spot-checked: Read the full delivery and all cited statements; review.md records checks of all thirteen steps. Verified Kummer generators, strict-local smooth-base-change hypotheses, canonical module/abelian and étale/pro-étale exchange comparisons, edge cases, and absence of dependency cycles or new duplicates. Accepted all fifteen declared tool uses. No corrections required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityRelativeKummer",
+  "declaration": "WeilConjectures.PurityFiniteSetting.relative_kummer",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.constantPullback",
+   "WeilConjectures.PurityFiniteSetting.twistPullback",
+   "WeilConjectures.PurityFiniteSetting.derivedCoefficientPullback",
+   "WeilConjectures.PurityFiniteSetting.relativeUnit",
+   "WeilConjectures.PurityFiniteSetting.kummerGenerator",
+   "WeilConjectures.PurityFiniteSetting.RelativeKummerConclusions",
+   "WeilConjectures.PurityFiniteSetting.KummerBaseChangeConclusions",
+   "WeilConjectures.PurityFiniteSetting.relative_kummer"
+  ],
+  "file": "lean/Sheaf/Paper/PurityRelativeKummer.lean",
+  "statement": "theorem relative_kummer (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of P.field.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of P.field.k))] : P.RelativeKummerConclusions h Y (Y ↘ Spec (CommRingCat.of P.field.k)) ∧ (∀ (Y' : Scheme.{u}) [Y'.Over (Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (Y' ↘ Spec (CommRingCat.of P.field.k))] [IsSeparated (Y' ↘ Spec (CommRingCat.of P.field.k))] (g : Y' ⟶ Y) [g.IsOver (Spec (CommRingCat.of P.field.k))], P.KummerBaseChangeConclusions h g (Y ↘ Spec (CommRingCat.of P.field.k))) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (CommRingCat.of Ω) ⟶ Y), P.KummerBaseChangeConclusions h g (Y ↘ Spec (CommRingCat.of P.field.k)) ∧ P.RelativeKummerConclusions h (Spec (CommRingCat.of Ω)) (g ≫ Y ↘ Spec (CommRingCat.of P.field.k))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6766fbe1a",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Audited node, dependencies, source, declarations, edge cases, docstrings, universes, reports, and scompile evidence; no substantive or mechanical defects found."
  }
 }
