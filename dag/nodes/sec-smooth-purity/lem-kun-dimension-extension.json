@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-dimension-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Dimension after extension and restriction",
@@ -14,28 +14,204 @@
  },
  "stmt_deps": [
   "def-kun-dimension",
-  "def-weil-pbc-scheme-conventions"
+  "def-pc-scheme",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-weil-open-immersion"
  ],
  "proof": [
   {
-   "text": "For a scheme of finite type over a field, the dimension formula\n[lem-kun-dimension-formula] (applied at the generic points of the\nirreducible components, and at all points for the upper bound; Noether\nnormalization and the additivity of transcendence degree, both basic\ncommutative algebra) shows that the Krull dimension equals the\nsupremum of the transcendence degrees $\\operatorname{trdeg}_K\\kappa(x)$\nof its points. Hence an open dense immersion $U\\hookrightarrow X$ has\n$\\kundim U=\\kundim X$: the generic points of the irreducible\ncomponents of $X$ lie in $U$ because $U$ is dense, and chains of\nirreducible closed subsets are computed by the same generic points.\nFor a field extension $L/K$, each residue field of $X_L$ is a\nfinitely generated extension of $L$ obtained from a residue field of\n$X$ by base change, so its transcendence degree over $L$ is at most\nthe transcendence degree of the corresponding residue field over $K$\n(again additivity of transcendence degree); conversely the projection\n$X_L\\to X$ is faithfully flat and of finite type, so its fibres are\nnonempty and the dimension formula for morphisms gives\n$\\kundim X_L\\ge\\kundim X$. Hence $\\kundim X_L=\\kundim X$.",
+   "text": "If $X=\\varnothing$, the projection $X_L\\to X$ forces $X_L=\\varnothing$, and an open immersion $U\\to X$ forces $U=\\varnothing$. Each dimension is the supremum of an empty set of chain lengths, hence $-\\infty$. Both equalities hold. Henceforth assume $X\\ne\\varnothing$.",
    "uses": [
-    "lem-kun-dimension-formula"
+    "def-pc-base-change",
+    "def-weil-open-immersion",
+    "def-kun-dimension"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055, definition-Krull, empty-space clause"
+   }
+  },
+  {
+   "text": "Write $Y=X_L$. Finite type implies locally finite type. Apply [lem-pc-dim-base-change-affine-covers] with $k=K$ and extension field $L$. It supplies matching affine open covers $(W_i)$ of $X$ and $(V_i)$ of the nonempty scheme $Y$, and finite type $K$-algebras $A_i$, with $W_i\\simeq\\operatorname{Spec}A_i$ and $V_i\\simeq\\operatorname{Spec}(A_i\\otimes_K L)$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-pc-dim-base-change-affine-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JQ and 01JR, lemma-fibre-product-affines and lemma-open-fibre-product; Morphisms Tag 01T0"
+   }
+  },
+  {
+   "text": "For every $i$, apply [lem-weil-pbc-dimension-preserved-field-extension] to $A_i$ and $L/K$: $\\dim\\operatorname{Spec}(L\\otimes_K A_i)=\\dim\\operatorname{Spec}A_i$. The tensor swap $a\\otimes l\\mapsto l\\otimes a$, whose inverse swaps again, is a ring isomorphism. Inverse image of prime ideals under these inverse ring maps gives a homeomorphism of their spectra. The homeomorphisms from the chart isomorphisms and this swap preserve dimension by [lem-weil-pbc-homeomorphism-krull-dimension]. Thus $\\dim V_i=\\dim W_i$. No finite-type assumption on the projection $Y\\to X$ is made.",
+   "uses": [
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3, lemma-dimension-preserved-field-extension; Topology Tag 0055"
+   }
+  },
+  {
+   "text": "For either scheme $T=X,Y$ with the corresponding open cover $(T_i)$, each $\\dim T_i\\le\\dim T$ by [lem-weil-pbc-open-subspace-dimension-monotone], taking the larger open to be $T$. Conversely [lem-weil-pbc-dimension-bound-open-cover] gives $\\dim T\\le\\sup_i\\dim T_i$. Its quasi-sober and $T_0$ hypotheses hold by [lem-weil-pbc-scheme-sober]: unique generic points for irreducible closed sets imply sobriety, and equality of singleton closures forces equality of their unique generic points. Consequently $\\dim T=\\sup_i\\dim T_i$. Step 3 now gives $\\kundim X_L=\\kundim X$.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "lem-weil-pbc-dimension-bound-open-cover",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0B7I, lemma-dimension-supremum-local-dimensions, open-cover consequence; Schemes Tag 01IS"
+   }
+  },
+  {
+   "text": "For the dense-open clause identify $U$ with its open image in $X$. The field $K$ has only the ideals $(0)$ and $(1)$, so is Noetherian, and its one-point affine spectrum is quasi-compact and locally Noetherian [pqf-def-locnoeth]. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. Apply [lem-sc-noetherian-closed-subset-finite-components] to the closed subset $X$ itself to write $X=C_1\\cup\\cdots\\cup C_r$ with distinct nonempty irreducible closed components. Apply [lem-weil-pbc-noetherian-open-subscheme-noetherian] to the open subset $U$ of the Noetherian scheme $X$; it gives that $U$ is Noetherian and quasi-compact. For each affine open $W\\subseteq X$, apply the same lemma to the open subset $U\\cap W$ of $X$. Its conclusion explicitly gives that $U\\cap W$ is quasi-compact. Thus both quasi-compactness assertions needed in Step 6 follow from the cited statement.",
+   "uses": [
+    "def-weil-open-immersion",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OV, 01OW, 01OZ, 0BA8, definition-noetherian, lemma-locally-Noetherian, lemma-Noetherian-topology, lemma-Noetherian-irreducible-components; Morphisms Tag 01T6"
+   }
+  },
+  {
+   "text": "The preimage under $j:U\\to X$ of any affine open $W\\subset X$ is $U\\cap W$, quasi-compact by Step 5. Hence $j$ is quasi-compact and [lem-weil-pbc-qc-open-immersion-finite-type] makes it of finite type. By [lem-weil-pbc-proper-fp-permanence] (e), the composite $U\\to X\\to\\operatorname{Spec}K$ is locally of finite type. Its preimage of the only nonempty affine open of $\\operatorname{Spec}K$ is $U$, quasi-compact by Step 5, so it is quasi-compact. The definition [def-weil-finite-type-morphism] therefore makes $U$ of finite type over $K$.",
+   "uses": [
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T0, 01T3 and 01T5, definition-finite-type, lemma-composition-finite-type, lemma-immersion-locally-finite-type"
+   }
+  },
+  {
+   "text": "For each component $C_i$, let $\\eta_i$ be its generic point supplied by [lem-weil-pbc-scheme-sober]. It is in no $C_j$ for $j\\ne i$: otherwise closedness gives $C_i=\\overline{\\{\\eta_i\\}}\\subseteq C_j$, contrary to maximality and distinctness [def-weil-irreducible-components]. Thus $O_i=X\\setminus\\bigcup_{j\\ne i}C_j$ is a nonempty open containing $\\eta_i$, and the covering in Step 5 gives $O_i\\subseteq C_i$. Density makes $U\\cap O_i$ nonempty. Every nonempty open of $C_i$ contains $\\eta_i$ (any point in it lies in the closure of $\\{\\eta_i\\}$). Therefore $\\eta_i\\in U$. In particular $C_i\\cap U$ is nonempty and closed in $U$, with generic point $\\eta_i$, since its closure in $U$ is $U\\cap\\overline{\\{\\eta_i\\}}$.",
+   "uses": [
+    "lem-weil-pbc-scheme-sober",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic (8), component generic points; elementary finite-component density argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-closed-irreducible-dimension-trdeg] first in $X$ to $C_i$ and then in the finite type $K$-scheme $U$ to $C_i\\cap U$. This gives $\\dim C_i=\\operatorname{trdeg}_K\\kappa_X(\\eta_i)$ and $\\dim(C_i\\cap U)=\\operatorname{trdeg}_K\\kappa_U(\\eta_i)$. Since $\\eta_i\\in U$, for every open neighbourhood $V$ of $\\eta_i$ in $X$, the intersection $V\\cap U$ is a neighbourhood in $U$ contained in $V$; these intersections are cofinal, and the open-immersion sheaf identification [def-weil-open-immersion] therefore identifies the two stalks. It respects germs of constants from $K$ and maximal ideals, so quotienting by those ideals identifies the residue fields as $K$-fields [def-weil-residue-field]. A $K$-field isomorphism preserves polynomial relations in both directions, hence preserves algebraic independence and transcendence degree [def-kun-transcendence-degree]. Therefore $\\dim(C_i\\cap U)=\\dim C_i$.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "def-weil-open-immersion",
+    "def-weil-residue-field",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0A21 and 0B1C, lemma-dimension-locally-algebraic (6) and (8); open restriction of the structure sheaf"
+   }
+  },
+  {
+   "text": "Each $C_i$ is closed in $X$, so a chain of nonempty irreducible closed subsets of $C_i$ is such a chain in $X$. Conversely the largest member $Z$ of any such chain in $X$ is contained in a $C_i$: $Z=\\bigcup_i(Z\\cap C_i)$ is a finite closed cover of the irreducible space $Z$, so one member is all of $Z$. Thus $\\dim X=\\max_i\\dim C_i$ directly from [def-kun-dimension]. Each $C_i\\cap U$ is closed in $U$, so its chains give $\\dim(C_i\\cap U)\\le\\dim U$. Step 8 yields $\\dim X\\le\\dim U$. Finally [lem-weil-pbc-open-subspace-dimension-monotone] with $U\\subseteq X$ gives the reverse inequality, proving $\\kundim U=\\kundim X$.",
+   "uses": [
+    "def-kun-dimension",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic, proof of (8): dimension is the supremum of component dimensions; Topology Tag 0055"
+   }
   }
  ],
  "proof_deps": [
-  "lem-kun-dimension-formula"
+  "def-kun-dimension",
+  "def-kun-transcendence-degree",
+  "def-pc-base-change",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-open-immersion",
+  "def-weil-residue-field",
+  "lem-pc-dim-base-change-affine-covers",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-scheme-sober",
+  "pqf-def-locnoeth"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-extension.md",
-  "place": "## Proof"
+  "place": "Repaired proof: field extension via Stacks 00P3 and affine open covers; dense restriction via Stacks 0A21(6),(8), with finite-component and stalk arguments written out."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme of finite type over a field, Krull dimension is invariant under extension of the base field and passage to a dense open subscheme.",
+   "results": "PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim (Mathlib/RingTheory/Spectrum/Prime/Topology); IsLocalization.AtPrime.ringKrullDim_eq_height and Ring.KrullDimLE.of_isLocalization; other hits concern algebraic fraction fields and standard smooth algebras.",
+   "date": "2026-10-16",
+   "verdict": "no match: spectrum/ring comparison and localization bounds do not assert either invariance"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim",
+   "results": "topologicalKrullDim, IsHomeomorph.topologicalKrullDim_eq, topologicalKrullDim_zero_of_discreteTopology, Topology.IsInducing.topologicalKrullDim_le, topologicalKrullDim_subspace_le, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero.",
+   "date": "2026-10-16",
+   "verdict": "no match: homeomorphism invariance and subspace inequality do not give field-extension or dense-open equality"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim.*(pullback|baseChange|dense)|ringKrullDim.*tensor",
+   "results": "One hit: Mathlib/RingTheory/KrullDimension/Polynomial.lean:39, rewrite by polyEquivTensor inside a polynomial-fibre calculation.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of a finite type scheme over a field is preserved by extension of the field and by a dense open immersion.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of the tensor product of a finitely generated algebra over a field with a field extension equals its Krull dimension.",
+   "results": "Module.finrank_tensorProduct, Module.finrank_baseChange, Module.finrank_mul_finrank, Module.rankAtStalk_tensorProduct_of_isScalarTower; fraction-field algebraicity and linear-disjointness rank lemmas.",
+   "date": "2026-10-16",
+   "verdict": "no match: vector-space or module ranks, not Krull dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim|ringKrullDim",
+   "results": "Mathlib/AlgebraicGeometry/Artinian.lean:66-72 dimension-zero criteria; Mathlib/AlgebraicGeometry/Properties.lean:376-397 ringKrullDim_stalk_eq_coheight and KrullDimLE rewrites (subdirectory AlgebraicGeometry).",
+   "date": "2026-10-16",
+   "verdict": "no match: neither invariance theorem is present in this search"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +239,64 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-dimension-extension",
+  "worker": "stage1",
+  "summary": "Kept both clauses unchanged; replaced the invalid claim that an arbitrary field-extension projection is finite type by the existing affine-cover and 00P3 nodes. Wrote the finite-component density argument and the open-stalk/residue-field identification explicitly. All non-elementary inputs reuse existing nodes; no new nodes. Audited each citation against its statement and searched Mathlib twice by concept.",
+  "blueprint": "Realizes the full proof paragraph: field-extension invariance chartwise via Noether-normalization theorem 00P3, and dense restriction via generic points and their residue transcendence degrees (0A21). This changes only the node-level argument; the unit has no prescribed proof steps and its Kunneth statement is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-dim-base-change-affine-covers",
+    "why": "Supplies matching affine charts for an arbitrary field extension and finite type coordinate algebras; no node of this unit supplies the chart construction."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-preserved-field-extension",
+    "why": "Generic commutative-algebra invariance under arbitrary field extension (00P3), applied chartwise; it is strictly smaller than the two-clause scheme statement."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-bound-open-cover",
+    "why": "Generic topological open-cover bound transfers the affine calculation to schemes; no Kunneth-unit replacement exists."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherianity supplies finiteness of the component cover."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Supplies a finite closed cover by maximal irreducible subsets, needed to justify the density argument."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic finite-type criterion for the dense open immersion, after quasi-compactness has been proved."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Only clause (e), composition of locally finite type morphisms, is used to check U is finite type."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic dimension/transcendence-degree formula for an irreducible closed subset, applied in X and U; supplies the component argument of the blueprint."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-dim-base-change-affine-covers",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sc-closed-irreducible-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q44-b04d7362c",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-b04d7362c (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All nine steps pass after one C1 citation repair: Step 5 now applies the existing Noetherian-open-subscheme lemma directly to U and each U∩W. Corrected whole JSON and detailed review.md written; statement unchanged, no new nodes or cycles.; 1 file(s) fixed by the reviewer"
+ }
 }
