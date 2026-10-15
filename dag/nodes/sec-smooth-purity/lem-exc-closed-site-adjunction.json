@@ -17,55 +17,29 @@
  ],
  "proof": [
   {
-   "text": "Write $R(D)=D/ID$ and $H(\\overline C)=H_A(\\overline C)$. For $V=\\operatorname{Spec}\\overline C$ and $U=\\operatorname{Spec}D$, the functors of [def-exc-closed-site-lift] give $v(V)=\\operatorname{Spec}H(\\overline C)$ and $u(U)=\\operatorname{Spec}R(D)$. The contravariant Hom correspondence of [def-weil-affine-spectrum] and the natural bijection of [lem-exc-closed-lift-adjunction] give\n$$\\operatorname{Hom}_X(v(V),U)=\\operatorname{Hom}_A(D,H(\\overline C))\\cong\\operatorname{Hom}_{A/I}(R(D),\\overline C)=\\operatorname{Hom}_Z(V,u(U)).$$\nThe restriction to maps over the bases is exact: the triangle over $\\operatorname{Spec}A$ commutes precisely when the ring map preserves the $A$-algebra structure, For $A/I$, the triangle over $\\operatorname{Spec}(A/I)$ commutes precisely when the ring map preserves the $A/I$-algebra structure. Naturality in both variables follows from the cited natural algebra bijection and functoriality of Spec. Thus this is the Hom bijection for $v\\dashv u$.",
+   "text": "For the precise functors of [def-exc-closed-site-lift], apply [lem-weil-pbc-affine-closed-site-functor-properties]. Extract its full and faithful witnesses for v, together with an adjunction v ⊣ u. This is an existing stronger statement, so the affine-spectrum and algebra-lift Hom calculations need not be repeated in this module.",
    "uses": [
     "def-exc-closed-site-lift",
-    "def-weil-affine-spectrum",
-    "lem-exc-closed-lift-adjunction"
+    "lem-weil-pbc-affine-closed-site-functor-properties"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BK, lemma-closed-immersion-affines, first proof paragraph; Tag 097P, lemma-lift-ind-etale, final two proof paragraphs"
-   }
+   "elementary": true
   },
   {
-   "text": "For completeness, let $\\alpha:\\mathrm{id}\\to HR$ and $\\beta:RH\\to\\mathrm{id}$ be the unit and counit of the algebra adjunction $R\\dashv H$ in [lem-exc-closed-lift-adjunction]. By [def-exc-closed-site-lift] and contravariant functoriality in [def-weil-affine-spectrum], define the site unit at $V=\\operatorname{Spec}\\overline C$ as $\\eta_V=\\operatorname{Spec}\\beta_{\\overline C}:V\\to uv(V)$ and its counit at $U=\\operatorname{Spec}D$ as $\\epsilon_U=\\operatorname{Spec}\\alpha_D:vu(U)\\to U$. For a ring map $f:D\\to D\\prime$, naturality $HR(f)\\circ\\alpha_D=\\alpha_{D\\prime}\\circ f$ gives, with $g=\\operatorname{Spec}f:U\\prime\\to U$, the equation $g\\circ\\epsilon_{U\\prime}=\\epsilon_U\\circ vu(g)$. For $h:\\overline C\\to\\overline C\\prime$, naturality $h\\circ\\beta_{\\overline C}=\\beta_{\\overline C\\prime}\\circ RH(h)$ gives, with $k=\\operatorname{Spec}h:V\\prime\\to V$, the equation $uv(k)\\circ\\eta_{V\\prime}=\\eta_V\\circ k$. Thus both site transformations are natural. The ring identities $H(\\beta_{\\overline C})\\circ\\alpha_{H(\\overline C)}=\\mathrm{id}$ and $\\beta_{R(D)}\\circ R(\\alpha_D)=\\mathrm{id}$ give respectively $\\epsilon_{v(V)}\\circ v(\\eta_V)=\\mathrm{id}_{v(V)}$ and $u(\\epsilon_U)\\circ\\eta_{u(U)}=\\mathrm{id}_{u(U)}$ after applying Spec. These are exactly the two site triangle identities.",
-   "uses": [
-    "lem-exc-closed-lift-adjunction",
-    "def-exc-closed-site-lift",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BK, lemma-closed-immersion-affines, first proof paragraph; Tag 097P, lemma-lift-ind-etale, final two proof paragraphs"
-   }
-  },
-  {
-   "text": "Under the reduction-induced Hom bijection of [lem-exc-closed-lift-adjunction], the identity of $H(\\overline C)$ maps to the specified reduction map $\\beta_{\\overline C}:H(\\overline C)/IH(\\overline C)\\to\\overline C$. This map is an isomorphism by [lem-exc-closed-lift-reduction]. Consequently its spectrum $\\eta_V$ from step 2 is an isomorphism, with inverse the spectrum of $\\beta_{\\overline C}^{-1}$; the two composites are identities by [def-weil-affine-spectrum]. For $k:V\\prime\\to V$, the equation $uv(k)\\circ\\eta_{V\\prime}=\\eta_V\\circ k$ implies $\\eta_V^{-1}\\circ uv(k)=k\\circ\\eta_{V\\prime}^{-1}$ by composing on the left with $\\eta_V^{-1}$ and on the right with $\\eta_{V\\prime}^{-1}$. These are exactly the naturality equations for the inverse. Hence $\\eta:\\mathrm{id}_{\\mathcal B_Z}\\xrightarrow{\\sim}uv$ is the asserted canonical identification, rather than a literal equality of chosen objects.",
-   "uses": [
-    "lem-exc-closed-lift-adjunction",
-    "lem-exc-closed-lift-reduction",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BK, lemma-closed-immersion-affines, first proof paragraph; Tag 097P, lemma-lift-ind-etale, final two proof paragraphs"
-   }
+   "text": "For a fully faithful left adjoint the unit of its adjunction is an isomorphism. Apply Mathlib CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful to the extracted adjunction. Concretely, faithfulness makes each unit component monic, while fullness lifts the counit to a section of that component by the triangle identity. Thus every unit component is invertible, and their inverses are natural. Pair the adjunction with this IsIso proof to obtain the asserted existential statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-exc-closed-site-lift",
-  "def-weil-affine-spectrum",
-  "lem-exc-closed-lift-adjunction",
-  "lem-exc-closed-lift-reduction"
+  "lem-weil-pbc-affine-closed-site-functor-properties"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "C4",
+  "date": "2026-10-16",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09BK, lemma-closed-immersion-affines, first proof paragraph; Tag 097P, lemma-lift-ind-etale, final two proof paragraphs"
+  "place": "Tag 09BK, lemma-closed-immersion-affines; reuse of its existing full-faithfulness and adjunction declaration, followed by Mathlib Adjunction/FullyFaithful.lean:75"
  },
  "mathlib_searches": [
   {
@@ -183,5 +157,15 @@
   "by": "NF",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T174647-L-626798",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

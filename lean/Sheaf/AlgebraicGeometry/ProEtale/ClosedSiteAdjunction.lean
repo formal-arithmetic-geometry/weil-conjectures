@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift
 public import Mathlib.CategoryTheory.Adjunction.Basic
-import Sheaf.RingTheory.ProEtale.ClosedLiftAdjunction
-import WeilConjectures.RingTheory.ProEtale.ClosedLift
-import Mathlib.AlgebraicGeometry.Scheme
+import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Adjunction for the closed-site lift
 
@@ -45,6 +44,11 @@ The inverses of these components are natural, by composing the unit naturality
 squares with the component inverses, so the unit is a natural isomorphism.
 Thus the identification of uv with the identity is the adjunction's own unit. -/
 theorem exists_closedSiteAdjunction (A : Type u) [CommRing A] (I : Ideal A) :
-    ∃ adj : closedSiteLift A I ⊣ closedSiteBaseChange A I, IsIso adj.unit := sorry
+    ∃ adj : closedSiteLift A I ⊣ closedSiteBaseChange A I, IsIso adj.unit := by
+  obtain ⟨_, _, hfull, hfaithful, _, ⟨adj⟩, _, _⟩ :=
+    affine_closed_site_functor_properties A I
+  have : (closedSiteLift A I).Full := hfull
+  have : (closedSiteLift A I).Faithful := hfaithful
+  exact ⟨adj, adj.unit_isIso_of_L_fully_faithful⟩
 
 end AlgebraicGeometry.Scheme.AffineProEt
