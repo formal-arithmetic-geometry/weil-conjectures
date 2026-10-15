@@ -3,54 +3,184 @@
  "blueprint": {
   "is": "thm-exc-explicit-preservation",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Preservation in the open and finite etale cases",
- "statement": "Let $A=A_{E,n}$, and let $f:V\\to X$ be an\nopen immersion or a finite\netale morphism. Its ambient exceptional right adjoint satisfies\n\n$$\nRf^{\\times}D_c^{[a,b]}(X,A)\\subseteq D_c^{[a,b]}(V,A).\n$$\n\nHere $D_c^{[a,b]}$ denotes the\nconstructible interval.\nIt also preserves the same\nTor-amplitude interval.\nFor every quotient $A\\to B=A_{E,m}$, $m\\leq n$, its\nderived coefficient comparison is\nan isomorphism:\n\n$$\n(Rf_A^{\\times}K)\\otimes_A^L B\n\\simeq Rf_B^{\\times}(K\\otimes_A^L B).\n$$\n\nFor finite-Tor input the two sides are bounded constructible.\nAll bounds are independent of $n$.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\geq1$, and put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $X,V$ be schemes on which $\\ell$ is invertible and let $f:V\\to X$ be an open immersion or a finite etale morphism [def-weil-scheme-morphism-properties]. Work with the ordinary derived categories of constant-coefficient module sheaves on their small pro-etale sites [def-weil-pbc-proetale-site, def-weil-pbc-proetale-operations]. Write $Rf_A^{\\times}$ for the right adjoint to extension by zero $f_!$ in the open case and to $Rf_!=f_*$ in the finite etale case, as in [prop-exc-open-adjoint, prop-exc-finite-etale-adjoint].\n\nFor all integers $a\\leq b$,\n$$\n Rf_A^{\\times}D_c^{[a,b]}(X,A)\\subseteq D_c^{[a,b]}(V,A),\n$$\nwhere $D_c^{[a,b]}$ is the constructible cohomological interval [def-weil-constructible-intervals]. For integers $c\\leq d$, if $K\\in D^b_c(X,A)$ [def-weil-finite-torsion-constructibility] has Tor amplitude in $[c,d]$ [def-weil-finite-tor-amplitude], then $Rf_A^{\\times}K$ has Tor amplitude in the same interval $[c,d]$.\n\nFor each quotient $A\\to B=A_{E,m}$ with $1\\leq m\\leq n$ and each $K\\in D(X_{\\mathrm{proet}},A)$, the derived coefficient comparison is an isomorphism in $D(V_{\\mathrm{proet}},B)$:\n$$\n (Rf_A^{\\times}K)\\otimes_A^L B\\xrightarrow{\\sim}\n Rf_B^{\\times}(K\\otimes_A^L B).\n$$\nHere derived coefficient extension is [def-weil-derived-tensor, lem-pur-derived-change-of-rings]; the comparison is the derived inverse-image coefficient comparison under the adjunction identifications $Rf_A^{\\times}\\cong f_A^*$ and $Rf_B^{\\times}\\cong f_B^*$. If $K$ is bounded constructible and has finite Tor amplitude, both sides are bounded constructible over $B$ and retain its Tor-amplitude interval. All interval bounds are independent of $n$ and $m$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-exc-explicit-preservation.md",
   "place": "node thm-exc-explicit-preservation, order 2063"
  },
  "stmt_deps": [
-  "def-weil-scheme-morphism-properties"
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "prop-exc-open-adjoint",
+  "prop-exc-finite-etale-adjoint",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-tensor",
+  "lem-pur-derived-change-of-rings"
  ],
  "proof": [
   {
-   "text": "By [prop-exc-open-adjoint], [prop-exc-finite-etale-adjoint], the ambient\nright adjoint is the exact functor $f^*$. Pull back each stratum in\n[def-weil-finite-torsion-constructibility]. The resulting partition\nis finite and constructible; inverse image of a locally constant finite\nmodule sheaf is locally constant with the same finite module fibres.\nExactness identifies $\\mathcal H^q(f^*K)$ with\n$f^*\\mathcal H^q(K)$, proving the assertion about the intervals of\n[def-weil-constructible-intervals].",
+   "text": "By [prop-exc-open-adjoint] in the open case, and [prop-exc-finite-etale-adjoint] in the finite etale case, the relevant compact-support functor has $f^*$ as its right adjoint on the entire ordinary derived categories. Identify $Rf^{\\times}$ with this right adjoint, using the isomorphism characterized by the adjunction bijections. By [prop-weil-pbc-proetale-constant-exact], $f_A^*$ is exact for every finite coefficient ring $A$, and likewise for $B$. Thus it can be applied termwise to any complex: exactness preserves cycles, boundaries and their quotients, so $\\mathcal H^q(f_A^*K)=f_A^*\\mathcal H^q(K)$, and it preserves quasi-isomorphisms. This reduces the interval assertions to constructibility of the inverse image and the Tor assertion to a flat-complex calculation.",
    "uses": [
     "prop-exc-open-adjoint",
     "prop-exc-finite-etale-adjoint",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-constructible-intervals"
+    "prop-weil-pbc-proetale-constant-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-exc-explicit-preservation.md",
+    "place": "Imported proof, paragraph 1, first sentence; exactness also Stacks Tag 00WJ"
+   }
   },
   {
-   "text": "If $K$ has Tor amplitude $[a,b]$, the usual flat-resolution\ncriterion for [def-weil-finite-tor-amplitude] represents it by a\ncomplex of flat module sheaves in these degrees. Inverse image preserves\nflatness: the relations criterion for flatness is local and is preserved\nby the exact inverse-image functor and its compatibility with tensor\nproducts. Pulling back this bounded flat complex and tensoring it with\nany module sheaf on $V$ proves the same Tor bound. Finally inverse\nimage is an exact tensor functor and preserves flat resolutions. Applying\nit to a flat resolution in the definition of the derived tensor product\nin [def-weil-derived-tensor] gives the displayed coefficient\nisomorphism. No assertion that $A\\to B$ is flat is used.",
+   "text": "Here is the constructibility calculation, without replacing the intrinsic pro-etale definition by etale origin. For a constructible sheaf $F$, choose its finite stratification and locally constant restrictions as in [def-weil-finite-torsion-constructibility, def-weil-proetale-locally-constant-sheaf]. Pull back the strata to $V\\times_X X_\\nu$. They are disjoint and cover $V$; they are locally closed because the inverse images of the open and closed pieces defining a locally closed subscheme give the corresponding open and closed pieces on $V$. Their underlying sets are constructible by [lem-pur-scheme-constructible-preimage]. Write $i_\\nu:X_\\nu\\to X$, $i'_\\nu:V\\times_X X_\\nu\\to V$ and $f_\\nu:V\\times_X X_\\nu\\to X_\\nu$ for the induced maps. Since $fi'_\\nu=i_\\nu f_\\nu$, the inverse-image composition isomorphisms of [lem-weil-pbc-left-exact-site-inverse-image-tensor] identify $(i'_\\nu)^*f^*F$ with $f_\\nu^*i_\\nu^*F$. Base change each trivializing covering of a stratum, using the covering-preserving finite-limit functor of [def-weil-proetale-inverse-image]. Its inverse image preserves finite limits and colimits by [lem-weil-pbc-left-exact-site-inverse-image-tensor]. On sheaves of sets the constant sheaf of a set $M$ is the coproduct of $M$ copies of the terminal sheaf; consequently inverse image takes it to the constant sheaf of the same set. Under these constant-set identifications the inverse images of the addition $M\\times M\\to M$, zero $1\\to M$, and scalar action $A\\times M\\to M$ are the same operations on the same labels: finite-product preservation identifies their domains, and functoriality preserves their defining equations. Thus the constant-set isomorphism is an isomorphism of module sheaves, using [prop-weil-pbc-proetale-constant-ring-map] to identify the scalar ring. Thus the pulled-back local trivializations have the same finite module labels and finite geometric stalks. This proves constructibility. Together with step 1 it gives exactly the cohomological interval in [def-weil-constructible-intervals], with no degree shift.",
    "uses": [
-    "def-weil-finite-tor-amplitude",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-pur-scheme-constructible-preimage",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-constructible-intervals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054I, lemma-inverse-image-constructible; the local trivialization argument is the elementary expansion of imported proof paragraph 1"
+   }
+  },
+  {
+   "text": "Let $K\\in D^b_c(X,A)$ have Tor amplitude $[c,d]$. Apply the pro-etale assertion of [lem-sf-flat-model] to obtain a complex $P\\simeq K$ of flat $A_X$-module sheaves supported in $[c,d]$. That statement permits any scheme on which $\\ell$ is invertible; its auxiliary finite-field coefficient convention imposes no $k$-scheme hypothesis on $X$. The morphism of ringed topoi in [def-weil-proetale-inverse-image], with its constant-ring structure isomorphism, meets the hypotheses of [lem-weil-pbc-ringed-topos-flat-module-pullback]. Hence every term of $f_A^*P$ is flat over $A_V$, and it vanishes outside $[c,d]$. It represents $f_A^*K$ by step 1. It is K-flat by [lem-pc-bounded-above-flat-kflat-site]. For every $A_V$-module sheaf $M$ in degree zero, [def-weil-derived-tensor] computes $f_A^*K\\otimes_A^L M$ by $(f_A^*P)\\otimes_A M$, whose terms outside $[c,d]$ are zero. Its cohomology there is therefore zero. This is precisely the Tor bound, also for module sheaves $M$ not pulled back from $X$.",
+   "uses": [
+    "lem-sf-flat-model",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-pc-bounded-above-flat-kflat-site",
     "def-weil-derived-tensor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VD, lemma-pullback-flat; bounded-flat-model calculation expands imported proof paragraph 2"
+   }
+  },
+  {
+   "text": "For the coefficient comparison let $K$ now be any derived complex. Choose $P\\to K$ K-flat with flat terms using [lem-pc-kflat-resolution]. Step 1 shows that $f_A^*P$ represents $f_A^*K$, and [lem-weil-pbc-ringed-pullback-preserves-kflat] shows it is K-flat with flat terms. By [lem-pur-derived-change-of-rings], the left side of the requested comparison is represented, as a complex of $B_V$-modules, by $(f_A^*P)\\otimes_{A_V}B_V$. The right side is represented by $f_B^*(P\\otimes_{A_X}B_X)$, since $P\\otimes_{A_X}B_X$ represents the coefficient extension and $f_B^*$ is exact. The ordinary tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor] and the identification $f^{-1}B_X=B_V$ from [prop-weil-pbc-proetale-constant-ring-map] give an isomorphism between these complexes. Concretely both identify to $f^{-1}P\\otimes_{f^{-1}A_X}B_V$, and the map is the identity on local pure tensors $p\\otimes b$. It is $B_V$-linear, respects differentials, and is natural in $P$. The resolution independence in [lem-pur-derived-change-of-rings] makes this the derived comparison specified in the statement, hence an isomorphism for arbitrary $K$. This calculation uses no flatness of $A\\to B$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); ordinary comparison: sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)"
+   }
+  },
+  {
+   "text": "It remains to justify bounded constructibility after reduction, rather than infer it from a nonflat quotient. Suppose $K\\in D^b_c(X,A)$ has Tor amplitude $[c,d]$. The constant $A$-module sheaf $B_X$ is bounded constructible in degree zero, since $B$ is a finite $A$-module. Apply [lem-pur-finite-tensor-constructible-cohomology] to $K$ and $B_X$: all cohomology sheaves of $K\\otimes_A^L B$ are constructible as $A$-module sheaves. Its cohomology vanishes outside $[c,d]$ by the defining Tor test [def-weil-finite-tor-amplitude], with $M=B_X$. These cohomology sheaves are also constructible as $B$-module sheaves: their $A$-action factors through $B=A/I$. On a trivializing covering member write such a cohomology sheaf as $F\\cong\\underline M$. Taking the quotient by $I$ gives $F=F/IF\\cong\\underline{M/IM}$: sheafification of the constant presheaf commutes with the cokernel defining this quotient. The finite module $M/IM$ is a $B$-module, and this quotient isomorphism is $B$-linear. This also works on empty covering members, without asserting that an arbitrary label $M$ there is annihilated by $I$. Thus reduction is bounded constructible over $B$. The model $P$ of step 3 reduces to $P\\otimes_A B$, a bounded flat $B$-complex in $[c,d]$, by [lem-sf-reduction-flat-model]. Hence it also retains Tor amplitude $[c,d]$. Apply steps 2 and 3 with coefficients $B$ to get the same assertions for $Rf_B^{\\times}(K\\otimes_A^L B)$; step 4 gives them for the isomorphic left side. All complexes used for the bounds are supported in the original intervals, so the constants do not depend on either coefficient exponent.",
+   "uses": [
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "def-weil-finite-tor-amplitude",
+    "lem-sf-reduction-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BQ, lemma-tensor-c, for constructible tensor cohomology; reduction of the bounded flat model is imported unit step (i), expanded using lem-sf-reduction-flat-model"
+   }
   }
  ],
  "proof_deps": [
   "prop-exc-open-adjoint",
   "prop-exc-finite-etale-adjoint",
+  "prop-weil-pbc-proetale-constant-exact",
   "def-weil-finite-torsion-constructibility",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-pur-scheme-constructible-preimage",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "prop-weil-pbc-proetale-constant-ring-map",
   "def-weil-constructible-intervals",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-weil-derived-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-pur-finite-tensor-constructible-cohomology",
   "def-weil-finite-tor-amplitude",
-  "def-weil-derived-tensor"
+  "lem-sf-reduction-flat-model"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-exc-explicit-preservation.md",
-  "place": "## Proof"
+  "place": "Imported proof paragraphs 1-2 and unit step (i), expanded with the cited Stacks ringed-topos lemmas; original literature copy absent on this machine"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptional.*adjoint|constructible.*torAmplitude",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state exceptional inverse-image preservation on the small pro-etale sites together with derived coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image for an open immersion or finite etale morphism preserves bounded constructible complexes and commutes with change of coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion or finite etale morphism, the exceptional right adjoint preserves constructible cohomological intervals and Tor amplitude, and commutes with derived change of finite torsion coefficients",
+   "results": "8 hit(s): DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isLE_Q_obj_iff, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE, CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state exceptional inverse-image preservation on the small pro-etale sites together with derived coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state exceptional inverse-image preservation on the small pro-etale sites together with derived coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|torAmplitude|TorAmplitude",
+   "results": "5 hit(s): Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state exceptional inverse-image preservation on the small pro-etale sites together with derived coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact tensor inverse image of sheaves of constant ring modules preserves finite locally constant stratifications, Tor amplitude, and derived extension of scalars",
+   "results": "8 hit(s): LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state exceptional inverse-image preservation on the small pro-etale sites together with derived coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"pullback\"",
+   "results": "12 hit(s): PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state exceptional inverse-image preservation on the small pro-etale sites together with derived coefficient comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -81,5 +211,89 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation"
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-exc-explicit-preservation",
+  "worker": "stage1",
+  "summary": "Expanded the exact inverse-image route into five steps, using existing general site and ringed-topos tools; supplied all omitted flatness, K-flat resolution and reduction-constructibility facts without new nodes. Clarified the bounded constructible scope of finite-Tor input and the B-valued derived comparison. No etale/pro-etale predicate identification is used.",
+  "blueprint": "Realizes unit sk-prop-sf-rf-shriek-preservation step (i) and both paragraphs of blueprint thm-exc-explicit-preservation: steps 1-2 give exactness/constructible intervals; step 3 gives unchanged Tor bounds; step 4 gives the coefficient isomorphism; step 5 proves bounded constructibility and uniformity after reduction.",
+  "tool_uses": [
+   {
+    "node": "prop-exc-open-adjoint",
+    "why": "The open case needs the ambient j_! right adjunction, not an assumed general exceptional-adjoint datum. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exactness on arbitrary constant-coefficient pro-etale module sheaves is needed to calculate cohomology termwise. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "The geometric inverse image preserves finite limits and all colimits, so the explicit local constant trivializations pull back. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Canonical constant-ring identifications are needed at both coefficient stages, including for B-linear comparison. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "The unit asks for a bounded flat model; this is the existing theorem providing it, not a new preservation assertion. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "General flat-module pullback supplies the non-elementary flatness assertion omitted by the imported proof. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "This general site theorem makes the bounded flat model compute derived tensor against arbitrary source-side sheaves. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Unbounded coefficient comparison needs a K-flat resolution with flat terms. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "The general ringed-topos theorem makes the pulled-back unbounded resolution valid for coefficient extension. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "This gives coefficient extension as a B-valued derived functor and its resolution independence. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "The underived natural tensor comparison gives the actual B-linear coefficient map on the two resolutions. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-pur-finite-tensor-constructible-cohomology",
+    "why": "Constructibility of tensor cohomology is separate from boundedness for the nonflat finite coefficient quotient. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sf-reduction-flat-model",
+    "why": "Reduction of a bounded flat model preserves its interval and gives flat B-terms. No statement in this unit supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-exc-open-adjoint",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-sf-reduction-flat-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-a6a687255",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-a6a687255 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, report, all cited node statements, and source locations. Verified both morphism cases, constructibility and Tor intervals, B-valued coefficient comparison, hypotheses, edge cases, and uniformity. No new nodes, duplicates, circularity, or repairs."
+ }
 }
