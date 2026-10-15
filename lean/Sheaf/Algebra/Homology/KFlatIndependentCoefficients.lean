@@ -7,6 +7,8 @@ module
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
 
 /-! # K-flat complexes with an independent coefficient universe
 
@@ -36,7 +38,32 @@ handles the other variable, and transport preserves these properties. -/
 theorem isMonoidal_W_independentCoefficients :
     (J.W.inverseImage (PresheafOfModules.toPresheaf.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj)).IsMonoidal := by
-  sorry
+  let e := equivSmallModel.{w} C
+  let K := e.inverse.inducedTopology J
+  have : ∀ X : Cᵒᵖ,
+      HasLimitsOfShape (StructuredArrow X e.inverse.op) AddCommGrpCat.{w} :=
+    fun _ ↦ hasLimitsOfShape_of_essentiallySmall.{w} _ _
+  let S := (e.inverse.sheafPushforwardContinuous CommRingCat.{w} K J).obj R
+  let T := PresheafOfModules.pushforward₀OfCommRingCat.{w} e.inverse R.obj
+  let W := J.W.inverseImage (PresheafOfModules.toPresheaf.{w}
+    ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj)
+  let V := K.W.inverseImage (PresheafOfModules.toPresheaf.{w}
+    ((sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj S).obj)
+  have hw {P Q : PresheafOfModules.{w} (R.obj ⋙ forget₂ _ _)} (f : P ⟶ Q) :
+      W f ↔ V (T.map f) := by
+    change J.W _ ↔ K.W _
+    rw [← J.W_inverseImage_whiskeringLeft K e.inverse]
+    rfl
+  have hleft (F : PresheafOfModules.{w} (R.obj ⋙ forget₂ _ _))
+      {P Q : PresheafOfModules.{w} (R.obj ⋙ forget₂ _ _)} {f : P ⟶ Q}
+      (hf : W f) : W (F ◁ f) := by
+    apply (hw _).2
+    exact V.whiskerLeft_mem (T.obj F) (T.map f) ((hw f).1 hf)
+  refine ⟨?_, ?_⟩
+  · intro F P Q f hf
+    exact hleft F hf
+  · intro P Q f hf G
+    exact (W.arrow_mk_iso_iff (Arrow.isoMk (β_ P G) (β_ Q G))).2 (hleft G hf)
 
 /-- Tensoring a zero morphism on the left is zero for module sheaves over a relatively
 small site. Source: Stacks Project, Cohomology on Sites, Tag 06YN.
@@ -50,7 +77,37 @@ theorem preservesZeroMorphisms_curriedTensor_independentCoefficients :
     letI := monoidalCategory R
     (curriedTensor (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))).PreservesZeroMorphisms := by
-  sorry
+  let 𝓡 := (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R
+  let := isMonoidal_W_independentCoefficients R
+  let := monoidalCategory R
+  let := HasZeroObject.zero' (SheafOfModules.{w} 𝓡)
+  let a := PresheafOfModules.sheafification.{w} (𝟙 𝓡.obj)
+  let i := SheafOfModules.forget 𝓡
+  have hzero (M : SheafOfModules.{w} 𝓡) :
+      IsZero ((0 : SheafOfModules.{w} 𝓡) ⊗ M) := by
+    have hp : IsZero ((0 : SheafOfModules.{w} 𝓡).val) := by
+      exact Functor.map_isZero i (isZero_zero _)
+    have : (tensorRight M.val).PreservesZeroMorphisms := by
+      refine ⟨fun P Q ↦ ?_⟩
+      change (0 : P ⟶ Q) ▷ M.val = 0
+      ext U : 1
+      change (0 : P ⟶ Q).app U ▷ M.val.obj U = 0
+      simp
+    have ht : IsZero ((0 : SheafOfModules.{w} 𝓡).val ⊗ M.val) := by
+      exact Functor.map_isZero (tensorRight M.val) hp
+    exact (Functor.map_isZero a ht).of_iso (tensorObjIsoSheafification (R := R)
+      (0 : SheafOfModules.{w} 𝓡) M)
+  refine ⟨fun X Y ↦ ?_⟩
+  apply NatTrans.ext
+  funext M
+  change (0 : X ⟶ Y) ▷ M = 0
+  have hz := hzero M
+  have h : (0 : X ⟶ Y) =
+      (0 : X ⟶ (0 : SheafOfModules.{w} 𝓡)) ≫
+        (0 : (0 : SheafOfModules.{w} 𝓡) ⟶ Y) := by simp
+  rw [h, comp_whiskerRight,
+    hz.eq_of_src ((0 : (0 : SheafOfModules.{w} 𝓡) ⟶ Y) ▷ M) 0,
+    comp_zero]
 
 /-- Tensoring a zero morphism on the right is zero, by symmetry of the tensor product.
 Source: Stacks Project, Cohomology on Sites, Tag 06YN.
@@ -66,7 +123,16 @@ theorem preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
     let T := curriedTensor (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))
     (T.obj M).PreservesZeroMorphisms := by
-  sorry
+  let := isMonoidal_W_independentCoefficients R
+  let := monoidalCategory R
+  let := symmetricCategory R
+  let := preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  refine ⟨fun X Y ↦ ?_⟩
+  change M ◁ (0 : X ⟶ Y) = 0
+  have h : (0 : X ⟶ Y) ▷ M = 0 :=
+    congrArg (fun t ↦ t.app M) ((curriedTensor _).map_zero X Y)
+  apply (cancel_mono (β_ M Y).hom).1
+  rw [BraidedCategory.braiding_naturality_right, h, comp_zero, zero_comp]
 
 end SheafOfModules
 
@@ -111,7 +177,7 @@ theorem isKFlatIndependentCoefficients_iff_isKFlat
     (K : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J
       (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) :
     IsKFlatIndependentCoefficients K ↔ IsKFlat K := by
-  sorry
+  rfl
 
 /-- The independent resolution predicate specializes to the live resolution predicate
 when the coefficient universe is the maximum of the site universes.
@@ -127,6 +193,6 @@ theorem isKFlatResolutionIndependentCoefficients_iff_isKFlatResolution
       (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ}
     (f : K ⟶ G) :
     IsKFlatResolutionIndependentCoefficients f ↔ IsKFlatResolution f := by
-  sorry
+  rfl
 
 end CochainComplex
