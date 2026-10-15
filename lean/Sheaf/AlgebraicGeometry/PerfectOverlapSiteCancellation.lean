@@ -207,4 +207,38 @@ theorem perfectOverlapApex_nestedCounit_cancel_U
   exact perfectOverlapApex_nestedCounit_cancel_for g pX pY b hg
     U V U inf_le_left E
 
+/-- The local identification cancels across the open-site comparison and
+counit. Source: Stacks Project, Tags 08BT and 08BV. Naturality of the
+comparison moves the local isomorphism through the overlap restriction;
+naturality of the equivalence counit then cancels its inverse. -/
+theorem perfectOverlapApex_localIso_cancel_for
+    {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
+    (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)
+    (U V L : Y.Opens) (hWL : U ⊓ V ≤ L)
+    (a : schemeDerivedCategory (g ⁻¹ᵁ L).toScheme)
+    (E : schemeDerivedCategory X)
+    (φ : a ≅ (schemeOpenRestriction X (g ⁻¹ᵁ L)).mapDerivedCategory.obj E) :
+    let W := g ⁻¹ᵁ U ⊓ g ⁻¹ᵁ V
+    let Q := g ⁻¹ᵁ L
+    let i : W ⟶ Q := homOfLE (fun _ hx ↦ hWL hx)
+    let PQ := (schemeOpenRestriction X Q).mapDerivedCategory
+    let SU := (schemeOpenOverlapRestriction X i).mapDerivedCategory
+    let LU := (overlapSiteInverse Q).mapDerivedCategory
+    let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
+    let ω := openSiteOverlapIso X i
+    let eW : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W) ≌
+      SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) :=
+      Scheme.Modules.overEquiv W
+    let cart := perfectOverlapStageEquivalence g pX pY b hg U V
+    let apex := perfectOverlapApexEquivalence g pX pY b hg U V
+    apex.functor.map ((LU ⋙ SP).map φ.hom) ≫
+        apex.functor.map (ω.hom.app (PQ.obj E)) ≫
+          cart.functor.map (eW.mapDerivedCategory.counitIso.hom.app (SU.obj (PQ.obj E))) ≫
+            cart.functor.map (SU.map φ.inv) =
+      apex.functor.map (ω.hom.app a) ≫
+        cart.functor.map (eW.mapDerivedCategory.counitIso.hom.app (SU.obj a)) := by
+  intro W Q i PQ SU LU SP ω eW cart apex
+  exact equivalence_comparison_counit_transport eW.mapDerivedCategory
+    cart.functor (LU ⋙ SP) SU ω φ
+
 end AlgebraicGeometry
