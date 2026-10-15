@@ -69,4 +69,48 @@ theorem perfectOverlapProjectionPrismU
   intro r m eY eK hKU hXU p t hr
   exact perfectOverlapTransport_prism r eY eK m hmap p t hr A
 
+/-- The second-open cartesian comparison is the same fixed prism, using the
+right projection of the overlap. Source: Stacks Project, Tag 0D5S. -/
+theorem perfectOverlapProjectionPrismV
+    {X Y K C T S : Scheme.{u}}
+    (g : X ⟶ Y) (gk : X ⟶ K) (f : K ⟶ Y)
+    (pX : X ⟶ C) (pK : K ⟶ T) (pY : Y ⟶ S)
+    (b : C ⟶ S) (q : T ⟶ S) (l : Over.mk b ⟶ Over.mk q)
+    (hgf : gk ≫ f = g) (hg : IsPullback g pX pY b)
+    (hf : IsPullback f pK pY q) (U V : Y.Opens)
+    (hR : g ⁻¹ᵁ (U ⊓ V) ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ (U ⊓ V)))
+    (hmap :
+      ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert hg).isoPullback.inv ≫
+          gk.resLE (f ⁻¹ᵁ (U ⊓ V)) (g ⁻¹ᵁ (U ⊓ V)) hR =
+        baseChangeMap ((U ⊓ V).ι ≫ pY) l ≫
+          ((isPullback_morphismRestrict f (U ⊓ V)).paste_vert hf).isoPullback.inv)
+    (B : schemeDerivedCategory V.toScheme) :
+    let r := gk.resLE (f ⁻¹ᵁ (U ⊓ V)) (g ⁻¹ᵁ (U ⊓ V)) hR
+    let m := baseChangeMap ((U ⊓ V).ι ≫ pY) l
+    let eY := ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert hg).isoPullback
+    let eK := ((isPullback_morphismRestrict f (U ⊓ V)).paste_vert hf).isoPullback
+    let hKV : f ⁻¹ᵁ (U ⊓ V) ≤ f ⁻¹ᵁ V := fun _ hx ↦ hx.2
+    let hXV : g ⁻¹ᵁ (U ⊓ V) ≤ g ⁻¹ᵁ V := fun _ hx ↦ hx.2
+    let p := K.homOfLE hKV ≫ (f ∣_ V)
+    let t := X.homOfLE hXV ≫ (g ∣_ V)
+    let hr : r ≫ p = t := by
+      apply (cancel_mono V.ι).1
+      dsimp only [r, p, t]
+      simp only [← Category.assoc]
+      rw [Scheme.Hom.resLE_map]
+      simp only [Category.assoc, morphismRestrict_ι]
+      simp only [← Category.assoc]
+      rw [Scheme.Hom.resLE_comp_ι, Scheme.homOfLE_ι,
+        Category.assoc, hgf]
+    (derivedPullback eY.inv).mapIso ((compositionTo r p t hr).app B) ≪≫
+        (compositionTo eY.inv t (eY.inv ≫ t) rfl).app B =
+      (perfectOverlapDerivedPullbackTransport r eY eK m hmap).app
+          ((derivedPullback p).obj B) ≪≫
+        ((derivedPullback m).mapIso
+            ((compositionTo eK.inv p (eK.inv ≫ p) rfl).app B) ≪≫
+          (compositionTo m (eK.inv ≫ p) (eY.inv ≫ t)
+            (by rw [← hr, ← Category.assoc, ← hmap, Category.assoc])).app B) := by
+  intro r m eY eK hKV hXV p t hr
+  exact perfectOverlapTransport_prism r eY eK m hmap p t hr B
+
 end AlgebraicGeometry
