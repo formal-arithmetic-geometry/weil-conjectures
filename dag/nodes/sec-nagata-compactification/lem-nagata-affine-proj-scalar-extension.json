@@ -232,5 +232,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-36b0ee1d9",
+  "group": "NH",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, source, all statement dependencies, every hypothesis and conclusion, edge cases, docstrings, and verbatim signature. Server-only compile reproduced cleanly in 1.4 seconds. No delivery errors found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataAffineProjScalarExtension",
+  "declaration": "AlgebraicGeometry.lem_nagata_affine_proj_scalar_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataAffineProjScalarExtension.lean",
+  "statement": "theorem lem_nagata_affine_proj_scalar_extension {R : Type u} [CommRing R] {S : Type u} [CommRing S] {A : Type u} [CommRing A] {B : Type u} [CommRing B] [Algebra R S] [Algebra R A] [Algebra S B] (𝒜 : ℕ → Submodule R A) (ℬ : ℕ → Submodule S B) [GradedRing 𝒜] [GradedRing ℬ] (ρA : R →+* 𝒜 0) (ρB : S →+* ℬ 0) (hρA : ∀ r : R, (ρA r : A) = algebraMap R A r) (hρB : ∀ s : S, (ρB s : B) = algebraMap S B s) (β : TensorProduct R S A ≃ₐ[S] B) (ψ : 𝒜 →+*ᵍ ℬ) (hβψ : ∀ a : A, β (TensorProduct.tmul R (1 : S) a) = ψ a) (hgraded : ∀ n : ℕ, ℬ n = Submodule.span S (ψ '' (𝒜 n : Set A))) : ∃ (r : Proj ℬ ⟶ Proj 𝒜), CategoryTheory.IsPullback r (Proj.toSpecZero ℬ ≫ Spec.map (CommRingCat.ofHom ρB)) (Proj.toSpecZero 𝒜 ≫ Spec.map (CommRingCat.ofHom ρA)) (Spec.map (CommRingCat.ofHom (algebraMap R S))) ∧ (∀ (n : ℕ) (f : A), f ∈ 𝒜 n → 0 < n → r ⁻¹ᵁ Proj.basicOpen 𝒜 f = Proj.basicOpen ℬ (ψ f)) ∧ (∀ (n : ℕ) (f : A) (hf : f ∈ 𝒜 n) (hn : 0 < n), Proj.awayι ℬ (ψ f) (ψ.map_mem hf) hn ≫ r = Spec.map (CommRingCat.ofHom (HomogeneousLocalization.Away.map ψ f)) ≫ Proj.awayι 𝒜 f hf hn) ∧ (⨆ (p : {p : ℕ × A // p.2 ∈ 𝒜 p.1 ∧ 0 < p.1}), Proj.basicOpen ℬ (ψ p.1.2)) = ⊤ ∧ (∀ r' : Proj ℬ ⟶ Proj 𝒜, (∀ (n : ℕ) (f : A), f ∈ 𝒜 n → 0 < n → r' ⁻¹ᵁ Proj.basicOpen 𝒜 f = Proj.basicOpen ℬ (ψ f)) → (∀ (n : ℕ) (f : A) (hf : f ∈ 𝒜 n) (hn : 0 < n), Proj.awayι ℬ (ψ f) (ψ.map_mem hf) hn ≫ r' = Spec.map (CommRingCat.ofHom (HomogeneousLocalization.Away.map ψ f)) ≫ Proj.awayι 𝒜 f hf hn) → r' = r)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
