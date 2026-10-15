@@ -4,65 +4,42 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E4
 -/
 module
-
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
-import Sheaf.CategoryTheory.SitePullbackAbelianUnderlying
-
+import Sheaf.AlgebraicGeometry.ProEtaleModelRingPresentation
+import Sheaf.CategoryTheory.ModuleInverseImageAdjunction
 /-!
 # Underlying abelian sheaf of the small-model module inverse image
-
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3,
 `sites-modules.tex`, labels `lemma-pullback-module` and `lemma-adjoint-push-pull-modules`.
 (blueprint: lem-weil-pbc-proetale-module-inverse-image-underlying).
 -/
-
 @[expose] public section
-
 universe u
-
 open CategoryTheory
-
 namespace AlgebraicGeometry.Scheme
-
 /-- Forgetting the action on the model-site module pullback gives model-site abelian inverse image.
-
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3,
 `sites-modules.tex`, labels `lemma-pullback-module` and `lemma-adjoint-push-pull-modules`.
 (blueprint: lem-weil-pbc-proetale-module-inverse-image-underlying).
-
 Proof:
-1. Work first on the equivalent sites `proEtaleSiteModel Y` and `proEtaleSiteModel X`.
-   Set inverse image preserves finite products: base change preserves finite limits,
-   its opposite has filtered comma categories, and sheafification preserves finite limits.
-   Transport addition and scalar multiplication by the inverse-product comparisons.
-   Applying the functor to associativity, unit and distributivity equations gives a module
-   over the inverse-image ring. Its underlying abelian sheaf is abelian inverse image:
-   the transported additive operations give the abelian adjunction, so uniqueness of
-   left adjoints identifies it with the constructed abelian sheaf pullback. The same
-   argument for ring operations identifies its ring with the commutative-ring pullback.
-   The down/up site equivalences identify that ring pullback with the down transport of
-   the original ring pullback by uniqueness of left adjoints. Their unit equation identifies
-   the structural ring map with the original unit precomposed with `AsSmall.down.op`.
-2. Let alpha be an abelian morphism from this inverse-image module to a target module,
-   and let beta be its adjunct. The mates of alpha after the inverse-image source action
-   and of the target action after (identity, alpha) are respectively beta after the
-   source action and direct image of the target action after (the ring unit, beta).
-   Naturality of the adjunction unit on the source action and its compatibility with
-   products give these identities. Injectivity of the adjunction bijection proves
-   linearity in both directions. This constructs a module adjunction whose right functor
-   is sectionwise direct image with scalars restricted along the ring adjunction unit.
-3. Mathlib's `SheafOfModules.pullback (proEtaleModelRingUnit f R)` is also left adjoint
-   to that same right functor. Uniqueness of left adjoints therefore identifies it
-   naturally with the action construction from step 1. The ring map is precisely
-   `proEtaleModelRingUnit f R`, since both maps are the original ring unit precomposed
-   with `AsSmall.down.op`; no other structural map is introduced.
-4. Forget the module comparison from step 3 and compose it with the underlying-abelian
-   comparison from step 1. This gives the displayed natural isomorphism on the model sites.
-   The argument uses no nonzero coefficient, nonempty scheme or flat scheme morphism. -/
+1. Transport the original commutative-ring adjunction through the strict AsSmall
+   equivalences and compare its left adjoint with model-site commutative-ring pullback.
+   The uniqueness comparison respects the units. Commuting forgetting with filtered
+   left Kan extension and sheafification identifies the underlying ring sheaf with set
+   inverse image, with unit exactly `proEtaleModelRingUnit f R`.
+2. The same canonical comparison presents the actual abelian inverse image as set
+   inverse image. Product presentations allow maps to be tested on pairs and triples
+   of unit sections. Transport the source scalar action through these presentations.
+   Prove its six module laws and semilinearity of restrictions by testing on unit
+   sections, where the claims reduce to the source module laws and linearity of the
+   abelian unit. The additive carrier is the actual abelian inverse image throughout.
+3. An abelian map out of this module is linear if its adjunct is linear: test its two
+   scalar-action composites on pairs of unit sections. The reverse implication follows
+   by composing with the linear unit. Restricting the abelian hom bijection therefore
+   gives a module adjunction to pushforward restricted along the specified ring unit.
+4. Uniqueness of left adjoints compares this construction with Mathlib's module
+   pullback. Forgetting gives the displayed natural isomorphism. The argument applies
+   also to the empty scheme and the zero ring and requires no flatness of `f`. -/
 theorem proEtaleModelModuleInverseImage_underlying {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     let A := (sheafCompose (ProEt.topology Y)
@@ -79,6 +56,16 @@ theorem proEtaleModelModuleInverseImage_underlying {X Y : Scheme.{u}} (f : X ⟶
       SheafOfModules.toSheaf A' ⋙
         Functor.sheafPullbackConstruction.sheafPullback (proEtaleModelBaseChange f)
           AddCommGrpCat.{u + 1} (proEtaleModelTopology Y) (proEtaleModelTopology X)) := by
-  sorry
-
+  let : (AsSmall.down : proEtaleSiteModel Y ⥤ Y.ProEt).IsEquivalence :=
+    inferInstanceAs (AsSmall.equiv.{u, u + 1, u + 1} (C := Y.ProEt)).inverse.IsEquivalence
+  let : (AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X).IsEquivalence :=
+    inferInstanceAs (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).functor.IsEquivalence
+  let : Limits.PreservesFiniteLimits (proEtaleModelBaseChange f) := by
+    change Limits.PreservesFiniteLimits
+      ((AsSmall.down : proEtaleSiteModel Y ⥤ Y.ProEt) ⋙ proEtaleBaseChange f ⋙ AsSmall.up)
+    infer_instance
+  let : RepresentablyFlat (proEtaleModelBaseChange f) := flat_of_preservesFiniteLimits _
+  obtain ⟨p, hp⟩ := proEtaleModelRingPresentation f R
+  exact SheafOfModules.inverseImage_underlying_of_ring_presentation
+    (proEtaleModelRingUnit f R) p (by ext U r; exact hp U r)
 end AlgebraicGeometry.Scheme

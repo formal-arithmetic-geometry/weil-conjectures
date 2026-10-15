@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-proetale-model-ring-presentation",
+ "kind": "statement",
+ "title": "The transported pro-etale ring unit presents set inverse image",
+ "statement": "Let f:X to Y be any scheme morphism, R a commutative-ring sheaf on the pro-etale site of Y, and A and B its down transports to the model sites before and after the constructed commutative-ring inverse image [def-weil-proetale-inverse-image]. For the model base-change functor there exists a unit presentation [def-weil-pbc-sheaf-pullback-unit-presentation] of the underlying set sheaf of B as inverse image of that of A whose map on source sections is precisely proEtaleModelRingUnit(f,R).",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D3; Pro-etale Cohomology Tag 09A5, opening functoriality paragraph; ring inverse image transported to equivalent small sites, retaining the original unit."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-sheaf-pullback-unit-presentation"
+ ],
+ "proof": [
+  {
+   "text": "The AsSmall up and down functors give strict inverse equivalences on commutative-ring sheaves. Restrict the original pro-etale ring adjunction through their fully faithful functors. Applying the faithful up functor to its unit and using map_restrictFullyFaithful_unit_app identifies the unit as the original commutative-ring unit precomposed with down opposite.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Model base change is the composite of two equivalences and scheme base change, hence preserves finite limits and is representably flat. Its opposite left Kan extensions are filtered. The commutative-ring forgetful functor preserves these extensions and sheafification, so the canonical forgetful comparison applies and respects units.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the transported ring left adjoint with constructed model ring inverse image using leftAdjointUniq. Follow its forgotten component with the canonical comparison from the previous step. The uniqueness unit equation followed by the forgetful unit equation shows this isomorphism carries the specified model ring unit to the set inverse-image unit, which is the required presentation.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
+    "def-weil-pbc-sheaf-pullback-unit-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheaf-pullback-unit-presentation",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D3; Pro-etale Cohomology Tag 09A5, opening functoriality paragraph; ring inverse image transported to equivalent small sites, retaining the original unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The underlying abelian sheaf of pullback of modules over the inverse image ring is the abelian sheaf inverse image",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.pullback; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.pullbackIso; SheafOfModules.pullbackObjFreeIso; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "verdict": "These results supply pullback, restriction, or basic forgetful-functor APIs, but do not give the unit-normalized comparison and varying-ring module action required here."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.toSheaf; SheafOfModules.instFaithfulSheafAddCommGrpCatToSheaf; SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf; SheafOfModules.toSheaf_obj_obj; SheafOfModules.toSheafCompSheafToPresheafIso; SheafOfModules.toSheaf_map_hom; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+   "verdict": "These results supply pullback, restriction, or basic forgetful-functor APIs, but do not give the unit-normalized comparison and varying-ring module action required here."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*underlying|pullback.*toSheaf|toSheaf.*pullback",
+   "date": "2026-10-15",
+   "results": "Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/AlgebraicGeometry/Cover/Over.lean; Mathlib/AlgebraicGeometry/Cover/Over.lean; Mathlib/Topology/Sheaves/Functors.lean; Mathlib/Topology/Sheaves/Functors.lean; Mathlib/CategoryTheory/Sites/RegularEpi.lean; Mathlib/CategoryTheory/Sites/RegularEpi.lean",
+   "verdict": "These results supply pullback, restriction, or basic forgetful-functor APIs, but do not give the unit-normalized comparison and varying-ring module action required here."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafComposeNatTrans_fac|unit_leftAdjointUniq_hom_app|prodComparisonIso|adjunctionOfLinearLifts",
+   "date": "2026-10-15",
+   "results": "Mathlib/CategoryTheory/Limits/Sifted.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "verdict": "Use the canonical sheafification unit equation, uniqueness-of-adjoints unit equation and product comparison APIs in these Mathlib files; the required composite statements are proved in this delivery."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The forgetful functor commutes with sheaf pullback and the adjunction units when it preserves left Kan extensions and sheafification",
+   "date": "2026-10-15",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": "Search service unavailable; no conclusion about absence of a match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite product preserving inverse image transports scalar actions on modules and the adjunction restricts to linear maps",
+   "date": "2026-10-15",
+   "results": "Rep.instIsRightAdjointActionModuleCatRes; Rep.resCoindHomEquiv; ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction_hom_apply_apply; Rep.instIsLeftAdjointActionModuleCatRes; LinearMap.conjugate; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply; LinearEquiv.piRing",
+   "verdict": "These results supply pullback, restriction, or basic forgetful-functor APIs, but do not give the unit-normalized comparison and varying-ring module action required here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-proetale-operations",
+   "place": "Constructive proof of the module inverse-image comparison, preserving the specified ring and abelian adjunction units.",
+   "via": [
+    "lem-weil-pbc-proetale-module-inverse-image-underlying"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModelRingPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModelRingPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleModelRingPresentation",
+  "statement": "theorem proEtaleModelRingPresentation {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :\n    let A := ((AsSmall.down : proEtaleSiteModel Y ⥤ Y.ProEt).sheafPushforwardContinuous\n      CommRingCat.{u + 1} (proEtaleModelTopology Y) (ProEt.topology Y)).obj R\n    let B := ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous\n      CommRingCat.{u + 1} (proEtaleModelTopology X) (ProEt.topology X)).obj\n        ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)\n    ∃ p : SheafPullbackUnitPresentation (F := proEtaleModelBaseChange f)\n      ((sheafCompose (proEtaleModelTopology Y) (CategoryTheory.forget CommRingCat.{u + 1})).obj A)\n      ((sheafCompose (proEtaleModelTopology X) (CategoryTheory.forget CommRingCat.{u + 1})).obj B),\n      ∀ U r, p.unit.hom.app U r = (proEtaleModelRingUnit f R).hom.app U r",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T174645-L-626492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T174645-L-626492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

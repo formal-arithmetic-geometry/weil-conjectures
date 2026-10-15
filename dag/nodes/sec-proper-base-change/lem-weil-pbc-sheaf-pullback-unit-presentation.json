@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-sheaf-pullback-unit-presentation",
+ "kind": "statement",
+ "title": "Maps, products and equality testing for inverse-image unit presentations",
+ "statement": "For unit presentations p of T as L(S) and q of T-prime as L(S-prime) [def-weil-pbc-sheaf-pullback-unit-presentation], two maps out of T agree whenever their composites with p.unit agree on all source sections. If L preserves finite limits, the cartesian product of the two units presents the product of T and T-prime as L of the product of S and S-prime. A map a:S to S-prime transports by the presentation isomorphisms to T to T-prime, and this transported map sends p.unit(x) to q.unit(a(x)).",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV and Modules on Sites Tag 03D2: preservation of algebraic operations by finite-product inverse image; the testing criterion is adjunction injectivity."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheaf-pullback-unit-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the two maps by p.iso.inv and apply injectivity of the set-sheaf adjunction hom equivalence. Its value is precomposition by the unit, so the presentation equation and the assumed equalities on sections prove equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For products use the product of the presentation isomorphisms followed by the inverse finite-product comparison of L. After applying the forward comparison, the two components of the unit equation are naturality of the adjunction unit at the two projections and the two input presentation equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define the transported map by i_p followed by L(a) followed by i_q inverse. Substitute the presentation equation for p, use naturality of the unit at a, then the inverse of the presentation equation for q.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV and Modules on Sites Tag 03D2: preservation of algebraic operations by finite-product inverse image; the testing criterion is adjunction injectivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The underlying abelian sheaf of pullback of modules over the inverse image ring is the abelian sheaf inverse image",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.pullback; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.pullbackIso; SheafOfModules.pullbackObjFreeIso; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "verdict": "These results supply pullback, restriction, or basic forgetful-functor APIs, but do not give the unit-normalized comparison and varying-ring module action required here."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.toSheaf; SheafOfModules.instFaithfulSheafAddCommGrpCatToSheaf; SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf; SheafOfModules.toSheaf_obj_obj; SheafOfModules.toSheafCompSheafToPresheafIso; SheafOfModules.toSheaf_map_hom; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+   "verdict": "These results supply pullback, restriction, or basic forgetful-functor APIs, but do not give the unit-normalized comparison and varying-ring module action required here."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*underlying|pullback.*toSheaf|toSheaf.*pullback",
+   "date": "2026-10-15",
+   "results": "Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/AlgebraicGeometry/Cover/Over.lean; Mathlib/AlgebraicGeometry/Cover/Over.lean; Mathlib/Topology/Sheaves/Functors.lean; Mathlib/Topology/Sheaves/Functors.lean; Mathlib/CategoryTheory/Sites/RegularEpi.lean; Mathlib/CategoryTheory/Sites/RegularEpi.lean",
+   "verdict": "These results supply pullback, restriction, or basic forgetful-functor APIs, but do not give the unit-normalized comparison and varying-ring module action required here."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafComposeNatTrans_fac|unit_leftAdjointUniq_hom_app|prodComparisonIso|adjunctionOfLinearLifts",
+   "date": "2026-10-15",
+   "results": "Mathlib/CategoryTheory/Limits/Sifted.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "verdict": "Use the canonical sheafification unit equation, uniqueness-of-adjoints unit equation and product comparison APIs in these Mathlib files; the required composite statements are proved in this delivery."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The forgetful functor commutes with sheaf pullback and the adjunction units when it preserves left Kan extensions and sheafification",
+   "date": "2026-10-15",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": "Search service unavailable; no conclusion about absence of a match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite product preserving inverse image transports scalar actions on modules and the adjunction restricts to linear maps",
+   "date": "2026-10-15",
+   "results": "Rep.instIsRightAdjointActionModuleCatRes; Rep.resCoindHomEquiv; ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction_hom_apply_apply; Rep.instIsLeftAdjointActionModuleCatRes; LinearMap.conjugate; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply; LinearEquiv.piRing",
+   "verdict": "These results supply pullback, restriction, or basic forgetful-functor APIs, but do not give the unit-normalized comparison and varying-ring module action required here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-proetale-operations",
+   "place": "Constructive proof of the module inverse-image comparison, preserving the specified ring and abelian adjunction units.",
+   "via": [
+    "lem-weil-pbc-proetale-module-inverse-image-underlying"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SheafPullbackUnitPresentation",
+  "file": "lean/Sheaf/CategoryTheory/SheafPullbackUnitPresentation.lean",
+  "declaration": "CategoryTheory.SheafPullbackUnitPresentation.hom_ext",
+  "statement": "theorem hom_ext (p : SheafPullbackUnitPresentation (F := F) S T)\n    {Z : Sheaf K (Type u)} (a b : T ⟶ Z)\n    (h : ∀ U x, a.hom.app (F.op.obj U) (p.unit.hom.app U x) =\n      b.hom.app (F.op.obj U) (p.unit.hom.app U x)) : a = b",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16",
+  "declarations": [
+   "CategoryTheory.SheafPullbackUnitPresentation.tensor",
+   "CategoryTheory.SheafPullbackUnitPresentation.map",
+   "CategoryTheory.SheafPullbackUnitPresentation.map_unit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T174645-L-626492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T174645-L-626492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
