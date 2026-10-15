@@ -3,29 +3,140 @@
  "blueprint": {
   "is": "def-pur-co-smoothness",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Cohomological smoothness",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\na separated finite-type\nmorphism $f:X\\to Y$ is *cohomologically smooth* if:\n\n1. $\\omega_f=Rf^!\\Lambda_Y$ is tensor-invertible;\n1. for every $K\\in D^b_{ctf}(Y,\\Lambda)$ the canonical map\n(the mate of the projection formula of\n[def-exchange-projection] with the adjunction counit)\n$$\n\\theta_{f,K}:Lf^*K\\otimes^L_{\\Lambda_X}\\omega_f\n\\longrightarrow Rf^!K\n$$\nis an isomorphism;\n1. for every Cartesian square\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{\\ g'\\ }&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{\\ g\\ }&Y,\n\\end{array}\n$$\nthe canonical base-change map\n$Lg'^*\\omega_f\\to\\omega_{f'}$ is an isomorphism.\n\nAt this stage no isomorphism $\\omega_f\\simeq\\Lambda_X(d)[2d]$ is part\nof the definition.",
+ "statement": "Fix a prime $p$, an integer $a\\geq1$, and $q=p^a$, a field $k_0$\nwith $q$ elements, and an algebraic closure $k$ of $k_0$, as in the\nglobal finite-field datum [def-weil-finite-field-fiber]. In the purity\nconventions [def-pur-conventions], fix a prime $\\ell\\ne p$, a finite\nextension $E/\\mathbf Q_\\ell$ inside a fixed algebraic closure, its\nvaluation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and an integer\n$n\\geq1$. Put $\\Lambda=A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$; thus $\\ell$\nis invertible on the schemes in sight. Work on the small pro-etale sites\n[def-weil-pbc-proetale-site] of finite-type $k$-schemes [def-weil-finite-type-morphism]. Use the derived\npullback and tensor [def-weil-derived-pullback-tensor-hom],\n[def-weil-derived-tensor], the category $D^b_{ctf}$ of bounded constructible\ncomplexes of finite Tor amplitude [def-weil-finite-tor-amplitude], the\ncompact-support direct image [def-compact-support-direct-image-detailed],\nand its constructible exceptional right adjoint $Rf^!$\n[def-weil-exceptional-inverse-image]. Let $f:X\\to Y$ be separated and of\nfinite type [def-weil-scheme-morphism-properties], with separatedness\ndefined in [def-weil-proper-morphism] and finite type in\n[def-weil-finite-type-morphism], and put\n$\\omega_f=Rf^!\\Lambda_Y$, where $\\Lambda_Y$ is the constant coefficient\nsheaf in degree zero. Write $\\varepsilon_f:Rf_!Rf^!\\to\\operatorname{id}$\nfor the adjunction counit.\n\nThe morphism $f$ is *cohomologically smooth* if all three conditions hold:\n\n1. The object $\\omega_f$ is tensor-invertible: there exists\n$M\\in D^b_{ctf}(X,\\Lambda)$ with\n$\\omega_f\\otimes^L_{\\Lambda_X}M\\cong\\Lambda_X$ and\n$M\\otimes^L_{\\Lambda_X}\\omega_f\\cong\\Lambda_X$.\n2. For every $K\\in D^b_{ctf}(Y,\\Lambda)$ the specified canonical map\n$$\n\\theta_{f,K}:Lf^*K\\otimes^L_{\\Lambda_X}\\omega_f\\longrightarrow Rf^!K\n$$\nis an isomorphism. It is the adjoint transpose under $Rf_!\\dashv Rf^!$\nof the composite\n$$\n\\begin{aligned}\nRf_!(Lf^*K\\otimes^L\\omega_f)\n&\\xrightarrow{\\sim}Rf_!(\\omega_f\\otimes^LLf^*K)\n\\xrightarrow{\\operatorname{PF}_{f,\\omega_f,K}^{-1}}\nRf_!\\omega_f\\otimes^LK\\\\\n&\\xrightarrow{\\varepsilon_{f,\\Lambda_Y}\\otimes\\operatorname{id}}\n\\Lambda_Y\\otimes^LK\\xrightarrow{\\sim}K.\n\\end{aligned}\n$$\nHere the first arrow is tensor symmetry; $\\operatorname{PF}$ is the\ntransformation [def-exchange-projection], whose invertibility on this\ndomain is [fix-prop-projection-formula].\n3. For every compact-support Cartesian square [def-cbc-compact-support-square]\n(and hence [def-weil-pbc-cartesian-square]) in this setting, with $g$\narbitrary,\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y,\n\\end{array}\n$$\nthe specified canonical map\n$$\n\\beta_{f,g}:Lg'^*\\omega_f\\longrightarrow\\omega_{f'}=Rf'^!\\Lambda_{Y'}\n$$\nis an isomorphism. It is the adjoint transpose under\n$Rf'_!\\dashv Rf'^!$ of\n$$\nRf'_!Lg'^*\\omega_f\n\\xrightarrow{\\operatorname{Ex}_!(\\omega_f)^{-1}}\nLg^*Rf_!\\omega_f\n\\xrightarrow{Lg^*\\varepsilon_{f,\\Lambda_Y}}\nLg^*\\Lambda_Y\\xrightarrow{\\sim}\\Lambda_{Y'}.\n$$\nThe exchange map in this composite is the transported pro-etale map of\n[def-cbc-exchange-map]. The constructible exceptional functor above is\ntransported from the etale one, so $\\omega_f$ has an etale-origin witness\n[def-weil-pbc-etale-origin-witness];\n[thm-cbc-finite-level-proetale] says that the exchange map is an\nisomorphism and is unchanged under replacing that witness by an\nisomorphic one.\n\nNo smoothness or dimension is assumed in this definition, and no\nidentification $\\omega_f\\cong\\Lambda_X(d)[2d]$ is part of it.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-pur-co-smoothness.md",
   "place": "node def-pur-co-smoothness, order 1896"
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "def-exchange-projection",
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-proetale-site",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-derived-tensor",
-  "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-finite-tor-amplitude",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-scheme-morphism-properties",
+  "def-exchange-projection",
+  "fix-prop-projection-formula",
+  "def-weil-pbc-cartesian-square",
+  "def-cbc-compact-support-square",
+  "def-cbc-exchange-map",
+  "thm-cbc-finite-level-proetale",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-etale-origin-witness"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type morphism of schemes is cohomologically smooth when its dualizing complex is tensor invertible, the projection formula mate is an isomorphism, and its dualizing complex commutes with arbitrary base change",
+   "results": "A geometric smoothness predicate and scheme morphism properties; none defines the three cohomological conditions.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologically\"",
+   "results": "No declarations matched the substring cohomologically.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomolog.*smooth|CohomologicallySmooth|dualizingComplex",
+   "results": "No source matches.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomologically smooth morphism exceptional inverse image tensor invertible dualizing complex",
+   "results": "LeanSearch returned Internal Server Error; unavailable.",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological smoothness in a six functor formalism: invertible relative dualizing object and canonical extraordinary pullback tensor formula stable under base change",
+   "results": "Underived sheaf/module pullback coherence, unit pullback, and geometric smooth base change; none defines cohomological smoothness.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\"",
+   "results": "ContinuousLinearMap.IsInvertible and its inverse/bijectivity results concern continuous linear maps, not invertibility of derived tensor objects or exceptional pullback.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isInvertible|IsInvertible|exceptional.*pullback|extraordinary",
+   "results": "No source matches in CategoryTheory. Subdirectory: CategoryTheory",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTensorInvertible\"",
+   "results": "No declarations matched IsTensorInvertible.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CohomologicalSmooth|cohomological.*smooth|dualizing|Dualizing",
+   "results": "Ten textual hits, all unrelated uses of dualizing (category-theoretic duals, homotopy or analysis); no cohomological smoothness predicate or relative dualizing complex.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A predicate on a morphism in a six operations formalism: extraordinary inverse image of the tensor unit is invertible, and the counit mates for tensor product and arbitrary base change are isomorphisms",
+   "results": "Eight hits: reflective monoidal adjunction equivalences, exponentiable morphisms and rigid tensor adjunctions. None defines this exceptional-inverse-image predicate or its three conditions.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A predicate for a morphism with tensor-invertible exceptional inverse image and projection formula and base change isomorphisms",
+   "results": "CategoryTheory.ObjectProperty.isLocal_trW; CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated; CategoryTheory.ObjectProperty.instHasRightCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated; CategoryTheory.Triangulated.Subcategory.W; CategoryTheory.ObjectProperty.instIsCompatibleWithTriangulationTrWOfIsTriangulatedOfIsTriangulated; CategoryTheory.Triangulated.Subcategory.W_iff'; CategoryTheory.ObjectProperty.isColocal_trW; CategoryTheory.ObjectProperty.trW_iff'. None defines cohomological smoothness.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism whose extraordinary inverse image is tensoring ordinary pullback with an invertible object, compatibly with arbitrary Cartesian base change",
+   "results": "Eight hits for Scheme.Modules pullback, its adjunction, composition and coherence. These are underived structure-sheaf module functors, not exceptional inverse image or this three-condition predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohomologicallySmooth\"",
+   "results": "Zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomolog.{0,30}smooth|extraordinary.{0,30}inverse|exceptional.{0,30}inverse",
+   "results": "Zero source hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -57,5 +168,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv"
+ "unit": "sk-def-purity-conv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-pur-co-smoothness",
+  "worker": "stage1",
+  "summary": "Expanded the source definition using existing notions and the specified counit transposes; no proof steps or new nodes. Independent second reading checked the three clauses, all fifteen original dependency statements, and three further existing definition statements. Added direct definition references for finite type, separatedness and etale-origin witnesses because the scheme-properties collector defines no notion itself. Ran fresh LeanFinder, Loogle and Mathlib source searches and recorded their actual results; no exact declaration found. The mathematical conditions and canonical maps are unchanged. Stage 1 only; no Lean or compilation.",
+  "blueprint": "Definition def-pur-co-smoothness, clauses 1-3: tensor invertibility, canonical projection-formula mate, and canonical relative-dualizing base-change map. There is no proof to realize for this definition; the ambient unit sk-def-purity-conv has no proof steps. Its other notions are realized by its other existing definition nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-2b5379cd4",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-2b5379cd4 (reviewer sub-agent of L); spot-checked: Read the full definition, all eighteen cited dependency statements, master source locations, report, and unit/chapter route. Both canonical mates have correct directions and justified inverse arrows; finite coefficients, finite-Tor hypotheses, and arbitrary base change are preserved. Small cases pass. No new nodes, duplicates, or dependency path back to the item. Detailed checks are in review.md; no repairs needed."
+ }
 }
