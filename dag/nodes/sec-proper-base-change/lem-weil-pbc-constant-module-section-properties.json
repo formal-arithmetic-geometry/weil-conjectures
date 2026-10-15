@@ -155,5 +155,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d71203fea",
+  "group": "NW",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all clauses, dependencies, source hypotheses, edge cases, docstrings, immutable blobs, and verbatim signature. Server-only compile passed in 2.6 seconds with no diagnostics. No delivery errors or fixes; no repository or branch changes performed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantModuleSectionProperties",
+  "declaration": "CategoryTheory.constantModule_section_properties",
+  "file": "lean/Sheaf/Paper/ConstantModuleSectionProperties.lean",
+  "statement": "theorem constantModule_section_properties {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Type (u)) [CommRing R] [IsNoetherianRing R] : (∀ (A B D : ModuleCat.{u} R) (f : A ⟶ B) (g : B ⟶ D), Function.Injective f → Function.Exact f g → Function.Surjective g → ∀ U : C, Function.Injective (((constantSheaf J (ModuleCat.{u} R)).map f).hom.app (op U)) ∧ Function.Exact (((constantSheaf J (ModuleCat.{u} R)).map f).hom.app (op U)) (((constantSheaf J (ModuleCat.{u} R)).map g).hom.app (op U)) ∧ Function.Surjective (((constantSheaf J (ModuleCat.{u} R)).map g).hom.app (op U))) ∧ (∃ e : ∀ (M Q : ModuleCat.{u} R), Module.FinitePresentation R Q → ∀ U : C, (((constantSheaf J (ModuleCat.{u} R)).obj M).obj.obj (op U) ⊗[R] Q) ≃ₗ[R] ((constantSheaf J (ModuleCat.{u} R)).obj (ModuleCat.of R (M ⊗[R] Q))).obj.obj (op U), (∀ (M Q : ModuleCat.{u} R) (hQ : Module.FinitePresentation R Q) (U : C) (s : ((constantSheaf J (ModuleCat.{u} R)).obj M).obj.obj (op U)) (q : Q), e M Q hQ U (s ⊗ₜ[R] q) = (((constantSheaf J (ModuleCat.{u} R)).map (ModuleCat.ofHom ((TensorProduct.mk R M Q).flip q))).hom.app (op U)) s) ∧ (∀ (M M' Q Q' : ModuleCat.{u} R) (hQ : Module.FinitePresentation R Q) (hQ' : Module.FinitePresentation R Q') (f : M ⟶ M') (g : Q ⟶ Q') (U : C) (z : ((constantSheaf J (ModuleCat.{u} R)).obj M).obj.obj (op U) ⊗[R] Q), e M' Q' hQ' U (TensorProduct.map (((constantSheaf J (ModuleCat.{u} R)).map f).hom.app (op U)).hom g.hom z) = (((constantSheaf J (ModuleCat.{u} R)).map (ModuleCat.ofHom (TensorProduct.map f.hom g.hom))).hom.app (op U)) (e M Q hQ U z)) ∧ (∀ (M Q : ModuleCat.{u} R) (hQ : Module.FinitePresentation R Q) (U V : C) (h : V ⟶ U) (z : ((constantSheaf J (ModuleCat.{u} R)).obj M).obj.obj (op U) ⊗[R] Q), e M Q hQ V (TensorProduct.map (((constantSheaf J (ModuleCat.{u} R)).obj M).obj.map h.op).hom (LinearMap.id : Q →ₗ[R] Q) z) = (((constantSheaf J (ModuleCat.{u} R)).obj (ModuleCat.of R (M ⊗[R] Q))).obj.map h.op) (e M Q hQ U z))) ∧ (∀ (M : ModuleCat.{u} R), Module.Flat R M → ∀ U : C, Module.Flat R (((constantSheaf J (ModuleCat.{u} R)).obj M).obj.obj (op U)))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
