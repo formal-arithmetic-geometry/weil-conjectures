@@ -1,6 +1,6 @@
 # Work queue
 
-31 items; claim with `tools/claim.py next <group> [--stage N]`.
+39 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (31)
+## Stage 3: modules to prove (39)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -22,22 +22,30 @@
 | `Sheaf.Paper.FiniteDiscreteExchangeComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueExchange` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
+| `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedCoefficientComplexModel` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedLfpCoefficientModel` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedLocalPieceHomContinuity` | 6 | 1 | proof |
+| `Sheaf.Paper.CondensedQcqsPushforwardLocalComparison` | 6 | 1 | proof |
+| `WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic` | 6 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishing` | 7 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarLfpMatrixRefinement` | 7 | 1 | proof |
-| `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStep` | 7 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension` | 7 | 1 | proof |
+| `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 7 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionAdjunction` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 8 | 1 | proof |
-| `Sheaf.Paper.CondensedQcqsPushforwardLocalComparison` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleRingedLocalizationSequence` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleComparisonMatchingTransport` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnitComparison` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit` | 10 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 10 | 1 | proof |
