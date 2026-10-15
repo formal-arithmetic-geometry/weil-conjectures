@@ -20,7 +20,7 @@
  },
  "kind": "statement",
  "title": "Quasi-coherent etale cohomology comparison natural in scheme pullback",
- "statement": "Let $X,Y$ be quasi-compact separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions], $g:Y\\to X$ a scheme morphism, and $F$ and $G$ quasi-coherent modules on $X$ and $Y$ respectively [pqf-def-coherent, def-weil-sheaf-of-modules-category]. Let $F_{\\mathrm{et}},G_{\\mathrm{et}}$ be their associated additive etale sheaves [def-sc-etale-qcoherent-module]. Fix either the identity coefficient operation $L$, or sectionwise $\\operatorname{ULift}$ into a common larger coefficient universe, transporting addition and applying the same operation to every restriction map. For every $q\\ge0$ there are canonical additive isomorphisms\n$$c^q_{X,F}:H^q(X_{\\mathrm{et}},L(F_{\\mathrm{et}}))\\xrightarrow{\\sim}H^q(X,F),$$\nwhere the right side is Zariski module cohomology [pqf-def-cohomology] and the left side is abelian etale cohomology [def-weil-pbc-etale-cohomology]. In degree zero $c^0$ is identity on sections, or $\\operatorname{ULift.down}$ if $L$ is a lift. These isomorphisms are simultaneous for all such schemes and modules and natural as follows. For every module morphism $\\psi:g^*F\\to G$ [def-pc-module-pullback], let $\\psi_{\\mathrm{et}}:g^{-1}L(F_{\\mathrm{et}})\\to L(G_{\\mathrm{et}})$ be adjoint to the sectionwise map sending a section on an etale $U\\to X$ to its structural pullback on $U\\times_XY$, followed by the pullback of $\\psi$. Then\n$$c^q_{Y,G}\\circ H^q(\\psi_{\\mathrm{et}})\\circ g_{\\mathrm{et}}^*=\\psi_{\\mathrm{Zar}}^*\\circ c^q_{X,F},$$\nwhere $g_{\\mathrm{et}}^*$ is [def-weil-pbc-cohomology-pullback] and $\\psi_{\\mathrm{Zar}}^*$ is the module cohomology map of the adjoint $F\\to g_*G$ [def-weil-pbc-module-cohomology-fmap]. In particular, for $g=\\mathrm{id}$ and multiplication by $a\\in\\Gamma(X,\\mathcal O_X)$ these comparisons intertwine multiplication by $a$ on both cohomology groups (or by its lift on the left).",
+ "statement": "Let $X,Y$ be quasi-compact separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions], $g:Y\\to X$ a scheme morphism, and $F$ and $G$ quasi-coherent modules on $X$ and $Y$ respectively [pqf-def-coherent, def-weil-sheaf-of-modules-category]. Let $F_{\\mathrm{et}},G_{\\mathrm{et}}$ be their associated additive etale sheaves [def-sc-etale-qcoherent-module]. Fix the size convention [def-weil-size-convention]: for schemes in universe $u$, use the common coefficient category $\\mathrm{AddCommGrp}_{u+1}$ of the recorded inverse-image and cohomology-pullback functors. Set $L$ to sectionwise $\\operatorname{ULift}^{u+1}$, transporting addition and every restriction map. This is the common-lift formulation of the source comparison, rather than quantification over the identity and arbitrary further coefficient-universe lifts. For every $q\\ge0$ there are canonical additive isomorphisms\n$$c^q_{X,F}:H^q(X_{\\mathrm{et}},L(F_{\\mathrm{et}}))\\xrightarrow{\\sim}H^q(X,F),$$\nwhere the right side is Zariski module cohomology [pqf-def-cohomology] and the left side is abelian etale cohomology [def-weil-pbc-etale-cohomology]. In degree zero $c^0$ is $\\operatorname{ULift.down}$ on sections, using the canonical tensor-pullback unit to identify sections on the terminal etale object and the degree-zero right-derived global-sections comparison. These isomorphisms are simultaneous for all such schemes and modules and natural as follows. For every module morphism $\\psi:g^*F\\to G$ [def-pc-module-pullback], let $\\psi_{\\mathrm{et}}:g^{-1}L(F_{\\mathrm{et}})\\to L(G_{\\mathrm{et}})$ be adjoint to the sectionwise map sending a section on an etale $U\\to X$ to its structural pullback on $U\\times_XY$, followed by the pullback of $\\psi$. Then\n$$c^q_{Y,G}\\circ H^q(\\psi_{\\mathrm{et}})\\circ g_{\\mathrm{et}}^*=\\psi_{\\mathrm{Zar}}^*\\circ c^q_{X,F},$$\nwhere $g_{\\mathrm{et}}^*$ is [def-weil-pbc-cohomology-pullback] and $\\psi_{\\mathrm{Zar}}^*$ is the module cohomology map of the adjoint $F\\to g_*G$ [def-weil-pbc-module-cohomology-fmap]. In particular, for $g=\\mathrm{id}$ and multiplication by $a\\in\\Gamma(X,\\mathcal O_X)$ these comparisons intertwine multiplication by $a$ on both cohomology groups (or by its lift on the left). The lifted associated sheaf and module-morphism action are the constructions recorded in [def-pbc-canonical-coherent-etale-comparison]; only those constructions are used here, with no properness or base-field restriction.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 03P2, label theorem-zariski-fpqc-quasi-coherent, separated-case affine-cover proof; canonical comparison naturality and its sectionwise coefficient-universe lift"
@@ -35,7 +35,9 @@
   "def-weil-pbc-etale-cohomology",
   "def-pc-module-pullback",
   "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-module-cohomology-fmap"
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-size-convention",
+  "def-pbc-canonical-coherent-etale-comparison"
  ],
  "proof": [
   {
@@ -300,5 +302,57 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-d430f774b (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked 03P2, 03AX/03F9, 01EQ/01FD, ringed-site normalization, and archived master target coefficients and exchange direction. Repaired C1/C4 localization citations, B3 total-complex convention/dependency, and incomplete new-node metadata. Six steps and the sole new node pass edge-case and duplicate checks; corrected dependency closure is acyclic. Whole corrected JSON files and detailed review.md are written.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-02cf152a0",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, source passages, clauses, edge cases, canonical constructions, universe correction, sole citer, and verbatim signature. Server-only compilation passed in 4.9 seconds without diagnostics. No delivery defects found; snapshot and branch head unchanged.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "NA stage 2",
+  "old_statement": "Let $X,Y$ be quasi-compact separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions], $g:Y\\to X$ a scheme morphism, and $F$ and $G$ quasi-coherent modules on $X$ and $Y$ respectively [pqf-def-coherent, def-weil-sheaf-of-modules-category]. Let $F_{\\mathrm{et}},G_{\\mathrm{et}}$ be their associated additive etale sheaves [def-sc-etale-qcoherent-module]. Fix either the identity coefficient operation $L$, or sectionwise $\\operatorname{ULift}$ into a common larger coefficient universe, transporting addition and applying the same operation to every restriction map. For every $q\\ge0$ there are canonical additive isomorphisms\n$$c^q_{X,F}:H^q(X_{\\mathrm{et}},L(F_{\\mathrm{et}}))\\xrightarrow{\\sim}H^q(X,F),$$\nwhere the right side is Zariski module cohomology [pqf-def-cohomology] and the left side is abelian etale cohomology [def-weil-pbc-etale-cohomology]. In degree zero $c^0$ is identity on sections, or $\\operatorname{ULift.down}$ if $L$ is a lift. These isomorphisms are simultaneous for all such schemes and modules and natural as follows. For every module morphism $\\psi:g^*F\\to G$ [def-pc-module-pullback], let $\\psi_{\\mathrm{et}}:g^{-1}L(F_{\\mathrm{et}})\\to L(G_{\\mathrm{et}})$ be adjoint to the sectionwise map sending a section on an etale $U\\to X$ to its structural pullback on $U\\times_XY$, followed by the pullback of $\\psi$. Then\n$$c^q_{Y,G}\\circ H^q(\\psi_{\\mathrm{et}})\\circ g_{\\mathrm{et}}^*=\\psi_{\\mathrm{Zar}}^*\\circ c^q_{X,F},$$\nwhere $g_{\\mathrm{et}}^*$ is [def-weil-pbc-cohomology-pullback] and $\\psi_{\\mathrm{Zar}}^*$ is the module cohomology map of the adjoint $F\\to g_*G$ [def-weil-pbc-module-cohomology-fmap]. In particular, for $g=\\mathrm{id}$ and multiplication by $a\\in\\Gamma(X,\\mathcal O_X)$ these comparisons intertwine multiplication by $a$ on both cohomology groups (or by its lift on the left).",
+  "what": "The original quantification over identity coefficients AddCommGrpCat.{u} and arbitrary larger lifts does not type with the recorded Etale.cohomologyMap, whose Scheme.{u} coefficient category is AddCommGrpCat.{u+1}. Following the explicit human size-repair authorization, record the common u+1 lift used by the canonical etale comparison; normalize it by ULift.down. Identity coefficients and arbitrary larger lifts are explicitly removed from this formulation, not silently specialized. No geometric hypothesis or cohomological conclusion is changed in the common-lift formulation.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 03P2, theorem-zariski-fpqc-quasi-coherent; size convention def-weil-size-convention; common-lift encoding expressly authorized by the human on 2026-10-15"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "holds": true,
+    "note": "Uses comparison for the etale structure sheaves in the same coefficient universe as direct image and Artin–Schreier; the common u+1 lift supplies exactly this case."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-weil-pbc-scheme-conventions",
+   "pqf-def-coherent",
+   "def-weil-sheaf-of-modules-category",
+   "def-sc-etale-qcoherent-module",
+   "pqf-def-cohomology",
+   "def-weil-pbc-etale-cohomology",
+   "def-pc-module-pullback",
+   "def-weil-pbc-cohomology-pullback",
+   "def-weil-pbc-module-cohomology-fmap"
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcoherentCohomologyComparisonPullback",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_qcoherentCohomologyComparisonPullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.qcoherentPullbackSection",
+   "AlgebraicGeometry.Scheme.Modules.exists_qcoherentCohomologyComparisonPullback"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QcoherentCohomologyComparisonPullback.lean",
+  "statement": "theorem exists_qcoherentCohomologyComparisonPullback : ∃ c : ∀ (X : Scheme.{u}) [CompactSpace X] [Scheme.IsSeparated X] (F : X.Modules) [F.IsQuasicoherent] (q : ℕ), Sheaf.H (liftedCoherentEtaleSheaf F) q ≃+ ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F), (∀ (X : Scheme.{u}) [CompactSpace X] [Scheme.IsSeparated X] (F : X.Modules) [F.IsQuasicoherent] (s : Γ(F, ⊤)), c X F 0 ((Sheaf.H.equiv₀ (liftedCoherentEtaleSheaf F) terminalIsTerminal).symm (ULift.up (tensorSectionsUnit (⊤_ X.Etale).hom F s))) = (RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app F s) ∧ (∀ (X Y : Scheme.{u}) [CompactSpace X] [Scheme.IsSeparated X] [CompactSpace Y] [Scheme.IsSeparated Y] (g : Y ⟶ X) (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] (ψ : (tensorPullback g).obj F ⟶ G), ∃ θ : liftedCoherentEtaleSheaf F ⟶ (Etale.lowerStar AddCommGrpCat.{u + 1} g).obj (liftedCoherentEtaleSheaf G), (∀ (U : X.Etale) (s : (etaleTensorSectionsSheaf F).obj.obj (op U)), θ.hom.app (op U) (ULift.up s) = ULift.up (qcoherentPullbackSection g F G ψ U ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).obj U) (pullback.fst U.hom g) (pullback.condition) s)) ∧ ∀ (q : ℕ) (x : Sheaf.H (liftedCoherentEtaleSheaf F) q), c Y G q (Sheaf.H.map ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).homEquiv (liftedCoherentEtaleSheaf F) (liftedCoherentEtaleSheaf G) |>.symm θ) q (Etale.cohomologyMap g (liftedCoherentEtaleSheaf F) q x)) = moduleCohomologyFMap g ((Classical.choose (exists_tensorPullbackAdjunction g)).homEquiv F G ψ) q (c X F q x)) ∧ (∀ (X : Scheme.{u}) [CompactSpace X] [Scheme.IsSeparated X] (F : X.Modules) [F.IsQuasicoherent] (a : Γ(X, ⊤)) (q : ℕ) (x : Sheaf.H (liftedCoherentEtaleSheaf F) q), c X F q (Sheaf.H.map (coherentEtaleMap F F (F.smulHom a)) q x) = (RingedSpace.moduleCohomology X.toRingedSpace q).map (F.smulHom a) (c X F q x))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
