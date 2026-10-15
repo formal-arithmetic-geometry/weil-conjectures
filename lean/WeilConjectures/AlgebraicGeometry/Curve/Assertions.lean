@@ -31,7 +31,7 @@ The proof of proper base change for the projective line rests on eight assertion
 They are bundled in `AlgebraicGeometry.IsCurve.Assertions`. The coefficient sheaf is a
 sheaf of `Λ`-modules and `Hᵠ(X, F)` is the cohomology of its underlying abelian sheaf; the
 torsion conditions are conditions on the geometric stalks
-(`AlgebraicGeometry.Scheme.IsTorsionSheaf`,
+(`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf`,
 `AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder`). The field extension in `C₆` and
 `C₇` is given by an arbitrary cartesian square
 
@@ -51,6 +51,12 @@ Spec k' -ι-> Spec k
   `AlgebraicGeometry.IsCurve.SurjectiveRestrictionTwo`: the eight assertions `C₁, …, C₈`, each
   as a separate predicate.
 - `AlgebraicGeometry.IsCurve.Assertions`: the conjunction `C(X, F)` of the eight assertions.
+
+The constructibility hypothesis of `C₄` and `C₅` (blueprint: `def-weil-pbc-constructible-torsion`)
+is `AlgebraicGeometry.Scheme.IsConstructibleSheaf`: a finite stratification of `X` by locally
+closed constructible subschemes on each of which `F` is locally constant with finite stalks.
+The pullback map of `C₆` and `C₇` (blueprint: `def-weil-pbc-extension-pullback`) is
+`AlgebraicGeometry.Etale.cohomologyMap`.
 
 ## Main statements
 

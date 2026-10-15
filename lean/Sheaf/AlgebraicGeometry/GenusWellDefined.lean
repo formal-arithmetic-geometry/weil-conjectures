@@ -6,13 +6,13 @@ Authors: SHEAF group P1
 module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
-import Sheaf.AlgebraicGeometry.Variety
+import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
@@ -61,7 +61,7 @@ independent families stay independent after extending scalars.
 -/
 theorem genus_well_defined (k : Type u) [Field k] (X : Scheme.{u})
     [X.Over (Spec (.of k))]
-    [Scheme.Hom.IsSmoothProjectiveCurve (X ↘ Spec (.of k))]
+    [IsSmoothProjectiveCurve (X ↘ Spec (.of k))]
     [GeometricallyIrreducible (X ↘ Spec (.of k))] :
     FiniteDimensional k
       (Scheme.Modules.scalarCohomology (f := X ↘ Spec (.of k))

@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.ClopenSmoothProper
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Sheaf.AlgebraicGeometry.GlobalSectionsProperVariety
 import Sheaf.AlgebraicGeometry.GlobalSectionsSeparable
-import Sheaf.AlgebraicGeometry.Variety
+import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import Sheaf.FieldTheory.SeparableTensorAlgebraicClosure
 import Sheaf.Paper.EulerCharacteristicWellDefined
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
@@ -51,7 +51,7 @@ Euler-characteristic degree. It uses `lem-pc-projective-proper`,
 -/
 theorem baseChange_closure_components
     (k : Type u) [Field k] {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) [f.IsSmoothProjectiveCurve]
+    (f : X ⟶ Spec (.of k)) [IsSmoothProjectiveCurve f]
     (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω] :
     letI := f.ΓAlgebra
     letI : X.Over (Spec (.of k)) := ⟨f⟩

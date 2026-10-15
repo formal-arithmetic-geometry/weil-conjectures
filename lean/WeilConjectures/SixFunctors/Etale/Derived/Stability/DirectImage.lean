@@ -280,6 +280,47 @@ lemma constructibleFiniteTor_mapDerivedCategory_upperStar {X Y : Scheme.{u}} (f 
       ((leftDerivedUpperStarIsoMapDerivedCategory _ f).app N)
       (torAmplitudeIn_leftDerivedUpperStar _ f c d hcd)⟩
 
+section DualizingHom
+
+variable [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
+  [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] [HasCompactification a]
+
+include a in
+/-- Blueprint `cor-weil-finite-constructible-hom`: Internal Hom for arbitrary finite-stage
+constructible complexes.
+
+For `X` separated of finite type over a field `k` with `dim X ≤ d`, a finite coefficient ring `Λ`
+whose exponent is invertible on `k`, and `K, L ∈ Dctf(X, Λ)` with Tor intervals `[p, q]` and
+`[r, s]`, the internal hom `RHom(K, L)` is bounded constructible with Tor amplitude in
+`[r - q - 2d, s - p + 2d]`. As in the blueprint, `RHom(K, L) ≅ 𝔻_X(𝔻_X L ⊗ᴸ K)` by biduality
+(`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`), and `𝔻_X` carries the Tor
+interval `[r, s]` into `[-s - 2d, -r]` (`AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual`). -/
+theorem constructibleFiniteTor_derivedHom_of_isSeparated (d : ℕ)
+    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) {p q r s : ℤ}
+    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X p q K)
+    (hL : boundedConstructible (ModuleCat.{u + 1} Λ) X L)
+    (hLt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X r s L) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj L) ∧
+      torAmplitudeIn (ModuleCat.{u + 1} Λ) X (r - q - 2 * (d : ℤ))
+        (s - p + 2 * (d : ℤ)) ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj L) := by
+  have hL' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X L := ⟨hL, r, s, hLt⟩
+  obtain ⟨e⟩ := nonempty_iso_verdierDual_verdierDual Λ a hL'
+  obtain ⟨e'⟩ := nonempty_iso_derivedHom_verdierDual _ a K L e
+  -- `𝔻_X L` has Tor amplitude in `[-s - 2d, -r]`, so `𝔻_X L ⊗ᴸ K` in `[p - s - 2d, q - r]`
+  have hD := constructibleFiniteTor_verdierDual Λ a hL'
+  have hDt := torAmplitudeIn_verdierDual Λ a d hd r s hL hLt
+  have hT := constructibleFiniteTor_tensor Λ X hD ⟨hK, p, q, hKt⟩
+  have hTt := torAmplitudeIn_tensor _ X _ _ _ _ hDt hKt
+  have hDT := torAmplitudeIn_verdierDual Λ a d hd _ _ hT.1 hTt
+  refine ⟨(boundedConstructible _ X).prop_of_iso e'.symm
+    (constructibleFiniteTor_verdierDual Λ a hT).1, (torAmplitudeIn _ X _ _).prop_of_iso e'.symm ?_⟩
+  exact hDT.mono (by omega) (by omega)
+
+end DualizingHom
+
 section DerivedHom
 
 variable {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -397,6 +438,104 @@ theorem torAmplitudeIn_derivedHom_of_isDualizable
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X (c - b) (d - a)
       (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
   torAmplitudeIn_derivedHom_of_isDualizable_aux _ hKt hKd hMt
+
+include aX in
+/-- Blueprint `lem-sf-ext-sheaf-constructible`: Constructible internal Hom with a site-perfect
+first variable.
+
+If `K ∈ Dctf(X, Λ)` is site-perfect, that is dualizable, and `M` is bounded constructible, then
+`RHom(K, M)` is bounded constructible; in particular every cohomology sheaf of `RHom(K, M)` is
+constructible. Indeed `RHom(K, M) ≅ K^∨ ⊗ᴸ M`, where the coefficient dual `K^∨ = RHom(K, Λ)` is
+bounded constructible (`AlgebraicGeometry.Etale.boundedConstructible_derivedHom`) of Tor
+amplitude `[-b, -a]`, and the tensor product of two bounded constructible complexes, one of
+them of finite Tor amplitude, is bounded constructible. -/
+theorem boundedConstructible_derivedHom_of_isDualizable
+    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) (hKd : IsDualizable K)
+    (hM : boundedConstructible (ModuleCat.{u + 1} Λ) X M) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) X
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) := by
+  -- the unit `Λ_X` is bounded constructible of Tor amplitude `[0, 0]`
+  have hU : boundedConstructible (ModuleCat.{u + 1} Λ) X (𝟙_ _) :=
+    (boundedConstructible _ X).prop_of_iso (_root_.DerivedCategory.singleFunctorObjUnitIso _)
+      (boundedConstructible_singleFunctor_obj _ 0)
+  have hUt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X 0 0 (𝟙_ _) :=
+    (torAmplitudeIn _ X 0 0).prop_of_iso (_root_.DerivedCategory.singleFunctorObjUnitIso _)
+      (_root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
+        (ObjectProperty.flat_of_isDualizable isDualizable_unit))
+  have hD : boundedConstructible (ModuleCat.{u + 1} Λ) X ((coefficientDual _ X).obj (op K)) :=
+    boundedConstructible_derivedHom Λ aX a b 0 0 hK hKt hU hUt
+  obtain ⟨_⟩ := hKd
+  obtain ⟨_⟩ := nonempty_exactPairing_swap K Kᘁ
+  have hDt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b) (-a)
+      ((coefficientDual _ X).obj (op K)) :=
+    (torAmplitudeIn _ X _ _).prop_of_iso (coefficientDualIsoOfExactPairing Kᘁ K).symm
+      (_root_.DerivedCategory.torAmplitudeIn_of_exactPairing (L := Kᘁ) hKt)
+  obtain ⟨e⟩ := nonempty_iso_coefficientDual_tensor (isDualizable_of_hasRightDual K) M
+  -- `K^∨ ⊗ᴸ M` is bounded, `K^∨` having finite Tor amplitude, with constructible homology
+  obtain ⟨c', d', hcd⟩ :=
+    (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded M).2 hM.1
+  have : IsNoetherianRing Λ := inferInstance
+  have hb : _root_.DerivedCategory.TStructure.t.bounded
+      (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj ((coefficientDual _ X).obj (op K))).obj M) :=
+    (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1
+      ⟨_, _,
+        _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_left hDt hcd⟩
+  have hc := constructibleHomology_derivedTensor _ (fun F G hF hG n ↦ by
+      have := (Etale.constructibleSheaf_iff _ _ _).mp hF
+      have := (Etale.constructibleSheaf_iff _ _ _).mp hG
+      exact (Etale.constructibleSheaf_iff _ _ _).mpr
+        (isConstructibleSheaf_homology_tensor_singleFunctor Λ F G n)) hD hM
+  exact (boundedConstructible _ X).prop_of_iso e ⟨hb, hc⟩
+
+omit [Finite Λ] [HasInvertibleExponent Λ X] in
+/-- If `K` is dualizable of Tor amplitude in `[a, b]`, then `RHom(K, G[0]) ≅ K^∨ ⊗ᴸ G[0]` is
+concentrated in `[-b, -a]` for every sheaf `G`, the dual `K^∨` having Tor amplitude in
+`[-b, -a]`. -/
+theorem homologyConcentratedIn_derivedHom_singleFunctor_of_isDualizable
+    (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) (hKd : IsDualizable K)
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    _root_.DerivedCategory.homologyConcentratedIn (-b) (-a)
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) := by
+  have h : _root_.DerivedCategory.homologyConcentratedIn (-b) (-a)
+      (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj ((coefficientDual _ X).obj (op K))).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) := by
+    obtain ⟨_⟩ := hKd
+    obtain ⟨_⟩ := nonempty_exactPairing_swap K Kᘁ
+    have := _root_.DerivedCategory.torAmplitudeIn_of_exactPairing (L := Kᘁ) hKt
+    exact (torAmplitudeIn _ X _ _).prop_of_iso
+      (coefficientDualIsoOfExactPairing Kᘁ K).symm this G
+  obtain ⟨e⟩ := nonempty_iso_coefficientDual_tensor hKd
+    ((_root_.DerivedCategory.singleFunctor _ 0).obj G)
+  exact homologyConcentratedIn_of_iso _ e h
+
+include aX in
+/-- Blueprint `lem-sf-ext-sheaf-constructible`: Constructible internal Hom with a site-perfect
+first variable.
+
+For a finite locally free sheaf `F`, that is a constructible flat sheaf which is dualizable in
+`D(X_ét, Λ)`, and a constructible sheaf `G`, the sheaves `𝓔xtʳ(F, G) = Hʳ RHom(F, G)` vanish
+for `r ≠ 0`, and `𝓗om(F, G) = H⁰ RHom(F, G)` is constructible: `RHom(F, G)` is bounded
+constructible and concentrated in degree `0`. Indeed `RHom(F, G) ≅ F^∨ ⊗ᴸ G` with `F^∨` of Tor
+amplitude `[0, 0]`. -/
+theorem boundedConstructible_derivedHom_singleFunctor_of_isDualizable
+    (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]
+    [IsConstructibleSheaf G] (hF : ObjectProperty.flat F)
+    (hFd : IsDualizable ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) X
+        (((RHom(X)[ModuleCat.{u + 1} Λ]).obj
+          (op ((_root_.DerivedCategory.singleFunctor _ 0).obj F))).obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) ∧
+      _root_.DerivedCategory.homologyConcentratedIn 0 0
+        (((RHom(X)[ModuleCat.{u + 1} Λ]).obj
+          (op ((_root_.DerivedCategory.singleFunctor _ 0).obj F))).obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) := by
+  have hFt := _root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat hF
+  refine ⟨boundedConstructible_derivedHom_of_isDualizable Λ aX 0 0
+    (boundedConstructible_singleFunctor_obj F 0) hFt hFd
+    (boundedConstructible_singleFunctor_obj G 0), ?_⟩
+  exact homologyConcentratedIn_derivedHom_singleFunctor_of_isDualizable Λ 0 0 hFt hFd G
 
 end DerivedHom
 

@@ -74,6 +74,12 @@ open Scheme
 
 namespace Etale
 
+/-- The characteristic of `Λ` is invertible on relative affine space over a scheme on which it
+is invertible. -/
+instance hasInvertibleExponent_affineSpace {Λ : Type (u + 1)} [CommRing Λ] {n : Type u}
+    {B : Scheme.{u}} [HasInvertibleExponent Λ B] : HasInvertibleExponent Λ 𝔸(n; B) :=
+  .of_hom (𝔸(n; B) ↘ B)
+
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
@@ -91,7 +97,7 @@ tensored with `Λ`. Equivalently `κ(u)` is the class of the `μ_{ℓ^N}`-torsor
 class HasKummerClass extends HasTateTwist Λ where
   /-- The *Kummer class* `κ(u) ∈ H¹(X, Λ(1)) = Hom(Λ_X, Λ_X(1)[1])` of a unit
   `u ∈ Γ(X, 𝒪_X)ˣ`. -/
-  kummerClass (X : Scheme.{u}) (u : Γ(X, ⊤)ˣ) :
+  kummerClass (X : Scheme.{u}) [HasInvertibleExponent Λ X] (u : Γ(X, ⊤)ˣ) :
     constantComplex Λ X ⟶ (twistObject X 1)⟦(1 : ℤ)⟧
   /-- The Kummer class is natural under pullback, `Lf^* κ(u) = κ(f^* u)`, along the
   identifications `Lf^* Λ_Y ≅ Λ_X` and `Lf^* Λ_Y(1) ≅ Λ_X(1)` of the twist datum:
@@ -102,16 +108,16 @@ class HasKummerClass extends HasTateTwist Λ where
      ▼                                ▼
     Λ_X ───────κ(f^* u)──────────▶ Λ_X(1)[1]
   ``` -/
-  leftDerivedUpperStar_map_kummerClass {X Y : Scheme.{u}} (f : X ⟶ Y) (u : Γ(Y, ⊤)ˣ) :
+  leftDerivedUpperStar_map_kummerClass {X Y : Scheme.{u}} [HasInvertibleExponent Λ X]
+      [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (u : Γ(Y, ⊤)ˣ) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).map (kummerClass Y u) ≫
         ((L((f)^*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app (twistObject Y 1) ≫
           (leftDerivedUpperStarTwistObjectIso f 1).hom⟦(1 : ℤ)⟧' =
-      ((L((f)^*[ModuleCat.{u + 1} Λ])).mapIso (twistObjectZeroIso Y).symm ≪≫
-          leftDerivedUpperStarTwistObjectIso f 0 ≪≫ twistObjectZeroIso X).hom ≫
+      (leftDerivedUpperStarConstantComplexIso Λ f).hom ≫
         kummerClass X (Units.map f.appTop.hom.toMonoidHom u)
   /-- The Kummer class is multiplicative, `κ(uv) = κ(u) + κ(v)`: the Kummer boundary is a
   group homomorphism. -/
-  kummerClass_mul (X : Scheme.{u}) (u v : Γ(X, ⊤)ˣ) :
+  kummerClass_mul (X : Scheme.{u}) [HasInvertibleExponent Λ X] (u v : Γ(X, ⊤)ˣ) :
     kummerClass X (u * v) = kummerClass X u + kummerClass X v
 
 variable [HasKummerClass Λ]
@@ -127,7 +133,7 @@ from the rank-one datum `AlgebraicGeometry.Etale.HasKummerClass`. In the concret
 `Λ(1) = μ_{ℓ^N} ⊗ Λ` with `ℓ^N Λ = 0`, it is the boundary of `u` in the Kummer sequence
 `0 → μ_{ℓ^N} → 𝔾_m → 𝔾_m → 0` (`AlgebraicGeometry.Scheme.kummerSequence`), tensored with `Λ`;
 for the coordinate `t` of `𝔾_{m,Y}` it is the class `κ(t)` of `sk-def-purity-conv`. -/
-noncomputable def kummerClass (u : Γ(X, ⊤)ˣ) :
+noncomputable def kummerClass [HasInvertibleExponent Λ X] (u : Γ(X, ⊤)ˣ) :
     constantComplex Λ X ⟶ (tateObject Λ X 1)⟦(1 : ℤ)⟧ :=
   HasKummerClass.kummerClass X u
 
@@ -140,7 +146,8 @@ Lf^* Λ_Y ──Lf^* κ(u)──▶ Lf^*(Λ_Y(1)[1]) ≅ (Lf^* Λ_Y(1))[1]
    ▼                                ▼
   Λ_X ───────κ(f^* u)──────────▶ Λ_X(1)[1]
 ``` -/
-theorem leftDerivedUpperStar_map_kummerClass (f : X ⟶ Y) (u : Γ(Y, ⊤)ˣ) :
+theorem leftDerivedUpperStar_map_kummerClass [HasInvertibleExponent Λ X]
+    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (u : Γ(Y, ⊤)ˣ) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).map (kummerClass Λ u) ≫
         ((L((f)^*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app (tateObject Λ Y 1) ≫
           (leftDerivedUpperStarTateObjectIso f 1).hom⟦(1 : ℤ)⟧' =
@@ -149,7 +156,7 @@ theorem leftDerivedUpperStar_map_kummerClass (f : X ⟶ Y) (u : Γ(Y, ⊤)ˣ) :
   HasKummerClass.leftDerivedUpperStar_map_kummerClass f u
 
 /-- The Kummer class is multiplicative: `κ(uv) = κ(u) + κ(v)`. -/
-theorem kummerClass_mul (u v : Γ(X, ⊤)ˣ) :
+theorem kummerClass_mul [HasInvertibleExponent Λ X] (u v : Γ(X, ⊤)ˣ) :
     kummerClass Λ (u * v) = kummerClass Λ u + kummerClass Λ v :=
   HasKummerClass.kummerClass_mul X u v
 
@@ -159,7 +166,7 @@ section Boundary
 
 variable [Finite Λ]
 
-variable {U : Scheme.{u}} (f : Γ(U, ⊤))
+variable {U : Scheme.{u}} [HasInvertibleExponent Λ U] (f : Γ(U, ⊤))
 
 /-- The *Kummer boundary* `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))` of a global function `f` on `U`. Write
 `i : V(f) ⟶ U` for the closed subscheme cut out by `f` and `j : U_f ⟶ U` for its open
@@ -177,6 +184,7 @@ noncomputable def kummerBoundary :
     constantComplex Λ U ⟶
       ((R(U.zeroLocusSubschemeι {f})_![ModuleCat.{u + 1} Λ]).obj
         ((R(U.zeroLocusSubschemeι {f})^![ModuleCat.{u + 1} Λ]).obj (tateObject Λ U 1)))⟦(2 : ℤ)⟧ :=
+  haveI : HasInvertibleExponent Λ (U.basicOpen f) := .of_hom (U.basicOpen f).ι
   ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (U.basicOpen f).ι).homEquiv _ _
       ((leftDerivedUpperStarConstantComplexIso Λ (U.basicOpen f).ι).hom ≫
         kummerClass Λ (U.basicOpenUnit f) ≫
@@ -206,6 +214,7 @@ noncomputable def supportedClassMap (i : Z ⟶ X) [IsClosedImmersion i]
   (compactificationConstantComplexIso Λ i).inv ≫
     rightDerivedLowerShriekTranspose (ModuleCat.{u + 1} Λ) i γ
 
+omit [HasKummerClass Λ] in
 /-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
 
 *Classes with supports are morphisms out of the constant complex of the support.* For a closed
@@ -231,10 +240,11 @@ theorem supportedClassMap_bijective (i : Z ⟶ X) [IsClosedImmersion i]
 
 /-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
 
-The *rank-one normalisation* of the Kummer classes. For every scheme `B` on which the exponent
-of `Λ` is invertible, let `t` be the coordinate of `𝔸¹_B` and `s : V(t) ⟶ 𝔸¹_B` the zero
-section. The Kummer boundary `∂κ(t) ∈ H²_{V(t)}(𝔸¹_B, Λ(1))` is the fundamental class of the
-zero section: its adjoint `Λ_{V(t)} ⟶ Rs^! (Λ(1)[2])` is an isomorphism.
+The *rank-one normalisation* of the Kummer classes. For every scheme `B` separated and locally
+of finite type over a field, on which the exponent of `Λ` is invertible, let `t` be the
+coordinate of `𝔸¹_B` and `s : V(t) ⟶ 𝔸¹_B` the zero section. The Kummer boundary
+`∂κ(t) ∈ H²_{V(t)}(𝔸¹_B, Λ(1))` is the fundamental class of the zero section: its adjoint
+`Λ_{V(t)} ⟶ Rs^! (Λ(1)[2])` is an isomorphism.
 
 This is the rank-one local calculation `H²_{0}(𝔸¹_ȳ, Λ(1)) ≅ Λ`, `∂κ(t) ↦ 1`, of the blueprint,
 a theorem for the concrete model. Naturality and multiplicativity alone do not imply it (the
@@ -242,10 +252,17 @@ zero class satisfies both), and it also pins down the twisting object `Λ(1)`: b
 `Rs^! Λ ≅ Λ(-1)[-2]` for the true twist, so the isomorphism forces `Λ_B(1) ≅ μ_n ⊗ Λ`, whereas
 the fields of `AlgebraicGeometry.Etale.HasTateTwist` alone also admit `Λ_B(1) = Λ_B` and
 `Λ_B(1) = Λ_B[-2]`. Its twist-side form `AlgebraicGeometry.Etale.HasTateTwist.IsNormalized` is
-what the statements comparing the twist with geometry assume. -/
+what the statements comparing the twist with geometry assume.
+
+The schemes `B` are those of the blueprint statement `sk-prop-a1` (separated of finite type over
+the base field): the same normalisation over an arbitrary base on which the exponent is invertible
+is relative purity for the zero section of `𝔸¹_B` over a general base, which is true (SGA 4 XVI)
+but beyond the blueprint, and is not needed by the statements assuming the class. -/
 class HasKummerClass.IsNormalized : Prop where
   /-- The adjoint of the Kummer boundary of the coordinate of `𝔸¹_B` is an isomorphism. -/
-  isIso_supportedClassMap_kummerBoundary_coord (B : Scheme.{u}) [HasInvertibleExponent Λ B] :
+  isIso_supportedClassMap_kummerBoundary_coord {k : Type u} [Field k] (B : Scheme.{u})
+      (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
+      [HasInvertibleExponent Λ B] :
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); B).zeroLocusSubschemeι
         {AffineSpace.coord B (ULift.up 0)})
       (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
@@ -263,7 +280,7 @@ the identification `Λ_U ⊗ Λ_U ≅ Λ_U(0) ⊗ Λ_U(0) ≅ Λ_U(0) ≅ Λ_U` 
 unit law `HasTateTwist.twistObjectAddIso_zero_left` it is the inverse of the left unitor; it is
 not written as such because the kernel cannot compare the unitor of the monoidal derived
 category with the derived tensor product of étale sheaves in reasonable time. -/
-noncomputable def constantComplexDiagonal :
+noncomputable def constantComplexDiagonal [HasInvertibleExponent Λ U] :
     constantComplex Λ U ⟶
       ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj (constantComplex Λ U)).obj
         (constantComplex Λ U) :=
@@ -272,7 +289,7 @@ noncomputable def constantComplexDiagonal :
       ((derivedTensor (ModuleCat.{u + 1} Λ) U).map (HasTateTwist.twistObjectZeroIso U).hom).app _ ≫
         ((derivedTensor (ModuleCat.{u + 1} Λ) U).obj _).map (HasTateTwist.twistObjectZeroIso U).hom
 
-variable {U Z₁ Z₂ Z : Scheme.{u}}
+variable {U Z₁ Z₂ Z : Scheme.{u}} [HasInvertibleExponent Λ U]
 
 /-- The cup product with supports of classes `α ∈ H^{2m}_{Z₁}(U, Λ(m))` and
 `β ∈ H^{2m'}_{Z₂}(U, Λ(m'))`, a class in `H^{2(m + m')}_{Z₁ ∩ Z₂}(U, Λ(m + m'))`: the cup

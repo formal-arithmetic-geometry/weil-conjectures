@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import Sheaf.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
-import Sheaf.AlgebraicGeometry.QuasicoherentSectionPowerTorsion
+import WeilConjectures.AlgebraicGeometry.Modules.QcqsSections
 
 /-! # Clearing denominators of sections on a nonvanishing locus
 

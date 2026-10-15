@@ -21,6 +21,8 @@ map `R → S` commutes with finite intersections: `(I ⊓ J) S = I S ⊓ J S`.
 - `Ideal.map_iInf_of_flat`: the case of a finite family.
 - `Module.Flat.of_exact_of_flat_of_flat`, `Module.Flat.of_exact_of_flat_of_flat_right`: an
   extension of flat modules is flat, and the kernel of a surjection of flat modules is flat.
+- `Module.Flat.lTensor_injective_ker_subtype`: the kernel of the first map of a complex of flat
+  modules which is universally exact in the middle stays a submodule after any base change.
 - `Ideal.Quotient.flat_span_singleton_mul`: if `v₁` is a non-zerodivisor and `B ⧸ (v₁)`,
   `B ⧸ (v₂)` are flat, then so is `B ⧸ (v₁ v₂)`.
 - `Algebra.TensorProduct.includeLeftRingHom_mem_nonZeroDivisors_of_flat`: a non-zerodivisor
@@ -28,6 +30,8 @@ map `R → S` commutes with finite intersections: `(I ⊓ J) S = I S ⊓ J S`.
 -/
 
 @[expose] public section
+
+universe u
 
 open TensorProduct
 
@@ -132,6 +136,56 @@ lemma Module.Flat.of_exact_of_flat_of_flat_right {R M' M M'' : Type*} [CommRing 
     rw [← LinearMap.comp_apply, LinearMap.rTensor_comp_lTensor, ← LinearMap.lTensor_comp_rTensor,
       LinearMap.comp_apply, hx, map_zero, map_zero]
   exact LinearMap.lTensor_injective_of_exact_of_flat g hg f hf H N (h1.trans (map_zero _).symm)
+
+/-- **Universal left exactness of a complex of flat modules.** Let `C₀ ⟶ C₁ ⟶ C₂` be a complex
+of `R`-modules with `C₁` and `C₂` flat, which stays exact at `C₁` after tensoring with every
+`R`-module. Then the kernel `Z` of `d₀` stays a submodule of `C₀` after tensoring: for every
+`R`-module `M`, the map `M ⊗ Z ⟶ M ⊗ C₀` is injective.
+
+The cokernel `Q` of `d₀` embeds universally into `C₂`, hence is flat; so is the image of `d₀`,
+as the kernel of `C₁ ⟶ Q`; and `0 ⟶ Z ⟶ C₀ ⟶ im d₀ ⟶ 0` stays exact after tensoring. -/
+theorem Module.Flat.lTensor_injective_ker_subtype {R : Type u} [CommRing R]
+    {C₀ C₁ C₂ : Type*} [AddCommGroup C₀] [AddCommGroup C₁] [AddCommGroup C₂] [Module R C₀]
+    [Module R C₁] [Module R C₂] [Module.Flat R C₁] [Module.Flat R C₂] (d₀ : C₀ →ₗ[R] C₁)
+    (d₁ : C₁ →ₗ[R] C₂) (hd : d₁ ∘ₗ d₀ = 0)
+    (H : ∀ (M : Type u) [AddCommGroup M] [Module R M],
+      Function.Exact (d₀.lTensor M) (d₁.lTensor M))
+    (M : Type*) [AddCommGroup M] [Module R M] :
+    Function.Injective ((LinearMap.ker d₀).subtype.lTensor M) := by
+  let π := (LinearMap.range d₀).mkQ
+  have hπ : Function.Surjective π := Submodule.mkQ_surjective _
+  have hdπ : Function.Exact d₀ π := LinearMap.exact_iff.mpr (Submodule.ker_mkQ _)
+  have hle : LinearMap.range d₀ ≤ LinearMap.ker d₁ := by
+    rintro _ ⟨x, rfl⟩
+    exact congr($hd x)
+  let q := (LinearMap.range d₀).liftQ d₁ hle
+  have hqπ : q ∘ₗ π = d₁ := Submodule.liftQ_mkQ _ _ _
+  -- the cokernel of `d₀` embeds universally into `C₂`
+  have hq (N : Type u) [AddCommGroup N] [Module R N] : Function.Injective (q.lTensor N) := by
+    rw [injective_iff_map_eq_zero]
+    intro z hz
+    obtain ⟨w, rfl⟩ := LinearMap.lTensor_surjective N hπ z
+    have hw : d₁.lTensor N w = 0 := by
+      rw [← hqπ, LinearMap.lTensor_comp, LinearMap.comp_apply, hz]
+    obtain ⟨u, rfl⟩ := (H N w).mp hw
+    exact (_root_.lTensor_exact N hdπ hπ _).mpr ⟨u, rfl⟩
+  -- hence it is flat
+  have : Module.Flat R (C₁ ⧸ LinearMap.range d₀) := by
+    rw [Module.Flat.iff_rTensor_preserves_injective_linearMap'.{u}]
+    intro N N' _ _ _ _ ι hι
+    have h : (ι.rTensor C₂) ∘ₗ (q.lTensor N) = (q.lTensor N') ∘ₗ (ι.rTensor _) := by
+      rw [LinearMap.rTensor_comp_lTensor, LinearMap.lTensor_comp_rTensor]
+    refine Function.Injective.of_comp (f := q.lTensor N') ?_
+    rw [← LinearMap.coe_comp, ← h, LinearMap.coe_comp]
+    exact (Module.Flat.rTensor_preserves_injective_linearMap _ hι).comp (hq N)
+  -- so is the image of `d₀`
+  have : Module.Flat R (LinearMap.range d₀) :=
+    Module.Flat.of_exact_of_flat_of_flat_right (LinearMap.range d₀).subtype π
+      Subtype.val_injective hπ (by
+        rw [LinearMap.exact_iff, Submodule.ker_mkQ, Submodule.range_subtype])
+  exact LinearMap.lTensor_injective_of_exact_of_flat d₀.rangeRestrict d₀.surjective_rangeRestrict
+    (LinearMap.ker d₀).subtype Subtype.val_injective
+    (by rw [LinearMap.exact_iff, Submodule.range_subtype, LinearMap.ker_rangeRestrict]) M
 
 section Quotient
 

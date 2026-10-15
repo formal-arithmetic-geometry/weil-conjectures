@@ -5,7 +5,7 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 

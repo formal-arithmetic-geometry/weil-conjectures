@@ -65,3 +65,69 @@ Written by L (Lean refresh 7d675a26, X-ref). Our declarations: every constant of
 |---|---|---|---|---|
 | lem-sc-ext-locally-free | `AlgebraicGeometry.Scheme.Modules.locallyFreeExtAddEquivH` (def, Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology) | `AlgebraicGeometry.Scheme.Modules.nonempty_ext_addEquiv_H` (WeilConjectures.AlgebraicGeometry.Modules.Ext:252, now sorry-free) | no | ours chooses the equivalence `Ext F G i ≃+ (Fᵛ ⊗ G).H i` (data); upstream states only `Nonempty`; the node is closed on slopmaster2 by the upstream theorem, our record stays (data a citer may use) |
 
+
+
+## Sync to ffb7b906069b754b60fc5d090a85e9ae4209561e (2026-10-13)
+
+The new upstream declarations were compared with the source of our modules, including full-name
+matches and alternate encodings. The canonical upstream definitions replace ours. Imports in
+all users are redirected; projectivity now uses upstream's finite coordinate type, varieties
+and smooth projective curves use the upstream classes, and the change-of-field proof transports
+`Scheme.dim` through its proved equality with topological Krull dimension.
+
+| retired module | canonical upstream module | reason |
+|---|---|---|
+| `Sheaf.AlgebraicGeometry.EtaleSheaves` | `WeilConjectures.AlgebraicGeometry.EtaleSheaves` | Same five notions, including torsion Ab cohomology; upstream ported our definitions. |
+| `Sheaf.AlgebraicGeometry.Morphisms.Projective` | `WeilConjectures.AlgebraicGeometry.Morphisms.Projective` | Same H-projectivity and projectivity; upstream accepts any finite coordinate type. |
+| `Sheaf.AlgebraicGeometry.Variety` | `WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective` | Same variety and integral curve; local-ring dimension equals topological dimension. |
+| `Sheaf.AlgebraicGeometry.SmoothProjectiveCurve` | `WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective` | Same smooth projective integral curve. |
+| `Sheaf.AlgebraicGeometry.Curve.ProperCohomology` | `WeilConjectures.AlgebraicGeometry.Curve.Estimate` | Same Kummer cohomology calculation, proved upstream. |
+| `Sheaf.AlgebraicGeometry.QuasicoherentSectionPowerExtension` | `WeilConjectures.AlgebraicGeometry.Modules.QcqsSections` | Same extension after multiplying by a power, proved upstream. |
+| `Sheaf.AlgebraicGeometry.QuasicoherentSectionPowerTorsion` | `WeilConjectures.AlgebraicGeometry.Modules.QcqsSections` | Same power-torsion criterion, proved upstream. |
+| `Sheaf.AlgebraicGeometry.NormalizationProperties` | `WeilConjectures.AlgebraicGeometry.Regular` | Canonical normalization properties proved upstream; the old extra birational-conjunction wrapper had no users. |
+| `Sheaf.AlgebraicGeometry.LowerStarPlusTransitionComp` | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.TransitionComposition` | Same composition theorem; upstream explicitly takes the composite arrow and witnesses. |
+| `Sheaf.CategoryTheory.ImageFiltration` | `WeilConjectures.CategoryTheory.Abelian.Filtration` | Same image filtration; seven users redirected. |
+
+The extension modules `Sheaf.AlgebraicGeometry.Dimension`, `GlobalSectionsLeftExact`, and
+`Sheaf.CategoryTheory.Filtration` retain their additional API but use upstream's relative
+dimension, global-sections functor, and decreasing-filtration structure. Filtration's quotient
+and graded piece now reuse upstream image and graded piece. The bigraded shifted-map exact
+couple now wraps the canonical upstream ExactCouple in a single `toExactCouple` field; shifted
+accessors and constructors provide the existing API. Its independent mathematical data
+structure is retired in place, and the extension module retains only pages and derived APIs.
+Private helper proofs have different signatures from the corresponding new public lemmas.
+They are renamed `isFinitePresentation_free_sheaf` and `transport_left_congr_sheaf` so their
+visible aliases coexist with the new upstream API; they introduce no mathematical data.
+
+The removed injective-preservation declaration is renamed to
+`preservesInjectiveObjects_lowerStar_of_abelian` in its node and audit records. Two WeilSheaf
+base-change pointers now name `WeilComplex.nonempty_upperStar_derivedLowerShriek_iso`.
+`lem-sc-field-brauer-comparison` has its stale Lean record cleared: upstream replaced the use of
+that general comparison by direct Cech cohomology for C1 fields, which does not establish the
+general equivalence. Its removed record and reason are retained as `lean_removed`.
+
+The private duplicate internal-Hom comparison proof in
+`Sheaf.ConstructibleSheaf.EtalePullbackInternalHom` is removed; its thin existential-isomorphism
+wrapper now uses upstream `Etale.isIso_ihomComparison_upperStar`. The smooth projective curve
+connectedness wrapper follows upstream instances, removing its redundant sorry.
+
+The strict-henselization adapters also retire
+`Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal` in favor of
+`WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization`, and
+`Sheaf.Paper.StrictHenselizationLocalStructure` in favor of
+`WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal`. The four node records
+`def-weil-pbc-strict-henselization-limit`, `lemma-weil-pbc-affine-neighbourhood-cofinal`,
+`lem-weil-pbc-strict-henselization-local-structure`, and
+`def-weil-pbc-strict-henselization-structural-map` now name the canonical upstream ring,
+initial inclusion, local-structure instances, and structure map. Our smaller-index diagrams
+retain only their presentation and transport API.
+
+This sync retires twelve modules in total. Twelve local Lean records are repointed or cleared
+in the broad API migration, three filtration/exact-couple records and four strict-henselization
+records are updated, and the two earlier Weil-complex repoints are replayed. The queue delta
+and upstream sorry census are generated from the final verified build by the sync routine.
+
+The exact canonical Projective section is extracted from Curve.SmoothProjective into
+WeilConjectures.AlgebraicGeometry.Morphisms.Projective and publicly re-imported.
+This removes the cycle from Chow relative ampleness back to finite-free direct-image
+cohomology; every projectivity notion still has one definition.

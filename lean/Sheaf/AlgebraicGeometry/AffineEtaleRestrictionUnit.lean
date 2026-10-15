@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionLargeSets
 import Sheaf.CategoryTheory.InverseMateEquivalence

@@ -5,7 +5,7 @@ Authors: SHEAF group U2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.CategoryTheory.Sites.Adjunction
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
 import Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality

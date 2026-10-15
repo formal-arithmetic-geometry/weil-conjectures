@@ -72,7 +72,7 @@ theorem strictHenselizationBaseChangeCone_exists
   let _ : ∀ j, IsAffine (D.obj j) := hAff
   let E := (opOpEquivalence (SmallModel.{v} (strictHenselizationNeighbourhoods y))).symm
   let cR := (strictHenselizationCone y).whisker E.functor
-  let α : D ⟶ E.functor ⋙ (strictHenselizationDiagram y).op ⋙ Scheme.Spec :=
+  let α : D ⟶ E.functor ⋙ (smallStrictHenselizationDiagram y).op ⋙ Scheme.Spec :=
     Functor.whiskerLeft D ΓSpec.adjunction.unit
   let hIso (j : SmallModel.{v} (strictHenselizationNeighbourhoods y)) :
       IsIso (α.app j) := by
@@ -99,7 +99,7 @@ theorem strictHenselizationBaseChangeCone_exists
   have hq (j : SmallModel.{v} (strictHenselizationNeighbourhoods y)) :
       cY.π.app j ≫ (A.obj j).hom = strictHenselizationStructuralMap y := by
     rw [hleg]
-    exact Classical.choose_spec (exists_strictHenselizationStructuralMap y) j
+    exact strictHenselizationStructuralMap_eq y j
   let B := A ⋙ MorphismProperty.Over.pullback @Etale ⊤ f
   let π : (Functor.const _).obj (pullback (strictHenselizationStructuralMap y) f) ⟶
       B ⋙ Etale.forget X ⋙ Over.forget X :=

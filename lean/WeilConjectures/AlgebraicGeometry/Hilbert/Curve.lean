@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
@@ -883,80 +884,231 @@ lemma exists_not_isClosed_singleton_of_smoothOfRelativeDimension_one
   rw [hdim] at this
   exact absurd this (by norm_num)
 
+/-- **A rational function regular at finitely many given points.** Let `X` be an integral
+`k`-scheme whose local rings are valuation rings, and which has a point whose local ring is not a
+field. For every finite set `t` of points of `X` there is a rational function `c ∈ k(X)`,
+transcendental over `k`, which is regular at every point of `t`.
+
+Take any transcendental `a` (`exists_transcendental_functionField`) and a monic `P ∈ k[T]` with
+`P(ā) ≠ 0` for the residue `ā` of `a` at every point of `t` where `a` is regular, for instance
+`P = T · ∏ μ + 1` with `μ` running over the minimal polynomials of the algebraic residues. Then
+`c = 1 / P(a)` works: where `a` is regular, `P(a)` is a unit; where `a` has a pole, `c` vanishes. -/
+theorem exists_transcendental_mem_range_stalk {X : Scheme.{u}} [X.Over (Spec (.of k))]
+    [IsIntegral X] (hval : ∀ x : X, ValuationRing (X.presheaf.stalk x)) (x₀ : X)
+    (hx₀ : ringKrullDim (X.presheaf.stalk x₀) ≠ 0) (t : Finset X) :
+    ∃ c : X.functionField,
+      (letI := (Scheme.functionFieldRingHom k X).toAlgebra; Transcendental k c) ∧
+      ∀ x ∈ t, c ∈ Set.range (algebraMap (X.presheaf.stalk x) X.functionField) := by
+  classical
+  let K := X.functionField
+  let := (Scheme.functionFieldRingHom k X).toAlgebra
+  obtain ⟨a, ha⟩ := Scheme.exists_transcendental_functionField (k := k) x₀ hx₀
+  -- the structure maps `k → 𝒪_{X,x}` and `k → κ(x)`
+  let ι (x : X) : k →+* X.presheaf.stalk x :=
+    (X.presheaf.germ ⊤ x trivial).hom.comp (Scheme.globalSectionsRingHom k (X := X))
+  have hι (x : X) : (algebraMap (X.presheaf.stalk x) K).comp (ι x) =
+      Scheme.functionFieldRingHom k X := by
+    ext r
+    simp only [RingHom.algebraMap_toAlgebra, Scheme.functionFieldRingHom, ι, RingHom.coe_comp,
+      Function.comp_apply]
+    rw [← CommRingCat.comp_apply]
+    erw [TopCat.Presheaf.germ_stalkSpecializes]
+    rfl
+  let ψ (x : X) : k →+* IsLocalRing.ResidueField (X.presheaf.stalk x) :=
+    (IsLocalRing.residue _).comp (ι x)
+  -- the residue of `a` at the points where it is regular
+  let r (x : X) : IsLocalRing.ResidueField (X.presheaf.stalk x) :=
+    if h : IsLocalization.IsInteger (X.presheaf.stalk x) a then IsLocalRing.residue _ h.choose
+    else 0
+  -- a monic polynomial killing the residue, if it is algebraic
+  let g (x : X) : Polynomial k := if h : (ψ x).IsIntegralElem (r x) then h.choose else 1
+  have hg (x : X) : (g x).Monic := by
+    simp only [g]
+    split_ifs with h
+    · exact h.choose_spec.1
+    · exact Polynomial.monic_one
+  let P : Polynomial k := Polynomial.X * ∏ y ∈ t, g y + 1
+  have hPm : P.Monic := by
+    refine (Polynomial.monic_X.mul (Polynomial.monic_prod_of_monic _ _ fun y _ ↦ hg y)).add_of_left
+      ?_
+    have hq := Polynomial.monic_prod_of_monic t g fun y _ ↦ hg y
+    rw [Polynomial.degree_one, Polynomial.degree_mul, Polynomial.degree_X,
+      Polynomial.degree_eq_natDegree hq.ne_zero]
+    norm_cast
+    omega
+  have hPr (x : X) (hx : x ∈ t) : Polynomial.eval₂ (ψ x) (r x) P ≠ 0 := by
+    intro h0
+    by_cases hint : (ψ x).IsIntegralElem (r x)
+    · have hgx : Polynomial.eval₂ (ψ x) (r x) (g x) = 0 := by
+        simp only [g, dif_pos hint]
+        exact hint.choose_spec.2
+      have : Polynomial.eval₂ (ψ x) (r x) (∏ y ∈ t, g y) = 0 := by
+        rw [Polynomial.eval₂_finsetProd]
+        exact Finset.prod_eq_zero hx hgx
+      simp [P, Polynomial.eval₂_add, Polynomial.eval₂_mul, this] at h0
+    · exact hint ⟨P, hPm, h0⟩
+  have hPdeg : P.natDegree ≠ 0 := by
+    have hq := Polynomial.monic_prod_of_monic t g fun y _ ↦ hg y
+    have hdeg : 0 < (Polynomial.X * ∏ y ∈ t, g y).degree := by
+      rw [Polynomial.degree_mul, Polynomial.degree_X, Polynomial.degree_eq_natDegree hq.ne_zero]
+      norm_cast
+      omega
+    have h1 : (1 : Polynomial k).degree < (Polynomial.X * ∏ y ∈ t, g y).degree := by
+      rwa [Polynomial.degree_one]
+    rw [Polynomial.natDegree_add_eq_left_of_degree_lt h1]
+    exact (Polynomial.natDegree_pos_iff_degree_pos.mpr hdeg).ne'
+  have ha0 : a ≠ 0 := fun h ↦ ha (h ▸ isAlgebraic_zero)
+  have hval' (x : X) {v : X.presheaf.stalk x} (hv : IsUnit v) :
+      algebraMap (X.presheaf.stalk x) K ↑hv.unit⁻¹ = (algebraMap (X.presheaf.stalk x) K v)⁻¹ :=
+    eq_inv_of_mul_eq_one_right (by rw [← map_mul, IsUnit.mul_val_inv, map_one])
+  refine ⟨(Polynomial.aeval a P)⁻¹, fun hc ↦ ha ?_, fun x hx ↦ ?_⟩
+  · refine IsAlgebraic.of_aeval P hPdeg ?_ (IsAlgebraic.inv_iff.mp hc)
+    rw [hPm.leadingCoeff]
+    exact one_mem _
+  by_cases hint : IsLocalization.IsInteger (X.presheaf.stalk x) a
+  · -- `a` is regular at `x`, so `P(a)` is a unit there
+    have ha' : algebraMap _ K hint.choose = a := hint.choose_spec
+    have hr : r x = IsLocalRing.residue _ hint.choose := by simp [r, dif_pos hint]
+    have hv : IsUnit (Polynomial.eval₂ (ι x) hint.choose P) := by
+      rw [← IsLocalRing.residue_ne_zero_iff_isUnit, Polynomial.hom_eval₂, ← hr]
+      exact hPr x hx
+    refine ⟨↑hv.unit⁻¹, ?_⟩
+    rw [hval', Polynomial.hom_eval₂, hι, ha']
+    rfl
+  · -- `a` has a pole at `x`, so `a⁻¹` lies in the maximal ideal and `1 / P(a)` vanishes there
+    obtain ⟨b, hb⟩ := (ValuationRing.isInteger_or_isInteger (X.presheaf.stalk x) a).resolve_left
+      hint
+    have hbm : b ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk x) := by
+      refine (IsLocalRing.mem_maximalIdeal _).mpr fun hbu ↦ hint ⟨↑hbu.unit⁻¹, ?_⟩
+      rw [hval', hb, inv_inv]
+    have hw : IsUnit (Polynomial.eval₂ (ι x) b P.reverse) := by
+      rw [← IsLocalRing.residue_ne_zero_iff_isUnit, Polynomial.hom_eval₂,
+        (IsLocalRing.residue_eq_zero_iff b).mpr hbm, Polynomial.eval₂_at_zero,
+        Polynomial.coeff_zero_reverse, hPm.leadingCoeff, map_one]
+      exact one_ne_zero
+    let := invertibleOfNonzero ha0
+    have key : Polynomial.aeval a P =
+        algebraMap _ K (Polynomial.eval₂ (ι x) b P.reverse) * a ^ P.natDegree := by
+      rw [Polynomial.hom_eval₂, hι, hb, ← invOf_eq_inv, Polynomial.eval₂_reverse_mul_pow]
+      rfl
+    refine ⟨↑hw.unit⁻¹ * b ^ P.natDegree, ?_⟩
+    rw [map_mul, map_pow, hval', hb, key, mul_inv, inv_pow]
+
+/-- **Points where the coordinate is regular lie in the affine chart.** Let `π : X ⟶ ℙ¹_k` be the
+morphism of a rational function `c` (`exists_hom_projectiveLine_of_functionField`). If `c` is
+regular at `x`, then `π(x)` lies in the affine chart `z ↦ [1 : z]`: the morphisms
+`Spec 𝒪_{X,x} ⟶ X ⟶ ℙ¹_k` and `Spec 𝒪_{X,x} ⟶ 𝔸¹_k ⟶ ℙ¹_k`, `z ↦ c`, agree on the generic point,
+hence agree, `ℙ¹_k` being separated and `𝒪_{X,x}` a valuation ring. -/
+theorem mem_opensRange_infinityChart_of_mem_range_stalk {X : Scheme.{u}} [X.Over (Spec (.of k))]
+    [IsIntegral X] (hval : ∀ x : X, ValuationRing (X.presheaf.stalk x)) (c : X.functionField)
+    (π : X ⟶ ProjectiveLine (Spec (.of k))) [π.IsOver (Spec (.of k))]
+    (hπ : ∀ hs, X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
+      (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (Scheme.functionFieldCoordinates c) hs)
+    {x : X} (hx : c ∈ Set.range (algebraMap (X.presheaf.stalk x) X.functionField)) :
+    π x ∈ (ProjectiveLine.infinityChart (Spec (.of k))).opensRange := by
+  obtain ⟨c', rfl⟩ := hx
+  have := hval x
+  let R := X.presheaf.stalk x
+  let K := X.functionField
+  let φ : R ⟶ K := X.presheaf.stalkSpecializes ((genericPoint_spec X).specializes trivial)
+  have hφ : Spec.map φ ≫ X.fromSpecStalk x = X.fromSpecFunctionField :=
+    Scheme.SpecMap_stalkSpecializes_fromSpecStalk _
+  let i₂ : Spec R ⟶ Spec (.of k) := X.fromSpecStalk x ≫ X ↘ Spec (.of k)
+  let b : Γ(Spec K, ⊤) := (Scheme.ΓSpecIso K).inv (φ c')
+  have hπb : X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
+      (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (ProjectiveLine.pairSections 1 b)
+      (ProjectiveLine.span_range_one_pairSections b) := by
+    have key : ∀ (v : ULift.{u} (Fin 2) → Γ(Spec K, ⊤))
+        (_ : v = Scheme.functionFieldCoordinates (algebraMap R K c')) hs,
+        X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
+          (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) v hs := by
+      rintro v rfl hs
+      exact hπ hs
+    refine key _ ?_ _
+    funext ⟨i⟩
+    fin_cases i
+    · simp [ProjectiveLine.pairSections, Scheme.functionFieldCoordinates]
+    · rfl
+  -- the two lifts of the valuative square
+  let l₁ : Spec R ⟶ ProjectiveLine (Spec (.of k)) := X.fromSpecStalk x ≫ π
+  let l₂ : Spec R ⟶ ProjectiveLine (Spec (.of k)) :=
+    AffineSpace.homOfVector i₂ (fun _ ↦ (Scheme.ΓSpecIso R).inv c') ≫
+      ProjectiveLine.infinityChart (Spec (.of k))
+  have hsq : CommSq (X.fromSpecFunctionField ≫ π)
+      (Spec.map (CommRingCat.ofHom (algebraMap R K)))
+      (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) i₂ := ⟨by
+    rw [Category.assoc, HomIsOver.comp_over, ← hφ, Category.assoc]
+    rfl⟩
+  have h₁ : Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ l₁ = X.fromSpecFunctionField ≫ π := by
+    rw [← hφ, Category.assoc]
+    rfl
+  have h₂ : Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ l₂ =
+      X.fromSpecFunctionField ≫ π := by
+    have e₁ : Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ i₂ =
+        X.fromSpecFunctionField ≫ X ↘ Spec (.of k) := by
+      rw [← hφ, Category.assoc]
+      rfl
+    have e₂ : (Spec.map (CommRingCat.ofHom (algebraMap R K))).appTop
+        ((Scheme.ΓSpecIso R).inv c') = b :=
+      congr($(Scheme.ΓSpecIso_inv_naturality (CommRingCat.ofHom (algebraMap R K))).hom c').symm
+    have key : ∀ {Z : Scheme.{u}} (g g' : Z ⟶ Spec (.of k)) (v v' : ULift.{u} (Fin 2) → Γ(Z, ⊤))
+        hs hs', g = g' → v = v' →
+        ProjectiveSpace.homOfSections g v hs = ProjectiveSpace.homOfSections g' v' hs' := by
+      rintro Z g _ v _ hs hs' rfl rfl
+      rfl
+    rw [hπb, ← Category.assoc, AffineSpace.comp_homOfVector]
+    simp only [Function.comp_def]
+    rw [ProjectiveLine.homOfVector_comp_infinityChart]
+    exact key _ _ _ _ _ _ e₁ (by rw [e₂])
+  have hsep : ValuativeCriterion.Uniqueness (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) :=
+    IsSeparated.valuativeCriterion _
+  have hl : l₁ = l₂ := by
+    have := hsep ⟨R, K, X.fromSpecFunctionField ≫ π, i₂, hsq⟩
+    exact congrArg CommSq.LiftStruct.l (Subsingleton.elim
+      (⟨l₁, h₁, by simp only [l₁, i₂, Category.assoc, HomIsOver.comp_over]⟩ : hsq.LiftStruct)
+      ⟨l₂, h₂, by simp only [l₂, i₂, Category.assoc, ProjectiveLine.infinityChart_over,
+        AffineSpace.homOfVector_over]⟩)
+  have hx : π x = l₂ (IsLocalRing.closedPoint R) := by
+    rw [← hl]
+    exact congrArg π Scheme.fromSpecStalk_closedPoint.symm
+  rw [hx]
+  exact ⟨_, rfl⟩
+
 /-- **Finite sets of points of a curve lie in an affine open.** Let `X` be a geometrically
-integral smooth proper curve over `k`. Every finite set of points of `X` is contained in an
+integral smooth proper curve over `k`. Every finite set `t` of points of `X` is contained in an
 affine open of `X`.
 
-Choose a closed point `Q` outside the given set. The divisor `[Q]` is effective Cartier of
-positive degree `[κ(Q) : k]`, so `𝒪_X(Q)` is ample
-(`AlgebraicGeometry.Scheme.isAmple_of_degree_pos`, using `H⁰(X, 𝒪_X) = k`), and `X \ {Q}` is affine
-(`AlgebraicGeometry.Scheme.isAffine_compl_of_isAmple`).
+Choose a rational function `c`, transcendental over `k` and regular at the points of `t`
+(`exists_transcendental_mem_range_stalk`). The induced morphism `π : X ⟶ ℙ¹_k` is finite
+(`isFinite_flat_of_hom_projectiveLine_of_functionField`) and maps `t` into the affine chart
+(`mem_opensRange_infinityChart_of_mem_range_stalk`), whose preimage is affine.
+
+The blueprint instead removes a closed point `Q ∉ t`, using that `𝒪_X(Q)` is ample by
+Riemann–Roch; the argument here avoids Riemann–Roch.
 
 (blueprint: `thm-pc-hilb-curves`, Step 0) -/
 theorem exists_affineOpens_forall_mem_of_curve [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] (t : Finset X) : ∃ U : X.affineOpens, ∀ x ∈ t, x ∈ U.1 := by
   classical
-  have : LocallyOfFiniteType f := inferInstance
-  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
-  obtain ⟨x, hx⟩ := exists_not_isClosed_singleton_of_smoothOfRelativeDimension_one f
-  set C : Set X := {y | y ∈ t ∧ IsClosed ({y} : Set X)}
-  have hCfin : C.Finite := (t.finite_toSet).subset fun y hy ↦ hy.1
-  have hCcl : IsClosed C := by
-    rw [← C.biUnion_of_singleton]
-    exact hCfin.isClosed_biUnion fun y hy ↦ hy.2
-  obtain ⟨Q, hQC, hQ⟩ := nonempty_inter_closedPoints (Z := Cᶜ) ⟨x, fun h ↦ hx h.2⟩
-    hCcl.isOpen_compl.isLocallyClosed
-  have hQt : Q ∉ t := fun h ↦ hQC ⟨h, hQ⟩
-  set J := Scheme.IdealSheafData.vanishingIdeal (X := X) ⟨{Q}, hQ⟩
-  have hJ : J.IsInvertible := isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f hQ
-  have hsupp : (J.support : Set X) = {Q} := by
-    simp [J]
   let : X.Over (Spec (.of k)) := ⟨f⟩
   have hf : X ↘ Spec (.of k) = f := rfl
   have : SmoothOfRelativeDimension 1 (X ↘ Spec (.of k)) := by rw [hf]; infer_instance
   have : IsProper (X ↘ Spec (.of k)) := by rw [hf]; infer_instance
-  have : GeometricallyIntegral (X ↘ Spec (.of k)) := by rw [hf]; infer_instance
-  have : Scheme.GlobalSectionsBijective k X :=
-    Scheme.GlobalSectionsBijective.of_geometricallyIntegral
-  -- the subscheme `[Q]` is finite and nonempty over `k`
-  have hsub : Subsingleton J.subscheme := by
-    refine ⟨fun a b ↦ J.subschemeι.isEmbedding.injective ?_⟩
-    have ha : J.subschemeι a ∈ Set.range J.subschemeι := ⟨a, rfl⟩
-    have hb : J.subschemeι b ∈ Set.range J.subschemeι := ⟨b, rfl⟩
-    rw [J.range_subschemeι, hsupp] at ha hb
-    exact ha.trans hb.symm
-  have hne : Nonempty J.subscheme := by
-    have : Q ∈ Set.range J.subschemeι := by rw [J.range_subschemeι, hsupp]; rfl
-    obtain ⟨a, -⟩ := this
-    exact ⟨a⟩
-  have : LocallyQuasiFinite (J.subschemeι ≫ f) :=
-    .of_finite_preimage_singleton _ fun _ ↦ Set.toFinite _
-  have : IsFinite (J.subschemeι ≫ f) := .of_isProper_of_locallyQuasiFinite _
-  have hpos : 0 < (J.subschemeι ≫ f).finrankΓ := by
-    have hfin := (HasAffineProperty.iff_of_isAffine (P := @IsFinite)
-      (f := J.subschemeι ≫ f)).mp inferInstance
-    let := (J.subschemeι ≫ f).ΓAlgebra
-    have : Module.Finite k Γ(J.subscheme, ⊤) := by
-      have h2 : RingHom.Finite ((Scheme.ΓSpecIso (.of k)).inv ≫
-          (J.subschemeι ≫ f).appTop).hom := by
-        rw [CommRingCat.hom_comp]
-        exact hfin.2.comp (RingHom.Finite.of_surjective _
-          (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of k)).inv).2)
-      exact h2
-    have : Nonempty (⊤ : J.subscheme.Opens) := ⟨⟨hne.some, trivial⟩⟩
-    exact Module.finrank_pos
-  have hdeg : 0 < J.toModulesᵛ.degree k := by
-    rw [hJ.degree_dual_toModules]
-    exact_mod_cast hpos
-  have := hJ.isInvertible_dual_toModules
-  have hample := Scheme.isAmple_of_degree_pos (k := k) J.toModulesᵛ hdeg
-  let U : X.Opens := ⟨(J.support : Set X)ᶜ, J.support.isClosed.isOpen_compl⟩
-  have hU : IsAffine U := Scheme.isAffine_compl_of_isAmple hJ hample U.ι (by simp [U])
-  refine ⟨⟨U, hU⟩, fun y hy ↦ ?_⟩
-  change y ∈ (J.support : Set X)ᶜ
-  rw [hsupp]
-  rintro rfl
-  exact hQt hy
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  have hval := Scheme.valuationRing_stalk (X ↘ Spec (.of k))
+  have : CompactSpace X := (quasiCompact_iff_compactSpace f).mp inferInstance
+  obtain ⟨x₀, -, hx₀⟩ := (isClosed_univ (X := X)).exists_closed_singleton
+    ⟨genericPoint X, trivial⟩
+  have hdim : ringKrullDim (X.presheaf.stalk x₀) ≠ 0 := by
+    rw [Scheme.ringKrullDim_stalk_eq_one_of_isClosed (X ↘ Spec (.of k)) hx₀]
+    exact one_ne_zero
+  obtain ⟨c, hc, hct⟩ := exists_transcendental_mem_range_stalk (k := k) hval x₀ hdim t
+  obtain ⟨π, hπ, hπc⟩ := Scheme.exists_hom_projectiveLine_of_functionField c hc
+  have := (Scheme.isFinite_flat_of_hom_projectiveLine_of_functionField c hc π hπc).1
+  have hW : IsAffineOpen (ProjectiveLine.infinityChart (Spec (.of k))).opensRange :=
+    isAffineOpen_opensRange _
+  exact ⟨⟨π ⁻¹ᵁ _, hW.preimage π⟩, fun x hx ↦
+    mem_opensRange_infinityChart_of_mem_range_stalk hval c π hπc (hct x hx)⟩
 
 /-- **The Hilbert functors of a curve are representable.** For a geometrically integral smooth
 proper curve `X` over `k`, every `Hilb^d_{X/k}` is representable: `X` is separated over `k`,

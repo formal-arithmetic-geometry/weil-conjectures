@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Sheaf.AlgebraicGeometry.StrictHenselizationModuleFibreFactorization
 import Sheaf.AlgebraicGeometry.StrictHenselianIntegralSectionsInjective
-import Sheaf.Paper.StrictHenselizationLocalStructure
+import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 
 /-! # Local sections of an integral geometric fibre
 

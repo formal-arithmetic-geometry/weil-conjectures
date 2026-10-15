@@ -5,7 +5,7 @@ Authors: SHEAF group T1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
@@ -133,7 +133,12 @@ theorem exists_finite_stalk_tests_of_constructible
   refine ⟨P, ?_, ?_⟩
   · intro z
     obtain ⟨i, _, hi⟩ := Finset.mem_image.mp z.property
-    have hfin := (hS i).2.2 _ (s i)
+    have hfin : Finite ((pointSmallEtale (s i)).sheafFiber.obj
+        ((etaleSetPullback (S.immersion i)).obj
+          ((sheafCompose X.smallEtaleTopology
+            (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F))) :=
+      (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
+        ((hS i).2.2.isFinitelyGenerated_sheafFiber _ (s i))
     let e₁ := (pointSmallEtale (s i)).sheafFiber.mapIso ((ea i).app F)
     let e₂ := ((pointSmallEtale (s i)).sheafFiberCompIso
       (CategoryTheory.forget AddCommGrpCat.{u + 1})).app

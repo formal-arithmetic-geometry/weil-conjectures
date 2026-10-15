@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.Algebra.Category.Ring.Limits
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.CategoryTheory.Adjunction.LiftedCommRingBranch
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresRingCore

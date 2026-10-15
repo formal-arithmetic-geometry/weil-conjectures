@@ -24,7 +24,7 @@ Source: Stacks Project, Tag 04HX. Its naturality is the pointed transition equat
 (blueprint: def-weil-pbc-strict-henselization-point-evaluation). -/
 noncomputable def strictHenselizationPointCocone
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
-    (barY : Spec (.of Ω) ⟶ Y) : Cocone (strictHenselizationDiagram barY) where
+    (barY : Spec (.of Ω) ⟶ Y) : Cocone (smallStrictHenselizationDiagram barY) where
   pt := .of Ω
   ι := {
     app := fun j ↦
@@ -51,6 +51,7 @@ Source: Stacks Project, Tag 04HX.
 noncomputable def strictHenselizationPointEvaluation
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y) : strictHenselizationRing barY →+* Ω :=
-  (colimit.desc _ (strictHenselizationPointCocone barY)).hom
+  ((isColimitSmallStrictHenselizationCocone barY).desc
+    (strictHenselizationPointCocone barY)).hom
 
 end AlgebraicGeometry.Scheme

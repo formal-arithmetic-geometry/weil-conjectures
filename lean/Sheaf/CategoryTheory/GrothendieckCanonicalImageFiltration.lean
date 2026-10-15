@@ -110,13 +110,12 @@ theorem exists_grothendieck_canonical_image_filtration
   change F.IsAcyclicComposablePair G at hFG
   let HF : ∀ (X : A) (n : ℕ), DecreasingFiltration (((F ⋙ G).rightDerived n).obj X) :=
     fun X n ↦
-      { step := fun p ↦
+      { F := fun p ↦
           (Subobject.«exists»
             ((F.grothendieckSpectralObjectHBotTopIso G hFG n).hom.app X)).obj
             ((F.grothendieckSpectralObject G X).imageFiltration (n : ℤ)
               ((n : ℤ) + 1 - p))
-        antitone_step := by
-          intro p q hpq
+        F_succ_le p := by
           exact leOfHom ((Subobject.«exists»
             ((F.grothendieckSpectralObjectHBotTopIso G hFG n).hom.app X)).map
             (homOfLE ((F.grothendieckSpectralObject G X).imageFiltration_mono
@@ -127,8 +126,8 @@ theorem exists_grothendieck_canonical_image_filtration
     let n : ℤ := (p + q : ℕ)
     let raw : DecreasingFiltration
         ((Y.H n).obj (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ⊤)))) :=
-      { step := fun i ↦ Y.imageFiltration n (n + 1 - i)
-        antitone_step := fun i j hij ↦ Y.imageFiltration_mono n (by omega) }
+      { F := fun i ↦ Y.imageFiltration n (n + 1 - i)
+        F_succ_le i := Y.imageFiltration_mono n (by omega) }
     have hquot := Y.nonempty_cokernel_ofLE_imageFiltration_iso n (q : ℤ)
       (q + 1 : ℤ) rfl (Y.imageFiltration_mono n (by omega))
     let page := Y.spectralSequencePageXIso Abelian.SpectralObject.coreE₂Cohomological
@@ -151,18 +150,18 @@ theorem exists_grothendieck_canonical_image_filtration
         ((Y.E₂SpectralSequence).page r hr).X ((p : ℤ), (q : ℤ))) := by
       refine ⟨?_ ≪≫ hquot.some ≪≫ right.symm ≪≫ left ≪≫ page.symm⟩
       have hs : raw.step (p : ℤ) = Y.imageFiltration n ((q : ℤ) + 1) := by
-        dsimp [raw, n]
+        dsimp [raw, n, DecreasingFiltration.step]
         congr 1
         omega
       have ht : raw.step ((p : ℤ) + 1) = Y.imageFiltration n (q : ℤ) := by
-        dsimp [raw, n]
+        dsimp [raw, n, DecreasingFiltration.step]
         congr 1
         omega
       exact cokernel_ofLE_congr _ _ _ _ _ _ ht hs
     let e := (F.grothendieckSpectralObjectHBotTopIso G hFG (p + q)).app X
     have hs (i : ℤ) : (HF X (p + q)).step i =
         Subobject.mk ((raw.step i).arrow ≫ e.hom) := by
-      dsimp only [HF, raw]
+      dsimp only [HF, raw, DecreasingFiltration.step]
       have he := transported_subobject_eq e
         (Y.imageFiltration n (n + 1 - i))
       dsimp only [e, Iso.app_hom] at he
@@ -175,7 +174,7 @@ theorem exists_grothendieck_canonical_image_filtration
       HomologicalComplex.eval C _ ((p : ℤ), (q : ℤ))).mapIso (c X)
     exact ⟨ep ≪≫ rawiso.some.symm ≪≫ transiso⟩
   · intro X Y f n p
-    dsimp only [HF]
+    dsimp only [HF, DecreasingFiltration.step]
     have hx := transported_imageFiltration_eq (F.grothendieckSpectralObject G X) (n : ℤ)
       ((n : ℤ) + 1 - p) ((F.grothendieckSpectralObjectHBotTopIso G hFG n).app X)
     have hy := transported_imageFiltration_eq (F.grothendieckSpectralObject G Y) (n : ℤ)

@@ -147,7 +147,7 @@ noncomputable def rootsOfUnitySheaf : Sheaf X.smallEtaleTopology AddCommGrpCat.{
 on `X`, the second map being `ω ↦ ωⁿ` and `μₙ = ker(n)` the sheaf of `n`-th roots of unity.
 Its exactness is `AlgebraicGeometry.Scheme.kummerSequence_shortExact` and is *not* part of
 the definition.
-(blueprint: `def-sc-kummer-sequence`) -/
+(blueprint: `sk-def-kummer`, `def-sc-kummer-sequence`) -/
 noncomputable def kummerSequence :
     ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   ShortComplex.mk (kernel.ι (n • 𝟙 X.gmSheaf)) (n • 𝟙 X.gmSheaf) (kernel.condition _)

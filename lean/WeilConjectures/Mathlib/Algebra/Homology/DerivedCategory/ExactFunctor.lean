@@ -47,8 +47,9 @@ For exact functors between abelian categories, the induced functor
   `CategoryTheory.Functor.isLE_mapDerivedCategory_obj`,
   `CategoryTheory.Functor.homologyConcentratedIn_mapDerivedCategory_obj` and
   `CategoryTheory.Functor.bounded_mapDerivedCategory_obj`: `F.mapDerivedCategory` preserves
-  the bounds of the canonical t-structure; if `F` is faithful, it also reflects boundedness
-  (`CategoryTheory.Functor.bounded_of_bounded_mapDerivedCategory_obj`).
+  the bounds of the canonical t-structure; if `F` is faithful, it also reflects them
+  (`CategoryTheory.Functor.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj`
+  and `CategoryTheory.Functor.bounded_of_bounded_mapDerivedCategory_obj`).
 - `CategoryTheory.Functor.mapDerivedCategoryPlus`: the restriction of
   `F.mapDerivedCategory` to the bounded below derived categories, with the compatibility
   isomorphism `CategoryTheory.Functor.mapDerivedCategoryPlusCompatibility` and the
@@ -592,19 +593,28 @@ lemma isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj [F
   rw [IsZero.iff_id_eq_zero] at h ⊢
   exact F.map_injective (by simpa using h)
 
+/-- A faithful exact functor between abelian categories reflects homology concentration in an
+interval `[a, b]`: it reflects the vanishing of homology objects. -/
+lemma homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj [F.Faithful]
+    {a b : ℤ} {X : DerivedCategory C}
+    (hX : DerivedCategory.homologyConcentratedIn a b (F.mapDerivedCategory.obj X)) :
+    DerivedCategory.homologyConcentratedIn a b X := by
+  obtain ⟨h₁, h₂⟩ := hX
+  exact ⟨(DerivedCategory.isGE_iff X a).2 fun i hi ↦
+      F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+        ((DerivedCategory.isGE_iff _ a).1 h₁ i hi),
+    (DerivedCategory.isLE_iff X b).2 fun i hi ↦
+      F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+        ((DerivedCategory.isLE_iff _ b).1 h₂ i hi)⟩
+
 /-- A faithful exact functor between abelian categories reflects objects of the derived
 categories that are bounded for the canonical t-structure. -/
 lemma bounded_of_bounded_mapDerivedCategory_obj [F.Faithful] {X : DerivedCategory C}
     (hX : DerivedCategory.TStructure.t.bounded (F.mapDerivedCategory.obj X)) :
     DerivedCategory.TStructure.t.bounded X := by
-  obtain ⟨a, b, ha, hb⟩ := (DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).2 hX
-  refine (DerivedCategory.exists_homologyConcentratedIn_iff_bounded X).1 ⟨a, b, ?_, ?_⟩
-  · exact (DerivedCategory.isGE_iff X a).2 fun i hi ↦
-      F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
-        ((DerivedCategory.isGE_iff _ a).1 ha i hi)
-  · exact (DerivedCategory.isLE_iff X b).2 fun i hi ↦
-      F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
-        ((DerivedCategory.isLE_iff _ b).1 hb i hi)
+  obtain ⟨a, b, hab⟩ := (DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).2 hX
+  exact (DerivedCategory.exists_homologyConcentratedIn_iff_bounded X).1
+    ⟨a, b, F.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj hab⟩
 
 /-- The functor induced on the bounded below derived categories by an exact functor
 between abelian categories: the restriction of `F.mapDerivedCategory` to

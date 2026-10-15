@@ -82,7 +82,9 @@ definition `ν_X^* ∘ f^× ∘ Rν_{Y,*}` (`AlgebraicGeometry.ProEtale.rightDer
 
 - `AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint.isLeftAdjoint`: under clause (1),
   `Rf_!` is a left adjoint.
-- `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar`
+- `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar`, in
+  `WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension`: the bound on the
+  étale-origin class (blueprint `sk-prop-sf-fullcd-etale-origin`).
 -/
 
 @[expose] public section
@@ -191,34 +193,6 @@ structure IsExceptionalAdjointAdmissible (f : X ⟶ Y) [HasCompactification f] :
         (DerivedCategory.constructibleFiniteTor A X).inverseImage G
 
 end Admissibility
-
-/-- Blueprint `sk-prop-sf-fullcd-etale-origin`: `FullCD` on the étale-origin class
-
-**The cohomological-dimension bound on the étale-origin class.** Let `k` be separably closed,
-let `p : X' ⟶ Y` be a proper morphism of finite-type `k`-schemes with `dim X' ≤ d`, and let
-`Λ` be a finite coefficient ring whose exponent is invertible on `X'` — so that every sheaf of
-`Λ`-modules is torsion, which is the first line of the blueprint proof. Then for every étale
-sheaf `F` of `Λ`-modules on any base change `X''` of `X'`,
-
-`H^r(Rp'_{proét,*} ν_{X''}^* F) = 0` for `r > 2d`.
-
-Quantifying over the base changes is what turns the statement into the bound
-`HasUniformCohomologicalDimensionLE` restricted to the essential image of `ν^*`. This is *not*
-clause (1) of `HasAmbientExceptionalRightAdjoint`, which quantifies over all pro-étale sheaves
-and fails in general (see `sk-rem-sf-fullcd-scope` and the module docstring); what it supports
-is the constructible `Rf^!` on the étale-origin class. -/
-theorem isZero_homology_rightDerivedLowerStar_comparisonUpperStar (Λ : Type (u + 1))
-    [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsSepClosed k] {X' : Scheme.{u}}
-    (p : X' ⟶ Y) [IsProper p] (aX' : X' ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
-    [LocallyOfFiniteType aX'] [LocallyOfFiniteType aY] (hp : p ≫ aY = aX')
-    [HasInvertibleExponent Λ X'] (d : ℕ) (hd : topologicalKrullDim X' ≤ (d : WithBot ℕ∞))
-    {X'' Y'' : Scheme.{u}} (g' : X'' ⟶ X') (p' : X'' ⟶ Y'') (g : Y'' ⟶ Y)
-    (sq : IsPullback g' p' p g)
-    (F : Sheaf X''.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (r : ℤ) (hr : (2 * d : ℤ) < r) :
-    IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj
-      ((R((p')_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
-        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X'').obj F)))) :=
-  sorry
 
 end ProEtale
 

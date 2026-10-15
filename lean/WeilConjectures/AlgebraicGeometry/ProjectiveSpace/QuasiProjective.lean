@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateCoverDescent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateCoverImmersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Spreading
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
 
 /-!
 # Quasi-projectivity descends along field extensions
@@ -109,5 +110,31 @@ theorem exists_isImmersion_projectiveSpace_of_pullback {X : Scheme.{u}} (f : X �
   -- taking norms gives an ample coordinate cover of `X`
   obtain ⟨ι, hι, 𝒟, h𝒟⟩ := exists_coordinateCover_of_isPullback H ψ' hψ'
   exact 𝒟.exists_isImmersion f h𝒟
+
+attribute [local instance] MvPolynomial.gradedAlgebra in
+/-- **Finite sets of points of a projective scheme lie in an affine open.** Let `X` be a scheme
+with a closed immersion `i : X ⟶ ℙ(α; Spec k)` into a projective space. Then every finite set of
+points of `X` is contained in an affine open subscheme: by graded prime avoidance
+(`ProjectiveSpectrum.exists_homogeneous_notMem_of_finset`) there is a form `f` of positive degree
+over `ℤ` not vanishing at the images of the points, and the preimage in `X` of the affine
+`D₊(f) ⊆ ℙⁿ_ℤ` is affine, `X ⟶ ℙⁿ_ℤ` being an affine morphism.
+
+(Stacks 01ZY, for projective schemes) -/
+@[stacks 01ZY]
+theorem exists_isAffineOpen_superset_of_isClosedImmersion {X : Scheme.{u}} {α : Type u}
+    (i : X ⟶ ℙ(α; Spec (.of k))) [IsClosedImmersion i] (s : Set X) (hs : s.Finite) :
+    ∃ U : X.Opens, IsAffineOpen U ∧ s ⊆ U := by
+  classical
+  let φ := i ≫ ProjectiveSpace.toProjInt α (Spec (.of k))
+  obtain ⟨m, hm, f, hf, hfS⟩ :=
+    ProjectiveSpectrum.exists_homogeneous_notMem_of_finset
+      (𝒜 := MvPolynomial.homogeneousSubmodule α (ULift.{u} ℤ)) (hs.image φ.base).toFinset
+  have hU₀ := Proj.isAffineOpen_basicOpen (MvPolynomial.homogeneousSubmodule α (ULift.{u} ℤ))
+    f hf hm
+  have : IsAffineHom (ProjectiveSpace.toProjInt α (Spec (.of k))) := by
+    have : IsAffineHom (terminal.from (Spec (.of k))) := isAffineHom_of_isAffine _
+    exact MorphismProperty.pullback_snd (P := @IsAffineHom) _ _ this
+  refine ⟨φ ⁻¹ᵁ Proj.basicOpen _ f, hU₀.preimage φ, fun x hx ↦ ?_⟩
+  exact hfS (φ.base x) (by simpa using ⟨x, hx, rfl⟩)
 
 end AlgebraicGeometry

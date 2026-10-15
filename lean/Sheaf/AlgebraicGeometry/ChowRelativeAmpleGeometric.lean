@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import Sheaf.AlgebraicGeometry.Morphisms.Projective
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 
 @[expose] public section
 universe u
@@ -38,9 +38,14 @@ theorem chow_relative_ample_geometric (m : ℕ) (S Z X' : Scheme.{u})
     IsClosedImmersion.of_isPreimmersion j j.isClosedMap.isClosed_range
   have : IsClosedImmersion (ProjectiveSpace.liftBaseChange π j hj) := inferInstance
   refine ⟨inferInstance, ?_, inferInstance, ?_⟩
-  · exact { exists_closedImmersion := ⟨m, j, inferInstance, hj.symm⟩ }
-  · exact { exists_closedImmersion :=
-      ⟨m, ProjectiveSpace.liftBaseChange π j hj, inferInstance,
-        ProjectiveSpace.liftBaseChange_over π j hj⟩ }
+  · letI : IsHProjective (π ≫ g) :=
+      ⟨⟨ULift.{u} (Fin (m + 1)), inferInstance, j, inferInstance, hj.symm⟩⟩
+    letI : QuasiCompact (π ≫ g) := inferInstance
+    exact IsProjective.mk
+  · letI : IsHProjective π :=
+      ⟨⟨ULift.{u} (Fin (m + 1)), inferInstance, ProjectiveSpace.liftBaseChange π j hj,
+        inferInstance, ProjectiveSpace.liftBaseChange_over π j hj⟩⟩
+    letI : QuasiCompact π := inferInstance
+    exact IsProjective.mk
 
 end AlgebraicGeometry

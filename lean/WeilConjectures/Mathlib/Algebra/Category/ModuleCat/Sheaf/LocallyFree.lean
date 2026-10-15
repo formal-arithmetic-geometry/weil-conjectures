@@ -104,11 +104,13 @@ instance IsInvertibleData.shrink {M : SheafOfModules.{u} R} (q : M.LocalGenerato
 
 end LocalGeneratorsData
 
--- TODO(unify): sk-def-av-pic
--- The blueprint home of the Picard group of a scheme is the abelian-varieties block, so this
--- may need unifying with that block's version later.
 /-- A sheaf of modules is *invertible* if it is locally free of rank one, i.e. if there
-exist local generators satisfying `IsInvertibleData`. -/
+exist local generators satisfying `IsInvertibleData`.
+
+The isomorphism classes of invertible `𝒪_X`-modules on a scheme `X` form the Picard group
+`AlgebraicGeometry.Scheme.Pic`.
+
+(blueprint: `def-sc-invertible-module`) -/
 class IsInvertible (M : SheafOfModules.{u} R) : Prop where
   exists_isInvertibleData : ∃ q : LocalGeneratorsData.{u₁} M, q.IsInvertibleData
 

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.FourierTransform.AffineSpace.KernelTransform
 public import WeilConjectures.FourierTransform.AffineSpace.NegProd
 public import WeilConjectures.FourierTransform.AffineSpace.Transform
+public import WeilConjectures.FourierTransform.AffineSpace.Unit
 
 /-!
 

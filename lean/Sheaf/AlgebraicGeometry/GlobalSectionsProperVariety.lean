@@ -6,7 +6,7 @@ Authors: SHEAF stage-2 worker K1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Sheaf.AlgebraicGeometry.Variety
+public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import Sheaf.Paper.EulerCharacteristicWellDefined
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
@@ -51,7 +51,7 @@ generic point embeds `A` into the function field by
 `lem-weil-pbc-finite-dimensional-domain-is-field` to obtain the field structure.
 -/
 theorem globalSections_finite_field_of_isVariety [IsProper (X ↘ Spec (.of k))]
-    [Scheme.Hom.IsVariety (X ↘ Spec (.of k))] :
+    [IsVariety (X ↘ Spec (.of k))] :
     (Scheme.globalSectionsRingHom k (X := X)).Finite ∧ IsField Γ(X, ⊤) := by
   sorry
 

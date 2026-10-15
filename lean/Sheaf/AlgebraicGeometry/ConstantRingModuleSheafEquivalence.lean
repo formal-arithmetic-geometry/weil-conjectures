@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # Module sheaves and modules over the constant ring sheaf

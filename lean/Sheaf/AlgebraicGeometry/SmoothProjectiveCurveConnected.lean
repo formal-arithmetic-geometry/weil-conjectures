@@ -5,10 +5,10 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import WeilConjectures.AlgebraicGeometry.Curve
 import Sheaf.AlgebraicGeometry.Dimension
-import Sheaf.AlgebraicGeometry.Variety
+import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 
 /-!
 # Smooth projective curves are smooth connected curves
@@ -30,8 +30,8 @@ field is a smooth connected curve in the sense of the blueprint's file 06.
 Source: blueprint `sec-abelian-varieties/sk-def-av-jacobian/lem-pc-curves-are-sc.md`.
 
 Proof:
-1. Unfold `Scheme.Hom.IsSmoothProjectiveCurve` (def-pc-smooth-projective-curve) and
-   `Scheme.Hom.IsCurveOverField` (def-pc-curve). The scheme is integral, separated and of
+1. Unfold `IsSmoothProjectiveCurve` (def-pc-smooth-projective-curve) and
+   `IsIntegralCurve` (def-pc-curve). The scheme is integral, separated and of
    finite type over the field, with `Scheme.dim X = 1` (def-pc-dimension); its structure
    morphism is smooth. Projectivity is not needed in the remaining steps.
 2. An integral scheme is nonempty and irreducible (def-pc-integral-scheme and
@@ -46,8 +46,8 @@ Proof:
    (def-sbc-smooth-morphisms), this is the required conclusion. -/
 theorem Scheme.Hom.isConnectedCurve_of_isSmoothProjectiveCurve
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) [f.IsSmoothProjectiveCurve] :
+    (f : X ⟶ Spec (.of k)) [IsSmoothProjectiveCurve f] :
     IsConnectedCurve f ∧ Smooth f := by
-  sorry
+  exact ⟨inferInstance, inferInstance⟩
 
 end AlgebraicGeometry

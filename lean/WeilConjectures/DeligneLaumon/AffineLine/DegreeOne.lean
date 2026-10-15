@@ -7,6 +7,11 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.WeilSheaf.CohomologyShift
+public import WeilConjectures.WeilSheaf.HomologyShift
+public import WeilConjectures.WeilSheaf.StalkIso
 
 /-!
 # The degree-one estimate for an irreducible factor
@@ -35,7 +40,9 @@ bound holds for every irreducible, non-geometrically-constant `M` unramified at 
   the stationary-phase identification `H_c^1(A, j_*M) ≃ (j'_*M')_{0'}` and the vanishing of
   `H_c^2(A, j_*M)`.
 - `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_one`: the degree-one bound
-  for an irreducible nonexceptional sheaf pure of weight `w`.
+  for an irreducible nonexceptional sheaf pure of weight `w`, and
+  `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity`
+  for an irreducible sheaf unramified at infinity and not geometrically constant.
 
 ## Implementation notes
 
@@ -43,14 +50,12 @@ The degree-one bound is derived along the blueprint argument from the boundary s
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage` and the stationary
 phase
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
+The boundary semicontinuity is the case of the affine line of
+`AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`.
 
 ## TODO
 
-Prove the two inputs of the degree-one bound:
-- the boundary semicontinuity
-  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`;
-- the stationary phase
-  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
+Prove the stalk formula at the origin (`lem-fd-stalk-at-origin`), which is stated with `sorry`.
 -/
 
 @[expose] public section
@@ -107,20 +112,54 @@ theorem WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_fourierTransform_middleE
         (D.directImage.compactlySupportedCohomology 2)) ∧
     ∀ r : ℤ, r ∉ ({-1, 0} : Set ℤ) → Subsingleton ((((WeilComplex.homologySheaf r).obj
       ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).carrier) :=
-  -- TODO(adic): the case of `nonempty_equiv_stalk_homologySheaf_fourierTransform_origin` for
-  -- `K = (j_*M)[1]`, and `H_c^0(𝔸¹, j_*M) = 0`
-  sorry
+  by
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible (𝔸(PUnit.{u + 1}; Spec (.of k₀)) ↘ _)
+  -- the stalk at the origin in degree `r` is `H_c^{r + 2}(𝔸¹, j_*M)`
+  have key (r : ℤ) : Nonempty ((((WeilComplex.homologySheaf r).obj
+      ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).Equiv
+        (D.directImage.compactlySupportedCohomology (r + 1 + 1))) := by
+    obtain ⟨e₁⟩ := nonempty_equiv_stalk_homologySheaf_fourierTransform_origin ψ
+      D.middleExtension r
+    obtain ⟨e₂⟩ := WeilComplex.nonempty_equiv_compactlySupportedCohomology_shift
+      (WeilSheaf.toComplex.obj D.directImage) (r + 1)
+    exact ⟨e₁.trans e₂⟩
+  refine ⟨?_, ?_, fun r hr ↦ ?_⟩
+  · obtain ⟨e⟩ := key (-1)
+    norm_num at e
+    exact ⟨e⟩
+  · obtain ⟨e⟩ := key 0
+    norm_num at e
+    exact ⟨e⟩
+  · obtain ⟨e⟩ := key r
+    have hr' : r + 1 + 1 < 0 ∨ 2 < r + 1 + 1 ∨ r + 1 + 1 = 0 := by
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff, not_or] at hr
+      omega
+    have hs : Subsingleton (D.directImage.compactlySupportedCohomology (r + 1 + 1)).carrier := by
+      rcases hr' with h | h | h
+      · exact subsingleton_compactlySupportedCohomology_directImage D.j D.sheaf D.lisse (Or.inl h)
+      · exact subsingleton_compactlySupportedCohomology_directImage D.j D.sheaf D.lisse (Or.inr h)
+      · rw [h]
+        exact subsingleton_compactlySupportedCohomology_directImage_zero D.j D.sheaf D.lisse
+    exact e.toLinearEquiv.toEquiv.subsingleton
 
 namespace WeilSheaf.LisseOnDenseOpen
 
 /-- *Boundary semicontinuity of weights* on the affine line: if the lisse sheaf `M` on the
 dense open `U₀` has punctual weights at most `β`, then so has its direct image `j_*M` at every
 closed point of the line, including the finitely many points outside `U₀`, where it may be
-singular. This is the case of the affine line of the blueprint lemma, which holds on every
-smooth geometrically connected curve. (blueprint: `lem-wf-boundary-semicontinuity`) -/
+singular. This is the case of the affine line of
+`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`.
+(blueprint: `lem-wf-boundary-semicontinuity`) -/
 theorem hasWeightsAtMost_directImage (D : LisseOnDenseOpen k₀ l) {ι : PadicAlgCl l →+* ℂ}
-    {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β :=
-  sorry
+    {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β := by
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible _
+  exact WeilSheaf.hasWeightsAtMost_directImage D.j ι D.lisse hβ
 
 /-- *The origin fibre is the stationary-phase contribution.* If the Fourier transform of the
 middle extension `(j_*M)[1]` is the middle extension `(j'_*M')[1]` of `D'`, then the fibre of
@@ -138,7 +177,20 @@ theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (Padi
     Nonempty ((D.directImage.compactlySupportedCohomology 1).Equiv
         (D'.directImage.stalk (affineLine.origin k₀))) ∧
       Subsingleton (D.directImage.compactlySupportedCohomology 2).carrier := by
-  sorry
+  obtain ⟨e⟩ := hFT
+  -- the fibre of the transform at `0'` is `RΓ_c(𝔸¹, j_*M)[2]`
+  obtain ⟨⟨e₁⟩, ⟨e₂⟩, -⟩ := D.nonempty_equiv_stalk_fourierTransform_middleExtension_origin ψ
+  -- the fibre of `(j'_*M')[1]` is the stalk `(j'_*M')_{0'}` placed in degree `-1`
+  obtain ⟨e₃⟩ := WeilSheaf.nonempty_equiv_stalk_of_iso
+    ((WeilComplex.homologySheaf (-1)).mapIso e ≪≫
+      D'.directImage.homologySheafShiftToComplexIso 1) (affineLine.origin k₀)
+  refine ⟨⟨e₁.symm.trans e₃⟩, ?_⟩
+  have h₀ : Limits.IsZero ((WeilComplex.homologySheaf 0).obj
+      ((fourierTransform ψ).obj D.middleExtension)) :=
+    (WeilSheaf.isZero_homologySheaf_shift_toComplex D'.directImage (n := 1) (a := 0)
+      (by norm_num)).of_iso ((WeilComplex.homologySheaf 0).mapIso e)
+  have := WeilSheaf.subsingleton_stalk_of_isZero h₀ (affineLine.origin k₀)
+  exact e₂.symm.toLinearEquiv.toEquiv.subsingleton
 
 end WeilSheaf.LisseOnDenseOpen
 
@@ -164,5 +216,18 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →
   have h0 := hM' (affineLine.origin k₀)
   rw [affineLine.residueCard_origin] at h0
   exact h0.of_equiv e
+
+/-- If `M` is irreducible, unramified at infinity, not geometrically constant and punctually
+`ι`-pure of weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has weights
+at most `w + 1`: such an `M` is nonexceptional for every nontrivial `ψ`
+(`AlgebraicGeometry.isNonexceptional_of_isUnramifiedAtInfinity`). (blueprint: `sk-c-dl-a1-hc1`) -/
+theorem hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity
+    (ι : PadicAlgCl l →+* ℂ) (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l)
+    (hD : D.sheaf.IsIrreducibleLisse) (hinf : D.IsUnramifiedAtInfinity)
+    (hconst : ¬ D.IsGeometricallyConstant) {w : ℝ}
+    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
+    (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) :=
+  hasWeightsAtMost_compactlySupportedCohomology_one ψ ι hψ D hD
+    (isNonexceptional_of_isUnramifiedAtInfinity ψ hψ D hD hinf hconst) hw
 
 end AlgebraicGeometry

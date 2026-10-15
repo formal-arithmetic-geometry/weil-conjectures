@@ -130,6 +130,20 @@ theorem exists_integral_lowerStar_stalk_injective
         (A := ModuleCat.{u + 1} Λ)).map ψ := by
     rw [← Category.assoc, d.inv.naturality]
     simp only [Functor.comp_map, Category.assoc, ← Functor.map_comp, hφ]
+  have htarget : IsIso (d.inv.app F ≫
+      ((Scheme.pointSmallEtale (w ≫ g)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).map ψ) := by
+    letI : IsIso (((Scheme.pointSmallEtale (w ≫ g)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).map ψ) := hψstalk
+    infer_instance
+  have hm : Mono (d.inv.app F ≫
+      ((Scheme.pointSmallEtale (w ≫ g)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).map ψ) := by
+    exact (ModuleCat.mono_iff_injective _).2
+      (ConcreteCategory.bijective_of_isIso
+        (d.inv.app F ≫ ((Scheme.pointSmallEtale (w ≫ g)).sheafFiber
+          (A := ModuleCat.{u + 1} Λ)).map ψ)).1
+  letI := hm
   have : Mono (((Scheme.pointSmallEtale ((w ≫ g) ≫ ν)).sheafFiber
       (A := ModuleCat.{u + 1} Λ)).map φ) := mono_of_mono_fac hfac
   exact (ModuleCat.mono_iff_injective _).mp this

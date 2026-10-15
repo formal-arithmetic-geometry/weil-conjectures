@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Weil.Definitions
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import WeilConjectures.ZetaFunction.Rationality
+public import WeilConjectures.ZetaFunction.SmoothProper
 
 @[expose] public section
 
@@ -81,21 +84,29 @@ theorem zetaSeries_rational [LocallyOfFiniteType f] [QuasiCompact f] :
     ∃ P Q : Polynomial ℤ, Q.coeff 0 = 1 ∧
       f.zetaSeries * (Q.map (Int.castRingHom ℚ) : PowerSeries ℚ) =
         (P.map (Int.castRingHom ℚ) : PowerSeries ℚ) :=
-  sorry
+  f.exists_int_mul_zetaSeries_eq
 
 /-- **The Weil conjectures** (Dwork, Grothendieck, Deligne): the zeta function of a
 smooth, proper, geometrically integral scheme `X` of dimension `d` over a finite field
 `k` with `q` elements factors as `Z(X, t) = (P₁ ⋯ P_{2d-1}) / (P₀ ⋯ P_{2d})` with
 `Pᵢ ∈ ℤ[t]`, `Pᵢ(0) = 1`, `P₀ = 1 - t`, `P_{2d} = 1 - qᵈ t`, satisfying the functional
 equation and the Riemann hypothesis: all inverse roots of `Pᵢ` have absolute value
-`q^{i/2}`, and `α ↦ qᵈ / α` matches the inverse roots of `Pᵢ` with those of `P_{2d-i}`. -/
+`q^{i/2}`, and `α ↦ qᵈ / α` matches the inverse roots of `Pᵢ` with those of `P_{2d-i}`.
+(blueprint: `thm-weil-final`) -/
 theorem weil_conjectures (d : ℕ) [SmoothOfRelativeDimension d f] [IsProper f]
     [GeometricallyIntegral f] :
     ∃ P : Fin (2 * d + 1) → Polynomial ℤ,
       IsWeilFactorization (Nat.card k) d f.zetaSeries P ∧
       WeilFunctionalEquation (Nat.card k) d P ∧
-      WeilRiemannHypothesis (Nat.card k) d P :=
-  sorry
+      WeilRiemannHypothesis (Nat.card k) d P := by
+  let : X.Over (Spec (.of k)) := ⟨f⟩
+  have : SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k)) :=
+    ‹SmoothOfRelativeDimension d f›
+  have : IsProper (X ↘ Spec (CommRingCat.of k)) := ‹IsProper f›
+  have : GeometricallyConnected (X ↘ Spec (CommRingCat.of k)) :=
+    GeometricallyIntegral.geometricallyConnected f
+  obtain ⟨P, h₁, h₂, h₃, -⟩ := exists_isWeilFactorization_of_smoothProper k X d
+  exact ⟨P, h₁, h₂, h₃⟩
 
 end Scheme
 

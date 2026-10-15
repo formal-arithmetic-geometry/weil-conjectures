@@ -82,9 +82,9 @@ homology of derived global sections, sending every coprojection to the displayed
 functor's map. Thus the image cocone is a colimit. Only finite upper bounds are
 used, so an index in universe u+1 is allowed. Identity diagrams and zero sheaves
 give identity and zero colimit cocones; no torsion hypothesis is required. -/
-theorem etaleCohomology_isColimit_of_isDirected (X : Scheme.{u}) [CompactSpace X]
-    [QuasiSeparatedSpace X] {I : Type (u + 1)} [PartialOrder I]
-    [IsDirected I (· ≤ ·)] [Nonempty I]
+theorem etaleCohomology_isColimit_of_isFiltered_coefficientSize
+    (X : Scheme.{u}) [CompactSpace X]
+    [QuasiSeparatedSpace X] {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
     {D : I ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
     (hc : IsColimit c) (q : ℕ) :
     Nonempty (IsColimit
@@ -123,5 +123,15 @@ theorem etaleCohomology_isColimit_of_isDirected (X : Scheme.{u}) [CompactSpace X
       (DerivedCategory.homologyFunctor AddCommGrpCat (q : ℤ)) ≪≫
         Γ.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q
   exact ⟨IsColimit.mapCoconeEquiv e.symm (isColimitOfPreserves (Γ.rightDerived q) hc)⟩
+
+theorem etaleCohomology_isColimit_of_isDirected (X : Scheme.{u}) [CompactSpace X]
+    [QuasiSeparatedSpace X] {I : Type (u + 1)} [PartialOrder I]
+    [IsDirected I (· ≤ ·)] [Nonempty I]
+    {D : I ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
+    (hc : IsColimit c) (q : ℕ) :
+    Nonempty (IsColimit
+      ((DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
+        Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ)).mapCocone c)) :=
+  etaleCohomology_isColimit_of_isFiltered_coefficientSize X hc q
 
 end AlgebraicGeometry.Scheme

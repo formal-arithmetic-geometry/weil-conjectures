@@ -18,12 +18,13 @@ public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 Let `X = U₁ ⊔ ⋯ ⊔ Uᵣ` be a decomposition of a scheme into finitely many pairwise disjoint
 clopen subsets. An abelian étale sheaf `F` on `X` is the direct sum of the direct images
 `ιᵢ_* ιᵢ^* F` of its restrictions, and the direct image along the closed immersion `ιᵢ` does
-not change cohomology, so `Hⁿ(X, F)` vanishes as soon as every `Hⁿ(Uᵢ, ιᵢ^* F)` does.
+not change cohomology, so `Hⁿ(X, F)` is the product of the `Hⁿ(Uᵢ, ιᵢ^* F)`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite`: for a finite morphism `f : X ⟶ Y`
   the edge map `Hⁿ(Y, f_* G) ⟶ Hⁿ(X, G)` is bijective in every degree.
+- `AlgebraicGeometry.Etale.nonempty_equiv_pi_H_of_isClopen`: `Hⁿ(X, F) ≅ ∏ᵢ Hⁿ(Uᵢ, F|_{Uᵢ})`.
 - `AlgebraicGeometry.Etale.subsingleton_H_of_isClopen`: `Hⁿ(X, F)` vanishes if its
   restrictions to the pieces of a finite clopen decomposition do.
 -/
@@ -57,16 +58,16 @@ theorem bijective_edgeMap_of_isFinite (f : X ⟶ Y) [IsFinite f]
 
 /-- **Étale cohomology over a clopen decomposition.** Let `U : ι → X.Opens` be a finite
 family of pairwise disjoint closed opens covering `X`, and let `F` be an abelian étale sheaf
-on `X`. If `Hⁿ(Uᵢ, F|_{Uᵢ}) = 0` for every `i`, then `Hⁿ(X, F) = 0`.
+on `X`. Then `Hⁿ(X, F) ≅ ∏ᵢ Hⁿ(Uᵢ, F|_{Uᵢ})` (as sets).
 
 The unit maps assemble to an isomorphism `F ≅ ⨁ᵢ ιᵢ_* ιᵢ^* F`, as can be checked after
 restricting to each `Uⱼ`, where all summands but the `j`-th vanish; and
 `Hⁿ(X, ιᵢ_* ιᵢ^* F) = Hⁿ(Uᵢ, ιᵢ^* F)` since `ιᵢ` is a closed immersion, hence finite. -/
-theorem subsingleton_H_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.Opens)
+theorem nonempty_equiv_pi_H_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (hU : ∀ i, IsClosed (U i : Set X)) (hdisj : Pairwise fun i j ↦ Disjoint (U i : Set X) (U j))
     (hcov : ∀ x : X, ∃ i, x ∈ U i) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (n : ℕ) (hF : ∀ i, Subsingleton (Sheaf.H (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F) n)) :
-    Subsingleton (Sheaf.H F n) := by
+    (n : ℕ) :
+    Nonempty (Sheaf.H F n ≃ ∀ i, Sheaf.H (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F) n) := by
   have := Fintype.ofFinite ι
   have : HasFiniteBiproducts (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
     HasFiniteBiproducts.of_hasFiniteProducts
@@ -76,11 +77,6 @@ theorem subsingleton_H_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.Opens
   let G (i : ι) : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
     ((U i).ι)_*[AddCommGrpCat.{u + 1}].obj (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F)
   let φ : F ⟶ ⨁ G := biproduct.lift fun i ↦ (adj i).unit.app F
-  -- each `G i` has vanishing cohomology
-  have hG (i : ι) : Subsingleton (Sheaf.H (G i) n) :=
-    have : Subsingleton (Sheaf.H ((𝟭 (Sheaf (U i).toScheme.smallEtaleTopology
-      AddCommGrpCat.{u + 1})).obj (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F)) n) := hF i
-    (bijective_edgeMap_of_isFinite (U i).ι _ n).injective.subsingleton
   -- `φ` is an isomorphism, as it is one after restricting to every `U j`
   have hφ : IsIso φ := by
     refine isIso_of_isIso_upperStar_map_of_jointlySurjective AddCommGrpCat.{u + 1}
@@ -106,10 +102,24 @@ theorem subsingleton_H_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.Opens
       rw [← P.map_comp, biproduct.lift_π]
       exact hunit
     exact IsIso.of_isIso_comp_right _ (P.map (biproduct.π G j))
-  have : Subsingleton (Sheaf.H (⨁ G) n) :=
-    (Ext.addEquivBiproduct _ (biproduct.isBilimit G) n).toEquiv.subsingleton
-  refine (Function.LeftInverse.injective (f := Sheaf.H.map φ n) (g := Sheaf.H.map (inv φ) n)
-    fun x ↦ ?_).subsingleton
-  rw [← Sheaf.H.map_comp_apply, IsIso.hom_inv_id, Sheaf.H.map_id_apply]
+  let e₁ : Sheaf.H F n ≃ Sheaf.H (⨁ G) n :=
+    { toFun := Sheaf.H.map φ n
+      invFun := Sheaf.H.map (inv φ) n
+      left_inv x := by rw [← Sheaf.H.map_comp_apply, IsIso.hom_inv_id, Sheaf.H.map_id_apply]
+      right_inv x := by rw [← Sheaf.H.map_comp_apply, IsIso.inv_hom_id, Sheaf.H.map_id_apply] }
+  exact ⟨e₁.trans ((Ext.addEquivBiproduct _ (biproduct.isBilimit G) n).toEquiv.trans
+    (Equiv.piCongrRight fun i ↦ Equiv.ofBijective _
+      (bijective_edgeMap_of_isFinite (U i).ι _ n)))⟩
+
+/-- **Vanishing over a clopen decomposition.** Let `U : ι → X.Opens` be a finite family of
+pairwise disjoint closed opens covering `X`, and let `F` be an abelian étale sheaf on `X`. If
+`Hⁿ(Uᵢ, F|_{Uᵢ}) = 0` for every `i`, then `Hⁿ(X, F) = 0`
+(`AlgebraicGeometry.Etale.nonempty_equiv_pi_H_of_isClopen`). -/
+theorem subsingleton_H_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.Opens)
+    (hU : ∀ i, IsClosed (U i : Set X)) (hdisj : Pairwise fun i j ↦ Disjoint (U i : Set X) (U j))
+    (hcov : ∀ x : X, ∃ i, x ∈ U i) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (n : ℕ) (hF : ∀ i, Subsingleton (Sheaf.H (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F) n)) :
+    Subsingleton (Sheaf.H F n) :=
+  (nonempty_equiv_pi_H_of_isClopen U hU hdisj hcov F n).some.subsingleton
 
 end AlgebraicGeometry.Etale

@@ -48,6 +48,22 @@ theorem dense_iInf_of_genericPoints_subset [QuasiSober α] {ι : Type*} [Finite 
   dense_of_genericPoints_subset <| by
     rw [TopologicalSpace.Opens.coe_iInf]; exact Set.subset_iInter h
 
+/-- In a quasi-sober `T₀` space, a point is the generic point of an irreducible component if and
+only if it has no proper generalization. -/
+theorem mem_genericPoints_iff_forall_specializes [QuasiSober α] [T0Space α] {x : α} :
+    x ∈ genericPoints α ↔ ∀ y, y ⤳ x → y = x := by
+  refine ⟨fun hx y hy ↦ ?_, fun h ↦ ?_⟩
+  · have hle : _root_.closure ({x} : Set α) ⊆ _root_.closure {y} :=
+      specializes_iff_closure_subset.1 hy
+    exact (hy.antisymm (specializes_iff_closure_subset.2
+      (hx.2 isIrreducible_singleton.closure hle))).eq
+  · have hC := irreducibleComponent_mem_irreducibleComponents x
+    have hg := hC.1.isGenericPoint_genericPoint (isClosed_of_mem_irreducibleComponents _ hC)
+    have hgx := h _ (hg.specializes mem_irreducibleComponent)
+    change _root_.closure {x} ∈ irreducibleComponents α
+    rw [← hgx, hg.def]
+    exact hC
+
 /-! ### Ported from the `proetale` package (`Proetale.Mathlib.Topology.Sober`) -/
 
 -- after `quasiSober_iff`

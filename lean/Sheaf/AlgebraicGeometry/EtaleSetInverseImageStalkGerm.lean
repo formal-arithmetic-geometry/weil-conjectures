@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 

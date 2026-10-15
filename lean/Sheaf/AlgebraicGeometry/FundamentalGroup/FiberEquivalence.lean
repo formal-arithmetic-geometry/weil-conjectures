@@ -50,7 +50,7 @@ theorem exists_fiber_flc_equivalence {Y : Scheme.{w}} [ConnectedSpace Y]
     (G : Type w) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
     [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G] :
     ∃ (Φ : Y.FiniteEtale ≌ Y.FLC) (E : Y.FLC ≌ ContAction FintypeCat.{w} G)
-      (γ : G ≃ₜ* Aut (ObjectProperty.ι (IsFiniteLocallyConstantEtaleSheafOfSets (T := Y)) ⋙
+      (γ : G ≃ₜ* Aut (ObjectProperty.ι (IsLisseEtaleSheafOfSets (T := Y)) ⋙
         (pointSmallEtale s).sheafFiber (A := Type (w + 1)))),
       Nonempty (Φ.functor ⋙ ObjectProperty.ι _ ≅
         ObjectProperty.ι _ ⋙ Y.smallEtaleTopology.uliftYoneda.{w + 1}) ∧

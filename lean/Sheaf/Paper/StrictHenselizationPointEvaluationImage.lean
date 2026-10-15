@@ -37,7 +37,9 @@ theorem strictHenselizationPointEvaluation_mem
       separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω := by
   classical
   have := (strictHenselization_properties barY).2.1
-  obtain ⟨j, b, rfl⟩ := Concrete.colimit_exists_rep (strictHenselizationDiagram barY) a
+  obtain ⟨j, b, rfl⟩ := Concrete.isColimit_exists_rep
+    (smallStrictHenselizationDiagram barY)
+    (isColimitSmallStrictHenselizationCocone barY) a
   let n := (equivSmallModel.{v} (strictHenselizationNeighbourhoods barY)).inverse.obj j.unop
   let V := Spec (unop n.1.left)
   let z : Spec (.of Ω) ⟶ V := n.2.left
@@ -49,9 +51,11 @@ theorem strictHenselizationPointEvaluation_mem
     rw [Category.assoc, residue_descResidueField]
     simpa using germ_stalkClosedPointTo z ⊤ trivial
   have hc : strictHenselizationPointEvaluation barY
-      (colimit.ι (strictHenselizationDiagram barY) j b) =
+      ((smallStrictHenselizationCocone barY).ι.app j b) =
       (z.appTop ≫ (ΓSpecIso (.of Ω)).hom) b := by
-    exact ConcreteCategory.congr_hom (colimit.ι_desc (strictHenselizationPointCocone barY) j) b
+    exact ConcreteCategory.congr_hom
+      ((isColimitSmallStrictHenselizationCocone barY).fac
+        (strictHenselizationPointCocone barY) j) b
   rw [hc, ← heval]
   let F := Y.residueField (g (z (IsLocalRing.closedPoint Ω)))
   let L := V.residueField (z (IsLocalRing.closedPoint Ω))

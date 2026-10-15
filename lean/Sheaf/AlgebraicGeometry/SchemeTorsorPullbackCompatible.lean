@@ -5,7 +5,7 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 

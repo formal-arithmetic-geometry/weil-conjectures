@@ -102,7 +102,7 @@ private theorem line_pushforward_stalk_on_iso_open {W Y : Scheme.{u}}
       ((pushforward π).obj L)) ≃ₗ[W.presheaf.stalk x] W.presheaf.stalk x) := by
   classical
   let M := (pushforward π).obj L
-  let e := (pushforward_restrict_square π U.ι (π ⁻¹ᵁ U).ι (π ∣_ U)
+  let e := (Scheme.Modules.pushforwardRestrictIso
     (isPullback_morphismRestrict π U).flip).app L
   have : (L.restrict (π ⁻¹ᵁ U).ι).IsInvertible :=
     IsInvertible.of_iso ((restrictFunctorIsoPullback (π ⁻¹ᵁ U).ι).app L).symm

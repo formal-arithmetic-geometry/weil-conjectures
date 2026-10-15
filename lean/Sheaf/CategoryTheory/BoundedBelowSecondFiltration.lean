@@ -165,7 +165,7 @@ theorem boundedBelow_secondFiltration
     apply Subobject.mk_le_mk_of_comm c
     ext n
     exact Subobject.ofLE_arrow _
-  let L : DecreasingFiltration T := ⟨fun p ↦ Subobject.mk (a p), hanti⟩
+  let L : DecreasingFiltration T := ⟨fun p ↦ Subobject.mk (a p), fun p ↦ hanti (by omega)⟩
   have hL : ∀ p n, L.complexStep p n = S p n := by
     intro p n
     let e := Subobject.underlyingIso (a p)

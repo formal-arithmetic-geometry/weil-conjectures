@@ -1,72 +1,35 @@
 {
-  "id": "lem-sc-compact-flat-bar-union-augmentation",
-  "kind": "statement",
-  "title": "Canonical bar union augmentation",
-  "statement": "Let Y be a scheme, A its category of module sheaves [def-pc-cochain-complex-modules], L_n a cochain tower with transitions l_n, and D a stage-filtered diagram with specified stage colimits L_n and all the finite compact-flat piece properties of [lem-sc-compact-flat-finite-subcomplex-diagrams]. Let T be a flat telescope [def-sc-flat-telescope-stage-map] and p_n:L_n→T satisfy l_n;p_(n+1)=p_n. There exist towers R_n,F_n with transitions s_n,u_n and maps c_n:R_n→L_n, a_n:R_n→F_n. Every R_n and F_n is bounded above and termwise flat [def-pc-flat-sheaf-modules]. Every c_n is a quasi-isomorphism [def-pc-quasi-iso-modules]. Strictly, s_n;c_(n+1)=c_n;l_n and s_n;a_(n+1)=a_n;u_n. Every u_n is degreewise split monic. There are maps q_n:F_n→T with u_n;q_(n+1)=q_n and a_n;q_n=c_n;p_n. Put delta=identity minus shift on the coproduct of F_n, as in [def-sc-flat-telescope-stage-map]. For every proof that delta;desc(q)=0, the induced canonical map cokernel(delta)→T is an isomorphism in the homotopy category. This conclusion contains no splitting of the cokernel short complex.",
-  "source": {
-    "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatTelescopeBarEnlargement.lean",
-    "place": "the finite-piece, target-chain and union-bar paragraphs of the parent proof."
-  },
-  "stmt_deps": [
-    "def-pc-cochain-complex-modules",
-    "def-pc-flat-sheaf-modules",
-    "def-pc-quasi-iso-modules",
-    "def-sc-flat-telescope-stage-map",
-    "lem-sc-compact-flat-finite-subcomplex-diagrams"
-  ],
-  "proof": [
-    {
-      "text": "Extract the supplied literal telescope presentation of T and substitute its equality. Construct R_n as the explicit bar of the supplied source-stage diagram. Its upper bound, flatness and strict augmentation squares are proved by the three displayed source-bar property lemmas. Use sourceBarAugmentation_quasiIso for the proved principal-lower-ideal contraction and exact filtered-colimit argument; it supplies no object data.",
-      "uses": [
-        "def-sc-flat-telescope-stage-map",
-        "def-sc-compact-flat-source-bar-tower",
-        "lem-sc-compact-flat-source-bar-bounded",
-        "lem-sc-compact-flat-source-bar-flat",
-        "lem-sc-compact-flat-source-bar-naturality",
-        "lem-sc-compact-flat-source-bar-quasi-iso"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Construct the finite cone blocks by finite coproducts and mappingCone.map. Factor every source piece through a block using its finite degree support and compact generator terms; the proved termwise monicity makes the resulting factor a chain map. The least factorization index defines the enlarged preorder and its actual diagram. Construct F_n as the bar on source labels and target indices at most n. The proved finite-block and bar-total properties give bounds and flatness. The bar reindexing API gives degreewise split transition maps, strict source-to-enlarged squares, strict enlarged augmentation squares and a_n;q_n=c_n;p_n. No resolution, factorization, splitting or diagram object is chosen from an unproved existence theorem.",
-      "uses": [
-        "def-sc-compact-flat-telescope-blocks",
-        "lem-sc-compact-flat-factor-telescope-block",
-        "def-sc-compact-flat-bar-index",
-        "def-sc-compact-flat-enlarged-bar-tower",
-        "lem-sc-compact-flat-enlarged-bar-bounded",
-        "lem-sc-compact-flat-enlarged-bar-flat",
-        "lem-sc-compact-flat-enlarged-bar-map-split",
-        "lem-sc-compact-flat-source-enlarged-naturality",
-        "lem-sc-compact-flat-enlarged-bar-naturality",
-        "lem-sc-compact-flat-source-enlarged-augmentation"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Prove directly that the full enlarged bar is the colimit of its stages: a finite string has a maximum stage label, and its map under a compatible cocone is independent of later stages. Prove independently that the cokernel of identity minus shift is the sequential colimit. The resulting canonical isomorphism carries the full-bar augmentation exactly to cokernel.desc for every zero-relation proof. The target-chain inclusion and least-block retraction are actual bar maps with a proved strict section. The proved targetComparison gives their other inverse up to homotopy and invertibility of the target-chain augmentation. Cancel the target inclusion in the homotopy category, then compose with the proved canonical cokernel-to-full-bar isomorphism. This gives cokernelAugmentation_isIso and the last conjunct of the original statement. Assemble all six actual tower families and their proved properties in Lean.",
-      "uses": [
-        "lem-sc-flat-telescope-cokernel-colimit",
-        "lem-sc-compact-flat-bar-union-colimit",
-        "def-sc-compact-flat-bar-union-iso",
-        "lem-sc-compact-flat-bar-union-iso-augmentation",
-        "def-sc-compact-flat-bar-target-retraction",
-        "lem-sc-compact-flat-bar-target-section",
-        "lem-sc-compact-flat-bar-target-comparison",
-        "lem-sc-compact-flat-bar-target-cancellation",
-        "lem-sc-compact-flat-bar-union-homotopy",
-        "lem-sc-compact-flat-bar-cokernel-homotopy"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sc-compact-flat-bar-union-augmentation",
+ "kind": "statement",
+ "title": "Canonical bar union augmentation",
+ "statement": "Let Y be a scheme, A its category of module sheaves [def-pc-cochain-complex-modules], L_n a cochain tower with transitions l_n, and D a stage-filtered diagram with specified stage colimits L_n and all the finite compact-flat piece properties of [lem-sc-compact-flat-finite-subcomplex-diagrams]. Let T be a flat telescope [def-sc-flat-telescope-stage-map] and p_n:L_n→T satisfy l_n;p_(n+1)=p_n. There exist towers R_n,F_n with transitions s_n,u_n and maps c_n:R_n→L_n, a_n:R_n→F_n. Every R_n and F_n is bounded above and termwise flat [def-pc-flat-sheaf-modules]. Every c_n is a quasi-isomorphism [def-pc-quasi-iso-modules]. Strictly, s_n;c_(n+1)=c_n;l_n and s_n;a_(n+1)=a_n;u_n. Every u_n is degreewise split monic. There are maps q_n:F_n→T with u_n;q_(n+1)=q_n and a_n;q_n=c_n;p_n. Put delta=identity minus shift on the coproduct of F_n, as in [def-sc-flat-telescope-stage-map]. For every proof that delta;desc(q)=0, the induced canonical map cokernel(delta)→T is an isomorphism in the homotopy category. This conclusion contains no splitting of the cokernel short complex.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatTelescopeBarEnlargement.lean",
+  "place": "the finite-piece, target-chain and union-bar paragraphs of the parent proof."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules",
+  "def-sc-flat-telescope-stage-map",
+  "lem-sc-compact-flat-finite-subcomplex-diagrams"
+ ],
+ "proof": [
+  {
+   "text": "Extract the supplied literal telescope presentation of T and substitute its equality. Construct R_n as the explicit bar of the supplied source-stage diagram. Its upper bound, flatness and strict augmentation squares are proved by the three displayed source-bar property lemmas. Use sourceBarAugmentation_quasiIso for the proved principal-lower-ideal contraction and exact filtered-colimit argument; it supplies no object data.",
+   "uses": [
     "def-sc-flat-telescope-stage-map",
     "def-sc-compact-flat-source-bar-tower",
     "lem-sc-compact-flat-source-bar-bounded",
     "lem-sc-compact-flat-source-bar-flat",
     "lem-sc-compact-flat-source-bar-naturality",
-    "lem-sc-compact-flat-source-bar-quasi-iso",
+    "lem-sc-compact-flat-source-bar-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the finite cone blocks by finite coproducts and mappingCone.map. Factor every source piece through a block using its finite degree support and compact generator terms; the proved termwise monicity makes the resulting factor a chain map. The least factorization index defines the enlarged preorder and its actual diagram. Construct F_n as the bar on source labels and target indices at most n. The proved finite-block and bar-total properties give bounds and flatness. The bar reindexing API gives degreewise split transition maps, strict source-to-enlarged squares, strict enlarged augmentation squares and a_n;q_n=c_n;p_n. No resolution, factorization, splitting or diagram object is chosen from an unproved existence theorem.",
+   "uses": [
     "def-sc-compact-flat-telescope-blocks",
     "lem-sc-compact-flat-factor-telescope-block",
     "def-sc-compact-flat-bar-index",
@@ -76,7 +39,13 @@
     "lem-sc-compact-flat-enlarged-bar-map-split",
     "lem-sc-compact-flat-source-enlarged-naturality",
     "lem-sc-compact-flat-enlarged-bar-naturality",
-    "lem-sc-compact-flat-source-enlarged-augmentation",
+    "lem-sc-compact-flat-source-enlarged-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove directly that the full enlarged bar is the colimit of its stages: a finite string has a maximum stage label, and its map under a compatible cocone is independent of later stages. Prove independently that the cokernel of identity minus shift is the sequential colimit. The resulting canonical isomorphism carries the full-bar augmentation exactly to cokernel.desc for every zero-relation proof. The target-chain inclusion and least-block retraction are actual bar maps with a proved strict section. The proved targetComparison gives their other inverse up to homotopy and invertibility of the target-chain augmentation. Cancel the target inclusion in the homotopy category, then compose with the proved canonical cokernel-to-full-bar isomorphism. This gives cokernelAugmentation_isIso and the last conjunct of the original statement. Assemble all six actual tower families and their proved properties in Lean.",
+   "uses": [
     "lem-sc-flat-telescope-cokernel-colimit",
     "lem-sc-compact-flat-bar-union-colimit",
     "def-sc-compact-flat-bar-union-iso",
@@ -87,92 +56,135 @@
     "lem-sc-compact-flat-bar-target-cancellation",
     "lem-sc-compact-flat-bar-union-homotopy",
     "lem-sc-compact-flat-bar-cokernel-homotopy"
-  ],
-  "proof_origin": {
-    "by": "worker",
-    "group": "P2",
-    "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
-    "place": "The complete proof from explicit bars, finite cone blocks, principal-lower-ideal and partial-sum contractions, the signed total-cone comparison, and the two colimit universal properties. No new sorry remains."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "A stage filtered diagram of finite compact flat complexes augmented into a flat telescope has an enlarged bar tower with split inclusions and a canonical union augmentation that is a homotopy equivalence",
-      "results": "8 hits: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, AlgebraicTopology.DoldKan.Γ₀.splitting, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId, AlgebraicTopology.DoldKan.homotopyPInftyToId, HomologicalComplex.homotopyCofiber.descEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId",
-      "date": "2026-10-14",
-      "verdict": "No exact finite-subcomplex or relative bar-enlargement theorem; related constructions only."
-    },
-    {
-      "tool": "leansearch",
-      "query": "A stage filtered diagram of finite compact flat complexes augmented into a flat telescope has an enlarged bar tower with split inclusions and a canonical union augmentation that is a homotopy equivalence",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Limits.cokernel.desc, HomotopyCategory",
-      "results": "0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "No exact finite-subcomplex or relative bar-enlargement theorem; related constructions only."
-    },
-    {
-      "tool": "grep",
-      "query": "bar.*augmentation|bar.*total",
-      "results": "0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "No exact finite-subcomplex or relative bar-enlargement theorem; related constructions only."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.CompactFlatTelescopeBarEnlargement",
-    "date": "2026-10-14",
-    "group": "P1"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-piece, target-chain and union-bar paragraphs of the parent proof.",
-      "via": [
-        "lem-sc-compact-flat-telescope-bar-enlargement"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
-    "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
-    "declaration": "AlgebraicGeometry.exists_compact_flat_bar_union_augmentation",
-    "statement": "theorem exists_compact_flat_bar_union_augmentation (Y : Scheme.{u})\n    (L : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (l : ∀ n : ℕ, L n ⟶ L (n + 1))\n    (D : CompactFlatFiniteSubcomplexDiagrams Y L l)\n    (T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hT : isFlatTelescope Y T) (p : ∀ n : ℕ, L n ⟶ T)\n    (hp : ∀ n : ℕ, l n ≫ p (n + 1) = p n) :\n    let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)\n    let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ)\n    ∃ (R F : ℕ → CochainComplex A ℤ)\n      (s : ∀ n : ℕ, R n ⟶ R (n + 1))\n      (u : ∀ n : ℕ, F n ⟶ F (n + 1))\n      (c : ∀ n : ℕ, R n ⟶ L n) (a : ∀ n : ℕ, R n ⟶ F n),\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((R n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((R n).X i)) ∧\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((F n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((F n).X i)) ∧\n      (∀ n : ℕ, QuasiIso (c n)) ∧\n      (∀ n : ℕ, s n ≫ c (n + 1) = c n ≫ l n) ∧\n      (∀ n : ℕ, s n ≫ a (n + 1) = a n ≫ u n) ∧\n      (∀ (n : ℕ) (i : ℤ), IsSplitMono ((u n).f i)) ∧\n      ∃ q : ∀ n : ℕ, F n ⟶ T,\n        (∀ n : ℕ, u n ≫ q (n + 1) = q n) ∧\n        (∀ n : ℕ, a n ≫ q n = c n ≫ p n) ∧\n        ∀ hzero : flatTelescopeDifferential F u ≫ Sigma.desc q = 0,\n          IsIso (Q.map\n            (cokernel.desc (flatTelescopeDifferential F u) (Sigma.desc q) hzero))",
-    "branch": "sheaf-dag",
-    "by": "P1",
-    "date": "2026-10-14"
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "P1",
-    "result": "pass",
-    "landing": "20261014T084701-L-89287",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "P2",
-    "result": "pass",
-    "landing": "20261014T140635-L-117934",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-sc-flat-telescope-stage-map",
+  "def-sc-compact-flat-source-bar-tower",
+  "lem-sc-compact-flat-source-bar-bounded",
+  "lem-sc-compact-flat-source-bar-flat",
+  "lem-sc-compact-flat-source-bar-naturality",
+  "lem-sc-compact-flat-source-bar-quasi-iso",
+  "def-sc-compact-flat-telescope-blocks",
+  "lem-sc-compact-flat-factor-telescope-block",
+  "def-sc-compact-flat-bar-index",
+  "def-sc-compact-flat-enlarged-bar-tower",
+  "lem-sc-compact-flat-enlarged-bar-bounded",
+  "lem-sc-compact-flat-enlarged-bar-flat",
+  "lem-sc-compact-flat-enlarged-bar-map-split",
+  "lem-sc-compact-flat-source-enlarged-naturality",
+  "lem-sc-compact-flat-enlarged-bar-naturality",
+  "lem-sc-compact-flat-source-enlarged-augmentation",
+  "lem-sc-flat-telescope-cokernel-colimit",
+  "lem-sc-compact-flat-bar-union-colimit",
+  "def-sc-compact-flat-bar-union-iso",
+  "lem-sc-compact-flat-bar-union-iso-augmentation",
+  "def-sc-compact-flat-bar-target-retraction",
+  "lem-sc-compact-flat-bar-target-section",
+  "lem-sc-compact-flat-bar-target-comparison",
+  "lem-sc-compact-flat-bar-target-cancellation",
+  "lem-sc-compact-flat-bar-union-homotopy",
+  "lem-sc-compact-flat-bar-cokernel-homotopy"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "place": "The complete proof from explicit bars, finite cone blocks, principal-lower-ideal and partial-sum contractions, the signed total-cone comparison, and the two colimit universal properties. No new sorry remains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A stage filtered diagram of finite compact flat complexes augmented into a flat telescope has an enlarged bar tower with split inclusions and a canonical union augmentation that is a homotopy equivalence",
+   "results": "8 hits: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, AlgebraicTopology.DoldKan.Γ₀.splitting, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId, AlgebraicTopology.DoldKan.homotopyPInftyToId, HomologicalComplex.homotopyCofiber.descEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId",
+   "date": "2026-10-14",
+   "verdict": "No exact finite-subcomplex or relative bar-enlargement theorem; related constructions only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A stage filtered diagram of finite compact flat complexes augmented into a flat telescope has an enlarged bar tower with split inclusions and a canonical union augmentation that is a homotopy equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.cokernel.desc, HomotopyCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No exact finite-subcomplex or relative bar-enlargement theorem; related constructions only."
+  },
+  {
+   "tool": "grep",
+   "query": "bar.*augmentation|bar.*total",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No exact finite-subcomplex or relative bar-enlargement theorem; related constructions only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatTelescopeBarEnlargement",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece and target-chain bar argument in the telescope comparison supporting finite duality. the finite-piece, target-chain and union-bar paragraphs of the parent proof.",
+   "via": [
+    "lem-sc-compact-flat-telescope-bar-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactFlatBarUnionAugmentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatBarUnionAugmentation.lean",
+  "declaration": "AlgebraicGeometry.exists_compact_flat_bar_union_augmentation",
+  "statement": "theorem exists_compact_flat_bar_union_augmentation (Y : Scheme.{u})\n    (L : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (l : ∀ n : ℕ, L n ⟶ L (n + 1))\n    (D : CompactFlatFiniteSubcomplexDiagrams Y L l)\n    (T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hT : isFlatTelescope Y T) (p : ∀ n : ℕ, L n ⟶ T)\n    (hp : ∀ n : ℕ, l n ≫ p (n + 1) = p n) :\n    let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)\n    let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ)\n    ∃ (R F : ℕ → CochainComplex A ℤ)\n      (s : ∀ n : ℕ, R n ⟶ R (n + 1))\n      (u : ∀ n : ℕ, F n ⟶ F (n + 1))\n      (c : ∀ n : ℕ, R n ⟶ L n) (a : ∀ n : ℕ, R n ⟶ F n),\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((R n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((R n).X i)) ∧\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((F n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((F n).X i)) ∧\n      (∀ n : ℕ, QuasiIso (c n)) ∧\n      (∀ n : ℕ, s n ≫ c (n + 1) = c n ≫ l n) ∧\n      (∀ n : ℕ, s n ≫ a (n + 1) = a n ≫ u n) ∧\n      (∀ (n : ℕ) (i : ℤ), IsSplitMono ((u n).f i)) ∧\n      ∃ q : ∀ n : ℕ, F n ⟶ T,\n        (∀ n : ℕ, u n ≫ q (n + 1) = q n) ∧\n        (∀ n : ℕ, a n ≫ q n = c n ≫ p n) ∧\n        ∀ hzero : flatTelescopeDifferential F u ≫ Sigma.desc q = 0,\n          IsIso (Q.map\n            (cokernel.desc (flatTelescopeDifferential F u) (Sigma.desc q) hzero))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T084701-L-89287",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261014T140635-L-117934",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

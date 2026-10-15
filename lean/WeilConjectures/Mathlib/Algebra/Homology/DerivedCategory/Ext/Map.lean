@@ -110,4 +110,36 @@ lemma mk₀_comp_mapExactFunctor_comp_eq_zero_iff (G₁ : C ⥤ D) [G₁.Additiv
     simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← reassoc_of% hc,
       IsIso.inv_hom_id_assoc]
 
+omit [HasExt.{w'} D] [EnoughInjectives C] in
+lemma mk₀_comp_eq_zero_iff_of_isIso {A A' B : C} (a : A' ⟶ A) [IsIso a] {n : ℕ}
+    (y : Ext A B n) : (mk₀ a).comp y (zero_add n) = 0 ↔ y = 0 := by
+  refine ⟨fun h ↦ ?_, fun h ↦ by rw [h, comp_zero]⟩
+  have := congrArg (fun z ↦ (mk₀ (inv a)).comp z (zero_add n)) h
+  simpa [← comp_assoc_of_second_deg_zero, mk₀_comp_mk₀] using this
+
+omit [HasExt.{w'} D] [EnoughInjectives C] in
+lemma comp_mk₀_eq_zero_iff_of_isIso {A B B' : C} (b : B ⟶ B') [IsIso b] {n : ℕ}
+    (y : Ext A B n) : y.comp (mk₀ b) (add_zero n) = 0 ↔ y = 0 := by
+  refine ⟨fun h ↦ ?_, fun h ↦ by rw [h, zero_comp]⟩
+  have := congrArg (fun z ↦ z.comp (mk₀ (inv b)) (add_zero n)) h
+  simpa [comp_assoc_of_third_deg_zero, mk₀_comp_mk₀] using this
+
+omit [HasExt.{w'} D] in
+/-- Pushing a class forward along the identity functor does not change it. -/
+lemma mapExactFunctor_id {A : C} (n : ℕ) :
+    ∀ {B : C} (x : Ext A B n), x.mapExactFunctor (𝟭 C) = x := by
+  induction n with
+  | zero =>
+    intro B x
+    obtain ⟨a, rfl⟩ := (mk₀_bijective A B).2 x
+    rw [mapExactFunctor_mk₀]
+    rfl
+  | succ n ih =>
+    intro B x
+    let ι := Injective.ι B
+    let S := ShortComplex.mk ι (cokernel.π ι) (cokernel.condition ι)
+    have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel ι }
+    obtain ⟨y, rfl⟩ := covariant_sequence_exact₁ A hS x (eq_zero_of_injective _) rfl
+    rw [mapExactFunctor_comp, ih, mapExactFunctor_extClass]
+
 end CategoryTheory.Abelian.Ext

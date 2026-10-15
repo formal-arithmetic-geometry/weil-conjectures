@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.EtaleSetPullbackSheafEquivalence
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismIdentity
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismComposition

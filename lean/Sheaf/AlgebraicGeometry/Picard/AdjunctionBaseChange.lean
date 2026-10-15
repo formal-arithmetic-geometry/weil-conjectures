@@ -45,7 +45,7 @@ pullback-composition isomorphism. The tensor-pullback adjunction is the canonica
 by the sectionwise unit formula in `exists_tensorPullbackAdjunction`. -/
 theorem nonempty_arrowIso_moduleBaseChange_counit
     {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) [f.IsSmoothProjectiveCurve]
+    (f : X ⟶ Spec (.of k)) [IsSmoothProjectiveCurve f]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules]
     {T T' : Over (Spec (.of k))} (i : T' ⟶ T)

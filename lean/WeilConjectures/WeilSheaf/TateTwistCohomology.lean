@@ -253,8 +253,11 @@ noncomputable def tateTwistSheafObjIso : ∀ m : ℤ, (tateTwistSheaf k₀ l X m
       (tateTwistSheafNatObjIso k₀ l X (n + 1)) ≪≫
       constantTwistCongrIso (zpow_negSucc _ _).symm _
 
-/-- **The Tate sheaves are constant twists.** The Tate sheaf `ℚ̄_ℓ(m)` is isomorphic, as a Weil
-sheaf, to the constant Weil twist `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}` of `ℚ̄_ℓ`. -/
+/-- **The Tate sheaves are constant twists** (compatibility of the Tate twists). The Tate sheaf
+`ℚ̄_ℓ(m)` is isomorphic, as a Weil sheaf, to the constant Weil twist `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}` of
+`ℚ̄_ℓ`: the Weil structure of `ℚ̄_ℓ(1)`, the pullback of roots of unity, is `χ_ℓ(σ)` times that of
+`ℚ̄_ℓ`, and the tensor products and duals defining `ℚ̄_ℓ(m)` give `χ_ℓ(σ)ᵐ`.
+(blueprint: `lem-wf-tate-twist-compatibility`) -/
 noncomputable def tateTwistSheafIso (m : ℤ) :
     tateTwistSheaf k₀ l X m ≅ (adicConstant k₀ l X).constantTwist (cyclotomicUnit k₀ l ^ m) :=
   ObjectProperty.isoMk _

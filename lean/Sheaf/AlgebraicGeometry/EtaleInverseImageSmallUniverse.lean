@@ -5,7 +5,7 @@ Authors: SHEAF group S3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.CategoryTheory.Sites.Whiskering
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale

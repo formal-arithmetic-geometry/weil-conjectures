@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Regular.SMul
 
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootFiniteEtaleModel
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteStrictHenselianAlgebraEtaleSection
-import Sheaf.Paper.StrictHenselizationLocalStructure
+import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 
 /-!
 # A section on a punctured root cover over the strict henselization

@@ -78,7 +78,7 @@ theorem strictHenselization_dvr
           Scheme.Hom.appLE
             (((AffineEtale.Spec Y).obj
               (((equivSmallModel.{v} (strictHenselizationNeighbourhoods s)).inverse.obj n).1)).hom)
-              U ⊤ h ≫ colimit.ι (strictHenselizationDiagram s) (op n)) ∧
+              U ⊤ h ≫ (smallStrictHenselizationCocone s).ι.app (op n)) ∧
       RingHom.Flat ι.hom ∧ IsLocalHom ι.hom ∧ Function.Injective ι.hom ∧
       ((∃ _ : IsDomain (Y.presheaf.stalk (s.base x)).1,
           IsDiscreteValuationRing (Y.presheaf.stalk (s.base x)).1) ↔

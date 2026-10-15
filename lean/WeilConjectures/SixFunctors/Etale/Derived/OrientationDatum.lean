@@ -154,6 +154,7 @@ noncomputable def OrientationComparisonData.baseChangeIso (C : OrientationCompar
     [HasCompactification f] [HasInvertibleExponent Λ X] [HasCompactification f']
     (γf : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f) :
     (tateObject Λ X' d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f' :=
+  haveI : HasInvertibleExponent Λ X' := .of_hom g
   (leftDerivedUpperStarTateShiftIso Λ g d).symm ≪≫ (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso γf ≪≫
     (C.upperShriekBaseChange sq d).app (𝟙_ _) ≪≫
     (R(f')^![ModuleCat.{u + 1} Λ]).mapIso (leftDerivedUpperStarUnitIso _ v)

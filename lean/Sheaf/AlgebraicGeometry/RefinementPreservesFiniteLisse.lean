@@ -5,12 +5,13 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.ConstructibleSheaf.Refinement
 
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-! # Finite local constancy under refinement
 
@@ -254,10 +255,10 @@ theorem refinement_preserves_finite_lisse
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (T S : Stratification X) (hTS : T.Refines S)
     (hS : ∀ k : Fin S.n,
-      IsFiniteLocallyConstantEtaleSheafOfSets
+      IsLisseEtaleSheafOfSets
         ((etaleSetPullback (S.immersion k)).obj F)) :
     ∀ i : Fin T.n,
-      IsFiniteLocallyConstantEtaleSheafOfSets
+      IsLisseEtaleSheafOfSets
         ((etaleSetPullback (T.immersion i)).obj F) := by
   intro i
   obtain ⟨k, hk⟩ := hTS i
@@ -280,11 +281,15 @@ theorem refinement_preserves_finite_lisse
       ((c X (T.domain i) (Limits.pullback a b) a (Limits.pullback.fst a b)).app F).symm
   refine ⟨etaleSetLocallyConstant_descend (Limits.pullback.fst a b)
     ((etaleSetPullback a).obj F) (locallyConstant_of_iso e hq), ?_⟩
+  refine isFiniteSheaf_of_finite_algClosed_stalks _ ?_
   intro Ω _ _ s
   obtain ⟨t, ht⟩ := exists_comp_eq_of_surjective (Limits.pullback.fst a b) s
   obtain ⟨cq, hcq, _⟩ := etaleSetInverseImageStalkGerm (S.domain k) (Limits.pullback a b)
     (Limits.pullback.snd a b) ((etaleSetPullback b).obj F) Ω t
-  have hfinite := (hS k).2 Ω (t ≫ Limits.pullback.snd a b)
+  have hfinite : Finite ((pointSmallEtale (t ≫ Limits.pullback.snd a b)).sheafFiber.obj
+      ((etaleSetPullback b).obj F)) :=
+    (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
+      ((hS k).2.isFinitelyGenerated_sheafFiber Ω (t ≫ Limits.pullback.snd a b))
   have hqfinite : Finite ((pointSmallEtale t).sheafFiber.obj
       ((etaleSetPullback (Limits.pullback.snd a b)).obj ((etaleSetPullback b).obj F))) :=
     Finite.of_injective cq hcq.1

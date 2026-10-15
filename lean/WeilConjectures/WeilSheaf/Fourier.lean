@@ -1381,14 +1381,6 @@ instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).IsT
   unfold fourierTransform
   infer_instance
 
--- TODO(unify): sk-thm-inversion
-/-- **Fourier inversion**: for a nontrivial additive character the Fourier–Deligne transform is
-an equivalence between the triangulated categories of Weil complexes on the two dual lines, with
-quasi-inverse `FT_{ψ⁻¹}` up to the Tate twist `(1)`. -/
-theorem isEquivalence_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) :
-    (fourierTransform (l := l) ψ).IsEquivalence :=
-  sorry
-
 end Fourier
 
 end AlgebraicGeometry

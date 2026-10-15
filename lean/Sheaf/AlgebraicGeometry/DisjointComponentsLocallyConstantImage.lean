@@ -5,7 +5,7 @@ Authors: SHEAF group X3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover

@@ -56,7 +56,9 @@ coordinates, with `i^* 𝒪(1) ≅ M`.
 This is the "projective" variant of the notion: Hartshorne (II.5) and EGA II (4.4.2) only ask
 for an immersion. The two agree when `f` is proper, since an immersion from a proper
 `S`-scheme into the separated `S`-scheme `ℙ(n; S)` is closed, and every use of very ample
-modules in the project is for a proper `f`. -/
+modules in the project is for a proper `f`.
+
+This is the very ample part of blueprint `def-sc-ample` (with `S = Spec k`). -/
 def IsVeryAmple {S : Scheme.{u}} (f : X ⟶ S) (M : X.Modules) : Prop :=
   ∃ (n : Type u) (i : X ⟶ ℙ(n; S)), Finite n ∧ IsClosedImmersion i ∧ i ≫ ℙ(n; S) ↘ S = f ∧
     Nonempty (ProjectiveSpace.twistRestrict i 1 ≅ M)
@@ -128,7 +130,10 @@ notion (EGA II 4.5.3, Stacks `01PS`) when `f` is proper, which is the only case 
 blueprint uses it, but an ample module on a non-proper `K`-scheme, such as `𝒪` on `𝔸¹_K`, does
 not satisfy `IsAmple`. Statements such as Serre vanishing
 (`AlgebraicGeometry.Scheme.Modules.exists_subsingleton_H_tensorObj_tensorPow`) hold without a
-properness hypothesis for this reason. -/
+properness hypothesis for this reason.
+
+This is also blueprint `def-sc-ample` and, as recorded in blueprint `rem-pc-sc-ample`, it is
+used in its stated generality, for any proper scheme over a field. -/
 def IsAmple (f : X ⟶ Spec (.of K)) (M : X.Modules) : Prop :=
   M.IsInvertible ∧ ∃ m : ℕ, 0 < m ∧ IsVeryAmple f (M.tensorPow m)
 

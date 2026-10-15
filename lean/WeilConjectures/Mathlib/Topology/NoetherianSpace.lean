@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Topology.Connected.LocallyConnected
+public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Topology.Separation.Connected
 public import Mathlib.Topology.Sober
@@ -231,5 +232,25 @@ theorem finite_setOf_forall_specializes [QuasiSober α] {Z : Set α} (hZ : IsClo
   · simp only [Set.mem_iUnion, Set.mem_singleton_iff]
     exact ⟨t, ht, h.symm⟩
   · exact absurd ⟨t, ht, h ▸ hg.mem⟩ hξ
+
+/-- **Functions constant along specialisations are locally constant** on a noetherian
+quasi-sober space: near a point `y` every point is a specialisation of a generalisation of `y`
+(`TopologicalSpace.NoetherianSpace.exists_isOpen_forall_exists_specializes`). -/
+theorem isLocallyConstant_of_specializes [QuasiSober α] {β : Type*} {f : α → β}
+    (hf : ∀ ⦃x y : α⦄, x ⤳ y → f x = f y) : IsLocallyConstant f := by
+  refine (IsLocallyConstant.iff_exists_open f).2 fun y ↦ ?_
+  obtain ⟨W, hW, hyW, h⟩ := exists_isOpen_forall_exists_specializes isClosed_univ y
+  refine ⟨W, hW, hyW, fun z hz ↦ ?_⟩
+  obtain ⟨g, -, hgz, hgy⟩ := h z hz trivial
+  exact (hf hgz).symm.trans (hf hgy)
+
+/-- In a noetherian quasi-sober space, a point in the closure of an open set `S` is a
+specialisation of a point of `S`. -/
+theorem exists_specializes_of_mem_closure [QuasiSober α] {S : Set α} (hS : IsOpen S) {z : α}
+    (hz : z ∈ closure S) : ∃ s ∈ S, s ⤳ z := by
+  obtain ⟨W, hW, hzW, h⟩ := exists_isOpen_forall_exists_specializes isClosed_closure z
+  obtain ⟨z', hz'W, hz'S⟩ := mem_closure_iff.1 hz W hW hzW
+  obtain ⟨g, -, hgz', hgz⟩ := h z' hz'W (subset_closure hz'S)
+  exact ⟨g, hgz'.mem_open hS hz'S, hgz⟩
 
 end TopologicalSpace.NoetherianSpace

@@ -105,7 +105,8 @@ def hand_names(d):
         out += [x for x in [rec.get("declaration")] + list(rec.get("declarations") or []) if isinstance(x, str) and x]
     if not d.get("created") and not rec.get("note", "").startswith("attached by the lead"):
         return out
-    for a in (d.get("lean_audit") or {}).values():
+    audit = d.get("lean_audit")
+    for a in (audit if isinstance(audit, dict) else {}).values():
         if isinstance(a, dict):
             out += [x["name"] for x in a.get("decls") or [] if isinstance(x, dict) and x.get("name")]
     return out

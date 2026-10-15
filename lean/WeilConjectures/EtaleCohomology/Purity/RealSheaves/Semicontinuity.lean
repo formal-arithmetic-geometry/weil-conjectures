@@ -498,8 +498,10 @@ noncomputable def boundaryPolynomial (ρ : Representation (PadicAlgCl l) WU.carr
     (s : ↥((Set.range j.base)ᶜ)) : Polynomial ℂ :=
   ((D.boundaryFrobenius l ρ s).charpolyRev.map ι).comp (Polynomial.X ^ p.degreeOver s.1)
 
-/-- Blueprint `lem-wf-euler-product-middle-extension`: Graded Euler-product identity for a
-middle extension.
+/-- The Euler-product identity of `lem-wf-euler-product-middle-extension`, transported to the
+representation side, as a hypothesis on a boundary datum. (The blueprint node itself is the
+sheaf-level identity
+`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_directImage`.)
 
 Let `X'₀ ⊆ C₀` be an affine open, a smooth geometrically connected affine curve, and let
 `j' : U'₀ = U₀ ∩ X'₀ ↪ X'₀`. For the middle extension `j'_* ℱ` of a lisse Weil sheaf `ℱ` the
@@ -845,7 +847,8 @@ theorem frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius [SmoothOfRelativeD
     linarith
   linarith
 
-/-- Blueprint `lem-wf-boundary-semicontinuity`: Boundary semicontinuity of weights on a curve.
+/-- Boundary semicontinuity of weights on a curve (`lem-wf-boundary-semicontinuity`), on the
+representation side and conditional on the Euler-product hypothesis `hD`.
 
 Let `j : U₀ ↪ C₀` be a dense open of a smooth geometrically connected curve over `𝔽_q` with
 finite complement, and let `ℱ` be a lisse Weil sheaf on `U₀` such that every local Frobenius
@@ -893,7 +896,8 @@ theorem hasEigenvalue_boundaryFrobenius_of_forall_inertia
     simp [boundaryFrobenius, hv.apply_eq_smul]
   · exact fun h ↦ hv.2 (congrArg Subtype.val h)
 
-/-- Blueprint `cor-wf-unramified-boundary-purity`: Purity at an unramified boundary point.
+/-- Purity at an unramified boundary point (first part of `cor-wf-unramified-boundary-purity`),
+conditional on the Euler-product hypothesis `hD`.
 
 Let `ℱ` be lisse and punctually `ι`-pure of weight `w` on `U₀`, and let `s` be a boundary point
 at which the inertia `I_s` acts trivially. Then the extended stalk `(j_* ℱ)_s̄ = V` is pure of

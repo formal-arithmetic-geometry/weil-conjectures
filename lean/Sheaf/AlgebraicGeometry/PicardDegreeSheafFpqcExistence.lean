@@ -41,13 +41,22 @@ theorem exists_amalgamation_fpqc_sheafify_picardDegree
         S.toFunctor).obj R.arrows)
     (hx : x.Compatible) :
     ∃ t, x.IsAmalgamation t := by
-  have : Smooth f := SmoothOfRelativeDimension.smooth (n := 1) f
+  letI : Smooth f := SmoothOfRelativeDimension.smooth (n := 1) f
   let J := Scheme.fppfTopology.over (Spec (.of k))
+  letI : Presheaf.IsLocallySurjective J (toPicardFunctor f) := by
+    change Presheaf.IsLocallySurjective _ (toSheafify _ _)
+    infer_instance
   let Q := ((presheafToSheaf J (Type (u + 1))).obj S.toFunctor).obj
   let τ : Q ⟶ (picardFunctor f).obj := sheafifyMap J S.ι
   have hτ : ∀ U, Function.Injective (τ.app U) := by
     intro U
-    exact (mono_iff_injective (τ.app U)).1 inferInstance
+    change Function.Injective
+      (((presheafToSheaf J (Type (u + 1))).map S.ι).hom.app U)
+    have h : Sheaf.IsLocallyInjective
+        ((presheafToSheaf J (Type (u + 1))).map S.ι) := by
+      rw [Presheaf.isLocallyInjective_presheafToSheaf_map_iff]
+      infer_instance
+    exact (Sheaf.isLocallyInjective_iff_injective _).1 h U
   have hτ_unit (U : Over (Spec (.of k))) (L : S.toFunctor.obj (op U)) :
       τ.app (op U) ((toSheafify J S.toFunctor).app (op U) L) =
         (toPicardFunctor f).app (op U) L.1 := by
@@ -64,7 +73,7 @@ theorem exists_amalgamation_fpqc_sheafify_picardDegree
   let y := x.map τ
   have hy := hx.map τ
   obtain ⟨t, ht, _⟩ :=
-    ((isSheaf_iff_isSheaf_of_type _ _).1 (isSheaf_fpqc_picardFunctor f)) R hR y hy
+    ((isSheaf_iff_isSheaf_of_type _ _).1 (isSheaf_fpqc_picardFunctor_of_curve f)) R hR y hy
   have htd (u : T.left) : picardDegree f t u = d := by
     obtain ⟨Z, g, hg, z, hz⟩ := Scheme.exists_mem_of_mem_fpqcTopology
       ((GrothendieckTopology.mem_over_iff _ _).1 hR) u

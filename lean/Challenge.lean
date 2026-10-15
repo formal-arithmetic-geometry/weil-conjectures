@@ -10,133 +10,45 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+
 /-!
-# Challenge: the five upstream declarations under the proper base change theorem
+# Challenge: upstream proper base change dependencies
 
-Decision of the human (2026-10-12 04:20 +08, `GOAL.md`): the targets of the run are the five
-declarations of the source repository (branch `slopmaster2` at `7d675a263`) on which the earlier
-target `thm-weil-pbc-bounded-below` rests. They are its five `sorry`s. This file holds their
-statements verbatim, with `sorry` proofs (`stages/2-statements.md` §4):
+The human's 2026-10-12 decision adopts the corrected upstream statements (PR 1413,
+46dc75fcf and reviewer fix 84babb37e). At slopmaster2 ffb7b9060 the selected targets are
+six sorry carriers: geometric-stalk comparison, two curve field-extension declarations,
+filtered cohomology, section continuity, and henselian idempotent lifting.
+Their signatures are copied from that tip; torsion module sheaves use the upstream name
+`Scheme.IsTorsionModuleSheaf`. The reduction and the prime-coefficient acyclicity bridge
+are now proved upstream. No private copy of either base-change property is needed.
 
-1. `AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine`,
-   `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk`, line 133;
-2. `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper`,
-   `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine`, line 145;
-3. `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed`,
-   `WeilConjectures.AlgebraicGeometry.Curve.FieldExtension`, line 88;
-4. `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`,
-   `WeilConjectures.AlgebraicGeometry.Curve.FieldExtension`, line 120;
-5. `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity`,
-   `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients`, line 201.
-
-(The line is that of the `theorem` keyword.) Target 5 follows the corrected upstream
-prime-quotient statement.
-
-When the five are proved, the earlier target (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`
-and `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring` in
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper`) follows by the library's own
-sorry-free assembly.
-
-## Imports
-
-This file imports only modules that define what the statements use, and none of the four modules
-of the targets (each of them declares a target, so importing it would clash with the statement
-here):
-
-- `Mathlib.FieldTheory.IsAlgClosed.Basic`, `Mathlib.FieldTheory.IsSepClosed`: `IsAlgClosed`,
-  `IsSepClosed`;
-- `WeilConjectures.AlgebraicGeometry.Curve`: `AlgebraicGeometry.IsCurve`;
-- `WeilConjectures.AlgebraicGeometry.ProjectiveSpace`: `AlgebraicGeometry.ProjectiveLine`,
-  `AlgebraicGeometry.ProjectiveSpace.map`;
-- `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB`: the instance
-  `ModuleCat.isGrothendieckAbelian_of_commRing` (priority high) through which the library's
-  statements find `IsGrothendieckAbelian (ModuleCat Λ)`; without it the elaborated types differ
-  from the library's (see the earlier version of this file, commit 2e1c48405);
-- `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus`: `R+(-)`;
-- `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint`: geometric points as points of the
-  small étale site (`pointSmallEtale`);
-- `WeilConjectures.SixFunctors.BaseChange.Derived`:
-  `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`;
-- `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf`:
-  `AlgebraicGeometry.Scheme.IsTorsionSheaf` and
-  `AlgebraicGeometry.Etale.DerivedCategory.Plus.torsionHomology`;
-- `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs`: `Etale.baseChangeSourceFunctor`,
-  `Etale.baseChangeTargetFunctor`, `Etale.baseChangeHomologyMap`;
-- `WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance`: `Etale.cohomologyMap`.
-
-## The two definitions restated
-
-Targets 2 and 5 use `AlgebraicGeometry.Etale.HasTorsionBaseChange` and
-`AlgebraicGeometry.Etale.HasInjectiveAcyclicity`, which the library defines in
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` (lines 135 and 187 at
-`7d675a263`), the module of target 5. That module cannot be imported here, so the two definitions
-are restated below verbatim, under the same names. `tools/target_types.sh check` compares only the
-theorems; the two definitions are compared with the library's by Lean comparator and by the target
-review.
-
-The theorems are written with their full names (no `namespace`), so that
-`tools/target_types.sh` reads the names it looks up off the `theorem` lines.
+The main result is `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` for bounded below
+complexes of abelian sheaves with torsion cohomology (Stacks 0DDE). Its torsion-ring form is
+`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`; the former module
+statement is `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`.
+See `coord/target-migration.md` for the closure audit and target choice.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits
-
-open scoped CategoryTheory.Functor
-
+open CategoryTheory Limits Opposite
 open AlgebraicGeometry Scheme Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-section Definitions
-
-variable {X Y : Scheme.{u}}
-
-/-- **The base change property** `PBC(f)` for torsion coefficients, verbatim from
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` (line 135 at
-`7d675a263`): for every cartesian square with `f` on the right and every `K ∈ D⁺(X_ét, Λ)`
-whose cohomology sheaves are all torsion, the derived base change map is an isomorphism.
-(blueprint: def-weil-pbc-property) -/
-def AlgebraicGeometry.Etale.HasTorsionBaseChange (f : X ⟶ Y) : Prop :=
-  ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (sq : IsPullback g' f' f g)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-    Etale.DerivedCategory.Plus.torsionHomology Λ X K →
-      IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)
-
-/-- **Injective acyclicity** `IA(f)`, verbatim from
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` (line 187 at
-`7d675a263`): for every cartesian square with `f` on the right and every injective torsion sheaf
-`I` of `Λ`-modules on `X_ét`, `Rᵠf'_*(g'^{-1} I) = 0` for `q > 0`.
-(blueprint: def-weil-pbc-injective-acyclicity-property) -/
-def AlgebraicGeometry.Etale.HasInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
-  ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (_sq : IsPullback g' f' f g)
-    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsTorsionSheaf I → Injective I →
-      ∀ q : ℤ, 0 < q →
-        IsZero ((DerivedCategory.Plus.homologyFunctor
-            (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj
-          (R+((f')_*[ModuleCat.{u + 1} Λ]).obj
-            ((DerivedCategory.Plus.singleFunctor
-              (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj
-                ((g')^*[ModuleCat.{u + 1} Λ].obj I))))
-
-end Definitions
-
-/-- **Target 1. The exchange morphism of `ℙ¹` on a geometric stalk.** For a cartesian square
-with `ℙ¹_S ⟶ S` on the right, a torsion sheaf `F` of `Λ`-modules on `ℙ¹_S`, and compatible
-geometric points `σ`, `τ`, `ι` whose fields are algebraic over the residue fields, the stalk at
-`τ` of the degree-`q` exchange morphism `g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` is, up to *some* additive
-isomorphisms of its source and target, the pullback map `Hᵠ(ℙ¹_k, F|) ⟶ Hᵠ(ℙ¹_{k'}, F|)`.
-Verbatim from `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk`
-(line 133 at `7d675a263`).
+/-- Target 1: verbatim upstream signature at `ffb7b9060`.
 (blueprint: `lemma-weil-pbc-p1-exchange-geometric-stalk`) -/
 theorem AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
@@ -149,7 +61,7 @@ theorem AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap
     (hτ : ∃ (t : T) (φ : T.residueField t ⟶ .of k'),
       φ.hom.IsIntegral ∧ Spec.map φ ≫ T.fromSpecResidueField t = τ)
     (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℕ) :
+    [IsTorsionModuleSheaf F] (q : ℕ) :
     ∃ (e₁ : ((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
           ((Etale.baseChangeSourceFunctor Λ g (ProjectiveLine S ↘ S) q).obj F) ≃+
         Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
@@ -166,64 +78,98 @@ theorem AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap
             ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) :=
   sorry
 
-/-- **Target 2. Reduction of proper base change to the projective line**: if the projection
-`ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasTorsionBaseChange` for every scheme `S`, then
-so does every proper morphism of schemes. Verbatim from
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` (line 145 at `7d675a263`).
-(blueprint: `prop-weil-pbc-reduction-to-projective-line`; Stacks 0A4F) -/
-theorem AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper
-    (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
-    Etale.HasTorsionBaseChange Λ f :=
-  sorry
-
-/-- **Target 3. Invariance of the cohomology of a proper curve under extension of algebraically
-closed fields.** For algebraically closed `k ⊆ k'`, a proper curve `C` over `k`, a torsion étale
-sheaf `F` of `Λ`-modules on `C` and a cartesian square over `Spec k' ⟶ Spec k`, the pullback map
-`Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` on the cohomology of the underlying abelian sheaves is bijective.
-Verbatim from `WeilConjectures.AlgebraicGeometry.Curve.FieldExtension` (line 88 at `7d675a263`).
-(blueprint: `prop-weil-pbc-algebraically-closed-extension`; Stacks 0A5E) -/
+/-- Target 2: verbatim upstream signature at `ffb7b9060`.
+(blueprint: `prop-weil-pbc-algebraically-closed-extension`) -/
 theorem AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed {k k' : Type u}
     [Field k] [IsAlgClosed k]
     [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
     (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionSheaf F] (q : ℕ) :
+    [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
   sorry
 
-/-- **Target 4. Passage between separably closed fields.** If the cohomology of proper curves is
-invariant under extensions of algebraically closed fields (the hypothesis `H`, which is target 3),
-then for separably closed `k ⊆ k'`, a proper curve `C` over `k`, a torsion étale sheaf `F` of
-`Λ`-modules on `C` and a cartesian square over `Spec k' ⟶ Spec k`, the pullback map
-`Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` is bijective. Verbatim from
-`WeilConjectures.AlgebraicGeometry.Curve.FieldExtension` (line 120 at `7d675a263`).
+/-- Target 3: verbatim upstream signature at `ffb7b9060`.
 (blueprint: `lemma-weil-pbc-curve-separably-closed-passage`) -/
 theorem AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed
     (H : ∀ {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
       {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]
       {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
       (_ : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-      [Scheme.IsTorsionSheaf F] (q : ℕ),
+      [Scheme.IsTorsionModuleSheaf F] (q : ℕ),
       Function.Bijective (Etale.cohomologyMap ι'
         ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q))
     {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] {C C' : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)}
     {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι)
-    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] (q : ℕ) :
+    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
   sorry
 
-/-- **Target 5. Injective acyclicity implies the base change property**, with prime quotient
-coefficients: if a proper morphism has injective acyclicity over `Λ ⧸ pΛ` for every prime `p`,
-then it satisfies the base change property over `Λ`. Verbatim from
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients`.
-(blueprint: `lemma-weil-pbc-property-iff-acyclicity`; Stacks 0A4B) -/
-theorem AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity {X Y : Scheme.{u}}
-    (f : X ⟶ Y) [IsProper f]
-    (hf : ∀ p : ℕ, p.Prime →
-      Etale.HasInjectiveAcyclicity (Λ ⧸ Ideal.span {(p : Λ)}) f) :
-    Etale.HasTorsionBaseChange Λ f :=
+/-- Comparator-only verbatim upstream definition needed by a target signature. -/
+noncomputable abbrev AlgebraicGeometry.Etale.shiftedHomFunctor {Z : Scheme.{u}}
+    (A : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
+    Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤ AddCommGrpCat.{u + 1} :=
+  DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q ⋙
+    preadditiveCoyoneda.obj (op ((DerivedCategory.Plus.singleFunctor _ 0).obj A))
+
+/-- Comparator-only verbatim upstream definition needed by a target signature. -/
+noncomputable abbrev AlgebraicGeometry.Etale.finalObject (Z : Scheme.{u}) : Z.Etale :=
+  MorphismProperty.Over.mk ⊤ (𝟙 Z) (inferInstance : Etale (𝟙 Z))
+
+/-- Comparator-only verbatim upstream definition needed by a target signature. -/
+noncomputable def AlgebraicGeometry.Etale.unitComparison {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h₁₂ : T ⟶ R)
+    (hh₁₂ : h₁₂ = h₁ ≫ h₂) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    (h₂)_*[AddCommGrpCat.{u + 1}].obj ((h₂)^*[AddCommGrpCat.{u + 1}].obj G) ⟶
+      (h₁₂)_*[AddCommGrpCat.{u + 1}].obj ((h₁₂)^*[AddCommGrpCat.{u + 1}].obj G) :=
+  (h₂)_*[AddCommGrpCat.{u + 1}].map
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h₁).unit.app
+        ((h₂)^*[AddCommGrpCat.{u + 1}].obj G)) ≫
+    (lowerStarComp AddCommGrpCat.{u + 1} h₁ h₂ h₁₂ hh₁₂).hom.app _ ≫
+      (h₁₂)_*[AddCommGrpCat.{u + 1}].map
+        ((upperStarComp AddCommGrpCat.{u + 1} h₁ h₂ h₁₂ hh₁₂).inv.app G)
+
+/-- Target 4: verbatim upstream signature at `ffb7b9060`.
+(blueprint: `lem-weil-pbc-cohomology-filtered-colimit`) -/
+theorem AlgebraicGeometry.Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject (Z : Scheme.{u})
+    [CompactSpace Z] [QuasiSeparatedSpace Z] (q : ℤ) (J : Type u) [SmallCategory J]
+    [IsFiltered J] :
+    PreservesColimitsOfShape J
+      (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) q) :=
+  sorry
+
+/-- Target 5: verbatim upstream signature at `ffb7b9060`.
+(blueprint: `lem-weil-pbc-etale-section-continuity`) -/
+theorem AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit
+    {R : Scheme.{u}} {J : Type u} [SmallCategory J] [IsCofiltered J]
+    (D : J ⥤ Scheme.{u}) (π : D ⟶ (Functor.const J).obj R)
+    (c : Cone D) (P : c.pt ⟶ R) (hP : ∀ j, P = c.π.app j ≫ π.app j)
+    [∀ j, CompactSpace (D.obj j)]
+    [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
+    [QuasiSeparatedSpace R] (hc : IsLimit c)
+    (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) (W : R.Etale)
+    [CompactSpace W.left] [QuasiSeparatedSpace W.left] :
+    (∀ t : ((P)_*[AddCommGrpCat.{u + 1}].obj
+        ((P)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W),
+      ∃ (j : J) (s : ((π.app j)_*[AddCommGrpCat.{u + 1}].obj
+        ((π.app j)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W)),
+        (unitComparison (c.π.app j) (π.app j) P (hP j) G).hom.app (op W) s = t) ∧
+    ∀ (j : J) (s : ((π.app j)_*[AddCommGrpCat.{u + 1}].obj
+        ((π.app j)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W)),
+      (unitComparison (c.π.app j) (π.app j) P (hP j) G).hom.app (op W) s = 0 →
+        ∃ (j' : J) (f : j' ⟶ j), (unitComparison (D.map f) (π.app j) (π.app j')
+          (by simp) G).hom.app (op W) s = 0 :=
+  sorry
+
+/-- Target 6: verbatim upstream signature at `ffb7b9060`.
+(blueprint: `thm-weil-pbc-henselian-idempotent-lifting`) -/
+theorem AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing
+    {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]
+    {Y Y₀ : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (i : Y₀ ⟶ Y)
+    (f₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
+    Function.Bijective (fun e : {e : Γ(Y, ⊤) // IsIdempotentElem e} ↦
+      (⟨i.appTop.hom e.1, e.2.map i.appTop.hom⟩ : {e : Γ(Y₀, ⊤) // IsIdempotentElem e})) :=
   sorry

@@ -49,4 +49,46 @@ theorem convMul_apply_eq_zero {I : Ideal A} [I.IsHopfIdeal R] {f g : A →ₐ[R]
   have : q a = 0 := Ideal.Quotient.eq_zero_iff_mem.2 ha
   simp [this]
 
+/-- The supremum of a family of Hopf ideals is a Hopf ideal: the counit, coideal and antipode
+conditions are additive. -/
+theorem _root_.Ideal.isHopfIdeal_sSup {S : Set (Ideal A)} (hS : ∀ J ∈ S, J.IsHopfIdeal R) :
+    (SupSet.sSup S).IsHopfIdeal R := by
+  set T := SupSet.sSup S
+  have key : ∀ x ∈ T, Coalgebra.counit (R := R) x = 0 ∧
+      Coalgebra.comul (R := R) x ∈ LinearMap.range (LinearMap.lTensor A
+        (T.restrictScalars R).subtype) ⊔ LinearMap.range (LinearMap.rTensor A
+          (T.restrictScalars R).subtype) ∧ HopfAlgebra.antipode R x ∈ T := by
+    intro x hx
+    change x ∈ SupSet.sSup S at hx
+    rw [sSup_eq_iSup'] at hx
+    refine Submodule.iSup_induction _ (motive := fun x ↦ Coalgebra.counit (R := R) x = 0 ∧
+      Coalgebra.comul (R := R) x ∈ LinearMap.range (LinearMap.lTensor A
+        (T.restrictScalars R).subtype) ⊔ LinearMap.range (LinearMap.rTensor A
+          (T.restrictScalars R).subtype) ∧ HopfAlgebra.antipode R x ∈ T) hx ?_ ?_ ?_
+    · intro J y hy
+      have hJ := hS J.1 J.2
+      have hle : J.1 ≤ T := le_sSup J.2
+      have hle' : J.1.restrictScalars R ≤ T.restrictScalars R := hle
+      refine ⟨hJ.counit_eq_zero hy, ?_, hle (hJ.antipode_mem hy)⟩
+      have hc := ((Submodule.isCoideal_iff_comul_mem _).1 hJ.toIsCoideal).2 y hy
+      refine SetLike.le_def.1 (sup_le_sup ?_ ?_) hc
+      · rintro _ ⟨z, rfl⟩
+        refine ⟨LinearMap.lTensor A (Submodule.inclusion hle') z, ?_⟩
+        rw [← LinearMap.comp_apply, ← LinearMap.lTensor_comp]
+        rfl
+      · rintro _ ⟨z, rfl⟩
+        refine ⟨LinearMap.rTensor A (Submodule.inclusion hle') z, ?_⟩
+        rw [← LinearMap.comp_apply, ← LinearMap.rTensor_comp]
+        rfl
+    · simp
+    · intro y z hy hz
+      refine ⟨by rw [map_add, hy.1, hz.1, add_zero], ?_, ?_⟩
+      · rw [map_add]
+        exact add_mem hy.2.1 hz.2.1
+      · rw [map_add]
+        exact add_mem hy.2.2 hz.2.2
+  have : (T.restrictScalars R).IsCoideal := (Submodule.isCoideal_iff_comul_mem _).2
+    ⟨fun x hx ↦ (key x hx).1, fun x hx ↦ (key x hx).2.1⟩
+  exact ⟨fun x hx ↦ (key x hx).2.2⟩
+
 end Ideal.IsHopfIdeal

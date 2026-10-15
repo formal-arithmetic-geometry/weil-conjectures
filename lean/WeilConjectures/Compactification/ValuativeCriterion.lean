@@ -638,4 +638,16 @@ theorem IsSeparated.of_valuativeCriterion_of_isDominant {U X S : Scheme.{u}} (f 
   exact IsClosedImmersion.of_isPreimmersion _
     (pullback.diagonal f).isClosedMap.isClosed_range
 
+/-- **The dense-source valuative criterion, properness** (Stacks Project Tag 0894;
+blueprint: `sk-lem-nagata-sketch-dense-valuative`, `lemma-nagata-dense-source-valuative`):
+a quasi-compact, quasi-separated morphism locally of finite type satisfying the valuative
+criterion relative to a quasi-compact dominant `h : U ⟶ X` is proper. -/
+@[stacks 0894]
+theorem IsProper.of_valuativeCriterion_of_isDominant {U X S : Scheme.{u}} (f : X ⟶ S)
+    [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f] (h : U ⟶ X) [QuasiCompact h]
+    [IsDominant h] (H : ValuativeCriterion.RelativeTo f h) : IsProper f :=
+  have := IsSeparated.of_valuativeCriterion_of_isDominant f h H
+  have := UniversallyClosed.of_valuativeCriterion_of_isDominant f h H
+  { }
+
 end AlgebraicGeometry

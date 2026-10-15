@@ -6,7 +6,7 @@ Authors: SHEAF group E2
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 import Sheaf.AlgebraicGeometry.FiniteEtaleSchemeTorsorLift

@@ -79,7 +79,7 @@ theorem Etale.projectiveLine_strictLocal_stalkExchangeComparison
       eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)
     (hρ : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA)
     (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℕ) :
+    [IsTorsionModuleSheaf F] (q : ℕ) :
     let F₀ := (ProjectiveSpace.map _
       (eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)))^*[
       ModuleCat.{u + 1} Λ].obj F

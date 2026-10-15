@@ -3,7 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Sheaf.Paper.StrictHenselizationLocalStructure
+import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Sheaf.Paper.StrictHenselizationPointedMap
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiber
 import Sheaf.AlgebraicGeometry.StrictLocalFibreRestrictionCompatibility
@@ -86,7 +86,7 @@ theorem exists_integralStrictLocalFibreComparison
       SmallModel.{u} (strictHenselizationNeighbourhoods s)))
     have hp := hpoint j
     rw [isoSpec_Spec_inv] at hp
-    have hstr := Classical.choose_spec (exists_strictHenselizationStructuralMap s) j
+    have hstr := strictHenselizationStructuralMap_eq s j
     change _ = strictHenselizationStructuralMap s at hstr
     rw [← hstr, ← Category.assoc, ← Category.assoc]
     exact (congrArg (fun a ↦ a ≫ ((AffineEtale.Spec Y).obj

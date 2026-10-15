@@ -96,6 +96,27 @@ theorem Scheme.finiteAffineOpenCoverDenseIInter_spec (X : Scheme.{u}) [CompactSp
     (exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter X hX).choose_spec.choose_spec
   exact ⟨h₁, h₂, h₄⟩
 
+/-- **The selected affine neighbourhood of a point and finitely many generic points**: for a
+quasi-separated scheme `X`, a finite set `s` of generic points of irreducible components of `X`
+and a point `x`, a chosen affine open `A(x; s)` containing `x` and every point of `s`, selected
+from `AlgebraicGeometry.exists_isAffineOpen_mem_of_subset_genericPoints`. Its defining
+properties are `AlgebraicGeometry.Scheme.affineOpenGenericPoints_spec`.
+(blueprint: `def-nagata-affine-neighbourhood-generic-points`) -/
+noncomputable def Scheme.affineOpenGenericPoints (X : Scheme.{u}) [QuasiSeparatedSpace X]
+    {s : Set X} (hsf : s.Finite) (hs : s ⊆ genericPoints X) (x : X) : X.Opens :=
+  (exists_isAffineOpen_mem_of_subset_genericPoints hsf hs x).choose
+
+/-- **Properties of the selected affine neighbourhood**: `A(x; s)` is affine and contains `x`
+and every point of `s`.
+(blueprint: `lemma-nagata-affine-neighbourhood-generic-points`; the existence statement
+`lemma-nagata-affine-neighbourhood-generic-points-exists` is
+`AlgebraicGeometry.exists_isAffineOpen_mem_of_subset_genericPoints`) -/
+theorem Scheme.affineOpenGenericPoints_spec (X : Scheme.{u}) [QuasiSeparatedSpace X]
+    {s : Set X} (hsf : s.Finite) (hs : s ⊆ genericPoints X) (x : X) :
+    IsAffineOpen (X.affineOpenGenericPoints hsf hs x) ∧ x ∈ X.affineOpenGenericPoints hsf hs x ∧
+      s ⊆ (X.affineOpenGenericPoints hsf hs x : Set X) :=
+  (exists_isAffineOpen_mem_of_subset_genericPoints hsf hs x).choose_spec
+
 /-! ### Partial unions -/
 
 /-- **The partial unions of a finite family of opens**: `X_r = U 0 ∪ ⋯ ∪ U (r - 1)`, so that
@@ -238,5 +259,25 @@ theorem nagataCompactification_of_isNoetherian [IsNoetherian S] (f : X ⟶ S) [I
     rwa [Scheme.partialAffineOpenUnions_self, hcov] at this
   have := HasCompactification.comp_of_isOpenImmersion (f := (⊤ : X.Opens).ι ≫ f) X.topIso.inv
   rwa [← Category.assoc, X.toIso_inv_ι, Category.id_comp] at this
+
+/-- **The constructed Noetherian compactification** `C_Noeth(X/S)`: the last stage `X_n = X`
+of the recursion `AlgebraicGeometry.noetherianCompactificationConstruction` over the selected
+dense affine cover `AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter` of `X`,
+transported along the identification `X ≅ X_n`.
+(blueprint: `def-nagata-noetherian-compactification`, `thm-nagata-noetherian`) -/
+noncomputable def noetherianCompactification [IsNoetherian S] (f : X ⟶ S) [IsSeparated f]
+    [LocallyOfFiniteType f] [QuasiCompact f] : Compactification f :=
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian X := ⟨⟩
+  have hfin : (irreducibleComponents X).Finite := NoetherianSpace.finite_irreducibleComponents
+  have hspec := X.finiteAffineOpenCoverDenseIInter_spec hfin
+  have hle : (⊤ : X.Opens) ≤ Scheme.partialAffineOpenUnions
+      (X.finiteAffineOpenCoverDenseIInter hfin).2 (X.finiteAffineOpenCoverDenseIInter hfin).1 := by
+    rw [Scheme.partialAffineOpenUnions_self, hspec.2.1]
+  ((noetherianCompactificationConstruction f _ hspec.1 hspec.2.2
+      (X.finiteAffineOpenCoverDenseIInter hfin).1).precomp
+      (X.topIso.inv ≫ X.homOfLE hle)).copy (by
+    rw [Category.assoc, X.homOfLE_ι_assoc, X.toIso_inv_ι_assoc])
 
 end AlgebraicGeometry

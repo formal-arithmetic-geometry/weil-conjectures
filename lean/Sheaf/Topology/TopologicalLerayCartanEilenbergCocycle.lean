@@ -205,10 +205,9 @@ theorem exists_topological_leray_cartan_eilenberg_cocycle
   obtain ⟨t, ht, b, hb2, hbt⟩ := exists_bottom_page_transitions E
   have stable := spectral_object_page_stabilizes Y
   let T (n : ℕ) : DecreasingFiltration (HZ n) :=
-    { step i := (Subobject.«exists» (h n).hom).obj
+    { F i := (Subobject.«exists» (h n).hom).obj
         (Y.imageFiltration n ((n : ℤ) + 1 - i))
-      antitone_step := by
-        intro i j hij
+      F_succ_le i := by
         exact leOfHom ((Subobject.«exists» (h n).hom).map
           (homOfLE (Y.imageFiltration_mono n (by omega)))) }
   have top (n : ℕ) : (T n).step 0 = ⊤ := by

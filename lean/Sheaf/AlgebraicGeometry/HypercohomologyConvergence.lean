@@ -12,7 +12,7 @@ import Sheaf.CategoryTheory.ExactCouple
 import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.Filtration
 import Sheaf.CategoryTheory.HalfPlaneConvergence
-import Sheaf.CategoryTheory.ImageFiltration
+import Sheaf.CategoryTheory.Filtration
 import Sheaf.CategoryTheory.KInjectiveComputes
 import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
 import Sheaf.CategoryTheory.TruncationCouple

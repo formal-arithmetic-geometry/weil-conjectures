@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.Span.Basic
+public import WeilConjectures.Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 
 /-!
 # Extension of scalars along an algebra map as a tensor product
@@ -17,6 +18,10 @@ For an `R`-algebra `S`, the object `(ModuleCat.extendScalars (algebraMap R S)).o
 tensor product `S ⊗[R] N` for the `R`-module structure on `S` coming from the algebra structure
 (`ModuleCat.tensorEquivExtendScalars`). The two are not definitionally equal, since
 `ModuleCat.extendScalars` uses the module structure on `S` obtained by restriction of scalars.
+
+Coinduction `ModuleCat.coinduce R : AddCommGrpCat ⥤ ModuleCat R`, sending an abelian group `A` to
+`Hom_ℤ(R, A)`, is right adjoint to the forgetful functor (`ModuleCat.forget₂CoinduceAdj`); as an
+abelian group, `Hom_ℤ(R, A)` is `R →+ A` (`ModuleCat.coinduceObjAddEquiv`).
 -/
 
 @[expose] public section
@@ -138,5 +143,49 @@ lemma exact_coextendQuotientShortComplex (M : ModuleCat.{u} Λ) :
   change φ (show Λ ⧸ Ideal.span {ϖ} from 1) = x
   change Submodule.liftQ _ _ hle (Submodule.Quotient.mk (1 : Λ)) = x
   rw [Submodule.liftQ_apply, LinearMap.toSpanSingleton_apply, one_smul]
+
+end ModuleCat
+
+namespace ModuleCat
+
+variable (R : Type u) [Ring R]
+
+/-- Coinduction from abelian groups to `R`-modules: an abelian group `A` is sent to
+`Hom_ℤ(R, A)`, on which `R` acts through the source. -/
+noncomputable def coinduce : AddCommGrpCat.{u} ⥤ ModuleCat.{u} R :=
+  AddCommGrpCat.toModuleCatInt ⋙ coextendScalars (Int.castRingHom R)
+
+/-- The underlying abelian group of an `R`-module is its underlying `ℤ`-module, obtained by
+restriction of scalars along `ℤ → R`. -/
+noncomputable def forget₂AddCommGrpIsoRestrictScalars :
+    forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u} ≅
+      restrictScalars.{u} (Int.castRingHom R) ⋙ forget₂ (ModuleCat.{u} ℤ) AddCommGrpCat.{u} :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _)
+
+/-- Forgetting the `R`-module structure is left adjoint to coinduction. -/
+noncomputable def forget₂CoinduceAdj : forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u} ⊣ coinduce R :=
+  ((restrictCoextendScalarsAdj (Int.castRingHom R)).comp
+    forget₂AddCommGrpToModuleCatIntAdj).ofNatIsoLeft (forget₂AddCommGrpIsoRestrictScalars R).symm
+
+instance : (coinduce R).IsRightAdjoint :=
+  (forget₂CoinduceAdj R).isRightAdjoint
+
+/-- The coinduced module `Hom_ℤ(R, A)` is, as an abelian group, the group `R →+ A`. -/
+noncomputable def coinduceObjAddEquiv (A : AddCommGrpCat.{u}) :
+    (coinduce R).obj A ≃+ (R →+ A) where
+  toFun f := LinearMap.toAddMonoidHom f
+  invFun g :=
+    { toFun := g
+      map_add' := map_add g
+      map_smul' n x := (congrArg g (Int.cast_smul_eq_zsmul R n (x : R))).trans (map_zsmul g n x) }
+  left_inv _ := rfl
+  right_inv _ := rfl
+  map_add' _ _ := rfl
+
+@[simp]
+lemma coinduceObjAddEquiv_map_apply {A B : AddCommGrpCat.{u}} (g : A ⟶ B)
+    (f : (coinduce R).obj A) (x : R) :
+    coinduceObjAddEquiv R B ((coinduce R).map g f) x = g (coinduceObjAddEquiv R A f x) := by
+  with_unfolding_all rfl
 
 end ModuleCat

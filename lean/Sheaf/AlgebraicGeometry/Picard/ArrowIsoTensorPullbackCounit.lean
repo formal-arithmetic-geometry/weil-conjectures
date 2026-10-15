@@ -6,6 +6,8 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.Picard.InvertibleDirectImageClasses
+public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.CategoryTheory.Comma.Arrow
@@ -51,7 +53,7 @@ isomorphism; its target edge is the identity of `i_X^* L`. Both edges are isomor
 so the square is the required isomorphism in `Arrow`. -/
 theorem nonempty_arrowIso_tensorPullback_directImageCounit
     {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
-    [(X ↘ Spec (.of k)).IsSmoothProjectiveCurve]
+    [IsSmoothProjectiveCurve (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),

@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+public import WeilConjectures.Algebra.Homology.ExactCouple.DoubleComplex
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated

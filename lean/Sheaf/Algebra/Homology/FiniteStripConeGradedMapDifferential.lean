@@ -399,7 +399,8 @@ theorem finiteStripGradedMap_differential
     _ = (l n ≫ (F.step p : CochainComplex C ℤ).d n (n + 1)) ≫
         (F.complexQuotientπ p (p + 1) (by omega)).f (n + 1) := by
       simpa only [Category.assoc, DecreasingFiltration.gradedPiece,
-        DecreasingFiltration.complexQuotient] using congrArg (fun t ↦ l n ≫ t)
+        DecreasingFiltration.gr, DecreasingFiltration.complexQuotient] using
+        congrArg (fun t ↦ l n ≫ t)
         ((F.complexQuotientπ p (p + 1) (by omega)).comm n (n + 1))
     _ = _ := by
       rw [hzero]

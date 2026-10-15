@@ -141,3 +141,92 @@ end Pi
 end FiniteField
 
 end
+
+namespace Polynomial
+
+variable {R ι : Type*} [CommRing R] {s : Finset ι} {v : ι → R}
+
+/-- Over a commutative ring, a polynomial vanishing at nodes whose pairwise differences are
+invertible is divisible by the product of the corresponding linear factors. -/
+theorem prod_X_sub_C_dvd_of_isUnit_sub (hv : ∀ i ∈ s, ∀ j ∈ s, i ≠ j → IsUnit (v i - v j))
+    {f : R[X]} (hf : ∀ i ∈ s, f.eval (v i) = 0) : ∏ i ∈ s, (X - C (v i)) ∣ f :=
+  Finset.prod_dvd_of_coprime
+    (fun i hi j hj hij ↦ isCoprime_X_sub_C_of_isUnit_sub (hv i hi j hj hij))
+    fun i hi ↦ dvd_iff_isRoot.2 (hf i hi)
+
+/-- Over a commutative ring, a polynomial of degree less than the number of nodes, whose pairwise
+differences are invertible, vanishing at all nodes is zero. -/
+theorem eq_zero_of_degree_lt_of_isUnit_sub (hv : ∀ i ∈ s, ∀ j ∈ s, i ≠ j → IsUnit (v i - v j))
+    {f : R[X]} (hdeg : f.degree < s.card) (hf : ∀ i ∈ s, f.eval (v i) = 0) : f = 0 := by
+  nontriviality R
+  obtain ⟨q, rfl⟩ := prod_X_sub_C_dvd_of_isUnit_sub hv hf
+  by_contra hne
+  have hq : q ≠ 0 := by rintro rfl; simp at hne
+  have hmon : (∏ i ∈ s, (X - C (v i))).Monic := monic_prod_of_monic _ _ fun i _ ↦ monic_X_sub_C _
+  rw [mul_comm, hmon.degree_mul, degree_prod_of_monic _ _ fun i _ ↦ monic_X_sub_C _] at hdeg
+  simp only [degree_X_sub_C, Finset.sum_const, nsmul_eq_mul, mul_one] at hdeg
+  have : (0 : WithBot ℕ) ≤ q.degree := zero_le_degree_iff.2 hq
+  exact absurd hdeg (not_lt.2 (le_add_of_nonneg_left this))
+
+variable {ζ : R} {n : ℕ}
+
+/-- If `ζ ^ n = 1` with `0 < n` and the differences `ζ ^ i - ζ ^ j`, `i ≠ j < n`, are invertible,
+then `Xⁿ - 1 = ∏_{i < n} (X - ζ ^ i)` over any commutative ring. -/
+theorem X_pow_sub_one_eq_prod_of_isUnit_sub (hn : 0 < n) (hζ : ζ ^ n = 1)
+    (hζ' : ∀ i < n, ∀ j < n, i ≠ j → IsUnit (ζ ^ i - ζ ^ j)) :
+    X ^ n - 1 = ∏ i ∈ Finset.range n, (X - C (ζ ^ i)) := by
+  nontriviality R
+  rw [← sub_eq_zero]
+  have hmon : (∏ i ∈ Finset.range n, (X - C (ζ ^ i))).Monic :=
+    monic_prod_of_monic _ _ fun i _ ↦ monic_X_sub_C _
+  have hdeg : (∏ i ∈ Finset.range n, (X - C (ζ ^ i))).degree = (n : WithBot ℕ) := by
+    rw [degree_prod_of_monic _ _ fun i _ ↦ monic_X_sub_C _]
+    simp only [degree_X_sub_C, Finset.sum_const, Finset.card_range, nsmul_eq_mul, mul_one]
+  have hX : (X ^ n - 1 : R[X]).degree = n := by
+    rw [← C_1, degree_X_pow_sub_C hn]
+  refine eq_zero_of_degree_lt_of_isUnit_sub (s := Finset.range n) (v := (ζ ^ ·))
+    (fun i hi j hj hij ↦ hζ' i (Finset.mem_range.1 hi) j (Finset.mem_range.1 hj) hij) ?_ ?_
+  · rw [Finset.card_range]
+    refine (degree_sub_lt_left (hX.trans hdeg.symm) ?_ ?_).trans_eq hX
+    · rw [← C_1]; exact (monic_X_pow_sub_C 1 hn.ne').ne_zero
+    · rw [← C_1, (monic_X_pow_sub_C 1 hn.ne').leadingCoeff, hmon.leadingCoeff]
+  · intro i hi
+    have hz : (ζ ^ i) ^ n = 1 := by rw [← pow_mul, mul_comm, pow_mul, hζ, one_pow]
+    simp only [eval_sub, eval_pow, eval_X, eval_one, hz, sub_self, eval_prod, zero_sub,
+      neg_eq_zero]
+    exact Finset.prod_eq_zero hi (by simp)
+
+/-- **Lagrange interpolation at roots of unity over a commutative ring.** If `ζ ^ n = 1` and the
+differences `ζ ^ i - ζ ^ j`, `i ≠ j < n`, are invertible, the Lagrange basis polynomials at the
+nodes `ζ ^ i` sum to `1`. -/
+theorem sum_inverse_mul_prod_erase_eq_one (hn : 0 < n)
+    (hζ' : ∀ i < n, ∀ j < n, i ≠ j → IsUnit (ζ ^ i - ζ ^ j)) :
+    ∑ r ∈ Finset.range n, C (Ring.inverse (∏ s ∈ (Finset.range n).erase r, (ζ ^ r - ζ ^ s))) *
+      ∏ s ∈ (Finset.range n).erase r, (X - C (ζ ^ s)) = 1 := by
+  nontriviality R
+  have hv : ∀ i ∈ Finset.range n, ∀ j ∈ Finset.range n, i ≠ j → IsUnit (ζ ^ i - ζ ^ j) :=
+    fun i hi j hj hij ↦ hζ' i (Finset.mem_range.1 hi) j (Finset.mem_range.1 hj) hij
+  rw [← sub_eq_zero]
+  refine eq_zero_of_degree_lt_of_isUnit_sub (s := Finset.range n) (v := (ζ ^ ·)) hv ?_ ?_
+  · refine (degree_sub_le _ _).trans_lt (max_lt ?_ ?_)
+    · refine (degree_sum_le _ _).trans_lt ((Finset.sup_lt_iff (WithBot.bot_lt_coe _)).2
+        fun r hr ↦ ?_)
+      refine (degree_mul_le _ _).trans_lt ?_
+      refine (add_le_add_left degree_C_le _).trans_lt ?_
+      rw [zero_add]
+      rw [degree_prod_of_monic _ _ fun i _ ↦ monic_X_sub_C _]
+      simp only [degree_X_sub_C, Finset.sum_const, nsmul_eq_mul, mul_one,
+        Finset.card_erase_of_mem hr, Finset.card_range]
+      exact_mod_cast Nat.sub_lt hn one_pos
+    · rw [degree_one, Finset.card_range]
+      exact_mod_cast hn
+  · intro i hi
+    simp only [eval_sub, eval_one, eval_finsetSum, eval_mul, eval_C, eval_prod, eval_X]
+    rw [Finset.sum_eq_single i, Ring.inverse_mul_cancel _ (IsUnit.prod_iff.2 fun s hs ↦
+      hv i hi s (Finset.mem_of_mem_erase hs) (Finset.ne_of_mem_erase hs).symm), sub_self]
+    · intro r hr hri
+      exact mul_eq_zero_of_right _
+        (Finset.prod_eq_zero (Finset.mem_erase.2 ⟨Ne.symm hri, hi⟩) (sub_self _))
+    · intro h; exact absurd hi h
+
+end Polynomial

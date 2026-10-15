@@ -42,7 +42,7 @@ Spec k' -ι-> Spec k
 ```
 
 and the coefficient sheaf is a torsion sheaf of `Λ`-modules
-(`AlgebraicGeometry.Scheme.IsTorsionSheaf`, torsion of the geometric stalks); its cohomology
+(`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf`, torsion of the geometric stalks); its cohomology
 is that of the underlying sheaf of abelian groups.
 
 ## Main statements
@@ -94,7 +94,7 @@ theorem bijective_cohomologyMap_of_isAlgClosed {k k' : Type u} [Field k] [IsAlgC
     [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
     (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionSheaf F] (q : ℕ) :
+    [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
   refine bijective_cohomologyMap_of_forall_isReduced Λ ?_ f k' h F q
@@ -129,13 +129,13 @@ theorem bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed
       {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]
       {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
       (_ : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-      [Scheme.IsTorsionSheaf F] (q : ℕ),
+      [Scheme.IsTorsionModuleSheaf F] (q : ℕ),
       Function.Bijective (Etale.cohomologyMap ι'
         ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q))
     {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] {C C' : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)}
     {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι)
-    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] (q : ℕ) :
+    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
   obtain ⟨K, hK, hKa, K', hK', hK'a, D, D', b, b', j, a, p, p',
@@ -230,7 +230,7 @@ theorem bijective_cohomologyMap_of_isSepClosed {k k' : Type u} [Field k] [IsSepC
     [Field k'] [IsSepClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
     (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionSheaf F] (q : ℕ) :
+    [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
   bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed Λ

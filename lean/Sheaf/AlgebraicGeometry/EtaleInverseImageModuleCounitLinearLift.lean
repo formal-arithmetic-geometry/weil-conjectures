@@ -5,7 +5,7 @@ Authors: SHEAF group A2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures

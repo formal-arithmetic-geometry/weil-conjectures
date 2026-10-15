@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.CategoryTheory.Linear.FunctorCategory
-import Sheaf.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists
 import Sheaf.Paper.DirectImageSplitCoverProduct
 import Sheaf.Paper.FiniteEtaleEtaleLocalSplit

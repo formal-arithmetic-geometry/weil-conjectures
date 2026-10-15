@@ -6,7 +6,7 @@ Finite-label proofs adapted from groups S2, Q2, F1, G2, K1 and V3.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Sites.Adjunction
 

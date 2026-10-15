@@ -5,10 +5,11 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.FiniteConstantAbelianRefinement
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Finite local constancy after forgetting an abelian structure
@@ -85,7 +86,7 @@ finiteness conditions agree. The empty scheme has the empty cover, and needs no 
 -/
 theorem finite_local_abelian_forget_iff {Y : Scheme.{u}}
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :
-    IsFiniteLocallyConstantEtaleSheafOfSets
+    IsLisseEtaleSheafOfSets
       ((sheafCompose Y.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G) ↔
     IsLocallyConstantSheaf G ∧
       ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),
@@ -105,7 +106,15 @@ theorem finite_local_abelian_forget_iff {Y : Scheme.{u}}
       fun h ↦ @Finite.of_equiv _ _ h e.toEquiv.symm⟩
   constructor
   · intro h
-    refine ⟨?_, fun Ω _ _ s ↦ (hfinite Ω s).mp (h.2 Ω s)⟩
+    have hstalkSet : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+        (s : Spec (.of Ω) ⟶ Y), Finite (((pointSmallEtale s).sheafFiber
+          (A := Type (u + 1))).obj
+            ((sheafCompose Y.smallEtaleTopology
+              (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G)) := by
+      intro Ω _ _ s
+      exact (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
+        (h.2.isFinitelyGenerated_sheafFiber Ω s)
+    refine ⟨?_, fun Ω _ _ s ↦ (hfinite Ω s).mp (hstalkSet Ω s)⟩
     classical
     obtain ⟨𝒰₀, h𝒰₀⟩ := h.1
     let 𝒰 : Cover.{u} etalePrecoverage Y :=
@@ -127,13 +136,14 @@ theorem finite_local_abelian_forget_iff {Y : Scheme.{u}}
           (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G).over
             (𝒰₀.etalePrecoverageToEtale i.1)).mem_essImage_of_isConstant
       have : Nonempty (𝒰.etalePrecoverageToEtale i).left := i.2
-      have : Finite S := finite_constant_value G (𝒰.etalePrecoverageToEtale i) S e.symm h.2
+      have : Finite S := finite_constant_value G (𝒰.etalePrecoverageToEtale i) S e.symm hstalkSet
       exact finite_constant_abelian_refinement G (𝒰.etalePrecoverageToEtale i) S e.symm
     choose 𝒱 h𝒱 using hrefine
     refine ⟨⟨⟨𝒰.bind 𝒱, fun i ↦ ?_⟩⟩⟩
     exact h𝒱 i.1 i.2
   · rintro ⟨hlocal, hstalk⟩
-    refine ⟨?_, fun Ω _ _ s ↦ (hfinite Ω s).mpr (hstalk Ω s)⟩
+    refine ⟨?_, isFiniteSheaf_of_finite_algClosed_stalks _
+      (fun Ω _ _ s ↦ (hfinite Ω s).mpr (hstalk Ω s))⟩
     obtain ⟨⟨𝒰, h𝒰⟩⟩ := hlocal.nonempty_locallyConstantDatum
     refine ⟨𝒰, fun i ↦ ?_⟩
     have := h𝒰 i

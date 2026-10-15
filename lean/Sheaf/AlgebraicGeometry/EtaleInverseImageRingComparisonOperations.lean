@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 public import Mathlib.Algebra.Category.Ring.Limits
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-! # Multiplication and unit for a supplied ring inverse image comparison
 

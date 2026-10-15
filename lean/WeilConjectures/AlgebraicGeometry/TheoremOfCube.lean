@@ -7,12 +7,12 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
-
-import Sheaf.AlgebraicGeometry.PicardFiberTrivialityClosed
-import Sheaf.AlgebraicGeometry.CubeFiberTrivialityOpen
+public import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
+public import WeilConjectures.AlgebraicGeometry.Seesaw
+public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.SpreadOut
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-!
 # The theorem of the cube
@@ -49,57 +49,123 @@ open Scheme.Modules
 
 variable {K : Type u} [Field K]
 
+
 /-- The open subscheme `X ×_K Y ×_K U` of `X ×_K Y ×_K Z` lying over an open `U ⊆ Z`. -/
 noncomputable abbrev preimageSnd (X Y Z : Over (Spec (.of K))) (U : Z.left.Opens) :
     ((X ⊗ Y) ⊗ Z).left.Opens :=
   (snd (X ⊗ Y) Z).left ⁻¹ᵁ U
 
-private lemma pullback_iso_iff_tensor_dual_iso_unit {A B : Scheme.{u}} (g : A ⟶ B)
-    (M N : B.Modules) [N.IsInvertible] :
-    Nonempty ((Scheme.Modules.pullback g).obj M ≅ (Scheme.Modules.pullback g).obj N) ↔
-      Nonempty ((Scheme.Modules.pullback g).obj (M ⊗ Nᵛ) ≅ 𝟙_ A.Modules) := by
-  constructor
-  · rintro ⟨e⟩
-    exact nonempty_pullback_tensorObj_dual_iso_unit g M N e
-  · rintro ⟨e⟩
-    let F := Scheme.Modules.pullback g
-    obtain ⟨t⟩ := nonempty_pullback_tensorObj_iso g M Nᵛ
-    obtain ⟨d⟩ := nonempty_pullback_tensorObj_dual_iso_unit g N N (Iso.refl _)
-    obtain ⟨t'⟩ := nonempty_pullback_tensorObj_iso g N Nᵛ
-    let ev : F.obj N ⊗ F.obj Nᵛ ≅ 𝟙_ A.Modules := t'.symm ≪≫ d
-    exact ⟨(ρ_ (F.obj M)).symm ≪≫
-      (Iso.refl _ ⊗ᵢ ((β_ _ _) ≪≫ ev).symm) ≪≫ (α_ _ _ _).symm ≪≫
-      ((t.symm ≪≫ e) ⊗ᵢ Iso.refl _) ≪≫ λ_ (F.obj N)⟩
+instance (X Y : Over (Spec (.of K))) [IsProper X.hom] [IsProper Y.hom] :
+    IsProper (X ⊗ Y).hom :=
+  inferInstanceAs (IsProper (Limits.pullback.fst X.hom Y.hom ≫ X.hom))
 
-private lemma nonempty_pullback_fiber_iso_unit_of_open {P S : Scheme.{u}}
-    (f : P ⟶ S) (L : P.Modules) (s : S) (U : S.Opens) (hs : s ∈ U)
-    (e : Nonempty ((Scheme.Modules.pullback (f ⁻¹ᵁ U).ι).obj L ≅
-      SheafOfModules.unit _)) :
-    Nonempty ((Scheme.Modules.pullback (f.fiberι s)).obj L ≅ SheafOfModules.unit _) := by
-  have hsub : Set.range (f.fiberι s) ⊆ Set.range (f ⁻¹ᵁ U).ι := by
-    rw [f.range_fiberι, Scheme.Opens.range_ι]
-    intro p hp
-    change f p ∈ U
-    have hp' : f p = s := hp
-    rwa [hp']
-  let j := IsOpenImmersion.lift (f ⁻¹ᵁ U).ι (f.fiberι s) hsub
-  have hj : j ≫ (f ⁻¹ᵁ U).ι = f.fiberι s := IsOpenImmersion.lift_fac _ _ _
-  exact ⟨(pullbackCongr hj.symm).app L ≪≫ (pullbackComp j _).symm.app L ≪≫
-    (Scheme.Modules.pullback j).mapIso e.some ≪≫ pullbackObjUnitIso j⟩
+instance (X Y : Over (Spec (.of K))) [IsProper X.hom] [GeometricallyIntegral X.hom]
+    [IsProper Y.hom] [GeometricallyIntegral Y.hom] : GeometricallyIntegral (X ⊗ Y).hom :=
+  GeometricallyIntegral.comp_of_flat (Limits.pullback.fst X.hom Y.hom) X.hom
 
-private lemma geometricallyIntegral_tensorHom (X Y : Over (Spec (.of K)))
-    [IsProper X.hom] [GeometricallyIntegral X.hom] [GeometricallyIntegral Y.hom] :
-    GeometricallyIntegral (X ⊗ Y).hom := by
-  refine ⟨?_⟩
-  intro k _ t P a b H
-  let e := pullbackRightPullbackFstIso X.hom t (pullback.fst X.hom Y.hom)
-  have : IsIntegral (pullback X.hom t) :=
-    GeometricallyIntegral.geometrically_isIntegral _ _ _ (.of_hasPullback _ _)
-  have : IsLocallyNoetherian (pullback X.hom t) := inferInstance
-  have : IsIntegral (pullback (pullback.fst X.hom Y.hom) (pullback.fst X.hom t)) :=
-    inferInstance
-  have : Nonempty P := ⟨H.isoPullback.inv (e.hom (Nonempty.some inferInstance))⟩
-  exact isIntegral_of_isOpenImmersion (H.isoPullback.hom ≫ e.inv)
+instance (W Z : Over (Spec (.of K))) [IsProper W.hom] : IsProper (snd W Z).left :=
+  inferInstanceAs (IsProper (Limits.pullback.snd W.hom Z.hom))
+
+instance (W Z : Over (Spec (.of K))) : Flat (snd W Z).left :=
+  inferInstanceAs (Flat (Limits.pullback.snd W.hom Z.hom))
+
+instance (W Z : Over (Spec (.of K))) [IsProper W.hom] :
+    LocallyOfFinitePresentation (snd W Z).left :=
+  inferInstanceAs (LocallyOfFinitePresentation (Limits.pullback.snd W.hom Z.hom))
+
+instance (W Z : Over (Spec (.of K))) [GeometricallyIntegral W.hom] :
+    GeometricallyIntegral (snd W Z).left :=
+  inferInstanceAs (GeometricallyIntegral (Limits.pullback.snd W.hom Z.hom))
+
+/-- Isomorphic modules stay isomorphic after pulling back along a further morphism. -/
+lemma nonempty_iso_pullback_comp {A B C : Scheme.{u}} (f : A ⟶ B) (g : B ⟶ C) {M N : C.Modules}
+    (e : (Scheme.Modules.pullback g).obj M ≅ (Scheme.Modules.pullback g).obj N) :
+    Nonempty ((Scheme.Modules.pullback (f ≫ g)).obj M ≅ (Scheme.Modules.pullback (f ≫ g)).obj N) :=
+  ⟨(pullbackComp f g).symm.app M ≪≫ (Scheme.Modules.pullback f).mapIso e ≪≫
+    (pullbackComp f g).app N⟩
+
+/-- **Triviality on a fibre spreads out** (Stacks, Tag 0BF3).
+
+Let `X`, `Y` be proper and geometrically integral over a field `K` with `K`-points `x`, `y`, and
+let `M`, `N` be invertible modules on `X ×_K Y ×_K Z` which become isomorphic on the slices
+`{x} × Y × Z` and `X × {y} × Z`. If `M` and `N` become isomorphic on the fibre
+`X ×_K Y ×_K Spec F` over a point `φ : Spec F ⟶ Z` with values in a field `F`, then they are
+isomorphic on `X ×_K Y ×_K U` for an open neighbourhood `U` of the image of `φ`.
+
+This is Tag 0BF3 applied over the base `Z` to `X ×_K Z` and `Y ×_K Z` with the sections given
+by `x` and `y`. Its proof is an infinitesimal lifting argument based on the injectivity of
+`H¹(X × Y, 𝒪) → H¹(X, 𝒪) ⊕ H¹(Y, 𝒪)` (Künneth, Tag 0BF2). Tag 0BF3 asks for triviality on the
+fibre over the residue field `κ(t)` of the image `t` of `φ`; this is equivalent to triviality
+over `F`, since a morphism `Spec F ⟶ Z` factors through the locally closed subscheme of
+Tag 0BDP if and only if `t` lies in it. -/
+theorem exists_mem_nonempty_iso_preimageSnd_of_nonempty_iso_fiber (X Y Z : Over (Spec (.of K)))
+    [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
+    [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
+    (M N : ((X ⊗ Y) ⊗ Z).left.Modules) [M.IsInvertible] [N.IsInvertible]
+    (hx : Nonempty (overPullback (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)) M ≅
+      overPullback (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)) N))
+    (hy : Nonempty (overPullback (lift (lift (fst X Z) (toUnit _ ≫ y)) (snd X Z)) M ≅
+      overPullback (lift (lift (fst X Z) (toUnit _ ≫ y)) (snd X Z)) N))
+    {F : Type u} [Field F] (φ : Spec (.of F) ⟶ Z.left)
+    (hφ : Nonempty
+      ((Scheme.Modules.pullback (Limits.pullback.fst (snd (X ⊗ Y) Z).left φ)).obj M ≅
+        (Scheme.Modules.pullback (Limits.pullback.fst (snd (X ⊗ Y) Z).left φ)).obj N)) :
+    ∃ U : Z.left.Opens, φ.base (IsLocalRing.closedPoint F) ∈ U ∧
+      Nonempty ((Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj M ≅
+        (Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj N) := by
+  obtain ⟨ex⟩ := hx
+  obtain ⟨ey⟩ := hy
+  obtain ⟨e⟩ := Scheme.Modules.nonempty_iso_fiber_of_nonempty_iso_pullback
+    (snd (X ⊗ Y) Z).left M N φ hφ
+  obtain ⟨U, htU, m, hm⟩ := TheoremOfCube.exists_mem_isFreeGenerator X Y Z x y (M ⊗ Nᵛ)
+    (nonempty_pullback_tensorObj_dual_iso_unit _ M N ex)
+    (nonempty_pullback_tensorObj_dual_iso_unit _ M N ey) _
+    (nonempty_pullback_tensorObj_dual_iso_unit _ M N e)
+  obtain ⟨d⟩ := nonempty_pullback_ι_iso_unit_of_isFreeGenerator _ hm
+  exact ⟨U, htU, nonempty_pullback_iso_of_pullback_tensorObj_dual_iso_unit _ M N d⟩
+
+/-- **The locus of triviality on the fibres is closed** (Stacks, Tags 0BDP and 0BF0).
+
+Let `X`, `Y` be proper and geometrically integral over a field `K`, and let `M`, `N` be
+invertible modules on `X ×_K Y ×_K Z`. The set of points `t ∈ Z` such that `M` and `N` become
+isomorphic on the fibre `X ×_K Y ×_K Spec κ(t)` is closed.
+
+The projection `X ×_K Y ×_K Z ⟶ Z` is proper, flat, of finite presentation and has
+geometrically integral fibres, so this is the seesaw principle
+`AlgebraicGeometry.Scheme.Modules.isClosed_setOf_nonempty_iso_fiber`. -/
+theorem isClosed_setOf_nonempty_iso_fiber (X Y Z : Over (Spec (.of K)))
+    [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
+    [GeometricallyIntegral Y.hom] (M N : ((X ⊗ Y) ⊗ Z).left.Modules) [M.IsInvertible]
+    [N.IsInvertible] :
+    IsClosed {t : Z.left | Nonempty
+      ((Scheme.Modules.pullback
+          (Limits.pullback.fst (snd (X ⊗ Y) Z).left (Z.left.fromSpecResidueField t))).obj M ≅
+        (Scheme.Modules.pullback
+          (Limits.pullback.fst (snd (X ⊗ Y) Z).left (Z.left.fromSpecResidueField t))).obj N)} :=
+  Scheme.Modules.isClosed_setOf_nonempty_iso_fiber (snd (X ⊗ Y) Z).left M N
+
+/-- If `M ≅ N` over an open `U ⊆ Z`, then `M ≅ N` on the fibre over every field-valued point
+of `U`. -/
+lemma nonempty_iso_fiber_of_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K)))
+    (M N : ((X ⊗ Y) ⊗ Z).left.Modules) {U : Z.left.Opens}
+    (e : (Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj M ≅
+      (Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj N)
+    {F : Type u} [Field F] (φ : Spec (.of F) ⟶ Z.left)
+    (hφ : φ.base (IsLocalRing.closedPoint F) ∈ U) :
+    Nonempty
+      ((Scheme.Modules.pullback (Limits.pullback.fst (snd (X ⊗ Y) Z).left φ)).obj M ≅
+        (Scheme.Modules.pullback (Limits.pullback.fst (snd (X ⊗ Y) Z).left φ)).obj N) := by
+  have H : Set.range (Limits.pullback.fst (snd (X ⊗ Y) Z).left φ) ⊆
+      Set.range (preimageSnd X Y Z U).ι := by
+    rintro _ ⟨w, rfl⟩
+    rw [Scheme.Opens.range_ι]
+    change (snd (X ⊗ Y) Z).left ((Limits.pullback.fst (snd (X ⊗ Y) Z).left φ) w) ∈ U
+    rw [← Scheme.Hom.comp_apply, Limits.pullback.condition, Scheme.Hom.comp_apply,
+      Subsingleton.elim ((Limits.pullback.snd (snd (X ⊗ Y) Z).left φ) w)
+        (IsLocalRing.closedPoint F)]
+    exact hφ
+  rw [← IsOpenImmersion.lift_fac _ _ H]
+  exact nonempty_iso_pullback_comp _ _ e
 
 /-- **Closedness of the locus of triviality** (Stacks, Tags 0BDP, 0BF0 and 0BF3).
 
@@ -108,10 +174,9 @@ let `M`, `N` be invertible modules on `X ×_K Y ×_K Z` which become isomorphic 
 `{x} × Y × Z` and `X × {y} × Z`. Then the set of points `t ∈ Z` having an open neighbourhood
 `U` with `M ≅ N` on `X ×_K Y ×_K U` is closed.
 
-By Tag 0BF3 (applied over `Z`, using the two slices) this set is the set of `t` such that `M` and
-`N` are isomorphic on the fibre over `t`, and by Tags 0BDP and 0BF0 that set is the image of a
-closed immersion `Z' → Z`.
-(blueprint: lem-sc-cube-local-isomorphism-closed). -/
+By Tag 0BF3 (`AlgebraicGeometry.exists_mem_nonempty_iso_preimageSnd_of_nonempty_iso_fiber`)
+this set is the set of `t` such that `M` and `N` are isomorphic on the fibre over `t`, which is
+closed by Tags 0BDP and 0BF0 (`AlgebraicGeometry.isClosed_setOf_nonempty_iso_fiber`). -/
 theorem isClosed_setOf_exists_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K)))
     [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
     [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
@@ -123,68 +188,19 @@ theorem isClosed_setOf_exists_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of 
     IsClosed {t : Z.left | ∃ U : Z.left.Opens, t ∈ U ∧
       Nonempty ((Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj M ≅
         (Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj N)} := by
-  let p := (snd (X ⊗ Y) Z).left
-  let L := M ⊗ Nᵛ
-  have : GeometricallyIntegral (X ⊗ Y).hom := geometricallyIntegral_tensorHom X Y
-  have : IsProper (X ⊗ Y).hom := by
-    change IsProper (pullback.fst X.hom Y.hom ≫ X.hom)
-    infer_instance
-  have : IsProper p := inferInstanceAs (IsProper (pullback.snd (X ⊗ Y).hom Z.hom))
-  have : Flat p := inferInstanceAs (Flat (pullback.snd (X ⊗ Y).hom Z.hom))
-  have : LocallyOfFinitePresentation p :=
-    inferInstanceAs (LocallyOfFinitePresentation (pullback.snd (X ⊗ Y).hom Z.hom))
-  have : GeometricallyIntegral p :=
-    inferInstanceAs (GeometricallyIntegral (pullback.snd (X ⊗ Y).hom Z.hom))
-  let σ := lift (lift (toUnit Z ≫ x) (toUnit Z ≫ y)) (𝟙 Z)
-  have hσ : σ.left ≫ p = 𝟙 Z.left := by
-    rw [← Over.comp_left]
-    simp [σ]
-  have hclosed := Scheme.isClosed_setOf_nonempty_pullback_fiber_iso_unit p σ.left hσ L
-  have hset : {t : Z.left | ∃ U : Z.left.Opens, t ∈ U ∧
-      Nonempty ((Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj M ≅
-        (Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj N)} =
-      {t : Z.left | Nonempty ((Scheme.Modules.pullback (p.fiberι t)).obj L ≅
-        SheafOfModules.unit _)} := by
-    ext t
-    constructor
-    · rintro ⟨U, ht, e⟩
-      exact nonempty_pullback_fiber_iso_unit_of_open p L t U ht
-        ((pullback_iso_iff_tensor_dual_iso_unit _ M N).mp e)
-    · intro ht
-      obtain ⟨U, htU, e⟩ := exists_mem_nonempty_pullback_iso_unit_of_cube_fiber X Y Z x y L
-        ((pullback_iso_iff_tensor_dual_iso_unit _ M N).mp hx)
-        ((pullback_iso_iff_tensor_dual_iso_unit _ M N).mp hy) t ht
-      exact ⟨U, htU, (pullback_iso_iff_tensor_dual_iso_unit _ M N).mpr e⟩
-  rw [hset]
-  exact hclosed
-
-
-private lemma rationalPoint_fromSpecResidueField_factor (Z : Over (Spec (.of K)))
-    (z : 𝟙_ _ ⟶ Z) :
-    Z.left.fromSpecResidueField (z.left (IsLocalRing.closedPoint K)) ≫ Z.hom ≫ z.left =
-      Z.left.fromSpecResidueField (z.left (IsLocalRing.closedPoint K)) := by
-  let t := z.left (IsLocalRing.closedPoint K)
-  let a := Z.left.descResidueField (Scheme.stalkClosedPointTo z.left)
-  let r := Z.left.fromSpecResidueField t ≫ Z.hom
-  have ha : Spec.map a ≫ Z.left.fromSpecResidueField t = z.left :=
-    Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField K Z.left z.left
-  have hw : z.left ≫ Z.hom = 𝟙 _ := z.w
-  have hba : Spec.preimage r ≫ a = 𝟙 _ := by
-    apply Spec.map_injective
-    simp only [Spec.map_comp, Spec.map_preimage, Spec.map_id]
-    change Spec.map a ≫ (Z.left.fromSpecResidueField t ≫ Z.hom) = _
-    rw [← Category.assoc, ha, hw]
-    rfl
-  have hsurj : Function.Surjective a.hom := by
-    intro k
-    refine ⟨(Spec.preimage r).hom k, ?_⟩
-    exact congrArg (fun f ↦ f.hom k) hba
-  have : IsIso a := (ConcreteCategory.isIso_iff_bijective a).mpr ⟨a.hom.injective, hsurj⟩
-  have : IsIso (Spec.map a) := inferInstance
-  apply (cancel_epi (Spec.map a)).mp
-  rw [← Category.assoc, ← Category.assoc, ha, hw]
-  change (𝟙 (Spec (.of K))) ≫ z.left = z.left
-  simp
+  convert isClosed_setOf_nonempty_iso_fiber X Y Z M N using 1
+  ext t
+  constructor
+  · rintro ⟨U, htU, ⟨e⟩⟩
+    refine nonempty_iso_fiber_of_nonempty_iso_preimageSnd X Y Z M N e _ ?_
+    convert htU
+    exact Scheme.fromSpecResidueField_apply _ _
+  · intro ht
+    obtain ⟨U, htU, e⟩ :=
+      exists_mem_nonempty_iso_preimageSnd_of_nonempty_iso_fiber X Y Z x y M N hx hy _ ht
+    refine ⟨U, ?_, e⟩
+    convert htU
+    exact (Scheme.fromSpecResidueField_apply _ _).symm
 
 /-- **Openness of the locus of triviality at a rational point** (Stacks, Tag 0BF3).
 
@@ -193,10 +209,8 @@ let `z` be a `K`-point of `Z`. If two invertible modules `M`, `N` on `X ×_K Y �
 isomorphic on the slices `{x} × Y × Z`, `X × {y} × Z` and `X × Y × {z}`, then they are
 isomorphic on `X ×_K Y ×_K U` for some open neighbourhood `U` of `z`.
 
-Tag 0BF3 is applied over the base `Z` to `X ×_K Z` and `Y ×_K Z` with the sections given by `x`
-and `y`; its proof is an infinitesimal lifting argument based on the injectivity of
-`H¹(X × Y, 𝒪) → H¹(X, 𝒪) ⊕ H¹(Y, 𝒪)` (Künneth).
-(blueprint: lem-sc-cube-rational-neighborhood). -/
+The slice `X × Y × {z}` is the fibre over `z`, so this is
+`AlgebraicGeometry.exists_mem_nonempty_iso_preimageSnd_of_nonempty_iso_fiber`. -/
 theorem exists_mem_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K)))
     [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
     [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
@@ -210,34 +224,30 @@ theorem exists_mem_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K)))
     ∃ U : Z.left.Opens, z.left.base (IsLocalRing.closedPoint K) ∈ U ∧
       Nonempty ((Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj M ≅
         (Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj N) := by
-  let L := M ⊗ Nᵛ
-  let p := (snd (X ⊗ Y) Z).left
-  let t := z.left (IsLocalRing.closedPoint K)
-  let i := lift (𝟙 (X ⊗ Y)) (toUnit _ ≫ z)
-  let q := p.fiberι t ≫ (fst (X ⊗ Y) Z).left
-  have hqi : q ≫ i.left = p.fiberι t := by
-    apply pullback.hom_ext
-    · simp [q, i]
-    · change (q ≫ i.left) ≫ (snd (X ⊗ Y) Z).left = _
-      rw [Category.assoc, ← Over.comp_left]
-      simp only [i, lift_snd, Over.comp_left]
-      change (p.fiberι t ≫ pullback.fst (X ⊗ Y).hom Z.hom) ≫
-        (X ⊗ Y).hom ≫ z.left = p.fiberι t ≫ pullback.snd (X ⊗ Y).hom Z.hom
-      rw [Category.assoc, pullback.condition_assoc]
-      change p.fiberι t ≫ p ≫ Z.hom ≫ z.left = p.fiberι t ≫ p
-      rw [← Category.assoc, Scheme.Hom.fiber_fac]
-      simp only [Category.assoc]
-      rw [rationalPoint_fromSpecResidueField_factor Z z]
-  have ht : Nonempty ((Scheme.Modules.pullback (p.fiberι t)).obj L ≅
-      SheafOfModules.unit _) := by
-    obtain ⟨e⟩ := (pullback_iso_iff_tensor_dual_iso_unit i.left M N).mp hz
-    exact ⟨(pullbackCongr hqi.symm).app L ≪≫ (pullbackComp q i.left).symm.app L ≪≫
-      (Scheme.Modules.pullback q).mapIso e ≪≫ pullbackObjUnitIso q⟩
-  obtain ⟨U, htU, e⟩ := exists_mem_nonempty_pullback_iso_unit_of_cube_fiber X Y Z x y L
-    ((pullback_iso_iff_tensor_dual_iso_unit _ M N).mp hx)
-    ((pullback_iso_iff_tensor_dual_iso_unit _ M N).mp hy) t ht
-  exact ⟨U, htU, (pullback_iso_iff_tensor_dual_iso_unit _ M N).mpr e⟩
-
+  refine exists_mem_nonempty_iso_preimageSnd_of_nonempty_iso_fiber X Y Z x y M N hx hy
+    (F := K) z.left ?_
+  -- The fibre over `z` is the slice `X × Y × {z}`.
+  have H : Limits.pullback.fst (snd (X ⊗ Y) Z).left z.left =
+      (Limits.pullback.fst (snd (X ⊗ Y) Z).left z.left ≫ (fst (X ⊗ Y) Z).left) ≫
+        (lift (𝟙 (X ⊗ Y)) (toUnit _ ≫ z)).left := by
+    set pf := Limits.pullback.fst (snd (X ⊗ Y) Z).left z.left
+    apply Over.tensorObj_ext
+    · change pf ≫ (fst (X ⊗ Y) Z).left =
+        (pf ≫ (fst (X ⊗ Y) Z).left) ≫ (lift (𝟙 (X ⊗ Y)) (toUnit _ ≫ z)).left ≫ (fst (X ⊗ Y) Z).left
+      rw [← Over.comp_left, lift_fst, Over.id_left, Category.comp_id]
+    · change pf ≫ (snd (X ⊗ Y) Z).left =
+        (pf ≫ (fst (X ⊗ Y) Z).left) ≫ (lift (𝟙 (X ⊗ Y)) (toUnit _ ≫ z)).left ≫ (snd (X ⊗ Y) Z).left
+      rw [← Over.comp_left, lift_snd, Over.comp_left, Limits.pullback.condition, ← Category.assoc,
+        Over.toUnit_left]
+      congr 1
+      calc Limits.pullback.snd (snd (X ⊗ Y) Z).left z.left
+          = Limits.pullback.snd (snd (X ⊗ Y) Z).left z.left ≫ z.left ≫ Z.hom := by
+            rw [Over.w z]; exact (Category.comp_id _).symm
+        _ = pf ≫ (snd (X ⊗ Y) Z).left ≫ Z.hom := by rw [← Limits.pullback.condition_assoc]
+        _ = (pf ≫ (fst (X ⊗ Y) Z).left) ≫ (X ⊗ Y).hom := by
+            rw [Over.w, Category.assoc, Over.w]
+  rw [H]
+  exact nonempty_iso_pullback_comp _ _ hz.some
 
 /-- **Invertible modules isomorphic locally over the base are isomorphic** (Stacks, Tag 0BDP and
 the last step of the proof of Tag 0BF4).
