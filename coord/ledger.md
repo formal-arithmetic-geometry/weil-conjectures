@@ -15193,3 +15193,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:50 L: merged deliver/M1/Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatQuotientTensorSES (stage 3; reviewer PASS; first push; landing 20261015T205052-L-1693853 (proof); batch 20261015T205049; modules 1; new nodes 0)
 - 20:50 L: merged deliver/M3/Sheaf.Algebra.Homology.AcyclicKFlatCyclesFlat (stage 3; reviewer PASS; first push; landing 20261015T205052-L-1693971 (proof); batch 20261015T205049; modules 1; new nodes 0)
 - 20:50 L: merged deliver/M4/Sheaf.Algebra.Homology.KFlatIndependentCoefficients (stage 3; reviewer PASS; first push; landing 20261015T205052-L-1694100 (proof); batch 20261015T205049; modules 1; new nodes 0)
+- 20:50 L: merged deliver/P1/Sheaf.Paper.CartanEilenbergLeftExactCohomology (stage 3; reviewer PASS; first push; landing 20261015T205053-L-1694266 (proof); batch 20261015T205049; modules 1; new nodes 0)
