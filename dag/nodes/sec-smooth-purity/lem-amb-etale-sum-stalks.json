@@ -411,5 +411,23 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-7b518234b (reviewer sub-agent of L); spot-checked: Reviewed the complete item, proof steps, cited DAG statements, unit/chapter route, and source locations Tag 0710, 03S5, 03CY, 02GN, and 02GW. The geometric-lift indexing, A-linear coefficient typing, sheafification-stalk comparison, cocone maps, inverse identities, naturality, and edge cases are correct. No new nodes or repairs are needed; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSumStalks",
+  "declaration": "AlgebraicGeometry.Etale.exists_etaleSumStalksIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSumStalks.lean",
+  "statement": "theorem Etale.exists_etaleSumStalksIso {U X : Scheme.{u}} (u : U ⟶ X) [Etale u] (A : Type (u + 1)) [CommRing A] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) : ∃ e : ∀ F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A), (((Scheme.pointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} A)).obj ((Etale.etaleLowerShriek (ModuleCat.{u + 1} A) u inferInstance).obj F)) ≃ₗ[A] (⨁ (z : Over.mk x ⟶ Over.mk u), ((Scheme.pointSmallEtale z.left).sheafFiber (A := ModuleCat.{u + 1} A)).obj F), (∀ (F G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (α : F ⟶ G) (s : ((Scheme.pointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} A)).obj ((Etale.etaleLowerShriek (ModuleCat.{u + 1} A) u inferInstance).obj F)), e G (((Scheme.pointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} A)).map ((Etale.etaleLowerShriek (ModuleCat.{u + 1} A) u inferInstance).map α) s) = DirectSum.lmap (fun z : Over.mk x ⟶ Over.mk u => (((Scheme.pointSmallEtale z.left).sheafFiber (A := ModuleCat.{u + 1} A)).map α).hom) (e F s)) ∧ (∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : U.Etale) (v : Over.mk x ⟶ (Scheme.Etale.forget X).obj ((MorphismProperty.Over.map ⊤ (inferInstance : Etale u)).obj W)) (s : F.obj.obj (op W)), e F ((Scheme.pointSmallEtale x).toPresheafFiber ((MorphismProperty.Over.map ⊤ (inferInstance : Etale u)).obj W) v ((Etale.etaleLowerShriek (ModuleCat.{u + 1} A) u inferInstance).obj F).obj ((toSheafify X.smallEtaleTopology ((MorphismProperty.Over.map ⊤ (inferInstance : Etale u)).op.lan.obj F.obj)).app (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale u)).obj W)) (((MorphismProperty.Over.map ⊤ (inferInstance : Etale u)).op.lanUnit.app F.obj).app (op W) s))) = DirectSum.lof A (Over.mk x ⟶ Over.mk u) (fun z : Over.mk x ⟶ Over.mk u => ((Scheme.pointSmallEtale z.left).sheafFiber (A := ModuleCat.{u + 1} A)).obj F) (v ≫ Over.homMk W.hom) ((Scheme.pointSmallEtale (v.left ≫ W.hom)).toPresheafFiber W (Over.homMk v.left) F.obj s))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1447f52a6",
+  "group": "NP",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all six dependencies, source clauses, germ formula, naturality, universes, edge cases, records and maintainer gates. Server-only compile reproduced cleanly in 1.9 seconds. No corrections needed; branch and project clones unchanged."
  }
 }
