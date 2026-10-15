@@ -26,87 +26,54 @@
  ],
  "proof": [
   {
-   "text": "For each $n$, the indexing category is finite: for each $0\\leq k\\leq m$ there are finitely many order-preserving maps $[k]\\to[n]$, and between any two such maps there are finitely many possible $\\psi$. Thus finite limits [def-galois-finite-limits-colimits] give $L_n=\\lim U(n)$ with projections $p_{n,\\alpha}:L_n\\to U_k$. If $\\varphi:[n]\\to[n']$, the projections $p_{n',\\varphi\\alpha}$ form a cone over $U(n)$, hence give a unique $L(\\varphi):L_{n'}\\to L_n$ with $p_{n,\\alpha}L(\\varphi)=p_{n',\\varphi\\alpha}$. Applying these equations to the identity and to a composite proves the simplicial identities by uniqueness of maps into a limit; so $L$ is a simplicial object.",
+   "text": "The objects of the truncated simplex category inject into Fin (m + 1) by their lengths. Its opposite is finite as well. Simplex morphisms are finite by Mathlib, and opposites and the fully faithful inclusion inherit finite hom sets. Objects of StructuredArrow n (inclusion m).op are the image of the finite dependent sum of truncated objects x and arrows n -> inclusion.op.obj x; its hom sets inject into the corresponding truncated hom sets by taking the right component. Thus every indexing category is a FinCategory.",
    "uses": [
-    "def-galois-finite-limits-colimits",
     "def-weil-pbc-simplicial-set",
     "def-weil-pbc-simplicial-object"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0183 (lemma-existence-cosk), formula and construction of the maps induced by postcomposition"
-   }
+   "elementary": true
   },
   {
-   "text": "For a simplicial object $V$, a morphism $g:V\\to L$ is equivalent, by the limit property in each degree, to compatible maps $g_{n,\\alpha}=p_{n,\\alpha}g_n:V_n\\to U_k$ for all $\\alpha:[k]\\to[n]$, $k\\leq m$. Naturality in $n$ says $g_{n,\\alpha}V(\\varphi)=g_{n',\\varphi\\alpha}$ for $\\varphi:[n]\\to[n']$. Taking $\\varphi=\\alpha:[k]\\to[n]$ gives $g_{n,\\alpha}=g_{k,\\mathrm{id}}V(\\alpha)$. Conversely, a natural transformation $t:\\mathrm{sk}_mV\\to U$ gives maps $t_kV(\\alpha)$; for $\\psi:[k']\\to[k]$, naturality of $t$ makes $U(\\psi)t_kV(\\alpha)=t_{k'}V(\\alpha\\psi)$, so they are cones and define $g_n$. Their compatibility under every $\\varphi$ makes $g$ simplicial. These constructions are inverse and natural in $V$, establishing the coskeleton mapping property [def-weil-pbc-simplicial-coskeleton]; its counit is $p_{k,\\mathrm{id}}:L_k\\to U_k$ in degrees $k\\leq m$.",
-   "uses": [
-    "def-weil-pbc-simplicial-coskeleton",
-    "def-weil-pbc-simplicial-object"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0183 (lemma-existence-cosk), proof, the Hom-set calculation from compatible families and their identity components"
-   }
-  },
-  {
-   "text": "For $k\\leq m$, the object $\\mathrm{id}_{[k]}:[k]\\to[k]$ is final in $(\\Delta/[k])_{\\leq m}$, hence initial in its opposite. The limit of $U(k)$ is therefore $U_k$: the cone with vertex $U_k$ has component $U(\\alpha):U_k\\to U_j$ at $\\alpha:[j]\\to[k]$, and every cone factors uniquely through its component at the identity. Thus the counit $p_{k,\\mathrm{id}}$ from the preceding step is an isomorphism in each truncated degree; naturality makes $\\varepsilon:\\mathrm{sk}_mL\\to U$ an isomorphism.",
-   "uses": [
-    "def-weil-pbc-simplicial-coskeleton"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0184 (lemma-trivial-cosk), proof, and Lemma 0185 (lemma-recover-cosk)"
-   }
-  },
-  {
-   "text": "Let $\\Phi:\\mathcal C\\to\\mathcal D$ preserve finite limits. Each category $(\\Delta/[n])_{\\leq m}^{\\mathrm{op}}$ is finite by step 1, so the cone $\\Phi(p_{n,\\alpha})$ exhibits $\\Phi(L_n)$ as the limit of $\\Phi\\circ U(n)$. The equations defining $L(\\varphi)$ in step 1 remain true after $\\Phi$; uniqueness of the induced limit maps therefore identifies $\\Phi\\circ L$ with the same construction applied to $\\Phi\\circ U$. The Hom-set calculation of step 2, with these image cones, proves that $(\\Phi\\circ L,\\Phi(\\varepsilon))$ has the coskeleton mapping property in $\\mathcal D$. If $c:K\\to\\operatorname{cosk}_m\\mathrm{sk}_mK$ is the canonical isomorphism, then $\\Phi(c)$ is an isomorphism and $\\Phi(\\varepsilon)\\circ\\mathrm{sk}_m(\\Phi(c))=\\mathrm{id}$; the mapping property makes $\\Phi(c)$ the canonical morphism for $\\Phi\\circ K$.",
+   "text": "Finite limits give HasPointwiseRightKanExtension for every truncated object U. Take R = inclusion.op.ran and epsilon = inclusion.op.ranCounit. Mathlib isPointwiseRightKanExtensionRanCounit proves the pointwise limit description, and ranCounit has the right Kan extension property. Full faithfulness of the inclusion and IsPointwiseRightKanExtension.isIso_hom show that every epsilon.app U is an isomorphism.",
    "uses": [
     "def-galois-finite-limits-colimits",
     "def-weil-pbc-simplicial-coskeleton"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Lemma 01GD (lemma-acyclicity), proof, finite-limit construction of coskeleton terms under an exact functor; expanded using Simplicial Lemma 0183"
-   }
+   "elementary": true
   },
   {
-   "text": "For $\\beta:U\\to U'$, the maps $\\beta_k:U_k\\to U'_k$ form a natural transformation $U(n)\\to U'(n)$ for each $n$. Composing each limit projection for $U(n)$ with $\\beta_k$ gives a cone over $U'(n)$ and a unique map $b_n:L_n\\to L'_n$. Its defining equations commute with the postcomposition maps $L(\\varphi)$ by uniqueness, so $b$ is simplicial; at $k\\leq m$ its component obeys $\\varepsilon'_k b_k=\\beta_k\\varepsilon_k$. The mapping property of step 2 makes $b$ the unique map with that property. The same uniqueness applied to identity and composite transformations proves functoriality; applied to $\\beta^{-1}$ it proves that $b$ is an isomorphism when $\\beta$ is. Applying $\\Phi$ to the defining projection equations for $b$ gives exactly the defining equations for the map induced by $\\Phi\\circ\\beta$ between the image coskeleta of step 4, so these maps agree.",
+   "text": "Apply hom_ext_of_isRightKanExtension to the two maps b and R.map beta. The assumed counit equation and naturality of ranCounit identify their composites with the counit, proving uniqueness of the induced map. Functoriality is built into Mathlib ran.",
    "uses": [
     "def-weil-pbc-simplicial-coskeleton"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0183 (lemma-existence-cosk), naturality of the limit construction and the coskeleton mapping property"
-   }
+   "elementary": true
   },
   {
-   "text": "Take $\\mathcal C=\\mathrm{PSh}(\\mathcal E)$ with values in sets. By [lem-weil-pbc-presheaf-finite-limits-objectwise] (1), presheaf limits are objectwise and evaluation at each $V\\in\\mathcal E$ preserves finite limits. Apply step 4 to this evaluation functor and step 5 to an arbitrary truncated-presheaf morphism. This gives the coskeleton and induced morphism sectionwise; in particular the canonical coskeletality isomorphism is detected at every $V$.",
+   "text": "A finite-limit-preserving functor Phi preserves each limit of a StructuredArrow diagram because that category is finite. Mathlib preservesPointwiseRightKanExtensionAtOfPreservesLimit and preservesPointwiseRKEOfHasPointwiseAndPreservesPointwise therefore give preservation of the right Kan extension. Removing the identity components of the associator gives the image counit exactly as stated. Apply hom_ext_of_isRightKanExtension in the image category; the required counit equation for the whiskered map follows by applying Phi.map to each component of naturality of ranCounit.",
    "uses": [
-    "lem-weil-pbc-presheaf-finite-limits-objectwise"
+    "def-galois-finite-limits-colimits",
+    "def-weil-pbc-simplicial-coskeleton"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Lemma 01GD (lemma-acyclicity), proof, passage to sections and the finite-limit description of coskeleton terms; Sites and Sheaves Lemma 00W2 (lemma-limit-sheaf)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For the final clause compare c prime with whiskerRight c Phi using hom_ext_of_isRightKanExtension. Their composites with the image counit are identities: this is assumed for c prime, and for the whiskered c follows by applying Phi.map to the original counit equation componentwise. Hence c prime equals whiskerRight c Phi. The latter is an isomorphism since c is. The presheaf evaluation case is a specialization of this general theorem and requires no separate presheaf-limit lemma in its proof.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-galois-finite-limits-colimits",
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-simplicial-object",
-  "def-weil-pbc-simplicial-coskeleton",
-  "lem-weil-pbc-presheaf-finite-limits-objectwise"
+  "def-galois-finite-limits-colimits",
+  "def-weil-pbc-simplicial-coskeleton"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/simplicial.tex",
-  "place": "Lemmas 0183, 0184, 0185, with the finite-limit consequence used in Hypercoverings Lemma 01GD; proof expanded from the online Stacks text because the local literature checkout is absent"
+  "place": "Lemmas 0183--0185, and hypercovering.tex Lemma 01GD; implemented using Mathlib pointwise Kan extensions, finite-limit preservation, and Kan-extension hom extensionality (Y3, 2026-10-16)."
  },
  "mathlib_searches": [
   {
@@ -197,5 +164,15 @@
   "group": "T1",
   "result": "fix",
   "note": "C finite limits, m; (1) existence as IsRightKanExtension along truncation (landed family form), limit formula as pointwise Kan extension (coneAt = U(n)), counit iso; (3) uniqueness of the induced map, functoriality via R; (2) image Kan extension, image-of-cosk-beta uniqueness, canonical image morphism iso; (4) by instantiating evaluation. Fix: dropped tautological conjuncts (eps naturality, Functor.map_isIso, Phi-whiskered equations); coskeletality clause now concludes IsIso of every c' satisfying the image counit equation"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261015T220338-L-2474767",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

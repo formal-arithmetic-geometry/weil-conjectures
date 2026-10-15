@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 public import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 public import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+import Mathlib.Data.Finite.Sigma
 
 /-!
 # Coskeleta of truncated simplicial objects as finite limits
@@ -89,6 +91,82 @@ theorem truncatedCoskeletonFiniteLimits
               Functor.whiskerRight (ε.app ((SimplicialObject.truncation m).obj K)) Φ = 𝟙 _ →
             IsIso c')
     := by
-  sorry
+  classical
+  let ι := (SimplexCategory.Truncated.inclusion m).op
+  let (x y : SimplexCategoryᵒᵖ) : Finite (x ⟶ y) :=
+    Finite.of_injective (fun f : x ⟶ y ↦ f.unop)
+      (fun _ _ h ↦ Quiver.Hom.unop_inj h)
+  have : Finite (SimplexCategory.Truncated m) := by
+    apply Finite.of_injective (fun x : SimplexCategory.Truncated m ↦
+      (⟨x.obj.len, Nat.lt_succ_of_le x.property⟩ : Fin (m + 1)))
+    intro x y h
+    apply ObjectProperty.FullSubcategory.ext
+    exact SimplexCategory.ext (congrArg Fin.val h)
+  have : Finite (SimplexCategory.Truncated m)ᵒᵖ :=
+    Finite.of_injective Opposite.unop Opposite.unop_injective
+  let (x y : (SimplexCategory.Truncated m)ᵒᵖ) : Finite (x ⟶ y) :=
+    Finite.of_injective ι.map (Functor.map_injective _)
+  have (n : SimplexCategoryᵒᵖ) : Finite (StructuredArrow n ι) := by
+    apply Finite.of_surjective
+      (fun z : Σ x : (SimplexCategory.Truncated m)ᵒᵖ, (n ⟶ ι.obj x) ↦
+        StructuredArrow.mk z.2)
+    rintro ⟨⟨⟨⟩⟩, x, f⟩
+    exact ⟨⟨x, f⟩, rfl⟩
+  let (n : SimplexCategoryᵒᵖ) (x y : StructuredArrow n ι) : Finite (x ⟶ y) :=
+    Finite.of_injective (fun f : x ⟶ y ↦ f.right)
+      (fun _ _ h ↦ StructuredArrow.hom_ext _ _ h)
+  let (n : SimplexCategoryᵒᵖ) : FinCategory (StructuredArrow n ι) :=
+    { fintypeObj := Fintype.ofFinite _
+      fintypeHom := fun x y ↦ Fintype.ofFinite (x ⟶ y) }
+  let (U : SimplicialObject.Truncated C m) : ι.HasPointwiseRightKanExtension U :=
+    fun n ↦ inferInstance
+  refine ⟨ι.ran, ι.ranCounit, ?_, ?_, ?_, ?_, ?_⟩
+  · intro U
+    infer_instance
+  · intro U
+    exact ⟨ι.isPointwiseRightKanExtensionRanCounit U⟩
+  · intro U
+    exact (ι.isPointwiseRightKanExtensionRanCounit U).isIso_hom
+  · intro U U' β b hb
+    apply Functor.hom_ext_of_isRightKanExtension _ (ι.ranCounit.app U')
+    exact hb.trans (ι.ranCounit.naturality β).symm
+  · intro D _ Φ hΦ
+    let := hΦ
+    have hkan (U : SimplicialObject.Truncated C m) :
+        (ι.ran.obj U ⋙ Φ).IsRightKanExtension
+          (Functor.whiskerRight (ι.ranCounit.app U) Φ) := by
+      have h := Functor.PreservesRightKanExtension.preserves (G := Φ) (F := U) (L := ι)
+        (ι.ran.obj U) (ι.ranCounit.app U)
+      convert h using 1 <;> first | rfl | (ext x; simp)
+    refine ⟨hkan, ?_, ?_⟩
+    · intro U U' β b hb
+      let := hkan U'
+      apply Functor.hom_ext_of_isRightKanExtension (ι.ran.obj U' ⋙ Φ)
+        (Functor.whiskerRight (ι.ranCounit.app U') Φ)
+      change Functor.whiskerLeft ι b ≫ _ = _ at hb
+      rw [hb]
+      ext x
+      have hβ := NatTrans.congr_app (ι.ranCounit.naturality β) x
+      change (ι.ran.map β).app (ι.obj x) ≫ (ι.ranCounit.app U').app x =
+        (ι.ranCounit.app U).app x ≫ β.app x at hβ
+      change Φ.map ((ι.ranCounit.app U).app x) ≫ Φ.map (β.app x) =
+        Φ.map ((ι.ran.map β).app (ι.obj x)) ≫ Φ.map ((ι.ranCounit.app U').app x)
+      rw [← Φ.map_comp, ← Φ.map_comp, hβ]
+    · intro K c hc hiso c' hc'
+      let := hiso
+      have hcc' : c' = Functor.whiskerRight c Φ := by
+        let := hkan ((SimplicialObject.truncation m).obj K)
+        apply Functor.hom_ext_of_isRightKanExtension
+          (ι.ran.obj ((SimplicialObject.truncation m).obj K) ⋙ Φ)
+          (Functor.whiskerRight (ι.ranCounit.app _) Φ)
+        change Functor.whiskerLeft ι c' ≫ _ = _ at hc'
+        rw [hc']
+        ext x
+        have hcx := NatTrans.congr_app hc x
+        change c.app (ι.obj x) ≫ (ι.ranCounit.app _).app x = 𝟙 _ at hcx
+        change 𝟙 _ = Φ.map (c.app (ι.obj x)) ≫ Φ.map ((ι.ranCounit.app _).app x)
+        rw [← Φ.map_comp, hcx, Φ.map_id]
+      rw [hcc']
+      infer_instance
 
 end CategoryTheory
