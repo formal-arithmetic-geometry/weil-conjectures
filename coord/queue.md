@@ -1,6 +1,6 @@
 # Work queue
 
-29 items; claim with `tools/claim.py next <group> [--stage N]`.
+32 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (29)
+## Stage 3: modules to prove (32)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -23,23 +23,26 @@
 | `Sheaf.Paper.CondensedQbarLfpLocalTriviality` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelAssembly` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus` | 5 | 1 | proof |
-| `Sheaf.Paper.CondensedSheafExtContinuity` | 5 | 1 | proof |
 | `Sheaf.Paper.GeometricFieldProEtaleEvaluation` | 5 | 1 | proof |
-| `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleRingedClosedCounit` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleRingedLocalizationSequence` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 6 | 1 | proof |
-| `Sheaf.Paper.CondensedOpenClosedRecollement` | 6 | 1 | proof |
-| `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 6 | 5 | proof |
-| `Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution` | 7 | 1 | proof |
+| `Sheaf.Paper.CondensedLocalPieceHomContinuity` | 6 | 1 | proof |
+| `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 7 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleClosedAbelianFilteredColimits` | 7 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections` | 7 | 1 | proof |
 | `Sheaf.NumberTheory.Padics.ExtensionIntegersDvrCore` | 7 | 1 | proof |
 | `Sheaf.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique` | 7 | 1 | proof |
-| `Sheaf.Paper.PointLanFiniteProducts` | 7 | 1 | proof |
-| `Sheaf.Algebra.Homology.FunctorialObjectResolution` | 8 | 1 | proof |
+| `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
+| `Sheaf.Paper.CondensedOpenClosedRecollement` | 7 | 1 | proof |
+| `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 7 | 5 | proof |
+| `Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.GeometricModuleConstruction` | 8 | 1 | proof |
+| `Sheaf.Algebra.Homology.FunctorialObjectResolution` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
 Also listed above and claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
