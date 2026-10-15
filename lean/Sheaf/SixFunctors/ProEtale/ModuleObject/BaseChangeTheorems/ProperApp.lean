@@ -1,13 +1,12 @@
 module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 import Sheaf.Paper.CondensedQbarBaseChangeCompatibility
 
 @[expose] public section
-
 
 universe u
 
@@ -65,6 +64,35 @@ theorem isIso_boundedConstructibleBaseChange_padicAlgCl_app [IsProper f]
     ∀ K : _,
       IsIso ((boundedConstructibleBaseChange
         (Profinite.padicAlgClRingObj.{u} ℓ) ℓ k sq.toCommSq).app K) := by
-  sorry
+  intro K
+  let : IsNoetherian (Spec (.of k)) := {}
+  let : IsNoetherian X := AlgebraicGeometry.isNoetherian_of_locallyOfFiniteType
+    (X ↘ Spec (.of k))
+  let : TopologicalSpace.NoetherianSpace X := by infer_instance
+  obtain ⟨E, K₀, ⟨e⟩⟩ :=
+    AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj X ℓ K
+  let csq : AlgebraicGeometry.ChosenCartesianSquare g' f' f g :=
+    { toCommSq := sq.toCommSq
+      isoPullback := sq.isoPullback
+      hom_fst := sq.isoPullback_hom_fst
+      hom_snd := sq.isoPullback_hom_snd }
+  have hcompat := constructibleToQbar_baseChange_compatibility ℓ k E f g f' g' csq
+  have hfinite := isIso_boundedConstructibleBaseChange_continuousMap_app
+    ℓ E k sq K₀
+  have hsource : IsIso (constructibleToQbarSourceHom ℓ k E f g K₀) :=
+    (hcompat.2.2 K₀).1
+  have htarget : IsIso (constructibleToQbarTargetHom ℓ k E f' g' K₀) :=
+    (hcompat.2.2 K₀).2.1
+  let : IsIso (constructibleToQbarSourceHom ℓ k E f g K₀ ≫
+      (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k sq.toCommSq).app
+        ((AlgebraicGeometry.ProEtale.constructibleToPadicAlgCl X ℓ E).obj K₀)) := by
+    rw [(hcompat.2.2 K₀).2.2]
+    infer_instance
+  have hcomp : IsIso ((boundedConstructibleBaseChange
+      (Profinite.padicAlgClRingObj ℓ) ℓ k sq.toCommSq).app
+        ((AlgebraicGeometry.ProEtale.constructibleToPadicAlgCl X ℓ E).obj K₀)) :=
+    IsIso.of_isIso_comp_left (constructibleToQbarSourceHom ℓ k E f g K₀) _
+  exact (NatTrans.isIso_app_iff_of_iso
+    (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k sq.toCommSq) e).1 hcomp
 
 end AlgebraicGeometry.ProEtale.CondensedRing
