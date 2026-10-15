@@ -3,62 +3,200 @@
  "blueprint": {
   "is": "thm-exc-curve-open-dimension-general",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Open direct-image dimension on arbitrary curves",
- "statement": "Let $T$ be of finite type of dimension at most one over\na finite field or its algebraic closure, and let\n$j:U\\hookrightarrow T$ be any\nopen immersion.\nLet $A$ be a finite commutative ring killed by a power\nof a prime $\\ell$ invertible on $T$. Then\n$R^qj_*M$ is zero\nfor $q>1$ and every etale $A$-module sheaf $M$.",
+ "statement": "Let $k$ be a finite field or its algebraic closure, let $T$ be a scheme of finite type over $k$ [def-weil-finite-type-morphism] whose underlying topological space has Krull dimension at most one [def-kun-topological-krull-dimension], and let $j:U\\hookrightarrow T$ be any open immersion [def-weil-open-immersion]. Let $A$ be a finite commutative ring killed by a power of a prime $\\ell$ invertible on $T$. Then $R^qj_*M=0$ for every integer $q>1$ and every etale $A$-module sheaf $M$ on $U$ [def-weil-pbc-etale-sheaves], with higher direct images as in [def-weil-pbc-direct-image].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-exc-curve-open-dimension-general.md",
   "place": "node thm-exc-curve-open-dimension-general, order 1919"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-open-immersion",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "Restriction to $U$ is exact and $j^*j_*$ is the\nidentity by [def-weil-pbc-direct-image], so all positive\ndirect-image stalks there vanish. Outside $U$, use the\nstalk formula of\n[prop-weil-pbc-strict-henselization-stalk-formula].\nAt a generic point belonging to the closed complement,\nthe strict local spectrum has dimension zero and its\npullback of $U$ is empty, giving zero.",
+   "text": "Fix $M$ and $q>1$, and let $F$ be the underlying abelian sheaf of $M$. Since $\\ell^n A=0$ for some $n$, $\\ell^n F=0$, so $F$ is torsion. Apply clause (2) of [lem-weil-pbc-exchange-forget-coefficients] to the cartesian square with vertical arrows $j,j$ and horizontal identity arrows, and to $M[0]$. Taking degree-$q$ cohomology, using the exactness of scalar-forgetting explicitly stated there, identifies the underlying abelian sheaf of $R^qj_*M$ with $R^qj_*F$. This comparison is stated for modules over the constant ring sheaf, the coefficient category used in the theorem. It therefore suffices to prove that this abelian sheaf is zero. The field spectrum is Noetherian, so [lem-weil-pbc-finite-type-over-noetherian] makes $T$ Noetherian. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], every open subscheme of $T$, including the intersection of $U$ with any affine open of $T$, is quasi-compact. This proves that $j$ is quasi-compact. Its diagonal is an isomorphism, since an open immersion identifies $U$ with an open subscheme [def-weil-open-immersion]; hence $j$ is also quasi-separated.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "prop-weil-pbc-strict-henselization-stalk-formula"
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-open-immersion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6J (lemma-modules-abelian-unbounded), part (3); morphisms.tex Tag 01T6; properties.tex Tags 01OW, 01OZ"
+   }
   },
   {
-   "text": "For a closed point $t$, put\n$R=\\mathcal O^{\\rm sh}_{T,\\bar t}$.\nThis ring is excellent and Noetherian of dimension at\nmost one: finite-type field algebras are excellent, and\nlocalization and strict henselization preserve excellence,\nNoetherianness and local dimension. These are the ordinary\nlocal-algebra permanence theorems. Its residue field is\nalgebraically closed, since the ground field is finite or\nalgebraically closed and $t$ is closed.\nReplace $R$ by $R_{\\rm red}$, which changes neither\nthe etale site nor its cohomology, by\n[thm-weil-pbc-universal-homeomorphism-invariance].\nIf its dimension is zero, the open above $U$ is empty.\nOtherwise that open is contained in the punctured spectrum\nand hence, by [lem-exc-punctured-curve-branches], is a\ndisjoint union of a subset of the finitely many branch fields.",
+   "text": "For every geometric point $\\bar t$ of $T$, [prop-weil-pbc-strict-henselization-stalk-formula] now applies to the qcqs morphism $j$ and the torsion sheaf $F$. Write $R=\\mathcal O^{\\mathrm{sh}}_{T,\\bar t}$, $V=U\\times_T\\operatorname{Spec}R$, and $F_V$ for the pullback of $F$. It gives $(R^qj_*F)_{\\bar t}\\cong H^q(V,F_V)$. Choose an affine finite-type $k$-chart $\\operatorname{Spec}B$ containing $t$. Let $\\mathfrak p$ be the prime of $t$ in $B$ and let $K$ be the separable closure of $\\kappa(t)$ selected by $\\bar t$. By [lem-weil-pbc-etale-local-ring-triples], $R$, defined by affine pointed neighbourhoods, is canonically the colimit of etale residue triples over $(B,\\mathfrak p,K)$. By [lem-weil-pbc-strict-henselization-triples], this colimit is the algebraic strict henselization of $B_{\\mathfrak p}=\\mathcal O_{T,t}$, is strictly henselian, has residue field $K$, and the preimage of its maximal ideal in $B$ is $\\mathfrak p$. Thus its closed point maps to $t$. By [lem-sc-strict-henselization-dimension], $\\dim R=\\dim\\mathcal O_{T,t}\\le1$: a prime chain in $B_{\\mathfrak p}$ is a prime chain in $B$, and the closures in $T$ of the corresponding points are a strict chain of irreducible closed subsets, bounded in length by the hypothesis on $T$.",
    "uses": [
-    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q9 (theorem-higher-direct-images), 04HX (lemma-describe-etale-local-ring); algebra.tex Tags 04GP, 04GW; more-algebra.tex Tag 06LK"
+   }
+  },
+  {
+   "text": "If $t\\in U$, every point of $\\operatorname{Spec}R$ maps into $U$: the preimage of $U$ is an open containing the closed point of this local spectrum, and an open containing its maximal ideal contains a basic open $D(f)$ with $f$ a unit, hence is the whole spectrum. Thus $V=\\operatorname{Spec}R$, and [lem-weil-pbc-strictly-henselian-etale-acyclic] gives $H^q(V,F_V)=0$ because $q>1$.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-etale-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+   }
+  },
+  {
+   "text": "Suppose $t\\notin U$. The closed point of $\\operatorname{Spec}R$ is absent from $V$. If $\\dim R=0$, this is its only point: every prime of a zero-dimensional local ring equals its maximal ideal. Hence $V$ is empty. An abelian sheaf on the empty scheme is zero by the empty covering axiom, so its cohomology vanishes. Otherwise $\\dim R=\\dim\\mathcal O_{T,t}=1$. This forces $t$ to be closed in $T$. Indeed there is a strict generization $s$ of $t$ from a strict prime chain in its local ring; if $t$ had a distinct specialization $z$, then $\\overline{\\{z\\}}\\subsetneq\\overline{\\{t\\}}\\subsetneq\\overline{\\{s\\}}$ would contradict $\\dim T\\le1$. The closures are irreducible, and strictness follows from the $T_0$ property of scheme spaces. This also covers an isolated zero-dimensional component of $T$, without assuming that $U$ is dense.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-exc-curve-open-dimension-general.md",
+    "place": "Proof, first paragraph (generic points) and second paragraph (dimension-zero case), with the prime-chain argument written out"
+   }
+  },
+  {
+   "text": "In the remaining case $t$ is closed. By [lem-kun-closed-point-field], $\\kappa(t)$ is finite over $k$. It is therefore a finite field if $k$ is finite, and equals $k$ if $k$ is algebraically closed. In either case its separable closure is algebraically closed of characteristic $p=\\operatorname{char}k$: in the finite-field case every finite subextension of the separable closure is itself a finite field, whose Frobenius is bijective, so their union is perfect; a polynomial irreducible over this perfect, separably closed union must be linear, since a zero derivative would make it a $p$-th power. In the algebraically closed case the separable closure is the field itself. Together with the residue-field description in step 2 this gives the algebraically closed residue field required below. By [lem-exc-field-algebra-strict-henselization-excellent], $R$ and $R_0=R/\\sqrt{(0)}$ are excellent and Noetherian. The quotient $R_0$ is henselian by [lem-weil-pbc-quotient-henselian-pair], and has the same residue field and prime spectrum as $R$; thus it is reduced, one-dimensional and strictly henselian. By [lem-weil-pbc-reduction-universal-homeomorphism] its spectrum maps to $\\operatorname{Spec}R$ by a universal homeomorphism. The same holds for the reduction of $V$, namely $V_0=V\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R_0$. By [thm-weil-pbc-universal-homeomorphism-invariance], pullback identifies $H^q(V,F_V)$ with $H^q(V_0,F_0)$, where $F_0$ retains its pulled-back $A$-action.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "lem-exc-field-algebra-strict-henselization-excellent",
+    "lem-weil-pbc-quotient-henselian-pair",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-exc-curve-open-dimension-general.md",
+    "place": "Proof, second paragraph; supporting Stacks Tags 07QT, 07QU, 07QW, 09XK, 054M, 04DY, 04DZ; strict-henselization excellence is isolated as a new unsplit algebra lemma"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-punctured-curve-branches] to $R_0$. All its hypotheses were established in step 5, and its punctured spectrum is a finite disjoint union $\\coprod_{a=1}^r\\operatorname{Spec}K_a$, with each $K_a$ the fraction field of an excellent strictly henselian DVR with that same algebraically closed residue field of characteristic $p$. Since $V_0$ is an open missing the closed point, it is an open of this punctured spectrum. Each $\\operatorname{Spec}K_a$ is a single point, so its intersection with $V_0$ is either empty or the whole summand. Consequently $V_0$ is the coproduct over a subset $J\\subseteq\\{1,\\ldots,r\\}$ of these fields, with $J$ finite, possibly empty.",
+   "uses": [
     "lem-exc-punctured-curve-branches"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-exc-curve-open-dimension-general.md",
+    "place": "Proof, second paragraph, final sentence; branch algebra input as in Stacks Tags 0C3S, 00PD (as cited by the branch lemma)"
+   }
   },
   {
-   "text": "For every such field, [lem-exc-field-discrete-modules]\nidentifies etale cohomology, including for arbitrary $M$,\nwith continuous Galois cohomology. The DVR computation\n[lem-exc-dvr-galois] makes it zero above degree one.\nA finite disjoint union has the finite product of these\ncohomology groups. Thus every stalk vanishes for $q>1$,\nand [lemma-weil-pbc-geometric-stalk-conservative] proves\nthe asserted sheafwise vanishing.",
+   "text": "For each $a\\in J$, restrict the $A$-module sheaf to $\\operatorname{Spec}K_a$. When using the module-valued encoding, apply [lem-weil-pbc-module-sheaf-constant-ring-equivalence] on this field spectrum: it gives an equivalence with modules over the constant ring sheaf and retains exactly the underlying abelian sheaf. An equivalence of abelian categories preserves kernels and cokernels and is exact. The natural isomorphism on underlying additive sheaves identifies their sections on the final object, hence identifies the underlying abelian groups of their module-section functors. Its inverse gives the same identification in the opposite direction. Applying this exact equivalence to an injective resolution computes the same section-cohomology groups in either encoding: injectivity is preserved by the lifting argument below, and the section complexes are identified term by term. This is only a comparison on the fixed field spectrum; no compatibility of an arbitrary chosen encoding equivalence with scheme pushforwards is assumed. By [lem-exc-field-discrete-modules], the geometric fibre functor is an exact equivalence from these module sheaves to discrete continuous $A[G_a]$-modules, compatible with global sections and invariants, where $G_a=\\operatorname{Gal}(K_a^{\\mathrm{sep}}/K_a)$. An exact equivalence preserves injectives: a lifting problem transports to its exact inverse, is solved there, and transports back. Applying the equivalence to an injective resolution therefore identifies module-sheaf cohomology with the derived invariants defining $H^q(G_a,N_a)$ in [def-exc-continuous-cohomology]. By [lem-weil-pbc-etale-module-cohomology-forget], forgetting scalars identifies the former groups with the abelian-sheaf groups $H^q(\\operatorname{Spec}K_a,F_0|_{K_a})$ being used here. The prime $\\ell$ differs from $p$ because it is invertible on the nonempty $T$, and $A$ is finite and killed by a power of $\\ell$. Thus [lem-exc-dvr-galois] applies to every $N_a$, without a finiteness assumption on $N_a$, and makes all these groups zero for $q>1$.",
    "uses": [
+    "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
     "lem-exc-field-discrete-modules",
-    "lem-exc-dvr-galois",
+    "def-exc-continuous-cohomology",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-exc-dvr-galois"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-exc-curve-open-dimension-general.md",
+    "place": "Proof, third paragraph, first two sentences; etale-cohomology.tex Tags 03QT, 03QU; sites-cohomology.tex Tag 03FD; valuation input as in the cited DVR lemma"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-coproduct-cohomology-assembly], $H^q(V_0,F_0)$ is the finite product of the zero groups from step 7, hence zero (including the empty product). Steps 3–7 give $H^q(V,F_V)=0$ at every geometric point. The stalk isomorphism in step 2 therefore shows that all geometric stalks of $R^qj_*F$ vanish. Apply [lemma-weil-pbc-geometric-stalk-conservative] to its morphism to the zero sheaf to conclude $R^qj_*F=0$. The scalar-forgetting comparison in step 1 now gives $R^qj_*M=0$, since a module sheaf with zero underlying abelian sheaf is zero. If $T$ is empty, its only module sheaf is zero and this last conclusion already holds.",
+   "uses": [
+    "lem-weil-pbc-finite-coproduct-cohomology-assembly",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5B (lemma-constant-smooth-statements), first paragraph of proof; Tag 03Q9; geometric-stalk conservativity"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-open-immersion",
   "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-kun-closed-point-field",
+  "lem-exc-field-algebra-strict-henselization-excellent",
+  "lem-weil-pbc-quotient-henselian-pair",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
   "thm-weil-pbc-universal-homeomorphism-invariance",
   "lem-exc-punctured-curve-branches",
+  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
   "lem-exc-field-discrete-modules",
+  "def-exc-continuous-cohomology",
+  "lem-weil-pbc-etale-module-cohomology-forget",
   "lem-exc-dvr-galois",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-exc-curve-open-dimension-general.md",
-  "place": "## Proof"
+  "place": "Proof, all three paragraphs, with omitted algebra facts isolated and coefficient and finite-coproduct comparisons supplied"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|higherDirectImage|rightDerivedLowerStar",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state this theorem or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion into a curve over a finite field, higher etale direct images of torsion module sheaves vanish in degrees greater than one",
+   "results": "Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, Algebra.etaleLocus_eq_univ_iff, Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state this theorem or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"Etale\", \"cohomology\"",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'; ",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern; no conclusion from this query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale cohomological dimension of an open immersion into a curve is at most one",
+   "results": "service unavailable: Internal Server Error; ",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher derived pushforward of an etale sheaf under an open immersion into a one dimensional scheme vanishes above degree one",
+   "results": "AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.of_comp, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.formallyEtale_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, Algebra.Etale.formallyEtale, DerivedCategory.isZero_of_isLE",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state this theorem or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\"",
+   "results": "CochainComplex.HomComplex.CohomologyClass, CochainComplex.HomComplex.instAddCommGroupCohomologyClass, CochainComplex.HomComplex.CohomologyClass.mk, CochainComplex.HomComplex.CohomologyClass.instSMul, CochainComplex.HomComplex.CohomologyClass.mk_surjective, CochainComplex.HomComplex.CohomologyClass.rec, CochainComplex.HomComplex.CohomologyClass.instModule, CochainComplex.HomComplex.CohomologyClass.mkLinearMap",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state this theorem or a one-line generalization"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -90,5 +228,109 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-exc-curve-open-dimension-general",
+  "worker": "stage1",
+  "summary": "Expanded the three imported paragraphs into eight steps. Kept the theorem and branch/DVR route; supplied qcqs, scalar-forgetting, affine-chart residue-triples identification, dimension-zero and closed-point arguments, reduced strict henselian hypotheses, derived Galois comparison, and finite-coproduct assembly. One statement-only algebra node isolates excellence of strict henselizations of finite-type field local rings; its missing textbook reference is requested in report.md. No Lean or builds.",
+  "blueprint": "Paragraph 1 is realized by steps 1–4; paragraph 2 by steps 2, 4–6; paragraph 3 by steps 7–8. The sk-prop-a1-kummer route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic structural tool for the strict-local stalk proof: The derived exchange morphism commutes with forgetting the coefficient ring. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic structural tool for the strict-local stalk proof: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic structural tool for the strict-local stalk proof: An open subscheme of a Noetherian scheme is Noetherian. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Generic structural tool for the strict-local stalk proof: Strict-henselization stalk formula. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Generic structural tool for the strict-local stalk proof: The etale local ring at a geometric point as a colimit over etale algebras with a point. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic structural tool for the strict-local stalk proof: The colimit over etale algebras with a point and a residue embedding is strictly henselian. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic structural tool for the strict-local stalk proof: Strict henselization preserves local Krull dimension. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "why": "Generic structural tool for the strict-local stalk proof: Etale cohomology of a strictly henselian local scheme vanishes in positive degrees. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic structural tool for the strict-local stalk proof: Residue fields of closed points. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-henselian-pair",
+    "why": "Generic structural tool for the strict-local stalk proof: Henselianity descends through a quotient inside the maximal ideal. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic structural tool for the strict-local stalk proof: The reduction of a scheme is reduced and a universal homeomorphism. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic structural tool for the strict-local stalk proof: Universal-homeomorphism invariance. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+    "why": "Generic structural tool for the strict-local stalk proof: ModuleCat sheaves and sheaves of modules over the constant ring sheaf. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-exc-field-discrete-modules",
+    "why": "Generic structural tool for the strict-local stalk proof: Etale modules on a field and discrete Galois modules. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Generic structural tool for the strict-local stalk proof: Natural comparison of etale module cohomology with underlying abelian cohomology. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+    "why": "Generic structural tool for the strict-local stalk proof: Cohomology of a finite coproduct is the product of component cohomologies. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic structural tool for the strict-local stalk proof: Conservativity of geometric stalks. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-quotient-henselian-pair",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+  "lem-exc-field-discrete-modules",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-N5-48805cd70",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-48805cd70 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements, sources, and unit/chapter route. Checked all eight steps, coefficient comparisons, edge cases, duplicates, and cycles. No repairs needed. The unavailable strict-henselization reference is explicitly WANTED for the unsplit algebra lemma. Full findings are in review.md."
+ }
 }
