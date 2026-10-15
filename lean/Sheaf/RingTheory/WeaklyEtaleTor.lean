@@ -11,18 +11,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Homology.QuasiIso
+import Sheaf.RingTheory.WeaklyEtaleTorBoundedResolution
 import Sheaf.Algebra.Homology.FlatResolutionTorComparison
-import Sheaf.Algebra.FlatTorIdealCriterion
 import Sheaf.Algebra.Homology.DoubleComplexCokernelHomologyIso
 import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Module.Projective
-import Mathlib.CategoryTheory.Abelian.Projective.Resolution
-import Mathlib.CategoryTheory.Abelian.LeftDerived
 
 /-! # Tor and flat resolution bounds for weakly etale algebras
 
@@ -169,7 +161,32 @@ theorem weaklyEtale_flatResolutionBound
           (ChainComplex.single₀ (ModuleCat.{max u v} (ULift.{v} B))).obj M),
         QuasiIso ε ∧ (∀ j : ℕ, Module.Flat (ULift.{v} B) (F.X j)) ∧
           (∀ j : ℕ, d < j → IsZero (F.X j)) := by
-  sorry
+  let : Algebra (ULift.{v} A) (ULift.{v} B) := ULift.algebra' A (ULift.{v} B)
+  apply WeaklyEtaleTorAux.flatResolution_of_tor_vanishing (ULift.{v} B) d
+  intro M N j hj
+  obtain ⟨action, _, e, _⟩ := exists_weaklyEtale_tor_iso A B j
+  obtain ⟨F, ε, hε, hflat, hzero⟩ := hA ((restrictScalars (algebraMap _ _)).obj M)
+  let : QuasiIso ε := hε
+  obtain ⟨c⟩ := flatResolution_torComparison
+    ((restrictScalars (algebraMap _ _)).obj M) F ε hflat
+    ((restrictScalars (algebraMap _ _)).obj N) j
+  have hz : IsZero (torOverBase (ULift.{v} A) (ULift.{v} B) j M N) := by
+    apply IsZero.of_iso _ c
+    apply HomologicalComplex.ExactAt.isZero_homology
+    apply HomologicalComplex.ExactAt.of_isZero
+    change IsZero ((MonoidalCategory.tensorRight
+      ((restrictScalars (algebraMap (ULift.{v} A) (ULift.{v} B))).obj N)).obj (F.X j))
+    exact (MonoidalCategory.tensorRight
+      ((restrictScalars (algebraMap (ULift.{v} A) (ULift.{v} B))).obj N)).map_isZero
+        (hzero j hj)
+  have hd : IsZero (torDiagonalModule (ULift.{v} A) (ULift.{v} B) j M N (action M N)) := by
+    apply ModuleCat.isZero_iff_subsingleton.mpr
+    change Subsingleton (torOverBase (ULift.{v} A) (ULift.{v} B) j M N)
+    exact ModuleCat.subsingleton_of_isZero hz
+  have ht : IsZero (torDiagonalTensor (ULift.{v} A) (ULift.{v} B) j M N (action M N)) :=
+    (extendScalars (Algebra.TensorProduct.lmul' (ULift.{v} A)
+      (S := ULift.{v} B)).toRingHom).map_isZero hd
+  exact ht.of_iso (e M N).symm
 
 end
 

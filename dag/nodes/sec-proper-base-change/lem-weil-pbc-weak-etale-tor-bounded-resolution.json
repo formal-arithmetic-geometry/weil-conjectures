@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-weak-etale-tor-bounded-resolution",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-weak-etale-tor",
+   "place": "Step 7 of the expanded proof of Flat diagonal and Tor groups: truncate a free resolution at a flat syzygy.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Flat resolution from uniform Tor vanishing",
+ "statement": "Let R be a commutative ring and d a nonnegative integer. Suppose that for every pair of R-modules M,N, Tor_j^R(M,N) [def-weil-pbc-tor-modules] is zero whenever d < j. Then every R-module M has an augmented nonnegative chain complex F -> M[0] [def-weil-pbc-module-chain-complex-homology] which is a quasi-isomorphism, has flat terms [def-weil-pbc-flat-ring-map], and has zero terms in every degree greater than d. All module carriers and R may lie in the same arbitrary universe; there is no finite generation hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066F, converse Tor-dimension criterion and truncation; Algebra Tag 00M5 gives flatness of the last syzygy."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix M. Form a free resolution P by taking the free module on the underlying set of M, then successively the free modules on the kernels of the resulting surjections; augment by [m] -> m. Each differential is the kernel surjection followed by its inclusion. Thus images equal kernels in all degrees. Put K_0=M, and for d>0 put K_d=ker(P_(d-1) -> P_(d-2)), with the augmentation used when d=1. The tail whose degree-zero term is P_d is a free resolution of K_d.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LY, free resolutions; explicit free-on-elements construction from original step 1."
+   }
+  },
+  {
+   "text": "For each ideal I, compute Tor_1(K_d,R/I) with this tail. Its three terms and two differentials agree with the terms in degrees d+2,d+1,d of P tensor R/I. Therefore its degree-one homology is Tor_(d+1)(M,R/I), zero by the hypothesis, including d=0. The flat Tor ideal criterion implies K_d is flat.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "def-weil-pbc-module-chain-complex-homology",
+    "lem-weil-pbc-flat-tor-ideal-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066F, converse via the tail of a free resolution; Algebra Tag 00M5, flatness criterion."
+   }
+  },
+  {
+   "text": "For d>0, put K_d in degree d, P_j in degrees j<d, and zero in degrees j>d, with differential out of degree d the kernel inclusion. The kernel-image equalities make the augmented complex a quasi-isomorphism to M[0]. The lower terms are free, hence flat, the last term is flat by the preceding step, and zero terms are flat. For d=0 use M[0] and its identity augmentation, since K_0=M is flat. This works for the zero module and zero ring as well.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066F, truncation of a free resolution at a flat syzygy; d=0 handled by the single complex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-weil-pbc-flat-tor-ideal-criterion",
+  "lem-weil-pbc-projective-module-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066F, converse; original item proof step 7, expanded with the explicit free-on-elements construction and Algebra Tag 00M5. Second reading by G1, 2026-10-15."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A uniform bound on Tor vanishing yields a bounded flat resolution by truncating a projective resolution at a flat syzygy",
+   "results": "8 hits: CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.HasProjectiveDimensionLT, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.HasProjectiveDimensionLT.mk', CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CategoryTheory.hasProjectiveDimensionLT_iff",
+   "date": "2026-10-15",
+   "verdict": "No match: projective-dimension statements impose a stronger property, projective Tor vanishing is one-way, and none constructs a bounded flat resolution from this Tor bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor'",
+   "results": "5 hits: CategoryTheory.Tor', CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app",
+   "date": "2026-10-15",
+   "verdict": "No match: projective-dimension statements impose a stronger property, projective Tor vanishing is one-way, and none constructs a bounded flat resolution from this Tor bound."
+  },
+  {
+   "tool": "grep",
+   "query": "flatResolution|syzygy|Tor.*diagonal|Tor.*action",
+   "results": "4 hits: Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean",
+   "date": "2026-10-15",
+   "verdict": "No match: projective-dimension statements impose a stronger property, projective Tor vanishing is one-way, and none constructs a bounded flat resolution from this Tor bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If Tor over a commutative ring vanishes above degree d for all modules, every module admits a flat resolution of length at most d",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.WeaklyEtaleTor",
+  "date": "2026-10-15",
+  "group": "G1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.WeaklyEtaleTorBoundedResolution",
+  "file": "lean/Sheaf/RingTheory/WeaklyEtaleTorBoundedResolution.lean",
+  "declaration": "ModuleCat.WeaklyEtaleTorAux.flatResolution_of_tor_vanishing",
+  "statement": "theorem flatResolution_of_tor_vanishing\n    (R : Type u) [CommRing R] (d : ℕ)\n    (hTor : ∀ M N : ModuleCat.{u} R, ∀ j : ℕ, d < j →\n      IsZero (((Tor' (ModuleCat.{u} R) j).obj M).obj N)) :\n    ∀ M : ModuleCat.{u} R,\n      ∃ (F : ChainComplex (ModuleCat.{u} R) ℕ)\n        (ε : F ⟶ (ChainComplex.single₀ (ModuleCat.{u} R)).obj M),\n        QuasiIso ε ∧ (∀ j : ℕ, Module.Flat R (F.X j)) ∧\n          (∀ j : ℕ, d < j → IsZero (F.X j))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-15",
+  "declarations": [
+   "ModuleCat.WeaklyEtaleTorAux.flatResolution_of_tor_vanishing"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261015T161026-L-260376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261015T161026-L-260376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

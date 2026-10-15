@@ -92,30 +92,19 @@
    }
   },
   {
-   "text": "Suppose $d\\ge0$ bounds the flat resolution length of every $A$-module. For any $B$-modules $M,N$, their underlying $A$-modules satisfy $\\operatorname{Tor}^A_i(M,N)=0$ for $i>d$: choose a flat resolution of $M$ of length at most $d$, extend it by zero, and apply the flat-resolution-tor-comparison node; its tensor with $N$ has zero terms, hence zero homology, above $d$. The formula already proved gives $\\operatorname{Tor}^B_i(M,N)=0$ for $i>d$ and every $N$.",
+   "text": "For each j > d and B-modules M,N, choose the bounded flat A-resolution supplied by hA for the restricted M. Apply ModuleCat.flatResolution_torComparison to identify base Tor with the homology of its tensor with the restricted N. The term in degree j is zero, hence its tensor and its homology are zero. The first conclusion of this node (ModuleCat.exists_weaklyEtale_tor_iso, whose original hole remains open) identifies B-Tor with the diagonal scalar extension of this zero base-Tor module. The underlying group is subsingleton for every coefficient action; extendScalars preserves zero objects. Transport across the comparison to obtain the required B-Tor vanishing.",
    "uses": [
     "lem-pc-flat-resolution-tor-comparison",
     "def-weil-pbc-module-chain-complex-homology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 066F (lemma-tor-dimension), forward implication; Tor computation by flat resolutions from Algebra Tags 00LY, 00M1, 00M3"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix any $B$-module $M$ and the free resolution $P$ of step 1. Let $K_0=M$ and, for $d\\ge1$, let $K_d=\\ker(P_{d-1}\\to P_{d-2})$, taking $P_{-1}=M$ and the map from $P_0$ to be the augmentation. The tail $\\cdots\\to P_{d+1}\\to P_d\\to K_d\\to0$ is a free resolution. For any ideal $I\\subseteq B$, the Tor definition identifies $\\operatorname{Tor}^B_1(K_d,B/I)$ with the degree-one homology of that tail tensored with $B/I$, which is exactly $H_{d+1}(P\\otimes_B B/I)=\\operatorname{Tor}^B_{d+1}(M,B/I)=0$ by step 6: the three terms and the two differentials defining these homologies are identical. This also holds for $d=0$, when the tail is $P$ itself. The flat-tor-ideal-criterion node makes $K_d$ flat. Each $P_j$ is flat by projective-module-flat, so for $d\\ge1$ the exact truncated sequence $0\\to K_d\\to P_{d-1}\\to\\cdots\\to P_0\\to M\\to0$ is a flat resolution of length $d$. For $d=0$, $M=K_0$ is flat and gives a length-zero resolution. Thus the original common bound holds for every $B$-module.",
+   "text": "Apply the generic uniform Tor-vanishing-to-flat-resolution theorem [lem-weil-pbc-weak-etale-tor-bounded-resolution] to the lifted ring B and bound d, using the vanishing just proved. All coefficient rings and module universes are the same canonical ULifts as in the original statement.",
    "uses": [
-    "def-weil-pbc-tor-modules",
-    "lem-weil-pbc-flat-tor-ideal-criterion",
-    "lem-weil-pbc-projective-module-flat",
-    "def-weil-pbc-module-chain-complex-homology"
+    "lem-weil-pbc-weak-etale-tor-bounded-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 066F (lemma-tor-dimension), converse and truncation; Algebra Tag 00M5 (lemma-characterize-flat)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -134,12 +123,12 @@
   "lem-weil-pbc-tor-map-via-resolution-lift",
   "def-weil-pbc-module-chain-complex-homology",
   "lem-pc-flat-resolution-tor-comparison",
-  "lem-weil-pbc-flat-tor-ideal-criterion"
+  "lem-weil-pbc-weak-etale-tor-bounded-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-weak-etale-tor.md",
-  "place": "## Proof, expanded using Stacks 00M1, 00M3, 00HD, 00M5, 066F; one free resolution plus the other module replaces the redundant total tensor"
+  "place": "Original steps 1–5 retained for the open diagonal comparison. Step 6 is now formalized from the existing flat-resolution comparison and zero-object preservation; step 7 is split as the generic syzygy-truncation lemma. Second reading by G1, 2026-10-15."
  },
  "mathlib_searches": [
   {
@@ -268,5 +257,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The two conclusions are stated separately. Independent ring and module universes are encoded by the canonical common ULift of both coefficient rings, with the explicitly induced algebra. DiagonalTorComparison spells out the canonical two-factor action and the natural B-module identifications; no arbitrary action is assumed. All helpers have actual data and no postponed choice."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261015T161026-L-260376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
