@@ -18,91 +18,23 @@
  ],
  "proof": [
   {
-   "text": "Fix a torsion abelian étale sheaf F. Use the common-universe small skeletons of [def-weil-size-convention]. Apply [lem-pur-ringed-site-grothendieck-abelian] with the constant sheaf of rings ℤ of [def-weil-pbc-constant-sheaf] to both X_et and X_Zar, and to the one-object site with only the identity covering. Using the module-sheaf definition [def-weil-sheaf-of-modules-category], abelian sheaves are exactly modules over this constant ℤ sheaf: the action of an integer is repeated addition, and for a section of the constant sheaf locally represented by integers these actions glue uniquely; conversely any such module action restricts to this unique integer action. Every abelian-sheaf morphism respects it. On the one-object site, abelian sheaves are simply abelian groups. Thus all three categories Ab(X_et), Ab(X_Zar), and Ab are Grothendieck abelian, as required by [def-sp-composite-acyclicity]. The Zariski-to-étale inclusion node gives ε:X_et→X_Zar, its adjunction ε⁻¹ ⊣ ε_*, and (ε_*F)(V)=F(V→X). Its exact inverse image on sets induces an exact additive inverse image on abelian sheaves: kernels are finite limits of underlying sheaves, and cokernels are preserved by the left adjoint. The cited right-adjoint lemma therefore makes ε_* preserve injectives. The evaluation formula makes ε_* additive and left exact, since kernels are sectionwise. Both sheaf categories have enough injectives by the sites-and-cohomology definition; Zariski sections are additive and left exact by the Zariski-cohomology definition. In particular ε_* sends injectives to objects acyclic for Zariski sections. With every hypothesis of the composable-pair definition now established, [thm-sp-grothendieck] gives E₂^{p,q}=H^p(X_Zar,R^q ε_*F), converging in the first quadrant to R^{p+q}(Γ_Zar∘ε_*)(F).",
+   "text": "Apply the affine-to-global Leray reduction with the affine bound supplied by the affine finite-type calculation.",
    "uses": [
-    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-sp-right-adjoint-preserves-injectives",
-    "def-sc-zariski-cohomology",
-    "thm-sp-grothendieck",
-    "def-weil-size-convention",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-sheaf-of-modules-category",
-    "def-sp-composite-acyclicity"
+    "new-thm-sc-finite-type-torsion-cd-affine-reduction",
+    "new-thm-sc-affine-torsion-cd-bound"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
-    "place": "## Proof, first paragraph"
-   }
-  },
-  {
-   "text": "At the terminal object, (Γ_Zar∘ε_*)(G)=(ε_*G)(X)=G(id_X)=Γ_et(G), and on a morphism each map is evaluation at id_X. Thus these additive left-exact functors agree. Applying them to any injective étale resolution identifies their derived functors with H^n(X_et,G), as defined in the cited sites-and-cohomology node. Consequently the spectral sequence of Step 1 abuts to ordinary étale cohomology of F.",
-   "uses": [
-    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
-    "place": "## Proof, second paragraph"
-   }
-  },
-  {
-   "text": "Choose an injective étale resolution F→I^•. For an ordinary point x of the underlying Zariski space, exactness of filtered colimits of abelian groups and stalkwise exactness of abelian sheaves give (R^q ε_*F)_x=H^q(colim_{x∈V} I^•(V))=colim_{x∈V} H^q(I^•(V)). Explicitly, write Z^q and B^q for the kernel and image of the differential in ε_*I^•. The stalk-exactness criterion identifies their stalks with the kernel and image of the stalk differential and identifies (Z^q/B^q)_x with Z^q_x/B^q_x. For the neighborhood complexes I^•(V), apply exact filtered colimits to the sequences defining kernels, images, and their quotients; this identifies that quotient with colim H^q(I^•(V)). Here ε_* is the open-evaluation functor of Step 1. By the definition of cohomology over a site object, H^q(I^•(V))=H^q(V→X,F); the cited open-cohomology node identifies this naturally under restriction with H^q(V_et,F|_V). The statement of [lem-weil-pbc-affine-opens-basis] supplies an affine neighborhood of x inside every open neighborhood, so affine opens are cofinal. These neighborhoods form a small filtered poset under reverse inclusion: any two have an intersection containing x and a smaller affine neighborhood in that intersection; no assertion that the intersection itself is affine is needed. The locally-Noetherian finite-type lemma applies over Spec K (a field is Noetherian), and X is quasi-compact since its structure morphism is finite type over the one-point affine scheme; hence X is Noetherian. An affine open V inherits the locally-finite-type condition and is quasi-compact, so V is finite type over K. Its dimension is at most d: the closures in X of any strict chain of irreducible closed subsets of V remain irreducible and strict, since intersecting the closures back with V recovers the original chain. The restriction F|_V is torsion by the following local-section argument. [lem-weil-pbc-etale-site-localization-open] identifies V_et with X_et/V with the same coverings, and [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint] states the restriction formula F|_V(W→V)=F(W→X). For any such section s, the torsion definition in [def-weil-pbc-etale-sheaves] gives an étale covering {W_i→W} and positive integers n_i killing s|_{W_i}. Each W_i has the composite map to V, so this is also a covering in V_et, with exactly the same sections, restriction maps, and annihilation equations. Thus F|_V satisfies that definition; a uniform annihilator of F is not assumed. The affine torsion bound therefore gives H^q(V_et,F|_V)=0 for q>d+c, and the colimit formula makes every stalk of R^q ε_*F zero. The stalk-exactness criterion applied to 0→R^q ε_*F→0 makes that sheaf zero. The Zariski dimension bound applies to the Noetherian scheme X and to every abelian sheaf R^q ε_*F, without requiring it to be torsion, and gives E₂^{p,q}=0 for p>d. Thus for n>2d+c every E₂^{p,n-p} is zero: either p>d or n-p>d+c. All later pages and the associated graded groups of the finite first-quadrant filtration on H^n(X_et,F) are zero, so that group is zero. Since F was an arbitrary torsion sheaf, this is the asserted torsion cohomological-dimension bound.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-sc-abelian-sheaf-exact-iff-stalk-exact",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-etale-cohomology-over-open",
-    "pqf-lem-locnoeth-lft",
-    "def-weil-pbc-scheme-conventions",
-    "def-kun-topological-krull-dimension",
-    "thm-sc-affine-torsion-cd",
-    "lem-sc-zariski-dimension-bound",
-    "def-sc-etale-torsion-cd",
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-etale-site-localization-open",
-    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
-    "def-weil-pbc-etale-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
-    "place": "## Proof, third paragraph"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-sp-right-adjoint-preserves-injectives",
-  "def-sc-zariski-cohomology",
-  "thm-sp-grothendieck",
-  "def-weil-size-convention",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-sheaf-of-modules-category",
-  "def-sp-composite-acyclicity",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-sc-abelian-sheaf-exact-iff-stalk-exact",
-  "lem-weil-pbc-etale-cohomology-over-open",
-  "pqf-lem-locnoeth-lft",
-  "def-weil-pbc-scheme-conventions",
-  "def-kun-topological-krull-dimension",
-  "thm-sc-affine-torsion-cd",
-  "lem-sc-zariski-dimension-bound",
-  "def-sc-etale-torsion-cd",
-  "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
-  "def-weil-pbc-etale-sheaves"
+  "new-thm-sc-finite-type-torsion-cd-affine-reduction",
+  "new-thm-sc-affine-torsion-cd-bound"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
-  "place": "## Proof"
+  "by": "worker",
+  "document": "stated intermediate affine and Leray reductions",
+  "place": "composition in target module",
+  "group": "S2"
  },
  "mathlib_searches": [
   {
@@ -222,5 +154,15 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-055e69778 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, and unit/chapter route. Verified Grothendieck hypotheses, natural stalk computation, local torsion restriction, both vanishing bounds, and edge cases. Accepted all six declared tool uses. No new nodes or repairs; detailed checks recorded in review.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261015T054251-L-1536669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

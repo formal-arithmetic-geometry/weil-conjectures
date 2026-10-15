@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
+import Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension
+import Sheaf.AlgebraicGeometry.Sites.AffineToGlobalTorsionCohomologicalDimension
 
 /-!
 # Torsion cohomological dimension of a scheme of finite type over a field
@@ -47,8 +49,10 @@ theorem subsingleton_H_of_two_mul_add_lt {K : Type u} [Field K] (c d : ℕ)
     {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
-    (hq : 2 * d + c < q) : Subsingleton (Sheaf.H F q) :=
-  sorry
+    (hq : 2 * d + c < q) : Subsingleton (Sheaf.H F q) := by
+  apply subsingleton_H_of_two_mul_add_lt_of_affine_bound c d a hX
+    (fun b _ _ _ hY G hG n hn ↦
+      subsingleton_H_of_two_mul_add_lt_of_isAffine c d hK b hY G hG n hn) F hF q hq
 
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility, the
 cohomological-dimension bound over a separably closed field.

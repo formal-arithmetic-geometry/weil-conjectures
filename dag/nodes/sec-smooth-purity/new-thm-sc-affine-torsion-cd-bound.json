@@ -1,0 +1,133 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "mathlib_match": null,
+ "import_flags": [],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-finite-type-torsion-cd",
+   "place": "strict affine substatement",
+   "via": []
+  }
+ },
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "affine calculation used in the proof of thm-sc-finite-type-torsion-cd"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
+  "place": "affine calculation and Leray comparison",
+  "group": "S2"
+ },
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension",
+  "date": "2026-10-15",
+  "group": "S2"
+ },
+ "proof_deps": [
+  "thm-sc-affine-torsion-cd"
+ ],
+ "stmt_deps": [
+  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine torsion etale cohomological dimension bound finite type scheme",
+   "results": "Service unavailable in this run; no direct declaration was found in the local library or Mathlib.",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "affine torsion etale cohomological dimension finite type",
+   "results": "No direct Mathlib theorem; the project blueprint supplies the affine calculation.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subsingleton (Sheaf.H F q) IsAffine",
+   "results": "No direct match.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine finite type etale torsion cohomology vanishing",
+   "results": "No direct match.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "vanishing higher etale cohomology affine finite type scheme torsion sheaf Krull dimension field cohomological dimension",
+   "results": "Eight hits, all cotangent cohomology or affine-limit coordinate-ring facts; none supplies the affine torsion bound or etale-to-Zariski comparison vanishing.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subsingleton (Sheaf.H _ _)",
+   "results": "0 hits; unknown identifier Sheaf.H in the search service.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "d + c < q; subsingleton_H_of_two_mul_add_lt_of_isAffine; subsingleton_H_of_two_mul_add_lt_of_affine_bound",
+   "results": "No existing split declarations or affine d+c bound in repository Lean or Mathlib. The upstream target remains sorry. FiniteAffineCoverRestrictionBound assumes positive-degree affine acyclicity and a finite separated cover, and does not give the dimension bound here.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
+ "id": "new-thm-sc-affine-torsion-cd-bound",
+ "title": "Affine torsion cohomological dimension bound",
+ "statement": "For a field K with torsion cohomological dimension at most c, an affine finite-type K-scheme X of dimension at most d has Subsingleton (H^q(X,F)) for every torsion abelian etale sheaf F and every q with d + c < q.",
+ "proof": [
+  {
+   "text": "Apply Noether normalization, the finite direct-image invariance theorem, and the affine-space calculation to reduce to the stated bound.",
+   "uses": [
+    "thm-sc-affine-torsion-cd"
+   ],
+   "elementary": false
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/AffineTorsionCohomologicalDimension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_add_lt_of_isAffine",
+  "statement": "theorem subsingleton_H_of_two_mul_add_lt_of_isAffine {K : Type u} [Field K] (c d : ℕ)\n    (hK : ∀ F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}, F.IsTorsion →\n      ∀ q : ℕ, c < q → Subsingleton (Sheaf.H F q))\n    {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]\n    [IsAffine X] (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)\n    (hq : d + c < q) : Subsingleton (Sheaf.H F q)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261015T054251-L-1536669",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261015T054251-L-1536669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
