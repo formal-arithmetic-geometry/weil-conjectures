@@ -3,42 +3,247 @@
  "blueprint": {
   "is": "cor-coef-finite-verdier",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite reductions of Verdier duality",
- "statement": "For every $K\\in D^b_{ctf}(X,A)$, there is a natural isomorphism\n\n$$\nd_{K,A,B}:(D_{X,A}K)\\otimes_A^LB\n\\xrightarrow{\\sim}D_{X,B}(K_B).\n$$\n\nThe maps form a cocycle under further coefficient change and\ncarry evaluation and the double-dual morphism to the corresponding\nmaps at $B$. If $\\dim X\\leq d$ and $K$ has Tor interval\n$[a,b]$, both sides have Tor interval $[-b-2d,-a]$.",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-finite-field-fiber]. Let $1\\le m\\le n$ and let $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\to B=A_{E,m}=\\mathcal O_E/\\varpi_E^m$ be the quotient map. Let $X$ be a separated finite-type $k$-scheme [def-weil-finite-type-morphism, def-weil-proper-morphism]. Use the bounded constructible finite-Tor category $D^b_{ctf}(X,A)$ [def-weil-finite-tor-amplitude], with the corresponding étale constructibility convention [def-weil-pbc-constructible-complexes]. Put $K_B=K\\otimes_A^LB$ using derived scalar extension on that site [lem-pur-derived-change-of-rings]. On the étale site put $\\omega_{X,A}=Ra_{X,A}^{\\times}A$, where $a_X:X\\to\\operatorname{Spec}k$ is the structure morphism, and $D_{X,A}K=R\\mathcal Hom_A(K,\\omega_{X,A})$ [def-pur-derived-internal-hom, lem-weil-duality-pairing]; define $\\omega_{X,B}$ and $D_{X,B}$ similarly. On the finite-coefficient pro-étale constructible category use the dualizing object transported by the site comparison [lem-weil-finite-duality-site-comparison]. On either finite coefficient site, for every $K\\in D^b_{ctf}(X,A)$ there is a natural isomorphism\n$$\nd_{K,A,B}:(D_{X,A}K)\\otimes_A^LB\\xrightarrow{\\sim}D_{X,B}(K_B).\n$$\nThe maps form a cocycle under further coefficient quotients and carry evaluation and the double-dual morphism to the corresponding maps at $B$. If $\\dim X\\le d$ and $K$ has Tor interval $[a,b]$, both sides have Tor interval $[-b-2d,-a]$. Here Tor interval $[a,b]$ means that $\\mathcal H^i(K\\otimes_A^LN)=0$ for every $i\\notin[a,b]$ and every sheaf $N$ of $A$-modules in degree zero, on the site under consideration.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-finite-verdier.md",
   "place": "node cor-coef-finite-verdier, order 2142"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-constructible-complexes",
+  "def-pur-derived-internal-hom",
+  "lem-weil-duality-pairing",
+  "lem-weil-finite-duality-site-comparison",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-pur-derived-change-of-rings"
+ ],
  "proof": [
   {
-   "text": "Apply [thm-coef-finite-hom] with second argument\n$\\omega_{X,A}$, and then use\n[lem-coef-finite-dualizing] on that argument. The resulting\nmap is $d_{K,A,B}$. Evaluation compatibility follows from\nthe two comparisons already proved, and transposing evaluation\nas in [lem-weil-duality-pairing] gives double-dual\ncompatibility. The cocycle is their quotient cocycle. The Tor\nbound is [lem-weil-verdier-preservation-strata], together\nwith preservation of the Tor interval by scalar extension.",
+   "text": "First work on the étale site. The constant sheaf $A_X$ is constructible with Tor interval $[0,0]$: tensoring with the free rank-one coefficient sheaf is the identity, so this is the definition [def-weil-finite-tor-amplitude]. By the Hom-complex definition [def-pur-derived-internal-hom], $R\\mathcal Hom_A(A_X,\\omega_{X,A})=\\omega_{X,A}$ (the Hom complex from the degree-zero unit to a K-injective representative is that representative). Apply [lem-weil-verdier-preservation-strata] to $A_X$ to obtain $\\omega_{X,A}\\in D^b_{ctf}(X_{\\mathrm{Et}},A)$. The same result applied to $K$ gives $D_{X,A}K\\in D^b_{ctf}(X_{\\mathrm{Et}},A)$; this also permits applying the eventual comparison to $D_{X,A}K$.\n\nWe also check that the reduced inputs used in the cocycle remain in the required category. For any $T\\in D^b_{ctf}(X_{\\mathrm{Et}},A)$ with Tor interval $[h,j]$, the constructible variant of [lem-sf-flat-model] gives a bounded flat constructible model $P$ in $[h,j]$ (its finite-type-over-$k$ hypothesis applies to $X$). A bounded flat complex is K-flat: tensor with an acyclic complex and filter the total complex by the finitely many degrees of $P$; each successive quotient is acyclic by flatness. Thus $T_B$ is represented by $P\\otimes_A B$. On every stratum trivializing $P^i$, its coefficient extension is the constant finite $B$-module $P^i_{\\bar x}\\otimes_A B$, so each term is constructible. The kernel and cokernel clauses of [thm-constructible-serre], applied to its differentials, make its cohomology constructible. Each term is $B$-flat because $(P^i\\otimes_A B)\\otimes_B N=P^i\\otimes_A N$ and restriction of $B$-module sheaves to $A$-module sheaves is exact. The same finite filtration proves $P\\otimes_A B$ K-flat; tensoring it with a degree-zero $B$-module sheaf has terms only in $[h,j]$. Consequently $T_B\\in D^b_{ctf}(X_{\\mathrm{Et}},B)$ with that interval. Apply this to $T=K,\\omega_{X,A},D_AK$, and repeat for $B\\to C$ when needed below.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "def-pur-derived-internal-hom",
+    "lem-weil-verdier-preservation-strata",
+    "lem-sf-flat-model",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-finite-verdier.md",
+    "place": "Proof, prerequisite for applying thm-coef-finite-hom with second argument omega_{X,A}"
+   }
+  },
+  {
+   "text": "By [thm-coef-finite-hom], with its second argument $\\omega_{X,A}$ now verified finite-Tor constructible, the evaluation-defined map $v_{K,\\omega_A}$ is an isomorphism. Let $u:\\omega_{X,A}\\otimes_A^LB\\xrightarrow{\\sim}\\omega_{X,B}$ be [lem-coef-finite-dualizing]. Define\n$$d_{K,A,B}=R\\mathcal Hom_B(K_B,u)\\circ v_{K,\\omega_A}.$$\nBoth factors are isomorphisms; the second-variable functor in [def-pur-derived-internal-hom] takes an isomorphism to an isomorphism. This proves the displayed isomorphism. Naturality of evaluation-defined $v$ in $K$, postcomposition by the fixed $u$, and functoriality of internal Hom make $d$ natural (contravariantly) in $K$.",
    "uses": [
     "thm-coef-finite-hom",
     "lem-coef-finite-dualizing",
-    "lem-weil-duality-pairing",
-    "lem-weil-verdier-preservation-strata"
+    "def-pur-derived-internal-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-finite-verdier.md",
+    "place": "Proof, first two sentences: construct d by v then u"
+   }
+  },
+  {
+   "text": "Write $S=-\\otimes_A^LB$. Its tensor identifications preserve associativity and evaluation by [lem-fix-operation-reduction]; the general internal-Hom comparison respects evaluation by [thm-coef-finite-hom]. Consequently the definition of $d$ gives the actual equality of pairings\n$$\\operatorname{ev}_{K_B}\\circ(d_{K,A,B}\\otimes_B^L1_{K_B})=u\\circ S(\\operatorname{ev}_K),$$\nwhere $S(D_AK\\otimes_A^LK)$ is identified with $S(D_AK)\\otimes_B^LK_B$. Indeed the evaluation identity for $v$ has right side $S(\\operatorname{ev}_K)$ with target $S\\omega_A$; composing with $u$ and using naturality of evaluation in its target gives precisely this equation. The evaluation maps are those of [lem-weil-duality-pairing], and the chosen $u$ is the counit-compatible comparison of [lem-coef-finite-dualizing].",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "thm-coef-finite-hom",
+    "lem-weil-duality-pairing",
+    "lem-coef-finite-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-finite-verdier.md",
+    "place": "Proof, evaluation compatibility"
+   }
+  },
+  {
+   "text": "The double-dual map $\\delta_K$ is the transpose of evaluation with tensor symmetry by [lem-weil-duality-pairing]. Under the tensor--Hom adjunction, which [thm-coef-finite-hom] respects, both arrows in\n$$d_{D_AK,A,B}\\circ S(\\delta_K)=D_B(d_{K,A,B})\\circ\\delta_{K_B}$$\nhave source $K_B$ and target $D_B(S(D_AK))$. To compute the left transpose, apply Step 3 with input $D_AK$, then precompose with $S(\\delta_K)\\otimes1$. This gives $u\\circ S(\\operatorname{ev}_{D_AK}\\circ(\\delta_K\\otimes1_{D_AK}))$. The definition of $\\delta_K$ as the evaluation transpose says exactly that $\\operatorname{ev}_{D_AK}\\circ(\\delta_K\\otimes1)=\\operatorname{ev}_K\\circ\\tau_{K,D_AK}$, where $\\tau$ is tensor symmetry. For the right transpose, precomposition in internal Hom is adjoint to precomposition in its tensor argument. Hence transposing $D_B(d_K)\\circ\\delta_{K_B}$ gives $\\operatorname{ev}_{D_BK_B}\\circ(\\delta_{K_B}\\otimes d_K)$, which by the same defining equation for $\\delta_{K_B}$ equals $\\operatorname{ev}_{K_B}\\circ(d_K\\otimes1)\\circ\\tau_{K_B,S(D_AK)}$. Step 3 with input $K$ equates these transposes; injectivity of the adjunction bijection proves the equation. Here $D_AK$ is in the required domain by Step 1. Since $d_K$ is an isomorphism, this equation is exactly compatibility with double duals after identifying $S(D_A^2K)$ with $D_B^2(K_B)$ using $D_B(d_K)^{-1}\\circ d_{D_AK}$. On K-flat models scalar change is termwise tensor with $B$ placed in degree zero: on homogeneous tensors of degrees $i,j$, symmetry is $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$ both before and after scalar change. Thus the symmetry used in these two transposes has the same sign.",
+   "uses": [
+    "lem-weil-duality-pairing",
+    "thm-coef-finite-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-finite-verdier.md",
+    "place": "Proof, transposing evaluation gives double-dual compatibility"
+   }
+  },
+  {
+   "text": "For $A=A_{E,n}\\to B=A_{E,m}\\to C=A_{E,r}$, $1\\le r\\le m$, identify $S_{B,C}S_{A,B}$ with $S_{A,C}$ by the tensor comparisons of [lem-fix-operation-reduction]. Expand $d$ as $R\\mathcal Hom(-,u)\\circ v$. Successive-change compatibility of $v$ in [thm-coef-finite-hom] and its naturality in the second argument collect the two Hom factors into $R\\mathcal Hom_C(K_C,u_{B,C}\\circ S_{B,C}u_{A,B})$. The quotient cocycle in [lem-coef-finite-dualizing] identifies this last argument map with $u_{A,C}$. Thus\n$$d_{K,A,C}=d_{K_B,B,C}\\circ S_{B,C}(d_{K,A,B}).$$\nFor an identity quotient the evaluation transpose and the dualizing counit transpose are identities, so this includes the identity part of the cocycle.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "thm-coef-finite-hom",
+    "lem-coef-finite-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-finite-verdier.md",
+    "place": "Proof, their quotient cocycle"
+   }
+  },
+  {
+   "text": "If $\\dim X\\le d$ and $K$ has Tor interval $[a,b]$, [lem-weil-verdier-preservation-strata] gives interval $[-b-2d,-a]$ for $D_AK$. For every $B$-module sheaf $N$ in degree zero, take a K-flat representative $P$ with flat terms for $D_AK$. Such a representative and its scalar extension being K-flat are supplied by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] for the identity topos with coefficient map $A_X\\to B_X$. Then\n$$(P\\otimes_A B)\\otimes_B N\\longrightarrow P\\otimes_A N,\\quad (p\\otimes b)\\otimes z\\longmapsto p\\otimes bz$$\nis a chain isomorphism, inverse $p\\otimes z\\mapsto(p\\otimes1)\\otimes z$. It identifies $S(D_AK)\\otimes_B^LN$ with $D_AK\\otimes_A^LN$, which vanishes outside $[-b-2d,-a]$ by the definition [def-weil-finite-tor-amplitude]. Hence the left side of $d$ has the claimed Tor interval; its isomorphism to the right side gives the same interval there. No flatness of $B$ over $A$ is assumed.",
+   "uses": [
+    "lem-weil-verdier-preservation-strata",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-finite-verdier.md",
+    "place": "Proof, Tor bound and preservation of Tor interval by scalar extension"
+   }
+  },
+  {
+   "text": "For a pro-étale input, [lem-sf-proetale-constructible-origin] gives $K\\cong\\nu_X^*K'$ for an étale bounded constructible $K'$. By [lem-sf-comparison-tor-amplitude] (ii), $K'$ has the same Tor interval and is an allowed input above. Constant coefficient sheaves are preserved by $\\nu_X^*$: the constant sheaf of a set is the coproduct of copies of the terminal sheaf, and an inverse-image functor preserves coproducts and finite limits, including the ring operations on these sheaves. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $\\nu_X$ with constant coefficient $A$. Its tensor comparison with the constant $A$-module $B$ gives the $B$-linear identification $\\nu_X^*(T\\otimes_A^LB)\\cong\\nu_X^*T\\otimes_A^LB$.\n\nThe dualizing and internal-Hom comparisons of [lem-weil-finite-duality-site-comparison], with second argument $\\omega_{X,A}$ verified by Step 1, identify $\\nu_X^*D_AK'$ with $D_A(\\nu_X^*K')$ and identify evaluations and double-dual maps. Define $u_{\\mathrm{proet}}$ by pulling back the étale isomorphism $u$ of [lem-coef-finite-dualizing] and composing the just-specified tensor and dualizing identifications. Its quotient cocycle follows by pulling back the étale cocycle: the tensor identifications are the balanced tensor maps, and both reassociations send $(p\\otimes b)\\otimes c$ to $p\\otimes bc$. This uses the transported dualizing object; it requires no ambient pro-étale exceptional adjunction.\n\nThe map $v$ of [thm-coef-finite-hom] on the pro-étale site is defined by transposing evaluation. Since the site comparisons identify evaluation, uniqueness of its transpose identifies the pullback of $d_{K',A,B}$ with $R\\mathcal Hom_B(K_B,u_{\\mathrm{proet}})\\circ v_{K,\\omega_A}$. This constructs the natural pro-étale isomorphism. Steps 3--4 apply to this composite using the same evaluation identities, and its cocycle is the pulled-back cocycle just checked. Step 1 gives the bounded constructible reduced étale objects; their pullbacks are bounded constructible by [lem-sf-proetale-constructible-origin]. Finally the Tor interval for the étale $D_AK'$ is carried unchanged to its pro-étale dual by [lem-sf-comparison-tor-amplitude] (i) and the duality identification. Step 6's balanced-tensor calculation on the pro-étale site preserves this interval under coefficient reduction, so both sides have $[-b-2d,-a]$.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-weil-finite-duality-site-comparison",
+    "thm-coef-finite-hom",
+    "lem-coef-finite-dualizing",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-finite-verdier.md",
+    "place": "Proof, finite pro-étale realization of the four cited interfaces"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-finite-tor-amplitude",
+  "def-pur-derived-internal-hom",
+  "lem-weil-verdier-preservation-strata",
+  "lem-sf-flat-model",
+  "thm-constructible-serre",
   "thm-coef-finite-hom",
   "lem-coef-finite-dualizing",
+  "lem-fix-operation-reduction",
   "lem-weil-duality-pairing",
-  "lem-weil-verdier-preservation-strata"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-finite-duality-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-finite-verdier.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism derived internal Hom coefficient change Verdier dual finite coefficients",
+   "results": "8 hits including LightCondensed.ihomPoints_symm_comp, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, DerivedCategory.singleFunctorIsoCompQ; none state this Verdier coefficient-change theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, DerivedCategory, internal hom, tensor coefficient change, IsIso",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory'.",
+   "date": "2026-10-16",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|internalHom|tensor.*B|coefficient",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "invalid subdirectory (Mathlib repeated); not evidence of absence",
+   "subdirectory": "Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coefficient change commutes with Verdier dual derived internal Hom",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived category internal Hom tensor base change natural isomorphism",
+   "results": "8 hits including CategoryTheory.Tor_map, CategoryTheory.Tor, CategoryTheory.tensorRightHomEquiv_tensor; none state this theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RHom _ _ ⊗ _ ≅ RHom _ _",
+   "results": "0 hits; parser error: expected end of input.",
+   "date": "2026-10-16",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*Hom|IsIso.*tensor|hom.*tensor",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "invalid subdirectory (Mathlib repeated); not evidence of absence",
+   "subdirectory": "Mathlib/Algebra/Homology"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|internalHom|coefficient",
+   "subdirectory": "CategoryTheory",
+   "results": "25 hits: Mathlib/CategoryTheory/Preadditive/Projective/Internal.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Category.lean, Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean. ",
+   "date": "2026-10-16",
+   "verdict": "no match: generic categorical Hom, Verdier quotient, or complex tensor results; not geometric duality coefficient reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*Hom|IsIso.*tensor|hom.*tensor",
+   "subdirectory": "Algebra/Homology",
+   "results": "5 hits: Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean. ",
+   "date": "2026-10-16",
+   "verdict": "no match: generic categorical Hom, Verdier quotient, or complex tensor results; not geometric duality coefficient reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "subdirectory": "",
+   "results": "12 hits: CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite. ",
+   "date": "2026-10-16",
+   "verdict": "no match: generic categorical Hom, Verdier quotient, or complex tensor results; not geometric duality coefficient reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"map\"",
+   "subdirectory": "",
+   "results": "12 hits: AddActionSemiHomClass.map_vaddₛₗ, MulActionSemiHomClass.map_smulₛₗ, SemilinearMapClass.distribMulActionSemiHomClass, SemilinearMapClass.toMulActionSemiHomClass, NonUnitalAlgHomClass.instSemilinearMapClassOfNonUnitalAlgSemiHomClassOfClassRingHom, CategoryTheory.MonoidalClosed.curry'_ihom_map, CategoryTheory.MonoidalClosed.uncurry_ihom_map, CategoryTheory.MonoidalClosed.pre_comm_ihom_map. ",
+   "date": "2026-10-16",
+   "verdict": "no match: generic categorical Hom, Verdier quotient, or complex tensor results; not geometric duality coefficient reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars strong monoidal functor preserves dual objects evaluation and double dual natural map",
+   "subdirectory": "",
+   "results": "8 hits: CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation. ",
+   "date": "2026-10-15",
+   "verdict": "no match: rigid monoidal duals or finite free module dual base change; no geometric derived Verdier comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*dual|[Vv]erdier[Dd]ual",
+   "subdirectory": "",
+   "results": "9 hits: Mathlib/LinearAlgebra/Transvection/Basic.lean, Mathlib/LinearAlgebra/Transvection/Basic.lean, Mathlib/LinearAlgebra/Transvection/Basic.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean. ",
+   "date": "2026-10-15",
+   "verdict": "no match: rigid monoidal duals or finite free module dual base change; no geometric derived Verdier comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -66,5 +271,64 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "cor-coef-finite-verdier",
+  "worker": "stage1",
+  "summary": "Bound the implicit quotient levels, coefficient category and scheme hypotheses faithfully to the source; verified the dualizing object is an allowed second argument; gave seven steps with explicit evaluation, double-dual and cocycle equations, a K-flat Tor calculation, and separate finite-site transport. No new nodes. Second reading explicitly verified reduced-input constructibility, expanded the double-dual transpose calculation, and defined the pro-étale dualizing comparison by transport.",
+  "blueprint": "Steps 1--2 realize the first two source sentences (Hom comparison with omega then dualizing comparison). Steps 3--4 expand evaluation and transposed double-dual compatibility. Step 5 expands the quotient cocycle. Step 6 proves the last Tor-bound sentence by an explicit balanced-tensor chain map. Step 7 makes the finite pro-étale realization explicit, following the source proofs of the two coefficient-comparison inputs.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-verdier-preservation-strata",
+    "why": "Independent étale Verdier preservation and its Tor bound; this is exactly the bound cited by the blueprint proof and verifies the Hom-comparison domain."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic finite-quotient tensor and associator coherence, not a replacement for general Hom comparison; needed to type the evaluation and quotient equations."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic K-flat change-of-rings tool: its identity-topos specialization says a flat-term K-flat resolution remains K-flat after scalar extension. No own-unit statement supplies that resolution property."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic finite coefficient site-comparison equivalence, used only to obtain an étale representative of a pro-étale input."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Generic preservation and detection of the Tor interval under finite-site comparison; needed to verify the representative hypothesis and transport the bound."
+   },
+   {
+    "node": "lem-weil-finite-duality-site-comparison",
+    "why": "Generic identification of dualizing objects, Hom, evaluation and double-dual maps on the two sites; needed for the finite pro-étale realization, as in the source input proofs."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Generic bounded flat constructible resolution on the etale site; verifies that every reduced input remains finite-Tor constructible before the cocycle is applied."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic kernel and cokernel closure for finite-ring constructible sheaves; applies to the bounded coefficient-extended model and proves constructibility of its cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-verdier-preservation-strata",
+  "lem-fix-operation-reduction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-sf-flat-model",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-4d72097c6",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-4d72097c6 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, report, sources, every cited node statement, and delivery-errors A–F. Verified all seven proof steps, coefficient base-change typing, étale/pro-étale transport, Tor bounds, cocycle and double-dual maps, Mathlib searches, dependency closure, and edge cases. No new nodes or repairs are required; review.md records the checks."
+ }
 }
