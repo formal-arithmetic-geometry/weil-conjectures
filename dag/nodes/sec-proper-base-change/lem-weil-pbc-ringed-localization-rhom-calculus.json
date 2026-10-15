@@ -26,7 +26,10 @@
   "def-pc-tensor-complex-sheaves",
   "def-pc-kflat-complex",
   "def-pur-localized-ringed-site",
-  "def-weil-presheaf-modules-sheafification"
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-ringed-section-localization",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-slice-restriction-flat"
  ],
  "proof": [
   {
@@ -312,5 +315,42 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-1ad7f3620 (reviewer sub-agent of L); spot-checked: Review written to review.md. The item, six proof steps, cited DAG statements, Stacks sources, unit/chapter route, coefficient category, slice base-change maps, edge cases, DAG acyclicity, and tool uses were checked. No new nodes or repairs are required. A pre-existing 06YS/06YQ source-label defect is documented but lies outside this delivery’s ownership."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedLocalizationRHomCalculus",
+  "declaration": "CategoryTheory.ringedLocalizationRHom_calculus",
+  "declarations": [
+   "CategoryTheory.localizationModules",
+   "CategoryTheory.localizationDerived",
+   "CategoryTheory.localizationQ",
+   "CategoryTheory.localizationRHom",
+   "CategoryTheory.localizationComplexRestriction",
+   "CategoryTheory.localizationDerivedRestriction",
+   "CategoryTheory.IsBoundedLocalizationComplex",
+   "CategoryTheory.localizationTensorComplex",
+   "CategoryTheory.localizationSliceCoefficient",
+   "CategoryTheory.localizationSliceComplex",
+   "CategoryTheory.localizationSliceDerivedCoefficient",
+   "CategoryTheory.localizationDerivedOverMap",
+   "CategoryTheory.localizationRestrictionCompIso",
+   "CategoryTheory.ringedLocalization_kflat_models",
+   "CategoryTheory.ringedLocalization_tensor_product",
+   "CategoryTheory.ringedLocalizationRHom_calculus"
+  ],
+  "file": "lean/Sheaf/Paper/RingedLocalizationRHomCalculus.lean",
+  "statement": "theorem ringedLocalizationRHom_calculus (R : Sheaf J CommRingCat.{u}) : ∃ (e : ∀ U : C, localizationRHom R ⋙ localizationDerivedRestriction R U ≅ ((localizationDerivedRestriction R U).op.prod (localizationDerivedRestriction R U)) ⋙ localizationRHom (R.over U)) (s : ∀ (U V : C) (a : V ⟶ U), localizationRHom (R.over U) ⋙ localizationDerivedOverMap R a ≅ ((localizationDerivedOverMap R a).op.prod (localizationDerivedOverMap R a)) ⋙ localizationRHom (R.over V)) (c : ∀ (U : C) (f : R.obj.obj (op U)) (P : CochainComplex (localizationModules R) ℤ), IsBoundedLocalizationComplex R P → ∀ N : localizationDerived R, (localizationRHom (R.over U)).obj (op (localizationSliceDerivedCoefficient R U f), (localizationRHom (R.over U)).obj (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R U).obj N)) ≅ (localizationRHom (R.over U)).obj (op ((localizationQ (R.over U)).obj ((localizationSliceComplex R U f).obj P)), (localizationDerivedRestriction R U).obj N)), (∀ (U V : C) (a : V ⟶ U) (L M : localizationDerived R), (localizationDerivedOverMap R a).map ((e U).hom.app (op L, M)) ≫ (s U V a).hom.app (op ((localizationDerivedRestriction R U).obj L), (localizationDerivedRestriction R U).obj M) ≫ (localizationRHom (R.over V)).map (X := (op ((localizationDerivedOverMap R a).obj ((localizationDerivedRestriction R U).obj L)), (localizationDerivedOverMap R a).obj ((localizationDerivedRestriction R U).obj M))) (Y := (op ((localizationDerivedRestriction R V).obj L), (localizationDerivedRestriction R V).obj M)) (((localizationRestrictionCompIso R a).inv.app L).op, (localizationRestrictionCompIso R a).hom.app M) = (localizationRestrictionCompIso R a).hom.app ((localizationRHom R).obj (op L, M)) ≫ (e V).hom.app (op L, M)) ∧ (∀ (U : C) (f : R.obj.obj (op U)) (P P' : CochainComplex (localizationModules R) ℤ) (hP : IsBoundedLocalizationComplex R P) (hP' : IsBoundedLocalizationComplex R P') (a : P' ⟶ P) (N N' : localizationDerived R) (b : N ⟶ N'), (c U f P hP N).hom ≫ (localizationRHom (R.over U)).map (((localizationQ (R.over U)).map ((localizationSliceComplex R U f).map a)).op, (localizationDerivedRestriction R U).map b) = (localizationRHom (R.over U)).map (𝟙 (op (localizationSliceDerivedCoefficient R U f)), (localizationRHom (R.over U)).map (((localizationDerivedRestriction R U).map ((localizationQ R).map a)).op, (localizationDerivedRestriction R U).map b)) ≫ (c U f P' hP' N').hom) ∧ ∀ (U V : C) (a : V ⟶ U) (f : R.obj.obj (op U)), ∃ (l : (localizationDerivedOverMap R a).obj (localizationSliceDerivedCoefficient R U f) ≅ localizationSliceDerivedCoefficient R V (R.obj.map a.op f)) (t : localizationSliceComplex R U f ⋙ localizationQ (R.over U) ⋙ localizationDerivedOverMap R a ≅ localizationSliceComplex R V (R.obj.map a.op f) ⋙ localizationQ (R.over V)), ∀ (P : CochainComplex (localizationModules R) ℤ) (hP : IsBoundedLocalizationComplex R P) (N : localizationDerived R), (localizationDerivedOverMap R a).map ((c U f P hP N).hom) ≫ (s U V a).hom.app (op ((localizationQ (R.over U)).obj ((localizationSliceComplex R U f).obj P)), (localizationDerivedRestriction R U).obj N) ≫ (localizationRHom (R.over V)).map (X := (op ((localizationDerivedOverMap R a).obj ((localizationQ (R.over U)).obj ((localizationSliceComplex R U f).obj P))), (localizationDerivedOverMap R a).obj ((localizationDerivedRestriction R U).obj N))) (Y := (op ((localizationQ (R.over V)).obj ((localizationSliceComplex R V (R.obj.map a.op f)).obj P)), (localizationDerivedRestriction R V).obj N)) ((t.inv.app P).op, (localizationRestrictionCompIso R a).hom.app N) = (s U V a).hom.app (op (localizationSliceDerivedCoefficient R U f), (localizationRHom (R.over U)).obj (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R U).obj N)) ≫ (localizationRHom (R.over V)).map (X := (op ((localizationDerivedOverMap R a).obj (localizationSliceDerivedCoefficient R U f)), (localizationDerivedOverMap R a).obj ((localizationRHom (R.over U)).obj (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R U).obj N)))) (Y := (op (localizationSliceDerivedCoefficient R V (R.obj.map a.op f)), (localizationRHom (R.over V)).obj (op ((localizationDerivedRestriction R V).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R V).obj N))) (l.inv.op, (s U V a).hom.app (op ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R U).obj N) ≫ (localizationRHom (R.over V)).map (X := (op ((localizationDerivedOverMap R a).obj ((localizationDerivedRestriction R U).obj ((localizationQ R).obj P))), (localizationDerivedOverMap R a).obj ((localizationDerivedRestriction R U).obj N))) (Y := (op ((localizationDerivedRestriction R V).obj ((localizationQ R).obj P)), (localizationDerivedRestriction R V).obj N)) (((localizationRestrictionCompIso R a).inv.app ((localizationQ R).obj P)).op, (localizationRestrictionCompIso R a).hom.app N)) ≫ (c V (R.obj.map a.op f) P hP N).hom",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The main comparison family, ringedLocalization_kflat_models and ringedLocalization_tensor_product jointly state the node. The transparent size abbreviations reuse the recorded module/derived categories, RHom and exact slice functors. The K-flat certificates and ordinary total-tensor isomorphism specify the identity-replacement computation of derived tensor. The newly landed localization, exact restriction and slice-flatness interfaces are cited rather than duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1675acebe",
+  "group": "NB",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, definitions, edge cases, report sections, and compiler evidence checked; no findings."
  }
 }
