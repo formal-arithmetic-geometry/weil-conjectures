@@ -348,6 +348,38 @@ This is exactly the true branch of the defining comparison. -/
       d.γV.symm.app B' ≪≫ SQ.mapIso θV ≪≫ τV.app E := by
   rfl
 
+/-- Invert the first-open coherence square at a global object.
+Source: Stacks Project, Tag 08DW. The defining square says that the path through
+`τU⁻¹`, `βU`, and `γU` equals the path through `βW` and `αU⁻¹`.
+Compose on the left with `αU` and `βW⁻¹`, then cancel `γU` on the right.
+Functoriality and the inverse laws for the natural isomorphisms give the formula. -/
+theorem overlapDiagram_gammaU_inv_on_image
+    {C D A B W P Q T : Type*}
+    [Category* C] [Category* D] [Category* A] [Category* B]
+    [Category* W] [Category* P] [Category* Q] [Category* T]
+    {L : C ⥤ D} {TU : C ⥤ A} {TV : C ⥤ B} {TW : C ⥤ W}
+    {SU : A ⥤ W} {SV : B ⥤ W}
+    {RU : D ⥤ P} {RV : D ⥤ Q} {RW : D ⥤ T}
+    {SP : P ⥤ T} {SQ : Q ⥤ T}
+    {αU : TU ⋙ SU ≅ TW} {αV : TV ⋙ SV ≅ TW}
+    {τU : RU ⋙ SP ≅ RW} {τV : RV ⋙ SQ ≅ RW}
+    (d : TwoOpenComparisonDiagram L TU TV TW SU SV RU RV RW SP SQ
+      αU αV τU τV) (F : C) :
+    d.γU.inv.app (TU.obj F) =
+      d.HW.map (αU.hom.app F) ≫ d.βW.inv.app F ≫
+        τU.inv.app (L.obj F) ≫ SP.map (d.βU.hom.app F) := by
+  apply (cancel_mono (d.γU.hom.app (TU.obj F))).1
+  calc
+    d.γU.inv.app (TU.obj F) ≫ d.γU.hom.app (TU.obj F) = 𝟙 _ := by simp
+    _ = d.HW.map (αU.hom.app F) ≫ d.βW.inv.app F ≫
+          (d.βW.hom.app F ≫ d.HW.map (αU.inv.app F)) := by simp
+    _ = (d.HW.map (αU.hom.app F) ≫ d.βW.inv.app F ≫
+          τU.inv.app (L.obj F) ≫ SP.map (d.βU.hom.app F)) ≫
+          d.γU.hom.app (TU.obj F) := by
+      simp only [Category.assoc]
+      rw [d.coherenceU F]
+
+
 /-- Geometric object comparisons and their natural compatibility with apex pullback.
 The transition functors and their fixed conjugation formula are recorded explicitly;
 the Hom pin will be derived from naturality, rather than included as a field.
