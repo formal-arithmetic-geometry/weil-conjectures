@@ -20,8 +20,8 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
-  "place": "the original comparison-site proof, with affine vanishing as hypothesis",
-  "group": "S2"
+  "place": "Leray comparison proof, using affine-basis exactness in place of stalk colimits and the proved source spectral-sequence and topological vanishing APIs",
+  "group": "E4"
  },
  "created": {
   "by": "worker",
@@ -30,28 +30,15 @@
   "group": "S2"
  },
  "proof_deps": [
-  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-zariski-etale-core",
   "lem-sp-right-adjoint-preserves-injectives",
-  "def-sc-zariski-cohomology",
-  "thm-sp-grothendieck",
-  "def-weil-size-convention",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-sheaf-of-modules-category",
-  "def-sp-composite-acyclicity",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-sc-abelian-sheaf-exact-iff-stalk-exact",
-  "lem-weil-pbc-etale-cohomology-over-open",
-  "pqf-lem-locnoeth-lft",
-  "def-weil-pbc-scheme-conventions",
-  "def-kun-topological-krull-dimension",
-  "lem-sc-zariski-dimension-bound",
-  "def-sc-etale-torsion-cd",
   "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
-  "def-weil-pbc-etale-sheaves"
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-torsion",
+  "def-kun-topological-krull-dimension",
+  "pqf-lem-locnoeth-lft"
  ],
  "stmt_deps": [
   "def-sc-etale-torsion-cd",
@@ -114,31 +101,37 @@
  "statement": "The affine bound in degrees above d + c implies that a finite-type K-scheme of dimension at most d has Subsingleton (H^q(X,F)) for every torsion abelian etale sheaf F and every q with 2*d + c < q.",
  "proof": [
   {
-   "text": "Apply comparison with the Zariski site to an injective resolution. Exact inverse image makes direct image preserve injectives. The resulting Grothendieck spectral sequence has ordinary etale cohomology as abutment. Stalks of the higher direct image are filtered colimits of open-restriction cohomology. Use the supplied hAffine on a cofinal basis of affine neighbourhoods, whose dimensions are bounded by d and whose restricted sheaves remain torsion. This kills higher direct images above d+c; Grothendieck vanishing kills Zariski degree above d, so first-quadrant convergence and its finite filtration give zero in total degrees above 2*d+c.",
+   "text": "Use zariski_to_etale_core for the inclusion i of Zariski opens into the small etale site, with i(top) terminal. Let P be its sheaf pushforward and Gamma Zariski global sections. Representable flatness and exact sheafification make the left adjoint of P preserve finite limits. The continuous sheaf adjunction therefore makes (P,Gamma) an acyclic composable pair; P followed by Gamma is etale global sections. Use the existing proved AddCommGrpCat-valued Grothendieck-abelian instances, without passing to ringed-site modules.",
    "uses": [
-    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-sp-right-adjoint-preserves-injectives",
-    "def-sc-zariski-cohomology",
-    "thm-sp-grothendieck",
-    "def-weil-size-convention",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-sheaf-of-modules-category",
-    "def-sp-composite-acyclicity",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-sc-abelian-sheaf-exact-iff-stalk-exact",
-    "lem-weil-pbc-etale-cohomology-over-open",
-    "pqf-lem-locnoeth-lft",
-    "def-weil-pbc-scheme-conventions",
-    "def-kun-topological-krull-dimension",
-    "lem-sc-zariski-dimension-bound",
-    "def-sc-etale-torsion-cd",
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-etale-site-localization-open",
-    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
-    "def-weil-pbc-etale-sheaves"
+    "lem-weil-pbc-zariski-etale-core",
+    "lem-sp-right-adjoint-preserves-injectives"
    ],
+   "elementary": false
+  },
+  {
+   "text": "Prove exactness of a short complex of Zariski sheaves from exactness of sections on every affine open: its map to the kernel is locally surjective, since any section and point admit an affine refinement where a preimage exists. Apply this to the pushed-forward injective resolution. For each affine open U, exact open restriction preserves injectives because its left adjoint is exact extension by zero. Functor.compRightDerivedObjIso and Sheaf.subsingleton_H_iff_isZero_rightDerived identify the section-complex homology with H^n(U,F|U). The upperStar/restriction isomorphism and preservation of torsion allow hAffine to kill it for n>d+c. The dimension inequality is topologicalKrullDim_subspace_le; the affine open over the field is locally of finite type and quasi-compact. Consequently R^n P(F)=0 above d+c, without a stalk-colimit calculation.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-inverse-image-torsion",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-type quasi-compact scheme over the field is Noetherian. Use the existing proved source theorem TopCat.Sheaf.subsingleton_H_of_topologicalKrullDim_lt from WeilConjectures.Topology.Sheaves.GrothendieckVanishing. Its coefficient and space universes coincide, so first replace the underlying topological space by ULift at universe u+1. The homeomorphism induces an equivalence of open categories and hence sheaf categories, preserving Noetherianity, quasi-sobriety and the dimension bound. The derived global-sections comparison across this exact equivalence, using Functor.compRightDerivedObjIso, transports the vanishing back to AddCommGrpCat.{u+1}-valued sheaves on X. Thus R^p Gamma(R^n P(F))=0 whenever d<p, for all n. This uses the source theorem directly rather than the separately stated Sheaf.AlgebraicGeometry.ZariskiDimensionBound theorem.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing proved Functor.isZero_rightDerived_comp_of_lt_add from WeilConjectures.CategoryTheory.SpectralSequence.Vanishing to the two bounds d and d+c. Arithmetic gives d+(d+c)<q from 2*d+c<q. Transport the resulting zero derived functor along the equality P followed by Gamma = etale sections at i(top), then apply Sheaf.subsingleton_H_iff_isZero_rightDerived at that terminal object. No new unproved statement is used or introduced.",
+   "uses": [],
    "elementary": false
   }
  ],
@@ -166,10 +159,10 @@
   "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261015T054251-L-1536669",
-  "kind": "interface",
+  "landing": "20261015T213631-L-2151436",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
