@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionCoordinateSectionsNaturality
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionSecondKFlat
 
 /-! # Chart coordinates for ordinary tensor homology
 
@@ -29,6 +31,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 /-- Chartwise ordinary tensor homology coordinates for quasi-coherent coefficients.
 
@@ -82,6 +86,19 @@ theorem qcoh_ordinary_tensor_resolution_coordinates_witness
             (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
-  sorry
+  classical
+  obtain ⟨F, s, hF, hs⟩ := exists_tensorResolutionSecondKFlat Y N
+  let c := fun U : Y.affineOpens ↦
+    tensorResolutionCoordinateSections Y M N U (MA U) (NA U)
+      (sM U) (sN U) (P U) K F q s hK hF hq hs n
+  refine ⟨c, ?_⟩
+  intro V U h _hbasic
+  have hcmp := exists_tensorResolutionCanonicalComparison Y M N MA NA sM sN P V U h
+  obtain ⟨b, a, k, ha, hb, hk⟩ := hcmp
+  refine ⟨b, a, k, ha, hb, hk, ?_⟩
+  dsimp only
+  intro x
+  exact tensorResolutionCoordinateSections_naturality Y M N MA NA sM sN P
+    K F q s hK hF hq hs n V U h b a k ha hb hk x
 
 end AlgebraicGeometry
