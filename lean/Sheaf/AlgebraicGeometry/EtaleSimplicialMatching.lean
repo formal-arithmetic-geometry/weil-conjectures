@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.EtaleHypercover
-public import Sheaf.CategoryTheory.ProperFaceMatchingObject
 public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 import Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember
 import Mathlib.Tactic

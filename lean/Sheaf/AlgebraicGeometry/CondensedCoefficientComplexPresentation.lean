@@ -6,6 +6,8 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.CondensedDerivedTensorComparison
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import Mathlib.CategoryTheory.Limits.Final
 import Sheaf.AlgebraicGeometry.CondensedCoefficientComplexModel
 
 /-! # Complex presentations of condensed coefficient extension
