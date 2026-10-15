@@ -31,17 +31,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- The canonical arrow from the colimit affine scheme to a finite stage.
-Source: Stacks Project, Tag 09RE, the affine limit system.
-(blueprint: def-pc-perfect-overlap-stage-equivalence). -/
-noncomputable def overlapLimitArrow
-    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
-    {i : I} (k : Set.Ici i) :
-    Over.mk (Spec.map (c.ι.app i)) ⟶
-      Over.mk (Spec.map (R.map (homOfLE k.property))) :=
-  Over.homMk (Spec.map (c.ι.app k.val))
-    (by dsimp; rw [← Spec.map_comp, c.w (homOfLE k.property)])
-
 /-- The exact nested-open restriction agrees with derived pullback along its inclusion.
 Source: Stacks Project, Tag 08DW, restriction of derived pullback.
 (blueprint: def-pc-perfect-overlap-stage-equivalence). -/

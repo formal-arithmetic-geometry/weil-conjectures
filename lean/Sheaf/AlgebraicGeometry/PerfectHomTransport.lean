@@ -22,6 +22,17 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
+/-- The canonical arrow from the colimit affine scheme to a finite stage.
+Source: Stacks Project, Tag 09RE, the affine limit system.
+(blueprint: def-pc-perfect-overlap-stage-equivalence). -/
+noncomputable def overlapLimitArrow
+    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
+    {i : I} (k : Set.Ici i) :
+    Over.mk (Spec.map (c.ι.app i)) ⟶
+      Over.mk (Spec.map (R.map (homOfLE k.property))) :=
+  Over.homMk (Spec.map (c.ι.app k.val))
+    (by dsimp; rw [← Spec.map_comp, c.w (homOfLE k.property)])
+
 /-- The fixed counit-pinned comparison for composition of derived pullbacks.
 Source: Stacks Project, Tag 0D5S (blueprint: lem-pc-perfect-hom-transport). -/
 noncomputable def perfectHomComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
@@ -50,6 +61,16 @@ noncomputable def perfectHomMap {X S : Scheme.{u}} (s : X ⟶ S)
       (derivedPullback (pullback.fst s T'.hom)).obj Q :=
   (perfectHomComparison s g).hom.app P ≫
     (derivedPullback (baseChangeMap s g)).map f ≫ (perfectHomComparison s g).inv.app Q
+
+/-- The conjugation formula for one named base-change arrow. -/
+theorem perfectHomMap_eq {X S : Scheme.{u}} (s : X ⟶ S)
+    {T T' : Over S} (g : T' ⟶ T) {P Q : schemeDerivedCategory X}
+    (f : (derivedPullback (pullback.fst s T.hom)).obj P ⟶
+      (derivedPullback (pullback.fst s T.hom)).obj Q) :
+    perfectHomMap s g f =
+      (perfectHomComparison s g).hom.app P ≫
+        (derivedPullback (baseChangeMap s g)).map f ≫
+        (perfectHomComparison s g).inv.app Q := rfl
 
 @[simp] theorem perfectHomMap_id {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) (P : schemeDerivedCategory X) :
@@ -209,11 +230,21 @@ noncomputable def perfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ CommRingC
     {j : I} (hij : i ≤ j) {P Q : schemeDerivedCategory X}
     (f : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj P ⟶
       (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj Q) :=
-  perfectHomMap s
-    (T := Over.mk (Spec.map (R.map (homOfLE hij))))
-    (T' := Over.mk (Spec.map (c.ι.app i)))
-    (Over.homMk (Spec.map (c.ι.app j))
-      (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) f
+  perfectHomMap s (overlapLimitArrow R c ⟨j, hij⟩) f
+
+/-- The finite-to-colimit transport uses the fixed comparison for its
+canonical arrow. This is the defining conjugation equation. -/
+theorem perfectLimitMap_eq {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
+    (c : Cocone R) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
+    {j : I} (hij : i ≤ j) {P Q : schemeDerivedCategory X}
+    (f : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj P ⟶
+      (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj Q) :
+    perfectLimitMap R c s hij f =
+      (perfectHomComparison s (overlapLimitArrow R c ⟨j, hij⟩)).hom.app P ≫
+        (derivedPullback (baseChangeMap s (overlapLimitArrow R c ⟨j, hij⟩))).map f ≫
+        (perfectHomComparison s (overlapLimitArrow R c ⟨j, hij⟩)).inv.app Q := by
+  unfold perfectLimitMap
+  exact perfectHomMap_eq s (overlapLimitArrow R c ⟨j, hij⟩) f
 
 @[simp] theorem perfectStageMap_id {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
