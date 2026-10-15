@@ -27,9 +27,8 @@
  ],
  "proof": [
   {
-   "text": "For every object $V$ and sheaf $T$, the sheafification existence theorem supplies $h_V^\\#$ and its unit $\\eta_V:h_V\\to h_V^\\#$. The universal property and the Yoneda bijection give $\\operatorname{Hom}(h_V^\\#,T)\\cong\\operatorname{Hom}(h_V,T)\\cong T(V)$. The map corresponding to $t\\in T(V)$ is characterized by sending $\\eta_V(\\mathrm{id}_V)$ to $t$; before sheafification it sends $f:W\\to V$ to $T(f)(t)$. This also specifies the maps when the site is not subcanonical.",
+   "text": "The sheafification adjunction (Mathlib sheafificationAdjunction) and the universe-raised Yoneda equivalence (uliftYonedaEquiv) identify maps from the sheafified representable of V to a sheaf T with sections of T(V), naturally in T. This uses only the universal property of sheafification, without computing the plus construction and without subcanonicity.",
    "uses": [
-    "lem-weil-pbc-sheafification-plus-theorem",
     "def-weil-pbc-sheafification",
     "lem-galois-yoneda-hom-bijection"
    ],
@@ -40,9 +39,8 @@
    }
   },
   {
-   "text": "For an arbitrary sheaf $T$, let $J(T)=\\{(V,t):V\\in E,\\ t\\in T(V)\\}$, a set since the site is small and all values are sets. Define the presheaf $A_T(W)=\\coprod_{(V,t)\\in J(T)}\\operatorname{Hom}(W,V)$ with restriction $(V,t,f)\\mapsto(V,t,f\\circ g)$ along $g:W^{\\prime}\\to W$, and put $P(T)=A_T^\\#$. The functor laws follow from associativity and identities in $\\mathcal D$. A map $A_T\\to K$ to any sheaf $K$ is exactly a family of maps $h_V\\to K$, one for each $(V,t)$: restrict to each summand for one direction, and use these maps on disjoint-union elements for the other. Factoring through sheafification on both sides therefore identifies maps $P(T)\\to K$ with families of maps $h_V^\\#\\to K$. The summand inclusion $h_V\\to A_T\\to P(T)$ factors uniquely through a map $\\iota_{V,t}:h_V^\\#\\to P(T)$. The preceding correspondence sends $b:P(T)\\to K$ to $(b\\circ\\iota_{V,t})_{(V,t)}$, so it proves the coproduct universal property for these injections, including an empty coproduct. The maps of step 1 indexed by $(V,t)$ induce $q_T:P(T)\\to T$; on the image of $(V,t,f)$ in $P(T)(W)$ this map is $T(f)(t)$.",
+   "text": "For any sheaf T, let I(T) be the sigma type of V in E and t in T(V). Take the coproduct P(T) of the sheafified representables indexed by I(T), using Mathlib Sheaf colimits and coproductIsCoproduct. Sheaf colimits are obtained by sheafifying presheaf colimits, so their universal property is the one obtained from the sheafification adjunction. The maps from step 1 define q_T by Sigma.desc; Sigma.ι_desc identifies its restriction to each summand with the map corresponding to t. The index type lies in Type(max u w). This construction also allows an empty index type.",
    "uses": [
-    "lem-weil-pbc-sheafification-plus-theorem",
     "def-weil-pbc-sheafification",
     "def-weil-pbc-category-colimit"
    ],
@@ -53,18 +51,18 @@
    }
   },
   {
-   "text": "The map $q_T$ is locally surjective. Indeed, for $s\\in T(W)$ choose a covering $\\{V_i\\xrightarrow{f_i}W\\}_i$ with $V_i\\in E$. In the summand indexed by $(V_i,T(f_i)(s))$, the image of $\\mathrm{id}_{V_i}$ under $A_T(V_i)\\to P(T)(V_i)$ maps under $q_T$ to $T(f_i)(s)$. This is exactly the covering-local lifting condition, so the sheaf epimorphism criterion implies $q_T$ is an epimorphism. This argument works for every sheaf $T$, so it can be used twice without an additional hypothesis.",
+   "text": "Prove q_T epi by cancellation. If f,g:T→K agree after q_T, precomposing with every coproduct injection and applying the natural sheafification and Yoneda bijections gives f_V(t)=g_V(t) for every V in E and t in T(V). For any U and t in T(U), choose the covering R supplied by the covering hypothesis. Naturality identifies the restrictions of f_U(t) and g_U(t) along R.f(i) with their equal values on T(R.f(i))(t), because R.X(i) lies in E. Separatedness of K for the covering presieve R.presieve₀ implies f_U(t)=g_U(t), even if the covering is empty. Thus f=g and q_T is epi. In Lean this uses isSheaf_iff_isSheaf_of_type, isSheafFor_of_mem_precoverage and isSeparatedFor.ext; it does not use the local-surjectivity criterion.",
    "uses": [
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+    "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
     "place": "Tag 00WS, first paragraph, epimorphism assertion; Tag 00WN, lemma-mono-epi-sheaves"
    }
   },
   {
-   "text": "Apply the construction to $T=H$ and write $P_0=P(H)$ and $q=q_H$. Form $G=P_0\\times_H P_0$ in sheaves of sets with projections $r,s:G\\rightrightarrows P_0$. The sectionwise-limits theorem supplies this fibre product, with $G(W)=\\{(a,b)\\in P_0(W)^2:q_W(a)=q_W(b)\\}$. Apply steps 1--3 to the sheaf $G$ to obtain $P_1=P(G)$ and the epimorphism $e=q_G:P_1\\to G$. Both $P_0$ and $P_1$ are coproducts of the stipulated sheafified representables indexed by the sets $J(H)$ and $J(G)$. Put $d_0=r\\circ e$ and $d_1=s\\circ e$. The fibre-product equation gives $q\\circ d_0=q\\circ d_1$.",
+   "text": "Apply the proved epimorphic presentation to H, giving P₀ and q. Use the sheaf pullback K=pullback q q with its two projections r,s; Mathlib Sites.Limits supplies this limit. Apply the same presentation to K, giving P₁ and an epimorphism e:P₁→K. Set d₀=e≫r and d₁=e≫s. Associativity and pullback.condition prove d₀≫q=d₁≫q.",
    "uses": [
     "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
    ],
@@ -75,7 +73,7 @@
    }
   },
   {
-   "text": "Since $q$ is an epimorphism and $(G,r,s)$ is its kernel pair in the category of sheaves of sets, the kernel-pair coequalizer theorem says that $(H,q)$ is a coequalizer of $r,s$. All its hypotheses hold by steps 3 and 4; the index category used to construct $G$ is finite.",
+   "text": "Sheaves of sets form a regular epi category (Mathlib Sites.RegularEpi), so the epi q is regular by IsRegularEpiCategory.regularEpiOfEpi. Its canonical kernel pair is IsKernelPair.of_hasPullback q. Apply its toCoequalizer' to obtain the coequalizer universal property for q and r,s.",
    "uses": [
     "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
    ],
@@ -86,7 +84,7 @@
    }
   },
   {
-   "text": "For a sheaf $K$ and a map $a:P_0\\to K$ with $a\\circ d_0=a\\circ d_1$, we have $(a\\circ r)\\circ e=(a\\circ s)\\circ e$. As $e$ is an epimorphism, $a\\circ r=a\\circ s$. Step 5 gives exactly one $u:H\\to K$ with $u\\circ q=a$. Conversely, every such composite $u\\circ q$ equalizes $d_0,d_1$ because $q\\circ d_0=q\\circ d_1$. These two operations are inverse, which is the stated bijection and the coequalizer universal property. No new coequalizer-existence result is needed: its vertex is the given sheaf $H$.",
+   "text": "For a cofork t of d₀,d₁, cancel the epi e in its cofork equation to get r≫t.π=s≫t.π. Descend t.π through the kernel-pair coequalizer. Its factorization equation follows from Cofork.IsColimit.π_desc; uniqueness follows from Cofork.IsColimit.hom_ext for that coequalizer. Cofork.IsColimit.mk combines these into an actual colimit witness with vertex H. Package the two coproduct colimit witnesses and this coequalizer witness into the required existential.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
@@ -98,18 +96,17 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sheafification-plus-theorem",
   "def-weil-pbc-sheafification",
   "lem-galois-yoneda-hom-bijection",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "def-weil-pbc-sites-and-cohomology",
   "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
   "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 00WS (lemma-sheaf-coequalizer-representable), with the coproduct universal property and the final cancellation step written out; Tags 00WB, 00WH, 00WN, 00W2 and 086K for the cited inputs"
+  "place": "Tag 00WS (lemma-sheaf-coequalizer-representable), using the canonical coproduct and kernel-pair argument; the worker writes out the direct epi-cancellation proof by sheaf separatedness and the final epi cancellation and coequalizer universal property in Lean. Source consulted at https://stacks.math.columbia.edu/tag/00WS because the local literature source is absent."
  },
  "mathlib_searches": [
   {
@@ -238,5 +235,15 @@
   "by": "NZ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-7ee3f",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T182201-L-784702",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem with its node and Stacks 00WS, checked proof dependencies and import changes, compiled the delivery and sole direct importer, and verified both declarations' axioms."
  }
 }

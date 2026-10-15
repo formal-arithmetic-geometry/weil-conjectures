@@ -5,17 +5,10 @@ Authors: SHEAF group NZ
 -/
 module
 
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.CategoryTheory.Sites.Sheafification
-public import Mathlib.CategoryTheory.Sites.Hypercover.Zero
+public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-public import Mathlib.CategoryTheory.Limits.HasLimits
-public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
-import Sheaf.CategoryTheory.Sites.SheafificationPlusTheorem
 public import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Sites.RegularEpi
 import Mathlib.CategoryTheory.Limits.Shapes.KernelPair
 
@@ -33,6 +26,70 @@ universe u w
 open CategoryTheory.Limits
 
 namespace CategoryTheory
+
+/-- For a covering family of site objects, every set-valued sheaf is covered by a
+coproduct of sheafified representables indexed by that family.
+
+Source: Stacks Project, Sites, Tag 00WS, first paragraph (the construction of the
+coproduct and its locally surjective map).
+(blueprint: lem-weil-pbc-sheaf-covering-representable-coequalizer-presentation)
+
+Take the coproduct of sheafified representables indexed by pairs `(V,t)` with
+`V ∈ E` and `t ∈ H(V)`. The sheafification adjunction and Yoneda give its map to
+`H`. If two arrows out of `H` agree after that map, they agree on every section
+at every object of `E`. Naturality gives equality after restriction to the assumed
+cover of any object; separatedness of the target sheaf gives equality globally.
+This proves the epimorphism assertion directly, including empty coverings. -/
+private theorem exists_coveringRepresentable_epi
+    {C : Type u} [SmallCategory C]
+    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
+    [J.IsStableUnderBaseChange] [J.HasPullbacks]
+    (E : Set C)
+    (hE : ∀ U : C, ∃ R : Precoverage.ZeroHypercover.{max u w} J U,
+      ∀ i : R.I₀, R.X i ∈ E)
+    (H : Sheaf J.toGrothendieck (Type (max u w))) :
+    ∃ (I : Type (max u w)) (V : I → E)
+      (P : Sheaf J.toGrothendieck (Type (max u w)))
+      (ι : ∀ j : I, (presheafToSheaf J.toGrothendieck (Type (max u w))).obj
+        (uliftYoneda.{w}.obj (V j).val) ⟶ P),
+      Nonempty (IsColimit (Cofan.mk P ι)) ∧ ∃ q : P ⟶ H, Epi q := by
+  classical
+  let I : Type (max u w) := Σ V : E, H.obj.obj (Opposite.op V.val)
+  let V : I → E := Sigma.fst
+  let F : I → Sheaf J.toGrothendieck (Type (max u w)) := fun j ↦
+    (presheafToSheaf J.toGrothendieck (Type (max u w))).obj
+      (uliftYoneda.{w}.obj (V j).val)
+  let a : ∀ j : I, F j ⟶ H := fun j ↦
+    ((sheafificationAdjunction J.toGrothendieck (Type (max u w))).homEquiv _ _).symm
+      (uliftYonedaEquiv.{w}.symm j.2)
+  let q : ∐ F ⟶ H := Sigma.desc a
+  refine ⟨I, V, ∐ F, Sigma.ι F, ⟨coproductIsCoproduct F⟩, q, ?_⟩
+  constructor
+  intro G f g hfg
+  have heq (j : I) : a j ≫ f = a j ≫ g := by
+    have hh := congrArg (fun k ↦ Sigma.ι F j ≫ k) hfg
+    simpa only [q, ← Category.assoc, Sigma.ι_desc] using hh
+  have hsections (W : E) (t : H.obj.obj (Opposite.op W.val)) :
+      f.hom.app (Opposite.op W.val) t = g.hom.app (Opposite.op W.val) t := by
+    have hh := congrArg
+      ((sheafificationAdjunction J.toGrothendieck (Type (max u w))).homEquiv _ _)
+      (heq ⟨W, t⟩)
+    rw [Adjunction.homEquiv_naturality_right,
+      Adjunction.homEquiv_naturality_right] at hh
+    simp only [a, Equiv.apply_symm_apply] at hh
+    have hh' := congrArg uliftYonedaEquiv.{w} hh
+    simpa only [uliftYonedaEquiv_comp, Equiv.apply_symm_apply,
+      sheafToPresheaf, ObjectProperty.ι_obj, ObjectProperty.ι_map, V, Sigma.fst] using hh'
+  apply (sheafToPresheaf J.toGrothendieck (Type (max u w))).map_injective
+  ext U t
+  obtain ⟨R, hR⟩ := hE U.unop
+  apply ((isSheaf_iff_isSheaf_of_type _ _).mp G.property
+    |>.isSheafFor_of_mem_precoverage R.mem₀).isSeparatedFor.ext
+  rintro W k ⟨i⟩
+  change G.obj.map (R.f i).op (f.hom.app U t) =
+    G.obj.map (R.f i).op (g.hom.app U t)
+  rw [← f.hom.naturality_apply, ← g.hom.naturality_apply]
+  exact hsections ⟨R.X i, hR i⟩ (H.obj.map (R.f i).op t)
 
 /-- Every set sheaf is a coequalizer of two coproducts of sheafified representables from
 any covering set of site objects. The two `IsColimit (Cofan.mk ...)` assertions mean that
@@ -86,6 +143,37 @@ theorem exists_coveringRepresentable_coequalizer
       Nonempty (IsColimit (Cofan.mk P₁ ι₁)) ∧
       ∃ (d₀ d₁ : P₁ ⟶ P₀) (q : P₀ ⟶ H) (hq : d₀ ≫ q = d₁ ≫ q),
         Nonempty (IsColimit (Cofork.ofπ q hq)) := by
-  sorry
+  obtain ⟨I₀, V₀, P₀, ι₀, hP₀, hq₀⟩ :=
+    exists_coveringRepresentable_epi J E hE H
+  obtain ⟨q₀, hq₀⟩ := hq₀
+  let K := pullback q₀ q₀
+  let r : K ⟶ P₀ := pullback.fst q₀ q₀
+  let s : K ⟶ P₀ := pullback.snd q₀ q₀
+  obtain ⟨I₁, V₁, P₁, ι₁, hP₁, he⟩ :=
+    exists_coveringRepresentable_epi J E hE K
+  obtain ⟨e, he⟩ := he
+  let d₀ : P₁ ⟶ P₀ := e ≫ r
+  let d₁ : P₁ ⟶ P₀ := e ≫ s
+  let q : P₀ ⟶ H := q₀
+  have hq : d₀ ≫ q = d₁ ≫ q := by
+    dsimp [d₀, d₁, q, r, s]
+    rw [Category.assoc, Category.assoc, pullback.condition]
+  have : Epi q := hq₀
+  have : IsRegularEpi q := IsRegularEpiCategory.regularEpiOfEpi q
+  have hcoeq : Nonempty (IsColimit (Cofork.ofπ q hq)) := by
+    have : Epi e := he
+    let hc := (IsKernelPair.of_hasPullback q).toCoequalizer'
+    have equalizes (t : Cofork d₀ d₁) : r ≫ t.π = s ≫ t.π := by
+      apply (cancel_epi e).1
+      simpa only [← Category.assoc] using t.condition
+    refine ⟨Cofork.IsColimit.mk _
+      (fun t ↦ hc.desc (Cofork.ofπ t.π (equalizes t))) ?_ ?_⟩
+    · intro t
+      exact Cofork.IsColimit.π_desc hc
+    · intro t m hm
+      apply Cofork.IsColimit.hom_ext hc
+      exact hm.trans (Cofork.IsColimit.π_desc hc
+        (t := Cofork.ofπ t.π (equalizes t))).symm
+  exact ⟨I₀, I₁, V₀, V₁, P₀, P₁, ι₀, ι₁, hP₀, hP₁, d₀, d₁, q, hq, hcoeq⟩
 
 end CategoryTheory
