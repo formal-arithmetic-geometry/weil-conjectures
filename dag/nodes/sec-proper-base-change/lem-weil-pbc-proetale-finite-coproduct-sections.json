@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-proetale-finite-coproduct-sections",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+   "place": "sheaf equalizer and empty-family clauses",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Section evaluation on finite pro-etale coproducts",
+ "statement": "For a finite family of qcqs pro-etale objects whose scheme coproduct is identified with a pro-etale object W by coprojections ι, every sheaf of sets on X.ProEt evaluates on W as the product of its evaluations on the summands, and for an empty family the sections on W form a singleton and W is empty.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/hypercovering.tex",
+  "place": "Tag 0F4P, proof of lemma-weakly-contractible-cover; Tag 0DB1, hypotheses (a)-(c)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof": [
+  {
+   "text": "The coprojections are pairwise disjoint open immersions and jointly cover W. The sheaf equalizer axiom for this finite cover identifies sections on W with compatible tuples on the summands; off-diagonal intersections are empty and diagonal restrictions are identities. The empty family is the empty cover, so its sections are unique.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites.tex",
+    "place": "Tags 0F4P, 0DB1 and 00VM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites.tex",
+  "place": "Tags 0F4P, 0DB1, 00VM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Presieve.isSheafFor_ofArrows_iff_bijective_toCompabible; Presieve.IsSheaf.existsUnique_amalgamation_ofArrows",
+   "results": "Mathlib CategoryTheory/Sites/IsSheafFor.lean provides the sheaf equalizer and bijectivity API; no theorem specialized to the pro-etale finite coproduct was found.",
+   "date": "2026-10-15",
+   "verdict": "candidate infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Presieve.isSheafFor_ofArrows_iff_bijective_toCompabible",
+   "results": "The general presieve sheaf criterion was found; its hypotheses still require the pro-etale covering and disjointness verification.",
+   "date": "2026-10-15",
+   "verdict": "candidate infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf sections finite disjoint coproduct cover product bijective",
+   "results": "Etale.isIso_piLift_of_disjoint is specialized to the small etale site and cannot be applied to ProEt; no direct ProEt match.",
+   "date": "2026-10-15",
+   "verdict": "no direct match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEvaluation",
+  "date": "2026-10-15",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/ProEtaleFiniteCoproductSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.finite_coproduct_sheaf_core",
+  "statement": "theorem finite_coproduct_sheaf_core (X : Scheme.{u}) (I : Type v) [Finite I]\n    (V : I → X.ProEt) (W : X.ProEt) (ι : ∀ i, V i ⟶ W)\n    (e : (∐ fun i ↦ (V i).left) ≅ W.left)\n    (hqc : ∀ i, CompactSpace (V i).left)\n    (hqs : ∀ i, QuasiSeparatedSpace (V i).left)\n    (hι : ∀ i, Sigma.ι (fun i ↦ (V i).left) i ≫ e.hom = (ι i).left) :\n    (∀ F : Sheaf (topology X) (Type (max (u + 1) w)),\n        Function.Bijective (fun s : F.obj.obj (op W) ↦\n          fun i ↦ F.obj.map (ι i).op s)) ∧\n      (IsEmpty I → IsEmpty W.left ∧\n        ∀ F : Sheaf (topology X) (Type (max (u + 1) w)),\n          Nonempty (Unique (F.obj.obj (op W))))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-ae5d9",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T161022-L-259317",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-ae5d9",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T161022-L-259317",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean and DAG declarations match the packet statements; all modules and three direct importers compile successfully."
+ }
+}

@@ -28,76 +28,54 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-scheme-coproduct-family] to construct $V=\\coprod_i V_i$, the morphism $V\\to X$, and the pairwise disjoint clopen coprojections $\\iota_i$. Clause (1) of [lem-weil-pbc-finite-coproduct-lfp-qcqs] makes $V$ qcqs. If $V_i\\cong\\operatorname{Spec}A_i$ for all $i$, [lem-weil-pbc-finite-affine-coproduct-spectrum] identifies $V$ with $\\operatorname{Spec}(\\prod_i A_i)$. For the empty index set this is the spectrum of the zero ring, namely the empty scheme.",
+   "text": "Define f as the scheme coproduct map Sigma.desc (fun i => (V i).hom), and use IsZariskiLocalAtSource.sigmaDesc to make it weakly etale. Put W = ProEt.mk f and take the coproduct inclusions as morphisms in X.ProEt. The existing finite coproduct qcqs theorem gives compactness, quasi-separatedness, and the affine implication.",
    "uses": [
     "lem-weil-pbc-scheme-coproduct-family",
     "lem-weil-pbc-finite-coproduct-lfp-qcqs",
-    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+    "def-weil-weakly-etale-morphism"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/proetale.tex",
-    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), 01KO (lemma-characterize-quasi-separated); Tag 0F4P (lemma-weakly-contractible-cover), finite-union paragraph"
+    "document": "Mathlib.AlgebraicGeometry.Limits; Mathlib.AlgebraicGeometry.Morphisms.Basic; Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale",
+    "place": "Sigma.desc, IsZariskiLocalAtSource.sigmaDesc, and finite_coproduct_lfp_qcqs"
    }
   },
   {
-   "text": "The structural map $V\\to X$ is weakly etale: at $v\\in V_i$ its stalk map is the stalk map of $V_i\\to X$, so it is flat; near $\\Delta(v)$ the open subscheme $V_i\\times_X V_i$ of $V\\times_X V$ identifies the diagonal stalk map with that of $V_i\\to X$, so the diagonal is flat as well. This checks the two defining conditions of [def-weil-weakly-etale-morphism] using [def-weil-flat-morphism]. Likewise each clopen inclusion $V_i\\to V$ has identity stalk maps and diagonal an isomorphism, hence is weakly etale. The empty scheme has no points, so both flatness conditions are vacuous. Finite unions of bounded schemes remain in the chosen universe [def-weil-size-convention]; after taking the chosen skeleton, $V$ is therefore an object of the qcqs full subcategory of [def-weil-pbc-proetale-site].",
+   "text": "Apply the independently stated finite_coproduct_sheaf_core to obtain the representable coproduct colimit, the section evaluation bijection, and the empty-family assertion.",
    "uses": [
-    "def-weil-weakly-etale-morphism",
-    "def-weil-flat-morphism",
-    "def-weil-pbc-proetale-site",
-    "def-weil-size-convention"
+    "lem-weil-pbc-proetale-finite-coproduct-sections"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0F4P (lemma-weakly-contractible-cover); Tag 094P (definition-weakly-etale)"
-   }
-  },
-  {
-   "text": "The family $\\{V_i\\to V\\}$ covers in [def-weil-pbc-proetale-site]: for an affine open $A\\subset V$, each $A\\cap V_i$ is clopen in $A$, hence quasi-compact; take a finite affine open cover of each $A\\cap V_i$ and combine these finitely many covers. Their images cover $A$, which verifies the stated covering criterion. The empty family covers the empty scheme by the same criterion. The equalizer sheaf axiom in [def-weil-pbc-sites-and-cohomology] applied to that empty cover gives $F(\\varnothing)$ a single element. For the cover of $V$, the overlaps $V_i\\times_V V_j$ are empty for $i\\ne j$ and $V_i$ for $i=j$. Off-diagonal compatibility is automatic because $F(\\varnothing)$ is a singleton; on-diagonal both maps are the identity. Thus every tuple in $\\prod_i F(V_i)$ glues uniquely to a section of $F(V)$, proving the asserted bijection. For a morphism $\\eta:F\\to G$, naturality gives $G(\\iota_i)\\eta_V=\\eta_{V_i}F(\\iota_i)$ for each $i$, proving naturality of the bijection.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites.tex",
-    "place": "Tag 0F4P (lemma-weakly-contractible-cover), first proof paragraph; Tag 00VM (definition-sheaf)"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-proetale-subcanonical], $h_V$ and each $h_{V_i}$ are sheaves. Since sheaves form a full subcategory of presheaves [def-weil-pbc-sites-and-cohomology], [lem-galois-yoneda-hom-bijection] identifies restriction along $h_{\\iota_i}$ with $F(\\iota_i)$ under $\\operatorname{Hom}(h_W,F)\\cong F(W)$. Step 3 therefore gives, for every sheaf $F$, the bijection $\\operatorname{Hom}(h_V,F)\\cong\\prod_i\\operatorname{Hom}(h_{V_i},F)$ induced by the coprojections. This is precisely the coproduct universal property [def-weil-pbc-category-colimit]. Hence $h_V$, with these coprojections, is their coproduct in sheaves; the canonical morphism from any chosen coproduct has inverse supplied by its universal property, and both composites are identities because their restrictions to all coprojections are identities. This also proves the empty-family assertion: $h_{\\varnothing}$ is initial in sheaves.",
-   "uses": [
-    "lem-weil-pbc-proetale-subcanonical",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-galois-yoneda-hom-bijection",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex; literature/stacks-project/hypercovering.tex",
-    "place": "Tag 098Z (lemma-proetale-subcanonical); Tag 0DB1 (remark-take-unions-hypercovering-X), auxiliary representable-union comparison; Yoneda and the coproduct universal property"
+    "place": "Tag 0F4P and Tag 0DB1"
+   }
+  },
+  {
+   "text": "For any other colimit cofan, use IsColimit.nonempty_isColimit_iff_isIso_desc. Naturality follows by applying the naturality square of the sheaf morphism to a section.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib.CategoryTheory.Limits.Shapes.Products; Mathlib.CategoryTheory.Sites.Canonical",
+    "place": "IsColimit.nonempty_isColimit_iff_isIso_desc and uliftYoneda naturality"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-scheme-coproduct-family",
   "lem-weil-pbc-finite-coproduct-lfp-qcqs",
-  "lem-weil-pbc-finite-affine-coproduct-spectrum",
   "def-weil-weakly-etale-morphism",
-  "def-weil-flat-morphism",
-  "def-weil-pbc-proetale-site",
-  "def-weil-size-convention",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-proetale-subcanonical",
-  "lem-galois-yoneda-hom-bijection",
-  "def-weil-pbc-category-colimit"
+  "lem-weil-pbc-proetale-finite-coproduct-sections",
+  "def-weil-pbc-category-colimit",
+  "lem-galois-yoneda-hom-bijection"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/schemes.tex; literature/stacks-project/sites.tex",
-  "place": "Tag 0F4P (lemma-weakly-contractible-cover), disjoint-union argument; Tags 01JB, 01JC, 01KO, 098Z, 00VM; explicit coproduct universal-property argument for the auxiliary comparison used with Hypercovering Tag 0DB1"
+  "by": "worker",
+  "document": "Mathlib and Stacks Project Tags 0F4P, 0DB1",
+  "place": "Geometry by scheme coproduct and finite coproduct qcqs APIs; sheaf core split off; Yoneda and colimit consequences proved in Lean"
  },
  "mathlib_match": null,
  "status": "split",
@@ -203,5 +181,15 @@
   "group": "NN",
   "result": "pass",
   "note": "Wrote review.md. Checked the immutable statement, all six statement dependencies, sources, declarations, docstrings, universes and empty-family cases. Signature matches verbatim; server-only overlay compile passed in 1.5 seconds. No delivery errors found; repositories and branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-ae5d9",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T161022-L-259317",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean and DAG declarations match the packet statements; all modules and three direct importers compile successfully."
  }
 }
