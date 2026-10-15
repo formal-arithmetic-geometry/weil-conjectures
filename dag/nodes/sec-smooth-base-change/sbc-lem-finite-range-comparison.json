@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Finite-range comparison",
- "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$. All coefficients are abelian groups: let $K\\in D^+(\\Ab(X_{\\Et}))$ [def-weil-pbc-derived-categories], and let $a\\le b$ be integers with $\\mathcal H^q(K)=0$ for $q\\notin[a,b]$. Write $\\Phi=g^{-1}Rf_*$, $\\Psi=Rf'_*g'^{-1}$ and $\\Ex_\\square:\\Phi\\to\\Psi$ for the derived exchange transformation [def-weil-pbc-derived-exchange]. Let $\\varphi$ be the spectral-sequence morphism induced by $\\Ex_\\square$ on the two truncation couples [def-weil-pbc-truncation-exact-couples], whose spectral sequences are (2) and (3) of [def-weil-pbc-hypercohomology-filtrations]. If $\\varphi_2^{p,q}:g^{-1}R^pf_*\\mathcal H^q(K)\\to R^pf'_*g'^{-1}\\mathcal H^q(K)$ is an isomorphism for every $(p,q)$, then $\\varphi_\\infty^{p,q}$ and the induced map $\\mathcal H^n(\\Ex_{\\square,K}):\\mathcal H^n(g^{-1}Rf_*K)\\to\\mathcal H^n(Rf'_*g'^{-1}K)$ are isomorphisms for every $(p,q)$ and every $n$. Consequently $\\Ex_{\\square,K}$ is an isomorphism. In the exact master notation this is $\\operatorname{IsIso}((\\operatorname{Etale.baseChange}\\ \\Ab\\ \\mathsf{sq.toCommSq}).\\operatorname{app}K)$, where $\\mathsf{sq}:\\operatorname{IsPullback}(g',f',f,g)$ witnesses the same square and $K$ is viewed in $\\mathrm{DerivedCategory.Plus}(\\mathrm{Sheaf}(X_{\\Et},\\Ab))$.",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$. All coefficients are abelian groups: let $K\\in D^+(\\Ab(X_{\\Et}))$ [def-weil-pbc-derived-categories], and let $a\\le b$ be integers with $\\mathcal H^q(K)=0$ for $q\\notin[a,b]$. Write $\\Phi=g^{-1}Rf_*$, $\\Psi=Rf'_*g'^{-1}$ and $\\Ex_\\square:\\Phi\\to\\Psi$ for the derived exchange transformation [def-weil-pbc-derived-exchange]. Let $\\varphi$ be the spectral-sequence morphism induced by $\\Ex_\\square$ on the two truncation couples [def-weil-pbc-truncation-exact-couples], whose spectral sequences are (2) and (3) of [def-weil-pbc-hypercohomology-filtrations]. If $\\varphi_2^{p,q}:g^{-1}R^pf_*\\mathcal H^q(K)\\to R^pf'_*g'^{-1}\\mathcal H^q(K)$ is an isomorphism for every $(p,q)$, then $\\varphi_\\infty^{p,q}$ and the induced map $\\mathcal H^n(\\Ex_{\\square,K}):\\mathcal H^n(g^{-1}Rf_*K)\\to\\mathcal H^n(Rf'_*g'^{-1}K)$ are isomorphisms for every $(p,q)$ and every $n$. Consequently $\\Ex_{\\square,K}$ is an isomorphism. In the generic abelian-coefficient notation this is $\\operatorname{IsIso}((\\operatorname{Etale.derivedBaseChangeMapPlus}\\ \\Ab\\ \\mathsf{sq.toCommSq}).\\operatorname{app}K)$, where $\\mathsf{sq}:\\operatorname{IsPullback}(g\\prime,f\\prime,f,g)$ witnesses the same square and $K$ is viewed in $\\mathrm{DerivedCategory.Plus}(\\mathrm{Sheaf}(X_{\\Et},\\Ab))$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
   "place": "node sbc-lem-finite-range-comparison, order 1436"
@@ -77,23 +77,10 @@
     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
     "place": "Proof: hence the derived comparison is an isomorphism"
    }
-  },
-  {
-   "text": "Identify the arrow, rather than just its source and target. By [def-weil-pbc-derived-exchange], $\\Ex_{\\square,K}$ is the composite of the unit $\\eta_{f',g^{-1}Rf_*K}$, the square transport $Rf'_*\\theta^D_{\\square,Rf_*K}$, and the counit map $Rf'_*g'^{-1}\\varepsilon_{f,K}$. In exact master MorphismDefs.lean, Etale.baseChange_app expands the component into baseChangeUnitStep, baseChangeSquareStep and baseChangeCounitStep. Their component formulas are respectively these same unit, square transport, and counit, with $A=\\Ab$ and the commutative-square proof $\\mathsf{sq.toCommSq}$. The termwise exact abelian inverse images of [def-weil-pbc-derived-inverse-image] are the master's derived upper-star functors. Thus the composite equals the master component, on the same $K$, from $g^{-1}Rf_*K$ to $Rf'_*g'^{-1}K$. No $\\operatorname{ModuleCat}\\Lambda$ transformation is substituted. If one uses the alternate square notation of sbc-def-base-change-map, its letters must be renamed $(T,S,X,Y;g,f,e,h)=(X,Y,Y',X';f,g,g',f')$, so the old subscript would be $\\operatorname{BC}_{g,f}$; the statement instead names the master arrow explicitly.",
-   "uses": [
-    "def-weil-pbc-derived-exchange",
-    "def-weil-pbc-derived-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
-    "place": "Proof final clause, expanded by agent; exact master factors read in /home/ubuntu/weil-newtargets-master/WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/MorphismDefs.lean: baseChangeUnitStep_app (167), baseChangeSquareStep_hom_app (129), baseChangeCounitStep_app (184), baseChange and baseChange_app (200--209); archive copy wanted"
-   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-derived-inverse-image",
   "lem-sp-couple-morphism",
   "lem-sp-finite-filtration-induction",
   "lem-sp-page-induction",
@@ -233,5 +220,128 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-f42038cbb (reviewer sub-agent of L); spot-checked: Removed the unjustified “torsion cohomology” hypothesis from the item statement in fixes/dag/nodes/sec-smooth-base-change/sbc-lem-finite-range-comparison.json. The blueprint assumes only cohomology concentrated in [a,b], and torsion is unused by every proof step. All cited nodes, spectral-sequence arguments, edge cases, and the Ab-valued master base-change factors were checked.; 1 file(s) fixed by the reviewer"
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "NV stage 2",
+  "old_statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$. All coefficients are abelian groups: let $K\\in D^+(\\Ab(X_{\\Et}))$ [def-weil-pbc-derived-categories], and let $a\\le b$ be integers with $\\mathcal H^q(K)=0$ for $q\\notin[a,b]$. Write $\\Phi=g^{-1}Rf_*$, $\\Psi=Rf'_*g'^{-1}$ and $\\Ex_\\square:\\Phi\\to\\Psi$ for the derived exchange transformation [def-weil-pbc-derived-exchange]. Let $\\varphi$ be the spectral-sequence morphism induced by $\\Ex_\\square$ on the two truncation couples [def-weil-pbc-truncation-exact-couples], whose spectral sequences are (2) and (3) of [def-weil-pbc-hypercohomology-filtrations]. If $\\varphi_2^{p,q}:g^{-1}R^pf_*\\mathcal H^q(K)\\to R^pf'_*g'^{-1}\\mathcal H^q(K)$ is an isomorphism for every $(p,q)$, then $\\varphi_\\infty^{p,q}$ and the induced map $\\mathcal H^n(\\Ex_{\\square,K}):\\mathcal H^n(g^{-1}Rf_*K)\\to\\mathcal H^n(Rf'_*g'^{-1}K)$ are isomorphisms for every $(p,q)$ and every $n$. Consequently $\\Ex_{\\square,K}$ is an isomorphism. In the exact master notation this is $\\operatorname{IsIso}((\\operatorname{Etale.baseChange}\\ \\Ab\\ \\mathsf{sq.toCommSq}).\\operatorname{app}K)$, where $\\mathsf{sq}:\\operatorname{IsPullback}(g',f',f,g)$ witnesses the same square and $K$ is viewed in $\\mathrm{DerivedCategory.Plus}(\\mathrm{Sheaf}(X_{\\Et},\\Ab))$.",
+  "what": "The final Etale.baseChange Ab expression cannot be typed: MorphismDefs.baseChange requires MonoidalCategory, MonoidalPreadditive, SymmetricCategory, MonoidalClosed and HasFunctorialFlatResolution on its coefficient category. AddCommGrpCat has no such published tensor package. The server rejects the expression with failed synthesis of MonoidalCategory AddCommGrpCat. Use the already recorded canonical generic abelian-coefficient derivedBaseChangeMapPlus, retaining the same exchange, every hypothesis and every mathematical conclusion. The blueprint lemma asserts BC is an isomorphism without prescribing the ill-typed master spelling.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
+   "place": "node sbc-lem-finite-range-comparison, order 1436"
+  },
+  "citers": [
+   {
+    "id": "sbc-thm-bounded-allowable-torsion",
+    "holds": true,
+    "note": "Uses the abelian exchange isomorphism; changing the untypable master notation to the generic abelian exchange preserves this conclusion."
+   },
+   {
+    "id": "sbc-thm-bounded-derived-smooth-base-change",
+    "holds": true,
+    "note": "Uses finite-range comparison for the abelian-sheaf exchange underlying the coefficient argument; no mathematical hypothesis or conclusion changes."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Construct $t_D^{p,q}=\\mathcal H^{p+q}(\\Ex_{\\square,\\tau_{\\le q}K})$ and $t_E^{p,q}=\\mathcal H^{p+q}(\\Ex_{\\square,\\mathcal H^q(K)[-q]})$. By [lem-weil-pbc-truncation-couple-morphism], both truncation couples are exact and these maps commute with all three structure maps, including the boundary. They therefore satisfy the exact-couple-morphism hypotheses of [lem-sp-couple-morphism], which gives compatible maps on every spectral-sequence page, not merely unrelated maps between entries. Clause (3) of [lem-weil-pbc-truncation-couple-morphism] identifies the initial components with the stated degree-$p$ exchange maps of $\\mathcal H^q(K)$. Thus this constructed morphism is the $\\varphi$ in the hypothesis.",
+    "uses": [
+     "lem-weil-pbc-truncation-couple-morphism",
+     "lem-sp-couple-morphism"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
+     "place": "Proof: the comparison of the two hypercohomology spectral sequences, constructed explicitly"
+    }
+   },
+   {
+    "text": "The bound $\\mathcal H^q(K)=0$ outside $[a,b]$ implies the lower bound $q<a$ required by [lemma-weil-pbc-exact-couple-abutment]. Apply that lemma to the two couples and the map just constructed. Its clause (1) verifies $D^{p,q}=0$ for $q<a$ and $E_2^{p,q}=0$ unless $p\\ge0$ and $q\\ge a$, exactly the half-plane hypotheses required by [lem-sp-couple-morphism]. It supplies finite canonical abutment filtrations and existing limiting pages. Clause (2) supplies the isomorphisms $\\iota_n:D^{0,n}\\to\\mathcal H^n(\\Phi K)$ and $\\iota'_n:D'^{0,n}\\to\\mathcal H^n(\\Psi K)$ carrying these finite filtrations to the image filtrations on the desired abutments. Only finitely many $q\\in[a,b]$ can contribute in total degree $n$; if $n<a$, all those terms are zero.",
+    "uses": [
+     "lemma-weil-pbc-exact-couple-abutment"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
+     "place": "Proof: finite filtration on each abutment and the bounds"
+    }
+   },
+   {
+    "text": "Apply [lem-sp-page-induction] to the spectral-sequence morphism of Step 1, in the abelian category $\\Ab(Y'_{\\Et})$: the hypothesis supplies isomorphisms on every $E_2$ component, and Step 2 supplies the existing limiting pages. Hence every finite-page component and every $E_\\infty$ component is an isomorphism. Explicitly, the page induction starts with $\\varphi_2$; at a successor the componentwise inverse of $\\varphi_r$ commutes with the differential because $\\varphi_r d_r=d'_r\\varphi_r$, so it is an inverse map of page complexes. Homology and the compatible page-to-page isomorphisms give an inverse for $\\varphi_{r+1}$. The cycle and boundary subobjects defining the limiting pages are carried isomorphically by these maps. This direct page-comparison lemma has no directed-colimit hypotheses and needs no singleton-index construction.",
+    "uses": [
+     "lem-sp-page-induction"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
+     "place": "Proof: E2 isomorphisms imply Einfinity isomorphisms"
+    }
+   },
+   {
+    "text": "For fixed $n$, clause (3) of [lemma-weil-pbc-exact-couple-abutment] gives $\\iota'_n\\circ t_D^{0,n}=\\mathcal H^n(\\Ex_{\\square,K})\\circ\\iota_n$. Its clause (4) says that $u_n=\\mathcal H^n(\\Ex_{\\square,K})$ respects every step of the image filtrations and that its graded maps are precisely $\\varphi_\\infty^{p,n-p}$ under the canonical identifications. Thus $u_n$ is a morphism of the finite filtered abutments of Step 2, and all its graded maps are isomorphisms by Step 3. All hypotheses of [lem-sp-finite-filtration-induction] are now supplied, so $u_n$ is an isomorphism for each $n$ (no strictness hypothesis is needed).",
+    "uses": [
+     "lemma-weil-pbc-exact-couple-abutment",
+     "lem-sp-finite-filtration-induction"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/homology.tex",
+     "place": "Tag 0127 (lemma-characterize-strict), finite-filtration induction; blueprint final clause"
+    }
+   },
+   {
+    "text": "Every geometric-stalk functor carries the cohomology-sheaf isomorphisms $u_n$ and their inverses to inverse maps. Apply [lem-weil-pbc-derived-stalk-conservative] on $Y'$ to $\\Ex_{\\square,K}:\\Phi K\\to\\Psi K$, whose two objects are bounded below as in [def-weil-pbc-derived-exchange]. It gives that $\\Ex_{\\square,K}$ itself is an isomorphism.",
+    "uses": [
+     "lem-weil-pbc-derived-stalk-conservative",
+     "def-weil-pbc-derived-exchange"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
+     "place": "Proof: hence the derived comparison is an isomorphism"
+    }
+   },
+   {
+    "text": "Identify the arrow, rather than just its source and target. By [def-weil-pbc-derived-exchange], $\\Ex_{\\square,K}$ is the composite of the unit $\\eta_{f',g^{-1}Rf_*K}$, the square transport $Rf'_*\\theta^D_{\\square,Rf_*K}$, and the counit map $Rf'_*g'^{-1}\\varepsilon_{f,K}$. In exact master MorphismDefs.lean, Etale.baseChange_app expands the component into baseChangeUnitStep, baseChangeSquareStep and baseChangeCounitStep. Their component formulas are respectively these same unit, square transport, and counit, with $A=\\Ab$ and the commutative-square proof $\\mathsf{sq.toCommSq}$. The termwise exact abelian inverse images of [def-weil-pbc-derived-inverse-image] are the master's derived upper-star functors. Thus the composite equals the master component, on the same $K$, from $g^{-1}Rf_*K$ to $Rf'_*g'^{-1}K$. No $\\operatorname{ModuleCat}\\Lambda$ transformation is substituted. If one uses the alternate square notation of sbc-def-base-change-map, its letters must be renamed $(T,S,X,Y;g,f,e,h)=(X,Y,Y',X';f,g,g',f')$, so the old subscript would be $\\operatorname{BC}_{g,f}$; the statement instead names the master arrow explicitly.",
+    "uses": [
+     "def-weil-pbc-derived-exchange",
+     "def-weil-pbc-derived-inverse-image"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
+     "place": "Proof final clause, expanded by agent; exact master factors read in /home/ubuntu/weil-newtargets-master/WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/MorphismDefs.lean: baseChangeUnitStep_app (167), baseChangeSquareStep_hom_app (129), baseChangeCounitStep_app (184), baseChange and baseChange_app (200--209); archive copy wanted"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-derived-exchange",
+   "def-weil-pbc-derived-inverse-image",
+   "lem-sp-couple-morphism",
+   "lem-sp-finite-filtration-induction",
+   "lem-sp-page-induction",
+   "lem-weil-pbc-derived-stalk-conservative",
+   "lem-weil-pbc-truncation-couple-morphism",
+   "lemma-weil-pbc-exact-couple-abutment"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-44fbb80d4",
+  "group": "NV",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, report sections, and canonical maps checked; scompile.py passed both overlay and library checks.",
+  "statement_corrected": true
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRangeComparison",
+  "declaration": "AlgebraicGeometry.Etale.finite_range_exchange_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRangeComparison.lean",
+  "statement": "theorem finite_range_exchange_comparison {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) (K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (a b : ℤ) (_hab : a ≤ b) (_hK : ∀ q : ℤ, q < a ∨ b < q → IsZero ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K)) (_h₂ : ∀ p q : ℤ, IsIso (tE (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q)) : (∃ P Q : BigradedExactCouple (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) 0, P.D = D (truncationPhi f g) K ∧ Q.D = D (truncationPsi g' f') K ∧ ∃ hPE : P.E = E (truncationPhi f g) K, ∃ hQE : Q.E = E (truncationPsi g' f') K, HEq P.alpha (alpha (truncationPhi f g) K) ∧ HEq Q.alpha (alpha (truncationPsi g' f') K) ∧ HEq P.f (CategoryTheory.TruncationExchange.f (truncationPhi f g) K) ∧ HEq Q.f (CategoryTheory.TruncationExchange.f (truncationPsi g' f') K) ∧ HEq P.g (CategoryTheory.TruncationExchange.g (truncationPhi f g) K) ∧ HEq Q.g (CategoryTheory.TruncationExchange.g (truncationPsi g' f') K) ∧ ∃ L : LimitSubobjects P, ∃ M : LimitSubobjects Q, ∃ z : ∀ p q : ℤ, (L.Z p q : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) ⟶ (M.Z p q : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}), ∃ tInf : ∀ p q : ℤ, P.pageInfinity L p q ⟶ Q.pageInfinity M p q, (∀ p q : ℤ, z p q ≫ (M.Z p q).arrow = (L.Z p q).arrow ≫ eqToHom (congrFun (congrFun hPE p) q) ≫ tE (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q ≫ eqToHom (congrFun (congrFun hQE p) q).symm) ∧ (∀ p q : ℤ, cokernel.π (Subobject.ofLE _ _ (limitBoundary_le_cycle P L p q)) ≫ tInf p q = z p q ≫ cokernel.π (Subobject.ofLE _ _ (limitBoundary_le_cycle Q M p q))) ∧ (∀ p q : ℤ, IsIso (tInf p q))) ∧ (∀ n : ℤ, IsIso ((_root_.DerivedCategory.Plus.homologyFunctor _ n).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K))) ∧ IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
