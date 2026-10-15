@@ -165,5 +165,28 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-b9fcfd3c1 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, and sources. All four adjunction/coherence steps and edge cases check out; no new nodes, missing dependencies, or cycles. Accepted the declared adjunction tool use. Target morphisms and coefficient categories remain distinct and unchanged. Detailed checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6609cc133",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Wrote review.md. All clauses, dependencies, canonical comparisons, edge cases, docstrings, and verbatim signature checked. Immutable snapshot compiled cleanly via server-only scompile.py in 1.4 s. No corrections required; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence",
+  "declaration": "AlgebraicGeometry.Etale.openImmersionLowerShriekComp_coherence",
+  "declarations": [
+   "AlgebraicGeometry.Etale.openImmersionLowerShriekComp",
+   "AlgebraicGeometry.Etale.openImmersionLowerShriekComp_coherence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Etale/OpenImmersionLowerShriekCoherence.lean",
+  "statement": "theorem Etale.openImmersionLowerShriekComp_coherence (Λ : Type (u + 1)) [CommRing Λ] : (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)), (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) (𝟙 U) j).inv.app F ≫ eqToHom (by simp only [Category.id_comp, Functor.id_obj]) = ((j)_!open[ModuleCat.{u + 1} Λ]).map ((Adjunction.leftAdjointIdIso (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 U)) (upperStarId (ModuleCat.{u + 1} Λ) U)).hom.app F)) ∧ (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)), (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) j (𝟙 X)).inv.app F ≫ eqToHom (by simp only [Category.comp_id, Functor.id_obj]) = (Adjunction.leftAdjointIdIso (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 X)) (upperStarId (ModuleCat.{u + 1} Λ) X)).hom.app (((j)_!open[ModuleCat.{u + 1} Λ]).obj F)) ∧ (∀ {U V W X : Scheme.{u}} (j₁ : U ⟶ V) (j₂ : V ⟶ W) (j₃ : W ⟶ X) [IsOpenImmersion j₁] [IsOpenImmersion j₂] [IsOpenImmersion j₃] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)), ((j₃)_!open[ModuleCat.{u + 1} Λ]).map ((openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) j₁ j₂).inv.app F) ≫ (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) (j₁ ≫ j₂) j₃).inv.app F ≫ eqToHom (by simp only [Category.assoc]) = (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) j₂ j₃).inv.app (((j₁)_!open[ModuleCat.{u + 1} Λ]).obj F) ≫ (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) j₁ (j₂ ≫ j₃)).inv.app F)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Mixed record: the existing upstream openImmersionLowerShriekComp supplies the canonical natural isomorphism (use its inverse for the node orientation); the new theorem supplies both identity laws and associativity for that same comparison. Coefficients are specialized to ModuleCat over an arbitrary commutative ring, as in the dependency node."
  }
 }
