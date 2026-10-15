@@ -5,8 +5,6 @@ Authors: SHEAF group NF
 -/
 module
 
-public import Sheaf.Algebra.Homology.KFlat
-public import Mathlib.CategoryTheory.Limits.ExactFunctor
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
