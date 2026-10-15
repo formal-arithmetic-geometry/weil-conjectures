@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
 import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # The closed counit on abelian pro-etale sheaves

@@ -21,6 +21,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleShriekSpecializationZero
 import Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections
 import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
 import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-! Ringed pro-etale localization: a geometric step of the open-closed argument. -/
 

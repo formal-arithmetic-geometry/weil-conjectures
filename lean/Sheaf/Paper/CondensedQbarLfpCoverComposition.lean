@@ -3,6 +3,7 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 @[expose] public section
 universe u
 open CategoryTheory

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+import Sheaf.Paper.CondensedQcqsPushforwardContinuity
 
 /-! # Integral realization of a continuous E exchange arrow
 

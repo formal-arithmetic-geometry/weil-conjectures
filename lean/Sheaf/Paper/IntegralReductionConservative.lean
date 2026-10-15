@@ -6,6 +6,7 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Conservativity of integral reduction
 

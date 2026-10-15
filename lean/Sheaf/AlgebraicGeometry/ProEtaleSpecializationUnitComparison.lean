@@ -11,6 +11,8 @@ import Sheaf.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEvaluation
 import Sheaf.Paper.SiteSheafificationSectionsLocal
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 
 @[expose] public section
 

@@ -10,6 +10,7 @@ public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 
 /-!
 # A finite-coefficient comparison for compactly supported constant cohomology

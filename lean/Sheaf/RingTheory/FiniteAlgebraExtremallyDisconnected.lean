@@ -12,6 +12,9 @@ public import Mathlib.FieldTheory.IsSepClosed
 import Mathlib.RingTheory.Spectrum.Prime.Homeomorph
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Mathlib.AlgebraicGeometry.PullbackCarrier
+import Sheaf.AlgebraicGeometry.FiniteAffineSectionCover
+import Sheaf.AlgebraicGeometry.ZeroDimensionalSpectrumProfinite
+import Sheaf.RingTheory.WLocalStalkIsomorphismRetraction
 
 /-! # Finite algebras over extremally disconnected affine schemes -/
 

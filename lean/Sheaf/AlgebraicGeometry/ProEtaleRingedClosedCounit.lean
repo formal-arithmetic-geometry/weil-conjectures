@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
 import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
+import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-! Ringed pro-etale localization: a geometric step of the open-closed argument. -/
 

@@ -9,6 +9,16 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import Sheaf.Paper.CondensedPointBasisEvaluation
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.ProfinitePointPullback
 
 /-!
 # Local matrix refinement for one finite presentation

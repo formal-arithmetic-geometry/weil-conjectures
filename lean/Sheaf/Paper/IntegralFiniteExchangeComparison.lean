@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
 
 /-! # Comparison of integral reduction with finite etale exchange
 

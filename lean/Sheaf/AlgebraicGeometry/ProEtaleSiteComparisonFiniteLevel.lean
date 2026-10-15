@@ -16,6 +16,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
 import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-!
 # Exactness, the unit, and injective acyclicity of finite-coefficient comparison

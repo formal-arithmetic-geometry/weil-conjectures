@@ -10,6 +10,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Passing a finite-coefficient bound to the constant adic sheaf

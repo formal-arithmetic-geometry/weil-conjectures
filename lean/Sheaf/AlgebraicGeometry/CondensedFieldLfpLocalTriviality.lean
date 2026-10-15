@@ -19,6 +19,11 @@ import WeilConjectures.CategoryTheory.Sites.MonObj
 import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 import Mathlib.Analysis.Normed.Module.FiniteDimension
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.ProfinitePointPullback
 
 /-!
 # Local triviality over continuous p-adic field coefficients

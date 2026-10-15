@@ -6,6 +6,7 @@ public import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 
 @[expose] public section
 

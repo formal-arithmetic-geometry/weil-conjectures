@@ -12,6 +12,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructur
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
+import Sheaf.AlgebraicGeometry.ProperCaseConstructibility
 
 /-!
 # Adic finiteness for projection from relative projective space

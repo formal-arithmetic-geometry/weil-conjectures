@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import Sheaf.Paper.CondensedOpenClosedRecollement
 import WeilConjectures.Topology.StratificationDense
+import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+import WeilConjectures.ConstructibleSheaf.GenericConstancy
 
 /-! # One open/closed step for a constructible condensed sheaf -/
 
