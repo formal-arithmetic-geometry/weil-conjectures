@@ -1,0 +1,163 @@
+{
+ "id": "lem-weil-pbc-formal-coproduct-sheaf-cover-epi",
+ "kind": "statement",
+ "title": "Componentwise covers induce epimorphisms of realized formal families",
+ "statement": "Let $\\mathcal C$ be a small category, $J$ a precoverage whose generated Grothendieck topology is subcanonical [def-weil-pbc-sites-and-cohomology], and $T\\in\\mathcal C$. Let $f=(\\alpha,(f_i)):X\\to Y$ be a morphism of formal families in $\\mathcal C/T$ [def-weil-pbc-formal-coproduct]. Suppose that for each target index $j$, the arrows $X_i\\to Y_j$ for $\\alpha(i)=j$ form a $J$-covering family. Then the morphism $R_T(f)$ between the coproducts of representable sheaves in the slice over $h_T$ [lem-weil-pbc-formal-coproduct-sheaf-finite-limits] is an epimorphism. No pullback or precoverage stability hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01G3, definition-covering, and Tag 0DB1, the implication from a formal matching cover to an epimorphism after sheafification; use the equivalent cancellation argument by sheaf separatedness."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-coproduct",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-formal-coproduct-sheaf-finite-limits"
+ ],
+ "proof": [
+  {
+   "text": "Given two maps g,h from R_T(Y) to a sheaf over h_T whose composites with R_T(f) agree, use the target coproduct universal property to test g=h on each representable summand h_{Y_j}.",
+   "uses": [
+    "def-weil-pbc-formal-coproduct",
+    "lem-weil-pbc-formal-coproduct-sheaf-finite-limits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By sheaf Yoneda, those restricted maps correspond to two sections of the target sheaf over Y_j. The componentwise covering hypothesis and separatedness of that sheaf show that they agree if their restrictions along all X_i to Y_j agree. This includes empty covering families.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Each required restriction equality is obtained by precomposing the assumed equality with the corresponding source coproduct inclusion. Substitute alpha(i)=j and use the defining equation for the map of coproducts. Faithfulness of the forgetful functor from the slice gives equality in the slice. Thus cancellation holds, proving R_T(f) epi.",
+   "uses": [
+    "def-weil-pbc-formal-coproduct",
+    "lem-weil-pbc-formal-coproduct-sheaf-finite-limits"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formal-coproduct",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-formal-coproduct-sheaf-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01G3, definition-covering, and Tag 0DB1, the implication from a formal matching cover to an epimorphism after sheafification; use the equivalent cancellation argument by sheaf separatedness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Formal coproduct of a simplicial object, preservation of finite limits by coproducts of representables, hypercover disjoint union",
+   "results": "8 hits: CategoryTheory.PreZeroHypercover.sum, CategoryTheory.PreZeroHypercover.sum_X, CategoryTheory.Precoverage.ZeroHypercover.sum_toPreZeroHypercover, CategoryTheory.PreOneHypercover.sigmaOfIsColimit_toPreZeroHypercover, CategoryTheory.PreOneHypercover.sigmaOfIsColimit, CategoryTheory.PreZeroHypercover.sum_I₀, CategoryTheory.PreZeroHypercover.sumInr, CategoryTheory.PreZeroHypercover.sum_f",
+   "date": "2026-10-15",
+   "verdict": "No direct match for realization in the slice and its covering epimorphisms; use the listed Mathlib categorical building blocks."
+  },
+  {
+   "tool": "loogle",
+   "query": "FormalCoproduct",
+   "results": "0 hits: . loogle: unknown identifier 'FormalCoproduct'",
+   "date": "2026-10-15",
+   "verdict": "No direct match for realization in the slice and its covering epimorphisms; use the listed Mathlib categorical building blocks."
+  },
+  {
+   "tool": "grep",
+   "query": "FormalCoproduct.*preserv|preserv.*FormalCoproduct|disjoint_union.*hypercover",
+   "results": "1 hits: Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean",
+   "date": "2026-10-15",
+   "verdict": "No direct match for realization in the slice and its covering epimorphisms; use the listed Mathlib categorical building blocks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The formal coproduct Yoneda functor preserves limits and coproducts of representable sheaves in a slice preserve finite limits",
+   "results": "8 hits: CategoryTheory.extensiveTopology.isSheaf_yoneda_obj, instPreservesFiniteProductsOppositeYonedaPresheafOfPreservesFiniteCoproductsTopCat, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts, CategoryTheory.Limits.preservesFiniteLimits_of_isFiltered_costructuredArrow_yoneda, CategoryTheory.isSheafFor_extensive_of_preservesFiniteProducts, CategoryTheory.Presieve.isSheaf_iff_preservesFiniteProducts, CategoryTheory.instPreservesFiniteProductsOppositeVal",
+   "date": "2026-10-15",
+   "verdict": "No direct match for realization in the slice and its covering epimorphisms; use the listed Mathlib categorical building blocks."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "12 hits: CategoryTheory.Limits.PreservesFiniteLimits, CategoryTheory.Limits.instPreservesFiniteProductsOfPreservesFiniteLimits, CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits, CategoryTheory.Limits.PreservesLimitsOfSize.preservesFiniteLimits, CategoryTheory.Limits.PreservesLimitsOfSize0.preservesFiniteLimits, CategoryTheory.Limits.preservesFiniteLimits_of_preservesFiniteLimitsOfSize, CategoryTheory.Limits.preservesLimitsOfShapeOfPreservesFiniteLimits, CategoryTheory.Limits.PreservesFiniteLimits.preservesFiniteLimits",
+   "date": "2026-10-15",
+   "verdict": "No direct match for realization in the slice and its covering epimorphisms; use the listed Mathlib categorical building blocks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The formal coproduct Yoneda functor preserves finite limits and a covering family of representables induces an epimorphism of sheaves",
+   "results": "0 hits: . service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteHypercoverDisjointUnion",
+  "date": "2026-10-15",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Auxiliary realization lemma for the disjoint-union comparison, supporting the recorded affine-acyclic-hypercover route below Proof paragraph 1.",
+   "via": [
+    "lem-weil-pbc-site-hypercover-disjoint-union",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FormalCoproductSheafCoverEpi",
+  "file": "lean/Sheaf/CategoryTheory/FormalCoproductSheafCoverEpi.lean",
+  "declaration": "CategoryTheory.Limits.FormalCoproduct.sheafRealization_map_epi",
+  "declarations": [
+   "CategoryTheory.Limits.FormalCoproduct.sheafRealization_map_epi"
+  ],
+  "statement": "theorem sheafRealization_map_epi {C : Type u} [SmallCategory C] (J : Precoverage C) [J.toGrothendieck.Subcanonical] {T : C} {X Y : FormalCoproduct.{u} (Over T)} (f : X ⟶ Y) (hf : ∀ j : Y.I, Presieve.ofArrows (fun i : {i : X.I // f.f i = j} ↦ (X.obj i.val).left) (fun i ↦ (f.φ i.val ≫ eqToHom (congrArg Y.obj i.property)).left) ∈ J (Y.obj j).left) : Epi ((sheafRealization J.toGrothendieck T).map f)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261015T154209-L-163900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261015T154209-L-163900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

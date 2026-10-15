@@ -28,75 +28,51 @@
  ],
  "proof": [
   {
-   "text": "For every simplicial operator between the families, take on each component the given map into the corresponding component and then use the coproduct universal property to obtain the map between A_n and A_m. The componentwise identity and composition equations imply the identity and composition equations for these maps, and the same construction handles the augmentation to T. Thus the maps form an augmented simplicial object A_\\bullet\\to T.",
+   "text": "Construct A on each simplicial degree from the given coproduct cofan. For an operator use its component maps followed by the target coproduct inclusions, and descend by the given universal property. Test identity and composition on each summand. The degreewise identifications with the supplied coproducts are identity isomorphisms.",
    "uses": [
     "def-weil-pbc-formal-coproduct",
     "def-weil-pbc-simplicial-object"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 0DB1, remark-take-unions-hypercovering, construction preceding 'Now we claim that L is a hypercovering'"
-   }
+   "elementary": true
   },
   {
-   "text": "Work over $T$. The slice $\\mathcal C/T$ has terminal object $T\\to T$ and fibre products, so [lem-weil-pbc-semi-representable-finite-limits] and [lem-weil-pbc-simplicial-matching-object] give the formal matching family $B_n=M_n(K)$ for every $n$, with $B_0=\\{T\\}$. For a family $Q=\\{V_j\\to T\\}$ define the presheaf over $h_T$ by $F(Q)(U)=\\coprod_j\\operatorname{Hom}_{\\mathcal C}(U,V_j)$. This functor preserves finite limits in the slice: its terminal value is $h_T$, and the displayed fibre-product family of the finite-limits node gives, sectionwise, pairs $(j,u),(k,w)$ with equal target index and equal composites to that target object. This is precisely $F(Q)\\times_{F(R)}F(Q')$. Finite products are pullbacks over the terminal object and equalizers are pullbacks along diagonals, so this checks all finite limits. By [lem-weil-pbc-sheafification-sets-exact], sheafifying the finite matching diagram gives the canonical projection-compatible isomorphism $F(B_n)^\\#\\cong M_n(F(K)^\\#/h_T)$. Here $h_T^\\#=h_T$ by subcanonicity, so the same finite-limit comparison applies over $h_T$.",
+   "text": "Let R_T be the coproduct of representable sheaves in the slice over h_T. It preserves finite limits by the realization lemma. The assumed colimit property of each Yoneda-image cofan also holds in the slice because the slice forgetful functor reflects colimits. Uniqueness of coproducts gives a degreewise isomorphism K composed with R_T to A composed with sheaf Yoneda. Test naturality on each representable summand.",
+   "uses": [
+    "lem-weil-pbc-formal-coproduct-sheaf-finite-limits",
+    "def-weil-pbc-formal-coproduct"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Formal families over T have finite limits: Over T has a terminal object and pullbacks, and the formal-family construction preserves those existence properties. Choose a proper-face matching arrow kappa in degree n using the matching-object existence statements, with separate terminal and binary-product cases in degrees zero and one. Its componentwise covering property is the supplied hcover, so R_T(kappa) is epi by the covering-realization lemma.",
    "uses": [
     "lem-weil-pbc-semi-representable-finite-limits",
     "lem-weil-pbc-simplicial-matching-object",
-    "def-weil-pbc-formal-coproduct",
-    "lem-weil-pbc-sheafification-sets-exact"
+    "lem-weil-pbc-formal-coproduct-sheaf-cover-epi"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 01G2, lemma-coprod-prod-SR, slice assertion (2); Tag 0DB1, remark-take-unions-hypercovering, first and last displayed equalities"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $n\\geq0$ and a section of $F(B_n)^\\#$ over $U$. By [lem-weil-pbc-site-sheafification-sections-local], a covering of $U$ makes it the image of sections of $F(B_n)$, each a pair $(j,u:U_a\\to B_{n,j})$. Write the formal matching map as $(\\alpha,(f_i)):K_n\\to B_n$. Its covering hypothesis says that $\\{f_i:A_{n,i}\\to B_{n,j}\\}_{\\alpha(i)=j}$ covers $B_{n,j}$. Pulling this covering back along $u$ gives a covering $U_a\\times_{B_{n,j}}A_{n,i}\\to U_a$; the projections to $A_{n,i}$ are sections of $F(K_n)$ lifting $(j,u)$. The composition axiom for site coverings makes these successive covers a covering of $U$, and their lifts give lifts to $F(K_n)^\\#$. Thus $F(K_n)^\\#\\to F(B_n)^\\#$ is locally surjective and is an epimorphism by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]. This works also for $n=0$, where $B_0=\\{T\\}$.",
+   "text": "Transport the matching cone through R_T and the simplicial natural isomorphism. In degree zero compare terminal objects; in degree one compare binary-product cones; in higher degrees postcompose the finite boundary cone with the natural isomorphism of diagrams. Limit uniqueness gives a target isomorphism, and testing on every face projection expresses the requested matching map as R_T(kappa) conjugated by source and target isomorphisms. It is epi in the sheaf slice and hence its underlying sheaf map is epi.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-formal-coproduct"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 0DB1, remark-take-unions-hypercovering, checking conditions (1), (2), (3); Tag 01G3, definition-covering-SR"
-   }
-  },
-  {
-   "text": "By the sheafification universal property [def-weil-pbc-sheafification], $F(K_n)^\\#$ is the coproduct of the representable sheaves $h_{A_{n,i}}$: maps from either object to a sheaf $H$ are exactly families of maps $h_{A_{n,i}}\\to H$. Hence the assumed canonical isomorphisms give $\\eta_n:F(K_n)^\\#\\xrightarrow{\\sim}h_{A_n}$. They commute with each simplicial operator and the augmentation, since on the $i$th representable summand both composites are postcomposition by the component map followed by its coproduct inclusion, and those summands determine a map from the sheaf coproduct. For each $n$, compose the matching projections with the corresponding $\\eta_m$ to obtain a cone; the matching universal property [lem-weil-pbc-simplicial-matching-object] gives $\\eta_{M_n}:M_n(F(K)^\\#/h_T)\\to M_n(h_{A_\\bullet}/h_T)$. Repeating with $\\eta_m^{-1}$ gives an inverse, because both composites have the identity on every limit projection. The square of matching arrows commutes: its composites with every face projection agree by the simplicial compatibility just checked. Combining Step 2 and Step 3, the bottom matching arrow is $\\eta_{M_n}\\circ\\mu_n\\circ\\eta_n^{-1}$, where $\\mu_n$ is an epimorphism. Cancellation in the definition of epimorphism therefore makes the bottom arrow an epimorphism. For $n=0$ the target is $h_T$ and the target identification is the identity; for $n=1$ the finite limit over $h_T$ is $h_{A_0}\\times_{h_T}h_{A_0}$.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-formal-coproduct",
-    "def-weil-pbc-simplicial-object",
+    "lem-weil-pbc-formal-coproduct-sheaf-finite-limits",
     "lem-weil-pbc-simplicial-matching-object"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 0DB1, remark-take-unions-hypercovering, middle displayed equality and final implication, in the slice over T"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-formal-coproduct",
-  "def-weil-pbc-sheafification",
   "def-weil-pbc-simplicial-object",
-  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-formal-coproduct-sheaf-cover-epi",
+  "lem-weil-pbc-formal-coproduct-sheaf-finite-limits",
   "lem-weil-pbc-semi-representable-finite-limits",
-  "lem-weil-pbc-sheafification-sets-exact",
-  "lem-weil-pbc-simplicial-matching-object",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-simplicial-matching-object"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/hypercovering.tex",
-  "place": "Tags 0DB1 and 0DB2, remarks on taking unions of hypercoverings"
+  "place": "Tags 01G2, 01G3, 0DB1 and 0DB2; F2 Lean realization uses separatedness for covering epimorphisms and finite-limit transport of proper-face matching cones."
  },
  "mathlib_searches": [
   {
@@ -202,5 +178,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The helper characterizes the canonical matching arrow using the existing matchingBoundaryIndex diagram, including terminal and binary-product boundary cases. The coproduct hypothesis is expressed by its canonical Yoneda-image cocone universal property, and the simplicial coproduct construction is specified on every summand of every operator."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261015T154209-L-163900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
