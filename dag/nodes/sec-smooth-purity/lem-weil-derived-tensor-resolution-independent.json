@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-weil-derived-tensor-resolution-independent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Resolution independence of the derived tensor product",
- "statement": "Fix a scheme $Y$, a commutative ring $A$, and complexes $K_1,K_2$ of\n$A_Y$-modules on the small pro-etale site\n[def-weil-pbc-proetale-site] $Y_{\\mathrm{proet}}$. Let $P\\to K_1$\nand $P'\\to K_1$ be quasi-isomorphisms of complexes of $A_Y$-modules whose\nsources are K-flat [def-weil-derived-tensor]. Then the induced map\n\n$$\n P\\otimes_AK_2\\longrightarrow P'\\otimes_AK_2\n$$\n\nis a quasi-isomorphism. Consequently the object $K_1\\otimes_A^LK_2$ of\n[def-weil-derived-tensor] is independent of the chosen K-flat resolution, up\nto canonical isomorphism in $D(Y_{\\mathrm{proet}},A)$.",
+ "statement": "Fix a scheme $Y$, a commutative ring $A$, and complexes $K_1,K_2$ of $A_Y$-modules on the small pro-etale site [def-weil-pbc-proetale-site] $Y_{\\mathrm{proet}}$. Let $q:P\\to K_1$ and $q':P'\\to K_1$ be quasi-isomorphisms with K-flat sources [def-weil-derived-tensor]. If a morphism of complexes $\\alpha:P\\to P'$ is supplied with $q'\\alpha$ homotopic to $q$, then\n$$\\alpha\\otimes1_{K_2}:P\\otimes_AK_2\\longrightarrow P'\\otimes_AK_2$$\nis a quasi-isomorphism. No such direct comparison morphism is asserted to exist. Without choosing a direct comparison, there is a canonical isomorphism\n$$Q(P\\otimes_AK_2)\\xrightarrow{\\sim}Q(P'\\otimes_AK_2)$$\nin $D(Y_{\\mathrm{proet}},A)$, where $Q$ is the localization [def-weil-abstract-derived-category]. It depends on the specified resolution maps $q,q'$, agrees with $Q(\\alpha\\otimes1_{K_2})$ whenever such an $\\alpha$ is supplied, is the identity for identical resolutions, and satisfies the cocycle identity for three resolutions. Thus the object $K_1\\otimes_A^LK_2$ of [def-weil-derived-tensor] is independent of the chosen K-flat resolution up to this canonical isomorphism.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-sf-mate/lem-weil-derived-tensor-resolution-independent.md",
   "place": "node lem-weil-derived-tensor-resolution-independent, order 1870",
@@ -36,30 +36,200 @@
  },
  "stmt_deps": [
   "def-weil-pbc-proetale-site",
-  "def-weil-derived-tensor"
+  "def-weil-derived-tensor",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
-   "text": "Over a ring, a quasi-isomorphism $\\alpha:P\\to Q$ between K-flat complexes\ninduces a quasi-isomorphism\n$\\operatorname{id}_L\\otimes\\alpha:\\operatorname{Tot}(L\\otimes P)\\to\n\\operatorname{Tot}(L\\otimes Q)$ for every complex $L$: this is Lemma 15.60.12\nof the Stacks Project, Tag\n[064L](https://stacks.math.columbia.edu/tag/064L), whose proof uses only the\nK-flatness [def-weil-derived-tensor] of the two complexes, the existence of\nK-flat resolutions (Tag\n[06Y4](https://stacks.math.columbia.edu/tag/06Y4)) and the behaviour of\nK-flatness under tensoring (Tag\n[06Y0](https://stacks.math.columbia.edu/tag/06Y0)). For complexes of\n$A_Y$-modules on the small pro-etale site\n[def-weil-pbc-proetale-site] the same argument applies: tensor\nproducts, total complexes and truncations are formed termwise in the abelian\ncategory of sheaves of $A_Y$-modules, in which filtered colimits are exact,\nand K-flat resolutions exist by the functorial flat-resolution construction.\nSince $P$ and $P'$ are both K-flat resolutions of $K_1$, the identity of\n$K_1$ lifts to a morphism $P\\to P'$ in the homotopy category of complexes\n(Tag [0G6M](https://stacks.math.columbia.edu/tag/0G6M)), and the resulting\nmap $P\\otimes_AK_2\\to P'\\otimes_AK_2$ is a quasi-isomorphism by the first\npart. This is the assertion recorded for modules in Definition 15.60.13 of\nthe Stacks Project, Tag\n[064M](https://stacks.math.columbia.edu/tag/064M) (the category of K-flat\nresolutions of $K_1$ is cofiltered and Lemma 15.60.12 shows that the functor\nobtained is independent of the choice).",
+   "text": "Work in the abelian category of $A_Y$-module sheaves on the small site [def-weil-pbc-proetale-site]. We first prove a more general assertion: any quasi-isomorphism $a:U\\to V$ between K-flat complexes remains a quasi-isomorphism after tensoring with any complex $F$. By [lem-pur-quasi-iso-cone-acyclic], its cone $C=\\operatorname{Cone}(a)$ is acyclic. By the cone clause of [lem-pc-kflat-cone-direct-sum], $C$ is also K-flat. Both cited statements apply to this ringed site, without any boundedness or flatness of terms.",
    "uses": [
-    "def-weil-derived-tensor",
-    "def-weil-pbc-proetale-site"
+    "def-weil-pbc-proetale-site",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-kflat-cone-direct-sum"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT (sites-cohomology-lemma-derived-tor-quasi-isomorphism-other-side), cone reformulation using Tag 07A3 (sites-cohomology-lemma-K-flat-two-out-of-three)"
+   }
+  },
+  {
+   "text": "By [lem-pur-acyclic-kflat-tensor-arbitrary], $\\operatorname{Tot}(F\\otimes C)$ is acyclic for arbitrary $F$. By [lem-pc-tensor-mapping-cone-iso] it is the cone, up to a complex isomorphism, of $1_F\\otimes a$. The converse cone criterion [lem-pur-quasi-iso-cone-acyclic] makes this map a quasi-isomorphism. To obtain the order $a\\otimes1_F$, use the explicit signed swap for the total tensor [def-pc-tensor-complex-sheaves]: on the $(p,q)$ summand send $x\\otimes y$ to $(-1)^{pq}y\\otimes x$. Its square is the identity. Comparing the two differential terms gives respectively the signs $(-1)^{pq+q}$ and $(-1)^{pq}$ on both sides, so this is a chain isomorphism. Naturality of the module swap conjugates $1_F\\otimes a$ to $a\\otimes1_F$. Hence both orders preserve quasi-isomorphisms between K-flat sources.",
+   "uses": [
+    "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT (sites-cohomology-lemma-derived-tor-quasi-isomorphism-other-side); tensor signs from Section 06YL (sites-cohomology-section-flat)"
+   }
+  },
+  {
+   "text": "Fix $F=K_2$ and write $\\mathsf Q:K(\\operatorname{Mod}(A_Y))\\to D(Y_{\\mathrm{proet}},A)$ for the homotopy-category localization [def-weil-abstract-derived-category]. Tensoring defines a functor from the homotopy category to the derived category: if $h$ is a homotopy in the first factor, the degree $-1$ map $H(x\\otimes y)=h(x)\\otimes y$ satisfies $dH+Hd=(dh+hd)\\otimes1$, because the two terms involving $d_F$ have opposite signs in [def-pc-tensor-complex-sheaves]. For a derived morphism between K-flat complexes $U,V$, use the right calculus [lem-pc-quasi-isomorphisms-multiplicative-system] and [lem-pc-right-fraction-representation] to write it as the roof $U\\xleftarrow{s}M\\xrightarrow{b}V$. Resolve $M$ by $r:R\\to M$ using the general ringed-site theorem [lem-pc-kflat-resolution]. Put $J(f)=\\mathsf Q(f\\otimes1_F)$ and assign the roof the morphism $J(br)J(sr)^{-1}$. The composite $sr$ is a quasi-isomorphism between K-flat complexes, so Step 2 supplies its inverse. For two choices, first replace both roofs by their resolved roofs $U\\xleftarrow{d_i}R_i\\xrightarrow{e_i}V$, where $R_i$ is K-flat, $d_i=s_i r_i$ and $e_i=b_i r_i$. These still represent the original derived arrow since $\\mathsf Q(r_i)$ is invertible. Apply [lem-pc-right-fraction-common-refinement] to these resolved roofs: there are $a_i:T\\to R_i$ with $d_1a_1=d_2a_2$ a quasi-isomorphism and $e_1a_1=e_2a_2$ in the homotopy category. Resolve $T$ by $z:S\\to T$ with $S$ K-flat and put $c_i=a_i z$. Each $c_i$ is a quasi-isomorphism: $H^n(d_i)H^n(c_i)=H^n(d_i c_i)$ and both $H^n(d_i)$ and $H^n(d_i c_i)$ are isomorphisms. Step 2 makes $J(c_i)$ invertible. Functoriality and cancellation give $J(e_i)J(d_i)^{-1}=J(e_i c_i)J(d_i c_i)^{-1}$; the right-hand expressions for $i=1,2$ are equal by the common-refinement equations. This proves equality of the assigned arrows, including independence of every intervening K-flat resolution.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation",
+    "lem-pc-kflat-resolution",
+    "lem-pc-right-fraction-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (sites-cohomology-definition-derived-tor), preceding independence paragraph; expanded using derived-lemma-acyclic (05RT), categories-lemma-morphisms-right-localization (04VI), categories-lemma-equality-morphisms-right-localization (04VJ), and the right-fraction equivalence relation preceding categories-lemma-right-localization"
+   }
+  },
+  {
+   "text": "The roof assignment of Step 3 respects identities, using the roof with both legs the identity on a K-flat complex. For composition, take K-flat-middle roofs $U\\xleftarrow{s}R\\xrightarrow{a}V$ and $V\\xleftarrow{t}R'\\xrightarrow{b}W$. The right-calculus axiom [lem-pc-quasi-isomorphisms-multiplicative-system] gives $v:T\\to R$ a quasi-isomorphism and $w:T\\to R'$ with $av=tw$. Resolve $T$ by $z:S\\to T$ with $S$ K-flat using [lem-pc-kflat-resolution]. Write $v_0=vz,w_0=wz$. The composite roof has legs $sv_0,bw_0$. Step 2 inverts $J(s),J(t),J(v_0)$, and $J(a)J(v_0)=J(t)J(w_0)$, since tensor respects composition [def-pc-tensor-complex-sheaves]. Therefore\n$$J(bw_0)J(sv_0)^{-1}=J(b)J(w_0)J(v_0)^{-1}J(s)^{-1}=J(b)J(t)^{-1}J(a)J(s)^{-1}.$$\nThis is exactly the composite of the two assigned arrows; no invertibility of $w_0$ is needed. Thus Step 3 defines a functor on the full subcategory of the derived category represented by K-flat complexes. Its value on a chain map between such complexes is $J(f)$, by using an identity denominator.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-kflat-resolution",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (sites-cohomology-definition-derived-tor), preceding independence paragraph; composition rule preceding categories-lemma-right-localization in categories.tex"
+   }
+  },
+  {
+   "text": "In the derived category [def-weil-abstract-derived-category], the given resolution maps specify the isomorphism $u_{q,q'}=\\mathsf Q(q')^{-1}\\mathsf Q(q):\\mathsf Q(P)\\to\\mathsf Q(P')$. Apply the functor of Steps 3-4 to obtain $c_{q,q'}:Q(P\\otimes F)\\to Q(P'\\otimes F)$. It is an isomorphism because the functor sends the inverse of $u_{q,q'}$ to an inverse. Cancelling the resolution isomorphisms gives $u_{q,q}=1$ and $u_{q',q''}u_{q,q'}=u_{q,q''}$; functoriality proves the identity and cocycle laws for $c$. If $q'\\alpha$ is homotopic to $q$, then $H^n(q')H^n(\\alpha)=H^n(q)$ for every $n$, so $\\alpha$ is a quasi-isomorphism by cancellation. Step 2 proves the required chain-level assertion. Moreover $\\mathsf Q(\\alpha)=u_{q,q'}$, and Step 4 identifies its image with $Q(\\alpha\\otimes1_F)$, proving agreement with the canonical comparison. The two total tensor objects are precisely the prescribed models in [def-weil-derived-tensor], so these comparisons prove independence of the chosen resolution.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (sites-cohomology-definition-derived-tor) and preceding independence paragraph; explicit canonical comparison and cocycle"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-tensor",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-pc-tensor-mapping-cone-iso",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-kflat-resolution",
+  "lem-pc-right-fraction-common-refinement",
+  "def-weil-derived-tensor"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-sf-mate/lem-weil-derived-tensor-resolution-independent.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YT (sites-cohomology-lemma-derived-tor-quasi-isomorphism-other-side) and 06YU (sites-cohomology-definition-derived-tor); agent expansion of cone and localization-roof arguments. Second reader checked local TeX at /home/ubuntu/weil-launcher-nt/literature/stacks-project/sites-cohomology.tex and categories.tex."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "whiskerRight_of_kFlat|quasiIso.*tensor|KFlat",
+   "results": "none",
+   "date": "2026-10-15",
+   "verdict": "superseded: supplied directory included an extra Mathlib prefix; the corrected directory searches below are the evidence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "resolution independence of derived tensor product K-flat complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "MorphismProperty.whiskerRight_of_kFlat, HomotopyCategory.quasiIso",
+   "results": "loogle: unknown identifier 'MorphismProperty.whiskerRight_of_kFlat'",
+   "date": "2026-10-15",
+   "verdict": "no match: no K-flat tensor resolution-independence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-isomorphism between K-flat complexes remains a quasi-isomorphism after tensoring with any complex",
+   "results": "quasiIsoAt_of_comp_right; quasiIsoAt_iff_comp_right; quasiIsoAt_of_comp_left; DerivedCategory.isIso_Q_map_iff_quasiIso; quasiIsoAt_iff_comp_left; quasiIso_of_comp_right; HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso; quasiIso_of_comp_left",
+   "date": "2026-10-15",
+   "verdict": "no match: no K-flat tensor resolution-independence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_rightFraction|RightFraction.map_eq_iff|kFlat|KFlat",
+   "results": "none",
+   "date": "2026-10-15",
+   "verdict": "superseded: supplied directory included an extra Mathlib prefix; the corrected directory searches below are the evidence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical isomorphism between derived tensor products computed from two K-flat resolutions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.exists_rightFraction, RightFraction.map_eq_iff, DerivedCategory.Q",
+   "results": "loogle: unknown identifier 'RightFraction.map_eq_iff'",
+   "date": "2026-10-15",
+   "verdict": "no match: no K-flat tensor resolution-independence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical independence of the derived tensor product from K-flat resolutions in a localized homotopy category",
+   "results": "CategoryTheory.Tor_obj; CategoryTheory.Tor'; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso; CategoryTheory.Functor.leftDerivedToHomotopyCategory; CategoryTheory.Tor'_map_app; CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj",
+   "date": "2026-10-15",
+   "verdict": "no match: no K-flat tensor resolution-independence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat|KFlat|derivedTensor|tensorDerived",
+   "results": "none",
+   "date": "2026-10-15",
+   "verdict": "no match: no K-flat tensor resolution-independence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_rightFraction|RightFraction.map_eq_iff",
+   "results": "Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean; Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean; Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean; Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean; Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean; Mathlib/CategoryTheory/Localization/CalculusOfFractions/ComposableArrows.lean",
+   "date": "2026-10-15",
+   "verdict": "ingredient only: right-fraction machinery does not state K-flat tensor independence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso\", \"tensor\"",
+   "results": "none",
+   "date": "2026-10-15",
+   "verdict": "no match: no K-flat tensor resolution-independence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "K.?flat|homotopically.?flat|whiskerRight_of_kFlat",
+   "results": "no hits",
+   "date": "2026-10-15",
+   "verdict": "Independent second reading: no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensoring a quasi-isomorphism between homotopically flat cochain complexes with an arbitrary unbounded complex is a quasi-isomorphism",
+   "results": "CochainComplex.cm5b.instQuasiIsoIntP; DerivedCategory.instIsIsoMapCochainComplexIntQ; DerivedCategory.isIso_Qh_map_iff; DerivedCategory.isIso_Q_map_iff_quasiIso; HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso; CochainComplex.mappingCone.quasiIso_descShortComplex; HomotopyCategory.quotient_map_mem_quasiIso_iff; HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+   "date": "2026-10-15",
+   "verdict": "Independent second reading: localization and quasi-isomorphism ingredients only, no K-flat tensor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"quasiIso\"",
+   "results": "no hits",
+   "date": "2026-10-15",
+   "verdict": "Independent second reading: no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -84,5 +254,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-lem-sf-mate"
+ "unit": "sk-lem-sf-mate",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-derived-tensor-resolution-independent",
+  "worker": "stage1",
+  "summary": "Corrected the undefined induced comparison: arbitrary K-flat resolutions need not admit a direct map in the indicated direction. Proved preservation via the acyclic K-flat cone and canonical independence via explicitly refined roofs, identity/composition and cancellation. All dependencies are existing generic ringed-site or localization nodes; no new nodes or etale/proetale identification.",
+  "blueprint": "Realizes the sole imported proof paragraph: K-flat tensor quasi-isomorphism preservation (Steps 1-2) and resolution independence (Steps 3-5). Replaces its false direct lift of the identity through an arbitrary K-flat resolution, which Tag 0G6M does not state.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q31-cb905d585",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-cb905d585 (reviewer sub-agent of L); spot-checked: Reviewed the corrected item, all five proof steps, cited DAG statements, blueprint/unit route, literature sources, citers, searches, and edge cases. The conditional comparison plus canonical roof-based independence is mathematically valid for the stated pro-etale constant-sheaf coefficient category. No new nodes or repairs are required. Review written to review.md."
+ }
 }
