@@ -7,12 +7,9 @@ module
 
 public import Sheaf.RingTheory.IndPrincipalZariski
 public import WeilConjectures.RingTheory.ProEtale.WLocal
-public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.ClosedComponentSpectrumRestriction
 import Sheaf.RingTheory.IndPrincipalZariskiOfLocalRingIso
-import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
-import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
+import WeilConjectures.RingTheory.ProEtale.WContractible
 
 /-! # Profinite change of components of a w-local affine ring
 
@@ -91,7 +88,109 @@ theorem exists_profinite_component_ring_pullback (C : Type u) [CommRing C] [IsWL
         closedPoints (PrimeSpectrum D) =
           PrimeSpectrum.comap (algebraMap C D) ⁻¹' closedPoints (PrimeSpectrum C) ∧
         IsHomeomorph (fun q : closedPoints (PrimeSpectrum D) ↦ (e q.val).val.2) ∧
-        (Function.Surjective u → Function.Surjective (PrimeSpectrum.comap (algebraMap C D))) :=
-  sorry
+        (Function.Surjective u → Function.Surjective (PrimeSpectrum.comap (algebraMap C D))) := by
+  classical
+  have hcompact : CompactSpace (ConnectedComponents (PrimeSpectrum C)) := inferInstance
+  have ht2 : T2Space (ConnectedComponents (PrimeSpectrum C)) := inferInstance
+  have htd : TotallyDisconnectedSpace (ConnectedComponents (PrimeSpectrum C)) := inferInstance
+  have hclosed := WLocalSpace.isHomeomorph_connectedComponents_closedPoints
+    (PrimeSpectrum C)
+  refine ⟨hcompact, ht2, htd, ?_, ?_⟩
+  · simpa [Function.comp_def] using hclosed
+  · intro T _ _ _ _ u
+    let D := WContractification.PullbackProfinite C T u
+    let pb := WContractification.PullbackProfinite.isPullback C T u
+    let e0 := WContractification.PullbackProfinite.fiberHomeo C T u
+    have hswap :
+        (Homeomorph.prodComm T (PrimeSpectrum C) ''
+            {q : T × PrimeSpectrum C | u q.1 = ConnectedComponents.mk q.2}) =
+          {z : PrimeSpectrum C × T | ConnectedComponents.mk z.1 = u z.2} := by
+      ext z
+      constructor
+      · rintro ⟨q, hq, rfl⟩
+        exact hq.symm
+      · intro hz
+        exact ⟨(z.2, z.1), hz.symm, rfl⟩
+    let eswap :
+        {q : T × PrimeSpectrum C // u q.1 = ConnectedComponents.mk q.2} ≃ₜ
+          {z : PrimeSpectrum C × T // ConnectedComponents.mk z.1 = u z.2} :=
+      ((Homeomorph.prodComm T (PrimeSpectrum C)).image
+        {q : T × PrimeSpectrum C | u q.1 = ConnectedComponents.mk q.2}).trans
+        (Homeomorph.setCongr hswap)
+    let e : PrimeSpectrum D ≃ₜ
+        {z : PrimeSpectrum C × T // ConnectedComponents.mk z.1 = u z.2} := e0.trans eswap
+    let hlift := ConnectedComponents.isHomeomorph_lift_of_isPullback pb
+    let eπ : ConnectedComponents (PrimeSpectrum D) ≃ₜ T :=
+      IsHomeomorph.homeomorph _ hlift
+    let _ : IsWLocalRing D := by
+      have hwl : WLocalSpace (PrimeSpectrum D) :=
+        ConnectedComponents.wlocalSpace_of_isPullback pb
+      exact ⟨hwl⟩
+    have hlocal' : ∀ (q : Ideal D) [q.IsPrime], Function.Bijective
+        (Localization.localRingHom (q.comap (algebraMap C D)) q
+          (algebraMap C D) rfl) := by
+      intro q
+      exact (Algebra.IndZariski.bijectiveOnStalks C D).bijective_localRingHom q
+    have hprincipal : IsIndPrincipalZariski C D :=
+      Algebra.isIndPrincipalZariski_of_bijective_localRingHom C D hlocal'
+    have hlocal : ∀ q : PrimeSpectrum D, Function.Bijective
+        (Localization.localRingHom (q.asIdeal.comap (algebraMap C D)) q.asIdeal
+          (algebraMap C D) rfl) := by
+      intro q
+      exact hlocal' q.asIdeal
+    have hind : IndEtale C D := Algebra.IndEtale.of_indZariski C D
+    have hclosedpts :=
+      ConnectedComponents.preimage_closedPoints_eq_closedPoints_of_isPullback pb
+    have hsurj : Function.Surjective u →
+        Function.Surjective (PrimeSpectrum.comap (algebraMap C D)) := by
+      intro hu
+      simpa [D, WContractification.PullbackProfinite.projSpec] using
+        WContractification.PullbackProfinite.projSpec_surjective C T u hu
+    refine ⟨D, inferInstance, inferInstance, e, eπ, ?_, ?_, ?_, hprincipal, hind,
+      hlocal, inferInstance, ?_, ?_, hsurj⟩
+    · intro q
+      change (eswap (e0 q)).val.1 = _
+      change (e0 q).val.2 = _
+      exact WContractification.PullbackProfinite.snd_fiberHomeo C T u q
+    · intro q
+      change (IsHomeomorph.homeomorph _ hlift) (ConnectedComponents.mk q) = _
+      rw [IsHomeomorph.homeomorph_apply]
+      exact Continuous.connectedComponentsLift_apply_coe _ q
+    · intro p
+      change u (eπ p) =
+        (PrimeSpectrum.continuous_comap (algebraMap C D)).connectedComponentsMap p
+      obtain ⟨q, rfl⟩ := p.exists_rep
+      change u (eπ (ConnectedComponents.mk q)) = _
+      rw [show eπ (ConnectedComponents.mk q) =
+        WContractification.PullbackProfinite.projT C T u q by
+          change (IsHomeomorph.homeomorph _ hlift) (ConnectedComponents.mk q) = _
+          rw [IsHomeomorph.homeomorph_apply]
+          exact Continuous.connectedComponentsLift_apply_coe _ q]
+      change u (WContractification.PullbackProfinite.projT C T u q) =
+        (PrimeSpectrum.continuous_comap (algebraMap C D)).connectedComponentsMap
+          (ConnectedComponents.mk q)
+      rw [Continuous.connectedComponentsMap_mk]
+      rw [← WContractification.PullbackProfinite.fst_fiberHomeo C T u q]
+      change u (e0 q).val.1 =
+        ConnectedComponents.mk (WContractification.PullbackProfinite.projSpec C T u q)
+      rw [← WContractification.PullbackProfinite.snd_fiberHomeo C T u q]
+      exact (e0 q).property
+    · simpa [D, WContractification.PullbackProfinite.projSpec] using hclosedpts.symm
+    · have hcp := WLocalSpace.isHomeomorph_connectedComponents_closedPoints
+        (PrimeSpectrum D)
+      have hcomp := eπ.isHomeomorph.comp hcp
+      have heq : (fun q : closedPoints (PrimeSpectrum D) ↦ (e q.val).val.2) =
+          (fun q : closedPoints (PrimeSpectrum D) ↦ eπ (ConnectedComponents.mk q.val)) := by
+        funext q
+        change (eswap (e0 q.val)).val.2 = eπ (ConnectedComponents.mk q.val)
+        change (e0 q.val).val.1 = eπ (ConnectedComponents.mk q.val)
+        rw [show eπ (ConnectedComponents.mk q.val) =
+          WContractification.PullbackProfinite.projT C T u q.val by
+            change (IsHomeomorph.homeomorph _ hlift) (ConnectedComponents.mk q.val) = _
+            rw [IsHomeomorph.homeomorph_apply]
+            exact Continuous.connectedComponentsLift_apply_coe _ q.val]
+        exact (WContractification.PullbackProfinite.fst_fiberHomeo C T u q.val).symm
+      rw [heq]
+      exact hcomp
 
 end Algebra
