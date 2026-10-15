@@ -21,7 +21,8 @@
   "def-weil-algebraic-closure",
   "def-weil-finite-subextension-directed-set",
   "def-weil-pbc-condensed-e-module-category",
-  "def-weil-pbc-cartesian-square"
+  "def-weil-pbc-cartesian-square",
+  "prop-weil-pbc-qbar-condensed-two-colimit"
  ],
  "proof": [
   {
@@ -228,5 +229,30 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-e1c97a6e7 (reviewer sub-agent of L); spot-checked: Full mathematical review completed. The item preserves all hypotheses, coefficient categories, specified base-change morphism, and non-invertibility clauses. All seven proof steps, cited nodes, unit route, Stacks Tag 09A3 adaptation, Mathlib leaf, edge cases, and duplicate checks were verified. Review written to review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedQbarBaseChangeCompatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.constructibleToQbar_baseChange_compatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.constructibleToQbarPullIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.constructibleToQbarPushHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.constructibleToQbarSourceHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.constructibleToQbarTargetHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.constructibleToQbar_baseChange_compatibility"
+  ],
+  "file": "lean/Sheaf/Paper/CondensedQbarBaseChangeCompatibility.lean",
+  "statement": "theorem constructibleToQbar_baseChange_compatibility [IsProper f] (sq : ChosenCartesianSquare g' f' f g) : (∀ K : PadicSubfieldConstructible X ℓ E, IsIso (constructibleToQbarPushHom ℓ k E f K)) ∧ (∀ K : PadicSubfieldConstructible X' ℓ E, IsIso (constructibleToQbarPushHom ℓ k E f' K)) ∧ (∀ K : PadicSubfieldConstructible X ℓ E, IsIso (constructibleToQbarSourceHom ℓ k E f g K) ∧ IsIso (constructibleToQbarTargetHom ℓ k E f' g' K) ∧ constructibleToQbarSourceHom ℓ k E f g K ≫ (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k sq.toCommSq).app ((constructibleToPadicAlgCl X ℓ E).obj K) = (constructibleToPadicAlgCl Y' ℓ E).map ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k sq.toCommSq).app K) ≫ constructibleToQbarTargetHom ℓ k E f' g' K)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ff0b995ab",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all six statement dependencies, exact framework declarations, canonical maps, hypotheses, conclusions, universes, edge cases, docstrings, and verbatim statement field. Immutable module compiled cleanly through scompile.py (9.8 s sandbox, 34.6 s library). No repairs needed; branch unchanged."
  }
 }
