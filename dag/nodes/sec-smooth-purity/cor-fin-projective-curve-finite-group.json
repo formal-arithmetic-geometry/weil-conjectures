@@ -286,5 +286,23 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-1bf1048e9 (reviewer sub-agent of L); spot-checked: Full mathematical and source review completed; review.md records hypothesis checks, all seven proof steps, edge cases, coefficient-category/base-change distinctions, dependency reuse, graph checks, and accepted generic tool uses. No new nodes or repair files are needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroup",
+  "declaration": "AlgebraicGeometry.isConstructibleAbelianSheaf_higherDirectImage_constant_of_projective_curve",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveCurveFiniteGroup.lean",
+  "statement": "theorem isConstructibleAbelianSheaf_higherDirectImage_constant_of_projective_curve (k : Type u) [Field k] (X S : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] (f : X ⟶ S) [IsProjective f.left] (hdim : ∀ s : S.left, topologicalKrullDim (pullback f.left (Spec.map (CommRingCat.ofHom (algebraMap (S.left.residueField s) (AlgebraicClosure (S.left.residueField s)))) ≫ S.left.fromSpecResidueField s) : Scheme.{u}) ≤ 1) (M : AddCommGrpCat.{u + 1}) [Finite M] (horder : IsUnit (Nat.card M : Γ(S.left, ⊤))) (q : ℤ) : Scheme.IsConstructibleAbelianSheaf ((DerivedCategory.Plus.homologyFunctor (Sheaf S.left.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((Etale.rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f.left).obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.left.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj ((constantSheaf X.left.smallEtaleTopology AddCommGrpCat.{u + 1}).obj M))))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6333e9381",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, five dependencies, sources, docstrings, edge cases, universes, reuse, and verbatim signature. Server-only compile reproduced successfully with no diagnostics. No delivery errors or fixes required; branch head unchanged."
  }
 }
