@@ -1,0 +1,109 @@
+{
+ "id": "def-pur-kummer-module-coefficients",
+ "kind": "definition",
+ "title": "Kummer sheaves with module coefficients and their scalar actions",
+ "status": "split",
+ "statement": "Let $X$ be a scheme and $m\\geq1$. On its small etale site [def-weil-pbc-etale-site], let $\\mu_m$ be the root sheaf of the Kummer sequence [def-sc-kummer-sequence], with the exponent $R=\\mathbf Z/m\\mathbf Z$ action supplied by [def-asd-finite-etale-tate-twist]. For an $R$-module $A$ and its constant sheaf $A_X$ [def-weil-pbc-etale-sheaves], define $A(1)_X=\\mu_m\\otimes_{R_X}A_X$ using [def-pur-sheaf-tensor-product]. Concretely this is sheafification of $U\\mapsto\\mu_m(U)\\otimes_R A$, with restrictions $x\\otimes a\\mapsto x|_V\\otimes a$. A linear map $f:A\\to B$ induces $1\\otimes f$, and $a\\in A$ induces $i_a:\\mu_m\\to A(1)_X$, $x\\mapsto x\\otimes a$. These insertion maps commute with restrictions. The groups $H^q(X,\\mu_m)$ and $H^q(X,A(1)_X)$ [def-weil-pbc-etale-cohomology] are killed by $m$ and are equipped with their unique $R$-module actions. The coefficient ring may be replaced by its universe lift, with its canonically transported action.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-sc-kummer-sequence",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-pbc-etale-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/_section.md",
+  "place": "Coefficients, finite-free parenthesis; Stacks Project Tags 03PK and 03EK"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor roots of unity etale sheaf with a constant finite module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor roots of unity sheaf with a constant module and coefficient insertion",
+   "results": "LightCondensed.instMonoidalLightCondSetLightCondModFree; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; Rep.diagonalSuccIsoTensorTrivial_hom_hom_single; PresheafOfModules.monoidalCategoryStruct; LightCondensed.instMonoidalCategoryLightCondMod; PresheafOfModules.Monoidal.tensorObj; Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_right.",
+   "date": "2026-10-15",
+   "verdict": "general tensor constructions reused; no module-coefficient Kummer functor or insertion"
+  },
+  {
+   "tool": "grep",
+   "query": "kummerModuleTwist|kummerAbelianTwist|kummerCoefficientInsertion (Mathlib, upstream WeilConjectures, lean/Sheaf, dag/nodes); blueprint_refs.py search module coefficients roots of unity",
+   "results": "No hits; 0 blueprint nodes match. Existing finiteEtaleMuModulePresheaf supplies the root module; finiteEtaleTateLine takes a commutative coefficient ring and not an arbitrary module. Generic tensor and sheafification are reused.",
+   "date": "2026-10-15",
+   "verdict": "new specialization, no duplicate notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-kummer-affine-line",
+  "date": "2026-10-15",
+  "group": "N9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-kummer-affine-line",
+   "place": "Definition of A(1) and its coefficient insertion maps in the theorem statement and the finite-free coefficient argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KummerModuleCoefficients",
+  "declaration": "AlgebraicGeometry.Scheme.kummerModuleTwist",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.kummerRootModulePresheaf",
+   "AlgebraicGeometry.Scheme.kummerModuleTwist",
+   "AlgebraicGeometry.Scheme.kummerAbelianTwist",
+   "AlgebraicGeometry.Scheme.kummerCoefficientInsertionApp",
+   "AlgebraicGeometry.Scheme.kummerCoefficientInsertion_naturality",
+   "AlgebraicGeometry.Scheme.kummerCoefficientInsertion",
+   "AlgebraicGeometry.Scheme.kummerRootCohomology_annihilated",
+   "AlgebraicGeometry.Scheme.kummerRootCohomologyModule",
+   "AlgebraicGeometry.Scheme.kummerModuleCohomology_annihilated",
+   "AlgebraicGeometry.Scheme.kummerModuleCohomologyModule"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/KummerModuleCoefficients.lean",
+  "statement": "def kummerModuleTwist (X : Scheme.{u}) (m : ℕ) : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m)) ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m)))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f154159f6",
+  "group": "N9",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f154159f6",
+  "group": "N9",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, docstrings, edge cases, and recorded per-file compilation checked; no substantive or mechanical faults found."
+ }
+}

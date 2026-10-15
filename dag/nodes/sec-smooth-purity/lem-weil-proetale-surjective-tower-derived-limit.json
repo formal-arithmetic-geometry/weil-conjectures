@@ -305,5 +305,28 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-03f59d2f5 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and unit/chapter route. All seven steps are supported; checked arbitrary ring-sheaf coefficients, local surjectivity, derived products, Roos signs, degree-zero uniqueness, edge cases, and duplicate candidates. No repairs needed. Accepted six declared tool uses. Target coefficient comparisons remain separate obligations. Details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSurjectiveTowerDerivedLimit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtale_surjectiveTower_derivedLimit",
+  "statement": "theorem proEtale_surjectiveTower_derivedLimit (Y : Scheme.{t}) (R : Sheaf (Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)}) [HasDerivedCategory.{w} (ringedSiteModules.{max u (t + 1)} ((sheafCompose (Scheme.ProEt.topology Y) (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R))] (F : ℕ → ringedSiteModules.{max u (t + 1)} ((sheafCompose (Scheme.ProEt.topology Y) (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)) (t : ∀ n : ℕ, F (n + 1) ⟶ F n) (ht : ∀ n : ℕ, Epi (t n)) : ∃ (hzero : (Pi.lift (fun n : ℕ ↦ limit.π (Functor.ofOpSequence t) (op n))) ≫ towerTransitionEndomorphism t = 0) (hSES : (ShortComplex.mk (Pi.lift (fun n : ℕ ↦ limit.π (Functor.ofOpSequence t) (op n))) (towerTransitionEndomorphism t) hzero).ShortExact), Epi (towerTransitionEndomorphism t) ∧ Nonempty (IsLimit (KernelFork.ofι (Pi.lift (fun n : ℕ ↦ limit.π (Functor.ofOpSequence t) (op n))) hzero)) ∧ Nonempty (IsLimit (Fan.mk ((DerivedCategory.singleFunctor.{w} _ 0).obj (∏ᶜ F)) (fun n : ℕ ↦ (DerivedCategory.singleFunctor.{w} _ 0).map (Pi.π F n)))) ∧ hSES.singleTriangle ∈ distTriang _ ∧ (∀ [hprod : HasProduct (fun n : ℕ ↦ (DerivedCategory.singleFunctor.{w} _ 0).obj (F n))], ∃ e : (DerivedCategory.singleFunctor.{w} _ 0).obj (∏ᶜ F) ≅ ∏ᶜ (fun n : ℕ ↦ (DerivedCategory.singleFunctor.{w} _ 0).obj (F n)), (∀ n : ℕ, e.hom ≫ Pi.π (fun n : ℕ ↦ (DerivedCategory.singleFunctor.{w} _ 0).obj (F n)) n = (DerivedCategory.singleFunctor.{w} _ 0).map (Pi.π F n)) ∧ IsDerivedLimitTriangle (K := fun n : ℕ ↦ (DerivedCategory.singleFunctor.{w} _ 0).obj (F n)) (fun n : ℕ ↦ (DerivedCategory.singleFunctor.{w} _ 0).map (t n)) ((DerivedCategory.singleFunctor.{w} _ 0).obj (limit (Functor.ofOpSequence t))) ((DerivedCategory.singleFunctor.{w} _ 0).map (Pi.lift (fun n : ℕ ↦ limit.π (Functor.ofOpSequence t) (op n))) ≫ e.hom) (e.inv ≫ hSES.singleδ)) ∧ (∀ (G : ringedSiteModules.{max u (t + 1)} ((sheafCompose (Scheme.ProEt.topology Y) (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)) (g : ∀ n : ℕ, G ⟶ F n), (∀ n : ℕ, g (n + 1) ≫ t n = g n) → ∃ (h₀ : G ⟶ limit (Functor.ofOpSequence t)), (∀ n : ℕ, h₀ ≫ limit.π (Functor.ofOpSequence t) (op n) = g n) ∧ (∃! h : (DerivedCategory.singleFunctor.{w} _ 0).obj G ⟶ (DerivedCategory.singleFunctor.{w} _ 0).obj (limit (Functor.ofOpSequence t)), h ≫ (DerivedCategory.singleFunctor.{w} _ 0).map (Pi.lift (fun n : ℕ ↦ limit.π (Functor.ofOpSequence t) (op n))) = (DerivedCategory.singleFunctor.{w} _ 0).map (Pi.lift g)) ∧ (∀ h : (DerivedCategory.singleFunctor.{w} _ 0).obj G ⟶ (DerivedCategory.singleFunctor.{w} _ 0).obj (limit (Functor.ofOpSequence t)), h ≫ (DerivedCategory.singleFunctor.{w} _ 0).map (Pi.lift (fun n : ℕ ↦ limit.π (Functor.ofOpSequence t) (op n))) = (DerivedCategory.singleFunctor.{w} _ 0).map (Pi.lift g) → h = (DerivedCategory.singleFunctor.{w} _ 0).map h₀) ∧ (∀ k : (DerivedCategory.singleFunctor.{w} _ 0).obj G ⟶ ((DerivedCategory.singleFunctor.{w} _ 0).obj (∏ᶜ F))⟦(-1 : ℤ)⟧, k = 0))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.surjectiveTower_hasSheafify",
+   "AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective",
+   "AlgebraicGeometry.ProEtale.proEtale_surjectiveTower_derivedLimit"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ee8f03041",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Verified immutable files, dependencies, sources, exact signature, universes, edge cases, docstrings and report. Per-file scompile passed in sandbox and library positions; no substantive delivery errors."
  }
 }

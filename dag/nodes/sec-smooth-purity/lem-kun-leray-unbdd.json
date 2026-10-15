@@ -89,10 +89,24 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.GlobalSections",
+  "declaration": "AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso",
   "declarations": [
    "AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-15 19:29 UTC for group NU, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_7d675a26.jsonl.gz: Specializing to ModuleCat (ZMod n), its component at any unbounded E, inverted, gives the canonical stated Leray isomorphism, with no qcqs or finite cohomolog"
+  "statement": "noncomputable def rightDerivedLowerStarCompRightDerivedGlobalSectionsIso\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ((f)_*[A]).rightDerivedFunctor ⋙ rightDerivedGlobalSections A Y ≅\n      rightDerivedGlobalSections A X",
+  "branch": "slopmaster2",
+  "by": "NQ",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Existing canonical Leray natural isomorphism on the unbounded derived categories. For n ≥ 1, specialize A to ModuleCat.{u+1} (ULift.{u+1} (ZMod n)), take the component at E and invert it. ULift.ringEquiv canonically identifies the lifted coefficient ring with ZMod n. This gives exactly RΓ(X,E) ≅ RΓ(Y,Rf_*E) for every E in the stated domain; restrict f to qcqs of finite torsion cohomological dimension. The upstream construction works for every f, so these hypotheses need no replacement or extra assumption. Only the lean record is completed; the node statement and proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c52cc6c75",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, source and dependency interfaces, exact signature, coefficient universes, canonicity, and edge cases. scompile.py passed without warnings; only standard axioms occur. The disclosed pre-existing spectral-sequence proof error does not invalidate the existing K-injective comparison."
  }
 }

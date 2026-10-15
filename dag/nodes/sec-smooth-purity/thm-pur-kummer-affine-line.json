@@ -18,7 +18,8 @@
   "def-weil-pbc-etale-site",
   "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-etale-sheaves",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-pur-kummer-module-coefficients"
  ],
  "proof": [
   {
@@ -227,5 +228,33 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-1d1d58d67 (reviewer sub-agent of L); spot-checked: Reviewed the full item, unit/chapter route, cited DAG statements, Stacks Tags 03SC/03PK/03PL/01FT, and edge cases. The corrected invertibility and finite-free coefficient hypotheses are necessary; all six proof steps check, no new nodes or duplicate repairs are needed, and review.md records the source and tool-use checks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KummerAffineLine",
+  "declaration": "AlgebraicGeometry.KummerLine.kummer_affine_line",
+  "declarations": [
+   "AlgebraicGeometry.KummerLine.curve",
+   "AlgebraicGeometry.KummerLine.structureMap",
+   "AlgebraicGeometry.KummerLine.inclusion",
+   "AlgebraicGeometry.KummerLine.scalar",
+   "AlgebraicGeometry.KummerLine.coordinateUnit",
+   "AlgebraicGeometry.KummerLine.generator",
+   "AlgebraicGeometry.KummerLine.rootRestriction",
+   "AlgebraicGeometry.KummerLine.kummer_affine_line"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/KummerAffineLine.lean",
+  "statement": "theorem kummer_affine_line (k : Type u) [Field k] [IsAlgClosed k] (ℓ N : ℕ) (hℓ : ℓ.Prime) (hℓk : IsUnit (ℓ : k)) (hN : 1 ≤ N) (ζ : kˣ) (hζ : IsPrimitiveRoot ζ (ℓ ^ N)) : ∃ (hm : IsUnit ((ℓ ^ N : ℕ) : Γ(curve k true, ⊤))) (z : (b : Bool) → Sheaf.H ((curve k b).rootsOfUnitySheaf (ℓ ^ N)) 0), (∀ b : Bool, (kernel.ι (ℓ ^ N • 𝟙 (curve k b).gmSheaf)).hom.app (op (Scheme.Etale.mk (𝟙 (curve k b)))) (Sheaf.H.equiv₀ _ (MorphismProperty.Over.mkIdTerminal @Etale (curve k b)) (z b)) = ULift.up (Additive.ofMul (Units.map (scalar k b).toMonoidHom ζ))) ∧ rootRestriction k (ℓ ^ N) 0 (z false) = z true ∧ (∀ (b : Bool) (A : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ N)))), Module.Free (ULift.{u + 1} (ZMod (ℓ ^ N))) A → Module.Finite (ULift.{u + 1} (ZMod (ℓ ^ N))) A → (∃ e : A ≃ₗ[ULift.{u + 1} (ZMod (ℓ ^ N))] Sheaf.H ((Scheme.kummerAbelianTwist (curve k b) (ℓ ^ N)).obj A) 0, ∀ a : A, e a = Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k b) (ℓ ^ N) A a) 0 (z b)) ∧ (∀ q : ℕ, (if b then 1 else 0) < q → Subsingleton (Sheaf.H ((Scheme.kummerAbelianTwist (curve k b) (ℓ ^ N)).obj A) q)) ∧ (∀ q : ℕ, Finite (Sheaf.H ((Scheme.kummerAbelianTwist (curve k b) (ℓ ^ N)).obj A) q)) ∧ (∀ q : ℕ, ∃ e : (Sheaf.H ((curve k b).rootsOfUnitySheaf (ℓ ^ N)) q ⊗[ULift.{u + 1} (ZMod (ℓ ^ N))] A) ≃ₗ[ULift.{u + 1} (ZMod (ℓ ^ N))] Sheaf.H ((Scheme.kummerAbelianTwist (curve k b) (ℓ ^ N)).obj A) q, ∀ (x : Sheaf.H ((curve k b).rootsOfUnitySheaf (ℓ ^ N)) q) (a : A), e (x ⊗ₜ a) = Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k b) (ℓ ^ N) A a) q x) ∧ (∀ (B : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ N)))) [Module.Free (ULift.{u + 1} (ZMod (ℓ ^ N))) B] [Module.Finite (ULift.{u + 1} (ZMod (ℓ ^ N))) B] (f : A →ₗ[ULift.{u + 1} (ZMod (ℓ ^ N))] B) (q : ℕ) (x : Sheaf.H ((curve k b).rootsOfUnitySheaf (ℓ ^ N)) q) (a : A), Sheaf.H.map ((Scheme.kummerAbelianTwist (curve k b) (ℓ ^ N)).map (ModuleCat.ofHom f)) q (Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k b) (ℓ ^ N) A a) q x) = Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k b) (ℓ ^ N) B (f a)) q x) ∧ (∀ (S : Type (u + 1)) [CommRing S] [Algebra (ULift.{u + 1} (ZMod (ℓ ^ N))) S] [Module.Free (ULift.{u + 1} (ZMod (ℓ ^ N))) S] [Module.Finite (ULift.{u + 1} (ZMod (ℓ ^ N))) S] (q : ℕ), ∃ e : (Sheaf.H ((Scheme.kummerAbelianTwist (curve k b) (ℓ ^ N)).obj A) q ⊗[ULift.{u + 1} (ZMod (ℓ ^ N))] S) ≃ₗ[ULift.{u + 1} (ZMod (ℓ ^ N))] Sheaf.H ((Scheme.kummerAbelianTwist (curve k b) (ℓ ^ N)).obj (ModuleCat.of _ (A ⊗[ULift.{u + 1} (ZMod (ℓ ^ N))] S))) q, ∀ (x : Sheaf.H ((curve k b).rootsOfUnitySheaf (ℓ ^ N)) q) (a : A) (s : S), e ((Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k b) (ℓ ^ N) A a) q x) ⊗ₜ s) = Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k b) (ℓ ^ N) (ModuleCat.of _ (A ⊗[ULift.{u + 1} (ZMod (ℓ ^ N))] S)) (a ⊗ₜ s)) q x)) ∧ (∀ (A : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ N)))) [Module.Free (ULift.{u + 1} (ZMod (ℓ ^ N))) A] [Module.Finite (ULift.{u + 1} (ZMod (ℓ ^ N))) A], (∃ e : A ≃ₗ[ULift.{u + 1} (ZMod (ℓ ^ N))] Sheaf.H ((Scheme.kummerAbelianTwist (curve k true) (ℓ ^ N)).obj A) 1, ∀ a : A, e a = Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k true) (ℓ ^ N) A a) 1 (generator k (ℓ ^ N) hm)) ∧ ∃! res : Sheaf.H ((Scheme.kummerAbelianTwist (curve k false) (ℓ ^ N)).obj A) 0 →ₗ[ULift.{u + 1} (ZMod (ℓ ^ N))] Sheaf.H ((Scheme.kummerAbelianTwist (curve k true) (ℓ ^ N)).obj A) 0, (∀ (x : Sheaf.H ((curve k false).rootsOfUnitySheaf (ℓ ^ N)) 0) (a : A), res (Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k false) (ℓ ^ N) A a) 0 x) = Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k true) (ℓ ^ N) A a) 0 (rootRestriction k (ℓ ^ N) 0 x)) ∧ (∀ a : A, res (Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k false) (ℓ ^ N) A a) 0 (z false)) = Sheaf.H.map (Scheme.kummerCoefficientInsertion (curve k true) (ℓ ^ N) A a) 0 (z true)))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f154159f6",
+  "group": "N9",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, docstrings, edge cases, and recorded per-file compilation checked; no substantive or mechanical faults found."
  }
 }

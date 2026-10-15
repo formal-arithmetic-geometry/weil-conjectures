@@ -86,11 +86,21 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "lean": {
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.FlatModel",
+  "declaration": "DerivedCategory.torAmplitudeIn_Q_obj_of_flat",
+  "statement": "lemma torAmplitudeIn_Q_obj_of_flat (P : CochainComplex C ℤ) (a b : ℤ)\n    [P.IsStrictlyGE a] [P.IsStrictlyLE b] (hP : ∀ n, ObjectProperty.flat (P.X n)) :\n    torAmplitudeIn C a b (Q.obj P)",
   "branch": "slopmaster2",
-  "declarations": [
-   "DerivedCategory.torAmplitudeIn_Q_obj_of_flat",
-   "AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-15 19:42 UTC for group Q25, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_7d675a26.jsonl.gz: The first gives tor amplitude for the same Q-object from bounded flat terms, and the second identif"
+  "by": "NK",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Specialize C to Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), for T : Scheme.{u} and Λ : Type (u + 1), [CommRing Λ]. CochainComplex.isStrictlyGE_iff and isStrictlyLE_iff identify the support hypotheses with zero terms outside [a,b]; hP is exactness of sheaf tensor with every term. No extra geometric or coefficient hypotheses are required: the etale module-sheaf category has the structural instances of the generic theorem. The node assumes a ≤ b; the existing theorem also covers a > b, when the support conditions force the zero complex, so its specialization at ordered endpoints is exactly the requested assertion. AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn in WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel identifies the conclusion with the bounded-interval predicate recorded by def-kun-tor-amplitude. The latter etale torAmplitudeIn is an abbreviation for this generic predicate. Both declarations and their surrounding hypotheses were independently read; no duplicate theorem is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-84effc2d0",
+  "group": "NK",
+  "result": "pass",
+  "note": "Checked immutable records, sources, dependencies, exact signatures, universes, edge cases and maintainer gates. scompile.py reproduction passed without warnings; reused theorems contain no sorryAx."
  }
 }
