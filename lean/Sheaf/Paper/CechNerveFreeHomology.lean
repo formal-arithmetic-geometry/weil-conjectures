@@ -6,7 +6,6 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.AlgebraicTopology.CechNerve
-public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
