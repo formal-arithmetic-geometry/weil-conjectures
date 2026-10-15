@@ -29,70 +29,42 @@
  ],
  "proof": [
   {
-   "text": "Write $T_U(\\mathcal A,\\mathcal B)=\\mathcal{H}om_{\\mathcal O_U}(\\mathcal A,\\mathcal B)$ and $T(\\mathcal A,\\mathcal B)=\\mathcal{H}om_{\\mathcal O}(\\mathcal A,\\mathcal B)$. For every $v:V\\to U$, the relocalization $(\\mathcal C/U)/(V/U)\\cong\\mathcal C/V$ identifies the restricted modules and their scalar actions sectionwise. Hence both $T(\\mathcal F,\\mathcal H)|_U(V/U)$ and $T_U(\\mathcal F|_U,\\mathcal H|_U)(V/U)$ are the same set of $\\mathcal O_V$-linear maps $\\mathcal F|_V\\to\\mathcal H|_V$. The identification keeps every component of each map. Restriction along $W\\to V$ is restriction of those components on both sides, and scalar multiplication is postcomposition with the same multiplication map. This gives an isomorphism $c_{\\mathcal F,\\mathcal H}:T_U(\\mathcal F|_U,\\mathcal H|_U)\\cong T(\\mathcal F,\\mathcal H)|_U$. Precomposition by $f$ and postcomposition by $h$ commute with $c$, since both give componentwise $h\\circ\\varphi\\circ f$.",
+   "text": "Use the Hom-equivalence family, natural in the test module and in the parameter pair, supplied by new-ringed-slice-extension-tensor-hom-data.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8H (lemma-internal-hom-restriction), definition proof; used in the third equality of 0E8I"
-   }
-  },
-  {
-   "text": "Put $A=j_{U!}(\\mathcal G\\otimes_{\\mathcal O_U}\\mathcal F|_U)$ and $B=(j_{U!}\\mathcal G)\\otimes_{\\mathcal O}\\mathcal F$. For an arbitrary test module $\\mathcal H$, the extension adjunction gives $\\operatorname{Hom}_{\\mathcal O}(A,\\mathcal H)\\cong\\operatorname{Hom}_{\\mathcal O_U}(\\mathcal G\\otimes\\mathcal F|_U,\\mathcal H|_U)$. Apply the tensor-Hom bijection on the slice, using its symmetry to put $\\mathcal F|_U$ in the fixed tensor factor, to obtain $\\operatorname{Hom}_{\\mathcal O_U}(\\mathcal G,T_U(\\mathcal F|_U,\\mathcal H|_U))$. These bijections are natural in $\\mathcal G,\\mathcal F,\\mathcal H$.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "new-ringed-slice-extension-tensor-hom-data"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), proof"
+    "place": "Tag 0E8I, proof"
    }
   },
   {
-   "text": "Postcompose with $c_{\\mathcal F,\\mathcal H}$ from step 1. This gives $\\operatorname{Hom}_{\\mathcal O_U}(\\mathcal G,T(\\mathcal F,\\mathcal H)|_U)$. Use the inverse extension-adjunction bijection to obtain $\\operatorname{Hom}_{\\mathcal O}(j_{U!}\\mathcal G,T(\\mathcal F,\\mathcal H))$, and the inverse tensor-Hom bijection (again with symmetry) to obtain $\\operatorname{Hom}_{\\mathcal O}(B,\\mathcal H)$. Denote the composite of steps 2 and 3 by $E_{\\mathcal G,\\mathcal F,\\mathcal H}:\\operatorname{Hom}(A,\\mathcal H)\\cong\\operatorname{Hom}(B,\\mathcal H)$. Each component is natural: the two adjunctions have the naturality stated in the cited nodes, and step 1 verifies it for $c$. Thus $E$ commutes with postcomposition in $\\mathcal H$ and precomposition by the induced maps of $A$ and $B$ in the parameters.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), proof"
-   }
-  },
-  {
-   "text": "Here is the representability argument explicitly, without an additional lemma. Set $u=E_{\\mathcal G,\\mathcal F,A}(\\mathrm{id}_A):B\\to A$ and $v=E_{\\mathcal G,\\mathcal F,B}^{-1}(\\mathrm{id}_B):A\\to B$. Naturality in the test module implies $E_{\\mathcal G,\\mathcal F,\\mathcal H}(q)=q\\circ u$ for every $q:A\\to\\mathcal H$ and $E_{\\mathcal G,\\mathcal F,\\mathcal H}^{-1}(r)=r\\circ v$ for every $r:B\\to\\mathcal H$. Evaluating the two inverse identities at $\\mathrm{id}_A$ and $\\mathrm{id}_B$ gives $u\\circ v=\\mathrm{id}_A$ and $v\\circ u=\\mathrm{id}_B$. Consequently $v:A\\xrightarrow{\\sim}B$ is the required isomorphism of module sheaves.",
+   "text": "For each parameter pair, evaluate the Hom equivalence at the identity of the left object and use its inverse at the identity of the right object. Naturality in the test object proves the two resulting maps are inverse.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), proof"
+    "place": "Tag 0E8I, proof"
    }
   },
   {
-   "text": "For maps $g:\\mathcal G\\to\\mathcal G^\\prime$ and $f:\\mathcal F\\to\\mathcal F^\\prime$, write $a:A\\to A^\\prime$ and $b:B\\to B^\\prime$ for the induced maps. Parameter naturality of $E$ gives $E_{\\mathcal G,\\mathcal F,A^\\prime}(a)=E_{\\mathcal G^\\prime,\\mathcal F^\\prime,A^\\prime}(\\mathrm{id}_{A^\\prime})\\circ b=u^\\prime\\circ b$. Test-module naturality gives the same left side as $a\\circ u$. Using $u\\circ v=\\mathrm{id}_A$ and $v^\\prime\\circ u^\\prime=\\mathrm{id}_{B^\\prime}$ gives explicitly $v^\\prime\\circ a=v^\\prime\\circ a\\circ u\\circ v=v^\\prime\\circ u^\\prime\\circ b\\circ v=b\\circ v$. This is naturality in both variables, including simultaneous morphisms, and completes the statement.",
+   "text": "Parameter naturality of the Hom equivalence proves naturality of the resulting component isomorphisms; NatIso.ofComponents packages them into the displayed natural isomorphism.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), proof"
+    "place": "Tag 0E8I, proof"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
-  "def-pur-localized-ringed-site",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "new-ringed-slice-extension-tensor-hom-data"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 0E8I (lemma-j-shriek-and-tensor), with the definition calculation of 0E8H and the Yoneda inverse/naturality argument expanded"
+  "place": "Tag 0E8I, with the representability and naturality glue proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -241,5 +213,15 @@
   "by": "NK",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261015T224109-L-2885487",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

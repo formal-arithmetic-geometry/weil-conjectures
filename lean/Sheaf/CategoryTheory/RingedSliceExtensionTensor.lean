@@ -8,9 +8,7 @@ module
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.CategoryTheory.RingedSliceExtensionTensorHomData
 
 /-!
 # Tensor projection formula for a ringed-site slice
@@ -30,6 +28,39 @@ universe uC u
 open CategoryTheory
 
 namespace SheafOfModules
+
+private theorem iso_of_hom_data
+    {D : Type uC} [Category.{u} D] {E : Type (max u uC)} [Category.{u} E]
+    (A B : D ⥤ E)
+    (e : ∀ X : D, ∀ H : E, ((A.obj X ⟶ H) ≃ (B.obj X ⟶ H)))
+    (hH : ∀ (X : D) (H K : E) (φ : A.obj X ⟶ H) (h : H ⟶ K),
+      e X K (φ ≫ h) = e X H φ ≫ h)
+    (hX : ∀ (X Y : D) (H : E) (f : X ⟶ Y) (φ : A.obj Y ⟶ H),
+      e X H (A.map f ≫ φ) = B.map f ≫ e Y H φ) :
+    Nonempty (A ≅ B) := by
+  let hom : ∀ X : D, A.obj X ⟶ B.obj X := fun X =>
+    (e X (B.obj X)).symm (𝟙 _)
+  let inv : ∀ X : D, B.obj X ⟶ A.obj X := fun X =>
+    e X (A.obj X) (𝟙 _)
+  have hhom : ∀ X : D, hom X ≫ inv X = 𝟙 _ := by
+    intro X
+    apply (e X (A.obj X)).injective
+    rw [hH]
+    simp [hom, inv]
+  have hinv : ∀ X : D, inv X ≫ hom X = 𝟙 _ := by
+    intro X
+    have hh := hH X (A.obj X) (B.obj X) (𝟙 _) (hom X)
+    rw [← hh]
+    simp [hom]
+  have hn : ∀ {X Y : D} (f : X ⟶ Y),
+      A.map f ≫ hom Y = hom X ≫ B.map f := by
+    intro X Y f
+    apply (e X (B.obj Y)).injective
+    rw [hX, hH]
+    simp [hom]
+  let c : ∀ X : D, A.obj X ≅ B.obj X := fun X =>
+    { hom := hom X, inv := inv X, hom_inv_id := hhom X, inv_hom_id := hinv X }
+  exact ⟨NatIso.ofComponents c (by intro X Y f; exact hn f)⟩
 
 /-- Extension by zero commutes with tensoring by a restricted module, naturally in both
 module variables. The domain of both functors is the product of the slice module category
@@ -85,6 +116,8 @@ theorem ringedSlice_extension_tensor
           RingCat)).obj R).obj) ⋙
         PresheafOfModules.sheafification (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
           R).obj))) := by
-  sorry
+  obtain ⟨e, hH, hX⟩ := ringedSlice_extension_tensor_hom_data J R U
+  exact iso_of_hom_data (ringedSliceTensorLeft J R U)
+    (ringedSliceTensorRight J R U) e hH hX
 
 end SheafOfModules
