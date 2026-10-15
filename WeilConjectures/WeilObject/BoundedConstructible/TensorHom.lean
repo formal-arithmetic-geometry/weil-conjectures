@@ -67,11 +67,11 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
-  {X : Scheme.{u}} [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
-  [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
-  (e : X ≅ X) [e.hom.IsOver (Spec (.of k))]
+  {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom]
+  (e : X ≅ X)
 
 /-! ### The tensor product -/
 
@@ -83,22 +83,22 @@ faithful inclusion of `leftDerivedUpperStarTensorIso`, through the compatibility
 the restricted pullback (`boundedConstructibleUpperStarCompatibility`) and tensor product with
 the inclusions. -/
 noncomputable def weilTensorComparison :
-    Functor.uncurry.obj (boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) ℓ k X) ⋙
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k e.hom ≅
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k e.hom).prod
-          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k e.hom) ⋙
-        Functor.uncurry.obj (boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) ℓ k X) :=
+    Functor.uncurry.obj (boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) ℓ X) ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom ≅
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom).prod
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom) ⋙
+        Functor.uncurry.obj (boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) ℓ X) :=
   NatIso.ofComponents
     (fun KL ↦ (ObjectProperty.fullyFaithfulι _).preimageIso
-      ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ k
+      ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
           e.hom).app _ ≪≫
-        ((leftDerivedUpperStarTensorIso (Profinite.padicAlgClRingObj ℓ) e.hom).app
+        ((leftDerivedUpperStarTensorIso (Profinite.padicAlgClRingObj ℓ) e.hom.left).app
           KL.1.obj).app KL.2.obj ≪≫
         ((curriedTensor _).mapIso
-          ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ k
+          ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
             e.hom).app KL.1).symm).app _ ≪≫
         ((curriedTensor _).obj _).mapIso
-          ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ k
+          ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
             e.hom).app KL.2).symm))
     sorry
 
@@ -106,15 +106,15 @@ noncomputable def weilTensorComparison :
 for `e` is sent to `K ⊗ᴸ L` with the structure isomorphism
 `Φ (K ⊗ᴸ L) ≅ Φ K ⊗ᴸ Φ L ≅ K ⊗ᴸ L` given by `weilTensorComparison` and `φ_K ⊗ᴸ φ_L`. -/
 noncomputable def weilTensor :
-    WeilBoundedConstructible ℓ k e ⥤ WeilBoundedConstructible ℓ k e ⥤
-      WeilBoundedConstructible ℓ k e :=
-  IsoAlgebra.mapOfNatIso₂ (boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) ℓ k X)
-    (weilTensorComparison ℓ k e)
+    WeilBoundedConstructible ℓ e ⥤ WeilBoundedConstructible ℓ e ⥤
+      WeilBoundedConstructible ℓ e :=
+  IsoAlgebra.mapOfNatIso₂ (boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) ℓ X)
+    (weilTensorComparison ℓ e)
 
 @[simp]
-lemma weilTensor_obj_obj_carrier (K L : WeilBoundedConstructible ℓ k e) :
-    (((weilTensor ℓ k e).obj K).obj L).carrier =
-      ((boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) ℓ k X).obj K.carrier).obj
+lemma weilTensor_obj_obj_carrier (K L : WeilBoundedConstructible ℓ e) :
+    (((weilTensor ℓ e).obj K).obj L).carrier =
+      ((boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) ℓ X).obj K.carrier).obj
         L.carrier :=
   rfl
 
@@ -126,21 +126,21 @@ section Hom
 
 /-- The Frobenius pullback `Φ = Le^*` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. -/
 noncomputable abbrev weilFrobenius :
-    Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k e.hom
+    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom
 
 /-- The derived hom `RHom(-, -)` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. -/
 noncomputable abbrev weilRHom :
-    (Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧)ᵒᵖ ⥤ Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
-      Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  boundedConstructibleHom (Profinite.padicAlgClRingObj ℓ) ℓ k X
+    (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
+      Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  boundedConstructibleHom (Profinite.padicAlgClRingObj ℓ) ℓ X
 
 /-- The evaluation `K ⊗ᴸ RHom(K, L) ⟶ L` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: the counit of the adjunction
 `K ⊗ᴸ - ⊣ RHom(K, -)`. -/
-noncomputable def weilEv (K L : Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) ℓ k X).obj K).obj
-        (((weilRHom ℓ k (X := X)).obj (Opposite.op K)).obj L) ⟶ L :=
-  (boundedConstructibleTensorHomAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ k K).counit.app L
+noncomputable def weilEv (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((boundedConstructibleTensor (Profinite.padicAlgClRingObj ℓ) ℓ X).obj K).obj
+        (((weilRHom ℓ (X := X)).obj (Opposite.op K)).obj L) ⟶ L :=
+  (boundedConstructibleTensorHomAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ K).counit.app L
 
 /-- The comparison `h_{K,L} : Φ RHom(K, L) ⟶ RHom(Φ K, Φ L)` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: the adjoint, for
 `Φ K ⊗ᴸ - ⊣ RHom(Φ K, -)`, of the composite
@@ -148,43 +148,43 @@ noncomputable def weilEv (K L : Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧) :
 Φ K ⊗ᴸ Φ RHom(K, L) --m⁻¹--> Φ (K ⊗ᴸ RHom(K, L)) --Φ ev--> Φ L.
 ```
 -/
-noncomputable def weilHomComparisonApp (K L : Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (weilFrobenius ℓ k e).obj (((weilRHom ℓ k).obj (Opposite.op K)).obj L) ⟶
-      ((weilRHom ℓ k).obj (Opposite.op ((weilFrobenius ℓ k e).obj K))).obj
-        ((weilFrobenius ℓ k e).obj L) :=
-  (boundedConstructibleTensorHomAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ k
-      ((weilFrobenius ℓ k e).obj K)).homEquiv _ _
-    ((weilTensorComparison ℓ k e).inv.app (K, ((weilRHom ℓ k).obj (Opposite.op K)).obj L) ≫
-      (weilFrobenius ℓ k e).map (weilEv ℓ k K L))
+noncomputable def weilHomComparisonApp (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (weilFrobenius ℓ e).obj (((weilRHom ℓ).obj (Opposite.op K)).obj L) ⟶
+      ((weilRHom ℓ).obj (Opposite.op ((weilFrobenius ℓ e).obj K))).obj
+        ((weilFrobenius ℓ e).obj L) :=
+  (boundedConstructibleTensorHomAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((weilFrobenius ℓ e).obj K)).homEquiv _ _
+    ((weilTensorComparison ℓ e).inv.app (K, ((weilRHom ℓ).obj (Opposite.op K)).obj L) ≫
+      (weilFrobenius ℓ e).map (weilEv ℓ K L))
 
 /-- The comparison `h_{K,L}` is natural in `K` (contravariantly) and in `L`. -/
-lemma weilHomComparisonApp_naturality {K K' L L' : Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧}
+lemma weilHomComparisonApp_naturality {K K' L L' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (φ : K' ⟶ K) (ψ : L ⟶ L') :
-    (weilFrobenius ℓ k e).map
-          (((weilRHom ℓ k).map φ.op).app L ≫ ((weilRHom ℓ k).obj (Opposite.op K')).map ψ) ≫
-        weilHomComparisonApp ℓ k e K' L' =
-      weilHomComparisonApp ℓ k e K L ≫
-        (((weilRHom ℓ k).map ((weilFrobenius ℓ k e).map φ).op).app
-            ((weilFrobenius ℓ k e).obj L) ≫
-          ((weilRHom ℓ k).obj (Opposite.op ((weilFrobenius ℓ k e).obj K'))).map
-            ((weilFrobenius ℓ k e).map ψ)) :=
+    (weilFrobenius ℓ e).map
+          (((weilRHom ℓ).map φ.op).app L ≫ ((weilRHom ℓ).obj (Opposite.op K')).map ψ) ≫
+        weilHomComparisonApp ℓ e K' L' =
+      weilHomComparisonApp ℓ e K L ≫
+        (((weilRHom ℓ).map ((weilFrobenius ℓ e).map φ).op).app
+            ((weilFrobenius ℓ e).obj L) ≫
+          ((weilRHom ℓ).obj (Opposite.op ((weilFrobenius ℓ e).obj K'))).map
+            ((weilFrobenius ℓ e).map ψ)) :=
   sorry
 
 /-- The comparison `h_{K,L}` is an isomorphism: `Φ` is a strong monoidal equivalence. See the
 module docstring. -/
-instance isIso_weilHomComparisonApp (K L : Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (weilHomComparisonApp ℓ k e K L) :=
+instance isIso_weilHomComparisonApp (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso (weilHomComparisonApp ℓ e K L) :=
   sorry
 
 /-- The comparison `h : Φ RHom(K, L) ≅ RHom(Φ K, Φ L)` as an isomorphism of functors
 `Dᵇc(X)ᵒᵖ × Dᵇc(X) ⥤ Dᵇc(X)`, for the endofunctor `Φ.op × Φ` of the source. -/
 noncomputable def weilHomComparison :
-    Functor.uncurry.obj (weilRHom ℓ k (X := X)) ⋙ weilFrobenius ℓ k e ≅
-      (weilFrobenius ℓ k e).op.prod (weilFrobenius ℓ k e) ⋙
-        Functor.uncurry.obj (weilRHom ℓ k (X := X)) :=
-  NatIso.ofComponents (fun KL ↦ asIso (weilHomComparisonApp ℓ k e KL.1.unop KL.2))
+    Functor.uncurry.obj (weilRHom ℓ (X := X)) ⋙ weilFrobenius ℓ e ≅
+      (weilFrobenius ℓ e).op.prod (weilFrobenius ℓ e) ⋙
+        Functor.uncurry.obj (weilRHom ℓ (X := X)) :=
+  NatIso.ofComponents (fun KL ↦ asIso (weilHomComparisonApp ℓ e KL.1.unop KL.2))
     fun {KL KL'} φ ↦ by
-      have := weilHomComparisonApp_naturality ℓ k e φ.1.unop φ.2
+      have := weilHomComparisonApp_naturality ℓ e φ.1.unop φ.2
       simpa using this
 
 /-- The derived hom of Weil objects: for Weil objects `(K, φ_K)` and `(L, φ_L)` for `e`, the
@@ -195,16 +195,16 @@ object `RHom(K, L)` with the structure isomorphism
 the inverse of `φ_K` entering through the contravariant variable
 (`CategoryTheory.Endofunctor.IsoAlgebra.opFunctor`). -/
 noncomputable def weilHom :
-    (WeilBoundedConstructible ℓ k e)ᵒᵖ ⥤ WeilBoundedConstructible ℓ k e ⥤
-      WeilBoundedConstructible ℓ k e :=
-  IsoAlgebra.opFunctor ⋙ IsoAlgebra.mapOfNatIso₂ (weilRHom ℓ k (X := X))
-    (weilHomComparison ℓ k e)
+    (WeilBoundedConstructible ℓ e)ᵒᵖ ⥤ WeilBoundedConstructible ℓ e ⥤
+      WeilBoundedConstructible ℓ e :=
+  IsoAlgebra.opFunctor ⋙ IsoAlgebra.mapOfNatIso₂ (weilRHom ℓ (X := X))
+    (weilHomComparison ℓ e)
 
 @[simp]
-lemma weilHom_obj_obj_carrier (K : (WeilBoundedConstructible ℓ k e)ᵒᵖ)
-    (L : WeilBoundedConstructible ℓ k e) :
-    (((weilHom ℓ k e).obj K).obj L).carrier =
-      ((weilRHom ℓ k).obj (Opposite.op K.unop.carrier)).obj L.carrier :=
+lemma weilHom_obj_obj_carrier (K : (WeilBoundedConstructible ℓ e)ᵒᵖ)
+    (L : WeilBoundedConstructible ℓ e) :
+    (((weilHom ℓ e).obj K).obj L).carrier =
+      ((weilRHom ℓ).obj (Opposite.op K.unop.carrier)).obj L.carrier :=
   rfl
 
 end Hom
