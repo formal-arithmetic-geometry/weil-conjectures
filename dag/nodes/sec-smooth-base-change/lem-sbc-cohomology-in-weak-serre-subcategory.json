@@ -23,97 +23,20 @@
  ],
  "proof": [
   {
-   "text": "The chosen subcategory is full by construction. If $K\\cong L$, functoriality gives $H^q(K)\\cong H^q(L)$ for every $q$; strict fullness of $\\mathcal B$ therefore makes membership invariant under isomorphism. The zero complex has zero cohomology, so its image in the derived category belongs to $D_{\\mathcal B}(\\mathcal A)$.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory, proof; hypotheses expanded by Homology Tag 0754, label lemma-characterize-weak-serre-subcategory"
-   }
-  },
-  {
-   "text": "For every $k,q\\in\\mathbf Z$, the cohomology-shift isomorphism is $H^q(K[k])\\cong H^{q+k}(K)$. Hence if $K$ belongs to $D_{\\mathcal B}(\\mathcal A)$, then so does $K[k]$, by strict fullness of $\\mathcal B$. The argument includes negative shifts, since $q\\mapsto q+k$ permutes all integer degrees.",
-   "uses": [
-    "lem-sp-derived-cohomology-shift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory, proof; hypotheses expanded by Homology Tag 0754, label lemma-characterize-weak-serre-subcategory"
-   }
-  },
-  {
-   "text": "Let $X\\to Y\\to Z\\to X[1]$ be a distinguished triangle with $X,Z\\in D_{\\mathcal B}(\\mathcal A)$. For each $q$, take its five consecutive cohomology terms $H^{q-1}(Z)\\xrightarrow{a}H^q(X)\\xrightarrow{b}H^q(Y)\\xrightarrow{c}H^q(Z)\\xrightarrow{d}H^{q+1}(X)$. They are exact at the three inner positions. All four outer terms belong to $\\mathcal B$.",
-   "uses": [
-    "lem-sf-derived-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory, proof; hypotheses expanded by Homology Tag 0754, label lemma-characterize-weak-serre-subcategory"
-   }
-  },
-  {
-   "text": "Put $U=\\operatorname{coker}a$ and $V=\\ker d$. Exactness gives $\\ker b=\\operatorname{im}a$, $\\ker c=\\operatorname{im}b$, and $\\operatorname{im}c=\\ker d$. Thus the map induced by $b$ embeds $U$ into $H^q(Y)$: $U\\cong\\operatorname{coim}b$ by the cokernel universal property, and the coimage-to-target map is mono by the cited lemma. Its image is $\\operatorname{im}b=\\ker c$. The factor of $c$ through $V=\\operatorname{im}c$ is the epimorphism onto its image; its kernel is still $\\ker c$, because $V\\to H^q(Z)$ is mono. This gives the short exact sequence $0\\to U\\to H^q(Y)\\to V\\to0$. These are the kernel, image and cokernel identifications in an abelian category, applied to the displayed exact row, not an appeal to weak-Serre closure as an extra theorem.",
-   "uses": [
-    "def-sp-abelian",
-    "lem-weil-pbc-coimage-mono"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory, proof; hypotheses expanded by Homology Tag 0754, label lemma-characterize-weak-serre-subcategory"
-   }
-  },
-  {
-   "text": "The map $a$ is between two objects of $\\mathcal B$, so its cokernel $U$ belongs to $\\mathcal B$. Likewise $d$ is between two objects of $\\mathcal B$, so its kernel $V$ belongs to $\\mathcal B$. Apply precisely the extension hypothesis of the item to the short exact sequence just constructed: $H^q(Y)\\in\\mathcal B$. Since $q$ was arbitrary, $Y\\in D_{\\mathcal B}(\\mathcal A)$. This writes out the five-term weak-Serre implication of Homology 02MO/0754 for the row used here.",
+   "text": "The imported HomologyProperty API provides the weak-Serre triangulated instance for homologyProperty P. The generic intersection instance for triangulated object properties, together with the canonical triangulated instances for the plus and bounded t-structure properties, gives the two intersection instances. Therefore the conjunction is obtained by typeclass inference.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory, proof; hypotheses expanded by Homology Tag 0754, label lemma-characterize-weak-serre-subcategory"
-   }
-  },
-  {
-   "text": "The full subcategory contains zero, is stable under every shift, and contains the middle vertex of each distinguished triangle whose outer vertices belong to it. The full-triangulated-subcategory criterion supplies the inherited shift and distinguished triangles and makes it triangulated, since $D(\\mathcal A)$ is triangulated. Its strict fullness was proved in step 1.",
-   "uses": [
-    "def-weil-triangulated-subcategory",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory, proof; hypotheses expanded by Homology Tag 0754, label lemma-characterize-weak-serre-subcategory"
-   }
-  },
-  {
-   "text": "For each $E=D^+(\\mathcal A)$ and $E=D^b(\\mathcal A)$, the cited bounded-derived-category node states that $E$ contains zero, is stable under shifts, and contains the third vertex whenever it contains two vertices of a distinguished triangle. The intersection $E\\cap D_{\\mathcal B}(\\mathcal A)$ is full and contains zero. A shift preserves each factor, hence preserves their intersection. If the outer vertices of a triangle belong to the intersection, its middle vertex belongs to $E$ by the cited closure and to $D_{\\mathcal B}(\\mathcal A)$ by steps 3--5. The same criterion therefore supplies the inherited triangulated structure on both intersections.",
-   "uses": [
-    "def-weil-pbc-bounded-derived-subcategories",
-    "def-weil-triangulated-subcategory"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory, proof; hypotheses expanded by Homology Tag 0754, label lemma-characterize-weak-serre-subcategory"
+    "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/HomologyProperty.lean",
+    "place": "declarations homologyProperty_isTriangulated and the generic ObjectProperty.IsTriangulated intersection instance"
    }
   }
  ],
- "proof_deps": [
-  "def-sp-abelian",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-bounded-derived-subcategories",
-  "def-weil-triangulated-subcategory",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sp-derived-cohomology-shift",
-  "lem-weil-pbc-coimage-mono"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 06UQ, label lemma-cohomology-in-serre-subcategory, proof; hypotheses expanded by Homology Tag 0754, label lemma-characterize-weak-serre-subcategory"
+  "by": "library API",
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/HomologyProperty.lean",
+  "place": "homologyProperty_isTriangulated and CategoryTheory.ObjectProperty.IsTriangulated intersection instance"
  },
  "mathlib_searches": [
   {
@@ -267,5 +190,15 @@
   "by": "NH",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T154157-L-159984",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
