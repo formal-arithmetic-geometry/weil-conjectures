@@ -265,5 +265,23 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-c270d4750 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and route. The truncation induction, coefficient comparison, and canonical restriction-map compatibility check out. Repaired one missing citation to derived inverse image in the statement and stmt_deps; no assertion changed. Full findings are in review.md; corrected JSON is under fixes/dag/nodes/sec-proper-base-change/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedCohomologyContinuity",
+  "declaration": "AlgebraicGeometry.derived_cohomology_continuity",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedCohomologyContinuity.lean",
+  "statement": "theorem derived_cohomology_continuity {I : Type u} [SmallCategory I] [IsCofiltered I] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] (i₀ : I) (K : DerivedCategory.Plus (Sheaf (D.obj i₀).smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) (F : (Over i₀)ᵒᵖ ⥤ (ModuleCat.{u + 1} Λ)) (e : ∀ i : Over i₀, F.obj (op i) ≅ (Etale.cohomology (ModuleCat.{u + 1} Λ) (D.obj i.left) n).obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map i.hom)).mapDerivedCategory.obj K.obj)) (hm : ∀ {i j : Over i₀} (f : i ⟶ j), F.map f.op = (e j).hom ≫ (Etale.cohomology (ModuleCat.{u + 1} Λ) (D.obj j.left) n).map ((Etale.mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (D.map f.left)).unit.app ((Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map j.hom)).mapDerivedCategory.obj K.obj)) ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) n).map ((Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ) (D.map f.left)).hom.app ((Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map f.left)).mapDerivedCategory.obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map j.hom)).mapDerivedCategory.obj K.obj))) ≫ (Etale.cohomology (ModuleCat.{u + 1} Λ) (D.obj i.left) n).map ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (D.map f.left) (D.map j.hom) (D.map i.hom) ((congrArg D.map f.w).symm.trans (D.map_comp f.left j.hom))) ≪≫ Functor.mapDerivedCategoryCompIso (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map j.hom)) (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map f.left))).inv.app K.obj) ≫ (e i).inv) (s : Cocone F) (eY : s.pt ≅ (Etale.cohomology (ModuleCat.{u + 1} Λ) c.pt n).obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app i₀)).mapDerivedCategory.obj K.obj)) (hs : ∀ i : Over i₀, s.ι.app (op i) = (e i).hom ≫ (Etale.cohomology (ModuleCat.{u + 1} Λ) (D.obj i.left) n).map ((Etale.mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (c.π.app i.left)).unit.app ((Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map i.hom)).mapDerivedCategory.obj K.obj)) ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) n).map ((Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} Λ) (c.π.app i.left)).hom.app ((Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app i.left)).mapDerivedCategory.obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map i.hom)).mapDerivedCategory.obj K.obj))) ≫ (Etale.cohomology (ModuleCat.{u + 1} Λ) c.pt n).map ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (c.π.app i.left) (D.map i.hom) (c.π.app i₀) (c.w i.hom).symm) ≪≫ Functor.mapDerivedCategoryCompIso (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map i.hom)) (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app i.left))).inv.app K.obj) ≫ eY.inv) : Nonempty (IsColimit s)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1cbc6c44d",
+  "group": "NX",
+  "result": "pass",
+  "note": "Wrote review.md. Immutable files, all statement dependencies, sources, canonical maps, edge cases, and pilot gates checked; no delivery errors found. Server-only compilation reproduced successfully in 3.1 seconds without diagnostics."
  }
 }
