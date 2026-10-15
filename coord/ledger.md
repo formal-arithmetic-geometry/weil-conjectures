@@ -15249,3 +15249,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:10 L: merged deliver/R2/Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy (stage 3; reviewer PASS; after a return; landing 20261015T221015-L-2560766 (proof); batch 20261015T220926; modules 1; new nodes 0)
 - 22:10 L: merged deliver/R2/Sheaf.Paper.HypercoverFreeResolution (stage 3; reviewer PASS; first push; landing 20261015T221026-L-2562473 (proof); batch 20261015T220926; modules 1; new nodes 0)
 - 22:10 L: merged deliver/X2/Sheaf.AlgebraicTopology.CoskeletalMapTrivialKan (stage 3; reviewer PASS; first push; landing 20261015T221039-L-2564929 (proof); batch 20261015T220926; modules 1; new nodes 0)
+- 22:15 L: merged deliver/A4/Sheaf.Paper.ImagePresheafSheafificationIso (stage 3; reviewer PASS; first push; landing 20261015T221553-L-2623949 (interface); batch 20261015T221551; modules 1; new nodes 0; change records: coord/changes/imagePresheaf_sheafification_iso-size.md)
