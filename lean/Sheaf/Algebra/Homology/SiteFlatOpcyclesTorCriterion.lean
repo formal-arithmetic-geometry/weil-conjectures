@@ -11,11 +11,8 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.CategoryTheory.Sites.LeftExact
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Mathlib.CategoryTheory.Sites.EpiMono
-import Mathlib.Algebra.Homology.ExactSequence
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-!
 # Flat opcycles from universal ordinary tensor exactness
@@ -80,6 +77,30 @@ theorem isFlat_opcycles_of_universal_tensor_exactAt
       (CochainComplex.mapBifunctor ((CochainComplex.singleFunctor _ 0).obj N) P
         (@curriedTensor _ _ (monoidalCategory O))).ExactAt (n - 1)) :
     IsFlat (R := O) (P.opcycles n) := by
-  sorry
+  classical
+  let := monoidalCategory O
+  let := symmetricCategory O
+  let : MonoidalPreadditive (ringedSiteModules
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
+    Classical.choice (tensorClosed O).1
+  let : MonoidalClosed (ringedSiteModules
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
+    Classical.choice (tensorClosed O).2.1
+  -- Symmetry converts the one-sided sheaf definition to categorical flatness.
+  have hcatflat (i : ℤ) : ObjectProperty.flat (P.X i) := by
+    have : Limits.PreservesFiniteLimits (tensorRight (P.X i)) := (hflat i).1
+    exact (ObjectProperty.flat_iff_preservesFiniteLimits _).2
+      (Limits.preservesFiniteLimits_of_natIso
+        (BraidedCategory.tensorLeftIsoTensorRight (P.X i)).symm)
+  -- A degree-zero test complex gives termwise tensor, then symmetry swaps factors.
+  have hterm (N : ringedSiteModules
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :
+      (((tensorRight N).mapHomologicalComplex (.up ℤ)).obj P).ExactAt (n - 1) := by
+    let e₁ := CochainComplex.mapBifunctorSingle₁Iso (curriedTensor _) N P
+    let e₂ := (NatIso.mapHomologicalComplex
+      (BraidedCategory.tensorLeftIsoTensorRight N) (.up ℤ)).app P
+    exact (hexact N).of_iso (e₁ ≪≫ e₂)
+  -- The generic Tor criterion already contains the abelian diagram chase.
+  exact (ObjectProperty.flat_opcycles_of_exactAt P n (hcatflat _) (hcatflat _) hterm).2
 
 end SheafOfModules

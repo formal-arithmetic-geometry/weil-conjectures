@@ -29,125 +29,52 @@
  ],
  "proof": [
   {
-   "text": "Put $B=P^{n-1}$, $D=P^n$, $R=P^{n-2}$, $e=d^{n-2}:R\\to B$, $d=d^{n-1}:B\\to D$, and $q:D\\to Q=\\operatorname{coker}d$. Thus $de=0$ and $qd=0$. Regard each test module $N$ as a complex concentrated in degree zero. The total tensor complex in the hypothesis has the single summand $N\\otimes P^j$ in degree $j$, with differential $1_N\\otimes d^j$ (the other differential is zero). The symmetry from the tensor-closed node identifies this with $P^j\\otimes N$, naturally and compatibly with differentials. Consequently $R\\otimes N\\xrightarrow{e_N}B\\otimes N\\xrightarrow{d_N}D\\otimes N$ is exact in the middle for every $N$. Here $e_N=e\\otimes1_N$ and similarly for $d_N,q_N$.",
+   "text": "Install the existing monoidal and symmetric structures for sheaves of O-modules. The two Nonempty factors of SheafOfModules.tensorClosed supply MonoidalPreadditive and MonoidalClosed for precisely this tensor product. The category ringedSiteModules is definitionally the Mathlib abelian category of module sheaves.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each integer i, unfold the existing IsFlat hypothesis only to obtain PreservesFiniteLimits (tensorRight (P.X i)). Transport it along the inverse of BraidedCategory.tensorLeftIsoTensorRight. The proved upstream ObjectProperty.flat_iff_preservesFiniteLimits (WeilConjectures.CategoryTheory.Abelian.Flat.Basic) now gives ObjectProperty.flat (P.X i); closure supplies right exactness automatically.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every test sheaf N, apply the proved upstream CochainComplex.mapBifunctorSingle₁Iso (WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle) to identify the total tensor of N[0] with P with termwise tensorLeft N applied to P. Compose with NatIso.mapHomologicalComplex of BraidedCategory.tensorLeftIsoTensorRight N. HomologicalComplex.ExactAt.of_iso transports the given exactness to the termwise tensorRight N complex, in exactly degree n-1.",
    "uses": [
     "def-pc-cochain-complex-modules",
     "def-pc-tensor-complex-sheaves",
     "def-pc-acyclic-complex-modules",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-weil-sheaf-of-modules-category"
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G0 (lemma-last-one-flat), first displayed tensor sequence; direct specialization to degree-zero test complexes"
-   }
+   "elementary": true
   },
   {
-   "text": "Tensoring with any fixed module preserves cokernels: by the natural tensor–Hom bijection, a map out of $N\\otimes D$ annihilating $1_N\\otimes d$ corresponds precisely to a map $D\\to\\mathcal Hom(N,-)$ annihilating $d$, which factors uniquely through $q$. Applying the bijection back gives the unique factorization through $1_N\\otimes q$. Symmetry gives the same assertion in the other variable. Hence $B\\otimes N\\xrightarrow{d_N}D\\otimes N\\xrightarrow{q_N}Q\\otimes N\\to0$ is exact for every $N$, and tensoring any epimorphism is again an epimorphism: an epimorphism in an abelian category is the cokernel of its kernel. This is right exactness, with no flatness requirement on the fixed tensor factor.",
-   "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-weil-sheaf-of-modules-category",
-    "def-sp-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EO (lemma-internal-hom-adjoint-tensor), adjunction; Tag 03EP (lemma-tensor-commute-colimits), cokernel specialization"
-   }
-  },
-  {
-   "text": "We will use exactness on local sections, rather than exactness on all sections over an object. For an exact sequence $X\\xrightarrow{f}Y\\xrightarrow{g}Z$, exactness means $\\operatorname{im}f=\\ker g$. Thus the induced map $X\\to\\ker g$ is epic; forgetting module structure preserves this epimorphism by the exact forgetful-functor node. The abelian-sheaf epimorphism node supplies local lifts of every section of $\\ker g$. Kernels are sectionwise by the module-category node, so every section $y$ killed by $g$ locally equals $f(x)$. The same epimorphism node supplies local lifts for any module epimorphism. These implications apply over every object and after every restriction; successive covering refinements are composed using the site covering axioms. Monomorphisms of module sheaves are injective on sections because their sectionwise kernel is zero.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA (lemma-abelian), exact forgetful functor; Tag 03CN (lemma-abelian-abelian), parts (2), (3), (5), (6)"
-   }
-  },
-  {
-   "text": "Fix an arbitrary short exact sequence $0\\to N_1\\xrightarrow{i}N_2\\xrightarrow{p}N_3\\to0$ and an object $V$. Write $X_i=1_X\\otimes i$ and $X_p=1_X\\otimes p$. Let $x\\in(Q\\otimes N_1)(V)$ satisfy $Q_i(x)=0$. Since $q_{N_1}$ is epic by step 2, locally lift $x$ to $y\\in(D\\otimes N_1)(V)$. Naturality gives $q_{N_2}(D_i y)=Q_i(q_{N_1}y)=0$. Exactness of the cokernel sequence of step 2 and the local criterion of step 3 give, after another covering refinement, $z\\in(B\\otimes N_2)(V)$ with $d_{N_2}z=D_i y$. All letters henceforth denote these restricted sections; no global lift is claimed.",
-   "uses": [
-    "def-weil-pbc-exact-sequence",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G0 (lemma-last-one-flat), cokernel-flatness argument; agent expansion by local diagram chase"
-   }
-  },
-  {
-   "text": "The section $B_p z$ is a cycle: $d_{N_3}(B_p z)=D_p(d_{N_2}z)=D_pD_i y=0$, because $pi=0$. Step 1 applied to $N_3$ and the local criterion give a local section $w\\in(R\\otimes N_3)(V)$ with $e_{N_3}w=B_pz$. Tensoring the epimorphism $p$ with $R$ is epic by step 2, even without using flatness of $R$. Locally lift $w$ to $\\widetilde w\\in(R\\otimes N_2)(V)$. Set $z_0=z-e_{N_2}\\widetilde w$. Then $B_pz_0=B_pz-e_{N_3}R_p\\widetilde w=0$, whereas $d_{N_2}z_0=d_{N_2}z$ since $de=0$.",
-   "uses": [
-    "def-pc-cochain-complex-modules",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-acyclic-complex-modules",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G0 (lemma-last-one-flat), tensor exactness in degree n-1; agent expansion of the obstruction and boundary correction"
-   }
-  },
-  {
-   "text": "Flatness of $B=P^{n-1}$, by its defining exactness property, makes $0\\to B\\otimes N_1\\xrightarrow{B_i}B\\otimes N_2\\xrightarrow{B_p}B\\otimes N_3\\to0$ exact. Thus the local criterion supplies $v\\in(B\\otimes N_1)(V)$ with $B_i v=z_0$. Naturality and the correction identity give $D_i(d_{N_1}v)=d_{N_2}B_i v=d_{N_2}z_0=d_{N_2}z=D_i y$. Flatness of $D=P^n$ makes $D_i$ monic and therefore sectionwise injective; hence $y=d_{N_1}v$. It follows that $x=q_{N_1}y=q_{N_1}d_{N_1}v=0$ on the resulting cover. The sheaf separatedness axiom gives $x=0$ on the original $V$. Since $V$ and $x$ were arbitrary, $Q_i$ is monic.",
+   "text": "Specialize the already proved upstream CategoryTheory.ObjectProperty.flat_opcycles_of_exactAt (WeilConjectures.CategoryTheory.DerivedCategory.FlatModel, lines 74-165) to P and n, with the categorical flatness hypotheses at n-1 and n and the tensor-exactness just obtained. Its abelian refinement argument is exactly the cokernel-flatness diagram chase and requires no boundedness or enough-points hypothesis. The second conjunct of its conclusion is exactness of tensorRight (P.opcycles n), definitionally SheafOfModules.IsFlat (R := O) (P.opcycles n).",
    "uses": [
     "def-pc-flat-sheaf-modules",
-    "def-weil-pbc-exact-sequence",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G0 (lemma-last-one-flat), conclusion of cokernel-flatness argument; agent expansion using exactly the flat terms in degrees n-1 and n"
-   }
-  },
-  {
-   "text": "By step 2, $Q\\otimes-$ is additive and preserves cokernels, so it sends the chosen short exact sequence to a right exact sequence. Step 6 supplies injectivity at the left, so that sequence is short exact. This holds for every short exact sequence. Write $T=Q\\otimes-$. For an arbitrary sequence $A\\xrightarrow{f}B\\xrightarrow{g}C$ exact at $B$, set $I=\\operatorname{im}f=\\ker g$ and $J=\\operatorname{im}g$. Factor $f$ as the epimorphism $A\\to I$ followed by $I\\hookrightarrow B$, and $g$ as $B\\to J$ followed by $J\\hookrightarrow C$. Preservation of $0\\to I\\to B\\to J\\to0$ gives $\\operatorname{im}T(I\\hookrightarrow B)=\\ker T(B\\to J)$. Right exactness makes $T(A\\to I)$ epic, so $\\operatorname{im}T(f)=\\operatorname{im}T(I\\hookrightarrow B)$. Applying the short-exact preservation already proved to $0\\to J\\to C\\to C/J\\to0$ makes $T(J\\hookrightarrow C)$ monic, so $\\ker T(g)=\\ker T(B\\to J)$. Combining these three equalities proves exactness at $T(B)$. Thus $Q\\otimes-$ is exact. Tensor symmetry identifies it with $-\\otimes Q$, and the flat-sheaf definition proves that $Q=Q^n$ is flat.",
-   "uses": [
-    "def-pc-flat-sheaf-modules",
-    "def-weil-pbc-exact-sequence",
-    "lem-pc-sheaf-modules-tensor-closed",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G0 (lemma-last-one-flat), final flatness conclusion; direct exact-functor definition"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-cochain-complex-modules",
-  "def-pc-tensor-complex-sheaves",
-  "def-pc-acyclic-complex-modules",
   "lem-pc-sheaf-modules-tensor-closed",
   "def-weil-sheaf-of-modules-category",
-  "def-sp-abelian",
-  "def-weil-pbc-exact-sequence",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-pc-cochain-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-acyclic-complex-modules"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08G0 (lemma-last-one-flat), cokernel/Tor criterion; direct local diagram chase replacing the Tor formalism, with Tag 03EO and Tag 03CN"
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "CategoryTheory.ObjectProperty.flat_opcycles_of_exactAt, lines 74-165; site specialization using tensorClosed, flat_iff_preservesFiniteLimits, mapBifunctorSingle₁Iso, and tensorLeftIsoTensorRight. This realizes the same Tag 08G0 cokernel-flatness argument without sectionwise lifts."
  },
  "mathlib_searches": [
   {
@@ -286,5 +213,15 @@
   "by": "ND",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261015T203757-L-1608376",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

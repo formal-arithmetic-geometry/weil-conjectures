@@ -15185,3 +15185,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:17 L: merged deliver/H4/Sheaf.AlgebraicGeometry.ProEtaleClosedAbelianFilteredColimits (stage 3; reviewer PASS; first push; landing 20261015T201715-L-1447747 (proof); batch 20261015T201712; modules 1; new nodes 0)
 
 - 04:23 L: batch 20261015T202023 dependency take-out
+- 20:37 L: merged deliver/P3/Sheaf.Algebra.Homology.SiteFlatOpcyclesTorCriterion (stage 3; reviewer PASS; first push; landing 20261015T203757-L-1608376 (proof); batch 20261015T203756; modules 1; new nodes 0)
