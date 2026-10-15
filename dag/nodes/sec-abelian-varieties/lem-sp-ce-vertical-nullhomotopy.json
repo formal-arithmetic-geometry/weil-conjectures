@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "Because $R$ is a morphism of double complexes and is zero on the augmentation, its restrictions to the augmented boundary, cycle, and horizontal-cohomology rows are maps of augmented complexes whose composite with the source augmentation is zero. The exact sequences $0\\to B_I^p\\to Z_I^p\\to H_I^p\\to0$ and $0\\to Z_I^p\\to I^{p,\\bullet}\\to B_I^{p+1}\\to0$, together with commutation of $R$ with the horizontal differential, make the induced maps compatible with the subobject and quotient maps.",
+   "text": "Because $R$ is a morphism of double complexes and is zero on the augmentation, its restrictions to the augmented boundary, cycle, and horizontal-cohomology rows are maps of augmented complexes whose composite with the source augmentation is zero. The exact sequences $0\\to B_I^p\\to Z_I^p\\to H_I^p\\to0$ and $0\\to Z_I^p\\to I^{p,\\bullet}\\to B_I^{p+1}\\to0$, together with commutation of $R$ with the horizontal differential, make the induced maps compatible with the subobject and quotient maps. The Lean proof imports the existing private bi, row, rowHom and supportedIso constructions and their proved factorization, exactness and naturality lemmas from Sheaf.CategoryTheory.CartanEilenbergComparisonCycleStage using a proof-only import all, rather than duplicating them. This reuses its helper API, not its comparison-cycle-stage theorem.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -34,18 +34,16 @@
    }
   },
   {
-   "text": "Apply the exact-source/injective-target comparison theorem to the induced maps on the boundary, cycle, and horizontal-cohomology rows. The theorem is the special case of the acyclic-to-bounded-below-injective null-homotopy result obtained by adjoining the augmentation object in degree $-1$; it gives row homotopies $h_B$, $h_Z$, and $h_H$, all zero in degree zero, satisfying $R_B=d_vh_B+h_Bd_v$, $R_Z=d_vh_Z+h_Zd_v$, and $R_H=d_vh_H+h_Hd_v$.",
-   "uses": [
-    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
-   ],
-   "elementary": false,
+   "text": "Normalize each source row, which is supported in vertical degree zero, by its canonical isomorphism with single₀ of its degree-zero object. Apply the already proved source-library construction CochainComplex.homotopyZeroOfQuasiIso from WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution to the induced boundary, cycle and homology maps. The source augmentation is a quasi-isomorphism, the target terms are injective, and the composite with the augmentation is zero by functoriality and R ε_I = 0. This gives the three row null-homotopies directly, without adjoining a degree -1 term or using K-injectivity.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
     "place": "Tag 015I, comparison construction by boundary, cycle, and cohomology rows"
    }
   },
   {
-   "text": "Construct $s_2$ and homotopies $h_B^p$ of $R_B^p$ and $h_Z^p$ of $R_Z^p$, zero in vertical degree zero, by induction on $p$, keeping the invariant that $h_Z^p$ restricts to $h_B^p$ on $B_I^p$; start with $h_B^0=0$ since $B_I^0=0$ in the first quadrant. Given $h_B^p$, apply the compatible-homotopy assembly lemma to $0\\to B_I^p\\to Z_I^p\\to H_I^p\\to0$ (augmented by $0\\to B^p(K)\\to Z^p(K)\\to H^p(K)\\to0$) with target $0\\to B_J^p\\to Z_J^p\\to H_J^p\\to0$ and $s_Z=h_B^p$; it yields $h_Z^p$ with $h_Z^p\\iota=\\iota_Jh_B^p$, and the augmentation condition is $R\\epsilon_I=0$. Apply the same lemma to $0\\to Z_I^p\\to I^{p,\\bullet}\\to B_I^{p+1}\\to0$ (augmented by $0\\to Z^p(K)\\to K^p\\to B^{p+1}(K)\\to0$, the column being exact as an extension of exact rows) with target $0\\to Z_J^p\\to J^{p,\\bullet}\\to B_J^{p+1}\\to0$ (degreewise split, so $J^{p,\\bullet}$ is injective) and $s_Z=h_Z^p$; it yields $s_2^{p,\\bullet}$ with $s_2^{p,0}=0$, $R=d_vs_2+s_2d_v$ on $I^{p,\\bullet}$, $s_2i=jh_Z^p$, and a homotopy $h_B^{p+1}$ of $R_B^{p+1}$ with $\\rho s_2^p=h_B^{p+1}\\pi$. Since $d_h=i\\iota\\pi$ on both $I$ and $J$, one gets $s_2^{p+1}d_h=s_2^{p+1}i\\iota\\pi=jh_Z^{p+1}\\iota\\pi=j\\iota_Jh_B^{p+1}\\pi=j\\iota_J\\rho s_2^p=d_hs_2^p$, using the invariant at $p+1$; this completes the induction.",
+   "text": "Construct $s_2$ and homotopies $h_B^p$ of $R_B^p$ and $h_Z^p$ of $R_Z^p$, zero in vertical degree zero, by induction on $p$, keeping the invariant that $h_Z^p$ restricts to $h_B^p$ on $B_I^p$; start with the boundary-row null-homotopy in degree zero obtained in step 2. Given $h_B^p$, apply the compatible-homotopy assembly lemma to $0\\to B_I^p\\to Z_I^p\\to H_I^p\\to0$ (augmented by $0\\to B^p(K)\\to Z^p(K)\\to H^p(K)\\to0$) with target $0\\to B_J^p\\to Z_J^p\\to H_J^p\\to0$ and $s_Z=h_B^p$; it yields $h_Z^p$ with $h_Z^p\\iota=\\iota_Jh_B^p$, and the augmentation condition is $R\\epsilon_I=0$. Apply the same lemma to $0\\to Z_I^p\\to I^{p,\\bullet}\\to B_I^{p+1}\\to0$ (augmented by $0\\to Z^p(K)\\to K^p\\to B^{p+1}(K)\\to0$, the column being exact as an extension of exact rows) with target $0\\to Z_J^p\\to J^{p,\\bullet}\\to B_J^{p+1}\\to0$ (degreewise split, so $J^{p,\\bullet}$ is injective) and $s_Z=h_Z^p$; it yields $s_2^{p,\\bullet}$ with $s_2^{p,0}=0$, $R=d_vs_2+s_2d_v$ on $I^{p,\\bullet}$, $s_2i=jh_Z^p$, and a homotopy $h_B^{p+1}$ of $R_B^{p+1}$ with $\\rho s_2^p=h_B^{p+1}\\pi$. Since $d_h=i\\iota\\pi$ on both $I$ and $J$, one gets $s_2^{p+1}d_h=s_2^{p+1}i\\iota\\pi=jh_Z^{p+1}\\iota\\pi=j\\iota_Jh_B^{p+1}\\pi=j\\iota_J\\rho s_2^p=d_hs_2^p$, using the invariant at $p+1$; this completes the induction. Derive the column quasi-isomorphism from the boundary/cycle short exact sequences using the proved source-library HomologicalComplex.HomologySequence.quasiIso_τ₂, and obtain injectivity of column terms from the splitting of the target sequence with injective first term. Extend the resulting family from natural to integer horizontal degrees by the zero homotopy in negative source columns. Check all horizontal indices: use the induction for successive nonnegative indices, the first-quadrant hypotheses for negative indices, and the complex shape for nonsuccessive indices.",
    "uses": [
     "lem-sp-ce-compatible-homotopy-assembly"
    ],
@@ -57,13 +55,12 @@
   }
  ],
  "proof_deps": [
-  "lem-sp-ce-compatible-homotopy-assembly",
-  "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+  "lem-sp-ce-compatible-homotopy-assembly"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 015I, compatibility of the boundary/cycle exact sequences; vertical null-homotopy detail from Weibel Homological Algebra Lemma 5.7.10"
+  "place": "Tag 015I and Weibel Lemma 5.7.10, implemented by the boundary-cycle assembly induction; direct row comparison uses the proved source-library CochainComplex.homotopyZeroOfQuasiIso. The canonical boundary-cycle-homology row and degree-zero normalization helpers are reused from CartanEilenbergComparisonCycleStage."
  },
  "mathlib_searches": [
   {
@@ -150,5 +147,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261015T221015-L-2560766",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -15246,3 +15246,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:09 L: merged deliver/B2/Sheaf.AlgebraicGeometry.CondensedCoefficientComplexPresentation (stage 3; reviewer PASS; first push; landing 20261015T220938-L-2554367 (interface); batch 20261015T220926; modules 2; new nodes 1)
 - 22:09 L: merged deliver/N1/Sheaf.Paper.HypercoverCohomologyAbelian (stage 3; reviewer PASS; first push; landing 20261015T220951-L-2556904 (proof); batch 20261015T220926; modules 1; new nodes 0)
 - 22:10 L: merged deliver/P4/WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261015T221002-L-2558877 (interface); batch 20261015T220926; modules 2; new nodes 3)
+- 22:10 L: merged deliver/R2/Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy (stage 3; reviewer PASS; after a return; landing 20261015T221015-L-2560766 (proof); batch 20261015T220926; modules 1; new nodes 0)
