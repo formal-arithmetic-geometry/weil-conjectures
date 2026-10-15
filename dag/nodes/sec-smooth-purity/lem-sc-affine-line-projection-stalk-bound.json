@@ -1,0 +1,174 @@
+{
+ "id": "lem-sc-affine-line-projection-stalk-bound",
+ "kind": "statement",
+ "title": "Affine-line projection stalk bound from punctured smooth strict localizations",
+ "statement": "Fix a universe u, an algebraically closed field K:Type u, n in N, and d=n+2. Use torsion cohomological dimension as in [def-sc-etale-torsion-cd], residue transcendence degree as in [def-kun-transcendence-degree], and strict localizations and structural maps as in [def-weil-pbc-strict-henselization-limit] and [def-weil-pbc-strict-henselization-structural-map]. Assume the following six inputs. (P1) For every u-scheme S and locally torsion abelian etale sheaf F on P^1_S, R^q pi_*F=0 for q>2. (Boundary) For any open immersion j:U->Y with closed complement i:Z->Y and retraction g:Y->Z of i, every abelian etale sheaf M on U satisfies R^p g_*R^q j_*M=0 for p,q positive. (Stalk) For every qcqs f:X->S, algebraically closed geometric point s:Spec Omega->S, torsion abelian sheaf F and q in N, H^q(X times_S S_(s),p^*F)=0 implies the geometric stalk (R^q f_*F)_s=0. (Leray) For all scheme maps j:X->Y, g:Y->S, s:T->S, all abelian etale sheaves M on X, and r in N, if s^*R^p g_*R^q j_*M=0 for every p+q=r then s^*R^r(gj)_*M=0. (AffineLine) For every u-small commutative ring K and m in N, the explicit last-coordinate projection A^(m+1)_K->A^m_K is isomorphic over its base to the structural morphism of the relative affine line A^1_(A^m_K). (Cartier) For every smooth integral finite-type Y/K of dimension d, algebraically closed geometric point s above y with trdeg_K kappa(y)=a<d, and every nonzero h in the maximal ideal of R=O^sh_(Y,s), cd_tor(Spec R[1/h])<=d-a. The scalar structures K->kappa(y)->Omega and K->R in this input are required to induce the canonical structural morphisms of the point and strict localization, exactly as in the Lean signature. Then let f:A^d_K->A^(d-1)_K be the last-coordinate projection, given on coordinate rings by MvPolynomial.rename Fin.castSucc. For every sheaf M of abelian groups on A^d_K killed by a positive integer N, every q>=2, every separably closed field Omega:Type u and s:Spec Omega->A^(d-1)_K with image y, the cardinal inequality d<q+trdeg_K kappa(y) implies s^*(R^q f_*M)=0. The projective-line, inverse-image and geometric-stalk conventions are [def-nagata-projective-space-base-change], [def-weil-pbc-inverse-image] and [def-weil-pbc-geometric-stalks].",
+ "stmt_deps": [
+  "def-sc-etale-torsion-cd",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Proof steps 5-10: strict-local stalks, compactification, and the exceptional generic degree two"
+ },
+ "proof": [
+  {
+   "text": "Use the supplied relative-affine-line identification to embed the explicitly presented polynomial source as the standard affine chart of Y=P^1_B, where B=A^(d-1)_K. The infinity section is the closed complement. Its second chart supplies the nonzero boundary coordinate. The two polynomial charts show that Y is smooth, integral and of dimension d over K.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "def-sc-etale-torsion-cd",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a boundary point y, let a=trdeg_K kappa(y). The infinity section identifies its residue field with that of its image in B, so a<=d-1. In the infinity chart the divisor is cut out by the affine coordinate h. Its image in the strict henselization is in the maximal ideal and is nonzero: smoothness gives the regular strict-local domain and the coordinate remains a nonzerodivisor under the flat strict-local map. The supplied punctured strict-local bound hCartier gives cd_tor(Spec R[1/h])<=d-a. The pullback of j to this strict localization is Spec R[1/h]. The supplied comparison hStalk therefore gives zero stalks of R^r j_*M for r>d-a. Away from the boundary these positive direct images vanish, since open restriction is exact, preserves injectives, and identifies j with the identity.",
+   "uses": [
+    "lem-sc-smooth-strict-local-field-model",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For r>0, the closed-support equivalence gives R^r j_*M=i_*N_r: restrict to the affine chart to get zero, then use the closed immersion unit and geometric-stalk conservativity. The supplied hBoundary gives R^p g_*R^r j_*M=0 for p>0,r>0. Additivity preserves the annihilator N, including on j_*M; since N is positive, j_*M is locally torsion. The supplied hP1 gives R^p g_*j_*M=0 for p>2.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-openclosed-stalk-upperstar",
+    "lemma-weil-pbc-finite-stalk-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For r>2 apply the supplied exact-inverse-image Leray diagonal-vanishing statement. Diagonal terms with p,q positive vanish by the supplied mixed-degree boundary acyclicity; q=0 vanishes by the supplied projective-line bound; p=0 vanishes at the chosen point by the boundary strict-local calculation and finite-stalk formula. Thus the projected higher direct image vanishes at this point.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree r=2, the inequality forces the base point to have maximal residue transcendence degree d-1, hence to be the generic point: a nonzero prime of the polynomial ring imposes a nonzero relation among the d-1 coordinate residues. The smooth strict-local field model at the generic point gives a zero-dimensional regular local domain, which is its separably closed residue field. The pullback of f to this strict localization is the affine line over that field. Its torsion cohomological dimension is at most one by the affine curve theorem, so H^2 vanishes. Apply hStalk to get the generic stalk vanishing. Finally, for a separably closed geometric field Omega, extend to its algebraic closure. This purely inseparable extension induces an equivalence of etale topoi; the geometric-stalk/inverse-image comparison transports the vanishing back to s^*R^r f_*M.",
+   "uses": [
+    "lem-sc-smooth-strict-local-field-model",
+    "def-weil-regular-scheme",
+    "def-kun-transcendence-degree",
+    "lem-sc-arbitrary-curve-cd",
+    "lemma-openclosed-stalk-upperstar",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-affine-space-smooth",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-inverse-image",
+  "lem-sc-smooth-strict-local-field-model",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "thm-sp-grothendieck",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "def-weil-regular-scheme",
+  "def-kun-transcendence-degree",
+  "lem-sc-arbitrary-curve-cd"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P1",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Proof steps 5-10; global induction and local algebra are proved in the calling source module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "vanishing of higher direct images for affine line projection stalk support transcendence degree",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.stalkMap_injective_of_isAffine, AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter",
+   "date": "2026-10-15",
+   "verdict": "No matching etale projection stalk or transcendence-degree support theorem; hits concern affine limits or hom-complex cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*stalk.*(bound|vanish)|projection.*cohomolog",
+   "results": "1 hits: Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+   "date": "2026-10-15",
+   "verdict": "No matching etale projection stalk or transcendence-degree support theorem; hits concern affine limits or hom-complex cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"stalk\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "No matching etale projection stalk or transcendence-degree support theorem; hits concern affine limits or hom-complex cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The higher direct images of the affine line projection vanish at geometric points when the degree plus residue transcendence degree exceeds the total affine space dimension",
+   "date": "2026-10-15",
+   "status": "unavailable",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension",
+  "date": "2026-10-16",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-affine-torsion-cd",
+   "place": "Proof steps 5-10: strict-local boundary stalk calculation, affine-line compactification, and the exceptional generic degree two",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/AffineLineProjectionStalkBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineLineProjection_stalk_bound",
+  "statement": "theorem affineLineProjection_stalk_bound\n    (hP1 : ∀ (S : Scheme.{u})\n      (F : Sheaf (AlgebraicGeometry.ProjectiveLine S).smallEtaleTopology\n        AddCommGrpCat.{u + 1}), F.IsTorsion → ∀ q : ℕ, 2 < q →\n      IsZero (((Etale.lowerStar AddCommGrpCat.{u + 1}\n        (AlgebraicGeometry.ProjectiveLine S ↘ S)).rightDerived q).obj F))\n    (hBoundary : ∀ {U Z Y : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j]\n      (i : Z ⟶ Y) [IsClosedImmersion i] (g : Y ⟶ Z),\n      Set.range i.base = (Set.range j.base)ᶜ → i ≫ g = 𝟙 Z →\n      ∀ (M : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (p q : ℕ),\n      0 < p → 0 < q →\n      IsZero (((Etale.lowerStar AddCommGrpCat.{u + 1} g).rightDerived p).obj\n        (((Etale.lowerStar AddCommGrpCat.{u + 1} j).rightDerived q).obj M)))\n    (hStalk : ∀ {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]\n      {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n      (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}), F.IsTorsion → ∀ q : ℕ,\n      Subsingleton (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1}\n        (pullback.fst f (strictHenselizationStructuralMap s))).obj F) q) →\n      IsZero ((pointSmallEtale s).sheafFiber.obj\n        (((Etale.lowerStar AddCommGrpCat.{u + 1} f).rightDerived q).obj F)))\n    (hLeray : ∀ {X Y S T : Scheme.{u}} (j : X ⟶ Y) (g : Y ⟶ S) (s : T ⟶ S)\n      (M : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (r : ℕ),\n      (∀ p q : ℕ, p + q = r →\n        IsZero ((Etale.upperStar AddCommGrpCat.{u + 1} s).obj\n          (((Etale.lowerStar AddCommGrpCat.{u + 1} g).rightDerived p).obj\n            (((Etale.lowerStar AddCommGrpCat.{u + 1} j).rightDerived q).obj M)))) →\n      IsZero ((Etale.upperStar AddCommGrpCat.{u + 1} s).obj\n        (((Etale.lowerStar AddCommGrpCat.{u + 1} (j ≫ g)).rightDerived r).obj M)))\n    (hAffineLine : ∀ (K : Type u) [CommRing K] (m : ℕ),\n      let B := Spec (.of (MvPolynomial (Fin m) K))\n      let f := Spec.map (CommRingCat.ofHom (MvPolynomial.rename\n        (Fin.castSucc : Fin m → Fin (m + 1))).toRingHom)\n      ∃ e : Spec (.of (MvPolynomial (Fin (m + 1)) K)) ≅ AffineSpace PUnit.{u + 1} B,\n        e.hom ≫ AffineSpace PUnit.{u + 1} B ↘ B = f)\n    (K : Type u) [Field K] [IsAlgClosed K] (n : ℕ)\n    (hCartier : ∀ (Y : Scheme.{u}) [IsIntegral Y]\n        (f : Y ⟶ Spec (.of K)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f]\n        (a : ℕ), a < n + 2 → topologicalKrullDim Y = ((n + 2 : ℕ) : WithBot ℕ∞) →\n        ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)\n          (y : Y), s (IsLocalRing.closedPoint Ω) = y →\n        ∀ [Algebra K (Y.residueField y)],\n          Spec.map (CommRingCat.ofHom (algebraMap K (Y.residueField y))) =\n            Y.fromSpecResidueField y ≫ f →\n        ∀ [Algebra (Y.residueField y) Ω],\n          Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) Ω)) ≫\n            Y.fromSpecResidueField y = s →\n          Algebra.trdeg K (Y.residueField y) = (a : Cardinal.{u}) →\n        ∀ [Algebra K (strictHenselizationRing s)],\n          Spec.map (CommRingCat.ofHom (algebraMap K (strictHenselizationRing s))) =\n            strictHenselizationStructuralMap s ≫ f →\n        ∀ (h : strictHenselizationRing s), h ∈ IsLocalRing.maximalIdeal _ → h ≠ 0 →\n          (Spec (.of (Localization.Away h))).HasTorsionCohomologicalDimensionLE (n + 2 - a))\n    (M : Sheaf (Spec (.of (MvPolynomial (Fin (n + 2)) K))).smallEtaleTopology\n      AddCommGrpCat.{u + 1}) (N : ℕ) (hN : 0 < N) (hM : N • 𝟙 M = 0)\n    (q : ℕ) (hq : 2 ≤ q) :\n      let f : Spec (.of (MvPolynomial (Fin (n + 2)) K)) ⟶\n          Spec (.of (MvPolynomial (Fin (n + 1)) K)) :=\n        Spec.map (CommRingCat.ofHom (MvPolynomial.rename\n          (Fin.castSucc : Fin (n + 1) → Fin (n + 2))).toRingHom)\n      let b := Spec.map (CommRingCat.ofHom (algebraMap K (MvPolynomial (Fin (n + 1)) K)))\n      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n        (s : Spec (.of Ω) ⟶ Spec (.of (MvPolynomial (Fin (n + 1)) K))),\n        ((n + 2 : ℕ) : Cardinal.{u}) < (q : Cardinal.{u}) +\n            residueFieldTrdeg b (s (IsLocalRing.closedPoint Ω)) →\n          IsZero ((Etale.upperStar AddCommGrpCat.{u + 1} s).obj\n            (((Etale.lowerStar AddCommGrpCat.{u + 1} f).rightDerived q).obj M))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261015T233749-L-3369427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261015T233749-L-3369427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
