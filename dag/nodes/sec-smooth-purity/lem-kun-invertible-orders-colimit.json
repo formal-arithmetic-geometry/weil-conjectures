@@ -3,46 +3,156 @@
  "blueprint": {
   "is": "lem-kun-invertible-orders-colimit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The colimit description of invertible orders",
- "statement": "Let $K$ be a field and $F$ a\ntorsion sheaf on the etale site\nof a $K$-scheme; write $F[n]=\\ker(n:F\\to F)$ and let $I_K$ be the\nset of integers invertible in $K$, as in\n[def-kun-torsion-invertible]. Then $F$ has orders invertible in\n$K$ if and only if\n\n$$\nF=\\varinjlim_{n\\in I_K}F[n].\n$$",
+ "statement": "Let $K$ be a field and $F$ a\ntorsion sheaf on the etale site\nof a $K$-scheme; write $F[n]=\\ker(n:F\\to F)$ and let $I_K$ be the\nset of integers invertible in $K$, as in\n[def-kun-torsion-invertible]. Then $F$ has orders invertible in\n$K$ if and only if\n\n$$\nF=\\varinjlim_{n\\in I_K}F[n].\n$$\n\nThe colimit [def-weil-pbc-category-colimit] is taken in the category of etale abelian sheaves [def-weil-pbc-etale-sheaves], over the positive integers in $I_K$ ordered by divisibility, with inclusion maps $F[n]\\hookrightarrow F[m]$ for $n\\mid m$. The kernels are those of [def-pur-abelian-sheaf-kernel]. The displayed equality means that the canonical map $c:\\varinjlim_{n\\in I_K}F[n]\\to F$ induced by the inclusions is an isomorphism.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-invertible-orders-colimit.md",
   "place": "node lem-kun-invertible-orders-colimit, order 1688"
  },
  "stmt_deps": [
-  "def-kun-torsion-invertible"
+  "def-kun-torsion-invertible",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-sheaves",
+  "def-pur-abelian-sheaf-kernel"
  ],
  "proof": [
   {
-   "text": "Since $F$ is torsion, $F=\\varinjlim_{n\\ge1}F[n]$ by\n[lemma-weil-pbc-torsion-filtered-union], and the canonical map\n$\\varinjlim_{n\\in I_K}F[n]\\to F$ is the comparison of the\nsub-colimit over the divisibility-ordered subset\n$I_K\\subseteq\\mathbf N_{>0}$. Geometric stalks commute with these\ncolimits ([lem-kun-stalks-commute-colimits]), so this comparison\nis an isomorphism if and only if it is an isomorphism on every\ngeometric stalk ([lemma-weil-pbc-geometric-stalk-conservative]); on\na stalk it says that every element is killed by some $n\\in I_K$,\nwhich is exactly the defining condition of\n[def-kun-torsion-invertible]. The notion of a torsion sheaf is\nthat of [def-weil-pbc-etale-sheaves].",
+   "text": "Write $X$ for the $K$-scheme on whose small etale site $F$ is given. The blueprint proof first uses [lemma-weil-pbc-torsion-filtered-union] to identify the unrestricted positive-integer torsion colimit with $F$; the restricted comparison below is the subdiagram needed for the claimed equivalence. By [def-kun-torsion-invertible], $I_K=\\{n\\geq1:n\\cdot1_K\\ne0\\}$. It contains $1$, and for $n,m\\in I_K$ it contains $nm$, since $(nm)\\cdot1_K=(n\\cdot1_K)(m\\cdot1_K)\\ne0$ in the field $K$. Thus its divisibility poset is small, nonempty and directed; parallel arrows are unique, so it is a filtered category [def-weil-pbc-category-colimit]. By [def-pur-abelian-sheaf-kernel], $F[n](U)=\\{s\\in F(U):ns=0\\}$. For $n\\mid m$, say $m=an$, $ns=0$ gives $ms=a(ns)=0$, yielding the inclusion $F[n]\\hookrightarrow F[m]$. These inclusions compose and are compatible with the inclusions into $F$. All small colimits in $\\Ab(X_{\\Et})$ exist by [lem-weil-pbc-abelian-etale-sheaves-grothendieck], so the colimit universal property [def-weil-pbc-category-colimit] gives $C=\\varinjlim_{n\\in I_K}F[n]$ and its canonical comparison $c:C\\to F$.",
    "uses": [
     "lemma-weil-pbc-torsion-filtered-union",
-    "lem-kun-stalks-commute-colimits",
-    "lemma-weil-pbc-geometric-stalk-conservative",
     "def-kun-torsion-invertible",
-    "def-weil-pbc-etale-sheaves"
+    "def-weil-pbc-category-colimit",
+    "def-pur-abelian-sheaf-kernel",
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-invertible-orders-colimit.md",
+    "place": "Blueprint proof opening sentence (unrestricted torsion colimit), together with Tag 03CO (1) for colimit existence and (2) for sectionwise kernels; construction of the restricted diagram is written out here"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar x$ of $X$, with stalk defined in [def-weil-pbc-geometric-stalks], and put $G=F_{\\bar x}$. Exactness of this stalk functor [prop-weil-pbc-geometric-stalks-exact] identifies $(F[n])_{\\bar x}\\to F_{\\bar x}$ with $G[n]=\\ker(n:G\\to G)\\hookrightarrow G$: apply the exact functor to $0\\to F[n]\\to F\\xrightarrow{n}F$. The induced last map is multiplication by $n$, because on a representative section $s$ the germ of $ns$ is $n$ times the germ of $s$. These identifications respect the transition maps: for $n\\mid m$ the triangle of inclusions into $F$ commutes, and after taking stalks the map $G[n]\\to G[m]$ is the inclusion, since both injections to $G$ send an element to itself.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PT, lemma-stalk-exact (3); compatibility checked on the kernel inclusions"
+   }
+  },
+  {
+   "text": "For the diagram of subgroups $G[n]\\subseteq G$ just obtained, let $U=\\bigcup_{n\\in I_K}G[n]$. It is a subgroup: two elements killed by $n$ and $m$ have their sum killed by the common multiple $nm\\in I_K$, and negatives stay in the same kernel. Its inclusions exhibit $U$ as the colimit [def-weil-pbc-category-colimit]. Indeed, for any compatible family of homomorphisms $f_n:G[n]\\to H$, define $f:U\\to H$ by $f(x)=f_n(x)$ when $x\\in G[n]$. If also $x\\in G[m]$, both values equal $f_{nm}(x)$; addition can likewise be checked in $G[nm]$. Thus $f$ is a well-defined homomorphism, and it is uniquely determined because every element of $U$ lies in some $G[n]$. Under this colimit description the comparison to $G$ is exactly the inclusion $U\\hookrightarrow G$, so it is an isomorphism if and only if $U=G$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By [lem-kun-stalks-commute-colimits], $C_{\\bar x}\\cong\\varinjlim_{n\\in I_K}(F[n])_{\\bar x}$. The colimit isomorphism identifies the stalk $c_{\\bar x}$ with the map induced by $(F[n])_{\\bar x}\\to F_{\\bar x}$, because its composites with all colimit coprojections are those stalk inclusions. Combining steps 2 and 3, $c_{\\bar x}$ is an isomorphism if and only if every $x\\in F_{\\bar x}$ is killed by some $n\\in I_K$.",
+   "uses": [
+    "lem-kun-stalks-commute-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PT, lemma-stalk-exact, proof of (1)-(3): directed stalk colimits commute with abelian presheaf colimits and sheafification leaves stalks unchanged; together with Tag 03CO, sites-modules.tex, lemma-limits-colimits-abelian-sheaves (4), this gives preservation of abelian sheaf colimits. Clause (4) of 03PT is stated for sheaves of sets. The comparison is determined by its composites with coprojections."
+   }
+  },
+  {
+   "text": "Both $C$ and $F$ are etale sheaves of abelian groups on the same scheme $X$, so [lemma-weil-pbc-geometric-stalk-conservative] applies to $c$: it is an isomorphism if and only if $c_{\\bar x}$ is an isomorphism at every geometric point $\\bar x$. By step 4 this is equivalent to every element of every geometric stalk being killed by some $n\\in I_K$, exactly the condition of having orders invertible in $K$ in [def-kun-torsion-invertible]. This proves both directions for the canonical comparison required in the statement.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-kun-torsion-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PU, theorem-exactness-stalks; Tag 040S, remarks-enough-points (1); definition of invertible orders"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-torsion-filtered-union",
-  "lem-kun-stalks-commute-colimits",
-  "lemma-weil-pbc-geometric-stalk-conservative",
   "def-kun-torsion-invertible",
-  "def-weil-pbc-etale-sheaves"
+  "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-geometric-stalks",
+  "lem-kun-stalks-commute-colimits",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-weil-pbc-torsion-filtered-union",
+  "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-invertible-orders-colimit.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Blueprint proof paragraph in literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-invertible-orders-colimit.md, with Stacks Tags 03PT, 03PU and 03CO supplying the stalk and colimit facts; the restricted-index calculation is written out here."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A torsion etale sheaf of abelian groups has orders invertible in a field if and only if it is the filtered colimit of kernels of multiplication by positive integers invertible in that field",
+   "results": "8 hits: Concrete.colimit_no_zero_smul_divisor and Concrete.colimit_rep_eq_zero (Mathlib/CategoryTheory/Limits/ConcreteCategory/WithAlgebraicStructures); Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_etaleLocus_iff; localCohomology.ofDiagram, isoSelfLERadical, hasColimitDiagram; LightCondensed.instIsGrothendieckAbelianLightCondMod. These concern module colimits, etale ring loci, local cohomology or category structure, not the asserted torsion-sheaf equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.kernel, CategoryTheory.Limits.colimit",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torsion sheaf is a filtered union of the subsheaves killed by integers invertible in a field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*sheaf|sheaf.*torsion|invertibleOrder|IsTorsionSheaf",
+   "results": "0 hits in Mathlib",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of abelian groups is the union of the kernels of multiplication by elements in a multiplicative subset of the natural numbers exactly when every stalk element is annihilated by one of these integers",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData (and I, X), GeneratingSections (and I), PresheafOfModules.Sheafify.instNonemptySMulCandidate, ModuleCat.Tilde.sectionsSubmodule and exists_const. These describe generators, sheafification or the associated quasicoherent sheaf, not a canonical colimit of invertible-order torsion subsheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*kernel|kernel.*colimit|colimit.*[Tt]orsion|[Tt]orsion.*colimit",
+   "results": "25 displayed hits: cokernel colimit constructions in Algebra/Category/Grp/Kernels, ModuleCat/Kernels and Abelian, ModuleCat sheaf/presheaf presentations, AlgebraicGeometry/Modules/Tilde, SimplicialSet/Homology/HomologyZero. None states the equivalence for torsion etale sheaves and invertible annihilators.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsionBySet|IsTorsionBySet|torsion.*(colimit|[Ss]heaf)|([Ss]heaf|colimit).*torsion",
+   "results": "24 displayed hits concerning torsion submodules, primary components and annihilators. Read Algebra/Module/Torsion/Basic.lean:27-30 and 183-215: torsionBySet means annihilation by every member of a set, while torsion' is the elementwise existential notion. Neither is an etale sheaf colimit theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive sheaf is the directed union of the subsheaves annihilated by a multiplicatively closed set of nonzero natural numbers if and only if all geometric fibers are torsion for this set",
+   "results": "8 hits concerning sheafification scalar structures, finite generation and finite presentation of sheaves of modules; none states the stalkwise torsion criterion or the canonical annihilator-kernel colimit.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -68,5 +178,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-invertible-orders-colimit",
+  "worker": "stage1",
+  "summary": "Expanded the imported single stalk argument into five steps: the small filtered invertible-integer diagram and canonical map, exact identification of each kernel stalk, an explicit elementary proof that the directed subgroup union is the colimit, preservation of that comparison by stalks, and conservativity in both directions. Clarified the canonical interpretation of the displayed equality without changing the assertion or hypotheses. Added kernel and colimit notion dependencies; removed the unnecessary use of the unrestricted torsion-union theorem. Exactness of stalks was missing from the imported citation list and is now cited. All required lemmas already exist; no new nodes. Mathlib searches ran through msearch.py; LeanSearch was unavailable. No exact project attachment was found.",
+  "blueprint": "The five steps realize the whole imported proof paragraph: its canonical sub-colimit comparison is step 1, its assertion about what the map says on a stalk is justified in steps 2-4 (including the previously implicit kernel-stalk and subgroup-colimit arguments), and its final iff by geometric stalks and the definition is step 5. The preliminary unrestricted torsion-union sentence is unnecessary. The unit has no proof steps to replace.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q45-d0021bf2d",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-d0021bf2d (reviewer sub-agent of L); spot-checked: Mathematics and all five steps check out, including the canonical comparison, abelian-sheaf coefficient category, stalk kernel identification, filtered subgroup colimit, stalk-colimit preservation, conservativity, and edge cases. The delivery incorrectly reports the blueprint Markdown as unavailable and silently omits its explicit opening citation to the existing unrestricted torsion filtered-union lemma. I wrote the corrected whole DAG JSON at fixes/dag/nodes/sec-smooth-purity/lem-kun-invertible-orders-colimit.json, adding that citation and dependency and correcting the source provenance. Review: review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
