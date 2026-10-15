@@ -7,10 +7,7 @@ module
 
 public import Sheaf.Paper.ProfiniteTestObjectFunctor
 public import Mathlib.Topology.Connected.TotallyDisconnected
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.Topology.Spectral.Basic
-import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
-import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Maps to relative profinite test schemes
@@ -27,6 +24,109 @@ universe u
 open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.ProEtale
+
+private noncomputable def componentMapEquiv (A : Type u) [TopologicalSpace A]
+    (S : Profinite.{u}) : C(A, S) ≃ C(ConnectedComponents A, S) where
+  toFun f := ⟨f.continuous.connectedComponentsLift,
+    f.continuous.connectedComponentsLift_continuous⟩
+  invFun f := f.comp ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩
+  left_inv f := by ext x; simp
+  right_inv f := by
+    ext x
+    obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe x
+    simp
+
+private noncomputable def profiniteHomContinuousEquiv (A S : Profinite.{u}) :
+    (A ⟶ S) ≃ C(A, S) where
+  toFun f := f.hom.hom
+  invFun f := ConcreteCategory.ofHom f
+
+-- Reuse the proved locally constant ring correspondence from Basic. Its inverse
+-- sends a ring map to the first coordinate of its map on prime spectra.
+private noncomputable def specMapEquiv (R : CommRingCat.{u}) (S : Profinite.{u}) :
+    (Spec R ⟶ profiniteToScheme.obj S) ≃ C(Spec R, S) :=
+  Spec.homEquiv.trans ((opEquiv _ _).symm.trans
+    ((profiniteLocallyConstantHomEquiv (op R) S).symm.trans
+      ((profiniteHomContinuousEquiv _ S).trans (componentMapEquiv (Spec R) S).symm)))
+
+private lemma specMapEquiv_apply (R : CommRingCat.{u}) (S : Profinite.{u})
+    (f : Spec R ⟶ profiniteToScheme.obj S) (x : Spec R) :
+    specMapEquiv R S f x =
+      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm (f x)).1 := by
+  change profiniteSpectrumProjection (Spec.homEquiv f).hom x = _
+  obtain ⟨φ, rfl⟩ := Spec.homEquiv.symm.surjective f
+  rw [Equiv.apply_symm_apply]
+  rfl
+
+private noncomputable def affineMapEquiv (A : Scheme.{u}) [IsAffine A]
+    (S : Profinite.{u}) : (A ⟶ profiniteToScheme.obj S) ≃ C(A, S) :=
+  (Iso.homCongr A.isoSpec (Iso.refl _)).trans
+    ((specMapEquiv _ S).trans
+      ((Scheme.homeoOfIso A.isoSpec.symm).continuousMapCongr (Homeomorph.refl S)))
+
+private lemma affineMapEquiv_apply (A : Scheme.{u}) [IsAffine A] (S : Profinite.{u})
+    (f : A ⟶ profiniteToScheme.obj S) (x : A) :
+    affineMapEquiv A S f x =
+      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm (f x)).1 := by
+  change specMapEquiv _ S (A.isoSpec.inv ≫ f ≫ 𝟙 _) (A.isoSpec.hom x) = _
+  rw [specMapEquiv_apply]
+  simp
+
+-- Maps over X into the base change are maps into Spec LC(S, Z), since Spec Z is terminal.
+private noncomputable def relativeMapEquiv (X : Scheme.{u}) (U : X.ProEt)
+    (S : Profinite.{u}) : (U ⟶ (profiniteToProEtOf X).obj S) ≃
+      (U.left ⟶ profiniteToScheme.obj S) where
+  toFun f := f.left ≫ Limits.pullback.fst _ _
+  invFun f := MorphismProperty.Over.homMk
+    (Limits.pullback.lift f U.hom (by
+      change f ≫ toSpecZ _ = U.hom ≫ toSpecZ X
+      exact specULiftZIsTerminal.hom_ext _ _)) (by
+        change Limits.pullback.lift _ _ _ ≫ Limits.pullback.snd _ _ = _
+        simp)
+  left_inv f := by
+    apply MorphismProperty.Over.Hom.ext
+    apply Limits.pullback.hom_ext
+    · simp
+    · change Limits.pullback.lift _ _ _ ≫ Limits.pullback.snd _ _ = _
+      rw [Limits.pullback.lift_snd]
+      exact f.w.symm
+  right_inv f := by simp
+
+private noncomputable def pointComponentsEquiv (X : Scheme.{u}) (U : X.ProEt)
+    [IsAffine U.left] (S : Profinite.{u}) :
+    (U ⟶ (profiniteToProEtOf X).obj S) ≃ C(ConnectedComponents U.left, S) :=
+  (relativeMapEquiv X U S).trans
+    ((affineMapEquiv U.left S).trans (componentMapEquiv U.left S))
+
+private lemma pointComponentsEquiv_apply (X : Scheme.{u}) (U : X.ProEt)
+    [IsAffine U.left] (S : Profinite.{u})
+    (f : U ⟶ (profiniteToProEtOf X).obj S) (x : U.left) :
+    pointComponentsEquiv X U S f (ConnectedComponents.mk x) =
+      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
+        ((f.left ≫ Limits.pullback.fst _ _) x)).1 := by
+  change (affineMapEquiv U.left S (relativeMapEquiv X U S f)) x = _
+  exact affineMapEquiv_apply _ _ _ _
+
+private lemma profiniteProjection_natural (S T : Profinite.{u}) (b : S ⟶ T)
+    (x : profiniteToScheme.obj S) :
+    ((LocallyConstant.homeomorphPrimeSpectrum (T := T) (R := ℤ)).symm
+      (profiniteToScheme.map b x)).1 =
+    b (((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm x).1) := by
+  obtain ⟨⟨s, p⟩, rfl⟩ := LocallyConstant.toPrimeSpectrum_surjective x
+  change ((LocallyConstant.homeomorphPrimeSpectrum (T := T) (R := ℤ)).symm
+      (LocallyConstant.homeomorphPrimeSpectrum (T := T) (R := ℤ) (b s, p))).1 =
+    b (((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
+      (LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ) (s, p))).1)
+  rw [Homeomorph.symm_apply_apply, Homeomorph.symm_apply_apply]
+
+private lemma relativeMapEquiv_target (X : Scheme.{u}) (U : X.ProEt)
+    (S T : Profinite.{u}) (b : S ⟶ T) (f : U ⟶ (profiniteToProEtOf X).obj S) :
+    relativeMapEquiv X U T (f ≫ (profiniteToProEtOf X).map b) =
+      relativeMapEquiv X U S f ≫ profiniteToScheme.map b := by
+  change (f.left ≫ ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)).map
+      (profiniteToProEt.map b)).left) ≫ Limits.pullback.fst _ _ = _
+  rw [MorphismProperty.Over.pullback_map_left]
+  simp [Category.assoc, relativeMapEquiv, profiniteToProEt]
 
 /-- The component quotient of an affine weakly contractible pro-etale object is profinite.
 Maps to `X[S]` are naturally continuous maps from this quotient to `S`.
@@ -87,6 +187,34 @@ theorem proEtale_point_components_maps (X : Scheme.{u}) :
         e V hV wV S (a ≫ f) = (e U hU wU S f).comp
           ⟨a.left.continuous.connectedComponentsMap,
             a.left.continuous.connectedComponentsMap_continuous⟩) := by
-  sorry
+  -- The affine correspondence is stronger than needed: weak contractibility is unused.
+  constructor
+  · intro U hU _
+    let _ := hU
+    exact ⟨inferInstance, inferInstance, inferInstance⟩
+  · refine ⟨fun U hU _ S ↦ @pointComponentsEquiv X U hU S, ?_, ?_⟩
+    · intro U hU wU S T b f
+      let _ := hU
+      ext x
+      obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe x
+      change pointComponentsEquiv X U T (f ≫ (profiniteToProEtOf X).map b)
+          (ConnectedComponents.mk x) = b (pointComponentsEquiv X U S f
+            (ConnectedComponents.mk x))
+      rw [pointComponentsEquiv_apply, pointComponentsEquiv_apply]
+      change ((LocallyConstant.homeomorphPrimeSpectrum (T := T) (R := ℤ)).symm
+          (relativeMapEquiv X U T (f ≫ (profiniteToProEtOf X).map b) x)).1 = _
+      rw [relativeMapEquiv_target]
+      exact profiniteProjection_natural S T b _
+    · intro U V hU hV wU wV a S f
+      let _ := hU
+      let _ := hV
+      ext x
+      obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe x
+      change pointComponentsEquiv X V S (a ≫ f) (ConnectedComponents.mk x) =
+        pointComponentsEquiv X U S f (a.left.continuous.connectedComponentsMap
+          (ConnectedComponents.mk x))
+      rw [Continuous.connectedComponentsMap_mk, pointComponentsEquiv_apply,
+        pointComponentsEquiv_apply]
+      rfl
 
 end AlgebraicGeometry.ProEtale
