@@ -1,80 +1,124 @@
 ## What changed
 
-The target module now imports `Sheaf.Algebra.Homology.FunctorialObjectResolution` and proves
-`CochainComplex.exists_functorial_bounded_injective_resolution` by composing two strictly lower
-construction steps.  The first new theorem isolates normalization, recursive cokernels, zero-morphism preservation, and zero-object behavior of functorial injective resolutions of objects.  The second theorem isolates the
-bicomplex totalization, first-quadrant quasi-isomorphism argument, finite diagonal injectivity,
-and preservation of every lower bound.  The target statement and all its binders are unchanged.
+Completed `CochainComplex.exists_functorial_bounded_injective_resolution_of_object_resolution`
+in `Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution`. Extend the supplied
+object resolutions by zero and apply them degreewise to the complex. The canonical total
+complex and total maps give one replacement functor independent of a chosen lower bound.
+Finite diagonal biproducts prove injectivity and preservation of every lower bound.
+A private comparison argument truncates columns when checking each homology degree and
+applies the source library's proved finite-column comparison theorem.
+
+All existing public signatures, visibility, public imports, and declaration docstrings are
+unchanged. All new helpers are private. The two item nodes record the actual proof routes.
+The change record `coord/changes/functorial-injective-resolution-proof-scopes.md` describes
+private proof scopes which the static preflight conservatively classifies as an interface
+change. There are no new nodes, forced adaptations, or target changes.
+
+The draft also completed `Sheaf.Algebra.Homology.FunctorialObjectResolution`. The second
+reader checked that proof and its axioms, but the dry run refused its inclusion because
+E1 now holds that module (server claim checked directly). It is not a forced adaptation:
+the original compiles unchanged against this delivery. Its reviewed source and node are
+preserved under `withheld/` in this sandbox and are excluded from the delivery.
 
 ## Proved and sorry left
 
-The original target hole is closed at the level of a real Lean proof:
-`CochainComplex.exists_functorial_bounded_injective_resolution` (node
-`lem-weil-pbc-functorial-bounded-injective-resolution`).  Its proof obtains the objectwise
-resolution and applies the totalization theorem with the resulting data.
+Closed one existing hole:
 
-Two strictly simpler public construction theorems remain as named `sorry`s:
+- `CochainComplex.exists_functorial_bounded_injective_resolution_of_object_resolution`
+  (`lem-weil-pbc-functorial-bounded-injective-resolution-totalization`).
 
-- `CochainComplex.exists_functorial_object_injective_resolution` (node
-  `lem-weil-pbc-functorial-object-resolution`), for normalization, recursive cokernels,
-  exactness, zero preservation, and injectivity of the objectwise augmented complexes;
-- `CochainComplex.exists_functorial_bounded_injective_resolution_of_object_resolution` (node
-  `lem-weil-pbc-functorial-bounded-injective-resolution-totalization`), for totalizing supplied
-  functorial object resolutions with zero preservation into one bounded-below complex functor.
+No hole is added or split off, and no `sorry` remains in the delivered module. This is a
+complete proof of the supplied-object-resolution totalization theorem, not a decomposition.
 
-No definition contains `sorry`; both remaining holes are the complete proofs of their named
-public theorems.
+The upper `CochainComplex.exists_functorial_bounded_injective_resolution` retains its
+existing assembly proof. Its existing dependency
+`CochainComplex.exists_functorial_object_injective_resolution`
+(`lem-weil-pbc-functorial-object-resolution`) remains open in E1's module, which this
+delivery does not change. Consequently the assembly theorem still depends on `sorryAx`;
+the newly closed totalization theorem uses only the three permitted standard axioms.
 
 ## No longer needed
 
-Removed the unused public import `Mathlib.Algebra.Homology.DerivedCategory.Basic`; the target
-interface is already supplied by `CochainComplexPlus`.  The imported `Sheaf.Algebra.Homology.DoubleComplexTotal` and
-`Sheaf.Algebra.Homology.FirstQuadrantAugmentation` remain necessary for the totalization theorem;
-`Mathlib.Algebra.Homology.CochainComplexPlus` and
-`Mathlib.CategoryTheory.Preadditive.Injective.Basic` remain necessary for the target interfaces.
-The new object-resolution module uses only the cochain-complex and injective interfaces.
-The proof dependency `def-weil-abstract-derived-category` and its
-`Mathlib.Algebra.Homology.DerivedCategory.Basic` module are no longer needed by this route.
-The import change is recorded in `coord/changes/functorial-bounded-injective-resolution-import.md`.
+Removed the item's proof-only imports:
+
+- `Sheaf.Algebra.Homology.FirstQuadrantAugmentation`
+- `Sheaf.CategoryTheory.DoubleComplexTotal`
+
+The second reader also removed the redundant proof-only import
+`Mathlib.Algebra.Homology.Embedding.ExtendHomology` introduced in the draft. Its required
+API is supplied by the remaining imports. Removal tests confirm `Int.Interval` remains
+necessary for finite diagonal indexing.
+
+All old direct dependencies removed from the totalization node are accounted for:
+
+- `lem-sc-first-quadrant-column-augmentation`: replaced by finite-column comparison,
+  without reindexing the bicomplex to natural degrees.
+- `def-sp-double-complex-total`: the proof uses Mathlib's canonical totalization directly.
+  This node remains an indirect dependency of finite-column comparison.
+- `def-sp-abelian`: removed as a redundant direct proof edge. The unchanged `[Abelian C]`
+  hypothesis and statement dependencies retain the setting, also recorded by the two
+  totalization/comparison dependencies. No assumption is removed.
+
+The proof instead uses `lem-sc-integer-finite-column-total-comparison` and
+`lem-weil-pbc-total-bounded-below`. No module is withdrawn or claimed to be pruned globally;
+other parents may still import the two removed modules.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The original DAG presents normalization, recursive cokernels, bicomplex totalization, and
-quasi-isomorphism verification as one theorem-sized hole.  The Lean interface is valid, but a
-complete proof requires these two independent construction theorems, so the node was split along
-its own numbered proof steps.  No unit statement or target statement was changed, and no route
-below the fixed proper-base-change unit was bypassed.
+The first-quadrant augmentation route can be replaced by finite column truncation and
+the source library's complete finite-column comparison proof. The existing
+`Sheaf.Algebra.Homology.BoundedBelowTotalComparison` theorem assumes countable coproducts,
+which are absent here. The local comparison proof uses only the totals supplied by finite
+diagonals and introduces no such assumption.
 
-## New nodes
+No statement was found false. The hypothesis that `E(0)` is zero follows from preservation
+of zero morphisms; it is retained unchanged.
 
-`lem-weil-pbc-functorial-object-resolution` records the objectwise functorial injective
-resolution construction and is implemented by
-`lean/Sheaf/Algebra/Homology/FunctorialObjectResolution.lean`.
-
-`lem-weil-pbc-functorial-bounded-injective-resolution-totalization` records the totalization
-construction from those objectwise resolutions and is implemented as
-`CochainComplex.exists_functorial_bounded_injective_resolution_of_object_resolution` in the
-item module.  No change record was needed.
-
-## Earlier second reading (a previous round; superseded)
-
-The target signature is unchanged and its proof is a real composition of the two strictly lower
-construction statements.  The two new statements are parts of the numbered plan: objectwise
-normalization/recursion and then totalization.  Their hypotheses include the zero-preservation
-data required for the bicomplex identities and lower-bound vanishing.  The fixed unit route is
-not bypassed.  All three delivered modules compile in dependency order, and the only changed
-existing interface is the explicitly documented redundant import removal.
+The draft report's assertion that D4 holds the object-resolution dependency became stale.
+The required dry run rejected that additional proof work because E1 holds it and its
+adaptation is not forced. The second reader corrected the delivery scope and all counts;
+the reviewed proof is preserved separately rather than modifying E1's module.
 
 ## Second reading by D4
 
-1. **Signatures and accidental changes.** I compared both delivered Lean modules with the repository versions. The existing target declaration is byte-for-byte unchanged; the only existing-module edit is its proof and the removal of the unused public `DerivedCategory.Basic` import. The two added declarations are new split-off statements and their formal binders match the report and DAG nodes. Verdict: **pass**.
+1. **Visible interface: pass.** Read both draft modules and their complete diffs. Compared
+   exact source bytes of all three existing theorem signatures, their docstrings, and the
+   public import lists: unchanged. All added declarations are private. After the ownership
+   rejection, excluded the object-resolution module and its node. The delivered file only
+   changes the item's proofs, private helpers, and proof-only imports. No target or public
+   definition changes, and no forced adaptation remains.
+2. **Proof and construction: pass.** Both draft modules compiled together without warnings
+   or errors in 6.7 s and 4.8 s. Scratch `#print axioms` checks initially confirmed all three
+   public theorems use only `propext`, `Classical.choice`, and `Quot.sound` against the draft
+   dependency. Final verification uses the shared object-resolution module instead: the
+   newly proved totalization theorem is independent of its open hole; the assembly theorem
+   still depends on that existing hole. That scratch compilation passed in 5.8 s and its
+   explicit axiom output confirmed exactly these dependencies. Read every private helper,
+   augmentation naturality,
+   the finite diagonal coproduct identification, and the comparison proof. There are no
+   sorries, forbidden declarations, or hollow definitions in the delivered file. Data comes
+   from canonical extensions, totalization, and coproduct universal properties, without
+   selecting arbitrary witnesses of unproved existence theorems.
+3. **Split statements and edge cases: pass.** No split statement or new node is delivered.
+   Checked zero complexes, zero morphisms, negative lower bounds, and empty diagonals n<a.
+   The truncation cutoff x=n-b+1 preserves all three terms n-1,n,n+1 computing homology,
+   including x<a. The private lemmas are fully proved, strictly smaller subarguments.
+4. **Shortest route, imports, and unit: pass after pruning.** Independently searched the
+   shared library, upstream homological algebra, and Mathlib for bounded-below comparison,
+   finite columns, recursive resolution functors, and functorial injective resolutions.
+   Read the existing finite-column theorem and the stronger-assumption bounded-below API;
+   no shorter applicable public theorem was found. Removed the redundant extension import
+   and confirmed the interval import is necessary. The pruning list accounts for every old
+   direct dependency removed. Checked `dag/units/sk-thm-properbasechange.json` `realized`:
+   neither this item nor the pruned augmentation node realizes a unit step. The unit route
+   is retained.
+5. **DAG agreement: pass.** Compared the two delivered JSON nodes with the shared versions:
+   only `proof`, `proof_deps`, and `proof_origin` differ. The totalization node records
+   finite diagonals and finite-column comparison; the upper node records object resolution
+   followed by totalization. Step dependency unions match `proof_deps`, and their recorded
+   Lean declarations exist. The upper route does not claim the object theorem is proved.
 
-2. **Proof soundness and holes.** Both modules compile with `lcompile.py`. The target theorem has no `sorry`; the only remaining holes are the two named split-off construction theorems, with no `sorry` in definitions and no forbidden declarations. Verdict: **pass**, with the two documented split holes remaining.
-
-3. **Truth and strength of split statements.** The object-resolution theorem states exactly the normalization/recursive-cokernel output needed by the target. The totalization theorem is independently parameterized by an arbitrary supplied objectwise resolution and states precisely the functor, quasi-isomorphism, injective-term, and lower-bound conclusions. Edge cases covered by the hypotheses include the zero object and empty diagonals. Searches recorded in the nodes found no existing theorem duplicating either statement. Verdict: **pass**.
-
-4. **Pruning and route.** The target proof uses only the object-resolution theorem followed by totalization. The redundant `DerivedCategory.Basic` public import is removed, while the totalization and first-quadrant imports remain needed. The fixed proper-base-change unit route and its `realized` fields are unchanged. Verdict: **pass**.
-
-5. **DAG agreement.** The target node proof and dependencies follow the two applications in the Lean proof. I removed the object-resolution dependency from the standalone totalization node because that theorem consumes `E` and `ε` as hypotheses and does not invoke the object-resolution declaration; its statement dependencies remain the definitions used by its interface. Verdict: **pass**.
-
-I changed only the standalone totalization node's dependency metadata and appended this second-reading record. No Lean proof or statement required repair.
+Second-reading changes: removed one redundant delivered proof import, completed the direct
+dependency pruning account, and withheld the separately held dependency and its node after
+the tool's ownership rejection. The item's proof bodies and DAG routes needed no repair.
+One existing hole is closed, zero are added, and zero are split off.
