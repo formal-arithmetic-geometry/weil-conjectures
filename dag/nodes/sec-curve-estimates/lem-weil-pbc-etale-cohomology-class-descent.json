@@ -13,56 +13,38 @@
  ],
  "proof": [
   {
-   "text": "Restrict D to the category Over i of arrows into i. The forgetful functor is initial for a cofiltered category (Mathlib Over.initial_forget), so its whiskered cone is still a limit (Functor.Initial.isLimitWhiskerEquiv). Its stages are qcqs and its transitions affine. The limit projections are affine (Mathlib isAffineHom_π_app), hence the limit is qcqs. This reduction keeps the chosen coefficient sheaf on the fixed stage.",
+   "text": "Restrict D to E = Over.forget i ⋙ D. Its objects carry the structure maps π_j = D.map j.hom to D_i. The whiskered cone c′ is still limiting because Over.forget i is initial for a cofiltered category (Mathlib Over.initial_forget and Functor.Initial.isLimitWhiskerEquiv). Its stages and transitions inherit the given qcqs and affine properties; c_i = c′_j π_j by the cone equation.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Compute Sheaf.H using an injective resolution of F, taking Hom from the constant integer sheaf. By the constant-sheaf adjunction this is the global-section complex. Thus this Ext encoding agrees with the derived-global-sections encoding of hypercover_cohomology. The identification is natural for the inverse-image adjunction, so its pullback is cohomologyMap followed by the indicated inverse-image composition comparison. Apply hypercover_cohomology to represent x by a degree-q cocycle on a finite split hypercover. Only degrees through q+1 are involved.",
+   "text": "Construct H on (Over i) opposite with objects H^q(D_j, π_j inverse image F) and maps cohomologyTriangleMap. Its identity and composition laws are exactly cohomologyTriangleMap_laws. Construct B with vertex H^q(c.pt, c_i inverse image F) and canonical triangle-pullback legs. Applying the composition law to a cone leg followed by a transition, and using the cone equation, proves naturality of these legs. All stage and vertex comparison isomorphisms are identity isomorphisms.",
    "uses": [
-    "lem-weil-pbc-ext-via-injective-resolution",
-    "thm-weil-pbc-hypercover-cohomology",
-    "lem-weil-pbc-cohomology-pullback-derived-unit"
+    "lem-weil-pbc-etale-cohomology-triangle-laws"
    ],
    "elementary": false
   },
   {
-   "text": "Descend the finite split skeleton through degree q+1, including the matching covering maps, to one stage by finite_hypercover_descent. Extend the descended skeleton to a finite split hypercover by the matching-object induction of hypercover-refinement: choose finitely many affine etale covering pieces in every next degree, retaining the already chosen lower skeleton.",
+   "text": "Apply nonempty_isColimit_cofiltered_fixed_base_cohomology to E, π, c′, the fixed limit structure map c_i and the explicitly constructed H and B. The required transition and leg equations follow directly from their definitions. This proves that B is a colimit, with its legs specified on every stage class, not merely on restrictions from the fixed base.",
    "uses": [
-    "lemma-weil-pbc-finite-hypercover-descent",
-    "lem-weil-pbc-hypercover-refinement"
+    "lem-weil-pbc-cofiltered-fixed-base-cohomology-continuity"
    ],
    "elementary": false
   },
   {
-   "text": "Each component of the degree-q cocycle is a section of the limit inverse image on a descended qcqs etale object. Section continuity gives a stage representative, after the finite refinement needed for local representatives. Choose a common stage for the finitely many components. The finitely many equations δz=0 hold on the limit. Apply injectivity in section continuity to their differences, and choose one further common stage where all differences vanish. The resulting finite list is a stage cocycle.",
-   "uses": [
-    "lem-weil-pbc-etale-section-continuity",
-    "lem-weil-pbc-hypercover-refinement"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The stage cocycle gives y by the same hypercover comparison. Pullback recovers the original cocycle, so naturality of the comparison gives the displayed equation, with the inverse upperStarComp transporting iterated inverse images. In degree zero this is a section with its degree-one gluing equations; no negative-degree cochain occurs. The zero sheaf and empty schemes give only the zero class.",
-   "uses": [
-    "thm-weil-pbc-hypercover-cohomology",
-    "lem-weil-pbc-cohomology-pullback-derived-unit"
-   ],
-   "elementary": false
+   "text": "The forgetful functor from abelian groups to types preserves these filtered colimits (Mathlib preservesFilteredColimitsOfSize_of_univLE). Concrete.isColimit_exists_rep gives an object j of (Over i) opposite and a class y whose B-leg is x. The underlying object j.unop.left and arrow j.unop.hom are the required stage and map to i. Unfolding the definitions of B and cohomologyTriangleMap identifies this leg definitionally with the cohomologyMap followed by the inverse upperStarComp appearing in the conclusion. No torsion condition is needed by this argument; q=0 and zero coefficients require no change.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ext-via-injective-resolution",
-  "thm-weil-pbc-hypercover-cohomology",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "lemma-weil-pbc-finite-hypercover-descent",
-  "lem-weil-pbc-hypercover-refinement",
-  "lem-weil-pbc-etale-section-continuity"
+  "lem-weil-pbc-etale-cohomology-triangle-laws",
+  "lem-weil-pbc-cofiltered-fixed-base-cohomology-continuity"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
-  "place": "Proof step 1, expanded finite hypercover cocycle descent"
+  "by": "worker",
+  "document": "Stacks Project, Tag 09YQ; existing fixed-base continuity and triangle-map interfaces",
+  "place": "H1, 2026-10-16: construct the full canonical fixed-base cohomology cocone on Over i and extract a finite-stage representative using its colimit universal property."
  },
  "mathlib_searches": [
   {
@@ -159,13 +141,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T044746-L-2036467",
-  "kind": "interface",
+  "landing": "20261015T221636-L-2636305",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
