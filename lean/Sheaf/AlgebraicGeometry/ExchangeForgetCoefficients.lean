@@ -7,14 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-import Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
-import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
-import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Mathlib.Algebra.Homology.DerivedCategory.Plus
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.SixFunctors.BaseChange.Derived
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Exchange and forgetting coefficients
@@ -98,6 +91,39 @@ theorem exchange_forget_coefficients
       (IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) ↔
         IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app
           (D+(moduleAbelianForget Λ X).obj K))) := by
-  sorry
+  have hcompat := moduleAbelianDerivedExchange_compatibility Λ sq.toCommSq K
+  refine ⟨?_, ?_, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, hcompat, ?_⟩
+  · intro T i
+    exact ⟨((moduleAbelianForget Λ T).mapDerivedCategoryPlusHomologyFunctorIso i).symm⟩
+  · intro T
+    exact ⟨inferInstance, inferInstance⟩
+  · have hforgot :
+        IsIso (D+(moduleAbelianForget Λ Y').map
+          ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)) ↔
+        IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app
+          (D+(moduleAbelianForget Λ X).obj K)) := by
+      rw [← isIso_comp_right_iff _ (moduleAbelianDerivedExchangeTargetIso Λ g' f' K).hom,
+        hcompat, isIso_comp_left_iff]
+    constructor
+    · intro h
+      exact hforgot.mp inferInstance
+    · intro h
+      have := hforgot.mpr h
+      apply (DerivedCategory.Plus.isIso_iff _).mpr
+      intro i
+      have := Functor.map_isIso
+        (DerivedCategory.Plus.homologyFunctor
+          (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) i)
+        (D+(moduleAbelianForget Λ Y').map
+          ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K))
+      have : IsIso ((moduleAbelianForget Λ Y').map
+          ((DerivedCategory.Plus.homologyFunctor
+            (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) i).map
+              ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K))) :=
+        (NatIso.isIso_map_iff
+          ((moduleAbelianForget Λ Y').mapDerivedCategoryPlusHomologyFunctorIso i)
+          ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)).2 this
+      exact isIso_of_reflects_iso _ (moduleAbelianForget Λ Y')
 
 end AlgebraicGeometry.Etale

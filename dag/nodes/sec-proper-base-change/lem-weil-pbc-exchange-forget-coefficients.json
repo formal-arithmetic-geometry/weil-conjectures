@@ -26,94 +26,57 @@
  ],
  "proof": [
   {
-   "text": "The forgetful functor of [def-weil-pbc-etale-sheaves] retains the underlying sheaf and its additive operations. A kernel is the same subsheaf of sections killed by the map, and a cokernel is the sheafification of the same quotient abelian groups with their induced module action; hence forgetting preserves kernels and cokernels and is exact. Thus on a representing complex it preserves $\\ker d^i/\\operatorname{im}d^{i-1}$, so $\\mathcal H^i(\\operatorname{For}K)=\\operatorname{For}\\mathcal H^i(K)$ and it preserves quasi-isomorphisms. The localization defining [def-weil-pbc-derived-categories] therefore gives the asserted bounded-below functor.",
+   "text": "The statement already uses sheaves valued in ModuleCat Λ, as do the fixed canonical comparisons. The instances moduleAbelianForget_preservesFiniteLimits and moduleAbelianForget_preservesFiniteColimits give exactness directly. For every scheme T and degree i, take the inverse of Functor.mapDerivedCategoryPlusHomologyFunctorIso to obtain the stated cohomology comparison. No separate change of sheaf encoding is necessary in this proof.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-derived-categories"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6J (lemma-modules-abelian-unbounded), image K_ab; exactness of coefficient restriction"
-   }
-  },
-  {
-   "text": "Before applying the comparison tools, use [lem-weil-pbc-etale-constant-ring-module-equivalence] on each scheme to identify sheaves valued in $\\Lambda$-modules with modules over the constant ring sheaf, as used in [def-weil-pbc-etale-sheaves]. The equivalence and its inverse retain the underlying abelian presheaves and maps, hence are additive. Their Hom bijections transport the universal properties of kernels and cokernels, so both are exact. Termwise application preserves cohomology and quasi-isomorphisms; the inverse functor and the equivalence unit and counit descend through localization to inverse equivalences on the bounded-below derived categories [def-weil-pbc-derived-categories]. Direct image [def-weil-pbc-direct-image] evaluates at the same fibre products in both encodings, with the scalar action restricted through the constant-ring map; therefore it commutes with these equivalences. Injectivity is preserved: the extension problem across a monomorphism transports through the Hom bijections and the exact inverse equivalence. Transporting bounded-below injective representatives thus identifies the derived direct images with their derived units. The inverse-image adjunction [def-weil-pbc-inverse-image] transports through the same Hom bijections, and the unit and counit are their images of identity maps. The inverse-image composition comparison is the unique comparison compatible with these adjunctions and the sectionwise direct-image composition identity. Consequently the unit, square-comparison, and counit factors defining [def-weil-pbc-derived-exchange] transport to those in the module-valued encoding. The comparison tools below therefore apply to the categories and the fixed exchange maps in this statement, rather than merely to equivalent categories with unspecified maps.",
-   "uses": [
-    "lem-weil-pbc-etale-constant-ring-module-equivalence",
     "def-weil-pbc-etale-sheaves",
     "def-weil-pbc-derived-categories",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-derived-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03CV (section-sheaves-modules), lemma-sheafification-presheaf-modules; Section 093I (section-constant); agent assembly from the cited constant-ring equivalence and adjunction definitions"
-   }
-  },
-  {
-   "text": "For an edge $u:A\\to B$, take the abelian adjoint of the forgotten module unit. By [lem-weil-pbc-module-abelian-inverse-image-comparison] this particular map $u^{-1}_{\\mathrm{Ab}}U_BJ\\to U_Au^{-1}_{\\mathrm{Mod}}J$ is an isomorphism. The unit is natural in J and adjunction is a natural Hom-bijection, so these components form a natural isomorphism. Its inverse is the comparison of clause (1); the equality there denotes this canonical identification, rather than strict equality of chosen functor models. This specifies the comparisons required by the exchange compatibility theorem, for all four edges.",
-   "uses": [
-    "lem-weil-pbc-module-abelian-inverse-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D3 (lemma-adjoint-push-pull-modules) and 03D7 (lemma-adjoint-pullback-pushforward-modules)"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-module-abelian-derived-direct-image-comparison] with $u=f$ and $u=f\\prime$. Its statement gives the fixed, unit-compatible canonical coefficient comparison, natural in the complex and invertible for every scheme morphism and every commutative coefficient ring. This is clause (2). In the K-injective model of Tag 0D6J(3) it is represented by $u_*I\\to u_*J$, where I represents the module complex and $U I\\to J$ is an abelian K-injective replacement. Exactness alone does not assert that $U I$ is K-injective or identify the two resolutions; invertibility is supplied by the cited comparison theorem.",
-   "uses": [
     "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6J (lemma-modules-abelian-unbounded), part (3) and first proof paragraph"
-   }
+   "elementary": true
   },
   {
-   "text": "A cartesian square is in particular commutative, so [lem-weil-pbc-module-abelian-derived-exchange-compatibility] applies to it with precisely the canonical comparisons fixed in steps 2 and 3. Its endpoint maps are $s_K:U_{Y\\prime}(g^{-1}_{\\mathrm{Mod}}Rf_*^{\\mathrm{Mod}}K)\\xrightarrow{\\sim}g^{-1}_{\\mathrm{Ab}}Rf_*^{\\mathrm{Ab}}(U_XK)$ and $r_K:U_{Y\\prime}(Rf\\prime_*^{\\mathrm{Mod}}g\\prime^{-1}_{\\mathrm{Mod}}K)\\xrightarrow{\\sim}Rf\\prime_*^{\\mathrm{Ab}}g\\prime^{-1}_{\\mathrm{Ab}}(U_XK)$. The cited equality is $r_K\\circ U_{Y\\prime}(\\Ex^{\\Lambda}_{\\square,K})=\\Ex_{\\square,U_XK}\\circ s_K$. These are the adjoint-mate exchange maps, not arbitrary maps between the same endpoints. Composing with the inverse endpoint isomorphisms is exactly the identification in clause (3).",
+   "text": "The canonical inverse-image comparisons on all four edges and derived direct-image comparisons on f and f′ are isomorphisms by their existing instances. Apply moduleAbelianDerivedExchange_compatibility to sq.toCommSq and K. Its equation uses exactly the source and target isomorphisms in the statement.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "lem-weil-pbc-module-abelian-derived-exchange-compatibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Since the endpoint comparisons are isomorphisms, isIso_comp_right_iff and isIso_comp_left_iff applied to the compatibility equation identify invertibility of the forgotten module exchange with invertibility of the abelian exchange. The forward implication of the final equivalence follows because every functor preserves isomorphisms.",
    "uses": [
     "lem-weil-pbc-module-abelian-derived-exchange-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7 (remark-base-change), adjoint-mate construction; coefficient coherence supplied by the cited node"
-   }
+   "elementary": true
   },
   {
-   "text": "Every functor preserves isomorphisms. For reflection, a module-sheaf map whose underlying abelian-sheaf map is invertible has a module-linear inverse: if h is the inverse of v, then $v(h(\\lambda y))=\\lambda y=v(\\lambda h(y))$ implies $h(\\lambda y)=\\lambda h(y)$; hence U reflects isomorphisms. By step 1, the cohomology map of U applied to any derived morphism is U of its cohomology map. Apply [lem-weil-pbc-derived-plus-iso-on-cohomology] in the two abelian categories: invertibility of the forgotten derived morphism implies invertibility of all its module cohomology maps, and hence of the derived morphism. Finally the equation in step 4 and invertibility of $r_K,s_K$ identify invertibility of the forgotten exchange with that of the abelian exchange. This proves both directions of the concluding equivalence.",
+   "text": "For the converse, the preceding equivalence gives invertibility of the forgotten module exchange. Apply each abelian homology functor. NatIso.isIso_map_iff for moduleAbelianForget.mapDerivedCategoryPlusHomologyFunctorIso transfers this to invertibility of the underlying abelian map of each module cohomology map. The standard sheafCompose reflection instance, induced by reflection for forget₂ (ModuleCat Λ) AddCommGrpCat, then gives invertibility of every module cohomology map. By DerivedCategory.Plus.isIso_iff the module exchange itself is invertible.",
    "uses": [
+    "def-weil-pbc-etale-sheaves",
     "lem-weil-pbc-derived-plus-iso-on-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived-category isomorphism criterion; elementary module-linear inverse calculation"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-derived-categories",
-  "lem-weil-pbc-etale-constant-ring-module-equivalence",
-  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
   "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
   "def-weil-pbc-derived-exchange",
   "lem-weil-pbc-module-abelian-inverse-image-comparison",
-  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
   "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
   "lem-weil-pbc-derived-plus-iso-on-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6J and 07A7, assembled from the existing canonical-comparison nodes with an explicit conservativity argument"
+  "place": "Tags 0D6J and 07A7; C1 Lean assembly of existing canonical comparisons, exact-functor homology comparison, and the cohomological isomorphism criterion (2026-10-15)"
  },
  "mathlib_searches": [
   {
@@ -244,5 +207,15 @@
   "by": "NC",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261015T154154-L-159306",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
