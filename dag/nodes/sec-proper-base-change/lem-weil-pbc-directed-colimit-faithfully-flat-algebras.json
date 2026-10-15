@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "View each S_i as an R-module. Since R to S_i is faithfully flat, it is flat. The underlying R-module S is the filtered colimit of the underlying modules S_i, so the existing filtered-colimit flatness lemma gives that S is flat over R.",
+   "text": "View the algebra diagram as a diagram of R-modules. Package the underlying-module colimit universal property as an IsColimit cocone, then use the filtered-colimit flatness theorem and the unique linear equivalence from the module colimit to the underlying algebra colimit.",
    "uses": [
     "def-weil-pbc-faithfully-flat-ring-map",
     "lem-weil-pbc-filtered-colimit-flat-modules"
@@ -34,9 +34,8 @@
    }
   },
   {
-   "text": "Fix a maximal ideal m of R. For every i, the new maximal-ideal nonvanishing lemma gives S_i/mS_i nonzero from faithful flatness of R to S_i. Apply the tensor-colimit statement to the R-module R/mR: the colimit of the modules S_i tensor_R R/mR, identified with S_i/mS_i, is S tensor_R R/mR, identified with S/mS. The transition maps are unital algebra maps, so the class of 1 in this colimit cannot be zero: if it became zero at a later stage, the image of 1 there would be zero, contradicting that every S_j/mS_j is nonzero. Hence S/mS is nonzero for every maximal m.",
+   "text": "For a maximal ideal m, faithful flatness gives each stage tensor (R/m) ⊗ S_i nontrivial via the quotient-tensor equivalence. If the colimit tensor were subsingleton, symmetry gives the same for S ⊗ (R/m). The element 1 ⊗ 1 is then zero; the elementwise tensor-colimit theorem carries this vanishing to a later stage. The ring-hom realization of the transition tensor map sends 1 ⊗ 1 to 1, contradicting nontriviality of the later stage tensor.",
    "uses": [
-    "lem-weil-pbc-faithfully-flat-maximal-ideal-nonzero",
     "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
    ],
    "elementary": false,
@@ -46,7 +45,7 @@
    }
   },
   {
-   "text": "The flat map R to S has S/mS nonzero for every maximal ideal m, so the flat-module faithful-flatness criterion applies and proves that R to S is faithfully flat.",
+   "text": "The custom flatness-and-tensor criterion `Module.FaithfullyFlat.of_nontrivial_tensor_quotient` now applies to the flat colimit and the nontrivial tensor products established above.",
    "uses": [
     "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
    ],
@@ -59,15 +58,14 @@
  ],
  "proof_deps": [
   "def-weil-pbc-faithfully-flat-ring-map",
-  "lem-weil-pbc-faithfully-flat-maximal-ideal-nonzero",
   "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
-  "lem-weil-pbc-filtered-colimit-flat-modules",
-  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-flat-modules"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 090N, lemma-colimit-faithfully-flat, lines 9285-9302"
+  "place": "Tag 090N, lemma-colimit-faithfully-flat, lines 9285-9302; Lean proof packages the underlying algebra colimit universal property and the tensor element argument."
  },
  "mathlib_searches": [
   {
@@ -182,5 +180,15 @@
   "date": "2026-10-15",
   "existing": false,
   "fixed_by": "NT-stage2-Codex-2a827e5b9"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-1d1d6",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T154205-L-162769",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean module and DAG node matched against packet statements and declarations; full delivery compilation and #print axioms passed."
  }
 }
