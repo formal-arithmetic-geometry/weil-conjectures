@@ -22,7 +22,7 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2251 | 225 | 2026 | 61 | 17 |
+| 889327369 (Queue at the start of stage 3) | library | 2237 | 225 | 2012 | 75 | 17 |
 | 660345513 (Application of proof-dependency imports) | library | 2193 | 223 | 1970 | 61 | 17 |
 | 660345513 (Application of proof-dependency imports) | closure | 1958 | 5 | 1953 | 28 | 0 |
 
@@ -34,7 +34,7 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 | decomposed | 48 |
 | moved | 3918 |
 | pruned | 119 |
-| other | 508 |
+| other | 510 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -135,7 +135,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Y2 | 108 | 110 | 98 | 12 | 59/108 (54.6%) |
 | Y3 | 103 | 90 | 56 | 34 | 45/103 (43.7%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
-| launcher prover | 41 | 9 | 7 | 2 | 5/41 (12.2%) |
+| launcher prover | 43 | 9 | 7 | 2 | 5/43 (11.6%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
 
@@ -408,6 +408,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.ColimitSiteSections`
 - `Sheaf.CategoryTheory.ColimitSites`
 - `Sheaf.CategoryTheory.CoskeletonMatchingTuples`
+- `Sheaf.CategoryTheory.DeltaFunctor`
 - `Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors`
 - `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd`
 - `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantIndHomColimit`
@@ -460,6 +461,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.RightLocalizationHomColimit`
 - `Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects`
 - `Sheaf.CategoryTheory.SimplicialMatchingObject`
+- `Sheaf.CategoryTheory.SiteCechComplex`
 - `Sheaf.CategoryTheory.SiteCohomologyPullback`
 - `Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf`
 - `Sheaf.CategoryTheory.SiteCoveringsCommonRefinement`
