@@ -833,6 +833,46 @@ noncomputable def openPullbackRestrictionIso
     (perfectHomComposition (g.resLE U P h) U.ι).symm ≪≫
     Functor.isoWhiskerRight (singleComplexOpenPullbackIso Y U) _
 
+/-- A global object whose pullback restricts to the pullback of an open object.
+The global precursor exists because derived restriction to an open is a
+localization and hence essentially surjective. -/
+noncomputable def perfectOverlapOpenLiftObject
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens)
+    (A : schemeDerivedCategory U.toScheme) : schemeDerivedCategory X := by
+  let rY := (schemeOpenRestriction Y U).mapDerivedCategory
+  let W := (MorphismProperty.isomorphisms _).inverseImage rY
+  letI : rY.IsLocalization W := schemeDerivedOpenRestriction_isLocalization Y U
+  letI : rY.EssSurj := Localization.essSurj rY W
+  exact (derivedPullback f).obj (rY.objPreimage A)
+
+/-- The chosen global lift restricts to the pulled-back open object.
+Source: Stacks Project, Tag 08DW. Choose the localization preimage of the
+original open object. The open-pullback square identifies restriction after
+pullback with pullback after restriction; map the preimage isomorphism through
+the restricted pullback functor. Their composite gives the displayed iso. -/
+noncomputable def perfectOverlapOpenLiftIso
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens)
+    (A : schemeDerivedCategory U.toScheme) :
+    (schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory.obj
+        (perfectOverlapOpenLiftObject f U A) ≅
+      (derivedPullback (f ∣_ U)).obj A := by
+  let rY := (schemeOpenRestriction Y U).mapDerivedCategory
+  let W := (MorphismProperty.isomorphisms _).inverseImage rY
+  letI : rY.IsLocalization W := schemeDerivedOpenRestriction_isLocalization Y U
+  letI : rY.EssSurj := Localization.essSurj rY W
+  let M := rY.objPreimage A
+  let e := rY.objObjPreimageIso A
+  let β := openPullbackRestrictionIso f (f ⁻¹ᵁ U) U le_rfl
+  change ((schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory.obj
+    ((derivedPullback f).obj M)) ≅ (derivedPullback (f ∣_ U)).obj A
+  have β' :
+      (schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory.obj
+          ((derivedPullback f).obj M) ≅
+        (derivedPullback (f ∣_ U)).obj (rY.obj M) := by
+    simpa only [Scheme.Hom.resLE_eq_morphismRestrict, Functor.comp_obj, rY]
+      using β.app M
+  exact β' ≪≫ (derivedPullback (f ∣_ U)).mapIso e
+
 /-- Construct a simultaneous diagram from restricted pullbacks and site equivalences.
 Open restriction is a localization, so its fully faithful precomposition functor lifts
 both overlap comparisons and their coherence from the global restriction diagram. -/
