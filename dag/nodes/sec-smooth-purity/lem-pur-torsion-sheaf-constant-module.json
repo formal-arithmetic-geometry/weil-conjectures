@@ -4,16 +4,16 @@
   "is": null,
   "from": {
    "node": "def-coefficient-twists-detailed",
-   "place": "its statement (a notion the statement uses)",
+   "place": "Statement of def-coefficient-twists-detailed: the displayed definition of the sheaves $\\mu_{\\ell^r,S}$, and the following transition maps $u\\mapsto u^\\ell$; this lemma supplies their constant torsion-coefficient module structures and linearity, through def-pur-roots-of-unity-sheaf.",
    "via": [
     "def-pur-roots-of-unity-sheaf"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "An abelian sheaf killed by N is a module over the constant sheaf Z/N",
- "statement": "Let $\\mathcal C$ be a site, $N\\in\\mathbf Z_{\\geq1}$, and let $(\\mathbf Z/N\\mathbf Z)_{\\mathcal C}$\nbe the constant sheaf of rings [def-weil-pbc-constant-sheaf] with value\n$\\mathbf Z/N\\mathbf Z$. Let $\\mathcal F$ be a sheaf of abelian groups on $\\mathcal C$ with\n$N\\cdot x=0$ for every object $U$ and every $x\\in\\mathcal F(U)$. Then:\n\n1. $\\mathcal F$ carries a unique structure of sheaf of\n$(\\mathbf Z/N\\mathbf Z)_{\\mathcal C}$-modules [def-weil-sheaf-of-modules-category] with\nunderlying sheaf of abelian groups $\\mathcal F$ such that, for every $U$, a section of\n$(\\mathbf Z/N\\mathbf Z)_{\\mathcal C}(U)$ coming from the constant presheaf, i.e. the image of\na class $a\\in\\mathbf Z/N\\mathbf Z$, acts on $\\mathcal F(U)$ as multiplication by any\ninteger representative of $a$;\n2. if $\\mathcal F,\\mathcal G$ are two such sheaves, every morphism of sheaves of abelian\ngroups $\\mathcal F\\to\\mathcal G$ is $(\\mathbf Z/N\\mathbf Z)_{\\mathcal C}$-linear, so the\nsheaves of $(\\mathbf Z/N\\mathbf Z)_{\\mathcal C}$-modules are exactly the sheaves of abelian\ngroups killed by $N$, with the same morphisms.\n\n(Proof outline from the source: $\\mathcal F$ is a presheaf of modules over the constant\npresheaf $\\mathbf Z/N\\mathbf Z$, each $\\mathcal F(U)$ being a $\\mathbf Z/N\\mathbf Z$-module\nsince it is killed by $N$; sheafifying, Stacks Lemma 03CY gives the unique\n$(\\mathbf Z/N\\mathbf Z)_{\\mathcal C}$-module structure on $\\mathcal F^\\#=\\mathcal F$, and its\nsecond part gives the linearity of morphisms, any additive map between\n$\\mathbf Z/N\\mathbf Z$-modules being linear.)",
+ "statement": "Let $\\mathcal C$ be a site, $N\\in\\mathbf Z_{\\geq1}$, and let $(\\mathbf Z/N\\mathbf Z)_{\\mathcal C}$\nbe the constant sheaf of rings [def-weil-pbc-constant-sheaf] with value\n$\\mathbf Z/N\\mathbf Z$. Let $\\mathcal F$ be a sheaf of abelian groups on $\\mathcal C$ with\n$N\\cdot x=0$ for every object $U$ and every $x\\in\\mathcal F(U)$. Then:\n\n1. $\\mathcal F$ carries a unique structure of sheaf of\n$(\\mathbf Z/N\\mathbf Z)_{\\mathcal C}$-modules [def-weil-sheaf-of-modules-category] with\nunderlying sheaf of abelian groups $\\mathcal F$ such that, for every $U$, a section of\n$(\\mathbf Z/N\\mathbf Z)_{\\mathcal C}(U)$ coming from the constant presheaf, i.e. the image of\na class $a\\in\\mathbf Z/N\\mathbf Z$, acts on $\\mathcal F(U)$ as multiplication by any\ninteger representative of $a$;\n2. if $\\mathcal F,\\mathcal G$ are two such sheaves, every morphism of sheaves of abelian\ngroups $\\mathcal F\\to\\mathcal G$ is $(\\mathbf Z/N\\mathbf Z)_{\\mathcal C}$-linear, so the\nsheaves of $(\\mathbf Z/N\\mathbf Z)_{\\mathcal C}$-modules are exactly the sheaves of abelian\ngroups killed by $N$, with the same morphisms.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Lemma 03CY (sites-modules-lemma-sheafification-presheaf-modules: for a presheaf of O-modules F, the sheafification F^# is uniquely an O^#-module compatible with O × F → F, and morphisms to O^#-modules G extend uniquely)"
@@ -22,27 +22,133 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathbf Z/N\\mathbf Z$ and let $P$ be the constant presheaf of rings with value $A$ and identity restriction maps. Write $R=A_{\\mathcal C}$ and $\\eta:P\\to R$ for its sheafification map [def-weil-pbc-constant-sheaf]. For any abelian sheaf $H$, the identity $H\\to H$ is a sheafification of its underlying abelian presheaf: every presheaf morphism $H\\to K$ to a sheaf factors uniquely through that identity [def-weil-pbc-sheafification]. Thus in the module-sheafification theorem we may take the associated abelian sheaf of $\\mathcal F$ to be $\\mathcal F$ itself, with unit the identity; no comparison of different underlying sheaves is needed.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules, specialized to the constant presheaf of rings Z/N and an already sheaf-valued abelian presheaf; presheaf module convention: Tag 03CT, definition-presheaf-modules"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-zmod-module-structure-killed-by-n] (1), for each $U$ the hypothesis $N\\mathcal F(U)=0$ gives the $A$-module structure $\\bar a\\cdot x=ax$, for any integer lift $a$. Explicitly, another lift $a+Nk$ gives $(a+Nk)x=ax+k(Nx)=ax$. Each restriction map is additive, and hence $A$-linear by part (4) of that same node. Consequently these sectionwise actions make the underlying abelian presheaf of $\\mathcal F$ a presheaf of $P$-modules: restrictions satisfy $(\\bar a\\cdot x)|_V=\\bar a\\cdot(x|_V)$ since $P$ has identity restrictions.",
+   "uses": [
+    "lem-weil-pbc-zmod-module-structure-killed-by-n"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules, specialized to the constant presheaf of rings Z/N and an already sheaf-valued abelian presheaf; presheaf module convention: Tag 03CT, definition-presheaf-modules"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-sites-module-sheafification-interface] with $\\mathcal O=P$, $\\mathcal O^\\#=R$, $\\mathcal P=\\mathcal F$ with its action from step 2, and abelian sheafification $\\mathcal F\\xrightarrow{\\mathrm{id}}\\mathcal F$ from step 1. It gives a unique compatible action $R\\times\\mathcal F\\to\\mathcal F$ making $\\mathcal F$ a sheaf of $R$-modules. Compatibility reads $\\eta_U(\\bar a)\\cdot x=ax$, exactly the normalization in clause (1). Every action required in clause (1) satisfies this compatibility, so the uniqueness assertion of the cited node proves uniqueness on the fixed underlying abelian sheaf, not merely uniqueness up to isomorphism.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules, specialized to the constant presheaf of rings Z/N and an already sheaf-valued abelian presheaf; presheaf module convention: Tag 03CT, definition-presheaf-modules"
+   }
+  },
+  {
+   "text": "Let $H$ be any sheaf of $R$-modules, in the sense of [def-weil-sheaf-of-modules-category]. Because $\\eta_U:A\\to R(U)$ is a unital ring homomorphism, $\\eta_U(\\bar a)=a\\cdot1_{R(U)}$ for every integer $a$. By [lem-weil-pbc-zmod-module-structure-killed-by-n] (3), its action on $H(U)$ is therefore $ax$. In particular $Nx=\\eta_U(\\bar N)x=\\eta_U(0)x=0$, so the underlying abelian sheaf is killed by $N$. Its constant-presheaf action is the one of step 2; step 3 shows that its full $R$-action is the unique extension of that action. This proves the converse assertion about objects in clause (2), including module structures not initially assumed to satisfy the normalization.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-zmod-module-structure-killed-by-n"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules, specialized to the constant presheaf of rings Z/N and an already sheaf-valued abelian presheaf; presheaf module convention: Tag 03CT, definition-presheaf-modules"
+   }
+  },
+  {
+   "text": "Let $h:\\mathcal F\\to\\mathcal G$ be a morphism of abelian sheaves killed by $N$, with the $R$-module structures of step 3. For every $U$, the additive map $h_U$ is $A$-linear by [lem-weil-pbc-zmod-module-structure-killed-by-n] (4). By step 4, the restriction of the action on $\\mathcal G$ along $\\eta$ is precisely this $A$-action, so $h$ is a morphism of presheaves of $P$-modules from the presheaf of step 2 to the scalar restriction of $\\mathcal G$. The factorization clause of [lem-pc-sites-module-sheafification-interface] gives an $R$-linear sheaf map $\\widetilde h:\\mathcal F\\to\\mathcal G$ whose composite with the abelian sheafification unit is $h$. That unit is the identity by step 1, hence $\\widetilde h=h$ as abelian sheaf maps. Thus every abelian sheaf morphism in question is $R$-linear. Conversely an $R$-linear sheaf morphism is an abelian sheaf morphism by [def-weil-sheaf-of-modules-category]. Together with steps 3 and 4, this proves clause (2) with the same morphisms.",
+   "uses": [
+    "lem-weil-pbc-zmod-module-structure-killed-by-n",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules, specialized to the constant presheaf of rings Z/N and an already sheaf-valued abelian presheaf; presheaf module convention: Tag 03CT, definition-presheaf-modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-zmod-module-structure-killed-by-n",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY (lemma-sheafification-presheaf-modules), applied to the constant ring presheaf and the identity sheafification of an abelian sheaf; the elementary scalar algebra is the existing Mathlib leaf lem-weil-pbc-zmod-module-structure-killed-by-n."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -n '^noncomputable def\\|^def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; grep -n 'zmodModule' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/ZMod.lean",
-   "results": "`PresheafOfModules.sheafify α φ : SheafOfModules R` (Presheaf/Sheafify.lean:328) for `α : R₀ ⟶ R.val` locally bijective and `φ : M₀.presheaf ⟶ A.val` locally bijective, with `sheafifyHomEquiv` (line 380) for morphisms; `AddCommGroup.zmodModule` (Algebra/Module/ZMod.lean:44): an abelian group killed by n is a `ZMod n`-module",
-   "date": "2026-10-09",
-   "verdict": "generalization: Stacks 03CY is `PresheafOfModules.sheafify` (with φ the identity of F and α the sheafification map of the constant presheaf ZMod N); building the presheaf of ZMod N-modules from `AddCommGroup.zmodModule` and deriving the linearity of morphisms takes more than one line"
+   "query": "zmodModule|sheafifyHomEquiv|def sheafify",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean:328 sheafify; :364 sheafifyHomEquiv'; :371 comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; Presheaf/Sheafification.lean:90 use of sheafifyHomEquiv",
+   "date": "2026-10-15",
+   "verdict": "no match for the whole item: general module sheafification, not the torsion-sheaf characterization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of ZMod n modules are equivalent to abelian sheaves annihilated by n",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGroup.zmodModule",
+   "results": "AddCommGroup.zmodModule (Mathlib.Algebra.Module.ZMod): an abelian group with n • x = 0 is a ZMod n-module",
+   "date": "2026-10-15",
+   "verdict": "no match for the whole item: group-level ingredient, already recorded by lem-weil-pbc-zmod-module-structure-killed-by-n"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian sheaf annihilated by n has a unique module structure over the constant sheaf ZMod n, and every additive sheaf map is linear",
+   "results": "instAbelianCondensedMod; instAbelianLightCondMod; SheafOfModules.instAbelian; CategoryTheory.Sheaf.H; AlgebraicGeometry.Scheme.Modules.instAbelian; LightCondensed.instIsGrothendieckAbelianLightCondMod; SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf; SheafOfModules.instPreadditive",
+   "date": "2026-10-15",
+   "verdict": "no match: hits concern abelian categories and sheaf cohomology, not the normalized Z/N action or fullness of the forgetful functor"
   },
   {
    "tool": "grep",
-   "query": "grep -rn -iE 'zmod' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match: no statement identifying (ZMod N)-sheaves of modules with N-torsion abelian sheaves"
+   "query": "ZMod|zmod|torsion|annihilat",
+   "results": "No hits in Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Give a sheaf of abelian groups killed by n the action of the sheafification of the constant ring Z/n by sheafifying a presheaf of modules",
+   "results": "PresheafOfModules.Sheafify.module; PresheafOfModules.Sheafify.smulCandidate; PresheafOfModules.Sheafify.add_smul; PresheafOfModules.Sheafify.instNonemptySMulCandidate; PresheafOfModules.Sheafify.SMulCandidate; PresheafOfModules.sheafify; PresheafOfModules.Sheafify.smul; PresheafOfModules.Sheafify.SMulCandidate.mk'",
+   "date": "2026-10-15",
+   "verdict": "no match for the whole item: PresheafOfModules.sheafify and its scalar-action helpers give general module sheafification; the sectionwise ZMod construction and identification of additive morphisms still have to be supplied"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafify",
+   "results": "PresheafOfModules.sheafify, toSheafify, sheafifyHomEquiv, sheafifyHomEquiv', sheafifyMap and compatibility lemmas (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify)",
+   "date": "2026-10-15",
+   "verdict": "no match for the whole item: the general sheafification interface is already the Mathlib leaf lem-pc-sites-module-sheafification-interface"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -91,5 +197,21 @@
   "group": "Q16",
   "result": "pass",
   "note": "Reviewed node, dependencies, source, four Lean modules, report sections, edge cases, universes, canonical constructions, and scompile evidence; no substantive or mechanical defects found."
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-torsion-sheaf-constant-module",
+  "worker": "stage1",
+  "summary": "Read Stacks 03CY and the existing algebra and variable-ring sheafification leaves. Wrote the constant-presheaf module, extended its action using identity abelian sheafification, proved uniqueness on the fixed abelian sheaf, checked that arbitrary module sheaves are killed by N, and proved fullness by the factorization part of 03CY. No new nodes. Removed the old proof-outline parenthesis from the statement into actual proof steps without changing any mathematical clause. No sorry-free project declaration states the arbitrary-site result.",
+  "blueprint": "Realizes the module-structure and linearity ingredients behind the displayed mu_{ell^r,S} and transition maps u -> u^ell in the statement of def-coefficient-twists-detailed, through def-pur-roots-of-unity-sheaf; the enclosing unit and chapter route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-a1b8fd6a6",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-a1b8fd6a6 (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited nodes, unit/chapter route, Stacks 03CY source, Mathlib leaves, searches, edge cases, and coefficient/sheafification compatibility. Five proof steps are correct; no new nodes or repairs are needed. Wrote review.md."
  }
 }
