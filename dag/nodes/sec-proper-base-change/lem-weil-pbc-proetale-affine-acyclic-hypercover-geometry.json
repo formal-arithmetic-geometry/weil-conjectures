@@ -16,24 +16,52 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Apply the finite-basis hypercover construction in the qcqs subsite, realize each finite formal coproduct in the full pro-etale slice, and transport matching epimorphisms and component evaluation bijections through the representable coproduct comparison.",
+   "text": "Let B consist of the affine qcqs objects whose evaluation sends sheaf epimorphisms to surjections. The qc affine weakly-contractible singleton-cover theorem supplies a finite B-cover of every qcqs object. The finite-family geometry theorem gives pullbacks and finite limits in the qcqs slice, preservation by its inclusion into the full slice, and stability of covers under adjoining a basis arrow.",
    "uses": [
-    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
-    "lem-weil-pbc-site-finite-basis-hypercover-existence",
-    "lem-weil-pbc-site-hypercover-disjoint-union"
+    "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the finite-basis hypercover existence theorem to the qcqs precoverage and B. Its chosen limiting proper-face cones and canonical componentwise covering arrows suffice; no covering condition for arbitrary matching-cone choices is needed.",
+   "uses": [
+    "lem-weil-pbc-site-finite-basis-hypercover-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map formal families componentwise along the slice inclusion. This functor preserves finite limits because it sends the singleton terminal family and the componentwise pullback family to their limiting counterparts. Realize each formal family as a coproduct of lifted representable sheaves in the full sheaf slice, using Type (u+1). The local GeometryRealization helpers prove finite-limit preservation: restriction of ordinary Yoneda on formal families is a coproduct of lifted representables, preserves limits, and sheafification is left exact; use the equivalence between families over W and families equipped with a map to the singleton W, then the coproduct universal property. This is the proof of Hypercoverings Tags 0DB1 and 0DB2 with independent category universes, not an application of the small-category-only realization API.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each finite degree family, choose the actual scheme disjoint union supplied by finite-family geometry. Full faithfulness of lifted sheaf Yoneda descends the augmentation and reflects the represented coproduct universal property back to the full pro-etale slice. Descend every simplicial operator through its cofan, and prove the identities on each summand. Uniqueness of coproducts gives a natural simplicial isomorphism with the sheaf realization. Affineness and all component evaluation bijections and lifting properties are the corresponding clauses of finite-family geometry and membership in B.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Each realized formal matching arrow is epi: test cancellation on a target representable summand; separatedness of the testing sheaf reduces equality to the component covering family. This argument includes empty fibres. The proper-face index category is finite (objects embed into the finite sum of simplex hom sets, and morphisms into simplex hom sets). Map the chosen formal limiting cone through the finite-limit-preserving realization and transport along the simplicial natural isomorphism. Compare it by limit uniqueness to the degree-zero terminal cone, degree-one product cone, or higher boundary cone, using the proper-face matching comparison theorems. The requested matching arrow is the known epi conjugated by source and target isomorphisms. Forget the sheaf slice and reflect epimorphisms along the faithful universe-lift functor on sheaves to obtain exactly the ordinary-Yoneda epimorphisms in the unchanged statement.",
+   "uses": [
+    "lem-weil-pbc-simplicial-matching-object",
+    "lem-weil-pbc-matching-object-proper-faces"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-proetale-qc-affine-contractible-cover",
   "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
   "lem-weil-pbc-site-finite-basis-hypercover-existence",
-  "lem-weil-pbc-site-hypercover-disjoint-union"
+  "lem-weil-pbc-simplicial-matching-object",
+  "lem-weil-pbc-matching-object-proper-faces"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09A1, proof of clause (2)"
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/hypercovering.tex",
+  "place": "Tag 09A1 proof of clause (2); Tags 0DAV, 0DB1 and 0DB2; local universe-generalized realization and proper-face limit comparison"
  },
  "mathlib_searches": [
   {
@@ -107,11 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "X-7328a",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261015T161024-L-259778",
+  "landing": "20261015T184347-L-858854",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivery files compiled cleanly with lcompile.py; original geometry reader fails against changed dependencies while adapted readers compile, and signatures/DAG proofs match the delivered changes."
  }
 }

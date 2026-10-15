@@ -34,12 +34,12 @@ open scoped Simplicial
 namespace CategoryTheory
 
 private theorem cover_of_finite_enlargement
-    {C : Type u} [SmallCategory C] (J : Precoverage C) (B : Set C)
-    (hadjoin : ∀ (T : C) (I : Type u) [Finite I] (U : I → C)
+    {C : Type u} [Category.{v} C] (J : Precoverage C) (B : Set C)
+    (hadjoin : ∀ (T : C) (I : Type (max u v)) [Finite I] (U : I → C)
       (f : ∀ i : I, U i ⟶ T), (∀ i : I, U i ∈ B) →
       Presieve.ofArrows U f ∈ J T → ∀ (V : C), V ∈ B → ∀ (g : V ⟶ T),
         Presieve.ofArrows U f ⊔ Presieve.singleton g ∈ J T)
-    (T : C) {I A : Type u} [Finite I] [Finite A]
+    (T : C) {I A : Type (max u v)} [Finite I] [Finite A]
     (U : I → C) (f : ∀ i, U i ⟶ T) (hU : ∀ i, U i ∈ B)
     (hf : Presieve.ofArrows U f ∈ J T)
     (V : A → C) (g : ∀ a, V a ⟶ T) (hV : ∀ a, V a ∈ B)
@@ -101,18 +101,18 @@ private theorem cover_of_finite_enlargement
   simpa only [hall] using hs Finset.univ
 
 private def familyIndices {D : Type u} [Category.{v} D] :
-    FormalCoproduct.{u} D ⥤ Type u where
+    FormalCoproduct.{max u v} D ⥤ Type (max u v) where
   obj X := X.I
   map f := ↾f.f
 
 private theorem familyIndices_terminal {D : Type u} [Category.{v} D] [HasTerminal D] :
-    PreservesLimit (Functor.empty.{0} (FormalCoproduct.{u} D)) familyIndices := by
+    PreservesLimit (Functor.empty.{0} (FormalCoproduct.{max u v} D)) familyIndices := by
   apply preservesLimit_of_preserves_limit_cone
     (FormalCoproduct.isTerminalIncl (⊤_ D) terminalIsTerminal)
   exact (isLimitMapConeEmptyConeEquiv _ _).symm Types.isTerminalPUnit
 
 private theorem familyIndices_pullback {D : Type u} [Category.{v} D] [HasPullbacks D]
-    {X Y Z : FormalCoproduct.{u} D} (f : X ⟶ Z) (g : Y ⟶ Z) :
+    {X Y Z : FormalCoproduct.{max u v} D} (f : X ⟶ Z) (g : Y ⟶ Z) :
     PreservesLimit (cospan f g) familyIndices := by
   let pb := fun i : Function.Pullback f.f g.f ↦
     pullback.cone (f.φ i.1.1 ≫ eqToHom (by rw [i.2])) (g.φ i.1.2)
@@ -127,7 +127,7 @@ private theorem familyIndices_finite {D : Type u} [Category.{v} D]
   have := familyIndices_terminal (D := D)
   have : PreservesLimitsOfShape (Discrete PEmpty.{1}) (familyIndices (D := D)) :=
     preservesLimitsOfShape_pempty_of_preservesTerminal _
-  have : ∀ (X Y Z : FormalCoproduct.{u} D) (f : X ⟶ Z) (g : Y ⟶ Z),
+  have : ∀ (X Y Z : FormalCoproduct.{max u v} D) (f : X ⟶ Z) (g : Y ⟶ Z),
       PreservesLimit (cospan f g) familyIndices := fun _ _ _ f g ↦
     familyIndices_pullback f g
   have : PreservesLimitsOfShape WalkingCospan (familyIndices (D := D)) :=
@@ -137,7 +137,7 @@ private theorem familyIndices_finite {D : Type u} [Category.{v} D]
 private theorem finite_family_limit
     {D : Type u} [Category.{v} D] [HasTerminal D] [HasPullbacks D]
     {J : Type} [SmallCategory J] [FinCategory J]
-    (F : J ⥤ FormalCoproduct.{u} D) (hF : ∀ j, Finite (F.obj j).I)
+    (F : J ⥤ FormalCoproduct.{max u v} D) (hF : ∀ j, Finite (F.obj j).I)
     (c : Cone F) (hc : IsLimit c) : Finite c.pt.I := by
   have := familyIndices_finite (D := D)
   have h := isLimitOfPreserves familyIndices hc
@@ -183,7 +183,7 @@ private def boundaryDiagram {D : Type u} [Category.{v} D] {n : ℕ}
   (CostructuredArrow.proj _ _).op ⋙ K
 
 private def coneToBoundary {D : Type u} [Category.{v} D] {n : ℕ}
-    (K : SimplicialObject.Truncated (FormalCoproduct.{u} D) n)
+    (K : SimplicialObject.Truncated (FormalCoproduct.{max u v} D) n)
     (c : Cone (boundaryDiagram K)) : BoundaryCone K c.pt where
   projection q α := c.π.app (op (CostructuredArrow.mk (Y := degree q) α))
   naturality q r α β := by
@@ -194,8 +194,8 @@ private def coneToBoundary {D : Type u} [Category.{v} D] {n : ℕ}
         (Nat.le_of_lt_succ q.isLt) (Nat.le_of_lt_succ r.isLt)) rfl).op
 
 private def boundaryToCone {D : Type u} [Category.{v} D] {n : ℕ}
-    (K : SimplicialObject.Truncated (FormalCoproduct.{u} D) n)
-    {M : FormalCoproduct.{u} D} (p : BoundaryCone K M) : Cone (boundaryDiagram K) where
+    (K : SimplicialObject.Truncated (FormalCoproduct.{max u v} D) n)
+    {M : FormalCoproduct.{max u v} D} (p : BoundaryCone K M) : Cone (boundaryDiagram K) where
   pt := M
   π :=
     { app a := p.projection ⟨a.unop.left.obj.len, Nat.lt_succ_of_le a.unop.left.property⟩
@@ -213,7 +213,7 @@ private def boundaryToCone {D : Type u} [Category.{v} D] {n : ℕ}
         exact h.symm }
 
 private theorem matching_of_isLimit {D : Type u} [Category.{v} D] {n : ℕ}
-    (K : SimplicialObject.Truncated (FormalCoproduct.{u} D) n)
+    (K : SimplicialObject.Truncated (FormalCoproduct.{max u v} D) n)
     (c : Cone (boundaryDiagram K)) (hc : IsLimit c) : IsMatching K (coneToBoundary K c) := by
   intro T p
   refine ⟨hc.lift (boundaryToCone K p), ?_, ?_⟩
@@ -270,8 +270,8 @@ private theorem properFaceToBoundary_final (n : ℕ) :
   exact isConnected_of_isInitial _ hz
 
 private theorem isLimit_boundaryToCone {D : Type u} [Category.{v} D] {n : ℕ}
-    (K : SimplicialObject.Truncated (FormalCoproduct.{u} D) n)
-    {M : FormalCoproduct.{u} D} (c : BoundaryCone K M) (hc : IsMatching K c) :
+    (K : SimplicialObject.Truncated (FormalCoproduct.{max u v} D) n)
+    {M : FormalCoproduct.{max u v} D} (c : BoundaryCone K M) (hc : IsMatching K c) :
     Nonempty (IsLimit (boundaryToCone K c)) := by
   classical
   let lift (s : Cone (boundaryDiagram K)) := (hc s.pt (coneToBoundary K s)).choose
@@ -289,12 +289,12 @@ private theorem isLimit_boundaryToCone {D : Type u} [Category.{v} D] {n : ℕ}
 
 private theorem exists_finite_boundary
     {D : Type u} [Category.{v} D] [HasFiniteLimits D] {n : ℕ}
-    (K : SimplicialObject.Truncated (FormalCoproduct.{u} D) n)
+    (K : SimplicialObject.Truncated (FormalCoproduct.{max u v} D) n)
     (hK : ∀ q : Fin (n + 1), Finite (term K q).I) :
-    ∃ (M : FormalCoproduct.{u} D) (c : BoundaryCone K M),
+    ∃ (M : FormalCoproduct.{max u v} D) (c : BoundaryCone K M),
       Finite M.I ∧ IsMatching K c := by
   have := boundaryIndex_finCategory n
-  have : HasFiniteLimits (FormalCoproduct.{u} D) :=
+  have : HasFiniteLimits (FormalCoproduct.{max u v} D) :=
     hasFiniteLimits_of_hasTerminal_and_pullbacks
   let c := limit.cone (boundaryDiagram K)
   have hc := limit.isLimit (boundaryDiagram K)
@@ -333,9 +333,9 @@ No matching data are required to be chosen coherently between truncations: the u
 property transfers each degree's matching cone when the tower is assembled.
 Source: Stacks Project, Tags 0DAV and 01G5.
 (blueprint: lem-weil-pbc-site-finite-basis-hypercover-step) -/
-def IsFiniteBasisTruncation {C : Type u} [SmallCategory C]
+def IsFiniteBasisTruncation {C : Type u} [Category.{v} C]
     (J : Precoverage C) (B : Set C) (T : C) {n : ℕ}
-    (K : SimplicialObject.Truncated (FormalCoproduct.{u} (Over T)) n) : Prop :=
+    (K : SimplicialObject.Truncated (FormalCoproduct.{max u v} (Over T)) n) : Prop :=
   IsSplit K ∧ ∀ q : Fin (n + 1),
     Finite (term K q).I ∧
     (∀ i : (term K q).I, ((term K q).obj i).left ∈ B) ∧
@@ -355,20 +355,20 @@ def IsFiniteBasisTruncation {C : Type u} [SmallCategory C]
               eqToHom (congrArg (fun k ↦ (M.pt.obj k).left) i.property)) ∈
           J (M.pt.obj j).left)
 
-private def FamilyCovers {C : Type u} [SmallCategory C] (J : Precoverage C)
-    {T : C} {X Y : FormalCoproduct.{u} (Over T)} (f : X ⟶ Y) : Prop :=
+private def FamilyCovers {C : Type u} [Category.{v} C] (J : Precoverage C)
+    {T : C} {X Y : FormalCoproduct.{max u v} (Over T)} (f : X ⟶ Y) : Prop :=
   ∀ j : Y.I,
     Presieve.ofArrows
       (fun i : {i : X.I // f.f i = j} ↦ (X.obj i.val).left)
       (fun i : {i : X.I // f.f i = j} ↦ (f.φ i.val).left ≫
         eqToHom (congrArg (fun k ↦ (Y.obj k).left) i.property)) ∈ J (Y.obj j).left
 
-private theorem basis_attached {C : Type u} [SmallCategory C] {B : Set C} {T : C}
-    {n : ℕ} (K : SimplicialObject.Truncated (FormalCoproduct.{u} (Over T)) n)
-    (V : FormalCoproduct.{u} (Over T))
+private theorem basis_attached {C : Type u} [Category.{v} C] {B : Set C} {T : C}
+    {n : ℕ} (K : SimplicialObject.Truncated (FormalCoproduct.{max u v} (Over T)) n)
+    (V : FormalCoproduct.{max u v} (Over T))
     (hK : ∀ (q : Fin (n + 1)) (i : (term K q).I), ((term K q).obj i).left ∈ B)
     (hV : ∀ i : V.I, (V.obj i).left ∈ B)
-    {X : FormalCoproduct.{u} (Over T)} (t : attachedFamily K V = X) :
+    {X : FormalCoproduct.{max u v} (Over T)} (t : attachedFamily K V = X) :
     ∀ i : X.I, (X.obj i).left ∈ B := by
   subst X
   intro i
@@ -376,16 +376,16 @@ private theorem basis_attached {C : Type u} [SmallCategory C] {B : Set C} {T : C
   | inl i => exact hV i
   | inr a => exact hK a.1 a.2.2.val
 
-private theorem covers_attached {C : Type u} [SmallCategory C]
+private theorem covers_attached {C : Type u} [Category.{v} C]
     (J : Precoverage C) (B : Set C)
-    (hadjoin : ∀ (T : C) (I : Type u) [Finite I] (U : I → C)
+    (hadjoin : ∀ (T : C) (I : Type (max u v)) [Finite I] (U : I → C)
       (f : ∀ i : I, U i ⟶ T), (∀ i : I, U i ∈ B) →
       Presieve.ofArrows U f ∈ J T → ∀ (V : C), V ∈ B → ∀ (g : V ⟶ T),
         Presieve.ofArrows U f ⊔ Presieve.singleton g ∈ J T)
     {T : C} {n : ℕ}
-    (K : SimplicialObject.Truncated (FormalCoproduct.{u} (Over T)) n)
-    (V : FormalCoproduct.{u} (Over T)) [Finite V.I]
-    {X M : FormalCoproduct.{u} (Over T)} (t : attachedFamily K V = X)
+    (K : SimplicialObject.Truncated (FormalCoproduct.{max u v} (Over T)) n)
+    (V : FormalCoproduct.{max u v} (Over T)) [Finite V.I]
+    {X M : FormalCoproduct.{max u v} (Over T)} (t : attachedFamily K V = X)
     [Finite X.I] (b : X ⟶ M) (hB : ∀ i : X.I, (X.obj i).left ∈ B)
     (hv : FamilyCovers J (newInclusion K V ≫ eqToHom t ≫ b)) : FamilyCovers J b := by
   subst X
@@ -434,19 +434,19 @@ The old-degree matching cones and covers transport along the restriction equalit
 all earlier conditions, including the prescribed degree-zero point, are preserved.
 -/
 theorem exists_finite_basis_truncation_extension
-    {C : Type u} [SmallCategory C] [HasPullbacks C]
-    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange]
+    {C : Type u} [Category.{v} C] [HasPullbacks C]
+    (J : Precoverage C)
     (B : Set C)
-    (hcover : ∀ T : C, ∃ (I : Type u) (U : I → C) (f : ∀ i : I, U i ⟶ T),
+    (hcover : ∀ T : C, ∃ (I : Type (max u v)) (U : I → C) (f : ∀ i : I, U i ⟶ T),
       Finite I ∧ (∀ i : I, U i ∈ B) ∧ Presieve.ofArrows U f ∈ J T)
-    (hadjoin : ∀ (T : C) (I : Type u) [Finite I] (U : I → C)
+    (hadjoin : ∀ (T : C) (I : Type (max u v)) [Finite I] (U : I → C)
       (f : ∀ i : I, U i ⟶ T), (∀ i : I, U i ∈ B) →
       Presieve.ofArrows U f ∈ J T → ∀ (V : C), V ∈ B → ∀ (g : V ⟶ T),
         Presieve.ofArrows U f ⊔ Presieve.singleton g ∈ J T)
     (T : C) (n : ℕ)
-    (K : SimplicialObject.Truncated (FormalCoproduct.{u} (Over T)) n)
+    (K : SimplicialObject.Truncated (FormalCoproduct.{max u v} (Over T)) n)
     (hK : IsFiniteBasisTruncation J B T K) :
-    ∃ L : SimplicialObject.Truncated (FormalCoproduct.{u} (Over T)) (n + 1),
+    ∃ L : SimplicialObject.Truncated (FormalCoproduct.{max u v} (Over T)) (n + 1),
       (SimplicialObject.Truncated.trunc _ (n + 1) n).obj L = K ∧
         IsFiniteBasisTruncation J B T L := by
   classical
@@ -454,7 +454,7 @@ theorem exists_finite_basis_truncation_extension
   obtain ⟨M, c, hM, hc⟩ := exists_finite_boundary K (fun q ↦ (hK.2 q).1)
   have : Finite M.I := hM
   choose I U f hI hB hf using fun j : M.I ↦ hcover (M.obj j).left
-  let V : FormalCoproduct.{u} (Over T) :=
+  let V : FormalCoproduct.{max u v} (Over T) :=
     ⟨Σ j : M.I, I j, fun p ↦ Over.mk (f p.1 p.2 ≫ (M.obj p.1).hom)⟩
   let v : V ⟶ M := ⟨Sigma.fst, fun p ↦ Over.homMk (f p.1 p.2) rfl⟩
   have : Finite V.I := inferInstance

@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-site-finite-basis-hypercover-step",
  "kind": "statement",
  "title": "One-degree extension of a finite split basis hypercover truncation",
- "statement": "Let C be a small category with pullbacks, J a precoverage having isomorphisms and stable under composition and base change [def-weil-pbc-sites-and-cohomology], and B a set of objects. Assume every object has a finite covering family from B, and adjoining any single arrow from a B-object to any finite B-cover again gives a cover, including empty covers. Fix T and n>=0. Let K be an n-truncated simplicial object [def-weil-pbc-simplicial-object] in formal families over T [def-weil-pbc-formal-coproduct], split in the explicit normalized-degeneracy sense of [lem-weil-pbc-site-hypercover-finite-extension]. Suppose every retained term has finite indices and B-components, and for each retained degree q its proper-face diagram [lem-weil-pbc-matching-object-proper-faces] has a limiting cone M_q and an arrow from K_q with the canonical projection equations and componentwise covering presieves. Require the degree-zero cone point to equal the singleton id_T. Then there exists a split (n+1)-truncation L restricting exactly to K, with all these same finite-basis and normalized matching-cover properties in every degree through n+1. No coherent choice of matching cones between degrees or stages is assumed.",
+ "statement": "Let C be a category with pullbacks, with possibly distinct object and morphism universes, J any precoverage [def-weil-pbc-sites-and-cohomology], and B a set of objects. Formal-family index types lie in the maximum of those universes. Assume every object has a finite covering family from B, and adjoining any single arrow from a B-object to any finite B-cover again gives a cover, including empty covers. Fix T and n>=0. Let K be an n-truncated simplicial object [def-weil-pbc-simplicial-object] in formal families over T [def-weil-pbc-formal-coproduct], split in the explicit normalized-degeneracy sense of [lem-weil-pbc-site-hypercover-finite-extension]. Suppose every retained term has finite indices and B-components, and for each retained degree q its proper-face diagram [lem-weil-pbc-matching-object-proper-faces] has a limiting cone M_q and an arrow from K_q with the canonical projection equations and componentwise covering presieves. Require the degree-zero cone point to equal the singleton id_T. Then there exists a split (n+1)-truncation L restricting exactly to K, with all these same finite-basis and normalized matching-cover properties in every degree through n+1. No coherent choice of matching cones between degrees or stages is assumed.",
  "source": {
   "document": "literature/stacks-project/hypercovering.tex",
   "place": "Tag 0DAV, lemma-hypercovering-object, split-skeleton construction; Tag 01G2, finite limits of formal families; Tag 01G5, matching-cover condition"
@@ -136,10 +136,11 @@
   "module": "Sheaf.CategoryTheory.SiteFiniteBasisHypercoverStep",
   "file": "lean/Sheaf/CategoryTheory/SiteFiniteBasisHypercoverStep.lean",
   "declaration": "CategoryTheory.FormalSplitAttachment.exists_finite_basis_truncation_extension",
-  "statement": "theorem exists_finite_basis_truncation_extension\n    {C : Type u} [SmallCategory C] [HasPullbacks C]\n    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange]\n    (B : Set C)\n    (hcover : ∀ T : C, ∃ (I : Type u) (U : I → C) (f : ∀ i : I, U i ⟶ T),\n      Finite I ∧ (∀ i : I, U i ∈ B) ∧ Presieve.ofArrows U f ∈ J T)\n    (hadjoin : ∀ (T : C) (I : Type u) [Finite I] (U : I → C)\n      (f : ∀ i : I, U i ⟶ T), (∀ i : I, U i ∈ B) →\n      Presieve.ofArrows U f ∈ J T → ∀ (V : C), V ∈ B → ∀ (g : V ⟶ T),\n        Presieve.ofArrows U f ⊔ Presieve.singleton g ∈ J T)\n    (T : C) (n : ℕ)\n    (K : SimplicialObject.Truncated (FormalCoproduct.{u} (Over T)) n)\n    (hK : IsFiniteBasisTruncation J B T K) :\n    ∃ L : SimplicialObject.Truncated (FormalCoproduct.{u} (Over T)) (n + 1),\n      (SimplicialObject.Truncated.trunc _ (n + 1) n).obj L = K ∧\n        IsFiniteBasisTruncation J B T L",
+  "statement": "theorem exists_finite_basis_truncation_extension\n    {C : Type u} [Category.{v} C] [HasPullbacks C]\n    (J : Precoverage C)\n    (B : Set C)\n    (hcover : ∀ T : C, ∃ (I : Type (max u v)) (U : I → C) (f : ∀ i : I, U i ⟶ T),\n      Finite I ∧ (∀ i : I, U i ∈ B) ∧ Presieve.ofArrows U f ∈ J T)\n    (hadjoin : ∀ (T : C) (I : Type (max u v)) [Finite I] (U : I → C)\n      (f : ∀ i : I, U i ⟶ T), (∀ i : I, U i ∈ B) →\n      Presieve.ofArrows U f ∈ J T → ∀ (V : C), V ∈ B → ∀ (g : V ⟶ T),\n        Presieve.ofArrows U f ⊔ Presieve.singleton g ∈ J T)\n    (T : C) (n : ℕ)\n    (K : SimplicialObject.Truncated (FormalCoproduct.{max u v} (Over T)) n)\n    (hK : IsFiniteBasisTruncation J B T K) :\n    ∃ L : SimplicialObject.Truncated (FormalCoproduct.{max u v} (Over T)) (n + 1),\n      (SimplicialObject.Truncated.trunc _ (n + 1) n).obj L = K ∧\n        IsFiniteBasisTruncation J B T L",
   "branch": "sheaf-dag",
   "by": "F1",
-  "date": "2026-10-15"
+  "date": "2026-10-15",
+  "note": " F2: independent category universes, index universe max u v, and only the used precoverage hypotheses; proof unchanged apart from universe annotations."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -154,11 +155,28 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-7328a",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261015T154208-L-163604",
+  "landing": "20261015T184347-L-858854",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivery files compiled cleanly with lcompile.py; original geometry reader fails against changed dependencies while adapted readers compile, and signatures/DAG proofs match the delivered changes."
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "F2 stage 2",
+  "old_statement": "Let C be a small category with pullbacks, J a precoverage having isomorphisms and stable under composition and base change [def-weil-pbc-sites-and-cohomology], and B a set of objects. Assume every object has a finite covering family from B, and adjoining any single arrow from a B-object to any finite B-cover again gives a cover, including empty covers. Fix T and n>=0. Let K be an n-truncated simplicial object [def-weil-pbc-simplicial-object] in formal families over T [def-weil-pbc-formal-coproduct], split in the explicit normalized-degeneracy sense of [lem-weil-pbc-site-hypercover-finite-extension]. Suppose every retained term has finite indices and B-components, and for each retained degree q its proper-face diagram [lem-weil-pbc-matching-object-proper-faces] has a limiting cone M_q and an arrow from K_q with the canonical projection equations and componentwise covering presieves. Require the degree-zero cone point to equal the singleton id_T. Then there exists a split (n+1)-truncation L restricting exactly to K, with all these same finite-basis and normalized matching-cover properties in every degree through n+1. No coherent choice of matching cones between degrees or stages is assumed.",
+  "what": "Generalize the object/hom universes and remove three unused precoverage axioms. The existing proofs require only hcover, hadjoin and pullbacks. The qcqs finite precoverage is a pretopology but its finite-family presentation need not satisfy the stronger arbitrary-cartesian-presieve base-change class. No conclusion is weakened, and no target statement or target-visible definition changes.",
+  "source": {
+   "document": "literature/stacks-project/hypercovering.tex",
+   "place": "Tag 0DAV, lemma-hypercovering-object, split-skeleton construction; Tag 01G2, finite limits of formal families; Tag 01G5, matching-cover condition"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-site-finite-basis-hypercover-existence",
+    "holds": true,
+    "note": "The generalized existence proof uses the same split-extension construction. All old small-category applications specialize the morphism universe to the object universe."
+   }
+  ]
  }
 }

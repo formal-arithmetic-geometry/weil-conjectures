@@ -20,7 +20,7 @@ split-skeleton construction of Tag 0DAV and the hypercover definition of Tag 01G
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped Simplicial
@@ -125,9 +125,9 @@ private theorem towerGlue_restrict {D : Type u} [Category D]
 
 
 open FormalSplitAttachment in
-private theorem zero_split {D : Type u} [Category D] (F : FormalCoproduct.{u} D) :
+private theorem zero_split {D : Type u} [Category D] (F : FormalCoproduct.{max u v} D) :
     IsSplit ((Functor.const _).obj F : SimplicialObject.Truncated _ 0) := by
-  let K : SimplicialObject.Truncated (FormalCoproduct.{u} D) 0 := (Functor.const _).obj F
+  let K : SimplicialObject.Truncated (FormalCoproduct.{max u v} D) 0 := (Functor.const _).obj F
   have hn (q : Fin 1) (i : (term K q).I) : IsNondegenerate K q i := by
     rintro ⟨r, hr, σ, hσ, j, hj⟩
     have hq : q.val = 0 := Nat.eq_zero_of_le_zero (Nat.le_of_lt_succ q.isLt)
@@ -162,13 +162,13 @@ private theorem zero_split {D : Type u} [Category D] (F : FormalCoproduct.{u} D)
 
 open FormalSplitAttachment in
 private theorem exists_zero_truncation
-    {C : Type u} [SmallCategory C] (J : Precoverage C) (B : Set C) (T : C)
-    (I : Type u) (U : I → C) (f : ∀ i, U i ⟶ T)
+    {C : Type u} [Category.{v} C] (J : Precoverage C) (B : Set C) (T : C)
+    (I : Type (max u v)) (U : I → C) (f : ∀ i, U i ⟶ T)
     (hI : Finite I) (hB : ∀ i, U i ∈ B) (hf : Presieve.ofArrows U f ∈ J T) :
-    ∃ K : SimplicialObject.Truncated (FormalCoproduct.{u} (Over T)) 0,
+    ∃ K : SimplicialObject.Truncated (FormalCoproduct.{max u v} (Over T)) 0,
       IsFiniteBasisTruncation J B T K := by
-  let F : FormalCoproduct.{u} (Over T) := ⟨I, fun i ↦ Over.mk (f i)⟩
-  let K : SimplicialObject.Truncated (FormalCoproduct.{u} (Over T)) 0 :=
+  let F : FormalCoproduct.{max u v} (Over T) := ⟨I, fun i ↦ Over.mk (f i)⟩
+  let K : SimplicialObject.Truncated (FormalCoproduct.{max u v} (Over T)) 0 :=
     (Functor.const _).obj F
   refine ⟨K, zero_split F, ?_⟩
   intro q
@@ -225,17 +225,17 @@ since each functor identity can be checked at a finite stage containing its degr
 [def-weil-pbc-simplicial-object]. The slice gives the augmentation and degree-zero
 matching object. Every fixed degree retains its finite basis family and matching cover. -/
 theorem exists_site_finite_basis_hypercover
-    {C : Type u} [SmallCategory C] [HasPullbacks C]
-    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange]
+    {C : Type u} [Category.{v} C] [HasPullbacks C]
+    (J : Precoverage C)
     (B : Set C)
-    (hcover : ∀ T : C, ∃ (I : Type u) (U : I → C) (f : ∀ i : I, U i ⟶ T),
+    (hcover : ∀ T : C, ∃ (I : Type (max u v)) (U : I → C) (f : ∀ i : I, U i ⟶ T),
       Finite I ∧ (∀ i : I, U i ∈ B) ∧ Presieve.ofArrows U f ∈ J T)
-    (hadjoin : ∀ (T : C) (I : Type u) [Finite I] (U : I → C)
+    (hadjoin : ∀ (T : C) (I : Type (max u v)) [Finite I] (U : I → C)
       (f : ∀ i : I, U i ⟶ T), (∀ i : I, U i ∈ B) →
       Presieve.ofArrows U f ∈ J T → ∀ (V : C), V ∈ B → ∀ (g : V ⟶ T),
         Presieve.ofArrows U f ⊔ Presieve.singleton g ∈ J T)
     (T : C) :
-    ∃ (K : SimplicialObject (FormalCoproduct.{u} (Over T)))
+    ∃ (K : SimplicialObject (FormalCoproduct.{max u v} (Over T)))
       (M : ∀ n : ℕ, Cone (K.properFaceDiagram n))
       (μ : ∀ n : ℕ, K _⦋n⦌ ⟶ (M n).pt),
       (∀ n : ℕ, Finite (K _⦋n⦌).I) ∧
@@ -254,7 +254,7 @@ theorem exists_site_finite_basis_hypercover
   classical
   obtain ⟨I, U, f, hI, hB, hf⟩ := hcover T
   obtain ⟨K₀, hK₀⟩ := exists_zero_truncation J B T I U f hI hB hf
-  let A (n : ℕ) := {K : SimplicialObject.Truncated (FormalCoproduct.{u} (Over T)) n //
+  let A (n : ℕ) := {K : SimplicialObject.Truncated (FormalCoproduct.{max u v} (Over T)) n //
     FormalSplitAttachment.IsFiniteBasisTruncation J B T K}
   have hstep (n : ℕ) (a : A n) :=
     FormalSplitAttachment.exists_finite_basis_truncation_extension

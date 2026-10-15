@@ -15,7 +15,7 @@
  },
  "kind": "statement",
  "title": "Finite-basis hypercover existence on a site with fibre products",
- "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] with fibre products, and let $\\mathcal B\\subseteq\\operatorname{Ob}(\\mathcal C)$ be a set of objects. Assume every object $T$ has a finite covering $\\{B_i\\to T\\}_{i\\in I}$ with all $B_i\\in\\mathcal B$. Assume also that adjoining one arrow $B\\to T$ with $B\\in\\mathcal B$ to any finite covering with members in $\\mathcal B$ again gives a covering. Then for each $T\\in\\mathcal C$ there exists an augmented simplicial object [def-weil-pbc-simplicial-object] $K$ in the category of formal coproducts $\\mathrm{SR}(\\mathcal C/T)$ [def-weil-pbc-formal-coproduct], with $K_n=\\{B_{n,i}\\to T\\}_{i\\in I_n}$, every $I_n$ finite and every $B_{n,i}\\in\\mathcal B$, whose matching arrows are coverings in every degree. A family morphism $(\\alpha,f_i):\\{A_i\\}\\to\\{D_j\\}$ is a covering here precisely when $\\{f_i:A_i\\to D_j\\mid\\alpha(i)=j\\}$ covers $D_j$ for each $j$. Matching objects are limits of the compatible proper-face diagram in $\\mathrm{SR}(\\mathcal C/T)$, with degree-zero matching object the one-member family $\\{\\operatorname{id}_T\\}$. In particular all face and degeneracy maps satisfy the simplicial identities.",
+ "statement": "Let $\\mathcal C$ be a category with fibre products, with possibly distinct object and morphism universes, equipped with any precoverage [def-weil-pbc-sites-and-cohomology], and let $\\mathcal B\\subseteq\\operatorname{Ob}(\\mathcal C)$ be a set of objects. Assume every object $T$ has a finite covering $\\{B_i\\to T\\}_{i\\in I}$ with all $B_i\\in\\mathcal B$. Assume also that adjoining one arrow $B\\to T$ with $B\\in\\mathcal B$ to any finite covering with members in $\\mathcal B$ again gives a covering. Formal-family index types lie in the maximum of the object and morphism universes. No isomorphism, composition, or base-change axiom on the precoverage is required. Then for each $T\\in\\mathcal C$ there exists an augmented simplicial object [def-weil-pbc-simplicial-object] $K$ in the category of formal coproducts $\\mathrm{SR}(\\mathcal C/T)$ [def-weil-pbc-formal-coproduct], with $K_n=\\{B_{n,i}\\to T\\}_{i\\in I_n}$, every $I_n$ finite and every $B_{n,i}\\in\\mathcal B$, whose matching arrows are coverings in every degree. A family morphism $(\\alpha,f_i):\\{A_i\\}\\to\\{D_j\\}$ is a covering here precisely when $\\{f_i:A_i\\to D_j\\mid\\alpha(i)=j\\}$ covers $D_j$ for each $j$. Matching objects are limits of the compatible proper-face diagram in $\\mathrm{SR}(\\mathcal C/T)$, with degree-zero matching object the one-member family $\\{\\operatorname{id}_T\\}$. In particular all face and degeneracy maps satisfy the simplicial identities.",
  "source": {
   "document": "literature/stacks-project/hypercovering.tex",
   "place": "Tag 094K, lemma-w-contractible; Tag 01G5, definition-hypercovering; Tag 0DAV, lemma-hypercovering-object, split-skeleton construction"
@@ -192,21 +192,38 @@
   "module": "Sheaf.CategoryTheory.SiteFiniteBasisHypercoverExistence",
   "declaration": "CategoryTheory.exists_site_finite_basis_hypercover",
   "file": "lean/Sheaf/CategoryTheory/SiteFiniteBasisHypercoverExistence.lean",
-  "statement": "theorem exists_site_finite_basis_hypercover {C : Type u} [SmallCategory C] [HasPullbacks C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] (B : Set C) (hcover : ∀ T : C, ∃ (I : Type u) (U : I → C) (f : ∀ i : I, U i ⟶ T), Finite I ∧ (∀ i : I, U i ∈ B) ∧ Presieve.ofArrows U f ∈ J T) (hadjoin : ∀ (T : C) (I : Type u) [Finite I] (U : I → C) (f : ∀ i : I, U i ⟶ T), (∀ i : I, U i ∈ B) → Presieve.ofArrows U f ∈ J T → ∀ (V : C), V ∈ B → ∀ (g : V ⟶ T), Presieve.ofArrows U f ⊔ Presieve.singleton g ∈ J T) (T : C) : ∃ (K : SimplicialObject (FormalCoproduct.{u} (Over T))) (M : ∀ n : ℕ, Cone (K.properFaceDiagram n)) (μ : ∀ n : ℕ, K _⦋n⦌ ⟶ (M n).pt), (∀ n : ℕ, Finite (K _⦋n⦌).I) ∧ (∀ (n : ℕ) (i : (K _⦋n⦌).I), ((K _⦋n⦌).obj i).left ∈ B) ∧ (M 0).pt = (FormalCoproduct.incl (Over T)).obj (Over.mk (𝟙 T)) ∧ (∀ n : ℕ, Nonempty (IsLimit (M n))) ∧ (∀ (n : ℕ) (a : SimplicialObject.ProperFaceCategory n), μ n ≫ (M n).π.app (op a) = K.map a.obj.hom.op) ∧ (∀ (n : ℕ) (j : (M n).pt.I), Presieve.ofArrows (fun i : {i : (K _⦋n⦌).I // (μ n).f i = j} ↦ ((K _⦋n⦌).obj i.val).left) (fun i : {i : (K _⦋n⦌).I // (μ n).f i = j} ↦ ((μ n).φ i.val).left ≫ eqToHom (congrArg (fun k ↦ ((M n).pt.obj k).left) i.property)) ∈ J ((M n).pt.obj j).left)",
+  "statement": "theorem exists_site_finite_basis_hypercover\n    {C : Type u} [Category.{v} C] [HasPullbacks C]\n    (J : Precoverage C)\n    (B : Set C)\n    (hcover : ∀ T : C, ∃ (I : Type (max u v)) (U : I → C) (f : ∀ i : I, U i ⟶ T),\n      Finite I ∧ (∀ i : I, U i ∈ B) ∧ Presieve.ofArrows U f ∈ J T)\n    (hadjoin : ∀ (T : C) (I : Type (max u v)) [Finite I] (U : I → C)\n      (f : ∀ i : I, U i ⟶ T), (∀ i : I, U i ∈ B) →\n      Presieve.ofArrows U f ∈ J T → ∀ (V : C), V ∈ B → ∀ (g : V ⟶ T),\n        Presieve.ofArrows U f ⊔ Presieve.singleton g ∈ J T)\n    (T : C) :\n    ∃ (K : SimplicialObject (FormalCoproduct.{max u v} (Over T)))\n      (M : ∀ n : ℕ, Cone (K.properFaceDiagram n))\n      (μ : ∀ n : ℕ, K _⦋n⦌ ⟶ (M n).pt),\n      (∀ n : ℕ, Finite (K _⦋n⦌).I) ∧\n      (∀ (n : ℕ) (i : (K _⦋n⦌).I), ((K _⦋n⦌).obj i).left ∈ B) ∧\n      (M 0).pt = (FormalCoproduct.incl (Over T)).obj (Over.mk (𝟙 T)) ∧\n      (∀ n : ℕ, Nonempty (IsLimit (M n))) ∧\n      (∀ (n : ℕ) (a : SimplicialObject.ProperFaceCategory n),\n        μ n ≫ (M n).π.app (op a) = K.map a.obj.hom.op) ∧\n      (∀ (n : ℕ) (j : (M n).pt.I),\n        Presieve.ofArrows\n          (fun i : {i : (K _⦋n⦌).I // (μ n).f i = j} ↦ ((K _⦋n⦌).obj i.val).left)\n          (fun i : {i : (K _⦋n⦌).I // (μ n).f i = j} ↦\n            ((μ n).φ i.val).left ≫\n              eqToHom (congrArg (fun k ↦ ((M n).pt.obj k).left) i.property)) ∈\n          J ((M n).pt.obj j).left)",
   "branch": "newtargets-dag",
   "by": "NS",
   "date": "2026-10-15",
   "existing": false,
-  "note": "The existing properFaceDiagram is used directly (landed statement dependency added under brief-stage2 §5). Matching cones and their canonical arrows are quantified with IsLimit and the projection equations; covering is the original precoverage condition on each index fibre. Simplicial objects in formal families of Over T carry the augmentation canonically."
+  "note": "The existing properFaceDiagram is used directly (landed statement dependency added under brief-stage2 §5). Matching cones and their canonical arrows are quantified with IsLimit and the projection equations; covering is the original precoverage condition on each index fibre. Simplicial objects in formal families of Over T carry the augmentation canonically. F2: independent category universes, index universe max u v, and only the used precoverage hypotheses; proof unchanged apart from universe annotations."
  },
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-7328a",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261015T154208-L-163604",
+  "landing": "20261015T184347-L-858854",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivery files compiled cleanly with lcompile.py; original geometry reader fails against changed dependencies while adapted readers compile, and signatures/DAG proofs match the delivered changes."
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "F2 stage 2",
+  "old_statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] with fibre products, and let $\\mathcal B\\subseteq\\operatorname{Ob}(\\mathcal C)$ be a set of objects. Assume every object $T$ has a finite covering $\\{B_i\\to T\\}_{i\\in I}$ with all $B_i\\in\\mathcal B$. Assume also that adjoining one arrow $B\\to T$ with $B\\in\\mathcal B$ to any finite covering with members in $\\mathcal B$ again gives a covering. Then for each $T\\in\\mathcal C$ there exists an augmented simplicial object [def-weil-pbc-simplicial-object] $K$ in the category of formal coproducts $\\mathrm{SR}(\\mathcal C/T)$ [def-weil-pbc-formal-coproduct], with $K_n=\\{B_{n,i}\\to T\\}_{i\\in I_n}$, every $I_n$ finite and every $B_{n,i}\\in\\mathcal B$, whose matching arrows are coverings in every degree. A family morphism $(\\alpha,f_i):\\{A_i\\}\\to\\{D_j\\}$ is a covering here precisely when $\\{f_i:A_i\\to D_j\\mid\\alpha(i)=j\\}$ covers $D_j$ for each $j$. Matching objects are limits of the compatible proper-face diagram in $\\mathrm{SR}(\\mathcal C/T)$, with degree-zero matching object the one-member family $\\{\\operatorname{id}_T\\}$. In particular all face and degeneracy maps satisfy the simplicial identities.",
+  "what": "Generalize the object/hom universes and remove three unused precoverage axioms. The existing proofs require only hcover, hadjoin and pullbacks. The qcqs finite precoverage is a pretopology but its finite-family presentation need not satisfy the stronger arbitrary-cartesian-presieve base-change class. No conclusion is weakened, and no target statement or target-visible definition changes.",
+  "source": {
+   "document": "literature/stacks-project/hypercovering.tex",
+   "place": "Tag 094K, lemma-w-contractible; Tag 01G5, definition-hypercovering; Tag 0DAV, lemma-hypercovering-object, split-skeleton construction"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-proetale-affine-acyclic-hypercover-geometry",
+    "holds": true,
+    "note": "Now applies directly to the finite qcqs precoverage. The affine hypercover statement is unchanged."
+   }
+  ]
  }
 }
