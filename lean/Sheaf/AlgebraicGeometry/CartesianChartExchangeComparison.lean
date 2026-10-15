@@ -19,11 +19,23 @@ private theorem chartRawAdj_pullback {S X B T T' : Scheme.{u}}
     (hl₁ : l ≫ pullback.fst a (pullback.snd f g) =
       pullback.fst a' (pullback.snd f g) ≫ b)
     (hl₂ : l ≫ pullback.snd a (pullback.snd f g) = pullback.snd a' (pullback.snd f g))
+    (hw : l ≫ (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g) =
+      pullback.snd a' (pullback.snd f g) ≫ pullback.snd f g)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) (V : B.Etale)
     (z : (abelianHigherDirectImageRawPresheaf
       (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g) n
       (((pullback.snd a (pullback.snd f g))^*[AddCommGrpCat.{u + 1}]).obj
-        (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F))).obj (op V)) :
+        (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F))).obj (op V))
+    (z' : (abelianHigherDirectImageRawPresheaf
+      (pullback.snd a' (pullback.snd f g) ≫ pullback.snd f g) n
+      (((pullback.snd a' (pullback.snd f g))^*[AddCommGrpCat.{u + 1}]).obj
+        (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F))).obj (op V))
+    (hz' : z' = abelianHigherDirectImageRawPullback l
+      (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g)
+      (pullback.snd a' (pullback.snd f g) ≫ pullback.snd f g) hw n _ _
+      ((upperStarComp AddCommGrpCat.{u + 1} l
+        (pullback.snd a (pullback.snd f g)) (pullback.snd a' (pullback.snd f g))
+        hl₂.symm).inv.app (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F)) V z) :
     (DerivedCategory.Plus.singleFunctor _ 0).map
         ((upperStarComp AddCommGrpCat.{u + 1} b a a' ha).hom.app
           ((abelianComparisonFree B).obj V)) ≫
@@ -35,14 +47,8 @@ private theorem chartRawAdj_pullback {S X B T T' : Scheme.{u}}
       (shiftFunctor _ (n : ℤ)).map
         (cartesianDerivedImageMap f g' g'' b wb
           ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) =
-    (cartesianChartRawAdjunctionIso f g a' g'' w' F n V).hom
-      (abelianHigherDirectImageRawPullback l
-        (pullback.snd a (pullback.snd f g) ≫ pullback.snd f g)
-        (pullback.snd a' (pullback.snd f g) ≫ pullback.snd f g)
-        (by rw [← Category.assoc, hl₂]) n _ _
-        ((upperStarComp AddCommGrpCat.{u + 1} l
-          (pullback.snd a (pullback.snd f g)) (pullback.snd a' (pullback.snd f g))
-          hl₂.symm).inv.app (((pullback.fst f g)^*[AddCommGrpCat.{u + 1}]).obj F)) V z) := by
+    (cartesianChartRawAdjunctionIso f g a' g'' w' F n V).hom z' := by
+  subst z'
   let t := cartesianImageProjection f g' g'' b wb
   let sq : CommSq t (pullback.snd f g'') (pullback.snd f g') b :=
     ⟨cartesianImageProjection_snd f g' g'' b wb⟩
