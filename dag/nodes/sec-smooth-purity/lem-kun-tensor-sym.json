@@ -167,19 +167,24 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-ba95b8dd3",
-  "group": "NZ",
+  "reviewer": "NT-stage2-Codex-24c250101",
+  "group": "NB",
   "result": "pass",
-  "note": "Wrote review.md. Verified immutable files, both statement dependencies, exact signature, canonical Koszul descent, universes and edge cases. Concrete specialization compiled cleanly through scompile.py. No delivery errors or fixes; project clones and branch head unchanged."
+  "note": "Wrote review.md. Verified all eight statement dependencies, source passages, canonical signed symmetry, exact signatures, universes and edge cases. Both immutable Lean modules compiled successfully through scompile.py within 60 seconds per check, without warnings. No delivery errors or fixes; no repository edits or Git mutations performed."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.Etale.Derived.TensorStructure",
-  "declaration": "AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip",
-  "statement": "theorem nonempty_iso_derivedTensor_flip :\n    Nonempty (derivedTensor A X ≅ (derivedTensor A X).flip)",
-  "branch": "slopmaster2",
-  "by": "NZ",
+  "module": "Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry",
+  "declaration": "AlgebraicGeometry.Etale.derivedTensorSymmetry",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDerivedTensorSymmetry.lean",
+  "statement": "def derivedTensorSymmetry (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A] (T : Scheme.{u}) : derivedTensor A T ≅ (derivedTensor A T).flip",
+  "branch": "newtargets-dag",
+  "by": "NB",
   "date": "2026-10-15",
-  "existing": true,
-  "note": "Specialize A to ModuleCat.{u + 1} Λ for Λ : Type (u + 1), [CommRing Λ], and X to T : Scheme.{u}. The bifunctor is exactly AlgebraicGeometry.Etale.derivedTensor recorded by def-kun-derived-tensor, on Etale.DerivedCategoryModule Λ T recorded by def-weil-pbc-derived-categories. Its natural isomorphism with the flipped bifunctor is the canonical symmetry induced by the signed complex braiding via K-flat localization (as documented in the declaration and DerivedCategory.nonempty_braidedCategory). No boundedness or other geometric hypothesis is imposed."
+  "existing": false,
+  "note": "Interface repair under brief-stage2 §1(B): the old nonempty_iso_derivedTensor_flip states existence but forgets the canonical signed symmetry needed by lem-amb-proper-coproducts-projection. This module constructs the actual natural isomorphism of the same unbounded derived tensor bifunctor, using the existing DerivedMonoidal.braiding descended from the Koszul braiding; it makes no choice of an arbitrary isomorphism. Specialize A to ModuleCat.{u + 1} Λ, [CommRing Λ], and T to the scheme. No statement, dependency, or proof field changed.",
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedTensorSymmetry",
+   "CategoryTheory.DerivedMonoidal.canonicalBraidingNatIso"
+  ]
  }
 }
