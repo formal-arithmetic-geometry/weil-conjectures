@@ -108,12 +108,13 @@ instance hasExactColimitsOfShape_int : HasExactColimitsOfShape ℤ (Mod C R) :=
 omit [Abelian C] [MonoidalPreadditive C] [MonoidalClosed C]
   [IsGrothendieckAbelian.{v} C] [Abelian.HasFunctorialFlatResolution C]
   [IsCommMonObj R] in
-private lemma restrictedRegular_rightAction :
+/-- The right action on the restricted regular module is multiplication after scalar change. -/
+lemma restrictedRegular_rightAction :
     (β_ S R).hom ≫ γ[R,((comap φ).obj (regular S)).X] = S ◁ φ ≫ μ[S] := by
   change (β_ S R).hom ≫ φ ▷ S ≫ μ[S] = _
   rw [← BraidedCategory.braiding_naturality_right_assoc, IsCommMonObj.mul_comm]
 
-private noncomputable def extendForgetTensorObjIso (M : Mod C R) :
+noncomputable def extendForgetTensorObjIso (M : Mod C R) :
     (extendScalarsObj φ M).X ≅ (((comap φ).obj (regular S)) ⊗ M).X where
   hom := extendDescHom φ (tensorObjπ ((comap φ).obj (regular S)) M) (by
     rw [← restrictedRegular_rightAction φ]
@@ -134,7 +135,7 @@ private noncomputable def extendForgetTensorObjIso (M : Mod C R) :
     erw [coequalizer.π_desc, Category.comp_id]
     rfl
 
-private noncomputable def extendForgetTensorIso :
+noncomputable def extendForgetTensorIso :
     extendScalars φ ⋙ forget S ≅
       tensorLeft ((comap φ).obj (regular S)) ⋙ forget R :=
   NatIso.ofComponents (extendForgetTensorObjIso φ) (by
