@@ -15207,3 +15207,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:18 L: merged deliver/N3/Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility (stage 3; reviewer PASS; first push; landing 20261015T211846-L-1947334 (proof); batch 20261015T211839; modules 1; new nodes 0)
 - 21:22 L: merged deliver/J3/Sheaf.Algebra.Homology.SiteDerivedTensorDescent (stage 3; reviewer PASS; first push; landing 20261015T212215-L-1979368 (proof); batch 20261015T212213; modules 1; new nodes 0)
 - 21:22 L: merged deliver/N4/Sheaf.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFunctors (stage 3; reviewer PASS; first push; landing 20261015T212221-L-1981801 (proof); batch 20261015T212213; modules 1; new nodes 0)
+- 21:22 L: merged deliver/R1/Sheaf.CategoryTheory.SheafSubcategoryComparison (stage 3; reviewer PASS; first push; landing 20261015T212227-L-1982751 (proof); batch 20261015T212213; modules 1; new nodes 0)

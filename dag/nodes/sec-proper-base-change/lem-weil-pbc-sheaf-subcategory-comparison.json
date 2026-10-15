@@ -28,22 +28,18 @@
  ],
  "proof": [
   {
-   "text": "For a sheaf $F$ and $U\\in\\mathcal S$, sheafification adjunction followed by Yoneda gives $\\operatorname{Hom}(h_U^\\#,F)=F(U)$ naturally in both arguments: a map is sent to the image of the unit section of $h_U$. For a set-indexed family $(A_i)$, let $P(U)=\\coprod_i A_i(U)$, with sectionwise restrictions. Its sheafification is the coproduct in sheaves: maps $P^\\#\\to F$ are, by the adjunction and the presheaf coproduct universal property, precisely families of maps $A_i\\to F$. By local sections of sheafification every section of $P^\\#$ locally comes from one of the $A_i$. Hence $\\coprod_i A_i\\to A$ is epi iff every section of $A$ locally lifts to some $A_i$: use the epi/local-surjectivity criterion and then refine its local lifts into $P^\\#$ using the preceding local representation. This includes the empty family, where local lifting may use an empty covering.",
+   "text": "For an indexed family R, form the sectionwise union I of the images of its arrows as a subfunctor of F(A). Each arrow factors through the sheaf closure of I. Joint right cancellation makes that closure inclusion epimorphic; it is also monomorphic, hence an isomorphism of sheaves. Thus the closure is the whole sheaf, exactly the asserted local lifting criterion. Conversely, local lifts and separatedness make any two maps agreeing on the family equal. This avoids coproducts and works for empty families and arbitrary allowed index universes.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "lem-galois-yoneda-hom-bijection",
-    "lem-weil-pbc-presheaf-colimits-sectionwise",
-    "lem-weil-pbc-site-sheafification-sections-local",
     "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "03A1 proof; equation map-representable-into-sheaf; 00WK and 00WN"
+    "place": "03A1(1), local surjectivity; Mathlib Subfunctor.sheafify_isSheaf and the balanced category of sheaves"
    }
   },
   {
-   "text": "The epimorphic families satisfy the site axioms. A singleton isomorphism lifts every section. Given $\\{A_i\\to A\\}$ and $\\{B_{ij}\\to A_i\\}$, first lift a section of $A$ locally to some $A_i$, then refine each such open by a covering on which this lift comes from a $B_{ij}$; composition of coverings on $\\mathcal S$ gives local lifting into the composite family. Given $B\\to A$, a section $b\\in B(U)$ locally has an $A_i$-lift $a_i$ of its image; the pair $(a_i,b)$ is a section of $A_i\\times_A B$ by sectionwise limits. These pullbacks belong to $\\mathcal E$ by hypothesis. Step 1 proves the composite and pulled-back families are epimorphic. Hom-sets in $\\mathcal E$ are sets of natural transformations between sheaves on a small site, so its set of objects makes its arrow collection a set.",
+   "text": "Singleton isomorphisms and compositions satisfy joint right cancellation directly. Pull back an epimorphic family using the assumed pullbacks in the ambient sheaf category. Evaluation preserves these pullbacks, so a local lift of the image of a section combines with that section to a lift into the pullback. The local lifting criterion makes the pulled-back family epimorphic. Faithfulness reflects the chosen pullback squares to E. This proves both the indexed covering-class axioms and the site axioms for the precoverage K of all jointly epimorphic presieves.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
     "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
@@ -51,121 +47,93 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "03A1 proof, omitted verification of the site axioms, expanded"
+    "place": "03A1, omitted verification of the site axioms"
    }
   },
   {
-   "text": "Apply the set-of-coverings theorem to this class of epimorphic families. In addition to any prescribed set, include in $\\operatorname{Cov}_0$ all images of coverings of $\\mathcal S$ under $v(U)=h_U^\\#$, and for each $A\\in\\mathcal E$ the family of all maps $h_U^\\#\\to A$, indexed by pairs $(U,s\\in A(U))$. These are sets because both sites have sets of objects and Hom-sets; the images of $\\mathcal S$ coverings are epi, since two maps $h_U^\\#\\to F$ agreeing on all $h_{U_i}^\\#$ correspond to sections of $F(U)$ agreeing on a cover and hence equal. The all-sections family is epi because each section $s\\in A(U)$ is the image of the unit section under its associated map. Thus all added families are legitimate. The selected set satisfies the site axioms and represents every epimorphic family up to equality of arrow supports. For two occurrences of the same arrow $B\\to A$, the matching equation on $B\\times_A B$, pulled back along the diagonal $B\\to B\\times_A B$, forces the two assigned sections to be equal. Conversely a matching assignment to the arrow support pulls back to a matching assignment on any indexing family. Thus repeating an arrow does not alter the matching-family condition, so sheaves for this set are exactly sheaves for all epimorphic families. Its associated topology is the topology specified in the statement.",
+   "text": "Apply exists_small_coveringFamilies to the indexed class just proved, retaining the prescribed Cov0. Every presieve has a canonical indexed presentation, with an index for each arrow in its support. The selection theorem gives a chosen family with the same support, so membership in K is equivalent to being the support of a chosen family. No extra families have to be adjoined: all epimorphic supports already belong to K.",
    "uses": [
-    "lem-weil-pbc-small-set-of-covering-families",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-sheafification",
-    "lem-galois-yoneda-hom-bijection",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+    "lem-weil-pbc-small-set-of-covering-families"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sets.tex",
-    "place": "000X (sets-lemma-coverings-site), (1)-(3), applied to the coverings of 03A1"
+    "place": "03A1(1); representative coverings are Sets Tag 000X(1)-(3)"
    }
   },
   {
-   "text": "For any $F\\in\\operatorname{Sh}(\\mathcal S)$, matching maps $t_i:A_i\\to F$ on an epimorphic family define a map $t:A\\to F$ as follows. For $a\\in A(U)$ choose local lifts $a_k\\in A_{i(k)}(U_k)$ as in step 1 and glue $t_{i(k)}(a_k)\\in F(U_k)$. On overlaps the pair of lifts lies in $A_{i(k)}\\times_A A_{i(l)}$, so the matching hypothesis gives equality there. For a second choice of lifts $a_l^\\prime\\in A_{i^\\prime(l)}(U_l^\\prime)$, pull both coverings back to $U_k\\times_U U_l^\\prime$. The two lifts there have image $a$, hence give a section of $A_{i(k)}\\times_A A_{i^\\prime(l)}$; the matching equation makes their images in $F$ equal. Composition and pullback of coverings give a common covering of $U$, so separatedness makes the two glued sections equal. Restricting the chosen local lifts proves that this assignment commutes with restriction in $\\mathcal S$, hence is a sheaf map. It restricts to $t_i$ and is unique because every section locally lifts. Thus $NF$ is a sheaf on $\\mathcal E$. Taking $F=A\\in\\mathcal E$, fullness gives $N(A)(B)=\\operatorname{Hom}_{\\mathcal E}(B,A)=h_A(B)$, proving subcanonicity.",
+   "text": "Matching maps from a jointly epimorphic family into B agree on any two lifts of the same section: choose their ambient pullback, lift the pair sectionwise, and apply the matching equation there. For each section a of F(A), its covering sieve of lifts therefore carries a compatible family of sections of B. Glue uniquely. Uniqueness proves compatibility with restrictions and that the resulting sheaf map restricts to each given map. This proves the nerve is a sheaf for K, including its generated topology. Full faithfulness identifies the nerve of F(A) naturally with the representable at A, proving subcanonicity.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
     "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "03A1(2), Hom equalizer paragraph; local descent argument expanded"
+    "place": "03A1(2), Hom equalizer and descent argument"
    }
   },
   {
-   "text": "The functor $v:\\mathcal S\\to\\mathcal E$ is continuous. Step 3 ensured its images of coverings are coverings. Representable presheaves preserve every existing fibre product: on $W$ this is the universal-property bijection $\\operatorname{Hom}(W,T\\times_U U_i)=\\operatorname{Hom}(W,T)\\times_{\\operatorname{Hom}(W,U)}\\operatorname{Hom}(W,U_i)$. Sheafification preserves these fibre products by its finite-limit theorem. Hence $v(T\\times_U U_i)\\cong v(T)\\times_{v(U)}v(U_i)$ for every covering arrow and $T\\to U$; these are exactly the continuity requirements. We assert preservation only of fibre products that exist in $\\mathcal S$, not of arbitrary finite limits on that site.",
+   "text": "Choose v(U) in E with an isomorphism F(v(U)) to the sheafification of yoneda(U), and transport the maps through these isomorphisms using fullness. The sheafification adjunction and Yoneda give natural equivalences Hom(F(v(U)), B) = B(U). They identify restriction along v and postcomposition in B, and send v(f) followed by the chosen isomorphism to the unit section eta(f).",
    "uses": [
-    "lem-weil-pbc-sheafification-sets-exact",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "03A1 proof of (3), continuity; 00WJ"
-   }
-  },
-  {
-   "text": "To check cocontinuity, take an epimorphic covering $\\{A_i\\to v(U)\\}$ of $v(U)$. Apply local lifting from step 1 to the unit section $\\eta(\\mathrm{id}_U)\\in h_U^\\#(U)$. Obtain a covering $\\{f_j:U_j\\to U\\}$ and $a_j\\in A_{i(j)}(U_j)$ mapping to its restriction. The bijection of step 1 makes $a_j$ a sheaf map $v(U_j)\\to A_{i(j)}$. Its composite to $v(U)$ equals $v(f_j)$, since their corresponding sections are both $\\eta(f_j)$. Thus the image of this covering refines the given one, exactly cocontinuity.",
-   "uses": [
-    "def-weil-pbc-special-cocontinuous-functor",
-    "def-weil-pbc-sheafification",
-    "lem-galois-yoneda-hom-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "03A1 proof of (3), cocontinuity from 00WN"
-   }
-  },
-  {
-   "text": "If $a,b:U'\\to U$ have $v(a)=v(b)$, evaluate at the unit section of $v(U')$: their images $\\eta(a),\\eta(b)$ in $h_U^\\#(U')$ agree. Local equality for the sheafification unit gives a covering $\\{U'_j\\to U'\\}$ on which $a,b$ agree. If $c:v(U')\\to v(U)$ is any sheaf map, the bijection in step 1 gives its section in $h_U^\\#(U')$. Local representation gives a covering $f_j:U'_j\\to U'$ and actual arrows $c_j:U'_j\\to U$ representing its restrictions. Naturality of that bijection gives $v(c_j)=c\\circ v(f_j)$. These establish respectively local faithfulness and local fullness, with no assumption that $\\mathcal S$ is subcanonical.",
-   "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-weil-pbc-sheafification",
-    "lem-galois-yoneda-hom-bijection",
-    "def-weil-pbc-special-cocontinuous-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "03A1 proof of (3), verification of conditions (3) and (4) of 03A0"
-   }
-  },
-  {
-   "text": "For every $A\\in\\mathcal E$, the all-sections family $\\{v(U)\\to A\\}_{(U,s)}$ of step 3 is a chosen covering. Hence $v$ is cover-dense. Steps 5-7 verify all remaining conditions in the definition of special cocontinuity. The special-cocontinuous comparison theorem applies to these two small sites and gives an equivalence $g:\\operatorname{Sh}(\\mathcal S)\\to\\operatorname{Sh}(\\mathcal E)$ with $g^{-1}H(U)=H(v(U))$. Since $h_A$ is a sheaf by step 4, this gives $g^{-1}h_A(U)=\\operatorname{Hom}(v(U),A)=A(U)$ by step 1, naturally in $U$ and in $A$. Thus $g^{-1}h_A\\cong A$.",
-   "uses": [
-    "def-weil-pbc-special-cocontinuous-functor",
-    "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
     "def-weil-pbc-sheafification",
     "lem-galois-yoneda-hom-bijection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "03A1(3)-(4), applying 03A0; Hom calculation in proof of (4)"
+    "place": "03A1, equation map-representable-into-sheaf"
    }
   },
   {
-   "text": "Finally use the explicit direct-image formula for a continuous cocontinuous functor. An element of $(g_*F)(A)$ is a family $s_{U,\\psi}\\in F(U)$, where $\\psi:v(U)\\to A$, satisfying $F(f)(s_{U,\\psi})=s_{V,\\psi\\circ v(f)}$ for every $f:V\\to U$. By step 1 the maps $\\psi$ correspond to sections $a\\in A(U)$, and this condition is exactly naturality of the functions $A(U)\\to F(U)$, $a\\mapsto s_{U,\\psi_a}$. Thus these families are precisely maps $A\\to F$. Restriction along $B\\to A$ becomes precomposition of such maps, and maps in $F$ become postcomposition. This identifies $g_*$ naturally with the functor $N$ stated in the item, so $N$ is an equivalence of topoi. Step 4 already identifies $N(A)=h_A$, and step 3 proves the asserted exact description of the covering families up to the representative convention.",
+   "text": "The equivalences of sections show that v takes covering sieves on C to K-covering sieves and is cover dense. For local fullness, represent the section corresponding to a map v(U) to v(V) locally by an arrow Uprime to V, using Mathlib Presheaf.imageSieve_mem for the sheafification unit. For local faithfulness, equality after v gives equality after the unit; use Presheaf.equalizerSieve_mem for its locally injective unit. Send these covering sieves to K. These are the local fullness and faithfulness hypotheses of Mathlib dense-subsite comparison, without requiring E to have the same object universe as C.",
    "uses": [
-    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
     "def-weil-pbc-sheafification",
     "lem-galois-yoneda-hom-bijection"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "03A1 Hom calculation in proof of (5); 00XO and 00XR direct-image formula"
+    "place": "03A1(3)-(5); Mathlib local surjectivity and local injectivity of toSheafify"
+   }
+  },
+  {
+   "text": "Let Jprime be the topology on C induced from K along v. Cover preservation gives J <= Jprime. Every J-sheaf B is the restriction of its nerve along v, by the natural section equivalences, and that nerve is a K-sheaf. Since v is a dense subsite for its induced topology, restriction makes B a Jprime-sheaf. Apply this to the J-sheaf of J-closed sieves: Mathlib le_topology_of_closedSieves_isSheaf gives Jprime <= J. Thus v is a dense subsite from J to K. Mathlib makes restriction W from K-sheaves to J-sheaves an equivalence. Lift the nerve to K-sheaves; its composite with W is naturally the identity by the section equivalences. Hence the nerve itself is an equivalence, using Functor.isEquivalence_of_comp_right.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "03A1, comparison lemma; Mathlib Functor.IsDenseSubsite, DenseSubsite.SheafEquiv, and the closed-sieve classifier"
+   }
+  },
+  {
+   "text": "Choose the equivalence whose functor is exactly the lifted nerve. Its underlying presheaf functor is therefore the stated nerve. The full-faithfulness hom equivalences give the required natural isomorphism on E with yoneda. Lift it to representable sheaves and whisker its inverse by the equivalence inverse; the equivalence unit gives yoneda_K followed by the inverse naturally isomorphic to F. Assemble this with the local lifting criterion, K, and the small representative covering families.",
+   "uses": [
+    "lem-weil-pbc-small-set-of-covering-families"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "03A1(2), final Hom calculation and inverse image of representables"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sheafification",
-  "lem-galois-yoneda-hom-bijection",
-  "lem-weil-pbc-presheaf-colimits-sectionwise",
-  "lem-weil-pbc-site-sheafification-sections-local",
   "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
   "def-weil-pbc-sites-and-cohomology",
   "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
   "lem-weil-pbc-small-set-of-covering-families",
-  "lem-weil-pbc-sheafification-sets-exact",
-  "def-weil-pbc-special-cocontinuous-functor",
-  "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
-  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "R1",
+  "date": "2026-10-16",
   "document": "literature/stacks-project/sites.tex",
-  "place": "03A1 (sites-lemma-special-equivalence), proof; omitted site axioms expanded and 000X applied"
+  "place": "Tag 03A1, with Sets Tag 000X for representative coverings; implemented via Mathlib dense-subsite comparison and the closed-sieve classifier rather than the project special-cocontinuous comparison interfaces. All local image, pullback, descent, density and compatibility arguments are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -263,5 +231,15 @@
   "group": "NH",
   "result": "pass",
   "note": "Wrote review.md. Verified immutable node, sources, dependencies, hypotheses, conclusions, universes, edge cases, docstrings, and signature. Per-file scompile.py compilation passed cleanly. No faults or fixes; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261015T212227-L-1982751",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
