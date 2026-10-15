@@ -24,6 +24,24 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct DirectSum
 namespace AlgebraicGeometry.Scheme.Modules
 
+private noncomputable def summandSignEquiv {k : Type w} [Field k]
+    {I : Type*} (M : I → Type w) [∀ i, AddCommGroup (M i)] [∀ i, Module k (M i)]
+    (d : I → ℕ) : (⨁ i, M i) ≃ₗ[k] ⨁ i, M i :=
+  DirectSum.congrLinearEquiv fun i ↦ LinearEquiv.smulOfUnit ((-1 : kˣ) ^ d i)
+
+private theorem summandSignEquiv_lof {k : Type w} [Field k]
+    {I : Type*} [DecidableEq I] (M : I → Type w)
+    [∀ i, AddCommGroup (M i)] [∀ i, Module k (M i)]
+    (d : I → ℕ) (i : I) (x : M i) :
+    summandSignEquiv (k := k) M d (DirectSum.lof k I M i x) =
+      (-1 : ℤ) ^ d i • DirectSum.lof k I M i x := by
+  classical
+  simp only [summandSignEquiv, DirectSum.coe_congrLinearEquiv, DirectSum.lmap_lof,
+    LinearEquiv.coe_coe]
+  change DirectSum.lof k I M i (((-1 : k) ^ d i) • x) = _
+  rw [_root_.map_smul, ← Int.cast_smul_eq_zsmul k, Int.cast_pow, Int.cast_neg, Int.cast_one]
+
+
 /-- The specified external Cech cup takes each pure factor-homology tensor to
 external cup, in compatible Cech comparison coordinates. This statement concerns
 only generators of the direct sum, and does not compare with scalar-total cycles.
@@ -39,7 +57,11 @@ with the finite products in each Cech term. Compose the product comparison with 
 inverse fixed-resolution comparison and extension homology to obtain b. Tensor the
 factor comparisons on each direct-sum summand, then apply tensor Kunneth to the
 extended factor Cech complexes. The canonical comparison between extension of the
-natural tensor total and the tensor total of extensions yields e.
+natural tensor total and the tensor total of extensions yields a comparison.
+Precompose it with the direct sum of scalar automorphisms (-1)^(p*q) on its
+(p,q) tensor-homology summands. These are units over every field, so this gives
+the equivalence e. The signed cycle formula and linearity of all comparisons
+then give the displayed unsigned generator formula.
 For x and y, lift their images under the factor comparisons to Cech cycles. Tensor
 Kunneth represents their summand tensor by the total tensor cycle. The given hθ
 identifies its image tuple by tuple with the front X section and back Y section
@@ -94,7 +116,11 @@ theorem picardRightCechCup_generators
   let s := DirectSum.congrLinearEquiv fun i : {pq : ℕ × ℕ // pq.1 + pq.2 = n} ↦
     TensorProduct.congr (alpha i.val.1).symm (beta i.val.2).symm
   let t := T.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl
-  refine ⟨(s.trans e).trans t.symm.toLinearEquiv, b n, ?_⟩
+  let M := fun i : {pq : ℕ × ℕ // pq.1 + pq.2 = n} ↦
+    (picardScalarModel f F).homology (i.val.1 : ℤ) ⊗[k]
+      (picardScalarModel g G).homology (i.val.2 : ℤ)
+  let r := summandSignEquiv (k := k) M (fun i ↦ i.val.1 * i.val.2)
+  refine ⟨r.trans ((s.trans e).trans t.symm.toLinearEquiv), b n, ?_⟩
   intro i x y
   obtain ⟨a, ha⟩ := (ModuleCat.epi_iff_surjective (A.homologyπ i.val.1)).mp
     inferInstance ((alpha i.val.1).symm x)
@@ -112,8 +138,9 @@ theorem picardRightCechCup_generators
   change picardScalarModelEquiv (pullback.fst f g ≫ f)
     (externalCupCoefficients f g F G) n
     ((b n).hom (HomologicalComplex.homologyMap (θ.app G) (n : ℤ)
-      (t.inv (e (s (DirectSum.lof k _ _ i (x ⊗ₜ[k] y))))))) = _
-  rw [hs, hez]
+      (t.inv (e (s (r (DirectSum.lof k _ _ i (x ⊗ₜ[k] y)))))))) = _
+  rw [summandSignEquiv_lof, map_zsmul, map_zsmul, map_zsmul,
+    map_zsmul, map_zsmul, map_zsmul, hs, hez]
   dsimp only [A] at hx
   dsimp only [B] at hy
   simpa only [hx, hy] using hab n i a v z hz

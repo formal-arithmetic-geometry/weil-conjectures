@@ -72,7 +72,7 @@ private theorem cupResolutionClass_surjective_local {X : Scheme.{w}} {F : X.Modu
         (cupCycleClass_surjective_local (T.obj D.K) n))
 
 
-/-- The scalar Ext cup agrees with any cup computed by acyclic module resolutions.
+/-- The scalar Ext cup is the signed cup computed by acyclic module resolutions.
 Source: Stacks Project, Cohomology, section-cup-product and Tag 0FKV.
 (blueprint: lem-sc-scalar-cup-module-cup-compatibility).
 
@@ -85,7 +85,7 @@ Yoneda tensor pairing is represented by the signed total tensor of the two cycle
 Its augmentation coefficient is scalarTensorCoefficient, which sends pure tensors
 of sections to tmulSection. Thus this pairing is exactly the module resolution
 pairing, including its differential sign. Apply IsModuleCupProduct to the paired
-cycle. Its target class is the scalar cup by the preceding identification. The
+cycle. Its target class, multiplied by (-1)^(p*q), is the scalar cup. The
 resolution comparison maps and homotopy independence ensure that this conclusion
 is independent of all chosen resolutions and representatives. No pullback is used.
 In degree zero this is the pure tensor of sections; empty schemes and zero
@@ -110,7 +110,8 @@ theorem scalarCup_moduleCup_compatibility
         c.val = D.pair p q ⊤ a.val b.val →
           cup (D.left.class p a) (D.right.class q b) = D.target.class (p + q) c)
     (a : scalarCohomology f F p) (b : scalarCohomology f G q) :
-    scalarCohomologyCup f F G p q a b = cup a b := by
+    scalarCohomologyCup f F G p q a b =
+      (-1 : ℤ) ^ (p * q) • cup a b := by
   obtain ⟨D⟩ := exists_moduleCupResolutionPairing F G
   obtain ⟨a', ha⟩ := cupResolutionClass_surjective_local D.left p a
   obtain ⟨b', hb⟩ := cupResolutionClass_surjective_local D.right q b

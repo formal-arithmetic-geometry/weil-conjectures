@@ -1,0 +1,208 @@
+{
+ "id": "new-sc-scalar-cup-positive-resolution-class-compatibility",
+ "kind": "statement",
+ "title": "Positive-degree part of the signed scalar cup resolution comparison",
+ "statement": "For a field k, a scheme X over Spec k, modules F and G and a cup resolution pairing D [def-sc-module-cup-resolution-data], let a,b,c be global resolution cycles in degrees p,q,p+q and assume p>0, q>0 and c.val=D.pair p q top a.val b.val. The scalar cup [def-sc-field-linear-module-cohomology-operations] of their left and right classes equals (-1)^(p*q) times the class of c.",
+ "stmt_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-module-cup-resolution-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F7 and 0FKV, resolution cup comparison"
+ },
+ "proof": [
+  {
+   "text": "Pairing with a fixed right cycle b defines O-linear sheaf morphisms pairRightComponent from the degree-n left term to the degree-(n+q) target term. Naturality follows from D.restriction, and closedness of b with Leibniz proves pairRightComponent_comm. These maps assemble into the actual map pairRightMap to the q-th tail using Mathlib's HomologicalComplex.d_comp_eqToHom for differential transport, without a duplicate helper theorem. Multiplying degree n by (-1)^(n*q) and extending by zero gives pairRightCochain. Its differential vanishes by pairRightCochain_closed: cancel the two terms using the tail-map chain equation and (-1)^(q+1)*(-1)^((n+1)*q)=-(-1)^(n*q). Negative source degrees vanish. All these private constructions and proofs are complete.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport a resolution cycle through D.comparison and apply homology-pi naturality. The defining injective-cocycle formula for moduleExtEquiv identifies D.class with InjectiveResolution.extMk. Exact scalar restriction and precomposition with scalarUnitMorphism give the formula for scalarCohomologyExtEquiv. The private class_ext_formula and scalar_class_ext_formula prove these formulas in every degree.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Remaining comparison: after exact scalar restriction, identify the localized pairRightCochain over the left augmentation with tensor transport of the right Ext class followed by scalarTensorCoefficient. For this identification, D.pair in bidegrees (0,n), with the left input in the augmentation, defines a map from scalar F tensor the right resolution to the target resolution. Leibniz gives its chain equation, augmentation_pair identifies its coefficient map, and exact tensoring by a sheaf of k-vector spaces inverts the tensor augmentation. The localized comparison from the preceding step identifies the fixed right cycle with its Ext class. Composing with the left class evaluates the degree-p component of pairRightCochain, hence gives (-1)^(p*q) times the paired target cycle. Target comparison and additivity of scalarCohomologyExtEquiv give the equality. The alternative total-tensor proof in the docstring gives the same normalization by Mathlib shift interchange. The constructions cover characteristic two, zero cycles and empty schemes. Both zero-degree axes are already proved in the parent.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex; Mathlib/Algebra/Homology/BifunctorShift.lean",
+  "place": "Tags 01F7 and 0FKV; Mathlib Algebra.Homology.BifunctorShift, shift interchange"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Yoneda tensor cup product computed by cocycles in acyclic resolutions with a Koszul sign",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "Unavailable; no absence conclusion inferred.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda product of Ext classes computed as signed tensor product of resolution cocycles",
+   "results": "8 hits, mostly Ext.bilinearComp and ProjectiveResolution.extEquivCohomologyClass_symm_add",
+   "verdict": "No full resolution tensor comparison returned.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "Abelian.Ext.comp",
+   "results": "Unknown identifier Abelian.Ext.comp; no hits.",
+   "verdict": "No absence conclusion inferred.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "grep",
+   "query": "extMk.*comp|comp.*extMk|tensor.*Ext",
+   "results": "Mathlib Algebra/Homology/Monoidal.lean. Local searches found Ext coefficient naturality, degree-zero formulas, and total-pairing assembly, but no signed scalar resolution comparison. Whole-blueprint searches for cup resolution and Yoneda tensor found no duplicate statement.",
+   "verdict": "Use the existing APIs for degree zero; the positive-degree localized tensor comparison remains.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext composition computed using a chain map from an acyclic resolution to a shifted injective resolution tensor product",
+   "results": "InjectiveResolution.mk₀_comp_extMk, extMk_comp_mk₀, extMk_hom, and Ext derived-category composition formulas.",
+   "verdict": "These handle degree-zero composition or cocycle representation, not the required localized tensor comparison. Second reading found no duplicate.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extMk\", \"comp\"",
+   "results": "Four injective/projective resolution formulas for composing extMk with mk₀.",
+   "verdict": "Only degree-zero composition; does not close the case p,q>0.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute Yoneda product of two positive degree Ext classes by pairing cocycles in acyclic resolutions",
+   "results": "Eight hits: Ext precomp, postcomp, bilinearComp and linear variants, and add_extMk/sub_extMk.",
+   "verdict": "These are composition or additivity APIs, not the localized tensor-resolution identification. Independent second reading found no replacement theorem.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocycle\", \"comp\", \"Ext\"",
+   "results": "CochainComplex.HomComplex.Cocycle.ext and ext_iff only.",
+   "verdict": "Neither identifies the scalar cup with a paired resolution class.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "grep",
+   "query": "extMk.*comp|comp.*extMk|tensor.*[Cc]ocycle",
+   "results": "No matches in Mathlib/Algebra/Homology. Separate local searches in Mathlib/CategoryTheory/Abelian/Injective/Ext.lean found only degree-zero extMk composition formulas; local Sheaf searches found the coefficient comparison APIs already used.",
+   "verdict": "No shorter existing positive-degree resolution comparison found.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda tensor product classes represented by a closed degree map on acyclic resolutions",
+   "results": "Eight hits: Tor, Tor', their object formulas and vanishing for projectives, and KProjective characterizations.",
+   "verdict": "Independent second reading: none compares the tensor Yoneda pairing with the given resolution cycles.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapExactFunctor\", \"comp\"",
+   "results": "Ext.mapExactFunctor_comp, Ext.comp_mapExactFunctor, Ext.mapExactFunctor_comp_mk₀_natTransApp.",
+   "verdict": "Composition functoriality APIs do not identify a positive-degree resolution pairing with Yoneda tensor transport.",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility",
+  "date": "2026-10-15",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "The sole proof step invokes lem-sc-general-theorem-of-cube. Its special-fibre Picard argument (Tag 0BF3) uses the Varieties Tag 0BED Kunneth external cup comparison. This is the signed positive-bidegree resolution calculation, after both zero-degree axes have been proved.",
+   "via": [
+    "new-sc-scalar-cup-resolution-class-compatibility",
+    "lem-sc-scalar-cup-module-cup-compatibility",
+    "lem-sc-scalar-external-cup-module-comparison",
+    "lem-sc-picard-scalar-cech-external-cup-core",
+    "lem-sc-picard-scalar-cech-external-cup",
+    "lem-sc-picard-right-cech-cup-cycle-comparison",
+    "lem-sc-picard-right-cech-cup-generators",
+    "lem-sc-picard-right-cech-cup-homology",
+    "lem-sc-picard-external-right-cech-comparison",
+    "lem-sc-picard-external-cup-right-cech-diagram",
+    "lem-sc-picard-external-cup-right-exact-ladder",
+    "lem-sc-picard-external-cup-right-short-exact",
+    "lem-sc-picard-external-cup-shift-right",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open-core",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarCupPositiveResolutionClassCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarCupPositiveResolutionClassCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCup_positive_resolution_class_compatibility",
+  "statement": "theorem scalarCup_positive_resolution_class_compatibility\n    {k : Type w} [Field k] {X : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (F G : X.Modules) (p q : ℕ) (hp : 0 < p) (hq : 0 < q)\n    (D : CupResolutionPairing F G)\n    (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)\n    (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K)\n    (c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K)\n    (hc : c.val = D.pair p q ⊤ a.val b.val) :\n    scalarCohomologyCup f F G p q (D.left.class p a) (D.right.class q b) =\n      (-1 : ℤ) ^ (p * q) • D.target.class (p + q) c",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-15"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-d5acf",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261015T091817-L-780521",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-d5acf",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261015T091817-L-780521",
+  "kind": "interface",
+  "note": "independent Codex review: Full packet and delivered Lean/DAG records matched against signatures, dependency proofs, sign conventions, reconstructed originals, direct importers, clean compilation and axiom probes."
+ }
+}

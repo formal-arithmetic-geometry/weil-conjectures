@@ -74,7 +74,9 @@ factor coefficients and the product coefficient. Restriction of scalars is
 exact and commutes with the products in each Cech term, so the comparisons are
 k-linear. Compose the factor comparisons with the inverse fixed scalar-model
 comparisons to get alpha and beta. For the product also use the zero-extension
-homology isomorphism, giving b. Choose these comparisons together, in all degrees.
+homology isomorphism, giving b. The signed canonical Cech cup formula then
+identifies (-1)^(p*q) times the product comparison with externalCup. The next
+comparison on homology generators absorbs this factor in each tensor summand.
 For factor cocycles a and v, the inclusion of z is the tensor of their inclusions
 in the indicated total summand. The htheta coordinates compute its image on each
 product-cover tuple as the front X section and back Y section pulled back by the
@@ -117,7 +119,8 @@ theorem picardRightCechCup_cycle_comparison
           HomologicalComplex.ιMapBifunctor A B (curriedTensor (ModuleCat.{w} k))
             (ComplexShape.up ℕ) i.val.1 i.val.2 n i.property
               ((A.iCycles i.val.1 a) ⊗ₜ[k] (B.iCycles i.val.2 v)) →
-        picardScalarModelEquiv (pullback.fst f g ≫ f)
+        (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+          picardScalarModelEquiv (pullback.fst f g ≫ f)
             (externalCupCoefficients f g F G) n
           ((b n).hom (HomologicalComplex.homologyMap (θ.app G) (n : ℤ)
             ((T.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl).inv
@@ -181,20 +184,21 @@ theorem picardRightCechCup_cycle_comparison
     (fun j ↦ (eP j).toLinearMap) heP n i a v z hz
   dsimp only [alpha, beta, LinearEquiv.trans_apply] at *
   simp only [LinearEquiv.apply_symm_apply]
-  change (picardScalarModelEquiv (pullback.fst f g ≫ f) E n)
-    ((b n).hom (HomologicalComplex.homologyMap (θ.app G) (n : ℤ)
-      ((T.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl).inv
-        (T.homologyπ n z)))) = _
+  change (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+    (picardScalarModelEquiv (pullback.fst f g ≫ f) E n)
+      ((b n).hom (HomologicalComplex.homologyMap (θ.app G) (n : ℤ)
+        ((T.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl).inv
+          (T.homologyπ n z)))) = _
   rw [hθc]
-  change (picardScalarModelEquiv (pullback.fst f g ≫ f) E n)
-    ((picardScalarModelEquiv (pullback.fst f g ≫ f) E n).symm
-      (eP n ((P.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl).hom
-        (HomologicalComplex.homologyMap (HomologicalComplex.extendMap c
-          ComplexShape.embeddingUpNat) (n : ℤ)
-          ((T.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl).inv
-            (T.homologyπ n z)))))) = _
-  rw [LinearEquiv.apply_symm_apply]
-  rw [extendHomology_cancel]
+  change (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+    (picardScalarModelEquiv (pullback.fst f g ≫ f) E n)
+      ((picardScalarModelEquiv (pullback.fst f g ≫ f) E n).symm
+        (eP n ((P.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl).hom
+          (HomologicalComplex.homologyMap (HomologicalComplex.extendMap c
+            ComplexShape.embeddingUpNat) (n : ℤ)
+            ((T.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl).inv
+              (T.homologyπ n z)))))) = _
+  rw [LinearEquiv.apply_symm_apply, extendHomology_cancel]
   exact hcup
 
 end AlgebraicGeometry.Scheme.Modules

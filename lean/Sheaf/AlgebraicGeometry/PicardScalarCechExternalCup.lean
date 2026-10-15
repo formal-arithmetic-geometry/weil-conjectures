@@ -49,7 +49,8 @@ ordinary module comparison witnesses from heX, heY and heP. The ordinary module
 external-pairing comparison gives the cup of the module pullback classes.
 Their witness equations replace the factor and product comparisons by eX, eY
 and eP. The scalar Ext/module external-cup comparison identifies that ordinary
-cup with externalCup of the two factor classes. Compose the equalities and
+cup, multiplied by (-1)^(p*q), with externalCup of the two factor classes.
+Compose the equalities and
 eliminate the degree equality p+q=n. No comparison isomorphism is assumed. -/
 theorem picardScalarCech_externalCup_core
     {k : Type w} [Field k] {X Y : Scheme.{w}}
@@ -88,7 +89,8 @@ theorem picardScalarCech_externalCup_core
     T.iCycles n z = HomologicalComplex.ιMapBifunctor A B
         (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ) i.val.1 i.val.2 n
         i.property ((A.iCycles i.val.1 a) ⊗ₜ[k] (B.iCycles i.val.2 v)) →
-      eP n (HomologicalComplex.homologyMap c n (T.homologyπ n z)) =
+      (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+          eP n (HomologicalComplex.homologyMap c n (T.homologyπ n z)) =
         cast (congrArg (fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)
           (externalCupCoefficients f g F G) d)) i.property)
           (externalCup f g F G i.val.1 i.val.2
@@ -147,12 +149,12 @@ theorem picardScalarCech_externalCup_core
     cup hxPull hyPull
   have hm := hmodule.trans hpaired
   have hscalar := htP'.symm.trans hm
-  change eP (p + q) (HomologicalComplex.homologyMap c (p + q)
-    (T.homologyπ (p + q) z)) = externalCup f g F G p q
-      (eX p (A.homologyπ p a)) (eY q (B.homologyπ q v))
-  exact (congrArg (eP (p + q)) hclass).trans (hscalar.trans
-    (scalarExternalCup_moduleComparison f g F G p q cup hcup
-      (eX p (A.homologyπ p a)) (eY q (B.homologyπ q v))).symm)
+  have he := (scalarExternalCup_moduleComparison f g F G p q cup hcup
+    (eX p (A.homologyπ p a)) (eY q (B.homologyπ q v))).symm
+  have he' := (congrArg (fun x ↦ (-1 : ℤ) ^ (p * q) • x)
+    ((congrArg (eP (p + q)) hclass).trans hscalar)).trans he
+  exact he'
+
 
 /-- Canonical scalar Cech comparisons identify the natural-degree external cup.
 No scalar resolution, extension by zero, or affine comparison existence occurs here.
@@ -172,7 +174,8 @@ scalar restriction preserves this morphism and its cocycle equation. The scalar
 pullback coefficient has adjoint the tensor-pullback unit, and the scalar tensor
 coefficient sends pure tensors to tmulSection. Hence their pullback and tensor
 operations on these representatives are scalarCohomologyPullback and
-scalarCohomologyCup, whose composition is externalCup of the factor classes. The cycle
+scalarCohomologyCup, whose composition is the signed ordinary external cup of
+the factor classes. The cycle
 inclusion hypothesis identifies the image cycle with this front/back cocycle;
 monicity of the cycle inclusion removes the choice of representative. For p+q=n,
 transport along the degree equality gives the displayed cast. Empty covers and
@@ -215,7 +218,8 @@ theorem picardScalarCech_externalCup
         HomologicalComplex.ιMapBifunctor A B (curriedTensor (ModuleCat.{w} k))
           (ComplexShape.up ℕ) i.val.1 i.val.2 n i.property
             ((A.iCycles i.val.1 a) ⊗ₜ[k] (B.iCycles i.val.2 v)) →
-      eP n (HomologicalComplex.homologyMap c n (T.homologyπ n z)) =
+      (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+          eP n (HomologicalComplex.homologyMap c n (T.homologyπ n z)) =
         cast (congrArg (fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)
           (externalCupCoefficients f g F G) d)) i.property)
           (externalCup f g F G i.val.1 i.val.2

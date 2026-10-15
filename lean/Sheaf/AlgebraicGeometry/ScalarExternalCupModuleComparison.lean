@@ -26,7 +26,7 @@ open scoped TensorProduct
 open Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The scalar Ext external cup is the ordinary module cup of the two pullbacks.
+/-- The scalar Ext external cup is the signed module cup of the two pullbacks.
 Source: Stacks Project, Cohomology, Tags 01F7 and 0FKV; Varieties, Tag 0BED.
 (blueprint: lem-sc-scalar-external-cup-module-comparison).
 
@@ -41,7 +41,7 @@ module pullback give the same underlying cohomology classes. On the computing
 pairing, tensoring the two unit morphisms and composing with scalarTensorCoefficient
 evaluates to the tensor of their sections: its pure-tensor formula is tmulSection.
 The signed total tensor differential is the same in both constructions. Hence the
-scalar Ext cup gives the class of the paired cocycle. IsModuleCupProduct identifies
+scalar Ext cup gives (-1)^(p*q) times the paired cocycle class. IsModuleCupProduct identifies
 this class with cup of the module pullback classes. Resolution comparison and
 homotopy independence remove the choices. This argument is valid in all natural
 degrees; zero coefficients or an empty scheme give zero classes, and in degree
@@ -75,14 +75,16 @@ theorem scalarExternalCup_moduleComparison
           cup (D.left.class p a) (D.right.class q b) = D.target.class (p + q) c)
     (x : scalarCohomology f F p) (y : scalarCohomology g G q) :
     externalCup f g F G p q x y =
-      cup (moduleCohomologyPullback (pullback.fst f g) F p x)
-        (moduleCohomologyPullback (pullback.snd f g) G q y) := by
+      (-1 : ℤ) ^ (p * q) •
+        cup (moduleCohomologyPullback (pullback.fst f g) F p x)
+          (moduleCohomologyPullback (pullback.snd f g) G q y) := by
   have hx := scalar_moduleCohomologyPullback_comparison f (pullback.fst f g ≫ f)
     (pullback.fst f g) rfl F p x
   have hy := scalar_moduleCohomologyPullback_comparison g (pullback.fst f g ≫ f)
     (pullback.snd f g) pullback.condition.symm G q y
   unfold externalCup
   exact (scalarCup_moduleCup_compatibility (pullback.fst f g ≫ f) _ _
-    p q cup hcup _ _).trans (congrArg₂ (fun a b ↦ cup a b) hx hy)
+    p q cup hcup _ _).trans (congrArg (fun z ↦ (-1 : ℤ) ^ (p * q) • z)
+      (congrArg₂ (fun a b ↦ cup a b) hx hy))
 
 end AlgebraicGeometry.Scheme.Modules
