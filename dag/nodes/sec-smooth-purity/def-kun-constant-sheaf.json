@@ -203,5 +203,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-d8387fd03 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, unit/chapter route and source passages. All three steps preserve arbitrary coefficients and unbounded complexes; Stacks 03P5 supports the unrestricted function model. Accepted the off-unit function-model theorem as a generic tool. No new nodes or repairs; target morphisms and coefficient categories remain unchanged. Concrete checks recorded in review.md."
+ },
+ "lean": {
+  "module": "Mathlib.Algebra.Homology.Additive",
+  "declaration": "CategoryTheory.Functor.mapHomologicalComplex",
+  "statement": "def Functor.mapHomologicalComplex (F : W₁ ⥤ W₂) [F.PreservesZeroMorphisms] (c : ComplexShape ι) :\n    HomologicalComplex W₁ c ⥤ HomologicalComplex W₂ c",
+  "branch": "mathlib",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Use the existing generic construction, not a duplicate specialization: F = CategoryTheory.constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), c = ComplexShape.up ℤ, for T : Scheme.{u}, Λ : Type (u + 1), [CommRing Λ]. The constant sheaf is the construction recorded by def-constructible-constant; its value at M is sheafification of the constant presheaf. The function model is the existing AlgebraicGeometry.Scheme.Etale.locallyConstantModulePresheafFunctor_iso_constantSheaf in Sheaf.ConstructibleSheaf.ConstantModuleLocallyConstant (proof dependency). mapHomologicalComplex maps objects, differentials and chain maps termwise. The existing CategoryTheory.Functor.mapCochainComplexShiftIso shift isomorphism has identity degree components. Exactness instances CategoryTheory.preservesFiniteLimits_constantSheaf and CategoryTheory.preservesFiniteColimits_constantSheaf in WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver, together with Mathlib constant-sheaf additivity, supply preservation of homology, hence quasi-isomorphisms. All specializations checked by scompile.py; no finiteness or boundedness assumptions. The primary declaration is in the recorded module. Shift compatibility is in Mathlib.Algebra.Homology.HomotopyCategory.Shift; quasi-isomorphism preservation is HomologicalComplex.quasiIso_map_of_preservesHomology in Mathlib.Algebra.Homology.QuasiIso; the derived interpretation is CategoryTheory.Functor.mapDerivedCategoryFactors in Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor. Each was read and its specialization compiled in the sandbox."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6573d3877",
+  "group": "NB",
+  "result": "pass",
+  "note": "Immutable statements, dependencies, sources, exact declarations, universes and edge cases agree. lean.statement matches verbatim; scompile.py sandbox and library checks passed. No project clone or branch changes."
  }
 }

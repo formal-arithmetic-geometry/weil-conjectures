@@ -15,7 +15,8 @@
  "stmt_deps": [
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-derived-exchange"
  ],
  "proof": [
   {
@@ -152,5 +153,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-a21af4a1d (reviewer sub-agent of L); spot-checked: Step 2 cited `lem-weil-pbc-site-restriction-injectives`, stated only for abelian sheaves, while the target is in finite-ring module derived categories. I supplied a corrected DAG JSON citing `lem-pur-site-restriction-module-adjunction-exact` for module restriction exactness and the exact extension-by-zero adjunction, including Step 3's inverse-image exactness. Full source, node, route, coefficient, and edge-case checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenRestriction",
+  "declaration": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_openImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenRestriction.lean",
+  "statement": "theorem isIso_derivedBaseChangeMapPlus_of_openImmersion (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {T S U V : Scheme.{u}} (f : T ⟶ S) (a : U ⟶ S) (b : V ⟶ T) (fU : V ⟶ U) [IsOpenImmersion a] (sq : ChosenCartesianSquare b fU f a) : IsIso (derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d9c2e0b60",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statement, dependencies, sources, universes, edge cases, reuse, docstrings, and sorry-only proof. Signature matches verbatim; scompile.py reproduced clean sandbox and library compilation. No repairs needed."
  }
 }
