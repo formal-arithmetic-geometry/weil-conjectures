@@ -19,6 +19,7 @@ import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.KFlatRingedToposPullback
+import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 /-!
 # Canonical representative comparison for tensor pullback
@@ -55,6 +56,8 @@ noncomputable def tensorPullbackTotalComponent (P Q : CochainComplex A ℤ) (n :
     (e (P.X a) (Q.X b)).inv ≫
       L.map (CochainComplex.ιMapBifunctor P Q (curriedTensor A) a b n h))
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary summand comparison commutes with the two tensor differentials.
 Source: Stacks 07A4, construction of the total comparison
 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
@@ -70,7 +73,63 @@ theorem tensorPullbackTotalComponent_comm
       (CochainComplex.mapBifunctor
         ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
         ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) (curriedTensor B)).d n m ≫
-          tensorPullbackTotalComponent L e P Q m := sorry
+          tensorPullbackTotalComponent L e P Q m := by
+  have hi {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y') :
+      (e X Y).inv ≫ L.map (f ⊗ₘ g) =
+        (L.map f ⊗ₘ L.map g) ≫ (e X' Y').inv := by
+    apply (cancel_mono (e X' Y').hom).1
+    rw [Category.assoc, he, Iso.inv_hom_id_assoc, Category.assoc,
+      Iso.inv_hom_id, Category.comp_id]
+  by_cases hnm : (ComplexShape.up ℤ).Rel n m
+  · change n + 1 = m at hnm
+    subst m
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro a b hab
+    change a + b = n at hab
+    simp only [tensorPullbackTotalComponent,
+      HomologicalComplex.ι_mapBifunctorDesc_assoc,
+      HomologicalComplex.mapBifunctor.d_eq, Preadditive.comp_add,
+      Preadditive.add_comp, HomologicalComplex.mapBifunctor.ι_D₁_assoc,
+      HomologicalComplex.mapBifunctor.ι_D₂_assoc]
+    simp only [L.map_add, Preadditive.comp_add, Category.assoc]
+    rw [← L.map_comp, HomologicalComplex.mapBifunctor.ι_D₁,
+      ← L.map_comp, HomologicalComplex.mapBifunctor.ι_D₂]
+    rw [HomologicalComplex.mapBifunctor.d₁_eq P Q _ _
+        (show (ComplexShape.up ℤ).Rel a (a + 1) from rfl) b (n + 1)
+        (by change a + 1 + b = n + 1; omega),
+      HomologicalComplex.mapBifunctor.d₂_eq P Q _ _ a
+        (show (ComplexShape.up ℤ).Rel b (b + 1) from rfl) (n + 1)
+        (by change a + (b + 1) = n + 1; omega),
+      HomologicalComplex.mapBifunctor.d₁_eq
+        ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+        ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) _ _
+        (show (ComplexShape.up ℤ).Rel a (a + 1) from rfl) b (n + 1)
+        (by change a + 1 + b = n + 1; omega),
+      HomologicalComplex.mapBifunctor.d₂_eq
+        ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+        ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) _ _ a
+        (show (ComplexShape.up ℤ).Rel b (b + 1) from rfl) (n + 1)
+        (by change a + (b + 1) = n + 1; omega)]
+    simp only [
+      ComplexShape.ε₁_def, ComplexShape.ε₂_def, ComplexShape.ε_up_ℤ,
+      one_smul, Functor.map_units_smul, Functor.map_comp,
+      Linear.comp_units_smul, Linear.units_smul_comp, Category.assoc,
+      HomologicalComplex.ι_mapBifunctorDesc]
+    simp only [curriedTensor_map_app, curriedTensor_obj_map,
+      Functor.mapHomologicalComplex_obj_d, ← tensorHom_id, ← id_tensorHom]
+    dsimp only [Functor.mapHomologicalComplex, curriedTensor_obj_obj]
+    apply congrArg₂ (· + ·)
+    · simpa only [L.map_id, Category.assoc] using
+        congrArg (fun f ↦ f ≫ L.map
+          (CochainComplex.ιMapBifunctor P Q (curriedTensor A)
+            (a + 1) b (n + 1) (by omega))) (hi (P.d a (a + 1)) (𝟙 (Q.X b)))
+    · simpa only [L.map_id, Category.assoc, Linear.units_smul_comp,
+        Linear.comp_units_smul] using
+        congrArg (fun f ↦ a.negOnePow • (f ≫ L.map
+          (CochainComplex.ιMapBifunctor P Q (curriedTensor A)
+            a (b + 1) (n + 1) (by omega)))) (hi (𝟙 (P.X a)) (Q.d b (b + 1)))
+  · rw [HomologicalComplex.shape _ n m hnm, HomologicalComplex.shape _ n m hnm,
+      L.map_zero, comp_zero, zero_comp]
 
 /-- The chain comparison is the signed total of the inverse ordinary comparisons.
 Source: Stacks 07A4, final display
@@ -99,7 +158,44 @@ theorem tensorPullbackTotal_isIso
     (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
       L.map (f ⊗ₘ g) ≫ (e X' Y').hom = (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
     (V : B ⥤ A) (adj : L ⊣ V) (P Q : CochainComplex A ℤ) :
-    IsIso (tensorPullbackTotal L e he P Q) := sorry
+    IsIso (tensorPullbackTotal L e he P Q) := by
+  let := adj.isLeftAdjoint
+  have (n : ℤ) : IsIso ((tensorPullbackTotal L e he P Q).f n) := by
+    let f := Cofan.IsColimit.desc
+      (HomologicalComplex.mapBifunctor.isColimitMapCofan
+        (G := L) (F := curriedTensor A) (c := ComplexShape.up ℤ) P Q n)
+      (fun x ↦ (e (P.X x.1.1) (Q.X x.1.2)).hom ≫
+        CochainComplex.ιMapBifunctor
+          ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+          ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)
+          (curriedTensor B) x.1.1 x.1.2 n x.2)
+    have hf (a b : ℤ) (h : a + b = n) :
+        L.map (CochainComplex.ιMapBifunctor P Q (curriedTensor A) a b n h) ≫ f =
+          (e (P.X a) (Q.X b)).hom ≫
+            CochainComplex.ιMapBifunctor
+              ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+              ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)
+              (curriedTensor B) a b n h :=
+      Cofan.IsColimit.fac
+        (HomologicalComplex.mapBifunctor.isColimitMapCofan
+          (G := L) (F := curriedTensor A) (c := ComplexShape.up ℤ) P Q n)
+        _ ⟨⟨a, b⟩, h⟩
+    refine ⟨f, ?_, ?_⟩
+    · apply HomologicalComplex.mapBifunctor.hom_ext
+      intro a b h
+      dsimp only [tensorPullbackTotal]
+      simp only [tensorPullbackTotalComponent,
+        HomologicalComplex.ι_mapBifunctorDesc_assoc, Category.assoc, hf,
+        Iso.inv_hom_id_assoc, Category.comp_id]
+    · apply HomologicalComplex.mapBifunctor.hom_ext_of_map L
+      intro a b h
+      rw [← Category.assoc, hf, Category.assoc]
+      dsimp only [tensorPullbackTotal]
+      simp only [tensorPullbackTotalComponent,
+        HomologicalComplex.ι_mapBifunctorDesc, Iso.hom_inv_id_assoc]
+      dsimp only [Functor.mapHomologicalComplex]
+      rw [Category.comp_id]
+  exact HomologicalComplex.Hom.isIso_of_components _
 
 
 universe wA wB
@@ -296,7 +392,12 @@ theorem CanonicalRingedTensorComparison.total_isIso [L.Additive]
       V)
     (P Q : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R)) ℤ) :
-    IsIso (k.total R S RI uInv I c L hobj P Q) := sorry
+    IsIso (k.total R S RI uInv I c L hobj P Q) := by
+  let := monoidalCategory R
+  let := monoidalCategory S
+  let := ringedTensorPreadditive R
+  let := ringedTensorPreadditive S
+  exact tensorPullbackTotal_isIso L k.mu k.naturality V am P Q
 
 /-- The canonical chain comparison as an isomorphism, with no arbitrary choice.
 Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
