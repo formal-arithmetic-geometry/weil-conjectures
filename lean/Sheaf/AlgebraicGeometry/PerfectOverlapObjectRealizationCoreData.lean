@@ -590,6 +590,47 @@ noncomputable def comparisonFromRestrictions
     rw [hγV]
     simp [δV]
 
+/-- The first localization-lifted comparison evaluated on a restricted object.
+Source: Stacks Project, Tag 08DW. The lifted isomorphism is the preimage of
+the composite of the first-open comparison, the site restriction comparison,
+the intersection comparison, and the inverse open restriction comparison.
+Whiskering the preimage back along `TU` recovers that composite exactly. -/
+theorem comparisonFromRestrictions_gammaU_on_image
+    {C D A B W P Q T : Type*}
+    [Category* C] [Category* D] [Category* A] [Category* B]
+    [Category* W] [Category* P] [Category* Q] [Category* T]
+    (L : C ⥤ D) (TU : C ⥤ A) (TV : C ⥤ B) (TW : C ⥤ W)
+    (SU : A ⥤ W) (SV : B ⥤ W)
+    (RU : D ⥤ P) (RV : D ⥤ Q) (RW : D ⥤ T)
+    (SP : P ⥤ T) (SQ : Q ⥤ T)
+    (αU : TU ⋙ SU ≅ TW) (αV : TV ⋙ SV ≅ TW)
+    (τU : RU ⋙ SP ≅ RW) (τV : RV ⋙ SQ ≅ RW)
+    [((Functor.whiskeringLeft C A T).obj TU).Full]
+    [((Functor.whiskeringLeft C A T).obj TU).Faithful]
+    [((Functor.whiskeringLeft C B T).obj TV).Full]
+    [((Functor.whiskeringLeft C B T).obj TV).Faithful]
+    (HU : A ⥤ P) (HV : B ⥤ Q) (HW : W ⥤ T)
+    (βU : L ⋙ RU ≅ TU ⋙ HU) (βV : L ⋙ RV ≅ TV ⋙ HV)
+    (βW : L ⋙ RW ≅ TW ⋙ HW) (F : C) :
+    let δU : TU ⋙ (HU ⋙ SP) ≅ TU ⋙ (SU ⋙ HW) :=
+      (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight βU.symm SP ≪≫ Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft L τU ≪≫ βW ≪≫
+        Functor.isoWhiskerRight αU.symm HW ≪≫ Functor.associator _ _ _
+    ((comparisonFromRestrictions L TU TV TW SU SV RU RV RW SP SQ
+      αU αV τU τV HU HV HW βU βV βW).γU).hom.app (TU.obj F) =
+      δU.hom.app F := by
+  let δU : TU ⋙ (HU ⋙ SP) ≅ TU ⋙ (SU ⋙ HW) :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight βU.symm SP ≪≫ Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft L τU ≪≫ βW ≪≫
+      Functor.isoWhiskerRight αU.symm HW ≪≫ Functor.associator _ _ _
+  change (((Functor.whiskeringLeft C A T).obj TU).preimageIso δU).hom.app
+    (TU.obj F) = δU.hom.app F
+  rw [Functor.preimageIso_hom]
+  exact congrArg (fun a ↦ a.app F)
+    (((Functor.whiskeringLeft C A T).obj TU).map_preimage δU.hom)
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
