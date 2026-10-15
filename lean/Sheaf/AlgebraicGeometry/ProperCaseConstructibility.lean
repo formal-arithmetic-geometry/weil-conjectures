@@ -12,15 +12,8 @@ public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-import Sheaf.AlgebraicGeometry.ConstructibleHigherDirectImages
-import WeilConjectures.ConstructibleSheaf.Pullback
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.GeometricFiberFinite
-import Sheaf.AlgebraicGeometry.Sites.FibrewiseCohomologicalDimension
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.ProperConstructibleHigherDirectImages
-import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Constructibility and vanishing in the proper case
@@ -44,28 +37,15 @@ Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/thm-fin-proper-case.md`
 (blueprint: thm-fin-proper-case).
 
 Proof:
-1. Properness includes finite type (def-weil-proper-morphism). Compose finite affine
-   covers of the base and source to see that X is finite type over k
-   (def-weil-finite-type-morphism). No separatedness of S over k is needed.
-2. Pull the inverse of N back from S to X. Apply
-   thm-fin-proper-constructibility-complete and def-finrepair-property-c to obtain
-   constructibility of every nonnegative higher direct image of F.
-3. For every geometric point s, pull back the finite affine cover. The rings of the
-   fibre charts are tensor products (lem-weil-pbc-fibre-product-affine-spectra), finitely
-   generated over the algebraically closed field. The fibre has dimension at most d
-   by hypothesis, and N remains invertible on it.
-4. Pull back the constructible stratification of F (prop-constructible-pullback).
-   Constructible preimages (lem-pur-scheme-constructible-preimage) ensure that its
-   pulled-back parts remain constructible, so F restricted to the fibre is constructible
-   in the sense of def-weil-pbc-constructible-complexes.
-5. Constructibility implies finite geometric stalks (def-constructible-finite).
-   The sheaf clause of cor-weil-pbc-geometric-fiber-finite identifies each geometric
-   stalk of the higher direct image with the corresponding fibre cohomology group.
-6. Apply fin4-lem-fibrewise-cohomological-dimension to the restricted sheaf to make
-   these groups zero above 2d.
-7. Geometric stalk conservativity (lemma-weil-pbc-geometric-stalk-conservative) makes
-   the underlying abelian sheaf zero; the inverse of its zero map is automatically
-   linear, so the module sheaf itself is zero. -/
+If S is empty, all the displayed cohomology sheaves vanish. Otherwise the positive
+annihilating exponent descends to the ground field. Convert F to the finite-stalk
+constructibility convention and use proper constructibility. The compatibility of total
+and bounded-below right derived functors converts its cohomology sheaves to the stated
+higherDirectImage objects. For vanishing, pull back to each algebraic-closure geometric
+point. Proper base change identifies the pulled-back higher direct image with the
+cohomology of its geometric fibre; the torsion bound above twice the fibre dimension
+makes that object zero. These geometric pullbacks jointly detect zero sheaves.
+No geometric fibre or nonempty source is needed in the empty-target case. -/
 theorem properCase_constructible_and_vanishing
     (k : Type u) [Field k] (N : ℕ) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X S : Scheme.{u}} [S.Over (Spec (.of k))]
@@ -78,6 +58,49 @@ theorem properCase_constructible_and_vanishing
     (hF : Scheme.IsConstructibleEtaleModuleSheaf F) :
     (∀ q : ℕ, Scheme.IsConstructibleEtaleModuleSheaf (higherDirectImage Λ f (q : ℤ) F)) ∧
     (∀ q : ℕ, 2 * d < q → IsZero (higherDirectImage Λ f (q : ℤ) F)) := by
-  sorry
+  classical
+  by_cases hS : IsEmpty S
+  · let := hS
+    exact ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
+      (Scheme.IsConstructibleSheaf.of_isZero (Scheme.Etale.isZero_sheaf_of_isEmpty _)),
+      fun q hq ↦ Scheme.Etale.isZero_sheaf_of_isEmpty _⟩
+  have : Nonempty S := not_isEmpty_iff.mp hS
+  have : HasInvertibleExponent Λ S := ⟨N, hcoeff.1, hcoeff.2.2.1, hcoeff.2.2.2⟩
+  have : HasInvertibleExponent Λ (Spec (.of k)) :=
+    .of_hom_of_nonempty (S ↘ Spec (.of k))
+  have : Scheme.IsConstructibleSheaf F := (Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF
+  let A := (_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F
+  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 ?_, fun q hq ↦ ?_⟩
+  · have : Scheme.IsConstructibleSheaf
+        ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
+          ((_root_.DerivedCategory.Plus.ι ⋙
+            (f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctor).obj A)) := by
+      change Scheme.IsConstructibleSheaf
+        ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
+          ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctor.obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
+      exact hasConstructibleDirectImages_of_isProper (S ↘ Spec (.of k)) f F inferInstance q
+    exact Scheme.IsConstructibleSheaf.of_iso
+      ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).mapIso
+        ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusCompatibility.app A).symm)
+  · refine isZero_of_forall_isZero_upperStar_algClosurePoint Λ _ fun t ↦ ?_
+    let x := S.algClosurePoint t
+    let sq := IsPullback.of_hasPullback f x
+    have := isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ
+      (fun z ↦ isOfFinAddOrder_of_finite z) sq
+    rw [baseChange_eq_derivedBaseChangeMapPlus] at this
+    have hvan := isZero_higherDirectImage_of_two_mul_lt
+      (fun z : Λ ↦ isOfFinAddOrder_of_finite z) (pullback.snd f x)
+      (pullback.snd f x) (𝟙 _) (Category.comp_id _) d (hfib _ x)
+      (((pullback.fst f x)^*[ModuleCat.{u + 1} Λ]).obj F) q (by omega)
+    refine IsZero.of_iso hvan
+      ((((x)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).app
+          ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj A) ≪≫
+        (_root_.DerivedCategory.Plus.homologyFunctor _ q).mapIso
+          (asIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app A)) ≪≫
+        (_root_.DerivedCategory.Plus.homologyFunctor _ q).mapIso
+          ((pullback.snd f x)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.mapIso
+            ((((pullback.fst f x)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app
+              F)))
 
 end AlgebraicGeometry.Etale

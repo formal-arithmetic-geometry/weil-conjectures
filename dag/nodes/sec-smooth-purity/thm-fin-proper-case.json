@@ -24,108 +24,49 @@
  ],
  "proof": [
   {
-   "text": "Properness includes finite type [def-weil-proper-morphism]. Choose a finite affine cover $S=\\bigcup_i\\operatorname{Spec}A_i$, with each $A_i$ a finitely generated $k$-algebra. By the finite-type definition [def-weil-finite-type-morphism], each $f^{-1}(\\operatorname{Spec}A_i)$ has a finite affine cover $\\operatorname{Spec}B_{ij}$ with $B_{ij}$ finitely generated over $A_i$. The union of these covers is finite. Generators of $A_i$ over $k$ together with generators of $B_{ij}$ over $A_i$ generate $B_{ij}$ over $k$. Thus $X$ is of finite type over $k$; no separatedness of $S$ over $k$ is being assumed.",
+   "text": "If the target S is empty, all sheaves on its etale site are zero. This proves both assertions in that case. Otherwise the positive coefficient annihilator N, invertible on the nonempty S, is also invertible on its ground field: a zero value in the field would be zero in every nonzero stalk on S. Use [lem-weil-pbc-constructible-etale-module-sheaf-comparison] to identify the input constructibility conventions.",
    "uses": [
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T3 (lemma-composition-finite-type), finite affine-cover argument"
-   }
+   "elementary": false
   },
   {
-   "text": "The image of a unit under a ring map is a unit, so invertibility of $N$ on $S$ implies invertibility on $X$ via $f$. Apply [thm-fin-proper-constructibility-complete] to $f$, now a proper morphism between finite-type $k$-schemes. It gives $\\mathcal C(f)$. By [def-finrepair-property-c], with precisely the finite allowable coefficient ring of the statement and the given constructible $F$, this means $R^qf_*F$ is constructible for every $q\\geq0$. This predicate includes no vanishing assertion, so the dimension bound will be proved separately.",
+   "text": "Apply [thm-fin-proper-constructibility-complete], using the source-library hasConstructibleDirectImages_of_isProper. It gives finite-stalk constructibility of every H^q(Rf_*(F[0])). The proved rightDerivedFunctorPlusCompatibility identifies this sheaf with higherDirectImage at the stated nonnegative integer q. Apply the constructibility equivalence again to obtain precisely the finite-constant-value conclusion.",
    "uses": [
     "thm-fin-proper-constructibility-complete",
-    "def-finrepair-property-c"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-proper-case.md",
-    "place": "Proof, first sentence: constructibility from thm-fin-proper-constructibility-complete"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix an arbitrary geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to S$. Choose an affine $\\operatorname{Spec}A_i$ containing its image. The finite affine cover from step 1 pulls back to a finite cover of $X_{\\bar s}$ by $\\operatorname{Spec}(B_{ij}\\otimes_{A_i}\\Omega)$: affine fibre products are tensor products [lem-weil-pbc-fibre-product-affine-spectra]. If $B_{ij}=A_i[b_1,\\ldots,b_r]$, then $B_{ij}\\otimes_{A_i}\\Omega$ is generated over $\\Omega$ by $b_1\\otimes1,\\ldots,b_r\\otimes1$. Hence $X_{\\bar s}$ is of finite type over the algebraically closed field $\\Omega$ [def-weil-finite-type-morphism]. The assumed bound gives $\\dim X_{\\bar s}\\leq d$. The image of $N$ is a unit in $\\Omega$, since $N$ is a unit in $A_i$ and its inverse maps to an inverse under $A_i\\to\\Omega$.",
+   "text": "For a geometric point s given by the algebraic closure of a residue field, use proper bounded-below base change [thm-weil-pbc-bounded-below], with the torsion module-coefficient realization isIso_baseChange_of_isProper_of_isAddTorsion_ring. Exact pullback commutes with homology and with sheaves in degree zero. Thus s^*R^qf_*F is isomorphic to the q-th direct image of the restricted sheaf on the geometric fibre. The fibre is proper, hence finite type, over its algebraically closed field and has dimension at most d. The torsion cohomological-dimension bound [fin4-lem-fibrewise-cohomological-dimension], as realized by isZero_higherDirectImage_of_two_mul_lt, makes it zero when q > 2d. Only torsion coefficients are needed for this vanishing, and a finite ring is additive torsion.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-finite-type-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T4 (lemma-base-change-finite-type), affine tensor-product argument"
-   }
-  },
-  {
-   "text": "Put $F_{\\bar s}=i_{\\bar s}^{-1}F$, where $i_{\\bar s}:X_{\\bar s}\\to X$ is the first projection. By [prop-constructible-pullback], applied in the category of $\\Lambda$-module sheaves, this pullback is constructible: its finite stratification is the pullback of a stratification for $F$, and its restrictions are finite locally constant. To retain the constructible-subset requirement of [def-weil-pbc-constructible-complexes], each pulled-back stratum has constructible underlying subset by [lem-pur-scheme-constructible-preimage]. Thus $F_{\\bar s}$ satisfies exactly the constructibility hypothesis of the fibre cohomology bound, for the same finite allowable $\\Lambda$.",
-   "uses": [
-    "prop-constructible-pullback",
-    "lem-pur-scheme-constructible-preimage",
-    "def-weil-pbc-constructible-complexes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095G (lemma-pullback-constructible), proof by pulling back the finite partition"
-   }
-  },
-  {
-   "text": "By [def-weil-pbc-constructible-complexes], every geometric stalk of $F$ is finite: the point lies in one of the strata and the restriction there is lisse with finite stalks. Thus $F$ is a finite sheaf in the precise stalkwise sense of [def-constructible-finite]. Apply the sheaf clause of [cor-weil-pbc-geometric-fiber-finite] to the proper $f$, the finite ring $\\Lambda$, and this finite $\\Lambda$-module sheaf $F$. For every $q\\geq0$ it gives the $\\Lambda$-linear isomorphism $(R^qf_*F)_{\\bar s}\\cong H^q(X_{\\bar s},F_{\\bar s})$. No global constancy of $F$, and no finiteness of its higher cohomology groups, is asserted.",
-   "uses": [
-    "cor-weil-pbc-geometric-fiber-finite",
-    "def-weil-pbc-constructible-complexes",
-    "def-constructible-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DDF (lemma-proper-base-change-stalk), part (1)"
-   }
-  },
-  {
-   "text": "For $q>2d$, [fin4-lem-fibrewise-cohomological-dimension] applies with $k'=\\Omega$, the finite-type scheme $X_{\\bar s}$ of dimension at most $d$ from step 3, and the constructible finite allowable coefficient sheaf $F_{\\bar s}$ from step 4. It gives $H^q(X_{\\bar s},F_{\\bar s})=0$. By step 5, $(R^qf_*F)_{\\bar s}=0$. The point was arbitrary, so all geometric stalks vanish.",
-   "uses": [
+    "thm-weil-pbc-bounded-below",
     "fin4-lem-fibrewise-cohomological-dimension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-proper-case.md",
-    "place": "Proof, second paragraph: apply fin4-lem-fibrewise-cohomological-dimension"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $G=R^qf_*F$ for $q>2d$. The unique morphism $0\\to G$ of underlying abelian etale sheaves is an isomorphism on every geometric stalk by step 6. By [lemma-weil-pbc-geometric-stalk-conservative], it is an isomorphism of abelian sheaves. Its inverse is automatically $\\Lambda$-linear: every section of $G$ is zero and hence there is only one possible map to the zero module. Thus $G=0$ as a $\\Lambda$-module sheaf. Together with step 2 this proves both clauses.",
+   "text": "Pullbacks along these geometric points jointly detect zero module sheaves by [lemma-weil-pbc-geometric-stalk-conservative]. Apply isZero_of_forall_isZero_upperStar_algClosurePoint to conclude that R^qf_*F itself is zero. This proves the node with the original coefficient hypotheses, geometric fibre bound and every binder unchanged.",
    "uses": [
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PU (theorem-exactness-stalks), conservativity applied to the zero morphism"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "thm-fin-proper-constructibility-complete",
-  "def-finrepair-property-c",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "prop-constructible-pullback",
-  "lem-pur-scheme-constructible-preimage",
-  "def-weil-pbc-constructible-complexes",
-  "cor-weil-pbc-geometric-fiber-finite",
+  "thm-weil-pbc-bounded-below",
   "fin4-lem-fibrewise-cohomological-dimension",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "def-constructible-finite"
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "C3",
+  "date": "2026-10-16",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-proper-case.md",
-  "place": "Proof, first and second paragraphs, with Stacks Tags 01T3, 01T4, 095G, 0DDF and 03PU spelling out the intermediate hypotheses"
+  "place": "Proper constructibility, proper torsion base change, the geometric fibre 2d bound and geometric-point detection; explicit empty-target case and conversion of constructibility conventions."
  },
  "mathlib_searches": [
   {
@@ -314,5 +255,15 @@
   "by": "NP",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-39cd0",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T195758-L-1299658",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean statements, proofs, axioms and DAG records checked against the published originals, dependency interfaces and cited source; all delivery modules and direct importers compile."
  }
 }

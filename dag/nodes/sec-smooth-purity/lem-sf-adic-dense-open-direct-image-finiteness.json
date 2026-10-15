@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-adic-dense-open-direct-image-finiteness",
+ "kind": "statement",
+ "title": "Dense affine-open adic direct-image finiteness",
+ "statement": "Fix a prime l. For a scheme V let Qbar_l,V be the sheaf of locally finite continuous functions to an algebraic closure of Q_l: locally on V the values lie in a finite extension of Q_l. Let AdicSheaf_l(V) be the abelian category of modules over this sheaf, and call such a sheaf constructible if Zariski locally it admits a finite partition by locally closed constructible subschemes on which it is pro-etale locally finite free. These are the concrete sheaf models of [def-weil-sheaf-of-modules-category], [def-weil-pbc-proetale-site], [def-weil-algebraically-closed-coefficients], [def-weil-l-adic-coefficient-extension] and [def-weil-finite-torsion-constructibility]. Write D^b_c(V) for the objects of the ordinary derived category [def-weil-abstract-derived-category] which are bounded for its standard t-structure and have constructible cohomology. Let l be a prime and K an algebraically closed field with char K != l. Let t:W -> Spec K be quasi-compact and locally of finite type [def-weil-scheme-morphism-properties]. Let j:Z -> W be a quasi-compact open immersion with dense topological range and with Z affine. For a constructible F in AdicSheaf_l(Z), Rj_*(F[0]) belongs to D^b_c(W).",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.2, Proposition 6.8.11, Proposition 6.8.14 and Remark 6.8.15; affine compactification proof of sk-prop-sf-finiteness (SGA 4½, Theoreme de finitude, Theorem 1.1)."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-torsion-constructibility"
+ ],
+ "proof": [
+  {
+   "text": "The target W is a noetherian quasi-excellent scheme because it is quasi-compact and locally of finite type over K. The prime l is invertible on W. The open source Z is also noetherian and qcqs. A constructible adic sheaf in degree zero is a constructible complex for the concrete coefficient sheaf, by the finite lisse stratification characterization of Proposition 6.8.11. Proposition 6.8.14 gives a finite extension E/Q_l and an integral constructible complex C over the completed O_E coefficient sheaf whose rationalization and extension to Qbar_l is F[0]. A global lisse lattice is not asserted: Lemma 6.8.13 constructs a constructible lattice, gluing extensions after clearing denominators.",
+   "uses": [
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every n >= 1, reduce C by the perfect quotient O_E/pi^n. Its derived reduction C_n has finite l-primary torsion coefficients and is bounded constructible. The finite-coefficient open-immersion finiteness theorem [cor-fin-deligne-open-finite-coefficients] shows Rj_*C_n is constructible. Theorem 6.7.1 gives a finite cohomological-dimension bound on torsion sheaves, independent of n. Equivalently use the finite filtration by powers of pi, whose factors are modules over O_E/pi, and the long exact cohomology sequence. With the two-term resolution of O_E/pi^n and the fixed amplitude of C, all the derived images occupy a single finite interval. No bound by the zero-dimensional fibres of j is used.",
+   "uses": [
+    "cor-fin-deligne-open-finite-coefficients",
+    "lem-kun-0f10"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed direct image is derived complete and commutes with these perfect reductions, by Lemmas 6.5.9 and 6.5.11. The bounded constructible finite reductions with their uniform bounds therefore place it in the integral constructible category, exactly Lemma 6.7.2; this is the integral argument of [lem-sf-integral-direct-image-constructible] specialized to j.",
+   "uses": [
+    "lem-sf-integral-direct-image-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Propositions 6.8.11 and 6.8.14 and Remark 6.8.15 identify the rationalization and coefficient extension of this image with the ordinary ambient derived image on AdicSheaf_l. The sheaf of locally finite continuous functions is the filtered finite-coefficient-extension model of Lemma 6.8.2, rather than the discrete constant field sheaf. Under the stated finiteness assumptions the comparisons commute with direct image as in Remark 6.8.15. Consequently the displayed Rj_*(F[0]) is bounded and all its cohomology sheaves are constructible. This coefficient-model comparison, not the torsion theorem alone, remains to be formalized.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+  "cor-fin-deligne-open-finite-coefficients",
+  "lem-kun-0f10",
+  "lem-sf-integral-direct-image-constructible",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.2, Proposition 6.8.11, Proposition 6.8.14 and Remark 6.8.15; affine compactification proof of sk-prop-sf-finiteness (SGA 4½, Theoreme de finitude, Theorem 1.1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-compact dense open immersion of schemes of finite type over an algebraically closed field sends constructible l-adic sheaves to bounded complexes with constructible cohomology under derived direct image",
+   "date": "2026-10-16",
+   "results": [
+    "AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+    "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+    "AlgebraicGeometry.Scheme.Hom.isConstructible_preimage",
+    "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+    "Topology.IsConstructible.image_of_isOpenEmbedding",
+    "AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj",
+    "PrimeSpectrum.isConstructible_comap_image",
+    "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit"
+   ],
+   "verdict": "No matching adic finiteness theorem; the hits do not concern this coefficient sheaf or direct-image property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an open immersion j of noetherian schemes over an algebraically closed field, the higher direct images of a constructible l-adic sheaf are bounded and constructible",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]onstructible|[Cc]onstructible.*rightDerived",
+   "date": "2026-10-16",
+   "results": [],
+   "verdict": "No matching adic finiteness theorem; the hits do not concern this coefficient sheaf or direct-image property.",
+   "subdirectory": "AlgebraicGeometry"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+  "date": "2026-10-16",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-ordinary-compact-cohomology",
+   "place": "Affine factorization into an open immersion, a closed immersion and a projective projection; adic coefficient passage in sk-prop-sf-finiteness.",
+   "via": [
+    "lem-weil-structure-direct-images-constructible",
+    "lem-sf-adic-affine-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-finiteness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdicDenseOpenImmersionFiniteness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.bounded_constructible_rightDerivedFunctor_adicLowerStar_of_denseOpenImmersion",
+  "statement": "theorem bounded_constructible_rightDerivedFunctor_adicLowerStar_of_denseOpenImmersion\n    (hK : ringChar K ≠ l) {Z W : Scheme.{u}} [IsAffine Z]\n    (t : W ⟶ Spec (.of K)) [LocallyOfFiniteType t] [QuasiCompact t]\n    (j : Z ⟶ W) [IsOpenImmersion j] [QuasiCompact j] (hj : DenseRange j.base)\n    (F : AdicSheaf l Z) (hF : IsAdicConstructibleSheaf F) :\n    (_root_.DerivedCategory.TStructure.t.bounded ⊓\n      _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l W))\n      ((j)_*ᵃ[l].rightDerivedFunctor.obj\n        ((_root_.DerivedCategory.singleFunctor _ 0).obj F))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-39cd0",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T195758-L-1299658",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-39cd0",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T195758-L-1299658",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean statements, proofs, axioms and DAG records checked against the published originals, dependency interfaces and cited source; all delivery modules and direct importers compile."
+ }
+}

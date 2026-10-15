@@ -8,6 +8,10 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Detection
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement
 
+import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
+import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
+
 /-!
 # The pushforward along a closed immersion on pro-étale sheaves of modules
 
@@ -59,13 +63,143 @@ namespace ProEtale
 
 variable (R : Type (u + 1)) [Ring R] {Z U X : Scheme.{u}}
 
+private lemma closedSitePrecompFullyFaithful (A : Type u) [CommRing A] (I : Ideal A) :
+    Nonempty (((Functor.whiskeringLeft _ _ (ModuleCat.{u + 1} R)).obj
+      (AffineProEt.closedSiteBaseChange A I).op).FullyFaithful) := by
+  obtain ⟨adj, h⟩ := AffineProEt.exists_closedSiteAdjunction A I
+  have : IsIso adj.unit := h
+  let adjp := adj.op.whiskerLeft (ModuleCat.{u + 1} R)
+  have : ∀ F, IsIso (adjp.counit.app F) := fun F => by
+    have : ∀ X, IsIso ((adjp.counit.app F).app X) := fun X => by
+      change IsIso (F.map (adj.unit.app X.unop).op)
+      infer_instance
+    exact NatIso.isIso_of_isIso_app _
+  have : IsIso adjp.counit := NatIso.isIso_of_isIso_app _
+  exact ⟨adjp.fullyFaithfulROfIsIsoCounit⟩
+
+private lemma isIso_closedCounit_of_quotient (A : Type u) [CommRing A] (I : Ideal A) :
+    IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R)
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))).counit := by
+  obtain ⟨hpre⟩ := closedSitePrecompFullyFaithful R A I
+  let F := lowerStar (ModuleCat.{u + 1} R)
+    (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))
+  let RX := (AffineProEt.toProEt (Spec (.of A))).sheafPushforwardContinuous
+    (ModuleCat.{u + 1} R) (AffineProEt.topology (Spec (.of A))) (ProEt.topology (Spec (.of A))) ⋙
+    sheafToPresheaf (AffineProEt.topology (Spec (.of A))) (ModuleCat.{u + 1} R)
+  let RZ := (AffineProEt.toProEt (Spec (.of (A ⧸ I)))).sheafPushforwardContinuous
+    (ModuleCat.{u + 1} R) (AffineProEt.topology (Spec (.of (A ⧸ I))))
+      (ProEt.topology (Spec (.of (A ⧸ I)))) ⋙
+    sheafToPresheaf (AffineProEt.topology (Spec (.of (A ⧸ I)))) (ModuleCat.{u + 1} R)
+  have hRZ : RZ.FullyFaithful := Functor.FullyFaithful.ofFullyFaithful _
+  have hcomp : (F ⋙ RX).FullyFaithful := hRZ.comp hpre
+  have hF : F.FullyFaithful := hcomp.ofCompFaithful
+  have : F.Full := hF.full
+  have : F.Faithful := hF.faithful
+  exact Adjunction.counit_isIso_of_R_fully_faithful _
+
+private lemma isIso_closedCounit_of_isAffine {Z X : Scheme.{u}} [IsAffine X]
+    (i : Z ⟶ X) [IsClosedImmersion i] :
+    IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit := by
+  obtain ⟨I, e, he⟩ := (IsClosedImmersion.Spec_iff (f := i ≫ X.isoSpec.hom)).mp inferInstance
+  have hq := isIso_closedCounit_of_quotient R (Γ(X, ⊤)) I
+  let q := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
+  have : (q)_*[ModuleCat.{u + 1} R].Full :=
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) q).fullyFaithfulROfIsIsoCounit.full
+  have : (q)_*[ModuleCat.{u + 1} R].Faithful :=
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) q).fullyFaithfulROfIsIsoCounit.faithful
+  have h : ((e.hom)_*[ModuleCat.{u + 1} R] ⋙ (q)_*[ModuleCat.{u + 1} R]).FullyFaithful :=
+    Functor.FullyFaithful.ofFullyFaithful _
+  have h' := h.ofIso (lowerStarComp (ModuleCat.{u + 1} R) e.hom q ≪≫
+    lowerStarCongr (ModuleCat.{u + 1} R) he.symm)
+  have h'' : ((i)_*[ModuleCat.{u + 1} R] ⋙
+      (X.isoSpec.hom)_*[ModuleCat.{u + 1} R]).FullyFaithful :=
+    h'.ofIso (lowerStarComp (ModuleCat.{u + 1} R) i X.isoSpec.hom).symm
+  have hF := h''.ofCompFaithful
+  have := hF.full
+  have := hF.faithful
+  exact Adjunction.counit_isIso_of_R_fully_faithful _
+
+private lemma isIso_map_counit_of_local_adjunction
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
+    {F₁ : A ⥤ C} {U₁ : C ⥤ A} {F₂ : B ⥤ D} {U₂ : D ⥤ B}
+    (ai : L₁ ⊣ R₁) (ai' : L₂ ⊣ R₂) (aj : F₁ ⊣ U₁) (aj' : F₂ ⊣ U₂)
+    (α : TwoSquare U₂ R₂ R₁ U₁) [IsIso α.natTrans]
+    (hb : IsIso (((mateEquiv aj' aj).symm α).natTrans))
+    (hc : IsIso ai'.counit) (M : B) : IsIso (F₂.map (ai.counit.app M)) := by
+  let β := (mateEquiv aj' aj).symm α
+  let γ := (mateEquiv ai ai').symm β
+  have : IsIso β.natTrans := hb
+  have : IsIso γ.natTrans := by
+    dsimp [γ, β]
+    rw [iterated_mateEquiv_conjugateEquiv_symm ai ai' aj aj']
+    change IsIso ((conjugateEquiv (ai.comp aj') (aj.comp ai')).symm α.natTrans)
+    infer_instance
+  have h := mateEquiv_counit_symm ai ai' β M
+  have : IsIso ai'.counit := hc
+  have : IsIso (L₂.map (β.app M) ≫ ai'.counit.app (F₂.obj M)) := inferInstance
+  rw [h] at this
+  exact IsIso.of_isIso_comp_left (γ.natTrans.app _) _
+
+private lemma isIso_closedCounit_localization {U' U Z' Z : Scheme.{u}}
+    {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
+    [WeaklyEtale j] [WeaklyEtale j'] (sq : IsPullback g' j' j g'')
+    (hc : IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g').counit)
+    (F : Sheaf (ProEt.topology Z') (ModuleCat.{u + 1} R)) :
+    IsIso ((localizationRestriction (ModuleCat.{u + 1} R) j' inferInstance).map
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g'').counit.app F)) := by
+  let ai := upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g''
+  let ai' := upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g'
+  let aj := localizationRestrictionLowerStarAdjunction (ModuleCat.{u + 1} R) j inferInstance
+  let aj' := localizationRestrictionLowerStarAdjunction (ModuleCat.{u + 1} R) j' inferInstance
+  let α := TwoSquare.mk _ _ _ _ (squareLowerStarIso (ModuleCat.{u + 1} R) sq.toCommSq).hom
+  let β := (mateEquiv aj' aj).symm α
+  have hβ : β.natTrans = localizationRestrictionBaseChangeMap
+      (ModuleCat.{u + 1} R) sq.toCommSq := by
+    apply (mateEquiv aj' aj).injective
+    change (mateEquiv aj' aj) ((mateEquiv aj' aj).symm α) = _
+    rw [Equiv.apply_symm_apply]
+    exact (mateEquiv_localizationRestrictionBaseChangeMap
+      (ModuleCat.{u + 1} R) sq.toCommSq).symm
+  have : IsIso β.natTrans := by
+    rw [hβ]
+    exact isIso_localizationRestrictionBaseChangeMap_of_isPullback _ sq
+  exact isIso_map_counit_of_local_adjunction ai ai' aj aj' α this hc F
+
+
 /-- Blueprint `lem-exc-proetale-closed-fully-faithful` (subsection
 `sk-prop-sf-open-closed-triangle`): for a closed immersion `i : Z ⟶ X` the counit
 `i^* i_* G ⟶ G` of the pro-étale adjunction `i^* ⊣ i_*` is an isomorphism on all pro-étale
-sheaves of modules; so `i_*` is fully faithful, without a constructibility hypothesis. -/
+sheaves of modules; so `i_*` is fully faithful, without a constructibility hypothesis.
+
+Proof: on the affine pro-étale bases of Spec A and Spec (A/I), closed base change is
+right adjoint to the closed-site lift with invertible unit. Opposites and precomposition
+therefore make direct image fully faithful on presheaves. Restriction to these bases is
+an equivalence on sheaves, so the same holds for sheaves of modules. An arbitrary closed
+immersion into an affine scheme is isomorphic to such a quotient immersion. Finally,
+restrict the counit to the inverse image of an affine open cover of the target. Weakly
+étale base change and the double-mate identity identify these restrictions with the affine
+counits, up to isomorphisms. Open-cover conservativity proves the global claim. -/
 theorem isIso_upperStarLowerStarAdjunction_counit (i : Z ⟶ X) [IsClosedImmersion i] :
-    IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit :=
-  sorry
+    IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit := by
+  have happ (F : Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} R)) :
+      IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit.app F) := by
+    let U (k : X.affineCover.I₀) := pullback (X.affineCover.f k) i
+    let j (k : X.affineCover.I₀) : U k ⟶ Z := pullback.snd _ _
+    have : ∀ k, IsOpenImmersion (j k) := fun k => inferInstance
+    have hsurj : ∀ z, ∃ k, z ∈ Set.range (j k).base := by
+      intro z
+      obtain ⟨x, hx⟩ := X.affineCover.covers (i.base z)
+      obtain ⟨w, -, hw⟩ := Scheme.Pullback.exists_preimage_pullback x z hx
+      exact ⟨X.affineCover.idx (i.base z), w, hw⟩
+    have hcover : Presieve.ofArrows U j ∈ Scheme.proetalePrecoverage Z :=
+      Scheme.zariskiPrecoverage_le_proetalePrecoverage _
+        ((Scheme.ofArrows_mem_precoverage_iff _).mpr ⟨hsurj, fun k => this k⟩)
+    refine isIso_of_isIso_localizationRestriction (ModuleCat.{u + 1} R) _ j hcover
+      fun k => ?_
+    exact isIso_closedCounit_localization R (IsPullback.of_hasPullback (X.affineCover.f k) i)
+      (isIso_closedCounit_of_isAffine R (pullback.fst (X.affineCover.f k) i)) F
+  exact NatIso.isIso_of_isIso_app _
 
 attribute [instance] isIso_upperStarLowerStarAdjunction_counit
 

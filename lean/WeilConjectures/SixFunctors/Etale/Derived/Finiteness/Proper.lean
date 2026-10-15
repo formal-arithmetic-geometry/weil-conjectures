@@ -9,6 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.ProjectiveModification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+
 /-!
 # Constructibility of proper direct images
 
@@ -107,7 +111,13 @@ theorem hasConstructibleDirectImages_of_isProper {X S : Scheme.{u}} (aS : S ⟶ 
 Let `f : X ⟶ S` be a proper morphism with `S` of finite type over `k`, all of whose geometric
 fibres have dimension at most `d`, and let `F` be a constructible sheaf of `Λ`-modules on `X_ét`,
 `Λ` a finite ring killed by an integer invertible in `k`. Then `Rᵠf_* F` is constructible on
-`S_ét` for every `q`, and `Rᵠf_* F = 0` for `q > 2d`. -/
+`S_ét` for every `q`, and `Rᵠf_* F = 0` for `q > 2d`.
+
+Proof: Proper constructibility gives the first assertion. For the second, pull back to
+an algebraic-closure geometric point of S. Proper torsion base change identifies this
+pullback with fibre cohomology, which vanishes above twice the specified fibre dimension.
+Geometric pullbacks detect zero sheaves. Compatibility of total, bounded-below and
+classical right derived functors gives exactly the displayed total-derived statement. -/
 theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper {X S : Scheme.{u}}
     (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (f : X ⟶ S) [IsProper f]
     (d : ℕ) (hd : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S),
@@ -116,8 +126,33 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper {X S : S
     (∀ q : ℤ, IsConstructibleSheaf ((homologyFunctor _ q).obj
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F)))) ∧
     ∀ q : ℤ, (2 * d : ℤ) < q → IsZero ((homologyFunctor _ q).obj
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))) :=
-  sorry
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))) := by
+  refine ⟨hasConstructibleDirectImages_of_isProper aS f F inferInstance, fun q hq ↦ ?_⟩
+  obtain ⟨n, rfl⟩ : ∃ n : ℕ, q = n := ⟨q.toNat, by omega⟩
+  refine IsZero.of_iso ?_
+    ((f)_*[ModuleCat.{u + 1} Λ].homologyRightDerivedFunctorObjSingleFunctorIso F n)
+  refine isZero_of_forall_isZero_upperStar_algClosurePoint Λ _ fun t ↦ ?_
+  let x := S.algClosurePoint t
+  let sq := IsPullback.of_hasPullback f x
+  have := isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ
+    (fun z ↦ isOfFinAddOrder_of_finite z) sq
+  rw [baseChange_eq_derivedBaseChangeMapPlus] at this
+  have hvan := isZero_higherDirectImage_of_two_mul_lt
+    (fun z : Λ ↦ isOfFinAddOrder_of_finite z) (pullback.snd f x)
+    (pullback.snd f x) (𝟙 _) (Category.comp_id _) d (hd _ x)
+    (((pullback.fst f x)^*[ModuleCat.{u + 1} Λ]).obj F) n hq
+  let A := (Plus.singleFunctor _ 0).obj F
+  refine IsZero.of_iso hvan
+    (((x)^*[ModuleCat.{u + 1} Λ]).mapIso
+        ((f)_*[ModuleCat.{u + 1} Λ].homologyRightDerivedFunctorPlusObjSingleFunctorIso F n).symm
+      ≪≫ (((x)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso n).app
+        ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj A)
+      ≪≫ (Plus.homologyFunctor _ n).mapIso
+        (asIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app A))
+      ≪≫ (Plus.homologyFunctor _ n).mapIso
+        ((pullback.snd f x)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.mapIso
+          ((((pullback.fst f x)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app
+            F)))
 
 /-- Blueprint `obl-fin-comparison`: The comparison and finitude of proper direct images.
 
@@ -131,7 +166,14 @@ finite ring `Λ` killed by an integer invertible in `k`. Let `s : Spec Ω ⟶ S`
    (the `q`-th homology of `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus` at `F`, the
    right-hand side being the sheaf `Rᵠa_{s*}(i_s^* F)` on `Spec Ω`) is an isomorphism, the
    fibre cohomology is finite, and it vanishes for `q > 2d`;
-2. (the finitude) every `Rᵠf_* F` is constructible, and `Rᵠf_* F = 0` for `q > 2d`. -/
+2. (the finitude) every `Rᵠf_* F` is constructible, and `Rᵠf_* F = 0` for `q > 2d`.
+
+Proof: Use the proper constructibility and fibre-bound theorem just proved for (2).
+Proper torsion base change gives the isomorphism of (1). Exact pullback commutes with
+homology. The bounded-below/total-derived compatibility identifies the source cohomology
+with the sheaf in (2), whose pullback is constructible and therefore has finitely generated
+geometric stalks. Transport this finitude and the vanishing from (2) through the same
+comparison isomorphism. This works for all integer degrees, including negative degrees. -/
 theorem isIso_homology_derivedBaseChangeMapPlus_of_isProper {X S : Scheme.{u}}
     (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (f : X ⟶ S) [IsProper f]
     (d : ℕ) (hd : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S),
@@ -151,22 +193,66 @@ theorem isIso_homology_derivedBaseChangeMapPlus_of_isProper {X S : Scheme.{u}}
     (∀ q : ℤ, IsConstructibleSheaf ((homologyFunctor _ q).obj
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F)))) ∧
     ∀ q : ℤ, (2 * d : ℤ) < q → IsZero ((homologyFunctor _ q).obj
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))) :=
-  sorry
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))) := by
+  have hfin := isConstructibleSheaf_homology_rightDerivedLowerStar_of_isProper aS f d hd F
+  refine ⟨?_, hfin⟩
+  intro Ω _ _ s q
+  let sq := IsPullback.of_hasPullback f s
+  have := isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ
+    (fun z ↦ isOfFinAddOrder_of_finite z) sq
+  rw [baseChange_eq_derivedBaseChangeMapPlus] at this
+  let A := (Plus.singleFunctor _ 0).obj F
+  have : IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app A) :=
+    inferInstance
+  let e := ((s)^*[ModuleCat.{u + 1} Λ]).mapIso
+      ((homologyFunctor _ q).mapIso
+        ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusCompatibility.app A).symm) ≪≫
+    (((s)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso q).app
+      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj A) ≪≫
+    (Plus.homologyFunctor _ q).mapIso
+      (asIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app A))
+  have : IsConstructibleSheaf ((homologyFunctor _ q).obj
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))) := hfin.1 q
+  have hc := IsConstructibleSheaf.upperStar s
+    ((homologyFunctor _ q).obj
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F)))
+  have : IsFiniteSheaf ((s)^*[ModuleCat.{u + 1} Λ].obj
+      ((homologyFunctor _ q).obj ((Plus.ι ⋙ R((f)_*[ModuleCat.{u + 1} Λ])).obj A))) := by
+    change IsFiniteSheaf ((s)^*[ModuleCat.{u + 1} Λ].obj
+      ((homologyFunctor _ q).obj
+        ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj F))))
+    exact hc.isFiniteSheaf
+  refine ⟨inferInstance, IsFiniteSheaf.of_iso e, fun hq ↦ ?_⟩
+  exact (((s)^*[ModuleCat.{u + 1} Λ]).map_isZero (hfin.2 q hq)).of_iso e.symm
 
 /-- Blueprint `lem-fin-proper-bounded-constructible`: Bounded constructible complexes under a
 proper direct image.
 
 Let `b : Y ⟶ S` be proper with `S` of finite type over `k`, and let `Λ` be a finite ring killed
 by an integer invertible in `k`. For `K ∈ D^b_c(Y, Λ)`, the derived direct image `Rb_* K` lies in
-`D^b_c(S, Λ)`. -/
+`D^b_c(S, Λ)`.
+
+Proof: Finite coefficients are additive torsion, so the finite cohomological-dimension
+result for finite-type morphisms gives one upper bound for all sheaves in degree zero.
+Right-derived direct image preserves the lower bound zero. Proper constructibility gives
+constructible cohomology of these images. The finite-truncation devissage then extends
+this assertion from constructible sheaves in degree zero to all bounded constructible
+complexes. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isProper {Y S : Scheme.{u}}
     (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (b : Y ⟶ S) [IsProper b]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K) :
     Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) S
-      ((R((b)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-  sorry
+      ((R((b)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  obtain ⟨d, hd⟩ := hasFiniteCohomologicalDimensionMorphism Λ
+    (fun x ↦ isOfFinAddOrder_of_finite x) (b ≫ aS) aS b rfl
+  refine boundedConstructible_obj_of_forall_singleFunctor Λ _ ?_ hK
+  intro F hF
+  refine ⟨⟨⟨0, ?_⟩, ⟨d, ?_⟩⟩, ?_⟩
+  · exact (b)_*[ModuleCat.{u + 1} Λ].isGE_rightDerivedFunctor_obj
+      ((singleFunctor _ 0).obj F) 0
+  · exact (_root_.DerivedCategory.isLE_iff _ d).2 (hd F)
+  · exact hasConstructibleDirectImages_of_isProper aS b F hF
 
 end Etale
 

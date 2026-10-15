@@ -9,19 +9,8 @@ public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
-import Sheaf.Topology.DimensionSupremumLocalDimensions
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.CategoryTheory.TruncationHypercohomology
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
-import Sheaf.AlgebraicGeometry.ProperCaseConstructibility
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Proper direct image of bounded constructible complexes
@@ -43,26 +32,14 @@ coefficients of the smooth-base-change convention, for finite-type schemes over 
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/lem-fin-proper-bounded-constructible.md`
 (blueprint: lem-fin-proper-bounded-constructible).
 
-Proof: (1) Choose a cohomological support interval [a,c] for K. Properness implies finite
- type, and the target is quasi-compact. The finite-type fibre-dimension bound
-(`lem-fin-finite-type-fibre-dimension-bound`) gives d bounding ordinary fibres. Base change
-preserves local fibre dimensions (`lem-sc-fibre-dimension-after-base-change`), and dimension
-is their supremum (`lem-weil-pbc-dimension-supremum-local-dimensions`), so d bounds geometric
-fibres too, including empty fibres.
-(2) The coefficient module-sheaf categories are Grothendieck abelian
-(`lem-weil-pbc-ring-sheaves-grothendieck`), direct image is additive and left exact
-(`lem-weil-pbc-module-direct-image-left-exact`), and enough injectives exist
-(`lem-weil-pbc-module-sheaves-enough-injectives`). Choose a bounded-below K-injective
-representative vanishing below a (`lem-weil-pbc-dplus-injective-representative`). Apply
-`thm-sp-truncation-e2` to obtain E₂^{p,q} = Rᵖb_* H^q(K) converging to H^{p+q}(Rb_*K),
-with stabilization and a finite exhaustive separated abutment filtration.
-(3) Proper finiteness (`thm-fin-proper-case`) makes these entries constructible and zero
-outside 0 ≤ p ≤ 2d and a ≤ q ≤ c.
-(4) Kernels, cokernels and extensions preserve constructibility (`thm-constructible-serre`).
-Induction on pages proves constructibility of every page and its stable entries. Induction
-on the finite abutment filtration proves constructibility of every cohomology sheaf.
-(5) Outside [a,c+2d] all graded pieces vanish, hence the abutment vanishes. This is exactly
-the bounded-constructible predicate. -/
+Proof: On the empty target every cohomology sheaf is zero. Otherwise the coefficient
+exponent descends from the nonempty target to its ground field. The finite-constant-value
+and finite-stalk notions of constructibility agree for the finite coefficient ring.
+The stated cohomology support interval is equivalent to boundedness for the standard
+t-structure. Apply the proper direct-image theorem to that bounded constructible complex
+and convert its conclusion back along the same equivalences. The proper theorem uses
+proper constructibility on sheaves, finite torsion cohomological dimension and finite
+truncation devissage. -/
 theorem isBoundedConstructible_rightDerivedLowerStar_of_proper
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (N : ℕ)
     {k : Type u} [Field k] {Y S : Scheme.{u}}
@@ -75,6 +52,29 @@ theorem isBoundedConstructible_rightDerivedLowerStar_of_proper
     (K : DerivedCategoryModule Λ Y) (hK : DerivedCategory.isBoundedConstructible Λ Y K) :
     DerivedCategory.isBoundedConstructible Λ S
       ((rightDerivedLowerStar (ModuleCat.{u + 1} Λ) b).obj K) := by
-  sorry
+  classical
+  have hcompat := hb
+  have hcoeffY : HasInvertibleExponent Λ Y := ⟨N, hY.1, hY.2.2.1, hY.2.2.2⟩
+  by_cases hS' : IsEmpty S
+  · let := hS'
+    refine ⟨fun i ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
+      (Scheme.IsConstructibleSheaf.of_isZero (Scheme.Etale.isZero_sheaf_of_isEmpty _)),
+      0, 0, le_rfl, fun i hi ↦ Scheme.Etale.isZero_sheaf_of_isEmpty _⟩
+  have : Nonempty S := not_isEmpty_iff.mp hS'
+  have : HasInvertibleExponent Λ S := ⟨N, hS.1, hS.2.2.1, hS.2.2.2⟩
+  have : HasInvertibleExponent Λ (Spec (.of k)) := .of_hom_of_nonempty aS
+  have hK' : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K := by
+    obtain ⟨hc, a, c, hac, hvan⟩ := hK
+    refine ⟨⟨⟨a, ?_⟩, ⟨c, ?_⟩⟩, fun q ↦
+      (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hc q)⟩
+    · exact (_root_.DerivedCategory.isGE_iff K a).2 fun i hi ↦ hvan i (Or.inl hi)
+    · exact (_root_.DerivedCategory.isLE_iff K c).2 fun i hi ↦ hvan i (Or.inr hi)
+  obtain ⟨⟨⟨a, ha⟩, ⟨c, hc⟩⟩, hcoh⟩ :=
+    boundedConstructible_rightDerivedLowerStar_of_isProper aS b hK'
+  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hcoh q),
+    min a c, max a c, min_le_max, fun i hi ↦ ?_⟩
+  rcases hi with hi | hi
+  · exact (_root_.DerivedCategory.isGE_iff _ a).1 ha i (lt_of_lt_of_le hi (min_le_left _ _))
+  · exact (_root_.DerivedCategory.isLE_iff _ c).1 hc i (lt_of_le_of_lt (le_max_right _ _) hi)
 
 end AlgebraicGeometry.Etale

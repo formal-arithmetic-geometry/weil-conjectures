@@ -1,0 +1,155 @@
+{
+ "id": "lem-sf-adic-affine-direct-image-finiteness",
+ "kind": "statement",
+ "title": "Adic direct-image finiteness between affine finite-type schemes",
+ "statement": "Fix a prime l. For a scheme V let Qbar_l,V be the sheaf of locally finite continuous functions to an algebraic closure of Q_l: locally on V the values lie in a finite extension of Q_l. Let AdicSheaf_l(V) be the abelian category of modules over this sheaf, and call such a sheaf constructible if Zariski locally it admits a finite partition by locally closed constructible subschemes on which it is pro-etale locally finite free. These are the concrete sheaf models of [def-weil-sheaf-of-modules-category], [def-weil-pbc-proetale-site], [def-weil-algebraically-closed-coefficients], [def-weil-l-adic-coefficient-extension] and [def-weil-finite-torsion-constructibility]. Write D^b_c(V) for the objects of the ordinary derived category [def-weil-abstract-derived-category] which are bounded for its standard t-structure and have constructible cohomology. Let l be a prime and K an algebraically closed field of characteristic different from l. Let Y and T be affine schemes, let s:Y -> Spec K and g:T -> Y be locally of finite type [def-weil-scheme-morphism-properties], and let F be a constructible object of AdicSheaf_l(T). Then Rg_*(F[0]) belongs to D^b_c(Y).",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.2, Proposition 6.8.11, Proposition 6.8.14 and Remark 6.8.15; affine compactification proof of sk-prop-sf-finiteness (SGA 4½, Theoreme de finitude, Theorem 1.1)."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-torsion-constructibility"
+ ],
+ "proof": [
+  {
+   "text": "Embed the affine source T over the affine base Y into an affine space A^n_Y, using [lemma-nagata-quasi-affine-immersion-affine-space-exists], and compose with the standard open immersion into P^n_Y. Denote this quasi-compact immersion by j and the projection by p, so j followed by p is g.",
+   "uses": [
+    "lemma-nagata-quasi-affine-immersion-affine-space-exists",
+    "def-nagata-affine-compactification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor j through its scheme-theoretic image: j = j.toImage followed by j.imageι, as in [def-nagata-scheme-image-factor]. For an immersion, j.toImage is an open immersion, has dense range, and has the same affine source T. The image is a closed subscheme of projective space. Since Y is affine of finite type over K, projective space and its closed subscheme are noetherian. The image inclusion is proper and the resulting map to Spec K is quasi-compact and locally of finite type.",
+   "uses": [
+    "def-nagata-scheme-image-factor",
+    "lemma-nagata-projective-space-base-change-proper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sf-adic-dense-open-direct-image-finiteness] to the dense open map j.toImage and F. Apply [lem-sf-adic-closed-direct-image-finiteness] to the resulting bounded constructible complex and the closed inclusion j.imageι. The derived image along the immersion j is therefore bounded constructible.",
+   "uses": [
+    "lem-sf-adic-dense-open-direct-image-finiteness",
+    "lem-sf-adic-closed-direct-image-finiteness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sf-adic-projective-space-direct-image-finiteness] to the projective projection p on constructible sheaves in degree zero. The already proved finiteLowerStar_of_bounded extends that assertion to every bounded constructible complex by the finite truncation triangles. Apply it to the complex obtained in the preceding step.",
+   "uses": [
+    "lem-sf-adic-projective-space-direct-image-finiteness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every adic lower star preserves K-injective complexes because it is right adjoint to the exact adic upper star. The derived-composition isomorphisms therefore identify the successive images with Rg_*(F[0]); use adicLowerStarComp and the equalities j.toImage_imageι and j followed by p = g. Boundedness and the cohomology object property are invariant under these isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-quasi-affine-immersion-affine-space-exists",
+  "def-nagata-affine-compactification",
+  "def-nagata-scheme-image-factor",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-sf-adic-dense-open-direct-image-finiteness",
+  "lem-sf-adic-closed-direct-image-finiteness",
+  "lem-sf-adic-projective-space-direct-image-finiteness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.2, Proposition 6.8.11, Proposition 6.8.14 and Remark 6.8.15; affine compactification proof of sk-prop-sf-finiteness (SGA 4½, Theoreme de finitude, Theorem 1.1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived pushforward of a constructible l-adic sheaf along a finite type morphism between affine schemes over an algebraically closed field is bounded with constructible cohomology",
+   "date": "2026-10-16",
+   "results": [
+    "AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+    "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+    "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+    "AlgebraicGeometry.Scheme.Hom.finite_app",
+    "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+    "AlgebraicGeometry.IsFinite.finite_app",
+    "PrimeSpectrum.isConstructible_comap_image",
+    "AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj"
+   ],
+   "verdict": "No matching adic finiteness theorem; the hits do not concern this coefficient sheaf or direct-image property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type map between affine schemes over an algebraically closed field has bounded constructible derived pushforward for constructible l-adic sheaves",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible_rightDerivedLowerStar",
+   "date": "2026-10-16",
+   "results": [],
+   "verdict": "No matching adic finiteness theorem; the hits do not concern this coefficient sheaf or direct-image property."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+  "date": "2026-10-16",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-ordinary-compact-cohomology",
+   "place": "Affine factorization into an open immersion, a closed immersion and a projective projection; adic coefficient passage in sk-prop-sf-finiteness.",
+   "via": [
+    "lem-weil-structure-direct-images-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-finiteness",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+  "statement": "theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s]\n    [IsAffine Y] {T : Scheme.{u}} [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]\n    {F : AdicSheaf l T} (hF : IsAdicConstructibleSheaf F) :\n    finiteLowerStar l g ((DerivedCategory.singleFunctor _ 0).obj F)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-39cd0",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T195758-L-1299658",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-39cd0",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T195758-L-1299658",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean statements, proofs, axioms and DAG records checked against the published originals, dependency interfaces and cited source; all delivery modules and direct importers compile."
+ }
+}

@@ -21,90 +21,40 @@
  ],
  "proof": [
   {
-   "text": "Choose $a\\leq c$ with $\\mathcal H^qK=0$ for $q\\notin[a,c]$ by the bounded-constructible definition. The proper morphism $b$ is finite type, and $S$ is quasi-compact since its structure morphism is finite type. Apply [lem-fin-finite-type-fibre-dimension-bound] to get $d\\geq0$ bounding ordinary fibre dimensions. Apply [lem-sc-fibre-dimension-after-base-change] to $\\operatorname{Spec}\\overline{\\kappa(s)}\\to S$: every local dimension of the geometric fibre agrees with the local dimension of the ordinary fibre at its image, hence is at most $d$. By [lem-weil-pbc-dimension-supremum-local-dimensions], the global dimension of each geometric fibre is the supremum of these local dimensions, so is at most $d$. The same cited statement covers an empty fibre, whose dimension is $-\\infty$.",
+   "text": "First prove the source-library finite-stalk version in AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper. A finite coefficient ring is torsion as an additive group. Apply [lem-kun-0f10] to b with the compatible structure maps b followed by aS and aS. This gives an integer d such that Rb_*(F[0]) has no cohomology above d, uniformly in all module sheaves F. The right derived functor preserves the lower bound zero. For constructible F, [thm-fin-proper-constructibility-complete] gives constructibility of all its higher direct images. Thus Rb_*(F[0]) is bounded constructible.",
    "uses": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-scheme-conventions",
-    "lem-fin-finite-type-fibre-dimension-bound",
-    "lem-sc-fibre-dimension-after-base-change",
-    "lem-weil-pbc-dimension-supremum-local-dimensions"
+    "lem-kun-0f10",
+    "thm-fin-proper-constructibility-complete"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 0A3V (lemma-morphism-finite-type-bounded-dimension) and Tag 02FY (lemma-dimension-fibre-after-base-change); blueprint proof paragraph 1; Topology Tag 0B7I (lemma-dimension-supremum-local-dimensions)"
-   }
+   "elementary": false
   },
   {
-   "text": "Work with the constant-ring module categories on $Y_{\\Et}$ and $S_{\\Et}$, in a universe large enough that these sites and ring values are small. They are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], and $b_*$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Their module sheaf categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Choose a bounded below K-injective representative $I$ for $K$, with $I^q=0$ for $q<a$, by [lem-weil-pbc-dplus-injective-representative]. Apply [thm-sp-truncation-e2] to this representative and $v=b_*$, whose right derived functor is $Rb_*$ as defined in [def-weil-pbc-direct-image]. We obtain $E_2^{p,q}=R^pb_*\\mathcal H^q(K)\\Longrightarrow\\mathcal H^{p+q}(Rb_*K)$, zero for $p<0$, with stabilization and the specified finite exhaustive separated abutment filtration and graded pieces $E_\\infty^{p,q}$.",
+   "text": "Constructible sheaves form a Serre subcategory by [thm-constructible-serre]. The existing proved boundedConstructible_obj_of_forall_singleFunctor lemma uses finite truncation triangles and closure of bounded constructible objects under shifts and extensions. Apply it to the triangulated derived direct-image functor and the result of step 1, obtaining the source-library bounded-complex assertion.",
    "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "thm-sp-truncation-e2",
-    "def-weil-pbc-direct-image"
+    "thm-constructible-serre"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-proper-bounded-constructible.md",
-    "place": "## Proof, paragraph 1, hypercohomology sequence; expanded verification of its hypotheses"
-   }
+   "elementary": false
   },
   {
-   "text": "Each $\\mathcal H^q(K)$ is a constructible $\\Lambda$-module sheaf. The proper morphism $b$, finite-type target $S$, and geometric fibre bound $d$ meet the hypotheses of [thm-fin-proper-case]. Therefore $R^pb_*\\mathcal H^q(K)$ is constructible for $p\\geq0$ and is zero for $p>2d$. Together with step 2 and the cohomology support of $K$, the $E_2$ page is zero outside the rectangle $0\\leq p\\leq2d$, $a\\leq q\\leq c$.",
+   "text": "Prove the exact project statement attached to this node. If the target is empty, every cohomology sheaf on its etale site is zero, so the conclusion holds with support interval [0,0]. Otherwise a positive coefficient annihilator invertible on the target is also invertible on its ground field: if it vanished in the field, it would vanish in every nonzero stalk on the nonempty target. This supplies HasInvertibleExponent for the source-library assertion. Use [lem-weil-pbc-constructible-etale-module-sheaf-comparison] to convert finite-constant-value constructibility to finite-stalk constructibility and back. The given interval is equivalent to simultaneous standard t-structure lower and upper bounds. Apply the source assertion of steps 1-2 and take [min(a,c), max(a,c)] for the output interval. This proves the original isBoundedConstructible_rightDerivedLowerStar_of_proper with every binder unchanged.",
    "uses": [
-    "thm-fin-proper-case"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-proper-bounded-constructible.md",
-    "place": "## Proof, paragraph 2, first sentence"
-   }
-  },
-  {
-   "text": "Induct on the page number. Given constructible entries on $E_r$, the kernel of each outgoing differential is constructible by [thm-constructible-serre]; the image of the incoming differential is the kernel of its cokernel, so is constructible by the same kernel and cokernel clauses. Taking their quotient, again a cokernel, makes $E_{r+1}$ constructible. Entries outside the rectangle stay zero, since each next entry is a subquotient of the corresponding previous entry. Stabilization in [thm-sp-truncation-e2] identifies each $E_\\infty$ entry with a finite page, hence it is constructible. The same theorem gives each $H^n=\\mathcal H^n(Rb_*K)$ a finite exhaustive separated filtration with these graded pieces. Starting from its zero final term and using the extension clause of [thm-constructible-serre] on each short exact sequence of successive filtration terms shows $H^n$ is constructible.",
-   "uses": [
-    "thm-constructible-serre",
-    "thm-sp-truncation-e2"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-proper-bounded-constructible.md",
-    "place": "## Proof, paragraph 2, kernels/cokernels and finite-filtration sentences"
-   }
-  },
-  {
-   "text": "For $n<a$ or $n>c+2d$, no pair $(p,q)$ in the rectangle has $p+q=n$. Thus every graded piece of the finite filtration of step 4 is zero. Successively each adjacent filtration inclusion is an isomorphism, and the filtration runs from $H^n$ to zero, so $H^n=0$. Hence $Rb_*K$ has constructible cohomology and cohomology support in $[a,c+2d]$; by [def-weil-pbc-constructible-complexes] this is membership in $D^b_c(S,\\Lambda)$.",
-   "uses": [
-    "def-weil-pbc-constructible-complexes"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-proper-bounded-constructible.md",
-    "place": "## Proof, paragraph 2, concluding support interval"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-scheme-conventions",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-sc-fibre-dimension-after-base-change",
-  "lem-weil-pbc-dimension-supremum-local-dimensions",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "thm-sp-truncation-e2",
-  "def-weil-pbc-direct-image",
-  "thm-fin-proper-case",
-  "thm-constructible-serre"
+  "lem-kun-0f10",
+  "thm-fin-proper-constructibility-complete",
+  "thm-constructible-serre",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "C3",
+  "date": "2026-10-16",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-proper-bounded-constructible.md",
-  "place": "## Proof"
+  "place": "Proper constructibility followed by finite cohomological dimension (Stacks 0F10) and finite truncation triangles; source and exact finite-constant-value statements both proved, with the existing constructibility comparison."
  },
  "mathlib_searches": [
   {
@@ -276,5 +226,15 @@
   "group": "NW",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statement, all five dependencies, exact declarations, source, edge cases, report sections, and maintainer gates. Signature matches verbatim; server-only compile passed in 1.6 seconds. No delivery errors found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-39cd0",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T195758-L-1299658",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean statements, proofs, axioms and DAG records checked against the published originals, dependency interfaces and cited source; all delivery modules and direct importers compile."
  }
 }

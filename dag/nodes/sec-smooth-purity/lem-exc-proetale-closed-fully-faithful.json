@@ -18,24 +18,35 @@
  ],
  "proof": [
   {
-   "text": "The assertion is local on affine opens of $X$, by the unit and counit\ncompatibility of [lem-exc-closed-localization]. On one such open the\npresheaf formula of [lem-exc-closed-inverse-image-formula] gives\n$$\n P_{i_*G}(V)=(i_*G)(v(V))=G(u(v(V)))=G(V),\n$$\nusing [lem-exc-closed-lift-reduction] for the last equality. This presheaf\nis already the sheaf $G$. Its sheafification and its map to $G$ are\ntherefore the identity. The adjunction calculation in that formula\nidentifies this map with the counit of the pro-etale operations. These\naffine identifications agree on overlaps, since they are counits, and glue.\nAn adjunction has fully faithful right adjoint precisely when its counit is\nan isomorphism, giving the assertion.",
+   "text": "Apply [lem-exc-closed-site-adjunction] on the affine pro-etale sites over A and A/I. It gives v left adjoint to u with invertible unit. Opposites followed by precomposition with functors to ModuleCat R give an adjunction whose right adjoint is precomposition with u.op and whose counit is the image of the original unit, hence invertible. Thus precomposition with u.op is fully faithful. Restriction from the full pro-etale site to its affine basis is an equivalence on sheaves. The direct-image restriction square commutes definitionally, so closed direct image along Spec(A/I) -> Spec A is fully faithful on sheaves too. Therefore its upper-star/lower-star counit is invertible. This works for any coefficient ring R, in particular the finite constant ring of the node.",
    "uses": [
-    "lem-exc-closed-localization",
-    "lem-exc-closed-inverse-image-formula",
-    "lem-exc-closed-lift-reduction"
+    "lem-exc-closed-site-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A closed immersion into an affine scheme factors, up to source and target scheme isomorphisms, as a quotient-spectrum immersion. Pushforward along a scheme isomorphism is an equivalence. Transport full faithfulness through lowerStarComp and lowerStarCongr to obtain the counit isomorphism whenever the target is affine.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose an affine open cover of the arbitrary target and pull it back to the source. By [lem-exc-closed-localization], the lower-star square has invertible weakly-etale base-change mate. Taking a second mate gives the conjugate of the original square isomorphism and is therefore invertible. The mate-counit identity then identifies the restriction of the global counit with an invertible affine counit, up to these isomorphisms. Restrictions along the pulled-back Zariski open cover jointly detect isomorphisms. Hence the original counit is invertible, and closed direct image is fully faithful.",
+   "uses": [
+    "lem-exc-closed-localization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-exc-closed-localization",
-  "lem-exc-closed-inverse-image-formula",
-  "lem-exc-closed-lift-reduction"
+  "lem-exc-closed-site-adjunction",
+  "lem-exc-closed-localization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-proetale-closed-fully-faithful.md",
-  "place": "## Proof"
+  "group": "C3",
+  "date": "2026-10-16",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BK and 097P; closed-site adjunction followed by Mathlib adjunctions on opposites, precomposition, iterated mates, and open-cover conservativity."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -69,5 +80,24 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-open-closed-triangle"
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_counit",
+  "statement": "theorem isIso_upperStarLowerStarAdjunction_counit (i : Z ⟶ X) [IsClosedImmersion i] :\n    IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-16"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-39cd0",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T195758-L-1299658",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean statements, proofs, axioms and DAG records checked against the published originals, dependency interfaces and cited source; all delivery modules and direct importers compile."
+ }
 }

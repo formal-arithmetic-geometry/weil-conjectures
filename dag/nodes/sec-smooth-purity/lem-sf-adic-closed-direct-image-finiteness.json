@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-adic-closed-direct-image-finiteness",
+ "kind": "statement",
+ "title": "Closed adic direct image preserves bounded constructibility",
+ "statement": "Fix a prime l. For a scheme V let Qbar_l,V be the sheaf of locally finite continuous functions to an algebraic closure of Q_l: locally on V the values lie in a finite extension of Q_l. Let AdicSheaf_l(V) be the abelian category of modules over this sheaf, and call such a sheaf constructible if Zariski locally it admits a finite partition by locally closed constructible subschemes on which it is pro-etale locally finite free. These are the concrete sheaf models of [def-weil-sheaf-of-modules-category], [def-weil-pbc-proetale-site], [def-weil-algebraically-closed-coefficients], [def-weil-l-adic-coefficient-extension] and [def-weil-finite-torsion-constructibility]. Write D^b_c(V) for the objects of the ordinary derived category [def-weil-abstract-derived-category] which are bounded for its standard t-structure and have constructible cohomology. Let i:Z -> X be a closed immersion [def-weil-scheme-morphism-properties] with X noetherian. For any A in D^b_c(Z), its ordinary derived direct image Ri_*A belongs to D^b_c(X).",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 6.1 and 6.8, closed-immersion recollement; closed-direct-image step of sk-prop-sf-finiteness."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-torsion-constructibility"
+ ],
+ "proof": [
+  {
+   "text": "The closed subscheme Z is quasi-compact and quasi-separated. For a constructible adic sheaf F, choose its finite lisse stratification on Z. The counit i^* i_* F -> F is an isomorphism by [lem-exc-proetale-closed-fully-faithful], also after passage to module objects over the adic coefficient sheaf: the forgetful functor reflects isomorphisms and the module adjunction has this underlying counit. On the open complement U, the restriction of i_* F is zero, by the empty-fibre formula. Combining the stratification of Z with the zero sheaf on U proves constructibility of i_* F.",
+   "uses": [
+    "lem-exc-proetale-closed-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open complement is quasi-compact because X is noetherian. By [lem-exc-proetale-closed-exact], closed direct image of underlying module sheaves preserves finite colimits. The forgetful functor from module objects over the adic coefficient sheaf preserves and reflects these colimits, so adic i_* is exact too.",
+   "uses": [
+    "lem-exc-proetale-closed-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An exact additive functor has right derived functor isomorphic to its functor on derived categories. It preserves both standard t-structure bounds and commutes with every cohomology functor. Thus Ri_*A is bounded and its cohomology is i_*H^n(A), which is constructible by step 1. This is the compiled rightDerivedFunctorIsoMapDerivedCategory and mapDerivedCategoryHomologyFunctorIso calculation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-proetale-closed-fully-faithful",
+  "lem-exc-proetale-closed-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 6.1 and 6.8, closed-immersion recollement; closed-direct-image step of sk-prop-sf-finiteness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of noetherian schemes the right derived direct image on modules over the l-adic coefficient sheaf preserves bounded complexes with constructible cohomology",
+   "date": "2026-10-16",
+   "results": [
+    "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+    "CondensedMod.IsSolid",
+    "localCohomology.diagram",
+    "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+    "instAbelianCondensedMod",
+    "DerivedCategory.isGE_Q_obj_iff",
+    "Condensed.instAB5CondensedMod",
+    "instAbelianLightCondMod"
+   ],
+   "verdict": "No matching adic finiteness theorem; the hits do not concern this coefficient sheaf or direct-image property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion of noetherian schemes, derived direct image of a bounded constructible complex of l-adic sheaves is bounded constructible",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]onstructible|[Cc]onstructible.*rightDerived",
+   "date": "2026-10-16",
+   "results": [],
+   "verdict": "No matching adic finiteness theorem; the hits do not concern this coefficient sheaf or direct-image property.",
+   "subdirectory": "AlgebraicGeometry"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+  "date": "2026-10-16",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-ordinary-compact-cohomology",
+   "place": "Affine factorization into an open immersion, a closed immersion and a projective projection; adic coefficient passage in sk-prop-sf-finiteness.",
+   "via": [
+    "lem-weil-structure-direct-images-constructible",
+    "lem-sf-adic-affine-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-finiteness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AdicClosedImmersionFiniteness",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdicClosedImmersionFiniteness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.bounded_constructible_rightDerivedFunctor_adicLowerStar_of_isClosedImmersion",
+  "statement": "theorem bounded_constructible_rightDerivedFunctor_adicLowerStar_of_isClosedImmersion\n    (A : _root_.DerivedCategory (AdicSheaf l Z))\n    (hb : _root_.DerivedCategory.TStructure.t.bounded A)\n    (hc : _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l Z) A) :\n    (_root_.DerivedCategory.TStructure.t.bounded ⊓\n      _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l X))\n      ((i)_*ᵃ[l].rightDerivedFunctor.obj A)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-39cd0",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T195758-L-1299658",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-39cd0",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T195758-L-1299658",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean statements, proofs, axioms and DAG records checked against the published originals, dependency interfaces and cited source; all delivery modules and direct importers compile."
+ }
+}
