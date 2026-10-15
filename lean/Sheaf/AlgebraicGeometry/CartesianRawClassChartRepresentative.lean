@@ -5,15 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
-import Sheaf.AlgebraicGeometry.AbelianRawPullbackComposition
+import Sheaf.AlgebraicGeometry.CartesianRawClassChartData
+import Sheaf.AlgebraicGeometry.CartesianRawClassChartNaturality
 import Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality
-import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
-import Sheaf.AlgebraicGeometry.CofilteredAffineEtaleModel
-import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
-import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonEvaluationIsIso
-import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonIsIso
-import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality
+import all Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawAssembly
 
 /-! # Finite-stage chart representatives of raw cartesian classes
 
@@ -27,6 +22,26 @@ universe u
 open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
+
+attribute [local irreducible] restrictedOverCohomologyMap
+  cartesianDerivedImageMap cartesianChartCohomologyLift cartesianChartCohomologyIso
+  upperStar upperStarCompDerivedPlus
+
+set_option backward.isDefEq.respectTransparency true
+
+private theorem cartesian_exchange_comp_named {X S T T' T'' : Scheme.{u}}
+    (f : X ⟶ S) (g : T ⟶ S) (g' : T' ⟶ S) (g'' : T'' ⟶ S)
+    (a : T' ⟶ T) (b : T'' ⟶ T') (d : T'' ⟶ T) (hd : d = b ≫ a)
+    (w : g' = a ≫ g) (w' : g'' = b ≫ g') (wd : g'' = d ≫ g)
+    (P : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
+    (upperStarCompDerivedPlus AddCommGrpCat.{u + 1} b a d hd).hom.app
+        (cartesianDerivedImage f g P) ≫
+      (D+((b)^*[AddCommGrpCat.{u + 1}])).map
+        (cartesianDerivedImageMap f g g' a w P) ≫
+      cartesianDerivedImageMap f g' g'' b w' P =
+        cartesianDerivedImageMap f g g'' d wd P := by
+  subst d
+  exact cartesian_map_comp f g g' g'' a b w w' P
 
 /-- A raw stage class admits a chart representative after one further base change.
 
@@ -101,6 +116,21 @@ theorem exists_cartesianRawClass_chart_representative
             (restrictedOverCohomologyMap (pullback.snd f (D.obj j).hom)
               (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)
               (q : ℤ) ((cartesianChartDiagram f D j).map a) W x) := by
-  sorry
+  obtain ⟨j, W, hW, r, hr, l, b, x, hbase⟩ :=
+    exists_cartesianRawClass_chart_data D c hc f F q i V z
+  refine ⟨j, W, hW, r, hr, l, b, x, ?_, ?_⟩
+  · have hcone := cartesian_exchange_comp_named f (D.obj i).hom (D.obj l.left).hom
+      c.pt.hom (D.map b).left (c.π.app l.left).left (c.π.app i).left
+      (congrArg (fun t ↦ t.left) (c.w b)).symm
+      (Over.w (D.map b)).symm (Over.w (c.π.app l.left)).symm
+      (Over.w (c.π.app i)).symm ((DerivedCategory.Plus.singleFunctor _ 0).obj F)
+    have h := congrArg (fun t ↦ t ≫ (shiftFunctor _ (q : ℤ)).map
+      (cartesianDerivedImageMap f (D.obj l.left).hom c.pt.hom (c.π.app l.left).left
+        (Over.w (c.π.app l.left)).symm
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) hbase
+    simp only [Category.assoc, ← Functor.map_comp] at h
+    rw [hcone] at h
+    exact h.trans (cartesianChartCohomologyLift_exchange f D c F q j W V r hr l x)
+  · exact cartesianRawClass_chart_naturality D c hc f F q i j V z W hW r hr l b x hbase
 
 end AlgebraicGeometry.Etale
