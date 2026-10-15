@@ -24,80 +24,53 @@
  ],
  "proof": [
   {
-   "text": "Write $L=u^{-1}$, $V=u_*$, with unit $\\eta$ and counit $\\varepsilon$, and $A=LR$. Besides the assumed finite-product preservation of $L$, $V$ preserves finite products: for every sheaf $T$, the given adjunction identifies $\\operatorname{Hom}(T,V(H_1\\times H_2))$ with $\\operatorname{Hom}(LT,H_1)\\times\\operatorname{Hom}(LT,H_2)$ and hence with $\\operatorname{Hom}(T,VH_1)\\times\\operatorname{Hom}(T,VH_2)$; the terminal-object case is the same with a singleton. Apply these canonical product identifications to the ring operations of $R$ and to the additive and scalar operations of $M$ and $H$. Functoriality carries each defining equation (associativity, distributivity, zero and unit) to the same equation after applying $L$ or $V$. This constructs the $A$-module $LM$ and the $VS$-module $VH$, and sends linear maps to linear maps, as required by [def-weil-sheaf-of-modules-category].",
+   "text": "Transport the sheaf of rings R to A with its underlying isomorphism and the stated operation comparisons.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-geometric-ring-transport"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D1, 03D2, labels lemma-pushforward-module, lemma-pullback-module"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $F$ be any $A$-module sheaf and endow $VF$ with its $R$-action via $\\eta_R:R\\to VA$. The set-sheaf adjunction sends $\\alpha:LM\\to F$ to $\\beta=V\\alpha\\circ\\eta_M$. For scalar multiplication write $\\mu_M:R\\times M\\to M$ and $\\mu_F:LR\\times F\\to F$. Naturality gives the explicit mates $\\operatorname{adj}(\\alpha\\circ L\\mu_M)=\\beta\\circ\\mu_M$ and $\\operatorname{adj}(\\mu_F\\circ(\\mathrm{id}_{LR}\\times\\alpha))=V\\mu_F\\circ(\\eta_R\\times\\beta)$ for scalar multiplication. For addition replace the last expression by $V\\mu_F\\circ(\\beta\\times\\beta)$; for zero use the terminal object. These formulas follow by inserting $V\\alpha\\eta_M$ and using that the component of $\\eta$ on a product has components $\\eta$ on its factors. Thus, by injectivity of the given hom-set bijection, $\\alpha$ preserves addition, zero and scalar multiplication if and only if $\\beta$ does. This proves, in both directions, a bijection $\\operatorname{Hom}_A(LM,F)\\cong\\operatorname{Hom}_R(M,VF)$ from the module morphism definition [def-weil-sheaf-of-modules-category].",
+   "text": "For each c:A→S, obtain I,P and the natural linear hom equivalence B, together with the underlying normalization.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-geometric-module-transport"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D3, label lemma-adjoint-push-pull-modules, proof and its omitted converse"
-   }
+   "elementary": false
   },
   {
-   "text": "Restrict the $S$-action on $H$ along $c:A\\to S$ and call the resulting $A$-module $H_c$. The $R$-action on $VH_c$ in the preceding step is $V\\mu_H\\circ(Vc\\times\\mathrm{id})\\circ(\\eta_R\\times\\mathrm{id})$. Since the adjunct of $c$ is exactly $c^\\sharp=Vc\\circ\\eta_R$, this is the action of $R$ on the module pushforward specified in the statement. Its underlying sheaf is $VH$; no replacement of the given geometric morphism or coefficient rings is involved.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7, label lemma-adjoint-pullback-pushforward-modules; definition-pushforward"
-   }
-  },
-  {
-   "text": "For an $A$-module sheaf $G$ on $\\mathcal D$, let $P(W)=S(W)\\otimes_{A(W)}G(W)$. By [lem-weil-pbc-scalar-extension-hom], a sectionwise $A(W)$-linear map $\\lambda_W:G(W)\\to H(W)$ uniquely extends to the $S(W)$-linear map $s\\otimes g\\mapsto s\\lambda_W(g)$ on $P(W)$. These maps commute with restriction along $W\\to W_0$: both ways on a pure tensor give $s|_W\\lambda_W(g|_W)$, by the semilinear restrictions of [def-weil-sheaf-of-modules-category]. Conversely a presheaf map gives $\\lambda_W(g)=\\psi_W(1\\otimes g)$, which commutes with restrictions because $1$ restricts to $1$. The inverse identities hold sectionwise by the cited bijection. This gives a bijection from $S$-linear presheaf maps $P\\to H$ to $A$-linear sheaf maps $G\\to H_c$.",
+   "text": "Construct the presheaf scalar-extension functor from the sectionwise tensor products. Restriction on a pure tensor is the specified change-of-rings restriction. The ordinary extension/restriction hom equivalence gives maps in both directions; equality on pure tensors proves their naturality with respect to site restrictions and their inverse identities.",
    "uses": [
     "lem-weil-pbc-scalar-extension-hom",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CU, label lemma-adjointness-tensor-restrict-presheaves"
-   }
+   "elementary": false
   },
   {
-   "text": "By [def-pur-sheaf-tensor-product], $S\\otimes_A G$ is precisely the module sheafification $P^\\#$. By [def-weil-presheaf-modules-sheafification], every $S$-linear map $P\\to H$ factors uniquely through $P^\\#$ because $H$ is a sheaf of $S$-modules. Therefore the preceding bijection is $\\operatorname{Hom}_S(S\\otimes_A G,H)\\cong\\operatorname{Hom}_A(G,H_c)$. Its forward map is restriction to $1\\otimes g$, and its inverse is the unique sheaf extension of $s\\otimes g\\mapsto s\\lambda(g)$.",
+   "text": "Compose with module sheafification. Its universal hom equivalence identifies maps from the sheafified tensor with maps from the tensor presheaf. The unit on sections is the sheafification unit applied to 1⊗m, and its naturality identifies the induced underlying map with restriction along this unit.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CZ, label lemma-adjointness-tensor-restrict"
-   }
+   "elementary": false
   },
   {
-   "text": "Take $G=LM$ in step 5 and then compose with step 2 for $F=H_c$, using the action identification of step 3. This gives exactly $\\operatorname{Hom}_S(S\\otimes_{LR}LM,H)\\cong\\operatorname{Hom}_R(M,u_*H)$. For an $R$-linear $a:M_0\\to M$, precomposition on the tensor side by $\\mathrm{id}_S\\otimes La$ becomes precomposition by $La$ after restriction to $1\\otimes g$, then precomposition by $a$ after applying the naturality of the given set adjunction. For an $S$-linear $b:H\\to H_0$, postcomposition becomes postcomposition by $b$ after that restriction (since $b(sx)=sb(x)$), then by $Vb$ under the given adjunction. The uniqueness of the sheaf extension proves the same identities for the inverse maps. Thus the bijection is natural in both variables and defines the asserted adjunction.",
+   "text": "Define T as I followed by this explicit scalar-extension functor. Compose the scalar-extension hom equivalence with B and prove its two naturality equations. Use Adjunction.mkOfHomEquiv. The tensor object and map identifications are definitional; combine the scalar-extension unit formula and the normalization for B to obtain the last required equation.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7, label lemma-adjoint-pullback-pushforward-modules, displayed chain of three hom sets"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-geometric-ring-transport",
+  "lem-weil-pbc-geometric-module-transport",
   "lem-weil-pbc-scalar-extension-hom",
+  "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03D7, with Tags 03D3, 03CZ and 03CU; explicit finite-product mate calculation fills the omitted converse in 03D3"
+  "place": "Tag 03D7, with the explicit product-mate argument of Tag 03D3 and the sectionwise tensor/sheafification arguments of Tags 03CU and 03CZ; A4 Lean reduction 2026-10-16"
  },
  "mathlib_searches": [
   {
@@ -225,5 +198,15 @@
   "by": "NF",
   "date": "2026-10-15",
   "fixed_by": "NT-stage2-Codex-b802a491d"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261015T183808-L-842829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
