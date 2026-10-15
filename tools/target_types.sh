@@ -45,9 +45,9 @@ open Lean in
     | none => IO.println s!"TYPE {n} MISSING"
 LEAN
 done
-for n in "${NAMES[@]}" \
-  AlgebraicGeometry.Etale.isIso_baseChange_of_isProper \
-  AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring; do
+# 2026-10-15 (launcher): the two main statements of Proper are no longer imported by TargetsCheck (only the six target
+# modules are), so only the targets' axioms are printed.
+for n in "${NAMES[@]}"; do
   echo "#print axioms $n"
 done >> "$D/Types_TargetsCheck.lean"
 A=$(SHEAF_FILE_TIMEOUT=60 "$(dirname "$0")/lean_file.sh" "$D/Types_Challenge.lean" 2>&1) || { echo "$A"; exit 2; }
