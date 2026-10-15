@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-integral-constructible-nakayama",
+ "kind": "statement",
+ "title": "Integral Nakayama for constructible internal modules",
+ "statement": "Let ℓ be prime, E a normed field with a normed ℚ_ℓ-algebra structure, and X a scheme with noetherian underlying space. An internal module M over the continuous integral coefficient ring of [def-weil-pbc-continuous-integral-coefficients] which is constructible in the library sense and on which multiplication by ℓ is invertible is zero. No finite dimensionality of E is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3), finite-generator integral Nakayama argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing proved private freeEpiLocalSplitting theorem in CondensedConstructibleSerre, attached to the local splitting node. The same module provides its regular-module inverse-image comparison. No local splitting proof is copied.",
+   "uses": [
+    "lem-weil-pbc-proetale-free-epi-local-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite presentation, write π:R^n→M for the cokernel epimorphism. Pull it back along t=π followed by the inverse of multiplication by ℓ. The resulting epimorphism onto R^n splits locally by the preceding lemma; the first projection supplies T with Tπ=t. Then (1−ℓT)π=0. The proved contractive finite-free assertion makes 1−ℓT invertible, forcing π=0. As π is epi, the restricted M is zero.",
+   "uses": [
+    "lem-weil-pbc-integral-finite-free-contractive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the finite stratification and the local finite presentation covers supplied by constructibility. The coefficient pullback ring comparison identifies their coefficient rings with the actual continuous integral rings. Exact additive pullback preserves invertibility of multiplication by ℓ. Apply the preceding finite-presentation argument on each member of each cover. Pro-etale cover restrictions detect zero, so each stratum restriction is zero.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing proved private abDetectMaps theorem in ProEtaleAbelianClosedSupport to detect zero across the finite strata, using the identity map of M. The theorem uses inverse-image Kan extension, sheafification and quasi-compact joint surjectivity; no public closed-support assertion is applied. Each stratum immersion has the required quasi-compactness since its domain is noetherian.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-closed-support"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-free-epi-local-splitting",
+  "lem-weil-pbc-integral-finite-free-contractive",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-proetale-abelian-closed-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3), finite-generator integral Nakayama argument",
+  "note": "Fully proved. Return repair: import the existing private freeEpiLocalSplitting and ccsRegularMapIso helpers from CondensedConstructibleSerre and abDetectMaps from ProEtaleAbelianClosedSupport. All copied helper blocks are removed. The field-specific Serre theorem and public closed-support theorem are not used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented sheaf of modules vanishes if multiplication by an element in the Jacobson radical is invertible",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented sheaf of modules vanishes if multiplication by an element in the Jacobson radical is invertible",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation, Module.FinitePresentation.exists_notMem_bijective, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+   "verdict": "The hits concern SheafOfModules, not internal Mod objects on this site. A local free-generator lifting argument is necessary."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.eq_bot_of_le_smul_of_le_jacobson_bot",
+   "date": "2026-10-16",
+   "results": "1 hits: Submodule.eq_bot_of_le_smul_of_le_jacobson_bot",
+   "verdict": "Ordinary module Nakayama is available but does not apply directly to internal sheaf modules."
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]akayama|IsLocallyFinitelyPresented",
+   "date": "2026-10-16",
+   "results": "22 hits: Mathlib/RingTheory/Finiteness/Nakayama.lean, Mathlib/RingTheory/Finiteness/Nakayama.lean, Mathlib/RingTheory/Finiteness/Nakayama.lean, Mathlib/RingTheory/Ideal/IdempotentFG.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Nakayama.lean, Mathlib/RingTheory/Nakayama.lean",
+   "verdict": "No direct internal sheaf Nakayama statement found; prove the generator lifting and matrix argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralReductionConservative",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Integral coefficient reduction in the continuous-coefficient proper base change step",
+   "via": [
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralConstructibleNakayama",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleNakayama.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructible_isZero_of_isIso_nsmul",
+  "statement": "theorem integralConstructible_isZero_of_isIso_nsmul (X : Scheme.{u})\n    [TopologicalSpace.NoetherianSpace X]\n    (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) X))\n    (hM : IsConstructibleModuleObject (condensedRingObj (integralCoeff ℓ E) X) M)\n    (hℓ : IsIso (ℓ • 𝟙 M)) : IsZero M",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

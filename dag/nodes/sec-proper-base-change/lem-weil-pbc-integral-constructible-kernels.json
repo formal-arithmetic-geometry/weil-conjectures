@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-integral-constructible-kernels",
+ "kind": "statement",
+ "title": "Kernel closure for integral constructible internal modules",
+ "statement": "Let ℓ be prime, E a finite normed extension of ℚ_ℓ, and X a scheme with noetherian underlying space. For the continuous integral coefficient ring of [def-weil-pbc-continuous-integral-coefficients], kernels of morphisms between internal modules which are constructible by stratified local finite presentations are again constructible.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(1), integral finite model comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Realize the pulled continuous integral coefficient ring as the sheaf of continuous O_E-valued functions. On a presentation cover, evaluate a finite matrix at geometric points. Flat going-down lifts specializations through the cover. A continuous function to the Hausdorff ring O_E agrees on comparable points, so the Smith invariants of the fiber modules are invariant under specialization. Independence of the algebraically closed representative follows by base change of the same finite matrix. A noetherian scheme has finitely many irreducible components with generic points, and components meeting each other have the same invariants. Hence each connected component has one finite module type and there are finitely many types.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over a connected component, the local presentation matrices thus have fixed Smith invariants. A smallest nonzero valuation entry stays of this valuation on a neighborhood. Divide by it continuously, perform integral elementary row and column operations, and repeat on the smaller matrix. All division quotients are integral by the minimal valuation choice. A remainder whose fiber entries all vanish is zero as a matrix of continuous functions. This identifies the module locally with a fixed finite O_E-module model, including the zero matrix case.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Refine the source and target stratifications with a constructible stratification of their cokernel, using the proved generic cokernel closure. On each connected component of each stratum, the preceding finite-model comparison gives fixed finite fiber module types for all three. Choose presentations M=coker A and N=coker B, and locally lift the finitely many source generators to obtain a matrix F for the map. The augmented free matrix D=(F,-B) presents its cokernel, so B and D have fixed Smith invariants. Continuous pivot operations diagonalize both, and their kernels are finite free since multiplication by a nonzero constant of O_E is injective on continuous functions. Lift the columns of FA through B locally, by local surjectivity of the epimorphism onto its image. The resulting map from the source relation module, together with ker B, presents the kernel as a cokernel into ker D. All three modules in this presentation are finite free. Exact inverse image identifies these local kernels with the original kernel on each stratum. This avoids assuming free source and target in the presence of torsion; zero ranks and empty strata are included.",
+   "uses": [
+    "lem-weil-pbc-constructible-cokernels-extensions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-constructible-cokernels-extensions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(1), integral finite model comparison",
+  "note": "The sole remaining sorry. This is now strictly narrower than the initial Serre split: cokernels and extensions have been fully proved generically. What remains is the integral finite-model comparison and its coefficient-dependent kernel finiteness. Second reading B4: the torsion-module step is made explicit using two augmented free matrices and a finite relation presentation, rather than an unsupported Smith form for maps between arbitrary finite modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kernels of constructible sheaves with continuous integral p adic coefficients are constructible",
+   "date": "2026-10-16",
+   "results": "0 hits: ; service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernels of constructible sheaves with continuous integral p adic coefficients are constructible",
+   "date": "2026-10-16",
+   "results": "8 hits: PrimeSpectrum.exists_range_eq_of_isConstructible, AlgebraicGeometry.Scheme.Hom.isConstructible_image, CondensedMod.ofSheafCompHaus, CompHausLike.LocallyConstantModule.functor, CondensedMod.ofSheafProfinite, ChevalleyThm.chevalley_polynomialC, LightCondMod.ofSheafLightProfinite, Topology.IsLocallyConstructible.isConstructible",
+   "verdict": "No direct continuous integral internal-module kernel theorem was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation.fg_ker",
+   "date": "2026-10-16",
+   "results": "1 hits: Module.FinitePresentation.fg_ker",
+   "verdict": "The ordinary-module kernel finiteness result does not establish the integral sheaf finite-model comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Kk]ernel|[Kk]ernel.*constructible",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No direct Mathlib constructible internal-module kernel assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernels of locally finitely presented integral continuous coefficient module sheaves on a noetherian scheme",
+   "date": "2026-10-16",
+   "results": "Second reading: eight SheafOfModules finite-presentation and quasicoherent-data results, with no continuous integral coefficient kernel closure interface.",
+   "verdict": "These use a different encoding and do not supply the finite-model comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation.fg_ker",
+   "date": "2026-10-16",
+   "results": "Second reading: requires a surjective ordinary linear map from a finite module to a finitely presented module.",
+   "verdict": "Not an internal coefficient-sheaf kernel theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*(constructible|finite.?present)|constructible.*kernel in lean/Sheaf and lean/WeilConjectures",
+   "date": "2026-10-16",
+   "results": "Second reading found IsConstructibleSheaf.kernel, IsAdicConstructibleSheaf.kernel_cokernel and homObj_finitePresentation_kernel.",
+   "verdict": "The first two have different coefficient encodings; the third is a Hom presentation formula, not kernel closure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralReductionConservative",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Integral coefficient reduction in the continuous-coefficient proper base change step",
+   "via": [
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralConstructibleKernels",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleKernels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructible_kernels",
+  "statement": "theorem integralConstructible_kernels (X : Scheme.{u})\n    [TopologicalSpace.NoetherianSpace X] :\n    ObjectProperty.IsClosedUnderKernels\n      (IsConstructibleModuleObject (condensedRingObj (integralCoeff ℓ E) X))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

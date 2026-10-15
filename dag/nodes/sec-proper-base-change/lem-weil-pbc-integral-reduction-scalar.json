@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-integral-reduction-scalar",
+ "kind": "statement",
+ "title": "Zero derived integral reduction makes multiplication by ℓ invertible",
+ "statement": "For prime ℓ, a normed ℚ_ℓ-algebra field E, any scheme X and any unbounded complex K of internal O_E coefficient modules, with coefficients and reduction as in [def-weil-pbc-continuous-integral-coefficients], if the derived reduction of K modulo ℓ is zero, multiplication by ℓ on K is an isomorphism. No finite dimensionality, constructibility, boundedness or noetherianity is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5, the two-term residue resolution and derived tensor"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "The already proved coefficient sequence O_E --ℓ--> O_E --> O_E/(ℓ) is short exact. Exact inverse image takes it to X. Faithful exact forgetting of the internal module structure reflects short exactness, giving a free two-term resolution of the restricted residue module.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a K-flat representative P of K. The counit comparison for left derived extension of scalars is an isomorphism on P. Zero derived reduction therefore makes its ordinary scalar extension acyclic. The extension/forgetting tensor comparison, and then the braiding, imply that P tensor the restricted residue module is acyclic.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved source-library DerivedCategory.reductionIso to the coefficient short exact sequence and P. It identifies the derived residue tensor with the cone of ℓ times the identity of P. That cone is zero, hence the first morphism of its distinguished triangle is invertible. Transport along the chosen representative isomorphism yields invertibility of ℓ times the identity of K.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5, the two-term residue resolution and derived tensor",
+  "note": "Fully proved. A generic categorical auxiliary avoids unfolding the large concrete coefficient definitions repeatedly; the same module now compiles well below 60 seconds."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction modulo a regular scalar is zero if and only if scalar multiplication is an isomorphism",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction modulo a regular scalar is zero if and only if scalar multiplication is an isomorphism",
+   "date": "2026-10-16",
+   "results": "8 hits: IsRegular.smul_eq_zero_iff_right, RingTheory.Sequence.isWeaklyRegular_singleton_iff, IsRegular.smul_ne_zero_iff_right, IsRegular.smul_right_inj, IsRegular.isSMulRegular, isSMulRegular_iff_torsionBy_eq_bot, isSMulRegular_iff_right_eq_zero_of_smul, isSMulRegular_iff_smul_eq_zero_imp_eq_zero",
+   "verdict": "Search found ordinary regular-element statements; no exact derived statement. The source-library reductionIso supplies the cone identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.reductionIso",
+   "date": "2026-10-16",
+   "results": "0 hits: ; loogle: unknown identifier 'DerivedCategory.reductionIso'",
+   "verdict": "This declaration is in WeilConjectures, not indexed Mathlib; found its proved source by local rg."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionIso|KFlat.*acyclic",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No Mathlib hit; use the proved WeilConjectures tensor mapping cone and K-flat interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralReductionConservative",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Integral coefficient reduction in the continuous-coefficient proper base change step",
+   "via": [
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionScalar",
+  "file": "lean/Sheaf/Paper/IntegralReductionScalar.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralReduction_isIso_nsmul_of_isZero",
+  "statement": "theorem integralReduction_isIso_nsmul_of_isZero (X : Scheme.{u})\n    (K : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) X)))\n    (hK : IsZero ((integralReduction ℓ E X).obj K)) : IsIso (ℓ • 𝟙 K)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

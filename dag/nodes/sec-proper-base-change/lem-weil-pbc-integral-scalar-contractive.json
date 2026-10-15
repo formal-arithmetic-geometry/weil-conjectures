@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-integral-scalar-contractive",
+ "kind": "statement",
+ "title": "Contractive scalar units in continuous integral coefficients",
+ "statement": "Let ℓ be prime and E a normed field with a normed ℚ_ℓ-algebra structure. For any scheme X, a commutative internal ring R isomorphic by a ring homomorphism e to the continuous integral coefficient ring of [def-weil-pbc-continuous-integral-coefficients], and any R-linear endomorphism f of the regular R-module, the endomorphism 1−ℓf is invertible. There are no noetherianity or finite dimensionality assumptions.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, Section 6.8, continuous coefficient realization and integral units"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Generalize the proved continuous-ring comparison construction from CondensedFieldLfpLocalTriviality to any totally disconnected topological ring in Type 0. Define its adjoint using the existing profiniteTestProjection |X[S]|→S and reuse profiniteTestProjection_natural from the same module. It is a ring homomorphism. On an affine weakly contractible test object, the point-components comparison and unchanged sheafification sections make it an isomorphism; the affine weakly contractible covering family detects that it is an isomorphism on all test objects. Import and reuse its existing generic projection naturality, point-components target naturality, affine weakly contractible detection and pushforward-ring helpers; only the coefficient-ring generalization is proved here.",
+   "uses": [
+    "lem-weil-pbc-proetale-point-components-maps",
+    "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-condensed-lfp-local-triviality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A morphism of regular modules is sectionwise linear: applying the sheaf tensor comparison to the module action equation proves f_U(ab)=a f_U(b). Hence on every test object it is multiplication by the continuous integral function f_U(1).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The normed ℚ_ℓ-algebra is ultrametric, and ||ℓ||<1. Thus for every integral a, ||1−ℓa||=1. For a continuous integral-valued function a, its pointwise reciprocal (1−ℓa)⁻¹ is continuous, integral, and inverse on both sides. This constructs a unit without requiring completeness of E.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral coefficient ring is totally disconnected by the ultrametric topology. Use the continuous-ring comparison and sectionwise linearity to show every component of 1−ℓf is multiplication by a unit, hence bijective. Reflect the component isomorphisms through sheaves and internal module forgetting. Finally transport the result across e using the proved Mod.regularIsoOfIsIso comparison for restriction of scalars.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-point-components-maps",
+  "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-condensed-lfp-local-triviality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, Section 6.8, continuous coefficient realization and integral units",
+  "note": "Fully proved. Only the already proved continuous comparison helpers are generalized from the field-local-triviality module; its remaining finite-free-cover sorry is neither copied nor used. The comparison is constructed, not chosen from an existence sorry. Return repair: generic coefficient-independent helpers are imported directly from CondensedFieldLfpLocalTriviality rather than copied. No field local-freeness assertion is applied. Fresh second reading: also remove the renamed projection construction and its naturality proof, using existing profiniteTestProjection and profiniteTestProjection_natural directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "One minus a prime times a continuous integral p adic function is a unit",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One minus a prime times a continuous integral p adic function is a unit",
+   "date": "2026-10-16",
+   "results": "8 hits: PadicInt.unitCoeff, PadicInt.mkUnits, PadicInt.unitCoeff_coe, PadicInt.isUnit_den, PadicInt.isUnit_iff, PadicInt.mul_inv, PadicInt.inv_mul, PadicInt.val_mkUnits",
+   "verdict": "Only ℤ_p-specific unit lemmas were found, not the internal continuous coefficient statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap.isUnit_iff_forall_isUnit",
+   "date": "2026-10-16",
+   "results": "1 hits: ContinuousMap.isUnit_iff_forall_isUnit",
+   "verdict": "The general continuous-map unit lemma has a completeness hypothesis; the direct norm-one reciprocal proves what is needed without adding it."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_add_eq_max_of_norm_ne_norm|isUnit_iff_mulRight_bijective",
+   "date": "2026-10-16",
+   "results": "3 hits: Mathlib/RingTheory/Artinian/Module.lean, Mathlib/Algebra/Ring/NonZeroDivisors.lean, Mathlib/Algebra/Group/Units/Basic.lean",
+   "verdict": "Use the ordinary unit/bijective multiplication equivalence and ultrametric norm API inside the sectionwise argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralReductionConservative",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Integral coefficient reduction in the continuous-coefficient proper base change step",
+   "via": [
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarContractive",
+  "file": "lean/Sheaf/Paper/IntegralScalarContractive.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralRegular_one_sub_nsmul_isIso",
+  "statement": "theorem integralRegular_one_sub_nsmul_isIso (X : Scheme.{u})\n    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]\n    (e : R ⟶ condensedRingObj (integralCoeff ℓ E) X) [IsMonHom e] [IsIso e]\n    (f : Mod.regular R ⟶ Mod.regular R) : IsIso (𝟙 _ - ℓ • f)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

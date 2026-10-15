@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-integral-finite-free-contractive",
+ "kind": "statement",
+ "title": "Contractive endomorphisms of finite free integral modules",
+ "statement": "For ℓ,E,X,R,e as in [def-weil-pbc-continuous-integral-coefficients], where R is a commutative internal ring identified with the actual continuous integral coefficient ring on X, every endomorphism T of the finite free module R^n has 1−ℓT invertible. Rank zero is included; no noetherianity or finite dimensionality is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, integral Nakayama argument; matrix Jacobson radicals"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Apply the rank-one integral scalar assertion to every endomorphism of the regular module. The criterion TwoSidedIdeal.mem_jacobson_iff then puts the central natural scalar ℓ in the Jacobson radical of End(R).",
+   "uses": [
+    "lem-weil-pbc-integral-scalar-contractive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each entry of ℓT is in this radical. Mathlib TwoSidedIdeal.matrix_jacobson_bot puts its matrix in the radical of the matrix ring. If x is in a Jacobson radical, obtain a left inverse z of 1−x from the radical criterion, note z−1=zx is still radical, and obtain a left inverse of z. Associativity then shows z is also a right inverse of 1−x.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the biproduct matrix ring homomorphism to End(R^n), transposing indices to match categorical composition. The biproduct component equations prove multiplicativity and identify the image of 1−ℓT with the stated endomorphism. Ring homomorphisms preserve units, and units of an endomorphism ring are exactly categorical isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-scalar-contractive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, integral Nakayama argument; matrix Jacobson radicals",
+  "note": "Fully proved, including the noncommutative radical unit argument and categorical matrix ring homomorphism. The scalar ring object is not unfolded in the matrix proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An element in the Jacobson radical of a ring has one minus itself invertible, also for matrices",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An element in the Jacobson radical of a ring has one minus itself invertible, also for matrices",
+   "date": "2026-10-16",
+   "results": "8 hits: Ideal.single_mem_jacobson_matrix, Ideal.single_mem_jacobson_matricesOver, TwoSidedIdeal.jacobson_matrix, TwoSidedIdeal.jacobson_matricesOver, TwoSidedIdeal.matricesOver_jacobson_bot, TwoSidedIdeal.matrix_jacobson_bot, TwoSidedIdeal.jacobson_matricesOver_le, Ideal.matricesOver_jacobson_le",
+   "verdict": "Matrix Jacobson radical identities are available; the internal finite-free interpretation and scalar hypothesis still require proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "TwoSidedIdeal.matrix_jacobson_bot",
+   "date": "2026-10-16",
+   "results": "1 hits: TwoSidedIdeal.matrix_jacobson_bot",
+   "verdict": "Exact ordinary matrix radical identity used in the proof, but not the full sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "jacobson_matrix|mem_jacobson_iff",
+   "date": "2026-10-16",
+   "results": "10 hits: Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/RingTheory/Jacobson/Ideal.lean, Mathlib/RingTheory/Jacobson/Ideal.lean, Mathlib/RingTheory/Jacobson/Ideal.lean",
+   "verdict": "Read and used Matrix.Ideal and the Jacobson membership criterion; the categorical matrix comparison is proved locally."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralReductionConservative",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Integral coefficient reduction in the continuous-coefficient proper base change step",
+   "via": [
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralFiniteFreeContractive",
+  "file": "lean/Sheaf/Paper/IntegralFiniteFreeContractive.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralFiniteFree_one_sub_nsmul_isIso",
+  "statement": "theorem integralFiniteFree_one_sub_nsmul_isIso (X : Scheme.{u})\n    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]\n    (e : R ⟶ condensedRingObj (integralCoeff ℓ E) X) [IsMonHom e] [IsIso e]\n    (n : ℕ) (T : Mod.finiteFree R n ⟶ Mod.finiteFree R n) :\n    IsIso (𝟙 _ - ℓ • T)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

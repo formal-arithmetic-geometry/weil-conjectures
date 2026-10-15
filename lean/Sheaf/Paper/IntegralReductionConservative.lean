@@ -6,7 +6,9 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
-import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+import Sheaf.Paper.IntegralConstructibleSerre
+import Sheaf.Paper.IntegralConstructibleNakayama
+import Sheaf.Paper.IntegralReductionScalar
 
 /-! # Conservativity of integral reduction
 
@@ -39,11 +41,10 @@ The integral realization identifies the locally finitely presented internal modu
 with the continuous integral sheaves in Proposition 6.8.11(3); this identification and
 the coefficient-dependent closure assertions must be established, rather than inferred
 from noetherianity alone. Derived reduction carries the cone to zero when the reduced
-map is invertible. On each stratum, the highest potentially nonzero cohomology of the cone has
- zero reduction,
-by the top-degree tensor spectral sequence. Nakayama over the valuation ring, after
-pro-etale localization, makes this cohomology zero. Descending induction through the
-finite cohomological interval makes every cohomology zero. The cone is therefore zero,
+map is invertible. The two-term coefficient resolution identifies its restricted
+reduction with the cone of multiplication by ℓ, so multiplication by ℓ is invertible
+on the cone and hence on every cohomology module. Constructible Nakayama makes each
+of those modules zero. The cone is therefore zero,
 so φ is invertible. This argument includes torsion modules, zero complexes, and empty X;
 it uses no properness or exchange hypothesis. -/
 theorem integralReduction_reflects_isIso (X : Scheme.{u})
@@ -51,6 +52,41 @@ theorem integralReduction_reflects_isIso (X : Scheme.{u})
     {M N : ProEtale.BoundedConstructible (condensedRingObj (integralCoeff ℓ E) X)}
     (φ : M ⟶ N)
     (hφ : IsIso ((integralReduction ℓ E X).map φ.hom)) : IsIso φ := by
-  sorry
+  obtain ⟨hk, hc, he⟩ := integralConstructible_serre ℓ E X
+  let := hk
+  let := hc
+  let := he
+  obtain ⟨C, g, δ, hT⟩ := Pretriangulated.distinguished_cocone_triangle φ.hom
+  obtain ⟨C', hC', ⟨e⟩⟩ := ObjectProperty.ext_of_isTriangulatedClosed₃'
+    (boundedConstructible (condensedRingObj (integralCoeff ℓ E) X))
+      _ hT M.property N.property
+  let adj := Mod.derivedExtendMapDerivedCategoryAdjunction
+    (coefficientMap (integralReductionMap ℓ E) X)
+  let : (L(Mod.extendScalars (coefficientMap (integralReductionMap ℓ E) X))).CommShift ℤ :=
+    adj.leftAdjointCommShift ℤ
+  have : adj.CommShift ℤ := adj.commShift_of_rightAdjoint ℤ
+  have : (L(Mod.extendScalars
+      (coefficientMap (integralReductionMap ℓ E) X))).IsTriangulated :=
+    adj.isTriangulated_leftAdjoint
+  have hred : IsZero ((integralReduction ℓ E X).obj C) := by
+    exact Pretriangulated.Triangle.isZero₃_of_isIso₁ _
+      ((L(Mod.extendScalars (coefficientMap (integralReductionMap ℓ E) X))).map_distinguished
+        _ hT) hφ
+  have hred' : IsZero ((integralReduction ℓ E X).obj C') :=
+    hred.of_iso ((integralReduction ℓ E X).mapIso e).symm
+  have hℓ : IsIso (ℓ • 𝟙 C') := integralReduction_isIso_nsmul_of_isZero ℓ E X C' hred'
+  have hzero : IsZero C' := by
+    apply DerivedCategory.isZero_of_forall_isZero_homology
+    intro n
+    let H := DerivedCategory.homologyFunctor
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj (integralCoeff ℓ E) X)) n
+    have hℓH : IsIso (ℓ • 𝟙 (H.obj C')) := by
+      have : IsIso (H.map (ℓ • 𝟙 C')) := inferInstance
+      rw [H.map_nsmul, H.map_id] at this
+      exact this
+    exact integralConstructible_isZero_of_isIso_nsmul ℓ E X _ (hC'.2 n) hℓH
+  exact (ObjectProperty.isIso_hom_iff _).mp
+    ((Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).mp (hzero.of_iso e))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

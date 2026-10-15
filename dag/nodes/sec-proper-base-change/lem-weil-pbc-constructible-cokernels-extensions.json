@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-constructible-cokernels-extensions",
+ "kind": "statement",
+ "title": "Generic cokernel and extension closure for constructible internal modules",
+ "statement": "Let X be any scheme and R a commutative ring object in abelian sheaves on X_proet. Define constructibility by a finite locally closed stratification on each stratum of which the module is pro-etale locally the cokernel of a map between finite free internal R-modules. This property is closed under cokernels and extensions in internal R-modules. No noetherianity of X or R is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, finite presentations and the elementary closure argument"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Reuse the proved private finite-presentation, finite-free, isomorphism-transport and common-stratification helpers of Sheaf.AlgebraicGeometry.CondensedConstructibleSerre via a proof-only import all. Exact additive inverse image preserves finite presentations, and its composition comparison transports them through composites and coefficient isomorphisms. Intersect finite stratifications and refine their covers to put both given finite presentations on the same cover. No field-specific Serre or local-triviality theorem is applied.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given a map of presented modules, pull back the target presentation epimorphism along the map on the finite free source generators. Its epimorphism onto a finite free module splits locally by the local splitting theorem. The resulting lift t, together with the target relations b, gives the presentation map (b,t) into the target free generators. The universal properties construct explicitly an isomorphism from its cokernel to the original cokernel.",
+   "uses": [
+    "lem-weil-pbc-proetale-free-epi-local-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an extension Q, pull back Q.g to a finite free presentation π of Q.X3. The pulled sequence is short exact. Its epimorphism onto the finite free generators splits locally, so its middle term is Q.X1 plus a finite free module. This sum has a finite presentation: compose the relation map for Q.X1 with the first biproduct inclusion and construct the cokernel isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proetale-free-epi-local-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The original Q.X2 is the cokernel of the map from the finite free relation module of π to this pullback. Prove that assertion by exactness up to epimorphism refinements: a generalized element in the projection kernel maps into the relation module after refinement, and the pullback component equations give its required factorization. The cokernel closure just proved now applies. Bind the covers and transport the presentations back to every stratum. This yields both object-property closure classes, including arbitrary colimit cokernel representatives by their canonical isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-proetale-free-epi-local-splitting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, finite presentations and the elementary closure argument",
+  "note": "Fully proved in the same session after the initial Serre split. Both ordinary cokernel and extension closure are coefficient-independent; the integral kernel assertion is the only unresolved part. All refinements and cokernel isomorphisms are proved, not new axioms or holes. Return repair: remove the ten flagged duplicate helpers and eight associated copies; import and reuse the existing proved private helpers from CondensedConstructibleSerre instead. The field-specific closure theorem is not used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally finitely presented sheaves of modules are closed under cokernels and extensions",
+   "date": "2026-10-16",
+   "results": "0 hits: ; service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented sheaves of modules are closed under cokernels and extensions",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "verdict": "SheafOfModules has local finite-presentation interfaces, but no direct internal Mod constructibility theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation",
+   "date": "2026-10-16",
+   "results": "12 hits: Module.FinitePresentation, instFinitePresentation, instFiniteOfFinitePresentation, Module.FinitePresentation.of_subsingleton, instFinitePresentationForall, Module.finitePresentation_of_finite, Module.finitePresentation_iff_finite, Module.finitePresentation_of_projective",
+   "verdict": "Ordinary module finite presentation does not supply internal sheaf presentation lifts."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitePresentation.*[Cc]okernel|[Cc]okernel.*IsFinitePresentation|finitePresentation.*[Ee]xtension",
+   "date": "2026-10-16",
+   "results": "3 hits: Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "verdict": "Only unrelated algebraic finite-presentation hits; construct the internal categorical presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralReductionConservative",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Integral coefficient reduction in the continuous-coefficient proper base change step",
+   "via": [
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleCokernelsExtensions",
+  "file": "lean/Sheaf/Paper/ConstructibleCokernelsExtensions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.constructible_cokernels_extensions",
+  "statement": "theorem constructible_cokernels_extensions (X : Scheme.{u})\n    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :\n    ObjectProperty.IsClosedUnderCokernels (IsConstructibleModuleObject R) ∧\n      ObjectProperty.IsClosedUnderExtensions (IsConstructibleModuleObject R)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

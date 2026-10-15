@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-proetale-free-epi-local-splitting",
+ "kind": "statement",
+ "title": "Local splitting of epimorphisms onto finite free internal module sheaves",
+ "statement": "Let X be a scheme and R a commutative ring object in abelian sheaves on X_proet. For internal R-modules M,N and an epimorphism f:M→N with N finite free, there exists a pro-etale cover of X on every member of which the restricted f is a split epimorphism. No noetherianity or coefficient field assumption is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, local lifting of finitely many module generators"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Underlying abelian sheaf epimorphisms are locally surjective. The sheaf unit and the adjunction with sheafification convert a local section lift into a map from the regular module. The module action identity makes this correspondence compatible with the given module epimorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose a finite free presentation of the target as a finite biproduct of regular modules. Apply the preceding local lift to all its basis maps on a common finite refinement. The biproduct of the resulting lifts, transported through the chosen free-module isomorphism and the pullback regular-module comparison, is a section. Its composite with the restricted f is the identity by the biproduct component equations. For rank zero the same equations require no basis lifts.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, local lifting of finitely many module generators",
+  "note": "Return repair: the existing private freeEpiLocalSplitting theorem already proves this statement. Import and apply it directly with import all; the new ProEtaleFreeEpiLocalSplitting module and all of its copied helpers are pruned. The node is retained and attached to the existing declaration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An epimorphism onto a finite free sheaf of internal modules splits locally by lifting its basis",
+   "date": "2026-10-16",
+   "results": "0 hits: ; service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphism onto a finite free sheaf of internal modules splits locally by lifting its basis",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.GeneratingSections.epi, SheafOfModules.GeneratingSections.ofEpi, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.GeneratingSections.ofEpi_s, SheafOfModules.GeneratingSections.ofEpi_I, SheafOfModules.generatorsOfIsCokernelFree_π",
+   "verdict": "Search found SheafOfModules generator interfaces, not the internal Mod local splitting statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSplitEpi",
+   "date": "2026-10-16",
+   "results": "0 hits: ; loogle: unknown identifier 'IsSplitEpi'",
+   "verdict": "Unqualified identifier not recognized; no direct local splitting match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSplitEpi.*IsFree|IsFree.*IsSplitEpi",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No direct Mathlib match for internal sheaf modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralReductionConservative",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Integral coefficient reduction in the continuous-coefficient proper base change step",
+   "via": [
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.CondensedConstructibleSerre",
+  "declaration": "AlgebraicGeometry.ProEtale.freeEpiLocalSplitting",
+  "statement": "private lemma freeEpiLocalSplitting : FreeEpiLocalSplitting.{u}",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16",
+  "note": "Existing proved private lemma, accessible with import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre; its private FreeEpiLocalSplitting abbreviation unfolds to the full quantified statement of this node."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518326",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
