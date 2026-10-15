@@ -38,7 +38,8 @@
   "lem-weil-pbc-sets-etale-inverse-image-composition-units",
   "lem-weil-pbc-etale-base-change-continuous",
   "def-sbc-smooth-morphisms",
-  "def-pc-scheme-fibre"
+  "def-pc-scheme-fibre",
+  "sbc-def-base-change-map"
  ],
  "proof": [
   {
@@ -279,5 +280,28 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-7f55e8096 (reviewer sub-agent of L); spot-checked: Mathematics, hypotheses, coefficient category, canonical base-change morphism, source routes, all six proof steps, edge cases, duplicate audit, and Mathlib searches pass. The new chart node claims the exact sorry-free declaration AlgebraicGeometry.exists_etaleCover_factorization (SlicingFlat.lean:599-609) but omitted the required lean_audit.slopmaster2 closed attachment. Added the corrected whole node JSON at fixes/dag/nodes/sec-smooth-base-change/lem-sbc-flat-reduced-etale-connected-charts.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetDegreeZeroFlatBaseChange",
+  "declaration": "AlgebraicGeometry.isIso_etaleSetDegreeZeroBaseChange_of_flat",
+  "declarations": [
+   "AlgebraicGeometry.isIso_etaleSetDegreeZeroBaseChange_of_flat",
+   "AlgebraicGeometry.isIso_etaleSetDegreeZeroBaseChange_of_smooth"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetDegreeZeroFlatBaseChange.lean",
+  "statement": "theorem isIso_etaleSetDegreeZeroBaseChange_of_flat {X Y S T : Scheme.{u}} {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S} (sq : ChosenCartesianSquare h e f g) [Flat f] [LocallyOfFinitePresentation f] (hf : ∀ s : S, GeometricallyReduced (f.fiberToSpecResidueField s)) (F : Sheaf T.smallEtaleTopology (Type (u + 1))) : IsIso (Etale.setBaseChangeArrow sq F)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Second reading: reuse the landed Etale.setBaseChangeArrow from sbc-def-base-change-map instead of duplicating its canonical set exchange construction. The existing unit/composition/counit formula is the adjoint transpose specified in this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fe93e78c5",
+  "group": "NM",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, source passages, canonical exchange map, hypotheses, conclusions, universes, edge cases, docstrings, and verbatim signature. Immutable module compiled cleanly through scompile.py in both modes. No fixes needed; repositories and branch head unchanged."
  }
 }
