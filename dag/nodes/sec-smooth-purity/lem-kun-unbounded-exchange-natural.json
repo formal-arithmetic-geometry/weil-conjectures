@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "lem-kun-unbounded-exchange-natural",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sbc-lem-bc-naturality"
+  ]
  },
  "kind": "statement",
  "title": "Naturality of the unbounded exchange morphism",
@@ -12,31 +14,139 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-unbounded-exchange-natural.md",
   "place": "node lem-kun-unbounded-exchange-natural, order 1665"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-kun-unbounded-exchange"
+ ],
  "proof": [
   {
-   "text": "Choose a morphism of K-injective resolutions over $\\varphi$, which\nexists and is unique up to chain homotopy because K-injective\nresolutions exist and any two of them are chain-homotopy equivalent\n([prop-weil-pbc-kinjective-resolutions-exist]), and represent the\nderived functors by these K-injective resolutions,\n[def-weil-pbc-kinjective-resolutions].\nThe composite $f'^{-1}g^{-1}Rf_*K\\to g'^{-1}K$ whose mate defines\n$\\Ex_{\\square,K}$ in [def-kun-unbounded-exchange] is natural in\n$K$, its constituents $\\theta_\\square$ and\n$g'^{-1}\\varepsilon_f$ being natural transformations; the mate of a\nnatural composite under the fixed adjunction $f'^{-1}\\dashv Rf'_*$\nis natural, so the displayed square commutes.",
+   "text": "Use the unbounded module functors and derived adjunctions of [def-kun-unbounded-exchange]. Write $F=f^{-1}$, $R=Rf_*$, $F'=f'^{-1}$, $R'=Rf'_*$, $G=g^{-1}$, $H=g'^{-1}$, $U=GR$ and $V=R'H$, with composition read from right to left. Write $\\theta:F'G\\xrightarrow{\\sim}HF$ for its natural derived square comparison. For an object $K$ put $a_K=\\eta_{f',UK}$, $b_K=R'(\\theta_{RK})$, and $c_K=R'H(\\varepsilon_{f,K})$. The explicit defining formula is $\\Ex_{\\square,K}=c_K\\circ b_K\\circ a_K$. For $\\varphi:K\\to K'$, naturality of the adjunction unit at $U\\varphi$ gives\n$$R'F'(U\\varphi)\\circ a_K=a_{K'}\\circ U\\varphi.$$\nThis is the defining naturality identity for the unit, with its source and target evaluated at $UK$ and $UK'$.",
    "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "def-weil-pbc-kinjective-resolutions",
     "def-kun-unbounded-exchange"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-unbounded-exchange-natural.md",
+    "place": "Proof, final sentence: naturality of the mate; explicit constituent calculation, step 1"
+   }
+  },
+  {
+   "text": "Apply naturality of the natural isomorphism $\\theta$ in [def-kun-unbounded-exchange] to $R\\varphi:RK\\to RK'$. It says $HF(R\\varphi)\\circ\\theta_{RK}=\\theta_{RK'}\\circ F'G(R\\varphi)$. Apply the functor $R'$ to this equality and use preservation of composition. Since $G(R\\varphi)=U\\varphi$, the result is\n$$R'HF(R\\varphi)\\circ b_K=b_{K'}\\circ R'F'(U\\varphi).$$",
+   "uses": [
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-unbounded-exchange-natural.md",
+    "place": "Proof, final sentence: naturality of the mate; explicit constituent calculation, step 2"
+   }
+  },
+  {
+   "text": "For the adjunction $F\\dashv R$ provided by [def-kun-unbounded-exchange], the counit's defining naturality identity at $\\varphi$ is $\\varphi\\circ\\varepsilon_{f,K}=\\varepsilon_{f,K'}\\circ FR(\\varphi)$. Apply the functors $H$ and $R'$ and use their preservation of composition. With the notation of step 1 this is\n$$V\\varphi\\circ c_K=c_{K'}\\circ R'HF(R\\varphi).$$",
+   "uses": [
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-unbounded-exchange-natural.md",
+    "place": "Proof, final sentence: naturality of the mate; explicit constituent calculation, step 3"
+   }
+  },
+  {
+   "text": "Substitute the three equalities of steps 1--3 into the explicit exchange formula of [def-kun-unbounded-exchange], using associativity:\n$$\\begin{aligned}\nV\\varphi\\circ\\Ex_{\\square,K}\n&=V\\varphi\\circ c_K\\circ b_K\\circ a_K\\\\\n&=c_{K'}\\circ R'HF(R\\varphi)\\circ b_K\\circ a_K\\\\\n&=c_{K'}\\circ b_{K'}\\circ R'F'(U\\varphi)\\circ a_K\\\\\n&=c_{K'}\\circ b_{K'}\\circ a_{K'}\\circ U\\varphi\\\\\n&=\\Ex_{\\square,K'}\\circ U\\varphi.\n\\end{aligned}$$\nHere $U\\varphi=g^{-1}Rf_*(\\varphi)$ and $V\\varphi=Rf'_*g'^{-1}(\\varphi)$, so this is exactly commutativity of the displayed square.",
+   "uses": [
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-unbounded-exchange-natural.md",
+    "place": "Proof, final sentence: naturality of the mate; explicit constituent calculation, step 4"
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-weil-pbc-kinjective-resolutions",
   "def-kun-unbounded-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-unbounded-exchange-natural.md",
-  "place": "## Proof"
+  "place": "Imported proof, final sentence: expanded into unit, square comparison and counit naturality identities. The referenced blueprint file is absent locally; WANTED is recorded in report.md."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the unbounded derived etale sheaf base change exchange morphism in the complex",
+   "results": "8 hits: KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+   "date": "2026-10-16",
+   "verdict": "no match for the specific unbounded module-sheaf exchange; generic naturality and mate infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-16",
+   "verdict": "no match for the specific unbounded module-sheaf exchange; generic naturality and mate infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChange|unbounded.*exchange|baseChange.*naturality",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match for the specific unbounded module-sheaf exchange; generic naturality and mate infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a derived base change map in an unbounded complex of sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation obtained by composing an adjunction unit a natural square isomorphism and an adjunction counit is natural in its argument",
+   "results": "8 hits: CategoryTheory.Adjunction.homEquiv_naturality_right_square_assoc, CategoryTheory.Adjunction.unit_naturality_assoc, CategoryTheory.Adjunction.unit_naturality, CategoryTheory.Adjunction.homEquiv_naturality_left_square_assoc, CategoryTheory.Adjunction.homEquiv_naturality_right_square, CategoryTheory.Adjunction.Triple.leftToRight_app, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.Equivalence.adjointify_η_ε_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match for the specific unbounded module-sheaf exchange; generic naturality and mate infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem naturality|naturality :|naturality \\(",
+   "results": "1 hits: 67",
+   "date": "2026-10-16",
+   "verdict": "no match for the specific unbounded module-sheaf exchange; generic naturality and mate infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "structure NatTrans|naturality|mateEquiv",
+   "results": "5 hits: 53, 84, 107, 108, 117",
+   "date": "2026-10-16",
+   "verdict": "no match for the specific unbounded module-sheaf exchange; generic naturality and mate infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-16",
+   "verdict": "no match for the specific unbounded module-sheaf exchange; generic naturality and mate infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "structure NatTrans|naturality ⦃",
+   "results": "3 hits: Mathlib/CategoryTheory/NatTrans.lean, Mathlib/CategoryTheory/NatTrans.lean, Mathlib/CategoryTheory/Profunctor/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the specific unbounded module-sheaf exchange; generic naturality and mate infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "^def mateEquiv",
+   "results": "1 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the specific unbounded module-sheaf exchange; generic naturality and mate infrastructure only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +170,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-unbounded-exchange-natural",
+  "worker": "stage1",
+  "summary": "Kept the statement and unbounded constant-ring module coefficients. Added the square, category and exchange definition statement dependencies. Removed unnecessary resolution-level proof dependencies; wrote the three naturality identities and their explicit composite calculation from the exchange definition. Searched project declarations, the whole blueprint and Mathlib: the named project naturality theorem is bounded below, so not an attachment. No new nodes.",
+  "blueprint": "Imported proof, only paragraph: steps 1--4 expand its final sentence about naturality of the defining composite and its mate; the preliminary choice of resolution morphisms is unnecessary. The unit has no prescribed proof steps; its statement and chapter are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q24-9688b64da",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q24-9688b64da (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, recovered blueprint sources, and unit/chapter route. All four naturality steps are correctly typed elementary calculations. Checked edge cases, DAG duplicate/generalization candidates, and exact master morphism/coefficient distinctions. No new nodes or repairs; findings recorded in review.md."
+ }
 }
