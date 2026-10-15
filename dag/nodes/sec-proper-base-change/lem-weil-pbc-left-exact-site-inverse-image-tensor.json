@@ -28,19 +28,18 @@
  ],
  "proof": [
   {
-   "text": "The finite-limit hypothesis gives the covering fibre-product comparisons in the definition of continuity, and cover preservation gives its other clause. The continuous-pushforward node therefore shows that precomposition R sends sheaves to sheaves. Apply the adjunction node in sets and in abelian groups: L is precisely sheafification of the left Kan extension along u^op and L is left adjoint to R. Smallness makes each comma category small, so its colimit exists in the stipulated larger universe.",
+   "text": "Cover preservation gives J <= K.comap U. Finite-limit preservation supplies J.PullbacksPreservedBy U. Apply the proved Mathlib isContinuous_toGrothendieck_of_pullbacksPreservedBy to obtain continuity. The constructed Kan-extension/sheafification inverse images in sets, abelian groups and modules have the canonical sheafAdjunctionContinuous adjunctions.",
    "uses": [
-    "lem-weil-pbc-site-continuous-pushforward-sheaf",
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "00WV definition-continuous; 00WW lemma-pushforward-sheaf; 00WX lemma-adjoint-sheaves"
+    "document": "Lean library (Mathlib and WeilConjectures), implementing Stacks Tags 00X6 and 03EL",
+    "place": "Mathlib/CategoryTheory/Sites/Continuous.lean, isContinuous_toGrothendieck_of_pullbacksPreservedBy; Sites/Pullback.lean, sheafAdjunctionContinuous"
    }
   },
   {
-   "text": "The presheaf-pullback node (2) applies because C has finite limits and u preserves them: every comma category I_W^op is filtered and the set-valued Kan extension preserves finite limits. Inclusion of sheaves into presheaves preserves limits by the sectionwise-limits node, and sheafification preserves finite limits by the sheafification node. Their composite L therefore preserves finite limits. The left-adjoint-colimits node applied to the preceding adjunction gives all colimits. Thus the adjunction is a geometric morphism in the stated direction.",
+   "text": "Apply flat_of_preservesFiniteLimits. Its comma categories are filtered. The proved general-universe instance preservesFiniteLimits_op_lan_of_flat applies to sets and abelian groups: shrink AB5 from size (u+1,u+1) to (u,u+1), the comma-category size. The composite with the sheaf inclusion and sheafification preserves finite limits. The set and abelian adjunctions give colimits. Abelian pushforward is additive on sectionwise morphisms, so left_adjoint_additive gives additive pullback. Preservation of finite limits and finite colimits then gives ShortExact.map_of_exact. This is the finite-limit Kan-extension argument of 00X6, without the auxiliary abelian-group-object lifting route.",
    "uses": [
     "lem-weil-pbc-presheaf-pullback-sets-left-exact",
     "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
@@ -49,80 +48,64 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "00X3 lemma-directed; 00X5 lemma-directed-morphism; 00X6 proposition-get-morphism"
+    "document": "Lean library (Mathlib and WeilConjectures), implementing Stacks Tags 00X6 and 03EL",
+    "place": "WeilConjectures/Mathlib/CategoryTheory/Functor/Flat.lean, preservesFiniteLimits_op_lan_of_flat; Mathlib/Sites/Pullback.lean, sheafPullback finite-limit instance; Adjunction/Additive.lean; ShortComplex.ShortExact.map_of_exact"
    }
   },
   {
-   "text": "The preceding continuity and set-valued finite-limit preservation make u a morphism of sites, so the abelian-exactness node applies without adding a hypothesis: the abelian L is additive and preserves finite limits and finite colimits, hence short exact sequences. Its adjunction from step 1 also gives all colimits. The underlying-sheaf node identifies the underlying sets of abelian L with set-valued L. Its group operations are the images of the original operations: the adjunction unit is an abelian homomorphism, and uniqueness of adjuncts determines addition and zero after the product comparisons of step 2.",
+   "text": "Forgetting module structure on either site is left adjoint to sectionwise coinduction, by the proved Sheaf.forget₂CoinduceAdj. Compose module pullback with the forgetful adjunction on D, and compose the forgetful adjunction on C with abelian pullback. Their right adjoints are definitionally equal, because sectionwise coinduction commutes with precomposition. The uniqueness isomorphism a.leftAdjointUniq b gives exactly the required natural isomorphism between module pullback followed by forgetting and forgetting followed by abelian pullback. No arbitrary object is chosen from an existence theorem.",
    "uses": [
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-site-pullback-abelian-underlying",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "04JC lemma-flat-pullback-exact, first paragraph; 03DC lemma-exactness-pushforward-pullback"
+    "document": "Lean library (Mathlib and WeilConjectures), implementing Stacks Tags 00X6 and 03EL",
+    "place": "WeilConjectures/Algebra/Category/ModuleCat/Sheaf/Coinduce.lean, Sheaf.forget₂CoinduceAdj; Mathlib/CategoryTheory/Adjunction/Unique.lean, leftAdjointUniq"
    }
   },
   {
-   "text": "Write V for underlying sheaves of sets. A map from F tensor_Z G to an abelian sheaf H is uniquely a natural sectionwise Z-bilinear map VF times VG to VH: first use the ordinary sectionwise tensor universal property and then the sheafification adjunction. For any abelian sheaf H on D, set-valued adjunction and the product comparison give bijections Bilin(F,G,RH) = Bilin(LF,LG,H). Explicitly, b on the left has adjunct beta = epsilon_VH composed with Lb composed with the inverse of L(VF times VG) -> VLF times VLG; the inverse sends beta to Rbeta composed with (eta_VF,eta_VG). Naturality and the triangle identities make these inverse. Bilinearity is preserved in both directions: transpose the equation b(a+a_prime,c)=b(a,c)+b(a_prime,c) on VF times VF times VG, using preservation of this triple product and addition from step 3; transpose the equation in the second variable on VF times VG times VG. The zero equations transpose using the terminal object, and integer linearity follows from additivity. Thus Hom(L(F tensor_Z G),H) = Bilin(F,G,RH) = Bilin(LF,LG,H) = Hom(LF tensor_Z LG,H), naturally in H. Applying these bijections to identity maps gives mutually inverse tensor comparisons. The forward comparison is adjoint to (s,t) -> eta_F(s) tensor eta_G(t), fixing its normalization and naturality.",
+   "text": "Use the localized monoidal structure Sheaf.monoidalCategory and its braiding. Filtered comma categories are sifted; tensoring in ModuleCat is a left adjoint because modules form a closed monoidal category, so it preserves the required colimits. The existing proved sheafPullbackMonoidal supplies the strong monoidal structure; its underlying oplax structure is definitionally sheafPullbackOplaxMonoidal. Its proof identifies the oplax comparison with the Kan-extension tensor comparison followed by monoidal sheafification, so this is the stated sheaf tensor. The canonical pullback-pushforward adjunction is monoidal and pushforward is lax braided. Adjunction.μ_comp_map_braiding gives the braided axiom for pullback. Choose these canonical structures, with all normalization equalities reflexive.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-site-pullback-abelian-underlying"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "03EL lemma-tensor-product-pullback, all Hom/Bilin equalities with the third equality expanded"
-   }
-  },
-  {
-   "text": "Define underline{Z} as sheafification of the constant presheaf Z. A map underline{Z} -> H is uniquely a compatible family h_U in H(U), the image of 1; equivalently it is a map from the terminal sheaf to VH. The sheafification adjunction, the abelian adjunction, the set adjunction and L(*) = * therefore give Hom(L underline{Z}_C,H) = Hom(underline{Z}_C,RH) = Hom(*_C,RVH) = Hom(*_D,VH) = Hom(underline{Z}_D,H). Identity maps give inverse unit comparisons. The comparison sends the pullback of 1 to 1 and, by additivity, the pullback of n to n for every integer n.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "03EL lemma-tensor-product-pullback specialized to the integer unit; explicit free-abelian-unit calculation"
-   }
-  },
-  {
-   "text": "The composition node supplies the adjunction-compatible inverse-image comparison for two composable site functors (with its labels relabelled to our orientation); its unit compatibility sends the generator eta_composite(s) to eta_second(eta_first(s)). The identity comparison sends eta_identity(s) to s by the triangle identity. To check the monoidal diagrams, take adjuncts and precompose with the universal bilinear map F times G -> F tensor_Z G: both composition routes send (s,t) to eta_second(eta_first(s)) tensor eta_second(eta_first(t)), and both identity routes send (s,t) to s tensor t. The unit routes send 1 to 1. These checks determine the maps because of the Hom/Bilin bijections of step 4 and the unit bijections of step 5; they do not assume that pullback sheaves are evaluated by precomposition. For associativity, after the same adjunction and universal-map reductions both routes send (s,t,r) to (eta(s) tensor eta(t)) tensor eta(r), identified with eta(s) tensor (eta(t) tensor eta(r)) by associativity. For symmetry both send (s,t) to eta(t) tensor eta(s). For the left and right unit diagrams both send (n,s) or (s,n) to n eta(s). The elementary identities for ordinary tensors descend through sheafification by its uniqueness property. Consequently the tensor and unit comparisons define a strong symmetric monoidal functor, and the composition and identity comparisons are monoidal.",
-   "uses": [
-    "lem-weil-pbc-site-morphism-composition",
     "def-pur-sheaf-tensor-product",
     "def-weil-pbc-sheafification"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "03CB lemma-composition-morphisms-sites; 03EL lemma-tensor-product-pullback; RefactorInstruction.tex Section 4 prop:pX"
+    "document": "Lean library (Mathlib and WeilConjectures), implementing Stacks Tags 00X6 and 03EL",
+    "place": "WeilConjectures/Mathlib/CategoryTheory/Sites/Monoidal.lean, sheafPullbackMonoidal and isMonoidal_sheafAdjunctionContinuous; Mathlib/CategoryTheory/Sites/Monoidal.lean, Sheaf.monoidalCategory; WeilConjectures/Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Adjunction.μ_comp_map_braiding"
+   }
+  },
+  {
+   "text": "For composable U,V, establish continuity and representable flatness and use the same canonical strong monoidal structures for U,V,U⋙V and the identity. The proved pushforward comparison sheafPushforwardContinuousComp' (Iso.refl _) is monoidal. Conjugate it between the composite pullback adjunction and the pullback adjunction of U⋙V. The resulting isomorphism has the direction required in the statement; isMonoidal_conjugateEquiv_symm makes it monoidal. unit_conjugateEquiv_symm identifies its unit; the pushforward comparison has identity components, so its formula reduces to the iterated units. For the identity, conjugate the inverse of sheafPushforwardContinuousId' (Iso.refl _) between Adjunction.id and the identity-site pullback adjunction. That pushforward comparison is monoidal, hence so is its conjugate, and the same unit equation reduces to the inverse of sheafPushforwardContinuousId. These are calculations with adjunction units, not an assertion that pullback is sectionwise precomposition.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lean library (Mathlib and WeilConjectures), implementing Stacks Tags 00X6 and 03EL",
+    "place": "WeilConjectures/CategoryTheory/Sites/MonObj.lean, isMonoidal_sheafPushforwardContinuousComp' and isMonoidal_sheafPushforwardContinuousId'; WeilConjectures/CategoryTheory/Monoidal/Conjugate.lean, isMonoidal_conjugateEquiv_symm; Mathlib/CategoryTheory/Adjunction/Mates.lean, unit_conjugateEquiv_symm"
    }
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-sheafification",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-weil-pbc-presheaf-pullback-sets-left-exact",
   "lem-weil-pbc-sheafification-sets-exact",
-  "lem-weil-pbc-site-continuous-pushforward-sheaf",
-  "lem-weil-pbc-site-morphism-composition",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-site-pullback-abelian-underlying",
   "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 00X6 proposition-get-morphism and sites-modules.tex Tag 03EL lemma-tensor-product-pullback; coherence on pure tensors follows the blueprint RefactorInstruction.tex Section 4 prop:pX"
+  "by": "agent",
+  "group": "C4",
+  "date": "2026-10-15",
+  "document": "Existing proved Mathlib and WeilConjectures APIs; Stacks Tags 00X6 and 03EL",
+  "place": "Complete Lean proof from the general-universe flat Kan-extension, coinduction, canonical monoidal sheaf-pullback and monoidal conjugation APIs. All tools have been checked by #print axioms on the resulting two theorems."
  },
  "mathlib_searches": [
   {
@@ -233,5 +216,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Two declarations cover all clauses: exact inverse image and its normalized strong symmetric tensor structure, then adjunction-compatible monoidal composition/identity. Abelian groups use their unique integer module action via ULift.ringEquiv; a natural isomorphism explicitly identifies the module and abelian inverse-image functors. No node statement changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-99c53",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T154158-L-160393",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean module and DAG node matched the packet and prior signatures; all delivered files and five direct importers compiled successfully."
  }
 }

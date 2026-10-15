@@ -8,22 +8,20 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.CategoryTheory.SitePullbackAbelianUnderlying
-import Sheaf.CategoryTheory.SiteMorphismComposition
 public import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Functor.Flat
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.CategoryTheory.Adjunction.Additive
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
+import WeilConjectures.CategoryTheory.Sites.MonObj
+import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
 # Exact symmetric monoidal inverse image on a site
@@ -32,10 +30,11 @@ Source: Stacks Project, Sites, Tag 00X6; Modules on Sites, Tag 03EL;
 RefactorInstruction.tex, Section 4, prop:pX
 (blueprint: lem-weil-pbc-left-exact-site-inverse-image-tensor).
 
-Integer-module sheaves encode abelian sheaves by the unique integer action, transported
-along `ULift.ringEquiv`. The tensor is the existing sheafification of the sectionwise
-module tensor, with the canonical oplax comparison of sheaf pullback. Heterogeneous
-equalities fix the monoidal structures without introducing file-local instances.
+Integer-module sheaves encode abelian sheaves by the unique integer action.
+The comparison of their pullbacks follows from the sectionwise coinduction adjunction.
+The tensor is the existing sheafification of the sectionwise module tensor, with the
+canonical oplax comparison of sheaf pullback. Heterogeneous equalities fix the monoidal
+structures without introducing file-local instances.
 -/
 
 @[expose] public section
@@ -47,44 +46,32 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
+-- Continuity is consumed by instance synthesis in the unchanged existential signature.
+set_option linter.unusedVariables false in
 /-- Source: Stacks, Tags 00X6 and 03EL; RefactorInstruction.tex Section 4 prop:pX
 (blueprint: lem-weil-pbc-left-exact-site-inverse-image-tensor).
 
 The Kan-extension inverse image, its exactness, and its normalized tensor structure.
 
 Proof:
-1. Cover preservation and finite-limit preservation imply Stacks continuity, by
-   lem-weil-pbc-site-continuous-pushforward-sheaf. Small comma categories give the
-   left Kan extension and the sheafification adjunction
-   (lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction).
-2. The comma categories are filtered. Thus the set Kan extension preserves finite
-   limits (lem-weil-pbc-presheaf-pullback-sets-left-exact). Inclusion of sheaves
-   preserves limits (lem-weil-pbc-site-sheaf-sets-limits-sectionwise), and
-   sheafification is left exact (lem-weil-pbc-sheafification-sets-exact).
-   The composite is left exact; its adjunction gives all colimits
-   (lem-weil-pbc-left-adjoint-preserves-colimits). This is a geometric morphism.
-3. On abelian sheaves, apply lem-weil-pbc-site-pullback-abelian-exact and
-   lem-weil-pbc-site-pullback-abelian-underlying: the functor is additive and exact,
-   and its underlying set sheaf is the set inverse image. The unique integer
-   action identifies this with the integer-module construction.
-4. The tensor represents sectionwise bilinear maps followed by sheafification
-   (def-pur-sheaf-tensor-product and def-weil-pbc-sheafification). Transpose a
-   bilinear map through the adjunction using the product comparison; addition,
-   zero, and integer scalar multiplication transpose because finite products
-   are preserved. Yoneda gives the tensor comparison, normalized by sending
-   the adjunction-unit images of a pair to their tensor.
-5. Maps from the integer unit are maps from the terminal set sheaf to the
-   underlying set sheaf. The set and abelian adjunctions and preservation of
-   the terminal object identify the two unit objects, carrying 1 to 1.
-6. The composition comparison of lem-weil-pbc-site-morphism-composition carries
-   the composite unit to the iterated units; the identity comparison carries
-   its unit to the identity. After transposing and precomposing with universal
-   bilinear maps, both composition routes send a pair to the tensor of its
-   iterated unit images. Both identity routes send it to its original tensor.
-   Unit routes send 1 to 1. The associativity routes agree on triples of pure
-   tensors, symmetry interchanges the pair, and the unitor routes send (n,s)
-   to n times s. The universal properties determine all maps, proving strong
-   symmetric monoidality and monoidality of composition and identity.
+1. Use `isContinuous_toGrothendieck_of_pullbacksPreservedBy`: finite-limit
+   preservation supplies the covering pullback comparisons, and `hUcover` supplies
+   cover preservation. The constructed sheaf pullback has its canonical adjunction.
+2. `flat_of_preservesFiniteLimits` makes the comma categories filtered.
+   `preservesFiniteLimits_op_lan_of_flat` applies in the stated, unequal universes:
+   filtered colimits are exact in sets and abelian groups. Composing with the
+   limit-preserving sheaf inclusion and left-exact sheafification gives finite-limit
+   preservation. The adjunctions give colimits. Abelian pushforward is additive
+   sectionwise, so its left adjoint is additive and preserves short exact sequences.
+3. On either site, forgetting module structure is left adjoint to sectionwise
+   coinduction (`Sheaf.forget₂CoinduceAdj`). Compose these with the two pullback
+   adjunctions. Their right adjoints agree because coinduction and precomposition
+   commute. `Adjunction.leftAdjointUniq` gives the required module/abelian comparison.
+4. Take the existing localized sheaf tensor and braiding. Filtered comma categories
+   are sifted and tensoring in modules preserves their colimits, so
+   `sheafPullbackMonoidal` supplies a strong monoidal structure whose oplax structure
+   is definitionally the prescribed one. Transposing the braided axiom through the
+   monoidal adjunction (`Adjunction.μ_comp_map_braiding`) proves braidedness.
 -/
 theorem siteInverseImage_tensor
     {C D : Type (u + 1)}
@@ -137,46 +124,84 @@ theorem siteInverseImage_tensor
         ℤ)) J.toGrothendieck K.toGrothendieck) ∧
               Nonempty (sheafPullback U (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) J.toGrothendieck
         K.toGrothendieck).Braided := by
-  sorry
+  let : J.PullbacksPreservedBy U := inferInstance
+  let hU : U.IsContinuous J.toGrothendieck K.toGrothendieck :=
+    U.isContinuous_toGrothendieck_of_pullbacksPreservedBy J K (by
+      intro X R hR
+      exact hUcover X R hR)
+  let : U.IsContinuous J.toGrothendieck K.toGrothendieck := hU
+  have : RepresentablyFlat U := flat_of_preservesFiniteLimits U
+  have : AB5OfSize.{u, u + 1} (Type (u + 1)) :=
+    AB5OfSize_shrink.{u, u + 1, u + 1, u + 1} _
+  have : AB5OfSize.{u, u + 1} AddCommGrpCat.{u + 1} :=
+    AB5OfSize_shrink.{u, u + 1, u + 1, u + 1} _
+  have hsetadj := sheafAdjunctionContinuous U (Type (u + 1)) J.toGrothendieck K.toGrothendieck
+  have hsetlim : PreservesFiniteLimits
+      (sheafPullback U (Type (u + 1)) J.toGrothendieck K.toGrothendieck) := by infer_instance
+  have hsetcol : PreservesColimitsOfSize.{u + 1, u + 1}
+      (sheafPullback U (Type (u + 1)) J.toGrothendieck K.toGrothendieck) :=
+    hsetadj.leftAdjoint_preservesColimits
+  let Fab := sheafPullback U AddCommGrpCat.{u + 1} J.toGrothendieck K.toGrothendieck
+  let abadj := sheafAdjunctionContinuous U AddCommGrpCat.{u + 1}
+    J.toGrothendieck K.toGrothendieck
+  let : (U.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
+      J.toGrothendieck K.toGrothendieck).Additive := ⟨by
+    intro X Y f g
+    ext W
+    rfl⟩
+  have : Fab.Additive := abadj.left_adjoint_additive
+  have : PreservesColimitsOfSize.{0, 0} Fab := abadj.leftAdjoint_preservesColimits
+  have : PreservesFiniteColimits Fab := inferInstance
+  have : PreservesFiniteLimits Fab := by dsimp [Fab]; infer_instance
+  refine ⟨hU, ⟨hsetadj⟩, hsetlim, hsetcol, ⟨abadj⟩, inferInstance,
+    inferInstance, inferInstance, ?_, ?_, ?_⟩
+  · intro S hS
+    exact hS.map_of_exact Fab
+  · let a := (sheafAdjunctionContinuous U (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
+        J.toGrothendieck K.toGrothendieck).comp
+        (Sheaf.forget₂CoinduceAdj K.toGrothendieck (ULift.{u + 1} ℤ))
+    let b := (Sheaf.forget₂CoinduceAdj J.toGrothendieck (ULift.{u + 1} ℤ)).comp abadj
+    exact ⟨a.leftAdjointUniq b⟩
+  · refine ⟨Sheaf.monoidalCategory _ _, Sheaf.monoidalCategory _ _, rfl, rfl,
+      Sheaf.braidedCategory _ _, Sheaf.braidedCategory _ _, HEq.rfl, HEq.rfl, ?_⟩
+    let : MonoidalCategory (Sheaf J.toGrothendieck
+        (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) := Sheaf.monoidalCategory _ _
+    let : MonoidalCategory (Sheaf K.toGrothendieck
+        (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) := Sheaf.monoidalCategory _ _
+    let : BraidedCategory (Sheaf J.toGrothendieck
+        (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) := Sheaf.braidedCategory _ _
+    let : BraidedCategory (Sheaf K.toGrothendieck
+        (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) := Sheaf.braidedCategory _ _
+    let m := sheafPullbackMonoidal U (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
+      J.toGrothendieck K.toGrothendieck
+    refine ⟨m, HEq.rfl, ?_⟩
+    exact ⟨{ braided := (sheafAdjunctionContinuous U
+      (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) J.toGrothendieck
+      K.toGrothendieck).μ_comp_map_braiding }⟩
 
+-- Continuity is consumed by instance synthesis in the unchanged existential signature.
+set_option linter.unusedVariables false in
 /-- Source: Stacks, Tags 00X6 and 03EL; RefactorInstruction.tex Section 4 prop:pX
 (blueprint: lem-weil-pbc-left-exact-site-inverse-image-tensor).
 
 The adjunction-compatible composition and identity comparisons are monoidal.
 
 Proof:
-1. Cover preservation and finite-limit preservation imply Stacks continuity, by
-   lem-weil-pbc-site-continuous-pushforward-sheaf. Small comma categories give the
-   left Kan extension and the sheafification adjunction
-   (lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction).
-2. The comma categories are filtered. Thus the set Kan extension preserves finite
-   limits (lem-weil-pbc-presheaf-pullback-sets-left-exact). Inclusion of sheaves
-   preserves limits (lem-weil-pbc-site-sheaf-sets-limits-sectionwise), and
-   sheafification is left exact (lem-weil-pbc-sheafification-sets-exact).
-   The composite is left exact; its adjunction gives all colimits
-   (lem-weil-pbc-left-adjoint-preserves-colimits). This is a geometric morphism.
-3. On abelian sheaves, apply lem-weil-pbc-site-pullback-abelian-exact and
-   lem-weil-pbc-site-pullback-abelian-underlying: the functor is additive and exact,
-   and its underlying set sheaf is the set inverse image. The unique integer
-   action identifies this with the integer-module construction.
-4. The tensor represents sectionwise bilinear maps followed by sheafification
-   (def-pur-sheaf-tensor-product and def-weil-pbc-sheafification). Transpose a
-   bilinear map through the adjunction using the product comparison; addition,
-   zero, and integer scalar multiplication transpose because finite products
-   are preserved. Yoneda gives the tensor comparison, normalized by sending
-   the adjunction-unit images of a pair to their tensor.
-5. Maps from the integer unit are maps from the terminal set sheaf to the
-   underlying set sheaf. The set and abelian adjunctions and preservation of
-   the terminal object identify the two unit objects, carrying 1 to 1.
-6. The composition comparison of lem-weil-pbc-site-morphism-composition carries
-   the composite unit to the iterated units; the identity comparison carries
-   its unit to the identity. After transposing and precomposing with universal
-   bilinear maps, both composition routes send a pair to the tensor of its
-   iterated unit images. Both identity routes send it to its original tensor.
-   Unit routes send 1 to 1. The associativity routes agree on triples of pure
-   tensors, symmetry interchanges the pair, and the unitor routes send (n,s)
-   to n times s. The universal properties determine all maps, proving strong
-   symmetric monoidality and monoidality of composition and identity.
+1. Establish continuity for both functors by covering pullbacks and then compose
+   it. Their finite-limit preservation gives representable flatness. Use the
+   canonical `sheafPullbackMonoidal` structures for both functors, their composite,
+   and the identity; all four prescribed oplax equalities are reflexive.
+2. Compose the pullback adjunctions. The source library proves that the canonical
+   pushforward composition isomorphism is monoidal. Its conjugate gives an
+   isomorphism from composite-site pullback to the iterated pullback, and
+   `isMonoidal_conjugateEquiv_symm` proves that it is monoidal.
+3. `unit_conjugateEquiv_symm` gives the composition unit equation. The canonical
+   pushforward comparison for a strict composite has identity components, leaving
+   exactly the iterated adjunction unit in the statement.
+4. Conjugate the inverse of the monoidal pushforward identity comparison between
+   the identity adjunction and the identity-site pullback adjunction. The same
+   conjugate-unit equation, and its identity components, give the required unit
+   equation. No componentwise description of pullback sections is assumed.
 -/
 theorem siteInverseImage_tensor_coherence
     {C D E : Type (u + 1)}
@@ -248,6 +273,90 @@ theorem siteInverseImage_tensor_coherence
           J.toGrothendieck J.toGrothendieck).map (e.hom.app F) =
             (Functor.sheafPushforwardContinuousId (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
           J.toGrothendieck).inv.app F) := by
-  sorry
+  let : J.PullbacksPreservedBy U := inferInstance
+  let : K.PullbacksPreservedBy V := inferInstance
+  let hU : U.IsContinuous J.toGrothendieck K.toGrothendieck :=
+    U.isContinuous_toGrothendieck_of_pullbacksPreservedBy J K (by
+      intro X R hR
+      exact hUcover X R hR)
+  let hV : V.IsContinuous K.toGrothendieck T.toGrothendieck :=
+    V.isContinuous_toGrothendieck_of_pullbacksPreservedBy K T (by
+      intro X R hR
+      exact hVcover X R hR)
+  let : U.IsContinuous J.toGrothendieck K.toGrothendieck := hU
+  let : V.IsContinuous K.toGrothendieck T.toGrothendieck := hV
+  let hUV : (U ⋙ V).IsContinuous J.toGrothendieck T.toGrothendieck :=
+    Functor.isContinuous_comp U V J.toGrothendieck K.toGrothendieck T.toGrothendieck
+  let : (U ⋙ V).IsContinuous J.toGrothendieck T.toGrothendieck := hUV
+  have : RepresentablyFlat U := flat_of_preservesFiniteLimits U
+  have : RepresentablyFlat V := flat_of_preservesFiniteLimits V
+  have : RepresentablyFlat (𝟭 C) := flat_of_preservesFiniteLimits (𝟭 C)
+  let A := ModuleCat.{u + 1} (ULift.{u + 1} ℤ)
+  let : MonoidalCategory (Sheaf J.toGrothendieck A) := Sheaf.monoidalCategory _ _
+  let : MonoidalCategory (Sheaf K.toGrothendieck A) := Sheaf.monoidalCategory _ _
+  let : MonoidalCategory (Sheaf T.toGrothendieck A) := Sheaf.monoidalCategory _ _
+  let : BraidedCategory (Sheaf J.toGrothendieck A) := Sheaf.braidedCategory _ _
+  let : BraidedCategory (Sheaf K.toGrothendieck A) := Sheaf.braidedCategory _ _
+  let : BraidedCategory (Sheaf T.toGrothendieck A) := Sheaf.braidedCategory _ _
+  let mU := sheafPullbackMonoidal U A J.toGrothendieck K.toGrothendieck
+  let mV := sheafPullbackMonoidal V A K.toGrothendieck T.toGrothendieck
+  let mUV := sheafPullbackMonoidal (U ⋙ V) A J.toGrothendieck T.toGrothendieck
+  let mId := sheafPullbackMonoidal (𝟭 C) A J.toGrothendieck J.toGrothendieck
+  refine ⟨hU, hV, hUV, Sheaf.monoidalCategory _ _, Sheaf.monoidalCategory _ _,
+    Sheaf.monoidalCategory _ _, rfl, rfl, rfl, mU, mV, mUV, mId,
+    HEq.rfl, HEq.rfl, HEq.rfl, HEq.rfl, ?_, ?_⟩
+  · let a := (sheafAdjunctionContinuous U A J.toGrothendieck K.toGrothendieck).comp
+      (sheafAdjunctionContinuous V A K.toGrothendieck T.toGrothendieck)
+    let b := sheafAdjunctionContinuous (U ⋙ V) A J.toGrothendieck T.toGrothendieck
+    let e := (conjugateIsoEquiv a b).symm
+      (Functor.sheafPushforwardContinuousComp' (Iso.refl (U ⋙ V)) A
+        J.toGrothendieck K.toGrothendieck T.toGrothendieck)
+    refine ⟨e, ?_, ?_⟩
+    · exact isMonoidal_conjugateEquiv_symm a b _
+    · intro F
+      have h := unit_conjugateEquiv_symm a b
+        (Functor.sheafPushforwardContinuousComp' (Iso.refl (U ⋙ V)) A
+          J.toGrothendieck K.toGrothendieck T.toGrothendieck).hom F
+      calc
+        _ = a.unit.app F ≫
+            (Functor.sheafPushforwardContinuousComp' (Iso.refl (U ⋙ V)) A
+              J.toGrothendieck K.toGrothendieck T.toGrothendieck).hom.app
+                ((sheafPullback U A J.toGrothendieck K.toGrothendieck ⋙
+                  sheafPullback V A K.toGrothendieck T.toGrothendieck).obj F) := h.symm
+        _ = _ := by
+          change a.unit.app F ≫ _ = a.unit.app F
+          have he : (Functor.sheafPushforwardContinuousComp' (Iso.refl (U ⋙ V)) A
+              J.toGrothendieck K.toGrothendieck T.toGrothendieck).hom.app
+                ((sheafPullback U A J.toGrothendieck K.toGrothendieck ⋙
+                  sheafPullback V A K.toGrothendieck T.toGrothendieck).obj F) = 𝟙 _ := by
+            ext X
+            simp [Functor.sheafPushforwardContinuousComp',
+              Functor.sheafPushforwardContinuousComp]
+            rfl
+          rw [he]
+          exact Category.comp_id _
+  · let a := Adjunction.id (C := Sheaf J.toGrothendieck A)
+    let b := sheafAdjunctionContinuous (𝟭 C) A J.toGrothendieck J.toGrothendieck
+    let e := (conjugateIsoEquiv a b).symm
+      (Functor.sheafPushforwardContinuousId' (Iso.refl (𝟭 C)) A J.toGrothendieck).symm
+    refine ⟨e, ?_, ?_⟩
+    · have : NatTrans.IsMonoidal
+          (Functor.sheafPushforwardContinuousId' (Iso.refl (𝟭 C)) A J.toGrothendieck).inv :=
+        inferInstance
+      exact isMonoidal_conjugateEquiv_symm a b
+        (Functor.sheafPushforwardContinuousId' (Iso.refl (𝟭 C)) A J.toGrothendieck).inv
+    · intro F
+      have h := unit_conjugateEquiv_symm a b
+        (Functor.sheafPushforwardContinuousId' (Iso.refl (𝟭 C)) A J.toGrothendieck).inv F
+      calc
+        _ = a.unit.app F ≫
+            (Functor.sheafPushforwardContinuousId' (Iso.refl (𝟭 C)) A
+              J.toGrothendieck).inv.app F := h.symm
+        _ = _ := by
+          change 𝟙 _ ≫ _ = _
+          rw [Category.id_comp]
+          ext X
+          simp [Functor.sheafPushforwardContinuousId', Functor.sheafPushforwardContinuousId]
+          rfl
 
 end CategoryTheory
