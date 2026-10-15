@@ -24,67 +24,65 @@
  ],
  "proof": [
   {
-   "text": "Use the concrete localization model of $D(\\mathcal A)$ in [def-weil-abstract-derived-category]: its objects are the complexes, and $Q$ changes the morphisms by inverting quasi-isomorphisms. For each complex $K$ choose, using the hypothesis, a quasi-isomorphism $u_K:K\\to I_K$ with $I_K$ K-injective. Regard $u_K$ as a morphism in $K(\\mathcal A)$ and put $q_K=Q(u_K)$, an isomorphism. These are objectwise choices; no functorial resolution is assumed. Set $RF(QK)=F(I_K)$.",
+   "text": "For each complex K choose a quasi-isomorphism f_K : K → J_K to a K-injective complex, using the given hypothesis. For each object X of D(A), choose a representative K_X with an isomorphism Q(K_X) ≅ X, using essential surjectivity of the localization in [def-weil-abstract-derived-category]. Put j(X)=J_(K_X). Compose the inverse representative isomorphism with Q(f_(K_X)) and the quotient/localization comparison to obtain e_X : X ≅ Qh(π(j(X))), where π is the homotopy-category quotient. This works for any chosen localization model, without objectwise equality.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070K, lemma-enough-K-injectives-implies; Tag 070I, lemma-K-injective (3); explicit construction and universal-property verification by the worker"
+    "document": "Stacks Project, Derived Categories",
+    "place": "Tags 070K and 070Y; Hom bijection from Tag 070I. Explicit construction and universal-property verification by E1."
    }
   },
   {
-   "text": "For a derived morphism $a:QK\\to QL$, apply the Hom bijection of [lem-weil-pbc-kinjective-hom-derived] with source $I_K$ and K-injective target $I_L$. It gives a unique $\\widetilde a:I_K\\to I_L$ in the homotopy category satisfying $Q(\\widetilde a)=q_L\\circ a\\circ q_K^{-1}$. Define $RF(a)=F(\\widetilde a)$. The lift of the identity is the identity, since its image is $q_Kq_K^{-1}$. For $b:QL\\to QM$, $Q(\\widetilde b\\circ\\widetilde a)=q_M\\circ b\\circ a\\circ q_K^{-1}$, so uniqueness gives $\\widetilde{b\\circ a}=\\widetilde b\\circ\\widetilde a$. Thus these choices define a functor on the entire derived category.",
+   "text": "The Hom bijection of [lem-weil-pbc-kinjective-hom-derived] defines a unique lift of any map Qh(K) → Qh(π(j(X))) to K → π(j(X)). Define R : D(A) → K(A) by R(X)=π(j(X)) and R(a)=lift(e_X⁻¹ ≫ a ≫ e_Y). Applying Qh and its injectivity on these Hom sets proves preservation of identities and composition: the middle e_Y and e_Y⁻¹ cancel. Set RF=R ⋙ F.",
    "uses": [
     "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070K, lemma-enough-K-injectives-implies; Tag 070I, lemma-K-injective (3); explicit construction and universal-property verification by the worker"
+    "document": "Stacks Project, Derived Categories",
+    "place": "Tags 070K and 070Y; Hom bijection from Tag 070I. Explicit construction and universal-property verification by E1."
    }
   },
   {
-   "text": "Define $\\eta_K=F(u_K):F(K)\\to RF(QK)$. If $f:K\\to L$ is a homotopy-category morphism, then $Q(\\widetilde{Qf}\\circ u_K)=q_L\\circ Qf=Q(u_L\\circ f)$. Injectivity of the Hom bijection in [lem-weil-pbc-kinjective-hom-derived], now with source $K$ and target $I_L$, gives $\\widetilde{Qf}\\circ u_K=u_L\\circ f$. Applying $F$ proves $RF(Qf)\\circ\\eta_K=\\eta_L\\circ F(f)$, so $\\eta:F\\to RF\\circ Q$ is natural.",
+   "text": "Define u_K : K → R(Qh(K)) as the unique lift of e_(Qh(K)). For a : K → L, apply Qh to a ≫ u_L and u_K ≫ R(Qh(a)); the definition of R and cancellation of e_(Qh(K)) give equal images. Injectivity of the Hom bijection into j(Qh(L)) proves naturality of u. Set η=whiskerRight u F.",
    "uses": [
     "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070K, lemma-enough-K-injectives-implies; Tag 070I, lemma-K-injective (3); explicit construction and universal-property verification by the worker"
+    "document": "Stacks Project, Derived Categories",
+    "place": "Tags 070K and 070Y; Hom bijection from Tag 070I. Explicit construction and universal-property verification by E1."
    }
   },
   {
-   "text": "Let $G:D(\\mathcal A)\\to\\mathcal T$ be any functor and $\\alpha:F\\to G\\circ Q$ any natural transformation. Define $\\beta_{QK}=G(q_K^{-1})\\circ\\alpha_{I_K}:F(I_K)\\to G(QK)$. For $a:QK\\to QL$, naturality of $\\alpha$ at $\\widetilde a$ gives $\\alpha_{I_L}\\circ F(\\widetilde a)=G(Q\\widetilde a)\\circ\\alpha_{I_K}$. Substituting $Q\\widetilde a=q_La q_K^{-1}$ yields $\\beta_{QL}\\circ RF(a)=G(a)\\circ\\beta_{QK}$. Naturality of $\\alpha$ at $u_K$ also gives $\\beta_{QK}\\circ\\eta_K=G(q_K^{-1})G(q_K)\\alpha_K=\\alpha_K$. This constructs a natural transformation $\\beta:RF\\to G$ whose composition with $\\eta$ is $\\alpha$.",
+   "text": "When K is K-injective, lift e_(Qh(π(K)))⁻¹ to g : R(Qh(π(K))) → π(K) using the same Hom bijection, this time with K-injective target K. Applying Qh to u_(π(K)) ≫ g and g ≫ u_(π(K)) gives the identity maps by the two inverse identities of e. Injectivity into K and into j(Qh(π(K))) gives the two inverse identities in K(A). Thus u_(π(K)) is invertible, and η_(π(K))=F(u_(π(K))) is invertible.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project, Derived Categories",
+    "place": "Tags 070K and 070Y; Hom bijection from Tag 070I. Explicit construction and universal-property verification by E1."
+   }
+  },
+  {
+   "text": "For any G : D(A) → T and α : F → Qh ⋙ G, define β_X = α_(R(X)) ≫ G(e_X⁻¹). Naturality of α at R(a), the defining formula Qh(R(a))=e_X⁻¹ ≫ a ≫ e_Y, and the inverse identities of e prove naturality of β. Naturality of α at u_K gives F(u_K) ≫ α_(R(Qh(K))) = α_K ≫ G(e_(Qh(K))); composing with G(e_(Qh(K))⁻¹) proves η ≫ whiskerLeft Qh β = α. Hence the map on natural transformations is surjective.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070K, lemma-enough-K-injectives-implies; Tag 070I, lemma-K-injective (3); explicit construction and universal-property verification by the worker"
+    "document": "Stacks Project, Derived Categories",
+    "place": "Tags 070K and 070Y; Hom bijection from Tag 070I. Explicit construction and universal-property verification by E1."
    }
   },
   {
-   "text": "To prove uniqueness, observe that the lift defining $RF(q_K)$ is $u_{I_K}$: its image under $Q$ is $q_{I_K}\\circ q_K\\circ q_K^{-1}=q_{I_K}$, and [lem-weil-pbc-kinjective-hom-derived] gives uniqueness with target $I_{I_K}$. Hence $RF(q_K)=F(u_{I_K})=\\eta_{I_K}$. If $\\gamma:RF\\to G$ satisfies $\\gamma_{QN}\\circ\\eta_N=\\alpha_N$ for every $N$, its naturality at $q_K$ gives $G(q_K)\\circ\\gamma_{QK}=\\gamma_{QI_K}\\circ RF(q_K)=\\gamma_{QI_K}\\circ\\eta_{I_K}=\\alpha_{I_K}$. Since $G(q_K)$ is invertible, $\\gamma_{QK}=G(q_K^{-1})\\alpha_{I_K}=\\beta_{QK}$. All derived objects occur as $QK$ in the chosen localization model. Thus composition with $\\eta$ is the asserted bijection, with inverse $\\alpha\\mapsto\\beta$.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
+   "text": "For injectivity, suppose β and γ have equal composites with η. Evaluate this equality at R(X), which is represented by the K-injective j(X). The preceding invertibility of u_(R(X)) implies that η_(R(X)) is an isomorphism, so cancellation gives β_(Qh(R(X))) = γ_(Qh(R(X))). Naturality of β and γ at the isomorphism e_X : X → Qh(R(X)), followed by cancellation of G(e_X), gives β_X=γ_X. Thus composition with η is bijective. Together with the K-injective computation established above, this proves the unchanged conclusion.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070K, lemma-enough-K-injectives-implies; Tag 070I, lemma-K-injective (3); explicit construction and universal-property verification by the worker"
-   }
-  },
-  {
-   "text": "For a K-injective complex $J$, both $J$ and $I_J$ are K-injective and $u_J$ is a quasi-isomorphism. The last clause of [lem-weil-pbc-kinjective-hom-derived] makes $u_J$ a homotopy equivalence, hence an isomorphism in $K(\\mathcal A)$. Applying the functor $F$ shows that $\\eta_J=F(u_J):F(J)\\to RF(QJ)$ is an isomorphism. This is exactly the derived-functor comparison constructed above. The existence and comparison clauses therefore hold for the stipulated exact $F$ (the universal-property construction itself needed only that $F$ is a functor).",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070K, lemma-enough-K-injectives-implies; Tag 070I, lemma-K-injective (3); explicit construction and universal-property verification by the worker"
+    "document": "Stacks Project, Derived Categories",
+    "place": "Tags 070K and 070Y; Hom bijection from Tag 070I. Explicit construction and universal-property verification by E1."
    }
   }
  ],
@@ -94,8 +92,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 070K/070Y for the assertion and 070I for the Hom bijection; direct lift construction replaces the general existence criterion invoked by 070K"
+  "document": "Stacks Project, Derived Categories",
+  "place": "Tags 070K/070Y, with the Hom bijection of 070I. E1 formalized the direct construction for arbitrary chosen localization models using representatives up to isomorphism; injectivity uses the comparison at K-injective replacements."
  },
  "mathlib_searches": [
   {
@@ -230,5 +228,15 @@
   "by": "NF",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261015T175721-L-667281",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
