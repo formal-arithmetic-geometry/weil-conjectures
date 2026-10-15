@@ -56,4 +56,36 @@ theorem perfectOverlapObjectPin_of_triangles
     _ = comparison.hom.app X ≫ transition.map stageObj.hom := by
           rw [← Category.assoc, hnatural]
 
+/-- Pasting the site-return and pullback-comparison component triangles gives
+the object pin. Source: Stacks Project, Tags 08DW and 0D5S.
+
+Proof: The site-return equation identifies the transported theta and return
+maps with a single map to the apex pullback object. The projection comparison
+equation identifies that map followed by the fixed base comparison with the
+stage object map after the middle comparison. These are exactly the two
+component equations required by `perfectOverlapObjectPin_of_triangles`; its
+conclusion follows for either open. -/
+theorem perfectOverlapObjectPin_of_component_triangles
+    {C D E F : Type*} [Category* C] [Category* D]
+    [Category* E] [Category* F]
+    (G : C ⥤ D) (apex : D ⥤ E) (stage : C ⥤ F) (transition : F ⥤ E)
+    (comparison : G ⋙ apex ≅ stage ⋙ transition)
+    (X : C) (O Y Z : D) (Q : F) (P : E)
+    (ψ : G.obj X ≅ O) (apexObj : apex.obj O ≅ P)
+    (base : P ≅ transition.obj Q) (stageObj : stage.obj X ≅ Q)
+    (gamma : G.obj X ⟶ Y) (theta : Y ⟶ Z) (returnMap : Z ⟶ O)
+    (middle : apex.obj Y ⟶ transition.obj (stage.obj X))
+    (siteMiddle : apex.obj Y ⟶ P)
+    (hψ : ψ.hom = gamma ≫ theta ≫ returnMap)
+    (hnatural : apex.map gamma ≫ middle = comparison.hom.app X)
+    (hreturn : apex.map theta ≫ apex.map returnMap ≫ apexObj.hom = siteMiddle)
+    (hbase : siteMiddle ≫ base.hom =
+      middle ≫ transition.map stageObj.hom) :
+    apex.map ψ.hom ≫ apexObj.hom ≫ base.hom =
+      comparison.hom.app X ≫ transition.map stageObj.hom := by
+  apply perfectOverlapObjectPin_of_triangles G apex stage transition comparison
+    X O Y Z Q P ψ apexObj base stageObj gamma theta returnMap middle hψ hnatural
+  simp only [← Category.assoc] at hreturn ⊢
+  rw [hreturn, hbase]
+
 end AlgebraicGeometry
