@@ -15228,3 +15228,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:45 L: merged deliver/C4/Sheaf.Algebra.Homology.LocallyFreeDerivedHom (stage 3; reviewer PASS; first push; landing 20261015T214542-L-2274697 (interface); batch 20261015T214540; modules 1; new nodes 0; change records: coord/changes/c4-locally-free-comparison-api.md)
 - 22:01 L: merged deliver/D2/Sheaf.Paper.TrivialKanHomotopyEquivalence (stage 3; reviewer PASS; first push; landing 20261015T220103-L-2439972 (proof); batch 20261015T220101; modules 1; new nodes 0)
 - 22:01 L: merged deliver/E1/Sheaf.AlgebraicTopology.SimplicialIndexFiniteInitial (stage 3; reviewer PASS; first push; landing 20261015T220111-L-2441985 (proof); batch 20261015T220101; modules 1; new nodes 0)
+- 22:01 L: merged deliver/M1/Sheaf.Paper.FiniteSplitHypercoverExistence (stage 3; reviewer PASS; first push; landing 20261015T220121-L-2447701 (proof); batch 20261015T220101; modules 1; new nodes 0)
