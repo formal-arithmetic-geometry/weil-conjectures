@@ -26,68 +26,67 @@
  ],
  "proof": [
   {
-   "text": "Assume first that A is admissible. By the finite-limit statement for semi-representable objects, form P = H(B) \\times_{H(A)} H(C) in SR(X), with projections r_B:P\\to H(B) and r_C:P\\to H(C). The maps in the pullback are p^* and q^* from the universal families in the definition of H.",
+   "text": "For a test object W, identify an S-family in K over W with a natural transformation from S to the simplicial set n |-> Mor(W,K_n). Use ULift on both sides to put simplex and morphism types in the same universe. The compatibility equations are exactly naturality. The explicit maps familyToNatTrans and natTransToFamily implement this identification, and familyToNatTrans is injective. Whiskering with uliftFunctor preserves colimits by Mathlib's whiskeringRight_preservesColimitsOfShape and ULift colimit-preservation instances. Apply IsPushout.desc to the lifted simplicial pushout to glue agreeing B- and C-families; its two factorization equations give the required restrictions. Apply IsPushout.hom_ext to show that two D-families with the same two restrictions agree. These are the proved private helpers glueFamilies and family_pushout_ext.",
    "uses": [
-    "lem-weil-pbc-semi-representable-finite-limits",
+    "def-weil-pbc-simplicial-set",
     "def-weil-pbc-simplicial-hom-object",
     "def-weil-pbc-semi-representable-object"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 017N (lemma-hom-from-coprod), proof: existence of the required Hom objects and the fibre product"
+    "place": "Lemma 017N (lemma-hom-from-coprod), proof, degree zero"
    }
   },
   {
-   "text": "For every W in SR(X), a D-family in K over W restricts along i and j to a B-family and a C-family. These restrictions agree after p and q, because i\\circ p = j\\circ q in the pushout square. Conversely, compatible B- and C-families agreeing after p and q define a unique D-family: in every degree assign a simplex of D its value from either B or C, using the pushout universal property; agreement on A makes this independent of the choice, and the simplicial compatibility equations hold because they hold on B and C. Thus D-families over W are naturally in bijection with pairs of B- and C-families whose restrictions to A agree.",
+   "text": "The representing property for A makes equality of morphisms to HA equivalent to equality of all universal-family components. Compose iStar followed by pStar and jStar followed by qStar with each component of uA. The equations hp, hq, hi and hj identify the results with uD at the images under p followed by i and q followed by j. The pushout square commutes, so these images agree. Thus iStar followed by pStar equals jStar followed by qStar.",
    "uses": [
-    "def-weil-pbc-simplicial-set",
-    "def-weil-pbc-simplicial-hom-object"
+    "def-weil-pbc-simplicial-hom-object",
+    "def-weil-pbc-representing-object"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 017N (lemma-hom-from-coprod), proof, the displayed sequence of functorial equalities and the final term using the pushout term by term"
+    "place": "Lemma 017N (lemma-hom-from-coprod), proof, degree zero"
    }
   },
   {
-   "text": "The representing property of H identifies morphisms W\\to H(S) with S-families over W, naturally in W. Applying this to S=D,B,C,A and the bijection of the previous step gives a natural bijection between Mor(W,H(D)) and Mor(W,H(B)) \\times_{Mor(W,H(A))} Mor(W,H(C)); under it a morphism g is sent to (i^*\\circ g,j^*\\circ g). The universal property of the categorical fibre product P gives the same bijection with Mor(W,P), with the pair (r_B\\circ -,r_C\\circ -). By Yoneda (or directly by the representing universal properties), there is a unique isomorphism H(D)\\cong P carrying its two projections to i^* and j^*. Hence H(D), i^*, j^* is the asserted fibre product.",
+   "text": "Given a:W->HB and b:W->HC with a followed by pStar equal to b followed by qStar, the B-family a followed by uB and the C-family b followed by uC agree on A, by hp and hq. Glue them by step 1 to a D-family f. Surjectivity of the representing bijection for D supplies l:W->HD carrying uD to f. Injectivity of the representing bijections for B and C proves that l followed by iStar is a and l followed by jStar is b. If two such l have the same projections, step 1 identifies their D-families; injectivity of the representing bijection for D then identifies the morphisms. IsPullback.mk' packages commutativity, existence and uniqueness into the claimed pullback. No independently constructed fibre product, finite-limit existence theorem, or comparison isomorphism is needed.",
    "uses": [
     "def-weil-pbc-simplicial-hom-object",
     "def-weil-pbc-representing-object",
-    "lem-weil-pbc-semi-representable-finite-limits"
+    "def-weil-pbc-simplicial-set"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 017N (lemma-hom-from-coprod), proof, the representing functor equalities and conclusion"
+    "place": "Lemma 017N (lemma-hom-from-coprod), proof, degree zero"
    }
   },
   {
-   "text": "If A is empty, the compatibility condition in the family bijection is vacuous. The pushout D is the coproduct of B and C, so the same argument gives a natural bijection Mor(W,H(D)) \\cong Mor(W,H(B))\\times Mor(W,H(C)). Since SR(X) has a final object e and finite limits, this product is the fibre product H(B)\\times_e H(C); the resulting comparison isomorphism identifies its projections with i^* and j^*. Therefore H(D) is a product of H(B) and H(C).",
+   "text": "When every degree of A is empty, any B-family and C-family agree on A by empty elimination. Apply the same gluing and representing-bijection argument to obtain a lift for every pair a:W->HB and b:W->HC, with uniqueness by family_pushout_ext and injectivity for D. BinaryFan.isLimitMk packages these lifts and their uniqueness as the product universal property of HD with projections iStar and jStar. This uses no representing pair for A and no terminal-object or finite-limit construction.",
    "uses": [
     "def-weil-pbc-simplicial-set",
     "def-weil-pbc-simplicial-hom-object",
-    "lem-weil-pbc-semi-representable-finite-limits"
+    "def-weil-pbc-representing-object"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 017N (lemma-hom-from-coprod), statement and proof, with the fibre product over the final object for the empty U case"
+    "place": "Lemma 017N (lemma-hom-from-coprod), proof, degree zero"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-semi-representable-finite-limits",
+  "def-weil-pbc-simplicial-set",
   "def-weil-pbc-simplicial-hom-object",
   "def-weil-pbc-semi-representable-object",
-  "def-weil-pbc-simplicial-set",
   "def-weil-pbc-representing-object"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/simplicial.tex",
-  "place": "Lemma 017N (lemma-hom-from-coprod), proof, specialized to degree 0; empty-base case by the fibre product over the final object"
+  "place": "Lemma 017N (lemma-hom-from-coprod), proof, degree zero; V1 implements family gluing by the simplicial pushout universal property and establishes the represented pullback/product universal properties directly"
  },
  "mathlib_searches": [
   {
@@ -169,5 +168,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261015T220252-L-2466159",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
