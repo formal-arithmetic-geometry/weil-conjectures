@@ -700,6 +700,56 @@ theorem overlapNatIso_inv_app_of_iso
     γ.inv.app y = K.map e.inv ≫ γ.inv.app x ≫ H.map e.hom := by
   exact overlapNatIso_hom_app_of_iso K H γ.symm e
 
+/-- The first open-site comparison at any object is determined by its
+localization-lifted component on a restricted object.
+Source: Stacks Project, Tag 08DW. Transport the inverse comparison along an
+isomorphism from a restricted object by naturality. On that restricted object,
+the defining preimage equation identifies it with the inverse of the explicit
+comparison through `βU`, `τU`, `βW`, and `αU`. -/
+theorem comparisonFromRestrictions_gammaU_inv_at_iso
+    {C D A B W P Q T : Type*}
+    [Category* C] [Category* D] [Category* A] [Category* B]
+    [Category* W] [Category* P] [Category* Q] [Category* T]
+    (L : C ⥤ D) (TU : C ⥤ A) (TV : C ⥤ B) (TW : C ⥤ W)
+    (SU : A ⥤ W) (SV : B ⥤ W)
+    (RU : D ⥤ P) (RV : D ⥤ Q) (RW : D ⥤ T)
+    (SP : P ⥤ T) (SQ : Q ⥤ T)
+    (αU : TU ⋙ SU ≅ TW) (αV : TV ⋙ SV ≅ TW)
+    (τU : RU ⋙ SP ≅ RW) (τV : RV ⋙ SQ ≅ RW)
+    [((Functor.whiskeringLeft C A T).obj TU).Full]
+    [((Functor.whiskeringLeft C A T).obj TU).Faithful]
+    [((Functor.whiskeringLeft C B T).obj TV).Full]
+    [((Functor.whiskeringLeft C B T).obj TV).Faithful]
+    (HU : A ⥤ P) (HV : B ⥤ Q) (HW : W ⥤ T)
+    (βU : L ⋙ RU ≅ TU ⋙ HU) (βV : L ⋙ RV ≅ TV ⋙ HV)
+    (βW : L ⋙ RW ≅ TW ⋙ HW)
+    (F : C) {A' : A} (e : TU.obj F ≅ A') :
+    let d := comparisonFromRestrictions L TU TV TW SU SV RU RV RW SP SQ
+      αU αV τU τV HU HV HW βU βV βW
+    let δU : TU ⋙ (HU ⋙ SP) ≅ TU ⋙ (SU ⋙ HW) :=
+      (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight βU.symm SP ≪≫ Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft L τU ≪≫ βW ≪≫
+        Functor.isoWhiskerRight αU.symm HW ≪≫ Functor.associator _ _ _
+    d.γU.inv.app A' =
+      (SU ⋙ d.HW).map e.inv ≫ δU.inv.app F ≫ (d.HU ⋙ SP).map e.hom := by
+  let d := comparisonFromRestrictions L TU TV TW SU SV RU RV RW SP SQ
+    αU αV τU τV HU HV HW βU βV βW
+  let δU : TU ⋙ (HU ⋙ SP) ≅ TU ⋙ (SU ⋙ HW) :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight βU.symm SP ≪≫ Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft L τU ≪≫ βW ≪≫
+      Functor.isoWhiskerRight αU.symm HW ≪≫ Functor.associator _ _ _
+  have hImage : d.γU.hom.app (TU.obj F) = δU.hom.app F :=
+    comparisonFromRestrictions_gammaU_on_image L TU TV TW SU SV
+      RU RV RW SP SQ αU αV τU τV HU HV HW βU βV βW F
+  have hInv : d.γU.inv.app (TU.obj F) = δU.inv.app F :=
+    (Iso.inv_eq_inv (d.γU.app (TU.obj F)) (δU.app F)).2 hImage
+  change d.γU.inv.app A' =
+    (SU ⋙ HW).map e.inv ≫ δU.inv.app F ≫ (HU ⋙ SP).map e.hom
+  rw [overlapNatIso_inv_app_of_iso (d.HU ⋙ SP) (SU ⋙ d.HW) d.γU e, hInv]
+  rfl
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
