@@ -23,7 +23,8 @@
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-etale-sheaves",
   "def-kun-unbounded-exchange",
-  "def-weil-pbc-kinjective-resolutions"
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
  ],
  "proof": [
   {
@@ -235,5 +236,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison",
+  "declaration": "AlgebraicGeometry.Etale.unbounded_abelian_exchange_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.moduleAbelianUnboundedUpperStarIso",
+   "AlgebraicGeometry.Etale.moduleAbelianUnboundedLowerStarComparison",
+   "AlgebraicGeometry.Etale.unbounded_abelian_exchange_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedAbelianExchangeComparison.lean",
+  "statement": "theorem unbounded_abelian_exchange_comparison (Λ : Type (u + 1)) [CommRing Λ] {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) : (∀ T : Scheme.{u}, PreservesFiniteLimits (moduleAbelianForget Λ T) ∧ PreservesFiniteColimits (moduleAbelianForget Λ T) ∧ (D(moduleAbelianForget Λ T)).IsTriangulated ∧ (D(moduleAbelianForget Λ T)).ReflectsIsomorphisms ∧ ∀ i : ℤ, Nonempty (D(moduleAbelianForget Λ T) ⋙ DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) i ≅ DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) i ⋙ moduleAbelianForget Λ T)) ∧ (∀ {A B : Scheme.{u}} (v : A ⟶ B), IsIso (moduleAbelianUnboundedLowerStarComparison Λ v) ∧ ∀ P : HomotopyCategory (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ComplexShape.up ℤ), (moduleAbelianForget Λ B).mapDerivedCategoryFactorsh.inv.app (((v)_*[ModuleCat.{u + 1} Λ]).mapHomotopyCategory (ComplexShape.up ℤ) |>.obj P) ≫ D(moduleAbelianForget Λ B).map (((v)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorUnit.app P) ≫ (moduleAbelianUnboundedLowerStarComparison Λ v).app (DerivedCategory.Qh.obj P) = ((v)_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorUnit.app ((moduleAbelianForget Λ A).mapHomotopyCategory (ComplexShape.up ℤ) |>.obj P) ≫ R((v)_*[AddCommGrpCat.{u + 1}]).map ((moduleAbelianForget Λ A).mapDerivedCategoryFactorsh.inv.app P)) ∧ ∀ K : DerivedCategoryModule Λ X, D(moduleAbelianForget Λ Y').map ((exactDerivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) ≫ (moduleAbelianUnboundedLowerStarComparison Λ f').app (D((g')^*[ModuleCat.{u + 1} Λ]).obj K) ≫ R((f')_*[AddCommGrpCat.{u + 1}]).map ((moduleAbelianUnboundedUpperStarIso Λ g').hom.app K) = (moduleAbelianUnboundedUpperStarIso Λ g).hom.app (R((f)_*[ModuleCat.{u + 1} Λ]).obj K) ≫ D((g)^*[AddCommGrpCat.{u + 1}]).map ((moduleAbelianUnboundedLowerStarComparison Λ f).app K) ≫ (exactDerivedBaseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq).app (D(moduleAbelianForget Λ X).obj K)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-057ee249b",
+  "group": "NF",
+  "result": "pass",
+  "note": "Reviewed immutable nodes, sources, dependencies, both modules, and report. Canonical comparisons and exchange equality match; dependency repair is valid. Statement fields match verbatim. Both files compile cleanly through scompile.py. Findings recorded in review.md; no fixes needed."
  }
 }

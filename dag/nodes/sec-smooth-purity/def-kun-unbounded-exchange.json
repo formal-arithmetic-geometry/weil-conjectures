@@ -152,19 +152,24 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-710bf121d",
-  "group": "NE",
+  "reviewer": "NT-stage2-Codex-057ee249b",
+  "group": "NF",
   "result": "pass",
-  "note": "Existing derivedBaseChangeMap matches the node; dependencies, docstrings, edge cases, searches, and server-only scompile were verified. review.md written."
+  "note": "Reviewed immutable nodes, sources, dependencies, both modules, and report. Canonical comparisons and exchange equality match; dependency repair is valid. Statement fields match verbatim. Both files compile cleanly through scompile.py. Findings recorded in review.md; no fixes needed."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded",
-  "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMap",
-  "statement": "def derivedBaseChangeMap (sq : CommSq g' f' f g) : R((f)_*[A]) ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ R((f')_*[A])",
-  "branch": "slopmaster2",
-  "by": "NE",
+  "module": "Sheaf.AlgebraicGeometry.ExactUnboundedExchange",
+  "declaration": "AlgebraicGeometry.Etale.exactDerivedBaseChangeMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.exactDerivedSquareUpperStarIso",
+   "AlgebraicGeometry.Etale.exactDerivedBaseChangeMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ExactUnboundedExchange.lean",
+  "statement": "def exactDerivedBaseChangeMap (A : Type v) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : CommSq g' f' f g) : R((f)_*[A]) ⋙ D((g)^*[A]) ⟶ D((g')^*[A]) ⋙ R((f')_*[A])",
+  "branch": "newtargets-dag",
+  "by": "NF",
   "date": "2026-10-15",
-  "existing": true,
-  "note": "Specialize A to ModuleCat.{u + 1} Λ for Λ : Type (u + 1), [CommRing Λ], and sq to the cartesian square's toCommSq; take .app K. All coefficient instances are available without extra assumptions (server-checked). The source's leftDerivedUpperStarIsoMapDerivedCategory canonically identifies L(u^*) with exact termwise inverse image. leftDerivedUpperStarComp is transported from the termwise composition comparison along these isomorphisms, so derivedSquareUpperStarIso gives the specified descended square comparison. derivedBaseChangeSquare is literally mateEquiv of this comparison under derivedUpperStarLowerStarAdjunction; its .natTrans is this declaration. R(u_*) is the total K-injective-derived direct image. No new module or dependency copy: the existing declaration supplies the entire notion. The generic source uses only commutativity, and restricts to every cartesian square without changing the formula."
+  "existing": false,
+  "note": "The recorded derivedBaseChangeMap uses leftDerivedFunctor and requires a monoidal coefficient category; it cannot specialize to AddCommGrpCat with the available instances. This equivalent interface descends exact inverse image termwise and takes its canonical derived adjunction mate, with the same square comparison and K-injective-derived direct image. It states the full unbounded exchange notion for module and abelian coefficients without tensor hypotheses. On ModuleCat it is the recorded construction transported along leftDerivedUpperStarIsoMapDerivedCategory; no base-change invertibility is asserted."
  }
 }
