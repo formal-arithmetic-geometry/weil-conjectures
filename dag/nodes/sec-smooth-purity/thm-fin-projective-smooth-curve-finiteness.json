@@ -196,5 +196,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-26badf5c3 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and sources, and unit/chapter route. All four proof steps check out, including finite étale base change and SGA 4 IX 2.13(iii). Repaired missing Mathlib search records and the projective-implies-proper tool-use proposal. Accepted both generic tools; statement unchanged. Detailed checks and corrected JSON are in review.md and fixes/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSmoothCurveFiniteness",
+  "declaration": "AlgebraicGeometry.isConstructibleEtaleModuleSheaf_higherDirectImage_constant_of_projective_smooth_curve",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSmoothCurveFiniteness.lean",
+  "statement": "theorem isConstructibleEtaleModuleSheaf_higherDirectImage_constant_of_projective_smooth_curve {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProjective f] [SmoothOfRelativeDimension 1 f] (ℓ : ℕ) [Fact ℓ.Prime] (hinv : IsUnit (ℓ : Γ(S, ⊤))) (r : ℕ) : Scheme.IsConstructibleEtaleModuleSheaf ((DerivedCategory.Plus.homologyFunctor (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) (r : ℤ)).obj ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) f).obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) 0).obj ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj (ModuleCat.of (ULift.{u + 1} (ZMod ℓ)) (ULift.{u + 1} (ZMod ℓ)))))))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-969bdee2a",
+  "group": "NW",
+  "result": "pass",
+  "note": "Wrote review.md. Audited the immutable statement, all five dependencies, source, declarations, docstrings, edge cases, universes, and report. Signature matches verbatim; per-file scompile.py reproduction passed cleanly. No corrections needed; branch unchanged."
  }
 }

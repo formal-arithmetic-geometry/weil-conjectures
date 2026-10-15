@@ -23,7 +23,10 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-derived-internal-hom",
   "def-pc-flat-sheaf-modules",
-  "def-pc-sheaf-restrict-scalars"
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-ringed-site-ideal",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete"
  ],
  "proof": [
   {
@@ -206,5 +209,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FlatRingedIdealCompleteEquivalence",
+  "declaration": "CategoryTheory.flat_ringed_ideal_complete_equivalence",
+  "declarations": [
+   "CategoryTheory.siteRestrictScalars_exact",
+   "CategoryTheory.siteDerivedRestrictScalars",
+   "CategoryTheory.flat_ringed_ideal_complete_equivalence"
+  ],
+  "file": "lean/Sheaf/Paper/FlatRingedIdealCompleteEquivalence.lean",
+  "statement": "theorem flat_ringed_ideal_complete_equivalence {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R) [HasDerivedCategory.{w} (ringedSiteModules.{u} (siteModuleRings R))] [HasDerivedCategory.{w} (ringedSiteModules.{u} (siteModuleRings B))] [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u} (siteModuleRings (R.over U)))] [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u} (siteModuleRings (B.over U)))] (hI : SheafOfModules.IsFiniteType.{u, u, u} I.module) (hflat : SheafOfModules.IsFlat ((SheafOfModules.restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj (SheafOfModules.unit (siteModuleRings B)))) (hquot : I.IsQuotientIso φ) : ∃ e : ObjectProperty.FullSubcategory (IsLocallyDerivedRingedIdealComplete B (I.extension φ).module (I.extension φ).inclusion) ≌ ObjectProperty.FullSubcategory (IsLocallyDerivedRingedIdealComplete R I.module I.inclusion), Nonempty (e.functor ⋙ ObjectProperty.ι (IsLocallyDerivedRingedIdealComplete R I.module I.inclusion) ≅ ObjectProperty.ι (IsLocallyDerivedRingedIdealComplete B (I.extension φ).module (I.extension φ).inclusion) ⋙ siteDerivedRestrictScalars φ)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-99e9de415",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked sources, all statement dependencies, both Lean modules, canonical constructions, universes, edge cases, records, and docstrings. Both immutable modules compiled cleanly through scompile.py's local side overlay. No corrections needed; branch unchanged."
  }
 }
