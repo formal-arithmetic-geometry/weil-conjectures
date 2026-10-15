@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-095r",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pushforward of constructible sheaves along finite morphisms",
@@ -20,19 +20,34 @@
  ],
  "proof": [
   {
-   "text": "The constructibility of $f_*F$, including that of all higher direct\nimages, is [fin4-thm-finite-morphisms-constructible] of the smooth-base-change chapter (stated there for the coefficient ring of\n[sbc-def-coefficient-conventions], under exactly the hypotheses on\n$X$, $Y$ and $\\Lambda$ displayed above); the vanishing of the\nhigher direct images is\n[lemma-weil-pbc-finite-direct-image-exact].",
+   "text": "Apply [fin4-thm-finite-morphisms-constructible] with $S=Y$. Its hypotheses hold because $Y$ is a finite-type $k$-scheme, $f$ is finite, and $F$ is constructible with coefficients as in [sbc-def-coefficient-conventions]. The chosen positive annihilator $N$ is invertible on $X$ and $Y$: its inverse in $k$ maps to an inverse under each structure map. The theorem gives that $R^qf_*F$ is constructible on $Y_{\\Et}$ for every $q\\geq0$.",
    "uses": [
     "fin4-thm-finite-morphisms-constructible",
-    "sbc-def-coefficient-conventions",
-    "lemma-weil-pbc-finite-direct-image-exact"
+    "sbc-def-coefficient-conventions"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-095r.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Take $q=0$ in the preceding step. To identify $R^0f_*F$ with $f_*F$, use the module-sheaf direct image and its left exactness in [def-weil-pbc-direct-image]: for an injective resolution $0\\to F\\to I^0\\to I^1\\to\\cdots$, one has $\\mathcal H^0(f_*I^\\bullet)=\\ker(f_*I^0\\to f_*I^1)=f_*\\ker(I^0\\to I^1)=f_*F$. Thus $f_*F$ is constructible. For $q>0$, [fin4-thm-finite-morphisms-constructible] explicitly supplies $R^qf_*F=0$ for the $\\Lambda$-module sheaf $F$.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "fin4-thm-finite-morphisms-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-095r.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
   "fin4-thm-finite-morphisms-constructible",
   "sbc-def-coefficient-conventions",
-  "lemma-weil-pbc-finite-direct-image-exact"
+  "def-weil-pbc-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
@@ -41,7 +56,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -73,5 +88,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-095r",
+  "worker": "stage1",
+  "summary": "Checked the original blueprint and Stacks 095R and 03QP. Existing finite-morphism constructibility supplies all higher module direct images and their positive-degree vanishing. The degree-zero identification is written explicitly from the left-exact module direct image and an injective resolution. Removed a redundant off-route abelian exactness citation because the finite-morphism theorem already states the needed module vanishing. No new nodes are needed.",
+  "blueprint": "Realizes the two assertions in the blueprint proof: finite-morphism constructibility (including q=0) and vanishing from exactness of finite direct image.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q27-507f7587d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-507f7587d (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, cited nodes, blueprint, and Stacks sources 095R and 03QP. The statement and mathematics are correct, including coefficient hypotheses and edge cases. Step 2 unnecessarily cites the off-route abelian exactness node lemma-weil-pbc-finite-direct-image-exact even though fin4-thm-finite-morphisms-constructible already states the required module-sheaf vanishing; split_report.tool_uses is empty. Corrected item and unit realization are in fixes/dag/. No new nodes or target weakening.; 2 file(s) fixed by the reviewer"
+ }
 }
