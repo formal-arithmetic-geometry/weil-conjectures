@@ -28,46 +28,53 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal P$ be the set of primes whose images are units in $\\Gamma(Y,\\top)$. Unfolding $hK$ and the geometric-stalk definitions, for every cohomology degree and geometric stalk element $x$, the integer $n=\\operatorname{addOrderOf}(x)$ maps to a unit in $\\Gamma(Y,\\top)$. If $n>0$, each prime divisor $p$ of $n$ also maps to a unit: writing $n=pr$ and choosing an inverse of $n$, the product $r n^{-1}$ is an inverse of $p$. Thus each stalk element is killed by an integer whose prime divisors lie in $\\mathcal P$. If $n=0$ and a geometric point existed, the ring map $\\Gamma(Y,\\top)\\to\\Omega$ induced by the composite $\\operatorname{Spec}\\Omega\\to X\\xrightarrow{f}Y$ would send the unit $0\\in\\Gamma(Y,\\top)$ to zero, impossible; hence this case has no stalks. Therefore $K\\in D^+_{\\mathcal P\\text{-tor}}(X_{\\Et})$ by [sbc-def-derived-categories-with-allowable-torsion].",
+   "text": "Use the proved source-library equivalence between abelian etale sheaves and sheaves of ULift Z-modules (Etale.exists_forget₂_mapDerivedCategoryPlus_obj_iso in SixFunctors/BaseChange/DerivedForget.lean) to obtain Kprime and an isomorphism Phi_derived(Kprime) ≅ K. This is transport through an actual equivalence, not a choice of arbitrary data from an unproved existence theorem. For every q, Functor.mapDerivedCategoryPlusHomologyFunctorIso and that isomorphism identify Phi(Hq Kprime) with Hq K. Point.sheafFiberCompIso then identifies their stalks, including the underlying abelian group of the module stalk; supply LocallySmall X.Etale and the shrunk filtered-colimit preservation instance explicitly. The induced additive isomorphism is injective, so addOrderOf_injective transports hK to each module-stalk element.",
    "uses": [
     "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/BaseChange/DerivedForget.lean",
+    "place": "Equivalence and BaseChange sections; exists_forget₂_mapDerivedCategoryPlus_obj_iso and exact-functor homology comparison"
+   }
+  },
+  {
+   "text": "For a module-stalk element x at s, the homomorphism (s ≫ f).appTop followed by Scheme.ΓSpecIso gives Γ(Y,top) → Ω. RingHom.domain_nontrivial therefore makes Γ(Y,top) nontrivial. Since hK makes the image of addOrderOf x a unit, IsUnit.ne_zero and Nat.cast_zero imply addOrderOf x > 0, including the empty-base edge case without an added nonemptiness hypothesis. The integer addOrderOf x kills x. A prime factor p divides this integer, hence its natural cast divides a unit; isUnit_of_dvd_unit gives IsUnit (p : Γ(Y,top)). Thus the module cohomology sheaf is IsTorsionSheafOfPrimes Y.invertiblePrimes, and Kprime has torsionHomologyOfPrimes. This is the allowable-prime torsion condition of the cited definition, in the equivalent module-valued encoding.",
+   "uses": [
     "def-pc-scheme",
     "sbc-def-derived-categories-with-allowable-torsion"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-    "place": "Proof; allowable-prime torsion specialization (agent reconstruction; upstream TorsionSheaf source is WANTED)"
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/Smooth.lean",
+    "place": "Smooth-base-change invertible-order specialization; elementary order and unit-divisor argument of the original target node"
    }
   },
   {
-   "text": "Apply [sbc-thm-bounded-below-derived-smooth-base-change] after relabelling its $(S,T,X,Y;f,g,h,e)$ as $(Y,X,Y\\prime,X\\prime;g,f,f\\prime,g\\prime)$ in the given cartesian square. Its smooth morphism is therefore the present $g$, its quasi-compact and quasi-separated morphism is the present $f$, and its input is the present $K$; Step 1 supplies the required allowable-torsion hypothesis. The resulting isomorphism is the component of the derived base-change map with endpoints $Lg^*Rf_*K$ and $Rf\\prime_*Lg\\prime^*K$. The definition [sbc-def-base-change-map] identifies this morphism with [def-weil-pbc-derived-exchange] on the relabelled square. The latter gives the component explicitly as $\\eta_{f',Lg^*Rf_*K}$ followed by $Rf'_*(\\theta^D_{Rf_*K})$ followed by $Rf'_*Lg'^*(\\varepsilon_{f,K})$, where $\\theta^D:Lf'^*Lg^*\\cong Lg'^*Lf^*$ is induced by $gf'=fg'$. Unfolding upstream MorphismDefs.lean, baseChangeUnitStep.app is exactly this unit, baseChangeSquareStep.hom.app is exactly this direct image of the composition comparison, and baseChangeCounitStep.app is exactly this direct image of the pulled-back counit. Its pullbackSquareComparison is $(L(gf')^*\\cong Lf'^*Lg^*)^{-1}$ followed by the square equality and $L(fg')^*\\cong Lg'^*Lf^*$, so it has the same orientation as $\\theta^D$. Thus Etale.baseChange.app K is this very three-arrow composite, not merely a map with the same endpoints. The target component is consequently an isomorphism.",
+   "text": "Apply the existing source-library Etale.isIso_baseChange_app_of_smooth (ULift Z) g sq Kprime hKprime, from SixFunctors/Etale/SmoothBaseChange/Derived.lean. This is the bounded-below smooth-base-change theorem tagged sbc-thm-bounded-below-derived-smooth-base-change in the source; it already gives exactly the ambient exchange-isomorphism clause needed here, so the additional allowable-torsion output-membership assertions of the Sheaf attachment need not be proved. Its variables (S,T,X,Y;p,g,e,h) are (Y,X,Yprime,Xprime;g,f,gprime,fprime); the pullback datum is sq without changing orientation. Rewrite the resulting hypothesis by baseChange_eq_derivedBaseChangeMapPlus. Apply the proved isIso_derivedBaseChangeMapPlus_app_forget₂_iff to transport invertibility to the abelian coefficient category, and NatTrans.isIso_app_iff_of_iso along Phi_derived(Kprime) ≅ K to obtain the target. These comparison lemmas identify the specified canonical exchange maps, not arbitrary arrows with the same endpoints. The sk-rem-rest unit has no realized statement or proof steps to bypass; the bounded-below smooth-base-change route is retained.",
    "uses": [
     "sbc-thm-bounded-below-derived-smooth-base-change",
-    "sbc-thm-smooth-base-change",
-    "sbc-def-base-change-map",
     "def-weil-pbc-derived-exchange"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-    "place": "Proof; final application and relabelling of the bounded-below theorem"
+    "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/Derived.lean",
+    "place": "Etale.isIso_baseChange_app_of_smooth; use the proved coefficient comparison in SixFunctors/BaseChange/DerivedForget.lean"
    }
   }
  ],
  "proof_deps": [
   "def-pc-scheme",
+  "def-weil-pbc-derived-exchange",
   "def-weil-pbc-geometric-stalks",
-  "sbc-def-base-change-map",
   "sbc-def-derived-categories-with-allowable-torsion",
-  "sbc-thm-bounded-below-derived-smooth-base-change",
-  "sbc-thm-smooth-base-change",
-  "def-weil-pbc-derived-exchange"
+  "sbc-thm-bounded-below-derived-smooth-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-  "place": "Proof; specialize order-invertible-on-homology input to allowable-prime torsion and relabel the bounded-below theorem"
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/Derived.lean",
+  "place": "C1: reuse existing bounded-below module smooth base change and DerivedForget equivalence; explicit stalk order/prime-factor transport in target module"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -144,5 +151,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The removed upstream Ab coefficient name is AddCommGrpCat. The removed orderInvertibleOnHomology predicate is expanded inline exactly as described in proof step 1: every geometric stalk element of every homology sheaf has additive order invertible in the global sections of Y. No new notion or extra torsion/boundedness assumption is introduced. The canonical map is the recorded dependency derivedBaseChangeMapPlus, valid for abelian coefficients without a tensor structure, rather than the monoidal-only baseChange presentation of the same derived exchange."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261015T154156-L-159686",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

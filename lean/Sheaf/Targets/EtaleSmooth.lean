@@ -9,10 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.BaseChange.Derived
-import Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
-import Sheaf.AlgebraicGeometry.AllowableTorsionDerivedCategories
-import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
+import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 
 /-!
 # Smooth base change for bounded-below etale abelian sheaves
@@ -73,7 +71,54 @@ theorem Etale.isIso_baseChange_of_smooth
         ((DerivedCategory.Plus.homologyFunctor
           (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj K)),
       IsUnit (addOrderOf x : Γ(Y, ⊤))) :
-    IsIso ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K) :=
-  sorry
+    IsIso ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K) := by
+  let Φ := sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})
+  obtain ⟨K', ⟨eK⟩⟩ := Etale.exists_forget₂_mapDerivedCategoryPlus_obj_iso K
+  have hK' : Etale.DerivedCategory.Plus.torsionHomologyOfPrimes
+      (ULift.{u + 1} ℤ) X Y.invertiblePrimes K' := by
+    intro q
+    constructor
+    intro Ω _ _ s x
+    let F := (DerivedCategory.Plus.homologyFunctor
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) q).obj K'
+    let eH : Φ.obj F ≅ (DerivedCategory.Plus.homologyFunctor
+        (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj K :=
+      (Φ.mapDerivedCategoryPlusHomologyFunctorIso q).app K' ≪≫
+        (DerivedCategory.Plus.homologyFunctor _ q).mapIso eK
+    have : PreservesFilteredColimitsOfSize.{u, u}
+        (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1}) :=
+      preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+    have : LocallySmall.{u} X.Etale := locallySmall_self _
+    let ψ : (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1}).obj
+        ((Scheme.pointSmallEtale s).sheafFiber.obj F) ≅
+        ((Scheme.pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj
+          ((DerivedCategory.Plus.homologyFunctor
+            (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj K) :=
+      (((Scheme.pointSmallEtale s).sheafFiberCompIso
+        (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})).app F).symm ≪≫
+        (Scheme.pointSmallEtale s).sheafFiber.mapIso eH
+    have hx : IsUnit (addOrderOf x : Γ(Y, ⊤)) := by
+      have heq := addOrderOf_injective ψ.hom.hom
+        (ConcreteCategory.bijective_of_isIso ψ.hom).1 x
+      rw [← heq]
+      exact hK q Ω s (ψ.hom.hom x)
+    let ρ : Γ(Y, ⊤) ⟶ CommRingCat.of Ω :=
+      (s ≫ f).appTop ≫ (Scheme.ΓSpecIso (.of Ω)).hom
+    have : Nontrivial Γ(Y, ⊤) := ρ.hom.domain_nontrivial
+    have hn : 0 < addOrderOf x := Nat.pos_of_ne_zero fun hn ↦ by
+      apply hx.ne_zero
+      simp only [hn, Nat.cast_zero]
+    refine ⟨addOrderOf x, hn, ?_, addOrderOf_nsmul_eq_zero x⟩
+    intro p hp
+    exact ⟨Nat.prime_of_mem_primeFactors hp,
+      isUnit_of_dvd_unit (Nat.cast_dvd_cast (Nat.dvd_of_mem_primeFactors hp)) hx⟩
+  have hm := Etale.isIso_baseChange_app_of_smooth (ULift.{u + 1} ℤ) g sq K' hK'
+  rw [Etale.baseChange_eq_derivedBaseChangeMapPlus] at hm
+  have hab : IsIso ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}
+      sq.toCommSq).app (Φ.mapDerivedCategoryPlus.obj K')) :=
+    (Etale.isIso_derivedBaseChangeMapPlus_app_forget₂_iff sq.toCommSq K').2 hm
+  exact (NatTrans.isIso_app_iff_of_iso
+    (Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) eK).1 hab
 
 end AlgebraicGeometry
