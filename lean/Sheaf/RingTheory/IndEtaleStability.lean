@@ -8,20 +8,8 @@ module
 public import Sheaf.RingTheory.IndPrincipalZariski
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtale
 public import Mathlib.CategoryTheory.Limits.Comma
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Sheaf.AlgebraicGeometry.EtaleAlgebraFilteredColimitDescent
-import Mathlib.RingTheory.Etale.Pi
-import Mathlib.CategoryTheory.Limits.MorphismProperty
-import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
-import Sheaf.RingTheory.FilteredColimitOfFactorization
-import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
-import Mathlib.Algebra.Category.Ring.FinitePresentation
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.RingTheory.Flat.Localization
+
+import Mathlib.RingTheory.Localization.Pi
 
 /-! # Stability of ind-etale and principal ind-Zariski maps
 
@@ -35,6 +23,392 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits
 
+-- Finite principal-localization blocks and their explicit base changes.
+private def blocks (A : Type u) [CommRing A] : ObjectProperty (CommAlgCat.{u} A) :=
+  fun B ↦ ∃ (n : ℕ) (f : Fin n → A),
+    Nonempty (B ≃ₐ[A] ((j : Fin n) → Localization.Away (f j)))
+open TensorProduct in
+private noncomputable def tensorBlockEquiv (A S : Type u)
+    [CommRing A] [CommRing S] [Algebra A S] (n : ℕ) (f : Fin n → A) :
+    S ⊗[A] ((j : Fin n) → Localization.Away (f j)) ≃ₐ[S]
+      ((j : Fin n) → Localization.Away (algebraMap A S (f j))) := by
+  classical
+  refine (Algebra.TensorProduct.piRight A S S _).trans (AlgEquiv.piCongrRight fun j ↦ ?_)
+  have : IsLocalization.Away (algebraMap A S (f j)) (S ⊗[A] Localization.Away (f j)) := by
+    simpa only [Algebra.algebraMapSubmonoid, Submonoid.map_powers] using
+      (inferInstance : IsLocalization
+        (Algebra.algebraMapSubmonoid S (Submonoid.powers (f j)))
+        (S ⊗[A] Localization.Away (f j)))
+  exact IsLocalization.algEquiv (Submonoid.powers (algebraMap A S (f j))) _ _
+open TensorProduct in
+private theorem block_tensor (A S : Type u) [CommRing A] [CommRing S] [Algebra A S]
+    (B : CommAlgCat.{u} A) (hB : blocks A B) :
+    blocks S (CommAlgCat.of S (S ⊗[A] B)) := by
+  obtain ⟨n, f, ⟨e⟩⟩ := hB
+  exact ⟨n, fun j ↦ algebraMap A S (f j),
+    ⟨(Algebra.TensorProduct.congr (AlgEquiv.refl : S ≃ₐ[S] S) e).trans
+      (tensorBlockEquiv A S n f)⟩⟩
+private noncomputable def bc (A S : Type u) [CommRing A] [CommRing S] [Algebra A S] :
+    CommAlgCat.{u} A ⥤ CommAlgCat.{u} S :=
+  (commAlgCatEquivUnder (.of A)).functor ⋙
+    Under.pushout (CommRingCat.ofHom (algebraMap A S)) ⋙
+      (commAlgCatEquivUnder (.of S)).inverse
+open TensorProduct in
+private noncomputable def bcEquiv (A S : Type u) [CommRing A] [CommRing S] [Algebra A S]
+    (B : CommAlgCat.{u} A) :
+    (bc A S).obj B ≃ₐ[S] S ⊗[A] B := by
+  let e := (CommRingCat.isPushout_tensorProduct A B S).isoPushout.symm
+  exact
+    { __ := e.commRingCatIsoToRingEquiv.trans (Algebra.TensorProduct.comm A B S).toRingEquiv
+      commutes' := by
+        intro s
+        change (Algebra.TensorProduct.comm A B S)
+          (e.hom.hom ((pushout.inr (CommRingCat.ofHom (algebraMap A B))
+            (CommRingCat.ofHom (algebraMap A S))).hom s)) = _
+        have he := (CommRingCat.isPushout_tensorProduct A B S).inr_isoPushout_inv
+        have hes := congrArg (fun g ↦ g.hom s) he
+        change e.hom.hom _ = 1 ⊗ₜ[A] s at hes
+        exact (congrArg (Algebra.TensorProduct.comm A B S) hes).trans (by rfl) }
+
+private theorem bc_preserves (A S : Type u) [CommRing A] [CommRing S] [Algebra A S]
+    {I : Type u} [SmallCategory I] : PreservesColimitsOfShape I (bc A S) := by
+  unfold bc
+  infer_instance
+private theorem blocks_of_equiv (A : Type u) [CommRing A] {B C : CommAlgCat.{u} A}
+    (e : B ≃ₐ[A] C) (h : blocks A C) : blocks A B := by
+  obtain ⟨n, f, ⟨e'⟩⟩ := h
+  exact ⟨n, f, ⟨e.trans e'⟩⟩
+private theorem principal_of_equiv (A : Type u) [CommRing A]
+    {B C : Type u} [CommRing B] [CommRing C] [Algebra A B] [Algebra A C]
+    (e : B ≃ₐ[A] C) (h : Algebra.IsIndPrincipalZariski A B) :
+    Algebra.IsIndPrincipalZariski A C := by
+  change (blocks A).ind (CommAlgCat.of A C)
+  exact (blocks A).ind.prop_of_iso (CommAlgCat.isoMk e) h
+open TensorProduct in
+private theorem principal_tensor (A S B : Type u) [CommRing A] [CommRing S] [CommRing B]
+    [Algebra A S] [Algebra A B] (h : Algebra.IsIndPrincipalZariski A B) :
+    Algebra.IsIndPrincipalZariski S (S ⊗[A] B) := by
+  obtain ⟨I, _, _, P, hP⟩ := h
+  have := bc_preserves A S (I := I)
+  have h' : Algebra.IsIndPrincipalZariski S ((bc A S).obj (CommAlgCat.of A B)) := by
+    refine ⟨I, ‹_›, ‹_›, P.map (bc A S), fun i ↦ ?_⟩
+    change blocks S ((bc A S).obj (P.diag.obj i))
+    exact blocks_of_equiv S (C := CommAlgCat.of S (S ⊗[A] P.diag.obj i))
+      (bcEquiv A S (P.diag.obj i))
+      (block_tensor A S (P.diag.obj i) (hP i))
+  exact principal_of_equiv S (bcEquiv A S (CommAlgCat.of A B)) h'
+
+private theorem principal_baseChange : RingHom.IsStableUnderBaseChange
+    (fun {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) ↦
+      @Algebra.IsIndPrincipalZariski A B _ _ f.toAlgebra) := by
+  intro R S R' S' _ _ _ _ _ _ _ _ _ _ _ hpush h
+  rw [toAlgebra_algebraMap] at h ⊢
+  have : Algebra.IsPushout R R' S S' := hpush.symm
+  exact principal_of_equiv R' (Algebra.IsPushout.equiv R R' S S')
+    (principal_tensor R R' S h)
+
+-- Relate the algebra presentation to the categorical ind-property.
+private local instance blocks_closedIso (A : Type u) [CommRing A] :
+    (blocks A).IsClosedUnderIsomorphisms where
+  of_iso e h := blocks_of_equiv A (CommAlgCat.algEquivOfIso e).symm h
+private def blockMaps : MorphismProperty CommRingCat.{u} :=
+  fun A B f ↦ let := f.hom.toAlgebra; blocks A (CommAlgCat.of A B)
+private theorem principal_iff_ind {A B : CommRingCat.{u}} (f : A ⟶ B) :
+    @Algebra.IsIndPrincipalZariski A B _ _ f.hom.toAlgebra ↔ blockMaps.ind.{u} f := by
+  rw [MorphismProperty.ind_iff_ind_underMk]
+  change (blocks A).ind ((commAlgCatEquivUnder A).inverse.obj (Under.mk f)) ↔ _
+  change (blocks A).ind.inverseImage (commAlgCatEquivUnder A).inverse (Under.mk f) ↔ _
+  rw [← ObjectProperty.ind_inverseImage_eq_of_isEquivalence
+    (blocks A) (commAlgCatEquivUnder A).inverse]
+  rfl
+private theorem blockMaps_fp :
+    blockMaps ≤ MorphismProperty.isFinitelyPresentable.{u} CommRingCat.{u} := by
+  intro A B g hg
+  apply CommRingCat.isFinitelyPresentable_under
+  obtain ⟨n, f, ⟨e⟩⟩ := hg
+  let := g.hom.toAlgebra
+  have : Algebra.Etale A ((j : Fin n) → Localization.Away (f j)) := inferInstance
+  have : Algebra.Etale A B := Algebra.Etale.of_equiv e.symm
+  exact (RingHom.etale_algebraMap.mpr (inferInstance : Algebra.Etale A B)).2
+private theorem principal_iff_ind_principal {A B : CommRingCat.{u}} (f : A ⟶ B) :
+    @Algebra.IsIndPrincipalZariski A B _ _ f.hom.toAlgebra ↔
+      (RingHom.toMorphismProperty
+        (fun {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) ↦
+          @Algebra.IsIndPrincipalZariski A B _ _ f.toAlgebra)).ind.{u} f := by
+  rw [principal_iff_ind]
+  have heq : RingHom.toMorphismProperty
+      (fun {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) ↦
+        @Algebra.IsIndPrincipalZariski A B _ _ f.toAlgebra) = blockMaps.ind.{u} := by
+    ext A B g
+    exact principal_iff_ind g
+  rw [heq]
+  exact (congrArg (fun P : MorphismProperty CommRingCat.{u} ↦ P f)
+    (MorphismProperty.ind_ind blockMaps_fp)).symm.to_iff
+
+private local instance blockMaps_baseChange : blockMaps.{u}.IsStableUnderCobaseChange := by
+  change (RingHom.toMorphismProperty
+    (fun {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) ↦
+      let := f.toAlgebra; blocks A (CommAlgCat.of A B))).IsStableUnderCobaseChange
+  apply RingHom.isStableUnderCobaseChange_toMorphismProperty_iff.mpr
+  intro R S R' S' _ _ _ _ _ _ _ _ _ _ _ hpush h
+  rw [toAlgebra_algebraMap] at h ⊢
+  have : Algebra.IsPushout R R' S S' := hpush.symm
+  exact blocks_of_equiv R' (Algebra.IsPushout.equiv R R' S S').symm
+    (block_tensor R R' (CommAlgCat.of R S) h)
+
+-- Localization and finite products preserve the blocks, including empty products.
+private theorem block_away (A : Type u) [CommRing A] (B : CommAlgCat.{u} A)
+    (hB : blocks A B) (b : B) : blocks A (CommAlgCat.of A (Localization.Away b)) := by
+  classical
+  obtain ⟨n, f, ⟨e⟩⟩ := hB
+  let R (i : Fin n) := Localization.Away (f i)
+  let g : (i : Fin n) → R i := e b
+  let T (i : Fin n) := Localization.Away (g i)
+  have (i : Fin n) : IsLocalization ((Submonoid.powers g).map (Pi.evalRingHom R i))
+      (T i) := by
+    simp only [Submonoid.map_powers]
+    change IsLocalization.Away (g i) (T i)
+    infer_instance
+  have : IsLocalization.Away g ((i : Fin n) → T i) :=
+    (IsLocalization.iff_map_piEvalRingHom R ((i : Fin n) → T i)
+      (Submonoid.powers g)).mpr inferInstance
+  let e₁ : Localization.Away b ≃ₐ[A] Localization.Away g :=
+    IsLocalization.algEquivOfAlgEquiv (M := Submonoid.powers b)
+      (T := Submonoid.powers g) _ _ e (by rw [Submonoid.map_powers])
+  let e₂ : Localization.Away g ≃ₐ[A] ((i : Fin n) → T i) :=
+    (IsLocalization.algEquiv (Submonoid.powers g) _ _).restrictScalars A
+  let a (i : Fin n) : A := (IsLocalization.Away.sec (f i) (g i)).1
+  have (i : Fin n) : IsLocalization.Away (f i * a i) (T i) :=
+    IsLocalization.Away.mul_of_associated (f i) (a i) (g i)
+      (IsLocalization.Away.associated_sec_fst (f i) (g i))
+  refine ⟨n, fun i ↦ f i * a i, ⟨e₁.trans (e₂.trans ?_)⟩⟩
+  exact AlgEquiv.piCongrRight fun i ↦
+    IsLocalization.algEquiv (Submonoid.powers (f i * a i)) _ _
+private theorem block_pi (A : Type u) [CommRing A] {m : ℕ}
+    (B : Fin m → CommAlgCat.{u} A) (hB : ∀ j, blocks A (B j)) :
+    blocks A (CommAlgCat.of A ((j : Fin m) → B j)) := by
+  classical
+  choose n f e using hB
+  let J := (j : Fin m) × Fin (n j)
+  let fs : J → A := fun p ↦ f p.1 p.2
+  let e₁ : ((j : Fin m) → B j) ≃ₐ[A]
+      ((p : J) → Localization.Away (fs p)) :=
+    { toFun x p := (e p.1).some (x p.1) p.2
+      invFun x j := (e j).some.symm (fun k ↦ x ⟨j, k⟩)
+      left_inv x := by ext j; exact (e j).some.symm_apply_apply (x j)
+      right_inv x := by ext p; exact congrFun ((e p.1).some.apply_symm_apply _) p.2
+      map_mul' x y := by ext p; simp
+      map_add' x y := by ext p; simp
+      commutes' a := by
+        ext p
+        simpa only [fs, Pi.algebraMap_apply] using congrFun ((e p.1).some.commutes a) p.2 }
+  let k := Fintype.card J
+  let eqv : Fin k ≃ J := (Fintype.equivFin J).symm
+  refine ⟨k, fs ∘ eqv, ⟨e₁.trans ?_⟩⟩
+  exact (AlgEquiv.piCongrLeft A (fun p : J ↦ Localization.Away (fs p)) eqv).symm
+private theorem block_comp (A B C : Type u) [CommRing A] [CommRing B] [CommRing C]
+    [Algebra A B] [Algebra A C] [Algebra B C] [IsScalarTower A B C]
+    (hB : blocks A (CommAlgCat.of A B)) (hC : blocks B (CommAlgCat.of B C)) :
+    blocks A (CommAlgCat.of A C) := by
+  obtain ⟨n, f, ⟨e⟩⟩ := hC
+  apply blocks_of_equiv A
+    (C := CommAlgCat.of A ((j : Fin n) → Localization.Away (f j))) (e.restrictScalars A)
+  apply block_pi A (fun j ↦ CommAlgCat.of A (Localization.Away (f j)))
+  intro j
+  exact block_away A (CommAlgCat.of A B) hB (f j)
+
+private local instance blockMaps_comp : blockMaps.{u}.IsStableUnderComposition where
+  comp_mem {A B C} f g hf hg := by
+    let := f.hom.toAlgebra
+    let := g.hom.toAlgebra
+    let := (g.hom.comp f.hom).toAlgebra
+    have : IsScalarTower A B C := IsScalarTower.of_algebraMap_eq' rfl
+    exact block_comp A B C hf hg
+-- Descend the finite list of denominators to one filtered stage.
+private theorem finite_reps {I : Type u} [SmallCategory I] [IsFiltered I]
+    (D : I ⥤ CommRingCat.{u}) (c : Cocone D) (hc : IsColimit c)
+    (n : ℕ) (x : Fin n → c.pt) :
+    ∃ (i : I) (y : Fin n → D.obj i), ∀ j, (c.ι.app i).hom (y j) = x j := by
+  classical
+  choose i y hy using fun j ↦ Concrete.isColimit_exists_rep D hc (x j)
+  let co := IsFiltered.cocone (Discrete.functor i)
+  refine ⟨co.pt, fun j ↦ (D.map (co.ι.app ⟨j⟩)).hom (y j), fun j ↦ ?_⟩
+  have hw := congrArg (fun k ↦ k.hom (y j)) (c.w (co.ι.app ⟨j⟩))
+  exact hw.trans (hy j)
+open TensorProduct in
+private local instance blockMaps_spreads : MorphismProperty.PreIndSpreads.{u} blockMaps.{u} where
+  exists_isPushout {I} _ _ {D} {c} hc {T} f hf := by
+    let : Algebra c.pt T := f.hom.toAlgebra
+    obtain ⟨n, g, ⟨e⟩⟩ := hf
+    obtain ⟨i, gi, hgi⟩ := finite_reps D c hc n g
+    let : Algebra (D.obj i) c.pt := (c.ι.app i).hom.toAlgebra
+    let Ti := (j : Fin n) → Localization.Away (gi j)
+    let e₀ : c.pt ⊗[D.obj i] Ti ≃ₐ[c.pt]
+        ((j : Fin n) → Localization.Away (g j)) := by
+      refine (tensorBlockEquiv (D.obj i) c.pt n gi).trans
+        (AlgEquiv.piCongrRight fun j ↦ ?_)
+      have hh : algebraMap (D.obj i) c.pt (gi j) = g j := hgi j
+      rw [hh]
+    let ebc : c.pt ⊗[D.obj i] Ti ≃ₐ[c.pt] T := e₀.trans e.symm
+    let fi : D.obj i ⟶ CommRingCat.of Ti := CommRingCat.ofHom (algebraMap (D.obj i) Ti)
+    let v : CommRingCat.of Ti ⟶ T := CommRingCat.ofHom
+      (ebc.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom)
+    refine ⟨i, CommRingCat.of Ti, fi, v, ?_, ?_⟩
+    · refine (CommRingCat.isPushout_tensorProduct (D.obj i) c.pt Ti).of_iso
+        (Iso.refl _) (Iso.refl _) (Iso.refl _) ebc.toRingEquiv.toCommRingCatIso
+        ?_ ?_ ?_ ?_
+      · rfl
+      · rfl
+      · ext x
+        exact ebc.commutes x
+      · rfl
+    · change @blocks (D.obj i) _
+        (@CommAlgCat.of (D.obj i) _ Ti _ (algebraMap (D.obj i) Ti).toAlgebra)
+      rw [toAlgebra_algebraMap]
+      exact ⟨n, gi, ⟨AlgEquiv.refl⟩⟩
+
+private theorem principal_comp : RingHom.StableUnderComposition
+    (fun {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) ↦
+      @Algebra.IsIndPrincipalZariski A B _ _ f.toAlgebra) := by
+  have : blockMaps.ind.{u}.IsStableUnderComposition :=
+    .ind_of_le_isFinitelyPresentable blockMaps_fp
+  intro A B C _ _ _ f g hf hg
+  exact (principal_iff_ind (CommRingCat.ofHom (g.comp f))).mpr
+    (blockMaps.ind.comp_mem (CommRingCat.ofHom f) (CommRingCat.ofHom g)
+      ((principal_iff_ind (CommRingCat.ofHom f)).mp hf)
+      ((principal_iff_ind (CommRingCat.ofHom g)).mp hg))
+
+-- Push out to a fixed source, then construct the colimit universal property.
+private theorem colimit_mem_ind {C : Type (u + 1)} [Category.{u} C] [HasPushouts C]
+    (P : MorphismProperty C) [P.IsStableUnderCobaseChange]
+    {I : Type u} [SmallCategory I] [IsFiltered I]
+    (F G : I ⥤ C) (a : Cocone F) (b : Cocone G)
+    (ha : IsColimit a) (hb : IsColimit b) (η : F ⟶ G)
+    (hη : ∀ i, P (η.app i)) (f : a.pt ⟶ b.pt)
+    (hf : ∀ i, a.ι.app i ≫ f = η.app i ≫ b.ι.app i) : P.ind.{u} f := by
+  let E : I ⥤ C :=
+    { obj i := pushout (a.ι.app i) (η.app i)
+      map {i j} k := pushout.desc (pushout.inl _ _)
+        (G.map k ≫ pushout.inr _ _) (by
+          rw [← Category.assoc, ← η.naturality k]
+          simp only [Category.assoc, ← pushout.condition]
+          rw [← Category.assoc, a.w k])
+      map_id i := by apply pushout.hom_ext <;> simp
+      map_comp {i j k} x y := by apply pushout.hom_ext <;> simp }
+  have hinl {i j : I} (k : i ⟶ j) :
+      pushout.inl (a.ι.app i) (η.app i) ≫ E.map k =
+        pushout.inl (a.ι.app j) (η.app j) := by simp [E]
+  have hinr {i j : I} (k : i ⟶ j) :
+      pushout.inr (a.ι.app i) (η.app i) ≫ E.map k =
+        G.map k ≫ pushout.inr (a.ι.app j) (η.app j) := by simp [E]
+  have hinlw : ∀ (w : Cocone E) {i j : I} (k : i ⟶ j),
+      pushout.inl (a.ι.app i) (η.app i) ≫ w.ι.app i =
+        pushout.inl (a.ι.app j) (η.app j) ≫ w.ι.app j := by
+    intro w i j k
+    rw [← w.w k, ← Category.assoc, hinl k]
+  have hleft (w : Cocone E) (i j : I) :
+      pushout.inl (a.ι.app i) (η.app i) ≫ w.ι.app i =
+        pushout.inl (a.ι.app j) (η.app j) ≫ w.ι.app j :=
+    (hinlw w (IsFiltered.leftToMax i j)).trans
+      (hinlw w (IsFiltered.rightToMax i j)).symm
+  let rightCocone (w : Cocone E) : Cocone G :=
+    { pt := w.pt
+      ι :=
+        { app i := pushout.inr _ _ ≫ w.ι.app i
+          naturality {i j} k := by
+            dsimp
+            rw [Category.comp_id, ← Category.assoc, ← hinr k, Category.assoc, w.w k] } }
+  let t : (Functor.const I).obj a.pt ⟶ E :=
+    { app i := pushout.inl _ _
+      naturality {i j} k := by dsimp; rw [Category.id_comp, hinl k] }
+  let s : E ⟶ (Functor.const I).obj b.pt :=
+    { app i := pushout.desc f (b.ι.app i) (hf i)
+      naturality {i j} k := by apply pushout.hom_ext <;> simp [E] }
+  refine ⟨I, ‹_›, ‹_›, E, t, s, ?_, fun i ↦ ⟨P.pushout_inl _ _ (hη i), by simp [t, s]⟩⟩
+  refine
+    { desc := fun w ↦ hb.desc (rightCocone w)
+      fac := fun w i ↦ ?_
+      uniq := fun w m hm ↦ ?_ }
+  · dsimp only
+    apply pushout.hom_ext
+    · simp only [s, pushout.inl_desc_assoc]
+      change f ≫ hb.desc (rightCocone w) = pushout.inl _ _ ≫ w.ι.app i
+      apply ha.hom_ext
+      intro j
+      rw [← Category.assoc, hf j, Category.assoc, hb.fac]
+      dsimp [rightCocone]
+      rw [hleft w i j, ← pushout.condition_assoc]
+    · simp only [s, pushout.inr_desc_assoc]
+      change b.ι.app i ≫ hb.desc (rightCocone w) = _
+      exact hb.fac _ i
+  · apply hb.hom_ext
+    intro i
+    rw [hb.fac]
+    have hi := congrArg (fun g ↦ pushout.inr (a.ι.app i) (η.app i) ≫ g) (hm i)
+    simpa [s, rightCocone] using hi
+private theorem indEtale_colimit {I : Type u} [SmallCategory I] [IsFiltered I]
+    (D : I ⥤ Arrow CommRingCat.{u}) (c : Cocone D) (hc : IsColimit c)
+    (h : ∀ i, (D.obj i).hom.hom.IndEtale) : c.pt.hom.hom.IndEtale := by
+  have : (RingHom.toMorphismProperty (@RingHom.IndEtale.{u})).IsStableUnderCobaseChange :=
+    RingHom.isStableUnderCobaseChange_toMorphismProperty_iff.mpr
+      RingHom.IndEtale.isStableUnderBaseChange
+  have h' := colimit_mem_ind (RingHom.toMorphismProperty (@RingHom.IndEtale.{u}))
+    (D ⋙ Arrow.leftFunc) (D ⋙ Arrow.rightFunc)
+    (Arrow.leftFunc.mapCocone c) (Arrow.rightFunc.mapCocone c)
+    (isColimitOfPreserves Arrow.leftFunc hc) (isColimitOfPreserves Arrow.rightFunc hc)
+    { app i := (D.obj i).hom
+      naturality i j f := (D.map f).w }
+    h c.pt.hom (fun i ↦ (c.ι.app i).w)
+  exact (RingHom.IndEtale.iff_ind_indEtale c.pt.hom.hom).mpr h'
+
+private theorem principal_colimit {I : Type u} [SmallCategory I] [IsFiltered I]
+    (D : I ⥤ Arrow CommRingCat.{u}) (c : Cocone D) (hc : IsColimit c)
+    (h : ∀ i, @Algebra.IsIndPrincipalZariski (D.obj i).left (D.obj i).right
+      _ _ (D.obj i).hom.hom.toAlgebra) :
+    @Algebra.IsIndPrincipalZariski c.pt.left c.pt.right _ _ c.pt.hom.hom.toAlgebra := by
+  have : (RingHom.toMorphismProperty
+      (fun {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) ↦
+        @Algebra.IsIndPrincipalZariski A B _ _ f.toAlgebra)).IsStableUnderCobaseChange :=
+    RingHom.isStableUnderCobaseChange_toMorphismProperty_iff.mpr principal_baseChange
+  have h' := colimit_mem_ind (RingHom.toMorphismProperty
+      (fun {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) ↦
+        @Algebra.IsIndPrincipalZariski A B _ _ f.toAlgebra))
+    (D ⋙ Arrow.leftFunc) (D ⋙ Arrow.rightFunc)
+    (Arrow.leftFunc.mapCocone c) (Arrow.rightFunc.mapCocone c)
+    (isColimitOfPreserves Arrow.leftFunc hc) (isColimitOfPreserves Arrow.rightFunc hc)
+    { app i := (D.obj i).hom
+      naturality i j f := (D.map f).w }
+    h c.pt.hom (fun i ↦ (c.ι.app i).w)
+  exact (principal_iff_ind_principal c.pt.hom).mpr h'
+
+-- The remaining clauses use existing ind-etale and weakly etale APIs.
+private theorem weaklyEtale_of_bijective {R S : Type u} [CommRing R] [CommRing S]
+    (f : R →+* S) (hf : Function.Bijective f) : f.WeaklyEtale := by
+  let := f.toAlgebra
+  have : Algebra.Etale R S := (RingHom.Etale.of_bijective hf).toAlgebra
+  exact inferInstanceAs (Algebra.WeaklyEtale R S)
+private theorem weaklyEtale_baseChange :
+    RingHom.IsStableUnderBaseChange (@RingHom.WeaklyEtale.{u,u}) := by
+  apply RingHom.IsStableUnderBaseChange.mk
+  · apply RingHom.StableUnderComposition.respectsIso
+    · intro R S T _ _ _ f g hf hg
+      exact hf.comp hg
+    · intro R S _ _ e
+      exact weaklyEtale_of_bijective _ e.bijective
+  · intro R S T _ _ _ _ _ h
+    rw [RingHom.weaklyEtale_algebraMap_iff] at h ⊢
+    have := h
+    infer_instance
+private theorem relative_indEtale
+    (A B C : Type u) [CommRing A] [CommRing B] [CommRing C]
+    [Algebra A B] [Algebra A C] (hB : Algebra.IndEtale A B)
+    (hC : Algebra.IndEtale A C) (f : B →ₐ[A] C) : f.toRingHom.IndEtale := by
+  apply RingHom.IndEtale.of_comp ((RingHom.IndEtale.algebraMap_iff A B).mpr hB)
+  have heq : f.toRingHom.comp (algebraMap A B) = algebraMap A C :=
+    RingHom.ext f.commutes
+  rw [heq]
+  exact (RingHom.IndEtale.algebraMap_iff A C).mpr hC
+
 namespace RingHom
 
 /-- Stability under base change, composition and filtered colimits of ind-etale and principal
@@ -46,127 +420,30 @@ Source: blueprint, proper base change, lemma "Stability and diagonal of an ind-e
 Filtered colimits are expressed in the arrow category, allowing varying source rings.
 The principal ind-Zariski condition is evaluated using the algebra structure of each ring map.
 
-Proof plan:
+Proof:
 
-1. Work with commutative rings and small filtered diagrams in a common universe. Call the finite
-building blocks over a ring R either etale R-algebras or finite products of principal
-localizations R_f. Both are finitely presented: R_f=R[t]/(ft-1), and a finite product is presented
-by finitely many orthogonal idempotents summing to 1 and presentations of its factors. Every
-principal localization is etale by the open-immersion clause of the cited composition node, and
-finite products are etale by the cited finite-product node (including the empty product, the zero
-ring). Thus an ind-Zariski presentation is also an ind-etale presentation. For either class, the
-cited finite-presentation factorization lemma and its converse criterion give: L has a filtered
-presentation by building blocks if and only if every map P\to L from a finitely presented
-R-algebra factors through a building block. Choose a set of representatives of the building blocks
-when applying the criterion. Dependencies: def-weil-pbc-ind-etale-algebra, lem-weil-pbc-finite-
-presentation-algebra-factors-filtered-colimit, lem-weil-pbc-factorization-criterion-filtered-
-colimit, lem-weil-pbc-etale-composition-cancellation, lem-weil-pbc-etale-algebra-finite-product.
+The source library already proves ind-etale base change and composition, weak etaleness of
+ind-etale maps, relative ind-etaleness by cancellation, and weakly etale composition. Weakly
+etale base change follows from the tensor-product instance and invariance under ring isomorphism.
 
-2. For R\to R\prime and L=\varinjlim_i L_i, the canonical map \varinjlim_i(R\prime\otimes_R
-L_i)\to R\prime\otimes_R L is an isomorphism. Explicitly, maps from either side to an R\prime-
-algebra Q are compatible families of R-algebra maps L_i\to Q: the tensor universal property and
-then the colimit universal property give the mutually inverse correspondences. Each etale building
-block stays etale by the cited base-change node. For Zariski blocks, R\prime\otimes_R\prod_{a=1}^n
-R_{f_a}\cong\prod_{a=1}^n R\prime_{\bar f_a}: the finite orthogonal idempotents split the tensor
-product, and in each factor adjoining an inverse to f_a is adjoining an inverse to its image. This
-includes n=0. These presentations prove arbitrary base-change stability for both classes.
-Dependencies: def-weil-pbc-ind-etale-algebra, lem-weil-pbc-etale-base-change-finite-limits, def-
-weil-pbc-category-colimit.
+For principal ind-Zariski maps, use finite products of principal localizations as building
+blocks. Tensor product preserves these blocks: it distributes over finite products and changes
+localization at f into localization at the image of f. The base-change functor on algebra
+categories preserves colimits, giving base-change stability of their filtered colimits.
 
-3. Let R\to B\to C be ind-etale. Write B=\varinjlim_i B_i with B_i etale over R and C=\varinjlim_j
-C_j with C_j etale over B. Given a finitely presented R-algebra P and P\to C, factor it through
-C_j by the cited factorization lemma. The cited etale-algebra descent node supplies i and an etale
-B_i-algebra H with C_j\cong B\otimes_{B_i}H. The latter is the filtered colimit of
-B_k\otimes_{B_i}H over arrows i\to k: this follows by the tensor universal property as in step 2.
-Factor P\to C_j through one such term. That term is etale over B_k by base change and over R by
-composition, so P\to C factors through an etale R-algebra. The criterion in step 1 proves the ind-
-etale composition assertion. All scheme uses here are on spectra of rings; the descent node itself
-supplies an affine algebra H, so no affineness of a descended scheme is assumed. Dependencies:
-def-weil-pbc-ind-etale-algebra, lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit,
-lem-weil-pbc-factorization-criterion-filtered-colimit, lem-weil-pbc-etale-algebra-filtered-
-colimit-descent, lem-weil-pbc-etale-base-change-finite-limits, lem-weil-pbc-etale-composition-
-cancellation.
+The blocks are finitely presented because they are etale. They compose: localizing a product
+amounts to localizing each factor, and if g = a/f^N in A_f then (A_f)_g is A_(fa). Flatten the
+resulting finite product. They also spread over filtered colimits: finitely many denominators
+have representatives at a common stage. Apply the source library's composition theorem for
+ind-properties of finitely presented morphisms that spread.
 
-4. For ind-Zariski R\to B\to C, write B=\varinjlim_i B_i with B_i=\prod_a R_{f_{ia}}, and C as a
-filtered colimit of blocks C_j=\prod_{b=1}^{m_j}B_{g_{jb}}. A map P\to C from a finitely presented
-R-algebra factors through some C_j. Choose one common i representing all finitely many g_{jb} in
-B_i, using the cited elementwise colimit description. Put H=\prod_b(B_i)_{g_{jb,i}}. Its base
-change to B is C_j, and C_j=\varinjlim_{i\to k}\prod_b(B_k)_{g_{jb,k}} by the explicit finite-
-product/localization calculation in step 2. Factor P\to C_j through one such term. If g in a
-factor R_f is a/f^N, then (R_f)_g\cong R_{fa}: making f and g invertible is exactly making f and a
-invertible. Hence that term is a finite product of principal R-localizations, including zero
-factors and empty products. The criterion in step 1 proves ind-Zariski composition; neither the
-elements g nor the product components have been assumed to descend without choosing their
-representatives. Dependencies: def-weil-pbc-ind-etale-algebra, lem-weil-pbc-finite-presentation-
-algebra-factors-filtered-colimit, lem-weil-pbc-factorization-criterion-filtered-colimit, lem-pc-
-filtered-colimit-commrings-elementwise.
-
-5. Let L=\varinjlim_i L_i with every L_i ind-etale, or with every L_i ind-Zariski, over a fixed R.
-Given finitely presented P and P\to L, the cited factorization lemma first factors it through L_i,
-and then through a finite building block in a chosen presentation of L_i. The criterion in step 1
-gives a filtered presentation of L by building blocks of the same class. This proves the filtered-
-colimit assertion without imposing any compatibility between independently chosen presentations of
-the L_i. If the colimit assertion is read for a filtered diagram of arrows R_i\to L_i with varying
-bases, apply step 2 to R_i\to R=\varinjlim_i R_i. Then
-\varinjlim_i(R\otimes_{R_i}L_i)\cong\varinjlim_i L_i as R-algebras: maps out of either side are
-precisely compatible maps out of the L_i agreeing with the R_i structural maps. Dependencies: def-
-weil-pbc-ind-etale-algebra, lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit,
-lem-weil-pbc-factorization-criterion-filtered-colimit, def-weil-pbc-category-colimit.
-
-6. Let B=\varinjlim_i E_i be ind-etale over A and put S=B\otimes_A B, with multiplication \mu:S\to
-B. For each i, E_i\otimes_A E_i is etale over E_i through its first factor by base change. Its
-multiplication is an E_i-algebra retraction. Apply the cited etale-section idempotent splitting
-node to obtain an idempotent e_i with \ker(\mu_i)=(1-e_i)(E_i\otimes_A E_i). Every element x of S
-has a representative x_i in some E_i\otimes_A E_i: write x as a finite sum of pure tensors and
-advance their finitely many coefficients to a common stage. If \mu(x)=0, the cited elementwise
-equality criterion gives an arrow i\to k where \mu_k(x_k)=0. Thus x is a multiple of the image of
-1-e_k. Conversely those images all lie in \ker\mu. Consequently \ker\mu is generated by
-idempotents, with no compatibility required among the chosen e_i. Dependencies: def-weil-pbc-ind-
-etale-algebra, lem-weil-pbc-etale-base-change-finite-limits, lem-weil-pbc-etale-section-
-idempotent-splitting, lem-pc-filtered-colimit-commrings-elementwise.
-
-7. Write J=\ker\mu, generated by idempotents q_\alpha as proved in step 6, and let U be the
-multiplicative subset of S generated by 1-q_\alpha. The quotient S/J inverts U since each
-1-q_\alpha maps to 1. In U^{-1}S each q_\alpha vanishes because q_\alpha(1-q_\alpha)=0 and
-1-q_\alpha is invertible. The quotient and localization universal properties give inverse maps
-S/J\leftrightarrows U^{-1}S fixing every element of S. Multiplication is surjective
-(b=\mu(b\otimes1)), hence B\cong S/J\cong U^{-1}S. For finite subsets F of the generators, invert
-u_F=\prod_{\alpha\in F}(1-q_\alpha); these principal localizations form a filtered presentation of
-U^{-1}S, since any map inverting all u_F inverts precisely U. Thus \mu is ind-Zariski. Each
-principal localization S_{u_F} is flat over S by the cited localization-flat node, and applying
-the cited filtered-colimit-flat-modules node to this filtered presentation shows that \mu is flat
-as an S-module. Each E_i is flat over A by the definition of etale and the affine flatness
-equivalence. To see the underlying A-module of B is their filtered module colimit, take the
-disjoint union of stage modules modulo eventual equality: the cited ring-colimit description gives
-the same set and the same addition and A-scalar multiplication. The cited filtered-colimit-flat-
-modules node therefore makes B flat over A. Together these two flatness assertions prove weak
-etaleness. Dependencies: def-weil-pbc-ind-etale-algebra, lem-weil-pbc-localization-flat, def-weil-
-etale-morphism, lem-weil-pbc-flat-ring-map-iff-flat-affine, lem-pc-filtered-colimit-commrings-
-elementwise, lem-weil-pbc-filtered-colimit-flat-modules.
-
-8. For an A-algebra map h:B\to C between ind-etale A-algebras, factor it as b\mapsto b\otimes1
-from B to B\otimes_A C, followed by p(b\otimes c)=h(b)c. The first map is the base change of A\to
-C and is ind-etale by step 2. The second is a base change of \mu_B:B\otimes_A B\to B from step 7
-along \theta:B\otimes_A B\to B\otimes_A C, \theta(b_1\otimes b_2)=b_1\otimes h(b_2). The pushout
-isomorphism (B\otimes_A C)\otimes_{B\otimes_A B} B\cong C sends (b\otimes c)\otimes b\prime to
-h(bb\prime)c, with inverse c\mapsto(1\otimes c)\otimes1. Balancing moves b\prime to the first
-tensor factor and then uses b\otimes1=1\otimes h(b), verifying both inverse identities. Under this
-isomorphism the base-changed multiplication is exactly p. By ind-Zariski base-change stability, p
-is ind-Zariski, hence ind-etale by step 1. Ind-etale composition from step 3 now proves h ind-
-etale. Dependencies: def-weil-pbc-ind-etale-algebra.
-
-9. For weakly etale A\to B\to C, A\to C is flat by the cited flat-composition node. Its
-multiplication factors as C\otimes_A C\to C\otimes_B C\to C. The first arrow is the base change of
-\mu_B along B\otimes_A B\to C\otimes_A C, b_1\otimes b_2\mapsto b_1\otimes b_2: explicitly
-(C\otimes_A C)\otimes_{B\otimes_A B}B\cong C\otimes_B C via (c_1\otimes c_2)\otimes b\mapsto
-bc_1\otimes c_2. The inverse takes c_1\otimes_B c_2 to (c_1\otimes_A c_2)\otimes1, which is
-B-balanced by the tensor relations. The first arrow is flat by flat module base change and the
-second by weak etaleness of B\to C; composition makes \mu_{C/A} flat. For A\to A\prime and
-B\prime=A\prime\otimes_A B, the structural map A\prime\to B\prime is flat by base change. Its
-diagonal satisfies B\prime\otimes_{A\prime}B\prime\cong A\prime\otimes_A(B\otimes_A B); under the
-associativity isomorphism its multiplication is the base change of \mu_B, hence flat by the same
-base-change node. This proves both remaining weak-etale stability assertions. Dependencies: def-
-weil-pbc-ind-etale-algebra, lem-weil-pbc-flat-ring-map-comp, lem-weil-pbc-flat-module-base-change.
+For filtered colimits with varying bases, push each stage arrow out to the colimit source.
+These pushouts form a filtered diagram with that fixed source, whose target colimit is the
+original target colimit. Construct its universal property using the two original colimit
+universal properties and pushout descent; filteredness identifies all the source injections.
+Cobase-change stability makes its stages satisfy the original property, so the colimit arrow
+satisfies its ind-property. Finally flatten twice-ind presentations, using
+`RingHom.IndEtale.iff_ind_indEtale` and `MorphismProperty.ind_ind`, respectively.
 -/
 theorem indEtale_principalZariski_stability :
     RingHom.IsStableUnderBaseChange (@RingHom.IndEtale.{u}) ∧
@@ -192,6 +469,19 @@ theorem indEtale_principalZariski_stability :
       ∀ f : B →ₐ[A] C, f.toRingHom.IndEtale) ∧
     RingHom.StableUnderComposition (@RingHom.WeaklyEtale.{u, u}) ∧
     RingHom.IsStableUnderBaseChange (@RingHom.WeaklyEtale.{u, u}) := by
-  sorry
+  refine ⟨IndEtale.isStableUnderBaseChange, principal_baseChange, ?_, principal_comp,
+    ?_, ?_, ?_, ?_, ?_, weaklyEtale_baseChange⟩
+  · intro A B C _ _ _ f g hf hg
+    exact hg.comp hf
+  · intro I _ _ D c hc h
+    exact indEtale_colimit D c hc h
+  · intro I _ _ D c hc h
+    exact principal_colimit D c hc h
+  · intro A B _ _ f hf
+    exact hf.weaklyEtale
+  · intro A B C _ _ _ _ _ hB hC f
+    exact relative_indEtale A B C hB hC f
+  · intro A B C _ _ _ f g hf hg
+    exact hf.comp hg
 
 end RingHom

@@ -17,154 +17,86 @@
  ],
  "proof": [
   {
-   "text": "Work with commutative rings and small filtered diagrams in a common universe. Call the finite building blocks over a ring R either etale R-algebras or finite products of principal localizations R_f. Both are finitely presented: R_f=R[t]/(ft-1), and a finite product is presented by finitely many orthogonal idempotents summing to 1 and presentations of its factors. Every principal localization is etale by the open-immersion clause of the cited composition node, and finite products are etale by the cited finite-product node (including the empty product, the zero ring). Thus an ind-Zariski presentation is also an ind-etale presentation. For either class, the cited finite-presentation factorization lemma and its converse criterion give: L has a filtered presentation by building blocks if and only if every map P\\to L from a finitely presented R-algebra factors through a building block. Choose a set of representatives of the building blocks when applying the criterion.",
+   "text": "Reuse the fully proved source-library results RingHom.IndEtale.isStableUnderBaseChange and RingHom.IndEtale.comp for ind-etale base change and composition. RingHom.IndEtale.weaklyEtale gives weak etaleness. For an A-algebra map f : B -> C between ind-etale A-algebras, f composed with algebraMap A B equals algebraMap A C by f.commutes, so RingHom.IndEtale.of_comp proves f ind-etale. No affine etale-descent or idempotent-splitting obligation is needed here.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
+    "place": "Proof, paragraphs 1-2; existing source-library ind-etale APIs"
+   }
+  },
+  {
+   "text": "Let blocks A be the property of being isomorphic as an A-algebra to a finite product of principal localizations. Construct tensorBlockEquiv using Algebra.TensorProduct.piRight and IsLocalization.algEquiv: S tensor_A product_j A_(f_j) is product_j S_(image f_j), including the empty product. Realize algebra base change as the equivalence with Under A, pushout along A -> S, and the inverse equivalence with S-algebras. This functor preserves colimits and has the explicit tensor-product equivalence bcEquiv. Map the filtered block presentation through it and transport across bcEquiv. Algebra.IsPushout.equiv then gives stability under arbitrary base-change squares.",
    "uses": [
     "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-    "lem-weil-pbc-factorization-criterion-filtered-colimit",
-    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
+    "place": "Proof, paragraph 1: explicit tensor and colimit base change"
+   }
+  },
+  {
+   "text": "Regard blocks as the morphism property blockMaps on CommRingCat. The equivalence between A-algebras and Under A, together with ObjectProperty.ind_inverseImage_eq_of_isEquivalence, identifies the given principal ind-Zariski definition with blockMaps.ind. Every block is etale: principal localizations are etale and finite products preserve etaleness. Hence every block is finitely presented and CommRingCat.isFinitelyPresentable_under gives blockMaps <= MorphismProperty.isFinitelyPresentable. MorphismProperty.ind_ind then shows that ind of principal ind-Zariski is principal ind-Zariski.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
     "lem-weil-pbc-etale-algebra-finite-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
-    "place": "Proof, first paragraph: finite-presentation building blocks and the factorization criterion"
+    "place": "Proof, paragraph 1: finite blocks and flattening filtered presentations"
    }
   },
   {
-   "text": "For R\\to R\\prime and L=\\varinjlim_i L_i, the canonical map \\varinjlim_i(R\\prime\\otimes_R L_i)\\to R\\prime\\otimes_R L is an isomorphism. Explicitly, maps from either side to an R\\prime-algebra Q are compatible families of R-algebra maps L_i\\to Q: the tensor universal property and then the colimit universal property give the mutually inverse correspondences. Each etale building block stays etale by the cited base-change node. For Zariski blocks, R\\prime\\otimes_R\\prod_{a=1}^n R_{f_a}\\cong\\prod_{a=1}^n R\\prime_{\\bar f_a}: the finite orthogonal idempotents split the tensor product, and in each factor adjoining an inverse to f_a is adjoining an inverse to its image. This includes n=0. These presentations prove arbitrary base-change stability for both classes.",
+   "text": "Prove blocks closed under composition. A principal localization of a finite product is the product of the localized factors, by IsLocalization.iff_map_piEvalRingHom. For g in A_f choose its numerator a with IsLocalization.Away.sec; IsLocalization.Away.mul_of_associated identifies (A_f)_g with A_(f*a). Flatten a finite product of finite products using a dependent finite index and Fintype.equivFin. These arguments also cover the empty product and zero localizations. Prove blocks spread over filtered colimits by choosing representatives of their finitely many denominators at one common stage, using Concrete.isColimit_exists_rep and a cocone over a finite discrete diagram. The explicit tensorBlockEquiv supplies the required pushout. Apply the already proved source theorem MorphismProperty.IsStableUnderComposition.ind_of_le_isFinitelyPresentable to blockMaps and its finite-presentation bound, composition, cobase-change and PreIndSpreads instances. Transfer the result through principal_iff_ind.",
    "uses": [
     "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
-    "place": "Proof, first paragraph: base change"
-   }
-  },
-  {
-   "text": "Let R\\to B\\to C be ind-etale. Write B=\\varinjlim_i B_i with B_i etale over R and C=\\varinjlim_j C_j with C_j etale over B. Given a finitely presented R-algebra P and P\\to C, factor it through C_j by the cited factorization lemma. The cited etale-algebra descent node supplies i and an etale B_i-algebra H with C_j\\cong B\\otimes_{B_i}H. The latter is the filtered colimit of B_k\\otimes_{B_i}H over arrows i\\to k: this follows by the tensor universal property as in step 2. Factor P\\to C_j through one such term. That term is etale over B_k by base change and over R by composition, so P\\to C factors through an etale R-algebra. The criterion in step 1 proves the ind-etale composition assertion. All scheme uses here are on spectra of rings; the descent node itself supplies an affine algebra H, so no affineness of a descended scheme is assumed.",
-   "uses": [
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-    "lem-weil-pbc-factorization-criterion-filtered-colimit",
-    "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
-    "place": "Proof, first paragraph: composition, using affine finite-data descent"
-   }
-  },
-  {
-   "text": "For ind-Zariski R\\to B\\to C, write B=\\varinjlim_i B_i with B_i=\\prod_a R_{f_{ia}}, and C as a filtered colimit of blocks C_j=\\prod_{b=1}^{m_j}B_{g_{jb}}. A map P\\to C from a finitely presented R-algebra factors through some C_j. Choose one common i representing all finitely many g_{jb} in B_i, using the cited elementwise colimit description. Put H=\\prod_b(B_i)_{g_{jb,i}}. Its base change to B is C_j, and C_j=\\varinjlim_{i\\to k}\\prod_b(B_k)_{g_{jb,k}} by the explicit finite-product/localization calculation in step 2. Factor P\\to C_j through one such term. If g in a factor R_f is a/f^N, then (R_f)_g\\cong R_{fa}: making f and g invertible is exactly making f and a invertible. Hence that term is a finite product of principal R-localizations, including zero factors and empty products. The criterion in step 1 proves ind-Zariski composition; neither the elements g nor the product components have been assumed to descend without choosing their representatives.",
-   "uses": [
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-    "lem-weil-pbc-factorization-criterion-filtered-colimit",
     "lem-pc-filtered-colimit-commrings-elementwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
-    "place": "Proof, first paragraph: explicit denominator and product descent for ind-Zariski composition"
+    "place": "Proof, paragraph 1: composition and finite denominator descent"
    }
   },
   {
-   "text": "Let L=\\varinjlim_i L_i with every L_i ind-etale, or with every L_i ind-Zariski, over a fixed R. Given finitely presented P and P\\to L, the cited factorization lemma first factors it through L_i, and then through a finite building block in a chosen presentation of L_i. The criterion in step 1 gives a filtered presentation of L by building blocks of the same class. This proves the filtered-colimit assertion without imposing any compatibility between independently chosen presentations of the L_i. If the colimit assertion is read for a filtered diagram of arrows R_i\\to L_i with varying bases, apply step 2 to R_i\\to R=\\varinjlim_i R_i. Then \\varinjlim_i(R\\otimes_{R_i}L_i)\\cong\\varinjlim_i L_i as R-algebras: maps out of either side are precisely compatible maps out of the L_i agreeing with the R_i structural maps.",
+   "text": "Prove the varying-base filtered-colimit step directly by universal properties. Given a filtered diagram of stage arrows F_i -> G_i and colimit source A and target B, set E_i = A pushout_(F_i) G_i. Pushout descent gives the transition maps. The maps from A into any cocone over E are independent of the index, since filteredness gives a common receiving index. From the G colimit obtain the unique map out of B, and use the F colimit and pushout hom-extensionality to prove its compatibility with E_i and uniqueness. Thus B is the colimit of E. If P is stable under cobase change and each stage arrow lies in P, every A -> E_i lies in P and hence A -> B lies in P.ind. Apply this construction first to ind-etale maps and use RingHom.IndEtale.iff_ind_indEtale; apply it again to principal ind-Zariski maps and use the flattening identity of step 3. Arrow.leftFunc and Arrow.rightFunc preserve the given arrow-category colimit.",
    "uses": [
     "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-    "lem-weil-pbc-factorization-criterion-filtered-colimit",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
-    "place": "Proof, first paragraph: filtered colimits"
+    "place": "Proof, paragraph 1: filtered colimits with varying source rings"
    }
   },
   {
-   "text": "Let B=\\varinjlim_i E_i be ind-etale over A and put S=B\\otimes_A B, with multiplication \\mu:S\\to B. For each i, E_i\\otimes_A E_i is etale over E_i through its first factor by base change. Its multiplication is an E_i-algebra retraction. Apply the cited etale-section idempotent splitting node to obtain an idempotent e_i with \\ker(\\mu_i)=(1-e_i)(E_i\\otimes_A E_i). Every element x of S has a representative x_i in some E_i\\otimes_A E_i: write x as a finite sum of pure tensors and advance their finitely many coefficients to a common stage. If \\mu(x)=0, the cited elementwise equality criterion gives an arrow i\\to k where \\mu_k(x_k)=0. Thus x is a multiple of the image of 1-e_k. Conversely those images all lie in \\ker\\mu. Consequently \\ker\\mu is generated by idempotents, with no compatibility required among the chosen e_i.",
-   "uses": [
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-section-idempotent-splitting",
-    "lem-pc-filtered-colimit-commrings-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
-    "place": "Proof, second paragraph: finite etale diagonals and their kernel in the colimit"
-   }
-  },
-  {
-   "text": "Write J=\\ker\\mu, generated by idempotents q_\\alpha as proved in step 6, and let U be the multiplicative subset of S generated by 1-q_\\alpha. The quotient S/J inverts U since each 1-q_\\alpha maps to 1. In U^{-1}S each q_\\alpha vanishes because q_\\alpha(1-q_\\alpha)=0 and 1-q_\\alpha is invertible. The quotient and localization universal properties give inverse maps S/J\\leftrightarrows U^{-1}S fixing every element of S. Multiplication is surjective (b=\\mu(b\\otimes1)), hence B\\cong S/J\\cong U^{-1}S. For finite subsets F of the generators, invert u_F=\\prod_{\\alpha\\in F}(1-q_\\alpha); these principal localizations form a filtered presentation of U^{-1}S, since any map inverting all u_F inverts precisely U. Thus \\mu is ind-Zariski. Each principal localization S_{u_F} is flat over S by the cited localization-flat node, and applying the cited filtered-colimit-flat-modules node to this filtered presentation shows that \\mu is flat as an S-module. Each E_i is flat over A by the definition of etale and the affine flatness equivalence. To see the underlying A-module of B is their filtered module colimit, take the disjoint union of stage modules modulo eventual equality: the cited ring-colimit description gives the same set and the same addition and A-scalar multiplication. The cited filtered-colimit-flat-modules node therefore makes B flat over A. Together these two flatness assertions prove weak etaleness.",
-   "uses": [
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-localization-flat",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-    "lem-pc-filtered-colimit-commrings-elementwise",
-    "lem-weil-pbc-filtered-colimit-flat-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
-    "place": "Proof, second paragraph: localization of the diagonal and flatness"
-   }
-  },
-  {
-   "text": "For an A-algebra map h:B\\to C between ind-etale A-algebras, factor it as b\\mapsto b\\otimes1 from B to B\\otimes_A C, followed by p(b\\otimes c)=h(b)c. The first map is the base change of A\\to C and is ind-etale by step 2. The second is a base change of \\mu_B:B\\otimes_A B\\to B from step 7 along \\theta:B\\otimes_A B\\to B\\otimes_A C, \\theta(b_1\\otimes b_2)=b_1\\otimes h(b_2). The pushout isomorphism (B\\otimes_A C)\\otimes_{B\\otimes_A B} B\\cong C sends (b\\otimes c)\\otimes b\\prime to h(bb\\prime)c, with inverse c\\mapsto(1\\otimes c)\\otimes1. Balancing moves b\\prime to the first tensor factor and then uses b\\otimes1=1\\otimes h(b), verifying both inverse identities. Under this isomorphism the base-changed multiplication is exactly p. By ind-Zariski base-change stability, p is ind-Zariski, hence ind-etale by step 1. Ind-etale composition from step 3 now proves h ind-etale.",
+   "text": "Reuse RingHom.WeaklyEtale.comp for composition. For base change, RingHom.IsStableUnderBaseChange.mk reduces to invariance under ring isomorphism and the canonical tensor-product square. Composition with bijective maps proves the former, since a bijective ring map is etale and hence weakly etale. The latter is exactly the existing Algebra.WeaklyEtale tensor-product instance after rewriting RingHom.weaklyEtale_algebraMap_iff. Assemble the ten clauses in their original order.",
    "uses": [
     "def-weil-pbc-ind-etale-algebra"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
-    "place": "Proof, third paragraph: the relative assertion, with the actual pushout maps"
-   }
-  },
-  {
-   "text": "For weakly etale A\\to B\\to C, A\\to C is flat by the cited flat-composition node. Its multiplication factors as C\\otimes_A C\\to C\\otimes_B C\\to C. The first arrow is the base change of \\mu_B along B\\otimes_A B\\to C\\otimes_A C, b_1\\otimes b_2\\mapsto b_1\\otimes b_2: explicitly (C\\otimes_A C)\\otimes_{B\\otimes_A B}B\\cong C\\otimes_B C via (c_1\\otimes c_2)\\otimes b\\mapsto bc_1\\otimes c_2. The inverse takes c_1\\otimes_B c_2 to (c_1\\otimes_A c_2)\\otimes1, which is B-balanced by the tensor relations. The first arrow is flat by flat module base change and the second by weak etaleness of B\\to C; composition makes \\mu_{C/A} flat. For A\\to A\\prime and B\\prime=A\\prime\\otimes_A B, the structural map A\\prime\\to B\\prime is flat by base change. Its diagonal satisfies B\\prime\\otimes_{A\\prime}B\\prime\\cong A\\prime\\otimes_A(B\\otimes_A B); under the associativity isomorphism its multiplication is the base change of \\mu_B, hence flat by the same base-change node. This proves both remaining weak-etale stability assertions.",
-   "uses": [
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-flat-ring-map-comp",
-    "lem-weil-pbc-flat-module-base-change"
-   ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
-    "place": "Proof, third paragraph: weak-etale composition and base change"
+    "place": "Proof, paragraph 3: existing weakly etale composition and tensor-product APIs"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-etale-morphism",
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-ind-etale-algebra",
   "lem-pc-filtered-colimit-commrings-elementwise",
-  "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
-  "lem-weil-pbc-etale-algebra-finite-product",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-section-idempotent-splitting",
-  "lem-weil-pbc-factorization-criterion-filtered-colimit",
-  "lem-weil-pbc-filtered-colimit-flat-modules",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-  "lem-weil-pbc-flat-module-base-change",
-  "lem-weil-pbc-flat-ring-map-comp",
-  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-  "lem-weil-pbc-localization-flat"
+  "lem-weil-pbc-etale-algebra-finite-product"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-stability.md",
-  "place": "## Proof"
+  "place": "D3 stage 3: full Lean proof using existing source-library APIs, explicit principal-localization blocks, and pushout colimit descent"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -224,5 +156,15 @@
   "by": "NC",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T154201-L-161218",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
