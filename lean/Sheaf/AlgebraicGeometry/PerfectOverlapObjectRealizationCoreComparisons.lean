@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
+public import Sheaf.AlgebraicGeometry.SingleComplexOpenCounitCompatibility
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
@@ -566,15 +567,14 @@ noncomputable def perfectOverlapOpenLiftIso
   letI : rY.EssSurj := Localization.essSurj rY W
   let M := rY.objPreimage A
   let e := rY.objObjPreimageIso A
-  let β := openPullbackRestrictionIso f (f ⁻¹ᵁ U) U le_rfl
   change ((schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory.obj
     ((derivedPullback f).obj M)) ≅ (derivedPullback (f ∣_ U)).obj A
   have β' :
       (schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory.obj
           ((derivedPullback f).obj M) ≅
         (derivedPullback (f ∣_ U)).obj (rY.obj M) := by
-    simpa only [Scheme.Hom.resLE_eq_morphismRestrict, Functor.comp_obj, rY]
-      using β.app M
+    exact (singleComplexOpenPullbackSquareIso f U (f ⁻¹ᵁ U) (f ∣_ U)
+      (morphismRestrict_ι f U)).symm.app M
   exact β' ≪≫ (derivedPullback (f ∣_ U)).mapIso e
 
 /-- The fixed restriction/pullback comparison on one open. Its implementation
