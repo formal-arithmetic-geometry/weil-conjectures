@@ -146,26 +146,25 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-752a2e421",
-  "group": "NA",
+  "reviewer": "NT-stage2-Codex-b3d897215",
+  "group": "NR",
   "result": "pass",
-  "note": "Wrote review.md. Statements, dependencies, canonical maps, universes, edge cases, and records checked; all four modules compile cleanly through scompile.py. No fixes needed. External context-clone advancement changed only blueprint-index.tsv; immutable delivery unaffected."
+  "note": "Statement, dependencies, canonical constructions, universes, edge cases, docstrings, report sections, and per-file compilation all checked; no findings."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingDerivedAdjunction",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantDerivedDirectImage",
   "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleRingModuleAdjunction_existsUnique",
-   "AlgebraicGeometry.Scheme.proEtaleRingModuleAdjunction",
-   "AlgebraicGeometry.Scheme.proEtaleRingDerivedAdjunction"
+   "AlgebraicGeometry.Scheme.proEtaleConstantModuleDirectImage_additive",
+   "AlgebraicGeometry.Scheme.proEtaleConstantDerivedDirectImage"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOperationsCanonicalAdjunction.lean",
-  "statement": "def proEtaleRingDerivedAdjunction : proEtaleRingDerivedPullback f R S c ⊣ proEtaleRingDerivedDirectImage f R S c",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantDerivedDirectImage.lean",
+  "statement": "abbrev proEtaleConstantDerivedDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A] : proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory Y A",
   "branch": "newtargets-dag",
-  "by": "NA",
+  "by": "NR",
   "date": "2026-10-15",
   "existing": false,
-  "note": "Section 1(B), return fbd410f63c6b: the inherited compiled derived adjunction references hasSheafify_coefficientUniverse, unavailable from the live KFlat module. Import its complete recorded generalized KFlat source explicitly and retain the uniquely normalized model-site tensor Hom correspondence and derived adjunction, with explicit coefficient-universe annotations. The ordinary and derived operations, small site, coefficients and mathematical signatures are unchanged."
+  "note": "Section 1(B): the old module only exposed derived direct image after supplying an inverse-image coefficient isomorphism. For canonical constant coefficients this demanded an unstated isomorphism theorem merely to name the existing K-injective construction. This module publicly reexports all original arbitrary identified-coefficient operations and their canonical adjunction, and exposes the same ordinary K-injective rightDerivedFunctor of the recorded proEtaleConstantModuleDirectImage through its actual constant-section structure map. It registers additivity from the recorded proEtaleConstantModuleDirectImage_additive_leftExact theorem; no coefficient map, category, resolution construction, or mathematical statement is changed."
  },
  "reviewed_proof": {
   "date": "2026-10-15",

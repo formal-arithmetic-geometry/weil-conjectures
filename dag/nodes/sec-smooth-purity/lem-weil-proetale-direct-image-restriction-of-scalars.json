@@ -26,7 +26,9 @@
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-proetale-operations",
   "def-pc-sheaf-restrict-scalars",
-  "def-pur-kinjective-complex"
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-proetale-module-direct-image-left-exact"
  ],
  "proof": [
   {
@@ -223,5 +225,31 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-b3843febc (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited sources. Repaired one step-2 citation gap by citing existing canonical constant-ring structure-map and isomorphism nodes; statement unchanged. Verified unbounded composition, nonflat coefficients, comparison direction and inverse resolution formula. review.md records all checks, accepted tool_uses, and a pre-existing dependency cycle outside this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b3d897215",
+  "group": "NR",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical constructions, universes, edge cases, docstrings, report sections, and per-file compilation all checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDirectImageRestrictionOfScalars",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleDerivedDirectImage_restrictScalars",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientRestrictScalars",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientRestrictScalars_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientRestrictScalars_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientDirectImageComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientDirectImageComparison",
+   "AlgebraicGeometry.Scheme.proEtaleDerivedDirectImage_restrictScalars"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDirectImageRestrictionOfScalars.lean",
+  "statement": "theorem proEtaleDerivedDirectImage_restrictScalars {X Y : Scheme.{u}} (f : X ⟶ Y) {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) : ∃ d : (proEtaleCoefficientRestrictScalars X φ).mapDerivedCategory ⋙ proEtaleConstantDerivedDirectImage f A ≅ proEtaleConstantDerivedDirectImage f B ⋙ (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory, ∀ (J : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X B)) ℤ) [J.IsKInjective] (I : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ) [I.IsKInjective] (j : ((proEtaleCoefficientRestrictScalars X φ).mapHomologicalComplex (.up ℤ)).obj J ⟶ I) [QuasiIso j], QuasiIso (((proEtaleConstantModuleDirectImage f A).mapHomologicalComplex (.up ℤ)).map j) ∧ d.hom.app (DerivedCategory.Q.obj J) ≫ (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory.map ((proEtaleConstantModuleDirectImage f B).rightDerivedFunctorObjQIso J).hom ≫ (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategoryFactors.hom.app (((proEtaleConstantModuleDirectImage f B).mapHomologicalComplex (.up ℤ)).obj J) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (proEtaleCoefficientDirectImageComparison f φ) (.up ℤ)).hom.app J) ≫ DerivedCategory.Q.map (((proEtaleConstantModuleDirectImage f A).mapHomologicalComplex (.up ℤ)).map j) = (proEtaleConstantDerivedDirectImage f A).map ((proEtaleCoefficientRestrictScalars X φ).mapDerivedCategoryFactors.hom.app J) ≫ (proEtaleConstantDerivedDirectImage f A).map (DerivedCategory.Q.map j) ≫ ((proEtaleConstantModuleDirectImage f A).rightDerivedFunctorObjQIso I).hom",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
