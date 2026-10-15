@@ -249,24 +249,33 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-bf2c6066f",
-  "group": "NF",
+  "reviewer": "NT-stage2-Codex-bee7dec8e",
+  "group": "NI",
   "result": "pass",
-  "note": "Statement, dependencies, universes, edge cases, docstrings, helper construction, report sections, and per-file compiler evidence all checked; no findings."
+  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, reports, and all per-file scompile checks verified; no fixes required."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingModuleInverseImage",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleCoefficientPullbackUniverses",
+  "declaration": "AlgebraicGeometry.Scheme.coefficientProEtaleModulePullback",
   "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleRingModelUnit",
-   "AlgebraicGeometry.Scheme.proEtaleRingModuleInverseImage"
+   "AlgebraicGeometry.Scheme.coefficientProEtaleSiteModel",
+   "AlgebraicGeometry.Scheme.coefficientProEtaleModelTopology",
+   "AlgebraicGeometry.Scheme.coefficientProEtaleModelBaseChange",
+   "AlgebraicGeometry.Scheme.coefficientProEtaleModelUp_isContinuous",
+   "AlgebraicGeometry.Scheme.coefficientProEtaleModelBaseChange_isContinuous",
+   "AlgebraicGeometry.Scheme.coefficientProEtaleDirectRingMap",
+   "AlgebraicGeometry.Scheme.coefficientProEtaleModelRingMap",
+   "AlgebraicGeometry.Scheme.coefficientProEtaleModuleDirectImage",
+   "AlgebraicGeometry.Scheme.coefficientProEtaleModuleDirectImage_isRightAdjoint",
+   "AlgebraicGeometry.Scheme.coefficientProEtaleModulePullback",
+   "AlgebraicGeometry.Scheme.coefficientProEtaleModuleAdjunction"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingInverseImage.lean",
-  "statement": "def proEtaleRingModuleInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Sheaf (ProEt.topology Y) RingCat.{u + 1}) : ringedSiteModules.{u + 1} R ⥤ ringedSiteModules.{u + 1} ((proEtaleSheafInverseImage f RingCat.{u + 1}).obj R)",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleCoefficientPullbackUniverses.lean",
+  "statement": "def coefficientProEtaleModulePullback {X Y : Scheme.{t}} (f : X ⟶ Y) (A : CommRingCat.{max r (t + 1)})",
   "branch": "newtargets-dag",
-  "by": "NF",
+  "by": "NI",
   "date": "2026-10-15",
   "existing": false,
-  "note": "§1(B): proEtaleModuleInverseImage accepts only CommRingCat, whereas this dependency explicitly defines inverse image for rings without commutativity and their modules. The repair publicly imports the entire recorded interface, retaining its declarations, and adds the RingCat module construction. It uses the same small site model, transports, actual RingCat sheaf inverse image and adjunction unit, and Mathlib module pullback. No site universe equality or freely chosen map is assumed. Existing commutative callers remain publicly available."
+  "note": "The recorded inverse-image API fixes the coefficient universe to the site size t+1. Publicly retain every recorded declaration and add constant-coefficient pullback with coefficients in max r (t+1), needed for independently sized finite extensions. Its right adjoint is the actual pushforward with the canonical constant-section coefficient map; the left adjoint is determined by that adjunction. The module also gives the coefficient-sized small models and canonical adjunction unit. No equality of site universes or arbitrary coefficient map is imposed."
  }
 }

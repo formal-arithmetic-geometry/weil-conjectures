@@ -138,15 +138,8 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.Algebra.Homology.KFlatIndependentCoefficients",
-  "declaration": "CochainComplex.IsKFlatIndependentCoefficients",
-  "file": "lean/Sheaf/Algebra/Homology/KFlatIndependentCoefficients.lean",
-  "statement": "def IsKFlatIndependentCoefficients (K : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) : Prop",
-  "branch": "newtargets-dag",
-  "by": "NO",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "The live IsKFlat stays in KFlat at coefficient universe max u v. This new module records the same total-tensor definition at an independent coefficient universe, with a comparison to the live predicate. Its three tensor-localization lemmas and two comparisons are postponed stage-3 theorems; none is a global instance.",
+  "module": "Sheaf.Algebra.Homology.KFlat",
+  "declaration": "CochainComplex.IsKFlat",
   "declarations": [
    "CochainComplex.IsKFlat",
    "CochainComplex.IsKFlatResolution",
@@ -154,23 +147,23 @@
    "SheafOfModules.preservesZeroMorphisms_curriedTensor",
    "SheafOfModules.preservesZeroMorphisms_curriedTensor_obj",
    "SheafOfModules.hasSheafify_coefficientUniverse",
-   "SheafOfModules.wEqualsLocallyBijective_coefficientUniverse",
-   "CochainComplex.IsKFlatIndependentCoefficients",
-   "CochainComplex.IsKFlatResolutionIndependentCoefficients",
-   "CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat",
-   "CochainComplex.isKFlatResolutionIndependentCoefficients_iff_isKFlatResolution",
-   "SheafOfModules.isMonoidal_W_independentCoefficients",
-   "SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients",
-   "SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients"
-  ]
+   "SheafOfModules.wEqualsLocallyBijective_coefficientUniverse"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/KFlat.lean",
+  "statement": "def IsKFlat (K : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The wrapper selected an older artifact fixing coefficient size to the site size, so the published independent-coefficient resolution could not synthesize the tensor structure. Supply the current published generalized source with only an explanatory module-docstring addition as a sibling overlay. All seven recorded declarations, independent coefficient sizes, relative smallness and the standard K-flat predicate are preserved; this is an artifact/interface reconciliation, with no mathematical change. All declarations, signatures, bodies and proof plans are unchanged; only the module documentation explains the integral-operations specialization."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-112336445",
-  "group": "NO",
+  "reviewer": "NT-stage2-Codex-bee7dec8e",
+  "group": "NI",
   "result": "pass",
-  "note": "All node clauses, dependencies, declarations, docstrings, edge cases, and report sections checked; both delivered modules compile cleanly with the side overlay."
+  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, reports, and all per-file scompile checks verified; no fixes required."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

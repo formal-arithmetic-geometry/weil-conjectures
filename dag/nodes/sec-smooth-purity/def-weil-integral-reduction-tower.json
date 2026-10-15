@@ -132,27 +132,35 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-0485f454a (reviewer sub-agent of L); spot-checked: Read the full item, eight dependency statements, reports, unit/chapter route, and cited source passages. Verified completed-sheaf coefficients, K-flat construction, linear chain maps, tower/cone compatibility, and resolution independence via the existing lemma. Small cases and duplicate candidates checked; no delivery fault or target weakening found. Detailed evidence and inherited issues recorded in review.md."
  },
  "lean": {
-  "module": "Sheaf.Paper.IntegralReductionTower",
-  "declaration": "WeilConjectures.integralReductionTower",
+  "module": "Sheaf.Paper.IntegralReductionTowerUnrestricted",
+  "declaration": "WeilConjectures.unrestrictedIntegralComplexTower",
   "declarations": [
-   "WeilConjectures.integralReductionTower",
-   "WeilConjectures.integralReductionTowerMap",
-   "WeilConjectures.integralReductionTowerMap_naturality",
-   "WeilConjectures.integralReductionTowerCone"
+   "WeilConjectures.integralTowerModules",
+   "WeilConjectures.integralTowerHasDerivedCategory",
+   "WeilConjectures.unrestrictedIntegralReductionExistence",
+   "WeilConjectures.unrestrictedIntegralReductionFunctor",
+   "WeilConjectures.unrestrictedIntegralReductionFunctor_additive",
+   "WeilConjectures.unrestrictedIntegralFiniteComplex",
+   "WeilConjectures.unrestrictedIntegralComplexFunctor",
+   "WeilConjectures.unrestrictedIntegralTensorSection",
+   "WeilConjectures.unrestrictedIntegralTransition_existsUnique",
+   "WeilConjectures.unrestrictedIntegralTransition",
+   "WeilConjectures.unrestrictedIntegralComplexTower"
   ],
-  "file": "lean/Sheaf/Paper/IntegralReductionTower.lean",
-  "statement": "def integralReductionTower (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) : ℕᵒᵖ ⥤ completedIntegralDerivedCategory l E Y D hl",
+  "file": "lean/Sheaf/Paper/IntegralReductionTowerUnrestricted.lean",
+  "statement": "def unrestrictedIntegralComplexTower (P : CochainComplex (integralTowerModules l E Y) ℤ) : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E Y) ℤ",
   "branch": "newtargets-dag",
-  "by": "NO",
+  "by": "NI",
   "date": "2026-10-15",
-  "existing": false
+  "existing": false,
+  "note": "The recorded reduction tower requires an auxiliary finite-field datum and l != p, not provided by the consumer. Publicly retain that recorded module and add its same scalar-extension/tensor-generator construction without the irrelevant datum, using the published unrestricted completed coefficient sheaf. The unique transition is fixed by its pure-tensor formula; no arbitrary tower is chosen."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-112336445",
-  "group": "NO",
+  "reviewer": "NT-stage2-Codex-bee7dec8e",
+  "group": "NI",
   "result": "pass",
-  "note": "All node clauses, dependencies, declarations, docstrings, edge cases, and report sections checked; both delivered modules compile cleanly with the side overlay."
+  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, reports, and all per-file scompile checks verified; no fixes required."
  }
 }

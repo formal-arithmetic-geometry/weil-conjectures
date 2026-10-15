@@ -32,7 +32,11 @@
   "def-pc-sheaf-restrict-scalars",
   "def-weil-abstract-derived-category",
   "def-pc-tensor-complex-sheaves",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-weil-integral-reduction-tower",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-derived-reduction",
+  "lem-weil-integral-reduction-tower-well-defined"
  ],
  "proof": [
   {
@@ -287,5 +291,65 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-3105b4ee9 (reviewer sub-agent of L); spot-checked: Read the item, all eight steps, cited statements, source passages, and unit/chapter route in full. Verified strict transitions, homotopy signs, localization descent, edge cases, and exact master target coefficients and arrow orientation. Repaired one B3 fault by citing the existing flat sheaf-module definition. review.md and corrected whole JSON are written; no new nodes or target changes.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bee7dec8e",
+  "group": "NI",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, reports, and all per-file scompile checks verified; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralOperationsWellDefined",
+  "declaration": "WeilConjectures.integralOperationsWellDefined",
+  "declarations": [
+   "WeilConjectures.integralOperationsAbSheafify",
+   "WeilConjectures.integralOperationsAbLocallyBijective",
+   "WeilConjectures.integralOperationsFiniteModules",
+   "WeilConjectures.integralOperationsSiteSmall",
+   "WeilConjectures.integralOperationsCommHasDerivedCategory",
+   "WeilConjectures.integralOperationsFinitePresheafMonoidal",
+   "WeilConjectures.integralOperationsFiniteMonoidal",
+   "WeilConjectures.integralOperationsFiniteTensorZero",
+   "WeilConjectures.integralOperationsFiniteTensorObjZero",
+   "WeilConjectures.integralOperationsRestrict",
+   "WeilConjectures.integralOperationsLevelPullback",
+   "WeilConjectures.integralOperationsLevelPullback_additive",
+   "WeilConjectures.integralOperationsPullbackLevel",
+   "WeilConjectures.integralOperationsPullbackGenerator",
+   "WeilConjectures.integralOperationsPullbackTransition_existsUnique",
+   "WeilConjectures.integralOperationsPullbackTransition",
+   "WeilConjectures.integralOperationsTensorLevel",
+   "WeilConjectures.integralOperationsTensorSection",
+   "WeilConjectures.integralOperationsTotalTensorSection",
+   "WeilConjectures.integralOperationsTensorTransition_existsUnique",
+   "WeilConjectures.integralOperationsTensorTransition",
+   "WeilConjectures.integralOperationsTowerStep",
+   "WeilConjectures.integralOperationsRoos",
+   "WeilConjectures.integralOperationsRoos_square",
+   "WeilConjectures.integralOperationsRoosMap",
+   "WeilConjectures.integralOperationsRoosMap_id",
+   "WeilConjectures.integralOperationsRoosMap_comp",
+   "WeilConjectures.integralOperationsRoosFunctor",
+   "WeilConjectures.integralOperationsCountableProducts",
+   "WeilConjectures.integralOperationsDerivedCountableProducts",
+   "WeilConjectures.integralOperationsPullbackTowerFunctor",
+   "WeilConjectures.integralOperationsTensorTowerFunctor",
+   "WeilConjectures.integralOperationsPullbackComplexFunctor",
+   "WeilConjectures.integralOperationsTensorComplexFunctor",
+   "WeilConjectures.integralOperationsGoodComplex",
+   "WeilConjectures.integralOperationsGoodLocalization",
+   "WeilConjectures.integralOperationsPullbackOnGood",
+   "WeilConjectures.integralOperationsTensorOnGood",
+   "WeilConjectures.integralOperationsDerivedLimitProperty",
+   "WeilConjectures.integralOperationsWellDefined"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralOperationsWellDefined.lean",
+  "statement": "theorem integralOperationsWellDefined {X Y : AlgebraicGeometry.Scheme.{t}} (f : X ⟶ Y) (W : AlgebraicGeometry.Scheme.{t}) : (∀ (P P' : (integralOperationsGoodComplex l E Y).FullSubcategory) (α : P.obj ⟶ P'.obj), QuasiIso α → QuasiIso ((integralOperationsPullbackComplexFunctor l E f).map α)) ∧ (∀ (P P' Q Q' : (integralOperationsGoodComplex l E W).FullSubcategory) (α : P.obj ⟶ P'.obj) (β : Q.obj ⟶ Q'.obj), QuasiIso α → QuasiIso β → QuasiIso ((integralOperationsTensorComplexFunctor l E W).map (X := (P.obj, Q.obj)) (Y := (P'.obj, Q'.obj)) (α, β))) ∧ ∃ (F : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l E X)) (e : integralOperationsGoodLocalization l E Y ⋙ F ≅ integralOperationsPullbackOnGood l E f) (G : (DerivedCategory (integralTowerModules l E W)) × (DerivedCategory (integralTowerModules l E W)) ⥤ DerivedCategory (integralTowerModules l E W)) (d : ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ⋙ G ≅ integralOperationsTensorOnGood l E W), (∀ (F' : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l E X)) (e' : integralOperationsGoodLocalization l E Y ⋙ F' ≅ integralOperationsPullbackOnGood l E f), ∃! ι : F ≅ F', isoWhiskerLeft (integralOperationsGoodLocalization l E Y) ι ≪≫ e' = e) ∧ (∀ (G' : (DerivedCategory (integralTowerModules l E W)) × (DerivedCategory (integralTowerModules l E W)) ⥤ DerivedCategory (integralTowerModules l E W)) (d' : ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ⋙ G' ≅ integralOperationsTensorOnGood l E W), ∃! ι : G ≅ G', isoWhiskerLeft ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ι ≪≫ d' = d) ∧ (∀ (K : DerivedCategory (integralTowerModules l E Y)) (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (_e : DerivedCategory.Q.obj P.obj ≅ K), integralOperationsDerivedLimitProperty l E X ((integralOperationsPullbackTowerFunctor l E f).obj P.obj) (F.obj K)) ∧ (∀ (M N : DerivedCategory (integralTowerModules l E W)) (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (_e : DerivedCategory.Q.obj P.obj ≅ M) (_d : DerivedCategory.Q.obj Q.obj ≅ N), integralOperationsDerivedLimitProperty l E W ((integralOperationsTensorTowerFunctor l E W).obj (P.obj, Q.obj)) (G.obj (M, N)))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

@@ -143,20 +143,20 @@
    "CochainComplex.exists_isKFlatResolutionIndependentCoefficients"
   ],
   "file": "lean/Sheaf/Algebra/Homology/KFlatResolutionIndependentCoefficients.lean",
-  "statement": "theorem exists_isKFlatResolutionIndependentCoefficients {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] {R : Sheaf J CommRingCat.{r}} (G : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : letI := SheafOfModules.isMonoidal_W_independentCoefficients R; ∃ (K : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (f : K ⟶ G), CochainComplex.IsKFlatIndependentCoefficients K ∧ (∀ i : ℤ, exactFunctor _ _ (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory R) (K.X i))) ∧ QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i))",
+  "statement": "theorem exists_isKFlatResolutionIndependentCoefficients {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] {R : Sheaf J CommRingCat.{r}} (G : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : ∃ (K : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (f : K ⟶ G), CochainComplex.IsKFlat K ∧ (∀ i : ℤ, exactFunctor _ _ (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory R) (K.X i))) ∧ QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i))",
   "branch": "newtargets-dag",
-  "by": "NB",
+  "by": "NI",
   "date": "2026-10-15",
   "existing": false,
-  "note": "The site and coefficient universes remain independent. K-flatness is expressed by the new IsKFlatIndependentCoefficients predicate, which agrees with the live IsKFlat where their universes coincide."
+  "note": "Retain the current published independent-coefficient resolution statement with only an explanatory module-docstring addition in the coherent sibling overlay with KFlat. The previously selected older KFlat artifact did not support its independent coefficient universe. All four conclusions are preserved: K-flatness, flat terms, quasi-isomorphism and termwise epimorphism. All declarations, signatures, bodies and proof plans are unchanged; only the module documentation explains the integral-operations specialization."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-f0f9514fd",
-  "group": "NB",
+  "reviewer": "NT-stage2-Codex-bee7dec8e",
+  "group": "NI",
   "result": "pass",
-  "note": "Checked all clauses, dependencies, sources, universes, canonical constructions, edge cases, docstrings, and verbatim signatures. All five files reproduced cleanly through scompile.py; no delivery errors found."
+  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, reports, and all per-file scompile checks verified; no fixes required."
  },
  "reviewed_proof": {
   "date": "2026-10-12",
