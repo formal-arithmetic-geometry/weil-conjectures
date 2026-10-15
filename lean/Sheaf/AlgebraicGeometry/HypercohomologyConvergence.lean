@@ -18,6 +18,8 @@ import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
 import Sheaf.CategoryTheory.TruncationCouple
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.Algebra.Homology.ExactCouple.Basic
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Half-plane convergence of the three hypercohomology couples

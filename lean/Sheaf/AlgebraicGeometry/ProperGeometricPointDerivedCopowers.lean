@@ -9,6 +9,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 
 /-! # Copowers for proper geometric-point derived direct image
 

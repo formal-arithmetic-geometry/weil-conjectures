@@ -15,6 +15,7 @@ import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.StrictHenselizationRegular
 import Sheaf.RingTheory.StrictHenselizationTriples
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 
 /-!
 # DVR property of strict henselizations

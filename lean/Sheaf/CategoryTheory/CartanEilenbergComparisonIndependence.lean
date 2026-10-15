@@ -19,6 +19,7 @@ import Sheaf.CategoryTheory.FilteredHomotopySpectralSequence
 import Sheaf.CategoryTheory.Filtration
 import Sheaf.Paper.CartanEilenbergLeftExactCohomology
 import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-! # Independence of Cartan--Eilenberg comparison maps
 

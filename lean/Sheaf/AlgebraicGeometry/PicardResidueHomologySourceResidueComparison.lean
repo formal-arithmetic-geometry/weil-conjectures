@@ -20,6 +20,8 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.PicardResidueHomologySourceFibreComparison
 import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex
 import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
+import Sheaf.AlgebraicGeometry.AffineResidueModelNaturality
+import Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality
 
 /-! # A strictly perfect affine model computes residue cycle homology
 

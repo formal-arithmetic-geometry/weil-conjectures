@@ -17,6 +17,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.SixFunctors.BaseChange.Derived
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # The abutment of the truncation exchange couples

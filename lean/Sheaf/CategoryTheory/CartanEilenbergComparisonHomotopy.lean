@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy
 import Sheaf.CategoryTheory.CartanEilenbergExists
 import Sheaf.CategoryTheory.DoubleComplexTotal
 import Sheaf.CategoryTheory.Filtration
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Homotopy uniqueness of Cartan--Eilenberg comparison lifts

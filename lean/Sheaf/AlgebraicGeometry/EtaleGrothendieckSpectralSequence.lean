@@ -22,6 +22,7 @@ import Sheaf.CategoryTheory.KInjectiveComputes
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Relative Leray spectral sequences on small etale sites

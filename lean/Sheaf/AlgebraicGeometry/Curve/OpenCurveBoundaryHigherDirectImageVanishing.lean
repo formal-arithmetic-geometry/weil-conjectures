@@ -16,6 +16,7 @@ import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselizationDVR
 import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 
 /-!
 # Higher direct images of the multiplicative group across a curve boundary

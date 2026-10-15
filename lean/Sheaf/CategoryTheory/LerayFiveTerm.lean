@@ -8,6 +8,8 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.ExactSequence
 import Sheaf.CategoryTheory.ExactCouple
 import Sheaf.CategoryTheory.Filtration
+import WeilConjectures.Algebra.Homology.ExactCouple.Basic
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Five-term exact sequence of a first-quadrant spectral sequence

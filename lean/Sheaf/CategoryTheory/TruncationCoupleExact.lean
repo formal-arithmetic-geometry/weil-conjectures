@@ -12,6 +12,7 @@ import Sheaf.CategoryTheory.KInjectiveBridge
 import Sheaf.CategoryTheory.KInjectiveComputes
 import Sheaf.CategoryTheory.TruncationTriangle
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.Algebra.Homology.ExactCouple.Basic
 
 /-!
 # Exactness of the truncation couple

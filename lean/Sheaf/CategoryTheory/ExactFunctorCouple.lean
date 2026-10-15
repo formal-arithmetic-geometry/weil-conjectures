@@ -11,6 +11,8 @@ import Sheaf.CategoryTheory.ExactCouple
 import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.ExactCoupleMorphism
 import Sheaf.CategoryTheory.Filtration
+import WeilConjectures.Algebra.Homology.ExactCouple.Basic
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Exact functors transport exact couples

@@ -13,6 +13,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.Algebra.Homology.ExactCouple.Basic
 
 /-!
 # Exchange on truncation exact couples

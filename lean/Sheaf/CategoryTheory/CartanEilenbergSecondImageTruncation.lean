@@ -11,6 +11,7 @@ public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.CategoryTheory.DoubleComplexTotal
 import Sheaf.CategoryTheory.Filtration
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-! # CartanEilenbergSecondImageTruncation
 

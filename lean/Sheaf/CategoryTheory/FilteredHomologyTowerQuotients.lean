@@ -17,6 +17,7 @@ import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover
 import Sheaf.CategoryTheory.FilteredHomologyCoupleData
 import Sheaf.CategoryTheory.FilteredHomologyTowerDifferential
 import Sheaf.CategoryTheory.FiniteCycleFormula
+import WeilConjectures.Algebra.Homology.ExactCouple.Basic
 
 /-! # Representative comparisons with the canonical exact-couple tower
 

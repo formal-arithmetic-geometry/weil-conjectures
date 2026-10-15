@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 import Sheaf.CategoryTheory.ExactCouple
 import Sheaf.CategoryTheory.FilteredHomologyCoupleData
+import WeilConjectures.Algebra.Homology.ExactCouple.Basic
 
 /-! # Representative comparisons with the canonical exact-couple tower
 
