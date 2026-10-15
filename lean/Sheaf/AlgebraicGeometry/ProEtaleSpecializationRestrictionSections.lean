@@ -6,8 +6,6 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 import Sheaf.AlgebraicGeometry.ProEtaleSpecializationAffineCoordinates
 import Sheaf.AlgebraicGeometry.ProEtaleSpecializationCounit

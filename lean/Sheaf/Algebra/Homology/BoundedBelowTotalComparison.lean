@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.Algebra.Homology.TotalComplexSymmetry
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 

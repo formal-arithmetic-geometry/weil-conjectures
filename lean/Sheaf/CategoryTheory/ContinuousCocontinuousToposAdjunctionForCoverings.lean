@@ -5,9 +5,7 @@ Authors: SHEAF group NS
 -/
 module
 
-public import WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
-public import Mathlib.CategoryTheory.Sites.Limits
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 
 /-!

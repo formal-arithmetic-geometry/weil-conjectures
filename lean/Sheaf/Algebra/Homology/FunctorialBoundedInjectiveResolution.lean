@@ -6,7 +6,6 @@ Authors: SHEAF group NK
 module
 
 public import Mathlib.Algebra.Homology.CochainComplexPlus
-public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 import Mathlib.Data.Int.Interval
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexRows

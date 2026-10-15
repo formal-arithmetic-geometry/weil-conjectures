@@ -6,9 +6,6 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.Paper.ProfinitePointPullback
-public import Sheaf.Paper.ProfiniteTestObjectFunctor
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective

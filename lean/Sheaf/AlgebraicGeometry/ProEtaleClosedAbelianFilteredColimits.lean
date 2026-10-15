@@ -6,10 +6,7 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.CategoryTheory.Limits.Preserves.Filtered
 
-import Mathlib.CategoryTheory.Sites.CoverLifting
 
 import Sheaf.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine

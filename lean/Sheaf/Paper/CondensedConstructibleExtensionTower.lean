@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.CondensedConstructiblePiece
 import Sheaf.Paper.CondensedConstructibleOneStep
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Finite open/closed dévissage of constructible condensed module sheaves -/
 

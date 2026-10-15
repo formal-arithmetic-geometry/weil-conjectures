@@ -3,7 +3,6 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 import Sheaf.Paper.CondensedQbarBaseChangeCompatibility
 
 import Sheaf.Paper.IntegralReductionConservative

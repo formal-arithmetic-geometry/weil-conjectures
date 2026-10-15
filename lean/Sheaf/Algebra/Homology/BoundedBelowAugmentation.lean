@@ -6,7 +6,6 @@ Authors: SHEAF group C3
 module
 
 public import Mathlib.Algebra.Homology.TotalComplex
-public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Sheaf.Algebra.Homology.BoundedBelowTotalComparison
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns

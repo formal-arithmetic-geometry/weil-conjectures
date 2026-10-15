@@ -7,8 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteFinitePresentationInternalHomColimit

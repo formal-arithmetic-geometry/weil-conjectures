@@ -9,8 +9,6 @@ public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
-public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Sheaf.Paper.CondensedLocalPieceHomContinuity
 import Sheaf.Paper.CondensedConstructibleExtensionTower
 

@@ -6,7 +6,6 @@ Authors: SHEAF groups E2, E1
 module
 
 public import Sheaf.Paper.ProfiniteTestObjectFunctor
-public import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 import Sheaf.Paper.ProEtalePointComponentsMaps
 
 /-! # Finite coproducts for the point Kan presheaf -/

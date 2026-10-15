@@ -6,16 +6,8 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-public import Mathlib.Algebra.Homology.ExactSequence
-public import Mathlib.CategoryTheory.Limits.Preserves.Filtered
 
-import Mathlib.CategoryTheory.Abelian.Exact
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison
 import Sheaf.AlgebraicGeometry.ProEtaleRingedClosedCounit

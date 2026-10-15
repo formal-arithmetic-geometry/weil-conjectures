@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
 
 /-!
 # Special cocontinuous functors induce equivalences of sheaves

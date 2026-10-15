@@ -1,9 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift
-import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 import all Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 @[expose] public section
 

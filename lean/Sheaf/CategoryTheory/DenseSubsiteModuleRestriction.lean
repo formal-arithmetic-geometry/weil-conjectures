@@ -5,7 +5,6 @@ Authors: SHEAF group E4
 -/
 module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-public import Mathlib.CategoryTheory.Sites.DenseSubsite.Basic
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

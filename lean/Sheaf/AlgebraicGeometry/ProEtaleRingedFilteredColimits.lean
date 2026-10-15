@@ -6,8 +6,6 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.CategoryTheory.Limits.Preserves.Filtered
 
 import Sheaf.AlgebraicGeometry.ProEtaleClosedAbelianFilteredColimits
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
