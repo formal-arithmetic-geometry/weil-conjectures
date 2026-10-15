@@ -70,11 +70,17 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation",
+  "declaration": "CommRingCat.exists_isPushout_of_finitePresentation",
   "declarations": [
    "CommRingCat.exists_isPushout_of_finitePresentation"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-15 02:39 UTC for group NF, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_7d675a26.jsonl.gz: For the given filtered colimit and finitely presented A-algebra B, this gives an index i and finitely presented A_i-algebra B_i whose pushout identifies B with B_i ⊗_{A_i} A as A-"
+  "statement": "theorem exists_isPushout_of_finitePresentation {S : CommRingCat.{u}} (f : c.pt ⟶ S)\n    (hf : f.hom.FinitePresentation) :\n    ∃ (j : J) (T : CommRingCat.{u}) (g : F.obj j ⟶ T) (_ : g.hom.FinitePresentation)\n      (h : T ⟶ S), IsPushout (c.ι.app j) g f h",
+  "branch": "slopmaster2",
+  "by": "NR",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Exact existing descent theorem. The preceding section binds {J : Type uJ} [Category.{vJ} J] [IsFiltered J] (F : J ⥤ CommRingCat.{u}) (c : Cocone F) [PreservesColimit F (forget CommRingCat)] (hc : IsColimit c). For the usual small filtered indexing category the preservation instance is automatic. The pushout square identifies S with T ⊗[F.obj j] c.pt, compatibly with the c.pt-algebra structures; see CommRingCat.isPushout_tensorProduct. No new module. Source cross-check: the upstream Stacks 00R4 annotation is a citation error (miracle flatness); the matching source is Stacks 05N9, algebra.tex lemma-colimit-category-fp-algebras, part (1). The recorded signature itself is correct."
  },
  "reviewed_proof": {
   "date": "2026-10-13",
@@ -85,5 +91,13 @@
   "landing": "20261013T082413-L-1648049",
   "kind": "interface",
   "note": "independent Codex review: Matched the unchanged Core signature and delivered proof with the node, recorded dependencies, change record and report; delivery and direct importer compile cleanly, and both axiom checks show only the three permitted axioms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-99605aa74",
+  "group": "NR",
+  "result": "pass",
+  "note": "Wrote review.md. Exact signature, all clauses, dependencies, universes, edge cases, and existing-declaration gates checked. Server-only compile passed in 1.3 seconds without warnings; only standard axioms. The upstream citation error is already disclosed correctly. No fixes required."
  }
 }

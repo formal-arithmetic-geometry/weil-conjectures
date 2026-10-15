@@ -187,5 +187,23 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-bff97996c (reviewer sub-agent of L); spot-checked: Read the full item, unit, chapter route, cited node statements, Stacks Tag 0F03 source, blueprint, and archived master declaration. The three-step injective-resolution and exact-diagram argument is correct, hypotheses and coefficient categories match, edge cases were checked, and no duplicate or circular nodes occur. Review written to review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-126cc2a2f",
+  "group": "NU",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable nodes, dependency interfaces, source proofs, exact upstream signature, canonical cokernel maps, universes, edge cases, report sections, and recorded successful compiler validation. No delivery errors or fixes; repositories and branch head unchanged."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap",
+  "declaration": "AlgebraicGeometry.Etale.UniversalBaseChangeProperty.mono_baseChangeHomologyMap_and_cokernel",
+  "statement": "theorem Etale.UniversalBaseChangeProperty.mono_baseChangeHomologyMap_and_cokernel {q : ℤ}\n    (hq : 1 ≤ q) (huniv : Etale.UniversalBaseChangeProperty Λ p (q - 1)) {S' X' : Scheme.{u}}\n    {a : S' ⟶ S} {b : X' ⟶ X} {p' : X' ⟶ S'} (hp : IsPullback b p' p a) {g : T ⟶ S'}\n    {h : Y ⟶ X'} [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p') :\n    (∀ F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ),\n      Mono (Etale.baseChangeHomologyMap Λ sq q F)) ∧\n    (∀ {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (α : F ⟶ G) [Mono α],\n      Mono (cokernel.map (Etale.baseChangeHomologyMap Λ sq q F)\n        (Etale.baseChangeHomologyMap Λ sq q G) ((Etale.baseChangeSourceFunctor Λ p' g q).map α)\n        ((Etale.baseChangeTargetFunctor Λ e h q).map α)\n        (Etale.baseChangeHomologyMap_naturality Λ sq q α))) ∧\n    (∀ {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (α : F ⟶ G) [Mono α]\n      [Injective G],\n      Mono (cokernel.desc (Etale.baseChangeHomologyMap Λ sq q F)\n        ((Etale.baseChangeTargetFunctor Λ e h q).map α)\n        (Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective Λ sq (by lia) α)))",
+  "branch": "slopmaster2",
+  "by": "NU",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Existing upstream theorem explicitly tagged sbc-lem-bc-injectivity and Stacks 0F03; specialize Λ to ULift.{u + 1} (ZMod n), as in the recorded dependency sbc-def-base-change-property. Its three conjuncts are precisely the three canonical monomorphisms of the node. Positivity and invertibility of n specify the coefficient domain, and are not needed by this coefficient-general theorem. Source verified against the current server via scompile.py --source."
  }
 }
