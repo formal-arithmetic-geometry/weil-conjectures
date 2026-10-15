@@ -189,5 +189,23 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-72c070863 (reviewer sub-agent of L); spot-checked: Read the complete mathematics and verified all five steps against Stacks 03CF, the new slice equivalence against 00Y1, and target morphisms and coefficient categories against master source. Repaired only missing created.by/date in the new node. Full checks, edge cases, duplicate searches and inherited-cycle observations are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SliceSiteLocalization",
+  "declaration": "CategoryTheory.slice_site_localization",
+  "file": "lean/Sheaf/Paper/SliceSiteLocalization.lean",
+  "statement": "theorem slice_site_localization {D : Type u} {C : Type v} [SmallCategory D] [SmallCategory C] (K : Precoverage D) (J : Precoverage C) [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (u : D ⥤ C) (hcover : ∀ (X : D) (R : Presieve X), R ∈ K X → R.map u ∈ J (u.obj X)) (hpullback : ∀ (X Y Z : D) (R : Presieve X), R ∈ K X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) u) [u.IsContinuous K.toGrothendieck J.toGrothendieck] [(u.sheafPushforwardContinuous (Type (max u v)) K.toGrothendieck J.toGrothendieck).IsRightAdjoint] [PreservesFiniteLimits (u.sheafPullback (Type (max u v)) K.toGrothendieck J.toGrothendieck)] (V : D) : (∀ (X : Over V) (R : Presieve X), Presieve.overEquiv X R ∈ K X.left → Presieve.overEquiv ((Over.post (X := V) u).obj X) (R.map (Over.post (X := V) u)) ∈ J (u.obj X.left)) ∧ (∀ (X Y Z : Over V) (R : Presieve X), Presieve.overEquiv X R ∈ K X.left → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) (Over.post (X := V) u)) ∧ ∃ hcont : (Over.post (X := V) u).IsContinuous (K.toGrothendieck.over V) (J.toGrothendieck.over (u.obj V)), ∃ hadj : ((Over.post (X := V) u).sheafPushforwardContinuous (Type (max u v)) (K.toGrothendieck.over V) (J.toGrothendieck.over (u.obj V))).IsRightAdjoint, ∃ hlim : PreservesFiniteLimits ((Over.post (X := V) u).sheafPullback (Type (max u v)) (K.toGrothendieck.over V) (J.toGrothendieck.over (u.obj V))), Nonempty ((K.toGrothendieck.overPullback (Type (max u v)) V) ⋙ (Over.post (X := V) u).sheafPullback (Type (max u v)) (K.toGrothendieck.over V) (J.toGrothendieck.over (u.obj V)) ≅ u.sheafPullback (Type (max u v)) K.toGrothendieck J.toGrothendieck ⋙ J.toGrothendieck.overPullback (Type (max u v)) (u.obj V)) ∧ Nonempty (u.sheafPushforwardContinuous (Type (max u v)) K.toGrothendieck J.toGrothendieck ⋙ K.toGrothendieck.overPullback (Type (max u v)) V ≅ J.toGrothendieck.overPullback (Type (max u v)) (u.obj V) ⋙ (Over.post (X := V) u).sheafPushforwardContinuous (Type (max u v)) (K.toGrothendieck.over V) (J.toGrothendieck.over (u.obj V)))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-df762dbc4",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. Verified the immutable statement, dependencies, source, docstrings, universes, edge cases, and verbatim signature. Server-only compilation reproduced cleanly in 0.9 seconds under required limits. No delivery errors found."
  }
 }
