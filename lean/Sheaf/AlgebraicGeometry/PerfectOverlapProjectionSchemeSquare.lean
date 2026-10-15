@@ -41,4 +41,25 @@ theorem perfectOverlapRestrictionSquareU
     Scheme.Hom.resLE_comp_ι]
   rw [← Category.assoc, Scheme.homOfLE_ι]
 
+/-- The corresponding second-open square is obtained by the same ambient
+restriction calculation, using the right projection of the overlap. -/
+theorem perfectOverlapRestrictionSquareV
+    {X K Y : Scheme.{u}} (g : X ⟶ Y) (gk : X ⟶ K) (f : K ⟶ Y)
+    (hgf : gk ≫ f = g) (U V : Y.Opens) :
+    let P := g ⁻¹ᵁ U
+    let Q := g ⁻¹ᵁ V
+    let hPU : P ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ U) := by rw [← Scheme.Hom.comp_preimage, hgf]
+    let hPV : Q ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ V) := by rw [← Scheme.Hom.comp_preimage, hgf]
+    let hPW : P ⊓ Q ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V) :=
+      fun _ hx ↦ ⟨hPU hx.1, hPV hx.2⟩
+    (gk.resLE (f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V) (P ⊓ Q) hPW) ≫
+        K.homOfLE (inf_le_right : f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V ≤ f ⁻¹ᵁ V) =
+      X.homOfLE (inf_le_right : P ⊓ Q ≤ Q) ≫
+        gk.resLE (f ⁻¹ᵁ V) Q hPV := by
+  intro P Q hPU hPV hPW
+  apply (cancel_mono (f ⁻¹ᵁ V).ι).1
+  simp only [Category.assoc, Scheme.homOfLE_ι,
+    Scheme.Hom.resLE_comp_ι]
+  rw [← Category.assoc, Scheme.homOfLE_ι]
+
 end AlgebraicGeometry
