@@ -1,0 +1,156 @@
+{
+ "id": "lem-sc-field-higher-direct-image-stalk",
+ "kind": "statement",
+ "title": "Higher direct image stalk over a field via algebraic closure",
+ "statement": "Let $K$ be a field, $L$ an algebraic closure of $K$, and $a:X\\to\\operatorname{Spec}K$ a finite-type morphism. Let $F$ be a torsion abelian etale sheaf on $X$ and $q\\geq0$. With geometric stalks [def-weil-pbc-geometric-stalks], direct image [def-weil-pbc-direct-image], inverse image [def-weil-pbc-inverse-image], and cohomology [def-weil-pbc-etale-cohomology], there is an additive equivalence $(R^qa_*F)_{\\operatorname{Spec}L}\\simeq H^q(X\\times_{\\operatorname{Spec}K}\\operatorname{Spec}L,F|)$. Torsion has the local-section meaning [def-weil-pbc-torsion-etale-sheaf].",
+ "stmt_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-torsion-etale-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9 (theorem-higher-direct-images), Tag 03SI (proposition-topological-invariance), and strict-henselization local structure Tags 04HX and 04GP"
+ },
+ "proof": [
+  {
+   "text": "Finite type over the Noetherian field K makes X locally Noetherian. Thus X and a to the affine base are quasi-separated; quasi-compactness is assumed. This supplies the qcqs hypothesis for the stalk formula.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write s:Spec L → Spec K and C for the strict henselization at s. In the identity affine chart the maximal ideal of C is the image of the unique prime (0) of K, hence zero. C is a field. Its residue field is separably closed by strict-henselization local structure, so C is separably closed because the residue map is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+    "lem-weil-pbc-strict-henselization-local-structure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The chart map ρ:K → C and evaluation C → L compose to the given K → L: apply Spec and compatibility of evaluation with the strict-localization structural map. These maps form a scalar tower. L is algebraic over K, hence over C. Mathlib Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed makes L/C purely inseparable, and the source instance Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable makes Spec L → Spec C a universal homeomorphism.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-pc-spec-pure-insep-integral-radicial-surjective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply strictHenselizationStalkFormula to a,s,F,q. Convert ordinary right derived direct image to bounded-below derived homology via homologyRightDerivedFunctorPlusObjSingleFunctorIso. The formula gives an isomorphism to derived global sections on X×_(Spec K) Spec C. Convert derived homology of global sections to ordinary right derived sections and then Ext cohomology using Sheaf.nonempty_rightDerived_sections_obj_iso_functorH.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pullback universal property constructs X_L → X_C. Cancel the outer pullback square to show it is the base change of Spec L → Spec C, hence a universal homeomorphism. Compose the stalk comparison with Etale.cohomologyEquiv and upperStarComp to identify the pulled-back coefficient sheaf with F|_(X_L). Choices of comparison isomorphisms occur only inside a proof of Nonempty; no definition chooses arbitrary data from an unproved existence theorem.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-pc-spec-pure-insep-integral-radicial-surjective",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "def-weil-pbc-etale-cohomology",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "worker P4",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9 (theorem-higher-direct-images), Tag 03SI (proposition-topological-invariance), and strict-henselization local structure Tags 04HX and 04GP"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of a higher direct image over a field is the etale cohomology of the base change to an algebraic closure",
+   "results": "8 hits about structure-sheaf stalks and underived topological pushforward stalks.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPurelyInseparable\"",
+   "results": "12 hits, including Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed.",
+   "date": "2026-10-16",
+   "verdict": "Partial match: use the generic purely-inseparable instance for the field-algebra step."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*rightDerived|rightDerived.*sheafFiber",
+   "results": "0 Mathlib hits. Local rg found the derived comparison APIs and the project strict-henselization stalk formula.",
+   "date": "2026-10-16",
+   "verdict": "No exact Mathlib stalk comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of a higher direct image over a field is the etale cohomology of the base change to an algebraic closure",
+   "results": "Service unavailable: Internal Server Error (0 results).",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension",
+  "date": "2026-10-16",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cd-ground-field",
+   "place": "Proof steps 2--4; comparison tool specialized to a finite-type scheme over a field"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Sites.FieldHigherDirectImageStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/FieldHigherDirectImageStalk.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_addEquiv_sheafFiber_rightDerived_lowerStar_of_isAlgClosure",
+  "statement": "theorem nonempty_addEquiv_sheafFiber_rightDerived_lowerStar_of_isAlgClosure\n    {K : Type u} [Field K] (L : Type u) [Field L] [Algebra K L]\n    [IsAlgClosure K L] [IsAlgClosed L] {X : Scheme.{u}} (a : X ⟶ Spec (.of K))\n    [LocallyOfFiniteType a] [QuasiCompact a]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion)\n    (q : ℕ) :\n    Nonempty\n      ((((Scheme.pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K L)))).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj\n          (((lowerStar AddCommGrpCat.{u + 1} a).rightDerived q).obj F)) ≃+\n        Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n          (pullback.fst a (Spec.map (CommRingCat.ofHom (algebraMap K L))))).obj F) q)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-16",
+  "note": "The explicit IsAlgClosed L instance is redundant with IsAlgClosure K L; it makes elaboration of the geometric point independent of reverse instance search for K."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261015T221002-L-2558877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261015T221002-L-2558877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

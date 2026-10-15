@@ -1,0 +1,110 @@
+{
+ "id": "lem-sc-torsion-bounded-exponent-vanishing",
+ "kind": "statement",
+ "title": "Reduce torsion cohomology vanishing to bounded exponent",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme and $q$ a natural number. Use torsion abelian etale sheaves [def-weil-pbc-torsion-etale-sheaf] and cohomology [def-weil-pbc-etale-cohomology]. If $H^q(X,G)=0$ for every abelian etale sheaf $G$ annihilated by some positive integer $N$, then $H^q(X,F)=0$ for every torsion abelian etale sheaf $F$.",
+ "stmt_deps": [
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DDC (lemma-torsion-cohomology), proof of (1), and Tag 03Q5 (lemma-colimit)"
+ },
+ "proof": [
+  {
+   "text": "The source theorem Etale.subsingleton_H_of_isTorsion is already proved. Its explicit diagram is K_n=ker((n+1)!·id_F), ordered by n. Factorial divisibility gives the inclusions. Every local torsion section locally belongs to some K_n, and the mono locally-surjective cocone is a colimit. Each K_n is annihilated by (n+1)!, so its degree-q cohomology vanishes by hypothesis. Cohomology commutes with this filtered colimit on qcqs X, so H^q(X,F)=0. This is the original filtered-union and cohomology-colimit argument with cofinal factorial indexing.",
+   "uses": [
+    "lemma-weil-pbc-torsion-filtered-union",
+    "lem-weil-pbc-cohomology-filtered-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-torsion-filtered-union",
+  "lem-weil-pbc-cohomology-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "worker P4",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DDC (lemma-torsion-cohomology), proof of (1), and Tag 03Q5 (lemma-colimit)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated scheme a torsion sheaf is a filtered union of bounded exponent subsheaves and cohomology vanishing reduces to bounded exponent",
+   "results": "8 hits about structure-sheaf sections on qcqs schemes; no bounded-exponent reduction.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesFilteredColimits\", \"Subsingleton\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton.*[Tt]orsion|[Tt]orsion.*subsingleton",
+   "results": "3 hits: Subsingleton.to_moduleIsTorsionFree, Subsingleton.to_isMulTorsionFree, and a freeRank proof.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Torsion sheaf cohomology vanishing on a quasi compact quasi separated scheme reduces to sheaves annihilated by a positive integer",
+   "results": "Service unavailable: Internal Server Error (0 results).",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension",
+  "date": "2026-10-16",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cd-ground-field",
+   "place": "Proof step 7; generic bounded-exponent tool already proved in the source library"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing",
+  "declaration": "AlgebraicGeometry.Etale.subsingleton_H_of_isTorsion",
+  "statement": "theorem Etale.subsingleton_H_of_isTorsion [CompactSpace X] [QuasiSeparatedSpace X]\n    {F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (hF : F.IsTorsion) (q : ℕ)\n    (h : ∀ (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ), 0 < n →\n      n • 𝟙 G = 0 → Subsingleton (Sheaf.H G q)) :\n    Subsingleton (Sheaf.H F q)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261015T221002-L-2558877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261015T221002-L-2558877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

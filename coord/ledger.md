@@ -15245,3 +15245,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:09 L: returned deliver/T3/Sheaf.Paper.CechNerveFreeHomology (reviewer RETURN: (the landing tools, head 596da3cc1) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 22:09 L: merged deliver/B2/Sheaf.AlgebraicGeometry.CondensedCoefficientComplexPresentation (stage 3; reviewer PASS; first push; landing 20261015T220938-L-2554367 (interface); batch 20261015T220926; modules 2; new nodes 1)
 - 22:09 L: merged deliver/N1/Sheaf.Paper.HypercoverCohomologyAbelian (stage 3; reviewer PASS; first push; landing 20261015T220951-L-2556904 (proof); batch 20261015T220926; modules 1; new nodes 0)
+- 22:10 L: merged deliver/P4/WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261015T221002-L-2558877 (interface); batch 20261015T220926; modules 2; new nodes 3)
