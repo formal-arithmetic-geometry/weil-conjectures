@@ -15257,3 +15257,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:17 L: merged deliver/K4/Sheaf.Paper.FiniteHypercoverDescentParts (stage 3; reviewer PASS; first push; landing 20261015T221726-L-2644205 (proof); batch 20261015T221551; modules 1; new nodes 0)
 - 22:17 L: merged deliver/S1/Sheaf.CategoryTheory.RingedSliceExtensionExactness (stage 3; reviewer PASS; first push; landing 20261015T221736-L-2646180 (interface); batch 20261015T221551; modules 3; new nodes 2)
 - 22:32 L: returned deliver/F1/Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality (reviewer RETURN: (reviewer X-56b8e, head 56b8e2263) H9 / review point 5: remove two unused imports from lean/Sheaf/AlgebraicGeometry/Cond)
+- 22:38 L: returned deliver/Q3/Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat (reviewer RETURN: (reviewer X-d1eac, head d1eaca652) H9 / brief point 5: In lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SliceRestrictionFl)
