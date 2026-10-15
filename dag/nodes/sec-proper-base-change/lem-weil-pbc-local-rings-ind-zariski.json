@@ -20,132 +20,108 @@
  ],
  "proof": [
   {
-   "text": "Fix a finitely presented $A$-algebra $P$ and an $A$-map $u:P\\to B$. Write $P=A[x_1,\\ldots,x_n]/(r_1,\\ldots,r_t)$ using [def-weil-pbc-finitely-presented-algebra]. For a maximal ideal $q$ of $B$, put $p=q\\cap A$. Apply the inverse of the assumed $A_p\\cong B_q$ to the elements $u(x_i)/1$. By the fraction description in [def-weil-pbc-localization-at-prime], write these inverse images as $a_i/s_i$ with $s_i\\notin p$. Let $d=\\prod_i s_i$ (empty product $1$); these fractions are elements of $A_d$.",
+   "text": "For a finitely presented A-algebra P mapping to B and a prime q of B, invert the given A-algebra isomorphism A_p ≃ B_q, where p is the contraction. Apply Algebra.factors_through_principal_localization to descend P → A_p to a map β : P → A_f for f outside p. Localization extensionality identifies the composite P → A_f → B_q with the original map.",
    "uses": [
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
-    "place": "Proof, 1 (expanded blueprint argument)"
-   }
-  },
-  {
-   "text": "Evaluate each $r_l$ on these fractions in $A_d$, and write its value as $N_l/d^{k_l}$. Its image in $A_p$ is zero, since the original map $u$ respects $r_l$. The fraction equality criterion in [def-weil-pbc-localization-at-prime] gives $t_l\\notin p$ with $t_lN_l=0$ in $A$. Put $f=d\\prod_l t_l$, so $f\\notin p$. In $A_f$ every $s_i$ and $t_l$ is invertible (the inverse of a factor of $f$ is the complementary product times $f^{-1}$); hence every $r_l$ evaluates to zero. The polynomial substitution therefore descends to $v_q:P\\to A_f$ and induces exactly the chosen map $P\\to A_p$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
-    "place": "Proof, 2 (expanded blueprint argument)"
-   }
-  },
-  {
-   "text": "Write $v_q(x_i)=c_i/f^{h_i}$. The equality with $u$ in $B_q$ says that $\\phi(f)^{h_i}u(x_i)-\\phi(c_i)$ vanishes in $B_q$, where $\\phi:A\\to B$ is the given map. The same fraction equality criterion gives $b_i\\notin q$ annihilating this numerator. Set $g_q=\\phi(f)\\prod_i b_i\\notin q$. In $B_{g_q}$ all these numerators vanish and $\\phi(f)$ is a unit. The universal property [lem-weil-pbc-localization-away-universal-property] gives $A_f\\to B_{g_q}$, and its composite with $v_q$ agrees with $u$ after localization, since it agrees on all the generators. Put $O_q=D(g_q)$, an open neighbourhood of $q$.",
-   "uses": [
+    "lem-factors-through-localization-of-smooth",
     "def-weil-pbc-localization-at-prime",
     "def-weil-ring-localization-away",
-    "lem-weil-pbc-localization-away-universal-property",
-    "lem-weil-pbc-spec-localization-away-basic-open"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
-    "place": "Proof, 3 (expanded blueprint argument)"
-   }
-  },
-  {
-   "text": "The $O_q\\cap X^c$, for $X=\\operatorname{Spec}B$, cover the closed-point set. By [lem-weil-pbc-w-local-partition], $X^c$ is profinite. Choose a clopen neighbourhood inside one of these opens for each closed point, then take a finite subcover by compactness. Successively subtract the preceding members to get a disjoint finite clopen partition subordinate to that subcover. The same cited lemma extends this partition uniquely to a clopen partition $X=\\coprod_j U_j$, with each $U_j\\subseteq O_{q_j}$. For $X=\\varnothing$ this is the empty partition. This is precisely the topology needed here; no w-locality of $\\operatorname{Spec}A$ is assumed.",
-   "uses": [
-    "lem-weil-pbc-w-local-partition"
+    "lem-weil-pbc-localization-away-universal-property"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
-    "place": "Proof, 4 (expanded blueprint argument)"
+    "place": "Proof paragraphs 1--3; Lean implementation step 1"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-spec-clopen-idempotent] to obtain idempotents $e_j$ with $U_j=D(e_j)$. For $i\\ne j$, $e_ie_j$ is idempotent with empty basic open, so uniqueness in that lemma gives $e_ie_j=0$. Thus $e=\\sum_j e_j$ is idempotent, and its basic open is all of $X$ (in any prime exactly one $e_j$ is outside it). Uniqueness gives $e=1$. The rings $B_j=e_jB$, with identity $e_j$, consequently satisfy $B\\cong\\prod_jB_j$: the forward map is $b\\mapsto(e_jb)_j$ and the inverse is $(c_j)_j\\mapsto\\sum_jc_j$. Orthogonality checks both composites and multiplication. In the empty case the same uniqueness assertion gives $0=1$ in $B$.",
+   "text": "Set g₀ to the image of f in B and map A_f canonically to B_g₀. Choose a finite polynomial presentation t of P. For each generator the difference between the two maps into B_g₀ vanishes in B_q. Write that difference with denominator a power of g₀; the numerator is annihilated by some b_i outside q. Put g = g₀ times the product of the b_i. Mapping the annihilator identities to B_g and cancelling the now-invertible b_i proves equality on generators. Polynomial extensionality and surjectivity of t give P → A_f → B_g factoring the localized original map.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
+    "place": "Proof paragraphs 1--3; Lean implementation step 2"
+   }
+  },
+  {
+   "text": "Use the proved upstream WLocalSpace.closedPointsHomeomorph from the w-local API: the closed points are homeomorphic to the connected components. They are compact Hausdorff and totally disconnected. Mathlib TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover refines the D(g) cover on closed points. Pull its finite partition back along the continuous map H.symm ∘ ConnectedComponents.mk. If x specializes to a closed c, Specializes.connectedComponents_mk_eq shows this map sends x to c. Thus openness ensures the pulled-back part stays in its selected D(g). Empty spectra and empty partitions are included.",
+   "uses": [
+    "def-weil-pbc-w-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
+    "place": "Proof paragraphs 1--3; Lean implementation step 3"
+   }
+  },
+  {
+   "text": "Choose idempotents e_i representing the clopen partition. PrimeSpectrum.basicOpen_injOn_isIdempotentElem and basicOpen_mul turn disjointness into e_i e_j = 0. OrthogonalIdempotents.isIdempotentElem_sum makes their sum idempotent. At any prime, one e_i is outside the prime; multiplying a supposed membership of the sum by this e_i contradicts orthogonality. Hence the sum has the same basic open as 1 and equals 1 by idempotent injectivity. Apply Mathlib CompleteOrthogonalIdempotents.bijective_pi to identify B with the product of B/(1-e_i).",
    "uses": [
     "lem-weil-pbc-spec-clopen-idempotent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
-    "place": "Proof, 5 (expanded blueprint argument)"
+    "place": "Proof paragraphs 1--3; Lean implementation step 4"
    }
   },
   {
-   "text": "A prime of $B_j=e_jB=B/(1-e_j)B$ contracts to a prime of $B$ in $D(e_j)=U_j$, and conversely contraction and quotient give inverse correspondences. Since $U_j\\subseteq D(g_{q_j})$, the image of $g_{q_j}$ belongs to no prime of $B_j$. By [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] it is a unit. Hence $B\\to B_j$ extends to $B_{g_{q_j}}\\to B_j$ by [lem-weil-pbc-localization-away-universal-property]. Composing the maps in step 3 and taking their product gives $P\\to C=\\prod_j A_{f_j}\\to\\prod_j B_j\\cong B$ with composite $u$. We have proved the factorization for every finitely presented $P$, including the empty-product case.",
+   "text": "The image of g_i is a unit in B/(1-e_i): if its principal ideal were proper, Ideal.exists_le_maximal would give a maximal ideal containing it. Its contraction to B avoids e_i, since it contains 1-e_i and is proper, contradicting D(e_i) ⊆ D(g_i). Extend B → B/(1-e_i) to B_gᵢ by localization. Compose each A_fᵢ → B_gᵢ with that extension, take the product and then the inverse Chinese remainder isomorphism. The selected local factorization equations give P → ∏ A_fᵢ → B with the required composite.",
    "uses": [
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
     "lem-weil-pbc-localization-away-universal-property"
    ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
+    "place": "Proof paragraphs 1--3; Lean implementation step 5"
+   }
+  },
+  {
+   "text": "Use the Mathlib instances IsLocalization.Away.finitePresentation and Algebra.FinitePresentation.pi, then Algebra.FinitePresentation.equiv, to see that every A-algebra equivalent to a finite product of A_f is finitely presented. This is a one-line instance inference and transport in Lean; it includes the empty product and needs no étaleness theorem.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-ring-localization-away"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
-    "place": "Proof, 6 (expanded blueprint argument)"
+    "place": "Proof paragraphs 1--3; Lean implementation step 6"
    }
   },
   {
-   "text": "Every algebra $C=\\prod_{j=1}^m A_{f_j}$ is etale and finitely presented over $A$. Indeed the identity of $\\operatorname{Spec}A$ is an open immersion, hence etale by [lem-weil-pbc-open-immersion-etale]; clause (2) of [lem-weil-pbc-etale-algebra-finite-presentation-localization] applied to $A\\to A$ makes every $A_{f_j}$ etale. Now [lem-weil-pbc-etale-algebra-finite-product] makes $C$ etale, and clause (1) of the localization lemma makes $C$ finitely presented. The product lemma explicitly includes $m=0$.",
+   "text": "Let E be the set of A-algebras equivalent to finite products of principal localizations. The preceding factorization applies to every finitely presented algebra mapping to B. Apply CommAlgCat.exists_filtered_colimit_of_factorization to E. Package its small filtered diagram, cocone and IsColimit proof as a ColimitPresentation. Membership of every term in E is exactly the term condition in IsIndPrincipalZariski A B.",
    "uses": [
-    "lem-weil-pbc-open-immersion-etale",
-    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
-    "lem-weil-pbc-etale-algebra-finite-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
-    "place": "Proof, 7 (expanded blueprint argument)"
-   }
-  },
-  {
-   "text": "Let $\\mathcal E$ be the set of the fixed finite products $\\prod_{j=1}^m A_{f_j}$ (including the empty product). By step 7 every member of $\\mathcal E$ is a finitely presented $A$-algebra. Step 6 says that every map from a finitely presented $A$-algebra to $B$ factors through some member of $\\mathcal E$. Applying [lem-weil-pbc-factorization-criterion-filtered-colimit] to this set and factorization property gives a small filtered category of members of $\\mathcal E$ whose colimit is $B$.",
-   "uses": [
-    "lem-weil-pbc-factorization-criterion-filtered-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
-    "place": "Proof, third paragraph: “Take all finite products of principal localizations equipped with an $A$-map to $B$”; factorization-criterion application made explicit"
-   }
-  },
-  {
-   "text": "By steps 7--8, $B$ is a filtered colimit of etale, finitely presented $A$-algebras, each a finite product of principal localizations $A_f$. This is the ind-Zariski presentation required by [def-weil-pbc-ind-etale-algebra].",
-   "uses": [
+    "lem-weil-pbc-factorization-criterion-filtered-colimit",
     "def-weil-pbc-ind-etale-algebra"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
-    "place": "Proof, 12 (expanded blueprint argument)"
+    "place": "Proof paragraphs 1--3; Lean implementation step 7"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finitely-presented-algebra",
+  "lem-factors-through-localization-of-smooth",
   "def-weil-pbc-localization-at-prime",
   "def-weil-ring-localization-away",
   "lem-weil-pbc-localization-away-universal-property",
-  "lem-weil-pbc-spec-localization-away-basic-open",
-  "lem-weil-pbc-w-local-partition",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-w-local",
   "lem-weil-pbc-spec-clopen-idempotent",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "lem-weil-pbc-open-immersion-etale",
-  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
-  "lem-weil-pbc-etale-algebra-finite-product",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
   "lem-weil-pbc-factorization-criterion-filtered-colimit",
   "def-weil-pbc-ind-etale-algebra"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
-  "place": "Proof, all three paragraphs; denominator clearing and clopen factorization expanded, with the existing filtered-colimit criterion applied to the final paragraph"
+  "place": "Proof paragraphs 1--3, implemented by D4 using the proved principal-localization factorization, upstream closed-point/connected-component homeomorphism, Mathlib clopen refinement and Chinese remainder theorem; finite presentation used directly instead of etaleness"
  },
  "mathlib_searches": [
   {
@@ -278,5 +254,15 @@
   "by": "NO",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-30f77",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261015T154203-L-161575",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proof matched the node; DAG dependencies agree; module and both direct importers compile cleanly; all four proved declarations use only permitted axioms."
  }
 }
