@@ -38,11 +38,11 @@
 | `Sheaf.NumberTheory.Padics.ExtensionIntegersDvrCore` | 7 | 1 | proof |
 | `Sheaf.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
-| `Sheaf.Paper.CondensedOpenClosedRecollement` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 7 | 5 | proof |
 | `Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.GeometricModuleConstruction` | 8 | 1 | proof |
 | `Sheaf.Algebra.Homology.FunctorialObjectResolution` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedCounit` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
 Also listed above and claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
