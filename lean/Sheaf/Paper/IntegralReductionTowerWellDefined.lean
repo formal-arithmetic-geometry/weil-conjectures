@@ -94,7 +94,7 @@ Source: Stacks Tag 06YY (blueprint: lem-weil-integral-reduction-tower-well-defin
 noncomputable def integralTowerResolutionIso (n : ℕ)
     {P K : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ}
     (q : P ⟶ K)
-    (hq : CochainComplex.IsKFlatResolution
+    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients
       (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
       (R := completedIntegralCommRingSheaf l E Y D hl) q) :
     (integralDerivedReduction l E Y D hl n).obj (DerivedCategory.Q.obj K) ≅
@@ -114,7 +114,7 @@ Source: Stacks Tag 06YY (blueprint: lem-weil-integral-reduction-tower-well-defin
 noncomputable def integralTowerFiniteComparison (n : ℕ)
     {P P' K : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ}
     (q : P ⟶ K) (q' : P' ⟶ K)
-    (hq : CochainComplex.IsKFlatResolution
+    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients
       (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
       (R := completedIntegralCommRingSheaf l E Y D hl) q)
     (hq' : CochainComplex.IsKFlatResolutionIndependentCoefficients
@@ -135,7 +135,7 @@ noncomputable def integralTowerComparison (n : ℕ)
     (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients
       (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
       (R := completedIntegralCommRingSheaf l E Y D hl) q)
-    (hq' : CochainComplex.IsKFlatResolution
+    (hq' : CochainComplex.IsKFlatResolutionIndependentCoefficients
       (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
       (R := completedIntegralCommRingSheaf l E Y D hl) q') :
     DerivedCategory.Q.obj (integralTowerComplex l E Y D hl n P) ≅
@@ -244,7 +244,7 @@ isomorphism of inverse systems, and clause (1) respects the augmentations. -/
 theorem integralReductionTowerWellDefined
     {P P' K : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ}
     (q : P ⟶ K) (q' : P' ⟶ K)
-    (hq : CochainComplex.IsKFlatResolution
+    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients
       (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
       (R := completedIntegralCommRingSheaf l E Y D hl) q)
     (hq' : CochainComplex.IsKFlatResolutionIndependentCoefficients
