@@ -144,11 +144,11 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 
 | module | distance | holes | group |
 |---|---:|---:|---|
-| Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawClassVanishing | 15 | 1 | — |
-| Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality | 16 | 1 | F3 |
+| Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawClassVanishing | 15 | 1 | H3 |
+| Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality | 16 | 1 | F2 |
 | Sheaf.AlgebraicGeometry.PicardH1ProductSpanningBypass | 16 | 1 | — |
 | Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueBridge | 24 | 1 | X2 |
-| Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 34 | 1 | F3 |
+| Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 34 | 1 | F2 |
 | Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates | 50 | 1 | T4 |
 
 Modules pruned since the imports baseline:
