@@ -28,88 +28,20 @@
  ],
  "proof": [
   {
-   "text": "For an object $V\\to U$, put $V_i=U_i\\times_U V$ and $V_{ij}=U_i\\times_U U_j\\times_U V$. Define $F(V)$ to be the set of tuples $(s_i)\\in\\prod_i F_i(V_i)$ satisfying $\\phi_{ij}(s_i|_{V_{ij}})=s_j|_{V_{ij}}$ for every pair. For a morphism $W\\to V$ over $U$, restrict each component along $U_i\\times_U W\\to V_i$. Naturality of $\\phi_{ij}$ preserves the compatibility equations; identity and composite restriction laws hold componentwise. All these fibre products exist by the base-change axiom for coverings.",
+   "text": "Construct the compatible-tuples module sheaf and its local evaluation maps and inverses by the explicit Tag 04TR construction.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-pur-localized-ringed-site"
+    "lem-weil-pbc-site-module-sheaf-gluing-aux"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
-   }
-  },
-  {
-   "text": "Make $F(V)$ an $A(V)$-module by $(s+t)_i=s_i+t_i$, $0_i=0$, $(-s)_i=-s_i$, and $(a s)_i=(a|_{V_i})s_i$. On $V_{ij}$ both scalar restrictions are $a|_{V_{ij}}$; linearity of $\\phi_{ij}$ therefore preserves the tuple equations for all four operations. Every module axiom holds in each $F_i(V_i)$ and hence in the tuple subset. The restriction maps are additive and satisfy $(a s)|_W=a|_W(s|_W)$ by the corresponding property in each $F_i$.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
-   }
-  },
-  {
-   "text": "Let $\\{W_b\\to V\\}_b$ be a covering in $\\mathcal C/U$, and let $t^{(b)}\\in F(W_b)$ be a matching family. For each $i$, the base-changed family $\\{U_i\\times_U W_b\\to V_i\\}_b$ is a covering of $\\mathcal C/U_i$; its matching sections $t_i^{(b)}$ have a unique amalgamation $s_i\\in F_i(V_i)$. On $V_{ij}$, the sections $\\phi_{ij}(s_i|_{V_{ij}})$ and $s_j|_{V_{ij}}$ agree on the covering $\\{V_{ij}\\times_V W_b\\to V_{ij}\\}_b$, since each $t^{(b)}$ is a compatible tuple. Separatedness of $F_j$ makes them equal. Thus $(s_i)\\in F(V)$ amalgamates the family, uniquely by separatedness in every component. The underlying presheaf is a sheaf, so the module presheaf of step 2 is an $A$-module sheaf.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-pur-localized-ringed-site",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
-   }
-  },
-  {
-   "text": "Fix $k$ and $g:W\\to U_k$. For $s\\in F(W)$ define $e_k(W)(s)$ by restricting $s_k\\in F_k(U_k\\times_U W)$ along the graph $d_g=(g,\\mathrm{id}_W):W\\to U_k\\times_U W$. For $t\\in F_k(W)$ define a tuple $q_k(W)(t)$ whose $i$-component is $\\phi_{ki}(t|_{U_i\\times_U W})$, evaluated on $U_i\\times_U W$ as an object over $U_k\\times_U U_i$ via $(g\\circ\\mathrm{pr}_W,\\mathrm{pr}_{U_i})$. Restricting the cocycle $\\phi_{kj}=\\phi_{ij}\\circ\\phi_{ki}$ to $U_i\\times_U U_j\\times_U W$ gives its tuple equation. Thus $q_k$ takes values in $F(W)$. Both $e_k$ and $q_k$ commute with restriction by naturality of $\\phi$ and the graph maps, and are $A(W)$-linear by step 2 and linearity of the transition maps.",
-   "uses": [
-    "def-pur-localized-ringed-site",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
-   }
-  },
-  {
-   "text": "Restrict the $(k,k,k)$ cocycle to the full diagonal $U_k\\to U_k\\times_U U_k\\times_U U_k$. The resulting automorphism $\\alpha=\\Delta^*\\phi_{kk}$ satisfies $\\alpha=\\alpha\\circ\\alpha$, so cancellation gives $\\alpha=\\mathrm{id}$. It follows that $e_k(W)q_k(W)(t)=t$. Conversely, restrict the tuple equation $\\phi_{ki}(s_k)=s_i$ to $U_i\\times_U W$ by the map with coordinates $(g\\circ\\mathrm{pr}_W,\\mathrm{pr}_{U_i},\\mathrm{pr}_W)$. Its left side is exactly the $i$-component of $q_k(W)e_k(W)(s)$, while its right side is $s_i$. Hence $q_ke_k=\\mathrm{id}$ componentwise. Therefore $e_k:F|_{U_k}\\to F_k$ is an $A_k$-linear isomorphism; no covering arrow was assumed monomorphic.",
-   "uses": [
-    "def-pur-localized-ringed-site",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
-   }
-  },
-  {
-   "text": "For an object $W\\to U_i\\times_U U_j$ write $g_i,g_j$ for its two projections to $U_i,U_j$. Pull the tuple equation on $U_i\\times_U U_j\\times_U W$ back along $(g_i,g_j,\\mathrm{id}_W)$. It gives $\\phi_{ij}(e_i(W)(s))=e_j(W)(s)$ for every $s\\in F(W)$. These are equalities of $A(W)$-linear maps, and hence the required equalities of $A_{ij}$-module sheaf morphisms on the overlap. The sheaf $F$ and the isomorphisms $e_i$ now meet every clause of the statement.",
-   "uses": [
-    "def-pur-localized-ringed-site",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, sites-lemma-glue-sheaves: compatible-tuples formula; explicit verification of restrictions, sheaf condition and local isomorphisms omitted in the source."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "def-pur-localized-ringed-site",
-  "def-weil-sheaf-of-modules-category"
+  "lem-weil-pbc-site-module-sheaf-gluing-aux"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 04TR, sites-lemma-glue-sheaves; compatible-tuples construction with componentwise module operations and the omitted verifications written out."
+  "place": "Tag 04TR, compatible-tuples construction with componentwise module operations, sheaf gluing, and graph evaluation inverses."
  },
  "mathlib_searches": [
   {
@@ -231,5 +163,15 @@
   "by": "ND",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T190716-L-966099",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Module.Equiv.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.SiteModuleSheafGluingAux
 
 /-!
 # Gluing module sheaves on an arbitrary covering of a site
@@ -94,7 +95,12 @@ theorem exists_moduleSheaf_of_cover
         ∀ (i j : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j)
           (x : F.val.obj (op W)),
           φ i j W a b ((e i).hom.val.app (op (Over.mk (T := Over U) a)) x) =
-            (e j).hom.val.app (op (Over.mk (T := Over U) b)) x := by
-  sorry
+            (e j).hom.val.app (op (Over.mk (T := Over U) b)) x  := by
+  obtain ⟨F, e, e_inv, heinv, he, hcompat⟩ :=
+    exists_moduleSheaf_of_cover_with_maps J U I Uᵢ hcover A hcomm Fᵢ φ hnatural hcocycle
+  let eIso : ∀ i : I, F.over (Uᵢ i) ≅ Fᵢ i := fun i =>
+    { hom := e i, inv := e_inv i, hom_inv_id := he i, inv_hom_id := heinv i }
+  refine ⟨F, eIso, ?_⟩
+  exact hcompat
 
 end SheafOfModules
