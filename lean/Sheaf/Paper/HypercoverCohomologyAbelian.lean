@@ -2,12 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.HypercoverCohomologyColimit
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.Paper.FiniteSplitHypercoverRefinement
-import Sheaf.Paper.HypercoverFreeResolution
-import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import WeilConjectures.AlgebraicGeometry.HypercoverCohomology
 
 @[expose] public section
 
@@ -27,6 +22,6 @@ theorem hypercover_cohomology_abelian_part (X : Scheme.{u₁}) [CompactSpace X]
     FiniteSplitEtaleHypercover.IsCohomologyColimit AddCommGrpCat.{u₁ + 1} q
       (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u₁ + 1}) 0 ⋙
         Etale.cohomology AddCommGrpCat.{u₁ + 1} X (q : ℤ)) := by
-  sorry
+  exact (AlgebraicGeometry.hypercover_cohomology X q).1
 
 end AlgebraicGeometry
