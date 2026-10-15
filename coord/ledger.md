@@ -15200,3 +15200,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:55 L: merged deliver/F3/Sheaf.AlgebraicGeometry.UnboundedCoefficientForgetfulAux (stage 3; reviewer PASS; first push; landing 20261015T205524-L-1734243 (proof); batch 20261015T205522; modules 1; new nodes 0)
 - 20:58 L: merged deliver/XR1b27919aec52b018/Sheaf.Paper.CondensedStratumModelAssembly (stage 3; reviewer PASS; first push; landing 20261015T205835-L-1763358 (interface); batch 20261015T205833; modules 3; new nodes 1)
 - 20:58 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261015T205839-L-1763877 (proof); batch 20261015T205833; modules 1; new nodes 0)
+- 21:07 L: merged deliver/T1/Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly (stage 3; reviewer PASS; first push; landing 20261015T210718-L-1857448 (proof); batch 20261015T210716; modules 1; new nodes 0)

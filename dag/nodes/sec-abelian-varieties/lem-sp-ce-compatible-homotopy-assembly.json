@@ -24,18 +24,16 @@
  ],
  "proof": [
   {
-   "text": "First choose, degree by degree, extensions $\\widetilde{s}_Z^q:I^q\\to J_Z^{q-1}$ of $s_Z^q$ across the monomorphisms $i^q$, using injectivity of the terms of $J_Z$. Since $J_Z^{q-1}$ is injective, the monomorphism $j^{q-1}$ has a retraction, so each short exact sequence $0\\to J_Z^{q-1}\\to J_I^{q-1}\\to J_B^{q-1}\\to0$ splits and $\\rho^{q-1}$ has a section $\\sigma^{q-1}$ with $\\rho^{q-1}\\sigma^{q-1}=1$ (the injectivity of $J_B^{q-1}$ is not what gives the section); independently choose the null-homotopy $s_B$ of $R_B$ with $s_B^0=0$ by the acyclic-to-injective null-homotopy result applied to the augmented exact complex $B$ (adjoin its augmentation object in degree $-1$, with the map $0$ there, a chain map because $R_B\\epsilon_B=0$). The resolutions are indexed from degree $0$, so $J^{-1}=0$ and every map $I^0\\to J^{-1}$ or $B^0\\to J^{-1}$ is zero; in particular $s_B^0=0$ and $\\widetilde{s}_Z^0=0$, hence $t^0=0$ below. The condition $R_I\\epsilon_I=0$ implies $R_B\\epsilon_B=0$, so this application has the required augmentation-zero condition.",
-   "uses": [
-    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
-   ],
-   "elementary": false,
+   "text": "Cancel the epic augmentation quotient S.g in the degree-zero compatibility square to show epsilonB.f 0 >> RB.f 0 = 0. Apply the already proved CochainComplex.homotopyZeroOfQuasiIso from WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution. This fully proved upstream construction directly gives sB, without using the general integer-indexed K-injective theorem recorded by lem-weil-pbc-acyclic-map-to-injective-nullhomotopy. Extend each relevant component of sZ across the monic i.f n using Injective.factorThru, putting zero in all degrees excluded by the homotopy shape. Split the target short exact sequence degreewise by injectivity of JZ, obtaining sections Q of rho. Set t(n,m) = a(n,m) >> j.f m + pi.f n >> sB.hom n m >> Q m. Composition and the two zero composites prove i t = sZ j and t rho = pi sB.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
     "place": "Tag 015I, comparison construction for the boundary and cycle rows; Weibel Homological Algebra, Lemma 5.7.10"
    }
   },
   {
-   "text": "Define $t^q=j\\widetilde{s}_Z^q+\\sigma^{q-1}s_B^q\\pi^q$. Then $t i=j s_Z$ and $\\rho t=s_B\\pi$. Put $E=R_I-(d t+t d)$. The homotopy identity for $s_Z$ and the relation $R_Ii=jR_Z$ give $Ei=0$, while the homotopy identity for $s_B$ and $\\rho R_I=R_B\\pi$ give $\\rho E=0$. Exactness therefore factors the defect uniquely as $E=jE'\\pi$ for a chain map $E':B^\\bullet\\to J_Z^{\\bullet}$; its augmentation composite is zero because $E\\epsilon_I=0$ and $j$ is monic.",
+   "text": "Use Homotopy.nullHomotopicMap t to construct F = dt + td as an actual chain map. Naturality of this construction and the given homotopy equations show i >> F = RZ >> j and F >> rho = pi >> RB. Put E = RI - F. Thus i >> E = 0 and E >> rho = 0. HomologicalComplex.shortExact_of_degreewise_shortExact makes the source and target rows short exact in the category of complexes. Descend E through pi and lift the result through j using ShortComplex.Exact.desc and ShortComplex.Exact.lift; this gives the unique chain map e with pi >> e >> j = E. At degree zero, epsilonI >> d = 0 and prevD 0 t = 0 imply epsilonI.f 0 >> E.f 0 = 0. Cancel S.g and j.f 0 to obtain epsilonB.f 0 >> e.f 0 = 0.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -44,18 +42,16 @@
    }
   },
   {
-   "text": "Apply the same acyclic-to-bounded-below-injective null-homotopy result to the augmentation-zero map $E'$ (again adjoining the augmentation object in degree $-1$). It gives $k^q:B^q\\to J_Z^{q-1}$ with $k^0=0$ and $E'=d k+k d$. Define $s_I=t+j k\\pi$ and retain $s_B$. Then $R_I=d s_I+s_I d$, because $E=jE'\\pi$, while $s_Ii=js_Z$ and $\\rho s_I=s_B\\pi$ because $\\pi i=0$ and $\\rho j=0$.",
-   "uses": [
-    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
-   ],
-   "elementary": false,
+   "text": "Apply CochainComplex.homotopyZeroOfQuasiIso a second time, now to epsilonB and e, obtaining k : Homotopy e 0. Add the null-homotopy of F to (k.compLeft pi).compRight j. Since F + pi >> e >> j = RI, the resulting components define sI : Homotopy RI 0. Its components are t(n,m) + pi.f n >> k.hom n m >> j.f m. The zero composites pi i and rho j give both required compatibility identities.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
     "place": "Tag 015I, compatibility of the boundary/cycle exact sequences; Weibel Homological Algebra, Lemma 5.7.10"
    }
   },
   {
-   "text": "The chosen homotopies vanish in degree zero, so $s_I^0=s_B^0=0$; the displayed identities give all required conclusions.",
+   "text": "The shape condition of a homotopy of natural-number cochain complexes implies sI.hom 0 m = 0 and sB.hom 0 m = 0, since there is no relation from m to 0. Return sI, sB, these normalizations and the two compatibility identities.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -64,13 +60,11 @@
    }
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 015I; vertical assembly detail from Weibel Homological Algebra, Lemma 5.7.10"
+  "place": "Tags 015I and 013R; original assembly route, using the proved augmented-resolution specialization CochainComplex.homotopyZeroOfQuasiIso and Mathlib nullHomotopicMap/exactness APIs; formalized by T1, 2026-10-16"
  },
  "mathlib_searches": [
   {
@@ -159,5 +153,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261015T210718-L-1857448",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
