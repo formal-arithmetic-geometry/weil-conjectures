@@ -187,5 +187,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-e4f9981ff (reviewer sub-agent of L); spot-checked: Read the complete delivery, cited DAG nodes, unit/chapter route, master blueprint source, and Stacks Tags 00CO/00CX. Verified the localization map, injectivity, surjectivity via the DVR unit-times-uniformizer decomposition, transported E-action, tensor isomorphism, hypotheses, coefficient category, edge cases, searches, and absence of duplicates or cycles. No repairs needed; review.md written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3cbbd443f",
+  "group": "NF",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement clauses, dependencies, sources, docstrings, edge cases, uniqueness, and verbatim signature. Server-only compile passed cleanly in 1.4 s. No corrections needed. No repository mutations performed; concurrent movement of the context clone’s HEAD is documented."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer",
+  "declaration": "Padic.coefficientExtension_localization_uniformizer",
+  "file": "lean/Sheaf/NumberTheory/Padics/IntegersLocalizationUniformizer.lean",
+  "statement": "theorem coefficientExtension_localization_uniformizer (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : IsLocalization.Away (coefficientExtensionUniformizer l E) E ∧ ∃ φ : Localization.Away (coefficientExtensionUniformizer l E) ≃ₐ[ coefficientExtensionIntegers l E] E, (∀ (x : coefficientExtensionIntegers l E) (n : ℕ), φ (IsLocalization.mk' (Localization.Away (coefficientExtensionUniformizer l E)) x (⟨coefficientExtensionUniformizer l E ^ n, ⟨n, rfl⟩⟩ : Submonoid.powers (coefficientExtensionUniformizer l E))) = (x : E) * (coefficientExtensionUniformizer l E : E)⁻¹ ^ n) ∧ ∀ (M : Type v) [AddCommGroup M] [Module (coefficientExtensionIntegers l E) M], ∃ (s : Module E (M ⊗[coefficientExtensionIntegers l E] Localization.Away (coefficientExtensionUniformizer l E))) (t : Module E (M ⊗[coefficientExtensionIntegers l E] E)) (F : (M ⊗[coefficientExtensionIntegers l E] Localization.Away (coefficientExtensionUniformizer l E)) ≃+ (M ⊗[coefficientExtensionIntegers l E] E)), (∀ (e : E) (m : M) (a : Localization.Away (coefficientExtensionUniformizer l E)), s.toSMul.smul e (m ⊗ₜ a) = m ⊗ₜ (φ.symm e * a)) ∧ (∀ (e : E) (m : M) (a : E), t.toSMul.smul e (m ⊗ₜ a) = m ⊗ₜ (e * a)) ∧ (∀ (m : M) (a : Localization.Away (coefficientExtensionUniformizer l E)), F (m ⊗ₜ a) = m ⊗ₜ φ a) ∧ (∀ (e : E) (z : M ⊗[coefficientExtensionIntegers l E] Localization.Away (coefficientExtensionUniformizer l E)), F (s.toSMul.smul e z) = t.toSMul.smul e (F z))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
