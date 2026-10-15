@@ -179,5 +179,30 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-04fda7144 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, blueprint route, and Stacks source passages. Verified both operator equations, the specified totalization inverse, and base-change compatibility with the correct theta inverse. No new nodes, repairs, or off-unit tool uses. Checked the exact master target categories and morphism direction without assuming a comparison with condensed coefficients. Detailed checks and inherited graph limitations are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e6454912c",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Full independent review completed; all three delivered modules compile together via scompile.py with no errors or warnings, and no substantive defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectionFormulaBaseChangeNaturality",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleProjectionFormula_baseChange",
+  "declarations": [
+   "CategoryTheory.derivedProjectionFormulaMate_naturality",
+   "CategoryTheory.transportTensorProjectionArrows",
+   "SheafOfModules.ringedProjectionFormula_operator_naturality",
+   "AlgebraicGeometry.Scheme.proEtaleProjectionFormulaMate",
+   "AlgebraicGeometry.Scheme.proEtaleProjectionFormula_baseChange"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectionFormulaBaseChangeNaturality.lean",
+  "statement": "theorem proEtaleProjectionFormula_baseChange {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) (RX : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (RY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (RX' : Sheaf (ProEt.topology X') CommRingCat.{u + 1}) (RY' : Sheaf (ProEt.topology Y') CommRingCat.{u + 1}) (cf : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj RY ≅ RX) (cg : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj RY ≅ RY') (cg' : (proEtaleSheafInverseImage g' CommRingCat.{u + 1}).obj RX ≅ RX') (cf' : (proEtaleSheafInverseImage f' CommRingCat.{u + 1}).obj RY' ≅ RX') (hcoeff : HEq (proEtaleRingCompositeCoefficients g' f RY RX RX' cf cg') (proEtaleRingCompositeCoefficients f' g RY RY' RX' cg cf')) (aY : ProEtaleTensorModel Y RY) (aX : ProEtaleTensorModel X RX) (aY' : ProEtaleTensorModel Y' RY') (aX' : ProEtaleTensorModel X' RX') (K : DerivedCategory (proEtaleRingModules X RX)) (Q : DerivedCategory (proEtaleRingModules Y RY)) : (proEtaleRingDerivedPullback g RY RY' cg).map (proEtaleProjectionFormulaMate f RY RX cf aY aX K Q) ≫ (proEtaleAmbientRingedExchange sq RX RY RX' RY' cf cg cg' cf' hcoeff).app (aX.tensor.obj (K, (proEtaleRingDerivedPullback f RY RX cf).obj Q)) ≫ (proEtaleRingDerivedDirectImage f' RY' RX' cf').map ((proEtaleCanonicalTensorComparison g' RX RX' cg' aX aX').hom.app (K, (proEtaleRingDerivedPullback f RY RX cf).obj Q) ≫ aX'.tensor.map (Prod.mkHom (𝟙 ((proEtaleRingDerivedPullback g' RX RX' cg').obj K)) ((proEtaleAmbientRingedPullbackComparison sq RX RY RX' RY' cf cg cg' cf' hcoeff).inv.app Q))) = (proEtaleCanonicalTensorComparison g RY RY' cg aY aY').hom.app ((proEtaleRingDerivedDirectImage f RY RX cf).obj K, Q) ≫ aY'.tensor.map (Prod.mkHom ((proEtaleAmbientRingedExchange sq RX RY RX' RY' cf cg cg' cf' hcoeff).app K) (𝟙 ((proEtaleRingDerivedPullback g RY RY' cg).obj Q))) ≫ proEtaleProjectionFormulaMate f' RY' RX' cf' aY' aX' ((proEtaleRingDerivedPullback g' RX RX' cg').obj K) ((proEtaleRingDerivedPullback g RY RY' cg).obj Q)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

@@ -82,22 +82,23 @@
   "declaration": "AlgebraicGeometry.Scheme.proEtaleAmbientRingedExchange",
   "declarations": [
    "AlgebraicGeometry.Scheme.proEtaleCanonicalDerivedPullbackComparison",
+   "AlgebraicGeometry.Scheme.proEtaleAmbientRingedPullbackComparison",
    "AlgebraicGeometry.Scheme.proEtaleAmbientRingedExchange"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAmbientRingedExchange.lean",
   "statement": "def proEtaleAmbientRingedExchange {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (R_X' : Sheaf (ProEt.topology X') CommRingCat.{u + 1}) (R_Y' : Sheaf (ProEt.topology Y') CommRingCat.{u + 1}) (c_f : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X) (c_g : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj R_Y ≅ R_Y') (c_g' : (proEtaleSheafInverseImage g' CommRingCat.{u + 1}).obj R_X ≅ R_X') (c_f' : (proEtaleSheafInverseImage f' CommRingCat.{u + 1}).obj R_Y' ≅ R_X') (hcoeff : HEq (proEtaleRingCompositeCoefficients g' f R_Y R_X R_X' c_f c_g') (proEtaleRingCompositeCoefficients f' g R_Y R_Y' R_X' c_g c_f')) : proEtaleRingDerivedDirectImage f R_Y R_X c_f ⋙ proEtaleRingDerivedPullback g R_Y R_Y' c_g ⟶ proEtaleRingDerivedPullback g' R_X R_X' c_g' ⋙ proEtaleRingDerivedDirectImage f' R_Y' R_X' c_f'",
   "branch": "newtargets-dag",
-  "by": "NA",
+  "by": "Q12",
   "date": "2026-10-15",
   "existing": false,
-  "note": "The helper selects the derived comparison from a repackaging of the complete normalized existence statement in proEtaleRingDerivedPullbackComposition, retaining its section, conjugation, termwise and K-flat characterizations. The exchange is its mate after dependent transport along scheme commutativity and coefficient compatibility. No arbitrary comparison parameter and no completeness or constructibility assumption."
+  "note": "Section 1(B): the now-landed module defines ambient exchange but keeps its canonical square pullback comparison local to that definition. The base-change equation needs that exact comparison as an isomorphism for its target identification. This repair exposes proEtaleAmbientRingedPullbackComparison and defines the existing exchange as its mate. The composition selector, all normalizations, coefficient transport, and exchange signature are preserved; no new arbitrary comparison is chosen."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-5943d3bf8",
-  "group": "NA",
+  "reviewer": "NT-stage2-Codex-e6454912c",
+  "group": "Q12",
   "result": "pass",
-  "note": "Review is complete and explicitly passes immutable snapshot 5943d3bf851fcad0fa9e07dbc342ffd9b4b57ae0. The exchange matches the stated canonical mate construction, preserves coefficient compatibility and full normalization, and adds no scope restrictions. Both required per-file compilations passed without errors or warnings. No fixes required."
+  "note": "Full independent review completed; all three delivered modules compile together via scompile.py with no errors or warnings, and no substantive defects found."
  }
 }
