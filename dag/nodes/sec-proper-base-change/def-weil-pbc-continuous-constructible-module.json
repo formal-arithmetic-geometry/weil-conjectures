@@ -1,0 +1,145 @@
+{
+ "id": "def-weil-pbc-continuous-constructible-module",
+ "kind": "definition",
+ "title": "Constructibility for continuous coefficient module sheaves",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with small pro-etale site [def-weil-pbc-proetale-site], and let $A$ be a commutative topological ring. Write $A_X(V)=C(|V|,A)$, with pointwise operations and precomposition restrictions, for the continuous coefficient sheaf [lem-weil-pbc-lattice-sheaf-locally-constant]. The constant-section map from the constant ring sheaf, formed by sheafification [def-weil-pbc-adic-lisse-module], to $A_X$ sends $a$ to the constant function $a$. For an ordinary $A$-module $P$, define $A_X\\otimes_A P$ by extension of scalars of its constant module sheaf along that map, using the sheaf tensor product [def-pur-sheaf-tensor-product]. For a scheme morphism $f:X\\to Y$, precomposition along $V\\times_Y X\\to V$ defines $A_Y\\to f_*A_X$: these section maps commute with every restriction. Let $f^{-1}A_Y\\to A_X$ be its adjoint under the pro-etale inverse/direct-image adjunction [def-weil-proetale-inverse-image], and define the ringed inverse image $f^*N=A_X\\otimes_{f^{-1}A_Y}f^{-1}N$. Now assume that the underlying topological space of $X$ is noetherian, meaning every descending chain of closed subsets stabilizes, as in Definition 6.8.10. An $A_X$-module sheaf $N$ [def-weil-sheaf-of-modules-category] is continuous-constructible if there is a finite locally closed stratification $X=\\coprod S_i$ [def-constructible-stratification] such that, for each stratum inclusion $j_i:S_i\\to X$, there is a pro-etale covering family $(V_a\\to S_i)_a$ and, for every $a$, a finitely presented $A$-module $P_a$ [def-sc-finitely-presented-module] with $(j_i^*N)|_{V_a}\\cong(A_{S_i}\\otimes_A P_a)|_{V_a}$. Both the covering family and the finitely presented modules may vary with the stratum.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-proetale-inverse-image",
+  "def-constructible-stratification",
+  "def-sc-finitely-presented-module",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.1 and 6.8.10; canonical coefficient restriction and scalar extension used in Lemma 6.8.13."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch (msearch.py leansearch)",
+   "query": "A sheaf over continuous coefficient rings is constructible if on a finite stratification it is locally tensor with a finitely presented constant module",
+   "results": "UNAVAILABLE: internal server error. No negative mathematical conclusion drawn.",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "Loogle (msearch.py loogle)",
+   "query": "\"IsConstructible\", \"SheafOfModules\"",
+   "results": "OK: 0 results.",
+   "date": "2026-10-15",
+   "verdict": "no exact declaration"
+  },
+  {
+   "tool": "LeanFinder (msearch.py leanfinder)",
+   "query": "Every lisse sheaf over a finite extension of the p-adic numbers has a constructible integral lattice",
+   "results": "OK: 8 results, including instModuleFinite_of_discrete_submodule, LocallyConstant.freeOfProfinite and ZLattice.module_finite; none states continuous-coefficient sheaf constructibility.",
+   "date": "2026-10-15",
+   "verdict": "no exact declaration"
+  },
+  {
+   "tool": "grep (msearch.py grep; Mathlib)",
+   "query": "IsContinuousConstructible|continuousCoefficientModule|continuousModulePullback",
+   "results": "OK: 0 results.",
+   "date": "2026-10-15",
+   "verdict": "no exact declaration"
+  },
+  {
+   "tool": "rg (upstream WeilConjectures)",
+   "query": "IsConstructibleModuleObject|IsLocallyFinitelyPresented; exact item id",
+   "results": "ConstructibleSheaf/ProEtaleModule/Def.lean defines internal-module local finite presentation over a ring sheaf and constructibility using that predicate. It does not define local scalar extension of an ordinary finitely presented A-module; exact item id absent.",
+   "date": "2026-10-15",
+   "verdict": "different notion and encoding"
+  },
+  {
+   "tool": "rg (lean/Sheaf)",
+   "query": "latticeCoefficientSheaf|IntegralLatticePair|IsContinuousConstructible",
+   "results": "Sheaf/Paper/LatticeSheafLocallyConstant.lean supplies continuous coefficient sheaves and a globally finite-locally-free lattice pair; AdicLisseModule.lean supplies constant module sheafification. Neither supplies the stratumwise ordinary-finitely-presented-module predicate. Those existing constructions are reused.",
+   "date": "2026-10-15",
+   "verdict": "existing components reused; new predicate needed"
+  },
+  {
+   "tool": "blueprint_refs.py search and DAG text search",
+   "query": "continuous constructible module; continuous coefficient constructible",
+   "results": "No exact definition node. Finite-discrete-coefficient pro-etale modules and inverse-system l-adic lisse sheaves are different notions.",
+   "date": "2026-10-15",
+   "verdict": "new definition node needed"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+  "date": "2026-10-15",
+  "group": "Q40"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "The constructible integral lattice required by the first sentence of the finite-extension proof; continuous coefficient restriction and finitely presented stratumwise models.",
+   "via": [
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousConstructibleModule",
+  "declaration": "AlgebraicGeometry.ProEtale.IsContinuousConstructible",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuousCoefficientConstants",
+   "AlgebraicGeometry.ProEtale.continuousCoefficientConstantMap",
+   "AlgebraicGeometry.ProEtale.continuousCoefficientModule",
+   "AlgebraicGeometry.ProEtale.continuousCoefficientDirectImageApp",
+   "AlgebraicGeometry.ProEtale.continuousCoefficientDirectImageApp_naturality",
+   "AlgebraicGeometry.ProEtale.continuousCoefficientDirectImageMap",
+   "AlgebraicGeometry.ProEtale.continuousCoefficientInverseImageMap",
+   "AlgebraicGeometry.ProEtale.continuousModulePullback",
+   "AlgebraicGeometry.ProEtale.IsContinuousConstructible"
+  ],
+  "file": "lean/Sheaf/Paper/ContinuousConstructibleModule.lean",
+  "statement": "def IsContinuousConstructible (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (A : Type u) [TopologicalSpace A] [CommRing A] [IsTopologicalRing A] (N : SheafOfModules.{u + 1} (latticeModuleRing X A)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Canonical coefficient maps, ordinary constant-module scalar extension, and ringed pullback are constructed, not chosen. The named naturality theorem postpones only the proof of the restriction law explicitly included in this definition node. Maintainer correction: constructibility is defined on topologically noetherian schemes, exactly as in Definition 6.8.10. This makes the inherited constructibility condition on stratification parts automatic; all coefficient and pullback constructions remain general.",
+  "fixed_by": "NT-stage2-Codex-3fdd212d3"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3fdd212d3",
+  "group": "Q40",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3fdd212d3",
+  "group": "Q40",
+  "result": "fix",
+  "note": "Wrote review.md and five complete replacement files under fixes/. Corrected the helper to its source’s topologically noetherian scope and bundled equivalent theorem hypotheses. Both corrected modules compile cleanly through scompile.py; signatures and required report sections verified. Branch head unchanged."
+ }
+}

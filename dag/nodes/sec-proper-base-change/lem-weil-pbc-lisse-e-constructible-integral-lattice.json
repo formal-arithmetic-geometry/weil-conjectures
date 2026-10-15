@@ -30,7 +30,9 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-kun-topological-krull-dimension",
   "def-weil-sheaf-of-modules-category",
-  "def-sc-finitely-presented-module"
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-continuous-constructible-module",
+  "lem-weil-pbc-lattice-sheaf-locally-constant"
  ],
  "proof": [
   {
@@ -314,5 +316,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3fdd212d3",
+  "group": "Q40",
+  "result": "fix",
+  "note": "Wrote review.md and five complete replacement files under fixes/. Corrected the helper to its source’s topologically noetherian scope and bundled equivalent theorem hypotheses. Both corrected modules compile cleanly through scompile.py; signatures and required report sections verified. Branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseEConstructibleIntegralLattice",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_constructible_integral_lattice",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.exists_constructible_integral_lattice"
+  ],
+  "file": "lean/Sheaf/Paper/LisseEConstructibleIntegralLattice.lean",
+  "statement": "theorem exists_constructible_integral_lattice (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) [IsNoetherian T] (_hdim : ∃ d : ℕ, topologicalKrullDim T ≤ d) (_hℓ : ∀ x : T, IsUnit (l : T.presheaf.stalk x)) (L : SheafOfModules.{u + 1} (latticeModuleRing T (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)))) [L.IsFiniteLocallyFree] : ∃ N : SheafOfModules.{u + 1} (latticeModuleRing T (latticeCoefficientIntegers l E)), IsContinuousConstructible T (latticeCoefficientIntegers l E) N ∧ Nonempty (SheafOfModules.changeOfRings.{u, u + 1, u + 1} (integralLatticeCoefficientMap T l E) N ≅ L)",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Uses the canonical continuous coefficient sheaves and valuation topology of the landed lattice-coefficient interface. Constructibility is stratumwise, and no global locally-free hypothesis is imposed on N. Maintainer fix: IsNoetherian T bundles exactly the original locally-noetherian and compact hypotheses and supplies the topologically-noetherian instance for the source-scoped constructibility predicate.",
+  "fixed_by": "NT-stage2-Codex-3fdd212d3"
  }
 }

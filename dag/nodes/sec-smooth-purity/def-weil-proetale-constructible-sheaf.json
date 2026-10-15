@@ -156,10 +156,10 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-afc86e324",
-  "group": "Q14",
+  "reviewer": "NT-stage2-Codex-7a108191d",
+  "group": "Q36",
   "result": "pass",
-  "note": "Wrote review.md. Checked statement clauses, dependencies, canonical constructions, universes, edge cases, docstrings, and verbatim signatures. Both immutable Lean modules compile cleanly through scompile.py’s local side overlay. No fixes required; branch unchanged."
+  "note": "Item and dependencies match the node/source; edge cases, declarations, docstrings, reuse, and intrinsic comparison repair checked. All three files compiled successfully together via scompile.py with status 0; no fixes required."
  },
  "lean": {
   "module": "Sheaf.Paper.ProEtaleConstructibleSheaf",
@@ -167,9 +167,9 @@
   "file": "lean/Sheaf/Paper/ProEtaleConstructibleSheaf.lean",
   "statement": "def IsConstructibleProEtaleModuleSheaf (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q14",
+  "by": "Q36",
   "date": "2026-10-15",
   "existing": false,
-  "note": "§1(B): the original declaration omitted constructibility of each stratum. LocallyClosedStratification supplies only local closedness and immersion data. The repaired predicate retains every original field and adds ∀ i, Topology.IsConstructible (S.stratum i), exactly as this node requires; its name and module are preserved."
+  "note": "This interface makes the unchanged node's constructible-stratum requirement explicit by adding Topology.IsConstructible (S.stratum i), while preserving the declaration and all remaining binders and data. LocallyClosedStratification has no additional constructibility field of its own; the currently available upstream Topology.Stratification already has isConstructible_stratum, so in that version the explicit conjunct is redundant and equivalent, rather than a change of the mathematical notion. The previous justification that constructibility was absent from the entire inherited structure is superseded by the maintainer source check."
  }
 }

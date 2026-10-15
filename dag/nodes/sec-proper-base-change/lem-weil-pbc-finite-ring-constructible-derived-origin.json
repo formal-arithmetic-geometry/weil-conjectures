@@ -22,7 +22,8 @@
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-etale-constructible-sheaf",
   "def-weil-proetale-constructible-sheaf",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-constructible-complexes"
  ],
  "proof": [
   {
@@ -205,5 +206,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7a108191d",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Item and dependencies match the node/source; edge cases, declarations, docstrings, reuse, and intrinsic comparison repair checked. All three files compiled successfully together via scompile.py with status 0; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteRingConstructibleDerivedOrigin",
+  "declaration": "AlgebraicGeometry.Scheme.finiteRing_constructibleDerived_origin",
+  "file": "lean/Sheaf/Paper/FiniteRingConstructibleDerivedOrigin.lean",
+  "statement": "theorem finiteRing_constructibleDerived_origin (X : Scheme.{u}) (B : Type u) [CommRing B] [Finite B] : (ObjectProperty.ι (Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} B) X) ⋙ ProEtale.finiteCoefficientIntrinsicDerivedComparison X B).Full ∧ (ObjectProperty.ι (Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} B) X) ⋙ ProEtale.finiteCoefficientIntrinsicDerivedComparison X B).Faithful ∧ (∀ K : proEtaleDerivedCategory X B, (ObjectProperty.ι (Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} B) X) ⋙ ProEtale.finiteCoefficientIntrinsicDerivedComparison X B).essImage K ↔ (∀ i : ℤ, IsConstructibleProEtaleModuleSheaf X B ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X B)) i).obj K)) ∧ ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X B)) i).obj K)) ∧ (∀ (L : ProEtale.FiniteCoefficientEtaleDerivedCategory X (ULift.{u + 1, u} B)) (a b : ℤ), (∀ i : ℤ, (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) i).obj L)) ↔ (∀ i : ℤ, (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X B)) i).obj ((ProEtale.finiteCoefficientIntrinsicDerivedComparison X B).obj L))))",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
