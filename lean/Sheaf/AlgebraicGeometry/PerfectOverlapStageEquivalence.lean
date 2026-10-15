@@ -98,6 +98,32 @@ theorem overlapOpenInclusionPullbackIso_hom_comp
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
   dsimp only [h]
 
+/-- Inverse component equation, arranged to cancel the exact restriction
+comparison before the open-inclusion pullback comparison. -/
+theorem overlapOpenInclusionPullbackIso_inv_comp
+    (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U)
+    (M : schemeDerivedCategory X) :
+    let R := (schemeOpenRestriction X U).mapDerivedCategory
+    let h := X.homOfLE (leOfHom i)
+    (schemeDerivedOpenRestrictionCompIso X i).inv.app M ≫
+        (overlapOpenInclusionPullbackIso X i).inv.app (R.obj M) =
+      (singleComplexOpenPullbackIso X W).inv.app M ≫
+        (eqToIso (congrArg (fun k : W.toScheme ⟶ X ↦ derivedPullback.{u,w} k)
+          (show h ≫ U.ι = W.ι from Scheme.homOfLE_ι X (leOfHom i)))).inv.app M ≫
+          (perfectHomComposition h U.ι).inv.app M ≫
+            (derivedPullback h).map ((singleComplexOpenPullbackIso X U).hom.app M) := by
+  intro R h
+  have H := congrArg (fun e ↦ e.inv.app M)
+    (overlapOpenInclusionPullbackIso_whiskerLeft X i)
+  simp only [Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app,
+    Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerRight_inv,
+    Functor.whiskerRight_app, Iso.symm_inv] at H
+  rw [H]
+  simp only [Category.assoc]
+  rw [← Category.assoc ((schemeDerivedOpenRestrictionCompIso X i).inv.app M)
+    ((schemeDerivedOpenRestrictionCompIso X i).hom.app M),
+    Iso.inv_hom_id_app, Category.id_comp]
+
 /-- Derived pullback along the inverse of a scheme isomorphism, with its inverse
 constructed from pullback along the isomorphism itself.
 Source: Stacks Project, Tag 0D5S, composition and identity pullback.
