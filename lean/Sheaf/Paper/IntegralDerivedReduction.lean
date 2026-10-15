@@ -83,7 +83,7 @@ noncomputable def integralReductionChangeOfRings :
 
 /-- Additivity of the chosen ordinary tensor functor, supplied by its defining witness.
 Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/
-noncomputable def integralReductionChangeOfRingsAdditive :
+theorem integralReductionChangeOfRingsAdditive :
     (integralReductionChangeOfRings l E Y D hl n).Additive :=
   (integralReductionExistence l E Y D hl n).choose_spec.choose_spec.choose_spec.choose
 
@@ -131,7 +131,7 @@ noncomputable def integralDerivedReductionCounit :
 /-- The universal left-derived-functor structure; it determines the functor uniquely
 up to the unique isomorphism respecting this counit.
 Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/
-noncomputable def integralDerivedReductionUniversal :
+theorem integralDerivedReductionUniversal :
     (integralDerivedReduction l E Y D hl n).IsLeftDerivedFunctor
       (integralDerivedReductionCounit l E Y D hl n)
       (HomotopyCategory.quasiIso (completedIntegralModuleSheaves l E Y D hl)

@@ -58,7 +58,7 @@ theorem proEtaleRingRestrictScalars_properties {T : Scheme.{u}}
 
 /-- Left exactness of restriction. Source: Stacks, Tag 05RT
 (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
-noncomputable def proEtaleRingRestrictScalars_preservesFiniteLimits {T : Scheme.{u}}
+theorem proEtaleRingRestrictScalars_preservesFiniteLimits {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S) :
     PreservesFiniteLimits (proEtaleRingRestrictScalars a) :=
   (proEtaleRingRestrictScalars_properties a).1
@@ -67,7 +67,7 @@ attribute [local instance] proEtaleRingRestrictScalars_preservesFiniteLimits
 
 /-- Right exactness of restriction. Source: Stacks, Tag 05RT
 (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
-noncomputable def proEtaleRingRestrictScalars_preservesFiniteColimits {T : Scheme.{u}}
+theorem proEtaleRingRestrictScalars_preservesFiniteColimits {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S) :
     PreservesFiniteColimits (proEtaleRingRestrictScalars a) :=
   (proEtaleRingRestrictScalars_properties a).2.1

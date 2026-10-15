@@ -49,15 +49,19 @@ noncomputable instance integralTowerRestrictionAdditive (n : ℕ) :
 
 /-- Exactness supplies the limits instance for the recorded restriction functor.
 Source: Stacks Tag 03DA (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
-noncomputable instance integralTowerRestrictionLimits (n : ℕ) :
+noncomputable def integralTowerRestrictionLimits (n : ℕ) :
     PreservesFiniteLimits (completedIntegralRestrictScalars l E Y D hl n) :=
   (completedIntegralRestrictScalars_exact l E Y D hl n).1
 
+attribute [local instance] integralTowerRestrictionLimits
+
 /-- Exactness supplies the colimits instance for the recorded restriction functor.
 Source: Stacks Tag 03DA (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
-noncomputable instance integralTowerRestrictionColimits (n : ℕ) :
+noncomputable def integralTowerRestrictionColimits (n : ℕ) :
     PreservesFiniteColimits (completedIntegralRestrictScalars l E Y D hl n) :=
   (completedIntegralRestrictScalars_exact l E Y D hl n).2
+
+attribute [local instance] integralTowerRestrictionColimits
 
 /-- The termwise finite reduction, using the recorded change-of-rings functor.
 Source: Stacks Tag 06YY (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
