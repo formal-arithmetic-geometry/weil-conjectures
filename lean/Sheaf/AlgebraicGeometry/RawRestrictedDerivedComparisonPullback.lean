@@ -40,6 +40,7 @@ noncomputable def rawRestrictedDerivedPullback {S Y Y' : Scheme.{u}}
     (shiftFunctor _ q).map φ
 
 /-- Canonical cohomology pullback, expressed through restricted derived sections. -/
+@[no_expose]
 noncomputable def rawRestrictedDerivedCohomologyPullback {S Y Y' : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -58,6 +59,24 @@ noncomputable def rawRestrictedDerivedCohomologyPullback {S Y Y' : Scheme.{u}}
       (((D+((a)^*[AddCommGrpCat.{u + 1}])).commShiftIso q).hom.app K ≫
         (shiftFunctor _ q).map φ) ≫
     (RawRestrictedComparison.derivedShiftIso h' q K' U).hom
+
+/-- Characterization of the restricted cohomology pullback by its shift factors. -/
+theorem rawRestrictedDerivedCohomologyPullback_eq {S Y Y' : Scheme.{u}}
+    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (K' : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (φ : (D+((a)^*[AddCommGrpCat.{u + 1}])).obj K ⟶ K')
+    (q : ℤ) (U : S.Etale) :
+    rawRestrictedDerivedCohomologyPullback a h h' w K K' φ q U =
+      (RawRestrictedComparison.derivedShiftIso h q K U).inv ≫
+        (RawRestrictedComparison.restrictedSectionPullback a h h' w U).app (K⟦q⟧) ≫
+        (RawRestrictedComparison.sectionsFunctor
+          ((MorphismProperty.Over.pullback @Etale ⊤ h').obj U) ⋙
+            DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0).map
+          (((D+((a)^*[AddCommGrpCat.{u + 1}])).commShiftIso q).hom.app K ≫
+            (shiftFunctor _ q).map φ) ≫
+        (RawRestrictedComparison.derivedShiftIso h' q K' U).hom := by
+  rfl
 
 set_option maxRecDepth 2048 in
 /-- Derived evaluation intertwines raw pullback and restricted cohomology pullback. -/
