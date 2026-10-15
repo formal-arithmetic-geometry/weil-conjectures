@@ -221,5 +221,23 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-4ce5efd92 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, unit/chapter route, and Stacks Tags 0736/07A7. Verified the resolution comparison, canonical cohomology identifications, coefficient scope, edge cases, and absence of dependency cycles. No new nodes or repairs; accepted all five declared tool uses. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8059360f9",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, source and dependency declarations, every statement clause, edge cases, docstrings, and verbatim signature. Server-only compile passed in 13.0 seconds. No H1–H13 errors; no repository or branch changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KunBcMapOnCohomology",
+  "declaration": "AlgebraicGeometry.derivedBaseChangeMapPlus_cohomology_resolution",
+  "file": "lean/Sheaf/Paper/KunBcMapOnCohomology.lean",
+  "statement": "theorem derivedBaseChangeMapPlus_cohomology_resolution {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ) : (∀ (I : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (J : HomotopyCategory.Plus (Sheaf X'.smallEtaleTopology AddCommGrpCat.{u + 1})) (_ : ∀ n : ℤ, Injective (I.obj.as.X n)) (_ : ∀ n : ℤ, Injective (J.obj.as.X n)) (s : ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F) ≅ DerivedCategory.Plus.Qh.obj I) (j : ((g')^*[AddCommGrpCat.{u + 1}]).mapHomotopyCategoryPlus.obj I ⟶ J), ∀ [IsIso (DerivedCategory.Plus.Qh.map j)], (((g)^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusHomologyFunctorIso q).hom.app ((f)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)) ≫ (DerivedCategory.Plus.homologyFunctor (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) q).map ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)) ≫ (DerivedCategory.Plus.homologyFunctor (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) q).map ((f')_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.map ((((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F)) = (((g)^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusHomologyFunctorIso q).hom.app ((f)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)) ≫ (DerivedCategory.Plus.homologyFunctor (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) q).map (inv (((g)^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlus.map ((f)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlusUnit.app I ≫ (f)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.map s.inv)) ≫ ((g)^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusFactorsh.hom.app ((f)_*[AddCommGrpCat.{u + 1}].mapHomotopyCategoryPlus.obj I) ≫ DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus (Etale.baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq)).app I) ≫ DerivedCategory.Plus.Qh.map ((f')_*[AddCommGrpCat.{u + 1}].mapHomotopyCategoryPlus.map j) ≫ ((f')_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlusUnit.app J ≫ (f')_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.map (inv (((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlus.map s.hom ≫ ((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusFactorsh.hom.app I ≫ DerivedCategory.Plus.Qh.map j)))) ≫ (DerivedCategory.Plus.homologyFunctor (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) q).map ((f')_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.map ((((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F))) ∧ (q < 0 → IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((f)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))) ∧ IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((f')_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor (Sheaf X'.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj (((g')^*[AddCommGrpCat.{u + 1}]).obj F)))))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
