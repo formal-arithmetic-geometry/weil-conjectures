@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-0f0e",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Tensor with a constant complex over $\\mathbf Z$",
@@ -13,34 +13,183 @@
   "place": "node lem-kun-0f0e, order 1737"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor",
+  "def-kun-constant-sheaf",
+  "def-kun-constant-projection-morphism"
  ],
  "proof": [
   {
-   "text": "Both sides are triangulated functors in $K\\in\\Dplus(\\mathbf Z)$\n([def-kun-derived-tensor], [def-weil-pbc-etale-cohomology]),\nand for $K=\\mathbf Z$ placed in degree zero the map is the unit\nconstraint of the tensor product, hence an isomorphism; the same holds\nfor every bounded complex of free $\\mathbf Z$-modules, both sides\nbeing compatible with finite direct sums and shifts on the nose.\nFor a general bounded-below $K$ write $K=\\varinjlim_N\\sigma_{\\ge -N}K$ as the filtered colimit of its stupid truncations\n([def-kun-truncations]); since $E$ is bounded below, in each\ncohomological degree the tensor product\n$\\RGamma(X_{\\Et},E)\\otimes_{\\mathbf Z}K$ involves only finitely many\ndegrees of $K$ below any bound, so the horizontal maps are the\ncolimits of the isomorphisms for the truncations, and likewise for\n$\\RGamma(X_{\\Et},E\\otimes_{\\mathbf Z}\\underline{K})$ because\n$\\underline{K}$ is the colimit of the $\\underline{\\sigma_{\\ge -N}K}$\n([def-kun-constant-sheaf]) and cohomology commutes with filtered\ncolimits of complexes. Hence the map is an isomorphism for every\n$K\\in\\Dplus(\\mathbf Z)$.",
+   "text": "Write $R=R\\Gamma(X_{\\Et},-)$ and $a^*K=\\underline K$. The canonical map is precisely the counit mate $\\alpha_{E,K}:RE\\otimes^L K\\to R(E\\otimes^L a^*K)$ of [def-kun-constant-projection-morphism]. Apply [lem-weil-pbc-ringed-projection-mate-exact] to the ringed-topos morphism from the small etale topos to the one-point topos, with coefficient ring $\\mathbf Z$. This gives exact functors of K, a natural comparison commuting with the triangle connecting maps, and $\\alpha_{E,\\mathbf Z}=1_{RE}$. In the E variable, the same counit formula also commutes with cones: for a chain map u the cone differential is the matrix $(d,u;0,-d)$, tensor distributes over its two summands, and naturality with u gives the off-diagonal square, with the same minus sign on both shifted summands. Applying the triangulated functor R gives a morphism of these cone triangles. Thus the isomorphism property is stable under shifts and finite extensions in either variable.",
    "uses": [
-    "def-kun-derived-tensor",
-    "def-weil-pbc-etale-cohomology",
-    "def-kun-truncations",
-    "def-kun-constant-sheaf"
+    "def-kun-constant-projection-morphism",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pc-right-derived-functor-triangulated",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0E (lemma-pull-out-constant), canonical comparison and the distinguished-triangle reductions"
+   }
+  },
+  {
+   "text": "We will use the lower-bound fact $C\\in D^{\\ge c}\\Rightarrow RC\\in D^{\\ge c}$. Indeed global sections is the additive right adjoint of the constant-sheaf functor, hence left exact, and abelian etale sheaves form a Grothendieck category. Apply [lem-weil-pbc-derived-functor-truncation-iso] to $0\\to C$ and $n=c-1$: the cohomology maps are isomorphisms in degrees at most $c-1$, and the degree-c map from zero is a monomorphism. Hence $H^j(RC)=0$ for $j<c$. The standard t-structure supplies a representative of RC zero below c.",
+   "uses": [
+    "def-weil-pbc-global-sections-functor",
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "lem-weil-pbc-derived-functor-truncation-iso",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0E (lemma-pull-out-constant), lower-bound vanishing used with the stupid truncation triangles"
+   }
+  },
+  {
+   "text": "Let $P$ be a bounded-below complex of flat abelian groups and choose an integer $b$ with $P^i=0$ for $i<b$. Each $P^i$ is torsion free: tensor the injection $\\mathbf Z\\xrightarrow{m}\\mathbf Z$ with $P^i$ for each nonzero integer m. Every subgroup, in particular $\\ker(d_P^j)$, is then torsion free, hence flat by [lem-weil-pbc-pid-torsion-free-module-flat] with $A=\\mathbf Z$. Thus every good truncation $\\tau_{\\le j}P$ is bounded and flat. Constant sheaves are exact, preserve flat objects and, as left adjoint to global sections, preserve colimits; hence their termwise images are also bounded flat complexes, and $\\underline P=\\operatorname{colim}_{j\\ge b}\\underline{\\tau_{\\le j}P}$, degreewise. The same colimit formula holds for $P$ itself. Apply [lem-pc-bounded-above-flat-kflat-site] on the etale site and on the one-point site to each of these bounded truncations. For any acyclic complex $A$, [lem-pc-module-filtered-colimits-tensor] identifies its tensor with the colimit complex with the filtered colimit of its tensors with these truncations; exactness of filtered colimits, also in that cited statement, makes this colimit of acyclic complexes acyclic. This proves K-flatness of $P$ and of its constant complex directly from the definition. It applies in particular to every stupid tail or head of $P$, since those still have flat terms and are bounded below.",
+   "uses": [
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "def-kun-truncations",
+    "def-kun-constant-projection-morphism",
+    "def-weil-pbc-global-sections-functor",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pc-module-filtered-colimits-tensor",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0E (lemma-pull-out-constant), justification that ordinary total tensor with the flat integer model computes derived tensor; via good truncations and the existing K-flatness/colimit criteria"
+   }
+  },
+  {
+   "text": "First let E be an abelian sheaf $\\mathcal F$ in degree zero and let K be a flat abelian group M in degree zero. By [lem-kun-lazard-flat-module], choose a small directed presentation $M=\\operatorname{colim}_i F_i$ by finite free groups. Constant sheaves preserve this colimit because they are left adjoint to global sections; tensoring sheaves with $\\mathcal F$ preserves it by [lem-pc-module-filtered-colimits-tensor]. The qcqs hypothesis on X permits [lem-weil-pbc-cohomology-filtered-colimit], so for $q\\ge0$ we have $H^q(X,\\mathcal F\\otimes\\underline M)=\\operatorname{colim}_i H^q(X,\\mathcal F\\otimes\\underline{F_i})$. On the source side [lem-pc-filtered-colimit-derived-tensor], with $R=A=\\mathbf Z$, identifies $H^q(R\\mathcal F\\otimes^L M)$ with $\\operatorname{colim}_iH^q(R\\mathcal F\\otimes^L F_i)$. For $F_i=\\mathbf Z^{r_i}$, both sides and the comparison are the finite direct sum of $\\alpha_{\\mathcal F,\\mathbf Z}$, which is the identity by step 1. Naturality identifies the two directed systems of comparison maps, so their colimit is an isomorphism. Flatness and the K-flatness calculation of step 3 identify the derived tensor on the right with $\\mathcal F\\otimes\\underline M$. Both sides vanish in negative degrees by step 2, so this proves the derived comparison for this case.",
+   "uses": [
+    "lem-kun-lazard-flat-module",
+    "def-weil-pbc-global-sections-functor",
+    "lem-pc-module-filtered-colimits-tensor",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-pc-filtered-colimit-derived-tensor",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0E (lemma-pull-out-constant), Lazard and Theorem colimit (Tag 0739), final paragraph"
+   }
+  },
+  {
+   "text": "Keep K=M[0] flat and now let E be arbitrary bounded below. Flatness means that tensor preserves the kernel-image short exact sequences of a complex, whence $H^i(C\\otimes M)=H^i(C)\\otimes M$; the same holds for $\\underline M$ on sheaves, since constant sheaves preserve flat objects. Fix n and put $E_n=\\tau_{\\le n}E$. By [lem-weil-pbc-derived-functor-truncation-iso], $RE_n\\to RE$ induces an isomorphism on $H^n$. Exact flat tensor gives the same for the source comparisons, and $E_n\\otimes\\underline M\\to E\\otimes\\underline M$ has isomorphic cohomology through n and a monomorphism in degree n+1; the same cited truncation lemma gives the target isomorphism in degree n. The object E_n has cohomology in only finitely many degrees. Starting with its lowest nonzero cohomology sheaf, successively use the canonical triangles $\\tau_{\\le j-1}E_n\\to\\tau_{\\le j}E_n\\to H^j(E_n)[-j]\\to$ from [lem-weil-pbc-truncation-triangle]. Step 4 handles each sheaf, shifts are handled by step 1, and the long exact cohomology sequences of the morphisms of triangles propagate the isomorphism by the five lemma. This proves the comparison for E_n and hence in degree n for E. Since n was arbitrary, it proves the flat-group case for every E.",
+   "uses": [
+    "def-kun-constant-projection-morphism",
+    "lem-weil-pbc-derived-functor-truncation-iso",
+    "def-kun-truncations",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0E (lemma-pull-out-constant), repeating the truncation argument for E, with the degree bound written out"
+   }
+  },
+  {
+   "text": "For fixed E, let P be a bounded complex of flat abelian groups. Induct on the number of its potentially nonzero terms. The zero complex is immediate; a single term is a shift of the flat-group case of step 5. For a complex supported in [b,N], the degreewise split short exact sequence $0\\to\\sigma_{\\ge b+1}P\\to P\\to P^b[-b]\\to0$ gives the stupid truncation triangle. Step 1 turns the comparison into a morphism of triangles. The first and third comparisons are isomorphisms by induction and step 5; exactness of the cohomology sequences gives the middle isomorphism. This establishes all bounded flat coefficient complexes.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0E (lemma-pull-out-constant), bounded flat complexes reduced to single flat modules by stupid truncation triangles"
+   }
+  },
+  {
+   "text": "For general K use [lem-kun-torsionfree-complex-model] to choose a flat complex P representing K with $P^i=0$ for $i<b$. Choose a representative $\\mathcal E$ of E with $\\mathcal E^i=0$ for $i<a$. By the K-flatness calculation of step 3, P, all its stupid tails, and their termwise constant complexes are K-flat; thus ordinary total tensors with them compute the derived tensors. Fix n and choose $N\\ge\\max(b,n-a+1)$. Put $T=\\sigma_{\\ge N+1}P$ and $B=\\sigma_{\\le N}P$. The complexes $\\operatorname{Tot}(\\mathcal E\\otimes\\underline T)$ and $\\operatorname{Tot}(RE\\otimes T)$ are zero below $a+N+1\\ge n+2$, where the latter uses the lower-bounded representative of RE from step 2. Step 2 gives the same vanishing below n+2 after applying R to the former. Apply both functors of step 1 to the triangle $T\\to P\\to B\\to T[1]$. The vanishing of both degree n and degree n+1 of each tail shows that the maps from the P terms to the B terms induce isomorphisms on $H^n$. Step 6 proves that the comparison for the bounded flat complex B is an isomorphism. The natural square therefore proves $H^n(\\alpha_{E,K})$ is an isomorphism. This holds for every integer n, so $\\alpha_{E,K}$ is an isomorphism in the derived category.",
+   "uses": [
+    "lem-kun-torsionfree-complex-model",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-kun-derived-tensor",
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0E (lemma-pull-out-constant), first model paragraph and the explicit high-tail reduction for K"
+   }
   }
  ],
  "proof_deps": [
+  "def-kun-constant-projection-morphism",
   "def-kun-derived-tensor",
-  "def-weil-pbc-etale-cohomology",
   "def-kun-truncations",
-  "def-kun-constant-sheaf"
+  "def-pc-kflat-complex",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-global-sections-functor",
+  "lem-kun-lazard-flat-module",
+  "lem-kun-torsionfree-complex-model",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-filtered-colimit-derived-tensor",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-truncation-triangle"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f0e.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0E (lemma-pull-out-constant), with corrected lower-bound and cutoff indices; see report Source error"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections tensored with a constant bounded-below integer complex on a quasi-compact quasi-separated scheme",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections tensor constant complex etale cohomology filtered colimits",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Algebra.Extension.tensorCotangentSpace, CategoryTheory.Sheaf.cohomologyPresheafFunctor, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, Algebra.FormallyEtale.instTensorProduct, CategoryTheory.Sheaf.H",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, tensor, cohomology",
+   "results": "loogle: unknown identifier 'tensor'; 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedGlobalSections|cohomology.*tensor|tensor.*cohomology",
+   "results": "0 hits:  (Mathlib/CategoryTheory)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived global sections tensored with a constant bounded-below integer complex on a quasi-compact quasi-separated scheme",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +218,74 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-0f0e",
+  "worker": "stage1",
+  "summary": "Replaced the invalid imported truncation-colimit argument by seven explicit steps following Tag 0F0E: canonical mate, lower-bound vanishing, an elementary K-flatness calculation from existing PID/colimit lemmas, the Lazard single-sheaf calculation, truncation in E, bounded flat complexes, and the degree-n cutoff N >= n-a+1 in K. Added only the bounded-below flat-model existence theorem and Lazard presentation as statement-only nodes; no theorem statement change.",
+  "blueprint": "The imported proof paragraph: triangulated comparison/unit case in step 1; the actual flat-complex tensor justification in steps 2-3; missing flat-group colimit argument in step 4; its unsupported filtered-truncation claim replaced by the source degreewise truncation argument in steps 5-7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "General counit-mate exactness, naturality, and unit normalization for the constant-sheaf/global-sections adjunction; no unit-route theorem replaces this generic construction."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "General triangulatedness of derived global sections, needed for the E-variable cone calculation."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-truncation-iso",
+    "why": "General degreewise comparison under a left exact derived functor, needed for lower-bound vanishing and E truncations."
+   },
+   {
+    "node": "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "why": "Verifies the Grothendieck hypothesis when the generic truncation lemma is applied to global sections."
+   },
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Tensor/filtered-colimit compatibility for sheaves, specialized to degree-zero complexes."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-filtered-colimit",
+    "why": "Qcqs etale cohomology continuity (Tag 0739), the source proof final tool."
+   },
+   {
+    "node": "lem-pc-filtered-colimit-derived-tensor",
+    "why": "Ordinary integer-module derived tensor continuity; applied only to complexes of modules, never to sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "General canonical truncation triangles used to induct on the finite cohomological support of E_n."
+   },
+   {
+    "node": "lem-weil-pbc-pid-torsion-free-module-flat",
+    "why": "Generic PID flatness criterion, applied to kernels inside flat integer groups to justify the tensor model."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic bounded-above K-flatness criterion for the good truncations, applied on both the etale and one-point sites."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-pc-filtered-colimit-derived-tensor",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-N9-8bb08d126",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-8bb08d126 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, source passages and unit/chapter route. All seven steps check, including canonical-map compatibility, group/sheaf coefficient distinctions and both tail-vanishing degrees. Lazard and bounded-below integer flat-model lemmas are valid, nonduplicate supporting results. Edge cases and dependency cycles checked; ten generic tool uses accepted. Detailed review written to review.md; no fixes required."
+ }
 }
