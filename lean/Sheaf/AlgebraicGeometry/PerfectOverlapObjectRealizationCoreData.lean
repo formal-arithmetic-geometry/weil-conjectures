@@ -979,6 +979,33 @@ theorem openSiteReturn_overlap_triangle (X : Scheme.{u}) {W U : X.Opens}
   intro PU PW LU LW SP SU RU RW siteU siteW τ σ ω
   exact Classical.choose_spec (openSiteOverlapIso_exists X i)
 
+/-- Component form of the open-site restriction triangle.
+Source: Stacks Project, Tags 08BT and 08BV. Evaluate the natural triangle at
+the given derived object; its associator components are identities. -/
+theorem openSiteReturn_overlap_triangle_app (X : Scheme.{u}) {W U : X.Opens}
+    (i : W ⟶ U) (E : schemeDerivedCategory X) :
+    let PU := (schemeOpenRestriction X U).mapDerivedCategory
+    let LW := (overlapSiteInverse W).mapDerivedCategory
+    let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
+    let RU := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory
+    let RW := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
+    let τ : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso
+        (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
+    SP.map ((openSiteReturnIso X U).hom.app E) ≫ τ.hom.app E =
+      (openSiteOverlapIso X i).hom.app (PU.obj E) ≫
+        LW.map ((schemeDerivedOpenRestrictionCompIso X i).hom.app E) ≫
+          (openSiteReturnIso X W).hom.app E := by
+  intro PU LW SP RU RW τ
+  have h := congrArg (fun e ↦ e.hom.app E) (openSiteReturn_overlap_triangle X i)
+  simpa only [PU, LW, SP, RU, RW, τ, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Iso.symm_hom,
+    Functor.comp_obj, Category.id_comp, Category.assoc] using h
+
+
 
 /-- The two paths around an open-restriction square agree by pullback composition.
 Use the fixed composition comparisons and the constructed open-pullback comparisons. -/
