@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.Stalk
 
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import Sheaf.WeilSheaf.FiniteBoundaryPositive
+import Sheaf.WeilSheaf.AffineCurveRangePositive
+
 /-!
 # Compactly supported cohomology of Weil complexes
 
@@ -116,6 +120,30 @@ noncomputable def compactlySupportedCohomology (F : WeilSheaf k₀ l X) (r : ℤ
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   (toComplex.obj F).compactlySupportedCohomology r
 
+set_option linter.style.haveILetI false in
+private theorem isZero_homology_compactSupport_of_neg (G : WeilSheaf k₀ l X)
+    {r : ℤ} (hr : r < 0) :
+    IsZero ((WeilComplex.homologySheaf r).obj
+      ((WeilComplex.derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj
+        (toComplex.obj G))) := by
+  let a := X ↘ Spec (CommRingCat.of k₀)
+  let c := HasCompactification.compactification a
+    (hf := hasCompactification_of_over (k₀ := k₀) a)
+  letI := c.over (k₀ := k₀)
+  let E := ProEtaleWeilSheaf.extensionByZero k₀ l c.i
+  let P := ProEtaleWeilSheaf.lowerStar k₀ l c.g
+  have hge := P.isGE_rightDerivedFunctor_obj_singleFunctor (E.obj G.obj)
+  rw [WeilComplex.isZero_homologySheaf_obj_iff]
+  exact (_root_.DerivedCategory.isZero_of_isGE (hX := hge) _ 0 r hr).of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ r).mapIso
+      (P.rightDerivedFunctor.mapIso ((E.mapDerivedCategorySingleFunctor 0).app G.obj)))
+
+private theorem subsingleton_globalSections_of_isZero (F : WeilSheaf k₀ l
+    (Spec (CommRingCat.of k₀))) (hF : IsZero F) : Subsingleton F.globalSections.carrier := by
+  exact ModuleCat.subsingleton_of_isZero
+    ((WeilCoefficients.toModuleCat l).map_isZero ((Sheaf.Γ _ _).map_isZero
+      ((ProEtale.AdicSheaf.forget _).map_isZero (isZero_iff_isZero_carrier.mp hF))))
+
 /-- *Cohomology of a finite boundary.* If `X` is finite over `k₀`, then the compactly supported
 cohomology `H_c^r(X ⊗ k̄, G)` of a Weil sheaf `G` on `X` vanishes for `r ≠ 0`: after geometric
 base change `X` becomes a finite discrete space, whose cohomology is concentrated in degree
@@ -124,8 +152,12 @@ no role.
 (blueprint: `lem-a1-finite-boundary-cohomology`) -/
 theorem subsingleton_compactlySupportedCohomology_of_isFinite
     [IsFinite (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ} (hr : r ≠ 0) :
-    Subsingleton (G.compactlySupportedCohomology r).carrier :=
-  sorry
+    Subsingleton (G.compactlySupportedCohomology r).carrier := by
+  rcases hr.lt_or_gt with hr | hr
+  · exact subsingleton_globalSections_of_isZero _
+      (isZero_homology_compactSupport_of_neg G hr)
+  · exact subsingleton_globalSections_of_isZero _
+      (isZero_homology_compactSupport_of_isFinite_of_pos G hr)
 
 /-- *Cohomological range of an affine curve.* If `X` is a smooth affine curve over `k₀` and `G`
 is a constructible Weil sheaf on `X`, then `H_c^r(X ⊗ k̄, G) = 0` for `r ∉ {0, 1, 2}`: after a
@@ -136,8 +168,10 @@ theorem subsingleton_compactlySupportedCohomology_of_isAffine [IsAffine X]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ}
     (hr : r < 0 ∨ 2 < r) :
     Subsingleton (G.compactlySupportedCohomology r).carrier := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
-  sorry
+  rcases hr with hr | hr
+  · exact subsingleton_globalSections_of_isZero _ (isZero_homology_compactSupport_of_neg G hr)
+  · exact subsingleton_globalSections_of_isZero _
+      (isZero_homology_compactSupport_of_isAffine_of_two_lt G hr)
 
 end WeilSheaf
 

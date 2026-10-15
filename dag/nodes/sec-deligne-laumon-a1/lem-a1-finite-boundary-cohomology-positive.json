@@ -1,0 +1,131 @@
+{
+ "id": "lem-a1-finite-boundary-cohomology-positive",
+ "kind": "statement",
+ "title": "Positive-degree finite-boundary cohomology",
+ "statement": "Let k₀ be a finite field, l a prime different from its characteristic, and X a separated finite-type k₀-scheme [def-weil-scheme-morphism-properties]. Let G be a constructible Weil sheaf [def-weil-weil-sheaf-complex] on X. Assume X is finite over k₀ and r is a positive integer. The r-th Weil cohomology sheaf of the compactly supported derived direct image [def-compact-support-direct-image-detailed] of G, placed in degree zero, along X → Spec k₀ is zero.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.md",
+  "place": "The corresponding positive-degree part of the blueprint proof"
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "A finite structure map is proper, so compactification independence identifies its compactly supported direct image with ordinary direct image. Geometric base change is finite. Its reduction is a finite disjoint union of spectra of the algebraically closed base field; nilpotents do not change the etale or pro-etale site. At finite coefficients, the zero-dimensional cohomology theorem gives degree-zero sections as a finite product of stalks and no positive cohomology, including on the empty scheme.",
+   "uses": [
+    "def-compact-support-direct-image-detailed",
+    "lem-weil-pbc-zero-dimensional-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a finite coefficient field of definition and a constructible integral lattice. Adic direct image is the derived inverse limit of finite reductions. Degree-zero sections of these finite reductions are finite, hence their tower is Mittag--Leffler with vanishing first derived limit. The Milnor exact sequence therefore gives zero in degree one as well as in all higher degrees. Exact rationalization and scalar extension preserve this vanishing.",
+   "uses": [
+    "def-weil-pbc-qbar-category",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-mittag-leffler"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact forgetful functor from Weil structures commutes with derived direct image and reflects zero objects. The underlying geometric cohomology calculation therefore gives the zero Weil cohomology sheaf. This is a sheaf-level obligation, before the parent theorem takes global sections.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-compact-support-direct-image-detailed",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "def-weil-pbc-qbar-category",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-mittag-leffler",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.md",
+  "place": "Positive-degree argument, expanded at second reading including integral-lattice and Mittag--Leffler passage"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "positive-degree compactly supported cohomology finite scheme vanishing",
+   "results": "UNAVAILABLE: LeanSearch returned Internal Server Error. No mathematical verdict is inferred from this unavailable search.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isZero_of_isLE",
+   "results": "Found DerivedCategory.isZero_of_isLE: it requires an upper bound, which the available adic finiteness theorem does not specify as zero or two.",
+   "date": "2026-10-16",
+   "verdict": "generic tool, not the required geometric bound"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupportedCohomology.*(two_lt|isFinite)|isLE.*lowerStar|lowerStar.*isLE",
+   "results": "No Mathlib hit via msearch. Repository searches found ZeroDimensionalCohomology, Finite.Exact, EtaleCohomologicalDimension, and adic LowerStar finiteness; these give finite-torsion computations or an unspecified bound, not the adic compact-support comparison needed here.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact finite direct image adic sheaves vanishing higher right derived functor",
+   "results": "Eight generic hits, including Functor.isZero_rightDerived_obj_injective_succ, but none compares the adic Weil compact-support construction.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.Cohomology",
+  "date": "2026-10-16",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-boundary-cohomology",
+   "place": "Positive-degree part"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-i-dl-a1-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.FiniteBoundaryPositive",
+  "file": "lean/Sheaf/WeilSheaf/FiniteBoundaryPositive.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.isZero_homology_compactSupport_of_isFinite_of_pos",
+  "statement": "theorem isZero_homology_compactSupport_of_isFinite_of_pos\n    [IsFinite (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ} (hr : 0 < r) :\n    IsZero ((WeilComplex.homologySheaf r).obj\n      ((WeilComplex.derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj\n        (toComplex.obj G)))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261015T182204-L-785636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261015T182204-L-785636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
