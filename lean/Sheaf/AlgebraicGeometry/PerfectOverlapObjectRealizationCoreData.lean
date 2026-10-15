@@ -31,6 +31,56 @@ universe u w v h v' h'
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+/-- The fixed pullback from a finite overlap stage to the colimit overlap. -/
+noncomputable def perfectOverlapCoreTransition
+    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
+    (i : I) (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i))
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    (k : Set.Ici i) :
+    schemeDerivedCategory (pullback s (Spec.map (R.map (homOfLE k.property)))) ⥤
+      schemeDerivedCategory (pullback s (Spec.map (c.ι.app i))) :=
+  derivedPullback (baseChangeMap s (overlapLimitArrow R c k))
+
+/-- The fixed composition comparison for the overlap transition. -/
+@[irreducible] noncomputable def perfectOverlapCoreBaseComparison
+    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
+    (i : I) (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i))
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    (k : Set.Ici i) :
+    derivedPullback (pullback.fst s (Spec.map (c.ι.app i))) ≅
+      derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE k.property)))) ⋙
+        perfectOverlapCoreTransition R c i Y s k :=
+  let hX : pullback.fst s (Spec.map (c.ι.app i)) =
+      pullback.fst s (Over.mk (Spec.map (c.ι.app i))).hom := rfl
+  let hY : pullback.fst s (Spec.map (R.map (homOfLE k.property))) =
+      pullback.fst s (Over.mk (Spec.map (R.map (homOfLE k.property)))).hom := rfl
+  let eX := eqToIso (congrArg (fun f ↦ derivedPullback f) hX)
+  let eY := eqToIso (congrArg (fun f ↦ derivedPullback f) hY)
+  (by
+    simpa only [perfectOverlapCoreTransition] using
+      (eX ≪≫ perfectHomComparison s (overlapLimitArrow R c k) ≪≫
+        (Functor.isoWhiskerRight eY
+          (derivedPullback (baseChangeMap s (overlapLimitArrow R c k)))).symm))
+
+/-- Natural derived-pullback comparison for two cartesian identifications.
+Source: Stacks Project, Tag 0D5S. The two sides are pullbacks along the same
+scheme map after `h`. Compose the fixed pullback-composition isomorphism for
+`e.inv` and `r`, transport across `h`, and invert the fixed comparison for
+`m` and `d.inv`. Naturality follows from that of each factor. -/
+noncomputable def perfectOverlapDerivedPullbackTransport
+    {Y Z A B : Scheme.{u}}
+    [∀ T : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
+    (r : Y ⟶ Z) (e : Y ≅ A) (d : Z ≅ B) (m : A ⟶ B)
+    (h : e.inv ≫ r = m ≫ d.inv) :
+    derivedPullback r ⋙ derivedPullback e.inv ≅
+      derivedPullback d.inv ⋙ derivedPullback m :=
+  perfectHomComposition e.inv r ≪≫
+    eqToIso (congrArg (fun f ↦ derivedPullback f) h) ≪≫
+      (perfectHomComposition m d.inv).symm
+
 /-- Geometric object comparisons and their natural compatibility with apex pullback.
 The transition functors and their fixed conjugation formula are recorded explicitly;
 the Hom pin will be derived from naturality, rather than included as a field.
