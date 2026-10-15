@@ -123,5 +123,27 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-18690d814 (reviewer sub-agent of L); spot-checked: Read the full item, six dependency statements, route, and cited mathematics. Roos indexing, exact products, unbounded evaluation, edge cases, and dependency acyclicity check out; no condensed-coefficient comparison is assumed. Repaired B5 source metadata to include 08TC and exact TeX labels for 08TC/07KC. Whole corrected JSON is under fixes/dag/nodes; concrete checks are in review.md. No targets changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dc41775f2",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Reviewed all immutable modules, nodes, dependencies, sources, and report sections. Statements, constructions, universes, and edge cases match; all three modules compile cleanly through scompile.py’s local side overlay. Full findings recorded in review.md; no fixes required."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.Triangulated.DerivedLimit",
+  "declaration": "CategoryTheory.IsDerivedLimitTriangle",
+  "declarations": [
+   "CategoryTheory.IsDerivedLimitTriangle",
+   "CategoryTheory.IsDerivedLimit"
+  ],
+  "statement": "def IsDerivedLimitTriangle {C : Type u} [Category.{v} C] [HasZeroObject C]\n    [HasShift C ℤ] [Preadditive C]\n    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]\n    {K : ℕ → C} [HasProduct K] (f : ∀ n, K (n + 1) ⟶ K n)\n    (L : C) (p : L ⟶ ∏ᶜ K) (δ : ∏ᶜ K ⟶ L⟦(1 : ℤ)⟧) : Prop",
+  "branch": "slopmaster2",
+  "by": "Q39",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "The node has no current Lean record; its statement explicitly specializes the existing Roos-triangle definition, without choosing an object or functor. This is the same exact match read in delivery/Q02/def-weil-pbc-derived-inverse-limit. Specialize C to DerivedCategory (CompletedAdicModules T d), K n to the derived evaluation at positive level n+1, and f to the induced transitions. Product existence and termwise computation are the separately cited product lemmas. Current source confirmed with scompile.py --source."
  }
 }

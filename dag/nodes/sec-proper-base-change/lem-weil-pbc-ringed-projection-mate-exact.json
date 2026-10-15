@@ -23,7 +23,9 @@
   "lem-pc-kflat-resolution",
   "def-pc-tensor-complex-sheaves",
   "def-pur-kinjective-complex",
-  "prop-pur-kinjective-resolutions-exist"
+  "prop-pur-kinjective-resolutions-exist",
+  "def-weil-pbc-ringed-tensor-square-presentation",
+  "def-weil-pbc-projection-formula-arrows"
  ],
  "proof": [
   {
@@ -226,5 +228,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7a2b3f05e",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical constructions, universes, edge cases, docstrings and verbatim signature. scompile.py reproduced clean sandbox/library passes in 21.7/27.6 seconds. No defects found; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectionMateExact",
+  "declaration": "SheafOfModules.ringedProjectionMateExact",
+  "declarations": [
+   "SheafOfModules.RingedTensorCorner.mateModules",
+   "SheafOfModules.RingedTensorCorner.mateDerived",
+   "SheafOfModules.RingedTensorCorner.mateUnitComplex",
+   "SheafOfModules.RingedTensorCorner.mateUnit",
+   "SheafOfModules.RingedTensorCorner.mateTensor",
+   "SheafOfModules.RingedTensorCorner.mateFlat",
+   "SheafOfModules.RingedTensorModel.MateCanonicalShifts",
+   "SheafOfModules.RingedTensorModel.MateCanonicalUnit",
+   "SheafOfModules.ringedProjectionMateExact"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectionMateExact.lean",
+  "statement": "theorem ringedProjectionMateExact {Y X : RingedTensorCorner.{u, w}} (e : RingedTensorEdge Y X) (a : RingedTensorModel Y) (b : RingedTensorModel X) : ∃ (_ : (Functor.curryObj Y.tensor).CommShift₂Int) (_ : (Functor.curryObj X.tensor).CommShift₂Int) (_ : e.left.CommShift ℤ) (_ : e.right.CommShift ℤ), a.MateCanonicalShifts ∧ b.MateCanonicalShifts ∧ NatTrans.CommShift e.epsilon ℤ ∧ e.left.IsTriangulated ∧ e.right.IsTriangulated ∧ e.derivedAdjunction.CommShift ℤ ∧ (∀ U : Y.mateDerived, ((Functor.curryObj Y.tensor).obj U).IsTriangulated ∧ ((Functor.curryObj Y.tensor).flip.obj U).IsTriangulated) ∧ (∀ U : X.mateDerived, ((Functor.curryObj X.tensor).obj U).IsTriangulated ∧ ((Functor.curryObj X.tensor).flip.obj U).IsTriangulated) ∧ (∀ (n : ℤ) (U V : Y.mateDerived), (e.tensorComparison a b).hom.app (U, V⟦n⟧) ≫ X.tensor.map (Prod.mkHom (𝟙 (e.left.obj U)) ((e.left.commShiftIso n).hom.app V)) ≫ (((Functor.curryObj X.tensor).obj (e.left.obj U)).commShiftIso n).hom.app (e.left.obj V) = e.left.map ((((Functor.curryObj Y.tensor).obj U).commShiftIso n).hom.app V) ≫ (e.left.commShiftIso n).hom.app (Y.tensor.obj (U, V)) ≫ (shiftFunctor X.mateDerived n).map ((e.tensorComparison a b).hom.app (U, V))) ∧ (∀ (n : ℤ) (U V : Y.mateDerived), (e.tensorComparison a b).hom.app (U⟦n⟧, V) ≫ X.tensor.map (Prod.mkHom ((e.left.commShiftIso n).hom.app U) (𝟙 (e.left.obj V))) ≫ (((Functor.curryObj X.tensor).flip.obj (e.left.obj V)).commShiftIso n).hom.app (e.left.obj U) = e.left.map ((((Functor.curryObj Y.tensor).flip.obj V).commShiftIso n).hom.app U) ≫ (e.left.commShiftIso n).hom.app (Y.tensor.obj (U, V)) ≫ (shiftFunctor X.mateDerived n).map ((e.tensorComparison a b).hom.app (U, V))) ∧ ∃ (unitL : e.left.obj Y.mateUnit ≅ X.mateUnit) (unitY : ∀ U : Y.mateDerived, Y.tensor.obj (U, Y.mateUnit) ≅ U) (unitX : ∀ U : X.mateDerived, X.tensor.obj (U, X.mateUnit) ≅ U), a.MateCanonicalUnit unitY ∧ b.MateCanonicalUnit unitX ∧ (∀ U : Y.mateDerived, (e.tensorComparison a b).hom.app (U, Y.mateUnit) ≫ X.tensor.map (Prod.mkHom (𝟙 (e.left.obj U)) unitL.hom) ≫ (unitX (e.left.obj U)).hom = e.left.map (unitY U).hom) ∧ ∃ alpha : ∀ E : X.mateDerived, (Functor.curryObj Y.tensor).obj (e.right.obj E) ⟶ e.left ⋙ (Functor.curryObj X.tensor).obj E ⋙ e.right, (∀ (E : X.mateDerived) (P : Y.mateDerived), (alpha E).app P = derivedProjectionFormulaMate e.left e.right e.derivedAdjunction Y.tensor X.tensor (e.tensorComparison a b) E P) ∧ (∀ E : X.mateDerived, (e.left ⋙ (Functor.curryObj X.tensor).obj E ⋙ e.right).IsTriangulated ∧ NatTrans.CommShift (alpha E) ℤ) ∧ (∀ (E : X.mateDerived) (T : Triangle Y.mateDerived), T ∈ distTriang Y.mateDerived → ∃ m : (Functor.mapTriangle ((Functor.curryObj Y.tensor).obj (e.right.obj E))).obj T ⟶ (Functor.mapTriangle (e.left ⋙ (Functor.curryObj X.tensor).obj E ⋙ e.right)).obj T, m.hom₁ = (alpha E).app T.obj₁ ∧ m.hom₂ = (alpha E).app T.obj₂ ∧ m.hom₃ = (alpha E).app T.obj₃) ∧ (∀ (E E' : X.mateDerived) (q : E ⟶ E') (P : Y.mateDerived), ((Functor.curryObj Y.tensor).map (e.right.map q)).app P ≫ (alpha E').app P = (alpha E).app P ≫ (Functor.whiskerRight (Functor.whiskerLeft e.left ((Functor.curryObj X.tensor).map q)) e.right).app P) ∧ (∀ E : X.mateDerived, (alpha E).app Y.mateUnit ≫ e.right.map (X.tensor.map (Prod.mkHom (𝟙 E) unitL.hom) ≫ (unitX E).hom) = (unitY (e.right.obj E)).hom)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

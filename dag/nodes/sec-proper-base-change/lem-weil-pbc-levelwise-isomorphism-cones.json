@@ -255,5 +255,26 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-f6f0adaf0 (reviewer sub-agent of L); spot-checked: Read all six steps, dependency statements, cited source locations, and chapter/unit route. Checked strict tower cone compatibility, completeness hypotheses, small cases, duplicates, and cycles. Accepted three generic tool uses. Reconstruction and comparisons with master condensed coefficient categories remain open dependencies; no target is weakened. Full findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dc41775f2",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Reviewed all immutable modules, nodes, dependencies, sources, and report sections. Statements, constructions, universes, and edge cases match; all three modules compile cleanly through scompile.py’s local side overlay. Full findings recorded in review.md; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedAdicLevelwiseIsomorphismCones",
+  "declaration": "AlgebraicGeometry.Scheme.completedAdic_levelwise_isomorphism_cones",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedAdic_levelwise_isomorphism_cones"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedAdicLevelwiseIsomorphismCones.lean",
+  "statement": "theorem completedAdic_levelwise_isomorphism_cones (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) : (∀ (M N : DerivedCategory (CompletedAdicTowers T d)) (u : M ⟶ N), (∀ n : ℕ, IsIso ((completedAdicEvaluation T d n).map u)) → IsIso u ∧ ∀ (RF : DerivedCategory (CompletedAdicTowers T d) ⥤ DerivedCategory (CompletedAdicModules T d)) (η : (lim : CompletedAdicTowers T d ⥤ CompletedAdicModules T d).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF), RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (CompletedAdicTowers T d) (ComplexShape.up ℤ)) → IsIso (RF.map u)) ∧ (∀ C : DerivedCategory (CompletedAdicModules T d), IsCompletedAdicDerivedComplete T d r a ha C → (∀ n : ℕ, IsZero ((completedAdicFiniteReduction T d n).obj C)) → IsZero C) ∧ (∀ (C D : DerivedCategory (CompletedAdicModules T d)) (u : C ⟶ D), IsCompletedAdicDerivedComplete T d r a ha C → IsCompletedAdicDerivedComplete T d r a ha D → (∀ n : ℕ, IsIso ((completedAdicFiniteReduction T d n).map u)) → IsIso u)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
