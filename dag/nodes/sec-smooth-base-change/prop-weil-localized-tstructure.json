@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "prop-weil-localized-tstructure",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The rational t-structure",
- "statement": "Let $E/\\Ql$ be finite and let $\\varpi$ be a uniformizer of $\\mathcal O_E$.\nBy [prop-weil-pbc-integral-tstructure] the standard t-structure restricts to\n$\\Dbc(T,\\mathcal O_E)$ [def-weil-pbc-bounded-constructible-complete], and\nthe $\\varpi$-power-torsion subcategory is stable under the truncation\nfunctors; the truncations are the levelwise ones on the reduction tower\n[thm-weil-pbc-integral-truncations], which is exactly the adic-model\ncondition of the standard t-structure (objectwise cohomological boundedness\nalone is not a bounded t-structure on a derived-complete category, and the\nlevelwise definition shows the truncations to persist). Then the\nsubcategories\n$$\n  (\\Dbc(T,E))^{\\le0}:=\n  \\{K:K\\cong L\\text{ in }\\Dbc(T,E),\\ L\\in(\\Dbc(T,\\mathcal O_E))^{\\le0}\\},\n$$\n$$\n  (\\Dbc(T,E))^{\\ge0}:=\n  \\{K:K\\cong L\\text{ in }\\Dbc(T,E),\\ L\\in(\\Dbc(T,\\mathcal O_E))^{\\ge0}\\},\n$$\nwith the objects of $\\Dbc(T,E)$ [def-weil-pbc-rational-category] identified\nwith those of $\\Dbc(T,\\mathcal O_E)$, form a bounded t-structure on\n$\\Dbc(T,E)$ for which the localization functor is t-exact; the truncation\nfunctors are the levelwise canonical truncations on an integral\nrepresentative, and the heart is the essential image of the integral heart.",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be finite, and let $A=\\mathcal O_E$ with uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $T$ be a noetherian finite-dimensional scheme on which $\\ell$ is invertible. Write $\\mathcal C=\\Dbc(T_{\\Proet},A)$ [def-weil-pbc-bounded-constructible-complete], with its bounded standard integral t-structure [prop-weil-pbc-integral-tstructure], and $\\mathcal C_E=\\Dbc(T,E)=\\mathcal C[1/\\varpi]$ [def-weil-pbc-rational-category]. Equip $\\mathcal C_E$ with the triangulated scalar-localization structure of [lem-weil-linear-scalar-localization-triangulated], and let $Q:\\mathcal C\\to\\mathcal C_E$ be the localization functor. Then the strictly full subcategories\n$$\n \\mathcal C_E^{\\le0}=\\{X\\mid X\\cong QL\\text{ for some }L\\in\\mathcal C^{\\le0}\\},\\qquad\n \\mathcal C_E^{\\ge0}=\\{X\\mid X\\cong QL\\text{ for some }L\\in\\mathcal C^{\\ge0}\\}\n$$\nform a bounded t-structure [def-weil-t-structure]. The functor $Q$ is t-exact, and for every $K\\in\\mathcal C$ and every $m\\in\\mathbf Z$ there are natural isomorphisms\n$$\n \\tau_E^{\\le m}QK\\cong Q\\tau_A^{\\le m}K,\\qquad\n \\tau_E^{\\ge m}QK\\cong Q\\tau_A^{\\ge m}K.\n$$\nIts heart is the essential image under $Q$ of the integral heart (the full subcategory of objects isomorphic to $QH$ with $H\\in\\mathcal C^{\\le0}\\cap\\mathcal C^{\\ge0}$).\n\nFor an integral representative $K$ satisfying the Tor-compatibility hypothesis of [thm-weil-pbc-integral-truncations] (in particular, when the cohomology sheaves of its local models are $A_T$-flat), these truncations can be computed as the images under $Q$ of the derived limits of the levelwise canonical truncations of its normalized reduction tower $K_n=K\\otimes^L_{A_T}(A/\\varpi^n)_T$. This levelwise computation is asserted with that hypothesis; the t-structure and the displayed commutation with integral canonical truncations are the scalar-localization assertions above.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-localized-tstructure.md",
   "place": "node prop-weil-localized-tstructure, order 1432",
@@ -26,44 +26,224 @@
   ]
  },
  "stmt_deps": [
-  "prop-weil-pbc-integral-tstructure",
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-pbc-bounded-constructible-complete",
-  "thm-weil-pbc-integral-truncations",
+  "prop-weil-pbc-integral-tstructure",
   "def-weil-pbc-rational-category",
-  "def-weil-derived-cohomology-sheaves",
-  "def-weil-t-structure"
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-t-structure",
+  "thm-weil-pbc-integral-truncations"
  ],
  "proof": [
   {
-   "text": "The shift conditions hold first for the integral representatives in\n$\\Dbc(T,\\mathcal O_E)$, by [prop-weil-pbc-integral-tstructure], and then for\ntheir isomorphism closures in the rational category. For orthogonality,\nchoose integral representatives $A_0$ in degrees $\\le0$ and $B_0$ in degrees\n$\\ge0$, together with rational isomorphisms $A\\cong A_0$ and $B\\cong B_0$.\nBy [def-weil-pbc-rational-category],\n$$\n \\Hom_{\\Dbc(T,E)}(A,B[-1])\n  \\cong\\Hom_{\\Dbc(T,\\mathcal O_E)}(A_0,B_0[-1])\\otimes_{\\mathcal O_E}E=0,\n$$\nthe first factor being zero by orthogonality of\n[prop-weil-pbc-integral-tstructure] and the tensor product being zero. For\nthe truncation axiom, the truncation triangle\n$$\n \\tau^{\\le0}K\\longrightarrow K\\longrightarrow\\tau^{\\ge1}K\n \\longrightarrow\\tau^{\\le0}K[1]\n$$\nof $K$ in $\\Dbc(T,\\mathcal O_E)$ (the triangle of\n[thm-weil-pbc-integral-truncations] (iii)) is carried to a distinguished\ntriangle of $\\Dbc(T,E)$ by the exact localization functor of\n[def-weil-pbc-rational-category], whose end terms lie in\n$(\\Dbc(T,E))^{\\le0}$ and $(\\Dbc(T,E))^{\\ge0}$ by definition; the same\nargument at every truncation level shows that the truncations are computed\nlevelwise on integral representatives. Boundedness, in terms of the\ncohomology sheaves, is inherited: an object of $\\Dbc(T,E)$ is an object of\nthe bounded category $\\Dbc(T,\\mathcal O_E)$. The t-exactness of the\nlocalization functor is the identity on objects together with the displayed\ndefinitions of the two subcategories, and the heart is the essential image\nin $\\Dbc(T,E)$ of the integral heart.",
+   "text": "The integral category $\\mathcal C$ of [def-weil-pbc-bounded-constructible-complete] is a full subcategory of the derived category of $A_T$-modules, with the triangulated structure underlying [prop-weil-pbc-integral-tstructure]. Its scalar action is multiplication by $A$ on morphisms, commutes with composition, and is preserved by the shift. The category of [def-weil-pbc-rational-category] is exactly its scalar localization. Apply [lem-weil-linear-scalar-localization-triangulated] with $R=A$ and scalar $\\varpi$: $\\mathcal C_E$ is triangulated, $Q$ commutes with shifts, and the image of every integral distinguished triangle is distinguished. This exactness is supplied by that theorem, rather than by the Hom formula alone.",
    "uses": [
+    "def-weil-pbc-bounded-constructible-complete",
     "prop-weil-pbc-integral-tstructure",
     "def-weil-pbc-rational-category",
-    "thm-weil-pbc-integral-truncations"
+    "lem-weil-linear-scalar-localization-triangulated"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-localized-tstructure.md",
+    "place": "Proof, the exact localization functor; Stacks Tag 05R6, derived.tex, proposition-construct-localization, via the cited scalar-localization theorem"
+   }
   },
   {
-   "text": "The source records that audit item BC-03 is resolved for this proposition:\nits truncation functors are those of [thm-weil-pbc-integral-truncations],\nwhose proof is complete once the Tor-compatibility condition is carried as\nan explicit hypothesis.",
+   "text": "The displayed classes are closed under isomorphism by their definition. If $X\\cong QL$ with $L\\in\\mathcal C^{\\le0}$, then $X[1]\\cong Q(L[1])$ and $L[1]\\in\\mathcal C^{\\le0}$ by [prop-weil-pbc-integral-tstructure]. Likewise $X\\cong QM$ with $M\\in\\mathcal C^{\\ge0}$ gives $X[-1]\\cong Q(M[-1])$ with $M[-1]\\in\\mathcal C^{\\ge0}$. Thus the two shift conditions in [def-weil-t-structure] hold.",
+   "uses": [
+    "prop-weil-pbc-integral-tstructure",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-localized-tstructure.md",
+    "place": "Proof, first sentence: shift conditions and isomorphism closures"
+   }
+  },
+  {
+   "text": "For $X\\cong QK_0$ and $Y\\cong QL_0$ with $K_0\\in\\mathcal C^{\\le0}$ and $L_0\\in\\mathcal C^{\\ge0}$, composition with these isomorphisms and the Hom formula of [def-weil-pbc-rational-category] identify\n$$\\operatorname{Hom}_{\\mathcal C_E}(X,Y[-1])\\cong\\operatorname{Hom}_{\\mathcal C}(K_0,L_0[-1])\\otimes_A E.$$\nThe integral Hom module is zero by [prop-weil-pbc-integral-tstructure]; tensoring the zero module gives zero. This proves orthogonality, including for objects whose integral representatives acquire extra isomorphisms after localization.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "prop-weil-pbc-integral-tstructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-localized-tstructure.md",
+    "place": "Proof, displayed orthogonality computation"
+   }
+  },
+  {
+   "text": "Every rational object is $QK$ for an integral $K$ by [def-weil-pbc-rational-category]. The bounded integral t-structure of [prop-weil-pbc-integral-tstructure] and the truncation-triangle statement (1) of [lem-weil-heart-short-exact-triangles] give, for every $m$, a distinguished triangle\n$$\\tau_A^{\\le m}K\\longrightarrow K\\longrightarrow\\tau_A^{\\ge m+1}K\\longrightarrow(\\tau_A^{\\le m}K)[1].$$\nApply the exact $Q$ of [lem-weil-linear-scalar-localization-triangulated]. Its first term lies in $\\mathcal C_E^{\\le m}$ and its third term in $\\mathcal C_E^{\\ge m+1}$, by their definitions and the shift compatibility already checked. At $m=0$ this is precisely the existence axiom of [def-weil-t-structure]: write the third term as $B[-1]$, with $B=(Q\\tau_A^{\\ge1}K)[1]\\in\\mathcal C_E^{\\ge0}$. Together with steps 2 and 3 this establishes the t-structure. No levelwise truncation of a coefficient tower has been used.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "prop-weil-pbc-integral-tstructure",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-t-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-localized-tstructure.md",
+    "place": "Proof, truncation axiom and its displayed triangle; BBD 1.3.3 for abstract truncation triangles"
+   }
+  },
+  {
+   "text": "Given $X=QK$, boundedness of the integral t-structure [prop-weil-pbc-integral-tstructure] gives integers $a\\le b$ with $K\\in\\mathcal C^{\\ge a}\\cap\\mathcal C^{\\le b}$. Consequently $X\\in\\mathcal C_E^{\\ge a}\\cap\\mathcal C_E^{\\le b}$, which is boundedness as defined in [def-weil-t-structure]. Also $Q$ sends each integral nonpositive or nonnegative object to the corresponding rational class by the very definition of those classes. With its exactness from step 1, this is t-exactness. Boundedness here comes from the bounded integral t-structure, not merely from derived completeness.",
+   "uses": [
+    "prop-weil-pbc-integral-tstructure",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-localized-tstructure.md",
+    "place": "Proof, boundedness and t-exactness sentences"
+   }
+  },
+  {
+   "text": "Apply the uniqueness and adjunction assertion (1) of [lem-weil-heart-short-exact-triangles] to the rational t-structure just proved. The image triangle in step 4 has the prescribed bounds, so it is uniquely isomorphic, with identity on $QK$, to the rational canonical truncation triangle. Write the resulting lower comparison as $\\alpha_K:Q\\tau_A^{\\le m}K\\xrightarrow{\\sim}\\tau_E^{\\le m}QK$, and the integral and rational counits as $\\epsilon_K^A$ and $\\epsilon_{QK}^E$. It is characterized by $\\epsilon_{QK}^E\\alpha_K=Q\\epsilon_K^A$. For an integral $f:K\\to L$, both sides of\n$$\\alpha_L\\,Q(\\tau_A^{\\le m}f)=(\\tau_E^{\\le m}Qf)\\,\\alpha_K$$\nhave composite $Qf\\,Q\\epsilon_K^A$ with $\\epsilon_{QL}^E$, so the rational adjunction makes them equal. For the upper comparison $\\beta_K:Q\\tau_A^{\\ge m+1}K\\xrightarrow{\\sim}\\tau_E^{\\ge m+1}QK$, with units $\\eta_K^A$ and $\\eta_{QK}^E$, its characterization is $\\beta_K Q\\eta_K^A=\\eta_{QK}^E$. The two maps in\n$$\\beta_L\\,Q(\\tau_A^{\\ge m+1}f)=(\\tau_E^{\\ge m+1}Qf)\\,\\beta_K$$\nhave equal precomposition with $Q\\eta_K^A$, and the upper adjunction makes them equal. Thus both comparisons are natural in $K$.\n\nEvery rational morphism $h:QK\\to QL$ is $Qf/\\varpi^r$ by [def-weil-pbc-rational-category]. In the image models its lower truncation is $g_{\\le}=Q(\\tau_A^{\\le m}f)/\\varpi^r$: the equation\n$$Q\\epsilon_L^A\\,g_{\\le}=h\\,Q\\epsilon_K^A$$\nis the integral counit naturality equation divided by $\\varpi^r$. Its upper truncation is $g_{\\ge}=Q(\\tau_A^{\\ge m+1}f)/\\varpi^r$, since\n$$g_{\\ge}\\,Q\\eta_K^A=Q\\eta_L^A\\,h.$$\nThe respective adjunctions give uniqueness in these two equations, proving independence of the fraction expression. An isomorphism between two rational representatives induces the unique isomorphisms between their canonical truncations by these equations; this proves independence of the integral representative as well. Reindexing $m+1$ proves both displayed natural isomorphisms.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-localized-tstructure.md",
+    "place": "Proof, truncations computed on integral representatives; BBD 1.3.3, adjunction and uniqueness"
+   }
+  },
+  {
+   "text": "If $H$ belongs to the integral heart, $QH$ belongs to both rational classes by t-exactness. Conversely take $X=QK$ in the rational heart. A truncation of an object already in its target aisle or coaisle is that object: its identity is the universal map in the adjunction of [lem-weil-heart-short-exact-triangles] (1). Hence $H_E^0(X)=\\tau_E^{\\ge0}\\tau_E^{\\le0}X\\cong X$. Step 6 gives\n$$X\\cong Q(\\tau_A^{\\ge0}\\tau_A^{\\le0}K)=QH_A^0(K).$$\nThe same cited statement puts $H_A^0(K)$ in the integral heart. Thus a single integral heart object represents $X$, proving the reverse inclusion and the claimed essential-image description. This proves more than merely intersecting two unrelated essential images.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-localized-tstructure.md",
+    "place": "Proof, last clause: heart is the essential image of the integral heart; BBD 1.3.5 and 1.3.6"
+   }
+  },
+  {
+   "text": "Now impose exactly the extra Tor-compatibility hypothesis of [thm-weil-pbc-integral-truncations] on a chosen integral $K$. That theorem defines its canonical integral truncations by\n$$\\tau_A^{\\le m}K=\\mathbf R\\!\\varprojlim_n\\tau^{\\le m}K_n,\\qquad \\tau_A^{\\ge m+1}K=\\mathbf R\\!\\varprojlim_n\\tau^{\\ge m+1}K_n,$$\nand asserts that these belong to $\\mathcal C$ and coincide with the ambient canonical truncations. Substitute these identifications into step 6. This gives exactly the asserted levelwise computation in $\\mathcal C_E$ under the stated hypothesis. The source's closing audit sentence explicitly requires that hypothesis; it cannot be omitted when using this theorem.",
    "uses": [
     "thm-weil-pbc-integral-truncations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-localized-tstructure.md",
+    "place": "Statement, levelwise computation; Proof, final audit paragraph requiring explicit Tor compatibility"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
   "prop-weil-pbc-integral-tstructure",
   "def-weil-pbc-rational-category",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-t-structure",
+  "lem-weil-heart-short-exact-triangles",
   "thm-weil-pbc-integral-truncations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-localized-tstructure.md",
-  "place": "## Proof"
+  "place": "Proof, first paragraph expanded using the existing scalar-localization theorem and BBD 1.3.3–1.3.6; last audit paragraph supplies the conditional levelwise computation."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TStructure.*[Ll]ocaliz|[Ll]ocaliz.*TStructure|[Rr]ational.*[Tt][Ss]tructure",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: t-structure primitives or general triangulated localization; no scalar-localization t-structure and heart theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded t-structure descends under extension of scalars to the fraction field of a discrete valuation ring",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded t-structure on an O_E-linear triangulated category descends to the rational category with Hom groups tensored with E",
+   "results": "8 hits: DerivedCategory.TStructure.t, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.le, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Triangulated.TStructure, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.IsLE",
+   "date": "2026-10-15",
+   "verdict": "no match: t-structure primitives or general triangulated localization; no scalar-localization t-structure and heart theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure",
+   "results": "12 hits: CategoryTheory.Triangulated.TStructure, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Triangulated.TStructure.bounded, CategoryTheory.Triangulated.TStructure.minus, CategoryTheory.Triangulated.TStructure.plus, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.le",
+   "date": "2026-10-15",
+   "verdict": "no match: t-structure primitives or general triangulated localization; no scalar-localization t-structure and heart theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocaliz|[Tt][Ee]xact|[Tt]_exact",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: t-structure primitives or general triangulated localization; no scalar-localization t-structure and heart theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TStructure\", \"localization\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: t-structure primitives or general triangulated localization; no scalar-localization t-structure and heart theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing morphism groups of a linear triangulated category at powers of a central scalar induces a t-structure with heart the localization of the original heart",
+   "results": "8 hits: DerivedCategory.TStructure.t, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization', CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization', CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel",
+   "date": "2026-10-15",
+   "verdict": "no match: t-structure primitives or general triangulated localization; no scalar-localization t-structure and heart theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "TStructure|truncLE|truncGE",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: general triangulated localization and homological functors, not scalar-localization descent of a t-structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor compatible with t-structures commutes naturally with truncation functors; t-structures induced by a localization of a linear category",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Triangulated.Localization.isTriangulated_functor, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-15",
+   "verdict": "no match: general triangulated localization and homological functors, not scalar-localization descent of a t-structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TStructure\", \"IsLocalization\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: general triangulated localization and homological functors, not scalar-localization descent of a t-structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A t-structure descends to an exact scalar localization by preserving orthogonality and truncation triangles; its heart consists of localized heart objects",
+   "results": "8 hits: DerivedCategory.TStructure.t, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization', CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization, CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'",
+   "date": "2026-10-15",
+   "verdict": "no match: independent second reading; ambient derived t-structure and general triangulated localization do not supply scalar-localization descent or the heart statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TStructure\", \"Linear\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: independent second reading; ambient derived t-structure and general triangulated localization do not supply scalar-localization descent or the heart statement"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization|Scalar|Linear",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: independent second reading; ambient derived t-structure and general triangulated localization do not supply scalar-localization descent or the heart statement"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -104,5 +284,30 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "prop-weil-localized-tstructure",
+  "worker": "stage1",
+  "summary": "Expanded scalar-localization descent into the t-structure axioms, boundedness, natural truncation comparisons and the essential-image heart argument. Reused the generic triangulated-localization theorem and the existing abstract truncation lemma; no new nodes. STATEMENT-DISPUTED: unconditional normalization of levelwise truncations fails for torsion cohomology; the corrected statement carries precisely the existing truncation theorem's Tor hypothesis for that computation only. The bounded rational t-structure remains the descent of the bounded integral t-structure asserted by the cited integral proposition.",
+  "blueprint": "Steps 1–5 realize the first proof paragraph through the t-exactness sentence; step 6 expands its truncation claim; step 7 proves its final heart claim; step 8 realizes the final audit paragraph with its explicit Tor-compatibility restriction. The unit sk-rem-rest has no proof steps or unique key statement to realize.",
+  "statement_dispute": "The original statement does not introduce T or its geometric hypotheses and treats levelwise canonical truncations of every normalized reduction tower as an adic computation without the Tor-compatibility hypothesis. The source final audit paragraph explicitly requires that hypothesis. For K=(A/varpi)[-1] at a geometric point, the integral lower truncation at 0 is zero, while every levelwise lower truncation is (A/varpi)[0]; derived reduction from A/varpi^2 to A/varpi is unbounded, so this truncated tower is not normalized. This obstructs the cited reconstruction argument and its reduction comparison, but does not alone refute equality after a derived limit or rationalization. The corrected computation carries the exact existing theorem hypothesis, while the unrestricted canonical scalar-localization assertions are preserved. T and its noetherian, finite-dimensional and ell-invertibility setting, and the exact triangulation input, are made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Generic triangulated scalar-localization theorem supplying exact Q and induced shift; no statement of unit sk-rem-rest supplies this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-linear-scalar-localization-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-cc857c2c9",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-cc857c2c9 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources, and unit/chapter route in full. All eight steps check out; no new nodes or repairs. Accepted the scalar-localization tool and the source’s explicit Tor restriction. Verified edge cases and exact master target coefficients/morphisms without assuming a category comparison. Full checks and dependency limitations are recorded in review.md."
+ }
 }
