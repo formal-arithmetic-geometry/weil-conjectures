@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-duality-pairing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The duality pairing and the double-dual morphism",
@@ -13,30 +13,198 @@
   "place": "node lem-weil-duality-pairing, order 2122"
  },
  "stmt_deps": [
-  "thm-amb-etale-exceptional-adjoint"
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-proetale-site"
  ],
  "proof": [
   {
-   "text": "The tensor–internal-Hom adjunction of\n[def-weil-derived-pullback-tensor-hom] has evaluation as its\ncounit. Compose that evaluation with tensor symmetry, and transpose\nunder the same adjunction, obtaining $\\delta_K$. Naturality of the\ncounit gives naturality of this map. Internal Hom is triangulated in\neach variable, with the standard shift and Koszul-sign conventions, by\n[lem-sf-hom-triangulated] (on the pro-etale site by the same Hom-complex\nargument);\nthe natural transformation to its double application therefore\ncommutes with shifts and gives a morphism of triangles. This\nconstruction takes place in the ambient categories, before any\npreservation assertion.",
+   "text": "First work on any small ringed site $(\\mathcal C,R)$ with a sheaf of commutative rings, and put $H(L,M)=R\\mathcal Hom_R(L,M)$. The site may be chosen small in the universe of its module sheaves; on the pro-etale site this is the skeleton convention of [def-weil-pbc-proetale-site]. By [lem-weil-pbc-ringed-internal-hom-exact-restriction], $H(U,H(V,W))\\cong H(U\\otimes_R^L V,W)$ naturally. Apply $H^0(\\mathcal C,-)$ and [lem-pur-rhom-global-sections] to obtain the natural bijection $\\operatorname{Hom}(U,H(V,W))\\cong\\operatorname{Hom}(U\\otimes_R^L V,W)$. We also need tensor symmetry. On total tensor complexes it is $x_p\\otimes y_q\\mapsto(-1)^{pq}y_q\\otimes x_p$: the differential of [def-pc-tensor-complex-sheaves] gives the same coefficients $(-1)^{pq+q}$ and $(-1)^{pq}$ after interchanging the two differential summands, and the square of this map is the identity. By the resolving-class equivalence and natural-transformation descent of [lem-weil-pbc-site-derived-tensor-descent], this natural chain isomorphism descends to $U\\otimes_R^L V\\cong V\\otimes_R^L U$. Thus the adjunction and symmetry used below are available for arbitrary ambient objects on either site.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-sf-hom-triangulated"
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-pbc-proetale-site"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-internal-hom), 08JA (lemma-section-RHom-over-U), 06YU (definition-derived-tor), 0FPT (lemma-symmetric-monoidal-derived); explicit symmetry check"
+   }
+  },
+  {
+   "text": "Fix an arbitrary $W\\in D(R)$ and write $D=H(-,W)$. Under the bijection of step 1 the identity of $DK$ corresponds to $e_K:DK\\otimes_R^L K\\to W$. Define $\\delta_K:K\\to H(DK,W)=D^2K$ to correspond to $e_K\\circ\\sigma_{K,DK}:K\\otimes_R^L DK\\to W$. This is precisely the evaluation pairing followed by transposition, not an assertion that evaluation or $\\delta_K$ is an isomorphism. For $u:K\\to L$, naturality of the adjunction gives $e_K\\circ(Du\\otimes1_K)=e_L\\circ(1_{DL}\\otimes u)$ as maps $DL\\otimes_R^L K\\to W$. Transpose this equality after tensor symmetry; it becomes $D^2u\\circ\\delta_K=\\delta_L\\circ u$. This proves the asserted naturality (the displayed identity is the precise variance convention for naturality of evaluation). Both uses of adjunction take place in the ambient derived category, supplied by [lem-weil-pbc-ringed-internal-hom-exact-restriction] and [lem-pur-rhom-global-sections].",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 and equation (equation-internal-hom); evaluation as the adjunct of the identity"
+   }
+  },
+  {
+   "text": "Here is a representative calculation that will check the shift assertion. Choose a K-injective complex $I$ representing $W$ by [prop-pur-kinjective-resolutions-exist]. Write $T(C)=\\mathcal Hom^\\bullet_R(C,I)$, using [def-pur-hom-complex]. By [def-pur-derived-internal-hom], $T(C)$ represents $DC$ and $T(T(C))$ represents $D^2C$; the second assertion only requires that the second variable $I$ be K-injective, not that $T(C)$ be K-injective. These assignments invert quasi-isomorphisms by [lem-pur-rhom-well-defined]. On homogeneous local sections $x\\in C^p$, $f\\in T(C)^q$, define $b_C(x)(f)=(-1)^{pq}f(x)$. The Hom differential gives $(d b_C(x))(f)=(-1)^{pq}d_I(f(x))-(-1)^{pq}(d_I(f(x))-(-1)^qf(d_Cx))=(-1)^{(p+1)q}f(d_Cx)=b_C(d_Cx)(f)$; hence $b_C:C\\to T^2C$ is a chain map, natural for chain maps. To identify its localization with the transpose in step 2, take K-flat resolutions $P\\to C$ and $r:Q\\to T(P)$ using [lem-pc-kflat-resolution]. By [lem-weil-pbc-site-derived-tensor-descent], $Q\\otimes P$ computes $DP\\otimes_R^L P$, now with both tensor factors K-flat. By [lem-pur-hom-kflat-into-kinjective], both $T(P)$ and $T(Q)$ are K-injective. Thus the derived currying of step 1 is computed by ordinary Hom-complex currying on these representatives. That currying sends $g$ to the map $x\\otimes q\\mapsto g(x)(q)$: substituting the Hom and tensor differentials gives $d_Ig(x)(q)-(-1)^n g(d_Px)(q)-(-1)^{n+p}g(x)(d_Qq)$ on both sides for a degree-$n$ map $g$ and $x\\in P^p$. Under the morphism-set adjunction, the identity of $DP$ is represented by $r:Q\\to T(P)$, so evaluation on $Q\\otimes P$ is $q\\otimes x\\mapsto r(q)(x)$. Symmetry followed by evaluation is $x\\otimes q\\mapsto(-1)^{p\\deg(q)}r(q)(x)$. Currying the latter gives $T(r)\\circ b_P:P\\to T(Q)$. The map $T(r):T^2(P)\\to T(Q)$ is a quasi-isomorphism by [lem-pur-rhom-well-defined], so this is exactly $b_P$ after the canonical derived identification. Naturality and the same quasi-isomorphism theorem identify the localization of $b_C$ with $\\delta_C$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "lem-pc-kflat-resolution",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-hom-kflat-into-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 08J9 (lemma-internal-hom); signed evaluation calculation"
+   }
+  },
+  {
+   "text": "We make the double-dual shift comparison explicit. With cochain shifts as in [def-weil-abstract-derived-category], there is a chain isomorphism $s_{C,m}:T(C[m])\\to T(C)[-m]$ sending a degree-$q$ map $f$ to $(-1)^{mq}f$, after reindexing its components. Substitution into $d(f)=d_If-(-1)^qfd_C$ checks it is a chain map. Put $\\chi_C=-s_{T(C),-1}\\circ T(s_{C,1})^{-1}:T^2(C[1])\\to T^2(C)[1]$. Concretely, on a degree-$p$ map $g\\in T^2(C[1])^p$ and $y\\in T(C)^r$, this is $(\\chi_Cg)(y)=(-1)^{p+r}g(y)$, where the argument on the right is reindexed into $T(C[1])^{r+1}$. We check directly that this is an exact comparison, rather than deducing the sign from exactness alone. For a chain map $u:A\\to B$, let $E=\\operatorname{Cone}(u)$, with maps $i:B\\to E$ and $\\pi:E\\to A[1]$; its cone triangle ends in $-\\pi$ by [def-weil-abstract-derived-category]. Put $X=T(B)$, $Y=T(A)$, and $h=T(u)$. A degree-$q$ element of $T(E)$ is $(x,y)\\in X^q\\oplus Y^{q-1}$, and [def-pur-hom-complex] gives differential $(d_Xx,d_Yy+(-1)^{q+1}h(x))$. Write a degree-$p$ element of $T^2(E)$ as $(\\alpha,\\beta)$, where $\\alpha:X^q\\to I^{q+p}$ and $\\beta:Y^r\\to I^{r+p+1}$. Set $\\gamma(y)=(-1)^{p+r}\\beta(y)$ for $y\\in Y^r$. Then $\\theta_E(\\alpha,\\beta)=(\\alpha,\\gamma)$ identifies $T^2(E)$ with $\\operatorname{Cone}(T^2u)$. Indeed, the first differential component on $x\\in X^q$ is $d_{T^2B}\\alpha(x)+(-1)^{p+q}\\beta(h(x))=d_{T^2B}\\alpha(x)+(T^2u)(\\gamma)(x)$, and the second raw component is $\\beta'(y)=d_I\\beta(y)-(-1)^p\\beta(d_Yy)$; multiplying it by $(-1)^{p+1+r}$ gives $\\gamma'=-d_{T^2A}\\gamma$. These are exactly the cone differential components. Under $\\theta_E$, $T^2(i)$ is inclusion into the first component. Also $T^2(\\pi)$ is the raw second component $\\beta$, so $\\chi_A\\circ T^2(-\\pi)=-\\operatorname{pr}_2\\circ\\theta_E$, exactly the connecting map of the cone of $T^2u$. Hence $T^2$, with $\\chi$, sends each cone triangle to a cone triangle; localization and invariance under triangle isomorphisms give the assertion for all distinguished triangles. This makes the shift sign in the exactness assertion of [lem-weil-pbc-ringed-internal-hom-exact-restriction] explicit. Finally, for $x\\in C[1]^p=C^{p+1}$ and $\\psi\\in T(C)^t$, the three signs in $\\chi_C b_{C[1]}(x)(\\psi)$ have exponent $1+p+p(t+1)+(t+1)\\equiv(p+1)t\\pmod2$. Therefore $\\chi_C\\circ b_{C[1]}=b_C[1]$. Localization gives $\\chi_K\\circ\\delta_{K[1]}=\\delta_K[1]$. Iterating this identity and its inverse gives compatibility with every integer shift.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated); explicit double-Hom cone comparison and double-dual shift-sign calculation, with derived.tex Definition 014Q (definition-distinguished-triangle) and definition-cone"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-commshift-nattrans-triangle-morphism] to $F_1=\\mathrm{id}$, $F_2=D^2$, and $\\tau=\\delta$. Naturality is step 2, and the required equation with the shift comparisons is step 4. Hence for every distinguished triangle $K'\\to K\\to K''\\to K'[1]$, the three components $(\\delta_{K'},\\delta_K,\\delta_{K''})$ form a morphism to its $D^2$-image triangle, which is distinguished by [lem-weil-pbc-ringed-internal-hom-exact-restriction] and the exact comparison checked in step 4. This supplies in particular the last square involving the connecting arrow; it is not inferred merely from exactness of the two functors.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC; for the formal triangle-morphism step, literature/stacks-project/derived.tex, Definitions 0144 and 014V"
+   }
+  },
+  {
+   "text": "Specialize the preceding argument to the small etale ringed site $(X_{\\mathrm{et}},A_X)$ and $W=\\omega_X$ already specified in the statement using [thm-amb-etale-exceptional-adjoint]. This gives exactly $e_K:\\!D_XK\\otimes_A^LK\\to\\omega_X$ and its transpose $\\delta_K$ with all the asserted compatibilities. Instantiate steps 1–5 instead with $\\mathcal C=X_{\\mathrm{proet}}$ as in [def-weil-pbc-proetale-site], $R=A_X$, and the specified ambient object $W=\\omega_X$: step 2 gives its evaluation and double-dual arrow, step 4 gives the shift equation, and step 5 gives the triangle morphism. This proves the pro-etale clause. The arguments above used arbitrary objects of $D(R)$ throughout; no assertion about $D_XK$ being constructible, and no comparison equivalence between the two sites, is used.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JC, specialization of ringed-site formalism; blueprint order 2122, final two sentences"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-sf-hom-triangulated"
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-proetale-site",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-kflat-into-kinjective",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "thm-amb-etale-exceptional-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-duality-pairing.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9, 08JA and 08JC; explicit evaluation, naturality and double-dual shift-sign computations following blueprint order 2122"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "doubleDual|bidual|toIhomIhom|derivedHom",
+   "results": "0 hits in Mathlib/Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom evaluation natural double dual morphism compatible with distinguished triangles on a ringed site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalClosed.curry, ihom.ev",
+   "results": "loogle: unknown identifier 'MonoidalClosed.curry'",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the derived category of sheaves of modules on a ringed site evaluation defines a natural map K to RHom(RHom(K,W),W) compatible with shifts and distinguished triangles",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H, SheafOfModules.evaluation, CategoryTheory.Sheaf.cohomologyPresheaf, Ext, CategoryTheory.eval_app, LightCondensed.ihom_map_val_app, CategoryTheory.Abelian.extFunctor. Sheaf cohomology or abstract closed-category evaluation/coevaluation, not the derived ringed-site double-dual transformation with shifts and triangles.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "curry|ev_naturality|evaluation",
+   "results": "The wrapper printed OK, 0 hits for CategoryTheory/Closed. That directory does not exist in the pinned tree, so this is not evidence of absence. Reran the same pattern in CategoryTheory/Monoidal/Closed, obtaining 25 hits.",
+   "date": "2026-10-16",
+   "verdict": "unavailable: wrong directory; superseded by the corrected grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any object W in a symmetric monoidal closed triangulated category the evaluation transpose defines a natural transformation from identity to the double internal Hom dual",
+   "results": "8 hits: CategoryTheory.ihom.ev_coev, CategoryTheory.exp.ev_coev, CategoryTheory.ihom.coev_ev, CategoryTheory.exp.coev_ev, CategoryTheory.coev_expComparison, CategoryTheory.exp.coev, CategoryTheory.exp.ev, CategoryTheory.exp.coev_ev_assoc. Sheaf cohomology or abstract closed-category evaluation/coevaluation, not the derived ringed-site double-dual transformation with shifts and triangles.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "12 hits including CategoryTheory.MonoidalClosed.curry, curry_injective, uncurry_curry, curry_uncurry, curry_natural_left, curry_natural_right in Mathlib.CategoryTheory.Monoidal.Closed.Basic. Read the pinned source at lines 145–187; no ringed-site derived evaluation/shift theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "curry|ev_naturality|evaluation",
+   "results": "25 hits: CategoryTheory.ihom.ev (Closed/Basic.lean:92), ihom.ev_naturality (109), MonoidalClosed.curry (146) and generic internal currying. Read Basic.lean:91–187. These require a closed monoidal category and give no derived ringed-site structure or shift/triangle compatibility.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; generic categorical ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Double dualization is a triangulated functor; evaluation into an internal Hom is compatible with shift functors and mapping cones",
+   "results": "8 hits: generic opposite triangulated functors, preadditive Yoneda homological functors, triangulated adjunctions and localization of distinguished triangles. None gives the ringed-site double-Hom map or its signed cone comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom.ev_naturality",
+   "results": "1 hit, CategoryTheory.ihom.ev_naturality in Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:109–111, read with the evaluation and currying definitions at lines 91–187. This is naturality in the target for an already closed monoidal category; it gives no derived ringed-site or shift statement.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|double.?dual|evaluation|curry",
+   "results": "25 hits in CategoryTheory/Monoidal/Closed, including Basic.lean:91,145–146 and InternalCurrying.lean:30–38. Read Basic.lean:91–187. These generic closed-category definitions do not give the complete item or the double-Hom cone signs.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +228,64 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-duality-pairing",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Replaced the single imported paragraph by six checked steps: ringed-site tensor-Hom adjunction and symmetry, evaluation and naturality, the signed representative, the double-dual shift and cone calculation, the morphism of triangles, and the two site specializations. Reused existing general ringed-site and triangulated-category nodes; no new node is needed. Corrected the original C4 use of a definition as the tensor-Hom adjunction and the unproved inference from exactness alone to shift compatibility. No complete Lean attachment found. Second reading: cited the existing K-flat-to-K-injective Hom lemma to justify chain-level currying, and expanded double Hom on a cone, including its two outer arrows, to establish the exact shift sign explicitly.",
+  "blueprint": "Realizes all of the proof of blueprint lem-weil-duality-pairing (order 2122): first two sentences in steps 1–2; naturality in step 2; standard shift and Koszul signs with internal-Hom exactness in steps 3–4; morphism of triangles in step 5; ambient-category and pro-etale scope in step 6. The unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic tensor/internal-Hom currying and exactness on an arbitrary small ringed site; the imported Hom lemma in the biduality route only covers the etale site and its cited definition is pro-etale, so this existing general tool supplies both without changing the geometric route."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Turns the existing internal currying isomorphism into the tensor-Hom adjunction on morphism sets; a definition of RHom does not itself assert this theorem."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Descends the explicit Koszul symmetry to derived tensor and supplies its representative comparison on K-flat models."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic small-ringed-site existence of the K-injective representative used to verify the evaluation signs."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Allows the Hom representative calculations to be passed through quasi-isomorphisms in both Hom applications."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides a K-flat representative for the tensor evaluation calculation, without imposing flatness on K."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "why": "Generic formal implication from the explicitly checked naturality and shift equation to all three triangle squares; it does not replace any geometric step of the unit."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Generic ringed-site resolution fact ensures that Hom from each K-flat tensor representative into I is K-injective, so step 3 computes the stated derived adjunction on actual Hom complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-rhom-well-defined",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-pur-hom-kflat-into-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-753260269",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-753260269 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, unit/chapter route, report, and cited source passages. All six steps check out, including double-Hom cone signs and the connecting arrow. Accepted all eight declared tool uses. No new nodes or repairs; inherited DAG issues are documented in review.md."
+ }
 }
