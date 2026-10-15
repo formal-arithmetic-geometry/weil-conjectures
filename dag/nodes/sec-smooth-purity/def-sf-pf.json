@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-sf-pf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Coefficient dual, Verdier dual, and the projection formula",
- "statement": "In the setting of [def-sf-datum], let $a_X:X\\to\\operatorname{Spec}k$ be\nthe structure morphism of a separated finite-type $k$-scheme and put\n$\\omega_X=Ra_X^!\\Lambda$. For $K\\in D^b_{ctf}(X,\\Lambda)$ the\n*Verdier dual* and the *coefficient dual* are\n\n$$\n\\mathbb D_XK=R\\mathcal H om_X(K,\\omega_X),\\qquad\nK^\\vee=R\\mathcal H om_X(K,\\Lambda_X),\n$$\n\nand for a separated finite-type $f:X\\to Y$ the *projection\ntransformation* is\n\n$$\n\\operatorname{PF}_{f,K,L}:Rf_!K\\otimes^L_\\Lambda L\\longrightarrow\nRf_!\\bigl(K\\otimes^L_\\Lambda Lf^*L\\bigr)\n$$\n\nof [def-exchange-projection]; axiom (A3) is the assertion\nthat it is an isomorphism, and it is verified for the concrete\ncompact-support direct image in [thm-sf-pf-finite], [prop-sf-pf-reduction], [thm-sf-pf-adic], [thm-sf-pf-field], [thm-sf-pf-proetale] and [prop-sf-pf-coherence].",
+ "statement": "In the six-functor datum of [def-sf-datum], use the derived pullback, tensor product and internal Hom of [def-weil-derived-pullback-tensor-hom]. For a scheme $T$ in this datum, $\\Lambda_T$ denotes its coefficient unit. Let $X$ be a separated finite-type $k$-scheme, put $s=\\operatorname{Spec}k$, let $a_X:X\\to s$ be its structure morphism, and define the dualizing complex by\n\n$$\n\\omega_X=Ra_X^!\\Lambda_s.\n$$\n\nFor $K\\in D^b_{ctf}(X,\\Lambda)$ the *Verdier dual* and the *coefficient dual* are, respectively,\n\n$$\n\\mathbb D_XK=R\\mathcal H om_X(K,\\omega_X),\\qquad\nK^\\vee=R\\mathcal H om_X(K,\\Lambda_X).\n$$\n\nFor a separated finite-type morphism $f:X\\to Y$ of separated finite-type $k$-schemes, $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$, the *projection transformation* has the type\n\n$$\n\\operatorname{PF}_{f,K,L}:Rf_!K\\otimes^L_\\Lambda L\\longrightarrow\nRf_!\\bigl(K\\otimes^L_\\Lambda Lf^*L\\bigr).\n$$\n\nIn the abstract datum this denotes its supplied projection transformation on the finite-Tor domain. For the concrete operations, it denotes the chosen-compactification projection morphism of [def-exchange-projection], using the operation and comparison data and the domains specified there. The notation without the compactification superscript uses comparisons intertwining those morphisms. At the integral stage the pullback and tensor are completed; at the rational and algebraically closed stages the morphism is formed by rationalization and common-stage scalar extension as specified there.\n\nAxiom (A3) of [def-sf-datum] asserts invertibility for $K\\in D^b_{ctf}(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$. The concrete projection formula, including the larger finite-coefficient domain $K\\in D^b_c(X,A_{E,n})$, $L\\in D^b_{ctf}(Y,A_{E,n})$, is the subject of [thm-sf-pf-finite], [prop-sf-pf-reduction], [thm-sf-pf-adic], [thm-sf-pf-field], [thm-sf-pf-proetale] and [prop-sf-pf-coherence]; these are forward references, not assertions proved by this definition.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-exchanges/def-sf-pf.md",
   "place": "node def-sf-pf, order 1502"
@@ -20,9 +20,80 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Verdier|dualizingComplex|projectionMap|coefficientDual",
+   "results": "25 displayed hits: references to Verdier and Verdier localization, including DerivedCategory/Plus.lean:86 and DerivedCategory/Basic.lean:56; none defines Verdier/coefficient duality or compact-support projection.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Verdier dual is derived internal Hom into the dualizing complex and the coefficient dual is derived internal Hom into the constant coefficient sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier dual and coefficient dual of a constructible complex on a scheme, and the compactly supported derived projection transformation",
+   "results": "Returned DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, exists_iso_Q_obj_of_isGE_of_isLE, isGE_Q_obj_iff, isLE_Q_obj_iff, fraction lemmas and LightCondensed.ihomPoints_symm_comp. These concern truncation, fractions, or underived condensed internal Hom, not the three geometric constructions here.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"dual\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|verdierDual|coefficientDual|rightDerivedLowerShriek|projectionMap|derivedHom",
+   "results": "No hits in the Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed monoidal derived category of sheaves define the dual as internal Hom into the tensor unit and the compact support pushforward projection formula",
+   "results": "Returned LightCondensed.ihomPoints and its apply/symm/compatibility lemmas, closed structures on light condensed sets/modules, and ExponentiableMorphism.coev_def. Read LightCondensed.ihomPoints in Mathlib/Condensed/Light/InternallyProjective.lean:53: underived light condensed modules, not the derived geometric operations. The abstract CategoryTheory.ihom in Monoidal/Closed/Basic.lean:76 presupposes the closed structure and gives no geometric Rf_! or exceptional inverse image.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\"",
+   "results": "12 displayed hits: AddActionSemiHomClass, MulActionSemiHomClass and their variants/coercions in Mathlib.GroupTheory.GroupAction.Hom. None concerns internal Hom in a derived category or the geometric projection transformation.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dual of an object defined by internal hom into the monoidal unit, and duality with respect to an exceptional pullback of the unit on a scheme",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.coev_def, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, CategoryTheory.ExponentiableMorphism.coev, isExponentiable, ev_def, id, ev and ExponentiableMorphism. Abstract over-category adjunctions and underived structure-sheaf module pullback do not define the four-stage coefficient duals or compact-support projection.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|verdierDual|coefficientDual|projectionFormula|projectionMap",
+   "results": "10 hits, all for the word dualizing in comments or the dualizing functor on Cat (CategoryTheory/Category/Cat/Op.lean:12); no geometric duals or compact-support projection definition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"ihom\"",
+   "results": "12 displayed hits, including CategoryTheory.MonoidalClosed.curry'_ihom_map, uncurry_ihom_map, whiskerLeft_curry_ihom_ev_app, pre_comm_ihom_map, ObjectProperty.IsMonoidalClosed.prop_ihom, ihomCurryIso, ihomCurry and ihomUncurry. These presuppose closed monoidal structures; they do not construct the geometric derived operations or their coefficient stages. Read CategoryTheory.ihom at Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:76, which only chooses the supplied right adjoint.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -100,5 +171,20 @@
   }
  ],
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-exchanges"
+ "unit": "sk-def-sf-exchanges",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sf-pf",
+  "worker": "stage1",
+  "summary": "Split this definition by naming its existing constituent notions, without creating nodes or proof steps. Retained def-sf-datum, def-exchange-projection and def-weil-derived-pullback-tensor-hom as exactly the statement dependencies. Made the base coefficient unit and the projection variables/domains explicit, following the imported unit statement and the existing projection definition. Kept concrete projection-formula verification references as pointers. Searched the project declarations and the entire imported blueprint; partial overlaps do not cover the full item, and no exact Mathlib match was found. The original blueprint files are absent locally; report.md records the requested sources and precisely what imported source records were read. Second reading kept the finite-Tor scope of axiom (A3) distinct from the larger finite-coefficient projection domain, and made the current constituent definition's chosen-compactification and higher-coefficient comparison prerequisites explicit.",
+  "blueprint": "The complete definitional statement of blueprint node def-sf-pf: omega_X, the two displayed duals, and PF with the direction shown. This is a definition with no proof. The unit sk-def-sf-exchanges has no proof steps; its projection-transformation clause supplies the explicit K and L domains."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q28-0ec7a6b72",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-0ec7a6b72 (reviewer sub-agent of L); spot-checked: Read the complete definition, dependencies, original blueprint sources, unit/chapter route, and archived target declarations. Dual formulas, projection direction, coefficient interpretations, and A3’s finite-Tor scope agree. Small cases and dependency-cycle checks passed; no new nodes or repairs. Comparison and coherence obligations remain separate. Findings recorded in review.md."
+ }
 }
