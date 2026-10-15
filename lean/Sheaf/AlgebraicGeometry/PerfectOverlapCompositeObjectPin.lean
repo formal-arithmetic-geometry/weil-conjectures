@@ -6,6 +6,11 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
+import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
 
 /-! # Object compatibility for a composite overlap pullback
 
