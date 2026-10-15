@@ -1,6 +1,6 @@
 # Work queue
 
-32 items; claim with `tools/claim.py next <group> [--stage N]`.
+31 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (32)
+## Stage 3: modules to prove (31)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -35,7 +35,6 @@
 | `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleClosedAbelianFilteredColimits` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections` | 7 | 1 | proof |
-| `Sheaf.NumberTheory.Padics.ExtensionIntegersDvrCore` | 7 | 1 | proof |
 | `Sheaf.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 7 | 5 | proof |
