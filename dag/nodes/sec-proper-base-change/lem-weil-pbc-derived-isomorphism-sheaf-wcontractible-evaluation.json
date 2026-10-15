@@ -29,7 +29,9 @@
   "def-weil-pbc-etale-sheaves",
   "def-constructible-locally-constant",
   "def-pur-localized-ringed-site",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-derived-morphism-presheaves",
+  "def-weil-pbc-derived-morphism-sheaf-comparison"
  ],
  "proof": [
   {
@@ -289,5 +291,37 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-bde1a2227 (reviewer sub-agent of L); spot-checked: Read all six steps, the new node, cited statements and source passages. The finite-diagonal Hom model, weakly contractible evaluation, inverse-pair argument and bounded scalar-extension compatibility check out. Archived master targets retain distinct condensed coefficients. Corrected incomplete new-node metadata and the 08FI source label; statements unchanged. Full checks and five accepted tool_uses are recorded in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedMorphismWeaklyContractibleEvaluation",
+  "declaration": "AlgebraicGeometry.Scheme.derivedMorphism_weaklyContractible_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constantDerivedEtale",
+   "AlgebraicGeometry.Scheme.derivedMorphism_weaklyContractible_evaluation",
+   "AlgebraicGeometry.Scheme.derivedMorphism_evaluation_extends_local",
+   "AlgebraicGeometry.Scheme.derivedMorphism_evaluation_restriction",
+   "AlgebraicGeometry.Scheme.derivedMorphism_evaluation_composition",
+   "AlgebraicGeometry.Scheme.derivedMorphism_evaluation_natural",
+   "AlgebraicGeometry.Scheme.derivedMorphism_evaluation_identity",
+   "AlgebraicGeometry.Scheme.derivedMorphism_isoEvaluation_composition",
+   "AlgebraicGeometry.Scheme.derivedMorphism_isoEvaluation_natural",
+   "AlgebraicGeometry.Scheme.scalarEvaluationTransport",
+   "AlgebraicGeometry.Scheme.derivedMorphism_evaluation_scalarExtension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMorphismWeaklyContractibleEvaluation.lean",
+  "statement": "theorem derivedMorphism_weaklyContractible_evaluation [Finite B] (E : DerivedCategory (ModuleCat.{u + 1} B)) (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) (hE : (DerivedCategory.TStructure.t (C := ModuleCat.{u + 1} B)).bounded E) (hEf : ∀ n : ℤ, Module.Finite B ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} B) n).obj E)) (hK : (DerivedCategory.TStructure.t (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))).bounded K) (hKf : ∀ n : ℤ, IsFiniteLocallyConstantSheaf ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) n).obj K)) (U : X.ProEt) [IsAffine U.left] (hU : (ProEt.topology X).IsWeaklyContractible.{u + 1} U) : Function.Bijective (derivedHomEvaluation X B ((constantDerivedEtale X B).obj E) K U hU) ∧ Function.Bijective (derivedIsoEvaluation X B ((constantDerivedEtale X B).obj E) K U hU)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The primary theorem is simultaneous Hom/Isom bijectivity. The remaining declarations spell out the node's extension, identity, composition, naturality, restriction and derived scalar-extension clauses. The structural compatibility formulas are given for general derived arguments so specialize to the displayed constant source and finite locally constant target. Tensor functors in the scalar clause are identified by their actual derived restriction-of-scalars adjunctions; unit normalizations fix every mate. No finite Tor dimension or perfectness is added. Uses the authorized fixed-coefficient ModuleCat sheaf encoding in the larger site universe, as in def-weil-pbc-etale-sheaves."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2d625d6eb",
+  "group": "NF",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, universes, edge cases, canonical constructions, documentation, report headings, and per-file compilation all checked successfully."
  }
 }

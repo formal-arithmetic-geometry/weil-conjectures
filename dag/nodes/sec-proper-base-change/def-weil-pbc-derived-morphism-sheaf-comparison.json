@@ -1,0 +1,149 @@
+{
+ "id": "def-weil-pbc-derived-morphism-sheaf-comparison",
+ "kind": "definition",
+ "title": "Canonical comparison and weakly contractible evaluation of derived morphism sheaves",
+ "status": "split",
+ "statement": "Let $X$ be a scheme with its small etale and pro-etale sites [def-weil-pbc-etale-site] [def-weil-pbc-proetale-site], and let $B$ be a commutative ring in $\\mathrm{Type}(u+1)$. Use the actual set- and module-valued comparison inverse images $\\nu^*$ [def-weil-pbc-site-comparison-morphism] and the derived local Hom/Isom presheaves and sheaves [def-weil-pbc-derived-morphism-presheaves]. The comparison on the slice over an etale object $V$ is the constructed sheaf inverse image of the postcomposition functor $(X_{\\mathrm{et}}/V)\\to(X_{\\mathrm{proet}}/V)$. This functor is continuous, its module inverse image is exact, and the slice base-change morphism obtained by restricting the global adjunction unit and transposing under the slice adjunction is an invertible natural morphism. Derive this specified morphism to identify restriction of $\\nu^*$ with slice comparison. Pullback of actual local derived morphisms or isomorphisms, followed by pro-etale sheafification, is natural in $V$. Transpose this presheaf map first under sheafification and then under the comparison adjunction, defining the canonical sheaf maps $\\nu^*\\mathcal H_{A,D}\\to\\mathcal H_{\\nu^*A,\\nu^*D}$ and $\\nu^*\\mathcal I_{A,D}\\to\\mathcal I_{\\nu^*A,\\nu^*D}$.\n\nFor an affine object $U$ weakly contractible in the sense that every epimorphism of set sheaves is surjective on sections over $U$, the pro-etale sheafification units of the two actual local derived presheaves are bijections (the presheaves carry finite disjoint unions, including the empty union, to products). Define evaluation from the two pulled-back etale sheaves to actual derived Hom and Isom on the localized pro-etale site by composing the above sheaf maps with the unique inverse of these unit bijections. Define composition of pulled-back sections through the inverse-image product comparison, and the sections represented by actual etale-local maps through the sheafification and comparison units; identities are represented over the terminal etale object. For a ring map $B\\to B'$, the scalar-restriction comparison $\\nu^*\\operatorname{Res}\\to\\operatorname{Res}\\nu^*$ is the transpose of the restriction of the comparison unit; it is invertible and natural, and gives the specified comparison on derived categories. All maps here have the indicated canonical constructions, not freely chosen data.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-derived-morphism-presheaves"
+ ],
+ "source": {
+  "document": "Stacks Project and Weil conjectures blueprint",
+  "place": "Pro-etale Cohomology, Tags 0F63 and 09B1; amplification proof (c), the actual-morphism comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived morphism sheaf evaluation on weakly contractible proetale affines",
+   "results": "{\"t\": \"2026-10-15T18:06:01Z\", \"tool\": \"leanfinder\", \"query\": \"derived morphism sheaf evaluation on weakly contractible proetale affines\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\"], \"digest\": \"f3a0f0f3729211a0\"}",
+   "date": "2026-10-15",
+   "verdict": "No exact existing derived local Hom/Isom presheaf or canonical comparison; hits only give sheafification infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of derived morphisms on localized sites and its comparison under inverse image",
+   "results": "{\"t\": \"2026-10-15T18:32:48Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf of derived morphisms on localized sites and its comparison under inverse image\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "homPresheaf|isomPresheaf|derivedHomPresheaf",
+   "results": "{\"t\": \"2026-10-15T18:33:49Z\", \"tool\": \"grep\", \"query\": \"homPresheaf|isomPresheaf|derivedHomPresheaf\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "No exact existing derived local Hom/Isom presheaf or canonical comparison; hits only give sheafification infrastructure."
+  },
+  {
+   "tool": "grep (upstream, Sheaf and DAG)",
+   "query": "derived (morphism|Hom|isomorphism).*presheaf|derivedLocalHomPresheaf|derivedHomSheafComparison",
+   "results": "rg on dag/nodes, lean/Sheaf and WeilConjectures found proof prose only, no declaration of the required presheaves or comparison. blueprint_refs.py search \"derived morphism presheaf\" and \"derived morphism sheaf comparison\" each returned 0 blueprint nodes.",
+   "date": "2026-10-15",
+   "verdict": "No pre-existing node or declaration for this construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation",
+  "date": "2026-10-15",
+  "group": "NF"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Amplification proof (c), canonical etale/pro-etale Hom/Isom comparison and evaluation on affine weakly contractible objects.",
+   "via": [
+    "lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation",
+    "lem-weil-pbc-compatible-finite-derived-trivializations",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedMorphismSheafComparison",
+  "declaration": "AlgebraicGeometry.Scheme.derivedHomSheafComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.comparisonSetUpperStar",
+   "AlgebraicGeometry.Scheme.comparisonSetUpperStar_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.derivedComparison",
+   "AlgebraicGeometry.Scheme.comparisonSlice_continuous",
+   "AlgebraicGeometry.Scheme.comparisonSliceUpperStar",
+   "AlgebraicGeometry.Scheme.comparisonSliceAdjunction",
+   "AlgebraicGeometry.Scheme.comparisonSliceLowerStar_additive",
+   "AlgebraicGeometry.Scheme.comparisonSliceUpperStar_additive",
+   "AlgebraicGeometry.Scheme.comparisonSliceUpperStar_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.comparisonSliceUpperStar_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.comparisonSliceBaseMap",
+   "AlgebraicGeometry.Scheme.comparisonSliceBaseMap_properties",
+   "AlgebraicGeometry.Scheme.comparisonSliceBaseIso",
+   "AlgebraicGeometry.Scheme.derivedComparisonSliceIso",
+   "AlgebraicGeometry.Scheme.derivedComparisonLocalHom",
+   "AlgebraicGeometry.Scheme.derivedComparisonLocalIso",
+   "AlgebraicGeometry.Scheme.derivedComparisonHomTarget",
+   "AlgebraicGeometry.Scheme.derivedComparisonIsoTarget",
+   "AlgebraicGeometry.Scheme.derivedComparisonHomUnit",
+   "AlgebraicGeometry.Scheme.derivedComparisonIsoUnit",
+   "AlgebraicGeometry.Scheme.derivedComparisonUnits_natural",
+   "AlgebraicGeometry.Scheme.derivedComparisonHomPresheafMap",
+   "AlgebraicGeometry.Scheme.derivedComparisonIsoPresheafMap",
+   "AlgebraicGeometry.Scheme.derivedHomSheafComparison",
+   "AlgebraicGeometry.Scheme.derivedIsoSheafComparison",
+   "AlgebraicGeometry.Scheme.proEtaleDerivedHomUnit",
+   "AlgebraicGeometry.Scheme.proEtaleDerivedIsoUnit",
+   "AlgebraicGeometry.Scheme.proEtaleDerivedUnits_bijective",
+   "AlgebraicGeometry.Scheme.derivedHomEvaluation",
+   "AlgebraicGeometry.Scheme.derivedIsoEvaluation",
+   "AlgebraicGeometry.Scheme.pulledbackDerivedHomComp",
+   "AlgebraicGeometry.Scheme.pulledbackDerivedIsoComp",
+   "AlgebraicGeometry.Scheme.pulledbackEtaleLocalHom",
+   "AlgebraicGeometry.Scheme.pulledbackEtaleLocalIso",
+   "AlgebraicGeometry.Scheme.pulledbackDerivedIdentity",
+   "AlgebraicGeometry.Scheme.pulledbackDerivedIsoIdentity",
+   "AlgebraicGeometry.Scheme.comparisonRestrictScalarsMap",
+   "AlgebraicGeometry.Scheme.comparisonRestrictScalarsMap_properties",
+   "AlgebraicGeometry.Scheme.comparisonRestrictScalarsSheafIso",
+   "AlgebraicGeometry.Scheme.comparisonRestrictScalarsIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMorphismSheafComparison.lean",
+  "statement": "def derivedHomSheafComparison : (comparisonSetUpperStar X).obj (derivedLocalHomSheaf X.smallEtaleTopology B A D) ⟶ derivedComparisonHomTarget X B A D",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Defines the canonical comparison by explicit local pullback and the two adjunction transposes. Evaluation uses only the unique inverse of a specified sheafification-unit bijection; no arbitrary Hom map or chosen isomorphism is supplied."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2d625d6eb",
+  "group": "NF",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2d625d6eb",
+  "group": "NF",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, universes, edge cases, canonical constructions, documentation, report headings, and per-file compilation all checked successfully."
+ }
+}

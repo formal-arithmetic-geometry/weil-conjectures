@@ -1,0 +1,143 @@
+{
+ "id": "def-weil-pbc-derived-morphism-presheaves",
+ "kind": "definition",
+ "title": "Derived local morphism and isomorphism presheaves",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,J)$ be an essentially small site with objects in $\\mathrm{Type}(u+1)$ and morphisms in $\\mathrm{Type}(u)$, and let $B$ be a commutative ring in $\\mathrm{Type}(u+1)$. Use module-valued sheaves $\\operatorname{Sh}(J,\\operatorname{Mod}_B)$, the constant-coefficient encoding of [def-weil-pbc-etale-sheaves], and the actual derived categories [def-weil-abstract-derived-category]. For $U\\in\\mathcal C$, localization uses $J/U$, restriction of sheaves, and relocalization along $V\\to U$ as in [def-pur-localized-ringed-site]. Write $r_U$ and $r_f$ for their exact functors induced on derived categories, and $r_U(-)|_V\\cong r_V(-)$ for the canonical restriction isomorphism. For derived objects $A,D$, define presheaves $P_{A,D}(U)=\\operatorname{Hom}_{D(J/U,B)}(r_U A,r_U D)$ and $Q_{A,D}(U)=\\operatorname{Isom}_{D(J/U,B)}(r_U A,r_U D)$. Restriction is the image under $r_f$, conjugated by these canonical isomorphisms; it obeys the identity and composition laws. Define $\\mathcal H_{A,D}=P_{A,D}^{\\#}$ and $\\mathcal I_{A,D}=Q_{A,D}^{\\#}$ by [def-weil-pbc-sheafification]. Composition on each is the unique map from the product of the corresponding sheaves that agrees with composition of actual local morphisms or isomorphisms after the sheafification units. Precomposition and postcomposition induce their canonical maps; for $\\mathcal I$ the changes of arguments are isomorphisms. There is the canonical map $\\mathcal I\\to\\mathcal H$ forgetting the inverse.\n\nFor another commutative ring $B'$, a coherent localized functor consists of a functor $T:D(J,B)\\to D(J,B')$, functors $T_U:D(J/U,B)\\to D(J/U,B')$, and natural isomorphisms $r_U T\\cong T_U r_U$ (written in the direction $r_U(-)$ followed by $T_U$ to $T(-)$ followed by $r_U$), such that the induced conjugated maps on both local Hom and local Isom commute with every restriction. These data induce maps on $P,Q,\\mathcal H,\\mathcal I$. Restriction of scalars along $B\\to B'$ commutes with localization by the identity comparison on sheaves and its induced derived isomorphism. This specifies all functoriality data; it does not replace actual derived morphisms by underived maps.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sheafification"
+ ],
+ "source": {
+  "document": "Stacks Project and Weil conjectures blueprint",
+  "place": "Cohomology on Sites, Tags 0946 and 09BE; localized sites and set sheafification; amplification proof (c), actual local derived morphisms."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "presheaf of morphisms in derived categories of localized sheaves of modules and sheafification",
+   "results": "{\"t\": \"2026-10-15T18:27:08Z\", \"tool\": \"leanfinder\", \"query\": \"presheaf of morphisms in derived categories of localized sheaves of modules and sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafification\", \"PresheafOfModules.sheafify\", \"PresheafOfModules.toSheafify\", \"PresheafOfModules.toPresheaf_map_toSheafify\", \"PresheafOfModules.Sheafify.module\", \"PresheafOfModules.Sheafify.SMulCandidate.mk'\", \"PresheafOfModules.toSheafify_app_apply'\", \"PresheafOfModules.toSheafify_app_apply\"], \"digest\": \"55874a2c43c31435\"}",
+   "date": "2026-10-15",
+   "verdict": "No exact existing derived local Hom/Isom presheaf or canonical comparison; hits only give sheafification infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of derived morphisms on localized sites and its comparison under inverse image",
+   "results": "{\"t\": \"2026-10-15T18:32:48Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf of derived morphisms on localized sites and its comparison under inverse image\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "homPresheaf|isomPresheaf|derivedHomPresheaf",
+   "results": "{\"t\": \"2026-10-15T18:33:49Z\", \"tool\": \"grep\", \"query\": \"homPresheaf|isomPresheaf|derivedHomPresheaf\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "No exact existing derived local Hom/Isom presheaf or canonical comparison; hits only give sheafification infrastructure."
+  },
+  {
+   "tool": "grep (upstream, Sheaf and DAG)",
+   "query": "derived (morphism|Hom|isomorphism).*presheaf|derivedLocalHomPresheaf|derivedHomSheafComparison",
+   "results": "rg on dag/nodes, lean/Sheaf and WeilConjectures found proof prose only, no declaration of the required presheaves or comparison. blueprint_refs.py search \"derived morphism presheaf\" and \"derived morphism sheaf comparison\" each returned 0 blueprint nodes.",
+   "date": "2026-10-15",
+   "verdict": "No pre-existing node or declaration for this construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation",
+  "date": "2026-10-15",
+  "group": "NF"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Amplification proof (c), the Hom/Isom sheaf on etale-local finite derived models.",
+   "via": [
+    "lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation",
+    "lem-weil-pbc-compatible-finite-derived-trivializations",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedMorphismPresheaf",
+  "declaration": "CategoryTheory.derivedLocalHomPresheaf",
+  "declarations": [
+   "CategoryTheory.derivedSliceRestriction_additive",
+   "CategoryTheory.derivedSliceMap_additive",
+   "CategoryTheory.derivedSliceRestriction",
+   "CategoryTheory.derivedSliceMap_preservesFiniteColimits",
+   "CategoryTheory.derivedSliceMap",
+   "CategoryTheory.sliceRestrictionMapIso",
+   "CategoryTheory.derivedSliceMapIso",
+   "CategoryTheory.derivedLocalHomRestriction",
+   "CategoryTheory.derivedLocalIsoRestriction",
+   "CategoryTheory.derivedLocalHomRestriction_laws",
+   "CategoryTheory.derivedLocalIsoRestriction_laws",
+   "CategoryTheory.derivedLocalHomPresheaf",
+   "CategoryTheory.derivedLocalIsoPresheaf",
+   "CategoryTheory.derivedLocalHomSheaf",
+   "CategoryTheory.derivedLocalIsoSheaf",
+   "CategoryTheory.sheafPairSection",
+   "CategoryTheory.derivedLocalHomSheafComp_exists",
+   "CategoryTheory.derivedLocalHomSheafComp",
+   "CategoryTheory.derivedLocalIsoSheafComp_exists",
+   "CategoryTheory.derivedLocalIsoSheafComp",
+   "CategoryTheory.derivedLocalHomPresheafMap_natural",
+   "CategoryTheory.derivedLocalHomPresheafMap",
+   "CategoryTheory.derivedLocalIsoPresheafMap",
+   "CategoryTheory.derivedLocalIsoSheafMap",
+   "CategoryTheory.derivedLocalHomSheafMap",
+   "CategoryTheory.derivedLocalIsoToHomPresheaf",
+   "CategoryTheory.derivedLocalIsoToHomSheaf",
+   "CategoryTheory.DerivedLocalFunctor",
+   "CategoryTheory.DerivedLocalFunctor.homPresheafMap",
+   "CategoryTheory.DerivedLocalFunctor.isoPresheafMap",
+   "CategoryTheory.DerivedLocalFunctor.homSheafMap",
+   "CategoryTheory.DerivedLocalFunctor.isoSheafMap",
+   "CategoryTheory.sliceRestrictScalarsSheafIso",
+   "CategoryTheory.sliceRestrictScalarsIso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedMorphismPresheaf.lean",
+  "statement": "def derivedLocalHomPresheaf : Cᵒᵖ ⥤ Type (u + 1)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Actual localized derived categories and their canonical restriction maps; finite-product sheafification determines composition uniquely. DerivedLocalFunctor records coherent local functors used to express tensor maps, not an arbitrary comparison hypothesis."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2d625d6eb",
+  "group": "NF",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2d625d6eb",
+  "group": "NF",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, universes, edge cases, canonical constructions, documentation, report headings, and per-file compilation all checked successfully."
+ }
+}
