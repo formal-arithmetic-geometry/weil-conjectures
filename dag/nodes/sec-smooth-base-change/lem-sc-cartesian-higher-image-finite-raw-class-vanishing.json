@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-cartesian-higher-image-finite-raw-class-vanishing",
+ "kind": "statement",
+ "title": "Common-stage vanishing of finitely many raw cartesian derived classes",
+ "statement": "Let k be a field, I a small cofiltered category, and D an I-diagram of qcqs schemes over Spec k with affine transition maps. Let c be a cone whose underlying scheme cone is limiting, with qcqs structure morphism, and let f:X→Spec k be qcqs. Let F be an abelian etale sheaf on X, q a nonnegative integer, i an index, and (V_t) a finite family of affine etale objects over c.pt. Put P=F[0] and K_i=(c.π_i)^* R(pullback.snd f (D_i.hom))_* (pullback.fst f (D_i.hom))^* P. For every t let z_t:Z[V_t][0]→K_i[q] be a derived morphism, with Z[V_t] the sheafified free abelian representable. If each z_t becomes zero after the canonical cartesian exchange K_i→cartesianDerivedImage f c.pt.hom P, then there exist j and a:j→i such that every z_t becomes zero after the transition K_i→(c.π_j)^*cartesianDerivedImage f (D_j.hom) P, including the canonical inverse-image composition comparison. The notions are those of [def-sc-cartesian-derived-image], [def-sc-cartesian-derived-image-map], [def-weil-pbc-derived-categories] and [def-weil-pbc-sheafification].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Second proof, part (2), raw cohomology classes; Tags 0EYL and 0GIT for affine etale descent and derived cohomology continuity."
+ },
+ "stmt_deps": [
+  "def-sc-cartesian-derived-image",
+  "def-sc-cartesian-derived-image-map",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Work in the cofiltered category of arrows to the original index i, which has the same limit. Descend each affine etale V_t to an affine etale model over a common stage. Put L_i = cartesianDerivedImage f (D.obj i).hom F[0], a bounded-below complex on D_i. Identify Hom(Z[V_t][0], (c.π_i)^*L_i[q]) with hypercohomology of V_t with these coefficients. Apply derived etale cohomology continuity (0GIT) to the system of models of V_t over D_i with fixed coefficient L_i. Surjectivity of its colimit comparison descends the entire raw class z_t, not just its restrictions on a cover, to a sufficiently late model. Finiteness gives a common stage for these models and representatives.",
+   "uses": [
+    "lem-sc-cofiltered-affine-etale-model",
+    "lem-weil-pbc-derived-etale-cohomology-limit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a stage model send the descended class through the canonical derived base-change exchange to the cohomology of its cartesian chart X times V_{t,j}. Derived adjunction identifies this with the raw Hom for the stage direct image. These cartesian charts form qcqs inverse systems over X with affine transitions and fixed coefficient F[0]. Apply derived etale cohomology continuity (0GIT) again. The hypothesis says that the limit image of each chart class is zero: exchange pasting identifies its map with z_t followed by the displayed limit exchange. Injectivity of the colimit comparison and the filtered-colimit equality criterion kill each chart class at a later stage. Pullback, adjunction and exchange compatibility identify its pullback to V_t with the required transitioned raw class.",
+   "uses": [
+    "lem-sbc-abelian-higher-direct-image-class-compatibility",
+    "lem-weil-pbc-derived-etale-cohomology-limit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-sc-cartesian-derived-image-map-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use IsCofiltered.wideCospan on the finitely many resulting arrows to i, obtaining one arrow to i factoring through each of them. Pull every zero to that common index; functoriality and the inverse-image composition comparisons give exactly the displayed raw transition. For an empty family choose i and its identity. Empty affine test objects have zero hypercohomology, and degree zero uses the same continuity statement. No preservation of injectives by inverse image is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cofiltered-affine-etale-model",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-sbc-abelian-higher-direct-image-class-compatibility",
+  "lem-sc-cartesian-derived-image-map-exchange"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Registration of an existing theorem and its existing docstring proof, not a new split or new sorry; V1 read Tags 0EYM, 0EYL and 0GIT. Second reading: make explicit the first application of 0GIT needed to descend an arbitrary global raw class, followed by its second application to the cartesian charts; correct the finite common-index API to IsCofiltered.wideCospan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived etale cohomology commutes with cofiltered inverse limits of schemes with affine transition maps, with finitely many classes vanishing at one stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many derived etale cohomology classes killed at an inverse limit vanish at a common finite stage of a cofiltered inverse system",
+   "results": "Eight hits, including exists_appTop_map_eq_zero_of_isLimit and exists_app_map_eq_zero_of_isLimit for structure-sheaf sections; none addresses the displayed derived etale classes.",
+   "verdict": "No exact match.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCofiltered\", \"homology\"",
+   "results": "Zero hits.",
+   "verdict": "No exact match.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*classes.*zero|cohomology.*[Ll]imit|[Ll]imit.*cohomology",
+   "results": "Five Mathlib hits about nonabelian H1, local cohomology and group cohomology; none states this result.",
+   "verdict": "No exact match.",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing",
+  "date": "2026-10-15",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "Affine inverse-limit continuity for cartesian higher direct images, Stacks 0EYM second proof, raw-class injectivity step.",
+   "via": [
+    "lem-sc-cartesian-higher-image-affine-section-local-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawClassVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianHigherImageFiniteRawClassVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_cartesianHigherImage_finite_raw_classes_eq_zero",
+  "statement": "theorem exists_cartesianHigherImage_finite_raw_classes_eq_zero\n    {k : Type u} [Field k]\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Over (Spec (.of k)))\n    [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]\n    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (q : ℕ) (i : I) (J : Type u) [Finite J]\n    (V : J → c.pt.left.Etale) [∀ t, IsAffine (V t).left]\n    (z : ∀ t, (DerivedCategory.Plus.singleFunctor _ 0).obj\n      ((abelianComparisonFree c.pt.left).obj (V t)) ⟶\n        ((D+(((c.π.app i).left)^*[AddCommGrpCat.{u + 1}])).obj\n          (cartesianDerivedImage f (D.obj i).hom\n            ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))⟦(q : ℤ)⟧)\n    (hz : ∀ t, z t ≫ (shiftFunctor _ (q : ℤ)).map\n      (cartesianDerivedImageMap f (D.obj i).hom c.pt.hom (c.π.app i).left\n        (Over.w (c.π.app i)).symm ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) = 0) :\n    ∃ (j : I) (a : j ⟶ i), ∀ t,\n      z t ≫ (shiftFunctor _ (q : ℤ)).map\n        ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1}\n          (c.π.app j).left (D.map a).left (c.π.app i).left\n          (congrArg (fun b ↦ b.left) (c.w a)).symm).hom.app _ ≫\n          (D+(((c.π.app j).left)^*[AddCommGrpCat.{u + 1}])).map\n            (cartesianDerivedImageMap f (D.obj i).hom (D.obj j).hom\n              (D.map a).left (Over.w (D.map a)).symm\n              ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) = 0",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261015T020923-L-3186976",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261015T020923-L-3186976",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

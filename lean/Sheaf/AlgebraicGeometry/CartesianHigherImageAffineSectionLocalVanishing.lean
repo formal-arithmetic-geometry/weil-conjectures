@@ -160,36 +160,32 @@ theorem cartesianHigherImage_section_eq_zero_of_finite_cover
       ((cartesianHigherImageStage D c f F q i).obj.map (r t).op x) = 0) :
     (cartesianHigherImageTransition D c f F q a).hom.app
       (Opposite.op U) x = 0 := by
-  let T := cartesianHigherImageTransition D c f F q a
   let G := cartesianHigherImageStage D c f F q j
-  let e : AddCommGrpCat.of (ULift.{u + 1} ℤ) ⟶ G.obj.obj (Opposite.op U) :=
-    AddCommGrpCat.ofHom
-      { toFun := fun n ↦ n.down • (T.hom.app (Opposite.op U) x)
-        map_zero' := zero_zsmul _
-        map_add' := fun m n ↦ add_zsmul _ _ _ }
-  have he : e = 0 := by
-    apply G.property.hom_ext_ofArrows r hcover
-    intro t
-    rw [Limits.zero_comp]
-    ext n
-    change G.obj.map (r t).op (n.down • (T.hom.app (Opposite.op U) x)) = 0
-    rw [map_zsmul, ← NatTrans.naturality_apply]
-    rw [hzero t, smul_zero]
-  have h := congrArg (fun k ↦ k (ULift.up (1 : ℤ))) he
-  change (1 : ℤ) • (T.hom.app (Opposite.op U) x) = 0 at h
-  simpa only [one_zsmul] using h
+  have : PreservesLimitsOfSize.{u, u + 1} (forget AddCommGrpCat.{u + 1}) :=
+    preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
+  let G' := (sheafCompose c.pt.left.smallEtaleTopology
+    (forget AddCommGrpCat.{u + 1})).obj G
+  apply (((isSheaf_iff_isSheaf_of_type _ _).1 G'.property).isSeparated _ hcover).ext
+  intro W g hg
+  obtain ⟨t, l, rfl⟩ := (Sieve.mem_ofArrows_iff V r g).mp hg
+  change G.obj.map (l ≫ r t).op
+    ((cartesianHigherImageTransition D c f F q a).hom.app (Opposite.op U) x) =
+      G.obj.map (l ≫ r t).op 0
+  rw [map_zero, op_comp, G.obj.map_comp]
+  change G.obj.map l.op (G.obj.map (r t).op
+    ((cartesianHigherImageTransition D c f F q a).hom.app (Opposite.op U) x)) = 0
+  rw [← NatTrans.naturality_apply, hzero t, map_zero]
 
 
 /-- Local sieve form of affine-section eventual vanishing.
 Source: Stacks Project, Tag 0EYM, second proof, affine section reduction.
-Proof: represent the zero image of the section in the cohomology presheaf and use
-local injectivity of sheafification to obtain a covering sieve on which the
-representative vanishes. Refine that sieve by affine etale objects, descend the
-finitely presented objects and arrows to one common stage of the cofiltered
-system, and apply continuity of derived etale cohomology there. Naturality and
-the exchange comparison identify the resulting restriction with the displayed
-cartesian transition, giving zero on every arrow of the sieve.
-(blueprint: lem-sc-cartesian-higher-image-affine-section-local-zero-sieve)
+Proof: local surjectivity of the derived-Hom-to-homology comparison lifts the
+section, and local injectivity at the target makes its derived image zero after
+refinement. Extract a finite affine etale cover. Apply eventual vanishing of the
+finite family of raw derived classes at one common stage. Naturality of homology
+and its shift comparison then gives zero for the transitioned sections. Close the
+finite covering family under precomposition to obtain the required sieve.
+(blueprint: lem-sc-cartesian-higher-image-affine-section-local-vanishing)
 -/
 theorem cartesianHigherImage_affine_section_local_zero_sieve
     {k : Type u} [Field k]
@@ -268,6 +264,11 @@ theorem cartesianHigherImage_affine_section_local_zero_sieve
     rw [NatTrans.naturality_apply, hsection t, map_zero]
 
 
+/-- Extract a finite cover from the covering sieve of eventual local vanishing.
+Source: Stacks Project, Tag 0EYM, second proof, part (2).
+The affine test object is quasi-compact, so the sieve has a finite affine etale
+refinement; reindex that family in the base universe and retain its vanishing.
+(blueprint: lem-sc-cartesian-higher-image-affine-section-local-vanishing). -/
 theorem exists_cartesianHigherImage_affine_section_local_zero
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]
