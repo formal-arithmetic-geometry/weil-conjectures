@@ -309,5 +309,27 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-28d139613 (reviewer sub-agent of L); spot-checked: Read the complete item and cited statements/sources. All nine steps are sound against Stacks 01ZR, 01WC, 01BW, 01CD, 01BQ and the affine module criteria. Checked nonflat, empty, zero-factor and denominator cases; no new nodes, duplicates or dependency cycle. Accepted all twelve declared tool uses. Full findings recorded in review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpreadFiniteAlgebra",
+  "declaration": "AlgebraicGeometry.spread_finite_algebra",
+  "declarations": [
+   "AlgebraicGeometry.spread_finite_algebra",
+   "AlgebraicGeometry.spread_finite_algebra_product"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpreadFiniteAlgebra.lean",
+  "statement": "theorem spread_finite_algebra (A K : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [Field K] [Algebra A K] [IsFractionRing A K] (T : Scheme.{u}) (f : T ⟶ Spec (.of A)) [IsProjective f] (C : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap A K)))).CommAlgebraSheaf) (hC : RingedSpace.IsCoherent (pullback f (Spec.map (CommRingCat.ofHom (algebraMap A K)))).toRingedSpace C.toModule) : ∃ (a : A), a ≠ 0 ∧ ∃ (φ : Localization.Away a →+* K) (g : pullback f (Spec.map (CommRingCat.ofHom (algebraMap A K))) ⟶ pullback f (Spec.map (CommRingCat.ofHom (algebraMap A (Localization.Away a))))) (B : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap A (Localization.Away a))))).CommAlgebraSheaf) (θ : (TopCat.Sheaf.inverseImageConstruction g.base CommRingCat.{u}).obj B.right ⟶ C.right), φ.comp (algebraMap A (Localization.Away a)) = algebraMap A K ∧ g ≫ pullback.fst f _ = pullback.fst f _ ∧ g ≫ pullback.snd f _ = pullback.snd f _ ≫ Spec.map (CommRingCat.ofHom φ) ∧ B.toModule.IsQuasicoherent ∧ B.toModule.IsFiniteType ∧ IsPushout ((TopCat.Sheaf.inverseImageConstruction g.base CommRingCat.{u}).map B.hom) (Scheme.Modules.tensorPullbackRingMap g) θ C.hom",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-952401c29",
+  "group": "NX",
+  "result": "pass",
+  "note": "Checked statement clauses, dependencies, sources, edge cases, docstrings, report sections, and verbatim signature. Server-only compile passed in 5.8 seconds. Local canonical-projectivity source availability limitation is documented."
  }
 }
