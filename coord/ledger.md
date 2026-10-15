@@ -15183,3 +15183,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:17 L: merged deliver/E4/Sheaf.Paper.GeometricFieldProEtaleEvaluation (stage 3; reviewer PASS; first push; landing 20261015T201714-L-1447509 (interface); batch 20261015T201712; modules 3; new nodes 2)
 - 20:17 L: merged deliver/H2/Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison (stage 3; reviewer PASS; first push; landing 20261015T201715-L-1447634 (proof); batch 20261015T201712; modules 1; new nodes 0)
 - 20:17 L: merged deliver/H4/Sheaf.AlgebraicGeometry.ProEtaleClosedAbelianFilteredColimits (stage 3; reviewer PASS; first push; landing 20261015T201715-L-1447747 (proof); batch 20261015T201712; modules 1; new nodes 0)
+- 20:20 L: merged deliver/A4/Sheaf.Paper.CondensedStratumModelAssembly (stage 3; reviewer PASS; first push; landing 20261015T202025-L-1475573 (interface); batch 20261015T202023; modules 2; new nodes 1)

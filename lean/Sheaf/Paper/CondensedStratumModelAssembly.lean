@@ -8,16 +8,8 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.CategoryTheory.ExtOneExtensionClassification
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.Paper.CondensedSheafExtContinuity
+import Sheaf.Paper.CondensedStratumModelInductionStep
 import Sheaf.Paper.ProfinitePointPullback
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Assembly of finite coefficient models on strata
@@ -94,6 +86,19 @@ theorem exists_finiteCoefficient_model_of_stratum_models
       (M_E : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ E)),
       IsConstructibleModuleObject (padicSubfieldRingObj T ℓ E) M_E ∧
         Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).obj M_E ≅ M) := by
-  sorry
+  have supportModels : ∀ (D : TopologicalSpace.Closeds T) (Y : Scheme.{u}) (i : Y ⟶ T)
+      [IsClosedImmersion i], Set.range i ⊆ D →
+      ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
+        (P : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (padicSubfieldRingObj Y ℓ E)),
+        IsConstructibleModuleObject (padicSubfieldRingObj Y ℓ E) P ∧
+        Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl Y ℓ E)).obj P ≅
+          (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) i).obj M) := by
+    intro D
+    induction D using WellFoundedLT.induction with
+    | ind D ih =>
+      exact exists_finiteCoefficient_model_on_closed_support_step T ℓ M S hS D ih
+  obtain ⟨E, P, hP, ⟨e⟩⟩ := supportModels ⊤ T (𝟙 T) (Set.subset_univ _)
+  exact ⟨E, P, hP, ⟨e ≪≫ (profinitePointModuleIdentity
+    (Profinite.padicAlgClRingObj ℓ) T).app M⟩⟩
 
 end AlgebraicGeometry.ProEtale
