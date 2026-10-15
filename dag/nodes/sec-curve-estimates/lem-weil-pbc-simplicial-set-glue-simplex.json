@@ -24,19 +24,18 @@
  ],
  "proof": [
   {
-   "text": "The simplex $x$ is nondegenerate: if $x=V(\\sigma)(y)$ for a map $\\sigma:[n]\\to[r]$ with $r<n$, then $y\\in V_r=U_r$, so simplicial stability of $U$ would give $x\\in U_n$. For $n=0$ there are no non-surjective maps to $[0]$. For $n>0$, if $\\varphi:[m]\\to[n]$ is not surjective, choose $i$ outside its image and factor $\\varphi=\\delta_i\\circ\\psi$ by [lem-weil-pbc-simplex-face-factorization]. The face $V(\\delta_i)(x)$ lies in $V_{n-1}=U_{n-1}$, hence $a(\\varphi)=U(\\psi)(V(\\delta_i)(x))\\in U_m$. This defines $b$ and makes the square commute.",
+   "text": "Let a be the Yoneda morphism of x. First x is nondegenerate: an expression from degree r < n would have its ancestor in U by hbelow, hence x in U. The subcomplex B = a^{-1}(U) of the standard simplex contains the boundary: by SSet.Subcomplex.le_iff_contains_nonDegenerate it suffices to check its nondegenerate simplices, which have degree less than n by SSet.dim_lt_of_nonDegenerate and the dimension bound for the boundary. Their images lie in U by hbelow. B is proper since the identity simplex maps to x, which is outside U. SSet.stdSimplex.eq_boundary_iff therefore gives B = boundary Delta[n]. Restrict a using Subcomplex.lift to obtain b; cancel the monomorphism V -> X to prove the required commutativity.",
    "uses": [
-    "def-weil-pbc-simplicial-set",
-    "lem-weil-pbc-simplex-face-factorization"
+    "def-weil-pbc-simplicial-set"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 018R (lemma-glue-simplex), statement and proof, the sentence 'Since clearly x is nondegenerate'; Lemma 0166 (lemma-face-degeneracy), proof of factorization through a missing face"
+    "place": "Lemma 018R (lemma-glue-simplex), statement and proof (its last step is Lemma 017S (lemma-injective-map-simplicial-sets)), with the morphism Delta[n] -> V of Lemma 0177 (lemma-simplex-map); used in hypercovering.tex Lemma 01GM (lemma-one-more-simplex), proof, second paragraph"
    }
   },
   {
-   "text": "Every $z\\in V_j\\setminus U_j$ has a unique expression $z=V(\\sigma)(x)$ for a surjective $\\sigma:[j]\\to[n]$. Indeed, apply [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] to $z$. Its nondegenerate ancestor $y$ is outside $U$ (otherwise $z\\in U$); it cannot have degree below $n$ by (1), nor above $n$ by (3), and by (2) it is $x$ in degree $n$. Conversely, if $\\sigma$ is surjective and $V(\\sigma)(x)\\in U_j$, choose an order-preserving section $\\tau:[n]\\to[j]$ of $\\sigma$. Then $x=V(\\tau)(V(\\sigma)(x))\\in U_n$, a contradiction. Thus the simplices outside $U$ are exactly the distinct surjective degeneracies of $x$.",
+   "text": "For a simplex z of V outside U, apply [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] to write z = V(f)(y) with y nondegenerate. The ancestor y lies outside U by stability under V(f). Its degree r cannot be less than n by hbelow and cannot be greater than n by habove and nondegeneracy. Thus r = n, and hat identifies y with x. Consequently the inclusion U -> V and the map a are jointly surjective in every degree.",
    "uses": [
     "def-weil-pbc-simplicial-set",
     "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
@@ -44,45 +43,42 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 018R (lemma-glue-simplex), proof, induction showing every new simplex is a degeneracy of x and injectivity via Lemma 017S; Lemma 017R (lemma-splitting-simplicial-sets) supplies uniqueness"
+    "place": "Lemma 018R (lemma-glue-simplex), statement and proof (its last step is Lemma 017S (lemma-injective-map-simplicial-sets)), with the morphism Delta[n] -> V of Lemma 0177 (lemma-simplex-map); used in hypercovering.tex Lemma 01GM (lemma-one-more-simplex), proof, second paragraph"
    }
   },
   {
-   "text": "Let $g:U\\to Y$ and $h:\\Delta[n]\\to Y$ agree on the boundary. Define $f_j:V_j\\to Y_j$ by $f_j(z)=g_j(z)$ for $z\\in U_j$, and $f_j(V(\\sigma)(x))=h_j(\\sigma)$ for the unique surjection $\\sigma:[j]\\to[n]$ of step 2. To check naturality for $\\theta:[k]\\to[j]$, it is immediate for $z\\in U_j$. For $z=V(\\sigma)(x)$ outside $U$, write $\\rho=\\sigma\\circ\\theta$. If $\\rho$ is surjective, step 2 gives $V(\\theta)(z)=V(\\rho)(x)$ outside $U$ and both sides of naturality equal $h_k(\\rho)$. If $\\rho$ is not surjective, step 1 puts $V(\\theta)(z)=b_k(\\rho)$ in $U_k$ and the boundary agreement gives $g_k(b_k(\\rho))=h_k(\\rho)=Y(\\theta)(h_j(\\sigma))$. Thus $f$ is a simplicial morphism extending $g$.",
+   "text": "In each degree the commutative square is a pullback of sets: an image a(p) lies in U precisely when p belongs to the boundary, by step 1; the boundary inclusion is injective. Off the boundary, a simplex of Delta[n] corresponds to an epimorphism f into [n], since it is a surjective order-preserving map. If a(f) = a(g), uniqueness of the map in [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], applied to the nondegenerate simplex x, implies f = g. Thus a is injective on the complement of the boundary.",
    "uses": [
     "def-weil-pbc-simplicial-set",
-    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
-    "lem-weil-pbc-simplex-face-factorization"
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 018R (lemma-glue-simplex), proof, degreewise bijectivity of the pushout map; expanded here into the universal-property construction using the unique splitting of Lemma 017R"
+    "place": "Lemma 018R (lemma-glue-simplex), statement and proof (its last step is Lemma 017S (lemma-injective-map-simplicial-sets)), with the morphism Delta[n] -> V of Lemma 0177 (lemma-simplex-map); used in hypercovering.tex Lemma 01GM (lemma-one-more-simplex), proof, second paragraph"
    }
   },
   {
-   "text": "For $\\varphi:[j]\\to[n]$, if $\\varphi$ is surjective then $a_j(\\varphi)$ lies outside $U$ by step 2 and $f_j(a_j(\\varphi))=h_j(\\varphi)$. Otherwise it lies on the boundary by step 1 and $f_j(a_j(\\varphi))=g_j(b_j(\\varphi))=h_j(\\varphi)$. Hence $f\\circ a=h$. Any other morphism with these restrictions agrees with $f$ on $U$, and on a new simplex $V(\\sigma)(x)$ it must take the value $Y(\\sigma)(h_n(\\mathrm{id}_{[n]}))=h_j(\\sigma)$; it is therefore $f$. This is the pushout universal property. When $n=0$, every map $[j]\\to[0]$ is surjective and $\\partial\\Delta[0]$ is empty, so the same argument says $V=U\\amalg\\Delta[0]$.",
+   "text": "Apply Mathlib CategoryTheory.Limits.Types.isPushout_of_isPullback_of_mono' in each degree to the pullback of step 3, the jointly surjective maps of step 2, and the injectivity off the boundary of step 3. CategoryTheory.IsPushout.of_forall_isPushout_app upgrades these degreewise pushouts to a pushout of simplicial sets. This works also for n = 0: the boundary dimension bound has no nondegenerate generators, so the first step treats its empty boundary without a separate case.",
    "uses": [
     "def-weil-pbc-simplicial-set",
-    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
-    "lem-weil-pbc-simplex-face-factorization"
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 018R (lemma-glue-simplex), conclusion of the proof; the empty boundary for n=0 is immediate from its definition"
+    "place": "Lemma 018R (lemma-glue-simplex), statement and proof (its last step is Lemma 017S (lemma-injective-map-simplicial-sets)), with the morphism Delta[n] -> V of Lemma 0177 (lemma-simplex-map); used in hypercovering.tex Lemma 01GM (lemma-one-more-simplex), proof, second paragraph"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-simplicial-set",
-  "lem-weil-pbc-simplex-face-factorization",
   "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/simplicial.tex",
-  "place": "Lemma 018R (lemma-glue-simplex), proof, expanded through Lemma 017R (lemma-splitting-simplicial-sets) and Lemma 0166 (lemma-face-degeneracy)"
+  "place": "Lemma 018R (lemma-glue-simplex), degreewise surjectivity and injectivity argument; implemented using Mathlib nondegenerate decomposition and the degreewise Types pushout criterion. The boundary restriction is obtained from Mathlib boundary dimension and proper-subcomplex API rather than explicit face factorization."
  },
  "mathlib_searches": [
   {
@@ -167,5 +163,15 @@
   "group": "J1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261015T220315-L-2470633",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
