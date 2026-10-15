@@ -1,6 +1,6 @@
 # Work queue
 
-39 items; claim with `tools/claim.py next <group> [--stage N]`.
+44 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,31 +8,31 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (39)
+## Stage 3: modules to prove (44)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 1 | disputed |
-| `Sheaf.Paper.IntegralReductionConservative` | 2 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
 | `Sheaf.Paper.ContinuousConstructibleIntegralModel` | 3 | 1 | proof |
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralExchangeEquality` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralPushComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteExchangeComparison` | 4 | 1 | proof |
+| `Sheaf.Paper.IntegralConstructibleKernels` | 4 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueExchange` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 1 | proof |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedCoefficientComplexModel` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedLfpCoefficientModel` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedLocalPieceHomContinuity` | 6 | 1 | proof |
+| `Sheaf.Paper.CondensedQbarLfpMatrixRefinement` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardLocalComparison` | 6 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic` | 6 | 1 | proof |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
-| `Sheaf.Paper.CondensedQbarLfpMatrixRefinement` | 7 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 7 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleAbelianKInjectiveDirectImageAcyclic` | 8 | 1 | proof |
@@ -44,17 +44,21 @@
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonempty` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Sites.ArbitraryCurveCohomologicalDimension` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.SupportDimension` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ClosedPointField` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonMatchingTransport` | 10 | 1 | proof |
+| `Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation` | 11 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit` | 12 | 1 | proof |
+| `Sheaf.CategoryTheory.CartanEilenbergCanonicalTruncationComparison` | 12 | 1 | proof |
+| `Sheaf.CategoryTheory.SpectralObjectPageTwoMap` | 12 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
-Also listed above and claimable: 2 modules whose proof uses a node that has no Lean declaration yet.
+Also listed above and claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
-| `Sheaf.Paper.IntegralReductionConservative` | 2 | 1 |
 | `Sheaf.Paper.ContinuousConstructibleIntegralModel` | 3 | 1 |
