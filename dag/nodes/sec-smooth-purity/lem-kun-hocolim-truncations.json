@@ -154,5 +154,24 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-bd929fb9e (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source locations. Verified all three steps, canonical telescope comparison, coefficient category, truncation boundary and unbounded edge cases. No new nodes, missing citations, cycles or repairs. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-68bd5f4e4",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, report sections, and exact per-file scompile evidence checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TruncationHomotopyColimit",
+  "declaration": "AlgebraicGeometry.Etale.isIso_truncationHomotopyColimit_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/TruncationHomotopyColimit.lean",
+  "statement": "theorem isIso_truncationHomotopyColimit_comparison (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) (E : DerivedCategoryModule Λ T) (B : Cofan (fun n : ℕ ↦ (_root_.DerivedCategory.TStructure.t.truncLE (n : ℤ)).obj E)) (hB : IsColimit B) (H : DerivedCategoryModule Λ T) (p : B.pt ⟶ H) (q : H ⟶ B.pt⟦(1 : ℤ)⟧) (hT : Triangle.mk (𝟙 B.pt - Cofan.IsColimit.desc hB (fun n : ℕ ↦ (_root_.DerivedCategory.TStructure.t.natTransTruncLEOfLE (n : ℤ) (n + 1 : ℕ) (Int.ofNat_le.mpr (Nat.le_succ n))).app E ≫ B.inj (n + 1))) p q ∈ distTriang (DerivedCategoryModule Λ T)) : ∃ c : H ⟶ E, (∀ n : ℕ, B.inj n ≫ p ≫ c = (_root_.DerivedCategory.TStructure.t.truncLEι (n : ℤ)).app E) ∧ IsIso c",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Uses the recorded telescope formula with an arbitrary coproduct cofan and its universal property. The conclusion supplies an invertible comparison induced by the truncation cocone rather than assuming that comparison exists. No functorial or unique cone choice is asserted."
  }
 }
