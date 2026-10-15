@@ -32,7 +32,14 @@
   "def-pc-geometrically-irreducible",
   "def-kun-topological-krull-dimension",
   "def-sc-etale-qcoherent-module",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "def-sc-etale-additive-structure-restriction",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-abelian-higher-direct-image-class-compatibility",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "def-pbc-canonical-coherent-etale-comparison"
  ],
  "proof": [
   {
@@ -373,5 +380,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a70a9447d",
+  "group": "NK",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all dependencies, source passages, canonical scalar action, universes, edge cases, docstrings, reports, and verbatim signature. scompile.py server confirmation passed in 6.4 seconds without warnings. No corrections needed; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages",
+  "declaration": "AlgebraicGeometry.Etale.smooth_curve_etale_structure_direct_images",
+  "declarations": [
+   "AlgebraicGeometry.Etale.curveLocalStructure",
+   "AlgebraicGeometry.Etale.curveLocalFunction",
+   "AlgebraicGeometry.Etale.IsCurveLocalScalar",
+   "AlgebraicGeometry.Etale.curveLocalCohomologyMap",
+   "AlgebraicGeometry.Etale.smooth_curve_etale_structure_direct_images"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCurveEtaleStructureDirectImages.lean",
+  "statement": "theorem smooth_curve_etale_structure_direct_images {X S : Scheme.{u}} [CompactSpace S] [IsLocallyNoetherian S] (f : X ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f] (hdim : ∀ s : S, topologicalKrullDim (f.fiber s) = 1) : IsIso (Scheme.etaleAdditiveSheafToLowerStar f) ∧ ∃ (E : S.Modules) (_ : E.IsFiniteLocallyFree) (_ : E.IsQuasicoherent) (e : (DerivedCategory.Plus.homologyFunctor (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) 1).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj X.etaleAdditiveSheaf)) ≅ Scheme.Modules.liftedCoherentEtaleSheaf E), ∀ (U : S.Etale) (a : Γ(U.left, ⊤)), ∃ μ : curveLocalStructure f U ⟶ curveLocalStructure f U, IsCurveLocalScalar f U a μ ∧ ∀ (z z' : (abelianHigherDirectImageRawPresheaf f 1 X.etaleAdditiveSheaf).obj (op U)), rawRestrictedCohomologyComparison f 1 X.etaleAdditiveSheaf U z' = curveLocalCohomologyMap f U μ (rawRestrictedCohomologyComparison f 1 X.etaleAdditiveSheaf U z) → e.hom.hom.app (op U) (abelianHigherDirectImageClass f 1 X.etaleAdditiveSheaf U z') = ULift.up (a • @id Γ((Scheme.Modules.tensorPullback U.hom).obj E, ⊤) (e.hom.hom.app (op U) (abelianHigherDirectImageClass f 1 X.etaleAdditiveSheaf U z)).down)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Module-linearity is expressed on the canonical raw local cohomology classes, with every local scalar endomorphism specified on all coefficient sections by structural pullback. The statement assumes no freely chosen scalar action or comparison map. The extra statement dependencies are already recorded nodes supplying the exact constructions used in this formulation."
  }
 }
