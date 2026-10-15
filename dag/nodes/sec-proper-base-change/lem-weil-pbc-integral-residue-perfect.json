@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-integral-residue-perfect",
+ "kind": "statement",
+ "title": "The integral residue coefficient complex is dualizable",
+ "statement": "Fix a prime ℓ and a normed field E with a normed ℚ_ℓ-algebra structure. Use the continuous integral and residue coefficient objects and quotient map of [def-weil-pbc-continuous-integral-coefficients]. For every scheme T, restrict the regular residue module on T along the integral quotient coefficient map and place it in degree zero of the derived category of internal integral module objects. This object is dualizable. No finite-dimensionality, finite-type, nonemptiness, or characteristic assumption on T is needed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), perfect coefficient input; the two-term free resolution of O_E/ℓ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Apply exact monoidal inverse image from the profinite point to the proved integralModuleReductionSequence_shortExact. Exactness follows from left adjointness, preservation of finite limits, and additivity. Its first two terms are inverse images of the regular integral module.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify each of these terms with the regular module of the pulled integral ring. The isomorphism has the identity on underlying sheaves, and the action equation follows from monoidality. They are tensor units and hence dualizable.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved library theorem DerivedCategory.isDualizable_singleFunctor_obj_of_shortExact to this short exact sequence and the two regular modules. Transport the third term through Functor.mapModComapIso and the inverse-image regular-module isomorphism. This is precisely the restricted residue module in the statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), perfect coefficient input; the two-term free resolution of O_E/ℓ",
+  "note": "C2 specialization to the actual internal module objects; the complete argument and the remaining interface work are recorded in the module docstring and report."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A short exact sequence of modules with finite free first two terms gives a dualizable object in the derived category",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: the search request failed; no match verdict was obtained from this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a short exact sequence has two dualizable terms then the third is dualizable in the derived category",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂'; CategoryTheory.Abelian.Ext.contravariantSequence_exact; CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃'; CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁'; CategoryTheory.Abelian.Ext.covariant_sequence_exact₂'; CategoryTheory.Abelian.Ext.covariant_sequence_exact₃'; CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished; CategoryTheory.ShortComplex.shortExact_iff_op",
+   "verdict": "No matching Mathlib theorem for derived dualizability of internal module objects. The library DualizableShortExact theorem applies and the specialized proof is complete."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizable.*ShortExact|ShortExact.*dualizable|isDualizable_singleFunctor",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No matching Mathlib theorem for derived dualizability of internal module objects. The library DualizableShortExact theorem applies and the specialized proof is complete."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralFiniteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Lemma 6.5.9(3), perfect coefficient input; the two-term free resolution of O_E/ℓ",
+   "via": [
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResiduePerfect",
+  "file": "lean/Sheaf/Paper/IntegralResiduePerfect.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_isDualizable",
+  "statement": "theorem integralResidue_isDualizable (T : Scheme.{u}) :\n    IsDualizable ((DerivedCategory.singleFunctor _ 0).obj\n      ((Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj\n        (Mod.regular (condensedRingObj\n          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) T))))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2885036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2885036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

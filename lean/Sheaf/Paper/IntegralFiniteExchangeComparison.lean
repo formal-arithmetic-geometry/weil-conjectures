@@ -8,8 +8,12 @@ module
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
+
+import Sheaf.Paper.IntegralResidueExchange
+import Sheaf.Paper.IntegralResiduePerfect
+import Sheaf.Paper.IntegralReductionTensor
+import Sheaf.Paper.FiniteDiscreteExchangeComparison
+import Sheaf.Paper.ConstantInternalModuleSheafEquivalence
 
 /-! # Comparison of integral reduction with finite etale exchange
 
@@ -83,6 +87,17 @@ theorem integralFiniteExchange_comparison
           ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq).app M).hom) ≅
         Arrow.mk (F.map ((Etale.baseChange
           (ModuleCat.{u + 1} (ULift.{u + 1} (integralResidue ℓ E))) sq).app L))) := by
-  sorry
+  obtain ⟨N, _, ⟨e₁⟩⟩ := integralResidueExchange_comparison ℓ E k sq M
+    (integralResidue_isDualizable ℓ E) (integralReduction_restrictTensor ℓ E)
+  have hA : (ℓ : integralResidue ℓ E) = 0 := by
+    exact Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (by simp))
+  obtain ⟨F, L, ⟨e₂⟩⟩ :=
+    finiteDiscreteExchange_comparison ℓ (integralResidue ℓ E) k hA sq N
+      (fun T ↦ by
+        have : ((Scheme.ProEt.topology T).W (A := Ab.{u + 1})).IsMonoidal :=
+          GrothendieckTopology.W.monoidal (J := Scheme.ProEt.topology T) (A := Ab.{u + 1})
+        exact constantInternalModuleSheaf_equivalence (Scheme.ProEt.topology T)
+          (ULift.{u + 1} (integralResidue ℓ E)))
+  exact ⟨F, L, ⟨e₁ ≪≫ e₂⟩⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

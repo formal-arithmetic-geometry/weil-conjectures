@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-internal-module-ab-equivalence",
+ "kind": "statement",
+ "title": "Internal modules in abelian groups are ordinary modules",
+ "statement": "Use the internal-module convention of [def-weil-pbc-proetale-modules]. For every ring R in Type u, regard its additive group as a monoid object of Ab with the tensor product over integers. There exists an equivalence functor F from internal R-module objects in Ab to ModuleCat R such that its composite with the forgetful functor to Ab is equal to the internal-module forgetful functor. This includes the zero ring and requires no commutativity or finiteness.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 5.3, pointwise module encoding; agent-expanded tensor universal-property argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the internal action on pure tensors to define r • m. The internal unit and associativity equations on 1 tensor m and (r tensor s) tensor m give the module laws; bilinearity gives the additive laws. Evaluating a morphism action equation on pure tensors gives linearity, producing a functor to ModuleCat R.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The ordinary bilinear scalar action factors through the integer tensor product. Its unit and associativity diagrams hold on pure tensors, so it constructs an internal module for each ordinary module. Tensor-product extensionality similarly lifts every ordinary linear map. This proves fullness and faithfulness of the first functor.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For every ordinary module, the inverse construction followed by the first functor has the same action, so identity on the underlying group gives an ordinary linear isomorphism. Thus the functor is essentially surjective and an equivalence. Its composite forgetful functor is definitionally the internal-module forgetful functor.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 5.3, pointwise module encoding; agent-expanded tensor universal-property argument",
+  "note": "C2 specialization to the actual internal module objects; the complete argument and the remaining interface work are recorded in the module docstring and report."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The category of internal modules over a ring in abelian groups is equivalent to the category of ordinary modules, compatibly with the underlying abelian group.",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: the search request failed; no match verdict was obtained from this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module objects over a ring in AddCommGrpCat form a category equivalent to ModuleCat R.",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.moduleCategory; ModuleCat.moduleObj; MoritaEquivalence.linear; ModuleCat.instLinear; FGModuleCat.instLinearModuleCatForget₂; ModuleCat.of; ModuleCat; ModuleCat.forget₂AddCommGroupIsEquivalence",
+   "verdict": "No Mathlib internal-module equivalence over a general ring. The integer-module equivalence does not identify internal actions over arbitrary R; the pure-tensor construction here supplies the needed equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "Mod.*ModuleCat|ModuleCat.*Mod",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean",
+   "verdict": "No Mathlib internal-module equivalence over a general ring. The integer-module equivalence does not identify internal actions over arbitrary R; the pure-tensor construction here supplies the needed equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralFiniteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Section 5.3, pointwise module encoding; agent-expanded tensor universal-property argument",
+   "via": [
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InternalModuleAbEquivalence",
+  "file": "lean/Sheaf/Paper/InternalModuleAbEquivalence.lean",
+  "declaration": "CategoryTheory.internalModuleAb_equivalence",
+  "statement": "theorem internalModuleAb_equivalence :\n    ∃ F : Mod Ab.{u} (AddCommGrpCat.of R) ⥤ ModuleCat.{u} R,\n      F.IsEquivalence ∧\n      F ⋙ forget₂ (ModuleCat.{u} R) Ab.{u} = Mod.forget (AddCommGrpCat.of R)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2885036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2885036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

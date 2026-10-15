@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-integral-reduction-tensor",
+ "kind": "statement",
+ "title": "Integral reduction after restriction is a derived tensor functor",
+ "statement": "Fix a prime ℓ and a normed field E with a normed ℚ_ℓ-algebra structure, and the coefficient objects of [def-weil-pbc-continuous-integral-coefficients]. On every scheme T let φ_T be its integral-to-residue coefficient map and B_T the regular residue module restricted along φ_T. The functor integralReduction ℓ E T followed by exact derived restriction along φ_T admits a counit from the homotopy-category localization which makes it a total left derived functor of ordinary tensoring with B_T. The tensor is the relative tensor on internal integral module objects. This asserts the universal property for the specified derived extension functor, not only a comparison after forgetting scalar actions.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), tensor interpretation of coefficient change; coequalizer and K-flat universal-property argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Use Mod.extendForgetTensorObjIso for the two coequalizer presentations. To verify integral linearity, precompose with R tensor extendπ, which is an epimorphism. The extension and relative-tensor balancing equations reduce both sides to the same multiplication composite; associator naturality proves equality. Lift the underlying isomorphisms by Mod.isoMk. Faithfulness of Mod.forget detects the naturality equation supplied by Mod.extendForgetTensorIso.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the counit for derived extension followed by exact restriction: whisker the extension counit by derived restriction, use mapDerivedCategoryFactorsh, then mapHomotopyCategoryCompIso. Compose with the homotopy image of the preceding tensor isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Tensor with a fixed module preserves quasi-isomorphisms between K-flat complexes. Use the proved acyclic_tensorRight_of_kFlat theorem and the braiding, then Functor.PreservesKFlatQuasiIso.mk'. On a K-flat complex, the constructed counit is a composite of the invertible extension counit and isomorphisms. Apply isLeftDerivedFunctor_iff_isIso_app_of_kFlat. This gives exactly the universal property in the statement, with no flatness assumption on the residue coefficient itself.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), tensor interpretation of coefficient change; coequalizer and K-flat universal-property argument",
+  "note": "C2 specialization to the actual internal module objects; the complete argument and the remaining interface work are recorded in the module docstring and report."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars followed by restriction of scalars is naturally isomorphic to tensoring with the restricted regular module",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: the search request failed; no match verdict was obtained from this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars followed by restriction of scalars is naturally isomorphic to tensoring with the restricted regular module",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "verdict": "Mathlib has the ordinary ModuleCat extension/restriction adjunction, but no corresponding internal-module comparison. The underlying comparison already in the library is lifted to a linear isomorphism here and derived using K-flat complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*restrictScalars|restrictScalars.*extendScalars",
+   "date": "2026-10-16",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Descent.lean; Mathlib/Algebra/Category/ModuleCat/Descent.lean; Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "verdict": "Mathlib has the ordinary ModuleCat extension/restriction adjunction, but no corresponding internal-module comparison. The underlying comparison already in the library is lifted to a linear isomorphism here and derived using K-flat complexes.",
+   "subdirectory": "Algebra/Category"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralFiniteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Lemma 6.5.9(3), tensor interpretation of coefficient change; coequalizer and K-flat universal-property argument",
+   "via": [
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionTensor",
+  "file": "lean/Sheaf/Paper/IntegralReductionTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralReduction_restrictTensor",
+  "statement": "theorem integralReduction_restrictTensor (T : Scheme.{u}) :\n    ∃ ε : DerivedCategory.Qh ⋙ (integralReduction ℓ E T ⋙\n          (Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).mapDerivedCategory) ⟶\n        Functor.mapHomotopyCategory\n          (tensorLeft ((Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj\n            (Mod.regular (condensedRingObj\n              (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) T)))) (.up ℤ) ⋙\n          DerivedCategory.Qh,\n      Functor.IsLeftDerivedFunctor\n        (integralReduction ℓ E T ⋙\n          (Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).mapDerivedCategory)\n        ε (HomotopyCategory.quasiIso\n          (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n            (condensedRingObj (integralCoeff ℓ E) T)) (.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2885036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2885036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

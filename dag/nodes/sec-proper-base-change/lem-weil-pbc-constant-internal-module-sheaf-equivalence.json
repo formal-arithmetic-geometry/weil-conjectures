@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-constant-internal-module-sheaf-equivalence",
+ "kind": "statement",
+ "title": "Internal modules over a constant ring sheaf are module-valued sheaves",
+ "statement": "Use the internal module convention of [def-weil-pbc-proetale-modules]. Let C be a category with a Grothendieck topology J and let R be a ring. Use abelian groups and R-modules in universe w. Assume weak abelian sheafification, monoidality of J-equivalences for the tensor of abelian presheaves, sheaf composition with the module-to-abelian forgetful functor, and the size-specific limits and limit preservation/reflection hypotheses written in Lean. Sheafify the constant RingCat R presheaf after forgetting to abelian groups. There exists an equivalence functor from internal modules over this sheafified constant ring to Sheaf J (ModuleCat R), with a natural isomorphism from its composite with the ordinary additive-sheaf forgetful functor to the internal-module forgetful functor. R need not be commutative or finite and C or its sheaves need not be nonempty.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 5.3, constant coefficient sheaf encoding; Stacks Project Tag 093I; agent-expanded tensor and monoidal sheafification argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate internal constant-ring presheaf modules at each object, using action naturality for restriction linearity. Conversely form an internal presheaf action with the given component actions. The internal unit, associativity and morphism diagrams hold objectwise. Fullness, faithfulness and essential surjectivity follow from these inverse constructions. Compose with the proved internal-module Ab encoding to get ordinary module presheaves, preserving underlying additive presheaves.",
+   "uses": [
+    "lem-weil-pbc-internal-module-ab-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Lift the monoidal sheafification adjunction to internal modules along the ring sheafification unit. Its adjoint ring map is the identity. The lifted counit forgets to the abelian sheafification counit and is invertible, so the lifted right adjoint is fully faithful. Compose it with the presheaf encoding. Its values have underlying additive presheaves that are sheaves, hence are module-valued sheaves by reflection of the relevant limits.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a module-valued sheaf, choose a preimage under the proved presheaf equivalence. Its additive presheaf is a sheaf, so the module sheafification unit is invertible after forgetting and hence invertible. Sheafify this preimage and transport the inverse unit through the presheaf equivalence to prove essential surjectivity. Full faithfulness follows through the inclusion of sheaves into presheaves. Finally lift the equality of the underlying presheaf functors through that fully faithful inclusion to obtain the natural isomorphism of underlying abelian sheaf functors.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-internal-module-ab-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 5.3, constant coefficient sheaf encoding; Stacks Project Tag 093I; agent-expanded tensor and monoidal sheafification argument",
+  "note": "C2 specialization to the actual internal module objects; the complete argument and the remaining interface work are recorded in the module docstring and report."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal modules over the sheafification of a constant ring in abelian sheaves are equivalent to sheaves of ordinary modules over that ring.",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: the search request failed; no match verdict was obtained from this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between internal modules over a constant ring object in abelian sheaves and sheaves with values in ModuleCat R.",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.toSheafCompSheafToPresheafIso; SheafOfModules.forgetToSheafModuleCat; SheafOfModules.unit; SheafOfModules.unitHomEquiv; SheafOfModules.forgetToSheafModuleCat_obj_val; SheafOfModules.unit_val; SheafOfModules.toSheaf; LightCondensed.free",
+   "verdict": "Mathlib provides SheafOfModules for the sectionwise encoding but not the internal-module tensor encoding. The proof uses the constructed pointwise equivalence and the monoidal sheafification module adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "Mod.*Sheaf|Sheaf.*Mod",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Internal/FunctorCategory.lean; Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean; Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean; Mathlib/CategoryTheory/Abelian/Basic.lean; Mathlib/CategoryTheory/Sites/Equivalence.lean; Mathlib/CategoryTheory/Sites/Equivalence.lean; Mathlib/CategoryTheory/Sites/Equivalence.lean; Mathlib/CategoryTheory/Sites/Equivalence.lean",
+   "verdict": "Mathlib provides SheafOfModules for the sectionwise encoding but not the internal-module tensor encoding. The proof uses the constructed pointwise equivalence and the monoidal sheafification module adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralFiniteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Section 5.3, constant coefficient sheaf encoding; Stacks Project Tag 093I; agent-expanded tensor and monoidal sheafification argument",
+   "via": [
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantInternalModuleSheafEquivalence",
+  "file": "lean/Sheaf/Paper/ConstantInternalModuleSheafEquivalence.lean",
+  "declaration": "CategoryTheory.constantInternalModuleSheaf_equivalence",
+  "statement": "theorem constantInternalModuleSheaf_equivalence :\n    ∃ F : CategoryTheory.Mod (Sheaf J Ab.{w}) (Sheaf.sheafifyRingPresheaf J\n          ((Functor.const Cᵒᵖ).obj (RingCat.of R))) ⥤ Sheaf J (ModuleCat.{w} R),\n      F.IsEquivalence ∧ Nonempty (F ⋙\n        sheafCompose J (forget₂ (ModuleCat.{w} R) Ab.{w}) ≅ CategoryTheory.Mod.forget _)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2885036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2885036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15263,3 +15263,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:41 L: returned deliver/J4/Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison (reviewer RETURN: (the landing tools, head 23792c763) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 22:41 L: returned deliver/K1/Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation (reviewer RETURN: (the landing tools, head c741c1f66) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 22:41 L: merged deliver/A2/Sheaf.Paper.ContinuousExchangeIntegralModel (stage 3; reviewer PASS; first push; landing 20261015T224107-L-2884881 (interface); batch 20261015T224105; modules 7; new nodes 6)
+- 22:41 L: merged deliver/C2/Sheaf.Paper.IntegralFiniteExchangeComparison (stage 3; reviewer PASS; first push; landing 20261015T224107-L-2885036 (interface); batch 20261015T224105; modules 7; new nodes 6)

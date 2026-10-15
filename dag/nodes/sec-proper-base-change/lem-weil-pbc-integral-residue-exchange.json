@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-integral-residue-exchange",
+ "kind": "statement",
+ "title": "Integral reduction compares exchange to residue-coefficient exchange",
+ "statement": "Use the continuous integral coefficient ring O_E and residue A=O_E/ℓ, coefficient maps and derived reduction of [def-weil-pbc-continuous-integral-coefficients]. Fix prime ℓ, a finite normed extension E/ℚ_ℓ, a field k of positive prime characteristic different from ℓ, separated finite-type k-schemes X,Y,X′,Y′ and k-morphisms forming a commutative square. Assume for every scheme T that the restricted residue regular module in degree zero is dualizable and that derived reduction followed by restriction is a left derived functor of tensor with this module, with the counit and universal property written in Lean. For every bounded constructible integral complex M on X there is a bounded constructible residue complex N on X, isomorphic to the actual reduction of M, and an isomorphism of arrows from reduction of the specified integral boundedConstructibleBaseChange component at M to the specified residue boundedConstructibleBaseChange component at N. There is no etale realization, properness, Cartesian assumption, or assertion of exchange invertibility in this statement.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3) and Proposition 6.8.11(3); coefficient change and compatibility of adjunction mates"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "The exact integral coefficient reduction sequence gives the two-term free resolution of A. Thus reduction has Tor amplitude in [-1,0]. On a common constructible stratification for the finitely many cohomology modules of M, reduce their local finite presentations. Over the valuation ring of a finite extension of ℚ_ℓ, finite presentations and their relevant kernels remain finite; modulo ℓ their coefficient sections are locally constant. The resulting homology modules are locally finitely presented over A. The finite Tor amplitude gives boundedness. Equip the actual reduced derived object with these properties to obtain N and its isomorphism.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the supplied left-derived tensor description, exact restriction, and the canonical inverse-image coefficient comparisons to obtain the scalar pullback comparison. Tensor associativity gives its invertibility. For direct image, the supplied dualizability gives the perfect-coefficient projection formula (the finite triangle argument for the two-term free resolution). Exact restriction detects these comparisons, so the scalar direct-image comparison is invertible as an A-module map.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The comparisons are mates of the underived scalar and inverse-image comparisons. Their unit and counit identities are the equations defining mates; compatibility with composition follows from the coefficientMap and pullback composition equations. Substitute them into the unit-square-counit formula defining boundedConstructibleBaseChange. The restricted adjunctions agree with the ambient adjunctions through their full-subcategory compatibility isomorphisms. The resulting equality is the commuting square between the two actual exchange components. Its endpoint comparisons are invertible and hence define the required Arrow isomorphism.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3) and Proposition 6.8.11(3); coefficient change and compatibility of adjunction mates",
+  "note": "C2 specialization to the actual internal module objects; the complete argument and the remaining interface work are recorded in the module docstring and report."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quotient coefficient ring with a two term finite free resolution commutes with derived direct image and pullback",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: the search request failed; no match verdict was obtained from this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product with a quotient by a regular element is a mapping cone and commutes with a derived direct image functor",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Tor_obj; CategoryTheory.Tor'_map_app; CategoryTheory.Tor_map; CategoryTheory.Tor'_obj_map; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "verdict": "No exact Mathlib statement. Existing flat-coefficient derivedPushHom cannot apply to O_E→O_E/ℓ. The perfectness and derived tensor inputs are proved separately in this delivery; bounded constructibility and mate coherence remain."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*proetale|proetale.*etale",
+   "date": "2026-10-16",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "verdict": "No exact Mathlib statement. Existing flat-coefficient derivedPushHom cannot apply to O_E→O_E/ℓ. The perfectness and derived tensor inputs are proved separately in this delivery; bounded constructibility and mate coherence remain."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralFiniteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Lemma 6.5.9(3) and Proposition 6.8.11(3); coefficient change and compatibility of adjunction mates",
+   "via": [
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueExchange",
+  "file": "lean/Sheaf/Paper/IntegralResidueExchange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidueExchange_comparison",
+  "statement": "theorem integralResidueExchange_comparison\n    (sq : CommSq g' f' f g)\n    (M : integralConstructible ℓ E X)\n    (hPerfect : ∀ T : Scheme.{u},\n      IsDualizable ((DerivedCategory.singleFunctor _ 0).obj\n        ((Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj\n          (Mod.regular (condensedRingObj\n            (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) T)))))\n    (hTensor : ∀ T : Scheme.{u},\n      ∃ ε : DerivedCategory.Qh ⋙ (integralReduction ℓ E T ⋙\n            (Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).mapDerivedCategory) ⟶\n          Functor.mapHomotopyCategory\n            (MonoidalCategory.tensorLeft\n            ((Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj\n              (Mod.regular (condensedRingObj\n                (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) T)))) (.up ℤ) ⋙\n            DerivedCategory.Qh,\n        Functor.IsLeftDerivedFunctor\n          (integralReduction ℓ E T ⋙\n            (Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).mapDerivedCategory)\n          ε (HomotopyCategory.quasiIso\n            (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n              (condensedRingObj (integralCoeff ℓ E) T)) (.up ℤ))) :\n    ∃ N : ProEtale.BoundedConstructible\n        (condensedRingObj (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) X),\n      Nonempty (N.obj ≅ (integralReduction ℓ E X).obj M.obj) ∧\n      Nonempty (Arrow.mk ((integralReduction ℓ E Y').map\n          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq).app M).hom) ≅\n        Arrow.mk ((boundedConstructibleBaseChange\n          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) ℓ k sq).app N).hom)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2885036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2885036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
