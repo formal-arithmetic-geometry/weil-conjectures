@@ -7,22 +7,9 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
-import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus
-import Sheaf.CategoryTheory.ExtOneExtensionClassification
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.CategoryTheory.SiteModuleSheafGluing
-import Sheaf.Paper.CondensedSheafExtContinuity
-import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.Paper.CondensedLfpCoefficientModel
+import Sheaf.Paper.CondensedStratumModelAssembly
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
@@ -101,7 +88,11 @@ theorem exists_constructible_finiteCoefficient_model
     ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
       (M_E : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ E)),
       IsConstructibleModuleObject (padicSubfieldRingObj T ℓ E) M_E ∧
-        Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).obj M_E ≅ M) :=
-  sorry
+        Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl T ℓ E)).obj M_E ≅ M) := by
+  obtain ⟨S, hS⟩ := hM
+  apply exists_finiteCoefficient_model_of_stratum_models T ℓ M S
+  intro a
+  exact exists_lfp_finiteCoefficient_model_on_immersion T (S.domain a) (S.immersion a) ℓ
+    (((upperStar Ab.{u + 1} (S.immersion a)).mapMod (padicAlgClRingObj T ℓ)).obj M) (hS a)
 
 end AlgebraicGeometry.ProEtale

@@ -35,135 +35,28 @@
  ],
  "proof": [
   {
-   "text": "First descend a sheaf P that is locally finitely presented on the whole of a topologically noetherian scheme Y. Choose a finite affine pro-etale covering V_r of Y refining its presentation cover: take a finite affine Zariski cover of Y, then the finite affine refinement in the definition of a pro-etale covering. Y is quasi-compact because its whole underlying space is noetherian. The intersection of any two affine opens is an open of that space and hence quasi-compact, so the affine-cover criterion makes Y quasi-separated; the V_r and their pairwise and triple fibre products over Y are qcqs. On Prof the coefficient sheaf underline Omega is the pointwise directed union of underline E, by its definition. Finite covers and finite overlap equalizers show this is also the sheaf colimit. The inverse image p_Y^*, being a left adjoint, preserves this colimit. Hence Omega_Y^c is colim_E E_Y^c, and the section-calculus node lifts the finitely many entries of the presentation matrices on the V_r to one finite field E.",
+   "text": "Unpack the given constructibility witness as a finite stratification S whose stratum restrictions are locally finitely presented. For every a apply finite coefficient local-finite-presentation descent to the immersion S_a→T, obtaining a locally finitely presented model over a finite field E_a, with exactly the inverse-image coefficient rings and coefficient map in the restriction.",
    "uses": [
-    "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
-    "def-weil-pbc-proetale-covering",
-    "def-weil-pbc-condensed-e-module-category",
-    "lem-weil-pbc-profinite-point-pullback",
-    "def-weil-finite-subextension-directed-set",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "def-weil-pbc-scheme-conventions"
+    "lem-weil-pbc-condensed-lfp-coefficient-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "module docstring, (Obj) descent paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Take P_{r,E} to be the cokernel of each lifted matrix. Tensor preserves cokernels, so its Omega-extension is P restricted to V_r. For two finitely presented A-module sheaves R,S on any qcqs pro-etale object V, and a coefficient system B_H with colimit B, the section-calculus Hom assertion and tensor adjunction give colim_H Hom_{B_H}(B_H tensor_A R, B_H tensor_A S) = Hom_B(B tensor_A R, B tensor_A S): the left hand groups equal Hom_A(R,B_H tensor_A S), and tensor commutes with colimits by its universal property. Apply this on the pairwise overlaps to descend the prescribed isomorphisms between the Omega-extensions of P_{r,E}, together with their inverses. Enlarge E until both inverse identities, all diagonal identities and the cocycle identities on the finitely many triple overlaps hold. Eventual equality follows from injectivity of the same Hom colimit. Thus the P_{r,E} have actual gluing isomorphisms at one field, not merely local matrices.",
+   "text": "Apply finite-stratum model assembly to S and this family of models. Its conclusion is precisely a constructible model over one finite coefficient field together with the original scalar-extension isomorphism.",
    "uses": [
-    "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
-    "def-weil-finite-subextension-directed-set"
+    "lem-weil-pbc-condensed-stratum-model-assembly"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "module docstring, (Obj) descent paragraph"
-   }
-  },
-  {
-   "text": "Apply the ringed-site module-sheaf gluing node to the covering {V_r to Y} and the descended linear isomorphisms and cocycle from step 2. Its conclusion gives an E_Y^c-module P_E and linear isomorphisms e_r:P_E restricted to V_r to P_{r,E} satisfying exactly the prescribed overlap equations. The site-identification clause of weakly-etale localization identifies these restrictions with module sheaves on (V_r)_proet: this uses its first, coefficient-independent clause, not its constant-ring clause. For restriction u_r to this slice, apply ringed-topoi tensor pullback with R=E_Y^c, S=u_r^{-1}E_Y^c and its identity ring map. Thus u_r^{-1}(Omega_Y^c tensor_{E_Y^c} P_E) is naturally (u_r^{-1}Omega_Y^c) tensor_{u_r^{-1}E_Y^c} (u_r^{-1}P_E), including its pulled-back Omega action. Composing with e_r and the cokernel comparison in step 2 gives local Omega-linear isomorphisms to P restricted to V_r. Naturality of the tensor comparison and the overlap equation for e_r make these morphisms agree on pairwise overlaps. The sheaf-Hom covering-gluing node therefore gives a unique global Omega-linear map a:Omega_Y^c tensor_{E_Y^c} P_E to P. The local inverses agree as well: on an overlap both are inverse to the same restricted map a. Applying that same node again glues them to b. Uniqueness in its statement, applied to ba and ab whose restrictions are identities, gives ba=id and ab=id. This proves the scalar-extension isomorphism without assuming tensor commutes with a product equalizer. Each e_r identifies the restriction of P_E with the cokernel of the lifted finite matrix, so this same cover witnesses local finite presentation. No covering morphism is assumed monomorphic or covering scheme noetherian.",
-   "uses": [
-    "lem-weil-pbc-site-module-sheaf-gluing",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-pur-sheaf-hom-cover-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
-    "place": "Tags 04TR (lemma-glue-sheaves), 04TQ (lemma-glue-maps), 03EL (lemma-tensor-product-pullback); applied to the (Obj) route of exact master TwoColimit.lean."
-   }
-  },
-  {
-   "text": "Use noetherian induction on the underlying closed subsets of T, asserting descent for every coefficient module sheaf on every closed subscheme Y with that support and the indicated stratified local finite presentations. The empty support has the zero model over Q_ell. Pull a stratification to a closed subscheme by taking the fibre products of its immersion strata, not by reusing their original scheme structures. The immersion factors as closed into an open; the open pulls back to its inverse-image open, and on affine charts a closed immersion R to R/I pulls back to B to B/IB. Thus each pulled-back stratum remains an immersion, and its image is the inverse image of the original stratum, so the images still partition the base. Pullback of a presentation is a presentation: inverse image preserves finite free modules and cokernels, and base change of a pro-etale cover is a cover. The coefficient identifications for these restrictions are h^{-1}p_T^* = p_Y^*, from the profinite-point pullback node. On a nonempty Y choose an irreducible component C. Finitely many closures of intersections of C with the strata cover C; irreducibility makes one closure all of C, and local closedness makes that intersection a dense open in C. Remove the other finitely many components and the closed complement of that dense open in C. The resulting nonempty topological open U of Y is contained in the image of one immersion S to Y. Regard U as its open subscheme and form S_U=S times_Y U, with h:S_U to U. This is a surjective closed immersion: factor S to Y as a closed immersion into an open W of Y; because its image contains U, U is contained in W, and base change gives a closed immersion onto all of U. It does not assert that U itself factors through S. Apply the ringed open-closed node with X=U, i=h and complementary open empty. The localization sequence has zero first term, so its unit N to h_*h^{-1}N is an isomorphism for every coefficient module N. Together with h^{-1}h_*=id this gives quasi-inverse exact module equivalences; the same argument applies in every slice after base change to a pro-etale object of U. The coefficient rings are identified by h^{-1}Omega_U^c=Omega_{S_U}^c and h^{-1}E_U^c=E_{S_U}^c, by the monoidal profinite-point comparison. Local finite presentation is reflected by this equivalence: express a presentation cover as an epimorphic family of objects of the sheaf topos and a finite free cokernel presentation in each slice. The equivalence and its slice equivalences preserve this epimorphic family, finite free modules and cokernels. Refine the transported family by representable objects; the sheaf-local definition of epimorphism says their maps cover U. The transported slice matrices therefore give pro-etale local presentations of M restricted to U. This is precisely the empty-complement form of pro-etale topological invariance, not a scheme factorization. Hence the preceding three steps give a model P_E on U. Apply lem-weil-pbc-closed-subset-closed-subscheme to the closed subset Y minus U and choose its closed subscheme Z; only the asserted existence and support equality are used. Its fibre-product stratification is constructible by the pullback argument above, so the induction hypothesis gives Q_F on Z. The support of Z is properly smaller; noetherianity gives well-founded induction. Enlarge E,F to one finite field. Every open in Y is quasi-compact, so U to Y is quasi-compact as required for subsequent open-closed localization.",
-   "uses": [
-    "lem-sc-noetherian-finite-irreducible-components",
-    "def-constructible-stratification",
-    "def-weil-finite-subextension-directed-set",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-profinite-point-pullback",
-    "def-weil-pbc-condensed-e-module-category",
-    "lem-weil-pbc-closed-subset-closed-subscheme",
-    "def-weil-closed-immersion",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-proetale-covering"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "module docstring, (Obj) descent paragraph; Stacks proetale.tex Tag 09AH lemma-ses-associated-to-open and Tag 09AA lemma-closed-immersion, empty-complement case; compare Tag 09AB lemma-thickening"
-   }
-  },
-  {
-   "text": "Write j:U into Y and i:Z into Y. The ringed open-closed node gives 0 to j!j* M to M to i_*i* M to 0. Let A_E=j!P_E and C_E=i_*Q_E be the extensions of the descended U and Z models. Their restrictions on U and Z are respectively P_E,0 and 0,Q_E, so the union of the U stratum with a stratification of Z witnesses constructibility of both. For any B-module N, tensor adjunction and j! adjunction give Hom_B(B tensor_E j!P_E,N) = Hom_E(j!P_E,Res N) = Hom_{j*E}(P_E,j*Res N) = Hom_{j*B}(j*B tensor_{j*E} P_E,j*N) = Hom_B(j!(j*B tensor_{j*E} P_E),N). Here j*Res N is Res(j*N), since the coefficient action is restricted along the same ring map. These bijections are natural in N, so the represented objects are canonically isomorphic, proving the j! scalar comparison. It commutes with i_* for finite coefficient extensions because finite free tensor is a finite direct sum, and for Omega because i_* commutes with filtered colimits and Omega is the colimit of the finite fields. Thus the outer terms of this exact sequence are the Omega-extensions of A_E and C_E.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-condensed-flat-coefficient-calculus",
-    "def-weil-pbc-condensed-e-module-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "module docstring, (Obj) descent paragraph"
-   }
-  },
-  {
-   "text": "Let delta be the degree-one derived class of that short exact sequence. Apply the flat coefficient derived adjunction to regard delta as a map C_E[0] to the restriction of (Omega tensor_E A_E)[0][1]. The restricted target is colim_{H containing E}(H tensor_E A_E)[0], by the coefficient-colimit and tensor assertions of flat coefficient calculus. These complexes are concentrated in degree zero, so they satisfy the same lower bound a=0. Since C_E is constructible, sheaf Ext-continuity with n=1 represents delta at one finite H containing E. The finite-stage adjunction identifies its representative with a class from (H tensor_E C_E)[0] to (H tensor_E A_E)[0][1]. Naturality of the colimit and adjunction ensures that its Omega-extension is exactly delta.",
-   "uses": [
-    "lem-weil-pbc-ext-one-extension-classification",
-    "lem-weil-pbc-condensed-flat-coefficient-calculus",
-    "lem-weil-pbc-condensed-sheaf-ext-continuity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "module docstring, (Obj) descent paragraph"
-   }
-  },
-  {
-   "text": "Realize this finite-stage class by a short exact sequence 0 to H tensor_E A_E to M_H to H tensor_E C_E to 0, using degree-one extension classification. The outer terms are constructible: tensor the local presentations on their finite stratifications. Serre closure makes M_H constructible. Exact Omega-extension preserves the sequence and its class; its class equals delta by the preceding step. The injectivity of extension classification gives an isomorphism from Omega tensor_H M_H to M, with identity maps on the already identified outer terms. This completes the induction and proves the stated single-sheaf conclusion.",
-   "uses": [
-    "lem-weil-pbc-ext-one-extension-classification",
-    "lem-weil-pbc-condensed-flat-coefficient-calculus",
-    "lem-weil-pbc-condensed-constructible-serre"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "module docstring, (Obj) descent paragraph"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-constructible-stratification",
-  "def-weil-closed-immersion",
-  "def-weil-finite-subextension-directed-set",
-  "def-weil-pbc-condensed-e-module-category",
-  "def-weil-pbc-proetale-covering",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-proetale-inverse-image",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "lem-sc-noetherian-finite-irreducible-components",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
-  "lem-weil-pbc-condensed-constructible-serre",
-  "lem-weil-pbc-condensed-flat-coefficient-calculus",
-  "lem-weil-pbc-condensed-sheaf-ext-continuity",
-  "lem-weil-pbc-ext-one-extension-classification",
-  "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-weil-pbc-condensed-lfp-coefficient-model",
+  "lem-weil-pbc-condensed-stratum-model-assembly"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-  "place": "module docstring, (Obj) descent paragraph"
+  "place": "(Obj) descent paragraph; finite-stratification reduction combining local model descent (steps 1--3) with model assembly (steps 4--7)"
  },
  "mathlib_searches": [
   {
@@ -271,5 +164,15 @@
   "date": "2026-10-15",
   "existing": false,
   "fixed_by": "NT-stage2-Codex-65f8f71e8"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-a87dd",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T183808-L-842976",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules and DAG nodes match the recorded statements; all delivery modules compile, and the sole importer timeout is pre-existing."
  }
 }

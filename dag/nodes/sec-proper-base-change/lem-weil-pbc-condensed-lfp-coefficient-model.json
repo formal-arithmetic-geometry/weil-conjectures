@@ -1,0 +1,181 @@
+{
+ "id": "lem-weil-pbc-condensed-lfp-coefficient-model",
+ "kind": "statement",
+ "title": "Finite coefficient model for a locally finitely presented module on an immersed stratum",
+ "statement": "Let T be a topologically noetherian scheme, f:X→T an immersion [def-weil-closed-immersion], and ℓ prime. For every locally finitely presented module M over f⁻¹Ω_T, there are a finite intermediate coefficient field E and a locally finitely presented f⁻¹E_T-module M_E with (f⁻¹Ω_T)⊗_(f⁻¹E_T)M_E ≅ M. Here Ω_T and E_T are the condensed coefficient rings of [def-weil-pbc-condensed-e-module-category], and finite fields are [def-weil-finite-subextension-directed-set].",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "module docstring, (Obj) descent paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Let f:X→T be the stated immersion. Its topological embedding makes X noetherian. The monoidal point-pullback comparisons identify f⁻¹Ω_T and f⁻¹E_T, with their coefficient maps, with Ω_X and E_X. Now apply the following finite-presentation argument on X. First descend a sheaf P that is locally finitely presented on the whole of a topologically noetherian scheme Y. Choose a finite affine pro-etale covering V_r of Y refining its presentation cover: take a finite affine Zariski cover of Y, then the finite affine refinement in the definition of a pro-etale covering. Y is quasi-compact because its whole underlying space is noetherian. The intersection of any two affine opens is an open of that space and hence quasi-compact, so the affine-cover criterion makes Y quasi-separated; the V_r and their pairwise and triple fibre products over Y are qcqs. On Prof the coefficient sheaf underline Omega is the pointwise directed union of underline E, by its definition. Finite covers and finite overlap equalizers show this is also the sheaf colimit. The inverse image p_Y^*, being a left adjoint, preserves this colimit. Hence Omega_Y^c is colim_E E_Y^c, and the section-calculus node lifts the finitely many entries of the presentation matrices on the V_r to one finite field E.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
+    "def-weil-pbc-proetale-covering",
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-profinite-point-pullback",
+    "def-weil-finite-subextension-directed-set",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, (Obj) descent paragraph"
+   }
+  },
+  {
+   "text": "Take P_{r,E} to be the cokernel of each lifted matrix. Tensor preserves cokernels, so its Omega-extension is P restricted to V_r. For two finitely presented A-module sheaves R,S on any qcqs pro-etale object V, and a coefficient system B_H with colimit B, the section-calculus Hom assertion and tensor adjunction give colim_H Hom_{B_H}(B_H tensor_A R, B_H tensor_A S) = Hom_B(B tensor_A R, B tensor_A S): the left hand groups equal Hom_A(R,B_H tensor_A S), and tensor commutes with colimits by its universal property. Apply this on the pairwise overlaps to descend the prescribed isomorphisms between the Omega-extensions of P_{r,E}, together with their inverses. Enlarge E until both inverse identities, all diagonal identities and the cocycle identities on the finitely many triple overlaps hold. Eventual equality follows from injectivity of the same Hom colimit. Thus the P_{r,E} have actual gluing isomorphisms at one field, not merely local matrices.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, (Obj) descent paragraph"
+   }
+  },
+  {
+   "text": "Apply the ringed-site module-sheaf gluing node to the covering {V_r to Y} and the descended linear isomorphisms and cocycle from step 2. Its conclusion gives an E_Y^c-module P_E and linear isomorphisms e_r:P_E restricted to V_r to P_{r,E} satisfying exactly the prescribed overlap equations. The site-identification clause of weakly-etale localization identifies these restrictions with module sheaves on (V_r)_proet: this uses its first, coefficient-independent clause, not its constant-ring clause. For restriction u_r to this slice, apply ringed-topoi tensor pullback with R=E_Y^c, S=u_r^{-1}E_Y^c and its identity ring map. Thus u_r^{-1}(Omega_Y^c tensor_{E_Y^c} P_E) is naturally (u_r^{-1}Omega_Y^c) tensor_{u_r^{-1}E_Y^c} (u_r^{-1}P_E), including its pulled-back Omega action. Composing with e_r and the cokernel comparison in step 2 gives local Omega-linear isomorphisms to P restricted to V_r. Naturality of the tensor comparison and the overlap equation for e_r make these morphisms agree on pairwise overlaps. The sheaf-Hom covering-gluing node therefore gives a unique global Omega-linear map a:Omega_Y^c tensor_{E_Y^c} P_E to P. The local inverses agree as well: on an overlap both are inverse to the same restricted map a. Applying that same node again glues them to b. Uniqueness in its statement, applied to ba and ab whose restrictions are identities, gives ba=id and ab=id. This proves the scalar-extension isomorphism without assuming tensor commutes with a product equalizer. Each e_r identifies the restriction of P_E with the cokernel of the lifted finite matrix, so this same cover witnesses local finite presentation. No covering morphism is assumed monomorphic or covering scheme noetherian. Finally transport the model and comparison back along those coefficient isomorphisms; local finite presentation is invariant under these isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-site-module-sheaf-gluing",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04TR (lemma-glue-sheaves), 04TQ (lemma-glue-maps), 03EL (lemma-tensor-product-pullback); applied to the (Obj) route of exact master TwoColimit.lean."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-scheme-conventions",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "(Obj) finite-presentation descent; parent steps 1--3, transported along the immersion coefficient comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*presentation.*descent|descent.*finite.*presentation|stratif.*model",
+   "results": "0 hits: ; no coefficient-descent or stratum-model assembly theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible module whose restrictions to a finite stratification have finite coefficient field models admits a global finite coefficient field model using extension classes",
+   "results": "8 hits: ChevalleyThm.chevalley_mvPolynomialC, ChevalleyThm.chevalley_polynomialC, Submodule.exists_finiteIndex_of_cover, Module.fgSystem.instDirectedSystemSubtypeSubmoduleFGMemValCoeLinearMapId, Module.Finite.left, FGModuleRepr, FGModuleCat.instFiniteCarrierLimitModuleCatCompForget₂, Module.Finite.of_pi; no coefficient-descent or stratum-model assembly theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "5 hits: SheafOfModules.IsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFinitePresentation.mk; no coefficient-descent or stratum-model assembly theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finitely presented module sheaf over a filtered union of coefficient fields descends to a finite intermediate coefficient field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "grep",
+   "query": "stratif.*(model|coefficient)|finite.*field.*descent|descen.*coefficient",
+   "results": "0 hits: ; no coefficient-descent or stratum-model assembly theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedFinitePresentationDescent",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "(Obj) finite-presentation descent; parent steps 1--3, transported along the immersion coefficient comparison",
+   "via": [
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedLfpCoefficientModel",
+  "file": "lean/Sheaf/Paper/CondensedLfpCoefficientModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_lfp_finiteCoefficient_model_on_immersion",
+  "statement": "theorem exists_lfp_finiteCoefficient_model_on_immersion\n    (T X : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]\n    (f : X ⟶ T) [IsImmersion f] (ℓ : ℕ) [Fact ℓ.Prime]\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ)))\n    (hM : IsLocallyFinitelyPresented\n      ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ)) M) :\n    ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n      (M_E : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))),\n      IsLocallyFinitelyPresented\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E)) M_E ∧\n      Nonempty ((Mod.extendScalars\n        ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ E))).obj M_E ≅ M)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-a87dd",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T183808-L-842976",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-a87dd",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T183808-L-842976",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules and DAG nodes match the recorded statements; all delivery modules compile, and the sole importer timeout is pre-existing."
+ }
+}
