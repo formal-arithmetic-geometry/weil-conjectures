@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Functoriality of the sequential derived inverse limit",
- "statement": "Let $\\operatorname{Tow}_{A}(T)$ be the tower category of\n[def-weil-pbc-adic-coefficient-datum], an abelian category with enough\ninjectives. Fixing a functorial K-injective resolution\n[def-weil-pbc-kinjective-resolutions] $M_\\bullet\\to I_\\bullet$ of every\nobject of $\\operatorname{Tow}_{A}(T)$, the assignment\n\n$$\n \\Rlim:D(\\operatorname{Tow}_{A}(T))\\longrightarrow D(T_{\\Proet},A),\n \\qquad\n M_\\bullet\\longmapsto\\varprojlim_nI_n\n$$\n\nis a triangulated functor, and any two such choices of functorial K-injective\nresolutions give isomorphic functors.\n\n(*Source note:* Stacks Project, Derived Categories, Definition (Tag\n[08TC](https://stacks.math.columbia.edu/tag/08TC)) defines the derived-limit\nproperty by a distinguished triangle; it does not choose functorial cones.\nTheorem (Tag [079P](https://stacks.math.columbia.edu/tag/079P)) supplies\nfunctorial K-injective resolutions in a Grothendieck abelian category.\nLemma (Tag [0BK7](https://stacks.math.columbia.edu/tag/0BK7)) gives existence\nof derived limits for inverse systems of bounded-below derived objects.\nThe unbounded strict-tower triangulated functor and the natural comparison\nbetween resolution choices asserted here require the argument below.)",
+ "statement": "Let $\\operatorname{Tow}_{A}(T)$ be the tower category of\n[def-weil-pbc-adic-coefficient-datum], an abelian category with enough\ninjectives. Fixing a functorial K-injective resolution\n[def-weil-pbc-kinjective-resolutions] $M_\\bullet\\to I_\\bullet$ of every\ncochain complex in $\\operatorname{Tow}_{A}(T)$, the assignment\n\n$$\n \\Rlim:D(\\operatorname{Tow}_{A}(T))\\longrightarrow D(T_{\\Proet},A),\n \\qquad\n M_\\bullet\\longmapsto\\varprojlim_nI_n\n$$\n\nis a triangulated functor, and any two such choices of functorial K-injective\nresolutions give isomorphic functors.\n\nIts values are sequential derived inverse limits in the sense of\n[def-weil-pbc-derived-inverse-limit].\n\n(*Source note:* Stacks Project, Derived Categories, Definition (Tag\n[08TC](https://stacks.math.columbia.edu/tag/08TC)) defines the derived-limit\nproperty by a distinguished triangle; it does not choose functorial cones.\nTheorem (Tag [079P](https://stacks.math.columbia.edu/tag/079P)) supplies\nfunctorial K-injective resolutions in a Grothendieck abelian category.\nLemma (Tag [0BK7](https://stacks.math.columbia.edu/tag/0BK7)) gives existence\nof derived limits for inverse systems of bounded-below derived objects.\nThe unbounded strict-tower triangulated functor and the natural comparison\nbetween resolution choices asserted here require the argument below.)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-rlim-functoriality.md",
   "place": "node prop-weil-pbc-rlim-functoriality, order 1242",
@@ -31,7 +31,8 @@
   "def-weil-pbc-kinjective-resolutions",
   "def-weil-derived-limit",
   "def-sp-kinjective-bridge",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-derived-inverse-limit"
  ],
  "proof": [
   {
@@ -248,5 +249,86 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-f8a30f419 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, and source passages; verified all five steps, strict-tower homotopies, unbounded triangulatedness, and natural resolution independence. No new nodes or repairs. Accepted prop-pur-kinjective-resolutions-exist as a generic tool. General-tower computation and condensed-coefficient target comparisons remain outstanding dependencies. Detailed checks are in review.md."
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "Q09 stage 2",
+  "old_statement": "Let $\\operatorname{Tow}_{A}(T)$ be the tower category of\n[def-weil-pbc-adic-coefficient-datum], an abelian category with enough\ninjectives. Fixing a functorial K-injective resolution\n[def-weil-pbc-kinjective-resolutions] $M_\\bullet\\to I_\\bullet$ of every\nobject of $\\operatorname{Tow}_{A}(T)$, the assignment\n\n$$\n \\Rlim:D(\\operatorname{Tow}_{A}(T))\\longrightarrow D(T_{\\Proet},A),\n \\qquad\n M_\\bullet\\longmapsto\\varprojlim_nI_n\n$$\n\nis a triangulated functor, and any two such choices of functorial K-injective\nresolutions give isomorphic functors.\n\n(*Source note:* Stacks Project, Derived Categories, Definition (Tag\n[08TC](https://stacks.math.columbia.edu/tag/08TC)) defines the derived-limit\nproperty by a distinguished triangle; it does not choose functorial cones.\nTheorem (Tag [079P](https://stacks.math.columbia.edu/tag/079P)) supplies\nfunctorial K-injective resolutions in a Grothendieck abelian category.\nLemma (Tag [0BK7](https://stacks.math.columbia.edu/tag/0BK7)) gives existence\nof derived limits for inverse systems of bounded-below derived objects.\nThe unbounded strict-tower triangulated functor and the natural comparison\nbetween resolution choices asserted here require the argument below.)",
+  "what": "K-injectivity is a property of cochain complexes. Resolving only objects of the abelian tower category (placed in degree zero) does not specify the asserted unbounded functor. Replace every object by every cochain complex, as required by the original proof steps 2–4 and Stacks 079P. Make the already asserted Rlim value property cite its existing definition explicitly, following proof step 5; no boundedness, coefficient or geometric hypothesis is changed.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tag 079P (every complex, functorially), together with blueprint prop-weil-pbc-rlim-functoriality, proof steps 2–5"
+  },
+  "citers": [
+   {
+    "id": "cor-weil-pbc-constructible-complete",
+    "holds": true,
+    "note": "Uses the triangulated derived-limit functor on derived strict towers, its composition/identity laws or its action on isomorphisms; resolving all cochain complexes is exactly the intended construction, so this use is unchanged."
+   },
+   {
+    "id": "def-weil-pbc-completed-base-change-map",
+    "holds": true,
+    "note": "Uses the triangulated derived-limit functor on derived strict towers, its composition/identity laws or its action on isomorphisms; resolving all cochain complexes is exactly the intended construction, so this use is unchanged."
+   },
+   {
+    "id": "def-weil-pbc-completed-pullback",
+    "holds": true,
+    "note": "Uses the triangulated derived-limit functor on derived strict towers, its composition/identity laws or its action on isomorphisms; resolving all cochain complexes is exactly the intended construction, so this use is unchanged."
+   },
+   {
+    "id": "lem-weil-pbc-levelwise-isomorphism-cones",
+    "holds": true,
+    "note": "Uses the triangulated derived-limit functor on derived strict towers, its composition/identity laws or its action on isomorphisms; resolving all cochain complexes is exactly the intended construction, so this use is unchanged."
+   },
+   {
+    "id": "lem-weil-pbc-rectangle-derived-limit",
+    "holds": true,
+    "note": "Uses the triangulated derived-limit functor on derived strict towers, its composition/identity laws or its action on isomorphisms; resolving all cochain complexes is exactly the intended construction, so this use is unchanged."
+   },
+   {
+    "id": "lemma-weil-pbc-completed-exchange-coherence",
+    "holds": true,
+    "note": "Uses the triangulated derived-limit functor on derived strict towers, its composition/identity laws or its action on isomorphisms; resolving all cochain complexes is exactly the intended construction, so this use is unchanged."
+   },
+   {
+    "id": "lemma-weil-pbc-completed-map-reduction",
+    "holds": true,
+    "note": "Uses the triangulated derived-limit functor on derived strict towers, its composition/identity laws or its action on isomorphisms; resolving all cochain complexes is exactly the intended construction, so this use is unchanged."
+   },
+   {
+    "id": "thm-weil-pbc-finite-extension",
+    "holds": true,
+    "note": "Uses the triangulated derived-limit functor on derived strict towers, its composition/identity laws or its action on isomorphisms; resolving all cochain complexes is exactly the intended construction, so this use is unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-adic-coefficient-datum",
+   "def-weil-pbc-kinjective-resolutions",
+   "def-weil-derived-limit",
+   "def-sp-kinjective-bridge",
+   "def-weil-abstract-derived-category"
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SequentialDerivedInverseLimitFunctor",
+  "declaration": "AlgebraicGeometry.ProEtale.sequentialDerivedInverseLimit_functorial",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sequentialDerivedInverseLimit_functorial"
+  ],
+  "file": "lean/Sheaf/Paper/SequentialDerivedInverseLimitFunctor.lean",
+  "statement": "theorem sequentialDerivedInverseLimit_functorial (T : Scheme.{t}) {A : Type t} [CommRing A] (d : Scheme.AdicCoefficientDatum A) [EnoughInjectives (Scheme.CompletedAdicTowers T d)] (I : CochainComplex (Scheme.CompletedAdicTowers T d) ℤ ⥤ CochainComplex (Scheme.CompletedAdicTowers T d) ℤ) (η : 𝟭 (CochainComplex (Scheme.CompletedAdicTowers T d) ℤ) ⟶ I) (hI : ∀ M : CochainComplex (Scheme.CompletedAdicTowers T d) ℤ, QuasiIso (η.app M) ∧ (I.obj M).IsKInjective) : ∃ (RF : DerivedCategory (Scheme.CompletedAdicTowers T d) ⥤ DerivedCategory (Scheme.CompletedAdicModules T d)) (_ε : DerivedCategory.Q ⋙ RF ≅ I ⋙ (lim : Scheme.CompletedAdicTowers T d ⥤ Scheme.CompletedAdicModules T d).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q), (∃ (_ : RF.CommShift ℤ), RF.IsTriangulated) ∧ (∀ M : DerivedCategory (Scheme.CompletedAdicTowers T d), IsAdicSequentialDerivedLimit T d M (RF.obj M)) ∧ ∀ (J : CochainComplex (Scheme.CompletedAdicTowers T d) ℤ ⥤ CochainComplex (Scheme.CompletedAdicTowers T d) ℤ) (ν : 𝟭 (CochainComplex (Scheme.CompletedAdicTowers T d) ℤ) ⟶ J), (∀ M : CochainComplex (Scheme.CompletedAdicTowers T d) ℤ, QuasiIso (ν.app M) ∧ (J.obj M).IsKInjective) → ∀ (RF' : DerivedCategory (Scheme.CompletedAdicTowers T d) ⥤ DerivedCategory (Scheme.CompletedAdicModules T d)), Nonempty (DerivedCategory.Q ⋙ RF' ≅ J ⋙ (lim : Scheme.CompletedAdicTowers T d ⥤ Scheme.CompletedAdicModules T d).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) → Nonempty (RF ≅ RF')",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-383f89834",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Reviewed immutable statements, dependencies, sources, declarations, correction audit, universes, edge cases, and report. Both modules compile cleanly through scompile.py’s local side overlay; signatures match verbatim. No faults found. Recorded in review.md; branch and project clones unchanged.",
+  "statement_corrected": true
  }
 }
