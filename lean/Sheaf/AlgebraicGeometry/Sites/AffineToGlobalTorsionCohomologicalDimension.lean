@@ -6,6 +6,16 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen
+import Sheaf.AlgebraicGeometry.ZariskiDimensionBound
+import Sheaf.CategoryTheory.GrothendieckComposablePair
+import Sheaf.CategoryTheory.GrothendieckSpectralSequence
+import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
+import Sheaf.CategoryTheory.SiteExtensionByZeroPresheafAdjoint
+import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # From affine to global torsion cohomological dimension
