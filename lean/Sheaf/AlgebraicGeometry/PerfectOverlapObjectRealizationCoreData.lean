@@ -1181,6 +1181,37 @@ theorem transportDataOfComposite_diagram
   unfold transportDataOfComposite
   rfl
 
+/-- The first site field is the fixed return comparison for the inverse-image open.
+This follows by projecting the first site component of the composite transport
+construction; no choice of restriction diagram affects the component. -/
+theorem transportDataOfComposite_siteU
+    {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
+    (hgf : g ≫ f = gf) (U V : Y₀.Opens)
+    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)
+    (E : schemeDerivedCategory X)
+    (φU : (derivedPullback (gf ∣_ U)).obj A ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ U)).mapDerivedCategory.obj E)
+    (φV : (derivedPullback (gf ∣_ V)).obj B ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ V)).mapDerivedCategory.obj E) :
+    (transportDataOfComposite f g gf hgf U V A B E φU φV).siteU =
+      openSiteReturnIso X (gf ⁻¹ᵁ U) := by
+  rfl
+
+/-- The second site field is the fixed return comparison for its inverse-image open.
+Projecting the second site component of the composite transport gives this equation. -/
+theorem transportDataOfComposite_siteV
+    {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
+    (hgf : g ≫ f = gf) (U V : Y₀.Opens)
+    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)
+    (E : schemeDerivedCategory X)
+    (φU : (derivedPullback (gf ∣_ U)).obj A ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ U)).mapDerivedCategory.obj E)
+    (φV : (derivedPullback (gf ∣_ V)).obj B ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ V)).mapDerivedCategory.obj E) :
+    (transportDataOfComposite f g gf hgf U V A B E φU φV).siteV =
+      openSiteReturnIso X (gf ⁻¹ᵁ V) := by
+  rfl
+
 
 
 end
