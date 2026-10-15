@@ -28,62 +28,44 @@
  ],
  "proof": [
   {
-   "text": "Put h=n+1 and P_r={U_{r,i}}_{i∈N_r} for r≤n, P_h=V. For q≤n let H_q be the formal family of triples (r,σ,i), with σ:[q]↠[r] and i∈N_r. The split hypothesis gives a componentwise isomorphism E_q:H_q→K_q, whose component e_{σ,i} is K(σ)|_{U_{r,i}}. Set H_h to the displayed new family, also regarding V_j as the triple (h,id,j). Eventually transport the operators on H_q through E_q for q≤n, so the resulting L agrees exactly with K in those degrees. Each H_q has finite index set: N_r is a subset of finite I_r, and there are finitely many functions between any two finite ordinals.",
+   "text": "Compose the given v with every matching projection, obtaining a compatible boundary cone p on V. Apply exists_attachment_operators to get the explicitly constructed extension L, its strict restriction equality e, top-family equality t, prescribed new and old faces, and normalized top epi API.",
    "uses": [
-    "def-weil-pbc-simplicial-coskeleton",
-    "def-weil-pbc-formal-coproduct"
+    "lem-weil-pbc-site-split-attachment-operators"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 0DAV, lemma-hypercovering-object, construction of the extension; Tag 0DAU, split decomposition"
-   }
+   "elementary": true
   },
   {
-   "text": "For every α:[q]→[h] with q≤n define B_α:V→K_q as follows. Choose a missing value a of α and write α=δ_aβ; put B_α=K(β)v_a. For two missing values a<b, α factors through the injection κ omitting both a and b, say α=κγ. Writing κ=δ_aδ_{b-1}=δ_bδ_a gives K(β)v_a=K(γ) d_{b-1}v_a and K(β′)v_b=K(γ) d_a v_b. These agree by the defining equality of the limit M. For n=0 no map α:[q]→[1] with q≤0 can omit both values, so there is no independence condition. Moreover B_{αβ}=K(β)B_α whenever q,p≤n and β:[p]→[q], using the same missing value a. For a proper injection τ:[t]↪[h] write b_τ=B_τ; for an injection τ:[t]↪[r] with r≤n, write b_τ=K(τ)|_{P_r}. These are morphisms of formal families, including their index functions, and they obey b_{τη}=K(η)b_τ for injections η into [t]. Set b_id=id on P_r, including P_h.",
+   "text": "Apply split_attachment_of_degeneracies to this epi API. It gives IsSplit L and identifies exactly the new V-indices with top nondegenerate indices.",
    "uses": [
-    "def-weil-pbc-simplicial-coskeleton",
-    "def-weil-pbc-formal-coproduct"
+    "lem-weil-pbc-site-split-attachment-split"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 0DAV, lemma-hypercovering-object, construction of faces from the boundary map"
-   }
+   "elementary": true
   },
   {
-   "text": "Define F(α):H_b→H_a for EVERY order-preserving α:[a]→[b], a,b≤h. On a source summand (r,σ,i), factor σ α=τ ρ uniquely, where ρ:[a]↠[t] enumerates the image and τ:[t]↪[r] is its increasing inclusion. If t=h then a=b=r=h and σ=α=τ=ρ=id, so use the identity on V_i. Otherwise apply the component of b_τ to P_{r,i}, obtaining an index k of K_t and a map f:P_{r,i}→U_{t,k}. The split bijection writes k uniquely as K(λ)(j), λ:[t]↠[u], j∈N_u. Send this component to the summand (u,λρ,j) of H_a by e_{λ,j}^{-1}f. This includes maps into the new degree even when α is not surjective, and all nonidentity endomorphisms of [h]. For a,b≤n it is exactly E_a^{-1}K(α)E_b, because K(ρ)K(τ) applied to the source component is K(σα), and K(ρ)e_{λ,j}=e_{λρ,j}. The last equality also proves that a surjection α simply sends (r,σ,i) to (r,σα,i) with identity component.",
+   "text": "The lower operators of L, transported through e, form a boundary cone by L.map_comp. The matching universal property supplies b with all projection equations. Both v and newInclusion≫eqToHom t≫b induce the cone p, so uniqueness gives the required restriction v.",
    "uses": [
-    "def-weil-pbc-simplicial-coskeleton",
-    "def-weil-pbc-formal-coproduct"
+    "def-weil-pbc-site-split-attachment-data"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 0DAV, lemma-hypercovering-object, verification of simplicial identities and splitness; Tag 0DAU"
-   }
+   "elementary": true
   },
   {
-   "text": "Check composition for α:[a]→[b] and β:[p]→[a] componentwise. In the notation of step 3, let k=K(λ)(j) be the index of b_τ(i). Factor ρβ=ηγ, with η:[s]↪[t], γ:[p]↠[s]. Then σαβ=(τη)γ is the image factorization for the composite, and b_{τη}(i)=K(η)b_τ(i) by step 2 (or functoriality of K when r≤n). The second operator, applied to the intermediate summand (u,λρ,j), factors λρβ: factor λη=ξζ, with ξ injective and ζ surjective, so its image factorization is ξ(ζγ). Since t,u,s≤n, functoriality in the old truncation gives K(η)e_{λ,j}=K(λη)|_{P_{u,j}}=K(ζ)K(ξ)|_{P_{u,j}}. If K(ξ)(j)=K(μ)(l), split normalization therefore makes the final label (w,μζγ,l) and final component e_{μ,l}^{-1}(K(ξ)|_{P_{u,j}}) e_{λ,j}^{-1}f on the two-step route. On the direct route K(η)f=K(ζ)(K(ξ)|_{P_{u,j}})e_{λ,j}^{-1}f; its normalization uses label μζ in degree s and e_{μζ,l}=K(ζ)e_{μ,l}, giving exactly the same final label and component. All these e-maps are the component isomorphisms supplied by the split hypothesis. The exceptional t=h case is an identity operator, and if the direct composite has image h then both factors are identities on [h]. Thus F(β)F(α)=F(αβ) in every case; the identity formula follows by normalizing σ itself. Transport F through E_q in degrees q≤n and the identity in degree h to obtain the required functor L. Surjections into degree h send the old normalized labels to (r,σα,i), with identity components, so their images are exactly all summands with r≤n and none in J. Every such summand is obtained using σ itself. Hence the new nondegenerate set is J and the split component maps are identities. Step 2 gives the prescribed faces on V, while step 3 in a lower target gives K(σδ_a) on each old degenerate summand. Finiteness follows from step 1. When n=0, L_1=V⨿K_0. When n=1, the three surjections give the families P_0 and two copies of P_1, so L_2=V⨿P_0⨿P_1⨿P_1; the actual number of old summands is |N_0|+2|N_1|, not necessarily three. Empty families, empty objects, and J=∅ require no change to any formula.",
+   "text": "Old terms inherit finiteness from K by e. The new index set is V.I plus Labels K (n+1), finite by finite_labels and the finite sum instance; transport finiteness along t. Specialize the all-lower old-summand face equation to the codimension-one face δ_i. These give all remaining conclusion clauses.",
    "uses": [
-    "def-weil-pbc-simplicial-coskeleton",
-    "def-weil-pbc-formal-coproduct"
+    "def-weil-pbc-site-split-attachment-data",
+    "lem-weil-pbc-site-split-attachment-operators"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 0DAV, final construction clauses; n=0 convention"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-simplicial-coskeleton",
-  "def-weil-pbc-formal-coproduct"
+  "def-weil-pbc-site-split-attachment-data",
+  "lem-weil-pbc-site-split-attachment-operators",
+  "lem-weil-pbc-site-split-attachment-split"
  ],
  "proof_origin": {
-  "by": "document",
   "document": "literature/stacks-project/hypercovering.tex",
-  "place": "Tag 0DAV (lemma-hypercovering-object), proof; Tag 0DAU (lemma-split)"
+  "place": "Tags 0DAV (lemma-hypercovering-object), construction and omitted composition verification, and 0DAU (lemma-split); explicit normalized-coordinate expansion of the finite attachment argument.",
+  "by": "document"
  },
  "mathlib_searches": [
   {
@@ -184,18 +166,6 @@
   "module": "Sheaf.Paper.SiteHypercoverFiniteExtension",
   "declaration": "CategoryTheory.FormalSplitAttachment.exists_split_truncated_extension",
   "declarations": [
-   "CategoryTheory.FormalSplitAttachment.degree",
-   "CategoryTheory.FormalSplitAttachment.term",
-   "CategoryTheory.FormalSplitAttachment.operator",
-   "CategoryTheory.FormalSplitAttachment.IsNondegenerate",
-   "CategoryTheory.FormalSplitAttachment.Labels",
-   "CategoryTheory.FormalSplitAttachment.labelIndex",
-   "CategoryTheory.FormalSplitAttachment.IsSplit",
-   "CategoryTheory.FormalSplitAttachment.BoundaryCone",
-   "CategoryTheory.FormalSplitAttachment.IsMatching",
-   "CategoryTheory.FormalSplitAttachment.attachedFamily",
-   "CategoryTheory.FormalSplitAttachment.newInclusion",
-   "CategoryTheory.FormalSplitAttachment.oldInclusion",
    "CategoryTheory.FormalSplitAttachment.exists_split_truncated_extension"
   ],
   "file": "lean/Sheaf/Paper/SiteHypercoverFiniteExtension.lean",
@@ -204,5 +174,15 @@
   "by": "NS",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f0594",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T154201-L-160991",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered six modules, DAG records, change record, and report matched the packet; all modules and the direct importer compiled cleanly, with no forbidden constructs or remaining sorry."
  }
 }

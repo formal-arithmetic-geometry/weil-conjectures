@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-site-split-attachment-composition",
+ "kind": "statement",
+ "title": "Contravariant composition of all attachment operators",
+ "statement": "With K split, V a formal family, p a compatible boundary cone, and the explicit operators attachmentMap [def-weil-pbc-site-split-attachment-operators], for any q,r,s≤n+1 and ordinal maps α:[q]→[r], β:[r]→[s], the operator for α followed by β is attachmentMap(β) followed by attachmentMap(α). No finiteness or matching universal property is required.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 0DAV (lemma-hypercovering-object), construction and omitted composition verification, and 0DAU (lemma-split); explicit normalized-coordinate expansion of the finite attachment argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-split-attachment-operators"
+ ],
+ "proof": [
+  {
+   "text": "Split each of q,r,s into old degree or top degree. Old--old--old is K.map_comp. The other seven cases are respectively face naturality, lift-face, end-face, lift naturality, end-lift, lift-end and end composition from the explicit operator identities. Whisker each identity by the source and target equality transports; the intermediate inverse equality transports cancel. These eight cases exhaust all possible ordinal operators.",
+   "uses": [
+    "def-weil-pbc-site-split-attachment-operators"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-split-attachment-operators"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 0DAV (lemma-hypercovering-object), proof; Tag 0DAU (lemma-split); explicit epi--mono construction and eight-case composition proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend a split truncated simplicial object by a family with compatible boundary maps",
+   "results": "8 hits: CategoryTheory.SimplicialObject.truncation, CategoryTheory.SimplicialObject.Truncated.trunc, CategoryTheory.SimplicialObject.Truncated.sk, CategoryTheory.SimplicialObject.Truncated, CategoryTheory.SimplicialObject.sk, CategoryTheory.SimplicialObject.Truncated.cosk, CategoryTheory.SimplicialObject.Truncated.trunc_obj_obj, CategoryTheory.SimplicialObject.instCategoryTruncated",
+   "date": "2026-10-15",
+   "verdict": "No matching truncated attachment theorem; the hits concern truncation, skeleton/coskeleton, full simplicial splitting or unrelated split epis."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Splitting",
+   "results": "12 hits: CategoryTheory.SimplicialObject.Splitting, CategoryTheory.SimplicialObject.Splitting.N, CategoryTheory.SimplicialObject.Split.mk, CategoryTheory.SimplicialObject.Split.mk', CategoryTheory.SimplicialObject.Split.s, CategoryTheory.SimplicialObject.Split.mk'_X, CategoryTheory.SimplicialObject.Split.mk'_s, CategoryTheory.SimplicialObject.Splitting.cofan",
+   "date": "2026-10-15",
+   "verdict": "No matching truncated attachment theorem; the hits concern truncation, skeleton/coskeleton, full simplicial splitting or unrelated split epis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a split truncated simplicial family by prescribed compatible faces and new nondegenerate simplices",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "Unavailable: the search service returned Internal Server Error."
+  },
+  {
+   "tool": "grep",
+   "query": "split.*trunc|trunc.*split|FormalSplitAttachment|attachedFamily",
+   "results": "6 hits: Mathlib/Combinatorics/SetFamily/AhlswedeZhang.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/Data/Finsupp/ToDFinsupp.lean",
+   "date": "2026-10-15",
+   "verdict": "No matching truncated attachment theorem; the hits concern truncation, skeleton/coskeleton, full simplicial splitting or unrelated split epis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SiteHypercoverFiniteExtension",
+  "date": "2026-10-15",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof paragraph 1: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; downstream categorical split-skeleton attachment used by the finite-basis hypercover construction along the recorded via chain.",
+   "via": [
+    "lem-weil-pbc-site-hypercover-finite-extension",
+    "lem-weil-pbc-site-finite-basis-hypercover-existence",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SiteHypercoverAttachmentComposition",
+  "file": "lean/Sheaf/Paper/SiteHypercoverAttachmentComposition.lean",
+  "declaration": "CategoryTheory.FormalSplitAttachment.attachmentMap_comp",
+  "declarations": [
+   "CategoryTheory.FormalSplitAttachment.attachmentMap_comp"
+  ],
+  "statement": "theorem attachmentMap_comp (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K) (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (q r s : Fin (n + 2)) (α : SimplexCategory.mk q.val ⟶ SimplexCategory.mk r.val) (β : SimplexCategory.mk r.val ⟶ SimplexCategory.mk s.val) : attachmentMap K hs V p q s (α ≫ β) = attachmentMap K hs V p r s β ≫ attachmentMap K hs V p q r α",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f0594",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T154201-L-160991",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f0594",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T154201-L-160991",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered six modules, DAG records, change record, and report matched the packet; all modules and the direct importer compiled cleanly, with no forbidden constructs or remaining sorry."
+ }
+}

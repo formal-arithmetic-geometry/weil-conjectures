@@ -1,0 +1,167 @@
+{
+ "id": "def-weil-pbc-site-split-attachment-operators",
+ "kind": "definition",
+ "title": "Explicit split-attachment operators and image-factorization identities",
+ "statement": "Let K be a split n-truncated simplicial formal family and V a formal family with compatible boundary cone p [def-weil-pbc-site-split-attachment-data]. Define a family in degrees q≤n+1 equal to K_q in the old degrees and V plus all old proper epi labels in the top degree. For each α:[q]→[r], define a contravariant morphism from the family in degree r to the family in degree q: old--old uses K, top-to-old faces use p on new summands and K on old summands, old-to-top maps factor α through its image and apply the inverse normalization, and top endomorphisms use the same factorization except that an epi endomorphism is the identity. The resulting maps satisfy identity, epi normalization with invertible components, and the mixed face/lift/end identities recorded in the module.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 0DAV (lemma-hypercovering-object), construction and omitted composition verification, and 0DAU (lemma-split); explicit normalized-coordinate expansion of the finite attachment argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-split-attachment-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct normalizationIso componentwise from the split label-index equivalence and its component isomorphisms; define denormalize by transporting the index equality and inverting that component. A normalized epi merely precomposes a label and has identity components. Define attachEpi by inverse normalization followed by this normalized epi. Naturality of normalizationIso for epis is K.map_comp componentwise; cancel normalizationIso to prove attachEpi_oldEpi and attachEpi_face.",
+   "uses": [
+    "def-weil-pbc-site-split-attachment-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define attachFace on the sum index: new summands use p.projection, and old summands use the component of K on the composite ordinal operator. Its naturality is p.naturality on new summands and K.map_comp on old ones. Define attachLift through the canonical simplex image factorization, whose image degree is old because the target degree is old.",
+   "uses": [
+    "def-weil-pbc-site-split-attachment-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Any epi--mono factorization is isomorphic to the image factorization by image.isoStrongEpiMono. Naturality under that isomorphism and epi concatenation prove attachLift_factor_mono, then factor an arbitrary old final operator again to obtain attachLift_factor and attachLift_naturality. An epi lift is attachEpi; a lift followed by a face is the old composite operator.",
+   "uses": [
+    "def-weil-pbc-site-split-attachment-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "An epi endomorphism of the finite ordinal is the identity. Otherwise its image is strictly smaller, so define attachEnd as its image face followed by its epi. As for lifts, independence of epi--mono factorization follows from image.isoStrongEpiMono, face naturality and attachEpi_oldEpi. This gives arbitrary old-middle factorization, end-face, lift-end, end-lift and end-end identities. Finally transport between the piecewise degree families; eqToHom component maps are isomorphisms, so the top epi components are isomorphisms. The identity formulas follow from K.map_id and epi end=id.",
+   "uses": [
+    "def-weil-pbc-site-split-attachment-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-split-attachment-data"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 0DAV (lemma-hypercovering-object), proof; Tag 0DAU (lemma-split); explicit epi--mono construction and eight-case composition proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend a split truncated simplicial object by a family with compatible boundary maps",
+   "results": "8 hits: CategoryTheory.SimplicialObject.truncation, CategoryTheory.SimplicialObject.Truncated.trunc, CategoryTheory.SimplicialObject.Truncated.sk, CategoryTheory.SimplicialObject.Truncated, CategoryTheory.SimplicialObject.sk, CategoryTheory.SimplicialObject.Truncated.cosk, CategoryTheory.SimplicialObject.Truncated.trunc_obj_obj, CategoryTheory.SimplicialObject.instCategoryTruncated",
+   "date": "2026-10-15",
+   "verdict": "No matching truncated attachment theorem; the hits concern truncation, skeleton/coskeleton, full simplicial splitting or unrelated split epis."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Splitting",
+   "results": "12 hits: CategoryTheory.SimplicialObject.Splitting, CategoryTheory.SimplicialObject.Splitting.N, CategoryTheory.SimplicialObject.Split.mk, CategoryTheory.SimplicialObject.Split.mk', CategoryTheory.SimplicialObject.Split.s, CategoryTheory.SimplicialObject.Split.mk'_X, CategoryTheory.SimplicialObject.Split.mk'_s, CategoryTheory.SimplicialObject.Splitting.cofan",
+   "date": "2026-10-15",
+   "verdict": "No matching truncated attachment theorem; the hits concern truncation, skeleton/coskeleton, full simplicial splitting or unrelated split epis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a split truncated simplicial family by prescribed compatible faces and new nondegenerate simplices",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "Unavailable: the search service returned Internal Server Error."
+  },
+  {
+   "tool": "grep",
+   "query": "split.*trunc|trunc.*split|FormalSplitAttachment|attachedFamily",
+   "results": "6 hits: Mathlib/Combinatorics/SetFamily/AhlswedeZhang.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/Data/Finsupp/ToDFinsupp.lean",
+   "date": "2026-10-15",
+   "verdict": "No matching truncated attachment theorem; the hits concern truncation, skeleton/coskeleton, full simplicial splitting or unrelated split epis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SiteHypercoverFiniteExtension",
+  "date": "2026-10-15",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof paragraph 1: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; downstream categorical split-skeleton attachment used by the finite-basis hypercover construction along the recorded via chain.",
+   "via": [
+    "lem-weil-pbc-site-hypercover-finite-extension",
+    "lem-weil-pbc-site-finite-basis-hypercover-existence",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SiteHypercoverAttachmentOperators",
+  "file": "lean/Sheaf/Paper/SiteHypercoverAttachmentOperators.lean",
+  "declaration": "CategoryTheory.FormalSplitAttachment.attachmentMap",
+  "declarations": [
+   "CategoryTheory.FormalSplitAttachment.denormalize",
+   "CategoryTheory.FormalSplitAttachment.normalizationIso",
+   "CategoryTheory.FormalSplitAttachment.normalizedEpi",
+   "CategoryTheory.FormalSplitAttachment.normalizedOldEpi",
+   "CategoryTheory.FormalSplitAttachment.normalizationIso_epi",
+   "CategoryTheory.FormalSplitAttachment.attachEpi",
+   "CategoryTheory.FormalSplitAttachment.attachEpi_eq",
+   "CategoryTheory.FormalSplitAttachment.attachEpi_oldEpi",
+   "CategoryTheory.FormalSplitAttachment.attachFace",
+   "CategoryTheory.FormalSplitAttachment.attachFace_naturality",
+   "CategoryTheory.FormalSplitAttachment.attachEpi_face",
+   "CategoryTheory.FormalSplitAttachment.attachLift",
+   "CategoryTheory.FormalSplitAttachment.attachLift_factor_mono",
+   "CategoryTheory.FormalSplitAttachment.attachLift_factor",
+   "CategoryTheory.FormalSplitAttachment.attachLift_naturality",
+   "CategoryTheory.FormalSplitAttachment.attachLift_epi",
+   "CategoryTheory.FormalSplitAttachment.attachLift_face",
+   "CategoryTheory.FormalSplitAttachment.attachEnd",
+   "CategoryTheory.FormalSplitAttachment.attachEnd_factor_mono",
+   "CategoryTheory.FormalSplitAttachment.attachEnd_factor",
+   "CategoryTheory.FormalSplitAttachment.attachEnd_face",
+   "CategoryTheory.FormalSplitAttachment.attachLift_end",
+   "CategoryTheory.FormalSplitAttachment.attachEnd_lift",
+   "CategoryTheory.FormalSplitAttachment.attachEnd_comp",
+   "CategoryTheory.FormalSplitAttachment.attachmentTerm",
+   "CategoryTheory.FormalSplitAttachment.attachmentMap",
+   "CategoryTheory.FormalSplitAttachment.attachmentMap_epi",
+   "CategoryTheory.FormalSplitAttachment.attachmentMap_epi_component_iso",
+   "CategoryTheory.FormalSplitAttachment.attachmentMap_id"
+  ],
+  "statement": "def attachmentMap (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K) (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) (q r : Fin (n + 2)) (α : SimplexCategory.mk q.val ⟶ SimplexCategory.mk r.val) : attachmentTerm K V r ⟶ attachmentTerm K V q",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f0594",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T154201-L-160991",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f0594",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T154201-L-160991",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered six modules, DAG records, change record, and report matched the packet; all modules and the direct importer compiled cleanly, with no forbidden constructs or remaining sorry."
+ }
+}

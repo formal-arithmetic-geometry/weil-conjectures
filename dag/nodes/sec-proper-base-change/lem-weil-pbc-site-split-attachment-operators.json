@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-site-split-attachment-operators",
+ "kind": "statement",
+ "title": "Realize compatible faces by a split-attachment functor",
+ "statement": "For a split n-truncated simplicial formal family K and a formal family V with compatible boundary cone p [def-weil-pbc-site-split-attachment-data], there exists an (n+1)-truncated simplicial formal family L with strict old restriction K and top family attachedFamily K V. For every lower ordinal face α, the new inclusion followed by L(α) is p(α), and the old summand (r,σ,i) followed by L(α) is the component of K(α≫σ) at i. A proper top epi concatenates σ with the normalized old label, and every component of this epi operator is invertible.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 0DAV (lemma-hypercovering-object), construction and omitted composition verification, and 0DAU (lemma-split); explicit normalized-coordinate expansion of the finite attachment argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-split-attachment-data"
+ ],
+ "proof": [
+  {
+   "text": "Use attachmentTerm and attachmentMap as the object and morphism maps of L. attachmentMap_id and attachmentMap_comp give the functor laws. Functor.hext gives the strict restriction equality: the old pieces are precisely K. The top family equality is the piecewise definition.",
+   "uses": [
+    "def-weil-pbc-site-split-attachment-operators",
+    "lem-weil-pbc-site-split-attachment-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On new and old summands, the prescribed face equations are hom_ext applied to the two clauses of attachFace. For epis, attachLift_epi reduces to attachEpi, giving the displayed normalized index equation. The component isomorphism assertion is attachmentMap_epi_component_iso.",
+   "uses": [
+    "def-weil-pbc-site-split-attachment-operators"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-split-attachment-operators",
+  "lem-weil-pbc-site-split-attachment-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 0DAV (lemma-hypercovering-object), proof; Tag 0DAU (lemma-split); explicit epi--mono construction and eight-case composition proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend a split truncated simplicial object by a family with compatible boundary maps",
+   "results": "8 hits: CategoryTheory.SimplicialObject.truncation, CategoryTheory.SimplicialObject.Truncated.trunc, CategoryTheory.SimplicialObject.Truncated.sk, CategoryTheory.SimplicialObject.Truncated, CategoryTheory.SimplicialObject.sk, CategoryTheory.SimplicialObject.Truncated.cosk, CategoryTheory.SimplicialObject.Truncated.trunc_obj_obj, CategoryTheory.SimplicialObject.instCategoryTruncated",
+   "date": "2026-10-15",
+   "verdict": "No matching truncated attachment theorem; the hits concern truncation, skeleton/coskeleton, full simplicial splitting or unrelated split epis."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Splitting",
+   "results": "12 hits: CategoryTheory.SimplicialObject.Splitting, CategoryTheory.SimplicialObject.Splitting.N, CategoryTheory.SimplicialObject.Split.mk, CategoryTheory.SimplicialObject.Split.mk', CategoryTheory.SimplicialObject.Split.s, CategoryTheory.SimplicialObject.Split.mk'_X, CategoryTheory.SimplicialObject.Split.mk'_s, CategoryTheory.SimplicialObject.Splitting.cofan",
+   "date": "2026-10-15",
+   "verdict": "No matching truncated attachment theorem; the hits concern truncation, skeleton/coskeleton, full simplicial splitting or unrelated split epis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a split truncated simplicial family by prescribed compatible faces and new nondegenerate simplices",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "Unavailable: the search service returned Internal Server Error."
+  },
+  {
+   "tool": "grep",
+   "query": "split.*trunc|trunc.*split|FormalSplitAttachment|attachedFamily",
+   "results": "6 hits: Mathlib/Combinatorics/SetFamily/AhlswedeZhang.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/CategoryTheory/EpiMono.lean, Mathlib/Data/Finsupp/ToDFinsupp.lean",
+   "date": "2026-10-15",
+   "verdict": "No matching truncated attachment theorem; the hits concern truncation, skeleton/coskeleton, full simplicial splitting or unrelated split epis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SiteHypercoverFiniteExtension",
+  "date": "2026-10-15",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof paragraph 1: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; downstream categorical split-skeleton attachment used by the finite-basis hypercover construction along the recorded via chain.",
+   "via": [
+    "lem-weil-pbc-site-hypercover-finite-extension",
+    "lem-weil-pbc-site-finite-basis-hypercover-existence",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SiteHypercoverFiniteExtensionConstruction",
+  "file": "lean/Sheaf/Paper/SiteHypercoverFiniteExtensionConstruction.lean",
+  "declaration": "CategoryTheory.FormalSplitAttachment.exists_attachment_operators",
+  "declarations": [
+   "CategoryTheory.FormalSplitAttachment.exists_attachment_operators"
+  ],
+  "statement": "theorem exists_attachment_operators (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hs : IsSplit K) (V : FormalCoproduct.{w} D) (p : BoundaryCone K V) : ∃ (L : SimplicialObject.Truncated (FormalCoproduct.{w} D) (n + 1)) (e : (SimplicialObject.Truncated.trunc (FormalCoproduct.{w} D) (n + 1) n (Nat.le_succ n)).obj L = K) (t : attachedFamily K V = term L ⟨n + 1, Nat.lt_succ_self _⟩), (∀ (q : Fin (n + 1)) (α : SimplexCategory.mk q.val ⟶ SimplexCategory.mk (n + 1)), newInclusion K V ≫ eqToHom t ≫ operator L (q := ⟨q.val, Nat.lt_succ_of_lt q.isLt⟩) (r := ⟨n + 1, Nat.lt_succ_self _⟩) α ≫ (eqToHom e).app (op (degree q)) = p.projection q α) ∧ (∀ (a : Labels K (n + 1)) (q : Fin (n + 1)) (α : SimplexCategory.mk q.val ⟶ SimplexCategory.mk (n + 1)), oldInclusion K V a ≫ eqToHom t ≫ operator L (q := ⟨q.val, Nat.lt_succ_of_lt q.isLt⟩) (r := ⟨n + 1, Nat.lt_succ_self _⟩) α ≫ (eqToHom e).app (op (degree q)) = FormalCoproduct.Hom.fromIncl a.2.2.val (𝟙 _) ≫ operator K (α ≫ a.2.1.val)) ∧ (∀ (q : Fin (n + 1)) (σ : SimplexCategory.mk (n + 1) ⟶ SimplexCategory.mk q.val) (hσ : Epi σ) (i : (term L ⟨q.val, Nat.lt_succ_of_lt q.isLt⟩).I), (operator L (q := ⟨n + 1, Nat.lt_succ_self _⟩) (r := ⟨q.val, Nat.lt_succ_of_lt q.isLt⟩) σ).f i = (eqToHom t).f (Sum.inr (precomposeLabel K (normalization K hs q (((eqToHom e).app (op (degree q))).f i)) σ hσ))) ∧ (∀ (q : Fin (n + 1)) (σ : SimplexCategory.mk (n + 1) ⟶ SimplexCategory.mk q.val) (_ : Epi σ) (i : (term L ⟨q.val, Nat.lt_succ_of_lt q.isLt⟩).I), IsIso ((operator L (q := ⟨n + 1, Nat.lt_succ_self _⟩) (r := ⟨q.val, Nat.lt_succ_of_lt q.isLt⟩) σ).φ i))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f0594",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T154201-L-160991",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f0594",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T154201-L-160991",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered six modules, DAG records, change record, and report matched the packet; all modules and the direct importer compiled cleanly, with no forbidden constructs or remaining sorry."
+ }
+}
