@@ -244,5 +244,36 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedQcqsPushforwardContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_qcqs_pushforward_continuity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.condensedContinuityCocone",
+   "AlgebraicGeometry.ProEtale.condensedContinuityComparison",
+   "AlgebraicGeometry.ProEtale.condensedContinuityComparison_naturality",
+   "AlgebraicGeometry.ProEtale.condensedContinuityComparison_functor_naturality",
+   "AlgebraicGeometry.ProEtale.condensedModuleSections",
+   "AlgebraicGeometry.ProEtale.condensed_qcqs_pushforward_continuity",
+   "AlgebraicGeometry.ProEtale.condensed_qcqs_globalSections_continuity",
+   "AlgebraicGeometry.ProEtale.condensed_qcqs_pushforward_continuity_shift",
+   "AlgebraicGeometry.ProEtale.condensed_qcqs_globalSections_continuity_shift",
+   "AlgebraicGeometry.ProEtale.condensedContinuityComparison_representatives"
+  ],
+  "file": "lean/Sheaf/Paper/CondensedQcqsPushforwardContinuity.lean",
+  "statement": "theorem condensed_qcqs_pushforward_continuity (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (D : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) (condensedRingObj Λ X)) ℤ) (a : ℤ) (ha : ∀ (i : I) (n : ℤ), n < a → IsZero ((D.obj i).homology n)) (q : ℤ) : IsIso (condensedContinuityComparison D a (DerivedCategory.Q ⋙ (CondensedRing.lowerStar Λ f).rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ q))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The listed family includes global sections, diagram and output-functor naturality, all shifted cocones, and normalized functorial complex representatives. Coefficients and direct image use the already recorded upstream internal-module presentation, with the ordinary uncompleted rightDerivedFunctor of the operations node. The canonical comparison is constructed by good truncation and colimit.desc."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ca6365fa6",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statement, dependencies, source, declarations, universes, edge cases, docstrings and maintainer gates. Exact signature matches; snapshot module compiles cleanly through scompile.py in both contexts. No project clone or branch head changed."
  }
 }
