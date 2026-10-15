@@ -23,12 +23,14 @@ attribute [local irreducible] perfectHomComposition derivedPullback
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-private noncomputable def compositionTo {X Y Z : Scheme.{u}} (f : X ⟶ Y)
+/-- The fixed derived-pullback comparison transported along an equality of scheme maps. -/
+noncomputable def compositionTo {X Y Z : Scheme.{u}} (f : X ⟶ Y)
     (p : Y ⟶ Z) (q : X ⟶ Z) (e : f ≫ p = q) :
     derivedPullback p ⋙ derivedPullback f ≅ derivedPullback q :=
   perfectHomComposition f p ≪≫ eqToIso (congrArg (fun k ↦ derivedPullback k) e)
 
-private theorem compositionTo_triangle {W X Y Z : Scheme.{u}}
+/-- The three-arrow triangle for the fixed derived-pullback comparisons. -/
+theorem compositionTo_triangle {W X Y Z : Scheme.{u}}
     (h : W ⟶ X) (f : X ⟶ Y) (p : Y ⟶ Z)
     (q : X ⟶ Z) (r : W ⟶ Z) (t : W ⟶ Y)
     (eq : f ≫ p = q) (er : h ≫ q = r) (et : h ≫ f = t)
