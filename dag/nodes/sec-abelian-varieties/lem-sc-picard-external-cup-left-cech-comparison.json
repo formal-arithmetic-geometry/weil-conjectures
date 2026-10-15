@@ -54,7 +54,7 @@
    "elementary": false
   },
   {
-   "text": "For every direct-sum summand and pure tensor x tensor y, lift x and y through the epimorphic scalar-model homology projections. Tensor Kunneth supplies a total cycle z and its homology formula. The generator formula for theta and normalization of the given d have the identical externalCup value; cancel the injective product scalarModelEquiv. DirectSum.linearMap_ext and TensorProduct.ext' extend the equality to the whole direct sum. Evaluate at e inverse of an arbitrary tensor-Cech homology class to get H(theta) followed by b equals a followed by H(d).",
+   "text": "For every direct-sum summand and pure tensor x tensor y, lift x and y through the epimorphic scalar-model homology projections. Tensor Kunneth supplies a total cycle z and its homology formula. The generator formula for theta and normalization of the given d have the identical externalCup value; cancel the injective product scalarModelEquiv. DirectSum.linearMap_ext and TensorProduct.ext' extend the equality to the whole direct sum. Evaluate at e inverse of an arbitrary tensor-Cech homology class to get H(theta) followed by b equals a followed by H(d). The two coordinate identities have the same factor (-1)^(p*q) on the left. Multiply their equality by that factor again and use its square equal to one before cancelling the scalar model comparison.",
    "uses": [
     "lem-sc-picard-external-cup-left-cech-generators",
     "lem-sc-picard-external-cup-cochain",
@@ -70,9 +70,11 @@
   "lem-sc-qcoh-cech-total-tensor-nat-iso"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED equation-kunneth-on-cech; J2 implements scalar-total Kunneth comparison, cycle lifts, normalization, direct-sum/tensor extensionality and cancellation, leaving only the geometric Cech generator calculation."
+  "by": "K1 second reader",
+  "document": "Stacks Project",
+  "place": "Tag 0BED; propagate signed normalization in existing proof",
+  "date": "2026-10-15",
+  "group": "K1"
  },
  "blueprint": {
   "is": null,
@@ -120,7 +122,7 @@
   "module": "Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechComparison",
   "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupLeftCechComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCup_left_cech_comparison",
-  "statement": "theorem picardExternalCup_left_cech_comparison {k : Type w} [Field k] {X Y : Scheme.{w}} (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) [CompactSpace X] [CompactSpace Y] [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)] (G : Y.Modules) [G.IsQuasicoherent] : ∃ θ : picardLeftTensorCechFunctor f g G ⟶ picardLeftProductCechFunctor f g G, ∀ (F : X.Modules) (_ : F.IsQuasicoherent) (d : picardExternalTotal f g F G ⟶ picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G)), IsPicardExternalCupCochain f g F G d → ∀ n : ℕ, ∃ (a : ((picardLeftTensorCechFunctor f g G).obj F).homology (n : ℤ) ≅ (picardExternalTotal f g F G).homology (n : ℤ)) (b : ((picardLeftProductCechFunctor f g G).obj F).homology (n : ℤ) ≅ (picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G)).homology (n : ℤ)), HomologicalComplex.homologyMap (θ.app F) (n : ℤ) ≫ b.hom = a.hom ≫ HomologicalComplex.homologyMap d (n : ℤ)",
+  "statement": "theorem picardExternalCup_left_cech_comparison\n    {k : Type w} [Field k] {X Y : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [CompactSpace X] [CompactSpace Y]\n    [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)]\n    (G : Y.Modules) [G.IsQuasicoherent] :\n    ∃ θ : picardLeftTensorCechFunctor f g G ⟶ picardLeftProductCechFunctor f g G,\n      ∀ (F : X.Modules) (_ : F.IsQuasicoherent)\n        (d : picardExternalTotal f g F G ⟶\n          picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G)),\n        IsPicardExternalCupCochain f g F G d → ∀ n : ℕ,\n          ∃ (a : ((picardLeftTensorCechFunctor f g G).obj F).homology (n : ℤ) ≅\n              (picardExternalTotal f g F G).homology (n : ℤ))\n            (b : ((picardLeftProductCechFunctor f g G).obj F).homology (n : ℤ) ≅\n              (picardScalarModel (pullback.fst f g ≫ f)\n                (externalCupCoefficients f g F G)).homology (n : ℤ)),\n            HomologicalComplex.homologyMap (θ.app F) (n : ℤ) ≫ b.hom =\n              a.hom ≫ HomologicalComplex.homologyMap d (n : ℤ)",
   "branch": "sheaf-dag",
   "by": "U3",
   "date": "2026-10-13",
@@ -139,13 +141,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "X-9db49",
-  "group": "J2",
+  "reviewer": "X-09592",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T115430-L-3359275",
+  "landing": "20261015T040627-L-472947",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and node statements; both delivered modules and the direct importer compiled cleanly, with only the documented generator sorryAx remaining."
+  "note": "independent Codex review: Matched 15 delivered Lean modules with 16 node records, declared interface corrections, original callers, required importers, sources, and axiom probes."
  }
 }

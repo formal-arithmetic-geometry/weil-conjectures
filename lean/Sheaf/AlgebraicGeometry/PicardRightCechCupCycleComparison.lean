@@ -82,7 +82,8 @@ projection adjunction units and tensored. The projection refinements followed by
 Cech cup have exactly these coordinates. Tag 01FD identifies the refinement maps
 with pullback on cohomology, and Tag 0FKV identifies Cech cup with sheaf cup.
 The fixed scalar-resolution comparison and its Ext identification give precisely
-externalCup of the two displayed factor classes. Extension homology transports
+`(-1)^(p*q)` times the unsigned compared class as externalCup of the two
+displayed factor classes. Extension homology transports
 this class to the integer complex without changing the natural-degree formula.
 The degree cast implements p+q=n. Monicity of iCycles makes the assertion hold
 for every z with the given inclusion. Empty covers force empty factors, and zero
@@ -117,7 +118,8 @@ theorem picardRightCechCup_cycle_comparison
           HomologicalComplex.ιMapBifunctor A B (curriedTensor (ModuleCat.{w} k))
             (ComplexShape.up ℕ) i.val.1 i.val.2 n i.property
               ((A.iCycles i.val.1 a) ⊗ₜ[k] (B.iCycles i.val.2 v)) →
-        picardScalarModelEquiv (pullback.fst f g ≫ f)
+        (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+          picardScalarModelEquiv (pullback.fst f g ≫ f)
             (externalCupCoefficients f g F G) n
           ((b n).hom (HomologicalComplex.homologyMap (θ.app G) (n : ℤ)
             ((T.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl).inv
@@ -181,12 +183,14 @@ theorem picardRightCechCup_cycle_comparison
     (fun j ↦ (eP j).toLinearMap) heP n i a v z hz
   dsimp only [alpha, beta, LinearEquiv.trans_apply] at *
   simp only [LinearEquiv.apply_symm_apply]
-  change (picardScalarModelEquiv (pullback.fst f g ≫ f) E n)
+  change (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+    (picardScalarModelEquiv (pullback.fst f g ≫ f) E n)
     ((b n).hom (HomologicalComplex.homologyMap (θ.app G) (n : ℤ)
       ((T.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl).inv
         (T.homologyπ n z)))) = _
   rw [hθc]
-  change (picardScalarModelEquiv (pullback.fst f g ≫ f) E n)
+  change (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+    (picardScalarModelEquiv (pullback.fst f g ≫ f) E n)
     ((picardScalarModelEquiv (pullback.fst f g ≫ f) E n).symm
       (eP n ((P.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl).hom
         (HomologicalComplex.homologyMap (HomologicalComplex.extendMap c

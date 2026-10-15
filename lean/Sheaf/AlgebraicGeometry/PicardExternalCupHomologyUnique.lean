@@ -42,7 +42,8 @@ def IsPicardExternalCupHomology
           exact_mod_cast i.property)
         (((picardScalarModel f F).iCycles (i.val.1 : ℤ) a) ⊗ₜ[k]
           ((picardScalarModel g G).iCycles (i.val.2 : ℤ) b)) →
-    picardScalarModelEquiv (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) n
+    (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+      picardScalarModelEquiv (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) n
         (φ n
           ((picardExternalTotal f g F G).homologyπ (n : ℤ) z)) =
       cast (congrArg (fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)
@@ -60,7 +61,9 @@ Source: Stacks, Tag 0BED, equation-kunneth-on-cech.
 Proof: Tensor Kunneth expresses natural-degree total homology as the direct sum
 of the tensors of factor homologies. Lift each factor class through its surjective
 homology projection. The Kunneth cycle formula realizes its pure tensor as a total
-cycle. Both normalized maps take that cycle to the same external cup class. The
+cycle. After multiplication by `(-1)^(p*q)`, both normalized maps take that cycle to
+the same external cup class. Applying the sign again cancels it since its square
+is one. The
 scalar-model comparison is injective, so the images agree. Pure tensors span each
 summand and direct-sum inclusions span the direct sum, proving equality. Degree
 zero and zero factors are covered by the same argument. -/
@@ -92,7 +95,15 @@ theorem picardExternalCupHomology_unique
     rw [hez]
     apply (picardScalarModelEquiv (pullback.fst f g ≫ f)
       (externalCupCoefficients f g F G) n).injective
-    exact (hφ n i a b z hz).trans (hψ n i a b z hz).symm
+    have hs := (hφ n i a b z hz).trans (hψ n i a b z hz).symm
+    have hs' := congrArg (fun w ↦ (-1 : ℤ) ^ (i.val.1 * i.val.2) • w) hs
+    rw [smul_smul, smul_smul] at hs'
+    have hh : ((-1 : ℤ) ^ (i.val.1 * i.val.2)) *
+        ((-1 : ℤ) ^ (i.val.1 * i.val.2)) = 1 := by
+      rw [← pow_add, ← two_mul]
+      simp
+    rw [hh, one_smul] at hs'
+    simpa only [one_smul, A, B, picardExternalTotal] using hs'
   ext x
   obtain ⟨y, rfl⟩ := e.surjective x
   exact LinearMap.congr_fun h y

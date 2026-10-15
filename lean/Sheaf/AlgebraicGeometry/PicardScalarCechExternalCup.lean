@@ -88,7 +88,8 @@ theorem picardScalarCech_externalCup_core
     T.iCycles n z = HomologicalComplex.ιMapBifunctor A B
         (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ) i.val.1 i.val.2 n
         i.property ((A.iCycles i.val.1 a) ⊗ₜ[k] (B.iCycles i.val.2 v)) →
-      eP n (HomologicalComplex.homologyMap c n (T.homologyπ n z)) =
+      (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+        eP n (HomologicalComplex.homologyMap c n (T.homologyπ n z)) =
         cast (congrArg (fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)
           (externalCupCoefficients f g F G) d)) i.property)
           (externalCup f g F G i.val.1 i.val.2
@@ -147,12 +148,11 @@ theorem picardScalarCech_externalCup_core
     cup hxPull hyPull
   have hm := hmodule.trans hpaired
   have hscalar := htP'.symm.trans hm
-  change eP (p + q) (HomologicalComplex.homologyMap c (p + q)
-    (T.homologyπ (p + q) z)) = externalCup f g F G p q
-      (eX p (A.homologyπ p a)) (eY q (B.homologyπ q v))
-  exact (congrArg (eP (p + q)) hclass).trans (hscalar.trans
-    (scalarExternalCup_moduleComparison f g F G p q cup hcup
-      (eX p (A.homologyπ p a)) (eY q (B.homologyπ q v))).symm)
+  simpa only [cast_eq] using (congrArg (fun z ↦ (-1 : ℤ) ^ (p * q) • z)
+    (congrArg (eP (p + q)) hclass)).trans
+    ((congrArg (fun z ↦ (-1 : ℤ) ^ (p * q) • z) hscalar).trans
+      (scalarExternalCup_moduleComparison f g F G p q cup hcup
+        (eX p (A.homologyπ p a)) (eY q (B.homologyπ q v))).symm)
 
 /-- Canonical scalar Cech comparisons identify the natural-degree external cup.
 No scalar resolution, extension by zero, or affine comparison existence occurs here.
@@ -215,7 +215,8 @@ theorem picardScalarCech_externalCup
         HomologicalComplex.ιMapBifunctor A B (curriedTensor (ModuleCat.{w} k))
           (ComplexShape.up ℕ) i.val.1 i.val.2 n i.property
             ((A.iCycles i.val.1 a) ⊗ₜ[k] (B.iCycles i.val.2 v)) →
-      eP n (HomologicalComplex.homologyMap c n (T.homologyπ n z)) =
+      (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+        eP n (HomologicalComplex.homologyMap c n (T.homologyπ n z)) =
         cast (congrArg (fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)
           (externalCupCoefficients f g F G) d)) i.property)
           (externalCup f g F G i.val.1 i.val.2

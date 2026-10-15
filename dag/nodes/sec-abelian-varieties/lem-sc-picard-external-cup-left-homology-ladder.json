@@ -24,10 +24,9 @@
    "elementary": false
   },
   {
-   "text": "Prove normalized_homology_eq: the homology maps of any two normalized external-cup cochain maps agree in natural degree n. Apply tensor_kunneth_nat to the two scalar models, using picardScalarModel_negative for nonnegative support. Precompose both maps with its linear equivalence. On each direct-sum summand, pure tensors span; lift the two factor homology elements to cycles via the surjective homology projections. The cycle formula provides z, and both normalizations give exactly the same externalCup expression. Injectivity of picardScalarModelEquiv implies equality on z. DirectSum.linearMap_ext and tensor extensionality prove equality of maps. Replace the maps d1,d2,d3 in the three comparison squares by the specified c,cE,cQ.",
+   "text": "Apply picardExternalCupHomology_unique to the two homologyMap families. Their cochain normalization hypotheses have exactly the homology normalization predicate. This cancels the common signed unit and proves the private homology uniqueness lemma. Use this equality to replace the three chosen normalized maps by the specified maps in the comparison squares.",
    "uses": [
-    "lem-sc-qcoh-cech-total-tensor-nat-iso",
-    "lem-sc-picard-kunneth-resolution-model"
+    "lem-sc-picard-external-cup-homology-unique"
    ],
    "elementary": false
   },
@@ -46,16 +45,17 @@
   }
  ],
  "proof_deps": [
+  "lem-sc-picard-external-cup-homology-unique",
   "lem-sc-picard-external-cup-left-comparison-complexes",
-  "lem-sc-picard-kunneth-resolution-model",
-  "lem-sc-qcoh-cech-total-tensor-nat-iso",
   "lem-weil-pbc-complex-ses-homology-long-exact",
   "lem-weil-pbc-complex-ses-long-exact-naturality"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "C4: Tag 0BED short-exact cochain diagram, isolated in the comparison-complex construction; explicit normalization uniqueness, Mathlib long-exact homology naturality, and outer-invertibility transfer in the delivered Lean proof."
+  "by": "K1 second reader",
+  "document": "Stacks Project",
+  "place": "Tag 0BED; use existing signed homology uniqueness for the comparison ladder",
+  "date": "2026-10-15",
+  "group": "K1"
  },
  "mathlib_searches": [
   {
@@ -134,14 +134,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
+  "reviewer": "X-09592",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T082335-L-1632272",
+  "landing": "20261015T040627-L-472947",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched 15 delivered Lean modules with 16 node records, declared interface corrections, original callers, required importers, sources, and axiom probes."
  },
  "lean_audit": {
   "master": {

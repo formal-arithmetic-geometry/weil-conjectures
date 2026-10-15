@@ -45,7 +45,8 @@ Kunneth represents their summand tensor by the total tensor cycle. The given hθ
 identifies its image tuple by tuple with the front X section and back Y section
 pulled back by the projection adjunction units and tensored. Refinement/pullback
 compatibility and Cech/sheaf-cup compatibility send this class under the canonical
-product comparison to externalCup of the factor classes. The fixed resolution
+product comparison, multiplied by `(-1)^(p*q)`, to externalCup of the factor
+classes. The fixed resolution
 comparisons identify those classes with the displayed scalar-model equivalences.
 The cast implements the equality p+q=n. All choices of comparisons here are made
 together with this formula; independent rescaling of b is not allowed. Empty covers
@@ -74,7 +75,8 @@ theorem picardRightCechCup_generators
           ∀ (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n})
             (x : (picardScalarModel f F).homology (i.val.1 : ℤ))
             (y : (picardScalarModel g G).homology (i.val.2 : ℤ)),
-            picardScalarModelEquiv (pullback.fst f g ≫ f)
+            (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+              picardScalarModelEquiv (pullback.fst f g ≫ f)
                 (externalCupCoefficients f g F G) n
               (b.hom (HomologicalComplex.homologyMap (θ.app G) (n : ℤ)
                 (e (DirectSum.lof k _ _ i (x ⊗ₜ[k] y))))) =
@@ -109,7 +111,8 @@ theorem picardRightCechCup_generators
       DirectSum.lof k _ _ i ((A.homologyπ _ a) ⊗ₜ[k] (B.homologyπ _ v)) := by
     simp only [s, DirectSum.coe_congrLinearEquiv, DirectSum.lmap_lof,
       LinearEquiv.coe_coe, TensorProduct.congr_tmul, ← ha, ← hv]
-  change picardScalarModelEquiv (pullback.fst f g ≫ f)
+  change (-1 : ℤ) ^ (i.val.1 * i.val.2) •
+    picardScalarModelEquiv (pullback.fst f g ≫ f)
     (externalCupCoefficients f g F G) n
     ((b n).hom (HomologicalComplex.homologyMap (θ.app G) (n : ℤ)
       (t.inv (e (s (DirectSum.lof k _ _ i (x ⊗ₜ[k] y))))))) = _

@@ -2,7 +2,7 @@
  "id": "lem-sc-picard-external-cup-cochain",
  "kind": "statement",
  "title": "Cochain realization of external cup on fixed scalar resolution models",
- "statement": "Let k be a field, f:X -> Spec(k), g:Y -> Spec(k), and F,G quasi-coherent modules. Form the explicit scalar models A,B and product model C of [lem-sc-picard-kunneth-resolution-model]. There exists a cochain map c:Tot(A tensor_k B) -> C with IsPicardExternalCupCochain f g F G c: after the canonical model-to-scalar-cohomology comparisons, H(c) on every tensor-cycle class in degree p+q is externalCup of the two factor classes. This asserts neither injectivity nor surjectivity of H(c), and has no compactness or affine-diagonal hypothesis.",
+ "statement": "Let k be a field, f:X -> Spec(k), g:Y -> Spec(k), and F,G quasi-coherent modules. Form the explicit scalar models A,B and product model C of [lem-sc-picard-kunneth-resolution-model]. There exists a cochain map c:Tot(A tensor_k B) -> C with IsPicardExternalCupCochain f g F G c: after the canonical model-to-scalar-cohomology comparisons, (-1)^(p*q) times H(c) on every tensor-cycle class in degree p+q is externalCup of the two factor classes. This asserts neither injectivity nor surjectivity of H(c), and has no compactness or affine-diagonal hypothesis.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Cohomology Tags 01FD, 07MB, 0FKV; Varieties Tag 0BED construction before equation 33.29.1.1, transported to fixed resolution models"
@@ -25,7 +25,7 @@
    "elementary": false
   },
   {
-   "text": "Apply tensor_kunneth_nat to the two constructed scalar models, using their negative-term vanishing. On each natural pair p+q=n, map factor homology tensors through picardScalarModelEquiv, extend the bilinear external cup by TensorProduct.lift, cast its degree p+q to n, and apply the inverse product-model comparison. DirectSum.toModule sums these linear maps. Compose with the inverse tensor Kunneth equivalence to obtain the natural-degree graded homology map; use the zero map in negative degrees. Keep picardExternalTotal as a semireducible definition with its original mapBifunctor body; explicitly identify the Kunneth cycle projection with T.homologyπ before rewriting.",
+   "text": "Apply tensor_kunneth_nat to the two constructed scalar models, using their negative-term vanishing. On each natural pair p+q=n, map factor homology tensors through picardScalarModelEquiv, extend the bilinear external cup by TensorProduct.lift, cast its degree p+q to n, and apply the inverse product-model comparison, multiplied by (-1)^(p*q). DirectSum.toModule sums these linear maps. Compose with the inverse tensor Kunneth equivalence to obtain the natural-degree graded homology map; use the zero map in negative degrees. Keep picardExternalTotal as a semireducible definition with its original mapBifunctor body; explicitly identify the Kunneth cycle projection with T.homologyπ before rewriting.",
    "uses": [
     "lem-sc-qcoh-cech-total-tensor-nat-iso",
     "lem-sc-picard-kunneth-resolution-model",
@@ -34,7 +34,7 @@
    "elementary": false
   },
   {
-   "text": "Prove the graded homology lifting step directly for all integer complexes of vector spaces. Extend the homology projection from source cycles to the source term with LinearMap.leftInverse, and split the target homology projection with exists_rightInverse_of_surjective. Their composites with the prescribed graded map define the cochain components. Source differentials vanish after projection because toCycles_comp_homologyπ is zero, and target differentials vanish on cycles. Naturality and cancellation of the epimorphic homology projection prove that the induced homology map is the prescribed one. Apply the tensor Kunneth cycle formula; monicity of the total iCycles identifies its cycle with the arbitrary cycle in the normalization hypothesis. Evaluate DirectSum.toModule on the generator, cancel the Kunneth inverse and the product-model comparison, and use the pure-tensor lift formula to obtain exactly externalCup.",
+   "text": "Prove the graded homology lifting step directly for all integer complexes of vector spaces. Extend the homology projection from source cycles to the source term with LinearMap.leftInverse, and split the target homology projection with exists_rightInverse_of_surjective. Their composites with the prescribed graded map define the cochain components. Source differentials vanish after projection because toCycles_comp_homologyπ is zero, and target differentials vanish on cycles. Naturality and cancellation of the epimorphic homology projection prove that the induced homology map is the prescribed one. Apply the tensor Kunneth cycle formula; monicity of the total iCycles identifies its cycle with the arbitrary cycle in the normalization hypothesis. Evaluate DirectSum.toModule on the generator, cancel the Kunneth inverse and the product-model comparison, and use the pure-tensor lift formula to obtain (-1)^(p*q) times externalCup. The normalization multiplies by the same sign again; its square is one, giving exactly externalCup.",
    "uses": [
     "lem-sc-qcoh-cech-total-tensor-nat-iso",
     "lem-sc-picard-kunneth-resolution-model"
@@ -48,9 +48,11 @@
   "lem-sc-qcoh-cech-total-tensor-nat-iso"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Cohomology Tags 01FD, 07MB, 0FKV; Varieties Tag 0BED construction before equation 33.29.1.1, transported to fixed resolution models; Y2 implemented the recorded bilinear Ext pairing, natural-degree tensor Kunneth transport and explicit vector-space homology lifting in Lean; repair removes duplicate inverseImage_linear helper and directly reuses the existing public adjunction theorem; compile-time repair keeps totalization folded and specializes abstract proved linear-composition and tensor-Ext-pairing evaluation formulas"
+  "by": "K1 second reader",
+  "document": "Stacks Project",
+  "place": "Tags 01F7, 07MB, 0FKV and 0BED; propagate signed scalar coordinates",
+  "date": "2026-10-15",
+  "group": "K1"
  },
  "mathlib_searches": [
   {
@@ -120,14 +122,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "X-84334",
-  "group": "Y2",
+  "reviewer": "X-09592",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T082426-L-1652175",
+  "landing": "20261015T040627-L-472947",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered Lean proof, preserved interfaces, dependency statements, node proof record and report; verified compilation and axioms, including all seven direct importers."
+  "note": "independent Codex review: Matched 15 delivered Lean modules with 16 node records, declared interface corrections, original callers, required importers, sources, and axiom probes."
  },
  "lean_audit": {
   "master": {
@@ -140,5 +142,118 @@
    "decls": [],
    "missing": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "K1 stage 2",
+  "old_statement": "Let k be a field, f:X -> Spec(k), g:Y -> Spec(k), and F,G quasi-coherent modules. Form the explicit scalar models A,B and product model C of [lem-sc-picard-kunneth-resolution-model]. There exists a cochain map c:Tot(A tensor_k B) -> C with IsPicardExternalCupCochain f g F G c: after the canonical model-to-scalar-cohomology comparisons, H(c) on every tensor-cycle class in degree p+q is externalCup of the two factor classes. This asserts neither injectivity nor surjectivity of H(c), and has no compactness or affine-diagonal hypothesis.",
+  "what": "Record the signed normalization of the coordinate predicates: (-1)^(p*q) multiplies the compared image on the left. The cochain is constructed with that same sign; its square is one. No hypotheses change.",
+  "source": {
+   "document": "literature/stacks-project/cohomology.tex",
+   "place": "Tags 01F7, 07MB and 0FKV; signed scalar/module comparison in this delivery"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-picard-external-cup-left-homology-ladder",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-cup-acyclic",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-right-cech-comparison",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-cup-right-short-exact",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-cup-homology-unique",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-cup-shift-right",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-cup-left-cech-comparison",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-cup-right-cech-diagram",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-cup-quasi-iso",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-cup-right-exact-ladder",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-cup-shift-left",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-left-cech-cup-homology",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-kunneth-cech-models",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-cup-left-cech-exact",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-external-cup-left-comparison-complexes",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Promote the recorded additive cohomology-to-Ext comparisons to linear equivalences using scalarCohomologyExtMap_smul. The promotion is proved first for abstract modules, with its forward and inverse formulas, to avoid expensive concrete Ext scalar reductions. Apply the existing public CategoryTheory.Adjunction.left_adjoint_linear from WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor directly to the sheaf adjunction, with its sectionwise linear pushforward instance; do not redeclare the private inverseImage_linear theorem of ExternalCupScalarBalance. Use Functor.mapExtLinearMap and Mathlib Abelian.Ext.bilinearCompOfLinear to obtain linear projection pullbacks and a bilinear cup pairing. Their formulas unfold to the recorded externalCup; no geometric invertibility is used. Compose linear maps over abstract modules and construct the tensor Ext pairing over an abstract abelian monoidal category before specializing to scalar sheaves. Use the proved evaluation formulas rather than kernel reduction of concrete Ext scalar actions.",
+    "uses": [
+     "def-sc-field-linear-module-cohomology-operations"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply tensor_kunneth_nat to the two constructed scalar models, using their negative-term vanishing. On each natural pair p+q=n, map factor homology tensors through picardScalarModelEquiv, extend the bilinear external cup by TensorProduct.lift, cast its degree p+q to n, and apply the inverse product-model comparison. DirectSum.toModule sums these linear maps. Compose with the inverse tensor Kunneth equivalence to obtain the natural-degree graded homology map; use the zero map in negative degrees. Keep picardExternalTotal as a semireducible definition with its original mapBifunctor body; explicitly identify the Kunneth cycle projection with T.homologyπ before rewriting.",
+    "uses": [
+     "lem-sc-qcoh-cech-total-tensor-nat-iso",
+     "lem-sc-picard-kunneth-resolution-model",
+     "def-sc-field-linear-module-cohomology-operations"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Prove the graded homology lifting step directly for all integer complexes of vector spaces. Extend the homology projection from source cycles to the source term with LinearMap.leftInverse, and split the target homology projection with exists_rightInverse_of_surjective. Their composites with the prescribed graded map define the cochain components. Source differentials vanish after projection because toCycles_comp_homologyπ is zero, and target differentials vanish on cycles. Naturality and cancellation of the epimorphic homology projection prove that the induced homology map is the prescribed one. Apply the tensor Kunneth cycle formula; monicity of the total iCycles identifies its cycle with the arbitrary cycle in the normalization hypothesis. Evaluate DirectSum.toModule on the generator, cancel the Kunneth inverse and the product-model comparison, and use the pure-tensor lift formula to obtain exactly externalCup.",
+    "uses": [
+     "lem-sc-qcoh-cech-total-tensor-nat-iso",
+     "lem-sc-picard-kunneth-resolution-model"
+    ],
+    "elementary": false
+   }
+  ]
  }
 }

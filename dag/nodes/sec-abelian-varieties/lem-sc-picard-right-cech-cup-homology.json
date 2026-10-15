@@ -2,7 +2,7 @@
  "id": "lem-sc-picard-right-cech-cup-homology",
  "kind": "statement",
  "title": "Affine Cech transport of the external tensor-cycle formula",
- "statement": "Let k be a field, let f:X→Spec k and g:Y→Spec k have affine diagonals, and let F,G be quasi-coherent. Take finite affine covers U,V that cover X,Y. Given a natural transformation θ satisfying the explicit cochain-coordinate predicate of [lem-sc-picard-right-cech-cup-construction], there are natural-degree homology isomorphisms a from its tensor Cech source to picardExternalTotal and b from its product Cech target to the scalar model. The family a.inv ≫ H(θ.app G) ≫ b.hom satisfies IsPicardExternalCupHomology of [lem-sc-picard-external-cup-homology-unique]: on each scalar-model tensor-cycle representative it gives externalCup of the factor classes after the model comparisons. This neither constructs θ nor asserts cup invertibility, and has no short complex or normalized cochain map as input or output.",
+ "statement": "Let k be a field, let f:X→Spec k and g:Y→Spec k have affine diagonals, and let F,G be quasi-coherent. Take finite affine covers U,V that cover X,Y. Given a natural transformation θ satisfying the explicit cochain-coordinate predicate of [lem-sc-picard-right-cech-cup-construction], there are natural-degree homology isomorphisms a from its tensor Cech source to picardExternalTotal and b from its product Cech target to the scalar model. The family a.inv ≫ H(θ.app G) ≫ b.hom satisfies IsPicardExternalCupHomology of [lem-sc-picard-external-cup-homology-unique]: on each scalar-model tensor-cycle representative, (-1)^(p*q) times its compared image is externalCup of the factor classes after the model comparisons. This neither constructs θ nor asserts cup invertibility, and has no short complex or normalized cochain map as input or output.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 0BED, equation-kunneth-on-cech (33.29.1.1); Cohomology Tags 01FD, 07MB, 0FKV; official tag pages read"
@@ -33,7 +33,7 @@
    "elementary": false
   },
   {
-   "text": "For factor cycles x,y and a specified total cycle z, Kunneth produces z′ with the same cycle inclusion as z. Injectivity of the cycle inclusion gives z′=z. Its cycle formula and s.symm_apply_apply show that a.inv of the class of z is e of the summand tensor of the factor classes. Substitute in the transported map and apply the geometric generator formula. This is exactly IsPicardExternalCupHomology.",
+   "text": "For factor cycles x,y and a specified total cycle z, Kunneth produces z′ with the same cycle inclusion as z. Injectivity of the cycle inclusion gives z′=z. Its cycle formula and s.symm_apply_apply show that a.inv of the class of z is e of the summand tensor of the factor classes. Substitute in the transported map and apply the geometric generator formula. The generator formula has (-1)^(p*q) on the left, exactly as required by the corrected IsPicardExternalCupHomology.",
    "uses": [
     "lem-sc-picard-right-cech-cup-generators",
     "lem-sc-qcoh-cech-total-tensor-nat-iso"
@@ -47,9 +47,11 @@
   "lem-sc-qcoh-cech-total-tensor-nat-iso"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, equation-kunneth-on-cech: E4 Lean assembly from the geometric generator formula and scalar-model tensor Kunneth; cycle identification uses injectivity of iCycles."
+  "by": "K1 second reader",
+  "document": "Stacks Project",
+  "place": "Tags 01F7, 07MB, 0FKV and 0BED; propagate signed scalar coordinates",
+  "date": "2026-10-15",
+  "group": "K1"
  },
  "mathlib_searches": [
   {
@@ -119,14 +121,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E4",
+  "reviewer": "X-09592",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T130033-L-3922856",
+  "landing": "20261015T040627-L-472947",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched 15 delivered Lean modules with 16 node records, declared interface corrections, original callers, required importers, sources, and axiom probes."
  },
  "lean_audit": {
   "master": {
@@ -139,5 +141,52 @@
    "decls": [],
    "missing": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "K1 stage 2",
+  "old_statement": "Let k be a field, let f:X→Spec k and g:Y→Spec k have affine diagonals, and let F,G be quasi-coherent. Take finite affine covers U,V that cover X,Y. Given a natural transformation θ satisfying the explicit cochain-coordinate predicate of [lem-sc-picard-right-cech-cup-construction], there are natural-degree homology isomorphisms a from its tensor Cech source to picardExternalTotal and b from its product Cech target to the scalar model. The family a.inv ≫ H(θ.app G) ≫ b.hom satisfies IsPicardExternalCupHomology of [lem-sc-picard-external-cup-homology-unique]: on each scalar-model tensor-cycle representative it gives externalCup of the factor classes after the model comparisons. This neither constructs θ nor asserts cup invertibility, and has no short complex or normalized cochain map as input or output.",
+  "what": "Record the signed normalization of the coordinate predicates: (-1)^(p*q) multiplies the compared image on the left. The cochain is constructed with that same sign; its square is one. No hypotheses change.",
+  "source": {
+   "document": "literature/stacks-project/cohomology.tex",
+   "place": "Tags 01F7, 07MB and 0FKV; signed scalar/module comparison in this delivery"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-picard-external-right-cech-comparison",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   },
+   {
+    "id": "lem-sc-picard-left-cech-cup-homology",
+    "holds": true,
+    "note": "The named normalization predicate now has the documented signed coordinates. Its use is retained; no new hypothesis is added, and the signed unit is invertible."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "In each natural degree obtain compatible Cech generator coordinates e and product comparison b from the geometric generator lemma.",
+    "uses": [
+     "lem-sc-picard-right-cech-cup-generators"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply tensor_kunneth_nat to the two scalar models, using picardScalarModel_negative, to get s and its tensor-cycle formula. Define a as e.symm followed by s, converted to a ModuleCat isomorphism. Choose these comparisons degreewise.",
+    "uses": [
+     "lem-sc-qcoh-cech-total-tensor-nat-iso",
+     "lem-sc-picard-kunneth-resolution-model"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For factor cycles x,y and a specified total cycle z, Kunneth produces z′ with the same cycle inclusion as z. Injectivity of the cycle inclusion gives z′=z. Its cycle formula and s.symm_apply_apply show that a.inv of the class of z is e of the summand tensor of the factor classes. Substitute in the transported map and apply the geometric generator formula. This is exactly IsPicardExternalCupHomology.",
+    "uses": [
+     "lem-sc-picard-right-cech-cup-generators",
+     "lem-sc-qcoh-cech-total-tensor-nat-iso"
+    ],
+    "elementary": true
+   }
+  ]
  }
 }

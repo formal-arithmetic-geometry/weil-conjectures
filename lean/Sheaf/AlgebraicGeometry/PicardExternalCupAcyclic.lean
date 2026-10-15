@@ -137,7 +137,9 @@ theorem picardExternalCupCochain_isIso_of_acyclic
         rw [← ha', ← hb']
         dsimp only [inc]
         erw [hez]
-        erw [hc 0 i₀ a' b' z hz]
+        have hc₀ := hc 0 i₀ a' b' z hz
+        simp only [i₀, Nat.zero_mul, pow_zero, one_smul] at hc₀
+        erw [hc₀]
         simpa [i₀, A, B] using (hs (picardScalarModelEquiv f F 0 (A.homologyπ 0 a'))
           (picardScalarModelEquiv g G 0 (B.homologyπ 0 b'))).symm
       have hmap' : ∀ x, HomologicalComplex.homologyMap c 0 (d x) = t x :=

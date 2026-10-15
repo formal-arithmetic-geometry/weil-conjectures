@@ -16,10 +16,13 @@
  ],
  "proof": [
   {
-   "text": "Properness over the affine scheme Spec k gives compactness of X and Y by proper_basic. The unit modules are quasi-coherent by the proved SheafOfModules.isQuasicoherent_unit instance. Their relative diagonals are closed immersions by separatedness, hence affine. Apply picard_kunneth_qcoh in degree one and keep its formula on pure summand tensors.",
+   "text": "In the existing bypass module, obtain a normalized external-cup cochain map from picardExternalCupCochain_exists. Properness gives compactness and affine relative diagonals; the unit modules are quasi-coherent. Prove the formerly axiomatic private degree-one invertibility helper by picardExternalCupCochain_isIso at n=1. Combine its homology isomorphism, the scalar-model comparisons, and tensor_kunneth_nat to construct the degree-one Kunneth equivalence with its pure-summand formula. For p+q=1, p=0 or q=0, so the signed normalization factor is one. This keeps the cup/Kunneth route and uses the existing general cup invertibility result, without an arbitrary axiom.",
    "uses": [
     "pqf-lem-proper-basic",
-    "lem-sc-picard-kunneth-qcoh"
+    "lem-sc-picard-external-cup-cochain",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-qcoh-cech-total-tensor-nat-iso",
+    "lem-sc-picard-kunneth-resolution-model"
    ],
    "elementary": false
   },
@@ -33,7 +36,6 @@
   {
    "text": "For a degree-one summand index (p,q), p+q=1 implies (p,q)=(1,0) or (0,1). In the first case its pure tensor image is the X projection pullback of eX(dY(b) times a), with zero Y class; in the second it is the Y projection pullback of eY(dX(a) times b), with zero X class. The Kunneth generator formula identifies these with the direct-sum map values.",
    "uses": [
-    "lem-sc-picard-kunneth-qcoh",
     "lem-sc-picard-external-cup-scalar-comparison"
    ],
    "elementary": true
@@ -45,14 +47,19 @@
   }
  ],
  "proof_deps": [
-  "pqf-lem-proper-basic",
-  "lem-sc-picard-kunneth-qcoh",
-  "lem-sc-picard-external-cup-scalar-comparison"
+  "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-external-cup-quasi-iso",
+  "lem-sc-picard-external-cup-scalar-comparison",
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-qcoh-cech-total-tensor-nat-iso",
+  "pqf-lem-proper-basic"
  ],
  "proof_origin": {
-  "by": "U3 stage-3 worker",
+  "by": "K1 second reader",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, varieties-lemma-kunneth, degree one; explicit tensor and direct-sum induction with scalar comparison split off"
+  "place": "Tag 0BED; degree-one Kunneth via the existing cup invertibility theorem, then unchanged scalar spanning argument",
+  "date": "2026-10-15",
+  "group": "K1"
  },
  "mathlib_searches": [
   {
@@ -127,14 +134,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "X-6482b",
-  "group": "U3",
+  "reviewer": "X-09592",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T225334-L-1814390",
+  "landing": "20261015T040627-L-472947",
   "kind": "interface",
-  "note": "independent Codex review: Matched unchanged spanning signature and new comparison theorem with their nodes, dependencies, and sources; both delivered modules and the sole direct importer compiled cleanly; axioms were propext, Classical.choice, Quot.sound, and justified sorryAx."
+  "note": "independent Codex review: Matched 15 delivered Lean modules with 16 node records, declared interface corrections, original callers, required importers, sources, and axiom probes."
  },
  "lean_audit": {
   "master": {
