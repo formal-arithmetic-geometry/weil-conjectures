@@ -355,5 +355,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-81bc199c1 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, cited statements, unit/chapter route, and source passages in full. Verified Stacks 0F6D, 099W(1), 09AY, 092Q/092R and the exact Mathlib fpqc sheaf theorem; checked coefficient scope, target source declarations, edge cases, duplicates and dependency cycles. Repaired one B3 missing-definition-citation fault in the item's statement and stmt_deps. Mathematics unchanged. Concrete checks and accepted tool uses are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFunctionsQuotientSections",
+  "declaration": "AlgebraicGeometry.Scheme.exists_proEtale_functions_quotient_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFunctionsQuotientSections.lean",
+  "statement": "theorem exists_proEtale_functions_quotient_sections (X : Scheme.{u}) (A : Type (u + 1)) [AddCommGroup A] : ∃ (F : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) (e : ∀ V : X.ProEt, F.obj.obj (op V) ≃+ (V.left → A)), (∀ (U V : X.ProEt) (f : U ⟶ V) (s : F.obj.obj (op V)) (x : U.left), e U (F.obj.map f.op s) x = e V s (f.left x)) ∧ ∃ (i : (constantSheaf (ProEt.topology X) AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of A) ⟶ F), Mono i ∧ (∀ (V : X.ProEt) (a : A) (x : V.left), e V (i.hom.app (op V) ((toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of A))).app (op V) a)) x = a) ∧ (∀ (V : X.ProEt) (f : V.left → A), (∃ s, e V (i.hom.app (op V) s) = f) ↔ IsLocallyConstant f) ∧ (∃ c : (presheafToSheaf (ProEt.topology X) AddCommGrpCat.{u + 1}).obj (cokernel i.hom) ≅ cokernel i, ∀ (V : X.ProEt) (s : F.obj.obj (op V)), c.hom.hom.app (op V) ((toSheafify (ProEt.topology X) (cokernel i.hom)).app (op V) ((cokernel.π i.hom).app (op V) s)) = (cokernel.π i).hom.app (op V) s) ∧ ((∀ x : X, IsClosed ({x} : Set X)) → (∀ x : X, IsSepClosed (X.residueField x)) → ∀ (V : X.ProEt), IsAffine V.left → ∃ q : ((V.left → A) ⧸ (LocallyConstant.coeFnAddMonoidHom : LocallyConstant V.left A →+ (V.left → A)).range) ≃+ (cokernel i).obj.obj (op V), ∀ f : V.left → A, q (QuotientAddGroup.mk f) = (cokernel.π i).hom.app (op V) ((e V).symm f))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9395d7871",
+  "group": "NR",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, seven dependencies, source passages, edge cases, universes, canonical maps, and maintainer gates. Signature matches verbatim; immutable module reproduced a clean server-only compile in 2.3 seconds. No delivery errors found; branch unchanged."
  }
 }
