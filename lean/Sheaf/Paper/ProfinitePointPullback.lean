@@ -14,6 +14,7 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.Sites.MonObj
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
 # The geometric inverse image from the profinite point

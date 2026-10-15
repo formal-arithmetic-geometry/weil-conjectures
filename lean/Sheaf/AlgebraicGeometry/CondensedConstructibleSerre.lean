@@ -21,6 +21,7 @@ import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
 import Sheaf.Paper.CondensedQbarLfpLocalTriviality
 import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Serre closure for constructible condensed field module sheaves

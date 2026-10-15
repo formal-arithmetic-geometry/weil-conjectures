@@ -23,6 +23,7 @@ import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.CategoryTheory.SiteModuleSheafGluing
 import Sheaf.Paper.CondensedSheafExtContinuity
 import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Descent of a constructible condensed module to finite coefficients

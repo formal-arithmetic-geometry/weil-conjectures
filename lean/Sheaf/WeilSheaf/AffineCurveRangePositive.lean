@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+import WeilConjectures.WeilSheaf.Category
 
 @[expose] public section
 

@@ -22,6 +22,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
 import Sheaf.Paper.CondensedPointBasisEvaluation
 import Sheaf.Paper.GeometricFieldProEtaleEvaluation
 import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Local triviality over continuous p-adic field coefficients

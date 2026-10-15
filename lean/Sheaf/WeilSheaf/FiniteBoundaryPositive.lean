@@ -6,6 +6,8 @@ Authors: SHEAF group F3
 module
 
 public import WeilConjectures.WeilSheaf.LowerShriek
+import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.WeilSheaf.Category
 
 @[expose] public section
 

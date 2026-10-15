@@ -22,6 +22,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
 import Sheaf.Paper.CondensedPointBasisEvaluation
 import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Local triviality for bounded-image condensed algebraic-closure coefficients

@@ -19,6 +19,7 @@ import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Mathlib.Topology.Algebra.Valued.LocallyCompact
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.Paper.ProEtaleConstructibleSheaf
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Constructible cohomology of finite-coefficient derived tensors
