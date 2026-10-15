@@ -25,10 +25,10 @@
  ],
  "proof": [
   {
-   "text": "Install PreservesLimitsOfSize.{0,0} R from adj.rightAdjoint_preservesLimits, then infer preservation of each finite discrete diagram. With this finite-product instance use the proved liftedCommGrpBranch and liftedCommRingBranch constructions and pair their conclusions with the preservation witness.",
+   "text": "Install PreservesLimitsOfSize.{0,0} R from adj.rightAdjoint_preservesLimits and infer finite-product preservation. Construct the group lifts directly as L.mapCommGrp and R.mapCommGrp with the canonical Cartesian braided structures and reflexive forgetful equalities. Use adj.mapCommGrp for the adjunction. Rewrite multiplication and unit via Functor.Monoidal.μ_of_cartesianMonoidalCategory and ε_of_cartesianMonoidalCategory; inverse is transported by mapping. Simplify the identity components in the lifted unit and counit. Adjunction.homEquiv_unit identifies the underlying hom-equivalence, and applying it and its inverse proves the final existence criterion. Pair this group branch with liftedCommRingBranch and the preservation witness.",
    "uses": [
     "lem-weil-pbc-right-adjoint-preserves-limits",
-    "lem-weil-pbc-lifted-comm-group-branch",
+    "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
     "lem-weil-pbc-lifted-comm-ring-branch"
    ],
    "elementary": false
@@ -36,13 +36,13 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-right-adjoint-preserves-limits",
-  "lem-weil-pbc-lifted-comm-group-branch",
+  "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
   "lem-weil-pbc-lifted-comm-ring-branch"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Proposition 00YV; composition of Mathlib right-adjoint limit preservation and the two proved branch assemblies (G1 second reading)"
+  "place": "Proposition 00YV; C1 duplicate repair of upstream review #1424 using Mathlib mapCommGrp directly"
  },
  "mathlib_searches": [
   {
@@ -156,13 +156,13 @@
   "note": "A,B CartesianMonoidal (finite products, canonical braiding via letI); adj L⊣R + PreservesFiniteProducts L; ∃ PreservesFiniteProducts R; Mathlib CommGrp / CommRingObjCat (G1-G4, R1-R4 equivalent, add_mul/mul_one/left_inv derived); transported ops via prodComparisonIso.inv / preservesTerminalIso.inv for L and R; strict forget equalities; lifted adjunction with homEquiv, unit, counit restricted; iff clause (2)"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-94dd6",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T053932-L-2635229",
+  "landing": "20261015T154155-L-159406",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged caller signature and direct Mathlib construction with the node statements and proof dependencies; both delivered modules and the sole direct importer compile cleanly; original caller fails as reported; axioms are exactly propext, Classical.choice, Quot.sound."
  }
 }

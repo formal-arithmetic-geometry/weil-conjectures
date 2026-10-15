@@ -8,7 +8,6 @@ module
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Ring
 import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.CategoryTheory.Adjunction.LiftedCommGrpBranch
 import Sheaf.CategoryTheory.Adjunction.LiftedCommRingBranch
 
 /-!
@@ -145,6 +144,61 @@ theorem liftsGroupRingObjects
                 (CommRingObjCat.forget A).map g ≫ eR.hom.app Y = adj.homEquiv X.X Y.X α)) := by
   let : PreservesLimitsOfSize.{0, 0} R := adj.rightAdjoint_preservesLimits
   let : PreservesFiniteProducts R := ⟨fun n => inferInstance⟩
-  exact ⟨inferInstance, liftedCommGrpBranch adj, liftedCommRingBranch adj⟩
+  refine ⟨inferInstance, ?_, liftedCommRingBranch adj⟩
+  let : BraidedCategory A := BraidedCategory.ofCartesianMonoidalCategory
+  let : BraidedCategory B := BraidedCategory.ofCartesianMonoidalCategory
+  let : L.Braided := Functor.Braided.ofChosenFiniteProducts L
+  let : R.Braided := Functor.Braided.ofChosenFiniteProducts R
+  have hforward (X : CommGrp A) (Y : CommGrp B) (f : L.mapCommGrp.obj X ⟶ Y) :
+      (adj.mapCommGrp.homEquiv X Y f).hom.hom.hom =
+        adj.homEquiv X.X Y.X f.hom.hom.hom := by
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+    change (𝟙 _ ≫ adj.unit.app X.X ≫ 𝟙 _) ≫ R.map f.hom.hom.hom = _
+    simp only [Category.id_comp, Category.comp_id]
+  refine ⟨L.mapCommGrp, R.mapCommGrp, rfl, rfl, adj.mapCommGrp, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro X
+    change
+      ((Functor.LaxMonoidal.μ L X.X X.X ≫ L.map MonObj.mul) ≫ 𝟙 _ =
+        (𝟙 _ ⊗ₘ 𝟙 _) ≫ (prodComparisonIso L X.X X.X).inv ≫ L.map MonObj.mul) ∧
+      ((Functor.LaxMonoidal.ε L ≫ L.map MonObj.one) ≫ 𝟙 _ =
+        (preservesTerminalIso L).inv ≫ L.map MonObj.one) ∧
+      (L.map GrpObj.inv ≫ 𝟙 _ = 𝟙 _ ≫ L.map GrpObj.inv)
+    simp only [Category.comp_id, tensorHom_id, id_whiskerRight, Category.id_comp,
+      Functor.Monoidal.μ_of_cartesianMonoidalCategory,
+      Functor.Monoidal.ε_of_cartesianMonoidalCategory, and_self]
+  · intro X
+    change
+      ((Functor.LaxMonoidal.μ R X.X X.X ≫ R.map MonObj.mul) ≫ 𝟙 _ =
+        (𝟙 _ ⊗ₘ 𝟙 _) ≫ (prodComparisonIso R X.X X.X).inv ≫ R.map MonObj.mul) ∧
+      ((Functor.LaxMonoidal.ε R ≫ R.map MonObj.one) ≫ 𝟙 _ =
+        (preservesTerminalIso R).inv ≫ R.map MonObj.one) ∧
+      (R.map GrpObj.inv ≫ 𝟙 _ = 𝟙 _ ≫ R.map GrpObj.inv)
+    simp only [Category.comp_id, tensorHom_id, id_whiskerRight, Category.id_comp,
+      Functor.Monoidal.μ_of_cartesianMonoidalCategory,
+      Functor.Monoidal.ε_of_cartesianMonoidalCategory, and_self]
+  · intro X Y f
+    change (adj.mapCommGrp.homEquiv X Y f).hom.hom.hom ≫ 𝟙 _ =
+      adj.homEquiv X.X Y.X (𝟙 _ ≫ f.hom.hom.hom)
+    simp only [Category.comp_id, Category.id_comp]
+    exact hforward X Y f
+  · intro X
+    change (𝟙 _ ≫ adj.unit.app X.X ≫ 𝟙 _) ≫ 𝟙 _ ≫ R.map (𝟙 _) = _
+    simp only [Functor.map_id, Category.comp_id, Category.id_comp]
+    exact Category.comp_id _
+  · intro Y
+    change L.map (𝟙 _) ≫ 𝟙 _ ≫ (𝟙 _ ≫ adj.counit.app Y.X ≫ 𝟙 _) = _
+    simp only [Category.comp_id, Category.id_comp, Functor.map_id]
+  · intro X Y α
+    change (∃ f : L.mapCommGrp.obj X ⟶ Y, 𝟙 _ ≫ f.hom.hom.hom = α) ↔
+      ∃ g : X ⟶ R.mapCommGrp.obj Y,
+        g.hom.hom.hom ≫ 𝟙 _ = adj.homEquiv X.X Y.X α
+    simp only [Category.id_comp, Category.comp_id]
+    constructor
+    · rintro ⟨f, hf⟩
+      exact ⟨adj.mapCommGrp.homEquiv X Y f, (hforward X Y f).trans (congrArg _ hf)⟩
+    · rintro ⟨g, hg⟩
+      refine ⟨(adj.mapCommGrp.homEquiv X Y).symm g, ?_⟩
+      apply (adj.homEquiv X.X Y.X).injective
+      rw [← hforward X Y, Equiv.apply_symm_apply, hg]
 
 end CategoryTheory.Adjunction
