@@ -23,6 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
+set_option linter.unusedVariables false in
 /-- The qcqs finite-cover subsite has scheme fibre products and slice finite limits.
 Finite disjoint unions are qcqs, and affine for affine summands. Representable sheaves
 carry these unions to coproducts, and sections of every sheaf carry them to products,
@@ -89,6 +90,32 @@ theorem qcqs_finite_family_geometry (X : Scheme.{u}) :
         (IsEmpty I → IsEmpty W.left ∧
           ∀ F : Sheaf (topology X) (Type (max (u + 1) w)),
             Nonempty (Unique (F.obj.obj (op W))))) := by
-  sorry
+  refine ⟨?_, ?_, inferInstance, ?_⟩
+  · intro V hV
+    have := hV
+    exact ⟨inferInstance, inferInstance⟩
+  · obtain ⟨h, J, hJ, hinc, hsch, hcov, hslice, _hfin, hadd⟩ := qcqs_site_limits X
+    refine ⟨h, J, hJ, hinc, hsch, hcov, ?_, hadd⟩
+    intro T
+    obtain ⟨hT, hpres⟩ := hslice T
+    have := hT
+    have := hpres
+    have : (Over.iteratedSliceForward
+        ((qcqsInclusion X ⋙ ProEt.forget X).obj T)).IsEquivalence :=
+      inferInstanceAs (Over.iteratedSliceEquiv
+        ((qcqsInclusion X ⋙ ProEt.forget X).obj T)).functor.IsEquivalence
+    refine ⟨hT, ?_, hpres⟩
+    have : PreservesFiniteLimits
+        (Over.post (X := T) (qcqsInclusion X) ⋙
+          (Over.post (ProEt.forget X) ⋙
+            Over.iteratedSliceForward ((qcqsInclusion X ⋙ ProEt.forget X).obj T))) := by
+      rw [← Functor.assoc, ← Over.post_comp]
+      exact hpres
+    exact preservesFiniteLimits_of_reflects_of_preserves
+      (Over.post (X := T) (qcqsInclusion X))
+      (Over.post (ProEt.forget X) ⋙
+        Over.iteratedSliceForward ((qcqsInclusion X ⋙ ProEt.forget X).obj T))
+  · intro I _ V hqc hqs
+    exact finite_coproduct_evaluation X I V hqc hqs
 
 end AlgebraicGeometry.Scheme.ProEt

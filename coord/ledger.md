@@ -15026,3 +15026,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:41 L: merged deliver/C2/Sheaf.Paper.CohomologyInWeakSerreSubcategory (stage 3; reviewer PASS; first push; landing 20261015T154157-L-159984 (proof); batch 20261015T154146; modules 1; new nodes 0)
 - 15:41 L: merged deliver/C4/Sheaf.AlgebraicGeometry.ProEtaleHypercoverTotal (stage 3; reviewer PASS; first push; landing 20261015T154157-L-160091 (proof); batch 20261015T154146; modules 1; new nodes 0)
 - 15:41 L: merged deliver/C4/Sheaf.AlgebraicGeometry.ProEtaleQcAffineContractibleCover (stage 3; reviewer PASS; first push; landing 20261015T154157-L-160189 (proof); batch 20261015T154146; modules 1; new nodes 0)
+- 15:41 L: merged deliver/C4/Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry (stage 3; reviewer PASS; first push; landing 20261015T154158-L-160293 (proof); batch 20261015T154146; modules 1; new nodes 0)
