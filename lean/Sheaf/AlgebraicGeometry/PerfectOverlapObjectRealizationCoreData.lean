@@ -969,6 +969,32 @@ noncomputable def transportDataOfComposite
     hθU := rfl
     hθV := rfl }
 
+/-- The diagram field of composite transport is the restriction diagram for the
+second map.
+Source: Stacks Project, Tags 08DW and 0D5S. The composite transport first
+constructs the restriction comparison for `g` on both inverse-image opens; its
+remaining fields add the two pullback-composition isomorphisms and the local
+object identifications. Projecting the diagram field therefore returns that
+restriction comparison. The two inclusion proofs agree by the equality
+`g ≫ f = gf`, and proof irrelevance identifies their presentations. -/
+theorem transportDataOfComposite_diagram
+    {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
+    (hgf : g ≫ f = gf) (U V : Y₀.Opens)
+    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)
+    (E : schemeDerivedCategory X)
+    (φU : (derivedPullback (gf ∣_ U)).obj A ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ U)).mapDerivedCategory.obj E)
+    (φV : (derivedPullback (gf ∣_ V)).obj B ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ V)).mapDerivedCategory.obj E) :
+    (transportDataOfComposite f g gf hgf U V A B E φU φV).d =
+      schemeComparisonFromRestrictions g (f ⁻¹ᵁ U) (f ⁻¹ᵁ V)
+        (gf ⁻¹ᵁ U) (gf ⁻¹ᵁ V)
+        (by rw [← Scheme.Hom.comp_preimage, hgf])
+        (by rw [← Scheme.Hom.comp_preimage, hgf]) := by
+  unfold transportDataOfComposite
+  rfl
+
+
 
 end
 
