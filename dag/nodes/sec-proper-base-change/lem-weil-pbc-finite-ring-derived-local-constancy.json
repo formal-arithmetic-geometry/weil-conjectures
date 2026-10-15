@@ -23,7 +23,10 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-constant-sheaf",
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-etale-derived-map-presheaves",
+  "def-constructible-locally-constant"
  ],
  "proof": [
   {
@@ -261,5 +264,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-29137544b",
+  "group": "NH",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, constructions, universes, edge cases, docstrings, and verbatim signatures. Both modules compiled separately through scompile.py with no errors or warnings. No corrections needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy",
+  "declaration": "AlgebraicGeometry.Etale.finiteRing_derived_local_constancy",
+  "declarations": [],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingDerivedLocalConstancy.lean",
+  "statement": "theorem finiteRing_derived_local_constancy (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B] (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) n).obj K)) (hlisse : ∀ n : ℤ, IsFiniteLocallyConstantSheaf ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) n).obj K)) : (∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i : 𝒰.I₀, ∃ E : CochainComplex (ModuleCat.{u + 1} B) ℤ, (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n)) ∧ (∀ n : ℤ, Finite (E.X n)) ∧ Nonempty ((upperStar (ModuleCat.{u + 1} B) (𝒰.f i)).mapDerivedCategory.obj K ≅ DerivedCategory.Q.obj (((constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} B)).mapHomologicalComplex (ComplexShape.up ℤ)).obj E))) ∧ (∀ L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)), (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) n).obj L)) → (∀ n : ℤ, IsFiniteLocallyConstantSheaf ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) n).obj L)) → IsFiniteLocallyConstantSheafOfTypes ((presheafToSheaf X.smallEtaleTopology (Type (u + 1))).obj (derivedHomPresheaf B K L)) ∧ IsFiniteLocallyConstantSheafOfTypes ((presheafToSheaf X.smallEtaleTopology (Type (u + 1))).obj (derivedIsoPresheaf B K L))) ∧ (∀ (U : Scheme.{u}) (E G : CochainComplex (ModuleCat.{u + 1} B) ℤ), (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n)) → (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n)) → (∀ n : ℤ, Finite (E.X n)) → (∀ n : ℤ, Finite (G.X n)) → Nonempty (((presheafToSheaf U.smallEtaleTopology (Type (u + 1))).obj (derivedHomPresheaf B (DerivedCategory.Q.obj (((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} B)).mapHomologicalComplex (ComplexShape.up ℤ)).obj E)) (DerivedCategory.Q.obj (((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} B)).mapHomologicalComplex (ComplexShape.up ℤ)).obj G)))) ≅ (constantSheaf U.smallEtaleTopology (Type (u + 1))).obj (DerivedCategory.Q.obj E ⟶ DerivedCategory.Q.obj G))) ∧ (ConnectedSpace X → ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i : 𝒰.I₀, Nonempty ((upperStar (ModuleCat.{u + 1} B) (𝒰.f i)).mapDerivedCategory.obj K ≅ (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} B)).mapDerivedCategory.obj ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (((pointSmallEtale x).ulift.{u + 1}).sheafFiber (A := ModuleCat.{u + 1} B)) (Functor.additive_of_preserves_binary_products _) _ _).obj K)))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
