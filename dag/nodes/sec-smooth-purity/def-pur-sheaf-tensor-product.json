@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "The source monoidalCategory and tensorObjIsoSheafification identify the tensor of sheaves with the sheafification of the sectionwise presheaf tensor. positiveTensorPower recursively uses this tensor, starting at the original sheaf in degree one.",
+   "text": "The existing specialized monoidalCategory and tensorObjIsoSheafification identify the tensor of sheaves with sheafification of the sectionwise presheaf tensor. positiveTensorPower recursively uses that tensor. For independent ring and module universes the siteTensorPresheaf and siteSheafTensorRight constructions use the identical sectionwise tensor formula and module sheafification.",
    "uses": [
     "def-pur-presheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification"
@@ -30,21 +30,33 @@
    "elementary": false
   },
   {
-   "text": "Construct the sectionwise change-of-rings restriction using Mathlib ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars. The map m ↦ 1 tensor M(f)(m) is linear over R1(X) into the twice-restricted target: M.map_smul and naturality of the ring morphism alpha identify the scalar actions. The universal property sends s tensor m to R2(f)(s) tensor M(f)(m), by TensorProduct.lift.tmul and ExtendScalars.smul_tmul. This proves exists_changeOfRingsMap.",
+   "text": "For exists_changeOfRingsMapMixedUniverses, view R2(X) and R2(Y) as modules over R1(X) and R1(Y) using alpha. Naturality of alpha and multiplicativity of R2(f) make R2(f) semilinear over R1(f). TensorProduct.map of this semilinear map with M.restrictₛₗ f gives the required underlying additive map. TensorProduct.induction_on proves R2(X)-linearity: zero and sums follow from additivity, and on s tensor m the assertion is exactly R2(f)(a*s) = R2(f)(a)*R2(f)(s). Its pure-tensor formula is definitional.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Classical.choose_spec gives the pure-tensor formula for the chosen changeOfRingsMap. Apply Mathlib ModuleCat.ExtendScalars.hom_ext to the identity and composition assertions. On generators 1 tensor m, the formula reduces the assertions to the ring-presheaf and module-presheaf identity and composition laws; the restrictScalarsId and restrictScalarsComp comparisons act as the identity on underlying elements.",
+   "text": "Classical.choose_spec gives changeOfRingsMap_tmulOfUniverses. Apply Mathlib ModuleCat.ExtendScalars.hom_ext to changeOfRingsMap_idOfUniverses and changeOfRingsMap_compOfUniverses. On generators 1 tensor m the formula reduces both assertions to the ring and module presheaf identity and composition laws. The restrictScalarsId and restrictScalarsComp comparisons are identity functions on underlying elements.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "For changeOfRingsHom_naturality, apply Mathlib ModuleCat.ExtendScalars.hom_ext. Evaluate both composites at 1 tensor m using the chosen-map formula and ExtendScalars.map_tmul. PresheafOfModules.naturality_apply for the original module morphism identifies the module factors. Sheafifying these section maps gives changeOfRingsHom as already defined.",
+   "text": "For changeOfRingsHom_naturalityOfUniverses, use ModuleCat.ExtendScalars.hom_ext, the restriction formula, and ExtendScalars.map_tmul. PresheafOfModules.naturality_apply for the original morphism identifies the module factors. Sheafification of the resulting presheaf morphism gives changeOfRingsHomOfUniverses.",
    "uses": [
     "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": false
+  },
+  {
+   "text": "For siteTensorRestriction_id, siteTensorRestriction_comp and siteTensorHom_naturality, reduce equality of module morphisms to their underlying linear maps with ModuleCat.hom_ext, and then to pure tensors with TensorProduct.ext'. The first two identities follow from PresheafOfModules.map_id and map_comp_apply; naturality follows from naturality_apply in the first tensor factor. The identity and composition laws for siteTensorHom follow sectionwise by the same tensor extensionality and reflexivity on generators.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib already supplies Presheaf.IsLocallyInjective and Presheaf.IsLocallySurjective for an isomorphism of presheaves. Apply these instances to the identity coefficient map. The forget, sectionwise tensor and sheafification functors then compose to the stated siteSheafTensorRight.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -54,7 +66,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Section 03EK, sectionwise tensor restriction construction; formalized by G1 using Mathlib extension-of-scalars universal property"
+  "place": "Section 03EK, sectionwise tensor construction; B2 mixed-universe proof uses semilinear TensorProduct.map, tensor extensionality, and Mathlib local-bijectivity instances. Source checked at https://stacks.math.columbia.edu/tag/03EK; the same-universe scalar-extension laws follow the existing Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct proofs."
  },
  "mathlib_searches": [
   {
@@ -187,13 +199,13 @@
   "note": "Reviewed the immutable node, dependencies, source, Lean declarations, docstrings, edge cases, and report sections. Recompiled all four delivered modules via scompile.py successfully; no substantive or mechanical faults found."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "X-63671",
-  "group": "G1",
+  "reviewer": "COMPILER",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T004254-L-631013",
+  "landing": "20261015T154150-L-158204",
   "kind": "proof",
-  "note": "independent Codex review: Matched the delivered proofs and node proof record with the unchanged Lean signatures and definitions; compilation is clean, all nine public declarations and the private helper use only permitted axioms, and no sorry remains."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
