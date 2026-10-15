@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.AffineComplementReciprocalCover
 import Sheaf.AlgebraicGeometry.ReciprocalCoverLineBundle
 import Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre

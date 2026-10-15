@@ -6,7 +6,7 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import Sheaf.AlgebraicGeometry.ResolutionOpenScalarComparison
 import Sheaf.AlgebraicGeometry.TensorUnitPowerScalar

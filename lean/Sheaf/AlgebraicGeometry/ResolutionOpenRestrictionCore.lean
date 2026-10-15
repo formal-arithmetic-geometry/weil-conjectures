@@ -6,7 +6,7 @@ Authors: SHEAF group E4
 module
 
 public import Sheaf.AlgebraicGeometry.ResolutionOpenComparisonMap
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
 import Sheaf.AlgebraicGeometry.ResolutionOpenRestrictionNatural

@@ -6,7 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.Topology.OpenModuleCohomology
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import Sheaf.Topology.PointwiseTruncationLimitExists

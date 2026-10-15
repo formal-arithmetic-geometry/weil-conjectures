@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic

@@ -8,7 +8,7 @@ module
 import all Sheaf.AlgebraicGeometry.AmpleIso
 import all Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 

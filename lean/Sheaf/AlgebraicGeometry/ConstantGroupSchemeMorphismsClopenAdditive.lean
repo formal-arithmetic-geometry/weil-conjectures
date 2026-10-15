@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J3
 -/
 module
-public import Sheaf.AlgebraicGeometry.ConstantGroupScheme
+public import WeilConjectures.AlgebraicGeometry.ConstantGroupScheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!

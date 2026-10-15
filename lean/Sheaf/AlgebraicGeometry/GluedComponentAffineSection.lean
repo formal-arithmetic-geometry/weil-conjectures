@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.AmpleIso
 import Sheaf.AlgebraicGeometry.AmpleFinitePrincipalAffine

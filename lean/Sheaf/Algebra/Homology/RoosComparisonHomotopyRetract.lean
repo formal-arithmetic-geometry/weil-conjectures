@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.Homotopy
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
-public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
+public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 import Sheaf.Algebra.Homology.RoosComparisonMaps
 import Sheaf.Algebra.Homology.RoosComparisonHomotopies
 

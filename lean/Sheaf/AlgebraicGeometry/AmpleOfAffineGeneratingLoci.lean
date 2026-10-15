@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
-import Sheaf.AlgebraicGeometry.Ample
+import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.AmpleImmersionAffineBase
 import Sheaf.AlgebraicGeometry.CompleteLinearSystemClosed
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
-public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
+public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 
 @[expose] public section
 

@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor

@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.Paper.LocalizedCohomologyMayerVietoris
 import Sheaf.Paper.CohomologySectionDivision
 import Mathlib.Algebra.FiveLemma

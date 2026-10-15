@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ConstantGroupScheme
+public import WeilConjectures.AlgebraicGeometry.ConstantGroupScheme
 public import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
 public import Mathlib.Topology.LocallyConstant.Algebra
 import Mathlib.Algebra.Group.TransferInstance

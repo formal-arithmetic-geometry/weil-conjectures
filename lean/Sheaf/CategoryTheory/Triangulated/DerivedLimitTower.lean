@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective

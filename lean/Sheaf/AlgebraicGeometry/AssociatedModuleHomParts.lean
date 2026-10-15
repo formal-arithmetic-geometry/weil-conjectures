@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.AssociatedModule
+public import WeilConjectures.AlgebraicGeometry.AssociatedModule
 
 @[expose] public section
 

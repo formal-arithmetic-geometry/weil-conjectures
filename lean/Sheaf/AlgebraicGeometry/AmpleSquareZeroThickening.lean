@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible

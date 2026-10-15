@@ -5,7 +5,7 @@ Authors: SHEAF group W3
 -/
 module
 
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products

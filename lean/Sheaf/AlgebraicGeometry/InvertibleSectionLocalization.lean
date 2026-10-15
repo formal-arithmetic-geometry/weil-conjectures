@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SectionFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.SectionFractionRestrictionMap
 import Sheaf.Paper.NonvanishingSectionTrivializes

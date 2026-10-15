@@ -6,7 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.AlgebraicGeometry.OpenSectionFractionPresentation
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffineSectionLocalization
 import Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestriction

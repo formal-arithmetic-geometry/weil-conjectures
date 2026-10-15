@@ -1,7 +1,7 @@
 module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
 @[expose] public section
 universe u

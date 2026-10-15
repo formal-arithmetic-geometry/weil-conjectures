@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.NonvanishingCommonDegree
 import Sheaf.AlgebraicGeometry.NonvanishingTransitionFunctions
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated

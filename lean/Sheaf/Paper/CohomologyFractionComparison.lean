@@ -6,7 +6,7 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.Paper.CohomologySectionDivision
 
 /-! # Comparison from cohomology fractions

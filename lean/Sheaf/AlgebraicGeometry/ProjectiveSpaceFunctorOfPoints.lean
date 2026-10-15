@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Sheaf.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomIsSheaf

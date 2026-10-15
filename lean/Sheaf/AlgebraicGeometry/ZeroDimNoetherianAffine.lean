@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Mathlib.AlgebraicGeometry.Limits
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete

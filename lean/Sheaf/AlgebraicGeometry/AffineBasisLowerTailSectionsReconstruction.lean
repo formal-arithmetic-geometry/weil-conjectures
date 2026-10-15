@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 

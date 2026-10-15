@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.AmpleFinitePowerCover

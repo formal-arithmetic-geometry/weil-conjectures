@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ConstantGroupScheme
+public import WeilConjectures.AlgebraicGeometry.ConstantGroupScheme
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!

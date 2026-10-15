@@ -5,7 +5,7 @@ Authors: SHEAF group G2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 
 /-! # Nonvanishing and local generation of an invertible module

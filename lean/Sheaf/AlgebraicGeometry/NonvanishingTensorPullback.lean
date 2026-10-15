@@ -5,7 +5,7 @@ Authors: SHEAF group R2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor

@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle
 import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing

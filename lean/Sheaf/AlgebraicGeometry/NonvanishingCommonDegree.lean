@@ -5,7 +5,7 @@ Authors: SHEAF group B3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
 import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 

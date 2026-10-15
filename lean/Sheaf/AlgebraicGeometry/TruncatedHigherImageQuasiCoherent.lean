@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.AlgebraicGeometry.Ample
+import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.CategoryTheory.TruncationHypercohomology
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension

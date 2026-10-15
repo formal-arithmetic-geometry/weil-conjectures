@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Topology.OpenModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.Paper.NonvanishingSectionTrivializes
 import Sheaf.Topology.OpenModuleCohomologyLocalIso
 

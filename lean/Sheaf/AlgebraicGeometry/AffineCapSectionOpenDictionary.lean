@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic

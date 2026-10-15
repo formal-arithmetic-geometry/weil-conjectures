@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.SectionCohomologyUntwistedComparisons
 import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
 

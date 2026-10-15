@@ -5,7 +5,7 @@ Authors: SHEAF group H2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
 import all Sheaf.AlgebraicGeometry.AmpleIso
 import Sheaf.AlgebraicGeometry.NonvanishingTensorPullback

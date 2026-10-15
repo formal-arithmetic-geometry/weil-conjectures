@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
 import WeilConjectures.AlgebraicGeometry.Modules.QcqsSections
 

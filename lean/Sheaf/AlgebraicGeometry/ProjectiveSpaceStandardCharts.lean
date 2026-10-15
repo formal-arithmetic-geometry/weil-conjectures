@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardChartsPullback
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardChartsNonvanishing
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardChartsAffine

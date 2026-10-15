@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
-public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
+public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 import Sheaf.Algebra.Homology.TowerSplitComplexReplacement
 import Sheaf.Algebra.Homology.RoosSplitComparison
 import Sheaf.Algebra.Homology.RoosComparisonHomotopyRetract

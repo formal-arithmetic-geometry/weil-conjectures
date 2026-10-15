@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import Sheaf.AlgebraicGeometry.InvertibleStalkLinearEquiv
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk

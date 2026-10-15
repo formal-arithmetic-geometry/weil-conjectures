@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.AmpleProjOpen
 import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
 import Sheaf.RingTheory.GradedPrimeAvoidance

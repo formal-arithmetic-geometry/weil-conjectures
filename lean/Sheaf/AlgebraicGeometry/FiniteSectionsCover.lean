@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.GlobalGenerationNonvanishingCover
 import Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
 

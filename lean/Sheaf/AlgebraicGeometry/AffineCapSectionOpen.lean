@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.AffineCapSectionOpenAlgebra
 import Sheaf.AlgebraicGeometry.AffineCapSectionOpenDictionary
 import Sheaf.AlgebraicGeometry.NonvanishingLocusRestrict

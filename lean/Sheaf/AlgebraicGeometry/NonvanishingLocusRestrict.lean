@@ -5,7 +5,7 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 
 /-! # Nonvanishing loci under restriction along an open immersion
 

@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.AmpleSeparated
 import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistGluedIdentification
 import Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection

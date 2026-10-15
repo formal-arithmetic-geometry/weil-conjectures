@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistingSheafCharts

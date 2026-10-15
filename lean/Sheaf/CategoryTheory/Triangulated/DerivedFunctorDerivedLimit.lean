@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
-public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.CategoryTheory.Triangulated.RightDerivedFunctorCountableProducts
 
 /-!

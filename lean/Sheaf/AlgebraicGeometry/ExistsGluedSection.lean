@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 import Sheaf.AlgebraicGeometry.ComponentSectionCechData

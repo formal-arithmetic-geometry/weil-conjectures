@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.AffineRestrictedTwistVanishing
 import Sheaf.AlgebraicGeometry.HigherDirectImageOpenRestriction

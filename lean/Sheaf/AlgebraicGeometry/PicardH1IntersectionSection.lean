@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescent
 

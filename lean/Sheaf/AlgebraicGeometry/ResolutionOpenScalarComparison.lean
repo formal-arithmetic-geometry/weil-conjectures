@@ -6,7 +6,7 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.ResolutionOpenRestrictionCore

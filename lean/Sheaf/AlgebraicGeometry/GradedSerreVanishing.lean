@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.Paper.PQFCohomology
 import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.AlgebraicGeometry.GradedModuleAffineBaseChange

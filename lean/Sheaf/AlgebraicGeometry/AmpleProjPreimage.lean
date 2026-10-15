@@ -6,7 +6,7 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import Sheaf.AlgebraicGeometry.SectionRingProjPreimageForward
 import Sheaf.AlgebraicGeometry.SectionRingProjPreimageReverse

@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import Sheaf.Paper.NonvanishingSectionTrivializes

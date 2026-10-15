@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.AlgebraicGeometry.AssociatedModule
+public import WeilConjectures.AlgebraicGeometry.AssociatedModule
 public import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.AssociatedModuleHom
 

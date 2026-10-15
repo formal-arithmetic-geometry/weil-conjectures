@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.Algebra.Category.Grp.Abelian
-public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
+public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 import Sheaf.CategoryTheory.RoosAcyclicResolution
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 import Sheaf.CategoryTheory.InjectiveTowerEmbedding

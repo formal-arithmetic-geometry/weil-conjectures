@@ -5,7 +5,7 @@ Authors: SHEAF group H2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import all Sheaf.Paper.NonvanishingSectionTrivializes
 
 /-! # The stalk of an invertible module has rank one

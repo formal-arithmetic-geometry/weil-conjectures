@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
 import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescentGenerator

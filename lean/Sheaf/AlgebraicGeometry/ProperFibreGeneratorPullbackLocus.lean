@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.Paper.NonvanishingSectionTrivializes
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 
