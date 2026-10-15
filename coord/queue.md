@@ -1,6 +1,6 @@
 # Work queue
 
-64 items; claim with `tools/claim.py next <group> [--stage N]`.
+61 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,11 +8,11 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (64)
+## Stage 3: modules to prove (61)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
-| `Sheaf.CategoryTheory.SiteCoveringsCommonRefinement` | 4 | 2 | repair |
+| `Sheaf.CategoryTheory.SiteCoveringsCommonRefinement` | 4 | 0 | repair |
 | `Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp` | 1 | 2 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 5 | proof |
@@ -32,10 +32,7 @@
 | `Sheaf.Paper.CondensedSheafExtContinuity` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift` | 5 | 5 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleShriekSpecializationZero` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections` | 5 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction` | 5 | 1 | proof |
@@ -55,10 +52,8 @@
 | `Sheaf.Paper.PointLanAffineEvaluation` | 6 | 1 | proof |
 | `Sheaf.Paper.ProEtalePointComponentsMaps` | 6 | 1 | proof |
 | `Sheaf.Paper.ProEtaleSheafificationWcontractibleSections` | 6 | 1 | proof |
-| `Sheaf.RingTheory.ProEtale.ClosedLiftAdjunction` | 6 | 1 | proof |
 | `Sheaf.RingTheory.ProEtale.ClosedLiftMap` | 6 | 3 | proof |
 | `WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing` | 6 | 1 | proof |
-| `WeilConjectures.RingTheory.ProEtale.ClosedLift` | 6 | 2 | proof |
 | `WeilConjectures.WeilSheaf.Finiteness` | 6 | 2 | proof |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | 6 | 5 | proof |
 | `WeilConjectures.WeilSheaf.StalkExtensionByZero` | 6 | 1 | proof |
@@ -66,7 +61,9 @@
 | `Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverGeometry` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductSections` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.LowerShriekCoveringGenerators` | 7 | 1 | proof |
+| `Sheaf.RingTheory.ProEtale.ClosedLiftAdjunction` | 7 | 1 | proof |
 | `Sheaf.RingTheory.ProEtale.ClosedLiftUnits` | 7 | 1 | proof |
+| `WeilConjectures.RingTheory.ProEtale.ClosedLift` | 7 | 2 | proof |
 | `WeilConjectures.WeilSheaf.Cohomology` | 7 | 2 | proof |
 | `WeilConjectures.WeilSheaf.PoincareDuality` | 7 | 3 | proof |
 | `Sheaf.CategoryTheory.Sites.CoveringRepresentableCoequalizer` | 8 | 1 | proof |
