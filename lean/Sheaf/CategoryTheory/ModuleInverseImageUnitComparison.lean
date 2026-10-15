@@ -4,7 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
 module
-public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Sheaf.CategoryTheory.SheafPullbackUnitPresentation
