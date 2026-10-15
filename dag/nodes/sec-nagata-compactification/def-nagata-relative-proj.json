@@ -168,42 +168,31 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-3019570ab (reviewer sub-agent of L); spot-checked: Read the complete definition, all six cited statements, master blueprint and Stacks 01NN/01NO/01NP/01NQ/01LH. Structural-map direction, unrestricted degree zero, affine refinements, gluing data and restriction equations agree. Edge cases and DAG duplicate/cycle checks passed; no new nodes or repairs. review.md records concrete checks. Separate existence and target comparison proofs are not certified."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.RelativeProjData",
-  "declaration": "AlgebraicGeometry.RelativeProjData",
+  "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
+  "declaration": "AlgebraicGeometry.Scheme.GradedAlgebraData.relProj",
   "declarations": [
-   "AlgebraicGeometry.RelativeProjAlgebra",
-   "AlgebraicGeometry.RelativeProjAlgebra.sections",
-   "AlgebraicGeometry.RelativeProjAlgebra.sectionGrade",
-   "AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_one",
-   "AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_mul",
-   "AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_internal",
-   "AlgebraicGeometry.RelativeProjAlgebra.sectionGradedRing",
-   "AlgebraicGeometry.RelativeProjAlgebra.restriction_mem",
-   "AlgebraicGeometry.RelativeProjAlgebra.restriction",
-   "AlgebraicGeometry.RelativeProjAlgebra.irrelevant_le",
-   "AlgebraicGeometry.RelativeProjAlgebra.unit_mem",
-   "AlgebraicGeometry.RelativeProjAlgebra.unitZero",
-   "AlgebraicGeometry.RelativeProjAlgebra.localProj",
-   "AlgebraicGeometry.RelativeProjAlgebra.localBase",
-   "AlgebraicGeometry.RelativeProjAlgebra.localTransition",
-   "AlgebraicGeometry.RelativeProjData",
-   "AlgebraicGeometry.RelativeProjData.proj",
-   "AlgebraicGeometry.RelativeProjData.π"
+   "AlgebraicGeometry.Scheme.GradedAlgebraData",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.Hom",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProj",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjHom",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjι",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso_hom_naturality",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjFunctor_map_relProjι"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean",
-  "statement": "structure RelativeProjData {X : Scheme.{u}} (A : RelativeProjAlgebra X)",
-  "branch": "newtargets-dag",
-  "by": "NA",
+  "statement": "def relProj : Scheme.{u}",
+  "branch": "slopmaster2",
+  "by": "NE",
   "date": "2026-10-15",
-  "existing": false,
-  "note": "RelativeProjAlgebra presents the input quasi-coherent graded algebra using the recorded graded homogeneous operations and underlying algebra sheaf, identified with the sheaf direct sum. RelativeProjData records relative gluing on all affine opens with canonical local Proj transitions and universal restriction isomorphisms. Named theorem obligations for the section grading and maps have sorry proofs; no existence of RelativeProjData is postulated or selected."
+  "existing": true,
+  "note": "Section 1(B) repair: the prior RelativeProjData record duplicates the existing upstream relative Proj notion and accepts a separate gluing datum; it does not supply the canonical construction on the GradedAlgebraData input used by the existing functoriality and base-change declarations. Reuse the upstream canonical gluing construction instead. GradedAlgebraData gives the equivalent affine-basis presentation of a quasi-coherent graded algebra: actual degreewise base-change restriction, not arbitrary affine rings. relProj glues its local Proj schemes, relProjHom uses the unit into degree zero without assuming A_0 = O_X, relProjι gives the local embeddings, and relProjRestrictIso and its naturality specify the universal affine identifications. Basic and GradedAlgebraData were read from the current server with scompile.py --source. No mathematical statement of this dependency is changed."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-6dbbac6e6",
-  "group": "NA",
+  "reviewer": "NT-stage2-Codex-7d70ae2ca",
+  "group": "NE",
   "result": "pass",
-  "note": "Node, dependencies, source, edge cases, docstrings, sorry-only obligations, report sections, and server scompile evidence all checked; no delivery errors found."
+  "note": "Wrote review.md. Checked all clauses, dependencies, upstream definitions, source locations, records, docstrings and edge cases. Fresh scompile.py checks passed without warnings. No delivery errors or fixes needed; branch unchanged."
  }
 }

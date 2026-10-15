@@ -1,0 +1,94 @@
+{
+ "id": "def-nagata-graded-algebra-pullback-data",
+ "kind": "definition",
+ "title": "Coefficientwise pullback data for a quasi-coherent graded algebra",
+ "status": "split",
+ "statement": "Let $g:X\\prime\\to X$ be a morphism of schemes [def-pc-scheme], and let $\\mathcal A$ and $\\mathcal B$ be quasi-coherent graded algebras on $X$ and $X\\prime$, respectively, in the affine-basis presentation of [def-nagata-relative-proj]. An identification of $\\mathcal B$ with the coefficientwise pullback $g^*\\mathcal A$ [def-pc-module-pullback] consists, for every pair of affine opens $U\\subseteq X$, $U\\prime\\subseteq X\\prime$ with $U\\prime\\subseteq g^{-1}(U)$, of a degree-preserving ring map $\\alpha_{U,U\\prime}:\\mathcal A(U)\\to\\mathcal B(U\\prime)$ over the structure-ring map $g^\\sharp_{U,U\\prime}$. In every degree $n\\geq0$, the induced semilinear map exhibits $\\mathcal B(U\\prime)_n$ as $\\mathcal O_{X\\prime}(U\\prime)\\otimes_{\\mathcal O_X(U)}\\mathcal A(U)_n$, with the canonical tensor map $s\\otimes a\\mapsto s\\alpha_{U,U\\prime}(a)$. The maps commute with restriction in both $U$ and $U\\prime$. These are algebra identifications, including the unit and multiplication, not merely unrelated isomorphisms of the underlying modules. There is no flatness assumption.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-relative-proj",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01O3 (lemma-relative-proj-base-change), coefficientwise pullback in its statement and affine description through Tag 01N2; Schemes Tag 01I9"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative Proj restriction graded algebra isomorphism closed immersion and base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible system of graded algebra maps on affine opens identifying each homogeneous component with extension of scalars along a scheme morphism",
+   "results": "Only absolute Proj global-section/restriction maps; no sheaf-algebra pullback data. Current server source reading found the exact upstream Scheme.GradedAlgebraData.PullbackData in RelativeProj.BaseChange.",
+   "date": "2026-10-15",
+   "verdict": "reuse exact existing upstream declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "PullbackData|IsGradedBaseChangeAlong|coefficientwise pullback|coefficientwise base change in dag/nodes, Mathlib, source WeilConjectures and lean/Sheaf",
+   "results": "No DAG definition node for this notion. Existing arbitrary-base-change and flat-Rees nodes are theorems or a specialization. Local source checkout lacks RelativeProj; scompile.py --source resolves BaseChange, Affine and ChartBaseChange from the current library and identifies the exact generic definition. Mathlib has only the ordinary ring/module tensor and absolute Proj APIs.",
+   "date": "2026-10-15",
+   "verdict": "new DAG node for existing upstream definition, no new Lean definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "prop-nagata-relative-proj-functoriality",
+  "date": "2026-10-15",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-nagata-relative-proj-functoriality",
+   "place": "Clause (4): coefficientwise pullback of the quasi-coherent graded algebra",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-nagata-sketch-data",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData",
+  "statement": "structure PullbackData",
+  "branch": "slopmaster2",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Existing upstream structure, read in the current server source. Its section context binds {X X\\prime : Scheme.{u}}, g : X\\prime ⟶ X, A : X.GradedAlgebraData and A\\prime : X\\prime.GradedAlgebraData. map preserves grading; isGradedBaseChangeAlong includes the structural ring equation and the canonical degreewise tensor identification; res_map and map_res express both restriction laws. This is the affine-basis presentation of coefficientwise tensor pullback, not an arbitrary map or a choice of an isomorphic scheme."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7d70ae2ca",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7d70ae2ca",
+  "group": "NE",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all clauses, dependencies, upstream definitions, source locations, records, docstrings and edge cases. Fresh scompile.py checks passed without warnings. No delivery errors or fixes needed; branch unchanged."
+ }
+}

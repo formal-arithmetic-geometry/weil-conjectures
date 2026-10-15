@@ -17,7 +17,8 @@
   "def-weil-closed-immersion",
   "def-weil-flat-morphism",
   "def-pc-module-pullback",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-nagata-graded-algebra-pullback-data"
  ],
  "proof": [
   {
@@ -421,5 +422,42 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-4952f97a3 (reviewer sub-agent of L); spot-checked: L full nine-step review: Stacks 01MY/01N0/01N2/01NQ/01O3/07ZI, homogeneous surjectivity, inverse gluing, local closed immersion, coefficient tensor and overlap compatibility; incoming finite-coordinate tool approved; no new nodes."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality",
+  "declaration": "AlgebraicGeometry.Scheme.GradedAlgebraData.isClosedImmersion_relProjMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjι",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso_hom_naturality",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjFunctor_map",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjFunctor_map_relProjι",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjMap",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjι_relProjMap",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjMap_relProjHom",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjIsoOfIso",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjIsoOfIso_hom_relProjHom",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.isClosedImmersion_relProjMap",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjComparison",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjι_relProjComparison",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.isPullback",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback_hom_fst",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback_hom_snd"
+  ],
+  "statement": "theorem isClosedImmersion_relProjMap (hsurj : ∀ U, Function.Surjective (f.app U)) :\n    IsClosedImmersion (relProjMap f (irrelevantLE_of_surjective f hsurj))",
+  "branch": "slopmaster2",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "The four clauses are supplied jointly by existing upstream declarations, not by the primary theorem alone. Basic supplies canonical affine restriction with naturality; Functoriality supplies the contravariant canonical map, its over-base equation, the isomorphism induced by a graded algebra isomorphism, and closed immersion for affine-section surjections; BaseChange supplies the canonical comparison and its fibre-product isomorphism for PullbackData (in particular for flat g). The homogeneous components are quasi-coherent, so sheaf surjectivity is equivalent to surjectivity on affine sections as detailed in proof Step 2. The added pullback-data definition node records the BaseChange module. All sources were read through scompile.py --source because the older local checkout lacks these modules."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7d70ae2ca",
+  "group": "NE",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all clauses, dependencies, upstream definitions, source locations, records, docstrings and edge cases. Fresh scompile.py checks passed without warnings. No delivery errors or fixes needed; branch unchanged."
  }
 }
