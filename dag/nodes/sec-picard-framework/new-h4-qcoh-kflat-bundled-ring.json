@@ -1,0 +1,114 @@
+{
+ "id": "new-h4-qcoh-kflat-bundled-ring",
+ "kind": "lemma",
+ "title": "Affine K-flatness with the section ring kept bundled",
+ "statement": "For a bundled commutative ring A, an A-module M, and a projective resolution P of M, sheafification on Spec A of the nonpositive extension of the resolution complex is K-flat. This is the existing affine K-flatness theorem with its ring retained as a bundled object. Definitions: [def-pc-kflat-complex], [def-pc-quasi-iso-modules], [def-pc-tensor-complex-sheaves], [def-weil-pbc-module-chain-complex-homology].",
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DV",
+  "place": "Tag 08DV, associated sheaf of a K-flat complex; bounded-above projective resolutions are K-flat."
+ },
+ "proof": [
+  {
+   "text": "Destruct the bundled commutative ring A. Apply the existing tensorResolution_isKFlat theorem to the underlying ring, M, and P. Both the scheme and complex in its conclusion are now definitionally those in the statement. The reused theorem combines bounded-above flat K-flatness for the extended projective resolution with preservation of K-flatness under associated sheaf; the two cited nodes record those mathematical dependencies.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-affine-tilde-kflat"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-tilde-kflat"
+ ],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/08DV",
+  "place": "Tag 08DV, associated sheaf of a K-flat complex; bounded-above projective resolutions are K-flat.",
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a four leg homology comparison of K flat tensor resolutions under restriction along an open immersion",
+   "results": "Eight hits about scheme restriction and global sections naturality; no four-leg K-flat comparison formula.",
+   "date": "2026-10-15",
+   "verdict": "Search for the parent tensor-resolution argument; direct library inspection found tensorResolution_isKFlat. Only its bundled-ring interface needs repackaging."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap\", \"mapBifunctorMap\"",
+   "results": "0 hits.",
+   "date": "2026-10-15",
+   "verdict": "Search for the parent tensor-resolution argument; direct library inspection found tensorResolution_isKFlat. Only its bundled-ring interface needs repackaging."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem tensorResolution_isKFlat in QCohTensorResolutionAffineModel.lean",
+   "results": "The existing tensorResolution_isKFlat theorem supplies the result for an underlying commutative ring.",
+   "date": "2026-10-15",
+   "verdict": "Destruct the bundled ring and reuse this proved theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of homology comparisons of K-flat resolutions under open restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonNaturality",
+  "date": "2026-10-15",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-t3-qcoh-tensor-resolution-chart-comparison-naturality",
+   "place": "The common comparison square before normalized open restriction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QCohTensorResolutionKFlatBundledRing",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCohTensorResolutionKFlatBundledRing.lean",
+  "declaration": "AlgebraicGeometry.tensorResolution_isKFlat_bundledRing",
+  "statement": "theorem tensorResolution_isKFlat_bundledRing\n    (A : CommRingCat.{u}) (M : ModuleCat.{u} A) (P : ProjectiveResolution M) :\n    CochainComplex.IsKFlat (R := (Spec A).sheaf)\n      (((tilde.functor A).mapHomologicalComplex (.up ℤ)).obj\n        (P.complex.extend ComplexShape.embeddingDownNat))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-693ce",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261015T095527-L-1336309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-693ce",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261015T095527-L-1336309",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all five DAG nodes, unchanged existing interfaces, documented definition changes, compilation, and permitted axioms."
+ }
+}

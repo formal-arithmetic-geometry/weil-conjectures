@@ -1,6 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartModel
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionComparison
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionKFlatBundledRing
 
 @[expose] public section
 universe u
@@ -44,11 +45,11 @@ noncomputable def tensorResolutionChartComparisonIso
   let N0 := (CochainComplex.singleFunctor Y.Modules 0).obj N
   let r := tensorResolutionChartAugmentation M U MA sM P
   have hE : CochainComplex.IsKFlat (R := (Spec Γ(Y, U.1)).sheaf) E :=
-    tensorResolution_isKFlat (Γ(Y, U.1) : Type u) MA P
+    tensorResolution_isKFlat_bundledRing Γ(Y, U.1) MA P
   have hK' := isKFlat_restrict U.2.fromSpec K hK
   have hF' := isKFlat_restrict U.2.fromSpec F hF
-  haveI : QuasiIso q := hq
-  haveI : QuasiIso s := hs
+  have : QuasiIso q := hq
+  have : QuasiIso s := hs
   have hq' : QuasiIso (RC.map q) := by dsimp [RC, R]; infer_instance
   have hs' : QuasiIso (RC.map s) := by dsimp [RC, R]; infer_instance
   exact tensorResolutionComparison (Spec Γ(Y, U.1)).sheaf E (RC.obj K) (RC.obj M0)

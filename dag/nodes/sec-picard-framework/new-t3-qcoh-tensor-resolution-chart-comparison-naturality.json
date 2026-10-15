@@ -19,7 +19,7 @@
  },
  "proof": [
   {
-   "text": "the formula ha implies that the extended sheafification of a\ncommutes with the two chart augmentations to M[0]; this is exactly\n tensorResolutionChartAugmentation_naturality. The restriction complex isomorphisms\nfor K, F, M[0] and N[0] commute with q and s by naturality. Apply\n tensorResolution_restrictedTensor_square to these squares and the augmentation\nsquare. This gives the four commuting squares between the legs of the tensor\nzigzags through the same restricted F. Take homology, inserting the inverse\nexact-restriction homology isomorphism at each vertex. Every horizontal leg of\nthe zigzag is invertible by K-flat tensor invariance. The elementary cancellation\nlemma tensorResolution_homology_zigzag therefore gives the comparison square.\nThe normalized open-restriction homology isomorphism is itself natural by\n tensorResolutionNormalizedRestrictHomologyIso_naturality, using the total tensor\nrestriction square tensorResolutionChartRestriction_total. Compose its inverse\nsquare with the comparison square and cancel adjacent inverse isomorphisms to\nobtain the displayed formula. Neither b, k nor a coefficient presentation of N\nis involved. The argument allows arbitrary n, zero complexes and unbounded K.",
+   "text": "Use tensorResolutionChartAugmentation_naturality for the semilinear chart augmentation square. Naturality of tensorResolutionChartRestrictionComplexIso gives the q and s squares.",
    "uses": [
     "def-pc-kflat-complex",
     "lem-pc-tensor-mapping-cone-iso",
@@ -27,19 +27,36 @@
     "lem-pc-kflat-open-restriction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply tensorResolutionComparison_restriction to these three squares, the affine chart K-flatness theorem, and the restricted global K-flat resolutions. This produces the unnormalized chart comparison square.",
+   "uses": [
+    "new-h4-qcoh-tensor-comparison-restriction-naturality",
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-open-restriction",
+    "new-h4-qcoh-chart-comparison-hom-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use tensorResolutionNormalizedRestrictHomologyIso_naturality and tensorResolutionChartRestriction_total for the normalization square. Compose with its inverse and cancel adjacent inverse isomorphisms using the elementary categorical tensorResolution_normalize_comparison lemma.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-kflat-complex",
   "lem-pc-tensor-mapping-cone-iso",
   "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pc-kflat-open-restriction"
+  "lem-pc-kflat-open-restriction",
+  "new-h4-qcoh-tensor-comparison-restriction-naturality",
+  "new-h4-qcoh-chart-comparison-hom-identification"
  ],
  "proof_origin": {
   "document": "https://stacks.math.columbia.edu/tag/08DX",
-  "place": "Tag 08DX(2), affine derived tensor calculation; Tag 08DV, associated sheaf of a K-flat complex; Tag 06YT, comparison using a common K-flat resolution; Tag 01I9, functorial associated-sheaf pullback. Attach the chartwise comparison already stated in QCohOrdinaryTensorResolutionCoordinatesFamily. Second reading: use the specified four-leg comparison and its naturality; the existential open comparison alone does not identify this isomorphism.",
+  "place": "The original four-square proof, using the protected comparison definition and its explicit equation and restriction-naturality APIs.",
   "by": "worker",
-  "group": "T3",
+  "group": "H4",
   "date": "2026-10-15"
  },
  "mathlib_searches": [
@@ -118,11 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "X-a207d",
-  "group": "T3",
+  "reviewer": "X-693ce",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261015T065832-L-2599491",
+  "landing": "20261015T095527-L-1336309",
   "kind": "interface",
-  "note": "independent Codex review: Matched all four Lean signatures to their nodes, verified the unchanged existing signature and permitted DAG edits; all four delivered modules and direct importer QCohOrdinaryTensorResolutionCoordinates compile cleanly; axioms match the two documented remaining holes."
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all five DAG nodes, unchanged existing interfaces, documented definition changes, compilation, and permitted axioms."
  }
 }

@@ -1,0 +1,108 @@
+{
+ "id": "new-h4-qcoh-tensor-comparison-hom-formula",
+ "kind": "lemma",
+ "title": "Four-map formula for the K-flat comparison hom",
+ "statement": "For a commutative ring sheaf R on a site, take cochain complexes E,K,M,F,N, K-flat E,K,F, and quasi-isomorphisms r:E to M, q:K to M, s:F to N. The hom of tensorResolutionComparison in degree i is the composite inverse H(id_E tensor s), H(r tensor id_F), inverse H(q tensor id_F), H(id_K tensor s), with the canonical associativity of composition. Definitions: [def-pc-kflat-complex], [def-pc-quasi-iso-modules], [def-pc-tensor-complex-sheaves], [def-weil-pbc-module-chain-complex-homology].",
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YT",
+  "place": "Tag 06YT, comparison through a common K-flat resolution; Tag 08DX(2), affine derived tensor computation."
+ },
+ "proof": [
+  {
+   "text": "Expand the explicit definition of tensorResolutionComparison and project its hom. The composite is definitionally the stated four-map expression. The two inverse maps exist by K-flat tensor invariance.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/06YT",
+  "place": "Tag 06YT, comparison through a common K-flat resolution; Tag 08DX(2), affine derived tensor computation.",
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a four leg homology comparison of K flat tensor resolutions under restriction along an open immersion",
+   "results": "Eight hits about scheme restriction and global sections naturality; no four-leg K-flat comparison formula.",
+   "date": "2026-10-15",
+   "verdict": "Use the existing homology zigzag and tensor restriction square APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap\", \"mapBifunctorMap\"",
+   "results": "0 hits.",
+   "date": "2026-10-15",
+   "verdict": "No exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Comparison_hom|Comparison_restriction|zigzag.*naturality in QCohTensorResolution*.lean",
+   "results": "Only tensorResolution_zigzag_naturality and its use in tensorResolution_homology_zigzag.",
+   "date": "2026-10-15",
+   "verdict": "Use the existing generic cancellation theorem; give the comparison its equation API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of homology comparisons of K-flat resolutions under open restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonNaturality",
+  "date": "2026-10-15",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-t3-qcoh-tensor-resolution-chart-comparison-naturality",
+   "place": "The common comparison square before normalized open restriction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QCohTensorResolutionComparisonFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCohTensorResolutionComparisonFormula.lean",
+  "declaration": "AlgebraicGeometry.tensorResolutionComparison_hom",
+  "statement": "theorem tensorResolutionComparison_hom\n    (E K M F N : CochainComplex C ℤ)\n    (r : E ⟶ M) (q : K ⟶ M) (s : F ⟶ N)\n    (hE : E.IsKFlat) (hK : K.IsKFlat) (hF : F.IsKFlat)\n    (hr : QuasiIso r) (hq : QuasiIso q) (hs : QuasiIso s) (i : ℤ) :\n    (tensorResolutionComparison R E K M F N r q s hE hK hF hr hq hs i).hom =\n      (let a := HomologicalComplex.mapBifunctorMap (𝟙 E) s (curriedTensor C) (.up ℤ)\n       let b := HomologicalComplex.mapBifunctorMap r (𝟙 F) (curriedTensor C) (.up ℤ)\n       let c := HomologicalComplex.mapBifunctorMap q (𝟙 F) (curriedTensor C) (.up ℤ)\n       let d := HomologicalComplex.mapBifunctorMap (𝟙 K) s (curriedTensor C) (.up ℤ)\n       letI : QuasiIso a := tensorResolution_quasiIso_tensor_left s hs hE\n       letI : QuasiIso c := tensorResolution_quasiIso_tensor_right q hq hF\n       inv (HomologicalComplex.homologyMap a i) ≫\n         HomologicalComplex.homologyMap b i ≫\n           inv (HomologicalComplex.homologyMap c i) ≫ HomologicalComplex.homologyMap d i)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-693ce",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261015T095527-L-1336309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-693ce",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261015T095527-L-1336309",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all five DAG nodes, unchanged existing interfaces, documented definition changes, compilation, and permitted axioms."
+ }
+}

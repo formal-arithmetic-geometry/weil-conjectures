@@ -84,7 +84,8 @@ section
 variable {S : Type u} [Category.{u} S] {J : GrothendieckTopology S}
 variable (R : Sheaf J CommRingCat.{u})
 local notation "C" => tensorResolutionSiteModules R
-noncomputable local instance TensorResolutionComparison_localInst1 : MonoidalCategory C := SheafOfModules.monoidalCategory R
+noncomputable local instance TensorResolutionComparison_localInst1 : MonoidalCategory C :=
+  SheafOfModules.monoidalCategory R
 
 /-- Comparison through a fixed K-flat resolution of the second argument. -/
 noncomputable def tensorResolutionComparison
@@ -94,11 +95,10 @@ noncomputable def tensorResolutionComparison
     (hr : QuasiIso r) (hq : QuasiIso q) (hs : QuasiIso s) (i : ℤ) :
     (CochainComplex.mapBifunctor E N (curriedTensor C)).homology i ≅
       (CochainComplex.mapBifunctor K N (curriedTensor C)).homology i := by
-  let T := (curriedTensor C).map₂CochainComplex
-  let a := (T.obj E).map s
-  let b := (T.map r).app F
-  let c := (T.map q).app F
-  let d := (T.obj K).map s
+  let a := HomologicalComplex.mapBifunctorMap (𝟙 E) s (curriedTensor C) (.up ℤ)
+  let b := HomologicalComplex.mapBifunctorMap r (𝟙 F) (curriedTensor C) (.up ℤ)
+  let c := HomologicalComplex.mapBifunctorMap q (𝟙 F) (curriedTensor C) (.up ℤ)
+  let d := HomologicalComplex.mapBifunctorMap (𝟙 K) s (curriedTensor C) (.up ℤ)
   have : QuasiIso a := tensorResolution_quasiIso_tensor_left s hs hE
   have : QuasiIso b := tensorResolution_quasiIso_tensor_right r hr hF
   have : QuasiIso c := tensorResolution_quasiIso_tensor_right q hq hF
@@ -107,6 +107,8 @@ noncomputable def tensorResolutionComparison
     asIso (HomologicalComplex.homologyMap b i) ≪≫
     (asIso (HomologicalComplex.homologyMap c i)).symm ≪≫
     asIso (HomologicalComplex.homologyMap d i)
+
+attribute [irreducible] tensorResolutionComparison
 
 end
 
@@ -125,7 +127,7 @@ theorem tensorResolution_zigzag_naturality
       f₀ ≫ (inv b₀ ≫ b₁ ≫ inv b₂ ≫ b₃) := by
   have h₂' : inv a₂ ≫ f₃ = f₂ ≫ inv b₂ := by
     apply (cancel_epi a₂).1
-    simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+    simp only [IsIso.hom_inv_id_assoc]
     rw [reassoc_of% h₂]
     simp
   apply (cancel_epi a₀).1

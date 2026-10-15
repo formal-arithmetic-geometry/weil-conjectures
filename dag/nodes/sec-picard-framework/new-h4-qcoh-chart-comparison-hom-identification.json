@@ -1,0 +1,112 @@
+{
+ "id": "new-h4-qcoh-chart-comparison-hom-identification",
+ "kind": "lemma",
+ "title": "Identify the specified single-chart comparison hom",
+ "statement": "For one affine open U of a scheme Y, coefficient modules M,N with M quasi-coherent, a specified affine presentation and projective resolution P of M on U, and global K-flat resolutions K to M[0] and F to N[0], the hom of tensorResolutionChartComparisonIso in every integer degree equals the hom of tensorResolutionComparison applied to the chart resolution, its augmentation, and the restrictions of K,F,q,s. Use the literal restricted coefficient complexes and the bundled section ring throughout. This identifies one specified isomorphism and has no chart-change map or naturality conclusion. Definitions: [def-pc-kflat-complex], [def-pc-quasi-iso-modules], [def-pc-tensor-complex-sheaves], [def-weil-pbc-module-chain-complex-homology].",
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YT",
+  "place": "Tag 06YT, comparison through a common K-flat resolution; Tag 08DX(2), affine derived tensor computation."
+ },
+ "proof": [
+  {
+   "text": "Unfold only tensorResolutionChartComparisonIso. Its local terms are exactly the displayed restriction functor, chart resolution, augmentation, and restricted maps. Proof irrelevance identifies the K-flatness and quasi-isomorphism certificates. The hom projections are definitionally equal, so reflexivity closes the goal without unfolding tensorResolutionComparison or any tensor totalization.",
+   "uses": [
+    "new-h4-qcoh-kflat-bundled-ring"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-h4-qcoh-kflat-bundled-ring"
+ ],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/06YT",
+  "place": "Tag 06YT, comparison through a common K-flat resolution; Tag 08DX(2), affine derived tensor computation.",
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a four leg homology comparison of K flat tensor resolutions under restriction along an open immersion",
+   "results": "Eight hits about scheme restriction and global sections naturality; no four-leg K-flat comparison formula.",
+   "date": "2026-10-15",
+   "verdict": "Use the existing homology zigzag and tensor restriction square APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap\", \"mapBifunctorMap\"",
+   "results": "0 hits.",
+   "date": "2026-10-15",
+   "verdict": "No exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Comparison_hom|Comparison_restriction|zigzag.*naturality in QCohTensorResolution*.lean",
+   "results": "Only tensorResolution_zigzag_naturality and its use in tensorResolution_homology_zigzag.",
+   "date": "2026-10-15",
+   "verdict": "Use the existing generic cancellation theorem; give the comparison its equation API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of homology comparisons of K-flat resolutions under open restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonNaturality",
+  "date": "2026-10-15",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-t3-qcoh-tensor-resolution-chart-comparison-naturality",
+   "place": "The common comparison square before normalized open restriction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIsoFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCohTensorResolutionChartComparisonIsoFormula.lean",
+  "declaration": "AlgebraicGeometry.tensorResolutionChartComparisonIso_hom_eq",
+  "statement": "theorem tensorResolutionChartComparisonIso_hom_eq\n    (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent]\n    (U : Y.affineOpens) (MA : ModuleCat.{u} (Γ(Y, U.1) : Type u))\n    (sM : MA ≃ₗ[Γ(Y, U.1)] M.val.obj (op U.1))\n    (P : ProjectiveResolution MA) (K F : CochainComplex Y.Modules ℤ)\n    (q : K ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj M)\n    (s : F ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj N)\n    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K)\n    (hF : CochainComplex.IsKFlat (R := Y.sheaf) F)\n    (hq : QuasiIso q) (hs : QuasiIso s) (i : ℤ) :\n  let R := Scheme.Modules.restrictFunctor U.2.fromSpec\n  let RC := R.mapHomologicalComplex (.up ℤ)\n  let E := tensorResolutionChartComplex U MA P\n  let M0 := (CochainComplex.singleFunctor Y.Modules 0).obj M\n  let N0 := (CochainComplex.singleFunctor Y.Modules 0).obj N\n  let r := tensorResolutionChartAugmentation M U MA sM P\n  let hE : CochainComplex.IsKFlat (R := (Spec Γ(Y, U.1)).sheaf) E :=\n    tensorResolution_isKFlat_bundledRing Γ(Y, U.1) MA P\n  let hK' := isKFlat_restrict U.2.fromSpec K hK\n  let hF' := isKFlat_restrict U.2.fromSpec F hF\n  letI : QuasiIso q := hq\n  letI : QuasiIso s := hs\n  let hq' : QuasiIso (RC.map q) := by dsimp [RC, R]; infer_instance\n  let hs' : QuasiIso (RC.map s) := by dsimp [RC, R]; infer_instance\n  (tensorResolutionChartComparisonIso Y M N U MA sM P K F q s hK hF hq hs i).hom =\n  (tensorResolutionComparison (Spec Γ(Y, U.1)).sheaf E (RC.obj K) (RC.obj M0)\n    (RC.obj F) (RC.obj N0) r (RC.map q) (RC.map s) hE hK' hF'\n    (tensorResolutionChartAugmentation_quasiIso M U MA sM P) hq' hs' i).hom",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-693ce",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261015T095527-L-1336309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-693ce",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261015T095527-L-1336309",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all five DAG nodes, unchanged existing interfaces, documented definition changes, compilation, and permitted axioms."
+ }
+}

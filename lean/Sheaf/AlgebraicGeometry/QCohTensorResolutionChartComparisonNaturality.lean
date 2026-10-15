@@ -2,10 +2,9 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionHomologyCoherence
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartAugmentationNaturality
+import Sheaf.AlgebraicGeometry.QCohTensorResolutionComparisonRestrictionNaturality
+import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIsoFormula
 
 /-! # K-flat chart comparison naturality
 
@@ -31,6 +30,57 @@ local instance QCohTensorResolutionChartComparisonNaturality_objZero
     (X : Scheme.{u}) (L : X.Modules) :
     ((curriedTensor X.Modules).obj L).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf L
+
+/-- Naturality in the component form of the chart restriction comparison. -/
+private theorem tensorResolutionChartRestrictionComplexIso_naturality
+    (Y : Scheme.{u}) (V U : Y.affineOpens) (h : V.1 ≤ U.1)
+    {E E' : CochainComplex Y.Modules ℤ} (g : E ⟶ E') :
+    ((Scheme.Modules.restrictFunctor
+      (Spec.map (Y.presheaf.map (homOfLE h).op))).mapHomologicalComplex (.up ℤ)).map
+        (((Scheme.Modules.restrictFunctor U.2.fromSpec).mapHomologicalComplex (.up ℤ)).map g) ≫
+      (tensorResolutionChartRestrictionComplexIso Y V U h E').hom =
+    (tensorResolutionChartRestrictionComplexIso Y V U h E).hom ≫
+      ((Scheme.Modules.restrictFunctor V.2.fromSpec).mapHomologicalComplex (.up ℤ)).map g := by
+  exact (Functor.mapHomologicalComplexCompIso
+    (tensorResolutionChartRestrictionIso Y V U h) (.up ℤ)).hom.naturality g
+
+/-- Keep the chart transition's complex type behind a named construction. -/
+private noncomputable def tensorResolutionChartTransition {Y : Scheme.{u}}
+    (V U : Y.affineOpens) (h : V.1 ≤ U.1)
+    (MA : ModuleCat.{u} (Γ(Y, U.1) : Type u))
+    (MB : ModuleCat.{u} (Γ(Y, V.1) : Type u))
+    (PA : ProjectiveResolution MA) (PB : ProjectiveResolution MB)
+    (a : PA.complex ⟶ ((ModuleCat.restrictScalars
+      (Y.presheaf.map (homOfLE h).op).hom).mapHomologicalComplex (.down ℕ)).obj PB.complex) :
+    ((Scheme.Modules.restrictFunctor
+      (Spec.map (Y.presheaf.map (homOfLE h).op))).mapHomologicalComplex (.up ℤ)).obj
+        (tensorResolutionChartComplex U MA PA) ⟶ tensorResolutionChartComplex V MB PB :=
+  tensorResolutionSemilinearComplexMap (Y.presheaf.map (homOfLE h).op) (.up ℤ)
+    (PA.complex.extend ComplexShape.embeddingDownNat)
+    (PB.complex.extend ComplexShape.embeddingDownNat)
+    (tensorResolutionExtendSemilinear (Y.presheaf.map (homOfLE h).op).hom
+      ComplexShape.embeddingDownNat PA.complex PB.complex a)
+
+/-- Compose a comparison square with the inverse of a normalization square. -/
+private theorem tensorResolution_normalize_comparison
+    {C D : Type*} [Category C] [Category D] (R : C ⥤ D)
+    {A B Q : C} {A' B' Q' : D}
+    (gU : A ≅ B) (gV : A' ≅ B') (eU : Q ≅ B) (eV : Q' ≅ B')
+    (ρ : R.obj Q ⟶ Q') (v : R.obj A ⟶ A') (t : R.obj B ⟶ B')
+    (hc : R.map gU.hom ≫ t = v ≫ gV.hom)
+    (hn : R.map eU.hom ≫ t = ρ ≫ eV.hom) :
+    R.map (gU ≪≫ eU.symm).hom ≫ ρ = v ≫ (gV ≪≫ eV.symm).hom := by
+  have hninv : R.map eU.inv ≫ ρ = t ≫ eV.inv := by
+    apply (cancel_epi (R.map eU.hom)).1
+    rw [← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
+    rw [← Category.assoc, hn]
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.map_comp, Category.assoc]
+  rw [hninv]
+  simpa only [Category.assoc] using congrArg (fun f ↦ f ≫ eV.inv) hc
+
+set_option maxHeartbeats 800000 in
+-- The four tensor squares require a larger elaboration budget.
 
 /-- Naturality of the common K-flat comparison and normalized open restriction.
 
@@ -99,6 +149,96 @@ theorem tensorResolutionChartComparisonIso_naturality
             K F q s hK hF hq hs (-(n : ℤ)) ≪≫
           (tensorResolutionNormalizedRestrictHomologyIso V.2.fromSpec K N0 (-(n : ℤ))).symm).hom
     := by
-  sorry
+  dsimp only
+  let αc := tensorResolutionChartTransition V U h (MA U) (MA V) (P U) (P V) a
+  have : QuasiIso q := hq
+  have : QuasiIso s := hs
+  let f₀ := tensorResolutionRestrictionTensorMap (Spec.map (Y.presheaf.map (homOfLE h).op))
+    (tensorResolutionChartComplex U (MA U) (P U)) (((Scheme.Modules.restrictFunctor
+    U.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj ((CochainComplex.singleFunctor Y.Modules
+    0).obj N))
+    (tensorResolutionChartComplex V (MA V) (P V)) (((Scheme.Modules.restrictFunctor
+      V.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj ((CochainComplex.singleFunctor Y.Modules
+      0).obj N)) αc ((tensorResolutionChartRestrictionComplexIso Y V U h
+      ((CochainComplex.singleFunctor Y.Modules 0).obj N)).hom)
+  let f₄ := tensorResolutionRestrictionTensorMap (Spec.map (Y.presheaf.map (homOfLE h).op))
+    (((Scheme.Modules.restrictFunctor U.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj K)
+    (((Scheme.Modules.restrictFunctor U.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj
+    ((CochainComplex.singleFunctor Y.Modules 0).obj N))
+    (((Scheme.Modules.restrictFunctor V.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj K)
+      (((Scheme.Modules.restrictFunctor V.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj
+      ((CochainComplex.singleFunctor Y.Modules 0).obj N))
+      ((tensorResolutionChartRestrictionComplexIso Y V U h K).hom)
+      ((tensorResolutionChartRestrictionComplexIso Y V U h ((CochainComplex.singleFunctor
+      Y.Modules 0).obj N)).hom)
+  have hz := tensorResolutionComparison_restriction (Spec.map (Y.presheaf.map (homOfLE h).op))
+    (tensorResolutionChartComplex U (MA U) (P U)) (((Scheme.Modules.restrictFunctor
+      U.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj K) (((Scheme.Modules.restrictFunctor
+      U.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj ((CochainComplex.singleFunctor Y.Modules
+      0).obj M)) (((Scheme.Modules.restrictFunctor U.2.fromSpec).mapHomologicalComplex (.up
+      ℤ)).obj F) (((Scheme.Modules.restrictFunctor U.2.fromSpec).mapHomologicalComplex (.up
+      ℤ)).obj ((CochainComplex.singleFunctor Y.Modules 0).obj N))
+    (tensorResolutionChartComplex V (MA V) (P V)) (((Scheme.Modules.restrictFunctor
+      V.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj K) (((Scheme.Modules.restrictFunctor
+      V.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj ((CochainComplex.singleFunctor Y.Modules
+      0).obj M)) (((Scheme.Modules.restrictFunctor V.2.fromSpec).mapHomologicalComplex (.up
+      ℤ)).obj F) (((Scheme.Modules.restrictFunctor V.2.fromSpec).mapHomologicalComplex (.up
+      ℤ)).obj ((CochainComplex.singleFunctor Y.Modules 0).obj N))
+    (tensorResolutionChartAugmentation M U (MA U) (sM U) (P U)) (((Scheme.Modules.restrictFunctor
+      U.2.fromSpec).mapHomologicalComplex (.up ℤ)).map q) (((Scheme.Modules.restrictFunctor
+      U.2.fromSpec).mapHomologicalComplex (.up ℤ)).map s) (tensorResolutionChartAugmentation M V
+      (MA V) (sM V) (P V)) (((Scheme.Modules.restrictFunctor V.2.fromSpec).mapHomologicalComplex
+      (.up ℤ)).map q) (((Scheme.Modules.restrictFunctor V.2.fromSpec).mapHomologicalComplex (.up
+      ℤ)).map s)
+    (tensorResolution_isKFlat_bundledRing Γ(Y, U.1) (MA U) (P U))
+    (isKFlat_restrict U.2.fromSpec K hK) (isKFlat_restrict U.2.fromSpec F hF)
+    (tensorResolution_isKFlat_bundledRing Γ(Y, V.1) (MA V) (P V))
+    (isKFlat_restrict V.2.fromSpec K hK) (isKFlat_restrict V.2.fromSpec F hF)
+    (tensorResolutionChartAugmentation_quasiIso M U (MA U) (sM U) (P U))
+    (by infer_instance) (by infer_instance)
+    (tensorResolutionChartAugmentation_quasiIso M V (MA V) (sM V) (P V))
+    (by infer_instance) (by infer_instance)
+    αc ((tensorResolutionChartRestrictionComplexIso Y V U h K).hom)
+      ((tensorResolutionChartRestrictionComplexIso Y V U h ((CochainComplex.singleFunctor
+      Y.Modules 0).obj M)).hom) ((tensorResolutionChartRestrictionComplexIso Y V U h F).hom)
+      ((tensorResolutionChartRestrictionComplexIso Y V U h ((CochainComplex.singleFunctor
+      Y.Modules 0).obj N)).hom)
+    (tensorResolutionChartAugmentation_naturality M V U h
+      (MA U) (MA V) (sM U) (sM V) (P U) (P V) a ha)
+    (tensorResolutionChartRestrictionComplexIso_naturality Y V U h q)
+    (tensorResolutionChartRestrictionComplexIso_naturality Y V U h s) (-(n : ℤ))
+  have hn := tensorResolutionNormalizedRestrictHomologyIso_naturality Y V U h K
+    ((CochainComplex.singleFunctor Y.Modules 0).obj N)
+    (-(n : ℤ)) (tensorResolutionChartRestriction_total Y V U h K ((CochainComplex.singleFunctor
+      Y.Modules 0).obj N))
+  simpa only [Category.assoc, f₀, αc, tensorResolutionChartTransition] using
+    tensorResolution_normalize_comparison (Scheme.Modules.restrictFunctor (Spec.map
+      (Y.presheaf.map (homOfLE h).op)))
+    (tensorResolutionChartComparisonIso Y M N U (MA U) (sM U) (P U)
+      K F q s hK hF hq hs (-(n : ℤ)))
+    (tensorResolutionChartComparisonIso Y M N V (MA V) (sM V) (P V)
+      K F q s hK hF hq hs (-(n : ℤ)))
+    (tensorResolutionNormalizedRestrictHomologyIso U.2.fromSpec K ((CochainComplex.singleFunctor
+      Y.Modules 0).obj N) (-(n : ℤ)))
+    (tensorResolutionNormalizedRestrictHomologyIso V.2.fromSpec K ((CochainComplex.singleFunctor
+      Y.Modules 0).obj N) (-(n : ℤ)))
+    ((tensorResolutionChartRestrictionIso Y V U h).hom.app
+      ((CochainComplex.mapBifunctor K ((CochainComplex.singleFunctor Y.Modules 0).obj N)
+        (curriedTensor Y.Modules)).homology (-(n : ℤ))))
+    ((((CochainComplex.mapBifunctor (tensorResolutionChartComplex U (MA U) (P U))
+      (((Scheme.Modules.restrictFunctor U.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj
+      ((CochainComplex.singleFunctor Y.Modules 0).obj N))
+      (curriedTensor (Spec Γ(Y, U.1)).Modules)).sc (-(n : ℤ))).mapHomologyIso
+        (Scheme.Modules.restrictFunctor (Spec.map (Y.presheaf.map (homOfLE h).op)))).inv ≫
+        HomologicalComplex.homologyMap f₀ (-(n : ℤ)))
+    ((((CochainComplex.mapBifunctor (((Scheme.Modules.restrictFunctor
+      U.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj K) (((Scheme.Modules.restrictFunctor
+      U.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj ((CochainComplex.singleFunctor Y.Modules
+      0).obj N))
+      (curriedTensor (Spec Γ(Y, U.1)).Modules)).sc (-(n : ℤ))).mapHomologyIso
+        (Scheme.Modules.restrictFunctor (Spec.map (Y.presheaf.map (homOfLE h).op)))).inv ≫
+        HomologicalComplex.homologyMap f₄ (-(n : ℤ)))
+    (by simpa only [tensorResolutionChartComparisonIso_hom_eq, Category.assoc] using hz)
+    (by simpa only [Category.assoc] using hn)
 
 end AlgebraicGeometry
