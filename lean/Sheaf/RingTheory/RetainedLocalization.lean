@@ -41,7 +41,33 @@ theorem parts_valid (E : Set (PrimeSpectrum R)) (hE : Topology.IsConstructible E
     (∀ F ∈ parts E, Topology.IsConstructible F) ∧
     (∀ p : PrimeSpectrum R, ∃! F : parts E, p ∈ F.val) ∧
     (∀ F : parts E, F.val ⊆ PrimeSpectrum.basicOpen (1 : R)) := by
-  sorry
+  classical
+  have mem_parts (F : Set (PrimeSpectrum R)) :
+      F ∈ parts E ↔ (F = E ∨ F = Eᶜ) ∧ F.Nonempty := by
+    simp [parts]
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro F hF
+    exact ((mem_parts F).mp hF).2
+  · intro F hF
+    rcases ((mem_parts F).mp hF).1 with rfl | rfl
+    · exact hE
+    · exact hE.compl
+  · intro p
+    by_cases hp : p ∈ E
+    · refine ⟨⟨E, (mem_parts E).mpr ⟨Or.inl rfl, ⟨p, hp⟩⟩⟩, hp, ?_⟩
+      intro F hF
+      apply Subtype.ext
+      rcases ((mem_parts F.val).mp F.property).1 with he | he
+      · exact he
+      · exact False.elim ((he ▸ hF) hp)
+    · refine ⟨⟨Eᶜ, (mem_parts Eᶜ).mpr ⟨Or.inr rfl, ⟨p, hp⟩⟩⟩, hp, ?_⟩
+      intro F hF
+      apply Subtype.ext
+      rcases ((mem_parts F.val).mp F.property).1 with he | he
+      · exact False.elim (hp (he ▸ hF))
+      · exact he
+  · intro F p hp
+    simp
 
 /-- The partition index used to construct the selector, with constant denominator one.
 Source: blueprint order 1224 (blueprint: def-weil-pbc-retained-localization). -/
@@ -68,7 +94,14 @@ is itself; the colimit inclusion preserves multiplication.
 Source: blueprint order 1224 (blueprint: def-weil-pbc-retained-localization). -/
 theorem selector_idempotent (E : Set (PrimeSpectrum R)) (hE : Topology.IsConstructible E) :
     IsIdempotentElem (selector E hE) := by
-  sorry
+  classical
+  apply IsIdempotentElem.map
+  change (fun F : (selectorIndex E hE).parts ↦
+    if F.val ⊆ E then (1 : Localization.Away ((selectorIndex E hE).denominator F))
+    else 0) * _ = _
+  funext F
+  simp only [Pi.mul_apply]
+  split_ifs <;> simp
 
 /-- Constructible neighbourhoods of `T`, ordered by reverse inclusion.
 Here neighbourhood means a constructible superset, exactly as in the source.
@@ -81,9 +114,41 @@ the intersection of two neighbourhoods contains `T`, is constructible, and is an
 bound for reverse inclusion. The preorder has at most one arrow between any two objects.
 Source: blueprint order 1224 (blueprint: def-weil-pbc-retained-localization). -/
 theorem neighborhood_isFiltered (T : Set (PrimeSpectrum R)) : IsFiltered (Neighborhood T) := by
-  sorry
+  refine { cocone_objs := ?_, cocone_maps := ?_, nonempty := ?_ }
+  · intro E F
+    let G : Neighborhood T :=
+      ⟨E.val ∩ F.val, E.property.1.inter F.property.1,
+        fun p hp ↦ ⟨E.property.2 hp, F.property.2 hp⟩⟩
+    exact ⟨G, homOfLE Set.inter_subset_left, homOfLE Set.inter_subset_right, trivial⟩
+  · intro E F f g
+    exact ⟨F, 𝟙 F, Subsingleton.elim _ _⟩
+  · exact ⟨⟨Set.univ, Topology.IsConstructible.univ, Set.subset_univ T⟩⟩
 
 attribute [instance] neighborhood_isFiltered
+
+open Classical in
+private theorem transition_selector (E : Set (PrimeSpectrum R))
+    (hE : Topology.IsConstructible E) {j : Index R} (h : selectorIndex E hE ≤ j) :
+    PrincipalWLocalization.transition h (fun P ↦ if P.val ⊆ E then 1 else 0) =
+      (fun Q ↦ if Q.val ⊆ E then 1 else 0) := by
+  classical
+  funext Q
+  have hsub : Q.val ⊆ (parent h Q).val := (Classical.choose_spec (h Q)).1
+  have hiff : (parent h Q).val ⊆ E ↔ Q.val ⊆ E := by
+    refine ⟨fun hP ↦ hsub.trans hP, ?_⟩
+    intro hQ
+    have hmem : (parent h Q).val ∈ parts E := (parent h Q).property
+    have hcases : (parent h Q).val = E ∨ (parent h Q).val = Eᶜ := by
+      simpa only [Finset.mem_insert, Finset.mem_singleton]
+        using (Finset.mem_filter.mp hmem).1
+    rcases hcases with he | he
+    · rw [he]
+    · obtain ⟨p, hp⟩ := j.nonempty Q.val Q.property
+      exact False.elim ((he ▸ hsub hp) (hQ hp))
+  simp only [PrincipalWLocalization.transition, AlgHom.pi_apply, AlgHom.comp_apply,
+    Pi.evalAlgHom_apply]
+  simp only [hiff]
+  split_ifs <;> simp
 
 /-- For `F ⊆ E`, the selector of `E` is a unit after localizing at the selector of `F`.
 Proof: refine both two-part partitions by their nonempty intersections with denominator one.
@@ -93,7 +158,31 @@ Source: blueprint order 1224 (blueprint: def-weil-pbc-retained-localization). -/
 theorem selector_isUnit {E F : Set (PrimeSpectrum R)}
     (hE : Topology.IsConstructible E) (hF : Topology.IsConstructible F) (hFE : F ⊆ E) :
     IsUnit (algebraMap (algebra R) (Localization.Away (selector F hF)) (selector E hE)) := by
-  sorry
+  classical
+  obtain ⟨j, f, g, _⟩ :=
+    IsFilteredOrEmpty.cocone_objs (selectorIndex E hE) (selectorIndex F hF)
+  have he : selector E hE = (colimit.ι (diagram (A := R)) j).hom
+      (fun Q ↦ if Q.val ⊆ E then 1 else 0) := by
+    rw [← transition_selector E hE f.le]
+    exact (ConcreteCategory.congr_hom (colimit.w (diagram (A := R)) f) _).symm
+  have hf : selector F hF = (colimit.ι (diagram (A := R)) j).hom
+      (fun Q ↦ if Q.val ⊆ F then 1 else 0) := by
+    rw [← transition_selector F hF g.le]
+    exact (ConcreteCategory.congr_hom (colimit.w (diagram (A := R)) g) _).symm
+  let c : Stage j →ₐ[R] PrincipalWLocalization.algebra R :=
+    (colimit.ι (diagram (A := R)) j).hom
+  have hmul : selector E hE * selector F hF = selector F hF := by
+    rw [he, hf]
+    change c _ * c _ = c _
+    rw [← map_mul]
+    apply congrArg c
+    funext Q
+    simp only [Pi.mul_apply]
+    by_cases hQ : Q.val ⊆ F
+    · simp [hQ, hQ.trans hFE]
+    · simp [hQ]
+  exact IsLocalization.Away.isUnit_of_dvd (selector F hF)
+    ⟨selector F hF, hmul.symm⟩
 
 /-- The transition is the unique `R^w`-algebra map between the selector localizations.
 Source: blueprint order 1224 (blueprint: def-weil-pbc-retained-localization). -/
@@ -109,14 +198,18 @@ Source: blueprint order 1224 (blueprint: def-weil-pbc-retained-localization). -/
 theorem transition_id {T : Set (PrimeSpectrum R)} (E : Neighborhood T) :
     transition (le_refl E) = AlgHom.id (algebra R)
       (Localization.Away (selector E.val E.property.1)) := by
-  sorry
+  apply IsLocalization.algHom_ext
+    (Submonoid.powers (selector E.val E.property.1))
+  ext
 
 /-- Transitions compose: both maps agree on `R^w`, so localization uniqueness identifies them.
 Source: blueprint order 1224 (blueprint: def-weil-pbc-retained-localization). -/
 theorem transition_comp {T : Set (PrimeSpectrum R)} {E F G : Neighborhood T}
     (hEF : E ≤ F) (hFG : F ≤ G) :
     transition (le_trans hEF hFG) = (transition hFG).comp (transition hEF) := by
-  sorry
+  apply IsLocalization.algHom_ext
+    (Submonoid.powers (selector E.val E.property.1))
+  ext
 
 /-- The reverse-inclusion diagram of localizations at the constructible selectors.
 Source: blueprint order 1224 (blueprint: def-weil-pbc-retained-localization). -/

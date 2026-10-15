@@ -16,9 +16,49 @@
   "def-weil-pbc-w-localization",
   "def-weil-pbc-w-local"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For parts_valid, membership in parts E means equality with E or its complement together with nonemptiness. Constructibility is stable under complement. Choose the part containing each point and use disjointness of E and its complement for uniqueness; D(1) is the whole spectrum. This includes empty E, the whole spectrum, and the empty spectrum.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The stage selector has only zero and one coordinates, hence is idempotent coordinatewise. Map this identity along the colimit inclusion to prove selector_idempotent.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The reverse-inclusion neighborhood preorder is inhabited by the whole spectrum. The intersection of two constructible supersets of T is a constructible superset of T receiving both arrows. Parallel arrows are equal in the preorder. These give neighborhood_isFiltered.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the filtered partition index of [def-weil-pbc-w-localization] to choose a common stage j for selectorIndex E hE and selectorIndex F hF. For a refinement from selectorIndex E hE, a child is contained in its selected parent; the parent is E or its complement. Nonemptiness of the child implies that the parent is contained in E exactly when the child is contained in E. Transition algebra maps preserve zero and one, so the selector transports to the indicator of the children contained in E. The private proved helper transition_selector records this calculation.",
+   "uses": [
+    "def-weil-pbc-w-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If F is contained in E, the two transported indicators at the common stage satisfy e_E * e_F = e_F coordinatewise. The colimit cocone identities and preservation of multiplication transfer this equality to the colimit. Thus e_E divides e_F. Apply Mathlib IsLocalization.Away.isUnit_of_dvd to show that the image of e_E is a unit in the localization at e_F, proving selector_isUnit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For transition_id and transition_comp, apply Mathlib IsLocalization.algHom_ext to the powers of the source selector. Both algebra maps agree on the base algebra by the algebra-homomorphism commutation law, so extensionality proves equality. The existing definitions then give the localization diagram and its colimit without changing their data.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-w-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E1",
+  "date": "2026-10-15",
+  "text": "Lean proofs expanding the existing construction docstrings for blueprint order 1224. For selector_isUnit, use the existing filtered-index theorem to take an arbitrary common refinement; the coordinate argument then applies without constructing a new intersection index. Mathlib localization uniqueness and isUnit_of_dvd close the remaining steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -145,5 +185,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Concrete selectors from the partition into E and its complement, followed by the reverse-inclusion diagram of principal localizations and its colimit. Supporting named theorems give partition validity, idempotence, filteredness, units and functor laws; all their proofs are postponed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261015T154205-L-162436",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
