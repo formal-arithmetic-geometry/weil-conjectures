@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 /-!
 
@@ -104,10 +105,60 @@ instance hasExactColimitsOfShape_int : HasExactColimitsOfShape ℤ (Mod C R) :=
   have := AB5OfSize_of_univLE.{0, 0} (Mod C R)
   inferInstance
 
+omit [Abelian C] [MonoidalPreadditive C] [MonoidalClosed C]
+  [IsGrothendieckAbelian.{v} C] [Abelian.HasFunctorialFlatResolution C]
+  [IsCommMonObj R] in
+private lemma restrictedRegular_rightAction :
+    (β_ S R).hom ≫ γ[R,((comap φ).obj (regular S)).X] = S ◁ φ ≫ μ[S] := by
+  change (β_ S R).hom ≫ φ ▷ S ≫ μ[S] = _
+  rw [← BraidedCategory.braiding_naturality_right_assoc, IsCommMonObj.mul_comm]
+
+private noncomputable def extendForgetTensorObjIso (M : Mod C R) :
+    (extendScalarsObj φ M).X ≅ (((comap φ).obj (regular S)) ⊗ M).X where
+  hom := extendDescHom φ (tensorObjπ ((comap φ).obj (regular S)) M) (by
+    rw [← restrictedRegular_rightAction φ]
+    exact tensorObjπ_condition ((comap φ).obj (regular S)) M)
+  inv := coequalizer.desc (extendπ φ M) (by
+    change ((β_ S R).hom ≫ γ[R,((comap φ).obj (regular S)).X]) ▷ M.X ≫
+        extendπ φ M = _
+    rw [restrictedRegular_rightAction φ]
+    exact extendπ_condition φ M)
+  hom_inv_id := by
+    apply coequalizer.hom_ext
+    simp only [extendDescHom, extendπ, tensorObjπ, coequalizer.π_desc_assoc]
+    erw [coequalizer.π_desc, Category.comp_id]
+    rfl
+  inv_hom_id := by
+    apply coequalizer.hom_ext
+    simp only [extendDescHom, extendπ, tensorObjπ, coequalizer.π_desc_assoc]
+    erw [coequalizer.π_desc, Category.comp_id]
+    rfl
+
+private noncomputable def extendForgetTensorIso :
+    extendScalars φ ⋙ forget S ≅
+      tensorLeft ((comap φ).obj (regular S)) ⋙ forget R :=
+  NatIso.ofComponents (extendForgetTensorObjIso φ) (by
+    intro M N f
+    apply (cancel_epi (extendπ φ M)).1
+    simp [extendForgetTensorObjIso, extendπ_extendScalarsMap_assoc,
+      tensorObjπ_whiskerLeft]
+    rfl)
+
 /-- Extension of scalars sends quasi-isomorphisms between K-flat complexes of `R`-modules to
 quasi-isomorphisms; see the module docstring for the argument. -/
-instance preservesKFlatQuasiIso : (extendScalars φ).PreservesKFlatQuasiIso :=
-  sorry
+instance preservesKFlatQuasiIso : (extendScalars φ).PreservesKFlatQuasiIso := by
+  refine Functor.PreservesKFlatQuasiIso.mk' _ ?_
+  intro K hK hKa
+  have ht := CochainComplex.acyclic_tensorRight_of_kFlat K hK hKa
+    ((comap φ).obj (regular S))
+  have hl := ht.of_iso
+    ((NatIso.mapHomologicalComplex
+      (BraidedCategory.tensorLeftIsoTensorRight ((comap φ).obj (regular S))) _).app K).symm
+  have hf := hl.map (forget R)
+  have he : (((extendScalars φ ⋙ forget S).mapHomologicalComplex _).obj K).Acyclic :=
+    hf.of_iso ((NatIso.mapHomologicalComplex (extendForgetTensorIso φ) _).app K).symm
+  intro n
+  exact (ShortComplex.exact_map_iff_of_faithful _ (forget S)).1 (he n)
 
 open scoped CategoryTheory.Functor in
 /-- The derived extension of scalars `S ⊗ᴸ_R - : D(Mod_R(C)) ⥤ D(Mod_S(C))`, the total left
