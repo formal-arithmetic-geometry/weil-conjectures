@@ -15270,3 +15270,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:41 L: merged deliver/S4/Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison (stage 3; reviewer PASS; first push; landing 20261015T224110-L-2885618 (interface); batch 20261015T224105; modules 2; new nodes 1)
 - 22:41 L: merged deliver/V4/Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections (stage 3; reviewer PASS; first push; landing 20261015T224110-L-2885764 (interface); batch 20261015T224105; modules 5; new nodes 4)
 - 22:48 L: returned deliver/H3/Sheaf.Paper.CondensedLocalPieceHomContinuity (reviewer RETURN: (the landing tools, head 18faf9216) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
+- 22:48 L: merged deliver/F2/Sheaf.CategoryTheory.RingedSliceExtensionReflectsExact (stage 3; reviewer PASS; first push; landing 20261015T224819-L-2950059 (proof); batch 20261015T224817; modules 1; new nodes 0)
