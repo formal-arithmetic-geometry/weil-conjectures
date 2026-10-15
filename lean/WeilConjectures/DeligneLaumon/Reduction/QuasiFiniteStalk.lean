@@ -13,6 +13,7 @@ public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 public import WeilConjectures.ZetaLinearAlgebra.CharpolyRevExpand
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TracePow
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
+import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 
 /-!
 # Local Frobenius of quasi-finite direct images

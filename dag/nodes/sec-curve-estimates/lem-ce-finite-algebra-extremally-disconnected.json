@@ -1,0 +1,146 @@
+{
+ "id": "lem-ce-finite-algebra-extremally-disconnected",
+ "kind": "statement",
+ "title": "Finite algebras over Hausdorff extremally disconnected affine spectra",
+ "statement": "Let R and S be commutative rings and R -> S an algebra map. Assume S is finite as an R-module and finitely presented as an R-algebra [def-weil-pbc-finitely-presented-algebra]. Suppose Spec R [def-weil-affine-spectrum] is Hausdorff and extremally disconnected, and every residue field kappa(p), for p in Spec R, is separably closed [def-kun-separably-closed]. Then Spec S is extremally disconnected. No flatness, reducedness or nonemptiness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0985, Lemma 61.11.5, finite case; expand the decomposition using the finite affine section-cover theorem (https://stacks.math.columbia.edu/tag/0985)."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-kun-separably-closed"
+ ],
+ "proof": [
+  {
+   "text": "Put X=Spec R and Y=Spec S. The Hausdorff spectrum X has only maximal primes. Apply the finite affine section-cover theorem to Y -> X to obtain a finite locally free surjection a:X_prime -> X, a finite locally free W over X_prime, a closed embedding j:Y_prime -> W where Y_prime=Y times_X X_prime, and finitely many closed sections of W covering its points. Every prime of these finite affine schemes is maximal by integrality, so their spaces are compact Hausdorff and zero-dimensional.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-section-cover",
+    "lem-weil-pbc-zero-dimensional-spectrum-profinite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed embedding j is finitely presented: Y_prime -> X is finitely presented and W -> X is of finite type, so apply Mathlib RingHom.FinitePresentation.of_comp_finiteType on these affine schemes. Chevalley (Scheme.Hom.isConstructible_image) makes its image constructible, hence clopen in the zero-dimensional affine W. Each section has a clopen incidence locus with this image. The equalizer locus of two sections is also clopen, by the finitely presented closed diagonal of the finite locally free map W -> X_prime and the same constructible-image argument. Partition X_prime into the finitely many clopen Boolean atoms cut out by these incidence and equality loci. On each atom select one representative of every section-equivalence class lying in Y_prime. Their images are disjoint and cover Y_prime on that atom.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The compact Hausdorff surjection a has a continuous section sigma by projectivity of the extremally disconnected compact Hausdorff space X. Pull the finite clopen partition of X_prime back along sigma. Each resulting clopen piece C of X is again extremally disconnected.",
+   "uses": [
+    "lem-weil-pbc-wlocal-stalk-isomorphism-retraction-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in X, x_prime=sigma(x), and y in Y above x, the points of Y_prime over (y,x_prime) are the primes of kappa(y) tensor_(kappa(x)) kappa(x_prime), by Scheme.Pullback.carrierEquiv. The extension kappa(y)/kappa(x) is algebraic because Y -> X is finite. Since kappa(x) is separably closed, Mathlib Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed makes it purely inseparable. Mathlib PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable and the tensor left-unit equivalence identify the spectrum of the tensor product homeomorphically with Spec kappa(x_prime), a singleton. This calculation is already Lean-proved in the private subsingleton_primeSpectrum_tensor_of_isSepClosed helper in the new module. The selected sections restricted along sigma therefore define a continuous bijection from finitely many copies of each C onto the part of Y above C. Compactness and Hausdorffness make it a homeomorphism. The private tripletTensor_subsingleton and pullbackPoint_ext helpers additionally implement the field-tensor comparison and point uniqueness via Scheme.Pullback.carrierEquiv, under the indicated residue-integrality hypothesis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Finite disjoint unions of extremally disconnected spaces are extremally disconnected (the sigma-type instance). The homeomorphisms of the preceding step therefore make Y extremally disconnected. Empty spectra and empty Boolean atoms cause no exception. No flatness or reducedness of S was used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-affine-section-cover",
+  "lem-weil-pbc-wlocal-stalk-isomorphism-retraction-section",
+  "lem-weil-pbc-zero-dimensional-spectrum-profinite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0985, Lemma 61.11.5, finite case; expand the decomposition using the finite affine section-cover theorem (https://stacks.math.columbia.edu/tag/0985).; the source argument is expanded into the stated Lean interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ee]xtremally.*[Ff]inite|[Ff]inite.*[Ee]xtremally",
+   "results": "Mathlib/Topology/Category/Stonean/Basic.lean; Mathlib/Topology/Category/Stonean/Basic.lean; Mathlib/Topology/Category/Stonean/Limits.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite finitely presented algebra over a ring with Hausdorff extremally disconnected spectrum and separably closed residue fields has extremally disconnected spectrum",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite finitely presented algebra over a ring with Hausdorff extremally disconnected spectrum and separably closed residue fields has extremally disconnected spectrum",
+   "results": "PrimeSpectrum.instPrespectralSpace; PrimeSpectrum.instSpectralSpace; Algebra.QuasiFinite.discreteTopology_primeSpectrum; AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat; Algebra.QuasiFiniteAt.isClopen_singleton; AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace; PrimeSpectrum.discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical; CompactT2.Projective.extremallyDisconnected",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ExtremallyDisconnected (PrimeSpectrum _)",
+   "results": "No results",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-finite-direct-image-exact",
+   "place": "Proof: exactness of finite direct image and vanishing of higher derived functors; pro-etale implementation for the attached WeilSheaf declaration. Tag 0985, Lemma 61.11.5, finite case; expand the decomposition using the finite affine section-cover theorem (https://stacks.math.columbia.edu/tag/0985).",
+   "via": [
+    "lem-ce-finite-finitely-presented-wcontractible-components",
+    "lem-ce-finite-finitely-presented-wcontractible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteAlgebraExtremallyDisconnected",
+  "file": "lean/Sheaf/RingTheory/FiniteAlgebraExtremallyDisconnected.lean",
+  "declaration": "extremallyDisconnected_spectrum_of_finite_finitePresentation",
+  "statement": "theorem extremallyDisconnected_spectrum_of_finite_finitePresentation\n    (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]\n    [Module.Finite R S] [Algebra.FinitePresentation R S]\n    [T2Space (PrimeSpectrum R)] [ExtremallyDisconnected (PrimeSpectrum R)]\n    (hsep : ∀ p : PrimeSpectrum R, IsSepClosed p.asIdeal.ResidueField) :\n    ExtremallyDisconnected (PrimeSpectrum S)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-affine-section-cover",
+  "lem-weil-pbc-wlocal-stalk-isomorphism-retraction-section",
+  "lem-weil-pbc-zero-dimensional-spectrum-profinite"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-049e2",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-049e2",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174801",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four DAG records, source statements, unchanged interfaces, forced-adaptation errors, direct-importer compiles, and axiom probes."
+ }
+}

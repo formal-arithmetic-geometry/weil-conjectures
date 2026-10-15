@@ -1,0 +1,141 @@
+{
+ "id": "lem-ce-finite-finitely-presented-wcontractible-components",
+ "kind": "statement",
+ "title": "Extremally disconnected components of a finite finitely presented algebra",
+ "statement": "Let R and S be commutative rings with an algebra map R -> S. Assume R is w-contractible, meaning w-local [def-weil-pbc-w-local], with strictly henselian maximal localizations [def-weil-pbc-henselian-terminology] and extremally disconnected connected-component space. Assume S is finite as an R-module and finitely presented as an R-algebra. Assume also that S is w-strictly-local: it is w-local and its maximal localizations are strictly henselian. Then the quotient topological space pi_0(Spec S) of connected components is extremally disconnected. The zero algebra and non-flat or nonreduced algebras are included.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0986, final paragraph, reducing the closed-point locus to Tag 0985, Lemma 61.11.5; its finite case is expanded here using the finite affine section-cover theorem (https://stacks.math.columbia.edu/tag/0985)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-w-local",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Let I be the vanishing ideal of the closed points of Spec R. Its zero locus is exactly those closed points because that locus is closed. The closed embedding Spec(R/I) -> Spec R identifies its domain homeomorphically with the closed-point locus, hence with pi_0(Spec R). Transport Hausdorffness and extremal disconnectedness across this homeomorphism.",
+   "uses": [
+    "lem-weil-pbc-w-local-closed-points-components-homeomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For maximal p of R/I, its contraction m in R is maximal. Invert R outside m to map R_m onto kappa(p). Surjectivity follows by lifting first through R -> R/I and then through the residue map, which is surjective at a maximal ideal. This map is local. Its induced map from the separably closed residue field of R_m is injective, being a field map, and surjective by the same lift. Therefore kappa(p) is separably closed. Every prime of R/I is maximal because its spectrum is Hausdorff.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set B=S/IS. The explicit algebra equivalence Algebra.TensorProduct.quotIdealMapEquivQuotTensor identifies B with (R/I) tensor_R S as an R/I-algebra. Module finiteness and finite presentation hold by base change and transport across this equivalence. Apply the finite-algebra spectrum theorem to R/I -> B.",
+   "uses": [
+    "lem-ce-finite-algebra-extremally-disconnected"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Integrality says a prime of S is maximal exactly when its contraction in R is maximal. Consequently V(IS) is precisely the closed-point locus of Spec S. The quotient closed embedding identifies Spec B homeomorphically with this locus. W-strict-locality of S supplies w-locality and the closed-point/component homeomorphism. Transport the extremal disconnectedness obtained in the preceding step to pi_0(Spec S). No point or nontriviality assumption is needed.",
+   "uses": [
+    "lem-weil-pbc-w-local-closed-points-components-homeomorphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "lem-ce-finite-algebra-extremally-disconnected",
+  "lem-weil-pbc-w-local-closed-points-components-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0986, final paragraph; E3 formalizes the closed-point quotient, residue-field comparison, and quotient/tensor base change, reducing only the finite Hausdorff spectrum part to Tag 0985."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite finitely presented algebra over a ring with w local spectrum and extremally disconnected connected components has extremally disconnected connected components",
+   "results": "PrimeSpectrum.instPrespectralSpace; Algebra.QuasiFiniteAt.isClopen_singleton; PrimeSpectrum.instSpectralSpace; Algebra.QuasiFinite.discreteTopology_primeSpectrum; PrimeSpectrum.discreteTopology_iff_toPiLocalization_surjective; PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing; PrimeSpectrum.discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical; AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ExtremallyDisconnected",
+   "results": "ExtremallyDisconnected; instExtremallyDisconnectedOfPreirreducibleSpace; instTotallySeparatedSpaceOfExtremallyDisconnectedOfT2Space; ExtremallyDisconnected.toPreirreducibleSpace; CompactT2.ExtremallyDisconnected.projective; CompactT2.Projective.extremallyDisconnected; CompactT2.projective_iff_extremallyDisconnected; extremallyDisconnected_of_homeo",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ExtremallyDisconnected",
+   "results": "Mathlib/Topology/Category/CompHausLike/Basic.lean; Mathlib/Topology/Category/Stonean/Adjunctions.lean; Mathlib/Topology/Category/Stonean/Adjunctions.lean; Mathlib/Topology/Category/Stonean/Basic.lean; Mathlib/Topology/Category/Stonean/Basic.lean; Mathlib/Topology/Category/Stonean/Basic.lean; Mathlib/Topology/Category/Stonean/Basic.lean; Mathlib/Topology/Category/Stonean/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite finitely presented algebra over a w-contractible ring the connected component space of its spectrum is extremally disconnected",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-finite-direct-image-exact",
+   "place": "Proof: exactness of finite direct image and vanishing of higher derived functors; pro-etale implementation for the attached WeilSheaf declaration. Tag 0986, final paragraph, reducing the closed-point locus to Tag 0985, Lemma 61.11.5; its finite case is expanded here using the finite affine section-cover theorem (https://stacks.math.columbia.edu/tag/0985).",
+   "via": [
+    "lem-ce-finite-finitely-presented-wcontractible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteWContractibleComponents",
+  "file": "lean/Sheaf/RingTheory/FiniteWContractibleComponents.lean",
+  "declaration": "extremallyDisconnected_components_of_finite_finitePresentation",
+  "statement": "theorem extremallyDisconnected_components_of_finite_finitePresentation\n    (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]\n    [IsWContractibleRing R] [Module.Finite R S] [Algebra.FinitePresentation R S]\n    [IsWStrictlyLocalRing S] :\n    ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum S))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16"
+ },
+ "tool_uses": [
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-w-local-closed-points-components-homeomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-049e2",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-049e2",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174801",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four DAG records, source statements, unchanged interfaces, forced-adaptation errors, direct-importer compiles, and axiom probes."
+ }
+}

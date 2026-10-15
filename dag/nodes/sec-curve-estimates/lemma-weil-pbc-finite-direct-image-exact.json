@@ -21,22 +21,47 @@
  ],
  "proof": [
   {
-   "text": "By [lemma-weil-pbc-finite-stalk-formula], a short exact sequence of sheaves\nbecomes, at every geometric stalk of the target, a finite direct sum of short\nexact sequences at the geometric points of the finite fibre; since the stalk\nfunctors are exact and jointly conservative, $f_*$ is exact. The vanishing of\nthe higher derived functors follows.",
+   "text": "For the original etale-sheaf declarations attached to this node, use the finite geometric-stalk formula: the pushforward stalk is a finite sum of source stalks, hence exact. Geometric stalks are conservative. These declarations are unchanged by E3.",
    "uses": [
-    "lemma-weil-pbc-finite-stalk-formula"
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-openclosed-point-ulift",
+    "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false
+  },
+  {
+   "text": "For the attached WeilSheaf.isZero_higherLowerStar_of_isFinite declaration, work with the actual pro-etale AdicSheaf implementation. The geometric-fibre map q of p is finite and locally of finite presentation: the target is locally Noetherian because it is locally of finite type over a field, and these morphism properties survive base change. A finite pullback of Spec R for w-contractible R is affine, say Spec S, and S is module-finite and finitely presented over R. Apply the finite w-contractibility theorem to S.",
+   "uses": [
+    "lem-ce-finite-finitely-presented-wcontractible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cover every target pro-etale object by affine opens, and each affine open by the faithfully flat ind-etale w-contractible algebra of exists_isWContractibleRing. Compose the two coverings. This is the construction in the already proved Scheme.ProEt.exists_isWeaklyContractible_cover, retaining the ring witness. By Scheme.ProEt.isWeaklyContractible_of_iso each cover member and its finite pullback are weakly contractible. Apply GrothendieckTopology.exact_iff_of_forall_exists and exact evaluation on weakly contractible objects. Evaluation of the direct image equals evaluation on its pullback, so direct image preserves homology and finite colimits. All this is Lean-proved in private helpers of the item.",
+   "uses": [
+    "lem-weil-pbc-source-wcontractible-extension",
+    "lem-weil-pbc-source-affine-wcontractible-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reflect finite-colimit preservation from ordinary module sheaves through AdicSheaf.forget, then transfer it to Frobenius-equivariant sheaves with Endofunctor.IsoAlgebra.preservesFiniteColimits_mapOfNatIso. The exact functor comparison singleFunctorCompRightDerivedFunctorIso identifies the derived direct image of a degree-zero object with a degree-zero object. Positive-degree homology of the latter vanishes by DerivedCategory.isZero_of_isLE, and the comparison transports this vanishing to the stated Weil higher direct image.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-ce-finite-finitely-presented-wcontractible",
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "lem-weil-pbc-source-wcontractible-extension",
   "lemma-openclosed-point-ulift",
+  "lemma-weil-pbc-finite-stalk-formula",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-finite-direct-image-exact.md",
-  "place": "## Proof"
+  "place": "Original etale finite-stalk proof retained; E3 stage-3 proof of the attached WeilSheaf vanishing uses finite w-contractible pullbacks (Stacks 0986) and exact evaluation, followed by the exact derived-functor comparison. No unit-level route is changed."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -146,5 +171,15 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-049e2",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174801",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four DAG records, source statements, unchanged interfaces, forced-adaptation errors, direct-importer compiles, and axiom probes."
+ }
 }

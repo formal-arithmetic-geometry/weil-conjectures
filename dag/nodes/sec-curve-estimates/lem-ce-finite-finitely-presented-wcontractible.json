@@ -1,0 +1,149 @@
+{
+ "id": "lem-ce-finite-finitely-presented-wcontractible",
+ "kind": "statement",
+ "title": "Finite finitely presented algebras preserve w-contractibility",
+ "statement": "Let R and S be commutative rings and let R -> S be an algebra map. Assume S is finite as an R-module and finitely presented as an R-algebra. Suppose R is w-contractible: Spec R is w-local [def-weil-pbc-w-local], its localizations at maximal ideals are strictly henselian [def-weil-pbc-henselian-terminology], and its connected-component space is extremally disconnected. Then S has all three properties, hence is w-contractible. No reducedness, flatness or nonemptiness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0986, Lemma 61.11.6, complete proof (https://stacks.math.columbia.edu/tag/0986)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-w-local",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "For a prime ideal p of R, R/p has a unique maximal ideal: two maximal ideals would contract to distinct closed specializations of p in Spec R, contrary to w-locality. Let m be that unique maximal ideal contracted to R. The quotient R/p is a surjective image of the strictly henselian ring R_m, since every element outside m maps to a unit. The quotient theorem makes R/p henselian.",
+   "uses": [
+    "def-weil-pbc-w-local",
+    "lem-weil-pbc-strictly-henselian-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a prime q of S, the domain S/q is integral over the henselian local domain R/(q intersect R). An integral domain integral over a henselian local ring is local (the already proved IsLocalRing.of_henselianLocalRing_of_isIntegral_of_isDomain in WeilConjectures.RingTheory.ProEtale.IntegralLocal). Hence q has a unique maximal specialization. Since a prime of an integral algebra is maximal exactly when its contraction is maximal, the closed-point locus of Spec S is the inverse image of the closed-point locus of Spec R, and is closed. This proves w-locality of S.",
+   "uses": [
+    "def-weil-pbc-w-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For maximal q of S put m=q intersect R and A=R_m. The finite A-algebra B=A tensor_R S is a finite product of henselian local A-algebras D_i with finite residue extensions. Their residue fields are separably closed by Mathlib Algebra.IsAlgebraic.isSepClosed, so every D_i is strictly henselian. The localization map B to S_q factors through one D_i: in the local ring S_q exactly one of the finite coordinate idempotents maps to 1. That factor map is local because it is compatible with A and its maximal ideal contracts to the maximal ideal of A. Every fraction of B in S_q then comes from D_i, since its denominator coordinate maps to a unit and is therefore a unit in D_i. Thus D_i surjects onto S_q, which is strictly henselian by the quotient theorem. This proves w-strict-locality of S.",
+   "uses": [
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-weil-pbc-strictly-henselian-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the component-space theorem to the finite finitely presented R-algebra S and the w-strict-locality just proved. Its conclusion, together with w-strict-locality, is exactly the two fields of IsWContractibleRing S.",
+   "uses": [
+    "lem-ce-finite-finitely-presented-wcontractible-components"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-w-local",
+  "lem-ce-finite-finitely-presented-wcontractible-components",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-strictly-henselian-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0986, Lemma 61.11.6, complete proof (https://stacks.math.columbia.edu/tag/0986).; the source argument is expanded into the stated Lean interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite finitely presented algebra over a w-contractible ring is w-contractible",
+   "results": "AlgHom.FinitePresentation.id; Module.FinitePresentation.iff_finitePresentation_of_finite; Algebra.FinitePresentation; Algebra.FinitePresentation.of_finitePresentation; Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite; RingHom.FinitePresentation; RingHom.FinitePresentation.id; Algebra.FinitePresentation.trans",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsWContractibleRing",
+   "results": "loogle: unknown identifier 'IsWContractibleRing'",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsWContractibleRing.*[Ff]inite",
+   "results": "No results",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite finitely presented algebra over a w-contractible ring is w-contractible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite finitely presented algebra over a w-contractible ring the connected component space of its spectrum is extremally disconnected",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-finite-direct-image-exact",
+   "place": "Proof: exactness of finite direct image and vanishing of higher derived functors; pro-etale implementation for the attached WeilSheaf declaration. Tag 0986, Lemma 61.11.6, complete proof (https://stacks.math.columbia.edu/tag/0986).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteWContractible",
+  "file": "lean/Sheaf/RingTheory/FiniteWContractible.lean",
+  "declaration": "isWContractibleRing_of_finite_finitePresentation",
+  "statement": "theorem isWContractibleRing_of_finite_finitePresentation\n    (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]\n    [IsWContractibleRing R] [Module.Finite R S] [Algebra.FinitePresentation R S] :\n    IsWContractibleRing S",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-strictly-henselian-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-049e2",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-049e2",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174801",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four DAG records, source statements, unchanged interfaces, forced-adaptation errors, direct-importer compiles, and axiom probes."
+ }
+}
