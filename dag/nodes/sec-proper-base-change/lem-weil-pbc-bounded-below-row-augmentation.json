@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-bounded-below-row-augmentation",
+ "kind": "statement",
+ "title": "Comparison of a row augmentation with a bounded-below total complex",
+ "statement": "Let K be an integer cochain bicomplex in an abelian category with countable coproducts, with K^{p,q}=0 for p<0 or q<N [def-sp-double-complex-total]. Let A be strictly bounded below by N, let a:A to K^0 be a chain map annihilated by the outgoing horizontal differential, and let b:A to Tot(K) have degree-n component a^n followed by the (0,n) total inclusion. If the row maps from the single-column bicomplex on A induced by a are quasi-isomorphisms, then b is a quasi-isomorphism.",
+ "stmt_deps": [
+  "def-sp-double-complex-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0133, row filtration; Tag 01EQ, single-column augmentation"
+ },
+ "proof": [
+  {
+   "text": "Make a the map from the single column at zero. Its source has the same lower bounds, and its row maps are quasi-isomorphisms by hypothesis. Apply bounded-below row comparison.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-total-column-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the isomorphism from A to the total of its single-column bicomplex using singleColumnObjTotalXIso in each degree. Its chain relation follows because the horizontal differential is zero and the vertical sign in column zero is 1. The composite with the total map equals b componentwise; thus b is a quasi-isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-bounded-below-total-column-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0133, row filtration; Tag 01EQ, single-column augmentation; implemented by C3 using the concrete Lean arguments described in proof"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A degree zero augmentation to a first quadrant bicomplex is a quasi-isomorphism if every horizontal augmented row is exact",
+   "results": "[leanfinder] OK 8 hit(s); CochainComplex.cm5b.instQuasiIsoIntP, quasiIsoAt_iff_exactAt', quasiIsoAt_iff_exactAt, exactAt_iff_of_quasiIsoAt, HomologicalComplex.HomologySequence.quasiIso_τ₃, CochainComplex.mappingCone.quasiIso_descShortComplex, quasiIsoAt_iff', CochainComplex.quasiIsoAt₀_iff",
+   "date": "2026-10-15",
+   "verdict": "No ready-made bounded-below augmentation theorem. Reuse the source single-column total isomorphism components and the proved bounded-below total comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleColumn\", \"QuasiIso\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "No ready-made bounded-below augmentation theorem. Reuse the source single-column total isomorphism components and the proved bounded-below total comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*singleColumn|singleColumn.*quasiIso",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "No ready-made bounded-below augmentation theorem. Reuse the source single-column total isomorphism components and the proved bounded-below total comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A single-column augmentation to a bounded-below bicomplex with exact augmented rows is a quasi-isomorphism on total complexes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex",
+  "date": "2026-10-15",
+  "group": "C3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Bounded-below hypercover descent, Comparison of a row augmentation with a bounded-below total complex",
+   "via": [
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BoundedBelowAugmentation",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedBelowAugmentation.lean",
+  "declaration": "HomologicalComplex₂.quasiIso_of_boundedBelow_row_augmentation",
+  "statement": "theorem quasiIso_of_boundedBelow_row_augmentation\n    (K : HomologicalComplex₂ C (up ℤ) (up ℤ)) (A : CochainComplex C ℤ) (N : ℤ)\n    [A.IsStrictlyGE N]\n    (hK : ∀ p q : ℤ, p < 0 ∨ q < N → IsZero ((K.X p).X q))\n    (a : A ⟶ K.X 0) (ha : ∀ p, (up ℤ).Rel 0 p → a ≫ K.d 0 p = 0)\n    (b : A ⟶ K.total (up ℤ))\n    (hb : ∀ n : ℤ, b.f n = a.f n ≫ K.ιTotal (up ℤ) 0 n n (by simp))\n    (hrow : ∀ n : ℤ, QuasiIso\n      (((flipFunctor C (up ℤ) (up ℤ)).map (mkHomFromSingle a ha)).f n)) :\n    QuasiIso b",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files match the item statement and proof route; all modules and both direct importers compile cleanly."
+ }
+}

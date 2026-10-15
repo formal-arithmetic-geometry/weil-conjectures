@@ -1,0 +1,66 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group C3
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Mathlib.CategoryTheory.Abelian.Exact
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+import Mathlib.CategoryTheory.Sites.Abelian
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Sites.LocallySurjective
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+
+/-!
+# Exact evaluation at weakly contractible objects
+
+Source: Stacks Project, Tags 0946, 03DA, 03CN and 00WN.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits Opposite
+
+namespace AlgebraicGeometry.Scheme.ProEt
+
+/-- Evaluation at a weakly contractible object preserves homology of module complexes.
+Source: Stacks Project, Tag 0946 (1), with the module sheaf epimorphism criterion 03DA.
+(blueprint: lem-weil-pbc-proetale-weakly-contractible-evaluation-exact).
+
+Proof: forgetting module structure preserves cokernels, hence epimorphisms. Such a map
+of abelian sheaves is locally surjective, and the same local lifts make its underlying
+set-sheaf map epic. Weak contractibility makes its evaluation surjective. Thus evaluation
+preserves epimorphisms; it also preserves kernels, which are computed sectionwise.
+In an abelian category these two properties imply preservation of homology. -/
+theorem weaklyContractible_evaluation_preservesHomology
+    (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)
+    (hW : ∀ (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G),
+      Epi f → Function.Surjective (f.hom.app (op W))) :
+    (SheafOfModules.evaluation.{u + 1}
+      ((sheafCompose (topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) (op W)).PreservesHomology := by
+  let A := (sheafCompose (topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  let ev := SheafOfModules.evaluation.{u + 1} A (op W)
+  have : ev.PreservesEpimorphisms := by
+    constructor
+    intro M N f hf
+    let g := (SheafOfModules.toSheaf A).map f
+    have : Epi g := inferInstance
+    have : Sheaf.IsLocallySurjective g :=
+      (Sheaf.isLocallySurjective_iff_epi' AddCommGrpCat.{u + 1} g).mpr inferInstance
+    let g' := (sheafCompose (topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})).map g
+    have : Epi g' := inferInstance
+    exact (ModuleCat.epi_iff_surjective (ev.map f)).mpr (hW _ _ g' inferInstance)
+  exact Functor.preservesHomology_of_preservesEpis_and_kernels ev
+
+end AlgebraicGeometry.Scheme.ProEt

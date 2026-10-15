@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-proetale-hypercover-local-lifting",
+ "kind": "statement",
+ "title": "Matching-map epimorphisms imply local lifting of all lower simplex data",
+ "statement": "Let X be a scheme and U an augmented simplicial object in the slice over a pro-etale site object W. Suppose U_0 to W is epic on represented sheaves; the degree-one fan matching object exists in the slice and U_1 to it is epic on represented sheaves; and in each higher degree the proper-face multicospan matching object [lem-weil-pbc-simplicial-matching-object] exists with an epic represented matching map. Then for any test object T, map w:T to W, degree n, and compatible maps from T to U_Delta for every Delta of dimension less than n and operator Delta to [n], augmented by w, there is a covering sieve S of T such that every f:V to T in S has a lift t:V to U_n. This lift is over f w and induces all prescribed maps after restriction along every lower-simplex operator.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-simplicial-matching-object"
+ ],
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 0186, 01GE and 01GW, representable matching covers and all lower-simplex local lifts; local-surjectivity criterion Tag 00WN"
+ },
+ "proof": [
+  {
+   "text": "Pass the data to the slice over W. In degree zero there are no lower simplices and the matching map is U_0 to W. In degree one the two vertex maps give a map into the limiting fan. In degree n+2 the prescribed codimension-one faces satisfy the face-pair equations by the lower-simplex compatibility and the simplex face-face identity; their tuple gives a map into the supplied limiting multicospan. This uses the universal property of the limits in the hypotheses, not a choice of a new matching object.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply representable_epi_local_lifting to the supplied matching epimorphism and the section into the limiting matching object. Its covering image sieve and local lifts give the codimension-one faces by the projection equations. Composing the lifted equation with the augmentation gives t over f w.",
+   "uses": [
+    "lem-weil-pbc-proetale-representable-epi-local-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A lower-dimensional simplex operator into [n] is not surjective on vertices, by the finite cardinality inequality. Factor it through a face with SimplexCategory.eq_comp_δ_of_not_surjective. Expand the contravariant functor on this factorization, apply the face equality and the given compatibility equation. This is the private fully proved lower_simplex_eq_of_faces. Degree zero has no lower simplex operators; the empty case follows from its impossible dimension inequality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-representable-epi-local-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 0186, 01GE and 01GW, representable matching covers and all lower-simplex local lifts; local-surjectivity criterion Tag 00WN; implemented by C3 using the concrete Lean arguments described in proof; C3 proves the fan and multicospan universal-property construction, face-pair identity, local lift transport and every lower-simplex factorization in Lean, using only the remaining single-morphism represented-epi criterion"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an augmented simplicial object, epimorphic maps to all matching objects give local lifts of compatible families of lower dimensional simplices",
+   "results": "[leanfinder] OK 8 hit(s); SimplicialObject.Splitting.IndexSet.epiComp, SimplicialObject.Splitting.IndexSet.instEpiSimplexCategoryE, SimplicialObject.Splitting.IndexSet.epiComp_fst, SimplicialObject.Splitting.IndexSet.epiComp_snd_coe, SimplicialObject.Splitting.IndexSet.mk, SSet.exists_nonDegenerate, SimplicialObject.Splitting.IndexSet, SSet.unique_nonDegenerate_map",
+   "date": "2026-10-15",
+   "verdict": "No all-degree bridge from represented matching epimorphisms to the local-lifting formulation. The existing matching diagrams and simplex factorization are reused. This is the sole remaining new proof obligation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"matching\", \"LocallySurjective\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "No all-degree bridge from represented matching epimorphisms to the local-lifting formulation. The existing matching diagrams and simplex factorization are reused. This is the sole remaining new proof obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "matchingBoundary|matching.*surjective|hypercover.*lifting",
+   "results": "[grep] OK 1 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "No all-degree bridge from represented matching epimorphisms to the local-lifting formulation. The existing matching diagrams and simplex factorization are reused. This is the sole remaining new proof obligation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Epimorphic representable matching maps in an augmented simplicial object give local lifts of compatible lower simplex data",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex",
+  "date": "2026-10-15",
+  "group": "C3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Bounded-below hypercover descent, Matching-map epimorphisms imply local lifting of all lower simplex data",
+   "via": [
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverLocalLifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleHypercoverLocalLifting.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.hypercover_matching_local_lifting",
+  "statement": "theorem hypercover_matching_local_lifting\n    (X : Scheme.{u}) (W : X.ProEt) (U : SimplicialObject (Over W))\n    (hzero : Epi ((topology X).yoneda.map (U _⦋0⦌).hom))\n    (hone : ∃ c : Fan (fun _ : Fin 2 ↦ U _⦋0⦌), Nonempty (IsLimit c) ∧\n      ∃ μ : U _⦋1⦌ ⟶ c.pt,\n        (∀ i : Fin 2, μ ≫ c.proj i = U.δ i) ∧\n        Epi ((topology X).yoneda.map μ.left))\n    (hhigher : ∀ n : ℕ,\n      ∃ c : Cone (SimplicialObject.matchingBoundaryIndex U n).multicospan,\n        Nonempty (IsLimit c) ∧ ∃ μ : U _⦋n + 2⦌ ⟶ c.pt,\n          (∀ i : Fin (n + 3), μ ≫ c.π.app (WalkingMulticospan.left i) = U.δ i) ∧\n          Epi ((topology X).yoneda.map μ.left)) :\n    ∀ (n : ℕ) (T : X.ProEt) (w : T ⟶ W)\n      (p : ∀ (Δ : SimplexCategory), Δ.len < n →\n        (Δ ⟶ SimplexCategory.mk n) → (T ⟶ (U ⋙ Over.forget W).obj (op Δ))),\n      (∀ (Δ : SimplexCategory) (h : Δ.len < n) (θ : Δ ⟶ SimplexCategory.mk n),\n        p Δ h θ ≫ (hypercoverUnderlyingAugmentation X W U).app (op Δ) = w) →\n      (∀ (Δ Δ' : SimplexCategory) (h : Δ.len < n) (h' : Δ'.len < n)\n        (α : Δ' ⟶ Δ) (θ : Δ ⟶ SimplexCategory.mk n),\n        p Δ h θ ≫ (U ⋙ Over.forget W).map α.op = p Δ' h' (α ≫ θ)) →\n      ∃ S : Sieve T, S ∈ topology X T ∧\n        ∀ (V : X.ProEt) (f : V ⟶ T), S f →\n          ∃ t : V ⟶ (U ⋙ Over.forget W) _⦋n⦌,\n            t ≫ (hypercoverUnderlyingAugmentation X W U).app\n              (op (SimplexCategory.mk n)) = f ≫ w ∧\n            ∀ (Δ : SimplexCategory) (h : Δ.len < n) (θ : Δ ⟶ SimplexCategory.mk n),\n              t ≫ (U ⋙ Over.forget W).map θ.op = f ≫ p Δ h θ",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-15",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverUnderlyingAugmentation",
+   "AlgebraicGeometry.Scheme.ProEt.hypercover_matching_local_lifting"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files match the item statement and proof route; all modules and both direct importers compile cleanly."
+ }
+}

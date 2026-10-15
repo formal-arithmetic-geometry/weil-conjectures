@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+ "kind": "statement",
+ "title": "Exact module-sheaf evaluation at a weakly contractible pro-etale object",
+ "statement": "Let X be a scheme, R a sheaf of commutative rings and W an object of its pro-etale site [def-weil-sheaf-of-modules-category]. Assume evaluation at W makes every epimorphism of Type (u+1)-valued sheaves surjective. Then evaluation at W from sheaves of R-modules to modules over R(W) preserves homology.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0946 (1), module kernels and cokernels Tag 03DA; epi criteria Tags 03CN and 00WN"
+ },
+ "proof": [
+  {
+   "text": "Forget a module epimorphism to abelian sheaves; the forgetful functor preserves cokernels. The abelian-sheaf epi criterion gives local surjectivity, and forgetting further to set sheaves makes the same map epic. Apply the given weak contractibility to obtain surjectivity of module evaluation. Kernels are already computed sectionwise. Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels finishes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0946 (1), module kernels and cokernels Tag 03DA; epi criteria Tags 03CN and 00WN; implemented by C3 using the concrete Lean arguments described in proof"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a sheaf of modules at a weakly contractible object preserves homology and epimorphisms",
+   "results": "[leanfinder] OK 8 hit(s); LightCondMod.instPreservesEpimorphismsLightCondSetForget, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.instAbelian, CategoryTheory.preservesHomology_preadditiveYonedaObj_of_injective, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instIsGrothendieckAbelian, instAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+   "date": "2026-10-15",
+   "verdict": "No direct weakly contractible module-evaluation theorem; existing abelian and set epi criteria and sectionwise kernels suffice."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"PreservesHomology\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "No direct weakly contractible module-evaluation theorem; existing abelian and set epi criteria and sectionwise kernels suffice."
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyContractible|evaluation_preservesHomology",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "No direct weakly contractible module-evaluation theorem; existing abelian and set epi criteria and sectionwise kernels suffice."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at a weakly contractible object preserves homology of sheaves of modules",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex",
+  "date": "2026-10-15",
+  "group": "C3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Bounded-below hypercover descent, Exact module-sheaf evaluation at a weakly contractible pro-etale object",
+   "via": [
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleWeaklyContractibleEvaluationExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.weaklyContractible_evaluation_preservesHomology",
+  "statement": "theorem weaklyContractible_evaluation_preservesHomology\n    (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)\n    (hW : ∀ (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G),\n      Epi f → Function.Surjective (f.hom.app (op W))) :\n    (SheafOfModules.evaluation.{u + 1}\n      ((sheafCompose (topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) (op W)).PreservesHomology",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files match the item statement and proof route; all modules and both direct importers compile cleanly."
+ }
+}

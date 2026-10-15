@@ -31,123 +31,62 @@
  ],
  "proof": [
   {
-   "text": "Put $A=R(W)$ and write $T(E)=\\operatorname{Tot}(E^q(U_p))$. Regard each section module as an $A$-module via $U_p\\to W$. Semilinearity of restriction gives $A$-linearity of the face maps, since all faces are over $W$. The simplicial identities pair the terms of $\\delta^2$ with opposite signs; naturality of $d_E$ gives $\\delta d_E=d_E\\delta$. Thus $(\\delta+(-1)^p d_E)^2=0$: the mixed terms have coefficients $(-1)^p$ and $(-1)^{p+1}$. There are at most $r-N+1$ nonzero summands in total degree $r$, and none when $r<N$. Coefficient chain maps act on each summand and commute with both differentials. This defines the additive total functor $T$ and its chain maps.",
+   "text": "Construct the actual restriction augmentation alpha:E(W) to T(E), using the degree-zero row restriction and its (0,n) total inclusion.",
    "uses": [
-    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
-    "def-weil-sheaf-of-modules-category",
-    "def-sp-double-complex-total"
+    "def-weil-pbc-proetale-hypercover-augmentation"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A2, label lemma-compute-cohomology; explicit total signs"
-   }
+   "elementary": false
   },
   {
-   "text": "Evaluation at each $U_p$ is exact on module sheaves. Indeed the kernel and cokernel descriptions for module sheaves identify them after forgetting coefficients with those for abelian sheaves. A module epimorphism therefore induces an abelian-sheaf epimorphism, which is locally surjective by the abelian-sheaf epimorphism criterion. The set-sheaf epimorphism criterion turns the same local lifts into an epimorphism of underlying set sheaves. Weak contractibility then makes evaluation of this map surjective at $U_p$. Evaluation preserves kernels because these are computed sectionwise. Consequently it preserves short exact sequences, cycles, boundaries and cohomology. In particular a quasi-isomorphism $E\\to F$ induces a quasi-isomorphism $E(U_p)\\to F(U_p)$ for every $p$. This argument uses the definition of weak contractibility, not the existence or affineness clause of the hypercover node.",
+   "text": "Exact evaluation at each weakly contractible term and exact scalar restriction make every section column preserve quasi-isomorphisms. Finite-column truncation comparison gives T(f) quasi-isomorphic for every bounded-below coefficient quasi-isomorphism, and in particular for each given resolution map i.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "lem-weil-pbc-proetale-affine-acyclic-hypercover"
+    "lem-weil-pbc-proetale-hypercover-total-quasi-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0946, label lemma-w-contractible, part (1), with module kernels/cokernels Tag 03DA and epimorphism criteria Tags 03CN, 00WN"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the general small-ringed-site bounded-below resolution theorem to choose a chain quasi-isomorphism $i:E\\to J$, with $J$ bounded below, termwise injective and K-injective. Its smallness hypothesis is exactly the chosen site/universe convention. This theorem supplies a chain map, whereas an abstract isomorphism of objects of $D^+$ alone would not. Choose a common lower bound $M$ for $E$ and $J$. For the double complexes below reindex the coefficient coordinate by $t=q-M\\geq0$, retaining the original differential, so total degree $n=p+t$ corresponds to original degree $n+M$. This is relabelling the complexes, not application of a signed derived shift.",
+   "text": "The represented matching-map epimorphisms give local lower-simplex lifting. Transport the ringed site through ULiftHom and apply the existing ringed-hypercover injective augmentation theorem to prove each injective row quasi-isomorphic.",
    "uses": [
-    "lem-sc-bounded-below-injective-resolution",
-    "def-weil-size-convention"
+    "lem-weil-pbc-proetale-hypercover-injective-row"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A2, second proof paragraph; derived.tex Tag 013K, label lemma-injective-resolutions-exist, part (3)"
-   }
+   "elementary": false
   },
   {
-   "text": "Set $B_E^{p,t}=E^{t+M}(U_p)$ and $B_J^{p,t}=J^{t+M}(U_p)$. The bicomplex map induced by $i$ is a quasi-isomorphism in each vertical complex at fixed $p$, by step 2. Apply the first-quadrant total comparison to the transposed bicomplexes, whose resolution columns at fixed $p$ are these vertical complexes. The signed interchange $x\\mapsto(-1)^{pt}x$ identifies their total complexes with the original ones: changing $p$ to $p+1$ changes this sign by $(-1)^t$, and changing $t$ to $t+1$ changes it by $(-1)^p$, precisely the factors interchanging $d_1+(-1)^p d_2$ and $d_2+(-1)^t d_1$. It also commutes with the map induced by $i$. Undo the degree relabelling. Hence $\\beta=T(i):T(E)\\to T(J)$ is a quasi-isomorphism of $A$-module complexes.",
+   "text": "Use the single-column source and bounded-below row comparison to prove alpha_J quasi-isomorphic for every termwise-injective bounded-below J.",
    "uses": [
-    "lem-sc-first-quadrant-total-column-comparison",
-    "def-sp-double-complex-total"
+    "lem-weil-pbc-proetale-hypercover-injective-complex-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A2, second proof paragraph; homology.tex Tag 0132, label lemma-first-quadrant-ss, first filtration"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $q$, apply the ringed-hypercover injective augmentation theorem to $I=J^q$. The small pro-etale site has representable sheaves as in the cited hypercover notion, and $U_\\bullet\\to W$ is the given all-degree hypercover. The theorem gives the canonical row quasi-isomorphism $J^q(W)[0]\\to(J^q(U_p),\\delta)_{p\\geq0}$ in $A$-modules. It requires module injectivity only; no assertion that the underlying abelian sheaf of $J^q$ is injective is made. This yields $H^0=J^q(W)$ through restriction and $H^p=0$ for $p>0$.",
+   "text": "In the derived category take c(E,J,i)=asIso(Q(T(i))) followed by the inverse of asIso(Q(alpha_J)). Both isomorphisms exist by the preceding comparisons. The final conjunct is already the coefficient quasi-isomorphism comparison.",
    "uses": [
-    "lem-weil-pbc-ringed-hypercover-injective-augmentation",
-    "lem-weil-pbc-proetale-affine-acyclic-hypercover"
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-proetale-hypercover-total-quasi-iso",
+    "lem-weil-pbc-proetale-hypercover-injective-complex-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tags 01GE and 01GW, labels lemma-acyclic-hypercover-sheaves and lemma-injective-trivial-cech; module-coefficient Hom argument"
-   }
+   "elementary": false
   },
   {
-   "text": "Form the first-quadrant bicomplex $S$ with $S^{0,t}=J^{t+M}(W)$ and $S^{p,t}=0$ for $p>0$, with vertical differential $d_J$. Restriction into $U_0$ gives a bicomplex map $S\\to B_J$: the two restrictions to $U_1$ agree because both structural maps compose to $U_1\\to W$, so $\\delta^0$ kills the augmentation; it also commutes with $d_J$. At each fixed $t$ its horizontal complex map is the row quasi-isomorphism of step 5. These are exactly the $\\mathrm{flip}.X\\,t$ complexes in the cited comparison theorem. Thus its total map is a quasi-isomorphism. Since $\\operatorname{Tot}(S)=J(W)$ after the degree relabelling, this is the restriction augmentation $\\alpha:J(W)\\to T(J)$, supported in $p=0$. In $D(A\\text{-}\\operatorname{Mod})$ both $Q\\alpha$ and $Q\\beta$ are invertible, so $c_E=(Q\\alpha)^{-1}\\circ Q\\beta:T(E)\\xrightarrow{\\sim}J(W)=R\\Gamma(W,QE)$ is the asserted isomorphism.",
+   "text": "For the given homotopy i a ~ f j, use its cylinder: the cylinder is bounded below one degree below E, and its projection to E is a homotopy equivalence. Any functor that inverts bounded-below quasi-isomorphisms identifies the two cylinder inclusions, hence the two homotopic maps. Apply this to T followed by Q. The augmentation is strictly natural, so cancel its invertible image at L to obtain the displayed naturality equation. Resolution existence and K-injective representative selection are unnecessary because i,j,a and the homotopy are inputs.",
    "uses": [
-    "lem-sc-first-quadrant-total-column-comparison",
-    "def-weil-abstract-derived-category"
+    "def-weil-pbc-proetale-hypercover-augmentation",
+    "lem-weil-pbc-proetale-hypercover-total-quasi-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A2, final proof paragraph; homology.tex Tag 0132, second filtration"
-   }
-  },
-  {
-   "text": "Check independence and naturality on morphisms rather than merely on cohomology groups. For a coefficient chain map $f:E\\to F$ and resolutions $i_E:E\\to J_E$, $i_F:F\\to J_F$, the localization-Hom bijection into the K-injective target $J_F$ represents $(Qi_F)(Qf)(Qi_E)^{-1}$ by a chain map $a:J_E\\to J_F$, unique up to homotopy. Injectivity of that bijection says $a i_E$ and $i_F f$ are homotopic. If $h$ is such a coefficient homotopy, its total homotopy on $E^q(U_p)$ is $H=(-1)^p h(U_p)$. In $d_T H+H d_T$ the horizontal terms cancel, since restriction commutes with $h$ and the signs are $(-1)^p$ and $(-1)^{p+1}$; the vertical terms are $d h+h d$. Hence $T(a)\\beta_E$ and $\\beta_F T(f)$ agree after localization. Evaluation carries $h$ to $h(W)$, so it also respects homotopies. The augmentation is strictly natural: $T(a)\\alpha_E=\\alpha_F a(W)$, since both components are restriction composed with $a$. Inverting the two augmentations gives $Qa(W)c_E=c_F QT(f)$. Here $Qa(W)$ is the resolution representative of $R\\Gamma(W,Qf)$. Taking $f=1_E$ with two choices of resolution proves independence of $c_E$ and of the morphism representative; applying the same bijection to composites and identities proves functoriality. No functorial choice of injective resolutions is needed.",
-   "uses": [
-    "lem-sc-kinjective-quasi-iso-comparison",
-    "def-pur-kinjective-complex",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I, label lemma-K-injective; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Qh_map_bijective, lines 41-46; explicit total homotopy sign calculation"
-   }
-  },
-  {
-   "text": "Finally let $f:E\\to F$ be any quasi-isomorphism between bounded-below coefficient complexes. Choose a common lower bound for both complexes, allowing their originally given bounds to differ. Step 2 makes every vertical section-complex map a quasi-isomorphism. Repeat the transposition and finite-diagonal comparison of step 4 directly on $f$ to obtain that $T(f)$ is a quasi-isomorphism. Thus the last assertion follows at chain level and does not require a converse claim about arbitrary isomorphisms in a derived category.",
-   "uses": [
-    "lem-sc-first-quadrant-total-column-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A2, quasi-isomorphism comparison in the second proof paragraph"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proetale-affine-acyclic-hypercover",
-  "def-weil-sheaf-of-modules-category",
-  "def-sp-double-complex-total",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "lem-sc-bounded-below-injective-resolution",
-  "def-weil-size-convention",
-  "lem-sc-first-quadrant-total-column-comparison",
-  "lem-weil-pbc-ringed-hypercover-injective-augmentation",
-  "def-weil-abstract-derived-category",
-  "lem-sc-kinjective-quasi-iso-comparison",
-  "def-pur-kinjective-complex"
+  "def-weil-pbc-proetale-hypercover-augmentation",
+  "lem-weil-pbc-proetale-hypercover-total-quasi-iso",
+  "lem-weil-pbc-proetale-hypercover-injective-row",
+  "lem-weil-pbc-proetale-hypercover-injective-complex-comparison",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09A2, label lemma-compute-cohomology: its two double-complex comparisons, with explicit ringed-module coefficients and K-injective comparison naturality"
+  "place": "Tag 09A2, the section-column and injective-row comparisons; C3 implementation via finite-column truncation, explicit restriction augmentation and a bounded-below cylinder naturality argument. No choice of resolutions or K-injective comparison theorem is used."
  },
  "status": "split",
  "mathlib_searches": [
@@ -304,5 +243,15 @@
   "by": "NA",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files match the item statement and proof route; all modules and both direct importers compile cleanly."
  }
 }

@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-proetale-hypercover-injective-complex-comparison",
+ "kind": "statement",
+ "title": "Injective row descent implies descent for bounded-below injective complexes",
+ "statement": "For X,R,W,U and the explicit restriction augmentation alpha [def-weil-pbc-proetale-hypercover-augmentation], assume every injective module sheaf I has a quasi-isomorphic row augmentation I(W)[0] to its alternating section row. Then alpha_J is a quasi-isomorphism for every strictly bounded-below termwise-injective complex J.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-hypercover-total",
+  "def-weil-pbc-proetale-hypercover-augmentation",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, final paragraph, the injective-resolution row comparison"
+ },
+ "proof": [
+  {
+   "text": "Take K to be the flipped section bicomplex of J and A=J(W). The restriction maps form a:A to K.X 0, commute with coefficient differentials, and are killed by the next horizontal differential. K vanishes for p<0 or q below a lower bound for J, and A shares that bound.",
+   "uses": [
+    "def-weil-pbc-proetale-hypercover-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each coefficient degree identify the row map from the single-column bicomplex with the stated row augmentation, using singleMapHomologicalComplex and its degree-zero component. The remaining source components vanish. Apply bounded-below row augmentation comparison with b=alpha_J.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-row-augmentation",
+    "def-weil-pbc-proetale-hypercover-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-hypercover-augmentation",
+  "lem-weil-pbc-bounded-below-row-augmentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, final paragraph, the injective-resolution row comparison; implemented by C3 using the concrete Lean arguments described in proof"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A degree zero augmentation to a first quadrant bicomplex is a quasi-isomorphism if every horizontal augmented row is exact",
+   "results": "[leanfinder] OK 8 hit(s); CochainComplex.cm5b.instQuasiIsoIntP, quasiIsoAt_iff_exactAt', quasiIsoAt_iff_exactAt, exactAt_iff_of_quasiIsoAt, HomologicalComplex.HomologySequence.quasiIso_τ₃, CochainComplex.mappingCone.quasiIso_descShortComplex, quasiIsoAt_iff', CochainComplex.quasiIsoAt₀_iff",
+   "date": "2026-10-15",
+   "verdict": "No existing specialization to this explicit section augmentation; use bounded-below row comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleColumn\", \"QuasiIso\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "No existing specialization to this explicit section augmentation; use bounded-below row comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*singleColumn|singleColumn.*quasiIso",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "No existing specialization to this explicit section augmentation; use bounded-below row comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A single-column augmentation to a bounded-below bicomplex with exact augmented rows is a quasi-isomorphism on total complexes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex",
+  "date": "2026-10-15",
+  "group": "C3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Bounded-below hypercover descent, Injective row descent implies descent for bounded-below injective complexes",
+   "via": [
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverInjectiveComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleHypercoverInjectiveComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.hypercoverAugmentation_quasiIso_of_injective_rows",
+  "statement": "theorem hypercoverAugmentation_quasiIso_of_injective_rows\n    (hrows : ∀ (I : ringedSiteModules.{u + 1}\n        ((sheafCompose (topology X)\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)), Injective I →\n      QuasiIso (hypercoverRowAugmentationComplex X R W U I))\n    (J : CochainComplex.Plus (ringedSiteModules.{u + 1}\n      ((sheafCompose (topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)))\n    (hJ : ∀ n : ℤ, Injective (J.obj.X n)) :\n    QuasiIso ((hypercoverAugmentation X R W U).app J.obj)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files match the item statement and proof route; all modules and both direct importers compile cleanly."
+ }
+}

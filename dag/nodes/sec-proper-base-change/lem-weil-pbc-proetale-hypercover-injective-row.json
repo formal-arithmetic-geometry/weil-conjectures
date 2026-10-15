@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-proetale-hypercover-injective-row",
+ "kind": "statement",
+ "title": "An injective module sheaf has a quasi-isomorphic hypercover section row",
+ "statement": "Let X,R,W,U be as in [def-weil-pbc-proetale-hypercover-total], and suppose U satisfies the represented matching epimorphism hypotheses of [lem-weil-pbc-proetale-affine-acyclic-hypercover]. For any injective R-module sheaf I, its canonical row augmentation [def-weil-pbc-proetale-hypercover-augmentation] from I(W)[0] to the integer alternating section row is a quasi-isomorphism. No weak contractibility or affineness assumption is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-hypercover-total",
+  "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+  "def-weil-pbc-proetale-hypercover-augmentation",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 01GE and 01GW, injective augmentation with ringed-module coefficients"
+ },
+ "proof": [
+  {
+   "text": "The represented matching epimorphisms imply the local lower-simplex lifting condition.",
+   "uses": [
+    "lem-weil-pbc-proetale-hypercover-local-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the site through ULiftHom, making its object and morphism universes equal while keeping its objects and geometry unchanged. Pull back the pro-etale precoverage and prove that its Grothendieck topology is the induced topology, using fullness to check map(comap S)=S. Subcanonicity transports, and the ringed module-sheaf equivalence transports I and its injectivity. Translate local lifting by the up/down maps and pull back the covering sieves.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply ringedHypercover_injective_augmentation_exact on the transported small site, then identify its section maps with the original restrictions. The degree-zero map is injective with image the kernel of the first alternating differential, and all positive degrees are exact. In natural degrees use the short-complex quasi-isomorphism criterion at zero and exactness at successors. Extend by zero to integer degrees and conjugate by extendSingleIso to get the stated row augmentation.",
+   "uses": [
+    "lem-weil-pbc-ringed-hypercover-injective-augmentation",
+    "def-weil-pbc-proetale-hypercover-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-hypercover-local-lifting",
+  "lem-weil-pbc-ringed-hypercover-injective-augmentation",
+  "def-weil-pbc-proetale-hypercover-augmentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 01GE and 01GW, injective augmentation with ringed-module coefficients; implemented by C3 using the concrete Lean arguments described in proof"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective sheaf of modules has an exact augmented alternating section complex on a hypercover",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.exact₀, CategoryTheory.InjectiveResolution.exact_succ, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CochainComplex.isKInjective_of_injective_aux, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, ChainComplex.alternatingConst_exactAt",
+   "date": "2026-10-15",
+   "verdict": "Reuse the existing ringedHypercover_injective_augmentation_exact statement. Its local lifting formulation and small-category universe require the explicit bridge and ULiftHom transport implemented here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"alternatingCofaceMapComplex\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "Reuse the existing ringedHypercover_injective_augmentation_exact statement. Its local lifting formulation and small-category universe require the explicit bridge and ULiftHom transport implemented here."
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*hypercover|hypercover.*injective",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "Reuse the existing ringedHypercover_injective_augmentation_exact statement. Its local lifting formulation and small-category universe require the explicit bridge and ULiftHom transport implemented here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The alternating section complex of an injective sheaf of modules on a hypercover has only augmentation homology",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex",
+  "date": "2026-10-15",
+  "group": "C3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Bounded-below hypercover descent, An injective module sheaf has a quasi-isomorphic hypercover section row",
+   "via": [
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverInjectiveRow",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleHypercoverInjectiveRow.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.hypercoverRowAugmentationComplex_quasiIso_of_injective",
+  "statement": "theorem hypercoverRowAugmentationComplex_quasiIso_of_injective\n    (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1})\n    (W : X.ProEt) (U : SimplicialObject (Over W))\n    (hzero : Epi ((topology X).yoneda.map (U _⦋0⦌).hom))\n    (hone : ∃ c : Fan (fun _ : Fin 2 ↦ U _⦋0⦌), Nonempty (IsLimit c) ∧\n      ∃ μ : U _⦋1⦌ ⟶ c.pt,\n        (∀ i : Fin 2, μ ≫ c.proj i = U.δ i) ∧\n        Epi ((topology X).yoneda.map μ.left))\n    (hhigher : ∀ n : ℕ,\n      ∃ c : Cone (SimplicialObject.matchingBoundaryIndex U n).multicospan,\n        Nonempty (IsLimit c) ∧ ∃ μ : U _⦋n + 2⦌ ⟶ c.pt,\n          (∀ i : Fin (n + 3), μ ≫ c.π.app (WalkingMulticospan.left i) = U.δ i) ∧\n          Epi ((topology X).yoneda.map μ.left)) \n    (I : ringedSiteModules.{u + 1}\n      ((sheafCompose (topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))\n    [Injective I] : QuasiIso (hypercoverRowAugmentationComplex X R W U I)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files match the item statement and proof route; all modules and both direct importers compile cleanly."
+ }
+}

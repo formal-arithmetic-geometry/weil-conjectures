@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-proetale-representable-epi-local-lifting",
+ "kind": "statement",
+ "title": "Represented epimorphisms give local lifts on the pro-etale site in their value universe",
+ "status": "split",
+ "statement": "Let X be a scheme in universe u and mu:A to B a morphism of its small pro-etale site [def-weil-pbc-proetale-site]. Assume the induced map between represented Type-u-valued sheaves is an epimorphism. For every site object T and map g:T to B, there is a covering sieve S on T such that every f:V to T in S admits t:V to A with t mu=f g. The epi hypothesis stays in the represented-sheaf universe; it is not replaced by an epimorphism of universe-lifted sheaves.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WN, epi/local-surjectivity criterion, with the pro-etale site Tag 098K and bounded affine weakly contractible refinements Tags 098I and 0990"
+ },
+ "proof": [
+  {
+   "text": "Use the pro-etale affine weakly contractible covering family, and refine an affine base by a fixed small such cover. On each compact projective cover, any covering family refines to a finite clopen partition: lift its represented covering epimorphism into the sheaf coproduct and read the locally constant component indices; compactness makes the partition finite. Partitions of the fixed small scheme form a small type.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the associated-sheaf refinement colimits on these small partition diagrams and descend along the fixed affine covers. Matching families and equalizers remain small, giving associated sheaves in the Type-u value universe. The usual finite-limit argument makes this adjunction left exact; this is the size justification required to apply the set-sheaf epi criterion to the displayed represented map.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the epi/local-surjectivity criterion to the represented map. The image sieve of g is covering. By Yoneda its membership at f is precisely the existence of a t with t mu=f g, so choosing that sieve proves the conclusion. No object is defined by choosing this merely existing sieve.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WN, image-sieve proof, with the value-universe size justification using Tags 098I and 0990; C3 isolates this as the only remaining new proof obligation"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An epimorphism of representable sheaves on the small pro-etale site is locally surjective in the universe of the represented sets",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphism between represented sheaves gives local lifts of every morphism into its target",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.PresheafIsGeneratedBy.of_epi, CategoryTheory.instEpiSheafTypeToImage, CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.instEpiAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi, CategoryTheory.Sheaf.epi_of_isLocallySurjective, CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.isLocallySurjective_iff_epi",
+   "date": "2026-10-15",
+   "verdict": "Mathlib has the general set-sheaf epi criterion under HasSheafify in the same value universe. No represented pro-etale specialization resolves the universe issue automatically."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yoneda\", \"IsLocallySurjective\"",
+   "results": "[loogle] OK 5 hit(s); CategoryTheory.GrothendieckTopology.ofArrows_mem_iff_isLocallySurjective_cofanIsColimitDesc_uliftYoneda_map, CategoryTheory.GrothendieckTopology.ofArrows_mem_iff_isLocallySurjective_cofanIsColimitDesc_shrinkYoneda_map, CategoryTheory.GrothendieckTopology.ofArrows_mem_iff_isLocallySurjective_sigmaDesc_uliftYoneda_map, CategoryTheory.GrothendieckTopology.ofArrows_mem_iff_isLocallySurjective_sigmaDesc_shrinkYoneda_map, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveFunYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOppositeType",
+   "date": "2026-10-15",
+   "verdict": "Mathlib has the general set-sheaf epi criterion under HasSheafify in the same value universe. No represented pro-etale specialization resolves the universe issue automatically."
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda.*isLocallySurjective|isLocallySurjective.*yoneda|representable.*epi",
+   "results": "[grep] OK 9 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "Mathlib has the general set-sheaf epi criterion under HasSheafify in the same value universe. No represented pro-etale specialization resolves the universe issue automatically."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Epimorphism of representable sheaves on locally small large sites is a covering morphism image sieve universe",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PresheafIsGeneratedBy.of_epi\", \"module\": \"Mathlib/CategoryTheory/Subfunctor/Finite\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor Cᵒᵖ (Type w)} {ι : Type w'}\\n  {X : ι → Cᵒᵖ} {x : (i : ι) → F.obj (X i)},\\n  CategoryTheory.PresheafIsGeneratedBy F x →\\n    ∀ {F' : CategoryTheory.Functor Cᵒᵖ (Type w)} (f : F ⟶ F') [CategoryTheory.Epi f],\\n      Categ\", \"doc\": \"If $ f $ is an epimorphism of functors, then the presheaf $ F' $ is generated by the sections $ f_{X_i}(x_i) $ for each index $ i $, meaning $ F' $ equals the supremum $ \\\\bigvee_{i \\\\in \\\\iota} \\\\langle \"}\n  {\"name\": \"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallySurjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {F₁ F₂ : CategoryTheory.Sheaf J (Type w)} (φ : F₁ ⟶ F₂) [CategoryTheory.Sheaf.IsLocallySurjective φ],\\n  CategoryTheory.Epi φ\", \"doc\": \"A locally surjective morphism between sheaves is an epimorphism in the category of sheaves. Specifically, if $\\\\phi: F \\\\to G$ is a sheaf morphism such that for every object $c$ in the base category, th\"}\n  {\"name\": \"CategoryTheory.Sheaf.epi_of_isLocallySurjective\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallySurjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {FA : A → A → Type u_1} {CA : A → Type w'}\\n  [inst_2 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_3 : CategoryTheory.ConcreteCateg\", \"doc\": \"Every locally surjective sheaf morphism $\\\\phi: F \\\\to G$ between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$ is an epimorphism. This means that if $\\\\phi$ is locally \"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"module\": \"Mathlib/CategoryTheory/Sites/EpiMono\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (A : Type u')\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {FA : A → A → Type u_1} {CA : A → Type w}\\n  [inst_2 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_3 : CategoryTheory.ConcreteCatego\", \"doc\": \"A sheaf morphism $\\\\phi$ is locally surjective if and only if it is an epimorphism.\"}\n  {\"name\": \"CategoryTheory.Sheaf.instEpiAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization\", \"module\": \"Mathlib/CategoryTheory/Sites/EpiMono\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {FA : A → A → Type u_1} {CA : A → Type w}\\n  [inst_2 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_3 : CategoryTheory.ConcreteCatego\", \"doc\": \"For a Grothendieck topology $ J $ on a category $\\\\mathcal{C}$ and a concrete category $\\\\mathcal{A}$ with a functorial surjective-injective factorization system, the component $i_f$ of the natural tran\"}\n  {\"name\": \"CategoryTheory.instEpiSheafTypeToImage\", \"module\": \"Mathlib/CategoryTheory/Sites/Subsheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {F F' : CategoryTheory.Sheaf J (Type w)} (f : F ⟶ F'), CategoryTheory.Epi (CategoryTheory.Sheaf.toImage f)\", \"doc\": \"For any sheaves $F$ and $F'$ on a category $\\\\mathcal{C}$ with values in the category of types, and for any morphism $f: F \\\\to F'$, the natural transformation from $F$ to the image sheaf of $f$ (constr\"}\n  {\"name\": \"CategoryTheory.presheafIsFinite_of_epi\", \"module\": \"Mathlib/CategoryTheory/Subfunctor/Finite\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor Cᵒᵖ (Type w))\\n  [CategoryTheory.PresheafIsFinite F] {F' : CategoryTheory.Functor Cᵒᵖ (Type w)} (f : F ⟶ F') [CategoryTheory.Epi f],\\n  CategoryTheory.PresheafIsFinite F'\", \"doc\": \"If $ F $ is a finite presheaf and there exists an epimorphism $ f : F \\to F' $, then the presheaf $ F' $ is also finite. This follows from the fact that the finiteness condition for subfunctors is main\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallySurjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {F G : CategoryTheory.Sheaf J (Type w)} (φ : F ⟶ G) [CategoryTheory.HasSheafify J (Type w)],\\n  CategoryTheory.Sheaf.IsLocallySurjective φ ↔ CategoryTheory.Epi φ\", \"doc\": \"For sheaves $F$ and $G$ on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$, a morphism $\\\\phi: F \\\\to G$ is locally surjective if and only if it is an epimorphism, provided that a s\"}\n",
+   "date": "2026-10-16",
+   "verdict": "The same-value-universe HasSheafify hypothesis remains necessary in the general Mathlib criterion; no applicable represented pro-etale specialization found."
+  },
+  {
+   "tool": "grep",
+   "query": "epi.*yoneda|yoneda.*epi|HasSheafify.*pro[Ee]t|[Bb]alanced.*[Ss]heaf",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"116\", \"text\": \"    Presieve.EffectiveEpimorphic.iff_forall_isSheafFor_yoneda]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"126\", \"text\": \"    Presieve.EffectiveEpimorphic.iff_forall_isSheafFor_yoneda]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"line\": \"182\", \"text\": \"theorem injective_iff_preservesEpimorphisms_yoneda_obj (J : C) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"line\": \"183\", \"text\": \"    Injective J ↔ (yoneda.obj J).PreservesEpimorphisms := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"line\": \"184\", \"text\": \"  rw [injective_iff_projective_op, Projective.projective_iff_preservesEpimorphisms_coyoneda_obj]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"line\": \"185\", \"text\": \"  exact Functor.PreservesEpimorphisms.iso_iff (Coyoneda.objOpOp _)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"line\": \"141\", \"text\": \"theorem projective_iff_preservesEpimorphisms_coyoneda_obj (P : C) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"line\": \"142\", \"text\": \"    Projective P ↔ (coyoneda.obj (op P)).PreservesEpimorphisms :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"line\": \"150\", \"text\": \"      (epi_iff_surjective _).1 (inferInstance : Epi ((coyoneda.obj (op P)).map e)) f⟩⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\", \"line\": \"14\", \"text\": \"An object is projective iff the preadditive coyoneda functor on it preserves epimorphisms.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\", \"line\": \"34\", \"text\": \"theorem projective_iff_preservesEpimorphisms_preadditiveCoyoneda_obj (P : C) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\", \"line\": \"35\", \"text\": \"    Projective P ↔ (preadditiveCoyoneda.obj (op P)).PreservesEpimorphisms := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\", \"line\": \"36\", \"text\": \"  rw [projective_iff_preservesEpimorphisms_coyoneda_obj]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\", \"line\": \"39\", \"text\": \"  · exact Functor.preservesEpimorphisms_of_preserves_of_reflects (preadditiveCoyoneda.obj (op P))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Yoneda/Injective.lean\", \"line\": \"14\", \"text\": \"An object is injective iff the preadditive yoneda functor on it preserves epimorphisms.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Yoneda/Injective.lean\", \"line\": \"34\", \"text\": \"theorem injective_iff_preservesEpimorphisms_preadditiveYoneda_obj (J : C) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Yoneda/Injective.lean\", \"line\": \"35\", \"text\": \"    Injective J ↔ (preadditiveYoneda.obj J).PreservesEpimorphisms := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Yoneda/Injective.lean\", \"line\": \"36\", \"text\": \"  rw [injective_iff_preservesEpimorphisms_yoneda_obj]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Yoneda/Injective.lean\", \"line\": \"38\", \"text\": \"    ⟨fun h : (preadditiveYoneda.obj J ⋙ (forget AddCommGrpCat)).PreservesEpimorphisms => ?_, ?_⟩\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/LocallySurjective.lean\", \"line\": \"127\", \"text\": \"    [ConcreteCategory C FC] [Balanced (CategoryTheory.Sheaf (Opens.grothendieckTopology X) C)]\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"177\", \"text\": \"instance : Epi M.fromFreeYonedaCoproduct :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"line\": \"178\", \"text\": \"  epi_of_surjective (fun X m ↦ ⟨M.freeYonedaCoproductMk (M.elementsMk X m),\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Basic.lean\", \"line\": \"37\", \"text\": \"  let := (injective_iff_preservesEpimorphisms_preadditive_yoneda_obj' J).mp hJ\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Basic.lean\", \"line\": \"48\", \"text\": \"  rw [injective_iff_preservesEpimorphisms_preadditive_yoneda_obj']\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Projective/Basic.lean\", \"line\": \"36\", \"text\": \"  have := (projective_iff_preservesEpimorphisms_preadditiveCoyonedaObj P).mp hP\"}\n",
+   "date": "2026-10-16",
+   "verdict": "Hits concern fpqc effective epimorphisms, projective/injective Yoneda, or unrelated sheaf topology; no replacement for the remaining statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Epi, \"isLocallySurjective\"",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallySurjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {F₁ F₂ : CategoryTheory.Sheaf J (Type w)} (φ : F₁ ⟶ F₂) [CategoryTheory.Sheaf.IsLocallySurjective φ] : CategoryTheory.Epi φ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallySurjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {F G : CategoryTheory.Sheaf J (Type w)} (φ : F ⟶ G) [CategoryTheory.HasSheafify J (Type w)] : CategoryTheory.Sheaf.IsLocallySurjective φ ↔ CategoryTheory.Epi φ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.epi_of_isLocallySurjective\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallySurjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'} [CategoryTheory.Category.{v', u'} A] {FA : A → A → Type u_1} {CA : A → Type w'} [(X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [CategoryTheory.ConcreteCategory A FA] {F₁ F₂ : CategoryTheory.Sheaf\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"module\": \"Mathlib.CategoryTheory.Sites.EpiMono\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (A : Type u') [CategoryTheory.Category.{v', u'} A] {FA : A → A → Type u_1} {CA : A → Type w} [(X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [CategoryTheory.ConcreteCategory A FA] [CategoryTheory.ConcreteCatego\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Sheaf.isLocallySurjective_iff_epi\", \"module\": \"Mathlib.Topology.Sheaves.LocallySurjective\", \"type\": \" {X : TopCat} {C : Type u} [CategoryTheory.Category.{v, u} C] {FC : C → C → Type u_1} {CC : C → Type v} [(X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [CategoryTheory.ConcreteCategory C FC] [CategoryTheory.Balanced (CategoryTheory.Sheaf (Opens.grothendieckTopology ↑X) C)] [(Opens.grothendieckTopology \", \"doc\": \"\"}\n",
+   "date": "2026-10-16",
+   "verdict": "The five results confirm that the Mathlib set-sheaf direction from epi to local surjectivity requires HasSheafify in the same value universe."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex",
+  "date": "2026-10-15",
+  "group": "C3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Bounded-below hypercover descent: the represented matching-map epi criterion in the actual value universe",
+   "via": [
+    "lem-weil-pbc-proetale-hypercover-local-lifting",
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRepresentableEpiLocalLifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRepresentableEpiLocalLifting.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.representable_epi_local_lifting",
+  "statement": "theorem representable_epi_local_lifting\n    (X : Scheme.{u}) {A B : X.ProEt} (μ : A ⟶ B)\n    (hμ : Epi ((topology X).yoneda.map μ)) (T : X.ProEt) (g : T ⟶ B) :\n    ∃ S : Sieve T, S ∈ topology X T ∧\n      ∀ (V : X.ProEt) (f : V ⟶ T), S f → ∃ t : V ⟶ A, t ≫ μ = f ≫ g",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-15"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "def-weil-size-convention",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files match the item statement and proof route; all modules and both direct importers compile cleanly."
+ }
+}

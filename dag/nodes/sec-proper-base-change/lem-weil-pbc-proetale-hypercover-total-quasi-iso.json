@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-proetale-hypercover-total-quasi-iso",
+ "kind": "statement",
+ "title": "Weakly contractible sections preserve bounded-below total quasi-isomorphisms",
+ "statement": "Let X,R,W,U and T be as in [def-weil-pbc-proetale-hypercover-total]. Assume every U_p is weakly contractible in the explicit Type (u+1)-sheaf epimorphism sense of [lem-weil-pbc-proetale-affine-acyclic-hypercover]. If E,F are strictly bounded-below complexes of R-module sheaves and f:E to F is a quasi-isomorphism, then T(f) is a quasi-isomorphism. No hypercover matching hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-hypercover-total",
+  "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, second proof paragraph, with exact evaluation Tag 0946"
+ },
+ "proof": [
+  {
+   "text": "At each U_p exact evaluation preserves homology. Follow it by exact restriction of scalars along R(W) to R(U_p). The resulting functor is the section functor evaluated in simplicial degree p. Hence its map on coefficient complexes preserves quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the extension-by-zero evaluation isomorphism to identify each nonnegative outer column with the corresponding section-evaluation complex; negative columns vanish. A common lower bound for E and F gives the second lower bound on both bicomplexes. Apply bounded-below column comparison to the flipped section bicomplex map.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-total-column-comparison",
+    "def-weil-pbc-proetale-hypercover-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "lem-weil-pbc-bounded-below-total-column-comparison",
+  "def-weil-pbc-proetale-hypercover-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, second proof paragraph, with exact evaluation Tag 0946; implemented by C3 using the concrete Lean arguments described in proof"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of integer cochain bicomplexes uniformly bounded below in both directions is a quasi-isomorphism on total complexes if each column is a quasi-isomorphism",
+   "results": "8 hits: quasi-isomorphism, homology and truncation criteria; no bounded-below total comparison.",
+   "date": "2026-10-15",
+   "verdict": "No direct result. Reuse the proved finite-column total comparison from WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns."
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso, HomologicalComplex₂.total.map",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*total|total.*quasiIso|column.*augmentation",
+   "results": "msearch: 0 hits. Local rg found total.quasiIso_map_of_finitely_many_columns in the source library, and totalFlipIso in Mathlib.",
+   "date": "2026-10-15",
+   "verdict": "Reuse these proofs; the new truncation argument supplies uniform bounded-below comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a sheaf of modules at a weakly contractible object preserves homology and epimorphisms",
+   "results": "[leanfinder] OK 8 hit(s); LightCondMod.instPreservesEpimorphismsLightCondSetForget, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.instAbelian, CategoryTheory.preservesHomology_preadditiveYonedaObj_of_injective, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instIsGrothendieckAbelian, instAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+   "date": "2026-10-15",
+   "verdict": "Exact evaluation and scalar restriction are available, but the hypercover-total specialization is new."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"PreservesHomology\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "Exact evaluation and scalar restriction are available, but the hypercover-total specialization is new."
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyContractible|evaluation_preservesHomology",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "Exact evaluation and scalar restriction are available, but the hypercover-total specialization is new."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of integer bicomplexes bounded below in both coordinates is a quasi-isomorphism on coproduct total complexes if it is so on each column",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex",
+  "date": "2026-10-15",
+  "group": "C3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Bounded-below hypercover descent, Weakly contractible sections preserve bounded-below total quasi-isomorphisms",
+   "via": [
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleHypercoverQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.hypercoverTotal_map_quasiIso_of_weaklyContractible",
+  "statement": "theorem hypercoverTotal_map_quasiIso_of_weaklyContractible\n    (hweak : ∀ (p : ℕ) (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G),\n      Epi f → Function.Surjective (f.hom.app (op (U _⦋p⦌).left)))\n    (E F : CochainComplex.Plus (ringedSiteModules.{u + 1}\n      ((sheafCompose (topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)))\n    (f : E ⟶ F) (hf : QuasiIso f.hom) :\n    QuasiIso ((hypercoverTotal X R W U).map f.hom)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files match the item statement and proof route; all modules and both direct importers compile cleanly."
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-bounded-below-total-column-comparison",
+ "kind": "statement",
+ "title": "Column and row comparison for uniformly bounded-below integer bicomplexes",
+ "statement": "Let C be an abelian category with countable coproducts and let f:K to L be a map of integer cochain bicomplexes [def-sp-double-complex-total]. Suppose common integers P,Q satisfy K^{p,q}=L^{p,q}=0 whenever p<P or q<Q. If each fixed-p column map is a quasi-isomorphism, the coproduct total map is a quasi-isomorphism. The same conclusion holds when each fixed-q row map is a quasi-isomorphism, with Mathlib signed flip symmetry.",
+ "stmt_deps": [
+  "def-sp-double-complex-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012X, 0132 and 0133; finite-diagonal comparison by truncation"
+ },
+ "proof": [
+  {
+   "text": "Fix a total homology degree n and put M=n-Q+1. The projection to the outer stupid truncation at M is an isomorphism in total degrees n-1,n,n+1: a removed summand has p>M and hence q<Q. Prove this summandwise using GradedObject.isIso_mapMap_apply and the zero-object isomorphism criterion. It follows that the projection is a quasi-isomorphism at n.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The truncated bicomplexes have only finitely many nonzero columns P through M. Column maps remain quasi-isomorphisms by the retained-column projection isomorphisms. Apply the source library theorem total.quasiIso_map_of_finitely_many_columns, totalize the naturality square of projections, and apply two-out-of-three at n.",
+   "uses": [
+    "lem-sc-integer-finite-column-total-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For rows apply the preceding statement to flipped bicomplexes and conjugate by totalFlipIso. Naturality follows on each total summand from the signed total-flip formulas.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integer-finite-column-total-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012X, 0132 and 0133; finite-diagonal comparison by truncation; implemented by C3 using the concrete Lean arguments described in proof"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of integer cochain bicomplexes uniformly bounded below in both directions is a quasi-isomorphism on total complexes if each column is a quasi-isomorphism",
+   "results": "8 hits: quasi-isomorphism, homology and truncation criteria; no bounded-below total comparison.",
+   "date": "2026-10-15",
+   "verdict": "No direct result. Reuse the proved finite-column total comparison from WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns."
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso, HomologicalComplex₂.total.map",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*total|total.*quasiIso|column.*augmentation",
+   "results": "msearch: 0 hits. Local rg found total.quasiIso_map_of_finitely_many_columns in the source library, and totalFlipIso in Mathlib.",
+   "date": "2026-10-15",
+   "verdict": "Reuse these proofs; the new truncation argument supplies uniform bounded-below comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of integer bicomplexes bounded below in both coordinates is a quasi-isomorphism on coproduct total complexes if it is so on each column",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex",
+  "date": "2026-10-15",
+  "group": "C3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Bounded-below hypercover descent, Column and row comparison for uniformly bounded-below integer bicomplexes",
+   "via": [
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BoundedBelowTotalComparison",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedBelowTotalComparison.lean",
+  "declaration": "HomologicalComplex₂.quasiIso_totalMap_of_boundedBelow_columns",
+  "statement": "theorem quasiIso_totalMap_of_boundedBelow_columns\n    {K L : HomologicalComplex₂ C (up ℤ) (up ℤ)} (f : K ⟶ L) (P Q : ℤ)\n    (hK : ∀ p q : ℤ, p < P ∨ q < Q → IsZero ((K.X p).X q))\n    (hL : ∀ p q : ℤ, p < P ∨ q < Q → IsZero ((L.X p).X q))\n    (hf : ∀ p : ℤ, QuasiIso (f.f p)) : QuasiIso (total.map f (up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-15",
+  "declarations": [
+   "HomologicalComplex₂.quasiIso_totalMap_of_boundedBelow_columns",
+   "HomologicalComplex₂.quasiIso_totalMap_of_boundedBelow_rows"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files match the item statement and proof route; all modules and both direct importers compile cleanly."
+ }
+}

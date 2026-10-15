@@ -1,0 +1,131 @@
+{
+ "id": "def-weil-pbc-proetale-hypercover-augmentation",
+ "kind": "definition",
+ "title": "Restriction augmentation into total hypercover sections",
+ "statement": "For a scheme X, a sheaf R of commutative rings and a simplicial object U in the slice over W of the small pro-etale site, define section rows and their signed coproduct total T as in [def-weil-pbc-proetale-hypercover-total]. Restriction I(W) to I(U_0), followed by the degree-zero extension isomorphism, defines a map I(W)[0] to the alternating section row. Its composite with the row differential is zero. For every coefficient complex E these restrictions, inserted into the (0,n) total summands, define a natural chain map alpha_E:E(W) to T(E). No hypercover or boundedness assumption is required. The construction uses actual sheaf restriction maps, not an existence choice.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-hypercover-total",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, restriction augmentation in the final paragraph of lemma-compute-cohomology"
+ },
+ "proof": [
+  {
+   "text": "Use restriction along U_0 to W, with its semilinear map regarded as R(W)-linear via the slice-section functor. The two restrictions to U_1 agree by the over-category commutativity equations, so their alternating difference vanishes.",
+   "uses": [
+    "def-weil-pbc-proetale-hypercover-total"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport through extension by zero and use mkHomFromSingle to construct the row map. In each coefficient degree n insert it into the (0,n) summand of the signed total. The horizontal contribution is zero, the vertical sign at p=0 is 1, and restriction commutes with coefficient differentials. The same calculation for a coefficient map proves naturality.",
+   "uses": [
+    "def-weil-pbc-proetale-hypercover-total"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-hypercover-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, restriction augmentation in the final paragraph of lemma-compute-cohomology; implemented by C3 using the concrete Lean arguments described in proof"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from global sections to degree zero of a cosimplicial section complex gives a natural augmentation to the total complex",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.CosimplicialObject.augment_hom_app, CategoryTheory.CosimplicialObject.augment, AlgebraicTopology.AlternatingFaceMapComplex.ε, CategoryTheory.CosimplicialObject.augment_hom_zero, AlgebraicTopology.alternatingCofaceMapComplex, CategoryTheory.CosimplicialObject.augment_right, AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_zero, AlgebraicTopology.alternatingCofaceMapComplex_obj",
+   "date": "2026-10-15",
+   "verdict": "No pre-existing section-to-hypercover-total augmentation. Reuse alternating cofaces, extension by zero and total summand maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"alternatingCofaceMapComplex\", \"NatTrans\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "No pre-existing section-to-hypercover-total augmentation. Reuse alternating cofaces, extension by zero and total summand maps."
+  },
+  {
+   "tool": "grep",
+   "query": "augmentation.*total|total.*augmentation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "No pre-existing section-to-hypercover-total augmentation. Reuse alternating cofaces, extension by zero and total summand maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction augmentation from sections to the total complex of hypercover sections is natural",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex",
+  "date": "2026-10-15",
+  "group": "C3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Bounded-below hypercover descent, Restriction augmentation into total hypercover sections",
+   "via": [
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverAugmentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleHypercoverAugmentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.hypercoverAugmentation",
+  "statement": "def hypercoverAugmentation :\n    (SheafOfModules.evaluation.{u + 1}\n      ((sheafCompose (topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) (op W)).mapHomologicalComplex\n          (ComplexShape.up ℤ) ⟶ hypercoverTotal X R W U",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-15",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverRestrictionZero",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverRestrictionZero_apply",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverRestrictionZero_d",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverRowAugmentation",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverRowAugmentation_naturality",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverRowAugmentation_d",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverRowAugmentationComplex",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverAugmentation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-961ee",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261015T171715-L-504217",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files match the item statement and proof route; all modules and both direct importers compile cleanly."
+ }
+}
