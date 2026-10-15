@@ -8,6 +8,10 @@ module
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Stalk
 
+import WeilConjectures.WeilSheaf.LowerShriekOperations
+import WeilConjectures.WeilSheaf.StalkCharpoly
+import WeilConjectures.WeilSheaf.TraceFunctionCongr
+
 /-!
 # The Grothendieck–Lefschetz trace formula for Weil sheaves
 
@@ -47,7 +51,28 @@ theorem sum_trace_compactlySupportedCohomology (F : WeilSheaf k₀ l X) {m : ℕ
         ((X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 : PadicAlgCl l) *
           LinearMap.trace (PadicAlgCl l) (F.stalk x).carrier ((F.stalk x).frobeniusEnd ^
             (m / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1))
-      else 0 :=
-  sorry
+      else 0 := by
+  classical
+  let f := X ↘ Spec (CommRingCat.of k₀)
+  let T := (f.finite_setOf_degreeOver_le m).toFinset
+  have hT (x : X.finitePoints) (hx : f.degreeOver x.1 ∣ m) : x ∈ T := by
+    exact (f.finite_setOf_degreeOver_le m).mem_toFinset.mpr
+      (Nat.le_of_dvd (Nat.pos_of_ne_zero hm) hx)
+  have h := (toComplex.obj F).sum_trace_compactlySupportedCohomology_eq_sum_traceFunction hm
+  simp only [WeilComplex.traceFunction_toComplex] at h
+  change (∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
+    ((F.compactlySupportedCohomology i).frobeniusEnd ^ m)) = _ at h
+  rw [h, f.finsum_fieldPoints_eq_sum hm (F.traceFunction m)
+    (fun x ↦ LinearMap.trace (PadicAlgCl l) _
+      ((F.stalk x).frobeniusEnd ^ (m / f.degreeOver x.1)))
+    (fun y x hx ↦ F.traceFunction_eq_trace_frobeniusEnd_stalk_pow m y x hx) hT]
+  rw [finsum_eq_sum_of_support_subset (s := T)]
+  · rw [Finset.sum_filter]
+    refine Finset.sum_congr rfl fun x _ ↦ ?_
+    split_ifs <;> simp [nsmul_eq_mul, f]
+  · intro x hx
+    apply hT
+    by_contra hd
+    exact hx (if_neg hd)
 
 end AlgebraicGeometry.WeilSheaf
