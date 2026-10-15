@@ -30,7 +30,8 @@
  "stmt_deps": [
   "def-weil-pbc-algebra-hom-quotient",
   "def-weil-pbc-quotient-module",
-  "def-weil-pbc-direct-sum-modules"
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-associated-graded-ring"
  ],
  "proof": [
   {
@@ -289,5 +290,24 @@
   "worker": "stage1",
   "summary": "Verified the Stacks associated-graded usage and preserved every hypothesis and clause. Supplied ten elementary steps: ideal-power product membership, quotient representative independence, homogeneous bilinearity and identities, finite convolution support, all ring laws, injective degree-zero homomorphism and the quotient scalar action. Reused the three existing Mathlib definition leaves; no new nodes or hidden generic graded-ring theorem. No matching project declaration was found.",
   "blueprint": "The ancestor is thm-weil-pbc-finite-etale-lifting, current proof step 2 (essential surjectivity), source Lemma 0GS2. This item supplies the ideal-power associated-graded ring used in the completion subargument along the recorded via chain; its ten steps verify the multiplication, ring laws and coefficient algebra structure, without replacing the unit route."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b13046f29",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, dependencies, sources, edge cases, docstrings, and verbatim signature; no defects found. Server-only compilation reproduced cleanly in 1.2 seconds. Branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AssociatedGradedRingStructure",
+  "declaration": "Ideal.associatedGraded_ring_structure",
+  "file": "lean/Sheaf/RingTheory/AssociatedGradedRingStructure.lean",
+  "statement": "theorem associatedGraded_ring_structure {A : Type u} [CommRing A] (J : Ideal A) : (∀ n m : ℕ, (∀ (a : (J ^ n : Ideal A)) (b : (J ^ m : Ideal A)), associatedGradedMul J n m (Submodule.Quotient.mk a) (Submodule.Quotient.mk b) = associatedGradedMulAux J n m a b) ∧ (∀ μ : associatedGradedPiece J n → associatedGradedPiece J m → associatedGradedPiece J (n + m), (∀ (a : (J ^ n : Ideal A)) (b : (J ^ m : Ideal A)), μ (Submodule.Quotient.mk a) (Submodule.Quotient.mk b) = associatedGradedMulAux J n m a b) → μ = fun x y ↦ associatedGradedMul J n m x y)) ∧ (∀ (ξ η : associatedGraded J) (k : ℕ), (ξ * η) k = ∑ p ∈ Finset.antidiagonal k, if h : p.1 + p.2 = k then h ▸ associatedGradedMul J p.1 p.2 (ξ p.1) (η p.2) else 0) ∧ (∀ (n m : ℕ) (x : associatedGradedPiece J n) (y : associatedGradedPiece J m), DirectSum.of (associatedGradedPiece J) n x * DirectSum.of (associatedGradedPiece J) m y = DirectSum.of (associatedGradedPiece J) (n + m) (associatedGradedMul J n m x y)) ∧ (∃ e : (A ⧸ J) ≃+ associatedGradedPiece J 0, (∀ a : A, e (Ideal.Quotient.mk J a) = Submodule.Quotient.mk (⟨a, by simp⟩ : (J ^ 0 : Ideal A))) ∧ (∀ a : A ⧸ J, algebraMap (A ⧸ J) (associatedGraded J) a = DirectSum.of (associatedGradedPiece J) 0 (e a)) ∧ (1 : associatedGraded J) = DirectSum.of (associatedGradedPiece J) 0 (e 1)) ∧ Function.Injective (algebraMap (A ⧸ J) (associatedGraded J)) ∧ (∀ (a : A) (n : ℕ) (x : (J ^ n : Ideal A)), algebraMap (A ⧸ J) (associatedGraded J) (Ideal.Quotient.mk J a) * DirectSum.of (associatedGradedPiece J) n (Submodule.Quotient.mk x) = DirectSum.of (associatedGradedPiece J) n (Submodule.Quotient.mk (a • x))) ∧ (∀ n : ℕ, ∃ S : Submodule (A ⧸ J) (associatedGraded J), (S : Set (associatedGraded J)) = Set.range (DirectSum.of (associatedGradedPiece J) n))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Uses the landed associated-graded construction; its node was added to stmt_deps under the standing rule permitting landed definition dependencies."
  }
 }
