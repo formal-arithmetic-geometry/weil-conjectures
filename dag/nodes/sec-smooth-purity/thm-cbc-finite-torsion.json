@@ -381,5 +381,35 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-fcab373ba (reviewer sub-agent of L); spot-checked: Read the full item, all three new nodes, cited statements, and source mathematics. The seven-step proof and arbitrary-base compactification geometry check out; no duplicate or new circular dependency found. Corrected three source records: derived proper base change 0DDE, extension-zero base change 03S6 in etale-cohomology.tex, and mate/pasting references in sites-cohomology.tex. Review and corrected whole item JSON written; no targets changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportFiniteTorsion",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactSupportProperOpenRefinementMap",
+   "AlgebraicGeometry.Etale.compactSupportFiniteTorsion",
+   "AlgebraicGeometry.CompactSupportFormalism.shriekBaseChange_id",
+   "AlgebraicGeometry.CompactSupportFormalism.shriekBaseChange_paste_horiz",
+   "AlgebraicGeometry.CompactSupportFormalism.lowerShriekBaseChange_eq",
+   "AlgebraicGeometry.CompactSupportFormalism.lowerShriekBaseChange_paste_vert",
+   "AlgebraicGeometry.CompactSupportFormalism.shriekIso_refl",
+   "AlgebraicGeometry.CompactSupportFormalism.shriekIso_trans",
+   "AlgebraicGeometry.CompactSupportFormalism.lowerShriekCompIso_hom_eq"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactSupportFiniteTorsion.lean",
+  "statement": "theorem compactSupportFiniteTorsion (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : IsPullback g' f' f g) (c : Compactification f) : (∀ K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsIso ((rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap Λ sq c).app K)) ∧ (∀ (d : Compactification f) (r : c.Refinement d) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))), compactSupportProperOpenRefinementMap Λ r K = ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekIso d c).hom.app K)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Mixed record: the new theorem supplies objectwise invertibility and identifies every specified proper/open refinement map with the canonical shriekIso, without requiring the refinement square to be Cartesian. The recorded existing upstream declarations supply identity, horizontal pasting, compactification-independent exchange, vertical pasting, and composition computed by any compatible tower. They specialize to derivedPlusFormalism (ModuleCat Λ); its HasBaseChange, HasProperExchange and HasProperBaseChange instances require only the finite coefficient ring. QuasiCompact and HasCompactification hypotheses in the canonical clauses follow from finite type, the supplied compactifications and their base changes. The general proper/open comparison is deliberately not replaced by upstream refinementComparison, which has an additional Cartesian-square argument."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-766bfab42",
+  "group": "NO",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all seven statement dependencies, source passages, exact declarations, every conclusion clause, universes, edge cases, canonical constructions, and verbatim signature. Immutable module compiled successfully through scompile.py using the local side overlay. No findings or repairs; branch unchanged."
  }
 }
