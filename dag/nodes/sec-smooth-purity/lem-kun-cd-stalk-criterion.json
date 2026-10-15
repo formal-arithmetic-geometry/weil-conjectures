@@ -203,5 +203,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-8da37e77d (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, report, all cited node statements, Stacks Tags 03Q8/03PT/03PU, and relevant Mathlib stalk sources. Verified the base-change orientation W×_Y X and coefficients in Ab(X_et), all hypotheses, stalk indexing, conservativity argument, edge cases, duplicate search, and tool-use declarations. No repair is needed; review.md records the full checks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleHigherDirectImageStalkCriterion",
+  "declaration": "AlgebraicGeometry.Etale.isZero_higherDirectImage_iff_geometric_cohomology_colimits",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleHigherDirectImageStalkCriterion.lean",
+  "statement": "theorem isZero_higherDirectImage_iff_geometric_cohomology_colimits {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (q : ℕ) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) : IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y), IsZero ((Y.pointSmallEtale y).presheafFiber.obj ((uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙ presheafToSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ upperStar AddCommGrpCat.{u + 1} f ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙ preadditiveYoneda.obj (((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(q : ℤ)⟧)))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6ae191703",
+  "group": "NY",
+  "result": "pass",
+  "note": "Wrote review.md. All statement clauses, dependencies, edge cases, universes, docstrings, and maintainer gates pass. Immutable Lean file compiled cleanly through server-only scompile.py in 1.7 seconds. No repairs or branch changes."
  }
 }
