@@ -26,6 +26,10 @@ import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
 import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 /-!
 # Acyclicity for pro-étale direct images on the affine pro-étale basis
