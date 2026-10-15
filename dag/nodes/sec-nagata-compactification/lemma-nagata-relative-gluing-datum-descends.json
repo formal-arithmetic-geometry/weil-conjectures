@@ -222,5 +222,23 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-fa1b690b0 (reviewer sub-agent of L); spot-checked: Read the full mathematics and master blueprint/Stacks 01ZM route. Repaired two C1 citation gaps in Step 5 concerning qcqs of the later base and compactness/quasi-separatedness of transported overlaps, using existing nodes. Statement unchanged; no new nodes, duplicates, cycles, or target weakening. Corrected JSON and concrete source-by-source checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dfeedea31",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. All hypotheses, recovery clauses, dependency interfaces, source passages, docstrings, edge cases, and verbatim signature checked. Server-only compile reproduced successfully in 5.2 seconds without errors or warnings. No delivery errors found; snapshot and branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataRelativeGluingDatumDescends",
+  "declaration": "AlgebraicGeometry.nagataRelativeGluingDatum_descends",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataRelativeGluingDatumDescends.lean",
+  "statement": "theorem nagataRelativeGluingDatum_descends {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ {i j : Iᵒᵖ} (t : i ⟶ j), IsAffineHom (D.map t)] (i₀ : I) [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))] {X : Scheme.{u}} (f : X ⟶ c.pt) [CompactSpace c.pt] [QuasiSeparatedSpace c.pt] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (R : NagataRelativeGluingDatum D c hc i₀ f) : (∀ j : Σ a, R.base.base.chartIndex a, IsPullback ((R.charts.chartComparison j).inv ≫ (baseChangeCone D c (R.charts.chartMap j)).π.app (Over.mk (homOfLE ((R.stages.chart_le_overlap j).trans R.raw.overlap_le_raw)).op) ≫ eqToHom (R.raw.rawChart_eq j).symm) ((R.base.base.chart j.1 j.2).ι ≫ f) (eqToHom (R.raw.rawChart_eq j) ≫ pullback.snd (R.charts.chartMap j) (D.map (homOfLE ((R.stages.chart_le_overlap j).trans R.raw.overlap_le_raw)).op)) (c.π.app (op R.raw.stage))) ∧ (∀ (j k : Σ a, R.base.base.chartIndex a) (l : R.base.base.overlapIndex j k), ((baseChangeCone D c (R.charts.chartMap j)).π.app (Over.mk (homOfLE ((R.stages.chart_le_overlap j).trans R.raw.overlap_le_raw)).op) ⁻¹ᵁ R.raw.rawLeftOpen j k l = R.opens.leftOpen j k l) ∧ ((baseChangeCone D c (R.charts.chartMap k)).π.app (Over.mk (homOfLE ((R.stages.chart_le_overlap k).trans R.raw.overlap_le_raw)).op) ⁻¹ᵁ R.raw.rawRightOpen j k l = R.opens.rightOpen j k l)) ∧ (∀ (j k : Σ a, R.base.base.chartIndex a) (l : R.base.base.overlapIndex j k), ((baseChangeCone D c (R.schemes.leftMap j k l)).π.app (Over.mk (homOfLE R.raw.overlap_le_raw).op) ≫ (R.raw.forwardRaw j k l).map.left = (R.overlaps.overlapIso j k l).hom ≫ (baseChangeCone D c (R.schemes.rightMap j k l)).π.app (Over.mk (homOfLE R.raw.overlap_le_raw).op)) ∧ ((baseChangeCone D c (R.schemes.rightMap j k l)).π.app (Over.mk (homOfLE R.raw.overlap_le_raw).op) ≫ (R.raw.backwardRaw j k l).map.left = (R.overlaps.overlapIso j k l).inv ≫ (baseChangeCone D c (R.schemes.leftMap j k l)).π.app (Over.mk (homOfLE R.raw.overlap_le_raw).op)))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
