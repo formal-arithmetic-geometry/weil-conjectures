@@ -121,5 +121,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sap3016 (reviewer sub-agent of L); spot-checked: Statement matches citers (lem-kun-stalks-of-cohomology, -stalk-faithful-derived, -pullback-constant, -sep-closure-conservative, -support-geometric-point-independent: stalk = inverse image, degreewise for complexes). FIX more, RETURN less: C1 - step derived Gamma(Spec Omega, t^{-1}F) = neighbourhood colimit directly from def-weil-pbc-inverse-image (ignores sheafification) and never cited the equivalence Sh(Spec Omega_et) = Ab via Gamma that makes 'stalk is inverse image' meaningful; both are the two clauses of existing node lem-weil-pbc-geometric-point-pullback-stalk, now cited (pointed-neighbourhoods use dropped). E derived clause rewritten honestly: t^{-1} exact via the natural iso with the exact stalk functor (prop-weil-pbc-geometric-stalks-exact), so it acts termwise on D without deriving. Missed by the Second reading.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricStalkAsPullback",
+  "declaration": "AlgebraicGeometry.Scheme.geometricStalk_as_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricStalkAsPullback.lean",
+  "statement": "theorem geometricStalk_as_pullback (T : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) : Nonempty (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} t ⋙ (sheafSections (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj (op (Etale.mk (𝟙 (Spec (.of Ω))))) ≅ (pointSmallEtale t).sheafFiber) ∧ Nonempty ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} t).mapDerivedCategory ⋙ AlgebraicGeometry.Etale.rightDerivedGlobalSections AddCommGrpCat.{u + 1} (Spec (.of Ω)) ≅ (@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (((pointSmallEtale t).ulift.{u + 1}).sheafFiber (A := AddCommGrpCat.{u + 1})) (((pointSmallEtale t).ulift.{u + 1}).sheafFiber_additive) _ _))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e98b4186b",
+  "group": "NH",
+  "result": "pass",
+  "note": "Wrote review.md. Verified statement clauses, dependencies, sources, universes, edge cases, docstrings, and verbatim signature. Server-only compilation reproduced cleanly in 1.7 seconds. No delivery errors or fixes; snapshot and branch head unchanged."
  }
 }
