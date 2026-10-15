@@ -476,35 +476,31 @@
   }
  },
  "lean": {
-  "branch": "slopmaster2",
-  "existing": true,
-  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs",
-  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChange",
+  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse",
+  "declaration": "Profinite.continuousCoefficientRingObj",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChange",
-   "Profinite.continuousMapRingObj",
-   "AlgebraicGeometry.ProEtale.profiniteToProEt",
-   "AlgebraicGeometry.ProEtale.pointUpperStar",
-   "AlgebraicGeometry.ProEtale.upperStarFromPoint",
-   "AlgebraicGeometry.ProEtale.condensedRingObj",
-   "AlgebraicGeometry.ProEtale.coefficientPullbackIso",
-   "AlgebraicGeometry.ProEtale.condensedPullbackHom",
-   "AlgebraicGeometry.ProEtale.condensedPushforwardHom",
-   "AlgebraicGeometry.ProEtale.IsLocallyFinitelyPresented",
-   "AlgebraicGeometry.ProEtale.IsConstructibleModuleObject",
-   "AlgebraicGeometry.ProEtale.boundedConstructible",
-   "AlgebraicGeometry.ProEtale.BoundedConstructible",
-   "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
-   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
-   "AlgebraicGeometry.ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStar",
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStar",
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructiblePullbackSquareComparison",
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeUnitStep",
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeSquareStep",
-   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeCounitStep"
+   "Profinite.continuousCoefficientRingPresheaf",
+   "Profinite.isSheaf_continuousCoefficientRingPresheaf",
+   "Profinite.continuousCoefficientRingSheaf",
+   "Profinite.continuousCoefficientRingObj",
+   "AlgebraicGeometry.ProEtale.continuousCoefficientRingPresheaf",
+   "AlgebraicGeometry.ProEtale.isSheaf_continuousCoefficientRingPresheaf",
+   "AlgebraicGeometry.ProEtale.continuousCoefficientRingSheaf"
   ],
-  "note": "attached by the lead's tool attach.py --stage2; source and statement checked by L; rests_on_sorry by sorry-map.jsonl.gz: Checked the entire bundled definition against the listed upstream definitions: sections C(S,E), S -> Spec LC(S,Z), point left Kan extension followed by sheafification, scheme inverse image, internal modules, pro-etale locally finite presentations on finite strata, bounded cohomology, scalar transport, underived/derived operations and restricted adjunctions. Checked the precise three-factor unit/square/counit base-change construction. No completeness condition; preservation inputs remain open."
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientUniverse.lean",
+  "statement": "abbrev continuousCoefficientRingObj : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "§1(B) universe-interface repair: the recorded Profinite.continuousMapRingObj and scheme continuousMapRingSheaf require T : Type 0, excluding coefficients in the common universe bound. This module supplies the same explicit ULift C(S,T) and ULift C(V,T), pointwise operations and precomposition for T : Type u. The condensed ring is fed to the existing condensedRingObj, internal module, finite-presentation, constructibility, derived-operation, adjunction and base-change definitions, publicly re-exported without replacement. No site universes are equated and no smallness hypothesis is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e2301cad4",
+  "group": "NV",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, all statement dependencies, canonical comparison, universe repair, edge cases, docstrings, and records. Both modules compile cleanly through scompile.py. No fixes required."
  }
 }

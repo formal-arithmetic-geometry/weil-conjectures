@@ -284,5 +284,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e2301cad4",
+  "group": "NV",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, all statement dependencies, canonical comparison, universe repair, edge cases, docstrings, and records. Both modules compile cleanly through scompile.py. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_finiteFree_cover_of_condensedField_lfp",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.profiniteTestProjection",
+   "AlgebraicGeometry.ProEtale.existsUnique_condensedFieldContinuousMapIso",
+   "AlgebraicGeometry.ProEtale.exists_finiteFree_cover_of_condensedField_lfp",
+   "AlgebraicGeometry.ProEtale.exists_finiteFree_cover_on_condensedField_strata"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedFieldLfpLocalTriviality.lean",
+  "statement": "theorem exists_finiteFree_cover_of_condensedField_lfp (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (P : Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) (hP : IsLocallyFinitelyPresented (condensedRingObj (Profinite.continuousCoefficientRingObj E) X) P) : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : C.I₀, Mod.IsFree ((upperStar AddCommGrpCat.{u + 1} (C.f i)).obj (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) (((upperStar AddCommGrpCat.{u + 1} (C.f i)).mapMod (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)).obj P)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Returned H3 repaired: the ring isomorphism is uniquely characterized by its adjoint on all profinite test functions. Coefficients now range over Type u, the universe bound containing X and E, using the generalized sectionwise coefficient API in the dependency repair."
  }
 }
