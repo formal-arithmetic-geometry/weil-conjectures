@@ -107,7 +107,7 @@ theorem scalarReductionRestriction_exact :
 /-- Finite-limit preservation supplied by exactness.
 Source: Stacks Tag 03DA
 (blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
-noncomputable def scalarReductionRestrictionLimits :
+theorem scalarReductionRestrictionLimits :
     PreservesFiniteLimits (scalarReductionRestriction l E Y n) :=
   (scalarReductionRestriction_exact l E Y n).1
 
@@ -116,7 +116,7 @@ attribute [local instance] scalarReductionRestrictionLimits
 /-- Finite-colimit preservation supplied by exactness.
 Source: Stacks Tag 03DA
 (blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
-noncomputable def scalarReductionRestrictionColimits :
+theorem scalarReductionRestrictionColimits :
     PreservesFiniteColimits (scalarReductionRestriction l E Y n) :=
   (scalarReductionRestriction_exact l E Y n).2
 
@@ -158,7 +158,7 @@ noncomputable def scalarReductionExtension :
 /-- Additivity of tensor extension.
 Source: Stacks Tag 06YY
 (blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
-noncomputable def scalarReductionExtensionAdditive :
+theorem scalarReductionExtensionAdditive :
     (scalarReductionExtension l E Y n).Additive :=
   (scalarReductionExistence l E Y n).choose_spec.choose_spec.choose_spec.choose
 

@@ -36,6 +36,8 @@ open scoped ChangeOfRings
 
 namespace WeilConjectures
 
+attribute [local instance] integralReductionChangeOfRingsAdditive
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
@@ -49,7 +51,7 @@ noncomputable instance integralTowerRestrictionAdditive (n : ℕ) :
 
 /-- Exactness supplies the limits instance for the recorded restriction functor.
 Source: Stacks Tag 03DA (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
-noncomputable def integralTowerRestrictionLimits (n : ℕ) :
+theorem integralTowerRestrictionLimits (n : ℕ) :
     PreservesFiniteLimits (completedIntegralRestrictScalars l E Y D hl n) :=
   (completedIntegralRestrictScalars_exact l E Y D hl n).1
 
@@ -57,7 +59,7 @@ attribute [local instance] integralTowerRestrictionLimits
 
 /-- Exactness supplies the colimits instance for the recorded restriction functor.
 Source: Stacks Tag 03DA (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
-noncomputable def integralTowerRestrictionColimits (n : ℕ) :
+theorem integralTowerRestrictionColimits (n : ℕ) :
     PreservesFiniteColimits (completedIntegralRestrictScalars l E Y D hl n) :=
   (completedIntegralRestrictScalars_exact l E Y D hl n).2
 
