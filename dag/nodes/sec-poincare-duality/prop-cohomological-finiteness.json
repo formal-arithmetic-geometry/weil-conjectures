@@ -87,47 +87,39 @@
    }
   },
   {
-   "text": "*Step 5 (constant coefficients, compact support, integral finite level).* Let $K=E_Y$ and assume $\\dim Y\\leq e$ [def-kun-dimension]. By [lem-weil-constant-coefficient-objects-constructible] (2), $\\widehat{\\mathcal O}_{E,Y}$ placed in degree $0$ is an object of $D^b_c(Y,\\mathcal O_E)$ whose reductions are $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}\\cong(A_{E,n})_Y$ in degree $0$; for every sheaf $\\mathcal M$ of $A_{E,n}$-modules, $(A_{E,n})_Y\\otimes^L_{A_{E,n}}\\mathcal M=\\mathcal M$ sits in degree $0$, so all reductions have Tor amplitude in $[0,0]$ [def-weil-finite-tor-amplitude]. Apply [lem-coef-integral-compact-support] to $f=a_Y$ (separated of finite type, $\\dim Y\\leq e$) and $\\widehat{\\mathcal O}_{E,Y}$ with Tor interval $[0,0]$: $N:=Ra_{Y!}\\widehat{\\mathcal O}_{E,Y}\\in D^b_c(s,\\mathcal O_E)$ (the integral compact-support functor of [def-weil-integral-rational-qbar-compact-support]), $N\\otimes^L_{\\mathcal O_E}A_{E,n}\\cong Ra_{Y!,n}(A_{E,n})_Y$, and these reductions have Tor amplitude in $[0,2e]$. For $n=1$, $A_{E,1}$ is the residue field of $\\mathcal O_E$; taking $\\mathcal M=(A_{E,1})_s$ in the definition of Tor amplitude gives $\\mathcal H^r(N\\otimes^L_{\\mathcal O_E}A_{E,1})=0$ for $r\\notin[0,2e]$.",
+   "text": "Step 5 (negative degrees, directly). For the constant Weil sheaf F choose a compactification a = j followed by g. Extension by zero j_! is exact, so j_!(F[0]) is isomorphic to (j_!F)[0]. The right derived functor Rg_* applied to a sheaf in degree zero is concentrated in degrees at least zero. Consequently the homology sheaf in degree r < 0 is zero; global sections of this zero Weil sheaf are zero. The Lean proof uses mapDerivedCategorySingleFunctor, isGE_rightDerivedFunctor_obj_singleFunctor and DerivedCategory.isZero_of_isGE, without any finite-coefficient comparison.",
    "uses": [
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-constant-weil-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+    "place": "Proof, constant-coefficient vanishing in negative degrees; formal right-derived-functor argument"
+   }
+  },
+  {
+   "text": "Step 6 (positive-degree bound at every finite coefficient level). Put Y = X times the algebraic closure and f : Y -> Spec(kbar). For n >= 0 take the finite ring Lambda_n = Z/l^(n+1), with a universe lift. Every geometric fibre of f has dimension at most e: it is a field extension of Y and topologicalKrullDim_pullback_le_of_field bounds its dimension by dim Y. Apply lem-dg-compact-support-amplitude to the constant unit sheaf and r > 2e. Its homology sheaf under Rf_! vanishes. Applying sections and restriction of scalars along Z_l -> Lambda_n gives Subsingleton (finiteLevelCompactSupportSections l X n r). No smoothness or properness of X is assumed.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
     "def-kun-dimension",
-    "lem-weil-constant-coefficient-objects-constructible",
-    "def-weil-finite-tor-amplitude",
-    "lem-coef-integral-compact-support",
-    "def-weil-integral-rational-qbar-compact-support"
+    "lem-dg-compact-support-amplitude"
    ],
    "elementary": false,
    "source": {
     "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Theorem 15.1, p. 105 (cd(X) <= 2 dim X for a variety over an algebraically closed field) and Proposition 18.3, p. 120, at finite level, here through lem-coef-integral-compact-support; the blueprint ## Proof, Steps 2 and 7 ('For K=E_Y Step 2 gives H^i_c(Y,E)=0 for i>2e')"
+    "place": "Theorem 15.1 and Proposition 18.3; finite-coefficient compact-support cohomological dimension"
    }
   },
   {
-   "text": "*Step 6 (passage to the point and to $\\mathcal O_E$-modules).* Put $C=\\Gamma(s,N)=\\operatorname{Fib}_s(N)\\in D^b_{\\mathrm{fg}}(\\mathcal O_E)$ ([def-weil-finite-coefficient-point] item 2, [def-weil-point-fg-complete-complexes]): $H^r(C)=0$ for all but finitely many $r$ and each $H^r(C)$ is a finitely generated $\\mathcal O_E$-module. By [lem-pod-point-sections-derived-reduction] (with $n=1$), $H^r(C\\otimes^L_{\\mathcal O_E}A_{E,1})\\cong\\Gamma(s,\\mathcal H^r(N\\otimes^L_{\\mathcal O_E}A_{E,1}))$, which is $0$ for $r\\notin[0,2e]$ by Step 5. Since $\\mathcal O_E$ is a discrete valuation ring with uniformizer $\\varpi_E$ and residue field $A_{E,1}$ [def-weil-l-adic-coefficient-extension], [lem-pod-dvr-complex-amplitude-mod-uniformizer] (with $a=0$, $b=2e$) gives $H^r(C)=0$ for $r\\notin[0,2e]$.",
+   "text": "Step 7 (passage to rational adic cohomology). Use lem-pod-compact-support-finite-coefficient-comparison to embed H_c^r(Y,Qbar_l) linearly into Qbar_l tensor over Z_l with the product over n of finiteLevelCompactSupportSections l X n r. Each factor vanishes by Step 6, hence so does their product and its tensor product. Injectivity gives vanishing of the source. Together with Step 5 this proves exactly the interval [0,2e]. This retains the unit route through finite coefficients, the integral inverse limit and rationalization, but does not require the stronger integral Tor-amplitude or derived Nakayama lemmas.",
    "uses": [
-    "def-weil-finite-coefficient-point",
-    "def-weil-point-fg-complete-complexes",
-    "lem-pod-point-sections-derived-reduction",
-    "def-weil-l-adic-coefficient-extension",
-    "lem-pod-dvr-complex-amplitude-mod-uniformizer"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "proof of Theorem 19.2, p. 125 (0 -> H^r(M)/l^n -> H^r(M_n) -> H^{r+1}(M)_{l^n} -> 0, and Nakayama), and p. 124 (H^r(X,Z_l)=lim H^r(X,Z/l^n)); the blueprint ## Proof, Step 4"
-   }
-  },
-  {
-   "text": "*Step 7 (rationalization: $H^i_c(Y,E)=0$ for $i<0$ or $i>2e$).* $E_Y$ is the image of $\\widehat{\\mathcal O}_{E,Y}$ in $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-constant-weil-structure], so by [def-weil-integral-rational-qbar-compact-support] $Ra_{Y!}E_Y$ is the object $N$ of Step 5 regarded in $D^b_c(s,E)$, and by [def-weil-finite-coefficient-point] (item 3) $\\RGammac(Y,E_Y)=\\operatorname{Fib}_s(N)=\\Gamma(s,N)\\otimes_{\\mathcal O_E}E=C\\otimes_{\\mathcal O_E}E$ [def-weil-ordinary-compact-cohomology]. $E=\\mathcal O_E[1/\\varpi_E]$ is a localization, hence flat over $\\mathcal O_E$, so $H^r(C\\otimes_{\\mathcal O_E}E)=H^r(C)\\otimes_{\\mathcal O_E}E$, which vanishes for $r\\notin[0,2e]$ by Step 6. Thus $H^i_c(Y,E)=0$ for $i<0$ or $i>2e$.",
-   "uses": [
-    "def-weil-constant-weil-structure",
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-finite-coefficient-point",
-    "def-weil-ordinary-compact-cohomology"
+    "lem-pod-compact-support-finite-coefficient-comparison"
    ],
    "elementary": true,
    "source": {
     "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "p. 124: H^r(X,Q_l) = H^r(X,Z_l) (x) Q_l; Deligne, Weil I, (1.10), p. 277 (zero for i > 2 dim X)"
+    "place": "pp. 124-125: integral cohomology as inverse limit, followed by rationalization; Bhatt-Scholze §§6.5, 6.7-6.8 for the pro-etale realization"
    }
   },
   {
@@ -179,14 +171,8 @@
   "prop-weil-proper-compact-coincidence",
   "lem-pod-proper-coincidence-frobenius",
   "def-kun-dimension",
-  "lem-weil-constant-coefficient-objects-constructible",
-  "def-weil-finite-tor-amplitude",
-  "lem-coef-integral-compact-support",
-  "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-point-fg-complete-complexes",
-  "lem-pod-point-sections-derived-reduction",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-pod-dvr-complex-amplitude-mod-uniformizer",
+  "lem-dg-compact-support-amplitude",
+  "lem-pod-compact-support-finite-coefficient-comparison",
   "def-weil-geometric-hypotheses",
   "def-weil-pure-dimension",
   "lem-weil-geometrically-connected-algebraic-closure",
@@ -196,8 +182,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-  "place": "## Proof; the facts recalled follow Deligne, La conjecture de Weil I (literature/deligne-weil-I_PMIHES-1974-43.pdf), (1.3) p. 274, (1.10)-(1.12) pp. 277-278, Deligne, Weil II (literature/deligne-weil-II_PMIHES-1980-52.pdf), (1.1.14) p. 153, and Milne, LEC (literature/milne-lectures-on-etale-cohomology_LEC.pdf), Theorem 15.1 p. 105, Proposition 18.3 p. 120, Theorems 19.1-19.2 pp. 123-125, which state these results (with references to SGA 4, SGA 4 1/2) without proofs in this pro-etale setting; the reduction to the bounded-constructibility lemma, the mod-uniformizer amplitude argument and the Frobenius computations are written by an agent"
+  "document": "lean/WeilConjectures/WeilSheaf/Finiteness.lean",
+  "place": "F1 stage 3, 2026-10-16: existing finite-dimensionality, proper comparison and H0 proofs retained; negative degrees by right-derived left t-exactness; positive degrees by the finite-coefficient compact-support dimension theorem and a finite-coefficient comparison embedding. Integral/Nakayama steps replaced by the inverse-limit route of Milne §19 and Bhatt-Scholze §§6.5, 6.7-6.8."
  },
  "mathlib_searches": [
   {
@@ -265,5 +251,15 @@
  "unit": "sk-lem-finite",
  "tool_uses": [
   "prop-weil-proper-compact-coincidence"
- ]
+ ],
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-dcba9",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261015T191323-L-1006997",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the recorded item and node statements; all modules and required importers compiled, and the forced TraceFormula adaptation was necessary and minimal."
+ }
 }
