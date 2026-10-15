@@ -15202,3 +15202,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:58 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261015T205839-L-1763877 (proof); batch 20261015T205833; modules 1; new nodes 0)
 - 21:07 L: merged deliver/T1/Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly (stage 3; reviewer PASS; first push; landing 20261015T210718-L-1857448 (proof); batch 20261015T210716; modules 1; new nodes 0)
 - 21:12 L: merged deliver/S3/Sheaf.CategoryTheory.SmallSetOfCoveringFamilies (stage 3; reviewer PASS; first push; landing 20261015T211230-L-1891878 (proof); batch 20261015T211228; modules 1; new nodes 0)
+- 21:12 L: merged deliver/S4/Sheaf.CategoryTheory.SpecialCocontinuousSheafEquivalence (stage 3; reviewer PASS; first push; landing 20261015T211236-L-1893216 (proof); batch 20261015T211228; modules 1; new nodes 0)
