@@ -95,7 +95,7 @@ def affineTildeTensorOrdinarySourceIso
   let : (affineTildeFunctor B).Additive :=
     instAdditiveModuleCatCarrierModulesSpecOfFunctor
   let : (ModuleCat.extendScalars.{u, u, u} (algebraMap R B)).Additive :=
-    ModuleCat.extendScalars_additive _
+    ModuleCat.extendScalars_additive_sheaf _
   let θ : affineTildeFunctor R ⋙ Scheme.Modules.tensorPullback g ≅
       ModuleCat.extendScalars (algebraMap R B) ⋙ affineTildeFunctor B :=
     Classical.choose (Scheme.Modules.exists_tensorPullback_tilde_iso
@@ -171,7 +171,7 @@ theorem affineTilde_scalarExtension_comparison
       SingleComplexBaseChange.tensorPullbackAdditive.{u, w} g
     let : TR.Additive := prebaseSourceComparisonTildeAdditive R
     let : T.Additive := prebaseSourceComparisonTildeAdditive B
-    let : E.Additive := ModuleCat.extendScalars_additive _
+    let : E.Additive := ModuleCat.extendScalars_additive_sheaf _
     let : (E ⋙ T).Additive := inferInstance
     let θ : TR ⋙ Scheme.Modules.tensorPullback g ≅ E ⋙ T :=
       Classical.choose (Scheme.Modules.exists_tensorPullback_tilde_iso

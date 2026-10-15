@@ -75,7 +75,7 @@ theorem scalarCohomologyPullback_comp
   dsimp only [Functor.comp_obj]
   simp only [AddEquiv.apply_symm_apply]
   have hc := scalarInverseImageCompIso_coherence k A B C fA fB fC a b ha hb F
-  have he := Abelian.Ext.mapExactFunctor_comp_mk₀_eq
+  have he := Abelian.Ext.mapExactFunctor_comp_mk₀_eq_sheaf
     (scalarInverseImage (k := k) b) (scalarInverseImage (k := k) a)
     (scalarInverseImage (k := k) (a ≫ b)) (scalarInverseImageCompIso k a b)
     (scalarCohomologyExtEquiv fC F n x)

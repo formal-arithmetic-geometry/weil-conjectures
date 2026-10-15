@@ -58,7 +58,7 @@ After cancelling the canonical comparisons with single complexes and shifts, its
 components are Ext.mk₀ (e.hom.app X) and Ext.mk₀ (e.hom.app Y).
 (blueprint: lem-weil-pbc-ext-exact-functor-identity-comparison)
 -/
-theorem exactFunctorIdentityComparison
+theorem exactFunctorIdentityComparisonSheaf
     {C : Type*} [Category C] [Abelian C] [HasExt.{w} C]
     (F : C ⥤ C) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]

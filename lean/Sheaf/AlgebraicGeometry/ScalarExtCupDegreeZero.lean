@@ -72,7 +72,7 @@ private theorem ext_iso_transport {C : Type*} [Category C] [Abelian C]
       (a.comp (Abelian.Ext.mk₀ (e.inv.app B)) (add_zero n)) (zero_add n) := by
   have h := congrArg (fun z : Abelian.Ext.{u + 1} (T.obj A) B n ↦
     z.comp (Abelian.Ext.mk₀ (e.inv.app B)) (add_zero n))
-      (Abelian.Ext.exactFunctorIdentityComparison T e a)
+      (Abelian.Ext.exactFunctorIdentityComparisonSheaf T e a)
   simpa only [Abelian.Ext.comp_assoc_of_second_deg_zero,
     Abelian.Ext.comp_assoc_of_third_deg_zero, Abelian.Ext.mk₀_comp_mk₀,
     Iso.hom_inv_id_app, Abelian.Ext.comp_mk₀_id] using h

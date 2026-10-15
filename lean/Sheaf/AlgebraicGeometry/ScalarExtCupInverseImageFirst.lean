@@ -35,7 +35,7 @@ private theorem rightUnitTransport {Z : Scheme.{w}} {M : KSheaf Z k} {n : ℕ}
   have h := congrArg (fun z : Abelian.Ext.{w + 1}
       ((tensorRight (𝟙_ (KSheaf Z k))).obj (𝟙_ (KSheaf Z k))) M n ↦
       z.comp (Abelian.Ext.mk₀ (ρ_ M).inv) (add_zero n))
-    (Abelian.Ext.exactFunctorIdentityComparison
+    (Abelian.Ext.exactFunctorIdentityComparisonSheaf
       (tensorRight (𝟙_ (KSheaf Z k))) (rightUnitorNatIso (KSheaf Z k)) x)
   simp only [rightUnitorNatIso, NatIso.ofComponents_hom_app] at h
   simp only [Abelian.Ext.comp_assoc_of_third_deg_zero, Abelian.Ext.mk₀_comp_mk₀,

@@ -57,7 +57,7 @@ The degree-zero components are precisely Ext.mk₀ of e.hom.app. The comparison 
 single complexes and the shift isomorphisms cancel on both sides, giving the equality.
 (blueprint: lem-weil-pbc-ext-exact-functor-composition-comparison)
 -/
-theorem mapExactFunctor_comp_mk₀_eq
+theorem mapExactFunctor_comp_mk₀_eq_sheaf
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
     [HasExt.{w} C] [HasExt.{w'} D] [HasExt.{w''} E]

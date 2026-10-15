@@ -210,7 +210,7 @@ theorem affineTildeTensorOrdinaryExchange_preNormalization
     let : F.Additive := preNormPushforwardAdditive f
     let : F'.Additive := preNormPushforwardAdditive f'
     let : (ModuleCat.extendScalars.{u, u, u} φ).Additive :=
-      ModuleCat.extendScalars_additive _
+      ModuleCat.extendScalars_additive_sheaf _
     let : (affineTildeFunctor A).Additive :=
       instAdditiveModuleCatCarrierModulesSpecOfFunctor
     let : (affineTildeFunctor D).Additive :=

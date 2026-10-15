@@ -113,7 +113,7 @@ theorem inverseImageCohomology_comp {X Y Z : Scheme.{u}}
     exact congrArg (fun m ↦
       (constantSheafAdj (Opens.grothendieckTopology X) AddCommGrpCat.{u}
         CategoryTheory.Limits.isTerminalTop).homEquiv _ _ (𝟙 A) ≫ m) ht
-  have he := Abelian.Ext.mapExactFunctor_comp_mk₀_eq
+  have he := Abelian.Ext.mapExactFunctor_comp_mk₀_eq_sheaf
     (invImage f) (invImage g) (invImage (g ≫ f)) (invImageComp g f).symm x
   simp only [Iso.symm_hom] at he
   simp only [Sheaf.H.map_apply, Sheaf.H.mapFunctor_apply, Iso.symm_hom,

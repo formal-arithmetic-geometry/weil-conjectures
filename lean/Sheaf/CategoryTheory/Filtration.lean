@@ -46,7 +46,7 @@ namespace FilteredObject
 /-- (blueprint: def-sp-filtration) A morphism of filtered objects is an underlying morphism
 whose restriction to each filtration step factors through the corresponding target step
 (Stacks, Tag 0121). -/
-structure Hom (A B : FilteredObject C) where
+structure HomPreservingSteps (A B : FilteredObject C) where
   hom : A.obj ⟶ B.obj
   preserves : ∀ i : ℤ, ∃ lift : (A.filtration.step i : C) ⟶
     (B.filtration.step i : C),
@@ -55,7 +55,7 @@ structure Hom (A B : FilteredObject C) where
 /-- (blueprint: def-sp-filtration) Filtered objects and filtration-preserving maps
 form the category `Fil(C)` (Stacks, Tag 0121). -/
 instance : Category.{v} (FilteredObject C) where
-  Hom := Hom
+  Hom := HomPreservingSteps
   id A := ⟨𝟙 A.obj, fun i => ⟨𝟙 _, by simp⟩⟩
   comp f g := ⟨f.hom ≫ g.hom, fun i => by
     obtain ⟨f_i, hf_i⟩ := f.preserves i

@@ -27,23 +27,23 @@ open Limits
 
 private theorem restriction_arrow {X Y : FilteredObject AddCommGrpCat.{u}}
     (f : X ⟶ Y) (q : ℤ) :
-    FilteredObject.restriction f q ≫ (Y.filtration.step q).arrow =
+    FilteredObject.restrictionSteps f q ≫ (Y.filtration.step q).arrow =
       (X.filtration.step q).arrow ≫ f.hom :=
   Classical.choose_spec (f.preserves q)
 
 private theorem gradedMap_projection {X Y : FilteredObject AddCommGrpCat.{u}}
     (f : X ⟶ Y) (q : ℤ) :
     cokernel.π (Subobject.ofLE (X.filtration.step (q + 1)) (X.filtration.step q)
-      (X.filtration.antitone_step (by omega))) ≫ FilteredObject.gradedMap f q =
-    FilteredObject.restriction f q ≫
+      (X.filtration.antitone_step (by omega))) ≫ FilteredObject.gradedMapSteps f q =
+    FilteredObject.restrictionSteps f q ≫
       cokernel.π (Subobject.ofLE (Y.filtration.step (q + 1)) (Y.filtration.step q)
         (Y.filtration.antitone_step (by omega))) :=
-  Classical.choose_spec (FilteredObject.exists_gradedMap X Y f q)
+  Classical.choose_spec (FilteredObject.exists_gradedMap_steps X Y f q)
 
 private theorem restriction_comp {X Y Z : FilteredObject AddCommGrpCat.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (q : ℤ) :
-    FilteredObject.restriction (f ≫ g) q =
-      FilteredObject.restriction f q ≫ FilteredObject.restriction g q := by
+    FilteredObject.restrictionSteps (f ≫ g) q =
+      FilteredObject.restrictionSteps f q ≫ FilteredObject.restrictionSteps g q := by
   apply (cancel_mono (Z.filtration.step q).arrow).1
   rw [restriction_arrow, Category.assoc, restriction_arrow,
     ← Category.assoc, restriction_arrow]
@@ -51,8 +51,8 @@ private theorem restriction_comp {X Y Z : FilteredObject AddCommGrpCat.{u}}
 
 private theorem gradedMap_comp {X Y Z : FilteredObject AddCommGrpCat.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (q : ℤ) :
-    FilteredObject.gradedMap (f ≫ g) q =
-      FilteredObject.gradedMap f q ≫ FilteredObject.gradedMap g q := by
+    FilteredObject.gradedMapSteps (f ≫ g) q =
+      FilteredObject.gradedMapSteps f q ≫ FilteredObject.gradedMapSteps g q := by
   apply (cancel_epi (cokernel.π (Subobject.ofLE
     (X.filtration.step (q + 1)) (X.filtration.step q)
     (X.filtration.antitone_step (by omega))))).1
@@ -97,10 +97,10 @@ theorem finite_filtered_colimit_comparison
     (hgraded : ∀ q : ℤ, ∃ (Q : I ⥤ AddCommGrpCat.{u})
       (e : ∀ i : I, Q.obj i ≅ (F i).gradedPiece q),
       (∀ {i j : I} (f : i ⟶ j),
-        Q.map f ≫ (e j).hom = (e i).hom ≫ FilteredObject.gradedMap (a f) q) ∧
+        Q.map f ≫ (e j).hom = (e i).hom ≫ FilteredObject.gradedMapSteps (a f) q) ∧
       ∃ ψ : colimit Q ⟶ G.gradedPiece q,
         (∀ i : I, colimit.ι Q i ≫ ψ = (e i).hom ≫
-          FilteredObject.gradedMap (b i) q) ∧ IsIso ψ) :
+          FilteredObject.gradedMapSteps (b i) q) ∧ IsIso ψ) :
     ∀ φ : colimit A ⟶ B,
       (∀ i : I, colimit.ι A i ≫ φ = (b i).hom) → IsIso φ := by
   obtain ⟨H, c, _hc, hH, hcompare, hdesc⟩ :=
@@ -109,23 +109,23 @@ theorem finite_filtered_colimit_comparison
   obtain ⟨f, hf, hcf⟩ := hdesc B G b hb φ hφ
   have hGfinite : G.IsFinite :=
     ⟨L, U + 1, (hG L).1 le_rfl, (hG (U + 1)).2 (by omega)⟩
-  have hgr : ∀ q : ℤ, IsIso (FilteredObject.gradedMap f q) := by
+  have hgr : ∀ q : ℤ, IsIso (FilteredObject.gradedMapSteps f q) := by
     intro q
     obtain ⟨Q, e, he, ψ, hψ, hψiso⟩ := hgraded q
     obtain ⟨θ, hθ, hθiso⟩ := hcompare q Q e he
-    have hcomp : θ ≫ FilteredObject.gradedMap f q = ψ := by
+    have hcomp : θ ≫ FilteredObject.gradedMapSteps f q = ψ := by
       apply colimit.hom_ext
       intro i
       rw [← Category.assoc, hθ, Category.assoc, ← gradedMap_comp, hcf]
       exact (hψ i).symm
     have : IsIso θ := hθiso
     have : IsIso ψ := hψiso
-    have heq : FilteredObject.gradedMap f q = inv θ ≫ ψ := by
+    have heq : FilteredObject.gradedMapSteps f q = inv θ ≫ ψ := by
       rw [← hcomp]
       simp
     rw [heq]
     infer_instance
-  have hiso := (FilteredObject.finite_filtration_induction
+  have hiso := (FilteredObject.finite_filtration_induction_steps
     ⟨colimit A, H⟩ ⟨B, G⟩ f hH hGfinite hgr).1
   rw [hf] at hiso
   exact hiso

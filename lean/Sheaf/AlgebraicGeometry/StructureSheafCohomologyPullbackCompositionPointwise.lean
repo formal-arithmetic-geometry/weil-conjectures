@@ -212,7 +212,7 @@ theorem structureSheafCohomologyPullback_comp_apply {X Y Z : Scheme.{u}}
     Abelian.Ext.comp_assoc_of_third_deg_zero]
   rw [← Abelian.Ext.comp_assoc_of_second_deg_zero
     (x.mapExactFunctor Lfg) (Abelian.Ext.mk₀ (α.hom.app OZ))]
-  rw [Abelian.Ext.mapExactFunctor_comp_mk₀_eq Lg Lf Lfg α x]
+  rw [Abelian.Ext.mapExactFunctor_comp_mk₀_eq_sheaf Lg Lf Lfg α x]
   simp only [Abelian.Ext.comp_assoc_of_third_deg_zero]
   rw [Abelian.Ext.mk₀_comp_mk₀_assoc, hconstant, Abelian.Ext.mk₀_comp_mk₀_assoc]
 

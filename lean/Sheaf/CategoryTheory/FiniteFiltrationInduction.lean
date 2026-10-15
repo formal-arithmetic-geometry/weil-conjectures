@@ -34,19 +34,19 @@ namespace FilteredObject
 Source: Stacks Project, Homology, Definition 0121 (3) and the diagram in Lemma 0127.
 The factorization is unique because the target subobject inclusion is monic.
 (blueprint: lem-sp-finite-filtration-induction) -/
-noncomputable def restriction {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
+noncomputable def restrictionSteps {A B : FilteredObject C} (f : HomPreservingSteps A B) (p : ℤ) :
     (A.filtration.step p : C) ⟶ (B.filtration.step p : C) :=
   Classical.choose (f.preserves p)
 
-private theorem restriction_arrow {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
-    restriction f p ≫ (B.filtration.step p).arrow =
+private theorem restriction_arrow {A B : FilteredObject C} (f : HomPreservingSteps A B) (p : ℤ) :
+    restrictionSteps f p ≫ (B.filtration.step p).arrow =
       (A.filtration.step p).arrow ≫ f.hom :=
   Classical.choose_spec (f.preserves p)
 
-private theorem restriction_naturality {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
+private theorem restriction_naturality {A B : FilteredObject C} (f : HomPreservingSteps A B) (p : ℤ) :
     Subobject.ofLE (A.filtration.step (p + 1)) (A.filtration.step p)
-        (A.filtration.antitone_step (by omega)) ≫ restriction f p =
-      restriction f (p + 1) ≫ Subobject.ofLE (B.filtration.step (p + 1))
+        (A.filtration.antitone_step (by omega)) ≫ restrictionSteps f p =
+      restrictionSteps f (p + 1) ≫ Subobject.ofLE (B.filtration.step (p + 1))
         (B.filtration.step p) (B.filtration.antitone_step (by omega)) := by
   rw [← cancel_mono (B.filtration.step p).arrow]
   simp only [Category.assoc, restriction_arrow, Subobject.ofLE_arrow]
@@ -65,20 +65,20 @@ source inclusion into the target inclusion, which the target cokernel kills.
 Apply the universal property of the source cokernel to obtain `g` and its equation.
 The filtration steps and graded pieces are those of `def-sp-filtration`.
 (blueprint: lem-sp-finite-filtration-induction). -/
-theorem exists_gradedMap (A B : FilteredObject C) (f : Hom A B) (p : ℤ) :
+theorem exists_gradedMap_steps (A B : FilteredObject C) (f : HomPreservingSteps A B) (p : ℤ) :
     ∃ g : A.filtration.gradedPiece p ⟶ B.filtration.gradedPiece p,
       cokernel.π (Subobject.ofLE (A.filtration.step (p + 1))
         (A.filtration.step p) (A.filtration.antitone_step (by omega))) ≫ g =
-        restriction f p ≫ cokernel.π (Subobject.ofLE (B.filtration.step (p + 1))
+        restrictionSteps f p ≫ cokernel.π (Subobject.ofLE (B.filtration.step (p + 1))
           (B.filtration.step p) (B.filtration.antitone_step (by omega))) := by
   let iA := Subobject.ofLE (A.filtration.step (p + 1)) (A.filtration.step p)
     (A.filtration.antitone_step (by omega))
   let iB := Subobject.ofLE (B.filtration.step (p + 1)) (B.filtration.step p)
     (B.filtration.antitone_step (by omega))
-  have hw : iA ≫ (restriction f p ≫ cokernel.π iB) = 0 := by
+  have hw : iA ≫ (restrictionSteps f p ≫ cokernel.π iB) = 0 := by
     rw [← Category.assoc, restriction_naturality, Category.assoc, cokernel.condition,
       comp_zero]
-  exact ⟨cokernel.desc iA (restriction f p ≫ cokernel.π iB) hw,
+  exact ⟨cokernel.desc iA (restrictionSteps f p ≫ cokernel.π iB) hw,
     cokernel.π_desc _ _ _⟩
 
 /-- The map induced by a filtered morphism on its graded pieces.
@@ -86,13 +86,13 @@ Source: Stacks Project, Homology, the paragraph defining `gr` before Lemma 05SP
 and the commutative diagram in Lemma 0127. This is the unique map commuting with
 the cokernel projections, chosen from `exists_gradedMap`.
 (blueprint: lem-sp-finite-filtration-induction) -/
-noncomputable def gradedMap {A B : FilteredObject C} (f : Hom A B) (p : ℤ) :
+noncomputable def gradedMapSteps {A B : FilteredObject C} (f : HomPreservingSteps A B) (p : ℤ) :
     A.filtration.gradedPiece p ⟶ B.filtration.gradedPiece p :=
-  Classical.choose (exists_gradedMap A B f p)
+  Classical.choose (exists_gradedMap_steps A B f p)
 
-private theorem restriction_isIso_of_succ {A B : FilteredObject C} (f : Hom A B)
-    (p : ℤ) (hsucc : IsIso (restriction f (p + 1)))
-    (hgr : IsIso (gradedMap f p)) : IsIso (restriction f p) := by
+private theorem restriction_isIso_of_succ {A B : FilteredObject C} (f : HomPreservingSteps A B)
+    (p : ℤ) (hsucc : IsIso (restrictionSteps f (p + 1)))
+    (hgr : IsIso (gradedMapSteps f p)) : IsIso (restrictionSteps f p) := by
   let iA := Subobject.ofLE (A.filtration.step (p + 1)) (A.filtration.step p)
     (A.filtration.antitone_step (by omega))
   let iB := Subobject.ofLE (B.filtration.step (p + 1)) (B.filtration.step p)
@@ -106,11 +106,11 @@ private theorem restriction_isIso_of_succ {A B : FilteredObject C} (f : Hom A B)
     { exact := ShortComplex.cokernelSequence_exact iB
       mono_f := by dsimp [SB, ShortComplex.cokernelSequence, iB]; infer_instance }
   let φ : SA ⟶ SB :=
-    { τ₁ := restriction f (p + 1)
-      τ₂ := restriction f p
-      τ₃ := gradedMap f p
+    { τ₁ := restrictionSteps f (p + 1)
+      τ₂ := restrictionSteps f p
+      τ₃ := gradedMapSteps f p
       comm₁₂ := (restriction_naturality f p).symm
-      comm₂₃ := (Classical.choose_spec (exists_gradedMap A B f p)).symm }
+      comm₂₃ := (Classical.choose_spec (exists_gradedMap_steps A B f p)).symm }
   exact ShortComplex.isIso₂_of_shortExact_of_isIso₁₃' φ hSA hSB hsucc hgr
 
 /-- A morphism inducing isomorphisms on all graded pieces of finite filtrations
@@ -140,14 +140,14 @@ Proof:
    with these isomorphisms. Therefore `f.hom` is an isomorphism. All restrictions
    being isomorphisms says `f(F^p A) = F^p B`, so the map is strict as asserted.
 (blueprint: lem-sp-finite-filtration-induction) -/
-theorem finite_filtration_induction (A B : FilteredObject C) (f : Hom A B)
+theorem finite_filtration_induction_steps (A B : FilteredObject C) (f : HomPreservingSteps A B)
     (hA : A.filtration.IsFinite) (hB : B.filtration.IsFinite)
-    (hgraded : ∀ p : ℤ, IsIso (gradedMap f p)) :
-    IsIso f.hom ∧ ∀ p : ℤ, IsIso (restriction f p) := by
+    (hgraded : ∀ p : ℤ, IsIso (gradedMapSteps f p)) :
+    IsIso f.hom ∧ ∀ p : ℤ, IsIso (restrictionSteps f p) := by
   obtain ⟨nA, mA, hnA, hmA⟩ := hA
   obtain ⟨nB, mB, hnB, hmB⟩ := hB
   let m := max mA mB
-  have hzero (p : ℤ) (hp : m ≤ p) : IsIso (restriction f p) := by
+  have hzero (p : ℤ) (hp : m ≤ p) : IsIso (restrictionSteps f p) := by
     have hAp : A.filtration.step p = ⊥ := by
       apply le_antisymm _ bot_le
       simpa [hmA] using A.filtration.antitone_step
@@ -163,7 +163,7 @@ theorem finite_filtration_induction (A B : FilteredObject C) (f : Hom A B)
       rw [hBp]
       exact (isZero_zero C).of_iso Subobject.botCoeIsoZero
     exact isIso_of_source_target_iso_zero _ hAz.isoZero hBz.isoZero
-  have hi : ∀ k : ℕ, ∀ p : ℤ, m ≤ p + k → IsIso (restriction f p) := by
+  have hi : ∀ k : ℕ, ∀ p : ℤ, m ≤ p + k → IsIso (restrictionSteps f p) := by
     intro k
     induction k with
     | zero =>
@@ -172,7 +172,7 @@ theorem finite_filtration_induction (A B : FilteredObject C) (f : Hom A B)
     | succ k ih =>
       intro p hp
       exact restriction_isIso_of_succ f p (ih (p + 1) (by omega)) (hgraded p)
-  have hall (p : ℤ) : IsIso (restriction f p) :=
+  have hall (p : ℤ) : IsIso (restrictionSteps f p) :=
     hi (m - p).toNat p (by omega)
   let n := min nA nB
   have hAn : A.filtration.step n = ⊤ := by
@@ -189,7 +189,7 @@ theorem finite_filtration_induction (A B : FilteredObject C) (f : Hom A B)
     (Subobject.isIso_arrow_iff_eq_top _).2 hBn
   have := hall n
   have hhom : f.hom = inv (A.filtration.step n).arrow ≫
-      restriction f n ≫ (B.filtration.step n).arrow := by
+      restrictionSteps f n ≫ (B.filtration.step n).arrow := by
     rw [restriction_arrow, IsIso.inv_hom_id_assoc]
   constructor
   · rw [hhom]

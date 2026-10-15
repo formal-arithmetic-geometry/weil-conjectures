@@ -157,7 +157,7 @@ theorem scalar_unit_abelian_ext_factorization (k : Type u) [Field k]
       (a.mapExactFunctor (scalarFunctor f)).mapExactFunctor U = a.mapExactFunctor T := by
     have h := Abelian.Ext.mapExactFunctor_square.{u, u + 1, u, u}
       (scalarFunctor f) T U (𝟭 _) (Iso.refl _) 1 a
-    have hid := Abelian.Ext.exactFunctorIdentityComparison (𝟭 _) (Iso.refl _)
+    have hid := Abelian.Ext.exactFunctorIdentityComparisonSheaf (𝟭 _) (Iso.refl _)
       (a.mapExactFunctor T)
     simpa using h.trans (by simpa using hid)
   unfold scalarCohomologyExtEquiv scalarCohomologyExtMap scalarExtMap

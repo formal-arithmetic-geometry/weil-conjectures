@@ -221,7 +221,7 @@ theorem exists_tensorStalkIso (z : X')
               (P.X i) := by
     subst a
     have : (ModuleCat.extendScalars.{uSC, uSC, uSC} (g'.stalkMap z).hom).Additive :=
-      ModuleCat.extendScalars_additive _
+      ModuleCat.extendScalars_additive_sheaf _
     -- Pin zero-preservation at the universe of the stalk modules.
     have hs0 : (RingedSpace.moduleStalkFunctor X.toRingedSpace
         (g' z)).PreservesZeroMorphisms := inferInstance

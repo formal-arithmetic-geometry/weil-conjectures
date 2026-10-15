@@ -73,7 +73,7 @@ private lemma mapExactFunctor_composite
     x.mapExactFunctor (F ⋙ G) = (x.mapExactFunctor F).mapExactFunctor G := by
   let := Limits.comp_preservesFiniteLimits F G
   let := Limits.comp_preservesFiniteColimits F G
-  simpa using Abelian.Ext.mapExactFunctor_comp_mk₀_eq F G (F ⋙ G) (Iso.refl _) x
+  simpa using Abelian.Ext.mapExactFunctor_comp_mk₀_eq_sheaf F G (F ⋙ G) (Iso.refl _) x
 
 set_option maxHeartbeats 800000 in
 -- Ext transport elaborates the exact tensor and sheaf inverse-image instances repeatedly.

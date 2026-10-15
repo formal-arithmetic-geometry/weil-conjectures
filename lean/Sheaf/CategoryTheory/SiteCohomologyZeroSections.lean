@@ -43,7 +43,7 @@ identifies such maps with sections at X, by evaluation on the identity. All
 three identifications preserve zero. Postcomposition with a sheaf morphism
 commutes with each identification, proving the displayed naturality equation.
 -/
-theorem siteCohomology_zero_section_properties
+theorem siteCohomology_zero_section_properties_sheaf
     {C : Type u} [SmallCategory C] (T : GrothendieckTopology C)
     [HasSheafify T AddCommGrpCat.{u}]
     [HasExt.{u} (Sheaf T AddCommGrpCat.{u})] :

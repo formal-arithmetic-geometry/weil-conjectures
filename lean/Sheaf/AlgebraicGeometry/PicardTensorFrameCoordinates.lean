@@ -21,7 +21,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 /-- The canonical tensor-unit isomorphism, with the pinned adjoint structure map. -/
-def picardTensorUnitIso {X Y : Scheme.{v}} (g : X ⟶ Y) :
+def picardTensorUnitIsoFrame {X Y : Scheme.{v}} (g : X ⟶ Y) :
     (tensorPullback g).obj (Modules.unit Y) ≅ Modules.unit X := by
   haveI := (tensorPullbackObjUnitToUnit_isIso g).1
   exact asIso (tensorPullbackObjUnitToUnit g)
@@ -31,7 +31,7 @@ def picardTensorFreeIso {X Y : Scheme.{v}} (g : X ⟶ Y) (I : Type v) :
     (tensorPullback g).obj (SheafOfModules.free (R := Y.ringCatSheaf) I) ≅
       SheafOfModules.free (R := X.ringCatSheaf) I := by
   letI := (Classical.choose (exists_tensorPullbackAdjunction g)).isLeftAdjoint
-  exact (SheafOfModules.mapFreeIso (tensorPullback g) I (picardTensorUnitIso g).symm).symm
+  exact (SheafOfModules.mapFreeIso (tensorPullback g) I (picardTensorUnitIsoFrame g).symm).symm
 
 /-- Morphisms from the structure sheaf are additive global-section coordinates. -/
 def picardUnitHomTopEquiv {X : Scheme.{v}} (M : X.Modules) :
@@ -68,8 +68,8 @@ def picardTensorScalarCoordinate {W Y T : Scheme.{v}}
     (t : T ⟶ W) (s : T ⟶ Y) {M : Y.Modules} (q : M ≅ Modules.unit Y) :
     ((tensorPullback t).obj (Modules.unit W) ⟶ (tensorPullback s).obj M) ≃+
       Γ(T, ⊤) :=
-  (picardHomCongr (picardTensorUnitIso t)
-    ((tensorPullback s).mapIso q ≪≫ picardTensorUnitIso s)).trans
+  (picardHomCongr (picardTensorUnitIsoFrame t)
+    ((tensorPullback s).mapIso q ≪≫ picardTensorUnitIsoFrame s)).trans
       (picardUnitHomTopEquiv (Modules.unit T))
 
 /-- Coordinates of a raw morphism into the tensor pullback of a finite-rank frame. -/
@@ -78,7 +78,7 @@ def picardTensorVectorCoordinate {W Y T : Scheme.{v}}
     (q : M ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{v} (Fin m))) :
     ((tensorPullback t).obj (Modules.unit W) ⟶ (tensorPullback s).obj M) ≃+
       (Fin m → Γ(T, ⊤)) :=
-  ((picardHomCongr (picardTensorUnitIso t)
+  ((picardHomCongr (picardTensorUnitIsoFrame t)
     ((tensorPullback s).mapIso q ≪≫ picardTensorFreeIso s (ULift.{v} (Fin m)))).trans
       ((picardUnitHomTopEquiv _).trans (freeSectionsEquiv _).toAddEquiv)).trans
         { toFun := fun a i ↦ a ⟨i⟩
@@ -89,17 +89,17 @@ def picardTensorVectorCoordinate {W Y T : Scheme.{v}}
 
 private lemma tensorUnit_conj_app_top {X Y : Scheme.{v}} (g : X ⟶ Y)
     (f : Modules.unit Y ⟶ Modules.unit Y) :
-    Hom.app ((picardTensorUnitIso g).inv ≫ (tensorPullback g).map f ≫
-        (picardTensorUnitIso g).hom) ⊤ (1 : Γ(X, ⊤)) =
+    Hom.app ((picardTensorUnitIsoFrame g).inv ≫ (tensorPullback g).map f ≫
+        (picardTensorUnitIsoFrame g).hom) ⊤ (1 : Γ(X, ⊤)) =
       g.appTop (Hom.app f ⊤ (1 : Γ(Y, ⊤))) := by
   let adj := Classical.choose (exists_tensorPullbackAdjunction g)
-  set F := (picardTensorUnitIso g).inv ≫ (tensorPullback g).map f ≫
-    (picardTensorUnitIso g).hom
-  have hF : (tensorPullback g).map f ≫ (picardTensorUnitIso g).hom =
-      (picardTensorUnitIso g).hom ≫ F := by simp [F]
+  set F := (picardTensorUnitIsoFrame g).inv ≫ (tensorPullback g).map f ≫
+    (picardTensorUnitIsoFrame g).hom
+  have hF : (tensorPullback g).map f ≫ (picardTensorUnitIsoFrame g).hom =
+      (picardTensorUnitIsoFrame g).hom ≫ F := by simp [F]
   have key := congrArg (adj.homEquiv _ _) hF
   rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right] at key
-  have h2 : adj.homEquiv _ _ (picardTensorUnitIso g).hom =
+  have h2 : adj.homEquiv _ _ (picardTensorUnitIsoFrame g).hom =
       SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom :=
     (adj.homEquiv _ _).apply_symm_apply _
   rw [h2] at key
@@ -114,14 +114,14 @@ private lemma tensorUnit_conj_app_top {X Y : Scheme.{v}} (g : X ⟶ Y)
 private lemma tensorFree_hom_projection {X Y : Scheme.{v}} (g : X ⟶ Y)
     (I : Type v) [DecidableEq I] (i : I) :
     (picardTensorFreeIso g I).hom ≫ freeπ i =
-      (tensorPullback g).map (freeπ i) ≫ (picardTensorUnitIso g).hom := by
+      (tensorPullback g).map (freeπ i) ≫ (picardTensorUnitIsoFrame g).hom := by
   let := (Classical.choose (exists_tensorPullbackAdjunction g)).isLeftAdjoint
   apply (cancel_epi (picardTensorFreeIso g I).inv).mp
   rw [Iso.inv_hom_id_assoc]
   apply free_hom_ext
   intro j
   have hι : SheafOfModules.ιFree j ≫ (picardTensorFreeIso g I).inv =
-      (picardTensorUnitIso g).inv ≫ (tensorPullback g).map (SheafOfModules.ιFree j) := by
+      (picardTensorUnitIsoFrame g).inv ≫ (tensorPullback g).map (SheafOfModules.ιFree j) := by
     exact SheafOfModules.ιFree_mapFreeIso_hom _ _ _ _
   rw [reassoc_of% hι, ← Functor.map_comp_assoc, ιFree_freeπ,
     ιFree_freeπ]
@@ -131,7 +131,7 @@ private lemma tensorColumn_app_top {X Y : Scheme.{v}} (g : X ⟶ Y)
     (I : Type v) [Fintype I] [DecidableEq I]
     (φ : Modules.unit Y ⟶ SheafOfModules.free (R := Y.ringCatSheaf) I) (i : I) :
     freeSectionsEquiv I
-      (Hom.app ((picardTensorUnitIso g).inv ≫ (tensorPullback g).map φ ≫
+      (Hom.app ((picardTensorUnitIsoFrame g).inv ≫ (tensorPullback g).map φ ≫
         (picardTensorFreeIso g I).hom) ⊤ (1 : Γ(X, ⊤))) i =
       g.appTop (freeSectionsEquiv I (Hom.app φ ⊤ (1 : Γ(Y, ⊤))) i) := by
   change Hom.app (freeπ i) ⊤ (Hom.app _ ⊤ _) =
@@ -166,12 +166,12 @@ theorem picardTensorFrame_map {W Y T : Scheme.{v}}
             (Hom.app (q0.inv ≫ δ ≫ q1.hom) ⊤ (1 : Γ(Y, ⊤))) ⟨i⟩)) := by
   classical
   let φ := q0.inv ≫ δ ≫ q1.hom
-  let u := (picardTensorUnitIso t).inv ≫ f ≫
-    (tensorPullback s).map q0.hom ≫ (picardTensorUnitIso s).hom
+  let u := (picardTensorUnitIsoFrame t).inv ≫ f ≫
+    (tensorPullback s).map q0.hom ≫ (picardTensorUnitIsoFrame s).hom
   let a : Γ(T, ⊤) := Hom.app u ⊤ (1 : Γ(T, ⊤))
-  let v := (picardTensorUnitIso s).inv ≫ (tensorPullback s).map φ ≫
+  let v := (picardTensorUnitIsoFrame s).inv ≫ (tensorPullback s).map φ ≫
     (picardTensorFreeIso s (ULift.{v} (Fin m))).hom
-  have hc : (picardTensorUnitIso t).inv ≫ (f ≫ (tensorPullback s).map δ) ≫
+  have hc : (picardTensorUnitIsoFrame t).inv ≫ (f ≫ (tensorPullback s).map δ) ≫
       ((tensorPullback s).mapIso q1 ≪≫ picardTensorFreeIso s (ULift.{v} (Fin m))).hom =
         u ≫ v := by
     simp only [u, v, φ, Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp,
@@ -180,7 +180,7 @@ theorem picardTensorFrame_map {W Y T : Scheme.{v}}
     dsimp only [Functor.mapIso_hom, Functor.mapIso_inv] at hcancel
     rw [reassoc_of% hcancel]
   change (fun i ↦ freeSectionsEquiv (ULift.{v} (Fin m))
-    (Hom.app ((picardTensorUnitIso t).inv ≫
+    (Hom.app ((picardTensorUnitIsoFrame t).inv ≫
       (f ≫ (tensorPullback s).map δ) ≫
       ((tensorPullback s).mapIso q1 ≪≫
         picardTensorFreeIso s (ULift.{v} (Fin m))).hom) ⊤ (1 : Γ(T, ⊤))) ⟨i⟩) = _

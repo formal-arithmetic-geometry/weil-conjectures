@@ -66,11 +66,11 @@ theorem etaleOpenObjectCohomologyMap_pullback
       e₁.inv.app _ ≫ e₂.hom.app _)).comp
       ((x.mapExactFunctor P).mapExactFunctor R) (zero_add q) = _
   simp only [← Abelian.Ext.mk₀_comp_mk₀_assoc]
-  rw [← Abelian.Ext.mapExactFunctor_comp_mk₀_eq P R H e₂ x]
+  rw [← Abelian.Ext.mapExactFunctor_comp_mk₀_eq_sheaf P R H e₂ x]
   have hc := congrArg
     (fun z ↦ ((Abelian.Ext.mk₀ (e₁.inv.app _)).comp z (zero_add q)).comp
       (Abelian.Ext.mk₀ (e₁.inv.app G)) (add_zero q))
-    (Abelian.Ext.mapExactFunctor_comp_mk₀_eq L T H e₁ x)
+    (Abelian.Ext.mapExactFunctor_comp_mk₀_eq_sheaf L T H e₁ x)
   simp only [← Abelian.Ext.comp_assoc_of_third_deg_zero,
     Abelian.Ext.mk₀_comp_mk₀_assoc, Iso.inv_hom_id_app,
     Abelian.Ext.mk₀_id_comp, Abelian.Ext.comp_mk₀_id,

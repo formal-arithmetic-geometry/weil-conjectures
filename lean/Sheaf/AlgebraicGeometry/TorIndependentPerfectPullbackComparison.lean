@@ -90,7 +90,7 @@ private theorem kFlat_pullback_stalk_cohomology
       St.obj ((Fc.obj K).homology i) := ((Fc.obj K).sc i).mapHomologyIso St
   obtain ⟨d, _⟩ := Scheme.Modules.exists_tensorPullback_stalk_iso k z
   have : (ModuleCat.extendScalars.{u₁, u₁, u₁} (k.stalkMap z).hom).Additive :=
-    ModuleCat.extendScalars_additive _
+    ModuleCat.extendScalars_additive_sheaf _
   have : (RingedSpace.moduleStalkFunctor X.toRingedSpace (k z)).PreservesZeroMorphisms :=
     RingedSpace.moduleStalkFunctor_preservesZeroMorphisms X.toRingedSpace (k z)
   have : St.Additive := stalk_additive Y.toRingedSpace z

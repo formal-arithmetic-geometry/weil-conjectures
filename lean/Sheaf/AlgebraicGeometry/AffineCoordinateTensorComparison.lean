@@ -174,7 +174,7 @@ noncomputable def affineCoordinateComplexComparison
       (ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ) ⋙
         affineCoordinateComplex b := by
   let := perfectHomTensorAdditive p
-  have : (ModuleCat.extendScalars φ).Additive := ModuleCat.extendScalars_additive φ
+  have : (ModuleCat.extendScalars φ).Additive := ModuleCat.extendScalars_additive_sheaf φ
   have : (tilde.functor a.A).Additive := ⟨by intros; exact tilde.map_add _ _⟩
   have : (tilde.functor b.A).Additive := ⟨by intros; exact tilde.map_add _ _⟩
   have : (Scheme.Modules.pushforward a.σ.hom).Additive := inferInstance

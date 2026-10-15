@@ -66,10 +66,10 @@ theorem finite_filtered_colimit_model
       (∀ (q : ℤ) (Q : I ⥤ AddCommGrpCat.{u})
         (e : ∀ i : I, Q.obj i ≅ (F i).gradedPiece q),
         (∀ {i j : I} (f : i ⟶ j),
-          Q.map f ≫ (e j).hom = (e i).hom ≫ FilteredObject.gradedMap (a f) q) →
+          Q.map f ≫ (e j).hom = (e i).hom ≫ FilteredObject.gradedMapSteps (a f) q) →
         ∃ θ : colimit Q ⟶ H.gradedPiece q,
           (∀ i : I, colimit.ι Q i ≫ θ = (e i).hom ≫
-            FilteredObject.gradedMap (c i) q) ∧ IsIso θ) ∧
+            FilteredObject.gradedMapSteps (c i) q) ∧ IsIso θ) ∧
       (∀ (B : AddCommGrpCat.{u}) (G : DecreasingFiltration B)
         (b : ∀ i : I,
           (⟨A.obj i, F i⟩ : FilteredObject AddCommGrpCat.{u}) ⟶ ⟨B, G⟩),

@@ -38,7 +38,7 @@ Extension of scalars is additive. Proof: its maps send `s ⊗ x` to `s ⊗ f x`;
 the sum of two maps thus gives `s ⊗ (f x + g x)`, the sum of their two images.
 Tensor induction proves equality on all tensors. -/
 @[instance]
-theorem extendScalars_additive {S : Type uS} {T : Type uT} [CommRing S] [CommRing T]
+theorem extendScalars_additive_sheaf {S : Type uS} {T : Type uT} [CommRing S] [CommRing T]
     (f : S →+* T) : (extendScalars.{uS, uT, v} f).Additive := by
   refine ⟨?_⟩
   intro M N g h

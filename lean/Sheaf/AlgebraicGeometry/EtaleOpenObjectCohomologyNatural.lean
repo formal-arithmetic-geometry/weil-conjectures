@@ -69,7 +69,7 @@ private lemma canonicalMap_naturality {X : Scheme.{u}}
   rw [← Abelian.Ext.mk₀_comp_mk₀_assoc
     (etaleOpenFreeSheafUnit V ≫ H.map a) (c.hom.app _)]
   rw [Abelian.Ext.comp_assoc_of_third_deg_zero]
-  rw [← Abelian.Ext.mapExactFunctor_comp_mk₀_eq L G H c x]
+  rw [← Abelian.Ext.mapExactFunctor_comp_mk₀_eq_sheaf L G H c x]
   simp
 
 /-- Object cohomology over an open is the cohomology of its inverse-image sheaf,

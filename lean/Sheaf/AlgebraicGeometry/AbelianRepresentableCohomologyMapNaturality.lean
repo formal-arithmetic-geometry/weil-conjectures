@@ -94,7 +94,7 @@ theorem abelianRepresentableCohomologyMap_naturality {X Y : Scheme.{u}}
     Abelian.Ext.mk₀_comp_mk₀_assoc]
   rw [Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_mk₀,
     Abelian.Ext.mk₀_comp_mk₀_assoc]
-  have hc := Abelian.Ext.mapExactFunctor_comp_mk₀_eq L G H i x
+  have hc := Abelian.Ext.mapExactFunctor_comp_mk₀_eq_sheaf L G H i x
   have hc' := congrArg (fun y ↦
     ((Abelian.Ext.mk₀ (abelianRepresentableGenerator h V ≫ H.map a)).comp y
       (zero_add q)).comp (Abelian.Ext.mk₀ (i.inv.app F)) (add_zero q)) hc

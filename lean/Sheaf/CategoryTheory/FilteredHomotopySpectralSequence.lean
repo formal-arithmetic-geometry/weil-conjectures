@@ -62,7 +62,7 @@ theorem filteredHomotopy_spectralSequence_map_eq
       F.complexStep pmin n = ⊤ ∧ F.complexStep pmax n = ⊥)
     (hLG : ∀ n : ℤ, ∃ pmin : ℤ, ∃ pmax : ℤ,
       G.complexStep pmin n = ⊤ ∧ G.complexStep pmax n = ⊥)
-    (a b : FilteredObject.Hom ⟨K, F⟩ ⟨L, G⟩)
+    (a b : FilteredObject.HomPreservingSteps ⟨K, F⟩ ⟨L, G⟩)
     (H : Homotopy a.hom b.hom)
     (hshift : ∀ (p n : ℤ), ∃ ℓ :
       (F.complexStep p n : C) ⟶ (G.complexStep (p - 1) (n - 1) : C),
@@ -75,7 +75,7 @@ theorem filteredHomotopy_spectralSequence_map_eq
         (HomologicalComplex.homologyMap (F.step p).arrow n)) →
       (∀ p : ℤ, BF.step p = imageSubobject
         (HomologicalComplex.homologyMap (G.step p).arrow n)) →
-      ∃ t : FilteredObject.Hom ⟨K.homology n, AF⟩ ⟨L.homology n, BF⟩,
+      ∃ t : FilteredObject.HomPreservingSteps ⟨K.homology n, AF⟩ ⟨L.homology n, BF⟩,
         t.hom = HomologicalComplex.homologyMap a.hom n ∧
         t.hom = HomologicalComplex.homologyMap b.hom n ∧
         ∀ p : ℤ, ∃ g : AF.gradedPiece p ⟶ BF.gradedPiece p,

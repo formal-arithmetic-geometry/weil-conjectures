@@ -90,10 +90,10 @@ theorem complex_spectral_sequence_comparison
     (conv' : ∀ p q : ℤ, (E'.page (N p q) (hN p q)).X ⟨p, q⟩ ≅ (G (p + q)).gradedPiece q)
     (hconv : ∀ {i j : I} (f : i ⟶ j) (p q : ℤ),
       ((E.map f).hom (N p q) (hN p q)).f ⟨p, q⟩ ≫ (conv j p q).hom =
-        (conv i p q).hom ≫ FilteredObject.gradedMap (a (p + q) f) q)
+        (conv i p q).hom ≫ FilteredObject.gradedMapSteps (a (p + q) f) q)
     (hconv' : ∀ (i : I) (p q : ℤ),
       ((v i).hom (N p q) (hN p q)).f ⟨p, q⟩ ≫ (conv' p q).hom =
-        (conv i p q).hom ≫ FilteredObject.gradedMap (b (p + q) i) q)
+        (conv i p q).hom ≫ FilteredObject.gradedMapSteps (b (p + q) i) q)
     (hpage : ∀ (p q : ℤ)
       (φ : colimit (E ⋙ SpectralSequence.pageFunctor AddCommGrpCat.{u}
         (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1 1 ⋙
@@ -111,10 +111,10 @@ theorem complex_spectral_sequence_comparison
       (e : ∀ i : I, Q.obj i ≅ (F (p + q) i).gradedPiece q),
       (∀ {i j : I} (f : i ⟶ j),
         Q.map f ≫ (e j).hom = (e i).hom ≫
-          FilteredObject.gradedMap (a (p + q) f) q) ∧
+          FilteredObject.gradedMapSteps (a (p + q) f) q) ∧
       ∃ ψ : colimit Q ⟶ (G (p + q)).gradedPiece q,
         (∀ i : I, colimit.ι Q i ≫ ψ = (e i).hom ≫
-          FilteredObject.gradedMap (b (p + q) i) q) ∧ IsIso ψ := by
+          FilteredObject.gradedMapSteps (b (p + q) i) q) ∧ IsIso ψ := by
     intro p q
     let Q := E ⋙ SpectralSequence.pageFunctor AddCommGrpCat.{u}
       (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1 (N p q) (hN p q) ⋙

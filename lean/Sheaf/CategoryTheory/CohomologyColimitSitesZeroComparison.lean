@@ -261,13 +261,13 @@ theorem cohomology_colimit_sites_zero_comparison_injective
     have hh := congrArg
       (siteCohomology_zero_section Q.toGrothendieck K.pt
         ((V.ι.app t.right).toFunctor.obj X)) hx₀
-    rw [(siteCohomology_zero_section_properties Q.toGrothendieck).2.1] at hh
+    rw [(siteCohomology_zero_section_properties_sheaf Q.toGrothendieck).2.1] at hh
     change siteCohomology_zero_section Q.toGrothendieck K.pt
       ((V.ι.app t.right).toFunctor.obj X)
       ((((Sheaf.cohomologyPresheafFunctor Q.toGrothendieck 0).map k).app
         (op ((V.ι.app t.right).toFunctor.obj X))).hom
           ((canonicalMap t.right 0 X (Fs t.right)).hom x₀)) = 0 at hh
-    have hh' := ((siteCohomology_zero_section_properties Q.toGrothendieck).2.2
+    have hh' := ((siteCohomology_zero_section_properties_sheaf Q.toGrothendieck).2.2
       _ K.pt k ((V.ι.app t.right).toFunctor.obj X)
       ((canonicalMap t.right 0 X (Fs t.right)).hom x₀)).symm.trans hh
     rw [show siteCohomology_zero_section Q.toGrothendieck _ _
@@ -282,14 +282,14 @@ theorem cohomology_colimit_sites_zero_comparison_injective
     ((Sheaf.cohomologyPresheafFunctor (P t'.right).toGrothendieck 0).map
       (φ b.right)).app (op Y)).hom x₀
   have hy : y = 0 := by
-    apply (siteCohomology_zero_section_properties (P t'.right).toGrothendieck).1
+    apply (siteCohomology_zero_section_properties_sheaf (P t'.right).toGrothendieck).1
       (Fs t'.right) Y
-    rw [(siteCohomology_zero_section_properties (P t'.right).toGrothendieck).2.1]
+    rw [(siteCohomology_zero_section_properties_sheaf (P t'.right).toGrothendieck).2.1]
     change siteCohomology_zero_section (P t'.right).toGrothendieck (Fs t'.right) Y
       ((((Sheaf.cohomologyPresheafFunctor (P t'.right).toGrothendieck 0).map
         (φ b.right)).app (op Y)).hom
           ((pullbackMap b.right 0 X (Fs t.right)).hom x₀)) = 0
-    apply ((siteCohomology_zero_section_properties (P t'.right).toGrothendieck).2.2
+    apply ((siteCohomology_zero_section_properties_sheaf (P t'.right).toGrothendieck).2.2
       _ (Fs t'.right) (φ b.right) Y
       ((pullbackMap b.right 0 X (Fs t.right)).hom x₀)).trans
     rw [show siteCohomology_zero_section (P t'.right).toGrothendieck _ _

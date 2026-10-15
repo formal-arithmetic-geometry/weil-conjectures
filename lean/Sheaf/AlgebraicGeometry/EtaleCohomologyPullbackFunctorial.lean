@@ -54,7 +54,7 @@ theorem cohomologyPullbackFunctorial {X Y Z : Scheme.{u}} (u : X ⟶ Y) (v : Y �
     rw [CategoryTheory.Abelian.Ext.mapExactFunctor_comp,
       CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀,
       CategoryTheory.Abelian.Ext.mk₀_comp_mk₀_assoc]
-    rw [CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_eq
+    rw [CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_eq_sheaf
       ((v)^*[AddCommGrpCat.{u + 1}]) ((u)^*[AddCommGrpCat.{u + 1}])
       ((u ≫ v)^*[AddCommGrpCat.{u + 1}])
       (upperStarComp AddCommGrpCat.{u + 1} u v)]
@@ -66,7 +66,7 @@ theorem cohomologyPullbackFunctorial {X Y Z : Scheme.{u}} (u : X ⟶ Y) (v : Y �
     change ((CategoryTheory.Abelian.Ext.mk₀ _).comp (x.mapExactFunctor _) _).comp
       (CategoryTheory.Abelian.Ext.mk₀ _) (add_zero q) = x
     rw [CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero,
-      CategoryTheory.Abelian.Ext.exactFunctorIdentityComparison
+      CategoryTheory.Abelian.Ext.exactFunctorIdentityComparisonSheaf
         ((𝟙 Z)^*[AddCommGrpCat.{u + 1}]) (upperStarId AddCommGrpCat.{u + 1} Z),
       CategoryTheory.Abelian.Ext.mk₀_comp_mk₀_assoc]
     simp only [Iso.app_hom, Iso.symm_hom]
