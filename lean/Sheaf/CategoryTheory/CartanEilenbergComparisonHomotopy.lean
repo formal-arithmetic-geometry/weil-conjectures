@@ -6,10 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.CategoryTheory.Filtration
-import WeilConjectures.CategoryTheory.Abelian.Filtration
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 
 /-!
 # Homotopy uniqueness of Cartan--Eilenberg comparison lifts
@@ -30,6 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
+set_option linter.unusedVariables false in
 /-- Comparison lifts of homotopic complex maps have a total homotopy lowering
 resolution degree by at most one.
 Source: Stacks Project, Derived Categories, Tags 015I and 015K
@@ -117,6 +115,146 @@ theorem cartanEilenberg_comparison_homotopy
               ((JZ.secondFiltration (n - 1)).step (q - 1) : B),
               f ≫ ((JZ.secondFiltration (n - 1)).step (q - 1)).arrow =
                 ((FIZ.secondFiltration n).step q).arrow ≫ H.hom n (n - 1) := by
-  sorry
+  classical
+  let G := F.mapHomologicalComplex (ComplexShape.up ℕ)
+  let GG := G.mapHomologicalComplex (ComplexShape.up ℤ)
+  let FK := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K
+  let a := (NatIso.mapHomologicalComplex
+    (HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℕ) 0)
+    (ComplexShape.up ℤ)).app K
+  let eFI : ((CochainComplex.single₀ B).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj FK ⟶ GG.obj I := a.inv ≫ GG.map eI
+  dsimp only
+  intro φ ψ hφ hψ
+  have hFIbelow (p : ℤ) (hp : p < 0) : IsZero ((GG.obj I).X p) :=
+    G.map_isZero (hIbelow p hp)
+  -- Transport the three augmented rows through the exact functor.
+  have hFIres (p : ℤ) :
+      QuasiIso (HomologicalComplex.cyclesMap eFI p) ∧
+      QuasiIso (image.map (Arrow.homMk' (eFI.f (p - 1)) (eFI.f p)
+        (eFI.comm (p - 1) p))) ∧
+      QuasiIso (HomologicalComplex.homologyMap eFI p) := by
+    let M := ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj K
+    let e := GG.map eI
+    have hc : QuasiIso (HomologicalComplex.cyclesMap e p) := by
+      have : QuasiIso (HomologicalComplex.cyclesMap eI p) := (hIres p).1
+      rw [← quasiIso_iff_comp_right _ ((I.sc p).mapCyclesIso G).hom]
+      change QuasiIso (ShortComplex.cyclesMap (G.mapShortComplex.map
+        ((HomologicalComplex.shortComplexFunctor _ _ p).map eI)) ≫ _)
+      rw [ShortComplex.mapCyclesIso_hom_naturality]
+      change QuasiIso (((M.sc p).mapCyclesIso G).hom ≫
+        (F.mapHomologicalComplex (ComplexShape.up ℕ)).map
+          (HomologicalComplex.cyclesMap eI p))
+      infer_instance
+    have hh : QuasiIso (HomologicalComplex.homologyMap e p) := by
+      have : QuasiIso (HomologicalComplex.homologyMap eI p) := (hIres p).2.2
+      rw [← quasiIso_iff_comp_right _ ((I.sc p).mapHomologyIso G).hom]
+      change QuasiIso (ShortComplex.homologyMap (G.mapShortComplex.map
+        ((HomologicalComplex.shortComplexFunctor _ _ p).map eI)) ≫ _)
+      rw [ShortComplex.mapHomologyIso_hom_naturality]
+      change QuasiIso (((M.sc p).mapHomologyIso G).hom ≫
+        (F.mapHomologicalComplex (ComplexShape.up ℕ)).map
+          (HomologicalComplex.homologyMap eI p))
+      infer_instance
+    have hb : QuasiIso (image.map (Arrow.homMk' (e.f (p - 1)) (e.f p)
+        (e.comm (p - 1) p))) := by
+      let b := image.map (Arrow.homMk' (e.f (p - 1)) (e.f p) (e.comm (p - 1) p))
+      let b₀ := image.map
+        (Arrow.homMk' (eI.f (p - 1)) (eI.f p) (eI.comm (p - 1) p))
+      have : QuasiIso b₀ := (hIres p).2.1
+      have fac : b ≫ (PreservesImage.iso G (I.d (p - 1) p)).hom =
+          (PreservesImage.iso G (M.d (p - 1) p)).hom ≫ G.map b₀ := by
+        apply (cancel_mono (G.map (image.ι (I.d (p - 1) p)))).1
+        rw [Category.assoc, PreservesImage.hom_comp_map_image_ι]
+        change image.map (Arrow.homMk' (G.map (eI.f (p - 1))) (G.map (eI.f p))
+          (e.comm (p - 1) p)) ≫ image.ι (G.map (I.d (p - 1) p)) = _
+        erw [image.map_homMk'_ι]
+        rw [Category.assoc, ← G.map_comp, image.map_homMk'_ι, G.map_comp,
+          ← Category.assoc, PreservesImage.hom_comp_map_image_ι]
+        rfl
+      change QuasiIso b
+      rw [← quasiIso_iff_comp_right _ (PreservesImage.iso G (I.d (p - 1) p)).hom,
+        fac]
+      infer_instance
+    -- Precomposing the augmentation by its canonical single-complex isomorphism
+    -- preserves all three quasi-isomorphisms.
+    have hca : IsIso (HomologicalComplex.cyclesMap a.inv p) :=
+      inferInstanceAs (IsIso ((HomologicalComplex.cyclesFunctor _ _ p).map a.inv))
+    have hha : IsIso (HomologicalComplex.homologyMap a.inv p) :=
+      inferInstanceAs (IsIso ((HomologicalComplex.homologyFunctor _ _ p).map a.inv))
+    refine ⟨?_, ?_, ?_⟩
+    · dsimp only [eFI]
+      rw [HomologicalComplex.cyclesMap_comp]
+      change QuasiIso (HomologicalComplex.cyclesMap a.inv p ≫
+        HomologicalComplex.cyclesMap e p)
+      infer_instance
+    · let r := Arrow.homMk' (a.inv.f (p - 1)) (a.inv.f p) (a.inv.comm (p - 1) p)
+      have : IsIso r.left := inferInstanceAs (IsIso
+        ((HomologicalComplex.eval _ _ (p - 1)).map a.inv))
+      have : IsIso r.right := inferInstanceAs (IsIso
+        ((HomologicalComplex.eval _ _ p).map a.inv))
+      have : IsIso r := Arrow.isIso_of_isIso_left_of_isIso_right r
+      have : IsIso (image.map r) := inferInstanceAs (IsIso (im.map r))
+      have fac : image.map (Arrow.homMk' (eFI.f (p - 1)) (eFI.f p)
+          (eFI.comm (p - 1) p)) = image.map r ≫
+            image.map (Arrow.homMk' (e.f (p - 1)) (e.f p) (e.comm (p - 1) p)) := by
+        rw [← image.map_comp]
+        congr 1
+      rw [fac]
+      infer_instance
+    · dsimp only [eFI]
+      rw [HomologicalComplex.homologyMap_comp]
+      infer_instance
+  -- The supplied homotopy is a null-homotopy of the difference.
+  have hs (p : ℤ) :
+      (u - u').f p = s.hom p (p - 1) ≫ L.d (p - 1) p +
+        FK.d p (p + 1) ≫ s.hom (p + 1) (p + 1 - 1) ≫
+          eqToHom (congrArg L.X (Int.add_sub_cancel p 1)) := by
+    have h := (Homotopy.equivSubZero s).comm p
+    rw [dNext_eq _ (show (ComplexShape.up ℤ).Rel p (p + 1) by simp),
+      prevD_eq _ (show (ComplexShape.up ℤ).Rel (p - 1) p by simp)] at h
+    simpa [Homotopy.equivSubZero, FK, add_comm] using h
+  have hδ (p : ℤ) :
+      (eFI.f p).f 0 ≫ ((φ - ψ).f p).f 0 = (u - u').f p ≫ (eJ.f p).f 0 := by
+    simp only [eFI, HomologicalComplex.comp_f, Category.assoc]
+    change ((HomologicalComplex.singleMapHomologicalComplex F
+      (ComplexShape.up ℕ) 0).inv.app (K.X p)).f 0 ≫
+        F.map ((eI.f p).f 0) ≫ ((φ - ψ).f p).f 0 = _
+    rw [HomologicalComplex.singleMapHomologicalComplex_inv_app_self]
+    simp only [CochainComplex.single₀ObjXSelf, Iso.refl_hom, Iso.refl_inv]
+    erw [Category.id_comp, F.map_id, Category.id_comp]
+    simp only [HomologicalComplex.sub_f_apply, Preadditive.comp_sub,
+      Preadditive.sub_comp]
+    have hφp := hφ p
+    have hψp := hψ p
+    simp only [CochainComplex.single₀ObjXSelf, Iso.refl_inv] at hφp hψp
+    erw [Category.id_comp, Category.id_comp] at hφp hψp
+    rw [hφp, hψp]
+  obtain ⟨tI, tJ, _, _, _, _, _, H, _, hfil⟩ :=
+    cartanEilenberg_doubleComplex_homotopy B FK L (GG.obj I) J eFI eJ
+      hFIbelow hJbelow hFIres hJres hJinj' (φ - ψ) (u - u')
+      (fun p ↦ s.hom p (p - 1)) hs hδ
+  refine ⟨tI, tJ, ?_⟩
+  let := tI
+  let := tJ
+  let E := (ComplexShape.embeddingUpNat.extendFunctor B).mapHomologicalComplex
+    (ComplexShape.up ℤ)
+  -- Totalization is additive on maps; keep the homotopy components unchanged
+  -- so that its filtration factorization can be reused verbatim.
+  have hm : HomologicalComplex₂.total.map (E.map (φ - ψ)) (ComplexShape.up ℤ) =
+      HomologicalComplex₂.total.map (E.map φ) (ComplexShape.up ℤ) -
+        HomologicalComplex₂.total.map (E.map ψ) (ComplexShape.up ℤ) := by
+    rw [E.map_sub]
+    ext n p q hpq
+    simp only [HomologicalComplex.sub_f_apply, Preadditive.comp_sub,
+      HomologicalComplex₂.ιTotal_map]
+    simp only [Preadditive.sub_comp]
+  let H' : Homotopy
+      (HomologicalComplex₂.total.map (E.map φ) (ComplexShape.up ℤ) -
+        HomologicalComplex₂.total.map (E.map ψ) (ComplexShape.up ℤ)) 0 :=
+    { hom := H.hom
+      zero := H.zero
+      comm := fun n ↦ by rw [← hm]; exact H.comm n }
+  exact ⟨Homotopy.equivSubZero.symm H', hfil⟩
 
 end CategoryTheory

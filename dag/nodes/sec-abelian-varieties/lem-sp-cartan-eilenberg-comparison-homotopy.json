@@ -26,61 +26,45 @@
  ],
  "proof": [
   {
-   "text": "Put $\\delta=\\phi-\\psi$. Additivity makes $\\delta$ a morphism of double complexes, and the augmentation identities give $\\delta F(\\epsilon_K)=\\epsilon_L(u-u')=\\epsilon_L(ds+sd)$. Thus the induced map on the augmented degree-zero complexes has the prescribed null-homotopy $s$.",
+   "text": "Let G be F applied to natural-indexed cochain complexes, and let GG apply G in the horizontal direction. The canonical singleMapHomologicalComplex isomorphism a identifies GG(single K) with single(F K). Define the augmentation eFI = a.inv followed by GG(eI). The exactness of F makes G exact and preserves quasi-isomorphisms. Naturality of ShortComplex.mapCyclesIso and mapHomologyIso identifies the cycle and homology augmentations of GG(eI) with G applied to the original augmentations, up to isomorphisms. For boundaries, use PreservesImage.iso; its naturality square follows after composing with the monomorphic image inclusion. Precomposition by a.inv preserves all three quasi-isomorphisms. G also preserves the zero columns below degree zero.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015I and Remark 015K, comparison morphism construction"
+    "place": "Lemma 015I and Remark 015K, comparison of Cartan--Eilenberg resolutions"
    }
   },
   {
-   "text": "Check the repaired double-complex lemma hypotheses for $F(I_K)$ and $J_L$. Exactness of the augmented boundary, cycle, and horizontal-cohomology rows of $F(I_K)$, and of $0\\to Z\\to F(I_K)\\to B\\to0$, follows from exactness of $F$ and the Cartan--Eilenberg resolution $I_K$; the corresponding rows of $J_L$ are injective resolutions by [lem-sp-cartan-eilenberg-exists]. With $w=u-u'$ and the given homotopy $s$, the augmentation identity is $\\delta F(\\epsilon_K)=\\epsilon_L w$, where $\\delta=\\phi-\\psi$. Thus [lem-sp-cartan-eilenberg-double-complex-homotopy] applies and supplies both homotopy components.",
-   "uses": [
-    "lem-sp-cartan-eilenberg-exists",
-    "lem-sp-cartan-eilenberg-double-complex-homotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015I comparison construction by B, Z, H rows and Remark 015K; horizontal/vertical homotopy decomposition as in Weibel Lemma 5.7.10"
-   }
-  },
-  {
-   "text": "The repaired lemma gives maps $s_1^{p,q}:F(I_K^{p,q})\\to J_L^{p-1,q}$ and $s_2^{p,q}:F(I_K^{p,q})\\to J_L^{p,q-1}$, with $s_1$ restricting on the augmented row to the prescribed $s$ and with the component identities required for the total homotopy.",
+   "text": "Set delta = phi - psi and w = u - u'. Homotopy.equivSubZero turns the given s into a null-homotopy of w. In degree p, use its components s.hom p (p - 1) and the homotopy identity with the up-integer predecessor and successor. The two supplied augmentation squares subtract to give eFI followed by delta = w followed by eJ, using the degree-zero component of the canonical single-complex isomorphism. Apply lem-sp-cartan-eilenberg-double-complex-homotopy to F(I), J, these augmentations, delta, w and s. Its hypotheses on J are precisely the supplied resolution and row-injectivity assumptions.",
    "uses": [
     "lem-sp-cartan-eilenberg-double-complex-homotopy"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015I, compatibility with the second exact sequence and vertical differential; Remark 015K"
+    "place": "Lemma 015I and Remark 015K, comparison of Cartan--Eilenberg resolutions"
    }
   },
   {
-   "text": "Set $H^{p,q}=s_1^{p,q}+(-1)^p s_2^{p,q}$. The component equations in the preceding step give $d_{\\operatorname{Tot}J}H+Hd_{\\operatorname{Tot}F(I_K)}=\\delta$; hence $\\operatorname{Tot}(\\phi)-\\operatorname{Tot}(\\psi)=dH+Hd$. The horizontal part preserves the vertical degree and the vertical part lowers it by one, so for the decreasing filtration by vertical (resolution) degree, $H(F^q\\operatorname{Tot}^n)\\subseteq F^{q-1}\\operatorname{Tot}^{n-1}$ [def-sp-double-complex-total, def-sp-filtration]. If $u=u'$, choose $s=0$ and obtain the final assertion.",
+   "text": "Retain the total-existence witnesses, null-homotopy H and filtration factorization returned by the double-complex lemma. Prove Tot(E(phi - psi)) = Tot(E(phi)) - Tot(E(psi)) by additivity of E and extensionality on every total diagonal coprojection, using the total-map coprojection formula [def-sp-double-complex-total]. Regard H as a null-homotopy of that difference by changing only its commutativity proof. Apply Homotopy.equivSubZero.symm; its components remain definitionally H.hom, so the returned factorization from filtration step q to step q - 1 is unchanged.",
    "uses": [
-    "lem-sp-cartan-eilenberg-double-complex-homotopy",
-    "def-sp-double-complex-total",
-    "def-sp-filtration"
+    "def-sp-double-complex-total"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Remark 015K, filtered total-complex comparison"
+    "place": "Lemma 015I and Remark 015K, comparison of Cartan--Eilenberg resolutions"
    }
   }
  ],
  "proof_deps": [
-  "lem-sp-cartan-eilenberg-exists",
   "lem-sp-cartan-eilenberg-double-complex-homotopy",
-  "def-sp-double-complex-total",
-  "def-sp-filtration"
+  "def-sp-double-complex-total"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 015I and Remark 015K; row-by-row comparison-homotopy argument"
+  "place": "Lemma 015I and Remark 015K, comparison of Cartan--Eilenberg resolutions; Lean proof by P4 using exact-functor transport and Homotopy.equivSubZero"
  },
  "mathlib_searches": [
   {
@@ -165,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261015T205054-L-1694447",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
