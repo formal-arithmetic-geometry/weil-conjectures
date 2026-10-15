@@ -15258,3 +15258,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:17 L: merged deliver/S1/Sheaf.CategoryTheory.RingedSliceExtensionExactness (stage 3; reviewer PASS; first push; landing 20261015T221736-L-2646180 (interface); batch 20261015T221551; modules 3; new nodes 2)
 - 22:32 L: returned deliver/F1/Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality (reviewer RETURN: (reviewer X-56b8e, head 56b8e2263) H9 / review point 5: remove two unused imports from lean/Sheaf/AlgebraicGeometry/Cond)
 - 22:38 L: returned deliver/Q3/Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat (reviewer RETURN: (reviewer X-d1eac, head d1eaca652) H9 / brief point 5: In lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SliceRestrictionFl)
+- 22:41 L: returned deliver/B4/Sheaf.CategoryTheory.RingedSliceExtensionPreservesExact (reviewer RETURN: (the landing tools, head f98395f3b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
