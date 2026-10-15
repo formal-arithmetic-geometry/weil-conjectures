@@ -227,5 +227,23 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-0eefd28b6 (reviewer sub-agent of L); spot-checked: Read the mathematics in full; review.md records all six steps, cited statements and source locations, edge cases, duplicate/cycle checks, and master target coefficient/morphism checks. No new nodes or repairs. Accepted all three declared generic tool uses; no étale/pro-étale or condensed-coefficient comparison is assumed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCtfTriangulated",
+  "declaration": "AlgebraicGeometry.Scheme.finite_ctf_isTriangulated",
+  "file": "lean/Sheaf/Paper/FiniteCtfTriangulated.lean",
+  "statement": "theorem finite_ctf_isTriangulated (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) : ObjectProperty.IsClosedUnderIsomorphisms (intrinsicFiniteTorsionConstructible l E n hn Y ⊓ fun K ↦ HasFiniteProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) K) ∧ ObjectProperty.IsTriangulated (intrinsicFiniteTorsionConstructible l E n hn Y ⊓ fun K ↦ HasFiniteProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) K) ∧ (∀ (K : proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E n)) (a b m : ℤ), HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) K a b → HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) (K⟦m⟧) (a - m) (b - m)) ∧ (∀ (T : Triangle (proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E n))) (a b : ℤ), T ∈ distTriang _ → HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) T.obj₁ a b → HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) T.obj₃ a b → HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) T.obj₂ a b)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8766b83a9",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all five dependencies, sources, exact declarations, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py reproduced cleanly through the local side overlay. No fixes required; project clones and branch head were not modified."
  }
 }
