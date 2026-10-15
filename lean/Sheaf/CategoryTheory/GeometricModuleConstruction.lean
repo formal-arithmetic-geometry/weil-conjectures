@@ -7,6 +7,9 @@ module
 
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.CartesianScalarDistributivityTransport
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresAbelian
+import Sheaf.CategoryTheory.TransportScalarActionDiagrams
 
 /-!
 # Constructing module functors through a geometric morphism

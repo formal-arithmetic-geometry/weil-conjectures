@@ -17,6 +17,15 @@ import Mathlib.CategoryTheory.Sites.Limits
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteInverseImageTensor
+import Sheaf.RingTheory.IndPrincipalZariski
+import Sheaf.RingTheory.WeaklyEtaleField
+import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
+import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 
 /-!
 # Pro-etale evaluation over an algebraically closed field

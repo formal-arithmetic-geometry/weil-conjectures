@@ -15,6 +15,9 @@ import Sheaf.CategoryTheory.ExtOneExtensionClassification
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.Paper.CondensedSheafExtContinuity
 import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Assembly of finite coefficient models on strata

@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
 
 /-!
 # Finite coefficient models on one stratum
