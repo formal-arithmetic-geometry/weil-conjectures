@@ -115,5 +115,27 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-c1c9de5aa (reviewer sub-agent of L); spot-checked: Read the definition, cited statements, master blueprint sources, Stacks K-injective passages, and unit/chapter route. Corrected missing definition citations and clarified that the bounded-below recipe retains Lambda-module coefficients; the cited cohomology definition literally covers abelian sheaves. No new nodes or target changes. Corrected whole JSON and concrete checks are recorded in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7c7257e7a",
+  "group": "NB",
+  "result": "pass",
+  "note": "Existing derived global sections and cohomology declarations match the node; dependencies, universes, edge cases, duplicate removal, report sections, and server scompile evidence checked."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriek",
+  "declaration": "AlgebraicGeometry.Etale.rightDerivedGlobalSections",
+  "declarations": [
+   "AlgebraicGeometry.Etale.rightDerivedGlobalSections",
+   "AlgebraicGeometry.Etale.cohomology"
+  ],
+  "statement": "def rightDerivedGlobalSections :\n    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory A",
+  "branch": "slopmaster2",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Specialize A to ModuleCat.{u + 1} Λ for Λ : Type (u + 1), [CommRing Λ], and X to T : Scheme.{u}. RGamma(T_et,K) is (AlgebraicGeometry.Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) T).obj K; H^q(T_et,K) is (AlgebraicGeometry.Etale.cohomology (ModuleCat.{u + 1} Λ) T q).obj K. The explicit K-injective computation API CategoryTheory.Functor.rightDerivedFunctorObjQIso (WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective) identifies RΓ(Q I) with Q of termwise Γ(I) for K-injective I; DerivedCategory.exists_iso_Q_obj_of_isKInjective supplies such a representative. These are exactly the node construction, with choices identified by the canonical comparison. The module sheaf coefficients retain their Λ-module structure. Independence and bounded-below agreement are properties, not additional definitions. Repair H4: removed the duplicate RGammaUnbounded module; repair H8: its unmarked etaleCohomology declaration is removed with that module."
  }
 }
