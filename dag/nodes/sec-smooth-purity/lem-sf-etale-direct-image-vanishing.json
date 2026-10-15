@@ -3,73 +3,144 @@
  "blueprint": {
   "is": "lem-sf-etale-direct-image-vanishing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Vanishing of the higher direct images above the dimension",
- "statement": "Let $k$ be an algebraically closed field, let $X,Y$ be finite-type\n$k$-schemes with $\\dim X\\leq d$, let $f:X\\to Y$ be a finite-type\nmorphism and let $A$ be a finite ring annihilated by an integer\ninvertible in $k$. Then the higher direct images of $f$ on the\nsmall étale sites satisfy\n$R^qf_*M=0$ for every $q>2d$ and every sheaf $M$ of $A$-modules on\n$X_{\\Et}$; that is, $\\operatorname{UDV}(f,A;2d)$ holds in the sense of\n[def-sf-uniform-direct-image-vanishing]. Separatedness of $f$ is\nnot needed.",
+ "statement": "Let $k$ be an algebraically closed field, let $d\\in\\mathbf N$, let $X,Y$ be finite-type $k$-schemes with $\\dim X\\leq d$, let $f:X\\to Y$ be a finite-type morphism, and let $A$ be a finite commutative coefficient ring annihilated by an integer invertible in $k$. Then the higher direct images [def-weil-pbc-direct-image] on the small étale sites [def-weil-pbc-etale-site] satisfy\n$$R^qf_*M=0\\qquad(q>2d)$$\nfor every sheaf $M$ of $A$-modules [def-weil-pbc-etale-sheaves] on $X_{\\Et}$. Separatedness of $f$ is not needed. In the global finite-field and coefficient-stage setting, and for separated $f$, to which [def-sf-uniform-direct-image-vanishing] applies, this asserts $\\operatorname{UDV}(f,A;2d)$. The dimension is the topological Krull dimension [def-kun-topological-krull-dimension], and finite type has the meaning of [def-weil-finite-type-morphism].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-etale-direct-image-vanishing.md",
   "place": "node lem-sf-etale-direct-image-vanishing, order 1790"
  },
  "stmt_deps": [
-  "def-sf-uniform-direct-image-vanishing",
-  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-etale-site"
+  "def-sf-uniform-direct-image-vanishing",
+  "def-kun-topological-krull-dimension",
+  "def-weil-finite-type-morphism"
  ],
  "proof": [
   {
-   "text": "A sheaf of $A$-modules is a torsion sheaf of abelian groups, $A$ being\nfinite. By [lemma-weil-pbc-geometric-stalk-conservative] a sheaf on the\nsmall étale site of $Y$ vanishes as\nsoon as all of its geometric stalks do, so it suffices to prove that\n$(R^qf_*M)_{\\bar y}=0$ for $q>2d$ at every geometric point\n$\\bar y\\to Y$.",
+   "text": "Since $k$ is algebraically closed, every finite separable extension is trivial, so $k$ is separably closed by [def-kun-separably-closed]. By [def-weil-finite-type-morphism], $f$ is quasi-compact and locally of finite type, and the given structure morphism $a_Y:Y\\to\\operatorname{Spec}k$ is locally of finite type. Equip $X$ with the structure map $a_X=a_Y\\circ f$; then the required compatibility is an equality by construction. No agreement of this map with an initially supplied $k$-structure on $X$ is needed: its underlying scheme and dimension have not changed. Finally, if $n>0$ annihilates $A$, then $na=0$ for every $a\\in A$, so the additive group of $A$ is torsion, including when $A$ is the zero ring.",
    "uses": [
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "def-kun-separably-closed",
+    "def-weil-finite-type-morphism"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T1 (definition-finite-type), items (2)–(3), in Tag 01T0 (section-finite-type); elementary hypothesis checks for the relative bound"
+   }
   },
   {
-   "text": "Fix such a point. The stalk of a sheaf on the small étale site is the\nfiltered colimit of its sections over the pointed étale neighbourhoods,\nand [lem-weil-pbc-qcqs-higher-direct-image] evaluates the sheaf\n$R^qf_*M$ of [def-weil-pbc-direct-image] on an étale object\n$W\\to Y$ as $H^q(W\\times_YX,M|)$; the morphism $f$ is of finite type,\nhence quasi-compact and quasi-separated, so\n\n$$\n(R^qf_*M)_{\\bar y}\n=\\varinjlim_{(W,\\bar w)}H^q\\bigl(W\\times_YX,M|\\bigr),\n$$\n\nthe colimit running over the pointed étale neighbourhoods of $\\bar y$, as in [lem-kun-cd-stalk-criterion].",
+   "text": "Apply [lem-kun-relative-torsion-direct-image-dimension-bound] with $\\Lambda=A$, the maps $a_X,a_Y$ just chosen, the given $d$, and any sheaf $M$ of $A$-modules on $X_{\\Et}$. Step 1 verifies the separably closed ground field, torsion additive coefficient group, quasi-compactness and local finite type of $f$, local finite type of $a_Y$, and compatibility of structure maps. The remaining hypothesis is exactly $\\dim X\\leq d$. Its conclusion gives $R^q f_*M=0$ for every $q>2d$. This is a theorem about module higher direct images themselves, so no identification of module and abelian derived functors is being assumed. The cited theorem has no separatedness, properness, constructibility or invertibility requirement; consequently it applies with all of the present hypotheses, including to empty $X$.",
    "uses": [
-    "lem-weil-pbc-qcqs-higher-direct-image",
-    "def-weil-pbc-direct-image",
-    "lem-kun-cd-stalk-criterion"
+    "lem-kun-relative-torsion-direct-image-dimension-bound"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-etale-direct-image-vanishing.md",
+    "place": "Proof, paragraphs 1–4: torsion cohomological-dimension argument, reused through the existing stronger relative bound"
+   }
   },
   {
-   "text": "Each $W\\times_YX$ is a finite-type $k$-scheme, and it has dimension at\nmost $d$: for a point $z\\in W\\times_YX$ with image $x\\in X$ the\nmorphism $W\\times_YX\\to X$ is étale, so\n$\\mathcal O_{W\\times_YX,z}$ is an étale local algebra over\n$\\mathcal O_{X,x}$ with finite separable residue extension, the two local\nrings have the same dimension, and [lem-kun-dimension-formula]\ncomputes the two local dimensions as the dimension at the point minus the\ntranscendence degree of the residue field over $k$; those transcendence\ndegrees agree because $\\kappa(z)/\\kappa(x)$ is finite separable. Hence\n$\\dim_z(W\\times_YX)=\\dim_xX\\leq\\dim X\\leq d$.",
+   "text": "The preceding conclusion quantifies over every $A$-module sheaf and every $q>2d$. When the global finite-field datum, coefficient stage $A=A_{E,n}$ and separated finite-type $f$ required by [def-sf-uniform-direct-image-vanishing] are present, substitute $N=2d$ into that definition. Its defining vanishing condition is exactly the conclusion of step 2, hence $\\operatorname{UDV}(f,A;2d)$ holds in that setting.",
    "uses": [
-    "lem-kun-dimension-formula"
+    "def-sf-uniform-direct-image-vanishing"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The field $k$ is algebraically closed, so\n$\\operatorname{cd}_{\\rm tor}(k)\\leq0$ by\n[lem-sf-separably-closed-torsion-cd], and\n[thm-sc-finite-type-torsion-cd] with $c=0$ gives\n$H^q(W\\times_YX,M|)=0$ for $q>2d$, for every torsion sheaf $M|$; this\nis the statement recorded for constructible coefficients as\n[fin4-lem-fibrewise-cohomological-dimension]. Every group of the\ncolimit above is therefore zero, so the stalk vanishes, and with all stalks\nthe sheaf.",
-   "uses": [
-    "lem-sf-separably-closed-torsion-cd",
-    "thm-sc-finite-type-torsion-cd",
-    "fin4-lem-fibrewise-cohomological-dimension"
-   ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-etale-direct-image-vanishing.md",
+    "place": "Statement, final UDV clause, corrected to the domain of its definition"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-qcqs-higher-direct-image",
-  "def-weil-pbc-direct-image",
-  "lem-kun-cd-stalk-criterion",
-  "lem-kun-dimension-formula",
-  "lem-sf-separably-closed-torsion-cd",
-  "thm-sc-finite-type-torsion-cd",
-  "fin4-lem-fibrewise-cohomological-dimension"
+  "def-kun-separably-closed",
+  "def-weil-finite-type-morphism",
+  "lem-kun-relative-torsion-direct-image-dimension-bound",
+  "def-sf-uniform-direct-image-vanishing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-etale-direct-image-vanishing.md",
-  "place": "## Proof"
+  "place": "Proof, paragraphs 1–4; specialization of the existing relative torsion-module direct-image bound"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism of finite type schemes over an algebraically closed field, higher etale direct images of torsion sheaves vanish in degrees greater than twice the dimension of the source.",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.instForallOfFinite, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-16",
+   "verdict": "no match: etale algebra, limit or abstract injective-dimension results do not give the scheme-theoretic higher-direct-image bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.Functor.rightDerived",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|etale.*dimension|higherDirectImage",
+   "results": "5 hits in Mathlib/AlgebraicGeometry; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: etale versus smooth relative dimension is not an etale cohomological-dimension theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of torsion etale sheaves on a finite type scheme over an algebraically closed field vanish above twice its dimension.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|isZero_higher|two_mul.*[dD]im|[dD]im.*two_mul",
+   "results": "0 hits in Mathlib/AlgebraicGeometry; ",
+   "date": "2026-10-16",
+   "verdict": "no match: etale versus smooth relative dimension is not an etale cohomological-dimension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived direct image functor for etale module sheaves over a separably closed field has cohomological dimension at most twice the Krull dimension of its source.",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.comp, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.hasInjectiveDimensionLT_iff, CategoryTheory.HasInjectiveDimensionLT.mk', CategoryTheory.HasProjectiveDimensionLT.mk, Algebra.formallyEtale_iff, CategoryTheory.hasProjectiveDimensionLT_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: etale algebra, limit or abstract injective-dimension results do not give the scheme-theoretic higher-direct-image bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct image functor on torsion étale sheaves has finite cohomological dimension bounded by twice the Krull dimension of a finite type source over a separably closed field.",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.smoothLocus_eq_compl_support_inter",
+   "date": "2026-10-15",
+   "verdict": "no match: these declarations concern etale ring algebras and cotangent modules, not higher direct images of etale module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "HasFiniteCohomologicalDimension|cohomologicalDimension|higherDirectImage|IsAddTorsion",
+   "results": "25 hits (output capped at 25); the source hits concern IsAddTorsionFree and additive-group torsion, including AddCommGroup.finite_of_fg_isAddTorsion",
+   "date": "2026-10-15",
+   "verdict": "no match: additive-group torsion declarations do not give a direct-image vanishing theorem; followed by a focused AlgebraicGeometry search"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological[Dd]imension|higherDirectImage|HasFiniteCohomologicalDimension|isZero.*[dD]erived",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -107,5 +178,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-fullcd-etale-origin"
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-etale-direct-image-vanishing",
+  "worker": "stage1",
+  "summary": "Reused the existing stronger relative torsion-module direct-image bound after checking every hypothesis, instead of creating duplicate geometric or derived-comparison nodes. Corrected the UDV notation to its defined scope, made the nonnegative bound and commutative coefficient convention explicit, and removed the imported objectwise higher-direct-image and unrestricted-neighbourhood errors. No Lean attachment is claimed.",
+  "blueprint": "The first four proof paragraphs are discharged by the existing relative bound, whose torsion cohomological-dimension method is the same as the unit’s first vanishing clause. The last statement clause is read only in the setting of its definition.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-relative-torsion-direct-image-dimension-bound",
+    "why": "Existing general relative torsion-module cohomological-dimension tool, specialized to the item. It implements the unit’s torsion dimension-bound argument; no same-unit node states this general bound, and no new copy is created."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-relative-torsion-direct-image-dimension-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-c8200cdfc",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-c8200cdfc (reviewer sub-agent of L); spot-checked: Read the item and all three proof steps in full. The existing relative theorem supplies every required hypothesis and the all-module vanishing conclusion. Source checks confirm the UDV scope correction and removed blueprint errors. No new nodes or repairs; cross-unit tool use accepted. Detailed checks are in review.md."
+ }
 }
