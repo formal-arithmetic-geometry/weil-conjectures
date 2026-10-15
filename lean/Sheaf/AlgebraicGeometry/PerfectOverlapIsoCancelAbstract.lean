@@ -5,7 +5,6 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Mathlib.CategoryTheory.NatIso
 public import Mathlib.CategoryTheory.Whiskering
 
 /-! # A categorical cancellation used by the overlap object pin -/
