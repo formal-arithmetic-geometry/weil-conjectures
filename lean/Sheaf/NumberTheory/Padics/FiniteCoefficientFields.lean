@@ -69,6 +69,19 @@ theorem finiteCoefficientFields_properties :
     (∀ E L : FiniteCoefficientFields l K, ∀ h : E ≤ L,
       letI := (IntermediateField.inclusion h).toRingHom.toAlgebra
       FiniteDimensional E.val L.val) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro E F
+    exact ⟨show E.val ≤ E.val ⊔ F.val from le_sup_left,
+      show F.val ≤ E.val ⊔ F.val from le_sup_right⟩
+  · intro x
+    refine ⟨⟨IntermediateField.adjoin ℚ_[l] {x},
+      IntermediateField.adjoin.finiteDimensional
+        (Algebra.IsAlgebraic.isAlgebraic x).isIntegral⟩, ?_⟩
+    exact IntermediateField.subset_adjoin ℚ_[l] {x} (Set.mem_singleton x)
+  · intro E L h
+    let := (IntermediateField.inclusion h).toRingHom.toAlgebra
+    have : IsScalarTower ℚ_[l] E.val L.val :=
+      IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+    exact Module.Finite.of_restrictScalars_finite ℚ_[l] E.val L.val
 
 end Padic

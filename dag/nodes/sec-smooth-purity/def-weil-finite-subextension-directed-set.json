@@ -21,9 +21,35 @@
   "def-weil-algebraic-closure",
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "The finite intermediate fields are the existing subtype. Mathlib IntermediateField.finiteDimensional_sup supplies finiteness of the supremum defining finiteCoefficientCompositum, and the bottom intermediate field defining finiteCoefficientBase is finite-dimensional. Thus the indexing type is nonempty.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For E and F the underlying compositum is E.val supremum F.val. The lattice inequalities le_sup_left and le_sup_right give both required inclusions, proving directedness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For x in K, IsAlgClosure.isAlgebraic makes x algebraic over the base field, hence integral. Take the concrete simple intermediate field IntermediateField.adjoin Q_l {x}. Mathlib IntermediateField.adjoin.finiteDimensional proves its finite dimensionality and IntermediateField.subset_adjoin proves that it contains x. This proves exhaustion without selecting an unspecified witness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For E <= L, equip L.val with the algebra structure of IntermediateField.inclusion h. The base algebra maps commute definitionally, giving IsScalarTower by IsScalarTower.of_algebraMap_eq. The recorded finite dimensionality of L.val over Q_l implies finite dimensionality over E.val by Module.Finite.of_restrictScalars_finite.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "group": "C2",
+  "date": "2026-10-15",
+  "note": "The existing natural-language proof in FiniteCoefficientFields.lean is implemented directly using Mathlib; all clauses are checked by the second reader. No additional DAG proof dependencies."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -104,5 +130,15 @@
   "group": "G1",
   "result": "fix",
   "note": "Noetherian/separated/l-invertible binders (AlgebraicGeometry.IsNoetherian by #check) = corrected (0.1) scope; levels IsFiniteLocallyConstantSheaf (recorded form); annihilation and stalk-transition kernel restated in K1 adic-limit form I^(n+1)•⊤ with I=span{ϖ}; zero-based index n = level n+1; rational Hom E⊗Hom; scalar ext index ceil((m+1)/e)-1; Qlbar 2-colimit via Grothendieck localization; tensor/unit; dependency module FiniteCoefficientFields"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T154156-L-159887",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

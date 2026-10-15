@@ -15022,3 +15022,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:41 L: merged deliver/C1/Sheaf.Paper.CondensedQbarBaseChangeCompatibility (stage 3; reviewer PASS; first push; landing 20261015T154155-L-159521 (interface); batch 20261015T154146; modules 3; new nodes 2; change records: coord/changes/constructibleToQbarComparisons.md)
 - 15:41 L: merged deliver/C1/Sheaf.Targets.EtaleSmooth (stage 3; reviewer PASS; first push; landing 20261015T154156-L-159686 (proof); batch 20261015T154146; modules 1; new nodes 0)
 - 15:41 L: merged deliver/C2/Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm (stage 3; reviewer PASS; first push; landing 20261015T154156-L-159784 (proof); batch 20261015T154146; modules 1; new nodes 0)
+- 15:41 L: merged deliver/C2/Sheaf.NumberTheory.Padics.FiniteCoefficientFields (stage 3; reviewer PASS; first push; landing 20261015T154156-L-159887 (proof); batch 20261015T154146; modules 1; new nodes 0)
