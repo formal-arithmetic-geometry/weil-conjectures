@@ -89,6 +89,35 @@ noncomputable def schemeComparisonFromRestrictions
   refine ⟨comparisonFromRestrictions (derivedPullback g) TU TV _ _ _ _ _ _ _ _ _ _ _ _
     HU HV HW (β U P hP) (β V Q hQ) (β (U ⊓ V) (P ⊓ Q) _)⟩
 
+/-- The first local comparison field is the fixed restriction/pullback map.
+This is the first projection of the comparison diagram constructor. -/
+theorem schemeComparisonFromRestrictions_betaU
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (U V : Y.Opens) (P Q : X.Opens)
+    (hP : P ≤ g ⁻¹ᵁ U) (hQ : Q ≤ g ⁻¹ᵁ V) :
+    (schemeComparisonFromRestrictions g U V P Q hP hQ).toDiagram.βU =
+      perfectOverlapRestrictionBeta g U P hP := by
+  rfl
+
+/-- The second local comparison field is the fixed restriction/pullback map.
+This is the second projection of the comparison diagram constructor. -/
+theorem schemeComparisonFromRestrictions_betaV
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (U V : Y.Opens) (P Q : X.Opens)
+    (hP : P ≤ g ⁻¹ᵁ U) (hQ : Q ≤ g ⁻¹ᵁ V) :
+    (schemeComparisonFromRestrictions g U V P Q hP hQ).toDiagram.βV =
+      perfectOverlapRestrictionBeta g V Q hQ := by
+  rfl
+
+/-- The intersection comparison field is the fixed restriction/pullback map.
+For the intersection, the required inclusion is the conjunction of the two
+given inclusions. -/
+theorem schemeComparisonFromRestrictions_betaW
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (U V : Y.Opens) (P Q : X.Opens)
+    (hP : P ≤ g ⁻¹ᵁ U) (hQ : Q ≤ g ⁻¹ᵁ V) :
+    let hW : P ⊓ Q ≤ g ⁻¹ᵁ (U ⊓ V) := fun _ hx ↦ ⟨hP hx.1, hQ hx.2⟩
+    (schemeComparisonFromRestrictions g U V P Q hP hQ).toDiagram.βW =
+      perfectOverlapRestrictionBeta g (U ⊓ V) (P ⊓ Q) hW := by
+  rfl
+
 /-- Construct the transport data for two composable scheme maps.
 The restricted composites agree after their open inclusions; pullback composition gives
 kappa. Set theta equal to kappa, the supplied local isomorphism, and the site comparison. -/
