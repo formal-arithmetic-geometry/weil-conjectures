@@ -4,12 +4,12 @@
   "is": null,
   "from": {
    "node": "def-weil-ordinary-compact-cohomology",
-   "place": "its statement (a notion the statement uses)",
+   "place": "The coefficient-object paragraph of def-weil-ordinary-compact-cohomology: the completed integral coefficient object $\\widehat{\\mathcal O}_{E,Y}$ must be derived complete; realizes step 6 (and step 9 after scalar extension) of lem-weil-constant-coefficient-objects-constructible by proving its surjective-tower auxiliary input.",
    "via": [
     "lem-weil-constant-coefficient-objects-constructible"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived limit of a surjective tower of pro-etale sheaves",
@@ -25,27 +25,218 @@
   "def-weil-abstract-derived-category",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(\\mathcal R)$, an abelian category by [def-weil-sheaf-of-modules-category]. Let $P=\\prod_{n\\geq1}F_n$ with projections $q_n$. By [lem-weil-proetale-countable-products-exact], this product exists, has sections $P(U)=\\prod_nF_n(U)$, and countable products in $\\mathcal A$ are exact. Define $d:P\\to P$ on sections by $d_U((x_n)_n)=(x_n-t_{n,U}(x_{n+1}))_n$. Since the $t_n$ are module-sheaf morphisms, these formulas are linear and commute with restriction; thus they define the asserted $1-s$. Write $L=\\varprojlim_nF_n$ and $i:L\\to P$ for the tuple of its projections. By [def-pur-sheaf-inverse-limit], $L(U)$ is exactly the module of compatible sequences.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-proetale-countable-products-exact",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits), 03CO (lemma-limits-colimits-abelian-sheaves); pro-etale product exactness as in 0947(4)"
+   }
+  },
+  {
+   "text": "Fix a site object $U$ and a section $y=(y_n)_n\\in P(U)$. By [lem-weil-pbc-proetale-affine-wcontractible-covering-family], choose a covering $\\{W_a\\to U\\}_a$ whose objects are affine and weakly contractible in the full small pro-etale site of $Y$. Apply [lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits] with $X=Y$, ring sheaf $R=\\mathcal R$, and $W=W_a$. Its exact evaluation functor sends every epimorphism $t_n$ to an epimorphism of $\\mathcal R(W_a)$-modules, hence to a surjective homomorphism $t_{n,W_a}:F_{n+1}(W_a)\\to F_n(W_a)$. The same object $W_a$ works for every $n$; this step does not assume that epimorphisms are surjective on arbitrary $U$-sections.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0990 (lemma-proetale-enough-w-contractible), with sites-cohomology.tex Tag 0946 (lemma-w-contractible)(1) and its module version in Tag 0947"
+   }
+  },
+  {
+   "text": "On a fixed $W_a$ choose, for each $n$, a set-theoretic section $\\sigma_n$ of the surjection $t_{n,W_a}$ in step 2. Starting with $x_1=0$, define recursively $x_{n+1}=\\sigma_n(x_n-y_n|_{W_a})$. Then $t_{n,W_a}(x_{n+1})=x_n-y_n|_{W_a}$ for every $n$, so $d_{W_a}((x_n)_n)=y|_{W_a}$. The tuple is a section of $P(W_a)$ by [lem-weil-proetale-countable-products-exact]. The chosen sections need not be linear or natural: they are used only to produce a local preimage of this section $y$. This is ordinary countable recursion and choice.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0947 (proposition-enough-weakly-contractibles), coordinatewise lifting on weakly contractible objects; explicit recursion for 1-s"
+   }
+  },
+  {
+   "text": "The local lifts of step 3 make $d$ an epimorphism directly: if $a,b:P\\to H$ satisfy $a\\circ d=b\\circ d$, their values on any $y\\in P(U)$ agree after restriction to every $W_a$, using its lift and naturality. The sheaf equalizer condition in [def-weil-pbc-sites-and-cohomology] makes $H(U)\\to\\prod_a H(W_a)$ injective, hence $a_U(y)=b_U(y)$ and $a=b$. On the other hand, by [def-pur-sheaf-inverse-limit], $\\ker(d_U)$ is precisely $\\{(x_n)_n:t_n(x_{n+1})=x_n\\}$, namely $L(U)$ with inclusion $i_U$. These identifications respect restrictions and scalar actions, and kernels are sectionwise by [def-weil-sheaf-of-modules-category]. Thus $i$ identifies $L$ with $\\ker d$ and is monic. Since $d$ is epic in the abelian category $\\mathcal A$, $0\\to L\\xrightarrow{i}P\\xrightarrow dP\\to0$ is short exact. This proves clause 1.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits); sites.tex Tags 00VM/00VR, the sheaf equalizer condition"
+   }
+  },
+  {
+   "text": "By [lem-weil-proetale-countable-products-exact], $\\mathcal A$ has exact countable products. Apply clause 2 of [lem-weil-derived-limit-existence] to this abelian category and the representatives $F_n[0]$. Their termwise product is $P[0]$: the degree-zero term is $P$, and all other terms are products of zero modules, hence zero. The localized coordinate projections are the product projections in $D(\\mathcal A)$. Therefore $P[0]$ with the given projections is a product of the $F_n[0]$ in this derived category. This invocation requires no enough-injectives hypothesis; that extra hypothesis belongs to clause 3 of the cited node, which is not used.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC (lemma-products), termwise products in the derived category"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-derived-ses-triangle] to the short exact sequence of step 4 in $\\mathcal A$. It yields a distinguished triangle $L[0]\\xrightarrow iP[0]\\xrightarrow dP[0]\\xrightarrow\\delta L[0][1]$. On composing $d$ with the $n$-th product projection of step 5, its sectionwise formula gives $q_n\\circ d=q_n-t_n\\circ q_{n+1}$. Thus its middle arrow is precisely the transition endomorphism $1-s$ in [def-weil-derived-limit], with the sign and indexing used there. The triangle is consequently a Roos triangle in that definition. This proves clause 2, with the specific derived limit $(L[0],i,\\delta)$; no categorical inverse-limit universal property for arbitrary objects of $D(\\mathcal A)$ is being asserted.",
+   "uses": [
+    "lem-sf-derived-ses-triangle",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 08TC (definition-derived-limit)"
+   }
+  },
+  {
+   "text": "For the compatible sheaf maps $g_n:G\\to F_n$, the inverse-limit universal property in [def-pur-sheaf-inverse-limit] supplies a unique sheaf map $h:G\\to L$ with $p_nh=g_n$. Its composite with $i$ has all coordinates $g_n$, so after placing sheaves in degree zero it equals $(g_n)_n$ by the product universal property [def-weil-category-product] and step 5. Conversely, every derived morphism $u:G[0]\\to L[0]$ comes from a unique sheaf morphism $u_0:G\\to L$ by [lem-weil-pbc-derived-single-fully-faithful]. If $iu=(g_n)_n$, composing with each projection gives $S(p_nu_0)=S(g_n)$, where $S$ is the degree-zero embedding. Its faithfulness gives $p_nu_0=g_n$, hence $u_0=h$ and $u=S(h)$. This proves exactly the uniqueness of clause 3 for the derived limit chosen in clause 2. The parenthetical vanishing also has the stated sign: for the standard t-structure [def-sbc-standard-tstructure-derived-category], $G[0]$ is in $D^{\\leq0}$ and $P[0]$ in $D^{\\geq0}$; axiom 2 of [def-weil-t-structure] gives $\\operatorname{Hom}(G[0],P[0][-1])=0$. Here $P[0][-1]$ is supported in cohomological degree $1$, not degree $-1$. Finally, if $u$ and $v$ both have the prescribed composite with $i$, the uniqueness just proved gives $u-v=0$. Writing $b:P[0][-1]\\to L[0]$ for the shifted connecting arrow of step 6 (with the rotation sign), this difference is explicitly $b\\circ 0$, where $0:G[0]\\to P[0][-1]$. This verifies the parenthetical factorization without invoking any unstated exactness theorem for representable Hom.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-category-product",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-t-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS (lemma-negative-exts)(2), degree-zero Hom and negative Ext; Tag 08J5 for the standard truncations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-proetale-countable-products-exact",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-derived-limit-existence",
+  "lem-sf-derived-ses-triangle",
+  "def-weil-derived-limit",
+  "def-weil-category-product",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-t-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent-written module-sheaf expansion of Proposition 3.1.10, using existing weakly-contractible evaluation and exact-products nodes; clause 3 by the degree-zero embedding. Second reader checked the paper and the Stacks .tex files in /home/ubuntu/weil-launcher-nt/literature/ (read-only literature cache); see report.md."
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rln 'Replete\\|replete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'homotopyLimit\\|HomotopyLimit\\|derivedLimit\\|lim¹\\|limOne\\|Roos' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "'replete' only in AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, in an unrelated sense; no derived or homotopy limit of a tower in a triangulated or derived category, no lim^1 for sheaves",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "tool": "leanfinder",
+   "query": "surjective inverse tower of sheaves on a pro-etale site has ordinary limit equal to derived limit via the Roos triangle",
+   "results": "8 hits: CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, CategoryTheory.RanIsSheafOfIsCocontinuous.isLimitMultifork, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux, CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac_assoc, CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac, CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux, Profinite.Extend.isLimitCone, CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj",
+   "date": "2026-10-15",
+   "verdict": "no match for the whole item: generic derived-category, products, or set/sheaf limit ingredients do not assert all three pro-etale module-sheaf clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, Triangulated, derived limit, Roos triangle, product, inverse system",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory'",
+   "date": "2026-10-15",
+   "verdict": "invalid Loogle query (unknown identifier); no evidence of absence; replaced by the valid singleFunctor/Full and singleFunctor/Faithful queries"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'Mittag\\|surjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/CofilteredSystem.lean; grep -rln 'Mittag' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "CategoryTheory/CofilteredSystem.lean: `Functor.IsMittagLeffler`, `surjective_toEventualRanges` (nonemptiness and surjectivity of limits of cofiltered systems of sets); RingTheory/AdicCompletion/Exactness.lean uses Mittag-Leffler for modules. Nothing for sheaves on a site or a replete topos",
-   "date": "2026-10-09",
-   "verdict": "no match (only the set-valued and module-valued Mittag-Leffler statements)"
+   "query": "replete|Roos|derived.?limit|homotopy.?limit",
+   "results": "0 hits: ; subdirectory argument Mathlib/CategoryTheory",
+   "date": "2026-10-15",
+   "verdict": "misdirected grep (Mathlib/ prefix repeated by search helper); its empty output is not evidence of absence; corrected by subsequent grep with CategoryTheory subdirectory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Roos triangle for a countable inverse system of sheaves with epimorphic transition maps in a derived category",
+   "results": "8 hits: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.triangleOfSESIso, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.triangleOfSES, DerivedCategory.triangleOfSESδ, CategoryTheory.ShortComplex.ShortExact.singleTriangle, DerivedCategory.mem_distTriang_iff, DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-15",
+   "verdict": "no match for the whole item: generic derived-category, products, or set/sheaf limit ingredients do not assert all three pro-etale module-sheaf clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "complete_distinguished_triangle_morphism, IsDerivedLimitTriangle, HasCountableProducts",
+   "results": "0 hits: ; loogle: unknown identifier 'complete_distinguished_triangle_morphism'",
+   "date": "2026-10-15",
+   "verdict": "invalid Loogle query (unknown identifier); no evidence of absence; replaced by the valid singleFunctor/Full and singleFunctor/Faithful queries"
+  },
+  {
+   "tool": "grep",
+   "query": "complete_distinguished_triangle_morphism|IsDerivedLimitTriangle|HasCountableProducts",
+   "results": "0 hits: ; subdirectory argument Mathlib/CategoryTheory/Triangulated",
+   "date": "2026-10-15",
+   "verdict": "misdirected grep (Mathlib/ prefix repeated by search helper); its empty output is not evidence of absence; corrected by subsequent grep with CategoryTheory subdirectory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective inverse tower of module sheaves on a pro-etale site has ordinary limit as its homotopy limit",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "replete|Roos|derived.?limit|homotopy.?limit",
+   "results": "0 hits: ; subdirectory argument CategoryTheory",
+   "date": "2026-10-15",
+   "verdict": "no match for the whole item: generic derived-category, products, or set/sheaf limit ingredients do not assert all three pro-etale module-sheaf clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"Full\"",
+   "results": "2 hits: CochainComplex.instFullIntSingleFunctor, DerivedCategory.instFullSingleFunctor",
+   "date": "2026-10-15",
+   "verdict": "no match for the whole item: generic derived-category, products, or set/sheaf limit ingredients do not assert all three pro-etale module-sheaf clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|replete|Roos|derived.?limit|homotopy.?limit",
+   "results": "5 hits: Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean; subdirectory argument CategoryTheory",
+   "date": "2026-10-15",
+   "verdict": "no match for the whole item: generic derived-category, products, or set/sheaf limit ingredients do not assert all three pro-etale module-sheaf clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category where countable products are exact, an inverse sequence with epimorphic maps has its limit concentrated in degree zero as homotopy limit",
+   "results": "8 hits: CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, HomologicalComplex.isLimitOfEval, LightCondensed.epi_π_app_zero_of_epi, HomologicalComplex.isLimitConeOfHasLimitEval, ChainComplex.isIso_descOpcycles_iff, CategoryTheory.Limits.SequentialProduct.functorMap_epi, instQFactorsThroughHomotopyDown",
+   "date": "2026-10-15",
+   "verdict": "Second-reader search: generic coherent-topology inverse-limit projections, sheaf limits, sequential products, or full/faithful degree-zero embeddings only; no complete pro-etale module-sheaf Roos theorem. Existing full-faithfulness node already supplies the needed ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "SequentialProduct|epi_π_app_zero_of_epi|homotopyLimit|HomotopyLimit",
+   "results": "5 hits: Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean, Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean, Mathlib/CategoryTheory/Limits/Shapes/SequentialProduct.lean, Mathlib/CategoryTheory/Limits/Shapes/SequentialProduct.lean, Mathlib/CategoryTheory/Limits/Shapes/SequentialProduct.lean",
+   "date": "2026-10-15",
+   "verdict": "Second-reader search: generic coherent-topology inverse-limit projections, sheaf limits, sequential products, or full/faithful degree-zero embeddings only; no complete pro-etale module-sheaf Roos theorem. Existing full-faithfulness node already supplies the needed ingredient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"Faithful\"",
+   "results": "2 hits: CochainComplex.instFaithfulIntSingleFunctor, DerivedCategory.instFaithfulSingleFunctor",
+   "date": "2026-10-15",
+   "verdict": "Second-reader search: generic coherent-topology inverse-limit projections, sheaf limits, sequential products, or full/faithful degree-zero embeddings only; no complete pro-etale module-sheaf Roos theorem. Existing full-faithfulness node already supplies the needed ingredient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary inverse limit of a sequence of sheaves with surjective transition morphisms represents the homotopy limit when evaluation on a basis of site objects is exact",
+   "results": "8 hits: CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, CategoryTheory.Sheaf.isLimitMultiforkOfIsLimit, CategoryTheory.Sheaf.isSheaf_of_isLimit, TopCat.isSheaf_of_isLimit, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.isLimit, CategoryTheory.Presheaf.isLimit_iff_isSheafFor, PresheafOfModules.isSheaf_of_isLimit, TopCat.Presheaf.SheafConditionPairwiseIntersections.isLimitMapConeOfIsLimitSheafConditionFork",
+   "date": "2026-10-15",
+   "verdict": "Second-reader search: generic coherent-topology inverse-limit projections, sheaf limits, sequential products, or full/faithful degree-zero embeddings only; no complete pro-etale module-sheaf Roos theorem. Existing full-faithfulness node already supplies the needed ingredient."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +256,54 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-proetale-surjective-tower-derived-limit",
+  "worker": "stage1",
+  "summary": "Kept all three clauses and all hypotheses. Seven steps give sectionwise products and kernels, a common affine weakly contractible cover, the explicit recursion x_(n+1)=sigma_n(x_n-y_n), categorical epimorphism cancellation, termwise derived products, the short-exact Roos triangle, and degree-zero uniqueness by the existing fully faithful embedding. Reused all required geometric and homological tools; created no nodes. Searches found only generic ingredients, not a complete attachment or Mathlib leaf.",
+  "blueprint": "The nearest blueprint ancestor is def-weil-ordinary-compact-cohomology; its coefficient-object paragraph is supported through steps 6 and 9 of lem-weil-constant-coefficient-objects-constructible. Unit sk-def-sf-admissible has no proof steps to replace. Whole-blueprint searches for surjective tower, derived limit, replete, countable products found no equivalent full statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic exact-countable-products input for arbitrary ring-sheaf modules, needed for derived products; the admissibility unit contains no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "why": "Generic geometric cover of the same small pro-etale site for the local recursion; the admissibility unit supplies no covering theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+    "why": "Generic exact evaluation for arbitrary ring-sheaf modules makes all transitions surjective over a common object; no such theorem in the admissibility unit."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Only clause 2, the generic termwise-product theorem for derived categories of abelian categories with exact countable products, is used."
+   },
+   {
+    "node": "def-sbc-standard-tstructure-derived-category",
+    "why": "Generic standard t-structure, used only to check the explanatory negative-Hom parenthesis of clause 3."
+   },
+   {
+    "node": "def-weil-t-structure",
+    "why": "Orthogonality axiom used only with the standard t-structure on the same arbitrary module-sheaf derived category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "lem-weil-derived-limit-existence",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-t-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q01-03f59d2f5",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-03f59d2f5 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and unit/chapter route. All seven steps are supported; checked arbitrary ring-sheaf coefficients, local surjectivity, derived products, Roos signs, degree-zero uniqueness, edge cases, and duplicate candidates. No repairs needed. Accepted six declared tool uses. Target coefficient comparisons remain separate obligations. Details in review.md."
+ }
 }
