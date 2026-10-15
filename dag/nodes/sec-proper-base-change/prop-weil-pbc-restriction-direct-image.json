@@ -297,5 +297,28 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-679db99a0 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, sources, report, and route in full. The truncation induction proves constructibility and the sharp interval [a,b+c]. Repaired one missing citation in step 1 to the existing canonical coefficient-ring isomorphism theorem. Corrected JSON and detailed source, hypothesis, edge-case, dependency, and tool-use checks are recorded under fixes/ and review.md. No new nodes or target changes.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f84b2255c",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, module, report, edge cases, docstrings, and universes; scompile.py succeeded with no findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RestrictionDirectImage",
+  "declaration": "AlgebraicGeometry.ProEtale.restrictionDirectImage",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedDirectImage_commShift",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedDirectImage_isTriangulated",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientBoundedConstructible_isTriangulated"
+  ],
+  "file": "lean/Sheaf/Paper/RestrictionDirectImage.lean",
+  "statement": "theorem restrictionDirectImage (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (hI : I.FG) (htorsion : IsAddTorsion (A ⧸ I)) [hfinite : ∀ m : ℕ+, Finite (A ⧸ I ^ (m : ℕ))] (hperfect : ∀ m : ℕ+, @DerivedCategory.IsPerfectRingComplex A _ (HasDerivedCategory.standard _) ((@DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) _ _ (HasDerivedCategory.standard _) 0).obj (ModuleCat.of A (A ⧸ I ^ (m : ℕ))))) (n : ℕ+) {S T : Scheme.{u}} [IsNoetherian T] (hdim : ∃ d : ℕ, topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (horder : ∀ (a : A ⧸ I ^ (n : ℕ)) (t : T), IsUnit (addOrderOf a : T.presheaf.stalk t)) (f : S ⟶ T) (c : ℕ) (hfin : ConstructibleDirectImageFiniteness A I hI htorsion hperfect n hdim horder f c) : letI : TopologicalSpace (A ⧸ I ^ (n : ℕ)) := ⊥ letI : DiscreteTopology (A ⧸ I ^ (n : ℕ)) := ⟨rfl⟩ ∃ h : ∀ K : FiniteCoefficientBoundedConstructibleDerivedCategory S (A ⧸ I ^ (n : ℕ)), isBoundedConstructibleFiniteCoefficient T (A ⧸ I ^ (n : ℕ)) ((finiteCoefficientDerivedDirectImage f (A ⧸ I ^ (n : ℕ))).obj K.obj), ((isBoundedConstructibleFiniteCoefficient T (A ⧸ I ^ (n : ℕ))).lift ((isBoundedConstructibleFiniteCoefficient S (A ⧸ I ^ (n : ℕ))).ι ⋙ finiteCoefficientDerivedDirectImage f (A ⧸ I ^ (n : ℕ))) h).IsTriangulated ∧ ∀ (K : FiniteCoefficientBoundedConstructibleDerivedCategory S (A ⧸ I ^ (n : ℕ))) (a b : ℤ), (∀ i : ℤ, (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor (FiniteCoefficientModules S (A ⧸ I ^ (n : ℕ))) i).obj K.obj)) → ∀ i : ℤ, (i < a ∨ b + (c : ℤ) < i) → IsZero ((DerivedCategory.homologyFunctor (FiniteCoefficientModules T (A ⧸ I ^ (n : ℕ))) i).obj ((finiteCoefficientDerivedDirectImage f (A ⧸ I ^ (n : ℕ))).obj K.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
