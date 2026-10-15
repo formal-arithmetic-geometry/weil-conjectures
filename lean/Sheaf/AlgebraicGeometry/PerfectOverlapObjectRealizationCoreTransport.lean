@@ -228,6 +228,20 @@ theorem transportDataOfComposite_siteV
       openSiteReturnIso X (gf ⁻¹ᵁ V) := by
   rfl
 
+/-- Restricting the two-step map to an open gives the restriction of its
+composite. This is the geometric equation used to define the transport
+isomorphism and the corresponding open-pullback cube. -/
+theorem perfectOverlapRestrictedComposite
+    {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
+    (hgf : g ≫ f = gf) (W : Y₀.Opens) :
+    let hP : gf ⁻¹ᵁ W ≤ g ⁻¹ᵁ (f ⁻¹ᵁ W) := by
+      rw [← Scheme.Hom.comp_preimage, hgf]
+    g.resLE (f ⁻¹ᵁ W) (gf ⁻¹ᵁ W) hP ≫ (f ∣_ W) = gf ∣_ W := by
+  intro hP
+  apply (cancel_mono W.ι).1
+  simp only [Category.assoc, morphismRestrict_ι]
+  rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, hgf]
+
 
 
 end
