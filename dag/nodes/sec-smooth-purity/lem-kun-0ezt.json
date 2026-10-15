@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-kun-0ezt",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Higher direct images along limits of cartesian squares",
- "statement": "Let $I$ be directed and let\n\n$$\n\\begin{array}{ccc}\nX_i&\\xleftarrow{\\;h_i\\;}&Y_i\\\\\n\\Big\\downarrow{\\scriptstyle f_i}&&\\Big\\downarrow{\\scriptstyle e_i}\\\\\nS_i&\\xleftarrow{\\;g_i\\;}&T_i\n\\end{array}\n\\qquad(i\\in I)\n$$\n\nbe an inverse system of\ncartesian squares with affine\ntransition morphisms, where every $g_i$ is\nquasi-compact and\nquasi-separated. Write\n\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle e}\\\\\nS&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nIf $(F_i)$ is a compatible system of torsion abelian sheaves on\n$T_i$, $F=\\varinjlim_ip_i^{-1}F_i$, and if for a fixed $q\\ge0$ every\nbase-change map\n\n$$\nf_i^{-1}R^qg_{i,*}F_i\\longrightarrow R^qh_{i,*}e_i^{-1}F_i\n$$\n\nis an isomorphism, then so is\n\n$$\nf^{-1}R^qg_*F\\longrightarrow R^qh_*e^{-1}F.\n$$\n\n(*Source:* Stacks Project,\n[Tag `0EZT`](https://stacks.math.columbia.edu/tag/0EZT), second\nassertion; the first assertion of that tag, for sheaves of sets, is not used\nin this chapter.) In the Stacks Project this assertion is deduced from Lemma 59.51.8,\n[Tag `0EYM`](https://stacks.math.columbia.edu/tag/0EYM)\n(higher direct images commute with filtered colimits along an inverse\nsystem whose transition morphisms are affine), applied to the two sides\nof the base-change map.\nThe torsion hypothesis recorded here is the case used in this chapter, whose\ncoefficients are $\\kunZn$-module sheaves.",
+ "statement": "Let $I$ be directed and let\n\n$$\n\\begin{array}{ccc}\nX_i&\\xleftarrow{\\;h_i\\;}&Y_i\\\\\n\\Big\\downarrow{\\scriptstyle f_i}&&\\Big\\downarrow{\\scriptstyle e_i}\\\\\nS_i&\\xleftarrow{\\;g_i\\;}&T_i\n\\end{array}\n\\qquad(i\\in I)\n$$\n\nbe an inverse system of\ncartesian squares with affine\ntransition morphisms, where every $g_i$ is\nquasi-compact and\nquasi-separated. Let $X=\\varprojlim_iX_i$, $Y=\\varprojlim_iY_i$, $S=\\varprojlim_iS_i$ and $T=\\varprojlim_iT_i$; their induced limit square is\n\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle f}&&\\Big\\downarrow{\\scriptstyle e}\\\\\nS&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nWrite $p_i:T\\to T_i$ for the projections. All sheaves are on the small etale sites. If $(F_i)$ is a compatible system of torsion abelian sheaves on\n$T_i$ (with transition morphisms $a_{ji}^{-1}F_i\\to F_j$ satisfying the identity and composition laws for the transitions $a_{ji}:T_j\\to T_i$), $F=\\varinjlim_ip_i^{-1}F_i$, and if for a fixed $q\\ge0$ every\nbase-change map\n\n$$\nf_i^{-1}R^qg_{i,*}F_i\\longrightarrow R^qh_{i,*}e_i^{-1}F_i\n$$\n\nis an isomorphism, then so is\n\n$$\nf^{-1}R^qg_*F\\longrightarrow R^qh_*e^{-1}F.\n$$\n\n(*Source:* Stacks Project,\n[Tag `0EZT`](https://stacks.math.columbia.edu/tag/0EZT), second\nassertion; the first assertion of that tag, for sheaves of sets, is not used\nin this chapter.) In the Stacks Project this assertion is deduced from Lemma 59.51.8,\n[Tag `0EYM`](https://stacks.math.columbia.edu/tag/0EYM)\n(higher direct images commute with filtered colimits along an inverse\nsystem whose transition morphisms are affine), applied to the two sides\nof the base-change map.\nThe torsion hypothesis recorded here is the case used in this chapter, whose\ncoefficients are $\\kunZn$-module sheaves.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0ezt.md",
   "place": "node lem-kun-0ezt, order 1657",
@@ -24,14 +24,200 @@
  },
  "stmt_deps": [
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-category-colimit",
+  "pqf-def-affine-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Write $r_i:X\\to X_i$, $s_i:S\\to S_i$, $p_i:T\\to T_i$ and $t_i:Y\\to Y_i$ for the projections. The limit square is cartesian directly from the universal properties: maps $Z\\to X$ and $Z\\to T$ with equal composites to $S$ give, at every stage, a unique map $Z\\to Y_i$; these maps are compatible because their two projections are compatible and the stage square has the pullback uniqueness property. They therefore give a unique map $Z\\to Y$ with the prescribed projections. Because the stage squares are cartesian, $h_i$ is a base change of $g_i$ and hence is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](3). Apply the sheaf-level composition identifications of [lem-weil-pbc-derived-inverse-image-composition](1) to $p_i e=e_i t_i$. Since inverse image preserves colimits by [lem-weil-pbc-inverse-image-preserves-colimits], the coprojections give\n$$e^{-1}F\\cong\\varinjlim_i e^{-1}p_i^{-1}F_i\\cong\\varinjlim_i t_i^{-1}e_i^{-1}F_i.$$\nThe transition from $i$ to $j$ on the latter system is inverse image of the given coefficient transition, conjugated by these composition identifications. Their associativity gives the identity and composition laws, so this is a system to which relative continuity applies.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-weil-pbc-inverse-image-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, proof: qcqs base change and the coefficient colimit on Y"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-0eym] to the inverse system $g_i:T_i\\to S_i$ and the given coefficient system. Both its source and base transition morphisms are affine by hypothesis, and every $g_i$ is qcqs. Its canonical comparison gives $R^qg_*F\\cong\\varinjlim_i s_i^{-1}R^qg_{i,*}F_i$. Pull back along $f$ and use [lem-weil-pbc-inverse-image-preserves-colimits], followed by the composition identifications for $s_i f=f_i r_i$ from [lem-weil-pbc-derived-inverse-image-composition], to obtain the canonical isomorphism\n$$C_A:\\varinjlim_i A_i\\xrightarrow{\\sim}f^{-1}R^qg_*F,\\qquad A_i=r_i^{-1}f_i^{-1}R^qg_{i,*}F_i.$$\nThe legs of $C_A$ are the inverse images of the specified continuity legs, with precisely those composition identifications.",
+   "uses": [
+    "lem-kun-0eym",
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, proof: the second displayed continuity equality, for the source"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-0eym] to $h_i:Y_i\\to X_i$ and the coefficient system $e_i^{-1}F_i$ of Step 1. The four given systems supply affine transitions on $Y_i$ and $X_i$; the required qcqs hypotheses were checked in Step 1. Its limit coefficient is $e^{-1}F$, by that step. Thus its canonical legs give\n$$C_B:\\varinjlim_i B_i\\xrightarrow{\\sim}R^qh_*e^{-1}F,\\qquad B_i=r_i^{-1}R^qh_{i,*}e_i^{-1}F_i.$$\nNo statement about the stages being cartesian over each other has been used.",
+   "uses": [
+    "lem-kun-0eym"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, proof: the first displayed continuity equality, for the target"
+   }
+  },
+  {
+   "text": "Let $\\beta_i:f_i^{-1}R^qg_{i,*}F_i\\to R^qh_{i,*}e_i^{-1}F_i$ and $\\beta:f^{-1}R^qg_*F\\to R^qh_*e^{-1}F$ be the specified exchange maps, and put $d_i=r_i^{-1}\\beta_i:A_i\\to B_i$. Write $x_{ji}:X_j\\to X_i$, $y_{ji}:Y_j\\to Y_i$, $a_{ji}:T_j\\to T_i$ and $s_{ji}:S_j\\to S_i$ for the four transition maps, and $\\phi_{ji}:a_{ji}^{-1}F_i\\to F_j$ for the given coefficient map. We verify that the $d_i$ commute with transitions and with the limit legs.\n\nFirst work on bounded below derived categories. Denote stage exchange by $E_i$, limit exchange by $E$, exchange for the square $(a_{ji},s_{ji},g_j,g_i)$ by $P_{ji}$, and exchange for $(y_{ji},x_{ji},h_j,h_i)$ by $Q_{ji}$. For these possibly noncartesian squares, use the mate formula displayed in [def-weil-pbc-derived-exchange]: the square isomorphism is formed from the composition isomorphisms and the equality of composite morphisms. That formula involves no pullback universal property. For $K\\in\\Dplus((T_i)_{\\Et})$, pasting along the nonadjoint sides by [lem-weil-pbc-mate-pasting](1) gives\n$$\n E_j(a_{ji}^{-1}K)\\circ f_j^{-1}P_{ji}(K)\n =Q_{ji}(e_i^{-1}K)\\circ x_{ji}^{-1}E_i(K).\n$$\nIndeed both pasted square transformations start at $h_j^{-1}f_j^{-1}s_{ji}^{-1}$, identified with $h_j^{-1}x_{ji}^{-1}f_i^{-1}$, and end at $e_j^{-1}a_{ji}^{-1}g_i^{-1}$, identified with $y_{ji}^{-1}e_i^{-1}g_i^{-1}$. Both are the composition comparison through the common morphism $Y_j\\to S_i$; their equality is exactly the associativity of [lem-weil-pbc-derived-inverse-image-composition](3). The mate formula therefore gives the displayed equality. Set $K=F_i[0]$ and postcompose with $Rh_{j,*}e_j^{-1}(\\phi_{ji}[0])$. Naturality of $E_j$ in its coefficient, stated in [def-weil-pbc-derived-exchange], moves this coefficient map past $E_j$. Pulling back by $r_j^{-1}$ and identifying $r_i=x_{ji}r_j$ gives the two diagram transition composites.\n\nFor the limit legs, define $P_i:s_i^{-1}Rg_{i,*}\\to Rg_*p_i^{-1}$ and $Q_i:r_i^{-1}Rh_{i,*}\\to Rh_*t_i^{-1}$ by the mate formula for the projection squares. Pasting gives the explicit equality\n$$\n E(p_i^{-1}K)\\circ f^{-1}P_i(K)\n =Q_i(e_i^{-1}K)\\circ r_i^{-1}E_i(K).\n$$\nHere the two underlying square transformations run from $h^{-1}f^{-1}s_i^{-1}$ to $e^{-1}p_i^{-1}g_i^{-1}$ and are both the composition comparison through $Y\\to S_i$, by the same cited associativity identity. Apply [lem-weil-pbc-mate-pasting](1) to these two transformations. Set $K=F_i[0]$ and postcompose with $Rh_*e^{-1}(\\iota_i[0])$, where $\\iota_i:p_i^{-1}F_i\\to F$ is the coprojection. Naturality of $E$ moves this coefficient map to the source-side leg. Step 1 identifies $e^{-1}\\iota_i$ with the coefficient leg used for $C_B$.\n\nTake degree-$q$ cohomology in both equations. The natural cohomology identifications for exact inverse images follow from [prop-weil-pbc-inverse-image-exact] and [lem-weil-pbc-exact-functor-complex-cohomology]. On the cartesian stage and limit squares, [lem-kun-bc-map-on-cohomology] identifies these maps with $\\beta_i$ and $\\beta$. On transition and projection squares they are the specified degree-$q$ mates in [lem-kun-0eym]. Thus, if $u_{ji}:A_i\\to A_j$ and $v_{ji}:B_i\\to B_j$ are the diagram transitions, the first equation gives $d_j u_{ji}=v_{ji}d_i$. If $\\lambda_i:A_i\\to f^{-1}R^qg_*F$ and $\\mu_i:B_i\\to R^qh_*e^{-1}F$ are the continuity legs, the second equation gives $\\beta\\lambda_i=\\mu_i d_i$.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "def-weil-pbc-derived-exchange",
+    "lem-kun-bc-map-on-cohomology",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-kun-0eym"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, final inference; explicit canonical-map check using the transition/leg construction of Tag 0EYM"
+   }
+  },
+  {
+   "text": "Every $\\beta_i$ is an isomorphism by hypothesis, and a functor preserves its inverse, so every $d_i$ is an isomorphism. If $a_{ji}:A_i\\to A_j$ and $b_{ji}:B_i\\to B_j$ now denote the diagram transitions, Step 4 gives $d_j a_{ji}=b_{ji}d_i$, hence $a_{ji}d_i^{-1}=d_j^{-1}b_{ji}$. Thus the inverses also form a morphism of diagrams. The colimit universal property [def-weil-pbc-category-colimit] induces mutually inverse morphisms $d:\\varinjlim A_i\\to\\varinjlim B_i$ and $d^{-1}$, since their composites are the identity on every coprojection. The leg equation in Step 4 and the same uniqueness clause give $\\beta C_A=C_B d$. Steps 2 and 3 identify $C_A,C_B$ as isomorphisms. Therefore $\\beta=C_B d C_A^{-1}$ is an isomorphism, as required.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZT, lemma-base-change-Rf-star-colim, final inference from the two continuity comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-kun-0eym",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-derived-exchange",
+  "lem-kun-bc-map-on-cohomology",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0EZT (lemma-base-change-Rf-star-colim) and 0EYM (lemma-relative-colimit-general); second reader checked the raw Stacks etale-cohomology.tex in sandbox sources/etale-cohomology.tex, fetched 2026-10-16. Agent expansion of the limit pullback universal property and of the canonical-map verification in Step 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "filtered[[:space:]]+colimit.*direct[[:space:]]+image",
+   "results": "msearch printed OK 0 hits with subdirectory Mathlib/CategoryTheory. This wrongly duplicates its built-in Mathlib/ prefix, so the requested source directory did not exist. Rerun with the correct root below.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: incorrect subdirectory, corrected by the later source grep"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|directImage.*filtered.*colimit",
+   "results": "msearch printed OK 0 hits with subdirectory Mathlib/. This wrongly duplicates its built-in Mathlib/ prefix, so the requested source directory did not exist. Rerun with the correct root below.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: incorrect subdirectory, corrected by the later source grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "higherDirectImage filtered colimit affine inverse system",
+   "results": "loogle: Unknown identifier `higherDirectImage`",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: rejected query; replaced by quoted-name searches below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct image commutes with filtered colimits along affine inverse limits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct images commute with filtered colimits along an inverse system of schemes with affine transition morphisms",
+   "results": "AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux_assoc, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-16",
+   "verdict": "no match: structure-sheaf section descent or etale-site infrastructure, not relative higher direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuity of étale cohomology higher direct image under affine inverse limits",
+   "results": "AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "date": "2026-10-16",
+   "verdict": "no match: structure-sheaf section descent or etale-site infrastructure, not relative higher direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "R^q pushforward preserves filtered colimits",
+   "results": "loogle: Unknown identifier `R`",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: rejected query; replaced by quoted-name searches below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "étale cohomology commutes with filtered colimits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "results": "CategoryTheory.Functor.HasRightDerivedFunctor, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension', CategoryTheory.Functor.HasRightDerivedFunctor.mk, CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension, CategoryTheory.Functor.hasRightDerivedFunctor_iff, CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.IsRightDerivedFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: general derived-functor/cohomology-presheaf infrastructure, no varying-scheme continuity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologyPresheaf\"",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: general derived-functor/cohomology-presheaf infrastructure, no varying-scheme continuity"
+  },
+  {
+   "tool": "grep",
+   "query": "def cohomologyPresheaf|def cohomologyPresheafFunctor",
+   "results": "72 Searched CategoryTheory/Sites/SheafCohomology/Basic.lean.",
+   "date": "2026-10-16",
+   "verdict": "no match: read the displayed declarations; they concern structure-sheaf sections or the definition of a cohomology presheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_isColimit_Γ_mapCocone|exists_app_map_eq_map_of_isLimit",
+   "results": "714, 823, 961, 969, 974 Searched AlgebraicGeometry/AffineTransitionLimit.lean.",
+   "date": "2026-10-16",
+   "verdict": "no match: read the displayed declarations; they concern structure-sheaf sections or the definition of a cohomology presheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered[[:space:]]+colimit.*direct[[:space:]]+image",
+   "results": "No hits. Searched CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|directImage.*filtered.*colimit",
+   "results": "No hits. Searched all Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -68,5 +254,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-0ezt",
+  "worker": "stage1",
+  "summary": "Expanded Tag 0EZT into five steps, with separate source and target applications of varying-base continuity, a canonical-map cube verification using general mates, and an explicit inverse on the colimit. Added one unsplit continuity lemma, Tag 0EYM, after checking the whole DAG and blueprint: existing 09Z1 is fixed-base, and the cartesian higher-image nodes fix a sheaf and, in the continuity assertions, a field base. Clarified only the implicit limits, projections and small-etale topology in the statement; retained its torsion hypothesis and conclusion. No finished project declaration or Mathlib match found. Second reader supplied the universal-property proof that the limit square is cartesian and explicit derived stage/limit mate equations, including coefficient postcomposition and the exact-inverse-image cohomology identifications.",
+  "blueprint": "Realizes the entire sole blueprint proof paragraph: its two applications of Tag 0EYM and the final passage of stage base-change isomorphisms to the limit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-preserves-colimits",
+    "why": "Generic abelian-sheaf inverse-image continuity needed on both sides of the prescribed 0EYM route; the unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Canonical inverse-image composition and coherence identify coefficient systems and the cube maps; generic formal tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "General pasting formula for adjunction mates verifies compatibility of the canonical continuity and base-change maps, including noncartesian transition faces."
+   },
+   {
+    "node": "def-weil-pbc-derived-exchange",
+    "why": "The canonical mate formula and coefficient naturality specify which base-change map is being compared."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Exactness of inverse image identifies the degree-q cohomology of the derived transition and leg equations with their sheaf-level formulas; a generic sheaf tool, leaving the prescribed continuity route unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-derived-exchange",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q40-105d4d009",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-105d4d009 (reviewer sub-agent of L); spot-checked: Read both nodes, every cited statement, Stacks 0EZT/0EYM and supporting sources. All five proof steps and canonical-map equations check; no duplicate or new cycle found. Fixed only missing new-node metadata. Full checks, accepted tool_uses, and inherited-cycle diagnostic are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
