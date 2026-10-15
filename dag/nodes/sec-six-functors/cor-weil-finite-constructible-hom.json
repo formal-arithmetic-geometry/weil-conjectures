@@ -3,40 +3,74 @@
  "blueprint": {
   "is": "cor-weil-finite-constructible-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Internal Hom for arbitrary finite-stage constructible complexes",
- "statement": "Let $\\dim X\\leq d$, and let $K,L\\in D^b_{ctf}(X,A_{E,n})$,\non the etale or pro-etale site over $\\overline{\\mathbf F}_q$.\nThen $R\\mathcal Hom_A(K,L)$ is bounded constructible of finite\nTor amplitude. If the Tor intervals of $K,L$ are respectively\n$[a,b]$, $[c,e]$, one valid interval for this internal Hom is\n$[c-b-2d,e-a+2d]$.",
+ "statement": "Fix the global finite-field datum, with $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber]. Let $\\ell\\ne p$ be a prime, let $E/\\mathbf Q_\\ell$ be a finite extension with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and let $n\\geq1$ be an integer. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism], and let $d\\in\\mathbf Z_{\\geq0}$ satisfy $\\dim X\\leq d$, using topological Krull dimension [def-kun-topological-krull-dimension]. Work on either the small etale site [def-weil-pbc-etale-site] or the small pro-etale site [def-weil-pbc-proetale-site] of $X$, with constant coefficient ring sheaf $A_X$. Use bounded constructibility on the chosen site [def-weil-pbc-constructible-complexes, def-weil-finite-torsion-constructibility], and let $D^b_{ctf}(X,A)$ be its full subcategory of objects of finite Tor amplitude [def-weil-finite-tor-amplitude]: an object has Tor amplitude in $[u,v]$ when its derived tensor product with every $A_X$-module sheaf in degree zero has cohomology only in degrees $u$ through $v$.\n\nFor all $K,L\\in D^b_{ctf}(X,A)$ the derived internal Hom $R\\mathcal Hom_A(K,L)$ [def-pur-derived-internal-hom] is bounded constructible of finite Tor amplitude. More precisely, for any integers $a\\leq b$ and $c\\leq e$, if $K$ and $L$ have Tor amplitude in $[a,b]$ and $[c,e]$, respectively, then $R\\mathcal Hom_A(K,L)$ has Tor amplitude in $[c-b-2d,e-a+2d]$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-finite-constructible-hom.md",
   "place": "node cor-weil-finite-constructible-hom, order 2138"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-derived-internal-hom"
+ ],
  "proof": [
   {
-   "text": "The tensor–Hom adjunction of\n[def-weil-derived-pullback-tensor-hom] and biduality\n[thm-fix-general-biduality] give the natural identity\n\n$$\nR\\mathcal Hom_A(K,L)\n\\cong R\\mathcal Hom_A(K,D_XD_XL)\n\\cong D_X(K\\otimes_A^LD_XL).\n$$",
+   "text": "First work on the etale site. Put $\\omega_X=Ra_X^!A$ and $D_X=R\\mathcal Hom_A(-,\\omega_X)$ as in [thm-fix-general-biduality]. Its biduality isomorphism $\\delta_L:L\\xrightarrow{\\sim}D_XD_XL$, followed by the ringed-site currying isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction] at $(K,D_XL,\\omega_X)$, gives\n\n$$\nR\\mathcal Hom_A(K,L)\\xrightarrow{\\sim}\nR\\mathcal Hom_A(K,R\\mathcal Hom_A(D_XL,\\omega_X))\n\\xrightarrow{\\sim}\nR\\mathcal Hom_A(K\\otimes_A^LD_XL,\\omega_X)\n=D_X(K\\otimes_A^LD_XL).\n$$\nThe first arrow applies the covariant second-variable functor $R\\mathcal Hom_A(K,-)$ to $\\delta_L$. The second is the cited natural isomorphism, which has no perfectness hypothesis.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "thm-fix-general-biduality"
+    "thm-fix-general-biduality",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-finite-constructible-hom.md",
+    "place": "## Proof, first paragraph: biduality and tensor–Hom identity"
+   }
   },
   {
-   "text": "By [lem-weil-verdier-preservation-strata], $D_XL$ has Tor\ninterval $[-e-2d,-c]$. Tensor preservation\n[lem-sf-tensor-ctf] gives interval $[a-e-2d,b-c]$ for the\ntensor inside the last dual. Apply the same duality bound again to\nobtain $[c-b-2d,e-a+2d]$. All the objects are constructible by\nthe same two results. The argument on the pro-etale site is the\ntransport by [lem-weil-finite-duality-site-comparison]; it makes\nno site-perfectness assumption on $K$ or $L$ on all of $X$.",
+   "text": "By [lem-weil-verdier-preservation-strata] applied to $L$, the complex $D_XL$ is in $D^b_{ctf}(X_{\\mathrm{et}},A)$ with Tor amplitude in $[-e-2d,-c]$. Clause (ii) of [lem-sf-tensor-ctf], applied to $K$ and $D_XL$, puts $T=K\\otimes_A^LD_XL$ in $D^b_{ctf}$ with Tor amplitude in $[a-e-2d,b-c]$. Apply [lem-weil-verdier-preservation-strata] to this $T$: its dual is bounded constructible with Tor amplitude in\n\n$$\n[-(b-c)-2d,-(a-e-2d)]=[c-b-2d,e-a+2d].\n$$\nStep 1 identifies this dual with the required internal Hom, so the asserted constructibility and interval follow on the etale site.",
    "uses": [
     "lem-weil-verdier-preservation-strata",
-    "lem-sf-tensor-ctf",
+    "lem-sf-tensor-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-finite-constructible-hom.md",
+    "place": "## Proof, second paragraph: the two duality bounds and tensor bound"
+   }
+  },
+  {
+   "text": "Now let $K,L$ be on the pro-etale site, and write $\\nu_X:X_{\\mathrm{proet}}\\to X_{\\mathrm{et}}$ for the comparison morphism. By clause (ii) of [lem-sf-proetale-constructible-origin], choose bounded constructible etale complexes $K',L'$ with $\\nu_X^*K'\\cong K$ and $\\nu_X^*L'\\cong L$. Clause (ii) of [lem-sf-comparison-tor-amplitude] gives their original intervals $[a,b]$ and $[c,e]$ on the etale site. Steps 1–2 therefore put $H'=R\\mathcal Hom_A(K',L')$ in $D^b_{ctf}(X_{\\mathrm{et}},A)$ with interval $[c-b-2d,e-a+2d]$. The internal-Hom comparison of [lem-weil-finite-duality-site-comparison], applicable because $K'$ is finite-Tor constructible and $L'$ is bounded constructible, identifies\n\n$$\n\\nu_X^*H'\\cong R\\mathcal Hom_A(\\nu_X^*K',\\nu_X^*L')\\cong R\\mathcal Hom_A(K,L).\n$$\nClause (i) of [lem-sf-comparison-tor-amplitude] makes $\\nu_X^*H'$ bounded constructible with exactly that Tor interval. This proves the pro-etale assertion for all $K,L$ in the stated category.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
     "lem-weil-finite-duality-site-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-finite-constructible-hom.md",
+    "place": "## Proof, second paragraph, final sentence: explicit pro-etale transport"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-pullback-tensor-hom",
   "thm-fix-general-biduality",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "lem-weil-verdier-preservation-strata",
   "lem-sf-tensor-ctf",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
   "lem-weil-finite-duality-site-comparison"
  ],
  "proof_origin": {
@@ -44,9 +78,94 @@
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-finite-constructible-hom.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom of bounded constructible finite Tor complexes has dimension dependent Tor amplitude bound",
+   "results": "8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.IsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, DerivedCategory.IsGE, DerivedCategory.instIsGEObjSingleFunctor; none states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RHom, tensor, VerdierDual, torAmplitudeIn",
+   "results": "Loogle rejected the query with unknown identifier RHom; this is not absence evidence.",
+   "date": "2026-10-16",
+   "verdict": "query rejected"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|internal Hom|verdierDual [Mathlib subdirectory: SixFunctors/Etale/Derived]",
+   "results": "The requested Mathlib/SixFunctors/Etale/Derived directory does not exist. The search wrapper printed 0 hits but ignored the rg path error, so this is not absence evidence. Superseded by the second reader's whole-Mathlib grep.",
+   "date": "2026-10-16",
+   "verdict": "invalid search root"
+  },
+  {
+   "tool": "leansearch",
+   "query": "internal Hom of bounded constructible finite Tor complexes",
+   "results": "service unavailable: Internal Server Error.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived internal Hom preserves constructible complexes finite Tor amplitude",
+   "results": "8 hits: CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyGE, CategoryTheory.hasExt_of_hasDerivedCategory; none states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorLeftHomEquiv|tensorRightHomEquiv|RHom [Mathlib subdirectory: Algebra/Homology]",
+   "results": "25 generic homological-complex hits (BifunctorFlip.lean, BifunctorShift.lean, Bifunctor.lean); no derived sheaf internal-Hom preservation theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed monoidal category internal hom adjunction currying internal hom of tensor product",
+   "results": "8 hits, including CategoryTheory.MonoidalClosed.internalHomAdjunction₂ and CategoryTheory.ihom.adjunction. These are abstract closed-category results, not the sheaf-derived realization or the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalClosed",
+   "results": "Query rejected: unknown identifier MonoidalClosed; this query supplies no absence evidence.",
+   "date": "2026-10-16",
+   "verdict": "query rejected"
+  },
+  {
+   "tool": "grep",
+   "query": "curryIso|internalHom.*[Aa]djunction|tensorHomAdjunction",
+   "results": "4 hits in CategoryTheory/Monoidal, including Closed/InternalCurrying.lean:80 ihomCurryIso and Closed/Basic.lean:305 internalHomAdjunction₂; neither states constructible preservation.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomCurryIso\"",
+   "results": "3 hits: CategoryTheory.MonoidalClosed.ihomCurryIso and its hom/inv equations. Read Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean:80–86; generic currying is available, but the item also needs the ringed-site derived realization and geometric bounds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor|verdierDual|torAmplitudeIn",
+   "results": "Whole Mathlib source search: 0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -75,5 +194,21 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "cor-weil-finite-constructible-hom",
+  "worker": "stage1",
+  "summary": "Second reader checked the original blueprint in the launcher literature cache. Made the ambient scheme and finite coefficient data explicit, replaced a definition-only adjunction citation by the existing arbitrary-ringed-site currying theorem, retained the dual–tensor–dual interval calculation, and expanded pro-etale transport using existing constructible-origin and Tor-comparison nodes. No new nodes.",
+  "blueprint": "Steps 1 and 2 realize the first paragraph and the interval/constructibility portion of the second paragraph of the original proof. Step 3 expands the final pro-etale-transport sentence of the second paragraph, using precisely the origin and Tor-amplitude comparison inputs named in the proof of the cited site-comparison theorem.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q39-68de8fecc",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-68de8fecc (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, source passages, and unit/chapter route in full. Verified biduality–currying, both duality bounds, tensor preservation, and canonical pro-etale internal-Hom comparison with Tor-interval reflection/preservation. Edge cases pass; no new nodes, circular dependencies, target weakening, or repairs. Concrete checks recorded in review.md."
+ }
 }
