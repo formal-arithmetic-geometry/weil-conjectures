@@ -132,28 +132,42 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-0485f454a (reviewer sub-agent of L); spot-checked: Read the full item, eight dependency statements, reports, unit/chapter route, and cited source passages. Verified completed-sheaf coefficients, K-flat construction, linear chain maps, tower/cone compatibility, and resolution independence via the existing lemma. Small cases and duplicate candidates checked; no delivery fault or target weakening found. Detailed evidence and inherited issues recorded in review.md."
  },
  "lean": {
-  "module": "Sheaf.Paper.IntegralReductionTower",
-  "declaration": "WeilConjectures.integralReductionTower",
+  "module": "Sheaf.Paper.SfIntegralReductionTower",
+  "declaration": "WeilConjectures.sfIntegralReductionTower",
   "declarations": [
-   "WeilConjectures.integralReductionTower",
-   "WeilConjectures.integralReductionTowerMap",
-   "WeilConjectures.integralReductionTowerMap_naturality",
-   "WeilConjectures.integralReductionTowerCone"
+   "WeilConjectures.sfAbSheafify",
+   "WeilConjectures.sfAbBijective",
+   "WeilConjectures.sfReductionRestricted",
+   "WeilConjectures.sfRestrictionLimits",
+   "WeilConjectures.sfRestrictionColimits",
+   "WeilConjectures.sfExtensionAdditive",
+   "WeilConjectures.sfReductionRestrictedAdditive",
+   "WeilConjectures.sfDerivedReductionRestricted",
+   "WeilConjectures.sfReductionTensor",
+   "WeilConjectures.sfReductionTransition_existsUnique",
+   "WeilConjectures.sfReductionTransition",
+   "WeilConjectures.sfReductionRepresentativeComparison",
+   "WeilConjectures.sfDerivedReductionTransition_existsUnique",
+   "WeilConjectures.sfDerivedReductionTransition",
+   "WeilConjectures.sfDerivedReductionUnit",
+   "WeilConjectures.sfIntegralReductionTower",
+   "WeilConjectures.sfIntegralReductionUnit_naturality",
+   "WeilConjectures.sfIntegralReductionCone"
   ],
-  "file": "lean/Sheaf/Paper/IntegralReductionTower.lean",
-  "statement": "def integralReductionTower (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) : ℕᵒᵖ ⥤ completedIntegralDerivedCategory l E Y D hl",
+  "file": "lean/Sheaf/Paper/SfIntegralReductionTower.lean",
+  "statement": "def sfIntegralReductionTower (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) : ℕᵒᵖ ⥤ DerivedCategory (scalarReductionSource.{u, u} l E X)",
   "branch": "newtargets-dag",
-  "by": "NB",
+  "by": "Q29",
   "date": "2026-10-15",
   "existing": false,
-  "note": "§1(B): the integral triangulation compile found the published K-flat artifact specialized to site-sized coefficients while the recorded tower source uses max u (t+1). Recompile the unchanged canonical definitions and statements in their paired source packet; no universes are equated and no mathematical assumptions, maps, or comparisons change."
+  "note": "§1(B): The recorded integralReductionTower requires a FiniteFieldDatum and l != D.p although neither the reduction construction nor this consumer depends on a finite base field. This module constructs the same canonical quotient tower and augmented cone from the unrestricted derived scalar extensions, with the transitions uniquely normalized on K-flat representatives and the units fixed by the scalar adjunction."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-bcc2bf354",
-  "group": "NB",
+  "reviewer": "NT-stage2-Codex-80772b1e6",
+  "group": "Q29",
   "result": "pass",
-  "note": "Reviewed node, source, dependencies, declarations, docstrings, edge cases, universes, and report. All nine sibling modules compile cleanly via scompile.py with the paired side overlay; no substantive or mechanical defects found."
+  "note": "Wrote review.md. Audited all eleven statement dependencies, five modules, canonical constructions, source correspondence, universes, edge cases, report sections, and verbatim signatures. All five immutable modules compiled cleanly through scompile.py. No fixes required; branch unchanged."
  }
 }

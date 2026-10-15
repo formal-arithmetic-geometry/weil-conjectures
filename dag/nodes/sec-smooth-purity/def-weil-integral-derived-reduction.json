@@ -99,39 +99,26 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.IntegralDerivedReduction",
-  "declaration": "WeilConjectures.integralDerivedReduction",
+  "module": "Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction",
+  "declaration": "WeilConjectures.scalarReductionDerivedExtension",
   "declarations": [
-   "WeilConjectures.integralReductionSourceHasDerivedCategory",
-   "WeilConjectures.integralReductionTargetHasDerivedCategory",
-   "WeilConjectures.integralReductionSiteEssentiallySmall",
-   "WeilConjectures.integralReductionExistence",
-   "WeilConjectures.integralReductionChangeOfRings",
-   "WeilConjectures.integralReductionChangeOfRingsAdditive",
-   "WeilConjectures.integralReductionDerivedExistence",
-   "WeilConjectures.integralDerivedReduction",
-   "WeilConjectures.integralDerivedReductionCounit",
-   "WeilConjectures.integralDerivedReductionUniversal",
-   "WeilConjectures.integralDerivedReductionProjection_locallySurjective",
-   "WeilConjectures.integralDerivedReduction_exact",
-   "WeilConjectures.integralDerivedReduction_counit_isIso",
-   "WeilConjectures.integralDerivedReductionKFlatIso",
-   "WeilConjectures.integralDerivedReductionResolutionIso"
+   "WeilConjectures.scalarReductionDerivedExtension",
+   "WeilConjectures.scalarReductionCounit",
+   "WeilConjectures.scalarReductionDerivedExistence"
   ],
-  "file": "lean/Sheaf/Paper/IntegralDerivedReduction.lean",
-  "statement": "def integralDerivedReduction : completedIntegralDerivedCategory l E Y D hl ⥤ DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n))",
+  "statement": "def scalarReductionDerivedExtension :\n    DerivedCategory (scalarReductionSource l E Y) ⥤\n      DerivedCategory (scalarReductionTarget l E Y n)",
   "branch": "newtargets-dag",
-  "by": "NB",
+  "by": "Q29",
   "date": "2026-10-15",
-  "existing": false,
-  "note": "§1(B): the integral triangulation compile found the published K-flat artifact specialized to site-sized coefficients while the recorded tower source uses max u (t+1). Recompile the unchanged canonical definitions and statements in their paired source packet; no universes are equated and no mathematical assumptions, maps, or comparisons change."
+  "existing": true,
+  "note": "§1(B): integralDerivedReduction requires a global finite-field datum and l != D.p absent from the arbitrary-field consumer. The already published scalarReductionDerivedExtension is the same universal derived change of rings along the actual completed coefficient projection, with the K-flat counit, for arbitrary schemes and with independent site/coefficient universes. Its index n is the positive exponent n+1, exactly as in the old interface. Read current server source through scompile.py --source."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-bcc2bf354",
-  "group": "NB",
+  "reviewer": "NT-stage2-Codex-80772b1e6",
+  "group": "Q29",
   "result": "pass",
-  "note": "Reviewed node, source, dependencies, declarations, docstrings, edge cases, universes, and report. All nine sibling modules compile cleanly via scompile.py with the paired side overlay; no substantive or mechanical defects found."
+  "note": "Wrote review.md. Audited all eleven statement dependencies, five modules, canonical constructions, source correspondence, universes, edge cases, report sections, and verbatim signatures. All five immutable modules compiled cleanly through scompile.py. No fixes required; branch unchanged."
  }
 }

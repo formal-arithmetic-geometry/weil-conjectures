@@ -96,26 +96,26 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.DerivedCompleteIntegralDetailed",
-  "declaration": "WeilConjectures.boundedConstructibleDerivedCompleteIntegral",
+  "module": "Sheaf.Paper.SfIntegralConstructible",
+  "declaration": "WeilConjectures.sfIntegralConstructible",
   "declarations": [
-   "WeilConjectures.boundedConstructibleDerivedCompleteIntegral",
-   "WeilConjectures.boundedConstructibleDerivedCompleteIntegralCategory"
+   "WeilConjectures.sfIntegralConstructible",
+   "WeilConjectures.sfIntegralConstructibleCategory"
   ],
-  "file": "lean/Sheaf/Paper/DerivedCompleteIntegralDetailed.lean",
-  "statement": "def boundedConstructibleDerivedCompleteIntegral (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) : ObjectProperty (completedIntegralDerivedCategory l E Y D hl)",
+  "file": "lean/Sheaf/Paper/SfIntegralConstructible.lean",
+  "statement": "def sfIntegralConstructible (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{u}) : ObjectProperty (DerivedCategory (scalarReductionSource.{u, u} l E X))",
   "branch": "newtargets-dag",
-  "by": "NB",
+  "by": "Q29",
   "date": "2026-10-15",
   "existing": false,
-  "note": "§1(B): the integral triangulation compile found the published K-flat artifact specialized to site-sized coefficients while the recorded tower source uses max u (t+1). Recompile the unchanged canonical definitions and statements in their paired source packet; no universes are equated and no mathematical assumptions, maps, or comparisons change."
+  "note": "§1(B): The recorded boundedConstructibleDerivedCompleteIntegral requires an auxiliary FiniteFieldDatum and l != D.p. This module states precisely completeness and constructibility of all positive derived reductions in a common finite interval, and its full subcategory, using the unrestricted canonical reduction and the published intrinsic finite-torsion predicate."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-bcc2bf354",
-  "group": "NB",
+  "reviewer": "NT-stage2-Codex-80772b1e6",
+  "group": "Q29",
   "result": "pass",
-  "note": "Reviewed node, source, dependencies, declarations, docstrings, edge cases, universes, and report. All nine sibling modules compile cleanly via scompile.py with the paired side overlay; no substantive or mechanical defects found."
+  "note": "Wrote review.md. Audited all eleven statement dependencies, five modules, canonical constructions, source correspondence, universes, edge cases, report sections, and verbatim signatures. All five immutable modules compiled cleanly through scompile.py. No fixes required; branch unchanged."
  }
 }

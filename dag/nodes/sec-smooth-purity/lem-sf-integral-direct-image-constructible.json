@@ -34,7 +34,8 @@
   "def-weil-derived-complete",
   "def-weil-finite-torsion-constructibility",
   "def-weil-cohomological-support",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-weil-integral-reduction-tower"
  ],
  "proof": [
   {
@@ -367,5 +368,26 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-8a07131cf (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, unit/chapter route and source passages. All eight steps check, including canonical reduction comparisons, completed coefficients, nonseparated morphisms, uniform bounds and empty cases. No new nodes, duplicates or dependency cycles found. Accepted all 19 declared tool uses. Master target categories and morphism directions checked without treating seeded routes as comparison theorems. Review recorded in review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfIntegralDirectImageConstructible",
+  "declaration": "WeilConjectures.sfIntegralDirectImage_constructible",
+  "declarations": [
+   "WeilConjectures.sfIntegralDirectImage_constructible"
+  ],
+  "file": "lean/Sheaf/Paper/SfIntegralDirectImageConstructible.lean",
+  "statement": "theorem sfIntegralDirectImage_constructible (K₀ : Type u) [Field K₀] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : K₀)) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : AlgebraicGeometry.Scheme.{u}} [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))] [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))] [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))] (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))] (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (_hK : sfIntegralConstructible l E X K) : (∃ hprod : HasProduct (sfDirectImageTerm l E f K), @Nonempty (@SfIntegralDirectImage l _ E _ _ _ X Y f K hprod)) ∧ (∀ [hprod : HasProduct (sfDirectImageTerm l E f K)] (L : SfIntegralDirectImage l E f K), sfIntegralConstructible l E Y L.obj ∧ IsSfDerivedComplete l E Y L.obj ∧ (∀ n : ℕ, IsIso (sfDirectImageReductionComparison l E f L n)) ∧ (∀ n : ℕ, intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) Y (sfFiniteDerivedDirectImage l E f K n))) ∧ (∃ N : ℤ, ∀ (q : ℕ), N < (q : ℤ) → ∀ M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))), IsZero (((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))) f).rightDerived q).obj M)) ∧ (∀ N : ℤ, (∀ (q : ℕ), N < (q : ℤ) → ∀ M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))), IsZero (((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))) f).rightDerived q).obj M)) → ∀ a b : ℤ, (∀ n : ℕ, proEtaleCohomologicalSupport ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) ⊆ Set.Icc a b) → ∀ n : ℕ, proEtaleCohomologicalSupport (sfFiniteDerivedDirectImage l E f K n) ⊆ Set.Icc a (b + N)) ∧ (IsAlgClosed K₀ → ∀ d : ℕ, Nonempty X → topologicalKrullDim X = (d : WithBot ℕ∞) → ∀ (q : ℕ), 2 * d < q → ∀ M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))), IsZero (((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))) f).rightDerived q).obj M)) ∧ (IsAlgClosed K₀ → IsEmpty X → ∀ (q : ℕ), 0 < q → ∀ M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))), IsZero (((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))) f).rightDerived q).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-80772b1e6",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Wrote review.md. Audited all eleven statement dependencies, five modules, canonical constructions, source correspondence, universes, edge cases, report sections, and verbatim signatures. All five immutable modules compiled cleanly through scompile.py. No fixes required; branch unchanged."
  }
 }
