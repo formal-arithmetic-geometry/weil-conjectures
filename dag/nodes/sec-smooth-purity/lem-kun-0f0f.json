@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-0f0f",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Projection formula, integer coefficients",
@@ -13,35 +13,171 @@
   "place": "node lem-kun-0f0f, order 1738"
  },
  "stmt_deps": [
-  "def-kun-torsion-invertible",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-kun-projection-formula-map"
  ],
  "proof": [
   {
-   "text": "Both sides of [def-kun-projection-formula-map] are triangulated\nfunctors in $K\\in\\Dplus(Y_{\\Et})$\n([lem-kun-derived-tensor-triangulated]), and for $K=\\mathbf Z$ in degree\nzero the map is the identity constraint\n$Rf_*E\\otimes_{\\mathbf Z}\\mathbf Z\\to Rf_*E$, an isomorphism; the\nsame holds for a bounded-below complex $F$ of free\n$\\mathbf Z$-module sheaves, since both sides commute with finite\ndirect sums and shifts and $f^{-1}$ of a free sheaf is free\n(the inverse image is exact, [def-weil-pbc-inverse-image]).\nFor a general $K\\in\\Dplus(Y_{\\Et})$ choose a quasi-isomorphism\n$F\\to K$ from a bounded-below complex of free sheaves: such an $F$\nexists by the standard Cartan–Eilenberg construction (in each degree\nthe kernel of the previous map is a quotient of a direct sum of copies\nof $\\mathbf Z_Y$). Then $F$ is K-flat, so\n$Rf_*E\\kunotimes{\\mathbf Z}K=Rf_*E\\otimes F$ and\n$E\\kunotimes{\\mathbf Z}f^{-1}K=E\\otimes f^{-1}F$, and the comparison\nof the previous paragraph is the assertion; the two identifications are\nthose of [def-kun-derived-tensor].",
+   "text": "Choose $a,b\\in\\mathbf Z$ such that $\\mathcal H^i(E)=0$ for $i<a$ and $\\mathcal H^j(K)=0$ for $j<b$. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] gives the same bound $b$ for $f^{-1}K$. Set $F=E\\otimes^L_{\\mathbf Z}f^{-1}K$. By [lem-kun-integral-derived-tensor-bounded-torsion], $F$ vanishes below $a+b-1$ and has torsion cohomology. The direct-image bound [lem-kun-tensor-t-est] gives $Rf_*E\\in D^{\\ge a}$ and $Rf_*F\\in D^{\\ge a+b-1}$. Applying the tensor bound once more, now to $Rf_*E$ and $K$ without the optional torsion clause, puts the source $Rf_*E\\otimes^L K$ in $D^{\\ge a+b-1}$ as well. Thus both sides lie in $D^+(Y_{\\Et})$, and bounded-below torsion proper base change is applicable to both $E$ and $F$.",
    "uses": [
-    "def-kun-projection-formula-map",
-    "lem-kun-derived-tensor-triangulated",
-    "def-weil-pbc-inverse-image",
-    "def-kun-derived-tensor"
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion",
+    "lem-kun-tensor-t-est"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0F, lemma-projection-formula-proper, proof"
+   }
+  },
+  {
+   "text": "Fix an arbitrary geometric point $g:s=\\operatorname{Spec}\\Omega\\to Y$, with $\\Omega$ algebraically closed, and form the cartesian square with $Z=X\\times_Ys$, $g':Z\\to X$ and $h:Z\\to s$. Properness is stable under this base change [lem-weil-pbc-proper-base-change]. By [def-weil-pbc-scheme-conventions], $h$ is separated and of finite type, so $Z$ is quasi-compact since $s$ is affine. To check quasi-separatedness as an absolute scheme, take affine opens $U=\\operatorname{Spec}A$ and $V=\\operatorname{Spec}B$ of $Z$. By [lem-weil-pbc-fibre-product-affine-spectra], $U\\times_s V=\\operatorname{Spec}(A\\otimes_\\Omega B)$. The inverse image of this open by the closed diagonal of $h$ is $U\\cap V$, hence is $\\operatorname{Spec}((A\\otimes_\\Omega B)/I)$ for an ideal $I$ [def-weil-closed-immersion]. The ring map $A\\otimes_{\\mathbf Z}B\\to A\\otimes_\\Omega B$ is surjective: it is the quotient imposing $(\\lambda a)\\otimes b=a\\otimes(\\lambda b)$. Consequently the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ has quasi-compact inverse image $U\\cap V$ on every affine open $U\\times_{\\mathbf Z}V$ of this cover. It is quasi-compact, so $Z$ is quasi-separated by [def-weil-quasi-separated-morphism]. Thus $Z$ is qcqs, without any finiteness hypothesis on $Y$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0F, lemma-projection-formula-proper, proof"
+   }
+  },
+  {
+   "text": "Write $E_s=(g')^{-1}E$ and $K_s=g^{-1}K$. The bounded-below proper base-change theorem [thm-weil-pbc-bounded-below] applied to $E$ and to $F$ makes both exchange morphisms $g^{-1}Rf_*E\\to Rh_*E_s$ and $g^{-1}Rf_*F\\to Rh_*(g')^{-1}F$ isomorphisms. The hypotheses on $F$ were proved in Step 1. Inverse-image monoidality [lem-kun-inverse-image-monoidal], together with $fg'=gh$, identifies $(g')^{-1}F$ with $E_s\\otimes^L_{\\mathbf Z}h^{-1}K_s$, and identifies the pulled-back source with $g^{-1}Rf_*E\\otimes^L_{\\mathbf Z}K_s$. The commuting square of [lem-kun-proj-formula-natural], for $\\Lambda=\\mathbf Z$, therefore identifies $g^{-1}\\mathrm{PF}_f(E,K)$ through these isomorphisms with $\\mathrm{PF}_h(E_s,K_s)$. This uses the canonical exchange morphisms, so it identifies the map, not only its two objects. On these bounded-below objects, the exchange used here and the unbounded exchange in the naturality square coincide: [def-kun-unbounded-exchange] and [def-weil-pbc-derived-exchange] both define the mate of the same composite $h^{-1}g^{-1}Rf_*L\\xrightarrow{\\theta} (g')^{-1}f^{-1}Rf_*L\\xrightarrow{(g')^{-1}\\varepsilon_f}(g')^{-1}L$, for $L=E,F$. The units and counits restrict to the same adjunction on the full bounded-below subcategories, so uniqueness of the adjoint transpose identifies these morphisms.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-proj-formula-natural",
+    "def-kun-unbounded-exchange",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0F, lemma-projection-formula-proper, proof"
+   }
+  },
+  {
+   "text": "By [lem-kun-stalk-as-pullback], $K_s$ is the stalk complex of $K$. For the algebraically closed field $\\Omega$, the Galois group in [lem-exc-abelian-sheaves-gmodules] is trivial, so geometric stalk $S:\\Ab(s_{\\Et})\\to\\Ab$ is an additive equivalence. Let $C_T$ denote the constant-sheaf functor of [def-kun-constant-sheaf] on a scheme $T$. The canonical constant-germ map gives $S C_s M\\cong M$ naturally in $M$ by [lem-weil-pbc-constant-sheaf-geometric-stalk]. Thus $C_s$ is a quasi-inverse of $S$: the inverse image under the fully faithful $S$ of this isomorphism gives $C_s S G\\cong G$ naturally in $G$. These additive equivalences preserve kernels and cokernels, so they extend termwise to equivalences of derived categories. Put $M=S K_s\\in D^+(\\mathbf Z)$; then $K_s\\cong C_s M$.\nFor any $T$, natural maps from the constant presheaf with value an abelian group $N$ to a sheaf $G$ correspond to homomorphisms $N\\to G(T)$: every component is forced by restriction along the unique $U\\to T$. Sheafification's universal property [def-weil-pbc-sheafification] gives $C_T\\dashv\\Gamma(T,-)$. Since $C_s$ is an equivalence, its right adjoint is $S$, so $S\\cong\\Gamma(s,-)$. The canonical pullback comparison [lem-kun-pullback-constant] identifies $h^{-1}C_s$ with $C_Z$. For a sheaf $G$ on $Z$, these adjunctions give\n$$\\operatorname{Hom}(N,S h_*G)=\\operatorname{Hom}(C_sN,h_*G)=\\operatorname{Hom}(h^{-1}C_sN,G)=\\operatorname{Hom}(C_ZN,G)=\\operatorname{Hom}(N,\\Gamma(Z,G)).$$\nConsequently $S h_*\\cong\\Gamma(Z,-)$ and, after taking derived functors, $S Rh_*\\cong R\\Gamma(Z,-)$. The Hom identifications are those of the constant-section adjunction, so their derived units and counits agree. The canonical tensor constraints also agree: on constants they send the local tensor of sections with values $m,n$ to the constant section with value $m\\otimes n$; sheafification extends this equality, and K-flat representatives give the derived equality. Hence the adjunct of counit tensored with identity defining $\\mathrm{PF}_h$ in [def-kun-projection-formula-map] is exactly the map of [def-kun-constant-projection-morphism] for $Z$ and $\\Lambda=\\mathbf Z$:\n$$R\\Gamma(Z,E_s)\\otimes^L_{\\mathbf Z}M\\longrightarrow R\\Gamma(Z,E_s\\otimes^L_{\\mathbf Z}\\underline M).$$\nBoth $E_s$ and $M$ are bounded below, by exact inverse image [prop-weil-pbc-inverse-image-modules-exact] and exactness of $S$. Since $Z$ is qcqs by Step 2, [lem-kun-0f0e] makes this canonical map an isomorphism.",
+   "uses": [
+    "lem-kun-stalk-as-pullback",
+    "lem-exc-abelian-sheaves-gmodules",
+    "def-kun-constant-sheaf",
+    "def-kun-projection-formula-map",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-kun-0f0e",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "def-weil-pbc-sheafification",
+    "lem-kun-pullback-constant",
+    "def-kun-constant-projection-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0F, lemma-projection-formula-proper, proof"
+   }
+  },
+  {
+   "text": "Steps 3 and 4 show that the projection map is an isomorphism after inverse image to every geometric point of $Y$. Exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] identifies the stalk of each cohomology morphism $\\mathcal H^i(\\mathrm{PF}_f(E,K))$ with the $i$th cohomology of this stalk map. It is therefore an isomorphism at every geometric stalk. By [lemma-weil-pbc-geometric-stalk-conservative] each cohomology morphism is an isomorphism of abelian sheaves. The cone then has zero cohomology in every degree, hence is zero in the derived category, proving that the original canonical map is invertible.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0F, lemma-projection-formula-proper, proof"
+   }
   }
  ],
  "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-kun-integral-derived-tensor-bounded-torsion",
+  "lem-kun-tensor-t-est",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "def-weil-quasi-separated-morphism",
+  "thm-weil-pbc-bounded-below",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-proj-formula-natural",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-derived-exchange",
+  "lem-kun-stalk-as-pullback",
+  "lem-exc-abelian-sheaves-gmodules",
+  "def-kun-constant-sheaf",
   "def-kun-projection-formula-map",
-  "lem-kun-derived-tensor-triangulated",
-  "def-weil-pbc-inverse-image",
-  "def-kun-derived-tensor"
+  "lem-kun-0f0e",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "def-weil-pbc-sheafification",
+  "lem-kun-pullback-constant",
+  "def-kun-constant-projection-morphism",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f0f.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0F, lemma-projection-formula-proper, proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for proper pushforward of bounded below etale complexes of abelian groups when the source complex has torsion cohomology",
+   "results": "8 hits; CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, Profinite.NobelingProof.CC_exact, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CochainComplex.cm5b, CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero', AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty. Read the returned signatures/snippets. No proper integral etale derived projection formula: hits concern complex factorizations, light condensed sheaf categories, Witt vectors, or tensor products of schemes.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "0 hits; none. Read the returned signatures/snippets. No proper integral etale derived projection formula: hits concern complex factorizations, light condensed sheaf categories, Witt vectors, or tensor products of schemes.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|projection.*formula",
+   "results": "3 hits; Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean. Read the returned signatures/snippets. No proper integral etale derived projection formula: hits concern complex factorizations, light condensed sheaf categories, Witt vectors, or tensor products of schemes.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived projection formula for proper morphisms and torsion etale sheaves over the integers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map tensor product with higher direct image to direct image of tensor product is an isomorphism for proper schemes and torsion abelian sheaf complexes",
+   "results": "8 hits; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition. Read the returned signatures/snippets. No proper integral etale derived projection formula: hits concern complex factorizations, light condensed sheaf categories, Witt vectors, or tensor products of schemes.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"tensor\"",
+   "results": "1 hits; AlgebraicGeometry.isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed. Read the returned signatures/snippets. No proper integral etale derived projection formula: hits concern complex factorizations, light condensed sheaf categories, Witt vectors, or tensor products of schemes.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*(tensor|projection)|(tensor|projection).*proper",
+   "results": "2 hits; Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean. Directory Mathlib/AlgebraicGeometry. Read the returned signatures/snippets. No proper integral etale derived projection formula: hits concern complex factorizations, light condensed sheaf categories, Witt vectors, or tensor products of schemes.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +208,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-0f0f",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Replaced the invalid globally free-sheaf resolution argument by Stacks 0F0F: integral boundedness and torsion closure, proper base change on geometric fibers, the existing integral constant-complex formula, and stalk conservativity. Added one statement-only auxiliary tensor lemma after DAG/blueprint/project/Mathlib searches. Report flags the incorrect generic tensor-connectivity node and reversed inequalities in the source proof. Second reading makes absolute quasi-separatedness and the canonical constant-functor adjunction/tensor comparison explicit, using existing nodes only. Maintainer review makes the equality of bounded-below and unbounded exchange mates explicit and declares the constant-sheaf stalk computation as an additional generic tool use.",
+  "blueprint": "Realizes the displayed integral projection-formula assertion and the whole ## Proof of lem-kun-0f0f. Replaces the node-level free-sheaf argument (not a unit-level step): arbitrary etale sheaves need not be generated by global constants, and finite sums/shifts do not generate all bounded-below complexes. The unit explicitly specifies 0F0F and has no additional proof steps.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact constant-coefficient inverse image gives the lower bounds for pulled-back complexes; this unit has only the inverse-image definition, not its exactness theorem."
+   },
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "The existing bounded-below torsion proper base-change theorem is the geometric-stalk input of the integral projection formula; no node of this unit replaces this theorem."
+   },
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "The field-site equivalence identifies sheaves over the geometric point with abelian groups; this is a generic field-site tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Geometric stalks detect sheaf isomorphisms, used after taking every cohomology sheaf; this is a generic etale-sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "The canonical constant-germ isomorphism identifies the inverse to the geometric-point equivalence in Step 4; this is a generic stalk computation and no statement in this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-weil-pbc-bounded-below",
+  "lem-exc-abelian-sheaves-gmodules",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q02-1c072b3f5",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-1c072b3f5 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full; the integral formula and auxiliary lemma check out. Corrected exchange-map citations, a missing tool-use declaration, and new-node metadata. Complete fixes and review.md are written. The review separately records an inherited downstream DAG cycle.; 2 file(s) fixed by the reviewer"
+ }
 }
