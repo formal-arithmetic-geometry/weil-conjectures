@@ -60,11 +60,11 @@ The two displayed formulas are theorems about the total derived functors, not de
   `(f)_*⟦Λ⟧ = mapMod(f_*) ⋙ Res_{η_f}` amounts to right deriving `mapMod(f_*)` and restricting
   scalars levelwise (`Functor.rightDerivedFunctorCompMapDerivedCategoryIso`).
 * `ProEtale.CondensedRing.leftDerivedUpperStarIso`:
-  `L((f)^*⟦Λ⟧) ≅ D(mapMod(f^*)) ⋙ L(Ext_{α_f})`. The exact functor `mapMod(f^*)` preserves
-  K-flat complexes, so left deriving the composite `(f)^*⟦Λ⟧ = mapMod(f^*) ⋙ Ext_{α_f}` amounts
-  to applying `mapMod(f^*)` levelwise and left deriving the extension of scalars, both being
-  computed on the same K-flat resolution in `Mod_{Λ_Y}`
-  (`Functor.leftDerivedFunctorCompMapDerivedCategoryIso`).
+  `L((f)^*⟦Λ⟧) ≅ D(mapMod(f^*)) ⋙ L(Ext_{α_f})`. Both factors are exact: `mapMod(f^*)` is
+  exact, and extension of scalars along the coefficient isomorphism `α_f` is restriction of
+  scalars along its inverse. Apply `Functor.leftDerivedFunctorCompIso` and identify the left
+  derived functor of `mapMod(f^*)` with its levelwise functor. This argument does not require
+  preservation of arbitrary K-flat complexes by `mapMod(f^*)`.
 
 ## Main results
 
@@ -84,19 +84,11 @@ The two displayed formulas are theorems about the total derived functors, not de
   `ProEtale.CondensedRing.leftDerivedUpperStarIso`: the computations of `Rf_*` and `Lf^*`
   described above.
 
-## Sorried input
+## Exactness input
 
-- `ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar`: `mapMod(f^*)` sends
-  K-flat complexes of `Λ_Y`-modules to K-flat complexes of `f^* Λ_Y`-modules. Indeed
-  `f^*` is strong monoidal, exact and commutes with colimits, so it commutes with the relative
-  tensor product of complexes of module objects and preserves acyclicity. From it follows that
-  the pullback `(f)^*⟦Λ⟧ = mapMod(f^*) ⋙ Ext_{α_f}` on module objects preserves
-  quasi-isomorphisms between K-flat complexes
-  (`ProEtale.CondensedRing.preservesKFlatQuasiIso_upperStar`), which is the functor-specific
-  input of the K-flat machinery making `L((f)^*⟦Λ⟧)` meaningful; the other ingredient is that
-  extension of scalars preserves quasi-isomorphisms between K-flat complexes
-  (`Mod.preservesKFlatQuasiIso`, itself sorried in
-  `WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars`).
+The pullback `(f)^*⟦Λ⟧` is exact, so it preserves all quasi-isomorphisms. This supplies the
+input for its K-flat left derived functor directly, without a K-flat preservation theorem.
+The displayed computation of the derived pullback uses exactness of both factors, as above.
 
 The remaining sorries are those of the module-object formalism
 (`WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian`,
@@ -306,19 +298,11 @@ section DerivedUpperStar
 instance preservesHomology_mapMod_upperStar :
     ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesHomology := {}
 
-/-- The pullback `mapMod(f^*) : Mod_{Λ_Y} ⥤ Mod_{f^* Λ_Y}` sends K-flat complexes to
-K-flat complexes. See the module docstring for the argument. -/
-instance preservesKFlatComplexes_mapMod_upperStar :
-    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesKFlatComplexes := sorry
-
-/-- The pullback `(f)^*⟦Λ⟧ = mapMod(f^*) ⋙ Ext_{α_f}` on module objects over `Λ` preserves
-quasi-isomorphisms between K-flat complexes: `mapMod(f^*)` is exact and preserves K-flat
-complexes, and the extension of scalars preserves quasi-isomorphisms between K-flat
-complexes. This is the functor-specific input of the K-flat left derivability structure. -/
+/-- The pullback `(f)^*⟦Λ⟧` on module objects over `Λ` preserves quasi-isomorphisms between
+K-flat complexes because it is exact. This is the functor-specific input of the K-flat
+left derivability structure. -/
 instance preservesKFlatQuasiIso_upperStar : (f)^*⟦Λ⟧.PreservesKFlatQuasiIso :=
-  Functor.preservesKFlatQuasiIso_comp
-    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
-    (Mod.extendScalars (condensedPullbackHom Λ f))
+  inferInstance
 
 /-- The total left derived functor `Lf^* : D(Mod_{Λ_Y}) ⥤ D(Mod_{Λ_X})` of the pullback
 `f^*` on module objects over `Λ`, on the unbounded derived categories, computed on K-flat
@@ -334,16 +318,23 @@ noncomputable example :
 
 /-- The derived pullback on module objects is the levelwise pullback
 `D(mapMod(f^*)) : D(Mod_{Λ_Y}) ⥤ D(Mod_{f^* Λ_Y})` followed by the derived extension of
-scalars `Λ_X ⊗ᴸ_{f^* Λ_Y} -` along `α_f`: `mapMod(f^*)` is exact and preserves K-flat
-complexes, so left deriving the composite `(f)^*⟦Λ⟧ = mapMod(f^*) ⋙ Ext_{α_f}` amounts to
-applying `mapMod(f^*)` levelwise and left deriving the extension of scalars. -/
+scalars `Λ_X ⊗ᴸ_{f^* Λ_Y} -` along `α_f`. Both factors are exact: `mapMod(f^*)` is exact,
+and extension of scalars along the isomorphism `α_f` is restriction along its inverse.
+Apply the composition isomorphism for left derived exact functors and identify the derived
+functor of `mapMod(f^*)` with its levelwise functor. -/
 noncomputable def leftDerivedUpperStarIso :
     L((f)^*⟦Λ⟧) ≅
       D((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)) ⋙
-        L(Mod.extendScalars (condensedPullbackHom Λ f)) :=
-  Functor.leftDerivedFunctorCompMapDerivedCategoryIso
-    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
-    (Mod.extendScalars (condensedPullbackHom Λ f))
+        L(Mod.extendScalars (condensedPullbackHom Λ f)) := by
+  letI : PreservesFiniteLimits (Mod.extendScalars (condensedPullbackHom Λ f)) :=
+    preservesFiniteLimits_of_natIso
+      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f)).symm
+  exact Functor.leftDerivedFunctorCompIso
+      ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
+      (Mod.extendScalars (condensedPullbackHom Λ f)) ≪≫
+    Functor.isoWhiskerRight
+      ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).leftDerivedFunctorIsoMapDerivedCategory
+      (Mod.extendScalars (condensedPullbackHom Λ f)).leftDerivedFunctor
 
 /-- The derived pullback on module objects is the levelwise functor: since `f^*` on module
 objects is exact (`ProEtale.CondensedRing.preservesFiniteLimits_upperStar`), its total left
