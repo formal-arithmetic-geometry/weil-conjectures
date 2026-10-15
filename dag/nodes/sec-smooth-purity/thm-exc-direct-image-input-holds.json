@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-exc-direct-image-input-holds",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The direct-image finiteness input holds",
@@ -20,34 +20,75 @@
  ],
  "proof": [
   {
-   "text": "Clause (1) is [thm-dg-finite-type-constructibility]: for a morphism\n$u:S\\to T$ of finite type between finite-type $k$-schemes and a\nconstructible $\\Lambda$-sheaf $F$, the derived direct image $Ru_*F$ is\nbounded constructible, so each of its cohomology sheaves $R^qu_*F$ is\nconstructible on $T_{{\\mathrm{et}}}$.",
+   "text": "Clause (1) follows from [thm-dg-finite-type-constructibility]. Let $u:S\\to T$ be of finite type between finite-type $k$-schemes and let $F$ be a constructible $\\Lambda$-sheaf. Since $N$ is prime to $\\operatorname{char}(k)$, it is invertible in $k$, so the theorem applies with the finite ring $A=\\Lambda$ annihilated by $N$. Regard $F$ as a constructible complex in degree zero; the theorem gives $Ru_*F$ bounded constructible, and the definition of bounded constructibility then says that each cohomology sheaf $R^qu_*F$ is constructible on $T_{{\\mathrm{et}}}$.",
    "uses": [
-    "thm-dg-finite-type-constructibility"
+    "thm-dg-finite-type-constructibility",
+    "def-weil-pbc-constructible-complexes"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-dg-finite-type-constructibility.md",
+    "place": "node thm-dg-finite-type-constructibility, order 1641"
+   }
   },
   {
-   "text": "For clause (2), let $K$ be a separably closed field and let $W$ be a\nfinite-type $K$-scheme of dimension at most $d$. A separably closed\nfield has torsion cohomological dimension zero\n([lem-kun-cd-sep-closed-point]), so\n[thm-sc-finite-type-torsion-cd] bounds the torsion cohomological\ndimension of $W$ by $2d+0=2d$; by the definition of that bound this is\nthe vanishing of $H^q(W,M)$ for every torsion sheaf $M$ and every\n$q>2d$, which is the asserted clause.",
+   "text": "For clause (2), let $K$ be a separably closed field of characteristic prime to $N$, let $W$ be a finite-type $K$-scheme of dimension at most $d$, and let $M$ be any torsion sheaf on $W_{{\\mathrm{et}}}$. If $W$ is empty, its higher cohomology vanishes immediately. Otherwise write $e=\\dim W$; then $e$ is the finite dimension of $W$ and $e\\leq d$. The existing separably closed-field bound [lem-sf-separably-closed-torsion-cd] gives $\\operatorname{cd}_{\\rm tor}(K)\\leq0$. Applying [thm-sc-finite-type-torsion-cd] with $c=0$ and the exact dimension $e$ gives $\\operatorname{cd}_{\\rm tor}(W)\\leq2e$. Since $e\\leq d$, this implies the bound $2e\\leq2d$; by the defining vanishing condition in [def-sc-etale-torsion-cd], $H^q(W,M)=0$ for every $q>2d$. This is clause (2).",
    "uses": [
-    "lem-kun-cd-sep-closed-point",
-    "thm-sc-finite-type-torsion-cd"
+    "lem-sf-separably-closed-torsion-cd",
+    "thm-sc-finite-type-torsion-cd",
+    "def-sc-etale-torsion-cd"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-finite-type-torsion-cd.md",
+    "place": "node thm-sc-finite-type-torsion-cd, order 1558"
+   }
   }
  ],
  "proof_deps": [
   "thm-dg-finite-type-constructibility",
-  "lem-kun-cd-sep-closed-point",
-  "thm-sc-finite-type-torsion-cd"
+  "def-weil-pbc-constructible-complexes",
+  "lem-sf-separably-closed-torsion-cd",
+  "thm-sc-finite-type-torsion-cd",
+  "def-sc-etale-torsion-cd"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-exc-direct-image-input-holds.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/rem-exc-direct-image-input-sources.md",
+  "place": "Clause (1) and clause (2) source discussion"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "direct-image finiteness input over a separably closed field constructible higher direct images torsion cohomological dimension",
+   "results": "CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range (Mathlib/CategoryTheory/CofilteredSystem); CategoryTheory.Subfunctor.range_isFinite (Mathlib/CategoryTheory/Subfunctor/Finite); CategoryTheory.presheafIsFinite_of_epi (Mathlib/CategoryTheory/Subfunctor/Finite); CategoryTheory.Functor.toEventualRanges_finite (Mathlib/CategoryTheory/CofilteredSystem); DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective (Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives); AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit (Mathlib/AlgebraicGeometry/AffineTransitionLimit); LightCondensed.instIsGrothendieckAbelianLightCondMod (Mathlib/Condensed/Light/AB); AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite (Mathlib/AlgebraicGeometry/Fiber)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isBoundedConstructible, HasTorsionEtaleCohomologicalDimensionLE, rightDerivedLowerStar",
+   "results": "0 hits; loogle: unknown identifier 'DerivedCategory.isBoundedConstructible'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "direct.?image|cohomological.?dimension|isBoundedConstructible in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct image constructibility and torsion etale cohomological dimension for finite type schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -80,5 +121,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-exc-direct-image-input-holds",
+  "worker": "stage1",
+  "summary": "Audited the two imported proof paragraphs against the exact direct-image definition and the cited DAG statements. Clause (1) now explicitly instantiates finite-ring bounded constructibility and extracts constructible cohomology sheaves. Clause (2) uses the existing torsion cohomological-dimension base-case node (the imported kuncd node had the wrong predicate), the finite-type bound, and its defining vanishing condition. No new nodes were needed.",
+  "blueprint": "The two steps realize the two clauses in the direct-image source discussion: thm-dg-finite-type-constructibility for clause (1), and the separably closed torsion-cd base case plus thm-sc-finite-type-torsion-cd for clause (2).",
+  "tool_uses": [
+   {
+    "node": "lem-sf-separably-closed-torsion-cd",
+    "why": "The direct-image source requires the torsion cohomological-dimension bound for a separably closed field; this existing node states cd_tor(K)≤0 exactly, while the imported kuncd node does not."
+   },
+   {
+    "node": "thm-dg-finite-type-constructibility",
+    "why": "The direct-image input clause (1) explicitly invokes this generic finite-type constructibility theorem; the affine-line/Kummer unit has no replacement for it."
+   },
+   {
+    "node": "thm-sc-finite-type-torsion-cd",
+    "why": "The direct-image input clause (2) explicitly invokes this generic finite-type torsion cohomological-dimension theorem; the affine-line/Kummer unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-separably-closed-torsion-cd",
+  "thm-dg-finite-type-constructibility",
+  "thm-sc-finite-type-torsion-cd"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-N5-a7489b39c",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-a7489b39c (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, master sources, and unit/chapter route. Both deductions are sound; exact-dimension handling and arbitrary-torsion quantifiers are correct. Accepted all three declared tool uses; no new nodes or cycles. review.md records the inherited citation error: Tag 0GL0 concerns Rf_!, whereas the item correctly cites the existing ordinary Rf_* theorem."
+ }
 }
