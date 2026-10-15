@@ -17,28 +17,48 @@
  ],
  "proof": [
   {
-   "text": "Evaluate the colimit comparison on an affine covering basis. Such an object V and its closed fibre V_Z are qcqs. Localization identifies evaluation with global sections on their own pro-etale sites and preserves colimits. The first clause of the qcqs section-calculus theorem commutes these sections with filtered colimits. The direct-image formula identifies both sides with the same colimit of sections at V_Z, compatibly with coprojections. The comparison is thus invertible on a covering basis and hence globally.",
+   "text": "The sections clause of proetale_qcqs_fp_section_calculus, applied to the identity object of any qcqs scheme T, makes the abelian-group colimit comparison bijective. ConcreteCategory.isIso_iff_bijective and preservesColimit_of_isIso_post therefore give preservation of filtered colimits by abelian global sections on T.",
    "uses": [
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-weil-proetale-weakly-etale-localization",
     "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a qcqs pro-etale object W over a scheme Y, use the concrete composition functor MorphismProperty.Over.map along W.hom. The proved source instances ProEt.isContinuous_overMap and ProEt.isCocontinuous_overMap make its restriction on sheaves a left adjoint via Functor.sheafAdjunctionCocontinuous, hence colimit preserving. The image of the identity object of W.left is canonically isomorphic to W by the identity on its underlying scheme. Applying each sheaf to this isomorphism gives a natural isomorphism between evaluation at W and restriction followed by global sections on W.left. The preceding step proves that evaluation at W preserves the given filtered colimits. These are explicit proved private helpers in the item module; no existentially chosen localization equivalence or module/ring comparison is needed.",
+   "uses": [
     "def-weil-proetale-inverse-image",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Let R be restriction to AffineProEt X and let T be R followed by the inclusion into affine presheaves. The source affine-basis comparison makes R an equivalence, so T reflects isomorphisms. Every affine object is qcqs; step 2 and pointwise colimits show that T preserves the filtered colimits. Since these colimits exist, reflectsColimitsOfShape_of_reflectsIsomorphisms implies that T reflects them as well.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The composite of the given direct image with T is evaluated at an affine basis object V by evaluation on the closed fibre V_Z. Its projection to V is a closed immersion and hence affine, so V_Z is affine and in particular qcqs. Step 2 shows that each such evaluation preserves the filtered colimits. Pointwise colimits give preservation by the composite. Finally preservesColimitsOfShape_of_reflects_of_preserves reflects that preservation through T and proves the stated direct-image assertion. The comparison maps throughout are the canonical ones from the colimit universal property. Empty schemes and arbitrary small filtered categories are included; neither compactness nor quasi-separatedness of the ambient base is needed in this argument.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-category-colimit",
   "def-weil-proetale-inverse-image",
   "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-weil-pbc-proetale-qcqs-fp-section-calculus"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 0738 (4) and Tag 098D; abelian geometric part of parent proof step 5."
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites.tex",
+  "place": "Tags 098D and 0738 (4); affine-basis detection of the colimit comparison, implemented using the proved source continuity/cocontinuity instances for localization and Mathlib colimit-preservation APIs (H4, 2026-10-16)."
  },
  "mathlib_searches": [
   {
@@ -117,10 +137,10 @@
   "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261015T192133-L-1050943",
-  "kind": "interface",
+  "landing": "20261015T201715-L-1447747",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
