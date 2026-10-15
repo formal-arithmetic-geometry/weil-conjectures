@@ -6,19 +6,10 @@ Authors: SHEAF group NJ
 module
 
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import Sheaf.Paper.CondensedQbarComparisons
 
-import Mathlib.Topology.Algebra.Module.FiniteDimension
-import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.Paper.CondensedQbarExchangeEquality
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
-import Sheaf.AlgebraicGeometry.ProEtaleBoundedBelowCoproducts
-import Sheaf.Paper.ProfinitePointPullback
 import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 
 /-!
@@ -49,40 +40,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
 
-section Edge
-
-variable {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
-  [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
-  [IsSeparated (T ↘ Spec (.of k))]
-  [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
-  [IsSeparated (U ↘ Spec (.of k))] (h : T ⟶ U) [h.IsOver (Spec (.of k))]
-
-/-- The canonical pullback comparison restricted to bounded constructible objects, in the
-orientation `T_T l_{h,E} ≅ l_{h,Ω} T_U`. Source: ChangeOfCoefficients.lean, `derivedPullIso`;
-TwoColimit.lean, final transport paragraph
-(blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility). -/
-noncomputable def constructibleToQbarPullIso (K : PadicSubfieldConstructible U ℓ E) :
-    (constructibleToPadicAlgCl T ℓ E).obj
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k h).obj K) ≅
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k h).obj
-        ((constructibleToPadicAlgCl U ℓ E).obj K) :=
-  ObjectProperty.isoMk _
-    ((derivedPullIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) h).app K.obj)
-
-/-- The specified pushforward comparison restricted to bounded constructible objects.
-Source: ChangeOfCoefficients.lean, `derivedPushHom`, the mate of restriction/pushforward;
-TwoColimit.lean, final transport paragraph
-(blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility). -/
-noncomputable def constructibleToQbarPushHom (K : PadicSubfieldConstructible T ℓ E) :
-    (constructibleToPadicAlgCl U ℓ E).obj
-        ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k h).obj K) ⟶
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k h).obj
-        ((constructibleToPadicAlgCl T ℓ E).obj K) :=
-  ObjectProperty.homMk
-    ((derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) h).app K.obj)
-
-end Edge
-
 section Square
 
 variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
@@ -98,36 +55,6 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
   (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
   [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
-
-/-- The specified source comparison `S_K`: first the pull comparison for `g`, then the
-pullback of the push comparison for `f`. Source: TwoColimit.lean, final transport paragraph
-(blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility). -/
-noncomputable def constructibleToQbarSourceHom (K : PadicSubfieldConstructible X ℓ E) :
-    (constructibleToPadicAlgCl Y' ℓ E).obj
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj
-          ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f).obj K)) ⟶
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k f).obj
-          ((constructibleToPadicAlgCl X ℓ E).obj K)) :=
-  (constructibleToQbarPullIso ℓ k E g
-      ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f).obj K)).hom ≫
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g).map
-      (constructibleToQbarPushHom ℓ k E f K)
-
-/-- The specified target comparison `U_K`: first the push comparison for `f'`, then the
-pushforward of the pull comparison for `g'`. Source: TwoColimit.lean, final transport paragraph
-(blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility). -/
-noncomputable def constructibleToQbarTargetHom (K : PadicSubfieldConstructible X ℓ E) :
-    (constructibleToPadicAlgCl Y' ℓ E).obj
-        ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f').obj
-          ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').obj K)) ⟶
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k f').obj
-        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g').obj
-          ((constructibleToPadicAlgCl X ℓ E).obj K)) :=
-  constructibleToQbarPushHom ℓ k E f'
-      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').obj K) ≫
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k f').map
-      (constructibleToQbarPullIso ℓ k E g' K).hom
 
 /-- Proper finite-to-Qbar coefficient change preserves the specified exchange arrow.
 Source: TwoColimit.lean, final transport paragraph; ChangeOfCoefficients.lean, Derived section
@@ -175,7 +102,38 @@ theorem constructibleToQbar_baseChange_compatibility [IsProper f]
             ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k
               sq.toCommSq).app K) ≫
           constructibleToQbarTargetHom ℓ k E f' g' K) := by
-  sorry
+  let : IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
+    inferInstance
+  have : IsProper f' := by
+    rw [← sq.hom_snd]
+    infer_instance
+  let : IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f') :=
+    inferInstance
+  have hpush : ∀ K : PadicSubfieldConstructible X ℓ E,
+      IsIso (constructibleToQbarPushHom ℓ k E f K) := by
+    intro K
+    apply (ObjectProperty.isIso_hom_iff _).mp
+    dsimp [constructibleToQbarPushHom]
+    exact inferInstance
+  have hpush' : ∀ K : PadicSubfieldConstructible X' ℓ E,
+      IsIso (constructibleToQbarPushHom ℓ k E f' K) := by
+    intro K
+    apply (ObjectProperty.isIso_hom_iff _).mp
+    dsimp [constructibleToQbarPushHom]
+    exact inferInstance
+  refine ⟨hpush, hpush', ?_⟩
+  intro K
+  have := hpush K
+  have : IsIso (constructibleToQbarPushHom ℓ k E f'
+      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').obj K)) :=
+    hpush' _
+  constructor
+  · dsimp [constructibleToQbarSourceHom]
+    infer_instance
+  constructor
+  · dsimp [constructibleToQbarTargetHom]
+    infer_instance
+  · exact constructibleToQbar_exchange_equality ℓ k E f g f' g' sq.toCommSq K
 
 end Square
 
