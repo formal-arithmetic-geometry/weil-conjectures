@@ -44,7 +44,7 @@ subextensions `E`. Both are currently `sorry`.
 As for the bounded constructible six functors
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), all schemes are
 separated and of finite type over a field `k` of characteristic `p > 0` with `p ≠ ℓ`, and all
-morphisms are morphisms over `Spec k`.
+morphisms are morphisms of `Over (Spec (.of k))`.
 
 ## Main statements
 
@@ -73,19 +73,13 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-  (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
-  [X'.Over (Spec (.of k))] [Y'.Over (Spec (.of k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-  [IsSeparated (X ↘ Spec (.of k))]
-  [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
-  [IsSeparated (Y ↘ Spec (.of k))]
-  [LocallyOfFiniteType (X' ↘ Spec (.of k))] [QuasiCompact (X' ↘ Spec (.of k))]
-  [IsSeparated (X' ↘ Spec (.of k))]
-  [LocallyOfFiniteType (Y' ↘ Spec (.of k))] [QuasiCompact (Y' ↘ Spec (.of k))]
-  [IsSeparated (Y' ↘ Spec (.of k))]
-  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} [f.IsOver (Spec (.of k))]
-  [g.IsOver (Spec (.of k))] [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {X Y X' Y' : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+
 
 include ℓ k in
 /-- **The proper base change theorem** for bounded constructible `E`-sheaves, `E` a finite
@@ -101,9 +95,9 @@ Y' --g---> Y
 
 with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an
 isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`. -/
-theorem isIso_boundedConstructibleBaseChange_of_isProper [IsProper f]
+theorem isIso_boundedConstructibleBaseChange_of_isProper [IsProper f.left]
     (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k sq.toCommSq) :=
+    IsIso (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ sq.toCommSq) :=
   sorry
 
 /-- **The proper base change theorem** for bounded constructible `ℚ̄_ℓ`-sheaves: for a cartesian
@@ -111,10 +105,10 @@ square of schemes `sq : IsPullback g' f' f g` with `f` proper, the base-change m
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an isomorphism of functors
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, for the condensed ring
 `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`. -/
-theorem isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl [IsProper f]
+theorem isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl [IsProper f.left]
     (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleBaseChange
-      (Profinite.padicAlgClRingObj ℓ) ℓ k sq.toCommSq) :=
+      (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq) :=
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing
