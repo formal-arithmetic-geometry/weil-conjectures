@@ -6,6 +6,12 @@ Authors: SHEAF group F4
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import Sheaf.AlgebraicGeometry.EtaleConstantRingInverseImageComparison
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.CategoryTheory.RingedToposMorphism
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-! # Underlying abelian direct-image acyclicity of module K-injectives
 
