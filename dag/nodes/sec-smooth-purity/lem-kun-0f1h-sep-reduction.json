@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-0f1h-sep-reduction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Reduction to a separably closed ground field",
@@ -13,34 +13,170 @@
   "place": "node lem-kun-0f1h-sep-reduction, order 1769"
  },
  "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-kun-separably-closed",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-kun-torsion-invertible",
   "def-kun-unbounded-exchange"
  ],
  "proof": [
   {
-   "text": "By [lem-kun-0f1c] applied to $j:U\\to X$ (and to\n$h:Y\\times_KU\\to Y\\times_KX$), formation of $Rj_*F$ and of\n$Rh_*p^{-1}F$ commutes with base change to $\\Spec(K^{\\mathrm{sep}})$,\nand by [lem-kun-bc-base-change] the pullback of the exchange\nmorphism of [def-kun-unbounded-exchange] to\n$(Y\\times_KX)_{K^{\\mathrm{sep}}}$ is the exchange morphism of the\nbase-changed diagram. Thus an isomorphism after base change to\n$K^{\\mathrm{sep}}$ implies an isomorphism over $K$ by\n[lem-kun-sep-closure-conservative].",
+   "text": "Put $L=K^{\\mathrm{sep}}$, $Z=Y\\times_KX$, $V=Y\\times_KU$, and write $r_T:T_L\\to T$ for scalar extension, for $T=U,X,V,Z$. Write $j_L,h_L,p_L,q_L$ for the maps after scalar extension. A field is Noetherian (its only ideals are $0$ and $K$), so $\\operatorname{Spec}K$ is Noetherian. By [lem-weil-pbc-finite-type-over-noetherian], $U$ and $X$ are Noetherian, in particular quasi-compact and locally Noetherian. By [lem-weil-pbc-locally-noetherian-quasi-separated], both are quasi-separated. Apply clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] to $j:U\\to X$: its source is quasi-compact and quasi-separated and its target is quasi-separated, so $j$ is quasi-compact and quasi-separated. The original square is cartesian, so clause (3) of the same node makes $h$ quasi-compact and quasi-separated. These are precisely the geometric hypotheses needed for the two applications of field-extension base change below.",
    "uses": [
-    "lem-kun-0f1c",
-    "lem-kun-bc-base-change",
-    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1h-sep-reduction.md",
+    "place": "Proof, first sentence: check the quasi-compact and quasi-separated hypotheses of lem-kun-0f1c; Stacks Tags 01T6 (morphisms-lemma-finite-type-noetherian), 01OY (properties-lemma-locally-Noetherian-quasi-separated), 03GI, 01KV, 01K5 and 01KU"
+   }
+  },
+  {
+   "text": "Regard $F$ as a complex concentrated in degree zero. Inverse image for constant coefficients is exact by [prop-weil-pbc-inverse-image-modules-exact], clause (3), with coefficient ring $\\mathbf Z$, so $p^{-1}F$ is again a sheaf concentrated in degree zero. For a geometric point $\\bar v$ of $V$, [lem-kun-stalk-as-pullback] and the inverse-image composition isomorphisms of [lem-weil-pbc-derived-inverse-image-composition] identify $(p^{-1}F)_{\\bar v}$ with $F_{p\\bar v}$. Hence every element of each such stalk is killed by an integer invertible in $K$, just as for $F$, by the pointwise definition [def-kun-torsion-invertible]. Thus $F\\in D^+(U_{\\Et})$ and $p^{-1}F\\in D^+(V_{\\Et})$ satisfy the coefficient hypotheses of [lem-kun-0f1c-exchange]; no single integer annihilating the whole sheaf is required.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-kun-stalk-as-pullback",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-kun-0f1c-exchange",
+    "def-kun-torsion-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1h-sep-reduction.md",
+    "place": "Proof, first sentence: verify both coefficient complexes before applying field-extension base change; Stacks Tags 04JC (sites-modules-lemma-flat-pullback-exact) and 0D6D (sites-cohomology-lemma-derived-pullback-composition)"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-0f1c-exchange] with $g=j$, $E=F$, and the extension $L/K$, and with $g=h$, $E=p^{-1}F$, and the same extension. It gives canonical exchange isomorphisms\n$$\na:r_X^{-1}Rj_*F\\xrightarrow{\\sim}Rj_{L,*}r_U^{-1}F,\\qquad\nb:r_Z^{-1}Rh_*p^{-1}F\\xrightarrow{\\sim}Rh_{L,*}r_V^{-1}p^{-1}F.\n$$\nThese are the field-extension comparison maps, rather than arbitrary object isomorphisms. Under inverse-image composition, $r_V^{-1}p^{-1}F\\cong p_L^{-1}r_U^{-1}F$ and $r_Z^{-1}q^{-1}\\cong q_L^{-1}r_X^{-1}$, by [lem-weil-pbc-derived-inverse-image-composition].",
+   "uses": [
+    "lem-kun-0f1c-exchange",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1h-sep-reduction.md",
+    "place": "Proof, first sentence: the two field-extension comparisons (Stacks Tag 0F1C, etale-cohomology-lemma-base-change-field-extension)"
+   }
+  },
+  {
+   "text": "Set $F_L=r_U^{-1}F$ and let $\\beta_L:q_L^{-1}Rj_{L,*}F_L\\to Rh_{L,*}p_L^{-1}F_L$ be the scalar-extended square's exchange map. All exchange maps here are evaluated at sheaves in $D^+$, so the first clause of [lem-kun-unbounded-exchange-agrees], at coefficient ring $\\mathbf Z$, identifies them with the images of the bounded-below exchange maps under the full inclusions $D^+\\hookrightarrow D$. These inclusions reflect isomorphisms: fullness puts an inverse in $D^+$, and faithfulness gives its two inverse identities there. Thus the isomorphism hypothesis and conclusion may be checked in $D^+$. The scalar-extension faces are cartesian by [def-pc-fibre-product], and [lem-weil-pbc-cartesian-square-pasting] makes the two outer rectangles cartesian. Apply the horizontal pasting formula, clause (2) of [lem-weil-pbc-exchange-identity-pasting], in two ways to the same outer rectangle from $U$ to $Z_L$. Factoring the base change as $Z_L\\xrightarrow{r_Z}Z\\xrightarrow{q}X$ gives $b\\circ r_Z^{-1}(\\beta)$; factoring it as $Z_L\\xrightarrow{q_L}X_L\\xrightarrow{r_X}X$ gives $\\beta_L\\circ q_L^{-1}(a)$. The two composite base maps, and the two composite top maps, agree by the defining equations of the scalar-extension cube. For complete typing, write $c^D_{u,v}:v^{-1}u^{-1}\\to(uv)^{-1}$ for [lem-weil-pbc-derived-inverse-image-composition] and put\n$$\nC_X=(c^D_{q,r_Z})^{-1}\\circ c^D_{r_X,q_L}:\nq_L^{-1}r_X^{-1}Rj_*F\\xrightarrow{\\sim}r_Z^{-1}q^{-1}Rj_*F,\n$$\n$$\nC_U=(c^D_{r_U,p_L})^{-1}\\circ c^D_{p,r_V}:\nr_V^{-1}p^{-1}F\\xrightarrow{\\sim}p_L^{-1}r_U^{-1}F.\n$$\nHere $qr_Z=r_Xq_L$ and $pr_V=r_Up_L$, so each composite has the displayed type. The two horizontal-pasting formulas therefore give the fully typed equality\n$$\nRh_{L,*}(C_U)\\circ b\\circ r_Z^{-1}(\\beta)\\circ C_X\n=\\beta_L\\circ q_L^{-1}(a).\n$$\nThis spells out the compatibility needed from the blueprint's phrase 'the pullback of the exchange morphism'.",
+   "uses": [
+    "lem-kun-unbounded-exchange-agrees",
+    "lem-weil-pbc-exchange-identity-pasting",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1h-sep-reduction.md",
+    "place": "Proof, second clause: compatibility of the exchange map; Stacks Tag 0E47, sites-cohomology-remark-compose-base-change-horizontal"
+   }
+  },
+  {
+   "text": "By hypothesis $\\beta_L$ is an isomorphism. The maps $a$ and $b$ are isomorphisms by Step 3, and the functor $q_L^{-1}$ sends the inverse of $a$ to an inverse of $q_L^{-1}(a)$. The equality in Step 4 consequently writes\n$$\nr_Z^{-1}(\\beta)=b^{-1}\\circ Rh_{L,*}(C_U^{-1})\\circ\\beta_L\\circ q_L^{-1}(a)\\circ C_X^{-1}\n$$\nas a composite of isomorphisms; $Rh_{L,*}(C_U^{-1})$ is the inverse of $Rh_{L,*}(C_U)$. Finally apply [lem-kun-sep-closure-conservative] to the $K$-scheme $Z$ and the derived morphism $\\beta$: since its pullback along $r_Z:Z_L\\to Z$ is an isomorphism, $\\beta$ is an isomorphism.",
+   "uses": [
     "lem-kun-sep-closure-conservative"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1h-sep-reduction.md",
+    "place": "Proof, final sentence: conservativity after scalar extension to a separable closure"
+   }
   }
  ],
  "proof_deps": [
-  "lem-kun-0f1c",
-  "lem-kun-bc-base-change",
-  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-kun-stalk-as-pullback",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-kun-0f1c-exchange",
+  "def-kun-torsion-invertible",
+  "lem-kun-unbounded-exchange-agrees",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-cartesian-square-pasting",
   "lem-kun-sep-closure-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1h-sep-reduction.md",
-  "place": "## Proof"
+  "place": "## Proof, expanded using Stacks Tags 0F1C and 0E47"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "reduction to separably closed ground field etale exchange morphism isomorphism",
+   "results": "8 hits: Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, RingHom.Etale.respectsIso, StandardEtalePair.homEquiv, StandardEtalePresentation.mapEquiv, Algebra.Etale.of_equiv, RingHom.etale_algebraMap, Algebra.IsStandardEtale.of_equiv",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state the etale field-extension exchange reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "separably closed base change conservative",
+   "results": "loogle: Unknown identifier `separably`; 0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state the etale field-extension exchange reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "separably closed|K^{\\\\mathrm{sep}}|exchange morphism",
+   "results": "Tool printed OK, 0 hits with subdirectory Mathlib. Inspection of msearch.py showed that this resolves to Mathlib/Mathlib, which is not the intended directory; this query is not used as absence evidence. Reran grep without a subdirectory.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale derived base change isomorphism can be checked over a separable closure",
+   "results": "service unavailable: Internal Server Error; 0 hits",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image etale sheaves commutes with extension of ground field and conservative inverse image",
+   "results": "8 hits: Algebra.Etale.comp, AlgebraicGeometry.IsEtale.of_comp, Algebra.IsEtaleAt.comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp, StandardEtalePair.HasMap.map, KaehlerDifferential.isBaseChange_of_formallyEtale",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state the etale field-extension exchange reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ReflectsIsomorphisms",
+   "results": "12 hits: CategoryTheory.Functor.ReflectsIsomorphisms, CategoryTheory.Functor.FullyFaithful.reflectsIsomorphisms, CategoryTheory.reflectsIsomorphisms_of_full_and_faithful, CategoryTheory.reflectsIsomorphisms_of_comp, CategoryTheory.reflectsIsomorphisms_of_iso, CategoryTheory.reflectsIsomorphisms_iso_iff, CategoryTheory.reflectsIsomorphisms_comp, CategoryTheory.isIso_of_reflects_iso",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state the etale field-extension exchange reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Ii]sIso|isIso.*baseChange|separableClosure",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean (searched AlgebraicGeometry)",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state the etale field-extension exchange reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "separably closed|exchange morphism|derivedBaseChange",
+   "results": "25 hits: Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/Analysis/Normed/Field/Dense.lean, Mathlib/Analysis/Normed/Field/Dense.lean, Mathlib/Analysis/Normed/Field/Approximation.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean (no displayed hit concerns derived etale exchange)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChange|exchange morphism|baseChange.*ReflectsIsomorphisms",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -65,5 +201,43 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-0f1h-sep-reduction",
+  "worker": "stage1",
+  "summary": "Restored the maintainer reader's canonical field-extension exchange lemma, correcting its projection notation and blueprint provenance. Step 3 now cites the canonical morphism assertion rather than an object-level identification. Preserved the five-step field-extension/pasting/conservativity route and the item statement. Revalidated all current cited statements and added complete logged searches and verbatim citations for the new statement-only node.",
+  "blueprint": [
+   "Proof, first sentence: Steps 1–3 verify hypotheses and construct the two canonical field-extension exchange isomorphisms.",
+   "Proof, second clause: Step 4 supplies the precise exchange-compatibility equation using two factorizations of one outer rectangle.",
+   "Proof, last sentence: Step 5 composes the isomorphisms and applies separable-closure conservativity."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exchange-identity-pasting",
+    "why": "Generic bounded-below abelian-etale exchange composition supplies the explicit two-path compatibility identity; the unit has no statement with this precise equation."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness with constant integer coefficients ensures the coefficient pullback is a degree-zero sheaf; no same-unit statement supplies the full coefficient-compatible exact functor."
+   },
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Generic coherent inverse-image composition identifies both pullback stalks and the two paths around the scalar-extension cube; no same-unit statement gives this coherence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exchange-identity-pasting",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-derived-inverse-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-bf879fb34",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-bf879fb34 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, new canonical exchange node, cited DAG statements, Stacks Tags 0F1C/0F1H/0E47, unit/chapter route, hypotheses, edge cases, searches, provenance, and cycle/duplicate risks. No faults found; review.md records the checks."
+ }
 }
