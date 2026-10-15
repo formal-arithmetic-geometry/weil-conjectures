@@ -32,54 +32,54 @@
  ],
  "proof": [
   {
-   "text": "Let $\\varphi:F\\to G$ be an epimorphism of sheaves of sets and $s\\in G(T)$. The epimorphism/local-surjectivity equivalence gives a covering $\\{f_i:T_i\\to T\\}_{i\\in I}$ in $X_{\\mathrm{proet}}$ and sections $t_i\\in F(T_i)$ with $\\varphi(t_i)=s|_{T_i}$.",
+   "text": "Let $\\alpha:F\\to G$ be an epimorphism and $s\\in G(T)$, where $T=\\operatorname{Spec}A$. By the epimorphism/local-surjectivity equivalence the image sieve of $s$ is covering. A covering sieve contains a family in the pro-etale precoverage. Restrict this family to a small covering subfamily $\\{g_i:T_i\\to T\\}_{i\\in I}$ and choose lifts $t_i\\in F(T_i)$ with $\\alpha(t_i)=G(g_i)(s)$. This restriction uses the existing Mathlib smallness instance for the quasi-compact weakly etale precoverage, its stability under comap, and ZeroHypercover.restrictIndexOfSmall; it changes only the indexing of a subfamily and preserves both covering and local lifts.",
    "uses": [
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WN, lemma-mono-epi-sheaves; Tag 00WM, definition-sheaves-injective-surjective"
+    "place": "Tags 00WM and 00WN; small-cover indexing uses Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean and Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean"
    }
   },
   {
-   "text": "The underlying family is a pro-etale covering of the affine scheme $T$. Apply the covering-section lemma using exactly the ring splitting hypothesis of the item. It gives $\\sigma:T\\to C=\\coprod_iT_i$ with $p\\circ\\sigma=\\mathrm{id}_T$, where $p|_{T_i}=f_i$. This is an assertion about schemes; no change from the small site to a big site is needed.",
+   "text": "Form $C=\\coprod_iT_i$ and $p=\\coprod_i g_i:C\\to T$. Convert the ring-map splitting hypothesis to the equivalent algebra formulation, using RingHom.faithfullyFlat_algebraMap_iff and RingHom.weaklyEtale_algebraMap_iff. The covering-section lemma gives $\\sigma:T\\to C$ with $\\sigma\\mathbin{\\gg}p=\\mathrm{id}_T$. Each $g_i$ is weakly etale because the underlying family belongs to the pro-etale precoverage. Source locality gives weak etaleness of $p$ (Mathlib IsZariskiLocalAtSource.sigmaDesc), so the composite $C\\to T\\to X$ is weakly etale. Consequently $C$, $p$, and $\\sigma$ belong to the same small site over $X$, with coprojections $\\iota_i:T_i\\to C$ satisfying $\\iota_i\\mathbin{\\gg}p=g_i$.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-wcontractible-cover-section"
+    "lem-weil-pbc-wcontractible-cover-section",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-weakly-etale-source-locality",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-weakly-etale-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098F, lemma-w-contractible-proetale-cover, forward proof"
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, forward proof; glue before pulling back the coproduct components"
    }
   },
   {
-   "text": "The coprojections have disjoint clopen images covering $C$. Their inverse images $U_i=\\sigma^{-1}(T_i)$ are disjoint clopen opens covering $T$, and $\\sigma|_{U_i}$ factors through $T_i$, with composite to $T$ the inclusion $U_i\\hookrightarrow T$. Quasi-compactness of $\\operatorname{Spec}A$ gives finitely many of the $U_i$ covering $T$; disjointness forces all the remaining $U_i$ to be empty. An open immersion is flat because its maps on local rings are isomorphisms, and its diagonal is an isomorphism, hence flat; thus each $U_i\\to T$ is weakly etale. Composition stability makes $U_i\\to X$ an object of the small site, within the original size bound. These finitely many opens form a pro-etale covering: for any affine test open $V\\subset T$, take affine neighborhoods in the intersections $V\\cap U_i$ and then a finite subcover of $V$. Thus their images have union exactly $V$.",
+   "text": "The coprojections form a disjoint open cover of $C$ and hence a pro-etale cover in the small site. In Lean this is the coproduct open cover together with Scheme.zariskiPrecoverage_le_propQCPrecoverage and the defining comap of the small precoverage. The family $t_i$ is compatible: for two maps from a test object into the same component whose composites into $C$ agree, monomorphy makes the maps equal. For maps into distinct components the test scheme is empty, by disjointness of their images. The empty covering gives a unique section of $F$ on that test object, so the two restrictions coincide. Apply the sheaf axiom to obtain $z\\in F(C)$ restricting to every $t_i$. This works for the empty index type as well, without a nontriviality assumption on $A$.",
    "uses": [
     "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "def-weil-weakly-etale-morphism",
-    "def-weil-flat-morphism",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "def-weil-pbc-proetale-site",
-    "def-weil-open-immersion"
+    "def-weil-open-immersion",
+    "def-weil-pbc-proetale-site"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098F, lemma-w-contractible-proetale-cover, inverse images of the coproduct components; Tag 098H, lemma-w-contractible-is-weakly-contractible, proof (3) implies (2), applied to the small site"
+    "place": "Tag 098H, lemma-w-contractible-is-weakly-contractible, disjoint-cover product/gluing argument; applied to the covering coproduct itself"
    }
   },
   {
-   "text": "Restrict $t_i$ along $\\sigma|_{U_i}:U_i\\to T_i$, obtaining $u_i\\in F(U_i)$. Naturality gives $\\varphi(u_i)=s|_{U_i}$ since $f_i\\circ\\sigma|_{U_i}$ is the inclusion. The empty scheme is a site object with an empty covering, so both sheaves have exactly one section there. Hence the $u_i$ agree on every pairwise intersection, which is empty for distinct indices. The sheaf axiom glues them to $u\\in F(T)$; the restrictions of $\\varphi(u)$ and $s$ agree on the covering, so sheaf uniqueness gives $\\varphi(u)=s$. The same argument applies to an empty covering when $A$ is the zero ring.",
+   "text": "Naturality gives $G(\\iota_i)(\\alpha(z))=\\alpha(t_i)=G(g_i)(s)=G(\\iota_i)(G(p)(s))$. Separatedness of $G$ for the coprojection cover gives $\\alpha(z)=G(p)(s)$. Pull back $z$ along $\\sigma$. Naturality and contravariant functoriality yield $\\alpha(F(\\sigma)(z))=G(\\sigma)(G(p)(s))=G(\\sigma\\mathbin{\\gg}p)(s)=s$. Thus the evaluation map is surjective. No finite clopen refinement of $T$ is needed: gluing on $C$ before pullback gives exactly the same preimage.",
    "uses": [
     "def-weil-pbc-proetale-site"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098H, lemma-w-contractible-is-weakly-contractible, proof (3) implies (2)"
+    "place": "Tag 098H, lemma-w-contractible-is-weakly-contractible, proof (3) implies (2), with gluing moved to the covering coproduct"
    }
   }
  ],
@@ -88,16 +88,15 @@
   "def-weil-pbc-proetale-site",
   "lem-weil-pbc-wcontractible-cover-section",
   "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "def-weil-weakly-etale-morphism",
-  "def-weil-flat-morphism",
+  "lem-weil-pbc-weakly-etale-source-locality",
   "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-weakly-etale-morphism",
   "def-weil-open-immersion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 098F and 098H; sites.tex Tags 00WM and 00WN. Explicit small-site adaptation and finite clopen refinement argument."
+  "place": "B3, stage 3: Tags 098F and 098H, small-site adaptation. Glue the local lifts on the small covering coproduct and then pull back along its section. The Lean proof uses the existing cover-section statement and Mathlib, and introduces no unproved intermediate statements."
  },
  "mathlib_searches": [
   {
@@ -204,5 +203,15 @@
   "by": "NR",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T154152-L-158807",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
