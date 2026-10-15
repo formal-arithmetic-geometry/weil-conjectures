@@ -6,8 +6,6 @@ Authors: SHEAF group E4
 module
 
 public import Sheaf.Paper.ProfiniteTestObjectFunctor
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import Mathlib.CategoryTheory.Sites.DenseSubsite.Basic
 import all Sheaf.Paper.ProEtalePointComponentsMaps
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 
