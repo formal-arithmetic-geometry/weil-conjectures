@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Choose a finite affine open covering $T=\\bigcup_{a=1}^r A_a$, using quasi-compactness. For each $A_a$, the covering definition [def-weil-pbc-proetale-covering] supplies finitely many affine opens $W_{ab}\\subset U_{i(a,b)}$ with images whose union is exactly $A_a$. Retain the finite set $J$ of all indices $i(a,b)$. The maps $W_{ab}\\to A_a$ form a pro-etale covering by the same affine-open criterion: over a principal open $D(h)\\subset A_a$, use the principal affine opens $D(f_{ab}^*h)\\subset W_{ab}$; an arbitrary affine open of $A_a$ has a finite covering by such principal opens. Thus the required affine witnesses exist for every affine open; composing these coverings with the Zariski covering of $T$ gives a covering refining $\\{U_j\\to T\\}_{j\\in J}$, so this retained family covers. These are the composition and refinement axioms of the site [def-weil-pbc-proetale-site]. If $T=\\varnothing$, take $J=\\varnothing$.",
+   "text": "Choose a finite affine open cover of T (Scheme.affineCover followed by OpenCover.finiteSubcover). Pull the given weakly etale covering family back over each chart. QuasiCompactCover.exists_hom supplies a finite affine refinement of each pullback. On an affine target, such a finite affine covering is quasi-compact. Bind these refinements with the finite affine open cover, obtaining a finite quasi-compact weakly etale covering W_j of T and a refinement map to the original family. This is the private, fully proved Lean helper exists_finite_refinement; it requires no quasi-separatedness of T. Retain the original affine weakly contractible objects indexed by the refinement map (repetition is harmless).",
    "uses": [
     "def-weil-pbc-proetale-covering",
     "def-weil-pbc-proetale-site"
@@ -51,11 +51,12 @@
    }
   },
   {
-   "text": "Form $V=\\coprod_{j\\in J}U_j$. By [lem-weil-pbc-proetale-qcqs-finite-family-geometry], each affine $U_j$ is qcqs and this finite coproduct is an affine object of the full site. Let $f:V\\to T$ be induced by the covering arrows. It is weakly etale by [def-weil-weakly-etale-morphism]: at each point of $V$, flatness of $f$ is flatness of the corresponding $U_j\\to T$; its diagonal on the open-and-closed piece $U_j\\times_TU_k$ is the diagonal of $U_j\\to T$ if $j=k$, and has empty source otherwise, hence is flat. For any affine open $A\\subset T$, the affine opens witnessing the covering criterion for the retained family are also affine opens of $V$, with the same images. Thus [def-weil-pbc-proetale-covering] makes $\\{V\\to T\\}$ a covering. For $J=\\varnothing$ and $T=\\varnothing$, flatness and the covering criterion are vacuous.",
+   "text": "Apply [lem-weil-pbc-proetale-finite-coproduct-evaluation] directly to the retained finite family; affine schemes are quasi-compact and quasi-separated. It gives an affine object W, inclusions, and the coproduct universal property for their representable sheaves. Descend the original covering arrows using that coproduct universal property and the full faithfulness of the subcanonical lifted Yoneda functor, obtaining g : W -> T whose composite with each inclusion is the original arrow. The finite quasi-compact refinement of step 2 consequently refines the singleton g. QuasiCompactCover.of_hom proves its quasi-compact covering condition; the same factorization proves surjectivity. The underlying arrow is weakly etale because its composite with T -> X is W -> X and WeaklyEtale.of_comp cancels the weakly etale structural arrow. Thus the singleton belongs to the pro-etale precoverage [def-weil-pbc-proetale-covering].",
    "uses": [
-    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "lem-weil-pbc-proetale-finite-coproduct-evaluation",
     "def-weil-weakly-etale-morphism",
-    "def-weil-pbc-proetale-covering"
+    "def-weil-pbc-proetale-covering",
+    "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
    "source": {
@@ -64,9 +65,9 @@
    }
   },
   {
-   "text": "Let $F\\to G$ be any epimorphism of sheaves of sets on the full site. By [lem-weil-pbc-proetale-qcqs-finite-family-geometry], the restriction maps identify $F(V)$ and $G(V)$ naturally with $\\prod_{j\\in J}F(U_j)$ and $\\prod_{j\\in J}G(U_j)$. Given $(g_j)$, choose a preimage $f_j$ of each $g_j$ using weak contractibility of $U_j$ from step 1. The tuple $(f_j)$ then maps to $(g_j)$. If $J$ is empty both products are singletons and their unique map is surjective. Hence $F(V)\\to G(V)$ is surjective and $V$ is weakly contractible.",
+   "text": "For an epimorphism F -> G and a section s of G over W, use the section-product bijection of [lem-weil-pbc-proetale-finite-coproduct-evaluation]. Weak contractibility of every retained original object supplies a preimage of the restriction of s on each summand. Surjectivity of the product comparison for F glues this tuple to a section a over W. Naturality of the comparison and its injectivity for G show that the image of a is s. The argument includes the empty index type without a separate choice of an element: the dependent tuple and its gluing still exist.",
    "uses": [
-    "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
+    "lem-weil-pbc-proetale-finite-coproduct-evaluation"
    ],
    "elementary": true,
    "source": {
@@ -79,13 +80,13 @@
   "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
   "def-weil-pbc-proetale-covering",
   "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-weil-pbc-proetale-finite-coproduct-evaluation",
   "def-weil-weakly-etale-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 0F4P, lemma-weakly-contractible-cover"
+  "place": "Tag 0F4P, finite-subfamily and section-product argument; implemented using Mathlib finite affine refinements and the direct finite-coproduct-evaluation lemma, with the map to T descended through lifted Yoneda."
  },
  "mathlib_searches": [
   {
@@ -177,5 +178,15 @@
   "by": "NF",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T154157-L-160189",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
