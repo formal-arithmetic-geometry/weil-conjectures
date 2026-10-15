@@ -140,29 +140,30 @@
  "lean": {
   "module": "Sheaf.Algebra.Homology.KFlat",
   "declaration": "CochainComplex.IsKFlat",
+  "file": "lean/Sheaf/Algebra/Homology/KFlat.lean",
+  "statement": "def IsKFlat (K : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "H3 supporting repair under §1(B): the old coefficient universe was exactly max u v, so it could not express one ambient coefficient universe for independently sized sites. Independent coefficient w and EssentiallySmall.{w} C now express relative smallness without any universe equality. The acyclic-total-tensor and quasi-isomorphism-resolution definitions are unchanged. Named sheafification, local-bijection, tensor-localization and tensor-zero helper theorems have full source/proof docstrings and postponed proofs; no private definition or hollow data is introduced.",
   "declarations": [
    "CochainComplex.IsKFlat",
    "CochainComplex.IsKFlatResolution",
+   "SheafOfModules.isMonoidal_W_separateHomUniverse",
    "SheafOfModules.preservesZeroMorphisms_curriedTensor",
    "SheafOfModules.preservesZeroMorphisms_curriedTensor_obj",
-   "SheafOfModules.isMonoidal_W_separateHomUniverse"
-  ],
-  "file": "lean/Sheaf/Algebra/Homology/KFlat.lean",
-  "statement": "def IsKFlat (K : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) : Prop",
-  "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-11",
-  "existing": false,
-  "note": "The old definition required the site object and morphism universes to be equal, excluding Scheme.ProEt (objects u+1, morphisms u). Generalize the hom universe, retaining the same acyclic-total-tensor predicate and resolution, with the monoidality proof named separately.",
-  "fixed_by": "R-ddt1257"
+   "SheafOfModules.hasSheafify_coefficientUniverse",
+   "SheafOfModules.wEqualsLocallyBijective_coefficientUniverse"
+  ]
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "R-ddt1257",
-  "group": "H1",
-  "result": "fix",
-  "note": "Y_proet/A_Y (CommRingCat constant sheaf forgotten to RingCat), K1 K2 unbounded, chosen P->K1 QuasiIso with sheaf IsKFlat (06YN), value Q.obj Tot(P (x) K2) via mapBifunctor curriedTensor of SheafOfModules.monoidalCategory, B_Y restrictScalars along constant-sheaf map in degree 0; KFlat fixed with synthInstance.maxSize 256 (HasMapBifunctor failed at max u v); 13 KFlat importers + DerivedTensor recompiled clean against fixed KFlat"
+  "reviewer": "NT-stage2-Codex-19ac740ca",
+  "group": "NR",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable item, all statement dependencies, sources, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signatures. All four modules reproduced cleanly through scompile.py. No delivery faults found; branch and project clones unchanged."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

@@ -77,11 +77,12 @@
   "module": "Sheaf.CategoryTheory.AlgebraicInverseImage",
   "declaration": "SheafOfModules.AlgebraicInverseImage",
   "file": "lean/Sheaf/CategoryTheory/AlgebraicInverseImage.lean",
-  "statement": "structure AlgebraicInverseImage {C D : Type u} [Category.{u} C] [Category.{u} D] {JC : GrothendieckTopology C} {JD : GrothendieckTopology D} (L : Sheaf JC (Type u) ⥤ Sheaf JD (Type u)) (R : Sheaf JC CommRingCat.{u}) (RI : Sheaf JD CommRingCat.{u})",
+  "statement": "structure AlgebraicInverseImage {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{w} C] [EssentiallySmall.{w} D] {JC : GrothendieckTopology C} {JD : GrothendieckTopology D} (L : Sheaf JC (Type (w)) ⥤ Sheaf JD (Type (w))) (R : Sheaf JC CommRingCat.{w}) (RI : Sheaf JD CommRingCat.{w})",
   "branch": "newtargets-dag",
-  "by": "NG",
+  "by": "NR",
   "date": "2026-10-15",
-  "existing": false
+  "existing": false,
+  "note": "H3 repair under §1(B): the old interface equated both site object and morphism universes with the coefficient universe. The identical operation-graph presentation now has independent uC, vC, uD, vD and coefficient w, with EssentiallySmall.{w} for each site to express smallness relative to coefficients. All graph and naturality fields are retained."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -94,9 +95,9 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-36878c0b9",
-  "group": "NG",
+  "reviewer": "NT-stage2-Codex-19ac740ca",
+  "group": "NR",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, dependencies, source passages, inverse-image operations, canonical comparison laws, universes, edge cases, records, and pilot gates. Both snapshot modules reproduced clean server-only compiles. No delivery errors found."
+  "note": "Wrote review.md. Checked the immutable item, all statement dependencies, sources, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signatures. All four modules reproduced cleanly through scompile.py. No delivery faults found; branch and project clones unchanged."
  }
 }
