@@ -3,28 +3,195 @@
  "blueprint": {
   "is": "def-pur-section-invariant",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Section invariant",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting), let $g:V\\to B$ be\nsmooth and let\n$s:B\\hookrightarrow V$ be a closed section. The\n*section invariant* is the invertible object of\n$\\operatorname{Pic}\\bigl(D^b_{ctf}(B,\\Lambda)\\bigr)$\n\n$$\nC(g,s)\\;=\\;Ls^*\\omega_g\\;=\\;Ls^*Rg^!\\Lambda_B,\n$$\n\ninvertible by [def-pur-co-smoothness].",
+ "statement": "Use the purity coefficient conventions [def-pur-conventions]: the global field $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, a finite extension $E/\\mathbf Q_\\ell$ with uniformizer $\\varpi_E$, $n\\geq1$, and $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. The finite coefficient stage is $\\Lambda=A$; the stages $\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell$ use the coefficient constructions specified in those conventions. Let $B,V$ be finite-type $k$-schemes [def-weil-finite-type-morphism], let $g:V\\to B$ be smooth [def-sbc-smooth-morphisms], separated [def-weil-proper-morphism] and of finite type, and let $s:B\\to V$ be a closed immersion [def-weil-closed-immersion] with $g\\circ s=\\mathrm{id}_B$.\n\nOn the small pro-etale sites [def-weil-pbc-proetale-site], let $Rg^!$ be the constructible exceptional inverse image [def-weil-exceptional-inverse-image], let $Ls^*$ and $\\otimes^L_\\Lambda$ be the derived operations [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor], and let $\\Lambda_T$ denote the coefficient tensor unit on a scheme $T$: the constant sheaf $A_T$ at finite level, the completed coefficient sheaf $\\widehat{\\mathcal O}_{E,T}$ [def-weil-completed-integral-coefficients] at integral level, and its rationalized or common-stage image at the field levels [def-weil-derived-pullback-tensor-hom]. Put $\\omega_g:=Rg^!\\Lambda_B$. Define the *section invariant* by the actual derived pullback\n$$\n C(g,s):=Ls^*\\omega_g=Ls^*Rg^!\\Lambda_B.\n$$\nIt is tensor-invertible in $D^b_{ctf}(B,\\Lambda)$ [def-weil-finite-tor-amplitude]: there is $Q\\in D^b_{ctf}(B,\\Lambda)$ with $C(g,s)\\otimes^L_\\Lambda Q\\simeq\\Lambda_B\\simeq Q\\otimes^L_\\Lambda C(g,s)$. Thus it is an object of $\\operatorname{Pic}(D^b_{ctf}(B,\\Lambda))$, the groupoid whose objects are tensor-invertible objects and whose arrows are their isomorphisms. No choice of an orientation or of an isomorphism to a Tate twist is part of this definition.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-pur-section-invariant.md",
   "place": "node def-pur-section-invariant, order 1897"
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "def-pur-co-smoothness",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
   "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
   "def-weil-derived-tensor",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-finite-tor-amplitude",
+  "def-weil-completed-integral-coefficients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "First allow the relative dimension of $g$ to vary. By [sbc-lem-smooth-relative-dimension-locally-constant] (Stacks Tag 02G1, lemma-smooth-omega-finite-locally-free), its dimension loci $V_d$ are open and closed. They form a disjoint open cover of the quasi-compact scheme $V$, so only finitely many are nonempty. Each restricted map $g_d:V_d\\to B$ is smooth separated of finite type, of pure relative dimension $d$: smoothness is local on the source, the diagonal is the restriction of the closed diagonal of $g$, and a clopen subset of a quasi-compact scheme is quasi-compact.\n\nThe coefficient sheaf category on $V$ is the product of those on its finitely many pieces. Explicitly, restrict a sheaf to the pieces, and recover $(F_d)_d$ by the sheaf assigning to $U\\to V$ the finite product $\\prod_dF_d(U\\times_VV_d)$. The gluing lemma [lem-weil-pbc-site-module-sheaf-gluing] applies to this clopen covering; different pieces have empty overlap. A map between these products is exactly its component maps, and restricting and reassembling are inverse by the sheaf axiom. Apply these exact inverse functors termwise to complexes; acyclicity and quasi-isomorphisms are componentwise, so they induce the derived equivalence. Tensor products and units are componentwise. Finite-level bounded constructibility and Tor bounds are componentwise: take the union of the finite strata and the minimum and maximum of the finitely many interval endpoints [def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude]. For the integral category, the completed coefficient ring, reductions and derived limits are componentwise under the same equivalence; take common bounds for the finitely many uniform reduction intervals in [def-weil-derived-complete-integral-detailed]. Rationalization and the common-stage construction are componentwise by [def-weil-derived-pullback-tensor-hom]; finitely many field stages have a common finite compositum.\n\nAt finite coefficients choose compactifications $V_d\\xrightarrow{j_d}\\overline V_d\\xrightarrow{p_d}B$ using [thm-nagata-compactification]; its base hypothesis holds since the finite-type $k$-scheme $B$ is quasi-compact and quasi-separated. Their finite disjoint union is a compactification of $g$: $\\coprod_dj_d$ is open, and $\\coprod_dp_d$ is proper. For the latter assertion, finite type is checked on each of the finitely many components, the diagonal is closed on the equal-component products and empty on the unequal ones, and after any base change the image of a closed subset is the finite union of its closed component images [def-weil-proper-morphism]. The compact-support formula [def-compact-support-direct-image-detailed] now gives\n$$\n Rg_!(K_d)_d\\simeq\\bigoplus_dR(g_d)_!K_d.\n$$\nIndeed extension by zero is componentwise; the sheaf direct image of a finite disjoint union is the finite product of component direct images, and finite product is finite direct sum for modules. The derived formula follows by taking componentwise K-injective resolutions in the product category [def-weil-derived-direct-image]. For bounded constructible $K_d$ the adjunction in [def-weil-exceptional-inverse-image] yields\n$$\n \\operatorname{Hom}((K_d)_d,\\omega_g)\n \\cong\\operatorname{Hom}(Rg_!(K_d)_d,\\Lambda_B)\n \\cong\\prod_d\\operatorname{Hom}(R(g_d)_!K_d,\\Lambda_B)\n \\cong\\prod_d\\operatorname{Hom}(K_d,\\omega_{g_d}).\n$$\nThese identifications are natural in all $K_d$, so uniqueness of a representing object identifies the components of $\\omega_g$ with $\\omega_{g_d}$. The identification is canonical from these adjunctions and is compatible with coefficient reduction. At integral coefficients apply the componentwise derived-limit construction defining $Rg^!$ in [def-weil-exceptional-inverse-image] to these compatible finite-level identifications; rationalization and the common-stage construction then give the identification at the two field stages. If $V$ is empty the product has no factors and has its unique object; the same formulas apply.",
+   "uses": [
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "lem-weil-pbc-site-module-sheaf-gluing",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude",
+    "def-compact-support-direct-image-detailed",
+    "def-weil-exceptional-inverse-image",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-pullback-tensor-hom",
+    "thm-nagata-compactification",
+    "def-weil-proper-morphism",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "node def-pur-section-invariant, order 1897"
+   }
+  },
+  {
+   "text": "Apply the invertibility clause of [thm-pur-cohomological-smoothness] to each $g_d$ of step 1. Its schemes and coefficients are in the same purity conventions, and each $g_d$ is smooth separated with the single relative dimension $d$ required by that theorem. Choose an inverse $P_d$ of $\\omega_{g_d}$ in the stated finite-Tor category. The finite product construction of step 1 gives a genuine object $P$ with these components, and the componentwise inverse isomorphisms give $\\omega_g\\otimes^L_\\Lambda P\\simeq\\Lambda_V\\simeq P\\otimes^L_\\Lambda\\omega_g$. Thus $\\omega_g$ and its inverse belong to $D^b_{ctf}(V,\\Lambda)$. No implication from geometric smoothness to cohomological smoothness is taken from the definition of cohomological smoothness; the required mathematical input is the theorem just cited.",
+   "uses": [
+    "thm-pur-cohomological-smoothness",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "node def-pur-section-invariant, order 1897"
+   }
+  },
+  {
+   "text": "Define $C(g,s)=Ls^*\\omega_g$ using the already defined derived pullback and put $Q=Ls^*P$, with $P$ from step 2. The underlying data are this actual pullback, rather than an object chosen from an existence assertion. Applying $Ls^*$ to the two inverse isomorphisms of step 2 and using the finite-level ambient comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the integral calculation below gives\n$$\n C(g,s)\\otimes^L_\\Lambda Q\\simeq Ls^*\\Lambda_V\n \\simeq Q\\otimes^L_\\Lambda C(g,s).\n$$\nAt finite coefficients $Ls^*$ is exact termwise inverse image and $Ls^*\\Lambda_V=\\Lambda_B$ by [def-weil-derived-pullback-tensor-hom]. At integral coefficients that definition computes $Ls^*\\Lambda_V$ as the derived limit of the finite constant units on $B$; [lem-weil-constant-coefficient-objects-constructible], clause 2, identifies this derived limit with the completed unit $\\widehat{\\mathcal O}_{E,B}$. At rational coefficients apply the rationalization functor to this unit isomorphism; at algebraically closed coefficients represent it by that isomorphism at the chosen finite field stage. Thus the two displayed isomorphisms have middle object $\\Lambda_B$ at every stage.\n\nCheck membership in $D^b_{ctf}$ for both pullbacks at finite coefficients as follows. For $F\\in\\{\\omega_g,P\\}$ choose its bounded cohomological interval and a finite constructibility partition for each of its nonzero cohomology sheaves. Exact inverse image preserves that interval. The inverse images of the strata are locally closed and constructible, the latter by [lem-pur-scheme-constructible-preimage]. On a stratum, pull back a covering trivializing its locally constant sheaf; the pulled-back covering is a covering and each constant finite module sheaf pulls back to the same constant finite module sheaf. These assertions follow from the covering-preserving base-change functor and the inverse-image construction [def-weil-proetale-inverse-image] and the definition [def-weil-proetale-locally-constant-sheaf]. Therefore all the pulled-back cohomology sheaves are constructible [def-weil-finite-torsion-constructibility].\n\nFor a Tor interval $[a_F,b_F]$ of $F$ and any coefficient-module sheaf $M$ on $B$ in degree zero, the section identity $g\\circ s=\\mathrm{id}_B$ gives $Ls^*Lg^*M\\simeq M$, and $Lg^*M$ is in degree zero. This is ordinary inverse-image composition, applied termwise because the inverse images are exact [def-weil-derived-pullback-tensor-hom, def-weil-proetale-inverse-image]. The ambient ringed-topos tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applies to $F$ and the possibly nonconstructible $Lg^*M$ and gives\n$$\n (Ls^*F)\\otimes^L_A M\\simeq Ls^*(F\\otimes^L_A Lg^*M).\n$$\nThe right side has cohomology only in $[a_F,b_F]$, by the Tor bound of $F$ and exactness of $Ls^*$. Since this holds for every $M$, [def-weil-finite-tor-amplitude] gives finite Tor amplitude of $Ls^*F$, for each of the two choices of $F$.\n\nAt integral coefficients take $F\\in\\{\\omega_g,P\\}$ and write $F_j=F\\otimes^L_{\\mathcal O_E}A_{E,j}$. By [lem-pur-integral-operations-preserve-constructible], $Ls^*F$ is bounded constructible and its $j$-th reduction is $Ls_j^*F_j$. There is one Tor interval $[a_F,b_F]$ for all $F_j$ by [def-weil-finite-tor-amplitude]. For every $j$ and every $A_{E,j}$-module sheaf $M$ on $B$, finite-level exactness, the section identity and the ambient tensor comparison give\n$$\n (Ls_j^*F_j)\\otimes^L_{A_{E,j}}M\n \\simeq Ls_j^*(F_j\\otimes^L_{A_{E,j}}Lg_j^*M).\n$$\nThe right side is concentrated in $[a_F,b_F]$, independent of $j$. This proves the uniform Tor condition for the integral pullbacks. At the rational and common-stage field levels, pullback is the image of integral pullback on representatives [def-weil-derived-pullback-tensor-hom], so it is bounded constructible, and finite Tor amplitude is part of the definition at those levels [def-weil-finite-tor-amplitude]. To justify the integral tensor comparison used above, set $H=\\omega_g$ and $J=P$. The pullback definition [def-weil-derived-pullback-tensor-hom] and the tensor-reduction and pullback-reduction formulas of [lem-pur-integral-operations-preserve-constructible] identify the two sides of the desired comparison with\n$$\n Ls^*(H\\widehat\\otimes^L_{\\mathcal O_E}J)\n \\simeq R\\varprojlim_j\\operatorname{Res}_j\n s_j^{-1}(H_j\\otimes^L_{A_{E,j}}J_j),\n$$\n$$\n Ls^*H\\widehat\\otimes^L_{\\mathcal O_E}Ls^*J\n \\simeq R\\varprojlim_j\\operatorname{Res}_j\n (s_j^{-1}H_j\\otimes^L_{A_{E,j}}s_j^{-1}J_j).\n$$\nFor every $j$ the ambient tensor-pullback lemma identifies the two terms. The identifications respect the tower maps: compute the ambient comparison with K-flat resolutions with flat terms, as in that lemma. On each total-complex summand its module map is the canonical pure-tensor comparison. Reducing a coefficient and then applying this comparison gives the tensor of the reduced factors, which is also obtained by first comparing and then reducing each factor. This equality commutes with the complex differentials, so gives commuting squares of the tower complexes. The resulting isomorphism of towers yields an isomorphism of their derived limits. Apply it to the two inverse isomorphisms $H\\widehat\\otimes^LJ\\simeq\\Lambda_V$ and $J\\widehat\\otimes^LH\\simeq\\Lambda_V$ from step 2. At the two field stages, apply rationalization to these isomorphisms or represent them at one common finite field stage; this is exactly the operation definition already cited. This proves the initially displayed inverse isomorphisms without assuming bounded tensor closure for arbitrary finite-level constructible complexes. They are now between objects of $D^b_{ctf}(B,\\Lambda)$ and prove the asserted membership in its Picard groupoid.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-pur-scheme-constructible-preimage",
+    "def-weil-proetale-inverse-image",
+    "def-weil-proetale-locally-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "node def-pur-section-invariant, order 1897"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "thm-nagata-compactification",
+  "def-weil-proper-morphism",
+  "def-weil-derived-direct-image",
+  "thm-pur-cohomological-smoothness",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-pur-scheme-constructible-preimage",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-locally-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Definition formula; expanded well-definedness and invertibility argument using existing DAG statements, with varying relative dimension handled by finite clopen decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Section invariant of a smooth scheme morphism with a closed section, derived pullback of its relative dualizing complex",
+   "results": "Scheme immersion/normalization and ideal-sheaf constructions; no exceptional inverse image or section-invariant construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.IsInvertible",
+   "results": "Loogle returned unknown identifier 'CategoryTheory.IsInvertible'; no mathematical search result.",
+   "date": "2026-10-16",
+   "verdict": "invalid query; no conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionInvariant|dualizingComplex|cohomologically.smooth",
+   "results": "No Mathlib source hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback of the relative dualizing complex along a section of a smooth morphism",
+   "results": "HTTP Internal Server Error; service unavailable.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism with a section define C(g,s) as s inverse image of g exceptional inverse image of the constant sheaf",
+   "results": "Scheme.Hom.appLE/app and restrictions to basic opens, plus liftCoborder_app; these concern structure-sheaf sections, not exceptional inverse image.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTensorInvertible\"",
+   "results": "Loogle returned no hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|exceptional.*(image|pullback)|IsTensorInvertible|Picard",
+   "results": "Only skeletal-category comment mentioning PicardGroup and generic comments about dualizing category-theory files; no relative dualizing complex or section invariant.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "Loogle returned no hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "section.invariant|relative.dualizing|upperShriek|exceptionalInverse",
+   "results": "Only section names Invariant, InvariantSubfields, invariantExtension, InvariantForm, InvariantBasisNumber, Invariants, invariantsResMap; unrelated uses of the word invariant.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|sectionInvariant|tensor.invertible",
+   "results": "Ten hits, all comments about dualizing unrelated constructions; no sectionInvariant or tensor-invertible dualizing sheaf theorem.",
+   "verdict": "no match",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"IsUnit\"",
+   "results": "Loogle returned zero hits.",
+   "verdict": "no match",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal inverse image functor sends a tensor invertible dualizing sheaf to an invertible object",
+   "results": "Eight adjacent sheaf-monoidal and LightCondensed declarations; none constructs the exceptional inverse image or proves the section-invariant finite-Tor/Picard assertion.",
+   "verdict": "no match",
+   "date": "2026-10-16"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -54,5 +221,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv"
+ "unit": "sk-def-purity-conv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-pur-section-invariant",
+  "worker": "NX second reader",
+  "summary": "Stage-1 repair and independent second reading: explicit exceptional-inverse-image domain and completed integral unit; retained the construction and Picard conclusion. Filled compactification existence, finite clopen product, pullback constructibility, arbitrary-sheaf Tor test and uniform integral reduction arguments using existing nodes only. No new nodes or Lean delivery. Avoided the existing overstrong bounded-constructible tensor lemma; proved the needed integral comparison by explicit compatible finite-reduction maps.",
+  "blueprint": "Realizes the section-invariant formula in sk-def-purity-conv and the entire definition def-pur-section-invariant; supplies the missing justification of its final sentence without using a purity orientation.",
+  "tool_uses": [
+   {
+    "node": "thm-pur-cohomological-smoothness",
+    "why": "Generic orientation-free invertibility of the relative dualizing object for a smooth separated pure-dimensional morphism; the conventions unit defines objects but gives no such theorem."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-sheaf-gluing",
+    "why": "Generic sheaf gluing tool used only on a finite disjoint open-and-closed cover to construct the product equivalence; no result of this conventions unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor-pullback comparison for arbitrary ringed-topos complexes. The Tor-amplitude test tensors with an arbitrary coefficient sheaf, outside the constructible-only comparison node."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic integral pullback preservation and its exact finite-reduction formula, needed to justify the uniform finite-Tor check beyond finite coefficients."
+   },
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Identifies the integral tensor unit with its derived system of finite constant reductions; no such result is stated in the conventions unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pur-cohomological-smoothness",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-constant-coefficient-objects-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-8553211b6",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-8553211b6 (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, cited nodes and source locations. Verified coefficient categories, separated finite-type hypotheses, morphism orientation, finite clopen decomposition, exceptional-adjunction construction, cohomological-smoothness invertibility, arbitrary-module Tor checks, integral reductions, completed units, and field transports. No new nodes or circular/restated splits; no Lean or build actions performed."
+ }
 }
