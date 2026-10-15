@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
+import Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit
+import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-!
 # Torsion cohomological dimension of an inverse limit
@@ -39,7 +41,19 @@ theorem HasTorsionCohomologicalDimensionLE.of_isLimit {I : Type u} [SmallCategor
     [∀ i, QuasiSeparatedSpace (D.obj i)] [∀ {i j : I} (g : i ⟶ j), IsAffineHom (D.map g)]
     (c : Cone D) (hc : IsLimit c) {n : ℕ}
     (h : ∀ i, (D.obj i).HasTorsionCohomologicalDimensionLE n) :
-    c.pt.HasTorsionCohomologicalDimensionLE n :=
-  sorry
+    c.pt.HasTorsionCohomologicalDimensionLE n := by
+  -- The stated affine-limit theorem uses derived global sections instead of `Sheaf.H`.
+  have h' (i : I) : (D.obj i).HasTorsionEtaleCohomologicalDimensionLE n := by
+    intro F hF q hq
+    have : Subsingleton ((Sheaf.functorH (D.obj i).smallEtaleTopology q).obj F) :=
+      h i F hF q hq
+    obtain ⟨e⟩ := nonempty_sheafH_extDerivedIso (D.obj i) q
+    exact (e.app F).addCommGroupIsoToAddEquiv.symm.injective.subsingleton
+  have hlim := hasTorsionEtaleCohomologicalDimensionLE_of_isLimit D c hc n h'
+  intro F hF q hq
+  obtain ⟨e⟩ := nonempty_sheafH_extDerivedIso c.pt q
+  have : Subsingleton ((DerivedCategory.singleFunctor _ 0 ⋙
+      Etale.cohomology AddCommGrpCat.{u + 1} c.pt (q : ℤ)).obj F) := hlim F hF q hq
+  exact (e.app F).addCommGroupIsoToAddEquiv.injective.subsingleton
 
 end AlgebraicGeometry.Scheme
