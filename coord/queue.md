@@ -30,7 +30,7 @@
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 4 | proof |
 | `Sheaf.Paper.CondensedQbarLfpLocalTriviality` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedSheafExtContinuity` | 4 | 1 | proof |
-| `Sheaf.Paper.ProfinitePointPullback` | 4 | 14 | proof |
+| `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift` | 5 | 5 | proof |
