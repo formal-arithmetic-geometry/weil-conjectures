@@ -244,5 +244,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-aae0c9d44 (reviewer sub-agent of L); spot-checked: Read all mathematics and sources in full. The five-step support-bound proof, compatible strict-local models, absolute vanishing input, and Mathlib tower leaf pass; the reported Stacks subalgebra error is verified. Exact upstream condensed coefficients and base-change direction checked without assuming comparison theorems. Repaired incomplete metadata in all three new nodes; statements unchanged. Details in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineDirectImageSupportBound",
+  "declaration": "AlgebraicGeometry.Scheme.affine_direct_image_support_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDirectImageSupportBound.lean",
+  "statement": "theorem affine_direct_image_support_bound {K : Type u} [Field K] {X Y : Scheme.{u}} [X.Over (Spec (.of K))] [Y.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] [LocallyOfFiniteType (Y ↘ Spec (.of K))] [QuasiCompact (Y ↘ Spec (.of K))] (f : X ⟶ Y) [f.IsOver (Spec (.of K))] [IsAffineHom f] (a : ℤ) (ha : 0 ≤ a) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : IsTorsionAbelianSheaf F) (hsupport : etaleSheafSupport F ⊆ (X ↘ Spec (.of K)).pointsOfTrdegLE a.toNat) (q : ℕ) : etaleSheafSupport ((DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((Etale.rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))) ⊆ {y | 0 ≤ a - (q : ℤ) ∧ y ∈ (Y ↘ Spec (.of K)).pointsOfTrdegLE (a - (q : ℤ)).toNat}",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-45f9e40ac",
+  "group": "NY",
+  "result": "pass",
+  "note": "Verified immutable files, source and all statement dependencies, exact signature, edge cases, report sections, and maintainer gates. Server-only scompile passed in 2.7 seconds. No repository or branch changes."
  }
 }
