@@ -245,5 +245,24 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-28ea1ec52 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited statements. Verified all seven steps, Stacks 04FR/04FT and 0B1C, edge cases, duplicates, dependencies, and exact master target categories/morphism directions. Accepted the three declared generic tools. No repairs or target weakening; concrete checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-effd7e3b4",
+  "group": "NF",
+  "result": "pass",
+  "note": "Verified the immutable statement, dependencies, sources, docstrings, edge cases, universes, report sections, and pilot gates. Statement field matches verbatim; server-only compile passed in 1.9 seconds. No delivery errors found; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportDimensionUnion",
+  "declaration": "AlgebraicGeometry.support_dimension_union",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportDimensionUnion.lean",
+  "statement": "theorem support_dimension_union {K : Type u} [Field K] {B : Scheme.{u}} (p : B ⟶ Spec (.of K)) [LocallyOfFiniteType p] [QuasiCompact p] (N : Sheaf B.smallEtaleTopology AddCommGrpCat.{u + 1}) (a : ℕ) (hN : CategoryTheory.Sheaf.IsTorsion N) (hvanish : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ B), (a : Cardinal.{u}) < @Algebra.trdeg K _ _ _ ((p.residueFieldAlgebraMap (s default)).toAlgebra) → IsZero (((Scheme.pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj N)) (D : {Z : TopologicalSpace.Closeds B // topologicalKrullDim ↥(Z : Set B) ≤ (a : WithBot ℕ∞)} ⥤ Sheaf B.smallEtaleTopology AddCommGrpCat.{u + 1}) (c : D ⟶ (Functor.const _).obj N) (hz : ∀ Z, c.app Z ≫ (Etale.upperStarLowerStarAdjunction (AddCommGrpCat.{u + 1}) (Scheme.Opens.ι ⟨(Z.val : Set B)ᶜ, Z.val.isClosed.isOpen_compl⟩)).unit.app N = 0) (hk : ∀ Z, IsLimit (KernelFork.ofι (c.app Z) (hz Z))) : IsIso ((colimit.isColimit D).desc (Cocone.mk N c))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "D is indexed by all closed subsets of dimension at most a. The natural transformation c, its zero-composite condition hz and kernel universal property hk specify precisely N_Z with its inclusion into N; naturality forces the canonical transition maps. This avoids a separate definition for the diagram and is invariant under the unique compatible isomorphisms between choices of kernels."
  }
 }
