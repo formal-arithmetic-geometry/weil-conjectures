@@ -3,36 +3,178 @@
  "blueprint": {
   "is": "lem-kun-colim-of-localizations",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Colimit of localizations",
- "statement": "Let $B$ be an integral $K$-algebra which is a filtered union\n$B=\\bigcup_{i\\in I}B_i$ of its finite type $K$-subalgebras, and\nassume $L=\\mathrm{Frac}(B)$ is a field (e.g. algebraically closed).\nLet $J$ be the set of pairs $(i,g)$ with $i\\in I$ and\n$g\\in B_i\\setminus\\{0\\}$, ordered by $(i',g')\\ge(i,g)$ if and only\nif $B_i\\subseteq B_{i'}$ and the image of $g$ in $(B_{i'})_{g'}$\nis a unit. Then\n\n$$\nL=\\varinjlim_{(i,g)\\in J}(B_i)_g .\n$$",
+ "statement": "Let $K$ be a commutative ring and let $B$ be an integral $K$-algebra (a commutative $K$-algebra with $1\\ne0$ and no zero divisors) which is a filtered union $B=\\bigcup_{i\\in I}B_i$ of its finite type $K$-subalgebras [def-weil-pbc-finite-type-algebra]. Here $I$ is a set, the family is nonempty, and any two $B_i,B_j$ are contained in some $B_k$. Put $L=\\mathrm{Frac}(B)$, the field of fractions: its elements are $a/b$ with $a,b\\in B$, $b\\ne0$, where $a/b=c/d$ means $ad=bc$, with the usual addition and multiplication of fractions. In particular $B$ embeds in $L$ by $a\\mapsto a/1$; no algebraic closedness is required.\nLet $J$ be the set of pairs $(i,g)$ with $i\\in I$ and $g\\in B_i\\setminus\\{0\\}$, preordered by $(i',g')\\ge(i,g)$ if and only if $B_i\\subseteq B_{i'}$ and the image of $g$ in $(B_{i'})_{g'}$ is a unit, where $(B_i)_g=B_i[1/g]$ is the principal localization [def-weil-ring-localization-away]. Regard this preorder as a small category with a unique arrow when the relation holds. With the canonical $K$-algebra transition maps extending the subalgebra inclusions, it is filtered, and the canonical embeddings into $L$ exhibit\n$$L\\cong\\varinjlim_{(i,g)\\in J}(B_i)_g$$\nas a colimit in commutative rings (and in commutative $K$-algebras), in the sense of [def-weil-pbc-category-colimit].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-colim-of-localizations.md",
   "place": "node lem-kun-colim-of-localizations, order 1748"
  },
  "stmt_deps": [
-  "def-kun-separably-closed"
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-category-colimit"
  ],
  "proof": [
   {
-   "text": "The order is filtered: given $(i,g),(j,h)$, choose $k$ with\n$B_i,B_j\\subseteq B_k$, then $(i,g),(j,h)\\le(k,gh)$. Every\n$(B_i)_g$ injects into $L$, so the colimit is a subring of\n$L$. Conversely, for $a/b\\in L$ with $a,b\\in B\\setminus\\{0\\}$,\nchoose $i$ with $a,b\\in B_i$; then $a/b$ lies in the image of\n$(B_i)_b$, so the colimit is all of $L$.",
-   "uses": [],
-   "elementary": null
+   "text": "For $p=(i,g)$ define $e_p:(B_i)_g\\to L$ by $a/g^n\\mapsto a/g^n$. The fraction relation in [def-weil-ring-localization-away] implies $g^k(ag^m-bg^n)=0$ in $B_i$ for equal representatives; since $g\\ne0$ in the domain $B$, cancel $g^k$ to get the fraction equality in $L$. The displayed addition and multiplication formulas make $e_p$ a ring map; it sends the image $c/1$ of each $c\\in K$ to the same scalar in $L$, so it is a $K$-algebra map. It is injective: equality in $L$ says $ag^m=bg^n$ in $B$, hence in its subring $B_i$, so the localization relation holds with exponent $k=0$. Thus identify $(B_i)_g$ with its image $A_p\\subseteq L$.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-colim-of-localizations.md",
+    "place": "Proof, sentence \"Every $(B_i)_g$ injects into $L$\", expanded by the fraction relation (Stacks Tag 00CO)."
+   }
+  },
+  {
+   "text": "If $p=(i,g)\\le q=(j,h)$, let $u$ be the inverse of $g$ in $(B_j)_h$ and define $t_{pq}(a/g^n)=a u^n$. If $g^k(ag^m-bg^n)=0$ represents equality in the source, its image in the target gives $a g^m=b g^n$ after multiplying by $u^k$; multiplying further by $u^{m+n}$ proves independence of the representative. For addition the fraction formula [def-weil-ring-localization-away] gives $(ag^m+bg^n)u^{n+m}=au^n+bu^m$, and for multiplication it gives $(ab)u^{n+m}=(au^n)(bu^m)$; the map fixes $0,1$ and all scalars. Thus $t_{pq}$ is a $K$-algebra map. Any ring map extending $B_i\\subseteq B_j$ must send $1/g$ to $u$, since it must send $g(1/g)=1$ to $gu=1$; its values on $a/g^n$ are therefore forced, so this extension is unique. Its composite with $e_q$ is $e_p$, since the image of $u$ in $L$ is $g^{-1}$. Thus $A_p\\subseteq A_q$ and $t_{pq}$ is that inclusion under the embeddings; identities and compositions are consequently identities and compositions of inclusions.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-colim-of-localizations.md",
+    "place": "Proof, implicit diagram of localizations: explicit transition maps and their compatibility; Stacks Tag 00CO fraction formulas."
+   }
+  },
+  {
+   "text": "The relation is reflexive since $g$ is invertible in $(B_i)_g$ [def-weil-ring-localization-away]. It is transitive: if $p\\le q\\le r$, the map $t_{qr}$ sends the inverse of $g$ in the $q$-stage to an inverse in the $r$-stage, and subalgebra inclusions compose. There is a pair $(i,1)$ because the family is nonempty and $1\\ne0$. For $(i,g),(j,h)$ choose $k$ containing both subalgebras. The product $gh\\in B_k$ is nonzero since $B$ is a domain. In $(B_k)_{gh}$ the fractions $h/(gh)$ and $g/(gh)$ invert $g$ and $h$, respectively. Hence $(k,gh)$ is a common upper bound. Parallel arrows in the thin category are equal and the identity on their target equalizes them, so these facts verify all filteredness conditions of [def-weil-pbc-category-colimit]; $J$ is small because it is a set of pairs.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-colim-of-localizations.md",
+    "place": "Proof, first sentence \"The order is filtered\", including the nonempty and parallel-arrow clauses of Stacks Tag 002V."
+   }
+  },
+  {
+   "text": "Every $x\\in L$ has the form $a/b$ with $a\\in B$ and $0\\ne b\\in B$ by the stated construction of the fraction field. The union hypothesis puts $a$ and $b$ in two stages, and directedness puts both in one $B_i$. The element $a/b\\in(B_i)_b$ of [def-weil-ring-localization-away] maps to $x$. This also covers $x=0$ by taking $a=0,b=1$. Therefore the subrings $A_p$ cover $L$.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-colim-of-localizations.md",
+    "place": "Proof, last sentence \"Conversely, for $a/b\\in L$ ...\", corrected to allow the numerator to be zero."
+   }
+  },
+  {
+   "text": "Let $R$ be any commutative ring and let $(v_p:(B_i)_g\\to R)_p$ be a compatible cocone. For $x\\in A_p$ set $v(x)=v_p(e_p^{-1}(x))$. If also $x\\in A_q$, choose a common upper bound $r$ from step 3. The two representatives have the same image in the $r$-stage by injectivity of $e_r$, so cocone compatibility gives the same value in $R$. This defines $v$ on all of $L$ by step 4. For $x,y$ choose a stage containing both; its map $v_r$ preserves their sum and product and $0,1$, so $v$ is a ring map. Every factorization must have these values on each $A_p$, hence is unique. If $R$ is a commutative $K$-algebra and every $v_p$ is a $K$-algebra map, the same formula preserves every scalar, so it also proves the $K$-algebra assertion. Together with $e_qt_{pq}=e_p$, this is exactly the colimit universal property [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-colim-of-localizations.md",
+    "place": "Proof, middle sentence \"so the colimit is a subring of $L$\" and final equality, replaced by the explicit universal property (Stacks Tag 002F)."
+   }
   }
  ],
  "proof_deps": [
-  "lem-kun-algebra-union"
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-colim-of-localizations.md",
-  "place": "## Proof"
+  "place": "Imported proof paragraph, expanded by fraction arithmetic and an explicit colimit universal-property argument; the standalone blueprint file is absent locally (WANTED in report)."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of localizations of finite type subalgebras gives fraction field",
+   "results": "8 hits: Algebra.QuasiFinite.instOfIsFractionRing, instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing, Localization.AtPrime.liftAlgebra, instAlgebraAtPrimeFractionRing, Algebra.EssFiniteType.isLocalization, Algebra.EssFiniteType.cond, instFiniteFractionRingLocalizationAlgebraMapSubmonoidNonZeroDivisors, Localization.subalgebra.isFractionRing_ofField",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the indexed finite-type-subalgebra localization colimit"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.Away, IsColimit, CommRingCat",
+   "results": "0 hits: ; loogle: unknown identifier 'IsColimit'",
+   "date": "2026-10-15",
+   "verdict": "invalid query: loogle: unknown identifier 'IsColimit'"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered colimit.*localization|localization.*filtered colimit",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the indexed finite-type-subalgebra localization colimit",
+   "subdirectory": "Algebra/Category/Ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "fraction field is filtered colimit of localizations",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization at nonzero elements of directed union is fraction field",
+   "results": "8 hits: Localization.subalgebra.isFractionRing_ofField, Localization.isFractionRing_range_mapToFractionRing, instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing, instIsFractionRingAtPrimeFractionRing, IsFractionRing.isFractionRing_of_isDomain_of_isLocalization, Localization.subalgebra.isFractionRing, IsFractionRing.instAtPrimeFractionRing, IsFractionRing.isFractionRing_of_isLocalization",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the indexed finite-type-subalgebra localization colimit"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization Away FractionRing",
+   "results": "0 hits: ; loogle: Unknown identifier `Away`",
+   "date": "2026-10-15",
+   "verdict": "invalid query: loogle: Unknown identifier `Away`"
+  },
+  {
+   "tool": "grep",
+   "query": "FractionRing|Localization.Away|filtered colimit",
+   "results": "25 hits: Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the indexed finite-type-subalgebra localization colimit",
+   "subdirectory": "RingTheory/Localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "localization at nonzero elements of a filtered union is the fraction field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, IsFractionRing",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the indexed finite-type-subalgebra localization colimit"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit|IsColimit|directLimit|DirectLimit",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match",
+   "subdirectory": "RingTheory/Localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "directed system of subalgebras localization fractions universal cocone colimit",
+   "results": "8 hits: Subalgebra.iSupLift, Ring.DirectLimit.exists_of, Ring.DirectLimit.of, Subalgebra.iSupLift_mk, Ring.DirectLimit, Subalgebra.iSupLift_of_mem, DirectLimit.instCommRingOfRingHomClass, HomogeneousLocalization.homogeneousLocalizationAlgebra",
+   "date": "2026-10-15",
+   "verdict": "no exact match: general directed-supremum or direct-limit constructions do not state the specified localization diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isColimit\", \"localization\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -59,5 +201,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-colim-of-localizations",
+  "worker": "stage1",
+  "summary": "Corrected ordered to preordered (distinct nonzero scalar denominators give equivalent pairs); made the fraction field, filtered union, small index and colimit category explicit. Expanded the imported argument into fraction embeddings, canonical transition maps, filteredness, coverage including zero, and gluing of arbitrary cocones. All steps are elementary calculations from the two cited definition nodes. Removed separably-closed and algebra-union dependencies, neither of which is used under the stated union hypothesis. No new nodes.",
+  "blueprint": "Realizes the entire imported proof paragraph: filteredness; injections into L; every fraction occurs at a stage. The missing diagram and colimit universal property are now explicit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-N5-abb29729c",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-abb29729c (reviewer sub-agent of L); spot-checked: Read the complete item, report, master blueprint, cited definitions, and unit/chapter route. Verified all five proof steps, preorder correction, transition compatibility, and colimit universal properties in rings and K-algebras. Checked edge cases and existing-DAG generalization candidates. No new nodes, repairs, or accepted tool_uses. Findings recorded in review.md."
+ }
 }
