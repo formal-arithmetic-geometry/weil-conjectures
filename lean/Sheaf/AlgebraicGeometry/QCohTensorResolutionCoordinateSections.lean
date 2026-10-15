@@ -1,13 +1,13 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionCoordinateSheafIso
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIsoFormula
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 set_option synthInstance.maxSize 2048
-noncomputable local instance (X : Scheme.{u}) : MonoidalCategory X.Modules :=
-  SheafOfModules.monoidalCategory X.sheaf
+attribute [local instance] instMonoidalCategoryModules_sheaf_1
 local instance (X : Scheme.{u}) : (curriedTensor X.Modules).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
 local instance (X : Scheme.{u}) (M : X.Modules) :
