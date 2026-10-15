@@ -88,10 +88,10 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-f0f9514fd",
-  "group": "NB",
+  "reviewer": "NT-stage2-Codex-a59b5e062",
+  "group": "NK",
   "result": "pass",
-  "note": "Checked all clauses, dependencies, sources, universes, canonical constructions, edge cases, docstrings, and verbatim signatures. All five files reproduced cleanly through scompile.py; no delivery errors found."
+  "note": "Wrote review.md. Checked all statement dependencies, source correspondence, canonical constructions, unit normalization, universes, edge cases, docstrings, and signatures. All three immutable Lean modules compile cleanly through scompile.py. No fixes needed; branch head unchanged."
  },
  "lean": {
   "module": "Sheaf.Paper.CompletedIntegralCoefficients",
@@ -114,14 +114,20 @@
    "WeilConjectures.completedIntegralCommRingPresheaf",
    "WeilConjectures.completedIntegralCommRingSheaf",
    "WeilConjectures.integralCoefficientCommRingSheaf",
-   "WeilConjectures.completedIntegralCommRingProjection"
+   "WeilConjectures.completedIntegralCommRingProjection",
+   "WeilConjectures.completedIntegralCoefficientSheafUnrestricted",
+   "WeilConjectures.completedIntegralCoefficient_mul_commUnrestricted",
+   "WeilConjectures.completedIntegralCoefficientCommRingUnrestricted",
+   "WeilConjectures.completedIntegralCommRingPresheafUnrestricted",
+   "WeilConjectures.completedIntegralCommRingSheafUnrestricted",
+   "WeilConjectures.completedIntegralCommRingProjectionUnrestricted"
   ],
   "file": "lean/Sheaf/Paper/CompletedIntegralCoefficients.lean",
   "statement": "def completedIntegralCoefficientSheaf (D : FiniteFieldDatum.{d}) (_hl : l ≠ D.p) : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) RingCat.{max u (t + 1)}",
   "branch": "newtargets-dag",
-  "by": "NB",
+  "by": "NK",
   "date": "2026-10-15",
   "existing": false,
-  "note": "The recorded completion forgot commutativity, so could not instantiate derived change of rings. Retain all original declarations verbatim and add the commutative structure on the same completed ring sections, its presheaf/sheaf, the finite commutative coefficient sheaf, and the same projection in CommRingCat. Ring data are unchanged definitionally. The sole additional postponed proof is sectionwise commutativity of this limit of commutative ring sheaves."
+  "note": "The recorded completion required an auxiliary finite-field datum and l != p, whereas the consumer explicitly has no such data. Retain every original interface and factor its inverse-limit construction through completedIntegralCoefficientSheafUnrestricted. Add the same commutative enhancement and limit projection without the auxiliary datum. The original completion now refers to that shared core, so no new coefficient notion or mathematical assumption is introduced."
  }
 }
