@@ -3,41 +3,160 @@
  "blueprint": {
   "is": "lem-kun-bc-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change maps are compatible with further base change",
- "statement": "Given a\ncartesian square as in\n[def-weil-pbc-cartesian-square] and a morphism $u:Y''\\to Y'$,\nform the square obtained by pulling all four corners and maps back\nalong $u$. Under the canonical pseudofunctorial identifications,\nthe pullback along $u$ of the original exchange morphism of\n[def-weil-pbc-derived-exchange] is the exchange morphism of the\npulled-back square.",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$ and $g':X'\\to X$. All coefficients are abelian groups and all derived categories are bounded below, as in [def-weil-pbc-derived-exchange]. Write $\\Ex_\\square:g^{-1}Rf_*\\to Rf'_*g'^{-1}$ for its exchange transformation. Write $c^D_{a,b}:b^{-1}a^{-1}\\xrightarrow{\\sim}(a\\circ b)^{-1}$ for the composition isomorphism [lem-weil-pbc-derived-inverse-image-composition].\n\n(1) For any morphism $u:Y''\\to Y'$, form the fibre product $X''=X'\\times_{Y'}Y''$ [def-pc-fibre-product], with projections $v:X''\\to X'$ and $f'':X''\\to Y''$. Let $\\square_u=(f',f'',u,v)$ and let $\\square_{gu}=(f,f'',g\\circ u,g'\\circ v)$ be the outer cartesian square with its induced chosen identification. For every $K\\in\\Dplus(X_{\\Et})$,\n$$\n\\Ex_{\\square_{gu},K}\n=Rf''_*(c^D_{g',v,K})\\circ\\Ex_{\\square_u,g'^{-1}K}\\circ u^{-1}(\\Ex_{\\square,K})\\circ(c^D_{g,u,Rf_*K})^{-1}.\n$$\nThus the pullback of the original exchange map is followed by the exchange map for the further base change; the intervening map is not assumed to be invertible.\n\n(2) For every $K\\in\\Dplus(X_{\\Et})$, the meaning of compatibility when all four corners of $\\square$ are base changed is the following commutative diagram. Let $w:Z\\to Y$ be any morphism. Form $\\widetilde X=X\\times_Y Z$, $\\widetilde Y'=Y'\\times_Y Z$, and $\\widetilde X'=X'\\times_Y Z$, with projections $a:\\widetilde X\\to X$, $b:\\widetilde Y'\\to Y'$, $c:\\widetilde X'\\to X'$, and induced arrows $\\widetilde f:\\widetilde X\\to Z$, $\\widetilde g:\\widetilde Y'\\to Z$, $\\widetilde f':\\widetilde X'\\to\\widetilde Y'$, $\\widetilde g':\\widetilde X'\\to\\widetilde X$. Denote by $B=(f,\\widetilde f,w,a)$ and $C=(f',\\widetilde f',b,c)$ the cartesian comparison squares, and by $\\widetilde\\square=(\\widetilde f,\\widetilde f',\\widetilde g,\\widetilde g')$ the base changed square. After the canonical inverse-image composition identifications, the diagram\n$$\n\\begin{array}{ccc}\nb^{-1}g^{-1}Rf_*K&\\xrightarrow{\\ b^{-1}\\Ex_{\\square,K}\\ }&b^{-1}Rf'_*g'^{-1}K\\\\\n\\big\\downarrow{\\scriptstyle\\widetilde g^{-1}\\Ex_{B,K}}&&\\big\\downarrow{\\scriptstyle\\Ex_{C,g'^{-1}K}}\\\\\n\\widetilde g^{-1}R\\widetilde f_*a^{-1}K&\\xrightarrow{\\ \\Ex_{\\widetilde\\square,a^{-1}K}\\ }&R\\widetilde f'_*\\widetilde g'^{-1}a^{-1}K\n\\end{array}\n$$\ncommutes. Explicitly, let\n$$\ns_K=(c^D_{w,\\widetilde g,Rf_*K})^{-1}\\circ c^D_{g,b,Rf_*K}:\n b^{-1}g^{-1}Rf_*K\\xrightarrow{\\sim}\\widetilde g^{-1}w^{-1}Rf_*K,\n$$\n$$\nt_K=(c^D_{a,\\widetilde g',K})^{-1}\\circ c^D_{g',c,K}:\n c^{-1}g'^{-1}K\\xrightarrow{\\sim}\\widetilde g'^{-1}a^{-1}K,\n$$\nwhere the middle composite morphisms are identified using $gb=w\\widetilde g$ and $g'c=a\\widetilde g'$. The left vertical arrow displayed above means $\\widetilde g^{-1}(\\Ex_{B,K})\\circ s_K$, and the right vertical arrow means $R\\widetilde f'_*(t_K)\\circ\\Ex_{C,g'^{-1}K}$. If the two vertical comparison maps are isomorphisms, this diagram identifies the pullback of the original exchange morphism with that of the base changed square. Without that extra condition, the assertion is the displayed commutativity.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bc-base-change.md",
   "place": "node lem-kun-bc-base-change, order 1751"
  },
  "stmt_deps": [
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-derived-exchange"
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "def-pc-fibre-product"
  ],
  "proof": [
   {
-   "text": "Both morphisms are mates (under the derived adjunctions of\n[def-weil-pbc-inverse-image]) of composites of the canonical\n$\\theta$-isomorphism of\n[def-weil-pbc-cartesian-square] with the counit\n$\\varepsilon_f$, and the $\\theta$'s are compatible with the\nidentifications for the pulled-back square (compatibility with\npasted squares of [def-weil-pbc-cartesian-square]); hence the\nidentity.",
+   "text": "Construct the extra square and the outer rectangle. By [def-pc-fibre-product], $X''$ represents pairs of maps to $X'$ and $Y''$ equal over $Y'$. Composing its map to $X'$ with $g'$ gives a pair over $Y$. Conversely a pair $T\\to X$, $T\\to Y''$ equal over $Y$ gives a unique $T\\to X'$ using the chosen cartesian property of $\\square$ [def-weil-pbc-cartesian-square], and then a unique $T\\to X''$. These assignments are inverse by uniqueness in the two fibre-product properties. They give the chosen identification $X''\\simeq X\\times_Y Y''$ for $\\square_{gu}$. This argument includes empty fibre products and makes no finiteness assumption.",
    "uses": [
-    "def-weil-pbc-inverse-image",
+    "def-pc-fibre-product",
     "def-weil-pbc-cartesian-square"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 0E47 (remark-compose-base-change-horizontal), applied to exact etale inverse image and bounded below derived direct image; verification and cube consequence written by the worker"
+   }
+  },
+  {
+   "text": "Apply the horizontal-pasting clause (2) of [lem-weil-pbc-exchange-identity-pasting] to $\\square_1=\\square$ and $\\square_2=\\square_u$, with that clause's $h=u$, $h'=v$ and $f''=f''$. Its four factors, evaluated at $K$, have successive objects $(gu)^{-1}Rf_*K$, $u^{-1}g^{-1}Rf_*K$, $u^{-1}Rf'_*g'^{-1}K$, $Rf''_*v^{-1}g'^{-1}K$ and $Rf''_*(g'v)^{-1}K$. Its $c^D$ are exactly the isomorphisms in [lem-weil-pbc-derived-inverse-image-composition]. The resulting equality is (1), with no exchange factor cancelled or treated as an isomorphism. The exchange maps here are the maps of [def-weil-pbc-derived-exchange], so all coefficients are abelian groups and the input category is $\\Dplus$, as required by the cited law.",
+   "uses": [
+    "lem-weil-pbc-exchange-identity-pasting",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 0E47 (remark-compose-base-change-horizontal), applied to exact etale inverse image and bounded below derived direct image; verification and cube consequence written by the worker"
+   }
+  },
+  {
+   "text": "For the four-corner base change, construct the three fibre products in (2) by [def-pc-fibre-product]. The maps $\\widetilde f',\\widetilde g'$ are obtained from the pairs $(f'c,\\widetilde X'\\to Z)$ and $(g'c,\\widetilde X'\\to Z)$. The fibre-product property gives $gb=w\\widetilde g$ and $g'c=a\\widetilde g'$. For any test scheme $T$, both $\\widetilde X'$ and $X'\\times_{Y'}\\widetilde Y'$ describe a map $T\\to X'$ and a map $T\\to Z$ equal over $Y$; the intermediate map to $Y'$ is forced to be $f'$ of the first map. The fibre product $\\widetilde X\\times_Z\\widetilde Y'$ describes maps $T\\to X$, $T\\to Y'$, $T\\to Z$ satisfying $f x=g y'=w z$, and the first two give a unique map to $X'$ by [def-weil-pbc-cartesian-square]. The mutually inverse assignments provide the chosen identifications for $C$ and $\\widetilde\\square$; $B$ is cartesian by its construction. Both pasted rectangles, $C\\cdot\\square$ and $\\widetilde\\square\\cdot B$, therefore have maps $\\widetilde X'\\to X$ equal to $g'c=a\\widetilde g'$ and base maps $\\widetilde Y'\\to Y$ equal to $gb=w\\widetilde g$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 0E47 (remark-compose-base-change-horizontal), applied to exact etale inverse image and bounded below derived direct image; verification and cube consequence written by the worker"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-exchange-identity-pasting] clause (2) with $(\\square_1,\\square_2)=(\\square,C)$, hence $(h,h')=(b,c)$, and with $(\\square_1,\\square_2)=(B,\\widetilde\\square)$, hence $(h,h')=(\\widetilde g,\\widetilde g')$. Set $A_K=\\Ex_{C,g'^{-1}K}\\circ b^{-1}(\\Ex_{\\square,K})$ and $D_K=\\Ex_{\\widetilde\\square,a^{-1}K}\\circ\\widetilde g^{-1}(\\Ex_{B,K})$. Step 3 identifies the outer base maps $gb=w\\widetilde g$ and the outer top maps $g'c=a\\widetilde g'$. Their cartesian identifications agree because each is the unique map to $X\\times_Y\\widetilde Y'$ with these two projections [def-weil-pbc-cartesian-square]. The definition [def-weil-pbc-derived-exchange] depends only on this commutative square through its canonical square isomorphism and fixed adjunctions, so both outer exchange maps are one map $E_K$. The two pasting equations explicitly read\n$$\nR\\widetilde f'_*(c^D_{g',c,K})\\circ A_K\\circ(c^D_{g,b,Rf_*K})^{-1}\n=E_K\n=R\\widetilde f'_*(c^D_{a,\\widetilde g',K})\\circ D_K\\circ(c^D_{w,\\widetilde g,Rf_*K})^{-1}.\n$$\nAll composition maps have the stated directions and are natural isomorphisms by [lem-weil-pbc-derived-inverse-image-composition]. Postcompose this equality with $R\\widetilde f'_*((c^D_{a,\\widetilde g',K})^{-1})$ and precompose it with $c^D_{g,b,Rf_*K}$. Functoriality and the inverse identities give\n$$\nR\\widetilde f'_*(t_K)\\circ A_K=D_K\\circ s_K,\n$$\nwhich is exactly diagram (2) with its explicit vertical arrows. If those arrows are denoted $L_K$ and $V_K$ and the bottom arrow is denoted $H_K$, this equality is $V_K\\circ b^{-1}(\\Ex_{\\square,K})=H_K\\circ L_K$. When $L_K,V_K$ are isomorphisms, composing with $V_K^{-1}$ gives $b^{-1}(\\Ex_{\\square,K})=V_K^{-1}\\circ H_K\\circ L_K$, the asserted identification. No inverse of an exchange map is used in the unconditional equality.",
+   "uses": [
+    "lem-weil-pbc-exchange-identity-pasting",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 0E47 (remark-compose-base-change-horizontal), applied to exact etale inverse image and bounded below derived direct image; verification and cube consequence written by the worker"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-cartesian-square"
+  "def-pc-fibre-product",
+  "def-weil-pbc-cartesian-square",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "def-weil-pbc-derived-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bc-base-change.md",
-  "place": "## Proof"
+  "place": "Imported proof paragraph, corrected by the two horizontal-pasting instances of Stacks Remark 0E47; explicit fibre-product and cube argument supplied here"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange.*paste|mateEquiv_vcomp|mateEquiv.*whisker",
+   "results": "CategoryTheory/Adjunction/Mates.lean:170 mateEquiv_vcomp and bicategorical analogue; no etale derived base-change theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; existing Mathlib tool"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived exchange morphisms for etale sheaves are compatible with successive base changes by the horizontal pasting law",
+   "results": "Scheme.Modules.pseudofunctor_associativity; Scheme.Modules.pullbackComp; SheafOfModules.pullback_assoc (ordinary structure sheaves, not derived etale exchange); read the types returned.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of the base change natural transformations for derived direct images of sheaves",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv_vcomp at Mathlib/CategoryTheory/Adjunction/Mates.lean:170, with mateEquiv and other mate calculus hits for the broader query; source read. The etale and derived identifications are additional project statements.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; existing Mathlib tool"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChange|baseChangeMap|base.change.*morphism",
+   "results": "Only comments in Morphisms/Constructors.lean:422, EllipticCurve/DivisionPolynomial/Basic.lean:548, Morphisms/UniversallyInjective.lean:16; none states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a composite of two natural transformation squares is the composite of their mates under three adjunctions",
+   "results": "CategoryTheory.mateEquiv_vcomp and mateEquiv_square; source of mateEquiv_vcomp read at Mathlib/CategoryTheory/Adjunction/Mates.lean:170-180. General mate-pasting, already carried by lem-weil-pbc-mate-pasting; no derived etale statement.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; existing Mathlib tool"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp at Mathlib/CategoryTheory/Adjunction/Mates.lean:170, with mateEquiv and other mate calculus hits for the broader query; source read. The etale and derived identifications are additional project statements.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; existing Mathlib tool"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley natural transformation for derived sheaf direct image commutes with a base change cube",
+   "results": "8 hits: toSheafify_pullbackSheafificationCompatibility (CoverLifting.lean:391) is underived pushforward/sheafification unit compatibility; SheafOfModules.pullbackComp (PullbackContinuous.lean:167) composes underived module-sheaf pullbacks. Remaining hits concern underived sheaf pushforward/sheafification. No derived etale exchange cube.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"vcomp\"",
+   "results": "6 hits: mateEquiv_vcomp and conjugateEquiv/mateEquiv composition variants, plus bicategorical versions. Read Adjunction/Mates.lean:157-180; these state generic mate calculus, not the derived etale cube.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; existing Mathlib tool"
+  },
+  {
+   "tool": "grep",
+   "query": "Beck.Chevalley|baseChange.*(comp|comm)|derived.*[Bb]ase[Cc]hange",
+   "results": "23 hits in CategoryTheory: generic Beck-Chevalley documentation in Adjunction/Mates.lean, Bicategory/Adjunction/Mate.lean and Comma/Over/Basic.lean; other hits concern morphism properties stable under base change. No derived exchange cube.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -61,5 +180,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-bc-base-change",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported all-four-corners pullback along a map to Y-prime was not defined, and pullback of an exchange map does not have the target of a new exchange map under pseudofunctorial identifications alone. Replaced it by the explicit successive-base-change identity and the full base-change cube with its two comparison maps. Reused the existing horizontal-pasting statement, with explicit fibre-product and two-route arguments; created no nodes. Coefficients remain abelian groups on D-plus.",
+  "blueprint": "The single imported proof paragraph (mates of theta followed by counit, and compatibility with pasted squares) is realized by steps 1-2 for successive base change and steps 3-4 for the base-change cube. The missing comparison maps are restored; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exchange-identity-pasting",
+    "why": "Generic horizontal-pasting identity for the same bounded-below etale exchange map; it supplies the mate-pasting computation assumed by this unit, which has no separate node proving that formal identity."
+   },
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Generic coherent composition identifications of exact derived inverse images; no such construction is supplied inside the Kunneth unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exchange-identity-pasting",
+  "lem-weil-pbc-derived-inverse-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-3b5c4ffc7",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-3b5c4ffc7 (reviewer sub-agent of L); spot-checked: Wrote review.md. Checked all four proof steps, five cited statements, master blueprint and Stacks 07A7/0E47/0D6D sources, coefficients, edge cases, reuse candidates, and dependency cycles. The source correction is justified; both generic tool_uses are accepted. No new nodes or repairs."
+ }
 }
