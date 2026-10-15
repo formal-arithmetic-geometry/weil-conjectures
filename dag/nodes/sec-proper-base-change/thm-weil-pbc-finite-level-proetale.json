@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Finite-level pro-etale proper base change",
- "statement": "Let $\\Lambda$ be finite, let $f$ be proper, and let\n$K\\in\\Dplus(X_{\\Proet},\\Lambda)$ carry an etale-origin witness\n[def-weil-pbc-etale-origin-witness] $(L,\\alpha)$. Then the pro-etale exchange\nmap\n\n$$\n g^{-1}Rf_*K\\xrightarrow{\\sim}Rf'_*g'^{-1}K\n$$\n\nis an isomorphism. It is independent of replacing the witness by an\nisomorphic witness.",
+ "statement": "Let $\\Lambda$ be a finite discrete commutative ring with identity, let $f$ be proper, and let\n$K\\in\\Dplus(X_{\\Proet},\\Lambda)$ carry an etale-origin witness\n[def-weil-pbc-etale-origin-witness] $(L,\\alpha)$. Then the pro-etale exchange\nmap\n\n$$\n g^{-1}Rf_*K\\xrightarrow{\\sim}Rf'_*g'^{-1}K\n$$\n\nis an isomorphism. It is independent of replacing the witness by an\nisomorphic witness.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-level-proetale.md",
   "place": "node thm-weil-pbc-finite-level-proetale, order 1325",
@@ -162,5 +162,61 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-78a037caa (reviewer sub-agent of L); spot-checked: The proof is mathematically coherent after repair. The delivered step omitted its mandatory source location and did not justify identifying the ambient derived module pullbacks L u^* with the displayed inverse-image maps u^{-1}; corrected JSON is under fixes/dag/nodes/sec-proper-base-change/thm-weil-pbc-finite-level-proetale.json. Stacks 09C8 and the archived master targets use different completed/constructible coefficient settings; this source mismatch is recorded in review.md without weakening the item.; 1 file(s) fixed by the reviewer"
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "Q14 stage 2",
+  "old_statement": "Let $\\Lambda$ be finite, let $f$ be proper, and let\n$K\\in\\Dplus(X_{\\Proet},\\Lambda)$ carry an etale-origin witness\n[def-weil-pbc-etale-origin-witness] $(L,\\alpha)$. Then the pro-etale exchange\nmap\n\n$$\n g^{-1}Rf_*K\\xrightarrow{\\sim}Rf'_*g'^{-1}K\n$$\n\nis an isomorphism. It is independent of replacing the witness by an\nisomorphic witness.",
+  "what": "The phrase Lambda finite left its ring structure implicit, while def-weil-pbc-proetale-modules explicitly admits noncommutative finite rings. The cited source works with commutative unital rings (Stacks conventions.tex, section-algebra); make this inherited source convention and the finite discrete topology explicit. No claim that noncommutative proper base change is false is made. This repairs an ambiguity against the source rather than adding a proof convenience, and does not change the unit sk-thm-properbasechange statement.",
+  "source": {
+   "document": "Stacks Project, proetale.tex and conventions.tex",
+   "place": "Tag 09C8 / Tag 09C9, theorem-proper-base-change, final finite-level reduction in the proof; conventions.tex, section-algebra (rings are commutative with 1)"
+  },
+  "citers": [
+   {
+    "id": "def-weil-pbc-four-arrows",
+    "holds": true,
+    "note": "Its P_n=A/I^n is commutative because the adic coefficient datum explicitly assumes A commutative; the canonical finite-level exchange and witness use are unchanged."
+   },
+   {
+    "id": "nt-target-proetale-qbar",
+    "holds": true,
+    "note": "Its fixed condensed algebraic-closure coefficient ring and finite-extension/commutative integral reduction route are unchanged; this clarification of the finite-level prerequisite changes no target statement or operation."
+   },
+   {
+    "id": "thm-sf-comp-composition",
+    "holds": true,
+    "note": "Its compact-support direct image is the finite-level construction of def-compact-support-direct-image-detailed with A_{E,n}=O_E/varpi_E^n, a commutative finite ring; proper base change on etale-origin objects still applies."
+   },
+   {
+    "id": "thm-sf-dual-base-change",
+    "holds": true,
+    "note": "The concrete finite-coefficient stage of def-sf-datum is A_{E,n}=O_E/varpi_E^n, a commutative finite ring; the formal right-adjoint argument and other coefficient stages are unchanged."
+   },
+   {
+    "id": "thm-weil-pbc-complete-proetale",
+    "holds": true,
+    "note": "Its finite-level application uses P_n=A/I^n from the adic coefficient datum with A commutative, so every required application still holds."
+   }
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-10535a7ff",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Reviewed immutable snapshot, dependencies, source declarations, report sections, edge cases, and exact theorem signature; scompile.py side-overlay compilation passed without errors.",
+  "statement_corrected": true
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isProper",
+  "statement": "theorem isIso_derivedBaseChangeMap_app_of_isProper [Finite Λ] [IsProper f]\n    (sq : IsPullback g' f' f g)\n    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))\n    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K) :\n    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)",
+  "branch": "slopmaster2",
+  "by": "Q14",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Exact existing declaration, read in the published side-project WeilConjectures framework and confirmed with scompile.py --source. Not present in the older slopmaster2 checkout. plusEtaleOrigin unfolds to a bounded-below etale complex L and Nonempty (D(nu^*).obj L ≅ K), so every supplied etale-origin witness supplies its hypothesis. The conclusion is the component at K of the fixed unit-square-counit mate, whose definition has no witness argument; hence replacing the witness, in particular by an isomorphic witness, leaves the map unchanged. Sheaf (...)(ModuleCat Λ) is the fixed-ring presentation of constant-coefficient module sheaves. This attachment records a statement match, not a sorry-free axiom audit. The branch label slopmaster2 follows the preflight convention for all WeilConjectures modules; availability is from the published side overlay, not the older local slopmaster2 checkout. Second reading: the source-based statement_change makes the commutative unital coefficient convention explicit, matching the section binder [CommRing Λ]; the general finite-ring convention of the witness dependency does not silently narrow this item. See the complete five-citer audit in statement_change and the report."
  }
 }

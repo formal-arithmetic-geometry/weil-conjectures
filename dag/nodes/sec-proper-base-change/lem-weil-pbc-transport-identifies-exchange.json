@@ -174,5 +174,23 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-3ee909212 (reviewer sub-agent of L); spot-checked: Review written. Mathematics and source checks pass, but the new node’s created record omits required by/date fields, and step 2 leaves bounded-below preservation for l_{g'}L implicit. Corrected whole-node JSON files are under fixes/dag/nodes/sec-proper-base-change/.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fcef7dc78",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Existing declaration matches the node and canonical mate comparisons; hypotheses, universes, edge cases, dependencies, docstrings, and required report sections checked. scompile source retrieval passed. Dry-run was attempted but blocked by shared launcher fetch-lock contention; no delivery defect found."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap",
+  "statement": "theorem comparison_derivedBaseChangeMap [QuasiCompact f] [QuasiSeparated f] [QuasiCompact f']\n    [QuasiSeparated f'] (sq : IsPullback g' f' f g)\n    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    D(ν^*(Y')[ModuleCat.{u + 1} Λ]).map\n        (DerivedCategory.Plus.ι.map ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app L)) ≫\n      (baseChangeTargetComparisonIso g' f' Λ).hom.app L =\n    (baseChangeSourceComparisonIso f g Λ).hom.app L ≫\n      (ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app\n        ((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj (DerivedCategory.Plus.ι.obj L))",
+  "branch": "slopmaster2",
+  "by": "Q44",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Existing upstream declaration, explicitly tagged with this blueprint id. Read its full signature and the definitions of both endpoint comparison isomorphisms: their factors are the specified pullback comparison and the canonical derived direct-image base-change mate, with Plus-to-unbounded compatibility maps. The pro-etale derivedBaseChangeMap is literally mateEquiv of the canonical derived square comparison under the derived adjunctions. This is the constant-coefficient module-sheaf presentation of the stated finite discrete commutative coefficient assertion; no arbitrary comparison isomorphism is chosen. The existing declaration also applies to commutative rings without finiteness. Its proof remains sorry; existing does not claim proved."
  }
 }
