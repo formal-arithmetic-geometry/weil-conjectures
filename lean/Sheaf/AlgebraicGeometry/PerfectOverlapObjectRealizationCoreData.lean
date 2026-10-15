@@ -51,7 +51,7 @@ noncomputable def perfectOverlapCoreTransition
   derivedPullback (baseChangeMap s (overlapLimitArrow R c k))
 
 /-- The fixed composition comparison for the overlap transition. -/
-@[irreducible] noncomputable def perfectOverlapCoreBaseComparison
+@[no_expose] noncomputable def perfectOverlapCoreBaseComparison
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     (i : I) (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i))
     [∀ Z : Scheme.{u},
@@ -92,7 +92,7 @@ noncomputable def perfectOverlapDerivedPullbackTransport
 attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverModuleAbelian
 
 /-- The derived equivalence between the localized module site and its open scheme. -/
-@[irreducible] noncomputable def perfectOverlapOpenSiteDerivedEquiv
+@[no_expose] noncomputable def perfectOverlapOpenSiteDerivedEquiv
     (X : Scheme.{u}) (W : X.Opens)
     [∀ T : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
