@@ -25,7 +25,12 @@
   "lem-asd-finite-etale-twist-line",
   "lem-amb-proper-coproducts-projection",
   "lem-amb-kummer-any-base",
-  "def-kun-unbounded-exchange"
+  "def-kun-unbounded-exchange",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-finite-etale-tate-sheaf",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "def-asd-ordinary-finite-p1-data"
  ],
  "proof": [
   {
@@ -405,5 +410,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e49875c66",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, dependencies, source clauses, canonical maps, signatures, universes, edge cases, reports and pilot gates. All four modules passed scompile.py server confirmation within per-file limits. No fixes required; no repository mutations."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction",
+  "declaration": "AlgebraicGeometry.Etale.exists_ordinaryFiniteP1Adjunction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.exists_ordinaryFiniteP1Adjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1Adjunction.lean",
+  "statement": "theorem exists_ordinaryFiniteP1Adjunction (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) : ∃ (t : OrdinaryFiniteTwistTransport A N hA) (d : ∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))), OrdinaryFiniteP1Datum A N hA t S hS), OrdinaryFiniteP1BaseChange A N hA t d",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The existence statement packages the canonical normalized arrows and all three base-change equations. The counit equation after precomposition with the ordered projection is equivalent to the displayed inverse-projection formula, by the recorded proper projection theorem."
  }
 }

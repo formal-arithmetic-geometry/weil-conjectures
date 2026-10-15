@@ -1,0 +1,140 @@
+{
+ "kind": "definition",
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+  "place": "Agent-written ordinary-etale coefficient interface for the diagonal-kernel proof; decomposition and trace in thm-amb-p1-decomposition.md and def-amb-p1-trace.md; Kummer sequence: Stacks Tag 03PL, etale-cohomology.tex, lemma-kummer-sequence; unbounded proper exchange: Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical Kummer first Chern class and projective line trace for finite coefficient module sheaves",
+   "results": "service unavailable: Internal Server Error; 0 hits",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar extended Kummer Chern class and projective line decomposition trace adjunction base change finite etale modules",
+   "results": "8 hits: CommRing.Pic.mapAlgebra_mapAlgebra; CommRing.Pic.mapAlgebra; groupCohomology.exists_mul_galRestrict_of_norm_eq_one; groupCohomology.Hilbert90.aux; Algebra.Extension.tensorCotangentSpace; CommRing.Pic.mapAlgebra_comp_mapAlgebra; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.Extension.tensorH1Cotangent",
+   "date": "2026-10-15",
+   "verdict": "No etale derived projective-line canonical-arrow interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kummer\", \"DerivedCategory\"",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*(trace|adjunction)|kummer.*(Chern|class) in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryFiniteP1|P1KummerClass|finite.*P1.*adjunction in WeilConjectures and lean/Sheaf; scalar.extended Kummer|normalized projective.line.*(arrow|datum) in dag/nodes; blueprint_refs.py search ordinary finite projective line",
+   "results": "No Lean hit. DAG: def-amb-p1-trace, lem-asd-ordinary-finite-p1-adjunction, lem-asd-ordinary-supported-kummer. Blueprint search: 0 blueprint nodes. The trace node uses this item downstream; it supplies no normalized-data interface or Lean declaration. The supported Kummer node is a different, support-valued construction.",
+   "date": "2026-10-15",
+   "verdict": "Missing combined canonical-arrow interface; existing finite-twist and exchange notions are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary etale projective line adjunction over finite rings with Kummer normalized trace and unbounded derived categories",
+   "results": "8 hits: StandardEtalePair.instEtaleRing; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; StandardEtalePair.instFormallyEtaleRing; StandardEtalePair.hasMap_X; Algebra.instIsStandardEtaleRing; StandardEtalePresentation; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; RingHom.IsStandardSmooth.exists_etale_mvPolynomial",
+   "date": "2026-10-15",
+   "verdict": "No match: standard-etale algebras do not define the scalar Kummer class, normalized projective-line arrows or duality datum."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"DerivedCategory\"",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "No match."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-asd-ordinary-finite-p1-adjunction",
+  "date": "2026-10-15",
+  "group": "Q43"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Projective-line calculation: actual scalar-extended Kummer class of O(1), without choosing a primitive root or replacing its class by a generator.",
+   "via": [
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "id": "def-asd-ordinary-finite-p1-kummer-class",
+ "title": "Scalar Kummer class of O(1) with finite ordinary etale coefficients",
+ "statement": "For a commutative ring A of universe u+1, a natural number N, hA:(N:A)=0 and a scheme T of universe u [def-pc-scheme], let A_T and A_T(1) be the constant sheaf and concrete scalar-extended positive Tate sheaf [def-asd-finite-etale-tate-sheaf]. Use the ordinary unbounded module derived category [def-weil-pbc-derived-categories] and its exact coefficient-forgetting functor [def-sbc-raw-module-scalar-pullback-comparison]. Define the abelian sheaf map mu_N,T -> forget(A_T(1)) by the scalar-extension unit followed by the sheafification unit, z |-> 1 tensor z; its section maps are natural. Define the constant integral generator by 1 |-> 1. For an A-module sheaf F on T and n in the natural numbers, a module-derived morphism A_T -> F[n] is realized as an abelian H^n class by exact forgetting of its Ext class and precomposition with this integral generator. Place A_T and A_T(1) in degree zero. For P=ProjectiveLine(S) [def-nagata-projective-space-base-change], with N invertible on P, define the scalar Kummer class in H^2(P,forget(A_P(1))) as the image under the scalar-root map of the actual Kummer connecting homomorphism [lem-amb-kummer-any-base] applied to the Picard class of the existing line bundle O_P(1) [def-pc-projective-space-twist], with transition g_0=(x_1/x_0)^(-1)g_1.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-weil-pbc-derived-categories",
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "def-nagata-projective-space-base-change",
+  "lem-amb-kummer-any-base",
+  "def-pc-projective-space-twist"
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Kummer",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1KummerClass",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteConstant",
+   "AlgebraicGeometry.Etale.ordinaryFiniteIntegralGenerator",
+   "AlgebraicGeometry.Etale.ordinaryFiniteClass",
+   "AlgebraicGeometry.Etale.ordinaryFiniteRootGenerator",
+   "AlgebraicGeometry.Etale.ordinaryFiniteRootGenerator_naturality",
+   "AlgebraicGeometry.Etale.ordinaryFiniteRootMap",
+   "AlgebraicGeometry.Etale.ordinaryFiniteLine",
+   "AlgebraicGeometry.Etale.ordinaryFiniteUnit",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1KummerClass",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1ChernSpec"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1Kummer.lean",
+  "statement": "def ordinaryFiniteP1KummerClass (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0) (S : Scheme.{u}) (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤))) : Sheaf.H ((RawModuleScalarComparison.forget A (ProjectiveLine S)).obj (Scheme.finiteEtaleTateLine (ProjectiveLine S) N A hA)) 2",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e49875c66",
+  "group": "Q43",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e49875c66",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, dependencies, source clauses, canonical maps, signatures, universes, edge cases, reports and pilot gates. All four modules passed scompile.py server confirmation within per-file limits. No fixes required; no repository mutations."
+ }
+}
