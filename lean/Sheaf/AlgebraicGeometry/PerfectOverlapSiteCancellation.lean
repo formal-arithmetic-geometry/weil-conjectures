@@ -71,4 +71,41 @@ theorem perfectOverlapApex_siteReturn_comp
   simp only [Functor.map_comp] at h
   exact h
 
+/-- The overlap return triangle and the apex counit paste to a single
+component equation. This is independent of the later-stage comparison data. -/
+theorem perfectOverlapApex_overlapReturn_comp
+    {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
+    (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)
+    (U V : Y.Opens) (E : schemeDerivedCategory X) :
+    let P := g ⁻¹ᵁ U
+    let Q := g ⁻¹ᵁ V
+    let i : P ⊓ Q ⟶ P := homOfLE inf_le_left
+    let PU := (schemeOpenRestriction X P).mapDerivedCategory
+    let LW := (overlapSiteInverse (P ⊓ Q)).mapDerivedCategory
+    let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
+    let RU := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) P).mapDerivedCategory
+    let τ : RU ⋙ SP ≅
+        (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (P ⊓ Q)).mapDerivedCategory :=
+      (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        Functor.mapDerivedCategoryNatIso
+          (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
+    let eW : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (P ⊓ Q)) ≌
+      SheafOfModules.{u} (moduleRings (P ⊓ Q).toScheme.toRingedSpace) :=
+      Scheme.Modules.overEquiv (P ⊓ Q)
+    let Rw := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (P ⊓ Q)
+    let cart := perfectOverlapStageEquivalence g pX pY b hg U V
+    let apex := perfectOverlapApexEquivalence g pX pY b hg U V
+    apex.functor.map (SP.map ((openSiteReturnIso X P).hom.app E)) ≫
+        apex.functor.map (τ.hom.app E) ≫
+          cart.functor.map ((Functor.mapDerivedCategoryCompIso Rw eW.functor).symm.hom.app E) =
+      apex.functor.map ((openSiteOverlapIso X i).hom.app (PU.obj E)) ≫
+        apex.functor.map (LW.map ((schemeDerivedOpenRestrictionCompIso X i).hom.app E)) ≫
+          cart.functor.map (eW.mapDerivedCategory.counitIso.hom.app
+            ((schemeOpenRestriction X (P ⊓ Q)).mapDerivedCategory.obj E)) := by
+  intro P Q i PU LW SP RU τ eW Rw cart apex
+  have hTri := congrArg apex.functor.map (openSiteReturn_overlap_triangle_app X i E)
+  simp only [Functor.map_comp] at hTri
+  have hCancel := perfectOverlapApex_siteReturn_comp g pX pY b hg U V E
+  exact paste_return_triangle hTri hCancel
+
 end AlgebraicGeometry
