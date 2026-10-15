@@ -18,56 +18,37 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal A=\\Ab(T_{\\Et})$. By [def-weil-pbc-derived-categories], $D^+(T_{\\Et})$ is a strictly full subcategory of $D(\\mathcal A)$, so invertibility of a morphism between its objects is the same in these two categories. By [def-weil-abstract-derived-category], the functors $H^i$ on $D(\\mathcal A)$ factor the cohomology of complexes, and a complex map is a quasi-isomorphism exactly when all its $H^i$ maps are invertible. For a complex map $f$, if all $H^i(f)$ are invertible, then $Q(f)$ is invertible by localization. Conversely, if $Q(f)$ is invertible, applying each functor $H^i$ shows $H^i(f)$ invertible. This criterion also holds for an arbitrary derived morphism $u$: the calculus of fractions in [lem-pc-quasi-isomorphisms-multiplicative-system] writes it as $Q(f)\\circ Q(s)^{-1}$ for a roof $K\\xleftarrow{s}M\\xrightarrow{f}L$ with $s$ a quasi-isomorphism. Thus $H^i(f)=H^i(u)\\circ H^i(s)$ under the stated factorization identifications. If every $H^i(u)$ is invertible, $f$ is a quasi-isomorphism, and $u^{-1}=Q(s)\\circ Q(f)^{-1}$. The reverse implication follows by applying the functors $H^i$ to $u$ and its inverse.",
+   "text": "Apply Mathlib DerivedCategory.Plus.isIso_iff, the exact cohomology criterion of [lem-weil-pbc-derived-plus-iso-on-cohomology], to reduce invertibility of f to invertibility of every cohomology-sheaf map. No separate roof construction or calculus-of-fractions import is needed.",
    "uses": [
-    "def-weil-pbc-derived-categories",
-    "def-weil-abstract-derived-category",
-    "lem-pc-quasi-isomorphisms-multiplicative-system"
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05RT (lemma-acyclic) and 05RU (definition-unbounded-derived-category); calculus-of-fractions application to the first blueprint proof paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Assume all displayed maps are isomorphisms. For each integer $i$, $H^i(u)$ is a morphism in the abelian etale sheaf category of [def-weil-pbc-etale-sheaves], by [def-weil-pbc-derived-categories]. Its geometric stalk maps are exactly the maps in the hypothesis; no interchange of stalks with cohomology of a stalk complex is needed because the display already takes the stalk of the cohomology sheaf. Apply [lemma-weil-pbc-geometric-stalk-conservative] to $H^i(u)$: it is an isomorphism of sheaves. Step 1 then proves $u$ invertible in $D^+(T_{\\Et})$.",
+   "text": "For each cohomological degree i, apply Scheme.isIso_of_isIso_sheafFiber_map from [lemma-weil-pbc-geometric-stalk-conservative]. Its family uses the universe-lifted point at the algebraic closure of each residue field. Specialize the hypothesis to that algebraically closed field and Scheme.algClosurePoint. Transport invertibility from the ordinary stalk to the universe-lifted stalk by NatIso.isIso_map_iff applied to the proved GrothendieckTopology.Point.uliftSheafFiberIso. This gives all the stalk hypotheses of the conservative-family theorem and hence invertibility of H^i(f).",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-derived-categories",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-derived-stalk-conservative.md",
-    "place": "Proof, second paragraph; apply sheaf conservativity directly to the displayed cohomology-sheaf maps"
-   }
-  },
-  {
-   "text": "If $u$ is invertible, the cohomology functors of [def-weil-abstract-derived-category] carry $u$ and its inverse to mutually inverse sheaf maps $H^i(u)$ and $H^i(u^{-1})$. Taking the geometric stalks of [def-weil-pbc-geometric-stalks] carries their two identity composites to identity composites: the maps of stalks are induced by the maps on sections in the defining colimit, which respect identity and composition. Hence each displayed stalk map is an isomorphism, with inverse the stalk of $H^i(u^{-1})$.",
-   "uses": [
-    "def-weil-abstract-derived-category",
+    "lemma-weil-pbc-geometric-stalk-conservative",
     "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-derived-stalk-conservative.md",
-    "place": "Proof, third paragraph; functoriality gives the inverse explicitly"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Conversely, if f is invertible, both the cohomology functor and the geometric-stalk functor of [def-weil-pbc-geometric-stalks] preserve its inverse. The two functor-map IsIso instances prove every displayed stalk map invertible.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-derived-categories",
-  "def-weil-abstract-derived-category",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
   "lemma-weil-pbc-geometric-stalk-conservative",
   "def-weil-pbc-geometric-stalks"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-derived-stalk-conservative.md",
-  "place": "## Proof"
+  "place": "The existing three-paragraph argument, implemented by Mathlib DerivedCategory.Plus.isIso_iff and the proved library geometric-stalk conservativity theorem; universe comparison by Point.uliftSheafFiberIso."
  },
  "mathlib_searches": [
   {
@@ -185,5 +166,15 @@
   "by": "NG",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261015T154150-L-158106",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

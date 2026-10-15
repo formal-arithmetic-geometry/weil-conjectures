@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Mathlib.Algebra.Homology.DerivedCategory.Plus
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # Geometric stalks detect isomorphisms in the bounded below derived category
@@ -52,6 +51,19 @@ theorem isIso_iff_isIso_geometricStalk_homologyMap
       (t : Spec (CommRingCat.of Ω) ⟶ T) (i : ℤ),
       IsIso ((pointSmallEtale t).sheafFiber.map
         ((DerivedCategory.Plus.homologyFunctor _ i).map f)) := by
-  sorry
+  constructor
+  · intro hf Ω _ _ t i
+    have := hf
+    infer_instance
+  · intro h
+    apply (DerivedCategory.Plus.isIso_iff f).2
+    intro i
+    apply Scheme.isIso_of_isIso_sheafFiber_map
+    intro s
+    dsimp only [uliftPointSmallEtale]
+    apply (NatIso.isIso_map_iff
+      (GrothendieckTopology.Point.uliftSheafFiberIso.{u + 1}
+        (pointSmallEtale (T.algClosurePoint s)) AddCommGrpCat.{u + 1}) _).2
+    exact h (AlgebraicClosure (T.residueField s)) (T.algClosurePoint s) i
 
 end AlgebraicGeometry.Scheme
