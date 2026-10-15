@@ -32,58 +32,58 @@
  ],
  "proof": [
   {
-   "text": "For an affine weakly contractible $U$, the quotient $\\pi_0(|U|)$ is profinite and maps from $U$ to the finite-quotient objects $X[S]$ are exactly continuous maps $\\pi_0(|U|)\\to S$, compatibly in $S$ and in $U$, by [lem-weil-pbc-proetale-point-components-maps].",
+   "text": "Apply [lem-weil-pbc-point-lan-affine-evaluation] to the chosen left Kan extension P_F along the opposite relative test-object functor. Mathlib Functor.isPointwiseLeftKanExtensionLeftKanExtensionUnit supplies its pointwise universal property. Extract the evaluation isomorphisms and their simultaneous naturality. The profinite component quotient is the existing pointLanComponents construction.",
    "uses": [
-    "lem-weil-pbc-proetale-point-components-maps"
+    "lem-weil-pbc-point-lan-affine-evaluation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.2.13(1); exact master RefactorInstruction.tex, Section 4, proof of Lemma point-pullback formula."
+    "place": "Lemma 4.2.13(1) and its inverse-image computation; Hemo–Richarz–Scholbach Example 3.1 identifies the map from the profinite point. The w-contractible-basis form is also explained in the exact master RefactorInstruction.tex, Section 4, lemma point-eval."
    }
   },
   {
-   "text": "The left Kan extension defining the geometric inverse image $p_X^*=\\pi_X^{-1}a^*$ evaluates on $U$ by the preceding finite-quotient correspondence: the resulting colimit is the value $F(\\pi_0(|U|))$. This identification is natural in $F$ and in maps of weakly contractible affines, since all transition maps are induced by precomposition and the quotient map on components.",
+   "text": "Apply [lem-weil-pbc-proetale-sheafification-wcontractible-sections] to P_F and compose the inverse of its sheafification-unit component with the Kan evaluation isomorphism. For coefficient naturality, use the map induced by the left Kan extension functor; compatibility with the unit is its lanUnit naturality. Specialize simultaneous Kan naturality to the identity of U; the induced component map is the identity, checked on representatives of ConnectedComponents. Cancel the invertible sheafification unit and use its naturality. For naturality in a:V to U, specialize the coefficient morphism to the identity and apply the same cancellation with the restriction-naturality equation of the unit. This constructs PointBasisEvaluationProperty for the relative sheafified Kan extension in any coefficient category with the required colimits and sheafification.",
    "uses": [
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-proetale-point-components-maps"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.2.13(1), inverse-image site computation; Hemo–Richarz–Scholbach Example 3.1."
-   }
-  },
-  {
-   "text": "Because $U$ is weakly contractible, sheafification does not change this left-Kan-extension section on $U$: apply [lem-weil-pbc-proetale-sheafification-wcontractible-sections]. Thus the sheaf inverse image itself satisfies $(p_X^*F)(U)\\cong F(\\pi_0(|U|))$, with the same naturality.",
-   "uses": [
+    "lem-weil-pbc-point-lan-affine-evaluation",
     "lem-weil-pbc-proetale-sheafification-wcontractible-sections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.2.13(1), sheafification on weakly contractible objects."
+    "place": "Lemma 4.2.13(1) and its inverse-image computation; Hemo–Richarz–Scholbach Example 3.1 identifies the map from the profinite point. The w-contractible-basis form is also explained in the exact master RefactorInstruction.tex, Section 4, lemma point-eval."
    }
   },
   {
-   "text": "For abelian groups and commutative rings, the comparison is induced by the same maps of underlying sections; addition and multiplication are computed pointwise, so the bijection preserves those operations. The quotient topology assertion is exactly the definition of the topology on $\\pi_0(|U|)$.",
+   "text": "The specified composite inverse image and the relative sheafified Kan extension are both left adjoint to restriction along profiniteToProEtOf X. Compose the two sheafPullbackConstruction adjunctions for the former; use the relative adjunction for the latter. Their right adjoints agree definitionally. Mathlib Adjunction.leftAdjointUniq gives a natural isomorphism between the left adjoints. Compose its evaluated components with the preceding comparisons; naturality of this isomorphism proves both equations after transport. Specialize to sets, abelian groups and commutative rings. The algebraic comparisons are isomorphisms in their coefficient categories, so preserve operations.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "/home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex",
-    "place": "Section 4, proof of Lemma point-pullback formula and the paragraph following it."
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.13(1) and its inverse-image computation; Hemo–Richarz–Scholbach Example 3.1 identifies the map from the profinite point. The w-contractible-basis form is also explained in the exact master RefactorInstruction.tex, Section 4, lemma point-eval."
+   }
+  },
+  {
+   "text": "The compactness, Hausdorffness and total disconnectedness instances are already bundled in pointLanComponents. The final assertion is Mathlib ConnectedComponents.isQuotientMap_coe.isCoinducing.isOpen_preimage, with the subset-open direction as stated. No extra hypotheses or nonempty choices are used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.13(1) and its inverse-image computation; Hemo–Richarz–Scholbach Example 3.1 identifies the map from the profinite point. The w-contractible-basis form is also explained in the exact master RefactorInstruction.tex, Section 4, lemma point-eval."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proetale-point-components-maps",
-  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-point-lan-affine-evaluation",
   "lem-weil-pbc-proetale-sheafification-wcontractible-sections"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "D3",
+  "date": "2026-10-16",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 4.2.13(1) and inverse-image computation; Hemo–Richarz–Scholbach Example 3.1; exact master RefactorInstruction.tex Section 4."
+  "place": "Lemma 4.2.13(1) and its inverse-image computation; Hemo–Richarz–Scholbach Example 3.1 identifies the map from the profinite point. The w-contractible-basis form is also explained in the exact master RefactorInstruction.tex, Section 4, lemma point-eval.",
+  "note": "Formal assembly of the existing Kan evaluation and sheafification statements; the inverse-image comparison is Mathlib uniqueness of left adjoints, with both naturality equations proved explicitly."
  },
  "mathlib_searches": [
   {
@@ -179,5 +179,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Audited node, dependencies, source, declarations, docstrings, edge cases, report sections, and universes. Immutable module compiled via scompile.py in sandbox and library modes without diagnostics; no substantive or mechanical faults found. Review recorded in review.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T181519-L-747552",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
