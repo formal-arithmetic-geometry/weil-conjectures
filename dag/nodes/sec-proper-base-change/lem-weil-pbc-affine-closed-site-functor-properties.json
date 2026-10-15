@@ -31,102 +31,95 @@
  ],
  "proof": [
   {
-   "text": "First check that the specified constructions take values in the stated bases. For $U=\\operatorname{Spec}D$ ind-etale over $A$, its closed base change is $\\operatorname{Spec}(D/ID)$, ind-etale over $A/I$ by [lem-weil-pbc-ind-etale-stability]. The indexing category defining $C=H_A(\\overline C)$ is filtered by [lem-exc-closed-lift-filtered]; its terms are etale $A$-algebras of finite presentation by [def-exc-ind-etale-closed-lift]. Thus $C$ is ind-etale by [def-weil-pbc-ind-etale-algebra], and $v(V)=\\operatorname{Spec}C$ lies in [def-weil-pbc-ind-etale-basis]. Postcomposition on the indexing categories induces the ring maps of [def-exc-closed-site-lift]; identity and composite postcompositions give identity and composite maps. Taking spectra reverses arrows, so this defines the asserted functor $v$. Base change is functorial by the uniqueness clause of [def-pc-fibre-product], defining $u$. All indexing categories are taken in the fixed universes/skeleton convention of [def-weil-pbc-proetale-site].",
+   "text": "Use the existing closedSiteBaseChange and closedSiteLift functors. Pullback preserves their pro-affine-etale object condition. On coordinates, the structural A-algebra map is GammaSpecIso.inv followed by the global-sections map; its spectrum is the original structure map after the affine isoSpec. The quotient-coordinate algebra is ind-etale by proAffineEtale_Spec_iff and indEtale_appTop_of_proAffineEtale.",
    "uses": [
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-exc-closed-lift-filtered",
-    "def-exc-ind-etale-closed-lift",
-    "def-weil-pbc-ind-etale-algebra",
-    "def-weil-pbc-ind-etale-basis",
     "def-exc-closed-site-lift",
-    "def-pc-fibre-product",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BK, lemma-closed-immersion-affines, proof opening sentence and Tag 097P, lemma-lift-ind-etale, filtered-colimit construction"
-   }
-  },
-  {
-   "text": "Let $V=\\operatorname{Spec}\\overline C$ and $U=\\operatorname{Spec}D$. By the contravariant affine correspondence [def-weil-affine-spectrum], the natural algebra bijection of [lem-exc-closed-lift-adjunction] reads $\\operatorname{Hom}_X(v(V),U)\\cong\\operatorname{Hom}_Z(V,u(U))$. This gives $v\\dashv u$ with exactly the functors of step 1. By [lem-exc-closed-lift-reduction], the specified map $C/IC\\to\\overline C$ is an isomorphism, naturally in $\\overline C$. Hence the adjunction unit $V\\to uv(V)$ is an isomorphism. The map $V\\to v(V)$ is the spectrum of $C\\twoheadrightarrow C/IC\\cong\\overline C$, so it is a closed immersion by [def-weil-closed-immersion] and identifies $V$ with the required closed base change. For $V,W$ the preceding Hom bijection with $U=v(W)$ becomes $\\operatorname{Hom}_X(v(V),v(W))\\cong\\operatorname{Hom}_Z(V,uv(W))\\cong\\operatorname{Hom}_Z(V,W)$; the inverse is the map induced by $v$, by naturality and the unit identity. Thus $v$ is fully faithful.",
-   "uses": [
     "def-weil-affine-spectrum",
-    "lem-exc-closed-lift-adjunction",
-    "lem-exc-closed-lift-reduction",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BK, lemma-closed-immersion-affines, statement and proof first two paragraphs; Tag 097P adjunction and reduction"
-   }
-  },
-  {
-   "text": "We will use the following elementary reading of the coverings in [def-weil-pbc-proetale-site] and [def-weil-pbc-fpqc-covering]. A covering family of affine objects has a finite jointly surjective subfamily: apply the fpqc condition to the whole affine target and enlarge the finitely many supplied affine source opens to their source objects. Conversely, a family of weakly etale maps between affines with a finite jointly surjective subfamily is fpqc. Indeed, every affine open $W$ of its target is covered by finitely many target principal opens $D(f_k)$ contained in $W$. To justify finiteness directly, a principal-open cover of any spectrum has elements generating the unit ideal: otherwise [lem-weil-pbc-proper-ideal-contained-in-maximal] supplies a maximal ideal missed by the cover. An expression $1=\\sum_{k=1}^n a_k f_k$ gives a finite subcover. To apply this to the ambient principal opens contained in $W$, write $W=\\operatorname{Spec}R$. Their intersections with $W$ are open in $\\operatorname{Spec}R$ and cover it; refine each by principal opens of $\\operatorname{Spec}R$. The unit-ideal argument selects finitely many of these intrinsic principal opens, and hence finitely many of the original ambient principal opens covering $W$. The preimage of each target $D(f_k)$ in each selected affine source is the affine principal open obtained by inverting the image of $f_k$. These finitely many source opens have images covering $W$, as required. A maximal ideal is prime here by the elementary argument that if $ab\\in\\mathfrak m$ and $a\\notin\\mathfrak m$, an equation $1=c+ra$, $c\\in\\mathfrak m$, implies $b\\in\\mathfrak m$. This criterion includes empty targets and empty covering families.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-fpqc-covering",
-    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+    "def-weil-pbc-ind-etale-basis"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BK, lemma-closed-immersion-affines, definition of affine-site coverings, with Tag 098X lemma-affine-alternative and definition-standard-proetale; elementary fpqc interpretation"
+    "place": "Tag 09BK, lemma-closed-immersion-affines, proof; Tag 097P for the algebra adjunction and reduction"
    }
   },
   {
-   "text": "The functor $u$ is continuous. A covering of $U$ is fpqc by [def-weil-pbc-proetale-site], so its base change along $U\\times_X Z\\to U$ is fpqc by [lem-galois-fpqc-covering-base-change]. The base-changed sources lie in the ind-etale basis and the arrows are weakly etale by [lem-weil-pbc-ind-etale-stability]. Thus it is a covering in the target basis [def-weil-pbc-ind-etale-basis]. For $T\\to U$ and a covering arrow $U_j\\to U$, both $(T\\times_U U_j)\\times_X Z$ and $(T\\times_X Z)\\times_{U\\times_X Z}(U_j\\times_X Z)$ represent pairs of maps to $T,U_j$ agreeing in $U$, together with the compatible map to $Z$. The universal property [def-pc-fibre-product] gives mutually inverse canonical maps. These fibre products are affine and ind-etale by base change and composition stability, so they are fibre products in the full basis categories. This proves both clauses of continuity in [def-weil-pbc-sites-and-cohomology].",
+   "text": "Use Algebra.ClosedLift.exists_natural_homEquiv to prove that composing an A-algebra map D → H_A(C) with the retained map is bijective. Descend an arbitrary map D → C to D/ID; the formula on quotient representatives proves both inverse identities. The affine-spectrum Hom equivalence transports this to unique factorization of an over-A scheme map V → U through the specified inclusion V → v(V). Pullback.lift gives Hom(v(V),U) ≃ Hom(V,u(U)); the retained-map naturality (checked on colimit structure maps) proves naturality in V, and pullback uniqueness proves naturality in U. Adjunction.mkOfHomEquiv gives v ⊣ u. Independently, CommRingCat.isPushout_quotient and bijective_reduction identify the closed-fibre square as a pullback, after applying Spec and isoSpec. Surjectivity of the retained map gives the closed immersion. The unit is the comparison isomorphism of this same pullback square, so fullyFaithfulLOfIsIsoUnit gives full faithfulness.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-galois-fpqc-covering-base-change",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-ind-etale-basis",
+    "def-exc-ind-etale-closed-lift",
+    "def-exc-closed-site-lift",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
     "def-pc-fibre-product",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-exc-closed-lift-adjunction",
+    "lem-exc-closed-lift-reduction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BK, lemma-closed-immersion-affines, proof opening paragraph: continuity from coverings"
+    "place": "Tag 09BK, lemma-closed-immersion-affines, proof; Tag 097P for the algebra adjunction and reduction"
    }
   },
   {
-   "text": "Every point of $\\operatorname{Spec}C=v(V)$ specializes to a point of $V=\\operatorname{Spec}(C/IC)$. Write the point as a prime $\\mathfrak p\\subset C$ and choose a maximal ideal $\\mathfrak m$ containing it using [lem-weil-pbc-proper-ideal-contained-in-maximal]. For every $b\\in IC$, the element $1-b$ maps to $1$ in $\\overline C$ and is invertible by [lem-exc-closed-lift-units]. If $b\\notin\\mathfrak m$, maximality would give $1=c+rb$ with $c\\in\\mathfrak m$, so $c=1-rb$ would be a unit in the proper ideal $\\mathfrak m$, a contradiction. Thus $IC\\subseteq\\mathfrak m$. The maximal ideal is prime by the calculation in step 3, and defines a point of $\\operatorname{Spec}(C/IC)$ specializing from $\\mathfrak p$: in the Zariski topology the closure of $\\{\\mathfrak p\\}$ consists precisely of primes containing $\\mathfrak p$. This is the requested specialization in the closed subscheme of step 2. If $C$ is the zero ring, there are no points and the assertion is vacuous.",
+   "text": "Read affine coverings directly using the existing quasi-compact-cover API. QuasiCompactCover.exists_isAffineOpen_of_isCompact applied to the whole compact affine target selects a finite subfamily whose images cover it. Conversely, finite jointly surjective families of affine-site arrows are coverings: the arrows are weakly etale, affine hence quasi-compact, and IsCompactOpenCovered.of_finite_of_isSpectralMap proves the quasi-compact-cover condition. QuasiCompactCover.of_hom promotes a finite covering subfamily to the entire family. These constructions also cover empty targets and empty families.",
    "uses": [
-    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BK, lemma-closed-immersion-affines, proof; Tag 097P for the algebra adjunction and reduction"
+   }
+  },
+  {
+   "text": "Write a covering presieve as ofArrows. Each square produced by closedSiteBaseChange is the cartesian square MorphismProperty.Over.isPullback_map_left. Precoverage.mem_coverings_of_isPullback and stability of proetalePrecoverage under base change prove covering preservation. Since u is a right adjoint by step 2, it preserves all existing pullbacks, yielding the required covering-arrow pullback clause.",
+   "uses": [
+    "def-exc-closed-site-lift",
+    "def-pc-fibre-product",
+    "def-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BK, lemma-closed-immersion-affines, proof; Tag 097P for the algebra adjunction and reduction"
+   }
+  },
+  {
+   "text": "Choose a maximal ideal containing a given prime of H_A(C), using Ideal.exists_le_maximal. Every element b of the retained-map kernel is in the Jacobson radical of zero: for each y the image of b*y+1 is 1, so isUnit_of_isUnit_toAlgHom makes b*y+1 a unit, and Ideal.mem_jacobson_bot applies. Thus the maximal ideal contains the kernel. The retained map is surjective by bijective_reduction, so range_comap_of_surjective produces a prime of C above this maximal ideal. PrimeSpectrum.le_iff_specializes gives the specialization, transported to V by isoSpec. No point exists in the zero-ring case.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-exc-closed-lift-reduction",
     "lem-exc-closed-lift-units",
-    "def-weil-affine-spectrum"
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BK, lemma-closed-immersion-affines, proof second paragraph: invertibility and specialization"
+    "place": "Tag 09BK, lemma-closed-immersion-affines, proof; Tag 097P for the algebra adjunction and reduction"
    }
   },
   {
-   "text": "Let $\\{V_a\\to V\\}$ be a covering. By step 3 choose a finite subfamily whose images cover $V$. The induced maps $v(V_a)\\to v(V)$ are morphisms between ind-etale $X$-objects; on rings they are ind-etale, and therefore weakly etale, by the relative-map and weak-etaleness clauses of [lem-weil-pbc-ind-etale-stability]. They are flat by the weak-etale definition in [def-weil-pbc-ind-etale-algebra]. Their ring maps are flat, equivalently their affine scheme maps are flat, by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. Let $\\mathfrak p$ be any point of $v(V)$ and choose a specialization $\\mathfrak p\\subseteq\\mathfrak m$ in $V$ from step 5. Choose $a$ and a point of $V_a$ over this point of $V$; the natural closed immersions of step 2 place it in $v(V_a)$ and its image is $\\mathfrak m$, since the reduction identifications are natural. Apply [lem-sc-flat-going-down] to the flat ring map $C\\to C_a$, the primes $\\mathfrak p\\subseteq\\mathfrak m$, and this prime of $C_a$ over $\\mathfrak m$. It supplies a prime of $C_a$ over $\\mathfrak p$. Thus the finite family $\\{v(V_a)\\to v(V)\\}$ is jointly surjective. By step 3 it is a covering, and the entire image family is a covering as well. This proves that $v$ sends coverings to coverings; no finite-presentation or openness assertion for the flat maps is used.",
+   "text": "Choose a finite jointly surjective covering subfamily by step 3. For any x in v(V), step 5 gives a specialization to the inclusion of some z in V. Lift z to one selected source V_i. Retained-map naturality makes the inclusion of this source point map to the inclusion of z. The affine-site arrow v(V_i) → v(V) is weakly etale and therefore flat. Flat.generalizingMap (flat going-down) gives a point mapping to x. Thus the lifted finite subfamily is jointly surjective, and step 3 makes the complete image presieve a covering.",
    "uses": [
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-exc-closed-site-lift",
+    "def-weil-pbc-ind-etale-basis",
     "lem-sc-flat-going-down"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BK, lemma-closed-immersion-affines, proof third paragraph: images of coverings, flat going-down supplies generalizations"
+    "place": "Tag 09BK, lemma-closed-immersion-affines, proof; Tag 097P for the algebra adjunction and reduction"
    }
   },
   {
-   "text": "To prove cocontinuity, take $V$ and a covering $\\{U_j\\to v(V)\\}$ in $X_{\\mathrm{app}}$. Step 4 gives a covering $\\{u(U_j)\\to uv(V)\\cong V\\}$ in $Z_{\\mathrm{app}}$. Let $h_j:u(U_j)\\to V$ be these arrows, using the inverse of the unit $\\eta_V:V\\xrightarrow{\\sim}uv(V)$ from step 2. The counit gives maps $\\epsilon_{U_j}:v(u(U_j))\\to U_j$. They are maps over $v(V)$: naturality of $\\epsilon$ and the triangle identity give $f_j\\epsilon_{U_j}=\\epsilon_{v(V)}v(u(f_j))=v(\\eta_V^{-1}u(f_j))=v(h_j)$, where $f_j:U_j\\to v(V)$. Thus the image of this covering under $v$ refines the original family, exactly as required by the cocontinuity definition [def-weil-pbc-special-cocontinuous-functor]. This argument requires only cocontinuity clause (1), not the stronger special-cocontinuity conditions.",
+   "text": "For cocontinuity apply Adjunction.isCocontinuous_iff_coverPreserving to step 2. Any covering sieve contains a finite jointly surjective family by AffineProEt.exists_finite_jointly_surjective_of_mem_topology. Step 3 makes it a covering presieve; step 4 maps it to a covering presieve. Its generated sieve is covering in the induced affine topology and is contained in the pushforward of the original sieve. Hence u is CoverPreserving, so v is cocontinuous. This is the counit-refinement argument packaged by Mathlib; it needs no special-cocontinuity wrapper.",
    "uses": [
-    "def-weil-pbc-special-cocontinuous-functor"
+    "def-weil-pbc-ind-etale-basis"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BK, lemma-closed-immersion-affines, proof last paragraph: explicit counit refinement"
+    "place": "Tag 09BK, lemma-closed-immersion-affines, proof; Tag 097P for the algebra adjunction and reduction"
    }
   }
  ],
@@ -136,26 +129,19 @@
   "def-pc-fibre-product",
   "def-weil-affine-spectrum",
   "def-weil-closed-immersion",
-  "def-weil-pbc-fpqc-covering",
-  "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-ind-etale-basis",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-special-cocontinuous-functor",
   "lem-exc-closed-lift-adjunction",
-  "lem-exc-closed-lift-filtered",
   "lem-exc-closed-lift-reduction",
   "lem-exc-closed-lift-units",
-  "lem-galois-fpqc-covering-base-change",
   "lem-sc-flat-going-down",
-  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-  "lem-weil-pbc-ind-etale-stability",
   "lem-weil-pbc-proper-ideal-contained-in-maximal"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "E1",
+  "date": "2026-10-16",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09BK, lemma-closed-immersion-affines, proof; Tag 097P, lemma-lift-ind-etale"
+  "place": "Tags 09BK and 097P; direct Lean proof of the seven steps, using the existing algebra Hom equivalence, quotient pushout, quasi-compact-cover API, and generic adjunction cocontinuity criterion."
  },
  "mathlib_searches": [
   {
@@ -346,5 +332,15 @@
   "by": "NA",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-bcd5b",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261015T185310-L-894313",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, DAG metadata, report, and direct importers match the stated item and compile cleanly with permitted axioms."
  }
 }
