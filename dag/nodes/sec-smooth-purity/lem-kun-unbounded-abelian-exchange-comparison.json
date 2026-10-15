@@ -28,85 +28,50 @@
  ],
  "proof": [
   {
-   "text": "Forgetting a module action preserves kernels sectionwise and cokernels by sheafifying the same underlying additive quotient. The inverse of a bijective module homomorphism is module-linear: if y=h(x), then h^{-1}(ry)=rx. Thus the sheaf forgetful functor is exact and reflects isomorphisms. The exact-functor factorization induces its triangulated unbounded functor; the exact cohomology comparison gives H^i(UK)=U H^i(K). If U(h) is invertible, all U H^i(h) are invertible, hence all H^i(h) are invertible by the preceding sheaf argument; the derived cohomology criterion makes h invertible. This proves conservativity for arbitrary unbounded complexes.",
+   "text": "Use the existing moduleAbelianForget exactness instances. Its exact localization commutes with homology by Functor.mapDerivedCategoryHomologyFunctorIso. For a derived morphism whose forgotten image is invertible, naturality of this homology isomorphism and reflection of isomorphisms by the ordinary forgetful functor make each homology map invertible. DerivedCategory.isIso_iff then makes the original morphism invertible. This proves the first conjunction using only the exact functor API and the cohomology criterion.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6J, lemma-modules-abelian-unbounded; exact forgetting and cohomology criterion"
-   }
+   "elementary": false
   },
   {
-   "text": "For an edge u, the module inverse image is the abelian inverse image with transported action, and its sheaf unit and counit are the underlying abelian ones. Hence forgetting gives the canonical inverse-image comparison and a compatible ordinary adjoint square, with direct-image comparison the sectionwise identity. Apply the localization universal property (2) to its termwise inverse-image isomorphism: this gives a_u. Applying the same property to the two composite inverse images gives, for theta:f'^{-1}g^{-1}->g'^{-1}f^{-1}, the equality theta_Z U(Rf K) o f'^{-1}_Z a_g(Rf K) o a_f'(g^{-1}_Lambda Rf K) = g'^{-1}_Z a_f(Rf K) o a_g'(f^{-1}_Lambda Rf K) o U(theta_Lambda,Rf K). Both sides are the same sheaf composition comparison degree by degree, and localization (3) preserves this equality.",
+   "text": "For a square e:G gamma to beta Gprime with exact beta and gamma, define derivedSquare by right-derived descent. Postcomposition of RG is absolute because K-injectives form a right derivability structure. Expand descent once on homotopy complexes to prove its unit-normalization equation. The naturality square of the abelian derived unit, evaluated at a K-injective replacement j:UI to J, shows its component at UI is invertible whenever Gprime(j) is a quasi-isomorphism. Apply the new direct-image acyclicity lemma. The derivability criterion now makes derivedSquare of the ordinary direct-image isomorphism invertible.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-localization-universal-property",
+    "def-weil-pbc-kinjective-resolutions",
+    "lem-kun-module-abelian-kinjective-direct-image-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute mates on homotopy complexes, using the explicit unit and counit normalization equations of the existing derived adjunction. An ordinary square whose mate is the sectionwise direct-image identity has its derived mate satisfying the normalization equation of step 2. Uniqueness of right-derived descent identifies the fixed moduleAbelianUnboundedLowerStarComparison with derivedSquare of moduleAbelianLowerStarIso. Consequently step 2 proves both its invertibility and exactly the displayed unit equation. No auxiliary existential comparison is chosen.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
     "def-kun-unbounded-exchange"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change; termwise inverse-image square"
-   }
+   "elementary": false
   },
   {
-   "text": "View forgetting as the direct image of the identity-topos ring map Z_T->Lambda_T. Its derived direct image is termwise U by exactness. Factor the ringed-topos morphism (A,Lambda_A)->(B,Z_B) in the two ways, through (B,Lambda_B) and through (A,Z_A). The ringed-topos composition theorem identifies both composites with its total right derived image, giving b_u:U_B Ru_Lambda->Ru_Z U_A. In the first factorization no replacement after u_*I is needed, since the last functor is exact. In the second choose U_AI->J abelian K-injective; the normalized composition comparison is exactly the class of u_*U_AI->u_*J. The theorem therefore gives invertibility and naturality for the prescribed b_u, without assuming U_AI K-injective. It also shows U_B Ru_Lambda, with its comparison unit, is the right derived functor of U_B u_*Lambda.",
+   "text": "Apply the already proved ordinary module/abelian exchange compatibility. Pass its cube to homotopy categories, insert the exact-functor localization comparison isomorphisms, and apply the four normalization equations of derivedSquare. Naturality and cancellation of the exact factorization isomorphisms reduce the resulting equation to the ordinary cube degree by degree. The universal uniqueness of right-derived descent gives the derived cube equality. By step 3, its faces are exactly the fixed mate comparisons and the exactDerivedBaseChangeMap declarations in the original statement, yielding the final equality.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-exact-functor-derived-functor"
+    "lem-weil-pbc-module-abelian-underived-exchange",
+    "def-kun-unbounded-exchange"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0D6J (3), lemma-modules-abelian-unbounded"
-   }
-  },
-  {
-   "text": "Apply the general derived adjoint-square comparison to the ordinary compatible square of step 2 and the right-derived postcomposition property of step 3. It gives b_u(u^{-1}M) U_B(eta_Lambda,M)=Ru_Z(a_u(M))^{-1} eta_Z,U_B M and U_A(epsilon_Lambda,N)=epsilon_Z,U_A N o u^{-1}_Z(b_u(N)) o a_u(Ru_Lambda N). These identities are for the fixed resolution-normalized comparison b_u; they do not merely assert the existence of some compatible isomorphism.",
-   "uses": [
-    "lem-kun-derived-adjoint-square-comparison",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change; derived adjunction normalization, using derived.tex Tag 09T5"
-   }
-  },
-  {
-   "text": "Write $L=f^{-1}$, $L'=f'^{-1}$, $H=g^{-1}$, $H'=g'^{-1}$, $R=Rf_*$ and $R'=Rf'_*$. Subscripts $0$ denote abelian derived functors; $U$ has the corner dictated by its argument. Put $x=\\operatorname{Ex}^{\\Lambda}_{\\square,K}$. The mate definition says $\\varepsilon'_{\\Lambda,H'K}L'(x)=H'(\\varepsilon_{\\Lambda,K})\\theta_{\\Lambda,RK}$. For $y=t_KU(x)$ its transpose is $\\varepsilon'_{0,H'_0UK}L'_0(y)$. Naturality of $\\varepsilon'_0$, the counit equation of step 4 for $f'$, and naturality of $a_{f'}$ give\n$$y^\\flat=a_{g'}(K)U(\\varepsilon'_{\\Lambda,H'K})U(L'(x))a_{f'}(HRK)^{-1}.$$\nSubstitute the mate equation and use naturality of $a_{g'}$ at $\\varepsilon_{\\Lambda,K}:LRK\\to K$:\n$$y^\\flat=H'_0(U\\varepsilon_{\\Lambda,K})a_{g'}(LRK)U(\\theta_{\\Lambda,RK})a_{f'}(HRK)^{-1}.$$\nThe counit equation for $f$ is $U\\varepsilon_{\\Lambda,K}=\\varepsilon_{0,UK}L_0(b_f(K))a_f(RK)$. The square equation of step 2, after cancelling $a_{f'}(HRK)$, is\n$$H'_0(a_f(RK))a_{g'}(LRK)U(\\theta_{\\Lambda,RK})a_{f'}(HRK)^{-1}=\\theta_{0,URK}L'_0(a_g(RK)).$$\nConsequently\n$$y^\\flat=H'_0(\\varepsilon_{0,UK})H'_0L_0(b_f(K))\\theta_{0,URK}L'_0(a_g(RK))=H'_0(\\varepsilon_{0,UK})\\theta_{0,R_0UK}L'_0(H_0(b_f(K))a_g(RK)).$$\nThe last equality is naturality of $\\theta_0$ at $b_f(K):URK\\to R_0UK$. Since $s_K=H_0(b_f(K))a_g(RK)$, this is the transpose of $\\operatorname{Ex}^{\\mathbf Z}_{\\square,UK}s_K$. Injectivity of the adjunction Hom bijection proves the required equality. Steps 2 and 3 make every component of $s,t$ a natural isomorphism.",
-   "uses": [
-    "def-kun-unbounded-exchange",
-    "lem-kun-derived-adjoint-square-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change; explicit mate calculation"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-kun-module-abelian-kinjective-direct-image-acyclic",
   "def-kun-unbounded-exchange",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-kun-derived-adjoint-square-comparison"
+  "lem-weil-pbc-module-abelian-underived-exchange"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "F4",
+  "date": "2026-10-16",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6E, 0D6J, 07A7; explicit coefficient-forgetting mate calculation"
+  "place": "Tags 0D6J(3) and 07A7; explicit unbounded descent, mate normalization and cube proof, with resolution acyclicity isolated"
  },
  "mathlib_searches": [
   {
@@ -259,5 +224,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Reviewed immutable nodes, sources, dependencies, both modules, and report. Canonical comparisons and exchange equality match; dependency repair is valid. Statement fields match verbatim. Both files compile cleanly through scompile.py. Findings recorded in review.md; no fixes needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-baaba",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T224820-L-2950168",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, DAG nodes, declarations, and direct importers match the packet and compile successfully with no mechanical findings."
  }
 }

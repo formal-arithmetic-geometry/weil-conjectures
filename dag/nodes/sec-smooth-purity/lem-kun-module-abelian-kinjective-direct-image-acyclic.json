@@ -1,0 +1,180 @@
+{
+ "id": "lem-kun-module-abelian-kinjective-direct-image-acyclic",
+ "kind": "statement",
+ "title": "Abelian direct-image acyclicity of a module K-injective complex",
+ "statement": "Let Lambda be any commutative ring and v:A to B any morphism of schemes. Let U_A be the exact functor forgetting Lambda-module structure on small-etale sheaves [lem-weil-pbc-module-abelian-derived-direct-image-comparison]. If I is an arbitrary unbounded K-injective complex of Lambda-module sheaves on A [def-weil-pbc-kinjective-resolutions], J is a K-injective complex of abelian sheaves on A, and j:U_A I to J is a quasi-isomorphism, then termwise abelian direct image v_*j is a quasi-isomorphism. There is no boundedness, flatness, properness or finite-cohomological-dimension hypothesis, and no assertion that U_A I is K-injective.",
+ "stmt_deps": [
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6J, lemma-modules-abelian-unbounded (3), proof using module and abelian K-injective replacements; equivalently the final resolution-normalization clause of Tag 0D6E"
+ },
+ "proof": [
+  {
+   "text": "On the small etale site of a scheme T, identify ModuleCat Lambda-valued sheaves with modules over the constant ring sheaf Lambda_T, using the underlying-abelian-compatible equivalence. Identify abelian sheaves with modules over Z_T (using ULift integers in the coefficient universe when necessary) by the sectionwise equivalence between abelian groups and Z-modules. These are additive exact equivalences. Their termwise functors therefore preserve quasi-isomorphisms and K-injectivity: the latter follows by transporting the defining null-homotopy condition against acyclic complexes through the inverse equivalence. To match the abstract ringed-topos interface, replace each small etale site by ULiftHom with morphisms lifted to the object universe, and equip it with the topology induced by the inverse site equivalence. Precomposition transports ring sheaves and module sheaves to this site; the inverse precomposition and the unit/counit identities give an exact equivalence on module categories compatible with underlying additive sheaves. Conjugate the base-change functor and the set inverse-image adjunction by these site equivalences. Their counit identities identify the transported direct image with the conjugated base-change direct image, and equivalences preserve finite limits. Thus ring sheaves, set sheaves and module carriers all have the coefficient universe required by the composition theorem, without lifting the schemes or changing the statement.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-constant-ring-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let r:(A,Lambda_A) to (A,Z_A) be restriction along the canonical constant-ring map Z_A to Lambda_A, with identity inverse and direct image on set sheaves. Its module functor is restriction of scalars and its underlying additive functor is forgetting. Let p:(A,Z_A) to (B,Z_B) be the geometric morphism induced by v, with constant-integer structural map. Its module direct image is precomposition by etale base change, with sectionwise integer action. Thus, under step 1, r.modules is U_A and p.modules is v_* on abelian sheaves. The structural maps preserve the zero, one, addition, and multiplication graphs: inverse image preserves the terminal object and binary products, and the integer structural map is a ring map. The module action graph is preserved in the same way, with addition and scalar multiplication sectionwise. This supplies the RingedToposMorphism data, including its generalized-element identities, and identifies both direct-image functors naturally on objects and maps.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-constant-ring-inverse-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the given I, J, and j through the equivalences of step 1 and the forgetting isomorphism of step 2. They become a K-injective Lambda_A-module complex I, a K-injective Z_A-module complex J, and a quasi-isomorphism r_*I to J. Apply the final resolution-normalization clause of the ringed-topos derived pushforward composition theorem to r and p. That clause states directly that p_*j is a quasi-isomorphism. Only this clause is needed; there is no assertion that r_*I is K-injective.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural identification of p.modules with abelian v_* in step 2 identifies this p_*j with the termwise map v_*j of the statement, conjugated by the termwise encoding isomorphisms. Exact equivalences reflect quasi-isomorphisms, and conjugation by chain isomorphisms preserves them. Transporting back gives the required QuasiIso. The identity morphism, zero ring, zero complex, empty etale objects, and arbitrary shifts are included; no boundedness or finite cohomological dimension was used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-constant-ring-inverse-image-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F4",
+  "date": "2026-10-16",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6J(3) and 0D6E; coefficient-restriction specialization of the composition normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting the coefficients of an unbounded K-injective complex of module sheaves is acyclic for the direct image of abelian sheaves",
+   "results": "Service unavailable: HTTP endpoint returned Internal Server Error. Actual attempt is recorded in searches.jsonl. No search verdict is asserted for the unavailable service. LeanFinder, Loogle and Mathlib-source grep were also run.",
+   "date": "2026-10-16",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any morphism of schemes, forgetting coefficients of a K-injective complex of module sheaves computes unbounded derived direct image of abelian sheaves",
+   "results": "8 generic hits, including Functor.isZero_rightDerived_obj_injective_succ, Functor.mapDerivedCategory, Functor.rightDerived and Functor.mapDerivedCategoryFactors. Inspected signatures: no unbounded coefficient-forgetting acyclicity theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KInjective\", \"rightDerivedFunctorUnit\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(forget|underlying).*(KInjective|rightDerivedFunctorUnit)|(KInjective|rightDerivedFunctorUnit).*(forget|underlying)",
+   "results": "0 Mathlib hits. Project search found only bounded-below module/abelian comparisons and the abstract ringed-topos composition theorem; its concrete site/module-encoding bridge is not stated. Whole-blueprint search for 0D6J found only the distinct vanishing-descends-retract statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a sheaf complex is K-injective as modules, any underlying abelian injective resolution stays a quasi-isomorphism after sheaf pushforward",
+   "results": "Second reading: 8 hits concerning ordinary injective resolutions and isKInjective_of_iso; none states underlying abelian direct-image acyclicity for unbounded module K-injectives.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso\", \"KInjective\"",
+   "results": "Second reading: CochainComplex.IsKInjective.quasiIso_iff requires both complexes K-injective in the same abelian category. It cannot apply to the forgotten module complex, which need not be abelian K-injective.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic.*(forget|pushforward)|rightDerived.*[Cc]omposition",
+   "results": "Second reading: no Mathlib hits. Project searches found bounded-below acyclicity and the previously cited abstract ringed-topos composition theorem, not the concrete unbounded assertion.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison",
+  "date": "2026-10-16",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0g",
+   "place": "Proof: the torsion-ring coefficient reduction; the resolution acyclicity part of the unbounded coefficient comparison",
+   "via": [
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-kun-proper-base-change-torsion-ring"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleAbelianKInjectiveDirectImageAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleAbelianKInjectiveDirectImageAcyclic.lean",
+  "declaration": "AlgebraicGeometry.Etale.moduleAbelianForget_kInjective_directImage_quasiIso",
+  "statement": "theorem moduleAbelianForget_kInjective_directImage_quasiIso\n    (Λ : Type (u + 1)) [CommRing Λ] {A B : Scheme.{u}} (v : A ⟶ B)\n    (I : CochainComplex (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ)\n    [I.IsKInjective]\n    (J : CochainComplex (Sheaf A.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)\n    [J.IsKInjective]\n    (j : ((moduleAbelianForget Λ A).mapHomologicalComplex (.up ℤ)).obj I ⟶ J)\n    [QuasiIso j] :\n    QuasiIso ((((v)_*[AddCommGrpCat.{u + 1}]).mapHomologicalComplex (.up ℤ)).map j)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Uses only its final resolution-normalization clause for coefficient restriction followed by geometric direct image; the Kunneth unit has no generic ringed-topos composition theorem. This retains the original parent route through this theorem."
+   }
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-baaba",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T224820-L-2950168",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-baaba",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T224820-L-2950168",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, DAG nodes, declarations, and direct importers match the packet and compile successfully with no mechanical findings."
+ }
+}
