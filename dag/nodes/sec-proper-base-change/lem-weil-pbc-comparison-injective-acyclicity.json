@@ -325,5 +325,23 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-fe02c5a5c (reviewer sub-agent of L); spot-checked: Read the complete item, all 27 dependency statements, blueprint route, report, and cited local sources. All nine steps correctly establish the two-limit Čech vanishing argument for finite discrete module coefficients. Covering descent, eventual affineness, face-map compatibility, and slice cohomology identification are justified. No new nodes, duplicate restatements, target weakening, or item dependency cycle. Accepted five declared generic tool uses; detailed checks and inherited unrelated DAG defects recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dcab02dab",
+  "group": "N3",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable records, source, dependencies, verbatim signature, universes, edge cases, and canonical identity transport. Independent scompile.py overlay checks passed without warnings. No delivery errors or fixes required; upstream proof remains open."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic",
+  "declaration": "AlgebraicGeometry.ProEtale.isZero_rightDerived_sectionsFunctor_comparisonUpperStar_obj",
+  "statement": "theorem isZero_rightDerived_sectionsFunctor_comparisonUpperStar_obj {U V : Scheme.{u}}\n    (f : U ⟶ V) [QuasiCompact f] [QuasiSeparated f] (I : Sheaf U.smallEtaleTopology A)\n    [Injective I] (W : V.AffineProEt) (q : ℕ) :\n    IsZero (((sectionsFunctor A ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj\n      ((AffineProEt.toProEt V).obj W))).rightDerived (q + 1)).obj\n        ((comparisonUpperStar A U).obj I))",
+  "branch": "slopmaster2",
+  "by": "N3",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Existing upstream theorem, read both locally and through scompile.py --source. Specialize A to ModuleCat.{u+1} Λ, U=V=X, and f=𝟙 X. The canonical MorphismProperty.Over.pullbackId identifies the evaluation object X ×_X W with W, and NatTrans.rightDerived transports this natural evaluation isomorphism. QuasiCompact and QuasiSeparated of the identity are inferred, so no hypotheses on X beyond the node are added. The natural number q in the upstream declaration indexes degree q+1, exactly all positive degrees. Scheme.AffineProEt is the recorded ind-etale basis on affine X. This specialization, including the canonical identity transport, was compiled in a sandbox-only scratch check. The theorem applies to arbitrary Grothendieck abelian coefficients, hence in particular to left modules over the finite discrete coefficient ring used by the comparison adjunction. No new theorem or copied notion is delivered; the upstream theorem is not claimed sorry-free."
  }
 }

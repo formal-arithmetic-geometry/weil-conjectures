@@ -113,5 +113,41 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-1c668d8dd (reviewer sub-agent of L); spot-checked: Read the complete item, report, required instructions, chapter/unit route, all cited nodes, Stacks sources, and archived master targets. The Cech definition matches the blueprint and source, preserves both coefficient categories, handles ordered/repeated indices, augmentation, empty and singleton cases, and introduces no duplicate or false statement. Review written to review.md; no repairs or tool uses accepted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-966cdb009",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, dependencies, every statement clause, edge cases, universes, canonical constructions, docstrings, report sections and signature. Immutable module compiled cleanly through scompile.py in sandbox and library modes. No defects found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoverCech",
+  "declaration": "AlgebraicGeometry.Scheme.etaleCoverCechComplex",
+  "declarations": [
+   "CategoryTheory.SiteCechComplex.coverComplex",
+   "CategoryTheory.SiteCechComplex.coverCohomology",
+   "CategoryTheory.SiteCechComplex.coverAugmentation",
+   "CategoryTheory.SiteCechComplex.coverAugmentation_comp_d",
+   "CategoryTheory.SiteCechComplex.coverCochainModule",
+   "CategoryTheory.SiteCechComplex.coverScalarCochains",
+   "CategoryTheory.SiteCechComplex.coverScalarCochains_comm",
+   "CategoryTheory.SiteCechComplex.coverScalarMap",
+   "CategoryTheory.SiteCechComplex.coverCohomologyScalar",
+   "CategoryTheory.SiteCechComplex.coverCohomologyScalar_laws",
+   "CategoryTheory.SiteCechComplex.coverCohomologyModule",
+   "AlgebraicGeometry.Scheme.etaleCoverCechComplex",
+   "AlgebraicGeometry.Scheme.etaleCoverCechCohomology",
+   "AlgebraicGeometry.ProEtale.proEtaleCoverCechComplex",
+   "AlgebraicGeometry.ProEtale.proEtaleCoverCechCohomology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoverCech.lean",
+  "statement": "def etaleCoverCechComplex (T : Scheme.{u}) (R : Type u) [CommRing R] {m : ℕ} {U : T.Etale} (V : Fin m → T.Etale) (f : ∀ i, V i ⟶ U) (_hcover : Sieve.generate (Presieve.ofArrows V f) ∈ T.smallEtaleTopology U) (S : SiteCechComplex V f) (M : SheafOfModules.{u + 1} ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1, u} R)))) : CochainComplex AddCommGrpCat.{u + 1} ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Both coefficient-site specializations reuse SiteCechComplex on M.val.presheaf, with no second Cech complex construction. The owning module supplies the actual restriction augmentation and the scalar action induced on cohomology by restriction-scalar cochain maps. Product choices are explicit SiteCechComplex data with universal properties, as required by the recorded dependency interface. The three postponed verification theorems express the augmentation and module-action clauses of this definition."
  }
 }
