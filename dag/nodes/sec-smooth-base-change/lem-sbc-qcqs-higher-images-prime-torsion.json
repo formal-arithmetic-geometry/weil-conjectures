@@ -24,20 +24,7 @@
  ],
  "proof": [
   {
-   "text": "Fix a pointed etale neighbourhood $(W,\\bar w)$ of $\\bar v$ with $W$ affine, and put $Z=U\\times_VW$, with projection $a:Z\\to U$. By clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], $Z\\to W$ is quasi-compact and quasi-separated; [lem-weil-pbc-qcqs-over-affine] therefore makes the scheme $Z$ qcqs. Set $G=a^{-1}F$. For every geometric point $\\bar z$ of $Z$, [lemma-openclosed-stalk-upperstar] identifies $G_{\\bar z}$ with $F_{a\\bar z}$, so every element of $G_{\\bar z}$ has an annihilator with the prescribed prime divisors. This uses no global qcqs hypothesis on $U$ or $V$.",
-   "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-qcqs-over-affine",
-    "lemma-openclosed-stalk-upperstar"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DDD, lemma-torsion-direct-image (1), affine test object; Schemes Tags 01K5, 01KU(4), 01K4 and 01KN; pullback stalk formula"
-   }
-  },
-  {
-   "text": "Let $S_{\\mathcal P}$ be the set of positive integers all of whose prime divisors belong to $\\mathcal P$, ordered by divisibility. It is a small nonempty directed partial order: $1$ belongs to it and $nm$ is a common upper bound of $n,m$. For $n\\in S_{\\mathcal P}$ define $G[n]=\\ker(n:G\\to G)$ using [def-pur-abelian-sheaf-kernel]. If $n\\mid m$, a section killed by $n$ is killed by $m$, so the inclusions form a diagram and a cocone to $G$. Form its sheaf colimit $C$ using [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact], and let $c:C\\to G$ be the induced map. The index set is a subset of the natural numbers, hence fits the coefficient universe required by directed cohomology continuity.",
+   "text": "Let I be the positive natural numbers whose prime divisors lie in P, ordered by divisibility. The integer 1 is an index, and multiplication supplies a common upper bound: a prime dividing nm divides n or m. For each n form the kernel subobject F[n] of n times the identity of F. Divisibility makes these subobjects monotone, so their underlying objects form a filtered diagram D and their subobject arrows form a cocone c with vertex F. Existence of the small colimit and exactness of filtered colimits are supplied by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact].",
    "uses": [
     "def-pur-abelian-sheaf-kernel",
     "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
@@ -45,97 +32,83 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DDC, lemma-torsion-cohomology (1), restricted annihilator index; Modules on Sites Tag 03CO(1),(2),(4)"
+    "place": "Tags 0DDC and 0DDD, fixed-prime kernel-union argument; Tag 09Z1, constant-scheme case of relative higher-image continuity. Coefficient comparison uses Cohomology on Sites Tags 03FD and 072W."
    }
   },
   {
-   "text": "We prove that the cocone just constructed is colimiting with vertex $G$, rather than invoking the unrestricted torsion union. By [prop-weil-pbc-geometric-stalks-exact], $(G[n])_{\\bar z}=\\ker(n:G_{\\bar z}\\to G_{\\bar z})$. By [lem-kun-stalks-commute-colimits], $C_{\\bar z}$ is the colimit of these subgroups. Every element of $G_{\\bar z}$ belongs to one of them by step 1. To check injectivity of $c_{\\bar z}$, represent an element of $C_{\\bar z}$ by $x\\in(G[n])_{\\bar z}$ using [lem-weil-pbc-filtered-colimit-modules-elementwise] with $R=\\mathbf Z$ (abelian groups have their canonical $\\mathbf Z$-module structure). If its image in $G_{\\bar z}$ is zero, $x=0$ because this is a subgroup inclusion, so its colimit class is zero. Thus $c_{\\bar z}$ is bijective at every geometric point. [lemma-weil-pbc-geometric-stalk-conservative] makes $c$ an isomorphism. Its composites with the colimit legs are exactly the inclusions $G[n]\\to G$, so these inclusions exhibit $G$ as their colimit.",
+   "text": "The induced map t:colim D to F is mono: all the subobject arrows are mono and exact filtered colimits preserve this mono natural transformation into the constant diagram. To prove t epi, let g,h:F to G agree after t. They agree after every kernel-subobject arrow. At the algebraic-closure point over each point of U, take x in the stalk of F and an allowed positive annihilator n from hF. Exactness of the stalk functor [prop-weil-pbc-geometric-stalks-exact] lifts x through the stalk of ker(n id_F). Transfer the equality on F[n] along kernelSubobjectIso to that kernel. Applying the stalk functor gives g(x)=h(x). The geometric-stalk equality detector sheafHom_ext_of_sheafFiber_map_algClosurePoint, proved from the conservative family in [lemma-weil-pbc-geometric-stalk-conservative], gives g=h. Hence t is epi as well as mono, thus is an isomorphism in the abelian sheaf category, and c is colimiting.",
    "uses": [
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
     "prop-weil-pbc-geometric-stalks-exact",
-    "lem-kun-stalks-commute-colimits",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DDC, lemma-torsion-cohomology (1), fixed-prime union justified on stalks; Tag 03PT(3),(4), theorem-exactness-stalks; Algebra Tag 00D6"
+    "place": "Tags 0DDC and 0DDD, fixed-prime kernel-union argument; Tag 09Z1, constant-scheme case of relative higher-image continuity. Coefficient comparison uses Cohomology on Sites Tags 03FD and 072W."
    }
   },
   {
-   "text": "The scheme $Z$ is qcqs and $S_{\\mathcal P}$ is a small nonempty directed partial order. Apply [lem-weil-pbc-etale-directed-cohomology-colimit] to the diagram $n\\mapsto G[n]$ and the colimit cocone of step 3. It gives\n$$H^q(Z_{\\Et},G)=\\varinjlim_{n\\in S_{\\mathcal P}}H^q(Z_{\\Et},G[n]),$$\nwith coprojections induced by the actual inclusions $G[n]\\hookrightarrow G$. By [lem-weil-pbc-filtered-colimit-modules-elementwise] with $R=\\mathbf Z$, any class $b\\in H^q(Z_{\\Et},G)$ is the image of a class $b_n\\in H^q(Z_{\\Et},G[n])$ for some $n\\in S_{\\mathcal P}$. There is no uniform annihilator assumption on $G$, and no torsion assumption is needed for this continuity theorem.",
+   "text": "For any additive functor H from abelian etale sheaves on U to abelian groups which preserves filtered colimits indexed in Type 0, the cocone H(c) is colimiting. The forgetful functor from abelian groups preserves these filtered colimits, so [lem-weil-pbc-filtered-colimit-modules-elementwise], using the abelian-group form Concrete.isColimit_exists_rep, represents any y in H(F) by z in H(F[n]) for some n in I. The kernel-subobject arrow is mono and its composite with n id_F is zero; cancellation therefore proves n id_F[n]=0. Additivity of H gives n id_H(F[n])=0, hence nz=0. The additive cocone leg then gives ny=0, and n is positive with all prime divisors in P by its membership in I. This is the private proved helper prime_torsion_of_filtered_functor.",
    "uses": [
-    "lem-weil-pbc-etale-directed-cohomology-colimit",
+    "def-pur-abelian-sheaf-kernel",
     "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DDC, lemma-torsion-cohomology (1); Tag 03Q5, lemma-colimit; Algebra Tag 00D6"
+    "place": "Tags 0DDC and 0DDD, fixed-prime kernel-union argument; Tag 09Z1, constant-scheme case of relative higher-image continuity. Coefficient comparison uses Cohomology on Sites Tags 03FD and 072W."
    }
   },
   {
-   "text": "The sectionwise kernel description in [def-pur-abelian-sheaf-kernel] gives $n\\operatorname{id}_{G[n]}=0$. By [def-weil-pbc-sites-and-cohomology](2), $H^q(Z_{\\Et},-)$ is $R^q\\Gamma(Z,-)$ for the left exact additive sections functor. [lem-weil-pbc-right-derived-universal-delta-functor] says that these derived functors form a delta functor, whose degree functors are additive. Consequently\n$$n\\operatorname{id}_{H^q(Z_{\\Et},G[n])}=H^q(n\\operatorname{id}_{G[n]})=H^q(0)=0.$$\nIndeed an additive functor sends the sum of $n$ identity maps to the sum of their images, sends the identity to the identity, and sends zero to zero. Thus $nb_n=0$. The coprojection of step 4 is a group homomorphism, so $nb=0$ as well. Every class over the affine neighbourhood $W$ is therefore killed by an integer in $S_{\\mathcal P}$.",
-   "uses": [
-    "def-pur-abelian-sheaf-kernel",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-right-derived-universal-delta-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DDC, lemma-torsion-cohomology (1), final sentence; Derived Categories Tags 015B(4), 05TE, Homology Definition 010Q"
-   }
-  },
-  {
-   "text": "By [sbc-lem-higher-direct-image-presheaf], $R^qu_*F$ is the sheafification of the abelian presheaf $W\\mapsto H^q(U\\times_VW,F|_{U\\times_VW})$. [lem-weil-pbc-sheafification-geometric-stalk] identifies its stalk at $\\bar v$ with the presheaf stalk. Pointed etale neighbourhoods form a cofiltered category by [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered]; their opposite is the filtered index in [def-weil-pbc-geometric-stalks]. The elementwise colimit statement of [lem-weil-pbc-filtered-colimit-modules-elementwise], again with $R=\\mathbf Z$, therefore represents the given $y$ by a class over some pointed neighbourhood $(W_0,\\bar w_0)$. Use [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink] with the open subset $W_0$ itself to obtain an affine pointed neighbourhood $(W,\\bar w)\\to(W_0,\\bar w_0)$. Restrict the representative to $W$; it has the same stalk class. All stalk index categories are taken in a common universe containing the site and its chosen geometric point, or in a small equivalent category; the colimit assertions are small-index assertions in that universe.",
-   "uses": [
-    "sbc-lem-higher-direct-image-presheaf",
-    "lem-weil-pbc-sheafification-geometric-stalk",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DDD, lemma-torsion-direct-image (1); Tag 03Q8, lemma-higher-direct-images; Tag 03PT(2); Tag 03PQ and affine shrinking in Tag 04HX"
-   }
-  },
-  {
-   "text": "Apply steps 1--5 to the affine representative $b$ obtained in step 6. There is $m\\in S_{\\mathcal P}$ with $mb=0$. The canonical map from its cohomology group into the stalk is a group homomorphism and takes $b$ to $y$, hence $my=0$. By definition of $S_{\\mathcal P}$, $m>0$ and every prime divisor of $m$ belongs to $\\mathcal P$. This proves the assertion for arbitrary $q\\ge0$ and arbitrary $\\bar v$.",
+   "text": "Put Lambda=ULift Z in the coefficient universe. Forgetting Lambda-modules to abelian groups is an equivalence: restrict scalars along the inverse ULift integer ring equivalence and use Mathlib ModuleCat.forget₂AddCommGroupIsEquivalence. Whisker its adjunction by the opposite etale site and restrict along the fully faithful sheaf-to-presheaf functors. This gives an equivalence A_T between Lambda-module sheaves and abelian sheaves for T=U,V. Its inverse is additive, and both directions preserve colimits. The canonical integer action is uniquely determined by the abelian group; no arbitrary witness of a mere existence theorem defines data.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DDD, lemma-torsion-direct-image (1), stalk conclusion of the fixed-prime refinement"
+    "place": "Tags 0DDC and 0DDD, fixed-prime kernel-union argument; Tag 09Z1, constant-scheme case of relative higher-image continuity. Coefficient comparison uses Cohomology on Sites Tags 03FD and 072W."
+   }
+  },
+  {
+   "text": "Let M be the functor on Lambda-module sheaves given by placing a sheaf in degree zero, applying derived direct image along f, and taking degree q homology. The existing theorem preservesColimitsOfShape_higherDirectImage from [lemma-weil-pbc-direct-image-filtered-colimit] proves that M preserves all filtered diagrams indexed in Type 0, under exactly QuasiCompact f and QuasiSeparated f, with no global qcqs assumption. Let T be the geometric stalk functor at s, and set H=A_U inverse followed by M, A_V, and T. The equivalences preserve colimits. The stalk functor preserves colimits by [lem-kun-stalks-commute-colimits], here obtained directly from Mathlib Point.skyscraperSheafAdjunction, and it is additive. Single, derived direct image, homology, and coefficient forgetting are additive as well. Thus H satisfies step 3.",
+   "uses": [
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "lem-kun-stalks-commute-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0DDC and 0DDD, fixed-prime kernel-union argument; Tag 09Z1, constant-scheme case of relative higher-image continuity. Coefficient comparison uses Cohomology on Sites Tags 03FD and 072W."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-higher-direct-image-forget-comparison] to A_U inverse(F). Compose the resulting isomorphism with the abelian higher-direct-image functor applied to the coefficient equivalence counit A_U(A_U inverse(F)) isomorphic to F, and then take the stalk. This gives an additive isomorphism e:H(F) isomorphic to the target stalk in the statement. Apply step 3 to e inverse(y), obtaining a positive allowed n annihilating it. Apply e to that equality; preservation of natural-number multiples and zero and e composed with its inverse give ny=0. This closes the stated theorem without new assumptions or any new sorry.",
+   "uses": [
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0DDC and 0DDD, fixed-prime kernel-union argument; Tag 09Z1, constant-scheme case of relative higher-image continuity. Coefficient comparison uses Cohomology on Sites Tags 03FD and 072W."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-qcqs-over-affine",
-  "lemma-openclosed-stalk-upperstar",
   "def-pur-abelian-sheaf-kernel",
   "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
   "prop-weil-pbc-geometric-stalks-exact",
-  "lem-kun-stalks-commute-colimits",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-etale-directed-cohomology-colimit",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "sbc-lem-higher-direct-image-presheaf",
-  "lem-weil-pbc-sheafification-geometric-stalk",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink"
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "lem-kun-stalks-commute-colimits",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 0DDC, lemma-torsion-cohomology (1), and 0DDD, lemma-torsion-direct-image (1): fixed-prime refinement with the restricted directed union and stalk arguments written explicitly"
+  "place": "Tags 0DDC and 0DDD, fixed-prime kernel-union argument; Tag 09Z1, constant-scheme case of relative higher-image continuity. Coefficient comparison uses Cohomology on Sites Tags 03FD and 072W. Group E4, 2026-10-15: compiled restricted-kernel colimit argument, transported through the integer-module sheaf equivalence; reuses the already implemented higher-direct-image filtered-colimit theorem."
  },
  "mathlib_searches": [
   {
@@ -303,5 +276,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Independent review completed; statement, dependencies, source, edge cases, report gates, and remote scompile all pass. Review recorded in review.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-8f32c",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261015T154207-L-163402",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean proof, DAG proof fields, change record, and report against the packet; delivery and both direct importers compile cleanly, with approved axioms only."
  }
 }

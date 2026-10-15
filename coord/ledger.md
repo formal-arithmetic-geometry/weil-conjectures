@@ -15049,3 +15049,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:42 L: merged deliver/E2/Sheaf.RingTheory.FiniteTypeAlgebraFiniteSpectrum (stage 3; reviewer PASS; first push; landing 20261015T154206-L-162972 (proof); batch 20261015T154146; modules 1; new nodes 0)
 - 15:42 L: merged deliver/E2/Sheaf.RingTheory.WLocalClopenPartitions (stage 3; reviewer PASS; first push; landing 20261015T154206-L-163185 (proof); batch 20261015T154146; modules 1; new nodes 1)
 - 15:42 L: merged deliver/E2/Sheaf.RingTheory.WLocalClosedComponentRetraction (stage 3; reviewer PASS; first push; landing 20261015T154206-L-163299 (proof); batch 20261015T154146; modules 1; new nodes 0)
+- 15:42 L: merged deliver/E4/Sheaf.AlgebraicGeometry.QcqsHigherImagesPrimeTorsion (stage 3; reviewer PASS; first push; landing 20261015T154207-L-163402 (interface); batch 20261015T154146; modules 1; new nodes 0; change records: coord/changes/qcqs-prime-torsion-proof-scope.md)
