@@ -267,5 +267,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-914d0da3b (reviewer sub-agent of L); spot-checked: Read the item, cited DAG statements, Stacks sources, unit/chapter route, and report in full. Verified all six proof steps, hypotheses, fibre stalk morphisms, quotient kernel, pointwise flatness, residue-field compatibility, searches, route, and edge cases. No faults or repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompositeFibreLocalModels",
+  "declaration": "AlgebraicGeometry.composite_fibre_local_models",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompositeFibreLocalModels.lean",
+  "statement": "theorem composite_fibre_local_models {U X S : Scheme.{u}} (a : U ⟶ X) (f : X ⟶ S) [LocallyOfFiniteType a] [LocallyOfFiniteType f] (u₀ : U) : IsNoetherianRing ((f.fiber (f (a u₀))).presheaf.stalk (f.asFiber (a u₀))) ∧ IsNoetherianRing (((a ≫ f).fiber (f (a u₀))).presheaf.stalk ((a ≫ f).asFiber u₀)) ∧ IsNoetherianRing ((a.fiber (a u₀)).presheaf.stalk (a.asFiber u₀)) ∧ (∃ b : (a ≫ f).fiber (f (a u₀)) ⟶ f.fiber (f (a u₀)), b ≫ f.fiberι (f (a u₀)) = (a ≫ f).fiberι (f (a u₀)) ≫ a ∧ b ≫ f.fiberToSpecResidueField (f (a u₀)) = (a ≫ f).fiberToSpecResidueField (f (a u₀)) ∧ ∃ hb : b ((a ≫ f).asFiber u₀) = f.asFiber (a u₀), ∃ φ : (f.fiber (f (a u₀))).presheaf.stalk (f.asFiber (a u₀)) →+* ((a ≫ f).fiber (f (a u₀))).presheaf.stalk ((a ≫ f).asFiber u₀), φ = (((f.fiber (f (a u₀))).presheaf.stalkCongr (.of_eq hb)).inv ≫ b.stalkMap ((a ≫ f).asFiber u₀)).hom ∧ IsLocalHom φ ∧ (∃ e : (((a ≫ f).fiber (f (a u₀))).presheaf.stalk ((a ≫ f).asFiber u₀) ⧸ Ideal.map φ (IsLocalRing.maximalIdeal _)) ≃+* (a.fiber (a u₀)).presheaf.stalk (a.asFiber u₀), ∀ z : U.presheaf.stalk u₀, e (Ideal.Quotient.mk _ (((U.presheaf.stalkCongr (.of_eq ((a ≫ f).fiberι_asFiber u₀))).inv ≫ ((a ≫ f).fiberι (f (a u₀))).stalkMap ((a ≫ f).asFiber u₀)) z)) = ((U.presheaf.stalkCongr (.of_eq (a.fiberι_asFiber u₀))).inv ≫ (a.fiberι (a u₀)).stalkMap (a.asFiber u₀)) z) ∧ ((X.residueFieldCongr (f.fiberι_asFiber (a u₀))).inv ≫ (f.fiberι (f (a u₀))).residueFieldMap (f.asFiber (a u₀)) ≫ ((f.fiber (f (a u₀))).residueFieldCongr hb).inv ≫ b.residueFieldMap ((a ≫ f).asFiber u₀) = a.residueFieldMap u₀ ≫ (U.residueFieldCongr ((a ≫ f).fiberι_asFiber u₀)).inv ≫ ((a ≫ f).fiberι (f (a u₀))).residueFieldMap ((a ≫ f).asFiber u₀)) ∧ (RingHom.Flat (a.stalkMap u₀).hom → RingHom.Flat φ)) ∧ (∃ V : (f.fiber (f (a u₀))).Opens, IsAffineOpen V ∧ LocallyOfFiniteType (V.ι ≫ f.fiberToSpecResidueField (f (a u₀))) ∧ QuasiCompact (V.ι ≫ f.fiberToSpecResidueField (f (a u₀))) ∧ ∃ v : V, V.ι v = f.asFiber (a u₀) ∧ IsIso (V.ι.stalkMap v) ∧ IsIso (V.ι.residueFieldMap v) ∧ IsIso ((f.fiberι (f (a u₀))).residueFieldMap (V.ι v)) ∧ IsIso ((V.ι ≫ f.fiberι (f (a u₀))).residueFieldMap v)) ∧ (∃ W : ((a ≫ f).fiber (f (a u₀))).Opens, IsAffineOpen W ∧ LocallyOfFiniteType (W.ι ≫ (a ≫ f).fiberToSpecResidueField (f (a u₀))) ∧ QuasiCompact (W.ι ≫ (a ≫ f).fiberToSpecResidueField (f (a u₀))) ∧ ∃ v : W, W.ι v = (a ≫ f).asFiber u₀ ∧ IsIso (W.ι.stalkMap v) ∧ IsIso (W.ι.residueFieldMap v) ∧ IsIso (((a ≫ f).fiberι (f (a u₀))).residueFieldMap (W.ι v)) ∧ IsIso ((W.ι ≫ (a ≫ f).fiberι (f (a u₀))).residueFieldMap v)) ∧ (∃ T : (a.fiber (a u₀)).Opens, IsAffineOpen T ∧ LocallyOfFiniteType (T.ι ≫ a.fiberToSpecResidueField (a u₀)) ∧ QuasiCompact (T.ι ≫ a.fiberToSpecResidueField (a u₀)) ∧ ∃ v : T, T.ι v = a.asFiber u₀ ∧ IsIso (T.ι.stalkMap v) ∧ IsIso (T.ι.residueFieldMap v) ∧ IsIso ((a.fiberι (a u₀)).residueFieldMap (T.ι v)) ∧ IsIso ((T.ι ≫ a.fiberι (a u₀)).residueFieldMap v)) ∧ (f.residueFieldMap (a u₀) ≫ a.residueFieldMap u₀ = (a ≫ f).residueFieldMap u₀)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9d45885c9",
+  "group": "NC",
+  "result": "pass",
+  "note": "Checked every statement clause, dependencies, sources, edge cases, canonical maps, docstrings, and verbatim signature. Server-only compile passed in 1.7 seconds without diagnostics; no project clones or branch heads changed."
  }
 }
