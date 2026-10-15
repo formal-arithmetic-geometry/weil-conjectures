@@ -1,136 +1,148 @@
 {
-  "id": "lem-sc-flat-telescope-arrow-bar-data",
-  "kind": "statement",
-  "title": "Strict augmentation data from finite-piece bar diagrams",
-  "statement": "Let Y be a scheme and P,Pprime complexes of module sheaves [def-pc-cochain-complex-modules], both actual flat telescopes [def-sc-flat-telescope-stage-map], with f:P→Pprime. There are bounded-above termwise-flat towers E0,E1,E2 and level maps a:E0→E1,b:E0→E2 with strict sum squares for the telescope differentials. There are compatible quasi-isomorphisms qn:E0n→τ≤nP [def-pc-quasi-iso-modules]. There are target maps r1:Tel(E1)→P,r2:Tel(E2)→Pprime inducing homotopy-category isomorphisms and having zero shifted-summand restrictions. For s=Σdesc(qn;ιn), their unshifted restrictions satisfy Σmap(a);inr;r1=s and Σmap(b);inr;r2=s;f strictly. No source-cone augmentation or equality of maps from it is asserted.",
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/077J",
-    "place": "03EW flat-generator covers; 077J/06XX split generator-valued truncation tower; parent geometric construction expanded by the agent using finite subcomplexes and bar enlargement."
+ "id": "lem-sc-flat-telescope-arrow-bar-data",
+ "kind": "statement",
+ "title": "Strict augmentation data from finite-piece bar diagrams",
+ "statement": "Let Y be a scheme and P,Pprime complexes of module sheaves [def-pc-cochain-complex-modules], both actual flat telescopes [def-sc-flat-telescope-stage-map], with f:P→Pprime. There are bounded-above termwise-flat towers E0,E1,E2 and level maps a:E0→E1,b:E0→E2 with strict sum squares for the telescope differentials. There are compatible quasi-isomorphisms qn:E0n→τ≤nP [def-pc-quasi-iso-modules]. There are target maps r1:Tel(E1)→P,r2:Tel(E2)→Pprime inducing homotopy-category isomorphisms and having zero shifted-summand restrictions. For s=Σdesc(qn;ιn), their unshifted restrictions satisfy Σmap(a);inr;r1=s and Σmap(b);inr;r2=s;f strictly. No source-cone augmentation or equality of maps from it is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/077J",
+  "place": "03EW flat-generator covers; 077J/06XX split generator-valued truncation tower; parent geometric construction expanded by the agent using finite subcomplexes and bar enlargement."
+ },
+ "stmt_deps": [
+  "def-sc-flat-telescope-stage-map",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Choose E,t,q by the flat truncation tower theorem and set p_n=q_n followed by the good truncation inclusion into P. Its compatibility is exactly the tower compatibility.",
+   "uses": [
+    "lem-pc-flat-truncation-tower"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-sc-flat-telescope-stage-map",
-    "def-pc-cochain-complex-modules",
-    "def-pc-quasi-iso-modules"
-  ],
-  "proof": [
-    {
-      "text": "Choose E,t,q by the flat truncation tower theorem and set p_n=q_n followed by the good truncation inclusion into P. Its compatibility is exactly the tower compatibility.",
-      "uses": [
-        "lem-pc-flat-truncation-tower"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply the one-target refinement to E,t,p with target P, obtaining R,s,c,F,u,a and r1. Apply it again to R,s with augmentation c_n;p_n;f and target Pprime. The second application yields S,v,d,G,w,b and r2. Compatibility of its input follows by associativity and s_n;c_(n+1)=c_n;t_n.",
-      "uses": [
-        "lem-sc-flat-telescope-target-refinement"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Use S,F,G and level maps d_n;a_n,b_n. A level square induces the telescope sum square: test on each coproduct inclusion, distribute 1-shift, and use the level identity. Compose the sum square of d with that of a. Define qprime_n=d_n;c_n;q_n. Quasi-isomorphisms compose; applying the two refinement naturality identities followed by the original truncation compatibility proves strict compatibility of qprime.",
-      "uses": [
-        "lem-pc-flat-truncation-tower",
-        "lem-sc-flat-telescope-target-refinement"
-      ],
-      "elementary": true
-    },
-    {
-      "text": "Retain r1,r2 and their homotopy-category isomorphisms and zero shifted restrictions. Test each of the final two sum identities on its nth coproduct inclusion. The first becomes d_n;a_n;inr;r1=d_n;c_n;p_n; the second becomes b_n;inr;r2=d_n;c_n;p_n;f. These are the two refinement augmentation identities with composition reassociated.",
-      "uses": [
-        "lem-sc-flat-telescope-target-refinement"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "Apply the one-target refinement to E,t,p with target P, obtaining R,s,c,F,u,a and r1. Apply it again to R,s with augmentation c_n;p_n;f and target Pprime. The second application yields S,v,d,G,w,b and r2. Compatibility of its input follows by associativity and s_n;c_(n+1)=c_n;t_n.",
+   "uses": [
+    "lem-sc-flat-telescope-target-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use S,F,G and level maps d_n;a_n,b_n. A level square induces the telescope sum square: test on each coproduct inclusion, distribute 1-shift, and use the level identity. Compose the sum square of d with that of a. Define qprime_n=d_n;c_n;q_n. Quasi-isomorphisms compose; applying the two refinement naturality identities followed by the original truncation compatibility proves strict compatibility of qprime.",
+   "uses": [
     "lem-pc-flat-truncation-tower",
     "lem-sc-flat-telescope-target-refinement"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "group": "V4",
-    "document": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowBarData.lean",
-    "place": "Successive one-target refinements and the proved telescope sum-square calculation; geometric finite-piece bar construction retained in the one-target lemma."
+   ],
+   "elementary": true
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "A cochain arrow between flat telescopes has strict bar construction diagrams with target homotopy equivalences",
-      "results": "Service unavailable: Internal Server Error.",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "simplicial replacement bar construction homotopy colimit final functor chain complexes",
-      "results": "Dold-Kan simplicial replacement and normalized/alternating-face homotopy equivalence APIs; no strict flat tower augmentation theorem.",
-      "date": "2026-10-14",
-      "verdict": "No exact match."
-    },
-    {
-      "tool": "grep",
-      "query": "bar|simplicial.*replacement|homotopy.*final; finite subcomplex bar telescope",
-      "results": "Mathlib/source/library searches found no simultaneous tower theorem. Blueprint search returned zero matching nodes. Cone descent and comparison APIs are present in Mathlib.",
-      "date": "2026-10-14",
-      "verdict": "No exact match."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram",
-    "date": "2026-10-14",
-    "group": "F1"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "Finite-piece bar enlargement constructing compatible towers and target homotopy equivalences, before source cone descent.",
-      "via": [
-        "lem-sc-flat-telescope-arrow-cocycles",
-        "lem-sc-flat-telescope-arrow-diagram",
-        "lem-sc-flat-telescope-stage-map-refinement",
-        "lem-sc-normalized-flat-telescope-comparison",
-        "lem-sc-normalized-kflat-representative-comparison",
-        "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
-        "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowBarData",
-    "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowBarData.lean",
-    "declaration": "AlgebraicGeometry.exists_flat_telescope_arrow_bar_data",
-    "statement": "theorem exists_flat_telescope_arrow_bar_data (Y : Scheme.{u}) (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hP : isFlatTelescope Y P) (hP' : isFlatTelescope Y P') (f : P ⟶ P') : let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace) let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ) ∃ (E₀ E₁ E₂ : ℕ → CochainComplex A ℤ) (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1)) (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1)) (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1)) (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n), (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i)) ∧ ∃ (_c₁ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map a = Limits.Sigma.map a ≫ flatTelescopeDifferential E₁ t₁) (_c₂ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map b = Limits.Sigma.map b ≫ flatTelescopeDifferential E₂ t₂) (r₁ : CochainComplex.mappingCone (flatTelescopeDifferential E₁ t₁) ⟶ P) (r₂ : CochainComplex.mappingCone (flatTelescopeDifferential E₂ t₂) ⟶ P') (q : ∀ n : ℕ, E₀ n ⟶ P.truncLE (n : ℤ)), IsIso (Q.map r₁) ∧ IsIso (Q.map r₂) ∧ (∀ n : ℕ, QuasiIso (q n)) ∧ (∀ n : ℕ, t₀ n ≫ q (n + 1) ≫ P.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ P.ιTruncLE (n : ℤ)) ∧ (CochainComplex.mappingCone.inl (flatTelescopeDifferential E₁ t₁)).comp (Cochain.ofHom r₁) (add_zero _) = 0 ∧ (CochainComplex.mappingCone.inl (flatTelescopeDifferential E₂ t₂)).comp (Cochain.ofHom r₂) (add_zero _) = 0 ∧ Limits.Sigma.map a ≫ CochainComplex.mappingCone.inr (flatTelescopeDifferential E₁ t₁) ≫ r₁ = Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ)) ∧ Limits.Sigma.map b ≫ CochainComplex.mappingCone.inr (flatTelescopeDifferential E₂ t₂) ≫ r₂ = Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ)) ≫ f",
-    "branch": "sheaf-dag",
-    "by": "F1",
-    "date": "2026-10-14"
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "F1",
-    "result": "pass",
-    "landing": "20261014T063815-L-2813191",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "V4",
-    "result": "pass",
-    "landing": "20261014T074650-L-3571495",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Retain r1,r2 and their homotopy-category isomorphisms and zero shifted restrictions. Test each of the final two sum identities on its nth coproduct inclusion. The first becomes d_n;a_n;inr;r1=d_n;c_n;p_n; the second becomes b_n;inr;r2=d_n;c_n;p_n;f. These are the two refinement augmentation identities with composition reassociated.",
+   "uses": [
+    "lem-sc-flat-telescope-target-refinement"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-truncation-tower",
+  "lem-sc-flat-telescope-target-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V4",
+  "document": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowBarData.lean",
+  "place": "Successive one-target refinements and the proved telescope sum-square calculation; geometric finite-piece bar construction retained in the one-target lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cochain arrow between flat telescopes has strict bar construction diagrams with target homotopy equivalences",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial replacement bar construction homotopy colimit final functor chain complexes",
+   "results": "Dold-Kan simplicial replacement and normalized/alternating-face homotopy equivalence APIs; no strict flat tower augmentation theorem.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "bar|simplicial.*replacement|homotopy.*final; finite subcomplex bar telescope",
+   "results": "Mathlib/source/library searches found no simultaneous tower theorem. Blueprint search returned zero matching nodes. Cone descent and comparison APIs are present in Mathlib.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-piece bar enlargement constructing compatible towers and target homotopy equivalences, before source cone descent.",
+   "via": [
+    "lem-sc-flat-telescope-arrow-cocycles",
+    "lem-sc-flat-telescope-arrow-diagram",
+    "lem-sc-flat-telescope-stage-map-refinement",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowBarData",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowBarData.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_telescope_arrow_bar_data",
+  "statement": "theorem exists_flat_telescope_arrow_bar_data (Y : Scheme.{u}) (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hP : isFlatTelescope Y P) (hP' : isFlatTelescope Y P') (f : P ⟶ P') : let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace) let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ) ∃ (E₀ E₁ E₂ : ℕ → CochainComplex A ℤ) (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1)) (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1)) (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1)) (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n), (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i)) ∧ ∃ (_c₁ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map a = Limits.Sigma.map a ≫ flatTelescopeDifferential E₁ t₁) (_c₂ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map b = Limits.Sigma.map b ≫ flatTelescopeDifferential E₂ t₂) (r₁ : CochainComplex.mappingCone (flatTelescopeDifferential E₁ t₁) ⟶ P) (r₂ : CochainComplex.mappingCone (flatTelescopeDifferential E₂ t₂) ⟶ P') (q : ∀ n : ℕ, E₀ n ⟶ P.truncLE (n : ℤ)), IsIso (Q.map r₁) ∧ IsIso (Q.map r₂) ∧ (∀ n : ℕ, QuasiIso (q n)) ∧ (∀ n : ℕ, t₀ n ≫ q (n + 1) ≫ P.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ P.ιTruncLE (n : ℤ)) ∧ (CochainComplex.mappingCone.inl (flatTelescopeDifferential E₁ t₁)).comp (Cochain.ofHom r₁) (add_zero _) = 0 ∧ (CochainComplex.mappingCone.inl (flatTelescopeDifferential E₂ t₂)).comp (Cochain.ofHom r₂) (add_zero _) = 0 ∧ Limits.Sigma.map a ≫ CochainComplex.mappingCone.inr (flatTelescopeDifferential E₁ t₁) ≫ r₁ = Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ)) ∧ Limits.Sigma.map b ≫ CochainComplex.mappingCone.inr (flatTelescopeDifferential E₂ t₂) ≫ r₂ = Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ)) ≫ f",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261014T063815-L-2813191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261014T074650-L-3571495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

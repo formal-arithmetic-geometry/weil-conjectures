@@ -22,6 +22,9 @@ passes to Frobenius-stable subspaces and quotients.
   `FrobeniusModule.hasEigenvalue_of_surjective`: the transfer of eigenvalues.
 - `FrobeniusModule.IsPureOfWeight.of_injective` and
   `FrobeniusModule.IsPureOfWeight.of_surjective`: purity of subobjects and quotients.
+- `FrobeniusModule.HasWeightsAtMost.of_injective`, `FrobeniusModule.HasWeightsAtMost.of_surjective`
+  and `FrobeniusModule.HasWeightsAtMost.of_exact`: upper weight bounds pass to subobjects,
+  quotients and extensions.
 -/
 
 @[expose] public section
@@ -90,5 +93,60 @@ theorem IsPureOfWeight.of_injective (hinj : Function.Injective g) {ι : K →+* 
 theorem IsPureOfWeight.of_surjective (hsurj : Function.Surjective g) {ι : K →+* ℂ} {q : ℕ}
     {w : ℝ} (h : M.IsPureOfWeight ι q w) : N.IsPureOfWeight ι q w :=
   fun α hα ↦ h α (hasEigenvalue_of_surjective g hg hsurj hα)
+
+/-- A Frobenius-stable subspace of a Frobenius module of weights at most `w` has weights at most
+`w` (blueprint: `lem-a1-mixed-direct-summand`, the Frobenius module analogue). -/
+theorem HasWeightsAtMost.of_injective (hinj : Function.Injective g) {ι : K →+* ℂ} {q : ℕ}
+    {w : ℝ} (h : N.HasWeightsAtMost ι q w) : M.HasWeightsAtMost ι q w :=
+  fun α hα ↦ h α (hasEigenvalue_of_injective g hg hinj hα)
+
+/-- A Frobenius-equivariant quotient of a Frobenius module of weights at most `w` has weights at
+most `w` (blueprint: `lem-a1-mixed-direct-summand`, the Frobenius module analogue). -/
+theorem HasWeightsAtMost.of_surjective (hsurj : Function.Surjective g) {ι : K →+* ℂ} {q : ℕ}
+    {w : ℝ} (h : M.HasWeightsAtMost ι q w) : N.HasWeightsAtMost ι q w :=
+  fun α hα ↦ h α (hasEigenvalue_of_surjective g hg hsurj hα)
+
+end FrobeniusModule
+
+namespace FrobeniusModule
+
+variable {K : Type v} [Field K] {M N P : FrobeniusModule.{u, v} K}
+  (g : M.carrier →ₗ[K] N.carrier) (hg : ∀ x, g (M.frobenius x) = N.frobenius (g x))
+  (h : N.carrier →ₗ[K] P.carrier) (hh : ∀ x, h (N.frobenius x) = P.frobenius (h x))
+include hg hh
+
+/-- In a Frobenius-equivariant exact sequence `M ↪ N ⟶ P`, every eigenvalue of the Frobenius of
+`N` is one of `M` or one of `P`: an eigenvector `y` of `N` maps to an eigenvector of `P` unless
+`h y = 0`, in which case `y = g x` for an eigenvector `x` of `M`. -/
+theorem hasEigenvalue_or_of_exact (hinj : Function.Injective g)
+    (hex : LinearMap.range g = LinearMap.ker h)
+    {α : K} (hα : N.frobeniusEnd.HasEigenvalue α) :
+    M.frobeniusEnd.HasEigenvalue α ∨ P.frobeniusEnd.HasEigenvalue α := by
+  obtain ⟨y, hy⟩ := hα.exists_hasEigenvector
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hy
+  have hFy : N.frobenius y = α • y := hy.1
+  by_cases hy0 : h y = 0
+  · obtain ⟨x, rfl⟩ : y ∈ LinearMap.range g := by rw [hex]; exact hy0
+    left
+    refine Module.End.hasEigenvalue_of_hasEigenvector (x := x) ?_
+    rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff]
+    refine ⟨hinj ?_, fun hx ↦ hy.2 (by rw [hx, map_zero])⟩
+    change g (M.frobenius x) = g (α • x)
+    rw [hg, hFy, map_smul]
+  · right
+    refine Module.End.hasEigenvalue_of_hasEigenvector (x := h y) ?_
+    rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff]
+    refine ⟨?_, hy0⟩
+    change P.frobenius (h y) = α • h y
+    rw [← hh, hFy, map_smul]
+
+/-- The middle term of a Frobenius-equivariant exact sequence `M ↪ N ⟶ P` whose outer terms have
+weights at most `w` has weights at most `w` (blueprint: `lem-a1-mixed-direct-summand`, the
+Frobenius module analogue). -/
+theorem HasWeightsAtMost.of_exact (hinj : Function.Injective g)
+    (hex : LinearMap.range g = LinearMap.ker h) {ι : K →+* ℂ} {q : ℕ} {w : ℝ}
+    (hM : M.HasWeightsAtMost ι q w) (hP : P.HasWeightsAtMost ι q w) :
+    N.HasWeightsAtMost ι q w := fun α hα ↦
+  (hasEigenvalue_or_of_exact g hg h hh hinj hex hα).elim (hM α) (hP α)
 
 end FrobeniusModule

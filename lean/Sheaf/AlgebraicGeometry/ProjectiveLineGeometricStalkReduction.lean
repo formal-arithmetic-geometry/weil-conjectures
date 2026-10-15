@@ -73,7 +73,7 @@ theorem Etale.geometricStalk_projectiveLine_of_strictLocal
       [IsSepClosed (IsLocalRing.ResidueField A)] [CommRing B] [HenselianLocalRing B]
       [IsSepClosed (IsLocalRing.ResidueField B)] (φ : A →+* B) [IsLocalHom φ]
       (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
-        (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] (q : ℕ),
+        (ModuleCat.{u + 1} Λ)) [IsTorsionModuleSheaf F] (q : ℕ),
       ∃ (e₁ : ((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber
           (A := ModuleCat.{u + 1} Λ)).obj
           ((Etale.baseChangeSourceFunctor Λ (Spec.map (CommRingCat.ofHom φ))
@@ -108,7 +108,7 @@ theorem Etale.geometricStalk_projectiveLine_of_strictLocal
     (hτ : ∃ (t : T) (φ : T.residueField t ⟶ .of k'),
       φ.hom.IsIntegral ∧ Spec.map φ ≫ T.fromSpecResidueField t = τ)
     (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℕ) :
+    [IsTorsionModuleSheaf F] (q : ℕ) :
     ∃ (e₁ : ((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
           ((Etale.baseChangeSourceFunctor Λ g (ProjectiveLine S ↘ S) q).obj F) ≃+
         Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj

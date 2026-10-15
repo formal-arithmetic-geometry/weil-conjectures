@@ -1,152 +1,164 @@
 {
-  "id": "lem-sc-flat-telescope-sum-comparison-is-iso",
-  "kind": "statement",
-  "title": "Invertibility of the restricted natural comparison on the sum of bounded-flat stages",
-  "statement": "Let $f:Z\\to Y$ be a proper morphism of Noetherian schemes [def-weil-proper-morphism], with derived categories in a common universe [def-pc-derived-category], the recorded derived pullback $F$ [def-pc-derived-pullback] carrying a strong monoidal structure [def-pc-scheme-derived-tensor-structure], and additive termwise tensor pullback $H$ [def-pc-module-pullback]. Let $q$ be the homotopy quotient of cochain complexes [def-pc-cochain-complex-modules], and put $L=F\\circ Q_Y$, $G=Q_Z\\circ H^h$. Suppose $\\alpha_X:LX\\to GX$ is a family on flatTelescopeShiftRepresentative [def-sc-flat-telescope-stage-map], natural for every homotopy morphism between its objects. Suppose $\\alpha_X$ is invertible whenever $X$ also lies in boundedFlatShiftRepresentative [def-sc-bounded-flat-shift-representative]. For any sequence $E_n$ of bounded-above complexes with flat terms [def-pc-flat-sheaf-modules], with an individual upper bound for each $n$, there exist a cochain complex $R$, a proof that $R$ is a literal flat telescope, and a homotopy isomorphism $q(\\bigoplus_n E_n)\\cong qR$, such that $\\alpha_{qR}$ evaluated using this literal unshifted representative is invertible. There are no transition maps between the $E_n$, no shifted-unit comparison, and no normalized shift equation in the hypotheses; there is no assertion about the cone of an arbitrary transition endomorphism.",
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/06YS; https://stacks.math.columbia.edu/tag/06YJ",
-    "place": "Finite-partial-sum and coproduct part of step 1 of lem-sc-flat-telescope-normalization-unshifted-is-iso; inherited agent expansion, not a literal statement of either tag."
+ "id": "lem-sc-flat-telescope-sum-comparison-is-iso",
+ "kind": "statement",
+ "title": "Invertibility of the restricted natural comparison on the sum of bounded-flat stages",
+ "statement": "Let $f:Z\\to Y$ be a proper morphism of Noetherian schemes [def-weil-proper-morphism], with derived categories in a common universe [def-pc-derived-category], the recorded derived pullback $F$ [def-pc-derived-pullback] carrying a strong monoidal structure [def-pc-scheme-derived-tensor-structure], and additive termwise tensor pullback $H$ [def-pc-module-pullback]. Let $q$ be the homotopy quotient of cochain complexes [def-pc-cochain-complex-modules], and put $L=F\\circ Q_Y$, $G=Q_Z\\circ H^h$. Suppose $\\alpha_X:LX\\to GX$ is a family on flatTelescopeShiftRepresentative [def-sc-flat-telescope-stage-map], natural for every homotopy morphism between its objects. Suppose $\\alpha_X$ is invertible whenever $X$ also lies in boundedFlatShiftRepresentative [def-sc-bounded-flat-shift-representative]. For any sequence $E_n$ of bounded-above complexes with flat terms [def-pc-flat-sheaf-modules], with an individual upper bound for each $n$, there exist a cochain complex $R$, a proof that $R$ is a literal flat telescope, and a homotopy isomorphism $q(\\bigoplus_n E_n)\\cong qR$, such that $\\alpha_{qR}$ evaluated using this literal unshifted representative is invertible. There are no transition maps between the $E_n$, no shifted-unit comparison, and no normalized shift equation in the hypotheses; there is no assertion about the cone of an arbitrary transition endomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YS; https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Finite-partial-sum and coproduct part of step 1 of lem-sc-flat-telescope-normalization-unshifted-is-iso; inherited agent expansion, not a literal statement of either tag."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-module-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-proper-morphism",
+  "def-sc-bounded-flat-shift-representative",
+  "def-sc-flat-telescope-stage-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply exists_flat_telescope_sum_models to E, hb and hf. Obtain R,hR,T,hT,s, the required homotopy isomorphism, the boundedness predicates on qT_n and a colimiting cofan with vertex qR.",
+   "uses": [
+    "lem-sc-flat-telescope-sum-models"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-pc-cochain-complex-modules",
-    "def-pc-derived-category",
-    "def-pc-derived-pullback",
-    "def-pc-flat-sheaf-modules",
-    "def-pc-module-pullback",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-weil-proper-morphism",
-    "def-sc-bounded-flat-shift-representative",
-    "def-sc-flat-telescope-stage-map"
-  ],
-  "proof": [
-    {
-      "text": "Apply exists_flat_telescope_sum_models to E, hb and hf. Obtain R,hR,T,hT,s, the required homotopy isomorphism, the boundedness predicates on qT_n and a colimiting cofan with vertex qR.",
-      "uses": [
-        "lem-sc-flat-telescope-sum-models"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply flat_comparison_preserves_countable_coproducts. Map the homotopy cofan by L and G, obtaining colimiting cofans. For b_n = alpha(qT_n), the bounded hypothesis supplies IsIso b_n. Naturality gives L(s_n) followed by a = b_n followed by G(s_n), where a = alpha(qR). Define d:G(qR) -> L(qR) using the G cofan and legs inverse(b_n) followed by L(s_n). On each L coprojection, a followed by d is identity by the naturality square and b_n followed by its inverse. On each G coprojection, d followed by a is identity by the same square and inverse(b_n) followed by b_n. Colimit hom_ext proves both identities and hence IsIso a. Return R,hR and its homotopy isomorphism.",
-      "uses": [
-        "lem-sc-flat-comparison-preserves-countable-coproducts"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-sc-flat-telescope-sum-models",
+  {
+   "text": "Apply flat_comparison_preserves_countable_coproducts. Map the homotopy cofan by L and G, obtaining colimiting cofans. For b_n = alpha(qT_n), the bounded hypothesis supplies IsIso b_n. Naturality gives L(s_n) followed by a = b_n followed by G(s_n), where a = alpha(qR). Define d:G(qR) -> L(qR) using the G cofan and legs inverse(b_n) followed by L(s_n). On each L coprojection, a followed by d is identity by the naturality square and b_n followed by its inverse. On each G coprojection, d followed by a is identity by the same square and inverse(b_n) followed by b_n. Colimit hom_ext proves both identities and hence IsIso a. Return R,hR and its homotopy isomorphism.",
+   "uses": [
     "lem-sc-flat-comparison-preserves-countable-coproducts"
-  ],
-  "proof_origin": {
-    "by": "worker",
-    "group": "Y3",
-    "date": "2026-10-14",
-    "document": "The parent node, steps 1--3; Stacks Tags 06YS, 06YJ, 07D9 and 079W",
-    "place": "Literal telescope models followed by the coproduct inverse argument; preservation is proved."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "A natural comparison invertible on bounded above flat complexes is invertible on a countable direct sum of bounded flat complexes and its shift",
-      "date": "2026-10-14",
-      "results": "service unavailable: Internal Server Error",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "countable direct sum of complexes is homotopy equivalent to mapping telescope of finite partial sums",
-      "date": "2026-10-14",
-      "results": "8 hits: HomologicalComplex.homotopyCofiber.descEquiv, instQFactorsThroughHomotopyIntUp, CochainComplex.cm5b.homotopyEquiv, instQFactorsThroughHomotopyDown, HomologicalComplex.homotopyCofiber.inrCompHomotopy, HomologicalComplex.cylinder.homotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom",
-      "verdict": "No exact stage-sum comparison theorem; homotopy cofiber infrastructure only."
-    },
-    {
-      "tool": "grep",
-      "query": "telescope|finite.*partial.*sum",
-      "date": "2026-10-14",
-      "results": "0 hits: ",
-      "verdict": "No exact stage-sum comparison theorem; homotopy cofiber infrastructure only."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A split sequence of finite coproducts of cochain complexes has mapping telescope homotopy equivalent to their infinite coproduct",
-      "date": "2026-10-14",
-      "results": "Eight homotopy-cofiber and cone-composition infrastructure hits, including homotopyCofiber.descEquiv and mappingConeCompHomotopyEquiv.",
-      "verdict": "Independent second reading: no sum-comparison theorem or split partial-sum telescope equivalence."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"homotopy\", \"coproduct\"",
-      "date": "2026-10-14",
-      "results": "0 hits.",
-      "verdict": "Independent second reading: no replacement."
-    },
-    {
-      "tool": "grep",
-      "query": "five.*lemma|isIso.*exact|telescope.*sum|sum.*telescope",
-      "date": "2026-10-14",
-      "results": "Generic five-lemma declarations; no split partial-sum telescope comparison. Local library search found TelescopeColimit (quasi-isomorphism only) and FilteredFreeKProjectiveAssembly (ModuleCat filtered-free hypotheses), neither the required homotopy equivalence for sheaf complexes.",
-      "verdict": "No duplicate of the restricted sum obligation."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationUnshiftedIsIso",
-    "date": "2026-10-14",
-    "group": "E1"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "Finite-flat-model normalization and coproduct part of the telescope route expanding finite duality; step 1 of the immediate parent.",
-      "via": [
-        "lem-sc-flat-telescope-normalization-unshifted-is-iso",
-        "lem-sc-flat-telescope-normalization-is-iso",
-        "lem-sc-flat-telescope-bounded-normalization-extension",
-        "lem-sc-flat-telescope-model-shift-gauge",
-        "lem-sc-flat-telescope-shift-gauge",
-        "lem-sc-normalized-flat-telescope-stage-comparison",
-        "lem-sc-normalized-flat-telescope-comparison",
-        "lem-sc-normalized-kflat-representative-comparison",
-        "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
-        "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.FlatTelescopeSumComparisonIsIso",
-    "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeSumComparisonIsIso.lean",
-    "declaration": "AlgebraicGeometry.exists_flat_telescope_sum_comparison_isIso",
-    "statement": "theorem exists_flat_telescope_sum_comparison_isIso\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)]\n    [(Scheme.Modules.tensorPullback f).Additive]\n    (α : ∀ X : HomotopyCategory\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ),\n        flatTelescopeShiftRepresentative Y X →\n          ((DerivedCategory.Qh ⋙ derivedPullback f).obj X ⟶\n            ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n              (DerivedCategory.Qh : HomotopyCategory\n                (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                schemeDerivedCategory Z)).obj X))\n    (hαnat : (∀ (X X' : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n          (hX : flatTelescopeShiftRepresentative Y X) (hX' : flatTelescopeShiftRepresentative Y X')\n          (s : X ⟶ X'),\n          (DerivedCategory.Qh ⋙ derivedPullback f).map s ≫ (α X' hX') =\n            (α X hX) ≫\n              ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n                (DerivedCategory.Qh : HomotopyCategory\n                  (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                  schemeDerivedCategory Z)).map s))\n    (hαbounded : ∀ (X : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n      (hX : flatTelescopeShiftRepresentative Y X),\n      boundedFlatShiftRepresentative Y X → IsIso (α X hX))\n    (E : ℕ → CochainComplex\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n    (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)) :\n    ∃ (R : CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (hR : isFlatTelescope Y R),\n      Nonempty ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (∐ E) ≅\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) ∧\n      IsIso (α ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R)\n        ⟨R, hR, Or.inl rfl⟩)",
-    "branch": "sheaf-dag",
-    "by": "E1",
-    "date": "2026-10-14"
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "E1",
-    "result": "pass",
-    "landing": "20261014T081307-L-3872586",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "Y3",
-    "result": "pass",
-    "landing": "20261014T084703-L-89764",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-sc-flat-telescope-sum-models",
+  "lem-sc-flat-comparison-preserves-countable-coproducts"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y3",
+  "date": "2026-10-14",
+  "document": "The parent node, steps 1--3; Stacks Tags 06YS, 06YJ, 07D9 and 079W",
+  "place": "Literal telescope models followed by the coproduct inverse argument; preservation is proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural comparison invertible on bounded above flat complexes is invertible on a countable direct sum of bounded flat complexes and its shift",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "countable direct sum of complexes is homotopy equivalent to mapping telescope of finite partial sums",
+   "date": "2026-10-14",
+   "results": "8 hits: HomologicalComplex.homotopyCofiber.descEquiv, instQFactorsThroughHomotopyIntUp, CochainComplex.cm5b.homotopyEquiv, instQFactorsThroughHomotopyDown, HomologicalComplex.homotopyCofiber.inrCompHomotopy, HomologicalComplex.cylinder.homotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom",
+   "verdict": "No exact stage-sum comparison theorem; homotopy cofiber infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|finite.*partial.*sum",
+   "date": "2026-10-14",
+   "results": "0 hits: ",
+   "verdict": "No exact stage-sum comparison theorem; homotopy cofiber infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split sequence of finite coproducts of cochain complexes has mapping telescope homotopy equivalent to their infinite coproduct",
+   "date": "2026-10-14",
+   "results": "Eight homotopy-cofiber and cone-composition infrastructure hits, including homotopyCofiber.descEquiv and mappingConeCompHomotopyEquiv.",
+   "verdict": "Independent second reading: no sum-comparison theorem or split partial-sum telescope equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopy\", \"coproduct\"",
+   "date": "2026-10-14",
+   "results": "0 hits.",
+   "verdict": "Independent second reading: no replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "five.*lemma|isIso.*exact|telescope.*sum|sum.*telescope",
+   "date": "2026-10-14",
+   "results": "Generic five-lemma declarations; no split partial-sum telescope comparison. Local library search found TelescopeColimit (quasi-isomorphism only) and FilteredFreeKProjectiveAssembly (ModuleCat filtered-free hypotheses), neither the required homotopy equivalence for sheaf complexes.",
+   "verdict": "No duplicate of the restricted sum obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationUnshiftedIsIso",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-flat-model normalization and coproduct part of the telescope route expanding finite duality; step 1 of the immediate parent.",
+   "via": [
+    "lem-sc-flat-telescope-normalization-unshifted-is-iso",
+    "lem-sc-flat-telescope-normalization-is-iso",
+    "lem-sc-flat-telescope-bounded-normalization-extension",
+    "lem-sc-flat-telescope-model-shift-gauge",
+    "lem-sc-flat-telescope-shift-gauge",
+    "lem-sc-normalized-flat-telescope-stage-comparison",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeSumComparisonIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeSumComparisonIsIso.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_telescope_sum_comparison_isIso",
+  "statement": "theorem exists_flat_telescope_sum_comparison_isIso\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)]\n    [(Scheme.Modules.tensorPullback f).Additive]\n    (α : ∀ X : HomotopyCategory\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ),\n        flatTelescopeShiftRepresentative Y X →\n          ((DerivedCategory.Qh ⋙ derivedPullback f).obj X ⟶\n            ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n              (DerivedCategory.Qh : HomotopyCategory\n                (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                schemeDerivedCategory Z)).obj X))\n    (hαnat : (∀ (X X' : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n          (hX : flatTelescopeShiftRepresentative Y X) (hX' : flatTelescopeShiftRepresentative Y X')\n          (s : X ⟶ X'),\n          (DerivedCategory.Qh ⋙ derivedPullback f).map s ≫ (α X' hX') =\n            (α X hX) ≫\n              ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n                (DerivedCategory.Qh : HomotopyCategory\n                  (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n                  schemeDerivedCategory Z)).map s))\n    (hαbounded : ∀ (X : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))\n      (hX : flatTelescopeShiftRepresentative Y X),\n      boundedFlatShiftRepresentative Y X → IsIso (α X hX))\n    (E : ℕ → CochainComplex\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n    (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)) :\n    ∃ (R : CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (hR : isFlatTelescope Y R),\n      Nonempty ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (∐ E) ≅\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) ∧\n      IsIso (α ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R)\n        ⟨R, hR, Or.inl rfl⟩)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T081307-L-3872586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261014T084703-L-89764",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,130 +1,142 @@
 {
-  "id": "lem-sc-relative-biprod-cone-extension",
-  "kind": "statement",
-  "title": "Relative cone extension with explicit biproduct terms",
-  "statement": "Let A be an abelian category [def-sp-abelian]. Let E,H,Q be integer-indexed cochain complexes [def-pc-cochain-complex-modules], f:E→H and r:Q→Cone(f), with r a quasi-isomorphism [def-pc-quasi-iso-modules]. Assume E and Q bounded above, possibly by different integers. There are a bounded-above complex F and maps t:E→F, g:F→H, with g a quasi-isomorphism, t≫g=f, every t^i split mono, and F^i isomorphic to E^i⊕Q^i. No generator, flatness, boundedness of H, or surjectivity assumption is needed.",
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/06XX",
-    "place": "Relative cone triangle before the final termwise-surjectivity addition; explicit coordinate proof adapted from the proved RelativeFlatExtension module."
+ "id": "lem-sc-relative-biprod-cone-extension",
+ "kind": "statement",
+ "title": "Relative cone extension with explicit biproduct terms",
+ "statement": "Let A be an abelian category [def-sp-abelian]. Let E,H,Q be integer-indexed cochain complexes [def-pc-cochain-complex-modules], f:E→H and r:Q→Cone(f), with r a quasi-isomorphism [def-pc-quasi-iso-modules]. Assume E and Q bounded above, possibly by different integers. There are a bounded-above complex F and maps t:E→F, g:F→H, with g a quasi-isomorphism, t≫g=f, every t^i split mono, and F^i isomorphic to E^i⊕Q^i. No generator, flatness, boundedness of H, or surjectivity assumption is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XX",
+  "place": "Relative cone triangle before the final termwise-surjectivity addition; explicit coordinate proof adapted from the proved RelativeFlatExtension module."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Extract the degree-one component a_i:Q^i→E^{i+1} and degree-zero component b_i:Q^i→H^i of r. Its chain-map equations are a_i d_E + d_Q a_{i+1}=0 and d_Q b_{i+1}=a_i f_{i+1}+b_i d_H. Construct F^i=E^i⊕Q^i with differential whose diagonal is (d_E,d_Q) and off-diagonal is -a_i. Biprod extensionality and these equations prove square-zero. The inclusion t and map g=(f,b) are chain maps; t≫g=f and t is split by the first projection. The maximum of the bounds bounds F. The term isomorphisms are identities.",
+   "uses": [],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-sp-abelian",
-    "def-pc-cochain-complex-modules",
-    "def-pc-quasi-iso-modules"
-  ],
-  "proof": [
-    {
-      "text": "Extract the degree-one component a_i:Q^i→E^{i+1} and degree-zero component b_i:Q^i→H^i of r. Its chain-map equations are a_i d_E + d_Q a_{i+1}=0 and d_Q b_{i+1}=a_i f_{i+1}+b_i d_H. Construct F^i=E^i⊕Q^i with differential whose diagonal is (d_E,d_Q) and off-diagonal is -a_i. Biprod extensionality and these equations prove square-zero. The inclusion t and map g=(f,b) are chain maps; t≫g=f and t is split by the first projection. The maximum of the bounds bounds F. The term isomorphisms are identities.",
-      "uses": [],
-      "elementary": false
-    },
-    {
-      "text": "Construct a degreewise three-summand permutation isomorphism Cone(g)≅Cone(r), using the explicit cone inclusions and projections. The same two component equations verify compatibility with differentials. Since r is a quasi-isomorphism, Cone(r) is acyclic. Transport its zero homology across this complex isomorphism, and apply the acyclic-cone characterization to g.",
-      "uses": [
-        "lem-pur-quasi-iso-cone-acyclic"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "Construct a degreewise three-summand permutation isomorphism Cone(g)≅Cone(r), using the explicit cone inclusions and projections. The same two component equations verify compatibility with differentials. Since r is a quasi-isomorphism, Cone(r) is acyclic. Transport its zero homology across this complex isomorphism, and apply the acyclic-cone characterization to g.",
+   "uses": [
     "lem-pur-quasi-iso-cone-acyclic"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "group": "V4",
-    "date": "2026-10-14",
-    "document": "https://stacks.math.columbia.edu/tag/06XX",
-    "place": "Relative cone triangle before the final termwise-surjectivity addition; explicit coordinate proof adapted from the proved RelativeFlatExtension module."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Given a quasi-isomorphism Q to the mapping cone of f E to H in an abelian category construct a quasi-isomorphism E direct sum Q to H extending f and a degreewise split inclusion of E",
-      "results": "Service unavailable: Internal Server Error.",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A resolution of the mapping cone of f gives a quasi-isomorphism from a twisted direct sum with a degreewise split inclusion of the source",
-      "results": "Eight hits: cm5b.instQuasiIsoIntP, mappingCone.quasiIso_descShortComplex, mappingConeHomOfDegreewiseSplitIso, mappingConeHomOfDegreewiseSplitXIso, mappingConeHomOfDegreewiseSplitIso_hom_f, mappingCone.mapHomologicalComplexIso, cm5b.homotopyEquiv, and mappingCone.mapHomologicalComplexXIso. Read DegreewiseSplit and ShortExact: these identify cones of an already supplied split short exact sequence or compare its quotient; they do not construct the strict relative extension from a supplied cone resolution. CM5b uses enough injectives and provides a different factorization.",
-      "date": "2026-10-14",
-      "verdict": "No matching statement; retain the explicit cone construction."
-    },
-    {
-      "tool": "loogle",
-      "query": "CochainComplex.mappingCone, CategoryTheory.IsSplitMono",
-      "results": "0 hits.",
-      "date": "2026-10-14",
-      "verdict": "No matching statement."
-    },
-    {
-      "tool": "grep",
-      "query": "quasiIso_descShortComplex|mappingConeHomOfDegreewiseSplitIso|biprod.*resolution|resolution.*biprod",
-      "results": "Ten Mathlib hits, all in DegreewiseSplit, ShortExact and their derived-category users. Local source search also found exists_relative_boundedAbove_flat_extension; it specializes to flat module sheaves and omits both the split inclusion and exact biproduct term description. The acyclic-cone criterion already exists upstream and is used directly.",
-      "date": "2026-10-14",
-      "verdict": "Use the existing acyclic-cone criterion; no duplicate theorem provides the new conclusion."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.CompactFlatGeneratorRelativeExtension",
-    "date": "2026-10-14",
-    "group": "V4"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "Relative cone-extension proof: Relative cone extension with explicit biproduct terms.",
-      "via": [
-        "lem-sc-compact-flat-generator-relative-extension",
-        "lem-sc-compact-flat-generator-tower-resolution",
-        "lem-sc-flat-telescope-target-refinement",
-        "lem-sc-flat-telescope-arrow-bar-data",
-        "lem-sc-flat-telescope-arrow-cocycles",
-        "lem-sc-flat-telescope-arrow-diagram",
-        "lem-sc-flat-telescope-stage-map-refinement",
-        "lem-sc-normalized-flat-telescope-comparison",
-        "lem-sc-normalized-kflat-representative-comparison",
-        "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
-        "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Algebra.Homology.RelativeBiprodConeExtension",
-    "file": "lean/Sheaf/Algebra/Homology/RelativeBiprodConeExtension.lean",
-    "declaration": "CochainComplex.exists_relative_biprod_cone_extension",
-    "statement": "theorem exists_relative_biprod_cone_extension\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (E H : CochainComplex C ℤ) (f : E ⟶ H)\n    (hE : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E.X i))\n    (Q : CochainComplex C ℤ) (r : Q ⟶ mappingCone f)\n    (hQ : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (Q.X i)) (hr : QuasiIso r) :\n    ∃ (F : CochainComplex C ℤ) (t : E ⟶ F) (g : F ⟶ H),\n      (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (F.X i)) ∧\n      QuasiIso g ∧ t ≫ g = f ∧ (∀ i : ℤ, IsSplitMono (t.f i)) ∧\n      ∀ i : ℤ, Nonempty (F.X i ≅ E.X i ⊞ Q.X i)",
-    "branch": "sheaf-dag",
-    "by": "V4",
-    "date": "2026-10-14"
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "V4",
-    "result": "pass",
-    "landing": "20261014T091810-L-473387",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "V4",
-    "result": "pass",
-    "landing": "20261014T091810-L-473387",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06XX",
+  "place": "Relative cone triangle before the final termwise-surjectivity addition; explicit coordinate proof adapted from the proved RelativeFlatExtension module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Given a quasi-isomorphism Q to the mapping cone of f E to H in an abelian category construct a quasi-isomorphism E direct sum Q to H extending f and a degreewise split inclusion of E",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A resolution of the mapping cone of f gives a quasi-isomorphism from a twisted direct sum with a degreewise split inclusion of the source",
+   "results": "Eight hits: cm5b.instQuasiIsoIntP, mappingCone.quasiIso_descShortComplex, mappingConeHomOfDegreewiseSplitIso, mappingConeHomOfDegreewiseSplitXIso, mappingConeHomOfDegreewiseSplitIso_hom_f, mappingCone.mapHomologicalComplexIso, cm5b.homotopyEquiv, and mappingCone.mapHomologicalComplexXIso. Read DegreewiseSplit and ShortExact: these identify cones of an already supplied split short exact sequence or compare its quotient; they do not construct the strict relative extension from a supplied cone resolution. CM5b uses enough injectives and provides a different factorization.",
+   "date": "2026-10-14",
+   "verdict": "No matching statement; retain the explicit cone construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, CategoryTheory.IsSplitMono",
+   "results": "0 hits.",
+   "date": "2026-10-14",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_descShortComplex|mappingConeHomOfDegreewiseSplitIso|biprod.*resolution|resolution.*biprod",
+   "results": "Ten Mathlib hits, all in DegreewiseSplit, ShortExact and their derived-category users. Local source search also found exists_relative_boundedAbove_flat_extension; it specializes to flat module sheaves and omits both the split inclusion and exact biproduct term description. The acyclic-cone criterion already exists upstream and is used directly.",
+   "date": "2026-10-14",
+   "verdict": "Use the existing acyclic-cone criterion; no duplicate theorem provides the new conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatGeneratorRelativeExtension",
+  "date": "2026-10-14",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Relative cone-extension proof: Relative cone extension with explicit biproduct terms.",
+   "via": [
+    "lem-sc-compact-flat-generator-relative-extension",
+    "lem-sc-compact-flat-generator-tower-resolution",
+    "lem-sc-flat-telescope-target-refinement",
+    "lem-sc-flat-telescope-arrow-bar-data",
+    "lem-sc-flat-telescope-arrow-cocycles",
+    "lem-sc-flat-telescope-arrow-diagram",
+    "lem-sc-flat-telescope-stage-map-refinement",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RelativeBiprodConeExtension",
+  "file": "lean/Sheaf/Algebra/Homology/RelativeBiprodConeExtension.lean",
+  "declaration": "CochainComplex.exists_relative_biprod_cone_extension",
+  "statement": "theorem exists_relative_biprod_cone_extension\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (E H : CochainComplex C ℤ) (f : E ⟶ H)\n    (hE : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E.X i))\n    (Q : CochainComplex C ℤ) (r : Q ⟶ mappingCone f)\n    (hQ : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (Q.X i)) (hr : QuasiIso r) :\n    ∃ (F : CochainComplex C ℤ) (t : E ⟶ F) (g : F ⟶ H),\n      (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (F.X i)) ∧\n      QuasiIso g ∧ t ≫ g = f ∧ (∀ i : ℤ, IsSplitMono (t.f i)) ∧\n      ∀ i : ℤ, Nonempty (F.X i ≅ E.X i ⊞ Q.X i)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261014T091810-L-473387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261014T091810-L-473387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -23,9 +23,11 @@ cut out by `b` on `U`. Its ideal sheaf is `AlgebraicGeometry.Scheme.Modules.Hom.
 
 The zero scheme `Z(s)` of a global section `s` of an invertible module `ℳ` in the sense of the
 blueprint is the case `φ = s : 𝒪_X ⟶ ℳ`; more generally, for invertible `ℳ` and `𝒩`, the
-section `s` of `𝒩 ⊗ ℳ^{-1}` corresponding to `φ : ℳ ⟶ 𝒩` has `Z(s) = Z(φ)`, since both are cut
-out by the coefficient `b` above. Working with the morphism `φ` avoids the tensor-hom
-identification `Hom(ℳ, 𝒩) ≅ H⁰(X, 𝒩 ⊗ ℳ^{-1})`, which is not available.
+section `s : 𝒪_X ≅ ℳ ⊗ ℳ^∨ ⟶ 𝒩 ⊗ ℳ^∨` corresponding to `φ : ℳ ⟶ 𝒩`
+(`AlgebraicGeometry.Scheme.Modules.Hom.adjointSection`) has `Z(s) = Z(φ)`
+(`AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection`, in
+`WeilConjectures/AlgebraicGeometry/Modules/ZeroLocusDual.lean`), since both are cut out by the
+coefficient `b` above.
 
 ## Implementation notes
 
@@ -567,7 +569,9 @@ theorem Hom.zeroLocus_eq_bot_iff (φ : M ⟶ N) : φ.zeroLocus = ⊥ ↔ φ = 0 
     rw [Hom.ideal_zeroLocus (0 : M ⟶ N) (U x) hM hN (b := 0) (by simp)]
     simp
 
-/-- The zero scheme of a morphism of invertible modules is locally principal. -/
+/-- The zero scheme of a morphism of invertible modules is locally principal.
+
+(blueprint: `lem-pc-zero-scheme-properties`) -/
 theorem Hom.isLocallyPrincipal_zeroLocus (φ : M ⟶ N) : φ.zeroLocus.IsLocallyPrincipal := by
   intro x
   obtain ⟨U, hxU, -, ⟨eM, hM⟩, eN, hN⟩ :=
@@ -645,10 +649,12 @@ lemma Hom.app_mem_ideal_zeroLocus {L : X.Modules} [SheafOfModules.IsInvertible.{
 /-- **An invertible module mapping to `𝒪_X` along an effective Cartier divisor.** If
 `ψ : L ⟶ 𝒪_X` is a morphism from an invertible module whose zero scheme `D = Z(ψ)` is an
 effective Cartier divisor, then `ψ` identifies `L` with the ideal sheaf `𝒪_X(-D)`: locally `ψ`
-sends a free generator of `L` to a non-zerodivisor generating the ideal of `D`. -/
-theorem Hom.nonempty_iso_toModules_zeroLocus {L : X.Modules}
+sends a free generator of `L` to a non-zerodivisor generating the ideal of `D`. The isomorphism
+factors `ψ` through the inclusion `𝒪_X(-D) ⟶ 𝒪_X`. -/
+theorem Hom.exists_iso_toModules_zeroLocus {L : X.Modules}
     [SheafOfModules.IsInvertible.{u, u, u} L] (ψ : L ⟶ Modules.unit X)
-    (hψ : ψ.zeroLocus.IsInvertible) : Nonempty (L ≅ ψ.zeroLocus.toModules) := by
+    (hψ : ψ.zeroLocus.IsInvertible) :
+    ∃ κ : L ≅ ψ.zeroLocus.toModules, κ.hom ≫ ψ.zeroLocus.toModulesι = ψ := by
   have : SheafOfModules.IsInvertible.{u, u, u} (Modules.unit X) :=
     IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
   have hzero : ψ ≫ ψ.zeroLocus.toPushforwardSubscheme = 0 := by
@@ -674,13 +680,21 @@ theorem Hom.nonempty_iso_toModules_zeroLocus {L : X.Modules}
   let κ : L ⟶ ψ.zeroLocus.toModules := kernel.lift _ ψ hzero
   have hκ (U : X.Opens) (m : Γ(L, U)) : ψ.zeroLocus.toModulesι.app U (κ.app U m) = ψ.app U m :=
     congrArg (fun f : L ⟶ Modules.unit X ↦ f.app U m) (kernel.lift_ι _ ψ hzero)
-  refine ⟨@asIso _ _ _ _ κ (isIso_of_isFreeGenerator κ fun x ↦ ?_)⟩
+  refine ⟨@asIso _ _ _ _ κ (isIso_of_isFreeGenerator κ fun x ↦ ?_), kernel.lift_ι _ ψ hzero⟩
   obtain ⟨U, hxU, -, e, he⟩ := exists_isFreeGenerator L (TopologicalSpace.Opens.mem_top x)
   refine ⟨U.1, e, hxU, he, hψ.isFreeGenerator _ fun V h ↦ ?_⟩
   rw [hκ]
   refine Hom.ideal_zeroLocus ψ V (he.map h) (isFreeGenerator_one V.1) ?_
   exact (Hom.app_presheaf_map ψ (homOfLE h) e).trans
     (mul_one (X.presheaf.map (homOfLE h).op (ψ.app U.1 e))).symm
+
+/-- **An invertible module mapping to `𝒪_X` along an effective Cartier divisor.** If
+`ψ : L ⟶ 𝒪_X` is a morphism from an invertible module whose zero scheme `D = Z(ψ)` is an
+effective Cartier divisor, then `L` is isomorphic to the ideal sheaf `𝒪_X(-D)`. -/
+theorem Hom.nonempty_iso_toModules_zeroLocus {L : X.Modules}
+    [SheafOfModules.IsInvertible.{u, u, u} L] (ψ : L ⟶ Modules.unit X)
+    (hψ : ψ.zeroLocus.IsInvertible) : Nonempty (L ≅ ψ.zeroLocus.toModules) :=
+  ⟨(ψ.exists_iso_toModules_zeroLocus hψ).choose⟩
 
 /-- **A morphism of invertible modules vanishing exactly along a divisor.** If the zero scheme
 `D = Z(φ)` of `φ : M ⟶ N` is an effective Cartier divisor, then `φ` identifies `M` with
@@ -710,6 +724,49 @@ theorem Hom.nonempty_iso_dual_toModules_tensorObj (φ : M ⟶ N) (hφ : φ.zeroL
   exact ⟨(λ_ N).symm ≪≫ whiskerRightIso ((β_ _ _) ≪≫ dJ).symm N ≪≫ α_ _ _ _ ≪≫
     whiskerLeftIso _ (whiskerRightIso e.symm N ≪≫ α_ _ _ _ ≪≫
       whiskerLeftIso M ((β_ _ _) ≪≫ dN) ≪≫ ρ_ M)⟩
+
+/-- The zero scheme of a nonzero morphism of invertible modules on an integral scheme is an
+effective Cartier divisor. -/
+theorem Hom.isInvertible_zeroLocus [IsIntegral X] {φ : M ⟶ N} (hφ : φ ≠ 0) :
+    φ.zeroLocus.IsInvertible :=
+  (Hom.isLocallyPrincipal_zeroLocus φ).isInvertible fun h ↦ hφ ((Hom.zeroLocus_eq_bot_iff φ).mp h)
+
+/-- **Uniqueness of the zero scheme.** Let `I` be an ideal sheaf (a closed subscheme of `X`) such
+that on every affine open `U = Spec A` on which `M` and `N` have free generators `eM` and `eN`,
+with `φ(eM) = b • eN`, the ideal of `I` is `(b)`, i.e. `I ∩ U = Spec(A/(b))`. Then `I = Z(φ)`.
+
+Such affine opens cover every affine open by basic opens
+(`AlgebraicGeometry.Scheme.Modules.exists_basicOpen_isFreeGenerator`), and an ideal of `A` is
+determined by its localizations on such a cover
+(`AlgebraicGeometry.IsAffineOpen.mem_of_forall_exists_basicOpen`); `Z(φ)` has the same local
+ideals (`AlgebraicGeometry.Scheme.Modules.Hom.ideal_zeroLocus`).
+
+(blueprint: `lem-pc-zero-scheme-properties`, part (1), uniqueness) -/
+theorem Hom.eq_zeroLocus_of_ideal_eq_span (φ : M ⟶ N) (I : X.IdealSheafData)
+    (hI : ∀ (U : X.affineOpens) (eM : Γ(M, U.1)) (eN : Γ(N, U.1)), IsFreeGenerator eM →
+      IsFreeGenerator eN → ∀ b : Γ(X, U.1), φ.app U.1 eM = b • eN → I.ideal U = Ideal.span {b}) :
+    I = φ.zeroLocus := by
+  have hle (J J' : X.IdealSheafData)
+      (hJ : ∀ (U : X.affineOpens) (eM : Γ(M, U.1)) (eN : Γ(N, U.1)), IsFreeGenerator eM →
+        IsFreeGenerator eN → ∀ b : Γ(X, U.1), φ.app U.1 eM = b • eN →
+          J.ideal U = Ideal.span {b})
+      (hJ' : ∀ (U : X.affineOpens) (eM : Γ(M, U.1)) (eN : Γ(N, U.1)), IsFreeGenerator eM →
+        IsFreeGenerator eN → ∀ b : Γ(X, U.1), φ.app U.1 eM = b • eN →
+          J'.ideal U = Ideal.span {b}) : J ≤ J' := by
+    intro U a ha
+    refine U.2.mem_of_forall_exists_basicOpen _ a fun x hx ↦ ?_
+    obtain ⟨g, hxg, ⟨eM, hM⟩, eN, hN⟩ := exists_basicOpen_isFreeGenerator M N U.2 hx
+    obtain ⟨b, hb⟩ := hN.exists_smul_eq (φ.app _ eM)
+    refine ⟨g, hxg, ?_⟩
+    have h := Ideal.mem_map_of_mem (X.presheaf.map (homOfLE (X.basicOpen_le g)).op).hom ha
+    rw [J.map_ideal_basicOpen, hJ (X.affineBasicOpen g) eM eN hM hN b hb.symm,
+      ← hJ' (X.affineBasicOpen g) eM eN hM hN b hb.symm, ← J'.map_ideal_basicOpen] at h
+    exact h
+  have hZ : ∀ (U : X.affineOpens) (eM : Γ(M, U.1)) (eN : Γ(N, U.1)), IsFreeGenerator eM →
+      IsFreeGenerator eN → ∀ b : Γ(X, U.1), φ.app U.1 eM = b • eN →
+        φ.zeroLocus.ideal U = Ideal.span {b} :=
+    fun U _ _ hM hN _ hb ↦ φ.ideal_zeroLocus U hM hN hb
+  exact le_antisymm (hle _ _ hI hZ) (hle _ _ hZ hI)
 
 end Properties
 

@@ -188,4 +188,38 @@ lemma Topology.IsConstructible.image_of_isEmbedding [NoetherianSpace Y] {f : X �
     (NoetherianSpace.isRetrocompact _)
   rwa [← image_comp] at h2
 
+/-- In a Noetherian space, a constructible set containing the generic point `ξ` of an
+irreducible component contains an open neighbourhood of `ξ`: it generically contains the
+component, and the complement of the other, finitely many, components is an open neighbourhood
+of `ξ` inside the component. -/
+theorem Topology.IsConstructible.exists_isOpen_mem_subset [NoetherianSpace X] {s : Set X}
+    (hs : IsConstructible s) {ξ : X} (hξ : closure {ξ} ∈ irreducibleComponents X)
+    (hξs : ξ ∈ s) : ∃ u : Set X, IsOpen u ∧ ξ ∈ u ∧ u ⊆ s := by
+  set T := closure ({ξ} : Set X)
+  have hirr : IsIrreducible T := isIrreducible_singleton.closure
+  -- an open set meeting `T` contains `ξ`
+  have hmem : ∀ u : Set X, IsOpen u → (u ∩ T).Nonempty → ξ ∈ u := fun u hu ⟨x, hxu, hxT⟩ ↦
+    (specializes_iff_mem_closure.2 hxT).mem_open hu hxu
+  -- the complement `Ω` of the other components is an open neighbourhood of `ξ` inside `T`
+  set C := {D ∈ irreducibleComponents X | D ≠ T}
+  have hCf : C.Finite := NoetherianSpace.finite_irreducibleComponents.subset fun _ h ↦ h.1
+  have hΩ : IsOpen (⋃₀ C)ᶜ := (Set.sUnion_eq_biUnion ▸ hCf.isClosed_biUnion fun D hD ↦
+    isClosed_of_mem_irreducibleComponents D hD.1).isOpen_compl
+  have hξΩ : ξ ∈ (⋃₀ C)ᶜ := by
+    rintro ⟨D, ⟨hD, hDT⟩, hξD⟩
+    have hTD : T ⊆ D := closure_minimal (Set.singleton_subset_iff.2 hξD)
+      (isClosed_of_mem_irreducibleComponents D hD)
+    exact hDT ((hξ.2 (hD.1) hTD).antisymm hTD)
+  have hΩT : (⋃₀ C)ᶜ ⊆ T := by
+    intro y hy
+    obtain ⟨D, hD, hyD⟩ := exists_mem_irreducibleComponents_subset_of_isIrreducible {y}
+      isIrreducible_singleton
+    by_cases hDT : D = T
+    · exact hDT ▸ hyD (Set.mem_singleton y)
+    · exact absurd ⟨D, ⟨hD, hDT⟩, hyD (Set.mem_singleton y)⟩ hy
+  rcases hs.exists_isOpen_inter_subset_or hirr with ⟨u, hu, hut, hus⟩ | ⟨u, hu, hut, hus⟩
+  · exact ⟨u ∩ (⋃₀ C)ᶜ, hu.inter hΩ, ⟨hmem u hu hut, hξΩ⟩,
+      fun y hy ↦ hus ⟨hy.1, hΩT hy.2⟩⟩
+  · exact absurd hξs (hus ⟨hmem u hu hut, subset_closure (Set.mem_singleton ξ)⟩)
+
 end Noetherian

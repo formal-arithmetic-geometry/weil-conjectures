@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
-public import Sheaf.CategoryTheory.ImageFiltration
+public import Sheaf.CategoryTheory.Filtration
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 import Sheaf.CategoryTheory.HalfPlaneDiagonalColimits
 import Sheaf.CategoryTheory.HalfPlaneSharpBounds
@@ -254,8 +254,7 @@ theorem abutment_image_filtration
     apply filtration_ext
     funext p
     dsimp [FH, FA, DecreasingFiltration.image, BigradedExactCouple.imageFiltration]
-    rw [Subobject.exists_obj_eq_imageSubobject,
-      ← imageSubobject_comp_of_epi (factorThruImageSubobject ((AA n).ι p))]
+    rw [← imageSubobject_comp_of_epi (factorThruImageSubobject ((AA n).ι p))]
     simp only [imageSubobject_arrow_comp_assoc, hAAι, hAHι]
   have hFHj (n p : ℤ) : (FH n).step p = imageSubobject (j n (n - p)) := by
     change imageSubobject ((AH n).ι p) = _

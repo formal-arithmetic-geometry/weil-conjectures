@@ -1,151 +1,162 @@
 {
-  "id": "lem-sc-flat-telescope-sum-models",
-  "kind": "statement",
-  "title": "Literal telescope models for a countable coproduct",
-  "statement": "Let Y be any scheme and let E_n be a sequence of bounded-above cochain complexes of sheaves of O_Y-modules, all of whose terms are flat [def-pc-flat-sheaf-modules]. Bounds may depend on n. Let q be the homotopy quotient [def-pc-cochain-complex-modules]. There exist a complex R with isFlatTelescope Y R [def-sc-flat-telescope-stage-map], complexes T_n with isFlatTelescope Y (T_n), and maps s_n:qT_n -> qR, such that q(sum E_n) is isomorphic to qR, each qT_n satisfies boundedFlatShiftRepresentative Y [def-sc-bounded-flat-shift-representative], and the cofan (qR,s_n) is a coproduct of the qT_n in the homotopy category. No derived category, scheme morphism, comparison, or uniform bound is assumed.",
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/06YS; https://stacks.math.columbia.edu/tag/06YJ",
-    "place": "Steps 1--2 of lem-sc-flat-telescope-sum-comparison-is-iso: partial-sum telescope splitting and bounded constant-tower models; agent expansion of Tags 06YS and 06YJ."
-  },
-  "stmt_deps": [
-    "def-pc-flat-sheaf-modules",
-    "def-pc-cochain-complex-modules",
-    "def-sc-flat-telescope-stage-map",
-    "def-sc-bounded-flat-shift-representative"
-  ],
-  "proof": [
-    {
-      "text": "Define the finite partial sums recursively by B_0 = E_0 and B_(n+1) = B_n biproduct E_(n+1), with transition biprod.inl. Define the augmentation B_n -> sum E recursively by biprod.desc. Induction proves boundedness using max of the two bounds and the evaluation functor mapBiprod isomorphism. Flatness follows by the same induction, using flat coproducts and transport along evaluation and biprod.isoCoprod. For the universe-small index types used here, reindex through ULift to apply the sheaf-flat coproduct theorem.",
-      "uses": [
-        "def-sc-flat-telescope-stage-map",
-        "lem-pc-sites-modules-coproduct-flat"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Let D = sum B_n and delta = 1 - transition. Define l_0 = 0 and l_(n+1) = biprod.fst followed by (l_n - the nth coprojection B_n -> D). Let r = Sigma.desc l and let s : sum E -> D send E_n through the new-summand inclusion E_n -> B_n and then into D. The recursive augmentation defines g : D -> sum E. Coproduct extensionality proves delta g = 0. On the nth summand the formula for l_(n+1) proves delta r = id. Restricting to each E_n gives s g = id. For r delta + g s = id, use induction on n and binary-biproduct extensionality: on the old summand the induction hypothesis and subtraction cancel; on the new summand r vanishes and g s is its coprojection. These are the fields of an explicit ShortComplex.Splitting in the category of complexes. Map the splitting by each evaluation functor and use Mathlib HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit. Compare this distinguished triangle with the mapping-cone triangle by Pretriangulated.isoTriangleOfIso₁₂, taking identities on its first two objects. The third component gives qR isomorphic to q(sum E), for the literal cone R = mappingCone delta.",
-      "uses": [
-        "def-sc-flat-telescope-stage-map"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For each E_n take the constant identity tower and its literal cone T_n. Its short complex has augmentation Sigma.desc id, section the zeroth coprojection, and retraction determined by l_0 = 0 and l_(k+1) = l_k - the kth coprojection. Induction proves the same three splitting identities, so the preceding Mathlib triangle comparison gives qT_n isomorphic to qE_n. Degreewise coproduct preservation and flat coproducts prove flatness of the constant sum; homotopyCofiber.XIsoBiprod proves flatness of the cone. If E_n vanishes above b, both summands in cone degree i>b vanish, since its first summand is in degree i+1. Thus T_n satisfies boundedFlatShiftRepresentative without a uniform bound on n.",
-      "uses": [
-        "def-sc-flat-telescope-stage-map",
-        "def-sc-bounded-flat-shift-representative",
-        "lem-pc-sites-modules-coproduct-flat"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Prove directly that the homotopy quotient sends the complex coproduct cofan to a colimit cofan. Lift every proposed leg to a cochain map using fullness of the quotient, and descend their coproduct. For uniqueness, lift a competing map and choose the summand homotopies obtained from equality in the quotient. Evaluation preserves coproducts, so these homotopies assemble degreewise; their zero and differential identities follow by coproduct extensionality. The quotient identifies the two maps. Finally transport this colimit cofan through the isomorphisms qT_n -> qE_n and q(sum E) -> qR. Explicitly the legs are their composites with q(Sigma.ι E n), and the colimit descent precomposes with the inverse isomorphism at R and uses the inverse summand isomorphisms. All representatives and splittings were concretely constructed; no data is chosen from an unproved existence theorem.",
-      "uses": [],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-sc-bounded-flat-shift-representative",
+ "id": "lem-sc-flat-telescope-sum-models",
+ "kind": "statement",
+ "title": "Literal telescope models for a countable coproduct",
+ "statement": "Let Y be any scheme and let E_n be a sequence of bounded-above cochain complexes of sheaves of O_Y-modules, all of whose terms are flat [def-pc-flat-sheaf-modules]. Bounds may depend on n. Let q be the homotopy quotient [def-pc-cochain-complex-modules]. There exist a complex R with isFlatTelescope Y R [def-sc-flat-telescope-stage-map], complexes T_n with isFlatTelescope Y (T_n), and maps s_n:qT_n -> qR, such that q(sum E_n) is isomorphic to qR, each qT_n satisfies boundedFlatShiftRepresentative Y [def-sc-bounded-flat-shift-representative], and the cofan (qR,s_n) is a coproduct of the qT_n in the homotopy category. No derived category, scheme morphism, comparison, or uniform bound is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YS; https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Steps 1--2 of lem-sc-flat-telescope-sum-comparison-is-iso: partial-sum telescope splitting and bounded constant-tower models; agent expansion of Tags 06YS and 06YJ."
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-cochain-complex-modules",
+  "def-sc-flat-telescope-stage-map",
+  "def-sc-bounded-flat-shift-representative"
+ ],
+ "proof": [
+  {
+   "text": "Define the finite partial sums recursively by B_0 = E_0 and B_(n+1) = B_n biproduct E_(n+1), with transition biprod.inl. Define the augmentation B_n -> sum E recursively by biprod.desc. Induction proves boundedness using max of the two bounds and the evaluation functor mapBiprod isomorphism. Flatness follows by the same induction, using flat coproducts and transport along evaluation and biprod.isoCoprod. For the universe-small index types used here, reindex through ULift to apply the sheaf-flat coproduct theorem.",
+   "uses": [
     "def-sc-flat-telescope-stage-map",
     "lem-pc-sites-modules-coproduct-flat"
-  ],
-  "proof_origin": {
-    "by": "worker",
-    "group": "J4",
-    "date": "2026-10-14",
-    "document": "Stacks Project Tags 06YS, 06YJ and 03EU; Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit; Mathlib.CategoryTheory.Triangulated.Pretriangulated",
-    "place": "Agent-written complete Lean proof of the original telescope-sum-model statement: recursive partial sums, explicit split short complexes, the Mathlib split-sequence distinguished triangle and uniqueness of cones, and the homotopy coproduct universal property."
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "countable coproducts in homotopy categories and mapping telescope of finite partial sums",
-      "date": "2026-10-14",
-      "results": "Service unavailable: Internal Server Error",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "a natural transformation invertible on summands is invertible on a coproduct if both functors preserve coproducts",
-      "date": "2026-10-14",
-      "results": "Sigma.map_isIso and generic coproduct comparison isomorphisms; no literal telescope model construction.",
-      "verdict": "Infrastructure only; used coproduct universal property directly."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"IsColimit\", \"IsIso\"",
-      "date": "2026-10-14",
-      "results": "IsColimit.hom_isIso and coproduct cofan comparison lemmas; no telescope splitting.",
-      "verdict": "No exact model theorem."
-    },
-    {
-      "tool": "grep",
-      "query": "telescope|finite.*partial.*sum; local searches for telescope splitting, coproduct preservation and mapHomotopyCategory",
-      "date": "2026-10-14",
-      "results": "TelescopeColimit is a quasi-isomorphism theorem, not a homotopy splitting; FilteredFreeTelescopeSplitting is for ModuleCat filtrations. The homotopy/derived coproduct infrastructure is available. Blueprint search telescope and direct sums found no duplicate.",
-      "verdict": "New literal models statement needed; preservation proved from existing infrastructure."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.FlatTelescopeSumComparisonIsIso",
-    "date": "2026-10-14",
-    "group": "Y3"
+  {
+   "text": "Let D = sum B_n and delta = 1 - transition. Define l_0 = 0 and l_(n+1) = biprod.fst followed by (l_n - the nth coprojection B_n -> D). Let r = Sigma.desc l and let s : sum E -> D send E_n through the new-summand inclusion E_n -> B_n and then into D. The recursive augmentation defines g : D -> sum E. Coproduct extensionality proves delta g = 0. On the nth summand the formula for l_(n+1) proves delta r = id. Restricting to each E_n gives s g = id. For r delta + g s = id, use induction on n and binary-biproduct extensionality: on the old summand the induction hypothesis and subtraction cancel; on the new summand r vanishes and g s is its coprojection. These are the fields of an explicit ShortComplex.Splitting in the category of complexes. Map the splitting by each evaluation functor and use Mathlib HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit. Compare this distinguished triangle with the mapping-cone triangle by Pretriangulated.isoTriangleOfIso₁₂, taking identities on its first two objects. The third component gives qR isomorphic to q(sum E), for the literal cone R = mappingCone delta.",
+   "uses": [
+    "def-sc-flat-telescope-stage-map"
+   ],
+   "elementary": false
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "Steps 1--2 of lem-sc-flat-telescope-sum-comparison-is-iso: partial-sum telescope splitting and bounded constant-tower models; agent expansion of Tags 06YS and 06YJ.",
-      "via": [
-        "lem-sc-flat-telescope-sum-comparison-is-iso",
-        "lem-sc-flat-telescope-normalization-unshifted-is-iso",
-        "lem-sc-flat-telescope-normalization-is-iso",
-        "lem-sc-flat-telescope-bounded-normalization-extension",
-        "lem-sc-flat-telescope-model-shift-gauge",
-        "lem-sc-flat-telescope-shift-gauge",
-        "lem-sc-normalized-flat-telescope-stage-comparison",
-        "lem-sc-normalized-flat-telescope-comparison",
-        "lem-sc-normalized-kflat-representative-comparison",
-        "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
-        "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
-      ]
-    },
-    "same_as": []
+  {
+   "text": "For each E_n take the constant identity tower and its literal cone T_n. Its short complex has augmentation Sigma.desc id, section the zeroth coprojection, and retraction determined by l_0 = 0 and l_(k+1) = l_k - the kth coprojection. Induction proves the same three splitting identities, so the preceding Mathlib triangle comparison gives qT_n isomorphic to qE_n. Degreewise coproduct preservation and flat coproducts prove flatness of the constant sum; homotopyCofiber.XIsoBiprod proves flatness of the cone. If E_n vanishes above b, both summands in cone degree i>b vanish, since its first summand is in degree i+1. Thus T_n satisfies boundedFlatShiftRepresentative without a uniform bound on n.",
+   "uses": [
+    "def-sc-flat-telescope-stage-map",
+    "def-sc-bounded-flat-shift-representative",
+    "lem-pc-sites-modules-coproduct-flat"
+   ],
+   "elementary": false
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lean_audit": "none",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.FlatTelescopeSumModels",
-    "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeSumModels.lean",
-    "declaration": "AlgebraicGeometry.exists_flat_telescope_sum_models",
-    "statement": "theorem exists_flat_telescope_sum_models (Y : Scheme.{u})\n    (E : ℕ → CochainComplex\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n    (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)) :\n    ∃ (R : CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (hR : isFlatTelescope Y R)\n      (T : ℕ → CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (hT : ∀ n, isFlatTelescope Y (T n))\n      (s : ∀ n, (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (T n) ⟶\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R),\n      Nonempty ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (∐ E) ≅\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) ∧\n      (∀ n, boundedFlatShiftRepresentative Y\n        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (T n))) ∧\n      Nonempty (IsColimit (Cofan.mk\n        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) s))",
-    "branch": "sheaf-dag",
-    "by": "Y3",
-    "date": "2026-10-14"
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "Y3",
-    "result": "pass",
-    "landing": "20261014T084703-L-89764",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "X-f0c83",
-    "group": "J4",
-    "result": "pass",
-    "landing": "20261014T092318-L-534072",
-    "kind": "interface",
-    "note": "independent Codex review: Matched the unchanged theorem with its node and definitions, the proof with its recorded dependencies, and the scope changes with the change record; delivery and sole direct importer compile cleanly, with only standard axioms."
+  {
+   "text": "Prove directly that the homotopy quotient sends the complex coproduct cofan to a colimit cofan. Lift every proposed leg to a cochain map using fullness of the quotient, and descend their coproduct. For uniqueness, lift a competing map and choose the summand homotopies obtained from equality in the quotient. Evaluation preserves coproducts, so these homotopies assemble degreewise; their zero and differential identities follow by coproduct extensionality. The quotient identifies the two maps. Finally transport this colimit cofan through the isomorphisms qT_n -> qE_n and q(sum E) -> qR. Explicitly the legs are their composites with q(Sigma.ι E n), and the colimit descent precomposes with the inverse isomorphism at R and uses the inverse summand isomorphisms. All representatives and splittings were concretely constructed; no data is chosen from an unproved existence theorem.",
+   "uses": [],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-sc-bounded-flat-shift-representative",
+  "def-sc-flat-telescope-stage-map",
+  "lem-pc-sites-modules-coproduct-flat"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J4",
+  "date": "2026-10-14",
+  "document": "Stacks Project Tags 06YS, 06YJ and 03EU; Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit; Mathlib.CategoryTheory.Triangulated.Pretriangulated",
+  "place": "Agent-written complete Lean proof of the original telescope-sum-model statement: recursive partial sums, explicit split short complexes, the Mathlib split-sequence distinguished triangle and uniqueness of cones, and the homotopy coproduct universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "countable coproducts in homotopy categories and mapping telescope of finite partial sums",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a natural transformation invertible on summands is invertible on a coproduct if both functors preserve coproducts",
+   "date": "2026-10-14",
+   "results": "Sigma.map_isIso and generic coproduct comparison isomorphisms; no literal telescope model construction.",
+   "verdict": "Infrastructure only; used coproduct universal property directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsColimit\", \"IsIso\"",
+   "date": "2026-10-14",
+   "results": "IsColimit.hom_isIso and coproduct cofan comparison lemmas; no telescope splitting.",
+   "verdict": "No exact model theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|finite.*partial.*sum; local searches for telescope splitting, coproduct preservation and mapHomotopyCategory",
+   "date": "2026-10-14",
+   "results": "TelescopeColimit is a quasi-isomorphism theorem, not a homotopy splitting; FilteredFreeTelescopeSplitting is for ModuleCat filtrations. The homotopy/derived coproduct infrastructure is available. Blueprint search telescope and direct sums found no duplicate.",
+   "verdict": "New literal models statement needed; preservation proved from existing infrastructure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeSumComparisonIsIso",
+  "date": "2026-10-14",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Steps 1--2 of lem-sc-flat-telescope-sum-comparison-is-iso: partial-sum telescope splitting and bounded constant-tower models; agent expansion of Tags 06YS and 06YJ.",
+   "via": [
+    "lem-sc-flat-telescope-sum-comparison-is-iso",
+    "lem-sc-flat-telescope-normalization-unshifted-is-iso",
+    "lem-sc-flat-telescope-normalization-is-iso",
+    "lem-sc-flat-telescope-bounded-normalization-extension",
+    "lem-sc-flat-telescope-model-shift-gauge",
+    "lem-sc-flat-telescope-shift-gauge",
+    "lem-sc-normalized-flat-telescope-stage-comparison",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeSumModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeSumModels.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_telescope_sum_models",
+  "statement": "theorem exists_flat_telescope_sum_models (Y : Scheme.{u})\n    (E : ℕ → CochainComplex\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hb : ∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i))\n    (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)) :\n    ∃ (R : CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (hR : isFlatTelescope Y R)\n      (T : ℕ → CochainComplex\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (hT : ∀ n, isFlatTelescope Y (T n))\n      (s : ∀ n, (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (T n) ⟶\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R),\n      Nonempty ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (∐ E) ≅\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) ∧\n      (∀ n, boundedFlatShiftRepresentative Y\n        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (T n))) ∧\n      Nonempty (IsColimit (Cofan.mk\n        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj R) s))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261014T084703-L-89764",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-f0c83",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261014T092318-L-534072",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem with its node and definitions, the proof with its recorded dependencies, and the scope changes with the change record; delivery and sole direct importer compile cleanly, with only standard axioms."
+ }
 }

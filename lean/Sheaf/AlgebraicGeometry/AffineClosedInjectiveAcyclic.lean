@@ -50,7 +50,7 @@ theorem Etale.subsingleton_H_affine_closed_of_injective
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} [IsAffine X]
     (i : Z ⟶ X) [IsClosedImmersion i]
     (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Injective J] [IsTorsionSheaf J] (q : ℕ) (hq : 0 < q) :
+    [Injective J] [IsTorsionModuleSheaf J] (q : ℕ) (hq : 0 < q) :
     Subsingleton (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
         ((i)^*[ModuleCat.{u + 1} Λ].obj J)) q) := by

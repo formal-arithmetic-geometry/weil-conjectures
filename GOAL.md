@@ -1,5 +1,33 @@
 # GOAL
 
+## CURRENT UPSTREAM TARGETS (human decision 2026-10-12; sync 2026-10-13)
+
+The target statements follow upstream `slopmaster2` at `ffb7b906069b754b60fc5d090a85e9ae4209561e`.
+PR 1413 (`46dc75fcf`, reviewer fix `84babb37e`) corrects the main bounded-below statement to
+abelian sheaves with torsion cohomology (Stacks 0DDE); the torsion-ring statement uses the
+upstream `baseChange` map. The former module statement remains as
+`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`.
+
+The current upstream proof dependencies selected as targets are:
+
+- `AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine` (`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk`; node `lemma-weil-pbc-p1-exchange-geometric-stalk`).
+- `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed` (`WeilConjectures.AlgebraicGeometry.Curve.FieldExtension`; node `prop-weil-pbc-algebraically-closed-extension`).
+- `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed` (`WeilConjectures.AlgebraicGeometry.Curve.FieldExtension`; node `lemma-weil-pbc-curve-separably-closed-passage`).
+
+- `AlgebraicGeometry.Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject` (`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf`; node `lem-weil-pbc-cohomology-filtered-colimit`).
+- `AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit` (`WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity`; node `lem-weil-pbc-etale-section-continuity`).
+- `AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing` (`WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale`; node `thm-weil-pbc-henselian-idempotent-lifting`).
+
+`lean/Challenge.lean` locks their exact signatures, including the renamed module-sheaf
+notion `Scheme.IsTorsionModuleSheaf`. `lean/TargetsCheck.lean` imports their library versions.
+The reduction to the projective line and the prime-coefficient injective-acyclicity bridge
+are now proved upstream and cease to be separate targets. The main DAG target stays
+`thm-weil-pbc-bounded-below`, attached to the abelian declaration above.
+
+The closure audit and reasons are recorded in `coord/target-migration.md`. Completion still
+requires exact target types, no axioms beyond `propext`, `Classical.choice`, `Quot.sound`, and
+agreement with the mathematical statements. The prior decisions below are historical.
+
 ## DECISION OF THE HUMAN (2026-10-12 04:20 +08)
 
 **The targets of the run are the five upstream declarations on which the old target `thm-weil-pbc-bounded-below` rests.** They are the five `sorry`s on its route in the source repository (branch `slopmaster2` at `7d675a263`); the line is the line of the `theorem` keyword:

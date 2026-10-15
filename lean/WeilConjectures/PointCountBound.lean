@@ -195,4 +195,40 @@ theorem Hom.exists_pointCount_le_mul_pow [IsAffine X] (f : X ⟶ Spec (.of k))
           rw [← FiniteField.nat_card_galoisExtension k n hn]
           exact Nat.mul_le_mul_left d hpow
 
+
+/-- On an affine scheme of finite type and dimension at most one over a finite field `k` with
+`q` elements, the closed points of degree `e` number at most `A q ^ e`, in any finite set of
+them (a form of `lem-wf-point-count-linear-growth`): each contributes `deg x ≥ 1` points over
+`𝔽_(q ^ e)`. -/
+theorem Hom.exists_card_filter_degreeOver_le [IsAffine X] (f : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType f] (hX : topologicalKrullDim X ≤ 1) :
+    ∃ A : ℝ, ∀ (T : Set X.finitePoints) (t : Finset T) (e : ℕ),
+      ((t.filter fun x ↦ f.degreeOver x.1.1 = e).card : ℝ) ≤ A * (Nat.card k : ℝ) ^ e := by
+  classical
+  obtain ⟨d, hd⟩ := f.exists_pointCount_le_mul_pow hX
+  refine ⟨d, fun T t e ↦ ?_⟩
+  rcases eq_or_ne e 0 with rfl | he
+  · rw [Finset.card_eq_zero.2 (Finset.filter_eq_empty_iff.2 fun x _ ↦
+      f.degreeOver_ne_zero x.1.2)]
+    simp
+  set S := (t.filter fun x ↦ f.degreeOver x.1.1 = e).image Subtype.val
+  have hS : S.card = (t.filter fun x ↦ f.degreeOver x.1.1 = e).card :=
+    Finset.card_image_of_injective _ Subtype.val_injective
+  set T' := (f.finite_setOf_degreeOver_le e).toFinset
+  have hcount := f.pointCount_eq_sum he (T := T') fun y hy ↦ by
+    simpa [T'] using Nat.le_of_dvd (Nat.pos_of_ne_zero he) hy
+  have hST : S ⊆ T'.filter fun y ↦ f.degreeOver y.1 ∣ e := by
+    intro y hy
+    obtain ⟨x, hx, rfl⟩ := Finset.mem_image.1 hy
+    have hxe := (Finset.mem_filter.1 hx).2
+    simp [T', hxe]
+  have hle : S.card ≤ f.pointCount e := by
+    rw [hcount]
+    calc S.card = ∑ y ∈ S, 1 := by simp
+      _ ≤ ∑ y ∈ S, f.degreeOver y.1 := Finset.sum_le_sum fun y _ ↦
+          Nat.one_le_iff_ne_zero.2 (f.degreeOver_ne_zero y.2)
+      _ ≤ _ := Finset.sum_le_sum_of_subset hST
+  rw [← hS]
+  exact_mod_cast hle.trans (hd e he)
+
 end AlgebraicGeometry.Scheme

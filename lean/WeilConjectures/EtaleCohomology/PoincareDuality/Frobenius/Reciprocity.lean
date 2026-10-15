@@ -44,6 +44,7 @@ section Reciprocity
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {a : X ⟶ Y}
   [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
+  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
 /-- Blueprint `cor-pod-reciprocal-eigenvalues`: Reciprocal eigenvalues.
 

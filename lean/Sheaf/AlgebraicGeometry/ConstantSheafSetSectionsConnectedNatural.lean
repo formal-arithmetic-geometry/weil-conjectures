@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf
 

@@ -104,4 +104,17 @@ theorem subsingleton_H_of_injective (I : X.Modules) [Injective I] (n : ℕ) :
   have := isFlasque_of_injective I
   TopCat.Sheaf.IsFlasque.subsingleton_H n ((SheafOfModules.toSheaf X.ringCatSheaf).obj I)
 
+
+/-- **Restrictions of injective `𝒪_X`-modules to open subschemes are acyclic**: the restriction of
+an injective `𝒪_Y`-module along an open immersion is flasque, its sections being sections of the
+injective module over the image opens. -/
+theorem subsingleton_H_restrict_of_injective {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f]
+    (I : Y.Modules) [Injective I] (n : ℕ) : Subsingleton ((I.restrict f).H (n + 1)) :=
+  have := isFlasque_of_injective I
+  have : TopCat.Presheaf.IsFlasque
+      ((SheafOfModules.toSheaf X.ringCatSheaf).obj (I.restrict f)).obj :=
+    ⟨fun i ↦ inferInstanceAs
+      (Epi (((SheafOfModules.toSheaf Y.ringCatSheaf).obj I).obj.map (f.opensFunctor.op.map i)))⟩
+  TopCat.Sheaf.IsFlasque.subsingleton_H n
+    ((SheafOfModules.toSheaf X.ringCatSheaf).obj (I.restrict f))
 end AlgebraicGeometry.Scheme.Modules

@@ -154,7 +154,7 @@ omit [HasSmallSiteSheafify A] in
 subcategories.
 
 Clause (ii), amplitude: Tor amplitudes add under the derived tensor product,
-`[a, b], [c, d] ↦ [a + c, b + d]`. -/
+`[a, b], [c, d] ↦ [a + c, b + d]`. This is blueprint `lem-sf-tensor-ctf` (ii), Tor amplitude. -/
 theorem torAmplitudeIn_tensor (X : Scheme.{u}) (a b c d : ℤ)
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hKt : torAmplitudeIn A X a b K) (hMt : torAmplitudeIn A X c d M) :

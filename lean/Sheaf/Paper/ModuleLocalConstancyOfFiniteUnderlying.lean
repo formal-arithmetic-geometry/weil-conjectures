@@ -5,7 +5,7 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Sites.Adjunction
 import Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlyingOperationCompatibleCover
@@ -49,10 +49,12 @@ This argument applies to noncommutative rings with left scalar multiplication. -
 theorem module_localConstancy_of_finite_underlying
     {Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hF : IsFiniteLocallyConstantEtaleSheafOfSets
+    (hF : IsLisseEtaleSheafOfSets
       ((sheafForget Y.smallEtaleTopology).obj F)) :
     IsLocallyConstantSheaf F := by
   rcases hF.1 with ⟨𝒰, h𝒰⟩
-  exact module_operationCompatibleCover F _ rfl hF.2 𝒰 h𝒰
+  exact module_operationCompatibleCover F _ rfl
+    (fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
+      (hF.2.isFinitelyGenerated_sheafFiber Ω s)) 𝒰 h𝒰
 
 end AlgebraicGeometry.Scheme

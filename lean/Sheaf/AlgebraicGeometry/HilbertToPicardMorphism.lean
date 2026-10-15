@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
@@ -66,7 +66,7 @@ the Picard presheaf), and the class of a degree-`d` invertible module in it is i
 `toSheafify`. The Picard classes `L` and `LK` are tied to the actual dual ideal modules by
 isomorphisms; they are not arbitrary representatives. -/
 theorem exists_hilbertToPicardMorphism {k : Type u} [Field k] [IsSepClosed k]
-    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [f.IsSmoothProjectiveCurve]
+    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsSmoothProjectiveCurve f]
     [GeometricallyIntegral f] (d : ℕ)
     (H P : Over (Spec (.of k))) (eH : (hilbertPresheaf f d).RepresentableBy H)
     (eP : (picardFunctorDegree f d).obj.RepresentableBy P) :

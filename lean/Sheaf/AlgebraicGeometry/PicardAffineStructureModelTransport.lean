@@ -66,7 +66,7 @@ private theorem open_single_image
   have : A.PreservesKInjectiveComplexes :=
     (openImmersion_restriction_derived_properties r).2
   have : PreservesFiniteLimits B := (openImmersion_restriction_derived_properties j).1
-  have hbase := Modules.pushforward_restrict_square p j r p' sq
+  have hbase := Modules.pushforwardRestrictIso sq
   have : (RingedSpace.moduleDirectImage p.toLRSHom.toShHom).Additive :=
     RingedSpace.moduleDirectImage_additive_proof p.toLRSHom.toShHom
   have : (RingedSpace.moduleDirectImage p'.toLRSHom.toShHom).Additive :=

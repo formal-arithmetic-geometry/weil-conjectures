@@ -11,6 +11,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPu
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Tactic.CategoryTheory.Reassoc
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
@@ -274,6 +275,20 @@ lemma Scheme.Pullback.opensRange_openCoverOfLeftRight_f {X Y Z : Scheme.{u}}
   rw [Scheme.Hom.coe_opensRange, Scheme.Hom.coe_opensRange,
     Scheme.Pullback.openCoverOfLeftRight_f]
   rfl
+
+/-- A variant of `AlgebraicGeometry.Scheme.isPullback_of_openCover` in which the pullbacks of the
+cover are given by arbitrary pullback squares. -/
+lemma Scheme.isPullback_of_openCover_of_isPullback {W Y Z X' : Scheme.{u}}
+    (fWX : W ⟶ X') (fWY : W ⟶ Y) (fXZ : X' ⟶ Z) (fYZ : Y ⟶ Z) (𝒰 : X'.OpenCover)
+    (W' : 𝒰.I₀ → Scheme.{u}) (a : ∀ i, W' i ⟶ W) (b : ∀ i, W' i ⟶ 𝒰.X i)
+    (ha : ∀ i, IsPullback (a i) (b i) fWX (𝒰.f i))
+    (H : ∀ i, IsPullback (b i) (a i ≫ fWY) (𝒰.f i ≫ fXZ) fYZ) :
+    IsPullback fWX fWY fXZ fYZ := by
+  refine Scheme.isPullback_of_openCover fWX fWY fXZ fYZ 𝒰 fun i ↦ ?_
+  refine (H i).of_iso (ha i).isoPullback (Iso.refl _) (Iso.refl _)
+    (Iso.refl _) ?_ ?_ (by simp) (by simp)
+  · simp [Scheme.Cover.pullbackHom]
+  · exact (Category.comp_id _).trans (congrArg (· ≫ fWY) (ha i).isoPullback_hom_fst.symm)
 
 end AlgebraicGeometry
 
@@ -647,5 +662,15 @@ lemma Scheme.pullback_fst_toSpecΓ_appTop {U : Scheme.{u}} {R : CommRingCat.{u}}
   rw [reassoc_of% e]
 
 end PullbackSpec
+
+/-- Two points of a pair of schemes over a common base with the same image come from a point of
+any pullback of the pair. -/
+lemma _root_.CategoryTheory.IsPullback.exists_scheme_point {P A B C : Scheme.{u}} {fst : P ⟶ A}
+    {snd : P ⟶ B} {f : A ⟶ C} {g : B ⟶ C} (h : IsPullback fst snd f g) (a : A) (b : B)
+    (hab : f a = g b) : ∃ p, fst p = a ∧ snd p = b := by
+  obtain ⟨p, hp₁, hp₂⟩ := Scheme.Pullback.exists_preimage_pullback a b hab
+  refine ⟨h.isoPullback.inv p, ?_, ?_⟩
+  · rw [← Scheme.Hom.comp_apply, IsPullback.isoPullback_inv_fst, hp₁]
+  · rw [← Scheme.Hom.comp_apply, IsPullback.isoPullback_inv_snd, hp₂]
 
 end AlgebraicGeometry

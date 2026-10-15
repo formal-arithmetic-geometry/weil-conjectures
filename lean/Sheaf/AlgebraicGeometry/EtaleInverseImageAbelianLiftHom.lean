@@ -3,7 +3,7 @@ public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.EtaleAbelianDirectImageInternal
 import Mathlib.CategoryTheory.Adjunction.Restrict
 import Mathlib.CategoryTheory.Adjunction.Unique

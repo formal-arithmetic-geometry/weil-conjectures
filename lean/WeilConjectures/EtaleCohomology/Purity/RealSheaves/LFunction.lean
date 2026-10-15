@@ -83,7 +83,7 @@ theorem constantCoeff_eulerFactor (x : C.finitePoints) :
     Polynomial.eval_pow, Polynomial.eval_X, zero_pow (p.degreeOver_ne_zero x.2),
     eval_zero_map_localPolynomial, inv_one]
 
-/-- Blueprint `sk-d-real-cohom`: Cohomology and the Euler series.
+/-- Blueprint `sk-d-real-cohom`, `d-real-cohom`: Cohomology and the Euler series.
 
 The Euler product converges in the product topology of `ℂ⟦X⟧`: the local factor at `x` is
 `1` modulo `T ^ e_x`, and only finitely many closed points have degree below a given bound
@@ -106,7 +106,7 @@ theorem multipliable_eulerFactors : Multipliable (W.eulerFactor l ρ ι) := by
   simpa only [Polynomial.coe_sub, Polynomial.coe_one, Polynomial.coe_mul, Polynomial.coe_pow,
     Polynomial.coe_X] using h'
 
-/-- Blueprint `sk-d-real-cohom`: Cohomology and the Euler series.
+/-- Blueprint `sk-d-real-cohom`, `d-real-cohom`: Cohomology and the Euler series.
 
 The Euler series `L_ι(C₀, ρ, T) = ∏_{x ∈ |C₀|} ι P_x(ρ, T ^ e_x)⁻¹` of a Weil representation
 `ρ`, the locally finite product over the closed points `x` of the curve of the inverses of the
@@ -120,7 +120,7 @@ product topology on `ℂ⟦X⟧`, in which it converges by
 noncomputable def eulerSeries : PowerSeries ℂ :=
   ∏' x : C.finitePoints, W.eulerFactor l ρ ι x
 
-/-- Blueprint `sk-d-real-cohom`: Cohomology and the Euler series.
+/-- Blueprint `sk-d-real-cohom`, `d-real-cohom`: Cohomology and the Euler series.
 
 The Euler series lies in `1 + T ℂ⟦X⟧`: every local factor has constant term `1`, because the
 local polynomial `P_x(ρ, T) = det (1 - T F_x)` does. -/

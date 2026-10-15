@@ -5,10 +5,12 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import WeilConjectures.AlgebraicGeometry.Modules.IdealSheafFiniteType
 public import WeilConjectures.AlgebraicGeometry.Modules.SectionAvoidance
 public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
@@ -49,17 +51,6 @@ namespace AlgebraicGeometry.Scheme
 section ClosedSubscheme
 
 variable {X : Scheme.{u}}
-
-/-- **`𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)}` is an epimorphism**: on every affine open `V` it is the map
-`Γ(X, V) ⟶ Γ(V(J), ι⁻¹ V)`, which is surjective since `ι` is a closed immersion. Hence
-`0 ⟶ J ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` is short exact. -/
-instance IdealSheafData.epi_toPushforwardSubscheme (J : X.IdealSheafData) :
-    Epi J.toPushforwardSubscheme := by
-  refine Modules.epi_of_forall_exists_app_eq _ fun W y x hx ↦ ?_
-  obtain ⟨V, hV, hxV, hVW⟩ := exists_isAffineOpen_mem_and_subset (U := W) hx
-  obtain ⟨z, hz⟩ := J.subschemeι.app_surjective V hV (J.subscheme.presheaf.map
-    ((TopologicalSpace.Opens.map J.subschemeι.base).map (homOfLE hVW)).op y)
-  exact ⟨V, hVW, hxV, z, hz⟩
 
 /-- **The restriction of a module to a closed subscheme.** For a quasi-coherent ideal sheaf `J`
 with closed subscheme `ι : D ⟶ X` and an invertible `𝒪_X`-module `M`, the cokernel of
@@ -266,14 +257,16 @@ lemma isNoetherian_of_isProper : IsNoetherian X := by
   exact {}
 
 include K in
-/-- On a proper scheme over a field all cohomology vanishes above some degree, by Grothendieck
-vanishing. -/
+/-- On a proper scheme over a field all quasi-coherent cohomology vanishes above some degree:
+above the number of affine opens in a finite affine open covering. -/
 lemma exists_forall_subsingleton_H :
-    ∃ D : ℕ, ∀ (M : X.Modules) (q : ℕ), D < q → Subsingleton (M.H q) := by
-  have := isNoetherian_of_isProper K (X := X)
-  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (X ↘ Spec (.of K))
-  exact ⟨d, fun M q hq ↦ subsingleton_H_of_topologicalKrullDim_lt M
-    (hd.trans_lt (by exact_mod_cast hq))⟩
+    ∃ D : ℕ, ∀ (M : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M]
+      (q : ℕ), D < q → Subsingleton (M.H q) := by
+  have := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of K))
+  have : IsSeparated (terminal.from X) := by
+    rw [← terminal.comp_from (X ↘ Spec (.of K))]
+    infer_instance
+  exact exists_forall_subsingleton_H_of_isQuasicoherent
 
 omit [IsProper (X ↘ Spec (.of K))] in
 /-- The Euler characteristic of the zero module is zero. -/
@@ -315,8 +308,10 @@ theorem eulerChar_sub_eulerChar_eq {M N : X.Modules}
     finiteDimensional_H_of_isProper (kernel (cokernel.π φ))
   have j₂ : ∀ q, FiniteDimensional K (S₂.X₂.H q) := finiteDimensional_H_of_isProper N
   have j₃ : ∀ q, FiniteDimensional K (S₂.X₃.H q) := finiteDimensional_H_of_isProper (cokernel φ)
-  have h₁ := eulerChar_eq_add_of_shortExact K hS₁ D (hD _) (hD _) (hD _)
-  have h₂ := eulerChar_eq_add_of_shortExact K hS₂ D (hD _) (hD _) (hD _)
+  have h₁ := eulerChar_eq_add_of_shortExact K hS₁ D (hD (kernel φ)) (hD M)
+    (hD (cokernel (kernel.ι φ)))
+  have h₂ := eulerChar_eq_add_of_shortExact K hS₂ D (hD (kernel (cokernel.π φ))) (hD N)
+    (hD (cokernel φ))
   have h₃ := eulerChar_congr K (Abelian.coimageIsoImage φ)
   change M.eulerChar K = (kernel φ).eulerChar K + (cokernel (kernel.ι φ)).eulerChar K at h₁
   change N.eulerChar K = (kernel (cokernel.π φ)).eulerChar K + (cokernel φ).eulerChar K at h₂

@@ -13,7 +13,16 @@ import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.ArtinSchreierSequence
 import Sheaf.AlgebraicGeometry.Curve.ConstantModCharPDegreeTwo
-import Sheaf.AlgebraicGeometry.Curve.ProperCohomology
+import Sheaf.AlgebraicGeometry.Curve.ConstantInvariance
+import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.Curve.Estimate
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.AlgebraicGeometry.Curve.Affine
+import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+import WeilConjectures.AlgebraicGeometry.Sites.Gm
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 import Sheaf.AlgebraicGeometry.IsProperOrIsAffine
 import Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest

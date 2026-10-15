@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.KInjectiveResolutions
 import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.GrothendieckComposablePair
 import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Sheaf.CategoryTheory.ImageFiltration
+import Sheaf.CategoryTheory.Filtration
 import Sheaf.CategoryTheory.KInjectiveComputes
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence

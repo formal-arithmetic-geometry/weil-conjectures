@@ -118,7 +118,7 @@ theorem nestedOpen_single_directImage_comparison
     (Functor.rightUnitor R).symm ≪≫
       Functor.isoWhiskerLeft R (Scheme.Modules.overEquiv V).unitIso ≪≫
       (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight h E
-  have hbase := Scheme.Modules.pushforward_restrict_square f (V.ι ≫ U.ι) a r
+  have hbase := Scheme.Modules.pushforwardRestrictIso
     (IsPullback.of_hasPullback f (V.ι ≫ U.ι))
   have h0 : Scheme.Modules.pushforward f ⋙ R ≅
       A ⋙ (Scheme.Modules.pushforward r ⋙ E) :=

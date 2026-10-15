@@ -126,9 +126,9 @@ theorem grothendieck_left_edge_cocycle
   · let Y := F.grothendieckSpectralObject G X
     let e (n : ℕ) := (F.grothendieckSpectralObjectHBotTopIso G hFG n).app X
     let HF (n : ℕ) : DecreasingFiltration (((F ⋙ G).rightDerived n).obj X) :=
-      { step := fun p => (Subobject.«exists» (e n).hom).obj
+      { F := fun p => (Subobject.«exists» (e n).hom).obj
           (Y.imageFiltration n ((n : ℤ) + 1 - p))
-        antitone_step := fun p q hpq =>
+        F_succ_le p :=
           leOfHom ((Subobject.«exists» (e n).hom).map
             (homOfLE (Y.imageFiltration_mono n (by omega)))) }
     refine ⟨HF, fun n p => rfl, ?_⟩

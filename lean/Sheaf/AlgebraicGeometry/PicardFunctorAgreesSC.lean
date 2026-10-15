@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import Sheaf.AlgebraicGeometry.FppfAffineSheafificationRestriction
-public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
 @[expose] public section
@@ -34,7 +34,7 @@ two sides, yielding the displayed natural isomorphism; its component at an affin
 theorem picardFunctor_agrees_affineSheafification
     (k : Type u) [Field k] (X : Scheme.{u})
     (f : X ⟶ Scheme.Spec.obj (Opposite.op (CommRingCat.of k)))
-    [Scheme.Hom.IsSmoothProjectiveCurve f] [GeometricallyIntegral f] :
+    [IsSmoothProjectiveCurve f] [GeometricallyIntegral f] :
     Nonempty
       ((CostructuredArrow.toOver Scheme.Spec
             (Scheme.Spec.obj (Opposite.op (CommRingCat.of k)))).op ⋙ (picardFunctor f).obj ≅

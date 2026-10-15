@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Transition
-import Sheaf.AlgebraicGeometry.LowerStarPlusTransitionComp
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.TransitionComposition
 import Sheaf.AlgebraicGeometry.BaseChangePullbackComparisonComp
 
 /-! # Composition of target transitions
@@ -158,7 +158,8 @@ theorem Etale.baseChangeTargetTransition_comp
     (D+((e)^*[ModuleCat.{u + 1} Λ]).obj K)
   have hc := Etale.baseChangePullbackComparison_comp Λ e π₂ a₂ e₂ wa₂ π₁ a₁ e₁ wa₁ F
   change D+((a₁)^*[ModuleCat.{u + 1} Λ]).map c₂ ≫ c₁ ≫ v = d ≫ c₀ at hc
-  have ht := Etale.lowerStarPlusTransition_comp Λ h a₂ h₂ wh₂ a₁ h₁ wh₁
+  have ht := Etale.lowerStarPlusTransition_comp Λ a₂ a₁ (a₁ ≫ a₂) rfl h h₂ h₁ wh₂ wh₁
+    (by rw [Category.assoc, wh₂, wh₁])
     (D+((e)^*[ModuleCat.{u + 1} Λ]).obj K)
   have hn := lower_transition_naturality Λ a₁ h₂ h₁ wh₁ c₂
   have hd := transition_with_coefficients_comp

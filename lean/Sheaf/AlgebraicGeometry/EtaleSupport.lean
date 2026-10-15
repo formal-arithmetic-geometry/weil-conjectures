@@ -8,7 +8,7 @@ module
 public import WeilConjectures.ZetaSeries
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 
 /-!

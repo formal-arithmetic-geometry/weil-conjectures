@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
-public import Sheaf.CategoryTheory.ImageFiltration
+public import Sheaf.CategoryTheory.Filtration
 import Sheaf.CategoryTheory.FinitePageImageLift
 import Sheaf.CategoryTheory.FinitePageGradedQuotient
 import Sheaf.CategoryTheory.HalfPlaneSharpBounds
@@ -96,9 +96,7 @@ private theorem transport_filtration_graded
           (F.antitone_step (by omega))) ≫ gr.hom := by
   have hm (i : ℤ) : Subobject.mk ((F.step i).arrow ≫ c) = G.step i := by
     rw [hG]
-    dsimp [DecreasingFiltration.image]
-    rw [Subobject.exists_iso_map]
-    conv_rhs => rw [← Subobject.mk_arrow (F.step i), Subobject.map_mk]
+    exact (imageSubobject_mono ((F.step i).arrow ≫ c)).symm
   let e (i : ℤ) : (F.step i : B) ≅ (G.step i : B) :=
     Subobject.isoOfMkEq ((F.step i).arrow ≫ c) (G.step i) (hm i)
   have he (i : ℤ) : (e i).hom ≫ (G.step i).arrow = (F.step i).arrow ≫ c := by

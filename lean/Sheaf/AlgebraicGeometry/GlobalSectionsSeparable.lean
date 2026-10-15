@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
@@ -41,7 +41,7 @@ global-sections extension.
 -/
 theorem globalSections_isSeparable_of_isSmoothProjectiveCurve
     (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
-    [Scheme.Hom.IsSmoothProjectiveCurve (X ↘ Spec (.of k))]
+    [IsSmoothProjectiveCurve (X ↘ Spec (.of k))]
     (hA : IsField Γ(X, ⊤)) :
     @Algebra.IsSeparableExtension k Γ(X, ⊤) _ hA.toField
       (Scheme.globalSectionsRingHom k (X := X)).toAlgebra := by

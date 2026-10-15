@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Sheaf.AlgebraicGeometry.PullbackSectionsDiagram

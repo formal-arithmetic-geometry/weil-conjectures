@@ -81,7 +81,8 @@ theorem strictHenselizationPointedMap_core
     (Scheme.strictHenselizationNeighbourhoods (xU ≫ i))).inverse
   let q := (rep ⋙ incl).op
   let cmp : Scheme.strictHenselizationRing (xU ≫ i) ≅ cn.pt :=
-    (HasColimit.isoOfEquivalence q.asEquivalence (Iso.refl _)) ≪≫
+    (Scheme.smallStrictHenselizationColimitIso (xU ≫ i)).symm ≪≫
+      (HasColimit.isoOfEquivalence q.asEquivalence (Iso.refl _)) ≪≫
       colimit.isoColimitCocone ⟨cn, hcn⟩
   let ringIso : Scheme.strictHenselizationRing barY ≅ c.pt :=
     eqToIso (congrArg Scheme.strictHenselizationRing hfac.symm) ≪≫

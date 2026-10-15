@@ -42,6 +42,7 @@ they realise is about abelian varieties and so that they do not shadow
 - `AlgebraicGeometry.IsAbelianVariety.galoisRepresentation`: the action of `Gal(K̄/K)` on `T_ℓ A`.
 - `AlgebraicGeometry.IsAbelianVariety.pointsAddEquivGeometricPoints`: over an algebraically
   closed field `K`, `A(K) ≃ A(K̄)`.
+- `AlgebraicGeometry.IsAbelianVariety.tateModuleEquivTorsionPoints`: `T_ℓ A = lim_n A[ℓ ^ n](K̄)`.
 
 ## Main statements
 
@@ -125,7 +126,12 @@ variable {K : Type u} [Field K] (ℓ : ℕ) [Fact ℓ.Prime] (A : Over (Spec (.o
 
 The *`ℓ`-adic Tate module* of an abelian variety `A` over `K` is the inverse limit
 `T_ℓ A = lim_n A[ℓ^n](K̄)`, the transition map from level `n + 1` to level `n` being
-multiplication by `ℓ`. It is a `ℤ_[ℓ]`-module. -/
+multiplication by `ℓ`. It is a `ℤ_[ℓ]`-module.
+
+This is also blueprint `def-wf-abelian-tate-module`. It is defined as the Tate module
+`T_ℓ (A(K̄))` of the group of geometric points; the identification with compatible systems of
+points of the torsion subgroup schemes `A[ℓ ^ n]` is
+`AlgebraicGeometry.IsAbelianVariety.tateModuleEquivTorsionPoints`. -/
 noncomputable def tateModule :
     AddSubgroup (∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) :=
   AddCommGroup.tateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A))
@@ -146,6 +152,53 @@ noncomputable instance rationalTateModule.instAddCommGroup :
 noncomputable instance rationalTateModule.instModule : Module ℚ_[ℓ] (rationalTateModule ℓ A) :=
   inferInstanceAs (Module ℚ_[ℓ]
     (AddCommGroup.rationalTateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A))))
+
+/-- Blueprint `def-wf-abelian-tate-module`: The Tate module used in the curve argument.
+
+The Tate module `T_ℓ A` is the inverse limit `lim_n A[ℓ ^ n](K̄)` of the geometric points of the
+`ℓ ^ n`-torsion subgroup schemes `A[ℓ ^ n] = AlgebraicGeometry.torsionSubgroupScheme A (ℓ ^ n)`,
+the transition map from level `n + 1` to level `n` being multiplication by `ℓ`
+(`AlgebraicGeometry.torsionSubgroupSchemeMul`). Its elements are thus the compatible systems
+`(x n)_n` of points `x n : Spec K̄ ⟶ A[ℓ ^ n]`, matched with the elements of `T_ℓ (A(K̄))` by
+`AlgebraicGeometry.torsionByPointsEquiv`. -/
+noncomputable def tateModuleEquivTorsionPoints :
+    tateModule ℓ A ≃ {x : ∀ n : ℕ, Scheme.specAlgebraicClosure K ⟶ torsionSubgroupScheme A (ℓ ^ n)
+      // ∀ n, x (n + 1) ≫ torsionSubgroupSchemeMul A ℓ (pow_succ' ℓ n) = x n} where
+  toFun t := ⟨fun n ↦ torsionByPointsEquiv A (ℓ ^ n) _
+      ⟨(t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n, by
+        rw [AddSubgroup.torsionBy, Submodule.mem_toAddSubgroup, Submodule.mem_torsionBy_iff,
+          Nat.cast_pow]
+        exact t.2.1 n⟩, fun n ↦ by
+    refine (cancel_mono (torsionSubgroupScheme.ι A (ℓ ^ n))).mp ?_
+    dsimp only
+    rw [Category.assoc, torsionSubgroupSchemeMul_ι, comp_pow, torsionByPointsEquiv_comp_ι,
+      torsionByPointsEquiv_comp_ι]
+    change ((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) (n + 1)).toMul ^ ℓ =
+      ((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n).toMul
+    rw [← t.2.2 n, natCast_zsmul, toMul_nsmul]⟩
+  invFun x := ⟨fun n ↦ .ofMul (x.1 n ≫ torsionSubgroupScheme.ι A (ℓ ^ n)), fun n ↦ by
+      change Additive.ofMul ((x.1 n ≫ torsionSubgroupScheme.ι A (ℓ ^ n)) ^ (ℓ ^ n)) = 0
+      rw [← comp_pow, torsionSubgroupScheme.ι_pow, MonObj.comp_one]
+      rfl,
+    fun n ↦ by
+      change Additive.ofMul ((x.1 (n + 1) ≫ torsionSubgroupScheme.ι A (ℓ ^ (n + 1))) ^ ℓ) =
+        .ofMul (x.1 n ≫ torsionSubgroupScheme.ι A (ℓ ^ n))
+      rw [← x.2 n, Category.assoc, torsionSubgroupSchemeMul_ι, comp_pow]⟩
+  left_inv t := Subtype.ext <| funext fun n ↦
+    congrArg Additive.ofMul (torsionByPointsEquiv_comp_ι A (ℓ ^ n) _ _)
+  right_inv x := Subtype.ext <| funext fun n ↦
+    (cancel_mono (torsionSubgroupScheme.ι A (ℓ ^ n))).mp
+      (torsionByPointsEquiv_comp_ι A (ℓ ^ n) _ _)
+
+omit [Fact ℓ.Prime] in
+/-- The point of `A[ℓ ^ n]` attached to `t ∈ T_ℓ A` by
+`AlgebraicGeometry.IsAbelianVariety.tateModuleEquivTorsionPoints` is the `n`-th coordinate of
+`t`, viewed in `A[ℓ ^ n]`. -/
+theorem tateModuleEquivTorsionPoints_apply_comp_ι (t : tateModule ℓ A) (n : ℕ) :
+    (tateModuleEquivTorsionPoints ℓ A t).1 n ≫ torsionSubgroupScheme.ι A (ℓ ^ n) =
+      ((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n).toMul := by
+  rw [tateModuleEquivTorsionPoints, Equiv.coe_fn_mk]
+  exact torsionByPointsEquiv_comp_ι A (ℓ ^ n) _ _
 
 omit [IsAbelianVariety A] in
 /-- Over an algebraically closed field `K`, the structure morphism `Spec K̄ ⟶ Spec K` is an

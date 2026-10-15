@@ -159,13 +159,6 @@ section Generation
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- The derived direct image along an identity is the identity. -/
-noncomputable def rightDerivedLowerStarIdIso (Y : Scheme.{u}) :
-    R((𝟙 Y)_*[ModuleCat.{u + 1} Λ]) ≅ 𝟭 _ :=
-  (Etale.lowerStar (ModuleCat.{u + 1} Λ) (𝟙 Y)).rightDerivedFunctorIsoMapDerivedCategory ≪≫
-    Functor.mapDerivedCategoryNatIso (Etale.lowerStarId (ModuleCat.{u + 1} Λ) Y) ≪≫
-    Functor.mapDerivedCategoryIdIso _
-
 omit [Finite Λ] in
 variable {Λ} in
 /-- Tor amplitude through the canonical t-structure gives Tor amplitude tested on one homology

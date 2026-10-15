@@ -480,4 +480,19 @@ lemma torAmplitudeIn_of_exactPairing {a b : ℤ} {K L : DerivedCategory C} [Exac
     rw [← (tensorLeftHomEquiv ((singleFunctor C 0).obj F) K L Y).symm_apply_apply f, h]
     simp [tensorLeftHomEquiv]
 
+/-- A right adjoint `G` of `K ⊗ᴸ -`, for `K` vanishing above `b`, sends an object vanishing below
+`c` to one vanishing below `c - b`: maps `Y ⟶ G M` correspond to maps `K ⊗ᴸ Y ⟶ M`, which vanish
+for `Y` vanishing above `c - b - 1`, since `K ⊗ᴸ Y` then vanishes above `c - 1`. In particular
+this applies to the internal hom `RHom(K, -)`. -/
+lemma isGE_obj_of_adjunction {K : DerivedCategory C} {G : DerivedCategory C ⥤ DerivedCategory C}
+    (adj : tensorLeft K ⊣ G) (M : DerivedCategory C) (b c : ℤ) [K.IsLE b] [M.IsGE c] :
+    (G.obj M).IsGE (c - b) := by
+  refine (TStructure.t.isGE_iff_orthogonal (c - b - 1) (c - b) (by omega) _).2 fun Y f hY ↦ ?_
+  have : Y.IsLE (c - b - 1) := hY
+  have : TStructure.t.IsLE ((tensorLeft K).obj Y) (b + (c - b - 1)) := isLE_tensor K Y b _
+  obtain ⟨g, rfl⟩ := (adj.homEquiv Y M).surjective f
+  rw [TStructure.t.zero g (b + (c - b - 1)) c (by omega)]
+  have : G.IsRightAdjoint := adj.isRightAdjoint
+  rw [Adjunction.homEquiv_unit, Functor.map_zero, Limits.comp_zero]
+
 end DerivedCategory

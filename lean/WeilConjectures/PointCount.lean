@@ -46,6 +46,8 @@ a finite field `κ` with `[κ : k] = d` admits exactly `d` distinct `k`-embeddin
 - `AlgebraicGeometry.Scheme.Hom.finite_setOf_degreeOver_le`: a scheme of finite type
   over a finite field has finitely many points of bounded degree.
 - `AlgebraicGeometry.Scheme.Hom.pointCount_eq_sum`: the point counting formula.
+- `AlgebraicGeometry.Scheme.Hom.finsum_fieldPoints_eq_sum`: its weighted form, for a function on
+  the rational points depending only on the underlying point.
 -/
 
 universe u
@@ -317,6 +319,13 @@ private noncomputable def fieldPointsEquivSigma (f : X.Hom (Spec (.of k))) (K : 
       left_inv := fun _ ↦ rfl
       right_inv := fun _ ↦ rfl }
 
+/-- The rational point attached to a point `x` of `X` and an embedding of its residue field lies
+over `x`. -/
+private lemma fieldPointsEquivSigma_symm_base (f : X.Hom (Spec (.of k))) (K : Type u) [Field K]
+    [Algebra k K] (q : Σ x : X, f.FieldPointFiber K x) :
+    ((fieldPointsEquivSigma f K).symm q).1.base (IsLocalRing.closedPoint K) = q.1 :=
+  X.fromSpecResidueField_apply q.1 _
+
 /-- Counting the fibers of the point-embedding correspondence via the Galois theory of
 finite fields: over the degree `n` extension of `k`, the fiber over `x` has `deg x`
 elements if `deg x ∣ n` and is empty otherwise. -/
@@ -440,22 +449,71 @@ theorem Hom.pointCount_eq_sum [Finite k] (f : X.Hom (Spec (.of k)))
     _ = ∑ x ∈ T', f.degreeOver x.1 :=
         Finset.sum_coe_sort T' (fun x : X.finitePoints ↦ f.degreeOver x.1)
 
+/-- **The weighted point counting formula**: a function `φ` on the points of `X` rational over
+the degree `n` extension of `k`, which only depends on the underlying point `x` of `X` through
+a function `g`, sums to `∑ deg x • g x`, the sum running over the points of `X` whose degree
+divides `n`. For `φ = 1` this is `AlgebraicGeometry.Scheme.Hom.pointCount_eq_sum`. -/
+theorem Hom.finsum_fieldPoints_eq_sum [Finite k] (f : X.Hom (Spec (.of k)))
+    [QuasiCompact f] [LocallyOfFiniteType f] {n : ℕ} (hn : n ≠ 0) {M : Type*} [AddCommMonoid M]
+    (φ : f.fieldPoints (FiniteField.galoisExtension k n) → M) (g : X.finitePoints → M)
+    (hφ : ∀ y (x : X.finitePoints), y.1.base (IsLocalRing.closedPoint _) = x.1 → φ y = g x)
+    {T : Finset X.finitePoints}
+    (hT : ∀ x : X.finitePoints, f.degreeOver x.1 ∣ n → x ∈ T) :
+    ∑ᶠ y, φ y = ∑ x ∈ T with f.degreeOver x.1 ∣ n, f.degreeOver x.1 • g x := by
+  classical
+  set K := FiniteField.galoisExtension k n with hK
+  have : Finite K := Module.finite_of_finite k
+  set T' : Finset X.finitePoints := T.filter (fun x ↦ f.degreeOver x.1 ∣ n) with hT'
+  have h₁ : ∀ (x : X), f.FieldPointFiber K x → x ∈ X.finitePoints := fun x φ ↦
+    mem_finitePoints_of_fieldPointFiber f φ
+  have h₂ : ∀ (x : X) (φ : f.FieldPointFiber K x), (⟨x, h₁ x φ⟩ : X.finitePoints) ∈ T' :=
+    fun x φ ↦ Finset.mem_filter.mpr
+      ⟨hT _ (degreeOver_dvd_of_fieldPointFiber f hn φ),
+        degreeOver_dvd_of_fieldPointFiber f hn φ⟩
+  let E : (Σ x : X, f.FieldPointFiber K x) ≃ Σ x : T', f.FieldPointFiber K x.1.1 :=
+    { toFun := fun p ↦ ⟨⟨⟨p.1, h₁ p.1 p.2⟩, h₂ p.1 p.2⟩, p.2⟩
+      invFun := fun q ↦ ⟨q.1.1.1, q.2⟩
+      left_inv := fun _ ↦ rfl
+      right_inv := fun _ ↦ rfl }
+  have : ∀ q : T', Finite (f.FieldPointFiber K q.1.1) := fun q ↦
+    finite_fieldPointFiber f q.1.2
+  let _ : ∀ q : T', Fintype (f.FieldPointFiber K q.1.1) := fun q ↦ Fintype.ofFinite _
+  rw [← finsum_comp_equiv ((fieldPointsEquivSigma f K).trans E).symm,
+    finsum_eq_sum_of_fintype, Fintype.sum_sigma]
+  calc ∑ q : T', ∑ p : f.FieldPointFiber K q.1.1,
+        φ (((fieldPointsEquivSigma f K).trans E).symm ⟨q, p⟩)
+      = ∑ q : T', ∑ _p : f.FieldPointFiber K q.1.1, g q.1 :=
+        Finset.sum_congr rfl fun q _ ↦ Finset.sum_congr rfl fun p _ ↦ hφ _ _ (by
+          rw [Equiv.symm_trans_apply]
+          exact fieldPointsEquivSigma_symm_base f K _)
+    _ = ∑ q : T', f.degreeOver q.1.1 • g q.1 := Finset.sum_congr rfl fun q _ ↦ by
+        rw [Finset.sum_const, Finset.card_univ, Fintype.card_eq_nat_card,
+          nat_card_fieldPointFiber f hn, if_pos (Finset.mem_filter.mp q.2).2]
+    _ = ∑ x ∈ T', f.degreeOver x.1 • g x :=
+        Finset.sum_coe_sort T' (fun x : X.finitePoints ↦ f.degreeOver x.1 • g x)
+
+/-- On a scheme locally of finite type over a finite field, the points with finite residue field
+are the closed points (`AlgebraicGeometry.Scheme.finitePoints_eq_closedPoints`). -/
+theorem Hom.finitePoints_eq_closedPoints [Finite k] (f : X.Hom (Spec (.of k)))
+    [LocallyOfFiniteType f] : X.finitePoints = closedPoints X := by
+  let g : ULift.{u} ℤ →+* k := (Int.castRingHom k).comp ULift.ringEquiv.toRingHom
+  have hg : g.FiniteType := by
+    have h₁ : (algebraMap ℤ k).FiniteType :=
+      (RingHom.finite_algebraMap.2 Module.Finite.of_finite).finiteType
+    exact h₁.comp (RingHom.FiniteType.of_surjective _ ULift.ringEquiv.surjective)
+  have : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom g)) := by
+    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)]
+    exact hg
+  exact Scheme.finitePoints_eq_closedPoints X (f ≫ Spec.map (CommRingCat.ofHom g))
+
 /-- A nonempty quasi-compact scheme locally of finite type over a finite field has a point
 with finite residue field: it has a closed point, and closed points of such a scheme have
-finite residue fields (`AlgebraicGeometry.Scheme.finitePoints_eq_closedPoints`). -/
+finite residue fields (`AlgebraicGeometry.Scheme.Hom.finitePoints_eq_closedPoints`). -/
 theorem Hom.exists_mem_finitePoints [Finite k] (f : X.Hom (Spec (.of k)))
     [LocallyOfFiniteType f] [QuasiCompact f] [Nonempty X] : ∃ x, x ∈ X.finitePoints := by
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
   obtain ⟨x, -, hx⟩ := isClosed_univ.exists_closed_singleton (X := X) Set.univ_nonempty
-  let φ : ULift.{u} ℤ →+* k := (Int.castRingHom k).comp ULift.ringEquiv.toRingHom
-  have hφ : φ.FiniteType := by
-    have h₁ : (algebraMap ℤ k).FiniteType :=
-      (RingHom.finite_algebraMap.2 Module.Finite.of_finite).finiteType
-    exact h₁.comp (RingHom.FiniteType.of_surjective _ ULift.ringEquiv.surjective)
-  have : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom φ)) := by
-    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)]
-    exact hφ
-  rw [finitePoints_eq_closedPoints X (f ≫ Spec.map (CommRingCat.ofHom φ))]
+  rw [f.finitePoints_eq_closedPoints]
   exact ⟨x, hx⟩
 
 end AlgebraicGeometry.Scheme

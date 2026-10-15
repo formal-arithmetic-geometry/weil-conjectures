@@ -94,7 +94,7 @@ noncomputable def galoisUnderlyingSetSheaf {Y : Scheme.{u}}
 Source: Stacks 0DV5 (3) (blueprint: cor-galois-lisse-representations). -/
 noncomputable def galoisUnderlyingFLC {Y : Scheme.{u}}
     (R : Type (u + 1)) [Ring R] (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
-    (h : IsFiniteLocallyConstantEtaleSheafOfSets (galoisUnderlyingSetSheaf R F)) : Y.FLC :=
+    (h : IsLisseEtaleSheafOfSets (galoisUnderlyingSetSheaf R F)) : Y.FLC :=
   ⟨galoisUnderlyingSetSheaf R F, h⟩
 
 /-- Diagonal action on the tensor product of the underlying representation modules.
@@ -116,7 +116,7 @@ structure GaloisLisseFiniteData
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
     [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)] where
-  γ : G ≃ₜ* Aut (ObjectProperty.ι (IsFiniteLocallyConstantEtaleSheafOfSets (T := Y)) ⋙
+  γ : G ≃ₜ* Aut (ObjectProperty.ι (IsLisseEtaleSheafOfSets (T := Y)) ⋙
     (pointSmallEtale y).sheafFiber (A := Type (u + 1)))
   Φ : Y.FiniteEtale ≌ Y.FLC
   η : Φ.functor ⋙ ObjectProperty.ι _ ⋙ (pointSmallEtale y).sheafFiber (A := Type (u + 1)) ≅
@@ -223,7 +223,7 @@ def galoisFiniteEvaluationAction
     [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
     (d : GaloisLisseFiniteData y G) : Prop :=
   ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], ∀ F : LisseModuleSheafCategory Y Λ, ∃ h :
-    IsFiniteLocallyConstantEtaleSheafOfSets (galoisUnderlyingSetSheaf Λ F.obj), ∃ κ :
+    IsLisseEtaleSheafOfSets (galoisUnderlyingSetSheaf Λ F.obj), ∃ κ :
     (((pointSmallEtale y).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F.obj) ≃ (((pointSmallEtale
     y).sheafFiber (A := Type (u + 1))).obj (galoisUnderlyingSetSheaf Λ F.obj)), (∀ (U : Y.Etale) (x
     : (pointSmallEtale y).fiber.obj U) (s : F.obj.obj.obj (op U)), κ ((pointSmallEtale
@@ -454,7 +454,7 @@ def galoisIntegralEvaluationAction
     (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
     (d : GaloisLisseAdicData y G c l Q) : Prop :=
   ∀ (E : Padic.FiniteCoefficientFields l Q) (F : LisseIntegralSheaf l E.val Y) (n : ℕ), ∃ h :
-    IsFiniteLocallyConstantEtaleSheafOfSets (galoisUnderlyingSetSheaf
+    IsLisseEtaleSheafOfSets (galoisUnderlyingSetSheaf
     (Padic.coefficientExtensionIntegers l E.val) (F.obj.obj (op n))), ∃ κ : (((pointSmallEtale
     y).ulift.{u + 1}.sheafFiber (A := ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l
     E.val))).obj (F.obj.obj (op n))) ≃ (((pointSmallEtale y).sheafFiber (A := Type (u + 1))).obj

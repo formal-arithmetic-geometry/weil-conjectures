@@ -35,7 +35,7 @@ variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensiona
 
 /-- If a scalar `c` acts on a nonzero invariant subquotient `S ⧸ U` of `V`, then `c` is an
 eigenvalue of the endomorphism on all of `V`.
-(blueprint: `sk-p-linear-filtration`) -/
+(blueprint: `sk-p-linear-filtration`, `p-linear-filtration`) -/
 theorem hasEigenvalue_of_subquotient (f : Module.End K V) {U S : Submodule K V} (hUS : U < S)
     (hU : U ≤ U.comap f) (hS : S ≤ S.comap f) (c : K) (hc : ∀ x ∈ S, f x - c • x ∈ U) :
     f.HasEigenvalue c := by

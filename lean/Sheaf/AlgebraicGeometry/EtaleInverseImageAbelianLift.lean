@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # EtaleInverseImageAbelianLift

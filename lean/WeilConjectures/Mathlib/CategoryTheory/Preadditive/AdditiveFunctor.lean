@@ -11,7 +11,8 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 # Additive functors and direct summands of finite sums
 
 An additive functor preserves the property that an object is a direct summand of a finite direct
-sum of copies of another object.
+sum of copies of another object. The quasi-inverse of an additive equivalence is additive
+(`CategoryTheory.Functor.additive_inv`).
 -/
 
 @[expose] public section
@@ -55,4 +56,76 @@ instance (priority := 100) preservesBiproductsOfShape_of_additive {J : Type w} [
           simp_rw [F.mapBicone_π, F.mapBicone_ι, ← F.map_comp]
           erw [← F.map_sum, ← F.map_id, IsBilimit.total hb])⟩ } }
 
+/-- The quasi-inverse of an additive equivalence of preadditive categories is additive. -/
+instance additive_inv [F.IsEquivalence] [F.Additive] : F.inv.Additive :=
+  have : F.asEquivalence.functor.Additive := ‹F.Additive›
+  F.asEquivalence.inverse_additive
+
 end CategoryTheory.Functor
+
+namespace CategoryTheory
+
+open Limits
+
+section Biproduct
+
+variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+  [HasFiniteBiproducts C] {ι : Type} [Finite ι]
+
+/-- An additive functor carries a morphism `⨁ X ⟶ Y` out of a finite biproduct of copies of `X`
+which is an isomorphism to a morphism out of a biproduct which is an isomorphism. -/
+lemma Functor.isIso_biproductDesc_map (F : C ⥤ D) [F.Additive] {X Y : C} (φ : ι → (X ⟶ Y))
+    [HasFiniteBiproducts D] [IsIso (biproduct.desc φ)] :
+    IsIso (biproduct.desc fun i ↦ F.map (φ i)) := by
+  have hc : biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) =
+      (F.mapBiproduct fun _ : ι ↦ X).inv := by
+    ext i
+    simp [Functor.mapBiproduct]
+  have h : (biproduct.desc fun i ↦ F.map (φ i)) =
+      biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) ≫
+        F.map (biproduct.desc φ) := by
+    ext i
+    simp [← F.map_comp]
+  rw [h, hc]
+  infer_instance
+
+
+/-- If an additive functor carries the components of a morphism out of a finite biproduct to
+the components of a morphism which is an isomorphism, it carries the morphism to an
+isomorphism. -/
+lemma Functor.isIso_map_biproductDesc (F : C ⥤ D) [F.Additive] {X Y : C} (φ : ι → (X ⟶ Y))
+    [HasFiniteBiproducts D] [IsIso (biproduct.desc fun i ↦ F.map (φ i))] :
+    IsIso (F.map (biproduct.desc φ)) := by
+  have hc : IsIso (biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i))) := by
+    have : biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) =
+        (F.mapBiproduct fun _ : ι ↦ X).inv := by
+      ext i
+      simp [Functor.mapBiproduct]
+    rw [this]
+    infer_instance
+  have h : (biproduct.desc fun i ↦ F.map (φ i)) =
+      biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) ≫
+        F.map (biproduct.desc φ) := by
+    ext i
+    simp [← F.map_comp]
+  have : IsIso (biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) ≫
+      F.map (biproduct.desc φ)) := h ▸ inferInstance
+  exact IsIso.of_isIso_comp_left
+    (biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i))) _
+
+/-- The property that a morphism `⨁ X ⟶ Y` out of a biproduct of copies of `X`, given by maps
+`φ i : X ⟶ Y`, is an isomorphism is invariant under isomorphisms of `X` and `Y` compatible with
+the maps. -/
+lemma isIso_biproductDesc_of_iso {X Y X' Y' : C} (φ : ι → (X ⟶ Y)) (φ' : ι → (X' ⟶ Y'))
+    (e : X ≅ X') (e' : Y ≅ Y') (h : ∀ i, φ i ≫ e'.hom = e.hom ≫ φ' i)
+    (h' : IsIso (biproduct.desc φ')) : IsIso (biproduct.desc φ) := by
+  have hφ : biproduct.desc φ = biproduct.map (fun _ ↦ e.hom) ≫ biproduct.desc φ' ≫ e'.inv := by
+    ext i
+    simp [← reassoc_of% h i]
+  have : IsIso (biproduct.map fun _ : ι ↦ e.hom) := (biproduct.mapIso fun _ ↦ e).isIso_hom
+  rw [hφ]
+  infer_instance
+
+end Biproduct
+
+end CategoryTheory

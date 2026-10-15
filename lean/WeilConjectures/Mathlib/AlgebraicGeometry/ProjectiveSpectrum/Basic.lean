@@ -66,6 +66,21 @@ lemma Proj.basicOpen_add_le (f g : A) :
   rw [not_or, not_not, not_not] at h
   exact hx (add_mem h.1 h.2)
 
+/-- **The scheme `Proj S`.** For a graded ring `S = ⨁ 𝒜 i`, the points of `Proj 𝒜` are the
+homogeneous primes not containing the irrelevant ideal `S₊`, and for `f` homogeneous of positive
+degree the standard open `D₊(f)` is the affine scheme `Spec S₍f₎`, the restriction maps being the
+graded localisation maps (`AlgebraicGeometry.Proj.basicOpenIsoSpec`, `Proj.awayι`).
+
+Projective space `ℙⁿ_k` is used through `AlgebraicGeometry.ProjectiveSpace`, the base change of
+`Proj ℤ[x₀, …, xₙ]` (`AlgebraicGeometry.Proj.projectiveSpaceOverAffine`), whose standard opens
+`D₊(xᵢ)` are affine spaces (`AlgebraicGeometry.ProjectiveSpace.standardOpenIso`).
+
+(blueprint: `def-pc-proj`) -/
+theorem Proj.isAffineOpen_basicOpen_and_nonempty_iso {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m)
+    (hm : 0 < m) : IsAffineOpen (Proj.basicOpen 𝒜 f) ∧
+      Nonempty ((Proj.basicOpen 𝒜 f).toScheme ≅ Spec (.of (Away 𝒜 f))) :=
+  ⟨Proj.isAffineOpen_basicOpen 𝒜 f f_deg hm, ⟨Proj.basicOpenIsoSpec 𝒜 f f_deg hm⟩⟩
+
 namespace Proj
 
 variable {X Y : Scheme.{u}}

@@ -94,15 +94,6 @@ theorem isConstructible_of_iso {X : Scheme.{u}}
   ⟨S, fun i ↦ isFiniteLocallyConstant_of_iso
     (((S.immersion i))^*[ModuleCat.{u + 1} Λ].mapIso e) (hS i)⟩
 
-/-- The scheme `X`, with the identity, is a terminal object of its small étale site. -/
-noncomputable def _root_.AlgebraicGeometry.Scheme.Etale.isTerminalMkId (X : Scheme.{u}) :
-    IsTerminal (Scheme.Etale.mk (𝟙 X)) :=
-  IsTerminal.ofUniqueHom (fun V ↦ MorphismProperty.Over.homMk V.hom) fun V f ↦
-    MorphismProperty.Over.Hom.ext <| by
-      change f.left = V.hom
-      rw [← MorphismProperty.Over.w f]
-      exact (Category.comp_id _).symm
-
 variable (Λ) in
 /-- The comparison pullback `ν^*` sends constant étale sheaves to constant pro-étale sheaves:
 `constantSheaf ⋙ ν^*` and `constantSheaf` are both left adjoint to the global sections, as the

@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Finite.BaseChange
 
 Assume that the projection `ℙ¹_S ⟶ S` satisfies the base change property
 `AlgebraicGeometry.Etale.HasTorsionBaseChange` for every scheme `S`. Then every proper morphism
-satisfies it (`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_reduction`).
+satisfies it (`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper`).
 
 The proof follows the Stacks Project:
 
@@ -96,7 +96,7 @@ has the base change property, as `i` is finite and `pₙ : ℙⁿ_Y ⟶ Y` has i
 the closed immersion `(π, i) : X̃ ⟶ ℙⁿ_X` with the projection `ℙⁿ_X ⟶ X`. Cancellation along the
 proper surjection `π` gives the base change property for `f`.
 (blueprint: `prop-weil-pbc-reduction-to-projective-line`) -/
-theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_reduction_of_isAddTorsion
+theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_of_isAddTorsion
     (hΛ : IsAddTorsion Λ)
     (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] : Etale.HasTorsionBaseChange Λ f := by
@@ -134,12 +134,12 @@ need a torsion coefficient ring, which is reached by the change of coefficients
 `Λ ↝ Λ ⧸ pΛ`.
 (blueprint: `sk-thm-reduction`, `prop-weil-pbc-reduction-to-projective-line`) -/
 @[stacks 0A4F]
-theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_reduction
+theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper
     (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
     Etale.HasTorsionBaseChange Λ f :=
   Etale.hasTorsionBaseChange_of_forall_prime Λ f fun p hp ↦
-    Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_reduction_of_isAddTorsion _
+    Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_of_isAddTorsion _
       (isAddTorsion_quotient_span_natCast Λ hp.pos) (fun S ↦ (h S).quotient Λ p) f
 
 end AlgebraicGeometry

@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-import Sheaf.CategoryTheory.RightDerivedBaseChangeZeroUnit
+public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingleZero
 import Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres
 import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 import Sheaf.AlgebraicGeometry.EtaleChartSectionsArrowComparison
@@ -391,8 +391,7 @@ theorem Etale.isIso_baseChangeMap_app_of_flat [Flat p] [LocallyOfFinitePresentat
       (by rw [reassoc_of% hφ']; simp [c])] at h₂
     exact IsIso.of_isIso_comp_left (Etale.upperStarSectionsMap _ p ((g)_*[_].obj F) φ) _
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
+open scoped CategoryTheory.Functor in
 /-- In degree zero the base-change map `AlgebraicGeometry.Etale.baseChangeHomologyMap` of the
 derived base-change morphism is, up to isomorphism of arrows, the underived base-change map
 `AlgebraicGeometry.Etale.baseChangeMap`: the degree-zero homology of
@@ -403,48 +402,92 @@ theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_zero (sq : IsPullback e h 
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Nonempty (Arrow.mk (Etale.baseChangeHomologyMap Λ sq 0 F) ≅
       Arrow.mk ((Etale.baseChangeMap _ sq.toCommSq).app F)) := by
-  let G := (g)_*[ModuleCat.{u + 1} Λ]
-  let G' := (h)_*[ModuleCat.{u + 1} Λ]
-  let β := (e)^*[ModuleCat.{u + 1} Λ]
-  let γ := (p)^*[ModuleCat.{u + 1} Λ]
-  let δ := Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq
-  let l := (γ.mapDerivedCategoryPlusHomologyFunctorIso 0).symm.app
-      (G.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≪≫
-    γ.mapIso ((G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0).app F)
-  let r := (DerivedCategory.Plus.homologyFunctor _ 0).mapIso
-      (G'.rightDerivedFunctorPlus.mapIso ((β.mapDerivedCategoryPlusSingleFunctor 0).app F)) ≪≫
-    (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0).app (β.obj F)
-  have hδ : Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq =
-      Functor.rightDerivedFunctorPlusBaseChange δ := by
-    rw [Etale.baseChange_eq_derivedBaseChangeMapPlus]
+  -- the single complex `F[0]` in the homotopy category
+  let K₀ : CochainComplex.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    ⟨(HomologicalComplex.single _ (.up ℤ) 0).obj F, 0, inferInstance⟩
+  let K := (HomotopyCategory.Plus.quotient _).obj K₀
+  -- its image in the derived category is `F[0]`
+  let ε : DerivedCategory.Plus.Qh.obj K ≅ (DerivedCategory.Plus.singleFunctor _ 0).obj F :=
+    (DerivedCategory.Plus.ι.preimageIso (X := (DerivedCategory.Plus.singleFunctor _ 0).obj F)
+      (Y := DerivedCategory.Plus.Qh.obj K)
+      ((DerivedCategory.singleFunctorIsoCompQ _ 0).app F ≪≫
+        (DerivedCategory.quotientCompQhIso _).symm.app _)).symm
+  -- step 1: move from `F[0]` to `Qh K`
+  have e₁ : Arrow.mk (Etale.baseChangeHomologyMap Λ sq 0 F) ≅
+      Arrow.mk ((DerivedCategory.Plus.homologyFunctor _ 0).map
+        ((Etale.derivedBaseChangeMapPlus _ sq.toCommSq).app (DerivedCategory.Plus.Qh.obj K))) := by
+    have hb : Etale.baseChangeHomologyMap Λ sq 0 F = (DerivedCategory.Plus.homologyFunctor _ 0).map
+        ((Etale.derivedBaseChangeMapPlus _ sq.toCommSq).app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) := by
+      rw [Etale.baseChangeHomologyMap, Etale.baseChangeHomologyNatTrans_eq,
+        Etale.baseChange_eq_derivedBaseChangeMapPlus]
+      rfl
+    have hn := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map
+      ((Etale.derivedBaseChangeMapPlus _ sq.toCommSq).naturality ε.hom)
+    simp only [Functor.map_comp] at hn
+    rw [hb]
+    exact Arrow.isoOfCompEq _ (𝟙 _) _ (by rw [hn, Category.id_comp])
+  -- step 2: the factorisation of the derived base-change map through the underived one
+  have hu₁ := Functor.isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app
+    ((g)_*[ModuleCat.{u + 1} Λ]) F
+  have ha : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
+      (D+((p)^*[ModuleCat.{u + 1} Λ]).map
+      (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app K))) := by
+    have hN :=
+      (((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusHomologyFunctorIso 0).hom.naturality
+      (((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app K)
+    simp only [Functor.comp_map] at hN
+    rw [← IsIso.inv_comp_eq] at hN
+    rw [← hN]
+    infer_instance
+  -- the single complex `(e^* F)[0]` and its comparison with `e^*(F[0])`
+  let K₁ : CochainComplex.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    ⟨(HomologicalComplex.single _ (.up ℤ) 0).obj (((e)^*[ModuleCat.{u + 1} Λ]).obj F), 0,
+      inferInstance⟩
+  have hK : ((e)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K =
+      (HomotopyCategory.Plus.quotient _).obj
+        (((e)^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj K₀) := rfl
+  let ψ : (HomotopyCategory.Plus.quotient _).obj K₁ ≅
+      ((e)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K :=
+    (HomotopyCategory.Plus.quotient _).mapIso (ObjectProperty.isoMk _
+      (X := K₁) (Y := ((e)^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj K₀)
+      ((HomologicalComplex.singleMapHomologicalComplex ((e)^*[ModuleCat.{u + 1} Λ]) (.up ℤ) 0).app
+        F).symm) ≪≫ eqToIso hK.symm
+  have hu₂ := Functor.isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app
+    ((h)_*[ModuleCat.{u + 1} Λ]) (((e)^*[ModuleCat.{u + 1} Λ]).obj F)
+  have hc : IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
+      (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+        (((e)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K))) := by
+    have hN := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map
+      (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.naturality ψ.hom)
+    simp only [Functor.comp_map, Functor.map_comp] at hN
+    exact IsIso.of_isIso_fac_left hN
+  have hfac := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map
+    (Etale.derivedBaseChangeMapPlus_fac_app _ sq.toCommSq K)
+  rw [Functor.map_comp, Functor.map_comp, Functor.map_comp, Functor.map_comp] at hfac
+  have e₂ := Arrow.isoOfCompEq _ _ _ hfac
+  -- step 3: in degree `0`, the map of complexes is the underived base-change map
+  have e3eq : (DerivedCategory.Plus.homologyFunctor _ 0).map (DerivedCategory.Plus.Qh.map
+      ((NatTrans.mapHomotopyCategoryPlus (Etale.baseChangeMap _ sq.toCommSq)).app K)) =
+      (DerivedCategory.homologyFunctor _ 0).map (DerivedCategory.Qh.map
+        ((HomotopyCategory.quotient _ _).map ((NatTrans.mapHomologicalComplex
+          (Etale.baseChangeMap _ sq.toCommSq) (.up ℤ)).app K₀.obj))) := by
+    change (DerivedCategory.homologyFunctor _ 0).map (DerivedCategory.Qh.map
+      ((HomotopyCategory.Plus.ι _).map
+        ((NatTrans.mapHomotopyCategoryPlus (Etale.baseChangeMap _ sq.toCommSq)).app K))) = _
+    rw [NatTrans.ι_map_mapHomotopyCategoryPlus_app]
     rfl
-  have hw : Etale.baseChangeHomologyMap Λ sq 0 F ≫ r.hom =
-      l.hom ≫ (Functor.rightDerivedBaseChange δ 0).app F := by
-    change (DerivedCategory.Plus.homologyFunctor _ 0).map
-        ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≫ r.hom = _
-    rw [hδ, Functor.rightDerivedBaseChange_app]
-    dsimp only [l, r, G, G', β, γ, Iso.trans_hom, Functor.mapIso_hom,
-      Iso.app_hom, Iso.app_inv, Iso.symm_hom]
-    simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
-    erw [CategoryTheory.Functor.map_id]
-    simp only [Int.natCast_zero, Category.id_comp, Iso.inv_hom_id_app_assoc]
-  let l₀ := γ.mapIso (G.rightDerivedZeroIsoSelf.app F)
-  let r₀ := G'.rightDerivedZeroIsoSelf.app (β.obj F)
-  have hw₀ : (Functor.rightDerivedBaseChange δ 0).app F ≫ r₀.hom =
-      l₀.hom ≫ δ.app F := by
-    apply (cancel_epi l₀.inv).1
-    change (γ.map (G.toRightDerivedZero.app F) ≫
-        (Functor.rightDerivedBaseChange δ 0).app F) ≫ r₀.hom =
-      l₀.inv ≫ l₀.hom ≫ δ.app F
-    rw [Functor.rightDerivedBaseChange_zero_unit]
-    simp [r₀, Functor.rightDerivedZeroIsoSelf]
-  exact ⟨Arrow.isoMk (l ≪≫ l₀) (r ≪≫ r₀) (by
-    change (l.hom ≫ l₀.hom) ≫ δ.app F =
-      Etale.baseChangeHomologyMap Λ sq 0 F ≫ (r.hom ≫ r₀.hom)
-    rw [← Category.assoc, hw]
-    simp only [Category.assoc]
-    rw [hw₀])⟩
+  have e₃ : Arrow.mk ((DerivedCategory.Plus.homologyFunctor _ 0).map (DerivedCategory.Plus.Qh.map
+      ((NatTrans.mapHomotopyCategoryPlus (Etale.baseChangeMap _ sq.toCommSq)).app K))) ≅
+      Arrow.mk ((Etale.baseChangeMap _ sq.toCommSq).app F) := by
+    rw [e3eq]
+    exact Arrow.isoOfNatIso (Functor.isoWhiskerLeft (HomotopyCategory.quotient _ _)
+        (DerivedCategory.homologyFunctorFactorsh _ 0) ≪≫
+        HomotopyCategory.homologyFunctorFactors _ _ 0)
+        (Arrow.mk ((NatTrans.mapHomologicalComplex (Etale.baseChangeMap _ sq.toCommSq)
+          (.up ℤ)).app K₀.obj)) ≪≫
+      arrowIsoHomologyMapMapHomologicalComplexSingle _ _ _ F
+  exact ⟨e₁ ≪≫ e₂ ≪≫ e₃⟩
 
 end DegreeZero
 

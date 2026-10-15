@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
@@ -13,6 +13,7 @@ import Sheaf.AlgebraicGeometry.GenericFinitePushforward
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleNoetherianCriterion
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!
@@ -42,8 +43,11 @@ private theorem lisse_of_iso {T : Scheme.{u}}
     exact Sheaf.isConstant_congr _
       ((T.smallEtaleTopology.overPullback (Type (u + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e)
-  · intro Ω _ _ t
-    have := hfin Ω t
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ ?_
+    intro Ω _ _ t
+    have : Finite ((pointSmallEtale t).sheafFiber.obj F) :=
+      (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
+        (hfin.isFinitelyGenerated_sheafFiber Ω t)
     exact Finite.of_equiv _
       (((pointSmallEtale t).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv
 

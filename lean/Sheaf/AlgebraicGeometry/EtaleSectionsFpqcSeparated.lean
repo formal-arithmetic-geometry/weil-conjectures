@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen
 

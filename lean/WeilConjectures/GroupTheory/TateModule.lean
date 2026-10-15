@@ -10,6 +10,7 @@ public import Mathlib.LinearAlgebra.TensorProduct.Pi
 public import Mathlib.RingTheory.Localization.BaseChange
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
+public import WeilConjectures.Mathlib.NumberTheory.Padics.PadicIntegers
 
 /-!
 # Integral and rational Tate modules
@@ -40,6 +41,8 @@ Tate module* is the `ℚ_[ℓ]`-vector space `V_ℓ M = ℚ_[ℓ] ⊗_{ℤ_[ℓ]
 - `AddCommGroup.tateModule.eq_zero_of_pow_zsmul_eq_zero`: `T_ℓ M` has no `ℓ`-power torsion; it
   is a torsion-free `ℤ_[ℓ]`-module.
 - `AddCommGroup.rationalTateModule.injective_one_tmul`: `T_ℓ M → V_ℓ M` is injective.
+- `AddCommGroup.rationalTateModule.exists_eq_inv_pow_tmul`,
+  `AddCommGroup.rationalTateModule.inv_pow_tmul_eq_inv_pow_tmul_iff`: `V_ℓ M = T_ℓ M [1 / ℓ]`.
 - `AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq`,
   `AddCommGroup.rationalTateModule.nonempty_linearEquiv_of_natCard_eq`: if `M` is `ℓ`-divisible
   and `|M[ℓ]| = ℓ ^ r`, then `T_ℓ M ≅ ℤ_[ℓ] ^ r` and `V_ℓ M ≅ ℚ_[ℓ] ^ r`.
@@ -59,7 +62,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (M : Type u) [AddCommGroup M]
 
 The *Tate module* `T_ℓ M` of an abelian group `M` at a prime `ℓ` is the subgroup of the product
 `∀ n : ℕ, M` consisting of the compatible systems `t` of `ℓ ^ n`-torsion points, that is, those
-`t` with `ℓ ^ n • t n = 0` for all `n` and `ℓ • t (n + 1) = t n` for all `n`. -/
+`t` with `ℓ ^ n • t n = 0` for all `n` and `ℓ • t (n + 1) = t n` for all `n`.
+
+This is also blueprint `def-tate-module-abelian-group`; the blueprint indexes from `n = 1`, and
+the extra coordinate `t 0` here is always `0`. -/
 def tateModule : AddSubgroup (∀ _ : ℕ, M) where
   carrier := {t | (∀ n, (ℓ : ℤ) ^ n • t n = 0) ∧ ∀ n, (ℓ : ℤ) • t (n + 1) = t n}
   zero_mem' := by simp
@@ -319,6 +325,65 @@ theorem injective_one_tmul :
   obtain ⟨c, hc⟩ := (IsLocalizedModule.eq_zero_iff (nonZeroDivisors ℤ_[ℓ]) _).mp ht
   exact (smul_eq_zero.mp hc).resolve_left (nonZeroDivisors.ne_zero c.2)
 
+variable {ℓ M} in
+/-- Blueprint `def-tate-module-abelian-group`: rescaling a fraction. The fraction `ℓ ^ (-b) t`
+equals `ℓ ^ (-(b + c)) (ℓ ^ c t)` in `V_ℓ M`. -/
+theorem inv_pow_tmul_eq_inv_pow_add_tmul (b c : ℕ) (t : tateModule ℓ M) :
+    ((ℓ : ℚ_[ℓ]) ^ b)⁻¹ ⊗ₜ[ℤ_[ℓ]] t =
+      ((ℓ : ℚ_[ℓ]) ^ (b + c))⁻¹ ⊗ₜ[ℤ_[ℓ]] ((ℓ : ℤ_[ℓ]) ^ c • t) := by
+  rw [← TensorProduct.smul_tmul, Algebra.smul_def, PadicInt.algebraMap_apply,
+    PadicInt.coe_pow, PadicInt.coe_natCast]
+  congr 1
+  have hℓ : (ℓ : ℚ_[ℓ]) ≠ 0 := Nat.cast_ne_zero.mpr (NeZero.ne ℓ)
+  field_simp
+  ring
+
+variable {ℓ M} in
+/-- Blueprint `def-tate-module-abelian-group`: Tate module of an abelian group.
+
+`V_ℓ M = T_ℓ M [1 / ℓ]`: every element of the rational Tate module is a fraction `ℓ ^ (-b) t`
+with `t ∈ T_ℓ M`. -/
+theorem exists_eq_inv_pow_tmul (v : ℚ_[ℓ] ⊗[ℤ_[ℓ]] tateModule ℓ M) :
+    ∃ (b : ℕ) (t : tateModule ℓ M), v = ((ℓ : ℚ_[ℓ]) ^ b)⁻¹ ⊗ₜ[ℤ_[ℓ]] t := by
+  induction v using TensorProduct.induction_on with
+  | zero => exact ⟨0, 0, by simp⟩
+  | tmul q t =>
+    obtain ⟨b, z, rfl⟩ := Padic.exists_eq_inv_pow_mul q
+    refine ⟨b, z • t, ?_⟩
+    rw [← TensorProduct.smul_tmul, Algebra.smul_def, PadicInt.algebraMap_apply, mul_comm]
+  | add v w hv hw =>
+    obtain ⟨b, t, rfl⟩ := hv
+    obtain ⟨c, u, rfl⟩ := hw
+    refine ⟨b + c, (ℓ : ℤ_[ℓ]) ^ c • t + (ℓ : ℤ_[ℓ]) ^ b • u, ?_⟩
+    rw [TensorProduct.tmul_add, inv_pow_tmul_eq_inv_pow_add_tmul b c,
+      inv_pow_tmul_eq_inv_pow_add_tmul c b, add_comm c b]
+
+variable {ℓ M} in
+/-- Blueprint `def-tate-module-abelian-group`: Tate module of an abelian group.
+
+Equality of fractions in `V_ℓ M = T_ℓ M [1 / ℓ]`: `ℓ ^ (-b) t = ℓ ^ (-c) u` if and only if
+`ℓ ^ d (ℓ ^ c t - ℓ ^ b u) = 0` for some `d ≥ 0`. -/
+theorem inv_pow_tmul_eq_inv_pow_tmul_iff (b c : ℕ) (t u : tateModule ℓ M) :
+    ((ℓ : ℚ_[ℓ]) ^ b)⁻¹ ⊗ₜ[ℤ_[ℓ]] t = ((ℓ : ℚ_[ℓ]) ^ c)⁻¹ ⊗ₜ[ℤ_[ℓ]] u ↔
+      ∃ d : ℕ, (ℓ : ℤ) ^ d • ((ℓ : ℤ) ^ c • t - (ℓ : ℤ) ^ b • u) = 0 := by
+  have hcast (k : ℕ) (s : tateModule ℓ M) : (ℓ : ℤ) ^ k • s = (ℓ : ℤ_[ℓ]) ^ k • s := by
+    rw [← Int.cast_smul_eq_zsmul ℤ_[ℓ]]
+    push_cast
+    rfl
+  rw [inv_pow_tmul_eq_inv_pow_add_tmul b c, inv_pow_tmul_eq_inv_pow_add_tmul c b, add_comm c b]
+  constructor
+  · intro h
+    refine ⟨0, ?_⟩
+    have h' := congrArg (((ℓ : ℚ_[ℓ]) ^ (b + c)) • ·) h
+    have hℓ : ((ℓ : ℚ_[ℓ]) ^ (b + c)) ≠ 0 := pow_ne_zero _ (Nat.cast_ne_zero.mpr (NeZero.ne ℓ))
+    simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_inv_cancel₀ hℓ] at h'
+    rw [pow_zero, one_smul, hcast, hcast, sub_eq_zero]
+    exact injective_one_tmul ℓ M h'
+  · rintro ⟨d, h⟩
+    have h0 := tateModule.eq_zero_of_pow_zsmul_eq_zero h
+    rw [sub_eq_zero, hcast, hcast] at h0
+    rw [h0]
+
 variable {ℓ M} {N : Type*} [AddCommGroup N]
 
 /-- The map of rational Tate modules `V_ℓ M → V_ℓ N` induced by a homomorphism `M →+ N`. -/
@@ -329,6 +394,19 @@ theorem map_tmul (f : M →+ N) (a : ℚ_[ℓ]) (t : tateModule ℓ M) :
     map f (a ⊗ₜ[ℤ_[ℓ]] t : ℚ_[ℓ] ⊗[ℤ_[ℓ]] tateModule ℓ M) =
       (a ⊗ₜ[ℤ_[ℓ]] tateModule.map f t : ℚ_[ℓ] ⊗[ℤ_[ℓ]] tateModule ℓ N) :=
   rfl
+
+variable (ℓ) in
+/-- Blueprint `def-tate-module-abelian-group`: Tate module of an abelian group.
+
+The fixed submodule `(V_ℓ M)^s` of an endomorphism `s` of `M` (in the blueprint an
+automorphism), which acts on `V_ℓ M` coordinatewise and on fractions through
+`AddCommGroup.rationalTateModule.map`. -/
+noncomputable def fixedSubmodule (s : M →+ M) : Submodule ℚ_[ℓ] (rationalTateModule ℓ M) :=
+  LinearMap.eqLocus (map s) LinearMap.id
+
+theorem mem_fixedSubmodule {s : M →+ M} {v : rationalTateModule ℓ M} :
+    v ∈ fixedSubmodule ℓ s ↔ map s v = v :=
+  Iff.rfl
 
 variable (ℓ M) in
 /-- Blueprint `prop-av-tate-rank` (group-theoretic content, rational form): if multiplication by

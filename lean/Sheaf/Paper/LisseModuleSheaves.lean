@@ -1,6 +1,8 @@
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Sites.Adjunction
 import Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlying
@@ -16,7 +18,7 @@ with sites-modules Lemma 093S (1)
 
 Sheaves of left `Λ`-modules on `Y_et` are `Sheaf Y.smallEtaleTopology (ModuleCat.{u+1} Λ)`
 with `Λ : Type (u + 1)` (STATE: the encoding of the six-functor and constructible chapters).
-`FLC(Y)` is `IsFiniteLocallyConstantEtaleSheafOfSets` (def-weil-pbc-etale-sheaves).
+`FLC(Y)` is `IsLisseEtaleSheafOfSets` (def-weil-pbc-etale-sheaves).
 -/
 
 @[expose] public section
@@ -75,7 +77,7 @@ Lemma 0DV5 (blueprint: lem-pod-lisse-module-sheaves-as-module-objects). -/
 structure LambdaModuleObject where
   /-- The underlying sheaf of sets. -/
   sheaf : Sheaf Y.smallEtaleTopology (Type (u + 1))
-  isFLC : IsFiniteLocallyConstantEtaleSheafOfSets sheaf
+  isFLC : IsLisseEtaleSheafOfSets sheaf
   /-- The module operations. -/
   str : ModuleObjectStruct Λ sheaf
 
@@ -280,7 +282,7 @@ axioms hold as equalities of sheaf maps, so the local constant finite set is a f
 theorem lisseModuleSheaf_iff_underlying_finiteLocallyConstant [Finite Λ]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsLisseModuleSheaf F ↔
-      IsFiniteLocallyConstantEtaleSheafOfSets ((sheafForget Y.smallEtaleTopology).obj F) := by
+      IsLisseEtaleSheafOfSets ((sheafForget Y.smallEtaleTopology).obj F) := by
   constructor
   · rintro ⟨𝒰, h𝒰⟩
     constructor
@@ -293,7 +295,8 @@ theorem lisseModuleSheaf_iff_underlying_finiteLocallyConstant [Finite Λ]
         (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj
         (F.over (𝒰.etalePrecoverageToEtale i))).IsConstant _
       infer_instance
-    · intro Ω _ _ s
+    · refine isFiniteSheaf_of_finite_algClosed_stalks _ ?_
+      intro Ω _ _ s
       obtain ⟨i, x, hx⟩ := 𝒰.exists_eq (s default)
       have : Etale (𝒰.f i) := 𝒰.map_prop i
       obtain ⟨t, ht, -⟩ := exists_fac_of_etale_of_isSepClosed (𝒰.f i) s x hx
@@ -310,7 +313,9 @@ theorem lisseModuleSheaf_iff_underlying_finiteLocallyConstant [Finite Λ]
     let := module_localConstancy_of_finite_underlying F hF
     obtain ⟨d⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
     exact ⟨d.cover, fun i ↦ finiteModuleConstantModel_over F
-      (d.cover.etalePrecoverageToEtale i) (d.isConstant i) hF.2⟩
+      (d.cover.etalePrecoverageToEtale i) (d.isConstant i)
+      (fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
+        (hF.2.isFinitelyGenerated_sheafFiber Ω s))⟩
 
 /-- The underlying sheaf of sets of a sheaf of `Λ`-modules carries exactly one module-object
 structure given on sections by the operations of the modules `F(U)`. Source: Stacks Project,

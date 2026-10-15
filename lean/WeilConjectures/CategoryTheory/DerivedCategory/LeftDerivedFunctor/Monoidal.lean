@@ -9,7 +9,7 @@ public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStru
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
@@ -285,54 +285,6 @@ open OplaxMonoidal LaxMonoidal
 variable {E : Type u₃} [Category.{u + 1} E] [Abelian E] [IsGrothendieckAbelian.{u + 1} E]
   [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [BraidedCategory E]
   [HasFunctorialFlatResolution E]
-
-omit [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [BraidedCategory E]
-  [HasFunctorialFlatResolution E] in
-/-- The composition isomorphism `L(F ⋙ G) ≅ LF ⋙ LG` is compatible with the counits. -/
-@[reassoc]
-lemma leftDerivedFunctorCompIso_hom_app_comp_counit (F : C ⥤ D) (G : D ⥤ E) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F] [G.Additive]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (X : HomotopyCategory C (.up ℤ)) :
-    (F.leftDerivedFunctorCompIso G).hom.app (Qh.obj X) ≫
-        G.leftDerivedFunctor.map (F.leftDerivedFunctorCounit.app X) ≫
-        G.leftDerivedFunctorCounit.app ((F.mapHomotopyCategory _).obj X) =
-      (F ⋙ G).leftDerivedFunctorCounit.app X := by
-  have h₁ := congr_app (F ⋙ G).leftDerivedFunctorIsoMapDerivedCategory_hom_fac X
-  have h₂ := congr_app F.leftDerivedFunctorIsoMapDerivedCategory_hom_fac X
-  have h₃ := congr_app G.leftDerivedFunctorIsoMapDerivedCategory_hom_fac
-    ((F.mapHomotopyCategory _).obj X)
-  have h₄ := mapDerivedCategoryCompIso_fach F G X
-  rw [mapHomotopyCategoryCompIso_refl_hom_app] at h₄
-  erw [Qh.map_id, Category.comp_id] at h₄
-  dsimp at h₁ h₂ h₃ h₄
-  simp only [leftDerivedFunctorCompIso, Iso.trans_hom, NatTrans.comp_app, isoWhiskerRight_hom,
-    isoWhiskerLeft_hom, Iso.symm_hom, whiskerRight_app, whiskerLeft_app, Category.assoc]
-  rw [← h₁, ← h₄, ← h₂, ← h₃]
-  simp only [← Category.assoc]
-  congr 1
-  simp only [Category.assoc]
-  rw [← (G.leftDerivedFunctorIsoMapDerivedCategory.inv.naturality_assoc)]
-  simp
-
-omit [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
-  [HasFunctorialFlatResolution D] in
-/-- An isomorphism `F ≅ F'` of exact functors is compatible with the counits of their total
-left derived functors. -/
-@[reassoc]
-lemma leftDerivedFunctorNatIso_hom_app_comp_counit {F F' : C ⥤ D} [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F] [F'.Additive]
-    [PreservesFiniteLimits F'] [PreservesFiniteColimits F'] (τ : F ≅ F')
-    (X : HomotopyCategory C (.up ℤ)) :
-    (F.leftDerivedFunctorNatIso τ).hom.app (Qh.obj X) ≫ F'.leftDerivedFunctorCounit.app X =
-      F.leftDerivedFunctorCounit.app X ≫
-        Qh.map ((NatTrans.mapHomotopyCategory τ.hom (.up ℤ)).app X) := by
-  have h₁ := congr_app F.leftDerivedFunctorIsoMapDerivedCategory_hom_fac X
-  have h₂ := congr_app F'.leftDerivedFunctorIsoMapDerivedCategory_hom_fac X
-  have h₃ := mapDerivedCategoryNatIso_fach τ X
-  dsimp at h₁ h₂ h₃
-  simp only [leftDerivedFunctorNatIso, Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
-    Category.assoc]
-  rw [← h₁, ← h₂, Iso.inv_hom_id_app_assoc, h₃, Category.assoc]
 
 omit [HasFunctorialFlatResolution C] [HasFunctorialFlatResolution D] in
 open HomotopyCategory in

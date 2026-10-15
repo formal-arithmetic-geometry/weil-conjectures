@@ -5,10 +5,9 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.Algebra.Category.Ring.Colimits
-public import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 import Mathlib.CategoryTheory.Filtered.Final
 
 /-!
@@ -73,7 +72,7 @@ theorem strictHenselizationAffineInclusion_isEquivalence
   have : (Functor.Elements.precomp F G).Full := ⟨fun {X Y} f ↦
     ⟨⟨F.preimage f.val, by
       change G.map (F.map (F.preimage f.val)) X.snd = Y.snd
-      rw [F.map_preimage]
+      erw [F.map_preimage]
       exact f.property⟩, by
       apply Subtype.ext
       exact F.map_preimage f.val⟩⟩
@@ -91,14 +90,15 @@ theorem strictHenselizationAffineInclusion_isEquivalence
     let A : AffineEtale S := AffineEtale.mk (e.inv ≫ V.hom)
     let y : G.obj (F.obj A) := Over.homMk (X.obj.snd.left ≫ e.hom) (by
       change (X.obj.snd.left ≫ e.hom) ≫ (e.inv ≫ V.hom) = s
-      simpa using Over.w X.obj.snd)
+      rw [Category.assoc, e.hom_inv_id_assoc]
+      exact Over.w X.obj.snd)
     refine ⟨(F ⋙ G).elementsMk A y, ⟨?_⟩⟩
     apply ObjectProperty.isoMk
     let i : F.obj A ≅ V := MorphismProperty.Over.isoMk e.symm rfl
     refine CategoryOfElements.isoMk _ _ i ?_
     apply Over.OverMorphism.ext
     change (X.obj.snd.left ≫ e.hom) ≫ e.inv = X.obj.snd.left
-    simp
+    erw [Category.assoc, e.hom_inv_id, Category.comp_id]
   exact { }
 
 /-- The coordinate-ring diagram on all affine pointed neighbourhoods, contravariantly
@@ -113,7 +113,7 @@ noncomputable def strictHenselizationCoordinateRings
 /-- The ring diagram on the chosen small representative category.
 Source: blueprint `sec-curve-estimates/sk-prop-h2`, definition of strict henselization
 (blueprint: def-weil-pbc-strict-henselization-limit). -/
-noncomputable def strictHenselizationDiagram
+noncomputable def smallStrictHenselizationDiagram
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
     (SmallModel.{u} (strictHenselizationNeighbourhoods s))ᵒᵖ ⥤ CommRingCat.{u} :=
@@ -125,18 +125,48 @@ its opposite-indexed coordinate-ring colimit. `SmallModel` supplies a fully fait
 essentially surjective representative functor, so no affine neighbourhood is omitted.
 Source: blueprint `sec-curve-estimates/sk-prop-h2`, definition of strict henselization
 (blueprint: def-weil-pbc-strict-henselization-limit). -/
-noncomputable def strictHenselizationRing
+noncomputable abbrev strictHenselizationRing
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) : CommRingCat.{u} :=
-  colimit (strictHenselizationDiagram s)
+  strictHenselization s
+
+/-- Canonical comparison from the small ring-written diagram to upstream's affine diagram. -/
+noncomputable def smallStrictHenselizationColimitIso
+    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) :
+    colimit (smallStrictHenselizationDiagram s) ≅ strictHenselization s := by
+  let : HasColimit (strictHenselizationDiagram s) := inferInstance
+  let F := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse ⋙
+    strictHenselizationAffineInclusion s
+  let : (strictHenselizationAffineInclusion s).IsEquivalence :=
+    strictHenselizationAffineInclusion_isEquivalence s
+  exact Functor.Final.colimitIso F.op (strictHenselizationDiagram s)
+
+/-- The small affine diagram's cocone with upstream's strict henselization as vertex. -/
+noncomputable def smallStrictHenselizationCocone
+    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) : Cocone (smallStrictHenselizationDiagram s) :=
+  (colimit.cocone (strictHenselizationDiagram s)).whisker
+    ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse ⋙
+      strictHenselizationAffineInclusion s).op
+
+noncomputable def isColimitSmallStrictHenselizationCocone
+    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) : IsColimit (smallStrictHenselizationCocone s) := by
+  let F := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse ⋙
+    strictHenselizationAffineInclusion s
+  let : (strictHenselizationAffineInclusion s).IsEquivalence :=
+    strictHenselizationAffineInclusion_isEquivalence s
+  exact (Functor.Final.isColimitWhiskerEquiv F.op _).symm
+    (colimit.isColimit (strictHenselizationDiagram s))
 
 /-- The strict henselization scheme is the spectrum of the coordinate-ring colimit.
 Source: blueprint `sec-curve-estimates/sk-prop-h2`, definition of strict henselization
 (blueprint: def-weil-pbc-strict-henselization-limit). -/
-noncomputable def strictHenselizationScheme
+noncomputable abbrev strictHenselizationScheme
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) : Scheme.{u} :=
-  Spec (strictHenselizationRing s)
+  strictLocalization s
 
 /-- The canonical cone has vertex the strict henselization scheme; its legs are
 `Spec.map` of the coordinate-ring colimit coprojections.
@@ -145,8 +175,8 @@ Source: blueprint `sec-curve-estimates/sk-prop-h2`, definition of strict henseli
 noncomputable def strictHenselizationCone
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
-    Cone ((strictHenselizationDiagram s).op ⋙ Scheme.Spec) :=
-  Scheme.Spec.mapCone (colimit.cocone (strictHenselizationDiagram s)).op
+    Cone ((smallStrictHenselizationDiagram s).op ⋙ Scheme.Spec) :=
+  Scheme.Spec.mapCone (smallStrictHenselizationCocone s).op
 
 /-- Cofilteredness and the inverse-limit interpretation of the canonical cone.
 Source: blueprint `sec-curve-estimates/sk-prop-h2`, definition of strict henselization
@@ -177,7 +207,9 @@ theorem strictHenselization_properties
       Nonempty (IsLimit (strictHenselizationCone s)) := by
   classical
   have := strictHenselizationAffineInclusion_isEquivalence s
-  have := (affinePointedNeighbourhoods_initial_and_final_op s).1
+  have : (ObjectProperty.ι
+      (fun n : (pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)).Initial :=
+    AffinePointedEtaleNeighborhood.initial_ι s
   let F := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse ⋙
     strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
       (fun n : (pointSmallEtale s).fiber.Elements => IsAffine n.1.left)
@@ -188,7 +220,7 @@ theorem strictHenselization_properties
     obtain ⟨Y⟩ := (inferInstance : Nonempty (CostructuredArrow F X))
     exact ⟨Y.left, ⟨Y.hom⟩⟩
   · exact ⟨isLimitOfPreserves Scheme.Spec
-      (colimit.isColimit (strictHenselizationDiagram s)).op⟩
+      (isColimitSmallStrictHenselizationCocone s).op⟩
 
 /-- Independence of the representative category, via the canonical colimit map.
 Here `e` describes a replacement of the chosen representative category and `w`
@@ -203,8 +235,8 @@ noncomputable def strictHenselizationRepresentativeIso
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) {J : Type u} [SmallCategory J]
     (e : J ≌ (SmallModel.{u} (strictHenselizationNeighbourhoods s))ᵒᵖ)
-    (D : J ⥤ CommRingCat.{u}) (w : e.functor ⋙ strictHenselizationDiagram s ≅ D) :
+    (D : J ⥤ CommRingCat.{u}) (w : e.functor ⋙ smallStrictHenselizationDiagram s ≅ D) :
     colimit D ≅ strictHenselizationRing s :=
-  HasColimit.isoOfEquivalence e w
+  HasColimit.isoOfEquivalence e w ≪≫ smallStrictHenselizationColimitIso s
 
 end AlgebraicGeometry.Scheme

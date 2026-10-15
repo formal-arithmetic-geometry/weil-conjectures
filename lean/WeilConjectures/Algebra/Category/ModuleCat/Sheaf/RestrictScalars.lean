@@ -16,7 +16,9 @@ Let `f : R →+* S` be a ring morphism and `J` a Grothendieck topology. Composin
 (`CategoryTheory.Sheaf.restrictScalars`). Since `ModuleCat.restrictScalars f` is left adjoint
 to coextension of scalars, so is this functor on sheaves
 (`CategoryTheory.Sheaf.restrictCoextendScalarsAdj`). It is also a right adjoint, so it is exact
-and induces a functor `D(J, S) ⥤ D(J, R)` on derived categories. Restricting along `g` and then
+and induces a functor `D(J, S) ⥤ D(J, R)` on derived categories. A left adjoint of restriction of
+scalars on modules which preserves sheaves gives a left adjoint on sheaves
+(`CategoryTheory.Sheaf.sheafComposeRestrictScalarsAdj`). Restricting along `g` and then
 along `f` is restricting along `g ∘ f` (`CategoryTheory.Sheaf.restrictScalarsCompIso`).
 -/
 
@@ -51,6 +53,16 @@ noncomputable def restrictCoextendScalarsAdj :
 
 instance : (restrictScalars J f).IsLeftAdjoint :=
   (restrictCoextendScalarsAdj J f).isLeftAdjoint
+
+/-- If a functor `G` on modules is left adjoint to restriction of scalars and composing with `G`
+preserves sheaves, then composing sheaves with `G` is left adjoint to restriction of scalars of
+sheaves, both being computed objectwise. -/
+noncomputable def sheafComposeRestrictScalarsAdj {G : ModuleCat.{w} R ⥤ ModuleCat.{w} S}
+    [J.HasSheafCompose G] (adj : G ⊣ ModuleCat.restrictScalars f) :
+    sheafCompose J G ⊣ restrictScalars J f :=
+  Adjunction.restrictFullyFaithful (adj.whiskerRight Cᵒᵖ)
+    (fullyFaithfulSheafToPresheaf J _) (fullyFaithfulSheafToPresheaf J _) (Iso.refl _)
+    (Iso.refl _)
 
 instance [HasWeakSheafify J (ModuleCat.{w} S)] : (restrictScalars J f).IsRightAdjoint := by
   have := (ModuleCat.extendRestrictScalarsAdj f).isRightAdjoint

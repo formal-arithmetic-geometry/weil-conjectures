@@ -214,7 +214,7 @@ theorem Etale.isIso_baseChangeMap_app_of_hasTorsionBaseChange (hΛ : IsAddTorsio
   let K : CochainComplex.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
     ⟨(CochainComplex.singleFunctor _ 0).obj J, ⟨0, inferInstance⟩⟩
   let P := (HomotopyCategory.Plus.quotient _).obj K
-  have : IsTorsionSheaf J := .of_isTorsion hΛ J
+  have : IsTorsionModuleSheaf J := .of_isTorsion hΛ J
   have hJ := (hf.hasInjectiveAcyclicity Λ f).rightAcyclic Λ sq J
   have h₁ : IsIso ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) :=
     (f)_*[ModuleCat.{u + 1} Λ].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic K
@@ -240,7 +240,7 @@ theorem Etale.isIso_baseChangeMap_app_of_hasTorsionBaseChange (hΛ : IsAddTorsio
               (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 J n hn))
   have h₃ : IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
       (DerivedCategory.Plus.Qh.obj P)) :=
-    hf sq _ (Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion Λ X hΛ _)
+    hf sq _ (Etale.DerivedCategory.Plus.moduleTorsionHomology_of_isTorsion Λ X hΛ _)
   have hfac := Etale.derivedBaseChangeMapPlus_fac_app (ModuleCat.{u + 1} Λ) sq.toCommSq P
   have h₄ : IsIso (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
       ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) ≫
@@ -361,7 +361,7 @@ theorem Etale.HasInjectiveAcyclicity.of_comp (hΛ : IsAddTorsion Λ) {X Y Z : Sc
   have := Etale.mono_homEquiv_of_surjective Λ f ι
   have hsr : s ≫ Injective.factorThru (𝟙 I) s = 𝟙 I := Injective.comp_factorThru _ _
   have sq₁ : IsPullback (pullback.fst f b) (pullback.snd f b) f b := IsPullback.of_hasPullback f b
-  have : IsTorsionSheaf J := .of_isTorsion hΛ J
+  have : IsTorsionModuleSheaf J := .of_isTorsion hΛ J
   have hJ := (hf.hasInjectiveAcyclicity Λ f).rightAcyclic Λ sq₁ J
   refine Etale.isZero_homology_rightDerivedFunctorPlus_of_retract Λ h'
     ((b)^*[ModuleCat.{u + 1} Λ].map s)
@@ -377,53 +377,6 @@ theorem Etale.HasInjectiveAcyclicity.of_comp (hΛ : IsAddTorsion Λ) {X Y Z : Sc
         (Functor.rightDerivedFunctorPlusObjSingleFunctorIsoOfRightAcyclic _ _ hJ).symm ≪≫
       (Functor.rightDerivedFunctorPlusCompIso' _ _
         (Etale.lowerStarComp (ModuleCat.{u + 1} Λ) (pullback.snd f b) h')).app _)
-
-/-- **`IA ⇒ PBC` given the underived exchange**: if `Λ` is torsion as an additive group, `f` has
-injective acyclicity, and the underived base change map `g^* f_* ⟶ f'_* g'^*` is an isomorphism
-for every cartesian square over `f`, then the derived base change map is an isomorphism on all
-of `D⁺(X_ét, Λ)`. Represent `K` by a bounded below complex `I` of injectives. The derived base
-change map at `I` is computed by the underived base change map `g^* f_* I ⟶ f'_* g'^* I`, a
-termwise isomorphism by hypothesis, followed by the unit `f'_* g'^* I ⟶ Rf'_*(g'^* I)`, which is
-an isomorphism because the terms of `g'^* I` are `f'_*`-acyclic by injective acyclicity
-(`CategoryTheory.Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic`).
-(blueprint: `lemma-weil-pbc-property-iff-acyclicity`) -/
-theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isIso_baseChangeMap
-    (hΛ : IsAddTorsion Λ) (f : X ⟶ Y)
-    (hex : ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄
-      (sq : IsPullback g' f' f g), IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq))
-    (hf : Etale.HasInjectiveAcyclicity Λ f) : Etale.HasTorsionBaseChange Λ f := by
-  intro Y' X' g f' g' sq K _
-  have : IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := hex sq
-  obtain ⟨n, hn⟩ := K.2
-  have : K.IsGE n := (K.isGE_ι_obj_iff n).1 hn
-  obtain ⟨L, _, ⟨e⟩⟩ := DerivedCategory.Plus.exists_injective_nonempty_iso K n
-  let M := (InjectiveObject.ι _).mapCochainComplexPlus.obj L
-  let P := (HomotopyCategory.Plus.quotient _).obj M
-  suffices IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
-      (DerivedCategory.Plus.Qh.obj P)) by
-    rw [← NatTrans.isIso_app_iff_of_iso _ e]
-    exact this
-  have hM : ∀ m, (f')_*[ModuleCat.{u + 1} Λ].rightAcyclic
-      ((((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦
-    have : Injective (M.obj.X m) := (L.obj.X m).2
-    have : IsTorsionSheaf (M.obj.X m) := .of_isTorsion hΛ _
-    hf.rightAcyclic Λ sq (M.obj.X m)
-  have h₁ : IsIso ((f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
-      (((g')^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj P)) :=
-    (f')_*[ModuleCat.{u + 1} Λ].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic
-      (((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M) hM
-  have h₂ : IsIso ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) := by
-    dsimp only [P, M]
-    infer_instance
-  have hfac := Etale.derivedBaseChangeMapPlus_fac_app (ModuleCat.{u + 1} Λ) sq.toCommSq P
-  have : IsIso (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) ≫
-      (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
-        (DerivedCategory.Plus.Qh.obj P)) := by
-    rw [hfac]
-    infer_instance
-  exact IsIso.of_isIso_comp_left (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
-      ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P)) _
 
 /-- **Cancellation of the base change property along a surjection.** For a torsion coefficient
 ring `Λ`, let `f : X ⟶ Y` be surjective and `h : Y ⟶ Z`. If `f` and `f ≫ h` satisfy the base
@@ -466,8 +419,8 @@ theorem Etale.hasTorsionBaseChange_of_affineOpens {X Y : Scheme.{u}} (f : X ⟶ 
     exact ⟨⟨U, hU⟩, ⟨x, hx⟩, rfl⟩
   · rw [Etale.baseChange_eq_derivedBaseChangeMapPlus]
     refine h U (IsPullback.of_hasPullback _ _) _ fun n ↦ ?_
-    exact @Scheme.IsTorsionSheaf.of_epi _ _ _ _ _
+    exact @Scheme.IsTorsionModuleSheaf.of_epi _ _ _ _ _
       ((((f ⁻¹ᵁ (U : Y.Opens)).ι)^*[ModuleCat.{u + 1} Λ].mapDerivedCategoryPlusHomologyFunctorIso
-        n).hom.app K) inferInstance (@isTorsionSheaf_upperStar _ _ _ _ _ _ (hK n))
+        n).hom.app K) inferInstance (@isTorsionModuleSheaf_upperStar _ _ _ _ _ _ (hK n))
 
 end AlgebraicGeometry

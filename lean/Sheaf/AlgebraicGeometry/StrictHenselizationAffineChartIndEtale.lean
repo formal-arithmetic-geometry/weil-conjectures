@@ -95,7 +95,8 @@ theorem strictHenselization_indEtale_of_affine_chart
     let rep := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse
     let q := (rep ⋙ incl).op
     let cmp : strictHenselizationRing s ≅ cn.pt :=
-      Functor.Final.colimitIso q D ≪≫ colimit.isoColimitCocone ⟨cn, hcn⟩
+      (isColimitSmallStrictHenselizationCocone s).coconePointUniqueUpToIso
+        ((Functor.Final.isColimitWhiskerEquiv q cn).symm hcn)
     let k := hct.coconePointUniqueUpToIso hc
     let ringIso : strictHenselizationRing s ≅ c.pt := cmp ≪≫ t ≪≫ k
     -- The chart object identifies the transported R-map with the structural map.
@@ -114,13 +115,9 @@ theorem strictHenselization_indEtale_of_affine_chart
       let Q : ObjectProperty P.FullSubcategory := fun z ↦
         ∃ g : z.obj.1.left ⟶ Spec R, g ≫ i = z.obj.1.hom
       let d : Q.FullSubcategory := ⟨b, ⟨g, hg⟩⟩
-      have hcmp : colimit.ι (strictHenselizationDiagram s) (op j) ≫ cmp.hom =
+      have hcmp : (smallStrictHenselizationCocone s).ι.app (op j) ≫ cmp.hom =
           cn.ι.app (op b) := by
-        change colimit.ι (q ⋙ D) (op j) ≫
-          ((Functor.Final.colimitIso q D).hom ≫
-            (colimit.isoColimitCocone ⟨cn, hcn⟩).hom) = _
-        rw [← Category.assoc, Functor.Final.ι_colimitIso_hom]
-        exact colimit.isoColimitCocone_ι_hom ⟨cn, hcn⟩ (op b)
+          exact IsColimit.comp_coconePointUniqueUpToIso_hom _ _ _
       have htrip := (hδ d).1 g hg
       have hbase : (ΓSpecIso R).inv ≫ g.appTop ≫ δ.hom.app (op d) ≫
           c.ι.app (E.functor.obj (op d)) = ρ := by
@@ -134,11 +131,11 @@ theorem strictHenselization_indEtale_of_affine_chart
           _ = _ := by
             simp only [Category.assoc, k, IsColimit.comp_coconePointUniqueUpToIso_hom]
       have hring : (ΓSpecIso R).inv ≫ g.appTop ≫
-          colimit.ι (strictHenselizationDiagram s) (op j) = ρ ≫ ringIso.inv := by
+          (smallStrictHenselizationCocone s).ι.app (op j) = ρ ≫ ringIso.inv := by
         apply (cancel_mono ringIso.hom).1
         simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
         change (ΓSpecIso R).inv ≫ g.appTop ≫
-          colimit.ι (strictHenselizationDiagram s) (op j) ≫ cmp.hom ≫ t.hom ≫ k.hom = ρ
+          (smallStrictHenselizationCocone s).ι.app (op j) ≫ cmp.hom ≫ t.hom ≫ k.hom = ρ
         rw [← Category.assoc _ cmp.hom, hcmp, hleg]
         exact hbase
       let : IsAffine b.obj.1.left := b.property
@@ -148,17 +145,17 @@ theorem strictHenselization_indEtale_of_affine_chart
         change Spec.map g.appTop ≫ (Spec R).isoSpec.inv =
           (Spec (rep.obj j).1.left.unop).isoSpec.inv ≫ g at hh
         simpa only [isoSpec_Spec_inv] using hh
-      have hstr := Classical.choose_spec (exists_strictHenselizationStructuralMap s) j
-      change Spec.map (colimit.ι (strictHenselizationDiagram s) (op j)) ≫
+      have hstr := strictHenselizationStructuralMap_eq s j
+      change Spec.map ((smallStrictHenselizationCocone s).ι.app (op j)) ≫
         Spec.map (ΓSpecIso (rep.obj j).1.left.unop).inv ≫ b.obj.1.hom =
         strictHenselizationStructuralMap s at hstr
       calc
         Spec.map (ρ ≫ ringIso.inv) ≫ i =
-            Spec.map (colimit.ι (strictHenselizationDiagram s) (op j)) ≫
+            Spec.map ((smallStrictHenselizationCocone s).ι.app (op j)) ≫
               Spec.map g.appTop ≫ Spec.map (ΓSpecIso R).inv ≫ i := by
           simpa only [Spec.map_comp, Category.assoc] using
             congrArg (fun f ↦ Spec.map f ≫ i) hring.symm
-        _ = Spec.map (colimit.ι (strictHenselizationDiagram s) (op j)) ≫
+        _ = Spec.map ((smallStrictHenselizationCocone s).ι.app (op j)) ≫
             Spec.map (ΓSpecIso (rep.obj j).1.left.unop).inv ≫ b.obj.1.hom := by
           rw [← Category.assoc (Spec.map g.appTop), hgSpec, Category.assoc, hg]
         _ = _ := hstr

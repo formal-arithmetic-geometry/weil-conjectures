@@ -78,33 +78,33 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
 attribute [-instance] commShift₂CurriedTensor commShiftTensorLeft commShiftTensorRight
   isTriangulated_tensorLeft isTriangulated_tensorRight monoidalPreadditive monoidalLinear
 
-noncomputable local instance (priority := high) Principal_monoidalCategory :
+noncomputable local instance (priority := high) :
     MonoidalCategory (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   (sheafTensorStructure J R).monoidalCategory
 
-noncomputable local instance (priority := high) Principal_monoidalPreadditive :
+noncomputable local instance (priority := high) :
     MonoidalPreadditive (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   (sheafTensorStructure J R).monoidalPreadditive
 
-noncomputable local instance (priority := high) Principal_monoidalLinear :
+noncomputable local instance (priority := high) :
     MonoidalLinear R (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   (sheafTensorStructure J R).monoidalLinear
 
-noncomputable local instance (priority := high) Principal_commShift₂Int :
+noncomputable local instance (priority := high) :
     (curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).CommShift₂Int :=
   (sheafTensorStructure J R).commShift₂
 
-noncomputable local instance (priority := high) Principal_isTriangulated
+noncomputable local instance (priority := high)
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     ((curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).obj K).IsTriangulated :=
   (sheafTensorStructure J R).isTriangulated_tensorLeft K
 
-noncomputable local instance (priority := high) Principal_isTriangulated2
+noncomputable local instance (priority := high)
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     ((curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj K).IsTriangulated :=
   (sheafTensorStructure J R).isTriangulated_tensorRight K
 
-local instance Principal_isIso : IsIso (sheafTensorStructure J R).ε := (sheafTensorStructure J R).isIso_ε
+local instance : IsIso (sheafTensorStructure J R).ε := (sheafTensorStructure J R).isIso_ε
 
 variable {J}
 
@@ -308,6 +308,23 @@ triangulated subcategory. -/
 lemma isTriangulated_derivedComplete : (derivedComplete J I).IsTriangulated := by
   rw [derivedComplete_eq_rightOrthogonal hϖ hI]
   infer_instance
+
+/-- Every object is derived complete for the zero ideal: the tower `K ⊗ᴸ R/0ⁿ` is constant
+from `n = 1` on, with the reduction maps isomorphisms there, so `K` is its homotopy limit
+(`Pretriangulated.IsHomotopyLimit.of_isIso_π_succ`). -/
+lemma derivedComplete_bot (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
+    derivedComplete J (⊥ : Ideal R) K := by
+  have h (n : ℕ) : IsIso ((Ideal.quotPowCone (⊥ : Ideal R)).π.app (op (n + 1))) := by
+    rw [ConcreteCategory.isIso_iff_bijective]
+    refine ⟨fun x y hxy ↦ ?_, Submodule.mkQ_surjective _⟩
+    have : (⊥ : Ideal R) ^ (n + 1) = ⊥ := by simp
+    change Submodule.mkQ _ x = Submodule.mkQ _ y at hxy
+    rwa [Submodule.mkQ_apply, Submodule.mkQ_apply, Submodule.Quotient.eq, this,
+      Submodule.mem_bot, sub_eq_zero] at hxy
+  have (n : ℕ) : IsIso ((derivedCompletionCone J ⊥ K).π.app (op (n + 1))) := by
+    dsimp [derivedCompletionCone, quotPowCone, Sheaf.quotPowCone]
+    infer_instance
+  exact IsHomotopyLimit.of_isIso_π_succ _
 
 end Main
 

@@ -580,27 +580,6 @@ theorem Restriction.dense_frobenius (R : Restriction j WU WC)
 
 end Restriction
 
-section OpenSubcurve
-
-variable {U : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j]
-
-omit [Finite K] in
-/-- An affine open of a curve is a curve. -/
-lemma isCurve_comp_of_isAffine [IsAffine U] : IsCurve (j ≫ p) where
-  krullDim_le_one :=
-    j.isOpenEmbedding.isInducing.topologicalKrullDim_le.trans (IsCurve.krullDim_le_one (f := p))
-
-omit [Finite K] [IsCurve p] in
-/-- A nonempty open of a smooth geometrically connected scheme over a field is geometrically
-connected: it is geometrically irreducible. -/
-lemma geometricallyConnected_comp [Nonempty U] [Smooth p] [GeometricallyConnected p] :
-    GeometricallyConnected (j ≫ p) := by
-  have : GeometricallyIrreducible p := .of_smooth_of_geometricallyConnected p
-  have : Surjective (j ≫ p) := ⟨fun _ ↦ ⟨Nonempty.some inferInstance, Subsingleton.elim _ _⟩⟩
-  infer_instance
-
-end OpenSubcurve
-
 section General
 
 variable [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] [ConnectedSpace C]

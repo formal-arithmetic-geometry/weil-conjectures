@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.ResidueField
 import Mathlib.FieldTheory.IsSepClosed
-import Sheaf.Paper.StrictHenselizationLocalStructure
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 import Sheaf.Paper.StrictHenselizationPointedMap
 import Sheaf.Paper.EtalePointedMapRigidity
 import Sheaf.Paper.StrictHenselizationMapExists
@@ -198,7 +198,9 @@ theorem strictHenselizationResidue
               σ.toRingHom).comp
             (IsLocalRing.residue (Scheme.strictHenselizationRing barY)))) ≫
           Scheme.strictHenselizationStructuralMap barY = barY := by
-  obtain ⟨hlocal, hstrict⟩ := strictHenselizationLocalStructure barY
+  have hlocal : IsLocalRing (Scheme.strictHenselizationRing barY) := inferInstance
+  have hstrict : IsStrictlyHenselianLocalRing (Scheme.strictHenselizationRing barY) :=
+    ⟨inferInstance⟩
   let := hlocal
   obtain ⟨ψ, hsurj, hker, hpoint⟩ := strictHenselizationPointedMap barY hΩ
   let σ : IsLocalRing.ResidueField (Scheme.strictHenselizationRing barY) ≃+*
@@ -229,12 +231,11 @@ theorem strictHenselizationResidue
     let := hn
     let j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barY) :=
       Classical.choice IsCofiltered.nonempty
-    have hj := Classical.choose_spec (Scheme.exists_strictHenselizationStructuralMap barY) j
+    have hj := Scheme.strictHenselizationStructuralMap_eq barY j
     have hp := hpointσ j
     have hw := ((equivSmallModel.{v}
       (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).2.w
-    change pointLift ≫ Classical.choose
-      (Scheme.exists_strictHenselizationStructuralMap barY) = barY
+    change pointLift ≫ Scheme.strictHenselizationStructuralMap barY = barY
     rw [← hj]
     simpa only [pointLift, Scheme.isoSpec_Spec_inv, Category.assoc] using!
       (congrArg (fun f ↦ f ≫ ((Scheme.AffineEtale.Spec Y).obj
@@ -528,11 +529,11 @@ theorem strictHenselizationFunctoriality
   have hcS : ∀ a, cS a ≫ pS a = Scheme.strictHenselizationStructuralMap barS := by
     intro a
     simpa only [cS, pS, Scheme.isoSpec_Spec_inv] using!
-      Classical.choose_spec (Scheme.exists_strictHenselizationStructuralMap barS) a
+      Scheme.strictHenselizationStructuralMap_eq barS a
   have hcT : ∀ b, cT b ≫ pT b = Scheme.strictHenselizationStructuralMap barT := by
     intro b
     simpa only [cT, pT, Scheme.isoSpec_Spec_inv] using!
-      Classical.choose_spec (Scheme.exists_strictHenselizationStructuralMap barT) b
+      Scheme.strictHenselizationStructuralMap_eq barT b
   have hψS : ∀ a, Spec.map (CommRingCat.ofHom ψS) ≫ cS a =
       ((equivSmallModel.{v}
         (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj a).2.left := hσS

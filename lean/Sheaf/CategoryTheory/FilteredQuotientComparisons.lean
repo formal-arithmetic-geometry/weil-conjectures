@@ -115,7 +115,8 @@ private theorem first_page_comparison
     exact (image.eq_fac _).symm
   simpa only [Iso.trans_hom, Category.assoc, hi,
     HomologicalComplex.homologyMap_id, Category.comp_id,
-    DecreasingFiltration.gradedPiece, DecreasingFiltration.complexQuotient] using he
+    DecreasingFiltration.gradedPiece, DecreasingFiltration.gr,
+    DecreasingFiltration.complexQuotient] using he
 
 private theorem normalized_homology_naturality
     {C : Type u} [Category.{v} C] [Abelian C]
@@ -429,6 +430,7 @@ theorem filteredQuotient_comparisons_rest
       f ≫ HomologicalComplex.homologyMap (φ U p 1 (by omega)) (p + q)) heH
     exact heQ.trans (by
       simpa only [Category.assoc, DecreasingFiltration.gradedPiece,
+        DecreasingFiltration.gr,
         DecreasingFiltration.complexQuotient] using heH'.symm)
   · intro U V t p q r hr
     choose s hs using t.hom.preserves

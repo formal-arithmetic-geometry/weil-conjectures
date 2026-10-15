@@ -6,7 +6,7 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackSectionsNatural

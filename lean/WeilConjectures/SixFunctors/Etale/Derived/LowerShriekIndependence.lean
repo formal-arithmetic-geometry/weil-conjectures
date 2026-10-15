@@ -126,6 +126,7 @@ theorem isIso_derivedPlus_unit_app_openImmersionLowerShriek {c d : Compactificat
     fun M hM ↦ IsZero.of_full_of_faithful_of_isZero DerivedCategory.Plus.ι M hM
   let sq := IsPullback.of_hasPullback r.hom d.i.closedComplement
   have := Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
+  rw [Etale.baseChange_eq_derivedBaseChangeMapPlus] at this
   have hsource : IsZero (D+((d.i.closedComplement)^*[ModuleCat.{u + 1} Λ]).obj
       (D+((d.i)_!open[ModuleCat.{u + 1} Λ]).obj K)) :=
     hι _ (isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range _ d.i

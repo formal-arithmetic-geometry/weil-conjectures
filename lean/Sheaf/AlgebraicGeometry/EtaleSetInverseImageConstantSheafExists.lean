@@ -1,6 +1,6 @@
 /- helper construction -/
 module
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite

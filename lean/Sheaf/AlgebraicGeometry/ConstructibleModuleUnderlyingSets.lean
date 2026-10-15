@@ -6,7 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-!
@@ -53,7 +53,7 @@ private theorem finiteLocallyConstant_underlyingSets {Λ : Type (u + 1)}
     [CommRing Λ] [Finite Λ] {Y : Scheme.{u}}
     (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hG : IsFiniteLocallyConstantSheaf G) :
-    IsFiniteLocallyConstantEtaleSheafOfSets
+    IsLisseEtaleSheafOfSets
       ((sheafCompose Y.smallEtaleTopology
         (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj G) := by
   let := hG
@@ -65,7 +65,7 @@ private theorem finiteLocallyConstant_underlyingSets {Λ : Type (u + 1)}
       (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj
       (G.over (d.cover.etalePrecoverageToEtale i))).IsConstant _
     infer_instance
-  · intro Ω _ _ s
+  · refine ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2 ?_⟩
     let P := pointSmallEtale s
     let M := (P.sheafFiber (A := ModuleCat.{u + 1} Λ)).obj G
     let : Module.Finite Λ M := (ModuleCat.isFinitelyGenerated_iff M).mp
@@ -121,9 +121,13 @@ theorem isConstructibleEtaleSheafOfSets_of_module
     exact Sheaf.isConstant_congr _
       (((S.domain k).smallEtaleTopology.overPullback (Type (u + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e.symm)
-  · intro Ω _ _ s
-    let := hUG.2 Ω s
-    exact Finite.of_equiv _
+  · refine ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2 ?_⟩
+    have hfinite : Finite ((pointSmallEtale s).sheafFiber.obj
+        ((sheafCompose (S.domain k).smallEtaleTopology
+          (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj G)) :=
+      (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
+        (hUG.2.isFinitelyGenerated_sheafFiber Ω s)
+    exact @Finite.of_equiv _ _ hfinite
       (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv.symm
 
 end AlgebraicGeometry.Scheme

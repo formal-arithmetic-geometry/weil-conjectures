@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
-public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 
 /-!
 # The pointwise invertible-direct-image locus in the normalized Picard functor
@@ -30,7 +30,7 @@ It records only the pointwise assignment; stability under base change is a separ
 A normalization trivialization is not included in a class.
 Source: Stacks Project, Tag 0B9V (blueprint: def-pc-f-subfunctor). -/
 noncomputable def picardInvertibleDirectImageClasses {k : Type v} [Field k] {X : Scheme.{v}}
-    (f : X ⟶ Spec (.of k)) [f.IsSmoothProjectiveCurve]
+    (f : X ⟶ Spec (.of k)) [IsSmoothProjectiveCurve f]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules]
     (T : Over (Spec (.of k))) :

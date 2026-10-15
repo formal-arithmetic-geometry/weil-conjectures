@@ -45,7 +45,7 @@ private theorem comparisonInclusion_alpha (X : BigradedExactCouple C 0)
   induction n with
   | zero => simp [hI0, pageCouple]
   | succ n ih =>
-    change (Classical.choice (X.pageCouple n).derivedMaps_exists).alpha p q ≫ _ = _
+    simp only [pageCouple, derived_alpha]
     rw [hIs, hIs, ← Category.assoc,
       (Classical.choice (X.pageCouple n).derivedMaps_exists).alpha_comm,
       Category.assoc, ih, Category.assoc]
@@ -153,6 +153,7 @@ private theorem comparisonLift_g (X : BigradedExactCouple C 0)
       congr! 1 <;> omega
     rw [T.projection_succ]
     dsimp only [comparisonLift]
+    simp only [pageCouple, derived_g]
     change (comparisonLift X n p q ≫ eqToHom _ ≫
       factorThruImage (Y.alpha ((p - (n + 1 : ℕ)) + 1)
         ((q + (n + 1 : ℕ)) - 1))) ≫ M.g _ _ ≫ _ = _

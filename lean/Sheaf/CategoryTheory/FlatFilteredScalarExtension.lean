@@ -60,12 +60,10 @@ noncomputable def filteredScalarObject (φ : A →+* B)
     FilteredObject (CochainComplex (ModuleCat.{max uS vS wS} B) ℤ) where
   obj := (filteredScalarComplex.{uS, vS, wS} φ (.up ℤ)).obj U.obj
   filtration := {
-    step := fun p ↦ imageSubobject
+    F := fun p ↦ imageSubobject
       ((filteredScalarComplex.{uS, vS, wS} φ (.up ℤ)).map (U.filtration.step p).arrow)
-    antitone_step := by
-      intro p q hpq
-      have h := U.filtration.antitone_step hpq
-      dsimp only
+    F_succ_le p := by
+      have h := U.filtration.F_succ_le p
       rw [← Subobject.ofLE_arrow h, Functor.map_comp]
       exact imageSubobject_comp_le _ _ }
 

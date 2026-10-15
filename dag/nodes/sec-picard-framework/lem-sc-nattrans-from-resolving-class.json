@@ -1,122 +1,134 @@
 {
-  "id": "lem-sc-nattrans-from-resolving-class",
-  "kind": "statement",
-  "title": "Extension of natural comparisons out of a localized functor",
-  "statement": "Let C,D be categories, W a morphism property of C with right calculus of fractions (identities, composition, right Ore squares and right cancellation refinements), and P a predicate on objects of C. Assume every X admits s:R→X in W with P(R). Let A,B:C→D be functors, with A(s) invertible for s∈W. Suppose α_X:A(X)→B(X) is given for objects satisfying P, and A(t)≫α_Y=α_X≫B(t) for every t:X→Y between such objects. Then there is a natural transformation β:A→B with β_X=α_X for every object satisfying P. No preservation of weak equivalences is assumed for B.",
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/06YJ",
-    "place": "Resolving-class descent of a comparison from representatives; proved using the right Ore axiom of Stacks Tag 04VC and explicit cancellation."
+ "id": "lem-sc-nattrans-from-resolving-class",
+ "kind": "statement",
+ "title": "Extension of natural comparisons out of a localized functor",
+ "statement": "Let C,D be categories, W a morphism property of C with right calculus of fractions (identities, composition, right Ore squares and right cancellation refinements), and P a predicate on objects of C. Assume every X admits s:R→X in W with P(R). Let A,B:C→D be functors, with A(s) invertible for s∈W. Suppose α_X:A(X)→B(X) is given for objects satisfying P, and A(t)≫α_Y=α_X≫B(t) for every t:X→Y between such objects. Then there is a natural transformation β:A→B with β_X=α_X for every object satisfying P. No preservation of weak equivalences is assumed for B.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Resolving-class descent of a comparison from representatives; proved using the right Ore axiom of Stacks Tag 04VC and explicit cancellation."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For every X choose a resolution s_X:R_X→X with P(R_X) and s_X∈W. Define β_X=A(s_X)⁻¹≫α_R_X≫B(s_X). Multiplying by A(s_X) gives its defining equation.",
+   "uses": [],
+   "elementary": true
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "For every X choose a resolution s_X:R_X→X with P(R_X) and s_X∈W. Define β_X=A(s_X)⁻¹≫α_R_X≫B(s_X). Multiplying by A(s_X) gives its defining equation.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "Given t:R→X with P(R), apply the right Ore axiom (Stacks 04VC, RMS2) to t and s_X, then resolve the resulting common source. Obtain a:R'→R in W and b:R'→R_X with P(R') and a≫t=b≫s_X.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "Apply A to that equality and use naturality of α along a and b, together with the defining equation for β_X. Cancel the isomorphism A(a). This gives A(t)≫β_X=α_R≫B(t) for every arrow t out of a resolving object.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "For f:X→Y precompose the desired naturality square with the invertible A(s_X), and apply the preceding formula to s_X and s_X≫f. The same formula at the identity of an object satisfying P gives β_X=α_X.",
-      "uses": [],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "group": "N2",
-    "document": "https://stacks.math.columbia.edu/tag/06YJ",
-    "place": "Resolving-class descent of a comparison from representatives; proved using the right Ore axiom of Stacks Tag 04VC and explicit cancellation."
+  {
+   "text": "Given t:R→X with P(R), apply the right Ore axiom (Stacks 04VC, RMS2) to t and s_X, then resolve the resulting common source. Obtain a:R'→R in W and b:R'→R_X with P(R') and a≫t=b≫s_X.",
+   "uses": [],
+   "elementary": true
   },
-  "mathlib_match": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "natural transformations from localized functor extend from K flat resolutions resolving full subcategory",
-      "date": "2026-10-14",
-      "results": "8 hits: CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_functorial_right_resolutions, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans, CategoryTheory.LocalizerMorphism.functorialRightResolutions.localizerMorphismInv, CategoryTheory.LocalizerMorphism.functorialRightResolutions.ι, CategoryTheory.LocalizerMorphism.localizedFunctor, CategoryTheory.LocalizerMorphism.functorialRightResolutions.W₁_ι_app, CategoryTheory.Localization.Construction.NatTransExtension.app, CategoryTheory.Localization.natTrans_ext",
-      "verdict": "Generic APIs only; no exact representative or resolving-class extension theorem."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.leftDerivedLift",
-      "date": "2026-10-14",
-      "results": "6 hits: CategoryTheory.Functor.leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.leftDerived_fac, CategoryTheory.Functor.leftDerived_fac_app, CategoryTheory.Functor.leftDerived_fac_assoc, CategoryTheory.Functor.leftDerived_fac_app_assoc",
-      "verdict": "Generic APIs only; no exact representative or resolving-class extension theorem."
-    },
-    {
-      "tool": "grep",
-      "query": "KFlat.*[Nn]atur|[Nn]atur.*KFlat|resolvingClass",
-      "date": "2026-10-14",
-      "results": "0 hits: ",
-      "verdict": "Generic APIs only; no exact representative or resolving-class extension theorem."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Extend a natural transformation from a full resolving class using right calculus of fractions when its source inverts weak equivalences",
-      "date": "2026-10-14",
-      "results": "Service unavailable: Internal Server Error. Recorded as unavailable, not as no match.",
-      "verdict": "unavailable"
-    }
-  ],
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.NormalizedDerivedPullbackKFlatCounit",
-    "date": "2026-10-14",
-    "group": "N2"
+  {
+   "text": "Apply A to that equality and use naturality of α along a and b, together with the defining equation for β_X. Cancel the isomorphism A(a). This gives A(t)≫β_X=α_R≫B(t) for every arrow t out of a resolving object.",
+   "uses": [],
+   "elementary": true
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "Parent cone normalization step 3: Resolving-class descent of a comparison from representatives; proved using the right Ore axiom of Stacks Tag 04VC and explicit cancellation.",
-      "via": [
-        "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
-        "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.CategoryTheory.NatTransFromResolvingClass",
-    "file": "lean/Sheaf/CategoryTheory/NatTransFromResolvingClass.lean",
-    "declaration": "CategoryTheory.exists_natTrans_from_resolvingClass",
-    "statement": "theorem exists_natTrans_from_resolvingClass\n    {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]\n    (W : MorphismProperty C) [W.HasRightCalculusOfFractions]\n    (P : C → Prop)\n    (hres : ∀ X : C, ∃ (R : C) (s : R ⟶ X), P R ∧ W s)\n    (A B : C ⥤ D) (hA : W.IsInvertedBy A)\n    (α : ∀ X : C, P X → (A.obj X ⟶ B.obj X))\n    (hα : ∀ (X Y : C) (hX : P X) (hY : P Y) (s : X ⟶ Y),\n      A.map s ≫ α Y hY = α X hX ≫ B.map s) :\n    ∃ β : A ⟶ B, ∀ (X : C) (hX : P X), β.app X = α X hX",
-    "branch": "sheaf-dag",
-    "by": "N2",
-    "date": "2026-10-14"
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "N2",
-    "result": "pass",
-    "landing": "20261014T022549-L-4046769",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "N2",
-    "result": "pass",
-    "landing": "20261014T022549-L-4046769",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "For f:X→Y precompose the desired naturality square with the invertible A(s_X), and apply the preceding formula to s_X and s_X≫f. The same formula at the identity of an object satisfying P gives β_X=α_X.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N2",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Resolving-class descent of a comparison from representatives; proved using the right Ore axiom of Stacks Tag 04VC and explicit cancellation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations from localized functor extend from K flat resolutions resolving full subcategory",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_functorial_right_resolutions, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans, CategoryTheory.LocalizerMorphism.functorialRightResolutions.localizerMorphismInv, CategoryTheory.LocalizerMorphism.functorialRightResolutions.ι, CategoryTheory.LocalizerMorphism.localizedFunctor, CategoryTheory.LocalizerMorphism.functorialRightResolutions.W₁_ι_app, CategoryTheory.Localization.Construction.NatTransExtension.app, CategoryTheory.Localization.natTrans_ext",
+   "verdict": "Generic APIs only; no exact representative or resolving-class extension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedLift",
+   "date": "2026-10-14",
+   "results": "6 hits: CategoryTheory.Functor.leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.leftDerived_fac, CategoryTheory.Functor.leftDerived_fac_app, CategoryTheory.Functor.leftDerived_fac_assoc, CategoryTheory.Functor.leftDerived_fac_app_assoc",
+   "verdict": "Generic APIs only; no exact representative or resolving-class extension theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat.*[Nn]atur|[Nn]atur.*KFlat|resolvingClass",
+   "date": "2026-10-14",
+   "results": "0 hits: ",
+   "verdict": "Generic APIs only; no exact representative or resolving-class extension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a natural transformation from a full resolving class using right calculus of fractions when its source inverts weak equivalences",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error. Recorded as unavailable, not as no match.",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedDerivedPullbackKFlatCounit",
+  "date": "2026-10-14",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent cone normalization step 3: Resolving-class descent of a comparison from representatives; proved using the right Ore axiom of Stacks Tag 04VC and explicit cancellation.",
+   "via": [
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NatTransFromResolvingClass",
+  "file": "lean/Sheaf/CategoryTheory/NatTransFromResolvingClass.lean",
+  "declaration": "CategoryTheory.exists_natTrans_from_resolvingClass",
+  "statement": "theorem exists_natTrans_from_resolvingClass\n    {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]\n    (W : MorphismProperty C) [W.HasRightCalculusOfFractions]\n    (P : C → Prop)\n    (hres : ∀ X : C, ∃ (R : C) (s : R ⟶ X), P R ∧ W s)\n    (A B : C ⥤ D) (hA : W.IsInvertedBy A)\n    (α : ∀ X : C, P X → (A.obj X ⟶ B.obj X))\n    (hα : ∀ (X Y : C) (hX : P X) (hY : P Y) (s : X ⟶ Y),\n      A.map s ≫ α Y hY = α X hX ≫ B.map s) :\n    ∃ β : A ⟶ B, ∀ (X : C) (hX : P X), β.app X = α X hX",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261014T022549-L-4046769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

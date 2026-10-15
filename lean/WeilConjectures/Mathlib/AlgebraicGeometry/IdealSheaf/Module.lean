@@ -145,4 +145,24 @@ over every open subset, not merely a categorical monomorphism. -/
 lemma injective_toModulesι_app (U : X.Opens) : Function.Injective (J.toModulesι.app U) :=
   Scheme.Modules.injective_map_kernelι U J.toPushforwardSubscheme
 
+
+/-- If the global sections are mapped injectively to the closed subscheme cut out by `J`, then
+`J` has no nonzero global sections. -/
+lemma subsingleton_sections_toModules_of_injective
+    (h : Function.Injective (J.subschemeι.app ⊤)) : Subsingleton Γ(J.toModules, ⊤) := by
+  refine ⟨fun a b ↦ J.injective_toModulesι_app ⊤ ?_⟩
+  have ha : J.subschemeι.app ⊤ (J.toModulesι.app ⊤ a) = 0 :=
+    (J.range_toModulesι_app_eq ⊤).subset ⟨a, rfl⟩
+  have hb : J.subschemeι.app ⊤ (J.toModulesι.app ⊤ b) = 0 :=
+    (J.range_toModulesι_app_eq ⊤).subset ⟨b, rfl⟩
+  exact h (ha.trans hb.symm)
+
+/-- If `Γ(X, 𝒪_X)` is a field (for instance if `X` is proper and geometrically integral over a
+field), and the closed subscheme cut out by `J` is nonempty, then `J` has no nonzero global
+sections. -/
+lemma subsingleton_sections_toModules_of_isField (hX : IsField Γ(X, ⊤)) [Nonempty J.subscheme] :
+    Subsingleton Γ(J.toModules, ⊤) := by
+  let := hX.toField
+  have : Nonempty ↥(J.subschemeι ⁻¹ᵁ ⊤) := ⟨⟨Classical.arbitrary J.subscheme, trivial⟩⟩
+  exact J.subsingleton_sections_toModules_of_injective (J.subschemeι.app ⊤).hom.injective
 end AlgebraicGeometry.Scheme.IdealSheafData

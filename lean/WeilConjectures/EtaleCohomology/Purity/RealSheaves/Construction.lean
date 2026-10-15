@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusConjug
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusRestriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
 public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 
 /-!
@@ -394,7 +395,54 @@ lemma isConj_toStandard_frobenius (x : C.finitePoints) :
   rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one]
   exact (W.deg_eq _).symm.trans (W.deg_frobenius x)
 
+/-- Blueprint `sk-d-real-weil`: Weil sheaves and their representations.
+
+The local Frobenius `F_x` at a closed point `x` is well defined up to conjugacy in `W(C₀)`: every
+Frobenius element `f` at `x` of `π₁(C₀, s)`, whatever path from a geometric point over `x` to the
+base point it is transported along, is the image of an element of `W(C₀)` of degree `e_x`, and
+that element is conjugate to `F_x` in `W(C₀)` (and not merely in `π₁(C₀, s)`). -/
+theorem isConj_frobenius_of_isFrobeniusElement (x : C.finitePoints) {f : W.fundamentalGroup}
+    (hf : haveI : Finite (C.residueField x.1) := x.2
+      Scheme.FiniteEtale.IsFrobeniusElement W.basePoint W.fundamentalGroup x.1 f) :
+    IsConj (W.frobenius x) (W.weilGroupEquiv.symm
+      ⟨(f, Multiplicative.ofAdd (p.degreeOver x.1 : ℤ)),
+        haveI : Finite (C.residueField x.1) := x.2
+        hf.mem_weilGroup p⟩) := by
+  have := W.connectedSpace
+  have : Finite (C.residueField x.1) := x.2
+  obtain ⟨c, n, hcW, hc⟩ := (W.isFrobeniusElement_frobenius x).exists_mem_weilGroup_conj p
+    W.basePoint W.fundamentalGroup hf
+  refine isConj_iff.2 ⟨W.weilGroupEquiv.symm ⟨(c, n), hcW⟩,
+    W.weilGroupEquiv.injective (Subtype.ext (Prod.ext ?_ ?_))⟩
+  · simpa using hc
+  · simp only [map_mul, map_inv, MulEquiv.apply_symm_apply, Subgroup.coe_mul,
+      Subgroup.coe_inv, Prod.snd_mul, Prod.snd_inv]
+    rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one]
+    exact (W.deg_eq _).symm.trans (W.deg_frobenius x)
+
 end Standard
+
+section OpenSubcurve
+
+variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
+  {U : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j]
+
+omit [Finite K] in
+/-- An affine open of a curve is a curve. -/
+lemma isCurve_comp_of_isAffine [IsAffine U] : IsCurve (j ≫ p) where
+  krullDim_le_one :=
+    j.isOpenEmbedding.isInducing.topologicalKrullDim_le.trans (IsCurve.krullDim_le_one (f := p))
+
+omit [Finite K] [IsCurve p] in
+/-- A nonempty open of a smooth geometrically connected scheme over a field is geometrically
+connected: it is geometrically irreducible. -/
+lemma geometricallyConnected_comp [Nonempty U] [Smooth p] [GeometricallyConnected p] :
+    GeometricallyConnected (j ≫ p) := by
+  have : GeometricallyIrreducible p := .of_smooth_of_geometricallyConnected p
+  have : Surjective (j ≫ p) := ⟨fun _ ↦ ⟨Nonempty.some inferInstance, Subsingleton.elim _ _⟩⟩
+  infer_instance
+
+end OpenSubcurve
 
 end WeilGroup
 

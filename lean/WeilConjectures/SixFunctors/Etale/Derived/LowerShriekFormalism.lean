@@ -181,6 +181,7 @@ lemma isZero_plus_upperStar_lowerStar_openImmersionLowerShriek (hΛ : IsAddTorsi
       (R+((b)_*[ModuleCat.{u + 1} Λ]).obj (D+((l)_!open[ModuleCat.{u + 1} Λ]).obj M))) := by
   let sq := IsPullback.of_hasPullback b r.closedComplement
   have := Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ hΛ sq
+  rw [Etale.baseChange_eq_derivedBaseChangeMapPlus] at this
   have hdisj :
       Disjoint (Set.range (pullback.fst b r.closedComplement).base) (Set.range l.base) := by
     rw [Set.disjoint_left]
@@ -201,7 +202,8 @@ lemma isZero_plus_upperStar_lowerStar_openImmersionLowerShriek (hΛ : IsAddTorsi
 /-- **Proper base change for the compactly supported direct image**: in the bounded below étale
 derived categories with finite coefficients, the exchange map `r_! t_* ⟶ b_* l_!` of a cartesian
 square with `b` proper is an isomorphism. On the open `r` this is formal; on its closed complement
-both sides vanish, by proper base change (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`,
+both sides vanish, by proper base change
+(`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`,
 blueprint `sk-thm-properbasechange`). -/
 instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasProperExchange where
   isIso_exchange {U' U Z' Z t l r b} _ _ _ h := by

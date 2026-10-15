@@ -156,7 +156,8 @@ theorem filteredQuotient_canonical_structure
       eQ s p q ≪≫ (eZ p q (s + 1) (by omega)).symm
     refine ⟨X, fun _ _ ↦ Iso.refl _, eC, ?_, ?_, ?_⟩
     · intro P Q
-      dsimp [X, filteredHomologyExactCouple, filteredHomologyAlpha, filteredHomologyD,
+      simp only [X, filteredHomologyExactCouple, BigradedExactCouple.ofShifted_alpha]
+      dsimp [filteredHomologyAlpha, filteredHomologyD,
         filteredHomologyE, filteredHomologyG]
       simp only [Category.id_comp, Category.comp_id]
     · intro P Q
@@ -165,7 +166,9 @@ theorem filteredQuotient_canonical_structure
       rw [eq_of_heq (hbase (-Q) (P + 2 * Q))]
       simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
       dsimp only [filteredHomologyEIso, eqToIso]
-      dsimp [X, filteredHomologyExactCouple, BigradedExactCouple.initialG,
+      simp only [X, filteredHomologyExactCouple, BigradedExactCouple.initialG,
+        BigradedExactCouple.ofShifted_g]
+      dsimp [
         filteredHomologyAlpha, filteredHomologyD,
         filteredHomologyE, filteredHomologyG]
       simp only [Category.assoc, Iso.inv_hom_id_assoc, eqToHom_trans, eqToHom_refl,

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 
 /-!
@@ -35,13 +36,15 @@ adjoints: the iterated mate of `α` is its conjugate, hence an isomorphism.
 - `CategoryTheory.Adjunction.isIso_rightAdjointProjectionMap_of_mateEquiv`: transport of the
   invertibility of the projection map.
 - `CategoryTheory.Adjunction.isIso_mateEquiv_app_of_isIso`: invertibility of the base change map.
+- `CategoryTheory.Adjunction.isIso_mateEquiv_app_of_isIso_biproductDesc`: invertibility of the
+  base change map when `R ∘ N` only decomposes as a finite biproduct of copies of the identity.
 -/
 
 @[expose] public section
 
 namespace CategoryTheory.Adjunction
 
-open _root_.CategoryTheory.Functor
+open _root_.CategoryTheory.Functor Limits
 
 variable {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
   {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) {F' : D' ⥤ C'} {G' : C' ⥤ D'} (adj' : F' ⊣ G')
@@ -155,6 +158,69 @@ lemma isIso_mateEquiv_app_of_isIso (M : C) [IsIso (adj_C.unit.app M)]
     rw [← h]
     infer_instance
   exact IsIso.of_isIso_comp_left (adj_D.counit.app (N_D.obj (G.obj M))) _
+
+/-- The mate along `N_C ⊣ R_C` and `N_D ⊣ R_D` of the base change map, the map
+`G (R_C M') ⟶ R_D (G' M')`, is an isomorphism: it is the conjugate of `α`. -/
+lemma isIso_mateEquiv_mateEquiv :
+    IsIso (mateEquiv adj_C adj_D (mateEquiv adj adj' α.hom)) := by
+  have hconj : IsIso (conjugateEquiv (adj.comp adj_C) (adj_D.comp adj') α.hom) :=
+    inferInstance
+  rwa [← iterated_mateEquiv_conjugateEquiv adj adj' adj_D adj_C α.hom] at hconj
+
+variable [Preadditive C] [Preadditive D] [HasFiniteBiproducts C]
+  [G.Additive] [R_D.ReflectsIsomorphisms]
+
+/-- The base change map `β : N_D (G M) ⟶ G' (N_C M)`, the mate of an isomorphism
+`α : N_D ⋙ F' ≅ F ⋙ N_C`, is an isomorphism at `M` in the following situation: `N_C ⊣ R_C` and
+`N_D ⊣ R_D` are adjunctions with `R_D` conservative, and there are finitely many endomorphisms
+`e i` of `N_C M` and `e' i` of `N_D (G M)` compatible with `β`, such that the maps
+`M ⟶ R_C (N_C M)` and `G M ⟶ R_D (N_D (G M))` obtained by composing the units with `R_C (e i)`
+and `R_D (e' i)` exhibit the targets as biproducts of copies of `M` and of `G M`.
+
+This applies to extension of scalars `N` along a finite free ring map, with right adjoint the
+restriction of scalars `R`, and to the multiplications `e i` by the elements of a basis: on each
+summand, `R_D β` is then the iterated mate of `α`, which is invertible. -/
+lemma isIso_mateEquiv_app_of_isIso_biproductDesc {ι : Type} [Finite ι] (M : C)
+    (e : ι → (N_C.obj M ⟶ N_C.obj M)) (e' : ι → (N_D.obj (G.obj M) ⟶ N_D.obj (G.obj M)))
+    (he : ∀ i, e' i ≫ (mateEquiv adj adj' α.hom).app M =
+      (mateEquiv adj adj' α.hom).app M ≫ G'.map (e i))
+    [IsIso (biproduct.desc fun i ↦ adj_C.unit.app M ≫ R_C.map (e i))]
+    [IsIso (biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i))] :
+    IsIso ((mateEquiv adj adj' α.hom).app M) := by
+  set β := mateEquiv adj adj' α.hom
+  set β' := mateEquiv adj_C adj_D β
+  have : IsIso β' := isIso_mateEquiv_mateEquiv adj adj' α adj_D adj_C
+  have hu := unit_mateEquiv adj_C adj_D β M
+  dsimp at hu
+  -- the comparison `⨁ G M ⟶ G (⨁ M)` is invertible, `G` being additive
+  have hc : IsIso (biproduct.desc fun i ↦ G.map (biproduct.ι (fun _ : ι ↦ M) i)) := by
+    have h : (biproduct.desc fun i ↦ G.map (biproduct.ι (fun _ : ι ↦ M) i)) =
+        (G.mapBiproduct fun _ : ι ↦ M).inv := by
+      ext i
+      simp [Functor.mapBiproduct]
+    rw [h]
+    infer_instance
+  have key : (biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i)) ≫
+      R_D.map (β.app M) =
+      (biproduct.desc fun i ↦ G.map (biproduct.ι (fun _ : ι ↦ M) i)) ≫
+        G.map (biproduct.desc fun i ↦ adj_C.unit.app M ≫ R_C.map (e i)) ≫
+          β'.app (N_C.obj M) := by
+    ext i
+    simp only [biproduct.ι_desc_assoc, Category.assoc, ← G.map_comp_assoc, biproduct.ι_desc]
+    rw [← R_D.map_comp, he, R_D.map_comp, ← reassoc_of% hu, G.map_comp, Category.assoc]
+    congr 1
+    exact (β'.naturality (e i)).symm
+  have : IsIso (R_D.map (β.app M)) := by
+    have : IsIso ((biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i)) ≫
+        R_D.map (β.app M)) := by
+      have : IsIso (β'.app (N_C.obj M)) := NatIso.isIso_app_of_isIso (β' : NatTrans _ _) _
+      rw [key]
+      have h2 : IsIso (G.map (biproduct.desc fun i ↦ adj_C.unit.app M ≫ R_C.map (e i))) :=
+        Functor.map_isIso _ _
+      exact @IsIso.comp_isIso _ _ _ _ _ _ _ hc (@IsIso.comp_isIso _ _ _ _ _ _ _ h2 this)
+    exact IsIso.of_isIso_comp_left
+      (biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i)) _
+  exact isIso_of_reflects_iso _ R_D
 
 end BaseChange
 

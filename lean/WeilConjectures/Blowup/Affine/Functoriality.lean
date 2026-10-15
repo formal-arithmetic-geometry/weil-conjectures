@@ -174,8 +174,9 @@ lemma AffineBlowup.hom_comp (φ : A →+* B) (ψ : B →+* C) (h : I.map φ = J)
       (reesGrading.irrelevant_le_map_hom ψ h'))
 
 /-- The degree-zero square: the degree-zero component of `reesGrading.hom φ h` intertwines the
-canonical identifications of the degree-zero subrings with the base rings. -/
-private lemma gradeZeroRingHom_comp_reesGradingZero (φ : A →+* B) (h : I.map φ = J) :
+canonical identifications of the degree-zero subrings with the base rings.
+(blueprint: `lemma-nagata-rees-localization-degree-zero`) -/
+lemma gradeZeroRingHom_comp_reesGradingZero (φ : A →+* B) (h : I.map φ = J) :
     (reesGrading.hom φ h).gradeZeroRingHom.comp (reesGradingZero I).toRingHom =
       (reesGradingZero J).toRingHom.comp φ :=
   RingHom.ext fun a => Subtype.ext <| Subtype.ext <| by simp

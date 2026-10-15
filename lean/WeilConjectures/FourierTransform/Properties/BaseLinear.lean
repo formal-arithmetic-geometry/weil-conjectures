@@ -155,6 +155,7 @@ theorem nonempty_iso_fourierTransform_tateTwist [HasTateTwist Λ] (Ψ : AddChar 
   let φ {X : Scheme.{u}} (f : X ⟶ S) :
       (derivedTensorRightPullback (ModuleCat.{u + 1} Λ) f).obj (tateObject Λ S m) ≅
         tateTwist Λ X m :=
+    haveI : HasInvertibleExponent Λ X := .of_hom f
     (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.mapIso
       (((leftDerivedUpperStarIsoMapDerivedCategory _ f).app _).symm ≪≫
         leftDerivedUpperStarTateObjectIso f m)

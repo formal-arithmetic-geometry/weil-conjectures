@@ -305,6 +305,7 @@ theorem g_factors_limitCycles (X : BigradedExactCouple C 0) (L : LimitSubobjects
         infer_instance
       let := hmono
       apply (cancel_mono (Y.derivedDInclusion (p + 2) (q - 1))).mp
+      simp only [pageCouple, derived_f]
       change (b ≫ T.projection (r + 1) p q ≫ M.f p q) ≫
         Y.derivedDInclusion (p + 2) (q - 1) = _
       rw [Category.assoc]
@@ -361,8 +362,8 @@ theorem imageFiltration_antitone (X : BigradedExactCouple C 0) (n : ℤ)
 Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/
 noncomputable def imageFiltration (X : BigradedExactCouple C 0) (n : ℤ)
     (A : AlphaColimit X n) : DecreasingFiltration A.obj where
-  step p := imageSubobject (A.ι p)
-  antitone_step := imageFiltration_antitone X n A
+  F p := imageSubobject (A.ι p)
+  F_succ_le p := imageFiltration_antitone X n A (by omega)
 
 /-- The canonical map from `D^{p,q}` onto the graded piece of its image filtration.
 Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/
