@@ -1,0 +1,116 @@
+{
+ "id": "new-lem-weil-pbc-proetale-module-canonical-unit",
+ "kind": "statement",
+ "title": "Canonical adjunction unit comparison for module inverse image",
+ "statement": "For every scheme morphism i and commutative ring sheaf A, there exists an adjunction between the specified pro-etale module inverse-image functor and its ring-unit pushforward such that the abelian adjunct of its unit is an isomorphism at every module.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03D3",
+  "place": "Tags 03D2 and 03D3; transport of the module pullback adjunction through strict AsSmall models and compatibility with the abelian inverse-image unit."
+ },
+ "proof": [
+  {
+   "text": "Transport the module pullback adjunction along the strict AsSmall equivalences. The model ring-unit presentation and the restricted abelian adjunction identify the underlying unit mate with the model module comparison, which is invertible by the underlying module comparison theorem. Transporting this isomorphism back gives the required adjunction and componentwise IsIso result.",
+   "uses": [
+    "lem-weil-pbc-proetale-module-inverse-image-underlying",
+    "lem-weil-pbc-proetale-model-ring-presentation",
+    "lem-weil-pbc-module-inverse-image-action-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-module-inverse-image-underlying",
+  "lem-weil-pbc-proetale-model-ring-presentation",
+  "lem-weil-pbc-module-inverse-image-action-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03D3",
+  "place": "Unit-compatible strict AsSmall transport of the module pullback adjunction.",
+  "group": "C4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq unit homEquiv IsIso",
+   "results": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app and homEquiv_naturality_right_symm; no theorem packages the transported pro-etale comparison.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "The generic adjunction uniqueness identity only; transport-specific statement is absent.",
+   "date": "2026-10-16",
+   "verdict": "Generic identity used in the parent proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical underlying module inverse image unit comparison",
+   "results": "No exact canonical pro-etale match; the model comparison node is the stated dependency.",
+   "date": "2026-10-16",
+   "verdict": "No existing declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical module inverse image unit mate isomorphism for sheaves on sites",
+   "results": "Search service unavailable; no exact declaration found.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnitComparison",
+  "date": "2026-10-16",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-weil-pbc-proetale-module-inverse-image-unit-comparison",
+   "place": "Strict AsSmall canonical adjunction split from the arbitrary-adjunction uniqueness step.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleInverseImageCanonicalUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleModuleInverseImage_canonicalUnitComparison",
+  "statement": "theorem proEtaleModuleInverseImage_canonicalUnitComparison {X Z : Scheme.{u}} (i : Z ⟶ X)\n    (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :\n    ∃ (adj₀ : (proEtaleModuleInverseImage i A ⊣\n      (SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange i)\n      (J := ProEt.topology X) (K := ProEt.topology Z)\n      (S := ((sheafCompose (ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) (R := ((sheafCompose (ProEt.topology Z)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj A)))\n      ⟨Functor.whiskerRight\n        ((proEtaleSheafAdjunction i CommRingCat.{u + 1}).unit.app A).hom\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩))),\n      let S := (sheafCompose (ProEt.topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A\n      let R := (sheafCompose (ProEt.topology Z)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n          ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj A)\n      ∀ M, IsIso (((proEtaleSheafAdjunction i AddCommGrpCat.{u + 1}).homEquiv\n        ((SheafOfModules.toSheaf S).obj M)\n        ((SheafOfModules.toSheaf R).obj ((proEtaleModuleInverseImage i A).obj M))).symm\n          ((SheafOfModules.toSheaf S).map (adj₀.unit.app M)))",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-16"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T234124-L-3408411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T234124-L-3408411",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

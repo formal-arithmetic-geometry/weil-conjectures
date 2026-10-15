@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
-import Sheaf.AlgebraicGeometry.ProEtaleModelRingPresentation
-import Sheaf.CategoryTheory.ModuleInverseImageAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
 
 /-! # The canonical comparison of module and abelian inverse image
 
@@ -70,6 +69,61 @@ theorem proEtaleModuleInverseImage_unitComparison_isIso {X Z : Scheme.{u}} (i : 
       ((SheafOfModules.toSheaf S).obj M)
       ((SheafOfModules.toSheaf R).obj ((proEtaleModuleInverseImage i A).obj M))).symm
         ((SheafOfModules.toSheaf S).map (ai.unit.app M))) := by
-  sorry
+  dsimp only
+  intro M
+  let a := proEtaleSheafAdjunction i AddCommGrpCat.{u + 1}
+  let P := SheafOfModules.toSheaf
+    ((sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)
+  let Q := SheafOfModules.toSheaf
+    ((sheafCompose (ProEt.topology Z)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj A))
+  let T := SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange i)
+      (J := ProEt.topology X) (K := ProEt.topology Z)
+      (S := ((sheafCompose (ProEt.topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) (R := ((sheafCompose
+        (ProEt.topology Z) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj A)))
+      ⟨Functor.whiskerRight
+        ((proEtaleSheafAdjunction i CommRingCat.{u + 1}).unit.app A).hom
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+  let L := proEtaleModuleInverseImage i A
+  obtain ⟨adj₀, h₀⟩ := proEtaleModuleInverseImage_canonicalUnitComparison i A
+  let c₀ := (a.homEquiv (P.obj M) (Q.obj (L.obj M))).symm
+    (P.map (adj₀.unit.app M))
+  have hc₀ : IsIso c₀ := by
+    exact h₀ M
+  let e := adj₀.leftAdjointUniq ai
+  have he : adj₀.unit.app M ≫ T.map (e.hom.app M) = ai.unit.app M :=
+    Adjunction.unit_leftAdjointUniq_hom_app adj₀ ai M
+  let c := (a.homEquiv (P.obj M) (Q.obj (L.obj M))).symm
+    (P.map (ai.unit.app M))
+  let f₀ : P.obj M ⟶
+      (proEtaleSheafDirectImage i AddCommGrpCat).obj
+        (Q.obj ((proEtaleModuleInverseImage i A).obj M)) :=
+    P.map (adj₀.unit.app M)
+  let g₀ : Q.obj ((proEtaleModuleInverseImage i A).obj M) ⟶
+      Q.obj ((proEtaleModuleInverseImage i A).obj M) :=
+    Q.map (e.hom.app M)
+  have hce : c₀ ≫ g₀ = c := by
+    have hh := a.homEquiv_naturality_right_symm f₀ g₀
+    calc
+      c₀ ≫ g₀ = (a.homEquiv (P.obj M)
+          (Q.obj ((proEtaleModuleInverseImage i A).obj M))).symm f₀ ≫ g₀ := by rfl
+      _ = (a.homEquiv (P.obj M)
+          (Q.obj ((proEtaleModuleInverseImage i A).obj M))).symm
+          (f₀ ≫ (proEtaleSheafDirectImage i AddCommGrpCat).map g₀) := hh.symm
+      _ = (a.homEquiv (P.obj M)
+          (Q.obj ((proEtaleModuleInverseImage i A).obj M))).symm
+          (P.map (adj₀.unit.app M) ≫ P.map (T.map (e.hom.app M))) := by rfl
+      _ = c := by rw [← P.map_comp, he]
+  set_option linter.style.haveILetI false in
+  letI : IsIso (e.hom.app M) := by infer_instance
+  set_option linter.style.haveILetI false in
+  letI : IsIso g₀ := Q.map_isIso _
+  change IsIso c
+  rw [← hce]
+  exact inferInstanceAs (IsIso (c₀ ≫ g₀))
 
 end AlgebraicGeometry.Scheme
