@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.TensorPowerAlgebraCoproduct

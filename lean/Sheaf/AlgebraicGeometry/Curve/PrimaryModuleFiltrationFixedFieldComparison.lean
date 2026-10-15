@@ -5,7 +5,7 @@ Authors: SHEAF worker R3
 -/
 module
 
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.Topology.Algebra.OpenSubgroup

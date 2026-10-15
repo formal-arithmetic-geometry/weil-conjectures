@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.Topology.Sheaves.SheafCondition.Sites
 

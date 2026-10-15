@@ -5,7 +5,7 @@ Authors: SHEAF group A2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMapsBalancing

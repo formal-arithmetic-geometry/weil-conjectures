@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SimplicialHomObject
 public import Mathlib.AlgebraicTopology.SimplicialSet.Finite
 import Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence
-import Sheaf.AlgebraicGeometry.SemiRepresentableObject
+import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 import Sheaf.AlgebraicGeometry.SimplicialHomObjectPushout
 import Sheaf.AlgebraicGeometry.SimplicialHomStandardSimplex
 import Sheaf.AlgebraicTopology.GlueSimplex

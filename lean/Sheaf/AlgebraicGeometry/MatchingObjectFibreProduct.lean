@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Sheaf.CategoryTheory.ProperFaceMatchingObject
-import Sheaf.Paper.FiniteSplitEtaleHypercover
+import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 
 /-!
 # Matching schemes of termwise fibre products

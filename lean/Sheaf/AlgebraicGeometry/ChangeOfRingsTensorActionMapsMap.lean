@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H3
 -/
 module
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 /-! # The presheaf change-of-rings map

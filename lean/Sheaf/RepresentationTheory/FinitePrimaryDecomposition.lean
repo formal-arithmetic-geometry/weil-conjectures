@@ -5,7 +5,7 @@ Authors: SHEAF group U2
 -/
 module
 
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.GroupTheory.PGroup
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.Algebra.Module.PID

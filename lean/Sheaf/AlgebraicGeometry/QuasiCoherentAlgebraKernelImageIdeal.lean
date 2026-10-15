@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.RingTheory.Ideal.Maps

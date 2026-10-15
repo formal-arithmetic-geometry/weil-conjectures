@@ -5,7 +5,7 @@ Authors: SHEAF worker C1
 -/
 module
 
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Sheaf.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings

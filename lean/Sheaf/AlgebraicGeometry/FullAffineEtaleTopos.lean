@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
-public import Sheaf.CategoryTheory.SpecialCocontinuousCoverings
+public import WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen

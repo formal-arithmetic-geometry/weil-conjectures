@@ -78,7 +78,7 @@ theorem exists_coherent_idealPower_torsionFree_product
   have : I.toModules.IsQuasicoherent := by
     simpa only [pow_one] using (idealData_recursive_power_comparison I 1).1
   have : I.toModules.IsFiniteType :=
-    I.isFiniteType_toModules I.ofFiniteType_of_isLocallyNoetherian
+    I.isFiniteType_toModules_sheaf I.ofFiniteType_of_isLocallyNoetherian
   obtain ⟨V, hV, hbij⟩ := ideal_power_complement I.toModulesι
   have hsupport := (quasi_coherent_ideal_zero_set_affine X I).2.2.2.2
     I.subscheme I.subschemeι I.ker_subschemeι

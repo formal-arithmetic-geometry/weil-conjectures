@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
 import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfield

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.AffinePushforwardStalkLocalization
 import Mathlib.RingTheory.Regular.Flat

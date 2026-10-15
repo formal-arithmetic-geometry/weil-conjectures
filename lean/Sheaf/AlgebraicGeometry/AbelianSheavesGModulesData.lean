@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Point.Basic
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModulesTransport
 import Mathlib.Algebra.Category.Grp.LeftExactFunctor
 import Mathlib.Algebra.Category.Grp.AB

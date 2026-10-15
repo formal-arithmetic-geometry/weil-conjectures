@@ -6,8 +6,8 @@ Authors: SHEAF group S1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Tensor-power maps into an algebra sheaf

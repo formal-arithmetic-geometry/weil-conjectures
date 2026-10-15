@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Basic
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 
 import Mathlib.Topology.Algebra.OpenSubgroup
 

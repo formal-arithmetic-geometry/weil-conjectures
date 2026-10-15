@@ -3,7 +3,7 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 -/
 module
 
-public import Sheaf.CategoryTheory.ColimitSiteAbelianStageImage
+public import WeilConjectures.CategoryTheory.ColimitSiteAbelianStageImage
 public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import WeilConjectures.CategoryTheory.FinitePrecoverage
 import Sheaf.CategoryTheory.ColimitSiteAbelianFiniteIndexedMatching

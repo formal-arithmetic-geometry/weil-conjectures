@@ -1,5 +1,5 @@
 module
-public import Sheaf.Paper.FiniteSplitEtaleHypercover
+public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 import Sheaf.Paper.EtaleFiniteDataDescent
 @[expose] public section
 universe w

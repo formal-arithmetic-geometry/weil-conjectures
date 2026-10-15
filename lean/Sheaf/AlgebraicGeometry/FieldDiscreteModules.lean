@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.RepresentationTheory.Invariants
 public import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 import Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint
 import Sheaf.CategoryTheory.DiscreteModulesAbelian

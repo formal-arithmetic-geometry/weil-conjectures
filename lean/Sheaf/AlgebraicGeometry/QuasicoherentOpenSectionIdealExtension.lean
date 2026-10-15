@@ -74,7 +74,7 @@ theorem quasicoherent_open_section_ideal_extension
   have hqc : I.toModules.IsQuasicoherent := by
     simpa using (idealData_recursive_power_comparison I 1).1
   have : I.toModules.IsQuasicoherent := hqc
-  have : I.toModules.IsFiniteType := I.isFiniteType_toModules I.ofFiniteType_of_isLocallyNoetherian
+  have : I.toModules.IsFiniteType := I.isFiniteType_toModules_sheaf I.ofFiniteType_of_isLocallyNoetherian
   obtain ⟨V, hV, hbij⟩ := ideal_power_complement I.toModulesι
   have hVU : V = U := by
     ext x

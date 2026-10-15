@@ -7,7 +7,7 @@ module
 public import Sheaf.Paper.EtaleHypercover
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 import Sheaf.AlgebraicGeometry.MatchingObjectFibreProduct
-import Sheaf.Paper.FiniteSplitEtaleHypercover
+import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 
 /-!
 # Products of étale hypercovers

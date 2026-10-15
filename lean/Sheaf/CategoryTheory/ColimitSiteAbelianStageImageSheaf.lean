@@ -5,7 +5,7 @@ Authors: SHEAF group U3
 -/
 module
 
-public import Sheaf.CategoryTheory.ColimitSiteAbelianStageImage
+public import WeilConjectures.CategoryTheory.ColimitSiteAbelianStageImage
 public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import WeilConjectures.CategoryTheory.FinitePrecoverage
 import Sheaf.CategoryTheory.ColimitSiteAbelianStageMatchingLift

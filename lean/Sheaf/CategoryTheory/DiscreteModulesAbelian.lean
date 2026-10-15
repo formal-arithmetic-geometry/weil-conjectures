@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.Separation.Hausdorff
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Sheaf.RepresentationTheory.DiscreteContinuousInjectives
 import Sheaf.RepresentationTheory.DiscreteRep
 

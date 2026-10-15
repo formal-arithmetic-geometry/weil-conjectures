@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Sheaf.AlgebraicGeometry.TensorGradedAlgebraData
 import Sheaf.AlgebraicGeometry.TensorGradedDegreeData

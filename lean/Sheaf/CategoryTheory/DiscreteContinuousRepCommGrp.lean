@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Sheaf.CategoryTheory.DiscreteContinuousRepCommGrpAux
 
 /-!

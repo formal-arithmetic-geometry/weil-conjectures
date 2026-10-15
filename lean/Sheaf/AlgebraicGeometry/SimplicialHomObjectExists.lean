@@ -5,7 +5,7 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
+public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 public import Mathlib.AlgebraicTopology.SimplicialSet.Finite
 import Sheaf.AlgebraicTopology.SimplicialIndexFiniteInitial
 

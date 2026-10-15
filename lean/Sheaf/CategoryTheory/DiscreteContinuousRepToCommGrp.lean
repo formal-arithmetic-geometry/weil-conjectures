@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 
 /-!
 # Internal group objects associated to discrete continuous integer representations

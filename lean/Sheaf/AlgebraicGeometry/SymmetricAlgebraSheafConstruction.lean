@@ -5,7 +5,7 @@ Authors: SHEAF group Q3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.CategoryTheory.Sites.LeftExact
 

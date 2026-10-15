@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

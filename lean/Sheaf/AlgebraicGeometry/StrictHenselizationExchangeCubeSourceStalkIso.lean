@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-public import Sheaf.AlgebraicGeometry.AbelianExchangeCubeComparisons
+public import WeilConjectures.AlgebraicGeometry.AbelianExchangeCubeComparisons
 import Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsosSource
 
 @[expose] public section

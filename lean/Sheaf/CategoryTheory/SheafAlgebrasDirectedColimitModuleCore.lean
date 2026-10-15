@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Ring.FilteredColimits

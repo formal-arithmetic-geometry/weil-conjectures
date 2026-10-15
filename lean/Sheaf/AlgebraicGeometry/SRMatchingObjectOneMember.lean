@@ -5,11 +5,11 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
+public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 public import Sheaf.CategoryTheory.ProperFaceMatchingObject
 import Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence
 import Sheaf.CategoryTheory.SimplicialMatchingObject
-import Sheaf.Paper.FiniteSplitEtaleHypercover
+import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 
 /-!
 # Matching schemes and one-member semi-representable families

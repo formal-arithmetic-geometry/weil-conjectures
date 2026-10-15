@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.Grp.Preadditive
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.CofilteredSystem
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-public import Sheaf.CategoryTheory.EssentiallyConstantSystem
+public import WeilConjectures.CategoryTheory.EssentiallyConstantSystem
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-!

@@ -6,8 +6,8 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.Paper.PQFCohomology
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.AlgebraicGeometry.BoundaryCechLocalLifts
 import Sheaf.AlgebraicGeometry.CechH1MapNatural

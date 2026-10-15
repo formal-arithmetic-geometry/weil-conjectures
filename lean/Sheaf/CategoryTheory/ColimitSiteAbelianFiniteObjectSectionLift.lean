@@ -5,7 +5,7 @@ Authors: SHEAF group N4
 -/
 module
 
-public import Sheaf.CategoryTheory.ColimitSiteAbelianStageImage
+public import WeilConjectures.CategoryTheory.ColimitSiteAbelianStageImage
 public import WeilConjectures.CategoryTheory.ArrowsFunctor
 import all Sheaf.CategoryTheory.ColimitSiteAbelianStageImageRefinement
 import all Sheaf.CategoryTheory.ColimitSiteAbelianSectionDiagram

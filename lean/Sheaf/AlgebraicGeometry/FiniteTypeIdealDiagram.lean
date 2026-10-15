@@ -78,6 +78,6 @@ theorem exists_finiteType_ideal_module_diagram (X : Scheme.{u})
     I.directedOn_ofFiniteType_le I.sSup_ofFiniteType_le_eq D τ
     (fun a ↦ Iso.refl a.val.toModules) he
   refine ⟨D, τ, hc, fun a ↦ ⟨?_, Iso.refl _, he a⟩⟩
-  exact IdealSheafData.isFiniteType_toModules a.val a.property.2
+  exact IdealSheafData.isFiniteType_toModules_sheaf a.val a.property.2
 
 end AlgebraicGeometry.Scheme

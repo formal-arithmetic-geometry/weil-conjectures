@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.Topology.Separation.Profinite
 public import Mathlib.CategoryTheory.Abelian.Exact
 

@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore

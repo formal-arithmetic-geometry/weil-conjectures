@@ -183,7 +183,7 @@ theorem coherent_homs_over_open_data {X : Scheme.{u}} [IsLocallyNoetherian X]
     simpa only [idealSheafPower] using
       (Modules.ideal_times_quasiCoherent_affine_sections I F).2.2.1 1 (by decide)
   have : I.toModules.IsFiniteType :=
-    I.isFiniteType_toModules (I.ofFiniteType_of_isLocallyNoetherian)
+    I.isFiniteType_toModules_sheaf (I.ofFiniteType_of_isLocallyNoetherian)
   obtain ⟨U, one, rp, hU, hm, hpow, _⟩ :=
     sections_over_quasiCompact_open I.toModulesι F
   have hfactor (n m : ℕ) (h : n ≤ m) :

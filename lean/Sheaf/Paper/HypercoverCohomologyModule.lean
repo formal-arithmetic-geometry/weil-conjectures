@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.Paper.HypercoverCohomologyColimit
+public import WeilConjectures.AlgebraicGeometry.HypercoverCohomologyColimit
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist

@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.Paper.HypercoverCohomologyColimit
+public import WeilConjectures.AlgebraicGeometry.HypercoverCohomologyColimit
 import Sheaf.Paper.HypercoverCohomologyAbelian
 import Sheaf.Paper.HypercoverCohomologyModule
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek

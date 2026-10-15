@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import WeilConjectures.CategoryTheory.ArrowsFunctor
-public import Sheaf.CategoryTheory.ColimitSiteStageImage
+public import WeilConjectures.CategoryTheory.ColimitSiteStageImage
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # ColimitSiteStageImageRefinement

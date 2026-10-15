@@ -5,7 +5,7 @@ Authors: SHEAF group W2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction

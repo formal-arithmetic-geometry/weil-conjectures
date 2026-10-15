@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 import Sheaf.CategoryTheory.SheafAlgebrasDirectedColimitAlgebraCore
 import Sheaf.CategoryTheory.SheafAlgebrasDirectedColimitModuleCore
 public import Mathlib.CategoryTheory.Sites.Limits

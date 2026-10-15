@@ -6,7 +6,7 @@ Authors: SHEAF group M3
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.RingTheory.Depth
 

@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
+public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 
 /-!
 # Permanence of coverings of semi-representable étale objects

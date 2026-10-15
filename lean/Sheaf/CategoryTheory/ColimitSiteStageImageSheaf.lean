@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import WeilConjectures.CategoryTheory.FinitePrecoverage
-public import Sheaf.CategoryTheory.ColimitSiteStageImage
+public import WeilConjectures.CategoryTheory.ColimitSiteStageImage
 import Sheaf.CategoryTheory.ColimitSiteStageImageSheafAux
 
 /-! # ColimitSiteStageImageSheaf

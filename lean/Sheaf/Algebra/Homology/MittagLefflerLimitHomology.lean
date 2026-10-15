@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.CategoryTheory.CofilteredSystem
-public import Sheaf.CategoryTheory.EssentiallyConstantSystem
+public import WeilConjectures.CategoryTheory.EssentiallyConstantSystem
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono

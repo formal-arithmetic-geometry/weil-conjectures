@@ -6,7 +6,7 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-public import Sheaf.AlgebraicGeometry.AbelianExchangeCubeComparisons
+public import WeilConjectures.AlgebraicGeometry.AbelianExchangeCubeComparisons
 import Sheaf.AlgebraicGeometry.StrictLocalBaseChangeClosedStalk
 
 /-! # Invertibility of the canonical strict-local stalk comparisons

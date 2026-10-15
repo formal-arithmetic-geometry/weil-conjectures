@@ -9,7 +9,7 @@ public import Mathlib.RepresentationTheory.Rep.Basic
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Topology.Algebra.Group.Defs
 public import Mathlib.Topology.Separation.Profinite
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Sheaf.RepresentationTheory.DiscreteContinuousFunctorialInjectives
 
 /-!

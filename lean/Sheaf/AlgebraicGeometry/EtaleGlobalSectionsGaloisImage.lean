@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.KrullTopology
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.RepresentationTheory.Invariants
 import Sheaf.FieldTheory.GaloisAutomorphismExtension
 import Sheaf.AlgebraicGeometry.FieldEquivariantGermsOnePoint

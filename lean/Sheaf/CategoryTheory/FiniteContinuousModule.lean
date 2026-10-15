@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Action.Continuous
 public import Mathlib.Topology.Category.FinTopCat
-public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.CategoryTheory.Limits.Shapes.FiniteProducts
 
 /-!

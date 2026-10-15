@@ -32,7 +32,7 @@ basis, hence locally surjective and an epimorphism. These finite generating fami
 on the affine cover give LocalGeneratorsData.IsFiniteType, and therefore IsFiniteType.
 For the zero ideal use the empty generating family; the empty scheme has an empty
 affine cover, so the same local criterion applies. No compactness is required. -/
-theorem isFiniteType_toModules {X : Scheme.{u}} (I : X.IdealSheafData)
+theorem isFiniteType_toModules_sheaf {X : Scheme.{u}} (I : X.IdealSheafData)
     (hI : I.ofFiniteType) : I.toModules.IsFiniteType := by
   classical
   have hgen (U : X.affineOpens) :

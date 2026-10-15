@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.FiniteSplitEtaleHypercover
+public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 public import Sheaf.Paper.EtaleHypercover
 
 /-! Intermediate construction for finite split hypercover refinement. -/

@@ -6,7 +6,7 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-public import Sheaf.AlgebraicGeometry.AbelianExchangeCubeComparisons
+public import WeilConjectures.AlgebraicGeometry.AbelianExchangeCubeComparisons
 import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
 import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import Sheaf.Paper.InverseImageStalkGerm

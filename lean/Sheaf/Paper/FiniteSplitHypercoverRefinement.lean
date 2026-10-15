@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.FiniteSplitEtaleHypercover
-public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
+public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
+public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 import Sheaf.Paper.EtaleHypercoverProduct
 import Sheaf.Paper.FiniteSplitHypercoverExistence
 import Sheaf.Paper.FiniteSplitHypercoverReplacement

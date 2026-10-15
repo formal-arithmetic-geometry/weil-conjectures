@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.CategoryTheory.EssentiallyConstantSystem
+public import WeilConjectures.CategoryTheory.EssentiallyConstantSystem
 public import Mathlib.Algebra.Group.Subgroup.Ker
 
 /-!

@@ -6,8 +6,8 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.SheafTensorPushoutCancellation
 import Sheaf.Topology.InverseImageRegularExtension

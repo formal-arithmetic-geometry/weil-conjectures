@@ -6,8 +6,8 @@ Authors: SHEAF group Q3
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
+public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
