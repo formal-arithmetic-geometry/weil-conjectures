@@ -7,16 +7,8 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.CategoryTheory.ExtOneExtensionClassification
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.Paper.CondensedSheafExtContinuity
-import Sheaf.Paper.ProfinitePointPullback
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.CondensedStratumModelInductionStepNonempty
+import Sheaf.Paper.CondensedStratumModelInductionStepEmpty
 
 /-!
 # One support-induction step for finite coefficient models
@@ -34,6 +26,7 @@ universe u
 
 open CategoryTheory
 open scoped CategoryTheory.Obj
+
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -120,7 +113,13 @@ theorem exists_finiteCoefficient_model_on_closed_support_step
         (P : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (padicSubfieldRingObj Y ℓ E)),
         IsConstructibleModuleObject (padicSubfieldRingObj Y ℓ E) P ∧
         Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl Y ℓ E)).obj P ≅
-          (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) i).obj M) := by
-  sorry
+          (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) i).obj M)  := by
+  intro D hD Y i hI hYi
+  by_cases hY : Nonempty Y
+  · exact @exists_finiteCoefficient_model_on_closed_support_step_nonempty
+      T _ ℓ _ M S hS D hD Y i hI hY hYi
+  · let hE : IsEmpty Y := ⟨fun y ↦ hY ⟨y⟩⟩
+    exact @exists_finiteCoefficient_model_on_closed_support_step_empty
+      T _ ℓ _ M S hS D hD Y i hI hE hYi
 
 end AlgebraicGeometry.ProEtale

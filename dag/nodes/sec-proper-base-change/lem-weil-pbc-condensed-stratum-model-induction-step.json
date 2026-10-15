@@ -18,109 +18,37 @@
  ],
  "proof": [
   {
-   "text": "Fix D and the hypothesis giving models on all strictly smaller closed supports. For each closed immersion i:Y→T with image in D, construct the model in one geometric step. The empty support has the zero model over Q_ell. Pull a stratification to a closed subscheme by taking the fibre products of its immersion strata, not by reusing their original scheme structures. The immersion factors as closed into an open; the open pulls back to its inverse-image open, and on affine charts a closed immersion R to R/I pulls back to B to B/IB. Thus each pulled-back stratum remains an immersion, and its image is the inverse image of the original stratum, so the images still partition the base. Pullback of a presentation is a presentation: inverse image preserves finite free modules and cokernels, and base change of a pro-etale cover is a cover. The coefficient identifications for these restrictions are h^{-1}p_T^* = p_Y^*, from the profinite-point pullback node. On a nonempty Y choose an irreducible component C. Finitely many closures of intersections of C with the strata cover C; irreducibility makes one closure all of C, and local closedness makes that intersection a dense open in C. Remove the other finitely many components and the closed complement of that dense open in C. The resulting nonempty topological open U of Y is contained in the image of one immersion S to Y. Regard U as its open subscheme and form S_U=S times_Y U, with h:S_U to U. This is a surjective closed immersion: factor S to Y as a closed immersion into an open W of Y; because its image contains U, U is contained in W, and base change gives a closed immersion onto all of U. It does not assert that U itself factors through S. Apply the ringed open-closed node with X=U, i=h and complementary open empty. The localization sequence has zero first term, so its unit N to h_*h^{-1}N is an isomorphism for every coefficient module N. Together with h^{-1}h_*=id this gives quasi-inverse exact module equivalences; the same argument applies in every slice after base change to a pro-etale object of U. The coefficient rings are identified by h^{-1}Omega_U^c=Omega_{S_U}^c and h^{-1}E_U^c=E_{S_U}^c, by the monoidal profinite-point comparison. Local finite presentation is reflected by this equivalence: express a presentation cover as an epimorphic family of objects of the sheaf topos and a finite free cokernel presentation in each slice. The equivalence and its slice equivalences preserve this epimorphic family, finite free modules and cokernels. Refine the transported family by representable objects; the sheaf-local definition of epimorphism says their maps cover U. The transported slice matrices therefore give pro-etale local presentations of M restricted to U. This is precisely the empty-complement form of pro-etale topological invariance, not a scheme factorization. Apply this same equivalence to the already supplied finite-field model on S_U. Its coefficient-compatible inverse produces the model P_E on U; the argument uses no descent of presentation matrices or covering transition maps. Apply lem-weil-pbc-closed-subset-closed-subscheme to the closed subset Y minus U and choose its closed subscheme Z; only the asserted existence and support equality are used. Pullback of the supplied stratum models gives models on the fibre-product stratification of Z, so the supplied smaller-support hypothesis at the closed image of Z in T gives Q_F on Z, after the pullback-composition comparison. The closed image of Z is strictly contained in D because nonempty U contributes a point omitted from it and i is injective; this validates precisely the strict inequality required by the hypothesis. Enlarge E,F to one finite field. Every open in Y is quasi-compact, so U to Y is quasi-compact as required for subsequent open-closed localization.",
+   "text": "Introduce the closed support and its smaller-support induction hypothesis, then split on whether the closed subscheme Y is nonempty.",
    "uses": [
-    "lem-sc-noetherian-finite-irreducible-components",
-    "def-constructible-stratification",
-    "def-weil-finite-subextension-directed-set",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-profinite-point-pullback",
-    "def-weil-pbc-condensed-e-module-category",
-    "lem-weil-pbc-closed-subset-closed-subscheme",
-    "def-weil-closed-immersion",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-proetale-covering"
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty",
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-empty"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "module docstring, (Obj) descent paragraph; Stacks proetale.tex Tag 09AH lemma-ses-associated-to-open and Tag 09AA lemma-closed-immersion, empty-complement case; compare Tag 09AB lemma-thickening"
-   }
+   "elementary": false
   },
   {
-   "text": "Write j:U into Y and i:Z into Y. The ringed open-closed node gives 0 to j!j* M to M to i_*i* M to 0. Let A_E=j!P_E and C_E=i_*Q_E be the extensions of the descended U and Z models. Their restrictions on U and Z are respectively P_E,0 and 0,Q_E, so the union of the U stratum with a stratification of Z witnesses constructibility of both. For any B-module N, tensor adjunction and j! adjunction give Hom_B(B tensor_E j!P_E,N) = Hom_E(j!P_E,Res N) = Hom_{j*E}(P_E,j*Res N) = Hom_{j*B}(j*B tensor_{j*E} P_E,j*N) = Hom_B(j!(j*B tensor_{j*E} P_E),N). Here j*Res N is Res(j*N), since the coefficient action is restricted along the same ring map. These bijections are natural in N, so the represented objects are canonically isomorphic, proving the j! scalar comparison. It commutes with i_* for finite coefficient extensions because finite free tensor is a finite direct sum, and for Omega because i_* commutes with filtered colimits and Omega is the colimit of the finite fields. Thus the outer terms of this exact sequence are the Omega-extensions of A_E and C_E. The flat coefficient facts needed here are available already in Compatibility.lean: the tensor-restriction adjunction is Mod.extendRestrictAdjunction, finite-stage exactness is CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap, and closure exactness is CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl. A continuous finite field basis identifies finite tensor with finite direct sums; the coefficient colimit is isColimitPadicAlgClRingObjCocone. Module-sheaf forgetfulness computes exactness and colimits. Applying the exact-functor derived factorization and derived-adjunction construction to the tensor-restriction adjunction gives the derived adjunction needed in step 3. This avoids CondensedFlatCoefficientCalculus, whose present imports go through the parent theorem.",
+   "text": "In the nonempty branch install Nonempty Y and apply the nonempty-support branch theorem.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-condensed-e-module-category",
-    "def-weil-finite-subextension-directed-set",
-    "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-sc-derived-adjunction-from-underived"
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "module docstring, (Obj) descent paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Let delta be the degree-one derived class of that short exact sequence. Apply the flat coefficient derived adjunction to regard delta as a map C_E[0] to the restriction of (Omega tensor_E A_E)[0][1]. The restricted target is colim_{H containing E}(H tensor_E A_E)[0], by the coefficient-colimit and tensor assertions just described. These complexes are concentrated in degree zero, so they satisfy the same lower bound a=0. Since C_E is constructible, sheaf Ext-continuity with n=1 represents delta at one finite H containing E. The finite-stage adjunction identifies its representative with a class from (H tensor_E C_E)[0] to (H tensor_E A_E)[0][1]. Naturality of the colimit and adjunction ensures that its Omega-extension is exactly delta.",
+   "text": "In the empty branch install IsEmpty Y and apply the empty-support branch theorem.",
    "uses": [
-    "lem-weil-pbc-ext-one-extension-classification",
-    "lem-weil-pbc-condensed-sheaf-ext-continuity",
-    "def-weil-pbc-condensed-e-module-category",
-    "def-weil-finite-subextension-directed-set",
-    "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-sc-derived-adjunction-from-underived"
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-empty"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "module docstring, (Obj) descent paragraph"
-   }
-  },
-  {
-   "text": "Realize this finite-stage class by a short exact sequence 0 to H tensor_E A_E to M_H to H tensor_E C_E to 0, using degree-one extension classification. The outer terms are constructible: tensor the local presentations on their finite stratifications. Serre closure makes M_H constructible. Exact Omega-extension preserves the sequence and its class; its class equals delta by the preceding step. The injectivity of extension classification gives an isomorphism from Omega tensor_H M_H to M, with identity maps on the already identified outer terms. This proves the one-step assertion using the smaller-support models as inputs; the assembly theorem separately carries out the well-founded induction.",
-   "uses": [
-    "lem-weil-pbc-ext-one-extension-classification",
-    "lem-weil-pbc-condensed-constructible-serre",
-    "def-weil-pbc-condensed-e-module-category",
-    "def-weil-finite-subextension-directed-set",
-    "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-sc-derived-adjunction-from-underived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "module docstring, (Obj) descent paragraph"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-constructible-stratification",
-  "def-weil-closed-immersion",
-  "def-weil-finite-subextension-directed-set",
-  "def-weil-pbc-condensed-e-module-category",
-  "def-weil-pbc-proetale-covering",
-  "def-weil-proetale-inverse-image",
-  "lem-sc-derived-adjunction-from-underived",
-  "lem-sc-noetherian-finite-irreducible-components",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
-  "lem-weil-pbc-condensed-constructible-serre",
-  "lem-weil-pbc-condensed-sheaf-ext-continuity",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-ext-one-extension-classification",
-  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-profinite-point-pullback"
+  "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty",
+  "new-lem-weil-pbc-condensed-stratum-model-induction-step-empty"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-  "place": "(Obj) descent paragraph and original assembly node steps 1–4, with the strictly smaller-support hypothesis made explicit"
+  "document": "Source module docstring and case decomposition of the support-induction argument",
+  "place": "Nonempty and empty support branches",
+  "group": "M3"
  },
  "mathlib_searches": [
   {
@@ -195,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "XREPAIR-1b27919aec52b018",
-  "group": "XR1b27919aec52b018",
+  "reviewer": "COMPILER",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261015T205835-L-1763358",
+  "landing": "20261015T224821-L-2950411",
   "kind": "interface",
-  "note": "\nREADY: Added the missing direct Serre-closure import to `TwoColimit`. Induction step, assembly, and consumer passed single-file `lcompile.py` checks; import cycle check passed. Updated `report.md`; no statements or proofs changed.\nDELIVERED: checks and fix"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
