@@ -7,13 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.CategoryTheory.TruncationTriangle
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.Algebra.Homology.ExactCouple.Basic
 
 /-!
 # Exchange on truncation exact couples
@@ -70,12 +63,18 @@ noncomputable def layerIso (K : DerivedCategory.Plus A) (q : ℤ) :
     (DerivedCategory.singleFunctorCompHomologyFunctorIso A 0).app
       ((DerivedCategory.Plus.homologyFunctor A q).obj K)
 
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
 /-- The projection and connecting morphism of the canonical truncation triangle exist.
 The projection is characterized by the cohomology of the inclusion into K.
-Proof: use the short exact sequence of consecutive smart truncations (08J5),
-then transport its cone along the quasi-isomorphism to H^q(K)[-q]. Descend along
-Q and restrict to D+. This is lem-weil-pbc-truncation-triangle; its projection
-on H^q is the identity after the canonical identifications.
+Proof: use the standard t-structure's distinguished triangle of consecutive
+truncations. Its third term and H^q(K)[-q] are concentrated in degree q.
+The degree-q homology functor is bijective on morphisms between these objects.
+Lift the isomorphism obtained from the homology of the truncation projection,
+the inclusion into K and layerIso. This lift is an isomorphism: in degree q it
+induces that isomorphism, and in every other degree both homology objects vanish.
+Transport the distinguished triangle along the lift. The choice of its homology
+map gives exactly the displayed normalization of the projection.
 Source: Stacks 08J5 (blueprint: lem-weil-pbc-truncation-couple-morphism). -/
 theorem exists_triangle (K : DerivedCategory.Plus A) (q : ℤ) :
     ∃ j : trunc K q ⟶ layer K q,
@@ -84,7 +83,59 @@ theorem exists_triangle (K : DerivedCategory.Plus A) (q : ℤ) :
           (DerivedCategory.Plus.homologyFunctor A q).map
             ((DerivedCategory.Plus.TStructure.t.truncLEι q).app K) ∧
         Triangle.mk (inclusion K q) j k ∈ distTriang (DerivedCategory.Plus A) := by
-  sorry
+  let t := DerivedCategory.Plus.TStructure.t (C := A)
+  let H := DerivedCategory.Plus.homologyFunctor A
+  let T := (t.triangleLTLTGELT ((q - 1) + 1) (q + 1) (by omega)).obj K
+  have hT : T ∈ distTriang _ := t.triangleLTLTGELT_distinguished _ _ (by omega) K
+  have h₃ge : t.IsGE T.obj₃ q := by
+    change t.IsGE ((t.truncGELT ((q - 1) + 1) (q + 1)).obj K) q
+    exact t.isGE_of_ge _ q ((q - 1) + 1) (by omega)
+  have h₃le : t.IsLE T.obj₃ q := by
+    change t.IsLE ((t.truncGELT ((q - 1) + 1) (q + 1)).obj K) q
+    exact t.isLE_of_le _ ((q + 1) - 1) q (by omega)
+  have hlge : t.IsGE (layer K q) q := t.isGE_shift (sheaf K q) 0 (-q) q (by omega)
+  have hlle : t.IsLE (layer K q) q := t.isLE_shift (sheaf K q) 0 (-q) q (by omega)
+  have hproj : IsIso ((H q).map T.mor₂) :=
+    DerivedCategory.Plus.isIso_homologyFunctor_map_truncGEπ_app
+      (trunc K q) ((q - 1) + 1) q (by omega)
+  have hinc : IsIso ((H q).map ((t.truncLEι q).app K)) :=
+    DerivedCategory.Plus.isIso_homologyFunctor_map_truncLTι_app K (q + 1) q (by omega)
+  have hbij : Function.Bijective (fun e : T.obj₃ ⟶ layer K q ↦ (H q).map e) :=
+    (DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE q).comp
+      ((Functor.FullyFaithful.ofFullyFaithful DerivedCategory.Plus.ι).map_bijective _ _)
+  let d := inv ((H q).map T.mor₂) ≫
+    (H q).map ((t.truncLEι q).app K) ≫ (layerIso K q).inv
+  obtain ⟨e, he⟩ := hbij.2 d
+  dsimp only at he
+  have heiso : IsIso e := by
+    apply (DerivedCategory.Plus.isIso_iff e).2
+    intro n
+    by_cases hn : n = q
+    · subst n
+      change IsIso ((H q).map e)
+      rw [he]
+      dsimp only [d]
+      infer_instance
+    · have z (L : DerivedCategory.Plus A) [L.IsGE q] [L.IsLE q] :
+          IsZero ((H n).obj L) := by
+        rcases lt_or_gt_of_ne hn with h | h
+        · exact DerivedCategory.Plus.isZero_homology_of_isGE L q n h
+        · exact DerivedCategory.Plus.isZero_homology_of_isLE L q n h
+      exact (z T.obj₃).isIso (z (layer K q)) _
+  let j := T.mor₂ ≫ e
+  let k := inv e ≫ T.mor₃
+  refine ⟨j, k, ?_, ?_⟩
+  · change (H q).map j ≫ (layerIso K q).hom =
+      (H q).map ((t.truncLEι q).app K)
+    dsimp only [j]
+    rw [Functor.map_comp, he]
+    simp [d, Category.assoc]
+  · apply isomorphic_distinguished _ hT
+    refine Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (asIso e).symm ?_ ?_ ?_
+    · simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+      rfl
+    · simp [j]
+    · simp [k]
 
 /-- The canonical projection in the truncation triangle, chosen by its characterization.
 Source: Stacks 08J5 (blueprint: lem-weil-pbc-truncation-couple-morphism). -/
@@ -158,6 +209,249 @@ noncomputable def tE {F G : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B}
     (t : F ⟶ G) (K : DerivedCategory.Plus A) (p q : ℤ) : E F K p q ⟶ E G K p q :=
   (DerivedCategory.Plus.homologyFunctor B (p + q)).map (t.app (layer K q))
 
+private lemma exact_transport {C : Type*} [Category C] [Abelian C]
+    (S : ShortComplex C) (hS : S.Exact) {X Y Z : C}
+    (a : X ≅ S.X₁) (b : Y ≅ S.X₂) (c : Z ≅ S.X₃)
+    (i : X ⟶ Y) (j : Y ⟶ Z)
+    (hi : i ≫ b.hom = a.hom ≫ S.f) (hj : j ≫ c.hom = b.hom ≫ S.g) :
+    ∃ h : i ≫ j = 0, (ShortComplex.mk i j h).Exact := by
+  have h : i ≫ j = 0 := by
+    apply (cancel_mono c.hom).1
+    rw [Category.assoc, hj, ← Category.assoc, hi, Category.assoc, S.zero,
+      comp_zero, zero_comp]
+  exact ⟨h, ShortComplex.exact_of_iso (ShortComplex.isoMk a b c hi.symm hj.symm).symm hS⟩
+
+private lemma triangle_distinguished (K : DerivedCategory.Plus A) (q : ℤ) :
+    Triangle.mk (inclusion K q) (projection K q) (boundary K q) ∈
+      distTriang (DerivedCategory.Plus A) :=
+  (exists_triangle K q).choose_spec.choose_spec.2
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private lemma exact_g_f
+    (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
+    [F.IsTriangulated] (K : DerivedCategory.Plus A) (p q : ℤ) :
+    ∃ h : g F K p q ≫ f F K p q = 0,
+      (ShortComplex.mk (g F K p q) (f F K p q) h).Exact := by
+  let T := F.mapTriangle.obj
+    (Triangle.mk (inclusion K q) (projection K q) (boundary K q))
+  have hT : T ∈ distTriang _ := F.map_distinguished _ (triangle_distinguished K q)
+  exact ⟨(DerivedCategory.Plus.homologyFunctor B 0).comp_homologySequenceδ T hT
+      (p + q) ((p + 2) + (q - 1)) (by omega),
+    (DerivedCategory.Plus.homologyFunctor B 0).homologySequence_exact₃ T hT
+      (p + q) ((p + 2) + (q - 1)) (by omega)⟩
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private lemma exact_alpha_g
+    (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
+    [F.IsTriangulated] (K : DerivedCategory.Plus A) (p q : ℤ) :
+    ∃ h : alpha F K p q ≫ g F K (p - 1) (q + 1) = 0,
+      (ShortComplex.mk (alpha F K p q) (g F K (p - 1) (q + 1)) h).Exact := by
+  let H := DerivedCategory.Plus.homologyFunctor B
+  let T := F.mapTriangle.obj
+    (Triangle.mk (inclusion K (q + 1)) (projection K (q + 1)) (boundary K (q + 1)))
+  have hT : T ∈ distTriang _ := F.map_distinguished _ (triangle_distinguished K (q + 1))
+  let S := (shortComplexOfDistTriangle T hT).map (H (p + q))
+  have hS : S.Exact := (H (p + q)).map_distinguished_exact T hT
+  let a : D F K p q ≅ S.X₁ := eqToIso
+    (congrArg (fun i ↦ (H (p + q)).obj (F.obj (trunc K i)))
+      (by omega : q = (q + 1) - 1))
+  let b : D F K (p - 1) (q + 1) ≅ S.X₂ := eqToIso
+    (congrArg (fun n ↦ (H n).obj (F.obj (trunc K (q + 1))))
+      (by omega : (p - 1) + (q + 1) = p + q))
+  let c : E F K (p - 1) (q + 1) ≅ S.X₃ := eqToIso
+    (congrArg (fun n ↦ (H n).obj (F.obj (layer K (q + 1))))
+      (by omega : (p - 1) + (q + 1) = p + q))
+  apply exact_transport S hS a b c
+  · simp [a, b, alpha, S, T, H, Functor.map_comp, eqToHom_map, Category.assoc]
+  · exact eqToHom_naturality
+      (fun n ↦ (H n).map (F.map (projection K (q + 1)))) (by omega)
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private lemma exact_f_alpha
+    (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
+    [F.IsTriangulated] (K : DerivedCategory.Plus A) (p q : ℤ) :
+    ∃ h : f F K p q ≫ alpha F K (p + 2) (q - 1) = 0,
+      (ShortComplex.mk (f F K p q) (alpha F K (p + 2) (q - 1)) h).Exact := by
+  let H := DerivedCategory.Plus.homologyFunctor B
+  let T := F.mapTriangle.obj
+    (Triangle.mk (inclusion K q) (projection K q) (boundary K q))
+  have hT : T ∈ distTriang _ := F.map_distinguished _ (triangle_distinguished K q)
+  let S := ShortComplex.mk _ _ ((H 0).homologySequenceδ_comp T hT
+    (p + q) ((p + 2) + (q - 1)) (by omega))
+  have hS : S.Exact := (H 0).homologySequence_exact₁ T hT
+    (p + q) ((p + 2) + (q - 1)) (by omega)
+  let c : D F K ((p + 2) - 1) ((q - 1) + 1) ≅ S.X₃ :=
+    eqToIso (congrArg
+      (fun n ↦ (H n).obj (F.obj (trunc K ((q - 1) + 1))))
+      (by omega : ((p + 2) - 1) + ((q - 1) + 1) = (p + 2) + (q - 1))) ≪≫
+    eqToIso (congrArg
+      (fun r ↦ (H ((p + 2) + (q - 1))).obj (F.obj (trunc K r)))
+      (by omega : (q - 1) + 1 = q))
+  apply exact_transport S hS (Iso.refl _) (Iso.refl _) c
+  · change f F K p q ≫ 𝟙 _ = 𝟙 _ ≫ S.f
+    rw [Category.comp_id, Category.id_comp]
+    rfl
+  · change alpha F K (p + 2) (q - 1) ≫ c.hom =
+      𝟙 _ ≫ (H ((p + 2) + (q - 1))).map (F.map (inclusion K q))
+    rw [Category.id_comp]
+    dsimp only [alpha, c, Iso.trans_hom, eqToIso.hom]
+    simp only [Functor.map_comp, eqToHom_map, Category.assoc, eqToHom_trans]
+    rw [eqToHom_naturality
+      (fun r ↦ (H ((p + 2) + (q - 1))).map (F.map (inclusion K r)))
+      (by omega : (q - 1) + 1 = q)]
+    simp only [← Category.assoc, eqToHom_trans, eqToHom_refl, Category.id_comp]
+
+private noncomputable def gShifted
+    (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B)
+    (K : DerivedCategory.Plus A) (p q : ℤ) :
+    D F K p q ⟶ E F K (p + ((0 : ℕ) : ℤ)) (q - ((0 : ℕ) : ℤ)) :=
+  g F K p q ≫ eqToHom (by simp)
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma exact_gShifted_f
+    (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
+    [F.IsTriangulated] (K : DerivedCategory.Plus A) (p q : ℤ) :
+    ∃ h : gShifted F K p q ≫ f F K (p + (0 : ℕ)) (q - (0 : ℕ)) = 0,
+      (ShortComplex.mk _ _ h).Exact := by
+  let S := ShortComplex.mk _ _ (exact_g_f F K p q).choose
+  let b : E F K (p + (0 : ℕ)) (q - (0 : ℕ)) ≅ S.X₂ := eqToIso (by simp [S])
+  let c : D F K ((p + (0 : ℕ)) + 2) ((q - (0 : ℕ)) - 1) ≅ S.X₃ :=
+    eqToIso (by simp [S])
+  apply exact_transport S (exact_g_f F K p q).choose_spec (Iso.refl _) b c
+  · dsimp only [gShifted, b, S, Iso.refl_hom, eqToIso.hom]
+    simp only [Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id,
+      Category.id_comp]
+  · exact eqToHom_naturality (fun i : ℤ × ℤ ↦ f F K i.1 i.2)
+      (by simp : (p + (0 : ℕ), q - (0 : ℕ)) = (p, q))
+
+private lemma exact_alpha_gShifted
+    (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
+    [F.IsTriangulated] (K : DerivedCategory.Plus A) (p q : ℤ) :
+    ∃ h : alpha F K p q ≫ gShifted F K (p - 1) (q + 1) = 0,
+      (ShortComplex.mk _ _ h).Exact := by
+  let S := ShortComplex.mk _ _ (exact_alpha_g F K p q).choose
+  let c : E F K ((p - 1) + (0 : ℕ)) ((q + 1) - (0 : ℕ)) ≅ S.X₃ :=
+    eqToIso (by simp [S])
+  apply exact_transport S (exact_alpha_g F K p q).choose_spec
+    (Iso.refl _) (Iso.refl _) c
+  · change alpha F K p q ≫ 𝟙 _ = 𝟙 _ ≫ alpha F K p q
+    rw [Category.comp_id, Category.id_comp]
+  · dsimp only [gShifted, c, S, Iso.refl_hom, eqToIso.hom]
+    simp only [Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id,
+      Category.id_comp]
+
+private noncomputable def couple
+    (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
+    [F.IsTriangulated] (K : DerivedCategory.Plus A) : BigradedExactCouple B 0 :=
+  BigradedExactCouple.ofShifted (D F K) (E F K) (alpha F K) (f F K) (gShifted F K)
+    (fun p q ↦ (exact_f_alpha F K p q).choose)
+    (fun p q ↦ (exact_gShifted_f F K p q).choose)
+    (fun p q ↦ (exact_alpha_gShifted F K p q).choose)
+    (fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+      (exact_f_alpha F K p q).choose_spec)
+    (fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+      (exact_gShifted_f F K p q).choose_spec)
+    (fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+      (exact_alpha_gShifted F K p q).choose_spec)
+
+private lemma couple_data
+    (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
+    [F.IsTriangulated] (K : DerivedCategory.Plus A) :
+    (couple F K).D = D F K ∧ (couple F K).E = E F K ∧
+      HEq (couple F K).alpha (alpha F K) ∧
+      HEq (couple F K).f (f F K) ∧ HEq (couple F K).g (g F K) := by
+  refine ⟨rfl, rfl, ?_, ?_, ?_⟩
+  · apply heq_of_eq
+    funext p q
+    exact BigradedExactCouple.ofShifted_alpha ..
+  · apply heq_of_eq
+    funext p q
+    exact BigradedExactCouple.ofShifted_f ..
+  · apply Function.hfunext rfl
+    intro p p' hp
+    cases hp
+    apply Function.hfunext rfl
+    intro q q' hq
+    cases hq
+    dsimp only [couple]
+    rw [BigradedExactCouple.ofShifted_g]
+    exact comp_eqToHom_heq _ _
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private lemma alpha_naturality
+    {F G : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B} (t : F ⟶ G)
+    (K : DerivedCategory.Plus A) (p q : ℤ) :
+    alpha F K p q ≫ tD t K (p - 1) (q + 1) = tD t K p q ≫ alpha G K p q := by
+  dsimp [alpha, tD]
+  rw [Category.assoc, ← eqToHom_naturality
+    (fun n ↦ (DerivedCategory.Plus.homologyFunctor B n).map (t.app (trunc K (q + 1))))
+      (by omega : p + q = (p - 1) + (q + 1))]
+  simp only [← Category.assoc, ← Functor.map_comp, t.naturality]
+
+private lemma g_naturality
+    {F G : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B} (t : F ⟶ G)
+    (K : DerivedCategory.Plus A) (p q : ℤ) :
+    g F K p q ≫ tE t K p q = tD t K p q ≫ g G K p q := by
+  simpa only [g, tE, tD, ← Functor.map_comp] using
+    congrArg (DerivedCategory.Plus.homologyFunctor B (p + q)).map
+      (t.naturality (projection K q))
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private lemma f_naturality
+    {F G : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B}
+    [F.CommShift ℤ] [G.CommShift ℤ] (t : F ⟶ G) [NatTrans.CommShift t ℤ]
+    (K : DerivedCategory.Plus A) (p q : ℤ) :
+    f F K p q ≫ tD t K (p + 2) (q - 1) = tE t K p q ≫ f G K p q := by
+  let H := DerivedCategory.Plus.homologyFunctor B
+  let e := (H 0).shiftIso (1 : ℤ) (p + q) ((p + 2) + (q - 1)) (by omega)
+  have hs : (H (p + q)).map ((t.app (trunc K (q - 1)))⟦(1 : ℤ)⟧') ≫
+      e.hom.app (G.obj (trunc K (q - 1))) =
+    e.hom.app (F.obj (trunc K (q - 1))) ≫
+      (H ((p + 2) + (q - 1))).map (t.app (trunc K (q - 1))) :=
+    e.hom.naturality _
+  dsimp only [f, tD, tE, D, E]
+  rw [Category.assoc, ← hs]
+  simp only [← Category.assoc]
+  apply congrArg (fun z ↦ z ≫ e.hom.app (G.obj (trunc K (q - 1))))
+  change (H (p + q)).map
+      (F.map (boundary K q) ≫ (F.commShiftIso (1 : ℤ)).hom.app (trunc K (q - 1))) ≫
+      (H (p + q)).map ((t.app (trunc K (q - 1)))⟦(1 : ℤ)⟧') =
+    (H (p + q)).map (t.app (layer K q)) ≫
+      (H (p + q)).map
+        (G.map (boundary K q) ≫ (G.commShiftIso (1 : ℤ)).hom.app (trunc K (q - 1)))
+  simp only [← Functor.map_comp]
+  congr 1
+  rw [Category.assoc, NatTrans.shift_app_comm t, ← Category.assoc, t.naturality,
+    Category.assoc]
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private lemma pageIso_naturality
+    {F G : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B}
+    [F.CommShift ℤ] [G.CommShift ℤ] (t : F ⟶ G) [NatTrans.CommShift t ℤ]
+    (K : DerivedCategory.Plus A) (p q : ℤ) :
+    tE t K p q ≫ (pageIso G K p q).hom =
+      (pageIso F K p q).hom ≫
+        (DerivedCategory.Plus.homologyFunctor B p).map (t.app (sheaf K q)) := by
+  let H := DerivedCategory.Plus.homologyFunctor B
+  let e := (H 0).shiftIso (-q) (p + q) p (by omega)
+  have hs : (H (p + q)).map ((t.app (sheaf K q))⟦-q⟧') ≫
+      e.hom.app (G.obj (sheaf K q)) =
+    e.hom.app (F.obj (sheaf K q)) ≫ (H p).map (t.app (sheaf K q)) :=
+    e.hom.naturality _
+  change (H (p + q)).map (t.app (layer K q)) ≫
+      ((H (p + q)).map ((G.commShiftIso (-q)).hom.app (sheaf K q)) ≫
+        e.hom.app (G.obj (sheaf K q))) =
+    ((H (p + q)).map ((F.commShiftIso (-q)).hom.app (sheaf K q)) ≫
+      e.hom.app (F.obj (sheaf K q))) ≫ (H p).map (t.app (sheaf K q))
+  rw [← Category.assoc, ← Functor.map_comp, ← NatTrans.shift_app_comm t (-q),
+    Functor.map_comp, Category.assoc, hs, Category.assoc]
+
 end CategoryTheory.TruncationExchange
 
 namespace AlgebraicGeometry.Etale
@@ -213,21 +507,19 @@ noncomputable def truncationTargetIso {X' X Y' : Scheme.{u}} (g' : X' ⟶ X) (f'
 E they identify with the degree-p exchange of H^q(K).
 
 Proof:
-1. The truncation triangles are distinguished (lem-weil-pbc-truncation-triangle).
-   Exact inverse image and right derived direct image are triangulated with their
-   recorded shift isomorphisms; their composites are triangulated, so their images
-   of these triangles are distinguished (lem-weil-pbc-triangulated-functor-composite).
-2. The long exact cohomology sequence (lem-sf-derived-homology-long-exact) gives
-   image(alpha)=kernel(g), image(g)=kernel(f), image(f)=kernel(alpha), in every
-   bidegree, including all consecutive-composite zero identities (def-sp-exact-couple).
-3. Naturality of exchange gives the first two squares of the triangles.
-   Its shift compatibility gives the third (lem-weil-pbc-derived-exchange-triangulated).
-4. The cohomology ladder, including its connecting maps, gives the three couple
-   squares (lem-weil-pbc-derived-cohomology-ladder), hence a couple morphism.
-5. Apply H^{p+q} to shift compatibility for -q. Naturality of the cohomology shift
-   identification gives the pageIso square below. Exact inverse image commutes with
-   cohomology (lem-weil-pbc-exact-functor-bounded-below), identifying its source with
-   g^{-1}R^p f_* H^q(K); its target is R^p f'_* g'^{-1} H^q(K).
+1. Construct the normalized truncation triangles by exists_triangle. Exact inverse
+   image and right derived direct image are triangulated with their recorded shift
+   isomorphisms, so both composite functors send these triangles to distinguished ones.
+2. Apply the long exact homology sequence to each image triangle. Transport the
+   total degrees along the displayed integer equalities to obtain the three exact
+   short complexes. The shifted-map constructor packages them as exact couples.
+3. Naturality gives the inclusion and projection squares. For the connecting square,
+   use naturality for boundary, compatibility of exchange with shift by 1, and
+   naturality of the homology shift isomorphism.
+4. Apply the same shift compatibility at -q to the sheaf H^q(K). Naturality of the
+   homology shift isomorphism gives the pageIso square. Compose with the target
+   comparison and insert the cancelling source comparison and its inverse to obtain
+   the stated degree-p exchange formula.
 Source: Stacks 0DDE, proof, and 011Q (blueprint: lem-weil-pbc-truncation-couple-morphism). -/
 theorem truncation_exchange_couple_morphism
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -274,6 +566,13 @@ theorem truncation_exchange_couple_morphism
             ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app (sheaf K q)) ≫
         (truncationTargetIso g' f'
           ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K) p).hom) := by
-  sorry
+  obtain ⟨hPD, hPE, hPa, hPf, hPg⟩ := couple_data (truncationPhi f g) K
+  obtain ⟨hQD, hQE, hQa, hQf, hQg⟩ := couple_data (truncationPsi g' f') K
+  refine ⟨⟨couple (truncationPhi f g) K, couple (truncationPsi g' f') K,
+    hPD, hQD, hPE, hQE, hPa, hQa, hPf, hQf, hPg, hQg⟩,
+    alpha_naturality _ K, g_naturality _ K, f_naturality _ K, ?_⟩
+  intro p q
+  simp only [Iso.trans_hom, Category.assoc, Iso.hom_inv_id_assoc]
+  rw [← Category.assoc, pageIso_naturality, Category.assoc]
 
 end AlgebraicGeometry.Etale
