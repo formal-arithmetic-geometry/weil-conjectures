@@ -232,5 +232,29 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-13b141d91 (reviewer sub-agent of L); spot-checked: The mathematics and statement are correct. I repaired one citation fault: Steps 3–4 now use the existing same-unit lem-kun-flat-resolution-existence instead of the off-unit generic resolution theorem, with proof_deps and tool proposals updated. Corrected DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-kun-derived-tensor-well-defined.json; review.md records all source, route, coefficient-category, target, edge-case, and dependency checks.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat",
+  "declaration": "CategoryTheory.MorphismProperty.whiskerLeft_of_kFlat",
+  "declarations": [
+   "CategoryTheory.MorphismProperty.whiskerLeft_of_kFlat",
+   "CategoryTheory.MorphismProperty.whiskerRight_of_kFlat",
+   "CategoryTheory.DerivedMonoidal.isIso_counit_app_app_of_kFlat_left",
+   "CategoryTheory.DerivedMonoidal.isIso_counit_app_app_of_kFlat_right"
+  ],
+  "statement": "lemma whiskerLeft_of_kFlat [W.HasTwoOutOfThreeProperty]\n    [W.localizerMorphismKFlat.HasLeftResolutions]\n    {Y₁ Y₂ : C} (g : Y₁ ⟶ Y₂) (hg : W g) (hY₁ : W.kFlat Y₁) (hY₂ : W.kFlat Y₂) (X : C) :\n    W (X ◁ g)",
+  "branch": "slopmaster2",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Existing declarations for both clauses, specialized to Λ : Type (u + 1), [CommRing Λ], T : Scheme.{u}, A = Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ). For preservation take C = CochainComplex A ℤ and W = HomologicalComplex.quasiIso A (.up ℤ); X ◁ g is the signed direct-sum total tensor map id_X tensor g. Two-out-of-three and K-flat left resolutions are instances from the imports of Etale.Derived.Tensor, not additional mathematical hypotheses. K-flatness agrees with the acyclic-test definition by HomotopyCategory.kFlat_quotient_obj_iff and kFlat_iff_preserves_acyclic, using signed symmetry. For independence take C = HomotopyCategory A (.up ℤ), W = HomotopyCategory.quasiIso A (.up ℤ), L = DerivedCategory.Qh. The recorded isIso_counit_app_app_of_kFlat_left gives the canonical invertible comparison L(P) tensor-derived L(F) → L(P tensor F), natural in both variables. For two models with specified identification u : L(P) ≅ L(P'), the comparison is δ(P,F).symm ≪≫ whiskerRightIso u (L.obj F) ≪≫ δ(P',F). It depends only on u and satisfies identity and cocycle laws by functoriality and cancellation. This is the derived tensor already recorded by def-kun-derived-tensor, in exactly the coefficient category recorded by def-weil-pbc-derived-categories. No new definition, statement correction, module, or stronger flatness/boundedness hypothesis is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-04a6bb594",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable statements, dependencies, source, exact declarations, canonical independence, universes and edge cases. Signature matches verbatim; scompile.py passed local and library confirmation without warnings. No fixes or repository mutations."
  }
 }
