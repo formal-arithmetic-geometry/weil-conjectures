@@ -65,7 +65,7 @@ noncomputable instance braided_sheafUpperStar : (f)^*[Ab.{u + 1}].Braided where
 /-- The pullback `f^* = mapMod(f^*) ⋙ Ext_{α_f}` of module objects over `Λ` is strong monoidal
 for the relative tensor products, as the composite of two strong monoidal functors. -/
 noncomputable instance monoidal_upperStar : (f)^*⟦Λ⟧.Monoidal :=
-  inferInstanceAs ((f)^*[Ab.{u + 1}].mapMod (R := condensedRingObj Λ Y) ⋙
+  inferInstanceAs ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y) ⋙
     Mod.extendScalars (condensedPullbackHom Λ f)).Monoidal
 
 end AlgebraicGeometry.ProEtale.CondensedRing
