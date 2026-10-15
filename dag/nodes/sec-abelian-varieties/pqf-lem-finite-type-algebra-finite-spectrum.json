@@ -24,45 +24,33 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pqf-finite-spectrum-maximal-primes], every prime ideal of $B$ is maximal.",
+   "text": "The algebra B is Jacobson by [lem-weil-pbc-finite-type-over-field-prime-intersection-maximal], implemented by isJacobsonRing_of_finiteType with base k. PrimeSpectrum.instJacobsonSpace makes its prime spectrum a Jacobson space. Since this spectrum is finite, Mathlib's finite-Jacobson-space DiscreteTopology instance gives discrete Zariski topology. Concretely, closed points are dense in a Jacobson space; they form a finite closed set here, so they exhaust the space. Every subset is then a finite union of closed points and hence closed.",
    "uses": [
-    "lem-pqf-finite-spectrum-maximal-primes"
+    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0ALW, equivalence of (1) and (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-finite-type-algebra-dim-zero-finite] to the finite-type $k$-algebra $B$ and the conclusion of step 1. It gives that $B$ is finite-dimensional as a $k$-vector space (including the zero ring).",
+   "text": "Every singleton in the discrete spectrum is closed. By PrimeSpectrum.isClosed_singleton_iff_isMaximal, each prime ideal is maximal. PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero also gives Ring.KrullDimLE 0 B.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-algebra-dim-zero-finite], implemented by Module.finite_iff_krullDimLE_zero over the Artinian field k, to the dimension bound just obtained. This gives Module.Finite k B. Combine maximality, finiteness as a module, and discreteness. The proof requires no Nontrivial B hypothesis, and covers the zero ring, whose spectrum is empty.",
    "uses": [
     "lem-weil-pbc-finite-type-algebra-dim-zero-finite"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0ALW, implication (1) => (5)"
-   }
-  },
-  {
-   "text": "The points of $\\operatorname{Spec}B$ are prime ideals, and a point is closed exactly when its prime is maximal. Thus every point is closed by step 1. Since the space is finite by hypothesis, the complement of any singleton is a finite union of closed singletons and is closed; hence every singleton is open. Therefore $\\operatorname{Spec}B$ is discrete. The zero ring has empty spectrum, so the same conclusion is vacuous there.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0ALW and the Zariski topology definition"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pqf-finite-spectrum-maximal-primes",
+  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal",
   "lem-weil-pbc-finite-type-algebra-dim-zero-finite"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma 0ALW (finite type algebra with finitely many prime ideals), equivalence (1)–(5)"
+  "by": "agent",
+  "document": "Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean; Mathlib/Topology/JacobsonSpace.lean; Mathlib/RingTheory/Jacobson/Artinian.lean",
+  "place": "E2, 2026-10-15: shorter Mathlib route to the statement of Stacks Tag 0ALW, using the finite Jacobson-space discreteness instance, the discrete-spectrum dimension characterization, and Module.finite_iff_krullDimLE_zero."
  },
  "mathlib_searches": [
   {
@@ -155,5 +143,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T154206-L-162972",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

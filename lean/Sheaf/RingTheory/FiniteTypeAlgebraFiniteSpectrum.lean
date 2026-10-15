@@ -7,7 +7,8 @@ module
 
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Sheaf.RingTheory.FiniteSpectrumMaximalPrimes
+import Mathlib.RingTheory.Jacobson.Artinian
+import Mathlib.RingTheory.Spectrum.Prime.Jacobson
 
 /-! # Finite-type algebras with finite spectrum
 
@@ -45,6 +46,15 @@ theorem finiteType_finiteSpectrum
     [Algebra.FiniteType k B] (hfin : Finite (PrimeSpectrum B)) :
     (∀ p : PrimeSpectrum B, p.asIdeal.IsMaximal) ∧ Module.Finite k B ∧
       DiscreteTopology (PrimeSpectrum B) := by
-  sorry
+  have : Finite (PrimeSpectrum B) := hfin
+  -- A finite Jacobson spectrum is discrete, so no separate maximality lemma is needed.
+  have : IsJacobsonRing B := isJacobsonRing_of_finiteType (A := k)
+  have hdisc : DiscreteTopology (PrimeSpectrum B) := inferInstance
+  have hdim : Ring.KrullDimLE 0 B :=
+    (PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero.mp hdisc).2
+  have hfinite : Module.Finite k B :=
+    (Module.finite_iff_krullDimLE_zero (R := k) (A := B)).2 hdim
+  exact ⟨fun p ↦ (PrimeSpectrum.isClosed_singleton_iff_isMaximal p).1
+    isClosed_singleton, hfinite, hdisc⟩
 
 end Algebra
