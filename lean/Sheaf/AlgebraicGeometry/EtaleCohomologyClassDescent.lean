@@ -64,7 +64,7 @@ theorem exists_cohomology_class_of_isLimit
     [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
     (c : Cone D) (hc : IsLimit c) (i : J)
     (F : Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1})
-    (hF : F.IsTorsion) (q : ℕ) :
+    (_hF : F.IsTorsion) (q : ℕ) :
     (∀ x : Sheaf.H (((c.π.app i)^*[AddCommGrpCat.{u + 1}]).obj F) q,
       ∃ (j : J) (f : j ⟶ i)
         (y : Sheaf.H (((D.map f)^*[AddCommGrpCat.{u + 1}]).obj F) q),
@@ -73,7 +73,6 @@ theorem exists_cohomology_class_of_isLimit
             (c.π.app i) (c.w f).symm).inv.app F) q
           (cohomologyMap (c.π.app j) _ q y) = x) := by
   -- Use the existing fixed-base continuity theorem with explicitly constructed canonical legs.
-  have _ := hF
   let E : Over i ⥤ Scheme.{u} := Over.forget i ⋙ D
   let (a : Over i) : CompactSpace (E.obj a) :=
     inferInstanceAs (CompactSpace (D.obj a.left))
