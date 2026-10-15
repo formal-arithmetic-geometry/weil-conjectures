@@ -5,16 +5,12 @@ Authors: SHEAF group A2
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 public import Mathlib.NumberTheory.Padics.PadicNumbers
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import Mathlib.Analysis.Normed.Algebra.Ultra
 public import Mathlib.Topology.Algebra.Valued.NormedValued
 public import Mathlib.Topology.Algebra.Ring.Ideal
-public import Mathlib.RingTheory.Localization.Away.Basic
-public import Mathlib.Algebra.Homology.ShortComplex.Ab
-import Mathlib.Algebra.Order.Archimedean.Basic
 import Mathlib.Topology.ContinuousMap.Compact
 import Mathlib.Analysis.Normed.Module.FiniteDimension
 import Mathlib.NumberTheory.Padics.ProperSpace

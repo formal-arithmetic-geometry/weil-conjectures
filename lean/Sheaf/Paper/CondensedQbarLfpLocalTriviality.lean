@@ -8,6 +8,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Sheaf.Paper.ProfinitePointPullback
+public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 import Sheaf.Paper.CondensedQbarLfpMatrixRefinement
 import Sheaf.Paper.CondensedQbarLfpCoverComposition
 
