@@ -6,25 +6,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
-import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
-import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
-import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension
 
 /-!
 # Affine torsion cohomological dimension bound
@@ -58,8 +40,10 @@ of its small etale site is empty, the empty covering forces every abelian sheaf
 to have zero sections, and hence its section functor and all its derived
 functors vanish. Thus this case also satisfies the displayed bound. Torsion here
 means locally torsion sections, as in the cited theorem, without a uniform
-annihilator. No affine theorem is currently available as a Lean declaration;
-this statement records precisely this affine stage, rather than the global bound.
+annihilator. The upstream source declaration
+`hasTorsionCohomologicalDimensionLE_of_isAffine` already provides this affine bound,
+and the present theorem exposes the same result in the `Sheaf.H` formulation used by
+the surrounding modules.
 (blueprint: new-thm-sc-affine-torsion-cd-bound)
 -/
 theorem subsingleton_H_of_two_mul_add_lt_of_isAffine {K : Type u} [Field K] (c d : ℕ)
@@ -69,6 +53,6 @@ theorem subsingleton_H_of_two_mul_add_lt_of_isAffine {K : Type u} [Field K] (c d
     [IsAffine X] (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
     (hq : d + c < q) : Subsingleton (Sheaf.H F q) := by
-  sorry
+  exact hasTorsionCohomologicalDimensionLE_of_isAffine hK a hX F hF q hq
 
 end AlgebraicGeometry.Scheme

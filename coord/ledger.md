@@ -15199,3 +15199,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:50 L: merged deliver/R4/Sheaf.CategoryTheory.HorizontalComparisonLift (stage 3; reviewer PASS; first push; landing 20261015T205056-L-1694809 (proof); batch 20261015T205049; modules 1; new nodes 0)
 - 20:55 L: merged deliver/F3/Sheaf.AlgebraicGeometry.UnboundedCoefficientForgetfulAux (stage 3; reviewer PASS; first push; landing 20261015T205524-L-1734243 (proof); batch 20261015T205522; modules 1; new nodes 0)
 - 20:58 L: merged deliver/XR1b27919aec52b018/Sheaf.Paper.CondensedStratumModelAssembly (stage 3; reviewer PASS; first push; landing 20261015T205835-L-1763358 (interface); batch 20261015T205833; modules 3; new nodes 1)
+- 20:58 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261015T205839-L-1763877 (proof); batch 20261015T205833; modules 1; new nodes 0)
