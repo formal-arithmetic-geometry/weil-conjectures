@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCube
-import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
+public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
 
 /-! # Pinned overlap and open-pullback squares -/
 
@@ -92,6 +92,45 @@ end
 
 variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
   HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
+
+/-- The local pullback map induced by a two-step scheme map and a lifted
+object. It first crosses the pinned open square, transports the lifted object,
+then uses the fixed restricted-composite comparison. -/
+@[no_expose] noncomputable def perfectOverlapCompositeLocalMap
+    {X K Y : Scheme.{u}} (g : X ⟶ Y) (gk : X ⟶ K) (f : K ⟶ Y)
+    (hgf : gk ≫ f = g) (W : Y.Opens) (A : schemeDerivedCategory W.toScheme)
+    (F : schemeDerivedCategory K)
+    (e : (schemeOpenRestriction K (f ⁻¹ᵁ W)).mapDerivedCategory.obj F ≅
+      (derivedPullback (f ∣_ W)).obj A) :
+    (schemeOpenRestriction X (g ⁻¹ᵁ W)).mapDerivedCategory.obj
+        ((derivedPullback gk).obj F) ⟶
+      (derivedPullback (g ∣_ W)).obj A := by
+  let hP : g ⁻¹ᵁ W ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ W) := by
+    rw [← Scheme.Hom.comp_preimage, hgf]
+  let j := gk.resLE (f ⁻¹ᵁ W) (g ⁻¹ᵁ W) hP
+  exact (singleComplexOpenPullbackSquareIso gk (f ⁻¹ᵁ W) (g ⁻¹ᵁ W) j
+      (Scheme.Hom.resLE_comp_ι gk hP)).inv.app F ≫
+    (derivedPullback j).map e.hom ≫
+      (perfectOverlapCompositeLocalIso f gk g hgf W).hom.app A
+
+/-- Defining component equation for the named local composite map. -/
+theorem perfectOverlapCompositeLocalMap_eq
+    {X K Y : Scheme.{u}} (g : X ⟶ Y) (gk : X ⟶ K) (f : K ⟶ Y)
+    (hgf : gk ≫ f = g) (W : Y.Opens) (A : schemeDerivedCategory W.toScheme)
+    (F : schemeDerivedCategory K)
+    (e : (schemeOpenRestriction K (f ⁻¹ᵁ W)).mapDerivedCategory.obj F ≅
+      (derivedPullback (f ∣_ W)).obj A) :
+    let hP : g ⁻¹ᵁ W ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ W) := by
+      rw [← Scheme.Hom.comp_preimage, hgf]
+    let j := gk.resLE (f ⁻¹ᵁ W) (g ⁻¹ᵁ W) hP
+    perfectOverlapCompositeLocalMap g gk f hgf W A F e =
+      (singleComplexOpenPullbackSquareIso gk (f ⁻¹ᵁ W) (g ⁻¹ᵁ W) j
+        (Scheme.Hom.resLE_comp_ι gk hP)).inv.app F ≫
+      (derivedPullback j).map e.hom ≫
+        (perfectOverlapCompositeLocalIso f gk g hgf W).hom.app A := by
+  intro hP j
+  unfold perfectOverlapCompositeLocalMap
+  rfl
 
 /-- The pinned open-pullback cube for a two-step scheme map, on any open.
 Source: Stacks Project, Tag 0D5S. The composite restriction equation supplies
