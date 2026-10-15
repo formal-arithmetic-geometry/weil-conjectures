@@ -47,8 +47,8 @@
 | `WeilConjectures.AlgebraicGeometry.Sites.SupportDimension` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonMatchingTransport` | 10 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnitComparison` | 11 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit` | 12 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
