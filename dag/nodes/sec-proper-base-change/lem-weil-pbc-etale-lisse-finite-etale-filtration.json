@@ -407,5 +407,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-844c31611",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Checked every statement clause, all ten statement dependencies, sources, universes, edge cases, docstrings, and verbatim signature. Immutable module compiled cleanly through scompile.py in 2.4 seconds. No defects or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LisseFiniteEtaleFiltration",
+  "declaration": "AlgebraicGeometry.Etale.exists_lisse_finiteEtale_filtration",
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseFiniteEtaleFiltration.lean",
+  "statement": "theorem exists_lisse_finiteEtale_filtration (A : Type u) [CommRing A] [IsNoetherianRing A] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (F : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsFiniteLocallyConstantSheaf F] (ℓ n : ℕ) (hℓ : ℓ.Prime) (hn : 1 ≤ n) (hF : (ℓ ^ n) • 𝟙 F = 0) : ∃ (T : Scheme.{u}) (g : T ⟶ Spec (.of A)), IsFinite g ∧ Etale g ∧ Surjective g ∧ ∃ d : ℕ, 1 ≤ d ∧ ¬ ℓ ∣ d ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of A)), Nat.card (g.GeometricFiber s) = d) ∧ ∃ (k : ℕ) (U : Fin k → T.Opens), (∀ a, IsAffineOpen (U a) ∧ IsClosed (U a : Set T)) ∧ Pairwise (fun a b => Disjoint (U a) (U b)) ∧ (⋃ a, (U a : Set T)) = Set.univ ∧ ∀ a : Fin k, ∃ (r : ℕ) (c : Fin (r + 1) → Subobject ((upperStar (ModuleCat.{u + 1} Λ) (U a).ι).obj ((upperStar (ModuleCat.{u + 1} Λ) g).obj F))) (hc : Monotone c), IsZero (c 0 : Sheaf (U a).toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ∧ c (Fin.last r) = ⊤ ∧ ∀ i : Fin r, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧ Nonempty (cokernel (Subobject.ofLE (c i.castSucc) (c i.succ) (hc (Fin.castSucc_le_succ i))) ≅ (constantSheaf (U a).toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
