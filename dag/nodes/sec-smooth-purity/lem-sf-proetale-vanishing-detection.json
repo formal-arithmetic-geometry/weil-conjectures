@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-sf-proetale-vanishing-detection",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Detection of vanishing on affine weakly contractible objects",
- "statement": "Let $\\Lambda$ be a finite discrete ring, let $T$ be a scheme and let\n$F$ be a sheaf of $\\Lambda$-modules on the\nsmall pro-étale site\n$T_{\\Proet}$.\n\n1. **(i)** $F=0$ if and only if $F(W)=0$ for every affine weakly\ncontractible object $W\\to T$ of $T_{\\Proet}$.\n1. **(ii)** More generally, a complex of $\\Lambda$-module sheaves on\n$T_{\\Proet}$ is acyclic if and only if its evaluation at every affine\nweakly contractible object of $T_{\\Proet}$ is an acyclic complex.\n\nConsequently the family of evaluation functors $F\\mapsto F(W)$, indexed\nby the affine weakly contractible objects, is a detection device on the\nwhole pro-étale topos, although the geometric-point stalks are not\nconservative there by clause (4) of\n[lem-cbc-proetale-stalk-conservative].",
+ "statement": "Let $\\Lambda$ be a finite discrete ring, let $T$ be a scheme and let\n$F$ be a sheaf of $\\Lambda$-modules on the\nsmall pro-étale site\n$T_{\\Proet}$.\n\n1. **(i)** $F=0$ if and only if $F(W)=0$ for every affine weakly\ncontractible object $W\\to T$ of $T_{\\Proet}$.\n1. **(ii)** More generally, a complex of $\\Lambda$-module sheaves on\n$T_{\\Proet}$ is acyclic if and only if its evaluation at every affine\nweakly contractible object of $T_{\\Proet}$ is an acyclic complex.\n\nConsequently the family of evaluation functors $F\\mapsto F(W)$, indexed\nby the affine weakly contractible objects, is a detection device on the\nwhole pro-étale topos, although geometric-point stalks are not\nconservative on the pro-étale topos in general, as explained in clause (4) of\n[lem-cbc-proetale-stalk-conservative].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-proetale-vanishing-detection.md",
   "place": "node lem-sf-proetale-vanishing-detection, order 1792",
@@ -23,31 +23,161 @@
   ]
  },
  "stmt_deps": [
-  "lem-cbc-proetale-stalk-conservative",
-  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
   "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-proetale-site"
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-cbc-proetale-stalk-conservative"
  ],
  "proof": [
   {
-   "text": "*(i).* The implication from left to right is trivial. For the\nconverse let $V$ be an object of $T_{\\Proet}$. The pro-étale site has\nenough affine quasi-compact weakly contractible objects: this is Stacks\nProject, Pro-étale Cohomology, Lemma 61.13.4,\n[Tag 0990](https://stacks.math.columbia.edu/tag/0990), which states\nthat $T_{\\mathrm{proet}}$ has enough (affine) quasi-compact\nweakly contractible objects in the sense of the definition of weakly\ncontractible objects of a site, so that every object of $T_{\\Proet}$\nadmits a covering $\\lbrace W_i\\to V\\rbrace$ by affine weakly contractible\nobjects; the cited lemma is the pro-étale instance of that general\nnotion. The sheaf axiom embeds $F(V)$ into $\\prod_iF(W_i)=0$, so\n$F(V)=0$, and $V$ was arbitrary.\n*(ii).* A complex of sheaves is acyclic if and only if each of its\nthree-term segments $K^n\\to K^{n+1}\\to K^{n+2}$ is exact in the middle.\nExactness of such a segment is detected by evaluation at the objects of\nany class $\\mathcal B$ of weakly contractible objects that covers every\nobject of the site: this is Stacks Project, Cohomology on Sites,\nProposition 21.51.2,\n[Tag 0947](https://stacks.math.columbia.edu/tag/0947), part (1),\nquoted here and applied with $\\mathcal B$ the affine weakly contractible\nobjects, whose covering property is the input of (i); the remaining parts\nof that proposition are not used. Combining the two equivalences gives\n(ii). The final sentence restates that (i) and (ii) are proved by\nevaluation at weakly contractible objects and never by geometric-point\nstalks, in contrast with clause (4) of\n[lem-cbc-proetale-stalk-conservative].",
+   "text": "*(i).* The implication from left to right is immediate. Conversely, let $V$ be any object of $T_{\\Proet}$. By [lem-weil-pbc-proetale-affine-wcontractible-covering-family], choose a covering family $\\{W_i\\to V\\}_{i\\in I}$ whose members are affine and weakly contractible. The sheaf equalizer axiom of [def-weil-pbc-sites-and-cohomology] gives an injection $F(V)\\hookrightarrow\\prod_i F(W_i)$. If every $F(W_i)$ is zero, then $F(V)=0$; since $V$ was arbitrary, $F=0$.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0990, lemma-proetale-enough-w-contractible, together with the sheaf equalizer axiom"
+   }
+  },
+  {
+   "text": "Forgetting the left $\\Lambda$-action preserves homology and detects zero sheaves: the kernels and sheafified sectionwise cokernels of [def-weil-sheaf-of-modules-category] have the same underlying abelian sheaves before and after forgetting the action, and the zero module sheaf has zero underlying abelian sheaf. To apply the commutative-coefficient evaluation theorem, give any abelian sheaf $P$ the sectionwise integer action by repeated addition. Apply [lem-pc-sites-module-sheafification-interface] to the constant ring presheaf $U\\mapsto\\mathbf Z$ and this presheaf of modules $P$. Its ring sheafification is $\\mathbf Z_T$ of [def-weil-pbc-proetale-site], and its abelian sheafification is canonically $P$ itself since $P$ is already a sheaf. The cited functor therefore equips $P$ with a $\\mathbf Z_T$-module structure without changing its sections, and extends every abelian-sheaf morphism (which is sectionwise $\\mathbf Z$-linear) without changing its underlying maps. The same kernel and cokernel formulas show that this passage also preserves homology. Thus the subsequent calculation over $\\mathbf Z_T$ computes the underlying abelian groups of the original homology sheaves even for noncommutative $\\Lambda$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian, underlying abelian sheaves; Tag 03CY, lemma-sheafification-presheaf-modules, applied to the constant integer ring presheaf"
+   }
+  },
+  {
+   "text": "Fix any affine weakly contractible object $W$ of $T_{\\Proet}$. Weak contractibility means that every epimorphism of sheaves of sets is surjective on sections over $W$, exactly the definition stated in [lem-weil-pbc-proetale-affine-wcontractible-covering-family]. Apply [lem-weil-pbc-proetale-weakly-contractible-evaluation-exact] with $X=T$, $R=\\mathbf Z_T$ and this $W$. Its conclusion, together with step 2, gives for every degree $n$ an isomorphism of abelian groups $H^n(K(W))\\cong (\\mathcal H^n(K))(W)$ for any complex $K$ of left $\\Lambda$-module sheaves. Here $K(W)$ means termwise evaluation, and $\\mathcal H^n(K)$ is the module-sheaf homology, whose underlying abelian sheaf was identified in step 2. No commutativity of $\\Lambda$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0946, lemma-w-contractible (1); Tag 0947, proposition-enough-weakly-contractibles, proof of (1)"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-proetale-modules], acyclicity is the vanishing of every $\\mathcal H^n(K)=\\ker d^n/\\operatorname{im}d^{n-1}$. If these sheaves are zero, step 3 makes every $H^n(K(W))$ zero. Conversely, if every evaluated complex $K(W)$ is acyclic, step 3 makes $(\\mathcal H^n(K))(W)=0$ for every affine weakly contractible $W$ and every $n$. Clause (i), already proved in step 1, applied to the module sheaf $\\mathcal H^n(K)$ then gives $\\mathcal H^n(K)=0$. This proves clause (ii), degree by degree, for unbounded complexes as well.",
+   "uses": [
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0947, proposition-enough-weakly-contractibles (1), applied separately to each three-term segment of the complex"
+   }
+  },
+  {
+   "text": "Clauses (i) and (ii) give the claimed detection of vanishing and acyclicity. More explicitly, if a sheaf morphism evaluates to an isomorphism at every affine weakly contractible object, its kernel and cokernel have zero evaluations by steps 2 and 3. Clause (i) makes both sheaves zero, so the morphism is an isomorphism in the abelian module category. Thus this evaluation family is jointly conservative on sheaves. The warning compares this with geometric-point stalks: these are not conservative in general for arbitrary pro-étale sheaves, as stated in clause (4) of [lem-cbc-proetale-stalk-conservative].",
    "uses": [
     "lem-cbc-proetale-stalk-conservative"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-proetale-vanishing-detection.md",
+    "place": "Proof, final sentence"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "def-weil-pbc-proetale-modules",
   "lem-cbc-proetale-stalk-conservative"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-proetale-vanishing-detection.md",
-  "place": "## Proof"
+  "place": "Proof, clauses (i) and (ii); Stacks Tags 0990 (lemma-proetale-enough-w-contractible), 0946 (lemma-w-contractible), and 0947 (proposition-enough-weakly-contractibles), with the coefficient reduction supplied by 03CY (lemma-sheafification-presheaf-modules) and 03DA (lemma-abelian). Sources read from the launcher literature mirror; see the second reading report."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on a small pro-etale site vanishes exactly when its sections vanish on every affine weakly contractible object, and complexes are acyclic exactly when evaluations are acyclic",
+   "results": "8 hits: HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic; HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt; HomotopyCategory.mem_subcategoryAcyclic_iff; HomotopyCategory.subcategoryAcyclic; CochainComplex.isKInjective_iff_rightOrthogonal; CochainComplex.IsKInjective; CochainComplex.isKProjective_iff_leftOrthogonal; CochainComplex.isKInjective_of_injective",
+   "date": "2026-10-16",
+   "verdict": "no match: generic homological acyclicity and projective/coherent-site results do not give the stated pro-etale covering and evaluation criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, weakly contractible, exact, homology",
+   "results": "0 hits: ; loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-16",
+   "verdict": "no match: query returned no declarations; identifier diagnostic recorded above"
+  },
+  {
+   "tool": "grep",
+   "query": "weakly contractible|WeaklyContractible|pro.?etale",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; source subdirectory AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: topology definitions and coherent-site sheaf comparisons do not supply this affine weakly-contractible detection theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of a sheaf detected by sections on weakly contractible pro-etale objects and acyclicity detected by evaluations",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a site with enough projective objects, evaluation of sheaves on projective objects is exact and jointly detects zero objects and exact complexes",
+   "results": "8 hits: CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp; CategoryTheory.regularTopology.isSheaf_of_projective; CategoryTheory.Presheaf.isSheaf_iff_extensiveSheaf_of_projective; CategoryTheory.regularTopology.isSheafFor_regular_of_projective; CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ; CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective; CategoryTheory.projective_of_preservesFiniteColimits_preadditiveCoyonedaObj",
+   "date": "2026-10-16",
+   "verdict": "no match: generic homological acyclicity and projective/coherent-site results do not give the stated pro-etale covering and evaluation criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"isZero\"",
+   "results": "3 hits: CategoryTheory.Sheaf.subsingleton_H_of_isZero; AlgebraicGeometry.Scheme.isZero_ellAdicSheaf_of_isEmpty; TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero",
+   "date": "2026-10-16",
+   "verdict": "no match: zero sheaf cohomology, the empty-scheme ell-adic sheaf, and topological-space stalk detection do not state pro-etale weakly-contractible detection"
+  },
+  {
+   "tool": "grep",
+   "query": "WeaklyContractible|weaklyContractible|weakly.contractible|projective.*[Ss]heaf",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean; source subdirectory CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: topology definitions and coherent-site sheaf comparisons do not supply this affine weakly-contractible detection theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero.*iff.*(obj|eval)|jointly.*conservative|projective.*generator",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: generic projective resolutions and degreewise exactness in a category of complexes do not state exactness detected by weakly contractible objects of a pro-etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"PreservesHomology\"",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: generic projective resolutions and degreewise exactness in a category of complexes do not state exactness detected by weakly contractible objects of a pro-etale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on projective generators detects exactness of chain complexes of sheaves of modules on a Grothendieck site",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.ofComplex_exactAt_succ; CategoryTheory.ProjectiveResolution.complex_exactAt_succ; HomologicalComplex.exact_of_degreewise_exact; HomologicalComplex.exact_iff_degreewise_exact; CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ; CategoryTheory.isZero_Tor'_succ_of_projective; CategoryTheory.isZero_Tor_succ_of_projective; CategoryTheory.ProjectiveResolution.exact₀",
+   "date": "2026-10-16",
+   "verdict": "no match: generic projective resolutions and degreewise exactness in a category of complexes do not state exactness detected by weakly contractible objects of a pro-etale site"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -79,5 +209,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-fullcd-etale-origin"
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-proetale-vanishing-detection",
+  "worker": "stage1",
+  "summary": "Replaced the imported paragraph with a covering/sheaf-equalizer proof of (i), explicit reduction to underlying abelian sheaves for possibly noncommutative finite coefficients, exact evaluation over the integer ring sheaf using an existing node, and degreewise detection of homology sheaves for (ii). Retained the final stalk warning. Reused existing DAG nodes; no new nodes. Second reading: cite the existing general module-sheafification interface for the integer-sheaf action, qualify the stalk warning by in general, and check the locally available source mirror.",
+  "blueprint": "Realizes the proof paragraph of lem-sf-proetale-vanishing-detection: (i) the enough-weakly-contractible-cover argument, (ii) exactness detected by evaluations, and the final contrast with geometric-point stalks.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "why": "Generic theorem that every pro-etale object has an affine weakly contractible covering family; the present unit supplies no covering construction."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+    "why": "Generic homology-preserving evaluation for modules over a commutative ring sheaf, used with the integer coefficient sheaf after explicitly forgetting the possibly noncommutative coefficient action; the present unit has no exact-evaluation theorem."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "Generic module-sheafification theorem on an arbitrary site; applied to the constant integer ring presheaf to equip underlying abelian sheaves with commutative coefficients while leaving all sections unchanged. No corresponding interface occurs in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q26-1b423bf9a",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-1b423bf9a (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, unit/chapter route, and sources 0990, 0946, 0947, 03CY and 03DA. All five steps hold, including noncommutative coefficients and unbounded complexes. Accepted the three declared generic tool uses. No new nodes or repairs; detailed checks are in review.md."
+ }
 }
