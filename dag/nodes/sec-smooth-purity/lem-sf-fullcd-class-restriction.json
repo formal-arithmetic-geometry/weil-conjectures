@@ -3,55 +3,151 @@
  "blueprint": {
   "is": "lem-sf-fullcd-class-restriction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The coefficient class is stable under restriction to a pro-étale base change",
- "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, an integer\n$n\\geq1$, $A=A_{E,n}$, $k=\\Fbar$, a finite-type $k$-scheme\n$\\overline X$ and a scheme $Y$. Let $V\\to Y$ be a weakly étale\n$Y$-scheme, that is, an object of the small pro-étale site $Y_{\\Proet}$\nof\n[def-weil-pbc-proetale-site], and put\n\n$$\nW=\\overline X\\times_YV,\\qquad\nq:W\\longrightarrow\\overline X,\n$$\n\nso that $W$ is a scheme, $q$ is weakly étale and the square is\ncartesian. Let $\\mathcal F$ be a coefficient sheaf of the blueprint's\nclass on $\\overline X_{\\Proet}$, that is,\n$\\mathcal F\\cong\\nu_{\\overline X}^*\\mathcal G$ for a sheaf $\\mathcal G$\nof $A$-modules on $\\overline X_{\\Et}$ in the sense of\n[def-weil-pbc-etale-sheaves], the comparison morphism being that of\n[def-weil-pbc-site-comparison-morphism]. Then the restriction\n$q_{\\Proet}^{-1}\\mathcal F$ of $\\mathcal F$ to $W_{\\Proet}$ is again of\nétale origin,\n\n$$\nq_{\\Proet}^{-1}\\mathcal F\\cong\n\\nu_W^*\\bigl(q_{\\Et}^{-1}\\mathcal G\\bigr),\n$$\n\nso it is a coefficient sheaf of the same class on the base-changed source.",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, an integer $n\\geq1$ and the finite discrete coefficient ring $A=A_{E,n}$ [def-weil-l-adic-coefficient-extension]. Put $k=\\Fbar$. Let $\\overline X$ be a finite-type $k$-scheme [def-weil-finite-type-morphism], let $Y$ be a scheme [def-pc-scheme], and fix a morphism $f:\\overline X\\to Y$. Let $v:V\\to Y$ be an object of the small pro-étale site $Y_{\\Proet}$ [def-weil-pbc-proetale-site], in particular a weakly étale morphism, and form the fibre product [def-pc-fibre-product]\n$$\nW=\\overline X\\times_Y V,\\qquad q:W\\longrightarrow\\overline X,\\qquad r:W\\longrightarrow V.\n$$\nThen $W$ is a scheme, the square with sides $f,v,q,r$ is cartesian, and $q$ is weakly étale, so $W\\to\\overline X$ is an object of $\\overline X_{\\Proet}$.\n\nLet $\\mathcal F$ be a sheaf of $A$-modules on $\\overline X_{\\Proet}$ of étale origin in the sense of [def-sf-fullcd-used-class]. Choose any witnessing étale $A$-module sheaf $\\mathcal G$ [def-weil-pbc-etale-sheaves] and isomorphism $\\alpha:\\nu_{\\overline X}^*\\mathcal G\\xrightarrow{\\sim}\\mathcal F$, where $\\nu$ is the comparison morphism [def-weil-pbc-site-comparison-morphism]. Membership asserts existence of a witness; a choice of witness is used only to exhibit the isomorphism below. With the scheme inverse images of [def-weil-proetale-inverse-image] and [def-weil-pbc-inverse-image], there is an isomorphism of $A$-module sheaves\n$$\nq_{\\Proet}^{-1}\\mathcal F\\xrightarrow{\\sim}\n\\nu_W^*\\bigl(q_{\\Et}^{-1}\\mathcal G\\bigr).\n$$\nThus restriction is again of étale origin, with étale witness $q_{\\Et}^{-1}\\mathcal G$. Here the same étale-origin condition is used on the arbitrary scheme $W$; no finite-type hypothesis on $W$ is asserted. For $\\mathcal F=\\nu_{\\overline X}^*\\mathcal G$ and $\\alpha=\\mathrm{id}$ these isomorphisms are natural in $\\mathcal G$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-fullcd-class-restriction.md",
   "place": "node lem-sf-fullcd-class-restriction, order 1798"
  },
  "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-site-comparison-morphism"
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sf-fullcd-used-class",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-inverse-image"
  ],
  "proof": [
   {
-   "text": "The restriction along the base change is the scheme inverse image\n$q_{\\Proet}^{-1}$ of the weakly étale $Y$-morphism $q$. By\n[lem-weil-pbc-comparison-pullback] applied to $u=q$ the comparison\ninverse image of [def-weil-pbc-site-comparison-morphism] commutes with\nit:\n\n$$\nq_{\\Proet}^{-1}\\nu_{\\overline X}^*\n\\xrightarrow{\\ \\sim\\ }\\nu_W^*q_{\\Et}^{-1}.\n$$",
+   "text": "The chosen fibre product exists as a scheme and its projections satisfy the cartesian universal property by [def-pc-fibre-product], applied to $f:\\overline X\\to Y$ and $v:V\\to Y$. Apply the base-change clause of [lem-weil-pbc-weakly-etale-composition-base-change] with its $U=V$, its $V=Y$, its weakly étale morphism $v$, and its $V'=\\overline X$, $h=f$. Its projection is exactly $q:\\overline X\\times_YV\\to\\overline X$, so $q$ is weakly étale. This gives an object of $\\overline X_{\\Proet}$ by [def-weil-pbc-proetale-site], using the compatible size convention of that site. No finiteness property of $W$ is needed.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-site-comparison-morphism"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Substituting the identification\n$\\mathcal F\\cong\\nu_{\\overline X}^*\\mathcal G$ of the hypothesis into this\nisomorphism gives the displayed identification of\n$q_{\\Proet}^{-1}\\mathcal F$, and it is natural in $\\mathcal G$. The\nsheaf $q_{\\Et}^{-1}\\mathcal G$ is a sheaf of $A$-modules on the small\nétale site of $W$ in the sense of\n[def-weil-pbc-etale-sheaves], so the restriction is the comparison\ninverse image of an étale $A$-module sheaf, which is the defining\nproperty of the class [def-sf-fullcd-used-class]. The cartesian\nidentification of $W$ is the one used in\n[lem-weil-pbc-comparison-pullback], and stability of weak étaleness\nunder base change is what makes $W$ an object of the pro-étale site of\n$\\overline X$ of [def-weil-pbc-proetale-site].",
-   "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-sf-fullcd-used-class",
-    "lem-weil-pbc-comparison-pullback",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
     "def-weil-pbc-proetale-site"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 094U, lemma-base-change-weakly-etale (2); fibre-product universal property as in def-pc-fibre-product"
+   }
+  },
+  {
+   "text": "Write $\\mathcal H=q_{\\Et}^{-1}\\mathcal G$. The fixed-coefficient module inverse image in [def-weil-pbc-inverse-image] has values in étale $A$-module sheaves on $W$, whose category is the one in [def-weil-pbc-etale-sheaves]. The comparison adjunction acts on these module sheaves for the finite discrete ring $A$ by [def-weil-pbc-site-comparison-morphism]. Apply [lem-weil-pbc-comparison-pullback] to the scheme morphism $u=q$ and evaluate its natural isomorphism at $\\mathcal G$. This gives an $A$-linear isomorphism\n$$c_{q,\\mathcal G}:\\nu_W^*\\mathcal H\\xrightarrow{\\sim}q_{\\Proet}^{-1}\\nu_{\\overline X}^*\\mathcal G.$$\nThe orientation required in the conclusion is $c_{q,\\mathcal G}^{-1}$. The comparison lemma is for arbitrary scheme morphisms, so its use requires neither quasi-compactness nor finite type of $W$.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism, commuting square of inverse images before lemma-morphism-comparison; Tag 099R, section-comparison"
+   }
+  },
+  {
+   "text": "By [def-sf-fullcd-used-class], membership of $\\mathcal F$ in the class means existence of an étale sheaf $\\mathcal G$ and an isomorphism $\\alpha:\\nu_{\\overline X}^*\\mathcal G\\xrightarrow{\\sim}\\mathcal F$. The finite-type $k$-scheme and coefficient hypotheses of that definition hold for $\\overline X$ and $A$ here. Choose any such pair for this argument; the class does not carry a chosen pair as additional data. Put $Q=q_{\\Proet}^{-1}$. Apply this functor to $\\alpha$ and $\\alpha^{-1}$. Functoriality gives $Q(\\alpha^{-1})Q(\\alpha)=\\mathrm{id}$ and $Q(\\alpha)Q(\\alpha^{-1})=\\mathrm{id}$. Therefore\n$$b=c_{q,\\mathcal G}^{-1}\\circ Q(\\alpha^{-1}):Q\\mathcal F\\longrightarrow\\nu_W^*\\mathcal H$$\nhas inverse $Q(\\alpha)\\circ c_{q,\\mathcal G}$: the two composites reduce to identities by these equations and the inverse equations for $c_{q,\\mathcal G}$. This is the displayed isomorphism. The pair $(\\mathcal H,b^{-1})$ is an étale-origin witness on $W$. Here we use the explicitly stated existential condition on $W$, not the finite-type hypothesis in the definition's ambient setting. To spell out naturality, for a morphism $a:\\mathcal G\\to\\mathcal G'$ the naturality equation of $c_q$ in [lem-weil-pbc-comparison-pullback] reads\n$$Q(\\nu_{\\overline X}^*a)\\circ c_{q,\\mathcal G}=c_{q,\\mathcal G'}\\circ\\nu_W^*(q_{\\Et}^{-1}a).$$\nMultiplying by the two inverse components gives\n$$\\nu_W^*(q_{\\Et}^{-1}a)\\circ c_{q,\\mathcal G}^{-1}=c_{q,\\mathcal G'}^{-1}\\circ Q(\\nu_{\\overline X}^*a),$$\nwhich is precisely naturality of $b$ when $\\alpha=\\mathrm{id}$.",
+   "uses": [
+    "def-sf-fullcd-used-class",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism: elementary composition of the commuting inverse-image isomorphism with the given isomorphism alpha"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-comparison-pullback",
-  "def-weil-pbc-site-comparison-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-inverse-image",
   "def-weil-pbc-etale-sheaves",
-  "def-sf-fullcd-used-class",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-comparison-pullback",
+  "def-sf-fullcd-used-class"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-fullcd-class-restriction.md",
-  "place": "## Proof"
+  "place": "## Proof, both paragraphs, with the missing structural morphism supplied and the inverse-isomorphism calculation written out; checked against Stacks 094U and 09A5"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "essImage.*(comp|map)|mem_essImage.*(comp|map)",
+   "results": "14 hits; Mathlib/CategoryTheory/Skeletal.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-15",
+   "verdict": "no match for this item: the hits do not supply the scheme etale/pro-etale inverse-image comparison needed here"
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStar|[Pp]ro[Ee]tale",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-15",
+   "verdict": "no match for this item: the hits do not supply the scheme etale/pro-etale inverse-image comparison needed here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a sheaf of modules from the etale site to the proetale site commutes with scheme inverse image",
+   "results": "0 hits; ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comparisonUpperStar\"",
+   "results": "0 hits; ",
+   "date": "2026-10-15",
+   "verdict": "no match for this item: the hits do not supply the scheme etale/pro-etale inverse-image comparison needed here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of an etale-origin sheaf on the proetale site along a scheme morphism is again of etale origin",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-15",
+   "verdict": "no match for this item: the hits do not supply the scheme etale/pro-etale inverse-image comparison needed here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commuting square of inverse image functors carries the essential image of one functor into the essential image of the other",
+   "results": "8 hits; CategoryTheory.Functor.essImage_comp_apply_of_essSurj, CategoryTheory.Functor.obj_mem_essImage, CategoryTheory.Functor.essImage_comp_of_essSurj, CategoryTheory.Functor.objObjPreimageIso, CategoryTheory.Functor.essImage.of_overPost, CategoryTheory.Functor.essImage.ofNatIso, CategoryTheory.Functor.essImage.of_underPost, CategoryTheory.Functor.essImage.ofIso",
+   "date": "2026-10-15",
+   "verdict": "no match for the item: general essential-image facts do not supply the comparison square; the elementary composition is written in step 3"
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStar|comparison.*[Pp]ro|[Pp]ro.*comparison",
+   "results": "25 hits; Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Topology/Category/CompHausLike/SigmaComparison.lean, Mathlib/Topology/Category/TopCat/Yoneda.lean",
+   "date": "2026-10-15",
+   "verdict": "no match for this item: the hits do not supply the scheme etale/pro-etale inverse-image comparison needed here"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(pullback|essImage)|(pullback|essImage).*proetale|etaleComparisonPullback",
+   "results": "0 hits; ",
+   "date": "2026-10-15",
+   "verdict": "no match: no declaration with this scheme comparison or essential-image vocabulary"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a natural isomorphism F ⋙ Q ≅ P ⋙ G, Q maps the essential image of F into the essential image of G",
+   "results": "8 hits; CategoryTheory.Functor.essImage.ofNatIso, CategoryTheory.Functor.essImage_eq_of_natIso, CategoryTheory.Functor.essImage_comp_apply_of_essSurj, CategoryTheory.Functor.essImage_comp_of_essSurj, CategoryTheory.Functor.toEssImageCompι, CategoryTheory.Functor.essImage.ofIso, CategoryTheory.Functor.essImage.liftFunctorCompIso, CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage",
+   "date": "2026-10-15",
+   "verdict": "no match for this item: the generic essential-image lemmas do not supply the scheme comparison isomorphism or the geometric assertions"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -77,5 +173,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-fullcd-etale-origin"
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-fullcd-class-restriction",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: retained the earlier repairs supplying f:Xbar to Y and stating etale origin explicitly on arbitrary W, which need not be finite type. Revalidated all current cited statements after the landing refusal. Aligned the witness with the repaired def-sf-fullcd-used-class: membership means existence of alpha:nu_Xbar^*G to F, not a chosen pair or finite constructibility. Step 3 now cites that defining clause and uses c^{-1} Q(alpha^{-1}), with inverse Q(alpha)c; wrote out both cancellations and naturality. The earlier neighboring false equivalence has been removed in the current DAG. No new nodes or changed unit route.",
+  "blueprint": "Proof paragraph 1: step 2 applies the comparison isomorphism at q. Proof paragraph 2: step 1 supplies the previously uncited weakly-etale base-change fact; step 3 gives the substitution and naturality calculation. Same unit route; no unit/chapter change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "The generic comparison of scheme inverse image with etale-to-pro-etale inverse image is the tool already cited by this blueprint node; the present unit supplies no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-70eae6edd",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-70eae6edd (reviewer sub-agent of L); spot-checked: Read the item, all thirteen cited statements, sources, and unit/chapter route in full. Verified weakly étale base change, finite-discrete-module comparison, witness orientation, inverse equations, naturality, and edge cases. No new nodes or repairs; accepted the declared comparison-pullback tool use. Dependency closure is acyclic. Condensed target comparisons remain separate obligations. Detailed review written to review.md."
+ }
 }
