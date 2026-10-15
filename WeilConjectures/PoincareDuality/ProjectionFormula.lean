@@ -45,7 +45,7 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
   respect to a compactification, on the unbounded derived categories.
 - `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism`: `PF^!_f` on
   bounded constructible complexes, for a morphism `f` of separated `k`-schemes of finite type
-  and the compactification `compactificationOverField k f` defining
+  and the compactification `compactificationOverField f` defining
   `boundedConstructibleLowerShriek`. This is the version used by Verdier duality.
 
 ## Main results
@@ -217,31 +217,26 @@ end OfCompactification
 
 section BoundedConstructible
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
-include ℓ k
-
-variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-  [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]
-  [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
-  (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
-  [(boundedConstructible (condensedRingObj Λ X)).IsMonoidal]
-  [(boundedConstructible (condensedRingObj Λ Y)).IsMonoidal]
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  (f : X ⟶ Y)
 
 /-- The **derived exceptional projection morphism**
 `PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)` on bounded constructible complexes: the
 morphism `exceptionalProjectionMorphismOfCompactification` for the compactification
-`compactificationOverField k f` defining `boundedConstructibleLowerShriek`, the inclusions
+`compactificationOverField f` defining `boundedConstructibleLowerShriek`, the inclusions
 `Dᵇc ⥤ D` being fully faithful and monoidal. -/
-noncomputable def boundedConstructibleExceptionalProjectionMorphism (K : Dᵇc(X)⟦Λ⟧)
-    (B : Dᵇc(Y)⟦Λ⟧) :
-    (boundedConstructibleLowerShriek Λ ℓ k f).obj K ⊗ B ⟶
-      (boundedConstructibleLowerShriek Λ ℓ k f).obj
-        (K ⊗ (boundedConstructibleUpperStar Λ ℓ k f).obj B) :=
+noncomputable def boundedConstructibleExceptionalProjectionMorphism (K : Dᵇc(X.left)⟦Λ⟧)
+    (B : Dᵇc(Y.left)⟦Λ⟧) :
+    (boundedConstructibleLowerShriek Λ ℓ f).obj K ⊗ B ⟶
+      (boundedConstructibleLowerShriek Λ ℓ f).obj
+        (K ⊗ (boundedConstructibleUpperStar Λ ℓ f).obj B) :=
   ObjectProperty.homMk
-    (exceptionalProjectionMorphismOfCompactification Λ (compactificationOverField k f) K.obj B.obj)
+    (exceptionalProjectionMorphismOfCompactification Λ (compactificationOverField f) K.obj B.obj)
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
 second variable. It is the image of
@@ -249,21 +244,21 @@ second variable. It is the image of
 the direct term proof times out on unfolding the restricted functors, so it is `sorry`ed for
 now. -/
 @[reassoc]
-lemma boundedConstructibleExceptionalProjectionMorphism_natural_right (K : Dᵇc(X)⟦Λ⟧)
-    {B B' : Dᵇc(Y)⟦Λ⟧} (h : B ⟶ B') :
-    (boundedConstructibleLowerShriek Λ ℓ k f).obj K ◁ h ≫
-        boundedConstructibleExceptionalProjectionMorphism Λ ℓ k f K B' =
-      boundedConstructibleExceptionalProjectionMorphism Λ ℓ k f K B ≫
-        (boundedConstructibleLowerShriek Λ ℓ k f).map
-          (K ◁ (boundedConstructibleUpperStar Λ ℓ k f).map h) :=
+lemma boundedConstructibleExceptionalProjectionMorphism_natural_right (K : Dᵇc(X.left)⟦Λ⟧)
+    {B B' : Dᵇc(Y.left)⟦Λ⟧} (h : B ⟶ B') :
+    (boundedConstructibleLowerShriek Λ ℓ f).obj K ◁ h ≫
+        boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B' =
+      boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B ≫
+        (boundedConstructibleLowerShriek Λ ℓ f).map
+          (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) :=
   sorry
 
 /-- **The derived projection formula for `Rf_!`**: the exceptional projection morphism
 `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
 docstring. -/
-instance isIso_boundedConstructibleExceptionalProjectionMorphism (K : Dᵇc(X)⟦Λ⟧)
-    (B : Dᵇc(Y)⟦Λ⟧) :
-    IsIso (boundedConstructibleExceptionalProjectionMorphism Λ ℓ k f K B) :=
+instance isIso_boundedConstructibleExceptionalProjectionMorphism (K : Dᵇc(X.left)⟦Λ⟧)
+    (B : Dᵇc(Y.left)⟦Λ⟧) :
+    IsIso (boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B) :=
   sorry
 
 end BoundedConstructible

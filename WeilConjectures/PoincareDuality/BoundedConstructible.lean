@@ -11,15 +11,13 @@ public import WeilConjectures.SmoothPurity.Defs
 
 /-!
 
-# The monoidal closed structure on bounded constructible module objects
+# The derived pullback on bounded constructible module objects is oplax monoidal
 
-Let `Λ` be a commutative condensed ring and `X` a separated `k`-scheme of finite type. The bounded
-constructible complexes `Dᵇc(X)⟦Λ⟧` contain the tensor unit `Λ_X`
-(`ProEtale.CondensedRing.boundedConstructible_tensorUnit`) and are stable under the derived tensor
-product and the derived hom (`boundedConstructible_derivedTensor_obj`,
-`boundedConstructible_derivedHom_obj`). Hence they form a full monoidal closed subcategory of
-`D(Mod_{Λ_X})` (`ObjectProperty.IsMonoidal`, `ObjectProperty.IsMonoidalClosed`), whose tensor
-product, unit and internal hom are those of `D(Mod_{Λ_X})`.
+Let `Λ` be a commutative condensed ring and `X` a separated `k`-scheme of finite type, an object
+`X : Over (Spec (.of k))`. The bounded constructible complexes `Dᵇc(X)⟦Λ⟧` form a full monoidal
+closed subcategory of `D(Mod_{Λ_X})` (`ProEtale.CondensedRing.isMonoidal_boundedConstructible`,
+`ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible`), whose tensor product, unit and
+internal hom are those of `D(Mod_{Λ_X})`.
 
 The restriction `boundedConstructibleUpperStar` of the strong monoidal derived pullback
 `Lf^*` (`ProEtale.CondensedRing.monoidal_leftDerivedUpperStar`) is then oplax monoidal, with the
@@ -27,17 +25,11 @@ comparison maps of `Lf^*`.
 
 ## Main results
 
-- `ProEtale.CondensedRing.isMonoidal_boundedConstructible` and
-  `ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible`.
 - `ProEtale.CondensedRing.oplaxMonoidal_boundedConstructibleUpperStar`.
 
 ## Implementation notes
 
-These are lemmas rather than instances: the base field `k` does not appear in their conclusion,
-so they cannot be found by instance search. Downstream statements take the two properties as
-instance arguments, which these lemmas discharge.
-
-The monoidal unit of the subcategory is `⟨𝟙_ _, _⟩`, which is definitionally
+The monoidal unit of the subcategory is `⟨𝟙_ _, _⟩`; it is
 `ProEtale.CondensedRing.boundedConstructibleUnit`.
 
 -/
@@ -80,44 +72,19 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-
-section BoundedConstructible
-
-include ℓ k
-
-variable (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
-  [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
-
-/-- The bounded constructible complexes on `X` contain the unit `Λ_X` and are stable under the
-derived tensor product, so `Dᵇc(X)⟦Λ⟧` is a full monoidal subcategory of `D(Mod_{Λ_X})`. -/
-lemma isMonoidal_boundedConstructible :
-    (boundedConstructible (condensedRingObj Λ X)).IsMonoidal where
-  prop_unit := boundedConstructible_tensorUnit Λ X
-  prop_tensor _ _ hK hL := boundedConstructible_derivedTensor_obj Λ ℓ k X hK hL
-
-/-- The bounded constructible complexes on `X` are stable under the derived hom, so `Dᵇc(X)⟦Λ⟧`
-is a full monoidal closed subcategory of `D(Mod_{Λ_X})`. -/
-lemma isMonoidalClosed_boundedConstructible :
-    (boundedConstructible (condensedRingObj Λ X)).IsMonoidalClosed where
-  prop_ihom _ _ hK hL := boundedConstructible_derivedHom_obj Λ ℓ k X hK hL
-
-end BoundedConstructible
+  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 section UpperStar
 
-variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-  [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]
-  [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
-  (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
-  [(boundedConstructible (condensedRingObj Λ X)).IsMonoidal]
-  [(boundedConstructible (condensedRingObj Λ Y)).IsMonoidal]
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  (f : X ⟶ Y)
 
 /-- The derived pullback `Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible complexes is
 oplax monoidal, with the comparison maps of `L((f)^*⟦Λ⟧)`. -/
 noncomputable instance oplaxMonoidal_boundedConstructibleUpperStar :
-    (boundedConstructibleUpperStar Λ ℓ k f).OplaxMonoidal := by
+    (boundedConstructibleUpperStar Λ ℓ f).OplaxMonoidal := by
   unfold boundedConstructibleUpperStar
   exact ObjectProperty.oplaxMonoidalLift _ _
 

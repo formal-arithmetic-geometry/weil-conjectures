@@ -15,8 +15,10 @@ public import WeilConjectures.TateTwist.ProEtale
 
 Let `ℓ` be a prime and `k` a field of characteristic `p > 0` with `p ≠ ℓ`. As in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`, all schemes are
-separated and of finite type over `Spec k`, and all morphisms are morphisms over `Spec k`; in
-particular `ℓ` is invertible on every scheme considered.
+separated and of finite type over `Spec k`, as objects `X : Over (Spec (.of k))`, and all
+morphisms are morphisms `f : X ⟶ Y` of `Over (Spec (.of k))`, the functors being those of the
+underlying morphism of schemes `f.left`; in particular `ℓ` is invertible on every scheme
+considered.
 
 Let `f : X ⟶ Y` be a smooth morphism of pure relative dimension `d`. *Smooth purity* (SGA 4,
 Exposé XVIII, Théorème 3.2.5, and Bhatt–Scholze, *The pro-étale topology for schemes*,
@@ -35,12 +37,6 @@ compactification of `f` chosen by Nagata's theorem), `ℚ̄_ℓ,Y` is the tensor
 Tate twist of `WeilConjectures.TateTwist.ProEtale`. The isomorphism is stated after the
 inclusion `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{ℚ̄_ℓ,X})`, which is fully faithful, so that the constructibility
 of the Tate twists need not be recorded.
-
-## Sorried input
-
-* `AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensorUnit`: the tensor unit
-  `Λ_X` of `D(Mod_{Λ_X})` is bounded constructible: it is the module `Λ_X` placed in degree `0`,
-  which is free of rank one.
 
 ## Sorried data
 
@@ -78,20 +74,14 @@ open Scheme
 section Unit
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (X : Scheme.{u})
-
-/-- The tensor unit `Λ_X` of `D(Mod_{Λ_X})` is bounded constructible. See the module
-docstring. -/
-lemma boundedConstructible_tensorUnit :
-    boundedConstructible (condensedRingObj Λ X)
-      (𝟙_ (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj Λ X)))) :=
-  sorry
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] (X : Over (Spec (.of k)))
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- The constant coefficient object `Λ_X`, the tensor unit of `D(Mod_{Λ_X})`, as a bounded
-constructible complex. -/
-noncomputable def boundedConstructibleUnit : Dᵇc(X)⟦Λ⟧ :=
-  ⟨𝟙_ _, boundedConstructible_tensorUnit Λ X⟩
+constructible complex: the tensor unit of the monoidal subcategory `Dᵇc(X)⟦Λ⟧`
+(`isMonoidal_boundedConstructible`). -/
+noncomputable def boundedConstructibleUnit : Dᵇc(X.left)⟦Λ⟧ :=
+  𝟙_ _
 
 end Unit
 
@@ -99,13 +89,12 @@ end Unit
 
 section Purity
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
-  {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-  [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]
-  [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
-  (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (d : ℕ) [SmoothOfRelativeDimension d f]
+  {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]
 
 /-- **Smooth purity**: for a smooth morphism `f : X ⟶ Y` of pure relative dimension `d` between
 separated `k`-schemes of finite type, the exceptional inverse image of the constant coefficient
@@ -113,9 +102,9 @@ object is the shifted Tate twist, `Rf^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X(d)[2d]`. Thi
 see the module docstring. -/
 @[no_expose]
 noncomputable def smoothPurityIso :
-    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ k f).obj
+    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
       (boundedConstructibleUnit _ Y)).obj ≅
-      (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X ℓ d) :=
+      (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
   sorry
 
 end Purity
