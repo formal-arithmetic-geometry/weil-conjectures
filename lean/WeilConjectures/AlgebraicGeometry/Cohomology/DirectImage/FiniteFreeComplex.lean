@@ -223,7 +223,7 @@ theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, �
         exact finite_H_pushforward_integral_ideal f Z i I n
       have hQ : P (cokernel a) := hiso e.symm hI
       intro n
-      exact finite_H_of_shortExact R f.appTop.hom S hS n (ih n) (hQ n)
+      exact finite_H_of_shortExact_middle R f.appTop.hom S hS n (ih n) (hQ n)
   have hF : P ℱ := hiso
     (Subobject.isoOfEq _ _ htop ≪≫ asIso (⊤ : Subobject ℱ).arrow) (hpc _)
   let : Module R (ℱ.H q) := Module.compHom _ f.appTop.hom
