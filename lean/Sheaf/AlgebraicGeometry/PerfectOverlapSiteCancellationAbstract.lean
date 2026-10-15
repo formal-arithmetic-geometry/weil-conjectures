@@ -59,6 +59,24 @@ theorem paste_return_triangle
     _ = p ≫ q ≫ (r ≫ c) := by simp only [Category.assoc]
     _ = p ≫ q ≫ s := by rw [hcancel]
 
+/-- Paste a three-map middle cancellation into a surrounding two-map prefix
+and one-map suffix. Associativity gives the displayed factorization, and the
+two supplied equations replace its middle and then its whole composite. -/
+theorem paste_middle_three
+    {C₀ : Type*} [Category* C₀]
+    {A B C D E F G : C₀}
+    {a : A ⟶ B} {b : B ⟶ C} {c : C ⟶ D}
+    {d : D ⟶ E} {e : E ⟶ F} {f : F ⟶ G}
+    {x : C ⟶ F} {y : A ⟶ G}
+    (hmiddle : c ≫ d ≫ e = x)
+    (houter : a ≫ b ≫ x ≫ f = y) :
+    a ≫ b ≫ c ≫ d ≫ e ≫ f = y := by
+  calc
+    a ≫ b ≫ c ≫ d ≫ e ≫ f = (a ≫ b) ≫ (c ≫ d ≫ e) ≫ f := by
+      simp only [Category.assoc]
+    _ = a ≫ b ≫ x ≫ f := by rw [hmiddle]; simp only [Category.assoc]
+    _ = y := houter
+
 /-- An equivalence counit is invariant under transport to an isomorphic object.
 Proof: Naturality of the counit moves the isomorphism through the counit;
 its inverse then cancels. This is the object-level cancellation for nested
