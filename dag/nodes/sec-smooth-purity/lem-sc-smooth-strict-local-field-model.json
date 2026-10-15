@@ -496,5 +496,24 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-d3f2a2e2d (reviewer sub-agent of L); spot-checked: Read the full item, report, all 40 cited node statements, unit/chapter route, and cited source passages. Verified all eleven steps, structural maps, compatible Hensel lifts, dimension and transcendence-degree formulas, and characteristic-p edge cases. No new nodes, duplicates, cycles, or repairs found. Accepted all eleven declared tool uses. Detailed checks are in review.md; acceptance does not certify any seeded target-category comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f505ec7db",
+  "group": "NE",
+  "result": "fix",
+  "note": "Wrote review.md and complete fixes. Mathematical signature passes unchanged. Fixed H9: two existing proof-dependency imports were missing, and corrected the report. Original and replacement modules passed server-only scompile.py checks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModel",
+  "declaration": "AlgebraicGeometry.Scheme.smooth_strict_local_field_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothStrictLocalFieldModel.lean",
+  "statement": "theorem smooth_strict_local_field_model (K : Type u) [Field K] [IsAlgClosed K] (Y : Scheme.{u}) [IsIntegral Y] (f : Y ⟶ Spec (.of K)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f] (d a : ℕ) (hd : topologicalKrullDim Y = (d : WithBot ℕ∞)) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (y : Y) (hy : s (IsLocalRing.closedPoint Ω) = y) [Algebra K (Y.residueField y)] (hκ : Spec.map (CommRingCat.ofHom (algebraMap K (Y.residueField y))) = Y.fromSpecResidueField y ≫ f) [Algebra (Y.residueField y) Ω] (hΩ : Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) Ω)) ≫ Y.fromSpecResidueField y = s) (ha : Algebra.trdeg K (Y.residueField y) = (a : Cardinal)) [Algebra K (strictHenselizationRing s)] (hK : Spec.map (CommRingCat.ofHom (algebraMap K (strictHenselizationRing s))) = strictHenselizationStructuralMap s ≫ f) : IsRegularLocalRing (strictHenselizationRing s) ∧ ∃ hlocal : IsLocalRing (strictHenselizationRing s), ∃ hdomain : IsDomain (strictHenselizationRing s), letI := hlocal letI := hdomain ringKrullDim (strictHenselizationRing s) = ((d - a : ℕ) : WithBot ℕ∞) ∧ ∃ e : IsLocalRing.ResidueField (strictHenselizationRing s) ≃+* separableClosure (Y.residueField y) Ω, Spec.map (CommRingCat.ofHom ((separableClosure (Y.residueField y) Ω).subtype.comp (e.toRingHom.comp (IsLocalRing.residue (strictHenselizationRing s))))) ≫ strictHenselizationStructuralMap s = s ∧ ∃ i : Y.functionField →+* FractionRing (strictHenselizationRing s), Spec.map (CommRingCat.ofHom i) ≫ Y.fromSpecStalk (genericPoint Y) = Spec.map (CommRingCat.ofHom (algebraMap (strictHenselizationRing s) (FractionRing (strictHenselizationRing s)))) ≫ strictHenselizationStructuralMap s ∧ (letI := i.toAlgebra Algebra.IsAlgebraic Y.functionField (FractionRing (strictHenselizationRing s))) ∧ ∃ (F : Type u) (_ : Field F) (_ : Algebra K F), ∃ j : F →ₐ[K] strictHenselizationRing s, IsSepClosed F ∧ Function.Bijective ((IsLocalRing.residue (strictHenselizationRing s)).comp j.toRingHom) ∧ Algebra.trdeg K F = (a : Cardinal) ∧ (letI := ((algebraMap (strictHenselizationRing s) (FractionRing (strictHenselizationRing s))).comp j.toRingHom).toAlgebra Algebra.trdeg F (FractionRing (strictHenselizationRing s)) = ((d - a : ℕ) : Cardinal))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-f505ec7db"
  }
 }
