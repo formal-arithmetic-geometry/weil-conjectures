@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal A=\\operatorname{Mod}(R)$, which is abelian by [def-weil-sheaf-of-modules-category]. By [lem-pc-kflat-resolution], every object of $K(R)$ receives a quasi-isomorphism from an object of $\\mathcal P_R$. Quasi-isomorphisms in $K(R)$ have right calculus of fractions by [lem-pc-quasi-isomorphisms-multiplicative-system]. This calculus restricts to $W_R$: identities and composites are unchanged; given a right Ore square in $K(R)$ for arrows between objects of $\\mathcal P_R$, replace its new upper-left vertex $Z$ by a K-flat flat-term resolution $T\\to Z$ and precompose both arrows. The arrow required to be a denominator remains a quasi-isomorphism. For cancellation, if $sf=sg$ with $s$ a denominator and $f,g$ parallel arrows in $\\mathcal P_R$, ambient right cancellation gives $t:Z\\to\\operatorname{dom}(f)$ a quasi-isomorphism with $ft=gt$; replace $Z$ by such a resolution and precompose $t$. All these equations are equations in the homotopy category, and all vertices now lie in its full subcategory $\\mathcal P_R$. Thus $W_R$ admits right fractions.",
+   "text": "Write $\\mathcal A=\\operatorname{Mod}(R)$, which is abelian by [def-weil-sheaf-of-modules-category]. By [lem-pc-kflat-resolution], every object of $K(R)$ receives a quasi-isomorphism from an object of $\\mathcal P_R$. Quasi-isomorphisms in $K(R)$ have right calculus of fractions by [lem-pc-quasi-isomorphisms-multiplicative-system]. This calculus restricts to $W_R$: identities and composites are unchanged; given a right Ore square in $K(R)$ for arrows between objects of $\\mathcal P_R$, replace its new upper-left vertex $Z$ by a K-flat flat-term resolution $T\\to Z$ and precompose both arrows. The arrow required to be a denominator remains a quasi-isomorphism. For cancellation, if $sf=sg$ with $s$ a denominator and $f,g$ parallel arrows in $\\mathcal P_R$, ambient right cancellation gives $t:Z\\to\\operatorname{dom}(f)$ a quasi-isomorphism with $ft=gt$; replace $Z$ by such a resolution and precompose $t$. All these equations are equations in the homotopy category, and all vertices now lie in its full subcategory $\\mathcal P_R$. Thus $W_R$ admits right fractions. In Lean the membership predicate is defined literally on X.as, and the existing same-universe specialization CochainComplex.exists_isKFlatResolution supplies these replacements; the independent-coefficient resolution interface is not needed for this statement.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "lem-pc-kflat-resolution",
@@ -56,7 +56,7 @@
    }
   },
   {
-   "text": "Total tensor defines a bifunctor on homotopy categories, not just complexes. Use the differential of [def-pc-tensor-complex-sheaves]. If $f-f'=dh+hd$ in the first variable, $h\\otimes1$ is a degree $-1$ homotopy on the total tensor: the two cross terms with the second differential cancel because $h$ lowers the first degree by one. If $g-g'=dk+kd$ in the second variable, the homotopy on the $(p,q)$ summand is $(-1)^p1\\otimes k$; its two terms with the first differential cancel. The remaining terms give respectively $(f-f')\\otimes1$ and $1\\otimes(g-g')$. Consequently the complex bifunctor descends to $K(R)\\times K(R)$ and then, after $Q_R$, gives $B(P,Q)=Q_R\\operatorname{Tot}(P\\otimes_RQ)$ on $\\mathcal P_R\\times\\mathcal P_R$.",
+   "text": "Total tensor defines a bifunctor on homotopy categories, not just complexes. Use the differential of [def-pc-tensor-complex-sheaves]. If $f-f'=dh+hd$ in the first variable, $h\\otimes1$ is a degree $-1$ homotopy on the total tensor: the two cross terms with the second differential cancel because $h$ lowers the first degree by one. If $g-g'=dk+kd$ in the second variable, the homotopy on the $(p,q)$ summand is $(-1)^p1\\otimes k$; its two terms with the first differential cancel. The remaining terms give respectively $(f-f')\\otimes1$ and $1\\otimes(g-g')$. Consequently the complex bifunctor descends to $K(R)\\times K(R)$ and then, after $Q_R$, gives $B(P,Q)=Q_R\\operatorname{Tot}(P\\otimes_RQ)$ on $\\mathcal P_R\\times\\mathcal P_R$. The proved source construction CategoryTheory.Functor.bifunctorMapHomotopyCategory implements these two tensor homotopies. Uncurrying it gives B, with the requested complex-level comparison definitionally the identity natural isomorphism.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "def-weil-abstract-derived-category"
@@ -68,13 +68,15 @@
    }
   },
   {
-   "text": "The functor $B$ inverts $W_R$ in each variable. For a quasi-isomorphism $s:P\\to P'$ and a K-flat $Q$, [lem-pur-quasi-iso-cone-acyclic] says $C(s)$ is acyclic. By [def-pc-kflat-complex], $\\operatorname{Tot}(C(s)\\otimes_RQ)$ is acyclic. The cone formula of [def-weil-abstract-derived-category] and tensor differential of [def-pc-tensor-complex-sheaves] identify this total complex with $C(\\operatorname{Tot}(s\\otimes1_Q))$: distribute the finite sum $P'^a\\oplus P^{a+1}$ over tensor and direct sums; on the shifted $P$ summands both differentials are $-d_P\\otimes1+(-1)^{a}1\\otimes d_Q$, and the off-diagonal term is $s\\otimes1$. The cone criterion therefore makes $\\operatorname{Tot}(s\\otimes1_Q)$ a quasi-isomorphism. For the second variable use the chain symmetry $x_p\\otimes y_q\\mapsto(-1)^{pq}y_q\\otimes x_p$, whose compatibility with the two differential terms follows by substituting $p+1$ and $q+1$ in the sign; the ordinary module symmetry is the balanced pure-tensor swap [def-pur-sheaf-tensor-product]. It reduces the assertion to the first-variable argument with the K-flat first factor held fixed. Finally $Q_R$ sends these quasi-isomorphisms to isomorphisms. This uses no exactness of tensor on arbitrary complexes and no boundedness assumption.",
+   "text": "The functor $B$ inverts $W_R$ in each variable. For a quasi-isomorphism $s:P\\to P'$ and a K-flat $Q$, [lem-pur-quasi-iso-cone-acyclic] says $C(s)$ is acyclic. By [def-pc-kflat-complex], $\\operatorname{Tot}(C(s)\\otimes_RQ)$ is acyclic. The cone formula of [def-weil-abstract-derived-category] and tensor differential of [def-pc-tensor-complex-sheaves] identify this total complex with $C(\\operatorname{Tot}(s\\otimes1_Q))$: distribute the finite sum $P'^a\\oplus P^{a+1}$ over tensor and direct sums; on the shifted $P$ summands both differentials are $-d_P\\otimes1+(-1)^{a}1\\otimes d_Q$, and the off-diagonal term is $s\\otimes1$. The cone criterion therefore makes $\\operatorname{Tot}(s\\otimes1_Q)$ a quasi-isomorphism. For the second variable use the chain symmetry $x_p\\otimes y_q\\mapsto(-1)^{pq}y_q\\otimes x_p$, whose compatibility with the two differential terms follows by substituting $p+1$ and $q+1$ in the sign; the ordinary module symmetry is the balanced pure-tensor swap [def-pur-sheaf-tensor-product]. It reduces the assertion to the first-variable argument with the K-flat first factor held fixed. Finally $Q_R$ sends these quasi-isomorphisms to isomorphisms. This uses no exactness of tensor on arbitrary complexes and no boundedness assumption. The Lean proof uses the additive tensor structure from [lem-pc-sheaf-modules-tensor-closed] and the two tensor-cone comparisons from the source module attached to [lem-pc-tensor-mapping-cone-iso]. It constructs the bicomplex braiding componentwise, totalizes it, and composes with the signed mapBifunctorFlipIso. A pair of denominators is sent to the composite of the first-variable and second-variable quasi-isomorphisms.",
    "uses": [
     "lem-pur-quasi-iso-cone-acyclic",
     "def-pc-kflat-complex",
     "def-weil-abstract-derived-category",
     "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product"
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-tensor-mapping-cone-iso"
    ],
    "elementary": false,
    "source": {
@@ -83,7 +85,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-localization-universal-property] to $L$ in Step 2 twice. First curry $B$ as $\\mathcal P_R\\to\\operatorname{Fun}(\\mathcal P_R,D(R))$ and localize its first variable. A denominator maps to a natural isomorphism because all its components are isomorphisms by Step 4. This gives $B_1:D(R)\\to\\operatorname{Fun}(\\mathcal P_R,D(R))$. The second-variable denominator maps of $B_1$ are also isomorphisms: this holds at every $L(P)$ by Step 4 and hence at every derived object by the essential surjectivity of $L$ and naturality of $B_1$. Curry in the other order and localize the second variable to obtain a bifunctor $T:D(R)\\times D(R)\\to D(R)$ and a natural isomorphism $T\\circ(L\\times L)\\cong B$. Define $-\\otimes_R^{\\mathbf L}-=T$ and invert this comparison to obtain the displayed canonical representative isomorphisms. The uniqueness clauses of the localization property fix the construction up to the unique comparison preserving these isomorphisms. For a denominator $s$, the naturality equation is an equation between invertible arrows; multiplying it by their inverses gives precisely the equation for $s^{-1}$. Thus the comparisons are compatible with inversion. This is the two-variable form of the construction preceding Tag 06YU.",
+   "text": "Use the product form of [lem-weil-pbc-localization-universal-property], implemented by Mathlib.CategoryTheory.Localization.Prod through two successive localizations. Step 2 gives L = P.ι followed by Q_R as a localization at W_R. Hence L times L is a localization at W_R times W_R. Step 4 shows that H = (P.ι times P.ι) followed by B and Q_R inverts this product class. Localization.lift H along L times L constructs T, and the inverse of Localization.fac gives the requested natural representative comparison. For a denominator, invert its naturality square to obtain the equation for the inverse denominator. No representative choices or new unresolved statements are introduced.",
    "uses": [
     "lem-weil-pbc-localization-universal-property"
    ],
@@ -94,7 +96,7 @@
    }
   },
   {
-   "text": "Let $U,V:D(R)\\times D(R)\\to E$ and let $\\tau$ be a natural transformation on their restrictions to $\\mathcal P_R\\times\\mathcal P_R$. For each second object $Q$, apply the natural-transformation clause of [lem-weil-pbc-localization-universal-property] in the first variable to extend $\\tau_{-,Q}$ uniquely to $D(R)$. For every arrow $Q\\to Q'$ of $\\mathcal P_R$, the two first-variable transformations in its naturality square agree on all $L(P)$ by the given naturality of $\\tau$, so they agree everywhere by the uniqueness clause. Hence these extensions form a natural transformation of functors $\\mathcal P_R\\to\\operatorname{Fun}(D(R),E)$. These functors invert $W_R$, since they are the restrictions of $U,V$ along $L$ in the second variable. Apply the same clause a second time to extend to $D(R)\\to\\operatorname{Fun}(D(R),E)$, which is the required transformation $U\\to V$. Any two extensions agree first after restriction in the second variable by uniqueness in the first, and then everywhere by uniqueness in the second. Existence and uniqueness prove the last clause without assuming $\\tau$ is an isomorphism.",
+   "text": "Apply the fully faithful precomposition clause of [lem-weil-pbc-localization-universal-property] to the product localization L times L from Step 5, with arbitrary target category E. Localization.fullyFaithfulWhiskeringLeft gives a fully faithful functor on functor categories. Its map_bijective theorem, specialized to U and V, is definitionally the displayed bijection on arbitrary natural transformations. Fullness gives existence of extensions and faithfulness gives uniqueness; invertibility of the transformation is not assumed.",
    "uses": [
     "lem-weil-pbc-localization-universal-property"
    ],
@@ -116,12 +118,14 @@
   "def-pc-tensor-complex-sheaves",
   "lem-pur-quasi-iso-cone-acyclic",
   "def-pc-kflat-complex",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-tensor-mapping-cone-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS, 06YM, 06YP, 06YU: explicit right-roof refinement and two-variable localization argument using Categories Tags 04VI/04VJ/04VK"
+  "place": "Tags 06YS, 06YM, 06YP, 06YU; Categories 04VI/04VJ/04VK. J3 stage-3 Lean proof: restricted right fractions and roof refinements, proved homotopy bifunctor construction, tensor-cone and signed-flip comparisons, product localization, and fully faithful precomposition."
  },
  "mathlib_searches": [
   {
@@ -227,5 +231,15 @@
   "by": "NF",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261015T212215-L-1979368",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
