@@ -118,6 +118,25 @@ theorem schemeComparisonFromRestrictions_betaW
       perfectOverlapRestrictionBeta g (U ⊓ V) (P ⊓ Q) hW := by
   rfl
 
+/-- The fixed pullback-composition comparison on a restricted two-step map.
+The named definition keeps the geometric equality and its derived transport
+outside the larger two-open transport record. -/
+noncomputable def perfectOverlapCompositeLocalIso
+    {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
+    (hgf : g ≫ f = gf) (W : Y₀.Opens) :
+    let hP : gf ⁻¹ᵁ W ≤ g ⁻¹ᵁ (f ⁻¹ᵁ W) := by
+      rw [← Scheme.Hom.comp_preimage, hgf]
+    derivedPullback (f ∣_ W) ⋙
+      derivedPullback (g.resLE (f ⁻¹ᵁ W) (gf ⁻¹ᵁ W) hP) ≅
+        derivedPullback (gf ∣_ W) := by
+  intro hP
+  have hcomp : g.resLE (f ⁻¹ᵁ W) (gf ⁻¹ᵁ W) hP ≫ (f ∣_ W) = gf ∣_ W := by
+    apply (cancel_mono W.ι).1
+    simp only [Category.assoc, morphismRestrict_ι]
+    rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, hgf]
+  exact perfectHomComposition _ _ ≪≫
+    eqToIso (congrArg (fun a ↦ derivedPullback a) hcomp)
+
 /-- Construct the transport data for two composable scheme maps.
 The restricted composites agree after their open inclusions; pullback composition gives
 kappa. Set theta equal to kappa, the supplied local isomorphism, and the site comparison. -/
@@ -152,13 +171,8 @@ noncomputable def transportDataOfComposite
             (overlapSiteInverse (gf ⁻¹ᵁ W)).mapDerivedCategory) ≅
         derivedPullback (gf ∣_ W) ⋙
           (overlapSiteInverse (gf ⁻¹ᵁ W)).mapDerivedCategory := by
-    have eqW : g.resLE (f ⁻¹ᵁ W) (gf ⁻¹ᵁ W) (hP W) ≫ (f ∣_ W) = gf ∣_ W := by
-      apply (cancel_mono W.ι).1
-      simp only [Category.assoc, morphismRestrict_ι]
-      rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, hgf]
     exact (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (perfectHomComposition _ _ ≪≫
-        eqToIso (congrArg (fun a ↦ derivedPullback a) eqW)) _
+      Functor.isoWhiskerRight (perfectOverlapCompositeLocalIso f g gf hgf W) _
   exact {
     d := d
     κU := κ U
@@ -195,6 +209,23 @@ theorem transportDataOfComposite_diagram
         (by rw [← Scheme.Hom.comp_preimage, hgf])
         (by rw [← Scheme.Hom.comp_preimage, hgf]) := by
   unfold transportDataOfComposite
+  rfl
+
+/-- The first transport is the named restricted-composite comparison,
+whiskered through the inverse open-site equivalence. -/
+theorem transportDataOfComposite_kappaU
+    {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
+    (hgf : g ≫ f = gf) (U V : Y₀.Opens)
+    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)
+    (E : schemeDerivedCategory X)
+    (φU : (derivedPullback (gf ∣_ U)).obj A ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ U)).mapDerivedCategory.obj E)
+    (φV : (derivedPullback (gf ∣_ V)).obj B ≅
+      (schemeOpenRestriction X (gf ⁻¹ᵁ V)).mapDerivedCategory.obj E) :
+    (transportDataOfComposite f g gf hgf U V A B E φU φV).κU =
+      (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (perfectOverlapCompositeLocalIso f g gf hgf U)
+          (overlapSiteInverse (gf ⁻¹ᵁ U)).mapDerivedCategory := by
   rfl
 
 /-- The first site field is the fixed return comparison for the inverse-image open.
