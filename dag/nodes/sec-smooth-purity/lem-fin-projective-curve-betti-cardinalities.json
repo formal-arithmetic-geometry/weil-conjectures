@@ -327,5 +327,23 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-84096bea4 (reviewer sub-agent of L); spot-checked: Reviewed item, all nine steps, 23 dependency statements, unit/chapter route, master blueprint, and cited Stacks sources. Base-change morphism, small étale coefficient category, hypotheses, edge cases, constructibility, and cardinality calculations check out. No new nodes or repairs required. Full review: review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c12efca79",
+  "group": "NV",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, all statement dependencies, hypotheses, conclusions, edge cases, docstrings, and verbatim signature. Server-only compilation reproduced cleanly. No H1–H13 errors found; no fixes or branch changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectiveCurveBettiCardinalities",
+  "declaration": "AlgebraicGeometry.projective_curve_betti_cardinalities",
+  "file": "lean/Sheaf/Paper/ProjectiveCurveBettiCardinalities.lean",
+  "statement": "theorem projective_curve_betti_cardinalities {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [SmoothOfRelativeDimension 1 f] [IsProjective f] (ℓ : ℕ) (hℓ : ℓ.Prime) (hinv : ∀ s : S, (ℓ : S.residueField s) ≠ 0) : ∃ b : ℕ → S → ℕ, (∀ (r : ℕ) (s : S), Cardinal.mk ((Etale.cohomology AddCommGrpCat.{u + 1} (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)) (r : ℤ)).obj ((DerivedCategory.singleFunctor _ 0).obj ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).constantZMod ℓ))) = b r s) ∧ (∀ (r : ℕ) (s : S), b r s = if r = 0 ∨ r = 2 then ℓ ^ Nat.card (ConnectedComponents ↥(pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s))) else if r = 1 then ℓ ^ (2 * (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)).genus) else 1) ∧ ∀ r : ℕ, (Set.range (b r)).Finite ∧ ∀ n : ℕ, Topology.IsConstructible {s : S | b r s = n}",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
