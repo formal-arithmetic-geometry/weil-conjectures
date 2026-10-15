@@ -34,8 +34,8 @@ theorem perfectOverlapOpenLiftObject_eq
   intro rY W
   rfl
 
-/-- The pinned open square, transported from `resLE` to the restricted
-morphism. Source: Stacks Project, Tag 08DW. -/
+/-- The pinned open square for the restricted morphism.
+Source: Stacks Project, Tag 08DW. -/
 noncomputable def perfectOverlapOpenLiftBeta
     {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens)
     (M : schemeDerivedCategory Y) :
@@ -43,8 +43,8 @@ noncomputable def perfectOverlapOpenLiftBeta
         ((derivedPullback f).obj M) ≅
       (derivedPullback (f ∣_ U)).obj
         ((schemeOpenRestriction Y U).mapDerivedCategory.obj M) := by
-  simpa only [Scheme.Hom.resLE_eq_morphismRestrict, Functor.comp_obj] using
-    (openPullbackRestrictionIso f (f ⁻¹ᵁ U) U le_rfl).app M
+  exact (singleComplexOpenPullbackSquareIso f U (f ⁻¹ᵁ U) (f ∣_ U)
+    (morphismRestrict_ι f U)).symm.app M
 
 /-- The lift isomorphism is the fixed open-pullback square followed by the
 localization preimage isomorphism. Source: Stacks Project, Tag 08DW.
