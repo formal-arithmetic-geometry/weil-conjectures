@@ -54,6 +54,70 @@ theorem exists_section_homotopy_equivalence
       g ≫ p = 𝟙 Y ∧
         ∃ (h : X ⊗ Δ[1] ⟶ X),
           SSet.ι₀ ≫ h = 𝟙 X ∧ SSet.ι₁ ≫ h = p ≫ g := by
-  sorry
+  classical
+  have hp' : (MorphismProperty.monomorphisms SSet.{u}).rlp p := by
+    rwa [SSet.rlp_monomorphisms]
+  have : HasLiftingProperty (⊥ : Y.Subcomplex).ι p := hp' _ inferInstance
+  let sq₀ : CommSq (Subcomplex.isInitialBot.to X) (⊥ : Y.Subcomplex).ι p (𝟙 Y) :=
+    ⟨Subcomplex.isInitialBot.hom_ext _ _⟩
+  let g := sq₀.lift
+  have hg : g ≫ p = 𝟙 Y := sq₀.fac_right
+  refine ⟨g, hg, ?_⟩
+  -- The two copies of X forming the boundary of its cylinder.
+  let Z : SSet.{u} :=
+    { obj := fun n ↦ X.obj n ⊕ X.obj n
+      map := fun f ↦ ↾(Sum.map (X.map f) (X.map f))
+      map_id := by intro n; ext x; cases x <;> simp
+      map_comp := by intro n m k f t; ext x; cases x <;> simp }
+  let j : Z ⟶ X ⊗ Δ[1] :=
+    { app := fun n ↦ ↾(Sum.elim (SSet.ι₀.app n) (SSet.ι₁.app n))
+      naturality := by
+        intro n m f
+        ext x
+        cases x with
+        | inl x => exact ConcreteCategory.congr_hom (SSet.ι₀.naturality f) x
+        | inr x => exact ConcreteCategory.congr_hom (SSet.ι₁.naturality f) x }
+  have hj : Mono j := by
+    have hmono : ∀ n, Mono (j.app n) := by
+      rintro ⟨⟨n⟩⟩
+      apply (CategoryTheory.mono_iff_injective _).2
+      intro x y hxy
+      cases x with
+      | inl x =>
+        cases y with
+        | inl y => exact congrArg Sum.inl (congrArg Prod.fst hxy)
+        | inr y =>
+          have h := congrArg (fun t ↦ t.2 0) hxy
+          simp [j] at h
+      | inr x =>
+        cases y with
+        | inl y =>
+          have h := congrArg (fun t ↦ t.2 0) hxy
+          simp [j] at h
+        | inr y => exact congrArg Sum.inr (congrArg Prod.fst hxy)
+    exact NatTrans.mono_of_mono_app j
+  let a : Z ⟶ X :=
+    { app := fun n ↦ ↾(Sum.elim id ((p ≫ g).app n))
+      naturality := by
+        intro n m f
+        ext x
+        cases x with
+        | inl x => rfl
+        | inr x => exact ConcreteCategory.congr_hom ((p ≫ g).naturality f) x }
+  have : HasLiftingProperty j p := hp' _ hj
+  let sq : CommSq a j p (CartesianMonoidalCategory.fst X Δ[1] ≫ p) := by
+    constructor
+    ext n x
+    cases x with
+    | inl x => rfl
+    | inr x =>
+      have h := congrArg (fun t ↦ t.app n x) (show (p ≫ g) ≫ p = p by
+        simp [Category.assoc, hg])
+      exact h
+  refine ⟨sq.lift, ?_, ?_⟩
+  · ext n x
+    exact congrArg (fun t : Z ⟶ X ↦ t.app n (Sum.inl x)) sq.fac_left
+  · ext n x
+    exact congrArg (fun t : Z ⟶ X ↦ t.app n (Sum.inr x)) sq.fac_left
 
 end SSet
