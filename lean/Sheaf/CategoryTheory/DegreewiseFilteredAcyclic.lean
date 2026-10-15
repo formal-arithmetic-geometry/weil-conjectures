@@ -39,6 +39,8 @@ private theorem isZero_of_finite_filtration
     | succ k ih =>
       rw [show p + (k + 1 : ℕ) = (p + k) + 1 by omega, hstep, ih]
   obtain ⟨lo, hi, hlo, hhi⟩ := hfinite
+  change F.step lo = ⊤ at hlo
+  change F.step hi = ⊥ at hhi
   have hEq : (⊤ : Subobject X) = ⊥ := by
     by_cases h : lo ≤ hi
     · have he := hconstant lo (hi - lo).toNat
