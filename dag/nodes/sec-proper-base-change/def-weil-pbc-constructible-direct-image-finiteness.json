@@ -129,5 +129,29 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-c75d55645 (reviewer sub-agent of L); spot-checked: The corrected FIN definition and source-error repair are mathematically sound, with coefficient categories and target base-change orientation checked against the master sources. Remove the unused dependency def-weil-pbc-constructible-complexes from stmt_deps; corrected JSON is in fixes/dag/nodes/sec-proper-base-change/def-weil-pbc-constructible-direct-image-finiteness.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleDirectImageFiniteness",
+  "declaration": "AlgebraicGeometry.ProEtale.ConstructibleDirectImageFiniteness",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsConstructibleFiniteCoefficientSheaf",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientHigherDirectImage",
+   "AlgebraicGeometry.ProEtale.ConstructibleDirectImageFiniteness"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleDirectImageFiniteness.lean",
+  "statement": "def ConstructibleDirectImageFiniteness (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (_hI : I.FG) (_htorsion : IsAddTorsion (A ⧸ I)) [hfinite : ∀ m : ℕ+, Finite (A ⧸ I ^ (m : ℕ))] (_hperfect : ∀ m : ℕ+, @DerivedCategory.IsPerfectRingComplex A _ (HasDerivedCategory.standard _) ((@DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) _ _ (HasDerivedCategory.standard _) 0).obj (ModuleCat.of A (A ⧸ I ^ (m : ℕ))))) (n : ℕ+) {S T : Scheme.{u}} [IsNoetherian T] (_hdim : ∃ d : ℕ, topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (_horder : ∀ (a : A ⧸ I ^ (n : ℕ)) (t : T), IsUnit (addOrderOf a : T.presheaf.stalk t)) (f : S ⟶ T) (c : ℕ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Unstated dependency supplied in the same delivery under the human 2026-10-16 rule. Reuses the exact module delivered on deliver/Q07/def-weil-pbc-constructible-direct-image-finiteness: fixed positive quotient, explicit arithmetic adic hypotheses, etale-origin constructibility, ordinary K-injective higher direct images, constructibility in every nonnegative degree and vanishing above the fixed common bound. No duplicate FIN notion is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-595d5c368",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, canonical constructions, universes, edge cases, docstrings and report sections. All three delivered modules compiled cleanly through scompile.py. No findings; branch unchanged."
  }
 }

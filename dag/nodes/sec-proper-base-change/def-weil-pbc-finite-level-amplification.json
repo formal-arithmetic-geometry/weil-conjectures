@@ -47,7 +47,8 @@
   "def-weil-pbc-constructible-direct-image-finiteness",
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-proetale-operations",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-pc-perfect-ring-complex"
  ],
  "proof": [],
  "proof_deps": [],
@@ -158,5 +159,29 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-0c5241de0 (reviewer sub-agent of L); spot-checked: Read the complete definition, dependencies, master blueprint, cited Stacks statements, unit/chapter route, and exact master target category and base-change construction. Uniform bound, all finite levels, and both interval-preserving pullbacks are explicit. No new nodes or repairs. review.md records inherited FIN ambiguity and downstream cycles; target coefficient comparisons remain uncertified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLevelAmplification",
+  "declaration": "AlgebraicGeometry.ProEtale.HasFiniteLevelAmplification",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCoefficientCohomologyIn",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientPullbackAmplifies",
+   "AlgebraicGeometry.ProEtale.HasFiniteLevelAmplification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLevelAmplification.lean",
+  "statement": "def HasFiniteLevelAmplification {X' X Y' Y : Scheme.{u}} (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y) (_square : ChosenCartesianSquare g' f' f g) (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (hI : I.FG) (htorsion : IsAddTorsion (A ⧸ I)) [hfinite : ∀ m : ℕ+, Finite (A ⧸ I ^ (m : ℕ))] (hperfect : ∀ m : ℕ+, @DerivedCategory.IsPerfectRingComplex A _ (HasDerivedCategory.standard _) ((@DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) _ _ (HasDerivedCategory.standard _) 0).obj (ModuleCat.of A (A ⧸ I ^ (m : ℕ))))) [IsNoetherian Y] [IsNoetherian Y'] (hDimY : ∃ k : ℕ, topologicalKrullDim Y ≤ (k : WithBot ℕ∞)) (hDimY' : ∃ k : ℕ, topologicalKrullDim Y' ≤ (k : WithBot ℕ∞)) (hInvertY : ∀ (n : ℕ+) (a : A ⧸ I ^ (n : ℕ)) (y : Y), IsUnit (addOrderOf a : Y.presheaf.stalk y)) (hInvertY' : ∀ (n : ℕ+) (a : A ⧸ I ^ (n : ℕ)) (y : Y'), IsUnit (addOrderOf a : Y'.presheaf.stalk y)) (c : ℕ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The arithmetic coefficient datum is written explicitly using the actual ring and ideal and the recorded perfect-ring-complex predicate; the completed coefficient sheaf and strict reduction tower do not enter AMP. The two local helper predicates render clause (2) and the final interval notation. Existing delivered Q07 FIN is reused; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-595d5c368",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, canonical constructions, universes, edge cases, docstrings and report sections. All three delivered modules compiled cleanly through scompile.py. No findings; branch unchanged."
  }
 }
