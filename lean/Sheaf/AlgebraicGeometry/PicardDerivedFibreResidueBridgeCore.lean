@@ -16,6 +16,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Fiber
+import Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueModelData
 
 /-! Fixed-model naturality core for the derived fibre residue bridge.
 
