@@ -5,7 +5,6 @@ Authors: SHEAF group D3
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
