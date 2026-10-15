@@ -30,106 +30,65 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-profinite-test-object-functor] with $X=\\operatorname{Spec}\\mathbf Z$. Its existence, weak-etaleness, presentation-independence and functorial-identification assertions identify its relative functor with the explicitly defined $a(S)=\\operatorname{Spec}\\operatorname{LC}(S,\\mathbf Z)$, including the maps induced by precomposition. Its finite-limit and cover assertions give exactly the required properties of $a$. Thus no inverse-limit or pro-etale construction is being treated as elementary.",
+   "text": "Reuse the existing source constructions and their established instances: WeaklyEtale for profiniteToScheme, finite-limit and cover preservation for profiniteToProEt, and the pointUpperStar exact monoidal structure. Mathlib supplies the mixed-universe AB5 instances, pointwise Kan extensions, sheafPullbackConstruction.sheafAdjunctionContinuous, finite-limit preservation, and colimit preservation of a left adjoint. This proves profinite_point_pullback without invoking the separate relative test-object theorem.",
    "uses": [
-    "lem-weil-pbc-profinite-test-object-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-    "place": "Section 4 finite-XI, XS, lem:XS; Basic.lean module docstring 38–52"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to $a$. The profinite site has a final singleton and fibre products of profinite spaces, hence finite limits; the lemma in step 1 gives their preservation and cover preservation. The small skeletons and larger sheaf universe are those in [def-weil-size-convention] and [def-weil-pbc-proetale-site]. The theorem supplies existence of the left Kan extension, the sheafified adjunction, left exactness and preservation of all colimits, and the exact strong symmetric monoidal abelian inverse image $a^*$. Apply the same theorem to the scheme base-change site functors of [def-weil-proetale-inverse-image] to obtain their corresponding exact tensor structures; their preservation of the final object, fibre products and coverings is part of that node's specified site functor.",
-   "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
     "def-weil-size-convention",
     "def-weil-pbc-proetale-site",
     "def-weil-proetale-inverse-image"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-    "place": "Section 4 prop:pX proof; Stacks 00X6 and 03EL"
+    "place": "Section 4, Lemma lem:XS and Proposition prop:pX; Section 5, equation eq:triangle and Theorem thm:alpha. Read in the exact read-only master checkout /home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex; implementation Basic.lean, pointUpperStar and upperStarFromPointComp (including sorried monoidality input)."
    }
   },
   {
-   "text": "For composable scheme morphisms $h:T\\to U$, $k:U\\to V$, the site functors compose through $(T\\times_U(U\\times_V W))\\cong T\\times_VW$. This is the canonical fibre-product associativity map: it preserves the maps to $T$ and $W$, and its inverse is the unique map with these projections. Consequently all its associativity and identity diagrams commute by uniqueness of maps to fibre products. Use [lem-weil-pbc-site-morphism-composition] to obtain the adjunction-compatible inverse-image comparison $c_{k,h}:h^{-1}k^{-1}\\cong(kh)^{-1}$ (on sets and abelian sheaves). To apply [lem-sc-left-adjoint-composition-iso-associativity], whose statement assumes equal right adjoints, first use strictly composed right adjoints along the chain: let $R_{ji}$ be the ordered composite of the individual direct images from vertex $j$ to vertex $i$, so $R_{ki}=R_{ji}R_{kj}$, and take the composite adjunctions [def-weil-pbc-composite-adjunction]. Transport the single-morphism inverse-image adjunction to these right adjoints using the fibre-product comparison above. The unique transport and comparison isomorphisms are those of [lem-weil-pbc-conjugate-iso-unit-equation]. The associativity lemma now applies with the actual equalities $R_{ki}=R_{ji}R_{kj}$. Returning through the transports identifies its $c$ with the original adjunction-compatible comparisons by the unit equation. This proves their associativity without applying an equality-only lemma to unequal direct-image functors. For an identity, compare with the identity adjunction: both candidate maps carry the unit to the same unit and hence agree by the uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation]. These are monoidal comparisons by [lem-weil-pbc-left-exact-site-inverse-image-tensor].",
+   "text": "Use FiniteCoefficient.UpperLowerStar.CoherenceLegacy for the canonical direct-image units and associativity, and conjugateIsoEquiv with its composition, whiskering and associator equations for inverse images. Normalize condensedPullbackHom using condensedPullbackHom_eq; substitute the structure-map equalities before canceling inverse comparison components. This proves coefficient and abelian coherence. The monoidality of inverse-image comparisons is transported from the monoidal direct-image comparisons by the source CategoryTheory.Monoidal.Conjugate API. The set comparison is proved by the same direct-image mate argument with Type-valued sheaves. Establish its normalization first as an equality of natural transformations, then take components; this avoids expensive component-level iso reductions. Scheme base change is representably flat because it preserves finite limits. Mathlib then gives finite-limit preservation of its opposite left Kan extension and sheafified inverse image. Whiskering with the point inverse image preserves finite limits, and the point composition equation reduces every commutative square to its common composite.",
    "uses": [
-    "lem-weil-pbc-site-morphism-composition",
-    "lem-sc-left-adjoint-composition-iso-associativity",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-    "place": "Section 5 eq:triangle; sites.tex Tag 03CB; exact master Basic.lean 61–71"
+    "place": "Section 4, Lemma lem:XS and Proposition prop:pX; Section 5, equation eq:triangle and Theorem thm:alpha. Read in the exact read-only master checkout /home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex; implementation Basic.lean, pointUpperStar and upperStarFromPointComp (including sorried monoidality input)."
    }
   },
   {
-   "text": "Write $\\pi_T:T\\to\\operatorname{Spec}\\mathbf Z$ for the structure morphism. Define $p_T^*=\\pi_T^{-1}a^*$. For $h:T\\to U$ the equality $\\pi_Uh=\\pi_T$ identifies $c_{\\pi_U,h}a^*$ with an isomorphism $\\alpha_h:h^{-1}p_U^*\\cong p_T^*$. Naturality follows from naturality of $c$ and whiskering by $a^*$; monoidality follows from step 3. This is the source comparison defined in the exact master by inverse-image composition and the structure-map identity.",
-   "uses": [
-    "lem-weil-pbc-site-morphism-composition",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-    "place": "Section 5 basechange-XS, triangle, thm:alpha; exact master Basic.lean 61–71"
-   }
-  },
-  {
-   "text": "For $h:T\\to U$ and $k:U\\to V$, associativity of $c$ applied to $h,k,\\pi_V$ says $\\alpha_{kh}\\circ(c_{k,h}p_V^*)=\\alpha_h\\circ h^{-1}\\alpha_k$. For $h=\\mathrm{id}$ the unit equation for $c$ gives the identity comparison for $p_T^*$. Applying $\\alpha_h$ to a condensed ring $\\Lambda$ gives a ring isomorphism: the lift of inverse image to group and ring objects is [lem-weil-pbc-adjunction-lifts-group-ring-objects], interpreted as ring sheaves via [lem-weil-pbc-sheaf-algebraic-structures-objects]. Naturality with respect to addition, negation, zero, multiplication and one ensures the component preserves each operation. Thus, with $R_T=p_T^*\\Lambda$, the ring coefficient map $\\theta_h:h^{-1}R_U\\cong R_T$ satisfies precisely the displayed composite equation.",
-   "uses": [
-    "lem-sc-left-adjoint-composition-iso-associativity",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-    "place": "Section 5 thm:alpha and composition coherence; sites.tex 00YV"
-   }
-  },
-  {
-   "text": "For a fixed condensed commutative ring $\\Lambda$, set $R_T=p_T^*\\Lambda$ and use the invertible coefficient maps of step 5. Define the action on $h^{-1}M$ by applying the finite-product-preserving inverse image to the action on $M$ and then substituting $\\theta_h^{-1}$ in the scalar variable; all module equations follow by applying this functor to the equations defining a module [def-weil-sheaf-of-modules-category]. The extension-of-scalars identification [def-pur-sheaf-tensor-product] is explicitly $R_T\\otimes_{h^{-1}R_U}h^{-1}M\\to h^{-1}M$, $r\\otimes m\\mapsto\\theta_h^{-1}(r)m$, with inverse $m\\mapsto1\\otimes m$; the balancing relation proves these are inverse, and they pass through sheafification. Thus module pullback has the exact underlying abelian functor of step 2; kernels and sheafified cokernels in [def-weil-sheaf-of-modules-category] give module exactness. For composition, naturality at the action map says $c_M\\circ h^{-1}k^{-1}\\mu=(kh)^{-1}\\mu\\circ(c_{R_V}\\times c_M)$ under the canonical product identifications. Substitution of $\\theta_{kh}=\\theta_h\\circ h^{-1}\\theta_k\\circ c_{k,h,R_V}^{-1}$ makes this precisely $R_T$-linearity. The abelian unit and associativity equations of step 3 are consequently equations of module maps, since forgetting the action is faithful. This is the direct few-line action and tensor calculation of Stacks 03D2 and 03D8 with invertible coefficients; it needs no separate lemma.",
+   "text": "Construct the module direct-image identity component by Mod.isoMk on lowerStarId. Its linearity follows from the coefficient identity and monoidality; uniqueness follows from faithfulness of Mod.forget. Show that the module direct-image composition has underlying map lowerStarComp, using the mapMod and comap component formulas. Faithfulness then lifts direct-image unit and associativity equations to modules. Conjugate these equations under the specified module adjunctions to obtain both units and associativity of module inverse images. The separate compatibility with the scalar-extension forgetful isomorphism remains open with its original statement. Its square consequence is proved: transport the forgetful comparison along the equality of scheme morphisms, apply the existing composition-compatibility declaration to both routes, and cancel the mapped inverse/hom pair. The proof uses a raw-morphism diagram lemma, avoiding intermediate component isomorphisms and mapIso constructions.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "sites-modules.tex Tags 03D2, 03D3, 03D8; exact master Basic.lean coefficient/module construction"
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, Lemma lem:XS and Proposition prop:pX; Section 5, equation eq:triangle and Theorem thm:alpha. Read in the exact read-only master checkout /home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex; implementation Basic.lean, pointUpperStar and upperStarFromPointComp (including sorried monoidality input)."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to each exact abelian or coefficient-preserving module pullback above. Its termwise complex functor preserves quasi-isomorphisms and descends to the unbounded derived category without resolutions. For each sheaf-level comparison $c$, naturality at a differential $d^r$ gives $c_{M^{r+1}}L_1(d^r)=L_2(d^r)c_{M^r}$, so its components form an isomorphism of complexes. By [lem-weil-pbc-localization-universal-property](2), this comparison and its inverse descend uniquely to a derived natural isomorphism. That clause respects identities and composition, and clause (3) detects equality after localization; therefore the degreewise unit and associativity equations descend to the derived comparisons. This separately proves the derived coherence, rather than inferring it from a ring-sheaf component.",
+   "text": "For ring coherence, apply Mon.Hom.ext and the mapMon component formulas: the remaining equations are precisely the proved abelian equations. Prove the ring comparison by a generic formula for mapMonCompIso followed by mapMonNatIso, applied to the concrete inverse-image comparison.",
    "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property"
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "derived.tex Tag 05RU; categories.tex Tag 04VG, natural-transformation localization universal property"
-   }
-  },
-  {
-   "text": "For a commutative square $T'\\xrightarrow{b}T\\xrightarrow{f}U$ and $T'\\xrightarrow{f'}U'\\xrightarrow{g}U$ with $fb=gf'=r$, compare $b^{-1}f^{-1}$ and $f'^{-1}g^{-1}$ by $c_{g,f'}^{-1}c_{f,b}$, both of whose middle targets are $r^{-1}$. For the coefficient pullbacks, step 5 makes both routes to $p_{T'}^*$ equal to $\\alpha_r$. The module comparison of step 6 is the same map on underlying abelian sheaves, so the square equality remains true after its linear lift. Step 7 preserves this equation under localization. This gives exactly the stipulated commutative-square comparison in all coefficient categories.",
-   "uses": [
-    "lem-weil-pbc-site-morphism-composition",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-    "place": "Section 5 triangle and thm:alpha; comparison of common composite"
+    "place": "Section 4, Lemma lem:XS and Proposition prop:pX; Section 5, equation eq:triangle and Theorem thm:alpha. Read in the exact read-only master checkout /home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex; implementation Basic.lean, pointUpperStar and upperStarFromPointComp (including sorried monoidality input)."
+   }
+  },
+  {
+   "text": "For derived coherence, prove generic transfer lemmas for exact functors using mapDerivedCategoryNatIso. Precompose with DerivedCategory.Q and apply Localization.natTrans_ext. The formulas for mapDerivedCategoryFactors and mapDerivedCategoryNatTrans reduce the equations to the termwise unit and associativity equations. Apply these transfer lemmas to the proved abelian and module coherence equations. Normalize derived symmetry, composition and equality transports explicitly to obtain the derived square equality.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, Lemma lem:XS and Proposition prop:pX; Section 5, equation eq:triangle and Theorem thm:alpha. Read in the exact read-only master checkout /home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex; implementation Basic.lean, pointUpperStar and upperStarFromPointComp (including sorried monoidality input)."
    }
   }
  ],
@@ -140,20 +99,14 @@
   "def-weil-proetale-inverse-image",
   "def-weil-sheaf-of-modules-category",
   "def-weil-size-convention",
-  "lem-sc-left-adjoint-composition-iso-associativity",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-profinite-test-object-functor",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-site-morphism-composition"
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "B4",
   "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-  "place": "Sections 4–5 lem:XS, prop:pX, basechange-XS, triangle, thm:alpha; exact master Basic.lean 38–80; explicit module-action and localization coherence added from Stacks 03D2/03D8 and the cited generic localization results."
+  "place": "Stage 3, 2026-10-15: source FiniteCoefficient.UpperLowerStar.CoherenceLegacy, ModuleObject.UpperLowerStar.Defs, CategoryTheory.Monoidal.Conjugate, CategoryTheory.Sites.MonObj, and CategoryTheory.DerivedCategory.MapDerivedCategoryMate; Mathlib adjunction mates and derived localization. Thirteen of fourteen original holes closed; only profinite_point_pullback_module_comparison remains open. No statement, definition or blueprint-unit route changed."
  },
  "mathlib_searches": [
   {
@@ -326,5 +279,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Reviewed all statements, dependencies, sources, and 28 declarations; no substantive or mechanical faults found. Immutable module compiled cleanly through scompile.py in sandbox and library modes. Review recorded in review.md; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-a8a1b",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T172915-L-557856",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, definitions, proofs, relocation and remaining hole matched against the node, original declarations, compiler results and axiom checks."
  }
 }

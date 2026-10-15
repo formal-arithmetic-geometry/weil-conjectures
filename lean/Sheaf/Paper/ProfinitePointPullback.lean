@@ -11,16 +11,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Sheaf.CategoryTheory.RingedSiteModules
-import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Localization.Predicate
-import Sheaf.Paper.ProfiniteTestObjectFunctor
-import Sheaf.CategoryTheory.SiteMorphismComposition
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
+import WeilConjectures.CategoryTheory.Monoidal.Conjugate
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import WeilConjectures.CategoryTheory.Sites.MonObj
 
 /-!
 # The geometric inverse image from the profinite point
@@ -33,7 +26,9 @@ eq:triangle and thm:alpha (blueprint: lem-weil-pbc-profinite-point-pullback).
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits
+
+
+open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -84,7 +79,57 @@ theorem profinite_point_pullback :
     Nonempty pointUpperStar.{u}.Braided ∧
     (∀ (X Y : Scheme.{u}) (f : X ⟶ Y),
       NatTrans.IsMonoidal (upperStarFromPointComp f).hom) := by
-  sorry
+  let : AB5OfSize.{u, u + 1} (Type (u + 1)) := AB5OfSize_of_univLE.{u, u + 1, u + 1, u + 1} _
+  let : AB5OfSize.{u, u + 1} Ab.{u + 1} := AB5OfSize_of_univLE.{u, u + 1, u + 1, u + 1} _
+  refine ⟨fun S ↦ inferInstance, inferInstance, coverPreserving_profiniteToProEt,
+    fun F ↦ inferInstance, fun F ↦ inferInstance, ⟨?_⟩, ?_, ?_, ?_, ?_,
+    ⟨inferInstance⟩, ⟨{ toMonoidal := inferInstance, braided := Functor.LaxBraided.braided }⟩,
+    fun X Y f ↦ inferInstance⟩
+  · exact Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      profiniteToProEt (Type (u + 1))
+      (coherentTopology Profinite.{u}) (Scheme.ProEt.topology specZ)
+  · unfold profinitePointSetInverseImage
+    infer_instance
+  · exact (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      profiniteToProEt (Type (u + 1))
+      (coherentTopology Profinite.{u}) (Scheme.ProEt.topology specZ)).leftAdjoint_preservesColimits
+  · unfold pointUpperStar
+    infer_instance
+  · have : PreservesColimitsOfSize.{0, 0} pointUpperStar :=
+      pointUpperStarLowerStarAdjunction.leftAdjoint_preservesColimits
+    infer_instance
+
+private lemma normalizedPointComparison_comp
+    {X Y Z W : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (kX : X ⟶ W) (kY : Y ⟶ W) (kZ : Z ⟶ W)
+    (hX : f ≫ kY = kX) (hY : g ≫ kZ = kY) (hfg : (f ≫ g) ≫ kZ = kX)
+    (M : Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) :
+    (upperStarComp Ab.{u + 1} f g).hom.app ((upperStar Ab.{u + 1} kZ).obj M) ≫
+      (upperStar Ab.{u + 1} f).map
+        ((upperStarComp Ab.{u + 1} g kZ).inv.app M ≫
+          (eqToHom (congrArg (upperStar Ab.{u + 1}) hY)).app M) ≫
+      ((upperStarComp Ab.{u + 1} f kY).inv.app M ≫
+        (eqToHom (congrArg (upperStar Ab.{u + 1}) hX)).app M) =
+    (upperStarComp Ab.{u + 1} (f ≫ g) kZ).inv.app M ≫
+      (eqToHom (congrArg (upperStar Ab.{u + 1}) hfg)).app M := by
+  subst hY
+  subst hX
+  have h := congrArg (fun e ↦ e.inv.app M) (upperStarComp_assoc Ab.{u + 1} f g kZ)
+  simp only [Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerRight_inv,
+    Functor.whiskerRight_app, Functor.associator_inv_app, Functor.isoWhiskerLeft_inv,
+    Functor.whiskerLeft_app, Category.id_comp, upperStarCongr,
+    eqToIso.inv] at h
+  simp only [eqToHom_refl, NatTrans.id_app, Category.comp_id]
+  rw [h]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  rfl
+
+private lemma pointComparison_congr {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f = g)
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :
+    (eqToHom (congrArg (upperStar Ab.{u + 1}) w)).app ((upperStarFromPoint Y).obj Λ) ≫
+        (upperStarFromPointComp g).hom.app Λ = (upperStarFromPointComp f).hom.app Λ := by
+  subst w
+  simp
 
 /-- The point comparisons satisfy identity and composition on abelian sheaves, hence
 also on ring sheaves, since all their components preserve ring operations.
@@ -106,7 +151,18 @@ theorem profinite_point_pullback_coefficient_coherence :
           (upperStar Ab.{u + 1} f).map ((upperStarFromPointComp g).hom.app Λ) ≫
           (upperStarFromPointComp f).hom.app Λ =
         (upperStarFromPointComp (f ≫ g)).hom.app Λ) := by
-  sorry
+  constructor
+  · intro X Λ
+    simp [upperStarFromPointComp, upperStarComp_id_left, upperStarCongr,
+      upperStarFromPoint]
+  · intro X Y Z f g Λ
+    change (upperStarComp Ab.{u + 1} f g).hom.app
+        ((upperStar Ab.{u + 1} (toSpecZ Z)).obj (pointUpperStar.obj Λ)) ≫
+      (upperStar Ab.{u + 1} f).map (condensedPullbackHom Λ g) ≫
+        condensedPullbackHom Λ f = condensedPullbackHom Λ (f ≫ g)
+    rw [condensedPullbackHom_eq, condensedPullbackHom_eq, condensedPullbackHom_eq]
+    exact normalizedPointComparison_comp f g (toSpecZ X) (toSpecZ Y) (toSpecZ Z)
+      (comp_toSpecZ f) (comp_toSpecZ g) (comp_toSpecZ (f ≫ g)) (pointUpperStar.obj Λ)
 
 /-- Abelian inverse-image composition is coherent, including both units and every
 commutative square. The square map is explicitly the comparison through the common
@@ -149,7 +205,22 @@ theorem profinite_point_pullback_abelian_coherence :
           (upperStarFromPointComp f').hom.app Λ =
         (upperStar Ab.{u + 1} b).map ((upperStarFromPointComp f).hom.app Λ) ≫
           (upperStarFromPointComp b).hom.app Λ) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro X Y f M
+    simp [upperStarComp_id_left, upperStarCongr]
+    rfl
+  · intro X Y f M
+    simp [upperStarComp_id_right, upperStarCongr, ← Functor.map_comp]
+    rfl
+  · intro X Y Z W f g h M
+    exact upperStarComp_hom_app_comp_upperStarComp_hom_app Ab.{u + 1} f g h M
+  · intro X' X Y' Y b f f' g w Λ
+    rw [profinite_point_pullback_coefficient_coherence.2 X' Y' Y f' g Λ,
+      pointComparison_congr w Λ]
+    rw [← cancel_epi ((upperStarComp Ab.{u + 1} b f).hom.app
+      ((upperStarFromPoint Y).obj Λ))]
+    simpa [Category.assoc] using
+      (profinite_point_pullback_coefficient_coherence.2 X' X Y b f Λ).symm
 
 open scoped CategoryTheory.Obj
 
@@ -168,7 +239,36 @@ theorem existsUnique_profinitePointModuleDirectImageIdentity
       ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X),
         (Mod.forget (condensedRingObj Λ X)).map (r.hom.app M) =
           (lowerStarId Ab.{u + 1} X).hom.app M.X := by
-  sorry
+  classical
+  have : NatTrans.IsMonoidal (lowerStarId Ab.{u + 1} X).hom :=
+    Functor.isMonoidal_sheafPushforwardContinuousId' _ _
+  let r : CondensedRing.lowerStar Λ (𝟙 X) ≅ 𝟭 _ :=
+    NatIso.ofComponents (fun M ↦ Mod.isoMk ((lowerStarId Ab.{u + 1} X).app M.X) (by
+      change (condensedPushforwardHom Λ (𝟙 X) ▷ _ ≫
+          Functor.LaxMonoidal.μ (lowerStar Ab.{u + 1} (𝟙 X)) _ _ ≫
+          (lowerStar Ab.{u + 1} (𝟙 X)).map (Mod.act M.X)) ≫
+          (lowerStarId Ab.{u + 1} X).hom.app M.X = _
+      change (condensedPushforwardHom Λ (𝟙 X) ▷ _ ≫
+          Functor.LaxMonoidal.μ (lowerStar Ab.{u + 1} (𝟙 X)) _ _ ≫
+          (lowerStar Ab.{u + 1} (𝟙 X)).map (Mod.act M.X)) ≫
+          (lowerStarId Ab.{u + 1} X).hom.app M.X =
+        condensedRingObj Λ X ◁ (lowerStarId Ab.{u + 1} X).hom.app M.X ≫ Mod.act M.X
+      rw [condensedPushforwardHom_id]
+      simp only [Category.assoc]
+      rw [(lowerStarId Ab.{u + 1} X).hom.naturality,
+        NatTrans.IsMonoidal.tensor_assoc]
+      simp [Functor.LaxMonoidal.id_μ, MonoidalCategory.tensorHom_def,
+        ← MonoidalCategory.comp_whiskerRight_assoc])) (fun φ ↦ by
+      apply Mod.hom_ext
+      exact (lowerStarId Ab.{u + 1} X).hom.naturality φ.hom)
+  refine ⟨r, fun M ↦ ?_, ?_⟩
+  · rfl
+  · intro t ht
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply (Mod.forget (condensedRingObj Λ X)).map_injective
+    exact ht M
 
 /-- The canonical identity comparison of module direct images, selected by its unique
 underlying map, not by a mere existence of an unrelated isomorphism.
@@ -243,6 +343,255 @@ theorem profinite_point_pullback_module_comparison
           (upperStarComp Ab.{u + 1} f g).hom.app M.X) := by
   sorry
 
+private lemma moduleLowerStarComp_underlying
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    ((CondensedRing.lowerStarComp Λ f g).hom.app M).hom =
+      (lowerStarComp Ab.{u + 1} f g).hom.app M.X := by
+  simp only [Functor.comp_obj, CondensedRing.lowerStarComp, Functor.isoWhiskerLeft_trans,
+    Functor.isoWhiskerLeft_twice, Functor.mapModCompIso,
+    CondensedRing.comapCondensedPushforwardHomComp, Iso.trans_assoc,
+    Iso.self_symm_id_assoc, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom,
+    Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.whiskerRight_app,
+    NatIso.ofComponents_hom_app, Category.id_comp, Mod.comp_hom', Mod.id_hom',
+    Mod.comap_map_hom, Functor.mapModComapIso_hom_app_hom, Mod.comapComp_inv_app_hom,
+    Mod.isoMk_hom_hom, asIso_hom, Mod.comapCongr_hom_app_hom]
+  erw [Category.id_comp, Category.id_comp, Category.id_comp, Category.id_comp,
+    Category.comp_id]
+
+private lemma moduleLowerStarId_underlying
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    ((profinitePointModuleDirectImageIdentity Λ X).hom.app M).hom =
+      (lowerStarId Ab.{u + 1} X).hom.app M.X := by
+  exact (existsUnique_profinitePointModuleDirectImageIdentity Λ X).exists.choose_spec M
+
+private lemma moduleLowerStarCongr_underlying
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f = g)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    ((eqToHom (congrArg (CondensedRing.lowerStar Λ) w)).app M).hom =
+      (eqToHom (congrArg (lowerStar Ab.{u + 1}) w)).app M.X := by
+  subst w
+  rfl
+
+private lemma moduleLowerStar_map_hom
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (φ : M ⟶ N) : ((CondensedRing.lowerStar Λ f).map φ).hom =
+      (lowerStar Ab.{u + 1} f).map φ.hom := rfl
+
+private lemma moduleLowerStarComp_id_left
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    CondensedRing.lowerStarComp Λ (𝟙 X) f =
+      Functor.isoWhiskerRight (profinitePointModuleDirectImageIdentity Λ X)
+        (CondensedRing.lowerStar Λ f) ≪≫
+      (CondensedRing.lowerStar Λ f).leftUnitor ≪≫
+      (eqToIso (congrArg (CondensedRing.lowerStar Λ) (Category.id_comp f))).symm := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply Mod.hom_ext
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Iso.symm_hom,
+    eqToIso.inv, Mod.comp_hom', moduleLowerStarComp_underlying,
+    moduleLowerStar_map_hom, moduleLowerStarId_underlying,
+    Mod.id_hom']
+  rw [moduleLowerStarCongr_underlying Λ (Category.id_comp f).symm]
+  have h := congrArg (fun e ↦ e.hom.app M.X) (legacy_lowerStarComp_id_left Ab.{u + 1} f)
+  simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Iso.symm_hom,
+    lowerStarCongr, eqToIso.inv, Functor.comp_obj, CondensedRing.lowerStar_obj_X,
+    Category.id_comp] using h
+
+private lemma moduleLowerStarComp_id_right
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    CondensedRing.lowerStarComp Λ f (𝟙 Y) =
+      Functor.isoWhiskerLeft (CondensedRing.lowerStar Λ f)
+        (profinitePointModuleDirectImageIdentity Λ Y) ≪≫
+      (CondensedRing.lowerStar Λ f).rightUnitor ≪≫
+      (eqToIso (congrArg (CondensedRing.lowerStar Λ) (Category.comp_id f))).symm := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply Mod.hom_ext
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Iso.symm_hom,
+    eqToIso.inv, Mod.comp_hom', moduleLowerStarComp_underlying,
+    moduleLowerStarId_underlying, Mod.id_hom']
+  rw [moduleLowerStarCongr_underlying Λ (Category.comp_id f).symm]
+  have h := congrArg (fun e ↦ e.hom.app M.X) (lowerStarComp_id_right Ab.{u + 1} f)
+  simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Iso.symm_hom,
+    lowerStarCongr, eqToIso.inv, Functor.comp_obj, CondensedRing.lowerStar_obj_X,
+    Category.id_comp] using h
+
+private lemma moduleLowerStarComp_assoc
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y Z W : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) :
+    Functor.associator (CondensedRing.lowerStar Λ f)
+        (CondensedRing.lowerStar Λ g) (CondensedRing.lowerStar Λ h) ≪≫
+        Functor.isoWhiskerLeft (CondensedRing.lowerStar Λ f)
+          (CondensedRing.lowerStarComp Λ g h) ≪≫
+        CondensedRing.lowerStarComp Λ f (g ≫ h) =
+      Functor.isoWhiskerRight (CondensedRing.lowerStarComp Λ f g)
+          (CondensedRing.lowerStar Λ h) ≪≫
+        CondensedRing.lowerStarComp Λ (f ≫ g) h ≪≫
+        eqToIso (congrArg (CondensedRing.lowerStar Λ) (Category.assoc f g h)) := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply Mod.hom_ext
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, eqToIso.hom, Mod.comp_hom', Mod.id_hom',
+    moduleLowerStarComp_underlying, moduleLowerStar_map_hom]
+  rw [moduleLowerStarCongr_underlying Λ (Category.assoc f g h)]
+  have hc := congrArg (fun e ↦ e.hom.app M.X) (legacy_lowerStarComp_assoc Ab.{u + 1} f g h)
+  simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, lowerStarCongr, eqToIso.hom,
+    Functor.comp_obj, CondensedRing.lowerStar_obj_X, Category.id_comp] using hc
+private lemma eqToIso_symm_congr
+    {A B : Type*} [Category B] (F : A → B) {a b : A} (w : a = b) :
+    (eqToIso (congrArg F w.symm)).symm = eqToIso (congrArg F w) := by
+  cases w
+  rfl
+
+private lemma eqToIso_congr_symm
+    {A B : Type*} [Category B] (F : A → B) {a b : A} (w : a = b) :
+    eqToIso (congrArg F w.symm) = (eqToIso (congrArg F w)).symm := by
+  cases w
+  rfl
+
+section ModuleMates
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+  [MonObj Λ] [IsCommMonObj Λ]
+
+private lemma conjugateModuleComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    conjugateIsoEquiv ((CondensedRing.upperStarLowerStarAdjunction Λ g).comp
+      (CondensedRing.upperStarLowerStarAdjunction Λ f))
+      (CondensedRing.upperStarLowerStarAdjunction Λ (f ≫ g))
+      (CondensedRing.upperStarComp Λ f g) = CondensedRing.lowerStarComp Λ f g := by
+  rw [CondensedRing.upperStarComp, conjugateIsoEquiv_iso_symm]
+  simp
+
+private lemma conjugateModuleId (X : Scheme.{u}) :
+    conjugateIsoEquiv Adjunction.id (CondensedRing.upperStarLowerStarAdjunction Λ (𝟙 X))
+      (profinitePointModuleIdentity Λ X) = (profinitePointModuleDirectImageIdentity Λ X).symm := by
+  exact (conjugateIsoEquiv Adjunction.id
+    (CondensedRing.upperStarLowerStarAdjunction Λ (𝟙 X))).apply_symm_apply _
+
+private lemma conjugateModuleCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f = g) :
+    conjugateIsoEquiv (CondensedRing.upperStarLowerStarAdjunction Λ g)
+      (CondensedRing.upperStarLowerStarAdjunction Λ f)
+      (eqToIso (congrArg (fun k : X ⟶ Y ↦
+        CondensedRing.upperStar Λ k) w)) =
+      (eqToIso (congrArg (CondensedRing.lowerStar Λ) w)).symm := by
+  subst w
+  apply Iso.ext
+  exact conjugateEquiv_id (CondensedRing.upperStarLowerStarAdjunction Λ f)
+
+private lemma moduleComp_assoc {X Y Z W : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) :
+    CondensedRing.upperStarComp Λ f (g ≫ h) ≪≫
+        Functor.isoWhiskerRight (CondensedRing.upperStarComp Λ g h)
+          (CondensedRing.upperStar Λ f) ≪≫
+        Functor.associator _ _ _ =
+      eqToIso (congrArg (fun k : X ⟶ W ↦
+        CondensedRing.upperStar Λ k) (Category.assoc f g h).symm) ≪≫
+        CondensedRing.upperStarComp Λ (f ≫ g) h ≪≫
+        Functor.isoWhiskerLeft (CondensedRing.upperStar Λ h)
+          (CondensedRing.upperStarComp Λ f g) := by
+  refine (conjugateIsoEquiv ((CondensedRing.upperStarLowerStarAdjunction Λ h).comp
+    ((CondensedRing.upperStarLowerStarAdjunction Λ g).comp
+      (CondensedRing.upperStarLowerStarAdjunction Λ f)))
+    (CondensedRing.upperStarLowerStarAdjunction Λ (f ≫ g ≫ h))).injective ?_
+  rw [conjugateIsoEquiv_trans _
+      ((CondensedRing.upperStarLowerStarAdjunction Λ (g ≫ h)).comp
+        (CondensedRing.upperStarLowerStarAdjunction Λ f)) _,
+    conjugateIsoEquiv_trans _ (((CondensedRing.upperStarLowerStarAdjunction Λ h).comp
+      (CondensedRing.upperStarLowerStarAdjunction Λ g)).comp
+        (CondensedRing.upperStarLowerStarAdjunction Λ f)) _,
+    conjugateIsoEquiv_trans _ (CondensedRing.upperStarLowerStarAdjunction Λ ((f ≫ g) ≫ h)) _,
+    conjugateIsoEquiv_trans _ ((CondensedRing.upperStarLowerStarAdjunction Λ h).comp
+      (CondensedRing.upperStarLowerStarAdjunction Λ (f ≫ g))) _]
+  simp only [conjugateModuleComp Λ, conjugateIsoEquiv_isoWhiskerRight,
+    conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_associator,
+    Iso.trans_assoc]
+  rw [moduleLowerStarComp_assoc Λ]
+  congr 2
+  rw [conjugateModuleCongr Λ (Category.assoc f g h).symm]
+  exact (eqToIso_symm_congr (CondensedRing.lowerStar Λ) (Category.assoc f g h)).symm
+
+private lemma moduleComp_id_left {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    CondensedRing.upperStarComp Λ (𝟙 X) f =
+      eqToIso (congrArg (fun k : X ⟶ Y ↦
+        CondensedRing.upperStar Λ k) (Category.id_comp f)) ≪≫
+      (CondensedRing.upperStar Λ f).rightUnitor.symm ≪≫
+      Functor.isoWhiskerLeft (CondensedRing.upperStar Λ f)
+        (profinitePointModuleIdentity Λ X).symm := by
+  refine (conjugateIsoEquiv ((CondensedRing.upperStarLowerStarAdjunction Λ f).comp
+    (CondensedRing.upperStarLowerStarAdjunction Λ (𝟙 X)))
+    (CondensedRing.upperStarLowerStarAdjunction Λ (𝟙 X ≫ f))).injective ?_
+  rw [conjugateIsoEquiv_trans _ (CondensedRing.upperStarLowerStarAdjunction Λ f) _,
+    conjugateIsoEquiv_trans _ ((CondensedRing.upperStarLowerStarAdjunction Λ f).comp
+      Adjunction.id) _]
+  rw [conjugateModuleComp Λ, conjugateModuleCongr Λ (Category.id_comp f),
+    conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_iso_symm, conjugateModuleId Λ,
+    conjugateIsoEquiv_iso_symm, conjugateIsoEquiv_rightUnitor, moduleLowerStarComp_id_left Λ]
+  refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
+  simp
+
+
+private lemma moduleComp_id_right {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    CondensedRing.upperStarComp Λ f (𝟙 Y) =
+      eqToIso (congrArg (fun k : X ⟶ Y ↦
+        CondensedRing.upperStar Λ k) (Category.comp_id f)) ≪≫
+      (CondensedRing.upperStar Λ f).leftUnitor.symm ≪≫
+      Functor.isoWhiskerRight (profinitePointModuleIdentity Λ Y).symm
+        (CondensedRing.upperStar Λ f) := by
+  refine (conjugateIsoEquiv ((CondensedRing.upperStarLowerStarAdjunction Λ (𝟙 Y)).comp
+    (CondensedRing.upperStarLowerStarAdjunction Λ f))
+    (CondensedRing.upperStarLowerStarAdjunction Λ (f ≫ 𝟙 Y))).injective ?_
+  rw [conjugateIsoEquiv_trans _ (CondensedRing.upperStarLowerStarAdjunction Λ f) _,
+    conjugateIsoEquiv_trans _ (Adjunction.id.comp
+      (CondensedRing.upperStarLowerStarAdjunction Λ f)) _]
+  rw [conjugateModuleComp Λ, conjugateModuleCongr Λ (Category.comp_id f),
+    conjugateIsoEquiv_isoWhiskerRight, conjugateIsoEquiv_iso_symm, conjugateModuleId Λ,
+    conjugateIsoEquiv_iso_symm, conjugateIsoEquiv_leftUnitor, moduleLowerStarComp_id_right Λ]
+  refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
+  simp
+
+private lemma moduleComp_assoc_app {X Y Z W : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
+    (M : Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) :
+    (CondensedRing.upperStarComp Λ (f ≫ g) h).hom.app M ≫
+        (CondensedRing.upperStarComp Λ f g).hom.app ((CondensedRing.upperStar Λ h).obj M) =
+      (eqToHom (congrArg (CondensedRing.upperStar Λ) (Category.assoc f g h))).app M ≫
+        (CondensedRing.upperStarComp Λ f (g ≫ h)).hom.app M ≫
+        (CondensedRing.upperStar Λ f).map ((CondensedRing.upperStarComp Λ g h).hom.app M) := by
+  have hc := moduleComp_assoc Λ f g h
+  rw [eqToIso_congr_symm (CondensedRing.upperStar Λ) (Category.assoc f g h)] at hc
+  have hc' := congrArg (fun e ↦
+    eqToIso (congrArg (CondensedRing.upperStar Λ) (Category.assoc f g h)) ≪≫ e) hc
+  simp only [Iso.self_symm_id_assoc] at hc'
+  have ha := congrArg (fun e ↦ e.hom.app M) hc'
+  simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Category.comp_id, eqToIso.hom] using ha.symm
+
+end ModuleMates
+
 /-- Module inverse images satisfy both unit equations and associativity.
 Source: RefactorInstruction, Section 5, eq:triangle and thm:alpha
 (blueprint: lem-weil-pbc-profinite-point-pullback).
@@ -270,7 +619,22 @@ theorem profinite_point_pullback_module_coherence
         (eqToHom (congrArg (CondensedRing.upperStar Λ) (Category.assoc f g h))).app M ≫
           (CondensedRing.upperStarComp Λ f (g ≫ h)).hom.app M ≫
           (CondensedRing.upperStar Λ f).map ((CondensedRing.upperStarComp Λ g h).hom.app M)) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro X Y f M
+    rw [moduleComp_id_left Λ f]
+    simp only [Iso.trans_hom, NatTrans.comp_app, eqToIso.hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom,
+      Functor.rightUnitor_inv_app, Category.id_comp, Category.assoc,
+      Iso.inv_hom_id_app, Functor.id_obj, Category.comp_id]
+  · intro X Y f M
+    rw [moduleComp_id_right Λ f]
+    simp only [Iso.trans_hom, NatTrans.comp_app, eqToIso.hom,
+      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Iso.symm_hom,
+      Functor.leftUnitor_inv_app, Category.id_comp, Category.assoc,
+      ← Functor.map_comp, Iso.inv_hom_id_app, Functor.id_obj,
+      CategoryTheory.Functor.map_id, Category.comp_id]
+  · intro X Y Z W f g h M
+    exact moduleComp_assoc_app Λ f g h M
 
 /-- Monoidality of the canonical abelian inverse-image composition comparison.
 Source: RefactorInstruction, Section 5, eq:triangle and thm:alpha
@@ -284,7 +648,17 @@ Equivalently, conjugate the monoidal direct-image comparison and use the tensor 
 theorem profinitePoint_isMonoidal_upperStarComp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} f g).hom := by
-  sorry
+  have h₁ : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+      (upperStarLowerStarAdjunction Ab.{u + 1} (f ≫ g))
+      Functor.Monoidal.toOplaxMonoidal _ :=
+    isMonoidal_upperStarLowerStarAdjunction _ _
+  have h₂ : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+      ((upperStarLowerStarAdjunction Ab.{u + 1} g).comp
+        (upperStarLowerStarAdjunction Ab.{u + 1} f))
+      Functor.Monoidal.toOplaxMonoidal _ := Adjunction.isMonoidal_comp _ _
+  have : NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} f g).symm.hom :=
+    isMonoidal_conjugateEquiv_symm _ _ (lowerStarComp Ab.{u + 1} f g).inv
+  exact inferInstanceAs (NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} f g).symm.inv)
 
 /-- Monoidality of the canonical identity comparison of abelian inverse images.
 Source: RefactorInstruction, Section 5, eq:triangle and thm:alpha
@@ -296,7 +670,13 @@ site inverse-image tensor theorem says this same comparison is monoidal. -/
 @[instance]
 theorem profinitePoint_isMonoidal_upperStarId (X : Scheme.{u}) :
     NatTrans.IsMonoidal (upperStarId Ab.{u + 1} X).hom := by
-  sorry
+  have : NatTrans.IsMonoidal (lowerStarId Ab.{u + 1} X).hom :=
+    Functor.isMonoidal_sheafPushforwardContinuousId' _ _
+  have h : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+      (upperStarLowerStarAdjunction Ab.{u + 1} (𝟙 X))
+      Functor.Monoidal.toOplaxMonoidal _ :=
+    isMonoidal_upperStarLowerStarAdjunction _ _
+  exact isMonoidal_conjugateEquiv_symm _ _ (lowerStarId Ab.{u + 1} X).inv
 
 /-- The canonical ring-object composition comparison, obtained by lifting the abelian or
 linear comparison through the existing functor on algebraic structures or localization.
@@ -316,6 +696,13 @@ noncomputable def profinitePointRingIdentity
     (X : Scheme.{u}) :
     (upperStar Ab.{u + 1} (𝟙 X)).mapMon ≅ 𝟭 (Mon (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})) :=
   Functor.mapMonNatIso (upperStarId Ab.{u + 1} X) ≪≫ Functor.mapMonIdIso
+
+private lemma ringComparison_transport {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f = g)
+    (M : Mon (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})) :
+    ((eqToHom (congrArg (fun k ↦ (upperStar Ab.{u + 1} k).mapMon) w)).app M).hom =
+      (eqToHom (congrArg (upperStar Ab.{u + 1}) w)).app M.X := by
+  subst w
+  rfl
 
 /-- The ring-object inverse-image comparisons satisfy both units and associativity.
 Source: RefactorInstruction, Section 5, eq:triangle and thm:alpha; Stacks, Tag 05RU
@@ -349,7 +736,127 @@ theorem profinite_point_pullback_ring_coherence
           (Category.assoc f g h))).app M ≫
           (profinitePointRingComp f (g ≫ h)).hom.app M ≫
           (upperStar Ab.{u + 1} f).mapMon.map ((profinitePointRingComp g h).hom.app M)) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro X Y f M
+    apply Mon.Hom.ext
+    simp only [profinitePointRingComp, profinitePointRingIdentity, Iso.trans_hom,
+      NatTrans.comp_app, Mon.comp_hom', Functor.mapMonNatIso_hom_app_hom,
+      Functor.mapMonCompIso_hom_app_hom, Functor.mapMonIdIso_hom_app_hom]
+    exact profinite_point_pullback_abelian_coherence.1 X Y f M.X
+  · intro X Y f M
+    apply Mon.Hom.ext
+    simp only [profinitePointRingComp, profinitePointRingIdentity, Iso.trans_hom,
+      NatTrans.comp_app, Mon.comp_hom', Functor.mapMonNatIso_hom_app_hom,
+      Functor.mapMonCompIso_hom_app_hom, 
+      Category.comp_id, ringComparison_transport]
+    exact profinite_point_pullback_abelian_coherence.2.1 X Y f M.X
+  · intro X Y Z W f g h M
+    apply Mon.Hom.ext
+    simp only [profinitePointRingComp, Iso.trans_hom, NatTrans.comp_app, Mon.comp_hom',
+      Functor.mapMonNatIso_hom_app_hom, Functor.mapMonCompIso_hom_app_hom]
+    exact profinite_point_pullback_abelian_coherence.2.2.1 X Y Z W f g h M.X
+
+end AlgebraicGeometry.ProEtale
+
+namespace CategoryTheory.Functor
+
+section TransferUnits
+variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+  [HasDerivedCategory C] [HasDerivedCategory D]
+  (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+
+private lemma derivedLeftUnit (I : D ⥤ D) [I.Additive]
+    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    (K : C ⥤ D) [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K]
+    (c : K ≅ F ⋙ I) (i : I ≅ 𝟭 D) (w : K = F)
+    (h : c ≪≫ isoWhiskerLeft F i = eqToIso w) (M : DerivedCategory C) :
+    (mapDerivedCategoryNatIso c).hom.app M ≫
+      (mapDerivedCategoryCompIso F I).hom.app M ≫
+      (mapDerivedCategoryNatIso i).hom.app (F.mapDerivedCategory.obj M) ≫
+      (mapDerivedCategoryIdIso D).hom.app (F.mapDerivedCategory.obj M) =
+      (eqToHom (show K.mapDerivedCategory = F.mapDerivedCategory by cases w; rfl)).app M := by
+  subst K
+  simp only [eqToIso_refl] at h
+  have hm := congrArg (fun e ↦ (mapDerivedCategoryNatIso e).hom.app M) h
+  rw [mapDerivedCategoryNatIso_trans] at hm
+  simp only [NatTrans.comp_app, mapDerivedCategoryNatIso_refl, NatTrans.id_app] at hm
+  have hw := congr_app (mapDerivedCategoryNatIso_isoWhiskerLeft F i) M
+  simp only [NatTrans.comp_app, whiskerLeft_app] at hw
+  rw [← reassoc_of% hw, reassoc_of% hm]
+  simpa using congr_app (mapDerivedCategoryCompIso_comp_id F) M
+
+private lemma derivedRightUnit (I : C ⥤ C) [I.Additive]
+    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    (K : C ⥤ D) [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K]
+    (c : K ≅ I ⋙ F) (i : I ≅ 𝟭 C) (w : K = F)
+    (h : c ≪≫ isoWhiskerRight i F = eqToIso w) (M : DerivedCategory C) :
+    (mapDerivedCategoryNatIso c).hom.app M ≫
+      (mapDerivedCategoryCompIso I F).hom.app M ≫
+      F.mapDerivedCategory.map
+        ((mapDerivedCategoryNatIso i).hom.app M ≫ (mapDerivedCategoryIdIso C).hom.app M) =
+      (eqToHom (show K.mapDerivedCategory = F.mapDerivedCategory by cases w; rfl)).app M := by
+  subst K
+  simp only [eqToIso_refl] at h
+  have hm := congrArg (fun e ↦ (mapDerivedCategoryNatIso e).hom.app M) h
+  rw [mapDerivedCategoryNatIso_trans] at hm
+  simp only [NatTrans.comp_app, mapDerivedCategoryNatIso_refl, NatTrans.id_app] at hm
+  have hw := congr_app (mapDerivedCategoryNatIso_isoWhiskerRight i F) M
+  simp only [NatTrans.comp_app, whiskerRight_app] at hw
+  simp only [Functor.map_comp]
+  rw [← reassoc_of% hw, reassoc_of% hm]
+  simpa using congr_app (mapDerivedCategoryCompIso_id_comp F) M
+end TransferUnits
+
+section TransferAssociativity
+variable {C D E J : Type*} [Category C] [Category D] [Category E] [Category J]
+  [Abelian C] [Abelian D] [Abelian E] [Abelian J]
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E] [HasDerivedCategory J]
+  (F : C ⥤ D) (G : D ⥤ E) (H : E ⥤ J)
+  (P : C ⥤ E) (Q : D ⥤ J) (R R' : C ⥤ J)
+  [F.Additive] [G.Additive] [H.Additive] [P.Additive] [Q.Additive] [R.Additive] [R'.Additive]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+  [PreservesFiniteLimits P] [PreservesFiniteColimits P]
+  [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
+  [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+  [PreservesFiniteLimits R'] [PreservesFiniteColimits R']
+
+private lemma derivedAssociativity
+    (c₀ : R' ≅ F ⋙ Q) (c₁ : Q ≅ G ⋙ H) (c₂ : R ≅ P ⋙ H) (c₃ : P ≅ F ⋙ G)
+    (w : R' = R)
+    (h : c₀ ≪≫ isoWhiskerLeft F c₁ = eqToIso w ≪≫ c₂ ≪≫ isoWhiskerRight c₃ H)
+    (M : DerivedCategory C) :
+    (mapDerivedCategoryNatIso c₀).hom.app M ≫
+        (mapDerivedCategoryCompIso F Q).hom.app M ≫
+        ((mapDerivedCategoryNatIso c₁).hom.app (F.mapDerivedCategory.obj M) ≫
+          (mapDerivedCategoryCompIso G H).hom.app (F.mapDerivedCategory.obj M)) =
+      (eqToHom (show R'.mapDerivedCategory = R.mapDerivedCategory by cases w; rfl)).app M ≫
+        (mapDerivedCategoryNatIso c₂).hom.app M ≫
+        (mapDerivedCategoryCompIso P H).hom.app M ≫
+        H.mapDerivedCategory.map ((mapDerivedCategoryNatIso c₃).hom.app M ≫
+          (mapDerivedCategoryCompIso F G).hom.app M) := by
+  subst R'
+  simp only [eqToIso_refl, Iso.refl_trans] at h
+  have hm := congrArg (fun e ↦ (mapDerivedCategoryNatIso e).hom.app M) h.symm
+  simp only [mapDerivedCategoryNatIso_trans, NatTrans.comp_app] at hm
+  have hWR := congr_app (mapDerivedCategoryNatIso_isoWhiskerRight c₃ H) M
+  have hWL := congr_app (mapDerivedCategoryNatIso_isoWhiskerLeft F c₁) M
+  have hA := congr_app (mapDerivedCategoryCompIso_assoc F G H) M
+  simp only [NatTrans.comp_app, whiskerRight_app] at hWR
+  simp only [NatTrans.comp_app, whiskerLeft_app] at hWL
+  simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] at hA
+  simp only [Functor.map_comp]
+  simp only [eqToHom_refl, NatTrans.id_app, Category.id_comp]
+  symm
+  rw [← reassoc_of% hWR, reassoc_of% hm, ← hA, reassoc_of% hWL]
+end TransferAssociativity
+
+end CategoryTheory.Functor
+
+namespace AlgebraicGeometry.ProEtale
+
+open scoped CategoryTheory.Obj
 
 /-- The canonical termwise derived composition comparison, obtained by lifting the abelian or
 linear comparison through the existing functor on algebraic structures or localization.
@@ -371,6 +878,13 @@ noncomputable def profinitePointAbelianDerivedIdentity
     (upperStar Ab.{u + 1} (𝟙 X)).mapDerivedCategory ≅ 𝟭 (DerivedCategory (Sheaf
       (Scheme.ProEt.topology X) Ab.{u + 1})) :=
   Functor.mapDerivedCategoryNatIso (upperStarId Ab.{u + 1} X) ≪≫ Functor.mapDerivedCategoryIdIso _
+
+private lemma abelianDerived_congr {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f = g) :
+    (Functor.mapDerivedCategoryNatIso
+      (eqToIso (congrArg (fun k : X ⟶ Y ↦ upperStar Ab.{u + 1} k) w))).hom =
+      eqToHom (congrArg (fun k : X ⟶ Y ↦ (upperStar Ab.{u + 1} k).mapDerivedCategory) w) := by
+  subst w
+  exact Functor.mapDerivedCategoryNatIso_refl
 
 /-- The termwise derived inverse-image comparisons satisfy both units and associativity.
 The square clause identifies the derived square comparison with the unique descent of
@@ -427,7 +941,62 @@ theorem profinite_point_pullback_abelianderived_coherence
               (upperStarComp Ab.{u + 1} f' g))).hom.app M ≫
           (Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1}
             f')).hom.app M) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro X Y f M
+    have h : upperStarComp Ab.{u + 1} (𝟙 X) f ≪≫
+        Functor.isoWhiskerLeft (upperStar Ab.{u + 1} f) (upperStarId Ab.{u + 1} X) =
+        eqToIso (congrArg (upperStar Ab.{u + 1}) (Category.id_comp f)) := by
+      apply Iso.ext
+      apply NatTrans.ext
+      funext N
+      exact profinite_point_pullback_abelian_coherence.1 X Y f N
+    simpa only [profinitePointAbelianDerivedComp, profinitePointAbelianDerivedIdentity,
+      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      CategoryTheory.Functor.derivedLeftUnit (upperStar Ab.{u + 1} f)
+        (upperStar Ab.{u + 1} (𝟙 X)) (upperStar Ab.{u + 1} (𝟙 X ≫ f))
+        (upperStarComp Ab.{u + 1} (𝟙 X) f) (upperStarId Ab.{u + 1} X)
+        (congrArg (upperStar Ab.{u + 1}) (Category.id_comp f)) h M
+  · intro X Y f M
+    have h : upperStarComp Ab.{u + 1} f (𝟙 Y) ≪≫
+        Functor.isoWhiskerRight (upperStarId Ab.{u + 1} Y) (upperStar Ab.{u + 1} f) =
+        eqToIso (congrArg (upperStar Ab.{u + 1}) (Category.comp_id f)) := by
+      apply Iso.ext
+      apply NatTrans.ext
+      funext N
+      exact profinite_point_pullback_abelian_coherence.2.1 X Y f N
+    simpa only [profinitePointAbelianDerivedComp, profinitePointAbelianDerivedIdentity,
+      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      CategoryTheory.Functor.derivedRightUnit (upperStar Ab.{u + 1} f)
+        (upperStar Ab.{u + 1} (𝟙 Y)) (upperStar Ab.{u + 1} (f ≫ 𝟙 Y))
+        (upperStarComp Ab.{u + 1} f (𝟙 Y)) (upperStarId Ab.{u + 1} Y)
+        (congrArg (upperStar Ab.{u + 1}) (Category.comp_id f)) h M
+  · intro X Y Z W f g h M
+    have hc : upperStarComp Ab.{u + 1} (f ≫ g) h ≪≫
+        Functor.isoWhiskerLeft (upperStar Ab.{u + 1} h) (upperStarComp Ab.{u + 1} f g) =
+        eqToIso (congrArg (upperStar Ab.{u + 1}) (Category.assoc f g h)) ≪≫
+          upperStarComp Ab.{u + 1} f (g ≫ h) ≪≫
+          Functor.isoWhiskerRight (upperStarComp Ab.{u + 1} g h) (upperStar Ab.{u + 1} f) := by
+      apply Iso.ext
+      apply NatTrans.ext
+      funext N
+      simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+        Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+        eqToIso.hom, Category.assoc] using
+        profinite_point_pullback_abelian_coherence.2.2.1 X Y Z W f g h N
+    simpa only [profinitePointAbelianDerivedComp, Iso.trans_hom, NatTrans.comp_app,
+      Category.assoc] using
+      CategoryTheory.Functor.derivedAssociativity
+        (upperStar Ab.{u + 1} h) (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1} f)
+        (upperStar Ab.{u + 1} (g ≫ h)) (upperStar Ab.{u + 1} (f ≫ g))
+        (upperStar Ab.{u + 1} (f ≫ g ≫ h)) (upperStar Ab.{u + 1} ((f ≫ g) ≫ h))
+        (upperStarComp Ab.{u + 1} (f ≫ g) h) (upperStarComp Ab.{u + 1} f g)
+        (upperStarComp Ab.{u + 1} f (g ≫ h)) (upperStarComp Ab.{u + 1} g h)
+        (congrArg (upperStar Ab.{u + 1}) (Category.assoc f g h)) hc M
+  · intro X' X Y' Y b f f' g w M
+    simp only [profinitePointAbelianDerivedComp, Iso.trans_inv, Iso.trans_hom,
+      NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans,
+      Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
+    rw [abelianDerived_congr w]
 
 /-- The canonical termwise derived composition comparison, obtained by lifting the abelian or
 linear comparison through the existing functor on algebraic structures or localization.
@@ -455,6 +1024,15 @@ noncomputable def profinitePointModuleDerivedIdentity
       (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
   Functor.mapDerivedCategoryNatIso (profinitePointModuleIdentity Λ X) ≪≫
       Functor.mapDerivedCategoryIdIso _
+
+private lemma moduleDerived_congr
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f = g) :
+    (Functor.mapDerivedCategoryNatIso
+      (eqToIso (congrArg (fun k : X ⟶ Y ↦ CondensedRing.upperStar Λ k) w))).hom =
+      eqToHom (congrArg (fun k : X ⟶ Y ↦ (CondensedRing.upperStar Λ k).mapDerivedCategory) w) := by
+  subst w
+  exact Functor.mapDerivedCategoryNatIso_refl
 
 /-- The termwise derived inverse-image comparisons satisfy both units and associativity.
 The square clause identifies the derived square comparison with the unique descent of
@@ -514,7 +1092,75 @@ theorem profinite_point_pullback_modulederived_coherence
               (CondensedRing.upperStarComp Λ f' g))).hom.app M ≫
           (Functor.mapDerivedCategoryCompIso (CondensedRing.upperStar Λ g)
             (CondensedRing.upperStar Λ f')).hom.app M) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro X Y f M
+    have h : CondensedRing.upperStarComp Λ (𝟙 X) f ≪≫
+        Functor.isoWhiskerLeft (CondensedRing.upperStar Λ f) (profinitePointModuleIdentity Λ X) =
+        eqToIso (congrArg (CondensedRing.upperStar Λ) (Category.id_comp f)) := by
+      apply Iso.ext
+      apply NatTrans.ext
+      funext N
+      exact (profinite_point_pullback_module_coherence Λ).1 X Y f N
+    simpa only [profinitePointModuleDerivedComp, profinitePointModuleDerivedIdentity,
+      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      CategoryTheory.Functor.derivedLeftUnit (CondensedRing.upperStar Λ f)
+        (CondensedRing.upperStar Λ (𝟙 X)) (CondensedRing.upperStar Λ (𝟙 X ≫ f))
+        (CondensedRing.upperStarComp Λ (𝟙 X) f) (profinitePointModuleIdentity Λ X)
+        (congrArg (CondensedRing.upperStar Λ) (Category.id_comp f)) h M
+  · intro X Y f M
+    have h : CondensedRing.upperStarComp Λ f (𝟙 Y) ≪≫
+        Functor.isoWhiskerRight (profinitePointModuleIdentity Λ Y) (CondensedRing.upperStar Λ f) =
+        eqToIso (congrArg (CondensedRing.upperStar Λ) (Category.comp_id f)) := by
+      apply Iso.ext
+      apply NatTrans.ext
+      funext N
+      exact (profinite_point_pullback_module_coherence Λ).2.1 X Y f N
+    simpa only [profinitePointModuleDerivedComp, profinitePointModuleDerivedIdentity,
+      Iso.trans_hom, NatTrans.comp_app, Category.assoc] using
+      CategoryTheory.Functor.derivedRightUnit (CondensedRing.upperStar Λ f)
+        (CondensedRing.upperStar Λ (𝟙 Y)) (CondensedRing.upperStar Λ (f ≫ 𝟙 Y))
+        (CondensedRing.upperStarComp Λ f (𝟙 Y)) (profinitePointModuleIdentity Λ Y)
+        (congrArg (CondensedRing.upperStar Λ) (Category.comp_id f)) h M
+  · intro X Y Z W f g h M
+    have hc : CondensedRing.upperStarComp Λ (f ≫ g) h ≪≫
+        Functor.isoWhiskerLeft (CondensedRing.upperStar Λ h) (CondensedRing.upperStarComp Λ f g) =
+        eqToIso (congrArg (CondensedRing.upperStar Λ) (Category.assoc f g h)) ≪≫
+          CondensedRing.upperStarComp Λ f (g ≫ h) ≪≫
+          Functor.isoWhiskerRight (CondensedRing.upperStarComp Λ g h)
+            (CondensedRing.upperStar Λ f) := by
+      apply Iso.ext
+      apply NatTrans.ext
+      funext N
+      simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+        Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+        eqToIso.hom, Category.assoc] using
+        (profinite_point_pullback_module_coherence Λ).2.2 X Y Z W f g h N
+    simpa only [profinitePointModuleDerivedComp, Iso.trans_hom, NatTrans.comp_app,
+      Category.assoc] using
+      CategoryTheory.Functor.derivedAssociativity
+        (CondensedRing.upperStar Λ h) (CondensedRing.upperStar Λ g) (CondensedRing.upperStar Λ f)
+        (CondensedRing.upperStar Λ (g ≫ h)) (CondensedRing.upperStar Λ (f ≫ g))
+        (CondensedRing.upperStar Λ (f ≫ g ≫ h)) (CondensedRing.upperStar Λ ((f ≫ g) ≫ h))
+        (CondensedRing.upperStarComp Λ (f ≫ g) h) (CondensedRing.upperStarComp Λ f g)
+        (CondensedRing.upperStarComp Λ f (g ≫ h)) (CondensedRing.upperStarComp Λ g h)
+        (congrArg (CondensedRing.upperStar Λ) (Category.assoc f g h)) hc M
+  · intro X' X Y' Y b f f' g w M
+    simp only [profinitePointModuleDerivedComp, Iso.trans_inv, Iso.trans_hom,
+      NatTrans.comp_app, Functor.mapDerivedCategoryNatIso_trans,
+      Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
+    rw [moduleDerived_congr Λ w]
+
+private lemma ringLiftUnderlying
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    [F.LaxMonoidal] [G.LaxMonoidal] [H.LaxMonoidal]
+    (e : F ⋙ G ≅ H) [NatTrans.IsMonoidal e.hom] (R : Mon C) :
+    (((Functor.mapMonCompIso (F := F) (G := G)).symm.app R ≪≫
+      (Functor.mapMonNatIso e).app R).hom).hom = e.hom.app R.X := by
+  simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Mon.comp_hom',
+    Functor.mapMonCompIso_inv_app_hom, Functor.mapMonNatIso_hom_app_hom]
+  exact Category.id_comp _
 
 /-- The coefficient comparison is the ring lift of the stipulated point comparison.
 Its component preserves both multiplication and addition because it is a morphism in
@@ -531,7 +1177,42 @@ theorem profinite_point_pullback_ring_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) :
     (coefficientPullbackIso f Λ).hom.hom = (upperStarFromPointComp f).hom.app Λ.X := by
-  sorry
+  exact ringLiftUnderlying (upperStarFromPoint Y) (upperStar Ab.{u + 1} f)
+    (upperStarFromPoint X) (upperStarFromPointComp f) Λ
+
+private lemma moduleForget_transport
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f = g)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
+    (Mod.forget (condensedRingObj Λ X)).map
+        ((eqToHom (congrArg (fun k : X ⟶ Y ↦ CondensedRing.upperStar Λ k) w)).app M) ≫
+        (profinitePointModuleForgetPullbackIso Λ g).hom.app M =
+      (profinitePointModuleForgetPullbackIso Λ f).hom.app M ≫
+        (eqToHom (congrArg (upperStar Ab.{u + 1}) w)).app M.X := by
+  subst w
+  simp only [eqToHom_refl, NatTrans.id_app]
+  erw [Category.id_comp]
+private lemma squareOfMorphisms
+    {C : Type*} [Category C] {A B A' B' D E D' E' : C}
+    (s : A ⟶ B) (si : B ⟶ A) (t : A' ⟶ B')
+    (a : D ⟶ E) (ai : E ⟶ D) (b : D' ⟶ E')
+    (p : A ⟶ D) (q : B ⟶ E) (p' : A' ⟶ D') (q' : B' ⟶ E')
+    (v : A ⟶ A') (w : D ⟶ D')
+    (his : si ≫ s = 𝟙 B) (hai : a ≫ ai = 𝟙 D)
+    (hs : s ≫ q = p ≫ a) (ht : t ≫ q' = p' ≫ b)
+    (hw : v ≫ p' = p ≫ w) :
+    si ≫ v ≫ t ≫ q' = q ≫ ai ≫ w ≫ b := by
+  calc
+    si ≫ v ≫ t ≫ q' = si ≫ p ≫ w ≫ b := by
+      rw [ht, reassoc_of% hw]
+    _ = si ≫ p ≫ a ≫ ai ≫ w ≫ b := by
+      rw [reassoc_of% hai]
+    _ = si ≫ s ≫ q ≫ ai ≫ w ≫ b := by
+      rw [reassoc_of% hs]
+    _ = q ≫ ai ≫ w ≫ b := by
+      rw [reassoc_of% his]
+
 
 /-- The module square comparison has precisely the underlying abelian square map
 obtained via the common composite. The displayed normalization prevents an arbitrary
@@ -565,7 +1246,35 @@ theorem profinite_point_pullback_module_square
         (upperStarComp Ab.{u + 1} b f).inv.app M.X ≫
         (eqToHom (congrArg (upperStar Ab.{u + 1}) w)).app M.X ≫
         (upperStarComp Ab.{u + 1} f' g).hom.app M.X := by
-  sorry
+  let V : Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
+      (condensedRingObj Λ X') ⥤ Sheaf (Scheme.ProEt.topology X') Ab.{u + 1} :=
+    Mod.forget (condensedRingObj Λ X')
+  have his : V.map ((CondensedRing.upperStarComp Λ b f).inv.app M) ≫
+      V.map ((CondensedRing.upperStarComp Λ b f).hom.app M) = 𝟙 _ := by
+    rw [← V.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+  have hh := squareOfMorphisms
+    (V.map ((CondensedRing.upperStarComp Λ b f).hom.app M))
+    (V.map ((CondensedRing.upperStarComp Λ b f).inv.app M))
+    (V.map ((CondensedRing.upperStarComp Λ f' g).hom.app M))
+    ((upperStarComp Ab.{u + 1} b f).hom.app M.X)
+    ((upperStarComp Ab.{u + 1} b f).inv.app M.X)
+    ((upperStarComp Ab.{u + 1} f' g).hom.app M.X)
+    ((profinitePointModuleForgetPullbackIso Λ (b ≫ f)).hom.app M)
+    ((profinitePointModuleForgetPullbackIso Λ b).hom.app
+      ((CondensedRing.upperStar Λ f).obj M) ≫
+      (upperStar Ab.{u + 1} b).map ((profinitePointModuleForgetPullbackIso Λ f).hom.app M))
+    ((profinitePointModuleForgetPullbackIso Λ (f' ≫ g)).hom.app M)
+    ((profinitePointModuleForgetPullbackIso Λ f').hom.app
+      ((CondensedRing.upperStar Λ g).obj M) ≫
+      (upperStar Ab.{u + 1} f').map ((profinitePointModuleForgetPullbackIso Λ g).hom.app M))
+    (V.map ((eqToHom (congrArg
+      (fun k : X' ⟶ Y ↦ CondensedRing.upperStar Λ k) w)).app M))
+    ((eqToHom (congrArg (upperStar Ab.{u + 1}) w)).app M.X)
+    his (Iso.hom_inv_id_app _ M.X)
+    ((profinite_point_pullback_module_comparison Λ).2.2 X' X Y b f M)
+    ((profinite_point_pullback_module_comparison Λ).2.2 X' Y' Y f' g M)
+    (moduleForget_transport Λ w M)
+  simpa only [V, Functor.map_comp, Category.assoc] using hh
 
 /-- The geometric set inverse image for an arbitrary scheme is the point inverse image
 followed by the actual scheme inverse image along its structure morphism.
@@ -609,6 +1318,143 @@ noncomputable def profinitePointSetSchemeComp {X Y : Scheme.{u}} (f : X ⟶ Y) :
         (fun k : X ⟶ specZ ↦ Scheme.proEtaleSheafInverseImage k (Type (u + 1)))
         (comp_toSpecZ f)))
 
+private lemma conjugateSetComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    conjugateIsoEquiv ((Scheme.proEtaleSheafAdjunction g (Type (u + 1))).comp
+      (Scheme.proEtaleSheafAdjunction f (Type (u + 1))))
+      (Scheme.proEtaleSheafAdjunction (f ≫ g) (Type (u + 1)))
+      (profinitePointSetComp f g) = lowerStarComp (Type (u + 1)) f g := by
+  rw [profinitePointSetComp, conjugateIsoEquiv_iso_symm]
+  simp
+
+private lemma conjugateSetId (X : Scheme.{u}) :
+    conjugateIsoEquiv Adjunction.id (Scheme.proEtaleSheafAdjunction (𝟙 X) (Type (u + 1)))
+      (profinitePointSetIdentity X) = (lowerStarId (Type (u + 1)) X).symm := by
+  exact (conjugateIsoEquiv Adjunction.id
+    (Scheme.proEtaleSheafAdjunction (𝟙 X) (Type (u + 1)))).apply_symm_apply _
+
+private lemma conjugateSetCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f = g) :
+    conjugateIsoEquiv (Scheme.proEtaleSheafAdjunction g (Type (u + 1)))
+      (Scheme.proEtaleSheafAdjunction f (Type (u + 1)))
+      (eqToIso (congrArg (fun k : X ⟶ Y ↦
+        Scheme.proEtaleSheafInverseImage k (Type (u + 1))) w)) =
+      (lowerStarCongr (Type (u + 1)) w).symm := by
+  subst w
+  apply Iso.ext
+  exact conjugateEquiv_id (Scheme.proEtaleSheafAdjunction f (Type (u + 1)))
+
+private lemma setComp_assoc {X Y Z W : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) :
+    profinitePointSetComp f (g ≫ h) ≪≫
+        Functor.isoWhiskerRight (profinitePointSetComp g h)
+          (Scheme.proEtaleSheafInverseImage f (Type (u + 1))) ≪≫
+        Functor.associator _ _ _ =
+      eqToIso (congrArg (fun k : X ⟶ W ↦
+        Scheme.proEtaleSheafInverseImage k (Type (u + 1))) (Category.assoc f g h).symm) ≪≫
+        profinitePointSetComp (f ≫ g) h ≪≫
+        Functor.isoWhiskerLeft (Scheme.proEtaleSheafInverseImage h (Type (u + 1)))
+          (profinitePointSetComp f g) := by
+  refine (conjugateIsoEquiv ((Scheme.proEtaleSheafAdjunction h (Type (u + 1))).comp
+    ((Scheme.proEtaleSheafAdjunction g (Type (u + 1))).comp
+      (Scheme.proEtaleSheafAdjunction f (Type (u + 1)))))
+    (Scheme.proEtaleSheafAdjunction (f ≫ g ≫ h) (Type (u + 1)))).injective ?_
+  rw [conjugateIsoEquiv_trans _ ((Scheme.proEtaleSheafAdjunction (g ≫ h)
+      (Type (u + 1))).comp (Scheme.proEtaleSheafAdjunction f (Type (u + 1)))) _,
+    conjugateIsoEquiv_trans _ (((Scheme.proEtaleSheafAdjunction h (Type (u + 1))).comp
+      (Scheme.proEtaleSheafAdjunction g (Type (u + 1)))).comp
+        (Scheme.proEtaleSheafAdjunction f (Type (u + 1)))) _,
+    conjugateIsoEquiv_trans _ (Scheme.proEtaleSheafAdjunction ((f ≫ g) ≫ h)
+      (Type (u + 1))) _,
+    conjugateIsoEquiv_trans _ ((Scheme.proEtaleSheafAdjunction h (Type (u + 1))).comp
+      (Scheme.proEtaleSheafAdjunction (f ≫ g) (Type (u + 1)))) _]
+  simp only [conjugateSetComp, conjugateIsoEquiv_isoWhiskerRight,
+    conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_associator,
+    Iso.trans_assoc]
+  rw [legacy_lowerStarComp_assoc]
+  congr 2
+  rw [conjugateSetCongr (Category.assoc f g h).symm]
+  rfl
+
+private lemma setComp_id_left {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    profinitePointSetComp (𝟙 X) f =
+      eqToIso (congrArg (fun k : X ⟶ Y ↦
+        Scheme.proEtaleSheafInverseImage k (Type (u + 1))) (Category.id_comp f)) ≪≫
+      (Scheme.proEtaleSheafInverseImage f (Type (u + 1))).rightUnitor.symm ≪≫
+      Functor.isoWhiskerLeft (Scheme.proEtaleSheafInverseImage f (Type (u + 1)))
+        (profinitePointSetIdentity X).symm := by
+  refine (conjugateIsoEquiv ((Scheme.proEtaleSheafAdjunction f (Type (u + 1))).comp
+    (Scheme.proEtaleSheafAdjunction (𝟙 X) (Type (u + 1))))
+    (Scheme.proEtaleSheafAdjunction (𝟙 X ≫ f) (Type (u + 1)))).injective ?_
+  rw [conjugateIsoEquiv_trans _ (Scheme.proEtaleSheafAdjunction f (Type (u + 1))) _,
+    conjugateIsoEquiv_trans _ ((Scheme.proEtaleSheafAdjunction f (Type (u + 1))).comp
+      Adjunction.id) _]
+  rw [conjugateSetComp, conjugateSetCongr (Category.id_comp f),
+    conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_iso_symm, conjugateSetId,
+    conjugateIsoEquiv_iso_symm, conjugateIsoEquiv_rightUnitor, legacy_lowerStarComp_id_left]
+  refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
+  simp
+
+private lemma normalizedSetPointComparison_comp
+    {X Y Z W : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (kX : X ⟶ W) (kY : Y ⟶ W) (kZ : Z ⟶ W)
+    (hX : f ≫ kY = kX) (hY : g ≫ kZ = kY) (hfg : (f ≫ g) ≫ kZ = kX)
+    (M : Sheaf (Scheme.ProEt.topology W) (Type (u + 1))) :
+    (profinitePointSetComp f g).hom.app
+        ((Scheme.proEtaleSheafInverseImage kZ (Type (u + 1))).obj M) ≫
+      (Scheme.proEtaleSheafInverseImage f (Type (u + 1))).map
+        ((profinitePointSetComp g kZ).inv.app M ≫
+          (eqToHom (congrArg (fun k : Y ⟶ W ↦
+            Scheme.proEtaleSheafInverseImage k (Type (u + 1))) hY)).app M) ≫
+      ((profinitePointSetComp f kY).inv.app M ≫
+        (eqToHom (congrArg (fun k : X ⟶ W ↦
+          Scheme.proEtaleSheafInverseImage k (Type (u + 1))) hX)).app M) =
+    (profinitePointSetComp (f ≫ g) kZ).inv.app M ≫
+      (eqToHom (congrArg (fun k : X ⟶ W ↦
+        Scheme.proEtaleSheafInverseImage k (Type (u + 1))) hfg)).app M := by
+  subst hY
+  subst hX
+  have h := congrArg (fun e ↦ e.inv.app M) (setComp_assoc f g kZ)
+  simp only [Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerRight_inv,
+    Functor.whiskerRight_app, Functor.associator_inv_app, Functor.isoWhiskerLeft_inv,
+    Functor.whiskerLeft_app, Category.id_comp, eqToIso.inv] at h
+  simp only [eqToHom_refl, NatTrans.id_app, Category.comp_id]
+  rw [h]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  rfl
+
+private lemma setPointComparison_congr {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f = g)
+    (F : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1))) :
+    (eqToHom (congrArg (fun k : X ⟶ Y ↦
+      Scheme.proEtaleSheafInverseImage k (Type (u + 1))) w)).app
+        ((profinitePointSetSchemeInverseImage Y).obj F) ≫
+        (profinitePointSetSchemeComp g).hom.app F =
+      (profinitePointSetSchemeComp f).hom.app F := by
+  subst w
+  simp
+private lemma setPointSchemeComp_hom {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (profinitePointSetSchemeComp f).hom =
+      (Functor.associator profinitePointSetInverseImage
+        (Scheme.proEtaleSheafInverseImage (toSpecZ Y) (Type (u + 1)))
+        (Scheme.proEtaleSheafInverseImage f (Type (u + 1)))).hom ≫
+      Functor.whiskerLeft profinitePointSetInverseImage
+        ((profinitePointSetComp f (toSpecZ Y)).inv ≫
+          eqToHom (congrArg
+            (fun k : X ⟶ specZ ↦ Scheme.proEtaleSheafInverseImage k (Type (u + 1)))
+            (comp_toSpecZ f))) := by
+  simp only [profinitePointSetSchemeComp, Iso.trans_hom, Functor.isoWhiskerLeft_hom,
+    Iso.symm_hom, eqToIso.hom]
+
+private lemma setPointSchemeComp_hom_app {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (F : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1))) :
+    (profinitePointSetSchemeComp f).hom.app F =
+      (profinitePointSetComp f (toSpecZ Y)).inv.app (profinitePointSetInverseImage.obj F) ≫
+        (eqToHom (congrArg (fun k : X ⟶ specZ ↦
+          Scheme.proEtaleSheafInverseImage k (Type (u + 1))) (comp_toSpecZ f))).app
+          (profinitePointSetInverseImage.obj F) := by
+  have hh := congrArg (fun η ↦ η.app F) (setPointSchemeComp_hom f)
+  simpa only [NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Category.id_comp] using hh
+
+
 /-- The geometric point comparisons are coherent already on sets.
 Source: RefactorInstruction, prop:pX and Section 5, eq:triangle
 (blueprint: lem-weil-pbc-profinite-point-pullback).
@@ -646,6 +1492,44 @@ theorem profinite_point_pullback_set_coherence :
         (Scheme.proEtaleSheafInverseImage b (Type (u + 1))).map
             ((profinitePointSetSchemeComp f).hom.app F) ≫
           (profinitePointSetSchemeComp b).hom.app F) := by
-  sorry
+  have hcomp : ∀ (X Y Z : Scheme.{u}) (f : X ⟶ Y) (g : Y ⟶ Z)
+      (F : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1))),
+      (profinitePointSetComp f g).hom.app ((profinitePointSetSchemeInverseImage Z).obj F) ≫
+        (Scheme.proEtaleSheafInverseImage f (Type (u + 1))).map
+          ((profinitePointSetSchemeComp g).hom.app F) ≫
+        (profinitePointSetSchemeComp f).hom.app F =
+      (profinitePointSetSchemeComp (f ≫ g)).hom.app F := by
+    intro X Y Z f g F
+    rw [setPointSchemeComp_hom_app, setPointSchemeComp_hom_app,
+      setPointSchemeComp_hom_app]
+    exact normalizedSetPointComparison_comp f g (toSpecZ X) (toSpecZ Y) (toSpecZ Z)
+      (comp_toSpecZ f) (comp_toSpecZ g) (comp_toSpecZ (f ≫ g))
+      (profinitePointSetInverseImage.obj F)
+  refine ⟨?_, ?_, hcomp, ?_⟩
+  · intro X
+    let : AB5OfSize.{u, u + 1} (Type (u + 1)) :=
+      AB5OfSize_of_univLE.{u, u + 1, u + 1, u + 1} _
+    have : PreservesFiniteLimits profinitePointSetInverseImage.{u} :=
+      profinite_point_pullback.2.2.2.2.2.2.1
+    let : AB5OfSize.{u + 1, u + 1} (Type (u + 1)) := inferInstance
+    let : RepresentablyFlat (Scheme.proEtaleBaseChange (toSpecZ X)) :=
+      flat_of_preservesFiniteLimits _
+    have : PreservesFiniteLimits
+        (Scheme.proEtaleSheafInverseImage (toSpecZ X) (Type (u + 1))) := by
+      unfold Scheme.proEtaleSheafInverseImage Functor.sheafPullbackConstruction.sheafPullback
+      have : PreservesFiniteLimits
+          ((Scheme.proEtaleBaseChange (toSpecZ X)).op.lan :
+            ((Scheme.ProEt specZ)ᵒᵖ ⥤ Type (u + 1)) ⥤
+              (Scheme.ProEt X)ᵒᵖ ⥤ Type (u + 1)) := by
+        apply CategoryTheory.preservesFiniteLimits_op_lan_of_flat
+      infer_instance
+    exact comp_preservesFiniteLimits _ _
+  · intro X F
+    simp [profinitePointSetSchemeComp, setComp_id_left]
+  · intro X' X Y' Y b f f' g w F
+    rw [hcomp X' Y' Y f' g F, setPointComparison_congr w F]
+    rw [← cancel_epi ((profinitePointSetComp b f).hom.app
+      ((profinitePointSetSchemeInverseImage Y).obj F))]
+    simpa [Category.assoc] using (hcomp X' X Y b f F).symm
 
 end AlgebraicGeometry.ProEtale
