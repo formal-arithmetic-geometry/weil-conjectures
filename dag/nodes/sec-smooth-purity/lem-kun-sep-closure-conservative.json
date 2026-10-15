@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-sep-closure-conservative",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Conservativity of base change to a separable closure",
@@ -13,34 +13,166 @@
   "place": "node lem-kun-sep-closure-conservative, order 1744"
  },
  "stmt_deps": [
+  "def-pc-scheme",
   "def-kun-separably-closed",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-geometric-point",
+  "def-pc-base-change",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-inverse-image"
  ],
  "proof": [
   {
-   "text": "Let $\\bar x:\\Spec(\\Omega)\\to X$ be a geometric point; $\\Omega$ is\nalgebraically closed and contains $\\kappa(x)$, hence contains the\nalgebraic closure of $K$, in particular $K^{\\mathrm{sep}}$, so\n$\\bar x$ factors as\n$\\Spec(\\Omega)\\to X_{K^{\\mathrm{sep}}}\\to X$. If $\\alpha$ becomes\nan isomorphism after pullback to $X_{K^{\\mathrm{sep}}}$, then its\nstalk at $\\bar x$ (the pullback along $\\bar x$, see\n[lem-kun-stalk-as-pullback]) is an isomorphism as it factors\nthrough the pullback along\n$\\Spec(\\Omega)\\to X_{K^{\\mathrm{sep}}}$; all stalks are\nisomorphic, so $\\alpha$ is an isomorphism by\n[lemma-weil-pbc-geometric-stalk-conservative] (and\n[lem-kun-stalk-faithful-derived] in the derived case).",
+   "text": "Write $s:X\\to\\operatorname{Spec}K$ for the structure map, $L=K^{\\mathrm{sep}}$, and $p:X_L=X\\times_{\\operatorname{Spec}K}\\operatorname{Spec}L\\to X$ for the projection. Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be any geometric point. By [def-weil-geometric-point], $\\Omega$ is algebraically closed. The composite $s\\circ\\bar x$ corresponds, by [def-weil-affine-spectrum], to a field homomorphism $a:K\\to\\Omega$. The extension $L/K$ is algebraic by [def-kun-separably-closed]. Apply [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] to $L/K$, $\\Omega$ and $a$ to obtain $b:L\\to\\Omega$ with $b|_K=a$. This is a choice of embedding over $K$, not an assertion that the abstract field $L$ is already a specified subfield of $\\Omega$.",
    "uses": [
+    "def-weil-geometric-point",
+    "def-weil-affine-spectrum",
+    "def-kun-separably-closed",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GU (lemma-map-into-algebraic-closure), proof: the Zorn argument uses only algebraic closedness of the target, so applies to the algebraically closed extension Omega with the given K-structure"
+   }
+  },
+  {
+   "text": "Let $j=\\operatorname{Spec}(b):\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}L$. Functoriality of $\\operatorname{Spec}$ in [def-weil-affine-spectrum] and $b|_K=a$ give $\\operatorname{Spec}(K\\hookrightarrow L)\\circ j=s\\circ\\bar x$. The universal property in [def-pc-fibre-product] therefore gives $\\widetilde x=(\\bar x,j):\\operatorname{Spec}\\Omega\\to X_L$ with $p\\circ\\widetilde x=\\bar x$, where $X_L$ is the base change of [def-pc-base-change]. Since the domain is the same algebraically closed field, $\\widetilde x$ is a geometric point. This proves the factorization clause; no uniqueness of the lift is asserted.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "def-pc-base-change",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP (definition-fibre-product), universal property applied to the compatible pair (bar x, Spec b)"
+   }
+  },
+  {
+   "text": "Suppose $\\alpha:F\\to G$ is a morphism of abelian etale sheaves on $X$ and $p^{-1}\\alpha$ is an isomorphism. For the lift $\\widetilde x$ of any $\\bar x$ just constructed, the composition isomorphism of [lem-weil-pbc-inverse-image-composition](2) gives $\\widetilde x^{-1}p^{-1}\\cong\\bar x^{-1}$. Applying the functor $\\widetilde x^{-1}$ to $p^{-1}\\alpha$ preserves its inverse, so the naturality square of this comparison makes $\\bar x^{-1}\\alpha$ an isomorphism. By [lem-kun-stalk-as-pullback], this is the stalk map $\\alpha_{\\bar x}$, under the identification of sheaves on $\\operatorname{Spec}\\Omega$ with abelian groups. Since this holds for every geometric point $\\bar x$ of $X$, [lemma-weil-pbc-geometric-stalk-conservative] implies that $\\alpha$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
     "lem-kun-stalk-as-pullback",
-    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1 (lemma-stalk-pullback)(3), together with Tag 03PU (theorem-exactness-stalks); inverse-image composition is topologies.tex Tag 021J (lemma-composition-etale)"
+   }
+  },
+  {
+   "text": "For the derived clause we need composition on the entire unbounded derived category, not merely on $D^+$. The inverse images along $p$, $\\widetilde x$ and $\\bar x$ are exact by [prop-weil-pbc-inverse-image-exact], and their derived functors are computed termwise on every complex by [lem-weil-pbc-exact-functor-derived-factorization], as specified in [def-weil-pbc-derived-inverse-image]. On a complex $C^\\bullet$, apply the sheaf comparison $c_{p,\\widetilde x}$ of [lem-weil-pbc-inverse-image-composition](2) in every degree: its naturality with respect to $d^n:C^n\\to C^{n+1}$ says $\\bar x^{-1}(d^n)c_{C^n}=c_{C^{n+1}}\\widetilde x^{-1}p^{-1}(d^n)$. Thus these components form a chain isomorphism $\\widetilde x^{-1}p^{-1}C^\\bullet\\cong\\bar x^{-1}C^\\bullet$. Localizing this chain isomorphism gives the comparison of the derived functors on $QC^\\bullet$. It is natural for chain maps and their homotopy classes, and hence for inverses of quasi-isomorphisms and their composites; these generate the localized morphisms. Consequently $\\widetilde x_D^{-1}p_D^{-1}\\cong\\bar x_D^{-1}$ naturally on $D(X_{\\Et})$, with no boundedness assumption.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor)(3)-(4), applied termwise to the composition isomorphism of topologies.tex Tag 021J; explicit chain-map naturality and localization argument"
+   }
+  },
+  {
+   "text": "Now let $\\alpha:A\\to B$ be a morphism in $D(X_{\\Et})$ such that $p_D^{-1}\\alpha$ is an isomorphism. Applying $\\widetilde x_D^{-1}$ preserves its inverse, and the comparison of step 4 identifies the resulting morphism with $\\bar x_D^{-1}\\alpha$ up to conjugation by isomorphisms. Thus the pullback of $\\alpha$ to every geometric point of $X$ is an isomorphism. Apply [lem-kun-stalk-faithful-derived] with $T=X$ to conclude that $\\alpha$ is an isomorphism. The argument applies to the unbounded category, exactly as that cited statement does.",
+   "uses": [
     "lem-kun-stalk-faithful-derived"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-sep-closure-conservative.md",
+    "place": "Proof, final parenthesis invoking lem-kun-stalk-faithful-derived; the needed unbounded composition comparison is supplied in step 4"
+   }
+  },
+  {
+   "text": "Conversely, in either category, if $\\alpha$ has inverse $\\beta$, functoriality gives $p^{-1}(\\beta)p^{-1}(\\alpha)=p^{-1}(\\beta\\alpha)=\\mathrm{id}$ and $p^{-1}(\\alpha)p^{-1}(\\beta)=\\mathrm{id}$ (and the same identities for $p_D^{-1}$). Thus pullback preserves isomorphisms. Together with steps 3 and 5 this proves both equivalences in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-sep-closure-conservative.md",
+    "place": "Statement, the forward implication in each isomorphism criterion; functor axioms"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-geometric-point",
+  "def-weil-affine-spectrum",
+  "def-kun-separably-closed",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "lem-weil-pbc-inverse-image-composition",
   "lem-kun-stalk-as-pullback",
   "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-pbc-derived-inverse-image",
   "lem-kun-stalk-faithful-derived"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-sep-closure-conservative.md",
-  "place": "## Proof"
+  "place": "Proof: geometric-point factorization followed by sheaf and derived stalk conservativity; embedding justified by Stacks 09GU, fibre product by 01JP, pullback by 03Q1 and 021J, unbounded extension by 015F"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme X over a field K, inverse image of abelian etale sheaves or derived objects to the base change by a separable closure of K reflects isomorphisms",
+   "results": "Scheme.Modules forgetful functor reflects isomorphisms and sectionwise isomorphism criteria, formally etale field-algebra decompositions, and etale base-change stability; none states conservativity of small-etale inverse image after separable-closure base change, or the derived clause.",
+   "date": "2026-10-16",
+   "verdict": "no match: the whole item is not a one-line specialization of these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ReflectsIsomorphisms\", \"Etale\"",
+   "results": "No hits for the two name fragments ReflectsIsomorphisms and Etale together.",
+   "date": "2026-10-16",
+   "verdict": "no match: the whole item is not a one-line specialization of these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "separab.*conserv|conserv.*separab|reflectsIsomorphisms.*upperStar|exists_comp_eq_of_surjective",
+   "results": "No hits in Mathlib/AlgebraicGeometry for the supplied pattern.",
+   "date": "2026-10-16",
+   "verdict": "no match: the whole item is not a one-line specialization of these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback along base change to a separable closure is conservative for etale sheaves and their derived categories",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image functor on etale sheaves along a surjective morphism of schemes reflects isomorphisms; every geometric point lifts after extension of algebraic base field",
+   "results": "Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.IsEtale.of_comp, Scheme.instCategoryEtale and related etale morphism classes; none is the sheaf or derived conservativity criterion.",
+   "date": "2026-10-16",
+   "verdict": "no match: the whole item is not a one-line specialization of these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"isIso\"",
+   "results": "Four hits for isomorphisms of point-fibre/sheafification and monoidal comparison transformations in Sites.Point.Skyscraper, Monoidal and Presheaf; these do not state the item.",
+   "date": "2026-10-16",
+   "verdict": "no match: the whole item is not a one-line specialization of these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "ReflectsIsomorphisms|conservative|lift",
+   "results": "EtalePoint.lean:126 isConservative_pointSmallEtale states that a family of geometric points covering all underlying scheme points is conservative. Read lines 126 onward: this is the generic stalk-family input, not separable-closure base-change conservativity or its derived version. Other hits concern lifts and unrelated functors.",
+   "date": "2026-10-16",
+   "verdict": "no match: the whole item is not a one-line specialization of these hits"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +204,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-sep-closure-conservative",
+  "worker": "stage1",
+  "summary": "Kept the true imported statement unchanged. Replaced the implicit containment of an abstract separable closure in the geometric-point field with a chosen K-embedding using the existing Mathlib leaf, then constructed the geometric lift by the fibre-product universal property. Made inverse-image composition and the unbounded termwise localization argument explicit before applying the original sheaf and derived detection nodes. Audited the statement dependencies; no new nodes are needed. No exact project attachment or Mathlib leaf for the whole item was found.",
+  "blueprint": "The original single proof paragraph: steps 1-2 realize its field-containment and geometric-factorization sentence; step 3 realizes the sheaf stalk argument; steps 4-5 justify composition and the parenthetical derived case; step 6 supplies the forward implications. Whole-blueprint searches by separable closure, sep-closure, base change conservativity, and Every geometric point found no second statement of this item.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-derived-inverse-image",
+    "why": "Defines the termwise exact inverse image on the unbounded derived category, used to interpret the derived clause; the unit has no separate definition of this functor."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic composition isomorphism for abelian etale inverse images, used for the factorization through the lifted geometric point and then extended termwise; no composition statement in the Kunneth unit replaces it."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Generic exactness of inverse image for every scheme morphism, needed for termwise unbounded derivation in step 4; the Kunneth unit has no separate exactness statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-ac61a8971",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-ac61a8971 (reviewer sub-agent of L); spot-checked: Read the full item, report, dependency statements, unit/chapter route and cited sources. Compatible field embeddings and fibre-product lifts are valid; the explicit termwise/localization argument proves unbounded derived composition. Checked edge cases, duplicates and dependency cycles. Accepted the proposed generic tool uses. No repairs needed; detailed checks are in review.md."
+ }
 }
