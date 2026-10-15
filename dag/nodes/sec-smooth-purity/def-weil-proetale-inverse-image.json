@@ -249,10 +249,10 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-bea96458b",
-  "group": "NY",
+  "reviewer": "NT-stage2-Codex-684e4b6db",
+  "group": "N0",
   "result": "pass",
-  "note": "Wrote review.md. Audited the immutable statement, all nine dependencies, sources, universes, edge cases, docstrings, and dependency repair. Both delivered Lean files compile cleanly through scompile.py with the local side overlay. No fixes required; branch unchanged."
+  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, reports, and recorded per-file scompile evidence checked; no defects found."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImage",
@@ -287,9 +287,9 @@
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleInverseImage.lean",
   "statement": "abbrev proEtaleSheafInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y) (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D] [HasWeakSheafify (ProEt.topology X) D] : Sheaf (ProEt.topology Y) D ⥤ Sheaf (ProEt.topology X) D",
   "branch": "newtargets-dag",
-  "by": "NY",
+  "by": "N0",
   "date": "2026-10-15",
   "existing": false,
-  "note": "The recorded primary declaration is constant-coefficient pullback, whereas this item needs inverse image of continuous-function coefficient sheaves. The existing general inverse-image module supplies that construction, but its finite-coefficient framework import duplicates declarations from the upstream general framework used by continuous functions. Retain all its declarations and constructions verbatim, replace only that import by WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs, and bind implicits explicitly. The recorded module now exposes the general sheaf inverse image and module inverse image; the larger-universe constant-coefficient API remains in its original separate module, unchanged."
+  "note": "§1(B): the existing source imports the legacy pro-etale UpperLowerStar.Defs, which collides with the finite-coefficient interface already imported by the completed-coefficient dependencies. Preserve every definition and statement verbatim, changing only that import to the upstream FiniteCoefficient.UpperLowerStar.Defs with the same canonical operations."
  }
 }

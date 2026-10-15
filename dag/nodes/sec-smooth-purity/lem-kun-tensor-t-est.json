@@ -77,10 +77,21 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "lean": {
+  "module": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus",
+  "declaration": "CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE",
+  "statement": "theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE\n    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]\n    [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]\n    (F : C ⥤ D) [F.Additive] (K : DerivedCategory.Plus C) (n : ℤ) [K.IsGE n] {q : ℤ}\n    (hq : q < n) :\n    IsZero ((DerivedCategory.Plus.homologyFunctor D q).obj (F.rightDerivedFunctorPlus.obj K))",
   "branch": "slopmaster2",
-  "declarations": [
-   "CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-15 19:58 UTC for group NQ, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_7d675a26.jsonl.gz: Specializing to the additive étale direct image on abelian sheaves gives the entire vanishing conclusion, since these sheaf categories are abelian with de"
+  "by": "NL",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact specialization: C = Sheaf X.smallEtaleTopology AddCommGrpCat.{u+1}, D = Sheaf Y.smallEtaleTopology AddCommGrpCat.{u+1}, F = AlgebraicGeometry.Etale.lowerStar AddCommGrpCat.{u+1} f, K = E, n = b, q = i. rightDerivedLowerStarPlus is definitionally F.rightDerivedFunctorPlus. The hypothesis K.IsGE b is equivalent to the node's cohomology vanishing by DerivedCategory.Plus.isGE_ι_obj_iff and DerivedCategory.isGE_iff; Plus.homologyFunctor is homology after the inclusion. All categorical, additive, derived-category and enough-injectives instances are canonical for these sheaf categories. The original wrapper unnecessarily restated this existing theorem and is dropped under H4."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d69597bf8",
+  "group": "NL",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, exact existing theorem, edge cases, H4, report sections, scompile, and deliver2 dry run; all checks passed. Wrote review.md."
  }
 }

@@ -70,14 +70,18 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "lean": {
-  "module": "Sheaf.CategoryTheory.RingedSiteDerivedRestriction",
-  "declaration": "CategoryTheory.ringedSiteDerivedRestriction",
-  "file": "lean/Sheaf/CategoryTheory/RingedSiteDerivedRestriction.lean",
-  "statement": "def ringedSiteDerivedRestriction {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (U : C) [HasDerivedCategory.{w} (SheafOfModules.{u} R)] [HasDerivedCategory.{w} (SheafOfModules.{u} (R.over U))] (K : DerivedCategory (SheafOfModules.{u} R)) : DerivedCategory (SheafOfModules.{u} (R.over U))",
+  "module": "Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses",
+  "declaration": "CategoryTheory.ringedSiteDerivedRestrictionOfUniverses",
+  "declarations": [
+   "CategoryTheory.ringedSiteDerivedRestrictionOfUniverses"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteDerivedRestrictionUniverses.lean",
+  "statement": "def ringedSiteDerivedRestrictionOfUniverses {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r}) (U : C) [HasSheafify J AddCommGrpCat.{m}] [J.WEqualsLocallyBijective AddCommGrpCat.{m}] [HasSheafify (J.over U) AddCommGrpCat.{m}] [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{m}] [HasDerivedCategory.{w} (SheafOfModules.{m} R)] [HasDerivedCategory.{w'} (SheafOfModules.{m} (R.over U))] (K : DerivedCategory (SheafOfModules.{m} R)) : DerivedCategory (SheafOfModules.{m} (R.over U))",
   "branch": "newtargets-dag",
-  "by": "NH",
+  "by": "N0",
   "date": "2026-10-15",
-  "existing": false
+  "existing": false,
+  "note": "The recorded interface imposes SmallCategory C and makes coefficient and site object/Hom universes equal. This identical canonical-representative restriction construction permits independent universes and independently sized localizations, retaining the original construction on all small sites."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -90,9 +94,9 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-273a488ca",
-  "group": "NH",
+  "reviewer": "NT-stage2-Codex-684e4b6db",
+  "group": "N0",
   "result": "pass",
-  "note": "Wrote review.md. Statements, constructions, dependencies, edge cases, signatures, and maintainer gates pass; all four modules compile cleanly server-side. Two snapshot omissions were verified in the exact immutable commit. No delivery errors found."
+  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, reports, and recorded per-file scompile evidence checked; no defects found."
  }
 }

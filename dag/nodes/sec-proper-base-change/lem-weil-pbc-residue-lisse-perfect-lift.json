@@ -34,7 +34,12 @@
   "def-pur-sheaf-inverse-limit",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-projective-module",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-pbc-intrinsic-koszul-completion",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
  ],
  "proof": [
   {
@@ -317,5 +322,37 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-1f2259402 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements and sources in full. Six proof steps and the arbitrary-ring reconstruction statement check out against Stacks 09C6/09AW; coefficient categories remain distinct. Repaired missing creation/audit metadata in the new node. Detailed checks and accepted tool uses are in review.md; corrected JSON is under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-684e4b6db",
+  "group": "N0",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, reports, and recorded per-file scompile evidence checked; no defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ResidueLissePerfectLift",
+  "declaration": "AlgebraicGeometry.Scheme.residue_lisse_perfect_lift",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.residueLisseConstant_additive",
+   "AlgebraicGeometry.Scheme.residueLisseConstant_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.residueLisseConstant_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.residueLisseAlgebraHasDerivedCategory",
+   "AlgebraicGeometry.Scheme.residueLisseRingHasDerivedCategory",
+   "AlgebraicGeometry.Scheme.residueLisseDerivedConstant",
+   "AlgebraicGeometry.Scheme.residueLisseConstantComparison_exists",
+   "AlgebraicGeometry.Scheme.residueLisseConstantComparison",
+   "AlgebraicGeometry.Scheme.residueLisseSliceAbSheafify",
+   "AlgebraicGeometry.Scheme.residueLisseSliceAbLocallyBijective",
+   "AlgebraicGeometry.Scheme.residueLisseSliceHasDerivedCategory",
+   "AlgebraicGeometry.Scheme.residue_lisse_perfect_lift"
+  ],
+  "file": "lean/Sheaf/Paper/ResidueLissePerfectLift.lean",
+  "statement": "theorem residue_lisse_perfect_lift (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X] {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) [IsAdicComplete d.ideal A] (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (M : DerivedCategory (CompletedAdicModules X d)) (_hcomplete : IsCompletedAdicDerivedComplete X d r a ha M) (_hresidue : ∃ S : Sieve (⊤_ X.Etale), S ∈ X.smallEtaleTopology (⊤_ X.Etale) ∧ ∀ (V : X.Etale) (f : V ⟶ ⊤_ X.Etale), S f → ∃ P : DerivedCategory (ModuleCat.{t} (A ⧸ d.ideal ^ (0 + 1))), DerivedCategory.IsPerfectRingComplex P ∧ Nonempty (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0) ((toProEt X).obj V) ((completedAdicQuotientReduction X d 0).obj M) ≅ ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0) ((toProEt X).obj V) ((completedAdicDerivedChange X (residueLisseConstantComparison X d 0)).obj ((residueLisseDerivedConstant X (A ⧸ d.ideal ^ (0 + 1))).obj P)))) : ∃ S : Sieve (⊤_ X.ProEt), S ∈ ProEt.topology X (⊤_ X.ProEt) ∧ ∀ (U : X.ProEt) (f : U ⟶ ⊤_ X.ProEt), S f → ∃ P : DerivedCategory (ModuleCat.{t} A), DerivedCategory.IsPerfectRingComplex P ∧ Nonempty (ringedSiteDerivedRestrictionOfUniverses (completedAdicRing X d) U M ≅ ringedSiteDerivedRestrictionOfUniverses (completedAdicRing X d) U ((completedAdicDerivedChange X (completedAdicScalar X d)).obj ((residueLisseDerivedConstant X A).obj P)))",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

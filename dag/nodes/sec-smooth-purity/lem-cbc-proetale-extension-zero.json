@@ -188,5 +188,31 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-f52eabe45 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, sources, and unit/chapter route in full. Verified module adjunction, stalk colimit argument, scalar compatibility, derived descent, edge cases, duplicate candidates, and acyclicity. Stacks 0991/0993 justifies removing false stalk uniqueness. Accepted both declared localization/module-adjunction tool uses. Checked master target coefficient categories and base-change morphisms without accepting a seeded comparison theorem. No repairs needed; review.md records the checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d20974ec4",
+  "group": "NR",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, canonical scalar mate, pro-etale framework, and required compiler/mechanical checks all verified; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleExtensionZero",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtale_extension_by_zero",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.geometricModuleStalkFunctor",
+   "AlgebraicGeometry.ProEtale.geometricModuleStalkFunctor_additive",
+   "AlgebraicGeometry.ProEtale.openExtensionCochain",
+   "AlgebraicGeometry.ProEtale.openExtensionScalarRestriction_additive",
+   "AlgebraicGeometry.ProEtale.openExtensionScalarMap",
+   "AlgebraicGeometry.ProEtale.proEtale_extension_by_zero"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleExtensionZero.lean",
+  "statement": "theorem proEtale_extension_by_zero (A : Type (u + 1)) [CommRing A] [Finite A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : PreservesFiniteLimits (openImmersionLowerShriek (ModuleCat.{u + 1} A) j) ∧ PreservesFiniteColimits (openImmersionLowerShriek (ModuleCat.{u + 1} A) j) ∧ Nonempty (openImmersionLowerShriek (ModuleCat.{u + 1} A) j ⊣ openImmersionRestriction (ModuleCat.{u + 1} A) j) ∧ Nonempty (openExtensionCochain A j ⊣ (openImmersionRestriction (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ U), Nonempty (openExtensionCochain A j ⋙ (geometricModuleStalkFunctor A (y ≫ j)).mapHomologicalComplex (.up ℤ) ≅ (geometricModuleStalkFunctor A y).mapHomologicalComplex (.up ℤ))) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ X), (¬ ∃ z : Spec (.of Ω) ⟶ U, z ≫ j = y) → ∀ K : CochainComplex (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} A)) ℤ, IsZero (((geometricModuleStalkFunctor A y).mapHomologicalComplex (.up ℤ)).obj ((openExtensionCochain A j).obj K))) ∧ (∀ (B : Type (u + 1)) [CommRing B] [Finite B] (φ : A →+* B), IsIso (openExtensionScalarMap φ j) ∧ IsIso ((openExtensionScalarMap φ j).mapHomologicalComplex (.up ℤ)))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
