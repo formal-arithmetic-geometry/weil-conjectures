@@ -1,0 +1,181 @@
+{
+ "id": "lem-sp-exact-functor-half-plane",
+ "kind": "statement",
+ "title": "Limiting and large-page comparisons for an exact functor",
+ "statement": "Let Phi:C->B be an exact additive functor of abelian categories, and let X,Y be type-zero bigraded exact couples. Suppose object equalities identify the initial D and E terms with their Phi images. Suppose compatible isomorphisms delta and phi of all finite derived D and E terms are given, normalized at page zero, commuting with g and the kernel-to-cohomology projections. Suppose the iterated D inclusions are monic, recursively defined, and commute with delta. Fix the same half-plane lower bound a for both couples, limiting subobjects LX,LY and normalized alpha colimits AX,AY with convergence. Suppose an isomorphism eA of the colimit objects commutes with their cocone maps, and isomorphisms tau of filtration steps and kappa of graded pieces commute with inclusions and quotient projections. Then (1) there is an infinite-page isomorphism Phi(E_infinity(X))->E_infinity(Y) commuting with the canonical map from D, every stable-page identification at r+2>max(q-a+1,p), and the canonical infinite-page-to-graded-piece comparisons; (2) at every r+2>=max(p+3,q-a+2), the inverse normalized cocone map at p-r gives lambda, the iterated D images give isomorphisms t from filtration step p to D_r(p-r,q+r), and g induces quotient isomorphisms psi from the graded piece to E_r(p,q), with their displayed inclusion and quotient equations, and Phi(psiX) followed by phi_r equals kappa followed by psiY. The exact dependent types and equations are in the attached Lean statement. This is only the limiting-cycle and explicit large-page portion of the transport theorem, after finite pages and filtration transport have been constructed.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Original lem-sp-exact-functor-couple proof steps 4 and 6; Stacks Tags 011T and 012F for stabilization and associated graded pieces, Tags 011Q and 011R for exact couples and their derived images, Tag 010N for exact-functor preservation."
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "def-sp-filtration",
+  "thm-sp-half-plane-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Factor initial g through each finite cycle object and its page projection. The cycle lift and next-page projection equations give its successor recurrence. The initial g square, the normalized page-zero comparisons, and cancellation of kernel inclusions prove naturality of these finite maps by induction.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Original lem-sp-exact-functor-couple proof steps 4 and 6; Stacks Tags 011T and 012F for stabilization and associated graded pieces, Tags 011Q and 011R for exact couples and their derived images, Tag 010N for exact-functor preservation."
+   }
+  },
+  {
+   "text": "Reuse the proved page_zero and tower_stationary helpers from HalfPlaneWeakConvergence through the proof-only import all of FinitePageGradedQuotient. The incoming and outgoing differentials vanish under the stable-page bound, since their endpoints vanish initially and hence on every page. The tower successor formulas then make Z and B stationary. Their monotonicity and the GLB/LUB properties identify the stationary values with LX and LY. Reuse quotient_comparison from the same module: the epimorphic page projection, its kernel, and the cokernel presentation of the infinite page give a stable-page-to-infinite-page isomorphism with its displayed projection equation.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "lem-sp-half-plane-weak-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Original lem-sp-exact-functor-couple proof steps 4 and 6; Stacks Tags 011T and 012F for stabilization and associated graded pieces, Tags 011Q and 011R for exact couples and their derived images, Tag 010N for exact-functor preservation."
+   }
+  },
+  {
+   "text": "Use weakConvergence_comparison to obtain the canonical infinite-page-to-graded isomorphisms, uniquely fixed by their maps from D. Define phiInfinity by conjugating kappa through them. Cancel the monic target image inclusion in hTau to show naturality of the canonical factorization through each filtration step. Together with hKappa and the cocone square this proves naturality of toGradedPiece, hence the map from D to the infinite page. On a stable page the finite g map is epi, since its composite with the stable identification is the epimorphic infinite-page map. Cancel its functor image to prove compatibility with every stable-page identification.",
+   "uses": [
+    "def-sp-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Original lem-sp-exact-functor-couple proof steps 4 and 6; Stacks Tags 011T and 012F for stabilization and associated graded pieces, Tags 011Q and 011R for exact couples and their derived images, Tag 010N for exact-functor preservation."
+   }
+  },
+  {
+   "text": "Put u=p-r,v=q+r. Use cocone_iso_nonpositive (the proved helper of normalizedGraded_finite_kernel) to see that the transported cocone map c at u is invertible; lambda is its inverse. Use prescribed_inclusion_images (the proved helper of finitePage_image_lift) and incomingAlphaIter_cocone to identify the images of the r-th and (r+1)-st D inclusions with filtration steps p and p+1, transported by lambda. The canonical subobject isomorphism gives t. The incoming derived D image is the kernel of g (derivedDInclusion_kernel, the proved helper of finitePage_graded_quotient). The D lower bound and pageD_zero kill the following D term, so g is epi. The cokernel universal property gives psi with its quotient equation. All arguments apply to negative p and zero objects as written.",
+   "uses": [
+    "lem-sp-normalized-graded-finite-kernel",
+    "lem-sp-finite-page-image-lift",
+    "lem-sp-finite-page-graded-quotient",
+    "lem-sp-half-plane-weak-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Original lem-sp-exact-functor-couple proof steps 4 and 6; Stacks Tags 011T and 012F for stabilization and associated graded pieces, Tags 011Q and 011R for exact couples and their derived images, Tag 010N for exact-functor preservation."
+   }
+  },
+  {
+   "text": "The cocone square and the defining inverse equations prove naturality of lambda by cancelling its inverse. Cancel the monic target D inclusion and use the given D-inclusion and filtration-step squares to prove naturality of t. Map the psi quotient equation, use the g square (with endpoint transports), the t square, and the graded quotient square; cancel the mapped epic quotient projection to prove the final psi square.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Original lem-sp-exact-functor-couple proof steps 4 and 6; Stacks Tags 011T and 012F for stabilization and associated graded pieces, Tags 011Q and 011R for exact couples and their derived images, Tag 010N for exact-functor preservation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "lem-sp-half-plane-weak-convergence",
+  "def-sp-filtration",
+  "lem-sp-normalized-graded-finite-kernel",
+  "lem-sp-finite-page-image-lift",
+  "lem-sp-finite-page-graded-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Complete Lean proof by C4: finite g naturality, stationary towers, canonical weak-convergence comparisons, incoming-alpha images, and cancellation of mono/epi universal-property equations. Only standard axioms by print axioms. Second reading reuses existing page_zero, tower_stationary and quotient_comparison proofs from HalfPlaneWeakConvergence; removes redundant imports and narrows the new module public import to ExactCoupleConvergence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor commutes with images kernels cokernels and homology of a short complex",
+   "results": "ShortComplex.Exact.map, Functor.preservesHomologyOfExact and related exactness preservation results; used for finite pages, no complete limiting/large-page transport theorem.",
+   "date": "2026-10-15",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "imageComparison",
+   "results": "Unknown identifier; no result for the full transport. Direct source search subsequently found PreservesImage.iso.",
+   "date": "2026-10-15",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exactFunctor_couple|transport.*exact couple lean/WeilConjectures lean/Sheaf; rg PreservesImage|kernelComparison|cokernelComparison Mathlib/CategoryTheory",
+   "results": "No existing full transport theorem. PreservesImage.iso, PreservesKernel.iso, PreservesCokernel.iso, image functor and kernel/cokernel mapIso provide finite construction ingredients; no limiting-cycle or large-page naturality lemma. Further local source search found proved cocone, prescribed-inclusion image and derived-D kernel helpers in NormalizedGradedFiniteKernel, FinitePageImageLift and FinitePageGradedQuotient; these supply the remaining large-page construction.",
+   "date": "2026-10-15",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact additive functor commutes with stable pages of a half-plane exact couple and its associated graded filtration",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error. The search runner explicitly directs recording unavailability without a verdict; Loogle/LeanFinder and source grep were used.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitCokernelCoforkOfEpi|iso.*[Kk]ernel|cokernel.*[Ii]so",
+   "results": "Source search returned abelian kernel/cokernel comparison ingredients only. Repository source search found page_zero, tower_stationary and quotient_comparison in HalfPlaneWeakConvergence; these existing proved helpers now replace duplicate local proofs. No full limiting and large-page naturality result.",
+   "date": "2026-10-15",
+   "verdict": "ingredients only; reuse existing library helpers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ExactFunctorCouple",
+  "date": "2026-10-15",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-exact-functor-couple",
+   "place": "remaining limiting-cycle and explicit large-page parts of proof steps 4 and 6",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactFunctorHalfPlane",
+  "file": "lean/Sheaf/CategoryTheory/ExactFunctorHalfPlane.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.exactFunctor_halfPlane",
+  "statement": "theorem exactFunctor_halfPlane\n    {C : Type u₁} [Category.{v₁} C] [Abelian C]\n    {B : Type u₂} [Category.{v₂} B] [Abelian B]\n    (Φ : C ⥤ B) [Φ.Additive] [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ]\n    (X : BigradedExactCouple C 0)\n    (Y : BigradedExactCouple B 0)\n    (hD : ∀ p q : ℤ, Φ.obj (X.D p q) = Y.D p q)\n    (hE : ∀ p q : ℤ, Φ.obj (X.E p q) = Y.E p q)\n    (δ : ∀ (r : ℕ) (p q : ℤ),\n      Φ.obj ((X.pageCouple r).D p q) ≅ (Y.pageCouple r).D p q)\n    (φ : ∀ (r : ℕ) (p q : ℤ),\n      Φ.obj ((X.pageCouple r).E p q) ≅ (Y.pageCouple r).E p q)\n    (iX : ∀ (r : ℕ) (p q : ℤ), (X.pageCouple r).D p q ⟶ X.D p q)\n    (iY : ∀ (r : ℕ) (p q : ℤ), (Y.pageCouple r).D p q ⟶ Y.D p q)\n    (H0 : ∀ p q : ℤ, δ 0 p q = eqToIso (hD p q) ∧ φ 0 p q = eqToIso (hE p q))\n    (H1 : ∀ p q : ℤ, iX 0 p q = 𝟙 _ ∧ iY 0 p q = 𝟙 _)\n    (H2 : ∀ (r : ℕ) (p q : ℤ),\n      iX (r + 1) p q = (X.pageCouple r).derivedDInclusion p q ≫ iX r p q ∧\n      iY (r + 1) p q = (Y.pageCouple r).derivedDInclusion p q ≫ iY r p q)\n    (H3 : ∀ (r : ℕ) (p q : ℤ), Mono (iX r p q) ∧ Mono (iY r p q) ∧\n      (δ r p q).hom ≫ iY r p q = Φ.map (iX r p q) ≫ eqToHom (hD p q))\n    (H6 : ∀ (r : ℕ) (p q : ℤ),\n      Φ.map ((X.pageCouple r).g p q) ≫ (φ r (p + r) (q - r)).hom =\n        (δ r p q).hom ≫ (Y.pageCouple r).g p q)\n    (H8 : ∀ (r : ℕ) (p q : ℤ),\n      ∃ k : Φ.obj (kernel ((X.pageCouple r).d p q)) ⟶\n        kernel ((Y.pageCouple r).d p q),\n      IsIso k ∧\n      k ≫ kernel.ι ((Y.pageCouple r).d p q) =\n        Φ.map (kernel.ι ((X.pageCouple r).d p q)) ≫ (φ r p q).hom ∧\n      Φ.map ((X.pageCouple r).derivedEProjection p q) ≫ (φ (r + 1) p q).hom =\n        k ≫ (Y.pageCouple r).derivedEProjection p q)\n    (a : ℤ)\n    (hDX : ∀ p q : ℤ, q < a → IsZero (X.D p q))\n    (hEX : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q))\n    (hDY : ∀ p q : ℤ, q < a → IsZero (Y.D p q))\n    (hEY : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (Y.E p q))\n    (LX : LimitSubobjects X) (LY : LimitSubobjects Y)\n    (AX : ∀ n : ℤ, AlphaColimit X n) (AY : ∀ n : ℤ, AlphaColimit Y n)\n    (hAX : ∀ n : ℤ, (AX n).obj = X.D 0 n)\n    (hAY : ∀ n : ℤ, (AY n).obj = Y.D 0 n)\n    (hAX0 : ∀ n : ℤ, (AX n).ι 0 ≫ eqToHom (hAX n) =\n      eqToHom (by congr 1; omega))\n    (hAY0 : ∀ n : ℤ, (AY n).ι 0 ≫ eqToHom (hAY n) =\n      eqToHom (by congr 1; omega))\n    (hconvX : X.ConvergesTo LX AX) (hconvY : Y.ConvergesTo LY AY)\n    (eA : ∀ n : ℤ, Φ.obj (AX n).obj ≅ (AY n).obj)\n    (τ : ∀ n p : ℤ,\n        Φ.obj ((X.imageFiltration n (AX n)).step p : C) ≅\n          ((Y.imageFiltration n (AY n)).step p : B))\n    (κ : ∀ n p : ℤ,\n        Φ.obj ((X.imageFiltration n (AX n)).gradedPiece p) ≅\n          (Y.imageFiltration n (AY n)).gradedPiece p)\n    (hA : ∀ n p : ℤ, Φ.map ((AX n).ι p) ≫ (eA n).hom =\n        eqToHom (hD p (n - p)) ≫ (AY n).ι p)\n    (hτ : ∀ n p : ℤ,\n        (τ n p).hom ≫ ((Y.imageFiltration n (AY n)).step p).arrow =\n          Φ.map (((X.imageFiltration n (AX n)).step p).arrow) ≫ (eA n).hom)\n    (hκ : ∀ n p : ℤ,\n        Φ.map (cokernel.π (Subobject.ofLE\n          ((X.imageFiltration n (AX n)).step (p + 1))\n          ((X.imageFiltration n (AX n)).step p)\n          ((X.imageFiltration n (AX n)).antitone_step (by omega)))) ≫ (κ n p).hom =\n        (τ n p).hom ≫ cokernel.π (Subobject.ofLE\n          ((Y.imageFiltration n (AY n)).step (p + 1))\n          ((Y.imageFiltration n (AY n)).step p)\n          ((Y.imageFiltration n (AY n)).antitone_step (by omega))))\n    :\n      (∃ φInfinity : ∀ p q : ℤ, Φ.obj (X.pageInfinity LX p q) ≅ Y.pageInfinity LY p q,\n        (∀ p q : ℤ, Φ.map (X.toPageInfinity LX p q) ≫ (φInfinity p q).hom =\n          eqToHom (hD p q) ≫ Y.toPageInfinity LY p q) ∧\n        (∀ (r : ℕ) (p q : ℤ), (r : ℤ) + 2 > max (q - a + 1) p →\n          ∃ hZX : X.cycleBoundaryTower.Z r p q = LX.Z p q,\n          ∃ hZY : Y.cycleBoundaryTower.Z r p q = LY.Z p q,\n          ∃ eX : (X.pageCouple r).E p q ≅ X.pageInfinity LX p q,\n          ∃ eY : (Y.pageCouple r).E p q ≅ Y.pageInfinity LY p q,\n          X.cycleBoundaryTower.projection r p q ≫ eX.hom =\n            eqToHom (congrArg (fun S : Subobject (X.E p q) ↦ (S : C)) hZX) ≫\n              cokernel.π (Subobject.ofLE (LX.B p q) (LX.Z p q)\n                (limitBoundary_le_cycle X LX p q)) ∧\n          Y.cycleBoundaryTower.projection r p q ≫ eY.hom =\n            eqToHom (congrArg (fun S : Subobject (Y.E p q) ↦ (S : B)) hZY) ≫\n              cokernel.π (Subobject.ofLE (LY.B p q) (LY.Z p q)\n                (limitBoundary_le_cycle Y LY p q)) ∧\n          Φ.map eX.hom ≫ (φInfinity p q).hom = (φ r p q).hom ≫ eY.hom) ∧\n        ∀ p q : ℤ,\n          ∃ ξX : X.pageInfinity LX p q ≅\n            (X.imageFiltration (p + q) (AX (p + q))).gradedPiece p,\n          ∃ ξY : Y.pageInfinity LY p q ≅\n            (Y.imageFiltration (p + q) (AY (p + q))).gradedPiece p,\n          X.toPageInfinity LX p q ≫ ξX.hom = X.toGradedPiece AX p q ∧\n          Y.toPageInfinity LY p q ≫ ξY.hom = Y.toGradedPiece AY p q ∧\n          Φ.map ξX.hom ≫ (κ (p + q) p).hom = (φInfinity p q).hom ≫ ξY.hom) ∧\n      (∀ (r : ℕ) (p q : ℤ),\n        (r : ℤ) + 2 ≥ max (p + 3) (q - a + 2) →\n        ∃ lambdaX : (AX (p + q)).obj ≅ X.D (p - r) (q + r),\n        ∃ lambdaY : (AY (p + q)).obj ≅ Y.D (p - r) (q + r),\n        ∃ tX : ((X.imageFiltration (p + q) (AX (p + q))).step p : C) ≅\n          (X.pageCouple r).D (p - r) (q + r),\n        ∃ tY : ((Y.imageFiltration (p + q) (AY (p + q))).step p : B) ≅\n          (Y.pageCouple r).D (p - r) (q + r),\n        ∃ ψX : (X.imageFiltration (p + q) (AX (p + q))).gradedPiece p ≅\n          (X.pageCouple r).E p q,\n        ∃ ψY : (Y.imageFiltration (p + q) (AY (p + q))).gradedPiece p ≅\n          (Y.pageCouple r).E p q,\n        lambdaX.inv = eqToHom (by congr 1; omega) ≫ (AX (p + q)).ι (p - r) ∧\n        lambdaY.inv = eqToHom (by congr 1; omega) ≫ (AY (p + q)).ι (p - r) ∧\n        tX.hom ≫ iX r (p - r) (q + r) =\n          ((X.imageFiltration (p + q) (AX (p + q))).step p).arrow ≫ lambdaX.hom ∧\n        tY.hom ≫ iY r (p - r) (q + r) =\n          ((Y.imageFiltration (p + q) (AY (p + q))).step p).arrow ≫ lambdaY.hom ∧\n        cokernel.π (Subobject.ofLE\n          ((X.imageFiltration (p + q) (AX (p + q))).step (p + 1))\n          ((X.imageFiltration (p + q) (AX (p + q))).step p)\n          ((X.imageFiltration (p + q) (AX (p + q))).antitone_step (by omega))) ≫\n          ψX.hom = tX.hom ≫ (X.pageCouple r).g (p - r) (q + r) ≫\n            eqToHom (by congr 1 <;> omega) ∧\n        cokernel.π (Subobject.ofLE\n          ((Y.imageFiltration (p + q) (AY (p + q))).step (p + 1))\n          ((Y.imageFiltration (p + q) (AY (p + q))).step p)\n          ((Y.imageFiltration (p + q) (AY (p + q))).antitone_step (by omega))) ≫\n          ψY.hom = tY.hom ≫ (Y.pageCouple r).g (p - r) (q + r) ≫\n            eqToHom (by congr 1 <;> omega) ∧\n        Φ.map ψX.hom ≫ (φ r p q).hom = (κ (p + q) p).hom ≫ ψY.hom)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-c1a69",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T161928-L-300725",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-c1a69",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T161928-L-300725",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile cleanly; target signature, DAG nodes, proof, imports, and axioms match the packet. The sole downstream importer has identical pre-existing failures against the published baseline."
+ }
+}
