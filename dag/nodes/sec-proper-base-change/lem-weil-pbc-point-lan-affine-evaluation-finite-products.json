@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-point-lan-affine-evaluation-finite-products",
+ "kind": "statement",
+ "title": "Finite coproduct product cone for point Kan extensions",
+ "statement": "Use the universes of [def-weil-size-convention]. Let X be a scheme [def-pc-scheme] with small pro-etale site [def-weil-pbc-proetale-site]. Let a_X be the relative profinite test-object functor of [lem-weil-pbc-profinite-test-object-functor]. Let C be any category and F a C-valued sheaf on profinite spaces for finite jointly surjective covers. Let P be a presheaf on X.ProEt, with a unit eta from F to a_X.op followed by P, exhibiting P as a pointwise left Kan extension. For every finite family (U_i) of affine objects, assume that for every epimorphism A → B of sheaves of sets on X.ProEt the induced map A(U_i) → B(U_i) is surjective. Then there exists a cofan c of the U_i which is a colimit in X.ProEt, and the cone with point P(c.pt) and legs P((c.inj i).op) is a product cone in C. This includes the empty family.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.13(1), proof, component-factorization and sheaf argument; finite-coproduct consequence in RefactorInstruction Section 4, Lemma point-eval"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-profinite-test-object-functor"
+ ],
+ "proof": [
+  {
+   "text": "Construct W as the scheme coproduct of the U_i, with structure morphism Sigma.desc of their structure morphisms. Weakly etale is Zariski local at the source (Mathlib IsZariskiLocalAtSource.sigmaDesc), so W is an object of X.ProEt. The scheme coproduct universal property gives a colimit cofan c in X.ProEt.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By [lem-weil-pbc-proetale-point-components-maps], write T_i for the profinite component space of U_i and b_i for the natural equivalence between maps U_i → a_X(S) and maps T_i → S. Form their finite coproduct T in Profinite, with inclusions j_i. The two coproduct universal properties give a natural equivalence b_W(S) between maps W → a_X(S) and maps T → S, characterized by j_i ≫ b_W(S)(f) = b_i(S)(c.inj i ≫ f).",
+   "uses": [
+    "lem-weil-pbc-proetale-point-components-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For V = U_i and V = W, let q_V be the inverse image of the identity under b_V(T_V). Naturality and injectivity of b_V say that every f : V → a_X(S) uniquely equals q_V ≫ a_X.map(b_V(S)(f)). This makes (T_V,q_V) terminal in CostructuredArrow a_X.op (op V). The pointwise Kan cocone has an invertible leg there (Mathlib IsColimit.isIso_ι_app_of_isTerminal). Its inverse gives e_V : P(V) ≅ F(T_V), normalized by eta_S ≫ P(f.op) ≫ e_V.hom = F(b_V(S)(f).op). Precomposing with all Kan cocone legs at W and using the restriction identity of the preceding step proves P((c.inj i).op) ≫ e_i.hom = e_W.hom ≫ F(j_i.op).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A coherent sheaf on Profinite preserves finite products on the opposite (Mathlib Presheaf.instPreservesFiniteProductsOppositeVal). Apply isLimitFanMkObjOfIsLimit to the opposite of the coproduct cofan of the T_i. The e_V and their compatibility from the preceding step identify this limit with the desired restriction cone. For an empty family the coproduct T is initial and its image under F is terminal, so the same argument proves the empty case.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-proetale-point-components-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.13(1), proof, component-factorization and sheaf argument; finite-coproduct consequence in RefactorInstruction Section 4, Lemma point-eval",
+  "note": "E2 second reader removed the circular citation of the parent theorem and wrote the direct coproduct-representability and terminal-index argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a sheaf on a coherent extensive site sends disjoint finite coproducts to products",
+   "date": "2026-10-16",
+   "results": "Presheaf.instPreservesFiniteProductsOppositeVal and isSheaf_iff_preservesFiniteProducts: provide the profinite sheaf product step, but not the Kan or scheme-coproduct comparison.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTerminal\", \"CostructuredArrow\"",
+   "date": "2026-10-16",
+   "results": "0 hits",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_ι_app_of_isTerminal|isLimitFanMkObjOfIsLimit|instPreservesFiniteProductsOppositeVal",
+   "date": "2026-10-16",
+   "results": "IsColimit.isIso_ι_app_of_isTerminal and isLimitFanMkObjOfIsLimit supply generic terminal-colimit and product tools; neither states the remaining scheme point-Kan comparison.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a pointwise left Kan extension of a sheaf on profinite spaces sends finite coproducts of represented affine objects to products",
+   "date": "2026-10-16",
+   "results": "Service returned Internal Server Error; no usable search result.",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointLanAffineEvaluation",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "RefactorInstruction Section 4, Lemma point-eval, finite coproduct clause, as split in lem-weil-pbc-point-lan-affine-evaluation step 3",
+   "via": [
+    "lem-weil-pbc-point-lan-affine-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointLanFiniteProducts",
+  "file": "lean/Sheaf/Paper/PointLanFiniteProducts.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.point_lan_finite_products",
+  "statement": "theorem point_lan_finite_products (X : Scheme.{u}) (C : Type w) [Category.{v} C]\n    (F : Sheaf (coherentTopology Profinite.{u}) C) (P : X.ProEtᵒᵖ ⥤ C)\n    (η : F.obj ⟶ (profiniteToProEtOf X).op ⋙ P)\n    (hP : (Functor.LeftExtension.mk P η).IsPointwiseLeftKanExtension)\n    (I : Type u) [Finite I] (U : I → X.ProEt)\n    (ha : ∀ i, IsAffine (U i).left)\n    (hw : ∀ i,\n      ∀ (A B : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) (f : A ⟶ B),\n        Epi f → Function.Surjective (f.hom.app (op (U i)))) :\n    ∃ c : Cofan U, Nonempty (IsColimit c) ∧\n      Nonempty (IsLimit (Fan.mk (P.obj (op c.pt)) (fun i ↦ P.map (c.inj i).op)))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T182202-L-785108",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T182202-L-785108",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

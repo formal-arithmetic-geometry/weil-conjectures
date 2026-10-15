@@ -54,8 +54,11 @@
    }
   },
   {
-   "text": "For a finite family of weakly contractible affine objects, $\\pi_0(\\coprod_iU_i)$ is the finite coproduct of the $\\pi_0(|U_i|)$, including the empty family. A sheaf on profinite sets sends this finite jointly-surjective coproduct covering to the product diagram, so the identifications of step 2 give $P_F(\\coprod_iU_i)\\cong\\prod_iP_F(U_i)$; the same calculation preserves addition and multiplication. For a map $k:W\\to U$, write $t=\\pi_0(k)$. A representative $(S,g:T_U\\to S,x\\in F(S))$ restricts to $(S,g\\circ t,x)$; its image is $F(g\\circ t)x=F(t)F(g)x$. For a sheaf morphism $\\alpha:F\\to G$, the equality $\\alpha_TF(g)=G(g)\\alpha_S$ proves naturality in $F$. Every $F(g)$ is an algebra homomorphism when applicable, and the terminal-object colimit is computed in the indicated algebra category; hence the isomorphism preserves operations.",
-   "uses": [],
+   "text": "Use [lem-weil-pbc-point-lan-affine-evaluation-finite-products] for the finite coproduct restriction cone. For the evaluation isomorphism, choose the inverse of the Kan cocone leg at the terminal object constructed in step 2. The cocone naturality equation gives its normalization on every leg. To prove simultaneous naturality in the affine object and the coefficient sheaf, use pointwise Kan cocone hom_ext, the unit compatibility, and the two naturalities from [lem-weil-pbc-proetale-point-components-maps]. Functoriality and naturality of the coefficient morphism identify the resulting composites. This argument works in any coefficient category; specialize to types, abelian groups and commutative rings, so all maps preserve the corresponding operations.",
+   "uses": [
+    "lem-weil-pbc-point-lan-affine-evaluation-finite-products",
+    "lem-weil-pbc-proetale-point-components-maps"
+   ],
    "elementary": true,
    "source": {
     "document": "/home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex",
@@ -64,12 +67,14 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proetale-point-components-maps"
+  "lem-weil-pbc-proetale-point-components-maps",
+  "lem-weil-pbc-point-lan-affine-evaluation-finite-products"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 4.2.13(1) and inverse-image computation; exact master RefactorInstruction.tex Section 4, label lem:point-eval."
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf; /home/ubuntu/weil-newtargets-master/WeilConjectures/RefactorInstruction.tex",
+  "place": "Lemma 4.2.13(1), proof, first two sentences (factorization through connected components); RefactorInstruction.tex label lem:point-eval, proof, first paragraph and inverse-image site computation.",
+  "note": "Stage 3 E2: component equivalence, terminal Kan-index calculation, normalized evaluation, and simultaneous naturality are proved in Lean. The finite coproduct clause is the one remaining named intermediate theorem."
  },
  "mathlib_searches": [
   {
@@ -259,5 +264,15 @@
   "group": "NM",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, dependencies, exact framework declarations, sources, universes, edge cases, docstrings, report sections, and verbatim signature. Server-only compilation passed without diagnostics in 1.6 seconds. No delivery errors found; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T182202-L-785108",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
