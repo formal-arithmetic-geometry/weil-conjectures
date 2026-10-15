@@ -16,50 +16,36 @@
  },
  "proof": [
   {
-   "text": "Represent the bounded-below derived F-object L by a cochain complex C strictly zero below an integer a, using DerivedCategory.exists_iso_Q_obj_of_isGE. For each index i, take termwise extension F -> H(i) followed by restriction H(i) -> E. The inclusion H(i) -> H(j), tensor the identity of C, is E-linear and commutes with differentials. The coefficient maps compose, so these maps define a genuine functor N. Use the same construction with Omega as the cocone vertex.",
+   "text": "Use DerivedCategory.exists_iso_Q_obj_of_isGE to choose a representative C strictly zero below a, with an isomorphism L ≅ Q(C).",
    "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "def-weil-pbc-condensed-e-module-category"
+    "def-sbc-standard-tstructure-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
-   }
+   "elementary": false
   },
   {
-   "text": "The source theorem isColimitPadicAlgClRingObjCocone gives the coefficient colimit in abelian pro-etale sheaves. Finality of H preserves its universal property. Tensor in either variable preserves colimits; expressing balanced tensor as a coequalizer commutes that colimit with the two action maps. The forgetful functor from internal E-module objects creates these colimits. Therefore the tensor cocone is a colimit degreewise, hence in complexes. Every term below a vanishes because both coefficient functors are additive.",
+   "text": "Apply the termwise coefficient complex model construction to C. Its diagram objects are exactly termwise scalar extension F -> H(i) followed by restriction to E. Additivity sends zero terms to zero, giving the common lower bound a.",
    "uses": [
-    "def-weil-pbc-condensed-e-module-category"
+    "new-weil-pbc-condensed-coefficient-complex-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
-   }
+   "elementary": false
   },
   {
-   "text": "Exactness identifies the total derived tensor functors with termwise tensor, and exact restriction is already termwise on the derived category. Together with C representing L this supplies the vertex and stage isomorphisms. The tensor/restriction units and multiplication maps commute with coefficient inclusions: on complexes both sides send m to 1 tensor m and then use the same inclusion. Localize this equality of natural transformations. The defining factorization equations of the exact-derived comparison and derived natural-isomorphism constructors identify its comparisons with the fixed comparison of the helper node, proving the stated equality for every K and g. This is a comparison of the actual cocone maps, not an abstract bijection of Hom sets.",
+   "text": "Postcompose the comparison isomorphisms with the images of Q(C) ≅ L under scalar extension and restriction. Prove the comparison expression natural in both its source and its target using finite-adjunction naturality, tensor-comparison naturality, and algebraic-closure-adjunction naturality. Apply this to the canonical cocone-arrow equation from the model, precomposing by each g and transporting the target from Q(C) to L.",
    "uses": [
-    "def-weil-pbc-finite-derived-tensor-comparison",
-    "def-weil-pbc-condensed-e-module-category"
+    "def-weil-pbc-finite-derived-tensor-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sbc-standard-tstructure-derived-category",
-  "def-weil-pbc-condensed-e-module-category",
+  "new-weil-pbc-condensed-coefficient-complex-model",
   "def-weil-pbc-finite-derived-tensor-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-  "place": "B2 2026-10-15: coefficient algebra step of the archived Hom-surjectivity argument; bounded constructible devissage is proved in the parent"
+  "place": "B2 second reading: prove the bounded representative, common bound, and derived-isomorphism transport; retain only the termwise coefficient construction as an open component."
  },
  "mathlib_searches": [
   {
@@ -135,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "X-c6b94",
+  "reviewer": "COMPILER",
   "group": "B2",
   "result": "pass",
-  "landing": "20261015T194211-L-1174513",
+  "landing": "20261015T220938-L-2554367",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean statements and proofs with DAG nodes and sources; verified unchanged tensor data by rfl, allowed axioms, and clean compilation of all three delivered modules, all three direct importers, and CondensedFlatCoefficientCalculus."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

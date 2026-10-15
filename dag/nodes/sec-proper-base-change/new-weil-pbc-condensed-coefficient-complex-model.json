@@ -1,0 +1,128 @@
+{
+ "id": "new-weil-pbc-condensed-coefficient-complex-model",
+ "kind": "statement",
+ "title": "Termwise coefficient complex diagram and colimit comparison",
+ "statement": "Fix a scheme X in universe u, a prime ℓ, finite intermediate fields E and F of the algebraic closure of Q_ℓ [def-weil-finite-subextension-directed-set], and a cochain complex C of internal F_X-modules [def-weil-pbc-condensed-e-module-category]. Let I be a small filtered category in universe u+1, H : I → FiniteIntermediateField(ℓ) a final functor, and he : E ≤ H(i), hf : F ≤ H(i) for every i. There exist a diagram N of complexes of E_X-modules and a colimit cocone c whose object N(i) is exactly the termwise extension of C from F_X to H(i)_X followed by restriction to E_X. There are isomorphisms Q(c.pt) ≅ U_{Ω,E}T_{F,Ω}Q(C) and Q(N(i)) ≅ U_{H(i),E}T_{F,H(i)}Q(C). For each i, the fixed finite adjunction transposes the stage comparison Q(N(i)) → U_{H(i),E}T_{F,H(i)}Q(C). Extending this transpose to Ω, conjugating by the fixed tensor comparisons, and transposing under the fixed Ω-adjunction of [def-weil-pbc-finite-derived-tensor-comparison] gives exactly Q(c.ι_i) followed by the vertex comparison. This equation is only for the canonical cocone arrow, with source Q(N(i)); arbitrary source objects and precomposition morphisms are handled by the parent proof. Here Ω uses finite-subfield-valued functions. C need not be bounded in either direction, and this statement asserts no bound or derived-category representative choice.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-finite-derived-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Extend C termwise from F to H(i), restrict to E, and use coefficient inclusions tensor the identity to define the transition maps. They are E-linear; inclusion identities and composition give the diagram. Use extension to Ω, restricted to E, as the cocone vertex.",
+   "uses": [
+    "def-weil-pbc-finite-derived-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient ring cocone is a colimit after final whiskering by H and pullback to X. Express balanced tensor as the coequalizer of its action maps; ordinary tensor preserves colimits, and colimits commute. Underlying module functors create colimits and complex colimits are degreewise, proving the cocone universal property.",
+   "uses": [
+    "def-weil-pbc-finite-derived-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness identifies localization of termwise scalar extension and restriction with the fixed derived functors, giving the comparison isomorphisms. The underived unit and multiplication formulas commute with coefficient inclusion. Localize their equality and apply the factorization equations of the derived comparison constructors, giving the equation for the canonical localized cocone arrow. No boundedness is used in these degreewise constructions.",
+   "uses": [
+    "def-weil-pbc-finite-derived-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-derived-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "Coefficient algebra part of the original presentation proof, separated from the bounded representative and isomorphism-transport arguments by B2 second reading."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded below derived category object is represented by a complex that is zero below a fixed degree",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal module objects tensor extension restricted coefficient rings diagram filtered colimit complexes",
+   "results": "ModuleCat.FilteredColimits.colimitCocone, ModuleCat.FilteredColimits.colimit, PresheafOfModules.Monoidal.tensorObj, and ordinary ModuleCat scalar adjunction formulas; no theorem about internal coefficient complex diagrams.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right_symm",
+   "results": "Exact generic naturality formula available and used in the presentation proof; does not construct coefficient complexes or their colimit.",
+   "date": "2026-10-16",
+   "verdict": "supporting lemma used"
+  },
+  {
+   "tool": "grep",
+   "query": "termwise.*(colimit|coefficient)|coefficient.*colimit|extendScalars.*comap.*mapHomologicalComplex; source Compatibility.lean lines 1005-1059 and 1230-1315; Mathlib DerivedCategory/TStructure.lean",
+   "results": "Existing coefficient ring colimit and scalar exactness APIs; no internal-module coefficient complex presentation. exists_iso_Q_obj_of_isGE supplies the representative and is used directly, not split off.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedCoefficientComplexPresentation",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Termwise coefficient algebra part of the presentation lemma",
+   "via": [
+    "lem-weil-pbc-condensed-coefficient-complex-presentation",
+    "prop-weil-pbc-qbar-condensed-two-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedCoefficientComplexModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedCoefficientComplexModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_condensed_coefficient_complex_model",
+  "statement": "theorem exists_condensed_coefficient_complex_model\n    (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]\n    (E F : FiniteIntermediateField ℓ)\n    (C : CochainComplex\n      (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ)\n    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]\n    (H : I ⥤ FiniteIntermediateField ℓ) [H.Final]\n    (he : ∀ i, E ≤ H.obj i) (hf : ∀ i, F ≤ H.obj i) :\n    ∃ N : I ⥤ CochainComplex\n        (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ℤ,\n      ∃ c : Cocone N, Nonempty (IsColimit c) ∧\n      (∀ i, N.obj i =\n        (((Mod.extendScalars (padicSubfieldRingObjMap X ℓ (hf i))) ⋙\n          Mod.comap (padicSubfieldRingObjMap X ℓ (he i))).mapHomologicalComplex\n            (.up ℤ)).obj C) ∧\n      ∃ eΩ : DerivedCategory.Q.obj c.pt ≅\n          (finiteCoefficientDerivedFromAlgCl X ℓ E).obj\n            ((finiteCoefficientDerivedToAlgCl X ℓ F).obj (DerivedCategory.Q.obj C)),\n        ∃ ei : ∀ i : I, DerivedCategory.Q.obj (N.obj i) ≅\n            (finiteCoefficientDerivedRestriction X ℓ (he i)).obj\n              ((finiteCoefficientDerivedExtension X ℓ (hf i)).obj (DerivedCategory.Q.obj C)),\n          ∀ i : I,\n            finiteCoefficientDerivedAlgClHomEquiv X ℓ E\n              (DerivedCategory.Q.obj (N.obj i)) _\n              ((finiteCoefficientDerivedTensorCompIso X ℓ (he i)).inv.app\n                  (DerivedCategory.Q.obj (N.obj i)) ≫\n                (finiteCoefficientDerivedToAlgCl X ℓ (H.obj i)).map\n                    ((finiteCoefficientDerivedHomEquiv X ℓ (he i)\n                        (DerivedCategory.Q.obj (N.obj i)) _).symm (ei i).hom) ≫\n                  (finiteCoefficientDerivedTensorCompIso X ℓ (hf i)).hom.app\n                    (DerivedCategory.Q.obj C)) =\n              DerivedCategory.Q.map (c.ι.app i) ≫ eΩ.hom",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261015T220938-L-2554367",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261015T220938-L-2554367",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
