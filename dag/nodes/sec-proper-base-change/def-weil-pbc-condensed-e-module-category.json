@@ -31,9 +31,24 @@
   "lem-weil-pbc-profinite-point-pullback",
   "def-weil-size-convention"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "For the universe-general profinite coefficient presheaf, forget the ring structure and identify the underlying presheaf by the componentwise identity with ContinuousMap.yonedaPresheaf Profinite.toTopCat T followed by uliftFunctor. Remove ULift using Presieve.isSheaf_comp_uliftFunctor_iff. Apply Mathlib’s Presheaf.isSheaf_iff_preservesFiniteProducts_and_equalizerCondition and equalizerCondition_yonedaPresheaf (Mathlib/Condensed/TopComparison.lean:65): finite coproduct preservation gives finite product preservation, and Profinite.effectiveEpi_tfae identifies every effective epimorphism with a surjection. Such a continuous map from a compact space to a Hausdorff space is a quotient map by Topology.IsQuotientMap.of_surjective_continuous. This proves Profinite.isSheaf_continuousCoefficientRingPresheaf with T : Type u.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the universe-general scheme coefficient presheaf, forget the ring structure and identify the underlying presheaf with the restriction of AlgebraicGeometry.continuousMapPresheaf T to the small pro-etale site, followed by uliftFunctor. Functor.op_comp_isSheaf_of_isSheaf restricts sheaves along Scheme.ProEt.forget X composed with Over.forget X. Remove ULift and apply AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheaf (Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:68), whose coefficient universe is arbitrary, then restrict from fpqc to pro-etale using Scheme.proetaleTopology_le_fpqcTopology. This proves AlgebraicGeometry.ProEtale.isSheaf_continuousCoefficientRingPresheaf; the displayed coefficient sheaves and ring object then use these sheaf proofs in their existing definitions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "Hemo--Richarz--Scholbach, Example 3.1; Mathlib/Condensed/TopComparison.lean; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+  "place": "B2 stage-3 well-definedness proofs for the universe-general continuous coefficient presheaves. Generalizes the compiled source-library proofs in CategoryTheory/RingObjects/Condensed/ContinuousMap.lean:117 and CategoryTheory/RingObjects/ContinuousMap.lean:93 without changing the sectionwise constructions or the existing internal-module and derived framework."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -493,7 +508,7 @@
   "by": "NV",
   "date": "2026-10-15",
   "existing": false,
-  "note": "§1(B) universe-interface repair: the recorded Profinite.continuousMapRingObj and scheme continuousMapRingSheaf require T : Type 0, excluding coefficients in the common universe bound. This module supplies the same explicit ULift C(S,T) and ULift C(V,T), pointwise operations and precomposition for T : Type u. The condensed ring is fed to the existing condensedRingObj, internal module, finite-presentation, constructibility, derived-operation, adjunction and base-change definitions, publicly re-exported without replacement. No site universes are equated and no smallness hypothesis is added."
+  "note": "§1(B) universe-interface repair: the recorded Profinite.continuousMapRingObj and scheme continuousMapRingSheaf require T : Type 0, excluding coefficients in the common universe bound. This module supplies the same explicit ULift C(S,T) and ULift C(V,T), pointwise operations and precomposition for T : Type u. The condensed ring is fed to the existing condensedRingObj, internal module, finite-presentation, constructibility, derived-operation, adjunction and base-change definitions, reused without replacement by downstream modules. The stage-3 second reader removed the unused MorphismDefs re-export; the sole direct user imports that framework explicitly. No site universes are equated and no smallness hypothesis is added."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
@@ -502,5 +517,15 @@
   "group": "NV",
   "result": "pass",
   "note": "Wrote review.md. Verified immutable files, all statement dependencies, canonical comparison, universe repair, edge cases, docstrings, and records. Both modules compile cleanly through scompile.py. No fixes required."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-201a6",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261015T154151-L-158405",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both delivered sheaf proofs with unchanged signatures, sectionwise constructions, DAG proof records and Mathlib descent lemmas; compiled the delivery and all six required importers and checked all nine declarations' axioms."
  }
 }
