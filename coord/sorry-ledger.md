@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **842**, closure **5**, holes in definitions **1**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **840**, closure **4**, holes in definitions **1**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -17,24 +17,24 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 616 | 5 |
+| Sheaf | 614 | 4 |
 | WeilConjectures | 226 | 0 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2237 | 225 | 2012 | 75 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2193 | 223 | 1970 | 61 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1958 | 5 | 1953 | 28 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2217 | 224 | 1993 | 96 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2171 | 222 | 1949 | 84 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1936 | 4 | 1932 | 50 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3379 |
+| proved | 3380 |
 | decomposed | 48 |
-| moved | 3918 |
+| moved | 3919 |
 | pruned | 119 |
-| other | 510 |
+| other | 516 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -74,7 +74,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | J2 | 102 | 104 | 70 | 34 | 51/102 (50.0%) |
 | J3 | 117 | 123 | 77 | 46 | 54/117 (46.2%) |
 | J4 | 59 | 51 | 39 | 12 | 26/59 (44.1%) |
-| K1 | 117 | 130 | 87 | 43 | 59/117 (50.4%) |
+| K1 | 118 | 131 | 88 | 43 | 60/118 (50.8%) |
 | K2 | 119 | 117 | 83 | 34 | 64/119 (53.8%) |
 | K3 | 106 | 106 | 75 | 31 | 55/106 (51.9%) |
 | K4 | 60 | 44 | 35 | 9 | 24/60 (40.0%) |
@@ -104,7 +104,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | S4 | 45 | 43 | 35 | 8 | 24/45 (53.3%) |
 | T1 | 108 | 108 | 80 | 28 | 55/108 (50.9%) |
 | T2 | 131 | 153 | 97 | 56 | 64/131 (48.9%) |
-| T3 | 99 | 94 | 77 | 17 | 53/99 (53.5%) |
+| T3 | 100 | 95 | 77 | 18 | 53/100 (53.0%) |
 | T4 | 66 | 58 | 38 | 20 | 24/66 (36.4%) |
 | U1 | 125 | 126 | 92 | 34 | 62/125 (49.6%) |
 | U2 | 135 | 129 | 92 | 37 | 63/135 (46.7%) |
@@ -135,17 +135,16 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Y2 | 108 | 110 | 98 | 12 | 59/108 (54.6%) |
 | Y3 | 103 | 90 | 56 | 34 | 45/103 (43.7%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
-| launcher prover | 43 | 9 | 7 | 2 | 5/43 (11.6%) |
+| launcher prover | 49 | 9 | 7 | 2 | 5/49 (10.2%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
 
 | module | distance | holes | group |
 |---|---:|---:|---|
-| Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality | 16 | 1 | T3 |
 | Sheaf.AlgebraicGeometry.CartesianRawClassChartRepresentative | 17 | 1 | R4 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 37 | 1 | E4 |
 | Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonNaturality | 51 | 1 | H4 |
-| Sheaf.AlgebraicGeometry.QCohTensorResolutionChartHomologyNaturality | 51 | 1 | H4 |
+| Sheaf.AlgebraicGeometry.QCohTensorResolutionChartHomologyNaturality | 51 | 1 | H3 |
 
 Modules pruned since the imports baseline:
 
@@ -177,6 +176,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.Algebra.Homology.SubcategoryRightResolution`
 - `Sheaf.Algebra.Homology.TermwiseTorAcyclicDerivedTensor`
 - `Sheaf.Algebra.Homology.TorIndependentProjectiveComplexTensor`
+- `Sheaf.Algebra.Homology.ZigzagModule`
 - `Sheaf.Algebra.LocallyFreeCharpoly`
 - `Sheaf.Algebra.LocallyFreeCharpolyProdMap`
 - `Sheaf.Algebra.Module.GradedLocalizationExact`
@@ -196,6 +196,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent`
 - `Sheaf.AlgebraicGeometry.AffineTruncationKernelFiniteLocallyFree`
 - `Sheaf.AlgebraicGeometry.AffineTruncationKernelFlat`
+- `Sheaf.AlgebraicGeometry.Ample`
 - `Sheaf.AlgebraicGeometry.AmpleFiniteAffineCover`
 - `Sheaf.AlgebraicGeometry.AmpleFinitePrincipalAffine`
 - `Sheaf.AlgebraicGeometry.AmpleFiniteSetAffine`
@@ -215,6 +216,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.CechH1MapNatural`
 - `Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal`
 - `Sheaf.AlgebraicGeometry.CoherentProjRepresentation`
+- `Sheaf.AlgebraicGeometry.CommAlgebraSheaf`
 - `Sheaf.AlgebraicGeometry.ComponentIntersectionsFinite`
 - `Sheaf.AlgebraicGeometry.ConductorIdealRestriction`
 - `Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection`
@@ -407,6 +409,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.ColimitSiteCechComplex`
 - `Sheaf.CategoryTheory.ColimitSiteSections`
 - `Sheaf.CategoryTheory.ColimitSites`
+- `Sheaf.CategoryTheory.CommAlgebraSheafModule`
 - `Sheaf.CategoryTheory.CoskeletonMatchingTuples`
 - `Sheaf.CategoryTheory.DeltaFunctor`
 - `Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors`
@@ -449,6 +452,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.InjectiveResolutionSESComplexes`
 - `Sheaf.CategoryTheory.InternalModule`
 - `Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact`
+- `Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism`
 - `Sheaf.CategoryTheory.LocalizationHomColimit`
 - `Sheaf.CategoryTheory.MatchingObjectCoskeleton`
 - `Sheaf.CategoryTheory.MittagLefflerExactSequence`
@@ -491,8 +495,10 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.Sites.ZariskiContractedProductPresentation`
 - `Sheaf.CategoryTheory.Sites.ZariskiExtTorsor`
 - `Sheaf.CategoryTheory.Sites.ZariskiTorsorExtensionPushout`
+- `Sheaf.CategoryTheory.SpecialCocontinuousCoverings`
 - `Sheaf.CategoryTheory.SpectralSequenceComparison`
 - `Sheaf.CategoryTheory.SpectralSequencePageInduction`
+- `Sheaf.CategoryTheory.Triangulated.DerivedLimit`
 - `Sheaf.CategoryTheory.TruncatedCoskeletonFiniteLimits`
 - `Sheaf.CategoryTheory.TruncationCoupleExact`
 - `Sheaf.CategoryTheory.TruncationDescends`
