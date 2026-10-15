@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-pur-kummer-coefficient-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change of the Kummer coefficients",
- "statement": "Fix the finite-field datum of [def-pur-conventions], let $k$ be\nalgebraically closed, let $N\\geq1$, and let $A$ be a finite\n$\\mathbf Z/\\ell^N\\mathbf Z$-module which is free of finite rank (for\ninstance $A=A_{E,n}$ with $N=n\\cdot v_\\ell(\\varpi_E)$ under the\nhypothesis $e(E/\\Ql)\\mid n$ of [lem-pur-finite-kummer-level]). For every\nsmooth separated curve $C$ over $k$ and every\ninteger $q\\geq0$, the natural map\n\n$$\nH^q(C_{\\Et},\\mu_{\\ell^N})\\otimes_{\\mathbf Z/\\ell^N}A\n\\longrightarrow\nH^q(C_{\\Et},\\mu_{\\ell^N}\\otimes_{\\mathbf Z/\\ell^N}A)\n$$\n\nis an isomorphism, compatibly with the Kummer boundary maps of the Kummer\nsequence with $A$-coefficients.",
+ "statement": "Fix the finite-field datum of [def-pur-conventions], let $k$ be\nalgebraically closed, let $N\\geq1$, and let $A$ be a finite\n$\\mathbf Z/\\ell^N\\mathbf Z$-module which is free of finite rank (for\ninstance $A=A_{E,n}$ with $N=n\\cdot v_\\ell(\\varpi_E)$ under the\nhypothesis $e(E/\\Ql)\\mid n$ of [lem-pur-finite-kummer-level]). For every\nsmooth separated curve $C$ over $k$ and every\ninteger $q\\geq0$, the natural map\n\n$$\nH^q(C_{\\Et},\\mu_{\\ell^N})\\otimes_{\\mathbf Z/\\ell^N}A\n\\longrightarrow\nH^q(C_{\\Et},\\mu_{\\ell^N}\\otimes_{\\mathbf Z/\\ell^N}A)\n$$\n\nis an isomorphism. Here $A$ denotes the constant sheaf [def-kun-constant-sheaf] when it occurs in a sheaf tensor product [def-pur-sheaf-tensor-product], and cohomology is that of underlying abelian sheaves [def-weil-pbc-etale-cohomology]. More precisely, put $m=\\ell^N$, $R=\\mathbf Z/m\\mathbf Z$, and $F=\\mu_m$, the kernel in [def-sc-kummer-sequence]. The map $\\beta_A^q$ displayed above is characterized by\n$$\n\\beta_A^q(x\\otimes a)=H^q(i_a)(x),\\qquad i_a:F\\longrightarrow F\\otimes_R A,\\quad z\\longmapsto z\\otimes a.\n$$\nCompatibility with Kummer boundaries has the following precise meaning. Write $\\partial^q:H^q(C_{\\Et},\\mathbf G_m)\\to H^{q+1}(C_{\\Et},F)$ for the boundary of the ordinary Kummer sequence. For any finite free abelian group $L$ and any isomorphism $L/mL\\cong A$, take that Kummer sequence tensored over $\\mathbf Z$ with $L$, which is a finite direct sum of the ordinary sequence. Identify its left term $F\\otimes_{\\mathbf Z}L$ with $F\\otimes_R A$. Its cohomology boundary, using $H^q(C_{\\Et},\\mathbf G_m\\otimes_{\\mathbf Z}L)\\cong H^q(C_{\\Et},\\mathbf G_m)\\otimes_{\\mathbf Z}L$, descends to a map\n$$\n\\partial_A^q:H^q(C_{\\Et},\\mathbf G_m)\\otimes_{\\mathbf Z}A\\longrightarrow H^{q+1}(C_{\\Et},F\\otimes_R A).\n$$\nThis map is independent of the lift $L$ and satisfies, for every $u$ and $a$,\n$$\n\\partial_A^q(u\\otimes a)=\\beta_A^{q+1}(\\partial^q(u)\\otimes a).\n$$\nThus coefficient compatibility includes the usual units Kummer class in degree one. It does not require an $R$-module structure on $\\mathbf G_m$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kummer-coefficient-base-change.md",
   "place": "node lem-pur-kummer-coefficient-base-change, order 1925"
@@ -15,32 +15,191 @@
  "stmt_deps": [
   "def-pur-conventions",
   "lem-pur-finite-kummer-level",
-  "def-coefficient-twists-detailed",
-  "def-sbc-smooth-morphisms",
   "def-sc-curves",
-  "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-pbc-etale-cohomology",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-kummer-sequence",
+  "def-kun-constant-sheaf"
  ],
  "proof": [
   {
-   "text": "The sheaf $\\mu_{\\ell^N}$ is a finite locally constant\n$\\mathbf Z/\\ell^N\\mathbf Z$-module sheaf. Since $A$ is free of finite\nrank over $\\mathbf Z/\\ell^N\\mathbf Z$, the coefficient tensor\n$\\mu_{\\ell^N}\\otimes_{\\mathbf Z/\\ell^N}A$ is a finite direct sum of\ncopies of $\\mu_{\\ell^N}$; by [def-weil-pbc-etale-sheaves],\ncohomology and the tensor product commute with finite direct sums, so the\ndisplayed isomorphism is the assembly of the summand isomorphisms. Its compatibility with the Kummer boundary maps is\nthe naturality in the Kummer sequence: the exact sequence\n\n$$\n0\\to\\mu_{\\ell^N}\\otimes A\\to\\mathbf G_m\\otimes A\\to\\mathbf G_m\\otimes A\\to0\n$$\n\nis the tensor of the Kummer sequence with the free module $A$.",
+   "text": "Work throughout on $C_{\\Et}$ in abelian sheaves, retaining the $R$-action on $F$ and $F\\otimes_R A$. By [def-weil-pbc-sites-and-cohomology], this category has enough injectives and its section functor is additive and left exact. An ordinary injective resolution in nonnegative degrees is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so it is also a resolution allowed by the cohomology definition in the statement. Thus the cohomology functors here are precisely the right derived section functors of [def-weil-pbc-sites-and-cohomology]. Apply [lem-weil-pbc-right-derived-universal-delta-functor] to that section functor. Each $H^q$ is therefore an additive functor, and connecting homomorphisms are natural for morphisms of short exact sequences. In particular $H^q(\\sum f_j)=\\sum H^q(f_j)$ and $H^q(\\mathrm{id})=\\mathrm{id}$. Since $m\\,\\mathrm{id}_F=0$, also $m\\,\\mathrm{id}_{H^q(F)}=0$; the same holds for $F\\otimes_R A$. The $R$-actions on their cohomology are induced by the scalar sheaf endomorphisms, so an $R$-linear sheaf map induces an $R$-linear map on cohomology.",
    "uses": [
-    "def-weil-pbc-etale-sheaves"
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B (lemma-higher-derived-functors), (4); Tag 05TE (lemma-right-derived-delta-functor). Online source read; local literature copy absent."
+   }
+  },
+  {
+   "text": "Choose a finite $R$-basis $e_1,\\ldots,e_r$ of $A$, with coordinate functionals $\\lambda_j:A\\to R$; $r=0$ is allowed. Define $i_j:F\\to F\\otimes_R A$ by $z\\mapsto z\\otimes e_j$, and $p_j:F\\otimes_R A\\to F$ by $z\\otimes a\\mapsto\\lambda_j(a)z$. These are sheaf morphisms: the displayed formulas are compatible with restriction and induce maps on the sheafified presheaf tensor of [def-pur-sheaf-tensor-product]. By the locally constant function description of [def-kun-constant-sheaf], sections of $A$ have basis expansions with locally constant $R$-valued coordinates. Bilinearity gives $p_j i_h=\\delta_{jh}\\mathrm{id}_F$ and $\\sum_j i_jp_j=\\mathrm{id}_{F\\otimes_R A}$. These identities hold on pure tensors locally and hence on the sheafification. They give explicit mutually inverse maps $F^{\\oplus r}\\leftrightarrows F\\otimes_R A$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-kun-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), definition of the sheafified tensor; explicit basis calculation supplied here."
+   }
+  },
+  {
+   "text": "For any $a\\in A$ define $i_a(z)=z\\otimes a$. The identities $i_{a+b}=i_a+i_b$ and $i_{ta}=i_a\\circ(t\\,\\mathrm{id}_F)$, together with step 1, show that $(x,a)\\mapsto H^q(i_a)(x)$ is $R$-bilinear: explicitly, $H^q(i_{ta})(x)=H^q(i_a)(t x)=t H^q(i_a)(x)$, and additivity gives the sum rule. Hence it kills the tensor balancing relation and induces the canonical map $\\beta_A^q$. An explicit inverse is\n$$y\\longmapsto\\sum_{j=1}^r H^q(p_j)(y)\\otimes e_j.$$\nOn $x\\otimes a$ the composite is $\\sum_j\\lambda_j(a)x\\otimes e_j=x\\otimes a$, and on $y$ the other composite is $H^q(\\sum_j i_jp_j)(y)=y$. This proves the asserted isomorphism in every degree. Its definition by the maps $i_a$ does not use a basis. For an $R$-linear map $h:A\\to B$, $(\\mathrm{id}_F\\otimes h)i_a=i_{h(a)}$, so the same formula also proves naturality in the coefficient module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kummer-coefficient-base-change.md",
+    "place": "Imported proof, finite-direct-sum argument, made explicit by the two inverse formulas; agent reconstruction, local blueprint file absent."
+   }
+  },
+  {
+   "text": "The integer $m=\\ell^N$ is prime to $\\operatorname{char}k$, by the finite-field datum. The sequence $0\\to F\\to\\mathbf G_m\\xrightarrow{m}\\mathbf G_m\\to0$ is short exact by [lem-sc-kummer-exact]. A lift exists: if $A\\cong R^r$, take $L=\\mathbf Z^r$ with its induced isomorphism $L/mL\\cong A$. Now let $L$ be any finite free abelian lift with a specified isomorphism $L/mL\\cong A$, and write $\\bar l$ for the image of $l$ in $A$. Choose a basis $b_1,\\ldots,b_s$ of $L$ and coordinate maps $b_j^*:L\\to\\mathbf Z$. Write abelian sheaf operations additively in the tensor formulas. For each of the abelian sheaves $G=F,\\mathbf G_m$, define $J_j:G\\to G\\otimes_{\\mathbf Z}L$ by $g\\mapsto g\\otimes b_j$ and $P_j:G\\otimes_{\\mathbf Z}L\\to G$ by $g\\otimes l\\mapsto b_j^*(l)g$, using the tensor definition of step 2. Then $P_jJ_h=\\delta_{jh}\\mathrm{id}_G$ and $\\sum_jJ_jP_j=\\mathrm{id}_{G\\otimes_{\\mathbf Z}L}$ by the basis expansion of $l$. These formulas identify the sequence tensored with $L$ with a finite direct sum of the ordinary Kummer sequence; its kernels are coordinatewise; a morphism out of the last direct sum that vanishes after the preceding map restricts to zero on each summand, because each ordinary last map is an epimorphism, and therefore is zero. Thus the last map is an epimorphism and the sequence is short exact. For $G=\\mathbf G_m$, additivity from step 1 shows that the canonical map\n$$\n\\alpha_L^q:H^q(G)\\otimes_{\\mathbf Z}L\\longrightarrow H^q(G\\otimes_{\\mathbf Z}L),\\qquad\nu\\otimes l\\longmapsto H^q(g\\mapsto g\\otimes l)(u)\n$$\nhas inverse $y\\mapsto\\sum_jH^q(P_j)(y)\\otimes b_j$: the composites are $\\sum_j b_j^*(l)u\\otimes b_j=u\\otimes l$ and $H^q(\\sum_jJ_jP_j)(y)=y$. The left-term identification $F\\otimes_{\\mathbf Z}L\\cong F\\otimes_R A$ sends $z\\otimes l$ to $z\\otimes\\bar l$. Its inverse sends $z\\otimes a$ locally to $z\\otimes l$ for any lift $l$ of $a$; changing $l$ by $ml_0$ changes this by $z\\otimes ml_0=mz\\otimes l_0=0$, and this formula respects the $R$-balancing relation by taking integer representatives of its scalars. For each $l\\in L$, the maps $g\\mapsto g\\otimes l$ on all three terms commute with the inclusion and multiplication by $m$, hence give a morphism from the ordinary Kummer sequence to the lifted sequence. Naturality of connecting maps from [lem-weil-pbc-right-derived-universal-delta-functor], with $\\partial_L^q$ denoting the lifted boundary precomposed with $\\alpha_L^q$ and followed by the left-term identification, gives\n$$\n\\partial_L^q(u\\otimes l)=H^{q+1}(i_{\\bar l})(\\partial^q(u))=\\beta_A^{q+1}(\\partial^q(u)\\otimes\\bar l).\n$$",
+   "uses": [
+    "lem-sc-kummer-exact",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B (lemma-higher-derived-functors), (4), naturality for the Kummer sequence; Kummer exactness supplied by the cited node."
+   }
+  },
+  {
+   "text": "The formula in step 4 vanishes on $u\\otimes ml$. The canonical quotient $(H^q(\\mathbf G_m)\\otimes_{\\mathbf Z}L)/\\langle u\\otimes ml\\rangle$ is $H^q(\\mathbf G_m)\\otimes_{\\mathbf Z}(L/mL)$: the quotient map kills every $u\\otimes ml$, and maps from either quotient are exactly bilinear maps killing $(u,ml)$, by the universal property of the tensor product. Thus $\\partial_L^q$ descends to $\\partial_A^q$. The value on every pure tensor is $H^{q+1}(i_a)(\\partial^q(u))=\\beta_A^{q+1}(\\partial^q(u)\\otimes a)$. This expression depends only on $a$, not on $L$, its basis, or a lift of $a$; pure tensors generate the source, so it proves independence of all choices and the boundary compatibility in every degree. With $q=0$ it carries the ordinary Kummer class of a unit to its coefficient class. The proof also works for $A=0$, for the empty curve, and in degree zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kummer-coefficient-base-change.md",
+    "place": "Imported proof, final naturality sentence, corrected using a free integral lift and the displayed quotient; agent reconstruction."
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sheaves"
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-sheaf-tensor-product",
+  "def-kun-constant-sheaf",
+  "lem-sc-kummer-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kummer-coefficient-base-change.md",
-  "place": "## Proof"
+  "place": "Imported finite-direct-sum proof and unit sk-prop-a1-kummer step 3, reconstructed because the local blueprint and Stacks sources are absent; checked against https://stacks.math.columbia.edu/tag/01FT, /015B, /05TE, /03EK and /03PL. Boundary clause corrected to use free integral lifts. Second reader also read the official raw Stacks .tex sources at labels lemma-higher-derived-functors, lemma-right-derived-delta-functor, section-cohomology-sheaves, section-tensor-product, lemma-kummer-sequence and definition-cohomological-delta-functor; no local source files were created."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kummer|Kummer",
+   "results": "25 hits; Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the full etale Kummer coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sheaf cohomology commutes with tensoring by a finite free constant module, compatibly with Kummer connecting homomorphisms",
+   "results": "8 hits; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Extension.tensorCotangentSpace, Algebra.Extension.tensorH1Cotangent, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.tensorH1CotangentOfIsLocalization",
+   "date": "2026-10-16",
+   "verdict": "no match for the full etale Kummer coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology commutes with tensoring by finite free constant modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Additive, CategoryTheory.Functor.rightDerived",
+   "results": "12 hits; CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.NatTrans.rightDerived; generic right-derived definitions, not the coefficient comparison or Kummer boundary claim",
+   "date": "2026-10-16",
+   "verdict": "no match for the full etale Kummer coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*Additive|rightDerived.*[Aa]dditive|map_add",
+   "results": "5 hits; 14, 65, 110, 164, 207; search command output parses file-only rg lines as file names; hits are rightDerived definitions, not a Kummer comparison; grep subdirectory/path: CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the full etale Kummer coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functors of an additive functor are additive and preserve finite direct sums",
+   "results": "8 hits; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, DerivedCategory.instAdditiveSingleFunctor, CategoryTheory.AdditiveFunctor.ofRightExact, CategoryTheory.NatTrans.rightDerived_comp, DerivedCategory.instAdditiveCochainComplexIntQ",
+   "date": "2026-10-16",
+   "verdict": "no match for the full etale Kummer coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kummer\"",
+   "results": "8 hits; KummerExtension.«termK[_√_]», KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk, KummerDedekind.quotMapEquivQuotQuotMap, KummerDedekind.emultiplicity_factors_map_eq_emultiplicity, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span, KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map, KummerDedekind.quotMapEquivQuotQuotMap_symm_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the full etale Kummer coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*tensor|tensor.*cohomology|kummer|Kummer",
+   "results": "0 hits; ; grep subdirectory/path: CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match for the full etale Kummer coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology|rightDerived|connecting",
+   "results": "19 hits; Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean; grep subdirectory/path: CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match for the full etale Kummer coefficient comparison or its boundary compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.PreservesFiniteBiproducts",
+   "results": "loogle: unknown identifier 'CategoryTheory.PreservesFiniteBiproducts'; query did not perform the intended search",
+   "date": "2026-10-16",
+   "verdict": "invalid query; no absence conclusion; rerun with Functor.Additive"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of abelian sheaves preserves finite biproducts; compatibility of connecting homomorphisms with coefficient homomorphisms",
+   "results": "8 hits; groupCohomology.δ_apply, groupCohomology.δ, groupCohomology.δ₁_apply, groupCohomology.map_cochainsFunctor_shortExact, groupCohomology.mapCocycles₁_comp_i, groupCohomology.mapCocycles₂_comp_i, groupCohomology.toCocycles_comp_isoCocycles₁_hom, groupCohomology.toCocycles_comp_isoCocycles₂_hom",
+   "date": "2026-10-16",
+   "verdict": "no match for the full etale Kummer coefficient comparison or its boundary compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.Additive",
+   "results": "12 hits; CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.NatTrans.rightDerived",
+   "date": "2026-10-16",
+   "verdict": "no match for the full etale Kummer coefficient comparison or its boundary compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any additive cohomology functor on abelian sheaves tensoring with a finite rank free constant coefficient module commutes with cohomology in each degree",
+   "results": "8 hits; Rep.torIso, groupCohomologyIsoExt, groupCohomologyIso, groupHomology.coinvariantsTensorResProjectiveResolutionIso, Rep.barResolution.extIso, groupCohomology.coindIso, Rep.standardResolution.extIso, groupCohomology.isoShortComplexH1_hom",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the full etale coefficient comparison and Kummer boundary compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(cohomology|Sheaf.H)|((cohomology|Sheaf.H).*(tensor|biproduct))",
+   "results": "0 hits; ; grep subdirectory/path: CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the full etale coefficient comparison and Kummer boundary compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Additive, CategoryTheory.Sheaf.H",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the full etale coefficient comparison and Kummer boundary compatibility"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -76,5 +235,50 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-kummer-coefficient-base-change",
+  "worker": "stage1",
+  "summary": "Rebased the split onto the current newtargets-dag baseline and re-read every cited dependency. The proof now states the R-balancing calculation that makes the canonical comparison map well-defined and the tensor universal-property argument that makes the descended boundary precise. The corrected integral-lift interpretation of Kummer-boundary compatibility, explicit finite-basis inverses, and all original hypotheses remain unchanged. Updated the correction audit to the current direct citers, including prop-pur-gm-relative-kummer step 5; retained the reported unsupported geometric-pullback citation in the orientation node.",
+  "blueprint": "Realizes this blueprint node's finite-direct-sum proof and its final boundary-naturality sentence, within unit sk-prop-a1-kummer step 3 (the free-coefficient alternative).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "General additivity and naturality of the cohomology delta-functor; a homological algebra tool for the finite-sum argument, not a replacement of any unit step. No node of this unit states this general theorem."
+   }
+  ],
+  "statement_correction": {
+   "date": "2026-10-16",
+   "old_statement": "Fix the finite-field datum of [def-pur-conventions], let $k$ be\nalgebraically closed, let $N\\geq1$, and let $A$ be a finite\n$\\mathbf Z/\\ell^N\\mathbf Z$-module which is free of finite rank (for\ninstance $A=A_{E,n}$ with $N=n\\cdot v_\\ell(\\varpi_E)$ under the\nhypothesis $e(E/\\Ql)\\mid n$ of [lem-pur-finite-kummer-level]). For every\nsmooth separated curve $C$ over $k$ and every\ninteger $q\\geq0$, the natural map\n\n$$\nH^q(C_{\\Et},\\mu_{\\ell^N})\\otimes_{\\mathbf Z/\\ell^N}A\n\\longrightarrow\nH^q(C_{\\Et},\\mu_{\\ell^N}\\otimes_{\\mathbf Z/\\ell^N}A)\n$$\n\nis an isomorphism, compatibly with the Kummer boundary maps of the Kummer\nsequence with $A$-coefficients.",
+   "what": "The imported proof tensors the ordinary Kummer sequence with A over R = Z/ell^N, but G_m is not an R-module; tensoring its middle terms over Z with A instead makes both zero. Replace that ill-typed boundary clause by the boundary of the sequence tensored with a finite free integral lift L, descended along L -> L/ell^N L = A. The original cohomology comparison and all its hypotheses are retained.",
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kummer-coefficient-base-change.md",
+    "place": "Imported proof, final displayed sequence and boundary sentence; unit sk-prop-a1-kummer step 3, final finite-free-coefficient alternative. Kummer exactness: Stacks Tag 03PL (lemma-kummer-sequence); connecting-map naturality: Tags 015B (lemma-higher-derived-functors) and 05TE (lemma-right-derived-delta-functor)."
+   },
+   "citers": [
+    {
+     "id": "prop-pur-gm-relative-kummer",
+     "holds": true,
+     "note": "Current proof step 5 uses the finite-free coefficient comparison and preservation of the Kummer boundary, both retained. Step 1 establishes A free over Z/ell^N; the two curves are smooth separated curves over the algebraically closed datum field. Geometric-pullback naturality is proved independently in that citer step 3."
+    },
+    {
+     "id": "prop-pur-affine-line-orientation-base-change",
+     "holds": false,
+     "note": "Current proof step 1 still cites the item for geometric pullback of the Kummer class. Neither the imported nor the corrected coefficient-only statement supplies this; the pre-existing C4 mismatch requires a separate pullback-naturality input. This citer is not edited."
+    }
+   ]
+  }
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-6052e931e",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-6052e931e (reviewer sub-agent of L); spot-checked: Read the full item, five proof steps, cited statements, blueprint and Stacks sources. Verified the canonical coefficient map, integral-lift boundary correction, hypotheses and edge cases. No new nodes or repairs needed. Accepted the derived delta-functor tool use. Recorded the pre-existing orientation-citer C4 mismatch separately in review.md."
+ }
 }
