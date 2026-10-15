@@ -258,5 +258,30 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-2fcda083a (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources. The five-step argument and three helper statements are sound. Restored missing creation, merge, and audit metadata in all three helper JSON files under fixes/. Statements and citations remain unchanged. Concrete source, hypothesis, duplicate, edge-case, and tool-use checks are recorded in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-62b931bde",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, fourteen dependencies, sources, exact declarations, universes, edge cases, docstrings, and verbatim signature. Immutable module compiles cleanly through scompile.py with the local side overlay. No substantive or mechanical faults found; repositories and branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_ringed_open_closed",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleModuleCoefficients",
+   "AlgebraicGeometry.Scheme.proEtaleRingedDirectImage",
+   "AlgebraicGeometry.Scheme.proEtaleRingedExtensionByZero",
+   "AlgebraicGeometry.Scheme.proEtale_ringed_open_closed"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingedOpenClosed.lean",
+  "statement": "theorem proEtale_ringed_open_closed {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom] (hU : Set.range U.hom = (Set.range i)ᶜ) (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) : ∃ q : SheafOfModules.{u + 1} (proEtaleModuleCoefficients ((proEtaleSheafInverseImage U.hom CommRingCat.{u + 1}).obj A)) ≌ SheafOfModules.{u + 1} ((proEtaleModuleCoefficients A).over U), Nonempty (proEtaleModuleInverseImage U.hom A ⋙ q.functor ≅ SheafOfModules.overFunctor.{u + 1} (proEtaleModuleCoefficients A) U) ∧ ∃ (ai : proEtaleModuleInverseImage i A ⊣ proEtaleRingedDirectImage i A) (aj : proEtaleRingedExtensionByZero U A ⊣ SheafOfModules.overFunctor.{u + 1} (proEtaleModuleCoefficients A) U), (∀ H, IsIso (ai.counit.app H)) ∧ (∀ G, IsIso (aj.unit.app G)) ∧ (∀ H, IsZero ((SheafOfModules.overFunctor.{u + 1} (proEtaleModuleCoefficients A) U).obj ((proEtaleRingedDirectImage i A).obj H))) ∧ (∀ G, IsZero ((proEtaleModuleInverseImage i A).obj ((proEtaleRingedExtensionByZero U A).obj G))) ∧ PreservesFiniteLimits (proEtaleRingedExtensionByZero U A) ∧ PreservesFiniteColimits (proEtaleRingedExtensionByZero U A) ∧ PreservesFiniteLimits (proEtaleRingedDirectImage i A) ∧ PreservesFiniteColimits (proEtaleRingedDirectImage i A) ∧ (∀ M, Mono (aj.counit.app M) ∧ Epi (ai.unit.app M) ∧ (ComposableArrows.mk₂ (aj.counit.app M) (ai.unit.app M)).Exact) ∧ (CompactSpace X → QuasiSeparatedSpace X → ∀ (I : Type (u + 1)) [SmallCategory I] [IsFiltered I], PreservesColimitsOfShape I (proEtaleRingedDirectImage i A))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The open ringed topos is presented on the localized site. The existential equivalence q explicitly intertwines actual module inverse image with overFunctor; extension by zero is the sheafification of the recorded extension presheaf. Helper definitions specialize existing Mathlib constructions to arbitrary coefficient sheaves and have real data."
  }
 }
