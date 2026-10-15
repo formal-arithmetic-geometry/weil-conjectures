@@ -24,7 +24,8 @@
   "def-weil-pbc-free-module",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-sheafification",
-  "lem-weil-pbc-sheafification-sets-exact"
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-pur-rhom-into-kinjective-local"
  ],
  "proof": [],
  "proof_deps": [],
@@ -115,5 +116,50 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-ab475fbcc (reviewer sub-agent of L); spot-checked: Read the complete definition, report, twelve dependency statements, source passages, and unit/chapter route. Verified Stacks 08FL/08G5/0657, finite-projective retractions, idempotent identities, constant-sheaf construction, and edge cases. No new nodes or repairs needed. Checked master target hypotheses and base-change arrow; this definition asserts no comparison between ordinary constant and condensed coefficients. Detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3be8fd8e9",
+  "group": "NC",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, 13 dependencies, source passages, exact declarations, records, docstrings, universes, edge cases, and pilot gates. Snapshot files match the immutable commit. Server-only compilation reproduced cleanly in 9.6 seconds plus a 1.0-second dependency overlay. No delivery errors found; no repository or branch changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictPerfectCoefficientPackage",
+  "declaration": "SheafOfModules.StrictPerfectCoefficientRepresentation",
+  "declarations": [
+   "SheafOfModules.StrictPerfectCoefficientPackage",
+   "SheafOfModules.StrictPerfectCoefficientPackage.e",
+   "SheafOfModules.IsLocallyStrictPerfectComplex",
+   "SheafOfModules.IsPerfectOnRingedSite",
+   "SheafOfModules.StrictPerfectCoefficientRepresentation",
+   "ModuleCat.StrictPerfectCoefficientPackage",
+   "ModuleCat.StrictPerfectCoefficientRepresentation",
+   "SheafOfModules.strictPerfectConstantPresheaf",
+   "SheafOfModules.strictPerfectConstantPresheaf_additive",
+   "SheafOfModules.strictPerfectConstantSheaf",
+   "SheafOfModules.strictPerfectConstantSheaf_additive",
+   "SheafOfModules.strictPerfectConstantComplex",
+   "SheafOfModules.strictPerfectConstantCoordinateComponent_map_add",
+   "SheafOfModules.strictPerfectConstantCoordinateComponent_map_smul",
+   "SheafOfModules.strictPerfectConstantCoordinateComponent",
+   "SheafOfModules.strictPerfectConstantCoordinate_naturality",
+   "SheafOfModules.strictPerfectConstantCoordinate",
+   "SheafOfModules.strictPerfectConstantFiniteFreeComparison",
+   "SheafOfModules.strictPerfectConstantFiniteFreeComparison_isIso",
+   "SheafOfModules.strictPerfectConstant_splitting",
+   "ModuleCat.StrictPerfectCoefficientPackage.constant",
+   "SheafOfModules.StrictPerfectCoefficientPackage.identities",
+   "ModuleCat.StrictPerfectCoefficientPackage.e",
+   "ModuleCat.StrictPerfectCoefficientPackage.identities"
+  ],
+  "file": "lean/Sheaf/Paper/StrictPerfectCoefficientPackage.lean",
+  "statement": "structure StrictPerfectCoefficientRepresentation (R : Sheaf J CommRingCat.{u}) (U : C) [HasDerivedCategory.{w} (SheafOfModules.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))] (Q : DerivedCategory (SheafOfModules.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The localized commutative-ring representation is the main record; the module also defines the chosen degreewise splitting data, local perfectness, global ring packages, and their explicit constant-sheaf transport. General splitting data make sense over any ring sheaf; the localized representation and local-perfectness definitions use commutative ring sheaves exactly as stated."
  }
 }
