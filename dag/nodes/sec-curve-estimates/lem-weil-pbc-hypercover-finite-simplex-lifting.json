@@ -25,11 +25,12 @@
  ],
  "proof": [
   {
-   "text": "*Chain of one-simplex extensions.* By [lem-weil-pbc-simplicial-set-add-simplices] there is a chain of simplicial subsets $A=W^0\\subseteq W^1\\subseteq\\dots\\subseteq W^r=B$ such that each inclusion $W^k\\subseteq W^{k+1}$ adds one simplex $x_k\\in W^{k+1}_{n_k}$ subject to conditions (1)-(3) there. Each $W^k$ satisfies the hypotheses needed for $\\operatorname{Hom}(W^k,K)_0$ [def-weil-pbc-simplicial-hom-object]: $A_n\\subseteq W^k_n\\subseteq B_n$, so $W^k_n$ is finite and nonempty; and a simplex $y\\in W^k_m$ that is nondegenerate in $W^k$ is nondegenerate in $B$ [def-weil-pbc-simplicial-set]: if $y=B(f)(z)$ with $f:[m]\\to[p]$, $p<m$, $z\\in B_p$, factor $f=\\iota\\circ f'$ with $f':[m]\\to[p']$ surjective and $\\iota:[p']\\to[p]$ injective, $p'\\leq p<m$, so that $y=B(f')(z')$ with $z'=B(\\iota)(z)$; let $g:[p']\\to[m]$, $g(l)=\\min f'^{-1}(l)$, an order-preserving section of $f'$; then $z'=B(f'\\circ g)(z')=B(g)(y)\\in W^k_{p'}$ because $W^k$ is a simplicial subset, and $y=W^k(f')(z')$ is degenerate in $W^k$. Hence the nondegenerate simplices of $W^k$ are among the finitely many nondegenerate simplices of $B$.",
+   "text": "*Chain of one-simplex extensions.* By [lem-weil-pbc-simplicial-set-add-simplices] there is a chain of simplicial subsets $A=W^0\\subseteq W^1\\subseteq\\dots\\subseteq W^r=B$ such that each inclusion $W^k\\subseteq W^{k+1}$ adds one simplex $x_k\\in W^{k+1}_{n_k}$ subject to conditions (1)-(3) there. Each $W^k$ satisfies the hypotheses needed for $\\operatorname{Hom}(W^k,K)_0$ [def-weil-pbc-simplicial-hom-object]: $A_n\\subseteq W^k_n\\subseteq B_n$, so $W^k_n$ is finite and nonempty; and a simplex $y\\in W^k_m$ that is nondegenerate in $W^k$ is nondegenerate in $B$ [def-weil-pbc-simplicial-set]: if $y=B(f)(z)$ with $f:[m]\\to[p]$, $p<m$, $z\\in B_p$, factor $f=\\iota\\circ f'$ with $f':[m]\\to[p']$ surjective and $\\iota:[p']\\to[p]$ injective, $p'\\leq p<m$, so that $y=B(f')(z')$ with $z'=B(\\iota)(z)$; let $g:[p']\\to[m]$, $g(l)=\\min f'^{-1}(l)$, an order-preserving section of $f'$; then $z'=B(f'\\circ g)(z')=B(g)(y)\\in W^k_{p'}$ because $W^k$ is a simplicial subset, and $y=W^k(f')(z')$ is degenerate in $W^k$. Hence the nondegenerate simplices of $W^k$ are among the finitely many nondegenerate simplices of $B$. In Lean use Mathlib's instance that subcomplexes of finite simplicial sets are finite, for every W^k. Obtain a representing pair for each intermediate simplicial set from [lem-weil-pbc-simplicial-hom-object-exists]; its uniqueness property is exactly Functor.IsRepresentedBy after bundling the family compatibility equations.",
    "uses": [
     "lem-weil-pbc-simplicial-set-add-simplices",
     "def-weil-pbc-simplicial-hom-object",
-    "def-weil-pbc-simplicial-set"
+    "def-weil-pbc-simplicial-set",
+    "lem-weil-pbc-simplicial-hom-object-exists"
    ],
    "elementary": false,
    "source": {
@@ -38,7 +39,7 @@
    }
   },
   {
-   "text": "*Each extension gives a covering.* For $0\\leq k<r$ apply [lem-weil-pbc-hypercover-one-more-simplex] to the hypercover $K$ and the inclusion $U=W^k\\subseteq V=W^{k+1}$ with $n=n_k$, $x=x_k$: by step 1 both have finite nonempty sets of simplices in each degree and finitely many nondegenerate simplices, and conditions (1)-(3) hold by the choice of the chain. Hence the restriction morphism $\\rho_k:\\operatorname{Hom}(W^{k+1},K)_0\\to\\operatorname{Hom}(W^k,K)_0$ [def-weil-pbc-simplicial-hom-object] is a covering in $\\mathrm{SR}(X)$ [def-weil-pbc-semi-representable-object].",
+   "text": "*Each extension gives a covering.* For $0\\leq k<r$ apply [lem-weil-pbc-hypercover-one-more-simplex] to the hypercover $K$ and the inclusion $U=W^k\\subseteq V=W^{k+1}$ with $n=n_k$, $x=x_k$: by step 1 both have finite nonempty sets of simplices in each degree and finitely many nondegenerate simplices, and conditions (1)-(3) hold by the choice of the chain. Hence the restriction morphism $\\rho_k:\\operatorname{Hom}(W^{k+1},K)_0\\to\\operatorname{Hom}(W^k,K)_0$ [def-weil-pbc-simplicial-hom-object] is a covering in $\\mathrm{SR}(X)$ [def-weil-pbc-semi-representable-object]. View W^k as the subcomplex (W^k).preimage (W^{k+1}).ι of W^{k+1}, and identify this subcomplex with W^k by the explicit nested-subtype isomorphism. Transport its universal family along this isomorphism, preserving representability. The range conditions of the chain become exactly the three conditions of the one-more-simplex theorem.",
    "uses": [
     "lem-weil-pbc-hypercover-one-more-simplex",
     "def-weil-pbc-simplicial-hom-object",
@@ -51,7 +52,7 @@
    }
   },
   {
-   "text": "*Composition.* The restriction morphism $\\rho:\\operatorname{Hom}(B,K)_0\\to\\operatorname{Hom}(A,K)_0$ equals $\\rho_0\\circ\\rho_1\\circ\\dots\\circ\\rho_{r-1}$: both are morphisms $\\rho'$ with $u^A_s\\circ\\rho'=u^B_s$ for every simplex $s$ of $A$ (for the composite, apply the defining equation of each $\\rho_k$ in turn, as $s\\in A\\subseteq W^k$ for all $k$), and such a morphism is unique by the universal property of $\\operatorname{Hom}(A,K)_0$ [def-weil-pbc-simplicial-hom-object]. If $r=0$ then $A=B$ and $\\rho$ is the identity, which is a covering since each one-member family $\\{\\mathrm{id}:V_j\\to V_j\\}$ is a covering family of $X_{\\Et}$ [def-weil-pbc-etale-site]. If $r\\geq1$, induction on $r$ with [lem-weil-pbc-semi-representable-covering-permanence](1) shows that the composite of the coverings $\\rho_k$ of step 2 is a covering.",
+   "text": "*Composition.* The restriction morphism $\\rho:\\operatorname{Hom}(B,K)_0\\to\\operatorname{Hom}(A,K)_0$ equals $\\rho_0\\circ\\rho_1\\circ\\dots\\circ\\rho_{r-1}$: both are morphisms $\\rho'$ with $u^A_s\\circ\\rho'=u^B_s$ for every simplex $s$ of $A$ (for the composite, apply the defining equation of each $\\rho_k$ in turn, as $s\\in A\\subseteq W^k$ for all $k$), and such a morphism is unique by the universal property of $\\operatorname{Hom}(A,K)_0$ [def-weil-pbc-simplicial-hom-object]. If $r=0$ then $A=B$ as simplicial sets, but their specified representing pairs need not be equal. The restriction is an isomorphism by the representing universal properties. Its inverse is a section; each target-component identity therefore belongs to the generated component sieve, so that sieve is maximal and covers by [def-weil-pbc-etale-site]. If $r\\geq1$, induction on $r$ with [lem-weil-pbc-semi-representable-covering-permanence](1) shows that the composite of the coverings $\\rho_k$ of step 2 is a covering. The Lean proof defines restriction along an arbitrary simplicial map by the inverse representing bijection. Evaluation on universal components proves its composition equation. Restriction along a simplicial isomorphism has a section, hence is a covering: for each target component its identity factors through one of the covering-family generators. This handles both endpoint identifications, including the length-zero chain, without requiring chosen representing objects to be definitionally equal.",
    "uses": [
     "def-weil-pbc-simplicial-hom-object",
     "def-weil-pbc-etale-site",
@@ -64,12 +65,10 @@
    }
   },
   {
-   "text": "*Local lifting.* Write $\\operatorname{Hom}(A,K)_0=\\{L_j\\}_{j\\in J}$, $\\operatorname{Hom}(B,K)_0=\\{M_i\\}_{i\\in I}$ and $\\rho=(\\alpha,(g_i))$. A $T$-point $a$ of $\\operatorname{Hom}(A,K)_0$ is a pair $(j,t)$ with $t:T\\to L_j$ an $X$-morphism [def-weil-pbc-semi-representable-object]. Since $\\rho$ is a covering (step 3), $\\{g_i:M_i\\to L_j\\}_{\\alpha(i)=j}$ is a covering family of $X_{\\Et}$, i.e. a jointly surjective family of etale morphisms [def-weil-pbc-etale-site]. Put $T_i=T\\times_{t,L_j,g_i}M_i$ for $\\alpha(i)=j$; these fibre products are objects of $X_{\\Et}$ [def-weil-pbc-etale-site], and by [lem-weil-pbc-etale-covering-base-change] the projections $p_i:T_i\\to T$ are etale and jointly surjective, so $\\{p_i:T_i\\to T\\}_{\\alpha(i)=j}$ is a covering family of $X_{\\Et}$. The $T_i$-point $b_i=(i,q_i)$ of $\\operatorname{Hom}(B,K)_0$, $q_i:T_i\\to M_i$ the second projection, has image $\\rho(b_i)=(j,g_i\\circ q_i)=(j,t\\circ p_i)$, the restriction $a|_{T_i}$ of $a$. By [def-weil-pbc-simplicial-hom-object] these points are the compatible families described in the statement.",
+   "text": "Unpack the point as (j,t) using FormalCoproduct.inclHomEquiv. For each i with ρ.f i = j, let g_i be the component ρ.φ i followed by the equality transport to the jth target component. Put T_i = pullback g_i t in X.Etale and p_i = pullback.snd g_i t. By Sieve.ofArrows_eq_pullback_of_isPullback, the sieve generated by the p_i is the pullback along t of the covering component sieve from [def-weil-pbc-semi-representable-object]. The pullback-stability axiom of the Grothendieck topology [def-weil-pbc-etale-site] proves it covers T. Set b_i = FormalCoproduct.Hom.fromIncl i (pullback.fst g_i t); FormalCoproduct.hom_ext and pullback.condition give the required equality. The index type is the subtype {i // ρ.f i = j}, hence lies in Type w even when it is empty. This is the local-lifting content of Stacks 01G3.",
    "uses": [
     "def-weil-pbc-semi-representable-object",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-etale-covering-base-change",
-    "def-weil-pbc-simplicial-hom-object"
+    "def-weil-pbc-etale-site"
    ],
    "elementary": false,
    "source": {
@@ -82,16 +81,16 @@
   "lem-weil-pbc-simplicial-set-add-simplices",
   "def-weil-pbc-simplicial-hom-object",
   "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-simplicial-hom-object-exists",
   "lem-weil-pbc-hypercover-one-more-simplex",
   "def-weil-pbc-semi-representable-object",
   "def-weil-pbc-etale-site",
-  "lem-weil-pbc-semi-representable-covering-permanence",
-  "lem-weil-pbc-etale-covering-base-change"
+  "lem-weil-pbc-semi-representable-covering-permanence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/hypercovering.tex",
-  "place": "Lemma 01GN (lemma-add-simplices), proof, with Lemma 01GM (lemma-one-more-simplex) and simplicial.tex Lemma 018S (lemma-add-simplices); step 4 unpacks Definition 01G3"
+  "place": "Lemma 01GN (lemma-add-simplices), proof, with Lemma 01GM (lemma-one-more-simplex) and simplicial.tex Lemma 018S (lemma-add-simplices); step 4 unpacks Definition 01G3; Lean realization by N4 uses the existing Hom-object existence theorem for intermediate subsets and GrothendieckTopology.pullback_stable for step 4"
  },
  "mathlib_searches": [
   {
@@ -170,5 +169,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261015T220132-L-2450589",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
