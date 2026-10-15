@@ -14,28 +14,30 @@
  ],
  "proof": [
   {
-   "text": "The relation n·1_Λ=0 gives the explicit map Z/nZ → Λ, [a] ↦ a·1. Restrict a representing complex termwise with action [a]m=(a·1)m. Restriction preserves kernels and cokernels, hence quasi-isomorphisms, and the restricted complex K_n has exactly the same underlying abelian complex as K. This also works for n=0 with ZMod 0=ℤ.",
-   "uses": [
-    "def-weil-pbc-derived-categories"
-   ],
+   "text": "The unit annihilation gives (n : Λ)=0 and hence ringChar Λ divides n. Construct the explicit homomorphism φ : ULift (ZMod n) →+* Λ as ZMod.castHom composed with ULift.ringEquiv.toRingHom. Apply the assumed cyclic exchange isomorphism at the derived restriction of K along φ.",
+   "uses": [],
    "elementary": true
   },
   {
-   "text": "The assumed cyclic-coefficient exchange is invertible at K_n. Apply lem-kun-unbounded-abelian-exchange-comparison for Z/nZ: t_n U_n(Ex_n)=Ex_ab s_n, with s_n,t_n invertible. It follows that Ex_ab is invertible. Apply the same comparison for Λ; the equality of underlying complexes identifies exactly the same Ex_ab, and t_Λ U_Λ(Ex_Λ)=Ex_ab s_Λ makes U_Λ(Ex_Λ) invertible. The conservative forgetting functor then reflects invertibility of Ex_Λ. These equations concern the canonical mates, not just their endpoints.",
+   "text": "Apply the arbitrary-ring restricted exchange equivalence to transfer this component isomorphism to the image under derived restriction of the Λ-coefficient exchange.",
    "uses": [
-    "lem-kun-unbounded-abelian-exchange-comparison"
+    "lem-kun-proper-base-change-forgetful-aux"
    ],
    "elementary": false
+  },
+  {
+   "text": "The private proved reflection lemma uses the natural homology comparison for exact functors and sectionwise conservativity of restriction of scalars. Homology detects derived isomorphisms, so invertibility of the restricted exchange implies invertibility of the original exchange.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-derived-categories",
-  "lem-kun-unbounded-abelian-exchange-comparison"
+  "lem-kun-proper-base-change-forgetful-aux"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0D6J(3); twice apply the canonical exchange comparison node to explicitly restricted coefficients"
+  "document": "https://stacks.math.columbia.edu/tag/0D6J",
+  "place": "coefficient restriction via the explicit cyclic ring map; compare exchanges and reflect isomorphisms using homology"
  },
  "mathlib_searches": [
   {
@@ -106,12 +108,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261014T214024-L-3378178",
+  "landing": "20261015T055953-L-1741855",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
