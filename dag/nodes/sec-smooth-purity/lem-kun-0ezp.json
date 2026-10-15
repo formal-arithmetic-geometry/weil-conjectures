@@ -216,5 +216,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-617b953c5 (reviewer sub-agent of L); spot-checked: Read the full item, all six steps, every cited statement, report, route, and cited source passages. Tag 0EZP’s constant-coefficient scope is distinguished correctly; the proof independently establishes arbitrary abelian-sheaf vanishing. Infinite and empty objects, imperfect separably closed fields, and arbitrary f pass. No new nodes, duplicates, or cycles. Accept the declared fibre-classification tool use. No fixes needed; detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-22855e76d",
+  "group": "NX",
+  "result": "fix",
+  "note": "Lean statement and node pass all clause, dependency, edge-case, and signature checks; server compile reproduced cleanly in 1.5 seconds. Complete replacement report in fixes/lem-kun-0ezp.report.md corrects two inaccurate claims that rightDerivedLowerStarPlus is absent or obsolete. Full findings recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.EtaleCohomology.SepClosedFieldVanishing",
+  "declaration": "AlgebraicGeometry.Etale.sepClosedField_etale_decomposition_and_vanishing",
+  "file": "lean/Sheaf/EtaleCohomology/SepClosedFieldVanishing.lean",
+  "statement": "theorem sepClosedField_etale_decomposition_and_vanishing (L : Type u) [Field L] [IsSepClosed L] : (∀ V : (Spec (.of L)).Etale, ∃ (I : Type u) (ι : I → (Spec (.of L) ⟶ V.left)), (∀ i : I, ι i ≫ V.hom = 𝟙 (Spec (.of L))) ∧ Nonempty (IsColimit (Cofan.mk V.left ι))) ∧ (∀ (F : Sheaf (Spec (.of L)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ), 0 < q → IsZero ((cohomology AddCommGrpCat.{u + 1} (Spec (.of L)) q).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ∧ (∀ (Y : Scheme.{u}) (f : Spec (.of L) ⟶ Y) (F : Sheaf (Spec (.of L)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ), 0 < q → IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
