@@ -7,30 +7,31 @@
  },
  "kind": "statement",
  "title": "Limits preserve compatible levelwise isomorphisms",
- "statement": "If $u_n:M_n\\to N_n$ is a compatible map of towers and every $u_n$ is an\nisomorphism, then $R\\varprojlim u_n$ is an isomorphism.",
+ "statement": "Let $\\mathcal D$ be a triangulated category [def-weil-triangulated-category]. Let $(M_n,f_n)$ and $(N_n,g_n)$, indexed by $n\\geq1$, be towers whose countable products exist, and choose derived limits $(L,p,\\delta)$ and $(L',p',\\delta')$ with their Roos triangles [def-weil-derived-limit]. Let $u_n:M_n\\to N_n$ satisfy $u_n f_n=g_n u_{n+1}$, and assume every $u_n$ is an isomorphism. For every morphism $\\psi:L\\to L'$ for which $(\\psi,\\prod_n u_n,\\prod_n u_n)$ is a morphism of the specified Roos triangles (equivalently, $p'\\psi=(\\prod_n u_n)p$ and $\\psi[1]\\delta=\\delta'(\\prod_n u_n)$), $\\psi$ is an isomorphism. Thus every Roos-triangle completion denoted by $R\\varprojlim u_n$ is an isomorphism; no canonical map or functor is asserted.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-r-lim-levelwise-isomorphism.md",
   "place": "node lemma-weil-pbc-r-lim-levelwise-isomorphism, order 1326"
  },
  "stmt_deps": [
-  "def-weil-pbc-adic-derived-inverse-limit"
+  "def-weil-triangulated-category",
+  "def-weil-derived-limit"
  ],
  "proof": [
   {
-   "text": "By the definition of the sequential derived inverse limit, a compatible map of towers acts componentwise on the two product terms and therefore induces a morphism between the corresponding Roos triangles. The component maps are all isomorphisms by hypothesis, so the product map is an isomorphism. Applying the existing levelwise-isomorphism lemma [lem-weil-derived-limit-levelwise-iso] to this morphism of Roos triangles yields that the induced map on derived inverse limits is an isomorphism.",
+   "text": "Compatibility of the tower maps implies that the product map commutes with the transition endomorphisms 1-shift. The specified map ψ and the product map twice therefore form a morphism of the chosen distinguished Roos triangles [def-weil-derived-limit]. The product map is invertible, with inverse the product of the component inverses, as checked on projections. Apply [lem-weil-derived-limit-levelwise-iso], equivalently the five lemma for distinguished triangles, to conclude that ψ is an isomorphism. This applies to every completion and does not choose one.",
    "uses": [
-    "def-weil-pbc-adic-derived-inverse-limit",
+    "def-weil-derived-limit",
     "lem-weil-derived-limit-levelwise-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-r-lim-levelwise-isomorphism.md",
-    "place": "## Proof"
+    "place": "## Proof; Stacks derived.tex, Remark 0H9J and Tag 014A"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-adic-derived-inverse-limit",
+  "def-weil-derived-limit",
   "lem-weil-derived-limit-levelwise-iso"
  ],
  "proof_origin": {
@@ -130,5 +131,62 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-69b484010 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements and sources, and chapter/unit route. The Roos-triangle argument is sound; no new nodes or target weakening. Corrected the proof-only statement dependency and missing/invalid search metadata. Exact master condensed coefficients and base-change morphism were checked; no comparison theorem is certified. Details and corrected JSON are in review.md and fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "NI stage 2",
+  "old_statement": "If $u_n:M_n\\to N_n$ is a compatible map of towers and every $u_n$ is an\nisomorphism, then $R\\varprojlim u_n$ is an isomorphism.",
+  "what": "The only statement dependency explicitly supplies chosen Roos triangles, no map between them and no functor. Thus Rlim u_n is not a defined morphism. Make explicit the morphism of Roos triangles used in the blueprint proof, quantifying over every completion, as in Stacks 0H9J. This is the generic tower assertion of the source, including its adic specialization; no coefficient or boundedness assumptions are added.",
+  "source": {
+   "document": "literature/stacks-project/derived.tex",
+   "place": "Definition definition-derived-limit (08TC), Remark remark-functoriality-derived-limit (0H9J); blueprint lemma-weil-pbc-r-lim-levelwise-isomorphism, Proof (taking fibres in the homotopy-limit triangles)"
+  },
+  "citers": [
+   {
+    "id": "lemma-weil-pbc-completed-exchange-coherence",
+    "holds": true,
+    "note": "Its strict derived-tower Rlim comparison is a morphism of the corresponding Roos triangles; the correction applies to that specified map without asserting uniqueness."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-adic-derived-inverse-limit"
+  ],
+  "old_proof": [
+   {
+    "text": "By the definition of the sequential derived inverse limit, a compatible map of towers acts componentwise on the two product terms and therefore induces a morphism between the corresponding Roos triangles. The component maps are all isomorphisms by hypothesis, so the product map is an isomorphism. Applying the existing levelwise-isomorphism lemma [lem-weil-derived-limit-levelwise-iso] to this morphism of Roos triangles yields that the induced map on derived inverse limits is an isomorphism.",
+    "uses": [
+     "def-weil-pbc-adic-derived-inverse-limit",
+     "lem-weil-derived-limit-levelwise-iso"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-r-lim-levelwise-isomorphism.md",
+     "place": "## Proof"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-adic-derived-inverse-limit",
+   "lem-weil-derived-limit-levelwise-iso"
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.DerivedLimitLevelwiseIsomorphism",
+  "declaration": "CategoryTheory.isIso_derivedLimit_of_levelwise",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitLevelwiseIsomorphism.lean",
+  "statement": "theorem isIso_derivedLimit_of_levelwise {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] {M N : ℕ → C} [HasProduct M] [HasProduct N] (f : ∀ n : ℕ, M (n + 1) ⟶ M n) (g : ∀ n : ℕ, N (n + 1) ⟶ N n) (L L' : C) (p : L ⟶ ∏ᶜ M) (p' : L' ⟶ ∏ᶜ N) (δ : ∏ᶜ M ⟶ L⟦(1 : ℤ)⟧) (δ' : ∏ᶜ N ⟶ L'⟦(1 : ℤ)⟧) (hL : IsDerivedLimitTriangle f L p δ) (hL' : IsDerivedLimitTriangle g L' p' δ') (φ : ∀ n : ℕ, M n ⟶ N n) (hφ : ∀ n : ℕ, f n ≫ φ n = φ (n + 1) ≫ g n) [∀ n : ℕ, IsIso (φ n)] (ψ : L ⟶ L') (hp : ψ ≫ p' = p ≫ Limits.Pi.map φ) (hδ : δ ≫ ψ⟦(1 : ℤ)⟧' = Limits.Pi.map φ ≫ δ') : IsIso ψ",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6c7585d32",
+  "group": "NI",
+  "result": "pass",
+  "note": "Wrote review.md. Immutable files match the commit; statements, dependencies, source correction, sole citer, universes, edge cases and pilot gates pass. Server-only compilation succeeded cleanly in 0.9 seconds. No repository changes or fixes.",
+  "statement_corrected": true
  }
 }
