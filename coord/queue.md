@@ -31,7 +31,6 @@
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishing` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedCoefficientComplexModel` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedLfpCoefficientModel` | 6 | 1 | proof |
@@ -39,10 +38,10 @@
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 6 | 2 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 6 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion` | 7 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedToposSitePresentation` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
-| `Sheaf.Paper.CondensedQbarLfpMatrixRefinement` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStep` | 7 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension` | 7 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat` | 8 | 1 | proof |
@@ -55,6 +54,7 @@
 | `Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit` | 10 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedSliceExtensionPreservesExact` | 10 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedSliceExtensionReflectsExact` | 10 | 1 | proof |
+| `Sheaf.Paper.CondensedQbarLfpMatrixRefinement` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
 Also listed above and claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
