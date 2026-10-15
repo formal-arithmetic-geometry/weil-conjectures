@@ -148,5 +148,23 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-d793084a7 (reviewer sub-agent of L); spot-checked: Read the complete definition, all 13 cited statements, sources and unit/chapter route. Verified unbounded module derivability, adjunction, square comparison and mate orientation; checked master coefficient distinctions and edge cases. No new nodes or repairs. review.md records two pre-existing downstream DAG cycles also reachable through the seeded dependencies; this delivery introduces neither."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-710bf121d",
+  "group": "NE",
+  "result": "pass",
+  "note": "Existing derivedBaseChangeMap matches the node; dependencies, docstrings, edge cases, searches, and server-only scompile were verified. review.md written."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded",
+  "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMap",
+  "statement": "def derivedBaseChangeMap (sq : CommSq g' f' f g) : R((f)_*[A]) ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ R((f')_*[A])",
+  "branch": "slopmaster2",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Specialize A to ModuleCat.{u + 1} Λ for Λ : Type (u + 1), [CommRing Λ], and sq to the cartesian square's toCommSq; take .app K. All coefficient instances are available without extra assumptions (server-checked). The source's leftDerivedUpperStarIsoMapDerivedCategory canonically identifies L(u^*) with exact termwise inverse image. leftDerivedUpperStarComp is transported from the termwise composition comparison along these isomorphisms, so derivedSquareUpperStarIso gives the specified descended square comparison. derivedBaseChangeSquare is literally mateEquiv of this comparison under derivedUpperStarLowerStarAdjunction; its .natTrans is this declaration. R(u_*) is the total K-injective-derived direct image. No new module or dependency copy: the existing declaration supplies the entire notion. The generic source uses only commutativity, and restricts to every cartesian square without changing the formula."
  }
 }
