@@ -9,13 +9,16 @@ namespace AlgebraicGeometry
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-noncomputable local instance (X : Scheme.{u}) : MonoidalCategory X.Modules :=
+noncomputable local instance trChartTensorTailMonoidal
+    (X : Scheme.{u}) : MonoidalCategory X.Modules :=
   SheafOfModules.monoidalCategory X.sheaf
-noncomputable local instance (X : Scheme.{u}) : MonoidalPreadditive X.Modules :=
+noncomputable local instance trChartTensorTailPreadditive
+    (X : Scheme.{u}) : MonoidalPreadditive X.Modules :=
   (SheafOfModules.tensorClosed X.sheaf).1.some
-local instance (X : Scheme.{u}) : (curriedTensor X.Modules).PreservesZeroMorphisms :=
+local instance trChartTensorTailZero
+    (X : Scheme.{u}) : (curriedTensor X.Modules).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
-local instance (X : Scheme.{u}) (M : X.Modules) :
+local instance trChartTensorTailObjZero (X : Scheme.{u}) (M : X.Modules) :
     ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
 
