@@ -15095,3 +15095,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:50 L: returned deliver/B2/Sheaf.AlgebraicGeometry.BoundedAllowableTorsionSmoothBaseChange (reviewer RETURN: (the landing tools, head 4b02b4ff4) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 16:52 L: merged deliver/A4/Sheaf.Paper.CondensedCoefficientComparisons (stage 3; reviewer PASS; first push; landing 20261015T165258-L-417043 (proof); batch 20261015T165256; modules 1; new nodes 0)
 - 16:56 L: merged deliver/G2/Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreOfData (stage 3; reviewer PASS; first push; landing 20261015T165631-L-431359 (interface); batch 20261015T165630; modules 2; new nodes 1)
+- 17:03 L: returned deliver/C3/Sheaf.AlgebraicGeometry.FiniteRangeComparison (reviewer RETURN: (reviewer X-d8bfc, head d8bfc1384) F/G1: In dag/nodes/sec-smooth-base-change/sbc-lem-finite-range-comparison.json line 2)
