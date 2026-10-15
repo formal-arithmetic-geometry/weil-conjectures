@@ -3,51 +3,412 @@
  "blueprint": {
   "is": "lem-cbc-completed-extension-zero-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Completed extension-by-zero base change",
- "statement": "Let $(A,I)$ satisfy [def-weil-pbc-adic-coefficient-datum], let\n\n$$\n\\begin{array}{ccc}\nU'&\\xrightarrow{g_U}&U\\\\\nj'\\downarrow&&\\downarrow j\\\\\nX'&\\xrightarrow{g}&X\n\\end{array}\n$$\n\nbe an open-immersion square,\nand let $K\\in D(U_{\\Proet},A)$ be derived $I$-complete. Then the\ncanonical map\n\n$$\nLg^*_{\\mathrm{comp}}j_!K\\xrightarrow{\\ \\sim\\ }j'_!Lg_{U,\\mathrm{comp}}^*K\n$$\n\nis an isomorphism, natural in $K$.",
+ "statement": "Let $(A,I)$ satisfy [def-weil-pbc-adic-coefficient-datum], and let\n$$\n\\begin{array}{ccc}\nU'&\\xrightarrow{g_U}&U\\\\\nj'\\downarrow&&\\downarrow j\\\\\nX'&\\xrightarrow{g}&X\n\\end{array}\n$$\nbe a cartesian open-immersion square [def-cbc-open-immersion-square]. Assume in addition that $j$ is quasi-compact [def-weil-finite-type-morphism]. Use the completed coefficient sheaves $A_T=\\varprojlim_n(A/I^n)_T$ and $D(T_{\\Proet},A)=D(\\operatorname{Mod}(A_T))$ of [def-weil-pbc-adic-coefficient-datum]. Identify $A_X|_U=A_U$ and $A_{X'}|_{U'}=A_{U'}$ under the slice-site identifications [lem-weil-proetale-weakly-etale-localization]. Extension by zero $j_!$ and $j'_!$ means sheafification of the extension-by-zero module presheaf on these ringed slice sites [def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification], applied termwise to complexes. Let $K\\in D(U_{\\Proet},A)$ be derived $I$-complete [def-weil-pbc-intrinsic-completion]. Then $j_!K$ is derived $I$-complete, and the canonical completed base-change map\n$$\nLg^*_{\\mathrm{comp}}j_!K\\xrightarrow{\\ \\sim\\ }j'_!Lg_{U,\\mathrm{comp}}^*K\n$$\nis an isomorphism, natural in $K$, where completed pullback is [def-weil-pbc-completed-pullback]. Both sides belong to the derived $I$-complete subcategory of $D(X'_{\\Proet},A)$. The canonical map is the one induced by the finite-coefficient extension-by-zero base-change maps and the comparison between extension by zero and the derived limit of the strict reduction tower.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.md",
   "place": "node lem-cbc-completed-extension-zero-comparison, order 1587"
  },
  "stmt_deps": [
   "def-weil-pbc-adic-coefficient-datum",
-  "def-cbc-open-immersion-square"
+  "def-cbc-open-immersion-square",
+  "def-weil-finite-type-morphism",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-completed-pullback"
  ],
  "proof": [
   {
-   "text": "The functor $j_!$ is exact\n([def-weil-pbc-extension-by-zero] on the pro-etale site,\n[lem-cbc-proetale-extension-zero]), so the reduction tower of\n$j_!K$ is $j_!K_\\bullet$ (reductions commute with $j_!$ by\nexactness and [def-weil-pbc-adic-coefficient-datum]). By\n[def-weil-pbc-completed-pullback] its reduction maps are\n$Lg_n^*j_!K_n$, which\n[lem-cbc-proetale-extension-zero-base-change] identifies\nwith $j'_!Lg_{U,n}^*K_n$, the reductions of\n$j'_!Lg_{U,\\mathrm{comp}}^*K$ (with the reduction compatibilities of\n[lemma-weil-pbc-completed-pullback-reduction] for the map\n$g_U$). Applying the exactness of $j'_!$ and\n[lem-cbc-exact-functor-rlim] to the defining derived limits of\n[def-weil-pbc-completed-pullback] gives the asserted\nisomorphism (the countable-product hypothesis of\n[lem-cbc-exact-functor-rlim] holds for $j'_!$: extension by\nzero for an open immersion is exact and, being the stalk- and\nsectionwise extension by the zero functor\n$V\\mapsto V\\cap U'$, it is computed levelwise and preserves the\ncountable products of the derived-product representation).",
+   "text": "For $T=X,X',U,U'$ put $P_n=A/I^n$ and use the completed sheaf $A_T$ of [def-weil-pbc-adic-coefficient-datum]. For each pair $(T,W)=(X,U),(X',U')$, [lem-weil-proetale-weakly-etale-localization] identifies $W$'s pro-etale site with the slice site and carries each constant $(P_n)_T$ to $(P_n)_W$. The sectionwise formula for limits [lem-weil-pbc-module-sheaves-limits-sectionwise] therefore identifies $A_T|_W$ with $A_W$: on an object $V\\to W$ both are the compatible families of sections of $(P_n)_T(V)$. The componentwise identity preserves every projection and quotient map. Since the square is cartesian and $j$ is quasi-compact, [lem-pc-quasi-compact-base-change] makes $j'$ quasi-compact too; there is no quasi-compactness requirement on $g$.",
    "uses": [
-    "def-weil-pbc-extension-by-zero",
-    "lem-cbc-proetale-extension-zero",
     "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-completed-pullback",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lemma-weil-pbc-completed-pullback-reduction",
-    "lem-cbc-exact-functor-rlim"
+    "def-cbc-open-immersion-square",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-pc-quasi-compact-base-change"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE (definition-extension-zero), slice interpretation; schemes.tex Tag 01K5 (quasi-compact base change)."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-site-restriction-module-adjunction-exact] to these ringed slice sites. Restriction and sheafified extension by zero are exact, and extension is left adjoint to restriction. Thus [lem-sf-exact-functor-derived-triangulated] supplies their termwise functors on unbounded derived categories. We will also use extension with coefficients $(P_n)_T$; it is the same finite-coefficient functor as [lem-cbc-proetale-extension-zero]. Extension commutes with restriction of scalars along $A_T\\to(P_n)_T$ and along $P_b\\to P_a$. Indeed [def-weil-extension-by-zero-presheaf] uses the same direct-sum presheaf of abelian groups before and after scalar restriction, with action composed with the ring map [def-pc-sheaf-restrict-scalars]; [def-weil-presheaf-modules-sheafification] equips the same abelian sheafification with the unique extending action. The resulting comparison is identity on the underlying abelian sheaf and is natural in every module map. No completed coefficient sheaf is identified with the constant sheaf $A$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-cbc-proetale-extension-zero",
+    "def-weil-extension-by-zero-presheaf",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact); proetale.tex Tag 09AE (definition-extension-zero)."
+   }
+  },
+  {
+   "text": "Let $e:W\\hookrightarrow T$ be either $j:U\\hookrightarrow X$ or $j':U'\\hookrightarrow X'$, and let $C$ be any complex on $W$. Choose a K-flat representative $P\\to C$ with flat terms by [lem-pc-kflat-resolution]. The module tensor comparison [lem-weil-pbc-ringed-slice-extension-tensor] extends to total tensor complexes: $e_!$ commutes with the direct sums in the totalization because it is a left adjoint [lem-weil-pbc-left-adjoint-preserves-colimits], and the comparison commutes with the differentials in [def-pc-tensor-complex-sheaves]. For any acyclic $A_T$-complex $N$, restriction $e^*N$ is acyclic by Step 2, so\n$$ (e_!P)\\otimes_{A_T}N\\cong e_!(P\\otimes_{A_W}e^*N) $$\nis acyclic. Thus $e_!P$ is K-flat by [def-pc-kflat-complex]. Its terms are flat too: for each $q$ the same tensor comparison expresses $(-)\\otimes e_!P^q$ as restriction, tensor with the flat $P^q$, and exact extension, which is exact [def-pc-flat-sheaf-modules]. Since extension is exact, $e_!P\\to e_!C$ is a quasi-isomorphism. The reduction of $e_!C$ is consequently computed by $(e_!P)\\otimes_{A_T}(P_n)_T$, and the tensor comparison identifies this with $e_!(P\\otimes_{A_W}(P_n)_W)$. By [def-weil-pbc-adic-coefficient-datum] these identify the strict reduction towers\n$$ (e_!C)_\\bullet\\cong e_!(C_\\bullet). $$\nAt the presheaf tensor level the comparison sends a generator $s\\otimes u$ in the unique summand indexed by a factorization $V\\to W$ to the same tensor $s\\otimes u$. Applying $q_{b,a}$ on either side sends it to $s\\otimes q_{b,a}(u)$, so the comparisons commute with the actual tower maps, not just with their evaluations. Step 2 supplies the scalar-restriction identification on each level. The construction is natural on K-flat representatives and hence in $C$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor); sites-cohomology.tex Tags 06YS (lemma-K-flat-resolution) and 06YN (definition-K-flat). The extension to total complexes and quotient maps is written out here."
+   }
+  },
+  {
+   "text": "Here is the product argument needed in the imported proof (Stacks Tag 09BP), using existing nodes rather than introducing a product lemma. Let $e:W\\hookrightarrow T$ be either $j$ or $j'$, let $R=A_T$, and let $(F_s)_{s\\in S}$ be a small family of $R|_W$-module sheaves. Choose a closed immersion $i:Z\\hookrightarrow T$ with image $T\\setminus W$ by [lem-weil-pbc-closed-subset-closed-subscheme]. For $H=e_*F$ one has $e^{-1}H=F$: on $V\\to W$ the direct-image formula [def-weil-proetale-inverse-image] evaluates $H$ as $F(V\\times_TW)=F(V)$, under the slice identification of [lem-weil-proetale-weakly-etale-localization]. Since $e$ is quasi-compact, the exact sequence of [lem-weil-pbc-proetale-ringed-open-closed], applied to $H$, identifies\n$$ e_!F=\\ker\\big(e_*F\\longrightarrow i_*i^{-1}e_*F\\big). $$\nBoth direct images preserve products by the same sectionwise direct-image formula and [lem-weil-pbc-module-sheaves-limits-sectionwise]. Closed inverse image $i^{-1}$ preserves small limits, including products, by [lem-weil-pbc-proetale-immersion-limit-preservation], with target coefficient $i^{-1}R$ (no unrelated scalar extension). Therefore the kernel for $F=\\prod_sF_s$ is the product of the kernels for $F_s$: on each section both consist of tuples whose every component maps to zero. Under these identifications the map is precisely the comparison induced by the projections. Hence $e_!(\\prod_sF_s)\\to\\prod_se_!F_s$ is an isomorphism, natural in the family. This is a kernel computation from the cited statements, not an assertion that extension is sectionwise zero on arbitrary test schemes. It includes the empty family.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BP (lemma-j-shriek-limits), kernel proof, using Tag 09AA (lemma-closed-immersion). The stated ringed recollement and module limit nodes supply its module version."
+   }
+  },
+  {
+   "text": "Countable products of module sheaves over each of $A_T,A_W$ are exact by [lem-weil-proetale-countable-products-exact]. By [lem-weil-derived-limit-products-core], their termwise product complexes represent products in the unbounded derived categories. Applying the comparison in Step 4 in every cochain degree therefore proves preservation of these derived products by $e_!$. For a countable family of towers $(M_{s,n})_n$, define the tower with level $n$ equal to $\\prod_s M_{s,n}$ and transition the unique map whose $s$-th projection is the $s$-th transition followed by projection. A map into it is exactly a family of compatible maps into the given towers, by the product universal property at every level. Hence countable products of towers exist and are computed levelwise. Kernels, cokernels and exactness are levelwise by [lem-weil-tower-category-levelwise-abelian]; exactness of countable products of module sheaves therefore gives exact countable products of towers. The cited derived-product theorem applies also to these tower categories, and the degreewise, levelwise projection comparisons of Step 4 show that extension preserves their countable derived products. Termwise extension commutes with evaluation, and Step 2 made it triangulated. All hypotheses of [lem-cbc-exact-functor-rlim] are now verified. Construct the comparison independently of that theorem using an explicit functorial complex. For a strict tower complex $M_\\bullet$, put $P(M)=\\prod_nM_n$, $f_M=1-s$, and\n$$ H(M)^q=P(M)^q\\oplus P(M)^{q-1},\\qquad d(x,y)=(dx,f_Mx-dy). $$\nA strict tower map $h$ gives $H(h)(x,y)=((\\prod_nh_n)x,(\\prod_nh_n)y)$. Exact countable products imply that a levelwise quasi-isomorphism induces a quasi-isomorphism on $P$ and hence on $H$, by its mapping-cone triangle. Thus $H$ defines a functor on the derived strict-tower category. Choose the functorial K-injective resolution $u_M:M_\\bullet\\to I_\\bullet$ of [prop-weil-pbc-rlim-functoriality]. The canonical quasi-isomorphism of [lem-weil-derived-limit-roos-complex], after the change of cone coordinates $(y,x)\\mapsto(x,-y)$, is\n$$ a_I:\\lim I_\\bullet\\longrightarrow H(I_\\bullet),\\qquad x\\longmapsto(\\iota x,0). $$\nIts hypotheses hold: the module category is Grothendieck by [lem-pur-ringed-site-grothendieck-abelian] and hence has enough injectives by [lem-sp-grothendieck-enough-injectives] and has exact countable products as above. The displayed formula is natural in strict tower maps, since the kernel inclusion and the product projections are natural. Consequently\n$$ \\theta_M=(H(u_M))^{-1}a_I:\\operatorname{Rlim}M_\\bullet\\xrightarrow{\\sim}H(M_\\bullet) $$\nis a natural isomorphism, independent of any choice of cone map in a bare triangulated category. For two functorial resolutions, their comparison to a further resolution gives the same formula after localization: each square commutes by $x\\mapsto(\\iota x,0)$ and the coordinatewise formula for $H(h)$. This identifies $H$ with the specified derived-limit functor, rather than merely choosing an object isomorphic to a derived limit.\n\nStep 4 gives a natural chain isomorphism\n$$ \\kappa_M:e_!H(M_\\bullet)\\xrightarrow{\\sim}H(e_!M_\\bullet). $$\nIt is the product comparison on both summands. For the $n$-th coordinate its compatibility with $f_M$ reads $e_!(x_n-t_nx_{n+1})=e_!x_n-e_!t_n(e_!x_{n+1})$; additivity and naturality of the product comparison give this equality. Define\n$$ \\lambda_e=\\theta_{e_!M}^{-1}\\,\\kappa_M\\,e_!(\\theta_M):e_!\\operatorname{Rlim}M_\\bullet\\xrightarrow{\\sim}\\operatorname{Rlim}(e_!M_\\bullet). $$\nAll three maps are natural isomorphisms. This is the resolution/ordinary-limit comparison: for a target resolution $v:e_!I_\\bullet\\to J_\\bullet$, the square from $e_!\\lim I_\\bullet\\cong\\lim(e_!I_\\bullet)$ to $\\lim J_\\bullet$ and from $e_!H(I_\\bullet)$ to $H(J_\\bullet)$ commutes, since both composites send a compatible family $x$ to $( (v_nx_n)_n,0)$. This verifies the identification with the comparison induced by ordinary-limit projections. In the Roos triangles of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], use these fiber presentations: projection to the first summand and the shifted second-product inclusion are the structure maps. The map $\\kappa_M$ is the product comparison on each summand, so it commutes with both structure maps and gives precisely $p'\\lambda_e=\\phi e_!(p)$ and $\\lambda_e[1]\\xi e_!(\\delta)=\\delta'\\phi$. Thus the current [lem-cbc-exact-functor-rlim] also verifies invertibility of this independently specified comparison; it is not being used to select a canonical comparison.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-cbc-exact-functor-rlim",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-weil-derived-limit-roos-complex",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BP (lemma-j-shriek-limits); derived.tex Tag 07KC (lemma-products); sites-cohomology.tex Tag 0940 (section-derived-limits), sequential Roos comparison."
+   }
+  },
+  {
+   "text": "Extension by zero also preserves intrinsic derived completeness. In [def-weil-pbc-intrinsic-completion], the Koszul complex $Q_m(A_T)$ is a bounded finite free complex. Its restriction is $Q_m(A_W)$ with the same differential multiplications $a_j^m$ and transition multiplications $a_j$. The tensor comparison of Step 3, or its finite-sum version, identifies $e_!(C\\otimes Q_m(A_W))$ with $(e_!C)\\otimes Q_m(A_T)$. Step 4 identifies their termwise countable products. Since $e_!$ is additive, it identifies the operator $(z_m)\\mapsto(z_m-t_mz_{m+1})$ and the two finite summands and differential of the explicitly defined completion fiber $F(C)$. Moreover, both completion units send $c$ to $((c\\otimes1)_m,0)$, so $e_!\\eta_C$ is identified with $\\eta_{e_!C}$. Consequently $C$ complete implies $e_!C$ complete. Apply this first to $j$ and the given $K$, making $Lg^*_{\\mathrm{comp}}j_!K$ well-typed. By [lemma-weil-pbc-completed-pullback-reduction], $L=Lg_{U,\\mathrm{comp}}^*K$ is complete; apply the same argument to $j'$ and $L$. That lemma applied to $g$ and $j_!K$ also gives completeness of the left-hand side. Thus the displayed comparison will be a map between complete objects.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lemma-weil-pbc-completed-pullback-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BP combined with the Koszul completion model; algebraization.tex Tag 0A0E (lemma-derived-completion-koszul). The chain-level units are the specified units of the cited intrinsic definition."
+   }
+  },
+  {
+   "text": "Each $P_n=A/I^n$ is finite by the coefficient datum. Finite-coefficient pullback is exact and is the abelian inverse image with action transported through the canonical constant-ring isomorphism [prop-weil-pbc-proetale-constant-exact]. Thus [lem-cbc-proetale-extension-zero-base-change] gives, termwise and naturally,\n$$ \\beta_n:g_n^*j_!K_n\\xrightarrow{\\sim}j'_!g_{U,n}^*K_n. $$\nThese maps commute with the quotient transitions, as follows without imposing extra coefficient hypotheses on that lemma. The inverse comparison is the adjoint, under $j'_!\\dashv j'^{-1}$, of\n$$ g_U^{-1}F\\longrightarrow g_U^{-1}j^{-1}j_!F\\cong j'^{-1}g^{-1}j_!F, $$\nwhere the first map is inverse image of the extension/restriction unit, and the second is the composition comparison [lem-weil-pbc-site-morphism-composition] for $jg_U=gj'$. The finite base-change map is the inverse of this canonical comparison. The unit at an object factoring through $U$ sends a section to its own extension summand [def-weil-extension-by-zero-presheaf]; the adjunction is that of [lem-pur-site-restriction-module-adjunction-exact]. The inverse-image construction and its unit/counit act on the underlying abelian sheaves as in [def-weil-proetale-inverse-image]. All these maps are unchanged when an action is composed with $P_b\\to P_a$: scalar restriction does not change the underlying sections, summands or abelian sheafification (Step 2). The composition comparison is characterized by these same adjunctions. It too commutes with scalar restriction. Thus the inverse comparisons commute with every quotient transition, and so do their inverses $\\beta_n$. This also shows that applying a chain map or a quotient map before or after $\\beta_n$ gives the same underlying map. Combined with Step 3, these are a morphism of the actual strict reduction-tower models, with a levelwise inverse. In passing from completed-coefficient pullback to these finite models use the natural finite-reduction identifications in [def-weil-pbc-completed-pullback] and [lem-weil-pbc-constant-completion-equivalence]. The latter explicitly says these identifications commute with the finite quotient transitions; on K-flat tensors they rebracket $(x\\otimes b)\\otimes c$ to $x\\otimes bc$, and quotient maps replace $b,c$ by their images. Hence no identification of unrelated ambient coefficient categories or merely pointwise isomorphism of incoherent towers is being used.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE (definition-extension-zero), finite extension/restriction adjunction; Tag 099N (lemma-pushforward-Noetherian-case), finite pulled reductions. sites.tex Tag 03CB supplies composition; the scalar and transition verification is written out here."
+   }
+  },
+  {
+   "text": "Now apply the functorial derived inverse limit [prop-weil-pbc-rlim-functoriality] to the strict tower comparison of Step 7. By the definition of completed pullback [def-weil-pbc-completed-pullback] and Step 3, its source is $Lg^*_{\\mathrm{comp}}j_!K$, and its target is $\\operatorname{Rlim}_n(j'_!g_{U,n}^*K_n)$. Follow it by $\\lambda_{j'}^{-1}$ from Step 5. The result is\n$$\nLg^*_{\\mathrm{comp}}j_!K\n \\xrightarrow{\\operatorname{Rlim}\\beta}\\operatorname{Rlim}_n(j'_!g_{U,n}^*K_n)\n \\xrightarrow{\\lambda_{j'}^{-1}}j'_!\\operatorname{Rlim}_n(g_{U,n}^*K_n)\n =j'_!Lg_{U,\\mathrm{comp}}^*K.\n$$\nBoth arrows are isomorphisms: the first is the image of a tower isomorphism, the second was proved in Step 5. This is the canonical completed exchange, since it is induced by the finite canonical exchanges and the specified inverse-limit comparison, exactly as in the statement. Every constituent is natural in $K$ (tensor comparisons, finite exchange and the derived-limit functor); their composition is therefore natural. Step 6 supplies all completeness and domain assertions.",
+   "uses": [
+    "prop-weil-pbc-rlim-functoriality",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N (lemma-pushforward-Noetherian-case), completed pullback as derived limit; assembly of the finite exchange and Tag 09BP limit comparison."
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-extension-by-zero",
-  "lem-cbc-proetale-extension-zero",
   "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-completed-pullback",
-  "lem-cbc-proetale-extension-zero-base-change",
+  "def-cbc-open-immersion-square",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-pc-quasi-compact-base-change",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-cbc-proetale-extension-zero",
+  "def-weil-extension-by-zero-presheaf",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-cbc-exact-functor-rlim",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-derived-limit-roos-complex",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-weil-pbc-intrinsic-completion",
   "lemma-weil-pbc-completed-pullback-reduction",
-  "lem-cbc-exact-functor-rlim"
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-pbc-site-morphism-composition",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-constant-completion-equivalence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.md",
-  "place": "## Proof"
+  "place": "Corrected proof: quasi-compact open case, written from the cited Stacks statements and existing DAG tools; missing local sources are recorded WANTED in report.md."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived completed pullback commutes with extension by zero along a base-changed open immersion",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.pullback_id_comp",
+   "date": "2026-10-15",
+   "verdict": "no match: returned ordinary scheme/module pullback, restriction, finite-product sheaf presentations or condensed constructors; none asserts the completed pro-etale exchange or the needed extension-by-zero product comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, IsIso, extension by zero, pullback",
+   "results": "loogle: <input>:1:41: expected end of input",
+   "date": "2026-10-15",
+   "verdict": "invalid query: rejected by the Loogle parser; no absence inference. Subsequent valid Loogle queries replace it."
+  },
+  {
+   "tool": "grep",
+   "query": "extension by zero|completed pullback|derived inverse limit",
+   "results": "1 hits: Mathlib/NumberTheory/MulChar/Basic.lean",
+   "date": "2026-10-15",
+   "verdict": "no match: the lone character-theory extension-by-zero comment is unrelated to sheaves or completed pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived completed pullback commutes with extension by zero for an open immersion",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "extension by zero|lowerShriek|extensionByZero|jShriek",
+   "results": "0 hits: ; source directory Mathlib/CategoryTheory",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.etale|extension by zero|lowerShriek",
+   "results": "0 hits: ; source directory Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completedPullback|derivedCompletion|extensionByZero|lowerShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero on the pro-etale site commutes with limits for a quasi-compact open immersion",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left adjoint to restriction to a retrocompact open subtopos preserves products of abelian sheaves",
+   "results": "8 hits: CategoryTheory.Presheaf.instPreservesFiniteProductsOppositeVal, Condensed.instPreservesFiniteProductsOppositeProfiniteVal, CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective, Condensed.instPreservesFiniteProductsOppositeStoneanVal, LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal, Condensed.instPreservesFiniteProductsOppositeCompHausVal, CategoryTheory.instPreservesFiniteProductsOppositeVal, CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts",
+   "date": "2026-10-15",
+   "verdict": "no match: returned ordinary scheme/module pullback, restriction, finite-product sheaf presentations or condensed constructors; none asserts the completed pro-etale exchange or the needed extension-by-zero product comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimits, CategoryTheory.Sheaf",
+   "results": "7 hits: CategoryTheory.preservesFiniteLimits_presheafToSheaf, CategoryTheory.preservesLimitsOfShape_presheafToSheaf, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology, AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology, AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_affineEtaleTopology, AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology",
+   "date": "2026-10-15",
+   "verdict": "no match: sheafification preserves only the finite limits indicated by the FinCategory parameter in CategoryTheory/Sites/LeftExact.lean; the other hits are existence instances."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-compact open immersion of schemes has extension by zero on pro-etale abelian sheaves commuting with all small limits",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, Condensed.lanSheafProfinite, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-15",
+   "verdict": "no match: returned ordinary scheme/module pullback, restriction, finite-product sheaf presentations or condensed constructors; none asserts the completed pro-etale exchange or the needed extension-by-zero product comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adic completion of inverse image commutes with extension by zero for a quasi-compact open immersion",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.ideal_map, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top, AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc, AlgebraicGeometry.Scheme.Hom.app_invApp'_assoc",
+   "date": "2026-10-15",
+   "verdict": "no match: returned ordinary scheme/module pullback, restriction, finite-product sheaf presentations or condensed constructors; none asserts the completed pro-etale exchange or the needed extension-by-zero product comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along a retrocompact open inclusion preserves products of sheaves of abelian groups",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi-compact open immersion j of schemes and any ring sheaf R on the small pro-etale site, extension by zero of R modules preserves all products",
+   "results": "8 hits: LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, Condensed.instPreservesFiniteProductsOppositeProfiniteVal, CondensedMod.ofSheafCompHaus, LightCondAb.ofSheafLightProfinite, LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal, Condensed.lanSheafProfinite, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-15",
+   "verdict": "no match: returned ordinary scheme/module pullback, restriction, finite-product sheaf presentations or condensed constructors; none asserts the completed pro-etale exchange or the needed extension-by-zero product comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"openImmersion\", \"PreservesLimits\"",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.forget_preservesLimitsOfLeft, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.forget_preservesLimitsOfRight, AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeLocallyRingedSpaceWalkingCospanCospanForgetToLocallyRingedSpace, AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeLocallyRingedSpaceWalkingCospanCospanForgetToLocallyRingedSpace_1, AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeTopCatWalkingCospanCospanForgetToTop, AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeTopCatWalkingCospanCospanForgetToTop_1, AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeWalkingCospanCospanForget, AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeWalkingCospanCospanForget_1",
+   "date": "2026-10-15",
+   "verdict": "no match: these are forgetful functors preserving geometric pullback diagrams of spaces/schemes, not extension-by-zero module functors."
+  },
+  {
+   "tool": "grep",
+   "query": "extension by zero|lowerShriek|extensionByZero|jShriek|pro.etale",
+   "results": "0 hits: ; source directory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of module sheaves along a quasi-compact open immersion preserves infinite products on the pro-etale site",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesLimits extension by zero open immersion",
+   "results": "0 hits: ; loogle: <input>:1:26: expected end of input",
+   "date": "2026-10-15",
+   "verdict": "invalid query: Loogle parser error; no absence inference"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completed pullback extension by zero quasi-compact open immersion",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.IsOpenImmersion.isPullback, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.IsOpenImmersion.isPullback_lift_id, AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V, AlgebraicGeometry.IsOpenImmersion.range_pullback_fst_of_right, AlgebraicGeometry.IsOpenImmersion.range_pullbackFst, AlgebraicGeometry.IsOpenImmersion.range_pullback_snd_of_left",
+   "date": "2026-10-15",
+   "verdict": "no match: geometric pullback and open-immersion lemmas do not state module extension-by-zero or completed exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|jShriek|completedPullback",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lem-cbc-completed-extension-zero-comparison|def-weil-finite-type-morphism|lemma-weil-pbc-completed-pullback-reduction",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor on sheaves preserving countable products commutes with the derived inverse limit of a sequence",
+   "results": "8 hits: CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, Condensed.hasExactLimitsOfShape, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective, CategoryTheory.hasSheafCompose_of_preservesLimitsOfSize, CategoryTheory.Presheaf.isSheaf_comp_of_isSheaf, CategoryTheory.HasSheafify.isLeftExact",
+   "date": "2026-10-15",
+   "verdict": "no match: the returned declarations concern exact limits or sheaf composition, not the natural derived-limit/extension-by-zero comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "map.*homotopyLimit|homotopyLimit.*map|Roos|lowerShriek|extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyLimit\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Roos\"",
+   "results": "Twelve actual substring hits for Std.DTreeMap.Internal RooSlice declarations; these are unrelated data structures, not a Roos complex theorem.",
+   "date": "2026-10-15",
+   "verdict": "No matching declaration in these results."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|Roos|derivedInverseLimit",
+   "results": "Zero hits in the pinned Mathlib source for extensionByZero|lowerShriek|Roos|derivedInverseLimit.",
+   "date": "2026-10-15",
+   "verdict": "No matching declaration in these results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor preserving countable products commutes with the derived limit of a sequence of complexes of sheaves",
+   "results": "Eight actual hits: exact-limit axioms for condensed/light-condensed modules and general sheaf categories; none states completed open extension base change or the strict-tower derived-limit comparison.",
+   "date": "2026-10-15",
+   "verdict": "No matching declaration in these results."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -79,5 +440,119 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-cbc-completed-extension-zero-comparison",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported arbitrary-open statement can be ill-typed because non-quasi-compact extension by zero need not preserve derived completeness. Added quasi-compactness of j, explicitly retained completed coefficient categories, and proved completeness plus the canonical natural comparison in eight steps. No new nodes: Stacks 09BP product preservation is a kernel step using the existing ringed recollement and closed-immersion limit theorems. Audited finite-coefficient transition compatibility and supplied exact statement quotes for every citation. Mathlib searches and their unavailable results are recorded from searches.jsonl. Second reading supplied the levelwise countable-product construction for towers and made the two-open arguments uniform. Repair of landing return: revalidated current cited statements, replaced the obsolete canonical-map use of lem-cbc-exact-functor-rlim by an explicit functorial resolution comparison with both Roos equations, and refreshed stale quotes for the finite exchange and Rlim functoriality. Current second reading repaired the remaining unstated fiber-model identification in Step 5 using the existing general K-injective tower Roos-complex comparison and an explicit natural zigzag.",
+  "blueprint": "Original proof: exactness and reduction-tower identification are Steps 1-3; the final parenthetical claiming countable products is replaced by the quasi-compact kernel argument in Steps 4-5; typing/completeness is Step 6; finite base change and its quotient compatibility are Step 7; derived-limit assembly is Step 8. Imported metadata preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies open pro-etale sites with ringed slice sites and restricts constant coefficients; the finite-coefficient nodes of this unit do not provide the completed coefficient identification."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "Computes module limits and coefficient inverse limits sectionwise; needed for completed sheaves and the product-kernel calculation."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Supplies exact extension/restriction on any ringed slice site, including the nonfinite completed coefficient ring sheaf; the unit finite-coefficient statement does not cover this."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Passes the exact module functors termwise to unbounded derived categories."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides a K-flat representative with flat terms for the reduction-tower computation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "General module tensor comparison for extension by zero; used to prove K-flatness and reduction compatibility directly."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Gives the ringed short exact recollement sequence needed for the kernel proof of product preservation, with quasi-compact open hypothesis explicitly verified."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Supplies all-limit preservation for closed inverse image in the product-kernel argument; the target unit has no such geometric lemma."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact countable products of arbitrary ring-sheaf modules on the pro-etale site."
+   },
+   {
+    "node": "lem-weil-derived-limit-products-core",
+    "why": "Identifies termwise products with products in unbounded derived categories under exactness."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Fixes the functorial sequential derived-limit triangle and comparison to the concrete product/fiber model."
+   },
+   {
+    "node": "lemma-weil-pbc-completed-pullback-reduction",
+    "why": "Proves completed pullback is complete, needed for both sides and the application to j_!K after Step 6."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Identifies finite module pullback with exact inverse image; does not assume the completed ring structure map is an isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Provides the composition comparison compatible with adjunctions used to check coefficient compatibility of the finite exchange."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Provides finite-reduction scalar comparisons with quotient-transition compatibility; distinguishes completed and constant coefficient categories."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Supplies functorial Rlim on the derived strict tower category when assembling the comparison."
+   },
+   {
+    "node": "lem-weil-derived-limit-roos-complex",
+    "why": "Identifies the actual termwise limit of a K-injective tower with its explicit signed product fiber by the canonical kernel inclusion, needed for the natural comparison in Step 5."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Supplies the enough-injectives hypothesis of the general K-injective tower Roos-complex comparison for the completed ring-sheaf module categories in Step 5."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Supplies the enough-injectives hypothesis of the general K-injective tower Roos-complex comparison for the completed ring-sheaf module categories in Step 5."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-derived-limit-roos-complex",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q18-8a554f797",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-8a554f797 (reviewer sub-agent of L); spot-checked: Read all eight steps, cited statements, unit/chapter route, and source passages. Quasi-compactness correction is justified; completeness, strict quotient compatibility, and the canonical derived-limit comparison check out. No new nodes, duplicates, cycles, or repairs. Accepted tool uses and exact master target category/morphism distinctions are documented in review.md."
+ }
 }
