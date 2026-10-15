@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-weil-compact-support-finite-field-independence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Independence of the finite coefficient field",
- "statement": "Let $K_0$ be a field, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $K_0$-schemes, let $f:X\\to Y$ be a\nseparated finite-type $K_0$-morphism, fix a prime $\\ell$ whose image in $K_0$\nis invertible, and fix an algebraic closure $\\Qlb$ of $\\Ql$. Let\n$K_{\\Qlb}\\in D^b_c(X,\\Qlb)$ be an object of the common-stage category of\n[def-weil-algebraically-closed-coefficients] represented at the finite\ncoefficient stages $E\\subset L\\subset\\Qlb$ by $K_E\\in D^b_c(X,E)$ and $K_L\\in\nD^b_c(X,L)$ of [def-weil-rationalization-karoubi]. Then the two objects\n\n$$\n Rf_!K_E\\otimes_E\\Qlb,\\qquad Rf_!K_L\\otimes_L\\Qlb\n$$\n\nof $D^b_c(Y,\\Qlb)$, formed from the compact-support functor\n[def-weil-integral-rational-qbar-compact-support], are canonically\nisomorphic.",
+ "statement": "Let $K_0$ be a field, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $K_0$-schemes, let $f:X\\to Y$ be a\nseparated finite-type $K_0$-morphism, fix a prime $\\ell$ whose image in $K_0$\nis invertible, and fix an algebraic closure $\\Qlb$ of $\\Ql$. Let\n$K_{\\Qlb}\\in D^b_c(X,\\Qlb)$ be an object of the common-stage category of\n[def-weil-algebraically-closed-coefficients] represented at the finite\ncoefficient stages $E\\subset L\\subset\\Qlb$ by $K_E\\in D^b_c(X,E)$ and $K_L\\in\nD^b_c(X,L)$ of [def-weil-rationalization-karoubi], with fixed representing isomorphisms $\\alpha_E:(E,K_E)\\xrightarrow{\\sim}K_{\\Qlb}$ and $\\alpha_L:(L,K_L)\\xrightarrow{\\sim}K_{\\Qlb}$ in the common-stage category. Then the two objects\n\n$$\n Rf_!K_E\\otimes_E\\Qlb,\\qquad Rf_!K_L\\otimes_L\\Qlb\n$$\n\nof $D^b_c(Y,\\Qlb)$, formed from the compact-support functor\n[def-weil-integral-rational-qbar-compact-support], are canonically\nisomorphic relative to the specified representing isomorphisms. The comparison is independent of the common finite overfield and morphism representatives used to compute it.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-finite-field-independence.md",
   "place": "node lem-weil-compact-support-finite-field-independence, order 1495"
@@ -20,31 +20,168 @@
  ],
  "proof": [
   {
-   "text": "The scalar-extension functors between the finite stages of\n[def-weil-rationalization-karoubi] are exact and compatible with composition\nby [lem-weil-scalar-extension-composition], and the finite-stage\ncompact-support functors of\n[def-weil-integral-rational-qbar-compact-support] carry the scalar-extension\nisomorphisms supplied by the common-stage construction of\n[def-weil-algebraically-closed-coefficients]. By the descent-of-functors\nproposition of the proper-base-change chapter the compatible family therefore\ndescends to a single exact functor on the common-stage category, so its value\non the object $K_{\\Qlb}$ is computed indifferently at the stage $E$ or at the\nlarger stage $L$.",
+   "text": "For $Z=X,Y$, write $T^Z_{B/A}$ for the rational scalar extension of [def-weil-rationalization-karoubi], and write $F_A=Rf_{!,A}$ for the rational compact-support operation of [def-weil-integral-rational-qbar-compact-support]. Use the coefficient comparisons of [lem-fix-operation-reduction], on the stated bounded constructible domains, to obtain natural isomorphisms\n$$\\beta_{B/A}:T^Y_{B/A}F_A\\xrightarrow{\\sim}F_BT^X_{B/A}.$$\nHere only finite extensions of coefficient fields are used; the notation $-\\otimes_A\\Qlb$ will subsequently mean a pair in the common-stage category. Let $a^Z_{N,M,A}:T^Z_{N/M}T^Z_{M/A}\\xrightarrow{\\sim}T^Z_{N/A}$ be the scalar-extension associator of [lem-weil-scalar-extension-composition]. The compatibility with tensor associativity asserted in [lem-fix-operation-reduction] gives the equation\n$$\\beta_{N/A,K}=F_N(a^X_{N,M,A,K})\\circ\\beta_{N/M,T^X_{M/A}K}\\circ T^Y_{N/M}(\\beta_{M/A,K})\\circ(a^Y_{N,M,A,F_AK})^{-1}.$$\nThe identity-extension comparison is the corresponding unit map. These are comparisons for the actual completed-integral scalar extensions followed by raw Hom scalar localization, rather than for the ambient derived category of discrete $\\Qlb$-module sheaves.",
    "uses": [
     "def-weil-rationalization-karoubi",
-    "lem-weil-scalar-extension-composition",
     "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-algebraically-closed-coefficients"
+    "lem-fix-operation-reduction",
+    "lem-weil-scalar-extension-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-finite-field-independence.md",
+    "place": "Imported ## Proof: finite-stage scalar-extension compatibility, with its associator equation made explicit"
+   }
+  },
+  {
+   "text": "In the common-stage category of [def-weil-algebraically-closed-coefficients], let $\\gamma=\\alpha_L^{-1}\\alpha_E:(E,K_E)\\xrightarrow{\\sim}(L,K_L)$. Represent $\\gamma$ and $\\gamma^{-1}$ over common finite coefficient fields, then enlarge to a finite $M\\supset L$ on which both compositions are identities. This is possible because equality of two morphism representatives means equality after a further finite extension, and a compositum dominates the finitely many fields needed for the two equalities. With the associators of [lem-weil-scalar-extension-composition] inserted in the transport maps, we therefore have inverse maps\n$$u:T^X_{M/E}K_E\\xrightarrow{\\sim}T^X_{M/L}K_L,\\qquad v=u^{-1}$$\nat this single stage. No isomorphism $T^X_{L/E}K_E\\cong K_L$ at $L$ is assumed: the supplied common-stage identification may require enlarging $L$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-finite-field-independence.md",
+    "place": "Imported ## Proof: common-stage representation, with the inverse represented at a common larger field"
+   }
+  },
+  {
+   "text": "Define at stage $M$\n$$w_M=\\beta_{M/L,K_L}^{-1}\\circ F_M(u)\\circ\\beta_{M/E,K_E}:\nT^Y_{M/E}F_EK_E\\longrightarrow T^Y_{M/L}F_LK_L.$$\nDefine $z_M=\\beta_{M/E,K_E}^{-1}\\circ F_M(v)\\circ\\beta_{M/L,K_L}$. Then $z_Mw_M=\\beta_{M/E,K_E}^{-1}F_M(vu)\\beta_{M/E,K_E}=1$, and $w_Mz_M=\\beta_{M/L,K_L}^{-1}F_M(uv)\\beta_{M/L,K_L}=1$. Passing to morphism classes in [def-weil-algebraically-closed-coefficients] preserves these equations, since its composition is represented at one common stage. Thus $[M,w_M]$ is an isomorphism from $(E,F_EK_E)$ to $(L,F_LK_L)$. By [def-weil-integral-rational-qbar-compact-support], these are precisely the two objects displayed in the statement. This uses the finite-stage functors and the coefficient comparisons of [lem-fix-operation-reduction], without identifying the coefficient categories with a different ambient sheaf category.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-finite-field-independence.md",
+    "place": "Imported ## Proof: the descended value on the two representatives, via an explicit map and inverse"
+   }
+  },
+  {
+   "text": "It remains to verify that the isomorphism is canonical relative to $\\alpha_E,\\alpha_L$. If $M\\subset N$, the common-stage transport of $u$ is\n$$u_N=a^X_{N,M,L,K_L}\\circ T^X_{N/M}(u)\\circ(a^X_{N,M,E,K_E})^{-1}$$\nby [def-weil-algebraically-closed-coefficients] and [lem-weil-scalar-extension-composition]. For $A=E,L$, abbreviate $x_A=a^X_{N,M,A,K_A}$, $y_A=a^Y_{N,M,A,F_AK_A}$, $b_A=\\beta_{M/A,K_A}$ and $c_A=\\beta_{N/M,T^X_{M/A}K_A}$, and put $S=T^Y_{N/M}$. Step 1 says $\\beta_{N/A,K_A}=F_N(x_A)c_AS(b_A)y_A^{-1}$. Hence substitution of $u_N=x_LT^X_{N/M}(u)x_E^{-1}$ gives\n$$w_N=y_LS(b_L)^{-1}c_L^{-1}F_N(T^X_{N/M}u)c_ES(b_E)y_E^{-1}.$$\nNaturality of $\\beta_{N/M}$ at the map $u:T^X_{M/E}K_E\\to T^X_{M/L}K_L$ is precisely\n$$F_N(T^X_{N/M}u)c_E=c_LS(F_Mu).$$\nSubstituting this equality cancels $c_L^{-1}c_L$ and gives\n$$w_N=y_LS(b_L^{-1}F_M(u)b_E)y_E^{-1}=a^Y_{N,M,L,F_LK_L}\\circ T^Y_{N/M}(w_M)\\circ(a^Y_{N,M,E,F_EK_E})^{-1}.$$\nConsequently $w_N$ represents the same morphism as $w_M$. For two representatives of the fixed morphism $\\gamma$, choose a further stage where their transports agree, as in the equality clause of [def-weil-algebraically-closed-coefficients]; the displayed formula makes their output representatives equal there. This proves independence of every auxiliary stage and representative. Identity input comparisons give identity output comparisons, and composable comparisons give composable outputs, because in the product $\\beta^{-1}F(v)\\beta\\,\\beta^{-1}F(u)\\beta$ the middle factors cancel and $F(v)F(u)=F(vu)$. This is the descent argument in the imported proof, written within the present pair categories.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-finite-field-independence.md",
+    "place": "Imported ## Proof: descent-of-functors argument, written as invariance under common-stage transport and representative change"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-rationalization-karoubi",
-  "lem-weil-scalar-extension-composition",
   "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-algebraically-closed-coefficients",
-  "prop-weil-pbc-descent-functors"
+  "lem-fix-operation-reduction",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-finite-field-independence.md",
-  "place": "## Proof"
+  "place": "Imported proof paragraph in the DAG; explicit common-stage comparison and inverse, since the referenced markdown is absent locally and the literal PBC finite-stage categories have additional witness requirements."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "independence of finite coefficient field for compact-support direct image in rationalized constructible derived categories",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, Condensed.finFree, AlgebraicGeometry.Scheme.Hom.isConstructible_image, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CompHausLike.LocallyConstantModule.functor, CategoryTheory.presheafIsGeneratedBy_of_isFinite",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, scalar extension, compact support",
+   "results": "loogle: Unknown identifier `scalar`",
+   "date": "2026-10-16",
+   "verdict": "unavailable: query not parsed; superseded by valid ModuleCat.extendScalars query"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?support.*scalar|scalar.*compact.?support",
+   "results": "0 printed hits, but requested subdirectory does not exist under Mathlib/; this search is inconclusive and is superseded by the correctly rooted grep.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid subdirectory",
+   "subdirectory": "SixFunctors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compact-support functor is independent of finite coefficient field stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent family of exact compact-support direct image functors over finite coefficient field extensions descends to algebraic closure",
+   "results": "8 hits: Condensed.hasExactColimitsOfShape, Condensed.profiniteSolid, Condensed.instAB5CondensedMod, CompHausLike.LocallyConstantModule.functor, Condensed.lanSheafProfinite, LightCondensed.lanLightCondSet, CondensedMod.IsSolid, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "12 hits: ModuleCat.extendScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:954-1008: ordinary module extension of scalars and its composition/identity comparisons, without compact-support derived images.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module scalar extension is not this constructible coefficient-category assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|lowerShriek|compactSupport",
+   "results": "0 printed hits, but requested subdirectory does not exist under Mathlib/; this search is inconclusive and is superseded by the correctly rooted grep.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid subdirectory",
+   "subdirectory": "Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalarsId|lowerShriek|compactSupport",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?support.*scalar|scalar.*compact.?support|extendScalarsComp|extendScalarsId",
+   "results": "7 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:954-1008: ordinary module extension of scalars and its composition/identity comparisons, without compact-support derived images.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module scalar extension is not this constructible coefficient-category assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent family of functors between filtered diagrams of categories induces a functor on the common-stage pair categories and preserves isomorphisms",
+   "results": "8 hits: CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp, CategoryTheory.IndParallelPairPresentation.hI, CategoryTheory.instIsFilteredI, CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp_eq, CategoryTheory.instIsFilteredOrEmptyGrothendieckOfαCategoryObjCat, CategoryTheory.Ind.exists_nonempty_arrow_mk_iso_ind_lim, CategoryTheory.IsFiltered.IsEventuallyConstant, CategoryTheory.Limits.IndObjectPresentation.hI",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms compatible with transition functors induce a functor between filtered colimits of categories",
+   "results": "8 hits: CategoryTheory.Limits.instHasFilteredColimitsOfSizeFunctor, CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered, CategoryTheory.IsFiltered.SmallFilteredIntermediate.factoringCompInclusion, CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit, CategoryTheory.preservesColimitNatIso, CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit', CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered', CategoryTheory.preservesColimitNatIso_hom_app",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned filtered-colimit equality lemma verifies an elementary ingredient, not compact-support coefficient comparison or descent of the present category-valued diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "12 hits: CategoryTheory.Functor.mapIso, CategoryTheory.Functor.mapIso_refl, CategoryTheory.Functor.mapIso_symm, CategoryTheory.Functor.mapIso_hom, CategoryTheory.Functor.mapIso_inv, CategoryTheory.Functor.mapIso_trans, CategoryTheory.Functor.mapIso_injective, CategoryTheory.Functor.preimageIso_mapIso",
+   "date": "2026-10-16",
+   "verdict": "no match: functorial preservation of isomorphisms is only the elementary calculation already written in step 3"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*colimit.*categor|colimit.*categor.*functor|lowerShriek",
+   "results": "25 hits: Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean, Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean, Mathlib/CategoryTheory/Filtered/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean, Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean, Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean, Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned filtered-colimit and functor-category files do not state the compact-support coefficient-field assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -74,5 +211,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-compact-support-finite-field-independence",
+  "worker": "stage1",
+  "summary": "Made the representing isomorphisms explicit to repair the canonicity ambiguity. The four steps supply coherent finite-stage coefficient comparisons using the existing operation-reduction statement, represent the chosen input isomorphism and its inverse at one finite stage, form inverse output maps, and prove invariance under enlarging that stage or changing the representative. No new nodes. The PBC descent formula is written out directly, so no identification between its witness-enhanced coefficient categories and the present categories is needed.",
+  "blueprint": "Realizes the imported proof paragraph: scalar-extension compatibility in step 1, common-stage input in step 2, descended output in step 3, and the independence asserted by functor descent in step 4. The PBC descent proposition is not invoked on differently defined coefficient categories.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Its statement gives the compact-support coefficient comparisons and compatibility with rationalization, common-stage scalar extension, and tensor associativity. No statement in the present unit supplies that coefficient-transport theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-dbb05f32e",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-dbb05f32e (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, master sources, report, and unit/chapter route. All four steps, associator directions, inverse calculations, edge cases, and dependency checks pass. Accepted lem-fix-operation-reduction as the declared comparison tool. No new nodes or repairs. Condensed-category and exchange-map comparisons remain separate target obligations; review.md records the checks."
+ }
 }
