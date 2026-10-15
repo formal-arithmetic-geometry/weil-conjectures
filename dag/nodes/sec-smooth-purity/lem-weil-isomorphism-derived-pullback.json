@@ -4,12 +4,12 @@
   "is": null,
   "from": {
    "node": "def-weil-ordinary-compact-cohomology",
-   "place": "its statement (a notion the statement uses)",
+   "place": "Statement, coefficient-object paragraph: the finite constant sheaf and completed integral coefficient sheaf; the canonical Weil structure requested in the next sentence (via def-weil-constant-weil-structure) uses the derived-to-termwise comparison.",
    "via": [
     "def-weil-constant-weil-structure"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived pullback along an isomorphism of schemes is the termwise inverse image",
@@ -29,9 +29,152 @@
   "def-weil-derived-complete-integral-detailed",
   "def-weil-derived-pullback-tensor-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=g^{-1}$. By clauses 1--3 of [lem-weil-proetale-isomorphism-inverse-image], $F$ is relabelling along the covering-preserving site equivalence $\\Phi_g$, and it preserves limits and colimits. This description also gives an equivalence of module sheaves over any ring sheaf $R$ on $Y$ with module sheaves over $F R$: relabel the underlying abelian sheaf and its action; relabelling by $\\Phi_g^{-1}$ is its inverse, including the action maps. Kernels and cokernels are relabelled, so this equivalence is exact. At finite level use $c^g_{A_{E,n}}$ to identify $F(A_{E,n})_Y$ with $(A_{E,n})_X$. At integral level use the inverse-limit isomorphism in clause 2 and the compatible maps in clause 3 to obtain exactly the ring isomorphism $c_{\\mathcal O_E}$ in the statement. For the completed coefficient projections it satisfies\n$$\\pi_{n,X}c_{\\mathcal O_E}=c^g_{A_{E,n}}F(\\pi_{n,Y});$$\nthis follows by composing the defining limit map with its $n$-th projection. Thus restriction of scalars along the projections commutes with this relabelling. By [lem-weil-pbc-exact-functor-complex-cohomology], $H^i(FK)\\cong F H^i(K)$, naturally, for both coefficient rings. In particular $F$ preserves quasi-isomorphisms. By [lem-sf-exact-functor-derived-triangulated] it induces the termwise triangulated functor on the ambient derived categories.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-completed-integral-coefficients",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; module actions and completed projections relabelled using the site equivalence of lem-weil-proetale-isomorphism-inverse-image"
+   }
+  },
+  {
+   "text": "For $\\Lambda=A_{E,n}$ the module pullback is $F(-)\\otimes_{F\\Lambda_Y}\\Lambda_X$. Because $c_\\Lambda$ is an isomorphism, multiplication $m\\otimes a\\mapsto a m$ (where the action is transported along $c_\\Lambda$) identifies this functor naturally with $F$; its inverse is $m\\mapsto m\\otimes1$. Choose a K-flat resolution $q:P\\to K$ by [lem-pc-kflat-resolution]. The finite-level definition [def-weil-derived-pullback-tensor-hom] computes $Lg^*K$ by the module pullback of $P$. The displayed multiplication map identifies this representative with $FP$, and $Fq:FP\\to FK$ is a quasi-isomorphism by step 1. Their composite defines $\\lambda_K$ in the ambient derived category. For naturality, let $T$ be the underived module pullback. The multiplication maps define a natural isomorphism $T\\cong F$ on all complexes: for every chain map $u:M\\to N$, both paths send $m\\otimes a$ to $aF(u)(m)$. Both functors preserve quasi-isomorphisms by step 1 and this isomorphism, so this square descends through the localization [def-weil-abstract-derived-category]. By [def-weil-pbc-proetale-operations], in this identified-coefficient case $Lg^*$ is exactly the functor induced by $T$ termwise; its K-flat representative above is identified with $TK$ by $Tq$. The descended multiplication isomorphism is therefore $\\lambda$, independently of any functorial choice of resolutions. This also explains the finite-level termwise computation asserted by the definition, rather than using that assertion as a separate theorem.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; finite-level derived pullback on K-flat representatives, followed by the exact-functor computation of Tag 015F"
+   }
+  },
+  {
+   "text": "Suppose $K\\in D^b_c(Y,A_{E,n})$. For each of its finitely many nonzero cohomology sheaves choose the finite locally closed constructible partition in [def-weil-finite-torsion-constructibility]. Its inverse images under the scheme isomorphism $g$ form the corresponding finite partition of $X$. The restriction of $g$ to each inverse-image stratum is an isomorphism onto the original stratum, so the site relabelling of step 1 restricts to that stratum. A covering trivializing the restricted sheaf is relabelled to a covering with the same constant finite module; its stalks have the same finite module values. Hence $F H^i(K)$ is constructible. Step 1 gives $H^i(FK)\\cong F H^i(K)$ and introduces no new nonzero degrees. Thus $FK\\in D^b_c(X,A_{E,n})$. The subcategories are full, so the ambient natural isomorphism of step 2 is the required one inside $D^b_c$.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Coefficient objects and constructible coefficient categories; direct application of their definitions under the site relabelling"
+   }
+  },
+  {
+   "text": "Now put $R_Y=\\widehat{\\mathcal O}_{E,Y}$, $R_X=\\widehat{\\mathcal O}_{E,X}$ and use $c_{\\mathcal O_E}$ to regard $F$ as the exact equivalence of their module sheaves in step 1. Relabelling gives\n$$F(M\\otimes_{R_Y}N)\\cong FM\\otimes_{R_X}FN.$$\nIndeed the presheaf tensor has the same sectionwise tensor after relabelling, and a sheafification has the same universal property because the coverings are relabelled. These maps send $m\\otimes n$ to the corresponding tensor and commute with restrictions. Since $F$ commutes with direct sums, the same identification applies to total tensor complexes and their differentials $d\\otimes1+(-1)^i1\\otimes d$ [def-pc-tensor-complex-sheaves]. If $P$ is K-flat and $B$ is an acyclic complex on $X$, relabel $B$ back to $B'$ on $Y$. Then $B'$ is acyclic by step 1 and\n$$B\\otimes_{R_X}FP\\cong F(B'\\otimes_{R_Y}P)$$\nis acyclic; thus $FP$ is K-flat by [def-pc-kflat-complex]. Relabelling also preserves flat module sheaves [def-pc-flat-sheaf-modules]: for a flat $M$ and a short exact sequence on $X$, relabel the sequence back to $Y$, tensor with $M$, and apply the exact $F$; the tensor identification just proved gives its tensor with $FM$, so it is exact. Choose $P\\to K$ with flat terms by [lem-pc-kflat-resolution], so that $FP$ is K-flat with flat terms as well, and form $P_n=P\\otimes_{R_Y}(A_{E,n})_Y$ as in [def-weil-integral-derived-reduction]. The coefficient-projection square of step 1 gives, simultaneously for all $n$,\n$$F(P_n)\\cong FP\\otimes_{R_X}(A_{E,n})_X.$$\nThe maps $P\\to P_n$ and $P_{n+1}\\to P_n$ are $x\\mapsto x\\otimes1$ and $x\\otimes a\\mapsto x\\otimes\\rho_n(a)$ [def-weil-integral-reduction-tower]. Under the tensor identification these are the identical formulas on $X$, so both the quotient arrows and the transitions agree, not just the objects. These identifications are natural on K-flat representatives; the canonical resolution comparisons respect the quotient arrows and transitions by [lem-weil-integral-reduction-tower-well-defined]. Consequently they identify the derived reduction towers of $FK$ with the relabelled derived reduction towers of $K$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-resolution",
+    "def-weil-integral-derived-reduction",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-integral-reduction-tower-well-defined",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; tensor and K-flatness definitions applied under the covering-preserving site equivalence; quotient-arrow compatibility written explicitly"
+   }
+  },
+  {
+   "text": "For the K-flat representative $P\\to K$ with flat terms chosen in step 4 put $B(P)=\\prod_n\\operatorname{Res}_nP_n$ and\n$$C(P)=\\operatorname{Cone}(1-s:B(P)\\to B(P))[-1].$$\nHere products are the termwise products of module sheaves; they are exact by [lem-weil-proetale-countable-products-exact] and represent derived products by clause 2 of [lem-weil-derived-limit-existence]. With the cone convention of [def-weil-abstract-derived-category], $C(P)^j=B(P)^{j-1}\\oplus B(P)^j$ and\n$$d(y,x)=(-d_By-(1-s)x,d_Bx).$$\nWriting $a:P\\to B(P)$ for the maps $x\\mapsto x\\otimes1$, the strict equality $(1-s)a=0$ makes $x\\mapsto(0,a(x))$ a chain map $P\\to C(P)$. It gives a natural comparison $\\eta_K:K\\to C(P)$ in the derived category. Apply [lem-weil-finite-free-completed-scalar-comparison] with the coefficient extension $L=E$: its last sentence identifies precisely this zero-shifted-component comparison with the derived-completeness map, and its isomorphism assertion says that $\\eta_K$ is an isomorphism for $K$ derived complete as in [def-weil-derived-complete]. Naturality and independence from the representative are also part of that comparison theorem. This uses the specified strict cone map, rather than an arbitrary isomorphism between two Roos-triangle objects.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "def-weil-abstract-derived-category",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.5.1 and Definition 3.5.2, p. 24; L=E specialization of lem-weil-finite-free-completed-scalar-comparison; Stacks Tag 08TC (derived-definition-derived-limit) for the Roos triangle"
+   }
+  },
+  {
+   "text": "Use the integral definition [def-pur-integral-derived-operations], to which [def-weil-derived-pullback-tensor-hom] refers: $Lg^*K$ is represented by the strict cone of the tower $\\operatorname{Res}_n g_n^*P_n$. The multiplication isomorphisms of step 2 and the projection square of step 1 identify this tower with $F(\\operatorname{Res}_nP_n)$, including its transition maps. The product comparison $F B(P)\\cong\\prod_nF(\\operatorname{Res}_nP_n)$ has $n$-th component $F(\\mathrm{pr}_n)$; it therefore identifies $F(1-s)$ with the endomorphism having components $\\mathrm{pr}_n-F(t_n)\\mathrm{pr}_{n+1}$. Applying $F$ to both coordinates of the cone and to the displayed differential in step 5 gives a natural chain isomorphism from $F C(P)$ to that representative of $Lg^*K$. By [lem-pur-integral-operations-well-defined], these comparisons on K-flat representatives descend to a natural isomorphism $\\theta_K:Lg^*K\\xrightarrow{\\sim}F C(P)$, independent of the resolutions. For a derived-complete $K$, define\n$$\\lambda_K=F(\\eta_K)^{-1}\\circ\\theta_K:Lg^*K\\xrightarrow{\\sim}FK.$$\nThe inverse is natural because $\\eta$ is natural and all its components on this full subcategory are isomorphisms. Thus this comparison has the required naturality for integral coefficients as well.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC, definition-derived-limit; strict cone model and its resolution-independent functorial descent in lem-pur-integral-operations-well-defined"
+   }
+  },
+  {
+   "text": "It remains to put the integral comparison in the stated full subcategory. Apply the triangulated termwise functor of step 1 to a Roos triangle witnessing the derived completeness of $K$ in [def-weil-derived-complete]. By the product and transition identifications of step 6, and the quotient-arrow identifications of step 4, its image is a Roos triangle for the reduction tower of $FK$, with the required first map from $FK$. Thus $FK$ is derived complete. Step 4 identifies every derived reduction of $FK$ with $F(K\\otimes^L_{\\mathcal O_E}A_{E,n})$. Step 3 makes these reductions bounded constructible, and step 1 gives the same cohomological vanishing interval as on $Y$. The single interval $[r,s]$ supplied by [def-weil-derived-complete-integral-detailed] therefore works for every reduction on $X$. These are exactly the two defining conditions of $D^b_c(X,\\mathcal O_E)$. Fullness puts the natural isomorphism of step 6 in this subcategory.",
+   "uses": [
+    "def-weil-derived-complete",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2 and the constructible integral category; explicit transport of the defining triangle and the uniform reduction interval"
+   }
+  },
+  {
+   "text": "Finally the coefficient objects placed in degree zero belong to the relevant constructible categories by clauses 1--2 of [lem-weil-constant-coefficient-objects-constructible]. Its auxiliary finite-field datum and algebraic closure may be chosen independently of $X$ and $Y$: that statement allows any scheme $Y$ and requires no map from $Y$ to that finite field. Choose a prime $p\\ne\\ell$, the finite field of size $p$, and an algebraic closure containing the finite extension $E$. This merely instantiates those auxiliary parameters. Specialize the already constructed natural isomorphisms to $K=(A_{E,n})_Y[0]$ and $K=\\widehat{\\mathcal O}_{E,Y}[0]$ respectively. The resulting maps are the asserted $\\lambda_{\\Lambda_Y}$; the coefficient-ring identifications are exactly the maps $c_\\Lambda$ fixed in step 1.",
+   "uses": [
+    "lem-weil-constant-coefficient-objects-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "The coefficient objects Lambda_Y and their ordinary cohomology; constructibility supplied by lem-weil-constant-coefficient-objects-constructible"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pc-kflat-resolution",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-finite-torsion-constructibility",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-derived-complete",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-constant-coefficient-objects-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+  "place": "The coefficient objects and their canonical Weil structures; assembly from Stacks Tags 015F, 06YS, 08TC and Bhatt--Scholze Proposition 3.5.1 / Definition 3.5.2; no source states this exact two-coefficient comparison verbatim."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -39,10 +182,101 @@
    "results": "Algebra/Homology/DerivedCategory/ExactFunctor.lean:36 Functor.mapDerivedCategory (an exact functor of abelian categories induces a functor of derived categories); sheafPullback only in CategoryTheory/Sites (Pullback, CoverLifting, Point/Comap) and Topology/Sheaves/Functors; no derived pullback of sheaves of modules on pro-etale sites, no derived-complete or constructible l-adic categories",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback along an isomorphism of ringed sites is exact inverse image and preserves derived complete constructible complexes",
+   "results": "8 hits; top: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackIso, CategoryTheory.Functor.sheafPushforwardContinuousIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.Functor.sheafPushforwardContinuousIso_inv, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Functor.sheafPushforwardContinuousIso_hom, SheafOfModules.freeFunctorCompPullbackIso; relevant source inspected as described in report.md",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: general exact-functor, sheaf-pullback or ordinary adic-completion ingredients do not state the constructible completed-coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits; top: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId; relevant source inspected as described in report.md",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: general exact-functor, sheaf-pullback or ordinary adic-completion ingredients do not state the constructible completed-coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|derivedComplete|ProEtale",
+   "results": "10 hits; top: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; searched Mathlib/Algebra/Homology/DerivedCategory; relevant source inspected as described in report.md",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: general exact-functor, sheaf-pullback or ordinary adic-completion ingredients do not state the constructible completed-coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of ringed sites induces an exact inverse image on complexes preserving constructibility and derived completeness",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalences of sheaf categories preserve cohomology and termwise tensor products and derived inverse limits",
+   "results": "8 hits; top: CategoryTheory.Presheaf.coherentExtensiveEquivalence, CategoryTheory.Equivalence.hasSheafCompose, CategoryTheory.Equivalence.sheafCongrPrecoherent, CategoryTheory.Equivalence.precoherent_isSheaf_iff, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_obj_val_obj, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Functor.mapDerivedCategorySingleFunctor; relevant source inspected as described in report.md",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: general exact-functor, sheaf-pullback or ordinary adic-completion ingredients do not state the constructible completed-coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedComplete|ProEtale|pro.etale",
+   "results": "10 hits; top: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; searched Mathlib/AlgebraicGeometry; relevant source inspected as described in report.md",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: general exact-functor, sheaf-pullback or ordinary adic-completion ingredients do not state the constructible completed-coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived adic completion functor on sheaves over a completed coefficient ring is idempotent and its natural unit is an isomorphism on derived complete complexes",
+   "results": "8 hits; top: AdicCompletion.congr, AdicCompletion.ofLinearEquiv, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.congr_apply, AdicCompletion.ofAlgEquiv, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, PresheafOfModules.sheafificationCompForgetCompToPresheaf, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; relevant source inspected as described in report.md",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: general exact-functor, sheaf-pullback or ordinary adic-completion ingredients do not state the constructible completed-coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"completion\"",
+   "results": "12 hits; top: Lean.Elab.CompletionInfo, Lean.Elab.CompletionInfo.namespaceId, Lean.Elab.CompletionInfo.option, Lean.Elab.CompletionInfo.tactic, Lean.Elab.Info.ofCompletionInfo, Lean.Elab.CompletionInfo.errorName, Lean.Elab.CompletionInfo.dot, Lean.Elab.CompletionInfo.dotId; relevant source inspected as described in report.md",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: general exact-functor, sheaf-pullback or ordinary adic-completion ingredients do not state the constructible completed-coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedComplete|derivedComplete|derived.completion|Roos",
+   "results": "0 hits; top: ; relevant source inspected as described in report.md",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: general exact-functor, sheaf-pullback or ordinary adic-completion ingredients do not state the constructible completed-coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived complete complex is naturally isomorphic to the homotopy inverse limit of its derived reductions modulo powers of the ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCongr|mapDerivedCategoryEquivalence|pullbackIso",
+   "date": "2026-10-16",
+   "results": "25 hits; top: Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean, Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean, Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean, Mathlib/CategoryTheory/Galois/Basic.lean; inspected Sites/Equivalence.lean:109-145, DerivedCategory/ExactFunctor.lean:36-44 and Sheaf/PullbackContinuous.lean:106 as applicable.",
+   "verdict": "no match for the full item: generic sheaf equivalences and termwise derived functors do not state the completed-coefficient construction, natural completion comparison, and constructibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of categories of sheaves of modules induces an equivalence on derived categories by applying the functor to each term",
+   "date": "2026-10-16",
+   "results": "8 hits; top: CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, CategoryTheory.Equivalence.hasSheafCompose, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj; inspected Sites/Equivalence.lean:109-145, DerivedCategory/ExactFunctor.lean:36-44 and Sheaf/PullbackContinuous.lean:106 as applicable.",
+   "verdict": "no match for the full item: generic sheaf equivalences and termwise derived functors do not state the completed-coefficient construction, natural completion comparison, and constructibility clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"Iso\"",
+   "date": "2026-10-16",
+   "results": "12 hits; top: CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId, CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryIdIsoInt, CategoryTheory.Functor.mapDerivedCategoryCompIso, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryCompIsoInt, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_singleFunctor_obj; inspected Sites/Equivalence.lean:109-145, DerivedCategory/ExactFunctor.lean:36-44 and Sheaf/PullbackContinuous.lean:106 as applicable.",
+   "verdict": "no match for the full item: generic sheaf equivalences and termwise derived functors do not state the completed-coefficient construction, natural completion comparison, and constructibility clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +296,54 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-isomorphism-derived-pullback",
+  "worker": "stage1",
+  "summary": "Kept the statement. Checked the finite and completed coefficient sheaves separately, constructed the module equivalence by site relabelling, and wrote the finite K-flat comparison and constructibility argument. At integral level wrote tensor, reduction-transition and strict Roos-cone comparisons, taking the natural reconstruction unit from the existing finite-free completed scalar comparison with L=E. Transported the completeness triangle and the uniform reduction interval. No new nodes: all non-elementary facts already have DAG statements. Second reading made finite-level naturality independent of resolution choices and explicitly chose flat-term resolutions, proving flatness is preserved by relabelling.",
+  "blueprint": "Realizes the coefficient-object paragraph of def-weil-ordinary-compact-cohomology and its canonical Weil-structure requirement through def-weil-constant-weil-structure; the unit has no proof steps to replace.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic tool used exactly for a K-flat resolution over the specified coefficient ring sheaf; the admissibility unit does not supply this underlying coefficient-category fact."
+   },
+   {
+    "node": "lem-weil-integral-reduction-tower-well-defined",
+    "why": "Generic tool used exactly for compatibility of resolution comparisons with reduction transitions and quotient arrows; the admissibility unit does not supply this underlying coefficient-category fact."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic tool used exactly for exact countable products of module sheaves on the small pro-etale site; the admissibility unit does not supply this underlying coefficient-category fact."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Generic tool used exactly for the identification of termwise and derived products; the admissibility unit does not supply this underlying coefficient-category fact."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic tool used exactly for its explicit L=E natural reconstruction map for derived-complete completed coefficients; the admissibility unit does not supply this underlying coefficient-category fact."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic tool used exactly for functorial descent of the strict Roos-cone computations; the admissibility unit does not supply this underlying coefficient-category fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q34-be31f82b0",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-be31f82b0 (reviewer sub-agent of L); spot-checked: Read the complete item, report, all cited node statements, unit/chapter route, and cited source passages. All eight steps check, including the specified strict completion map, cone signs, transition compatibility, and uniform constructibility bounds. No cycles or duplicate new nodes; six declared tool uses accepted. Exact master target categories remain distinct and unchanged. Detailed findings recorded in review.md; no repairs required."
+ }
 }
