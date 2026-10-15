@@ -13,21 +13,59 @@
  },
  "proof": [
   {
-   "text": "Use the pro-etale affine weakly contractible covering family, and refine an affine base by a fixed small such cover. On each compact projective cover, any covering family refines to a finite clopen partition: lift its represented covering epimorphism into the sheaf coproduct and read the locally constant component indices; compactness makes the partition finite. Partitions of the fixed small scheme form a small type.",
+   "text": "Cover each affine chart of an arbitrary site object by the spectrum of the same-universe faithfully flat ind-etale w-contractible algebra supplied by the closed source theorem exists_isWContractibleRing. Compose the singleton spectrum covers with the affine open cover. The fixed resulting covering family has index type in Type u. The private helper exists_open_refinement_cover retains the geometric property needed below instead of only the abstract evaluation-surjectivity property of the earlier covering-family node.",
    "uses": [
-    "lem-weil-pbc-proetale-affine-wcontractible-covering-family"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compute the associated-sheaf refinement colimits on these small partition diagrams and descend along the fixed affine covers. Matching families and equalizers remain small, giving associated sheaves in the Type-u value universe. The usual finite-limit argument makes this adjunction left exact; this is the size justification required to apply the set-sheaf epi criterion to the displayed represented map.",
-   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-weakly-etale-morphism",
+    "def-weil-pbc-proetale-covering",
     "def-weil-size-convention"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/WeaklyContractible.lean",
+    "place": "exists_isWeaklyContractible_cover, using exists_isWContractibleRing from RingTheory/ProEtale/WContractible.lean (Stacks 0983 and 0990)"
+   }
   },
   {
-   "text": "Apply the epi/local-surjectivity criterion to the represented map. The image sieve of g is covering. By Yoneda its membership at f is precisely the existence of a t with t mu=f g, so choosing that sieve proves the conclusion. No object is defined by choosing this merely existing sieve.",
+   "text": "For W isomorphic to Spec R with R w-contractible, a covering sieve contains a finite affine weakly etale surjective cover. Its finite scheme coproduct is affine and its map to W has a section by the closed source theorem exists_comp_eq_id_of_isWContractibleRing, whose algebraic proof uses IsWContractibleRing.exists_retraction. Pull back the open component inclusions of that coproduct along the section. This gives a small family of open subschemes of W that covers W and whose arrows belong to the original sieve. The private open-refinement helpers formalize this geometric part of the existing isWeaklyContractible_of_iso proof, including the empty case.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-existing-wcontractible-indetale-retraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/WeaklyContractible.lean",
+    "place": "exists_comp_eq_id_of_isWContractibleRing; exists_disjoint_cover_of_comp_sigmaDesc_eq_id; isWeaklyContractible_of_iso (Stacks 0990)"
+   }
+  },
+  {
+   "text": "For a Type-u presheaf P, form the ordinary Type-(u+1) sheafification G of its universe lift, with locally surjective unit eta. On each W of step 1, encode s in G(W) by the set of all pairs (O,p), with O an open of W and p in P(O), for which eta(p)=s restricted to O. This code has type in universe u. If two codes agree, apply step 2 to the image sieve of eta at the first section. Its covering open refinement gives equal restrictions of the two sections, hence equality by separatedness of G. Thus the encoding is injective and G(W) is u-small. On an arbitrary object, restriction along the fixed u-small cover of step 1 injects G(U) into the product of the G(W_i), so G(U) is u-small as well. All unit-local-surjectivity and sheafification facts are applied in Type-(u+1), where Mathlib supplies them.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Sites/LocallySurjective.lean",
+    "place": "Presheaf.isLocallySurjective_toSheafify and imageSieve_mem; section-code size argument formalized here, refining the same-value-universe step of this node"
+   }
+  },
+  {
+   "text": "Shrink these objectwise-small sheafifications to Type u. Transport their sheaf property along the component equivalences and reflection of limits by the fully faithful universe lift. Shrinking morphisms gives a functor; shrinkSheafIso gives its natural comparison with the large sheafification. Adjunction.restrictFullyFaithful restricts the large sheafification adjunction to this functor. The comparison and reflection of finite limits descend left exactness, giving HasSheafify (topology X) (Type u). Every shrinking is of an already constructed object, and there is no data chosen from an unproved existence theorem.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+    "place": "Adjunction.restrictFullyFaithful, together with Limits.preservesFiniteLimits_of_reflects_of_preserves and the proved private shrinking helpers"
+   }
+  },
+  {
+   "text": "Install the proved Type-u HasSheafify locally. Apply Sheaf.isLocallySurjective_iff_epi to the original represented map, retaining its original Type-u epi hypothesis. Choose Presheaf.imageSieve of g. It is covering by imageSieve_mem, and its membership witness is definitionally a morphism t with t followed by mu equal to f followed by g. This proves the unchanged conclusion. Isomorphisms and empty objects require no extra hypotheses or case exclusions.",
    "uses": [
     "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
    ],
@@ -36,8 +74,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 00WN, image-sieve proof, with the value-universe size justification using Tags 098I and 0990; C3 isolates this as the only remaining new proof obligation"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/WeaklyContractible.lean",
+  "place": "C3 proof: retain open refinements from the existing Stacks 0990 geometry, bound the ordinary larger sheafification by injective local-representative codes, restrict its adjunction using Mathlib Adjunction.Restrict, then use the Type-u set-sheaf epi criterion. The theorem and all private helpers compile with only propext, Classical.choice and Quot.sound."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -124,8 +162,14 @@
   "date": "2026-10-15"
  },
  "proof_deps": [
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-pbc-proetale-covering",
   "def-weil-size-convention",
+  "lem-weil-pbc-existing-wcontractible-indetale-retraction",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-sets-exact",
   "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
  ],
  "reviewed": {
@@ -141,11 +185,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "X-961ee",
+  "reviewer": "COMPILER",
   "group": "C3",
   "result": "pass",
-  "landing": "20261015T171715-L-504217",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered Lean/DAG files match the item statement and proof route; all modules and both direct importers compile cleanly."
+  "landing": "20261015T181519-L-747417",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
