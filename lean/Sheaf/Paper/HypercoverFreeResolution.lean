@@ -12,9 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison
-import Sheaf.CategoryTheory.MatchingObjectCoskeleton
-import Sheaf.Paper.CechNerveFreeHomology
+import WeilConjectures.AlgebraicGeometry.HypercoverFreeResolution
 
 /-!
 # The augmented free complex of a split étale hypercover
@@ -63,7 +61,7 @@ theorem freeAbelian_augmentation_quasiIso_sheaf
             AddCommGrpCat.free ⋙
           presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{w + 1})).obj
         (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))) := by
-  sorry
+  exact freeAbelian_augmentation_quasiIso U
 
 /-- Injective abelian sheaves have hypercover-section cohomology equal to their base
 sections in degree zero and zero in positive degrees.
@@ -94,7 +92,7 @@ theorem injective_abelian_section_cohomology_sheaf
       ∀ p : ℕ, 0 < p → IsZero
         (((AlgebraicTopology.alternatingCofaceMapComplex AddCommGrpCat.{w + 1}).obj
           (U.simplicial.rightOp ⋙ I.obj)).homology p) := by
-  sorry
+  exact injective_abelian_section_cohomology U I
 
 /-- The same augmented free-sheaf resolution over every constant commutative ring.
 Source: Stacks Project, Hypercoverings, Tags 01GC, 01GD and 01GE, with free R-modules.
@@ -115,7 +113,7 @@ theorem freeModule_augmentation_quasiIso_sheaf
             (ModuleCat.free R) ⋙
           presheafToSheaf X.smallEtaleTopology (ModuleCat.{w + 1} R))).obj
         (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))) := by
-  sorry
+  exact freeModule_augmentation_quasiIso U R
 
 /-- Injective sheaves of modules over a constant ring have the same section-cohomology
 assertion, as R-modules.
@@ -142,6 +140,6 @@ theorem injective_module_section_cohomology_sheaf
       ∀ p : ℕ, 0 < p → IsZero
         (((AlgebraicTopology.alternatingCofaceMapComplex (ModuleCat.{w + 1} R)).obj
           (U.simplicial.rightOp ⋙ I.obj)).homology p) := by
-  sorry
+  exact injective_module_section_cohomology U R I
 
 end AlgebraicGeometry.SplitEtaleHypercover

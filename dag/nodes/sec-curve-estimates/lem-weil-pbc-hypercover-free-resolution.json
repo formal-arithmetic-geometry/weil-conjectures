@@ -144,20 +144,21 @@
  },
  "lead_note": "2026-10-10 L: reviewer note on step 2, case n = 1: K^0 is 1-coskeletal (a tuple of F^{m+1} whose pairs lie over one point of G is a point of the fibre power; Stacks simplicial lemma-cosk-minus-one), not 0-coskeletal in the absolute sense; the claim is true, the sentence is missing.",
  "lean": {
-  "module": "Sheaf.Paper.HypercoverFreeResolution",
-  "declaration": "AlgebraicGeometry.SplitEtaleHypercover.freeAbelian_augmentation_quasiIso_sheaf",
+  "module": "WeilConjectures.AlgebraicGeometry.HypercoverFreeResolution",
+  "declaration": "AlgebraicGeometry.SplitEtaleHypercover.freeAbelian_augmentation_quasiIso",
   "declarations": [
-   "AlgebraicGeometry.SplitEtaleHypercover.freeAbelian_augmentation_quasiIso_sheaf",
-   "AlgebraicGeometry.SplitEtaleHypercover.injective_abelian_section_cohomology_sheaf",
-   "AlgebraicGeometry.SplitEtaleHypercover.freeModule_augmentation_quasiIso_sheaf",
-   "AlgebraicGeometry.SplitEtaleHypercover.injective_module_section_cohomology_sheaf"
+   "AlgebraicGeometry.SplitEtaleHypercover.freeAbelian_augmentation_quasiIso",
+   "AlgebraicGeometry.SplitEtaleHypercover.injective_abelian_section_cohomology",
+   "AlgebraicGeometry.SplitEtaleHypercover.freeModule_augmentation_quasiIso",
+   "AlgebraicGeometry.SplitEtaleHypercover.injective_module_section_cohomology"
   ],
-  "file": "lean/Sheaf/Paper/HypercoverFreeResolution.lean",
-  "statement": "theorem freeAbelian_augmentation_quasiIso_sheaf {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X] (U : SplitEtaleHypercover X) : QuasiIso (AlgebraicTopology.AlternatingFaceMapComplex.ε.app ((SimplicialObject.Augmented.whiskeringObj X.Etale _ (uliftYoneda.{w + 1} ⋙ (Functor.whiskeringRight X.Etaleᵒᵖ (Type (w + 1)) AddCommGrpCat.{w + 1}).obj AddCommGrpCat.free ⋙ presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{w + 1})).obj (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale)))))",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/HypercoverFreeResolution.lean",
+  "statement": "theorem freeAbelian_augmentation_quasiIso {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X] (U : SplitEtaleHypercover X) : QuasiIso (AlgebraicTopology.AlternatingFaceMapComplex.ε.app ((SimplicialObject.Augmented.whiskeringObj X.Etale _ (uliftYoneda.{w + 1} ⋙ (Functor.whiskeringRight X.Etaleᵒᵖ (Type (w + 1)) AddCommGrpCat.{w + 1}).obj AddCommGrpCat.free ⋙ presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{w + 1})).obj (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale)))))",
   "branch": "sheaf-dag",
-  "by": "K1",
-  "date": "2026-10-11",
-  "existing": false
+  "by": "R2",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "All four obligations already exist verbatim in the source module. The Sheaf compatibility theorems now apply those existing declarations. The mathematical proof plan and dependencies remain attached here for the canonical source obligations, which still have their original sorry proofs. No new obligation is introduced."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -166,5 +167,15 @@
   "group": "K1",
   "result": "pass",
   "note": "independent Codex review: e099fc725696: matched qcqs base, unrestricted split hypercover, sheafified free alternating-face augmented exactness, canonical H^0 section identification, positive-degree vanishing, and constant-ring versions; H3/H11 repairs complete. Delivered modules and an existing dependency importer compiled cleanly in scratch."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261015T221026-L-2562473",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
