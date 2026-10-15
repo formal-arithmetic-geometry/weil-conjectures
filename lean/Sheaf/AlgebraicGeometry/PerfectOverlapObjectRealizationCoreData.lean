@@ -672,6 +672,34 @@ theorem comparisonFromRestrictions_gammaV_on_image
   exact congrArg (fun a ↦ a.app F)
     (((Functor.whiskeringLeft C B T).obj TV).map_preimage δV.hom)
 
+/-- Evaluate a natural isomorphism at an object transported from a known component.
+Source: Stacks Project, Tag 08DW, functoriality of open restriction. Naturality
+along the isomorphism identifies the two components after mapping its forward
+arrow. Precompose with the mapped inverse and cancel the mapped inverse-forward
+composite to obtain the displayed conjugation. -/
+theorem overlapNatIso_hom_app_of_iso
+    {A T : Type*} [Category* A] [Category* T]
+    (H K : A ⥤ T) (γ : H ≅ K) {x y : A} (e : x ≅ y) :
+    γ.hom.app y = H.map e.inv ≫ γ.hom.app x ≫ K.map e.hom := by
+  calc
+    γ.hom.app y = H.map (𝟙 y) ≫ γ.hom.app y := by simp
+    _ = H.map (e.inv ≫ e.hom) ≫ γ.hom.app y := by rw [e.inv_hom_id]
+    _ = H.map e.inv ≫ (H.map e.hom ≫ γ.hom.app y) := by
+      simp only [Functor.map_comp, Category.assoc]
+    _ = H.map e.inv ≫ (γ.hom.app x ≫ K.map e.hom) := by
+      rw [γ.hom.naturality e.hom]
+    _ = H.map e.inv ≫ γ.hom.app x ≫ K.map e.hom := by
+      simp only
+
+/-- The inverse component satisfies the same naturality transport equation.
+Source: Stacks Project, Tag 08DW. Apply the forward equation to the inverse
+natural isomorphism, whose source and target functors are interchanged. -/
+theorem overlapNatIso_inv_app_of_iso
+    {A T : Type*} [Category* A] [Category* T]
+    (H K : A ⥤ T) (γ : H ≅ K) {x y : A} (e : x ≅ y) :
+    γ.inv.app y = K.map e.inv ≫ γ.inv.app x ≫ H.map e.hom := by
+  exact overlapNatIso_hom_app_of_iso K H γ.symm e
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
