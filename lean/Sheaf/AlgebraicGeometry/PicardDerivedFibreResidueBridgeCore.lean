@@ -5,18 +5,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.PicardDerivedCoefficientMap
-public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
-public import Sheaf.AlgebraicGeometry.DerivedFiberCohomologyFunctor
-public import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.AffineResidueModelNaturality
-import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
+public import Sheaf.AlgebraicGeometry.AffineResidueModelNaturality
+public import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Fiber
-import Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueModelData
 
 /-! Fixed-model naturality core for the derived fibre residue bridge.
 
@@ -41,16 +38,7 @@ set_option maxHeartbeats 1600000 in
 -- The fixed-model naturality traverses derived and residue comparisons.
 /-- Fixed affine-model residue naturality data for a finite family.
 Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.
-(blueprint: new-picard-derived-fibre-residue-bridge-core)
-
-Proof: Apply affine residue-model naturality to the coefficient arrow induced by
-`picardDerivedCoefficientMap`.  The affine perfect-map representative theorem
-supplies a chain map `φ` representing the resulting derived-category arrow.
-Compose the residue-to-derived-fibre comparisons with the geometric residue
-comparisons.  Their naturality gives the first displayed equation, while the
-structure-sheaf comparison and its pullback naturality give the second.  These
-choices are made independently for each finite index, so the same source
-comparison works for the whole family, including the empty family. -/
+(blueprint: new-picard-derived-fibre-residue-bridge-core) -/
 theorem picard_derived_fibre_residue_bridge_core
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -62,7 +50,7 @@ theorem picard_derived_fibre_residue_bridge_core
     [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)]
     [∀ i, LocallyOfFinitePresentation (fi i)]
     (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i)
-    (L : X.Modules)
+    (L : X.Modules) [Modules.IsInvertible L]
     (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]
     (w : W) (s : S) (hw : k w = s)
     (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅
