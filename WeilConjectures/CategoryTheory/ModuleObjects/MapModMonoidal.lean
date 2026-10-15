@@ -39,7 +39,7 @@ built are strong monoidal for `⊗_R`:
 
 ## Main definitions
 
-- `Mod.tensorDesc`: a morphism out of `M ⊗_R N` from an `R`-balanced morphism out of `M ⊗ N`.
+- `Mod.tensorObjDesc`: a morphism out of `M ⊗_R N` from an `R`-balanced morphism out of `M ⊗ N`.
 - `Functor.mapModTensorIso`, `Functor.mapModCoreMonoidal`, `Functor.monoidal_mapMod`: the strong
   monoidal structure of `F.mapMod`.
 - `Mod.comapTensorIso`, `Mod.comapCoreMonoidal`, `Mod.monoidal_comap`: the strong monoidal
@@ -60,7 +60,7 @@ The data (the comparison isomorphisms) is constructed; the following properties 
   comparison isomorphisms) for `Functor.mapModCoreMonoidal` and `Mod.comapCoreMonoidal`.
 
 All of them are checked after precomposition with the projections onto the coequalizers
-(`Mod.tensorπ`), where they reduce to the coherences of `μ F` and of the algebra structures.
+(`Mod.tensorObjπ`), where they reduce to the coherences of `μ F` and of the algebra structures.
 
 -/
 
@@ -82,15 +82,15 @@ variable {R : C} [MonObj R] [IsCommMonObj R]
 
 /-- A morphism out of the relative tensor product `M ⊗_R N`, from a morphism out of `M ⊗ N`
 which is balanced for the two actions of `R`. -/
-noncomputable def tensorDesc (M N : Mod C R) {W : C} (k : M.X ⊗ N.X ⟶ W)
+noncomputable def tensorObjDesc (M N : Mod C R) {W : C} (k : M.X ⊗ N.X ⟶ W)
     (hk : ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ k = ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ k) :
     (M ⊗ N).X ⟶ W :=
   Cofork.IsColimit.desc (isColimitTensorπ M N) k hk
 
 @[reassoc (attr := simp)]
-lemma tensorπ_tensorDesc (M N : Mod C R) {W : C} (k : M.X ⊗ N.X ⟶ W) (hk) :
-    tensorπ M N ≫ tensorDesc M N k hk = k := by
-  unfold tensorDesc
+lemma tensorObjπ_tensorObjDesc (M N : Mod C R) {W : C} (k : M.X ⊗ N.X ⟶ W) (hk) :
+    tensorObjπ M N ≫ tensorObjDesc M N k hk = k := by
+  unfold tensorObjDesc
   exact Cofork.IsColimit.π_desc' (isColimitTensorπ M N) k hk
 
 end Mod
@@ -112,56 +112,57 @@ variable (F : C ⥤ D) [F.Braided] [PreservesColimitsOfShape WalkingParallelPair
 `F R`, the right action of `F R` on `F M` being `F` of the right action of `R` on `M` since `F`
 is braided. -/
 lemma mapMod_μ_balanced (M N : Mod C R) :
-    ((β_ (F.mapMod.obj M).X (F.obj R)).hom ≫ γ[F.obj R, (F.mapMod.obj M).X]) ▷
-        (F.mapMod.obj N).X ≫ LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorπ M N) =
-      ((α_ (F.mapMod.obj M).X (F.obj R) (F.mapMod.obj N).X).hom ≫
-        (F.mapMod.obj M).X ◁ γ[F.obj R, (F.mapMod.obj N).X]) ≫
-          LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorπ M N) :=
+    ((β_ ((F.mapMod R).obj M).X (F.obj R)).hom ≫ γ[F.obj R, ((F.mapMod R).obj M).X]) ▷
+        ((F.mapMod R).obj N).X ≫ LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorObjπ M N) =
+      ((α_ ((F.mapMod R).obj M).X (F.obj R) ((F.mapMod R).obj N).X).hom ≫
+        ((F.mapMod R).obj M).X ◁ γ[F.obj R, ((F.mapMod R).obj N).X]) ≫
+          LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorObjπ M N) :=
   sorry
 
 /-- The composite `F (M ⊗ N) ⟶ F M ⊗ F N ⟶ F M ⊗_{F R} F N` coequalizes the image under `F` of
 the parallel pair presenting `M ⊗_R N`. -/
 lemma mapMod_δ_balanced (M N : Mod C R) :
     F.map (((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X) ≫ OplaxMonoidal.δ F M.X N.X ≫
-        Mod.tensorπ (F.mapMod.obj M) (F.mapMod.obj N) =
+        Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N) =
       F.map ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ OplaxMonoidal.δ F M.X N.X ≫
-        Mod.tensorπ (F.mapMod.obj M) (F.mapMod.obj N) :=
+        Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N) :=
   sorry
 
 /-- The image under `F` of the coequalizer presenting `M ⊗_R N` is a coequalizer, `F`
 preserving coequalizers. -/
 noncomputable def isColimitMapTensorπ (M N : Mod C R) :=
-  isColimitCoforkMapOfIsColimit F (Mod.tensorπ_condition M N) (Mod.isColimitTensorπ M N)
+  isColimitCoforkMapOfIsColimit F (Mod.tensorObjπ_condition M N) (Mod.isColimitTensorπ M N)
 
 /-- The comparison `F M ⊗_{F R} F N ≅ F (M ⊗_R N)` of the underlying objects, induced by the
 tensorator `μ F M N` on the coequalizers presenting both sides. -/
 noncomputable def mapModTensorIsoX (M N : Mod C R) :
-    (F.mapMod.obj M ⊗ F.mapMod.obj N).X ≅ (F.mapMod.obj (M ⊗ N)).X where
-  hom := Mod.tensorDesc _ _ (LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorπ M N))
+    ((F.mapMod R).obj M ⊗ (F.mapMod R).obj N).X ≅ ((F.mapMod R).obj (M ⊗ N)).X where
+  hom := Mod.tensorObjDesc _ _ (LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorObjπ M N))
     (F.mapMod_μ_balanced M N)
   inv := Cofork.IsColimit.desc (F.isColimitMapTensorπ M N)
-    (OplaxMonoidal.δ F M.X N.X ≫ Mod.tensorπ (F.mapMod.obj M) (F.mapMod.obj N))
+    (OplaxMonoidal.δ F M.X N.X ≫ Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N))
     (F.mapMod_δ_balanced M N)
   hom_inv_id := by
-    rw [← cancel_epi (Mod.tensorπ (F.mapMod.obj M) (F.mapMod.obj N)), Mod.tensorπ_tensorDesc_assoc,
+    rw [← cancel_epi (Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N)),
+      Mod.tensorObjπ_tensorObjDesc_assoc,
       Category.assoc, Category.comp_id]
     erw [Cofork.IsColimit.π_desc' (F.isColimitMapTensorπ M N)]
     rw [Monoidal.μ_δ_assoc]
   inv_hom_id := by
     refine Cofork.IsColimit.hom_ext (F.isColimitMapTensorπ M N) ?_
     erw [Cofork.IsColimit.π_desc'_assoc (F.isColimitMapTensorπ M N)]
-    rw [Category.assoc, Mod.tensorπ_tensorDesc, Monoidal.δ_μ_assoc]
+    rw [Category.assoc, Mod.tensorObjπ_tensorObjDesc, Monoidal.δ_μ_assoc]
     exact (Category.comp_id _).symm
 
 /-- The comparison `F M ⊗_{F R} F N ⟶ F (M ⊗_R N)` is `F R`-linear. -/
 lemma mapModTensorIso_linear (M N : Mod C R) :
-    γ[F.obj R, (F.mapMod.obj M ⊗ F.mapMod.obj N).X] ≫ (F.mapModTensorIsoX M N).hom =
-      F.obj R ◁ (F.mapModTensorIsoX M N).hom ≫ γ[F.obj R, (F.mapMod.obj (M ⊗ N)).X] :=
+    γ[F.obj R, ((F.mapMod R).obj M ⊗ (F.mapMod R).obj N).X] ≫ (F.mapModTensorIsoX M N).hom =
+      F.obj R ◁ (F.mapModTensorIsoX M N).hom ≫ γ[F.obj R, ((F.mapMod R).obj (M ⊗ N)).X] :=
   sorry
 
 /-- The comparison isomorphism `F M ⊗_{F R} F N ≅ F (M ⊗_R N)` of `F R`-module objects. -/
 noncomputable def mapModTensorIso (M N : Mod C R) :
-    F.mapMod.obj M ⊗ F.mapMod.obj N ≅ F.mapMod.obj (M ⊗ N) :=
+    (F.mapMod R).obj M ⊗ (F.mapMod R).obj N ≅ (F.mapMod R).obj (M ⊗ N) :=
   Mod.isoMk (F.mapModTensorIsoX M N) (F.mapModTensorIso_linear M N)
 
 @[simp]
@@ -171,13 +172,13 @@ lemma mapModTensorIso_hom_hom (M N : Mod C R) :
 
 @[reassoc (attr := simp)]
 lemma tensorπ_mapModTensorIso_hom_hom (M N : Mod C R) :
-    Mod.tensorπ (F.mapMod.obj M) (F.mapMod.obj N) ≫ (F.mapModTensorIso M N).hom.hom =
-      LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorπ M N) :=
-  Mod.tensorπ_tensorDesc _ _ _ _
+    Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N) ≫ (F.mapModTensorIso M N).hom.hom =
+      LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorObjπ M N) :=
+  Mod.tensorObjπ_tensorObjDesc _ _ _ _
 
 /-- The unit comparison `𝟙 ≅ F.mapMod 𝟙`: both are `F R` with its algebra structure. -/
 noncomputable def mapModUnitIso :
-    𝟙_ (Mod D (F.obj R)) ≅ F.mapMod.obj (𝟙_ (Mod C R)) :=
+    𝟙_ (Mod D (F.obj R)) ≅ (F.mapMod R).obj (𝟙_ (Mod C R)) :=
   Mod.isoMk (Iso.refl (F.obj R)) (by
     change MonObj.mul ≫ 𝟙 _ = _ ◁ 𝟙 _ ≫ (LaxMonoidal.μ F R R ≫ F.map MonObj.mul)
     simp only [Category.comp_id, MonoidalCategory.whiskerLeft_id, Category.id_comp]
@@ -186,7 +187,7 @@ noncomputable def mapModUnitIso :
 /-- The transport `F.mapMod : Mod C R ⥤ Mod D (F.obj R)` of module objects along a braided
 functor preserving coequalizers is strong monoidal for the relative tensor products, with
 comparison isomorphisms `Functor.mapModTensorIso` and `Functor.mapModUnitIso`. -/
-noncomputable def mapModCoreMonoidal : (F.mapMod (R := R)).CoreMonoidal where
+noncomputable def mapModCoreMonoidal : (F.mapMod R).CoreMonoidal where
   εIso := F.mapModUnitIso
   μIso := F.mapModTensorIso
   μIso_hom_natural_left := sorry
@@ -197,11 +198,11 @@ noncomputable def mapModCoreMonoidal : (F.mapMod (R := R)).CoreMonoidal where
 
 /-- The transport `F.mapMod` of module objects along a braided functor preserving coequalizers
 is strong monoidal. -/
-noncomputable instance monoidal_mapMod : (F.mapMod (R := R)).Monoidal :=
+noncomputable instance monoidal_mapMod : (F.mapMod R).Monoidal :=
   F.mapModCoreMonoidal.toMonoidal
 
 lemma mapMod_μ_hom (M N : Mod C R) :
-    (LaxMonoidal.μ (F.mapMod (R := R)) M N).hom = (F.mapModTensorIsoX M N).hom :=
+    (LaxMonoidal.μ (F.mapMod R) M N).hom = (F.mapModTensorIsoX M N).hom :=
   rfl
 
 end Functor
@@ -219,16 +220,16 @@ variable {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S] (ψ :
 restrictions of scalars of `M` and `N`. -/
 lemma tensorπ_comap_balanced (M N : Mod C R) :
     ((β_ ((comap ψ).obj M).X S).hom ≫ γ[S,((comap ψ).obj M).X]) ▷ ((comap ψ).obj N).X ≫
-        tensorπ M N =
+        tensorObjπ M N =
       ((α_ ((comap ψ).obj M).X S ((comap ψ).obj N).X).hom ≫
-        ((comap ψ).obj M).X ◁ γ[S,((comap ψ).obj N).X]) ≫ tensorπ M N :=
+        ((comap ψ).obj M).X ◁ γ[S,((comap ψ).obj N).X]) ≫ tensorObjπ M N :=
   sorry
 
 /-- The projection `M ⊗ N ⟶ M ⊗_S N` of the restrictions of scalars is balanced for the two
 actions of `R`, `ψ` being an isomorphism. -/
 lemma comap_tensorπ_balanced (M N : Mod C R) :
-    ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ tensorπ ((comap ψ).obj M) ((comap ψ).obj N) =
-      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ tensorπ ((comap ψ).obj M) ((comap ψ).obj N) :=
+    ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) =
+      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) :=
   sorry
 
 /-- The comparison `M ⊗_S N ≅ M ⊗_R N` of the underlying objects for an isomorphism
@@ -237,16 +238,17 @@ differing by `M ⊗ ψ ⊗ N`, and the comparison is the identity of `M ⊗ N` o
 projections. -/
 noncomputable def comapTensorIsoX (M N : Mod C R) :
     ((comap ψ).obj M ⊗ (comap ψ).obj N).X ≅ ((comap ψ).obj (M ⊗ N)).X where
-  hom := tensorDesc _ _ (tensorπ M N) (tensorπ_comap_balanced ψ M N)
-  inv := tensorDesc M N (tensorπ ((comap ψ).obj M) ((comap ψ).obj N))
+  hom := tensorObjDesc _ _ (tensorObjπ M N) (tensorπ_comap_balanced ψ M N)
+  inv := tensorObjDesc M N (tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N))
     (comap_tensorπ_balanced ψ M N)
   hom_inv_id := by
-    rw [← cancel_epi (tensorπ ((comap ψ).obj M) ((comap ψ).obj N)), tensorπ_tensorDesc_assoc]
-    erw [tensorπ_tensorDesc]
+    rw [← cancel_epi (tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N)),
+      tensorObjπ_tensorObjDesc_assoc]
+    erw [tensorObjπ_tensorObjDesc]
     rw [Category.comp_id]
   inv_hom_id := by
-    rw [← cancel_epi (tensorπ M N), tensorπ_tensorDesc_assoc]
-    erw [tensorπ_tensorDesc, Category.comp_id]
+    rw [← cancel_epi (tensorObjπ M N), tensorObjπ_tensorObjDesc_assoc]
+    erw [tensorObjπ_tensorObjDesc, Category.comp_id]
 
 /-- The comparison `M ⊗_S N ⟶ M ⊗_R N` is `S`-linear. -/
 lemma comapTensorIso_linear (M N : Mod C R) :
@@ -262,9 +264,9 @@ noncomputable def comapTensorIso (M N : Mod C R) :
 
 @[reassoc (attr := simp)]
 lemma tensorπ_comapTensorIso_hom_hom (M N : Mod C R) :
-    tensorπ ((comap ψ).obj M) ((comap ψ).obj N) ≫ (comapTensorIso ψ M N).hom.hom =
-      tensorπ M N :=
-  tensorπ_tensorDesc _ _ _ _
+    tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) ≫ (comapTensorIso ψ M N).hom.hom =
+      tensorObjπ M N :=
+  tensorObjπ_tensorObjDesc _ _ _ _
 
 /-- The unit comparison `S ≅ ψ^* R` of `S`-module objects, given by `ψ`. -/
 noncomputable def comapUnitIso : 𝟙_ (Mod C S) ≅ (comap ψ).obj (𝟙_ (Mod C R)) :=
