@@ -15108,3 +15108,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:46 L: merged deliver/B3/Sheaf.CategoryTheory.SiteCoveringsCommonRefinement (stage 3; reviewer PASS; first push; landing 20261015T174646-L-626700 (proof); batch 20261015T174644; modules 1; new nodes 0)
 - 17:46 L: merged deliver/C4/Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction (stage 3; reviewer PASS; first push; landing 20261015T174647-L-626798 (proof); batch 20261015T174644; modules 1; new nodes 0)
 - 17:46 L: merged deliver/C4/Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift (stage 3; reviewer PASS; first push; landing 20261015T174647-L-626895 (proof); batch 20261015T174644; modules 1; new nodes 0)
+- 17:51 L: merged deliver/F4/Sheaf.Paper.SiteCoveringMorphismsSameH0Map (stage 3; reviewer PASS; first push; landing 20261015T175114-L-646208 (proof); batch 20261015T175112; modules 1; new nodes 0)

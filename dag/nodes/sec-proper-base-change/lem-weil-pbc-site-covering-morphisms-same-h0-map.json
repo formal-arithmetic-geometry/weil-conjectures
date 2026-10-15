@@ -27,50 +27,16 @@
  ],
  "proof": [
   {
-   "text": "*The morphism $\\varphi_i$.* Write $\\mathcal U=\\{\\pi_i:U_i\\to U\\}_{i\\in I}$, $\\mathcal V=\\{\\rho_j:V_j\\to V\\}_{j\\in J}$. Fix $i\\in I$. By the definition of a morphism of coverings [def-weil-pbc-site-plus-construction] (b), applied to $f$ and to $g$, which lie over the same $\\chi$, $\\rho_{\\alpha(i)}\\circ f_i=\\chi\\circ\\pi_i=\\rho_{\\beta(i)}\\circ g_i$. Let $V_{\\alpha(i)}\\times_VV_{\\beta(i)}$ with projections $\\mathrm{pr}_1,\\mathrm{pr}_2$ be the fibre product [def-weil-pbc-category-fibre-product] of $\\rho_{\\alpha(i)}$ and $\\rho_{\\beta(i)}$ that appears in the definition of $H^0(\\mathcal V,\\mathcal F)$ [def-weil-pbc-site-plus-construction] (a) for the pair of indices $(\\alpha(i),\\beta(i))$ (it exists by axiom (iii) of a site [def-weil-pbc-sites-and-cohomology], applied to the covering $\\mathcal V$ and the morphism $\\rho_{\\beta(i)}:V_{\\beta(i)}\\to V$; when $\\alpha(i)=\\beta(i)$ it is $V_{\\alpha(i)}\\times_VV_{\\alpha(i)}$). By its universal property, with $T=U_i$, $x=f_i$, $y=g_i$, there is a (unique) morphism $\\varphi_i:U_i\\to V_{\\alpha(i)}\\times_VV_{\\beta(i)}$ with $\\mathrm{pr}_1\\circ\\varphi_i=f_i$ and $\\mathrm{pr}_2\\circ\\varphi_i=g_i$.",
-   "uses": [
-    "def-weil-pbc-site-plus-construction",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-category-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma 00W7 (lemma-independent-refinement), proof"
-   }
-  },
-  {
-   "text": "*The two components agree.* Let $s=(s_j)_{j\\in J}\\in H^0(\\mathcal V,\\mathcal F)$ and $i\\in I$. Since $\\mathcal F$ is a functor $\\mathcal C^{op}\\to$ sets, $\\mathcal F(u\\circ v)=\\mathcal F(v)\\circ\\mathcal F(u)$ for composable $u,v$. Hence, with $\\varphi_i$ of step 1 and the formula for $f^*$, $g^*$ of [def-weil-pbc-site-plus-construction] (b), $(f^*s)_i=\\mathcal F(f_i)(s_{\\alpha(i)})=\\mathcal F(\\mathrm{pr}_1\\circ\\varphi_i)(s_{\\alpha(i)})=\\mathcal F(\\varphi_i)\\big(\\mathcal F(\\mathrm{pr}_1)(s_{\\alpha(i)})\\big)$ and $(g^*s)_i=\\mathcal F(g_i)(s_{\\beta(i)})=\\mathcal F(\\varphi_i)\\big(\\mathcal F(\\mathrm{pr}_2)(s_{\\beta(i)})\\big)$. The defining condition of $H^0(\\mathcal V,\\mathcal F)$ [def-weil-pbc-site-plus-construction] (a) for the indices $j=\\alpha(i)$, $j'=\\beta(i)$ says $\\mathcal F(\\mathrm{pr}_1)(s_{\\alpha(i)})=s_{\\alpha(i)}|_{V_{\\alpha(i)}\\times_VV_{\\beta(i)}}=s_{\\beta(i)}|_{V_{\\alpha(i)}\\times_VV_{\\beta(i)}}=\\mathcal F(\\mathrm{pr}_2)(s_{\\beta(i)})$ in $\\mathcal F(V_{\\alpha(i)}\\times_VV_{\\beta(i)})$. Applying $\\mathcal F(\\varphi_i)$ gives $(f^*s)_i=(g^*s)_i$.",
-   "uses": [
-    "def-weil-pbc-site-plus-construction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma 00W7 (lemma-independent-refinement), proof"
-   }
-  },
-  {
-   "text": "*Conclusion.* $f^*s$ and $g^*s$ are elements of $H^0(\\mathcal U,\\mathcal F)\\subseteq\\prod_{i\\in I}\\mathcal F(U_i)$ [def-weil-pbc-site-plus-construction] (a) whose components agree for every $i\\in I$ by step 2, so $f^*s=g^*s$; as $s\\in H^0(\\mathcal V,\\mathcal F)$ was arbitrary, $f^*=g^*$. The last sentence of the statement is the case $V=U$, $\\chi=\\mathrm{id}_U$: two morphisms of coverings $\\mathcal U\\to\\mathcal V$ over $\\mathrm{id}_U$ lie over the same morphism, so they induce the same map $H^0(\\mathcal V,\\mathcal F)\\to H^0(\\mathcal U,\\mathcal F)$.",
-   "uses": [
-    "def-weil-pbc-site-plus-construction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma 00W7 (lemma-independent-refinement), proof, last sentence; Remark 00W8 (remark-both-refine-same-H0)"
-   }
+   "text": "Apply Mathlib Homotopy.mapMultiforkOfIsLimit_eq to H, P, hc, and d. This has exactly the conclusion of the recorded Lean declaration, with A specialized to Type u. The homotopy already supplies the comparison maps, so no site axiom or pullback construction is needed in this proof.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-site-plus-construction",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-category-fibre-product"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Sites, Lemma 00W7 (lemma-independent-refinement) and its proof"
+  "document": "Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean",
+  "place": "Homotopy.mapMultiforkOfIsLimit_eq; proof by Multifork.IsLimit.hom_ext and d.condition"
  },
  "mathlib_searches": [
   {
@@ -189,5 +155,15 @@
   "group": "E1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T175114-L-646208",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

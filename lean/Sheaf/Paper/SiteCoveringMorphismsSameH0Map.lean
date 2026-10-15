@@ -1,7 +1,6 @@
 module
 
 public import Mathlib.CategoryTheory.Sites.Hypercover.Homotopy
-import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-! # Two covering morphisms induce the same zeroth Cech map
 
@@ -36,6 +35,6 @@ theorem siteCoveringMorphismsSameH0Map
     {c : Multifork (E.multicospanIndex P)} (hc : IsLimit c)
     (d : Multifork (F.multicospanIndex P)) :
     f.mapMultiforkOfIsLimit P hc d = g.mapMultiforkOfIsLimit P hc d := by
-  sorry
+  exact H.mapMultiforkOfIsLimit_eq P hc d
 
 end CategoryTheory.PreOneHypercover
