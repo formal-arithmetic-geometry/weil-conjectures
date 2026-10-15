@@ -30,7 +30,7 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 
 | landing class | count |
 |---|---:|
-| proved | 3382 |
+| proved | 3384 |
 | decomposed | 48 |
 | moved | 3920 |
 | pruned | 119 |
@@ -135,13 +135,13 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Y2 | 108 | 110 | 98 | 12 | 59/108 (54.6%) |
 | Y3 | 103 | 90 | 56 | 34 | 45/103 (43.7%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
-| launcher prover | 75 | 11 | 9 | 2 | 6/75 (8.0%) |
+| launcher prover | 77 | 14 | 9 | 5 | 6/77 (7.8%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
 
 | module | distance | holes | group |
 |---|---:|---:|---|
-| Sheaf.AlgebraicGeometry.CartesianChartLiftNaturality | 19 | 1 | A2 |
+| Sheaf.AlgebraicGeometry.CartesianChartLiftNaturality | 19 | 1 | — |
 | Sheaf.AlgebraicGeometry.RawDerivedClassAffineDescent | 19 | 1 | A2 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 37 | 1 | E3 |
 
