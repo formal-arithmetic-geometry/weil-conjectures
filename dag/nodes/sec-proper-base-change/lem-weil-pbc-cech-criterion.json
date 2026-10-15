@@ -246,5 +246,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-12c2583f2 (reviewer sub-agent of L); spot-checked: Read the complete governance files, packet, report, item, unit/chapter route, all cited node statements, Stacks Tags 03F8/03F9/03FB/03FC, and archived target declarations. Verified each proof step, module coefficient category, derived evaluation, Cech signs, finite-product exactness, dimension shifting, edge cases, duplicate searches, Mathlib searches, and five declared generic tool uses. Recorded the general-site coproduct issue and its valid tuple-lifting replacement in review.md. No DAG repair is needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleCechCriterion",
+  "declaration": "CategoryTheory.module_cech_acyclicity_criterion",
+  "file": "lean/Sheaf/CategoryTheory/ModuleCechCriterion.lean",
+  "statement": "theorem module_cech_acyclicity_criterion {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (R : Sheaf J.toGrothendieck RingCat.{u}) (B : Set C) (hbasis : ∀ U : C, ∃ (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U), Presieve.ofArrows V f ∈ J U ∧ ∀ t, V t ∈ B) (products : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U), U ∈ B → (∀ t, V t ∈ B) → Presieve.ofArrows V f ∈ J U → SiteCechComplex V f) (hproducts : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U) (hU : U ∈ B) (hV : ∀ t, V t ∈ B) (hc : Presieve.ofArrows V f ∈ J U) (p : ℕ) (a : Fin (p + 1) → T), (products U T V f hU hV hc).W p a ∈ B) (hrefine : ∀ (U : C), U ∈ B → ∀ (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U), Presieve.ofArrows V f ∈ J U → ∃ (m : ℕ) (W : Fin m → C) (g : ∀ a, W a ⟶ U), (∀ a, W a ∈ B) ∧ Presieve.ofArrows W g ∈ J U ∧ ∀ a, ∃ (t : T) (k : W a ⟶ V t), k ≫ f t = g a) : (∀ (I : ringedSiteModules.{u} R), Injective I → ∀ (U : C) (m : ℕ) (V : Fin m → C) (f : ∀ a, V a ⟶ U), U ∈ B → (∀ a, V a ∈ B) → Presieve.ofArrows V f ∈ J U → ∀ (S : SiteCechComplex V f) (p : ℕ), 0 < p → IsZero ((S.cohomologyFunctor p).obj I.val.presheaf)) ∧ (∀ (M : ringedSiteModules.{u} R), (∀ (U : C) (m : ℕ) (V : Fin m → C) (f : ∀ a, V a ⟶ U), U ∈ B → (∀ a, V a ∈ B) → Presieve.ofArrows V f ∈ J U → ∀ (S : SiteCechComplex V f) (p : ℕ), 0 < p → IsZero ((S.cohomologyFunctor p).obj M.val.presheaf)) → ∀ (U : C), U ∈ B → ∀ (q : ℕ), 0 < q → ∀ (I : InjectiveResolution M), IsZero ((((SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homology q))",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bbc5ae5e5",
+  "group": "NU",
+  "result": "pass",
+  "note": "Wrote review.md. Hypotheses, conclusions, dependencies, edge cases, docstrings and verbatim signature match. Server-only per-file compilation reproduced cleanly. No delivery defects; search-wrapper audit-log side effect documented."
  }
 }
