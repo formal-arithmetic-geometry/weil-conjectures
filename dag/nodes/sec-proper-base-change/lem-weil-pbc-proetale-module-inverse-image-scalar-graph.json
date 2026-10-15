@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-proetale-module-inverse-image-scalar-graph",
+ "kind": "statement",
+ "title": "Scalar graph compatibility of pro-etale module inverse image",
+ "statement": "Let f:Y to X be a morphism of schemes [def-pc-scheme] and R a sheaf of commutative rings on X_proet [def-weil-pbc-proetale-site]. For the constructed module inverse image [def-weil-proetale-inverse-image] on module sheaves [def-weil-sheaf-of-modules-category], there exist a set-sheaf isomorphism eR:f^{-1}(underlying R) to underlying(f^{-1}R) and a natural set-sheaf isomorphism eM:underlying(module inverse image) to f^{-1}(underlying module), such that every scalar graph t(x)=a(x)*b(x) on a test sheaf T is carried to eM^{-1}(f^{-1}t(x))=eR(f^{-1}a(x))*eM^{-1}(f^{-1}b(x)) on every target section of f^{-1}T. The same eR and natural eM work for every module and every test sheaf and maps. Schemes lie in universe u and sheaf carriers in universe u+1. There is no immersion, nonemptiness or nonzero coefficient assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 (inverse image of modules), 03D3 (module adjunction) and 04JC; transport through the equivalent small pro-etale model sites."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use proEtaleModelRingPresentation to obtain the normalized model ring presentation. The model base-change functor preserves finite limits, hence is representably flat. Apply the normalized underlying module comparison from inverseImage_underlying_of_ring_presentation; its retained adjunction-unit equation is the required comparison of actual module and abelian units.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-proetale-model-ring-presentation",
+    "lem-weil-pbc-module-inverse-image-action-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the normalized abelian comparison with sheafPullbackForgetIso. The latter has its canonical unit equation, so each actual model pullback module acquires a set unit presentation pm whose iso is the natural module set comparison. Its unit is the underlying module-pullback unit; its scalar equation follows from linearity of that actual module unit and the specified model ring unit.",
+   "uses": [
+    "def-weil-pbc-sheaf-pullback-unit-presentation",
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
+    "lem-weil-pbc-module-inverse-image-action-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To transport a scalar graph T to R times M, first work on the model sites. Give set inverse image of T its canonical unit presentation. Form the candidate target action by pairing inverse image of a followed by pr.iso.inv with inverse image of b followed by pm.iso.inv, then scalar multiplication. Compare it with inverse image of t followed by pm.iso.inv. Maps out of the presented inverse image are equal if their composites with the original unit are equal. On unit sections the equalities for pr and pm and the linearity of pm.unit reduce this to t(x)=a(x)*b(x). This proves equality on all sections, including generalized sections that do not individually come from a source section.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-unit-presentation",
+    "def-weil-pbc-sheaf-pullback-unit-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport these set comparisons back through AsSmall. The ring isomorphism is the inverse of pr.iso followed by the model/actual set inverse-image comparison; the module isomorphism is the transported em followed by the same comparison. Naturality of this last comparison on a, b and t carries the model scalar-graph equality to exactly the required equality for every pro-etale object and section of actual inverse image. The comparisons involve no immersion hypothesis and work for the zero ring and empty sites.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheaf-pullback-unit-presentation",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-module-inverse-image-action-adjunction",
+  "lem-weil-pbc-proetale-model-ring-presentation",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison",
+  "lem-weil-pbc-sheaf-pullback-unit-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 (inverse image of modules), 03D3 (module adjunction) and 04JC; transport through the equivalent small pro-etale model sites. Fully proved by normalized module adjunction comparison, unit-presentation hom_ext for arbitrary generalized sections, and naturality of the model/actual set comparison. Model unit and module pullback are kept locally irreducible while their API equations are used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image preserves limits locally on an affine open cover; compatible module scalar actions under inverse image sheaf pullback",
+   "results": "8 hits, including Scheme.Modules.map_smul, Scheme.Modules.restrict, sourceAffineLocally_morphismRestrict and affine transition limit lemmas.",
+   "date": "2026-10-16",
+   "verdict": "These concern scheme module restriction or affine limits, not the pro-etale sheaf comparisons. The needed statements are not one-line specializations."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullbackForgetIso|UnitPresentation|module_inverseImage",
+   "results": "No Mathlib hits; project-specific presentation and comparison APIs are in Sheaf.",
+   "date": "2026-10-16",
+   "verdict": "Use the project presentation APIs; Mathlib has no matching pro-etale scalar graph statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullback\"",
+   "results": "12 hits, including SheafOfModules.pullback, pullbackId, and presheaf pullback adjunctions.",
+   "date": "2026-10-16",
+   "verdict": "These construct pullback but do not supply its unit-normalized underlying set comparison or generalized scalar-graph equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of modules commutes with the underlying abelian sheaf functor and scalar multiplication",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "Unavailable; no conclusion about absence of a match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation",
+  "date": "2026-10-16",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-reconstruction-uniform-tower",
+   "place": "Proof first sentence: restrict the derived limit to local models; compatibility of coefficient-module inverse image with underlying sheaves and scalar action.",
+   "via": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageScalarGraph",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleInverseImageScalarGraph.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_moduleInverseImage_scalarGraph",
+  "statement": "theorem proEtale_moduleInverseImage_scalarGraph {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :\n    (∃ (eR : (proEtaleSheafInverseImage f (Type (u + 1))).obj\n            ((sheafCompose (ProEt.topology X) (CategoryTheory.forget CommRingCat.{u + 1})).obj R) ≅\n            (sheafCompose (ProEt.topology Y) (CategoryTheory.forget CommRingCat.{u + 1})).obj\n              ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R))\n          (eM : proEtaleModuleInverseImage f R ⋙ SheafOfModules.toSheaf _ ⋙\n              sheafCompose (ProEt.topology Y) (CategoryTheory.forget AddCommGrpCat.{u + 1}) ≅\n            (SheafOfModules.toSheaf _ ⋙\n              sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})) ⋙\n                proEtaleSheafInverseImage f (Type (u + 1))),\n          ∀ (M : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)\n              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))\n            (T : Sheaf (ProEt.topology X) (Type (u + 1)))\n            (a : T ⟶ (sheafCompose (ProEt.topology X)\n              (CategoryTheory.forget CommRingCat.{u + 1})).obj R)\n            (b t : T ⟶ (SheafOfModules.toSheaf _ ⋙\n              sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj M),\n            (∀ (U : X.ProEtᵒᵖ) (x : T.obj.obj U),\n              @id (M.val.obj U) (t.hom.app U x) =\n                @id (R.obj.obj U) (a.hom.app U x) •\n                  @id (M.val.obj U) (b.hom.app U x)) →\n            ∀ (V : Y.ProEtᵒᵖ)\n              (x : ((proEtaleSheafInverseImage f (Type (u + 1))).obj T).obj.obj V),\n              @id (((proEtaleModuleInverseImage f R).obj M).val.obj V)\n                ((eM.inv.app M).hom.app V\n                  (((proEtaleSheafInverseImage f (Type (u + 1))).map t).hom.app V x)) =\n                @id (((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R).obj.obj V)\n                  (eR.hom.hom.app V\n                    (((proEtaleSheafInverseImage f (Type (u + 1))).map a).hom.app V x)) •\n                @id (((proEtaleModuleInverseImage f R).obj M).val.obj V)\n                  ((eM.inv.app M).hom.app V\n                    (((proEtaleSheafInverseImage f (Type (u + 1))).map b).hom.app V x)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-0bac6",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T233748-L-3369032",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-0bac6",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T233748-L-3369032",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all six compiled, target signature was byte-identical, forced adaptations were minimal and necessary, and required importers compiled."
+ }
+}

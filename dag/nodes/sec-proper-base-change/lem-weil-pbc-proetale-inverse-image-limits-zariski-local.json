@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-proetale-inverse-image-limits-zariski-local",
+ "kind": "statement",
+ "title": "Zariski locality of preservation of pro-etale inverse-image limits",
+ "statement": "Let f:Y to X be a morphism of schemes [def-pc-scheme]. Fix sheaves of sets in universe u+1 on their small pro-etale sites [def-weil-pbc-proetale-site], and the inverse-image functors [def-weil-proetale-inverse-image]. Suppose that for every affine open U of X, inverse image along the restricted morphism f^{-1}(U) to U preserves all limits indexed by categories with objects and morphisms in universe u+1. Then inverse image along f preserves all such limits. There are no separation, nonemptiness or immersion assumptions.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AA, proof of lemma-closed-immersion: preservation of limits is Zariski local on the target; sites.tex, local criterion for an isomorphism of sheaves."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "For a weakly etale morphism g, composition on objects of the small pro-etale site is left adjoint to base change. Its sheaf restriction functor is left adjoint to direct image and preserves limits sectionwise. Uniqueness of left adjoints identifies it with the constructed inverse image. Similarly, compose the two sheaf adjunctions and the base-change composition isomorphism to obtain the inverse-image composition isomorphism.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every affine open U of X, let K_U be inverse image along the open inclusion f^{-1}(U) into Y. The scheme identity (f restricted to U) followed by U into X equals f^{-1}(U) into Y followed by f, and the composition comparison, identify inverse image of f followed by K_U with open restriction followed by inverse image of f restricted to U. The latter preserves the given size of limits by hypothesis and the first step. Each K_U also preserves these limits.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine opens cover X, so their inverse images cover Y, including when either scheme is empty. Their open inclusions form a pro-etale covering family. If a sheaf map becomes an isomorphism under every K_U, evaluate it at a pro-etale object V of Y. The pullbacks V times_Y f^{-1}(U) form a covering of V. Every object of its generated sieve factors through one of these opens; weak etaleness cancels across its weakly etale inclusion, so it is an object of that open pro-etale site. The components of the sheaf map there are isomorphisms. The local criterion for a sheaf map to be invertible proves it is an isomorphism. This proves joint reflection of isomorphisms by the K_U.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary diagram of the fixed small size, apply all K_U to the cone obtained by inverse image of its limit cone. Each resulting cone is limiting by the second step. Limit-preserving functors that jointly reflect isomorphisms jointly reflect limit cones: compare with a chosen limit, whose image comparison is invertible under every K_U, hence invertible itself. Thus the original mapped cone is limiting.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AA, proof of lemma-closed-immersion: preservation of limits is Zariski local on the target; sites.tex, local criterion for an isomorphism of sheaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image preserves limits locally on an affine open cover; compatible module scalar actions under inverse image sheaf pullback",
+   "results": "8 hits, including Scheme.Modules.map_smul, Scheme.Modules.restrict, sourceAffineLocally_morphismRestrict and affine transition limit lemmas.",
+   "date": "2026-10-16",
+   "verdict": "These concern scheme module restriction or affine limits, not the pro-etale sheaf comparisons. The needed statements are not one-line specializations."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullbackForgetIso|UnitPresentation|module_inverseImage",
+   "results": "No Mathlib hits; project-specific presentation and comparison APIs are in Sheaf.",
+   "date": "2026-10-16",
+   "verdict": "Use the project presentation APIs; Mathlib has no matching pro-etale scalar graph statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"JointlyReflectIsomorphisms\"",
+   "results": "12 hits, including JointlyReflectIsomorphisms and jointly faithful functor APIs.",
+   "date": "2026-10-16",
+   "verdict": "Use joint reflection, but no pro-etale open-cover criterion is supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "jointlyReflectsLimit|ofArrows_mem_precoverage_iff",
+   "results": "Mathlib/CategoryTheory/Functor/ReflectsIso/Limits.lean: jointlyReflectsLimit; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean: ofArrows_mem_precoverage_iff.",
+   "date": "2026-10-16",
+   "verdict": "These provide the abstract cone and covering APIs used in the proof, not the asserted locality theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Preservation of all limits by inverse image of sheaves can be checked on an affine open cover of schemes",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "Unavailable; no conclusion about absence of a match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation",
+  "date": "2026-10-16",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-reconstruction-uniform-tower",
+   "place": "Proof first sentence: restrict the derived limit to local models; Zariski localization step for preservation of the products occurring in that limit.",
+   "via": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImageLimitsZariskiLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleInverseImageLimitsZariskiLocal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_inverseImage_limits_zariski_local",
+  "statement": "theorem proEtale_inverseImage_limits_zariski_local\n    {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (h : ∀ U : X.affineOpens,\n      PreservesLimitsOfSize.{u + 1, u + 1}\n        (proEtaleSheafInverseImage (f ∣_ U.1) (Type (u + 1)))) :\n    PreservesLimitsOfSize.{u + 1, u + 1}\n      (proEtaleSheafInverseImage f (Type (u + 1)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-0bac6",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T233748-L-3369032",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-0bac6",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T233748-L-3369032",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all six compiled, target signature was byte-identical, forced adaptations were minimal and necessary, and required importers compiled."
+ }
+}

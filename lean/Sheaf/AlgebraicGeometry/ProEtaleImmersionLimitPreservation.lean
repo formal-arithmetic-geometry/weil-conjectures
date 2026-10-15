@@ -14,16 +14,16 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.CategoryTheory.SiteMorphismComposition
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.CategoryTheory.SitePullbackAbelianUnderlying
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageLeftAdjoint
-import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
-import Sheaf.CategoryTheory.SiteCoveringAxioms
+import all Sheaf.AlgebraicGeometry.ProEtaleOperations
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImageLimitsZariskiLocal
+import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageComparison
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresAbelian
 
 /-!
 # Limits under inverse image along a pro-etale immersion
@@ -41,6 +41,189 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+private theorem abelianUnderlying {X Y : Scheme.{u}} (f : Y ⟶ X)
+    [PreservesFiniteLimits (proEtaleSheafInverseImage f (Type (u + 1)))] :
+    Nonempty (proEtaleSheafInverseImage f AddCommGrpCat.{u + 1} ⋙
+        sheafCompose (ProEt.topology Y) (CategoryTheory.forget AddCommGrpCat.{u + 1}) ≅
+      sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1}) ⋙
+        proEtaleSheafInverseImage f (Type (u + 1))) := by
+  let J := ProEt.topology X
+  let K := ProEt.topology Y
+  let U := proEtaleBaseChange f
+  open Functor.sheafPullbackConstruction in
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.defeqAttrib.useBackward true in
+  exact (by
+    let : BraidedCategory (Sheaf J (Type (u + 1))) :=
+      BraidedCategory.ofCartesianMonoidalCategory
+    let : BraidedCategory (Sheaf K (Type (u + 1))) :=
+      BraidedCategory.ofCartesianMonoidalCategory
+    let R := U.sheafPushforwardContinuous (Type (u + 1)) J K
+    let : R.Braided := Functor.Braided.ofChosenFiniteProducts R
+    let Rab := U.sheafPushforwardContinuous AddCommGrpCat.{u + 1} J K
+    obtain ⟨FJ, GJ, hFJ, hGJ, hFJGJ, hGJFJ, opJ, _⟩ :=
+      sheavesAlgebraicStructuresAbelian.{u + 1, u, u + 1} J
+    obtain ⟨FK, GK, hFK, hGK, hFKGK, hGKFK, opK, _⟩ :=
+      sheavesAlgebraicStructuresAbelian.{u + 1, u, u + 1} K
+    let EJ := CategoryTheory.Equivalence.mk FJ GJ (eqToIso hFJGJ.symm) (eqToIso hGJFJ)
+    let EK := CategoryTheory.Equivalence.mk FK GK (eqToIso hFKGK.symm) (eqToIso hGKFK)
+    let e : (FK ⋙ R.mapCommGrp) ⋙ CommGrp.forget _ ≅
+        (Rab ⋙ FJ) ⋙ CommGrp.forget _ :=
+      (Functor.associator FK (CommGrp.forget _) R).symm ≪≫
+        Functor.isoWhiskerRight (eqToIso hFK) R ≪≫
+        Iso.refl _ ≪≫
+        Functor.isoWhiskerLeft Rab (eqToIso hFJ).symm
+    have hprod (X Y : Sheaf K (Type (u + 1))) :
+        (CartesianMonoidalCategory.prodComparisonIso R X Y).inv = 𝟙 _ := by
+      have h : (CartesianMonoidalCategory.prodComparisonIso R X Y).hom = 𝟙 _ := by
+        rfl
+      change (CartesianMonoidalCategory.prodComparisonIso R X Y).inv =
+        𝟙 (R.obj (MonoidalCategory.tensorObj X Y))
+      simpa only [h, Category.id_comp] using
+      (CartesianMonoidalCategory.prodComparisonIso R X Y).hom_inv_id
+    have hone : (CartesianMonoidalCategory.preservesTerminalIso R).inv = 𝟙 _ := by
+      rfl
+    have he (A : Sheaf K AddCommGrpCat.{u + 1}) :
+        (e.app A).hom ≫ (eqToIso hFJ).hom.app (Rab.obj A) =
+          R.map ((eqToIso hFK).hom.app A) := by
+      simp [e]
+    let egroup : FK ⋙ R.mapCommGrp ≅ Rab ⋙ FJ :=
+      NatIso.ofComponents (fun A ↦ CommGrp.mkIso (e.app A) (by
+        apply (cancel_mono ((eqToIso hFJ).hom.app (Rab.obj A))).1
+        change (Functor.LaxMonoidal.ε R ≫ R.map MonObj.one) ≫
+          (e.app A).hom ≫ (eqToIso hFJ).hom.app (Rab.obj A) = _
+        rw [Functor.Monoidal.ε_of_cartesianMonoidalCategory, hone, Category.id_comp, he]
+        apply Sheaf.hom_ext
+        ext X t
+        exact (opK A (U.op.obj X)).2.1 t |>.trans
+          ((opJ (Rab.obj A) X).2.1 t).symm) (by
+        apply (cancel_mono ((eqToIso hFJ).hom.app (Rab.obj A))).1
+        change (Functor.LaxMonoidal.μ R _ _ ≫ R.map MonObj.mul) ≫
+          (e.app A).hom ≫ (eqToIso hFJ).hom.app (Rab.obj A) = _
+        rw [Functor.Monoidal.μ_of_cartesianMonoidalCategory, hprod, Category.id_comp, he]
+        apply Sheaf.hom_ext
+        ext X ab
+        rcases ab with ⟨a, b⟩
+        change ((eqToIso hFK).hom.app A).hom.app (U.op.obj X)
+          ((MonObj.mul (X := (FK.obj A).X)).hom.app (U.op.obj X) (a, b)) = _
+        rw [(opK A (U.op.obj X)).1 a b]
+        change _ = ((eqToIso hFJ).hom.app (Rab.obj A)).hom.app X
+          ((MonObj.mul (X := (FJ.obj (Rab.obj A)).X)).hom.app X
+            (((e.app A).hom.hom.app X) a, ((e.app A).hom.hom.app X) b))
+        rw [(opJ (Rab.obj A) X).1]
+        have hea (x : (R.obj (FK.obj A).X).obj.obj X) :
+            ((eqToIso hFJ).hom.app (Rab.obj A)).hom.app X
+                (((e.app A).hom.hom.app X) x) =
+              ((eqToIso hFK).hom.app A).hom.app (U.op.obj X) x :=
+          congrArg (fun f ↦ f.hom.app X x) (he A)
+        rw [hea a, hea b])) (by
+        intro A B f
+        apply CommGrp.hom_ext
+        exact e.hom.naturality f)
+    let eR := Functor.isoWhiskerRight egroup GJ ≪≫
+      Functor.associator Rab FJ GJ ≪≫
+      Functor.isoWhiskerLeft Rab (eqToIso hFJGJ) ≪≫ Rab.rightUnitor
+    -- Lift and transport the adjunction using Mathlib's canonical commutative-group lift.
+    let L := sheafPullback U (Type (u + 1)) J K
+    let : L.Braided := Functor.Braided.ofChosenFiniteProducts L
+    let adj := sheafAdjunctionContinuous U (Type (u + 1)) J K
+    let lifted := (EJ.toAdjunction.comp adj.mapCommGrp).comp EK.symm.toAdjunction
+    let transported := lifted.ofNatIsoRight eR
+    let comparison :=
+      (sheafAdjunctionContinuous U AddCommGrpCat.{u + 1} J K).leftAdjointUniq transported
+    refine ⟨Functor.isoWhiskerRight comparison _ ≪≫ ?_⟩
+    exact Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (eqToIso hGK) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (Iso.refl _) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerRight (eqToIso hFJ) L)
+
+
+private theorem comp_setLimits {X Y Z : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X)
+    [PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage f (Type (u + 1)))]
+    [PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage g (Type (u + 1)))] :
+    PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage (f ≫ g) (Type (u + 1))) := by
+  let a := (proEtaleSheafAdjunction g (Type (u + 1))).comp
+    (proEtaleSheafAdjunction f (Type (u + 1)))
+  let e := Functor.sheafPushforwardContinuousComp'
+    (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) f g).symm
+    (Type (u + 1)) (ProEt.topology X) (ProEt.topology Y) (ProEt.topology Z)
+  let b := a.ofNatIsoRight e
+  let q := (proEtaleSheafAdjunction (f ≫ g) (Type (u + 1))).leftAdjointUniq b
+  exact preservesLimits_of_natIso q.symm
+
+private theorem closed_setLimits {X Y : Scheme.{u}} (f : Y ⟶ X)
+    [IsClosedImmersion f] :
+    PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage f (Type (u + 1))) := by
+  apply proEtale_inverseImage_limits_zariski_local f
+  intro U
+  let : IsAffine U.1.toScheme := U.2
+  let : IsAffine (f ⁻¹ᵁ U.1).toScheme := U.2.preimage f
+  obtain ⟨L, ⟨adj⟩⟩ := exists_affineClosedInverseImageLeftAdjoint (f ∣_ U.1)
+  exact adj.rightAdjoint_preservesLimits
+
+private theorem immersion_setLimits {X Y : Scheme.{u}} (f : Y ⟶ X)
+    [IsImmersion f] :
+    PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage f (Type (u + 1))) := by
+  have := closed_setLimits f.liftCoborder
+  have := restriction_preservesLimits f.coborderRange.ι
+  simpa only [Scheme.Hom.liftCoborder_ι] using comp_setLimits f.liftCoborder f.coborderRange.ι
+
+private theorem forgetAbelian_preservesLimits (X : Scheme.{u}) :
+    PreservesLimitsOfSize.{u + 1, u + 1}
+      (sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1})) := by
+  let : PreservesLimitsOfSize.{u + 1, u + 1}
+      (sheafCompose (ProEt.topology X) (CategoryTheory.forget AddCommGrpCat.{u + 1}) ⋙
+        sheafToPresheaf _ _) :=
+    show PreservesLimitsOfSize.{u + 1, u + 1}
+      (sheafToPresheaf _ _ ⋙ (Functor.whiskeringRight _ _ _).obj
+        (CategoryTheory.forget AddCommGrpCat.{u + 1})) by infer_instance
+  exact preservesLimits_of_reflects_of_preserves _ (sheafToPresheaf _ _)
+
+private theorem immersion_abelianLimits {X Y : Scheme.{u}} (f : Y ⟶ X)
+    [IsImmersion f] :
+    PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}) := by
+  let := immersion_setLimits f
+  let := forgetAbelian_preservesLimits X
+  let := forgetAbelian_preservesLimits Y
+  let V := sheafCompose (ProEt.topology Y) (CategoryTheory.forget AddCommGrpCat.{u + 1})
+  let : ReflectsLimitsOfSize.{u + 1, u + 1} V := reflectsLimits_of_reflectsIsomorphisms
+  obtain ⟨e⟩ := abelianUnderlying f
+  let : PreservesLimitsOfSize.{u + 1, u + 1}
+      (proEtaleSheafInverseImage f AddCommGrpCat.{u + 1} ⋙ V) :=
+    preservesLimits_of_natIso e.symm
+  exact preservesLimits_of_reflects_of_preserves _ V
+
+private theorem forgetModule_preservesLimits {X : Scheme.{u}}
+    (R : Sheaf (ProEt.topology X) RingCat.{u + 1}) :
+    PreservesLimitsOfSize.{u + 1, u + 1} (SheafOfModules.toSheaf.{u + 1} R) := by
+  let : PreservesLimitsOfSize.{u + 1, u + 1}
+      (SheafOfModules.toSheaf.{u + 1} R ⋙ sheafToPresheaf _ _) :=
+    show PreservesLimitsOfSize.{u + 1, u + 1}
+      (SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) by infer_instance
+  exact preservesLimits_of_reflects_of_preserves _ (sheafToPresheaf _ _)
+
+section ScalarExtension
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+  (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+  (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+  (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
+
+private theorem proEtaleRingExtension_preservesLimits :
+    PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleRingExtension f R S c) := by
+  let rc := (sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c
+  let e := proEtaleScalarEquivalence X rc
+  let T := SheafOfModules.restrictScalars rc.hom
+  let : T.IsEquivalence := inferInstanceAs e.functor.IsEquivalence
+  let adj := proEtaleRingExtensionAdjunction f R S c
+  let ei := adj.leftAdjointUniq e.symm.toAdjunction
+  exact preservesLimits_of_natIso ei.symm
+
+end ScalarExtension
+
 /-- Inverse image along a locally closed immersion preserves all small limits, also on
 abelian and module sheaves. The module underlying-sheaf comparison is natural; the graph
 condition on arbitrary test sheaves expresses transport of the scalar action under the
@@ -51,31 +234,34 @@ Source: Stacks Project, Tag 09AA (1), and Modules on Sites, Tags 03D2, 03DB and 
 (blueprint: lem-weil-pbc-proetale-immersion-limit-preservation).
 
 Proof:
-1. For an affine closed immersion, use the extra left adjoint of inverse image
-   (lem-weil-pbc-affine-closed-inverse-image-left-adjoint). A right adjoint preserves
-   limits (lem-weil-pbc-right-adjoint-preserves-limits), which exist sectionwise
-   (lem-weil-pbc-site-sheaf-sets-limits-sectionwise).
-2. For an open immersion, identify the site with a slice by
-   lem-weil-proetale-weakly-etale-localization. Inverse image is sectionwise restriction:
-   the object over the open is terminal in the inverse-image indexing diagram.
-   Sectionwise limits therefore commute with this restriction.
-3. Cover the target of a closed immersion by affine opens. Their inverse images are
-   affine. By lem-weil-pbc-site-morphism-composition, the restricted limit comparison
-   is the affine closed comparison after open restriction. It is an isomorphism by
-   steps 1 and 2. Local inverses glue by the sheaf condition, giving the global result.
-4. Factor the immersion into closed then open; inverse-image composition gives the result.
-5. Use lem-weil-pbc-site-pullback-abelian-underlying and componentwise group operations
-   on limits (lem-weil-pbc-algebraic-sheaf-iff-underlying-sets) to obtain the abelian
-   assertion. Additivity and exactness are lem-weil-pbc-site-pullback-abelian-exact.
-6. Apply finite-product-preserving inverse image to the module action. All module laws
-   are preserved equalities of composites. Kernels and cokernels have the underlying
-   abelian kernels and cokernels, with cokernels sheafified. Limits are created on
-   underlying sheaves (lem-weil-pbc-module-sheaves-limits-sectionwise). The limit
-   comparison is linear on all projections, hence its inverse is linear as well.
-7. For a ring isomorphism c, the map m tensor s to c inverse(s) times m, with inverse
-   m to m tensor 1, identifies extension with transport of scalar action. Balancing
-   proves the inverse identities and naturality. This transport preserves kernels,
-   cokernels and all limits. In particular it preserves countable products. -/
+1. For a weakly etale map, composition on pro-etale site objects is left adjoint
+   to base change. Its sheaf restriction preserves limits sectionwise. Uniqueness
+   of left adjoints identifies restriction with the specified inverse image.
+   Compose adjunctions to obtain the inverse-image composition comparison.
+2. For an affine closed immersion, the extra left adjoint supplied by
+   lem-weil-pbc-affine-closed-inverse-image-left-adjoint makes inverse image a right
+   adjoint, hence limit preserving. Apply the Zariski-local preservation theorem
+   to affine opens to handle any closed immersion. Factor a locally closed immersion
+   into its closed lift to the coborder followed by the open inclusion, and compose.
+3. Identify abelian sheaves with commutative-group objects in set sheaves. Direct image
+   commutes with this identification: the product and terminal comparisons of restriction
+   are identities, and the operation equations verify preservation of zero and addition.
+   Lift the set adjunction to groups and use uniqueness of left adjoints. This gives the
+   underlying-set comparison, so the limit-preserving, conservative forgetful functor
+   transfers all-limit preservation from sets to abelian sheaves.
+4. Use proEtale_moduleInverseImage_comparison for the natural abelian comparison and
+   the scalar graph assertion. Forgetting modules to abelian sheaves preserves limits
+   and finite colimits and reflects them. Transfer preservation through the comparison;
+   abelian inverse image preserves colimits by its adjunction. Its additivity transfers
+   through the comparison and the faithful additive forgetful functor.
+5. Take the specified proEtaleRingModulePullback, whose objects and maps are the given
+   sheafified tensor extension. Its additive and finite exactness instances are available.
+   The existing operations module proves the tensor/restriction adjunction, which
+   identifies extension of scalars as left adjoint to restriction. Restriction along a ring
+   isomorphism is an
+   equivalence, with inverse restriction along its inverse. Uniqueness of left adjoints
+   identifies extension with the inverse equivalence, so it preserves all limits.
+   Compose with pure module inverse image. -/
 theorem proEtale_immersion_inverseImage_preservesLimits
     {X Y : Scheme.{u}} (f : Y ⟶ X) [IsImmersion f] :
     PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage f (Type (u + 1))) ∧
@@ -134,6 +320,47 @@ theorem proEtale_immersion_inverseImage_preservesLimits
                     ((proEtaleModuleInverseImage f R).map a) ≫ eqToHom (hobj N).symm) ∧
             ∃ (_ : P.Additive), PreservesFiniteLimits P ∧ PreservesFiniteColimits P ∧
               PreservesLimitsOfSize.{u + 1, u + 1} P := by
-  sorry
+  let hs := immersion_setLimits f
+  let ha := immersion_abelianLimits f
+  refine ⟨hs, ha, ?_⟩
+  intro R
+  obtain ⟨⟨eA⟩, haction⟩ := proEtale_moduleInverseImage_comparison f R
+  let A := (sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  let B := (sheafCompose (ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)
+  let L := proEtaleModuleInverseImage f R
+  let V := SheafOfModules.toSheaf.{u + 1} B
+  let := forgetModule_preservesLimits A
+  let := forgetModule_preservesLimits B
+  let : ReflectsLimitsOfSize.{u + 1, u + 1} V := reflectsLimits_of_reflectsIsomorphisms
+  let : PreservesLimitsOfSize.{u + 1, u + 1} (L ⋙ V) :=
+    preservesLimits_of_natIso eA.symm
+  let hL : PreservesLimitsOfSize.{u + 1, u + 1} L :=
+    preservesLimits_of_reflects_of_preserves L V
+  let : PreservesFiniteColimits (proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}) := by
+    let : PreservesColimitsOfSize.{0, 0}
+        (proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}) :=
+      (proEtaleSheafAdjunction f AddCommGrpCat.{u + 1}).leftAdjoint_preservesColimits
+    infer_instance
+  let : PreservesFiniteColimits (L ⋙ V) := preservesFiniteColimits_of_natIso eA.symm
+  let : ReflectsFiniteColimits V := inferInstance
+  let : PreservesFiniteColimits L := preservesFiniteColimits_of_reflects_of_preserves L V
+  let : (proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).Additive :=
+    (proEtaleSheafAdjunction f AddCommGrpCat.{u + 1}).left_adjoint_additive
+  let : (L ⋙ V).Additive := Functor.additive_of_iso eA.symm
+  let : L.Additive := Functor.additive_of_comp_faithful L V
+  refine ⟨inferInstance, inferInstance, inferInstance, hL, ⟨eA⟩, haction, ?_⟩
+  intro S c
+  let P := proEtaleRingModulePullback f R S c
+  refine ⟨P, (fun _ ↦ rfl), ?_, inferInstance, inferInstance, inferInstance, ?_⟩
+  · intro M N a
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  · let := proEtaleRingExtension_preservesLimits f R S c
+    change PreservesLimitsOfSize.{u + 1, u + 1}
+      (proEtaleModuleInverseImage f R ⋙ proEtaleRingExtension f R S c)
+    infer_instance
 
 end AlgebraicGeometry.Scheme

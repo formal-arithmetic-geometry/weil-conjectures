@@ -66,6 +66,7 @@ theorem proEtaleModelModuleInverseImage_underlying {X Y : Scheme.{u}} (f : X ⟶
     infer_instance
   let : RepresentablyFlat (proEtaleModelBaseChange f) := flat_of_preservesFiniteLimits _
   obtain ⟨p, hp⟩ := proEtaleModelRingPresentation f R
-  exact SheafOfModules.inverseImage_underlying_of_ring_presentation
+  obtain ⟨e, _⟩ := SheafOfModules.inverseImage_underlying_of_ring_presentation
     (proEtaleModelRingUnit f R) p (by ext U r; exact hp U r)
+  exact ⟨e⟩
 end AlgebraicGeometry.Scheme

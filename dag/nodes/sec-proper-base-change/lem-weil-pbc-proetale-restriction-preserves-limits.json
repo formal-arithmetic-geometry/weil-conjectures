@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-proetale-restriction-preserves-limits",
+ "kind": "statement",
+ "title": "Limits preserved by weakly etale pro-etale restriction",
+ "statement": "For a weakly etale morphism f:Y to X of schemes, inverse image on sheaves of sets on the small pro-etale sites preserves all limits indexed by categories with objects and morphisms in universe u+1.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AA, the restriction/base-change argument in the proof of lemma-closed-immersion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Composition on objects of the pro-etale site is left adjoint to base change for a weakly etale morphism. Applying the sheaf pushforward construction gives an adjunction for the corresponding restriction functor.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specified inverse-image functor is the left adjoint in the pro-etale sheaf adjunction. Uniqueness of left adjoints identifies it with the restriction functor. Restriction is computed sectionwise and therefore preserves all limits.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AA, restriction to a weakly etale open or over-category and its sectionwise limit preservation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of pro-etale sheaves along weakly etale morphism preserves limits",
+   "results": "No matching project theorem; the existing pro-etale adjunction and site restriction APIs were inspected.",
+   "date": "2026-10-16",
+   "verdict": "Use the adjunction uniqueness argument in the delivered module."
+  },
+  {
+   "tool": "grep",
+   "query": "MorphismProperty.Over.mapPullbackAdj sheafPushforwardContinuous preservesLimits",
+   "results": "Found the pro-etale over-category adjunction and generic sheaf restriction limit APIs.",
+   "date": "2026-10-16",
+   "verdict": "These APIs establish the restriction comparison and limit preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesLimitsOfSize sheafPushforwardContinuous",
+   "results": "Generic preservation lemmas found, but no pro-etale specialization.",
+   "date": "2026-10-16",
+   "verdict": "No duplicate statement; use preservesLimits_of_natIso."
+  },
+  {
+   "tool": "leansearch",
+   "query": "weakly etale pro-etale inverse image preserves all limits",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "Unavailable; no conclusion about absence of a match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation",
+  "date": "2026-10-16",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-reconstruction-uniform-tower",
+   "place": "Proof first sentence: restrict the derived limit to local models.",
+   "via": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImageLimitsZariskiLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleInverseImageLimitsZariskiLocal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.restriction_preservesLimits",
+  "statement": "theorem restriction_preservesLimits {X Y : Scheme.{u}} (f : Y ⟶ X)\n    [WeaklyEtale f] :\n    PreservesLimitsOfSize.{u + 1, u + 1} (proEtaleSheafInverseImage f (Type (u + 1)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-0bac6",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T233748-L-3369032",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-0bac6",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T233748-L-3369032",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all six compiled, target signature was byte-identical, forced adaptations were minimal and necessary, and required importers compiled."
+ }
+}

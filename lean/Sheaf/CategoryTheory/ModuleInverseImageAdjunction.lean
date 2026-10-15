@@ -19,9 +19,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace SheafOfModules
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
-set_option backward.defeqAttrib.useBackward true
 variable {C D : Type u} [SmallCategory C] [SmallCategory D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
   {F : C ⥤ D} [F.IsContinuous J K]
@@ -95,8 +92,13 @@ adjunction to the specified scalar-restricted pushforward. Uniqueness of left ad
 identifies it with Mathlib's pullback. Forgetting gives the stated comparison. -/
 private theorem inverseImage_underlying_of_actions
     (actions : ∀ M : SheafOfModules.{u} A, InverseImageAction φ M) :
-    Nonempty (pullback.{u} φ ⋙ toSheaf B ≅
-      toSheaf A ⋙ sheafPullback F AddCommGrpCat.{u} J K) := by
+    ∃ e : pullback.{u} φ ⋙ toSheaf B ≅
+      toSheaf A ⋙ sheafPullback F AddCommGrpCat.{u} J K,
+      ∀ M : SheafOfModules.{u} A,
+        (toSheaf A).map ((pullbackPushforwardAdjunction φ).unit.app M) ≫
+          (F.sheafPushforwardContinuous AddCommGrpCat.{u} J K).map (e.hom.app M) =
+            (sheafAdjunctionContinuous F AddCommGrpCat.{u} J K).unit.app
+              ((toSheaf A).obj M) := by
   let La := sheafPullback F AddCommGrpCat.{u} J K
   let Ra := F.sheafPushforwardContinuous AddCommGrpCat.{u} J K
   let adj := sheafAdjunctionContinuous F AddCommGrpCat.{u} J K
@@ -177,24 +179,45 @@ private theorem inverseImage_underlying_of_actions
         exact (k.val.app U).hom.map_smul r m
       · ext U m
         rfl
-  obtain ⟨am, _, _, _⟩ :=
-    AlgebraicGeometry.adjunctionOfLinearLifts L T La Ra P Q adj e d hlin
-  exact ⟨Functor.isoWhiskerRight ((pullbackPushforwardAdjunction φ).leftAdjointUniq am) Q ≪≫ e⟩
+  obtain ⟨am, _, hη, _⟩ := AlgebraicGeometry.adjunctionOfLinearLifts L T La Ra P Q adj e d hlin
+  let a₀ := pullbackPushforwardAdjunction φ
+  let q := a₀.leftAdjointUniq am
+  let e' := Functor.isoWhiskerRight q Q ≪≫ e
+  refine ⟨e', ?_⟩
+  intro M
+  have hq := Adjunction.unit_leftAdjointUniq_hom_app a₀ am M
+  have hη' : P.map (am.unit.app M) =
+      adj.unit.app (P.obj M) ≫ Ra.map (e.inv.app M) := by
+    have hh := hη M
+    change P.map (am.unit.app M) ≫ 𝟙 _ = _ at hh
+    simpa only [Category.comp_id] using hh
+  change P.map (a₀.unit.app M) ≫ Ra.map (Q.map (q.hom.app M) ≫ e.hom.app M) = _
+  rw [Ra.map_comp, ← Category.assoc]
+  change (P.map (a₀.unit.app M) ≫ P.map (T.map (q.hom.app M))) ≫ _ = _
+  rw [← P.map_comp, hq, hη', Category.assoc, ← Ra.map_comp,
+    Iso.inv_hom_id_app]
+  rfl
 /-- A ring unit presenting the set inverse image identifies the underlying module pullback.
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
 (blueprint: lem-weil-pbc-module-inverse-image-action-adjunction).
 Proof: the canonical abelian/set comparison is compatible with its unit. Pair this
 presentation with the given ring presentation. It both constructs scalar actions and
 shows that linearity can be tested on unit pairs. Apply the restricted adjunction
-comparison proved above. -/
+comparison proved above. The unit equation for leftAdjointUniq identifies the chosen
+module unit, followed by this comparison, with the original abelian unit. -/
 theorem inverseImage_underlying_of_ring_presentation
     [RepresentablyFlat F] [PreservesFiniteLimits (sheafPullback F (Type u) J K)]
     (pr : SheafPullbackUnitPresentation (F := F)
       ((sheafCompose J (CategoryTheory.forget RingCat.{u})).obj A)
       ((sheafCompose K (CategoryTheory.forget RingCat.{u})).obj B))
     (hr : pr.unit = (sheafCompose J (CategoryTheory.forget RingCat.{u})).map φ) :
-    Nonempty (pullback.{u} φ ⋙ toSheaf B ≅
-      toSheaf A ⋙ sheafPullback F AddCommGrpCat.{u} J K) := by
+    ∃ e : pullback.{u} φ ⋙ toSheaf B ≅
+      toSheaf A ⋙ sheafPullback F AddCommGrpCat.{u} J K,
+      ∀ M : SheafOfModules.{u} A,
+        (toSheaf A).map ((pullbackPushforwardAdjunction φ).unit.app M) ≫
+          (F.sheafPushforwardContinuous AddCommGrpCat.{u} J K).map (e.hom.app M) =
+            (sheafAdjunctionContinuous F AddCommGrpCat.{u} J K).unit.app
+              ((toSheaf A).obj M) := by
   let ea := sheafPullbackForgetIso J K F (CategoryTheory.forget AddCommGrpCat.{u})
   let pa (M : SheafOfModules.{u} A) : SheafPullbackUnitPresentation (F := F)
       ((sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj ((toSheaf A).obj M))
@@ -216,4 +239,5 @@ theorem inverseImage_underlying_of_ring_presentation
     b.hom.app (F.op.obj U) (pr.unit.hom.app U x.1, (pa M).unit.hom.app U x.2)
   rw [hr]
   exact h U x.1 x.2
+
 end SheafOfModules
