@@ -24,30 +24,41 @@
  ],
  "proof": [
   {
-   "text": "Use $C,J,D_0$ from [def-weil-pbc-weak-etale-refinement]. By\n[lem-weil-pbc-strict-w-cover], $C/A$ is faithfully flat and ind-etale, and\nits maximal local rings are strictly henselian. Since $A\to B$ is weakly etale\nand weakly etale maps are stable under base change, $C\to D_0$ is weakly\netale. Applying [lem-weil-pbc-weak-etale-field] to each fibre of $D_0/C$\nshows that its residue fields are algebraic over the base fields. Thus\n$T=V(JD_0)$ consists of closed points of $D_0$.\n[lem-weil-pbc-retained-localization] makes $B'$ w-local with closed points\n$T$, unchanged local rings there, and $D_0\\to B'$ ind-Zariski.",
+   "text": "For C, J, D₀ and B′ of def-weil-pbc-weak-etale-refinement, use the ind-etaleness, w-locality, strictly henselian maximal local rings, and closed-point surjectivity of the strict cover. Its w-locality gives V(J) = closedPoints(Spec C). Mathlib weak-etale tensor base change gives C → C ⊗[A] B. Transport through Algebra.TensorProduct.commRight A C B: the isomorphism is etale by bijectivity, hence weakly etale, and Mathlib composition gives weak etaleness of C → D₀ for its specified right algebra structure. This uses the proved base-change and composition forms of lem-weil-pbc-ind-etale-stability, not its open bundled declaration. The already proved source-library theorem Algebra.WeaklyEtale.isAlgebraic_residueField_of_liesOver gives algebraic residue field extensions (the field calculation of lem-weil-pbc-weakly-etale-field-separable). Apply the already proved zeroLocus_map_algebraMap_subset_closedPoints: over a maximal ideal, an algebraic domain in the residue field is a field. Thus T = V(JD₀) consists of closed points. Apply retained-localization properties to T.",
    "uses": [
     "def-weil-pbc-weak-etale-refinement",
     "lem-weil-pbc-strict-w-cover",
-    "lem-weil-pbc-weak-etale-field",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-weakly-etale-field-separable",
+    "lem-weil-pbc-retained-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert any principal ind-Zariski presentation into an ind-etale presentation, using Mathlib Algebra.Etale.of_isLocalizationAway, finite-product etaleness, and Algebra.Etale.of_equiv at each stage. Hence D₀ → B′ is ind-etale. Base change of A → C makes B → D₀ ind-etale; source-library RingHom.IndEtale.comp gives ind-etaleness of B → B′ and hence flatness. The composite C → B′ is weakly etale by base change and composition.",
+   "uses": [
     "lem-weil-pbc-retained-localization",
+    "lem-weil-pbc-strict-w-cover",
     "lem-weil-pbc-ind-etale-stability"
    ],
    "elementary": false
   },
   {
-   "text": "At every maximal ideal $n\\subset B'$, its contraction $m\\subset C$ is\nmaximal. The composite $C\\to D_0\\to B'$ is weakly etale: the first map is\nthe weakly etale base change above, while $D_0\\to B'$ is ind-Zariski and\nhence ind-etale and weakly etale by [lem-weil-pbc-ind-etale-stability].\nTherefore the local map $C_m\\to B'_n$ is weakly etale, so is an isomorphism\nby [thm-weil-pbc-weak-etale-strict-local]. Every prime of $B'$ lies under a\nmaximal ideal. Localizing this isomorphism again shows that $C\\to B'$\nidentifies all local rings. It is therefore ind-Zariski by\n[lem-weil-pbc-local-rings-ind-zariski]. Composition with $A\\to C$ proves that\n$A\\to B'$ is ind-etale.",
+   "text": "For a maximal ideal n of B′, use surjectivity of the retained closed-point homeomorphism to write n = h(x). Its compatibility with the prime-pair equivalence says e(n) = (x,x), so n contracts to x in D₀. Since x lies in V(JD₀), its contraction to C lies in V(J), hence is maximal. Apply the already proved Algebra.WeaklyEtale.bijectiveOnStalks: every prime lies below a maximal ideal; the strictly henselian local isomorphism theorem identifies stalks there, and further localization identifies the remaining stalks. Now lem-weil-pbc-local-rings-ind-zariski makes C → B′ principal ind-Zariski, hence ind-etale by the stagewise conversion in the previous step. Compose with A → C. The tensor balancing identity identifies this composite with A → B → B′.",
    "uses": [
-    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-retained-localization",
+    "lem-weil-pbc-strict-w-cover",
     "thm-weil-pbc-weak-etale-strict-local",
     "lem-weil-pbc-local-rings-ind-zariski"
    ],
    "elementary": false
   },
   {
-   "text": "The map $B\\to D_0$ is ind-etale by base change from $A\\to C$; composition\nmakes $B\\to B'$ ind-etale and flat as well. The closed point set $V(J)$\nsurjects onto $\\operatorname{Spec}A$ by\n[lem-weil-pbc-strict-w-cover]. By [lem-weil-pbc-faithfully-flat-base-change], the base-changed faithfully flat map remains faithfully flat, so its base change $T$ surjects onto\n$\\operatorname{Spec}B$, and all these points are retained in\n$\\operatorname{Spec}B'$. The composite $B\to B'$ is flat, and the retained points give a surjective\nmap $\\operatorname{Spec}B'\to\\operatorname{Spec}B$. The existing criterion\n[lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] therefore gives\nfaithful flatness. The construction\ngives the refinement theorem commonly formulated in\n[Stacks Project, Tag 097Z](https://stacks.math.columbia.edu/tag/097Z); its\ncovering and local-ring steps have been proved above.",
+   "text": "The surjection from closed points of Spec C onto Spec A factors through Spec(C/J), giving a surjection Spec(C/J) → Spec A by the quotient-spectrum correspondence. Base change preserves spectrum surjectivity; use its affine source-library form PrimeSpectrum.comap_surjective_tensorProduct_left to choose Q₀ in Spec(B ⊗[A] (C/J)) over each prime q of B. Contract Q₀ along the explicit tensor quotient map to Q in Spec D₀. The tensor map kills the image of J, so Q is in T; it still lies over q. The retained prime equivalence supplies P = e⁻¹(Q,Q), whose contraction is Q. Thus Spec B′ → Spec B is surjective. Combine this with flatness from the second step by RingHom.FaithfullyFlat.iff_flat_and_comap_surjective.",
    "uses": [
     "lem-weil-pbc-strict-w-cover",
-    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-retained-localization",
+    "lem-weil-pbc-surjective-base-change",
     "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
    ],
    "elementary": false
@@ -55,19 +66,19 @@
  ],
  "proof_deps": [
   "def-weil-pbc-weak-etale-refinement",
-  "lem-weil-pbc-faithfully-flat-base-change",
   "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
   "lem-weil-pbc-ind-etale-stability",
   "lem-weil-pbc-local-rings-ind-zariski",
   "lem-weil-pbc-retained-localization",
   "lem-weil-pbc-strict-w-cover",
-  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-weakly-etale-field-separable",
   "thm-weil-pbc-weak-etale-strict-local"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-weak-etale-refinement.md",
-  "place": "## Proof"
+  "document": "Stacks Project, Tags 097Z and 097A; lean/WeilConjectures/RingTheory/ProEtale/WeaklyEtaleIndEtale.lean",
+  "place": "Adaptation of the proof of Algebra.WeaklyEtale.exists_indEtale to the specified principal retained localization; written by G1, 2026-10-15. Uses the source-library residue-field and tensor-spectrum helpers without replacing the specified refinement. Second reading by G1 replaced the open bundled stability application with Mathlib weak-etale tensor base change and isomorphism transport; all stability facts now use proved Mathlib or upstream APIs."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -152,5 +163,15 @@
   "by": "ND",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-88e85",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261015T154212-L-164807",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered proof with its unchanged Lean signature, DAG statement and dependencies; verified public import exposure and compiled the sole direct importer against the delivery."
  }
 }
