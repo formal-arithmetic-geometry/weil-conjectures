@@ -255,5 +255,24 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-28bcfaaa7 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages and unit/chapter route. Verified unrestricted étale hypotheses, the restriction morphism, unbounded K-injective computations, cone signs and derived naturality. Edge cases pass; no new nodes, duplicates or dependency cycle found. Accepted all eight proposed tool_uses. No coefficient-category comparison or target theorem is inferred. Detailed checks are in review.md; no repairs required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-97774133f",
+  "group": "NO",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable node, all statement dependencies, source passages, exact declarations, docstrings, hypotheses, conclusions, naturality, edge cases, and verbatim statement field. Server-only compilation reproduced cleanly. No delivery faults found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSupportHom",
+  "declaration": "AlgebraicGeometry.Etale.closedSupportHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSupportHom.lean",
+  "statement": "theorem closedSupportHom (A : Type (u + 1)) [CommRing A] {D V T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] (v : V ⟶ T) [IsOpenImmersion v] (hcomp : Set.range v.base = (Set.range i.base)ᶜ) : ∃ q : (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)).mapHomologicalComplex (ComplexShape.up ℤ) ⟶ (upperStar (ModuleCat.{u + 1} A) v ⋙ Sheaf.Γ V.smallEtaleTopology (ModuleCat.{u + 1} A)).mapHomologicalComplex (ComplexShape.up ℤ), (∀ (K : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (n : ℤ), (q.app K).f n = globalSectionsUpperStarMap (ModuleCat.{u + 1} A) v (K.X n)) ∧ ∃ e : ∀ K : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, (((linearCoyoneda A (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).obj (op ((lowerStar (ModuleCat.{u + 1} A) i).obj ((constantSheaf D.smallEtaleTopology (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A))))).rightDerivedFunctor).obj (DerivedCategory.Q.obj K) ≅ (DerivedCategory.Q.obj (CochainComplex.mappingCone (q.app ((CochainComplex.kInjectiveResolutionFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).obj K))))⟦(-1 : ℤ)⟧, ∀ (K L : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (f : K ⟶ L), (((linearCoyoneda A (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).obj (op ((lowerStar (ModuleCat.{u + 1} A) i).obj ((constantSheaf D.smallEtaleTopology (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A))))).rightDerivedFunctor).map (DerivedCategory.Q.map f) ≫ (e L).hom = (e K).hom ≫ (shiftFunctor (DerivedCategory (ModuleCat.{u + 1} A)) (-1 : ℤ)).map (DerivedCategory.Q.map (CochainComplex.mappingCone.map _ _ (((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)).mapHomologicalComplex (ComplexShape.up ℤ)).map ((CochainComplex.kInjectiveResolutionFunctor _).map f)) (((upperStar (ModuleCat.{u + 1} A) v ⋙ Sheaf.Γ V.smallEtaleTopology (ModuleCat.{u + 1} A)).mapHomologicalComplex (ComplexShape.up ℤ)).map ((CochainComplex.kInjectiveResolutionFunctor _).map f)) (q.naturality ((CochainComplex.kInjectiveResolutionFunctor _).map f)).symm))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Ordinary A-linear global RHom is the total right derived functor of linearCoyoneda from the degree-zero sheaf i_* A_D. The RHS uses the actual restriction map on the published functorial K-injective resolution, followed by the ordinary ModuleCat localization and shift. Its component formula uniquely specifies q; the final equation is naturality in K. No boundedness or finite-type hypothesis is added."
  }
 }
