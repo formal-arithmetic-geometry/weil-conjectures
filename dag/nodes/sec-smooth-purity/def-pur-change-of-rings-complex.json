@@ -1,0 +1,108 @@
+{
+ "id": "def-pur-change-of-rings-complex",
+ "kind": "definition",
+ "title": "Termwise change of rings of a cochain complex",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,J)$ be a site, $\\varphi:R\\to S$ a morphism of sheaves of commutative rings, and $K$ a cochain complex of $R$-modules [def-pc-cochain-complex-modules]. Its termwise change of rings [def-pur-sheaf-tensor-product] is the cochain complex $K\\otimes_R S$ of $S$-modules with term $(K\\otimes_R S)^i=K^i\\otimes_R S$ and differential $d^i\\otimes_R 1$. The change-of-rings maps preserve zero and composition, so these differentials have cochain shape and square to zero.",
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat: termwise pullback for the identity morphism of topoi and the coefficient map R → S"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Termwise extension of scalars cochain complex sheaves modules",
+   "results": "{\"t\": \"2026-10-15T06:19:26Z\", \"tool\": \"leansearch\", \"query\": \"Termwise extension of scalars cochain complex sheaves modules\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termwise change of rings cochain complex of sheaves of modules",
+   "results": "{\"t\": \"2026-10-15T06:19:27Z\", \"tool\": \"leanfinder\", \"query\": \"Termwise change of rings cochain complex of sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.instModuleCochain\", \"SheafOfModules.restrictScalars\", \"CochainComplex.HomComplex.Cochain.shiftLinearMap\", \"SheafOfModules.over\", \"CochainComplex.HomComplex.Cocycle.instModule\", \"CochainComplex.HomComplex_X\", \"CochainComplex.HomComplex\", \"CochainComplex.HomComplex.Cochain.shiftLinearMap_apply\"], \"digest\": \"56ad35e3539c8171\"}",
+   "date": "2026-10-15",
+   "verdict": "no matching construction"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRingsComplex|extendScalars.*Complex",
+   "results": "{\"t\": \"2026-10-15T06:19:27Z\", \"tool\": \"grep\", \"query\": \"changeOfRingsComplex|extendScalars.*Complex\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "no matching construction"
+  },
+  {
+   "tool": "grep",
+   "query": "change.of.rings.*complex|termwise.*change of rings|changeOfRingsComplex; blueprint_refs.py search \"change of rings\"",
+   "results": "DAG: derived operations and ring-specialized nodes, no general-site termwise construction node. Sheaf: DerivedChangeOfRings and other modules parameterize an additive E with object/map formulas; KFlatPullback constructs inverse image plus change of rings on spaces. WeilConjectures: no changeOfRingsComplex. Mathlib grep returned no hits.",
+   "date": "2026-10-15",
+   "verdict": "no general-site construction"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-kflat-change-of-rings",
+  "date": "2026-10-15",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "the termwise coefficient change in the K-flat change-of-rings lemma",
+   "via": [
+    "lem-pur-kflat-change-of-rings",
+    "def-pur-integral-derived-operations"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ChangeOfRingsComplex",
+  "declaration": "SheafOfModules.changeOfRingsComplex",
+  "file": "lean/Sheaf/Algebra/Homology/ChangeOfRingsComplex.lean",
+  "statement": "def changeOfRingsComplex : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj S)) ℤ",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "SheafOfModules.changeOfRingsComplex_shape",
+   "SheafOfModules.changeOfRingsComplex_comp",
+   "SheafOfModules.changeOfRingsComplex"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0b92618a4",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0b92618a4",
+  "group": "NK",
+  "result": "pass",
+  "note": "Verified source correspondence, dependencies, hypotheses, conclusions, edge cases, verbatim signatures, report sections and pilot gates. Server compilation passed; branch unchanged."
+ }
+}
