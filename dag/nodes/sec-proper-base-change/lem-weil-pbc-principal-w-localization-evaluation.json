@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-principal-w-localization-evaluation",
+ "kind": "statement",
+ "title": "Surjective evaluation from the principal w-localization to a prime localization",
+ "statement": "Let A be a commutative ring, let W be its finite-partition principal w-localization [def-weil-pbc-w-localization], and let x be a prime ideal of A. At each finite stage, project to the unique partition part containing x and map its principal localization canonically to A_x [def-weil-pbc-localization-at-prime]. These maps are compatible with refinement. Let rho_x: W -> A_x be their induced A-algebra map. Then rho_x is surjective. The map, its stage formula, and the two-part cut indices are explicit constructions, rather than choices from a mere existence assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-w-localization",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-w-localization-points.md",
+  "place": "Proof steps 3 and 6: compatible selected-factor maps and surjectivity of rho_x"
+ },
+ "proof": [
+  {
+   "text": "For each index i of [def-weil-pbc-w-localization] and prime x, select the unique partition part containing x. Its denominator is outside x, so the localization universal property gives a canonical A-algebra map from that factor to A_x [def-weil-pbc-localization-at-prime]. Compose with the coordinate projection to evaluate the whole stage.",
+   "uses": [
+    "def-weil-pbc-w-localization",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under refinement the selected child has the selected old part as parent. Both composites from the old principal localization to A_x agree on A, so uniqueness of localization maps proves compatibility. The colimit universal property defines evaluation rho_x: W -> A_x, with its explicit formula on every stage injection.",
+   "uses": [
+    "def-weil-pbc-w-localization",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given z=a/s in A_x, cut Spec A into the nonempty members of D(s), V(s), with denominator s on D(s) and 1 on its complement. This is an allowed index, including when one part is empty. Put a times the inverse of the selected denominator in every factor; its value at x is a/s because x belongs to D(s). The stage tuple therefore maps to z. Fraction representation and the inverse-denominator identity are Mathlib localization lemmas.",
+   "uses": [
+    "def-weil-pbc-w-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-w-localization",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-w-localization-points.md",
+  "place": "Proof steps 3 and 6: compatible selected-factor maps and surjectivity of rho_x; explicit Lean proof by E1 using Mathlib localization and finite-product spectrum APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation to a prime localization from a filtered colimit of finite constructible partitions, and pairs of primes parametrizing the spectrum",
+   "results": "8 hits: Localization.AtPrime.mapPiEvalRingHom, Localization.AtPrime.mapPiEvalRingHom_comp_algebraMap, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage, PrimeSpectrum.piLocalizationToMaximal_comp_toPiLocalization, Localization.AtPrime.mapPiEvalRingHom_algebraMap_apply, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, PrimeSpectrum.PiLocalization, PrimeSpectrum.mapPiLocalization",
+   "date": "2026-10-15",
+   "verdict": "The hits provide component tools (localization maps, prime correspondence, or fractions), not the evaluation or prime charts of this specific finite-partition colimit. The proof uses these tools explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.liftAlgHom",
+   "results": "4 hits: IsLocalization.Away.liftAlgHom, IsLocalization.Away.liftAlgHom_toRingHom, IsLocalization.Away.coe_liftAlgHom, IsLocalization.Away.liftAlgHom_apply",
+   "date": "2026-10-15",
+   "verdict": "The hits provide component tools (localization maps, prime correspondence, or fractions), not the evaluation or prime charts of this specific finite-partition colimit. The proof uses these tools explicitly."
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaToPi_bijective|isCompact_univ|AtPrime.primeSpectrumOrderIso|exists_mk._eq",
+   "results": "25 hits: Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean",
+   "date": "2026-10-15",
+   "verdict": "The hits provide component tools (localization maps, prime correspondence, or fractions), not the evaluation or prime charts of this specific finite-partition colimit. The proof uses these tools explicitly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation from a filtered colimit of finite products of principal localizations at constructible partitions to the localization at a prime is surjective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PrincipalWLocalizationPoints",
+  "date": "2026-10-15",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-w-localization-points",
+   "place": "Proof steps 3 and 6: compatible selected-factor maps and surjectivity of rho_x",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PrincipalWLocalizationEvaluation",
+  "file": "lean/Sheaf/RingTheory/PrincipalWLocalizationEvaluation.lean",
+  "declaration": "PrincipalWLocalization.evaluation_surjective",
+  "declarations": [
+   "PrincipalWLocalization.partAt",
+   "PrincipalWLocalization.mem_partAt",
+   "PrincipalWLocalization.partAt_eq",
+   "PrincipalWLocalization.parent_partAt",
+   "PrincipalWLocalization.partToLocal",
+   "PrincipalWLocalization.stageEvaluation",
+   "PrincipalWLocalization.stageEvaluation_transition",
+   "PrincipalWLocalization.evaluationCocone",
+   "PrincipalWLocalization.evaluation",
+   "PrincipalWLocalization.evaluation_ι",
+   "PrincipalWLocalization.cutIndex",
+   "PrincipalWLocalization.evaluation_surjective"
+  ],
+  "statement": "theorem evaluation_surjective (x : PrimeSpectrum A) : Function.Surjective (evaluation x)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261015T154204-L-162267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261015T154204-L-162267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,11 +7,7 @@ module
 
 public import Sheaf.RingTheory.PrincipalWLocalization
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
-import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.RingTheory.IndPrincipalZariski
-import Sheaf.RingTheory.WLocalClopenPartitions
-import WeilConjectures.RingTheory.ProEtale.WLocal
+import Sheaf.RingTheory.PrincipalWLocalizationPrimeCharts
 
 /-! # Points and components of the principal w-localization
 
@@ -27,6 +23,41 @@ open AlgebraicGeometry
 
 namespace PrincipalWLocalization
 
+private theorem indZariski (A : Type u) [CommRing A] :
+    Algebra.IndZariski A (algebra A) := by
+  let P : CategoryTheory.Limits.ColimitPresentation (Index A) (algebra A) :=
+    { diag := diagram
+      ι := (CategoryTheory.Limits.colimit.cocone diagram).ι
+      isColimit := CategoryTheory.Limits.colimit.isColimit diagram }
+  exact Algebra.IndZariski.of_colimitPresentation A (algebra A) P fun i ↦
+    inferInstanceAs (Algebra.IndZariski A (Stage i))
+
+private theorem patchT2 (A : Type u) [CommRing A] :
+    T2Space (WithConstructibleTopology (PrimeSpectrum A)) := by
+  classical
+  refine ⟨fun x y hxy ↦ ?_⟩
+  obtain ⟨f, hf⟩ : ∃ f : A,
+      ¬ (f ∈ x.ofTopology.asIdeal ↔ f ∈ y.ofTopology.asIdeal) := by
+    by_contra! h
+    exact hxy (WithTopology.ofTopology_injective _ (PrimeSpectrum.ext (Ideal.ext h)))
+  let U : Set (WithConstructibleTopology (PrimeSpectrum A)) :=
+    WithTopology.ofTopology ⁻¹' (PrimeSpectrum.basicOpen f : Set (PrimeSpectrum A))
+  have hU : IsClopen U := by
+    constructor
+    · rw [WithConstructibleTopology.isClosed_iff]
+      exact (PrimeSpectrum.isCompact_basicOpen f).isClosed_constructibleTopology_of_isOpen
+        (PrimeSpectrum.basicOpen f).isOpen
+    · rw [WithConstructibleTopology.isOpen_iff]
+      exact (PrimeSpectrum.isCompact_basicOpen f).isOpen_constructibleTopology_of_isOpen
+        (PrimeSpectrum.basicOpen f).isOpen
+  by_cases hx : f ∈ x.ofTopology.asIdeal
+  · have hy : f ∉ y.ofTopology.asIdeal := fun hy ↦ hf ⟨fun _ ↦ hy, fun _ ↦ hx⟩
+    exact ⟨Uᶜ, U, hU.compl.isOpen, hU.isOpen, (fun h ↦ h hx), hy, disjoint_compl_left⟩
+  · have hy : f ∈ y.ofTopology.asIdeal := by
+      by_contra hy
+      exact hf ⟨fun h ↦ (hx h).elim, fun h ↦ (hy h).elim⟩
+    exact ⟨U, Uᶜ, hU.isOpen, hU.compl.isOpen, hx, (fun h ↦ h hy), disjoint_compl_right⟩
+
 /-- The prime-pair description, local rings, component schemes, and closed points of the
 finite-partition principal w-localization. The closed immersion from `Spec A_x` with image the
 first-coordinate fibre equips that fibre with its canonical affine scheme structure. Its ring
@@ -36,120 +67,34 @@ rather than the Zariski topology on `Spec A`.
 
 Source: blueprint order 1223 (blueprint: lem-weil-pbc-w-localization-points).
 Proof:
-1. Use the small directed set of all finite constructible partitions and all allowed denominators
-from [def-weil-pbc-w-localization]; importantly, denominators are not fixed once and for all.
-Write $B_i=\prod_{E\in\mathcal P_i}A_{f_{i,E}}$. For a prime $q\subset W$, its inverse image in
-$B_i$ selects exactly one component: the finitely many orthogonal component idempotents sum to
-$1$, so exactly one is outside the prime (at least one by their sum, at most one by their zero
-pairwise products). The prime contains every other component and is the inverse image of a prime
-of the selected factor. Under refinement the selected part must lie in the previously selected
-part, by the transition formula for these idempotents.
-
-2. The selected parts have the finite intersection property: a common refinement selects a
-nonempty subset of their intersection. Each part is a closed subset of the patch space by its
-finite Boolean description in [def-weil-pbc-w-local]. Compactness of that space from [lem-weil-
-pbc-w-local-partition] gives a point $x$ in all of them. It is unique: if two primes differ on
-$f\in A$, the partition by the nonempty members of $D(f),V(f)$ separates them. Thus every stage
-selects precisely its part containing $x$. Let $y=q\cap A$. It is prime, since inverse image
-preserves the defining primality equations. If $f\notin x$, take the partition by $D(f),V(f)$ and
-denominator $f$ on $D(f)$; If $e$ is that factor's idempotent, its inverse for $f$ gives an
-element $u$ of the product with $fu=e$. Since $e\notin q$, primality implies $f\notin q\cap A=y$.
-Hence $y\subseteq x$.
-
-3. Conversely fix primes $y\subseteq x$. In stage $i$, project to the part $E_i$ containing $x$;
-since $E_i\subset D(f_{i,E_i})$, its denominator is outside $x$ and hence outside $y$. The
-universal property [lem-weil-pbc-ring-localization-universal-property] gives $A_{f_{i,E_i}}\to
-A_y\to\kappa(y)$ [def-weil-pbc-localization-at-prime]. These maps from $B_i$ are compatible under
-refinement, because the chosen part refines the old one and the localization maps agree on $A$.
-They induce $W\to\kappa(y)$; its kernel is a prime $q_{x,y}$ since the target is a field. Its
-contraction is $y$, and its selected parts contain $x$. This is inverse to the previous
-assignment: in a selected factor $a/f^n$ belongs to a prime contracting to $y$ exactly when $a\in
-y$, since $f$ is a unit. Consequently two primes with the same $(x,y)$ have identical inverse
-images at every stage and are equal, as every element of $W$ has a stage representative [lem-pc-
-filtered-colimit-commrings-elementwise].
-
-4. At $q_{x,y}$, localization of $B_i$ kills the unselected components: each other component
-idempotent is annihilated by the selected idempotent, which is inverted. The resulting local ring
-is $(A_{f_{i,E_i}})_{yA_{f_{i,E_i}}}\cong A_y$. Indeed, fractions $a/f^n$ outside that prime have
-$a\notin y$; localizing therefore inverts exactly the elements required for $A_y$. The mutually
-inverse maps are supplied by [lem-weil-pbc-ring-localization-universal-property]. Under these
-identifications every transition map is the identity on $A_y$, since it fixes $A$ and its
-inverses. The localization-colimit statement [lem-weil-pbc-filtered-colimit-localization-at-prime]
-gives $W_{q_{x,y}}\cong A_y$. The affine stalk identification in [lem-weil-pbc-spec-map-stalk-
-localization] identifies this with the scheme's local ring.
-
-5. For every constructible $E\subseteq\operatorname{Spec}A$, the characteristic vector of $E$ in
-the partition by $E$ and its complement, with denominators $1$, defines an idempotent $e_E\in W$.
-Empty parts are omitted; $e_\emptyset=0$ and $e_X=1$. Refinement makes this independent of the
-presentation and gives $e_{E\cap F}=e_Ee_F$ and $e_{X\setminus E}=1-e_E$. Under the point
-description, $D(e_E)$ is exactly the set of pairs whose first coordinate lies in $E$. These sets
-are clopen by [lem-weil-pbc-spec-clopen-idempotent], and constructible sets form a basis of the
-patch topology by [def-weil-pbc-w-local]. Therefore $\pi:\operatorname{Spec}W\to
-(\operatorname{Spec}A)_{\rm patch}$, $(x,y)\mapsto x$, is continuous. Distinct fibres are
-separated by a clopen set $D(e_E)$.
-
-6. Fix $x$, and let $J_x$ be the ideal generated by $1-e_E$ for all constructible $E$ containing
-$x$. Selecting the part containing $x$ and mapping $A_f\to A_x$ at every stage gives a compatible
-homomorphism $\rho_x:W\to A_x$, by [lem-weil-pbc-ring-localization-universal-property]. It kills
-$J_x$. It is surjective: for $a/s\in A_x$, refine by $D(s),V(s)$ and choose denominator $s$ on
-$D(s)$; the tuple $a/s$ on this part and zero on its complement maps to $a/s$. For the kernel,
-represent $b\in W$ at a stage using [lem-pc-filtered-colimit-commrings-elementwise]. Modulo $J_x$,
-it equals its selected coordinate $a/f^n$ multiplied by the corresponding idempotent. If
-$\rho_x(b)=0$, there is $s\notin x$ with $sa=0$ in $A$ by the fraction equality in [def-weil-pbc-
-localization-at-prime]. Refine by $D(s),V(s)$ and multiply all denominators on the $D(s)$ parts by
-$s$. On the part containing $x$ the selected coordinate becomes zero. Thus $e_Fb=0$ for a
-constructible $F$ containing $x$, and $b=(1-e_F)b\in J_x$. This proves $W/J_x\cong A_x$.
-
-7. A prime $q$ contains $J_x$ exactly when its selected part at every partition contains $x$,
-equivalently when its first coordinate is $x$: $e_E(1-e_E)=0$ and $e_E+(1-e_E)=1$ imply that
-exactly one of $e_E,1-e_E$ belongs to $q$. Thus $q$ contains the generators of $J_x$ exactly when
-its first coordinate lies in every constructible neighbourhood of $x$; the $D(f),V(f)$ partitions
-show that this coordinate is $x$. Primes of $W/J_x$ are precisely the primes of $W$ containing
-$J_x$, by inverse image along the quotient and passage to the quotient ideal; their basic opens
-agree with the restrictions of $D(b)$ from $W$. On each such basic open, the ring is
-$(W/J_x)_{\bar b}=W_b/J_xW_b$: both sides have the universal property of killing $J_x$ and
-inverting $b$. These identifications commute with restriction because they fix the images of
-elements of $W$. Therefore the closed fibre $\pi^{-1}(x)$, with its canonical affine scheme
-structure $\operatorname{Spec}(W/J_x)$ [def-weil-affine-spectrum], is isomorphic to
-$\operatorname{Spec}A_x$ by step 6. Equivalently it is obtained by inverting all $e_E$ with $x\in
-E$, since an invertible idempotent equals $1$, and conversely an idempotent equal to $1$ is
-invertible. Both constructions therefore have the same universal property.
-
-8. The spectrum of the local ring $A_x$ is connected. Its maximal ideal is $xA_x$ [def-weil-pbc-
-localization-at-prime]; an open neighbourhood of this point contains a basic open $D(a/s)$
-containing it, where $a\notin x$, and $a/s$ is a unit. Such a basic open is the entire spectrum.
-Thus any partition into two disjoint open subsets has an empty member. Step 7 makes each fibre
-connected. Any connected subset meeting two fibres would be separated by the clopen set of step 5,
-a contradiction. Hence the fibres are exactly the connected components.
-
-9. Specialization of prime points is inclusion of their ideals: $V(q)$ is the closure of $q$ by
-the definition of the Zariski closed sets. A specialization cannot change the first coordinate,
-because the clopen sets $D(e_E)$ separate different coordinates. Inside the closed fibre
-$\operatorname{Spec}A_x$, the unique closed point is its maximal ideal $xA_x$, namely $(x,x)$.
-Every $(x,y)$ specializes to $(x,x)$; no $(x,x)$ has a further specialization. Thus the closed
-points of $\operatorname{Spec}W$ are exactly the diagonal pairs. If $y\subsetneq x$, choose $f\in
-x\setminus y$. The open $D(e_{V(f)})\cap D(f)$ contains $(x,y)$ and contains no diagonal pair. The
-union of these opens over all $f\in A$ is precisely the complement of the diagonal, which is
-therefore closed.
-
-10. Identify the diagonal with $\operatorname{Spec}A$ by $x\mapsto(x,x)$. The restriction of
-$D(e_E)$ is $E$, so its subspace topology contains the patch topology. Conversely represent $b\in
-W$ by a tuple $(a_E/f_E^{n_E})_E$ in a stage, using [lem-pc-filtered-colimit-commrings-
-elementwise]. At $(x,x)$, $b$ is outside the prime exactly when $x$ lies in a part $E$ and
-$a_E\notin x$. Hence the restriction of $D(b)$ is the finite union $\bigcup_E(E\cap D(a_E))$, a
-constructible set and a patch open [def-weil-pbc-w-local]. Since basic opens form a basis for the
-Zariski topology, the two topologies coincide. Each connected component has its unique diagonal
-closed point by steps 8 and 9, and their set is closed by step 9; these are exactly the w-local
-conditions.
-
-11. The construction [def-weil-pbc-w-localization] presents $W$ as an ind-Zariski, hence ind-
-etale, $A$-algebra [def-weil-pbc-ind-etale-algebra]. By [lem-weil-pbc-ind-etale-stability], its
-map is weakly etale, which includes flatness by [def-weil-pbc-ind-etale-algebra]. Its spectrum map
-sends $(x,y)$ to $y$ by step 3, and is surjective since every prime $x$ is the image of $(x,x)$.
-The flat-surjective-spectrum criterion [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] now
-proves faithful flatness. If $A$ is the zero ring, both spectra and the set of pairs are empty and
-$W$ is the zero ring (the empty product at its sole partition); the same flat-surjective criterion
-applies, so this case is included.
+1. The proved `primeCharts` theorem supplies the prime-pair bijection, contraction formula,
+continuous first coordinate, and the closed immersion of `Spec A_x` onto its first-coordinate
+fibre. Its proof selects factors of each finite stage, uses compactness of the patch spectrum,
+and constructs the explicit surjective evaluation maps.
+2. The colimit presentation by finite products of principal localizations is ind-Zariski.
+The proved upstream `Algebra.IndZariski.bijectiveOnStalks_algebraMap` identifies the local ring
+at a prime with the localization of `A` at its contraction. Its canonical local-ring map fixes
+`A`, hence the inverse bijection gives the required `A`-algebra equivalence.
+3. Preimages of the basic patch clopens are clopen. They force the first coordinate to be
+constant on connected components and on specializations. Every point of a fibre specializes
+to the image of the closed point of `Spec A_x`, namely the diagonal point `(x,x)`. Thus two
+points in the same fibre have the same connected component; distinct fibres are separated by
+a basic patch clopen. This proves the component formula.
+4. A diagonal point is closed because it is the image of the closed point of a local spectrum
+under a closed immersion. Every point specializes to its diagonal point, so these are exactly
+the closed points. The complement of the diagonal is the union, over `f : A`, of the open sets
+where `f` belongs to the first prime and does not belong to the contracted prime. Indeed for
+`y` strictly contained in `x` one can choose `f` in `x` but outside `y`.
+5. The first-coordinate bijection from the closed points to the patch spectrum is continuous.
+Its domain is compact, since the closed points are closed in an affine spectrum. The patch
+spectrum is Hausdorff: distinct primes are separated by the complementary patch clopens
+`D(f)` and `V(f)` for an element on which they differ. A continuous bijection from a compact
+space to a Hausdorff space is a homeomorphism. Its inverse is the diagonal map. The closedness
+and unique closed specialization establish w-locality.
+6. Ind-Zariski algebras are flat by the proved upstream API. The structural spectrum map is
+surjective because of the diagonal points. Mathlib's flat-surjective-spectrum criterion gives
+faithful flatness. All constructions include the empty spectrum of the zero ring; the cut
+partitions omit empty parts and statements quantified over primes are then vacuous.
 -/
 theorem points (A : Type u) [CommRing A] :
     ∃ e : PrimeSpectrum (algebra A) ≃
@@ -175,6 +120,195 @@ theorem points (A : Type u) [CommRing A] :
           (constructibleTopology (PrimeSpectrum A)) inferInstance,
         ∀ x : PrimeSpectrum A, (e (h x).val).val = (x, x)) ∧
       Module.FaithfullyFlat A (algebra A) ∧ IsWLocalRing (algebra A) := by
-  sorry
+  classical
+  have hdata := primeCharts A
+  obtain ⟨e, he, hπ, hρ⟩ := hdata
+  have hind : Algebra.IndZariski A (algebra A) := indZariski A
+  have hlocal (q : PrimeSpectrum (algebra A)) :
+      Nonempty (Localization.AtPrime q.asIdeal ≃ₐ[A]
+        Localization.AtPrime (e q).val.2.asIdeal) := by
+    let f : Localization.AtPrime (PrimeSpectrum.comap
+        (algebraMap A (algebra A)) q).asIdeal →ₐ[A] Localization.AtPrime q.asIdeal :=
+      { toRingHom := Localization.localRingHom _ _ (algebraMap A (algebra A)) rfl
+        commutes' a := by
+          change Localization.localRingHom _ _ (algebraMap A (algebra A)) rfl
+              (algebraMap A _ a) =
+            algebraMap (algebra A) _ (algebraMap A (algebra A) a)
+          exact Localization.localRingHom_to_map .. }
+    have hf : Function.Bijective f :=
+      Algebra.BijectiveOnStalks.bijective_localRingHom q.asIdeal
+    have hh := (AlgEquiv.ofBijective f hf).symm
+    rw [he q] at hh
+    exact ⟨hh⟩
+  let δ (x : PrimeSpectrum A) : PrimeSpectrum (algebra A) :=
+    e.symm ⟨(x, x), le_rfl⟩
+  have hδ (x : PrimeSpectrum A) : (e (δ x)).val = (x, x) := by
+    simp [δ]
+  have hclopen (f : A) : IsClopen {q | f ∉ (e q).val.1.asIdeal} := by
+    have h : @IsClopen (PrimeSpectrum A) (constructibleTopology (PrimeSpectrum A))
+        (PrimeSpectrum.basicOpen f : Set (PrimeSpectrum A)) :=
+      ⟨(PrimeSpectrum.isCompact_basicOpen f).isClosed_constructibleTopology_of_isOpen
+          (PrimeSpectrum.basicOpen f).isOpen,
+        (PrimeSpectrum.isCompact_basicOpen f).isOpen_constructibleTopology_of_isOpen
+          (PrimeSpectrum.basicOpen f).isOpen⟩
+    exact @IsClopen.preimage _ _ _ (constructibleTopology (PrimeSpectrum A))
+      _ h (fun q ↦ (e q).val.1) hπ
+  have hcc_first {q r : PrimeSpectrum (algebra A)} (hr : r ∈ connectedComponent q) :
+      (e r).val.1 = (e q).val.1 := by
+    apply PrimeSpectrum.ext
+    ext f
+    constructor
+    · intro hfr
+      by_contra hfq
+      exact ((hclopen f).connectedComponent_subset hfq hr) hfr
+    · intro hfq
+      by_contra hfr
+      exact ((hclopen f).compl.connectedComponent_subset (by simpa using hfq) hr) hfr
+  have hspec_first {q r : PrimeSpectrum (algebra A)} (h : q ⤳ r) :
+      (e r).val.1 = (e q).val.1 := by
+    apply hcc_first
+    have hh := ConnectedComponents.coe_eq_coe.mp h.connectedComponents_mk_eq
+    rw [hh]
+    exact mem_connectedComponent
+  have hρδ (x : PrimeSpectrum A)
+      (ρ : algebra A →ₐ[A] Localization.AtPrime x.asIdeal)
+      (hrange : Set.range (PrimeSpectrum.comap ρ.toRingHom) = {q | (e q).val.1 = x}) :
+      PrimeSpectrum.comap ρ.toRingHom (IsLocalRing.closedPoint _) = δ x := by
+    apply e.injective
+    apply Subtype.ext
+    apply Prod.ext
+    · exact (hrange ▸ Set.mem_range_self (IsLocalRing.closedPoint _)).trans
+        (congrArg Prod.fst (hδ x)).symm
+    · rw [← he, ← PrimeSpectrum.comap_comp_apply]
+      have hcomp : ρ.toRingHom.comp (algebraMap A (algebra A)) =
+          algebraMap A (Localization.AtPrime x.asIdeal) := by
+        ext a
+        exact ρ.commutes a
+      rw [hcomp]
+      apply PrimeSpectrum.ext
+      change Ideal.comap _ (IsLocalRing.maximalIdeal _) = _
+      rw [show Ideal.comap (algebraMap A (Localization.AtPrime x.asIdeal))
+        (IsLocalRing.maximalIdeal _) = x.asIdeal from
+          Localization.AtPrime.under_maximalIdeal]
+      exact congrArg (fun z ↦ z.2.asIdeal) (hδ x).symm
+  have hspecial (q : PrimeSpectrum (algebra A)) : q ⤳ δ (e q).val.1 := by
+    obtain ⟨ρ, _, hrange⟩ := hρ (e q).val.1
+    have hq : q ∈ Set.range (PrimeSpectrum.comap ρ.toRingHom) := by
+      rw [hrange]
+      rfl
+    obtain ⟨p, hp⟩ := hq
+    have hh := (IsLocalRing.specializes_closedPoint p).map (PrimeSpectrum.continuous_comap
+      ρ.toRingHom)
+    rw [hp, hρδ _ ρ hrange] at hh
+    exact hh
+  have hδclosed (x : PrimeSpectrum A) : IsClosed ({δ x} : Set _) := by
+    obtain ⟨ρ, hclosed, hrange⟩ := hρ x
+    have : IsClosedImmersion (Spec.map (CommRingCat.ofHom ρ.toRingHom)) := hclosed
+    have hc : Topology.IsClosedEmbedding (PrimeSpectrum.comap ρ.toRingHom) :=
+      (Spec.map (CommRingCat.ofHom ρ.toRingHom)).isClosedEmbedding
+    rw [← hρδ _ ρ hrange, ← Set.image_singleton]
+    exact hc.isClosedMap _ (IsLocalRing.isClosed_singleton_closedPoint _)
+  have hdiag (q : PrimeSpectrum (algebra A)) :
+      q ∈ closedPoints (PrimeSpectrum (algebra A)) ↔ (e q).val.1 = (e q).val.2 := by
+    constructor
+    · intro hq
+      have hh : δ (e q).val.1 = q :=
+        Set.mem_singleton_iff.mp ((hspecial q).mem_closed
+          (mem_closedPoints_iff.mp hq) (Set.mem_singleton q))
+      have hp := hδ (e q).val.1
+      rw [hh] at hp
+      exact (congrArg Prod.fst hp).trans (congrArg Prod.snd hp).symm
+    · intro hq
+      have hh : q = δ (e q).val.1 := by
+        apply e.injective
+        apply Subtype.ext
+        rw [hδ]
+        exact Prod.ext rfl hq.symm
+      rw [hh]
+      exact mem_closedPoints_iff.mpr (hδclosed _)
+  have hcomponents (q : PrimeSpectrum (algebra A)) :
+      connectedComponent q = {r | (e r).val.1 = (e q).val.1} := by
+    apply Set.Subset.antisymm (fun r hr ↦ hcc_first hr)
+    intro r hr
+    have hh : ConnectedComponents.mk r = ConnectedComponents.mk q := by
+      rw [(hspecial r).connectedComponents_mk_eq, (hspecial q).connectedComponents_mk_eq, hr]
+    have hh' := ConnectedComponents.coe_eq_coe.mp hh
+    rw [← hh']
+    exact mem_connectedComponent
+  have hclosed : IsClosed (closedPoints (PrimeSpectrum (algebra A))) := by
+    have hcompl : (closedPoints (PrimeSpectrum (algebra A)))ᶜ =
+        ⋃ f : A, {q | f ∈ (e q).val.1.asIdeal} ∩
+          (PrimeSpectrum.comap (algebraMap A (algebra A))) ⁻¹' PrimeSpectrum.basicOpen f := by
+      ext q
+      simp only [Set.mem_compl_iff, hdiag, Set.mem_iUnion, Set.mem_inter_iff,
+        Set.mem_ofPred_eq, Set.mem_preimage, he]
+      constructor
+      · intro hne
+        have hlt : (e q).val.2.asIdeal < (e q).val.1.asIdeal :=
+          lt_of_le_of_ne (e q).property (fun h ↦ hne (PrimeSpectrum.ext h.symm))
+        exact SetLike.exists_of_lt hlt
+      · rintro ⟨f, hf, hnf⟩ h
+        exact hnf (h ▸ hf)
+    rw [← isOpen_compl_iff, hcompl]
+    refine isOpen_iUnion fun f ↦ ?_
+    have hf : IsOpen {q | f ∈ (e q).val.1.asIdeal} := by
+      simpa only [Set.compl_ofPred, not_not] using (hclopen f).compl.isOpen
+    exact hf.inter
+      ((PrimeSpectrum.basicOpen f).isOpen.preimage (PrimeSpectrum.continuous_comap _))
+  have hw : IsWLocalRing (algebra A) := by
+    refine ⟨{ toSpectralSpace := inferInstance
+              isClosed_closedPoints := hclosed
+              eq_of_specializes := ?_ }⟩
+    intro q c c' hc hc' hqc hqc'
+    have hcdiag := (hdiag c).mp (mem_closedPoints_iff.mpr hc)
+    have hc'diag := (hdiag c').mp (mem_closedPoints_iff.mpr hc')
+    have heq := (hspec_first hqc).trans (hspec_first hqc').symm
+    apply e.injective
+    apply Subtype.ext
+    exact Prod.ext heq (hcdiag.symm.trans (heq.trans hc'diag))
+  have hff : Module.FaithfullyFlat A (algebra A) := by
+    apply Module.FaithfullyFlat.of_comap_surjective
+    intro x
+    refine ⟨δ x, ?_⟩
+    rw [he]
+    exact congrArg Prod.snd (hδ x)
+  have hhomeo : ∃ h : @Homeomorph (PrimeSpectrum A)
+      (closedPoints (PrimeSpectrum (algebra A)))
+      (constructibleTopology (PrimeSpectrum A)) inferInstance,
+      ∀ x : PrimeSpectrum A, (e (h x).val).val = (x, x) := by
+    have : CompactSpace (closedPoints (PrimeSpectrum (algebra A))) :=
+      isCompact_iff_compactSpace.mp hclosed.isCompact
+    have : T2Space (WithConstructibleTopology (PrimeSpectrum A)) :=
+      patchT2 A
+    let g : closedPoints (PrimeSpectrum (algebra A)) ≃
+        WithConstructibleTopology (PrimeSpectrum A) :=
+      { toFun := fun q ↦ WithTopology.toTopology _ (e q.val).val.1
+        invFun := fun x ↦ ⟨δ x.ofTopology, mem_closedPoints_iff.mpr (hδclosed _)⟩
+        left_inv := fun q ↦ by
+          apply Subtype.ext
+          apply e.injective
+          apply Subtype.ext
+          rw [hδ]
+          exact Prod.ext rfl ((hdiag q.val).mp q.property)
+        right_inv := fun x ↦ by
+          apply WithTopology.ofTopology_injective
+          exact congrArg Prod.fst (hδ x.ofTopology) }
+    have hg : Continuous g :=
+      @Continuous.comp _ (PrimeSpectrum A) _ _
+        (constructibleTopology (PrimeSpectrum A)) _ _ _
+        (WithTopology.continuous_toTopology _)
+        (@Continuous.comp _ (PrimeSpectrum (algebra A)) (PrimeSpectrum A) _ _
+          (constructibleTopology (PrimeSpectrum A)) _ _ hπ continuous_subtype_val)
+    let H := g.toHomeomorphOfContinuousClosed hg hg.isClosedMap
+    let T : @Homeomorph (PrimeSpectrum A)
+        (WithConstructibleTopology (PrimeSpectrum A))
+        (constructibleTopology (PrimeSpectrum A)) inferInstance :=
+      @Homeomorph.mk _ _ (constructibleTopology (PrimeSpectrum A)) _
+        (WithTopology.equiv _ _).symm (WithTopology.continuous_toTopology _)
+        (WithTopology.continuous_ofTopology _)
+    refine ⟨@Homeomorph.trans _ _ _ (constructibleTopology (PrimeSpectrum A)) _ _ T H.symm, ?_⟩
+    intro x
+    exact hδ x
+  exact ⟨e, he, hlocal, hπ, hcomponents, hρ, hdiag, hclosed, hhomeo, hff, hw⟩
 
 end PrincipalWLocalization
