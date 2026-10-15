@@ -163,5 +163,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-f2c9ff02d (reviewer sub-agent of L); spot-checked: Read the mathematics in full and verified all four mate-calculus steps against the cited statements and Stacks 07A4, 07A7, 0B56 and 0E48. Repaired missing Mathlib-search records and the structured tensor-descent tool declaration. Coefficient correction is justified; no target weakened, new node, or dependency cycle. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bbc375085",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable node, all statement dependencies, sources, exact declarations, canonical transport, universes, edge cases, and verbatim signature. scompile.py reproduction passed cleanly; axiom checks found only standard axioms. No fixes required; branch unchanged."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap_derivedBaseChangeMap",
+  "statement": "lemma rightDerivedLowerStarProjectionMap_derivedBaseChangeMap (sq : CommSq g' f' f g)\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))\n    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :\n    L((g)^*[A]).map (((rightDerivedLowerStarProjectionMap A f).app K).app L) ≫\n        (derivedBaseChangeMap A sq).app (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) ≫\n        R((f')_*[A]).map (((leftDerivedUpperStarTensorComparison A g').app K).app\n          (L((f)^*[A]).obj L)) =\n      ((leftDerivedUpperStarTensorComparison A g).app (R((f)_*[A]).obj K)).app L ≫\n        ((-⊗ᴸ-(Y')[A]).map ((derivedBaseChangeMap A sq).app K)).app (L((g)^*[A]).obj L) ≫\n        ((rightDerivedLowerStarProjectionMap A f').app (L((g')^*[A]).obj K)).app\n          (L((g)^*[A]).obj L) ≫\n        R((f')_*[A]).map (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).map\n          ((derivedSquareUpperStarIso A sq).hom.app L))",
+  "branch": "slopmaster2",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Specialize A to ModuleCat.{u + 1} Λ, with Λ : Type (u + 1), [CommRing Λ], and sq to the recorded ChosenCartesianSquare.toCommSq; the theorem variables K,L are the node variables E,K. FlatModuleCat supplies UpperStarPreservesFlat with no extra mathematical hypothesis. This is the displayed square with its canonical monoidal identifications written out: postcompose the equality by Rf'_*(1 ⊗ theta_K.inv) to put its common target in the displayed bottom-right presentation. The left-derived inverse images and derivedBaseChangeMap are the exact inverse images and exactDerivedBaseChangeMap of the recorded exchange transported along leftDerivedUpperStarIsoMapDerivedCategory: mapDerivedUpperStarLowerStarAdjunction_eq identifies the adjunctions, and leftDerivedUpperStarComp is the descended ordinary composition comparison through the same exactness isomorphisms. Projection and tensor are precisely the declarations recorded by def-kun-projection-formula-map and def-kun-derived-tensor. The inverse compatibility is the reversed-isomorphism square (CommSq.vert_inv followed by CommSq.horiz_inv). No boundedness, properness, coefficient finiteness, torsion, or invertibility assumption is needed for the forward equality. The module-coefficient specialization and recorded exact-exchange interface compile cleanly through scompile.py. No duplicate module is written."
  }
 }
