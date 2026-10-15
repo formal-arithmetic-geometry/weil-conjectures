@@ -26,33 +26,26 @@
  ],
  "proof": [
   {
-   "text": "Fix $p$. Exactness of the augmented source column $0\\to K^p\\xrightarrow{\\epsilon_I^p}I^{p,0}\\to I^{p,1}\\to\\cdots$ makes $\\epsilon_I^p:K^p[0]\\to I^{p,\\bullet}$ a degreewise monic quasi-isomorphism. The target column $J^{p-1,\\bullet}$ is a bounded-below complex of injectives. Apply [lem-weil-pbc-lift-along-injective-quasi-iso] to $\\epsilon_I^p$ and $\\gamma=\\epsilon_J^{p-1}s^p:K^p[0]\\to J^{p-1,\\bullet}$. It yields a column-complex map $s_1^{p,\\bullet}:I^{p,\\bullet}\\to J^{p-1,\\bullet}$ with $s_1^{p,0}\\epsilon_I^p=\\epsilon_J^{p-1}s^p$. For $p\\le0$ the target column $J^{p-1,\\bullet}$ is zero (first quadrant), so $s_1^{p,\\bullet}=0$, and the augmentation equation holds because $\\epsilon_J^{p-1}$ lands in $J^{p-1,0}=0$; no vanishing of $K$ or $L$ in negative degrees is needed.",
-   "uses": [
-    "lem-weil-pbc-lift-along-injective-quasi-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 013P, lemma-morphisms-lift, applied to each column augmentation; Tag 015I for the Cartan--Eilenberg column hypotheses"
-   }
+   "text": "For a natural-indexed complex M with a quasi-isomorphism e:X[0]→M, use the already proved CochainComplex.exact₀_of_quasiIso_single₀ e and CochainComplex.exact_succ_of_quasiIso_single₀ e n from WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution. They give exactness of X→M⁰→M¹ and Mⁿ→Mⁿ⁺¹→Mⁿ⁺². The same module supplies mono_f_zero_of_quasiIso_single₀: e⁰ is monic, since the quasi-isomorphism identifies X with the degree-zero cycles kernel. These are proved library facts; the private lift helper reuses them without reconstructing the kernel.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Set $R=\\delta-d_hs_1-s_1d_h$. Since $\\delta$ and each $s_1^{p,\\bullet}$ commute with $d_v$, and $d_h$ commutes with $d_v$, the map $R$ commutes with $d_v$. On the augmentation, $d_h\\epsilon_I^p=\\epsilon_I^{p+1}d_K^p$ and $d_h\\epsilon_J^{p-1}=\\epsilon_J^p d_L^{p-1}$. Hence $R^{p,0}\\epsilon_I^p=\\epsilon_J^p(w^p-d_L^{p-1}s^p-s^{p+1}d_K^p)=0$ by the given homotopy identity. This proves the vertical-complex and vanishing assertions.",
+   "text": "Given a closed map f:X→N⁰ into a natural-indexed complex N of injectives, extend it along the monomorphism e⁰ using Injective.factorThru to obtain a₀. Since e⁰a₀d_N=f d_N=0, exactness of (e⁰,d_M) and Exact.descToInjective give a₁ with a₀d_N=d_Ma₁. Inductively, if aₙd_N=d_Maₙ₊₁, then d_Maₙ₊₁d_N=aₙd_Nd_N=0; positive-degree exactness and injectivity of Nⁿ⁺² extend aₙ₊₁d_N to aₙ₊₂. CochainComplex.mkHom assembles these components. Apply this proved helper to M=I.X p, N=J.X(p−1), e=eI.f p and f=s p followed by (eJ.f(p−1)).f 0. The last map is closed because eJ.f(p−1) is a complex morphism from Lᵖ⁻¹[0]. Choose the resulting column maps for all p. This works for every integer p, so the first-quadrant and horizontal-row assumptions are not needed for this conclusion.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015I, final comparison-defect calculation"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Define R p=δ.f p−s₁ p≫J.d(p−1,p)−I.d(p,p+1)≫s₁(p+1)≫J.XIsoOfEq((p+1)−1=p).hom. Each term has the type of a column-complex morphism. Evaluate the horizontal commutation equations for eI and eJ in vertical degree zero. The augmentation equation for s₁ rewrites the first correction to s p≫L.d(p−1,p)≫eJᵖ; the second rewrites to K.d(p,p+1)≫s(p+1)≫L.XIsoOfEq((p+1)−1=p).hom≫eJᵖ. Naturality of the equality-transport isomorphism is proved by equality elimination. Using haug, precomposition of R with eIᵖ is therefore (wᵖ−s p≫L.d(p−1,p)−K.d(p,p+1)≫s(p+1)≫L.XIsoOfEq.hom)≫eJᵖ, which is zero by hhom and additive cancellation.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-lift-along-injective-quasi-iso"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 013P comparison lift applied columnwise to the Cartan--Eilenberg data of Tag 015I"
+  "place": "Tag 013P(2), its successive injective-extension argument specialized to a single-object augmentation; Tag 015I for the Cartan--Eilenberg setting. Existing exactness and monicity lemmas in WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution supply the augmentation facts; the specialized recursion and residual calculation are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -169,5 +162,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261015T205056-L-1694809",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
