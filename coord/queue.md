@@ -1,6 +1,6 @@
 # Work queue
 
-36 items; claim with `tools/claim.py next <group> [--stage N]`.
+39 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (36)
+## Stage 3: modules to prove (39)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -33,17 +33,20 @@
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarLfpMatrixRefinement` | 7 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension` | 7 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 7 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleAbelianKInjectiveDirectImageAcyclic` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionAdjunction` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModel` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 8 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonempty` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula` | 9 | 1 | proof |
+| `WeilConjectures.AlgebraicGeometry.Sites.SupportDimension` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonMatchingTransport` | 10 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnitComparison` | 11 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses` | 13 | 1 | proof |
