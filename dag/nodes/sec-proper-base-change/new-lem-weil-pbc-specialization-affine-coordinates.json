@@ -1,0 +1,126 @@
+{
+ "id": "new-lem-weil-pbc-specialization-affine-coordinates",
+ "kind": "statement",
+ "title": "Affine coordinate transport for specialization restriction",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], and let $V$ be an affine object of the small pro-etale site of $X$ [def-weil-pbc-small-proetale-site]. Suppose evaluation at $V$ takes epimorphisms of set sheaves to surjections and every point specializes into $V\\times_X Z$ [def-pc-fibre-product]. Set $A=\\Gamma(V,\\mathcal O_V)$ [def-pc-scheme], $I=\\ker(A\\to\\Gamma(V\\times_XZ,\\mathcal O))$, and let $B$ be the identity object of the affine ind-etale basis over $\\operatorname{Spec}A$ [def-weil-pbc-ind-etale-basis]. Evaluation at $B$ takes epimorphisms of set sheaves on that basis to surjections, and every point of $B$ specializes into $B\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AC, first reduction; Tags 09A5 and 03CF for localization"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-small-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "Identify the localized small pro-etale site with the small site of V.left. Set-sheaves there are the slice topos at the representable V. Its forgetful functor preserves epimorphisms. Lift a section over the identity of V by the given evaluation property, so that the terminal object in the slice is projective. Transport along V.left.isoSpec and the affine-basis restriction equivalence; its evaluation at the identity is unchanged.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-pc-fppf-dense-sheaf-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed base change is affine with surjective global-sections map. Its quotient by the displayed kernel is its actual coordinate ring, by the first isomorphism theorem. The resulting spectrum isomorphism commutes with the projection. Transport the given specialization by V.left.isoSpec and this spectrum isomorphism, and identify the pullback of the identity with Spec(A/I). Empty schemes give the zero ring and a vacuous point condition.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-pc-fppf-dense-sheaf-equivalence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "D2 second reader",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AC, 09BK and 09BL; explicit localization and counit calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weak contractibility of an object of a site is preserved by localization at that object and restriction to a dense subsite",
+   "results": "CategoryTheory.GrothendieckTopology.W_eq_isLocal_range_sheafToPresheaf_obj; CategoryTheory.GrothendieckTopology.W_eq_W_range_sheafToPresheaf_obj; CategoryTheory.Functor.LocallyCoverDense; CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful; CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful'; CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW; CategoryTheory.Functor.IsDenseSubsite; CategoryTheory.Functor.IsCoverDense; ",
+   "date": "2026-10-16",
+   "verdict": "no exact match; returned generic sheaf, localization or module-adjunction infrastructure does not state this transport/comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsWeaklyContractible\"",
+   "results": "no hits; ",
+   "date": "2026-10-16",
+   "verdict": "no exact match; returned generic sheaf, localization or module-adjunction infrastructure does not state this transport/comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyContractible.*(over|slice|dense)|isWeaklyContractible.*(over|slice|dense)",
+   "results": "no hits; ",
+   "date": "2026-10-16",
+   "verdict": "no exact match; returned generic sheaf, localization or module-adjunction infrastructure does not state this transport/comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak contractibility is preserved by slice-site localization and affine-basis restriction, and a closed immersion is the spectrum of the quotient by its global sections kernel",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections",
+  "date": "2026-10-16",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-specialization-restriction-sections",
+   "place": "Step 1: affine coordinates and hypotheses",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSpecializationAffineCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSpecializationAffineCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.specialization_affine_coordinates",
+  "statement": "theorem specialization_affine_coordinates\n    {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (V : X.ProEt) [IsAffine V.left]\n    (hweak : ∀ (P Q : Sheaf (ProEt.topology X) (Type (u + 1))) (φ : P ⟶ Q),\n      Epi φ → Function.Surjective (φ.hom.app (op V)))\n    (hspec : ∀ x : V.left, ∃ z : ↥(pullback V.hom i),\n      Specializes x ((pullback.fst V.hom i) z)) :\n    let A := Γ(V.left, ⊤)\n    let I := RingHom.ker (pullback.fst V.hom i).appTop.hom\n    let B := AffineProEt.ofEtale (𝟙 (Spec A))\n    (∀ (P Q : Sheaf (AffineProEt.topology (Spec A)) (Type (u + 1))) (φ : P ⟶ Q),\n      Epi φ → Function.Surjective (φ.hom.app (op B))) ∧\n    (∀ x : B.left, ∃ z : ↥(pullback B.hom\n        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))),\n      Specializes x ((pullback.fst B.hom\n        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) z))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174644",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,21 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
-import Mathlib.AlgebraicGeometry.Sites.Proetale
-import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
-import Mathlib.RingTheory.Ideal.GoingDown
 import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEvaluation
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Sheaf.Paper.SiteSheafificationSectionsLocal
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation
-import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
-import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.AlgebraicGeometry.ProEtaleSpecializationAffineCoordinates
+import Sheaf.AlgebraicGeometry.ProEtaleSpecializationCounit
+import Sheaf.AlgebraicGeometry.ProEtaleSpecializationUnitComparison
 
 /-!
 # Sections on a closed specialization neighbourhood in the pro-etale site
@@ -82,6 +71,14 @@ theorem isIso_proEtaleUnit_sections_of_specialization
       Specializes x ((pullback.fst V.hom i) z)) :
     IsIso (Functor.whiskerRight (proEtaleSheafAdjunction i AddCommGrpCat.{u + 1}).unit
       ((sheafSections (ProEt.topology X) AddCommGrpCat.{u + 1}).obj (op V))) := by
-  sorry
+  let A := Γ(V.left, ⊤)
+  let I := RingHom.ker (pullback.fst V.hom i).appTop.hom
+  let B := AffineProEt.ofEtale (𝟙 (Spec A))
+  obtain ⟨hB, hspecB⟩ := specialization_affine_coordinates i V hweak hspec
+  obtain ⟨_, _, _, _, _, ⟨adj⟩, _, _⟩ :=
+    AffineProEt.affine_closed_site_functor_properties A I
+  have hcounit : IsIso (adj.counit.app B) :=
+    AffineProEt.isIso_closedSiteCounit_of_specialization A I adj B hB hspecB
+  exact isIso_proEtaleUnit_sections_of_closedSiteCounit i V hB adj hcounit
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,150 @@
+{
+ "id": "new-lem-weil-pbc-specialization-unit-comparison",
+ "kind": "statement",
+ "title": "Unit comparison from an invertible affine closed-site counit",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], and $V$ an affine small pro-etale object [def-weil-pbc-small-proetale-site]. Put $A=\\Gamma(V,\\mathcal O_V)$ [def-pc-scheme], $I=\\ker(A\\to\\Gamma(V\\times_XZ,\\mathcal O))$ [def-pc-fibre-product], and let $B$ be the identity object of the affine ind-etale basis over $\\operatorname{Spec}A$ [def-weil-pbc-ind-etale-basis]. Suppose evaluation at $B$ takes epimorphisms of set sheaves to surjections. For any adjunction between the canonical closed-site lift and base change [def-exc-closed-site-lift], an invertible counit at $B$ implies that the actual inverse-image adjunction unit on sections at $V$ [def-weil-proetale-inverse-image] is a natural isomorphism of abelian groups [def-weil-pbc-sites-and-cohomology]. No specialization hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BL (1),(2); Tag 09AC, affine reduction and unit identification"
+ },
+ "stmt_deps": [
+  "def-exc-closed-site-lift",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Localize at V and use the quotient of its global-sections map by its actual kernel. The inverse-image comparison is the mate of the base-change comparison, so preserves units. The presheaf colimit description and local representatives for sheafification verify the same identification explicitly. If the evaluation comparison uses a different adjunction on the same fixed functors, uniqueness of left adjoints changes the counit by an automorphism; its invertibility is unchanged.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift a finite cover of r(B) along v. The left adjoint preserves its finite coproduct, including the empty coproduct; the functor-properties theorem preserves the cover. Identify v(r(B)) with B by the assumed counit, split the resulting cover using projective evaluation and subcanonical Yoneda, then apply r and the invertible unit. This splits the original disjoint-union cover. Local lifts of any epimorphism glue over this union and pull back to r(B), proving weak contractibility there.",
+   "uses": [
+    "lem-weil-pbc-affine-closed-site-functor-properties",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+    "lem-weil-pbc-proetale-subcanonical",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine closed inverse-image evaluation identifies the inverse-image sections with sheafification of evaluation along v and makes its sheafification unit bijective at r(B). Under adjunction, the original representative (B,id) corresponds to the counit v(r(B))->B. Hence the actual unit is restriction along the invertible counit followed by this bijection. Forgetting abelian groups commutes with the filtered inverse-image colimit and sheafification, so the identified maps are additive; naturality assembles the pointwise isomorphisms. No geometry proving invertibility of the counit is used here.",
+   "uses": [
+    "lem-weil-pbc-affine-closed-inverse-image-evaluation",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-affine-closed-inverse-image-evaluation",
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "D2 second reader",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AC, 09BK and 09BL; explicit localization and counit calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image sheaf sections are evaluation at the left adjoint of base change, and the unit is restriction along its counit",
+   "results": "SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackIso; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; TopCat.Sheaf.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction; ",
+   "date": "2026-10-16",
+   "verdict": "no exact match; returned generic sheaf, localization or module-adjunction infrastructure does not state this transport/comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"unit\"",
+   "results": "no hits; ",
+   "date": "2026-10-16",
+   "verdict": "no exact match; returned generic sheaf, localization or module-adjunction infrastructure does not state this transport/comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(counit|unit).*(sheafPullback|evaluation)|(sheafPullback|evaluation).*(counit|unit)",
+   "results": "Mathlib/NumberTheory/Padics/RingHoms.lean; Mathlib/NumberTheory/Padics/PadicIntegers.lean; Mathlib/Algebra/Polynomial/Smeval.lean; Mathlib/Algebra/Ring/Pi.lean; Mathlib/RingTheory/DiscreteValuationRing/Basic.lean; Mathlib/RingTheory/DiscreteValuationRing/Basic.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; ",
+   "date": "2026-10-16",
+   "verdict": "no exact match; returned generic sheaf, localization or module-adjunction infrastructure does not state this transport/comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit of the affine closed pro etale lift is an isomorphism on a weakly contractible object whose points specialize into the closed fibre",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections",
+  "date": "2026-10-16",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-specialization-restriction-sections",
+   "place": "Steps 4 through 7: weak contractibility of the fibre and unit comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSpecializationUnitComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSpecializationUnitComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_proEtaleUnit_sections_of_closedSiteCounit",
+  "statement": "theorem isIso_proEtaleUnit_sections_of_closedSiteCounit\n    {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (V : X.ProEt) [IsAffine V.left]\n :\n    let A := Γ(V.left, ⊤)\n    let I := RingHom.ker (pullback.fst V.hom i).appTop.hom\n    let B := AffineProEt.ofEtale (𝟙 (Spec A))\n    (∀ (P Q : Sheaf (AffineProEt.topology (Spec A)) (Type (u + 1))) (φ : P ⟶ Q),\n      Epi φ → Function.Surjective (φ.hom.app (op B))) →\n    ∀ adj : AffineProEt.closedSiteLift A I ⊣ AffineProEt.closedSiteBaseChange A I,\n      IsIso (adj.counit.app B) →\n      IsIso (Functor.whiskerRight (proEtaleSheafAdjunction i AddCommGrpCat.{u + 1}).unit\n        ((sheafSections (ProEt.topology X) AddCommGrpCat.{u + 1}).obj (op V)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174644",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

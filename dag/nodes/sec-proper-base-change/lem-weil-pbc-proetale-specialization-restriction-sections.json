@@ -17,128 +17,33 @@
  ],
  "proof": [
   {
-   "text": "Put $B=V$ and $T=V_Z$. The base-change lemma makes $k:T\\hookrightarrow B$ a closed immersion; since $B$ is affine, the affine description of closed immersions gives $B=\\operatorname{Spec}A$ and $T=\\operatorname{Spec}(A/I)$. Write $F_B(U\\to B)=F(U\\to B\\to X)$. The localization node identifies $B_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/B$, and likewise $T_{\\mathrm{proet}}$ with $Z_{\\mathrm{proet}}/T$. The inverse-image formula gives a canonical identification $(i^{-1}F)|_T\\cong k^{-1}F_B$, including the units, as follows. At an object $W\\to T$, replace a pair $(E\\to X,W\\to Z\\times_X E)$ in the inverse-image colimit by $(E\\times_X B\\to B,W\\to T\\times_B(E\\times_X B))$, using the given $W\\to T\\to B$ and the restriction $F(E)\\to F(E\\times_X B)$. Conversely forget the map of an object over $B$ to $B$. One composite is identified with the original pair by the projection $E\\times_X B\\to E$; the other by the graph of the given map to $B$. These arrows also identify the representing sections, so the maps on colimits are mutually inverse. Covers over $W$ are the same in the slice and small sites. The local-sections characterization of sheafification therefore identifies the associated sheaves as well: local representatives and local equalities on either side are exactly those under this presheaf identification. The representative $(B,\\mathrm{id}_{T})$ is unchanged, so the original unit at $V$ is the unit for $k$ at $B$.",
+   "text": "Use the actual global-sections ring of V and the kernel of its closed-base-change map. Affine coordinate transport provides weak contractibility of evaluation and the specialization hypothesis at the identity basis object B.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-base-change",
-    "def-weil-closed-immersion",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "new-lem-weil-pbc-specialization-affine-coordinates"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AC, lemma-compute-i-star, first sentence of proof; Tag 09A5, section-morphism; Sites Tag 03CF, lemma-localize-morphism (explicit colimit verification)"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the affine ind-etale bases for $k$, with $u(E)=E\\times_B T$ and fully faithful $v\\dashv u$. Set $L=v(T)$ and let $p:L\\to B$ be the counit at the final object $B$ of $B_{\\mathrm{app}}$. The functor-properties statement gives $u(L)\\cong T$, and $u(p)$ is the identity under this identification (the triangle identity). Thus the image of $p$ contains $T$. The object $L$ is affine and ind-etale over $B$, hence weakly etale and flat. The affine flatness criterion and going down show that its image is closed under generalization: if $b$ specializes to $t\\in T$, choose a prime of $L$ over $t$ and lift the prime of $b$ below it. Every $b\\in B$ has such a specialization by hypothesis, so $p$ is surjective. A surjective weakly etale map between affines is a one-member pro-etale covering: in the covering definition, over an affine open $D(a)\\subset B$ take the affine inverse image $D(p^*a)\\subset L$; for any affine open $U\\subset B$, choose finitely many basic opens $D(a)\\subset U$ covering $U$ by quasi-compactness, and their affine inverse images cover $U$ surjectively. In particular $L\\to X$ is a small-site object by weakly etale composition. No unrestricted ring splitting property is inferred from the small-site hypothesis.",
+   "text": "Take an adjunction for the fixed closed-site lift and base change from the existing functor-properties theorem. The proved counit lemma uses flat generalization lifting, projective evaluation and adjunction injectivity to prove that its counit at B is invertible.",
    "uses": [
     "lem-weil-pbc-affine-closed-site-functor-properties",
-    "def-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-weakly-etale-morphism",
-    "lem-weil-pbc-flat-morphism-affine-criterion",
-    "lem-sc-flat-going-down",
-    "def-weil-pbc-proetale-covering"
+    "new-lem-weil-pbc-specialization-closed-site-counit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AC, lemma-compute-i-star, surjectivity argument, corrected to generalization; Tag 09BK, lemma-closed-immersion-affines; Algebra Tag 00HS, lemma-flat-going-down"
-   }
+   "elementary": false
   },
   {
-   "text": "By subcanonicity $h_L$ and $h_B$ are sheaves on the original $X_{\\mathrm{proet}}$. The map $h_L\\to h_B$ is locally surjective: an $X$-map $E\\to B$ lifts on the pullback covering $E\\times_B L\\to E$. The epimorphism/local-surjectivity lemma makes it epic. The assumed weak contractibility of $V=B$ now lifts $\\mathrm{id}_B\\in h_B(B)$ to a morphism $s:B\\to L$ with $p s=\\mathrm{id}_B$. This is a morphism in $B_{\\mathrm{app}}$, because that basis is full and both $B,L$ are its objects. Applying $u$ gives $u(s)=\\mathrm{id}_T$ since $u(p)=\\mathrm{id}_T$. Hence $u(s p)=\\mathrm{id}_T$. On the essential image of fully faithful $v$, the functor $u$ is faithful: the unit $\\mathrm{id}\\to uv$ is an isomorphism, and adjunction identifies maps between $v$-objects with the corresponding maps between their $u$-images. Thus $s p=\\mathrm{id}_L$. Consequently $p$ is an isomorphism. This supplies the uniqueness omitted by Tag 09AC: any other section has the same $u$-image, and its composite with $p$ must again be the identity of $L$, so it equals $s$.",
+   "text": "Apply the unit-comparison lemma with this actual counit. This identifies the original unit on sections, including its naturality in the abelian sheaf, as an isomorphism.",
    "uses": [
-    "lem-weil-pbc-proetale-subcanonical",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "lem-weil-pbc-affine-closed-site-functor-properties",
-    "def-weil-pbc-ind-etale-basis"
+    "new-lem-weil-pbc-specialization-unit-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AC, lemma-compute-i-star, existence and omitted uniqueness; Tag 09BK, lemma-closed-immersion-affines; Tag 098Z, lemma-proetale-subcanonical; Sites Tag 00WN, lemma-mono-epi-sheaves"
-   }
-  },
-  {
-   "text": "For a finite covering $\\{W_j\\to T\\}$ in $T_{\\mathrm{app}}$, the functor-properties lemma gives a covering $\\{v(W_j)\\to v(T)=L\\cong B\\}$. Let $C=\\coprod_j v(W_j)$. The finite-coproduct node makes $C$ affine and an object of $B_{\\mathrm{proet}}$, and hence of $X_{\\mathrm{proet}}$ by weakly etale composition. For any map $E\\to B$, the pullback covering by the $v(W_j)$ locally lifts that map to $C$. Subcanonicity and the locally-surjective criterion make $h_C\\to h_B$ epic on $X_{\\mathrm{proet}}$. Evaluate at $B$ and use its given weak contractibility to obtain a section $B\\to C$. Pulling this section back along $T\\to B$ gives a section $T\\to C\\times_B T\\cong\\coprod_j W_j$ of the disjoint-union covering of $T$. The last identification is literal base change of the components: $u(v(W_j))\\cong W_j$, and the inverse images of the disjoint open-and-closed components of $C$ form exactly their disjoint union after base change. We do not assume that $v$ preserves fibre products.",
-   "uses": [
-    "lem-weil-pbc-affine-closed-site-functor-properties",
-    "lem-weil-pbc-proetale-finite-coproduct-evaluation",
-    "lem-weil-pbc-proetale-subcanonical",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "lem-weil-pbc-ind-etale-stability"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09BK/09BL, lemma-closed-immersion-affines and lemma-closed-immersion-affines-apply; Tag 09AC, lemma-compute-i-star, weak-contractibility input"
-   }
-  },
-  {
-   "text": "The final object $T$ is weakly contractible in $T_{\\mathrm{proet}}$. Indeed, for an epimorphism $P\\to Q$ there and $q\\in Q(T)$, the local-surjectivity criterion gives local lifts of $q$. The ind-etale basis lemma refines their covering to a finite covering $\\{W_j\\to T\\}$ in $T_{\\mathrm{app}}$. Their chosen lifts form a section of $P(\\coprod_j W_j)$ by finite-coproduct evaluation, whose image is the restriction of $q$. Pull it back along the section constructed in step 4 to obtain a lift in $P(T)$. This also proves weak contractibility in $T_{\\mathrm{app}}$: the basis lemma supplies covering density and its topology is induced; the dense-subsite sheaf equivalence extends an epimorphism of basis sheaves to an epimorphism of full-site sheaves, and both restriction and its inverse preserve epimorphisms by their categorical cancellation definition. Evaluation at the common object $T$ is unchanged. All sites and finite disjoint unions use the fixed small universes, so the equivalence has the smallness hypotheses required for set-valued sheaves.",
-   "uses": [
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-proetale-finite-coproduct-evaluation",
-    "lem-pc-fppf-dense-sheaf-equivalence",
-    "def-weil-pbc-ind-etale-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL, lemma-closed-immersion-affines-apply, clause (2) and its proof; Tag 098X, lemma-affine-alternative; Sites Tag 00WN, lemma-mono-epi-sheaves"
-   }
-  },
-  {
-   "text": "Apply the affine-closed-inverse-image evaluation statement to $k:T\\hookrightarrow B$ and the underlying set sheaf of $F_B$. Step 5 verifies its required weak contractibility in $T_{\\mathrm{app}}$. It gives $(k^{-1}F_B)(T)\\cong F_B(v(T))=F_B(L)$. This is the canonical evaluation of the sheafification of $W\\mapsto F_B(v(W))$. In the affine-basis presentation of inverse image (identified with the ordinary inverse image by the cited evaluation statement), adjunction $v\\dashv u$ identifies pairs $(E,W\\to u(E))$ with maps $v(W)\\to E$. The pair $E=v(W)$ with the adjunction unit is final in the indexing direction of restriction maps, so evaluation of that presheaf is $F_B(v(W))$. In particular the representative for the inverse-image unit at $B$ is $E=B$, with $T=u(B)$ and its identity map; its corresponding map $v(T)\\to B$ is precisely the counit $p$. Therefore the actual unit component is $F_B(B)\\xrightarrow{F_B(p)}F_B(L)$ followed by the canonical sheafification/evaluation isomorphism. Since $p$ is an isomorphism by step 3, this component is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-affine-closed-inverse-image-evaluation",
-    "lem-weil-pbc-affine-closed-site-functor-properties",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL, lemma-closed-immersion-affines-apply, clauses (1),(2); Tag 09AC, lemma-compute-i-star; inverse-image unit from Tag 09A5, section-morphism"
-   }
-  },
-  {
-   "text": "Return through the unit-preserving identification of step 1. It gives the asserted isomorphism $F(V)\\to(i^{-1}F)(V_Z)$. All maps used are restriction maps, the prescribed inverse-image colimit maps, and its sheafification unit. They preserve addition on abelian sheaves, so the bijection of underlying sections is an isomorphism of abelian groups. For a morphism $a:F\\to F'$, naturality of restriction gives $a_L F(p)=F'(p)a_B$, and naturality of sheafification gives the same commuting square after passing to inverse images. Thus the asserted component is natural in $F$, and it is the original adjunction unit rather than an arbitrary abstract isomorphism.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-affine-closed-inverse-image-evaluation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AC, lemma-compute-i-star, conclusion; formal naturality of the unit"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-closed-immersion",
-  "def-weil-pbc-ind-etale-basis",
-  "def-weil-pbc-proetale-covering",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-proetale-inverse-image",
-  "def-weil-weakly-etale-morphism",
-  "lem-pc-fppf-dense-sheaf-equivalence",
-  "lem-sc-flat-going-down",
-  "lem-weil-pbc-affine-closed-inverse-image-evaluation",
   "lem-weil-pbc-affine-closed-site-functor-properties",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-flat-morphism-affine-criterion",
-  "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-proetale-finite-coproduct-evaluation",
-  "lem-weil-pbc-proetale-subcanonical",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-weil-proetale-weakly-etale-localization"
+  "new-lem-weil-pbc-specialization-affine-coordinates",
+  "new-lem-weil-pbc-specialization-closed-site-counit",
+  "new-lem-weil-pbc-specialization-unit-comparison"
  ],
  "status": "split",
  "mathlib_searches": [
@@ -243,9 +148,9 @@
   "same_as": []
  },
  "proof_origin": {
-  "by": "agent",
+  "by": "D2 second reader",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AC, lemma-compute-i-star; same affine-lift route via Tags 09BK/09BL, with explicit uniqueness, weak contractibility of the closed fibre, localization, and unit identification"
+  "place": "Tag 09AC; affine geometric counit proved, coordinate transport and actual-unit comparison split off"
  },
  "merged_into": null,
  "lean_audit": {
@@ -301,5 +206,15 @@
   "by": "NG",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

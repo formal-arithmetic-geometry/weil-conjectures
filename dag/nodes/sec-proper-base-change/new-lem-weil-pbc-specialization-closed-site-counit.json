@@ -1,0 +1,133 @@
+{
+ "id": "new-lem-weil-pbc-specialization-closed-site-counit",
+ "kind": "statement",
+ "title": "Invertibility of the affine closed-site specialization counit",
+ "statement": "For a commutative ring $A$, ideal $I$, and any adjunction $v\\dashv r$ between the canonical affine closed-site lift and base change [def-exc-closed-site-lift], let $V$ be an object of the affine ind-etale basis over $\\operatorname{Spec}A$ [def-weil-pbc-ind-etale-basis]. If evaluation at $V$ takes every epimorphism of set sheaves to a surjection and every point of $V$ specializes into its closed base change [def-pc-fibre-product], then the counit $v(r(V))\\to V$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AC, surjectivity and uniqueness, with the fully faithful adjunction of Tag 09BK"
+ },
+ "stmt_deps": [
+  "def-exc-closed-site-lift",
+  "def-pc-fibre-product",
+  "def-weil-pbc-ind-etale-basis"
+ ],
+ "proof": [
+  {
+   "text": "Obtain full faithfulness of the canonical lift. The adjunction triangle makes r(counit) invertible. In particular every point of the closed base change lifts through that map. The pullback projection identity places its image in the image of the original counit.",
+   "uses": [
+    "lem-weil-pbc-affine-closed-site-functor-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Morphisms in the affine basis are weakly etale and flat. Lift a generalization of each closed-fibre point along the counit using Flat.generalizingMap. The specialization hypothesis makes the counit surjective.",
+   "uses": [
+    "lem-weil-pbc-flat-generalizations-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer subcanonicity from ProEt to the full affine basis. Import the existing private cover_split theorem from AffineClosedInverseImageEvaluation with import all, and apply it to the surjective counit. That theorem uses the singleton cover and subcanonical Yoneda to make the representable map epic, then uses weak contractibility to lift the identity to a section. No copy of that theorem or its proof is needed here.",
+   "uses": [
+    "lem-weil-pbc-affine-closed-inverse-image-evaluation",
+    "lem-weil-pbc-proetale-subcanonical"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change sends that section to the inverse of r(counit). Thus r sends the opposite composite to the identity. Injectivity of the adjunction Hom equivalence identifies the opposite composite with the identity as well. The two-sided inverse proves IsIso, including for empty objects.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-closed-inverse-image-evaluation",
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-weil-pbc-proetale-subcanonical"
+ ],
+ "proof_origin": {
+  "by": "D2 repair worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AC, 09BK and 09BL; reuse the existing cover_split helper from AffineClosedInverseImageEvaluation rather than duplicate its proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a fully faithful left adjoint, a split epimorphic counit component is an isomorphism",
+   "results": "CategoryTheory.Adjunction.instIsIsoAppCounitOfFullOfFaithful; CategoryTheory.Adjunction.counit_isSplitMono_of_R_full; CategoryTheory.Adjunction.full_R_of_isSplitMono_counit_app; CategoryTheory.Adjunction.counitSplitMonoOfRFull; CategoryTheory.Adjunction.isIso_counit_app_of_iso; CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful; CategoryTheory.Adjunction.instIsIsoAppCounitObjOfFaithfulOfFull; CategoryTheory.Adjunction.instIsIsoMapAppCounitOfFaithfulOfFull; ",
+   "date": "2026-10-16",
+   "verdict": "no exact match; categorical infrastructure is used in the proof, but no result states this geometric assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"IsSplitEpi\"",
+   "results": "CategoryTheory.Comonad.isSplitEpi_iff_isIso_counit; CategoryTheory.mem_essImage_of_counit_isSplitEpi; ",
+   "date": "2026-10-16",
+   "verdict": "no exact match; categorical infrastructure is used in the proof, but no result states this geometric assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*(isSplitEpi|IsSplitEpi)|isIso_counit_app",
+   "results": "Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Characterization.lean; Mathlib/Condensed/Discrete/Characterization.lean; Mathlib/Condensed/Discrete/Characterization.lean; Mathlib/Condensed/Discrete/Characterization.lean; Mathlib/Condensed/Discrete/Characterization.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; ",
+   "date": "2026-10-16",
+   "verdict": "no exact match; categorical infrastructure is used in the proof, but no result states this geometric assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image unit on abelian pro etale sheaf sections is an isomorphism when the affine closed-site lift counit is invertible and evaluation is projective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections",
+  "date": "2026-10-16",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-specialization-restriction-sections",
+   "place": "Steps 2 and 3: the geometric counit isomorphism",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSpecializationCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSpecializationCounit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.AffineProEt.isIso_closedSiteCounit_of_specialization",
+  "statement": "theorem isIso_closedSiteCounit_of_specialization\n    (A : Type u) [CommRing A] (I : Ideal A)\n    (adj : closedSiteLift A I ⊣ closedSiteBaseChange A I)\n    (V : (Spec (.of A)).AffineProEt)\n    (hweak : ∀ (P Q : Sheaf (topology (Spec (.of A))) (Type (u + 1))) (φ : P ⟶ Q),\n      Epi φ → Function.Surjective (φ.hom.app (op V)))\n    (hspec : ∀ x : V.left, ∃ z : ↥(pullback V.hom\n        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))),\n      Specializes x ((pullback.fst V.hom\n        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) z)) :\n    IsIso (adj.counit.app V)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174644",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
