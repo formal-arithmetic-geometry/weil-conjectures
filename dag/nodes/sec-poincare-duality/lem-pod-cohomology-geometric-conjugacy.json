@@ -1,0 +1,134 @@
+{
+ "id": "lem-pod-cohomology-geometric-conjugacy",
+ "kind": "statement",
+ "title": "The explicit geometric cohomology equivalence intertwines conjugate Frobenius",
+ "statement": "In the setting of [def-pod-cohomology-geometric-equivalence], let $r\\ge0$ be an\ninteger and suppose the geometric Galois Frobenius automorphisms of the two geometric\nfibers satisfy $e\\circ\\tau_Y=\\tau_X^r\\circ e$ as scheme morphisms. Write $F_X,F_Y$ for\nthe constant-Weil-sheaf cohomological Frobenius operators of\n[def-weil-global-geometric-frobenius]. Then the explicitly constructed linear\nequivalence $e_i$ of [def-pod-cohomology-geometric-equivalence] satisfies\n$e_i(F_Yx)=F_X^r(e_i(x))$ for every integer $i$ and every\n$x\\in H^i(\\overline Y,\\overline{\\mathbf Q}_\\ell)$. No field extension or relation between\nthe finite base fields is assumed beyond the given geometric conjugacy.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
+  "place": "Proof, item (6), passage from geometric Frobenius conjugacy on the common geometric fiber to the cohomological operator F^r"
+ },
+ "stmt_deps": [
+  "def-pod-cohomology-geometric-equivalence",
+  "def-weil-global-geometric-frobenius"
+ ],
+ "proof": [
+  {
+   "text": "The two coefficient-unit maps and the global-section comparison in the construction e_i are functorial for isomorphisms of schemes: composition of pushforwards gives the comparison for the composite. The conjugacy equation therefore identifies the transport for tau_Y with that for tau_X^r through these specified comparisons. Concretely the unit inverse composition law follows from Mod.hom_ext and adicConstantSheafToLowerStar_comp; the global-section law is globalSectionsLowerStarIso_comp and naturality.",
+   "uses": [
+    "def-pod-cohomology-geometric-equivalence",
+    "def-weil-frobenius-cohomology-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An exact equivalence preserves injective resolutions. The exact global-section functor at the algebraically closed point identifies the definition via homology sheaves of derived direct image with homology of derived global sections. The forgetful functor from Weil sheaves preserves the resolutions used for these comparisons. Naturality of derived functors and of homology carries the transport identity to the specific e_i already constructed. The specified comparisons are characterized by the factorization equations with the right-derived units. Applying Functor.rightDerived_ext and these equations reduces their compatibility to the same identity on complexes.",
+   "uses": [
+    "def-pod-cohomology-geometric-equivalence",
+    "def-weil-ordinary-compact-cohomology",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the constant Weil structure, the transport for tau is precisely the cohomological geometric Frobenius. Induction on r using the composition law identifies transport for tau_X^r with F_X^r. Substitution into the preceding identity gives e_i(F_Y x)=F_X^r(e_i x).",
+   "uses": [
+    "def-weil-constant-weil-structure",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-cohomology-geometric-equivalence",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-constant-weil-structure",
+  "def-weil-global-geometric-frobenius"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
+  "place": "Proof, item (6), passage from geometric Frobenius conjugacy on the common geometric fiber to the cohomological operator F^r"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of geometric fibers conjugating Frobenius induces a linear equivalence of constant sheaf cohomology intertwining Frobenius",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of the constant adic sheaf are invariant under an isomorphism of schemes",
+   "results": "No exact theorem: AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.structurePresheafCompForget, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.Scheme.Spec_map_presheaf_map_eqToHom, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.Scheme.SpecMap_presheaf_map_eqToHom, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*cohomology|cohomology.*Frobenius|adicConstant|globalSections.*Iso",
+   "results": "No exact theorem: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.PoincareDuality",
+  "date": "2026-10-16",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-poincare-duality",
+   "place": "Proof, item (6), passage from geometric Frobenius conjugacy on the common geometric fiber to the cohomological operator F^r",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-poincare-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.CohomologyGeometricConjugacy",
+  "file": "lean/Sheaf/WeilSheaf/CohomologyGeometricConjugacy.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.cohomologyLinearEquivOfGeometricFiberIso_map_frobenius",
+  "statement": "theorem cohomologyLinearEquivOfGeometricFiberIso_map_frobenius\n    (k k' : Type u) [Field k] [Finite k] [Field k'] [Finite k']\n    (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)] [Fact (ringChar k' ≠ l)]\n    (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k'))]\n    [QuasiCompact (X ↘ Spec (.of k))] [QuasiSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (Y ↘ Spec (.of k'))] [QuasiSeparated (Y ↘ Spec (.of k'))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k'))]\n    (r : ℕ) (e : (Y ↘ Spec (.of k')).geometricFiber ≅ (X ↘ Spec (.of k)).geometricFiber)\n    (he : (Y ↘ Spec (.of k')).geometricGaloisFrobenius.hom ≫ e.hom =\n      e.hom ≫ ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ r).hom) (i : ℤ)\n    (x : ((adicConstant k' l Y).cohomology i).carrier) :\n    cohomologyLinearEquivOfGeometricFiberIso k k' l X Y e i\n        (((adicConstant k' l Y).cohomology i).frobenius x) =\n      (((adicConstant k l X).cohomology i).frobeniusEnd ^ r)\n        (cohomologyLinearEquivOfGeometricFiberIso k k' l X Y e i x)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261015T194213-L-1175013",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261015T194213-L-1175013",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

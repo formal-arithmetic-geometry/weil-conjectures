@@ -1,0 +1,140 @@
+{
+ "id": "lem-pod-adic-unit-direct-image-finite-bound",
+ "kind": "statement",
+ "title": "A finite-coefficient bound for constant adic cohomology at a geometric point",
+ "statement": "Let $\\ell$ be prime and let $k$ be algebraically closed with $\\operatorname{char}k\\ne\\ell$.\nLet $s:Y\\to\\operatorname{Spec}k$ be an isomorphism and let $f:X\\to Y$ be locally\nof finite type, quasi-compact and quasi-separated. Write $\\nu_X^*$ for inverse image from\nthe small etale to the small pro-etale site. Suppose $b\\ge0$ is an integer such that, for\nevery finite commutative ring $\\Lambda$ and every etale sheaf $F$ of $\\Lambda$-modules,\n$Rf_*\\nu_X^*F$ has no cohomology above $b$ (the finite-coefficient uniform bound of\n[def-sf-uniform-direct-image-vanishing], transported to pro-etale sheaves of etale origin).\nThen $Rf_*\\overline{\\mathbf Q}_{\\ell,X}$, calculated in the category of modules over the\ncontinuous constant adic coefficient sheaf, has no cohomology above $b$. Here the unit is\nthe underlying constant sheaf of [def-weil-constant-weil-structure], rather than an\narbitrary rational local system.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+  "place": "Proof, Steps 5-7, finite-level passage and rationalization, specialized to ordinary direct images of the constant sheaf; Milne LEC, Theorems 15.1 and 19.2"
+ },
+ "stmt_deps": [
+  "def-sf-uniform-direct-image-vanishing",
+  "def-weil-constant-weil-structure"
+ ],
+ "proof": [
+  {
+   "text": "Identify Y with Spec k using s. For each n use the etale constant integral coefficient sheaf modulo ell^n. Its pro-etale inverse image satisfies the assumed bound b.",
+   "uses": [
+    "def-sf-uniform-direct-image-vanishing",
+    "def-weil-constant-weil-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact coefficient reduction sequence has kernel another finite-coefficient sheaf of etale origin. Its direct image in degree b+1 vanishes, so the maps on the degree b direct images are epimorphic. Locally on weakly contractible pro-etale objects, countable products are exact and the Mittag-Leffler surjectivity kills R^1 lim in degree b+1. All higher degrees vanish because each level vanishes above b. Thus the integral derived limit has the same bound.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the actual integral continuous constant sheaf with the inverse limit of its torsion quotients on pro-etale objects. Direct image, a right adjoint, commutes with derived inverse limits; use this to identify the preceding derived limit with the integral constant-sheaf direct image.",
+   "uses": [
+    "def-weil-derived-limit",
+    "def-weil-constant-weil-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize at ell and extend coefficients to finite extensions of Q_ell; flatness preserves the upper cohomological bound. The continuous Qbar_ell unit is the filtered coefficient extension of these units. On the qcqs bases used to compute direct image, cohomology commutes with this filtered extension. Its exactness preserves the uniform bound b.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-constant-weil-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-uniform-direct-image-vanishing",
+  "def-weil-constant-weil-structure",
+  "lem-weil-proetale-countable-products-exact",
+  "def-weil-derived-limit",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+  "place": "Proof, Steps 5-7, finite-level passage and rationalization, specialized to ordinary direct images of the constant sheaf; Milne LEC, Theorems 15.1 and 19.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bound on finite coefficient etale direct images implies the same bound on the derived direct image of the constant adic sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A uniform upper cohomological bound for finite etale coefficient sheaves implies the same bound for the constant l-adic sheaf by derived inverse limit and flat scalar extension",
+   "results": "No exact theorem: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, CompHausLike.LocallyConstantModule.functor, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, LightCondAb.ofSheafLightProfinite, CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isLE.*adic|adic.*isLE|IsLE.*AdicSheaf",
+   "results": "No exact theorem: Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Monad/Adjunction.lean, Mathlib/CategoryTheory/Monad/Adjunction.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.PoincareDuality",
+  "date": "2026-10-16",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "Proof, Steps 5-7, finite-level passage and rationalization, specialized to ordinary direct images of the constant sheaf; Milne LEC, Theorems 15.1 and 19.2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.AdicFiniteCoefficientBound",
+  "file": "lean/Sheaf/WeilSheaf/AdicFiniteCoefficientBound.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.isLE_rightDerivedFunctor_adicLowerStar_unit_of_finite_bound",
+  "statement": "theorem isLE_rightDerivedFunctor_adicLowerStar_unit_of_finite_bound\n    {l : ℕ} [Fact l.Prime] {k : Type u} [Field k] [IsAlgClosed k]\n    {X Y : Scheme.{u}} (s : Y ⟶ Spec (.of k)) (f : X ⟶ Y)\n    [IsIso s] [LocallyOfFiniteType f] [QuasiCompact f] [QuasiSeparated f]\n    (hchar : ringChar k ≠ l) (b : ℕ)\n    (hfinite : ∀ (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ],\n      ∀ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),\n        ((ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj F))).IsLE (b : ℤ)) :\n    ((f)_*ᵃ[l].rightDerivedFunctor.obj\n      ((DerivedCategory.singleFunctor _ 0).obj (AdicSheaf.unit l X))).IsLE (b : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261015T194213-L-1175013",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261015T194213-L-1175013",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
