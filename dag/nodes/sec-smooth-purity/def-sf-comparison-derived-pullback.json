@@ -4,12 +4,12 @@
   "is": null,
   "from": {
    "node": "def-compact-support-direct-image-detailed",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, paragraph beginning 'Its independence of the chosen compactification': 'the complexes that come from the etale site with an etale-origin witness'; the comparison-derived pullback is the functor in that witness",
    "via": [
     "def-sf-etale-origin-subcategory"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The derived pullback along the comparison morphism of sites",
@@ -43,10 +43,80 @@
    "results": "DerivedCategory.Plus C (TStructure.lean line 204, full subcategory t.plus of DerivedCategory C) with Plus.ι (line 215); Functor.mapCochainComplexPlus (CochainComplexPlus.lean line 141) on bounded-below cochain complexes; nothing combining mapDerivedCategory with Plus",
    "date": "2026-10-09",
    "verdict": "no match for the restriction to D^+: it is ObjectProperty.lift of (Plus.ι ⋙ F.mapDerivedCategory) using part (3) of lem-sf-comparison-pullback-exact"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback along the comparison morphism of etale and pro-etale sites induced by an exact inverse image",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso; SheafOfModules.pullbackIso; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; CategoryTheory.GrothendieckTopology.overMapPullback; SheafOfModules.pullbackComp; CategoryTheory.GrothendieckTopology.overMapPullbackComp; TopCat.Sheaf.pullbackIso",
+   "date": "2026-10-16",
+   "verdict": "no match for the derived-category comparison pullback; only general sheaf pullback constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory, DerivedCategory.Plus, mapDerivedCategoryPlus",
+   "results": "0 hits | loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier; no absence conclusion; superseded by the quoted-name Loogle search"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|mapDerivedCategoryPlus|derivedComparison",
+   "results": "0 hits in requested subdirectory SixFunctors, which is not a Mathlib source directory; the extra CategoryTheory argument was ignored by msearch.py",
+   "date": "2026-10-16",
+   "verdict": "invalid directory for an absence conclusion; superseded by the recorded Algebra/Homology/DerivedCategory search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact functor on sheaves induces the derived pullback functor termwise on unbounded and bounded below derived categories",
+   "results": "service unavailable: Internal Server Error; the tool reports that this kind of search is unavailable now",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|IsTriangulated|homologyFunctor",
+   "results": "25 hits in Algebra/Homology/DerivedCategory; HomologySequence.lean:34 homologyFunctor; TStructure.lean:91 isGE_iff; ExactFunctor.lean:36 CategoryTheory.Functor.mapDerivedCategory and :41 mapDerivedCategoryFactors. Read ExactFunctor.lean:25-116 including CommShift at :80 and IsTriangulated at :104.",
+   "date": "2026-10-16",
+   "verdict": "match for the generic exact-functor derived construction, already the existing Mathlib leaf lem-sf-exact-functor-derived-triangulated; not the scheme-specific comparison functor and its bounded-below restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an exact additive functor between abelian categories induces a triangulated functor on derived categories and preserves bounded below objects",
+   "results": "8 hits; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.IsHomological, CategoryTheory.Functor.IsHomological.exact, DerivedCategory.instIsTriangulated",
+   "date": "2026-10-16",
+   "verdict": "match for the generic exact-functor derived construction, already the existing Mathlib leaf lem-sf-exact-functor-derived-triangulated; not the scheme-specific comparison functor and its bounded-below restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "12 hits; CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+   "date": "2026-10-16",
+   "verdict": "match for the generic exact-functor derived construction, already the existing Mathlib leaf lem-sf-exact-functor-derived-triangulated; not the scheme-specific comparison functor and its bounded-below restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor of abelian categories is t-exact on derived categories: it preserves cohomology vanishing below each integer",
+   "results": "8 hits: map_distinguished_exact; IsHomological.exact; IsHomological.mk'; instIsTriangulatedDerivedCategoryMapDerivedCategory; isHomological_of_localization; instIsHomologicalCompOfIsTriangulated; IsHomological; Abelian.Ext.mapExactFunctor. The relevant generic triangulated instance was checked in ExactFunctor.lean:27-44,80,104-105.",
+   "date": "2026-10-16",
+   "verdict": "generic triangulated construction already cited via lem-sf-exact-functor-derived-triangulated; no new Mathlib leaf or complete site-specific definition found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isGE_mapDerivedCategory_obj\"",
+   "results": "0 hits, no service error. The reference-project helper of that name is outside Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no indexed Mathlib declaration under that name; not an absence claim for the generic exact-functor construction"
+  },
+  {
+   "tool": "grep",
+   "query": "isGE_mapDerivedCategory_obj|mapDerivedCategoryPlus|mapDerivedCategory.*homology",
+   "results": "0 hits in Mathlib/Algebra/Homology. Read the generic termwise construction in DerivedCategory/ExactFunctor.lean:27-44 and triangulated instance at 104-105; the reference project provides the additional bounded-below helpers.",
+   "date": "2026-10-16",
+   "verdict": "no Mathlib declaration matching the searched bounded-below helper names; no new node needed, since the existing exactness lemma states preservation of the same lower cohomological bound"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +136,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sf-comparison-derived-pullback",
+  "worker": "stage1",
+  "summary": "Checked this definition against the Stacks derived-category exact-functor construction and the pro-etale comparison section, and against the blueprint etale-origin witness and ambient six-operations text. No new node is needed: every constituent notion is already an explicit statement dependency, while the derived pullback itself is the termwise functor induced by the existing exact comparison pullback; its bounded-below restriction follows from the exactness lemma’s cohomology clause. Filled the blueprint ancestor location and same_as search, preserved the imported statement and dependencies, and recorded fresh required Mathlib searches.",
+  "blueprint": "def-compact-support-direct-image-detailed.md, statement, paragraph beginning 'Its independence of the chosen compactification', specifically 'the complexes that come from the etale site with an etale-origin witness'; the witness formula alpha: nu_T^* L -> K is made precise by this definition. The unit has no proof steps to realize."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q33-54a903593",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-54a903593 (reviewer sub-agent of L); spot-checked: Read all required governance files, the item, unit/chapter route, exact master witness, Stacks Tags 015F/099R/099V, and all six dependency statements. The definition is correctly typed étale-to-pro-étale for finite discrete commutative coefficients; exactness supplies termwise quasi-isomorphism preservation and the bounded-below restriction. Edge cases and duplicate searches checked. Full review written to review.md; no fixes needed."
+ }
 }
