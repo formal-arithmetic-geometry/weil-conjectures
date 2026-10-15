@@ -1,0 +1,189 @@
+{
+ "id": "lem-weil-pbc-proetale-module-cohomology-coproducts",
+ "kind": "statement",
+ "title": "Classical pro-etale higher direct images commute with sums of module sheaves",
+ "statement": "Let h:T→U be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme] [def-weil-pbc-scheme-conventions], with the small pro-etale sites and universe convention [def-weil-pbc-proetale-site] [def-weil-size-convention]. Let R be a sheaf of commutative rational algebras on U_proet and S=h⁻¹R. Use the categories of module sheaves and ordinary uncompleted direct image F=h_* [def-weil-sheaf-of-modules-category] [def-weil-pbc-proetale-operations]. Assume enough injectives in Mod(S) [def-sp-enough-injectives], and use the classical right derived functors [def-sp-left-exact-additive]. For every small set I and every q≥0, the classical right derived functor R^qF:Mod(S)→Mod(R) preserves I-indexed coproducts [lem-weil-pbc-module-sheaves-colimits-forgetful]. Equivalently, the canonical map ⊕_i R^qF(M_i)→R^qF(⊕_i M_i) is an isomorphism for every family of module sheaves M_i. These are objects of the abelian category, with no arbitrary complexes in the input.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-sp-enough-injectives",
+  "def-sp-left-exact-additive"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1, 09A2 and 0946 for hypercovers and weakly contractible evaluation, and Tag 0935 for sections of sums"
+ },
+ "proof": [
+  {
+   "text": "For a qcqs source-site object W, choose the existing affine weakly contractible hypercover. Each section functor on a simplex preserves I-indexed coproducts, by exact colimit-preserving weakly contractible evaluation and preservation by restriction of scalars. The cosimplicial section functor therefore preserves these coproducts pointwise.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+    "def-weil-pbc-proetale-hypercover-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1, 09A2 and 0946 for hypercovers and weakly contractible evaluation, and Tag 0935 for sections of sums"
+   }
+  },
+  {
+   "text": "Prove preservation for alternating coface complexes degreewise. Prove preservation for extension by zero by distinguishing degrees in and outside the embedding range. Flipping the two complex indices preserves coproducts degreewise. For totalization, construct the colimit cocone explicitly: a map out of a total is determined by its maps on every bicomplex entry, so the degreewise coproduct universal properties supply the total universal property. Their composition shows the hypercover total functor preserves coproducts.",
+   "uses": [
+    "def-weil-pbc-proetale-hypercover-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1, 09A2 and 0946 for hypercovers and weakly contractible evaluation, and Tag 0935 for sections of sums"
+   }
+  },
+  {
+   "text": "Put a module sheaf in degree zero and compare it with its canonical injective resolution. The existing hypercover comparison is natural under coefficient maps and resolution lifts, including the chain homotopy witnessing compatibility with the augmentations. Apply derived homology and its factorization through Q, then the canonical homology-to-classical-right-derived isomorphism. This gives a natural isomorphism from hypercover homology to right derived evaluation. Single complexes and module homology preserve coproducts, so every classical right derived evaluation at W preserves them, including q=0.",
+   "uses": [
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1, 09A2 and 0946 for hypercovers and weakly contractible evaluation, and Tag 0935 for sections of sums"
+   }
+  },
+  {
+   "text": "For an exact additive functor G, the natural short-complex homology isomorphism descends through the homotopy quotient. Whisker it with the injective-resolutions functor, using the composition comparison for mapHomotopyCategory, to obtain (F composed with G).rightDerived q isomorphic to F.rightDerived q composed with G. Evaluate relative direct image on an affine weakly contractible target object V and forget scalars. Evaluation is exact; its composite with direct image is definitionally evaluation on the pullback followed by forgetting scalars. That pullback is qcqs by stability of quasi-compact and quasi-separated morphisms under base change, since V is affine. The previous step and the exact-postcomposition comparison show evaluated relative higher direct image preserves coproducts.",
+   "uses": [
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1, 09A2 and 0946 for hypercovers and weakly contractible evaluation, and Tag 0935 for sections of sums"
+   }
+  },
+  {
+   "text": "A module sheaf vanishing on all affine weakly contractible objects is zero: use their covering families and separatedness of the underlying abelian sheaf to show every section is zero, then faithfulness of the underlying-sheaf functor. To detect invertibility of f, apply this to its kernel and cokernel. Exact evaluation identifies them with the kernel and cokernel of the evaluated isomorphism; both vanish. Thus f is mono and epi and hence invertible.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1, 09A2 and 0946 for hypercovers and weakly contractible evaluation, and Tag 0935 for sections of sums"
+   }
+  },
+  {
+   "text": "Apply the detection test to the canonical coproduct comparison for the q-th higher direct image H. For any exact target evaluation G, the comparison for the composite H followed by G is the evaluation coproduct comparison followed by G applied to the comparison for H. The first and the composite are invertible because G and H followed by G preserve coproducts; cancellation makes the evaluated comparison invertible. Detection gives the required preservation by H. This universal-property argument includes the empty family.",
+   "uses": [
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1, 09A2 and 0946 for hypercovers and weakly contractible evaluation, and Tag 0935 for sections of sums"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "def-weil-pbc-proetale-hypercover-total",
+  "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1, 09A2 and 0946 for hypercovers and weakly contractible evaluation, and Tag 0935 for sections of sums; natural classical derived comparison and exact evaluation detection written out by C2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of module sheaves on the pro etale site under a quasi compact quasi separated morphism commute with arbitrary direct sums",
+   "results": "8 hits, concerning condensed modules, sheafification, generators, and pullback of free module sheaves; no higher direct-image coproduct theorem.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"PreservesColimitsOfShape\"",
+   "results": "0 hits.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(coproduct|direct.sum)|rightDerived.*preserves.*Coproduct",
+   "results": "0 hits. Repository rg searches also found only the input bounded-below theorem and unrelated etale or quasi-coherent coproduct results.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a quasi compact quasi separated morphism of schemes, classical higher direct images of module sheaves on the pro etale site commute with arbitrary direct sums",
+   "results": "Service unavailable: Internal Server Error; 0 hits. Executed through msearch.py C2. Other search kinds and source grep were completed.",
+   "date": "2026-10-15",
+   "availability": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleBoundedBelowCoproducts",
+  "date": "2026-10-15",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-bounded-below-coproducts",
+   "place": "Steps 3-6, specialized to module sheaves in degree zero; this supplies ordinary sum preservation and acyclicity of sums of injectives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleCohomologyCoproducts",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleCohomologyCoproducts.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingModuleDirectImage_rightDerived_preservesCoproducts",
+  "statement": "theorem proEtaleRingModuleDirectImage_rightDerived_preservesCoproducts\n    {T U : Scheme.{u}} (h : T ⟶ U) [QuasiCompact h] [QuasiSeparated h]\n    (R : Sheaf (ProEt.topology U) CommRingCat.{u + 1})\n    [∀ V : U.ProEtᵒᵖ, Algebra ℚ (R.obj.obj V)]\n    [EnoughInjectives\n      (proEtaleRingModules T ((proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj R))]\n    (I : Type (u + 1)) (q : ℕ) :\n    PreservesColimitsOfShape (Discrete I)\n      ((proEtaleRingModuleDirectImage h R\n        ((proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj R)\n          (Iso.refl _)).rightDerived q)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T161023-L-259418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T161023-L-259418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

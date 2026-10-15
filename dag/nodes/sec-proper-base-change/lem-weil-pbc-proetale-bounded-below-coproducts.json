@@ -30,122 +30,93 @@
  ],
  "proof": [
   {
-   "text": "Work in $\\mathcal A=\\operatorname{Mod}(R_T)$ on the chosen small site. It is Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. By [lem-weil-pbc-dplus-injective-representative], choose injective representatives $E_i^\\bullet$ of $K_i$, all zero below the given integer $N$. Put $S^\\bullet=\\bigoplus_iE_i^\\bullet$, the sheafified termwise sum stipulated in the item. Sums are exact: a sum is the filtered colimit of finite sums and filtered colimits are exact by the Grothendieck theorem. Thus $H^q(S)=\\bigoplus_iH^q(E_i)$, and $S$ is zero below $N$. Choose an injective representative $J^\\bullet$ of $QS$ also zero below $N$. The isomorphism $QS\\simeq QJ$ is represented by a chain map $a:S\\to J$ by [lem-weil-pbc-kinjective-hom-derived]; it is a quasi-isomorphism. Write $a_i:E_i\\to J$ for its composites with the inclusions.",
+   "text": "Transport module sheaves along the AsSmall model equivalence for the pro-etale site. Apply the source library theorem SheafOfModules.isGrothendieckAbelian on that model, where the site and section universes agree. EnoughInjectives.of_equivalence transports enough injectives back. This uses no localized-generator assertion.",
    "uses": [
-    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
     "lem-sp-grothendieck-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A3 proof: common lower bound, representatives and termwise direct sum"
-   }
-  },
-  {
-   "text": "It suffices to check cohomology presheaves on objects $V\\to U$ with $V$ affine and whose map factors through an affine open $A\\subset U$: cover any site object by its affine open pieces inside the inverse images of affine opens of $U$. These are still site objects by [def-weil-pbc-proetale-site]. The scheme $T_A=h^{-1}(A)$ is qcqs by [lem-weil-pbc-qcqs-over-affine]. Choose a finite affine cover $T_A=\\bigcup B_j$ with each intersection $B_j\\cap B_k$ quasi-compact, because this intersection is the inverse image of the affine $B_j\\times_A B_k$ under the quasi-compact diagonal, using the quasi-separated convention [def-weil-pbc-scheme-conventions]. Then $T_V=T_A\\times_A V$ has the finite affine cover $B_j\\times_A V$. Each pairwise intersection is $(B_j\\cap B_k)\\times_A V$ and has a finite affine cover obtained by pulling back a finite affine cover of $B_j\\cap B_k$. Consequently $T_V$ is qcqs. This explicitly checks the needed base-change property over affine $A$ and affine $V$; no qcqs assertion is made for arbitrary non-quasi-compact site objects.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-qcqs-over-affine",
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A3 proof: qcqs object to which the hypercover construction applies"
-   }
-  },
-  {
-   "text": "For each such $V$, $T_V$ is an object of $T_{\\mathrm{proet}}$ (weakly etale maps are preserved by this fibre product, as in the base-change site functor of [def-weil-pbc-proetale-operations]). Apply [lem-weil-pbc-proetale-affine-acyclic-hypercover] in that site to choose $U_\\bullet\\to T_V$ with each $U_p$ affine and weakly contractible. Apply [lem-weil-pbc-proetale-hypercover-computes-bounded-complex] to $E_i$, $S$, and $J$. It gives natural total-complex models for their derived sections over the object $T_V$. Since $E_i$ and $J$ are injective complexes, the corresponding derived sections are $E_i(T_V)$ and $J(T_V)$.",
-   "uses": [
-    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
-    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
     "def-weil-pbc-proetale-operations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A3 proof: Tags 09A1 and 09A2"
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1 and 09A2 for the hypercover calculation and Modules on Sites Tag 0935 for sections of sums"
    }
   },
   {
-   "text": "For an affine $W=U_p$ and any family of module sheaves $F_i$, the map $\\bigoplus_iF_i(W)\\to(\\bigoplus_iF_i)(W)$ is bijective. Indeed [def-weil-presheaf-modules-sheafification] constructs module sheafification on the underlying abelian presheaf; [lem-pc-sites-sheafification-underlying-sets] identifies its underlying set sheafification. By [lem-weil-pbc-site-sheafification-sections-local], every section is therefore locally a finite-support tuple. The covering definition [def-weil-pbc-proetale-site] gives a finite affine refinement of this cover over the affine $W$; the union of its finitely many finite supports is one finite set $I_0$. Every component outside $I_0$ vanishes locally and hence globally by sheaf separation. Projection to the finite sum on $I_0$ recovers the section, because the projection followed by inclusion agrees with it on this cover. A finite sum of module sheaves is also a finite product, so its sections are the finite sum of the sections of the summands [def-weil-sheaf-of-modules-category]. Injectivity follows by applying each component projection. These maps commute with restrictions and sheaf morphisms because each is the map induced by the same coproduct inclusions. This supplies the module case of Tag 0935 directly; it does not assume evaluation is exact.",
+   "text": "Choose for every K_i a strict >=N complex representative and resolve it by a complex E_i of injectives with the same lower bound. Each E_i is K-injective. The source and target derived module categories have I-indexed coproducts; Q takes a termwise coproduct cocone to a derived coproduct cocone.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A3 proof: sites-modules.tex Tag 0935, label lemma-sections-over-quasi-compact, clause (2), finite-support argument"
-   }
-  },
-  {
-   "text": "Apply step 4 to $F_i=E_i^q$ on every $U_p$. In total degree $r$ the only possible indices are $0\\leq p\\leq r-N$, so exchanging this finite sum with the sum over $i$ gives $$\\operatorname{Tot}(S(U_\\bullet))^r=\\bigoplus_i\\operatorname{Tot}(E_i(U_\\bullet))^r.$$ On the summand $E_i^q(U_p)$ both differentials are the same alternating restrictions plus $(-1)^p d_{E_i}$; thus these degreewise maps give an isomorphism of complexes compatible with every inclusion. Step 3 identifies its derived image with the canonical map $\\bigoplus_iR\\Gamma(T_V,K_i)\\to R\\Gamma(T_V,QS)$. Composing with the map induced by $a$ gives the map $\\bigoplus_iE_i(T_V)\\to J(T_V)$, which is a quasi-isomorphism. The sum of the complexes of sections represents their derived coproduct by [lem-pc-derived-module-direct-sums].",
-   "uses": [
-    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
-    "lem-pc-derived-module-direct-sums"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A3 proof: finite diagonals in the common bounded-below total complexes"
-   }
-  },
-  {
-   "text": "Set $P^\\bullet=\\bigoplus_i(h_*E_i^\\bullet)$, initially as a complex of presheaves of $R_U$-modules, and let $b:P\\to h_*J$ be induced by $h_*a_i$. By [def-weil-pbc-proetale-operations], $P(V)=\\bigoplus_iE_i(T_V)$ and $(h_*J)(V)=J(T_V)$, so step 5 says $b(V)$ is a quasi-isomorphism on every affine object of the basis in step 2. By [lem-weil-pbc-ringed-site-module-sheafification-exact], $H^q(P^\\#)\\simeq H^q(P)^\\#$, and the cohomology sheaf of $h_*J$ is the sheafification of its cohomology presheaf. Therefore $H^q(b^\\#)$ is the sheafification of a presheaf map that is an isomorphism on that basis. Its kernel and cokernel presheaves vanish there. Any map from either presheaf into a sheaf is zero: restrict a section to the covering by basis objects and use sheaf separation. The sheafification adjunction then makes their sheafifications zero. Exact sheafification consequently makes $H^q(b^\\#)$ an isomorphism for every $q$.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Relative version of Tag 09A3; sites-cohomology.tex Tag 0BKV, label lemma-sheafification-cohomology, explicit kernel/image calculation"
-   }
-  },
-  {
-   "text": "The complex $P^\\#$ is the sheafified termwise sum of $h_*E_i$, hence represents $\\bigoplus_iRh_*K_i$ by the coproduct convention in the item and [def-weil-pbc-proetale-operations]. The complex $h_*J$ represents $Rh_*(\\bigoplus_iK_i)$. The morphism $Q(b^\\#)$ has the required composites with every coproduct inclusion, namely $Rh_*(K_i\\to\\bigoplus_iK_i)$; it is therefore the canonical comparison. Both complexes vanish below $N$. Step 6 and [lem-weil-pbc-derived-plus-iso-on-cohomology] show this map is an isomorphism. The bounded-below category is full in the unbounded derived category [lem-weil-pbc-kinjective-hom-derived], so this is the requested ordinary uncompleted derived isomorphism.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-derived-plus-iso-on-cohomology",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-grothendieck-derived-has-coproducts",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A3 conclusion; relative comparison via cohomology sheaves"
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1 and 09A2 for the hypercover calculation and Modules on Sites Tag 0935 for sections of sums"
+   }
+  },
+  {
+   "text": "Apply the module cohomology coproduct theorem to F=h_* in every degree q. For q=0, the canonical natural isomorphism F.rightDerived 0 ≅ F gives underived coproduct preservation. For positive q, the image of every injective E_i^n is zero. The image of their sum is a coproduct of zero objects, hence zero. Evaluation identifies the n-th term of the termwise sum with that sum, so every term of the sum is F-acyclic. The termwise sum remains strictly >=N for the same zero-object argument.",
+   "uses": [
+    "lem-weil-pbc-proetale-module-cohomology-coproducts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1 and 09A2 for the hypercover calculation and Modules on Sites Tag 0935 for sections of sums"
+   }
+  },
+  {
+   "text": "Resolve the sum S by a complex J of injectives with the same bound. The resolution map f:S→J is a quasi-isomorphism between bounded-below F-acyclic complexes, so F(f) is a quasi-isomorphism. In the naturality square of the unbounded derived unit, the maps localized from f and F(f) are invertible, and the unit at the K-injective J is invertible. Cancel the right vertical map to conclude the unit at S is invertible.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1 and 09A2 for the hypercover calculation and Modules on Sites Tag 0935 for sections of sums"
+   }
+  },
+  {
+   "text": "Let v(K):Q(F(K))→RF(Q(K)) be the derived unit transported through the standard quotientCompQhIso. Its naturality is proved explicitly from naturality of those comparison isomorphisms. Every v(E_i) and v(S) is invertible. The termwise-image coproduct is a colimit because F preserves coproducts, and its Q-image is a derived coproduct. Transport that cocone through the natural isomorphism with components v(E_i) and point isomorphism v(S). Naturality identifies the transported coprojections with RF applied to the original coprojections. This proves preservation of the coproduct of Q(E_i), and transport along the chosen representative isomorphisms proves it for K_i.",
+   "uses": [
+    "lem-grothendieck-derived-has-coproducts",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1 and 09A2 for the hypercover calculation and Modules on Sites Tag 0935 for sections of sums"
+   }
+  },
+  {
+   "text": "Choose the standard coproduct s of K_i, and choose t to be its image under RF, with the just-proved colimit property. The canonical comparison ht.desc t is the identity by ht.hom_ext. It is an isomorphism, giving all the existential witnesses in the unchanged statement, including for I empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A3, objects concentrated in degree zero; Tags 09A1 and 09A2 for the hypercover calculation and Modules on Sites Tag 0935 for sections of sums"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-sp-grothendieck-enough-injectives",
+  "def-weil-pbc-proetale-operations",
   "lem-weil-pbc-dplus-injective-representative",
   "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-qcqs-over-affine",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-proetale-affine-acyclic-hypercover",
-  "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-pc-derived-module-direct-sums",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "lem-weil-pbc-derived-plus-iso-on-cohomology"
+  "lem-grothendieck-derived-has-coproducts",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-proetale-module-cohomology-coproducts",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09A3 proof: affine weakly contractible hypercover, common bounded-below representatives, finite diagonal totalization; relative conclusion by exact sheafification"
+  "place": "Tag 09A3, reduced to classical higher direct-image coproduct continuity on module sheaves in degree zero; generic acyclic-complex argument and naturality of the unbounded derived unit replace finite-diagonal assembly"
  },
  "mathlib_searches": [
   {
@@ -244,5 +215,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Wrote review.md. Verified statement clauses, dependencies, source, canonical comparison, universes, edge cases, docstrings and report sections. Snapshot per-file compilation passed cleanly through scompile.py. No delivery errors or repairs required."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T161023-L-259418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
