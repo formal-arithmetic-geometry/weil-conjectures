@@ -149,5 +149,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-0e96b42b8 (reviewer sub-agent of L); spot-checked: Read the item and report in full; no new nodes. Checked Stacks 0H9J, 08TC and 0145, all cited definitions, product compatibility, rotated TR3 signs, and both fixed connecting-map equations. Edge cases, reuse candidates, dependencies and unit route pass. Checked archived target categories and base-change arrows without accepting seeded comparisons. No repairs; findings recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.DerivedLimitMorphism",
+  "declaration": "CategoryTheory.exists_derivedLimit_morphism",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitMorphism.lean",
+  "statement": "theorem exists_derivedLimit_morphism {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] {K K' : ℕ → C} [HasProduct K] [HasProduct K'] (f : ∀ n : ℕ, K (n + 1) ⟶ K n) (f' : ∀ n : ℕ, K' (n + 1) ⟶ K' n) (L L' : C) (p : L ⟶ ∏ᶜ K) (p' : L' ⟶ ∏ᶜ K') (δ : ∏ᶜ K ⟶ L⟦(1 : ℤ)⟧) (δ' : ∏ᶜ K' ⟶ L'⟦(1 : ℤ)⟧) (hL : IsDerivedLimitTriangle f L p δ) (hL' : IsDerivedLimitTriangle f' L' p' δ') (φ : Functor.ofOpSequence f ⟶ Functor.ofOpSequence f') : ∃ ψ : L ⟶ L', ψ ≫ p' = p ≫ Limits.Pi.map (f := K) (g := K') (fun n : ℕ ↦ φ.app ⟨n⟩) ∧ δ ≫ ψ⟦(1 : ℤ)⟧' = Limits.Pi.map (f := K) (g := K') (fun n : ℕ ↦ φ.app ⟨n⟩) ≫ δ'",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4a2fdd453",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Immutable delivery reviewed fully; no delivery faults found. Server compile passed in 0.8 seconds. External context-clone HEAD movement is documented; no branch was changed by this review."
  }
 }
