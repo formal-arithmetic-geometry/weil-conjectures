@@ -1217,7 +1217,7 @@ theorem transportDataOfComposite_siteV
 end
 
 /-- The fixed restriction and pullback comparison at each later stage. -/
-noncomputable def perfectOverlapCanonicalComparisonFamily
+@[no_expose] noncomputable def perfectOverlapCanonicalComparisonFamily
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)
     (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))
