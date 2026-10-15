@@ -1,0 +1,122 @@
+{
+ "id": "new-lem-weil-pbc-proetale-module-inverse-image-unit-comparison",
+ "kind": "statement",
+ "title": "Canonical unit comparison for module inverse image",
+ "statement": "Let f:Z to X be any morphism of schemes [def-pc-scheme] and A a commutative ring sheaf on the pro-etale site. Use the actual ring and module inverse images [def-weil-proetale-inverse-image] and the module category [def-weil-sheaf-of-modules-category]. Write P and Q for the source and target forgetful functors to abelian sheaves. For every adjunction ai between the specified module inverse image and pushforward through the ring unit, and every source module M, the abelian adjunct of P(ai.unit at M) is an isomorphism from the abelian inverse image of P(M) to Q(f_module_inverse_image(M)). There is no closed immersion hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03D3",
+  "place": "Tags 03D2 and 03D3, Modules on Sites, Lemmas 18.12.2 and 18.12.3: scalar action on inverse image and restriction of the abelian Hom equivalence. The canonical-unit refinement of the existing module underlying comparison."
+ },
+ "proof": [
+  {
+   "text": "On the strict AsSmall models, the actual ring unit presents inverse image. Construct the scalar action on the actual abelian inverse image using ring and abelian unit presentations. The scalar laws and linearity criterion are tested on products of unit sections, as in the construction of the existing underlying comparison. Retain its unit equation, not merely its abstract natural isomorphism. This gives a module adjunction whose underlying unit is the abelian unit.",
+   "uses": [
+    "lem-weil-pbc-proetale-model-ring-presentation",
+    "lem-weil-pbc-module-inverse-image-action-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness of left adjoints identifies this constructed adjunction with model module pullback, compatibly with units. Transport through the strict AsSmall equivalences: the forgetful functors commute with precomposition, so the adjunct of the transported unit is still the corresponding isomorphism. Compare with the supplied ai by uniqueness of left adjoints; its unit formula writes the claimed comparison as this isomorphism composed with the forgotten uniqueness isomorphism.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-module-inverse-image-action-adjunction",
+  "lem-weil-pbc-proetale-model-ring-presentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03D3",
+  "place": "Unit-compatible refinement of the restricted abelian adjunction of Tags 03D2 and 03D3; strict AsSmall transport and uniqueness of left adjoints.",
+  "group": "G4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical mate comparing inverse image of module sheaves with inverse image of the underlying abelian sheaf is an isomorphism",
+   "results": "8 hits: SheafOfModules.toSheafCompSheafToPresheafIso, PresheafOfModules.sheafificationCompForgetCompToPresheaf, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, SheafOfModules.freeFunctorCompPullbackIso, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom",
+   "date": "2026-10-16",
+   "verdict": "The results give sheafification and forgetful comparisons, but none gives the canonical module inverse-image unit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*toSheaf|homEquiv.*unit",
+   "results": "17 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-16",
+   "verdict": "The 17 results concern free modules and sheafification. No matching continuous-site module inverse-image unit statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.IsIso",
+   "results": "2 hits: CategoryTheory.Functor.isIso_ranAdjunction_homEquiv_iff, CategoryTheory.Functor.isIso_lanAdjunction_homEquiv_symm_iff",
+   "date": "2026-10-16",
+   "verdict": "The two results concern Kan-extension adjunctions, not the module comparison along the inverse-image ring unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a morphism of sites the canonical adjunct of the underlying module inverse image unit is an isomorphism to abelian inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleRingedClosedCounit",
+  "date": "2026-10-16",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-ringed-closed-counit",
+   "place": "Separate scalar-action and unit-compatibility step of the ringed closed-counit proof; geometric closed counit is supplied by the existing abelian node.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnitComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleInverseImageUnitComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleModuleInverseImage_unitComparison_isIso",
+  "statement": "theorem proEtaleModuleInverseImage_unitComparison_isIso {X Z : Scheme.{u}} (i : Z ⟶ X)\n    (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (ai : proEtaleModuleInverseImage i A ⊣\n      (SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange i)\n      (J := ProEt.topology X) (K := ProEt.topology Z)\n      (S := ((sheafCompose (ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) (R := ((sheafCompose (ProEt.topology Z)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj A)))\n      ⟨Functor.whiskerRight\n        ((proEtaleSheafAdjunction i CommRingCat.{u + 1}).unit.app A).hom\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩)) :\n    let S := (sheafCompose (ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A\n    let R := (sheafCompose (ProEt.topology Z)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj A)\n    ∀ M, IsIso (((proEtaleSheafAdjunction i AddCommGrpCat.{u + 1}).homEquiv\n      ((SheafOfModules.toSheaf S).obj M)\n      ((SheafOfModules.toSheaf R).obj ((proEtaleModuleInverseImage i A).obj M))).symm\n        ((SheafOfModules.toSheaf S).map (ai.unit.app M)))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261015T213639-L-2153892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261015T213639-L-2153892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

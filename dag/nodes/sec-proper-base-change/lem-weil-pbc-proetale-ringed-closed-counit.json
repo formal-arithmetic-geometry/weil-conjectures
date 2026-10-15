@@ -15,30 +15,29 @@
  ],
  "proof": [
   {
-   "text": "Work Zariski locally on $X$, so $X$ and $Z$ are affine. Use the affine ind-etale basis equivalence and the closed-site lift $v$ with base-change functor $u$. The closed-site adjunction node identifies $u(v(W))$ with $W$ for every basis object $W$. Here the inverse-image formula needs no additional lemma: for a basis object $W$, the adjunction gives $\\operatorname{Hom}(W,u(V))=\\operatorname{Hom}(v(W),V)$, naturally in $V$. Thus $(v(W),W\\to u(v(W)))$ is initial among the pairs indexing the formula, so it is terminal in their opposite category used for the colimit. Every $F(V)$ maps to $F(v(W))$ by restriction along that unique arrow, and these maps identify the colimit with $F(v(W))$, naturally in $W$ and $F$. Sheafification is then exactly the inverse-image definition. Applied to $F=i_*H$, this gives the sheafification of the presheaf $W\\mapsto(i_*H)(v(W))=H(u(v(W)))=H(W)$. This is already the restriction of the sheaf $H$ to the basis. The counit is the displayed evaluation map, so its sheafification is the identity. It follows that $i^{-1}i_*H\\to H$ is an isomorphism on the basis and hence on the full site, and the counit commutes with restriction to every object over an intersection of affine opens by its naturality. Hence the local isomorphisms are restrictions of one global counit, which is an isomorphism because those opens cover. This argument is for underlying abelian sheaves. Inverse image carries the $A$-action to an $i^{-1}A$-action, and direct image uses $A\\to i_*i^{-1}A$; the counit commutes with these actions by naturality of the adjunction with respect to multiplication. Its inverse is consequently linear, proving $i^{-1}i_*\\cong\\mathrm{id}$ for arbitrary coefficients. Any adjunction on the same functors has invertible counit by uniqueness of adjoints.",
+   "text": "For the specified module adjunction ai and closed module H, take the canonical abelian adjunct c of the forgotten module unit at ai.right(H). It is invertible by the unit-comparison theorem, which applies to every scheme morphism.",
    "uses": [
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-exc-closed-site-adjunction",
-    "def-exc-closed-site-lift",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-proetale-module-inverse-image-underlying"
+    "new-lem-weil-pbc-proetale-module-inverse-image-unit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module right triangle identity, mapped by the source forgetful functor, and the abelian Hom equivalence give c followed by the forgotten ai counit equal to the actual abelian counit at the underlying sheaf of H. The existing abelian closed-counit theorem makes the latter invertible. Cancel the invertible c and reflect isomorphisms with the module-to-abelian-sheaf functor.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-closed-counit"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-exc-closed-site-lift",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-proetale-inverse-image",
-  "lem-exc-closed-site-adjunction",
-  "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-proetale-module-inverse-image-underlying"
+  "new-lem-weil-pbc-proetale-module-inverse-image-unit-comparison",
+  "lem-weil-pbc-proetale-abelian-closed-counit"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09AA and 09BK/09BL; parent proof step 2."
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03D3",
+  "place": "Restricted abelian adjunction, combined with the already-stated abelian closed counit and the adjunction triangle identity.",
+  "group": "G4"
  },
  "mathlib_searches": [
   {
@@ -117,9 +116,9 @@
   "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261015T192133-L-1050943",
+  "landing": "20261015T213639-L-2153892",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
