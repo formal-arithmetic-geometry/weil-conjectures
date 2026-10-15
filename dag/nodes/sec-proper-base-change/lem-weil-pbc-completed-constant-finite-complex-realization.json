@@ -240,5 +240,51 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-60feacb05",
+  "group": "NY",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable module, all statement dependencies, sources, hypotheses and conclusions, universes, edge cases, canonical maps, docstrings, and verbatim signature. Per-file scompile.py reproduction passed without diagnostics. No defects found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedConstantFiniteComplexRealization",
+  "declaration": "AlgebraicGeometry.Scheme.completed_constant_finite_complex_realization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedConstantAbSheafify",
+   "AlgebraicGeometry.Scheme.completedConstantAbLocallyBijective",
+   "AlgebraicGeometry.Scheme.completedConstantDerived",
+   "AlgebraicGeometry.Scheme.completedConstantQ",
+   "AlgebraicGeometry.Scheme.completedConstantMapComplex",
+   "AlgebraicGeometry.Scheme.completedConstantModules",
+   "AlgebraicGeometry.Scheme.completedConstantExtension",
+   "AlgebraicGeometry.Scheme.completedConstantExtension_additive",
+   "AlgebraicGeometry.Scheme.completedConstantFiniteComplex",
+   "AlgebraicGeometry.Scheme.completedConstantFiniteModules",
+   "AlgebraicGeometry.Scheme.completedConstantResolutions",
+   "AlgebraicGeometry.Scheme.completedConstantQuotient",
+   "AlgebraicGeometry.Scheme.CompletedConstantQuotientTower",
+   "AlgebraicGeometry.Scheme.completedConstantTensor",
+   "AlgebraicGeometry.Scheme.completedConstantTensorTower",
+   "AlgebraicGeometry.Scheme.CompletedConstantDerivedTower",
+   "AlgebraicGeometry.Scheme.completedConstantRealization",
+   "AlgebraicGeometry.Scheme.completedConstantGenerator",
+   "AlgebraicGeometry.Scheme.completedConstantReductionLevel",
+   "AlgebraicGeometry.Scheme.CompletedConstantReductionTower",
+   "AlgebraicGeometry.Scheme.completedConstantUnderlyingModule",
+   "AlgebraicGeometry.Scheme.completedConstantQuotientMap",
+   "AlgebraicGeometry.Scheme.completedConstantBaseMap",
+   "AlgebraicGeometry.Scheme.CompletedConstantModuleRealization",
+   "AlgebraicGeometry.Scheme.CompletedConstantReductionComparisons"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedConstantFiniteComplexRealization.lean",
+  "statement": "theorem completed_constant_finite_complex_realization (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) (hfinite : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) : ∃ (d : CompletedConstantModuleRealization X I) (h : ∀ n : ℕ, (adicLisseConstantModules X (A ⧸ I ^ (n + 1))).Additive), CompletedConstantReductionComparisons X I (adicLisseCompletedRing X I) (𝟙 _) (completedConstantRealization X I d.scalar) d.additive h ∧ ∀ (T : Scheme.{u}) (f : X ⟶ T), ∃ β : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (adicLisseCompletedRing T I) ⟶ adicLisseCompletedRing X I, (∀ n : ℕ, β ≫ limit.π (adicLisseRingSystem X I) (op n) = (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (limit.π (adicLisseRingSystem T I) (op n)) ≫ proEtaleConstantInverseImageMap f CommRingCat.{u + 1} (CommRingCat.of (A ⧸ I ^ (n + 1)))) ∧ ∃ hc : (completedConstantRealization X I d.scalar ⋙ SheafOfModules.restrictScalars ((adicLisseForget X).map β)).Additive, CompletedConstantReductionComparisons X I ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (adicLisseCompletedRing T I)) β (completedConstantRealization X I d.scalar ⋙ SheafOfModules.restrictScalars ((adicLisseForget X).map β)) hc h",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The finite module realization is the specified ordinary scalar extension of constant C-modules. Its limit comparisons, completed-scalar linearity and naturality are explicit. Derived comparisons are natural isomorphisms of full quotient diagrams in D(H), and relatively D(B), on the category of bounded-above finite-free resolutions of bounded finite complexes; the universal counit specifies computation on every K-flat complex. All helper declarations belong to this node. Positive level n means exponent n+1."
  }
 }
