@@ -317,5 +317,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBound",
+  "declaration": "AlgebraicGeometry.exists_stage_fibre_dimension_le",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLimitFibreDimensionBound.lean",
+  "statement": "theorem exists_stage_fibre_dimension_le {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (A C : I ⥤ CommRingCat.{u}) (φ : A ⟶ C) (hfinite : ∀ i : I, (φ.app i).hom.FiniteType) (hsurj : ∀ (i j : I) (hij : i ≤ j), Function.Surjective (pushout.desc (φ.app j) (C.map (homOfLE hij)) (φ.naturality (homOfLE hij))).hom) (d : ℕ) (hbound : ∀ (p : Ideal ↥(colimit A)) [p.IsPrime], topologicalKrullDim ↥(pullback (Spec.map (colimMap φ)) (Spec.map (CommRingCat.ofHom (algebraMap ↥(colimit A) p.ResidueField))) : Scheme.{u}) ≤ (d : WithBot ℕ∞)) : ∃ i : I, ∀ (p : Ideal (A.obj i)) [p.IsPrime], topologicalKrullDim ↥(pullback (Spec.map (φ.app i)) (Spec.map (CommRingCat.ofHom (algebraMap (A.obj i) p.ResidueField))) : Scheme.{u}) ≤ (d : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c292a8bff",
+  "group": "NR",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, all statement dependencies, source, hypotheses, edge cases, docstrings and verbatim signature. Server-only compile passed in 1.4 seconds without diagnostics. No delivery errors found. Recorded an external context-clone HEAD update; this review changed no branch."
  }
 }
