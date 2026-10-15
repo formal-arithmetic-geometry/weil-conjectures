@@ -305,5 +305,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e4f0ae86d",
+  "group": "NE",
+  "result": "pass",
+  "note": "Checked source, all statement dependencies, exact declarations, hypotheses, conclusions, universes, edge cases, docstrings, report sections, and verbatim signature. Immutable module reproduced cleanly through scompile.py; no defects found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteCohomologicalDimensionAcyclicComplex",
+  "declaration": "CategoryTheory.Functor.exists_rightDerived_computes_acyclic_of_finite_dimension",
+  "file": "lean/Sheaf/CategoryTheory/FiniteCohomologicalDimensionAcyclicComplex.lean",
+  "statement": "theorem exists_rightDerived_computes_acyclic_of_finite_dimension {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B] [Abelian A] [IsGrothendieckAbelian.{v₁} A] [Abelian B] [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (d : ℕ) (hd : ∀ (M : A) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj M)) : ∃ (RF : DerivedCategory A ⥤ DerivedCategory B) (α : F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF), (∀ G : DerivedCategory A ⥤ DerivedCategory B, Function.Bijective (fun β : RF ⟶ G ↦ α ≫ Functor.whiskerLeft DerivedCategory.Q β)) ∧ (∀ L : CochainComplex A ℤ, (∀ r : ℤ, F.rightAcyclic (L.X r)) → IsIso (α.app L)) ∧ (∀ (L M : CochainComplex A ℤ), (∀ r : ℤ, F.rightAcyclic (L.X r)) → (∀ r : ℤ, F.rightAcyclic (M.X r)) → ∀ f : L ⟶ M, DerivedCategory.Q.map ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map f) ≫ α.app M = α.app L ≫ RF.map (DerivedCategory.Q.map f))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
