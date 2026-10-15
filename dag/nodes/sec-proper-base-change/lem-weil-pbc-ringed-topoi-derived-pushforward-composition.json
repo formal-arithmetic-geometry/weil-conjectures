@@ -28,134 +28,59 @@
  ],
  "proof": [
   {
-   "text": "For each of $h=f,g,gf$, the tensor-formula module pullback $h^*$ is left adjoint to the module direct image $h_*$, by [lem-weil-pbc-ringed-topoi-module-adjunction]. Both are additive (their maps preserve sums). Termwise application preserves shifts and the finite biproduct cone differential, so the induced functors on homotopy categories are exact. The cone-triangle description and localization of [def-weil-abstract-derived-category] then make $Qh_*$ exact into the target derived category. Thus [lem-weil-pbc-termwise-adjunction-homotopy] gives the adjunction on unbounded homotopy categories. The everywhere-defined $Lh^*$ and its K-flat comparison are supplied by [lem-weil-pbc-ringed-topoi-derived-pullback]. K-injective resolutions exist by the hypothesis and [prop-pur-kinjective-resolutions-exist]; apply [lem-weil-pbc-kinjective-total-derived] to $Qh_*$ on the homotopy category. Thus the right derived comparison $Qh_*I\\to Rh_*QI$ is invertible for every K-injective $I$. The existence hypotheses of [lem-pc-derived-adjoint-functors] are now satisfied, giving $Lh^*\\dashv Rh_*$. Choose the canonical adjunction of [lem-pc-pre-derived-adjoint-functors-general], whose formula on a fraction $t:P\\to M$, a resolution $s:K\\to I$, and $a:P\\to h_*I$ is the localized underived adjunct, preceded by the left-derived comparison and followed by $Q(s)^{-1}$. This fixes the adjunction, rather than selecting an arbitrary adjunction between the same functors.",
+   "text": "Construct additive tensor pullbacks adjoint to the supplied module direct images of f and g, preserving K-flat complexes with flat terms and inverting quasi-isomorphisms between them. This is the supplied-functor interface proved in the new pullback lemma.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-pc-derived-adjoint-functors",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "def-weil-abstract-derived-category"
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, label lemma-adjoint; section-unbounded; derived.tex Tags 09T5 and 0FND"
-   }
+   "elementary": false
   },
   {
-   "text": "Identify $(gf)_*$ with $g_*f_*$ on modules. The underlying abelian direct images agree, and the $C$-action on either side is induced by the same composite $f^{-1}g^{-1}C\\to f^{-1}B\\to A$, so the identification is linear and natural. Compose the two module adjunctions by [def-weil-pbc-composite-adjunction]. Take the inverse image of this identity under the conjugation bijection of [def-weil-pbc-adjunction-conjugate] to obtain the canonical isomorphism $\\theta:f^*g^*\\xrightarrow{\\sim}(gf)^*$. Write $c_h:h^*h_*\\to1$ for the underived module counits. By the definition of conjugation and the composite counit formula, $\\theta$ satisfies, for every $A$-module complex $I$, the identity $c_{gf,I}\\circ\\theta_{g_*f_*I}=c_{f,I}\\circ f^*(c_{g,f_*I})$. These equations hold termwise on complexes and in the homotopy category, since the adjunctions there are induced termwise.",
+   "text": "On each homotopy category use K-flat complexes with flat terms as the resolving class. Every complex admits a resolution by the existing proved live-universe theorem CochainComplex.exists_isKFlatResolution in Sheaf.Algebra.Homology.KFlatResolution (the live specialization of the cited resolution statement). The pullback lemma gives preservation of this class and inversion of its weak equivalences. Lift the ordinary adjunctions termwise by CategoryTheory.Adjunction.mapHomotopyCategory.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "def-weil-pbc-composite-adjunction",
-    "def-weil-pbc-adjunction-conjugate",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
     "lem-weil-pbc-termwise-adjunction-homotopy"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8, label lemma-push-pull-composition-modules; the composite counit equation written out"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $M\\in D(C)$ and choose $p:P\\to M_0$ with $QM_0\\cong M$, $P$ K-flat with flat terms, by [lem-pc-kflat-resolution]. By [lem-weil-pbc-ringed-pullback-preserves-kflat], $g^*P$ is again K-flat with flat terms. The comparisons of [lem-weil-pbc-ringed-topoi-derived-pullback] therefore identify $Lf^*Lg^*QP$ with $Qf^*g^*P$ and $L(gf)^*QP$ with $Q(gf)^*P$. Compose these identifications with $Q\\theta_P$ to obtain $\\alpha_{QP}:Lf^*Lg^*QP\\xrightarrow{\\sim}L(gf)^*QP$. This is natural for all homotopy maps between K-flat complexes: each left-derived comparison is natural and so is $\\theta$. Each functor in this comparison inverts quasi-isomorphisms, so clause (2) of [lem-weil-pbc-localization-universal-property] descends the comparison through the localization of the K-flat subcategory. That localization is equivalent to $D(C)$ by [lem-weil-pbc-site-derived-tensor-descent]. Consequently it gives a canonical natural isomorphism $\\alpha:Lf^*Lg^*\\xrightarrow{\\sim}L(gf)^*$ on all of $D(C)$, independent of $p$. No assertion that arbitrary termwise pullback preserves quasi-isomorphisms is used.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, label lemma-derived-pullback-composition; K-flat localization and naturality made explicit"
-   }
+   "text": "Prove the needed hom-set comparison directly using the right-fraction calculus. For a K-flat test object K and a K-injective I, maps K to f_*I in the homotopy category are in bijection with maps QK to Q(f_*I). Represent a localized map by a right fraction, refine its denominator by a K-flat resolution, and use the ordinary adjunction and the bijectivity of localization into I to remove that denominator. Equality of fractions is treated by their common refinement. The Lean helper hom_localization_bijective implements both directions. The K-injective hom bijection and fraction calculus are the existing Mathlib APIs, not new assumptions.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The composite adjunction [def-weil-pbc-composite-adjunction] makes $Lf^*Lg^*$ left adjoint to $Rg_*Rf_*$. Conjugate $\\alpha:Lf^*Lg^*\\to L(gf)^*$ between this adjunction and $L(gf)^*\\dashv R(gf)_*$, using [def-weil-pbc-adjunction-conjugate]. Its conjugate is a canonical natural isomorphism $\\kappa:R(gf)_*\\to Rg_*Rf_*$. Explicitly, if $e_h$ denotes the canonical derived adjunction bijection in the direction from maps into $Rh_*$ to maps out of $Lh^*$, then $\\kappa$ is characterized by $e_f(e_g(\\kappa_K\\circ b))=e_{gf}(b)\\circ\\alpha_M$ for every $b:M\\to R(gf)_*K$. This is precisely the composite hom bijection and the conjugation formula; its inverse is the conjugate of $\\alpha^{-1}$.",
+   "text": "For a K-injective I and a K-injective resolution j:f_*I to T, test Q(g_*j) by maps from every K-flat complex K with flat terms. The preceding hom comparisons for g^*, f^* and their composite identify postcomposition with Q(g_*j) with postcomposition with Qj after adjunction. Since Qj is invertible, this operation is bijective. Every derived object is isomorphic to the localization of such a K, so Yoneda implies Q(g_*j) is invertible, hence g_*j is a quasi-isomorphism. No claim that f_*I is K-injective is made.",
    "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "def-weil-pbc-adjunction-conjugate"
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+    "lem-pc-kflat-resolution"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, label lemma-derived-pushforward-composition; uniqueness of right adjoints as an explicit conjugation"
-   }
+   "elementary": true
   },
   {
-   "text": "Fix a K-injective $A$-module complex $I$, and a quasi-isomorphism $j:f_*I\\to J$ with $J$ K-injective over $B$. Use the K-injective comparisons [lem-weil-pbc-kinjective-total-derived] to identify $R(gf)_*QI$ with $Qg_*f_*I$, $Rf_*QI$ with $Qf_*I$, and $Rg_*Rf_*QI$ with $Qg_*J$. To compare $\\kappa_{QI}$ with $Q(g_*j)$ it suffices to compare postcomposition on all maps into $Qg_*f_*I$. Indeed, equality for the identity map already gives equality of their components. For $M=QM_0$, write any such map as $b=Q(a)Q(t)^{-1}$, with $t:P\\to M_0$ a quasi-isomorphism and $a:P\\to g_*f_*I$, by [lem-pc-quasi-isomorphisms-multiplicative-system, lem-pc-right-fraction-representation]. Replace $P$ by a K-flat resolution with flat terms using [lem-pc-kflat-resolution]; composing both arrows with that resolution leaves the same fraction. Thus we may assume $P$ K-flat with flat terms, and $g^*P$ has those properties by [lem-weil-pbc-ringed-pullback-preserves-kflat].",
+   "text": "Obtain K-injective resolutions of module sheaves from the Grothendieck-abelian theorem. For every additive functor use the existing right derivability structure on K-injective complexes to construct its right derived functor and its comparison, invertible on K-injectives. A quasi-isomorphism between K-injectives is a homotopy equivalence, which every additive functor preserves. These constructions use WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs and Mathlib derivability APIs directly.",
    "uses": [
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pc-right-fraction-representation",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+    "prop-pur-kinjective-resolutions-exist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RT, label lemma-acyclic (quasi-isomorphisms form a multiplicative system); categories.tex Tag 04VI, label lemma-morphisms-right-localization; K-flat refinement uses sites-cohomology.tex Tag 06YS"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the fraction formula of [lem-pc-pre-derived-adjoint-functors-general] to the $g$-adjunction, with $s=j$, denominator $t$, and map $g_*j\\circ a:P\\to g_*J$. Under the K-flat comparison $Lg^*M\\cong Qg^*P$, it sends $Q(g_*j)\\circ b$ to $Q(j)^{-1}\\circ Q(c_{g,J}\\circ g^*(g_*j\\circ a))$. Naturality of the module counit gives $c_{g,J}\\circ g^*g_*j=j\\circ c_{g,f_*I}$, so this equals $Q(c_{g,f_*I}\\circ g^*a)$. Next apply the same fraction formula to the $f$-adjunction, taking resolution $\\mathrm{id}_I$ and the K-flat representative $g^*P$ of $Lg^*M$. The resulting map out of $Lf^*Lg^*M\\cong Qf^*g^*P$ is $Q(c_{f,I}\\circ f^*c_{g,f_*I}\\circ f^*g^*a)$. On the other hand, the formula for $e_{gf}(b)$, with resolution $\\mathrm{id}_I$ and denominator $t$, gives $Q(c_{gf,I}\\circ(gf)^*a)$ out of $L(gf)^*M\\cong Q(gf)^*P$. Precomposing with $\\alpha_M$ inserts $Q\\theta_P$. Naturality of $\\theta$ and the counit equation from step 2 give $c_{gf,I}\\circ(gf)^*a\\circ\\theta_P=c_{gf,I}\\circ\\theta_{g_*f_*I}\\circ f^*g^*a=c_{f,I}\\circ f^*c_{g,f_*I}\\circ f^*g^*a$. Thus $Q(g_*j)$ satisfies exactly the characterization of $\\kappa_{QI}$ in step 4 for every $b$, and equals $\\kappa_{QI}$. The inverse $Q(j)^{-1}$ was used only in $D(B)$; $f_*I$ was never assumed K-injective.",
+   "text": "Choose R(gf)=Rf followed by Rg, and define its unit by eta_g(f_*M) followed by Rg(eta_f(M)). Naturality is a direct composition calculation. At a K-injective I the unit eta_g(f_*I) is invertible: choose j as above and use naturality of eta_g, the invertibility at T, and the quasi-isomorphism g_*j just proved. The K-injective derivability criterion then proves that the composite is right derived. Take kappa to be the identity isomorphism. Naturality at j and cancellation of Qj give exactly the required resolution formula. The right-derived universal property proves uniqueness from the unit equation.",
    "uses": [
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "def-weil-pbc-composite-adjunction",
-    "def-weil-pbc-adjunction-conjugate"
+    "prop-pur-kinjective-resolutions-exist"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FND, label lemma-pre-derived-adjoint-functors-general, fraction adjunction calculation; sites-cohomology.tex Tag 0D6E normalization expanded by the worker"
-   }
-  },
-  {
-   "text": "Since $\\kappa_{QI}$ is an isomorphism and equals $Q(g_*j)$, [lem-weil-pbc-unbounded-derived-iso-cohomology] implies $H^n(Q(g_*j))$ is an isomorphism for every integer $n$. By [def-weil-abstract-derived-category], these maps identify with $H^n(g_*j)$, so $g_*j$ is a quasi-isomorphism, as asserted. For a different K-injective resolution $j':f_*I\\to J'$, the bijection [lem-weil-pbc-kinjective-hom-derived] lifts the derived comparison $Qj'\\circ(Qj)^{-1}:QJ\\to QJ'$ to a unique homotopy class $h:J\\to J'$, with $hj$ homotopic to $j'$. Applying the additive $g_*$ preserves this homotopy by [lem-weil-pbc-termwise-adjunction-homotopy], and hence $Q(g_*h)Q(g_*j)=Q(g_*j')$. These are exactly the resolution identifications of [lem-weil-pbc-kinjective-total-derived]. Finally $\\alpha$ and its conjugate $\\kappa$ are natural on the derived categories by steps 3 and 4. Therefore the representative formula just proved respects all derived morphisms and all resolution identifications, giving the required naturality and normalization.",
-   "uses": [
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, label lemma-derived-pushforward-composition; derived.tex K-injective comparison and cohomology criterion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pc-right-fraction-representation",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0D6E via Tag 0D6D and Tag 07A6; source adjunction route followed, with fraction-level normalization and naturality written out using derived.tex Tag 0FND"
+  "place": "Tags 0D6E, 0G7E and 06YS; direct homotopy-category adjunction and right-fraction argument, then the K-injective right-derivability criterion. Implemented by H4, 2026-10-16."
  },
  "mathlib_searches": [
   {
@@ -356,10 +281,20 @@
   "module": "Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition",
   "declaration": "CategoryTheory.ringedToposDerivedPushforwardComposition",
   "file": "lean/Sheaf/CategoryTheory/RingedToposDerivedPushforwardComposition.lean",
-  "statement": "theorem ringedToposDerivedPushforwardComposition {C D E : Type u} [SmallCategory C] [SmallCategory D] [SmallCategory E] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (L : GrothendieckTopology E) (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u}) (R : Sheaf L CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))] [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B))] [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose L (forget₂ CommRingCat RingCat)).obj R))] (f : RingedToposMorphism ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A) ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) (g : RingedToposMorphism ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B) ((sheafCompose L (forget₂ CommRingCat RingCat)).obj R)) : ∃ (Rf : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) ⥤ DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B))) (Rg : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) ⥤ DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose L (forget₂ CommRingCat RingCat)).obj R))) (Rgf : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) ⥤ DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose L (forget₂ CommRingCat RingCat)).obj R))) (ηf : f.modules.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ Rf) (ηg : g.modules.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ Rg) (ηgf : (f.modules ⋙ g.modules).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ Rgf), Rf.IsRightDerivedFunctor ηf (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) (ComplexShape.up ℤ)) ∧ Rg.IsRightDerivedFunctor ηg (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) (ComplexShape.up ℤ)) ∧ Rgf.IsRightDerivedFunctor ηgf (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) (ComplexShape.up ℤ)) ∧ (∀ (I : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) ℤ), I.IsKInjective → IsIso (ηf.app I) ∧ IsIso (ηgf.app I)) ∧ (∀ (T : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) ℤ), T.IsKInjective → IsIso (ηg.app T)) ∧ ∃! κ : Rgf ≅ Rf ⋙ Rg, (∀ (M : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) ℤ), ηgf.app M ≫ κ.hom.app (DerivedCategory.Q.{w}.obj M) = ηg.app ((f.modules.mapHomologicalComplex (ComplexShape.up ℤ)).obj M) ≫ Rg.map (ηf.app M)) ∧ ∀ (I : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) ℤ), I.IsKInjective → ∀ (T : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) ℤ), T.IsKInjective → ∀ (j : (f.modules.mapHomologicalComplex (ComplexShape.up ℤ)).obj I ⟶ T), ∀ [QuasiIso j], QuasiIso ((g.modules.mapHomologicalComplex (ComplexShape.up ℤ)).map j) ∧ ηgf.app I ≫ κ.hom.app (DerivedCategory.Q.{w}.obj I) = DerivedCategory.Q.{w}.map ((g.modules.mapHomologicalComplex (ComplexShape.up ℤ)).map j) ≫ ηg.app T ≫ Rg.map (inv (DerivedCategory.Q.{w}.map j) ≫ ηf.app I)",
+  "statement": "theorem ringedToposDerivedPushforwardComposition\n    {C D E : Type u} [SmallCategory C] [SmallCategory D] [SmallCategory E]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (L : GrothendieckTopology E)\n    (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u})\n    (R : Sheaf L CommRingCat.{u})\n    [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose J (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj\n      A))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose K (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj\n      B))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u}\n      ((sheafCompose L (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj\n      R))]\n    (f : RingedToposMorphism.{u} (C := C) (D := D) (J := J) (K := K)\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A)\n      ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj B))\n    (g : RingedToposMorphism.{u} (C := D) (D := E) (J := K) (K := L)\n      ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj B)\n      ((sheafCompose L (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) :\n    ∃ (Rf : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂\n      CommRingCat.{u}\n      RingCat.{u})).obj\n      A)) ⥤\n          DerivedCategory.{w} (ringedSiteModules.{u, u, u, u}\n            ((sheafCompose K (forget₂ CommRingCat.{u}\n            RingCat.{u})).obj\n            B)))\n      (Rg : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂\n        CommRingCat.{u}\n        RingCat.{u})).obj\n        B)) ⥤\n          DerivedCategory.{w} (ringedSiteModules.{u, u, u, u}\n            ((sheafCompose L (forget₂ CommRingCat.{u}\n            RingCat.{u})).obj\n            R)))\n      (Rgf : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂\n        CommRingCat.{u}\n        RingCat.{u})).obj A)) ⥤\n          DerivedCategory.{w} (ringedSiteModules.{u, u, u, u}\n            ((sheafCompose L (forget₂ CommRingCat.{u}\n            RingCat.{u})).obj\n            R)))\n      (ηf : f.modules.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶\n        DerivedCategory.Q.{w} ⋙ Rf)\n      (ηg : g.modules.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶\n        DerivedCategory.Q.{w} ⋙ Rg)\n      (ηgf : (f.modules ⋙ g.modules).mapHomologicalComplex (ComplexShape.up ℤ) ⋙\n        DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ Rgf),\n      Rf.IsRightDerivedFunctor ηf\n          (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂\n            CommRingCat.{u}\n            RingCat.{u})).obj A)) (ComplexShape.up ℤ)) ∧\n      Rg.IsRightDerivedFunctor ηg\n          (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂\n            CommRingCat.{u}\n            RingCat.{u})).obj B)) (ComplexShape.up ℤ)) ∧\n      Rgf.IsRightDerivedFunctor ηgf\n          (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂\n            CommRingCat.{u}\n            RingCat.{u})).obj A)) (ComplexShape.up ℤ)) ∧\n      (∀ (I : CochainComplex (ringedSiteModules.{u, u, u, u}\n        ((sheafCompose J (forget₂ CommRingCat.{u}\n        RingCat.{u})).obj A)) ℤ),\n        I.IsKInjective → IsIso (ηf.app I) ∧ IsIso (ηgf.app I)) ∧\n      (∀ (T : CochainComplex (ringedSiteModules.{u, u, u, u}\n        ((sheafCompose K (forget₂ CommRingCat.{u}\n        RingCat.{u})).obj B)) ℤ),\n        T.IsKInjective → IsIso (ηg.app T)) ∧\n      ∃! κ : Rgf ≅ Rf ⋙ Rg,\n        (∀ (M : CochainComplex (ringedSiteModules.{u, u, u, u}\n          ((sheafCompose J (forget₂ CommRingCat.{u}\n          RingCat.{u})).obj A)) ℤ),\n          ηgf.app M ≫ κ.hom.app (DerivedCategory.Q.{w}.obj M) =\n            ηg.app ((f.modules.mapHomologicalComplex (ComplexShape.up ℤ)).obj M) ≫\n              Rg.map (ηf.app M)) ∧\n        ∀ (I : CochainComplex (ringedSiteModules.{u, u, u, u}\n          ((sheafCompose J (forget₂ CommRingCat.{u}\n          RingCat.{u})).obj A)) ℤ),\n          I.IsKInjective → ∀ (T : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose K\n            (forget₂\n            CommRingCat.{u} RingCat.{u})).obj B)) ℤ),\n          T.IsKInjective →\n          ∀ (j : (f.modules.mapHomologicalComplex (ComplexShape.up ℤ)).obj I ⟶ T),\n          ∀ [QuasiIso j],\n          QuasiIso ((g.modules.mapHomologicalComplex (ComplexShape.up ℤ)).map j) ∧\n          ηgf.app I ≫ κ.hom.app (DerivedCategory.Q.{w}.obj I) =\n            DerivedCategory.Q.{w}.map\n                ((g.modules.mapHomologicalComplex (ComplexShape.up ℤ)).map j) ≫\n              ηg.app T ≫ Rg.map (inv (DerivedCategory.Q.{w}.map j) ≫ ηf.app I)",
   "branch": "newtargets-dag",
   "by": "NH",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-9ff0e",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261015T221655-L-2639332",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both delivered Lean statements and proofs against their DAG nodes, existing interfaces, change record, and stage-3 requirements; both modules and all twelve direct importers compile cleanly."
  }
 }

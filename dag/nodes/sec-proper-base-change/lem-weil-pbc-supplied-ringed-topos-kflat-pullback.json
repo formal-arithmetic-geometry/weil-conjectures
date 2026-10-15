@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+ "kind": "statement",
+ "title": "Tensor pullback adjoint to a supplied ringed-topos module direct image",
+ "statement": "Let C and D be small sites in universe u, with sheaves of commutative rings A on C and B on D, and let f be a ringed-topos morphism with its supplied module direct image f.modules [def-weil-pbc-ringed-topos-morphism]. There is an additive functor F:Mod(B) to Mod(A) [def-weil-sheaf-of-modules-category] left adjoint to f.modules. Termwise F on cochain complexes [def-pc-cochain-complex-modules] sends every K-flat complex [def-pc-kflat-complex] with flat terms [def-pc-flat-sheaf-modules] to a K-flat complex with flat terms, and sends quasi-isomorphisms [def-pc-quasi-iso-modules] between such complexes to quasi-isomorphisms. No flatness condition is imposed on the structural ring map.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, tensor pullback/direct-image adjunction; sites-cohomology.tex Tags 0G7E and 06YY for K-flat preservation and quasi-isomorphisms"
+ },
+ "proof": [
+  {
+   "text": "Transport the ring through the inverse-image functor by geometric_ring_transport. Use geometric_module_construction with identity coefficient map to transport its modules. The operation diagrams imply the generalized-section graph equations, including zero by cancellation and one by multiplication with the unit. This supplies a genuine AlgebraicInverseImage I.",
+   "uses": [
+    "lem-weil-pbc-geometric-ring-transport",
+    "lem-weil-pbc-geometric-module-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the supplied structural map through the inverse-ring isomorphism. The ring graph equations show that the resulting map c:RI to A preserves addition, multiplication, zero and one, hence is a morphism of sheaves of commutative rings. Extract addition, zero and scalar-action graph preservation for the supplied module direct image from module_linear, using scalar one and the zero section. These imply the categorical operation equations by testing universal operand pairs.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict the sheaf adjunction hom bijection to linear maps. AlgebraicInverseImage supplies the left operation equations and the preceding step supplies the right operation equations. The binary mate equivalence of GeometricModuleTransport shows that a map is linear on one side exactly when its mate is linear on the other. Its naturality and the tensor extension-of-scalars adjunction give I.modules followed by tensorFunctor c left adjoint to exactly f.modules. This functor is additive since it is a left adjoint between abelian categories.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-transport",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify IsFlat with IsFlatOnSite by the natural isomorphism between the live tensor-right functor and the site tensor-right construction; reuse the existing private SheafOfModules.siteTensorRightIso from RingedTopoiDerivedPullback, whose component comes from the identity on presheaf tensor products and sheafification. The independent-coefficient K-flat predicate specializes definitionally to the live predicate. The recorded ringed-topos K-flat pullback theorem now proves preservation of K-flatness and flat terms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The functor is definitionally inverse image followed by changeOfRings on objects and maps. Choose standard derived-category localizations and apply ringedTopoiDerivedPullback to these equations. Its quasi-isomorphism clause is exactly inversion on the K-flat, flat-term resolving class. The local choices disappear from the asserted underived conclusion.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-geometric-ring-transport",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, combined with sites-cohomology.tex Tags 0G7E and 06YY; supplied module functor identified by its generalized-section operation equations. Proved by H4, 2026-10-16."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism of sheaf topoi induces an adjunction on modules by inverse image followed by extension of scalars",
+   "results": "8 hits, including SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction and SheafOfModules.instIsLeftAdjointPullback.",
+   "date": "2026-10-16",
+   "verdict": "Continuous site-functor constructions only; no interface for the supplied arbitrary ringed-topos record."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackPushforwardAdjunction\"",
+   "results": "4 hits for presheaf and sheaf pullbackPushforwardAdjunction and its component formulas.",
+   "date": "2026-10-16",
+   "verdict": "Underived continuous-site constructions; the ringed-topos interface needs graph transport."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFlatOnSite|isKFlat_ringedToposPullback|geometric_module_transport",
+   "results": "0 Mathlib hits. Local project search found GeometricModuleTransport, Paper.KFlatRingedToposPullback and Paper.RingedTopoiDerivedPullback.",
+   "date": "2026-10-16",
+   "verdict": "Use the existing project declarations, after proving the supplied-functor and flatness identifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor inverse image for arbitrary ringed topoi is adjoint to module direct image and preserves K-flat complexes with flat terms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition",
+  "date": "2026-10-16",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-arrows",
+   "place": "Source paragraph: canonical ringed-topos exchange arrows; the module pullback and K-flat test-object interface needed for the unbounded direct-image composition ingredient.",
+   "via": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedToposKFlatPullback",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposKFlatPullback.lean",
+  "declaration": "CategoryTheory.RingedToposMorphism.exists_kFlatPullback",
+  "statement": "theorem RingedToposMorphism.exists_kFlatPullback\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u})\n    (f : RingedToposMorphism\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) :\n    ∃ (F : ringedSiteModules.{u, u, u, u}\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B) ⥤\n      ringedSiteModules.{u, u, u, u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))\n      (_ : F.Additive) (_ : F ⊣ f.modules),\n      (∀ P : CochainComplex (ringedSiteModules.{u, u, u, u}\n          ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) ℤ,\n        P.IsKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (P.X n)) →\n        CochainComplex.IsKFlat ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧\n          ∀ n : ℤ, SheafOfModules.IsFlat\n            (((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n)) ∧\n      ∀ (P Q : CochainComplex (ringedSiteModules.{u, u, u, u}\n          ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) ℤ) (s : P ⟶ Q),\n        P.IsKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (P.X n)) →\n        Q.IsKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (Q.X n)) →\n        QuasiIso s → QuasiIso ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map s)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-9ff0e",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261015T221655-L-2639332",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-9ff0e",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261015T221655-L-2639332",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both delivered Lean statements and proofs against their DAG nodes, existing interfaces, change record, and stage-3 requirements; both modules and all twelve direct importers compile cleanly."
+ }
+}
