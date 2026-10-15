@@ -116,18 +116,22 @@ noncomputable def perfectOverlapStageObjectIso
     simp only [Category.assoc, morphismRestrict_ι, Scheme.homOfLE_ι]
     rw [← Category.assoc, Scheme.homOfLE_ι]
     rfl
-  have fac : (e.inv ≫ X.homOfLE hW') ≫ (g ∣_ L) =
+  have fac : e.inv ≫ (X.homOfLE hW' ≫ (g ∣_ L)) =
       pullback.fst ((U ⊓ V).ι ≫ p) q ≫ Y.homOfLE hWL := by
-    rw [Category.assoc, restricted, ← Category.assoc]
-    rw [square.isoPullback_inv_fst]
+    calc
+      e.inv ≫ (X.homOfLE hW' ≫ (g ∣_ L)) =
+          e.inv ≫ ((g ∣_ (U ⊓ V)) ≫ Y.homOfLE hWL) := by rw [restricted]
+      _ = (e.inv ≫ (g ∣_ (U ⊓ V))) ≫ Y.homOfLE hWL := by
+            simp only [Category.assoc]
+      _ = _ := by rw [square.isoPullback_inv_fst]
   change (derivedPullback (g ∣_ L) ⋙
     (schemeOpenOverlapRestriction X (homOfLE hW')).mapDerivedCategory) ⋙
     derivedPullback e.inv ≅ _
   exact Functor.isoWhiskerRight
-      (Functor.isoWhiskerLeft _ (overlapOpenInclusionPullbackIso X (homOfLE hW')).symm) _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (perfectHomComposition e.inv (X.homOfLE hW')) ≪≫
-    perfectHomComposition (e.inv ≫ X.homOfLE hW') (g ∣_ L) ≪≫
+      (Functor.isoWhiskerLeft _
+        (overlapOpenInclusionPullbackIso X (homOfLE hW')).symm ≪≫
+          perfectHomComposition (X.homOfLE hW') (g ∣_ L)) _ ≪≫
+    perfectHomComposition e.inv (X.homOfLE hW' ≫ (g ∣_ L)) ≪≫
     eqToIso (congrArg (fun f ↦ derivedPullback f) fac) ≪≫
     (perfectHomComposition (pullback.fst ((U ⊓ V).ι ≫ p) q) (Y.homOfLE hWL)).symm
 
