@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-closed-points-of-product",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Closed points of a product",
@@ -13,29 +13,148 @@
   "place": "node lem-kun-closed-points-of-product, order 1745"
  },
  "stmt_deps": [
-  "def-kun-support",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-closed-points"
  ],
  "proof": [
   {
-   "text": "By [lem-kun-closed-point-field], $z$ is closed iff\n$\\kappa(z)$ is finite over $K$, and $\\kappa(x)$, $\\kappa(y)$\nare then finitely generated subfields of $\\kappa(z)$, hence finite\nover $K$ (a subfield of a finite extension is finite), so $x,y$\nare closed. Conversely, if $\\kappa(x)$ and $\\kappa(y)$ are finite\nover $K$, then $\\kappa(x)\\otimes_K\\kappa(y)$ is a finite\ndimensional $K$-algebra, presented as a finite product of Artinian\nlocal rings; the residue field $\\kappa(z)$ of the point $z$ over\n$(x,y)$ is a residue field of that finite algebra, hence finite over\n$K$, so $z$ is closed.",
+   "text": "Put $P=X\\times_KY$. By the definition of finite type, choose finite affine open covers $X=\\bigcup_i\\operatorname{Spec}A_i$ and $Y=\\bigcup_j\\operatorname{Spec}B_j$, with each $A_i,B_j$ a finitely generated $K$-algebra. By [lem-weil-pbc-open-fibre-product] their products are open subschemes of $P$, with images $p_1^{-1}(\\operatorname{Spec}A_i)\\cap p_2^{-1}(\\operatorname{Spec}B_j)$, and these cover $P$: every point has an image in some member of each cover. By [lem-weil-pbc-fibre-product-affine-spectra] each is $\\operatorname{Spec}(A_i\\otimes_KB_j)$. If $a_1,\\ldots,a_r$ generate $A_i$ and $b_1,\\ldots,b_t$ generate $B_j$, then $a_\\nu\\otimes1$ and $1\\otimes b_\\mu$ generate the tensor algebra: every pure tensor of polynomials is the product of the two corresponding polynomials in these generators, and every tensor is a finite sum of pure tensors. Thus this is a finite affine cover by finitely generated $K$-algebras, so $P$ is of finite type over $K$ by [def-weil-finite-type-morphism].",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product) and 01JQ (lemma-fibre-product-affines); explicit finite-generator argument for finite type"
+   }
+  },
+  {
+   "text": "If $z$ is closed in $P$, [lem-kun-closed-point-field](a), applicable by step 1, makes $\\kappa(z)$ finite-dimensional over $K$. The projections induce $K$-compatible field homomorphisms $\\kappa(x)\\to\\kappa(z)$ and $\\kappa(y)\\to\\kappa(z)$ by [def-weil-residue-field]. Each is injective: its kernel is an ideal in a field and cannot contain $1$. Their images are $K$-vector subspaces of $\\kappa(z)$, so have finite dimension. Consequently $\\kappa(x)$ and $\\kappa(y)$ are finite extensions of $K$, and [lem-kun-closed-point-field](a), now applied to the given finite-type schemes $X,Y$, makes both $x,y$ closed.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-points-of-product.md",
+    "place": "Proof, first sentence: closed z implies finite residue fields and closed images"
+   }
+  },
+  {
+   "text": "Conversely suppose $x,y$ closed. By [lem-kun-closed-point-field](a), $L=\\kappa(x)$ and $M=\\kappa(y)$ are finite extensions of $K$. Choose finite $K$-bases $e_1,\\ldots,e_r$ of $L$ and $f_1,\\ldots,f_t$ of $M$. The $rt$ elements $e_i\\otimes f_j$ span $A=L\\otimes_KM$: expand both factors of a pure tensor in these bases and distribute, then use that pure tensors span. Thus $A$ is a finite-dimensional commutative $K$-algebra.",
    "uses": [
     "lem-kun-closed-point-field"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-points-of-product.md",
+    "place": "Proof, converse: tensor product of the two finite residue fields is finite-dimensional"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-fibre-product-point-residue-field], applied to $X\\to\\operatorname{Spec}K$ and $Y\\to\\operatorname{Spec}K$, the kernel $\\mathfrak p$ of $A\\to\\kappa(z)$ is prime, and $\\kappa(z)$ is isomorphic to the fraction field of $D=A/\\mathfrak p$, compatibly with the two residue-field maps and hence with $K$. Here the base residue field is $K$ by [def-weil-affine-spectrum].",
+   "uses": [
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JT (lemma-points-fibre-product), last sentence of the statement"
+   }
+  },
+  {
+   "text": "The quotient $D$ is spanned over $K$ by the images of the finite spanning set of $A$ from step 3, and is a nonzero integral domain because $\\mathfrak p$ is prime. For $0\\ne a\\in D$, multiplication by $a$ is an injective $K$-linear endomorphism of this finite-dimensional vector space, so it is surjective; there is $b\\in D$ with $ab=1$. Thus $D$ is a field. Its fraction field is therefore $D$ itself, and the isomorphism of step 4 shows that $\\kappa(z)$ is finite over $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-points-of-product.md",
+    "place": "Proof, converse: residue field of the finite algebra is finite; elementary quotient and multiplication argument replacing the unnecessary Artinian decomposition"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-closed-point-field](a) to the finite-type $K$-scheme $P$ from step 1. The finiteness of $\\kappa(z)/K$ proved in step 5 gives that $z$ is closed in $P$, completing the reverse implication.",
+   "uses": [
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-points-of-product.md",
+    "place": "Proof, final clause: finite residue field implies closed z"
+   }
   }
  ],
  "proof_deps": [
-  "lem-kun-closed-point-field"
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-kun-closed-point-field",
+  "def-weil-residue-field",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "def-weil-affine-spectrum"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-points-of-product.md",
-  "place": "## Proof"
+  "place": "Proof: expanded with Stacks Tags 01JR, 01JQ and 01JT and elementary finite-dimensional linear algebra"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A point of a fiber product of finite type schemes over a field is closed if and only if its two projections are closed",
+   "results": "8 hits: AlgebraicGeometry.universallyClosed_snd, AlgebraicGeometry.universallyClosed_fst, AlgebraicGeometry.instIsClosedImmersionFstScheme, AlgebraicGeometry.instIsClosedImmersionSndScheme, AlgebraicGeometry.UniversallyClosed.universally_isClosedMap, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.UniversallyClosed.out, AlgebraicGeometry.Scheme.Hom.isClosedMap",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the full equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Pullback, IsClosed",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.Scheme.Pullback'",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the full equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed.*(pullback|residueField)|closedPoint.*(prod|pullback)|isClosed_singleton",
+   "results": "23 hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the full equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed points in a scheme fiber product over a field are exactly points with closed projections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For schemes locally of finite type over a field, closed points of a fiber product map to closed points and points above pairs of closed points are closed",
+   "results": "8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.IsFinite.instSndScheme, AlgebraicGeometry.IsFinite.instFstScheme, AlgebraicGeometry.universallyClosed_snd; read Morphisms/Finite.lean:209-218: Scheme.Hom.closePoints_subset_preimage_closedPoints proves only the forward preservation assertion, under JacobsonSpace and LocallyOfFiniteType",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the full equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, IsClosed",
+   "results": "9 hits: AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.residueFieldIsoBase, AlgebraicGeometry.pointOfClosedPoint, AlgebraicGeometry.pointOfClosedPoint_comp, AlgebraicGeometry.SpecMap_residueFieldIsoBase_inv, AlgebraicGeometry.pointOfClosedPoint_comp_assoc, AlgebraicGeometry.SpecMap_residueFieldIsoBase_inv_assoc, AlgebraicGeometry.pointOfClosedPoint_apply; isClosed_singleton_iff_locallyOfFiniteType (Morphisms/Finite.lean:221) characterizes a point morphism, not the product equivalence; AlgClosed results assume an algebraically closed base",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the full equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "residueField.*(tensor|Tensor)|pullback.*(residueField|IsClosed)|isClosed.*[Ff]inite[Tt]ype",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the full equivalence"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +182,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-closed-points-of-product",
+  "worker": "stage1",
+  "summary": "Preserved the statement and expanded the imported paragraph into six steps. Established finite type of the product from finite affine covers using existing affine/open fibre-product leaves. Proved the forward implication by injective residue-field maps. For the converse used finite tensor spanning sets and the existing general fibre-product point residue-field theorem, then proved a finite-dimensional domain is a field by multiplication. Removed unrelated support/conventions statement dependencies; all required definitions are cited directly. No new nodes.",
+  "blueprint": "Step 1 supplies the finite-type hypothesis implicit in the opening use of closed-point-field; step 2 realizes the first implication. Steps 3-6 realize the converse in the sole blueprint proof paragraph, replacing the unnecessary Artinian-local-product decomposition with the explicit prime-quotient argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Generic residue-field description for a point of a scheme fibre product (Stacks 01JT), used as a black box in step 4; no node of this unit states this identification. The unit has no proof steps to replace."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q17-c880c7227",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-c880c7227 (reviewer sub-agent of L); spot-checked: Read the full item, sources, cited nodes, unit/chapter route, and delivery rules. Verified all six proof steps, finite-type product construction, residue-field maps, prime tensor quotient, finite-dimensional domain argument, hypotheses, edge cases, and Mathlib searches. No new nodes, duplicates, cycles, or repairs are needed. Review written to review.md."
+ }
 }
