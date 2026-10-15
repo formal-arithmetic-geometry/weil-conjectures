@@ -197,15 +197,17 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-97ed59370",
-  "group": "NE",
+  "reviewer": "NT-stage2-Codex-523dc802f",
+  "group": "Q43",
   "result": "pass",
-  "note": "Reviewed immutable files, dependencies, sources, canonical constructions, coherence clauses, universes and edge cases. Signature matches verbatim; scompile.py reproduced clean sandbox and library compiles. No findings. Review written to review.md; branch unchanged."
+  "note": "Statement, dependencies, universes, edge cases, docstrings, canonical constructions, report sections, and compiler evidence verified; no repair needed."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence",
   "declaration": "AlgebraicGeometry.ProEtale.comparison_pullback_coherent",
   "declarations": [
+   "AlgebraicGeometry.ProEtale.comparisonSiteBaseChangeIso",
+   "AlgebraicGeometry.ProEtale.comparisonCoefficientDirectImageIso",
    "AlgebraicGeometry.ProEtale.etaleComparisonPullback",
    "AlgebraicGeometry.ProEtale.etaleComparisonAdjunction",
    "AlgebraicGeometry.ProEtale.etaleComparisonId",
@@ -225,9 +227,9 @@
   "file": "lean/Sheaf/AlgebraicGeometry/ComparisonPullbackCoherence.lean",
   "statement": "theorem comparison_pullback_coherent : ComparisonPullbackCoherent (Type (u + 1)) ∧ ComparisonPullbackCoherent AddCommGrpCat.{u + 1} ∧ ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], ComparisonPullbackCoherent (ModuleCat.{u + 1} Λ)",
   "branch": "newtargets-dag",
-  "by": "NE",
+  "by": "Q43",
   "date": "2026-10-15",
   "existing": false,
-  "note": "The comparison is constructed by conjugating the existing restriction/base-change isomorphism; the theorem states all identity, composite and chosen Cartesian-square equations, for sets, abelian groups and finite fixed-ring modules. Auxiliary interfaces use the existing Kan extension and sheafification construction without requiring abelian coefficients. The pro-etale inverse-image dependency is consumed through its definitionally identical upstream construction: importing its ring module as well would collide with the reorganized FiniteCoefficient copy of UpperLowerStar.Defs."
+  "note": "Section 1(B): importing the recorded coherence module with the finite-coefficient API failed because Comparison.LowerStar loads legacy UpperLowerStar.Defs and duplicates the reorganized notation. Keep every recorded coherence declaration and its full statement, replace that import by the compatible FiniteCoefficient API, and construct the same canonical right-image comparison directly from restriction composition and the chosen base-change isomorphism. Its adjunction mate is unchanged mathematically. The construction covers sets, abelian groups and finite-ring modules, with all identity, arbitrary-composite and chosen-square equations retained."
  }
 }

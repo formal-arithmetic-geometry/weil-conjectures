@@ -41,7 +41,9 @@
   "def-weil-pbc-constructible-direct-image-finiteness",
   "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-proetale-modules"
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-complete-coefficient-datum",
+  "lem-weil-pbc-comparison-pullback"
  ],
  "proof": [
   {
@@ -216,5 +218,30 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-8392721aa (reviewer sub-agent of L); spot-checked: Read the complete item, report, route, cited nodes, blueprint proof, Stacks sources, and archived master declarations. Verified all four proof steps, hypotheses, coefficient category, comparison morphism, interval preservation, edge cases, searches, and accepted tool uses. No repair is needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PullbackBoundedConstructible",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientBoundedConstructiblePullback_exact_and_interval",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.isBoundedConstructibleFiniteCoefficient_isTriangulated",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedPullback_preserves_boundedConstructible",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientBoundedConstructiblePullback",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientBoundedConstructiblePullback_commShift",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientBoundedConstructiblePullback_exact_and_interval"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackBoundedConstructible.lean",
+  "statement": "theorem finiteCoefficientBoundedConstructiblePullback_exact_and_interval (A : Type v) [CommRing A] (d : Scheme.CompleteCoefficientDatum A) [∀ m : ℕ, Finite (A ⧸ d.ideal ^ (m + 1))] (n : ℕ) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (_e : Λ ≃+* A ⧸ d.ideal ^ (n + 1)) {V' V : Scheme.{u}} (g : V' ⟶ V) : (finiteCoefficientBoundedConstructiblePullback g Λ).IsTriangulated ∧ ∀ (K : FiniteCoefficientBoundedConstructibleDerivedCategory V Λ) (a b : ℤ), (∀ i : ℤ, (i < a ∨ b < i) → IsZero ((_root_.DerivedCategory.homologyFunctor (FiniteCoefficientModules V Λ) i).obj K.obj)) → ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((_root_.DerivedCategory.homologyFunctor (FiniteCoefficientModules V' Λ) i).obj ((finiteCoefficientBoundedConstructiblePullback g Λ).obj K).obj)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-523dc802f",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Statement, dependencies, universes, edge cases, docstrings, canonical constructions, report sections, and compiler evidence verified; no repair needed."
  }
 }

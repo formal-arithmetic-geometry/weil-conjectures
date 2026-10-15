@@ -1,0 +1,101 @@
+{
+ "id": "def-pur-etale-derived-supported-sections",
+ "kind": "definition",
+ "title": "Étale derived global sections with closed support",
+ "status": "split",
+ "statement": "Let $R$ be a commutative ring, $X$ a scheme, and $W\\subseteq X$ an open subscheme [def-weil-open-immersion]. On the small etale site [def-weil-pbc-etale-site], for a sheaf $M$ of $R$-modules put $\\Gamma_{X\\setminus W}(X,M)=\\ker(\\Gamma(X,M)\\to\\Gamma(W,M|_W))$. This defines an additive left exact functor to $R$-modules, with its kernel inclusion into global sections. Define $R\\Gamma_{X\\setminus W}(X,-)$ on the bounded below derived category [def-weil-pbc-derived-categories] to be its right derived functor, computed on bounded below injective resolutions. Its cohomology modules are cohomology with support.",
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-restriction-triangle.md",
+  "place": "Statement: derived functor of sections supported on a closed subset; proof step 1: support kernel. Compare Stacks cohomology.tex, section-cohomology-support-bis, Tag 0G6Y."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kernel of restriction of global sections to the open complement of a closed support for etale module sheaves",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The additive functor of global sections of an etale sheaf of modules supported on a closed subset is the kernel of restriction to its open complement",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.kerFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"(Y : AlgebraicGeometry.Scheme) → CategoryTheory.Functor (CategoryTheory.Over Y)ᵒᵖ Y.IdealSheafData\", \"doc\": \"The functor assigns to each object in the opposite category of the over category over a scheme $ Y $ the kernel of its structure morphism as an ideal sheaf on $ Y $. For morphisms, it maps a morphism \"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U V : ↑X.affineOpens),\\n  I.ideal V ≤\\n    RingHom.ker\\n      (CommRingCat.Hom.hom\\n        (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.app (↑U).ι ↑V)\\n          (AlgebraicGeometry.Scheme.Hom.app (I.glueDataObjι U) ((Topologic\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and affine open subsets $U,V \\\\subseteq X$, the ideal $\\\\mathcal{I}(V)$ is contained in the kernel of the ring homomorphism obtained by composing the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  RingHom.ker (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop (I.glueDataObjι U))) =\\n    Ideal.comap (CommRingCat.Hom.hom (↑U).topIso.hom) (I.ideal U)\", \"doc\": \"For an affine open subset $U$ of a scheme $X$ and an ideal sheaf $\\\\mathcal{I}$, the kernel of the ring homomorphism $\\\\operatorname{Hom}_{\\\\text{appTop}}$ induced by the gluing data $\\\\mathcal{I}.\\\\text{g\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.Hom Y) [AlgebraicGeometry.QuasiCompact f] (U : Y.Opens)\\n  (V : ↑(↑U).affineOpens),\\n  (AlgebraicGeometry.Scheme.Hom.ker (f ∣_ U)).ideal V =\\n    f.ker.ideal ⟨(AlgebraicGeometry.Scheme.Hom.opensFunctor U.ι).obj ↑V, ⋯⟩\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact morphism of schemes, and let $U$ be an open subset of $Y$. For any affine open subset $V$ of the open subscheme $Y|_U$, the ideal associated to the kernel of the re\"}\n  {\"name\": \"ModuleCat.Tilde.exists_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))),\\n  ∀ x ∈ U,\\n    ∃ V,\\n      ∃ (_ : x ∈ V),\\n        ∃ i f g,\\n          ∃ (hg : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl),\\n            Mo\", \"doc\": \"For any section $ s $ of the sheaf $ \\\\widetilde{M} $ over an open subset $ U \\\\subseteq \\\\operatorname{Spec}(R) $, and for any point $ x \\\\in U $, there exists an open neighborhood $ V \\\\subseteq U $ of $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : ↑Y.affineOpens),\\n  (AlgebraicGeometry.Scheme.Hom.ker f).ideal U ≤\\n    RingHom.ker\\n      (CommRingCat.Hom.hom\\n        (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso (Y.presheaf.obj (Opposite.op ↑U))).inv\\n          (AlgebraicG\", \"doc\": \"For a scheme morphism $ f $ and an affine open subset $ U $, the ideal of the kernel sheaf on $ U $ is contained in the kernel of the ring homomorphism obtained by composing the inverse of the Γ-Spec \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerFunctor_map\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) {f g : (CategoryTheory.Over Y)ᵒᵖ} (hfg : f ⟶ g),\\n  Y.kerFunctor.map hfg = CategoryTheory.homOfLE ⋯\", \"doc\": \"For a scheme $Y$, given morphisms $f,g$ in the opposite category of the over category over $Y$, if there exists a morphism $f \\to g$, then the kernel functor maps this morphism to the unique inclusion \"}",
+   "date": "2026-10-15",
+   "verdict": "no match: scheme ideal kernels and etale loci are different notions"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedEtaleSections|sectionsWithSupport|derivedSupported",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "no Mathlib match; source has only the pro-etale sheaf-valued sectionsWithSupport, and project searches find no etale global supported-section functor"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-support-restriction-triangle",
+  "date": "2026-10-15",
+  "group": "Q24"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-support-restriction-triangle",
+   "place": "Statement defines RΓ_B and proof step 1 defines its section kernel for arbitrary etale module coefficients.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSupportedSections",
+  "declaration": "AlgebraicGeometry.Etale.supportedEtaleSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSupportedSections.lean",
+  "statement": "def supportedEtaleSections (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) (W : X.Opens) : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R) ⥤ ModuleCat.{u + 1} R",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportedEtaleSections",
+   "AlgebraicGeometry.Etale.supportedEtaleSectionsι",
+   "AlgebraicGeometry.Etale.supportedEtaleSections_additive",
+   "AlgebraicGeometry.Etale.derivedSupportedEtaleSections",
+   "AlgebraicGeometry.Etale.supportedEtaleSections_preservesFiniteLimits"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b23047860",
+  "group": "Q24",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b23047860",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, Lean modules, docstrings, edge cases, report sections, and exact declarations. Recompiled both files via scompile.py successfully; no substantive issues found."
+ }
+}
