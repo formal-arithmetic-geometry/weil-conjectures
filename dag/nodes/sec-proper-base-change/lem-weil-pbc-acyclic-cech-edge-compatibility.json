@@ -25,7 +25,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-sp-double-complex-total",
   "def-sp-left-exact-additive",
-  "lem-weil-pbc-right-derived-universal-delta-functor"
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-weil-pbc-site-cech-edge-normalization"
  ],
  "proof": [
   {
@@ -364,5 +365,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AcyclicCechEdgeCompatibility",
+  "declaration": "CategoryTheory.exists_acyclicCechEdge",
+  "file": "lean/Sheaf/CategoryTheory/AcyclicCechEdgeCompatibility.lean",
+  "statement": "theorem exists_acyclicCechEdge {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] {T : Type u} [Finite T] {U : C} (hU : IsTerminal U) (f : T → C) (hom : ∀ t, f t ⟶ U) (hcover : Presieve.ofArrows f hom ∈ J U) (S : SiteCechComplex f hom) : ∃! e : ∀ (A : Sheaf J.toGrothendieck AddCommGrpCat.{u}) (_hA : ∀ (p : ℕ) (t : Fin (p + 1) → T) (r : ℕ), 0 < r → IsZero (((sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op (S.W p t))).rightDerived r).obj A)) (q : ℕ), (S.cohomologyFunctor q).obj A.obj ⟶ ((sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q).obj A, (∀ A hA q, S.IsNormalizedEdge (sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u}) q (e A hA q) ∧ IsIso (e A hA q)) ∧ (∀ (A : Sheaf J.toGrothendieck AddCommGrpCat.{u}) hA (B : Sheaf J.toGrothendieck AddCommGrpCat.{u}) hB (g : A ⟶ B) (q : ℕ), (S.cohomologyFunctor q).map g.hom ≫ e B hB q = e A hA q ≫ ((sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q).map g)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.exists_acyclicCechEdge",
+   "CategoryTheory.acyclicCechEdge_siteChange",
+   "CategoryTheory.acyclicCechEdge_forgetModules"
+  ],
+  "note": "Three declarations render the abelian edge, site-change square, and module-forgetting square. Cohomology is right derived evaluation, the definition in the node; the landed object-cohomology bridge identifies it with Sheaf.H'. The added definition node pins both augmentations and their normalization using the existing chosen SiteCechComplex."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-17a25fc14",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, source passages, dependencies, signatures, normalization, compatibility clauses, and edge cases. Server compiles reproduced cleanly. No delivery errors found; contextual clone HEAD moved externally, as recorded."
  }
 }

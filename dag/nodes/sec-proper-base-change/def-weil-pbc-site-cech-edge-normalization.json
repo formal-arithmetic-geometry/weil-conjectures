@@ -1,0 +1,110 @@
+{
+ "id": "def-weil-pbc-site-cech-edge-normalization",
+ "kind": "definition",
+ "title": "Augmentation normalization of a chosen general-site Cech edge",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small category, $U\\in\\mathcal C$, and $S$ chosen tuple products for a family $U_i\\to U$, with Cech complex $\\check C_S$ [def-weil-pbc-site-cech-complex]. Let $\\mathcal E$ be an abelian category with enough injectives and $P:\\mathcal E\\to\\operatorname{Fun}(\\mathcal C^{op},\\mathbf{Ab})$ additive [def-sp-left-exact-additive]. For $A\\in\\mathcal E$ and an injective resolution $A\\to I$ [def-sp-injective-resolutions], define $D^{t,r}=\\check C_S^t(P(I^r))$ by applying the existing Cech functor termwise and exchanging indices. Its total $T_I$ uses $d_C+(-1)^t d_I$ [def-sp-double-complex-total]. Augmentation data consist of cochain maps $\\alpha_I:\\Gamma(U,P(I))\\to T_I$ and $\\beta_I:\\check C_S(P(A))\\to T_I$ whose degree-$n$ components are respectively restriction to every length-one tuple followed by inclusion at $(0,n)$, and the image of $A\\to I^0$ on every length-$(n+1)$ tuple followed by inclusion at $(n,0)$. Put $\\Gamma_P(U,-)=P(-)(U)$. An edge $e:\\check H_S^q(P(A))\\to R^q\\Gamma_P(U,-)(A)$ is normalized if for every $I$ there exist these specified augmentation maps, $\\alpha_I$ is a quasi-isomorphism, and $e$ followed by the injective-resolution identification and $H^q(\\alpha_I)$ is $H^q(\\beta_I)$. This condition specifies the normalization, not its existence or the acyclic-edge theorem.",
+ "stmt_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total",
+  "def-sp-left-exact-additive"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AX, label lemma-cech-cohomology, the termwise Cech double complex and the two augmentation maps alpha and beta; Tag 03FD uses the same construction in module sheaves."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech.*(edge|augmentation)|augmentation.*cech",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-15",
+   "verdict": "No normalized augmentation comparison for the chosen general-site SiteCechComplex; reuse the found resolution and Cech APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology acyclic covering canonical edge naturality injective resolution augmentation",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": []}",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology acyclic cover edge comparison compatible change of sites forgetting modules",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.CompatiblePreserving.compatible\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf\"]}",
+   "date": "2026-10-15",
+   "verdict": "No normalized augmentation comparison for the chosen general-site SiteCechComplex; reuse the found resolution and Cech APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\", \"isoRightDerivedObj\"",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc\"]}",
+   "date": "2026-10-15",
+   "verdict": "No normalized augmentation comparison for the chosen general-site SiteCechComplex; reuse the found resolution and Cech APIs."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-acyclic-cech-edge-compatibility",
+  "date": "2026-10-15",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "Proof, final paragraph: proper coherent base change identifies E tensor k′ with H¹ of the base-changed structure sheaf and carries Frobenius to Frobenius; canonical Cech edge compatibility used to justify this sentence",
+   "via": [
+    "lem-weil-pbc-acyclic-cech-edge-compatibility",
+    "lem-weil-pbc-coherent-frobenius-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteCechEdgeNormalization",
+  "declaration": "CategoryTheory.SiteCechComplex.IsNormalizedEdge",
+  "file": "lean/Sheaf/CategoryTheory/SiteCechEdgeNormalization.lean",
+  "statement": "def IsNormalizedEdge {A : E} (q : ℕ) (e : (S.cohomologyFunctor q).obj (P.obj A) ⟶ ((P ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q).obj A) : Prop",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.SiteCechComplex.resolutionDoubleComplex",
+   "CategoryTheory.SiteCechComplex.Augmentations",
+   "CategoryTheory.SiteCechComplex.IsNormalizedEdge"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-17a25fc14",
+  "group": "ND",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-17a25fc14",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, source passages, dependencies, signatures, normalization, compatibility clauses, and edge cases. Server compiles reproduced cleanly. No delivery errors found; contextual clone HEAD moved externally, as recorded."
+ }
+}
