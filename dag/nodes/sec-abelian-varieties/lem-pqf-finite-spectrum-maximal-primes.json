@@ -24,24 +24,20 @@
  ],
  "proof": [
   {
-   "text": "Fix a prime ideal \\$\\mathfrak p\\subset B\\$. By [lem-weil-pbc-finite-type-over-field-prime-intersection-maximal], \\$\\mathfrak p\\$ is the intersection of the maximal ideals containing it. There are only finitely many such maximal ideals because \\$\\operatorname{Spec}B\\$ is finite. If \\$\\mathfrak p\\$ were not maximal, each of these maximal ideals would strictly contain \\$\\mathfrak p\\$; choose \\$x_{\\mathfrak m}\\in\\mathfrak m\\setminus\\mathfrak p\\$ for each one. Their finite product lies in every \\$\\mathfrak m\\$, hence in their intersection \\$\\mathfrak p\\$, while primality of \\$\\mathfrak p\\$ implies that one factor \\$x_{\\mathfrak m}\\$ lies in \\$\\mathfrak p\\$, a contradiction. Thus every prime is maximal. If there are no maximal ideals above \\$\\mathfrak p\\$, the cited intersection is the whole ring, so it cannot equal the proper prime \\$\\mathfrak p\\$; hence the finite family is nonempty. The zero ring has empty spectrum, so the conclusion is vacuous there.",
-   "uses": [
-    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
-   ],
+   "text": "Use Mathlib’s finite-type characterization of quasi-finiteness. Since the whole prime spectrum is finite, every fiber over a prime of the field is finite, so `Algebra.QuasiFinite.iff_finite_comap_preimage_singleton` gives `Algebra.QuasiFinite k B`. The prime spectrum of a field is discrete, and `Algebra.QuasiFinite.discreteTopology_primeSpectrum` therefore gives a discrete topology on `PrimeSpectrum B`. Applying `PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero` yields `Ring.KrullDimLE 0 B`; finally `Ring.krullDimLE_zero_iff` gives `p.IsMaximal`.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0ALW (finite type algebra with finitely many prime ideals), equivalence of (1) and (2)"
+    "document": "Mathlib/RingTheory/QuasiFinite/Basic.lean",
+    "place": "Algebra.QuasiFinite.iff_finite_comap_preimage_singleton, Algebra.QuasiFinite.discreteTopology_primeSpectrum; Mathlib/RingTheory/Spectrum/Prime/Topology.lean: PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero; Mathlib/RingTheory/KrullDimension/Basic.lean: Ring.krullDimLE_zero_iff"
    }
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma 0ALW (finite type algebra with finitely many prime ideals), equivalence of (1) and (2)"
+  "by": "agent",
+  "document": "Mathlib/RingTheory/QuasiFinite/Basic.lean",
+  "place": "Finite spectrum implies quasi-finite, then discrete spectrum and Krull dimension zero"
  },
  "mathlib_searches": [
   {
@@ -117,5 +113,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T154153-L-158904",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

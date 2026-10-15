@@ -15013,3 +15013,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:41 L: merged deliver/B3/Sheaf.AlgebraicGeometry.ProEtaleQcqsSiteLimits (stage 3; reviewer PASS; first push; landing 20261015T154152-L-158608 (proof); batch 20261015T154146; modules 1; new nodes 0)
 - 15:41 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Sites.WContractibleCoverSection (stage 3; reviewer PASS; first push; landing 20261015T154152-L-158705 (interface); batch 20261015T154146; modules 1; new nodes 0; change records: coord/changes/WContractibleCoverSectionImports.md)
 - 15:41 L: merged deliver/B3/Sheaf.AlgebraicGeometry.WContractibleAffineEvaluation (stage 3; reviewer PASS; first push; landing 20261015T154152-L-158807 (proof); batch 20261015T154146; modules 1; new nodes 0)
+- 15:41 L: merged deliver/B4/Sheaf.RingTheory.FiniteSpectrumMaximalPrimes (stage 3; reviewer PASS; first push; landing 20261015T154153-L-158904 (proof); batch 20261015T154146; modules 1; new nodes 0)
