@@ -299,5 +299,23 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-8ea383c43 (reviewer sub-agent of L); spot-checked: Full review written to review.md. The item matches Stacks Tags 04DR/04DP, all seven proof steps and cited DAG statements check out, edge cases were tested, and no repairs or duplicate-node changes are required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralEtaleCoverDisjointRefinement",
+  "declaration": "AlgebraicGeometry.integral_etale_cover_disjoint_refinement",
+  "file": "lean/Sheaf/Paper/IntegralEtaleCoverDisjointRefinement.lean",
+  "statement": "theorem integral_etale_cover_disjoint_refinement {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegralHom f] (V : Y.Etale) (v : V.left) (I : Type w) (U : I → (CategoryTheory.Limits.pullback f V.hom : Scheme).Etale) (hU : ∀ x : (CategoryTheory.Limits.pullback f V.hom : Scheme), ∃ i : I, ∃ y : (U i).left, ((Scheme.Hom.toLRSHom' (U i).hom).base : TopCat.Hom _ _).hom y = x) : ∃ (V' : Y.Etale) (a : V' ⟶ V) (v' : V'.left), (Scheme.Hom.toLRSHom' a.left).base v' = v ∧ ∃ (J : Type u) (W : J → Scheme) (w : ∀ j, W j ⟶ pullback f V'.hom) (_ : ∀ j, IsOpenImmersion (w j)) (α : J → I) (b : ∀ j, W j ⟶ (U (α j)).left), Set.Pairwise Set.univ (fun j k => Disjoint (Set.range (((Scheme.Hom.toLRSHom' (w j)).base : TopCat.Hom _ _).hom)) (Set.range (((Scheme.Hom.toLRSHom' (w k)).base : TopCat.Hom _ _).hom))) ∧ (⋃ j, Set.range (((Scheme.Hom.toLRSHom' (w j)).base : TopCat.Hom _ _).hom)) = Set.univ ∧ (∀ j, b j ≫ (U (α j)).hom = w j ≫ CategoryTheory.Limits.pullback.map f V'.hom f V.hom (𝟙 X) a.left (𝟙 Y) (by simp) (by simp only [Category.comp_id]; exact a.w.symm))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ad6daac0a",
+  "group": "NC",
+  "result": "pass",
+  "note": "Wrote review.md. Verified source tags, dependencies, every statement clause, universes, empty cases, docstrings, and verbatim signature. Server-only compilation passed in 1.6 seconds. No project clone or branch changes."
  }
 }
