@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.FilteredTwoColimit
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.AlgebraicGeometry.CondensedDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars
 import Sheaf.AlgebraicGeometry.SplitCoefficientDerivedFaithful
@@ -16,6 +17,7 @@ import WeilConjectures.ConstructibleSheaf.OpenClosed
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import Sheaf.Paper.CondensedFinitePresentationDescent
 import Sheaf.Paper.CondensedSheafExtContinuity
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Category.ULift
 import Mathlib.CategoryTheory.Filtered.Final
 import Sheaf.AlgebraicGeometry.CondensedCoefficientComplexPresentation
