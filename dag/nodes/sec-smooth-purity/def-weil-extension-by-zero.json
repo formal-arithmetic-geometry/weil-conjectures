@@ -96,24 +96,25 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e91701d45",
-  "group": "NK",
+  "reviewer": "NT-stage2-Codex-f2309a039",
+  "group": "NX",
   "result": "pass",
-  "note": "Reviewed the immutable snapshot and exact framework declarations; canonical comparison and coherence match the node and sources. Dependency repair is valid, signature is verbatim, report sections are substantive, and scompile.py passed without errors or warnings."
+  "note": "Wrote review.md. Checked source, all statement dependencies, exact declarations, canonical arrows, universes, edge cases, docstrings, report sections, and verbatim signature. Immutable module compiled cleanly through scompile.py with the local side overlay. No fixes needed; branch unchanged."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs",
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs",
   "declaration": "AlgebraicGeometry.ProEtale.openImmersionLowerShriek",
   "declarations": [
    "AlgebraicGeometry.ProEtale.openImmersionLowerShriek",
    "AlgebraicGeometry.ProEtale.openImmersionLowerShriekAdjunction",
-   "AlgebraicGeometry.ProEtale.localizationLowerShriek_eq"
+   "AlgebraicGeometry.ProEtale.localizationLowerShriek_eq",
+   "AlgebraicGeometry.ProEtale.openImmersionLowerShriekUpperStarAdjunction"
   ],
   "statement": "def openImmersionLowerShriek :\n    Sheaf (Scheme.ProEt.topology U) A ⥤ Sheaf (Scheme.ProEt.topology X) A",
   "branch": "slopmaster2",
-  "by": "NK",
+  "by": "NX",
   "date": "2026-10-15",
   "existing": true,
-  "note": "The previous Scheme.proEtaleExtensionByZero interface has domain modules on X.ProEt/U over A_X.over U, rather than fixed-coefficient module sheaves on U.ProEt, and cannot compose with the recorded comparisonUpperStar (ModuleCat A). The existing upstream openImmersionLowerShriek specialized to ModuleCat.{u+1} A is the same extension by zero in the fixed-coefficient presentation: left Kan extension along localization followed by sheafification (localizationLowerShriek_eq). Since j is monic, its comma category is empty or has a terminal factorization, giving precisely M(V→U) or zero. The constant-sheaf module structure is equivalently the sectionwise A-action, as in the comparison dependency. The existing adjunction fixes the canonical maps. No arbitrary map, strengthened hypothesis, or new definition is introduced."
+  "note": "The old LowerShriek.OpenImmersion.Defs module imports the legacy UpperLowerStar.Defs and collides with the relocated FiniteCoefficient.UpperLowerStar.Defs already imported by the recorded inverse-image dependency (compiler: environment already contains AlgebraicGeometry.ProEtale.«term(_)_*[_]»). The published FiniteCoefficient.LowerShriek.Open.Defs gives the same declarations and full signatures, with imports relocated to the compatible framework. Specializing to ModuleCat.{u+1} Λ gives exactly the extension-by-zero presheaf followed by sheafification; localizationLowerShriek_eq records that construction. The additional recorded adjunction is the canonical transport to the same upperStar used by proEtaleSheafInverseImage. No notion, hypothesis or construction changes."
  }
 }
