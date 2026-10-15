@@ -18,7 +18,8 @@
  },
  "stmt_deps": [
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-ringed-tensor-square-presentation"
  ],
  "proof": [
   {
@@ -219,5 +220,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-18f523d78",
+  "group": "NY",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable modules, nodes, dependencies, canonical constructions, source diagram, hypotheses, naturality, universes, edge cases and pilot gates. Both modules reproduced clean scompile.py compiles. No repairs required; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedExchangeTensorCoherence",
+  "declaration": "SheafOfModules.ringedExchangeTensorCoherence",
+  "declarations": [
+   "SheafOfModules.RingedTensorSquare.complexComparison",
+   "SheafOfModules.RingedTensorSquare.derivedComparison_existsUnique",
+   "SheafOfModules.RingedTensorSquare.derivedComparison",
+   "SheafOfModules.RingedTensorSquare.exchange",
+   "SheafOfModules.RingedTensorEdge.projection",
+   "SheafOfModules.RingedTensorSquare.projectionFirst",
+   "SheafOfModules.RingedTensorSquare.exchangeFirst",
+   "SheafOfModules.ringedExchangeTensorCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/RingedExchangeTensorCoherence.lean",
+  "statement": "theorem ringedExchangeTensorCoherence (s : RingedTensorSquare Y X Y' X' f g h k) (aY : RingedTensorModel Y) (aX : RingedTensorModel X) (aY' : RingedTensorModel Y') (aX' : RingedTensorModel X') : (∀ (E : DerivedCategory (SheafOfModules.{u} ((sheafCompose X.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj X.ring))) (Q : DerivedCategory (SheafOfModules.{u} ((sheafCompose Y.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj Y.ring))), s.projectionFirst aY aX aX' E Q = s.exchangeFirst aY aY' aX' E Q) ∧ ∀ (E E' : DerivedCategory (SheafOfModules.{u} ((sheafCompose X.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj X.ring))) (Q Q' : DerivedCategory (SheafOfModules.{u} ((sheafCompose Y.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj Y.ring))) (v : E ⟶ E') (z : Q ⟶ Q'), g.left.map (Y.tensor.map (CategoryTheory.Prod.mkHom (f.right.map v) z)) ≫ s.projectionFirst aY aX aX' E' Q' = s.projectionFirst aY aX aX' E Q ≫ k.right.map (X'.tensor.map (CategoryTheory.Prod.mkHom (h.left.map v) (k.left.map (g.left.map z))))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

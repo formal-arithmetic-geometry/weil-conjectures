@@ -1,0 +1,103 @@
+{
+ "id": "def-weil-pbc-ringed-tensor-square-presentation",
+ "kind": "definition",
+ "title": "Representative presentation of a commutative ringed tensor square",
+ "status": "split",
+ "statement": "Fix a universe of module sheaves and small sites. A corner presentation consists of a small site, a sheaf of commutative rings R, its unbounded derived category D(R), and a bifunctor T:D(R)×D(R)→D(R) with its natural identification with total tensor on pairs of K-flat complexes with flat terms, as in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. An edge presentation from the R-corner to the S-corner (the direction of inverse image) consists of a geometric inverse image I with its right adjoint, its algebraic lift [def-weil-pbc-algebraic-inverse-image], a ring map c:I(R)→S, the additive module pullback P(M)=S⊗_{I(R)}I(M) on objects and morphisms, its module right adjoint, its total left derived functor L with its derived comparison, and a right adjoint U of L with an adjunction L⊣U. Right adjoints are models of the ordinary and derived module direct images; their unique adjunction-compatible identifications allow any such models. Retain the canonical ordinary tensor comparison, including its scalar-insertion maps q and generalized pure-tensor equation, from [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For corners Y,X,Y',X' and edges f:Y→X, g:Y→Y', h:X→X', k:Y'→X' in this inverse-image direction, a ringed square presentation consists of a natural isomorphism α:I_k I_g≅I_h I_f on sheaves of sets and its linear module comparison a:P_k P_g≅P_h P_f, characterized by\n$$a_M\\,q_k(P_gM)\\,I_k(q_g(M))=q_h(P_fM)\\,I_h(q_f(M))\\,α_{|M|}.$$\nHere q_u:I_u|M|→|P_uM| is specifically insertion of 1 in extension of scalars, and all terms use the algebraic-lift underlying-sheaf identifications. Linearity and this generator equation express compatibility with the structural ring maps, and fix the module comparison uniquely. There is no cartesianness or flatness condition, and no derived-square tensor coherence is included as data. The edge derived tensor comparison is the unique representative-normalized comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback].",
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0E48 remark-compatible-with-diagram; 0D6D lemma-derived-pullback-composition; 07A4 lemma-pullback-tensor-product; Modules on Sites 03EL for scalar insertion"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Commutative square of ringed topoi with canonical module pullback comparisons on generalized elements",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative square of ringed topoi, module pullback comparison induced by an inverse image natural isomorphism and compatible ring maps",
+   "results": "SheafOfModules.pullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-15",
+   "verdict": "no exact match: these use continuous site functors, not arbitrary geometric inverse images with a specified ringed commutation isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "RingedTensorSquare|RingedTensorCorner|RingedTensorEdge in dag/nodes, Mathlib, WeilConjectures and lean/Sheaf; blueprint_refs.py search \"ringed square\"; ringed commutation and square statements in DAG",
+   "results": "No hits for proposed declaration names in any tree; 0 blueprint nodes match ringed square. Existing ambient-ringed-exchange and proetale-derived-pullback-composition are pro-etale scheme specializations with coefficient-ring isomorphisms, not presentations of arbitrary ringed squares. Existing RingedToposMorphism packages a single morphism; AlgebraicInverseImage and CanonicalRingedTensorComparison supply the algebraic and tensor data reused here.",
+   "date": "2026-10-15",
+   "verdict": "no existing general square presentation; existing ingredients reused"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "date": "2026-10-15",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (b): the ringed-topos square comparing coefficient normalization and the etale-to-proetale comparison",
+   "via": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.RingedTensorSquarePresentation",
+  "declaration": "SheafOfModules.RingedTensorSquare",
+  "declarations": [
+   "SheafOfModules.RingedTensorCorner",
+   "SheafOfModules.RingedTensorModel",
+   "SheafOfModules.RingedTensorEdge",
+   "SheafOfModules.RingedTensorEdge.tensorComparison",
+   "SheafOfModules.RingedTensorEdge.insertion",
+   "SheafOfModules.RingedTensorSquare"
+  ],
+  "file": "lean/Sheaf/Paper/RingedTensorSquarePresentation.lean",
+  "statement": "structure RingedTensorSquare (Y X Y' X' : RingedTensorCorner.{u, w}) (f : RingedTensorEdge Y X) (g : RingedTensorEdge Y Y') (h : RingedTensorEdge X X') (k : RingedTensorEdge Y' X')",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-18f523d78",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-18f523d78",
+  "group": "NY",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable modules, nodes, dependencies, canonical constructions, source diagram, hypotheses, naturality, universes, edge cases and pilot gates. Both modules reproduced clean scompile.py compiles. No repairs required; branch head unchanged."
+ }
+}
