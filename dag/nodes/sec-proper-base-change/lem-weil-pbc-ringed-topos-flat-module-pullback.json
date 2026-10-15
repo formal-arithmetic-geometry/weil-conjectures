@@ -22,7 +22,8 @@
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-algebraic-inverse-image"
  ],
  "proof": [
   {
@@ -221,5 +222,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback",
+  "declaration": "SheafOfModules.isFlat_ringedToposPullback",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/RingedToposFlatPullback.lean",
+  "statement": "theorem isFlat_ringedToposPullback {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.HasSheafCompose (CategoryTheory.forget CommRingCat.{r} ⋙ uliftFunctor.{max r m, r})] [K.HasSheafCompose (CategoryTheory.forget CommRingCat.{r} ⋙ uliftFunctor.{max r m, r})] [J.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{max r m} ⋙ uliftFunctor.{r, max r m})] [K.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{max r m} ⋙ uliftFunctor.{r, max r m})] [J.WEqualsLocallyBijective AddCommGrpCat.{max r m}] [HasWeakSheafify J AddCommGrpCat.{max r m}] [K.WEqualsLocallyBijective AddCommGrpCat.{max r m}] [HasWeakSheafify K AddCommGrpCat.{max r m}] {R : Sheaf J CommRingCat.{r}} {RI S : Sheaf K CommRingCat.{r}} (uInv : Sheaf J (Type (max r m)) ⥤ Sheaf K (Type (max r m))) (uPush : Sheaf K (Type (max r m)) ⥤ Sheaf J (Type (max r m))) (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] (I : AlgebraicInverseImageOfUniverses uInv R RI) (c : RI ⟶ S) (F : ringedSiteModules.{max r m, r, vC, uC} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (hF : IsFlatOnSite F) : IsFlatOnSite (changeOfRingsOfUniverses (J := K) c (I.modules.obj F))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1bbc89044",
+  "group": "NA",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, source, Lean declarations, docstrings, edge cases, and report sections. Recompiled all four delivered modules via scompile.py successfully; no substantive or mechanical faults found."
  }
 }
