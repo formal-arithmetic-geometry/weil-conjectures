@@ -1,6 +1,6 @@
 # Work queue
 
-70 items; claim with `tools/claim.py next <group> [--stage N]`.
+68 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (70)
+## Stage 3: modules to prove (68)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -68,8 +68,6 @@
 | `Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedSliceExtensionExactness` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedSliceExtensionTensor` | 9 | 1 | proof |
-| `Sheaf.CategoryTheory.SmallSetOfCoveringFamilies` | 9 | 1 | proof |
-| `Sheaf.CategoryTheory.SpecialCocontinuousSheafEquivalence` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionLimit` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergAcyclicAugmentation` | 10 | 1 | proof |
