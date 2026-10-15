@@ -23,7 +23,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-pur-kinjective-complex",
-  "prop-pur-kinjective-resolutions-exist"
+  "prop-pur-kinjective-resolutions-exist",
+  "def-weil-pbc-ringed-topos-morphism"
  ],
  "proof": [
   {
@@ -342,5 +343,23 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-00c815c4d (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, seven proof steps, sources, and unit/chapter route. Stacks 0D6E/0D6D/07A6 and 0FND support composition and the explicit Q(g_*j) normalization. Checked nonflat coefficients, unboundedness, resolution independence, duplicates, and cycles. No new nodes or repairs. Accepted declared generic tools; no target-level coefficient comparison is certified. Details in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9add335fc",
+  "group": "NH",
+  "result": "pass",
+  "note": "Checked all statement clauses, dependencies, ringed-topos laws, normalization, universes, edge cases, exact signatures, docstrings, and report sections. Server compiles reproduced cleanly; no delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition",
+  "declaration": "CategoryTheory.ringedToposDerivedPushforwardComposition",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposDerivedPushforwardComposition.lean",
+  "statement": "theorem ringedToposDerivedPushforwardComposition {C D E : Type u} [SmallCategory C] [SmallCategory D] [SmallCategory E] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (L : GrothendieckTopology E) (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u}) (R : Sheaf L CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))] [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B))] [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose L (forget₂ CommRingCat RingCat)).obj R))] (f : RingedToposMorphism ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A) ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) (g : RingedToposMorphism ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B) ((sheafCompose L (forget₂ CommRingCat RingCat)).obj R)) : ∃ (Rf : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) ⥤ DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B))) (Rg : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) ⥤ DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose L (forget₂ CommRingCat RingCat)).obj R))) (Rgf : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) ⥤ DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose L (forget₂ CommRingCat RingCat)).obj R))) (ηf : f.modules.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ Rf) (ηg : g.modules.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ Rg) (ηgf : (f.modules ⋙ g.modules).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ Rgf), Rf.IsRightDerivedFunctor ηf (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) (ComplexShape.up ℤ)) ∧ Rg.IsRightDerivedFunctor ηg (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) (ComplexShape.up ℤ)) ∧ Rgf.IsRightDerivedFunctor ηgf (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) (ComplexShape.up ℤ)) ∧ (∀ (I : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) ℤ), I.IsKInjective → IsIso (ηf.app I) ∧ IsIso (ηgf.app I)) ∧ (∀ (T : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) ℤ), T.IsKInjective → IsIso (ηg.app T)) ∧ ∃! κ : Rgf ≅ Rf ⋙ Rg, (∀ (M : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) ℤ), ηgf.app M ≫ κ.hom.app (DerivedCategory.Q.{w}.obj M) = ηg.app ((f.modules.mapHomologicalComplex (ComplexShape.up ℤ)).obj M) ≫ Rg.map (ηf.app M)) ∧ ∀ (I : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) ℤ), I.IsKInjective → ∀ (T : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) ℤ), T.IsKInjective → ∀ (j : (f.modules.mapHomologicalComplex (ComplexShape.up ℤ)).obj I ⟶ T), ∀ [QuasiIso j], QuasiIso ((g.modules.mapHomologicalComplex (ComplexShape.up ℤ)).map j) ∧ ηgf.app I ≫ κ.hom.app (DerivedCategory.Q.{w}.obj I) = DerivedCategory.Q.{w}.map ((g.modules.mapHomologicalComplex (ComplexShape.up ℤ)).map j) ≫ ηg.app T ≫ Rg.map (inv (DerivedCategory.Q.{w}.map j) ≫ ηf.app I)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
