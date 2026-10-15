@@ -15209,3 +15209,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:22 L: merged deliver/N4/Sheaf.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFunctors (stage 3; reviewer PASS; first push; landing 20261015T212221-L-1981801 (proof); batch 20261015T212213; modules 1; new nodes 0)
 - 21:22 L: merged deliver/R1/Sheaf.CategoryTheory.SheafSubcategoryComparison (stage 3; reviewer PASS; first push; landing 20261015T212227-L-1982751 (proof); batch 20261015T212213; modules 1; new nodes 0)
 - 21:28 L: returned deliver/B3/Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedCounit (reviewer RETURN: (the landing tools, head 7c5204286) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 21:28 L: returned deliver/G3/Sheaf.AlgebraicGeometry.EtaleOpenCohomologyRestrictionCompatibility (reviewer RETURN: (the landing tools, head b6b40dfe4) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
