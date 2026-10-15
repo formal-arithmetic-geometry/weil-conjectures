@@ -25,43 +25,45 @@
  ],
  "proof": [
   {
-   "text": "The right adjoint V preserves finite limits, hence finite products. Transport the underlying additive group sheaves through L and V using internal commutative group objects and sectionwise reconstruction. Their addition diagrams are the respective product-comparison diagrams.",
-   "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
-   ],
-   "elementary": false
+   "text": "Construct the internal commutative group object of a module sheaf using its actual sectionwise zero, addition and negation. Give each finite-product-preserving functor the braided monoidal structure from chosen products. Apply Functor.mapCommGrp and evaluate its group diagrams on sections to obtain the transported sectionwise additive groups. The right adjoint preserves limits by Adjunction.rightAdjoint_preservesLimits.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Transport the scalar action by the inverse product comparison. The two distributivity diagrams follow from product preservation and the given addition comparisons. The multiplicative associativity and unit diagrams follow in the same way; compatibility of eR with multiplication and its being invertible also identify the multiplicative unit. Evaluate these diagrams on sections to obtain the module laws.",
-   "uses": [
-    "lem-weil-pbc-cartesian-scalar-distributivity-transport",
-    "lem-weil-pbc-transport-scalar-action-diagrams"
-   ],
-   "elementary": false
+   "text": "Construct the actual sectionwise ring monoid and module action. Use the proved source-library Functor.modObjObj and Mod.scalarRestriction to transport the multiplicative module laws. Prove the two distributivity diagrams directly by mapping their source diagrams, using naturality of the product comparison and its projection equations. Evaluate the diagrams on sections, and deduce the zero laws by additive cancellation.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Naturality of the action and the additive operations makes restriction maps semilinear. The underlying presheaf is already a set sheaf, so the section modules form a module sheaf. Apply the same formulas to a source linear map; its operation diagrams remain commutative, giving I on maps and its underlying natural isomorphism.",
+   "text": "Use the sectionwise module structures to construct a PresheafOfModules, with restriction maps linear by naturality of the transported action and addition. Its underlying set presheaf is the already existing image sheaf, so it is a sheaf. Map module homomorphisms by the functor, prove linearity from the mapped operation diagrams, and obtain the module-sheaf functor with the identity underlying natural isomorphism.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true
   },
   {
-   "text": "For V(H), restrict the transported VS action along the adjunct R→VS of eR⁻¹;c. This adjunct preserves ring operations by the product mate formula and the given ring comparison. V on linear maps gives P and eP. Define k by the inverse product comparison of V applied to the pair of this adjunct and eP. Its two projection equations follow from the product universal property; its scalar equation is the definition of the action.",
+   "text": "Identify the supplied addition and multiplication maps with the actual sectionwise operations by extensionality. Convert their binary-product comparison equations into monoidal equations. Multiplication compatibility of the ring isomorphism identifies the transported monoid structure with the ordinary ring monoid by MonObj.ext, and hence forces unit compatibility. Apply the preceding construction to L and this ring isomorphism to obtain I.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For P, take the adjunct d of eR inverse followed by the given ring-sheaf map c. Compute mates of a binary-operation diagram by testing its two product projections, and the mate of a constant diagram by terminal uniqueness. The inverse ring comparison and c preserve addition, multiplication and one, so these mate formulas prove the required operation equations for d. Apply the same explicit module-sheaf construction to V and d.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Relate the chosen categorical binary products to the cartesian monoidal products by the unique map with the same two projections. Its naturality and its compatibility with functor product comparisons prove the two addition equations and the scalar equation for I. For H define k as prod.map d identity followed by the inverse binary-product comparison for V. The projection equations follow from the comparison API, and the scalar equation is the definition of the transported action.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sheaf-algebraic-structures-abelian-component",
-  "lem-weil-pbc-cartesian-scalar-distributivity-transport",
-  "lem-weil-pbc-transport-scalar-action-diagrams",
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03D1 and 03D2, lemma-pushforward-module and lemma-pullback-module; construction part of Tag 03D7; finite-product comparisons make the operation transport explicit"
+  "place": "Tags 03D1 and 03D2, lemma-pushforward-module and lemma-pullback-module, construction part of Tag 03D7; direct implementation by A4 using Mathlib internal commutative groups and Cartesian monoidal comparisons, the proved WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod transport of multiplicative actions, and explicit distributivity and adjunction-mate calculations."
  },
  "mathlib_searches": [
   {
@@ -146,11 +148,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-7aa7f",
   "group": "A4",
   "result": "pass",
-  "landing": "20261015T183808-L-842829",
+  "landing": "20261015T195757-L-1299441",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered theorem with its unchanged signature and node statement, checked the proof and DAG route, compiled the delivery and sole direct importer, and verified permitted axioms for all helpers and the theorem."
  }
 }
