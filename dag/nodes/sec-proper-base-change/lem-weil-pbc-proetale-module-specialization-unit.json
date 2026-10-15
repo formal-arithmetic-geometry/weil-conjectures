@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-proetale-module-specialization-unit",
+ "kind": "statement",
+ "title": "Module unit on an affine weakly contractible closed specialization neighbourhood",
+ "statement": "Let i:Z to X be a closed immersion of schemes and V an affine object of the small pro-etale site of X [def-pc-scheme, def-weil-closed-immersion, def-weil-pbc-proetale-site]. Suppose every epimorphism of set sheaves is surjective on V-sections, and every point of V specializes to a point of V times_X Z. For any commutative ring sheaf A on X, and any adjunction between the constructed module inverse image i^-1_A and ring-unit scalar-restricted direct image [def-weil-proetale-inverse-image, def-weil-sheaf-of-modules-category], its unit is bijective on V-sections at every A-module sheaf M.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AC (lemma-compute-i-star), with Modules on Sites Tags 03D2 and 03D3 for the module-unit comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The abelian specialization theorem makes the actual abelian unit invertible on V-sections. Transport the adjunction through the strict AsSmall sheaf equivalences; uniqueness of left adjoints gives the same result for the canonical model-site abelian unit.",
+   "uses": [
+    "lem-weil-pbc-proetale-specialization-restriction-sections",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual model ring unit presents set inverse image. Apply the module/abelian comparison retaining its unit equation. Evaluating this equation shows the model module unit is an isomorphism on sections.",
+   "uses": [
+    "lem-weil-pbc-proetale-model-ring-presentation",
+    "lem-weil-pbc-module-inverse-image-unit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the model module adjunction with the two module site equivalences. Their unit maps and the direct-image comparison are isomorphisms. The resulting actual-site unit is therefore bijective on V. Any other adjunction differs by the unit-compatible left-adjoint uniqueness isomorphism, preserving bijectivity.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-module-inverse-image-unit-comparison",
+  "lem-weil-pbc-proetale-model-ring-presentation",
+  "lem-weil-pbc-proetale-specialization-restriction-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AC (lemma-compute-i-star), with Modules on Sites Tags 03D2 and 03D3 for the module-unit comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Underlying sheaf module pullback comparison respects adjunction unit",
+   "results": "Eight hits: pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, pullbackObjUnitToUnit, pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, pullbackIso, PullbackConstruction.adjunction and free-module comparison lemmas. None compares the underlying varying-ring module inverse image with abelian inverse image respecting units.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use scalar-action adjunction and uniqueness of left adjoints."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "No hits: remote index reports unknown identifier. Local Mathlib CategoryTheory/Adjunction/Unique.lean provides the unit equation and is used.",
+   "date": "2026-10-16",
+   "verdict": "Generic adjunction comparison available locally; specialization/module comparison absent."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*unit|unit.*underlying",
+   "results": "Thirteen hits, including functorCategory_inverseImage_isomorphisms_unit, unrelated scalar units, and bicategorical unitors. No module inverse-image unit comparison.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The underlying abelian sheaf of a module inverse image comparison respects its adjunction unit, and the unit on sections of an affine closed-specialization neighbourhood is bijective",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleRingedLocalizationSequence",
+  "date": "2026-10-16",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-ringed-localization-sequence",
+   "place": "Ringed localization proof: identify the actual closed unit on specialization neighbourhoods.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleSpecializationUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleSpecializationUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_module_unit_bijective_of_specialization",
+  "statement": "theorem proEtale_module_unit_bijective_of_specialization\n    {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (V : X.ProEt) [IsAffine V.left]\n    (hweak : ∀ (P Q : Sheaf (ProEt.topology X) (Type (u + 1))) (φ : P ⟶ Q),\n      Epi φ → Function.Surjective (φ.hom.app (op V)))\n    (hspec : ∀ x : V.left, ∃ z : ↥(pullback V.hom i),\n      Specializes x ((pullback.fst V.hom i) z))\n    (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (ai : proEtaleModuleInverseImage i A ⊣\n      (SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange i)\n      (J := ProEt.topology X) (K := ProEt.topology Z)\n      (S := ((sheafCompose (ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) (R := ((sheafCompose (ProEt.topology Z)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj A)))\n      ⟨Functor.whiskerRight\n        ((proEtaleSheafAdjunction i CommRingCat.{u + 1}).unit.app A).hom\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩))\n    (M : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) :\n    Function.Bijective ((ai.unit.app M).val.app (op V))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-72f61",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261015T224820-L-2950274",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-72f61",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261015T224820-L-2950274",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched packet, compiled cleanly, target signature matched repository, and direct importer compiled"
+ }
+}

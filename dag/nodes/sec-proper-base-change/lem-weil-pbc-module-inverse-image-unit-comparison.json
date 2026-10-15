@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-module-inverse-image-unit-comparison",
+ "kind": "statement",
+ "title": "Underlying module inverse-image comparison compatible with the unit",
+ "statement": "Let C,D be small sites in the same universe, F:C to D continuous and representably flat, and assume set-sheaf pullback along F preserves finite limits. Let A on C and B on D be ring sheaves, with structural map phi:A to F_*B [def-weil-sheaf-of-modules-category]. Suppose the underlying set sheaves of A,B carry a pullback-unit presentation p whose unit is the underlying map of phi [def-weil-pbc-sheaf-pullback-unit-presentation]. Let L be the chosen module pullback along phi, and U_A,U_B the forgetful functors to abelian sheaves. There exists a natural isomorphism e:L;U_B to U_A;F^-1_Ab such that, for every M, U_A(eta_module(M)) followed by F_*(e_M) equals eta_Ab(U_A(M)).",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D3: construction of module inverse image and its adjunction; retain the unit equation of the underlying abelian adjunction."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheaf-pullback-unit-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical forgetful comparison to present the abelian inverse image and its unit as set inverse image. Tensoring with the given ring presentation shows that maps out of ring-times-module inverse image are detected on unit pairs.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
+    "lem-weil-pbc-sheaf-pullback-unit-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the scalar action on the actual abelian inverse image, with linear unit and semilinear restrictions. The unit generators detect linearity of adjuncts.",
+   "uses": [
+    "lem-weil-pbc-module-inverse-image-action-of-presentations",
+    "lem-weil-pbc-module-inverse-image-action-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the abelian adjunction to linear maps. Its unit comparison is part of the lifted-adjunction construction. Compare the chosen module pullback with this left adjoint by uniqueness; the unit equation for the uniqueness isomorphism gives the claimed equality.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-module-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-module-adjunction",
+  "lem-weil-pbc-module-inverse-image-action-adjunction",
+  "lem-weil-pbc-module-inverse-image-action-of-presentations",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison",
+  "lem-weil-pbc-sheaf-pullback-unit-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D3: construction of module inverse image and its adjunction; retain the unit equation of the underlying abelian adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Underlying sheaf module pullback comparison respects adjunction unit",
+   "results": "Eight hits: pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, pullbackObjUnitToUnit, pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, pullbackIso, PullbackConstruction.adjunction and free-module comparison lemmas. None compares the underlying varying-ring module inverse image with abelian inverse image respecting units.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use scalar-action adjunction and uniqueness of left adjoints."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "No hits: remote index reports unknown identifier. Local Mathlib CategoryTheory/Adjunction/Unique.lean provides the unit equation and is used.",
+   "date": "2026-10-16",
+   "verdict": "Generic adjunction comparison available locally; specialization/module comparison absent."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*unit|unit.*underlying",
+   "results": "Thirteen hits, including functorCategory_inverseImage_isomorphisms_unit, unrelated scalar units, and bicategorical unitors. No module inverse-image unit comparison.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The underlying abelian sheaf of a module inverse image comparison respects its adjunction unit, and the unit on sections of an affine closed-specialization neighbourhood is bijective",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleRingedLocalizationSequence",
+  "date": "2026-10-16",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-ringed-localization-sequence",
+   "place": "Ringed localization proof: identify the actual closed unit on specialization neighbourhoods.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ModuleInverseImageUnitComparison",
+  "file": "lean/Sheaf/CategoryTheory/ModuleInverseImageUnitComparison.lean",
+  "declaration": "SheafOfModules.inverseImage_underlying_unit_of_ring_presentation",
+  "statement": "theorem inverseImage_underlying_unit_of_ring_presentation\n    [RepresentablyFlat F] [PreservesFiniteLimits (sheafPullback F (Type u) J K)]\n    (pr : SheafPullbackUnitPresentation (F := F)\n      ((sheafCompose J (CategoryTheory.forget RingCat.{u})).obj A)\n      ((sheafCompose K (CategoryTheory.forget RingCat.{u})).obj B))\n    (hr : pr.unit = (sheafCompose J (CategoryTheory.forget RingCat.{u})).map φ) :\n    ∃ e : pullback.{u} φ ⋙ toSheaf B ≅\n      toSheaf A ⋙ sheafPullback F AddCommGrpCat.{u} J K,\n      ∀ M, (toSheaf A).map ((pullbackPushforwardAdjunction φ).unit.app M) ≫\n        (F.sheafPushforwardContinuous AddCommGrpCat.{u} J K).map (e.hom.app M) =\n        (sheafAdjunctionContinuous F AddCommGrpCat.{u} J K).unit.app\n          ((toSheaf A).obj M)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-72f61",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261015T224820-L-2950274",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-72f61",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261015T224820-L-2950274",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched packet, compiled cleanly, target signature matched repository, and direct importer compiled"
+ }
+}

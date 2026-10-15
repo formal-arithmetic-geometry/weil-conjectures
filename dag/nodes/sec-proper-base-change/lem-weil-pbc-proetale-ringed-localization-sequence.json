@@ -20,44 +20,55 @@
  ],
  "proof": [
   {
-   "text": "Form the counit $\\epsilon:j_!j^{-1}M\\to M$ and unit $\\eta:M\\to i_*i^{-1}M$. The affine covering-family node first gives a cover by affine objects $T=\\operatorname{Spec}C$ in the fixed small site. For each such $C$, choose an infinite $\\mathcal U$-small cardinal $\\kappa\\geq |C|$ and apply the bounded ring-extension node. It supplies a one-member pro-etale covering $V=\\operatorname{Spec}R\\to T$ with $|R|\\leq\\kappa^{2^{2^{2^\\kappa}}}$ and, crucially, retractions of every faithfully flat weakly etale map out of $R$. The bound is still $\\mathcal U$-small: a Grothendieck universe is closed under power sets and function sets. Prime ideals, localizations, and the structure sheaf of $\\operatorname{Spec}R$ are built from subsets, quotients of pairs, and function sets of $R$, so the resulting affine scheme is $\\mathcal U$-bounded; choose its representative in the site's skeleton. Ind-etale maps are weakly etale, and weakly etale maps compose, by the stability node. Thus $V\\to X$ is an object of the same small site. These refinements cover every original object by the transitivity axiom of a site. We now use the ring splitting property furnished by the ring-extension statement itself, rather than infer it for unrestricted algebras from small-site weak contractibility. Write $V_Z=V\\times_X Z=\\operatorname{Spec}(R/I)$. Clause (3) of the qcqs-morphism permanence node makes the base change $V\\times_X U\\to V$ of the quasi-compact $j$ quasi-compact. Since $V$ is affine, its inverse image of the affine open $V$ is the whole $V\\times_X U=V\\setminus V_Z$, which is consequently a quasi-compact open, and $V\\setminus V_Z=\\bigcup_{f\\in I}D(f)$ by the definition of $V(I)$. Basic opens are open; compactness selects finitely many $f_k\\in I$ covering this complement, so $V(I)=V(f_1,\\ldots,f_r)$. The closed-localization node gives a covering of $V$ by $V_k=\\operatorname{Spec}R_{f_k}$ and $V^\\sim=\\operatorname{Spec}S^{-1}R$, where $S$ consists of elements invertible modulo $I$. On each $V_k$, step 1 identifies $\\epsilon$ with the identity and the target of $\\eta$ with zero. Every point of $V^\\sim$ specializes into its closed fibre, and $S^{-1}R$ is w-contractible; Both $S^{-1}R$ and $R_{f_k}$ are quotients of subsets of $R\\times R$, hence remain $\\mathcal U$-small; their spectra are bounded by the same subset/function-set argument. The closed-localization covering statement makes their maps to $V$ weakly etale, so the stability node makes the composites to $X$ objects of the same site. Applying the ring-to-site weak-contractibility node to the actual w-contractible ring $S^{-1}R$ and this verified site object shows that $V^\\sim$ is weakly contractible on the full small site. The shriek-specialization-zero node makes the source of $\\epsilon$ zero there, and the specialization-restriction-sections node identifies $\\eta(V^\\sim)$ with the identity. These are the actual unit and counit maps, not just abstract identifications of their objects. On this covering family the sequence is therefore either $0\\to M\\xrightarrow{\\mathrm{id}}M\\to0\\to0$ or $0\\to0\\to M\\xrightarrow{\\mathrm{id}}M\\to0$. The composite vanishes locally and hence globally; kernels and images agree locally and therefore globally, and local lifting of sections proves the last map epic. Forgetting module actions computes these exactness conditions; the maps are linear because the presheaf counit and inverse-image unit commute with multiplication. This proves the claimed short exact sequence without using geometric stalk conservativity. Changing ai or aj changes the end maps by isomorphisms of source or target; all three asserted conditions are preserved.",
+   "text": "Use the affine open cover of an arbitrary pro-etale object. Refine each affine by the bounded faithfully flat weakly etale ring extension having ring retractions. These same-universe singleton covers compose with the affine cover.",
    "uses": [
-    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "lem-weil-pbc-wcontractible-affine-weakly-contractible",
-    "lem-weil-pbc-wcontractible-closed-localization",
-    "lem-weil-pbc-proetale-specialization-restriction-sections",
-    "lem-weil-pbc-proetale-shriek-specialization-zero",
-    "def-weil-proetale-inverse-image",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-proetale-covering",
-    "lem-weil-pbc-spec-localization-away-basic-open",
     "lem-weil-pbc-wcontractible-ring-extension",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-size-convention",
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-proetale-ringed-open-comparison",
-    "lem-weil-pbc-proetale-module-inverse-image-underlying"
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse image of the closed support is closed in Spec R; its complement is compact because the complementary open immersion is quasi-compact. Compact-open classification yields a finite set s with V(span s) equal to this support. The closed-localization covering for J=span s consists of the basic opens D(s_j) and the localization at elements invertible modulo J. The latter ring has the retraction property, hence section-surjectivity of every set-sheaf epimorphism; all its points specialize into the closed support. Pullback points identify this support with the closed fibre.",
+   "uses": [
+    "lem-weil-pbc-wcontractible-closed-localization",
+    "lem-weil-pbc-affine-closed-specialization-localization",
+    "lem-weil-pbc-wcontractible-affine-weakly-contractible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a piece mapping to U, the open immersion makes U subterminal. Consequently Over.forget U is full, its unit is invertible, and the counit of the restriction/right-direct-image adjunction overPushforwardOverAdj is invertible. The adjoint-triple criterion therefore makes the unit of the supplied extension/restriction adjunction invertible. Its triangle identity makes the restricted counit invertible; evaluation at the given lift to U gives sectionwise bijectivity. The closed pullback is empty on this piece, so its module sections vanish by the empty sheaf axiom.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the closed-localization piece the sheafified extension presheaf has zero sections: locally represent a sheafified section, refine so each piece specializes into the closed fibre, and every lift to U then has empty source. Its direct-sum presheaf section vanishes by the empty sheaf axiom, so separatedness kills the section. The actual module closed unit is bijective by the module specialization theorem.",
+   "uses": [
+    "lem-weil-pbc-proetale-shriek-specialization-zero",
+    "lem-weil-pbc-proetale-module-specialization-unit",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Covering transitivity combines these refinements. On each piece the first section map is injective, the second is surjective, and their image/kernel condition holds because one end is zero and the other map bijective. Sheaf separatedness descends injectivity and the zero composite; local surjectivity gives epimorphisms. Apply the same local lifting argument to the kernel lift to prove exactness in the abelian module category.",
+   "uses": [
+    "def-weil-pbc-proetale-covering"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-extension-by-zero-presheaf",
   "def-weil-pbc-proetale-covering",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
   "def-weil-proetale-inverse-image",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-size-convention",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "lem-weil-pbc-proetale-module-inverse-image-underlying",
-  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-weil-pbc-affine-closed-specialization-localization",
+  "lem-weil-pbc-proetale-module-specialization-unit",
   "lem-weil-pbc-proetale-shriek-specialization-zero",
-  "lem-weil-pbc-proetale-specialization-restriction-sections",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-spec-localization-away-basic-open",
   "lem-weil-pbc-wcontractible-affine-weakly-contractible",
   "lem-weil-pbc-wcontractible-closed-localization",
   "lem-weil-pbc-wcontractible-ring-extension"
@@ -65,7 +76,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AH; bounded refinement Tags 0983/0984, 098H, 09AC and 09AG; parent proof step 3."
+  "place": "Tag 09AH; finite compact-open support ideal, bounded ring splitting, sectionwise module unit and counit, and local kernel-lift descent. Fully written Lean proof by H1."
  },
  "mathlib_searches": [
   {
@@ -143,11 +154,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
+  "reviewer": "X-72f61",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261015T192133-L-1050943",
+  "landing": "20261015T224820-L-2950274",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched packet, compiled cleanly, target signature matched repository, and direct importer compiled"
  }
 }
