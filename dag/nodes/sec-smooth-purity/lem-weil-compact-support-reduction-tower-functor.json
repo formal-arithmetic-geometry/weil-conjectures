@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-compact-support-reduction-tower-functor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-representative-independence",
+   "place": "Proof, first sentence: the integral operation K -> R lim_n Res_n Rf_{!,n} K_n is asserted to be an exact O_E-linear functor. This node supplies the coherent tower-valued input, before taking R lim or rationalizing.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coherent compact-support reduction tower functor",
+ "statement": "Let $K_0$ be a field, $X,Y$ finite-type $K_0$-schemes, and $f:X\\to Y$ a separated finite-type morphism [def-weil-scheme-morphism-properties]. Fix a prime $\\ell$ invertible in $K_0$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$, and put $A_n=R/\\varpi^n$ [def-weil-l-adic-coefficient-extension]. Use the small pro-etale sites and coefficient universes of [def-weil-pbc-proetale-site, def-weil-size-convention]. For a scheme $W$ write $B_W=\\widehat{\\mathcal O}_{E,W}=\\varprojlim_n(A_n)_W$ for the completed coefficient sheaf [def-weil-completed-integral-coefficients], $\\mathcal A_W=\\operatorname{Mod}(B_W)$ [def-weil-sheaf-of-modules-category], and $D(\\mathcal A_W)=D(W_{\\mathrm{proet}},R)$ [def-weil-abstract-derived-category]. Let $\\operatorname{Tow}(\\mathcal A_Y)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\mathcal A_Y)$ be the abelian category of strict inverse sequences, with compatible levelwise maps and levelwise exactness [def-weil-inverse-system, lem-weil-tower-category-levelwise-abelian]. Choose one compactification $c=(j,p)$ of $f$ [def-weil-compactifications-refinements], and let $Rf^{c}_{!,n}=Rp_{*,n}j_!$ on $(A_n)$-module derived categories [def-compact-support-direct-image-detailed]. For $K\\in D(\\mathcal A_X)$ let $K_n=K\\otimes^L_{B_X}(A_n)_X$ [def-weil-integral-derived-reduction], and let $\\operatorname{Res}_n$ be restriction of scalars along $B_Y\\to(A_n)_Y$ [def-pc-sheaf-restrict-scalars], applied termwise to complexes; it is exact by [lem-weil-restriction-of-scalars-exact].\n\nThere is an exact $R$-linear functor lifting the composite of derived reduction, extension by zero along $j$, the separately derived proper direct image $Rp_*$, and restriction of coefficients, with the scalar action induced by the compatible constant sections $R\\to\\Gamma(W_{\\mathrm{proet}},B_W)$:\n$$\n\\mathcal T_f^c:D(\\mathcal A_X)\\longrightarrow D(\\operatorname{Tow}(\\mathcal A_Y))\n$$\n[def-weil-linear-functor, def-weil-triangulated-category]. Its $n$-th evaluation is naturally isomorphic to $\\operatorname{Res}_nRf^{c}_{!,n}K_n$, including on morphisms. Under these identifications its transition from $n+1$ to $n$ is $\\operatorname{Res}_{n+1}$ of $Rf^{c}_{!,n+1}$ applied to the quotient-induced map $K_{n+1}\\to\\operatorname{Res}^{A_{n+1}}_{A_n}K_n$, followed by the coefficient-restriction comparison of [lem-sf-compact-support-restriction-of-scalars] and $\\operatorname{Res}_{n+1}\\operatorname{Res}^{A_{n+1}}_{A_n}=\\operatorname{Res}_n$. For every $m\\geq n\\geq1$ these identifications carry the composite transition from $m$ to $n$ to the map induced by $A_m\\twoheadrightarrow A_n$ and the coefficient-restriction comparison; the identifications are natural in $K$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
+  "place": "Proof, first sentence: missing coherent tower-valued exact-linear construction underlying the displayed integral compact-support operation; the Roos-triangle definition alone does not provide it.",
+  "note": "Agent-written implicit prerequisite of the imported first proof sentence. Stacks sites-cohomology.tex, Tag 0940 (section-derived-limits), constructs the tower site, and Tag 0941 (lemma-derived-limit-is-ok) compares its derived limit with homotopy limit; neither states this varying-coefficient compact-support lift. Bhatt-Scholze, arXiv:1309.1198, Definition 6.7.6 and Lemma 6.7.7 give the separately derived compact-support composite, not the coherent lift asserted here. In particular the lift is not asserted to be the total derived functor of the underived composite p_* j_! (see Remark 6.7.8)."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-compactifications-refinements",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-linear-functor",
+  "def-weil-triangulated-category",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-restriction-of-scalars-exact"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Linear|IsTriangulated",
+   "subdirectory": "Algebra/Homology/DerivedCategory",
+   "results": "25 hits; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-15",
+   "verdict": "generic derived-category linearity and exact-functor results; not a one-line specialization to coherent compact-support reduction towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite reductions of the compactly supported direct image define an exact linear functor to the derived category of strict inverse sequences of integral module sheaves",
+   "subdirectory": "",
+   "results": "8 hits; LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, Condensed.instAB5CondensedMod, ModuleCat.localizedModule_functor_map_exact, Condensed.hasExactColimitsOfShape, Condensed.instAB4StarCondensedMod, Profinite.NobelingProof.succ_exact",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.Linear",
+   "subdirectory": "",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|lower_shriek|adic.*tower|tower.*adic",
+   "subdirectory": "",
+   "results": "11 hits; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent exact functor from integral derived complexes to the derived category of towers of finite coefficient compact support images",
+   "subdirectory": "",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent lift of the derived functors of finite coefficient reduction extension by zero and proper pushforward to a derived category of diagrams",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.IsTriangulated|mapDerivedCategory.Linear",
+   "subdirectory": "Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "results": "2 hits; 104, 122",
+   "date": "2026-10-15",
+   "verdict": "generic derived functor of an exact abelian functor, inspected in DerivedCategory/ExactFunctor.lean:30-125; no coherent reduction/pushforward tower"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(Linear|FunctorCategory)|derived.*[Tt]ower|[Tt]ower.*derived|lowerShriek|lower_shriek",
+   "subdirectory": "",
+   "results": "0 hits; ",
+   "date": "2026-10-15",
+   "verdict": "no match: no declarations found for these tower/compact-support patterns"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image for sheaves of modules on a ringed site and inverse sequences, compatible with changing coefficient rings",
+   "subdirectory": "",
+   "results": "8 hits; SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, CategoryTheory.sheafComposeIso_inv_fac, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, SheafOfModules.toSheafCompSheafToPresheafIso, PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+   "date": "2026-10-15",
+   "verdict": "no match: the sheaf pushforward isomorphisms are underived and supply neither coefficient reduction nor a derived compact-support tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "subdirectory": "",
+   "results": "12 hits; CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.NatTrans.rightDerived",
+   "date": "2026-10-15",
+   "verdict": "no match: rightDerived n is an individual cohomology functor between abelian categories, not the unbounded derived-category tower lift"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compactly supported pushforward of sheaves of modules with a compatible tower of coefficient rings",
+   "subdirectory": "",
+   "results": "0 hits; ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-compact-support-representative-independence",
+  "by": "worker",
+  "date": "2026-10-15"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

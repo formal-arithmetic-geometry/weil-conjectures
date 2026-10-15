@@ -3,52 +3,288 @@
  "blueprint": {
   "is": "lem-weil-compact-support-representative-independence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Independence of the integral representative",
- "statement": "Let $K_0$ be a field, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $K_0$-schemes, let $f:X\\to Y$ be a\nseparated finite-type $K_0$-morphism, fix a prime $\\ell$ whose image in $K_0$\nis invertible, and choose a finite extension $E/\\Ql$ with valuation ring\n$\\mathcal O_E$ and uniformizer $\\varpi_E$. Let $K,K'\\in D^b_c(X,\\mathcal\nO_E)$ be integral complexes of the derived-complete integral category\n[def-weil-derived-complete-integral-detailed] representing the same object of\nthe rationalized category $D^b_c(X,E)$ of\n[def-weil-rationalization-karoubi]. Then the two objects\n\n$$\n (Rf_!K)\\otimes^L_{\\mathcal O_E}E,\\qquad\n (Rf_!K')\\otimes^L_{\\mathcal O_E}E\n$$\n\nof $D^b_c(Y,E)$, formed from the compact-support direct image\n[def-weil-integral-rational-qbar-compact-support], are canonically\nisomorphic.",
+ "statement": "Let $K_0$ be a field, $X,Y$ finite-type $K_0$-schemes and $f:X\\to Y$ a separated finite-type $K_0$-morphism [def-weil-scheme-morphism-properties]. Fix a prime $\\ell$ invertible in $K_0$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $\\mathcal C_W=D^b_c(W,R)$ be the derived-complete integral category [def-weil-derived-complete-integral-detailed], and let $Q_W:\\mathcal C_W\\to\\mathcal C_W[1/\\varpi]=D^b_c(W,E)$ be its raw scalar localization [def-weil-rationalization-karoubi, def-weil-linear-scalar-localization]. For any $K,K'\\in\\mathcal C_X$ and any specified isomorphism $\\alpha:Q_XK\\xrightarrow{\\sim}Q_XK'$, the two rational compact-support images\n$$\nQ_Y(Rf_!K)=(Rf_!K)\\otimes_R^L E,\\qquad\nQ_Y(Rf_!K')=(Rf_!K')\\otimes_R^L E\n$$\nof [def-weil-integral-rational-qbar-compact-support], interpreted using the coherent tower of [lem-weil-compact-support-reduction-tower-functor], have an induced isomorphism $\\beta_\\alpha:Q_Y(Rf_!K)\\xrightarrow{\\sim}Q_Y(Rf_!K')$, functorial in $\\alpha$. It sends identities to identities and compositions to compositions. Equivalently, for specified presentations $a:Q_XK\\xrightarrow{\\sim}M$ and $a':Q_XK'\\xrightarrow{\\sim}M$ of a common rational object, the canonical comparison is $\\beta_{(a')^{-1}a}$. The word canonical refers to these specified identifications, not to a choice-independent isomorphism between bare isomorphism classes.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
   "place": "node lem-weil-compact-support-representative-independence, order 1494"
  },
  "stmt_deps": [
   "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-derived-complete-integral-detailed",
   "def-weil-rationalization-karoubi",
-  "def-weil-integral-rational-qbar-compact-support"
+  "def-weil-linear-scalar-localization",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-compact-support-reduction-tower-functor"
  ],
  "proof": [
   {
-   "text": "The integral compact-support functor $K\\mapsto\nR\\varprojlim_n\\operatorname{Res}_nRf_{!,n}K_n$ of\n[def-weil-integral-rational-qbar-compact-support] is $\\mathcal O_E$-linear\nand exact on the derived-complete integral constructible category\n$D^b_c(X,\\mathcal O_E)$ of [def-weil-derived-complete-integral-detailed]: it\nis built from the finite-level functors $Rf_{!,n}$ of\n[def-compact-support-direct-image-detailed], each triangulated by\n[lem-compact-support-direct-image-triangulated], and from the derived limit\n[def-weil-derived-limit], which is triangulated by its defining triangle. By\nthe rational-transport proposition of the proper-base-change chapter every\nexact $\\mathcal O_E$-linear functor on the integral constructible category\nextends uniquely to its rationalization $D^b_c(X,E)$ of\n[def-weil-rationalization-karoubi]; a uniquely determined extension takes the\nsame value on any two integral representatives $K,K'$ of one object, and that\nidentification is the canonical isomorphism asserted.",
+   "text": "By the nonemptiness assertion of [prop-compactification-refinement], a compactification exists under exactly the field, finite-type and separated hypotheses in force. Fix the compactification used to compute the integral operation, once for every level. Use the small site and coefficient universes of [def-weil-pbc-proetale-site]. Apply [lem-weil-compact-support-reduction-tower-functor] to obtain $\\mathcal T_f^c$ with evaluations $\\operatorname{Res}_nRf_{!,n}K_n$ and the prescribed transitions. Put $B_Y=\\widehat{\\mathcal O}_{E,Y}$ and $\\mathcal A_Y=\\operatorname{Mod}(B_Y)$. Apply [lem-weil-pbc-ringed-strict-tower-homotopy-limit] on a small representative of $Y_{\\mathrm{proet}}$, in the coefficient universes, to obtain the exact functor $L=R\\lim:D(\\operatorname{Tow}(\\mathcal A_Y))\\to D(\\mathcal A_Y)$. Its construction uses a K-injective resolution of the entire strict tower, rather than unrelated resolutions of its evaluations. Thus $F_f=L\\mathcal T_f^c$ is a genuine exact functor, whose value is the integral derived-limit formula of [def-weil-integral-rational-qbar-compact-support]. No functoriality of arbitrary choices of cones in a triangulated category is invoked.",
    "uses": [
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-derived-complete-integral-detailed",
-    "def-compact-support-direct-image-detailed",
-    "lem-compact-support-direct-image-triangulated",
-    "def-weil-derived-limit",
-    "def-weil-rationalization-karoubi"
+    "prop-compactification-refinement",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-integral-rational-qbar-compact-support"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
+    "place": "Proof first sentence, with the missing coherent tower distinguished from the derived-limit property; strict derived limit: Stacks Tag 0940, section-derived-limits (the cited tower-limit node supplies its module version)."
+   }
+  },
+  {
+   "text": "The functor $L$ is $R$-linear. The completed coefficient action of $a\\in R$ on module sheaves is multiplication by its compatible constant sections, as specified by [lem-weil-integral-constructible-linear]; on a strict tower it is componentwise multiplication and commutes with every transition. The tower category is abelian by [lem-weil-tower-category-levelwise-abelian]. Componentwise module identities make it $R$-linear, so [lem-weil-linear-abelian-derived-category] makes its derived localization $Q$ linear too. For a derived map $h:M\\to N$, choose K-injective tower representatives $I_M,I_N$ as in [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Fix the resolution isomorphisms $q_M:M\\xrightarrow{\\sim}QI_M$ and $q_N:N\\xrightarrow{\\sim}QI_N$. By [lem-weil-pbc-kinjective-hom-derived], $q_Nh q_M^{-1}$ has a unique homotopy-class representative $\\bar h:I_M\\to I_N$. Since $Q$ and composition are linear, $Q(a\\bar h)=aQ(\\bar h)=q_N(ah)q_M^{-1}$; injectivity of the Hom map makes $a\\bar h$ the representative of $ah$. For a second map $h':M\\to N$, $Q(\\bar h+\\bar h')=Q(\\bar h)+Q(\\bar h')=q_N(h+h')q_M^{-1}$; the same injectivity makes $\\bar h+\\bar h'$ the representative of $h+h'$. Termwise inverse limit of compatible families satisfies $\\lim(a\\bar h)=a\\lim(\\bar h)$ and $\\lim(\\bar h+\\bar h')=\\lim(\\bar h)+\\lim(\\bar h')$. Termwise limit also respects tower chain homotopies: a compatible degree $-1$ map $H$ with $u-v=dH+Hd$ gives $\\lim u-\\lim v=d(\\lim H)+(\\lim H)d$, by evaluating each component of a compatible family. Thus these calculations descend to homotopy classes. Applying the linear localization in the target proves both linearity identities for $L$. This does not require a scalar-linear choice of resolution functor. Since $\\mathcal T_f^c$ is $R$-linear, so is $F_f$.",
+   "uses": [
+    "lem-weil-integral-constructible-linear",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-linear-abelian-derived-category",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-compact-support-reduction-tower-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
+    "place": "Proof first sentence, scalar-linearity supplied explicitly on K-injective tower representatives; derived Hom input Stacks Tag 070I, lemma-K-injective; linear localization from the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "For every $K\\in D^b_c(X,R)$, [lem-sf-integral-compact-support-constructible] applies to the same field, prime, coefficient field, compactification and transitions: every derived limit of this particular compact-support tower belongs to $D^b_c(Y,R)$, including the common cohomological interval required there. Thus $F_f$ restricts to the full integral constructible subcategories. Those subcategories have the induced triangulated structures by [lem-weil-integral-constructible-triangulated] and the inherited linear structures by [lem-weil-integral-constructible-linear], so the restricted functor remains exact and $R$-linear. By [def-weil-integral-rational-qbar-compact-support] it is the integral operation $Rf_!$. This step uses a constructibility theorem, not the definition as evidence of its own preservation claim.",
+   "uses": [
+    "lem-sf-integral-compact-support-constructible",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-integral-constructible-linear",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
+    "place": "Proof first sentence: checking the integral functor lands in the stated full subcategory before rationalization; preservation is the existing constructibility node, with exactly its hypotheses."
+   }
+  },
+  {
+   "text": "Write $F=F_f|_{D^b_c(X,R)}$. Using [def-weil-rationalization-karoubi] and [def-weil-linear-scalar-localization], define $F_E(K)=F(K)$ and $F_E(u\\otimes e)=F(u)\\otimes e$ on each rational Hom module. By [def-weil-module-base-change], $R$-linearity of $F$ makes this a well-defined $E$-linear Hom map: $F(ru)\\otimes e=F(u)\\otimes re$. For pure tensors, $F_E((v\\otimes b)(u\\otimes a))=F(vu)\\otimes ba=(F(v)\\otimes b)(F(u)\\otimes a)$; bilinearity gives the identity for sums. Also $F_E(1_K\\otimes1)=1_{F(K)}\\otimes1$. Hence it is a functor. Any $E$-linear extension must send $u\\otimes e=e(u\\otimes1)$ to $e(F(u)\\otimes1)$, proving uniqueness. This is the scalar-localization calculation of rational transport, performed on these actual Hom modules; it identifies neither the completed coefficient sheaf with a discrete constant sheaf nor two different definitions of an integral constructible category.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
+    "place": "Proof, rational-transport sentence, expanded as its elementary tensor-Hom formula; tensor balancing: Stacks Tag 05G3, algebra-definition-base-change."
+   }
+  },
+  {
+   "text": "Define $\\beta_\\alpha=F_E(\\alpha)$ and its inverse to be $F_E(\\alpha^{-1})$. Their composites are $F_E(\\alpha^{-1}\\alpha)=1$ and $F_E(\\alpha\\alpha^{-1})=1$, so this is the asserted isomorphism. By [def-weil-integral-rational-qbar-compact-support], $F_E$ on objects is precisely the displayed rational compact-support operation. If $a:Q_XK\\to M$ and $a':Q_XK'\\to M$ are the specified presentations, the input comparison is $(a')^{-1}a$, so the stated comparison is its image. For a third presentation $a''$, $(a'')^{-1}a'\\,(a')^{-1}a=(a'')^{-1}a$; applying $F_E$ proves the cocycle. The identity presentation gives the identity and a composite of input isomorphisms gives the corresponding composite of comparisons. If one changes the presentations, their new relative isomorphism gives its own functorial comparison; no uniqueness of an isomorphism chosen from a bare existence assertion is claimed.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
+    "place": "Proof final sentence: explicit images of an isomorphism and its inverse, with identity, composition, and presentation cocycle checks."
+   }
   }
  ],
  "proof_deps": [
+  "prop-compactification-refinement",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-derived-complete-integral-detailed",
-  "def-compact-support-direct-image-detailed",
-  "lem-compact-support-direct-image-triangulated",
-  "def-weil-derived-limit",
+  "lem-weil-integral-constructible-linear",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-linear-abelian-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-weil-integral-constructible-triangulated",
   "def-weil-rationalization-karoubi",
-  "prop-weil-pbc-rational-transport"
+  "def-weil-linear-scalar-localization",
+  "def-weil-module-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-  "place": "## Proof"
+  "place": "Imported first proof sentence and final rational-transport sentence, repaired by an agent with coherent strict towers and the explicit scalar-localization calculation. The archived blueprint is absent; the second reader obtained and read primary Stacks TeX (sites-cohomology.tex, section-derived-limits and lemma-derived-limit-is-ok; derived.tex, lemma-K-injective) and Bhatt-Scholze arXiv:1309.1198 Sections 6.1, 6.5 and 6.7. See report.md for the precise limits of these sources."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "independence of integral representatives for compact support direct image after rationalization",
+   "subdirectory": "",
+   "results": "8 hits; MeasureTheory.Integrable.exists_hasCompactSupport_lintegral_sub_le, MeasureTheory.Integrable.exists_hasCompactSupport_integral_sub_le, NumberField.mixedEmbedding.fundamentalCone.linearIndependent_completeFamily, NNRealRMK.integralLinearMap_inj, MeasureTheory.Measure.haar.mem_prehaar_empty, CompactlySupportedContinuousMap.integralLinearMap_apply, MeasureTheory.Measure.exists_integral_isAddLeftInvariant_eq_smul_of_hasCompactSupport, MeasureTheory.Measure.exists_integral_isMulLeftInvariant_eq_smul_of_hasCompactSupport",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, rationalization, lower shriek, exact",
+   "subdirectory": "",
+   "results": "0 hits; loogle: unknown identifier 'rationalization'",
+   "date": "2026-10-15",
+   "verdict": "no usable answer: loogle: unknown identifier 'rationalization'"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|representative.*rational",
+   "subdirectory": "WeilConjectures",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compact support functor independent of integral representative after inverting uniformizer",
+   "subdirectory": "",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact linear compact support functor on derived complete integral constructible complexes",
+   "subdirectory": "",
+   "results": "8 hits; HomologicalComplex.isSupported_iff, HomologicalComplex.IsSupportedOutside.exactAt, HomologicalComplex.map_isStrictlySupported, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.IsSolid, HomologicalComplex.IsSupported.exactAt, HomologicalComplex.exactAt_of_isSupported, CompHausLike.LocallyConstantModule.functor",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsTriangulated, Linear, rightDerivedLowerShriek",
+   "subdirectory": "",
+   "results": "0 hits; loogle: unknown identifier 'Functor.IsTriangulated'",
+   "date": "2026-10-15",
+   "verdict": "no usable answer: loogle: unknown identifier 'Functor.IsTriangulated'"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated.*rightDerivedLowerShriek|Linear.*rightDerivedLowerShriek",
+   "subdirectory": "WeilConjectures",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Linear|IsTriangulated",
+   "subdirectory": "Algebra/Homology/DerivedCategory",
+   "results": "25 hits; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-15",
+   "verdict": "generic derived-category linearity and exact-functor results; not a one-line specialization to coherent compact-support reduction towers"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|lower_shriek|compact.support.*derived|Rationalization",
+   "subdirectory": "",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral adic compact support direct image functor is exact and linear",
+   "subdirectory": "",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Functor.IsTriangulated",
+   "subdirectory": "",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral adic compactly supported direct image is an exact linear functor on bounded constructible derived complete complexes",
+   "subdirectory": "",
+   "results": "8 hits; Condensed.instAB5CondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4StarCondensedMod, localCohomology.diagram, CondensedMod.IsSolid, Condensed.instAB4CondensedMod, Condensed.hasExactColimitsOfShape, CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear functor extends to categories obtained by tensoring every morphism module with a localized coefficient ring",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.Localization.linear, CategoryTheory.Localization.functor_linear, CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.Localization.instLinearLocalizationQ, CategoryTheory.Localization.instLinearLocalization', CategoryTheory.Localization.instLinearLocalization, ModuleCat.localizedModule_functor",
+   "date": "2026-10-15",
+   "verdict": "candidate: generic localization linearity, not the project-specific integral compact-support functor or raw Hom tensor construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "subdirectory": "",
+   "results": "12 hits; CategoryTheory.Functor.mapIso, CategoryTheory.Functor.mapIso_refl, CategoryTheory.Functor.mapIso_symm, CategoryTheory.Functor.mapIso_hom, CategoryTheory.Functor.mapIso_inv, CategoryTheory.Functor.mapIso_trans, CategoryTheory.Functor.mapIso_injective, CategoryTheory.Functor.preimageIso_mapIso",
+   "date": "2026-10-15",
+   "verdict": "generic functor preservation of isomorphisms only; the adic compact-support functor is not supplied"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite reductions of the compactly supported direct image define an exact linear functor to the derived category of strict inverse sequences of integral module sheaves",
+   "subdirectory": "",
+   "results": "8 hits; LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, Condensed.instAB5CondensedMod, ModuleCat.localizedModule_functor_map_exact, Condensed.hasExactColimitsOfShape, Condensed.instAB4StarCondensedMod, Profinite.NobelingProof.succ_exact",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.Linear",
+   "subdirectory": "",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|lower_shriek|adic.*tower|tower.*adic",
+   "subdirectory": "",
+   "results": "11 hits; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent exact functor from integral derived complexes to the derived category of towers of finite coefficient compact support images",
+   "subdirectory": "",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent lift of the derived functors of finite coefficient reduction extension by zero and proper pushforward to a derived category of diagrams",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-15",
+   "verdict": "no match for this adic compact-support statement"
+  },
+  {
+   "tool": "grep",
+   "query": "def linear|lemma functor_linear_iff",
+   "subdirectory": "CategoryTheory/Localization/Linear.lean",
+   "results": "2 hits; 38, 79",
+   "date": "2026-10-15",
+   "verdict": "generic localization linearity, inspected in CategoryTheory/Localization/Linear.lean:38-96; not raw scalar extension of Hom modules or compact-support towers"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.IsTriangulated|mapDerivedCategory.Linear",
+   "subdirectory": "Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "results": "2 hits; 104, 122",
+   "date": "2026-10-15",
+   "verdict": "generic derived functor of an exact abelian functor, inspected in DerivedCategory/ExactFunctor.lean:30-125; no coherent reduction/pushforward tower"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -80,5 +316,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-compact-support-representative-independence",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: made the identification of two rational representatives explicit, since canonical comparison depends on it. Replaced the invalid appeal to the Roos-triangle definition as a functor by one statement-only coherent compact-support reduction-tower prerequisite and the existing strict-tower derived-limit theorem. Checked scalar-linearity on K-injective tower representatives, used the existing constructibility theorem, and wrote out scalar localization and the inverse/cocycle equations. No Lean or target statement changed. Second reading cited compactification existence and size conventions, made resolution conjugation and additivity explicit, and made the child statement-only with the separately derived operations and all coefficient restriction notions specified.",
+  "blueprint": "Steps 1-3 realize the first sentence of the imported proof (exact O_E-linear integral compact support), with its hidden coherent tower construction exposed. Step 4 realizes rational transport by the same tensor-Hom construction; Step 5 realizes representative independence with specified identifications. The unit sk-def-sf-operations has no proof steps, and its six-operation route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic total derived inverse limit for strict towers of module sheaves on a small ringed site, used in Steps 1 and 2. The unit sk-def-sf-operations contains no tower-limit theorem; this supplies a categorical tool without replacing any unit proof step. Accepted by the independent maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-N5-c51ccab3c",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-c51ccab3c (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements and source passages in full. Five-step proof and coefficient handling check out. Repaired new-node metadata and restored the accepted strict-tower-limit tool declaration. Mathematical statements remain unchanged. Detailed checks are in review.md; corrected JSON files are under fixes/dag/nodes/sec-smooth-purity/.; 2 file(s) fixed by the reviewer"
+ }
 }
