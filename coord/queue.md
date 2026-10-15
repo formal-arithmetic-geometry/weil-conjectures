@@ -1,6 +1,6 @@
 # Work queue
 
-5 items; claim with `tools/claim.py next <group> [--stage N]`.
+7 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,18 +8,14 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (5)
+## Stage 3: modules to prove (7)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
-| `Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawClassVanishing` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueBridge` | 24 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawAssembly` | 16 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CartesianHigherImageSingleRawClassVanishing` | 16 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueBridgeCore` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 34 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
-
-Also listed above and claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
-
-| module | distance to a target | sorry |
-|---|---|---|
-| `Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueBridge` | 24 | 1 |
+| `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinatesFamily` | 51 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionNaturality` | 51 | 1 | proof |
