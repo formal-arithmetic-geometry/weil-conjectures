@@ -18,9 +18,45 @@
   "lem-sbc-cohomology-in-weak-serre-subcategory",
   "prop-weil-pbc-geometric-stalks-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each geometric point use its sheafFiber functor. Finite-limit preservation follows from the AB5 instance for abelian groups, shrunk to the site universe; the skyscraper adjunction supplies finite-colimit preservation. Thus stalks take monomorphisms to injections, epimorphisms to surjections, and short exact sequences to short exact sequences. An allowable annihilator transports along an injection or a surjection, proving closure of allowableTorsionSheafProperty under subobjects and quotients.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stalk of a zero sheaf is a zero abelian group. Its unique element is killed by 1, whose set of prime divisors is empty. Thus allowableTorsionSheafProperty contains zero, including when P is empty.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a short exact sequence A -> E -> C of sheaves and an element x of a geometric stalk of E, choose a positive allowable n annihilating its image in C. Exactness gives an element y of the stalk of A whose image is n times x. Choose a positive allowable m annihilating y. Then mn annihilates x. It is positive, and each prime divisor of mn divides m or n, hence belongs to P. This proves closure under extensions. Subobject closure also gives invariance under isomorphisms. The argument uses no assumption that all members of P are prime.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already-proved source-library theorem DerivedCategory.homologyProperty_isTriangulated, attached among the declarations of prop-constructible-derived-subcategory, to the closure instances just proved. The required kernel and cokernel closure follow from subobject and quotient closure. The homology property is invariant under isomorphisms. Intersect it with the standard t-structure plus or bounded object property, whose triangulated and isomorphism-closure instances are already available in the derived-category interface. Instance inference supplies the four named theorems. This uses the generic source theorem directly, without the duplicate statement-only cohomology_in_weak_serre_subcategory wrapper.",
+   "uses": [
+    "prop-constructible-derived-subcategory",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-constructible-derived-subcategory",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-def-derived-categories-with-allowable-torsion.md",
+  "place": "Well-definedness argument, formalized by A4 on 2026-10-15 using the existing generic derived homology-property theorem directly."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -129,5 +165,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Statement, dependencies, edge cases, docstrings, uniqueness, report sections, and server scompile evidence all checked; delivery is correct."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-81336",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261015T154148-L-157809",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean definitions and proofs matched the allowable-torsion node and recorded dependencies; axioms and all five direct importers verified."
  }
 }

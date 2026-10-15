@@ -6,9 +6,10 @@ Authors: SHEAF group NF
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.Paper.CohomologyInWeakSerreSubcategory
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-!
 # Derived categories with allowable torsion
@@ -26,7 +27,7 @@ as first passing to `D^b` or `D^+`. All coefficients here are abelian groups.
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits ZeroObject
 
 namespace AlgebraicGeometry.Etale
 
@@ -40,6 +41,71 @@ def allowableTorsionSheafProperty (T : Scheme.{u}) (P : Set ℕ) :
   fun F ↦ ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ T)
     (x : ((Scheme.pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj F),
     ∃ n : ℕ, 0 < n ∧ (∀ p : ℕ, p.Prime → p ∣ n → p ∈ P) ∧ n • x = 0
+
+private instance allowableTorsionSheafProperty_isClosedUnderSubobjects
+    (T : Scheme.{u}) (P : Set ℕ) :
+    (allowableTorsionSheafProperty T P).IsClosedUnderSubobjects := by
+  have : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} := AB5OfSize_shrink.{u, u, u + 1, u + 1} _
+  constructor
+  intro F G f _ hG Ω _ _ s x
+  let L := (Scheme.pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})
+  have hi : Function.Injective (L.map f) :=
+    (AddCommGrpCat.mono_iff_injective _).mp inferInstance
+  obtain ⟨n, hn, hp, hx⟩ := hG Ω s (L.map f x)
+  refine ⟨n, hn, hp, hi ?_⟩
+  simpa only [map_nsmul, map_zero] using hx
+
+private instance allowableTorsionSheafProperty_isClosedUnderQuotients
+    (T : Scheme.{u}) (P : Set ℕ) :
+    (allowableTorsionSheafProperty T P).IsClosedUnderQuotients := by
+  constructor
+  intro F G f _ hF Ω _ _ s x
+  let L := (Scheme.pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})
+  have hs : Function.Surjective (L.map f) :=
+    (AddCommGrpCat.epi_iff_surjective _).mp inferInstance
+  obtain ⟨y, rfl⟩ := hs x
+  obtain ⟨n, hn, hp, hy⟩ := hF Ω s y
+  refine ⟨n, hn, hp, ?_⟩
+  rw [← map_nsmul, hy, map_zero]
+
+private instance allowableTorsionSheafProperty_containsZero
+    (T : Scheme.{u}) (P : Set ℕ) : (allowableTorsionSheafProperty T P).ContainsZero := by
+  refine ⟨0, isZero_zero _, ?_⟩
+  intro Ω _ _ s x
+  have : Subsingleton (((Scheme.pointSmallEtale s).sheafFiber
+      (A := AddCommGrpCat.{u + 1})).obj (0 : Sheaf T.smallEtaleTopology _)) :=
+    AddCommGrpCat.subsingleton_of_isZero (Functor.map_isZero _ (isZero_zero _))
+  refine ⟨1, Nat.one_pos, ?_, ?_⟩
+  · intro p hp hdiv
+    exact False.elim (hp.not_dvd_one hdiv)
+  · exact Subsingleton.elim _ _
+
+private instance allowableTorsionSheafProperty_isClosedUnderExtensions
+    (T : Scheme.{u}) (P : Set ℕ) :
+    (allowableTorsionSheafProperty T P).IsClosedUnderExtensions := by
+  have : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} := AB5OfSize_shrink.{u, u, u + 1, u + 1} _
+  constructor
+  intro S hS h₁ h₃ Ω _ _ s x
+  let L := (Scheme.pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})
+  have hLS := hS.map_of_exact L
+  obtain ⟨n, hn, hnp, hx⟩ := h₃ Ω s (L.map S.g x)
+  have hx' : (S.map L).g (n • x) = 0 := by
+    change L.map S.g (n • x) = 0
+    rw [map_nsmul]
+    exact hx
+  obtain ⟨y, hy⟩ := ((S.map L).ab_exact_iff.mp hLS.exact) (n • x) hx'
+  obtain ⟨m, hm, hmp, hy₀⟩ := h₁ Ω s y
+  refine ⟨m * n, Nat.mul_pos hm hn, ?_, ?_⟩
+  · intro p hp hdiv
+    rcases hp.dvd_mul.mp hdiv with hpm | hpn
+    · exact hmp p hp hpm
+    · exact hnp p hp hpn
+  · calc
+      (m * n) • x = m • (n • x) := (smul_smul m n x).symm
+      _ = m • (S.map L).f y := by rw [hy]
+      _ = 0 := by
+        change m • L.map S.f y = 0
+        rw [← map_nsmul, hy₀, map_zero]
 
 /-- Bounded-below objects with allowable-torsion cohomology, viewed in `D(T_et)`.
 Source: blueprint `sec-smooth-base-change/sk-rem-rest/`
@@ -69,7 +135,8 @@ The bounded-below condition is invariant under isomorphisms by the standard t-st
 @[instance] theorem allowableTorsionPlusProperty_isClosedUnderIsomorphisms
     (T : Scheme.{u}) (P : Set ℕ) :
     (allowableTorsionPlusProperty T P).IsClosedUnderIsomorphisms := by
-  sorry
+  unfold allowableTorsionPlusProperty
+  infer_instance
 
 /-- Strict fullness of the bounded allowable-torsion class.
 Source: blueprint `sec-smooth-base-change/sk-rem-rest/`
@@ -80,7 +147,8 @@ annihilator. The bounded condition is invariant under isomorphisms. -/
 @[instance] theorem allowableTorsionBoundedProperty_isClosedUnderIsomorphisms
     (T : Scheme.{u}) (P : Set ℕ) :
     (allowableTorsionBoundedProperty T P).IsClosedUnderIsomorphisms := by
-  sorry
+  unfold allowableTorsionBoundedProperty
+  infer_instance
 
 /-- The bounded-below allowable-torsion class inherits its triangulated structure.
 Source: blueprint `sec-smooth-base-change/sk-rem-rest/`
@@ -97,7 +165,9 @@ intersection clause (`lem-sbc-cohomology-in-weak-serre-subcategory`). -/
 @[instance] theorem allowableTorsionPlusProperty_isTriangulated
     (T : Scheme.{u}) (P : Set ℕ) :
     (allowableTorsionPlusProperty T P).IsTriangulated := by
-  sorry
+  unfold allowableTorsionPlusProperty
+  -- The source library already proves the cohomology-in-weak-Serre-class criterion.
+  infer_instance
 
 /-- The bounded allowable-torsion class inherits its triangulated structure.
 Source: blueprint `sec-smooth-base-change/sk-rem-rest/`
@@ -112,7 +182,9 @@ Apply the bounded intersection clause of `cohomology_in_weak_serre_subcategory`
 @[instance] theorem allowableTorsionBoundedProperty_isTriangulated
     (T : Scheme.{u}) (P : Set ℕ) :
     (allowableTorsionBoundedProperty T P).IsTriangulated := by
-  sorry
+  unfold allowableTorsionBoundedProperty
+  -- Intersect the homology subcategory with the bounded t-structure subcategory.
+  infer_instance
 
 /-- `D^+_{P-tor}(T_et)`, with the inherited shifts and distinguished triangles.
 Source: blueprint `sec-smooth-base-change/sk-rem-rest/`
