@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Sites.Equivalence
 
 /-!
 # K-flat complexes of modules on a ringed site
@@ -373,3 +374,40 @@ def IsKFlatResolution
   QuasiIso f ∧ K.IsKFlat
 
 end CochainComplex
+
+universe w
+
+namespace SheafOfModules
+
+variable {C : Type u} [Category.{v} C] [hsmall : EssentiallySmall.{w} C]
+  {J : GrothendieckTopology C}
+  (R : Sheaf J CommRingCat.{w})
+
+/-- Abelian sheafification exists and is left exact in any universe containing the site.
+Source: Stacks Project, Modules on Sites, Section 03DA, and Cohomology on Sites,
+Definition 06YN (blueprint: def-pc-kflat-complex).
+
+Proof: choose the small model of the site in the coefficient universe, where the usual
+abelian sheafification exists. Conjugate its adjunction by the equivalences of presheaf
+and sheaf categories induced by the small-model equivalence. Equivalences preserve
+finite limits, so the transported left adjoint remains left exact. The adjunction
+determines sheafification up to unique natural isomorphism. -/
+@[instance]
+theorem hasSheafify_coefficientUniverse : HasSheafify J AddCommGrpCat.{w} := by
+  sorry
+
+/-- Locally bijective maps are exactly sheafification equivalences for abelian groups
+in any coefficient universe relative to which the site is essentially small.
+Source: Stacks Project, Modules on Sites, Section 03DA, and Cohomology on Sites,
+Definition 06YN (blueprint: def-pc-kflat-complex).
+
+Proof: replace the site by its small model in the coefficient universe. On that model,
+apply the usual concrete sheafification criterion for abelian groups. Transport the
+criterion back along the dense equivalence; local injectivity and surjectivity and
+sheafification equivalences are invariant under this equivalence. -/
+@[instance]
+theorem wEqualsLocallyBijective_coefficientUniverse :
+    J.WEqualsLocallyBijective AddCommGrpCat.{w} := by
+  sorry
+
+end SheafOfModules

@@ -1,0 +1,74 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group NI
+-/
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.Algebra.FlatTorIdealCriterion
+import Mathlib.CategoryTheory.Monoidal.Tor
+import Mathlib.RingTheory.Flat.EquationalCriterion
+
+/-! # Bounded flat complexes with finite cohomology over a Noetherian ring
+
+Source: literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/
+lem-pc-noetherian-flat-complex-perfect.md, order 672
+(blueprint: lem-pc-noetherian-flat-complex-perfect).
+-/
+
+@[expose] public section
+
+universe w u
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace DerivedCategory
+
+/-- Over a Noetherian commutative ring, an object with a bounded flat representative and
+finitely generated cohomology in every degree has a bounded finite projective representative.
+The conclusion spells out ring-perfectness, allowing any chosen derived-category universe.
+Source: blueprint, sec-picard-framework/sk-thm-picard-semicon,
+lem-pc-noetherian-flat-complex-perfect.md, order 672
+(blueprint: lem-pc-noetherian-flat-complex-perfect).
+
+Proof:
+1. Choose a flat representative `F` concentrated in `[a,b]`. Its tensor with every module
+   has zero cohomology below `a`.
+2. Construct a bounded-above finite free complex `P` mapping quasi-isomorphically to `F`.
+   Start with finitely many cycles generating `H^b(F)`. Descend degree by degree, choosing
+   generators of the cone cohomology and using the cone-cycle equations to define each
+   new differential and chain-map component. Noetherian finiteness of kernels and cokernels
+   (lem-pc-noetherian-finite-kernels-cokernels) keeps all cone cohomology finite. Each fixed
+   degree stabilizes, and the resulting cone is acyclic (def-weil-abstract-derived-category).
+3. Both bounded-above flat complexes are K-flat (lem-pc-bounded-above-flat-kflat, applied
+   on the one-point ringed space), so they compute the same derived tensor. The left tail
+   of `P` resolves `Q = coker(P^{a-1} → P^a)`. Thus Tor_1(Q,N), computed by that resolution
+   (def-weil-pbc-tor-modules), is H^{a-1}(P tensor N) = H^{a-1}(F tensor N) = 0.
+4. Test this for `N = A/I` and apply lem-weil-pbc-flat-tor-ideal-criterion: `Q` is flat.
+   It is finitely presented as a cokernel of finite free modules, hence finite projective
+   by lem-weil-pbc-finitely-presented-flat-module-projective. Replace the left tail by `Q`
+   in degree `a`; the resulting bounded finite projective complex represents `C`, giving
+   precisely the affine perfectness described in def-pc-perfect-complex. -/
+theorem exists_bounded_finite_projective_model_of_flat_of_finite_homology
+    {A : Type u} [CommRing A] [IsNoetherianRing A]
+    [HasDerivedCategory.{w} (ModuleCat.{u} A)]
+    (C : DerivedCategory (ModuleCat.{u} A))
+    (hflat : ∃ F : CochainComplex (ModuleCat.{u} A) ℤ,
+      (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (F.X n)) ∧
+      (∀ n : ℤ, Module.Flat A (F.X n)) ∧ Nonempty (Q.obj F ≅ C))
+    (hfinite : ∀ i : ℤ, Module.Finite A ((homologyFunctor (ModuleCat.{u} A) i).obj C)) :
+    ∃ P : CochainComplex (ModuleCat.{u} A) ℤ,
+      (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) ∧
+      (∀ n : ℤ, Module.Finite A (P.X n)) ∧
+      (∀ n : ℤ, Module.Projective A (P.X n)) ∧
+      Nonempty (Q.obj P ≅ C) := by
+  sorry
+
+end DerivedCategory

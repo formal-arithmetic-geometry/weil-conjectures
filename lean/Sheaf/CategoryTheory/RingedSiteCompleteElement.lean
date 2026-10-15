@@ -1,0 +1,55 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group NH
+-/
+module
+
+public import Sheaf.CategoryTheory.RingedSiteLocalization
+public import Sheaf.CategoryTheory.RingedSiteDerivedRestriction
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+
+/-!
+# RingedSiteCompleteElement
+
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998
+(blueprint: def-weil-pbc-ringed-site-complete-element).
+-/
+
+@[expose] public section
+
+universe u w
+
+open CategoryTheory CategoryTheory.Limits Opposite
+
+set_option autoImplicit false
+
+namespace CategoryTheory
+
+/-- The local vanishing criterion R internal Hom(O_U[1/f], K|U) = 0.
+The localization is placed in degree zero. IsZero means the derived object
+is zero, with no boundedness, coherence or finite-generation assumption.
+The local instance only reconciles the definitionally equal presentations
+of the slice ring sheaf (forgetting commutativity before or after slicing).
+
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998
+(blueprint: def-weil-pbc-ringed-site-complete-element). -/
+def IsRingedSiteCompleteElement {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]
+    [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))]
+    (K : DerivedCategory (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))
+    (U : C) (f : R.obj.obj (op U)) : Prop :=
+  letI : HasDerivedCategory.{w} (SheafOfModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (R.over U))) :=
+    inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)))
+  IsZero ((derivedInternalHom (J.over U) (R.over U)).obj
+    (op ((DerivedCategory.singleFunctor _ 0).obj
+      (ringedSiteSectionLocalization ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U f)),
+    ringedSiteDerivedRestriction ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U K))
+
+end CategoryTheory
