@@ -3,35 +3,171 @@
  "blueprint": {
   "is": "lem-kun-change-of-rings-tensor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Change of rings for the derived tensor",
- "statement": "Let $\\Lambda'=\\kunZn$, let $M$ be a flat $\\Lambda'$-module, let\n$n=\\ell m$ with $\\ell$ a prime dividing $n$, and let $N$ be a\ncomplex of $\\Lambda'$-modules annihilated degreewise by $\\ell$,\nviewed as a complex of $\\kunFl$-vector spaces. Then\n\n$$\nM\\kunotimes{\\Lambda'}N\\cong(M/\\ell M)\\kunotimes{\\kunFl}N\n$$\n\ncanonically in $D(\\mathrm{Mod}(\\Lambda'))$.",
+ "statement": "Let $n,m\\in\\mathbf Z$, let $\\ell$ be a prime with $n=\\ell m$, and put $R=\\Lambda'=\\mathbf Z/n\\mathbf Z$ and $k=\\mathbf F_\\ell=\\mathbf Z/\\ell\\mathbf Z$. Let $M$ be a flat $R$-module [def-weil-pbc-flat-ring-map] and let $N^\\bullet$ be an arbitrary, possibly unbounded, cochain complex of $R$-modules [def-weil-abstract-derived-category] such that $\\ell N^q=0$ for every $q$. Regard $N^\\bullet$ and $M/\\ell M$ as $k$-modules via the quotient $R\\to k$. Put $M$ and $M/\\ell M$ in degree zero. Use the ordinary-module derived tensor computed on K-flat resolutions [def-pc-module-kflat-complex, lem-pc-derived-tensor-second-factor-functor], and the derived categories of [def-weil-abstract-derived-category]. Then there is a canonical isomorphism\n$$\nM[0]\\otimes_R^{\\mathbf L}N^\\bullet\\ \\cong\\ \\operatorname{Res}_{R\\to k}\\bigl((M/\\ell M)[0]\\otimes_k^{\\mathbf L}N^\\bullet\\bigr)\n$$\nin $D(\\operatorname{Mod}(R))$, where $\\operatorname{Res}_{R\\to k}$ means forgetting to $R$-modules along $R\\to k$. On ordinary tensor representatives its map is $x\\otimes y\\mapsto\\bar x\\otimes y$. Here ordinary module tensor products have their usual universal property for balanced biadditive maps; their total complexes are as in [def-pc-tensor-complex-sheaves] on the one-point ringed site.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-change-of-rings-tensor.md",
   "place": "node lem-kun-change-of-rings-tensor, order 1749"
  },
  "stmt_deps": [
-  "def-kun-derived-tensor",
-  "def-kun-torsion-invertible"
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pc-tensor-complex-sheaves"
  ],
  "proof": [
   {
-   "text": "Since $M$ is flat, the derived tensor product is the underived one.\nThe sequence\n\n$$\n\\ell M\\longrightarrow M\\longrightarrow M/\\ell M\\longrightarrow0\n$$\n\nis right exact and, tensored with $N$, the image of\n$\\ell M\\otimes_{\\Lambda'}N$ in $M\\otimes_{\\Lambda'}N$ is\n$\\ell(M\\otimes_{\\Lambda'}N)=M\\otimes_{\\Lambda'}\\ell N=0$, because\n$\\ell N=0$; hence\n$M\\otimes_{\\Lambda'}N=(M/\\ell M)\\otimes_{\\Lambda'}N$, and the right\nside identifies canonically with\n$(M/\\ell M)\\otimes_{\\kunFl}N$ since $\\ell$ annihilates $N$ and\n$M/\\ell M$.",
+   "text": "The map $R\\to k$, $[a]_n\\mapsto[a]_\\ell$, is well-defined because $\\ell\\mid n$, and its kernel is $\\ell R$. Since $\\ell N^q=0$, scalar multiplication by a residue class in $k$ is defined by any lift in $R$; two lifts differ by a multiple of $\\ell$, which acts by zero. The same applies to $\\overline M=M/\\ell M$. More generally, for every $k$-module $V$ define\n$$\\phi_V:M\\otimes_R V\\longrightarrow\\overline M\\otimes_k V,\\qquad x\\otimes v\\longmapsto\\bar x\\otimes v.$$\nThe displayed rule is $R$-balanced. Its inverse is $\\bar x\\otimes v\\mapsto x\\otimes v$: replacing $x$ by $x+\\ell z$ changes the tensor by $\\ell z\\otimes v=z\\otimes\\ell v=0$; for $c\\in k$ choose a lift $a\\in R$, and the balancing relation is $ax\\otimes v=x\\otimes av$. Thus the inverse is $k$-balanced and independent of all lifts. The two composites fix every pure tensor, so these are inverse $R$-linear maps. For any $k$-linear $f:V\\to W$ both naturality composites send $x\\otimes v$ to $\\bar x\\otimes f(v)$, so $\\phi_V$ is natural in $V$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-change-of-rings-tensor.md",
+    "place": "Proof, sole paragraph: quotient by ell and identification of the coefficient ring; expanded here into mutually inverse balanced maps using the ordinary tensor universal property"
+   }
+  },
+  {
+   "text": "The module $\\overline M$ is flat over $k$. Indeed let $i:V\\hookrightarrow W$ be an injective map of $k$-modules. It is still injective as a map of $R$-modules. Flatness of $M$ implies that $M\\otimes_R i$ is injective (use the left-tensor assertion of [lem-weil-pbc-flat-tensor-exact] on $0\\to V\\to W$). The natural isomorphisms $\\phi_V,\\phi_W$ of Step 1 identify this map with $\\overline M\\otimes_k i$, which is therefore injective. This is precisely the definition of flatness in [def-weil-pbc-flat-ring-map]. No assertion that $k$ itself is flat over $R$ is made or needed.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HB (definition-flat); elementary application of flatness and the explicit quotient tensor isomorphisms"
+   }
+  },
+  {
+   "text": "Both $M[0]$ over $R$ and $\\overline M[0]$ over $k$ are bounded-above complexes of flat modules: the only nonzero term is in degree zero, and the zero terms are flat since tensoring with zero is zero. Apply [lem-pc-module-bounded-flat-kflat] to each. They are K-flat even though $N^\\bullet$ may be unbounded. Apply clause (2) of [lem-pc-derived-tensor-second-factor-functor] first with the identity $R\\to R$, then with the identity $k\\to k$, using the identity K-flat resolutions of these two single-term complexes. It gives canonical representatives $Q_R(M\\otimes_R N^\\bullet)$ and $Q_k(\\overline M\\otimes_k N^\\bullet)$ of the two derived tensors. The total tensor formula of [def-pc-tensor-complex-sheaves] has only the summand $(0,q)$ in degree $q$; its differential is $1\\otimes d_N^q$, with sign $(-1)^0=1$.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K (bounded-above flat complexes are K-flat); Tag 06Y6, construction of the mixed derived tensor computed by K-flat complexes"
+   }
+  },
+  {
+   "text": "Apply Step 1 to $V=N^q$ in every degree. Naturality for $d_N^q$ says explicitly\n$$\\phi_{N^{q+1}}(x\\otimes d_N^q y)=\\bar x\\otimes d_N^q y=(1\\otimes d_N^q)\\phi_{N^q}(x\\otimes y).$$\nThus the $\\phi_{N^q}$ and their inverses form inverse $R$-linear chain maps $M\\otimes_R N^\\bullet\\cong\\operatorname{Res}_{R\\to k}(\\overline M\\otimes_k N^\\bullet)$. Restriction of scalars leaves underlying abelian groups, kernels and images unchanged, so preserves cohomology and quasi-isomorphisms. The localization property in [def-weil-abstract-derived-category] therefore induces restriction $D(k)\\to D(R)$, sending $Q_k(C)$ to $Q_R(\\operatorname{Res}C)$. Localize this chain isomorphism and compose with the two canonical representative isomorphisms of Step 3. This proves the asserted isomorphism in $D(R)$. The maps use only the quotient $M\\to\\overline M$ and tensor universal properties, with no choices of lifts remaining; clause (2) of [lem-pc-derived-tensor-second-factor-functor] makes the model comparisons canonical independently of resolutions. Hence the resulting derived isomorphism is canonical.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Blueprint item final coefficient identification; Tag 06XY, localization construction of derived tensor; Tag 06Y6, canonical K-flat comparisons"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-flat-ring-map",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-change-of-rings-tensor.md",
-  "place": "## Proof"
+  "place": "Imported proof expanded by Q31 using existing module K-flat interfaces; local source files absent, WANTED in report.md; online Stacks 00HB, 064K, 06XY and 06Y6 checked"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Ff]lat|[Ff]lat.*baseChange|quotient.*[Tt]ensor|[Tt]ensor.*quotient",
+   "results": "25 hits: Mathlib/LinearAlgebra/FreeProduct/Basic.lean, Mathlib/LinearAlgebra/FreeProduct/Basic.lean, Mathlib/LinearAlgebra/TensorAlgebra/Basic.lean, Mathlib/LinearAlgebra/TensorAlgebra/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/LowDegree.lean, Mathlib/LinearAlgebra/TensorPower/Symmetric.lean, Mathlib/LinearAlgebra/TensorPower/Symmetric.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: the hits concern ordinary tensor exactness or unrelated quotients, and do not give this canonical isomorphism of unbounded derived module tensors"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Quotient",
+   "results": "1 hits: Rep.coindToInd_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: the hits concern ordinary tensor exactness or unrelated quotients, and do not give this canonical isomorphism of unbounded derived module tensors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat Z/n-module M and a complex N annihilated by a prime l dividing n, the derived tensor of M and N over Z/n is the derived tensor of M/lM and N over F_l",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, lTensor.inverse_comp_lTensor, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, Rep.Tor_obj",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: the hits concern ordinary tensor exactness or unrelated quotients, and do not give this canonical isomorphism of unbounded derived module tensors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of a flat module with a complex annihilated by an ideal is computed by tensoring the quotient module over the quotient ring",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat module concentrated in degree zero is K-flat, so its unbounded derived tensor product is the ordinary tensor complex",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_flat_tensorProduct, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact'",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: the hits concern ordinary tensor exactness or unrelated quotients, and do not give this canonical isomorphism of unbounded derived module tensors"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|derivedTensor|tensorDerived",
+   "results": "0 hits:  (subdirectory Algebra/Homology)",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: the hits concern ordinary tensor exactness or unrelated quotients, and do not give this canonical isomorphism of unbounded derived module tensors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: the hits concern ordinary tensor exactness or unrelated quotients, and do not give this canonical isomorphism of unbounded derived module tensors"
+  },
+  {
+   "tool": "grep",
+   "query": "derived|KFlat|K.flat",
+   "results": "0 hits:  (subdirectory RingTheory/Flat)",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: the hits concern ordinary tensor exactness or unrelated quotients, and do not give this canonical isomorphism of unbounded derived module tensors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical isomorphism derived tensor quotient ring annihilated complex flat module",
+   "results": "8 hits: TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor, TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ, TensorProduct.tensorQuotMapSMulEquivTensorQuot, TensorProduct.quotTensorEquivQuotSMul, TensorProduct.quotTensorEquivQuotSMul_comp_mk, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: these are ordinary tensor quotient equivalences, with no unbounded derived tensor comparison or flat first-factor reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "TensorProduct.*quotient|quotient.*TensorProduct",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unbounded derived tensor change of rings flat module quotient complex",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact, Module.Flat.iff_lTensor_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: these are flatness and ordinary tensor-exactness results, not the derived change-of-rings isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct quotient ideal",
+   "results": "0 hits; loogle: Unknown identifier quotient",
+   "date": "2026-10-16",
+   "verdict": "no match; the query was accepted by msearch.py but Loogle returned no declaration"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -58,5 +194,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-change-of-rings-tensor",
+  "worker": "stage1",
+  "summary": "Expanded the quotient tensor calculation into explicit mutually inverse balanced maps, proved flatness of the quotient by transporting injectivity, used existing bounded-flat K-flat and canonical module tensor interfaces on both sides, and checked differentials and restriction of scalars. Clarified macros and coefficient categories without changing the claim. No new nodes; all non-elementary facts reuse existing DAG statements.",
+  "blueprint": "Realizes the entire sole imported proof paragraph: flat derived-to-ordinary reduction, quotient by ell, and change from Z/n to F_ell; supplies the omitted right-hand derived-to-ordinary argument and explicit chain compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module K-flat criterion, applied to a flat module in degree zero over each ring; the Kunneth unit has no module version."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic canonical K-flat computation and independence for ordinary module derived tensor; the unit definition only describes sheaves on the small etale site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q31-8abfe6c85",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-8abfe6c85 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, master blueprint, unit/chapter route, and relevant Stacks sources in full. All four proof steps and edge cases check out; accepted both declared K-flat tool uses. No new nodes or dependency cycle. Corrected Step 1’s source reference to the actual blueprint paragraph; full corrected JSON and review.md are written.; 1 file(s) fixed by the reviewer"
+ }
 }
