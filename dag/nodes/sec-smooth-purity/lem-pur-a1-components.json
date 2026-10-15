@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-pur-a1-components",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The connected components of the affine line over a base",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $B$ be a nonempty\nseparated finite-type\n$k$-scheme, let $\\mathbf A^1_B=\\operatorname{Spec}(\\mathcal O_B[t])$ be the affine line of [def-sbc-affine-space], let\n$s_0:B\\hookrightarrow\\mathbf A^1_B$ be the zero section, the closed\nimmersion defined by $t=0$, and let\n$\\mathbf G_{m,B}=\\mathbf A^1_B\\setminus s_0(B)$ be the complement of\nthe zero section. Let $1:B\\to\\mathbf A^1_B$ be the unit section,\nthe section defined by $t=1$ of the projection, which factors through\n$\\mathbf G_{m,B}$.\n\n1. The connected components of $\\mathbf A^1_B$, and those of\n$\\mathbf G_{m,B}$, are exactly the inverse images of the\nconnected components of $B$.\n1. Every connected component of $\\mathbf A^1_B$ meets\n$\\mathbf G_{m,B}$, and meets the image of the unit section\n$1$.\n1. Every connected component of $\\mathbf G_{m,B}$ meets the image\nof the unit section $1$.",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $B$ be a nonempty $k$-scheme whose structure morphism\n$B\\to\\operatorname{Spec}k$ is separated and of finite type\n[def-weil-proper-morphism, def-weil-finite-type-morphism, def-weil-affine-spectrum], let $\\mathbf A^1_B=\\underline{\\operatorname{Spec}}_B(\\mathcal O_B[t])$ be the affine line of [def-sbc-affine-space], let\n$s_0:B\\hookrightarrow\\mathbf A^1_B$ be the zero section, the closed\nimmersion [def-weil-closed-immersion] defined by $t=0$, and let\n$\\mathbf G_{m,B}=\\mathbf A^1_B\\setminus s_0(B)$ be the complement of\nthe zero section. Let $1:B\\to\\mathbf A^1_B$ be the unit section,\nthe section defined by $t=1$ of the projection, which factors through\n$\\mathbf G_{m,B}$.\n\n1. The connected components of $\\mathbf A^1_B$, and those of\n$\\mathbf G_{m,B}$, are exactly the inverse images of the\nconnected components of $B$.\n1. Every connected component of $\\mathbf A^1_B$ meets\n$\\mathbf G_{m,B}$, and meets the image of the unit section\n$1$.\n1. Every connected component of $\\mathbf G_{m,B}$ meets the image\nof the unit section $1$.\n\nHere a connected component means a maximal nonempty connected subset of the underlying topological space, with connectedness as in [def-weil-connected-scheme].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-a1-components.md",
   "place": "node lem-pur-a1-components, order 1958",
@@ -20,32 +20,197 @@
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "def-sbc-affine-space"
+  "def-sbc-affine-space",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-connected-scheme"
  ],
  "proof": [
   {
-   "text": "Step 1: openness and connected fibres. The projection\n$\\pi:\\mathbf A^1_B\\to B$ of [def-sbc-affine-space] is smooth of\nrelative dimension $1$ by [sbc-lem-affine-space-smooth], hence\nflat and locally of finite presentation; the same holds for\n$\\pi':\\mathbf G_{m,B}\\to B$, which is the composite of the open\nimmersion $\\mathbf G_{m,B}\\hookrightarrow\\mathbf A^1_B$ with\n$\\pi$, an open immersion being flat and locally of finite\npresentation and both properties being stable under composition. A\nflat morphism locally of finite presentation is universally open\n(Stacks Project, Lemma 29.26.10,\n[Tag 01UA](https://stacks.math.columbia.edu/tag/01UA)). The\nfibres of $\\pi$ and of $\\pi'$ over a point $y\\in B$ are\n$\\mathbf A^1_{\\kappa(y)}=\\operatorname{Spec}(\\kappa(y)[t])$ and\n$\\mathbf G_{m,\\kappa(y)}=\\operatorname{Spec}(\\kappa(y)[t,t^{-1}])$:\nboth rings are domains, so both fibres are nonempty and connected.\nStep 2: the components. Since $k$ is a field and $B$ is a\n[def-weil-scheme-morphism-properties] finite-type $k$-scheme, it\nis Noetherian; a Noetherian space has finitely many irreducible\ncomponents, hence finitely many connected components, and each of them\nis the complement of the union of the others, hence open as well as\nclosed. Let $D\\subseteq B$ be a connected component. Then\n$\\pi^{-1}(D)$ is open and closed in $\\mathbf A^1_B$, and it is\nconnected: if $\\pi^{-1}(D)=U\\sqcup V$ with $U,V$ open and\nnonempty, then every fibre of $\\pi$ over a point of $D$, being\nnonempty and connected, lies entirely in $U$ or entirely in $V$;\nconsequently $D=\\pi(U)\\sqcup\\pi(V)$ is a disjoint union of nonempty\nopen subsets, $\\pi(U)$ and $\\pi(V)$ being open because $\\pi$ is\nopen, which contradicts the connectedness of $D$. As $D$ runs\nover the finitely many connected components of $B$, the sets\n$\\pi^{-1}(D)$ are pairwise disjoint open connected subsets covering\n$\\mathbf A^1_B$, so they are its connected components. The same\nargument with $\\pi'$ in place of $\\pi$ identifies the connected\ncomponents of $\\mathbf G_{m,B}$. This is (1).\nStep 3: the sections. Let $\\pi^{-1}(D)$ be a connected component of\n$\\mathbf A^1_B$. Choose a point $y\\in D$, which is nonempty; the\nfibre $\\pi^{-1}(y)=\\mathbf A^1_{\\kappa(y)}$ contains the unit point\n$t=1$, which lies in $\\mathbf G_{m,B}$ and is the image of\n$1(y)$ under the unit section. Hence $\\pi^{-1}(D)$ meets\n$\\mathbf G_{m,B}$ and meets the image of the unit section, which is\n(2); the same argument for the components $\\pi'^{-1}(D)$ of\n$\\mathbf G_{m,B}$ gives (3).",
+   "text": "Write $X=\\mathbf A^1_B$, $G=\\mathbf G_{m,B}$, $p:X\\to B$ and $q=p|_G:G\\to B$. The projection $p$ is smooth of relative dimension one by [sbc-lem-affine-space-smooth]. The forward implication of [sbc-lem-smooth-criterion] therefore makes $p$ flat and locally of finite presentation. Apply [lem-weil-pbc-flat-lfp-open] to conclude that $p$ is open. No smoothness, flatness or finite-presentation assertion about $q$ is needed.",
    "uses": [
-    "def-sbc-affine-space",
     "sbc-lem-affine-space-smooth",
-    "def-weil-scheme-morphism-properties"
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-flat-lfp-open"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VE (lemma-smooth-locally-finite-presentation), 01VF (lemma-smooth-flat), 01UA (lemma-fppf-open); blueprint proof Step 1"
+   }
+  },
+  {
+   "text": "The subset $G$ is open in $X$ because it is the complement of the closed image of $s_0$. If $O$ is open in $G$, then $O$ is open in $X$, so $q(O)=p(O)$ is open in $B$. Thus $q$ is open too. The unit section satisfies $p(1(y))=y$ and takes values in $G$, so both $p$ and $q$ are surjective. Both maps are continuous, being underlying maps of scheme morphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-a1-components.md",
+    "place": "Proof Step 1 (open complement) and Step 3 (unit section)"
+   }
+  },
+  {
+   "text": "For $y\\in B$ put $K=\\kappa(y)$. By [def-pc-scheme-fibre], the topological fibre of $p$ is homeomorphic to the underlying space of $X\\times_B\\operatorname{Spec}K$. Using the fibre-product definition of affine space in [def-sbc-affine-space], this scheme is canonically $\\mathbf A^1_{\\operatorname{Spec}K}=\\operatorname{Spec}(K[t])$. Explicitly, a map into $(B\\times_{\\operatorname{Spec}\\mathbb Z}\\operatorname{Spec}\\mathbb Z[t])\\times_B\\operatorname{Spec}K$ is a compatible pair of maps into $\\operatorname{Spec}\\mathbb Z[t]$ and $\\operatorname{Spec}K$; the map into $B$ is forced by the latter. These are exactly the pairs defining $\\operatorname{Spec}K\\times_{\\operatorname{Spec}\\mathbb Z}\\operatorname{Spec}\\mathbb Z[t]$, so [def-pc-fibre-product] supplies mutually inverse maps. The affine-base formula in [def-sbc-affine-space] gives $\\operatorname{Spec}(K[t])$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-sbc-affine-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M0, definition-affine-n-space and following base-change formula; also schemes.tex Tags 01K0 (definition-fibre), 01K1 (lemma-fibre-topological)"
+   }
+  },
+  {
+   "text": "Every fibre of $p$ is connected. Indeed, in the polynomial ring of [def-weil-polynomial-ring], the coefficient in degree $\\deg F+\\deg H$ of the product of two nonzero polynomials over the field $K$ is the product of their nonzero leading coefficients. It is nonzero by the field axioms [def-weil-field], so $K[t]$ is a domain and its zero ideal is prime. In the Zariski topology on the spectrum [def-weil-affine-spectrum], a closed set $V(I)$ containing this zero prime has $I\\subseteq(0)$ and hence is the entire spectrum. Thus the zero prime is dense and belongs to every nonempty open subset. A partition into two nonempty opens is impossible since both would contain it; this proves connectedness in [def-weil-connected-scheme], including nonemptiness.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-field",
+    "def-weil-affine-spectrum",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "definition-spectrum-ring and definition of the Zariski topology; Tag 030A (lemma-polynomial-domain-normal), with the elementary polynomial-domain argument written out"
+   }
+  },
+  {
+   "text": "Every fibre of $q$ is the open subspace $G\\cap p^{-1}(y)$ of the fibre of $p$. It contains $1(y)$, so it is nonempty. Any nonempty open subset of this open subspace is open and nonempty in $p^{-1}(y)$, and therefore contains the dense zero prime from Step 4. Two nonempty disjoint opens of $q^{-1}(y)$ cannot exist. Consequently all fibres of $q$ are connected in the sense of [def-weil-connected-scheme]. This argument needs no localization-domain theorem and applies over every residue field, not only at closed points.",
+   "uses": [
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-a1-components.md",
+    "place": "Proof Step 1, connectedness of punctured-line fibres, with the generic-point argument written out"
+   }
+  },
+  {
+   "text": "Let $f$ be either $p$ or $q$, and let $D\\subseteq B$ be a connected component. For the restriction $f_D:f^{-1}(D)\\to D$, every relative open has the form $f^{-1}(D)\\cap O$ for $O$ open in the source of $f$, and its image is $D\\cap f(O)$. Hence $f_D$ is an open continuous surjection. If $f_D^{-1}(T)$ is closed, its open complement has image exactly $D\\setminus T$, by surjectivity; openness of $f_D$ makes $T$ closed in $D$. The converse follows from continuity. Thus $D$ has the quotient topology under $f_D$. Its fibres are exactly the connected fibres proved in Steps 4 and 5.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0378 (lemma-connected-fibres-connected-components), quotient-topology hypothesis of Tag 0377 written out for the restriction to D"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-connected-fibres-quotient-preimage-connected] with $P=f^{-1}(D)$, $W=D$ and $h=f_D$. Step 6 verifies continuity, all fibres connected, and the equivalence between closedness and closedness of the preimage. The whole space $T=W=D$ is closed in itself and is nonempty and connected because $D$ is a connected component. The lemma therefore proves that $f^{-1}(D)$ is connected. This use does not require $D$ to be open or even closed in $B$.",
+   "uses": [
+    "lem-weil-pbc-connected-fibres-quotient-preimage-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0377, lemma-connected-fibres-quotient-topology-connected-components, applied to f_D and the closed subset T=W"
+   }
+  },
+  {
+   "text": "The connected set $E=f^{-1}(D)$ is maximal connected. To see this, let $C$ be a connected subset containing $E$. A separation of $f(C)$ into two nonempty relative opens would pull back to a separation of $C$, so $f(C)$ is connected [def-weil-connected-scheme]. Surjectivity over $D$ gives $D\\subseteq f(C)$, and maximality of $D$ forces $f(C)=D$. Thus $C\\subseteq f^{-1}(D)=E$, as required.",
+   "uses": [
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0376 (lemma-image-connected-space), elementary proof of connectedness of the image; Tag 004S (definition-connected-components)"
+   }
+  },
+  {
+   "text": "These are all the components of the source of $f$. For completeness, every $y\\in B$ belongs to a component: take the union $D_y$ of all connected subsets containing $y$. In a separation of this union, each such subset lies in the side containing $y$, so the other side is empty; hence $D_y$ is connected and is maximal by its construction [def-weil-connected-scheme]. Now let $C$ be a component of the source and take $x\\in C$, $y=f(x)$. Step 7 gives the connected set $E=f^{-1}(D_y)$ containing $x$. The union $C\\cup E$ is connected, because in a separation both connected subsets must lie on the side containing their common point $x$. Maximality of $C$ and of $E$ (Step 8) yields $C=E$. Applying this for $p$ and $q$ proves clause (1).",
+   "uses": [
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004T, lemma-connected-components, union-of-connected-subsets proof written out; blueprint proof Step 2"
+   }
+  },
+  {
+   "text": "For any component $D$ of $B$, choose $y\\in D$, which is possible by nonempty connectedness. The point $1(y)$ belongs to $G$ and satisfies $p(1(y))=q(1(y))=y$. Therefore it lies in the corresponding components $p^{-1}(D)$ and $q^{-1}(D)$. The component description already proved implies that every component of $X$ meets both $G$ and the image of $1$, and every component of $G$ meets the image of $1$. These are exactly clauses (2) and (3).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-a1-components.md",
+    "place": "Proof Step 3: the sections"
+   }
   }
  ],
  "proof_deps": [
-  "def-sbc-affine-space",
   "sbc-lem-affine-space-smooth",
-  "def-weil-scheme-morphism-properties"
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-pc-scheme-fibre",
+  "def-sbc-affine-space",
+  "def-pc-fibre-product",
+  "def-weil-polynomial-ring",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-connected-fibres-quotient-preimage-connected"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-a1-components.md",
-  "place": "## Proof"
+  "place": "Proof Steps 1-3, completed using Stacks Tags 01M0, 01K1, 01VE, 01VF, 01UA and 0377; elementary subarguments written explicitly"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "connectedComponent|ConnectedSpace|IrreducibleSpace",
+   "results": "3 hits: 414, 415, 438",
+   "date": "2026-10-15",
+   "verdict": "no match: hits describe affine-space coordinates and affine charts, not connected components of both the line and its open complement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The connected components of affine line and punctured affine line over a scheme correspond to connected components of the base",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "no match: zero hits for an affine-space component theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace, connectedComponent",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: AffineSpace.lean has irreducibility instances, not the connected-component and unit-section assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected components of affine space and the multiplicative group over a scheme are the inverse images of connected components of the base",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.AffineSpace.isoOfIsAffine, AlgebraicGeometry.AffineSpace.homOverEquiv_apply, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "preimage.*[Cc]onnected|[Cc]onnected.*preimage|[Cc]onnected.*[Ff]iber",
+   "results": "25 hits: Mathlib/Topology/Connected/PathConnected.lean, Mathlib/Topology/Connected/PathConnected.lean, Mathlib/Topology/Connected/PathConnected.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the item: the quotient-map component theorem is a generic topological ingredient; the geometric fibre and open-map hypotheses still require proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous open surjection with connected fibers the inverse image of each connected component of the target is a connected component of the source",
+   "results": "8 hits: Topology.IsQuotientMap.preimage_connectedComponent, preimage_connectedComponent_connected, Topology.IsQuotientMap.image_connectedComponent, connectedComponents_preimage_image, IsConnected.preimage_of_isOpenMap, Continuous.mapsTo_connectedComponent, Continuous.mapsTo_connectedComponentIn, connectedComponents_preimage_singleton",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the item: hits are generic connectedness and quotient-map results, not affine-line geometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"connectedComponent\", \"preimage\"",
+   "results": "9 hits: Continuous.preimage_connectedComponent, ContinuousOn.preimage_connectedComponentIn, connectedComponents_preimage_singleton, preimage_connectedComponent_connected, Topology.IsCoinducing.preimage_connectedComponent, connectedComponents_preimage_image, IsOpenMap.finite_connectedComponents_of_finite_preimage_singleton_of_connectedSpace, IsOpenMap.enatCard_connectedComponents_le_encard_preimage_singleton",
+   "date": "2026-10-15",
+   "verdict": "no exact match for the item: generic component-preimage formulas require the separately proved geometric hypotheses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -73,5 +238,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-inv"
+ "unit": "sk-prop-a1-inv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-a1-components",
+  "worker": "stage1",
+  "summary": "No project attachment matches all clauses. Reused existing smoothness, smooth-criterion, openness and connected-fibre quotient nodes; no new nodes. Wrote out fibre base change, the polynomial leading-coefficient argument, dense zero-prime connectedness, restriction to an open punctured fibre, quotient topology, maximality and section intersections. Corrected ordinary Spec of the sheaf O_B[t] to relative spectrum, without changing hypotheses or conclusions.",
+  "blueprint": "Steps 1-5 realize blueprint proof Step 1; Steps 6-9 realize Step 2 by the connected-fibre quotient argument without the unnecessary Noetherian detour; Step 10 realizes Step 3. This is the connected-component geometry required by unit sk-prop-a1-inv step (i), not its key statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-d377be861",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-d377be861 (reviewer sub-agent of L); spot-checked: Read the item, unit, all cited nodes, and cited sources in full. Verified all ten proof steps, hypotheses, relative-spectrum correction, component and fibre arguments, edge cases, duplicate searches, and DAG dependencies. No new nodes or repairs are needed."
+ }
 }
