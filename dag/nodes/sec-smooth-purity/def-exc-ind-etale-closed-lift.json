@@ -19,9 +19,29 @@
   "def-weil-pbc-category-colimit",
   "lem-weil-pbc-commutative-algebras-colimits-exist"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "The retained map is the descent of coconeC. Its composite with each coprojection is the corresponding component by Mathlib colimit.ι_desc, which is definitionally the given factorization map. Use general commutative-algebra colimits, independently of filteredness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an indexing morphism f, associativity of algebra-homomorphism composition and f.comp_toC show that postcomposition with an input algebra map preserves compatibility. The underlying algebra maps therefore define the postcomposition functor.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define the induced map by descent from the colimit cocone whiskered by postcomposition. Mathlib colimit.ι_desc identifies its composite with every coprojection with the prescribed coprojection. Again use general colimits, without filteredness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/CategoryTheory/Limits/HasLimits.lean",
+  "place": "colimit.ι_desc; AlgHom.comp_assoc and the existing Index.Hom.comp_toC field; stage-3 direct proofs by E3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -138,5 +158,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Reuses upstream Algebra.ClosedLift, its indexing category, diagram and retained map; supplies the missing postcomposition functor and induced map. The upstream small model uses ideals of relations rather than finite lists: etaleness implies finite presentation and hence finite generation of these relation ideals, so forgetting redundant finite generating lists gives an equivalent indexing category. All input A/I-algebras carry their induced A-algebra structures; these constructions do not otherwise depend on I or ind-etaleness."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-eee38",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T182202-L-785252",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three proofs and preserved constructions with def-exc-ind-etale-closed-lift; verified DAG metadata, permitted axioms, clean delivery compilation and all four direct importers."
  }
 }

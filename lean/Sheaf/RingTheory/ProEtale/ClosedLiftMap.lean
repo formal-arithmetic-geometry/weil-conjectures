@@ -6,9 +6,6 @@ Authors: SHEAF group NE
 module
 
 public import WeilConjectures.RingTheory.ProEtale.ClosedLift
-public import Sheaf.RingTheory.IndPrincipalZariski
-public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Mathlib.RingTheory.FinitePresentation
 
 /-! # Functoriality of the ind-etale closed lift
 
@@ -33,19 +30,25 @@ namespace Algebra.ClosedLift
 variable {A C C' : Type u} [CommRing A] [CommRing C] [CommRing C']
   [Algebra A C] [Algebra A C']
 
+-- Use arbitrary colimits without depending on the open filteredness theorem.
+attribute [-instance] isFiltered_index in
 /-- The retained map to the input algebra is induced by the factorization maps.
 Source: blueprint `def-exc-ind-etale-closed-lift`, second paragraph
 (blueprint: def-exc-ind-etale-closed-lift).
 Proof: the defining colimit descent satisfies `colimit.ι_desc` at every index. -/
 theorem ι_toAlgHom (X : Index A C) :
-    (toAlgHom A C).comp (colimit.ι (diagram A C) X).hom = X.toC := sorry
+    (toAlgHom A C).comp (colimit.ι (diagram A C) X).hom = X.toC := by
+  change (colimit.ι (diagram A C) X ≫ colimit.desc (diagram A C) (coconeC A C)).hom = _
+  rw [colimit.ι_desc]
+  rfl
 
 /-- Postcomposition preserves compatibility with the input algebra map.
 Source: blueprint `def-exc-ind-etale-closed-lift`, final sentence
 (blueprint: def-exc-ind-etale-closed-lift).
 Proof: associate the three algebra maps and substitute `f.comp_toC`. -/
 theorem postcomp_compatible (φ : C →ₐ[A] C') {X Y : Index A C} (f : X ⟶ Y) :
-    (φ.comp Y.toC).comp f.hom = φ.comp X.toC := sorry
+    (φ.comp Y.toC).comp f.hom = φ.comp X.toC := by
+  rw [AlgHom.comp_assoc, f.comp_toC]
 
 /-- Postcomposition on the small indexing categories, leaving all underlying algebra maps
 unchanged. Source: blueprint `def-exc-ind-etale-closed-lift`, final sentence
@@ -54,6 +57,7 @@ noncomputable def postcomp (φ : C →ₐ[A] C') : Index A C ⥤ Index A C' wher
   obj X := ⟨X.n, X.rel, X.etale, φ.comp X.toC⟩
   map f := ⟨f.hom, postcomp_compatible φ f⟩
 
+attribute [-instance] isFiltered_index in
 /-- The map of closed lifts induced by the cocone with components indexed by `(B, φ ∘ q)`.
 Source: blueprint `def-exc-ind-etale-closed-lift`, final sentence
 (blueprint: def-exc-ind-etale-closed-lift). -/
@@ -61,12 +65,17 @@ noncomputable def map (φ : C →ₐ[A] C') : ClosedLift A C →ₐ[A] ClosedLif
   (colimit.desc (diagram A C)
     ((colimit.cocone (diagram A C')).whisker (postcomp φ))).hom
 
+attribute [-instance] isFiltered_index in
 /-- The structure maps characterize the induced map of closed lifts.
 Source: blueprint `def-exc-ind-etale-closed-lift`, final displayed equation
 (blueprint: def-exc-ind-etale-closed-lift).
 Proof: apply the factorization identity `colimit.ι_desc` to the defining cocone. -/
 theorem ι_map (φ : C →ₐ[A] C') (X : Index A C) :
     (map φ).comp (colimit.ι (diagram A C) X).hom =
-      (colimit.ι (diagram A C') ((postcomp φ).obj X)).hom := sorry
+      (colimit.ι (diagram A C') ((postcomp φ).obj X)).hom := by
+  change (colimit.ι (diagram A C) X ≫ colimit.desc (diagram A C)
+    ((colimit.cocone (diagram A C')).whisker (postcomp φ))).hom = _
+  rw [colimit.ι_desc]
+  rfl
 
 end Algebra.ClosedLift
