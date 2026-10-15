@@ -1,0 +1,120 @@
+{
+ "id": "def-kun-constant-projection-morphism",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f12",
+   "place": "the canonical map in the statement and its terminal-geometric-morphism construction in proof step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Canonical constant-coefficient derived projection morphism",
+ "statement": "Let $X$ be a scheme with small etale site $X_{\\Et}$ [def-weil-pbc-etale-site], and let $\\Lambda$ be a commutative ring. Use $D(X_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories], $D(\\Lambda)$ [def-weil-abstract-derived-category], and ordinary derived tensor [def-kun-derived-tensor]. The constant-presheaf functor to presheaves of $\\Lambda$-modules has the uniquely determined monoidal core whose unit and tensor constraints have identity components at every site object. Its composite with monoidal sheafification is the constant-sheaf functor $a^*$ of [def-kun-constant-sheaf]. It preserves flat objects. Let $L=La^*$, canonically identified with the termwise constant-complex functor since $a^*$ is exact, and let $R=R\\Gamma(X_{\\Et},-)$ be the unbounded right derived functor of [def-weil-pbc-global-sections-functor]. Use the canonical derived adjunction $L\\dashv R$ induced from constant sheaves and global sections, with counit $\\varepsilon$. The canonical comparison $c_{M,N}:L(M\\otimes^L_\\Lambda N)\\longrightarrow LM\\otimes^L_\\Lambda LN$ is obtained by deriving the normalized ordinary constant-sheaf comonoidal constraint; on K-flat representatives it is the ordinary tensor comparison followed by the localization identifications. For arbitrary $E\\in D(X_{\\Et},\\Lambda)$ and $K\\in D(\\Lambda)$ define the constant-coefficient projection morphism to be the adjunct of $c_{RE,K}$ followed by $\\varepsilon_E\\otimes 1_{LK}$:\n$$\\mathrm{PF}_{X,\\Lambda}(E,K): RE\\otimes^L_\\Lambda K\\longrightarrow R(E\\otimes^L_\\Lambda LK).$$\nNo finite dimension, torsion, boundedness, properness or invertibility assumption enters this construction.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map), specialized to the terminal morphism of etale-cohomology.tex Tag 0F12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor",
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-global-sections-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The constant etale sheaf functor is strong monoidal preserves flat modules and yields a canonical derived global sections projection map",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, SheafOfModules.unitToPushforwardObjUnit, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.sheafToPresheaf_ε, SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+   "date": "2026-10-15",
+   "verdict": "no match for the terminal-site derived constant projection morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaf functor on small etale site preserves flat modules and derived global sections projection morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable: service Internal Server Error; no mathematical verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"Monoidal\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match for the terminal-site derived constant projection morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(Monoidal|PreservesFlat)|constant.*DerivedProjection",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match for the terminal-site derived constant projection morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "rg of upstream WeilConjectures, side lean/Sheaf and DAG: constantSheaf.*Monoidal, constant.*DerivedProjection, constant presheaf.*monoidal; blueprint_refs.py search constant projection",
+   "results": "Upstream has generic leftDerivedTensorComparison and scheme-morphism projection maps. Side ConstantFiniteFreeDualNaturality has a private monoidal constant-sheaf instance, unavailable outside its module. No public normalized constant functor structure or constantDerivedProjectionMap; no DAG node for the terminal-site comparison. def-kun-projection-formula-map covers only a scheme morphism. blueprint_refs search: zero matching blueprint nodes.",
+   "date": "2026-10-15",
+   "verdict": "missing public terminal-site construction; reuse existing generic derivation and adjunction APIs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-kun-0f12",
+  "date": "2026-10-15",
+  "group": "NA"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap",
+  "declaration": "AlgebraicGeometry.Etale.constantDerivedProjectionMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.exists_etaleConstantPresheafCoreMonoidal",
+   "AlgebraicGeometry.Etale.etaleConstantPresheafMonoidal",
+   "AlgebraicGeometry.Etale.etaleConstantSheafMonoidal",
+   "AlgebraicGeometry.Etale.etaleConstantSheaf_preservesFlat",
+   "AlgebraicGeometry.Etale.derivedConstantGlobalSectionsAdjunction",
+   "AlgebraicGeometry.Etale.constantDerivedProjectionMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleConstantProjectionMap.lean",
+  "statement": "def constantDerivedProjectionMap (X : Scheme.{u}) [(constantSheaf X.smallEtaleTopology A).Monoidal] [(constantSheaf X.smallEtaleTopology A).PreservesFlat] (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) (K : DerivedCategory A) : (((rightDerivedGlobalSections A X) ⋙ curriedTensor (DerivedCategory A)).obj E).obj K ⟶ (((Functor.postcompose₂.obj (rightDerivedGlobalSections A X)).obj ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj (constantSheaf X.smallEtaleTopology A).leftDerivedFunctor).obj (curriedTensor _))).obj E).obj K",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The adjunction and mate declarations are generic in a coefficient category A, with the standard upstream monoidal Grothendieck hypotheses. Specialize A to ModuleCat.{u + 1} Λ. The normalized constant-presheaf monoidal core and flat-preservation theorem in this same module supply its two constant-functor instances for every commutative Λ; all other coefficient instances are existing upstream instances. This introduces no extra hypothesis in lem-kun-0f12. The uniquely determined core has every unit/tensor hom component fixed to the identity; no arbitrary monoidal comparison is chosen."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5224a5a8b",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5224a5a8b",
+  "group": "NA",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, edge cases, docstrings, and universes checked; both delivered Lean modules compiled cleanly with scompile.py."
+ }
+}
