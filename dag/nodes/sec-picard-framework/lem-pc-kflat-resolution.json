@@ -137,26 +137,26 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kfr1904 (reviewer sub-agent of L); spot-checked: No cycle: item cites only its three new nodes, none of def-pc-derived-pullback / lem-pc-ringed-spaces-derived-pullback-composition. Existing 06YD (lem-pc-bounded-above-flat-kflat) and 06YB (lem-pc-kflat-stalk-criterion) are ringed-space statements, not usable on an arbitrary site, so lem-pc-kflat-closure is not a duplicate (it is the site version incl. 06Y5-type closure); lem-kun-* are etale-site only. New statements true (functorial bounded-above flat replacement via Tot of functorial j_! resolutions; K-flat closed under cones/sums; hocolim of truncations). Mathlib grep KFlat: no hit. FIX more, RETURN less: (1) Step 3 (C1) applied the filtered-colimit clause directly to a homotopy colimit, which is not a filtered colimit; rewritten: direct sums as filtered colimits of finite sums, then map of cones + five lemma, then the truncation comparison; (2) Step 2 surjectivity argument was muddled (attributed surjectivity onto hocolim of truncations to eventual identity, and never argued hocolim tau->G surjective); rewritten with explicit degreewise components; Step 4 restated accordingly.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Algebra.Homology.KFlatResolutionGeneral",
-  "declaration": "CochainComplex.exists_isKFlatResolutionGeneral",
+  "module": "Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients",
+  "declaration": "CochainComplex.exists_isKFlatResolutionIndependentCoefficients",
   "declarations": [
-   "CochainComplex.exists_isKFlatResolutionGeneral"
+   "CochainComplex.exists_isKFlatResolutionIndependentCoefficients"
   ],
-  "file": "lean/Sheaf/Algebra/Homology/KFlatResolutionGeneral.lean",
-  "statement": "theorem exists_isKFlatResolutionGeneral {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{max u v}} (G : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) : ∃ (K : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) (f : K ⟶ G), CochainComplex.IsKFlat K ∧ (∀ i : ℤ, exactFunctor _ _ (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory R) (K.X i))) ∧ QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i))",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatResolutionIndependentCoefficients.lean",
+  "statement": "theorem exists_isKFlatResolutionIndependentCoefficients {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] {R : Sheaf J CommRingCat.{r}} (G : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : ∃ (K : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (f : K ⟶ G), CochainComplex.IsKFlat K ∧ (∀ i : ℤ, exactFunctor _ _ (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory R) (K.X i))) ∧ QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i))",
   "branch": "newtargets-dag",
-  "by": "NF",
+  "by": "NB",
   "date": "2026-10-15",
   "existing": false,
-  "note": "The recorded resolution theorem requires Category.{u} on Type u and cannot apply to the small pro-etale site. The repaired theorem retains arbitrary complexes, K-flatness, flat terms, quasi-isomorphism, and degreewise epimorphic augmentation, with independent site universes and coefficients in max u v. Flatness is stated by the exact tensorRight functor, exactly the defining condition of the recorded flat-sheaf predicate."
+  "note": "The recorded coefficient universe max(site-object,site-morphism) cannot accommodate independently sized coefficient fields. Retain all four resolution properties with independent coefficient universe, using the now-published CochainComplex.IsKFlat and the standard relative-smallness convention, without any equality on site universes."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-24ba6f6eb",
-  "group": "NF",
+  "reviewer": "NT-stage2-Codex-f0f9514fd",
+  "group": "NB",
   "result": "pass",
-  "note": "Wrote review.md. Verified all statement clauses, dependencies, universe repairs, canonical maps, edge cases, signatures, report sections, and pilot gates. All four delivered modules reproduced cleanly through server-only scompile.py. No delivery errors found; branch unchanged."
+  "note": "Checked all clauses, dependencies, sources, universes, canonical constructions, edge cases, docstrings, and verbatim signatures. All five files reproduced cleanly through scompile.py; no delivery errors found."
  },
  "reviewed_proof": {
   "date": "2026-10-12",
