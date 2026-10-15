@@ -3,55 +3,230 @@
  "blueprint": {
   "is": "thm-cbc-finite-level-proetale",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-level pro-etale compact-support base change",
- "statement": "Let $\\Lambda$ be finite, let $\\square$ be a\ncompact-support\nbase-change square with $f$ separated of finite type and\n$g:Y'\\to Y$ arbitrary, and let\n$K\\in D^+(X_{\\Proet},\\Lambda)$ carry an\netale-origin witness\n$(L,\\alpha)$. Then the pro-etale exchange map\n\n$$\ng^{-1}Rf_!K\\xrightarrow{\\ \\sim\\ }Rf'_!g'^{-1}K\n$$\n\nof [def-cbc-exchange-map] (with the compact-support functors\nand exchange map of [def-cbc-exchange-map] transported to the\npro-etale site) is an isomorphism; it is independent of replacing\nthe witness by an isomorphic one.",
+ "statement": "Let $\\Lambda$ be finite, let $\\square$ be a\ncompact-support\nbase-change square with $f$ separated of finite type and\n$g:Y'\\to Y$ arbitrary, and let\n$K\\in D^+(X_{\\Proet},\\Lambda)$ carry an\netale-origin witness\n$(L,\\alpha)$. Then the pro-etale exchange map\n\n$$\ng^{-1}Rf_!K\\xrightarrow{\\ \\sim\\ }Rf'_!g'^{-1}K\n$$\n\nof [def-cbc-exchange-map] (with the compact-support functors\nand exchange map of [def-cbc-exchange-map] transported to the\npro-etale site) is an isomorphism; it is independent of replacing\nthe witness by an isomorphic one.\n\nHere $\\Lambda$ is the finite commutative coefficient ring of [def-cbc-exchange-map], and the small pro-etale categories use constant discrete modules [def-weil-pbc-proetale-modules]. For arbitrary bases, the compact-support functors and exchange are the Zariski-local extension [lem-cbc-etale-local-compact-support-extension] of that definition's compactification formulas, transported to etale-origin objects. This supplies their meaning when there is no chosen global compactification; no compactification datum or quasi-compact-open hypothesis is imposed on the square. The witness is that of [def-weil-pbc-etale-origin-witness]. The square and its morphism hypotheses use [def-cbc-compact-support-square] and [def-weil-pbc-scheme-conventions].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
   "place": "node thm-cbc-finite-level-proetale, order 1648"
  },
  "stmt_deps": [
   "def-cbc-exchange-map",
-  "def-weil-pbc-scheme-conventions"
+  "def-cbc-compact-support-square",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-cbc-etale-local-compact-support-extension"
  ],
  "proof": [
   {
-   "text": "Choose a compactification $c=(j,p)$ of $f$ with base change\n$c'$ as in [def-cbc-compact-support-square]. The etale\nstatement of [thm-cbc-finite-torsion] applies to the etale\nrepresentative $L$: the etale exchange map\n$\\operatorname{Ex}_!(L)$ is an isomorphism. Transporting it to\nthe pro-etale site: the fully faithful comparison\n$\\nu_T^*$ of [thm-weil-pbc-site-comparison] (the interface\n`OBL-PBC-SITE-COMPARISON` of the proper-base-change chapter) carries the\ndirect-image parts by\n[lem-weil-pbc-transport-identifies-exchange] (and\n[prop-weil-pbc-comparison-direct-image]), and the\nextension-by-zero factors by the comparisons\n[lem-cbc-proetale-extension-zero-comparison] (etale to\npro-etale) and [lem-cbc-proetale-extension-zero-base-change]\n(pro-etale base change); the transported composite is the pro-etale\nmap of [def-cbc-exchange-map] for $K=\\nu_X^*L$. Independence\nof the witness follows from the functoriality of the transported map and\nthe notion of an etale-origin witness of\n[def-weil-pbc-etale-origin-witness].",
+   "text": "Retain the original unrestricted $f$ and $g$. Put $A_T=\\nu_T^*$. The witness [def-weil-pbc-etale-origin-witness] gives $L\\in D^+(X_{\\mathrm{et}},\\Lambda)$ and $\\alpha:A_XL\\simeq K$. The morphism $f′$ is separated of finite type by [lem-pod-separated-finite-type-base-change], so the extension lemma applies to both vertical maps. Use [lem-cbc-etale-local-compact-support-extension] to form the global etale compact-support functors $H_f,H_{f'}$ and the specified natural arrow $E_L:g_e^{-1}H_fL\\to H_{f'}g_e'{}^{-1}L$. This supplies the construction missing from the source's initial global choice; it asserts no invertibility. Its restriction to $V'=g^{-1}V$, for any open $V\\subseteq Y$, is the arrow for $f_V:X\\times_YV\\to V$, computed with a compactification of $f_V$ whenever one is available. In steps 2--5 fix an affine open $V\\subseteq Y$, work on this restricted square, and abbreviate $f_V,g|_{V'}$ and $L|_{X\\times_YV}$ by $f,g,L$. There is no assertion that $V'$ is affine or qcqs.",
    "uses": [
-    "def-cbc-compact-support-square",
-    "thm-cbc-finite-torsion",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-transport-identifies-exchange",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "def-cbc-exchange-map",
-    "def-weil-pbc-etale-origin-witness"
+    "def-weil-pbc-etale-origin-witness",
+    "lem-cbc-etale-local-compact-support-extension",
+    "lem-pod-separated-finite-type-base-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof, opening choice: explicit local-extension repair without a new hypothesis"
+   }
+  },
+  {
+   "text": "An affine $V$ is qcqs: apply [lem-weil-pbc-qcqs-over-affine] to its identity, whose quasi-compactness and quasi-separatedness follow directly from the identity diagonal and identity inverse images. The base-change theorem [lem-pod-separated-finite-type-base-change], applied to $V\\hookrightarrow Y$, makes $f_V$ separated of finite type. Therefore [thm-nagata-compactification] supplies a compactification $c=(j,p)$ over this $V$. The open immersion $j$ is quasi-compact by [lemma-nagata-open-immersion-qc-over-separated-target], applied to $X_V\\xrightarrow{j}\\overline X_V\\xrightarrow{p}V$: $X_V\\to V$ is finite type and $p$ is separated because it is proper. Thus quasi-compactness is proved, not assumed. [def-cbc-compact-support-square] supplies $c'=(j',p')$ over arbitrary $V'=g^{-1}V$. By the properness convention [def-weil-pbc-scheme-conventions], proper $p,p'$ are quasi-compact by finite type and quasi-separated by [lem-pc-separated-quasi-separated], so both meet the direct-image comparison hypotheses.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-weil-pbc-scheme-conventions",
+    "thm-nagata-compactification",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "def-cbc-compact-support-square",
+    "lem-pc-separated-quasi-separated",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof, opening choice: Nagata applied only to affine target charts"
+   }
+  },
+  {
+   "text": "The local witness representative $L$ is bounded below; restriction and inverse image are exact for constant module coefficients as in [def-cbc-exchange-map]. The hypotheses of [thm-cbc-finite-torsion] now hold on this chart: finite commutative $\\Lambda$, separated finite-type $f$, compactification with quasi-compact open part proved in step 2, and arbitrary $g:V'\\to V$. Hence the compactification exchange $E_L^c$ is an isomorphism and is natural in $L$. By the localization and normalization clauses of [lem-cbc-etale-local-compact-support-extension], this is precisely the restriction of the global etale arrow of step 1. It is not necessary to choose a global compactification of the original $f$.",
+   "uses": [
+    "def-cbc-exchange-map",
+    "thm-cbc-finite-torsion",
+    "lem-cbc-etale-local-compact-support-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof, etale finite-torsion theorem, applied chartwise"
+   }
+  },
+  {
+   "text": "Write $A_T=\\nu_T^*$. Exactness of $A_T$ is [prop-weil-pbc-site-comparison-finite-level]. Etale extension by zero preserves quasi-isomorphisms and acts degreewise by [lem-weil-pbc-extension-by-zero-exact], and pro-etale extension by zero is exact and degreewise by [lem-cbc-proetale-extension-zero]. For a representative complex $C$ of $L$, apply the natural sheaf comparison of [lem-cbc-proetale-extension-zero-comparison] in each degree. Naturality with respect to $d_C^n$ says the resulting components commute with the differentials; their inverses do too. This gives a chain isomorphism $e_{j,L}:A_{\\bar X}j_!^eL\\simeq j_!^pA_XL$, independent of the representative, since all functors preserve quasi-isomorphisms. In particular $j_!^eL$ stays bounded below. Take $b_p$ to be the specified canonical counit-mate direct-image comparison normalized in [lem-weil-pbc-transport-identifies-exchange], not an arbitrary choice of isomorphism; its underlying natural isomorphism is [prop-weil-pbc-comparison-direct-image]. Combine it with $e_j$ to obtain\n$$C_{c,L}:A_Y Rf_!^{c,e}L=A_YRp_*^ej_!^eL\\xrightarrow{b_{p,j_!L}}Rp_*^pA_{\\bar X}j_!^eL\\xrightarrow{Rp_*^p(e_{j,L})}Rf_!^{c,p}A_XL.$$\nBoth arrows are isomorphisms, natural in $L$. For $M=g_e'{}^{-1}L$, the base-changed formula is explicitly\n$$C_{c',M}:A_{Y'}Rp'_*^ej'_!^eM\\xrightarrow{b_{p',j'_!M}}Rp'_*^pA_{\\bar X'}j'_!^eM\\xrightarrow{Rp'_*^p(e_{j',M})}Rp'_*^pj'_!^pA_{X'}M.$$\nHere $M$ is bounded below because etale inverse image is exact, as in [def-cbc-exchange-map]; the degreewise natural comparison for $j'$ gives $e_{j',M}$ and the qcqs map $p'$ gives $b_{p'}$.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "def-cbc-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof, local proper/open comparisons, chain-level extension made explicit"
+   }
+  },
+  {
+   "text": "Let $a_u:A_Uu_e^{-1}\\simeq u_p^{-1}A_V$ be the natural pullback comparison of [lem-weil-pbc-comparison-pullback]. With $C_c$ from step 4 define\n$$S_L=g_p^{-1}(C_{c,L})\\circ a_{g,Rf_!^{c,e}L},\\qquad T_L=Rf'_!^{c',p}(a_{g',L})\\circ C_{c',g_e'{}^{-1}L}.$$\nThus $S_L$ has source $A_{Y'}g_e^{-1}Rf_!^{c,e}L$ and target $g_p^{-1}Rf_!^{c,p}A_XL$, while $T_L$ has source $A_{Y'}Rf'_!^{c',e}g_e'{}^{-1}L$ and target $Rf'_!^{c',p}g_p'{}^{-1}A_XL$. They are natural isomorphisms. By the transported-map convention in the original statement, the transported compact-support exchange is explicitly\n$$F_L=T_L\\circ A_{Y'}(E_L)\\circ S_L^{-1}.$$\nThis is the transport of the composite defining [def-cbc-exchange-map], rather than a choice of an arbitrary isomorphism between its endpoints. For its proper part [lem-weil-pbc-transport-identifies-exchange], applied to $p,p'$ and $j_!^eL$, identifies the conjugated proper exchange with the specified pro-etale proper exchange. For its open part [lem-cbc-proetale-extension-zero-base-change] supplies the canonical pro-etale extension-by-zero base-change isomorphism on complexes. We only need the transported composite specified in the item, so no claim about a separately normalized compact-support transformation outside the etale-origin class is used.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "def-cbc-exchange-map",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof, local conjugation identifies the transported compactification formula"
+   }
+  },
+  {
+   "text": "Return to the original global square and its etale arrow $E_L$ of step 1. Every geometric point of $Y'$ lies in $g^{-1}V$ for some affine open $V\\subseteq Y$. By step 3 the restriction of $E_L$ there is an isomorphism. Exact inverse image commutes with kernels and cokernels, hence with cohomology, by [prop-weil-pbc-inverse-image-modules-exact]. Thus every $\\mathcal H^q(E_L)$ is an isomorphism at every geometric stalk. [lemma-weil-pbc-geometric-stalk-conservative] makes each underlying abelian-sheaf map an isomorphism; its inverse is $\\Lambda$-linear because $\\mathcal H^q(E_L)$ is, so it is also an isomorphism of module sheaves. Apply [lem-weil-pbc-derived-plus-iso-on-cohomology] to the abelian category of constant $\\Lambda$-module sheaves of [def-weil-pbc-derived-categories]: since every cohomology map is invertible, $E_L$ is an isomorphism in its bounded-below derived category. This uses local detection for an already constructed global morphism; it does not infer gluing of arbitrary morphisms in the ordinary derived category.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-derived-categories",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof, missing passage from local compactification models to arbitrary bases"
+   }
+  },
+  {
+   "text": "Use the transported functors meant in the original statement. Explicitly, on etale-origin objects one may take $F_f=A_YH_fR\\nu_{X,*}$ and $F_{f'}=A_{Y'}H_{f'}R\\nu_{X',*}$. The unit isomorphism $\\eta_T:\\operatorname{id}\\simeq R\\nu_{T,*}A_T$ of [thm-weil-pbc-site-comparison] gives natural comparison isomorphisms $C_{f,L}=A_YH_f(\\eta_{X,L}):A_YH_fL\\simeq F_fA_XL$, and similarly for $f'$. Pullback preserves etale origin by [lem-weil-pbc-comparison-pullback], so all these formulas are defined. On an affine compactification chart, let $q^f_c:H_f\\xrightarrow{\\sim}Rf_!^{c,e}$ be the comparison from step 1 and define $D_{c,L}=C_{c,L}\\circ A_Y(q^f_{c,L})\\circ C_{f,L}^{-1}:F_fA_XL\\xrightarrow{\\sim}Rf_!^{c,p}A_XL$. Define $D_{c′,M}$ by the displayed formula of step 4 with $M=g_e′{}^{-1}L$. For a restriction of a global object, insert $r^f_V$ and the pullback comparison $a$ first; their compatibility with $q$ is part of the extension node. The equation $D_{c,L}C_{f,L}=C_{c,L}A_Y(q^f_{c,L})$, and its primed equation, show that conjugating the formula below by these endpoint identifications cancels $C_f$ and $C_{f′}$ and gives exactly the compactification formula of step 5: the middle arrow becomes $E^c_L$ by the normalization in step 3, and naturality of $a_{g′}$ moves it past the target comparison. Thus this is also the transported map of the source on every compactification chart. With $a_u$ the pullback comparison set\n$$S_L=g_p^{-1}(C_{f,L})\\circ a_{g,H_fL},\\qquad T_L=F_{f'}(a_{g',L})\\circ C_{f',g_e'{}^{-1}L}.$$\nTheir sources are $A_{Y'}g_e^{-1}H_fL$ and $A_{Y'}H_{f'}g_e'{}^{-1}L$, respectively, and their targets are $g_p^{-1}F_fA_XL$ and $F_{f'}g_p'{}^{-1}A_XL$. The global transported arrow on $A_XL$ is therefore\n$$F_L=T_L\\circ A_{Y'}(E_L)\\circ S_L^{-1}.$$\nAll its factors are invertible by step 6 and the displayed comparisons. Put $P=g_p^{-1}F_f$, $Q=F_{f'}g_p'{}^{-1}$; the actual map on $K$ is $Q(\\alpha)\\circ F_L\\circ P(\\alpha)^{-1}$ and is invertible. For another witness $(L',\\alpha')$, full faithfulness in [thm-weil-pbc-site-comparison] lifts $\\alpha'^{-1}\\alpha:A_XL\\to A_XL'$ uniquely to $u:L\\to L'$. Lifting the inverse and using faithfulness shows that $u$ is invertible. Naturality gives $F_{L'}P(A_Xu)=Q(A_Xu)F_L$. Substitution of $\\alpha'A_Xu=\\alpha$ into the two witness formulas and cancellation proves equality of the actual arrows on $K$. No global compactification, qcqs base, residue-characteristic restriction, or constructibility hypothesis was used.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof, global transport and witness-independence calculation"
+   }
   }
  ],
  "proof_deps": [
   "def-cbc-compact-support-square",
-  "thm-cbc-finite-torsion",
-  "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-transport-identifies-exchange",
-  "prop-weil-pbc-comparison-direct-image",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-cbc-proetale-extension-zero-base-change",
   "def-cbc-exchange-map",
-  "def-weil-pbc-etale-origin-witness"
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-scheme-conventions",
+  "lem-cbc-etale-local-compact-support-extension",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pc-separated-quasi-separated",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-cbc-finite-torsion",
+  "thm-nagata-compactification",
+  "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
-  "place": "## Proof"
+  "place": "Proof; opening global compactification inference repaired by local extension; source available at /home/ubuntu/weil-launcher-nt/literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For finite coefficients etale origin proetale complexes satisfy compactly supported base change along arbitrary maps of schemes",
+   "results": "8 hits; returned first names/files: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, RingHom.Etale.stableUnderComposition, Algebra.Etale.comp, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-15",
+   "verdict": "no match: these are ordinary scheme morphism, affine-limit, sheaf equivalence, or topological compact-support results; no derived etale compact-support construction or pro-etale compact-support exchange theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "0 hits; returned first names/files: ",
+   "date": "2026-10-15",
+   "verdict": "no match: these are ordinary scheme morphism, affine-limit, sheaf equivalence, or topological compact-support results; no derived etale compact-support construction or pro-etale compact-support exchange theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|compactSupport.*baseChange",
+   "results": "10 hits; returned first names/files: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-15",
+   "verdict": "no match: these are ordinary scheme morphism, affine-limit, sheaf equivalence, or topological compact-support results; no derived etale compact-support construction or pro-etale compact-support exchange theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct the etale derived direct image with compact support for a separated finite type morphism over any base by Zariski descent from local compactifications, with restriction-compatible exchange morphisms",
+   "results": "8 hits; returned first names/files: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-15",
+   "verdict": "no match: these are ordinary scheme morphism, affine-limit, sheaf equivalence, or topological compact-support results; no derived etale compact-support construction or pro-etale compact-support exchange theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"shriek\"",
+   "results": "0 hits; returned first names/files: ",
+   "date": "2026-10-15",
+   "verdict": "no match: these are ordinary scheme morphism, affine-limit, sheaf equivalence, or topological compact-support results; no derived etale compact-support construction or pro-etale compact-support exchange theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactSupport|compactification",
+   "results": "0 hits; returned first names/files: ",
+   "date": "2026-10-15",
+   "verdict": "no match: these are ordinary scheme morphism, affine-limit, sheaf equivalence, or topological compact-support results; no derived etale compact-support construction or pro-etale compact-support exchange theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski descent extends the etale compact support derived functor from compactifiable morphisms to separated finite type morphisms of arbitrary schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy coherent system of compactification based etale cohomology functors on affine open subsets extends to a bounded below functor on sheaves over the whole scheme",
+   "results": "8 hits; returned first names/files: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+   "date": "2026-10-15",
+   "verdict": "no match: these are ordinary scheme morphism, affine-limit, sheaf equivalence, or topological compact-support results; no derived etale compact-support construction or pro-etale compact-support exchange theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compactification\"",
+   "results": "0 hits; returned first names/files: ",
+   "date": "2026-10-15",
+   "verdict": "no match: these are ordinary scheme morphism, affine-limit, sheaf equivalence, or topological compact-support results; no derived etale compact-support construction or pro-etale compact-support exchange theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compact.support|compactification.*descent",
+   "results": "25 hits; returned first names/files: Mathlib/Topology/UrysohnsLemma.lean, Mathlib/Topology/Algebra/Order/Support.lean, Mathlib/Topology/Algebra/Order/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean",
+   "date": "2026-10-15",
+   "verdict": "no match: these are ordinary scheme morphism, affine-limit, sheaf equivalence, or topological compact-support results; no derived etale compact-support construction or pro-etale compact-support exchange theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -85,5 +260,75 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-cbc-finite-level-proetale",
+  "worker": "stage1",
+  "summary": "Repair of E1 and 7b: restored the exact upstream assertion with unrestricted f and g; removed the supplied-compactification and quasi-compact-open hypotheses. Read the actual blueprint and Stacks/SGA sources in the launcher literature directory. Added one statement-only construction/localization interface for the etale compact-support functor and arrow over arbitrary bases. Apply Nagata and finite-torsion base change only on affine target charts, derive quasi-compactness of each open part, detect the global etale isomorphism by cohomology stalks, and transport with explicit conjugation and witness cancellation. The new node asserts existence/local formulas, not base-change invertibility. Second reading replaces undefined enhancement/uniqueness language by explicit ordinary-category interface equations, cites base-change stability for both vertical maps, and uses the existing cohomology-isomorphism criterion directly.",
+  "blueprint": "Opening sentence 'Choose a compactification': repaired at proof steps 1--2 by Zariski-local construction plus local Nagata. Finite-torsion comparison: step 3. Proper and open site comparisons: steps 4--5. Globalization absent from the source: step 6. Transport and independence of witness: step 7. The unit's coefficient-stage route is retained; no unit/chapter file is changed.",
+  "statement_dispute": "STATEMENT-DISPUTED (construction/type defect, not a counterexample to base change): def-cbc-exchange-map only supplies compactification-dependent formulas, while the exact source allows arbitrary bases and its proof invokes a global compactification without justification. Correct the construction by its explicit Zariski-local extension; do not add hypotheses. The upstream assertion is retained verbatim before this clarification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic compactification, exactness, stalk/localization, or site-comparison input in the original finite-etale-to-pro-etale route; the compact-support unit supplies no substitute for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic compactification, exactness, stalk/localization, or site-comparison input in the original finite-etale-to-pro-etale route; the compact-support unit supplies no substitute for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Generic compactification, exactness, stalk/localization, or site-comparison input in the original finite-etale-to-pro-etale route; the compact-support unit supplies no substitute for this interface."
+   },
+   {
+    "node": "lemma-nagata-open-immersion-qc-over-separated-target",
+    "why": "Generic compactification, exactness, stalk/localization, or site-comparison input in the original finite-etale-to-pro-etale route; the compact-support unit supplies no substitute for this interface."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic compactification, exactness, stalk/localization, or site-comparison input in the original finite-etale-to-pro-etale route; the compact-support unit supplies no substitute for this interface."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Generic compactification, exactness, stalk/localization, or site-comparison input in the original finite-etale-to-pro-etale route; the compact-support unit supplies no substitute for this interface."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic compactification, exactness, stalk/localization, or site-comparison input in the original finite-etale-to-pro-etale route; the compact-support unit supplies no substitute for this interface."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Generic compactification, exactness, stalk/localization, or site-comparison input in the original finite-etale-to-pro-etale route; the compact-support unit supplies no substitute for this interface."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic compactification, exactness, stalk/localization, or site-comparison input in the original finite-etale-to-pro-etale route; the compact-support unit supplies no substitute for this interface."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic compactification, exactness, stalk/localization, or site-comparison input in the original finite-etale-to-pro-etale route; the compact-support unit supplies no substitute for this interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-nagata-compactification",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-N3-fb6da747a",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-fb6da747a (reviewer sub-agent of L); spot-checked: The mathematics and source checks pass, but the new node's `created` record omits required `by`, `date`, and `group` fields. Corrected full JSON is in fixes/dag/nodes/sec-smooth-purity/lem-cbc-etale-local-compact-support-extension.json.; 1 file(s) fixed by the reviewer"
+ }
 }
