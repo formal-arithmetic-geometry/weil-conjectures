@@ -244,5 +244,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-fcf627e88 (reviewer sub-agent of L); spot-checked: Read the item, cited statements and source passages in full. All six steps have matching hypotheses and canonical-map endpoints; finite commutative coefficients and bounded-below inputs are preserved. No new nodes, duplicates, cycles or repairs found. Accepted all three proposed generic tool uses. Concrete source checks and edge cases are recorded in review.md; no target comparison theorem is inferred from this auxiliary lemma."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenComparison",
+  "declaration": "AlgebraicGeometry.Etale.properOpenIdentification",
+  "statement": "def properOpenIdentification (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]\n    (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]\n    (h : j₁ ≫ f = j₂)\n    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    (upperStar (ModuleCat.{u + 1} Λ) j₂).mapDerivedCategoryPlus.obj\n      ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj\n        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K)) ≅\n      K",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "The existing definition constructs exactly the three specified identifications and their composite; its body defines e via extensionZeroBaseChangeDerivedPlusIso and upperStarIdDerivedPlus, r via derivedBaseChangeMapPlus for the pullback square, and c via clopenSectionDirectImage. properOpenComparison uses this very isomorphism’s inverse. No duplicate module is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-56ef3d1f8",
+  "group": "NO",
+  "result": "pass",
+  "note": "Canonical existing construction matches all statement clauses, dependencies, universes, edge cases, documentation, and comparison usage; scompile.py succeeded."
  }
 }
