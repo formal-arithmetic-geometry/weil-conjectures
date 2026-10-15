@@ -6,8 +6,8 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.CategoryTheory.SimplicialMatchingObject
-import Sheaf.CategoryTheory.CoskeletonMatchingTuples
-import Sheaf.CategoryTheory.ProperFaceMatchingObject
+import Sheaf.CategoryTheory.MatchingObjectCoskeletonComparisonOne
+import Sheaf.CategoryTheory.MatchingObjectCoskeletonComparison
 
 /-!
 # Matching object and coskeleton
@@ -70,7 +70,18 @@ theorem matching_object_coskeleton_one
             (∀ i : Fin 2, θ' ≫ M.proj i =
               L.δ i ≫ ε.app (op ⟨SimplexCategory.mk 0, Nat.le_refl 0⟩)) → θ' = θ) ∧
           IsIso θ ∧ c.app (op (SimplexCategory.mk 1)) ≫ θ = μ := by
-  sorry
+  obtain ⟨L, ε, hL, c, hc, e, he, he_nat, he_c⟩ :=
+    SimplicialObject.exists_coskeleton_matching_tuples K 1 (by omega)
+  let e' := e
+  obtain ⟨⟨E, hE, hE_nat⟩, ⟨π, hπ, hπfac, hπμ, hπuniq⟩⟩ :=
+    SimplicialObject.matching_object_proper_faces_one K M _hM μ _hμ
+  obtain ⟨θ, hθ, hθiso, hθc⟩ := matching_object_comparison_one K L ε c e he he_c M
+    _hM μ _hμ π hπ hπfac
+  refine ⟨L, ε, hL, c, hc, θ, hθ, ?_, hθiso, hθc⟩
+  intro θ' hθ'
+  apply Fan.IsLimit.hom_ext _hM
+  intro i
+  exact (hθ' i).trans (hθ i).symm
 
 /-- The matching object in degree `n + 2` is the corresponding term of the coskeleton.
 Source: Stacks Project, simplicial.tex, Lemmas 0183 and 0186 and example-cosk0.
@@ -117,6 +128,36 @@ theorem matching_object_coskeleton
               L.δ i ≫ ε.app (op ⟨SimplexCategory.mk (n + 1), Nat.le_refl (n + 1)⟩)) →
             θ' = θ) ∧
           IsIso θ ∧ c.app (op (SimplexCategory.mk (n + 2))) ≫ θ = μ := by
-  sorry
+  obtain ⟨L, ε, hL, c, hc, e, he, he_nat, he_c⟩ :=
+    SimplicialObject.exists_coskeleton_matching_tuples K (n + 2) (by omega)
+  let e' : ∀ W : C, (W ⟶ L _⦋n + 2⦌) ≃
+      {x : ∀ (k : SimplexCategory.Truncated (n + 1)),
+          ((SimplexCategory.Truncated.inclusion (n + 1)).obj k ⟶ SimplexCategory.mk (n + 2)) →
+            (W ⟶ K.obj (op ((SimplexCategory.Truncated.inclusion (n + 1)).obj k))) //
+        ∀ (k' k : SimplexCategory.Truncated (n + 1)) (ψ : k' ⟶ k)
+          (α : (SimplexCategory.Truncated.inclusion (n + 1)).obj k ⟶ SimplexCategory.mk (n + 2)),
+          x k α ≫ K.map ((SimplexCategory.Truncated.inclusion (n + 1)).map ψ).op =
+            x k' ((SimplexCategory.Truncated.inclusion (n + 1)).map ψ ≫ α)} := fun W => by
+    simpa using e W
+  have he' : ∀ (W : C) (h : W ⟶ L _⦋n + 2⦌)
+      (k : SimplexCategory.Truncated (n + 1))
+      (α : (SimplexCategory.Truncated.inclusion (n + 1)).obj k ⟶ SimplexCategory.mk (n + 2)),
+      (e' W h).val k α = h ≫ L.map α.op ≫ ε.app (op k) := by
+    intro W h k α
+    simpa [e'] using he W h k α
+  have hec' : ∀ (k : SimplexCategory.Truncated (n + 1))
+      (α : (SimplexCategory.Truncated.inclusion (n + 1)).obj k ⟶ SimplexCategory.mk (n + 2)),
+      (e' (K _⦋n + 2⦌) (c.app (op (SimplexCategory.mk (n + 2))))).val k α = K.map α.op := by
+    intro k α
+    simpa [e'] using he_c k α
+  obtain ⟨⟨E, hE, hE_nat⟩, ⟨π, hπ, hπfac, hπμ, hπuniq⟩⟩ :=
+    SimplicialObject.matching_object_proper_faces_succ_succ K n M _hM μ _hμ
+  obtain ⟨θ, hθ, hθiso, hθc⟩ := matching_object_comparison K L n ε c e' he' hec' M
+    _hM μ _hμ π hπ hπfac
+  refine ⟨L, ε, hL, c, hc, θ, hθ, ?_, hθiso, hθc⟩
+  intro θ' hθ'
+  apply Multifork.IsLimit.hom_ext _hM
+  intro i
+  exact (hθ' i).trans (hθ i).symm
 
 end CategoryTheory

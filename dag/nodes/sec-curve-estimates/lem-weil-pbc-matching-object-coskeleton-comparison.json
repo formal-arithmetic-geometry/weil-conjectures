@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-matching-object-coskeleton-comparison",
+ "kind": "statement",
+ "title": "General coskeleton and matching-boundary comparison",
+ "statement": "For n ≥ 0, the coskeleton family representation and a limiting proper-face boundary determine an isomorphism from degree n+2 of the coskeleton to the boundary, with the displayed face equations and canonical matching equation.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemmas 0183 and 0186, comparison of the two representing objects"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-coskeleton-matching-tuples",
+  "lem-weil-pbc-matching-object-proper-faces"
+ ],
+ "proof": [
+  {
+   "text": "Apply the two natural family representations to construct the comparison by the universal property of the representing limits; compare the comparison in the opposite direction and use uniqueness to prove the composites are identities. The canonical family gives the stated matching-map equation.",
+   "uses": [
+    "lem-weil-pbc-coskeleton-matching-tuples",
+    "lem-weil-pbc-matching-object-proper-faces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coskeleton-matching-tuples",
+  "lem-weil-pbc-matching-object-proper-faces"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemmas 0183 and 0186"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coskeleton matching object representing comparison isomorphism",
+   "results": "No direct exact match; only Kan extension and coskeletal criteria.",
+   "date": "2026-10-16",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso matching object coskeleton simplicial",
+   "results": "No direct match.",
+   "date": "2026-10-16",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"coskeleton.*matching|matching.*coskeleton\" lean/WeilConjectures lean/Sheaf Mathlib",
+   "results": "Only the input family and proper-face statements; no comparison theorem.",
+   "date": "2026-10-16",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.MatchingObjectCoskeleton",
+  "date": "2026-10-16",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-matching-object-coskeleton",
+   "place": "proof, comparison of representing objects",
+   "via": [
+    "lem-weil-pbc-coskeleton-matching-tuples",
+    "lem-weil-pbc-matching-object-proper-faces"
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.MatchingObjectCoskeletonComparison",
+  "file": "lean/Sheaf/CategoryTheory/MatchingObjectCoskeletonComparison.lean",
+  "declaration": "CategoryTheory.matching_object_comparison",
+  "statement": "theorem matching_object_comparison\n    {C : Type u} [Category.{v} C] [HasFiniteLimits C]\n    (K : SimplicialObject C) (L : SimplicialObject C) (n : ℕ) (ε :\n      (SimplicialObject.truncation (n + 1)).obj L ⟶\n        (SimplicialObject.truncation (n + 1)).obj K) (c : K ⟶ L)\n    (e : ∀ W : C, (W ⟶ L _⦋n + 2⦌) ≃\n      {x : ∀ (k : SimplexCategory.Truncated (n + 1)),\n          ((SimplexCategory.Truncated.inclusion (n + 1)).obj k ⟶ SimplexCategory.mk (n + 2)) →\n            (W ⟶ K.obj (op ((SimplexCategory.Truncated.inclusion (n + 1)).obj k))) //\n        ∀ (k' k : SimplexCategory.Truncated (n + 1)) (ψ : k' ⟶ k)\n          (α : (SimplexCategory.Truncated.inclusion (n + 1)).obj k ⟶ SimplexCategory.mk (n + 2)),\n          x k α ≫ K.map ((SimplexCategory.Truncated.inclusion (n + 1)).map ψ).op =\n            x k' ((SimplexCategory.Truncated.inclusion (n + 1)).map ψ ≫ α)})\n    (he : ∀ (W : C) (h : W ⟶ L _⦋n + 2⦌)\n      (k : SimplexCategory.Truncated (n + 1))\n      (α : (SimplexCategory.Truncated.inclusion (n + 1)).obj k ⟶ SimplexCategory.mk (n + 2)),\n      (e W h).val k α = h ≫ L.map α.op ≫ ε.app (op k))\n    (hec : ∀ (k : SimplexCategory.Truncated (n + 1))\n      (α : (SimplexCategory.Truncated.inclusion (n + 1)).obj k ⟶ SimplexCategory.mk (n + 2)),\n      (e (K _⦋n + 2⦌) (c.app (op (SimplexCategory.mk (n + 2))))).val k α = K.map α.op)\n    (M : Cone (SimplicialObject.matchingBoundaryIndex K n).multicospan)\n    (hM : IsLimit M) (μ : K _⦋n + 2⦌ ⟶ M.pt)\n    (hμ : ∀ i : Fin (n + 3), μ ≫ M.π.app (WalkingMulticospan.left i) = K.δ i)\n    (π : (Functor.const _).obj M.pt ⟶ SimplicialObject.properFaceDiagram K (n + 2))\n    (hπ : Nonempty (IsLimit (Cone.mk M.pt π)))\n    (hπfac : ∀ (a : SimplicialObject.ProperFaceCategory (n + 2)) (i : Fin (n + 3))\n      (η : a.obj.left ⟶ ⦋n + 1⦌), η ≫ SimplexCategory.δ i = a.obj.hom →\n      π.app (op a) = M.π.app (WalkingMulticospan.left i) ≫ K.map η.op) :\n    ∃ θ : L _⦋n + 2⦌ ⟶ M.pt,\n      (∀ i : Fin (n + 3), θ ≫ M.π.app (WalkingMulticospan.left i) =\n        L.δ i ≫ ε.app (op ⟨SimplexCategory.mk (n + 1), Nat.le_refl (n + 1)⟩)) ∧\n      IsIso θ ∧ c.app (op (SimplexCategory.mk (n + 2))) ≫ θ = μ",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261015T231531-L-3178151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261015T231531-L-3178151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -27,64 +27,26 @@
  ],
  "proof": [
   {
-   "text": "Put $V=\\mathrm{sk}_{n-1}K$. By [lem-weil-pbc-coskeleton-matching-tuples], the $(n-1)$-coskeleton $(L,\\varepsilon)$ exists and, for every $W$, maps $W\\to L_n$ correspond naturally to compatible families $(x_\\alpha:W\\to K_k)_\\alpha$ indexed by all order-preserving $\\alpha:[k]\\to[n]$ with $k\\leq n-1$; the canonical map $c_n$ corresponds to $(K(\\alpha))_\\alpha$.",
-   "uses": [
-    "lem-weil-pbc-coskeleton-matching-tuples"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0183, formula for cosk_m, with m=n-1"
-   }
-  },
-  {
-   "text": "Restriction sends an all-$\\alpha$ compatible family to its injective proper-face subfamily. Conversely, factor each proper $\\alpha$ through a missing face using [lem-weil-pbc-simplex-face-factorization]; independence of the missing face follows by factoring through two missing faces and applying [lem-weil-pbc-simplex-face-face-identity], and compatibility follows from contravariance of $K$. Thus all-map families and injective proper-face families are naturally bijective, as in the proof of Stacks Lemma 0186.",
-   "uses": [
-    "lem-weil-pbc-simplex-face-factorization",
-    "lem-weil-pbc-simplex-face-face-identity",
-    "def-weil-pbc-simplicial-object"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0186 proof, factorization through a face and independence of the factorization"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-matching-object-proper-faces] (1) and (2), injective proper-face families are represented by $M_n(K)$, with cone projections $\\pi_\\delta$; by its (3), the family represented by $\\mu_n$ is $(K(\\alpha))_\\alpha$ after the extension of Step 2. Hence $L_n$ and $M_n(K)$ represent the same natural functor of all-map compatible families.",
-   "uses": [
-    "lem-weil-pbc-matching-object-proper-faces"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0186 statement and proof, represented compatible families"
-   }
-  },
-  {
-   "text": "The unique comparison morphism $\\theta:L_n\\to M_n(K)$ between the two representations has the stated projection equations. The inverse comparison is obtained in the opposite direction; naturality and injectivity of the representing bijections show both composites are identities, so $\\theta$ is an isomorphism. The canonical map $c_n$ and $\\mu_n$ represent the same family $(K(\\alpha))_\\alpha$, hence $\\theta\\circ c_n=\\mu_n$.",
+   "text": "Obtain the coskeleton, counit, canonical map, and compatible-family equivalence from lem-weil-pbc-coskeleton-matching-tuples; obtain the proper-face family representation and boundary projections from lem-weil-pbc-matching-object-proper-faces. Apply the degree-one or general representing-object comparison statement to obtain the isomorphism, its projection equations, and the canonical matching equation. Uniqueness follows from the limiting cone hom_ext property.",
    "uses": [
     "lem-weil-pbc-coskeleton-matching-tuples",
-    "lem-weil-pbc-matching-object-proper-faces"
+    "lem-weil-pbc-matching-object-proper-faces",
+    "lem-weil-pbc-matching-object-coskeleton-comparison-one",
+    "lem-weil-pbc-matching-object-coskeleton-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0183 and Lemma 0186, comparison of representing objects"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-coskeleton-matching-tuples",
-  "lem-weil-pbc-simplex-face-factorization",
-  "lem-weil-pbc-simplex-face-face-identity",
-  "def-weil-pbc-simplicial-object",
-  "lem-weil-pbc-matching-object-proper-faces"
+  "lem-weil-pbc-matching-object-proper-faces",
+  "lem-weil-pbc-matching-object-coskeleton-comparison-one",
+  "lem-weil-pbc-matching-object-coskeleton-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/simplicial.tex",
-  "place": "Lemmas 0183 and 0186"
+  "place": "Lemmas 0183 and 0186, via the explicit representing-object comparison statements"
  },
  "mathlib_searches": [
   {
@@ -169,5 +131,15 @@
   "group": "J1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261015T231531-L-3178151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
