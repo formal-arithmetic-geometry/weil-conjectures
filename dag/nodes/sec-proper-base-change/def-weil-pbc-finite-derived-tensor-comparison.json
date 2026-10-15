@@ -1,0 +1,128 @@
+{
+ "id": "def-weil-pbc-finite-derived-tensor-comparison",
+ "kind": "definition",
+ "title": "Canonical finite coefficient derived tensor and adjunction data",
+ "statement": "Fix a scheme $X$ and a prime $\\ell$. Let $E_X=p_X^*\\underline E$ be the internal coefficient ring for a finite intermediate field $E\\subset\\overline{\\mathbf Q}_\\ell$, with module category and pullback as in [def-weil-pbc-condensed-e-module-category] and finite fields as in [def-weil-finite-subextension-directed-set]. On profinite sets put $\\underline\\Omega(S)=\\{f\\in C(S,\\overline{\\mathbf Q}_\\ell): f(S)\\subset G\\text{ for some finite intermediate field }G\\}$, with pointwise ring operations, and put $\\Omega_X=p_X^*\\underline\\Omega$. For $E\\subset F$, name the existing total derived scalar extension $T_{E,F}=L(F_X\\otimes_{E_X}-)$, exact derived restriction $U_{F,E}=D(\\operatorname{Res}_{F_X/E_X})$, their canonical derived adjunction $T_{E,F}\\dashv U_{F,E}$, and its Hom equivalence. Name the corresponding data $T_{E,\\Omega}$ and $U_{\\Omega,E}$. Fix the tensor comparison $T_{F,\\Omega}\\circ T_{E,F}\\cong T_{E,\\Omega}$: the inverse exact-derived composition comparison, followed by the derivation of the underived tensor multiplication isomorphism and the equality of the composite coefficient inclusion with $E_X\\to\\Omega_X$. These are shared names for the existing source-library constructions, with no change to their data.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
+ },
+ "proof": [
+  {
+   "text": "Specialize the existing source-library Mod.derivedExtendMapDerivedCategoryAdjunction to the finite coefficient inclusions and the algebraic-closure inclusion. Name the exact restriction functors and total derived extension functors and their Hom equivalences to share the inferred instances and avoid expanding resolution and localization data at every application. The tensor comparison is exactly the old derivedExtendScalarsCompIso construction: inverse leftDerivedFunctorCompIso, followed by leftDerivedFunctorNatIso of the underived extendScalarsComp comparison and the proved equality of coefficient maps. No data is obtained from an unproved existence theorem.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "ExtendScalars and Constructible sections (boundedConstructible_derivedExtendScalarsSubfield_obj, boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj), and TwoColimit section (constructibleCocone_essSurjObj, constructibleCocone_homSurj, constructibleCocone_homInj, constructibleCocone_isFilteredTwoColimit); these are unproved upstream inputs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "B2 2026-10-15: coefficient algebra step of the archived Hom-surjectivity argument; bounded constructible devissage is proved in the parent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of scalar extension is a filtered colimit of coefficient extensions of a bounded below complex",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting a derived scalar extension to a fixed field is a filtered colimit of the finite coefficient scalar extensions of a bounded below complex",
+   "results": "8 hits, including HomologicalComplex.instHasFilteredColimitsOfSize and ModuleCat.FilteredColimits.colimitCoconeIsColimit; no coefficient comparison theorem",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.extendScalars",
+   "results": "0 hits; unknown identifier in Mathlib-only search; this is a source-library construction",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*colimit|colimit.*leftDerivedFunctor",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit",
+  "date": "2026-10-15",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Finite coefficient descent of morphisms, via the condensed two-colimit",
+   "via": [
+    "prop-weil-pbc-qbar-condensed-two-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedDerivedTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedDerivedTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedTensorCompIso",
+  "statement": "def finiteCoefficientDerivedTensorCompIso\n    {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :\n    finiteCoefficientDerivedExtension X ℓ h ⋙ finiteCoefficientDerivedToAlgCl X ℓ F ≅\n      finiteCoefficientDerivedToAlgCl X ℓ E",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-15",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedExtension",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedToAlgCl",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedRestriction",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedFromAlgCl",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedAdjunction",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedAlgClAdjunction",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedHomEquiv",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedAlgClHomEquiv",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedTensorCompIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-c6b94",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261015T194211-L-1174513",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-c6b94",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261015T194211-L-1174513",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean statements and proofs with DAG nodes and sources; verified unchanged tensor data by rfl, allowed axioms, and clean compilation of all three delivered modules, all three direct importers, and CondensedFlatCoefficientCalculus."
+ }
+}
