@@ -25648,3 +25648,17 @@ TIMEOUT
 2026-10-15T00:52:15Z F3 abandoned Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality: abandon: Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality: proposed split merely restated the target; a genuine reduction exceeded the 60-second compile limit. Baseline restored; nothing pushed.
 2026-10-15T00:52:16Z F3 abandoned Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData: abandon: Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData: the core_of_data assembly step is false as stated; independently twisting κU at one stage preserves all hypotheses and θ equations but forces incompatible object_pin and transition_pin equations 
 2026-10-15T01:14:46Z C4 released Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing: finished meanwhile: the module has no sorry on sheaf-dag (dispatcher, 2026-10-14)
+2026-10-15T01:32:37Z XR3044c4e8ddb2f4ff abandoned Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing: abandon: dedicated repair failed; ✖ [20466/20539] Building WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence (5.6s)
+error: WeilConjectures/SixFunctors/Etale/Derived/LowerShriekCoherence.lean:505:6: `AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar` has already been declared
+error: Lean exited with code 1
+
+
+your change of Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing broke its importer WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence: adapt the importers in the same delivery or do not change what they use; tried: 
+READY: Renamed the duplicate consumer helper to `preservesInjectiveObjects_lowerStar_local`; both affected files compile with `lcompile.py`, and `report.md` records the forced adaptation.
+REJECT: `lcompile.py` passes both touched Lean files, but `deliver3.py` (dry run and normal delivery) rejects the adapted consumer’s inherited private axiom dependency from `PicardH1ProductSpanningBypass`; no delivery was pushed.
+REJECT: `lcompile.py` passes both touched Lean files, but `deliver3.py` (dry run and normal delivery) rejects the adapted consumer’s inherited private axiom dependency from `PicardH1ProductSpanningBypass`; no delivery was pushed.
+error: Your local changes to the following files would be overwritten by checkout:
+	coord/claims/Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing.lock
+Please commit your changes or stash them before you switch branches.
+Aborting
+
