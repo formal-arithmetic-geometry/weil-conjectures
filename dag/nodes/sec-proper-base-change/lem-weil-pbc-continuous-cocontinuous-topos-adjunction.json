@@ -29,127 +29,56 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-site-continuous-pushforward-sheaf], continuity implies that $L\\mathcal G=\\mathcal G\\circ u$ is a sheaf of sets on $\\mathcal C$ for every sheaf $\\mathcal G$ on $\\mathcal D$. Composition with $u$ sends a natural transformation to its components at $u(U)$ and respects identities and composition. Thus $L:\\Sh(\\mathcal D)\\to\\Sh(\\mathcal C)$ is the stated functor.",
-   "uses": [
-    "lem-weil-pbc-site-continuous-pushforward-sheaf"
-   ],
+   "text": "Construct the continuity instance directly from the covering hypotheses. The existential pullback clause in `hJ.IsSiteForCoverings` gives pullbacks for arrow-generated presieves; the pullback-preservation hypothesis gives pairwise pullbacks for the source cover. Mathlib's generated-topology criterion then proves that precomposition by `f` sends every `K`-sheaf to a `J`-sheaf, while `hcover` supplies the image-cover condition.",
+   "uses": [],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WW (lemma-pushforward-sheaf); Tag 00XR (lemma-when-shriek), proof, first sentence"
+    "place": "Tags 00WW and 00XR, with the covering-pullback criterion implemented using Mathlib's generated-topology sheaf API"
    }
   },
   {
-   "text": "For each $V$, the pairs $(A,\\psi:u(A)\\to V)$ form a set because both sites are small [def-weil-pbc-sites-and-cohomology](1). Hence $R\\mathcal F(V)$ is the subset of $\\prod_{(A,\\psi)}\\mathcal F(A)$ cut out by the displayed compatibility equations; it is a set, including when the indexing set is empty. Restriction along $h:V'\\to V$ replaces $\\psi'$ by $h\\psi'$; the equation $h\\psi'u(a)=(h\\psi')u(a)$ shows that compatibility is preserved. Replacing indices successively along $h$ and $k$ equals replacing them along $hk$, and identity replacement changes nothing. A natural transformation $\\mathcal F\\to\\mathcal F'$ sends every compatible family to a compatible family by naturality and commutes with these restrictions. Thus the formula gives a presheaf and a functor on presheaves.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Section Tag 00XF (section-more-functoriality-PSh), compatible-family formula and restriction maps"
-   }
-  },
-  {
-   "text": "We first prove separatedness of $R\\mathcal F$ for a sheaf $\\mathcal F$. Let $\\{h_j:V_j\\to V\\}$ be a covering and let $s,s'\\in R\\mathcal F(V)$ have equal restrictions to each $V_j$. Fix $(A,\\psi)$. Base change of this covering along $\\psi:u(A)\\to V$ is a covering of $u(A)$ by [def-weil-pbc-sites-and-cohomology](1). Cocontinuity [def-weil-pbc-special-cocontinuous-functor](1) supplies a covering $\\{f_i:A_i\\to A\\}$ and arrows $\\theta_i:u(A_i)\\to V_{j(i)}$ with $h_{j(i)}\\theta_i=\\psi u(f_i)$. Compatibility and the assumed equality give $\\mathcal F(f_i)(s_{A,\\psi})=s_{A_i,h_{j(i)}\\theta_i}=s'_{A_i,h_{j(i)}\\theta_i}=\\mathcal F(f_i)(s'_{A,\\psi})$. The injectivity part of the sheaf equalizer for $\\mathcal F$ gives $s_{A,\\psi}=s'_{A,\\psi}$. This holds for every coordinate, hence $s=s'$.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-special-cocontinuous-functor"
-   ],
+   "text": "Use Mathlib's `sheafPushforwardContinuous` and `sheafAdjunctionCocontinuous` for the resulting continuous functor and the assumed cocontinuity instance. The comparison isomorphism identifies precomposition with the sheaf functor, and the existing finite-limit instance for continuous sheaf pushforward gives `PreservesFiniteLimits` for the left adjoint.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00XK (lemma-pu-sheaf), covering-lifting paragraph, written directly on compatible families"
+    "document": "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+    "place": "the continuous/cocontinuous sheaf adjunction and its finite-limit instance"
    }
   },
   {
-   "text": "Now let $t^j\\in R\\mathcal F(V_j)$ be a matching family for the same covering. For each $(A,\\psi)$ choose a covering and lifts $f_i,\\theta_i$ as in step 3, and put $x_i=t^{j(i)}_{A_i,\\theta_i}\\in\\mathcal F(A_i)$. On $P=A_i\\times_A A_k$, which exists by the covering-base-change axiom [def-weil-pbc-sites-and-cohomology](1), the maps $\\theta_i u(\\operatorname{pr}_1)$ and $\\theta_k u(\\operatorname{pr}_2)$ have the same composite to $V$: both are $\\psi u(f_i\\operatorname{pr}_1)=\\psi u(f_k\\operatorname{pr}_2)$. The universal property gives a map $u(P)\\to V_{j(i)}\\times_V V_{j(k)}$; this target exists by the site axiom on $\\mathcal D$. Evaluate the matching equality of $t^{j(i)}$ and $t^{j(k)}$ on this pair. Their family-compatibility equations identify the resulting two sections of $\\mathcal F(P)$ with $\\mathcal F(\\operatorname{pr}_1)(x_i)$ and $\\mathcal F(\\operatorname{pr}_2)(x_k)$. Thus the $x_i$ match, and the existence part of the sheaf equalizer gives a unique $x_{A,\\psi}\\in\\mathcal F(A)$ restricting to them. No preservation of these overlaps by $u$ is asserted or needed.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-special-cocontinuous-functor"
-   ],
+   "text": "For a presheaf `F` and object `V`, natural transformations `f.op ⋙ yoneda.obj V ⟶ F` are definitionally the displayed compatible families. Compose this equivalence with Yoneda and the inverse right-Kan-extension hom-equivalence to obtain an equivalence from the sections of `f.op.ran.obj F` to those families. Mathlib's cocontinuity theorem supplies that this right Kan extension is the sheaf direct image.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00XK (lemma-pu-sheaf), covering-lifting and overlap paragraphs; direct componentwise gluing"
+    "document": "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+    "place": "right Kan extension model for the cocontinuous sheaf direct image"
    }
   },
   {
-   "text": "The section $x_{A,\\psi}$ does not depend on the cover or the lifts. Given a second choice $\\{f'_k:A'_k\\to A,\\theta'_k\\}$, the objects $P_{ik}=A_i\\times_A A'_k$ form a common covering of $A$: first base change the second cover to each $A_i$, then compose coverings [def-weil-pbc-sites-and-cohomology](1). Write $p:P_{ik}\\to A_i$ and $p\\prime:P_{ik}\\to A\\prime_k$ for the projections, and $z,z\\prime\\in\\mathcal F(A)$ for the sections glued from the two choices. The maps $\\theta_i u(p)$ and $\\theta\\prime_k u(p\\prime)$ have equal composites to $V$, so they determine $\\rho:u(P_{ik})\\to W=V_{j(i)}\\times_V V_{j\\prime(k)}$, with projections $r:W\\to V_{j(i)}$ and $r\\prime:W\\to V_{j\\prime(k)}$. The matching equality $R\\mathcal F(r)(t^{j(i)})=R\\mathcal F(r\\prime)(t^{j\\prime(k)})$ evaluated at $(P_{ik},\\rho)$ gives $t^{j(i)}_{P_{ik},\\theta_i u(p)}=t^{j\\prime(k)}_{P_{ik},\\theta\\prime_k u(p\\prime)}$. Family compatibility and the defining restrictions of $z,z\\prime$ identify these with $\\mathcal F(f_i p)(z)$ and $\\mathcal F(f\\prime_k p\\prime)(z\\prime)$; the maps $f_i p=f\\prime_k p\\prime$ are equal. Injectivity of the sheaf equalizer on this common covering gives their equality. This argument applies to any covering of $A$ equipped with such factorizations, not only to the one first obtained by cocontinuity.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00XK (lemma-pu-sheaf), final overlap paragraph, with independence of the local lifts spelled out"
-   }
-  },
-  {
-   "text": "For $a:B\\to A$, base change the cover $\\{f_i:A_i\\to A\\}$ of step 4 to $B$, with $q_i:B\\times_A A_i\\to B$ and $p_i:B\\times_A A_i\\to A_i$. The maps $\\theta_i u(p_i)$ factor $\\psi u(aq_i)$ through $V_{j(i)}$. The section assigned to this lifted cover is $\\mathcal F(a)(x_{A,\\psi})$: its restriction along $q_i$ is $\\mathcal F(p_i)(x_i)=t^{j(i)}_{B\\times_A A_i,\\theta_i u(p_i)}$, by compatibility of $t^{j(i)}$. Independence in step 5 therefore gives $\\mathcal F(a)(x_{A,\\psi})=x_{B,\\psi u(a)}$. Thus $x=(x_{A,\\psi})$ belongs to $R\\mathcal F(V)$. For $(A,\\theta:u(A)\\to V_j)$ the identity cover of $A$ with lift $\\theta$ is an allowed factored cover for $(A,h_j\\theta)$; step 5 implies $x_{A,h_j\\theta}=t^j_{A,\\theta}$. So $x$ restricts to $t^j$ for each $j$, and is unique by step 3. This proves the sheaf equalizer condition for $R\\mathcal F$. Consequently the componentwise functor of step 2 restricts to $R:\\Sh(\\mathcal C)\\to\\Sh(\\mathcal D)$. The only site operations used here are identity covers and base change [def-weil-pbc-sites-and-cohomology](1).",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00XK (lemma-pu-sheaf), conclusion; details of compatible-family descent written out"
-   }
-  },
-  {
-   "text": "We construct the adjunction bijection explicitly, using the fact that the sheaf categories are full subcategories of presheaves [def-weil-pbc-sites-and-cohomology](1). Given $\\alpha:L\\mathcal G\\to\\mathcal F$, set $\\beta_V(t)=(\\alpha_A(\\mathcal G(\\psi)(t)))_{A,\\psi}$. Naturality of $\\alpha$ gives the compatibility equation for $a:B\\to A$, since $\\mathcal F(a)\\alpha_A\\mathcal G(\\psi)=\\alpha_B\\mathcal G(u(a))\\mathcal G(\\psi)=\\alpha_B\\mathcal G(\\psi u(a))$. The equation for a restriction $h:V'\\to V$ is $\\mathcal G(\\psi')\\mathcal G(h)=\\mathcal G(h\\psi')$, so $\\beta$ is natural. Conversely, given $\\beta:\\mathcal G\\to R\\mathcal F$, set $\\alpha_A(t)=\\beta_{u(A)}(t)_{A,\\mathrm{id}}$. Naturality of $\\beta$ along $u(a)$ identifies $\\beta_{u(B)}(\\mathcal G(u(a))(t))_{B,\\mathrm{id}}$ with $\\beta_{u(A)}(t)_{B,u(a)}$; family compatibility identifies the latter with $\\mathcal F(a)(\\beta_{u(A)}(t)_{A,\\mathrm{id}})$. Hence $\\alpha$ is natural. Starting with $\\alpha$ and evaluating the constructed $\\beta$ at $(A,\\mathrm{id})$ recovers $\\alpha_A$. Starting with $\\beta$, its naturality along $\\psi$ gives $\\beta_{u(A)}(\\mathcal G(\\psi)(t))_{A,\\mathrm{id}}=\\beta_V(t)_{A,\\psi}$, so the other composite also recovers the original map. For $c:\\mathcal G\\prime\\to\\mathcal G$, naturality of $c$ yields $\\alpha_A\\mathcal G(\\psi)c_V=\\alpha_Ac_{u(A)}\\mathcal G\\prime(\\psi)$, so the family associated to $\\alpha\\circ Lc$ is $\\beta\\circ c$. For $b:\\mathcal F\\to\\mathcal F\\prime$, the family associated to $b\\circ\\alpha$ has coordinate $b_A\\alpha_A\\mathcal G(\\psi)(t)$, which is the coordinate of $Rb\\circ\\beta$. The inverse bijection has the same naturality since it is inverse to this bijection. They therefore give the bifunctorial hom-set bijection $L\\dashv R$, without invoking any Kan-extension or Yoneda theorem as a black box.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00XH (lemma-adjoints-pu), adjunction and evaluation description; Tag 00XL (lemma-exact-cocontinuous), restriction to sheaves"
-   }
-  },
-  {
-   "text": "Apply the bijection of step 7 to the identity of $L\\mathcal G$ to obtain the unit: $\\eta_{\\mathcal G,V}(t)=(\\mathcal G(\\psi)(t))_{A,\\psi}$. Apply its inverse to the identity of $R\\mathcal F$ to obtain the counit: $\\epsilon_{\\mathcal F,U}(s)=s_{U,\\mathrm{id}_{u(U)}}$. The composite $\\epsilon_{L\\mathcal G}\\circ L\\eta_{\\mathcal G}$ at $U$ sends $t\\in\\mathcal G(u(U))$ to the identity coordinate $\\mathcal G(\\mathrm{id}_{u(U)})(t)=t$. For the other composite $R\\epsilon_{\\mathcal F}\\circ\\eta_{R\\mathcal F}$, let $s\\in R\\mathcal F(V)$. The unit gives at $(A,\\psi)$ the family $R\\mathcal F(\\psi)(s)\\in R\\mathcal F(u(A))$. Applying $\\epsilon_{\\mathcal F,A}$ selects its $(A,\\mathrm{id})$ coordinate, equal by the restriction formula to $s_{A,\\psi}$. Thus both triangle identities hold and the formulas are those claimed.",
+   "text": "The right Kan extension counit formula identifies a family coordinate with evaluation of the counit after restriction along `ψ`. Functoriality of the Kan extension and naturality of its counit prove the displayed restriction equation and the equation for a morphism of sheaves.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Section 00XF and Tag 00XH (lemma-adjoints-pu), projections and evaluation at identity"
+    "document": "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+    "place": "`Functor.ranAdjunction_counit` and counit naturality"
    }
   },
   {
-   "text": "For a finite diagram $M:\\mathcal I\\to\\Sh(\\mathcal D)$ with limit cone $\\mathcal G$, [lem-weil-pbc-site-sheaf-sets-limits-sectionwise](2) says that $\\mathcal G(u(U))$, with its projections, is a limit of the sets $M(i)(u(U))$ for every $U$. Since these are precisely $(L\\mathcal G)(U)$ and $(LM(i))(U)$, applying clause (2) of the same node on $\\mathcal C$ says the cone $L\\mathcal G$ is a limit of $LM$. Hence $L$ preserves finite limits (indeed all small limits). The finite indexing category is small, as required by the cited statement; this includes the empty diagram.",
-   "uses": [
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00W2 (lemma-limit-sheaf); Tag 00XL (lemma-exact-cocontinuous), left exactness argument; Tag 00XR (lemma-when-shriek)(3)"
-   }
-  },
-  {
-   "text": "The adjunction of step 7 and finite-limit preservation of step 9 satisfy the stated definition of a morphism of topoi $g:\\Sh(\\mathcal C)\\to\\Sh(\\mathcal D)$, with $g^{-1}=L$ and $g_*=R$. In the associated cocontinuous construction the inverse image is sheafification of precomposition and the direct image is the compatible-family functor. To identify the former with $L$, use [def-weil-pbc-sheafification]: since $L\\mathcal G$ is already a sheaf, the identity $L\\mathcal G\\to L\\mathcal G$ has the sheafification universal property. More explicitly the universal map $e:L\\mathcal G\\to(L\\mathcal G)^\\#$ has an inverse $r$ induced by the identity, with $re=\\mathrm{id}$; uniqueness of factorization gives $er=\\mathrm{id}$. These inverse maps are natural by the same uniqueness. Under this canonical identification the hom-set formulas are exactly step 7, and hence give the unit and counit of step 8. Thus this is the morphism associated to $u$, as claimed.",
-   "uses": [
-    "def-weil-pbc-sheafification"
-   ],
+   "text": "The cocontinuous sheaf adjunction's counit evaluates at the identity arrow, by the Kan-extension counit formula. Its unit sends a section `t` to the compatible family whose `(A,ψ)` coordinate is `G.map ψ.op t`; the Kan-extension unit and counit identity prove the final displayed unit equation. Thus all four requested formulas hold, and the constructed functors and adjunction satisfy the node statement.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00XO (lemma-cocontinuous-morphism-topoi); Tag 00XR (lemma-when-shriek)(1); Proposition 00WH (proposition-sheafification-adjoint)"
+    "document": "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+    "place": "`sheafAdjunctionCocontinuous_counit_app_hom`, `sheafAdjunctionCocontinuous_unit_app_hom`, and the Kan-extension triangle identity"
    }
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-site-continuous-pushforward-sheaf",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-special-cocontinuous-functor",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "def-weil-pbc-sheafification"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Sections 00XF, 00XI; Tags 00XH, 00XK, 00XL, 00XO, 00XR. Direct compatible-family proof using the covering-lifting and overlap argument of 00XK rather than its sheafified coequalizer presentation."
+  "document": "Mathlib/CategoryTheory/Sites/CoverLifting.lean; WeilConjectures/Mathlib/CategoryTheory/Sites/Continuous.lean",
+  "place": "Direct covering-continuity bridge followed by Mathlib's continuous/cocontinuous sheaf adjunction, right Kan extension and Yoneda formulas."
  },
  "mathlib_searches": [
   {
@@ -366,5 +295,15 @@
   "group": "NS",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, source clauses, dependency repairs, universes, edge cases, docstrings, and verbatim signatures. All three modules compiled cleanly through scompile.py. No substantive or landing faults found; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261015T205055-L-1694586",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

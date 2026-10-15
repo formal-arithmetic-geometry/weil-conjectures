@@ -15195,3 +15195,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:50 L: merged deliver/M4/Sheaf.Algebra.Homology.KFlatIndependentCoefficients (stage 3; reviewer PASS; first push; landing 20261015T205052-L-1694100 (proof); batch 20261015T205049; modules 1; new nodes 0)
 - 20:50 L: merged deliver/P1/Sheaf.Paper.CartanEilenbergLeftExactCohomology (stage 3; reviewer PASS; first push; landing 20261015T205053-L-1694266 (proof); batch 20261015T205049; modules 1; new nodes 0)
 - 20:50 L: merged deliver/P4/Sheaf.CategoryTheory.CartanEilenbergComparisonHomotopy (stage 3; reviewer PASS; first push; landing 20261015T205054-L-1694447 (proof); batch 20261015T205049; modules 1; new nodes 0)
+- 20:50 L: merged deliver/R3/Sheaf.CategoryTheory.ContinuousCocontinuousToposAdjunctionForCoverings (stage 3; reviewer PASS; first push; landing 20261015T205055-L-1694586 (proof); batch 20261015T205049; modules 1; new nodes 0)
