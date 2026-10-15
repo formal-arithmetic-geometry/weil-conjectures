@@ -144,20 +144,20 @@
    "CochainComplex.exists_isKFlatResolutionIndependentCoefficients"
   ],
   "file": "lean/Sheaf/Algebra/Homology/KFlatResolutionIndependentCoefficients.lean",
-  "statement": "theorem exists_isKFlatResolutionIndependentCoefficients {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] {R : Sheaf J CommRingCat.{r}} (G : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : ∃ (K : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (f : K ⟶ G), CochainComplex.IsKFlat K ∧ (∀ i : ℤ, exactFunctor _ _ (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory R) (K.X i))) ∧ QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i))",
+  "statement": "theorem exists_isKFlatResolutionIndependentCoefficients {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] {R : Sheaf J CommRingCat.{r}} (G : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : ∃ (K : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (f : K ⟶ G), CochainComplex.IsKFlat.{u, v, r} (J := J) (R := R) K ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (K.X i)) ∧ QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i))",
   "branch": "newtargets-dag",
-  "by": "NB",
+  "by": "NA",
   "date": "2026-10-15",
   "existing": false,
-  "note": "§1(B): the recorded source and published artifact interfaces disagree in the K-flat/completed-coefficient import chain. Supply the same canonical definition and statements in a paired source packet; no mathematical data, assumptions, or canonical comparisons change. This module is rebuilt against its sibling sources so independent site and coefficient universes remain available."
+  "note": "Section 1(B), repair of immutable head dfe8da53b077: retain the full independent coefficient universe r and all four resolution clauses. Select IsKFlat.{u, v, r} explicitly. Supply the repaired generalized KFlat source in this delivery, rather than relying on its older live compiled artifact. The flat-term clause uses IsFlatOnSite. No site universe equality or coefficient restriction."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-488df6d67",
-  "group": "NB",
+  "reviewer": "NT-stage2-Codex-752a2e421",
+  "group": "NA",
   "result": "pass",
-  "note": "Immutable delivery matches the node and source; dependencies, universes, edge cases, docstrings, report sections, and all eight per-file scompile checks passed."
+  "note": "Wrote review.md. Statements, dependencies, canonical maps, universes, edge cases, and records checked; all four modules compile cleanly through scompile.py. No fixes needed. External context-clone advancement changed only blueprint-index.tsv; immutable delivery unaffected."
  },
  "reviewed_proof": {
   "date": "2026-10-15",

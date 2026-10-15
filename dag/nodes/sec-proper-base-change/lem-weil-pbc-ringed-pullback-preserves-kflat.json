@@ -131,20 +131,19 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-19ac740ca",
-  "group": "NR",
+  "reviewer": "NT-stage2-Codex-752a2e421",
+  "group": "NA",
   "result": "pass",
-  "note": "Wrote review.md. Checked the immutable item, all statement dependencies, sources, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signatures. All four modules reproduced cleanly through scompile.py. No delivery faults found; branch and project clones unchanged."
+  "note": "Wrote review.md. Statements, dependencies, canonical maps, universes, edge cases, and records checked; all four modules compile cleanly through scompile.py. No fixes needed. External context-clone advancement changed only blueprint-index.tsv; immutable delivery unaffected."
  },
  "lean": {
   "module": "Sheaf.Paper.KFlatRingedToposPullback",
   "declaration": "SheafOfModules.isKFlat_ringedToposPullback",
-  "file": "lean/Sheaf/Paper/KFlatRingedToposPullback.lean",
-  "statement": "theorem isKFlat_ringedToposPullback {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{w} C] [EssentiallySmall.{w} D] {JC : GrothendieckTopology C} {JD : GrothendieckTopology D} {R : Sheaf JC CommRingCat.{w}} {S RI : Sheaf JD CommRingCat.{w}} (uInv : Sheaf JC (Type (w)) ⥤ Sheaf JD (Type (w))) (uPush : Sheaf JD (Type (w)) ⥤ Sheaf JC (Type (w))) (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S) (uStar : ringedSiteModules.{w} ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⥤ ringedSiteModules.{w} ((sheafCompose JD (forget₂ CommRingCat.{w} RingCat.{w})).obj S)) (hobj : ∀ M : ringedSiteModules.{w} ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R), uStar.obj M = changeOfRings c (I.modules.obj M)) (hmap : ∀ {M N : ringedSiteModules.{w} ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R)} (a : M ⟶ N), uStar.map a = eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm) [uStar.Additive] (P : CochainComplex (ringedSiteModules.{w} ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) (hP : P.IsKFlatIndependentCoefficients) (hflat : ∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n)) : CochainComplex.IsKFlatIndependentCoefficients ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧ ∀ n : ℤ, IsFlatOnSite (J := JD) (R := S) (((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n)",
+  "statement": "theorem isKFlat_ringedToposPullback\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]\n    {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}\n    {R : Sheaf JC CommRingCat.{w}} {S RI : Sheaf JD CommRingCat.{w}}\n    (uInv : Sheaf JC (Type (w)) ⥤ Sheaf JD (Type (w)))\n    (uPush : Sheaf JD (Type (w)) ⥤ Sheaf JC (Type (w)))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]\n    (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S)\n    (uStar : ringedSiteModules.{w} ((sheafCompose JC\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⥤\n      ringedSiteModules.{w} ((sheafCompose JD\n        (forget₂ CommRingCat.{w} RingCat.{w})).obj S))\n    (hobj : ∀ M : ringedSiteModules.{w} ((sheafCompose JC\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R),\n      uStar.obj M = changeOfRings c (I.modules.obj M))\n    (hmap : ∀ {M N : ringedSiteModules.{w} ((sheafCompose JC\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R)} (a : M ⟶ N),\n      uStar.map a = eqToHom (hobj M) ≫\n        changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm)\n    [uStar.Additive]\n    (P : CochainComplex (ringedSiteModules.{w} ((sheafCompose JC\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)\n    (hP : P.IsKFlat) (hflat : ∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n)) :\n    CochainComplex.IsKFlat ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧\n      ∀ n : ℤ, IsFlatOnSite (J := JD) (R := S)\n        (((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n)",
   "branch": "newtargets-dag",
-  "by": "NR",
+  "by": "NA",
   "date": "2026-10-15",
-  "existing": false,
-  "note": "The independently quantified ringed pullback assertion is the same as lem-weil-pbc-ringed-topos-kflat-pullback after using the general IsFlatOnSite and IsKFlatIndependentCoefficients predicates. The module at the original path reexports that theorem."
+  "existing": true,
+  "note": "Section 1(B), independent second reading: with the published generalized KFlat source in the same overlay, the existing isKFlat_ringedToposPullback declaration is usable. Its compiled IsKFlatIndependentCoefficients predicate converts definitionally to the recorded IsKFlat predicate: a full-signature application checked with scompile.py, with all source/target sites and rings explicit. Reuse the existing general theorem rather than supply a duplicate preservation statement. No mathematical hypothesis, conclusion or universe changes."
  }
 }
