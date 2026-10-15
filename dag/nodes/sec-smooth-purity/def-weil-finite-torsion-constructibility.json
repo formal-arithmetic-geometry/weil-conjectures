@@ -81,25 +81,20 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-185bf26ad",
-  "group": "NF",
+  "reviewer": "NT-stage2-Codex-cffcc1a7e",
+  "group": "NY",
   "result": "pass",
-  "note": "Wrote review.md. Checked all eight statement dependencies, source correspondence, exact declarations, universes, edge cases, docstrings, uniqueness, and verbatim signatures. Both immutable Lean files compile through scompile.py with the local side overlay. No repairs required; branch head unchanged."
+  "note": "Wrote review.md. Checked immutable files, all six statement dependencies, source correspondence, hypotheses, conclusions, universes, edge cases, dependency repair, uniqueness and docstrings. Both delivered Lean files compiled separately through scompile.py with no errors or warnings. No fixes needed; branch head unchanged."
  },
  "lean": {
-  "module": "Sheaf.Paper.FiniteTorsionConstructibility",
-  "declaration": "AlgebraicGeometry.Scheme.finiteTorsionConstructible",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.finiteTorsionConstructible",
-   "AlgebraicGeometry.Scheme.finiteTorsionConstructibleCategory",
-   "AlgebraicGeometry.Scheme.finiteTorsionConstructible_isTriangulated",
-   "AlgebraicGeometry.Scheme.finiteTorsionConstructible_isClosedUnderIsomorphisms"
-  ],
-  "file": "lean/Sheaf/Paper/FiniteTorsionConstructibility.lean",
-  "statement": "def finiteTorsionConstructible (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) (Y : Scheme.{u}) : ObjectProperty (proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E n))",
+  "module": "Sheaf.Paper.IntrinsicFiniteTorsionConstructibility",
+  "declaration": "AlgebraicGeometry.Scheme.intrinsicFiniteTorsionConstructible",
+  "file": "lean/Sheaf/Paper/IntrinsicFiniteTorsionConstructibility.lean",
+  "statement": "def intrinsicFiniteTorsionConstructible (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) : ObjectProperty (proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E n))",
   "branch": "newtargets-dag",
-  "by": "NF",
+  "by": "NY",
   "date": "2026-10-15",
-  "existing": false
+  "existing": false,
+  "note": "§1(B): finiteTorsionConstructible requires an unused global FiniteFieldDatum and l ≠ D.p, absent from the consumer statement. This module imports that original interface and supplies its exact intrinsic cohomological predicate with those unused parameters removed, on the identical quotient coefficient ring and small pro-etale derived category."
  }
 }
