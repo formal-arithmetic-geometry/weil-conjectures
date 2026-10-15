@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-stalk-faithful-derived",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Stalk faithfulness for derived objects",
@@ -13,34 +13,140 @@
   "place": "node lem-kun-stalk-faithful-derived, order 1703"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-derived-categories",
+  "def-weil-geometric-point",
+  "def-weil-pbc-inverse-image"
  ],
  "proof": [
   {
-   "text": "Let $\\alpha:K\\to L$. The cone $C$ of $\\alpha$ is zero if and only\nif $\\alpha$ is an isomorphism; $\\mathcal H^q(C)=0$ for all $q$\niff $C=0$ by [lem-kun-d-zero-cohomology]. By\n[lem-kun-stalks-of-cohomology] and\n[lem-kun-stalk-as-pullback] the stalk of $\\mathcal H^q(C)$ at\n$\\bar t$ is $\\mathcal H^q(C_{\\bar t})$, and\n[lemma-weil-pbc-geometric-stalk-conservative] detects vanishing of\nsheaves on their stalks, so $C=0$ iff $C_{\\bar t}=0$ for all\n$\\bar t$, i.e. iff the pullbacks of $\\alpha$ are isomorphisms.",
+   "text": "Fix a scheme $T$ and a morphism $\\alpha:K\\to L$ in $D(T_{\\Et})$. By [def-weil-pbc-derived-categories] this is a triangulated derived category; choose a distinguished cone triangle $K\\xrightarrow{\\alpha}L\\to C\\to K[1]$ as in [def-weil-triangulated-category]. Apply [lem-kun-distinguished-cone-zero] to this triangle: $\\alpha$ is an isomorphism if and only if $C$ is zero.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-weil-triangulated-category",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalk-faithful-derived.md",
+    "place": "## Proof, cone and cohomology-stalk argument, expanded"
+   }
+  },
+  {
+   "text": "For a geometric point $\\bar t:P=\\operatorname{Spec}\\Omega\\to T$, [prop-weil-pbc-inverse-image-exact] says that $\\bar t^{-1}:\\Ab(T_{\\Et})\\to\\Ab(P_{\\Et})$ is additive and preserves finite limits and finite colimits. These are precisely the hypotheses of [lem-sf-exact-functor-derived-triangulated], so termwise inverse image induces a functor on the unbounded derived categories which commutes with shift and preserves distinguished triangles. To see its action on the cone, use the explicit formula of [def-weil-abstract-derived-category]: $C(f)^q=B^q\\oplus A^{q+1}$ and $d_{C(f)}=\\begin{pmatrix}d_B&f\\\\0&-d_A\\end{pmatrix}$. Additivity and preservation of finite sums send this matrix, its inclusion and its negative projection to the same cone data for $\\bar t^{-1}f$. Thus the image of the triangle of step 1 is the distinguished triangle $K_{\\bar t}\\xrightarrow{\\alpha_{\\bar t}}L_{\\bar t}\\to C_{\\bar t}\\to K_{\\bar t}[1]$ in $D(P_{\\Et})$. The termwise inverse image is the derived pullback (and, after identifying point sheaves with groups, the derived stalk) of [lem-kun-stalk-as-pullback].",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category",
+    "lem-kun-stalk-as-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalk-faithful-derived.md",
+    "place": "## Proof, first and final cone sentences; Stacks Tag 015F, lemma-right-derived-exact-functor, for termwise exact pullback, and the displayed cone calculation"
+   }
+  },
+  {
+   "text": "For every integer $q$ and geometric point $\\bar t$, [lem-kun-stalks-of-cohomology] identifies $\\mathcal H^q(C)_{\\bar t}$ with $\\mathcal H^q(C_{\\bar t})$. The equality is understood using the equivalence $\\Gamma(P,-):\\Ab(P_{\\Et})\\simeq\\Ab$ of [lem-weil-pbc-geometric-point-pullback-stalk], not as a literal equality between a sheaf and a group. An equivalence preserves and reflects zero objects: the unique maps to and from a zero object transport under a fully faithful, essentially surjective functor. Consequently $\\mathcal H^q(C)_{\\bar t}=0$ if and only if the cohomology sheaf $\\mathcal H^q(C_{\\bar t})$ on $P$ is zero.",
+   "uses": [
+    "lem-kun-stalks-of-cohomology",
+    "lem-weil-pbc-geometric-point-pullback-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalk-faithful-derived.md",
+    "place": "## Proof, cone and cohomology-stalk argument, expanded"
+   }
+  },
+  {
+   "text": "Apply [lemma-weil-pbc-geometric-stalk-conservative] to the morphism $0\\to\\mathcal H^q(C)$ of abelian etale sheaves. The stalk of the zero sheaf is zero because the stalk functor is exact by [prop-weil-pbc-geometric-stalks-exact]. Hence this morphism is an isomorphism exactly when all $\\mathcal H^q(C)_{\\bar t}$ vanish. This proves $\\mathcal H^q(C)=0$ if and only if all its geometric stalks vanish; no conservativity statement for derived objects has been used here.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalk-faithful-derived.md",
+    "place": "## Proof, cone and cohomology-stalk argument, expanded"
+   }
+  },
+  {
+   "text": "By [lem-kun-d-zero-cohomology] on $T$, $C=0$ if and only if $\\mathcal H^q(C)=0$ for every integer $q$. Step 4 makes this equivalent to vanishing of $\\mathcal H^q(C)_{\\bar t}$ for all $q,\\bar t$. Step 3 makes it equivalent to vanishing of every cohomology sheaf of every $C_{\\bar t}$. Interchange the two universal quantifiers and apply [lem-kun-d-zero-cohomology] on each scheme $P=\\operatorname{Spec}\\Omega$: the condition is exactly $C_{\\bar t}=0$ for every geometric point. Finally [lem-kun-distinguished-cone-zero] applied to each distinguished triangle of step 2 says that $C_{\\bar t}=0$ if and only if $\\alpha_{\\bar t}$ is an isomorphism. Combining this with step 1 gives both implications of the statement, with no boundedness restriction.",
    "uses": [
     "lem-kun-d-zero-cohomology",
-    "lem-kun-stalks-of-cohomology",
-    "lem-kun-stalk-as-pullback",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-kun-distinguished-cone-zero"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalk-faithful-derived.md",
+    "place": "## Proof, cone and cohomology-stalk argument, expanded"
+   }
   }
  ],
  "proof_deps": [
-  "lem-kun-d-zero-cohomology",
-  "lem-kun-stalks-of-cohomology",
+  "def-weil-pbc-derived-categories",
+  "def-weil-triangulated-category",
+  "lem-kun-distinguished-cone-zero",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-abstract-derived-category",
   "lem-kun-stalk-as-pullback",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-kun-stalks-of-cohomology",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-kun-d-zero-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalk-faithful-derived.md",
-  "place": "## Proof"
+  "place": "## Proof, expanded using Stacks Tag 05QR (derived.tex, lemma-third-object-zero) and exact inverse image; local literature mirror /home/ubuntu/weil-launcher-nt/literature"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism in the derived category of étale sheaves is an isomorphism if and only if its pullback to every geometric point is an isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app; TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso; TopCat.Presheaf.isIso_of_stalkFunctor_map_iso; TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso; AlgebraicGeometry.isomorphisms_eq_stalkwise; CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso; CategoryTheory.GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso; AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits concern ordinary sheaves or cohomology maps, not derived geometric pullbacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, IsIso",
+   "results": "No hits; loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle reported unknown identifier CategoryTheory.DerivedCategory; no evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalks are jointly conservative on the unbounded derived category of etale sheaves",
+   "results": "No hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff|conservative|sheafFiber",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; scoped to Mathlib/Algebra/Homology/DerivedCategory.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits concern ordinary sheaves or cohomology maps, not derived geometric pullbacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism in an unbounded derived category is invertible precisely when all its cohomology morphisms are invertible",
+   "results": "DerivedCategory.instIsIsoMapCochainComplexIntQ; DerivedCategory.isIso_Q_map_iff_quasiIso; DerivedCategory.isIso_Qh_map_iff; HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso; HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W; CochainComplex.cm5b.instQuasiIsoIntP; HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso; CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits concern ordinary sheaves or cohomology maps, not derived geometric pullbacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isIso_iff",
+   "results": "DerivedCategory.isIso_iff",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: the hits concern ordinary sheaves or cohomology maps, not derived geometric pullbacks"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +175,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-stalk-faithful-derived",
+  "worker": "stage1",
+  "summary": "Retained the statement and the blueprint cone route. Added one generic Mathlib leaf for the zero-cone criterion. Expanded exact inverse image on explicit cone complexes, the point-sheaf/group interpretation, sheaf vanishing detection via the map from zero, and the cohomology criterion on T and on Spec Omega. The nearby project declaration tests stalks of cohomology maps, so it is not an exact attachment for derived pullback isomorphisms. Return repair: reread every cited current statement; all previous quotations still match. Step 2 now explicitly cites the existing Mathlib leaf lem-sf-exact-functor-derived-triangulated for unbounded derived descent and preservation of distinguished triangles, instead of treating that entire construction as elementary. The original statement is unchanged.",
+  "blueprint": "Steps 1 and 2 realize the first sentence and the final cone implication. Steps 3 and 4 realize the cohomology/stalk comparison and sheaf conservativity. Step 5 writes out the equivalence of global and pointwise cone vanishing, retaining all four original ingredients.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Generic exactness of etale inverse image supplies the termwise kernel/cokernel and finite-sum calculation for geometric pullback; this unit has no node with that exactness statement."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic equivalence of abelian sheaves on Spec of an algebraically closed field with abelian groups makes the cohomology-stalk comparison well typed; no statement of this unit supplies the equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-376d23af5",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-376d23af5 (reviewer sub-agent of L); spot-checked: Read all five steps, the new cone leaf, cited statements and sources. Verified Stacks 05QR/015F/03Q1/04JN/04JQ/03PT/03PU and the exact Mathlib declarations. Unbounded ordinary étale coefficients, hypotheses, edge cases, duplicates and dependency cycles checked. No repairs needed; accepted generic tool uses documented in review.md."
+ }
 }
