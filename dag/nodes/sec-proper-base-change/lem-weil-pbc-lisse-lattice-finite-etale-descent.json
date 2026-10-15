@@ -28,7 +28,8 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-pbc-finite-etale-category",
   "def-weil-surjective-morphism",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-lisse-lattice-etale-local"
  ],
  "proof": [
   {
@@ -258,5 +259,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bea96458b",
+  "group": "NY",
+  "result": "pass",
+  "note": "Wrote review.md. Audited the immutable statement, all nine dependencies, sources, universes, edge cases, docstrings, and dependency repair. Both delivered Lean files compile cleanly through scompile.py with the local side overlay. No fixes required; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LisseLatticeFiniteEtaleDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_lisse_lattice_finite_etale_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticeFiniteEtaleDescent.lean",
+  "statement": "theorem exists_lisse_lattice_finite_etale_descent (l : ℕ) [Fact l.Prime] (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (L : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseFieldSheaf l E X))) (hL : L.IsFiniteLocallyFree) {Y : Scheme.{u}} (p : Y ⟶ X) [IsFinite p] [Etale p] [Surjective p] (hM : ∃ M : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseIntegerSheaf l E Y)), M.IsFiniteLocallyFree ∧ Nonempty ((SheafOfModules.changeOfRings.{u, u + 1, u + 1} (lisseIntegerToField l E Y) M).val ≅ (PresheafOfModules.pushforward.{u + 1, u, u, u + 1, u + 1, u + 1} (lisseEtaleCoefficientIdentification l E p)).obj L.val)) : ∃ M₀ : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseIntegerSheaf l E X)), M₀.IsFiniteLocallyFree ∧ Nonempty ((SheafOfModules.changeOfRings.{u, u + 1, u + 1} (lisseIntegerToField l E X) M₀).val ≅ L.val)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
