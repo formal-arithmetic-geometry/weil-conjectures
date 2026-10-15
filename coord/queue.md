@@ -1,6 +1,6 @@
 # Work queue
 
-33 items; claim with `tools/claim.py next <group> [--stage N]`.
+30 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (33)
+## Stage 3: modules to prove (30)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -21,7 +21,6 @@
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 4 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 4 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus` | 4 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIso` | 4 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluing` | 4 | 1 | proof |
@@ -35,12 +34,10 @@
 | `Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedOpenClosedRecollement` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 5 | proof |
-| `Sheaf.Paper.GeometricFieldProEtaleEvaluation` | 5 | 6 | proof |
+| `Sheaf.Paper.GeometricFieldProEtaleEvaluation` | 5 | 1 | proof |
 | `Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits` | 6 | 1 | proof |
 | `Sheaf.NumberTheory.Padics.ExtensionIntegersDvr` | 6 | 1 | proof |
-| `Sheaf.Paper.ProEtaleSheafificationWcontractibleSections` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverGeometry` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.LowerShriekCoveringGenerators` | 7 | 1 | proof |
 | `Sheaf.Paper.PointLanFiniteProducts` | 7 | 1 | proof |
