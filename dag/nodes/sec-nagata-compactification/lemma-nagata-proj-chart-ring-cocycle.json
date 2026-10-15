@@ -353,5 +353,31 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-134750b7f (reviewer sub-agent of L); spot-checked: Read the item, unit, DAG guidance, delivery records, exact blueprint source, Stacks Tag 01M4 proof, and every cited node. Verified all five proof steps, ring coefficient category, restriction/base-change maps, degree bookkeeping, universal-property uses, identity/inverse/cocycle laws, Mathlib searches, duplicate absence, route/tool use, and edge cases including zero/nilpotent rings and unequal degrees. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d2cbfece4",
+  "group": "NW",
+  "result": "pass",
+  "note": "Wrote review.md. All clauses, dependencies, edge cases, universes, and report sections checked; signature matches verbatim. Six declarations passed clean server checks. No delivery errors or fixes required."
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+  "declaration": "HomogeneousLocalization.Away.overlapEquiv_cocycle",
+  "declarations": [
+   "HomogeneousLocalization.Away.overlapEquiv",
+   "HomogeneousLocalization.Away.overlapEquiv_awayMap_left",
+   "HomogeneousLocalization.Away.overlapEquiv_awayMap_right",
+   "HomogeneousLocalization.Away.overlapEquiv_self",
+   "HomogeneousLocalization.Away.overlapEquiv_symm",
+   "HomogeneousLocalization.Away.overlapEquiv_cocycle"
+  ],
+  "statement": "theorem Away.overlapEquiv_cocycle {d e e' : ι} {f g h z : A} (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 e)\n    (hh : h ∈ 𝒜 e') (hz : z = f * g * h) :\n    (awayMap 𝒜 hh (hz.trans (by ring) : z = g * f * h)).comp\n        (Away.overlapEquiv 𝒜 f g).toRingHom = awayMap 𝒜 hh hz ∧\n      (awayMap 𝒜 hf (hz.trans (by ring) : z = h * g * f)).comp\n        (Away.overlapEquiv 𝒜 g h).toRingHom =\n          awayMap 𝒜 hf (hz.trans (by ring) : z = g * h * f) ∧\n      (awayMap 𝒜 hg (hz.trans (by ring) : z = h * f * g)).comp\n        (Away.overlapEquiv 𝒜 f h).toRingHom =\n          awayMap 𝒜 hg (hz.trans (by ring) : z = f * h * g)",
+  "branch": "slopmaster2",
+  "by": "NW",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Existing published chart-coherence family, read using scompile.py --source (the local slopmaster2 checkout predates it). The overlap rings are represented by Away at fg and gf; Mathlib Away.isLocalization_mul identifies these with the two restricted chart rings. overlapEquiv and the two awayMap compatibility lemmas supply the canonical equivalence; self and symm supply identity and inverse; overlapEquiv_cocycle identifies all three further restrictions with the common Away ring at fgh. Specialize the general grading to ℕ and the homogeneous degrees to positive ones."
  }
 }
