@@ -72,7 +72,7 @@ theorem koszulConstantFunctor_preservesZero :
     (koszulConstantFunctor X Λ).PreservesZeroMorphisms := by
   sorry
 
-attribute [instance] koszulConstantFunctor_preservesZero
+attribute [local instance] koszulConstantFunctor_preservesZero
 
 /-- The cohomologically reindexed Koszul complex of the positive power m+1.
 The lift changes only the carrier universe, not the coefficient ring.

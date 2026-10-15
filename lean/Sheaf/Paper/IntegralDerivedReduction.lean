@@ -83,9 +83,11 @@ noncomputable def integralReductionChangeOfRings :
 
 /-- Additivity of the chosen ordinary tensor functor, supplied by its defining witness.
 Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/
-noncomputable instance integralReductionChangeOfRingsAdditive :
+noncomputable def integralReductionChangeOfRingsAdditive :
     (integralReductionChangeOfRings l E Y D hl n).Additive :=
   (integralReductionExistence l E Y D hl n).choose_spec.choose_spec.choose_spec.choose
+
+attribute [local instance] integralReductionChangeOfRingsAdditive
 
 set_option linter.defProp false in
 /-- The full derived pair supplied by the general change-of-rings theorem.
@@ -129,12 +131,14 @@ noncomputable def integralDerivedReductionCounit :
 /-- The universal left-derived-functor structure; it determines the functor uniquely
 up to the unique isomorphism respecting this counit.
 Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/
-noncomputable instance integralDerivedReductionUniversal :
+noncomputable def integralDerivedReductionUniversal :
     (integralDerivedReduction l E Y D hl n).IsLeftDerivedFunctor
       (integralDerivedReductionCounit l E Y D hl n)
       (HomotopyCategory.quasiIso (completedIntegralModuleSheaves l E Y D hl)
         (ComplexShape.up ℤ)) :=
   (integralReductionDerivedExistence l E Y D hl n).choose_spec.choose_spec.1
+
+attribute [local instance] integralDerivedReductionUniversal
 
 /-- The completed coefficient projection is surjective as a morphism of sheaves.
 Source: Bhatt--Scholze, Section 6.5, setup before Definition 6.5.1

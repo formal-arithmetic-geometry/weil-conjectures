@@ -58,17 +58,21 @@ theorem proEtaleRingRestrictScalars_properties {T : Scheme.{u}}
 
 /-- Left exactness of restriction. Source: Stacks, Tag 05RT
 (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
-noncomputable instance proEtaleRingRestrictScalars_preservesFiniteLimits {T : Scheme.{u}}
+noncomputable def proEtaleRingRestrictScalars_preservesFiniteLimits {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S) :
     PreservesFiniteLimits (proEtaleRingRestrictScalars a) :=
   (proEtaleRingRestrictScalars_properties a).1
 
+attribute [local instance] proEtaleRingRestrictScalars_preservesFiniteLimits
+
 /-- Right exactness of restriction. Source: Stacks, Tag 05RT
 (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
-noncomputable instance proEtaleRingRestrictScalars_preservesFiniteColimits {T : Scheme.{u}}
+noncomputable def proEtaleRingRestrictScalars_preservesFiniteColimits {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S) :
     PreservesFiniteColimits (proEtaleRingRestrictScalars a) :=
   (proEtaleRingRestrictScalars_properties a).2.1
+
+attribute [local instance] proEtaleRingRestrictScalars_preservesFiniteColimits
 
 variable {U V : Scheme.{u}} (f : U ⟶ V)
   (RV SV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
@@ -153,7 +157,7 @@ theorem proEtaleRingRestrictionPullbackInv_isIso :
     IsIso (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm) := by
   sorry
 
-attribute [instance] proEtaleRingRestrictionPullbackInv_isIso
+attribute [local instance] proEtaleRingRestrictionPullbackInv_isIso
 
 /-- The termwise descended identified-coefficient inverse-image comparison `b`.
 Source: Stacks, Tag 0D6D (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
