@@ -417,5 +417,33 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-99fea38a6 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; all eight steps support the ordinary ring-sheaf comparison, including non-surjective towers and coherence. Corrected two rejected Loogle queries incorrectly recorded as 'no match'. review.md records source checks, accepted tools, the condensed-coefficient distinction, and pre-existing cycles outside this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-baa0d0ad2",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Checked every statement clause, dependencies, sources, canonical constructions, universes, edge cases, docstrings, and verbatim signature. Snapshot compilation passed both wrapper checks with no warnings or errors. No defects found; branch and clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_profinite_coefficient_inverse_image",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantInverseImageMap_naturality",
+   "AlgebraicGeometry.Scheme.proEtaleConstantComparison",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientTower",
+   "AlgebraicGeometry.Scheme.proEtaleProfiniteComparison",
+   "AlgebraicGeometry.Scheme.proEtaleRingInverseImageId",
+   "AlgebraicGeometry.Scheme.proEtaleRingInverseImageComp",
+   "AlgebraicGeometry.Scheme.proEtale_profinite_coefficient_inverse_image"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProfiniteCoefficientInverseImage.lean",
+  "statement": "theorem proEtale_profinite_coefficient_inverse_image (Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) [∀ n : ℕᵒᵖ, Finite (Q.obj n)] : (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (n : ℕᵒᵖ), IsIso ((proEtaleConstantComparison f).app (Q.obj n))) ∧ (∀ (X Y : Scheme.{u}) (f : X ⟶ Y), IsIso (proEtaleProfiniteComparison f Q)) ∧ (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (n : ℕᵒᵖ), proEtaleProfiniteComparison f Q ≫ limit.π (proEtaleCoefficientTower X Q) n = (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (limit.π (proEtaleCoefficientTower Y Q) n) ≫ (proEtaleConstantComparison f).app (Q.obj n)) ∧ (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (a : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (limit (proEtaleCoefficientTower Y Q)) ⟶ limit (proEtaleCoefficientTower X Q)), (∀ n : ℕᵒᵖ, a ≫ limit.π (proEtaleCoefficientTower X Q) n = (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (limit.π (proEtaleCoefficientTower Y Q) n) ≫ (proEtaleConstantComparison f).app (Q.obj n)) → a = proEtaleProfiniteComparison f Q) ∧ (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (n m : ℕᵒᵖ) (a : n ⟶ m), (proEtaleConstantComparison f).app (Q.obj n) ≫ (proEtaleCoefficientTower X Q).map a = (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map ((proEtaleCoefficientTower Y Q).map a) ≫ (proEtaleConstantComparison f).app (Q.obj m)) ∧ (∀ (P : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) [∀ n : ℕᵒᵖ, Finite (P.obj n)] (a : Q ⟶ P) (X Y : Scheme.{u}) (f : X ⟶ Y), (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (limMap (Functor.whiskerRight a (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}))) ≫ proEtaleProfiniteComparison f P = proEtaleProfiniteComparison f Q ≫ limMap (Functor.whiskerRight a (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}))) ∧ (∀ (P : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) [∀ n : ℕᵒᵖ, Finite (P.obj n)] (a : Q ⟶ P) (X Y : Scheme.{u}) (f : X ⟶ Y) (n : ℕᵒᵖ), (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map ((constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map (a.app n)) ≫ (proEtaleConstantComparison f).app (P.obj n) = (proEtaleConstantComparison f).app (Q.obj n) ≫ (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map (a.app n)) ∧ (∀ (X : Scheme.{u}) (n : ℕᵒᵖ), (proEtaleConstantComparison (𝟙 X)).app (Q.obj n) = (proEtaleRingInverseImageId X).hom.app ((proEtaleCoefficientTower X Q).obj n)) ∧ (∀ X : Scheme.{u}, proEtaleProfiniteComparison (𝟙 X) Q = (proEtaleRingInverseImageId X).hom.app (limit (proEtaleCoefficientTower X Q))) ∧ (∀ (X Y Z : Scheme.{u}) (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕᵒᵖ), (proEtaleConstantComparison (f ≫ g)).app (Q.obj n) = (proEtaleRingInverseImageComp f g).hom.app ((proEtaleCoefficientTower Z Q).obj n) ≫ (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map ((proEtaleConstantComparison g).app (Q.obj n)) ≫ (proEtaleConstantComparison f).app (Q.obj n)) ∧ (∀ (X Y Z : Scheme.{u}) (f : X ⟶ Y) (g : Y ⟶ Z), proEtaleProfiniteComparison (f ≫ g) Q = (proEtaleRingInverseImageComp f g).hom.app (limit (proEtaleCoefficientTower Z Q)) ≫ (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (proEtaleProfiniteComparison g Q) ≫ proEtaleProfiniteComparison f Q)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Canonical maps and site identity/composition mates are defined with real data. The helper naturality theorem is the naturality clause of this node, used to package its constant comparisons. Countable systems are indexed by the opposite of natural numbers, with op n corresponding to level n+1. Finite rings are placed in the mandated sheaf-value universe u+1, including ULift of rings in universe u."
  }
 }
