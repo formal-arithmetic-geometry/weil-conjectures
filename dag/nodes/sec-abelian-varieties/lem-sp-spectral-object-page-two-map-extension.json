@@ -1,0 +1,126 @@
+{
+ "id": "lem-sp-spectral-object-page-two-map-extension",
+ "kind": "statement",
+ "title": "Unique page-two spectral-sequence map induced by a spectral-object morphism",
+ "statement": "Let C be an abelian category and let X and Y be EInt-indexed abelian spectral objects. Every morphism φ : X ⟶ Y induces a unique morphism e : X.E₂SpectralSequence ⟶ Y.E₂SpectralSequence such that for every p,q the page-two component of e, followed by the canonical first-page comparison for Y, equals the canonical first-page comparison for X followed by the component of φ on H^(p+q)(q,q+1).",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-spectral-sequence"
+ ],
+ "source": {
+  "document": "Mathlib Algebra/Homology/SpectralObject/{Page,SpectralSequence,FirstPage}.lean and Stacks Project",
+  "place": "Tags 012K and 015K; finite kernel/image page maps and induction through successor-page homology isomorphisms"
+ },
+ "proof": [
+  {
+   "text": "For each page and bidegree, use the natural transformations in φ and the compatibility of connecting maps to obtain a morphism of the three-term complexes defining pageX. The induced kernel and cokernel maps give the page component, and the same equations give commutation with the page differential.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The kernel and cokernel universal properties identify the induced maps with the homology maps used in the successor-page isomorphisms, so the page components form a morphism of spectral sequences. At page two the first-page comparison equation follows from the same kernel/image maps.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If another spectral-sequence morphism has the displayed page-two equation, its page-two components agree because the comparison maps are isomorphisms. Induction on r≥2 using the successor-page isomorphisms gives equality on every page, and SpectralSequence.hom_ext gives equality of morphisms.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib Algebra/Homology/SpectralObject and Stacks Project",
+  "place": "Tags 012K and 015K"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "SpectralSequence.Hom spectralObject",
+   "results": "No existing global functor or map extension found; page-level map API is in SpectralObject.Page.lean",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSequence.Hom",
+   "results": "Only the structure and category operations",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functorial spectral sequence map induced by spectral object morphism",
+   "results": "Related page and homology map declarations only",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral object morphism induces spectral sequence morphism page two",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor",
+  "date": "2026-10-15",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-spectral-object-page-two-functor",
+   "place": "local morphism construction used by the functoriality proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SpectralObjectPageTwoMap",
+  "file": "lean/Sheaf/CategoryTheory/SpectralObjectPageTwoMap.lean",
+  "declaration": "CategoryTheory.Abelian.SpectralObject.exists_unique_pageTwoMap",
+  "statement": "theorem exists_unique_pageTwoMap {C : Type uC} [Category.{vC} C] [Abelian C] {X Y : SpectralObject C EInt} (φ : X ⟶ Y) : ∃ e : X.E₂SpectralSequence ⟶ Y.E₂SpectralSequence, (∀ (p q : ℤ), (e.hom 2).f (p, q) ≫ (pageTwoComparison Y (Iso.refl _) p q (p + q) rfl).hom = (pageTwoComparison X (Iso.refl _) p q (p + q) rfl).hom ≫ (φ.hom (p + q)).app (ComposableArrows.mk₁ (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt))))) ∧ ∀ e' : X.E₂SpectralSequence ⟶ Y.E₂SpectralSequence, (∀ (p q : ℤ), (e'.hom 2).f (p, q) ≫ (pageTwoComparison Y (Iso.refl _) p q (p + q) rfl).hom = (pageTwoComparison X (Iso.refl _) p q (p + q) rfl).hom ≫ (φ.hom (p + q)).app (ComposableArrows.mk₁ (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt))))) → e' = e",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-15"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f83ba",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261015T221711-L-2641190",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f83ba",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261015T221711-L-2641190",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules and DAG nodes match the stated changes; all modules and both direct importers compile cleanly, with only the named support theorem remaining sorry."
+ }
+}
