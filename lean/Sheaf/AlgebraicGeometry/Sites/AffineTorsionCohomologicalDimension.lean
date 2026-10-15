@@ -6,6 +6,23 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
+import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
+import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
+import Sheaf.CategoryTheory.GrothendieckSpectralSequence
+import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+import WeilConjectures.SixFunctors.Finite.Exact
+import WeilConjectures.SixFunctors.Finite.Stalk
 
 /-!
 # Affine torsion cohomological dimension bound
