@@ -1,0 +1,102 @@
+{
+ "id": "def-weil-pbc-algebraic-inverse-image",
+ "kind": "definition",
+ "title": "Algebraic inverse image of ring and module sheaves",
+ "status": "split",
+ "statement": "Let $(C,J)$ and $(D,K)$ be small sites, $L:\\operatorname{Sh}(C)\\to\\operatorname{Sh}(D)$ a functor on sheaves of sets, $R$ a sheaf of commutative rings on $C$, and $R_I$ a sheaf of commutative rings on $D$. An algebraic inverse-image presentation consists of an isomorphism $e_R:L(|R|)\\cong |R_I|$, a functor $I:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(R_I)$ [def-weil-sheaf-of-modules-category], and a natural isomorphism $e_M:|I(M)|\\cong L(|M|)$, transporting ring addition, multiplication, zero and one and module addition, zero and scalar multiplication. More explicitly, for every test sheaf $T$ and arrows $a,b,t$ into the operand and result sheaves with the sectionwise equation $t=a+b$, $t=ab$ or $t=a\\cdot b$, their images under $L$, identified by $e_R$ and $e_M^{-1}$, satisfy the same equation on every section over every object of $D$. Likewise every arrow identically zero or one remains so after transport. Additive inverses are determined by addition and zero. The natural isomorphism $e_M$ fixes the action on module morphisms. These graph conditions express transport along the inverse finite-product comparison; they determine the algebraic structures up to the stated identifications. The structure can be defined for an arbitrary $L$; finite-limit preservation is imposed when it presents inverse image of a morphism of topoi.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module, with sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of ring and module objects under geometric morphism",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of modules along an arbitrary geometric morphism of topoi, preserving addition and scalar action",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.pushforwardSections; PresheafOfModules.pushforward₀_obj; PresheafOfModules.pushforward; AlgebraicGeometry.Scheme.Modules.pullback; PresheafOfModules.pushforward_obj_obj; AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj; PresheafOfModules.pushforward₀.",
+   "date": "2026-10-15",
+   "verdict": "No match: site-induced or scheme-specific functors, not algebraic lifts of an arbitrary geometric inverse image."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous: pullback, pullbackId, instIsLeftAdjointPullback, pullbackPushforwardAdjunction, pullbackComp, pullback_comp_id, pullback_id_comp, pullbackIso, sheafificationCompPullback, conjugateEquiv_pullbackId_hom, pullback_assoc.",
+   "date": "2026-10-15",
+   "verdict": "No match: requires a continuous functor of the given sites; does not cover arbitrary morphisms between the given topoi."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep \"AlgebraicInverseImage|GeometricMorphism|mapModule|mapCommRing\" CategoryTheory; rg same names in WeilConjectures and lean/Sheaf; blueprint_refs.py search \"algebraic inverse image\"; rg -l \"inverse.image.*(module|ring)|morphism of (ringed )?topoi\" dag/nodes",
+   "results": "[grep] OK 0 hit(s) in Mathlib/CategoryTheory. No upstream AlgebraicInverseImage or GeometricMorphism declaration. Project has site-specific inverse-image results, ring-object transport and algebraic-structure equivalences, but no general module lift. blueprint search: 0 blueprint nodes match. DAG hits include the present item, module adjunction, and K-flat pullback theorem, with no recorded general algebraic inverse-image definition.",
+   "date": "2026-10-15",
+   "verdict": "No existing definition of this general lift; existing sheafCompose, toSheaf, and changeOfRings notions are reused, not duplicated."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "date": "2026-10-15",
+  "group": "NG"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-corners",
+   "place": "Inverse image on ring and module sheaves used in Tag 06YY before extension of scalars",
+   "via": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlgebraicInverseImage",
+  "declaration": "SheafOfModules.AlgebraicInverseImage",
+  "file": "lean/Sheaf/CategoryTheory/AlgebraicInverseImage.lean",
+  "statement": "structure AlgebraicInverseImage {C D : Type u} [Category.{u} C] [Category.{u} D] {JC : GrothendieckTopology C} {JD : GrothendieckTopology D} (L : Sheaf JC (Type u) ⥤ Sheaf JD (Type u)) (R : Sheaf JC CommRingCat.{u}) (RI : Sheaf JD CommRingCat.{u})",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-36878c0b9",
+  "group": "NG",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-36878c0b9",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, source passages, inverse-image operations, canonical comparison laws, universes, edge cases, records, and pilot gates. Both snapshot modules reproduced clean server-only compiles. No delivery errors found."
+ }
+}
