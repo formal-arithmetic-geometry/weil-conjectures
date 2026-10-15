@@ -6,12 +6,13 @@ Authors: SHEAF group U3
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Exact extension for localized restriction of module sheaves
@@ -217,6 +218,25 @@ private noncomputable def extensionSheafAdjunction
     erw [h]
     exact extensionPresheafHomEquiv_naturality_right R U F G H _ b
 
+
+/-- The explicit direct-sum extension followed by module sheafification is left
+adjoint to restriction to the slice.
+
+Proof: the existing Hom equivalence sends a map out of the direct sum to its
+components on the summands; its inverse sums those components. Naturality and
+the inverse laws hold on direct-sum generators. Composing with the module
+sheafification Hom equivalence gives the displayed adjunction.
+
+Source: Stacks Project, Modules on Sites, Tag 03DI.
+(blueprint: new-localized-restriction-extension-exists)
+-/
+theorem extensionSheafAdjunction_nonempty
+    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{max u v}) (U : C) :
+    Nonempty ((SheafOfModules.extensionByZeroPresheaf.{max u v} R U ⋙
+      PresheafOfModules.sheafification.{max u v} (𝟙 R.obj)) ⊣
+        SheafOfModules.overFunctor.{max u v} R U) :=
+  ⟨extensionSheafAdjunction R U⟩
 
 /-- For a sheaf of rings on a Grothendieck site and an object `U`, localized
 restriction admits a left adjoint preserving finite limits and finite colimits.

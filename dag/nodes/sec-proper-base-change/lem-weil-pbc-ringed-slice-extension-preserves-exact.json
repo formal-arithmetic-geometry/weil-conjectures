@@ -68,43 +68,39 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DI (direct-sum adjunction), 03DJ (exactness), and 0E8G, forward implication. Reviewed against https://stacks.math.columbia.edu/tag/03DJ on 2026-10-16; the existing Lean adjunction has narrower hypotheses, so its construction must be repeated at the general universes, rather than applied."
+  "place": "Tags 03DI and 03DJ. Reuse the existing concrete direct-sum adjunction in Sheaf.Algebra.Homology.LocalizedRestrictionExtensionExists through its proved public Nonempty interface; prove preservation of monos sectionwise and use Mathlib exact-functor glue."
  },
  "id": "lem-weil-pbc-ringed-slice-extension-preserves-exact",
  "title": "Ringed-slice extension preserves exactness",
  "statement": "Let C be a category with object universe u and morphism universe v, J a Grothendieck topology, O a sheaf of commutative rings with values in universe max u v, and U an object. Write R for its underlying ring sheaf, and L for the direct-sum extension from R.over U-module sheaves followed by module sheafification, all module values in universe max u v. For every short complex S of R.over U-module sheaves, S.Exact implies imageSubobject (L.map S.f) = kernelSubobject (L.map S.g). The notions are those of [def-pur-localized-ringed-site], [def-weil-sheaf-of-modules-category], [def-weil-extension-by-zero-presheaf], [def-weil-presheaf-modules-sheafification].",
  "proof": [
   {
-   "text": "The direct-sum universal property identifies maps from the extension presheaf of G to the underlying presheaf of F with maps from G to restriction of F. Module sheafification extends this to a natural hom-equivalence L(G) → F ≃ G → T(F); hence L is a left adjoint and right exact.",
+   "text": "Use CategoryTheory.extensionSheafAdjunction_nonempty, the public adjunction interface of [new-localized-restriction-extension-exists], for the concrete direct-sum extension followed by module sheafification. Restriction is additive sectionwise, so Adjunction.left_adjoint_additive makes L additive, and Adjunction.leftAdjoint_preservesColimits makes L preserve finite colimits.",
+   "uses": [
+    "new-localized-restriction-extension-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of a mono of module sheaves is monic, hence injective by ModuleCat.mono_iff_injective. The presheaf extension map is DirectSum.lmap; DirectSum.lmap_injective and PresheafOfModules.mono_of_injective show that it preserves monos. Mathlib already proves PreservesFiniteLimits for module sheafification, so the composite L preserves monos.",
    "uses": [
     "def-weil-extension-by-zero-presheaf",
-    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category",
     "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": false
   },
   {
-   "text": "A monomorphism of module sheaves is sectionwise injective. The map of direct sums is injective on each coordinate and thus injective. Exact module sheafification, identified with abelian sheafification, preserves this mono.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-pc-sites-module-sheafification-interface",
-    "lem-weil-pbc-sheafification-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A right exact additive functor preserving monos is exact, by factoring through images. Rewrite exactness of the mapped complex as equality of image and kernel subobjects.",
+   "text": "For a short exact complex T, map its cokernel cofork by L, using CokernelCofork.mapIsColimit. ShortComplex.exact_and_epi_g_iff_g_is_cokernel gives exactness and an epi, and preservation of monos gives the remaining short-exactness property. Functor.exact_tfae then implies preservation of every exact short complex. Finally apply ShortComplex.exact_iff_image_eq_kernel.",
    "uses": [],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "new-localized-restriction-extension-exists",
   "def-weil-extension-by-zero-presheaf",
-  "def-pur-localized-ringed-site",
-  "def-weil-presheaf-modules-sheafification",
   "def-weil-sheaf-of-modules-category",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-weil-pbc-sheafification-exact"
+  "def-weil-presheaf-modules-sheafification"
  ],
  "lean": {
   "existing": false,
@@ -129,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S1",
+  "reviewer": "X-8d2bd",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261015T221736-L-2646180",
+  "landing": "20261015T232823-L-3301124",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all required compilation and forced-adaptation checks passed."
  }
 }

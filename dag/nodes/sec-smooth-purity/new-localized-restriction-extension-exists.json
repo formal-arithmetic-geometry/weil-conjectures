@@ -10,7 +10,7 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Use SheafOfModules.extensionByZeroPresheaf for the actual direct-sum presheaf, at module universe max u v. Its restriction formula on a generator follows from DirectSum.toAddMonoid_of. Construct mutually inverse maps between presheaf morphisms out of this presheaf and module-sheaf morphisms into localized restriction: sum the components in one direction and compose with DirectSum.lof in the other. Prove naturality and the inverse laws on generators. Compose this Hom equivalence with PresheafOfModules.sheafificationHomEquiv and its naturality to construct the adjunction for the sheafified functor G.",
+   "text": "Use SheafOfModules.extensionByZeroPresheaf for the actual direct-sum presheaf, at module universe max u v. Its restriction formula on a generator follows from DirectSum.toAddMonoid_of. Construct mutually inverse maps between presheaf morphisms out of this presheaf and module-sheaf morphisms into localized restriction: sum the components in one direction and compose with DirectSum.lof in the other. Prove naturality and the inverse laws on generators. Compose this Hom equivalence with PresheafOfModules.sheafificationHomEquiv and its naturality to construct the adjunction for the sheafified functor G. The fully proved public theorem CategoryTheory.extensionSheafAdjunction_nonempty exposes this adjunction for the concrete composite, without revealing private Hom-equivalence helpers.",
    "uses": [
     "def-weil-extension-by-zero-presheaf"
    ],
@@ -117,7 +117,11 @@
   "statement": "theorem localized_restriction_extension_exists\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (R : Sheaf J RingCat.{max u v}) (U : C)\n    (hzero : (SheafOfModules.overFunctor.{max u v} R U).PreservesZeroMorphisms) :\n    ∃ (G : SheafOfModules.{max u v} (R.over U) ⥤ SheafOfModules.{max u v} R),\n      PreservesFiniteLimits G ∧ PreservesFiniteColimits G ∧\n      Nonempty (G ⊣ SheafOfModules.overFunctor.{max u v} R U)",
   "branch": "sheaf-dag",
   "by": "Q1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "declarations": [
+   "CategoryTheory.localized_restriction_extension_exists",
+   "CategoryTheory.extensionSheafAdjunction_nonempty"
+  ]
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -130,14 +134,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U3",
+  "reviewer": "X-8d2bd",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261012T231642-L-1964295",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261015T232823-L-3301124",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all required compilation and forced-adaptation checks passed."
  },
  "lean_audit": {
   "master": {
