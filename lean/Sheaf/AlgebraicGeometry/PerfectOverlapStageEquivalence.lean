@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
+public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # The cartesian equivalence for the overlap at a finite stage
@@ -34,38 +36,43 @@ variable [∀ Z : Scheme.{u},
 /-- The exact nested-open restriction agrees with derived pullback along its inclusion.
 Source: Stacks Project, Tag 08DW, restriction of derived pullback.
 (blueprint: def-pc-perfect-overlap-stage-equivalence). -/
-noncomputable def overlapOpenInclusionPullbackIso (X : Scheme.{u})
+@[no_expose] noncomputable def overlapOpenInclusionPullbackIso (X : Scheme.{u})
     {W U : X.Opens} (i : W ⟶ U) :
     derivedPullback (X.homOfLE (leOfHom i)) ≅
       (schemeOpenOverlapRestriction X i).mapDerivedCategory := by
   classical
-  let f := X.homOfLE (leOfHom i)
-  let T : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) :=
-    Scheme.Modules.tensorPullback f
-  have : T.Additive := (Classical.choose exists_derivedPullbackComposition) f
-  let ε := (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f
-  let Q := HomotopyCategory.quasiIso
-    (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (.up ℤ)
-  have : (derivedPullback f).IsLeftDerivedFunctor ε Q :=
-    (Classical.choose (Classical.choose_spec
-      (Classical.choose_spec exists_derivedPullbackComposition))) f
-  let η : T ≅ Scheme.Modules.restrictFunctor f :=
-    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
-      (Scheme.Modules.pullbackPushforwardAdjunction f) ≪≫
-        (Scheme.Modules.restrictFunctorIsoPullback f).symm
-  let restriction : schemeOpenOverlapRestriction X i ≅ Scheme.Modules.restrictFunctor f :=
-    Functor.isoWhiskerLeft (Scheme.Modules.overEquiv U).inverse
-        (Scheme.Modules.overMapCompOverEquiv i) ≪≫
-      (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (Scheme.Modules.overEquiv U).counitIso _ ≪≫ Functor.leftUnitor _
-  let θ : schemeOpenOverlapRestriction X i ≅ T := restriction ≪≫ η.symm
-  have : PreservesFiniteLimits T := preservesFiniteLimits_of_natIso θ
-  have : PreservesFiniteColimits T := preservesFiniteColimits_of_natIso θ
-  have : T.mapDerivedCategory.IsLeftDerivedFunctor T.mapDerivedCategoryFactorsh.hom Q :=
-    Functor.isLeftDerivedFunctor_of_inverts _ _ T.mapDerivedCategoryFactorsh
-  exact Functor.leftDerivedUnique T.mapDerivedCategory (derivedPullback f) ε
-    T.mapDerivedCategoryFactorsh.hom Q ≪≫ (Functor.mapDerivedCategoryNatIso θ).symm
+  let R := (schemeOpenRestriction X U).mapDerivedCategory
+  let h := X.homOfLE (leOfHom i)
+  let α : R ⋙ derivedPullback h ≅
+      R ⋙ (schemeOpenOverlapRestriction X i).mapDerivedCategory :=
+    Functor.isoWhiskerRight (singleComplexOpenPullbackIso X U).symm
+        (derivedPullback h) ≪≫
+      perfectHomComposition h U.ι ≪≫
+        eqToIso (congrArg (fun k : W.toScheme ⟶ X ↦ derivedPullback.{u,w} k)
+          (show h ≫ U.ι = W.ι from Scheme.homOfLE_ι X (leOfHom i))) ≪≫
+          singleComplexOpenPullbackIso X W ≪≫
+            (schemeDerivedOpenRestrictionCompIso X i).symm
+  exact Classical.choose (Scheme.derived_open_restriction_iso_descent X U
+    (derivedPullback h) (schemeOpenOverlapRestriction X i).mapDerivedCategory α)
+
+/-- The chosen inclusion comparison is pinned to the exact nested-open
+restriction after precomposition with global restriction. -/
+theorem overlapOpenInclusionPullbackIso_whiskerLeft
+    (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
+    let R := (schemeOpenRestriction X U).mapDerivedCategory
+    let h := X.homOfLE (leOfHom i)
+    Functor.isoWhiskerLeft R (overlapOpenInclusionPullbackIso X i) =
+      Functor.isoWhiskerRight (singleComplexOpenPullbackIso X U).symm
+          (derivedPullback h) ≪≫
+        perfectHomComposition h U.ι ≪≫
+          eqToIso (congrArg (fun k : W.toScheme ⟶ X ↦ derivedPullback.{u,w} k)
+            (show h ≫ U.ι = W.ι from Scheme.homOfLE_ι X (leOfHom i))) ≪≫
+            singleComplexOpenPullbackIso X W ≪≫
+              (schemeDerivedOpenRestrictionCompIso X i).symm := by
+  intro R h
+  unfold overlapOpenInclusionPullbackIso
+  exact Classical.choose_spec (Scheme.derived_open_restriction_iso_descent X U
+    (derivedPullback h) (schemeOpenOverlapRestriction X i).mapDerivedCategory _)
 
 /-- Derived pullback along the inverse of a scheme isomorphism, with its inverse
 constructed from pullback along the isomorphism itself.
