@@ -5,6 +5,10 @@ Authors: SHEAF group M2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
+
+public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
+
 public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
 
@@ -20,48 +24,6 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 -- Reuse the raw cohomology API's cached module-sheaf instances.
-
-/-- The shifted coefficient part of scalar comparison.
-Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: lem-sbc-raw-scalar-coefficient-square). -/
-noncomputable def scalarCoefficientFactor
-    (Λ : Type (u + 1)) [CommRing Λ] {W Y : Scheme.{u}} (h : Y ⟶ W)
-    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
-    (RawModuleScalarComparison.forget Λ Y).mapDerivedCategoryPlus.obj
-        (((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((upperStar (ModuleCat.{u + 1} Λ) h).obj G))⟦q⟧) ⟶
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj
-        ((upperStar AddCommGrpCat.{u + 1} h).obj
-          ((RawModuleScalarComparison.forget Λ W).obj G)))⟦q⟧ :=
-  ((RawModuleScalarComparison.forget Λ Y).mapDerivedCategoryPlus.commShiftIso q).hom.app
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj
-        ((upperStar (ModuleCat.{u + 1} Λ) h).obj G)) ≫
-    (shiftFunctor _ q).map
-      (((RawModuleScalarComparison.forget Λ Y).mapDerivedCategoryPlusSingleFunctor 0).hom.app
-          ((upperStar (ModuleCat.{u + 1} Λ) h).obj G) ≫
-        (DerivedCategory.Plus.singleFunctor _ 0).map
-          (inv (RawModuleScalarComparison.pullback Λ h G)))
-
-
-/-- The source part of the scalar comparison, as a fixed derived morphism.
-Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: lem-sbc-raw-scalar-source-square). -/
-noncomputable def scalarSourceFactor
-    (Λ : Type (u + 1)) [CommRing Λ] {S Y : Scheme.{u}} (h : Y ⟶ S)
-    (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (E : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (t : E ⟶ (RawModuleScalarComparison.forget Λ S).obj L) :
-    (DerivedCategory.Plus.singleFunctor _ 0).obj
-        ((upperStar AddCommGrpCat.{u + 1} h).obj E) ⟶
-      (RawModuleScalarComparison.forget Λ Y).mapDerivedCategoryPlus.obj
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((upperStar (ModuleCat.{u + 1} Λ) h).obj L)) :=
-  (DerivedCategory.Plus.singleFunctor _ 0).map
-      ((upperStar AddCommGrpCat.{u + 1} h).map t ≫
-        RawModuleScalarComparison.pullback Λ h L) ≫
-    ((RawModuleScalarComparison.forget Λ Y).mapDerivedCategoryPlusSingleFunctor 0).inv.app
-      ((upperStar (ModuleCat.{u + 1} Λ) h).obj L)
-
 
 attribute [local instance] moduleSheafCategory moduleSheafPreadditive moduleSheafAbelian
   moduleSheafHasDerivedCategory

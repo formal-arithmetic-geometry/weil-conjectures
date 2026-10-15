@@ -5,7 +5,7 @@ Authors: SHEAF group N1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
+public import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 import Sheaf.AlgebraicGeometry.ConstantModulePushforwardGermVanishing
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

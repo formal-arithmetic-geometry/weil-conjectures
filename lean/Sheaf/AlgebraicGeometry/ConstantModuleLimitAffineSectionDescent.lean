@@ -5,7 +5,7 @@ Authors: SHEAF group V3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
+public import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 import Sheaf.AlgebraicGeometry.GlobalSectionsLimitComparison
 import Sheaf.AlgebraicGeometry.ConstantModulePullbackSectionComparison
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Connected

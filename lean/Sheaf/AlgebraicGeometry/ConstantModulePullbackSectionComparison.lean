@@ -5,7 +5,7 @@ Authors: SHEAF group V3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
+public import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 import Sheaf.AlgebraicGeometry.ConstantModuleSectionCoefficients
 import Sheaf.AlgebraicGeometry.PullbackSectionTransport

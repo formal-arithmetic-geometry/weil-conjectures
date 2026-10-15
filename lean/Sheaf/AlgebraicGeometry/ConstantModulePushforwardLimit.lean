@@ -5,7 +5,7 @@ Authors: SHEAF group S1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
+public import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 import Sheaf.AlgebraicGeometry.ConstantModulePushforwardLimitInjectivity
 import Sheaf.AlgebraicGeometry.ConstantModulePushforwardLimitSurjectivity
 

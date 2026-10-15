@@ -8,7 +8,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
-import all Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
+import all WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 
 /-! # Degree-zero strict-local stalk comparison for constant coefficients
 

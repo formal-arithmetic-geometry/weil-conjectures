@@ -5,7 +5,7 @@ Authors: SHEAF group N2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
+public import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.ConstantModuleLimitAffineSectionDescent
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale

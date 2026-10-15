@@ -53,7 +53,7 @@ with that of Kⁿ⁻¹. K⁰ is 1-coskeletal; for n = 1 this supplies the needed
 with Kⁱ⁺¹. Transfer positive vanishing and the augmentation-induced H₀ identification.
 The unit of sheafification supplies the free sheaves (def-weil-pbc-sheafification).
 -/
-theorem freeAbelian_augmentation_quasiIso
+theorem freeAbelian_augmentation_quasiIso_sheaf
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X) :
     QuasiIso (AlgebraicTopology.AlternatingFaceMapComplex.ε.app
@@ -79,7 +79,7 @@ through the augmentation, and positive cohomology vanishes. The complex uses
 the alternating-coface construction of def-weil-pbc-finite-split-hypercover,
 without requiring finiteness of the hypercover.
 -/
-theorem injective_abelian_section_cohomology
+theorem injective_abelian_section_cohomology_sheaf
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X)
     (I : Sheaf X.smallEtaleTopology AddCommGrpCat.{w + 1}) [Injective I] :
@@ -105,7 +105,7 @@ The Čech-nerve and coskeleton-comparison lemmas are stated over every commutati
 ring; their contractions and the exactness of sheafification apply directly.
 Thus no tensor-exactness or flatness hypothesis on R is required.
 -/
-theorem freeModule_augmentation_quasiIso
+theorem freeModule_augmentation_quasiIso_sheaf
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X) (R : Type (w + 1)) [CommRing R] :
     QuasiIso (AlgebraicTopology.AlternatingFaceMapComplex.ε.app
@@ -127,7 +127,7 @@ Proof: Step (4) of the node over R. The free-presheaf Yoneda equivalence
 Hom(R[V], I) with I(V). Apply Hom(-, I) to the module resolution from steps (1)--(3).
 Injectivity gives exactness, hence H⁰ = I(X) through the augmentation and Hᵖ = 0 for p > 0.
 -/
-theorem injective_module_section_cohomology
+theorem injective_module_section_cohomology_sheaf
     {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U : SplitEtaleHypercover X) (R : Type (w + 1)) [CommRing R]
     (I : Sheaf X.smallEtaleTopology (ModuleCat.{w + 1} R)) [Injective I] :

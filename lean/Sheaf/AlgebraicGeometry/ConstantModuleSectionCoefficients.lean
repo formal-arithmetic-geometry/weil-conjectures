@@ -5,7 +5,7 @@ Authors: SHEAF group N3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
+public import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 import Sheaf.AlgebraicGeometry.ConstantModuleTransitionCoefficients
 import Sheaf.AlgebraicGeometry.ConstantPullbackCompositionCoherence
 public import Mathlib.CategoryTheory.Sites.Adjunction

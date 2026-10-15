@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.Algebra.Homology.Functor
 import Mathlib.CategoryTheory.Adjunction.Whiskering
-import Sheaf.CategoryTheory.SingleHomotopyPresheafHomology
+import WeilConjectures.CategoryTheory.SingleHomotopyPresheafHomology
 import Sheaf.CategoryTheory.MapExtendHomology
 
 @[expose] public noncomputable section

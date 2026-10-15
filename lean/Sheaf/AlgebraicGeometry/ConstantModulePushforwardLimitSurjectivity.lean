@@ -5,7 +5,7 @@ Authors: SHEAF group N1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
+public import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 import Sheaf.AlgebraicGeometry.ConstantModuleLimitFiberDescent
 import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 

@@ -5,6 +5,8 @@ Authors: SHEAF group M2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientUnshifted
+
 import Sheaf.AlgebraicGeometry.RawModuleScalarSheafComposition
 import Sheaf.AlgebraicGeometry.RawModuleScalarSourceSquareCore
 public import Sheaf.AlgebraicGeometry.RawModuleScalarDerivedPullbackIso
@@ -42,12 +44,6 @@ end CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 namespace RawModuleScalarComparison
-
-/-- Derive the fixed scalar inverse-image comparison, using composition comparisons.
-(blueprint: lem-sbc-raw-scalar-source-square). -/
-noncomputable abbrev derivedPullbackIso (Λ : Type (u + 1)) [CommRing Λ]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :=
-  RawModuleScalarComparison.derivedPullbackIsoImpl Λ f
 
 end RawModuleScalarComparison
 

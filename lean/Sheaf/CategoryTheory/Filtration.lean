@@ -5,6 +5,8 @@ Authors: SHEAF group E1
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Filtration
+
 public import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
@@ -34,12 +36,6 @@ omit [Abelian C] in
 theorem antitone_step {A : C} (F : DecreasingFiltration A) : Antitone F.step := F.antitone
 
 end DecreasingFiltration
-
-/-- (blueprint: def-sp-filtration) An object with a decreasing filtration
-(Stacks, Tag 0121). -/
-structure FilteredObject (C : Type u) [Category.{v} C] [Abelian C] where
-  obj : C
-  filtration : DecreasingFiltration obj
 
 namespace FilteredObject
 
@@ -97,11 +93,6 @@ noncomputable def induced {A : C} (F : DecreasingFiltration A) (X : Subobject A)
 image of each filtration step (Stacks, Tag 0121). -/
 noncomputable abbrev quotient {A Y : C} (F : DecreasingFiltration A)
     (π : A ⟶ Y) [Epi π] : DecreasingFiltration Y := F.image π
-
-/-- (blueprint: def-sp-filtration) A filtration is finite when one step is the entire
-object and another step is zero (Stacks, Tag 0121). -/
-def IsFinite {A : C} (F : DecreasingFiltration A) : Prop :=
-  ∃ n m : ℤ, F.step n = ⊤ ∧ F.step m = ⊥
 
 /-- (blueprint: def-sp-filtration) The intersection of the steps exists when there is
 a greatest subobject lying in every step (Stacks, Tag 0121). -/
