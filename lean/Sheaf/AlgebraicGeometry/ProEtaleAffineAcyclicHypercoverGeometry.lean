@@ -2,6 +2,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.SimplicialMatchingObject
+import Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry
+import Sheaf.CategoryTheory.SiteFiniteBasisHypercoverExistence
+import Sheaf.CategoryTheory.SiteHypercoverDisjointUnion
 
 /-!
 # Geometric part of the affine acyclic hypercover construction

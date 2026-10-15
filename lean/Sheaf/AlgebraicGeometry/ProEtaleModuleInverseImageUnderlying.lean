@@ -6,6 +6,11 @@ Authors: SHEAF group E4
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import Sheaf.CategoryTheory.SitePullbackAbelianUnderlying
 
 /-!
 # Underlying abelian sheaf of the small-model module inverse image

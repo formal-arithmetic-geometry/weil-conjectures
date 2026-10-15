@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Evaluation of sheaves on finite coproducts in the pro-etale site

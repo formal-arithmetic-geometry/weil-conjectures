@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Limits.ExactFunctor
 import Sheaf.Algebra.Homology.FlatTruncationTower
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 import Sheaf.Algebra.Homology.FlatTruncationTelescopeComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # K-flat resolutions without identifying the site universes
 

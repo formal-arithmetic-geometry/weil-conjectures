@@ -6,6 +6,9 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.Paper.CondensedQbarComparisons
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.Paper.CondensedFlatCoefficientCalculus
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! # The exchange equality for condensed finite-to-Qbar coefficient change -/
 
