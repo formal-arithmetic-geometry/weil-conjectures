@@ -27,7 +27,9 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-etale-sheaves",
   "def-constructible-locally-constant",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
  ],
  "proof": [
   {
@@ -254,5 +256,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompatibleFiniteDerivedTrivializations",
+  "declaration": "AlgebraicGeometry.Scheme.compatible_finite_derived_trivializations",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.compatible_finite_derived_trivializations"
+  ],
+  "file": "lean/Sheaf/Paper/CompatibleFiniteDerivedTrivializations.lean",
+  "statement": "theorem compatible_finite_derived_trivializations (X : Scheme.{u}) (B : ℕ → Type (u + 1)) [∀ n : ℕ, CommRing (B n)] [∀ n : ℕ, Finite (B n)] (q : ∀ n : ℕ, B (n + 1) →+* B n) (hq : ∀ n : ℕ, Function.Surjective (q n)) (E : ∀ n : ℕ, DerivedCategory (ModuleCat.{u + 1} (B n))) (K : ∀ n : ℕ, DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (B n)))) (dE : ∀ n : ℕ, E (n + 1) ⟶ (normalizationModuleRestrict (q n)).obj (E n)) (dK : ∀ n : ℕ, K (n + 1) ⟶ (normalizationRestrict X.smallEtaleTopology (q n)).obj (K n)) (hE : ∀ n : ℕ, ∃ a b : ℤ, (E n).IsGE a ∧ (E n).IsLE b) (hK : ∀ n : ℕ, ∃ a b : ℤ, (K n).IsGE a ∧ (K n).IsLE b) (hEf : ∀ (n : ℕ) (i : ℤ), Module.Finite (B n) ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (B n)) i).obj (E n))) (hKf : ∀ (n : ℕ) (i : ℤ), IsFiniteLocallyConstantSheaf ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (B n))) i).obj (K n))) (hη : ∀ n : ℕ, Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk (dE n)))) (hρ : ∀ n : ℕ, Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk (dK n)))) (hI : ∀ n : ℕ, IsLisseEtaleSheafOfSets (derivedLocalIsomorphismSheaf ((normalizationConstant X.smallEtaleTopology).obj (E n)) (K n))) (hInonempty : ∀ (n : ℕ) (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X), Nonempty ((pointSmallEtale s).sheafFiber.obj (derivedLocalIsomorphismSheaf ((normalizationConstant X.smallEtaleTopology).obj (E n)) (K n)))) : ∃ (𝒰 : Cover.{u} proetalePrecoverage X) (e : ∀ (j : 𝒰.I₀) (n : ℕ), (localProEtaleComparison (𝒰.f j) (B n)).obj ((normalizationConstant X.smallEtaleTopology).obj (E n)) ≅ (localProEtaleComparison (𝒰.f j) (B n)).obj (K n)), ∀ (j : 𝒰.I₀) (n : ℕ), (e j (n + 1)).hom ≫ localProEtaleNormalization (𝒰.f j) (q n) (dK n) = localProEtaleNormalization (𝒰.f j) (q n) (normalizationConstantArrow X.smallEtaleTopology (q n) (dE n)) ≫ (normalizationRestrict (ProEt.topology (𝒰.X j)) (q n)).map (e j n).hom",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Index n represents the paper level n+1. The specified normalization isomorphisms are represented equivalently by their adjunct universal arrows (Mathlib StructuredArrow.IsUniversal). The conclusion is their exact canonical coefficient-restriction square, adjoint to rho ∘ (e tensor B_n) ∘ eta inverse = e_n. No bound uniform in n, Tor-dimension hypothesis, or surjectivity of isomorphism reductions is added. Constants are pulled from the etale site as specified in the node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-80e14d814",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all three modules, dependency interfaces, canonical constructions, statement clauses, universes, edge cases, docstrings, report sections, and verbatim signatures. Per-file scompile.py compilation reproduced cleanly. No defects found; no fixes needed."
  }
 }
