@@ -21,7 +21,9 @@
   "def-pc-quasi-iso-modules",
   "def-pc-kflat-complex",
   "def-pur-sheaf-tensor-product",
-  "def-pc-cochain-complex-modules"
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pc-flat-sheaf-modules"
  ],
  "proof": [
   {
@@ -190,5 +192,28 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-9dc9631f4 (reviewer sub-agent of L); spot-checked: Read the full item, new nodes, DAG route, archived target source, and Stacks 06YS/0G7E/06YT/06YY sources. Mathematics and edge cases pass. Repair files add required created.by/date metadata to both new nodes and explicitly instantiate the additive extension-of-scalars functor in step 4, citing def-pur-sheaf-tensor-product.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-aec8de123",
+  "group": "NE",
+  "result": "pass",
+  "note": "Wrote review.md. Checked both statements, all seven dependencies, source arguments, exact signature record, docstrings, universes, edge cases and report sections. Server-only compilation reproduced cleanly in 6.7 seconds. No delivery errors found; branch and source clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DiagramKFlatReplacements",
+  "declaration": "CochainComplex.exists_diagram_isKFlatResolution",
+  "declarations": [
+   "CochainComplex.exists_diagram_isKFlatResolution",
+   "CochainComplex.diagram_pullback_quasiIso"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DiagramKFlatReplacements.lean",
+  "statement": "theorem exists_diagram_isKFlatResolution {C : Type u} [SmallCategory C] (T : GrothendieckTopology C) (R : Sheaf T CommRingCat.{u}) {J : Type u} [SmallCategory J] (M : J ⥤ CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose T (forget₂ CommRingCat RingCat)).obj R)) ℤ) : ∃ (P : J ⥤ CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose T (forget₂ CommRingCat RingCat)).obj R)) ℤ) (p : P ⟶ M), (∀ j : J, (P.obj j).IsKFlat) ∧ (∀ (j : J) (q : ℤ), SheafOfModules.IsFlat ((P.obj j).X q)) ∧ (∀ j : J, QuasiIso (p.app j)) ∧ (∀ (j : J) (q : ℤ), Epi ((p.app j).f q))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The two declarations render the replacement and pullback-invariance clauses respectively. Strict diagrams are functors into cochain complexes. Pullback is specified, uniquely up to natural isomorphism, as an additive left adjoint to the existing induced module direct image (Stacks 03D7)."
  }
 }
