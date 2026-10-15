@@ -138,37 +138,26 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.Algebra.Homology.KFlat",
+  "module": "Sheaf.Algebra.Homology.KFlatIndependentCoefficients",
   "declaration": "CochainComplex.IsKFlatIndependentCoefficients",
-  "file": "lean/Sheaf/Algebra/Homology/KFlat.lean",
-  "statement": "def IsKFlatIndependentCoefficients (K : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : Prop",
-  "branch": "newtargets-dag",
-  "by": "NZ",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "§1(B), H10 repair: although the recorded source writes a coefficient universe w, elaboration of its implicit tensor instances specializes the legacy IsKFlat/IsKFlatResolution interface to the site universe. Supply IsKFlatIndependentCoefficients and IsKFlatResolutionIndependentCoefficients in the owning module, explicitly retaining the coefficient-universe sheafification, monoidal localization and zero-morphism interfaces. They state the same total-tensor acyclicity and quasi-isomorphism conjunction at an independent coefficient size. Keep the legacy declarations for existing finite-level users and rebuild the paired consumers.",
   "declarations": [
-   "CochainComplex.IsKFlat",
-   "CochainComplex.IsKFlatResolution",
-   "SheafOfModules.isMonoidal_W_separateHomUniverse",
-   "SheafOfModules.preservesZeroMorphisms_curriedTensor",
-   "SheafOfModules.preservesZeroMorphisms_curriedTensor_obj",
-   "SheafOfModules.hasSheafify_coefficientUniverse",
-   "SheafOfModules.wEqualsLocallyBijective_coefficientUniverse",
-   "CochainComplex.independentCoefficients_isMonoidal",
-   "CochainComplex.independentCoefficients_preservesZeroMorphisms",
-   "CochainComplex.independentCoefficients_preservesZeroMorphisms_obj",
    "CochainComplex.IsKFlatIndependentCoefficients",
    "CochainComplex.IsKFlatResolutionIndependentCoefficients"
-  ]
+  ],
+  "statement": "def IsKFlatIndependentCoefficients\n    (K : CochainComplex (SheafOfModules.{w} ((sheafCompose J\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "§1(B), H4: the current published KFlatIndependentCoefficients module already supplies exactly the independent-coefficient K-flatness and resolution predicates, with canonical sheafified tensor and proved coefficient-universe infrastructure. Read its full source through scompile.py --source. Reuse these declarations instead of replaying the stale KFlat overlay, which conflicts with the published module. All acyclic complexes in the coefficient universe are tested; site universes remain independent."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-26a22ba19",
-  "group": "NZ",
+  "reviewer": "NT-stage2-Codex-06c02526a",
+  "group": "Q05",
   "result": "pass",
-  "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
+  "note": "Statement, dependencies, constructions, docstrings, edge cases, universes, source alignment, report sections, and server compiler evidence checked; no fixes required."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

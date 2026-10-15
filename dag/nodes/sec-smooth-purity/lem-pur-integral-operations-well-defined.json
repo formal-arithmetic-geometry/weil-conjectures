@@ -295,10 +295,10 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-bee7dec8e",
-  "group": "NI",
+  "reviewer": "NT-stage2-Codex-06c02526a",
+  "group": "Q05",
   "result": "pass",
-  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, reports, and all per-file scompile checks verified; no fixes required."
+  "note": "Statement, dependencies, constructions, docstrings, edge cases, universes, source alignment, report sections, and server compiler evidence checked; no fixes required."
  },
  "lean": {
   "module": "Sheaf.Paper.IntegralOperationsWellDefined",
@@ -348,8 +348,9 @@
   "file": "lean/Sheaf/Paper/IntegralOperationsWellDefined.lean",
   "statement": "theorem integralOperationsWellDefined {X Y : AlgebraicGeometry.Scheme.{t}} (f : X ⟶ Y) (W : AlgebraicGeometry.Scheme.{t}) : (∀ (P P' : (integralOperationsGoodComplex l E Y).FullSubcategory) (α : P.obj ⟶ P'.obj), QuasiIso α → QuasiIso ((integralOperationsPullbackComplexFunctor l E f).map α)) ∧ (∀ (P P' Q Q' : (integralOperationsGoodComplex l E W).FullSubcategory) (α : P.obj ⟶ P'.obj) (β : Q.obj ⟶ Q'.obj), QuasiIso α → QuasiIso β → QuasiIso ((integralOperationsTensorComplexFunctor l E W).map (X := (P.obj, Q.obj)) (Y := (P'.obj, Q'.obj)) (α, β))) ∧ ∃ (F : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l E X)) (e : integralOperationsGoodLocalization l E Y ⋙ F ≅ integralOperationsPullbackOnGood l E f) (G : (DerivedCategory (integralTowerModules l E W)) × (DerivedCategory (integralTowerModules l E W)) ⥤ DerivedCategory (integralTowerModules l E W)) (d : ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ⋙ G ≅ integralOperationsTensorOnGood l E W), (∀ (F' : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l E X)) (e' : integralOperationsGoodLocalization l E Y ⋙ F' ≅ integralOperationsPullbackOnGood l E f), ∃! ι : F ≅ F', isoWhiskerLeft (integralOperationsGoodLocalization l E Y) ι ≪≫ e' = e) ∧ (∀ (G' : (DerivedCategory (integralTowerModules l E W)) × (DerivedCategory (integralTowerModules l E W)) ⥤ DerivedCategory (integralTowerModules l E W)) (d' : ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ⋙ G' ≅ integralOperationsTensorOnGood l E W), ∃! ι : G ≅ G', isoWhiskerLeft ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W)) ι ≪≫ d' = d) ∧ (∀ (K : DerivedCategory (integralTowerModules l E Y)) (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (_e : DerivedCategory.Q.obj P.obj ≅ K), integralOperationsDerivedLimitProperty l E X ((integralOperationsPullbackTowerFunctor l E f).obj P.obj) (F.obj K)) ∧ (∀ (M N : DerivedCategory (integralTowerModules l E W)) (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (_e : DerivedCategory.Q.obj P.obj ≅ M) (_d : DerivedCategory.Q.obj Q.obj ≅ N), integralOperationsDerivedLimitProperty l E W ((integralOperationsTensorTowerFunctor l E W).obj (P.obj, Q.obj)) (G.obj (M, N)))",
   "branch": "newtargets-dag",
-  "by": "NI",
+  "by": "Q05",
   "date": "2026-10-15",
-  "existing": false
+  "existing": false,
+  "note": "§1(B): the published live KFlatIndependentCoefficients module already provides the exact independent-coefficient predicates and tensor infrastructure. Replace the specialized legacy IsKFlat, monoidal-localization and tensor-zero interface calls by those canonical independent-coefficient calls. Preserve every strict reduction, pullback and tensor generator, transition formula, Roos construction, quasi-isomorphism invariance clause, normalized descent and unique-compatible-isomorphism clause. No mathematical hypothesis or conclusion changes; this repair avoids colliding with the current published K-flat declarations."
  }
 }

@@ -119,29 +119,29 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Algebra.Homology.DerivedInternalHom",
-  "declaration": "CategoryTheory.derivedInternalHom",
-  "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHom.lean",
-  "statement": "def derivedInternalHom {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] : (DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))ᵒᵖ × DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))",
-  "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-11",
-  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses",
+  "declaration": "CategoryTheory.derivedInternalHomOfUniverses",
   "declarations": [
-   "CategoryTheory.derivedInternalHom_inverts",
-   "CategoryTheory.derivedInternalHom",
-   "CategoryTheory.derivedInternalHom_comparison",
-   "CategoryTheory.derivedInternalHom_obj_iso"
+   "CategoryTheory.derivedInternalHomOfUniverses_inverts",
+   "CategoryTheory.derivedInternalHomOfUniverses",
+   "CategoryTheory.derivedInternalHomOfUniverses_comparison",
+   "CategoryTheory.derivedInternalHomOfUniverses_obj_iso"
   ],
-  "fixed_by": "R-dih"
+  "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHomOfUniverses.lean",
+  "statement": "def derivedInternalHomOfUniverses {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max c v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] (R : Sheaf J CommRingCat.{max c v r}) [HasDerivedCategory.{w} (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))] : (DerivedCategory (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)))ᵒᵖ × DerivedCategory (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ⥤ DerivedCategory (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "§1(B): the recorded derivedInternalHom requires SmallCategory C and fixes both coefficients and modules to the site object universe. The small pro-etale site instead has object universe t+1, morphism universe t, and coefficients max u (t+1). Retain the old interface through its public import and supply the same Hom-complex/product-localization construction with independent site universes and coefficients max c v r. The module uses the canonical small-object K-injective replacement, not an arbitrary Hom functor or an assumed comparison. The second reading also retains the node’s comparisons with every functorial K-injective replacement and arbitrary source/K-injective target representatives at these same independent universes."
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "R-dih",
-  "group": "H1",
-  "result": "fix",
-  "note": "small site C/J, commutative R, SheafOfModules over sheafCompose forget₂, D(O) via HasDerivedCategory.{w}, D^op×D⥤D via Localization.lift over Q.op.prod Q of (L,M)↦Q Hom^•(L,I(M)) with upstream kInjectiveResolutionFunctor, homComplexFunctor of def-pur-hom-complex, qis-invariance from lem-pur-rhom-well-defined, comparison for any functorial K-inj replacement, representative independence"
+  "reviewer": "NT-stage2-Codex-06c02526a",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, docstrings, edge cases, universes, source alignment, report sections, and server compiler evidence checked; no fixes required."
  },
  "reviewed_proof": {
   "date": "2026-10-12",
