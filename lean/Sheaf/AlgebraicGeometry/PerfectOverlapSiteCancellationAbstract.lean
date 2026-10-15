@@ -77,6 +77,23 @@ theorem paste_middle_three
     _ = a ≫ b ≫ x ≫ f := by rw [hmiddle]; simp only [Category.assoc]
     _ = y := houter
 
+/-- Insert a six-map comparison between fixed prefix and suffix morphisms.
+The proof only reassociates composition and substitutes the supplied middle
+equation; no categorical structure beyond associativity is used. -/
+theorem paste_six_with_edges
+    {C₀ : Type*} [Category* C₀]
+    {A B C D E F G H I J : C₀}
+    {p : A ⟶ B} {a : B ⟶ C} {b : C ⟶ D} {c : D ⟶ E}
+    {d : E ⟶ F} {e : F ⟶ G} {f : G ⟶ H}
+    {x : B ⟶ I} {y : I ⟶ H} {q : H ⟶ J}
+    (hmiddle : a ≫ b ≫ c ≫ d ≫ e ≫ f = x ≫ y) :
+    p ≫ a ≫ b ≫ c ≫ d ≫ e ≫ f ≫ q = p ≫ x ≫ y ≫ q := by
+  calc
+    p ≫ a ≫ b ≫ c ≫ d ≫ e ≫ f ≫ q =
+        p ≫ (a ≫ b ≫ c ≫ d ≫ e ≫ f) ≫ q := by simp only [Category.assoc]
+    _ = p ≫ (x ≫ y) ≫ q := by rw [hmiddle]
+    _ = p ≫ x ≫ y ≫ q := by simp only [Category.assoc]
+
 /-- An equivalence counit is invariant under transport to an isomorphic object.
 Proof: Naturality of the counit moves the isomorphism through the counit;
 its inverse then cancels. This is the object-level cancellation for nested
