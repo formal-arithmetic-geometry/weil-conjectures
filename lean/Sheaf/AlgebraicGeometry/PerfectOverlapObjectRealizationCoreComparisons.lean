@@ -508,6 +508,20 @@ theorem openSiteReturn_overlap_triangle_inv_app (X : Scheme.{u}) {W U : X.Opens}
   simpa only [a, b, c, d, e, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv]
     using hc
 
+/-- Naturality of the open-site overlap comparison cancels an inverse and
+forward component around any local morphism. -/
+theorem openSiteOverlap_inv_map_hom (X : Scheme.{u}) {W U : X.Opens}
+    (i : W ⟶ U) {M N : schemeDerivedCategory U.toScheme} (t : M ⟶ N) :
+    let LU := (overlapSiteInverse U).mapDerivedCategory
+    let LW := (overlapSiteInverse W).mapDerivedCategory
+    let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
+    let SU := (schemeOpenOverlapRestriction X i).mapDerivedCategory
+    (openSiteOverlapIso X i).inv.app M ≫ SP.map (LU.map t) ≫
+        (openSiteOverlapIso X i).hom.app N = LW.map (SU.map t) := by
+  intro LU LW SP SU
+  simpa only [Functor.comp_map] using
+    (natIso_inv_map_hom (LU ⋙ SP) (SU ⋙ LW) (openSiteOverlapIso X i) t)
+
 
 
 /-- The two paths around an open-restriction square agree by pullback composition.
