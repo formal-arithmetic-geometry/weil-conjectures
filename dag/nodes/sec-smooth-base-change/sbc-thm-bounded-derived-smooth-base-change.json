@@ -3,51 +3,226 @@
  "blueprint": {
   "is": "sbc-thm-bounded-derived-smooth-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Bounded derived smooth base change",
- "statement": "In the square of\n[sbc-thm-smooth-base-change] with $f$ smooth and $g$ quasi-compact\nand quasi-separated, for every $K\\in\\Dbc(T_{\\Et},\\Lambda)$,\n\n$$\n{\\operatorname{BC}}_{f,g}(K):Lf^*Rg_*K\\xrightarrow{\\ \\sim\\ }Rh_*Le^*K\n$$\n\nin $D(X_{\\Et},\\Lambda)$, where the derived exchange is the one of\n[sbc-def-base-change-map].",
+ "statement": "Use the coefficient conventions [sbc-def-coefficient-conventions]: $\\Lambda$ is a finite commutative ring, $N$ is a positive integer, $(N:\\Lambda)=0$, and $N$ is invertible on $S$ (equivalently its image is a unit in $\\Gamma(S,\\mathcal O_S)$). In a cartesian square [sbc-def-base-change-square]\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{h}&Y\\\\\nf\\downarrow&&\\downarrow e\\\\\nS&\\xleftarrow{g}&T,\n\\end{array}\n$$\nassume $f$ is smooth [def-sbc-smooth-morphisms] and $g$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. For every $K\\in\\Dbc(T_{\\Et},\\Lambda)$ [def-weil-pbc-constructible-complexes], the canonical derived exchange\n$$\n\\operatorname{BC}_{f,g}(K):Lf^*Rg_*K\\longrightarrow Rh_*Le^*K\n$$\nof [sbc-def-base-change-map] is an isomorphism in the ambient unbounded category $D(X_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories]. No boundedness or constructibility of its two endpoints is asserted.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-derived-smooth-base-change.md",
   "place": "node sbc-thm-bounded-derived-smooth-base-change, order 1437"
  },
  "stmt_deps": [
-  "sbc-thm-smooth-base-change",
-  "sbc-def-base-change-map",
+  "sbc-def-coefficient-conventions",
+  "sbc-def-base-change-square",
   "def-sbc-smooth-morphisms",
-  "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-scheme-conventions",
-  "sbc-def-base-change-square"
+  "def-weil-pbc-constructible-complexes",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-derived-categories"
  ],
  "proof": [
   {
-   "text": "Each $H^q(K)$ is constructible, hence by the finite stratification\nfiltration (the exact open–closed localization sequence and extension\nby zero of [sbc-prop-extension-by-zero-and-arbitrary-base-change]) it is a\nfinite extension of extensions by zero of finite locally constant\nsheaves; finite locally constant sheaves are torsion with orders\ninvertible on $S$ (the ring $\\Lambda$ is annihilated by $N$), so\n[sbc-thm-smooth-base-change] together with the compatibility of\nthe base-change map with short exact sequences\n([lemma-weil-pbc-five-lemma-transfer]) gives the isomorphism on the\n$E_2$ page of the hypercohomology spectral sequences of\n[lemma-weil-pbc-hypercohomology-convergence]; since $K$ is bounded,\n[sbc-lem-finite-range-comparison] transfers the isomorphisms to\nthe abutments and gives the displayed isomorphism in the ambient\nderived category.",
+   "text": "Let $U_T$ denote derived coefficient forgetting and put $L=U_TK$. The exact conservative functor and its cohomology identifications are supplied by [lem-kun-unbounded-abelian-exchange-comparison]. Bounded constructibility [def-weil-pbc-constructible-complexes] gives integers $a\\le b$ with $\\mathcal H^q(K)=0$ outside $[a,b]$; hence $\\mathcal H^q(L)=U_T\\mathcal H^q(K)$ vanishes there too and $L$ is bounded below. For every element $x$ of every stalk of $\\mathcal H^q(K)$, the elementary module calculation $N x=(N:\\Lambda)x=0$ shows that its underlying abelian stalk is killed by the positive integer $N$. By [sbc-def-coefficient-conventions], $N$ is invertible on $S$. Thus every $\\mathcal H^q(L)$ is a torsion abelian sheaf of orders invertible on $S$: if an element has order $d$, then $d\\mid N$, so write $N=dm$. In $\\Gamma(S,\\mathcal O_S)$, the image of $d$ has inverse $mN^{-1}$, since $d(mN^{-1})=NN^{-1}=1$. Thus its order is invertible on $S$. This argument uses the module action directly and needs no stratification or extension-by-zero argument.",
    "uses": [
-    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
-    "sbc-thm-smooth-base-change",
-    "lemma-weil-pbc-five-lemma-transfer",
-    "lemma-weil-pbc-hypercohomology-convergence",
-    "sbc-lem-finite-range-comparison"
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "def-weil-pbc-constructible-complexes",
+    "sbc-def-coefficient-conventions"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6J, lemma-modules-abelian-unbounded; coefficient calculation in the standing conventions"
+   }
+  },
+  {
+   "text": "For each $q$ apply [sbc-thm-smooth-base-change] to the abelian sheaf $\\mathcal H^q(L)$. Its allowable torsion hypothesis was checked in Step 1; the square is cartesian, $f$ is smooth, and $g$ is quasi-compact and quasi-separated by the statement. For every $p\\ge0$ this gives an isomorphism of the actual degreewise exchange $f^{-1}R^pg_*\\mathcal H^q(L)\\longrightarrow R^ph_*e^{-1}\\mathcal H^q(L)$, with the degreewise map understood exactly as in [sbc-def-base-change-map].",
+   "uses": [
+    "sbc-thm-smooth-base-change",
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change"
+   }
+  },
+  {
+   "text": "To apply the generic abelian spectral-sequence nodes, rename their $(X_0,Y_0,X'_0,Y'_0;f_0,f'_0,g_0,g'_0)$ as $(T,S,Y,X;g,h,f,e)$. Apply [lem-weil-pbc-truncation-couple-morphism] to $L$: its clauses (1) and (2) supply the two exact couples and the morphism induced by the canonical bounded-below exchange, and clause (3) identifies its $E_2$ arrows with the degreewise arrows in Step 2. Apply [lemma-weil-pbc-hypercohomology-convergence] with the lower bound $a$ and the torsion cohomology verified in Step 1. Both spectral sequences vanish unless $p\\ge0$ and $q\\ge a$ and converge with finite filtrations in every total degree. Consequently all their $E_2$ arrows are isomorphisms: for $p\\ge0$ use Step 2, and for $p<0$ both sides are zero by the cited quadrant assertion.",
+   "uses": [
+    "lem-weil-pbc-truncation-couple-morphism",
+    "lemma-weil-pbc-hypercohomology-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J, lemma-two-ss-complex-functor; truncation-couple formulation in the cited nodes"
+   }
+  },
+  {
+   "text": "With this same renaming, $L\\in D^+(T_{\\Et})$, the bounds $[a,b]$, and the $E_2$ morphism just checked satisfy every hypothesis of [sbc-lem-finite-range-comparison]. It follows that the bounded-below abelian exchange $\\operatorname{BC}^{+}_{f,g}(L)$ is an isomorphism. Now [lem-sbc-abelian-derived-exchange-plus-compatibility] identifies the unbounded abelian exchange at $L$ with the composite $Df(c_g^{-1}(L))$, followed by the bounded-below inclusion of $\\operatorname{BC}^{+}_{f,g}(L)$, followed by $c_h(De^+L)$. Every factor is invertible, so $\\operatorname{BC}^{\\mathbf Z}_{f,g}(L)$ is invertible in the ambient abelian derived category. Only $L$ needs a finite cohomological interval; no bounded-above assertion for $Rg_*L$ or $Rh_*e^{-1}L$ is used.",
+   "uses": [
+    "sbc-lem-finite-range-comparison",
+    "lem-sbc-abelian-derived-exchange-plus-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F09, lemma-smooth-base-change-general, spectral-sequence argument using Tag 015J; bounded-below/unbounded mate comparison in the cited compatibility node"
+   }
+  },
+  {
+   "text": "The definition [sbc-def-base-change-map] identifies the required module map with the canonical unbounded exchange on the renamed square. Apply [lem-kun-unbounded-abelian-exchange-comparison] on that square to $K$. Its canonical endpoint isomorphisms $s_K,t_K$ satisfy $t_K\\circ U_X(\\operatorname{BC}^{\\Lambda}_{f,g}(K))=\\operatorname{BC}^{\\mathbf Z}_{f,g}(L)\\circ s_K$. Step 4 makes the right-hand side invertible, hence $U_X(\\operatorname{BC}^{\\Lambda}_{f,g}(K))=t_K^{-1}\\circ\\operatorname{BC}^{\\mathbf Z}_{f,g}(L)\\circ s_K$ is invertible. The cited node states conservativity of $U_X$, so the specified module exchange itself is an isomorphism, as required.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "lem-kun-unbounded-abelian-exchange-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6J and 07A7; canonical coefficient/exchange coherence and conservativity in the cited node"
+   }
   }
  ],
  "proof_deps": [
-  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "def-weil-pbc-constructible-complexes",
+  "sbc-def-coefficient-conventions",
   "sbc-thm-smooth-base-change",
-  "lemma-weil-pbc-five-lemma-transfer",
+  "sbc-def-base-change-map",
+  "lem-weil-pbc-truncation-couple-morphism",
   "lemma-weil-pbc-hypercohomology-convergence",
-  "sbc-lem-finite-range-comparison"
+  "sbc-lem-finite-range-comparison",
+  "lem-sbc-abelian-derived-exchange-plus-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-derived-smooth-base-change.md",
-  "place": "## Proof"
+  "place": "Proof: sheaf smooth base change and hypercohomology comparison; coefficient hypotheses restored from sbc-def-coefficient-conventions; canonical abelian/module and bounded-below/unbounded comparisons made explicit (Stacks 0EYU, 0F09, 015J, 0D6J, 07A7)."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded constructible etale derived smooth base change with finite invertible coefficients",
+   "date": "2026-10-15",
+   "results": "0 returned hits: ; service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*base.?change|base.?change.*smooth|boundedConstructible",
+   "date": "2026-10-15",
+   "results": "25 returned hits: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/RingTheory/Smooth/Local.lean; inspected returned signatures: underived morphism stability, normalization, modules, or Kan extension; none states derived etale smooth base change",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.IsIso",
+   "date": "2026-10-15",
+   "results": "1 returned hits: AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth; inspected returned signatures: underived morphism stability, normalization, modules, or Kan extension; none states derived etale smooth base change",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth base change for bounded constructible complexes of etale sheaves with finite coefficients of order invertible on the base",
+   "date": "2026-10-15",
+   "results": "8 returned hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Smooth.isStableUnderBaseChange, Algebra.Etale.baseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange; inspected returned signatures: underived morphism stability, normalization, modules, or Kan extension; none states derived etale smooth base change",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChangeMap|baseChangeHomologyMap|boundedConstructible|baseChange_app",
+   "date": "2026-10-15",
+   "results": "4 returned hits: Mathlib/CategoryTheory/GuitartExact/KanExtension.lean, Mathlib/CategoryTheory/GuitartExact/KanExtension.lean, Mathlib/CategoryTheory/GuitartExact/KanExtension.lean, Mathlib/CategoryTheory/GuitartExact/KanExtension.lean; requested subdirectory: CategoryTheory; inspected returned signatures: underived morphism stability, normalization, modules, or Kan extension; none states derived etale smooth base change",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image along a smooth morphism commutes with derived direct image of etale torsion sheaves",
+   "date": "2026-10-15",
+   "results": "8 returned hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.IdealSheafData.map_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; inspected returned signatures: underived morphism stability, normalization, modules, or Kan extension; none states derived etale smooth base change",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_baseChange_app_of_boundedConstructible_of_smooth|IsTorsionSheafOfInvertibleOrder",
+   "date": "2026-10-15",
+   "results": "0 returned hits: ; requested subdirectory: Mathlib; subdirectory argument was not relative; not evidence of absence",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible etale derived smooth base change with a coefficient ring killed by a nonzero integer invertible on the base",
+   "date": "2026-10-15",
+   "results": "8 returned hits: RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.Etale.isStableUnderBaseChange, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, RingHom.etale_iff_formallyUnramified_and_smooth, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.toAlgebra, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; inspected returned signatures: underived morphism stability, normalization, modules, or Kan extension; none states derived etale smooth base change",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, IsTorsionSheafOfInvertibleOrder, IsIso",
+   "date": "2026-10-15",
+   "results": "0 returned hits: ; loogle: unknown identifier 'IsTorsionSheafOfInvertibleOrder'; not evidence of absence",
+   "verdict": "unusable pattern"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded constructible complexes of etale sheaves smooth base change finite coefficient ring",
+   "date": "2026-10-15",
+   "results": "0 returned hits: ; service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|locally constant|extension.?by.?zero",
+   "date": "2026-10-15",
+   "results": "0 returned hits: ; requested subdirectory: Mathlib; subdirectory argument was not relative; not evidence of absence",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*base.?change|base.?change.*smooth|boundedConstructible",
+   "date": "2026-10-15",
+   "results": "25 returned hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/Smooth/Local.lean; inspected returned signatures: underived morphism stability, normalization, modules, or Kan extension; none states derived etale smooth base change",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, DerivedCategory",
+   "date": "2026-10-15",
+   "results": "0 returned hits: ; inspected returned signatures: underived morphism stability, normalization, modules, or Kan extension; none states derived etale smooth base change",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image along a smooth morphism commutes with derived direct image of complexes of torsion etale sheaves with invertible orders",
+   "date": "2026-10-15",
+   "results": "8 returned hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, SheafOfModules.pushforwardNatIso_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.pushforwardComp; inspected returned signatures: underived morphism stability, normalization, modules, or Kan extension; none states derived etale smooth base change",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeMapPlus|derivedBaseChangeMap|hypercohomology|etale.*cohomology",
+   "date": "2026-10-15",
+   "results": "0 returned hits. A root-level Mathlib source search returned no hits.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hypercohomology spectral sequence comparison for smooth pullback and higher direct images on the small etale site",
+   "date": "2026-10-15",
+   "results": "8 returned hits. Inspected the eight returned signatures: topological sheaf pullback and underived module pullback/composition comparisons; none is derived etale smooth base change.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Sheaf",
+   "date": "2026-10-15",
+   "results": "12 returned hits. Inspected the twelve returned signatures: sheafification counits and localization/sheaf composition facts; none states derived smooth base change.",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -84,5 +259,69 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sbc-thm-bounded-derived-smooth-base-change",
+  "worker": "stage1",
+  "summary": "Restored the positive annihilator invertible on the base and finite coefficient convention. Replaced the rejected attachment by a five-step proof using existing nodes only: coefficient forgetting and torsion, sheaf smooth base change, actual exchange/couple compatibility, finite-range comparison and ambient compatibility, conservative coefficient descent. No new nodes or Mathlib leaves.",
+  "blueprint": "Retains the chapter sheaf smooth-base-change plus hypercohomology-comparison route. The unit is a remark listing derived forms, without prescribed steps. The node paragraph unnecessarily stratifies sheaves already killed by N; this redundant detour is replaced by the explicit elementary scalar calculation. The previously implicit coefficient coherence and Plus/unbounded compatibility are now cited.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-unbounded-abelian-exchange-comparison",
+    "why": "Generic exact conservative coefficient forgetting, endpoint comparisons and equality for the canonical unbounded exchange; the smooth-base-change unit contains no coefficient-coherence replacement."
+   },
+   {
+    "node": "def-weil-pbc-constructible-complexes",
+    "why": "Definition of the finite ring bounded constructible category and its cohomological bounds."
+   },
+   {
+    "node": "sbc-def-coefficient-conventions",
+    "why": "Standing smooth-base-change coefficient convention; imported statement must expose its annihilator and invertibility hypotheses."
+   },
+   {
+    "node": "sbc-thm-smooth-base-change",
+    "why": "The chapter main sheaf theorem is the intended degreewise input to its derived corollary; it is applied to allowable torsion sheaves directly."
+   },
+   {
+    "node": "sbc-def-base-change-map",
+    "why": "Canonical exchange and its degreewise and exchanged-square identifications."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-couple-morphism",
+    "why": "Generic exact-couple morphism and identification of its E2 arrows; no such compatibility theorem is supplied by this unit."
+   },
+   {
+    "node": "lemma-weil-pbc-hypercohomology-convergence",
+    "why": "Generic abelian hypercohomology quadrant and finite-filtration convergence theorem, already the blueprint input."
+   },
+   {
+    "node": "sbc-lem-finite-range-comparison",
+    "why": "The existing in-unit finite-range comparison is applied with its actual abelian coefficient hypotheses."
+   },
+   {
+    "node": "lem-sbc-abelian-derived-exchange-plus-compatibility",
+    "why": "Existing in-unit comparison identifies the bounded-below and ambient canonical abelian exchange."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "def-weil-pbc-constructible-complexes",
+  "sbc-def-coefficient-conventions",
+  "sbc-thm-smooth-base-change",
+  "sbc-def-base-change-map",
+  "lem-weil-pbc-truncation-couple-morphism",
+  "lemma-weil-pbc-hypercohomology-convergence",
+  "sbc-lem-finite-range-comparison",
+  "lem-sbc-abelian-derived-exchange-plus-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-b820ad7b0",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-b820ad7b0 (reviewer sub-agent of L); spot-checked: Read the full item, report, DAG route, all nine cited node statements, exact Stacks sources (0EYU, 0F09, 015J, 0D6J, 07A7), blueprint, and archived master Smooth.lean. All five steps are mathematically valid with matching hypotheses, coefficient category, and canonical base-change morphism; edge cases and duplicate/search checks pass. No new nodes or repairs are needed. Review written to review.md."
+ }
 }
