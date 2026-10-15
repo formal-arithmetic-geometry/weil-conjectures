@@ -32,10 +32,9 @@
  ],
  "proof": [
   {
-   "text": "First check the continuous-function presheaf is a ring sheaf. For an fpqc covering of a site object $V$, a compatible family of continuous functions to $E$ gives a unique set function on $|V|$: two points of covering members above the same base point have a common point in their fibre product, since the tensor product of their residue fields over the base residue field is nonzero. Compatibility thus makes their values equal. For every open subset $O\\subseteq E$, the inverse image of $O$ in each covering member is open, so [lem-weil-pbc-fpqc-detects-openness] makes its inverse image in $|V|$ open. The descended function is continuous. Pointwise addition and multiplication descend as well. Site coverings are fpqc by [def-weil-pbc-proetale-site].",
+   "text": "Use the already constructed continuous coefficient ring sheaf from [def-weil-pbc-condensed-e-module-category]. Its compatible continuous functions descend along fpqc covers; that construction is not repeated in this module.",
    "uses": [
-    "lem-weil-pbc-fpqc-detects-openness",
-    "def-weil-pbc-proetale-site"
+    "def-weil-pbc-condensed-e-module-category"
    ],
    "elementary": true,
    "source": {
@@ -44,9 +43,10 @@
    }
   },
   {
-   "text": "On a weakly contractible affine $U$, apply [lem-weil-pbc-condensed-point-basis-evaluation] to $F=C(-,E)$: $(E_X^c)(U)=C(\\pi_0(|U|),E)$. A continuous map $|U|\\to E$ is constant on each connected component, because $E$ is totally disconnected. It factors continuously through the quotient $\\pi_0(|U|)$; conversely any continuous function on that quotient composes to one on $|U|$. Thus the formula identifies the two rings, naturally under restrictions. Every site object is covered by these affines by [lem-weil-pbc-proetale-affine-wcontractible-covering-family]. Sheaf gluing extends the identification uniquely to all site objects: on overlaps restrict to such an affine cover and use naturality, then glue. This proves the canonical ring-sheaf isomorphism, with the coefficient ring exactly as in [def-weil-pbc-condensed-e-module-category].",
+   "text": "Construct the adjoint by composing each continuous test function with the canonical projection |X[S]| → S. Prove projection naturality and ring compatibility, then transpose through the existing monoidal adjunction. On an affine U, use the explicit component-map equivalence of [lem-weil-pbc-proetale-point-components-maps] to construct U → X[π₀(U)] and prove it terminal in the opposite comma category. Its Kan cocone leg is invertible. The comparison on U is composition with U → π₀(U); connected-component factorization and total disconnectedness of the finite normed extension E make this map bijective. On a weakly contractible affine, [lem-weil-pbc-proetale-sheafification-wcontractible-sections] identifies the sheafification unit as invertible. Uniqueness of left adjoints transfers the Kan comparison to the given composite inverse image. The affine covers of [lem-weil-pbc-proetale-affine-wcontractible-covering-family] make the resulting sheaf morphism locally bijective, hence invertible. The adjoint equations on all test functions imply uniqueness by injectivity of the adjunction equivalence.",
    "uses": [
-    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "lem-weil-pbc-proetale-point-components-maps",
+    "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
     "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
     "def-weil-pbc-condensed-e-module-category"
    ],
@@ -117,11 +117,12 @@
    }
   },
   {
-   "text": "The opens in step 7 cover each piece in step 6, and those pieces cover the given presentation covering. Composing these coverings gives the required pro-etale covering of $X$ with $P$ finite free on every member. For a noetherian locally closed stratum in [def-constructible-stratification], apply the same result to that stratum and the finite presentations supplied by [def-weil-pbc-condensed-e-module-category]. Rank zero, zero rows or columns, and the empty scheme are included (on the empty scheme use the empty covering). All constructions used ordinary sheaf cokernels; no completeness condition entered.",
+   "text": "The opens in step 7 cover each piece in step 6, and those pieces cover the given presentation covering. Composing gives the required pro-etale finite-free covering; this local-freeness theorem remains the single open Lean obligation. The application to strata is proved: restriction gives a module over the pulled-back coefficient ring. Transport it along the inverse of the canonical condensed coefficient pullback isomorphism. Additive finite-colimit-preserving functors carrying the regular module to the regular module preserve finite presentations, by their finite-biproduct and cokernel comparison isomorphisms. This proves preservation of local finite presentations under the coefficient isomorphism. Apply the local-freeness theorem to the stratum, transport its free modules back using finite-biproduct comparisons, and use naturality of mapModComapIso to obtain exactly the displayed restricted modules. No nonempty, positive-rank, or positive-presentation-size assumption is used.",
    "uses": [
     "def-weil-pbc-proetale-site",
     "def-constructible-stratification",
-    "def-weil-pbc-condensed-e-module-category"
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-profinite-point-pullback"
    ],
    "elementary": true,
    "source": {
@@ -131,15 +132,15 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-fpqc-detects-openness",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-condensed-point-basis-evaluation",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
   "def-weil-pbc-condensed-e-module-category",
+  "lem-weil-pbc-proetale-point-components-maps",
+  "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
   "lem-weil-pbc-site-pullback-abelian-exact",
   "lem-weil-pbc-profinite-point-pullback",
   "lem-weil-pbc-geometric-field-proetale-evaluation",
   "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-site",
   "def-weil-flat-morphism",
   "lem-sc-flat-going-down",
   "lem-sc-noetherian-finite-irreducible-components",
@@ -149,7 +150,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Example 3.1 for coefficient realization; rank/descent and matrix proof supplied by ND, not quoted from Theorem 6.2"
+  "place": "Example 3.1; B3 stage-3 canonical Kan-extension comparison and coefficient-isomorphism transport prove the coefficient realization and stratum clauses. The original ND rank/descent and matrix plan is retained for the one remaining local-freeness hole, not quoted from Theorem 6.2."
  },
  "mathlib_searches": [
   {
@@ -309,5 +310,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Returned H3 repaired: the ring isomorphism is uniquely characterized by its adjoint on all profinite test functions. Coefficients now range over Type u, the universe bound containing X and E, using the generalized sectionwise coefficient API in the dependency repair."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-40966",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T191322-L-1006744",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean module, DAG node, report, change record, and three direct importers against the review packet"
  }
 }
