@@ -135,6 +135,42 @@ noncomputable def perfectOverlapStageObjectIso
     eqToIso (congrArg (fun f ↦ derivedPullback f) fac) ≪≫
     (perfectHomComposition (pullback.fst ((U ⊓ V).ι ≫ p) q) (Y.homOfLE hWL)).symm
 
+/-- Component equation for the pinned stage comparison, with the cartesian
+factor associated in the order used by the pullback prism. -/
+theorem perfectOverlapStageObjectIso_hom_app
+    {X Y S T : Scheme.{u}} (g : X ⟶ Y) (p' : X ⟶ T) (p : Y ⟶ S)
+    (q : T ⟶ S) (h : IsPullback g p' p q)
+    (U V L : Y.Opens) (hWL : U ⊓ V ≤ L)
+    (A : schemeDerivedCategory L.toScheme) :
+    let hW' : g ⁻¹ᵁ U ⊓ g ⁻¹ᵁ V ≤ g ⁻¹ᵁ L := fun _ hx ↦ hWL hx
+    let e := ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert h).isoPullback
+    let fac : e.inv ≫ (X.homOfLE hW' ≫ (g ∣_ L)) =
+        pullback.fst ((U ⊓ V).ι ≫ p) q ≫ Y.homOfLE hWL := by
+      have restricted : X.homOfLE hW' ≫ (g ∣_ L) =
+          (g ∣_ (U ⊓ V)) ≫ Y.homOfLE hWL := by
+        apply (cancel_mono L.ι).1
+        simp only [Category.assoc, morphismRestrict_ι, Scheme.homOfLE_ι]
+        rw [← Category.assoc, Scheme.homOfLE_ι]
+        rfl
+      calc
+        e.inv ≫ (X.homOfLE hW' ≫ (g ∣_ L)) =
+            e.inv ≫ ((g ∣_ (U ⊓ V)) ≫ Y.homOfLE hWL) := by rw [restricted]
+        _ = (e.inv ≫ (g ∣_ (U ⊓ V))) ≫ Y.homOfLE hWL := by
+              simp only [Category.assoc]
+        _ = _ := by rw [((isPullback_morphismRestrict g (U ⊓ V)).paste_vert h).isoPullback_inv_fst]
+    ((perfectOverlapStageObjectIso g p' p q h U V L hWL).app A).hom =
+      ((Functor.isoWhiskerRight
+          (Functor.isoWhiskerLeft (derivedPullback (g ∣_ L))
+            (overlapOpenInclusionPullbackIso X (homOfLE hW')).symm ≪≫
+            perfectHomComposition (X.homOfLE hW') (g ∣_ L))
+          (derivedPullback e.inv) ≪≫
+        perfectHomComposition e.inv (X.homOfLE hW' ≫ (g ∣_ L)) ≪≫
+        eqToIso (congrArg (fun f ↦ derivedPullback f) fac) ≪≫
+        (perfectHomComposition (pullback.fst ((U ⊓ V).ι ≫ p) q)
+          (Y.homOfLE hWL)).symm).app A).hom := by
+  intro hW' e fac
+  rfl
+
 /-- The apex equivalence first identifies the localized-open site with the actual
 open subscheme, then applies the cartesian overlap equivalence.
 Source: Stacks Project, Tags 08DW and 05RU.
