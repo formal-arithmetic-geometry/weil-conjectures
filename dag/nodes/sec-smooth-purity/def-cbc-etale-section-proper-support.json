@@ -1,0 +1,101 @@
+{
+ "id": "def-cbc-etale-section-proper-support",
+ "kind": "definition",
+ "title": "Proper support of an individual etale module section",
+ "status": "split",
+ "statement": "Let $X,S$ be schemes [def-pc-scheme], let $\\Lambda$ be a commutative ring, let $F$ be a sheaf of $\\Lambda$-modules on the small etale site of $X$ [def-weil-pbc-etale-sheaves], and let $V\\to X$ be an object of that site. Let $p:V\\to S$ be locally of finite type [def-weil-finite-type-morphism] and $s\\in F(V)$. Say that $s$ has proper support over $S$ if there exists a closed subset $Z\\subseteq V$ equal to the set of points $x$ admitting a geometric point $v:\\operatorname{Spec}\\Omega\\to V$ with $v(*)=x$ [def-weil-geometric-point] such that the germ of $s$ in $F_{v\\to X}$ is nonzero [def-weil-pbc-geometric-stalks], and $Z$ is proper over $S$ with its reduced induced closed subscheme structure [def-weil-pbc-closed-subset-proper-over-base].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-closed-subset-proper-over-base"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F76, proper-support sections; etale-cohomology.tex Tag 04FT (lemma-support-section-closed)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Support of a section of an etale module sheaf defined by its nonzero geometric germs",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of an etale sheaf of modules has closed support proper over the base",
+   "results": "Eight hits: Algebra.etaleLocus_eq_compl_support; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.Scheme.IdealSheafData.support_map; Module.isClosed_support; AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet; AlgebraicGeometry.Scheme.Hom.support_ker. These concern structure sheaves, ideals or algebraic modules; no small-etale section support predicate.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SectionHasProperSupport|sectionSupport|supportOfSection in Mathlib, WeilConjectures and lean/Sheaf; properSupport|proper_support|compactSupport in Mathlib/AlgebraicGeometry",
+   "results": "No hits in each search. Broader support search finds etaleSheafSupport (support of an entire sheaf) and module supports, not support of a section. DAG blueprint_refs.py search \"section support\" gives 0 blueprint nodes; DAG definition nodes about support concern whole sheaves or derived compact supports.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-proper-support-geometric-stalk",
+  "date": "2026-10-15",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-torsion",
+   "place": "Proper-support subsheaf and compactly supported fibre sections in the geometric-stalk identification.",
+   "via": [
+    "lem-cbc-proper-support-geometric-stalk",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-cbc-proper-open-interchange-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionProperSupport",
+  "declaration": "AlgebraicGeometry.Etale.SectionHasProperSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionProperSupport.lean",
+  "statement": "def SectionHasProperSupport (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : X.Etale) (p : V.left ⟶ S) [LocallyOfFiniteType p] (s : F.obj.obj (op V)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a8a7219e7",
+  "group": "NR",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a8a7219e7",
+  "group": "NR",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, exact signatures, support and naturality clauses, edge cases, and pilot gates. Both immutable modules compile cleanly via server-only scompile.py. No delivery defects found; contextual clone HEAD moved externally, documented in the review."
+ }
+}

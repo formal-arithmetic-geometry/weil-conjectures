@@ -29,7 +29,9 @@
   "def-weil-pbc-closed-subset-proper-over-base",
   "def-weil-geometric-point",
   "def-pc-fibre-product",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-cbc-etale-section-proper-support",
+  "lem-sbc-geometric-fibre-exchange-germs"
  ],
  "proof": [
   {
@@ -348,5 +350,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportGeometricStalk",
+  "declaration": "AlgebraicGeometry.Etale.properSupport_geometricStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportGeometricStalk.lean",
+  "statement": "theorem properSupport_geometricStalk (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) : ∃ c : lowerStar (ModuleCat.{u + 1} Λ) f ⋙ (Scheme.pointSmallEtale y).sheafFiber ⟶ upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f y) ⋙ (sheafSections (pullback f y).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op (Scheme.Etale.mk (𝟙 (pullback f y)))), (∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : Y.Etale) (v : (Scheme.pointSmallEtale y).fiber.obj V), (Scheme.pointSmallEtale y).toPresheafFiber V v ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ c.app F = geometricFibreSectionRestriction Λ (IsPullback.of_hasPullback f y).toCommSq F V v) ∧ ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (i : G ⟶ (lowerStar (ModuleCat.{u + 1} Λ) f).obj F), Mono i → (∀ (V : Y.Etale) (s : F.obj.obj (op (f.Etale.obj V))), (∃ t, i.hom.app (op V) t = s) ↔ SectionHasProperSupport Λ F (f.Etale.obj V) (pullback.fst V.hom f) s) → ∃ S : Submodule Λ (((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f y)).obj F).obj.obj (op (Scheme.Etale.mk (𝟙 (pullback f y))))), (∀ s, s ∈ S ↔ SectionHasProperSupport Λ ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f y)).obj F) (Scheme.Etale.mk (𝟙 (pullback f y))) (pullback.snd f y) s) ∧ ∃ e : (Scheme.pointSmallEtale y).sheafFiber.obj G ≅ ModuleCat.of Λ S, e.hom ≫ ModuleCat.ofHom S.subtype = (Scheme.pointSmallEtale y).sheafFiber.map i ≫ c.app F",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a8a7219e7",
+  "group": "NR",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, exact signatures, support and naturality clauses, edge cases, and pilot gates. Both immutable modules compile cleanly via server-only scompile.py. No delivery defects found; contextual clone HEAD moved externally, documented in the review."
  }
 }
