@@ -1,6 +1,6 @@
 # Work queue
 
-87 items; claim with `tools/claim.py next <group> [--stage N]`.
+76 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (87)
+## Stage 3: modules to prove (76)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -39,35 +39,25 @@
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishing` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.Sites.AffineToGlobalTorsionCohomologicalDimension` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 6 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 6 | 2 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion` | 7 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineEtaleSiteColimitStatement` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedCounit` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 7 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleRingedClosedCounit` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleRingedLocalizationSequence` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedToposSitePresentation` | 7 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension` | 7 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleOpenCohomologyRestrictionCompatibility` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnitComparison` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension` | 8 | 1 | proof |
-| `Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison` | 9 | 1 | proof |
-| `Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedSliceExtensionExactness` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedSliceExtensionTensor` | 9 | 1 | proof |
-| `Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit` | 10 | 1 | proof |
-| `Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence` | 10 | 1 | proof |
-| `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyClassDescent` | 12 | 1 | proof |
-| `Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy` | 12 | 1 | proof |
-| `Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy` | 13 | 1 | proof |
 | `Sheaf.Paper.FiniteSplitHypercoverRefinement` | 13 | 2 | proof |
 | `Sheaf.Paper.EtaleHypercoverHomotopyEqualizer` | 14 | 1 | proof |
 | `Sheaf.Paper.EtaleHypercoverProduct` | 14 | 1 | proof |
@@ -97,7 +87,6 @@
 | `Sheaf.Paper.ImagePresheafSheafificationIso` | 17 | 1 | proof |
 | `Sheaf.Paper.TrivialKanHomotopyEquivalence` | 17 | 1 | proof |
 | `Sheaf.AlgebraicTopology.SimplicialIndexFiniteInitial` | 18 | 1 | proof |
-| `Sheaf.CategoryTheory.FilteredHomologyTowerDifferential` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
 Also listed above and claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
