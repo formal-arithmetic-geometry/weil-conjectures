@@ -306,5 +306,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-e00a6b508 (reviewer sub-agent of L); spot-checked: Read all eleven steps, cited statements, blueprint route, and source locations; checked prime correspondence, canonical fibre quotients, patch topology, faithful flatness, and edge cases. No new nodes, cycles, duplicate replacement, or target weakening found. Accepted all six declared generic tool uses. Full checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-10f009f9d",
+  "group": "NC",
+  "result": "pass",
+  "note": "Reviewed immutable snapshot, sources, five statement dependencies, exact declarations, docstrings, signature, and edge cases. No delivery errors found; server-only compile reproduced cleanly."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrincipalWLocalizationPoints",
+  "declaration": "PrincipalWLocalization.points",
+  "file": "lean/Sheaf/RingTheory/PrincipalWLocalizationPoints.lean",
+  "statement": "theorem points (A : Type u) [CommRing A] : ∃ e : PrimeSpectrum (algebra A) ≃ {p : PrimeSpectrum A × PrimeSpectrum A // p.2.asIdeal ≤ p.1.asIdeal}, (∀ q : PrimeSpectrum (algebra A), PrimeSpectrum.comap (algebraMap A (algebra A)) q = (e q).val.2) ∧ (∀ q : PrimeSpectrum (algebra A), Nonempty (Localization.AtPrime q.asIdeal ≃ₐ[A] Localization.AtPrime (e q).val.2.asIdeal)) ∧ (@Continuous (PrimeSpectrum (algebra A)) (PrimeSpectrum A) inferInstance (constructibleTopology (PrimeSpectrum A)) (fun q ↦ (e q).val.1)) ∧ (∀ q : PrimeSpectrum (algebra A), connectedComponent q = {r | (e r).val.1 = (e q).val.1}) ∧ (∀ x : PrimeSpectrum A, ∃ ρ : algebra A →ₐ[A] Localization.AtPrime x.asIdeal, IsClosedImmersion (Spec.map (CommRingCat.ofHom ρ.toRingHom)) ∧ Set.range (PrimeSpectrum.comap ρ.toRingHom) = {q | (e q).val.1 = x}) ∧ (∀ q : PrimeSpectrum (algebra A), q ∈ closedPoints (PrimeSpectrum (algebra A)) ↔ (e q).val.1 = (e q).val.2) ∧ IsClosed (closedPoints (PrimeSpectrum (algebra A))) ∧ (∃ h : @Homeomorph (PrimeSpectrum A) (closedPoints (PrimeSpectrum (algebra A))) (constructibleTopology (PrimeSpectrum A)) inferInstance, ∀ x : PrimeSpectrum A, (e (h x).val).val = (x, x)) ∧ Module.FaithfullyFlat A (algebra A) ∧ IsWLocalRing (algebra A)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
