@@ -153,5 +153,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d8d4f8c42",
+  "group": "NF",
+  "result": "pass",
+  "note": "Reviewed the immutable node, source, dependencies, Lean declarations, docstrings, edge cases, report sections, and exact statement. Per-file scompile.py compilation passed cleanly; no substantive findings or fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_lisse_lattice_etale_local",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.lisseContinuousCommRingSheaf",
+   "AlgebraicGeometry.ProEtale.lisseFieldSheaf",
+   "AlgebraicGeometry.ProEtale.lisseIntegerSheaf",
+   "AlgebraicGeometry.ProEtale.lisseIntegerToField",
+   "AlgebraicGeometry.ProEtale.lisseEtaleSiteInclusion",
+   "AlgebraicGeometry.ProEtale.lisseEtaleCoefficientIdentification",
+   "AlgebraicGeometry.ProEtale.exists_lisse_lattice_etale_local"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticeEtaleLocal.lean",
+  "statement": "theorem exists_lisse_lattice_etale_local (l : ℕ) [Fact l.Prime] (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (L : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseFieldSheaf l E X))) (hL : L.IsFiniteLocallyFree) : ∃ (I : Type (u + 1)) (Y : I → X.Etale), (X.smallEtaleTopology).CoversTop Y ∧ ∀ i : I, ∃ M : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology (Y i).left) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseIntegerSheaf l E (Y i).left)), M.IsFiniteLocallyFree ∧ Nonempty ((SheafOfModules.changeOfRings (lisseIntegerToField l E (Y i).left) M).val ≅ (PresheafOfModules.pushforward (lisseEtaleCoefficientIdentification l E (Y i).hom)).obj L.val)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
