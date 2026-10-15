@@ -95,4 +95,59 @@ theorem perfectOverlapCanonicalSiteTriangleU
       (perfectOverlapApex_siteTail_cancel_for g pX pY b hg U V U inf_le_left
         ((derivedPullback (g ∣_ U)).obj A) E φ))
 
+set_option maxHeartbeats 800000 in
+-- The second statement also elaborates two derived site categories.
+/-- The second-open site triangle follows by the same return, nested-counit,
+and local-isomorphism pasting, using the inclusion `U ⊓ V ≤ V`. -/
+theorem perfectOverlapCanonicalSiteTriangleV
+    {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
+    (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)
+    (U V : Y.Opens) (B : schemeDerivedCategory V.toScheme)
+    (E : schemeDerivedCategory X)
+    (φ : (derivedPullback (g ∣_ V)).obj B ≅
+      (schemeOpenRestriction X (g ⁻¹ᵁ V)).mapDerivedCategory.obj E) :
+    let P := g ⁻¹ᵁ U
+    let Q := g ⁻¹ᵁ V
+    let i : P ⊓ Q ⟶ Q := homOfLE inf_le_right
+    let RV := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) Q).mapDerivedCategory
+    let RW := (SheafOfModules.overFunctor.{u}
+      (moduleRings X.toRingedSpace) (P ⊓ Q)).mapDerivedCategory
+    let SQ := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
+    let LV := (overlapSiteInverse Q).mapDerivedCategory
+    let τ : RV ⋙ SQ ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso
+        (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
+    let eW : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (P ⊓ Q)) ≌
+      SheafOfModules.{u} (moduleRings (P ⊓ Q).toScheme.toRingedSpace) :=
+      Scheme.Modules.overEquiv (P ⊓ Q)
+    let apex := perfectOverlapApexEquivalence g pX pY b hg U V
+    let cart := perfectOverlapStageEquivalence g pX pY b hg U V
+    ∀ (M : DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over Q)))
+      (κ : M ≅ LV.obj ((derivedPullback (g ∣_ V)).obj B))
+      (θ : M ≅ RV.obj E),
+      θ = κ ≪≫ LV.mapIso φ ≪≫ (openSiteReturnIso X Q).app E →
+      apex.functor.map (SQ.map θ.hom) ≫ apex.functor.map (τ.hom.app E) ≫
+          (perfectOverlapApexObjectIso g pX pY b hg U V V inf_le_right B E φ).hom =
+        apex.functor.map (SQ.map κ.hom) ≫
+          apex.functor.map ((openSiteOverlapIso X i).hom.app
+            ((derivedPullback (g ∣_ V)).obj B)) ≫
+          cart.functor.map
+            (eW.mapDerivedCategory.counitIso.hom.app
+              ((schemeOpenOverlapRestriction X i).mapDerivedCategory.obj
+                ((derivedPullback (g ∣_ V)).obj B))) ≫
+          ((perfectOverlapStageObjectIso g pX pY b hg U V V inf_le_right).app B).hom := by
+  intro P Q i RV RW SQ LV τ eW apex cart M κ θ hθ
+  rw [hθ]
+  unfold perfectOverlapApexObjectIso
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
+  simp only [id, Iso.trans_hom, Functor.mapIso_hom, Functor.map_comp,
+    Category.assoc, Iso.app_hom]
+  slice_lhs 3 5 =>
+    exact perfectOverlapApex_overlapReturn_comp_for g pX pY b hg
+      U V V inf_le_right E
+  simpa only [Functor.comp_map, Category.assoc, Iso.symm_hom] using
+    (paste_six_with_edges
+      (perfectOverlapApex_siteTail_cancel_for g pX pY b hg U V V inf_le_right
+        ((derivedPullback (g ∣_ V)).obj B) E φ))
+
 end AlgebraicGeometry
