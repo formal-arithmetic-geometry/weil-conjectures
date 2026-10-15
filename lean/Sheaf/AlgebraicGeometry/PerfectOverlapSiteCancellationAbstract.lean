@@ -12,6 +12,21 @@ public import Mathlib.CategoryTheory.Equivalence
 open CategoryTheory
 namespace AlgebraicGeometry
 
+/-- Inverting a five-isomorphism triangle and cancelling its final edge.
+The inverse of the forward triangle reverses the factors; composing with
+the final isomorphism cancels its inverse. -/
+theorem iso_triangle_inverse_cancel
+    {C : Type*} [Category* C] {A B D E F : C}
+    (a : A ≅ B) (b : B ≅ F) (c : A ≅ D) (d : D ≅ E) (e : E ≅ F)
+    (h : a.hom ≫ b.hom = c.hom ≫ d.hom ≫ e.hom) :
+    e.hom ≫ b.inv ≫ a.inv = d.inv ≫ c.inv := by
+  have hi : b.inv ≫ a.inv = e.inv ≫ d.inv ≫ c.inv := by
+    have h' := (Iso.inv_eq_inv (a ≪≫ b) (c ≪≫ d ≪≫ e)).2 (by
+      simpa only [Iso.trans_hom, Category.assoc] using h)
+    simpa only [Iso.trans_inv, Category.assoc] using h'
+  rw [hi]
+  simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+
 /-- A return unit followed by an equivalence counit cancels across any comparison.
 Proof: The triangle identity identifies the image of the inverse unit with
 the counit on the image object. Naturality moves that counit across the
