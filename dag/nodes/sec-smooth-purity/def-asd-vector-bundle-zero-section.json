@@ -3,25 +3,114 @@
  "blueprint": {
   "is": "def-asd-vector-bundle-zero-section",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-pur-vector-bundle-zero-section"
+  ]
  },
  "kind": "definition",
  "title": "Vector bundle with zero section",
- "statement": "Let $S$ be a Noetherian scheme and let $\\mathcal E$ be a\nlocally free sheaf of\n$\\mathcal O_S$-modules of constant finite rank $d$.\nIts vector bundle is the relative affine scheme\n\n$$\n\\pi:E=\\operatorname{Spec}_S(\\operatorname{Sym}^{\\bullet}\\mathcal E)\n\\longrightarrow S.\n$$\n\nHere the symmetric algebra is formed on each open affine and the\nassociated affine schemes glue by restriction. The augmentation\n$\\operatorname{Sym}^{\\bullet}\\mathcal E\\to\\mathcal O_S$\ndefines its closed\nzero section $z:S\\hookrightarrow E$.\nA trivialization on a Zariski open $V\\subset S$ is a choice\n$\\mathcal E|_V\\cong\\mathcal O_V^d$, giving\n$E|_V\\cong\\mathbf A^d_V$. Changes of trivialization are invertible\n$d$-by-$d$ matrices of regular functions on overlaps.",
+ "statement": "Let $S$ be a Noetherian scheme [def-pc-scheme], meaning a scheme with a finite affine open cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring], and let $d\\in\\mathbb N$. Let $\\mathcal E$ be a locally free $\\mathcal O_S$-module of constant finite rank $d$ [def-amb-finite-locally-free-module].\n\nUse the symmetric algebra sheaf $\\mathcal A=\\operatorname{Sym}^{\\bullet}_{\\mathcal O_S}(\\mathcal E)$ with generator map $j:\\mathcal E\\to\\mathcal A$ constructed in [lem-weil-pbc-symmetric-algebra-sheaf-construction]. Its quasi-coherence and its identification on an affine open $U=\\operatorname{Spec}R$ with $\\operatorname{Sym}_R(\\mathcal E(U))$ are supplied by [lem-weil-pbc-quasi-coherent-symmetric-algebra-affine]; its algebra universal property is [lem-weil-pbc-quasi-coherent-symmetric-algebra-core]. The vector bundle associated to $\\mathcal E$ is the relative affine scheme\n$$\n\\pi:E=\\underline{\\operatorname{Spec}}_S(\\mathcal A)\\longrightarrow S\n$$\nof [lem-weil-pbc-affine-morphism-relative-spec]. Concretely its affine pieces are $\\operatorname{Spec}(\\operatorname{Sym}_R(\\mathcal E(U)))$ with structural maps induced by $R\\to\\operatorname{Sym}_R(\\mathcal E(U))$ [def-weil-affine-spectrum], glued by the restriction maps in that relative-spectrum construction.\n\nThe augmentation $\\epsilon:\\mathcal A\\to\\mathcal O_S$ is the unique morphism of $\\mathcal O_S$-algebras satisfying $\\epsilon\\circ j=0$. Its corresponding $S$-morphism $z:S\\to E$ under [lem-weil-pbc-affine-morphism-relative-spec](3) is called the zero section. On each affine piece it is induced by the augmentation $\\operatorname{Sym}_R(\\mathcal E(U))\\to R$, which is the identity on $R$ and sends every degree-one generator to zero. Thus $\\epsilon$ composed with the structural inclusion is the identity and $\\pi\\circ z=\\mathrm{id}_S$. The zero section is a closed immersion [def-weil-closed-immersion]: on affine pieces the augmentation is surjective, and its spectrum is the quotient closed subscheme defined by its kernel.\n\nA trivialization on a Zariski open $V\\subseteq S$ is a choice $\\mathcal E|_V\\cong\\mathcal O_V^{\\oplus d}$. It induces $E|_V:=\\pi^{-1}(V)\\cong\\mathbf A^d_V$ over $V$, with affine space as in [def-sbc-affine-space], by restriction in [lem-weil-pbc-affine-morphism-relative-spec](4) and the basis-to-polynomial identification [lem-weil-pbc-symmetric-algebra-free-module-polynomial]. In these coordinates $z$ is $x_1=\\cdots=x_d=0$. On an overlap $W$ two frames are related by $e'_j=\\sum_{i=1}^d g_{ij}e_i$, where $G=(g_{ij})$ is a $d$-by-$d$ matrix with entries in $\\mathcal O_S(W)$ and with an inverse over that ring. The induced coordinates satisfy $x'_j=\\sum_i g_{ij}x_i$; these invertible coordinate substitutions are the changes of trivialization.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-asd-vector-bundle-zero-section.md",
   "place": "node def-asd-vector-bundle-zero-section, order 1968"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
   "def-amb-finite-locally-free-module",
-  "def-weil-scheme-morphism-properties"
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "relative Spec of the symmetric algebra of a locally free sheaf vector bundle zero section",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj; AlgebraicGeometry.AffineSpace.homOfVector; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι; ModuleCat.tildeInModuleCat; AlgebraicGeometry.specTargetImage; AlgebraicGeometry.StructureSheaf.to_global_factors_apply; AlgebraicGeometry.ΓSpec.toSpecΓ_of",
+   "date": "2026-10-16",
+   "verdict": "no match; affine-space, ideal-sheaf and tilde constructions do not construct the relative spectrum of the symmetric algebra of an arbitrary finite locally free sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Spec, SymmetricAlgebra, zero section",
+   "results": "0 hits; loogle: <input>:1:36: expected end of input",
+   "date": "2026-10-16",
+   "verdict": "no usable result; syntax error (expected end of input), superseded by the valid SymmetricAlgebra query"
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra|symmetric algebra|zeroSection|zero section",
+   "results": "0 hits; directory: Mathlib/AlgebraicGeometry/",
+   "date": "2026-10-16",
+   "verdict": "no match in AlgebraicGeometry/"
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative affine scheme Spec of the symmetric algebra of a locally free sheaf with augmentation zero section",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "vector bundle over a scheme from symmetric algebra of a locally free sheaf",
+   "results": "SheafOfModules.ιFree; SheafOfModules.freeFunctor_obj; SymmetricAlgebra.instModuleFree; SheafOfModules.freeSection; SymmetricPower; SheafOfModules.GeneratingSections.π; SheafOfModules.free; SymmetricAlgebra",
+   "date": "2026-10-16",
+   "verdict": "no match; the ring-module symmetric algebra and abstract free sheaf do not give this scheme construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace.zeroSection",
+   "results": "0 hits; loogle: unknown identifier 'AlgebraicGeometry.AffineSpace.zeroSection'",
+   "date": "2026-10-16",
+   "verdict": "no match; unknown identifier in the search service; project extension for the trivial bundle does not cover this item"
+  },
+  {
+   "tool": "grep",
+   "query": "Symmetric|symmetric|zeroSection",
+   "results": "0 hits; directory: Mathlib/AlgebraicGeometry/Modules/",
+   "date": "2026-10-16",
+   "verdict": "no match in AlgebraicGeometry/Modules/"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra",
+   "results": "SymmetricAlgebra; SymmetricAlgebra.instCommSemiring; SymmetricAlgebra.instNontrivial; SymmetricAlgebra.instCommRing; SymmetricAlgebra.isSymmetricAlgebra_ι; SymmetricAlgebra.algebraMapInv; SymmetricAlgebra.lift; SymmetricAlgebra.algHom",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; the returned symmetric-algebra and lift declarations concern modules over a ring, not vector bundles over arbitrary schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra|relativeSpec|relative spectrum|vector bundle",
+   "results": "Mathlib/Data/Bundle.lean; Mathlib/Algebra/Symmetrized.lean; Mathlib/Topology/FiberBundle/Trivialization.lean; Mathlib/Topology/FiberBundle/Trivialization.lean; Mathlib/Topology/FiberBundle/Trivialization.lean; Mathlib/Topology/FiberBundle/Basic.lean; Mathlib/Topology/FiberBundle/Basic.lean; Mathlib/Topology/FiberBundle/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; ring symmetric algebras and topological vector bundles are different component notions"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?spec|symmetric.?algebra|augmentation",
+   "results": "0 hits; directory: AlgebraicGeometry/",
+   "date": "2026-10-16",
+   "verdict": "no match in AlgebraicGeometry/"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "algebraic vector bundle associated to finite locally free module sheaf via relative spectrum and its zero morphism",
+   "results": "ModuleCat.tilde; ModuleCat.tildeInModuleCat; ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType; ModuleCat.tildeInType; SheafOfModules.ιFree; SheafOfModules.GeneratingSections.π; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.freeFunctor_obj",
+   "date": "2026-10-16",
+   "verdict": "no match; returned tilde and abstract free-sheaf constructions do not state the relative symmetric-algebra spectrum with zero section"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +136,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-an"
+ "unit": "sk-prop-an",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-asd-vector-bundle-zero-section",
+  "worker": "stage1",
+  "summary": "Completed this definition by naming the existing symmetric-algebra sheaf construction, its affine comparison and universal property, the relative-spectrum construction, closed-immersion criterion and affine-space identification. Kept the Noetherian base, constant finite rank and Spec Sym(E) convention, with no dualization. Made the augmentation and coordinate changes explicit. Removed the umbrella scheme-properties edge because it defines none of these notions. No new nodes and no proof steps: this is a definition; the short identities in its final clauses use the cited statements and linearity. All eleven Mathlib searches were actually run with msearch.py; LeanSearch was unavailable. The second reader located and read the blueprint and Stacks TeX in the read-only /home/ubuntu/weil-launcher-nt/literature archive, corrected the Stacks source labels, and checked the definition against those sources.",
+  "blueprint": "The item is the imported definition at order 1968, providing the vector bundle, zero section and local frames used in sk-prop-an Steps 2-4 and 7. Its blueprint.from remains null because it is itself a blueprint node. same_as names def-pur-vector-bundle-zero-section, the same construction in the narrower separated finite-type purity setting, with etale trivializations. The unit statement and proof route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-N5-a5e1efbaf",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-a5e1efbaf (reviewer sub-agent of L); spot-checked: Read the full item, report, eleven cited statements, unit/chapter route, and archived sources. Verified augmentation, closed immersion, Spec variance, coordinate changes, and edge cases. No new nodes, duplicate split, missing dependency, cycle, or target weakening found. Concrete checks recorded in review.md; no fixes or tool-use exceptions needed."
+ }
 }
