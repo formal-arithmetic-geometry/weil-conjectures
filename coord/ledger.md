@@ -15081,3 +15081,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:10 L: merged deliver/G1/Sheaf.RingTheory.WeaklyEtaleTor (stage 3; reviewer PASS; first push; landing 20261015T161026-L-260376 (interface); batch 20261015T161020; modules 2; new nodes 1)
 - 16:13 L: returned deliver/C3/Sheaf.AlgebraicGeometry.FiniteRangeComparison (reviewer RETURN: (reviewer X-2a2e1, head 2a2e1477b) F: In dag/nodes/sec-smooth-base-change/sbc-lem-finite-range-comparison.json, line 212)
 - 16:19 L: returned deliver/A2/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit (reviewer RETURN: (the landing tools, head ea5153369) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 16:19 L: returned deliver/B4/Sheaf.Paper.ProfinitePointPullback (reviewer RETURN: (the landing tools, head d51621221) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
