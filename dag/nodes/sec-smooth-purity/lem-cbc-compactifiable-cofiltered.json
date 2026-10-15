@@ -201,5 +201,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-60b4bccdb",
+  "group": "NL",
+  "result": "pass",
+  "note": "Verified immutable files, all statement clauses and dependencies, exact upstream signatures, report sections, and pilot gates. Server-only checks passed for all five declarations; both main declarations use only standard axioms. No stage-2 delivery errors found."
+ },
+ "lean": {
+  "module": "WeilConjectures.Compactification.CategoryBaseChange",
+  "declaration": "AlgebraicGeometry.Compactification.baseChangeFunctor",
+  "declarations": [
+   "AlgebraicGeometry.Compactification.isCofiltered",
+   "AlgebraicGeometry.Compactification.baseChangeFunctor",
+   "AlgebraicGeometry.Compactification.quasiCompact_openImmersion_iff",
+   "AlgebraicGeometry.Compactification.Refinement.baseChange_id",
+   "AlgebraicGeometry.Compactification.Refinement.baseChange_comp"
+  ],
+  "statement": "noncomputable def baseChangeFunctor (t : T ⟶ S) :\n    Compactification f ⥤ Compactification (pullback.snd f t)",
+  "branch": "slopmaster2",
+  "by": "NL",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Existing declarations jointly cover the item. Cofiltered.lean:81 is arbitrary-base already, requiring only QuasiCompact f and HasCompactification f; finite type supplies the former. CategoryBaseChange.lean:111 gives the specified fibre-product base-change functor, including identities, composition, common refinements and equalizing refinements. Defs.lean quasiCompact_openImmersion_iff identifies its objects with the node's quasi-compact-open compactifications under QuasiCompact f. No qcqs assumption on the base, density condition, or replacement notion is used."
  }
 }
