@@ -14976,3 +14976,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: returned deliver/G3/Sheaf.AlgebraicGeometry.ProperUnboundedBaseChangeModN (reviewer RETURN: (reviewer X-3ab9b, head 3ab9b53bd) C7 / stage 3 §2: TorsionAssembly realizes sk-thm-properbasechange.realized.statement )
 
 - 12:10 L: batch 20261015T040626 dependency take-out
+- 04:13 L: merged deliver/G2/Sheaf.AlgebraicGeometry.CartesianHigherImageSingleRawClassVanishing (stage 3; reviewer PASS; first push; landing 20261015T041333-L-536434 (interface); batch 20261015T041332; modules 2; new nodes 2; change records: coord/changes/G2-single-raw-class-proof-local.md)

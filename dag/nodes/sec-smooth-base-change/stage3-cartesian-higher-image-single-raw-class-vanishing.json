@@ -1,0 +1,158 @@
+{
+ "id": "stage3-cartesian-higher-image-single-raw-class-vanishing",
+ "kind": "statement",
+ "title": "Eventual vanishing of one raw cartesian derived class",
+ "statement": "Let k be a field, I a small cofiltered category, D:I→Over(Spec k) a diagram with qcqs structure maps and affine transitions, and c a cone whose underlying scheme cone is limiting and whose apex structure morphism is qcqs. Let f:X→Spec k be qcqs, F an abelian etale sheaf on X, q a nonnegative integer, i an index, and V affine etale over c.pt. Put P=F[0] and L_i=cartesianDerivedImage(f,D_i.hom,P). If z:Z[V][0]→(c.π_i)^*L_i[q] becomes zero under the canonical cartesian exchange to cartesianDerivedImage(f,c.pt.hom,P)[q], then there exist j and a:j→i such that z becomes zero under the raw transition to (c.π_j)^*cartesianDerivedImage(f,D_j.hom,P)[q]. The transition is the canonical inverse-image composition comparison followed by pullback of cartesianDerivedImageMap along D(a). Definitions are [def-sc-cartesian-derived-image], [def-sc-cartesian-derived-image-map], [def-weil-pbc-derived-categories] and [def-weil-pbc-sheafification].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Registration of the existing one-class declaration; proof reduces descent to the chart representative and proves the second-continuity eventual-zero argument in Lean."
+ },
+ "stmt_deps": [
+  "def-sc-cartesian-derived-image",
+  "def-sc-cartesian-derived-image-map",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Use the chart-representative theorem to descend the arbitrary raw class and obtain the two identities with the constructed chart cohomology maps. This is the first continuity application with the original stage complex fixed.",
+   "uses": [
+    "lem-sc-cartesian-raw-class-chart-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chart system is cofiltered and limiting with affine arrows and qcqs stage and apex maps. The apex chart isomorphism reflects zero, so the assumed vanishing kills the chart representative at the limit.",
+   "uses": [
+    "lem-sc-cartesian-higher-image-chart-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the restricted-over abelian cohomology presentation and apply its complex-cohomology colimit theorem. Forget to sets, transport the zero equality by the presentation isomorphisms, and apply the filtered-colimit equality criterion to obtain an arrow on which the representative becomes zero.",
+   "uses": [
+    "lem-sc-restricted-over-abelian-cohomology-presentation",
+    "def-sbc-etale-complex-cohomology-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the representative transition identity for that arrow and preservation of zero by all factors of the specified chart lift. The composite of its underlying arrow with the original stage arrow is the requested witness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cartesian-raw-class-chart-representative",
+  "lem-sc-cartesian-higher-image-chart-system",
+  "lem-sc-restricted-over-abelian-cohomology-presentation",
+  "def-sbc-etale-complex-cohomology-presentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "G2: the two-continuity route of the second proof, specialized to one raw class. Registration of the existing one-class declaration; proof reduces descent to the chart representative and proves the second-continuity eventual-zero argument in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "IsFiltered colimit zero",
+   "date": "2026-10-15",
+   "results": "loogle: Unknown identifier `IsFiltered`",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology continuity inverse limit schemes raw derived class eventually zero",
+   "date": "2026-10-15",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.Etale.forget",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*continuity|cartesian.*raw",
+   "date": "2026-10-15",
+   "results": "0 hits: ",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded below derived etale cohomology commutes with inverse limits of qcqs schemes with affine transition morphisms",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShiftIso\", \"map_comp\"",
+   "date": "2026-10-15",
+   "results": "0 hits: ",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesianChartCohomologyLift|presentationDerivedMap",
+   "date": "2026-10-15",
+   "results": "0 hits: ",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of canonical derived inverse image maps commutes with the single complex functor and shifts",
+   "date": "2026-10-15",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, DerivedCategory.singleFunctorsPostcompQIso_inv_hom, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorCompHomologyFunctorIso, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianHigherImageSingleRawClassVanishing",
+  "date": "2026-10-15",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "Raw-class injectivity in affine inverse-limit continuity, second proof of Stacks 0EYM.",
+   "via": [
+    "lem-sc-cartesian-higher-image-affine-section-local-vanishing",
+    "lem-sc-cartesian-higher-image-finite-raw-class-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianHigherImageSingleRawClassVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianHigherImageSingleRawClassVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_cartesianHigherImage_single_raw_class_eq_zero",
+  "statement": "theorem exists_cartesianHigherImage_single_raw_class_eq_zero\n    {k : Type u} [Field k]\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Over (Spec (.of k)))\n    [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]\n    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (q : ℕ) (i : I) (V : c.pt.left.Etale) [IsAffine V.left]\n    (z : (DerivedCategory.Plus.singleFunctor _ 0).obj\n      ((abelianComparisonFree c.pt.left).obj V) ⟶\n        ((D+(((c.π.app i).left)^*[AddCommGrpCat.{u + 1}])).obj\n          (cartesianDerivedImage f (D.obj i).hom\n            ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))⟦(q : ℤ)⟧)\n    (hz : z ≫ (shiftFunctor _ (q : ℤ)).map\n      (cartesianDerivedImageMap f (D.obj i).hom c.pt.hom (c.π.app i).left\n        (Over.w (c.π.app i)).symm ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) = 0) :\n    ∃ (j : I) (a : j ⟶ i),\n      z ≫ (shiftFunctor _ (q : ℤ)).map\n        ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1}\n          (c.π.app j).left (D.map a).left (c.π.app i).left\n          (congrArg (fun b ↦ b.left) (c.w a)).symm).hom.app _ ≫\n          (D+(((c.π.app j).left)^*[AddCommGrpCat.{u + 1}])).map\n            (cartesianDerivedImageMap f (D.obj i).hom (D.obj j).hom\n              (D.map a).left (Over.w (D.map a)).symm\n              ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) = 0",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-accb9",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261015T041333-L-536434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-accb9",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261015T041333-L-536434",
+  "kind": "interface",
+  "note": "independent Codex review: Existing signature unchanged; both DAG signatures match Lean; chart-representative split matches the continuity argument. Delivered modules and sole direct importer compile cleanly; helpers use standard axioms, public theorems additionally use sorryAx from the reported obligation."
+ }
+}

@@ -1,0 +1,176 @@
+{
+ "id": "lem-sc-cartesian-raw-class-chart-representative",
+ "kind": "statement",
+ "title": "Finite-stage chart representative of a raw cartesian class",
+ "statement": "Let k be a field, I small cofiltered, D:I→Over(Spec k) with qcqs structure maps and affine transitions, and c a cone with limiting underlying scheme cone and qcqs apex. Let f:X→Spec k be qcqs, F an abelian etale sheaf, q≥0, i∈I, V affine etale over c.pt, and z:Z[V][0]→(c.π_i)^*cartesianDerivedImage(f,D_i,F[0])[q]. There are a stage j, an affine etale W over D_j with specified pullback square V→W over c.π_j, an object l of Over j, an arrow b:l.left→i, and a restrictedOverCohomology class x on the explicit cartesianChartDiagram(f,D,j)(l) above W. The image of x under the chart cone map and the specified cartesianChartCohomologyIso equals z followed by limit exchange. For every a:m→l in Over j, the image of x under the explicit restrictedOverCohomologyMap followed by cartesianChartCohomologyLift at m equals z followed by the raw transition along a.left≫b, including the prescribed inverse-image composition comparison. These are identities for arbitrary z: there is no zero hypothesis or vanishing conclusion. Definitions are [def-sc-cartesian-derived-image], [def-sc-cartesian-derived-image-map] and [def-sc-cartesian-higher-image-chart-system].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Affine etale model descent from Tag 0EYL and fixed bounded-below coefficient continuity from Tag 0GIT, combined with the canonical exchange comparison square in the second proof of Tag 0EYM. The first derived-continuity application is an additional reduction for arbitrary raw derived classes, not an explicit application of 0GIT in 0EYM."
+ },
+ "stmt_deps": [
+  "def-sc-cartesian-derived-image",
+  "def-sc-cartesian-derived-image-map",
+  "def-sc-cartesian-higher-image-chart-system"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to Over i and descend the affine etale V using the affine etale model theorem. Above its model stage, the restricted model system is limiting, qcqs, and has affine arrows. Apply cohomology continuity for the fixed bounded-below coefficient complex cartesianDerivedImage(f,D_i,F[0]); evaluation on the represented identity identifies its hypercohomology with the raw Hom group. Surjectivity yields one finite-stage raw representative. For arbitrary bounded-below coefficients, compute restricted derived sections using a bounded-below injective representative and evaluation at the free representable generator. After obtaining the representative, base change the descended affine model to its stage and rename this stage j. Affineness is preserved because all transitions are affine. Set l to the identity object of Over j and b to the resulting arrow j to i.",
+   "uses": [
+    "lem-sc-cofiltered-affine-etale-model",
+    "lem-weil-pbc-derived-etale-cohomology-limit",
+    "lem-sbc-raw-restricted-cohomology-comparison-evaluation-is-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Send the finite-stage representative through cartesian exchange and take its derived adjoint on X times the descended affine etale model. Canonical raw restricted cohomology evaluation defines x. The evaluation comparison is invertible and commutes with raw pullback.",
+   "uses": [
+    "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
+    "lem-sbc-raw-restricted-cohomology-comparison-naturality",
+    "lem-sbc-abelian-higher-direct-image-class-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pasting the exchange squares gives the displayed limit identity. Naturality of inverse-image composition, the single and shift comparisons, derived adjunction, and raw cohomology evaluation gives the displayed identity for every a:m→l. The chart lift and apex chart comparison use the actual fibre-product identifications, so these are equalities of the specified maps. The construction is valid for q=0 and for empty V; it uses no vanishing hypothesis.",
+   "uses": [
+    "lem-sc-cartesian-chart-exchange-naturality",
+    "lem-sc-cartesian-derived-image-map-exchange",
+    "lem-sbc-abelian-raw-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cofiltered-affine-etale-model",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-sbc-raw-restricted-cohomology-comparison-evaluation-is-iso",
+  "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
+  "lem-sbc-raw-restricted-cohomology-comparison-naturality",
+  "lem-sbc-abelian-higher-direct-image-class-compatibility",
+  "lem-sc-cartesian-chart-exchange-naturality",
+  "lem-sc-cartesian-derived-image-map-exchange",
+  "lem-sbc-abelian-raw-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "G2: one-class specialization of the parent two-continuity plan. Use 0EYL and 0GIT to descend the original raw class, then the canonical exchange square of 0EYM to form its chart representative. Second reading corrected the source attribution: 0EYM itself does not explicitly invoke 0GIT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "IsFiltered colimit zero",
+   "date": "2026-10-15",
+   "results": "loogle: Unknown identifier `IsFiltered`",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology continuity inverse limit schemes raw derived class eventually zero",
+   "date": "2026-10-15",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.Etale.forget",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*continuity|cartesian.*raw",
+   "date": "2026-10-15",
+   "results": "0 hits: ",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded below derived etale cohomology commutes with inverse limits of qcqs schemes with affine transition morphisms",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShiftIso\", \"map_comp\"",
+   "date": "2026-10-15",
+   "results": "0 hits: ",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesianChartCohomologyLift|presentationDerivedMap",
+   "date": "2026-10-15",
+   "results": "0 hits: ",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of canonical derived inverse image maps commutes with the single complex functor and shifts",
+   "date": "2026-10-15",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, DerivedCategory.singleFunctorsPostcompQIso_inv_hom, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorCompHomologyFunctorIso, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "verdict": "No exact theorem for the specified raw-class chart representative or eventual vanishing. The generic composition and filtered-colimit APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of hypercohomology classes with bounded below coefficients to a finite stage of an inverse system of schemes",
+   "date": "2026-10-15",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac', CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc, CategoryTheory.GrothendieckTopology.OneHypercover.map_amalgamate, CategoryTheory.GrothendieckTopology.OneHypercover.amalgamate, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.lift, CategoryTheory.GrothendieckTopology.OneHypercover.arrowsCompatible",
+   "verdict": "Second reader: no theorem for descent of the specified raw class with these chart map identities. The structure-sheaf section vanishing hit has different coefficients and degree."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|derived.*cohomology.*limit|Cohomology.*[Cc]ontinuity",
+   "date": "2026-10-15",
+   "results": "0 hits: ",
+   "verdict": "Second reader: no theorem for descent of the specified raw class with these chart map identities. The structure-sheaf section vanishing hit has different coefficients and degree."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianHigherImageSingleRawClassVanishing",
+  "date": "2026-10-15",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "Raw-class injectivity in affine inverse-limit continuity, second proof of Stacks 0EYM.",
+   "via": [
+    "lem-sc-cartesian-higher-image-affine-section-local-vanishing",
+    "lem-sc-cartesian-higher-image-finite-raw-class-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianRawClassChartRepresentative",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianRawClassChartRepresentative.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_cartesianRawClass_chart_representative",
+  "statement": "theorem exists_cartesianRawClass_chart_representative\n    {k : Type u} [Field k]\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Over (Spec (.of k)))\n    [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]\n    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (q : ℕ) (i : I) (V : c.pt.left.Etale) [IsAffine V.left]\n    (z : (DerivedCategory.Plus.singleFunctor _ 0).obj\n      ((abelianComparisonFree c.pt.left).obj V) ⟶\n        ((D+(((c.π.app i).left)^*[AddCommGrpCat.{u + 1}])).obj\n          (cartesianDerivedImage f (D.obj i).hom\n            ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))⟦(q : ℤ)⟧)\n :\n    ∃ (j : I) (W : (D.obj j).left.Etale) (_ : IsAffine W.left)\n      (r : V.left ⟶ W.left)\n      (hr : IsPullback r V.hom W.hom (c.π.app j).left)\n      (l : Over j) (b : l.left ⟶ i)\n      (x : restrictedOverCohomology (pullback.snd f (D.obj j).hom)\n        (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)\n        (q : ℤ) ((cartesianChartDiagram f D j).obj l) W),\n      z ≫ (shiftFunctor _ (q : ℤ)).map\n          (cartesianDerivedImageMap f (D.obj i).hom c.pt.hom (c.π.app i).left\n            (Over.w (c.π.app i)).symm ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) =\n        (cartesianChartCohomologyIso f (D.obj j).hom (c.π.app j).left c.pt.hom\n          (Over.w (c.π.app j)).symm F q W V r hr).hom\n          (restrictedOverCohomologyMap (pullback.snd f (D.obj j).hom)\n            (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)\n            (q : ℤ) ((cartesianChartCone f D c j).π.app l) W x) ∧\n      ∀ (m : Over j) (a : m ⟶ l),\n        z ≫ (shiftFunctor _ (q : ℤ)).map\n          ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1}\n            (c.π.app m.left).left (D.map (a.left ≫ b)).left (c.π.app i).left\n            (congrArg (fun t ↦ t.left) (c.w (a.left ≫ b))).symm).hom.app _ ≫\n            (D+(((c.π.app m.left).left)^*[AddCommGrpCat.{u + 1}])).map\n              (cartesianDerivedImageMap f (D.obj i).hom (D.obj m.left).hom\n                (D.map (a.left ≫ b)).left (Over.w (D.map (a.left ≫ b))).symm\n                ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) =\n          cartesianChartCohomologyLift f D c F q j W V r hr m\n            (restrictedOverCohomologyMap (pullback.snd f (D.obj j).hom)\n              (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)\n              (q : ℤ) ((cartesianChartDiagram f D j).map a) W x)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-accb9",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261015T041333-L-536434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-accb9",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261015T041333-L-536434",
+  "kind": "interface",
+  "note": "independent Codex review: Existing signature unchanged; both DAG signatures match Lean; chart-representative split matches the continuity argument. Delivered modules and sole direct importer compile cleanly; helpers use standard axioms, public theorems additionally use sorryAx from the reported obligation."
+ }
+}
