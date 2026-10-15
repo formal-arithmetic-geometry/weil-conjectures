@@ -125,6 +125,81 @@ noncomputable def perfectOverlapNaturalComparisonFromGeometry
     Functor.isoWhiskerLeft (derivedPullback r) (Functor.leftUnitor _) ≪≫
     perfectOverlapDerivedPullbackTransport r e d m h
 
+/-- The component equation for the cartesian overlap comparison.
+The two maps into the later open subscheme agree after its open immersion: the
+first projection follows from the restricted-map equations and the pullback
+first projections, and the second from the base-change square and pullback
+second projections. The later cartesian square then identifies the maps. -/
+theorem perfectOverlapCartesianComponent
+    {X Y K C T S : Scheme.{u}}
+    (g : X ⟶ Y) (gk : X ⟶ K) (f : K ⟶ Y)
+    (pX : X ⟶ C) (pK : K ⟶ T) (pY : Y ⟶ S)
+    (a : C ⟶ T) (q : T ⟶ S)
+    (hgf : gk ≫ f = g) (hgk : gk ≫ pK = pX ≫ a)
+    (hf : IsPullback f pK pY q) (W : Y.Opens)
+    (r : (g ⁻¹ᵁ W).toScheme ⟶ (f ⁻¹ᵁ W).toScheme)
+    (hr : r ≫ (f ⁻¹ᵁ W).ι = (g ⁻¹ᵁ W).ι ≫ gk)
+    (eY : (g ⁻¹ᵁ W).toScheme ≅ pullback (W.ι ≫ pY) (a ≫ q))
+    (eK : (f ⁻¹ᵁ W).toScheme ≅ pullback (W.ι ≫ pY) q)
+    (hYfst : eY.inv ≫ (g ∣_ W) = pullback.fst (W.ι ≫ pY) (a ≫ q))
+    (hYsnd : eY.inv ≫ (g ⁻¹ᵁ W).ι ≫ pX =
+      pullback.snd (W.ι ≫ pY) (a ≫ q))
+    (hKfst : eK.inv ≫ (f ∣_ W) = pullback.fst (W.ι ≫ pY) q)
+    (hKsnd : eK.inv ≫ (f ⁻¹ᵁ W).ι ≫ pK = pullback.snd (W.ι ≫ pY) q) :
+    eY.inv ≫ r =
+      baseChangeMap (W.ι ≫ pY)
+        (Over.homMk a (by rfl) : Over.mk (a ≫ q) ⟶ Over.mk q) ≫ eK.inv := by
+  let m := baseChangeMap (W.ι ≫ pY)
+    (Over.homMk a (by rfl) : Over.mk (a ≫ q) ⟶ Over.mk q)
+  have hrf : r ≫ (f ⁻¹ᵁ W).ι ≫ f = (g ⁻¹ᵁ W).ι ≫ g := by
+    rw [← Category.assoc r (f ⁻¹ᵁ W).ι f, hr, Category.assoc, hgf]
+  have hrpK : r ≫ (f ⁻¹ᵁ W).ι ≫ pK = (g ⁻¹ᵁ W).ι ≫ pX ≫ a := by
+    rw [← Category.assoc r (f ⁻¹ᵁ W).ι pK, hr, Category.assoc, hgk]
+  have hYtoY : eY.inv ≫ (g ⁻¹ᵁ W).ι ≫ g =
+      pullback.fst (W.ι ≫ pY) (a ≫ q) ≫ W.ι := by
+    calc
+      eY.inv ≫ (g ⁻¹ᵁ W).ι ≫ g = eY.inv ≫ (g ∣_ W) ≫ W.ι := by
+        simpa only [Category.assoc] using
+          congrArg (fun z ↦ eY.inv ≫ z) (morphismRestrict_ι g W).symm
+      _ = pullback.fst (W.ι ≫ pY) (a ≫ q) ≫ W.ι := by
+        simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ W.ι) hYfst
+  have hKtoY : eK.inv ≫ (f ⁻¹ᵁ W).ι ≫ f =
+      pullback.fst (W.ι ≫ pY) q ≫ W.ι := by
+    calc
+      eK.inv ≫ (f ⁻¹ᵁ W).ι ≫ f = eK.inv ≫ (f ∣_ W) ≫ W.ι := by
+        simpa only [Category.assoc] using
+          congrArg (fun z ↦ eK.inv ≫ z) (morphismRestrict_ι f W).symm
+      _ = pullback.fst (W.ι ≫ pY) q ≫ W.ι := by
+        simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ W.ι) hKfst
+  have hmfst : m ≫ pullback.fst (W.ι ≫ pY) q =
+      pullback.fst (W.ι ≫ pY) (a ≫ q) := by
+    exact baseChangeMap_fst _ _
+  have hmsnd : m ≫ pullback.snd (W.ι ≫ pY) q =
+      pullback.snd (W.ι ≫ pY) (a ≫ q) ≫ a := by
+    exact baseChangeMap_snd _ _
+  apply (cancel_mono (f ⁻¹ᵁ W).ι).1
+  apply hf.hom_ext
+  · calc
+      eY.inv ≫ r ≫ (f ⁻¹ᵁ W).ι ≫ f =
+        eY.inv ≫ (g ⁻¹ᵁ W).ι ≫ g := by
+          simpa only [Category.assoc] using congrArg (fun z ↦ eY.inv ≫ z) hrf
+      _ = pullback.fst (W.ι ≫ pY) (a ≫ q) ≫ W.ι := hYtoY
+      _ = m ≫ pullback.fst (W.ι ≫ pY) q ≫ W.ι := by
+        simpa only [Category.assoc] using
+          congrArg (fun z ↦ z ≫ W.ι) hmfst.symm
+      _ = m ≫ eK.inv ≫ (f ⁻¹ᵁ W).ι ≫ f := by
+        simpa only [Category.assoc] using congrArg (fun z ↦ m ≫ z) hKtoY.symm
+  · calc
+      eY.inv ≫ r ≫ (f ⁻¹ᵁ W).ι ≫ pK =
+        eY.inv ≫ (g ⁻¹ᵁ W).ι ≫ pX ≫ a := by
+          simpa only [Category.assoc] using congrArg (fun z ↦ eY.inv ≫ z) hrpK
+      _ = pullback.snd (W.ι ≫ pY) (a ≫ q) ≫ a := by
+        simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ a) hYsnd
+      _ = m ≫ pullback.snd (W.ι ≫ pY) q := by
+        exact hmsnd.symm
+      _ = m ≫ eK.inv ≫ (f ⁻¹ᵁ W).ι ≫ pK := by
+        simpa only [Category.assoc] using congrArg (fun z ↦ m ≫ z) hKsnd.symm
+
 /-- Geometric object comparisons and their natural compatibility with apex pullback.
 The transition functors and their fixed conjugation formula are recorded explicitly;
 the Hom pin will be derived from naturality, rather than included as a field.
