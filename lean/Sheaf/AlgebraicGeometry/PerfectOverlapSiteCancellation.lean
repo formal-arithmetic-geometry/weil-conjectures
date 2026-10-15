@@ -5,12 +5,14 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData
+public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
 import Sheaf.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
 
 @[expose] public section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
@@ -240,5 +242,47 @@ theorem perfectOverlapApex_localIso_cancel_for
   intro W Q i PQ SU LU SP ω eW cart apex
   exact equivalence_comparison_counit_transport eW.mapDerivedCategory
     cart.functor (LU ⋙ SP) SU ω φ
+
+/-- The site part of a canonical overlap object comparison is the comparison
+at the pulled-back local object. Source: Stacks Project, Tags 08BT and 08BV.
+First use naturality of the site counit to cancel the nested restriction
+isomorphism. Then use the local-isomorphism triangle to move `φ` through the
+open-site comparison and cancel its inverse. -/
+theorem perfectOverlapApex_siteTail_cancel_for
+    {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
+    (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)
+    (U V L : Y.Opens) (hWL : U ⊓ V ≤ L)
+    (a : schemeDerivedCategory (g ⁻¹ᵁ L).toScheme)
+    (E : schemeDerivedCategory X)
+    (φ : a ≅ (schemeOpenRestriction X (g ⁻¹ᵁ L)).mapDerivedCategory.obj E) :
+    let W := g ⁻¹ᵁ U ⊓ g ⁻¹ᵁ V
+    let Q := g ⁻¹ᵁ L
+    let i : W ⟶ Q := homOfLE (fun _ hx ↦ hWL hx)
+    let PQ := (schemeOpenRestriction X Q).mapDerivedCategory
+    let SU := (schemeOpenOverlapRestriction X i).mapDerivedCategory
+    let PW := (schemeOpenRestriction X W).mapDerivedCategory
+    let LU := (overlapSiteInverse Q).mapDerivedCategory
+    let LW := (overlapSiteInverse W).mapDerivedCategory
+    let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
+    let ω := openSiteOverlapIso X i
+    let σ := schemeDerivedOpenRestrictionCompIso X i
+    let eW : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W) ≌
+      SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) :=
+      Scheme.Modules.overEquiv W
+    let cart := perfectOverlapStageEquivalence g pX pY b hg U V
+    let apex := perfectOverlapApexEquivalence g pX pY b hg U V
+    apex.functor.map ((LU ⋙ SP).map φ.hom) ≫
+      apex.functor.map (ω.hom.app (PQ.obj E)) ≫
+      apex.functor.map (LW.map (σ.hom.app E)) ≫
+      cart.functor.map (eW.mapDerivedCategory.counitIso.hom.app (PW.obj E)) ≫
+      cart.functor.map (σ.inv.app E) ≫
+      cart.functor.map (SU.map φ.inv) =
+        apex.functor.map (ω.hom.app a) ≫
+          cart.functor.map (eW.mapDerivedCategory.counitIso.hom.app (SU.obj a)) := by
+  intro W Q i PQ SU PW LU LW SP ω σ eW cart apex
+  have hn := perfectOverlapApex_nestedCounit_cancel_for g pX pY b hg U V L hWL E
+  have hl := perfectOverlapApex_localIso_cancel_for g pX pY b hg U V L hWL a E φ
+  dsimp only at hn hl
+  exact paste_middle_three hn hl
 
 end AlgebraicGeometry
