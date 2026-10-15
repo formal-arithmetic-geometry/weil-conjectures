@@ -76,5 +76,28 @@
   "result": "pass"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAmbientRingedExchange",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleAmbientRingedExchange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleCanonicalDerivedPullbackComparison",
+   "AlgebraicGeometry.Scheme.proEtaleAmbientRingedExchange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAmbientRingedExchange.lean",
+  "statement": "def proEtaleAmbientRingedExchange {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (R_X' : Sheaf (ProEt.topology X') CommRingCat.{u + 1}) (R_Y' : Sheaf (ProEt.topology Y') CommRingCat.{u + 1}) (c_f : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X) (c_g : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj R_Y ≅ R_Y') (c_g' : (proEtaleSheafInverseImage g' CommRingCat.{u + 1}).obj R_X ≅ R_X') (c_f' : (proEtaleSheafInverseImage f' CommRingCat.{u + 1}).obj R_Y' ≅ R_X') (hcoeff : HEq (proEtaleRingCompositeCoefficients g' f R_Y R_X R_X' c_f c_g') (proEtaleRingCompositeCoefficients f' g R_Y R_Y' R_X' c_g c_f')) : proEtaleRingDerivedDirectImage f R_Y R_X c_f ⋙ proEtaleRingDerivedPullback g R_Y R_Y' c_g ⟶ proEtaleRingDerivedPullback g' R_X R_X' c_g' ⋙ proEtaleRingDerivedDirectImage f' R_Y' R_X' c_f'",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The helper selects the derived comparison from a repackaging of the complete normalized existence statement in proEtaleRingDerivedPullbackComposition, retaining its section, conjugation, termwise and K-flat characterizations. The exchange is its mate after dependent transport along scheme commutativity and coefficient compatibility. No arbitrary comparison parameter and no completeness or constructibility assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5943d3bf8",
+  "group": "NA",
+  "result": "pass",
+  "note": "Review is complete and explicitly passes immutable snapshot 5943d3bf851fcad0fa9e07dbc342ffd9b4b57ae0. The exchange matches the stated canonical mate construction, preserves coefficient compatibility and full normalization, and adds no scope restrictions. Both required per-file compilations passed without errors or warnings. No fixes required."
+ }
 }
