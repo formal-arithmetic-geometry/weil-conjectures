@@ -22,9 +22,93 @@
   "def-weil-pbc-module-localization",
   "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-local-system-of-parameters] to the given Noetherian local ring with $d=1$. Its single parameter is an element $f\\in\\mathfrak m$ with $\\sqrt{fR}=\\mathfrak m$. We retain this particular $f$ for all subsequent steps.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KQ, proposition-dimension, (1) implies (3), specialized to dimension one; the existence assertion used in Tag 0C3R"
+   }
+  },
+  {
+   "text": "Every prime $\\mathfrak p$ is contained in $\\mathfrak m$: if $x\\in\\mathfrak p$ lay outside $\\mathfrak m$, [lem-weil-pbc-local-ring-unit-criterion] would make $x$ a unit and force $1\\in\\mathfrak p$. If $\\mathfrak p\\ne\\mathfrak m$ were not minimal, some prime $\\mathfrak q$ would satisfy $\\mathfrak q\\subsetneq\\mathfrak p\\subsetneq\\mathfrak m$, contradicting dimension one by [def-weil-pbc-krull-dimension-ring]. Thus every prime other than $\\mathfrak m$ is minimal. Moreover $\\mathfrak m$ is not minimal: otherwise every prime contained in it would equal it, leaving no chain of length one, again contradicting dimension exactly one. Finally, if a minimal prime $\\mathfrak p$ contained $f$, it would contain $\\sqrt{fR}$, since $x^n\\in\\mathfrak p$ implies $x\\in\\mathfrak p$ by induction using primality. Step 1 would give $\\mathfrak m\\subseteq\\mathfrak p$, hence $\\mathfrak p=\\mathfrak m$, a contradiction. Therefore $f$ lies in no minimal prime.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E9, lemma-characterize-local-ring, and 00KE, definition-Krull; elementary prime-chain argument underlying Tag 0C3R, (1) implies (2)"
+   }
+  },
+  {
+   "text": "Since $R$ is reduced, [lem-weil-pbc-reduced-zerodivisors-union-minimal-primes] applies. The avoidance proved in step 2 says exactly that $f$ is a nonzerodivisor, so $f\\in T$. Products of nonzerodivisors are nonzerodivisors: if $abx=0$, first cancel $a$, then $b$. Also $1\\in T$, so $T$ is multiplicative and $f^n\\in T$ for every integer $n\\geq0$.",
+   "uses": [
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EW, lemma-reduced-ring-sub-product-fields, (3); elementary cancellation for products and powers"
+   }
+  },
+  {
+   "text": "Using the fraction constructions in [def-weil-ring-localization-away] and [def-weil-pbc-module-localization] with $M=R$, define $\\alpha:R_f\\to Q$ by $\\alpha(r/f^n)=r/f^n$, now with denominator $f^n\\in T$. If $r/f^n=r\\prime/f^m$ in $R_f$, then $f^k(rf^m-r\\prime f^n)=0$ for some $k\\geq0$. The same equality, with multiplier $f^k\\in T$, proves equality in $Q$. Thus $\\alpha$ is well defined. The displayed addition and multiplication formulas in these definitions show that it preserves addition, multiplication and $1$, and it sends $r/1$ to $r/1$. It is therefore precisely the canonical $R$-algebra map in the statement.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, definition-localization, and the construction before Tag 07JZ, definition-localization-module; fraction formulas"
+   }
+  },
+  {
+   "text": "For each $s\\in T$ we claim that $f^n=sa$ for some $a\\in R$ and integer $n\\geq0$. If $s$ is a unit, take $n=0$ and $a=s^{-1}$. Otherwise [lem-weil-pbc-local-ring-unit-criterion] gives $s\\in\\mathfrak m$. By [lem-weil-pbc-reduced-zerodivisors-union-minimal-primes], $s$ belongs to no minimal prime. Step 2 then implies that the only prime containing $sR$ is $\\mathfrak m$. Apply the radical-intersection clause of [lem-weil-pbc-zero-locus-eq-iff-radical-eq] to $sR$: its radical is $\\mathfrak m$. Since $f\\in\\mathfrak m$, the definition of radical gives $f^n\\in sR$ for some $n\\geq1$, that is, $f^n=sa$ for some $a\\in R$. This proves the claim also for nonunits.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E9, lemma-characterize-local-ring; 00EW, lemma-reduced-ring-sub-product-fields, (3); 00E0, lemma-Zariski-topology, (7); explicit denominator argument for condition (5) of Tag 0C3R"
+   }
+  },
+  {
+   "text": "The map $\\alpha$ is injective: if $\\alpha(r/f^n)=0$, the zero criterion in [def-weil-pbc-module-localization] gives $t\\in T$ with $tr=0$, hence $r=0$ by the definition of $T$, and consequently $r/f^n=0$ in $R_f$ by [def-weil-ring-localization-away]. It is surjective: for any fraction $r/s\\in Q$, choose $n,a$ from step 5 with $f^n=sa$. Then $\\alpha(ra/f^n)=r/s$, since the cross-multiplied difference $(ra)s-rf^n$ is zero (multiplier $1\\in T$). Thus $\\alpha$ is a bijective $R$-algebra homomorphism; its inverse preserves the operations by applying injectivity to their images, so it is an $R$-algebra isomorphism. Together with steps 1--3, this gives every clause for the same element $f$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO and 07JZ, localization equality and zero criteria; explicit injectivity and surjectivity for Tag 0C3R, condition (5)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-local-system-of-parameters",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3R, lemma-pre-pre-delta-invariant: same parameter route; expanded directly using 00KQ, 00E9, 00EW and 00E0 and fraction formulas instead of the intermediate finite-product decomposition. Local literature absent; online statements read (see report)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,15 +158,73 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ring.DimensionLEOne.localization\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Dvr\", \"type\": \"∀ {R : Type u_2} (Rₘ : Type u_3) [inst : CommRing R] [IsDomain R] [inst_2 : CommRing Rₘ] [inst_3 : Algebra R Rₘ]\\n  {M : Submonoid R} [IsLocalization M Rₘ], M ≤ nonZeroDivisors R → ∀ [h : Ring.DimensionLEOne R], Ring.DimensionLEOne Rₘ\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain with Krull dimension at most one. If $ R_\\\\mathfrak{m} $ denotes the localization of $ R $ at a submonoid $ M $ consisting of non-zero divisor\"}\n  {\"name\": \"Algebra.Presentation.localizationAway_dimension_zero\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S], (Algebra.Presentation.localizationAway S r).dimension = 0\", \"doc\": \"The algebra presentation obtained by localizing a commutative semiring $ S $ at the powers of an element $ r $ has dimension zero, meaning the number of generators equals the number of relations in th\"}\n  {\"name\": \"IsLocalization.AtPrime.not_isField\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Dvr\", \"type\": \"∀ (A : Type u_1) [inst : CommRing A] [IsDomain A] {P : Ideal A},\\n  P ≠ ⊥ →\\n    ∀ [pP : P.IsPrime] (Aₘ : Type u_2) [inst_2 : CommRing Aₘ] [inst_3 : Algebra A Aₘ] [IsLocalization.AtPrime Aₘ P],\\n      ¬IsField Aₘ\", \"doc\": \"Let $ A $ be a commutative ring and $ P $ a non-zero prime ideal of $ A $. If $ A_P $ denotes the localization of $ A $ at the complement of $ P $, then $ A_P $ is not a field.\"}\n  {\"name\": \"IsLocalization.isDomain_of_atPrime\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Basic\", \"type\": \"∀ {A : Type u_4} [inst : CommRing A] [IsDomain A] (S : Type u_5) [inst_2 : CommSemiring S] [inst_3 : Algebra A S]\\n  (P : Ideal A) [inst_4 : P.IsPrime] [IsLocalization.AtPrime S P], IsDomain S\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ A $ at the complement of a prime ideal $ P $, then $ S $ is an integral domain (i.e., it has no zero divisors).\"}\n  {\"name\": \"IsLocalization.isDomain_of_local_atPrime\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Basic\", \"type\": \"∀ {A : Type u_4} [inst : CommRing A] [IsDomain A] {P : Ideal A} (x : P.IsPrime), IsDomain (Localization.AtPrime P)\", \"doc\": \"Given a commutative ring $ A $ and a prime ideal $ P $, the localization of $ A $ at the complement of $ P $ forms a domain. This means that inverting all elements not in $ P $ results in a ring with \"}\n  {\"name\": \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Dvr\", \"type\": \"∀ (A : Type u_1) [inst : CommRing A] [inst_1 : IsDomain A] [h : IsDedekindDomainDvr A], Ring.DimensionLEOne A\", \"doc\": \"A Dedekind domain $ A $ is a discrete valuation ring, meaning it is a commutative ring that is an integral domain with Krull dimension at most one, and every nonzero element belongs to exactly one max\"}\n  {\"name\": \"Ring.KrullDimLE.isField_of_isReduced\", \"module\": \"Mathlib/RingTheory/KrullDimension/Zero\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Ring.KrullDimLE 0 R] [IsReduced R] [IsLocalRing R], IsField R\", \"doc\": \"If $ R $ is a commutative semiring that is reduced (i.e., has no nonzero nilpotent elements) and local (i.e., has a unique maximal ideal), then $ R $ is a field.\"}\n  {\"name\": \"isReduced_ofLocalizationMaximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Reduced\", \"type\": \"OfLocalizationMaximal fun R x => IsReduced R\", \"doc\": \"If every localization of a commutative ring $ R $ at its maximal ideals is a reduced ring (i.e., contains no nonzero nilpotent elements), then $ R $ itself is reduced.\"}\n",
    "date": "2026-10-16",
    "verdict": "no match: Ring.DimensionLEOne.localization preserves dimension at most one for domains; Ring.KrullDimLE.isField_of_isReduced requires a local zero-dimensional ring. Neither chooses a parameter nor identifies the localization with the total quotient ring of a reduced ring with multiple minimal primes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced Noetherian local ring of Krull dimension one admits a regular parameter f such that localization away from f is the total quotient ring",
+   "results": "{\"t\": \"2026-10-15T22:49:16Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced Noetherian local ring of Krull dimension one admits a regular parameter f such that localization away from f is the total quotient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDiscreteValuationRing.TFAE\", \"IsDedekindDomainDvr\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\", \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"Ring.KrullDimLE.isField_of_isReduced\", \"IsDiscreteValuationRing.toIsLocalRing\"], \"digest\": \"0b53f75eb4831421\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned valuation-ring and domain results do not state the reduced local ring theorem, its parameter choice and canonical total-quotient identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, IsReduced, IsLocalization",
+   "results": "{\"t\": \"2026-10-15T22:49:17Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing, IsReduced, IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no returned declaration states all clauses of this parameter and total-quotient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "total.*fraction|exists.*nonZeroDivisors.*maximal|exists.*maximal.*nonZeroDivisors",
+   "results": "{\"t\": \"2026-10-15T22:49:17Z\", \"tool\": \"grep\", \"query\": \"total.*fraction|exists.*nonZeroDivisors.*maximal|exists.*maximal.*nonZeroDivisors\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean\", \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/PicardGroup.lean\"], \"digest\": \"2486dc000bf7d524\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no returned declaration states all clauses of this parameter and total-quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular parameter in a reduced Noetherian one dimensional local ring yields its total quotient ring by localization",
+   "results": "{\"t\": \"2026-10-15T22:49:17Z\", \"tool\": \"leansearch\", \"query\": \"A regular parameter in a reduced Noetherian one dimensional local ring yields its total quotient ring by localization\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a one dimensional reduced local ring every nonzero divisor divides a power of a parameter",
+   "results": "{\"t\": \"2026-10-15T22:49:18Z\", \"tool\": \"leanfinder\", \"query\": \"In a one dimensional reduced local ring every nonzero divisor divides a power of a parameter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.associated_pow_irreducible\", \"IsDiscreteValuationRing.HasUnitMulPowIrreducibleFactorization\", \"IsDiscreteValuationRing.exists_irreducible\", \"exists_reduced_fraction'\", \"IsDiscreteValuationRing.ideal_eq_span_pow_irreducible\", \"IsDiscreteValuationRing.irreducible_of_span_eq_maximalIdeal\", \"IsDiscreteValuationRing.exists_prime\", \"IsDiscreteValuationRing.associated_of_irreducible\"], \"digest\": \"911dc780e1f2723c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned valuation-ring and domain results do not state the reduced local ring theorem, its parameter choice and canonical total-quotient identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization away from one element is a total quotient ring when every regular element divides a power of that element",
+   "results": "{\"t\": \"2026-10-15T23:05:46Z\", \"tool\": \"leanfinder\", \"query\": \"A localization away from one element is a total quotient ring when every regular element divides a power of that element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away\", \"IsLocalization.isDomain_localization\", \"IsFractionRing\", \"FractionRing\", \"IsLocalization.isDomain_of_le_nonZeroDivisors\", \"IsLocalization.isDomain_of_local_atPrime\", \"IsLocalization.isDomain_of_atPrime\", \"IsLocalization.Away.mk\"], \"digest\": \"d0fe6b5d323bfd8a\"}",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: localization definitions and characterizations do not choose a regular parameter in the maximal ideal of a reduced Noetherian local ring of dimension one"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-punctured-curve-branches",
   "by": "worker",
   "date": "2026-10-15"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-local-curve-principal-total-fractions",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused existing Mathlib leaves for a one-element system of parameters, the local unit criterion, reduced-ring zerodivisors and radicals. Wrote the prime-chain argument and the canonical fraction map, including explicit injectivity and denominator-by-denominator surjectivity. Created no nodes; no Lean work or compilation.",
+  "blueprint": "Realizes paragraph 3 of lem-exc-punctured-curve-branches: choosing f in the maximal ideal outside every minimal prime and identifying R_f with Q(R). It supplies these claims directly by the radical and denominator argument; the parent already supplies the separate finite-product identification.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-ecb4ad9ef",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-ecb4ad9ef (reviewer sub-agent of L); spot-checked: Read the full item, parent, unit/chapter route, cited nodes, source passages, searches, and archived target declarations. All six proof steps are supported; edge cases and reducible/nonreduced examples check out. No duplicate, cycle, restatement, hypothesis error, or repair is needed. Review written to review.md."
+ }
 }
