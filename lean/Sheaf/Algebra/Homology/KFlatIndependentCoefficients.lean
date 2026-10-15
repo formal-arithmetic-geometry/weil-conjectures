@@ -48,8 +48,9 @@ theorem preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) :
     letI := isMonoidal_W_independentCoefficients R
     letI := monoidalCategory R
-    ((curriedTensor (SheafOfModules.{w}
-      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))).obj M).PreservesZeroMorphisms := by
+    let T := curriedTensor (SheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))
+    (T.obj M).PreservesZeroMorphisms := by
   sorry
 
 end SheafOfModules
