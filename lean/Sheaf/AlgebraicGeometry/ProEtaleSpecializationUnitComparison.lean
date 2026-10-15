@@ -7,12 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 import all Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Sheaf.CategoryTheory.InverseMateEquivalence
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
