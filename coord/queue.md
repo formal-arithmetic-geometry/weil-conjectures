@@ -19,7 +19,7 @@
 | `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 4 | 3 | proof |
-| `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 4 | proof |
+| `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedLfpCoefficientModel` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarLfpLocalTriviality` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelAssembly` | 4 | 1 | proof |
@@ -38,8 +38,8 @@
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 6 | 5 | proof |
 | `Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties` | 7 | 1 | proof |
-| `Sheaf.CategoryTheory.GeometricModuleConstruction` | 7 | 1 | proof |
 | `Sheaf.Paper.PointLanFiniteProducts` | 7 | 1 | proof |
+| `Sheaf.CategoryTheory.GeometricModuleConstruction` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.LowerShriekCoveringGenerators` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
