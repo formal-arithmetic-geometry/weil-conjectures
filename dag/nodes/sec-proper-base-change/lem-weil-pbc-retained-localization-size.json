@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-retained-localization-size",
+ "kind": "statement",
+ "title": "Retained localization does not enlarge the principal w-localization",
+ "statement": "Let $R$ be a commutative ring and $T\\subseteq\\operatorname{Spec}R$ a closed subset. For the retained localization $R_{[T]}$ of [def-weil-pbc-retained-localization], $|R_{[T]}|\\leq|R^w|$, where $R^w$ is [def-weil-pbc-w-localization]. No infinitude hypothesis on either ring is needed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0984 (remark-size-w-contractible), first three stages and the localization estimate for C; blueprint sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-retained-localization.md, proof first paragraph (retained localization as an idempotent quotient)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-retained-localization",
+  "def-weil-pbc-w-localization"
+ ],
+ "proof": [
+  {
+   "text": "Each selector e_E of [def-weil-pbc-retained-localization] is idempotent. Mathlib IsLocalization.Away.algebraMap_surjective_of_isIdempotentElem proves that R^w → (R^w)[1/e_E] is surjective: for a fraction a/e_E^n, the idempotent e_E becomes one after localization, so the fraction is the image of a.",
+   "uses": [
+    "def-weil-pbc-retained-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The neighbourhood category is filtered by its defining theorem. Every element of its colimit is the image of an element of one localization by the representative clause of [lem-pc-filtered-colimit-commrings-elementwise], transferred through the preserved filtered colimit of CommAlgCat. Step 1 lifts that element to b in R^w. Since the stage inclusion is an R^w-algebra homomorphism, its image of the structural image of b is exactly algebraMap b. Therefore R^w → R_[T] is surjective. Cardinal.mk_le_of_surjective yields the claimed inequality. This argument also covers T empty, T the whole spectrum, and a zero ring R.",
+   "uses": [
+    "def-weil-pbc-retained-localization",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-retained-localization",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0984 (remark-size-w-contractible), first three stages and the localization estimate for C; blueprint sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-retained-localization.md, proof first paragraph (retained localization as an idempotent quotient)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of localizations at idempotents is a quotient of the base ring",
+   "results": "Service unavailable: Internal Server Error; no evidence about availability of a theorem.",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of algebras whose structural maps are surjective has surjective structural map",
+   "results": "Eight hits include Concrete.from_union_surjective_of_isColimit, Types.FilteredColimit.jointly_surjective_of_isColimit₂, and generic algebra/module surjectivity lemmas. None states the estimate for retained localization. The representative theorem is used in the proof.",
+   "date": "2026-10-15",
+   "verdict": "Related generic tools, no theorem for this specific construction."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective.*[Ii]dempotent|[Ii]dempotent.*surjective|cardinal.*retained",
+   "results": "Localization/Away/Basic.lean:385 gives algebraMap_surjective_of_isIdempotentElem, used directly. No retained-localization size theorem in Mathlib or the project. The blueprint search found lem-weil-pbc-retained-localization, whose proof explains the quotient, but whose Lean signature does not expose structural surjectivity or a size bound.",
+   "date": "2026-10-15",
+   "verdict": "Generic tools used below; no existing theorem for this construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.StrictWCoverSize",
+  "date": "2026-10-15",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers. Input: bounded ring witness from 0983/0984. Supporting input: Size of the strict w-local construction. Supporting estimate in the complete Lean proof of strict-w-cover-size: Retained localization does not enlarge the principal w-localization.",
+   "via": [
+    "lem-weil-pbc-strict-w-cover-size",
+    "lem-weil-pbc-wcontractible-ring-extension",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RetainedLocalizationSize",
+  "file": "lean/Sheaf/RingTheory/RetainedLocalizationSize.lean",
+  "declaration": "PrincipalWLocalization.Retained.cardinalMk_le",
+  "statement": "theorem cardinalMk_le (R : Type u) [CommRing R] (T : Set (PrimeSpectrum R)) (hT : IsClosed T) : #(algebra T hT) ≤ #(PrincipalWLocalization.algebra R)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T161025-L-260130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T161025-L-260130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

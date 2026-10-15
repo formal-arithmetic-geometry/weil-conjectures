@@ -7,12 +7,9 @@ module
 
 public import Sheaf.RingTheory.StrictWCover
 public import Mathlib.SetTheory.Cardinal.Arithmetic
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.RingTheory.FinitePresentation
-import WeilConjectures.RingTheory.ProEtale.WLocal
-import Sheaf.RingTheory.PrincipalWLocalization
-import Sheaf.RingTheory.EtaleContraction
-import Sheaf.RingTheory.RetainedLocalization
+import Sheaf.RingTheory.PrincipalWLocalizationSize
+import Sheaf.RingTheory.EtaleContractionSize
+import Sheaf.RingTheory.RetainedLocalizationSize
 
 /-!
 # Cardinality of the strict w-local cover
@@ -63,6 +60,18 @@ theorem cardinalMk_le (A : Type u) [CommRing A] (κ : Cardinal.{v})
     (hκ : Cardinal.aleph0 ≤ κ)
     (hA : Cardinal.lift.{v} (Cardinal.mk A) ≤ Cardinal.lift.{u} κ) :
     Cardinal.lift.{v} (Cardinal.mk (algebra A)) ≤ Cardinal.lift.{u} κ := by
-  sorry
+  let μ : Cardinal.{u} := max (Cardinal.mk A) Cardinal.aleph0
+  have hμ : Cardinal.aleph0 ≤ μ := le_max_right _ _
+  have hW := PrincipalWLocalization.cardinalMk_le A μ hμ (le_max_left _ _)
+  have hE : Cardinal.mk (contraction A) ≤ μ :=
+    CommRingCat.EtaleContraction.cardinalMk_le
+      (CommRingCat.of (PrincipalWLocalization.algebra A)) μ hμ hW
+  have hEw := PrincipalWLocalization.cardinalMk_le (contraction A) μ hμ hE
+  have hC : Cardinal.mk (algebra A) ≤ μ :=
+    (PrincipalWLocalization.Retained.cardinalMk_le (contraction A)
+      (PrimeSpectrum.zeroLocus (extendedIdeal A : Set (contraction A)))
+      (PrimeSpectrum.isClosed_zeroLocus _)).trans hEw
+  apply (Cardinal.lift_le.mpr hC).trans
+  simpa [μ] using max_le hA (Cardinal.lift_le.mpr hκ)
 
 end PrincipalWLocalization.StrictWCover
