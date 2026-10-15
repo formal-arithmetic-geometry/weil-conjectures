@@ -15113,3 +15113,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:57 L: merged deliver/A2/Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp (stage 3; reviewer PASS; first push; landing 20261015T175721-L-667108 (proof); batch 20261015T175720; modules 1; new nodes 0)
 - 17:57 L: merged deliver/E1/Sheaf.CategoryTheory.KInjectiveTotalDerived (stage 3; reviewer PASS; first push; landing 20261015T175721-L-667281 (proof); batch 20261015T175720; modules 1; new nodes 0)
 - 18:07 L: merged deliver/F3/WeilConjectures.WeilSheaf.GrothendieckLefschetz (stage 3; reviewer PASS; first push; landing 20261015T180756-L-715047 (proof); batch 20261015T180754; modules 1; new nodes 0)
+- 18:08 L: returned deliver/C3/Sheaf.AlgebraicGeometry.FiniteRangeComparison (reviewer RETURN: (reviewer X-e1543, head e1543e19c) F/G1: In dag/nodes/sec-smooth-base-change/sbc-lem-finite-range-comparison.json line 2)
