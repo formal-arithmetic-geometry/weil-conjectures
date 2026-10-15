@@ -3,40 +3,286 @@
  "blueprint": {
   "is": "lem-weil-delta-restriction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The double-dual morphism restricts",
- "statement": "Let $j:W\\to Y$ be etale between separated finite-type schemes over\na field, with finite coefficients invertible there. For the ambient\netale dualizing objects, the canonical identifications\n$j^*\\omega_Y=\\omega_W$ and $j^*D_Y=D_Wj^*$ identify\n$j^*\\delta_K$ with $\\delta_{j^*K}$. Thus biduality is local\nfor the etale topology. The same restriction calculation applies\nto the finite pro-etale realization.",
+ "statement": "Let $k$ be a field, $A$ a finite commutative ring whose additive exponent is invertible in $k$, and $j:W\\to Y$ an etale $k$-morphism between separated finite-type $k$-schemes [def-weil-etale-morphism, def-weil-finite-type-morphism, def-weil-proper-morphism]. Work in the ordinary unbounded derived categories of constant-ring module sheaves $D(T_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories]. For $T=Y,W$ let $a_T:T\\to\\operatorname{Spec}k$ be the structure morphism, put $\\omega_T=a_T^\\times A$ using the ambient compact-support right adjoint [thm-amb-etale-exceptional-adjoint], and put $D_TK=R\\mathcal Hom_A(K,\\omega_T)$ [def-pur-derived-internal-hom]. Let $\\delta_K:K\\to D_TD_TK$ be the transpose of evaluation [lem-weil-duality-pairing], with the usual derived tensor [def-kun-derived-tensor].\n\nThere is a canonical natural isomorphism $\\theta:j^*\\omega_Y\\xrightarrow{\\sim}\\omega_W$. Together with slice restriction of derived internal Hom it induces $\\alpha_K:j^*D_YK\\xrightarrow{\\sim}D_W(j^*K)$. For every $K\\in D(Y_{\\mathrm{et}},A)$,\n$$\\alpha_{D_YK}\\circ j^*\\delta_K=D_W(\\alpha_K)\\circ\\delta_{j^*K}.$$\nThus the isomorphism $(D_W\\alpha_K)^{-1}\\circ\\alpha_{D_YK}:j^*D_YD_YK\\xrightarrow{\\sim}D_WD_Wj^*K$ carries $j^*\\delta_K$ to $\\delta_{j^*K}$. In particular $\\delta_K$ is an isomorphism if and only if its corresponding double-dual maps on a jointly surjective etale covering by separated finite-type $k$-schemes are isomorphisms.\n\nThe restriction calculation also holds on the small pro-etale sites with constant finite coefficients [def-weil-pbc-proetale-site]: more generally, for any $\\Omega_Y\\in D(Y_{\\mathrm{proet}},A)$ set $\\Omega_W=j^*\\Omega_Y$, $D_T^\\Omega=R\\mathcal Hom_A(-,\\Omega_T)$ and let $\\delta^\\Omega$ be the evaluation transpose. Slice restriction gives the same displayed identity with $D^\\Omega$ and $\\delta^\\Omega$ [lem-weil-duality-pairing, def-weil-pbc-ringed-derived-restriction]. Consequently it applies to a finite pro-etale realization with its specified compatible dualizing objects. This clause concerns ordinary constant-ring module categories; it does not assert an unconditional ambient pro-etale exceptional adjoint or identify them with condensed coefficient categories.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
   "place": "node lem-weil-delta-restriction, order 2124"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-derived-internal-hom",
+  "lem-weil-duality-pairing",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
  "proof": [
   {
-   "text": "Etale locality of the ambient adjoint,\n[lem-amb-etale-adjoint-locality], identifies\n$j^*\\omega_Y$ with $\\omega_W$. Restriction to the etale\nslice commutes with derived internal Hom. Indeed, its left adjoint\nis exact etale extension by zero, so restriction preserves injective\nresolutions, and ordinary internal Hom restricts to the internal Hom\non that slice. Applying exact monoidal restriction to the evaluation\nof [lem-weil-duality-pairing] therefore gives evaluation for\n$j^*K$. Transpose with the tensor–Hom adjunction of\n[def-weil-derived-pullback-tensor-hom]; this gives the claimed\nidentity of double-dual maps. An isomorphism is detected by a covering\nfamily. The proof is a slice-site argument and also applies on the\npro-etale realization; it does not apply to ordinary restriction\nalong a closed immersion.",
+   "text": "The affine scheme $\\operatorname{Spec}k$ is Noetherian: the only ideals of a field are zero and the unit ideal. Its underlying space is a singleton, so it and every intersection of its affine opens are quasi-compact; the base of Nagata is therefore quasi-compact and quasi-separated. By [lem-weil-pbc-finite-type-over-noetherian], $Y$ and $W$ are Noetherian. Nagata [thm-nagata-compactification] compactifies $a_Y$ and $a_W$; their proper compactification spaces are finite type over $k$ and hence Noetherian by the same finite-type lemma. Thus their ambient right adjoints exist by [thm-amb-etale-exceptional-adjoint]. The morphism $j$ is separated by [lem-weil-pbc-separated-cancellation], since $a_W=a_Yj$ is separated. It is locally finite type because etale includes unramifiedness [def-weil-unramified-morphism], whose definition includes local finite type; it is quasi-compact because inverse images of affine opens of $Y$ are open subschemes of the Noetherian scheme $W$, hence quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The compact-support assertion of [lem-amb-etale-adjoint-locality], applied to $f=a_Y$, $u=j$, and the constant input $A$ on $\\operatorname{Spec}k$, now gives the natural isomorphism $\\theta:j^*\\omega_Y\\cong\\omega_W$. This use is only on ordinary etale categories and only over the finite ring $A$.",
    "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "lem-amb-etale-adjoint-locality",
-    "lem-weil-duality-pairing",
-    "def-weil-derived-pullback-tensor-hom"
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
+    "place": "Proof, opening sentence: etale locality identifies the dualizing objects"
+   }
+  },
+  {
+   "text": "The node [lem-weil-pbc-etale-site-localization-open] applies to an arbitrary etale object $W\\to Y$, despite its title containing the word open: its statement identifies $Y_{\\mathrm{et}}/W$ with $W_{\\mathrm{et}}$ and their covering families. Under this identification the inverse-image functor is restriction by [lem-weil-pbc-etale-inverse-image-restriction]. This abelian-sheaf identification is $A$-linear: naturality for each multiplication-by-$a$, $a\\in A$, gives linearity on constant sections; general sections of the constant ring are locally constant sections, so the sheaf axiom gives linearity everywhere. The restricted constant ring is $A_W$ by the same local description. Apply [lem-pur-site-restriction-module-adjunction-exact] to obtain exact module restriction $r=j^*$ and its exact left adjoint, slice extension by zero. Derived restriction is its termwise descent [def-weil-pbc-ringed-derived-restriction]. No ordinary inverse image along a closed immersion is being substituted for a slice restriction.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
+    "place": "Proof, restriction to the etale slice and exact extension by zero"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-internal-hom-exact-restriction] on the small skeleton of $(Y_{\\mathrm{et}},A_Y)$ with $L=K$, $M=\\omega_Y$. It gives $rR\\mathcal Hom_A(K,\\omega_Y)\\cong R\\mathcal Hom_A(rK,r\\omega_Y)$ for every, possibly unbounded, $K$. Postcomposition with $\\theta$ gives $\\alpha_K$. This node imposes no perfectness, finite-generation, or boundedness assumption. Its naturality supplies both the comparison for $D_YK$ and the contravariant map $D_W(\\alpha_K)$ in the displayed equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
+    "place": "Proof, restriction commutes with derived internal Hom"
+   }
+  },
+  {
+   "text": "Here is the compatibility with evaluation, including its derived models. Choose a K-flat flat-term representative $P$ of $K$ by [lem-pc-kflat-resolution] and a K-injective representative $I$ of $\\omega_Y$ by [prop-pur-kinjective-resolutions-exist]. Then $H=\\mathcal Hom^\\bullet(P,I)$ represents $D_YK$ [def-pur-derived-internal-hom]. Restriction to the localization is a ringed-topos inverse image with unchanged ring sheaf; [lem-weil-pbc-ringed-pullback-preserves-kflat] therefore makes $rP$ K-flat with flat terms. Also $rI$ is K-injective by [lem-pur-kinjective-restrict-localized]. On a test object over $W$, restriction of the Hom complex is literally $\\mathcal Hom^\\bullet(rP,rI)$: the same families of local module maps and the same differential $df=d_If-(-1)^{|f|}fd_P$ occur [def-pur-hom-complex]. Tensor restriction identifies pure tensors of sections and their sheafifications; the coverings on the slice over each test object are unchanged [def-pur-localized-ringed-site, def-pur-sheaf-tensor-product]. It also commutes with direct-sum totalization, since sheaf direct sums are sheafifications of presheaf sums. Thus $r(H\\otimes P)=(rH)\\otimes(rP)$ with the same total differential [def-pc-tensor-complex-sheaves]. These are models for the derived tensors because $P,rP$ are K-flat [def-pc-kflat-complex]. Both evaluations on a homogeneous local tensor $h\\otimes p$ are $h(p)$. After postcomposition with $rI\\simeq r\\omega_Y\\xrightarrow{\\theta}\\omega_W$, this proves $\\theta\\circ r(\\mathrm{ev}_K)=\\mathrm{ev}_{rK}\\circ(\\alpha_K\\otimes1)$ under the tensor comparison. The formula holds for all local tensors, which generate the tensor presheaf and its sheafification.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-hom-complex",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
+    "place": "Proof, apply exact monoidal restriction to evaluation; K-flat and K-injective justification made explicit"
+   }
+  },
+  {
+   "text": "Take the transpose defining $\\delta$ in [lem-weil-duality-pairing]. On the models of step 4 it is the map $P\\to\\mathcal Hom^\\bullet(H,I)$ sending a degree-$a$ section $p$ to the degree-$a$ map $h\\mapsto(-1)^{ab}h(p)$ for $h$ of degree $b$; the sign is the tensor symmetry interchanging $p$ and $h$ [def-kun-derived-tensor]. The differential formula [def-pur-hom-complex] verifies this is a chain map: on degree-$b$ $h$, the coefficient of $d_Ih(p)$ cancels and the remaining term is $(-1)^{(a+1)b}h(d_Pp)$, which is $\\delta(d_Pp)(h)$. Restriction preserves the degrees, the sign, and the application $h(p)$. Hence it preserves this transpose, not merely its source and target. Postcomposing the dualizing object by $\\theta$ means that on the double dual the comparison is $(D_W\\alpha_K)^{-1}\\alpha_{D_YK}$, because $D_W$ is contravariant. Equivalently the two maps into $D_W(rD_YK)$ are exactly $\\alpha_{D_YK}\\,r\\delta_K$ and $D_W(\\alpha_K)\\,\\delta_{rK}$, and they have the same transpose under the tensor-Hom adjunction. More explicitly, let $\\sigma:rK\\otimes^L rD_YK\\to rD_YK\\otimes^L rK$ be tensor symmetry. Compatibility with evaluation from step 4, applied to $D_YK$, and the defining transpose of $\\delta_K$ show that the transpose of $\\alpha_{D_YK}\\,r\\delta_K$ is $\\theta\\,r(\\mathrm{ev}_K)\\,\\sigma$. Naturality of transposition in the Hom argument shows that the transpose of $D_W(\\alpha_K)\\,\\delta_{rK}$ is $\\mathrm{ev}_{rK}(\\alpha_K\\otimes1)\\sigma$. Step 4, now applied to $K$, equates these two maps. Injectivity of the adjunction bijection proves the displayed identity for arbitrary $\\theta$ in the derived category, independently of any choice of chain representative for $\\theta$. The signed formula above also shows directly that restriction preserves the symmetry used here.",
+   "uses": [
+    "lem-weil-duality-pairing",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
+    "place": "Proof, transpose with tensor-Hom adjunction: explicit signed double-dual formula"
+   }
+  },
+  {
+   "text": "Let $(j_i:W_i\\to Y)$ be the stated etale covering. Exactness of each $j_i^*$, supplied by step 2, makes $\\mathcal H^n(j_i^*\\varphi)=j_i^*\\mathcal H^n(\\varphi)$: kernels, images, and quotients in the defining cohomology complex are preserved. By [lem-weil-pbc-etale-cover-detects-iso] the underlying abelian-sheaf map $\\mathcal H^n(\\varphi)$ is an isomorphism precisely when all of its restrictions are. The inverse of an invertible $A$-linear map is $A$-linear (apply the map to $a\\varphi^{-1}(x)$ and $\\varphi^{-1}(ax)$), so forgetting the module action reflects isomorphisms. The criterion [lem-weil-pbc-unbounded-derived-iso-cohomology], in every integer degree, proves the same equivalence for any derived module morphism $\\varphi$. Apply it to $\\delta_K$ and then use step 5. This proves the locality assertion without assuming $K$ bounded or using only the bounded-below criterion. For the empty covering, $Y$ is empty and the module category is zero, so the assertion remains valid.",
+   "uses": [
+    "lem-weil-pbc-etale-cover-detects-iso",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
+    "place": "Proof, an isomorphism is detected by a covering family"
+   }
+  },
+  {
+   "text": "For the pro-etale calculation use [lem-weil-proetale-weakly-etale-localization]: it identifies the site over an object $W$ with $Y_{\\mathrm{proet}}/W$, including the topology and the constant coefficient rings. An etale $j$ is weakly etale: it is flat by [def-weil-etale-morphism], its diagonal is an open immersion by [def-weil-unramified-morphism], and an open immersion is flat because its local ring maps are isomorphisms [def-weil-open-immersion, def-weil-flat-morphism]. Thus $j$ is such an object [def-weil-pbc-proetale-site]. For the specified $\\Omega_Y$ take $\\Omega_W=r\\Omega_Y$, so the dualizing comparison is the identity. Exact slice restriction and exact extension by zero are again [lem-pur-site-restriction-module-adjunction-exact]; derived internal Hom restriction is again [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Specialize the arbitrary-ringed-slice calculations of steps 4 and 5 to $\\mathcal C=Y_{\\mathrm{proet}}$, $\\mathcal O=A_Y$, $U=W$ and the coefficient complex $\\Omega_Y$. Choose $P$ K-flat with flat terms and $I$ K-injective representing $K$ and $\\Omega_Y$; $rP$ is K-flat and $rI$ K-injective by the cited results in step 4. On an object $V\\to W$, both Hom complexes consist of the identical local families of maps on $Y_{\\mathrm{proet}}/V$, and both evaluation maps send $h\\otimes p$ to $h(p)$. Thus the internal-Hom comparison $\\alpha_K^\\Omega$ satisfies $r(\\mathrm{ev}_K)=\\mathrm{ev}_{rK}(\\alpha_K^\\Omega\\otimes1)$. The two transposes in step 5 are consequently this one map composed with $\\sigma$, proving the displayed identity with $D^\\Omega$ and $\\delta^\\Omega$. For a specified isomorphism $\\theta:r\\Omega_Y\\cong\\Omega_W$, postcompose the first evaluation by $\\theta$ and the Hom comparison by $R\\mathcal Hom(rK,\\theta)$; both transposes become $\\theta\\,r(\\mathrm{ev}_K)\\sigma$. This proves the restriction calculation for any compatible finite pro-etale realization; it does not use the etale compact-support locality theorem on a pro-etale ambient category.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "def-weil-pbc-proetale-site",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
+    "place": "Proof, last two sentences: the same slice calculation on the pro-etale realization, not closed restriction"
+   }
   }
  ],
  "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-unramified-morphism",
   "lem-amb-etale-adjoint-locality",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-site-restriction-module-adjunction-exact",
   "lem-weil-duality-pairing",
-  "def-weil-derived-pullback-tensor-hom"
+  "lem-weil-pbc-etale-cover-detects-iso",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-pur-kinjective-resolutions-exist",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
-  "place": "## Proof"
+  "place": "Proof, all sentences; expanded using the cited ringed-site sources (local cache paths and exact labels in the second-reading report)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale restriction commutes with derived internal Hom and the canonical Verdier biduality evaluation morphism",
+   "results": "8 hits; LightCondensed.ihomPoints_symm_comp, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_apply, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.ev_naturality, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, LightCondensed.ihomPoints",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state etale slice restriction of the derived evaluation/double-dual morphism; ordinary internal-Hom definitions or unrelated duals do not specialize to this theorem in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Functor",
+   "results": "12 hits; CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom, CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHom_obj, CategoryTheory.MonoidalClosed.internalHom_map, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.cartesianClosedFunctorToTypes",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state etale slice restriction of the derived evaluation/double-dual morphism; ordinary internal-Hom definitions or unrelated duals do not specialize to this theorem in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|derivedHom.*[Rr]estrict|[Rr]estrict.*derivedHom",
+   "results": "16 hits; Mathlib/MeasureTheory/Function/Holder.lean, Mathlib/MeasureTheory/Function/Holder.lean, Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state etale slice restriction of the derived evaluation/double-dual morphism; ordinary internal-Hom definitions or unrelated duals do not specialize to this theorem in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an etale slice preserves the derived internal Hom and double dual evaluation map",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed site localization restriction preserves evaluation and the morphism from an object to its double internal Hom dual",
+   "results": "8 hits; PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply, ModuleCat.Tilde.openToLocalization, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.res_apply, TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf_app",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state etale slice restriction of the derived evaluation/double-dual morphism; ordinary internal-Hom definitions or unrelated duals do not specialize to this theorem in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.internalHom",
+   "results": "12 hits; CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom, CategoryTheory.MonoidalClosed.internalHom_obj, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.internalHom_map, CategoryTheory.MonoidalCategory.Arrow.PullbackHom.isTerminalIso_hom_left, CategoryTheory.MonoidalCategory.Arrow.PullbackHom.isTerminalIso_inv_left",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state etale slice restriction of the derived evaluation/double-dual morphism; ordinary internal-Hom definitions or unrelated duals do not specialize to this theorem in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed symmetric monoidal functor preserves the canonical morphism to the double internal dual if its internal Hom comparison is an isomorphism",
+   "results": {
+    "t": "2026-10-15T23:15:09Z",
+    "tool": "leanfinder",
+    "query": "A closed symmetric monoidal functor preserves the canonical morphism to the double internal dual if its internal Hom comparison is an isomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.coev_expComparison",
+     "CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso",
+     "CategoryTheory.MonoidalClosedFunctor.comparison_iso",
+     "CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso",
+     "CategoryTheory.expComparison",
+     "CategoryTheory.frobeniusMorphism_mate",
+     "CategoryTheory.expComparison_ev",
+     "CategoryTheory.uncurry_expComparison"
+    ],
+    "digest": "775b3c92b09a4dc9"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: the only relevant hit, CategoryTheory.expComparison_ev, requires CartesianMonoidalCategory (Functor.lean:46-47,85-87); derived tensor is not the cartesian product, and this declaration does not state slice restriction or double-dual compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "biduality.*natur|doubleDual.*[Ff]unctor|[Ff]unctor.*doubleDual|expComparison_ev",
+   "results": {
+    "t": "2026-10-15T23:15:18Z",
+    "tool": "grep",
+    "query": "biduality.*natur|doubleDual.*[Ff]unctor|[Ff]unctor.*doubleDual|expComparison_ev",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean"
+    ],
+    "digest": "87c71fa2e2a68b6b"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: the only relevant hit, CategoryTheory.expComparison_ev, requires CartesianMonoidalCategory (Functor.lean:46-47,85-87); derived tensor is not the cartesian product, and this declaration does not state slice restriction or double-dual compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bidual\"",
+   "results": {
+    "t": "2026-10-15T23:15:47Z",
+    "tool": "loogle",
+    "query": "\"bidual\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: the only relevant hit, CategoryTheory.expComparison_ev, requires CartesianMonoidalCategory (Functor.lean:46-47,85-87); derived tensor is not the cartesian product, and this declaration does not state slice restriction or double-dual compatibility"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +306,89 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-delta-restriction",
+  "worker": "stage1",
+  "summary": "Expanded the imported paragraph into seven steps using existing DAG results only. Specified the exact double-dual comparison, proved compatibility on K-flat/K-injective complex models including the Koszul sign, and justified unbounded etale locality. Corrected the unscoped pro-etale sentence by stating the calculation for a specified compatible dualizing object, without asserting an ambient pro-etale adjoint or a comparison with condensed coefficients. No new nodes. Second reading checked the cached blueprint and Stacks TeX, made the Nagata-base and local-finite-type checks explicit, and proved the comparison identity by equality of its two transposes, including arbitrary derived dualizing comparisons.",
+  "blueprint": "Opening sentence realized in step 1; etale slice and derived Hom in steps 2-3; evaluation and its transpose in steps 4-5; covering conservativity in step 6; finite pro-etale slice calculation and exclusion of closed restriction in steps 2 and 7.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic Etale localization of the ambient adjoint used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic Restriction to a localized ringed site preserves K-injectivity used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic Restriction and extension by zero for modules on a localized site used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cover-detects-iso",
+    "why": "Generic A morphism of etale sheaves is an isomorphism iff it is one on an etale covering used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic Inverse image along an etale morphism is restriction used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic The localized small etale site at an etale open is the small etale site of the open used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic Ringed pullback kflat used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic The small pro-etale site of a weakly etale X-scheme is the localization of X_proet used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic The ordinary ambient exceptional adjoint used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic Nagata compactification, [stacks-project] used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-etale-adjoint-locality",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-etale-cover-detects-iso",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-pur-kinjective-resolutions-exist",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-7aea8575a",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-7aea8575a (reviewer sub-agent of L); spot-checked: Reviewed item, unit route, complete proof, every cited DAG statement, and cited literature locations. Hypotheses, base-change morphism, coefficient categories, derived Hom restriction, evaluation transpose, pro-etale scope, locality criterion, edge cases, searches, and DAG acyclicity all check out. No new nodes or repairs."
+ }
 }
