@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "fin2-lem-lisse-trivialized-finite-etale",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite etale trivialization of a lisse sheaf",
@@ -12,35 +12,171 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/fin2-lem-lisse-trivialized-finite-etale.md",
   "place": "node fin2-lem-lisse-trivialized-finite-etale, order 1904"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-connected-scheme"
+ ],
  "proof": [
   {
-   "text": "A Noetherian scheme has finitely many connected components,\nwhich are open and closed. We may therefore work on a\nconnected component of $X$. Let $M$ be a geometric\nfibre of $L$, finite by\n[def-weil-pbc-constructible-complexes]. Apply\n[thm-galois-lc-etale], [thm-galois-fundamental] to its\nunderlying finite locally constant set sheaf and retain\nthe addition and scalar-multiplication maps. These maps\nare preserved by the equivalence, so the resulting action\non $M$ is $\\Lambda$-linear. Its kernel in the\nprofinite fundamental group is open: it is the intersection\nof the stabilizers of the finitely many elements of $M$.\nThe finite cover corresponding to this kernel exists by\n[cor-galois-open-subgroups]. On that cover the action\nis trivial, so the pulled-back module sheaf is\n$\\underline M$. This also shows surjectivity of the cover;\nits fibres are the nonempty finite coset set.\nTake the disjoint union of the covers on the finitely many\nconnected components. This is finite etale in the sense of\n[def-weil-pbc-scheme-conventions], hence of finite type\nover the ground field. No freeness assertion about $M$\nis used; for instance $\\mathbf Z/\\ell$ is a finite\n$\\mathbf Z/\\ell^2$-module that is not free.",
+   "text": "The field $k$ is Noetherian (its only ideals are $0$ and $k$), and $\\operatorname{Spec}k$ is quasi-compact and locally Noetherian. Thus [lem-weil-pbc-finite-type-over-noetherian], applied to the structure morphism $X\\to\\operatorname{Spec}k$, makes $X$ Noetherian. By [lem-sc-noetherian-closed-subset-finite-components] with $E=X$, write $X=Z_1\\cup\\cdots\\cup Z_r$ with irreducible closed $Z_i$. Each $Z_i$ is connected, so lies in one connected component. Every connected component is therefore a union of some of these finitely many $Z_i$ and is closed. There are finitely many connected components, and the complement of each is a finite union of closed components, so each is open. We work on the resulting nonempty connected open-and-closed subschemes $X_i$; if $X$ is empty, the identity of the empty scheme already satisfies the conclusion.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-closed-subset-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; Properties Tag 0BA8, lemma-Noetherian-irreducible-components; first two sentences of the blueprint proof"
+   }
+  },
+  {
+   "text": "Fix a connected component $X_0$ and a geometric point $\\bar x\\to X_0$. The finite locally constant module hypothesis means that the underlying sheaf of sets of $L|_{X_0}$ is a finite locally constant set sheaf, with finite fibre $M=L_{\\bar x}$; this is the lisse/finite-stalk clause of [def-weil-pbc-constructible-complexes]. By [thm-galois-lc-etale] and [thm-galois-fundamental], finite locally constant sheaves are identified with finite sets carrying a continuous right action of $G=\\pi_1(X_0,\\bar x)$. Under this identification, the addition, zero, and scalar-multiplication maps of the module sheaf are maps of finite locally constant sheaves, so the induced $G$-action on $M$ is $\\Lambda$-linear. Explicitly, preservation of finite products identifies the fibre of $L\\times L$ with $M\\times M$, and equivariance of addition and scalar multiplication gives $(m+n)g=mg+ng$ and $(am)g=a(mg)$ for $g\\in G$, $a\\in\\Lambda$. Equivariance of zero gives $0g=0$. Thus every $g$ acts by a module automorphism.",
    "uses": [
     "def-weil-pbc-constructible-complexes",
     "thm-galois-lc-etale",
-    "thm-galois-fundamental",
-    "cor-galois-open-subgroups",
-    "def-weil-pbc-scheme-conventions"
+    "thm-galois-fundamental"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/fin2-lem-lisse-trivialized-finite-etale.md",
+    "place": "node fin2-lem-lisse-trivialized-finite-etale, order 1904"
+   }
+  },
+  {
+   "text": "Let $H=\\{g\\in G:mg=m\\text{ for every }m\\in M\\}$ be the kernel of the action. It is a subgroup: the right-action identities show that elements fixing every $m$ are closed under products and inverses. For each $m\\in M$, continuity of the finite discrete action from [thm-galois-fundamental] makes $\\{g:mg=m\\}$ open (it is the inverse image of $\\{m\\}$ under $g\\mapsto mg$). The finite intersection of these stabilizers is $H$, so $H$ is open.",
+   "uses": [
+    "thm-galois-fundamental"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/fin2-lem-lisse-trivialized-finite-etale.md",
+    "place": "node fin2-lem-lisse-trivialized-finite-etale, order 1904"
+   }
+  },
+  {
+   "text": "By the pointed clause of [cor-galois-open-subgroups], $H$ corresponds to a nonempty connected finite etale morphism $p_0:P_0\\to X_0$ with a chosen point of its geometric fibre whose stabilizer is exactly $H$. By the finite-etale base-change clause of [thm-galois-fundamental], $(p_0)_*$ identifies $\\pi_1(P_0)$ with this stabilizer. Base-change compatibility in [thm-galois-lc-etale] and [thm-galois-fundamental] consequently identifies $p_0^*L$ with the restricted $H$-action on $M$. This action is trivial by step 3. The constant set sheaf $\\underline M$ [def-weil-pbc-constant-sheaf] is the finite coproduct, indexed by $M$, of the terminal sheaf: this follows by sheafifying the corresponding coproduct of constant singleton presheaves. Since the equivalence preserves finite colimits and terminal objects, its action on the fibre of $\\underline M$ is the trivial action on $M$. Full faithfulness therefore gives a unique isomorphism of underlying set sheaves inducing the identity on $M$. Under this isomorphism, addition, zero and each scalar operation agree with the constant operations: their fibre maps are respectively $(m,n)\\mapsto m+n$, $0$, and $m\\mapsto am$, and faithfulness, with preservation of products, makes the corresponding sheaf maps equal. Hence $p_0^*L\\cong\\underline M$ as module sheaves, without assuming that $M$ is free.",
+   "uses": [
+    "cor-galois-open-subgroups",
+    "thm-galois-fundamental",
+    "thm-galois-lc-etale",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/fin2-lem-lisse-trivialized-finite-etale.md",
+    "place": "node fin2-lem-lisse-trivialized-finite-etale, order 1904"
+   }
+  },
+  {
+   "text": "The degree clause of [cor-galois-open-subgroups] says that $p_0$ has constant finite locally free degree $d=[G:H]\\geq1$. By [def-pc-finite-locally-free], for every point $y\\in X_0$ the global-section algebra of the fibre has dimension $d$ over $\\kappa(y)$. The empty scheme has the zero global-section algebra, of dimension zero, so this fibre cannot be empty. Thus every $y$ has a preimage and $p_0$ is surjective. Form $P=\\coprod_iP_i$ using [lem-weil-pbc-scheme-coproduct-family], and define $p:P\\to X$ by the maps $P_i\\to X_i\\hookrightarrow X$. Its restriction over the open-and-closed $X_i$ is precisely $p_i$, since the coproduct summands have disjoint images. Hence $p$ is finite by [lem-weil-pbc-finite-local-on-target]. For etaleness, use the affine-local characterization included in [def-weil-etale-morphism]: every affine source/target chart witnessing etaleness of $P_i\\to X_i$ is also a chart in the open subschemes $P_i\\subset P$ and $X_i\\subset X$; these charts cover $P$, so $p$ is etale. It is surjective because all the $p_i$ are surjective. Each $P_i$ is connected and open and closed, so these are the connected components of $P$, and step 4 gives the required constant module sheaf on each. If $X$ is connected there is one $X_i$, so the same finite module $M$ serves all of $P$.",
+   "uses": [
+    "cor-galois-open-subgroups",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-local-on-target",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/fin2-lem-lisse-trivialized-finite-etale.md",
+    "place": "node fin2-lem-lisse-trivialized-finite-etale, order 1904"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constructible-complexes",
-  "thm-galois-lc-etale",
-  "thm-galois-fundamental",
   "cor-galois-open-subgroups",
-  "def-weil-pbc-scheme-conventions"
+  "def-pc-finite-locally-free",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-constructible-complexes",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "thm-galois-fundamental",
+  "thm-galois-lc-etale"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/fin2-lem-lisse-trivialized-finite-etale.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite locally constant module sheaf on a finite type scheme is trivialized by a finite etale surjective cover",
+   "results": "CompHausLike.LocallyConstantModule.functor (Mathlib/Condensed/Discrete/Module); SheafOfModules.IsFiniteType.exists_localGeneratorsData (Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators); no scheme finite-etale trivialization declaration",
+   "date": "2026-10-16",
+   "verdict": "no match for the scheme/sheaf classification; unrelated condensed and generic sheaf finite-type results"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteEtale, IsLocallyConstantSheaf, finite module sheaf, open subgroup fundamental group",
+   "results": "0 hits; parser error: unexpected end of input, expected `in`",
+   "date": "2026-10-16",
+   "verdict": "unavailable/parser error"
+  },
+  {
+   "tool": "grep",
+   "query": "finite locally constant.*finite etale|connected components.*Noetherian (Mathlib)",
+   "results": "0 hits returned with subdirectory Mathlib, which resolves to the nonexistent Mathlib/Mathlib; not a valid source search.",
+   "date": "2026-10-16",
+   "verdict": "unavailable/invalid source subdirectory; superseded by the second reader global grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally constant module sheaf is trivialized by a finite etale surjective cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- IsLocallyConstantSheaf F → ∃ p, Finite p ∧ Etale p",
+   "results": "0 hits; unknown identifier `IsLocallyConstantSheaf`",
+   "date": "2026-10-16",
+   "verdict": "unavailable/type query contains an unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale cover trivializes a finite locally constant sheaf of modules",
+   "results": "CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstantModule.functor_obj_val; Condensed.finFree; LightCondMod.LocallyConstant.functorIsoDiscreteAux₁/₂; no scheme finite-etale result",
+   "date": "2026-10-16",
+   "verdict": "no match for the scheme/sheaf classification"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteEtale.*IsLocallyConstantSheaf|finite.*locally constant.*sheaf (Mathlib/AlgebraicGeometry)",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant sheaf with finite fibers has finite monodromy and becomes a constant sheaf after pullback along a covering scheme",
+   "results": "Eight hits: generic Sheaf.isConstant_of_forget, Sheaf.isConstant_iff_forget, and condensed locally constant functors; no finite-etale trivializing cover construction.",
+   "date": "2026-10-16",
+   "verdict": "no match for finite etale trivialization"
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|trivializ.*sheaf|sheaf.*trivializ",
+   "results": "Six hits: Algebra/Torsor/Defs and Topology/Homotopy/Lifting, topological monodromy only.",
+   "date": "2026-10-16",
+   "verdict": "no match for finite etale trivialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstant\", \"Sheaf\"",
+   "results": "Twelve hits in CategoryTheory/Sites/ConstantSheaf: generic definitions and constant-sheaf criteria; no scheme finite-etale cover existence theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for finite etale trivialization"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +202,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "fin2-lem-lisse-trivialized-finite-etale",
+  "worker": "stage1",
+  "summary": "Second reading repaired the scheme-level Noetherian input and the final assembly: existing target-local finiteness, coproduct existence and the affine-local etale definition justify the union, and positive constant fibre degree proves surjectivity explicitly. Expanded the linear-action and constant-module identifications and avoided a right-action homomorphism convention error. No new nodes; statement unchanged.",
+  "blueprint": "The sole blueprint proof paragraph: finite connected components in step 1; fibre and linear Galois action in step 2; open action kernel in step 3; corresponding pointed cover and constant module in step 4; nonempty fibres, coproduct, finite etale locality and common fibre in step 5."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q41-a0cd0a5a9",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-a0cd0a5a9 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, source passages and unit/chapter route in full. All five steps are sound, including linear monodromy, pointed-cover pullback, module constancy and surjectivity. No new nodes, cycles, duplicate obligations or repairs. Target coefficient categories remain distinct. Detailed checks are in review.md."
+ }
 }
