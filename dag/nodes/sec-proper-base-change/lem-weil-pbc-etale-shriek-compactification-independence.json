@@ -389,5 +389,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b65a808a6",
+  "group": "NC",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, six dependencies, source, exact declarations, universes, edge cases, report sections, and maintainer gates. All five existing declarations passed an independent scompile.py probe. No corrections required; repositories and branch head were unchanged."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence",
+  "declaration": "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso_eq_refinementIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso_eq_refinementIso",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso_refl",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso_trans"
+  ],
+  "statement": "theorem rightDerivedLowerShriekOfCompactificationPlusIso_eq_refinementIso\n    {c d e : Compactification f} (r : e.Refinement c) (s : e.Refinement d) :\n    rightDerivedLowerShriekOfCompactificationPlusIso Λ c d =\n      rightDerivedLowerShriekOfCompactificationPlusRefinementIso Λ r ≪≫\n        (rightDerivedLowerShriekOfCompactificationPlusRefinementIso Λ s).symm",
+  "branch": "slopmaster2",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Existing declaration family: PlusIso in LowerShriekIndependence constructs the natural isomorphism; LowerShriekCoherence publicly imports it and proves independence for arbitrary common refinements (Iso_eq_refinementIso), identity (Iso_refl), and cocycle (Iso_trans). Parameters are Λ : Type (u + 1), [CommRing Λ], [Finite Λ], {X Y : Scheme.{u}}, {f : X ⟶ Y}, [QuasiCompact f]. This applies to the stated separated finite-type qcqs setting; quasi-compactness of c.i follows from Compactification.quasiCompact_openImmersion. No density or cartesian restriction is imposed on the common refinement. Primary declaration is the arbitrary-refinement independence theorem, defined in the recorded module; the comparison construction is re-exported from LowerShriekIndependence."
  }
 }
