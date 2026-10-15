@@ -53,4 +53,40 @@ theorem openPullbackRestrictionIso_hom_app_eq_square_inv
   have := congrArg Iso.symm he
   exact congrArg Iso.hom this
 
+section
+
+variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
+  HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
+
+attribute [local instance] Functor.additive_of_preserves_binary_products
+attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverModuleAbelian
+
+/-- The canonical restriction/pullback component is the inverse pinned open
+square, transported into the localized site and preceded by its return unit. -/
+theorem perfectOverlapRestrictionBeta_hom_app_square
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (P : X.Opens) (U : Y.Opens)
+    (h : P ≤ g ⁻¹ᵁ U) (M : schemeDerivedCategory Y) :
+    (perfectOverlapRestrictionBeta g U P h).hom.app M =
+      (openSiteReturnIso X P).inv.app ((derivedPullback g).obj M) ≫
+        (overlapSiteInverse P).mapDerivedCategory.map
+          ((singleComplexOpenPullbackSquareIso g U P (g.resLE U P h)
+            (Scheme.Hom.resLE_comp_ι g h)).inv.app M) := by
+  rw [perfectOverlapRestrictionBeta_hom_app,
+    openPullbackRestrictionIso_hom_app_eq_square_inv]
+
+/-- The inverse canonical restriction/pullback component is the forward
+pinned open square, followed by the site return map. -/
+theorem perfectOverlapRestrictionBeta_inv_app_square
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (P : X.Opens) (U : Y.Opens)
+    (h : P ≤ g ⁻¹ᵁ U) (M : schemeDerivedCategory Y) :
+    (perfectOverlapRestrictionBeta g U P h).inv.app M =
+      (overlapSiteInverse P).mapDerivedCategory.map
+        ((singleComplexOpenPullbackSquareIso g U P (g.resLE U P h)
+          (Scheme.Hom.resLE_comp_ι g h)).hom.app M) ≫
+        (openSiteReturnIso X P).hom.app ((derivedPullback g).obj M) := by
+  rw [perfectOverlapRestrictionBeta_inv_app,
+    openPullbackRestrictionIso_inv_app_eq_square]
+
+end
+
 end AlgebraicGeometry
