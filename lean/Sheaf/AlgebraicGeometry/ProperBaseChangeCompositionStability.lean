@@ -11,6 +11,7 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 
 @[expose] public section
 

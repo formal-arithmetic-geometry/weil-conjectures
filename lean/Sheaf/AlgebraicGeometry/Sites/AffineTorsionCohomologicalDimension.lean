@@ -24,6 +24,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 
 /-!
 # Affine torsion cohomological dimension bound

@@ -15,6 +15,7 @@ import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 
 /-!
 # Low-degree Leray comparison for an open immersion
