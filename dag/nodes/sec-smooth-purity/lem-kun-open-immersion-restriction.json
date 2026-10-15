@@ -3,41 +3,106 @@
  "blueprint": {
   "is": "lem-kun-open-immersion-restriction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Inverse image along an open immersion is a left inverse of direct image",
- "statement": "Let $j:U\\to X$ be an\nopen immersion. Then\n$j^{-1}j_*=\\mathrm{id}$ on $\\Ab(U_{\\Et})$, and for every\n$F\\in D(U_{\\Et})$ the canonical morphism\n$\\RGamma(X_{\\Et},Rj_*F)\\to\\RGamma(U_{\\Et},F)$ of\n[lem-kun-leray-bdd] is an isomorphism (Leray for $j$).",
+ "statement": "Let $j:U\\to X$ be an open immersion of schemes [def-weil-open-immersion]. The counit $j^{-1}j_*\\to\\mathrm{id}$ on $\\Ab(U_{\\Et})$ is a natural isomorphism [def-weil-pbc-inverse-image, def-weil-pbc-direct-image]. For every $F\\in D(U_{\\Et})$ [def-weil-pbc-derived-categories], the canonical Leray morphism\n$$\\RGamma(X_{\\Et},Rj_*F)\\longrightarrow\\RGamma(U_{\\Et},F)$$\nis an isomorphism in $D(\\mathbf Z)$. Here $Rj_*$ is the total right derived direct image computed by K-injective resolutions [prop-weil-pbc-kinjective-resolutions-exist, lem-weil-pbc-kinjective-total-derived], and $\\RGamma$ is the unbounded derived global sections of [def-kun-rgamma-unbounded]. On bounded-below complexes this is the inverse of the isomorphism of [lem-kun-leray-bdd].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-open-immersion-restriction.md",
   "place": "node lem-kun-open-immersion-restriction, order 1699"
  },
  "stmt_deps": [
-  "lem-kun-leray-bdd",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-open-immersion",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-kun-rgamma-unbounded",
+  "lem-kun-leray-bdd"
  ],
  "proof": [
   {
-   "text": "For an etale $V\\to U$, the direct image of\n[def-weil-pbc-direct-image] gives\n$(j_*F)(V)=F(V\\times_XU)=F(V)$, because\n$V\\times_XU=V$ since $V\\to X$ factors through the open $U$; this\nis $j^{-1}j_*=\\mathrm{id}$. The second assertion is\n[lem-kun-leray-bdd] applied to $j$.",
+   "text": "The existing open-immersion fully-faithfulness statement [lem-sc-open-immersion-pushforward-fully-faithful] says that the direct image $j_*:\\Ab(U_{\\Et})\\to\\Ab(X_{\\Et})$ is fully faithful, equivalently that the counit $j^{-1}j_*G\\to G$ is an isomorphism for every abelian sheaf $G$ on $U_{\\Et}$. Thus the counit gives the asserted natural isomorphism $j^{-1}j_*\\cong\\mathrm{id}$.",
    "uses": [
+    "lem-sc-open-immersion-pushforward-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
+    "place": "Lean declaration AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion, lines 94–99"
+   }
+  },
+  {
+   "text": "Choose a complex $C$ representing $F$ and a K-injective resolution $C\\to I$ by [prop-weil-pbc-kinjective-resolutions-exist], taking the coefficient ring to be $\\mathbf Z$. The functor $j^{-1}$ is additive and exact by [prop-weil-pbc-inverse-image-exact], and is left adjoint to $j_*$ by [def-weil-pbc-inverse-image]; $j_*$ is additive by [def-weil-pbc-direct-image]. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with $u=j_*$, $v=j^{-1}$. It follows that $j_*I$ is K-injective on $X_{\\Et}$. No bound on $I$, no quasi-compactness, and no finite cohomological dimension is used.",
+   "uses": [
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-inverse-image",
     "def-weil-pbc-direct-image",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, label lemma-adjoint-preserve-K-injectives; unbounded replacement exists as in the cited resolution node"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-kinjective-total-derived] to termwise $j_*$ followed by localization. An additive termwise functor commutes with shifts and with the cone matrix (its entries are differentials, maps, and their negatives); hence it gives an exact functor on homotopy categories, as required there. The same observation applies to termwise global sections. Thus $Rj_*F$ is represented by $j_*I$, and, since both $I$ and $j_*I$ are K-injective, [def-kun-rgamma-unbounded] computes the two derived-global-sections objects by $\\Gamma(X,j_*I)$ and $\\Gamma(U,I)$. By [def-weil-pbc-global-sections-functor] and [def-weil-pbc-direct-image], in degree $r$ the former is $I^r(X\\times_XU)$. The projection $p:X\\times_XU\\to U$ has inverse $(j,\\mathrm{id}_U)$; both inverse identities follow from the uniqueness clause of [def-pc-fibre-product]. Restriction along $p^{-1}$ therefore gives $I^r(X\\times_XU)\\cong I^r(U)$. Naturality of restriction with respect to the sheaf morphism $d_I^r$ makes these isomorphisms commute with differentials, so they give an isomorphism of complexes $\\Gamma(X,j_*I)\\cong\\Gamma(U,I)$. Its derived class is an isomorphism with the displayed source and target.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-kun-rgamma-unbounded",
+    "def-weil-pbc-global-sections-functor",
+    "def-weil-pbc-direct-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K and 070Y, labels lemma-enough-K-injectives-implies and lemma-K-injective-defined; sectionwise identification follows the blueprint proof and WeilConjectures/SixFunctors/Etale/Derived/GlobalSections.lean:57-65"
+   }
+  },
+  {
+   "text": "For a morphism $F\\to F'$, [lem-weil-pbc-kinjective-hom-derived] gives a unique homotopy class of maps $h:I\\to I'$ between the chosen K-injective representatives. In each degree, the two composites from $I^r(X\\times_XU)$ to $I'^r(U)$ agree because $h^r$ commutes with sheaf restriction. Thus the chain isomorphism of Step 3 is natural. Applying additive $j_*$ and $\\Gamma$ termwise preserves homotopies. A change of K-injective representative is a homotopy equivalence by the same Hom bijection (lift the derived inverse and use injectivity to check the inverse identities), and the preceding restriction square identifies the two comparisons. Hence this is the canonical derived comparison induced by the underived sections identification, independent of resolutions. For $F$ bounded below, choose a bounded-below injective representative as in [lem-weil-pbc-dplus-injective-representative]. Its direct image is bounded below and K-injective by Step 2; [lem-kun-rgamma-unbounded-bounded] identifies the bounded and unbounded global-section computations. The comparison of [lem-kun-leray-bdd] is induced by the same underived sections identification in the opposite direction. Therefore our map is its inverse on that subcategory, while the construction above supplies it for all $F\\in D(U_{\\Et})$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-kun-rgamma-unbounded-bounded",
     "lem-kun-leray-bdd"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, label lemma-K-injective; explicit resolution and morphism comparison extending the blueprint final sentence"
+   }
   }
  ],
  "proof_deps": [
+  "def-kun-rgamma-unbounded",
+  "def-pc-fibre-product",
   "def-weil-pbc-direct-image",
-  "lem-kun-leray-bdd"
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-inverse-image",
+  "lem-kun-leray-bdd",
+  "lem-kun-rgamma-unbounded-bounded",
+  "lem-sc-open-immersion-pushforward-fully-faithful",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-open-immersion-restriction.md",
-  "place": "## Proof"
+  "place": "Proof: first clause unchanged in scope; replace the bounded-below-only final citation by the unbounded K-injective computation (Stacks 08BJ, 070K, 070I)"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -64,5 +129,64 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-open-immersion-restriction",
+  "worker": "stage1",
+  "summary": "Second reading restores the original unbounded quantifier, states the counit as a natural isomorphism, and supplies the unbounded Leray computation with existing nodes only. No new nodes. The first worker incorrectly treated a restricted dependency as a reason to weaken the conclusion.",
+  "blueprint": "The first sentence of the blueprint proof is step 1. Its final sentence is replaced by steps 2-4, deriving unbounded Leray and explicitly identifying its bounded-below restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-open-immersion-pushforward-fully-faithful",
+    "why": "Fully-faithful direct image for an open immersion supplies the counit isomorphism; the unit route has no replacement."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Existence and uniqueness of unbounded K-injective resolutions is used to construct the total derived comparison; the unit route only exposes its bounded-below Leray corollary."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Exactness of inverse image is needed to apply the adjoint-preserves-K-injectives lemma; no unit node supplies this generic categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "The generic right-adjoint preservation theorem makes j_*I K-injective; no open-immersion route node gives this construction."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "The generic total right-derived-functor construction computes unbounded Rj_* on K-injective resolutions; the unit route has only bounded-below derived direct image."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "The K-injective Hom bijection gives naturality and resolution independence of the unbounded comparison; no unit node provides it."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Bounded-below injective representatives are used to identify the unbounded comparison with the existing Leray map on D+; this generic representative lemma is outside the unit route."
+   },
+   {
+    "node": "lem-kun-rgamma-unbounded-bounded",
+    "why": "Agreement of unbounded and bounded-below global sections is needed for the restriction to the existing Leray theorem; it is a generic comparison outside the direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-open-immersion-pushforward-fully-faithful",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-kun-rgamma-unbounded-bounded"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-77640d4ae",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-77640d4ae (reviewer sub-agent of L); spot-checked: Mathematics passes: the unbounded K-injective proof, counit, base-change fibre product, coefficient category Z, source declarations, edge cases, and all cited statements were checked. FIX adds eight missing generic cross-unit tool_uses declarations in fixes/dag/nodes/sec-smooth-purity/lem-kun-open-immersion-restriction.json; the delivery had left split_report.tool_uses empty.; 1 file(s) fixed by the reviewer"
+ }
 }
