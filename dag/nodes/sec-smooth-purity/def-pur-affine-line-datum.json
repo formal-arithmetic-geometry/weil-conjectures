@@ -3,33 +3,195 @@
  "blueprint": {
   "is": "def-pur-affine-line-datum",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The affine-line datum",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\n$A=A_{E,n}$, and let $Y$ be a\nseparated finite-type\n$k$-scheme. Put\n\n$$\n\\mathbf A^1_Y=\\mathbf A^1_{\\mathbf Z}\\times_{\\mathbf Z}Y\n$$\n\nfor the affine line of [def-sbc-affine-space], with projection\n$p:\\mathbf A^1_Y\\to Y$, zero section $s:Y\\to\\mathbf A^1_Y$ (the closed\nimmersion defined by the vanishing of the coordinate), and open complement\n\n$$\nj:\\mathbf G_{m,Y}=\\mathbf A^1_Y\\setminus s(Y)\\longrightarrow\\mathbf A^1_Y.\n$$\n\nLet $t$ denote the global coordinate function on $\\mathbf A^1_Y$, viewed\nas a global unit on $\\mathbf G_{m,Y}$. With\n$N=n\\cdot v_\\ell(\\varpi_E)$ as in [lem-pur-finite-kummer-level]\n(whose hypothesis $e(E/\\Ql)\\mid n$ is assumed from now on), the\nfinite-level twist is\n\n$$\nA(1)_{\\mathbf A^1_Y}\n=\\mu_{\\ell^N,\\mathbf A^1_Y}\\otimes_{\\mathbf Z/\\ell^N}A,\n$$\n\nand the *Kummer class of $t$* is the class\n\n$$\n\\kappa(t)\\in H^1(\\mathbf G_{m,Y},A(1))\n$$\n\nobtained from the Kummer sequence of etale sheaves of units\non $\\mathbf G_{m,Y}$,\n\n$$\n0\\longrightarrow\\mu_{\\ell^N}\\longrightarrow\\mathbf G_m\n\\xrightarrow{\\ \\ell^N\\ }\\mathbf G_m\\longrightarrow0,\n$$\n\nwhose boundary map $\\mathbf G_m(Y)\\cong H^0(\\mathbf G_{m,Y},\\mathbf G_m) \\to H^1(\\mathbf G_{m,Y},\\mu_{\\ell^N})$ is applied to the global unit\n$t\\in\\Gamma(\\mathbf G_{m,Y},\\mathbf G_m)$, followed by the coefficient\nextension $H^1(-,\\mu_{\\ell^N})\\to H^1(-,A(1))$ induced by the canonical\nisomorphism $A(1)\\cong\\mu_{\\ell^N}\\otimes_{\\mathbf Z/\\ell^N}A$ of\n[lem-pur-finite-kummer-level]. (The naive tensor\n$\\mathbf G_m\\otimes_{\\mathbf Z/\\ell^N}A$ of the Kummer sequence is not\ndefined at the level of sheaves: $\\mathbf G_m$ is not a sheaf of\n$\\mathbf Z/\\ell^N$-modules, as it contains elements of order not\ndividing $\\ell^N$; the $A$-coefficient form of the sequence is the\none obtained by extending coefficients on the $\\mu_{\\ell^N}$-term and\ntaking the connecting map, as above.) Equivalently, in *torsor\nform*: the $\\ell^N$-th root of the coordinate defines the finite etale\nscheme\n\n$$\n\\mathcal T_t=\\operatorname{Spec}\\mathcal O_{\\mathbf G_{m,Y}}[T_0]\n\\bigm/\\bigl(T_0^{\\ell^N}-t\\bigr),\n$$\n\nwhose structure map $\\mathcal T_t\\to\\mathbf G_{m,Y}$ is finite etale of\ndegree $\\ell^N$ – the quotient is of finite presentation; $T_0$ is a\nunit (the relation $T_0^{\\ell^N}=t$ with $t$ a unit); and the\nderivative $\\ell^N T_0^{\\ell^N-1}$ is a unit because $\\ell^N$ is\ninvertible in the base field $k$ of [def-pur-conventions]\n($\\ell\\neq p$ there) and $T_0$ is a unit, so the monogenic etale\ncriterion applies – and the multiplication of\n$T_0$ by an $\\ell^N$-th root of unity makes $\\mathcal T_t$ a right\n$\\mu_{\\ell^N,\\mathbf G_{m,Y}}$-torsor; with $A$-coefficients,\n$\\mathcal T_t\\otimes_{\\mathbf Z/\\ell^N}A$ is a right\n$A(1)_{\\mathbf G_{m,Y}}$-torsor, and $\\kappa(t)$ is the class of this\ntorsor in $H^1(\\mathbf G_{m,Y},A(1))$, the two descriptions being related\nby the standard identification of the boundary of the Kummer sequence\nwith the torsor class. On the small pro-etale site,\nthe [def-weil-derived-cohomology-sheaves] cohomology sheaves of\nthe exceptional inverse\nimage along the zero section are written $R^r s^!(-)$, and the\nsupported cohomology of the pair $(s(Y),\\mathbf A^1_Y)$ is that of\n[def-pur-support-cohomology].",
+ "statement": "Fix the finite-field and coefficient datum of [def-pur-conventions], with $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$, $n\\geq1$, and $\\ell\\neq p$. Let $Y$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. Assume $e=e(E/\\mathbf Q_\\ell)\\mid n$ and put $N=n/e=n v_\\ell(\\varpi_E)\\geq1$ and $m=\\ell^N$, as in [lem-pur-finite-kummer-level]. In particular $m$ is invertible on every scheme over $Y$.\n\nThe affine-line datum consists of the following explicitly constructed objects. Set $X=\\mathbf A^1_Y$ with projection $p:X\\to Y$ as in [def-sbc-affine-space], and let $t\\in\\Gamma(X,\\mathcal O_X)$ be its coordinate. The zero section $s:Y\\to X$ is given over each affine open $\\operatorname{Spec}R\\subseteq Y$ by $R[t]\\to R$, $t\\mapsto0$. It is the closed immersion defined by the ideal $(t)$ [def-weil-closed-immersion]. Write $U=\\mathbf G_{m,Y}=X\\setminus s(Y)$ and $j:U\\hookrightarrow X$ for the complementary open immersion [def-weil-open-immersion]; over $\\operatorname{Spec}R\\subseteq Y$ it is $\\operatorname{Spec}R[t,t^{-1}]$. Also write $t$ for its restriction to the global unit $t\\in\\Gamma(U,\\mathcal O_U)^\\times$.\n\nFor $T=X$ or $U$, on the small pro-etale site [def-weil-pbc-proetale-site] use the roots-of-unity sheaf $\\mu_{m,T}$ [def-pur-roots-of-unity-sheaf] and the tensor product of module sheaves [def-pur-sheaf-tensor-product]. Write\n$$\n\\theta_T:A(1)_T\\xrightarrow{\\sim}\\mu_{m,T}\\otimes_{\\mathbf Z/m\\mathbf Z}A\n$$\nfor the canonical identification of the coefficient twist [def-coefficient-twists-detailed] supplied by [lem-pur-finite-kummer-level]. Define the coefficient morphism\n$$\n\\varphi_T:\\mu_{m,T}\\longrightarrow A(1)_T,\\qquad u\\longmapsto\\theta_T^{-1}(u\\otimes1_A).\n$$\nHere the multiplicatively written group $\\mu_{m,T}$ is regarded as a $\\mathbf Z/m\\mathbf Z$-module.\n\nFor the Kummer boundary first work on the small etale site of $U$. On this site $\\mu^{\\mathrm{et}}_{m,U}$ means the kernel of the $m$-th power map on the units sheaf, and define $A(1)^{\\mathrm{et}}_U=\\mu^{\\mathrm{et}}_{m,U}\\otimes_{\\mathbf Z/m\\mathbf Z}A$ and $\\varphi^{\\mathrm{et}}_U(u)=u\\otimes1_A$. Until the final comparison paragraph, abbreviate these etale sheaves by $\\mu_{m,U}$, $A(1)_U$ and $\\varphi_U$. The units sheaf $\\mathbf G_{m,U}$ is $V\\mapsto\\Gamma(V,\\mathcal O_V)^\\times$ [def-sc-gm-torsor]. Use the exact Kummer sequence of [lem-amb-kummer-any-base], with exponent $m$ invertible on $U$,\n$$\n0\\longrightarrow\\mu_{m,U}\\longrightarrow\\mathbf G_{m,U}\n\\xrightarrow{z\\mapsto z^m}\\mathbf G_{m,U}\\longrightarrow0.\n$$\nFor etale cohomology [def-weil-pbc-etale-cohomology] let\n$$\n\\delta_U:\\Gamma(U,\\mathcal O_U)^\\times\n=H^0(U_{\\mathrm{et}},\\mathbf G_{m,U})\\longrightarrow\nH^1(U_{\\mathrm{et}},\\mu_{m,U})\n$$\nbe its connecting map, with the right-derived-global-sections convention of [def-weil-pbc-sites-and-cohomology] and [lem-weil-pbc-right-derived-universal-delta-functor]. Define\n$$\n\\kappa_{\\mathrm{et}}(t)=H^1(\\varphi_U)(\\delta_U(t))\n\\in H^1(U_{\\mathrm{et}},A(1)_U).\n$$\nThus coefficient extension is applied to the roots-of-unity sheaf and its cohomology class; no tensor product of the units sheaf over $\\mathbf Z/m\\mathbf Z$ is used.\n\nHere is the equivalent torsor description, using torsors in [def-sc-gm-torsor] and their canonical classes in [lem-sc-torsor-h1]. Form the relative spectrum [lem-weil-pbc-affine-morphism-relative-spec]\n$$\n\\mathcal T_t=\\underline{\\operatorname{Spec}}_U\n\\bigl(\\mathcal O_U[T_0]/(T_0^m-t)\\bigr).\n$$\nIts etale sheaf of sections consists of the units $r$ with $r^m=t$, with right action $r\\cdot\\zeta=r\\zeta$ of $\\mu_{m,U}$. Since $\\mu_{m,U}$ is abelian, regard this as the left action required by [def-sc-gm-torsor]. This is a finite etale cover of degree $m$: on an affine open $\\operatorname{Spec}R\\subseteq U$, [lem-weil-pbc-monic-quotient-free] supplies the basis $1,T_0,\\ldots,T_0^{m-1}$ of $B=R[T_0]/(T_0^m-t)$, and $T_0^{-1}=t^{-1}T_0^{m-1}$ makes $mT_0^{m-1}$ invertible. Consequently the derivative localization in [lem-weil-pbc-standard-etale-monic-derivative] is $B$ itself. Finite and etale have the meanings of [def-weil-finite-integral-morphism] and [def-weil-etale-morphism]. Local roots exist by exactness of the Kummer sequence, and two roots differ by the unique root of unity $r^{-1}r'$, so this action is a torsor action.\n\nExtend its structure group along $\\varphi_U$ by forming\n$$\n\\mathcal T_{t,A}=\\mathcal T_t\\wedge^{\\mu_{m,U}}A(1)_U\n=\\bigl((\\mathcal T_t\\times A(1)_U)/\\mu_{m,U}\\bigr)^\\#,\n$$\nwhere the orbit presheaf is sheafified [def-weil-pbc-sheafification] and the action on pairs is $(r,a)\\cdot\\zeta=(r\\zeta,a-\\varphi_U(\\zeta))$. This is the contracted product of [def-sc-contracted-product-presentation], an $A(1)_U$-torsor whose class is $\\kappa_{\\mathrm{et}}(t)$ by the coefficient-functoriality statement [lem-sc-etale-torsor-h1-functoriality]. To identify the root-torsor class with $\\delta_U(t)$, use the canonical extension $0\\to\\mu_{m,U}\\to E_{\\mathcal T_t}\\to\\mathbf Z_U\\to0$ specified in [lem-sc-torsor-h1]. Its map to the Kummer sequence sends a local generator $[r]$ to $r$ and sends $a\\in\\mathbf Z_U$ to $t^a$. The relation $[r\\zeta]=[r]+\\zeta$ and the equality $r^m=t$ make both squares commute, with identity on $\\mu_{m,U}$. Naturality of connecting maps in [lem-weil-pbc-right-derived-universal-delta-functor] therefore sends the boundary of $1$ to $\\delta_U(t)$. This specifies the equivalence of the two descriptions without interpreting a torsor as a module tensor product.\n\nIn the chapter's small pro-etale convention, let $\\nu_U:U_{\\mathrm{proet}}\\to U_{\\mathrm{et}}$ be [def-weil-pbc-site-comparison-morphism]. Identify $\\nu_U^{-1}\\mu^{\\mathrm{et}}_{m,U}$ and $\\nu_U^{-1}A(1)^{\\mathrm{et}}_U$ with the pro-etale roots and twist sheaves above. The identical formulas for roots on etale objects give a morphism $\\mu^{\\mathrm{et}}_{m,U}\\to\\nu_{U,*}\\mu_{m,U}$ and hence, by the comparison adjunction, a canonical morphism $\\rho:\\nu_U^{-1}\\mu^{\\mathrm{et}}_{m,U}\\to\\mu_{m,U}$. To check it is an isomorphism, choose an etale covering $\\{U_i\\to U\\}$ and pro-etale module trivializations from [lem-pur-twist-sheaf-locally-free](1). Write $\\zeta_i$ for the root corresponding to $1\\in\\mathbf Z/m\\mathbf Z$; the trivialization sends a locally constant exponent $a$ to $\\zeta_i^a$. For every etale $V\\to U_i$, degree-zero comparison in [lem-cbc-abelian-etale-proetale-cohomology-comparison], together with [lem-sf-comparison-pullback-exact](1), identifies the etale and pro-etale sections of the constant sheaf $\\mathbf Z/m\\mathbf Z$ on $V$. The two roots sheaves have identical sections $\\{u\\in\\Gamma(V,\\mathcal O_V)^\\times:u^m=1\\}$ on such $V$. Thus $a\\mapsto\\zeta_i^a$ also trivializes the etale roots sheaf. Pulling this trivialization back, using preservation of constant finite coefficients, identifies $\\rho$ over $U_i$ with the identity of the constant $\\mathbf Z/m\\mathbf Z$-module. It is consequently an isomorphism. On overlaps write $\\zeta_j=\\zeta_i^{a_{ij}}$ for the uniquely determined locally constant $a_{ij}\\in(\\mathbf Z/m\\mathbf Z)^\\times$. Coordinates change by $a\\mapsto a_{ij}a$ on the roots and by $b\\mapsto a_{ij}b$ on their tensor products with $A$. The maps $\\zeta_i^a\\otimes b\\mapsto ab$ identify the etale and pro-etale tensor twists on each $U_i$; on overlaps both have the same transition $a\\mapsto a_{ij}a$ on the root coordinate (and hence the same induced transition on the tensor product), so these local identifications glue. Compose the resulting identification of $\\nu_U^{-1}A(1)^{\\mathrm{et}}_U$ with the pro-etale tensor twist with $\\theta_U^{-1}$. Since $u=\\zeta_i^a$ maps to $a\\cdot1_A$ in each tensor trivialization, this also identifies the two coefficient morphisms. Define $\\kappa(t)\\in H^1(U_{\\mathrm{proet}},A(1)_U)$ as the image of $\\kappa_{\\mathrm{et}}(t)$ under the canonical comparison isomorphism [lem-cbc-abelian-etale-proetale-cohomology-comparison]. Finally set $R^rs^!(-)=\\mathcal H^r(Rs^!(-))$, using [def-weil-exceptional-inverse-image] and [def-weil-derived-cohomology-sheaves], and use the supported cohomology $H^q_{s(Y)}(X,-)$ of [def-pur-support-cohomology].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-pur-affine-line-datum.md",
   "place": "node def-pur-affine-line-datum, order 1892"
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "def-sbc-affine-space",
+  "def-weil-scheme-morphism-properties",
   "lem-pur-finite-kummer-level",
-  "def-weil-derived-cohomology-sheaves",
-  "def-pur-support-cohomology",
+  "def-sbc-affine-space",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-tensor-product",
   "def-coefficient-twists-detailed",
-  "def-sbc-smooth-morphisms",
-  "def-weil-exceptional-inverse-image",
+  "def-sc-gm-torsor",
+  "lem-amb-kummer-any-base",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-sc-torsor-h1",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sheafification",
+  "def-sc-contracted-product-presentation",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "def-weil-pbc-site-comparison-morphism",
   "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-sf-comparison-pullback-exact",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-support-cohomology"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer class of a unit in first etale cohomology with finite coefficient Tate twist, boundary of Kummer sequence",
+   "results": "8 hits; groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, IsDedekindDomain.selmerGroup.fromUnitLift, groupCohomology.H1ofAutOnUnitsUnique, IsDedekindDomain.selmerGroup.fromUnit, IsDedekindDomain.selmerGroup.fromUnit_ker, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, groupCohomology.exists_div_of_norm_eq_one, Algebra.Extension.instAddCommGroupH1Cotangent",
+   "date": "2026-10-16",
+   "verdict": "no match: Hilbert 90 for Galois groups and Selmer unit maps do not define the sheaf Kummer class on an arbitrary scheme or its finite coefficient twist"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|tateTwist|rootsOfUnitySheaf",
+   "results": "25 hits; Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: Kummer-Dedekind, number-theoretic Kummer results and field Kummer extensions are different notions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer connecting homomorphism for a global unit on the punctured affine line",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine line over a scheme with zero section, multiplicative group complement and torsor of nth roots of its coordinate",
+   "results": "8 hits; AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.homOverEquiv_apply, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.coord, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.AffineSpace.map",
+   "date": "2026-10-16",
+   "verdict": "partial match only: AffineSpace, coord and homOfVector supply affine-space data (already def-sbc-affine-space); none gives the Kummer boundary, twist or torsor comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kummer\"",
+   "results": "8 hits; KummerExtension.«termK[_√_]», KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk, KummerDedekind.quotMapEquivQuotQuotMap, KummerDedekind.emultiplicity_factors_map_eq_emultiplicity, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span, KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map, KummerDedekind.quotMapEquivQuotQuotMap_symm_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: KummerExtension and KummerDedekind concern field extensions or ideal factorization, not the etale sheaf sequence or its twisted class"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|tateTwist|torsor|AffineSpace",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "partial match only: AlgebraicGeometry/AffineSpace.lean supplies affine space and coordinate maps, already represented by def-sbc-affine-space; no etale Kummer or Tate-twist construction"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|kummer|Torsor",
+   "results": "{\"t\": \"2026-10-15T18:37:40Z\", \"tool\": \"grep\", \"query\": \"rootsOfUnity|kummer|Torsor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "no match: no rootsOfUnity, kummer or Torsor declaration in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf cohomology first connecting map sends a unit to its torsor of roots, extension of structure group for abelian sheaf torsors",
+   "results": "{\"t\": \"2026-10-15T18:37:40Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaf cohomology first connecting map sends a unit to its torsor of roots, extension of structure group for abelian sheaf torsors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"CategoryTheory.PresheafOfGroups.H1\", \"CategoryTheory.PresheafOfGroups.instOneH1\", \"CategoryTheory.PresheafOfGroups.OneCocycle.class\", \"CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl\", \"CategoryTheory.PresheafOfGroups.OneCochain.one_ev\", \"CategoryTheory.PresheafOfGroups.OneCochain.ev\"], \"digest\": \"07332a7f070a1cf5\"}",
+   "date": "2026-10-15",
+   "verdict": "no match: the hits define nonabelian Cech cocycles and H1 for a chosen object family, not derived etale H1, the Kummer root torsor or its finite coefficient class"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\"",
+   "results": "{\"t\": \"2026-10-15T18:38:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"rootsOfUnity\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"rootsOfUnity\", \"rootsOfUnity_one\", \"rootsOfUnity_zero\", \"rootsOfUnity_inf_rootsOfUnity\", \"rootsOfUnity_eq_ker\", \"ker_zpowGroupHom_eq_rootsOfUnity\", \"rootsOfUnity_le_of_dvd\", \"instSubsingletonSubtypeUnitsMemSubgroupRootsOfUnityOfNatNat\"], \"digest\": \"fcde2c1f9b551923\"}",
+   "date": "2026-10-15",
+   "verdict": "partial algebraic match only: rootsOfUnity and rootsOfUnity_eq_ker concern subgroups of units of a commutative monoid, not sheaves or the complete affine-line datum"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|connecting|torsor",
+   "results": "{\"t\": \"2026-10-15T19:06:18Z\", \"tool\": \"grep\", \"query\": \"kummer|connecting|torsor\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"], \"digest\": \"d88f7555db397960\"}",
+   "date": "2026-10-15",
+   "verdict": "no match: the only restricted Sites hit, SheafCohomology/MayerVietoris.lean:110-114, constructs the Mayer-Vietoris boundary rather than a Kummer class or contracted product"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connecting homomorphism in degree zero for an epimorphism of abelian sheaves classifies the fibre torsor and commutes with change of coefficients",
+   "results": "{\"t\": \"2026-10-15T19:06:19Z\", \"tool\": \"leanfinder\", \"query\": \"Connecting homomorphism in degree zero for an epimorphism of abelian sheaves classifies the fibre torsor and commutes with change of coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex\", \"groupCohomology.epi_δ_of_isZero\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex\", \"CategoryTheory.ShortComplex.ShortExact.δ_apply'\", \"CategoryTheory.ShortComplex.SnakeInput.δ_apply'\"], \"digest\": \"27a7ddda8ac800ad\"}",
+   "date": "2026-10-15",
+   "verdict": "no match: Mayer-Vietoris short complexes, group cohomology and concrete snake-lemma formulas do not construct this etale roots torsor, its coefficient extension or the full affine-line datum"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsor\"",
+   "results": "{\"t\": \"2026-10-15T19:06:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"torsor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddTorsor\", \"Torsor\", \"addGroupIsAddTorsor\", \"AddGroup.instAddTorsor\", \"Group.instTorsor\", \"AddTorsor.nonempty\", \"Torsor.nonempty\", \"AddTorsor.toVSub\"], \"digest\": \"75634a7afaf1c794\"}",
+   "date": "2026-10-15",
+   "verdict": "no match: AddTorsor and Torsor are globally nonempty types with simply transitive group actions, not locally inhabited sheaves on the etale site or the full Kummer datum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer boundary class of coordinate unit on punctured affine line as a roots of unity torsor with finite coefficient extension",
+   "results": "{\"t\": \"2026-10-15T19:46:18Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer boundary class of coordinate unit on punctured affine line as a roots of unity torsor with finite coefficient extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"NumberField.Units.fun_eq_repr\", \"WeierstrassCurve.Affine.CoordinateRing.XClass\", \"NumberField.mixedEmbedding.fundamentalCone.torsion_unitSMul_mem_integerSet\", \"NumberField.Units.map_complexEmbedding_torsion\", \"WeierstrassCurve.Affine.Point.toClass_apply\", \"circleEquivGen\", \"NumberField.mixedEmbedding.fundamentalCone.unit_smul_mem_iff_mem_torsion\"], \"digest\": \"6ce293099076860a\"}",
+   "date": "2026-10-15",
+   "verdict": "no match: the hits concern Weierstrass coordinates and number field units, not the etale Kummer boundary or its finite coefficient torsor"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|Kummer|torsor|Torsor",
+   "results": "{\"t\": \"2026-10-15T19:46:34Z\", \"tool\": \"grep\", \"query\": \"kummer|Kummer|torsor|Torsor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "no match: the restricted AlgebraicGeometry grep returned no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kummer\"",
+   "results": "{\"t\": \"2026-10-15T19:46:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerExtension.«termK[_√_]»\", \"KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"KummerDedekind.quotMapEquivQuotQuotMap\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"KummerDedekind.quotMapEquivQuotQuotMap_symm_apply\"], \"digest\": \"1cda2c3b50a2fae5\"}",
+   "date": "2026-10-15",
+   "verdict": "no match: field Kummer extensions and Kummer-Dedekind ideal factorization do not construct the affine-line sheaf datum"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer exact sequence boundary of unit is the torsor of its nth roots",
+   "results": "{\"t\": \"2026-10-15T19:46:56Z\", \"tool\": \"leansearch\", \"query\": \"Kummer exact sequence boundary of unit is the torsor of its nth roots\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnitySheaf|kummerSequence|contractedProduct",
+   "results": "{\"t\": \"2026-10-15T22:17:13Z\", \"tool\": \"grep\", \"query\": \"rootsOfUnitySheaf|kummerSequence|contractedProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "no match: zero hits in the local Mathlib source; the analogous Kummer sequence is in WeilConjectures rather than Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coboundary of an invertible function in etale H1 is represented by its root cover as a sheaf torsor",
+   "results": "{\"t\": \"2026-10-15T22:17:13Z\", \"tool\": \"leanfinder\", \"query\": \"The coboundary of an invertible function in etale H1 is represented by its root cover as a sheaf torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"Algebra.Extension.h1Cotangentι_apply\", \"Algebra.Extension.H1Cotangent\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.H1Cotangent\", \"Algebra.Generators.H1Cotangent.δ_eq_δAux\", \"Algebra.Extension.H1Cotangent.map\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\"], \"digest\": \"80056233dfa093c8\"}",
+   "date": "2026-10-15",
+   "verdict": "no match: Hilbert 90 and cotangent H1 results do not construct a root torsor on a scheme or its coefficient class"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf.H.δ\"",
+   "results": "{\"t\": \"2026-10-15T22:17:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf.H.δ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H.δ\", \"CategoryTheory.Sheaf.H.δ_naturality\"], \"digest\": \"eece18942ea8966c\"}",
+   "date": "2026-10-15",
+   "verdict": "partial general interface only: online Loogle returns CategoryTheory.Sheaf.H.δ and δ_naturality, not the complete datum; the returned ExactSequences.lean file is absent from the pinned local Mathlib, so neither is accepted as a local leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology class associated to the finite etale cover adjoining an mth root of an invertible regular function",
+   "results": "{\"t\": \"2026-10-15T22:17:30Z\", \"tool\": \"leansearch\", \"query\": \"Etale cohomology class associated to the finite etale cover adjoining an mth root of an invertible regular function\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -66,5 +228,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv"
+ "unit": "sk-def-purity-conv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-pur-affine-line-datum",
+  "worker": "stage1",
+  "summary": "Read the master node and its unit and checked all construction clauses. Corrected the false identification of units of Y with units on the punctured line, specified u maps to u tensor 1 for coefficient extension, and replaced the undefined tensor product of a torsor by the contracted product. Made etale versus pro-etale cohomology explicit. The relative spectrum, monic quotient basis, derivative criterion, Kummer exactness, torsor-H1 bijection, coefficient functoriality, natural connecting maps and site comparison all have existing nodes; their elementary specializations are written in the construction. No new node is needed. Removed the unused smooth-morphism dependency and added the exact construction and well-definedness dependencies. Second reading corrected the overlap maps in the site comparison from multiplication by roots to exponent changes by units modulo m, and supplied the canonical comparison map and its degree-zero local check.",
+  "blueprint": "Definition def-pur-affine-line-datum: affine-line and zero-section paragraphs; finite-level twist and Kummer-boundary paragraphs; root-cover and torsor-form paragraphs; final exceptional-inverse-image and supported-cohomology notation. This is a definition, so proof remains empty; the elementary checks using the named general theorems are written beside the corresponding construction."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-53ff8c4c6",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-53ff8c4c6 (reviewer sub-agent of L); spot-checked: Reviewed the complete definition, all 31 direct dependencies, unit/chapter route, cited Stacks sources, Mathlib searches, edge cases, and dependency direction. Corrected construction and coefficient details are mathematically sound; review.md records the checks. No repair or dropped node is needed."
+ }
 }
