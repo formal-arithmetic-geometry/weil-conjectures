@@ -7,12 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.TruncationCouple
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.KInjectiveBridge
-import Sheaf.CategoryTheory.KInjectiveComputes
-import Sheaf.CategoryTheory.TruncationTriangle
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import WeilConjectures.Algebra.Homology.ExactCouple.Basic
+import Sheaf.CategoryTheory.TruncationRawExact
 
 /-!
 # Exactness of the truncation couple
@@ -84,6 +79,49 @@ theorem truncationCouple_exact
       ∃ w : (truncationCouple F K a ha).2.2.1 p q ≫
           (truncationCouple F K a ha).2.2.2.2 (p - 1) (q + 1) = 0,
         (ShortComplex.mk _ _ w).Exact) := by
-  sorry
+  let _ := HasDerivedCategory.standard A
+  let _ := HasDerivedCategory.standard B
+  obtain ⟨hfa, hgf, hag⟩ := truncation_raw_exact F K
+  have exact_transport_local
+      {X₁ X₂ X₃ Y₁ Y₂ Y₃ : B} (a : X₁ ⟶ X₂) (b : X₂ ⟶ X₃)
+      (w : a ≫ b = 0) (h : (ShortComplex.mk a b w).Exact)
+      {a' : Y₁ ⟶ Y₂} {b' : Y₂ ⟶ Y₃}
+      (e₁ : X₁ ≅ Y₁) (e₂ : X₂ ≅ Y₂) (e₃ : X₃ ≅ Y₃)
+      (h₁ : e₁.hom ≫ a' = a ≫ e₂.hom)
+      (h₂ : e₂.hom ≫ b' = b ≫ e₃.hom) :
+      ∃ w' : a' ≫ b' = 0, (ShortComplex.mk _ _ w').Exact := by
+    have w' : a' ≫ b' = 0 := by
+      rw [← cancel_epi e₁.hom, ← Category.assoc, h₁, Category.assoc, h₂,
+        ← Category.assoc, w, zero_comp, comp_zero]
+    refine ⟨w', ShortComplex.exact_of_iso ?_ h⟩
+    exact ShortComplex.isoMk e₁ e₂ e₃ h₁ h₂
+  have reindex_hom_local
+      (X Y : ℤ → ℤ → B)
+      (f : ∀ p q, X p q ⟶ Y p q) {p q p' q' : ℤ}
+      (hp : p = p') (hq : q = q') :
+      eqToHom (congrArg₂ X hp hq) ≫ f p' q' =
+        f p q ≫ eqToHom (congrArg₂ Y hp hq) := by
+    subst p'
+    subst q'
+    simp
+  dsimp only [truncationCouple]
+  refine ⟨?_, ?_, ?_⟩
+  · intro p q
+    exact hfa p q
+  · intro p q
+    obtain ⟨w, hw⟩ := hgf p q
+    exact exact_transport_local _ _ w hw (Iso.refl _) (eqToIso (by simp)).symm
+      (eqToIso (by simp)).symm (by simp) (by
+        let E' : ℤ → ℤ → B := TruncationCouple.E F K
+        let D' : ℤ → ℤ → B := TruncationCouple.D F K
+        let f' : ∀ r t, E' r t ⟶ D' (r + 2) (t - 1) :=
+          TruncationCouple.f F K
+        have hidx := reindex_hom_local E' (fun r t ↦ D' (r + 2) (t - 1)) f'
+          (show p + (0 : ℤ) = p by omega) (show q - (0 : ℤ) = q by omega)
+        simpa [Iso.symm_hom, eqToIso.hom, eqToIso.inv, E', D', f'] using hidx)
+  · intro p q
+    obtain ⟨w, hw⟩ := hag p q
+    exact exact_transport_local _ _ w hw (Iso.refl _) (Iso.refl _)
+      (eqToIso (by simp)).symm (by simp) (by simp)
 
 end CategoryTheory
