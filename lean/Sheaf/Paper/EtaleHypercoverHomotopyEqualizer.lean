@@ -6,8 +6,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 public import Sheaf.Paper.EtaleHypercover
-import Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting
-import Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember
+import Sheaf.AlgebraicGeometry.EtaleOrdinalPathHypercover
 
 /-! Intermediate construction for finite split hypercover refinement. -/
 
@@ -19,30 +18,32 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Hypercoverings, Tags 0DAV, 094K, 01GS.
 
-Proof: In degree n represent maps from the finite simplicial set Delta[1] times Delta[n]
-to V by the finite limit of V's terms indexed by its nondegenerate simplices and face
-relations. These limits exist in the etale site and remain limits after forgetting to
-schemes over X. Restriction along simplicial operators defines the endpoint path object
-of V. Pull its endpoint map back along (a,b) from U.
-Its projection c to U carries the universal simplicial homotopy between c followed by a and c
-followed by b. To verify the hypercover condition, the relative matching maps are restrictions from
-the whole prism to
-the endpoint simplices together with its boundary. The inclusion adds finitely many
-nondegenerate simplices. Finite simplex lifting makes these restrictions covering; base change
-preserves the covers. The singleton matching comparison identifies this covering condition with
-the scheme matching condition. In degree zero the relative arrow is a pullback of
-V_1 to V_0 times_X V_0. In each higher degree compose the relative covering arrow with
-the base change of U's matching cover to obtain K's absolute matching cover. The resulting K need
-not be finite or split; finite replacement
-is a separate step.
+Proof: Use the ordered join of two copies of [n], namely [2n+1], as an explicit
+simplicial path object for V. The cut maps give its elementary endpoint homotopy.
+Pull the two endpoint maps back along (a,b). To check its matching covers, first
+pull back U's matching cover. The resulting endpoint and lower doubled-face data
+glue on a finite subcomplex of the standard (2n+1)-simplex. Finite-simplex lifting
+in V extends this family locally. The endpoint pullback universal property gives
+local lifts of the matching datum, proving the required surjectivity. The projection
+to U and the explicit cut homotopy then give the asserted witnesses.
 (blueprint: lem-weil-pbc-etale-hypercover-homotopy-equalizer) -/
 theorem exists_etale_hypercover_homotopy_equalizer
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U V : FiniteSplitEtaleHypercover X) (a b : U.Refinement V) :
     ∃ (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)
       (c : K ⟶ U.simplicial), Nonempty (SimplicialObject.Homotopy (c ≫ a) (c ≫ b)) := by
-  sorry
+  refine ⟨SimplicialObject.ordinalPathPullback a b, ?_,
+    SimplicialObject.ordinalPathPullbackFst a b,
+    ⟨SimplicialObject.ordinalPathPullbackHomotopy a b⟩⟩
+  apply EtaleSimplicialMatching.isEtaleHypercover_ordinalPathPullback a b
+  · intro n
+    exact ⟨U.matching n, U.projection n, U.matchingMap n, U.projection_naturality n,
+      U.matching_universal n, U.matchingMap_projection n, U.matching_cover n⟩
+  · intro n
+    exact ⟨V.matching n, V.projection n, V.matchingMap n, V.projection_naturality n,
+      V.matching_universal n, V.matchingMap_projection n, V.matching_cover n⟩
 
 end AlgebraicGeometry.FiniteSplitEtaleHypercover

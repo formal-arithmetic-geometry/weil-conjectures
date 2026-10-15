@@ -1,0 +1,164 @@
+{
+ "id": "def-weil-pbc-simplicial-ordinal-path",
+ "kind": "definition",
+ "title": "Explicit ordered simplex path and endpoint pullback",
+ "statement": "For a category C with pullbacks and binary products and simplicial objects U,V [def-weil-pbc-simplicial-object], the doubling functor sends [n] to the ordered join [n] followed by [n], of dimension 2n+1, and sends each monotone map to its action on each block. Precomposing V with its opposite defines the ordinal path object, with the first and second block endpoint maps. For a,b:U to V define K to be their endpoint pullback. Its first projection c:K to U has a specified elementary simplicial homotopy from ca to cb.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01GS (lemma-homotopy), endpoint construction; ordered-join variant using Tag 01GN"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof": [
+  {
+   "text": "Define the doubled map blockwise. An increasing input stays in one block, or passes from the first to the second; this proves monotonicity. Evaluate at each block to prove identity, composition and naturality of both endpoints.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each cut i in degree n, send vertices j at most i to the first block with value j and vertices above i to the second block with value n+j. The seven simplicial homotopy identities follow from the vertex formulas for cofaces and codegeneracies, separating the inequalities defining the cut. Apply V contravariantly to obtain the endpoint homotopy.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the categorical pullback of (a,b) and the pair of endpoints. Projecting its pullback equation to either product factor gives the endpoint equations. Precompose the cut homotopy with the second projection. Evaluation preserves the pullback and product limits, giving the stated degreewise lifting and extensionality API.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01GS (lemma-homotopy), endpoint construction; ordered-join variant using Tag 01GN; explicit proof supplied in this delivery"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ordinal sum doubling of simplex category gives a simplicial path object with explicit endpoint homotopy",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glue compatible families on a finite union of faces of a standard simplex; ordinal sum simplicial homotopy path object matching covers",
+   "results": "Subcomplex.MulticoequalizerDiagram and horn colimit presentations supply related union APIs; no ordered-endpoint matching-cover theorem or explicit ordered path construction.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Subcomplex",
+   "results": "Subcomplex, toSSet, ofSimplex, range and image definitions. The construction uses these existing definitions; no duplicate family-gluing or ordinal-path declaration.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "face_inter_face|faceRepresentableBy|ofSimplex_le_iff|exists_nonempty_homotopy|factor_of_range_subset|ordinalPath",
+   "results": "StdSimplex.face_inter_face, faceRepresentableBy and ofSimplex_le_iff give face tools. Only one-step hypercover homotopy existence is found; no doubled-face intersection or ordered path.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleHypercoverHomotopyEqualizer",
+  "date": "2026-10-16",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof step 5: endpoint path object and its matching-cover verification before finite replacement",
+   "via": [
+    "lem-weil-pbc-etale-hypercover-homotopy-equalizer"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SimplicialOrdinalPath",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialOrdinalPath.lean",
+  "declaration": "CategoryTheory.SimplicialObject.ordinalPathPullback",
+  "declarations": [
+   "SimplexCategory.OrdinalPath.obj",
+   "SimplexCategory.OrdinalPath.map",
+   "SimplexCategory.OrdinalPath.map_apply_left",
+   "SimplexCategory.OrdinalPath.map_apply_right",
+   "SimplexCategory.OrdinalPath.doubling",
+   "SimplexCategory.OrdinalPath.left",
+   "SimplexCategory.OrdinalPath.right",
+   "SimplexCategory.OrdinalPath.left_naturality",
+   "SimplexCategory.OrdinalPath.right_naturality",
+   "SimplexCategory.OrdinalPath.cut",
+   "SimplexCategory.OrdinalPath.cut_val",
+   "SimplexCategory.OrdinalPath.map_val",
+   "SimplexCategory.OrdinalPath.δ_zero_cut",
+   "SimplexCategory.OrdinalPath.δ_last_cut",
+   "SimplexCategory.OrdinalPath.δ_cut_of_le",
+   "SimplexCategory.OrdinalPath.δ_cut_middle",
+   "SimplexCategory.OrdinalPath.δ_cut_of_lt",
+   "SimplexCategory.OrdinalPath.σ_cut_of_le",
+   "SimplexCategory.OrdinalPath.σ_cut_of_ge",
+   "CategoryTheory.SimplicialObject.ordinalPath",
+   "CategoryTheory.SimplicialObject.ordinalPathLeft",
+   "CategoryTheory.SimplicialObject.ordinalPathRight",
+   "CategoryTheory.SimplicialObject.ordinalPathHomotopy",
+   "CategoryTheory.SimplicialObject.ordinalPathPullback",
+   "CategoryTheory.SimplicialObject.ordinalPathPullbackFst",
+   "CategoryTheory.SimplicialObject.ordinalPathPullbackSnd",
+   "CategoryTheory.SimplicialObject.ordinalPathPullback_left",
+   "CategoryTheory.SimplicialObject.ordinalPathPullback_right",
+   "CategoryTheory.SimplicialObject.ordinalPathPullbackHomotopy",
+   "CategoryTheory.SimplicialObject.ordinalPathPullback_lift_degree",
+   "CategoryTheory.SimplicialObject.ordinalPathPullback_hom_ext_degree"
+  ],
+  "statement": "def ordinalPathPullback {U V : SimplicialObject C} (a b : U ⟶ V) :\n    SimplicialObject C",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-weil-pbc-simplicial-ordinal-path",
+  "worker": "stage3 J1",
+  "summary": "Constructed and proved in Lean, with no new sorry. LeanSearch was attempted and unavailable; LeanFinder/Loogle and Mathlib source searches were read.",
+  "blueprint": "Proof step 5 of lem-weil-pbc-hypercover-refinement, before finite split replacement"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

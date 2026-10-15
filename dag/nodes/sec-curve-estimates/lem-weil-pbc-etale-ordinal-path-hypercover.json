@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-etale-ordinal-path-hypercover",
+ "kind": "statement",
+ "title": "The ordered endpoint pullback is an etale hypercover",
+ "statement": "Let X be quasi-compact and quasi-separated, let U,V be etale hypercovers [def-weil-pbc-etale-hypercover], and let a,b:U to V. The explicit ordered endpoint pullback K [def-weil-pbc-simplicial-ordinal-path] is an etale hypercover. More precisely, a matching datum of K together with a compatible degree n simplex of U has local lifts to K_n.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 01GN and 01GS, relative matching covers and the endpoint construction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-hypercover",
+  "def-weil-pbc-simplicial-ordinal-path"
+ ],
+ "proof": [
+  {
+   "text": "From a matching datum q:T to M_n(K) and a compatible simplex u:T to U_n, form the lower proper-face family in the ordered path object by the second projection of K. The matching compatibility and endpoint pullback equations identify its endpoints with u followed by a and b.",
+   "uses": [
+    "def-weil-pbc-simplicial-ordinal-path",
+    "def-weil-pbc-etale-simplicial-matching"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Glue the full endpoint simplices and this lower family on their finite nonempty union A_n in Delta[2n+1]. Ordinary finite-simplex lifting gives, over an etale covering of T, degree 2n+1 simplices of V restricting to this family.",
+   "uses": [
+    "lem-weil-pbc-ordinal-boundary-family",
+    "lem-weil-pbc-etale-finite-simplex-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine each extended V-simplex with u using the evaluated endpoint pullback. Its first and second projections and all proper-face generator equations identify the lower K-faces. The proper-face matching universal property therefore says that these are local lifts of q.",
+   "uses": [
+    "def-weil-pbc-simplicial-ordinal-path",
+    "def-weil-pbc-etale-simplicial-matching",
+    "lem-weil-pbc-ordinal-boundary-family"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For absolute matching covers, pull U_n to M_n(U) back along the natural map M_n(K) to M_n(U). Its projection to M_n(K) is surjective by base change. Over this projection apply the preceding relative local lift. The small etale topology criterion says the covering points jointly surject onto that pullback; their lifts then surject onto M_n(K). This proves every canonical K matching arrow surjective, hence K is an etale hypercover.",
+   "uses": [
+    "def-weil-pbc-simplicial-ordinal-path",
+    "def-weil-pbc-etale-simplicial-matching",
+    "lem-weil-pbc-etale-finite-simplex-lifting"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-ordinal-path",
+  "def-weil-pbc-etale-simplicial-matching",
+  "lem-weil-pbc-ordinal-boundary-family",
+  "lem-weil-pbc-etale-finite-simplex-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 01GN and 01GS, relative matching covers and the endpoint construction; explicit proof supplied in this delivery"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the endpoint pullback of two morphisms of etale hypercovers is a hypercover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glue compatible families on a finite union of faces of a standard simplex; ordinal sum simplicial homotopy path object matching covers",
+   "results": "Subcomplex.MulticoequalizerDiagram and horn colimit presentations supply related union APIs; no ordered-endpoint matching-cover theorem or explicit ordered path construction.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Subcomplex",
+   "results": "Subcomplex, toSSet, ofSimplex, range and image definitions. The construction uses these existing definitions; no duplicate family-gluing or ordinal-path declaration.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "face_inter_face|faceRepresentableBy|ofSimplex_le_iff|exists_nonempty_homotopy|factor_of_range_subset|ordinalPath",
+   "results": "StdSimplex.face_inter_face, faceRepresentableBy and ofSimplex_le_iff give face tools. Only one-step hypercover homotopy existence is found; no doubled-face intersection or ordered path.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleHypercoverHomotopyEqualizer",
+  "date": "2026-10-16",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof step 5: endpoint path object and its matching-cover verification before finite replacement",
+   "via": [
+    "lem-weil-pbc-etale-hypercover-homotopy-equalizer"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOrdinalPathHypercover",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOrdinalPathHypercover.lean",
+  "declaration": "AlgebraicGeometry.EtaleSimplicialMatching.isEtaleHypercover_ordinalPathPullback",
+  "declarations": [
+   "AlgebraicGeometry.EtaleSimplicialMatching.locally_lift_ordinal_matching",
+   "AlgebraicGeometry.EtaleSimplicialMatching.isEtaleHypercover_ordinalPathPullback"
+  ],
+  "statement": "theorem isEtaleHypercover_ordinalPathPullback {X : Scheme.{u}}\n    [CompactSpace X] [QuasiSeparatedSpace X] {U V : SimplicialObject X.Etale}\n    (a b : U ⟶ V) (hU : IsEtaleHypercover U) (hV : IsEtaleHypercover V) :\n    IsEtaleHypercover (ordinalPathPullback a b)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-pbc-etale-ordinal-path-hypercover",
+  "worker": "stage3 J1",
+  "summary": "Constructed and proved in Lean, with no new sorry. LeanSearch was attempted and unavailable; LeanFinder/Loogle and Mathlib source searches were read.",
+  "blueprint": "Proof step 5 of lem-weil-pbc-hypercover-refinement, before finite split replacement"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

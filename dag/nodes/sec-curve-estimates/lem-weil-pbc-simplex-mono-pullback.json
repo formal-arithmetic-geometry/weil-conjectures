@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-simplex-mono-pullback",
+ "kind": "statement",
+ "title": "Nonempty intersections of injective ordinal maps",
+ "statement": "In the simplex category, a map factors through a monomorphism whenever its vertex range is contained in that of the monomorphism. For two injective simplex maps e:[a] to [c] and f:[b] to [c] with a common vertex, there are an ordinal [p] and injective projections r:[p] to [a], s:[p] to [b], with re=sf, through which every compatible pair of simplex maps factors. The simplex category is the indexing category of simplicial objects [def-weil-pbc-simplicial-object].",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0164, the category of finite nonempty ordered sets; the range and nonempty intersection arguments are agent-written consequences of this definition"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof": [
+  {
+   "text": "For range containment, choose the unique preimage of each vertex under the injective map. The injective monotone map reflects order, so these preimages define a monotone factorization.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Form the finite subset of the first domain whose images lie in the second image. A common vertex makes the subset nonempty. Its increasing enumeration from Fin(cardinality) defines r. Factor re through f by range containment to obtain s. Monicity of re proves monicity of s.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A compatible pair has first vertex range in this finite subset, hence factors through r by the range lemma. Cancel f in the compatibility equations to identify the second projection.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0164, the category of finite nonempty ordered sets; the range and nonempty intersection arguments are agent-written consequences of this definition; explicit proof supplied in this delivery"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "nonempty pullback of two injective morphisms in the simplex category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "matching object of a simplicial object as the finite limit over all lower-dimensional simplex maps; restrict a compatible cone to injective proper faces",
+   "results": "Cech nerves and ordinary simplex definitions; no all-lower matching limit comparison.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplexCategory.mono_iff_injective",
+   "results": "SimplexCategory.mono_iff_injective, used in the image factorization comparison.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "matchingObject|matching_object|ordinalSum|factor_of_range_subset|face_pullback",
+   "results": "No matchingObject, ordinal sum, face_pullback or range-factorization declaration found.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleHypercoverHomotopyEqualizer",
+  "date": "2026-10-16",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof step 5: endpoint path object and its matching-cover verification before finite replacement",
+   "via": [
+    "lem-weil-pbc-etale-hypercover-homotopy-equalizer"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SimplexMonoPullback",
+  "file": "lean/Sheaf/CategoryTheory/SimplexMonoPullback.lean",
+  "declaration": "SimplexCategory.exists_face_pullback",
+  "declarations": [
+   "SimplexCategory.factor_of_range_subset",
+   "SimplexCategory.exists_face_pullback"
+  ],
+  "statement": "theorem exists_face_pullback {a b c : SimplexCategory} (e : a ⟶ c) (f : b ⟶ c)\n    [Mono e] [Mono f]\n    (hne : ∃ x y, e.toOrderHom x = f.toOrderHom y) :\n    ∃ (p : SimplexCategory) (r : p ⟶ a) (s : p ⟶ b),\n      Mono r ∧ Mono s ∧ r ≫ e = s ≫ f ∧\n        ∀ (d : SimplexCategory) (q : d ⟶ a) (t : d ⟶ b), q ≫ e = t ≫ f →\n          ∃ z : d ⟶ p, z ≫ r = q ∧ z ≫ s = t",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-pbc-simplex-mono-pullback",
+  "worker": "stage3 J1",
+  "summary": "Constructed and proved in Lean, with no new sorry. LeanSearch was attempted and unavailable; LeanFinder/Loogle and Mathlib source searches were read.",
+  "blueprint": "Proof step 5 of lem-weil-pbc-hypercover-refinement, before finite split replacement"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

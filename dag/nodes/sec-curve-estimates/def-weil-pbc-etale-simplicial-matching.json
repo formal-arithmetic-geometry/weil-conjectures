@@ -1,0 +1,165 @@
+{
+ "id": "def-weil-pbc-etale-simplicial-matching",
+ "kind": "definition",
+ "title": "Canonical matching schemes and comparison of hypercover predicates",
+ "statement": "For a simplicial object U in the small etale category of X, define its degree n matching scheme as the finite limit indexed by all maps [m] to [n] with m<n. It has the projections, simplicial matching map, naturality and universal property used in the etale hypercover predicate [def-weil-pbc-etale-hypercover]. The same cone restricted to injective proper faces [lem-weil-pbc-matching-object-proper-faces] is limiting. An etale hypercover has surjective canonical matching maps, and after the singleton inclusion it is a semi-representable hypercover [def-weil-pbc-semi-representable-object].",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0186, matching objects; finite etale limits and the singleton matching comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-hypercover",
+  "lem-weil-pbc-matching-object-proper-faces",
+  "def-weil-pbc-semi-representable-object"
+ ],
+ "proof": [
+  {
+   "text": "The lower-simplex index has finitely many objects and finite hom sets. Its opposite domain diagram in X.Etale has a finite limit. Its projections and the cone of simplicial operators define the matching arrow. The etale inclusion preserves finite limits, proving the universal property among all schemes over X. A simplicial map induces a map of these matching limits by its component maps.",
+   "uses": [
+    "def-weil-pbc-etale-hypercover"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "To compare with proper faces, extend every proper-face cone to all lower simplices by their canonical epi-mono image factorizations. Naturality of the image factorization gives compatibility. On a proper face this extension is the original cone, and on an arbitrary simplex its value is forced by the image face. Thus the restricted canonical cone is limiting.",
+   "uses": [
+    "lem-weil-pbc-matching-object-proper-faces"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Given any matching witnesses from the hypercover predicate, use their universal property and the canonical limit to obtain a split comparison map onto the canonical matching scheme. The matching arrows commute with this map, so surjectivity passes to the canonical arrow.",
+   "uses": [
+    "def-weil-pbc-etale-hypercover"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the singleton proper-face matching comparison. Its limiting cone and the canonical proper-face cone are uniquely isomorphic. Their matching arrows commute with this isomorphism, so canonical surjectivity implies the singleton semi-representable hypercover predicate.",
+   "uses": [
+    "lem-weil-pbc-matching-object-proper-faces",
+    "lem-weil-pbc-sr-matching-object-one-member"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-hypercover",
+  "lem-weil-pbc-matching-object-proper-faces",
+  "lem-weil-pbc-sr-matching-object-one-member"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0186, matching objects; finite etale limits and the singleton matching comparison; explicit proof supplied in this delivery"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "matching object of a simplicial etale scheme as a finite limit and equivalence with the hypercover predicate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "matching object of a simplicial object as the finite limit over all lower-dimensional simplex maps; restrict a compatible cone to injective proper faces",
+   "results": "Cech nerves and ordinary simplex definitions; no all-lower matching limit comparison.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplexCategory.mono_iff_injective",
+   "results": "SimplexCategory.mono_iff_injective, used in the image factorization comparison.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "matchingObject|matching_object|ordinalSum|factor_of_range_subset|face_pullback",
+   "results": "No matchingObject, ordinal sum, face_pullback or range-factorization declaration found.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleHypercoverHomotopyEqualizer",
+  "date": "2026-10-16",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof step 5: endpoint path object and its matching-cover verification before finite replacement",
+   "via": [
+    "lem-weil-pbc-etale-hypercover-homotopy-equalizer"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSimplicialMatching",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSimplicialMatching.lean",
+  "declaration": "AlgebraicGeometry.EtaleSimplicialMatching.matching",
+  "declarations": [
+   "AlgebraicGeometry.EtaleSimplicialMatching.Index",
+   "AlgebraicGeometry.EtaleSimplicialMatching.domain",
+   "AlgebraicGeometry.EtaleSimplicialMatching.diagram",
+   "AlgebraicGeometry.EtaleSimplicialMatching.imageFace",
+   "AlgebraicGeometry.EtaleSimplicialMatching.extendProperFamily",
+   "AlgebraicGeometry.EtaleSimplicialMatching.extendProperFamily_restrict",
+   "AlgebraicGeometry.EtaleSimplicialMatching.matching",
+   "AlgebraicGeometry.EtaleSimplicialMatching.projection",
+   "AlgebraicGeometry.EtaleSimplicialMatching.projection_naturality",
+   "AlgebraicGeometry.EtaleSimplicialMatching.matchingCone",
+   "AlgebraicGeometry.EtaleSimplicialMatching.matchingMap",
+   "AlgebraicGeometry.EtaleSimplicialMatching.matchingMap_projection",
+   "AlgebraicGeometry.EtaleSimplicialMatching.matchingNat",
+   "AlgebraicGeometry.EtaleSimplicialMatching.matchingNat_projection",
+   "AlgebraicGeometry.EtaleSimplicialMatching.properCone",
+   "AlgebraicGeometry.EtaleSimplicialMatching.properConeIsLimit",
+   "AlgebraicGeometry.EtaleSimplicialMatching.matching_universal",
+   "AlgebraicGeometry.EtaleSimplicialMatching.isEtaleHypercover_of_matchingCover",
+   "AlgebraicGeometry.EtaleSimplicialMatching.matchingCover_of_isEtaleHypercover",
+   "AlgebraicGeometry.EtaleSimplicialMatching.isSemiRepresentableHypercover_of_isEtaleHypercover"
+  ],
+  "statement": "def matching {X : Scheme.{u}} (U : SimplicialObject X.Etale) (n : ℕ) :\n    X.Etale",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-weil-pbc-etale-simplicial-matching",
+  "worker": "stage3 J1",
+  "summary": "Constructed and proved in Lean, with no new sorry. LeanSearch was attempted and unavailable; LeanFinder/Loogle and Mathlib source searches were read.",
+  "blueprint": "Proof step 5 of lem-weil-pbc-hypercover-refinement, before finite split replacement"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

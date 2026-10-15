@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-ordinal-path-face-intersection",
+ "kind": "statement",
+ "title": "Intersections in the doubled ordinal simplex",
+ "statement": "For the doubling and endpoints [def-weil-pbc-simplicial-ordinal-path], doubling sends injective simplex maps to injective maps. If q:[d] to double([a]) and t:[d] to double([b]) have equal composites under doubled injective maps e:[a] to [c], f:[b] to [c], they factor compatibly through a doubled common face. The intersection of either endpoint of [c] with double(f) is the same endpoint of [a].",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 017J, compatible simplex families; doubled-ordinal intersections used in hypercovering Tag 01GN"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-ordinal-path"
+ ],
+ "proof": [
+  {
+   "text": "Every doubled vertex lies uniquely in its first or second block. A doubled map preserves the block and applies the underlying map there. Therefore equal doubled images have the same block and equal underlying images. Injectivity follows blockwise.",
+   "uses": [
+    "def-weil-pbc-simplicial-ordinal-path"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the compatibility equality at vertex zero to obtain a common vertex for e and f. Use the nonempty ordinal pullback and its factorization property. At every vertex the same-block observation and the ordinary pullback give range containment in the doubled first projection. Factor q through it and cancel the doubled f to identify t.",
+   "uses": [
+    "def-weil-pbc-simplicial-ordinal-path",
+    "lem-weil-pbc-simplex-mono-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an endpoint intersection, all vertices of t must lie in the indicated block, since the endpoint images in opposite blocks are disjoint. Factor through that endpoint by range containment and cancel the target endpoint to identify q.",
+   "uses": [
+    "def-weil-pbc-simplicial-ordinal-path",
+    "lem-weil-pbc-simplex-mono-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-ordinal-path",
+  "lem-weil-pbc-simplex-mono-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 017J, compatible simplex families; doubled-ordinal intersections used in hypercovering Tag 01GN; explicit proof supplied in this delivery"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ordinal sum doubling preserves nonempty intersections of injective simplex faces",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glue compatible families on a finite union of faces of a standard simplex; ordinal sum simplicial homotopy path object matching covers",
+   "results": "Subcomplex.MulticoequalizerDiagram and horn colimit presentations supply related union APIs; no ordered-endpoint matching-cover theorem or explicit ordered path construction.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Subcomplex",
+   "results": "Subcomplex, toSSet, ofSimplex, range and image definitions. The construction uses these existing definitions; no duplicate family-gluing or ordinal-path declaration.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "face_inter_face|faceRepresentableBy|ofSimplex_le_iff|exists_nonempty_homotopy|factor_of_range_subset|ordinalPath",
+   "results": "StdSimplex.face_inter_face, faceRepresentableBy and ofSimplex_le_iff give face tools. Only one-step hypercover homotopy existence is found; no doubled-face intersection or ordered path.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleHypercoverHomotopyEqualizer",
+  "date": "2026-10-16",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof step 5: endpoint path object and its matching-cover verification before finite replacement",
+   "via": [
+    "lem-weil-pbc-etale-hypercover-homotopy-equalizer"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.OrdinalPathFaceIntersection",
+  "file": "lean/Sheaf/CategoryTheory/OrdinalPathFaceIntersection.lean",
+  "declaration": "SimplexCategory.OrdinalPath.doubled_face_intersection",
+  "declarations": [
+   "SimplexCategory.OrdinalPath.vertex_cases",
+   "SimplexCategory.OrdinalPath.map_left_vertex",
+   "SimplexCategory.OrdinalPath.map_right_vertex",
+   "SimplexCategory.OrdinalPath.left_right_ne",
+   "SimplexCategory.OrdinalPath.map_mono",
+   "SimplexCategory.OrdinalPath.left_mono",
+   "SimplexCategory.OrdinalPath.right_mono",
+   "SimplexCategory.OrdinalPath.left_face_factor",
+   "SimplexCategory.OrdinalPath.right_face_factor",
+   "SimplexCategory.OrdinalPath.map_eq_blocks",
+   "SimplexCategory.OrdinalPath.doubled_face_intersection"
+  ],
+  "statement": "theorem doubled_face_intersection {a b c d : SimplexCategory}\n    (e : a ⟶ c) (f : b ⟶ c) [Mono e] [Mono f]\n    (q : d ⟶ obj a) (t : d ⟶ obj b) (hqt : q ≫ map e = t ≫ map f) :\n    ∃ (p : SimplexCategory) (r : p ⟶ a) (s : p ⟶ b) (z : d ⟶ obj p),\n      Mono r ∧ Mono s ∧ r ≫ e = s ≫ f ∧ z ≫ map r = q ∧ z ≫ map s = t",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-pbc-ordinal-path-face-intersection",
+  "worker": "stage3 J1",
+  "summary": "Constructed and proved in Lean, with no new sorry. LeanSearch was attempted and unavailable; LeanFinder/Loogle and Mathlib source searches were read.",
+  "blueprint": "Proof step 5 of lem-weil-pbc-hypercover-refinement, before finite split replacement"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

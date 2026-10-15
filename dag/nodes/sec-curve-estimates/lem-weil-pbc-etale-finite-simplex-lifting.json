@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-etale-finite-simplex-lifting",
+ "kind": "statement",
+ "title": "Ordinary etale finite-simplex lifting",
+ "statement": "Let X be quasi-compact and quasi-separated and V an etale hypercover [def-weil-pbc-etale-hypercover]. Let A be a finite subcomplex of Delta[n], nonempty in every degree. For any etale T over X and any compatible family T to V_m indexed by simplices of A, there is an etale covering T_i to T and maps g_i:T_i to V_n whose restrictions to every simplex of A are the pullbacks of that family.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01GN (lemma-add-simplices), local-lifting clause, with singleton representables"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-hypercover"
+ ],
+ "proof": [
+  {
+   "text": "The canonical matching comparison makes V after singleton inclusion a semi-representable hypercover. The standard simplex family on its degree n object is a representing universal family.",
+   "uses": [
+    "def-weil-pbc-etale-simplicial-matching",
+    "lem-weil-pbc-simplicial-hom-object-standard-simplex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the finite A-family functor by its Hom object. Its universal family gives a bijection between points of this representing object and compatible families. Send the given ordinary family to its singleton-included representing point.",
+   "uses": [
+    "def-weil-pbc-simplicial-hom-object",
+    "lem-weil-pbc-simplicial-hom-object-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the local-lifting clause of finite-simplex lifting to that point. Evaluation of the representing restriction identity at any A-simplex identifies its restricted lifted family with the pulled-back original family. Full faithfulness of singleton inclusion converts the maps to the claimed ordinary etale maps.",
+   "uses": [
+    "lem-weil-pbc-hypercover-finite-simplex-lifting",
+    "def-weil-pbc-simplicial-hom-object",
+    "lem-weil-pbc-simplicial-hom-object-standard-simplex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-simplicial-matching",
+  "lem-weil-pbc-simplicial-hom-object-standard-simplex",
+  "def-weil-pbc-simplicial-hom-object",
+  "lem-weil-pbc-simplicial-hom-object-exists",
+  "lem-weil-pbc-hypercover-finite-simplex-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01GN (lemma-add-simplices), local-lifting clause, with singleton representables; explicit proof supplied in this delivery"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local extension of a compatible family on a finite subcomplex of a standard simplex in an etale hypercover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glue compatible families on a finite union of faces of a standard simplex; ordinal sum simplicial homotopy path object matching covers",
+   "results": "Subcomplex.MulticoequalizerDiagram and horn colimit presentations supply related union APIs; no ordered-endpoint matching-cover theorem or explicit ordered path construction.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Subcomplex",
+   "results": "Subcomplex, toSSet, ofSimplex, range and image definitions. The construction uses these existing definitions; no duplicate family-gluing or ordinal-path declaration.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "face_inter_face|faceRepresentableBy|ofSimplex_le_iff|exists_nonempty_homotopy|factor_of_range_subset|ordinalPath",
+   "results": "StdSimplex.face_inter_face, faceRepresentableBy and ofSimplex_le_iff give face tools. Only one-step hypercover homotopy existence is found; no doubled-face intersection or ordered path.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; existing tools used where applicable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleHypercoverHomotopyEqualizer",
+  "date": "2026-10-16",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof step 5: endpoint path object and its matching-cover verification before finite replacement",
+   "via": [
+    "lem-weil-pbc-etale-hypercover-homotopy-equalizer"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFiniteSimplexLifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFiniteSimplexLifting.lean",
+  "declaration": "AlgebraicGeometry.EtaleSimplicialMatching.locally_extend_simplex",
+  "declarations": [
+   "AlgebraicGeometry.EtaleSimplicialMatching.locally_extend_simplex"
+  ],
+  "statement": "theorem locally_extend_simplex {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (V : SimplicialObject X.Etale) (hV : IsEtaleHypercover V) (n : ℕ)\n    (A : (Δ[n] : SSet.{t}).Subcomplex) [A.toSSet.Finite]\n    (hAnonempty : ∀ m : ℕ, Nonempty (A.toSSet.obj (op ⦋m⦌))) (T : X.Etale)\n    (f : ∀ m : ℕ, A.toSSet.obj (op ⦋m⦌) → (T ⟶ V.obj (op ⦋m⦌)))\n    (hf : ∀ (m k : ℕ) (φ : ⦋m⦌ ⟶ ⦋k⦌) (s : A.toSSet.obj (op ⦋k⦌)),\n      f k s ≫ V.map φ.op = f m (A.toSSet.map φ.op s)) :\n    ∃ (ι : Type u) (Tc : ι → X.Etale) (p : ∀ c : ι, Tc c ⟶ T),\n      Sieve.ofArrows Tc p ∈ X.smallEtaleTopology T ∧\n        ∃ g : ∀ c : ι, Tc c ⟶ V.obj (op ⦋n⦌),\n          ∀ (c : ι) (m : ℕ) (s : A.toSSet.obj (op ⦋m⦌)),\n            g c ≫ V.map (SSet.stdSimplex.objEquiv s.val).op = p c ≫ f m s",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-pbc-etale-finite-simplex-lifting",
+  "worker": "stage3 J1",
+  "summary": "Constructed and proved in Lean, with no new sorry. LeanSearch was attempted and unavailable; LeanFinder/Loogle and Mathlib source searches were read.",
+  "blueprint": "Proof step 5 of lem-weil-pbc-hypercover-refinement, before finite split replacement"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261015T224108-L-2885147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
