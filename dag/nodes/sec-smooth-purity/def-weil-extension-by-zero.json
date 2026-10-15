@@ -96,20 +96,24 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-3673e85d8",
-  "group": "NX",
+  "reviewer": "NT-stage2-Codex-e91701d45",
+  "group": "NK",
   "result": "pass",
-  "note": "Wrote review.md. Checked all seven dependencies, source construction, exact declarations, signature, universes, edge cases, docstrings and framework alternatives. Server-only compilation passed cleanly in 1.8 seconds. No delivery errors or repository changes."
+  "note": "Reviewed the immutable snapshot and exact framework declarations; canonical comparison and coherence match the node and sources. Dependency repair is valid, signature is verbatim, report sections are substantive, and scompile.py passed without errors or warnings."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleExtensionByZero",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleExtensionByZero",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleExtensionByZero.lean",
-  "statement": "def proEtaleExtensionByZero (X : Scheme.{u}) (U : X.ProEt) [IsOpenImmersion U.hom] (A : CommRingCat.{u + 1}) [Finite A] : ringedSiteModules.{u + 1} (((constantSheaf (ProEt.topology X) RingCat.{u + 1}).obj (RingCat.of A)).over U) ⥤ ringedSiteModules.{u + 1} ((constantSheaf (ProEt.topology X) RingCat.{u + 1}).obj (RingCat.of A))",
-  "branch": "newtargets-dag",
-  "by": "NX",
+  "module": "WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs",
+  "declaration": "AlgebraicGeometry.ProEtale.openImmersionLowerShriek",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.openImmersionLowerShriek",
+   "AlgebraicGeometry.ProEtale.openImmersionLowerShriekAdjunction",
+   "AlgebraicGeometry.ProEtale.localizationLowerShriek_eq"
+  ],
+  "statement": "def openImmersionLowerShriek :\n    Sheaf (Scheme.ProEt.topology U) A ⥤ Sheaf (Scheme.ProEt.topology X) A",
+  "branch": "slopmaster2",
+  "by": "NK",
   "date": "2026-10-15",
-  "existing": false,
-  "note": "Uses the localized-ringed-site presentation expressly specified in the node: U : X.ProEt with [IsOpenImmersion U.hom] packages the two schemes and j, and the domain is modules over A_X.over U. ProEt.weaklyEtale_localization identifies this with modules over A_U on U.left.ProEt. No equivalence is chosen from a sorry theorem; the presheaf and sheafification are concrete existing constructions."
+  "existing": true,
+  "note": "The previous Scheme.proEtaleExtensionByZero interface has domain modules on X.ProEt/U over A_X.over U, rather than fixed-coefficient module sheaves on U.ProEt, and cannot compose with the recorded comparisonUpperStar (ModuleCat A). The existing upstream openImmersionLowerShriek specialized to ModuleCat.{u+1} A is the same extension by zero in the fixed-coefficient presentation: left Kan extension along localization followed by sheafification (localizationLowerShriek_eq). Since j is monic, its comma category is empty or has a terminal factorization, giving precisely M(V→U) or zero. The constant-sheaf module structure is equivalently the sectionwise A-action, as in the comparison dependency. The existing adjunction fixes the canonical maps. No arbitrary map, strengthened hypothesis, or new definition is introduced."
  }
 }
