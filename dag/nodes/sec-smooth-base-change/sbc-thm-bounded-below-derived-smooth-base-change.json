@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Choose $a\\in\\mathbf Z$ with $H^q(K)=0$ for $q<a$. For each integer $n$, put $K_n=\\tau_{\\le n}K$ and let $i_n:K_n\\to K$ be the canonical map. The explicit standard truncation has $H^q(K_n)=H^q(K)$ for $q\\le n$ and zero otherwise. Thus $K_n$ is bounded (zero if $n<a$) and its cohomology stalks have only prime divisors in $\\mathcal P$. In particular $K_n\\in D^b_{\\mathcal P\\text{-tor}}(T_{\\Et})$.",
+   "text": "Choose a lower bound a for K. For each n, Kn = tau_le_n K has the same Hq as K for q <= n and zero above n, by the standard truncation triangle. It is bounded between a and n, including the case n < a, and its cohomology remains allowable torsion.",
    "uses": [
     "sbc-def-derived-categories-with-allowable-torsion",
     "def-sbc-standard-tstructure-derived-category"
@@ -28,86 +28,71 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-    "place": "## Proof: truncation argument"
+    "place": "Proof: bounded-to-bounded-below truncation argument; allowable-torsion typing"
    }
   },
   {
-   "text": "Apply [sbc-thm-bounded-allowable-torsion] to $K_n$. The smoothness of $f$, the quasi-compactness and quasi-separatedness of $g$, and the same set $\\mathcal P$ are exactly its hypotheses. Its unconditional ambient-derived-category conclusion gives that $\\operatorname{BC}_{f,g}(K_n)$ is an isomorphism; no upper bound on the cohomology of its images is assumed.",
+   "text": "Apply bounded allowable-torsion smooth base change to Kn. Flip the chosen Cartesian square to the convention of the bounded-below truncation criterion, which identifies Hn of both comparison maps from Kn to K. The abelian exchange is the component of the explicit unit/comparison/counit natural transformation. Its naturality gives a commutative square on Hn. Three edges are isomorphisms, so the fourth is one. DerivedCategory.isIso_iff detects isomorphisms directly on all cohomology objects; no separate stalk conservativity theorem is needed.",
    "uses": [
-    "sbc-thm-bounded-allowable-torsion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-    "place": "## Proof: truncation argument"
-   }
-  },
-  {
-   "text": "Write $A=Lf^*Rg_*$ and $B=Rh_*Le^*$. By [sbc-lem-bounded-below-truncation-criterion], $H^n(A(i_n))$ and $H^n(B(i_n))$ are isomorphisms. Naturality of the exchange map at $i_n$ gives $H^n(B(i_n))\\,H^n(\\operatorname{BC}(K_n))=H^n(\\operatorname{BC}(K))\\,H^n(A(i_n))$. Therefore $H^n(\\operatorname{BC}(K))=H^n(B(i_n))\\,H^n(\\operatorname{BC}(K_n))\\,H^n(A(i_n))^{-1}$ is an isomorphism, for every integer $n$, including $n<a$.",
-   "uses": [
+    "sbc-thm-bounded-allowable-torsion",
     "sbc-lem-bounded-below-truncation-criterion",
-    "sbc-lem-bc-naturality"
+    "sbc-def-base-change-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-    "place": "## Proof: truncation argument"
+    "place": "Proof: bounded-to-bounded-below truncation argument; allowable-torsion typing"
    }
   },
   {
-   "text": "The functors $Rg_*$ and $Rh_*$ act on bounded-below categories by [def-weil-pbc-direct-image], and the derived inverse images do so by [def-weil-pbc-derived-inverse-image]. Thus $A(K)$ and $B(K)$ are in $D^+(X_{\\Et})$. Step 3 gives isomorphisms on all cohomology sheaves, hence on all their geometric stalks. Apply [lem-weil-pbc-derived-stalk-conservative] on $X$ to obtain the isomorphism in $D^+(X_{\\Et})$.",
+   "text": "To apply qcqs_higherDirectImages_prime_torsion at a separably closed geometric point s, extend its field to its algebraic closure. The already-proved Scheme.isIso_pointSmallEtalePrecomp_sheafFiber gives an additive stalk isomorphism for this field extension. Transport annihilators across this isomorphism. This uses the existing algebraically closed formulation without changing that statement.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-derived-inverse-image",
-    "lem-weil-pbc-derived-stalk-conservative"
+    "lem-weil-pbc-geometric-point-field-extension",
+    "lem-sbc-qcqs-higher-images-prime-torsion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-    "place": "## Proof: truncation argument"
+    "place": "Proof: bounded-to-bounded-below truncation argument; allowable-torsion typing"
    }
   },
   {
-   "text": "We check the allowable-torsion typing separately. For any abelian sheaf $F$ on $T_{\\Et}$ with $\\mathcal P$-torsion stalks, let $M$ be the divisibility poset of positive integers having only prime factors in $\\mathcal P$ (including $1$), and put $F[m]=\\ker(m:F\\to F)$. This poset is filtered, since $mm^{\\prime}$ is a common upper bound. The stalk functor is exact by [prop-weil-pbc-geometric-stalks-exact] and preserves colimits: by [lem-weil-pbc-geometric-point-pullback-stalk] it is inverse image to the geometric point followed by an equivalence, and inverse image is a left adjoint by [def-weil-pbc-inverse-image]. Hence on every stalk the canonical map $\\varinjlim_{m\\in M}F[m]\\to F$ is the union of the kernels of multiplication by $m$, which is all of the stalk by hypothesis. Conservativity of geometric stalks gives $F=\\varinjlim_{m\\in M}F[m]$. Since $g$ is qcqs, [lemma-weil-pbc-direct-image-filtered-colimit] now gives $R^pg_*F=\\varinjlim_{m\\in M}R^pg_*F[m]$ for $p\\ge0$. Each term is killed by $m$: the additive derived functor sends the equality $m\\operatorname{id}_{F[m]}=0$ to $m\\operatorname{id}_{Rg_*F[m]}=0$, and then take $H^p$. Every element of every stalk of the displayed colimit thus is killed by some $m\\in M$. Consequently $R^pg_*F$ has $\\mathcal P$-torsion stalks.",
+   "text": "For a sheaf F placed in degree zero, qcqs higher direct images preserve allowable torsion by the preceding step. The proved rightDerivedFunctorPlusCompatibility identifies plus and unbounded right derived functors. Negative cohomology vanishes by left exactness. More generally, if K is bounded below at a, repackage it as a plus object and use the same compatibility to show Rg(K) is bounded below at a.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-weil-pbc-geometric-point-pullback-stalk",
-    "def-weil-pbc-inverse-image",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "lem-sbc-qcqs-higher-images-prime-torsion",
+    "src-right-derived-functor-plus-compatibility",
     "def-weil-pbc-direct-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-    "place": "Typing omitted by blueprint proof; allowable-prime refinement of Stacks 0DDC (lemma-torsion-cohomology) and 0DDD (lemma-torsion-direct-image)"
+    "place": "Proof: bounded-to-bounded-below truncation argument; allowable-torsion typing"
    }
   },
   {
-   "text": "Apply the first hypercohomology filtration of [def-weil-pbc-hypercohomology-filtrations] to the given Cartesian square, relabelling its $(X,Y,X^{\\prime},Y^{\\prime})$ as $(T,S,Y,X)$ and its $(f,g,f^{\\prime},g^{\\prime})$ as $(g,f,h,e)$, and to $K$ on $T$. Its $E_2^{p,q}=R^pg_*H^q(K)$ has $\\mathcal P$-torsion stalks by step 5. Its finite filtration of $H^n(Rg_*K)$ involves only $a\\le q\\le n$. All later-page terms are subquotients of earlier terms. Exactness of geometric stalks therefore makes each graded stalk a subquotient of a $\\mathcal P$-torsion group. Subgroups and quotients preserve the property. It also survives extensions: if the image of $x$ in the quotient is killed by $m\\in M$ and $mx$ in the subobject is killed by $m^{\\prime}\\in M$, then $mm^{\\prime}x=0$. Induct along the finite filtration. Thus every cohomology sheaf of $Rg_*K$ has $\\mathcal P$-torsion stalks.",
+   "text": "The allowable-torsion plus class is triangulated and closed under isomorphisms. Its inverse image under the triangulated functor Rg is therefore such a class. Apply the already-proved DerivedCategory.prop_of_bounded (WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean) to Kn: single sheaves satisfy this class by step 4, and Hq(Kn) is allowable by the truncation API. Hence all Hq(Rg(Kn)) have allowable torsion. After applying Rg to the standard triangle Kn -> K -> tau_gt_n K, its third term is >= n+1 by step 4. The long exact sequence shows Hn(Rg(Kn)) -> Hn(Rg(K)) is an isomorphism. Transport the allowable property. This is bounded devissage plus truncation in place of the optional hypercohomology filtration.",
    "uses": [
-    "def-weil-pbc-hypercohomology-filtrations",
-    "prop-weil-pbc-geometric-stalks-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-    "place": "Typing omitted by blueprint proof; Stacks 0DDC, proof of (2)"
-   }
-  },
-  {
-   "text": "Inverse image $f^{-1}$ is exact by [prop-weil-pbc-inverse-image-exact], so [lem-weil-pbc-exact-functor-bounded-below] identifies $H^n(A(K))$ with $f^{-1}H^n(Rg_*K)$. For a geometric point $\\bar x:P\\to X$, [lem-weil-pbc-geometric-point-pullback-stalk] identifies its stalk with $\\Gamma(P,\\bar x^{-1}f^{-1}H^n(Rg_*K))=\\Gamma(P,(f\\bar x)^{-1}H^n(Rg_*K))$, and hence with $H^n(Rg_*K)_{f\\bar x}$. The middle identification is clause (2) of [lem-weil-pbc-inverse-image-composition], applied with $u=f:X\\to S$ and $v=\\bar x:P\\to X$. Step 6 makes this a $\\mathcal P$-torsion group. Thus $A(K)$ lies in $D^+_{\\mathcal P\\text{-tor}}(X_{\\Et})$; its isomorphic object $B(K)$ does also, because the isomorphism induces isomorphisms on all cohomology stalks. This is a full subcategory by [sbc-def-derived-categories-with-allowable-torsion], so the ambient isomorphism and its inverse are morphisms in it, proving the claim with the corrected target site $X_{\\Et}$.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "lem-weil-pbc-geometric-point-pullback-stalk",
     "sbc-def-derived-categories-with-allowable-torsion",
-    "lem-weil-pbc-inverse-image-composition"
+    "def-sbc-standard-tstructure-derived-category",
+    "src-right-derived-functor-plus-compatibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-    "place": "## Proof: truncation argument"
+    "place": "Proof: bounded-to-bounded-below truncation argument; allowable-torsion typing"
+   }
+  },
+  {
+   "text": "Exact inverse image commutes with cohomology and preserves lower bounds. The already-proved upperStarCompSheafFiberIso identifies its geometric stalk with the original stalk at the composite geometric point. Positive allowable annihilators transport across this additive isomorphism. Thus Lf*Rg*K is bounded below with allowable-torsion cohomology. The ambient isomorphism of step 2 transports this property to Rh*Le*K, completing all three conjuncts.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lemma-openclosed-stalk-upperstar",
+    "sbc-def-derived-categories-with-allowable-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "Proof: bounded-to-bounded-below truncation argument; allowable-torsion typing"
    }
   }
  ],
@@ -116,24 +101,18 @@
   "def-sbc-standard-tstructure-derived-category",
   "sbc-thm-bounded-allowable-torsion",
   "sbc-lem-bounded-below-truncation-criterion",
-  "sbc-lem-bc-naturality",
+  "sbc-def-base-change-map",
+  "lem-weil-pbc-geometric-point-field-extension",
+  "lem-sbc-qcqs-higher-images-prime-torsion",
+  "src-right-derived-functor-plus-compatibility",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-derived-inverse-image",
-  "lem-weil-pbc-derived-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-weil-pbc-geometric-point-pullback-stalk",
-  "def-weil-pbc-inverse-image",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lemma-weil-pbc-direct-image-filtered-colimit",
-  "def-weil-pbc-hypercohomology-filtrations",
-  "prop-weil-pbc-inverse-image-exact",
   "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-weil-pbc-inverse-image-composition"
+  "lemma-openclosed-stalk-upperstar"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-  "place": "## Proof, expanded with explicit naturality square and allowable-torsion typing; Stacks 0DDC and 0DDD for the torsion argument"
+  "place": "A4 stage-3 proof: original bounded-to-bounded-below route; allowable typing by bounded triangulated devissage and truncation, using the proved source-library APIs"
  },
  "mathlib_searches": [
   {
@@ -269,5 +248,15 @@
   "by": "NE",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-4e293",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261015T154149-L-157907",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, canonical exchange construction, truncation proof and torsion typing matched the node statements and updated proof dependencies; delivered modules and all direct importers compile."
  }
 }
