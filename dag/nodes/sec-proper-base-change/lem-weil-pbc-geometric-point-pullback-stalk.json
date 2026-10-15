@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "For an algebraically closed $\\Omega$, [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant] gives, naturally in every sheaf of sets $G$ on $(\\operatorname{Spec}\\Omega)_{\\Et}$, an isomorphism from the constant sheaf with value $\\Gamma(\\operatorname{Spec}\\Omega,G)$ to $G$. Applying this to the underlying sheaf of an abelian sheaf and observing that the canonical map is defined by restriction of sections, hence respects zero and addition, gives a natural isomorphism between the constant abelian-sheaf functor and the identity. The same argument with the scalar-action maps gives the corresponding natural isomorphism for $\\Lambda$-module sheaves.",
+   "text": "For abelian sheaves, apply [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant] to the underlying sheaf of sets. Mathlib constantSheafAdj_counit_w identifies the image of the abelian counit under sheafCompose(forget) with the set-valued counit up to a canonical isomorphism. The forgetful functor on sheaves reflects isomorphisms, so the abelian counit is invertible. This is globalSections_addCommGrp_isEquivalence in the Lean proof.",
    "uses": [
     "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
     "def-weil-pbc-abelian-etale-sheaves",
@@ -40,11 +40,9 @@
    }
   },
   {
-   "text": "Since $P=\\operatorname{Spec}\\Omega$ has one point, it is connected [def-weil-connected-scheme], so by [lem-weil-pbc-constant-sheaf-sections-connected] the canonical map $\\iota_P:E\\to\\Gamma(P,\\underline E)$ is an isomorphism for every abelian group $E$, naturally in $E$ (it is the component at $P$ of the canonical map from the constant presheaf, natural in $E$); for $E=\\Lambda$ it is a ring isomorphism $\\Lambda\\cong\\Lambda_P(P)$, and for a $\\Lambda$-module $E$ it is $\\Lambda$-linear. Together with the natural isomorphism $\\underline{\\Gamma(P,-)}\\cong\\mathrm{id}$ of Step 1, the constant-sheaf functor and $\\Gamma(P,-)$ are therefore quasi-inverse equivalences on abelian sheaves, and likewise on $\\Lambda$-module sheaves. Every equivalence of abelian categories is exact, so both global-sections functors in (1) are exact.",
+   "text": "The already proved source-library instance Scheme.isLocalSite_smallEtaleTopology_of_isSepClosed (WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf) makes the constant-sheaf functor fully faithful, by Mathlib LocalSite. Hence the unit of the constant-sheaf/global-sections adjunction is invertible. Together with Step 1 this makes global sections an equivalence for abelian sheaves. Transport evaluation from the chosen terminal object to the identity etale object using their unique isomorphism. For every ring Lambda, use the already proved Scheme.isEquivalence_constantSheaf_of_isSepClosed in the same source module, and Adjunction.isEquivalence_right_of_isEquivalence_left, to obtain the module-valued global-sections equivalence. Equivalences preserve all limits and colimits, in particular finite ones. These source-library declarations are fully proved tools, not additional open obligations.",
    "uses": [
     "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-    "lem-weil-pbc-constant-sheaf-sections-connected",
-    "def-weil-connected-scheme",
     "def-weil-pbc-abelian-etale-sheaves",
     "def-weil-sheaf-of-modules-category"
    ],
@@ -55,7 +53,7 @@
    }
   },
   {
-   "text": "Apply the identity-geometric-point clause of [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant] to the sheaf $\\bar y^{-1}G$ on $P=\\operatorname{Spec}\\Omega$. It gives a natural isomorphism $\\Gamma(P,\\bar y^{-1}G)\\cong(\\bar y^{-1}G)_{\\mathrm{id}_P}$.",
+   "text": "For the identity point of P=Spec Omega, the set-valued germ is bijective by [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant]. The forgetful functor from abelian groups preserves the filtered stalk colimit (shrink its universe to u). Point.toPresheafFiber_presheafFiberCompIso_hom_app identifies the forgotten abelian germ with the set-valued germ followed by the canonical colimit comparison isomorphism. Reflection of isomorphisms by forget therefore makes the abelian germ invertible. Its natural transformation is the restriction of Point.toPresheafFiberNatTrans to sheaves; taking asIso yields the natural isomorphism from global sections to the identity-point stalk.",
    "uses": [
     "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
     "def-weil-pbc-inverse-image",
@@ -68,7 +66,7 @@
    }
   },
   {
-   "text": "The inverse-image stalk comparison [lem-weil-pbc-inverse-image-stalk-germ], applied to $f=\\bar y$, the point $\\mathrm{id}_P$ of $P$, and $G$, gives a natural isomorphism $(\\bar y^{-1}G)_{\\mathrm{id}_P}\\cong G_{\\bar y}$. Composing it with Step 3 yields the asserted natural isomorphism $\\Gamma(P,\\bar y^{-1}G)\\cong G_{\\bar y}$.",
+   "text": "Whisker the natural isomorphism of Step 3 with inverse image along y. Apply [lem-weil-pbc-inverse-image-stalk-germ] with f=y and the identity point of P, take its natural isomorphism c, and compose. The identity equation id_P followed by y equals y transports the resulting target stalk functor. This proves the required Nonempty natural isomorphism with the unchanged stalk functor at y.",
    "uses": [
     "lem-weil-pbc-inverse-image-stalk-germ",
     "def-weil-geometric-point"
@@ -77,19 +75,6 @@
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
     "place": "Lemma 03Q1 (lemma-stalk-pullback), assertion (3), and Remark 04JN"
-   }
-  },
-  {
-   "text": "Canonical-map refinement for isIso_globalGerm_identity: a field is henselian, and the proved IsLocalRing.isSepClosed_residueField_of_isSepClosed_fractionRing applied to Omega as its own fraction field gives separably closed residue field. Thus Omega is strictly henselian. Apply strictlyHenselianSections_geometricStalk_isIso at the identity geometric point, which lies over the closed point because Spec Omega has a unique point, in coefficient universe u+1. For each abelian sheaf F its first clause makes the specific toPresheafFiber map an isomorphism. Unfold globalGerm: its component is the composite of the terminal-object global-sections comparison isomorphism with this specific germ. Therefore every component is invertible, and NatIso.isIso_of_isIso_app makes globalGerm invertible. The preceding four steps concern the original full equivalence and pullback-stalk clauses, retained by the public import of GeometricPointPullbackStalk.",
-   "uses": [
-    "lem-weil-pbc-strictly-henselian-sections-stalk",
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-derived-global-germ"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QO specialized to an algebraically closed field; Tags 04JN and 03Q1 (3), canonical germ comparison"
    }
   }
  ],
@@ -101,17 +86,12 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-geometric-stalks",
   "lem-weil-pbc-inverse-image-stalk-germ",
-  "def-weil-geometric-point",
-  "lem-weil-pbc-constant-sheaf-sections-connected",
-  "def-weil-connected-scheme",
-  "lem-weil-pbc-strictly-henselian-sections-stalk",
-  "def-weil-pbc-henselian-terminology",
-  "def-weil-pbc-derived-global-germ"
+  "def-weil-geometric-point"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04JQ, 04JN and 03Q1 for the original clauses; Tag 03QO for the canonical identity-point germ. C2 applies the already-proved strictly henselian sections-to-stalk theorem and the defining component formula of globalGerm."
+  "place": "Tags 04JQ, 04JN and 03Q1(3), realized using the proved PointConstantSheaf source-library equivalence and local-site instances, set constancy, and inverse-image stalk comparison; C3 stage 3, 2026-10-15"
  },
  "mathlib_searches": [
   {
@@ -226,9 +206,9 @@
   "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261015T154156-L-159784",
+  "landing": "20261015T161023-L-259590",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
