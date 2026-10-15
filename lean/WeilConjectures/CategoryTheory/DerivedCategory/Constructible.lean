@@ -103,7 +103,7 @@ noncomputable def Etale.DerivedCategory.boundedConstructible :
 
 /-- The constructible bounded derived category `Dᵇc( X, A)`, realized as the full
 subcategory of bounded complexes with constructible homology in the derived category of
-étale sheaves. (blueprint: `def-weil-pbc-constructible-complexes`) -/
+étale sheaves. -/
 noncomputable def Etale.DerivedCategoryBoundedConstructible : Type _ :=
   (Etale.DerivedCategory.boundedConstructible A X).FullSubcategory
 
@@ -280,8 +280,7 @@ variable [(Etale.constructibleSheaf A X).IsClosedUnderKernels]
   [(Etale.constructibleSheaf A X).IsClosedUnderExtensions]
   [PreservesFiniteLimits (CategoryTheory.forget A)]
 
-/-- Blueprint `prop-constructible-derived-subcategory`, first assertion: **Complexes with
-constructible homology form a triangulated subcategory**, provided the
+/-- **Complexes with constructible homology form a triangulated subcategory**, provided the
 constructible sheaves are closed under kernels, cokernels and extensions
 (blueprint: `thm:constructible-serre`). (blueprint: `prop:constructible-derived-subcategory`) -/
 instance Etale.DerivedCategory.constructibleHomology_isTriangulated :
@@ -289,8 +288,7 @@ instance Etale.DerivedCategory.constructibleHomology_isTriangulated :
   rw [Etale.DerivedCategory.constructibleHomology_eq]
   infer_instance
 
-/-- Blueprint `prop-constructible-derived-subcategory`: **`Dᵇc(X, A)` is a triangulated
-subcategory of `D(X_ét)`**, provided the constructible
+/-- **`Dᵇc(X, A)` is a triangulated subcategory of `D(X_ét)`**, provided the constructible
 sheaves are closed under kernels, cokernels and extensions (blueprint:
 `thm:constructible-serre`). (blueprint: `prop:constructible-derived-subcategory`) -/
 instance Etale.DerivedCategory.boundedConstructible_isTriangulated :

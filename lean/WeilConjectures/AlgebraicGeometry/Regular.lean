@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-public import WeilConjectures.AlgebraicGeometry.NoetherianComponents
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
@@ -50,9 +49,6 @@ injection for the Brauer group.
   regular rings, i.e. all their localizations at primes are regular local rings.
 - `AlgebraicGeometry.IsRegular.uniqueFactorizationMonoid_stalk`: the local rings of a regular
   scheme are unique factorization domains.
-- `AlgebraicGeometry.IsRegular.isIntegrallyClosed_stalk`: regular schemes are normal.
-- `AlgebraicGeometry.IsRegular.exists_isClopen_isIntegral`: a Noetherian regular scheme is a
-  finite disjoint union of open and closed normal integral subschemes.
 -/
 
 @[expose] public section
@@ -199,27 +195,6 @@ theorem Scheme.smooth_fromNormalization_comp {k : Type u} [Field k] [PerfectFiel
     (X.topologicalKrullDim_normalization q ▸ hdim).le
   exact smooth_of_isRegular _
 
-/-- **Properties of the normalization.** Let `X` be an integral scheme of finite type over a
-field `k`, and `ν : X^ν ⟶ X` its normalization in the function field.
-
-* **(a)** `ν` is finite and surjective, and `dim X^ν = dim X`; if `X` is proper over `k`, so is
-  `X^ν`.
-* **(b)** `ν` is an isomorphism over every open of `X` whose local rings are integrally closed.
-* **(c)** If `dim X = 1` and `k` is perfect, then `X^ν` is smooth over `k`.
-(blueprint: `lem-sc-normalization-properties`) -/
-theorem Scheme.normalization_properties {k : Type u} [Field k] {X : Scheme.{u}} [IsIntegral X]
-    (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] :
-    (IsFinite X.fromNormalization ∧ Surjective X.fromNormalization ∧
-      topologicalKrullDim X.normalization = topologicalKrullDim X ∧
-      (IsProper q → IsProper (X.fromNormalization ≫ q))) ∧
-    (∀ U : X.Opens, (∀ x ∈ U, IsIntegrallyClosed (X.presheaf.stalk x)) →
-      IsIso (X.fromNormalization ∣_ U)) ∧
-    (PerfectField k → topologicalKrullDim X = 1 → Smooth (X.fromNormalization ≫ q)) := by
-  have := X.isFinite_fromNormalization_of_locallyOfFiniteType q
-  exact ⟨⟨this, inferInstance, X.topologicalKrullDim_normalization q, fun _ ↦ inferInstance⟩,
-    fun U hU ↦ X.isIso_fromNormalization_restrict U hU,
-    fun _ hdim ↦ Scheme.smooth_fromNormalization_comp q hdim⟩
-
 /-- The local rings of a regular locally noetherian scheme of dimension at most one are
 integrally closed: each of them is a field or a discrete valuation ring. -/
 theorem isIntegrallyClosed_stalk_of_isRegular {X : Scheme.{u}} [IsRegular X]
@@ -237,8 +212,7 @@ theorem isIntegrallyClosed_stalk_of_smooth {k : Type u} [Field k] {X : Scheme.{u
   isIntegrallyClosed_stalk_of_isRegular hdim x
 
 /-- A connected locally noetherian regular scheme is irreducible, since its local rings, being
-regular, are integral domains. This is the consequence recorded in blueprint
-`rem-pc-regular-normal`; see also `AlgebraicGeometry.IsRegular.exists_isClopen_isIntegral`. -/
+regular, are integral domains. -/
 theorem IsRegular.irreducibleSpace (X : Scheme.{u}) [IsRegular X] [IsLocallyNoetherian X]
     [ConnectedSpace X] : IrreducibleSpace X :=
   irreducibleSpace_of_isDomain_stalk X fun _ ↦ inferInstance
@@ -307,32 +281,5 @@ theorem IsRegular.uniqueFactorizationMonoid_stalk {X : Scheme.{u}} [IsRegular X]
     UniqueFactorizationMonoid (X.presheaf.stalk x) :=
   have := isRegularRing_stalk x
   IsRegularLocalRing.uniqueFactorizationMonoid _
-
-/-- **Regular schemes are normal** (Stacks 0569): the local rings of a regular scheme are
-integrally closed domains. They are unique factorization domains
-(`AlgebraicGeometry.IsRegular.uniqueFactorizationMonoid_stalk`), and a unique factorization
-domain is integrally closed. -/
-@[stacks 0569]
-theorem IsRegular.isIntegrallyClosed_stalk {X : Scheme.{u}} [IsRegular X] (x : X) :
-    IsIntegrallyClosed (X.presheaf.stalk x) :=
-  have := uniqueFactorizationMonoid_stalk x
-  inferInstance
-
-/-- Blueprint `rem-pc-regular-normal`: Regular schemes are normal; the normal decomposition.
-
-Regular schemes are normal (Stacks 0569, `AlgebraicGeometry.IsRegular.isIntegrallyClosed_stalk`)
-and a Noetherian normal scheme is a finite disjoint union of normal integral schemes (Stacks
-033M, `AlgebraicGeometry.Scheme.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk`). So a
-Noetherian regular scheme `X` is a finite disjoint union of open and closed subschemes `X_a`,
-each integral with integrally closed local rings. In particular a regular, connected, Noetherian
-scheme is integral (`AlgebraicGeometry.IsRegular.isIntegral`), hence irreducible
-(`AlgebraicGeometry.IsRegular.irreducibleSpace`). -/
-theorem IsRegular.exists_isClopen_isIntegral (X : Scheme.{u}) [IsRegular X] [IsNoetherian X] :
-    ∃ (n : ℕ) (U : Fin n → X.Opens), (∀ a, IsClopen (U a : Set X)) ∧
-      Pairwise (fun a b ↦ Disjoint (U a) (U b)) ∧ ⨆ a, U a = ⊤ ∧
-      ∀ a, IsIntegral (U a).toScheme ∧
-        ∀ x : (U a).toScheme, IsIntegrallyClosed ((U a).toScheme.presheaf.stalk x) :=
-  X.exists_isClopen_isIntegral_of_isIntegrallyClosed_stalk fun x ↦
-    ⟨inferInstance, isIntegrallyClosed_stalk x⟩
 
 end AlgebraicGeometry

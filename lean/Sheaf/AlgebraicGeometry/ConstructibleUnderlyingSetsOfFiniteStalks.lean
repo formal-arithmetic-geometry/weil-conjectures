@@ -5,7 +5,7 @@ Authors: SHEAF groups P1 and S2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
 import WeilConjectures.ConstructibleSheaf.Pullback
 import all Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
@@ -31,7 +31,7 @@ private theorem finiteLocallyConstant_underlyingSets {Λ : Type (u + 1)}
     (hG : IsFiniteLocallyConstantSheaf G)
     (hfin : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
       Finite (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj G)) :
-    IsLisseEtaleSheafOfSets
+    IsFiniteLocallyConstantEtaleSheafOfSets
       ((sheafCompose Y.smallEtaleTopology
         (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj G) := by
   let := hG
@@ -43,7 +43,7 @@ private theorem finiteLocallyConstant_underlyingSets {Λ : Type (u + 1)}
       (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj
       (G.over (d.cover.etalePrecoverageToEtale i))).IsConstant _
     infer_instance
-  · refine ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2 ?_⟩
+  · intro Ω _ _ s
     let P := pointSmallEtale s
     let M := (P.sheafFiber (A := ModuleCat.{u + 1} Λ)).obj G
     have : Finite M := hfin Ω s
@@ -105,12 +105,8 @@ theorem isConstructibleEtaleSheafOfSets_of_finite_module_stalks
     exact Sheaf.isConstant_congr _
       (((S.domain k).smallEtaleTopology.overPullback (Type (u + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e.symm)
-  · refine ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2 ?_⟩
-    have : Finite ((pointSmallEtale s).sheafFiber.obj
-        ((sheafCompose (S.domain k).smallEtaleTopology
-          (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj G)) :=
-      (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-        (hUG.2.isFinitelyGenerated_sheafFiber Ω s)
+  · intro Ω _ _ s
+    let := hUG.2 Ω s
     exact Finite.of_equiv _
       (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv.symm
 

@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.Curve.ConstantProperDegreeCoordinates
 import Sheaf.AlgebraicGeometry.IsProperOrIsAffine
 import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 import Sheaf.AlgebraicGeometry.BaseChangeCurve
-import WeilConjectures.AlgebraicGeometry.Curve.Estimate
+import Sheaf.AlgebraicGeometry.Curve.ProperCohomology
 import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 
 /-!

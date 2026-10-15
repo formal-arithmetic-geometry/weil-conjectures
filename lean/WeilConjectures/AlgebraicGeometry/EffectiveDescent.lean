@@ -12,15 +12,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 import Sheaf.FieldTheory.CommonExtensionFields
+import Sheaf.RingTheory.RelativeSmoothDimensionDescent
+import Sheaf.AlgebraicGeometry.InvariantAffineNeighbourhoods
+import Sheaf.AlgebraicGeometry.InvariantAffineDescentGluing
+import Sheaf.AlgebraicGeometry.CommMonoidDescent
+import Sheaf.AlgebraicGeometry.IsProperOfFieldBaseChange
+import Sheaf.AlgebraicGeometry.FpqcDescendQuasiCompact
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
-public import Mathlib.CategoryTheory.Sites.Over
-public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.AffineLocal
-public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Gluing
-public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Group
-public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Neighbourhood
-public import WeilConjectures.AlgebraicGeometry.FieldExtensionDescent
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
@@ -37,18 +36,10 @@ finite separable extension of the base field.
   free morphism, descent data on schemes in which every finite set of points lies in an affine open
   (for instance projective schemes over a field) are effective (blueprint
   `thm-pd-effective-descent`).
-- `CategoryTheory.Over.DescentDatum.isEffective_of_isClosedImmersion`: along a surjective finite
-  locally free morphism with affine source `X`, descent data on projective schemes over `X` are
-  effective (blueprint `thm-pd-effective-descent`).
 - `CategoryTheory.Over.DescentDatum.existsUnique_hom_of_isPullback`: compatible morphisms descend
   (blueprint `lem-pd-morphisms-descend`).
-- `CategoryTheory.Over.DescentDatum.existsUnique_grpObj_of_isPullback`: compatible group scheme
-  structures descend, uniquely (blueprint `lem-pd-group-scheme-descent`).
-- `CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback`: compatible commutative group
-  scheme structures descend (blueprint `lem-pd-group-scheme-descent`).
-- `AlgebraicGeometry.locallyOfFiniteType_quasiCompact_smooth_isProper_connectedSpace_of_isPullback`:
-  finite type, smoothness, properness and connectedness descend along a field extension (blueprint
-  `thm-pd-fpqc-local-properties`).
+- `CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback`: compatible group scheme
+  structures descend (blueprint `lem-pd-group-scheme-descent`).
 - `AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback`:
   properness, smoothness of relative dimension `n` and geometric integrality descend along a field
   extension (blueprint `thm-pd-fpqc-local-properties`).
@@ -79,37 +70,10 @@ theorem isEffective_of_isFinite [IsFinite p] [Flat p] [LocallyOfFinitePresentati
     [Surjective p] {V : Over X}
     (hV : ∀ s : Set V.left, s.Finite → ∃ U : V.left.Opens, IsAffineOpen U ∧ s ⊆ U)
     (D : Over.DescentDatum p V) : D.IsEffective := by
-  refine isEffective_of_forall_exists_mem fun v ↦ ?_
-  obtain ⟨U, hv, hU, hUa, W, hW, hUW⟩ := D.exists_isInvariant_isAffineOpen hV v
-  exact ⟨U, hU, hv, D.isEffective_restrict_of_isAffineOpen hU hUa hW hUW⟩
-
-/-- **Effective descent for projective schemes.** Let `p : X ⟶ Y` be a surjective finite locally
-free morphism with `X` affine, and let `V` be a scheme over `X` such that `V ⟶ X` is projective:
-there is a closed immersion `i : V ⟶ ℙ(α; X)`, with `α` finite, whose composition with the
-projection `ℙ(α; X) ⟶ X` is the structure morphism of `V`. Then every descent datum on `V`
-relative to `p` is effective.
-
-This is Stacks 0CCJ: finitely many points of `V` lie in an affine open (Stacks 01ZY,
-`exists_isAffineOpen_superset_of_isImmersion_of_isAffine`), which is the hypothesis of
-`isEffective_of_isFinite`. The blueprint states this for an arbitrary base; here `X`, hence the
-projective space `ℙ(α; X)`, is assumed affine, which covers the case of a finite extension of
-fields used for the Jacobian. The general case is
-`CategoryTheory.Over.DescentDatum.isEffective_of_isHProjective`.
-
-(blueprint: `thm-pd-effective-descent`) -/
-theorem isEffective_of_isClosedImmersion [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
-    [Surjective p] [IsAffine X] {V : Over X} {α : Type u} [Finite α] (i : V.left ⟶ ℙ(α; X))
-    [IsClosedImmersion i] (hi : i ≫ ℙ(α; X) ↘ X = V.hom) (D : Over.DescentDatum p V) :
-    D.IsEffective := by
-  have : CompactSpace ℙ(α; X) := QuasiCompact.compactSpace_of_compactSpace (ℙ(α; X) ↘ X)
-  have : CompactSpace V.left := QuasiCompact.compactSpace_of_compactSpace i
-  have : QuasiSeparated V.hom := by
-    rw [← hi]
-    infer_instance
-  have : QuasiSeparatedSpace V.left := quasiSeparatedSpace_of_quasiSeparated V.hom
-  exact D.isEffective_of_isFinite fun s hs ↦
-    exists_isAffineOpen_superset_of_isImmersion_of_isAffine i s hs
-
+  apply isEffective_of_invariant_affine_neighbourhoods D
+  intro v
+  obtain ⟨U, hv, hU, hB, hstable⟩ := exists_invariant_affine_neighbourhood hV D v
+  exact ⟨U, hv, hU, hB, hstable⟩
 
 /-- **Morphisms descend.** Let `p : X ⟶ Y` be faithfully flat and quasi-compact, and let `V`, `W`
 be schemes over `X` with descent data `D`, `E` that are effective, with descended schemes `V₀`,
@@ -131,63 +95,52 @@ theorem existsUnique_hom_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] 
     (hψ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
       E.transport f₁ f₂ h (a ≫ ψ) = D.transport f₁ f₂ h a ≫ ψ) :
     ∃! ψ₀ : V₀ ⟶ W₀, ψ.left ≫ qW = qV ≫ ψ₀.left := by
-  obtain ⟨g₀, hg₀, hu⟩ := D.existsUnique_desc_of_isPullback hqV hDV (ψ.left ≫ qW)
-    fun f₁ f₂ h a ↦ by simpa [hψ] using hEW f₁ f₂ h (a ≫ ψ)
-  obtain ⟨_, _, hY⟩ := D.existsUnique_desc_of_isPullback hqV hDV (V.hom ≫ p)
-    fun f₁ f₂ h a ↦ by simp [h]
-  have hg₀Y : g₀ ≫ W₀.hom = V₀.hom := by
-    refine (hY _ ?_).trans (hY V₀.hom hqV.w).symm
-    dsimp only
-    rw [reassoc_of% hg₀, hqW.w, Over.w_assoc]
-  refine ⟨Over.homMk g₀ hg₀Y, hg₀.symm, fun ψ₀ hψ₀ ↦ ?_⟩
-  ext
-  exact hu _ hψ₀.symm
+  have : Flat qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  have : Surjective qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  have : QuasiCompact qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  have hc : ∀ {T : Scheme.{u}} (a b : T ⟶ V.left),
+      a ≫ qV = b ≫ qV → a ≫ (ψ.left ≫ qW) = b ≫ (ψ.left ≫ qW) := by
+    intro T a b hab
+    have hf : (a ≫ V.hom) ≫ p = (b ≫ V.hom) ≫ p := by
+      simpa only [Category.assoc, ← hqV.w] using congrArg (· ≫ V₀.hom) hab
+    let aa : Over.mk (a ≫ V.hom) ⟶ V := Over.homMk a
+    let bb : Over.mk (b ≫ V.hom) ⟶ V := Over.homMk b
+    have ht : D.transport (a ≫ V.hom) (b ≫ V.hom) hf aa = bb := by
+      ext : 1
+      apply hqV.hom_ext
+      · exact (hDV _ _ hf aa).trans hab
+      · simp
+    have hw := hEW (a ≫ V.hom) (b ≫ V.hom) hf (aa ≫ ψ)
+    rw [hψ, ht] at hw
+    exact hw.symm
+  let ψ₀ := EffectiveEpi.desc qV (ψ.left ≫ qW) hc
+  have hfac : qV ≫ ψ₀ = ψ.left ≫ qW := EffectiveEpi.fac _ _ _
+  have hover : ψ₀ ≫ W₀.hom = V₀.hom := by
+    apply (cancel_epi qV).1
+    rw [← Category.assoc, hfac, Category.assoc, hqW.w, ← Category.assoc,
+      Over.w ψ, hqV.w]
+  refine ⟨Over.homMk ψ₀ hover, hfac.symm, ?_⟩
+  intro z hz
+  ext : 1
+  apply (cancel_epi qV).1
+  exact hz.symm.trans hfac.symm
+
+/-- The point `qV ∘ a` of `V₀` over `Y` induced by a point `a` of `V` over `f`, for a projection
+`qV : V ⟶ V₀` exhibiting `V` as the base change of `V₀` along `p`. -/
+abbrev descendPoint {V : Over X} {V₀ : Over Y} {qV : V.left ⟶ V₀.left}
+    (hqV : IsPullback qV V.hom V₀.hom p) {T : Scheme.{u}} {f : T ⟶ X} (a : Over.mk f ⟶ V) :
+    Over.mk (f ≫ p) ⟶ V₀ :=
+  Over.homMk (a.left ≫ qV) (by
+    simp only [Over.mk_hom, Category.assoc, hqV.w]
+    rw [← Category.assoc, Over.w a]
+    rfl)
 
 /-- **The descended scheme is a group scheme.** Let `p : X ⟶ Y` be faithfully flat and
 quasi-compact, let `V` be a scheme over `X` with an effective descent datum `D`, with descended
-scheme `V₀` and projection `qV`, and let `V` carry a group scheme structure whose multiplication
-and unit are compatible with `D`. Then `V₀` carries a unique group scheme structure over `Y`
-whose base change is the given one, in the sense that `qV` maps products of points of `V` to
-products of points of `V₀`.
-
-Existence comes from the Yoneda lemma applied to the invariant points of `V`; uniqueness from
-the injectivity of base change on morphisms (`liftPoint_injective`).
-
-(blueprint: `lem-pd-group-scheme-descent`) -/
-theorem existsUnique_grpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] {V : Over X}
-    [GrpObj V] (D : Over.DescentDatum p V) {V₀ : Over Y} (qV : V.left ⟶ V₀.left)
-    (hqV : IsPullback qV V.hom V₀.hom p)
-    (hDV : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
-      (D.transport f₁ f₂ h a).left ≫ qV = a.left ≫ qV)
-    (hμ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a b : Over.mk f₁ ⟶ V),
-      D.transport f₁ f₂ h (lift a b ≫ μ[V]) =
-        lift (D.transport f₁ f₂ h a) (D.transport f₁ f₂ h b) ≫ μ[V])
-    (hη : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p),
-      D.transport f₁ f₂ h (toUnit _ ≫ η[V]) = toUnit _ ≫ η[V]) :
-    ∃! _ : GrpObj V₀, ∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V),
-      descendPoint hqV (lift a b ≫ μ[V]) =
-        lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] := by
-  let G := GrpObj.ofRepresentableBy V₀ (D.descendedPresheaf hqV hDV hμ hη)
-    (D.descendedRepresentableBy hqV hDV hμ hη)
-  have hG {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V) :
-      descendPoint hqV (lift a b ≫ μ[V]) =
-        lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] := by
-    have hmul (x y : Over.mk (f ≫ p) ⟶ V₀) :
-        lift x y ≫ μ[V₀] = (D.homGroup hqV hDV hμ hη _).mul x y :=
-      (((D.descendedPresheaf hqV hDV hμ hη).map (lift x y).op).hom.map_mul
-        (fst V₀ V₀) (snd V₀ V₀)).trans
-        (congrArg₂ (D.homGroup hqV hDV hμ hη _).mul (lift_fst x y) (lift_snd x y))
-    exact (D.descendPoint_mul hqV hDV hμ hη a b).trans (hmul _ _).symm
-  exact ⟨G, hG, fun G' hG' ↦ GrpObj.ext_of_mul_eq
-    (mul_eq_of_descendPoint_mul hqV G'.toMonObj G.toMonObj hG' hG)⟩
-
-/-- **The descended scheme is a commutative group scheme.** Let `p : X ⟶ Y` be faithfully flat
-and quasi-compact, let `V` be a scheme over `X` with an effective descent datum `D`, with
-descended scheme `V₀` and projection `qV`, and let `V` carry a commutative group scheme structure
-whose multiplication and unit are compatible with `D`. Then `V₀` carries a commutative group
-scheme structure over `Y` whose base change is the given one: `qV` maps products of points of `V`
-to products of points of `V₀`. Such a structure is unique by
-`existsUnique_grpObj_of_isPullback`.
+scheme `V₀` and projection `qV`, and let `V` carry a commutative group scheme structure whose
+multiplication and unit are compatible with `D`. Then `V₀` carries a commutative group scheme
+structure over `Y` whose base change is the given one: `qV` maps products of points of `V` to
+products of points of `V₀`. Such a structure is unique, by the same token.
 
 (blueprint: `lem-pd-group-scheme-descent`) -/
 theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] {V : Over X}
@@ -203,12 +156,81 @@ theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p]
     ∃ _ : CommGrpObj V₀, ∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V),
       descendPoint hqV (lift a b ≫ μ[V]) =
         lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] := by
-  obtain ⟨G, hG, -⟩ := D.existsUnique_grpObj_of_isPullback qV hqV hDV hμ hη
-  have : IsCommMonObj V₀ := (isCommMonObj_iff_isMulCommutative V₀).2 fun T ↦
-    ⟨⟨fun x y ↦ liftPoint_injective hqV (by
-      rw [liftPoint_mul_of_descendPoint_mul hqV hG, liftPoint_mul_of_descendPoint_mul hqV hG,
-        mul_comm])⟩⟩
-  exact ⟨{ }, hG⟩
+  obtain ⟨M, hcomm, hprod, hunit⟩ :=
+    exists_commMonObj_of_effective_projection D qV hqV hDV hμ hη
+  let : MonObj V₀ := M
+  have : IsCommMonObj V₀ := hcomm
+  have hinv : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p)
+      (a : Over.mk f₁ ⟶ V),
+      D.transport f₁ f₂ h (a ≫ ι[V]) = D.transport f₁ f₂ h a ≫ ι[V] := by
+    intro T f₁ f₂ h a
+    let F : (Over.mk f₁ ⟶ V) →* (Over.mk f₂ ⟶ V) :=
+      { toFun := D.transport f₁ f₂ h
+        map_one' := hη f₁ f₂ h
+        map_mul' := hμ f₁ f₂ h }
+    exact F.map_inv a
+  obtain ⟨i₀, hi₀, _⟩ := existsUnique_hom_of_isPullback D D qV hqV hDV
+    qV hqV hDV ι[V] hinv
+  let a : Over.mk V.hom ⟶ V := Over.homMk (𝟙 V.left)
+  let q₀ := descendPoint hqV a
+  have hia : descendPoint hqV (a ≫ ι[V]) = q₀ ≫ i₀ := by
+    ext : 1
+    simpa [a, q₀, descendPoint] using hi₀
+  have hleft : lift (q₀ ≫ i₀) q₀ ≫ μ[V₀] = toUnit _ ≫ η[V₀] := by
+    rw [← hia]
+    calc
+      lift (descendPoint hqV (a ≫ ι[V])) (descendPoint hqV a) ≫ μ[V₀] =
+          descendPoint hqV (lift (a ≫ ι[V]) a ≫ μ[V]) := by
+        ext : 1
+        exact (hprod V.hom (a ≫ ι[V]) a).symm
+      _ = descendPoint hqV (toUnit _ ≫ η[V]) := by
+        congr 1
+        simp [a]
+      _ = toUnit _ ≫ η[V₀] := by
+        ext : 1
+        exact hunit V.hom
+  have hright : lift q₀ (q₀ ≫ i₀) ≫ μ[V₀] = toUnit _ ≫ η[V₀] := by
+    rw [← hia]
+    calc
+      lift (descendPoint hqV a) (descendPoint hqV (a ≫ ι[V])) ≫ μ[V₀] =
+          descendPoint hqV (lift a (a ≫ ι[V]) ≫ μ[V]) := by
+        ext : 1
+        exact (hprod V.hom a (a ≫ ι[V])).symm
+      _ = descendPoint hqV (toUnit _ ≫ η[V]) := by
+        congr 1
+        simp [a]
+      _ = toUnit _ ≫ η[V₀] := by
+        ext : 1
+        exact hunit V.hom
+  have : Flat qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  have : Surjective qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  have : QuasiCompact qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  let G : GrpObj V₀ :=
+    { M with
+      inv := i₀
+      left_inv := by
+        ext : 1
+        apply (cancel_epi qV).1
+        have hh : q₀ ≫ (lift i₀ (𝟙 V₀) ≫ μ[V₀]) =
+            q₀ ≫ (toUnit V₀ ≫ η[V₀]) := by
+          simpa only [← Category.assoc, comp_lift, Category.comp_id,
+            comp_toUnit] using hleft
+        have hq₀ : q₀.left = qV := by simp [q₀, a, descendPoint]
+        simpa only [Over.comp_left, hq₀] using congrArg Over.Hom.left hh
+      right_inv := by
+        ext : 1
+        apply (cancel_epi qV).1
+        have hh : q₀ ≫ (lift (𝟙 V₀) i₀ ≫ μ[V₀]) =
+            q₀ ≫ (toUnit V₀ ≫ η[V₀]) := by
+          simpa only [← Category.assoc, comp_lift, Category.comp_id,
+            comp_toUnit] using hright
+        have hq₀ : q₀.left = qV := by simp [q₀, a, descendPoint]
+        simpa only [Over.comp_left, hq₀] using congrArg Over.Hom.left hh }
+  let : GrpObj V₀ := G
+  refine ⟨inferInstance, ?_⟩
+  intro T f a b
+  ext : 1
+  exact hprod f a b
 
 end CategoryTheory.Over.DescentDatum
 
@@ -297,28 +319,34 @@ theorem isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback {
     (z' : Z' ⟶ Spec (.of K)) (q : Z' ⟶ Z)
     (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (n : ℕ)
     [IsProper z'] [SmoothOfRelativeDimension n z'] [GeometricallyIntegral z'] :
-    IsProper z ∧ SmoothOfRelativeDimension n z ∧ GeometricallyIntegral z :=
-  isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux z z' q h n
-
-/-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
-field extension and let `Z` be a scheme over `k` whose base change `Z_K` is smooth (in particular
-locally of finite type) and proper over `K`, and connected. Then `Z` is of finite type, smooth and
-proper over `k`, and connected.
-
-This is the statement of the blueprint, where `K / k` is finite; finiteness is not needed.
-Smoothness, being locally of finite type and properness descend along the faithfully flat
-quasi-compact morphism `Spec K ⟶ Spec k` (Stacks 02KL, 05B5, 02YJ), and `Z` is connected as the
-image of `Z_K` under the surjection `Z_K ⟶ Z`.
-
-(blueprint: `thm-pd-fpqc-local-properties`) -/
-theorem locallyOfFiniteType_quasiCompact_smooth_isProper_connectedSpace_of_isPullback
-    {k K : Type u} [Field k] [Field K] [Algebra k K] {Z Z' : Scheme.{u}} (z : Z ⟶ Spec (.of k))
-    (z' : Z' ⟶ Spec (.of K)) (q : Z' ⟶ Z)
-    (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K)))) [Smooth z']
-    [IsProper z'] [ConnectedSpace Z'] :
-    LocallyOfFiniteType z ∧ QuasiCompact z ∧ Smooth z ∧ IsProper z ∧ ConnectedSpace Z := by
-  have : IsProper z := of_isPullback_Spec_map_algebraMap @IsProper h ‹_›
-  exact ⟨inferInstance, inferInstance, of_isPullback_Spec_map_algebraMap @Smooth h ‹_›, this,
-    connectedSpace_of_isPullback_Spec_map_algebraMap h⟩
+    IsProper z ∧ SmoothOfRelativeDimension n z ∧ GeometricallyIntegral z := by
+  let p := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  have hp : (Surjective p ∧ Flat p) ∧ QuasiCompact p := by
+    dsimp [p]
+    exact ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩
+  let : MorphismProperty.IsStableUnderBaseChange (@SmoothOfRelativeDimension n) :=
+    smoothOfRelativeDimension_isStableUnderBaseChange n
+  let : MorphismProperty.DescendsAlong (@SmoothOfRelativeDimension n)
+      (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=
+    HasRingHomProperty.descendsAlong_flat
+      (RingHom.locally_standardSmoothOfRelativeDimension_codescendsAlong_faithfullyFlat n)
+  have hdim : SmoothOfRelativeDimension n z :=
+    MorphismProperty.of_isPullback_of_descendsAlong
+      (P := @SmoothOfRelativeDimension n)
+      (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact) h.flip hp inferInstance
+  have : Smooth z := SmoothOfRelativeDimension.smooth n z
+  have hqc' : QuasiCompact (pullback.snd z p) := by
+    have heq : pullback.snd z p = h.isoPullback.inv ≫ z' := by
+      simp [p]
+    rw [heq]
+    infer_instance
+  have hqc : QuasiCompact z := quasiCompact_of_fpqc_baseChange p z
+  have hproper' : IsProper (pullback.snd z p) := by
+    have heq : pullback.snd z p = h.isoPullback.inv ≫ z' := by
+      simp [p]
+    rw [heq]
+    infer_instance
+  have hproper : IsProper z := isProper_of_field_baseChange (K := K) z
+  exact ⟨hproper, hdim, geometricallyIntegral_of_field_pullback z z' q h⟩
 
 end AlgebraicGeometry

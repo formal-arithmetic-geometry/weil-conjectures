@@ -1,129 +1,117 @@
 {
- "kind": "statement",
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/06YH",
-  "place": "Localization normalization decomposition"
- },
- "proof_origin": {
-  "by": "worker",
-  "document": "https://stacks.math.columbia.edu/tag/06YH",
-  "place": "K-flat localization comparisons; S4 reuses the independent-universe lifting isomorphism and the homotopy acyclicity characterization"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Invertibility of target comparison",
-   "date": "2026-10-14",
-   "results": "No exact existing theorem found."
+  "kind": "statement",
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/06YH",
+    "place": "Localization normalization decomposition"
   },
-  {
-   "tool": "leanfinder",
-   "query": "Invertibility of target comparison",
-   "date": "2026-10-14",
-   "results": "No exact existing theorem found."
+  "proof_origin": {
+    "by": "worker",
+    "document": "https://stacks.math.columbia.edu/tag/06YH",
+    "place": "K-flat localization comparisons; S4 reuses the independent-universe lifting isomorphism and the homotopy acyclicity characterization"
   },
-  {
-   "tool": "grep",
-   "query": "schemeTensorShift localization comparison",
-   "date": "2026-10-14",
-   "results": "No exact existing theorem found."
-  }
- ],
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
-  "date": "2026-10-14",
-  "group": "E4"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-scheme-tensor-shift-localization-normalization",
-   "place": "component"
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/SchemeTensorShiftLocalizationNormalization.lean",
-  "branch": "sheaf-dag",
-  "by": "E4",
-  "date": "2026-10-14",
-  "declaration": "AlgebraicGeometry.schemeTensorShift_targetComparison_isIso",
-  "statement": "theorem schemeTensorShift_targetComparison_isIso\n    (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)\n    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :\n    letI := schemeCanonicalTensorShift X\n    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=\n      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B\n    IsIso (schemeTensorShiftTargetComparison X P T U)"
- },
- "id": "aux-sc-target-comparison-isIso",
- "title": "Invertibility of target comparison",
- "statement": "IsIso of schemeTensorShiftTargetComparison",
- "stmt_deps": [
-  "lem-sc-scheme-tensor-shift-localization-normalization"
- ],
- "proof": [
-  {
-   "text": "Convert the sheaf IsKFlat hypotheses for P and T to the monoidal quasi-isomorphism kFlat predicate. The homotopy-category characterization asks that tensoring preserve acyclic objects on both sides; the given hypothesis proves the right-tensor case and the braiding gives the left-tensor case.",
-   "uses": [
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a kFlat complex V, the component of IndependentTensorShift.TensorCommShift₂.liftingIsoHom at V and any W is the Qh tensorator and is invertible. Transport through quotientCompQhIso; the tensorator of the quotient functor is invertible, so the composite tensorator of Q is invertible as well.",
-   "uses": [
-    "lem-sc-derived-tensor-shift-independent-universe"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply this to (T,U) and (P,T tensor U). The target comparison is the shift of the composite of the whiskered first tensorator and the second tensorator, followed by the inverse localization shift comparison. All these maps are isomorphisms, hence so is their composite. No K-flatness of U is needed for this component.",
-   "uses": [
-    "def-pc-scheme-derived-tensor-structure"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-pc-kflat-complex",
-  "lem-sc-derived-tensor-shift-independent-universe",
-  "def-pc-scheme-derived-tensor-structure"
- ],
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E4",
-  "result": "pass",
-  "landing": "20261013T201746-L-3968356",
-  "kind": "proof",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "X-8f3e6",
-  "group": "K4",
-  "result": "pass",
-  "landing": "20261014T004107-L-2836183",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files match the node statements and compile cleanly; direct importer also compiles, with allowed axioms only.",
-  "sorry_before": [
-   "AlgebraicGeometry.schemeTensorShift_first_normalization_core",
-   "AlgebraicGeometry.schemeTensorShift_second_normalization"
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Invertibility of target comparison",
+      "date": "2026-10-14",
+      "results": "No exact existing theorem found."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Invertibility of target comparison",
+      "date": "2026-10-14",
+      "results": "No exact existing theorem found."
+    },
+    {
+      "tool": "grep",
+      "query": "schemeTensorShift localization comparison",
+      "date": "2026-10-14",
+      "results": "No exact existing theorem found."
+    }
   ],
-  "sorry_after": []
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
+    "date": "2026-10-14",
+    "group": "E4"
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-scheme-tensor-shift-localization-normalization",
+      "place": "component"
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
+    "file": "lean/Sheaf/AlgebraicGeometry/SchemeTensorShiftLocalizationNormalization.lean",
+    "branch": "sheaf-dag",
+    "by": "E4",
+    "date": "2026-10-14",
+    "declaration": "AlgebraicGeometry.schemeTensorShift_targetComparison_isIso",
+    "statement": "theorem schemeTensorShift_targetComparison_isIso\n    (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)\n    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :\n    letI := schemeCanonicalTensorShift X\n    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=\n      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B\n    IsIso (schemeTensorShiftTargetComparison X P T U)"
+  },
+  "id": "aux-sc-target-comparison-isIso",
+  "title": "Invertibility of target comparison",
+  "statement": "IsIso of schemeTensorShiftTargetComparison",
+  "stmt_deps": [
+    "lem-sc-scheme-tensor-shift-localization-normalization"
+  ],
+  "proof": [
+    {
+      "text": "Convert the sheaf IsKFlat hypotheses for P and T to the monoidal quasi-isomorphism kFlat predicate. The homotopy-category characterization asks that tensoring preserve acyclic objects on both sides; the given hypothesis proves the right-tensor case and the braiding gives the left-tensor case.",
+      "uses": [
+        "def-pc-kflat-complex"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "For a kFlat complex V, the component of IndependentTensorShift.TensorCommShift₂.liftingIsoHom at V and any W is the Qh tensorator and is invertible. Transport through quotientCompQhIso; the tensorator of the quotient functor is invertible, so the composite tensorator of Q is invertible as well.",
+      "uses": [
+        "lem-sc-derived-tensor-shift-independent-universe"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply this to (T,U) and (P,T tensor U). The target comparison is the shift of the composite of the whiskered first tensorator and the second tensorator, followed by the inverse localization shift comparison. All these maps are isomorphisms, hence so is their composite. No K-flatness of U is needed for this component.",
+      "uses": [
+        "def-pc-scheme-derived-tensor-structure"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-pc-kflat-complex",
+    "lem-sc-derived-tensor-shift-independent-universe",
+    "def-pc-scheme-derived-tensor-structure"
+  ],
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "E4",
+    "result": "pass",
+    "landing": "20261013T201746-L-3968356",
+    "kind": "proof",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "X-8f3e6",
+    "group": "K4",
+    "result": "pass",
+    "landing": "20261014T004107-L-2836183",
+    "kind": "interface",
+    "note": "independent Codex review: Delivered files match the node statements and compile cleanly; direct importer also compiles, with allowed axioms only.",
+    "sorry_before": [
+      "AlgebraicGeometry.schemeTensorShift_first_normalization_core",
+      "AlgebraicGeometry.schemeTensorShift_second_normalization"
+    ],
+    "sorry_after": []
   }
- }
 }

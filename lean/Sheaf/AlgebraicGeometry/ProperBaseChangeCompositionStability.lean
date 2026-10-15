@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
 public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 import Sheaf.AlgebraicGeometry.EtaleGrothendieckSpectralSequence
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.CategoryTheory.ExactCoupleConvergence
 import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
@@ -43,10 +43,10 @@ change and injective acyclicity gives the last conjunct.
 theorem prop_weil_pbc_composition_stability
     {X Y Z : Scheme.{u_comp}} (f : X ⟶ Y) (h : Y ⟶ Z)
     [IsProper f] [IsProper h]
-    (hf : HasAllPrimeAbelianInjectiveAcyclicity f)
-    (hh : HasAllPrimeAbelianInjectiveAcyclicity h) :
+    (hf : HasAllPrimeInjectiveAcyclicity f)
+    (hh : HasAllPrimeInjectiveAcyclicity h) :
     IsProper (f ≫ h) ∧
-      HasAllPrimeAbelianInjectiveAcyclicity (f ≫ h) ∧
+      HasAllPrimeInjectiveAcyclicity (f ≫ h) ∧
       HasTorsionAbelianBaseChange (f ≫ h) := by
   sorry
 

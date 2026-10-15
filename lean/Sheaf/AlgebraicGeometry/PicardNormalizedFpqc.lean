@@ -116,7 +116,6 @@ private theorem exists_iso_tensorObj_of_fpqc_local_eq (f : X ⟶ S)
     β_ K B ≪≫ whiskerLeftIso B (eNK.symm ≪≫
       (Modules.pullback _).mapIso (fromSkeletonToSkeletonIso N').symm)
 
-/-
 /-- Normalized Picard classes form an fpqc sheaf when the structure sheaf is universally
 its own pushforward. For existence, normalize overlap isomorphisms to preserve the chosen
 trivializations along the section. Global units come from the base, so these isomorphisms
@@ -126,7 +125,7 @@ local isomorphisms between two modules express their quotient as a module from t
 fpqc descent of the scalar cocycle. Normalization then forces their classes to agree.
 Source: Stacks Project, Tags 0D28, 0D2B and 023T.
 (blueprint: lem-pd-normalized-picard-fpqc) -/
-private theorem isSheaf_fpqc_picardFunctorNormalized_local (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S)
+theorem isSheaf_fpqc_picardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S)
     (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (Limits.pullback.snd f T.hom))) :
     Presheaf.IsSheaf (Scheme.fpqcTopology.over S)
       (picardFunctorNormalized f σ hσ).toFunctor := by
@@ -221,7 +220,5 @@ private theorem isSheaf_fpqc_picardFunctorNormalized_local (f : X ⟶ S) (σ : S
     exact picardFunctorNormalized_eq_of_iso_tensorObj f σ hσ t t' _ ((fromSkeleton _).obj N.val)
       (SheafOfModules.unit _) e
       ((ρ_ _).symm ≪≫ whiskerLeftIso _ (Modules.pullbackObjUnitIso _).symm)
-
--/
 
 end AlgebraicGeometry

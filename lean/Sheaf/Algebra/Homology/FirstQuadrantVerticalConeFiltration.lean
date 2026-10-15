@@ -163,10 +163,9 @@ private theorem filtration_of_degreewise
   have hi (p : ℤ) : Mono (i p) :=
     HomologicalComplex.mono_of_mono_f _ (fun _ ↦ inferInstance)
   let F : DecreasingFiltration K := {
-    F := fun p ↦ Subobject.mk (i p)
-    F_succ_le p := by
-      let q := p + 1
-      have hpq : p ≤ q := by dsimp [q]; omega
+    step := fun p ↦ Subobject.mk (i p)
+    antitone_step := by
+      intro p q hpq
       let l : L q ⟶ L p := CochainComplex.ofHom
         (fun n ↦ Subobject.ofLE (S q n) (S p n) (hS n hpq)) (by
           intro n

@@ -133,7 +133,7 @@ private theorem open_trivialized_image_spectrum_comparison
     (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (Modules.overFunctorEquiv U) _ ≪≫
       (Modules.restrictFunctorComp hU.isoSpec.inv U.ι).symm
-  have hbase := Modules.pushforwardRestrictIso hsq
+  have hbase := Modules.pushforward_restrict_square p j q r hsq
   have h0 : Modules.pushforward p ⋙ H ≅ A ⋙ Modules.pushforward r :=
     Functor.isoWhiskerLeft _ hHB ≪≫ hbase
   have : (Modules.pushforward p).Additive :=

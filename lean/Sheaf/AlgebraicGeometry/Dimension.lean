@@ -5,7 +5,6 @@ Authors: SHEAF lead L
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
@@ -69,5 +68,23 @@ theorem Scheme.dim_eq_topologicalKrullDim (X : Scheme.{u}) :
   apply iSup_congr
   intro x
   exact ringKrullDim_stalk_eq_coheight (X := X) x
+
+/-- (blueprint: def-pc-dimension) The *relative dimension* of a morphism `f : X ⟶ S` over a point
+`s : S`: the dimension `Scheme.dim` of the scheme-theoretic fibre `X_s = f.fiber s`
+(blueprint, node order 452). Standing assumptions of the node, which belong to the use of the
+notion and not to its data: `f` is of finite type (`LocallyOfFiniteType f` and `QuasiCompact f`)
+and the fibre `X_s` is nonempty; for an empty fibre the value is `⊥`. -/
+noncomputable def Scheme.Hom.relativeDimAt {X S : Scheme.{u}} (f : X ⟶ S) (s : S) :
+    WithBot ℕ∞ :=
+  (f.fiber s).dim
+
+/-- (blueprint: def-pc-dimension) A morphism `f : X ⟶ S` is *of relative dimension `d`*: `f` is of
+finite type (`LocallyOfFiniteType f` and `QuasiCompact f`) and every nonempty scheme-theoretic
+fibre `X_s = f.fiber s` has dimension `d` (blueprint, node order 452). Empty fibres impose no
+condition. This is the blueprint's convention; Stacks, Tag 02NJ asks moreover that the fibres be
+equidimensional. -/
+def Scheme.Hom.IsOfRelativeDimension {X S : Scheme.{u}} (f : X ⟶ S) (d : ℕ) : Prop :=
+  LocallyOfFiniteType f ∧ QuasiCompact f ∧
+    ∀ s : S, Nonempty (f.fiber s) → f.relativeDimAt s = d
 
 end AlgebraicGeometry

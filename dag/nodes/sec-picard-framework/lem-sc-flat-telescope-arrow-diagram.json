@@ -1,133 +1,121 @@
 {
- "id": "lem-sc-flat-telescope-arrow-diagram",
- "kind": "statement",
- "title": "Compatible flat tower diagram over a cochain arrow",
- "statement": "Let Y be a scheme and P,Pprime be cochain complexes of its module sheaves [def-pc-cochain-complex-modules], each an actual flat telescope [def-sc-flat-telescope-stage-map], and f:P→Pprime a cochain map. There are three sequential towers E0,E1,E2 of bounded-above flat complexes and level maps a:E0→E1, b:E0→E2 whose sum maps commute with the one-minus-shift differentials. There are homotopy isomorphisms e1:q(Tel(E1))≅q(P), e2:q(Tel(E2))≅q(Pprime), an augmentation g:Tel(E0)→P, and quasi-isomorphisms qn:E0n→τ≤nP [def-pc-quasi-iso-modules]. The qn commute with the tower transitions after inclusion into P. The unshifted restriction of g is the sum of qn followed by those inclusions, and its shifted restriction is zero. In the homotopy category q(g)=q(Cone.map(a));e1 and q(g);q(f)=q(Cone.map(b));e2. No claim that g is a quasi-isomorphism, and no stage-map predicate, is included: these are verified from this data separately.",
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/077J",
-  "place": "Parent lem-sc-flat-telescope-stage-map-refinement, step 1 and construction part of step 2; compatible-pair flat resolutions of Tags 06YS and 077J. The simultaneous maps to supplied telescope models are an agent expansion, not a literal assertion of these tags."
- },
- "stmt_deps": [
-  "def-sc-flat-telescope-stage-map",
-  "def-pc-cochain-complex-modules",
-  "def-pc-quasi-iso-modules"
- ],
- "proof": [
-  {
-   "text": "Obtain the towers, target homotopy-isomorphism augmentations, compatible truncation maps and four summand equations from the cocycle theorem, whose proof sets all four cochains to zero using strict bar augmentation data.",
-   "uses": [
+  "id": "lem-sc-flat-telescope-arrow-diagram",
+  "kind": "statement",
+  "title": "Compatible flat tower diagram over a cochain arrow",
+  "statement": "Let Y be a scheme and P,Pprime be cochain complexes of its module sheaves [def-pc-cochain-complex-modules], each an actual flat telescope [def-sc-flat-telescope-stage-map], and f:P→Pprime a cochain map. There are three sequential towers E0,E1,E2 of bounded-above flat complexes and level maps a:E0→E1, b:E0→E2 whose sum maps commute with the one-minus-shift differentials. There are homotopy isomorphisms e1:q(Tel(E1))≅q(P), e2:q(Tel(E2))≅q(Pprime), an augmentation g:Tel(E0)→P, and quasi-isomorphisms qn:E0n→τ≤nP [def-pc-quasi-iso-modules]. The qn commute with the tower transitions after inclusion into P. The unshifted restriction of g is the sum of qn followed by those inclusions, and its shifted restriction is zero. In the homotopy category q(g)=q(Cone.map(a));e1 and q(g);q(f)=q(Cone.map(b));e2. No claim that g is a quasi-isomorphism, and no stage-map predicate, is included: these are verified from this data separately.",
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/077J",
+    "place": "Parent lem-sc-flat-telescope-stage-map-refinement, step 1 and construction part of step 2; compatible-pair flat resolutions of Tags 06YS and 077J. The simultaneous maps to supplied telescope models are an agent expansion, not a literal assertion of these tags."
+  },
+  "stmt_deps": [
+    "def-sc-flat-telescope-stage-map",
+    "def-pc-cochain-complex-modules",
+    "def-pc-quasi-iso-modules"
+  ],
+  "proof": [
+    {
+      "text": "Obtain the towers, target homotopy-isomorphism augmentations, compatible truncation maps and four summand equations from the cocycle theorem, whose proof sets all four cochains to zero using strict bar augmentation data.",
+      "uses": [
+        "lem-sc-flat-telescope-arrow-cocycles"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Let s be the sum of qn followed by the truncation inclusions. By coproduct extensionality, strict compatibility gives (1-shift);s=0. Apply Mathlib mappingCone.desc with shifted component zero and unshifted component s to construct g. The inr_desc and inl_desc lemmas prove both required restrictions.",
+      "uses": [],
+      "elementary": true
+    },
+    {
+      "text": "For each comparison, apply Mathlib mappingCone.descHomotopy to the two retained cochains. Rewrite the cone-map restrictions by mappingCone.map and the cone-descent identities; the four summand equations prove the two homotopies. For the second homotopy, compose g with f; cochain associativity and its zero shifted component give zero shifted component for g;f. Apply HomotopyCategory.eq_of_homotopy and functoriality, and take asIso of Q(r1),Q(r2). This proves both final equalities.",
+      "uses": [],
+      "elementary": true
+    }
+  ],
+  "proof_deps": [
     "lem-sc-flat-telescope-arrow-cocycles"
-   ],
-   "elementary": false
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "group": "F1",
+    "document": "https://stacks.math.columbia.edu/tag/077J",
+    "place": "Finite-piece bar input; source cone descent and comparison homotopies proved in Lean."
   },
-  {
-   "text": "Let s be the sum of qn followed by the truncation inclusions. By coproduct extensionality, strict compatibility gives (1-shift);s=0. Apply Mathlib mappingCone.desc with shifted component zero and unshifted component s to construct g. The inr_desc and inl_desc lemmas prove both required restrictions.",
-   "uses": [],
-   "elementary": true
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "A cochain map between sequential telescopes of bounded above flat complexes admits a compatible common flat tower with quasi-isomorphic truncation augmentations",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "morphism between mapping telescopes represented by compatible maps of sequential systems after quasi-isomorphic source refinement",
+      "results": "8 hits, including Functor.OfSequence.map and generic composable-arrow and small-object iteration APIs; no flat arrow-diagram theorem.",
+      "date": "2026-10-14",
+      "verdict": "No exact match."
+    },
+    {
+      "tool": "grep",
+      "query": "mappingCone.*shiftIso|shiftIso.*mappingCone|exists_flat.*diagram",
+      "results": "mappingCone.shiftIso in Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated; no flat arrow-diagram theorem. Local blueprint and source searches found only the parent refinement plan.",
+      "date": "2026-10-14",
+      "verdict": "No exact match; shift transport can be proved with Mathlib."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.FlatTelescopeStageMapRefinement",
+    "date": "2026-10-14",
+    "group": "A2"
   },
-  {
-   "text": "For each comparison, apply Mathlib mappingCone.descHomotopy to the two retained cochains. Rewrite the cone-map restrictions by mappingCone.map and the cone-descent identities; the four summand equations prove the two homotopies. For the second homotopy, compose g with f; cochain associativity and its zero shifted component give zero shifted component for g;f. Apply HomotopyCategory.eq_of_homotopy and functoriality, and take asIso of Q(r1),Q(r2). This proves both final equalities.",
-   "uses": [],
-   "elementary": true
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "Parent telescope refinement: compatible arrow diagram over good truncations before telescope quasi-isomorphism verification.",
+      "via": [
+        "lem-sc-flat-telescope-stage-map-refinement",
+        "lem-sc-normalized-flat-telescope-comparison",
+        "lem-sc-normalized-kflat-representative-comparison",
+        "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+        "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram",
+    "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowDiagram.lean",
+    "declaration": "AlgebraicGeometry.exists_flat_telescope_arrow_diagram",
+    "statement": "theorem exists_flat_telescope_arrow_diagram (Y : Scheme.{u}) (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hP : isFlatTelescope Y P) (hP' : isFlatTelescope Y P') (f : P ⟶ P') : let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace) let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ) ∃ (E₀ E₁ E₂ : ℕ → CochainComplex A ℤ) (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1)) (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1)) (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1)) (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n), (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i)) ∧ ∃ (c₁ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map a = Limits.Sigma.map a ≫ flatTelescopeDifferential E₁ t₁) (c₂ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map b = Limits.Sigma.map b ≫ flatTelescopeDifferential E₂ t₂) (e₁ : Q.obj (CochainComplex.mappingCone (flatTelescopeDifferential E₁ t₁)) ≅ Q.obj P) (e₂ : Q.obj (CochainComplex.mappingCone (flatTelescopeDifferential E₂ t₂)) ≅ Q.obj P') (g : CochainComplex.mappingCone (flatTelescopeDifferential E₀ t₀) ⟶ P) (q : ∀ n : ℕ, E₀ n ⟶ P.truncLE (n : ℤ)), (∀ n : ℕ, QuasiIso (q n)) ∧ (∀ n : ℕ, t₀ n ≫ q (n + 1) ≫ P.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ P.ιTruncLE (n : ℤ)) ∧ (CochainComplex.mappingCone.inr _ ≫ g = Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ))) ∧ ((CochainComplex.mappingCone.inl _).comp (CochainComplex.HomComplex.Cochain.ofHom g) (add_zero _) = 0) ∧ (Q.map g = Q.map (CochainComplex.mappingCone.map (flatTelescopeDifferential E₀ t₀) (flatTelescopeDifferential E₁ t₁) (Limits.Sigma.map a) (Limits.Sigma.map a) c₁) ≫ e₁.hom) ∧ (Q.map g ≫ Q.map f = Q.map (CochainComplex.mappingCone.map (flatTelescopeDifferential E₀ t₀) (flatTelescopeDifferential E₂ t₂) (Limits.Sigma.map b) (Limits.Sigma.map b) c₂) ≫ e₂.hom)",
+    "branch": "sheaf-dag",
+    "by": "A2",
+    "date": "2026-10-14"
+  },
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "A2",
+    "result": "pass",
+    "landing": "20261014T050215-L-1646070",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "F1",
+    "result": "pass",
+    "landing": "20261014T063815-L-2813191",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-sc-flat-telescope-arrow-cocycles"
- ],
- "proof_origin": {
-  "by": "agent",
-  "group": "F1",
-  "document": "https://stacks.math.columbia.edu/tag/077J",
-  "place": "Finite-piece bar input; source cone descent and comparison homotopies proved in Lean."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "A cochain map between sequential telescopes of bounded above flat complexes admits a compatible common flat tower with quasi-isomorphic truncation augmentations",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "morphism between mapping telescopes represented by compatible maps of sequential systems after quasi-isomorphic source refinement",
-   "results": "8 hits, including Functor.OfSequence.map and generic composable-arrow and small-object iteration APIs; no flat arrow-diagram theorem.",
-   "date": "2026-10-14",
-   "verdict": "No exact match."
-  },
-  {
-   "tool": "grep",
-   "query": "mappingCone.*shiftIso|shiftIso.*mappingCone|exists_flat.*diagram",
-   "results": "mappingCone.shiftIso in Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated; no flat arrow-diagram theorem. Local blueprint and source searches found only the parent refinement plan.",
-   "date": "2026-10-14",
-   "verdict": "No exact match; shift transport can be proved with Mathlib."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeStageMapRefinement",
-  "date": "2026-10-14",
-  "group": "A2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "Parent telescope refinement: compatible arrow diagram over good truncations before telescope quasi-isomorphism verification.",
-   "via": [
-    "lem-sc-flat-telescope-stage-map-refinement",
-    "lem-sc-normalized-flat-telescope-comparison",
-    "lem-sc-normalized-kflat-representative-comparison",
-    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
-    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram",
-  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowDiagram.lean",
-  "declaration": "AlgebraicGeometry.exists_flat_telescope_arrow_diagram",
-  "statement": "theorem exists_flat_telescope_arrow_diagram (Y : Scheme.{u}) (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hP : isFlatTelescope Y P) (hP' : isFlatTelescope Y P') (f : P ⟶ P') : let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace) let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ) ∃ (E₀ E₁ E₂ : ℕ → CochainComplex A ℤ) (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1)) (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1)) (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1)) (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n), (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i)) ∧ ∃ (c₁ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map a = Limits.Sigma.map a ≫ flatTelescopeDifferential E₁ t₁) (c₂ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map b = Limits.Sigma.map b ≫ flatTelescopeDifferential E₂ t₂) (e₁ : Q.obj (CochainComplex.mappingCone (flatTelescopeDifferential E₁ t₁)) ≅ Q.obj P) (e₂ : Q.obj (CochainComplex.mappingCone (flatTelescopeDifferential E₂ t₂)) ≅ Q.obj P') (g : CochainComplex.mappingCone (flatTelescopeDifferential E₀ t₀) ⟶ P) (q : ∀ n : ℕ, E₀ n ⟶ P.truncLE (n : ℤ)), (∀ n : ℕ, QuasiIso (q n)) ∧ (∀ n : ℕ, t₀ n ≫ q (n + 1) ≫ P.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ P.ιTruncLE (n : ℤ)) ∧ (CochainComplex.mappingCone.inr _ ≫ g = Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ))) ∧ ((CochainComplex.mappingCone.inl _).comp (CochainComplex.HomComplex.Cochain.ofHom g) (add_zero _) = 0) ∧ (Q.map g = Q.map (CochainComplex.mappingCone.map (flatTelescopeDifferential E₀ t₀) (flatTelescopeDifferential E₁ t₁) (Limits.Sigma.map a) (Limits.Sigma.map a) c₁) ≫ e₁.hom) ∧ (Q.map g ≫ Q.map f = Q.map (CochainComplex.mappingCone.map (flatTelescopeDifferential E₀ t₀) (flatTelescopeDifferential E₂ t₂) (Limits.Sigma.map b) (Limits.Sigma.map b) c₂) ≫ e₂.hom)",
-  "branch": "sheaf-dag",
-  "by": "A2",
-  "date": "2026-10-14"
- },
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
-  "result": "pass",
-  "landing": "20261014T050215-L-1646070",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
-  "result": "pass",
-  "landing": "20261014T063815-L-2813191",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- }
 }

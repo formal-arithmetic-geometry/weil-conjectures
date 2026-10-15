@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.Monoidal
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteStalks
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.Topology.SpectralConstructibleFiniteIntersection
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint

@@ -83,9 +83,7 @@ theorem strictHenselizationPointEvaluation_comparison
   let rep := (equivSmallModel.{v} (strictHenselizationNeighbourhoods x)).inverse
   let q := (rep ⋙ incl).op
   let cmp : strictHenselizationRing x ≅ cn.pt :=
-    (smallStrictHenselizationColimitIso x).symm ≪≫
-      Functor.Final.colimitIso q D ≪≫ colimit.isoColimitCocone ⟨cn, hcn⟩
-  letI : HasColimit (strictHenselizationDiagram x) := inferInstance
+    Functor.Final.colimitIso q D ≪≫ colimit.isoColimitCocone ⟨cn, hcn⟩
   let k := hct.coconePointUniqueUpToIso hc
   let ringIso : strictHenselizationRing x ≅ c.pt := cmp ≪≫ t ≪≫ k
   let ev : Cocone D := {
@@ -101,20 +99,8 @@ theorem strictHenselizationPointEvaluation_comparison
         rw [← Category.assoc, ← Hom.comp_appTop, h]
         simp } }
   let m := hcn.desc ev
-  have hcmp (j) : (smallStrictHenselizationCocone x).ι.app j ≫ cmp.hom =
+  have hcmp (j) : colimit.ι (strictHenselizationDiagram x) j ≫ cmp.hom =
       cn.ι.app (q.obj j) := by
-    have hleg : (smallStrictHenselizationCocone x).ι.app j =
-        colimit.ι (smallStrictHenselizationDiagram x) j ≫
-          (smallStrictHenselizationColimitIso x).hom := by
-      let r := rep ⋙ incl
-      exact (Functor.Final.ι_colimitIso_hom r.op (strictHenselizationDiagram x) j).symm
-    rw [hleg]
-    change (colimit.ι (smallStrictHenselizationDiagram x) j ≫
-        (smallStrictHenselizationColimitIso x).hom) ≫
-      ((smallStrictHenselizationColimitIso x).inv ≫
-        (Functor.Final.colimitIso q D).hom ≫
-          (colimit.isoColimitCocone ⟨cn, hcn⟩).hom) = _
-    rw [Category.assoc, Iso.hom_inv_id_assoc]
     change colimit.ι (q ⋙ D) j ≫
       ((Functor.Final.colimitIso q D).hom ≫
         (colimit.isoColimitCocone ⟨cn, hcn⟩).hom) = _
@@ -122,11 +108,10 @@ theorem strictHenselizationPointEvaluation_comparison
     exact colimit.isoColimitCocone_ι_hom ⟨cn, hcn⟩ (q.obj j)
   have hsmall : cmp.hom ≫ m = CommRingCat.ofHom
       (strictHenselizationPointEvaluation x) := by
-    apply (isColimitSmallStrictHenselizationCocone x).hom_ext
+    apply colimit.hom_ext
     intro j
     rw [← Category.assoc, hcmp, hcn.fac ev]
-    exact ((isColimitSmallStrictHenselizationCocone x).fac
-      (strictHenselizationPointCocone x) j).symm
+    exact (colimit.ι_desc (strictHenselizationPointCocone x) j).symm
   let := hinitial
   have hchart : t.hom ≫ k.hom ≫ CommRingCat.ofHom ψ ≫
       CommRingCat.ofHom K.subtype = m := by

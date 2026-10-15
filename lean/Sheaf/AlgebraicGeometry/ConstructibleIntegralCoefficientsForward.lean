@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
@@ -8,7 +8,6 @@ public import Mathlib.Algebra.Ring.ULift
 import all Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
 import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
 import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Mathlib.GroupTheory.FiniteAbelian.Basic
 
@@ -93,8 +92,7 @@ theorem isConstructibleSheaf_integral_forward {X : Scheme.{u}}
     exact Sheaf.isConstant_congr _
       ((Y.smallEtaleTopology.overPullback (Type (u + 1))
         (d.cover.etalePrecoverageToEtale i)).mapIso es.symm)
-  · refine isFiniteSheaf_of_finite_algClosed_stalks _ ?_
-    intro Ω _ _ t
+  · intro Ω _ _ t
     let P := pointSmallEtale t
     let M := (P.sheafFiber (A := ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).obj G
     let : Module.Finite (ULift.{u + 1} ℤ) M := (ModuleCat.isFinitelyGenerated_iff M).mp

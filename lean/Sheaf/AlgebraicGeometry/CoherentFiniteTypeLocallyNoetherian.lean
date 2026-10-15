@@ -56,7 +56,7 @@ private theorem isQuasicoherent_overEquiv (X : Scheme.{u}) (U : X.Opens)
     _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     (U.sheafOfModulesEquivOverUnit X.ringCatSheaf) _ _ (fun V ↦ this V) _ _ M _
 
-private theorem isFinitePresentation_free_sheaf
+private theorem isFinitePresentation_free
     {C : Type u} [SmallCategory C] [Limits.HasBinaryProducts C]
     {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -185,7 +185,7 @@ theorem isCoherent_iff_isQuasicoherent_and_isFiniteType
     have hfree : (SheafOfModules.free
         (R := (Scheme.Opens.toScheme (X := X) U).ringCatSheaf)
         (ULift.{u} (Fin n))).IsFinitePresentation :=
-      isFinitePresentation_free_sheaf.{u} _
+      isFinitePresentation_free.{u} _
     have : (e.functor.obj (F.over U)).IsQuasicoherent :=
       isQuasicoherent_overEquiv X U (F.over U)
     have : (e.functor.obj

@@ -5,7 +5,7 @@ Authors: SHEAF group U2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
 import Sheaf.ConstructibleSheaf.RepresentablePullbackConstantOfEvaluation
@@ -45,7 +45,7 @@ is the trivial group and the cover is the identity; the same argument applies. -
 theorem exists_connected_torsor_constant_set_pullback
     {U : Scheme.{u}} [ConnectedSpace U]
     (F : Sheaf U.smallEtaleTopology (Type (u + 1)))
-    (hF : IsLisseEtaleSheafOfSets F) :
+    (hF : IsFiniteLocallyConstantEtaleSheafOfSets F) :
     ∃ (Q : Type u) (_ : Group Q) (_ : Finite Q)
       (c : GaloisCover (ULift.{u + 1} Q) U) (_ : ConnectedSpace c.P),
       ((etaleSetPullback c.π).obj F).IsConstant c.P.smallEtaleTopology := by

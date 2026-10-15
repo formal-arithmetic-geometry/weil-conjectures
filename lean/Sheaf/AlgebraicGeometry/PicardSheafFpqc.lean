@@ -94,7 +94,7 @@ For a test scheme, pull back the finite field cover. The fppf sheaf property and
 sheaf property over this cover imply the fpqc sheaf property on the test scheme by the
 transitivity lemma for sheaf conditions. Source: Stacks Project, Tags 0D28, 0D2B, 023T, 056U.
 (blueprint: lem-pd-picard-sheaf-fpqc) -/
-theorem isSheaf_fpqc_picardFunctor_of_curve {k : Type u} [Field k] {C : Scheme.{u}}
+theorem isSheaf_fpqc_picardFunctor {k : Type u} [Field k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] :
     Presheaf.IsSheaf (Scheme.fpqcTopology.over (Spec (.of k))) (picardFunctor f).obj := by

@@ -89,8 +89,8 @@ theorem filteredComplex_quotient_image_comparison (F : DecreasingFiltration K)
           z ≫ Z.arrow = R.arrow ≫
             (F.complexQuotientπ p (p + 1) (Int.le_add_one (show p ≤ p from le_rfl))).f n ∧
           g ≫ S.iCycles n = R.arrow ≫ (F.complexQuotientπ p (p + r) hs).f n ∧
-          ∃ e : cokernel (Subobject.ofLE B Z hBZ) ≅ Limits.image Hφ,
-            z ≫ cokernel.π (Subobject.ofLE B Z hBZ) ≫ e.hom ≫ Limits.image.ι Hφ =
+          ∃ e : cokernel (Subobject.ofLE B Z hBZ) ≅ image Hφ,
+            z ≫ cokernel.π (Subobject.ofLE B Z hBZ) ≫ e.hom ≫ image.ι Hφ =
               g ≫ S.homologyπ n ≫ Hφ := by
   have ha : p - r + 1 ≤ p := by omega
   have hb : p + 1 ≤ p + r := by omega

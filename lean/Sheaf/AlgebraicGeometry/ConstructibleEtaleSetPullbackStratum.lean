@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import all Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
@@ -31,11 +31,11 @@ theorem finiteLocallyConstant_pullback_stratum
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (E : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (S : Stratification X)
-    (hS : ∀ i : Fin S.n, IsLisseEtaleSheafOfSets
+    (hS : ∀ i : Fin S.n, IsFiniteLocallyConstantEtaleSheafOfSets
       ((etaleSetPullback (S.immersion i)).obj
         ((sheafCompose X.smallEtaleTopology
           (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj E))) :
-    ∀ i : Fin S.n, IsLisseEtaleSheafOfSets
+    ∀ i : Fin S.n, IsFiniteLocallyConstantEtaleSheafOfSets
       ((etaleSetPullback ((S.pullback g).immersion i)).obj
         ((sheafCompose Y.smallEtaleTopology
           (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj

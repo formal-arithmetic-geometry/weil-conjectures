@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.Dimension
-public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
+public import Sheaf.AlgebraicGeometry.Morphisms.Projective
 import Sheaf.AlgebraicGeometry.DimOneQuasiProjective
 
 /-!
@@ -56,7 +56,6 @@ theorem isProjective_of_isProper_of_dim_le_one {k : Type u} [Field k] {X : Schem
     IsProper.of_comp (i ≫ j) (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k))
   have hclosed : IsClosedImmersion (i ≫ j) :=
     IsClosedImmersion.of_isPreimmersion (i ≫ j) (i ≫ j).isClosedMap.isClosed_range
-  exact { exists_isClosedImmersion := ⟨ULift.{u} (Fin (N + 1)), inferInstance,
-    i ≫ j, hclosed, hcomp⟩ }
+  exact { exists_closedImmersion := ⟨N, i ≫ j, hclosed, hcomp⟩ }
 
 end AlgebraicGeometry

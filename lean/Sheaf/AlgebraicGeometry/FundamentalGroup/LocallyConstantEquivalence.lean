@@ -61,22 +61,21 @@ theorem exists_finiteEtale_flc_equivalence (Y : Scheme.{v}) :
           FiniteEtale.pullback f ⋙ Ψ.functor ⋙ ObjectProperty.ι _)) := by
   classical
   have hobj (T : Scheme.{v}) (P : T.FiniteEtale) :
-      IsLisseEtaleSheafOfSets
+      IsFiniteLocallyConstantEtaleSheafOfSets
         ((T.smallEtaleTopology.uliftYoneda.{v + 1}).obj P.obj) := by
     have : IsFinite P.obj.hom := P.property
     obtain ⟨hs, hfin⟩ :=
       (isFiniteLocallyConstant_yoneda_and_exists_iso T).1 P.obj.left P.obj.hom
     refine ⟨hfin.1, ?_⟩
-    refine isFiniteSheaf_of_finite_algClosed_stalks _ ?_
     intro Ω _ _ s
-    exact (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-      (hfin.2.isFinitelyGenerated_sheafFiber Ω s)
+    have := hfin.2.isFinitelyGenerated_sheafFiber Ω s
+    exact (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp this
   let H (T : Scheme.{v}) : T.FiniteEtale ⥤ T.FLC :=
     ObjectProperty.lift _
       (ObjectProperty.ι _ ⋙ T.smallEtaleTopology.uliftYoneda.{v + 1}) (hobj T)
   have heq (T : Scheme.{v}) : (H T).IsEquivalence := by
     have : (H T).EssSurj := ⟨fun E ↦ by
-      have hfin := E.property.2
+      have hfin := isFiniteSheaf_of_finite_algClosed_stalks E.obj E.property.2
       obtain ⟨P, π, hπ, hEt, ⟨e⟩⟩ :=
         (isFiniteLocallyConstant_yoneda_and_exists_iso T).2 E.obj ⟨E.property.1, hfin⟩
       let Q : T.FiniteEtale := ⟨Etale.mk π, hπ⟩

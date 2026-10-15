@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
@@ -62,27 +63,43 @@ section RestrictScalars
 
 variable {Λ} {Λ' : Type (u + 1)} [CommRing Λ'] (φ : Λ →+* Λ')
 
+
+/-- The counit of restriction and coextension is computed sectionwise. -/
+lemma Etale.restrictCoextendScalarsAdj_counit_app_hom_app
+    {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
+    {X : Scheme.{u}} (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (U : X.Etaleᵒᵖ) :
+    ((Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).counit.app G).hom.app U =
+      (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).counit.app (G.obj.obj U) := by
+  change ((sheafToPresheaf X.smallEtaleTopology _).map
+    ((Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).counit.app G)).app U = _
+  rw [Sheaf.restrictCoextendScalarsAdj, Adjunction.map_restrictFullyFaithful_counit_app]
+  simp only [Functor.comp_obj, Functor.id_obj, Iso.refl_inv, NatTrans.id_app,
+    NatTrans.comp_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
+  rfl
+
 /-- A sheaf of `Λ'`-modules is torsion if and only if its restriction of scalars along
 `φ : Λ →+* Λ'` is: both have the same underlying sheaf of abelian groups. -/
-lemma Scheme.isTorsionModuleSheaf_restrictScalars_obj_iff {X : Scheme.{u}}
+lemma Scheme.isTorsionSheaf_restrictScalars_obj_iff {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
-    IsTorsionModuleSheaf ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj F) ↔
-      IsTorsionModuleSheaf F := by
-  rw [isTorsionModuleSheaf_iff_isTorsion, isTorsionModuleSheaf_iff_isTorsion]
+    IsTorsionSheaf ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj F) ↔
+      IsTorsionSheaf F := by
+  rw [isTorsionSheaf_iff_isTorsion, isTorsionSheaf_iff_isTorsion]
   rfl
 
 /-- The restriction of scalars of a complex with torsion cohomology has torsion cohomology: its
 cohomology sheaves are the restrictions of scalars of those of the complex. -/
-lemma Etale.DerivedCategory.Plus.moduleTorsionHomology_restrictScalars {X : Scheme.{u}}
+lemma Etale.DerivedCategory.Plus.torsionHomology_restrictScalars {X : Scheme.{u}}
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')))
-    (hK : Etale.DerivedCategory.Plus.moduleTorsionHomology Λ' X K) :
-    Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X
+    (hK : Etale.DerivedCategory.Plus.torsionHomology Λ' X K) :
+    Etale.DerivedCategory.Plus.torsionHomology Λ X
       ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.obj K) := fun n ↦
   have := hK n
-  have : IsTorsionModuleSheaf ((DerivedCategory.Plus.homologyFunctor _ n ⋙
+  have : IsTorsionSheaf ((DerivedCategory.Plus.homologyFunctor _ n ⋙
       Sheaf.restrictScalars X.smallEtaleTopology φ).obj K) :=
-    (Scheme.isTorsionModuleSheaf_restrictScalars_obj_iff φ _).2 this
-  IsTorsionModuleSheaf.of_epi
+    (Scheme.isTorsionSheaf_restrictScalars_obj_iff φ _).2 this
+  IsTorsionSheaf.of_epi
     ((((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlusHomologyFunctorIso
       n).app K).hom)
 
@@ -127,8 +144,8 @@ theorem Etale.HasTorsionBaseChange.quotient {X Y : Scheme.{u}} {f : X ⟶ Y}
     Etale.HasTorsionBaseChange (Λ ⧸ Ideal.span {(N : Λ)}) f := by
   intro Y' X' g f' g' sq K hK
   rw [← Etale.isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff
-    (Ideal.Quotient.mk (Ideal.span {(N : Λ)})) sq.toCommSq K]
-  exact hf sq _ (Etale.DerivedCategory.Plus.moduleTorsionHomology_restrictScalars _ K hK)
+    (Ideal.Quotient.mk (Ideal.span {(N : Λ)})) sq K]
+  exact hf sq _ (Etale.DerivedCategory.Plus.torsionHomology_restrictScalars _ K hK)
 
 /-- **Base change property from prime coefficient rings.** Let `f` be quasi-compact and
 quasi-separated. If `f` satisfies the base change property with `Λ ⧸ pΛ`-coefficients for every
@@ -156,32 +173,35 @@ theorem Etale.hasTorsionBaseChange_of_forall_prime {X Y : Scheme.{u}} (f : X ⟶
         E' ≪≫ (DerivedCategory.Plus.singleFunctor _ 0).mapIso
           (asIso ((Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).counit.app E))
     rw [← NatTrans.isIso_app_iff_of_iso _ e,
-      Etale.isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff]
-    exact h r hr sq _ (Etale.DerivedCategory.Plus.moduleTorsionHomology_of_isTorsion _ _
+      Etale.isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff φ sq
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj E')]
+    exact h r hr sq _ (Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion _ _
       (isAddTorsion_quotient_span_natCast Λ hr.pos) _)
   let P : ObjectProperty (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-    fun F ↦ IsTorsionModuleSheaf F
+    fun F ↦ IsTorsionSheaf F
   have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦
-    have : IsTorsionModuleSheaf _ := h
-    IsTorsionModuleSheaf.of_epi e.hom⟩
+    have : IsTorsionSheaf _ := h
+    IsTorsionSheaf.of_epi e.hom⟩
   exact DerivedCategory.Plus.isIso_app_of_forall_homology _ P
     (fun F hF ↦ (Etale.isIso_baseChange_app_singleFunctor_obj_iff Λ sq F).2 fun q ↦
-      have : IsTorsionModuleSheaf F := hF
+      have : IsTorsionSheaf F := hF
       Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf Λ sq hprime F q)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeSource_obj Λ g f K n q hq)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ g' f' K n q hq) K hK
 
+
 /-- **Injective acyclicity implies the base change property.** If a proper morphism
 `f : X ⟶ Y` has injective acyclicity with `Λ ⧸ pΛ`-coefficients for every prime `p`, then it
 satisfies the base change property with `Λ`-coefficients: for the torsion rings `Λ ⧸ pΛ` this is
-`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`, and the passage to `Λ`
-is `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_forall_prime`.
+`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`, and the passage to
+`Λ` is `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_forall_prime`.
 (blueprint: `lemma-weil-pbc-property-iff-acyclicity`, `IA_r(f)` for every prime `r` implies
 `PBC(f)`) -/
 @[stacks 0A4B]
 theorem Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f]
-    (hf : ∀ p : ℕ, p.Prime → Etale.HasInjectiveAcyclicity (Λ ⧸ Ideal.span {(p : Λ)}) f) :
+    (hf : ∀ p : ℕ, p.Prime →
+      Etale.HasInjectiveAcyclicity (Λ ⧸ Ideal.span {(p : Λ)}) f) :
     Etale.HasTorsionBaseChange Λ f :=
   Etale.hasTorsionBaseChange_of_forall_prime Λ f fun p hp ↦
     (Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity _

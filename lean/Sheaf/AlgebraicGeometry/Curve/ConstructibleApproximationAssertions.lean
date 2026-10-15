@@ -200,7 +200,7 @@ theorem IsCurve.assertions_of_constructible_approximation
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     (H : ∀ (G : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
       [Scheme.IsConstructibleSheaf G], IsCurve.Assertions Λ f G)
-    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] :
+    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] :
     IsCurve.Assertions Λ f F := by
   have : IsNoetherian C := isNoetherian_of_locallyOfFiniteType f
   have : CompactSpace C := (quasiCompact_iff_compactSpace f).mp inferInstance

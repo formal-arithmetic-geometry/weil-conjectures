@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
@@ -23,10 +22,14 @@ import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.InjectiveModuleAnnihilatorAcyclic
 import Sheaf.AlgebraicGeometry.HenselianBoundedAbelianSurjectivity
 import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import Sheaf.AlgebraicGeometry.EtaleAbelianH0FiniteConnectedCriterion
 import Sheaf.AlgebraicGeometry.CofilteredEtaleCohomologyCocone
 import Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass
 import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
+import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
 import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
 
 /-!
@@ -37,7 +40,7 @@ with its closed immersion `i : T₀ ⟶ T`. For every torsion étale sheaf `F` o
 restriction `Hᵠ(T, F) ⟶ Hᵠ(T₀, F|_{T₀})` is bijective for every `q` [Stacks 09ZI].
 
 The coefficient sheaves are sheaves of `Λ`-modules with torsion geometric stalks
-(`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf`), and `Hᵠ` is the cohomology of the underlying
+(`AlgebraicGeometry.Scheme.IsTorsionSheaf`), and `Hᵠ` is the cohomology of the underlying
 abelian sheaf, the restriction map being `AlgebraicGeometry.Etale.cohomologyMap i`.
 
 The proof is by induction on `q`. The degree-zero case is the henselian restriction lemma
@@ -143,10 +146,56 @@ sheaf `G` on `Spec A`, restriction `Γ(Spec A, G) ⟶ Γ(Spec (A ⧸ I), G|)` is
 theorem bijective_cohomologyMap_zero_of_henselianRing {A : Type u} [CommRing A] (I : Ideal A)
     [HenselianRing A I] (G : Sheaf (Spec (.of A)).smallEtaleTopology AddCommGrpCat.{u + 1}) :
     Function.Bijective
-      (cohomologyMap (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) G 0) :=
-  (bijective_cohomologyMap_zero_iff _ G).2
-    ((isIso_globalSectionsUpperStarMap_iff_bijective_pullSection _ G).2
-      (bijective_pullSection_of_henselianRing I (𝟙 _) _ (𝟙 _) IsPullback.of_id_snd G))
+      (cohomologyMap (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) G 0) := by
+  let i := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
+  have : IsClosedImmersion i :=
+    IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+  have hi : Set.range i = PrimeSpectrum.zeroLocus (I : Set A) := by
+    change Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk I)) = _
+    rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective, Ideal.mk_ker]
+  have : IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} i G) := by
+    apply isIso_abelian_globalSectionsUpperStarMap_of_finite_connected_closed_intersections i
+    intro X' p hp C hC hC'
+    rw [hi]
+    exact (p.spectralSpace_and_isClosed_and_isConnected_inter I).2.2 C hC hC'
+  let a := fun g : (Sheaf.Γ _ AddCommGrpCat.{u + 1}).obj G ↦
+    (Sheaf.H.equiv₀ G terminalIsTerminal).symm
+      ((Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app G g)
+  let G₀ := (i)^*[AddCommGrpCat.{u + 1}].obj G
+  let b := fun g : (Sheaf.Γ (Spec (.of (A ⧸ I))).smallEtaleTopology
+      AddCommGrpCat.{u + 1}).obj G₀ ↦
+    (Sheaf.H.equiv₀ G₀ terminalIsTerminal).symm
+      ((Sheaf.ΓNatIsoSheafSections _ AddCommGrpCat.{u + 1}
+        terminalIsTerminal).hom.app G₀ g)
+  have ha : Function.Bijective a :=
+    (Sheaf.H.equiv₀ G terminalIsTerminal).symm.bijective.comp
+      (ConcreteCategory.bijective_of_isIso
+        ((Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app G))
+  have hb : Function.Bijective b :=
+    (Sheaf.H.equiv₀ G₀ terminalIsTerminal).symm.bijective.comp
+      (ConcreteCategory.bijective_of_isIso
+        ((Sheaf.ΓNatIsoSheafSections _ AddCommGrpCat.{u + 1}
+          terminalIsTerminal).hom.app G₀))
+  have hres := ConcreteCategory.bijective_of_isIso
+    (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} i G)
+  have hab : ∀ g, cohomologyMap i G 0 (a g) =
+      b (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} i G g) :=
+    cohomologyMap_zero_eq_globalSectionsUpperStarMap i G
+  refine ⟨?_, ?_⟩
+  · intro x y hxy
+    obtain ⟨x, rfl⟩ := ha.2 x
+    obtain ⟨y, rfl⟩ := ha.2 y
+    apply congrArg a
+    apply hres.1
+    apply hb.1
+    change cohomologyMap i G 0 (a x) = cohomologyMap i G 0 (a y) at hxy
+    rw [hab, hab] at hxy
+    exact hxy
+  · intro y
+    obtain ⟨y, rfl⟩ := hb.2 y
+    obtain ⟨x, rfl⟩ := hres.2 y
+    exact ⟨a x, hab x⟩
+
 
 end Auxiliary
 
@@ -246,7 +295,7 @@ theorem exists_isConstructibleSheaf_hom_of_henselianRing [Finite Λ] {A : Type u
 
 private theorem torsion_of_annihilated {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (n : ℕ) (hn : 0 < n) (hG : n • 𝟙 G = 0) : IsTorsionModuleSheaf G where
+    (n : ℕ) (hn : 0 < n) (hG : n • 𝟙 G = 0) : IsTorsionSheaf G where
   isTorsion_sheafFiber Ω _ _ s x := by
     have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
       hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
@@ -258,9 +307,9 @@ private theorem torsion_of_annihilated {X : Scheme.{u}}
 
 private theorem torsion_pushout {X : Scheme.{u}}
     {C E F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (a : C ⟶ E) (b : C ⟶ F) [IsTorsionModuleSheaf E] [IsTorsionModuleSheaf F] :
-    IsTorsionModuleSheaf (pushout a b) := by
-  have hEF : IsTorsionModuleSheaf (E ⊞ F) := by
+    (a : C ⟶ E) (b : C ⟶ F) [IsTorsionSheaf E] [IsTorsionSheaf F] :
+    IsTorsionSheaf (pushout a b) := by
+  have hEF : IsTorsionSheaf (E ⊞ F) := by
     refine ⟨fun Ω _ _ s x ↦ ?_⟩
     have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
       hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
@@ -269,20 +318,20 @@ private theorem torsion_pushout {X : Scheme.{u}}
     let : T.Additive := (pointSmallEtale s).sheafFiber_additive
     let : PreservesBinaryBiproduct E F T :=
       preservesBinaryBiproduct_of_preservesBiproduct T E F
-    have hE : IsAddTorsion (T.obj E) := IsTorsionModuleSheaf.isTorsion_sheafFiber Ω s
-    have hF : IsAddTorsion (T.obj F) := IsTorsionModuleSheaf.isTorsion_sheafFiber Ω s
+    have hE : IsAddTorsion (T.obj E) := IsTorsionSheaf.isTorsion_sheafFiber Ω s
+    have hF : IsAddTorsion (T.obj F) := IsTorsionSheaf.isTorsion_sheafFiber Ω s
     let e := (T.mapBiprod E F) ≪≫ ModuleCat.biprodIsoProd (T.obj E) (T.obj F)
     exact IsAddTorsion.of_surjective (f := e.inv.hom.toAddMonoidHom)
       e.toLinearEquiv.symm.surjective
       (fun y ↦ IsOfFinAddOrder.prod_mk (hE y.1) (hF y.2)) x
   have : Epi (biprod.desc (pushout.inl a b) (pushout.inr a b)) :=
     (IsPushout.of_hasPushout a b).epi_shortComplex_g
-  exact IsTorsionModuleSheaf.of_epi (biprod.desc (pushout.inl a b) (pushout.inr a b))
+  exact IsTorsionSheaf.of_epi (biprod.desc (pushout.inl a b) (pushout.inr a b))
 
 private theorem bounded_restriction_representative {A : Type u} [CommRing A]
     (I : Ideal A)
     (F : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionModuleSheaf F] (q : ℕ)
+    [IsTorsionSheaf F] (q : ℕ)
     (c : Sheaf.H
       (((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[AddCommGrpCat.{u + 1}]).obj
         ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)) q) :
@@ -300,7 +349,7 @@ private theorem bounded_restriction_representative {A : Type u} [CommRing A]
   let V := (i)^*[AddCommGrpCat.{u + 1}]
   have : V.IsLeftAdjoint :=
     (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).isLeftAdjoint
-  obtain ⟨J, hJ, hfiltered, D, d, hd, rfl, hD⟩ := IsTorsionModuleSheaf.exists_isColimit Λ F
+  obtain ⟨J, hJ, hfiltered, D, d, hd, rfl, hD⟩ := IsTorsionSheaf.exists_isColimit Λ F
   let e := ULiftHomULiftCategory.equiv.{u, u} J
   have : IsFiltered (ULiftHom.{u} (ULift.{u} J)) := IsFiltered.of_equivalence e
   let d' := d.whisker e.inverse
@@ -329,12 +378,12 @@ private theorem bounded_restriction_representative {A : Type u} [CommRing A]
 (blueprint: `lemma-weil-pbc-gabber-effacement`) -/
 theorem exists_mono_map_eq_zero_of_henselianRing {A : Type u} [CommRing A] (I : Ideal A)
     [HenselianRing A I] (F : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionModuleSheaf F] {q : ℕ} (hq : 0 < q)
+    [IsTorsionSheaf F] {q : ℕ} (hq : 0 < q)
     (c : Sheaf.H
       (((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[AddCommGrpCat.{u + 1}]).obj
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)) q) :
     ∃ (F' : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ι : F ⟶ F'),
-      IsTorsionModuleSheaf F' ∧ Mono ι ∧ Sheaf.H.map
+      IsTorsionSheaf F' ∧ Mono ι ∧ Sheaf.H.map
         (((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[AddCommGrpCat.{u + 1}]).map
           ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map ι)) q c =
         0 := by
@@ -356,7 +405,7 @@ theorem exists_mono_map_eq_zero_of_henselianRing {A : Type u} [CommRing A] (I : 
   have hEn : n • 𝟙 E = 0 := by
     rw [← cancel_mono (kernel.ι (n • 𝟙 J)), Preadditive.nsmul_comp, Category.id_comp,
       zero_comp, ← Category.comp_id (kernel.ι _), ← Preadditive.comp_nsmul, kernel.condition]
-  have hE : IsTorsionModuleSheaf E := torsion_of_annihilated Λ E n hn hEn
+  have hE : IsTorsionSheaf E := torsion_of_annihilated Λ E n hn hEn
   have hUGn : n • 𝟙 (U.obj G) = 0 := by
     have hid : U.map (𝟙 G) = 𝟙 (U.obj G) := U.map_id G
     simpa only [Functor.map_nsmul, Functor.map_zero, hid] using congrArg U.map hGn
@@ -366,7 +415,7 @@ theorem exists_mono_map_eq_zero_of_henselianRing {A : Type u} [CommRing A] (I : 
     rw [← hx, ← cohomologyMap_map]
     have hsub := subsingleton_H_kernel_nsmul_injective_module Λ X J n hn q hq
     rw [hsub.elim (Sheaf.H.map (U.map a) q x) 0, map_zero]
-  have hP : IsTorsionModuleSheaf (pushout a b) := torsion_pushout Λ a b
+  have hP : IsTorsionSheaf (pushout a b) := torsion_pushout Λ a b
   refine ⟨pushout a b, pushout.inr a b, hP, inferInstance, ?_⟩
   rw [← hz, ← Sheaf.H.map_comp_apply, ← Functor.map_comp, ← Functor.map_comp,
     ← pushout.condition, Functor.map_comp, Functor.map_comp, Sheaf.H.map_comp_apply,
@@ -384,7 +433,7 @@ fibre), so only the pair form, which is [Stacks 09ZI], is stated.
 @[stacks 09ZI]
 theorem bijective_cohomologyMap_of_henselianRing {A : Type u} [CommRing A] (I : Ideal A)
     [HenselianRing A I] (F : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionModuleSheaf F] (q : ℕ) :
+    [IsTorsionSheaf F] (q : ℕ) :
     Function.Bijective (cohomologyMap (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
   induction q generalizing F with
@@ -410,7 +459,7 @@ theorem bijective_cohomologyMap_of_henselianRing {A : Type u} [CommRing A] (I : 
       have hS : (S.map (sheafCompose _
           (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))).ShortExact :=
         shortExact_map_forget₂ Λ (key ι)
-      have : IsTorsionModuleSheaf (cokernel ι) := IsTorsionModuleSheaf.of_epi (cokernel.π ι)
+      have : IsTorsionSheaf (cokernel ι) := IsTorsionSheaf.of_epi (cokernel.π ι)
       obtain ⟨z, rfl⟩ := Ext.covariant_sequence_exact₁ _ hS ξ hξι rfl
       replace hξ := (cohomologyMap_comp_extClass _ hS z).symm.trans hξ
       obtain ⟨w, hw⟩ := Ext.covariant_sequence_exact₃ _
@@ -427,7 +476,7 @@ theorem bijective_cohomologyMap_of_henselianRing {A : Type u} [CommRing A] (I : 
       have hS : (S.map (sheafCompose _
           (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))).ShortExact :=
         shortExact_map_forget₂ Λ (key ι)
-      have : IsTorsionModuleSheaf (cokernel ι) := IsTorsionModuleSheaf.of_epi (cokernel.π ι)
+      have : IsTorsionSheaf (cokernel ι) := IsTorsionSheaf.of_epi (cokernel.π ι)
       obtain ⟨y, hy⟩ := Ext.covariant_sequence_exact₁ _
         (hS.map_of_exact ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[_])) η hη rfl
       obtain ⟨z, rfl⟩ := (ih (cokernel ι)).2 y

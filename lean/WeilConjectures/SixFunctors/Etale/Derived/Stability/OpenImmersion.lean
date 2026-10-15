@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.TorSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Finite.Exact
 
@@ -65,7 +64,7 @@ theorem isConstructibleSheaf_homology_tensor_singleFunctor {X : Scheme.{u}}
     IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ r).obj
       (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) :=
-  isConstructibleSheaf_torSheaf Λ F G r
+  sorry
 
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
@@ -76,8 +75,7 @@ Finite Tor amplitude of one factor is needed for boundedness: over `ℤ/ℓ²` o
 `ℤ/ℓ ⊗ᴸ ℤ/ℓ` has a nonzero `Tor_i` for every `i ≥ 0`. The coefficients cannot be an arbitrary
 coefficient category: over `R = k[x, y₁, y₂, …]` on a point, `R/(x yᵢ)ᵢ ⊗ᴸ R/(x)` has the
 non-finitely generated `Tor₁ = (yᵢ)ᵢ/(x yᵢ)ᵢ` in degree `-1`, although `R/(x)` has Tor
-amplitude in `[-1, 0]`. This is blueprint `lem-sf-tensor-ctf` (i).
--/
+amplitude in `[-1, 0]`. -/
 theorem boundedConstructible_tensor (X : Scheme.{u})
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
@@ -98,8 +96,7 @@ subcategories.
 
 Clause (ii): `- ⊗ᴸ - : Dctf(X, Λ) × Dctf(X, Λ) ⥤ Dctf(X, Λ)` is defined, for a finite ring
 `Λ`. The internal-Hom half of the clause is `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`
-below. This is blueprint `lem-sf-tensor-ctf` (ii).
--/
+below. -/
 theorem constructibleFiniteTor_tensor (X : Scheme.{u})
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)

@@ -26,15 +26,18 @@ namespace CategoryTheory
 Source: Stacks Project, Tags 012K and 011Q.
 (blueprint: def-sp-filtered-homology-exact-couple). -/
 noncomputable abbrev filteredHomologyExactCouple {C : Type u} [Category.{v} C] [Abelian C]
-    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) : BigradedExactCouple C 0 :=
-  BigradedExactCouple.ofShifted (filteredHomologyD K F) (filteredHomologyE K F)
-    (filteredHomologyAlpha K F) (filteredHomologyF K F) (filteredHomologyG K F)
-    (filteredHomologyCouple_exact C K F).1
-    (filteredHomologyCouple_exact C K F).2.1
-    (filteredHomologyCouple_exact C K F).2.2.1
-    (filteredHomologyCouple_exact C K F).2.2.2.1
-    (filteredHomologyCouple_exact C K F).2.2.2.2.1
-    (filteredHomologyCouple_exact C K F).2.2.2.2.2
+    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) : BigradedExactCouple C 0 where
+  D := filteredHomologyD K F
+  E := filteredHomologyE K F
+  alpha := filteredHomologyAlpha K F
+  f := filteredHomologyF K F
+  g := filteredHomologyG K F
+  alpha_f_zero := (filteredHomologyCouple_exact C K F).1
+  f_g_zero := (filteredHomologyCouple_exact C K F).2.1
+  g_alpha_zero := (filteredHomologyCouple_exact C K F).2.2.1
+  exact_alpha := (filteredHomologyCouple_exact C K F).2.2.2.1
+  exact_f := (filteredHomologyCouple_exact C K F).2.2.2.2.1
+  exact_g := (filteredHomologyCouple_exact C K F).2.2.2.2.2
 
 /-- The reindexed initial E term is graded-piece homology.
 Source: Stacks Project, Tag 012K.

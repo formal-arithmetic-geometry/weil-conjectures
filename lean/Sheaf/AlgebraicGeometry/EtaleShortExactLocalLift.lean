@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

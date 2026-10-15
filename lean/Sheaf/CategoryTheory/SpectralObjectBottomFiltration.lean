@@ -108,14 +108,14 @@ private theorem graded_comparison
   let n : ℤ := (p + q : ℕ)
   let raw : DecreasingFiltration
       ((Y.H n).obj (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ⊤)))) :=
-    { F := fun i ↦ Y.imageFiltration n (n + 1 - i)
-      F_succ_le i := Y.imageFiltration_mono n (by omega) }
+    { step := fun i ↦ Y.imageFiltration n (n + 1 - i)
+      antitone_step := fun i j hij ↦ Y.imageFiltration_mono n (by omega) }
   have hs : raw.step (p : ℤ) = Y.imageFiltration n ((q : ℤ) + 1) := by
-    dsimp [raw, n, DecreasingFiltration.step]
+    dsimp [raw, n]
     congr 1
     omega
   have ht : raw.step ((p : ℤ) + 1) = Y.imageFiltration n (q : ℤ) := by
-    dsimp [raw, n, DecreasingFiltration.step]
+    dsimp [raw, n]
     congr 1
     omega
   let rawiso : raw.gradedPiece p ≅ Y.E₂SpectralSequenceNat.pageInfinity (p, q) :=
@@ -251,8 +251,7 @@ theorem exists_spectral_object_bottom_filtration
       Y.E₂SpectralSequenceNat.pageInfinity (p, q) :=
     if hq : q = 0 then by
       subst q
-      simpa only [Nat.add_zero, DecreasingFiltration.gradedPiece,
-        DecreasingFiltration.gr, DecreasingFiltration.step] using
+      simpa only [Nat.add_zero, DecreasingFiltration.gradedPiece] using
         (@asIso _ _ _ _ (cokernel.π (Subobject.ofLE ((T p).step (p + 1))
           ((T p).step p) ((T p).antitone_step (by omega)))) (hπ p)).symm ≪≫ (k p).symm
     else (graded_comparison Y H h T hT p q).some

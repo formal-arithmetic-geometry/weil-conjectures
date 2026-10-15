@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.TruncationCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
-public import Sheaf.CategoryTheory.Filtration
+public import Sheaf.CategoryTheory.ImageFiltration
 import Sheaf.CategoryTheory.HalfPlaneSharpBounds
 import Sheaf.CategoryTheory.HalfPlaneConvergence
 import Sheaf.CategoryTheory.TruncationAbutmentCocone

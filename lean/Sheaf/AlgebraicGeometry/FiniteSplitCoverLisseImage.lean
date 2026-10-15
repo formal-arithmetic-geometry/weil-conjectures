@@ -5,12 +5,11 @@ Authors: SHEAF group J2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 import Sheaf.AlgebraicGeometry.DisjointUniversalHomeomorphismsLisseImage
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.SixFunctors.Finite.BaseChange
@@ -42,10 +41,8 @@ private theorem isLisse_of_iso {X : Scheme.{u}}
     exact Sheaf.isConstant_congr _
       ((X.smallEtaleTopology.overPullback (Type (u + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e)
-  · refine ⟨fun Ω _ _ t ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2 ?_⟩
-    have : Finite ((pointSmallEtale t).sheafFiber.obj F) :=
-      (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-        (hF.2.isFinitelyGenerated_sheafFiber Ω t)
+  · intro Ω _ _ t
+    have := hF.2 Ω t
     exact Finite.of_surjective
       (((pointSmallEtale t).sheafFiber.mapIso e).hom)
       (ConcreteCategory.bijective_of_isIso
@@ -68,9 +65,7 @@ private theorem finiteStalks_finite_directImage
   let F := fun t : f.GeometricFiber y ↦ (pointSmallEtale t.1).sheafFiber.obj E
   have hfinite (t : f.GeometricFiber y) : Finite (forgetA.obj (F t)) := by
     have : Finite ((pointSmallEtale t.1).sheafFiber.obj
-        ((sheafCompose X.smallEtaleTopology forgetA).obj E)) :=
-      (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-        (hE.2.isFinitelyGenerated_sheafFiber Ω t.1)
+        ((sheafCompose X.smallEtaleTopology forgetA).obj E)) := hE.2 Ω t.1
     let e : (pointSmallEtale t.1).sheafFiber.obj
         ((sheafCompose X.smallEtaleTopology forgetA).obj E) ≅ forgetA.obj (F t) :=
       ((pointSmallEtale t.1).sheafFiberCompIso forgetA).app E
@@ -156,9 +151,8 @@ theorem isLisse_pullback_finite_directImage_of_split_cover
         (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
           ((Etale.lowerStar AddCommGrpCat.{u + 1} b).obj
             ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E))) :=
-    ⟨hlocal, isFiniteSheaf_of_finite_algClosed_stalks _ (fun Ω _ _ y ↦
-      finiteStalks_finite_directImage b
-        ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E) hA Ω y)⟩
+    ⟨hlocal, fun Ω _ _ y ↦ finiteStalks_finite_directImage b
+      ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E) hA Ω y⟩
   obtain ⟨eV, _, _, _, _, _, _⟩ :=
     (AlgebraicGeometry.etaleInverseImageAlgebraicStructures V.toScheme S V.ι).2
   obtain ⟨ep, _, _, _, _, _, _⟩ :=

@@ -176,7 +176,6 @@ private theorem iterInclusion_alpha {C : Type u} [Category.{v} C] [Abelian C]
   induction n with
   | zero => simp [iterInclusion, pageCouple]
   | succ n ih =>
-    simp only [pageCouple, derived_alpha]
     change ((Classical.choice (X.pageCouple n).derivedMaps_exists).alpha p q) ≫
         ((X.pageCouple n).derivedDInclusion (p - 1) (q + 1) ≫
           iterInclusion X n (p - 1) (q + 1)) = _

@@ -6,7 +6,7 @@ Authors: SHEAF group A3
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 

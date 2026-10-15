@@ -8,7 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.ModuleAbelianStalkExchange
 import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
@@ -84,7 +83,7 @@ theorem Etale.projectiveLine_originalStalk_totalCohomologyExchange
       eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)
     (hρ : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA)
     (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionModuleSheaf F] (q : ℕ) :
+    [IsTorsionSheaf F] (q : ℕ) :
     let F₀ := (ProjectiveSpace.map _
       (eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)))^*[
       ModuleCat.{u + 1} Λ].obj F

@@ -9,16 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Sheaf.AlgebraicGeometry.UniformAffinePullbackCohomologyBound
+import Sheaf.AlgebraicGeometry.ProjectiveAffineFiniteCohomologyIndependent
 import Sheaf.AlgebraicGeometry.AffineOpenHigherDirectImageSectionsIso
 import Sheaf.AlgebraicGeometry.OpenModuleCohomologyComparison
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
-import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
-import Sheaf.AlgebraicGeometry.QuasiCoherentMayerVietorisOpenCover
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
-import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.Paper.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 
@@ -33,18 +26,19 @@ quasi-compact and quasi-separated morphism to a quasi-compact base, the higher d
 quasi-coherent sheaves vanish in degrees bounded uniformly in the sheaf and the base change.
 
 A projective morphism `f : X ⟶ S` is presented through a closed immersion `i : X ⟶ ℙ(n; S)` over
-`S`, as in the blueprint's definition of (H-)projective morphisms. The finiteness of the
-cohomology over a noetherian ring is in
-`WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite`
-(`AlgebraicGeometry.ProjectiveSpace.finite_H`,
-`AlgebraicGeometry.Scheme.Modules.finite_H_of_isClosedImmersion`).
+`S`, as in the blueprint's definition of (H-)projective morphisms. The cohomology `ℱ.H q` of a
+sheaf on a scheme `X` over `Spec A` is an `A`-module through the structure morphism; this is
+`AlgebraicGeometry.Scheme.Modules.moduleHOfSpec`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_of_isPullback`: the uniform
   vanishing bound for a quasi-compact quasi-separated morphism over a quasi-compact base.
-- `AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_isClosedImmersion`: the vanishing of the
-  cohomology of a closed subscheme of `ℙⁿ_A` above `n`.
+- `AlgebraicGeometry.ProjectiveSpace.finite_H`: the cohomology of a coherent sheaf on `ℙⁿ_A` is
+  finite over `A`.
+- `AlgebraicGeometry.Scheme.Modules.finite_H_of_isClosedImmersion` and
+  `subsingleton_H_of_isClosedImmersion`: the same for a closed subscheme of `ℙⁿ_A`, together with
+  the vanishing above `n`.
 - `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage_of_isClosedImmersion`
   and `isZero_higherDirectImage_of_isClosedImmersion`: coherence and vanishing of the higher
   direct images along a projective morphism.
@@ -150,11 +144,95 @@ theorem exists_isZero_higherDirectImage_of_isPullback [CompactSpace T] (f : X �
   apply (cancel_epi (0 : M ⟶ M)).mp
   simp
 
+/-- The cohomology of a sheaf of modules on a scheme `X` with a morphism `f : X ⟶ Spec A` is an
+`A`-module, by restriction of scalars of the `Γ(X, ⊤)`-module structure along
+`A ≅ Γ(Spec A, ⊤) ⟶ Γ(X, ⊤)`.
+
+This is not an instance, since `f` cannot be inferred. -/
+abbrev moduleHOfSpec {A : Type u} [CommRing A] (f : X ⟶ Spec (.of A)) (M : X.Modules) (q : ℕ) :
+    Module A (M.H q) :=
+  Module.compHom (M.H q) ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom
+
 end Scheme.Modules
 
 open Scheme.Modules
 
-variable {n : Type u} [Finite n] {X : Scheme.{u}}
+variable {n : Type u} [Finite n]
+
+/-- **Coherent cohomology of projective space over a noetherian ring.** Let `A` be noetherian
+and `ℱ` a coherent module on `ℙⁿ_A`. Then each `H^q(ℙⁿ_A, ℱ)` is a finite `A`-module.
+
+By descending induction on `q`, for all coherent modules at once: for `q > n` the cohomology
+vanishes; in general, a surjection `ℰ ⟶ ℱ` from a finite sum `ℰ` of twists `𝒪(m)` with coherent
+kernel `𝒦` gives an exact sequence `H^q(ℰ) ⟶ H^q(ℱ) ⟶ H^{q+1}(𝒦)` whose outer terms are finite.
+The proof reuses this induction in `finite_H_projective_affine_independent` for the identity
+embedding, and transports scalars along `Γ(Spec A, ⊤) ≅ A` by an identity semilinear surjection.
+Source: Stacks Project, Tag 01YS, Lemma 30.14.1 (3).
+
+(blueprint: `lem-pc-projective-space-coherent-finiteness`) -/
+theorem ProjectiveSpace.finite_H (A : Type u) [CommRing A] [IsNoetherianRing A]
+    (ℱ : (ℙ(n; Spec (.of A))).Modules)
+    [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ]
+    [SheafOfModules.IsFinitePresentation (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ] (q : ℕ) :
+    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) ℱ q
+    Module.Finite A (ℱ.H q) := by
+  classical
+  let T := Spec (.of A)
+  have : IsNoetherianRing Γ(T, ⊤) :=
+    isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.symm
+  let : Module Γ(T, ⊤) (ℱ.H q) :=
+    Module.compHom _ (ℙ(n; T) ↘ T).appTop.hom
+  have : Module.Finite Γ(T, ⊤) (ℱ.H q) := by
+    simpa using finite_H_projective_affine_independent n (𝟙 (ℙ(n; T))) ℱ q
+  let := moduleHOfSpec (ℙ(n; T) ↘ T) ℱ q
+  let e := (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv
+  let f : ℱ.H q →ₛₗ[e.toRingHom] ℱ.H q :=
+    { toFun := id
+      map_add' := fun _ _ ↦ rfl
+      map_smul' := fun a x ↦ by
+        change (ℙ(n; T) ↘ T).appTop a • x =
+          (ℙ(n; T) ↘ T).appTop ((Scheme.ΓSpecIso (.of A)).inv
+            ((Scheme.ΓSpecIso (.of A)).hom a)) • x
+        rw [Iso.hom_inv_id_apply] }
+  exact Module.Finite.of_surjective f Function.surjective_id
+
+variable {X : Scheme.{u}}
+
+/-- **Coherent cohomology of a projective scheme over a noetherian ring.** Let `A` be
+noetherian, `i : X ⟶ ℙⁿ_A` a closed immersion and `ℱ` a coherent `𝒪_X`-module. Then each
+`H^q(X, ℱ)` is a finite `A`-module. Apply the independent affine-base projective finiteness
+argument to `i`, which uses the finite-source twist cohomology segment and descending induction.
+The action in that theorem is through `Γ(Spec A, ⊤)`. The identity map on `H^q(X, ℱ)` is
+semilinear along `Γ(Spec A, ⊤) ≅ A`; its scalar identity is the inverse law of `ΓSpecIso`.
+Transport finite generation through this surjection to obtain precisely `moduleHOfSpec`.
+Source: Stacks Project, Tag 01YS, Lemma 30.14.1 (3).
+
+(blueprint: `lem-pc-projective-coherent-finiteness`) -/
+theorem Scheme.Modules.finite_H_of_isClosedImmersion (A : Type u) [CommRing A]
+    [IsNoetherianRing A] (i : X ⟶ ℙ(n; Spec (.of A))) [IsClosedImmersion i] (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    letI := moduleHOfSpec (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) ℱ q
+    Module.Finite A (ℱ.H q) := by
+  classical
+  let T := Spec (.of A)
+  have : IsNoetherianRing Γ(T, ⊤) :=
+    isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.symm
+  let : Module Γ(T, ⊤) (ℱ.H q) :=
+    Module.compHom _ (i ≫ (ℙ(n; T) ↘ T)).appTop.hom
+  have : Module.Finite Γ(T, ⊤) (ℱ.H q) :=
+    finite_H_projective_affine_independent n i ℱ q
+  let := moduleHOfSpec (i ≫ ℙ(n; T) ↘ T) ℱ q
+  let e := (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv
+  let f : ℱ.H q →ₛₗ[e.toRingHom] ℱ.H q :=
+    { toFun := id
+      map_add' := fun _ _ ↦ rfl
+      map_smul' := fun a x ↦ by
+        change (i ≫ (ℙ(n; T) ↘ T)).appTop a • x =
+          (i ≫ (ℙ(n; T) ↘ T)).appTop ((Scheme.ΓSpecIso (.of A)).inv
+            ((Scheme.ΓSpecIso (.of A)).hom a)) • x
+        rw [Iso.hom_inv_id_apply] }
+  exact Module.Finite.of_surjective f Function.surjective_id
 
 /-- **Vanishing of the cohomology of a projective scheme above the dimension.** Let
 `i : X ⟶ ℙᵈ_A` be a closed immersion, `ℙᵈ_A = ℙ(n; Spec A)` with `Nat.card n = d + 1`, and

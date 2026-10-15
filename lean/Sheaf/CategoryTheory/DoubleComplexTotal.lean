@@ -116,9 +116,9 @@ Terms past n vanish for a first-quadrant bicomplex, so this finite supremum
 is exactly the stated sum over indices at least p. -/
 noncomputable def firstFiltration (n : ℤ) :
     DecreasingFiltration ((K.total (ComplexShape.up ℤ)).X n) where
-  F p := (Finset.Icc p n).sup
+  step p := (Finset.Icc p n).sup
     (fun i ↦ imageSubobject (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n))
-  F_succ_le p := K.firstFiltration_antitone n (by omega)
+  antitone_step := K.firstFiltration_antitone n
 
 /-- The finite supremum defining the second filtration decreases with its index.
 Source: blueprint filtration formula (blueprint: def-sp-double-complex-total).
@@ -140,9 +140,9 @@ Terms past n vanish for a first-quadrant bicomplex, so this finite supremum
 is exactly the stated sum over indices at least p. -/
 noncomputable def secondFiltration (n : ℤ) :
     DecreasingFiltration ((K.total (ComplexShape.up ℤ)).X n) where
-  F p := (Finset.Icc p n).sup
+  step p := (Finset.Icc p n).sup
     (fun i ↦ imageSubobject (K.ιTotalOrZero (ComplexShape.up ℤ) (n - i) i n))
-  F_succ_le p := K.secondFiltration_antitone n (by omega)
+  antitone_step := K.secondFiltration_antitone n
 
 /-- A morphism factors through any subobject containing its image. -/
 private theorem factors_image (X Y : C) (f : X ⟶ Y) (S : Subobject Y)

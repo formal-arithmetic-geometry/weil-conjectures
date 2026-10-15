@@ -52,16 +52,21 @@ private noncomputable def rawCouple
     (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]
     (K : CochainComplex.Plus A) : BigradedExactCouple B 0 := by
   let h := truncation_raw_exact F K
-  exact BigradedExactCouple.ofShifted
-    (TruncationCouple.D F K) (TruncationCouple.E F K)
-    (TruncationCouple.alpha F K) (TruncationCouple.f F K)
-    (fun p q ↦ TruncationCouple.g F K p q ≫ eqToHom (by simp))
-    (fun p q ↦ (h.1 p q).choose)
-    (fun p q ↦ (h.2.1 p q).choose)
-    (fun p q ↦ (h.2.2 p q).choose)
-    (fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (h.1 p q).choose_spec)
-    (fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (h.2.1 p q).choose_spec)
-    (fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (h.2.2 p q).choose_spec)
+  exact
+    { D := TruncationCouple.D F K
+      E := TruncationCouple.E F K
+      alpha := TruncationCouple.alpha F K
+      f := TruncationCouple.f F K
+      g := fun p q ↦ TruncationCouple.g F K p q ≫ eqToHom (by simp)
+      alpha_f_zero := fun p q ↦ (h.1 p q).choose
+      f_g_zero := fun p q ↦ (h.2.1 p q).choose
+      g_alpha_zero := fun p q ↦ (h.2.2 p q).choose
+      exact_alpha := fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+        (h.1 p q).choose_spec
+      exact_f := fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+        (h.2.1 p q).choose_spec
+      exact_g := fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+        (h.2.2 p q).choose_spec }
 
 private theorem abutmentMap_isIso
     {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
@@ -174,17 +179,12 @@ theorem exists_natural_boundedBelow_truncation_couples
     let T : BigradedExactCouple.CoupleMorphism (Z M) (Z N) :=
       { tD := tD
         tE := tE
-        alpha_comm := by
-          intro p q
-          simpa [Z, rawCouple] using ha p q
-        f_comm := by
-          intro p q
-          simpa [Z, rawCouple] using hf p q
+        alpha_comm := ha
+        f_comm := hf
         g_comm := by
           intro p q
-          simpa [Z, rawCouple] using
-            zero_projection_square _ _ _ _ tD tE
-              (TruncationCouple.g F (K M)) (TruncationCouple.g F (K N)) hg p q }
+          exact zero_projection_square _ _ _ _ tD tE
+            (TruncationCouple.g F (K M)) (TruncationCouple.g F (K N)) hg p q }
     refine ⟨T, ?_, ?_⟩
     · intro n
       dsimp only [T, eD, Iso.trans_hom, Functor.mapIso_hom, asIso_hom]

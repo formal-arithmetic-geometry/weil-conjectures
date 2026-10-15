@@ -5,7 +5,7 @@ Authors: SHEAF group J2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm

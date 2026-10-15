@@ -5,7 +5,7 @@ Authors: SHEAF group E2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-! # Reflection of equivariance through the inverse-image unit

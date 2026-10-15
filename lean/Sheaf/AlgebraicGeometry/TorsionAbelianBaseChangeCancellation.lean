@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 import Sheaf.AlgebraicGeometry.EtaleGrothendieckSpectralSequence
 import Sheaf.AlgebraicGeometry.EtaleInjectiveRetract
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
 import Sheaf.CategoryTheory.FirstQuadrantRowCollapse
 import Sheaf.Paper.VanishingDescendsRetract

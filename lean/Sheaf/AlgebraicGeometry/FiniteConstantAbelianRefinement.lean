@@ -5,7 +5,7 @@ Authors: SHEAF group V3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.FiniteConstantAbelianNeighborhood
 
 /-!

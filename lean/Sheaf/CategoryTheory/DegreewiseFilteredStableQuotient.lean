@@ -30,8 +30,10 @@ private theorem gradedPiece_quotient_iso
     Nonempty (F.gradedPiece p ≅ (F.quotient c.hom).gradedPiece p) := by
   let G := F.quotient c.hom
   have heq (i : ℤ) : G.step i = Subobject.mk ((F.step i).arrow ≫ c.hom) := by
-    change imageSubobject ((F.step i).arrow ≫ c.hom) = _
-    exact imageSubobject_mono _
+    change (Subobject.«exists» c.hom).obj (F.step i) = _
+    rw [Subobject.exists_iso_map]
+    exact (congrArg (Subobject.map c.hom).obj (Subobject.mk_arrow (F.step i)).symm).trans
+      (Subobject.map_mk _ _)
   let e (i : ℤ) : (G.step i : C) ≅ (F.step i : C) :=
     Subobject.isoOfEqMk _ _ (heq i)
   have comm : Subobject.ofLE (G.step (p + 1)) (G.step p)
@@ -108,14 +110,13 @@ theorem degreewiseFiltered_stable_quotient
   · intro n
     obtain ⟨lo, hi, hlo, hhi⟩ := L.cohomologyImage_isFinite hfinite n
     refine ⟨lo, hi, ?_, ?_⟩
-    · change imageSubobject (((L.cohomologyImage n).step lo).arrow ≫ (c n).hom) = ⊤
-      rw [← Subobject.exists_obj_eq_imageSubobject, hlo, Subobject.exists_iso_map, Subobject.map_top]
+    · change (Subobject.«exists» (c n).hom).obj ((L.cohomologyImage n).step lo) = ⊤
+      rw [hlo, Subobject.exists_iso_map, Subobject.map_top]
       exact Subobject.mk_eq_top_of_isIso _
-    · change imageSubobject (((L.cohomologyImage n).step hi).arrow ≫ (c n).hom) = ⊥
-      rw [← Subobject.exists_obj_eq_imageSubobject, hhi, Subobject.exists_iso_map, Subobject.map_bot]
+    · change (Subobject.«exists» (c n).hom).obj ((L.cohomologyImage n).step hi) = ⊥
+      rw [hhi, Subobject.exists_iso_map, Subobject.map_bot]
   · intro p n
-    exact (Subobject.exists_obj_eq_imageSubobject (c n).hom
-      ((L.cohomologyImage n).step p)).symm
+    rfl
   · intro p n
     obtain ⟨lo, _, hlo, _⟩ := hfinite (n - 1)
     obtain ⟨_, hi, _, hhi⟩ := hfinite (n + 1)

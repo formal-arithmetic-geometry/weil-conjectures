@@ -43,7 +43,7 @@ private theorem pointedStrictHenselizationLift
             j).2.left := by
   classical
   let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse
-  let c : Cocone (smallStrictHenselizationDiagram s) :=
+  let c : Cocone (strictHenselizationDiagram s) :=
     { pt := Γ(Spec (.of Ω), ⊤)
       ι := { app := fun j ↦ (N.obj j.unop).2.left.appTop
              naturality := by
@@ -53,17 +53,17 @@ private theorem pointedStrictHenselizationLift
                rw [Category.comp_id, ← Scheme.Hom.comp_appTop]
                congr 1
                exact congrArg Over.Hom.left (N.map a.unop).2 } }
-  let r := (isColimitSmallStrictHenselizationCocone s).desc c
+  let r := colimit.desc (strictHenselizationDiagram s) c
   let t := (Spec (.of Ω)).toSpecΓ ≫ Spec.map r
   have hleg (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) :
       t ≫ (strictHenselizationCone s).π.app (op (op j)) ≫
         Spec.map (ΓSpecIso (N.obj j).1.left.unop).inv = (N.obj j).2.left := by
     change ((Spec (.of Ω)).toSpecΓ ≫ Spec.map r) ≫
-      Spec.map ((smallStrictHenselizationCocone s).ι.app (op j)) ≫ _ = _
+      Spec.map (colimit.ι (strictHenselizationDiagram s) (op j)) ≫ _ = _
     simp only [Category.assoc]
     rw [← Spec.map_comp_assoc]
     dsimp only [r]
-    rw [(isColimitSmallStrictHenselizationCocone s).fac]
+    rw [colimit.ι_desc]
     change (Spec (.of Ω)).toSpecΓ ≫ Spec.map (N.obj j).2.left.appTop ≫ _ = _
     rw [← Scheme.toSpecΓ_naturality_assoc]
     change (N.obj j).2.left ≫ (Spec _).toSpecΓ ≫ _ = _
@@ -73,8 +73,8 @@ private theorem pointedStrictHenselizationLift
   let := (strictHenselization_properties s).2.1
   let j := Classical.choice (IsCofiltered.nonempty
     (C := SmallModel.{u} (strictHenselizationNeighbourhoods s)))
-  change t ≫ strictHenselizationStructuralMap s = s
-  rw [← strictHenselizationStructuralMap_eq s j]
+  change t ≫ Classical.choose (exists_strictHenselizationStructuralMap s) = s
+  rw [← Classical.choose_spec (exists_strictHenselizationStructuralMap s) j]
   rw [← Category.assoc t, ← Category.assoc]
   erw [hleg j]
   exact (N.obj j).2.w

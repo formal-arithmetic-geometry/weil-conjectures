@@ -8,7 +8,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
 import WeilConjectures.AlgebraicGeometry.Sites.DerivedStalk
 import Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteGeometricPoint

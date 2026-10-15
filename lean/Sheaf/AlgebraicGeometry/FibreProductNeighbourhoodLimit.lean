@@ -78,7 +78,7 @@ theorem fibre_product_neighbourhood_limit
   let c := (Scheme.strictHenselizationCone s).whisker (opOp J)
   have hc : IsLimit c :=
     (Functor.Initial.isLimitWhiskerEquiv (opOp J) _).symm hlim
-  let e : (opOp J ⋙ (Scheme.smallStrictHenselizationDiagram s).op ⋙ Scheme.Spec) ≅
+  let e : (opOp J ⋙ (Scheme.strictHenselizationDiagram s).op ⋙ Scheme.Spec) ≅
       F ⋙ D ⋙ Over.forget S := NatIso.ofComponents
     (fun j ↦ (Spec (unop (R.obj j).1.left)).isoSpec.symm)
     (by

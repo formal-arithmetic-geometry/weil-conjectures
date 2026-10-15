@@ -5,7 +5,7 @@ Authors: SHEAF groups P1 and A3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction

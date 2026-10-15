@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
 import Sheaf.AlgebraicGeometry.ConstructibleTorsionModulesAgree
 import Sheaf.AlgebraicGeometry.CurveCoefficientPair
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.Paper.InverseImageStalkGerm
 import WeilConjectures.ConstructibleSheaf.Defs

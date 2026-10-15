@@ -100,10 +100,10 @@ private theorem couple_comparison_isIso
 
 private noncomputable def oneStep
     {C : Type uB} [Category.{v} C] [Abelian C] (X : C) : DecreasingFiltration X where
-  F p := if p ≤ 0 then ⊤ else ⊥
-  F_succ_le p := by
-    let r := p + 1
-    have hpr : p ≤ r := by dsimp [r]; omega
+  step p := if p ≤ 0 then ⊤ else ⊥
+  antitone_step := by
+    intro p r hpr
+    dsimp
     split_ifs <;> first | exact le_rfl | exact bot_le | exact le_top | omega
 
 private theorem oneStep_top

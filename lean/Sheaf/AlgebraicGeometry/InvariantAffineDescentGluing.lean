@@ -27,7 +27,7 @@ open CategoryTheory AlgebraicGeometry
 
 namespace CategoryTheory.Over.DescentDatum
 
-private theorem transport_left_congr_sheaf
+private theorem transport_left_congr
     {X Y T : Scheme.{u}} {p : X ⟶ Y} {V : Over X}
     (D : Over.DescentDatum p V) {f₁ f₂ g₁ g₂ : T ⟶ X}
     (h : f₁ ≫ p = f₂ ≫ p) (k : g₁ ≫ p = g₂ ≫ p)
@@ -152,7 +152,7 @@ private theorem exists_datum_over_mono_base
       g ≫ (D.transport _ _ _ (embed a)).left
     have hp : (f₁ ≫ i) ≫ p = (f₂ ≫ i) ≫ p := by
       simpa only [Category.assoc, hc] using congrArg (· ≫ j) h
-    refine (transport_left_congr_sheaf D _
+    refine (transport_left_congr D _
       (by simpa only [Category.assoc] using congrArg (g ≫ ·) hp) _
       ((Over.homMk g : Over.mk (g ≫ f₁ ≫ i) ⟶ Over.mk (f₁ ≫ i)) ≫ embed a)
       (Category.assoc g f₁ i) (Category.assoc g f₂ i) rfl).trans ?_
@@ -220,7 +220,7 @@ private theorem isEffective_of_affine_above_affine_open
     let aB : Over.mk g₁ ⟶ Over.mk r := Over.homMk a.left
     have ht := hinv g₁ g₂ hg aB
     rw [hE] at ht
-    have he := transport_left_congr_sheaf D
+    have he := transport_left_congr D
       (by simpa only [Category.assoc, hc] using congrArg (· ≫ B.ι) hg) h
       (Over.homMk aB.left (by
         simpa only [Over.mk_hom, ← hr, ← Category.assoc] using

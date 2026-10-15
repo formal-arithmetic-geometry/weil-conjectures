@@ -47,8 +47,7 @@ sheaves and commutes with homology. Hence the original Λ-linear exchange is
 invertible. This comparison concerns the canonical adjunction mate, not merely
 isomorphic endpoints. Apply it componentwise and assemble the natural isomorphism.
 No boundedness assumption on E or Noetherian assumption on the schemes is used. -/
-private theorem Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring_sheaf
-    (hΛ : IsAddTorsion Λ)
+theorem Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring (hΛ : IsAddTorsion Λ)
     [IsProper f] (sq : IsPullback g' f' f g) :
     IsIso (Etale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
   obtain ⟨n, hn, hunit⟩ := (hΛ 1).exists_nsmul_eq_zero

@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.EtaleSubsheafFinalOpen
 import Sheaf.AlgebraicGeometry.EtaleSectionsEqualitySubterminal

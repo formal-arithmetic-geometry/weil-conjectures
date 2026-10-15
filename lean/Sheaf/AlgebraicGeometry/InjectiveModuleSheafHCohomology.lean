@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
 import Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison
 import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.Paper.FreeCechComplexExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek

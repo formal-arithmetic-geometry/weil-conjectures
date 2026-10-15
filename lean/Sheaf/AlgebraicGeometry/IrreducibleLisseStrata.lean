@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.IrreducibleLisseRefinement
 
@@ -53,7 +53,7 @@ theorem exists_irreducible_lisse_stratification
       ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F)) :
     ∃ S : Stratification X, ∀ i : Fin S.n,
       IrreducibleSpace (S.domain i) ∧
-        IsLisseEtaleSheafOfSets
+        IsFiniteLocallyConstantEtaleSheafOfSets
           ((etaleSetPullback (S.immersion i)).obj
             ((sheafCompose X.smallEtaleTopology
               (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F)) := by

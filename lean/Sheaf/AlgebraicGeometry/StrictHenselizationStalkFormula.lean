@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

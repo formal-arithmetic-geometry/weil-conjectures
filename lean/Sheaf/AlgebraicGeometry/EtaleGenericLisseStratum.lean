@@ -5,7 +5,7 @@ Authors: SHEAF group J2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
@@ -35,11 +35,9 @@ private lemma lisse_of_iso {Y : Scheme.{u}}
     exact Sheaf.isConstant_congr _
       ((Y.smallEtaleTopology.overPullback (Type (u + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e)
-  · refine ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2 ?_⟩
-    have hfinite : Finite ((pointSmallEtale s).sheafFiber.obj G) :=
-      (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-        (hfin.isFinitelyGenerated_sheafFiber Ω s)
-    exact @Finite.of_equiv _ _ hfinite
+  · intro Ω _ _ s
+    have := hfin Ω s
+    exact Finite.of_equiv _
       (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv
 
 /-- Generic lissity on integral affine immersions supplies one lisse locally closed

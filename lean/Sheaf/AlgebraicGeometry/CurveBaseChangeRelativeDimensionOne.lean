@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
+public import Sheaf.AlgebraicGeometry.Variety
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.Dimension
@@ -56,7 +56,7 @@ Proof:
    `def-sbc-smooth-morphisms`, i.e. `SmoothOfRelativeDimension 1` (Stacks 02G1, 02G2).
 -/
 theorem curve_baseChange_smoothOfRelativeDimension_one {k : Type u} [Field k]
-    {C T : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsIntegralCurve f] [Smooth f]
+    {C T : Scheme.{u}} (f : C ⟶ Spec (.of k)) [f.IsCurveOverField] [Smooth f]
     (g : T ⟶ Spec (.of k)) :
     SmoothOfRelativeDimension 1 (pullback.snd f g) := by
   sorry

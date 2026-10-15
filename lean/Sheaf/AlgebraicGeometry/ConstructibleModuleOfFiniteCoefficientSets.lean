@@ -6,7 +6,7 @@ Finite-label helper proofs adapted from groups F1, G2, K1 and V3.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
 
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
@@ -398,7 +398,7 @@ constructed from submodules and equivalences, never from unproved existence. -/
 private theorem exists_finite_coefficient_module_charts
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hF : IsLisseEtaleSheafOfSets
+    (hF : IsFiniteLocallyConstantEtaleSheafOfSets
       ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
         ((sheafCompose X.smallEtaleTopology
           (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)))
@@ -443,9 +443,7 @@ private theorem exists_finite_coefficient_module_charts
         ((sheafCompose X.smallEtaleTopology
           (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)).over U
     obtain ⟨S, ⟨e⟩⟩ := H.mem_essImage_of_isConstant
-    have : Finite S := finite_constant_module_value Λ F U S e.symm
-      (fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-        (hfinite.isFinitelyGenerated_sheafFiber Ω s))
+    have : Finite S := finite_constant_module_value Λ F U S e.symm hfinite
     choose V v hv M hM e' α hα using
       finite_constant_module_neighborhood Λ F U S I hkill e.symm
     let 𝒱 : Cover.{u} etalePrecoverage U.left :=
@@ -611,18 +609,14 @@ theorem isConstructibleSheaf_of_finite_coefficient_underlying_sets
       ea.app ((sheafCompose X.smallEtaleTopology
         (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)
   have transport {H K : Sheaf (S.domain i).smallEtaleTopology (Type (u + 1))}
-      (q : H ≅ K) (hH : IsLisseEtaleSheafOfSets H) :
-      IsLisseEtaleSheafOfSets K := by
+      (q : H ≅ K) (hH : IsFiniteLocallyConstantEtaleSheafOfSets H) :
+      IsFiniteLocallyConstantEtaleSheafOfSets K := by
     obtain ⟨⟨𝒰, h𝒰⟩, hfin⟩ := hH
-    refine ⟨⟨𝒰, fun j ↦ ?_⟩,
-      ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2 ?_⟩⟩
+    refine ⟨⟨𝒰, fun j ↦ ?_⟩, fun Ω _ _ s ↦ ?_⟩
     · have := h𝒰 j
       exact Sheaf.isConstant_congr _
         (((S.domain i).smallEtaleTopology.overPullback (Type (u + 1)) _).mapIso q)
-    · have hfinite : Finite ((pointSmallEtale s).sheafFiber.obj H) :=
-        (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-          (hfin.isFinitelyGenerated_sheafFiber Ω s)
-      exact @Finite.of_equiv _ _ hfinite
+    · exact @Finite.of_equiv _ _ (hfin Ω s)
         ((pointSmallEtale s).sheafFiber.mapIso q).toEquiv
   have hG := transport e.symm (hS i)
   obtain ⟨d, hd⟩ := exists_finite_coefficient_module_charts Λ G hG I hI

@@ -49,8 +49,8 @@ theorem pointed_etale_ring_colimit
           ∃ z : Spec (F.obj j), (Spec.map (a.app j)) z = y := by
   classical
   let I := SmallModel.{u} (strictHenselizationNeighbourhoods barY)
-  let F := smallStrictHenselizationDiagram barY
-  let c := smallStrictHenselizationCocone barY
+  let F := strictHenselizationDiagram barY
+  let c := colimit.cocone F
   let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse
   let k (j : I) : Spec (F.obj (Opposite.op j)) ⟶ Spec R :=
     Spec.map (ΓSpecIso (N.obj j).1.left.unop).inv ≫
@@ -76,14 +76,14 @@ theorem pointed_etale_ring_colimit
         congr 1
         simpa using hw.symm }
   refine ⟨I, inferInstance, (strictHenselization_properties barY).2.1, F, c, a,
-    Iso.refl _, ⟨isColimitSmallStrictHenselizationCocone barY⟩, ?_, ?_⟩
+    Iso.refl _, ⟨colimit.isColimit F⟩, ?_, ?_⟩
   · intro j
     apply Spec.map_injective
     change Spec.map (Spec.preimage (k j.unop) ≫ c.ι.app j ≫ 𝟙 _) = Spec.map b
     simp only [Category.comp_id, Spec.map_comp, Spec.map_preimage]
     change (strictHenselizationCone barY).π.app (Opposite.op j) ≫ k j.unop = Spec.map b
     rw [hb]
-    exact strictHenselizationStructuralMap_eq barY j.unop
+    exact Classical.choose_spec (exists_strictHenselizationStructuralMap barY) j.unop
   · intro j
     have hk : Spec.map (a.app j) = k j.unop := Spec.map_preimage _
     rw [hk]

@@ -1,114 +1,102 @@
 {
- "kind": "statement",
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/06YH",
-  "place": "Localization normalization decomposition"
- },
- "proof_origin": {
-  "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/06YH",
-  "place": "Binary localization square plus proved generic lax monoidal normalization calculation"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "First localization normalization component",
-   "date": "2026-10-14",
-   "results": "No exact existing theorem found."
+  "kind": "statement",
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/06YH",
+    "place": "Localization normalization decomposition"
   },
-  {
-   "tool": "leanfinder",
-   "query": "First localization normalization component",
-   "date": "2026-10-14",
-   "results": "No exact existing theorem found."
+  "proof_origin": {
+    "by": "agent",
+    "document": "https://stacks.math.columbia.edu/tag/06YH",
+    "place": "Binary localization square plus proved generic lax monoidal normalization calculation"
   },
-  {
-   "tool": "grep",
-   "query": "schemeTensorShift localization comparison",
-   "date": "2026-10-14",
-   "results": "No exact existing theorem found."
-  }
- ],
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
-  "date": "2026-10-14",
-  "group": "S1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "aux-sc-target-comparison-first",
-   "place": "strict expanded intermediate"
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/SchemeTensorShiftLocalizationNormalization.lean",
-  "branch": "sheaf-dag",
-  "by": "S1",
-  "date": "2026-10-14",
-  "declaration": "AlgebraicGeometry.schemeTensorShift_first_normalization_core",
-  "statement": "theorem schemeTensorShift_first_normalization_core\n    (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)\n    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :\n    letI := schemeCanonicalTensorShift X\n    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=\n      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B\n    ((α_ (DerivedCategory.Q.obj P⟦(1 : ℤ)⟧) (DerivedCategory.Q.obj T)\n      (DerivedCategory.Q.obj U)).hom ≫\n      ((tensorRight (DerivedCategory.Q.obj T ⊗ DerivedCategory.Q.obj U)).commShiftIso\n        (1 : ℤ)).hom.app (DerivedCategory.Q.obj P)) ≫\n      schemeTensorShiftTargetComparison X P T U =\n      schemeTensorShiftSourceComparison X P T U ≫\n      DerivedCategory.Q.map ((α_ (P⟦(1 : ℤ)⟧) T U).hom ≫\n        (CochainComplex.mapBifunctorShift₁Iso P (T ⊗ U)\n          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom)"
- },
- "id": "aux-sc-target-comparison-first-core",
- "title": "Expanded first localization normalization component",
- "statement": "Expanded first normalization equality with comparisons unfolded",
- "stmt_deps": [
-  "lem-sc-scheme-tensor-shift-localization-normalization"
- ],
- "proof": [
-  {
-   "text": "Apply second-variable naturality of the canonical tensor shift to mu(T,U). Substitute the binary localization square for P,T tensor U. Whisker interchange moves eta(P) inverse to the left; associator naturality and lax monoidal associativity identify the tensorator composite with the localized complex associator. The private first_generic lemma proves this categorical calculation; specialize it to Q.",
-   "uses": [
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "First localization normalization component",
+      "date": "2026-10-14",
+      "results": "No exact existing theorem found."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "First localization normalization component",
+      "date": "2026-10-14",
+      "results": "No exact existing theorem found."
+    },
+    {
+      "tool": "grep",
+      "query": "schemeTensorShift localization comparison",
+      "date": "2026-10-14",
+      "results": "No exact existing theorem found."
+    }
+  ],
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
+    "date": "2026-10-14",
+    "group": "S1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "aux-sc-target-comparison-first",
+      "place": "strict expanded intermediate"
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
+    "file": "lean/Sheaf/AlgebraicGeometry/SchemeTensorShiftLocalizationNormalization.lean",
+    "branch": "sheaf-dag",
+    "by": "S1",
+    "date": "2026-10-14",
+    "declaration": "AlgebraicGeometry.schemeTensorShift_first_normalization_core",
+    "statement": "theorem schemeTensorShift_first_normalization_core\n    (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)\n    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :\n    letI := schemeCanonicalTensorShift X\n    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=\n      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B\n    ((α_ (DerivedCategory.Q.obj P⟦(1 : ℤ)⟧) (DerivedCategory.Q.obj T)\n      (DerivedCategory.Q.obj U)).hom ≫\n      ((tensorRight (DerivedCategory.Q.obj T ⊗ DerivedCategory.Q.obj U)).commShiftIso\n        (1 : ℤ)).hom.app (DerivedCategory.Q.obj P)) ≫\n      schemeTensorShiftTargetComparison X P T U =\n      schemeTensorShiftSourceComparison X P T U ≫\n      DerivedCategory.Q.map ((α_ (P⟦(1 : ℤ)⟧) T U).hom ≫\n        (CochainComplex.mapBifunctorShift₁Iso P (T ⊗ U)\n          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom)"
+  },
+  "id": "aux-sc-target-comparison-first-core",
+  "title": "Expanded first localization normalization component",
+  "statement": "Expanded first normalization equality with comparisons unfolded",
+  "stmt_deps": [
+    "lem-sc-scheme-tensor-shift-localization-normalization"
+  ],
+  "proof": [
+    {
+      "text": "Apply second-variable naturality of the canonical tensor shift to mu(T,U). Substitute the binary localization square for P,T tensor U. Whisker interchange moves eta(P) inverse to the left; associator naturality and lax monoidal associativity identify the tensorator composite with the localized complex associator. The private first_generic lemma proves this categorical calculation; specialize it to Q.",
+      "uses": [
+        "lem-sc-scheme-tensor-shift-binary-localization-square",
+        "def-pc-kflat-complex",
+        "def-sc-scheme-canonical-tensor-shift",
+        "def-pc-scheme-derived-tensor-structure"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "lem-sc-scheme-tensor-shift-binary-localization-square",
     "def-pc-kflat-complex",
     "def-sc-scheme-canonical-tensor-shift",
     "def-pc-scheme-derived-tensor-structure"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-sc-scheme-tensor-shift-binary-localization-square",
-  "def-pc-kflat-complex",
-  "def-sc-scheme-canonical-tensor-shift",
-  "def-pc-scheme-derived-tensor-structure"
- ],
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S1",
-  "result": "pass",
-  "landing": "20261013T231543-L-1820385",
-  "kind": "proof",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "X-8f3e6",
-  "group": "K4",
-  "result": "pass",
-  "landing": "20261014T004107-L-2836183",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files match the node statements and compile cleanly; direct importer also compiles, with allowed axioms only."
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "S1",
+    "result": "pass",
+    "landing": "20261013T231543-L-1820385",
+    "kind": "proof",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "X-8f3e6",
+    "group": "K4",
+    "result": "pass",
+    "landing": "20261014T004107-L-2836183",
+    "kind": "interface",
+    "note": "independent Codex review: Delivered files match the node statements and compile cleanly; direct importer also compiles, with allowed axioms only."
   }
- }
 }

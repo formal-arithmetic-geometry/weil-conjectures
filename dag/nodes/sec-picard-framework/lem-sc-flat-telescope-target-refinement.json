@@ -1,145 +1,133 @@
 {
- "id": "lem-sc-flat-telescope-target-refinement",
- "kind": "statement",
- "title": "One-target refinement of a bounded flat augmented tower",
- "statement": "Let $Y$ be a scheme and $A$ its category of module sheaves [def-pc-cochain-complex-modules]. Let $E_n$ be bounded-above cochain complexes of $A$, flat in every degree [def-pc-flat-sheaf-modules], with transitions $t_n:E_n\\to E_{n+1}$. Let $T$ be an actual flat telescope [def-sc-flat-telescope-stage-map] and $p_n:E_n\\to T$ chain maps satisfying $t_n p_{n+1}=p_n$. There exist bounded-above termwise-flat towers $(R_n,s_n)$ and $(F_n,u_n)$, quasi-isomorphisms $c_n:R_n\\to E_n$ [def-pc-quasi-iso-modules], and chain maps $a_n:R_n\\to F_n$ satisfying $s_n c_{n+1}=c_n t_n$ and $s_n a_{n+1}=a_n u_n$. There is a chain map $r:\\operatorname{Cone}(1-\\mathrm{shift}:\\bigoplus F_n\\to\\bigoplus F_n)\\to T$ which becomes an isomorphism in the homotopy category, has zero restriction to the shifted summand, and satisfies $(\\bigoplus a_n)\\,\\mathrm{inr}\\,r=\\operatorname{desc}(c_n p_n)$. Bounded above means that for each stage there is an integer above which all terms vanish; the bound need not be uniform in the stage. No second target or maps to good truncations are asserted.",
- "source": {
-  "document": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowBarData.lean",
-  "place": "Original proof of exists_flat_telescope_arrow_bar_data, finite-subcomplex and one-target bar-enlargement paragraphs, with a relative generator-valued resolution of the input tower by the cone construction of Stacks 06XX; 03EW and 077J supply the generator class."
- },
- "stmt_deps": [
-  "def-pc-cochain-complex-modules",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-quasi-iso-modules",
-  "def-sc-flat-telescope-stage-map"
- ],
- "proof": [
-  {
-   "text": "Apply the compact-flat-generator tower resolution to E,t. It gives a bounded-above split tower L and strict natural level quasi-isomorphisms v:L -> E. Augment L into T by v_n followed by p_n; associativity and naturality prove strict compatibility.",
-   "uses": [
-    "lem-sc-compact-flat-generator-tower-resolution"
-   ],
-   "elementary": true
+  "id": "lem-sc-flat-telescope-target-refinement",
+  "kind": "statement",
+  "title": "One-target refinement of a bounded flat augmented tower",
+  "statement": "Let $Y$ be a scheme and $A$ its category of module sheaves [def-pc-cochain-complex-modules]. Let $E_n$ be bounded-above cochain complexes of $A$, flat in every degree [def-pc-flat-sheaf-modules], with transitions $t_n:E_n\\to E_{n+1}$. Let $T$ be an actual flat telescope [def-sc-flat-telescope-stage-map] and $p_n:E_n\\to T$ chain maps satisfying $t_n p_{n+1}=p_n$. There exist bounded-above termwise-flat towers $(R_n,s_n)$ and $(F_n,u_n)$, quasi-isomorphisms $c_n:R_n\\to E_n$ [def-pc-quasi-iso-modules], and chain maps $a_n:R_n\\to F_n$ satisfying $s_n c_{n+1}=c_n t_n$ and $s_n a_{n+1}=a_n u_n$. There is a chain map $r:\\operatorname{Cone}(1-\\mathrm{shift}:\\bigoplus F_n\\to\\bigoplus F_n)\\to T$ which becomes an isomorphism in the homotopy category, has zero restriction to the shifted summand, and satisfies $(\\bigoplus a_n)\\,\\mathrm{inr}\\,r=\\operatorname{desc}(c_n p_n)$. Bounded above means that for each stage there is an integer above which all terms vanish; the bound need not be uniform in the stage. No second target or maps to good truncations are asserted.",
+  "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowBarData.lean",
+    "place": "Original proof of exists_flat_telescope_arrow_bar_data, finite-subcomplex and one-target bar-enlargement paragraphs, with a relative generator-valued resolution of the input tower by the cone construction of Stacks 06XX; 03EW and 077J supply the generator class."
   },
-  {
-   "text": "Apply compact-flat-generator bar enlargement to L and its augmentation. Obtain R,F,d,a,B,b,e, a degreewise split short complex with first map the telescope differential and second map b, and a homotopy equivalence e:B -> T.",
-   "uses": [
+  "stmt_deps": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-quasi-iso-modules",
+    "def-sc-flat-telescope-stage-map"
+  ],
+  "proof": [
+    {
+      "text": "Apply the compact-flat-generator tower resolution to E,t. It gives a bounded-above split tower L and strict natural level quasi-isomorphisms v:L -> E. Augment L into T by v_n followed by p_n; associativity and naturality prove strict compatibility.",
+      "uses": [
+        "lem-sc-compact-flat-generator-tower-resolution"
+      ],
+      "elementary": true
+    },
+    {
+      "text": "Apply compact-flat-generator bar enlargement to L and its augmentation. Obtain R,F,d,a,B,b,e, a degreewise split short complex with first map the telescope differential and second map b, and a homotopy equivalence e:B -> T.",
+      "uses": [
+        "lem-sc-compact-flat-telescope-bar-enlargement"
+      ],
+      "elementary": true
+    },
+    {
+      "text": "Apply the proved private helper isIso_split_cone_augmentation to the degreewise splitting of the short complex with maps delta and b. It makes the homotopy quotient of the canonical Mathlib descShortComplex augmentation rB:Cone(delta) -> B invertible. The helper contains the complete explicit split-row boundary homotopy and the distinguished-triangle five-lemma argument; it has no sorry and uses only Mathlib.",
+      "uses": [],
+      "elementary": true
+    },
+    {
+      "text": "Define c_n=d_n followed by v_n and r=rB followed by e. Quasi-isomorphisms and homotopy isomorphisms compose. Reassociate the two strict tower identities to prove naturality of c. Mathlib inl_v_descShortComplex_f gives the zero shifted restriction of r; inr_descShortComplex followed by the bar augmentation identity gives the unshifted sum identity, checked on Sigma inclusions.",
+      "uses": [],
+      "elementary": true
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-compact-flat-generator-tower-resolution",
     "lem-sc-compact-flat-telescope-bar-enlargement"
-   ],
-   "elementary": true
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "group": "G1",
+    "document": "lean/Sheaf/CategoryTheory/Abelian/SplitSESBoundaryComparison.lean",
+    "place": "The explicit cone/split-row boundary homotopy is reused to make a morphism of distinguished triangles in the homotopy category, where the triangle five lemma proves the canonical split-cone augmentation invertible. The geometric steps retain the original target-refinement proof."
   },
-  {
-   "text": "Apply the proved private helper isIso_split_cone_augmentation to the degreewise splitting of the short complex with maps delta and b. It makes the homotopy quotient of the canonical Mathlib descShortComplex augmentation rB:Cone(delta) -> B invertible. The helper contains the complete explicit split-row boundary homotopy and the distinguished-triangle five-lemma argument; it has no sorry and uses only Mathlib.",
-   "uses": [],
-   "elementary": true
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "refine a bounded above flat tower mapping into a telescope by levelwise quasi-isomorphisms and a strict map of towers",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "telescope|bar construction|compact.*generator",
+      "results": "0 hits: ",
+      "date": "2026-10-14",
+      "verdict": "No exact match; factorization APIs do not supply bounded flat telescope refinements."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A bounded above tower augmented into a mapping telescope admits a levelwise quasi-isomorphic refinement with a strict map into a bounded flat tower presenting the target up to chain homotopy",
+      "results": "8 hits: CochainComplex.cm5b, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, ComplexShape.QFactorsThroughHomotopy_of_exists_prev, instQFactorsThroughHomotopyDown",
+      "date": "2026-10-14",
+      "verdict": "No exact match; factorization APIs do not supply bounded flat telescope refinements."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowBarData",
+    "date": "2026-10-14",
+    "group": "V4"
   },
-  {
-   "text": "Define c_n=d_n followed by v_n and r=rB followed by e. Quasi-isomorphisms and homotopy isomorphisms compose. Reassociate the two strict tower identities to prove naturality of c. Mathlib inl_v_descShortComplex_f gives the zero shifted restriction of r; inr_descShortComplex followed by the bar augmentation identity gives the unshifted sum identity, checked on Sigma inclusions.",
-   "uses": [],
-   "elementary": true
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "Finite-piece bar enlargement of a bounded-flat source tower into one actual target telescope; used twice to obtain the simultaneous arrow diagram.",
+      "via": [
+        "lem-sc-flat-telescope-arrow-bar-data",
+        "lem-sc-flat-telescope-arrow-cocycles",
+        "lem-sc-flat-telescope-arrow-diagram",
+        "lem-sc-flat-telescope-stage-map-refinement",
+        "lem-sc-normalized-flat-telescope-comparison",
+        "lem-sc-normalized-kflat-representative-comparison",
+        "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+        "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.FlatTelescopeTargetRefinement",
+    "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeTargetRefinement.lean",
+    "declaration": "AlgebraicGeometry.exists_flat_telescope_target_refinement",
+    "statement": "theorem exists_flat_telescope_target_refinement (Y : Scheme.{u})\n    (E : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (t : ∀ n : ℕ, E n ⟶ E (n + 1))\n    (hb : ∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((E n).X i))\n    (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i))\n    (T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hT : isFlatTelescope Y T) (p : ∀ n : ℕ, E n ⟶ T)\n    (hp : ∀ n : ℕ, t n ≫ p (n + 1) = p n) :\n    let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)\n    let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ)\n    ∃ (R F : ℕ → CochainComplex A ℤ)\n      (s : ∀ n : ℕ, R n ⟶ R (n + 1))\n      (u : ∀ n : ℕ, F n ⟶ F (n + 1))\n      (c : ∀ n : ℕ, R n ⟶ E n) (a : ∀ n : ℕ, R n ⟶ F n),\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((R n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((R n).X i)) ∧\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((F n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((F n).X i)) ∧\n      (∀ n : ℕ, QuasiIso (c n)) ∧\n      (∀ n : ℕ, s n ≫ c (n + 1) = c n ≫ t n) ∧\n      (∀ n : ℕ, s n ≫ a (n + 1) = a n ≫ u n) ∧\n      ∃ r : CochainComplex.mappingCone (flatTelescopeDifferential F u) ⟶ T,\n        IsIso (Q.map r) ∧\n        (CochainComplex.mappingCone.inl (flatTelescopeDifferential F u)).comp\n          (Cochain.ofHom r) (add_zero _) = 0 ∧\n        Limits.Sigma.map a ≫\n            CochainComplex.mappingCone.inr (flatTelescopeDifferential F u) ≫ r =\n          Sigma.desc (fun n : ℕ ↦ c n ≫ p n)",
+    "branch": "sheaf-dag",
+    "by": "V4",
+    "date": "2026-10-14"
+  },
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "V4",
+    "result": "pass",
+    "landing": "20261014T074650-L-3571495",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "G1",
+    "result": "pass",
+    "landing": "20261014T081308-L-3872922",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-sc-compact-flat-generator-tower-resolution",
-  "lem-sc-compact-flat-telescope-bar-enlargement"
- ],
- "proof_origin": {
-  "by": "agent",
-  "group": "G1",
-  "document": "lean/Sheaf/CategoryTheory/Abelian/SplitSESBoundaryComparison.lean",
-  "place": "The explicit cone/split-row boundary homotopy is reused to make a morphism of distinguished triangles in the homotopy category, where the triangle five lemma proves the canonical split-cone augmentation invertible. The geometric steps retain the original target-refinement proof."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "refine a bounded above flat tower mapping into a telescope by levelwise quasi-isomorphisms and a strict map of towers",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "telescope|bar construction|compact.*generator",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "No exact match; factorization APIs do not supply bounded flat telescope refinements."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A bounded above tower augmented into a mapping telescope admits a levelwise quasi-isomorphic refinement with a strict map into a bounded flat tower presenting the target up to chain homotopy",
-   "results": "8 hits: CochainComplex.cm5b, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, ComplexShape.QFactorsThroughHomotopy_of_exists_prev, instQFactorsThroughHomotopyDown",
-   "date": "2026-10-14",
-   "verdict": "No exact match; factorization APIs do not supply bounded flat telescope refinements."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowBarData",
-  "date": "2026-10-14",
-  "group": "V4"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "Finite-piece bar enlargement of a bounded-flat source tower into one actual target telescope; used twice to obtain the simultaneous arrow diagram.",
-   "via": [
-    "lem-sc-flat-telescope-arrow-bar-data",
-    "lem-sc-flat-telescope-arrow-cocycles",
-    "lem-sc-flat-telescope-arrow-diagram",
-    "lem-sc-flat-telescope-stage-map-refinement",
-    "lem-sc-normalized-flat-telescope-comparison",
-    "lem-sc-normalized-kflat-representative-comparison",
-    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
-    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeTargetRefinement",
-  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeTargetRefinement.lean",
-  "declaration": "AlgebraicGeometry.exists_flat_telescope_target_refinement",
-  "statement": "theorem exists_flat_telescope_target_refinement (Y : Scheme.{u})\n    (E : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (t : ∀ n : ℕ, E n ⟶ E (n + 1))\n    (hb : ∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((E n).X i))\n    (hf : ∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i))\n    (T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hT : isFlatTelescope Y T) (p : ∀ n : ℕ, E n ⟶ T)\n    (hp : ∀ n : ℕ, t n ≫ p (n + 1) = p n) :\n    let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)\n    let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ)\n    ∃ (R F : ℕ → CochainComplex A ℤ)\n      (s : ∀ n : ℕ, R n ⟶ R (n + 1))\n      (u : ∀ n : ℕ, F n ⟶ F (n + 1))\n      (c : ∀ n : ℕ, R n ⟶ E n) (a : ∀ n : ℕ, R n ⟶ F n),\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((R n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((R n).X i)) ∧\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((F n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((F n).X i)) ∧\n      (∀ n : ℕ, QuasiIso (c n)) ∧\n      (∀ n : ℕ, s n ≫ c (n + 1) = c n ≫ t n) ∧\n      (∀ n : ℕ, s n ≫ a (n + 1) = a n ≫ u n) ∧\n      ∃ r : CochainComplex.mappingCone (flatTelescopeDifferential F u) ⟶ T,\n        IsIso (Q.map r) ∧\n        (CochainComplex.mappingCone.inl (flatTelescopeDifferential F u)).comp\n          (Cochain.ofHom r) (add_zero _) = 0 ∧\n        Limits.Sigma.map a ≫\n            CochainComplex.mappingCone.inr (flatTelescopeDifferential F u) ≫ r =\n          Sigma.desc (fun n : ℕ ↦ c n ≫ p n)",
-  "branch": "sheaf-dag",
-  "by": "V4",
-  "date": "2026-10-14"
- },
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V4",
-  "result": "pass",
-  "landing": "20261014T074650-L-3571495",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
-  "result": "pass",
-  "landing": "20261014T081308-L-3872922",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- }
 }

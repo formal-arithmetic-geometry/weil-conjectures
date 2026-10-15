@@ -1,139 +1,127 @@
 {
- "id": "lem-sc-compact-flat-generator-cover",
- "kind": "statement",
- "title": "Functorial covers by compact flat generators",
- "statement": "Let Y be any scheme and A its category of module sheaves [def-weil-sheaf-of-modules-category]. There exist a functor T:A→A and a natural augmentation π:T→Id such that every π_M is epic and T(M) is isomorphic to a coproduct indexed by a type in the scheme universe of flat module sheaves [def-pc-flat-sheaf-modules]. Each summand G has finite support: for every universe-small family H_k and morphism G→⊕H_k there is a finite subset S and a morphism G→⊕_{k∈S}H_k whose composite with the canonical inclusion is the given morphism. Neither quasi-coherence nor quasi-compactness of Y is assumed.",
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/03EW",
-  "place": "Clause (3), generators indexed by local sections; affine-open specialization in Tag 077J, with finite-support argument from the parent relative-extension proof."
- },
- "stmt_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "def-pc-flat-sheaf-modules"
- ],
- "proof": [
-  {
-   "text": "For an affine open U construct G_U as the sheafification of the free module presheaf on yoneda(U). Free section modules imply sectionwise flatness, hence the presheaf tensor preserves finite limits. Apply the existing flat-sheafification theorem. The free-Yoneda and sheafification adjunctions give Hom(G_U,M) ≃ M(U), natural in M. These constructions are explicit, with no choice of an existence witness.",
-   "uses": [
+  "id": "lem-sc-compact-flat-generator-cover",
+  "kind": "statement",
+  "title": "Functorial covers by compact flat generators",
+  "statement": "Let Y be any scheme and A its category of module sheaves [def-weil-sheaf-of-modules-category]. There exist a functor T:A→A and a natural augmentation π:T→Id such that every π_M is epic and T(M) is isomorphic to a coproduct indexed by a type in the scheme universe of flat module sheaves [def-pc-flat-sheaf-modules]. Each summand G has finite support: for every universe-small family H_k and morphism G→⊕H_k there is a finite subset S and a morphism G→⊕_{k∈S}H_k whose composite with the canonical inclusion is the given morphism. Neither quasi-coherence nor quasi-compactness of Y is assumed.",
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/03EW",
+    "place": "Clause (3), generators indexed by local sections; affine-open specialization in Tag 077J, with finite-support argument from the parent relative-extension proof."
+  },
+  "stmt_deps": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-flat-sheaf-modules"
+  ],
+  "proof": [
+    {
+      "text": "For an affine open U construct G_U as the sheafification of the free module presheaf on yoneda(U). Free section modules imply sectionwise flatness, hence the presheaf tensor preserves finite limits. Apply the existing flat-sheafification theorem. The free-Yoneda and sheafification adjunctions give Hom(G_U,M) ≃ M(U), natural in M. These constructions are explicit, with no choice of an existence witness.",
+      "uses": [
+        "lem-pc-sites-modules-sheafification-flat"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The Mathlib cocone finiteSubcoproductsCocone H is colimiting. The comparison from the underlying presheaf colimit to its sheaf colimit is the sheafification unit followed by an isomorphism, hence locally surjective. Evaluate its covering image sieve at a section and a point. Evaluation and the module forgetful functor preserve filtered colimits, so Types.jointly_surjective lifts the section into a finite stage on a neighborhood. On affine U compactness gives a finite subcover; union the finite supports. The canonical projection from the coproduct onto that finite subsum, followed by inclusion, fixes each local lift. Sheaf separatedness makes it fix the original section on U, so composing any map from G_U with that projection gives the requested factorization.",
+      "uses": [],
+      "elementary": false
+    },
+    {
+      "text": "Define T(M) as the coproduct of G_U over (U,s), U affine and s∈M(U), and evaluation as its augmentation. A map f sends (U,s) to (U,f(s)), using the identity on G_U. The coproduct equations prove the functor laws and naturality. If maps from M agree after the augmentation, the section adjunction makes them agree on affine-local sections. The affine-open basis and sheaf separatedness give equality on every open, proving the augmentation epic. The indicated coproduct itself supplies the term description, including on the empty scheme.",
+      "uses": [],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "lem-pc-sites-modules-sheafification-flat"
-   ],
-   "elementary": false
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "group": "V4",
+    "date": "2026-10-14",
+    "document": "https://stacks.math.columbia.edu/tag/03EW",
+    "place": "Clause (3), generators indexed by local sections; affine-open specialization in Tag 077J, with finite-support argument from the parent relative-extension proof."
   },
-  {
-   "text": "The Mathlib cocone finiteSubcoproductsCocone H is colimiting. The comparison from the underlying presheaf colimit to its sheaf colimit is the sheafification unit followed by an isomorphism, hence locally surjective. Evaluate its covering image sieve at a section and a point. Evaluation and the module forgetful functor preserve filtered colimits, so Types.jointly_surjective lifts the section into a finite stage on a neighborhood. On affine U compactness gives a finite subcover; union the finite supports. The canonical projection from the coproduct onto that finite subsum, followed by inclusion, fixes each local lift. Sheaf separatedness makes it fix the original section on U, so composing any map from G_U with that projection gives the requested factorization.",
-   "uses": [],
-   "elementary": false
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "sheaves of modules affine open extension by zero compact generators",
+      "results": "Service unavailable: Internal Server Error.",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A morphism from a free module sheaf on an affine representable to a coproduct factors through a finite subcoproduct",
+      "results": "Eight hits including PresheafOfModules.freeYonedaCoproductMk and freeCofan; no exact relative-extension or compact generator-cover theorem.",
+      "date": "2026-10-14",
+      "verdict": "Use the free-Yoneda and sheafification APIs to construct the cover."
+    },
+    {
+      "tool": "grep",
+      "query": "relative.*resolution|resolution.*split|finiteSubcoproductsCocone|freeYonedaEquiv|ModuleUnitLocalSupport",
+      "results": "Found RelativeFlatExtension (proved concrete cone construction) and ModuleUnitLocalSupport (proved local sheaf-colimit lifting), plus Mathlib freeYonedaEquiv and isColimitFiniteSubproductsCocone. The existing statements omit the required split term description or allow only free targets.",
+      "date": "2026-10-14",
+      "verdict": "Reuse their arguments and existing APIs; retain no new holes."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.CompactFlatGeneratorRelativeExtension",
+    "date": "2026-10-14",
+    "group": "V4"
   },
-  {
-   "text": "Define T(M) as the coproduct of G_U over (U,s), U affine and s∈M(U), and evaluation as its augmentation. A map f sends (U,s) to (U,f(s)), using the identity on G_U. The coproduct equations prove the functor laws and naturality. If maps from M agree after the augmentation, the section adjunction makes them agree on affine-local sections. The affine-open basis and sheaf separatedness give equality on every open, proving the augmentation epic. The indicated coproduct itself supplies the term description, including on the empty scheme.",
-   "uses": [],
-   "elementary": false
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "Relative cone-extension proof: Functorial covers by compact flat generators.",
+      "via": [
+        "lem-sc-compact-flat-generator-relative-extension",
+        "lem-sc-compact-flat-generator-tower-resolution",
+        "lem-sc-flat-telescope-target-refinement",
+        "lem-sc-flat-telescope-arrow-bar-data",
+        "lem-sc-flat-telescope-arrow-cocycles",
+        "lem-sc-flat-telescope-arrow-diagram",
+        "lem-sc-flat-telescope-stage-map-refinement",
+        "lem-sc-normalized-flat-telescope-comparison",
+        "lem-sc-normalized-kflat-representative-comparison",
+        "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+        "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.CompactFlatGeneratorCover",
+    "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatGeneratorCover.lean",
+    "declaration": "AlgebraicGeometry.exists_functorial_compact_flat_generator_cover",
+    "statement": "theorem exists_functorial_compact_flat_generator_cover (Y : Scheme.{u}) :\n    let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)\n    ∃ (T : A ⥤ A) (π : T ⟶ 𝟭 A),\n      ∀ M : A, Epi (π.app M) ∧\n        ∃ (I : Type u)\n        (G : I → SheafOfModules.{u} (moduleRings Y.toRingedSpace)),\n        Nonempty ((T.obj M) ≅ ∐ G) ∧\n        (∀ j : I, SheafOfModules.IsFlat (G j)) ∧\n        ∀ (j : I) (K : Type u)\n          (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n          (f : G j ⟶ ∐ H),\n          ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),\n            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f",
+    "branch": "sheaf-dag",
+    "by": "V4",
+    "date": "2026-10-14"
+  },
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "V4",
+    "result": "pass",
+    "landing": "20261014T091810-L-473387",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "V4",
+    "result": "pass",
+    "landing": "20261014T091810-L-473387",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-pc-sites-modules-sheafification-flat"
- ],
- "proof_origin": {
-  "by": "agent",
-  "group": "V4",
-  "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/03EW",
-  "place": "Clause (3), generators indexed by local sections; affine-open specialization in Tag 077J, with finite-support argument from the parent relative-extension proof."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "sheaves of modules affine open extension by zero compact generators",
-   "results": "Service unavailable: Internal Server Error.",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A morphism from a free module sheaf on an affine representable to a coproduct factors through a finite subcoproduct",
-   "results": "Eight hits including PresheafOfModules.freeYonedaCoproductMk and freeCofan; no exact relative-extension or compact generator-cover theorem.",
-   "date": "2026-10-14",
-   "verdict": "Use the free-Yoneda and sheafification APIs to construct the cover."
-  },
-  {
-   "tool": "grep",
-   "query": "relative.*resolution|resolution.*split|finiteSubcoproductsCocone|freeYonedaEquiv|ModuleUnitLocalSupport",
-   "results": "Found RelativeFlatExtension (proved concrete cone construction) and ModuleUnitLocalSupport (proved local sheaf-colimit lifting), plus Mathlib freeYonedaEquiv and isColimitFiniteSubproductsCocone. The existing statements omit the required split term description or allow only free targets.",
-   "date": "2026-10-14",
-   "verdict": "Reuse their arguments and existing APIs; retain no new holes."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.CompactFlatGeneratorRelativeExtension",
-  "date": "2026-10-14",
-  "group": "V4"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "Relative cone-extension proof: Functorial covers by compact flat generators.",
-   "via": [
-    "lem-sc-compact-flat-generator-relative-extension",
-    "lem-sc-compact-flat-generator-tower-resolution",
-    "lem-sc-flat-telescope-target-refinement",
-    "lem-sc-flat-telescope-arrow-bar-data",
-    "lem-sc-flat-telescope-arrow-cocycles",
-    "lem-sc-flat-telescope-arrow-diagram",
-    "lem-sc-flat-telescope-stage-map-refinement",
-    "lem-sc-normalized-flat-telescope-comparison",
-    "lem-sc-normalized-kflat-representative-comparison",
-    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
-    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CompactFlatGeneratorCover",
-  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatGeneratorCover.lean",
-  "declaration": "AlgebraicGeometry.exists_functorial_compact_flat_generator_cover",
-  "statement": "theorem exists_functorial_compact_flat_generator_cover (Y : Scheme.{u}) :\n    let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)\n    ∃ (T : A ⥤ A) (π : T ⟶ 𝟭 A),\n      ∀ M : A, Epi (π.app M) ∧\n        ∃ (I : Type u)\n        (G : I → SheafOfModules.{u} (moduleRings Y.toRingedSpace)),\n        Nonempty ((T.obj M) ≅ ∐ G) ∧\n        (∀ j : I, SheafOfModules.IsFlat (G j)) ∧\n        ∀ (j : I) (K : Type u)\n          (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n          (f : G j ⟶ ∐ H),\n          ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),\n            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f",
-  "branch": "sheaf-dag",
-  "by": "V4",
-  "date": "2026-10-14"
- },
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V4",
-  "result": "pass",
-  "landing": "20261014T091810-L-473387",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V4",
-  "result": "pass",
-  "landing": "20261014T091810-L-473387",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- }
 }

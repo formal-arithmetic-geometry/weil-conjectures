@@ -57,7 +57,7 @@ theorem finiteCocone_limitCycles
       let M := Classical.choice Y.derivedMaps_exists
       have hf : Y.derivedEProjection p q ≫ (X.pageCouple (r + 1)).f p q ≫
           Y.derivedDInclusion (p + 2) (q - 1) = kernel.ι (Y.d p q) ≫ Y.f p q :=
-        by simpa only [pageCouple, derived_f] using M.f_comm p q
+        M.f_comm p q
       rw [T.projection_succ, hIs]
       calc
         (T.cycleLift r p q ≫ Y.derivedEProjection p q) ≫

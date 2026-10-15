@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
 public import Sheaf.CategoryTheory.ExactCoupleMorphism
-public import Sheaf.CategoryTheory.Filtration
+public import Sheaf.CategoryTheory.ImageFiltration
 import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
 import Sheaf.CategoryTheory.Filtration

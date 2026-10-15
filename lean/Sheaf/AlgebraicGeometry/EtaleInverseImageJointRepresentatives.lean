@@ -5,7 +5,7 @@ Authors: SHEAF group P3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types

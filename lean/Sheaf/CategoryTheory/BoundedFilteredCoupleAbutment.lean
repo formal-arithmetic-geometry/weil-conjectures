@@ -218,8 +218,8 @@ theorem boundedFilteredComplex_coupleAbutment
         (P + (n - P))).map_isZero hz).of_iso (eD P (n - P))
   obtain ⟨L, hregular, hweak⟩ := X.finiteCocone_weakConvergence A htails
   let G : ∀ n : ℤ, DecreasingFiltration (U.obj.obj.homology n) := fun n ↦
-    { F := fun p ↦ (X.imageFiltration n (A n)).step (p + n)
-      F_succ_le := fun p ↦
+    { step := fun p ↦ (X.imageFiltration n (A n)).step (p + n)
+      antitone_step := fun p q hpq ↦
         (X.imageFiltration n (A n)).antitone_step (by omega) }
   have hG (n p : ℤ) : (G n).step p =
       imageSubobject (HomologicalComplex.homologyMap (U.obj.filtration.step p).arrow n) := by
@@ -246,13 +246,10 @@ theorem boundedFilteredComplex_coupleAbutment
     refine ⟨e ≪≫ eqToIso ?_⟩
     have hn : 2 * p + q + -p = p + q := by omega
     rw [hn]
-    simp only [DecreasingFiltration.gradedPiece, DecreasingFiltration.gr,
-      DecreasingFiltration.step, G,
+    simp only [DecreasingFiltration.gradedPiece, G,
       BigradedExactCouple.imageFiltration]
     have hP : 2 * p + q = p + (p + q) := by omega
     have hPs : 2 * p + q + 1 = p + 1 + (p + q) := by omega
-    congr! 2 <;> first
-      | exact congrArg (fun t : ℤ ↦ imageSubobject ((A (p + q)).ι t)) hPs
-      | exact congrArg (fun t : ℤ ↦ imageSubobject ((A (p + q)).ι t)) hP
+    congr! 6
 
 end CategoryTheory

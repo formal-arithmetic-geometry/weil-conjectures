@@ -59,7 +59,7 @@ noncomputable def strictHenselizationNeighbourhoodSection
       (𝟙 _)
       (by
         rw [Category.assoc, Category.id_comp]
-        exact Scheme.strictHenselizationStructuralMap_eq s j))
+        exact Classical.choose_spec (Scheme.exists_strictHenselizationStructuralMap s) j))
     (by
       change _ ≫ pullback.snd _ (Scheme.strictHenselizationStructuralMap s) = _
       simp

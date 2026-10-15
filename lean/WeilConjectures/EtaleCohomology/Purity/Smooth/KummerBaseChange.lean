@@ -8,8 +8,6 @@ module
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CompUnit
 
 /-!
 # Base change of the Kummer boundary
@@ -52,21 +50,13 @@ open Scheme
 
 namespace Etale
 
-/-- The exponent of `Λ` stays invertible on an open subscheme. -/
-theorem _root_.AlgebraicGeometry.HasInvertibleExponent.opens {Λ : Type (u + 1)} [CommRing Λ]
-    {X : Scheme.{u}} [HasInvertibleExponent Λ X] (V : X.Opens) : HasInvertibleExponent Λ V :=
-  .of_hom V.ι
-
-attribute [local instance] HasInvertibleExponent.opens
-
 section Twist
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [HasTateTwist Λ]
 
 /-- The pullback identifications of the twisting objects are compatible with composition, for
 a composite given up to an equality. -/
-lemma leftDerivedUpperStarTateObjectIso_comp {X Y S : Scheme.{u}} [HasInvertibleExponent Λ X]
-    [HasInvertibleExponent Λ Y] [HasInvertibleExponent Λ S] (f : X ⟶ Y) (g : Y ⟶ S)
+lemma leftDerivedUpperStarTateObjectIso_comp {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S)
     (fg : X ⟶ S) (h : fg = f ≫ g) (m : ℤ) :
     leftDerivedUpperStarTateObjectIso fg m =
       (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f g fg h).app (tateObject Λ S m) ≪≫
@@ -75,19 +65,25 @@ lemma leftDerivedUpperStarTateObjectIso_comp {X Y S : Scheme.{u}} [HasInvertible
   subst h
   exact HasTateTwist.leftDerivedUpperStarTwistObjectIso_comp f g m
 
-omit [HasTateTwist Λ] in
 variable (Λ) in
-/-- The pullback identifications of the constant complexes are compatible with composition: this
-is the compatibility of the composition isomorphism of the derived pullbacks with their counits
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarComp_hom_app_unit`). -/
+/-- The pullback identifications of the constant complexes are compatible with composition. -/
 lemma leftDerivedUpperStarConstantComplexIso_comp {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S)
     (fg : X ⟶ S) (h : fg = f ≫ g) :
     leftDerivedUpperStarConstantComplexIso Λ fg =
       (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f g fg h).app (constantComplex Λ S) ≪≫
         (L((f)^*[ModuleCat.{u + 1} Λ])).mapIso (leftDerivedUpperStarConstantComplexIso Λ g) ≪≫
           leftDerivedUpperStarConstantComplexIso Λ f := by
+  have := leftDerivedUpperStarTateObjectIso_comp (Λ := Λ) f g fg h 0
   ext
-  exact (leftDerivedUpperStarComp_hom_app_unit (ModuleCat.{u + 1} Λ) f g fg h).symm
+  simp only [leftDerivedUpperStarConstantComplexIso, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.app_hom, Functor.map_comp, Category.assoc]
+  change _ ≫ (leftDerivedUpperStarTateObjectIso fg 0).hom ≫ _ = _
+  rw [this]
+  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc, Iso.symm_hom]
+  erw [(leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f g fg h).hom.naturality_assoc]
+  simp only [Functor.comp_map, ← Functor.map_comp_assoc, Iso.hom_inv_id,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  rfl
 
 variable {X Y X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
@@ -102,9 +98,7 @@ Lf'^* ≅ │                                                 │ ≅
   Lf'^* Λ_{Y'}(m) ──────────────────≅─────────────────▶ Λ_{X'}(m)
 ```
 -/
-lemma derivedSquareUpperStarIso_hom_app_tateObject [HasInvertibleExponent Λ X]
-    [HasInvertibleExponent Λ Y] [HasInvertibleExponent Λ X'] [HasInvertibleExponent Λ Y']
-    (sq : CommSq g' f' f g) (m : ℤ) :
+lemma derivedSquareUpperStarIso_hom_app_tateObject (sq : CommSq g' f' f g) (m : ℤ) :
     (derivedSquareUpperStarIso (ModuleCat.{u + 1} Λ) sq).hom.app (tateObject Λ Y m) ≫
         (L((g')^*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarTateObjectIso f m).hom ≫
           (leftDerivedUpperStarTateObjectIso g' m).hom =
@@ -118,7 +112,6 @@ lemma derivedSquareUpperStarIso_hom_app_tateObject [HasInvertibleExponent Λ X]
   simp only [derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc, h₃, Iso.inv_hom_id_app_assoc]
 
-omit [HasTateTwist Λ] in
 variable (Λ) in
 /-- The derived square isomorphism of a commutative square `g' ≫ f = f' ≫ g` is compatible with
 the pullback identifications of the constant complexes. -/
@@ -136,7 +129,6 @@ lemma derivedSquareUpperStarIso_hom_app_constantComplex (sq : CommSq g' f' f g) 
   simp only [derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc, h₃, Iso.inv_hom_id_app_assoc]
 
-omit [HasTateTwist Λ] in
 variable (Λ) in
 /-- The constant-complex form of `derivedSquareUpperStarIso_hom_app_constantComplex`, solved
 for the identification along `f'`. -/
@@ -151,9 +143,7 @@ lemma leftDerivedUpperStarConstantComplexIso_square (sq : CommSq g' f' f g) :
 
 /-- The twist form of `derivedSquareUpperStarIso_hom_app_tateObject`, solved for the inverse
 identification along `f'`. -/
-lemma leftDerivedUpperStarTateObjectIso_square [HasInvertibleExponent Λ X]
-    [HasInvertibleExponent Λ Y] [HasInvertibleExponent Λ X'] [HasInvertibleExponent Λ Y']
-    (sq : CommSq g' f' f g) (m : ℤ) :
+lemma leftDerivedUpperStarTateObjectIso_square (sq : CommSq g' f' f g) (m : ℤ) :
     (leftDerivedUpperStarTateObjectIso g' m).inv ≫
         (L((g')^*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarTateObjectIso f m).inv ≫
         (derivedSquareUpperStarIso (ModuleCat.{u + 1} Λ) sq).inv.app (tateObject Λ Y m) ≫
@@ -186,9 +176,7 @@ Lj'^* Λ_{U'} ──≅──▶ Le₁^* Lj^* Λ_U ──Le₁^*(κ(u) read on U
    Λ_{D'} ──κ(u')──▶ Λ_{D'}(1)[1] ──────────≅──────────▶ (Lj'^* Λ_{U'}(1))[1]
 ```
 -/
-lemma kummerClass_square [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ U']
-    [HasInvertibleExponent Λ D] [HasInvertibleExponent Λ D'] (sq : CommSq e₁ j' j e)
-    (u : Γ(D, ⊤)ˣ) (u' : Γ(D', ⊤)ˣ)
+lemma kummerClass_square (sq : CommSq e₁ j' j e) (u : Γ(D, ⊤)ˣ) (u' : Γ(D', ⊤)ˣ)
     (hu : Units.map e₁.appTop.hom.toMonoidHom u = u') :
     (L((j')^*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
         (derivedSquareUpperStarIso (ModuleCat.{u + 1} Λ) sq).hom.app (constantComplex Λ U) ≫
@@ -216,8 +204,10 @@ lemma kummerClass_square [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ 
   simp only [Functor.comp_map, ← Functor.map_comp]
   rw [leftDerivedUpperStarTateObjectIso_square]
 
-variable [Finite Λ] [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ U']
+variable [Finite Λ]
 
+omit [HasKummerClass Λ] in
+variable [HasKummerClass Λ] in
 /-- The Kummer boundary `∂κ(f)` as the adjoint `Λ_U ⟶ (Rj_* Lj^* Λ_U(1))[1]` of the Kummer class
 of `f` on `U_f`, followed by the boundary of the supported localization triangle. -/
 lemma kummerBoundary_eq (f : Γ(U, ⊤)) :
@@ -315,7 +305,7 @@ end Kummer
 
 section Restriction
 
-variable {Λ : Type (u + 1)} [CommRing Λ]
+variable {Λ : Type (u + 1)} [CommRing Λ] [HasTateTwist Λ]
 
 variable (Λ) in
 /-- The pullback `f^♯ h : Λ_X ⟶ Λ_X` of an endomorphism `h` of the constant complex `Λ_S` along
@@ -357,29 +347,11 @@ lemma constantComplexEnd_ext {a b : constantComplex Λ X ⟶ constantComplex Λ 
   constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq (Iso.refl _) fun Ω _ _ x ↦ by
     simpa only [constantComplexEndPullback, cancel_epi, cancel_mono] using h Ω x
 
-variable (Λ Y) in
-/-- Every endomorphism `c` of `Λ` on the zero locus `V(t₁, …)` of the coordinates of the affine
-space `𝔸^n_Y` is the pullback `s^♯ h` of an endomorphism `h` of `Λ_{𝔸^n_Y}`: through
-`Y ≅ V(t₁, …)`, take for `h` the pullback of `c` along the projection `𝔸^n_Y ⟶ Y`, a retraction
-of the zero section. -/
-lemma exists_constantComplexEndPullback_zeroLocusSubschemeι_eq (n : Type u)
-    {s : Set Γ(𝔸(n; Y), ⊤)} (hs : Set.range (AffineSpace.coord Y) = s)
-    (c : constantComplex Λ (𝔸(n; Y).zeroLocusSubscheme s) ⟶
-      constantComplex Λ (𝔸(n; Y).zeroLocusSubscheme s)) :
-    ∃ h : constantComplex Λ 𝔸(n; Y) ⟶ constantComplex Λ 𝔸(n; Y),
-      constantComplexEndPullback Λ (𝔸(n; Y).zeroLocusSubschemeι s) h = c := by
-  let e := AffineSpace.zeroSectionIsoZeroLocusSubscheme n Y hs
-  refine ⟨constantComplexEndPullback Λ (𝔸(n; Y) ↘ Y)
-    (constantComplexEndPullback Λ e.hom c), constantComplexEnd_ext fun Ω _ _ x ↦ ?_⟩
-  rw [constantComplexEndPullback_constantComplexEndPullback _ _ e.inv rfl,
-    constantComplexEndPullback_constantComplexEndPullback x e.inv _ rfl,
-    constantComplexEndPullback_constantComplexEndPullback _ e.hom x (by simp)]
-
 end Restriction
 
 section SupportedRestriction
 
-variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+variable {Λ : Type (u + 1)} [CommRing Λ] [HasKummerClass Λ] [Finite Λ]
 
 variable {X Z U Z' : Scheme.{u}}
 

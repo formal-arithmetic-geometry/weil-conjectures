@@ -122,10 +122,11 @@
    }
   },
   {
-   "text": "Use integral extension of henselian pairs to give (D,ID) a henselian structure, ID = I.map φ. Connectedness of Z means its global-section ring D has only the idempotents zero and one. Every idempotent in D/ID lifts to D by integral henselian idempotent lifting, so D/ID also has only zero and one. The Jacobson condition makes ID proper; hence Spec(D/ID) is connected and nonempty. Its continuous image is V(ID), which is therefore connected and nonempty. This route avoids importing proper-scheme idempotent lifting, whose proof already uses this connectedness result.",
+   "text": "The target $\\operatorname{Spec}D$ is irreducible: if it is the union of two closed subsets, their inverse images under the continuous surjection $u$ cover the irreducible $Z$, so one inverse image is all of $Z$ and that closed subset is all of the target. Nonemptiness follows from $Z\\ne\\varnothing$. By [lem-weil-pbc-scheme-sober] it has a generic point, corresponding to a prime $\\mathfrak r\\subseteq D$. By [def-weil-affine-spectrum], its closure is $V(\\mathfrak r)$ (a closed set $V(J)$ contains the point exactly when $J\\subseteq\\mathfrak r$). Thus $V(\\mathfrak r)=\\operatorname{Spec}D$. Apply [lem-weil-pbc-henselian-pair-prime-connected] to the henselian pair $(D,ID)$ from Step 6 and this prime: $V(\\mathfrak r+ID)=V(\\mathfrak r)\\cap V(ID)=V(ID)$ is connected and nonempty. The displayed equality follows prime by prime from containment of the sum of ideals.",
    "uses": [
-    "lem-weil-pbc-integral-over-henselian-pair",
-    "lem-weil-pbc-henselian-pair-integral-idempotent-lifting"
+    "lem-weil-pbc-scheme-sober",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-henselian-pair-prime-connected"
    ],
    "elementary": false,
    "source": {
@@ -172,11 +173,12 @@
   "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
   "lem-weil-pbc-fibre-product-points",
   "lem-weil-pbc-h0-spectral-closed-restriction",
-  "lem-weil-pbc-henselian-pair-integral-idempotent-lifting",
+  "lem-weil-pbc-henselian-pair-prime-connected",
   "lem-weil-pbc-integral-over-henselian-pair",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-qcqs-over-affine",
   "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-scheme-sober",
   "lem-weil-pbc-spec-quotient-closed-immersion",
   "lem-weil-pbc-stein-factorization-affine",
   "pqf-def-coherent",
@@ -265,14 +267,14 @@
    ]
   },
   "slopmaster2": {
-   "state": "rests_on_sorry",
+   "state": "sorry_here",
    "decls": [
     {
      "name": "AlgebraicGeometry.Scheme.Hom.isFinite_steinFactorizationBase",
      "module": "WeilConjectures.AlgebraicGeometry.HenselianConnectedness",
      "lines": [
-      55,
-      83
+      52,
+      80
      ],
      "kind": "theorem",
      "sorry": false
@@ -281,15 +283,28 @@
      "name": "AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus",
      "module": "WeilConjectures.AlgebraicGeometry.HenselianConnectedness",
      "lines": [
-      101,
-      169
+      98,
+      111
      ],
      "kind": "theorem",
-     "sorry": false
+     "sorry": true
     }
    ],
    "missing": [],
    "open": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+     "lines": [
+      31,
+      48
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-cohomology-sections-affine-base"
+     ],
+     "below": false
+    },
     {
      "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
      "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
@@ -300,30 +315,6 @@
      "kind": "theorem",
      "nodes": [
       "lem-pc-coherent-hi"
-     ],
-     "below": true
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
-     "lines": [
-      45,
-      52
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing",
-     "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
-     "lines": [
-      119,
-      130
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "thm-weil-pbc-henselian-idempotent-lifting"
      ],
      "below": false
     }

@@ -169,7 +169,6 @@ namespace TateOrientation
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {a : X ⟶ Y} [HasCompactification a] {d : ℕ}
-  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
 /-- Blueprint `prop-pod-degree-of-the-pairing`: Degree of the pairing.
 
@@ -199,7 +198,6 @@ noncomputable def degreewisePairing (γ : TateOrientation Λ a d)
   (γ.degreeZeroPairing K i).compl₂ (Preadditive.rightComp _
     ((shiftFunctorAdd' _ (2 * d : ℤ) (-i) j (by lia)).hom.app _))
 
-omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
 /-- Blueprint `prop-pod-degree-of-the-pairing`: Degree of the pairing.
 
 The degreewise pairing `⟨x, y⟩ᵢ` is the degree-zero part of `β_K` evaluated on `x` and on the
@@ -264,6 +262,7 @@ section FieldDuality
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k]
 
+variable [Finite Λ] in
 /-- Over a separably closed field `k`, derived global sections carry a perfect pairing
 `b : C ⊗ᴸ D ⟶ Λ` in `D(Spec k_ét, Λ)`, with `C ∈ D^b_c(Spec k, Λ)`, to a duality
 `RΓ(Spec k, D) ≅ RΓ(Spec k, C)^∨` in `D(Λ)`: the pairing identifies `D` with the dual `C^∨`,

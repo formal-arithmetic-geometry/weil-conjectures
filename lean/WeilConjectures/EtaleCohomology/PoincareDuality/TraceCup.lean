@@ -195,7 +195,6 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
 namespace TateOrientation
 
 variable {a : X ⟶ Y} [HasCompactification a] {d : ℕ}
-  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
 /-- Blueprint `def-weil-poincare-trace-cup`: Poincare trace and cup-product pairing.
 
@@ -234,8 +233,7 @@ noncomputable def twistedSmoothTrace (γ : TateOrientation Λ a d) :
         ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).inv.app _ ≫ γ.smoothTrace
 
 /-- The identification `Λ_Y ≅ Λ_Y(d) ⊗ᴸ Λ_Y(-d)` of the Tate twist datum. -/
-noncomputable def constantComplexIsoTateObjectTensor (Y : Scheme.{u}) [HasInvertibleExponent Λ Y]
-    (d : ℕ) :
+noncomputable def constantComplexIsoTateObjectTensor (Y : Scheme.{u}) (d : ℕ) :
     𝟙_ (DerivedCategoryModule Λ Y) ≅
       ((derivedTensor _ Y).obj (tateObject Λ Y d)).obj (tateObject Λ Y (-d)) :=
   (HasTateTwist.twistObjectZeroIso Y).symm ≪≫ eqToIso (by rw [add_neg_cancel]) ≪≫

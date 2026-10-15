@@ -1,7 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
+import Sheaf.Paper.StrictHenselizationLocalStructure
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularPart
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 @[expose] public section

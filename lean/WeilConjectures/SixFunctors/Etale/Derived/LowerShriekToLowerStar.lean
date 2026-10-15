@@ -6,11 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.CategoryTheory.Monad.Adjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtaleFlat
 
 import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 
@@ -89,39 +87,31 @@ noncomputable def derivedOpenImmersionLowerShriekToLowerStar {U X : Scheme.{u}} 
         R((j)_*[A])
 
 /-- For an immersion `j` that is both open and closed, the derived comparison
-`D(j_!) ⟶ Rj_*` is an isomorphism.
-
-Such a `j` is finite and étale, so `j_*` is left adjoint to `j^*`
-(`AlgebraicGeometry.Etale.lowerStarUpperStarAdjunctionOfIsFinite`): it is exact, so
-`Rj_* ≅ D(j_*)`, and it is a second left adjoint of `j^*`, so `j_! ≅ j_*`. Being a closed
-immersion, `j_*` is fully faithful, so `D(j^*) Rj_* ≅ D(j^* j_*) ≅ 𝟭` and the counit of
-`D(j^*) ⊣ Rj_*` is an isomorphism. Hence the unit of `D(j^*) ⊣ Rj_*` is an isomorphism on
-`Rj_* K ≅ D(j_!) K`, which is what the comparison needs. -/
+`D(j_!) ⟶ Rj_*` is an isomorphism. -/
 instance isIso_derivedOpenImmersionLowerShriekToLowerStar {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] [IsClosedImmersion j] :
     IsIso (derivedOpenImmersionLowerShriekToLowerStar A j) := by
-  let adj := Etale.upperStarLowerStarAdjunction A j
-  have : IsIso adj.counit := adj.counit_isIso_of_R_fully_faithful
-  have : PreservesLimitsOfSize.{0, 0} (j)_*[A] := adj.rightAdjoint_preservesLimits
-  have : PreservesFiniteLimits (j)_*[A] := PreservesLimitsOfSize.preservesFiniteLimits.{0, 0} _
-  let eR : R((j)_*[A]) ≅ D((j)_*[A]) := ((j)_*[A]).rightDerivedFunctorIsoMapDerivedCategory
-  let adjD := mapDerivedUpperStarLowerStarAdjunction A j
-  have : IsIso adjD.counit := adjD.isIso_counit_of_iso
-    (Functor.isoWhiskerRight eR _ ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-      Functor.mapDerivedCategoryNatIso (asIso adj.counit) ≪≫ Functor.mapDerivedCategoryIdIso _)
+  have : IsIso (openImmersionLowerShriekToLowerStar A j) :=
+    isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range A j
+      j.isClosedEmbedding.isClosed_range
+  -- Derive the sheaf isomorphism; exactness identifies the derived shriek with D(j_!).
   let e : D((j)_!open[A]) ≅ R((j)_*[A]) :=
-    Functor.mapDerivedCategoryNatIso
-      ((Etale.openImmersionLowerShriekUpperStarAdjunction A j).leftAdjointUniq
-        (Etale.lowerStarUpperStarAdjunctionOfIsFinite A j)) ≪≫ eR.symm
-  have hK (K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology A)) :
-      IsIso (adjD.unit.app (D((j)_!open[A]).obj K)) := by
-    rw [NatTrans.isIso_app_iff_of_iso _ (e.app K)]
-    have : IsIso (adjD.unit.app (R((j)_*[A]).obj K) ≫ R((j)_*[A]).map (adjD.counit.app K)) := by
-      rw [adjD.right_triangle_components K]
-      exact IsIso.id _
-    exact IsIso.of_isIso_comp_right _ (R((j)_*[A]).map (adjD.counit.app K))
-  have : IsIso (Functor.whiskerLeft D((j)_!open[A]) adjD.unit) :=
-    @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun K ↦ hK K
+    ((j)_!open[A]).rightDerivedFunctorIsoMapDerivedCategory.symm ≪≫
+      Functor.rightDerivedFunctorNatIso (asIso (openImmersionLowerShriekToLowerStar A j))
+  -- Transfer full faithfulness from extension by zero to the derived pushforward.
+  have : D((j)_!open[A]).Full :=
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction A j).fullyFaithfulLOfIsIsoUnit.full
+  have : D((j)_!open[A]).Faithful :=
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction A j).fullyFaithfulLOfIsIsoUnit.faithful
+  have : (R((j)_*[A])).Full := Functor.Full.of_iso e
+  have : (R((j)_*[A])).Faithful := Functor.Faithful.of_iso e
+  -- The unit of a reflection is invertible on the essential image of its right adjoint.
+  have : IsIso (Functor.whiskerLeft D((j)_!open[A])
+      (mapDerivedUpperStarLowerStarAdjunction A j).unit) := by
+    have : ∀ K, IsIso ((Functor.whiskerLeft D((j)_!open[A])
+        (mapDerivedUpperStarLowerStarAdjunction A j).unit).app K) := fun K ↦
+      (mapDerivedUpperStarLowerStarAdjunction A j).isIso_unit_app_of_iso (e.app K)
+    exact NatIso.isIso_of_isIso_app _
   unfold derivedOpenImmersionLowerShriekToLowerStar
   infer_instance
 

@@ -192,10 +192,7 @@ theorem Hom.constantCoeff_zetaSeries :
   simpa using h0
 
 /-- The logarithmic derivative of the zeta function of `X` over `k` is the generating
-function of the point counts of `X`: `t * Z'(X, t) = (∑ N_n * t ^ n) * Z(X, t)`; together with
-`AlgebraicGeometry.Scheme.Hom.constantCoeff_zetaSeries` this characterises
-`Z(X, t) = exp (∑ N_n t ^ n / n)`.
-(blueprint: `def-weil-point-counts-zeta`) -/
+function of the point counts of `X`: `t * Z'(X, t) = (∑ N_n * t ^ n) * Z(X, t)`. -/
 theorem Hom.X_mul_derivative_zetaSeries :
     PowerSeries.X * PowerSeries.derivative ℚ f.zetaSeries =
       PowerSeries.mk (fun n ↦ if n = 0 then (0 : ℚ) else f.pointCount n) *

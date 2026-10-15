@@ -171,21 +171,21 @@ theorem exists_coproduct_truncation_couple
     (fun i ↦ (V i).g (p - 1) (r + 1))
     (fun i ↦ (V i).g_alpha_zero p r)
     (fun i ↦ (ShortComplex.exact_iff_image_eq_kernel _).mpr ((V i).exact_g p r))
-  let X : BigradedExactCouple B 0 := BigradedExactCouple.ofShifted
-      (fun p r ↦ ∐ (fun i ↦ (V i).D p r))
-      (fun p r ↦ ∐ (fun i ↦ (V i).E p r))
-      (fun p r ↦ Limits.Sigma.map (fun i ↦ (V i).alpha p r))
-      (fun p r ↦ Limits.Sigma.map (fun i ↦ (V i).f p r))
-      (fun p r ↦ Limits.Sigma.map (fun i ↦ (V i).g p r))
-      (fun p r ↦ (ha p r).choose)
-      (fun p r ↦ (hf p r).choose)
-      (fun p r ↦ (hg p r).choose)
-      (fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
-        (ha p r).choose_spec)
-      (fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
-        (hf p r).choose_spec)
-      (fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
-        (hg p r).choose_spec)
+  let X : BigradedExactCouple B 0 :=
+    { D := fun p r ↦ ∐ (fun i ↦ (V i).D p r)
+      E := fun p r ↦ ∐ (fun i ↦ (V i).E p r)
+      alpha := fun p r ↦ Limits.Sigma.map (fun i ↦ (V i).alpha p r)
+      f := fun p r ↦ Limits.Sigma.map (fun i ↦ (V i).f p r)
+      g := fun p r ↦ Limits.Sigma.map (fun i ↦ (V i).g p r)
+      alpha_f_zero := fun p r ↦ (ha p r).choose
+      f_g_zero := fun p r ↦ (hf p r).choose
+      g_alpha_zero := fun p r ↦ (hg p r).choose
+      exact_alpha := fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+        (ha p r).choose_spec
+      exact_f := fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+        (hf p r).choose_spec
+      exact_g := fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+        (hg p r).choose_spec }
   let T : BigradedExactCouple.CoupleMorphism X Y :=
     { tD := fun p r ↦ Sigma.desc (fun i ↦ (t i).tD p r)
       tE := fun p r ↦ Sigma.desc (fun i ↦ (t i).tE p r)

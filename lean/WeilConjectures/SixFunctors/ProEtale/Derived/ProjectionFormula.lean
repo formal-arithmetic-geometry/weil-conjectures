@@ -77,10 +77,8 @@ The blueprint's "étale-origin witnesses" are explicit: at the finite stages the
 constructibility is étale origin); at the `ℓ`-adic stages they are isomorphisms `ν^* K₀ ≅ K` with
 `K₀` a bounded constructible, derived complete étale complex of finite Tor amplitude. As in the
 étale model (`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational`), the stage
-`ℚ̄_ℓ` is covered through the finite stages `E` at which its objects are represented. The
-compatibility with the scalar extensions `𝒪_E ⟶ 𝒪_{E'}` (the projection map over `E'` at scalar
-extensions of `𝒪_E`-objects is an isomorphism) is
-`WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormulaExtendScalars`.
+`ℚ̄_ℓ` is covered through the finite stages `E` at which its objects are represented: the
+`2`-colimit over `E` and the scalar extensions `E ⟶ E'` are not constructed in the repository.
 The statement cannot be made directly with the discrete coefficients
 `AlgebraicGeometry.WeilCoefficients` (`ℚ̄_ℓ`-modules): there `ν^*` commutes with `Rg_*` on
 bounded below complexes, so the projection formula for objects of étale origin would be the
@@ -286,8 +284,7 @@ theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite
   have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
   exact hasProjectionFormulaOfCompactification_of_comparison c eK eL hK₀.1 hML inferInstance
 
-/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`: Projection formula: the pro-étale
-realization; the finite stages.
+/-- Blueprint `sk-thm-sf-pf-proetale`: Projection formula: the pro-étale realization.
 
 Let `Λ` be a finite ring (a finite coefficient stage). For a morphism `f : X ⟶ Y` admitting a
 compactification, and `K` in `Dctf(X_proét, Λ)` and `L` in `Dctf(Y_proét, Λ)`, the projection
@@ -329,7 +326,7 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the integral stage `𝒪_E`.
+/-- Blueprint `sk-thm-sf-pf-proetale`, the integral stage `𝒪_E`.
 
 Let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be the pro-étale realizations of bounded constructible,
 derived complete complexes `K₀`, `L₀` of étale sheaves of `𝒪_E`-modules of finite Tor amplitude,
@@ -364,10 +361,8 @@ theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompac
         (HasCompactification.compactification f).i).bounded_mapDerivedCategory_obj hKc.1)
       hLt') hPF'
 
-/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the rational stage `E` (and,
-through the finite stages `E'` at which its objects are represented, the stage `ℚ̄_ℓ`; see
-`AlgebraicGeometry.ProEtale.isIso_rationalization_map_projectionMap_extendScalars` for the
-compatibility with extension of scalars).
+/-- Blueprint `sk-thm-sf-pf-proetale`, the rational stage `E` (and, through the finite stages
+`E'` at which its objects are represented, the stage `ℚ̄_ℓ`).
 
 The rational stage is the rationalization `D(Y_proét, 𝒪_E)[1/ℓ]` of the integral one, the
 Verdier quotient by the objects killed by a nonzero element of `𝒪_E`, and the projection map

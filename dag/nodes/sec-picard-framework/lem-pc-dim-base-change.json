@@ -76,15 +76,15 @@
   },
   {
    "tool": "leanfinder",
-   "query": "ringKrullDim (A \u2297[k] K) = ringKrullDim A for a finitely generated algebra A over a field k and field extension K",
+   "query": "ringKrullDim (A ⊗[k] K) = ringKrullDim A for a finitely generated algebra A over a field k and field extension K",
    "results": "Algebra.IsAlgebraic.finrank_of_isFractionRing, lift_rank_of_isFractionRing, rank_of_isFractionRing, rank_fractionRing (Mathlib.RingTheory.Algebraic.Integral), IntermediateField.LinearDisjoint...rank, Ring.DimensionLEOne.isIntegralClosure: module ranks only",
    "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'ringKrullDim.*\u2297\\|krullDim.*TensorProduct\\|krullDim.*baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'krullDim' ~/weil-conjectures-slopmaster2/WeilConjectures | grep -i 'tensor\\|\u2297\\|baseChange\\|extension'",
-   "results": "Mathlib: none. slopmaster2: WeilConjectures/Mathlib/RingTheory/NoetherNormalization.lean:326 ringKrullDim_tensorProduct_eq_of_finite_inj_algHom_mvPolynomial (generic fibre K \u2297_R S of a Noether normalization over a domain R with fraction field K; for R=k a field it forces K=k, so not this statement); Mathlib/AlgebraicGeometry/Fiber.lean:86 topologicalKrullDim_fiber_of_isPullback (fibres of isomorphic pullback squares)",
+   "query": "grep -rn 'ringKrullDim.*⊗\\|krullDim.*TensorProduct\\|krullDim.*baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'krullDim' ~/weil-conjectures-slopmaster2/WeilConjectures | grep -i 'tensor\\|⊗\\|baseChange\\|extension'",
+   "results": "Mathlib: none. slopmaster2: WeilConjectures/Mathlib/RingTheory/NoetherNormalization.lean:326 ringKrullDim_tensorProduct_eq_of_finite_inj_algHom_mvPolynomial (generic fibre K ⊗_R S of a Noether normalization over a domain R with fraction field K; for R=k a field it forces K=k, so not this statement); Mathlib/AlgebraicGeometry/Fiber.lean:86 topologicalKrullDim_fiber_of_isPullback (fibres of isomorphic pullback squares)",
    "date": "2026-10-10",
    "verdict": "no match (rule 0: no slopmaster2 declaration states the item)"
   }
@@ -128,8 +128,8 @@
   "date": "2026-10-10",
   "item": "lem-pc-dim-base-change",
   "worker": "stage1",
-  "summary": "Source located: the affine statement is Stacks Algebra, Lemma 00P3 (lemma-dimension-preserved-field-extension), not 00HS (flat going-down), which the imported source and the blueprint proof cite. The blueprint proof (dim k[x]/I = n - ht(I), and ht(I K[x]) = ht(I) by a going-down argument for primes applied to the non-prime ideal I) is incomplete: its inequality ht(pR') <= ht(p) 'by going-down applied inside' is not an argument (Stacks 00P4 needs the flat local dimension formula 00ON for it). It is replaced by the existing DAG node lem-weil-pbc-dimension-preserved-field-extension (00P3: Noether normalization + finite injective K[y] -> K \u2297 S + 00OK), used as a generic tool of unit sk-thm-p1. The curve clause is written out: finite affine cover of X by finite type algebras (definition of finite type), the induced open cover of X_K by Spec(A_i \u2297_k K) (open fibre products 01JR, fibre product of affines 01JQ, both Mathlib leaves), and a new node computing dim of a scheme (sup of local ring dimensions, as def-pc-dimension defines it) from an affine open cover (04MU + 01HV + 00KG). Statement kept, with citations added; stmt_deps corrected (def-pc-field-tower and def-pc-morphism-conventions are not used; def-pc-field-extension, def-weil-pbc-finite-type-algebra, def-weil-pbc-krull-dimension-ring, def-pc-base-change added). No slopmaster2 declaration states the item.",
-  "blueprint": "Step 1 realizes the first paragraph's claim dim(A \u2297_k K) = dim A (by 00P3 instead of the blueprint's height computation); steps 2-3 realize the last paragraph 'X is a curve, covered by affine opens Spec(A_i) ... the X_K are covered by the Spec(A_i \u2297_k K) of dimension dim A_i, so dim X_K = 1'."
+  "summary": "Source located: the affine statement is Stacks Algebra, Lemma 00P3 (lemma-dimension-preserved-field-extension), not 00HS (flat going-down), which the imported source and the blueprint proof cite. The blueprint proof (dim k[x]/I = n - ht(I), and ht(I K[x]) = ht(I) by a going-down argument for primes applied to the non-prime ideal I) is incomplete: its inequality ht(pR') <= ht(p) 'by going-down applied inside' is not an argument (Stacks 00P4 needs the flat local dimension formula 00ON for it). It is replaced by the existing DAG node lem-weil-pbc-dimension-preserved-field-extension (00P3: Noether normalization + finite injective K[y] -> K ⊗ S + 00OK), used as a generic tool of unit sk-thm-p1. The curve clause is written out: finite affine cover of X by finite type algebras (definition of finite type), the induced open cover of X_K by Spec(A_i ⊗_k K) (open fibre products 01JR, fibre product of affines 01JQ, both Mathlib leaves), and a new node computing dim of a scheme (sup of local ring dimensions, as def-pc-dimension defines it) from an affine open cover (04MU + 01HV + 00KG). Statement kept, with citations added; stmt_deps corrected (def-pc-field-tower and def-pc-morphism-conventions are not used; def-pc-field-extension, def-weil-pbc-finite-type-algebra, def-weil-pbc-krull-dimension-ring, def-pc-base-change added). No slopmaster2 declaration states the item.",
+  "blueprint": "Step 1 realizes the first paragraph's claim dim(A ⊗_k K) = dim A (by 00P3 instead of the blueprint's height computation); steps 2-3 realize the last paragraph 'X is a curve, covered by affine opens Spec(A_i) ... the X_K are covered by the Spec(A_i ⊗_k K) of dimension dim A_i, so dim X_K = 1'."
  },
  "tool_uses": [
   "lem-weil-pbc-dimension-preserved-field-extension"
@@ -139,7 +139,7 @@
   "module": "Sheaf.AlgebraicGeometry.DimensionBaseChange",
   "declaration": "AlgebraicGeometry.dim_base_change",
   "file": "lean/Sheaf/AlgebraicGeometry/DimensionBaseChange.lean",
-  "statement": "theorem dim_base_change : (\u2200 (k : Type u) (K : Type v) (A : Type w) [Field k] [Field K] [CommRing A] [Algebra k K] [Algebra k A] [Algebra.FiniteType k A], ringKrullDim (A \u2297[k] K) = ringKrullDim A) \u2227 (\u2200 (k K : Type z) [Field k] [Field K] [Algebra k K] {X : Scheme.{z}} (f : X \u27f6 Spec (.of k)) [IsIntegralCurve f], Scheme.dim (Limits.pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) = 1)",
+  "statement": "theorem dim_base_change : (∀ (k : Type u) (K : Type v) (A : Type w) [Field k] [Field K] [CommRing A] [Algebra k K] [Algebra k A] [Algebra.FiniteType k A], ringKrullDim (A ⊗[k] K) = ringKrullDim A) ∧ (∀ (k K : Type z) [Field k] [Field K] [Algebra k K] {X : Scheme.{z}} (f : X ⟶ Spec (.of k)) [f.IsCurveOverField], Scheme.dim (Limits.pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) = 1)",
   "branch": "sheaf-dag",
   "by": "H1",
   "date": "2026-10-11",
@@ -151,7 +151,7 @@
   "reviewer": "R-dbc1229",
   "group": "H1",
   "result": "pass",
-  "note": "field k; A comm k-algebra with Algebra.FiniteType (n=0, zero ring allowed); K/k as [Field K][Algebra k K]; ringKrullDim (A \u2297[k] K) = ringKrullDim A; curve as explicit f with [f.IsCurveOverField] (integral, separated, LOFT+QC, X.dim=1); X_K = Limits.pullback f (Spec.map (ofHom (algebraMap k K))); Scheme.dim = 1; conjuncts independently quantified; #check resolves all names, clean compile"
+  "note": "field k; A comm k-algebra with Algebra.FiniteType (n=0, zero ring allowed); K/k as [Field K][Algebra k K]; ringKrullDim (A ⊗[k] K) = ringKrullDim A; curve as explicit f with [f.IsCurveOverField] (integral, separated, LOFT+QC, X.dim=1); X_K = Limits.pullback f (Spec.map (ofHom (algebraMap k K))); Scheme.dim = 1; conjuncts independently quantified; #check resolves all names, clean compile"
  },
  "reviewed_proof": {
   "date": "2026-10-12",

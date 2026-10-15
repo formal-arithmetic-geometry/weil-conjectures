@@ -5,7 +5,7 @@ Authors: SHEAF group J2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence

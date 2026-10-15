@@ -31,10 +31,9 @@ and functoriality of homology prove antitonicity.
 Source: Stacks Project, Tag 012P.
 (blueprint: lem-sp-filtered-cohomology-image-finite). -/
 noncomputable def cohomologyImage (n : ℤ) : DecreasingFiltration (K.homology n) where
-  F p := imageSubobject (HomologicalComplex.homologyMap (L.step p).arrow n)
-  F_succ_le p := by
-    let q := p + 1
-    have hpq : p ≤ q := by dsimp [q]; omega
+  step p := imageSubobject (HomologicalComplex.homologyMap (L.step p).arrow n)
+  antitone_step := by
+    intro p q hpq
     have h := imageSubobject_comp_le
       (HomologicalComplex.homologyMap
         (Subobject.ofLE (L.step q) (L.step p) (L.antitone_step hpq)) n)

@@ -87,51 +87,29 @@
   "master": {
    "state": "none",
    "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Scheme.strictLocalizationToBase",
-    "AlgebraicGeometry.Scheme.strictLocalizationCone_π_app_hom"
-   ]
+   "missing": []
   },
   "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.strictLocalizationToBase",
-     "module": "WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization",
-     "lines": [
-      241,
-      244
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.strictLocalizationCone_π_app_hom",
-     "module": "WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization",
-     "lines": [
-      246,
-      250
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Sites/StrictHenselization.lean",
-  "declaration": "AlgebraicGeometry.Scheme.strictLocalizationToBase",
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap",
+  "statement": "def strictHenselizationStructuralMap {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : strictHenselizationScheme s ⟶ S",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationStructuralMap.lean",
   "declarations": [
-   "AlgebraicGeometry.Scheme.strictLocalizationToBase",
-   "AlgebraicGeometry.Scheme.strictLocalizationCone_π_app_hom"
+   "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap",
+   "AlgebraicGeometry.Scheme.exists_strictHenselizationStructuralMap"
   ],
-  "branch": "slopmaster2",
-  "date": "2026-10-13",
-  "existing": true,
-  "note": "Upstream canonical structure map; SHEAF keeps only an abbreviation and the formula for its small affine representative legs."
+  "note": "Classical.choose of exists_strictHenselizationStructuralMap, whose spec ties the map to every leg of strictHenselizationCone composed with Spec Γ(V) ≅ V and the structure morphism V ⟶ S (as DERIVED PULLBACK / TENSOR-PULLBACK UNIT); uses go through Classical.choose_spec.",
+  "fixed_by": "R-gps"
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -158,25 +136,5 @@
   "landing": "20261012T042412-L-1817318",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- },
- "upstream_sync": {
-  "commit": "ffb7b9060",
-  "reason": "Retire the duplicate structural morphism and use the upstream map.",
-  "previous_lean": {
-   "module": "Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap",
-   "declaration": "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap",
-   "statement": "def strictHenselizationStructuralMap {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : strictHenselizationScheme s ⟶ S",
-   "branch": "sheaf-dag",
-   "by": "P1",
-   "date": "2026-10-11",
-   "existing": false,
-   "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationStructuralMap.lean",
-   "declarations": [
-    "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap",
-    "AlgebraicGeometry.Scheme.exists_strictHenselizationStructuralMap"
-   ],
-   "note": "Classical.choose of exists_strictHenselizationStructuralMap, whose spec ties the map to every leg of strictHenselizationCone composed with Spec Γ(V) ≅ V and the structure morphism V ⟶ S (as DERIVED PULLBACK / TENSOR-PULLBACK UNIT); uses go through Classical.choose_spec.",
-   "fixed_by": "R-gps"
-  }
  }
 }

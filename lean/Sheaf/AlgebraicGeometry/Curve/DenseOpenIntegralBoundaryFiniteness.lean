@@ -55,11 +55,7 @@ private theorem finite_constructible_stalk {X : Scheme.{u}}
   rw [← S.range_immersion j] at hj
   obtain ⟨t, ht⟩ := Scheme.exists_comp_eq_of_mem_range (S.immersion j) s
     (by simpa using hj)
-  have hfin : Finite (((Scheme.pointSmallEtale t).sheafFiber).obj
-      ((Scheme.etaleSetPullback (S.immersion j)).obj
-        ((sheafCompose X.smallEtaleTopology (forget AddCommGrpCat.{u + 1})).obj A))) :=
-    (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-      ((hS j).2.isFinitelyGenerated_sheafFiber Ω t)
+  have hfin := (hS j).2 Ω t
   let ea := (etaleInverseImageAlgebraicStructures (S.domain j) X (S.immersion j)).2.choose
   let e₁ := (Scheme.pointSmallEtale t).sheafFiber.mapIso (ea.app A)
   let e₂ := ((Scheme.pointSmallEtale t).sheafFiberCompIso

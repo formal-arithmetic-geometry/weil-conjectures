@@ -19,8 +19,6 @@ universe v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
--- The colimit comparison unfolds the full affine neighborhood diagram.
 /-- Evaluation recovers the given geometric point at every chosen neighbourhood.
 Source: Stacks Project, Tag 04HX. This is the colimit coprojection equation,
 followed by the naturality and triangle identities of Γ and Spec.
@@ -39,10 +37,9 @@ theorem strictHenselizationPointEvaluation_pointed
     (strictHenselizationNeighbourhoods barY)).inverse.obj j).1.left)
   let z : Spec (.of Ω) ⟶ V :=
     ((equivSmallModel.{v} (strictHenselizationNeighbourhoods barY)).inverse.obj j).2.left
-  change Spec.map ((isColimitSmallStrictHenselizationCocone barY).desc
-      (strictHenselizationPointCocone barY)) ≫
-    Spec.map ((smallStrictHenselizationCocone barY).ι.app (op j)) ≫ V.isoSpec.inv = z
-  rw [← Spec.map_comp_assoc, (isColimitSmallStrictHenselizationCocone barY).fac]
+  change Spec.map (colimit.desc _ (strictHenselizationPointCocone barY)) ≫
+    Spec.map (colimit.ι (strictHenselizationDiagram barY) (op j)) ≫ V.isoSpec.inv = z
+  rw [← Spec.map_comp_assoc, colimit.ι_desc]
   change Spec.map (z.appTop ≫ (ΓSpecIso (.of Ω)).hom) ≫ V.isoSpec.inv = z
   rw [Spec.map_comp, SpecMap_ΓSpecIso_hom, ← toSpecΓ_naturality]
   change z ≫ V.isoSpec.hom ≫ V.isoSpec.inv = z

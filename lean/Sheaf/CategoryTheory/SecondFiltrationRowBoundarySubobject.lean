@@ -131,7 +131,7 @@ theorem secondFiltration_row_boundary_subobject
     · subst r
       have hstep : L.complexStep s (s - 1) = ⊥ := by
         rw [hL]
-        simp only [DecreasingFiltration.step, HomologicalComplex₂.secondFiltration,
+        simp only [HomologicalComplex₂.secondFiltration,
           Finset.Icc_eq_empty_of_lt (by omega : s - 1 < s), Finset.sup_empty]
       let m₀ := (L.step s).arrow.f (s - 1)
       have : Mono m₀ := by

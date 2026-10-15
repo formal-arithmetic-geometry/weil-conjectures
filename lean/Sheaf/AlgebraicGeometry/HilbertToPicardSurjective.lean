@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.CartierDivisorFinite
 import Sheaf.AlgebraicGeometry.NonzeroSectionIntegralCartier
-import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
+import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
 import Sheaf.Paper.EulerCharacteristicWellDefined
 import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
@@ -74,7 +74,7 @@ The resulting lift maps to p, proving surjectivity on underlying points
 (def-weil-surjective-morphism).
 -/
 theorem surjective_hilbertToPicardMorphism {k : Type u} [Field k] [IsSepClosed k]
-    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsSmoothProjectiveCurve f]
+    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [f.IsSmoothProjectiveCurve]
     [GeometricallyIntegral f] (d : ℕ) (hd : @Scheme.arithmeticGenus k _ C ⟨f⟩ ≤ d)
     (H P : Over (Spec (.of k))) (eH : (hilbertPresheaf f d).RepresentableBy H)
     (eP : (picardFunctorDegree f d).obj.RepresentableBy P)

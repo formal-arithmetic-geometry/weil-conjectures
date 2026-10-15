@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.CategoryTheory.ExactCoupleShifted
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 import Sheaf.CategoryTheory.DerivedCoupleMapExactness
 
@@ -24,6 +24,25 @@ universe u v
 open CategoryTheory.Limits
 
 namespace CategoryTheory
+
+/-- A type-`s` exact couple. The image and kernel equalities compare subobjects
+of the same bidegree. Type zero is the initial couple of the blueprint.
+Source: Stacks Project, Tags 011Q and 0AMJ (blueprint: def-sp-exact-couple). -/
+structure BigradedExactCouple (C : Type u) [Category.{v} C] [Abelian C] (s : ℕ) where
+  D : ℤ → ℤ → C
+  E : ℤ → ℤ → C
+  alpha : ∀ p q, D p q ⟶ D (p - 1) (q + 1)
+  f : ∀ p q, E p q ⟶ D (p + 2) (q - 1)
+  g : ∀ p q, D p q ⟶ E (p + s) (q - s)
+  alpha_f_zero : ∀ p q, f p q ≫ alpha (p + 2) (q - 1) = 0
+  f_g_zero : ∀ p q, g p q ≫ f (p + s) (q - s) = 0
+  g_alpha_zero : ∀ p q, alpha p q ≫ g (p - 1) (q + 1) = 0
+  exact_alpha : ∀ p q,
+    imageSubobject (f p q) = kernelSubobject (alpha (p + 2) (q - 1))
+  exact_f : ∀ p q,
+    imageSubobject (g p q) = kernelSubobject (f (p + s) (q - s))
+  exact_g : ∀ p q,
+    imageSubobject (alpha p q) = kernelSubobject (g (p - 1) (q + 1))
 
 namespace BigradedExactCouple
 
@@ -182,20 +201,17 @@ exactness are stated in `derivedMaps_exists`.
 Source: Stacks Project, Tags 011R and 0AMJ (blueprint: def-sp-exact-couple). -/
 noncomputable def derived (X : BigradedExactCouple C s) : BigradedExactCouple C (s + 1) :=
   let M := Classical.choice X.derivedMaps_exists
-  ofShifted X.derivedD X.derivedE M.alpha M.f M.g
-    M.alpha_f_zero M.f_g_zero M.g_alpha_zero M.exact_alpha M.exact_f M.exact_g
-
-@[simp] theorem derived_alpha (X : BigradedExactCouple C s) (p q : ℤ) :
-    X.derived.alpha p q = (Classical.choice X.derivedMaps_exists).alpha p q := by
-  simp [derived]
-
-@[simp] theorem derived_f (X : BigradedExactCouple C s) (p q : ℤ) :
-    X.derived.f p q = (Classical.choice X.derivedMaps_exists).f p q := by
-  simp [derived]
-
-@[simp] theorem derived_g (X : BigradedExactCouple C s) (p q : ℤ) :
-    X.derived.g p q = (Classical.choice X.derivedMaps_exists).g p q := by
-  simp [derived]
+  { D := X.derivedD
+    E := X.derivedE
+    alpha := M.alpha
+    f := M.f
+    g := M.g
+    alpha_f_zero := M.alpha_f_zero
+    f_g_zero := M.f_g_zero
+    g_alpha_zero := M.g_alpha_zero
+    exact_alpha := M.exact_alpha
+    exact_f := M.exact_f
+    exact_g := M.exact_g }
 
 /-- The iterated exact couples, indexed so that the initial couple is page two.
 Source: Stacks Project, Tags 011S and 0AMJ (blueprint: def-sp-exact-couple). -/

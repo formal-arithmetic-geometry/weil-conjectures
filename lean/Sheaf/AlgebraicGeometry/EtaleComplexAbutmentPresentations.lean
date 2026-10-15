@@ -283,10 +283,7 @@ theorem exists_etale_complex_abutment_presentations
       change (f (a + ((p + 1 - a).toNat : ℤ))).hom.range = ⊥
       have hz : f (max a (p + 1)) = 0 := by
         dsimp [f]
-        have hzero : (W.step (max a (p + 1))).arrow = 0 := by
-          exact zero_of_source_iso_zero _
-            (Subobject.isoOfEq _ _ hbot ≪≫ Subobject.botCoeIsoZero)
-        simp only [hzero, zero_comp]
+        rw [hbot, Subobject.bot_arrow, zero_comp]
       rw [heq, hz]
       exact AddMonoidHom.range_zero
     have hanti : Antitone S := by

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
@@ -38,6 +38,6 @@ The predicate expands the definition of finite locally constant sheaf from
 morphisms as its arrows. -/
 abbrev FLC (Y : Scheme.{u}) : Type (u + 2) :=
   ObjectProperty.FullSubcategory
-    (IsLisseEtaleSheafOfSets (T := Y))
+    (IsFiniteLocallyConstantEtaleSheafOfSets (T := Y))
 
 end AlgebraicGeometry.Scheme

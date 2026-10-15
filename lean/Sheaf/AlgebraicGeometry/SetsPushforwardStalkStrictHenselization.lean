@@ -45,7 +45,7 @@ theorem strictHenselizationBaseChange_condition
           ((equivSmallModel.{v} (strictHenselizationNeighbourhoods y)).inverse.obj j).1).hom =
       pullback.snd (strictHenselizationStructuralMap y) f ≫ f := by
   rw [Category.assoc, Category.assoc]
-  rw [strictHenselizationStructuralMap_eq y j]
+  rw [Classical.choose_spec (exists_strictHenselizationStructuralMap y) j]
   exact pullback.condition
 
 /-- The map X^sh → V ×_Y X with components c_V ∘ f^sh and p, for a representative affine

@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Mathlib.CategoryTheory.Filtered.Final

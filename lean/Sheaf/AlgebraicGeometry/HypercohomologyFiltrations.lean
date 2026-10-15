@@ -11,7 +11,7 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.CategoryTheory.ExactCoupleMorphism
 import Sheaf.CategoryTheory.ExactFunctorCouple
 import Sheaf.CategoryTheory.KInjectiveBridge
@@ -115,15 +115,18 @@ theorem hypercohomology_maps_exact :
 /-- The exact truncation couple, with explicit data and separately named exactness proofs.
 Source: blueprint order 1315; Stacks Tags 0DDE, 015J
 (blueprint: def-weil-pbc-hypercohomology-filtrations). -/
-noncomputable def hypercohomologyCouple : BigradedExactCouple B 0 :=
-  BigradedExactCouple.ofShifted (hypercohomologyD F K) (hypercohomologyE F K)
-    (hypercohomologyAlpha F K) (hypercohomologyBoundary F K) (hypercohomologyG F K)
-    (hypercohomology_maps_exact F K).1
-    (hypercohomology_maps_exact F K).2.1
-    (hypercohomology_maps_exact F K).2.2.1
-    (hypercohomology_maps_exact F K).2.2.2.1
-    (hypercohomology_maps_exact F K).2.2.2.2.1
-    (hypercohomology_maps_exact F K).2.2.2.2.2
+noncomputable def hypercohomologyCouple : BigradedExactCouple B 0 where
+  D := hypercohomologyD F K
+  E := hypercohomologyE F K
+  alpha := hypercohomologyAlpha F K
+  f := hypercohomologyBoundary F K
+  g p q := hypercohomologyG F K p q
+  alpha_f_zero := (hypercohomology_maps_exact F K).1
+  f_g_zero := (hypercohomology_maps_exact F K).2.1
+  g_alpha_zero := (hypercohomology_maps_exact F K).2.2.1
+  exact_alpha := (hypercohomology_maps_exact F K).2.2.2.1
+  exact_f := (hypercohomology_maps_exact F K).2.2.2.2.1
+  exact_g := (hypercohomology_maps_exact F K).2.2.2.2.2
 
 /-- The canonical map from a truncation to the abutment in total degree n.
 Source: blueprint order 1315; Stacks Tags 0DDE, 015J
@@ -153,8 +156,8 @@ Source: blueprint order 1315; Stacks Tags 0DDE, 015J
 noncomputable def hypercohomologyFiltration (n : ℤ) :
     DecreasingFiltration
       ((DerivedCategory.homologyFunctor B n).obj (F.obj (DerivedCategory.Q.obj K.obj))) where
-  F p := imageSubobject (hypercohomologyAbutmentMap F K n (n - p))
-  F_succ_le p := hypercohomology_images_antitone F K n (by omega)
+  step p := imageSubobject (hypercohomologyAbutmentMap F K n (n - p))
+  antitone_step := hypercohomology_images_antitone F K n
 
 end CategoryTheory
 

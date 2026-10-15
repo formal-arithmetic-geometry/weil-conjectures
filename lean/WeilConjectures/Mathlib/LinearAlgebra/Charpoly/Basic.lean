@@ -82,7 +82,7 @@ variable {R V : Type*} [CommRing R] [AddCommGroup V] [Module R V] [Module.Free R
 /-- If an endomorphism preserves a submodule `W` with `W` and `V ⧸ W` finite free, its
 characteristic polynomial is the product of the characteristic polynomials of the induced
 endomorphisms of `W` and of `V ⧸ W`.
-(blueprint: `sk-p-linear-filtration`, `p-linear-filtration`) -/
+(blueprint: `sk-p-linear-filtration`) -/
 theorem charpoly_eq_charpoly_restrict_mul_charpoly_mapQ (f : V →ₗ[R] V) (W : Submodule R V)
     [Module.Free R W] [Module.Finite R W] [Module.Free R (V ⧸ W)] [Module.Finite R (V ⧸ W)]
     (hW : W ≤ W.comap f) :
@@ -197,7 +197,7 @@ variable {K V W : Type*} [Field K] [IsAlgClosed K] [AddCommGroup V] [Module K V]
 
 /-- The eigenvalues of the tensor product of two endomorphisms are the pairwise products of their
 eigenvalues, with multiplicity.
-(blueprint: `sk-p-linear-spectra`, `p-linear-spectra`) -/
+(blueprint: `sk-p-linear-spectra`) -/
 theorem charpoly_roots_tensorProduct (f : V →ₗ[K] V) (g : W →ₗ[K] W) :
     (TensorProduct.map f g).charpoly.roots =
       (f.charpoly.roots ×ˢ g.charpoly.roots).map fun p ↦ p.1 * p.2 := by
@@ -230,7 +230,7 @@ theorem charpoly_roots_tensorProduct (f : V →ₗ[K] V) (g : W →ₗ[K] W) :
 
 /-- The eigenvalues of the `s`-th exterior power of an endomorphism are the products of the
 `s`-element sub-multisets of its eigenvalues.
-(blueprint: `sk-p-linear-spectra`, `p-linear-spectra`) -/
+(blueprint: `sk-p-linear-spectra`) -/
 theorem charpoly_roots_exteriorPower (f : V →ₗ[K] V) (s : ℕ) :
     (exteriorPower.map s f).charpoly.roots =
       (f.charpoly.roots.powersetCard s).map Multiset.prod := by
@@ -313,7 +313,7 @@ theorem charpoly_roots_exteriorPower (f : V →ₗ[K] V) (s : ℕ) :
 
 /-- The eigenvalues of the contragredient of a linear automorphism, that is the dual of its
 inverse, are the inverses of its eigenvalues.
-(blueprint: `sk-p-linear-spectra`, `p-linear-spectra`) -/
+(blueprint: `sk-p-linear-spectra`) -/
 theorem charpoly_roots_dualMap_symm (f : V ≃ₗ[K] V) :
     (f.symm : V →ₗ[K] V).dualMap.charpoly.roots =
       (f : V →ₗ[K] V).charpoly.roots.map fun a ↦ a⁻¹ := by

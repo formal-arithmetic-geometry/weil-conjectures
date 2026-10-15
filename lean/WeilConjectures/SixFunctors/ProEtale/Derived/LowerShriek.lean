@@ -184,8 +184,9 @@ noncomputable def rightDerivedLowerShriekPlusCompatibility :
 `Rf_! ≅ Rg_!` for `f = g`. -/
 noncomputable def rightDerivedLowerShriekCongr {f g : X ⟶ Y} (h : f = g)
     [HasCompactification f] [HasCompactification g] : R(f)_![A] ≅ R(g)_![A] :=
-  -- not `eqToIso`: the kernel would compare `Rf_!` and `Rg_!` when reducing the transport
-  by subst h; exact Iso.refl _
+  eqToIso <| by
+    subst h
+    rfl
 
 @[simp]
 lemma rightDerivedLowerShriekCongr_rfl {f : X ⟶ Y} [HasCompactification f] :

@@ -1,113 +1,101 @@
 {
- "id": "lem-sc-flat-telescope-arrow-diagram-construction",
- "kind": "statement",
- "title": "Realization of a compatible flat tower arrow diagram",
- "statement": "Given structural bounded-above flat towers and level maps supplied by the core construction, the towers admit the cone augmentation, quasi-isomorphic truncation maps, and homotopy-category compatibilities required by the compatible flat tower diagram theorem.",
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/077J",
-  "place": "construction and strictification step"
- },
- "proof": [
-  {
-   "text": "Apply the unconditional arrow-diagram theorem. The legacy structural-core hypothesis is unused; all cone assembly and geometric input is supplied by the unconditional theorem.",
-   "uses": [
+  "id": "lem-sc-flat-telescope-arrow-diagram-construction",
+  "kind": "statement",
+  "title": "Realization of a compatible flat tower arrow diagram",
+  "statement": "Given structural bounded-above flat towers and level maps supplied by the core construction, the towers admit the cone augmentation, quasi-isomorphic truncation maps, and homotopy-category compatibilities required by the compatible flat tower diagram theorem.",
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/077J",
+    "place": "construction and strictification step"
+  },
+  "proof": [
+    {
+      "text": "Apply the unconditional arrow-diagram theorem. The legacy structural-core hypothesis is unused; all cone assembly and geometric input is supplied by the unconditional theorem.",
+      "uses": [
+        "lem-sc-flat-telescope-arrow-diagram"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "lem-sc-flat-telescope-arrow-diagram"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-sc-flat-telescope-arrow-diagram"
- ],
- "proof_origin": {
-  "by": "agent",
-  "group": "F1",
-  "document": "https://stacks.math.columbia.edu/tag/077J",
-  "place": "Finite-piece bar input; source cone descent and comparison homotopies proved in Lean."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "compatible flat tower arrow diagram cochain complexes",
-   "results": "No exact theorem found.",
-   "date": "2026-10-14",
-   "verdict": "No exact match."
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "group": "F1",
+    "document": "https://stacks.math.columbia.edu/tag/077J",
+    "place": "Finite-piece bar input; source cone descent and comparison homotopies proved in Lean."
   },
-  {
-   "tool": "leanfinder",
-   "query": "mapping cone map telescope flat complexes",
-   "results": "No exact theorem found.",
-   "date": "2026-10-14",
-   "verdict": "No exact match."
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "compatible flat tower arrow diagram cochain complexes",
+      "results": "No exact theorem found.",
+      "date": "2026-10-14",
+      "verdict": "No exact match."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "mapping cone map telescope flat complexes",
+      "results": "No exact theorem found.",
+      "date": "2026-10-14",
+      "verdict": "No exact match."
+    },
+    {
+      "tool": "grep",
+      "query": "exists_flat_telescope_arrow_diagram",
+      "results": "Only local blueprint declarations found.",
+      "date": "2026-10-14",
+      "verdict": "No exact match."
+    }
+  ],
+  "status": "split",
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram",
+    "date": "2026-10-14",
+    "group": "U4"
   },
-  {
-   "tool": "grep",
-   "query": "exists_flat_telescope_arrow_diagram",
-   "results": "Only local blueprint declarations found.",
-   "date": "2026-10-14",
-   "verdict": "No exact match."
-  }
- ],
- "status": "split",
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram",
-  "date": "2026-10-14",
-  "group": "U4"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-flat-telescope-arrow-diagram",
-   "place": "construction step"
-  }
- },
- "stmt_deps": [
-  "def-sc-flat-telescope-stage-map",
-  "def-pc-quasi-iso-modules"
- ],
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram",
-  "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowDiagram.lean",
-  "declaration": "AlgebraicGeometry.exists_flat_telescope_arrow_diagram_construction",
-  "statement": "theorem exists_flat_telescope_arrow_diagram_construction (Y : Scheme.{u}) (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hP : isFlatTelescope Y P) (hP' : isFlatTelescope Y P') (f : P ⟶ P') (hcore : ∃ (E₀ E₁ E₂ : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1)) (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1)) (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1)) (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n), (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i))) : let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace) let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ) ∃ (E₀ E₁ E₂ : ℕ → CochainComplex A ℤ) (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1)) (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1)) (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1)) (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n), (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i)) ∧ ∃ (c₁ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map a = Limits.Sigma.map a ≫ flatTelescopeDifferential E₁ t₁) (c₂ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map b = Limits.Sigma.map b ≫ flatTelescopeDifferential E₂ t₂) (e₁ : Q.obj (CochainComplex.mappingCone (flatTelescopeDifferential E₁ t₁)) ≅ Q.obj P) (e₂ : Q.obj (CochainComplex.mappingCone (flatTelescopeDifferential E₂ t₂)) ≅ Q.obj P') (g : CochainComplex.mappingCone (flatTelescopeDifferential E₀ t₀) ⟶ P) (q : ∀ n : ℕ, E₀ n ⟶ P.truncLE (n : ℤ)), (∀ n : ℕ, QuasiIso (q n)) ∧ (∀ n : ℕ, t₀ n ≫ q (n + 1) ≫ P.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ P.ιTruncLE (n : ℤ)) ∧ (CochainComplex.mappingCone.inr _ ≫ g = Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ))) ∧ ((CochainComplex.mappingCone.inl _).comp (CochainComplex.HomComplex.Cochain.ofHom g) (add_zero _) = 0) ∧ (Q.map g = Q.map (CochainComplex.mappingCone.map (flatTelescopeDifferential E₀ t₀) (flatTelescopeDifferential E₁ t₁) (Limits.Sigma.map a) (Limits.Sigma.map a) c₁) ≫ e₁.hom) ∧ (Q.map g ≫ Q.map f = Q.map (CochainComplex.mappingCone.map (flatTelescopeDifferential E₀ t₀) (flatTelescopeDifferential E₂ t₂) (Limits.Sigma.map b) (Limits.Sigma.map b) c₂) ≫ e₂.hom)",
-  "branch": "sheaf-dag",
-  "by": "U4",
-  "date": "2026-10-14"
- },
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U4",
-  "result": "pass",
-  "landing": "20261014T053242-L-2011354",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
-  "result": "pass",
-  "landing": "20261014T063815-L-2813191",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-flat-telescope-arrow-diagram",
+      "place": "construction step"
+    }
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "stmt_deps": [
+    "def-sc-flat-telescope-stage-map",
+    "def-pc-quasi-iso-modules"
+  ],
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram",
+    "file": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeArrowDiagram.lean",
+    "declaration": "AlgebraicGeometry.exists_flat_telescope_arrow_diagram_construction",
+    "statement": "theorem exists_flat_telescope_arrow_diagram_construction (Y : Scheme.{u}) (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hP : isFlatTelescope Y P) (hP' : isFlatTelescope Y P') (f : P ⟶ P') (hcore : ∃ (E₀ E₁ E₂ : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1)) (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1)) (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1)) (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n), (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i))) : let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace) let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ) ∃ (E₀ E₁ E₂ : ℕ → CochainComplex A ℤ) (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1)) (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1)) (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1)) (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n), (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧ (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i)) ∧ ∃ (c₁ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map a = Limits.Sigma.map a ≫ flatTelescopeDifferential E₁ t₁) (c₂ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map b = Limits.Sigma.map b ≫ flatTelescopeDifferential E₂ t₂) (e₁ : Q.obj (CochainComplex.mappingCone (flatTelescopeDifferential E₁ t₁)) ≅ Q.obj P) (e₂ : Q.obj (CochainComplex.mappingCone (flatTelescopeDifferential E₂ t₂)) ≅ Q.obj P') (g : CochainComplex.mappingCone (flatTelescopeDifferential E₀ t₀) ⟶ P) (q : ∀ n : ℕ, E₀ n ⟶ P.truncLE (n : ℤ)), (∀ n : ℕ, QuasiIso (q n)) ∧ (∀ n : ℕ, t₀ n ≫ q (n + 1) ≫ P.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ P.ιTruncLE (n : ℤ)) ∧ (CochainComplex.mappingCone.inr _ ≫ g = Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ))) ∧ ((CochainComplex.mappingCone.inl _).comp (CochainComplex.HomComplex.Cochain.ofHom g) (add_zero _) = 0) ∧ (Q.map g = Q.map (CochainComplex.mappingCone.map (flatTelescopeDifferential E₀ t₀) (flatTelescopeDifferential E₁ t₁) (Limits.Sigma.map a) (Limits.Sigma.map a) c₁) ≫ e₁.hom) ∧ (Q.map g ≫ Q.map f = Q.map (CochainComplex.mappingCone.map (flatTelescopeDifferential E₀ t₀) (flatTelescopeDifferential E₂ t₂) (Limits.Sigma.map b) (Limits.Sigma.map b) c₂) ≫ e₂.hom)",
+    "branch": "sheaf-dag",
+    "by": "U4",
+    "date": "2026-10-14"
+  },
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "U4",
+    "result": "pass",
+    "landing": "20261014T053242-L-2011354",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "F1",
+    "result": "pass",
+    "landing": "20261014T063815-L-2813191",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- }
 }

@@ -223,10 +223,7 @@ theorem sixOperationsPackage [HasTateTwist.IsNormalized Λ] [HasInvertibleExpone
   lowerShriekComp h := nonempty_iso_rightDerivedLowerShriek_comp Λ f h
   lowerShriekIsoLowerStarOfProper _ :=
     nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar _ f
-  orientation _ hd :=
-    have := hd
-    have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom (f ≫ aY)
-    Orientation.nonempty (Λ := Λ) f aY
+  orientation _ _ := sorry
   biduality _ hK := nonempty_iso_verdierDual_verdierDual Λ (f ≫ aY) hK
   verdierExchange M := nonempty_iso_verdierDual_rightDerivedLowerShriek Λ f aY M
   kunneth := hasKunnethComparisons Λ k

@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 

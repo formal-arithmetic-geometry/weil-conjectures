@@ -130,11 +130,11 @@ private noncomputable def moduleAbelianPullbackIso {X Y : Scheme.{v}}
 
 private theorem finiteSetLocal_congr {Y : Scheme.{v}}
     {G H : Sheaf Y.smallEtaleTopology (Type (v + 1))} (e : G ≅ H) :
-    IsLisseEtaleSheafOfSets G ↔
-      IsLisseEtaleSheafOfSets H := by
+    IsFiniteLocallyConstantEtaleSheafOfSets G ↔
+      IsFiniteLocallyConstantEtaleSheafOfSets H := by
   suffices h : ∀ {G H : Sheaf Y.smallEtaleTopology (Type (v + 1))}, (G ≅ H) →
-      IsLisseEtaleSheafOfSets G →
-      IsLisseEtaleSheafOfSets H from ⟨h e, h e.symm⟩
+      IsFiniteLocallyConstantEtaleSheafOfSets G →
+      IsFiniteLocallyConstantEtaleSheafOfSets H from ⟨h e, h e.symm⟩
   intro G H e hG
   constructor
   · obtain ⟨𝒰, h𝒰⟩ := hG.1
@@ -143,10 +143,8 @@ private theorem finiteSetLocal_congr {Y : Scheme.{v}}
     exact Sheaf.isConstant_congr _
       ((Y.smallEtaleTopology.overPullback (Type (v + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e)
-  · refine ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2 ?_⟩
-    have : Finite ((pointSmallEtale s).sheafFiber.obj G) :=
-      (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-        (hG.2.isFinitelyGenerated_sheafFiber Ω s)
+  · intro Ω _ _ s
+    have := hG.2 Ω s
     exact Finite.of_equiv _
       (((pointSmallEtale s).sheafFiber (A := Type (v + 1))).mapIso e).toEquiv
 
@@ -199,7 +197,7 @@ theorem constructible_torsion_modules_agree
         (P.IsConstructible ↔ IsConstructibleEtaleModuleSheaf M) ∧
         ∀ S : Stratification C,
           ((∀ i : Fin S.n,
-              IsLisseEtaleSheafOfSets
+              IsFiniteLocallyConstantEtaleSheafOfSets
                 ((etaleSetPullback (S.immersion i)).obj
                   ((sheafCompose C.smallEtaleTopology
                     (CategoryTheory.forget AddCommGrpCat.{v + 1})).obj F))) ↔
@@ -239,7 +237,7 @@ theorem constructible_torsion_modules_agree
     simpa using h
   obtain ⟨M, ⟨e⟩⟩ := exists_module_sheaf_of_nsmul_id_eq_zero C n F hF
   have hlocal {Y : Scheme.{v}} (g : Y ⟶ C) :
-      IsLisseEtaleSheafOfSets
+      IsFiniteLocallyConstantEtaleSheafOfSets
         ((etaleSetPullback g).obj
           ((sheafCompose C.smallEtaleTopology
             (CategoryTheory.forget AddCommGrpCat.{v + 1})).obj F)) ↔

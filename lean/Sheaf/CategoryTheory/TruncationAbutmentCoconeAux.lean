@@ -65,7 +65,11 @@ theorem truncation_abutment_cocone_aux
       subst t
       simp only [eqToHom_refl, Category.id_comp]
       rfl
+    cases X
+    dsimp only at hD
+    subst hD
     subst hH
+    dsimp only at halpha hj hc
     intro n p
     simp only [BigradedExactCouple.alphaDiagonal, halpha]
     rw [ha (p + 1) (n - (p + 1)) n (n - p) (by omega) (by omega)]

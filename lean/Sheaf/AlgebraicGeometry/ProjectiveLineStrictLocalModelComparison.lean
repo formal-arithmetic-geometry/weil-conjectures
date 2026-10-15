@@ -76,7 +76,7 @@ theorem Etale.projectiveLine_strictLocal_modelComparison
     (hτ : ∃ (t : T) (φ : T.residueField t ⟶ .of k'),
       φ.hom.IsIntegral ∧ Spec.map φ ≫ T.fromSpecResidueField t = τ)
     (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionModuleSheaf F] (q : ℕ) :
+    [IsTorsionSheaf F] (q : ℕ) :
     ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B),
       letI := cA
       letI := cB
@@ -90,7 +90,7 @@ theorem Etale.projectiveLine_strictLocal_modelComparison
           ∃ (φ : A →+* B) (hφ : IsLocalHom φ),
             letI := hφ
             ∃ (F₀ : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
-                (ModuleCat.{u + 1} Λ)) (hF₀ : IsTorsionModuleSheaf F₀),
+                (ModuleCat.{u + 1} Λ)) (hF₀ : IsTorsionSheaf F₀),
               letI := hF₀
               let t₀ := pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))
               let rA := Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))
@@ -139,7 +139,7 @@ theorem Etale.projectiveLine_strictLocal_modelComparison
   letI := hUB
   let F₀ := (ProjectiveSpace.map _ (eA.hom ≫ strictHenselizationStructuralMap s))^*[
     ModuleCat.{u + 1} Λ].obj F
-  have hF₀ : IsTorsionModuleSheaf F₀ := inferInstance
+  have hF₀ : IsTorsionSheaf F₀ := inferInstance
   obtain ⟨a₁, a₂, ha⟩ :=
     Etale.projectiveLine_strictLocal_stalkExchangeComparison Λ sq σ τ ι hι ν eA eB φ
       ρA ρB hbase hρA hρB hρ F q

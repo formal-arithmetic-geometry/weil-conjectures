@@ -1,139 +1,127 @@
 {
- "id": "lem-sc-compact-flat-telescope-bar-enlargement",
- "kind": "statement",
- "title": "Split bar presentation for a compact-flat-generator augmented tower",
- "statement": "Let $Y$ be a scheme and $A$ its category of module sheaves [def-pc-cochain-complex-modules]. Let $(L_n,l_n)$ be a tower of bounded-above cochain complexes (stage bounds may vary). Assume every $l_n^i$ has a retraction and that each $L_n^i$ is a coproduct of flat module sheaves [def-pc-flat-sheaf-modules], each of which is coproduct-compact: every morphism from it to any small coproduct factors through the canonical inclusion of a finite subcoproduct. Let $T$ be an actual flat telescope [def-sc-flat-telescope-stage-map] and let $p_n:L_n\\to T$ satisfy $l_np_{n+1}=p_n$. There exist bounded-above termwise-flat towers $(R_n,s_n)$ and $(F_n,u_n)$, quasi-isomorphisms $c_n:R_n\\to L_n$ [def-pc-quasi-iso-modules], and maps $a_n:R_n\\to F_n$ with $s_nc_{n+1}=c_nl_n$ and $s_na_{n+1}=a_nu_n$. There are a cochain complex $B$, maps $b:\\bigoplus F_n\\to B$ and $e:B\\to T$, and $\\delta b=0$, where $\\delta=1-\\mathrm{shift}$ for $(F_n,u_n)$ [def-sc-flat-telescope-stage-map]. In every degree the short complex $\\bigoplus F_n\\xrightarrow{\\delta}\\bigoplus F_n\\xrightarrow{b}B$ has a splitting (a retraction of the first map and a section of the second map whose two complementary projections sum to the identity). The homotopy quotient maps $e$ to an isomorphism, and $(\\bigoplus a_n)b e=\\operatorname{desc}(c_np_n)$. This asserts the split presentation and the geometric bar equivalence, not the canonical map out of the telescope cone.",
- "source": {
-  "document": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeTargetRefinement.lean",
-  "place": "Original proof, finite-subcomplex, target-block, cofinality and union-bar paragraphs; telescope-cone comparison excluded."
- },
- "stmt_deps": [
-  "def-pc-cochain-complex-modules",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-quasi-iso-modules",
-  "def-sc-flat-telescope-stage-map"
- ],
- "proof": [
-  {
-   "text": "Obtain the finite compact-flat subcomplex diagrams and then the canonical enlarged bar union augmentation. Use the resulting maps and identities to choose the cokernel of the telescope differential as B, with its canonical projection b and the induced map e. The degreewise splitting follows from the explicit finite-support recurrence for identity minus shift; the final equality follows by coproduct extensionality and the augmentation identity.",
-   "uses": [
+  "id": "lem-sc-compact-flat-telescope-bar-enlargement",
+  "kind": "statement",
+  "title": "Split bar presentation for a compact-flat-generator augmented tower",
+  "statement": "Let $Y$ be a scheme and $A$ its category of module sheaves [def-pc-cochain-complex-modules]. Let $(L_n,l_n)$ be a tower of bounded-above cochain complexes (stage bounds may vary). Assume every $l_n^i$ has a retraction and that each $L_n^i$ is a coproduct of flat module sheaves [def-pc-flat-sheaf-modules], each of which is coproduct-compact: every morphism from it to any small coproduct factors through the canonical inclusion of a finite subcoproduct. Let $T$ be an actual flat telescope [def-sc-flat-telescope-stage-map] and let $p_n:L_n\\to T$ satisfy $l_np_{n+1}=p_n$. There exist bounded-above termwise-flat towers $(R_n,s_n)$ and $(F_n,u_n)$, quasi-isomorphisms $c_n:R_n\\to L_n$ [def-pc-quasi-iso-modules], and maps $a_n:R_n\\to F_n$ with $s_nc_{n+1}=c_nl_n$ and $s_na_{n+1}=a_nu_n$. There are a cochain complex $B$, maps $b:\\bigoplus F_n\\to B$ and $e:B\\to T$, and $\\delta b=0$, where $\\delta=1-\\mathrm{shift}$ for $(F_n,u_n)$ [def-sc-flat-telescope-stage-map]. In every degree the short complex $\\bigoplus F_n\\xrightarrow{\\delta}\\bigoplus F_n\\xrightarrow{b}B$ has a splitting (a retraction of the first map and a section of the second map whose two complementary projections sum to the identity). The homotopy quotient maps $e$ to an isomorphism, and $(\\bigoplus a_n)b e=\\operatorname{desc}(c_np_n)$. This asserts the split presentation and the geometric bar equivalence, not the canonical map out of the telescope cone.",
+  "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeTargetRefinement.lean",
+    "place": "Original proof, finite-subcomplex, target-block, cofinality and union-bar paragraphs; telescope-cone comparison excluded."
+  },
+  "stmt_deps": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-quasi-iso-modules",
+    "def-sc-flat-telescope-stage-map"
+  ],
+  "proof": [
+    {
+      "text": "Obtain the finite compact-flat subcomplex diagrams and then the canonical enlarged bar union augmentation. Use the resulting maps and identities to choose the cokernel of the telescope differential as B, with its canonical projection b and the induced map e. The degreewise splitting follows from the explicit finite-support recurrence for identity minus shift; the final equality follows by coproduct extensionality and the augmentation identity.",
+      "uses": [
+        "lem-sc-compact-flat-finite-subcomplex-diagrams",
+        "lem-sc-compact-flat-bar-union-augmentation",
+        "def-sc-flat-telescope-stage-map"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "lem-sc-compact-flat-finite-subcomplex-diagrams",
     "lem-sc-compact-flat-bar-union-augmentation",
     "def-sc-flat-telescope-stage-map"
-   ],
-   "elementary": false
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "group": "P1",
+    "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatTelescopeBarEnlargement.lean",
+    "place": "The reduction in the delivered Lean proof to the finite-subcomplex diagram theorem, bar union theorem, and the explicit cokernel construction."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "A bounded above tower of sheaf cochain complexes has a compact flat generator resolution with split transitions and a finite piece bar enlargement against a mapping telescope",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A split tower of bounded above complexes of coproduct compact flat sheaf generators augmented into a flat telescope admits an enlarged bar total homotopy equivalent to the target and a split one minus shift presentation",
+      "results": "8 hits: AlgebraicTopology.DoldKan.Γ₀.splitting, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, CochainComplex.cm5b.homotopyEquiv, AlgebraicTopology.DoldKan.Γ₀NondegComplexIso, AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self_assoc, AlgebraicTopology.DoldKan.splitMonoInclusionOfMooreComplexMap, SimplicialObject.Splitting.comp_PInfty_eq_zero_iff",
+      "date": "2026-10-14",
+      "verdict": "No matching tower-resolution or relative bar-enlargement theorem."
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.IsSplitMono, QuasiIso",
+      "results": "0 hits: ",
+      "date": "2026-10-14",
+      "verdict": "No matching tower-resolution or relative bar-enlargement theorem."
+    },
+    {
+      "tool": "grep",
+      "query": "compact.*generator|bar.*total|bar.*augmentation",
+      "results": "5 hits: Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean",
+      "date": "2026-10-14",
+      "verdict": "No matching tower-resolution or relative bar-enlargement theorem."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.FlatTelescopeTargetRefinement",
+    "date": "2026-10-14",
+    "group": "G1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "Proof of finite duality: finite-piece bar enlargement and canonical target-chain augmentation.",
+      "via": [
+        "lem-sc-flat-telescope-target-refinement",
+        "lem-sc-flat-telescope-arrow-bar-data",
+        "lem-sc-flat-telescope-arrow-cocycles",
+        "lem-sc-flat-telescope-arrow-diagram",
+        "lem-sc-flat-telescope-stage-map-refinement",
+        "lem-sc-normalized-flat-telescope-comparison",
+        "lem-sc-normalized-kflat-representative-comparison",
+        "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+        "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.CompactFlatTelescopeBarEnlargement",
+    "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatTelescopeBarEnlargement.lean",
+    "declaration": "AlgebraicGeometry.exists_compact_flat_telescope_bar_enlargement",
+    "statement": "theorem exists_compact_flat_telescope_bar_enlargement (Y : Scheme.{u})\n    (L : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (l : ∀ n : ℕ, L n ⟶ L (n + 1))\n    (hb : ∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((L n).X i))\n    (hsplit : ∀ (n : ℕ) (i : ℤ), IsSplitMono ((l n).f i))\n    (hgen :\n      ∀ (n : ℕ) (i : ℤ), ∃ (I : Type u)\n        (G : I → SheafOfModules.{u} (moduleRings Y.toRingedSpace)),\n        Nonempty ((L n).X i ≅ ∐ G) ∧\n        (∀ j : I, SheafOfModules.IsFlat (G j)) ∧\n        ∀ (j : I) (K : Type u)\n          (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n          (f : G j ⟶ ∐ H),\n          ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),\n            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f)\n    (T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hT : isFlatTelescope Y T) (p : ∀ n : ℕ, L n ⟶ T)\n    (hp : ∀ n : ℕ, l n ≫ p (n + 1) = p n) :\n    let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)\n    let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ)\n    ∃ (R F : ℕ → CochainComplex A ℤ)\n      (s : ∀ n : ℕ, R n ⟶ R (n + 1))\n      (u : ∀ n : ℕ, F n ⟶ F (n + 1))\n      (c : ∀ n : ℕ, R n ⟶ L n) (a : ∀ n : ℕ, R n ⟶ F n),\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((R n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((R n).X i)) ∧\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((F n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((F n).X i)) ∧\n      (∀ n : ℕ, QuasiIso (c n)) ∧\n      (∀ n : ℕ, s n ≫ c (n + 1) = c n ≫ l n) ∧\n      (∀ n : ℕ, s n ≫ a (n + 1) = a n ≫ u n) ∧\n      ∃ (B : CochainComplex A ℤ) (b : (∐ F) ⟶ B) (e : B ⟶ T)\n        (hzero : flatTelescopeDifferential F u ≫ b = 0),\n        (∀ i : ℤ, Nonempty\n          (((ShortComplex.mk (flatTelescopeDifferential F u) b hzero).map\n            (HomologicalComplex.eval A (ComplexShape.up ℤ) i)).Splitting)) ∧\n        IsIso (Q.map e) ∧\n        Limits.Sigma.map a ≫ b ≫ e = Sigma.desc (fun n : ℕ ↦ c n ≫ p n)",
+    "branch": "sheaf-dag",
+    "by": "G1",
+    "date": "2026-10-14"
+  },
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "G1",
+    "result": "pass",
+    "landing": "20261014T081308-L-3872922",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "P1",
+    "result": "pass",
+    "landing": "20261014T084701-L-89287",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-sc-compact-flat-finite-subcomplex-diagrams",
-  "lem-sc-compact-flat-bar-union-augmentation",
-  "def-sc-flat-telescope-stage-map"
- ],
- "proof_origin": {
-  "by": "worker",
-  "group": "P1",
-  "document": "lean/Sheaf/AlgebraicGeometry/CompactFlatTelescopeBarEnlargement.lean",
-  "place": "The reduction in the delivered Lean proof to the finite-subcomplex diagram theorem, bar union theorem, and the explicit cokernel construction."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "A bounded above tower of sheaf cochain complexes has a compact flat generator resolution with split transitions and a finite piece bar enlargement against a mapping telescope",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A split tower of bounded above complexes of coproduct compact flat sheaf generators augmented into a flat telescope admits an enlarged bar total homotopy equivalent to the target and a split one minus shift presentation",
-   "results": "8 hits: AlgebraicTopology.DoldKan.Γ₀.splitting, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, CochainComplex.cm5b.homotopyEquiv, AlgebraicTopology.DoldKan.Γ₀NondegComplexIso, AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self_assoc, AlgebraicTopology.DoldKan.splitMonoInclusionOfMooreComplexMap, SimplicialObject.Splitting.comp_PInfty_eq_zero_iff",
-   "date": "2026-10-14",
-   "verdict": "No matching tower-resolution or relative bar-enlargement theorem."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.IsSplitMono, QuasiIso",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "No matching tower-resolution or relative bar-enlargement theorem."
-  },
-  {
-   "tool": "grep",
-   "query": "compact.*generator|bar.*total|bar.*augmentation",
-   "results": "5 hits: Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean, Mathlib/Order/BooleanGenerators.lean",
-   "date": "2026-10-14",
-   "verdict": "No matching tower-resolution or relative bar-enlargement theorem."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.FlatTelescopeTargetRefinement",
-  "date": "2026-10-14",
-  "group": "G1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "Proof of finite duality: finite-piece bar enlargement and canonical target-chain augmentation.",
-   "via": [
-    "lem-sc-flat-telescope-target-refinement",
-    "lem-sc-flat-telescope-arrow-bar-data",
-    "lem-sc-flat-telescope-arrow-cocycles",
-    "lem-sc-flat-telescope-arrow-diagram",
-    "lem-sc-flat-telescope-stage-map-refinement",
-    "lem-sc-normalized-flat-telescope-comparison",
-    "lem-sc-normalized-kflat-representative-comparison",
-    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
-    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CompactFlatTelescopeBarEnlargement",
-  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatTelescopeBarEnlargement.lean",
-  "declaration": "AlgebraicGeometry.exists_compact_flat_telescope_bar_enlargement",
-  "statement": "theorem exists_compact_flat_telescope_bar_enlargement (Y : Scheme.{u})\n    (L : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (l : ∀ n : ℕ, L n ⟶ L (n + 1))\n    (hb : ∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((L n).X i))\n    (hsplit : ∀ (n : ℕ) (i : ℤ), IsSplitMono ((l n).f i))\n    (hgen :\n      ∀ (n : ℕ) (i : ℤ), ∃ (I : Type u)\n        (G : I → SheafOfModules.{u} (moduleRings Y.toRingedSpace)),\n        Nonempty ((L n).X i ≅ ∐ G) ∧\n        (∀ j : I, SheafOfModules.IsFlat (G j)) ∧\n        ∀ (j : I) (K : Type u)\n          (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n          (f : G j ⟶ ∐ H),\n          ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),\n            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f)\n    (T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hT : isFlatTelescope Y T) (p : ∀ n : ℕ, L n ⟶ T)\n    (hp : ∀ n : ℕ, l n ≫ p (n + 1) = p n) :\n    let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)\n    let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ)\n    ∃ (R F : ℕ → CochainComplex A ℤ)\n      (s : ∀ n : ℕ, R n ⟶ R (n + 1))\n      (u : ∀ n : ℕ, F n ⟶ F (n + 1))\n      (c : ∀ n : ℕ, R n ⟶ L n) (a : ∀ n : ℕ, R n ⟶ F n),\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((R n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((R n).X i)) ∧\n      (∀ n : ℕ, ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero ((F n).X i)) ∧\n      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((F n).X i)) ∧\n      (∀ n : ℕ, QuasiIso (c n)) ∧\n      (∀ n : ℕ, s n ≫ c (n + 1) = c n ≫ l n) ∧\n      (∀ n : ℕ, s n ≫ a (n + 1) = a n ≫ u n) ∧\n      ∃ (B : CochainComplex A ℤ) (b : (∐ F) ⟶ B) (e : B ⟶ T)\n        (hzero : flatTelescopeDifferential F u ≫ b = 0),\n        (∀ i : ℤ, Nonempty\n          (((ShortComplex.mk (flatTelescopeDifferential F u) b hzero).map\n            (HomologicalComplex.eval A (ComplexShape.up ℤ) i)).Splitting)) ∧\n        IsIso (Q.map e) ∧\n        Limits.Sigma.map a ≫ b ≫ e = Sigma.desc (fun n : ℕ ↦ c n ≫ p n)",
-  "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-14"
- },
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
-  "result": "pass",
-  "landing": "20261014T081308-L-3872922",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
-  "result": "pass",
-  "landing": "20261014T084701-L-89287",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- }
 }

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.ResidueField
-import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+import Sheaf.Paper.StrictHenselizationLocalStructure
 import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 import Sheaf.AlgebraicGeometry.StrictHenselization
 
@@ -119,7 +119,7 @@ theorem strictHenselizationMapExists
       σT.toRingHom).comp (IsLocalRing.residue C))
   let t := Spec.map (CommRingCat.ofHom ψT)
   let N := (equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS)).inverse
-  let D := (Scheme.smallStrictHenselizationDiagram barS).op ⋙ Scheme.Spec
+  let D := (Scheme.strictHenselizationDiagram barS).op ⋙ Scheme.Spec
   let p := fun j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS) ↦
     ((Scheme.AffineEtale.Spec S).obj (N.obj j).1).hom
   let c := fun j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS) ↦
@@ -128,16 +128,16 @@ theorem strictHenselizationMapExists
   have hc : ∀ j, c j ≫ p j = Scheme.strictHenselizationStructuralMap barS := by
     intro j
     simpa only [c, p, N, Scheme.isoSpec_Spec_inv] using!
-      Scheme.strictHenselizationStructuralMap_eq barS j
+      Classical.choose_spec (Scheme.exists_strictHenselizationStructuralMap barS) j
   have htbase : t ≫ Scheme.strictHenselizationStructuralMap barT = barT := by
     let := (Scheme.strictHenselization_properties barT).2.1
     let j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barT) :=
       Classical.choice IsCofiltered.nonempty
-    have hj := Scheme.strictHenselizationStructuralMap_eq barT j
+    have hj := Classical.choose_spec (Scheme.exists_strictHenselizationStructuralMap barT) j
     have hp := hσT j
     have hw := ((equivSmallModel.{v}
       (Scheme.strictHenselizationNeighbourhoods barT)).inverse.obj j).2.w
-    change t ≫ Scheme.strictHenselizationStructuralMap barT = barT
+    change t ≫ Classical.choose (Scheme.exists_strictHenselizationStructuralMap barT) = barT
     rw [← hj]
     simpa only [t, ψT, C, Scheme.isoSpec_Spec_inv, Category.assoc] using!
       (congrArg (fun f ↦ f ≫ ((Scheme.AffineEtale.Spec T).obj
@@ -148,8 +148,7 @@ theorem strictHenselizationMapExists
     rw [Spec.map_apply]
     rw [Subsingleton.elim (default : Spec (.of Ω)) (IsLocalRing.closedPoint Ω)]
     exact IsLocalRing.comap_closedPoint ψT
-  have hstrict : IsStrictlyHenselianLocalRing (Scheme.strictHenselizationRing barT) :=
-    ⟨inferInstance⟩
+  obtain ⟨_, hstrict⟩ := strictHenselizationLocalStructure barT
   let : IsStrictlyHenselianLocalRing C := hstrict
   -- Pointed section construction: localize an affine etale chart at the marked prime.
   -- Olivier's theorem identifies that localization with C; the field map extends

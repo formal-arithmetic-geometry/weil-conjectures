@@ -49,7 +49,7 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} [IsAffine X]
     (i : Z ⟶ X) [IsClosedImmersion i]
     (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionModuleSheaf J] (q : ℕ) :
+    [IsTorsionSheaf J] (q : ℕ) :
     ∃ (I : Type u) (_ : SmallCategory I) (_ : IsFiltered I)
       (Y : I → Scheme.{u}) (v : ∀ a, Y a ⟶ X),
       (∀ a, Etale (v a)) ∧

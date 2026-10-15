@@ -26,7 +26,6 @@ import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
 import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections
 import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
@@ -88,7 +87,7 @@ the hypotheses of the reduction statements) a sheaf of modules over `ULift (ZMod
 
 @[expose] public section
 
-universe w w' u
+universe u
 
 open CategoryTheory Limits
 
@@ -107,8 +106,7 @@ abelian étale sheaves on `X`. Then for every `q` the canonical map
 every class on the colimit comes from some `D_λ`, and a class on `D_λ` which dies on the colimit
 already dies on some `D_μ`, `λ ⟶ μ`. The compatibility with the pullback along a field
 extension is the naturality `AlgebraicGeometry.Etale.cohomologyMap_map` of the pullback maps.
-The statement holds for arbitrary (not only torsion) abelian sheaves and small filtered
-categories.
+The statement holds for arbitrary (not only torsion) abelian sheaves.
 (blueprint: `lemma-weil-pbc-curve-filtered-cohomology`) -/
 @[stacks 03Q6]
 theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
@@ -145,40 +143,6 @@ theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
       refine ⟨j', φ, ?_⟩
       change Sheaf.H.map (D.map φ) q y = Sheaf.H.map (D.map ψ) q 0 at hφ
       rwa [(Sheaf.H.map (D.map ψ) q).map_zero] at hφ
-
-/-- The coefficient-size indexing variant of filtered-colimit continuity for sheaf cohomology. -/
-theorem Scheme.H_map_isColimit_of_isFiltered_coefficientSize
-    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
-    {J : Type (u + 1)} [SmallCategory J] [IsFiltered J]
-    {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
-    (hc : IsColimit c) (q : ℕ) :
-    (∀ x : Sheaf.H c.pt q, ∃ (j : J) (y : Sheaf.H (D.obj j) q),
-      Sheaf.H.map (c.ι.app j) q y = x) ∧
-    ∀ (j : J) (y : Sheaf.H (D.obj j) q), Sheaf.H.map (c.ι.app j) q y = 0 →
-      ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 := by
-  let E := Sheaf.functorH.{u + 1} X.smallEtaleTopology q
-  let R := DerivedCategory.singleFunctor
-    (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
-      Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ)
-  let e : E ≅ R := (Scheme.nonempty_sheafH_extDerivedIso X q).some
-  have hR : IsColimit (R.mapCocone c) :=
-    (Scheme.etaleCohomology_isColimit_of_isFiltered_coefficientSize X hc q).some
-  have hE : IsColimit (E.mapCocone c) := IsColimit.mapCoconeEquiv e.symm hR
-  have : PreservesFilteredColimitsOfSize.{u + 1, u + 1}
-      (CategoryTheory.forget AddCommGrpCat.{u + 1}) := inferInstance
-  constructor
-  · intro x
-    exact Concrete.isColimit_exists_rep (D ⋙ E) hE x
-  · intro j y hy
-    have hz : (E.mapCocone c).ι.app j y = (E.mapCocone c).ι.app j 0 := by
-      change Sheaf.H.map (c.ι.app j) q y = Sheaf.H.map (c.ι.app j) q 0
-      rw [(Sheaf.H.map (c.ι.app j) q).map_zero]
-      exact hy
-    obtain ⟨j', φ, ψ, hφ⟩ :=
-      Concrete.isColimit_exists_of_rep_eq (D ⋙ E) hE y 0 hz
-    refine ⟨j', φ, ?_⟩
-    change Sheaf.H.map (D.map φ) q y = Sheaf.H.map (D.map ψ) q 0 at hφ
-    rwa [(Sheaf.H.map (D.map ψ) q).map_zero] at hφ
 
 /-! ### Dévissage -/
 
@@ -430,7 +394,7 @@ theorem IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero {k k' : T
     (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)
     {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
     (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
+    [Scheme.IsTorsionSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
   by
@@ -518,7 +482,7 @@ theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field 
     {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f] (k' : Type u)
     [Field k'] [IsAlgClosed k'] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')}
     {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι)
-    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
+    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
   by
@@ -551,8 +515,7 @@ theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field 
     have : CompactSpace P := (quasiCompact_iff_compactSpace (j ≫ f')).mp inferInstance
     have : QuasiSeparatedSpace P := quasiSeparatedSpace_of_quasiSeparated (j ≫ f')
     let A₀ := ((i)^*[AddCommGrpCat.{u + 1}]).obj A
-    have ht : A.IsTorsion :=
-      (Scheme.isTorsionModuleSheaf_iff_isTorsion F).mp inferInstance
+    have ht : A.IsTorsion := (Scheme.isTorsionSheaf_iff_isTorsion F).mp inferInstance
     have ht₀ : Scheme.IsTorsionAbelianSheaf A₀ :=
       (Scheme.isTorsionAbelianSheaf_characterizations A₀).1.mpr (Etale.isTorsion_upperStar i ht)
     have ha : Function.Bijective (Etale.cohomologyMap a A₀ q) := by
@@ -613,7 +576,7 @@ theorem IsCurve.Assertions.of_forall_isReduced [Finite Λ] {k : Type u} [Field k
       (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
       [Scheme.IsConstructibleSheaf G], IsCurve.Assertions (ULift.{u + 1} (ZMod ℓ)) g G)
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
-    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] :
+    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] :
     IsCurve.Assertions Λ f F :=
   by
     obtain ⟨hred, hclosed, hsurj, -⟩ :=

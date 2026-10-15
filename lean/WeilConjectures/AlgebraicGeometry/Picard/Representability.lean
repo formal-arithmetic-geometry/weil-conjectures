@@ -52,10 +52,8 @@ which every smooth projective curve satisfies; for a general `f`, cohomology and
 (Stacks 08IB) would need at least `f` quasi-compact and quasi-separated.
 
 Every statement here assumes injective resolutions in the fibres, `∀ T,
-HasInjectiveResolutions (X ×[k] T).Modules`. This hypothesis always holds, since the category of
-`𝒪`-modules on a scheme is Grothendieck abelian
-(`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`); it is discharged in this way in
-`WeilConjectures/AlgebraicGeometry/Picard/Scheme.lean`.
+HasInjectiveResolutions (X ×[k] T).Modules`. Nothing can discharge that yet; see
+`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`.
 
 ## Main definitions
 

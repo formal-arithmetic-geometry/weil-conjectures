@@ -3159,7 +3159,7 @@ The affine case is
 `AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`; the
 general case follows by induction over a finite cover of `X` by affine opens each of which
 lies over an affine open of a fixed stage, gluing the descended charts over a common stage.
-(Blueprint: `lemma:nagata-finite-presentation-descends`; `thm-pd-spreading-out`, part (1).) -/
+(Blueprint: `lemma:nagata-finite-presentation-descends`.) -/
 @[stacks 01ZM]
 theorem Scheme.exists_isPullback_of_finitePresentation [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {X : Scheme.{u}} (g : X ⟶ c.pt)
@@ -3845,7 +3845,7 @@ include hc in
 
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes with affine
 transition maps. If `lim Dᵢ` is separated, then `Dᵢ` is separated for every `i` past some stage.
-(Blueprint: `lemma-nagata-separated-stage-exists-absolute`.) -/
+(Blueprint: `lemma:nagata-fixed-base-separated-stage-exists`.) -/
 @[stacks 086Q]
 theorem Scheme.exists_isSeparated_of_isLimit [c.pt.IsSeparated] :
     ∃ i₀ : I, ∀ {i : I} (_ : i ⟶ i₀), (D.obj i).IsSeparated := by
@@ -3916,8 +3916,7 @@ include hc in
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes over a base
 `S`, with affine transition maps and quasi-compact structure morphisms. If `lim Dᵢ ⟶ S` is
 separated, then `Dᵢ ⟶ S` is separated for every `i` past some stage.
-(Blueprint: `lemma-nagata-fixed-base-separated-stage-exists`,
-`lemma-nagata-fixed-base-separated-eventually`.) -/
+(Blueprint: `lemma:nagata-fixed-base-separated-eventually`.) -/
 @[stacks 01ZH]
 theorem Scheme.exists_isSeparated_app_of_isLimit (i₀ : I)
     [IsSeparated (c.π.app i₀ ≫ t.app i₀)] :
@@ -4080,16 +4079,18 @@ lemma exists_hom_forall_mem_range_appLE [IsCofiltered I]
   · exact ⟨t a, ht a _⟩
 
 open TopologicalSpace in
-/-- **The comparison with a stage of a Noetherian approximation is an immersion** (the key step of
-Stacks Project Tag 01ZE): if `X` is quasi-compact and quasi-separated, `f : X ⟶ S` is locally of
-finite type and `X = lim Xⱼ` is a Noetherian approximation of `X`, then for some stage `k` the
-morphism `(πₖ, f) : X ⟶ Xₖ ×_ℤ S` is an immersion. -/
-theorem Scheme.Hom.exists_isImmersion_lift_noetherianApproximation {X S : Scheme.{u}}
-    (f : X ⟶ S) [CompactSpace X] [QuasiSeparatedSpace X] [LocallyOfFiniteType f]
-    (N : X.NoetherianApproximation) :
-    ∃ k : N.I, IsImmersion (pullback.lift (N.π.app k) f (specULiftZIsTerminal.hom_ext _ _) :
-      X ⟶ pullback (specULiftZIsTerminal.from (N.D.obj k)) (specULiftZIsTerminal.from S)) := by
+/-- **Immersion into a scheme of finite presentation** (Stacks Project Tag 01ZE): a
+quasi-compact quasi-separated scheme `X` that is locally of finite type over a quasi-compact
+quasi-separated scheme `S` admits an immersion over `S` into a scheme of finite presentation
+over `S`. (Blueprint: `lemma:nagata-immersion-into-fp-model`.) -/
+@[stacks 01ZE]
+theorem Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation {X S : Scheme.{u}} (f : X ⟶ S)
+    [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S] [QuasiSeparatedSpace S]
+    [LocallyOfFiniteType f] [QuasiCompact f] :
+    ∃ (Y : Scheme.{u}) (p : Y ⟶ S) (i : X ⟶ Y), LocallyOfFinitePresentation p ∧ QuasiCompact p ∧
+      QuasiSeparated p ∧ IsImmersion i ∧ i ≫ p = f := by
   classical
+  obtain ⟨N⟩ := X.nonempty_noetherianApproximation
   have hπaff : ∀ j : N.I, IsAffineHom (N.π.app j) :=
     fun j ↦ isAffineHom_π_app N.D (Cone.mk X N.π) N.isLimit j
   -- an affine open cover of `X`, each member mapping into an affine open of `S`
@@ -4136,7 +4137,16 @@ theorem Scheme.Hom.exists_isImmersion_lift_noetherianApproximation {X S : Scheme
   obtain ⟨k, gk, hk⟩ := exists_hom_forall_mem_range_appLE (D := N.D) (c := Cone.mk X N.π)
     N.isLimit i (σ := Σ a : τ, {x // x ∈ gens a}) (U := fun q ↦ U q.1)
     (fun q ↦ (hU q.1).1) (fun q ↦ q.2.1)
-  refine ⟨k, ?_⟩
+  -- the finite presentation model
+  have : LocallyOfFinitePresentation (specULiftZIsTerminal.from (N.D.obj k)) := inferInstance
+  have : QuasiCompact (specULiftZIsTerminal.from (N.D.obj k)) :=
+    (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).mpr inferInstance
+  have : QuasiSeparated (specULiftZIsTerminal.from (N.D.obj k)) :=
+    (HasAffineProperty.iff_of_isAffine (P := @QuasiSeparated)).mpr inferInstance
+  refine ⟨pullback (specULiftZIsTerminal.from (N.D.obj k)) (specULiftZIsTerminal.from S),
+    pullback.snd _ _, pullback.lift (N.π.app k) f (specULiftZIsTerminal.hom_ext _ _),
+    MorphismProperty.pullback_snd _ _ ‹_›, MorphismProperty.pullback_snd _ _ ‹_›,
+    MorphismProperty.pullback_snd _ _ ‹_›, ?_, pullback.lift_snd _ _ _⟩
   set tZ := specULiftZIsTerminal.from (N.D.obj k) with htZ
   set tS := specULiftZIsTerminal.from S with htS
   set u : X ⟶ pullback tZ tS :=
@@ -4189,29 +4199,6 @@ theorem Scheme.Hom.exists_isImmersion_lift_noetherianApproximation {X S : Scheme
       Scheme.Hom.resLE_congr u _ rfl (hupre a) @IsImmersion]
     have := hcl (le_of_eq (hupre a).symm)
     infer_instance
-
-/-- **Immersion into a scheme of finite presentation** (Stacks Project Tag 01ZE): a
-quasi-compact quasi-separated scheme `X` that is locally of finite type over a quasi-compact
-quasi-separated scheme `S` admits an immersion over `S` into a scheme of finite presentation
-over `S`. (Blueprint: `lemma:nagata-immersion-into-fp-model`.) -/
-@[stacks 01ZE]
-theorem Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation {X S : Scheme.{u}} (f : X ⟶ S)
-    [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S] [QuasiSeparatedSpace S]
-    [LocallyOfFiniteType f] [QuasiCompact f] :
-    ∃ (Y : Scheme.{u}) (p : Y ⟶ S) (i : X ⟶ Y), LocallyOfFinitePresentation p ∧ QuasiCompact p ∧
-      QuasiSeparated p ∧ IsImmersion i ∧ i ≫ p = f := by
-  obtain ⟨N⟩ := X.nonempty_noetherianApproximation
-  obtain ⟨k, hk⟩ := f.exists_isImmersion_lift_noetherianApproximation N
-  -- the finite presentation model
-  have : LocallyOfFinitePresentation (specULiftZIsTerminal.from (N.D.obj k)) := inferInstance
-  have : QuasiCompact (specULiftZIsTerminal.from (N.D.obj k)) :=
-    (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).mpr inferInstance
-  have : QuasiSeparated (specULiftZIsTerminal.from (N.D.obj k)) :=
-    (HasAffineProperty.iff_of_isAffine (P := @QuasiSeparated)).mpr inferInstance
-  exact ⟨pullback (specULiftZIsTerminal.from (N.D.obj k)) (specULiftZIsTerminal.from S),
-    pullback.snd _ _, pullback.lift (N.π.app k) f (specULiftZIsTerminal.hom_ext _ _),
-    MorphismProperty.pullback_snd _ _ ‹_›, MorphismProperty.pullback_snd _ _ ‹_›,
-    MorphismProperty.pullback_snd _ _ ‹_›, hk, pullback.lift_snd _ _ _⟩
 
 end FinitePresentationModel
 
@@ -4523,18 +4510,27 @@ attribute [instance] smallCategory isCofiltered locallyOfFinitePresentation_p qu
 end Scheme.Hom.FinitePresentationApproximation
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The finite presentation approximation of `f : X ⟶ S` determined by a closed immersion
-`i : X ⟶ Y` over `S` into an `S`-scheme `Y` that is quasi-compact, quasi-separated and locally of
-finite presentation over `S`: the system of closed subschemes of `Y` cut out by the subideal
-sheaves of finite type of the kernel of `i`. (Blueprint: `def-nagata-closed-subscheme-fp-system`,
-`def-nagata-finite-type-fp-model-system`.) -/
-noncomputable def Scheme.Hom.FinitePresentationApproximation.ofIsClosedImmersion
-    {X Y S : Scheme.{u}} {f : X ⟶ S} [CompactSpace S] [QuasiSeparatedSpace S] (q : Y ⟶ S)
-    (i : X ⟶ Y) [IsClosedImmersion i] [LocallyOfFinitePresentation q] [QuasiCompact q]
-    [QuasiSeparated q] (hcomp : i ≫ q = f) : f.FinitePresentationApproximation :=
-  haveI : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace q
-  haveI : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated q
-  { I := (i.ker.FGSub)ᵒᵖ
+/-- **The finite presentation model system of a morphism of finite type** (Stacks Project
+Tag 09ZQ): a quasi-compact quasi-separated scheme `X` that is locally of finite type over a
+quasi-compact quasi-separated scheme `S` is the cofiltered limit of a system of schemes of
+finite presentation over `S` whose transition morphisms and whose morphisms from `X` are all
+closed immersions.
+
+The system is that of the closed subschemes of a finite presentation model `Y` of `X` over `S`
+cut out by the subideal sheaves of finite type of the kernel of the closed immersion `X ⟶ Y`.
+(Blueprint: `lemma:nagata-finite-type-fp-model-system`.) -/
+@[stacks 09ZQ]
+theorem Scheme.Hom.nonempty_finitePresentationApproximation {X S : Scheme.{u}} (f : X ⟶ S)
+    [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S] [QuasiSeparatedSpace S]
+    [LocallyOfFiniteType f] [QuasiCompact f] :
+    Nonempty f.FinitePresentationApproximation := by
+  obtain ⟨Y, q, i, hq, hqc, hqs, hi, hcomp⟩ :=
+    f.exists_isClosedImmersion_locallyOfFinitePresentation
+  have := hq; have := hqc; have := hqs; have := hi
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace q
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated q
+  refine ⟨{
+    I := (i.ker.FGSub)ᵒᵖ
     D := i.ker.fgSubDiagram
     p :=
       { app J := (J.unop : Y.IdealSheafData).subschemeι ≫ q
@@ -4561,26 +4557,7 @@ noncomputable def Scheme.Hom.FinitePresentationApproximation.ofIsClosedImmersion
     w J := by
       change (i.toImage ≫ i.ker.fgSubCone.π.app J) ≫
         (J.unop : Y.IdealSheafData).subschemeι ≫ q = f
-      simpa using hcomp }
-
-/-- **The finite presentation model system of a morphism of finite type** (Stacks Project
-Tag 09ZQ): a quasi-compact quasi-separated scheme `X` that is locally of finite type over a
-quasi-compact quasi-separated scheme `S` is the cofiltered limit of a system of schemes of
-finite presentation over `S` whose transition morphisms and whose morphisms from `X` are all
-closed immersions.
-
-The system is that of the closed subschemes of a finite presentation model `Y` of `X` over `S`
-cut out by the subideal sheaves of finite type of the kernel of the closed immersion `X ⟶ Y`.
-(Blueprint: `lemma:nagata-finite-type-fp-model-system`, `sk-prop-nagata-sketch-fp-models`.) -/
-@[stacks 09ZQ]
-theorem Scheme.Hom.nonempty_finitePresentationApproximation {X S : Scheme.{u}} (f : X ⟶ S)
-    [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S] [QuasiSeparatedSpace S]
-    [LocallyOfFiniteType f] [QuasiCompact f] :
-    Nonempty f.FinitePresentationApproximation := by
-  obtain ⟨Y, q, i, hq, hqc, hqs, hi, hcomp⟩ :=
-    f.exists_isClosedImmersion_locallyOfFinitePresentation
-  have := hq; have := hqc; have := hqs; have := hi
-  exact ⟨.ofIsClosedImmersion q i hcomp⟩
+      simpa using hcomp }⟩
 
 /-- The interface consumed by the descent of a separated morphism of finite presentation to a
 finite stage (Stacks Project Tag 01ZQ): all the instance arguments of
@@ -5123,42 +5100,6 @@ theorem Scheme.exists_isClosedImmersion_of_isOpenImmersion_of_isLimit [IsCofilte
       (c.π.app i₁ ⁻¹ᵁ V₁).ι ≫ c.π.app j.left :=
     opensCone_π_ι D c i₁ V₁ j
   rw [Category.assoc, h₂, reassoc_of% hg₀]
-
-/-- **Quasi-compact opens of a cofiltered limit descend** (Stacks Project Tag 01Z4, parts (1)
-and (3); blueprint `pqf-lem-limit-qc-open-descends`, items 1 and 3). Let `{Dᵢ}` be a cofiltered
-system of quasi-compact schemes with affine transition morphisms and limit `S = lim Dᵢ`, and let
-`V ⊆ S` be a quasi-compact open. Then `V = fᵢ⁻¹(Vᵢ)` for a quasi-compact open `Vᵢ` of some
-stage; the preimages `Vⱼ` of `Vᵢ` at later stages are quasi-compact, their transition morphisms
-are affine, and the projections exhibit `V = fᵢ⁻¹(Vᵢ)` as the limit `lim_{j ≥ i} Vⱼ`. -/
-theorem Scheme.exists_preimage_eq_and_isLimit_opensCone [IsCofiltered I]
-    [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (hc : IsLimit c) (V : c.pt.Opens)
-    (hV : IsCompact (V : Set c.pt)) :
-    ∃ (i : I) (Vᵢ : (D.obj i).Opens), IsCompact (Vᵢ : Set (D.obj i)) ∧ c.π.app i ⁻¹ᵁ Vᵢ = V ∧
-      (∀ j : Over i, IsCompact ((D.map j.hom ⁻¹ᵁ Vᵢ : (D.obj j.left).Opens) : Set (D.obj j.left))) ∧
-      (∀ {j k : Over i} (f : j ⟶ k), IsAffineHom ((opensDiagram D i Vᵢ).map f)) ∧
-      Nonempty (IsLimit (opensCone D c i Vᵢ)) := by
-  obtain ⟨i, Vᵢ, hVᵢ, hVᵢV⟩ := exists_preimage_eq D c hc V hV
-  exact ⟨i, Vᵢ, hVᵢ, hVᵢV, fun j ↦ QuasiCompact.isCompact_preimage _ Vᵢ.2 hVᵢ,
-    fun f ↦ inferInstance, ⟨isLimitOpensCone D c hc i Vᵢ⟩⟩
-
-/-- **Two descents of a quasi-compact open eventually agree** (Stacks Project Tag 01Z4, part
-(2); blueprint `pqf-lem-limit-qc-open-descends`, item 2). If quasi-compact opens `Vᵢ ⊆ Dᵢ` and
-`Vᵢ' ⊆ Dᵢ'` have the same preimage in the limit, then their preimages agree at some stage
-`i'' ≥ i, i'`. -/
-theorem Scheme.exists_map_preimage_eq_map_preimage_of_isLimit [IsCofiltered I]
-    [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (hc : IsLimit c) {i i' : I}
-    {V : (D.obj i).Opens} {V' : (D.obj i').Opens} (hV : IsCompact (V : Set (D.obj i)))
-    (hV' : IsCompact (V' : Set (D.obj i'))) (H : c.π.app i ⁻¹ᵁ V = c.π.app i' ⁻¹ᵁ V') :
-    ∃ (i'' : I) (f : i'' ⟶ i) (f' : i'' ⟶ i'), D.map f ⁻¹ᵁ V = D.map f' ⁻¹ᵁ V' := by
-  obtain ⟨k, g, g'⟩ : ∃ (k : I) (_ : k ⟶ i), Nonempty (k ⟶ i') :=
-    ⟨IsCofiltered.min i i', IsCofiltered.minToLeft i i', ⟨IsCofiltered.minToRight i i'⟩⟩
-  obtain ⟨g'⟩ := g'
-  obtain ⟨l, h, hl⟩ := exists_map_preimage_eq_map_preimage D c hc (i := k)
-    (U := D.map g ⁻¹ᵁ V) (V := D.map g' ⁻¹ᵁ V') (QuasiCompact.isCompact_preimage _ V.2 hV)
-    (QuasiCompact.isCompact_preimage _ V'.2 hV')
-    (by rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, c.w, c.w, H])
-  refine ⟨l, h ≫ g, h ≫ g', ?_⟩
-  rw [Functor.map_comp, Functor.map_comp, Scheme.Hom.comp_preimage, Scheme.Hom.comp_preimage, hl]
 
 end ClosedImmersionDescent
 

@@ -2,7 +2,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegular
-import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
+import Sheaf.Paper.StrictHenselizationLocalStructure
 set_option linter.style.haveILetI false
 set_option linter.unnecessarySimpa false
 @[expose] public section

@@ -10,7 +10,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.EtaleLocallyConstantOpenPullback
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # The reducible step for finite lisse partitions
@@ -34,15 +33,11 @@ private lemma lisse_open_comp {X Y : Scheme.{u}}
   have hopen : IsLisseEtaleSheafOfSets
       ((etaleSetPullback U.ι).obj ((etaleSetPullback g).obj F)) := by
     refine ⟨isLocallyConstantEtaleSheafOfSets_open_pullback _ U hF.1, ?_⟩
-    refine isFiniteSheaf_of_finite_algClosed_stalks _ ?_
     intro Ω _ _ s
     obtain ⟨c, hc, _⟩ := etaleSetInverseImageStalkGerm Y U U.ι
       ((etaleSetPullback g).obj F) Ω s
-    have hfinite : Finite ((pointSmallEtale (s ≫ U.ι)).sheafFiber.obj
-        ((etaleSetPullback g).obj F)) :=
-      (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-        (hF.2.isFinitelyGenerated_sheafFiber Ω (s ≫ U.ι))
-    exact @Finite.of_injective _ _ hfinite c hc.1
+    have := hF.2 Ω (s ≫ U.ι)
+    exact Finite.of_injective c hc.1
   obtain ⟨c, _⟩ := etaleSetInverseImageCompositionUnits.2.2
   have transport : ∀ {V : Scheme.{u}}
       {G H : Sheaf V.smallEtaleTopology (Type (u + 1))}, (G ≅ H) →
@@ -54,11 +49,9 @@ private lemma lisse_open_comp {X Y : Scheme.{u}}
       exact Sheaf.isConstant_congr _
         ((V.smallEtaleTopology.overPullback (Type (u + 1))
           (𝒰.etalePrecoverageToEtale i)).mapIso e)
-    · refine ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2 ?_⟩
-      have hfinite : Finite ((pointSmallEtale s).sheafFiber.obj G) :=
-        (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-          (hfin.isFinitelyGenerated_sheafFiber Ω s)
-      exact @Finite.of_equiv _ _ hfinite
+    · intro Ω _ _ s
+      have := hfin Ω s
+      exact Finite.of_equiv _
         (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv
   exact transport ((c X Y U g U.ι).app F) hopen
 

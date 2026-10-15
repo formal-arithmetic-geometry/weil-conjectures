@@ -5,7 +5,7 @@ Authors: SHEAF group G2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullbackStratum
 import WeilConjectures.ConstructibleSheaf.Pullback

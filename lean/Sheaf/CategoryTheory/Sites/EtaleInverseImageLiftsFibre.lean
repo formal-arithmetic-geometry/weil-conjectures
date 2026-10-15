@@ -6,7 +6,7 @@ Authors: SHEAF group V3
 module
 
 public import WeilConjectures.CategoryTheory.Sites.Torsor
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers

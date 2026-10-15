@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.Dimension
-public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
+public import Sheaf.AlgebraicGeometry.Variety
 import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
 import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
 import Sheaf.AlgebraicGeometry.FieldBaseChangeAffineCovers
@@ -67,14 +67,14 @@ theorem dim_base_change :
       [Algebra k K] [Algebra k A] [Algebra.FiniteType k A],
       ringKrullDim (A ⊗[k] K) = ringKrullDim A) ∧
     (∀ (k K : Type z) [Field k] [Field K] [Algebra k K]
-      {X : Scheme.{z}} (f : X ⟶ Spec (.of k)) [IsIntegralCurve f],
+      {X : Scheme.{z}} (f : X ⟶ Spec (.of k)) [f.IsCurveOverField],
       Scheme.dim (Limits.pullback f
         (Spec.map (CommRingCat.ofHom (algebraMap k K)))) = 1) := by
   constructor
   · intro k K A _ _ _ _ _ _
     exact ring_dim_base_change k K A
   · intro k K _ _ _ X f _
-    let : IsIntegral X := IsVariety.isIntegral (f := f)
+    let : IsIntegral X := Scheme.Hom.IsVariety.isIntegral (f := f)
     obtain ⟨hY, I, A, rings, algebras, hft, U, V, hU, hV, ⟨eU⟩, ⟨eV⟩⟩ :=
       exists_field_baseChange_affine_covers k K f
     let := rings
@@ -93,8 +93,6 @@ theorem dim_base_change :
         funext i
         exact ring_dim_base_change k K (A i)
       _ = X.dim := hX.symm
-      _ = 1 := by
-        rw [Scheme.dim_eq_topologicalKrullDim]
-        exact IsIntegralCurve.topologicalKrullDim_eq_one (f := f)
+      _ = 1 := Scheme.Hom.IsCurveOverField.dim_eq_one (f := f)
 
 end AlgebraicGeometry

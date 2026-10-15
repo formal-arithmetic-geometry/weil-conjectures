@@ -8,16 +8,13 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
-public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 public import Mathlib.Topology.Spectral.Basic
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
-public import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
-public import Sheaf.RingTheory.HenselianIntegralIdempotentLifting
-public import Sheaf.RingTheory.IntegralOverHenselianPair
-public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
+import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
+import Sheaf.RingTheory.HenselianPairPrimeConnected
+import Sheaf.RingTheory.IntegralOverHenselianPair
 
 /-!
 # Connectedness of closed fibres of proper schemes over a henselian pair
@@ -52,7 +49,7 @@ hypothesis of the Zariski restriction criterion
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory
 
 namespace AlgebraicGeometry
 
@@ -107,105 +104,63 @@ connectedness): let `(A, I)` be a henselian pair and `p : Y ⟶ Spec A` proper. 
 irreducible closed subset `C ⊆ Y` meets the closed fibre `Y₀ = p⁻¹(V(I))` in a nonempty
 connected subset. This is the Stein-factorization step of the henselian-pair comparison
 [Stacks 0A0B].
-
-It is deduced from the idempotent lifting for proper schemes over a henselian pair
-(`AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing`, blueprint
-`thm-weil-pbc-henselian-idempotent-lifting`), applied to `C` with its reduced induced
-structure `Z`: the space `Z ≅ C` is irreducible, hence connected, so `Γ(Z, 𝒪_Z)` has no
-idempotents but `0` and `1`; hence neither has `Γ(Z₀, 𝒪_{Z₀})`, and the nonempty closed fibre
-`Z₀`, whose image in `Y` is `C ∩ Y₀`, is connected.
 (blueprint: `thm-weil-pbc-stein-inputs`) -/
 @[stacks 0A0B]
 theorem Scheme.Hom.isConnected_inter_preimage_zeroLocus {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p]
     {C : Set Y} (hC : IsClosed C) (hC' : IsIrreducible C) :
     IsConnected (C ∩ p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A)) := by
-  have hne := p.nonempty_inter_preimage_zeroLocus I HenselianRing.jac hC hC'.nonempty
-  -- The reduced induced closed subscheme on `C`.
-  let J := Scheme.IdealSheafData.vanishingIdeal (X := Y) ⟨C, hC⟩
+  let J := Scheme.IdealSheafData.vanishingIdeal (⟨C, hC⟩ : TopologicalSpace.Closeds Y)
   let Z := J.subscheme
-  let ι : Z ⟶ Y := J.subschemeι
-  have hι : Set.range ι = C := by
-    rw [Scheme.IdealSheafData.range_subschemeι]
-    exact Scheme.IdealSheafData.coe_support_vanishingIdeal _
-  let q : Spec (.of (A ⧸ I)) ⟶ Spec (.of A) := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
-  have hq : Set.range q = PrimeSpectrum.zeroLocus (I : Set A) := by
-    have := range_comap_of_surjective (A ⧸ I) (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
-    rw [Ideal.mk_ker] at this
-    exact this
-  let Z₀ := pullback (ι ≫ p) q
-  let i₀ : Z₀ ⟶ Z := pullback.fst _ _
-  have hrange : Set.range (i₀ ≫ ι) = C ∩ p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := by
-    rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, Scheme.Pullback.range_fst,
-      ← hq, ← hι, Scheme.Hom.comp_base, TopCat.coe_comp, Set.preimage_comp,
-      Set.image_preimage_eq_range_inter, Set.inter_comm]
-  rw [← hrange]
-  have : ConnectedSpace Z := by
-    have : IrreducibleSpace Z := Subtype.irreducibleSpace (s := (J.support : Set Y)) (by
-      rw [Scheme.IdealSheafData.coe_support_vanishingIdeal]
-      exact hC')
+  let i : Z ⟶ Y := J.subschemeι
+  have hi : Set.range i = C := J.range_subschemeι
+  have hZi : IsIrreducible (Set.range i) := hi.symm ▸ hC'
+  let : IrreducibleSpace (Set.range i) := isIrreducible_iff_irreducibleSpace.mp hZi
+  let e : Z ≃ₜ Set.range i := i.isClosedEmbedding.isEmbedding.toHomeomorph
+  let : IrreducibleSpace Z := e.irreducibleSpace_iff.mpr inferInstance
+  let f := i ≫ p
+  obtain ⟨hint, hproper, _, hfib⟩ := f.steinFactorization_affine
+  let : IsProper Z.toSpecΓ := hproper
+  have hsurj : Function.Surjective Z.toSpecΓ := by
+    intro t
+    obtain ⟨z, hz⟩ := (hfib t).2.nonempty
+    exact ⟨z, hz⟩
+  let : IrreducibleSpace (Spec Γ(Z, ⊤)) :=
+    hsurj.irreducibleSpace Z.toSpecΓ.continuous
+  let φ := ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom
+  let : Algebra A Γ(Z, ⊤) := φ.toAlgebra
+  let : Algebra.IsIntegral A Γ(Z, ⊤) := algebraMap_isIntegral_iff.mp hint
+  let K := I.map φ
+  let : HenselianRing Γ(Z, ⊤) K := henselianRing_of_isIntegral A I Γ(Z, ⊤)
+  have hbirr : IrreducibleSpace (PrimeSpectrum (Γ(Z, ⊤) : Type u)) := by
+    change IrreducibleSpace (Spec Γ(Z, ⊤))
     infer_instance
-  have : Nonempty Z₀ := by
-    obtain ⟨y, hyC, hy₀⟩ := hne
-    rw [← hι] at hyC
-    obtain ⟨z, rfl⟩ := hyC
-    rw [← hq] at hy₀
-    obtain ⟨x, hx⟩ := hy₀
-    obtain ⟨w, hw, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := ι ≫ p) (g := q) z x
-      (by simpa using hx.symm)
-    exact ⟨w⟩
-  have : Nonempty Z := ⟨i₀ (Classical.arbitrary Z₀)⟩
-  let g := ι ≫ p
-  obtain ⟨hi, hp, hgc, hfib⟩ := g.steinFactorization_affine
-  have : Nonempty (⊤ : Z.Opens) := ⟨⟨Classical.arbitrary Z, trivial⟩⟩
-  let B := Γ(Z, ⊤)
-  have : Nontrivial B := Scheme.component_nontrivial Z ⊤
-  let α : A →+* B := ((Scheme.ΓSpecIso (.of A)).inv ≫ g.appTop).hom
-  let : Algebra A B := α.toAlgebra
-  have : Algebra.IsIntegral A B := algebraMap_isIntegral_iff.mp hi
-  let IB := I.map (algebraMap A B)
-  have : HenselianRing B IB := henselianRing_of_isIntegral A I B
-  have hIB : IB ≠ ⊤ := by
-    intro h
-    have hj : Ideal.jacobson (⊥ : Ideal B) = ⊤ :=
-      top_le_iff.mp (h ▸ HenselianRing.jac (R := B) (I := IB))
-    exact bot_ne_top (Ideal.jacobson_eq_top_iff.mp hj)
-  have : Nontrivial (B ⧸ IB) := Ideal.Quotient.nontrivial_iff.mpr hIB
-  have : ConnectedSpace (PrimeSpectrum (B ⧸ IB)) := by
-    apply PrimeSpectrum.connectedSpace_of_isIdempotentElem
-    intro e he
-    obtain ⟨e', ⟨he', hee'⟩, -⟩ :=
-      Algebra.existsUnique_isIdempotentElem_of_henselianRing A I B e he
-    rcases (Scheme.connectedSpace_iff_isIdempotentElem Z).1 inferInstance e' he' with h | h
-    · left
-      simpa only [h, map_zero] using hee'.symm
-    · right
-      simpa only [h, map_one] using hee'.symm
-  have hIBconn : _root_.IsConnected (PrimeSpectrum.zeroLocus (IB : Set B)) := by
-    have h := isConnected_range (PrimeSpectrum.continuous_comap (Ideal.Quotient.mk IB))
-    simpa [range_comap_of_surjective (B ⧸ IB) (Ideal.Quotient.mk IB)
-      Ideal.Quotient.mk_surjective, Ideal.mk_ker] using h
-  let : IsProper Z.toSpecΓ := hp
-  let : GeometricallyConnected Z.toSpecΓ := hgc
-  have hconn : _root_.IsConnected (Z.toSpecΓ ⁻¹' PrimeSpectrum.zeroLocus (IB : Set B)) :=
-    Topology.IsCoinducing.isConnected_preimage_of_isClosed
-      (fun t ↦ (hfib t).2)
-      (Z.toSpecΓ.isClosedMap.isQuotientMap Z.toSpecΓ.continuous
-        Z.toSpecΓ.surjective).isCoinducing
-      (PrimeSpectrum.isClosed_zeroLocus _) hIBconn
-  have hpre : g ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) =
-      Z.toSpecΓ ⁻¹' PrimeSpectrum.zeroLocus (IB : Set B) := by
-    rw [← Scheme.toSpecΓ_steinFactorizationBase g, Scheme.Hom.comp_base,
-      TopCat.coe_comp, Set.preimage_comp]
-    congr 1
-    change PrimeSpectrum.comap α ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) = _
+  let : (_root_.nilradical (Γ(Z, ⊤) : Type u)).IsPrime :=
+    PrimeSpectrum.irreducibleSpace_iff_isPrime_nilradical.mp hbirr
+  have hK : _root_.IsConnected (PrimeSpectrum.zeroLocus (K : Set Γ(Z, ⊤))) := by
+    have := PrimeSpectrum.connectedSpace_zeroLocus_sup_of_henselian K
+      (_root_.nilradical (Γ(Z, ⊤) : Type u))
+    have hconn := isConnected_iff_connectedSpace.mpr this
+    simpa only [PrimeSpectrum.zeroLocus_sup, PrimeSpectrum.zeroLocus_nilradical,
+      Set.univ_inter] using hconn
+  have hfconn : _root_.IsConnected (Z.toSpecΓ ⁻¹' PrimeSpectrum.zeroLocus (K : Set Γ(Z, ⊤))) :=
+    (Z.toSpecΓ.isClosedMap.isQuotientMap Z.toSpecΓ.continuous hsurj).isCoinducing
+      |>.isConnected_preimage_of_isClosed (fun t ↦ (hfib t).2)
+        (PrimeSpectrum.isClosed_zeroLocus _) hK
+  have hfzero : f ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) =
+      Z.toSpecΓ ⁻¹' PrimeSpectrum.zeroLocus (K : Set Γ(Z, ⊤)) := by
+    rw [← Scheme.toSpecΓ_steinFactorizationBase f, Scheme.Hom.comp_base, TopCat.coe_comp]
+    rw [Set.preimage_comp]
+    change Z.toSpecΓ ⁻¹' (PrimeSpectrum.comap φ ⁻¹' _) = _
     rw [PrimeSpectrum.preimage_comap_zeroLocus]
-    change PrimeSpectrum.zeroLocus (α '' (I : Set A)) =
-      PrimeSpectrum.zeroLocus (I.map α : Set B)
-    rw [Ideal.map, PrimeSpectrum.zeroLocus_span]
-  rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
-    Scheme.Pullback.range_fst, hq, hpre]
-  exact hconn.image ι ι.continuous.continuousOn
+    rw [← PrimeSpectrum.zeroLocus_span, ← Ideal.map]
+  rw [← hfzero] at hfconn
+  have himage : i '' (f ⁻¹' PrimeSpectrum.zeroLocus (I : Set A)) =
+      C ∩ p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := by
+    change i '' (i ⁻¹' (p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A))) = _
+    rw [Set.image_preimage_eq_inter_range, hi, Set.inter_comm]
+  rw [← himage]
+  exact hfconn.image i i.continuous.continuousOn
 
 /-- **Stein connectedness.** Let `(A, I)` be a henselian pair and `p : Y ⟶ Spec A` proper, with
 closed fibre `Y₀ = p⁻¹(V(I))`. Then `Y` is a spectral space, `Y₀` is closed in `Y`, and every

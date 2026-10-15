@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.CurveCoefficientPair
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # Constructible torsion sheaves on a curve

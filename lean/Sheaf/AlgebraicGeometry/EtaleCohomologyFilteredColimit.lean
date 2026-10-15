@@ -12,7 +12,6 @@ import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import Sheaf.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Sheaf.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
-import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
 
 /-!
 # Filtered colimits of etale cohomology
@@ -153,7 +152,7 @@ The coefficient forgetful functor preserves colimits and reflects isomorphisms, 
 reflects colimits. Applying that reflection gives precisely the module image cocone. -/
 theorem etaleModuleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactSpace Y]
     [QuasiSeparatedSpace Y] (Λ : Type (u + 1)) [CommRing Λ]
-    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
+    {I : Type u} [SmallCategory I] [IsFiltered I]
     {F : I ⥤ Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} {c : Cocone F}
     (hc : IsColimit c) (q : ℕ) :
     Nonempty (IsColimit
@@ -168,7 +167,7 @@ theorem etaleModuleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactS
       (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
       Etale.cohomology (ModuleCat.{u + 1} Λ) Y (q : ℤ)
     obtain ⟨e⟩ := nonempty_etaleModuleCohomology_forgetIso Y Λ q
-    have hAb := (etaleCohomology_isColimit_of_isFiltered_coefficientSize Y
+    have hAb := (etaleCohomology_isColimit_of_isFiltered Y
       (isColimitOfPreserves S hc) q).some
     have hU : IsColimit ((H ⋙ U).mapCocone c) :=
       IsColimit.mapCoconeEquiv e.symm hAb

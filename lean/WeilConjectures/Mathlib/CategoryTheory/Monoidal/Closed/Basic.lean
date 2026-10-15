@@ -278,18 +278,6 @@ lemma ihomComparison_app_comp_map_app {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMo
     ← NatTrans.IsMonoidal.tensor_assoc]
   exact congrArg _ (τ.naturality _)
 
-/-- The comparison maps `G [A, B] ⟶ [G A, G B]` are natural in the first variable: for
-`f : A' ⟶ A` they commute with precomposition `[A, B] ⟶ [A', B]` by `f`. -/
-@[reassoc]
-lemma map_pre_app_comp_ihomComparison_app (G : C ⥤ D) [G.LaxMonoidal] {A A' : C} (f : A' ⟶ A)
-    (B : C) :
-    G.map ((pre f).app B) ≫ (ihomComparison G A').natTrans.app B =
-      (ihomComparison G A).natTrans.app B ≫ (pre (G.map f)).app (G.obj B) := by
-  apply uncurry_injective
-  rw [uncurry_natural_left, uncurry_eq, ihomComparison_ev, uncurry_pre_app, uncurry_eq,
-    ihomComparison_ev, μ_natural_right_assoc, ← G.map_comp, id_tensor_pre_app_comp_ev,
-    G.map_comp, μ_natural_left_assoc]
-
 /-- If `τ : F ≅ F'` is a monoidal natural isomorphism, the comparison maps of `F` are isomorphisms
 if those of `F'` are. -/
 lemma isIso_ihomComparison_of_iso {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMonoidal]
@@ -304,17 +292,3 @@ lemma isIso_ihomComparison_of_iso {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMonoid
   exact IsIso.of_isIso_comp_right _ ((ihom (F.obj A)).map (τ.hom.app B))
 
 end CategoryTheory.Functor.LaxMonoidal
-
-namespace CategoryTheory.MonoidalClosed
-
-/-- The internal hom out of isomorphic objects: `[X, Y] ≅ [X', Y]` for `X ≅ X'`, given by
-precomposition (`MonoidalClosed.pre`). -/
-@[simps]
-noncomputable def ihomIsoOfIsoLeft {D : Type*} [Category D] [MonoidalCategory D]
-    [MonoidalClosed D] {X X' : D} (e : X ≅ X') (Y : D) : (ihom X).obj Y ≅ (ihom X').obj Y where
-  hom := (pre e.inv).app Y
-  inv := (pre e.hom).app Y
-  hom_inv_id := by rw [← NatTrans.comp_app, ← pre_map, e.hom_inv_id, pre_id]; rfl
-  inv_hom_id := by rw [← NatTrans.comp_app, ← pre_map, e.inv_hom_id, pre_id]; rfl
-
-end CategoryTheory.MonoidalClosed

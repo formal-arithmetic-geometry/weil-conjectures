@@ -21,8 +21,6 @@ computed from a K-injective resolution of `F` do not depend on the chosen resolu
   isomorphic in the homotopy category.
 - `CochainComplex.IsKInjective.nonempty_homology_iso`: their images under an additive functor
   have isomorphic cohomology.
-- `CochainComplex.IsKInjective.isIso_of_isIso_Qh_map`: `Qh` reflects isomorphisms between
-  K-injective complexes.
 -/
 
 @[expose] public section
@@ -68,16 +66,5 @@ theorem nonempty_homology_iso {D : Type*} [Category* D] [Abelian D] (G : C ⥤ D
         (G.mapHomotopyCategory (.up ℤ)).mapIso e ≪≫
         (G.mapHomotopyCategoryFactors (.up ℤ)).app J) ≪≫
     (HomotopyCategory.homologyFunctorFactors D (.up ℤ) q).app _⟩
-
-/-- A morphism between K-injective complexes in the homotopy category is an isomorphism as soon
-as its image in the derived category is: `Qh` is fully faithful on K-injective complexes. -/
-theorem isIso_of_isIso_Qh_map {I J : CochainComplex C ℤ} [I.IsKInjective] [J.IsKInjective]
-    (f : (HomotopyCategory.quotient C (.up ℤ)).obj I ⟶ (HomotopyCategory.quotient C (.up ℤ)).obj J)
-    [IsIso (Qh.map f)] : IsIso f := by
-  obtain ⟨g, hg⟩ := (Qh_map_bijective ((HomotopyCategory.quotient C (.up ℤ)).obj J) I).2
-    (inv (Qh.map f))
-  refine ⟨g, (Qh_map_bijective _ I).1 ?_, (Qh_map_bijective _ J).1 ?_⟩
-  · rw [Functor.map_comp, hg, IsIso.hom_inv_id, CategoryTheory.Functor.map_id]
-  · rw [Functor.map_comp, hg, IsIso.inv_hom_id, CategoryTheory.Functor.map_id]
 
 end CochainComplex.IsKInjective

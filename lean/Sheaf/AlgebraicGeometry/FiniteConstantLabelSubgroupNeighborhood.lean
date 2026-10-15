@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 
 /-! # Closure of finite label sections on an etale neighborhood

@@ -5,7 +5,7 @@ Authors: SHEAF group V1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 

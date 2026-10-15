@@ -13,8 +13,7 @@ public import Mathlib.CategoryTheory.EpiMono
 If a composite `a ≫ b ≫ φ ≫ c` is an isomorphism and `c` is an isomorphism, then `φ` is a split
 epimorphism. If moreover `b` is a split epimorphism and `a` is an isomorphism, then `b` is an
 isomorphism. If `p ≫ i = b ≫ s` is an epi–mono factorisation with `s ≫ b = 𝟙`, then `i ≫ b` is
-an isomorphism (`CategoryTheory.isIso_comp_of_fac`). A morphism with an inverse up to
-isomorphisms on both sides is an isomorphism (`CategoryTheory.isIso_of_isIso_comp_of_isIso_comp`).
+an isomorphism (`CategoryTheory.isIso_comp_of_fac`).
 -/
 
 @[expose] public section
@@ -52,14 +51,5 @@ lemma isIso_comp_of_fac {M P : C} (p : M ⟶ P) (i : P ⟶ M) (b : M ⟶ B) (s :
   rw [← cancel_mono i, ← cancel_epi p]
   simp only [Category.assoc, Category.id_comp]
   rw [reassoc_of% h, reassoc_of% hs, h, reassoc_of% hs]
-
-/-- A morphism `a` such that `a ≫ b` and `b ≫ a` are isomorphisms for some `b` is an
-isomorphism. -/
-lemma isIso_of_isIso_comp_of_isIso_comp {P Q : C} (a : P ⟶ Q) (b : Q ⟶ P) (h₁ : IsIso (a ≫ b))
-    (h₂ : IsIso (b ≫ a)) : IsIso a := by
-  have : IsSplitMono a := IsSplitMono.mk' ⟨b ≫ inv (a ≫ b), by rw [← Category.assoc,
-    IsIso.hom_inv_id]⟩
-  have : IsSplitEpi a := IsSplitEpi.mk' ⟨inv (b ≫ a) ≫ b, by rw [Category.assoc, IsIso.inv_hom_id]⟩
-  exact isIso_of_epi_of_isSplitMono a
 
 end CategoryTheory

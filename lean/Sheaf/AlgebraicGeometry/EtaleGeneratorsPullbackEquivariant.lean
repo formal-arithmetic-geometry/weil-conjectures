@@ -6,7 +6,7 @@ Authors: SHEAF group R2
 module
 
 public import Sheaf.AlgebraicGeometry.TensorPullback
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
 import Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackUnitMap
 import Sheaf.AlgebraicGeometry.EtaleInverseImageJointRepresentatives

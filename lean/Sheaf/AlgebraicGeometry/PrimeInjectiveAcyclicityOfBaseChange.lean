@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.DerivedCategories
 import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.BaseChange.Derived
@@ -53,7 +53,7 @@ exactly the higher direct image required by `def-weil-pbc-direct-image`.
 `def-weil-pbc-injective-acyclicity-property`. -/
 theorem hasAllPrimeInjectiveAcyclicity_of_hasTorsionAbelianBaseChange
     {X Y : Scheme.{u_forward}} (f : X ⟶ Y) [IsProper f]
-    (hf : HasTorsionAbelianBaseChange f) : HasAllPrimeAbelianInjectiveAcyclicity f := by
+    (hf : HasTorsionAbelianBaseChange f) : HasAllPrimeInjectiveAcyclicity f := by
   sorry
 
 end AlgebraicGeometry.Etale

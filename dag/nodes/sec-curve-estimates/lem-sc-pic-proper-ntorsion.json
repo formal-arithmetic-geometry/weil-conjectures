@@ -1,225 +1,151 @@
 {
- "id": "lem-sc-pic-proper-ntorsion",
- "blueprint": {
-  "is": "lem-sc-pic-proper-ntorsion",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Pic of a proper curve: divisibility, n-torsion, cokernel",
- "statement": "Let $C$ be a proper smooth connected curve of\ngenus $g$ over algebraically closed $k$, and let $n$ be prime\nto $\\operatorname{char}k$. Then\n\n$$\n\\operatorname{Pic}(C)[n]\\cong(\\mathbf Z/n\\mathbf Z)^{2g},\n\\qquad\n\\operatorname{coker}\\bigl(n:\\operatorname{Pic}(C)\\to\n\\operatorname{Pic}(C)\\bigr)\\cong\\mathbf Z/n\\mathbf Z,\n$$\n\nand $\\operatorname{Pic}^0(C)$ is $n$-divisible.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
-  "place": "node lem-sc-pic-proper-ntorsion, order 1023"
- },
- "stmt_deps": [
-  "def-sc-curves",
-  "def-sc-picard-group",
-  "def-sc-pic0",
-  "def-sc-genus"
- ],
- "proof": [
-  {
-   "text": "Apply the torsion, cokernel and degree-zero divisibility component theorems to the same f, n and nonzero cast hypothesis, and introduce the conjunction.",
-   "uses": [
+  "id": "lem-sc-pic-proper-ntorsion",
+  "blueprint": {
+    "is": "lem-sc-pic-proper-ntorsion",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Pic of a proper curve: divisibility, n-torsion, cokernel",
+  "statement": "Let $C$ be a proper smooth connected curve of\ngenus $g$ over algebraically closed $k$, and let $n$ be prime\nto $\\operatorname{char}k$. Then\n\n$$\n\\operatorname{Pic}(C)[n]\\cong(\\mathbf Z/n\\mathbf Z)^{2g},\n\\qquad\n\\operatorname{coker}\\bigl(n:\\operatorname{Pic}(C)\\to\n\\operatorname{Pic}(C)\\bigr)\\cong\\mathbf Z/n\\mathbf Z,\n$$\n\nand $\\operatorname{Pic}^0(C)$ is $n$-divisible.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
+    "place": "node lem-sc-pic-proper-ntorsion, order 1023"
+  },
+  "stmt_deps": [
+    "def-sc-curves",
+    "def-sc-picard-group",
+    "def-sc-pic0",
+    "def-sc-genus"
+  ],
+  "proof": [
+    {
+      "text": "Apply the torsion, cokernel and degree-zero divisibility component theorems to the same f, n and nonzero cast hypothesis, and introduce the conjunction.",
+      "uses": [
+        "lem-sc-pic-proper-ntorsion-torsion",
+        "lem-sc-pic-proper-ntorsion-coker",
+        "lem-sc-pic-proper-ntorsion-div"
+      ],
+      "elementary": true
+    }
+  ],
+  "proof_deps": [
     "lem-sc-pic-proper-ntorsion-torsion",
     "lem-sc-pic-proper-ntorsion-coker",
     "lem-sc-pic-proper-ntorsion-div"
-   ],
-   "elementary": true
-  }
- ],
- "proof_deps": [
-  "lem-sc-pic-proper-ntorsion-torsion",
-  "lem-sc-pic-proper-ntorsion-coker",
-  "lem-sc-pic-proper-ntorsion-div"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
-  "place": "Second reading: conjunction introduction; cokernel component reduced to decomposition and divisibility."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Picard group of proper smooth curve torsion n divisible Jacobian",
-   "results": "Only ring Picard-group and elliptic-curve point results; no statement for a general proper smooth curve",
-   "date": "2026-10-10",
-   "verdict": "no match"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
+    "place": "Second reading: conjunction introduction; cokernel component reduced to decomposition and divisibility."
   },
-  {
-   "tool": "leanfinder",
-   "query": "Picard group of smooth projective curve over algebraically closed field has n torsion of rank 2g and cokernel n is ZMod n",
-   "results": "Weierstrass-curve class-group maps and finite-field function-field class groups, not this theorem",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Pic\"",
-   "results": "No relevant declaration returned",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg 'pic.*torsion|Pic.*torsion|pic.*divisible|Pic.*divisible' in available WeilConjectures/Mathlib source; installed Mathlib package absent",
-   "results": "No result in available local source; Mathlib-source grep could not be performed",
-   "date": "2026-10-10",
-   "verdict": "no match in available source; Mathlib-source grep unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "cites_outside_uses"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 1023,
- "blueprint_uses": [
-  "def-sc-curves",
-  "def-sc-jacobian",
-  "def-sc-mult-n",
-  "def-sc-pic0",
-  "lem-pc-genus-agrees-sc",
-  "lem-sc-pic-proper-decomposition",
-  "thm-av-final",
-  "thm-sc-jacobian-representability"
- ],
- "uses_not_cited": [
-  "def-sc-curves"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.Jacobian",
-     "lines": [
-      85,
-      121
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "tool": "leansearch",
+      "query": "Picard group of proper smooth curve torsion n divisible Jacobian",
+      "results": "Only ring Picard-group and elliptic-curve point results; no statement for a general proper smooth curve",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Picard group of smooth projective curve over algebraically closed field has n torsion of rank 2g and cokernel n is ZMod n",
+      "results": "Weierstrass-curve class-group maps and finite-field function-field class groups, not this theorem",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Pic\"",
+      "results": "No relevant declaration returned",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg 'pic.*torsion|Pic.*torsion|pic.*divisible|Pic.*divisible' in available WeilConjectures/Mathlib source; installed Mathlib package absent",
+      "results": "No result in available local source; Mathlib-source grep could not be performed",
+      "date": "2026-10-10",
+      "verdict": "no match in available source; Mathlib-source grep unavailable"
     }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteFreeComplex.exists_opens_range_subset_iff",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-     "lines": [
-      69,
-      87
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-pc-perfect-locus"
-     ],
-     "below": true
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1023,
+  "blueprint_uses": [
+    "def-sc-curves",
+    "def-sc-jacobian",
+    "def-sc-mult-n",
+    "def-sc-pic0",
+    "lem-pc-genus-agrees-sc",
+    "lem-sc-pic-proper-decomposition",
+    "thm-av-final",
+    "thm-sc-jacobian-representability"
+  ],
+  "uses_not_cited": [
+    "def-sc-curves"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-     "lines": [
-      94,
-      135
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-     "lines": [
-      137,
-      152
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-pc-coherent-hi"
-     ],
-     "below": true
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
-     "lines": [
-      45,
-      52
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-     "lines": [
-      102,
-      118
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-sc-flat-base-change-coherent"
-     ],
-     "below": true
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     }
-   ]
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-thm-curveestimate",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-sc-pic-proper-ntorsion",
+    "worker": "stage1",
+    "summary": "Expanded the blueprint's one-paragraph proof into the projectivity and integrality bridge needed for Jacobian representability, the Picard decomposition and divisibility, the prime-to-characteristic torsion calculation, and the cokernel calculation. Added the Stacks 0A26 input as an unsplit node.",
+    "blueprint": "The four steps realize the paragraph under ## Proof of lem-sc-pic-proper-ntorsion.md: its first sentence, the Jacobian divisibility and torsion sentence, and its two displayed conclusions."
+  },
+  "tool_uses": [
+    "prop-pc-xk-integral",
+    "lem-pc-rational-points-dense",
+    "lem-sc-smooth-regular",
+    "lem-weil-pbc-finite-type-over-noetherian"
+  ],
+  "reviewed": "2026-10-10 E1 (delivered); L: reviewed in full by a reviewer sub-agent (FIX: same_as null -> [] after search): 0A26 read for the new node lem-sc-proper-dim-one-projective; step 1 passage from def-sc-curves to the Jacobian theorem hypotheses checked node by node; thm-av-final (c),(d) applied with the group identification Pic^0(C) = J_C(k); tool_uses recorded for the four off-unit generic tools.",
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion",
+    "declaration": "AlgebraicGeometry.Scheme.Hom.pic_proper_ntorsion",
+    "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicProperNTorsion.lean",
+    "statement": "theorem Scheme.Hom.pic_proper_ntorsion {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (_hn : (n : k) ≠ 0) : Nonempty ((powMonoidHom n : C.Pic →* C.Pic).ker ≃* Multiplicative (Fin (2 * f.genus) → ZMod n)) ∧ Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃* Multiplicative (ZMod n)) ∧ (∀ L : C.Pic, L ∈ f.picZero → ∃ M : C.Pic, M ∈ f.picZero ∧ M ^ n = L)",
+    "branch": "sheaf-dag",
+    "by": "J1",
+    "date": "2026-10-11",
+    "existing": false,
+    "fixed_by": "R-pnt1212"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-pnt1212",
+    "group": "J1",
+    "result": "fix",
+    "note": "k alg. closed; f proper smooth IsConnectedCurve; g = recorded f.genus; n prime to char as (n:k)≠0 (n≥1, p∤n); Pic[n] = ker powMonoidHom n ≃* (Z/n)^(2g); coker = Pic ⧸ range ≃* Z/n; Pic⁰ = recorded f.picZero n-divisible inside Pic⁰"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "P1",
+    "result": "pass",
+    "landing": "20261012T060747-L-2912244",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-sc-pic-proper-ntorsion",
-  "worker": "stage1",
-  "summary": "Expanded the blueprint's one-paragraph proof into the projectivity and integrality bridge needed for Jacobian representability, the Picard decomposition and divisibility, the prime-to-characteristic torsion calculation, and the cokernel calculation. Added the Stacks 0A26 input as an unsplit node.",
-  "blueprint": "The four steps realize the paragraph under ## Proof of lem-sc-pic-proper-ntorsion.md: its first sentence, the Jacobian divisibility and torsion sentence, and its two displayed conclusions."
- },
- "tool_uses": [
-  "prop-pc-xk-integral",
-  "lem-pc-rational-points-dense",
-  "lem-sc-smooth-regular",
-  "lem-weil-pbc-finite-type-over-noetherian"
- ],
- "reviewed": "2026-10-10 E1 (delivered); L: reviewed in full by a reviewer sub-agent (FIX: same_as null -> [] after search): 0A26 read for the new node lem-sc-proper-dim-one-projective; step 1 passage from def-sc-curves to the Jacobian theorem hypotheses checked node by node; thm-av-final (c),(d) applied with the group identification Pic^0(C) = J_C(k); tool_uses recorded for the four off-unit generic tools.",
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion",
-  "declaration": "AlgebraicGeometry.Scheme.Hom.pic_proper_ntorsion",
-  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicProperNTorsion.lean",
-  "statement": "theorem Scheme.Hom.pic_proper_ntorsion {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (_hn : (n : k) ≠ 0) : Nonempty ((powMonoidHom n : C.Pic →* C.Pic).ker ≃* Multiplicative (Fin (2 * f.genus) → ZMod n)) ∧ Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃* Multiplicative (ZMod n)) ∧ (∀ L : C.Pic, L ∈ f.picZero → ∃ M : C.Pic, M ∈ f.picZero ∧ M ^ n = L)",
-  "branch": "sheaf-dag",
-  "by": "J1",
-  "date": "2026-10-11",
-  "existing": false,
-  "fixed_by": "R-pnt1212"
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "R-pnt1212",
-  "group": "J1",
-  "result": "fix",
-  "note": "k alg. closed; f proper smooth IsConnectedCurve; g = recorded f.genus; n prime to char as (n:k)≠0 (n≥1, p∤n); Pic[n] = ker powMonoidHom n ≃* (Z/n)^(2g); coker = Pic ⧸ range ≃* Z/n; Pic⁰ = recorded f.picZero n-divisible inside Pic⁰"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
-  "result": "pass",
-  "landing": "20261012T060747-L-2912244",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

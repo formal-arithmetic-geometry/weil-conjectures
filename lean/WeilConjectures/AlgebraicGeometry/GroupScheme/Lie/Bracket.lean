@@ -6,918 +6,644 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Lie.Basic
-public import Mathlib.GroupTheory.Commutator.Basic
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.LocalPoints
-public import WeilConjectures.Mathlib.Algebra.DualNumber
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
+import Sheaf.AlgebraicGeometry.GroupScheme.MixedTranslationCoefficients
+import Mathlib.Tactic.NoncommRing
 
 /-!
-# The bracket on the Lie algebra of a group scheme over a field
+# The bracket on the Lie algebra of a group scheme
 
-Let `G` be a group scheme over a field `k`. Its tangent vectors are the points `v` of `G` with
-values in the dual numbers `k[ε]` reducing to the identity; such a point is determined by the
-homomorphism `v^♯ : 𝒪_{G,1} → k[ε]`, `a ↦ a(1) + ε D_v(a)` on the local ring at the identity
-(`AlgebraicGeometry.GrpObj.kerHom`). For an element `m` of square zero in the maximal ideal of a
-local `k`-algebra `A` with residue field `k`, substituting `ε ↦ m` gives the point `v^{(m)}` of `G`
-with values in `A`, with `(v^{(m)})^♯(a) = a(1) + m D_v(a)`.
-
-All computations go through these points, using only that `G(A)` is a group functorially in `A`:
-
-* the product `v^{(m)} w^{(n)}` has `(v^{(m)} w^{(n)})^♯ = a(1) + m D_v + n D_w + mn C(v, w)` for a
-  fixed `C(v, w)`, the `εδ`-coefficient of `v_ε w_δ` over `k[ε][δ] = k[ε, δ]/(ε², δ²)`
-  (`kerHom_tangentMap_mul_tangentMap`); in particular the group law on tangent vectors is the
-  addition of the `D_v`;
-* if `m` kills the maximal ideal, `u^{(m)}` is central and `(u^{(m)} q)^♯ = q^♯ + m D_u`
-  (`kerHom_tangentMap_mul`);
-* the commutator `v_ε w_δ v_ε⁻¹ w_δ⁻¹` is `[v, w]^{(εδ)}` for a unique tangent vector `[v, w]`, the
-  *bracket* (`tangentBracket`), with `D_{[v, w]} = C(v, w) - C(w, v)`.
-
-Substituting into the bracket gives `[v^{(m)}, w^{(n)}] = [v, w]^{(mn)}`. From this the bracket is
-biadditive and alternating, and the Hall–Witt identity over `k[α][β][γ]` gives the Jacobi
-identity.
+The bracket of `Lie(G)` as the mixed term of the commutator of infinitesimal points, the
+rescaling of infinitesimal points, and the functoriality of infinitesimal points in the group
+scheme.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory TrivSqZeroExt IsLocalRing
-open scoped MonObj commutatorElement
+open CategoryTheory TrivSqZeroExt
+open scoped MonObj
 
-namespace AlgebraicGeometry.GrpObj
+namespace AlgebraicGeometry
+section InfPoints
 
-variable {k : Type u} [Field k]
+variable {S : Scheme.{u}} (G : Over S) [GrpObj G]
 
-/-! ### Test rings -/
+namespace GrpObj
 
-section TestRings
+/-! ### The bracket as the mixed term of the commutator -/
 
-variable {A : Type u} [CommRing A] [Algebra k A]
+/-- The points of `G` over `S[ε][δ]` reducing to the identity both for `ε = 0` and for `δ = 0`. -/
+noncomputable def mixedPoints : Subgroup (Scheme.dualNumbers₂Over S ⟶ G) :=
+  (pointsPrecomp G (Scheme.dualNumbersιεOver S)).ker ⊓
+    (pointsPrecomp G (Scheme.dualNumbersιδOver S)).ker
 
-/-- The residue map `A[τ] → k`, `x + yτ ↦ π(x)`, of the dual numbers over a `k`-algebra with a
-residue map `π`. -/
-def dualAug (π : A →ₐ[k] k) : DualNumber A →ₐ[k] k :=
-  π.comp (fstHom k A A)
+theorem mem_mixedPoints {z : Scheme.dualNumbers₂Over S ⟶ G} :
+    z ∈ mixedPoints G ↔ Scheme.dualNumbersιεOver S ≫ z = 1 ∧ Scheme.dualNumbersιδOver S ≫ z = 1 :=
+  Iff.rfl
 
-instance (π : A →ₐ[k] k) [IsLocalHom π.toRingHom] : IsLocalHom (dualAug π).toRingHom := by
-  have : IsLocalHom (fstHom k A A).toRingHom := ⟨fun _ ↦ isUnit_iff_isUnit_fst.mpr⟩
-  exact RingHom.isLocalHom_comp π.toRingHom (fstHom k A A).toRingHom
-
-@[simp]
-theorem dualAug_apply (π : A →ₐ[k] k) (x : DualNumber A) : dualAug π x = π x.fst :=
-  rfl
-
-end TestRings
-
-/-- The residue map of `k[ε]`. -/
-abbrev aug₁ : DualNumber k →ₐ[k] k :=
-  fstHom k k k
-
-/-- The residue map of `k[ε][δ] = k[ε, δ]/(ε², δ²)`. -/
-abbrev aug₂ : DualNumber (DualNumber k) →ₐ[k] k :=
-  dualAug aug₁
-
-/-- The element `ε` of `k[ε][δ]`. -/
-abbrev eps₂ : DualNumber (DualNumber k) :=
-  inl (inr 1)
-
-/-- The element `δ` of `k[ε][δ]`. -/
-abbrev del₂ : DualNumber (DualNumber k) :=
-  inr 1
-
-theorem eps₂_mul_self : (eps₂ : DualNumber (DualNumber k)) * eps₂ = 0 := by
-  ext <;> simp
-
-theorem del₂_mul_self : (del₂ : DualNumber (DualNumber k)) * del₂ = 0 := by
-  ext <;> simp
-
-theorem eps₂_mul_del₂_mul_self :
-    (eps₂ * del₂ : DualNumber (DualNumber k)) * (eps₂ * del₂) = 0 := by
-  ext <;> simp
+/-- The map `μ : infPoints G → mixedPoints G` induced by `η ↦ εδ`. -/
+noncomputable def toMixed (v : infPoints G) : mixedPoints G :=
+  ⟨Scheme.dualNumbersMulOver S ≫ v.1, by
+    have hv := (mem_infPoints G).1 v.2
+    rw [mem_mixedPoints, Scheme.dualNumbersιεOver_comp_dualNumbersMulOver_assoc,
+      Scheme.dualNumbersιδOver_comp_dualNumbersMulOver_assoc, hv, MonObj.comp_one]
+    exact ⟨rfl, rfl⟩⟩
 
 @[simp]
-theorem aug₂_eps₂ : aug₂ (eps₂ : DualNumber (DualNumber k)) = 0 := by
-  simp
-
-@[simp]
-theorem aug₂_del₂ : aug₂ (del₂ : DualNumber (DualNumber k)) = 0 := by
-  simp
-
-/-- The `k`-algebra homomorphism `k[ε][δ] → A`, `ε ↦ m`, `δ ↦ n`, for elements of square zero. -/
-def lift₂ {A : Type u} [CommRing A] [Algebra k A] (m n : A) (hm : m * m = 0) (hn : n * n = 0) :
-    DualNumber (DualNumber k) →ₐ[k] A :=
-  DualNumber.lift ⟨(DualNumber.liftElem m hm, n), hn, fun _ ↦ Commute.all _ _⟩
-
-theorem lift₂_apply {A : Type u} [CommRing A] [Algebra k A] (m n : A) (hm : m * m = 0)
-    (hn : n * n = 0) (x : DualNumber (DualNumber k)) :
-    lift₂ m n hm hn x = DualNumber.liftElem m hm x.fst + DualNumber.liftElem m hm x.snd * n :=
+theorem coe_toMixed (v : infPoints G) :
+    (toMixed G v : Scheme.dualNumbers₂Over S ⟶ G) = Scheme.dualNumbersMulOver S ≫ v.1 :=
   rfl
 
-variable (G : Over (Spec (.of k))) [GrpObj G]
-
-/-! ### Tangent vectors and their substitutions -/
-
-variable {G}
-
-/-- The `ε`-coefficient `D_v : 𝒪_{G,1} → k` of a tangent vector `v`, so that
-`v^♯(a) = a(1) + ε D_v(a)`. -/
-noncomputable def tangentCoeff (v : pointsKer G aug₁) (a : stalkOne G) : k :=
-  (kerHom v a).snd
-
-theorem kerHom_tangent (v : pointsKer G aug₁) (a : stalkOne G) :
-    kerHom v a = inl (counit G a) + inr (tangentCoeff v a) := by
-  ext
-  · simpa using kerHom_apply_of_mem_ker v a
-  · simp [tangentCoeff]
-
-theorem tangent_ext {v w : pointsKer G aug₁} (h : ∀ a, tangentCoeff v a = tangentCoeff w a) :
-    v = w :=
-  kerHom_injective (RingHom.ext fun a ↦ by rw [kerHom_tangent, kerHom_tangent, h])
-
-variable {A : Type u} [CommRing A] [Algebra k A] [IsLocalRing A] {π : A →ₐ[k] k}
-  [IsLocalHom π.toRingHom]
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-theorem aug_comp_liftElem (m : A) (hm : m * m = 0) (hπ : π m = 0) :
-    π.comp (DualNumber.liftElem m hm) = aug₁ := by
-  ext
-  simp [DualNumber.liftElem_apply, hπ]
-
-/-- The point `v^{(m)}` of `G` with values in `A` obtained from a tangent vector `v` by the
-substitution `ε ↦ m`, for `m` of square zero in the maximal ideal. -/
-noncomputable def tangentMap (m : A) (hm : m * m = 0) (hπ : π m = 0) :
-    pointsKer G aug₁ →* pointsKer G π :=
-  kerMap (DualNumber.liftElem m hm) (aug_comp_liftElem m hm hπ)
-
-theorem kerHom_tangentMap (m : A) (hm : m * m = 0) (hπ : π m = 0) (v : pointsKer G aug₁)
-    (a : stalkOne G) :
-    kerHom (tangentMap m hm hπ v) a =
-      algebraMap k A (counit G a) + algebraMap k A (tangentCoeff v a) * m := by
-  rw [tangentMap, kerHom_kerMap]
-  simp [kerHom_tangent, DualNumber.liftElem_apply]
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-theorem liftElem_comp_eq {B : Type u} [CommRing B] [Algebra k B] (ψ : A →ₐ[k] B) (m : A)
-    (hm : m * m = 0) (m' : B) (hm' : m' * m' = 0) (h : ψ m = m') :
-    ψ.comp (DualNumber.liftElem m hm) = DualNumber.liftElem (R := k) m' hm' := by
-  ext
-  simp [DualNumber.liftElem_apply, h]
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-/-- Base change of a substituted tangent vector is the substitution of the image. -/
-theorem kerMap_tangentMap {B : Type u} [CommRing B] [Algebra k B] [IsLocalRing B]
-    {πB : B →ₐ[k] k} (ψ : A →ₐ[k] B) (hψ : πB.comp ψ = π) (m : A) (hm : m * m = 0)
-    (hπ : π m = 0) (m' : B) (hm' : m' * m' = 0) (hπ' : πB m' = 0) (h : ψ m = m')
-    (v : pointsKer G aug₁) :
-    kerMap ψ hψ (tangentMap m hm hπ v) = tangentMap m' hm' hπ' v := by
-  rw [tangentMap, tangentMap, kerMap_kerMap]
-  exact congrArg (· v) (kerMap_congr (liftElem_comp_eq ψ m hm m' hm' h)
-    (by rw [← AlgHom.comp_assoc, hψ]; exact aug_comp_liftElem m hm hπ)
-    (aug_comp_liftElem m' hm' hπ'))
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-/-- Substituting `ε ↦ 0` gives the identity point. -/
-theorem tangentMap_zero (v : pointsKer G aug₁) :
-    tangentMap (π := π) (0 : A) (mul_zero 0) (map_zero π) v = 1 :=
-  kerMap_eq_one _ (by ext; simp [DualNumber.liftElem_apply]) _ v
-
-theorem inr_one_mul_self : (inr 1 : DualNumber k) * inr 1 = 0 := by
-  ext <;> simp
-
-/-- Substituting `ε ↦ ε` is the identity. -/
-theorem tangentMap_inr_one (v : pointsKer G aug₁) :
-    tangentMap (A := DualNumber k) (π := aug₁) (inr 1) inr_one_mul_self (by simp) v = v := by
-  rw [tangentMap, kerMap_congr (ψ' := AlgHom.id k (DualNumber k)) (by
-      ext <;> simp [DualNumber.liftElem_apply, DualNumber.fst_eps, DualNumber.snd_eps,
-        algebraMap_eq_inl]) _ (AlgHom.comp_id _), kerMap_id]
-
-/-- The point `v_ε` of `G` over `k[ε][δ]` of a tangent vector `v`. -/
-noncomputable abbrev tangentEps (v : pointsKer G aug₁) : pointsKer G (aug₂ (k := k)) :=
-  tangentMap (A := DualNumber (DualNumber k)) (π := aug₂) eps₂ eps₂_mul_self aug₂_eps₂ v
-
-/-- The point `v_δ` of `G` over `k[ε][δ]` of a tangent vector `v`. -/
-noncomputable abbrev tangentDel (v : pointsKer G aug₁) : pointsKer G (aug₂ (k := k)) :=
-  tangentMap (A := DualNumber (DualNumber k)) (π := aug₂) del₂ del₂_mul_self aug₂_del₂ v
-
-/-- The `εδ`-coefficient `C(v, w)` of `v_ε w_δ` over `k[ε][δ]`. -/
-noncomputable def mulCoeff (v w : pointsKer G aug₁) (a : stalkOne G) : k :=
-  (kerHom (tangentEps v * tangentDel w) a).snd.snd
-
-/-- `δ ↦ 0`: the map `k[ε][δ] → k[ε]`. -/
-abbrev fst₂ : DualNumber (DualNumber k) →ₐ[k] DualNumber k :=
-  fstHom k (DualNumber k) (DualNumber k)
-
-/-- `ε ↦ 0, δ ↦ ε`: the map `k[ε][δ] → k[ε]`. -/
-abbrev rho₂ : DualNumber (DualNumber k) →ₐ[k] DualNumber k :=
-  lift₂ 0 (inr 1) (mul_zero 0) inr_one_mul_self
-
-theorem aug₁_comp_fst₂ : aug₁.comp fst₂ = (aug₂ : DualNumber (DualNumber k) →ₐ[k] k) :=
-  rfl
-
-theorem aug₁_comp_rho₂ : aug₁.comp rho₂ = (aug₂ : DualNumber (DualNumber k) →ₐ[k] k) := by
-  refine AlgHom.ext fun x ↦ ?_
-  simp [lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl]
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-theorem aug_comp_lift₂ (m n : A) (hm : m * m = 0) (hn : n * n = 0) (hπm : π m = 0)
-    (hπn : π n = 0) : π.comp (lift₂ m n hm hn) = aug₂ := by
-  refine AlgHom.ext fun x ↦ ?_
-  simp [lift₂_apply, DualNumber.liftElem_apply, hπm, hπn]
-
-theorem kerMap_fst₂_tangentEps_mul (v w : pointsKer G aug₁) :
-    kerMap fst₂ aug₁_comp_fst₂ (tangentEps v * tangentDel w) = v := by
-  rw [map_mul, kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp) (by simp),
-    kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _) (by simp), tangentMap_zero,
-    mul_one, tangentMap_inr_one]
-
-theorem kerMap_rho₂_tangentEps_mul (v w : pointsKer G aug₁) :
-    kerMap rho₂ aug₁_comp_rho₂ (tangentEps v * tangentDel w) = w := by
-  rw [map_mul, kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _)
-      (by simp [lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl]),
-    kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp)
-      (by simp [lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl]), tangentMap_zero,
-    one_mul, tangentMap_inr_one]
-
-theorem kerHom_mul_fst (v w : pointsKer G aug₁) (a : stalkOne G) :
-    (kerHom (tangentEps v * tangentDel w) a).fst = kerHom v a := by
-  have h := kerHom_kerMap fst₂ aug₁_comp_fst₂ (tangentEps v * tangentDel w)
-  rw [kerMap_fst₂_tangentEps_mul] at h
-  exact (congrArg (· a) h).symm
-
-theorem kerHom_mul_snd_fst (v w : pointsKer G aug₁) (a : stalkOne G) :
-    (kerHom (tangentEps v * tangentDel w) a).snd.fst = tangentCoeff w a := by
-  have h := kerHom_kerMap rho₂ aug₁_comp_rho₂ (tangentEps v * tangentDel w)
-  rw [kerMap_rho₂_tangentEps_mul] at h
-  have h' := congrArg (fun f ↦ (f a).snd) h
-  simp only [RingHom.coe_comp, Function.comp_apply, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
-    lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl] at h'
-  rw [tangentCoeff, h']
-  simp
-
-/-- **The product formula.** For `m, n` of square zero in the maximal ideal of `A`,
-`(v^{(m)} w^{(n)})^♯ = a(1) + m D_v + n D_w + mn C(v, w)`. -/
-theorem kerHom_tangentMap_mul_tangentMap (m n : A) (hm : m * m = 0) (hn : n * n = 0)
-    (hπm : π m = 0) (hπn : π n = 0) (v w : pointsKer G aug₁) (a : stalkOne G) :
-    kerHom (tangentMap m hm hπm v * tangentMap n hn hπn w) a =
-      algebraMap k A (counit G a) + algebraMap k A (tangentCoeff v a) * m +
-        algebraMap k A (tangentCoeff w a) * n + algebraMap k A (mulCoeff v w a) * (m * n) := by
-  have e : tangentMap m hm hπm v * tangentMap n hn hπn w =
-      kerMap (A := DualNumber (DualNumber k)) (πA := aug₂) (πB := π) (lift₂ m n hm hn)
-        (aug_comp_lift₂ m n hm hn hπm hπn) (tangentEps v * tangentDel w) := by
-    rw [map_mul, kerMap_tangentMap _ _ _ _ _ m hm hπm (by simp [lift₂_apply,
-      DualNumber.liftElem_apply]), kerMap_tangentMap _ _ _ _ _ n hn hπn (by simp [lift₂_apply,
-      DualNumber.liftElem_apply])]
-  rw [e, kerHom_kerMap, RingHom.comp_apply]
-  have h1 := kerHom_mul_fst v w a
-  have h2 := kerHom_mul_snd_fst v w a
-  have h3 : (kerHom (tangentEps v * tangentDel w) a).snd.snd = mulCoeff v w a := rfl
-  generalize kerHom (tangentEps v * tangentDel w) a = X at h1 h2 h3
-  change (lift₂ m n hm hn) X = _
-  rw [lift₂_apply, DualNumber.liftElem_apply, DualNumber.liftElem_apply, h1, h2, h3,
-    kerHom_tangent]
-  simp only [fst_add, fst_inl, fst_inr, add_zero, snd_add, snd_inl, snd_inr, zero_add]
-  ring
-/-! ### Points killing the maximal ideal are central -/
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-theorem dualAug_comp_inlAlgHom : (dualAug π).comp (inlAlgHom k A A) = π := by
-  ext
-  simp
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-theorem dualAug_inr_one : dualAug π (inr 1 : DualNumber A) = 0 := by
-  simp
-
-omit [IsLocalRing A] in
-theorem inr_one_mul_self' : (inr 1 : DualNumber A) * inr 1 = 0 := by
-  ext <;> simp
-
-/-- The map `A[τ] → k[ε]`, `x + yτ ↦ π(x) + π(y) ε`. -/
-def resDual (π : A →ₐ[k] k) : DualNumber A →ₐ[k] DualNumber k :=
-  DualNumber.lift ⟨((Algebra.ofId k (DualNumber k)).comp π, inr 1), inr_one_mul_self,
-    fun _ ↦ Commute.all _ _⟩
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-theorem resDual_apply (x : DualNumber A) :
-    resDual π x = inl (π x.fst) + inr (π x.snd) := by
-  rw [resDual, DualNumber.lift_apply_apply]
-  ext <;> simp [algebraMap_eq_inl]
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-theorem aug₁_comp_resDual : aug₁.comp (resDual π) = dualAug π := by
-  refine AlgHom.ext fun x ↦ ?_
-  simp [resDual_apply]
-
-/-- The map `A[τ] → A`, `τ ↦ m`. -/
-def substDual (m : A) (hm : m * m = 0) : DualNumber A →ₐ[k] A :=
-  DualNumber.lift ⟨(AlgHom.id k A, m), hm, fun _ ↦ Commute.all _ _⟩
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-theorem substDual_apply (m : A) (hm : m * m = 0) (x : DualNumber A) :
-    substDual (k := k) m hm x = x.fst + x.snd * m :=
-  rfl
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-theorem aug_comp_substDual (m : A) (hm : m * m = 0) (hπ : π m = 0) :
-    π.comp (substDual m hm) = dualAug π := by
-  refine AlgHom.ext fun x ↦ ?_
-  simp [substDual_apply, hπ]
-
-/-- A point `P` over `A[τ]` whose reduction `τ ↦ 0` is `q` and whose residue in `k[ε]` is `u`
-becomes `q + m D_u` after the substitution `τ ↦ m`, when `m` kills the maximal ideal. -/
-theorem kerHom_kerMap_substDual (m : A) (hπm : π m = 0) (hm : ∀ x, π x = 0 → m * x = 0)
-    (P : pointsKer G (dualAug π)) (q : pointsKer G π) (u : pointsKer G aug₁)
-    (hq : kerMap (πA := dualAug π) (πB := π) (fstHom k A A) rfl P = q)
-    (hu : kerMap (resDual π) aug₁_comp_resDual P = u)
-    (a : stalkOne G) :
-    kerHom (kerMap (substDual m (hm m hπm)) (aug_comp_substDual m (hm m hπm) hπm) P) a =
-      kerHom q a + algebraMap k A (tangentCoeff u a) * m := by
-  rw [kerHom_kerMap, RingHom.comp_apply]
-  have h1 : (kerHom P a).fst = kerHom q a := by
-    rw [← hq, kerHom_kerMap]
-    rfl
-  have h2 : π (kerHom P a).snd = tangentCoeff u a := by
-    rw [← hu, tangentCoeff, kerHom_kerMap, RingHom.comp_apply]
-    change _ = (resDual π (kerHom P a)).snd
-    simp [resDual_apply]
-  generalize kerHom P a = Y at h1 h2
-  change substDual m _ Y = _
-  rw [substDual_apply, h1, ← h2]
-  congr 1
-  have : m * (Y.snd - algebraMap k A (π Y.snd)) = 0 := hm _ (by simp)
-  rw [mul_sub] at this
-  rw [mul_comm, sub_eq_zero.mp this, mul_comm]
-
-/-- If `m` kills the maximal ideal, `(u^{(m)} q)^♯ = q^♯ + m D_u`. -/
-theorem kerHom_tangentMap_mul (m : A) (hπm : π m = 0) (hm : ∀ x, π x = 0 → m * x = 0)
-    (u : pointsKer G aug₁) (q : pointsKer G π) (a : stalkOne G) :
-    kerHom (tangentMap m (hm m hπm) hπm u * q) a =
-      kerHom q a + algebraMap k A (tangentCoeff u a) * m := by
-  set uτ := tangentMap (A := DualNumber A) (π := dualAug π) (inr 1) inr_one_mul_self'
-    dualAug_inr_one u
-  set q' := kerMap (inlAlgHom k A A) dualAug_comp_inlAlgHom q
-  have e : tangentMap m (hm m hπm) hπm u * q =
-      kerMap (substDual m (hm m hπm)) (aug_comp_substDual m (hm m hπm) hπm) (uτ * q') := by
-    rw [map_mul, kerMap_tangentMap _ _ _ _ _ m (hm m hπm) hπm (by simp [substDual_apply]),
-      kerMap_kerMap]
-    congr 1
-    rw [kerMap_congr (ψ' := AlgHom.id k A) (by ext; simp [substDual_apply]) _
-      (AlgHom.comp_id _), kerMap_id]
-  rw [e]
-  refine kerHom_kerMap_substDual m hπm hm _ q u ?_ ?_ a
-  · rw [map_mul, kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _) (by simp),
-      tangentMap_zero, one_mul, kerMap_kerMap, kerMap_congr (ψ' := AlgHom.id k A)
-        (by ext; simp) _ (AlgHom.comp_id _), kerMap_id]
-  · rw [map_mul, kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp)
-      (by simp [resDual_apply]), tangentMap_inr_one, kerMap_kerMap,
-      kerMap_eq_one _ (by ext <;> simp [resDual_apply, algebraMap_eq_inl]), mul_one]
-
-/-- If `m` kills the maximal ideal, `(q u^{(m)})^♯ = q^♯ + m D_u`. -/
-theorem kerHom_mul_tangentMap (m : A) (hπm : π m = 0) (hm : ∀ x, π x = 0 → m * x = 0)
-    (u : pointsKer G aug₁) (q : pointsKer G π) (a : stalkOne G) :
-    kerHom (q * tangentMap m (hm m hπm) hπm u) a =
-      kerHom q a + algebraMap k A (tangentCoeff u a) * m := by
-  set uτ := tangentMap (A := DualNumber A) (π := dualAug π) (inr 1) inr_one_mul_self'
-    dualAug_inr_one u
-  set q' := kerMap (inlAlgHom k A A) dualAug_comp_inlAlgHom q
-  have e : q * tangentMap m (hm m hπm) hπm u =
-      kerMap (substDual m (hm m hπm)) (aug_comp_substDual m (hm m hπm) hπm) (q' * uτ) := by
-    rw [map_mul, kerMap_tangentMap _ _ _ _ _ m (hm m hπm) hπm (by simp [substDual_apply]),
-      kerMap_kerMap]
-    congr 1
-    rw [kerMap_congr (ψ' := AlgHom.id k A) (by ext; simp [substDual_apply]) _
-      (AlgHom.comp_id _), kerMap_id]
-  rw [e]
-  refine kerHom_kerMap_substDual m hπm hm _ q u ?_ ?_ a
-  · rw [map_mul, kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _) (by simp),
-      tangentMap_zero, mul_one, kerMap_kerMap, kerMap_congr (ψ' := AlgHom.id k A)
-        (by ext; simp) _ (AlgHom.comp_id _), kerMap_id]
-  · rw [map_mul, kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp)
-      (by simp [resDual_apply]), tangentMap_inr_one, kerMap_kerMap,
-      kerMap_eq_one _ (by ext <;> simp [resDual_apply, algebraMap_eq_inl]), one_mul]
-
-/-- A point `u^{(m)}` with `m` killing the maximal ideal is central. -/
-theorem commute_tangentMap (m : A) (hπm : π m = 0) (hm : ∀ x, π x = 0 → m * x = 0)
-    (u : pointsKer G aug₁) (q : pointsKer G π) :
-    Commute (tangentMap m (hm m hπm) hπm u) q :=
-  kerHom_injective (RingHom.ext fun a ↦ by
-    rw [kerHom_tangentMap_mul, kerHom_mul_tangentMap])
-/-! ### The bracket -/
-
-theorem eps₂_mul_del₂_mul (x : DualNumber (DualNumber k)) (hx : aug₂ x = 0) :
-    eps₂ * del₂ * x = 0 := by
-  have h : x.fst.fst = 0 := hx
-  ext <;> simp [h]
-
-theorem aug₂_eps₂_mul_del₂ : aug₂ (eps₂ * del₂ : DualNumber (DualNumber k)) = 0 := by
-  simp
-
-/-- The map `k[η] → k[ε][δ]`, `η ↦ εδ`. -/
-abbrev mul₂ : DualNumber k →ₐ[k] DualNumber (DualNumber k) :=
-  DualNumber.liftElem (eps₂ * del₂) eps₂_mul_del₂_mul_self
-
-theorem mul₂_injective : Function.Injective (mul₂ (k := k)) := by
-  intro x y h
-  have h1 := congrArg (fun z : DualNumber (DualNumber k) ↦ z.fst.fst) h
-  have h2 := congrArg (fun z : DualNumber (DualNumber k) ↦ z.snd.snd) h
-  exact TrivSqZeroExt.ext (by simpa [DualNumber.liftElem_apply, algebraMap_eq_inl'] using h1)
-    (by simpa [DualNumber.liftElem_apply, algebraMap_eq_inl'] using h2)
-
-theorem aug₂_comp_mul₂ : aug₂.comp mul₂ = (aug₁ : DualNumber k →ₐ[k] k) :=
-  aug_comp_liftElem _ _ aug₂_eps₂_mul_del₂
-
-/-- The point `u^{(εδ)}` of `G` over `k[ε][δ]`. -/
-noncomputable abbrev tangentMul (u : pointsKer G aug₁) : pointsKer G (aug₂ (k := k)) :=
-  tangentMap (A := DualNumber (DualNumber k)) (π := aug₂) (eps₂ * del₂)
-    eps₂_mul_del₂_mul_self aug₂_eps₂_mul_del₂ u
-
-theorem tangentMul_injective : Function.Injective (tangentMul (G := G)) :=
-  kerMap_injective _ _ mul₂_injective
-
-theorem kerMap_fst₂_commutator (v w : pointsKer G aug₁) :
-    kerMap fst₂ aug₁_comp_fst₂ ⁅tangentEps v, tangentDel w⁆ = 1 := by
-  rw [map_commutatorElement, kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp)
-      (by simp), kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _) (by simp),
-    tangentMap_zero, commutatorElement_one_right]
-
-theorem kerMap_rho₂_commutator (v w : pointsKer G aug₁) :
-    kerMap rho₂ aug₁_comp_rho₂ ⁅tangentEps v, tangentDel w⁆ = 1 := by
-  rw [map_commutatorElement, kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _)
-      (by simp [lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl]),
-    kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp)
-      (by simp [lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl]),
-    tangentMap_zero, commutatorElement_one_left]
-
-/-- A point over `k[ε][δ]` trivial for `δ = 0` and for `ε = 0` has the form `a(1) + εδ B(a)`. -/
-theorem kerHom_eq_mul₂ (c : pointsKer G (aug₂ (k := k))) (h₁ : kerMap fst₂ aug₁_comp_fst₂ c = 1)
-    (h₂ : kerMap rho₂ aug₁_comp_rho₂ c = 1) (a : stalkOne G) :
-    kerHom c a = mul₂ (inl (counit G a) + inr (kerHom c a).snd.snd) := by
-  have e₁ : (kerHom c a).fst = inl (counit G a) := by
-    have h := kerHom_kerMap fst₂ aug₁_comp_fst₂ c
-    rw [h₁, kerHom_one] at h
-    have := congrArg (· a) h
-    simpa [algebraMap_eq_inl] using this.symm
-  have e₂ : (kerHom c a).snd.fst = 0 := by
-    have h := kerHom_kerMap rho₂ aug₁_comp_rho₂ c
-    rw [h₂, kerHom_one] at h
-    have h' := congrArg (fun f ↦ (f a).snd) h
-    simp only [RingHom.coe_comp, Function.comp_apply, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
-      lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl] at h'
-    simpa using h'.symm
-  generalize kerHom c a = X at e₁ e₂ ⊢
-  ext
-  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', e₁]
-  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', e₁]
-  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', e₂]
-  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl']
-
-instance : IsLocalHom (counit G) :=
-  inferInstanceAs (IsLocalHom (pointStalkHom _ _).hom)
-
-/-- A point over `k[ε][δ]` trivial for `δ = 0` and for `ε = 0` is `u^{(εδ)}` for a tangent
-vector `u`. -/
-theorem exists_tangentMul_eq (c : pointsKer G (aug₂ (k := k)))
-    (h₁ : kerMap fst₂ aug₁_comp_fst₂ c = 1) (h₂ : kerMap rho₂ aug₁_comp_rho₂ c = 1) :
-    ∃ u : pointsKer G aug₁, tangentMul u = c := by
-  set f : stalkOne G → DualNumber k := fun a ↦ inl (counit G a) + inr (kerHom c a).snd.snd
-  have hf (a : stalkOne G) : mul₂ (f a) = kerHom c a := (kerHom_eq_mul₂ c h₁ h₂ a).symm
-  let θ : stalkOne G →+* DualNumber k :=
-    { toFun := f
-      map_one' := mul₂_injective (by rw [hf, map_one, map_one])
-      map_mul' a b := mul₂_injective (by rw [hf, map_mul, map_mul, hf, hf])
-      map_zero' := mul₂_injective (by rw [hf, map_zero, map_zero])
-      map_add' a b := mul₂_injective (by rw [hf, map_add, map_add, hf, hf]) }
-  have hθ : aug₁.toRingHom.comp θ = counit G := RingHom.ext fun a ↦ by simp [θ, f]
-  have : IsLocalHom (CommRingCat.ofHom θ).hom := by
-    have : IsLocalHom (aug₁.toRingHom.comp θ) := by rw [hθ]; infer_instance
-    exact isLocalHom_of_comp θ aug₁.toRingHom
-  have := isLocalHom_of_comp_eq (A := DualNumber k) (B := DualNumber (DualNumber k))
-    (πA := aug₁) (πB := aug₂) mul₂ aug₂_comp_mul₂
-  obtain ⟨p, hp, -, hpc⟩ := exists_pointStalkHom_eq mul₂ mul₂_injective c.1
-    (closedPoint_eq_onePoint c.2) (CommRingCat.ofHom θ)
-    (CommRingCat.hom_ext (RingHom.ext fun a ↦ by
-      change kerHom c a = mul₂ (f a)
-      exact (hf a).symm))
-  have hp' : p ∈ pointsKer G aug₁ := by
-    rw [mem_pointsKer, ← aug₂_comp_mul₂, ← points.map_map, hpc]
-    exact mem_pointsKer.1 c.2
-  exact ⟨⟨p, hp'⟩, Subtype.ext hpc⟩
-
-/-- The commutator of `v_ε` and `w_δ` is `u^{(εδ)}` for a tangent vector `u`. -/
-theorem exists_tangentMul_eq_commutator (v w : pointsKer G aug₁) :
-    ∃ u : pointsKer G aug₁, tangentMul u = ⁅tangentEps v, tangentDel w⁆ :=
-  exists_tangentMul_eq _ (kerMap_fst₂_commutator v w) (kerMap_rho₂_commutator v w)
-
-/-- The bracket `[v, w]` of two tangent vectors: the tangent vector `u` with
-`u^{(εδ)} = v_ε w_δ v_ε⁻¹ w_δ⁻¹` over `k[ε][δ]`. -/
-noncomputable def tangentBracket (v w : pointsKer G aug₁) : pointsKer G aug₁ :=
-  (exists_tangentMul_eq_commutator v w).choose
-
-theorem tangentMul_tangentBracket (v w : pointsKer G aug₁) :
-    tangentMul (tangentBracket v w) = ⁅tangentEps v, tangentDel w⁆ :=
-  (exists_tangentMul_eq_commutator v w).choose_spec
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-theorem tangentMap_congr {m m' : A} (h : m = m') (hm : m * m = 0) (hπ : π m = 0)
-    (hm' : m' * m' = 0) (hπ' : π m' = 0) :
-    tangentMap (G := G) m hm hπ = tangentMap m' hm' hπ' := by
-  subst h
-  rfl
-
-omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
-theorem tangentMap_apply_congr {m m' : A} (h : m = m') (hm : m * m = 0) (hπ : π m = 0)
-    (hm' : m' * m' = 0) (hπ' : π m' = 0) (v : pointsKer G aug₁) :
-    tangentMap m hm hπ v = tangentMap m' hm' hπ' v := by
-  subst h
-  rfl
-
-omit [IsLocalHom π.toRingHom] in
-/-- **Substitution into the bracket.** `[v^{(m)}, w^{(n)}] = [v, w]^{(mn)}` for `m, n` of square
-zero in the maximal ideal. -/
-theorem commutator_tangentMap (m n : A) (hm : m * m = 0) (hn : n * n = 0) (hπm : π m = 0)
-    (hπn : π n = 0) (v w : pointsKer G aug₁) :
-    ⁅tangentMap m hm hπm v, tangentMap n hn hπn w⁆ =
-      tangentMap (A := A) (π := π) (m * n) (by rw [mul_mul_mul_comm, hm, zero_mul])
-        (by rw [map_mul, hπm, zero_mul]) (tangentBracket v w) := by
-  have h := congrArg (kerMap (A := DualNumber (DualNumber k)) (πA := aug₂) (πB := π)
-    (lift₂ m n hm hn) (aug_comp_lift₂ m n hm hn hπm hπn)) (tangentMul_tangentBracket v w)
-  rw [map_commutatorElement, kerMap_tangentMap (m := eps₂) (m' := m) _ _ _ _ hm hπm
-      (by simp [lift₂_apply, DualNumber.liftElem_apply]),
-    kerMap_tangentMap (m := del₂) (m' := n) _ _ _ _ hn hπn
-      (by simp [lift₂_apply, DualNumber.liftElem_apply]),
-    kerMap_tangentMap (m := eps₂ * del₂) (m' := m * n) _ _ _ _
-      (by rw [mul_mul_mul_comm, hm, zero_mul]) (by rw [map_mul, hπm, zero_mul])
-      (by simp [lift₂_apply, DualNumber.liftElem_apply])] at h
-  exact h.symm
-/-! ### The laws of the bracket -/
-
-theorem tangentCoeff_one (a : stalkOne G) : tangentCoeff (1 : pointsKer G aug₁) a = 0 := by
-  rw [tangentCoeff, kerHom_one]
-  simp [algebraMap_eq_inl]
-
-/-- The group law on tangent vectors is the addition of the `D_v`. -/
-theorem tangentCoeff_mul (v w : pointsKer G aug₁) (a : stalkOne G) :
-    tangentCoeff (v * w) a = tangentCoeff v a + tangentCoeff w a := by
-  conv_lhs => rw [← tangentMap_inr_one v, ← tangentMap_inr_one w]
-  rw [tangentCoeff, kerHom_tangentMap_mul_tangentMap]
-  simp [algebraMap_eq_inl]
-
-theorem tangent_mul_comm (v w : pointsKer G aug₁) : v * w = w * v :=
-  tangent_ext fun a ↦ by rw [tangentCoeff_mul, tangentCoeff_mul, add_comm]
-
-theorem tangentCoeff_inv (v : pointsKer G aug₁) (a : stalkOne G) :
-    tangentCoeff v⁻¹ a = -tangentCoeff v a := by
-  have h := tangentCoeff_mul v v⁻¹ a
-  rw [mul_inv_cancel, tangentCoeff_one] at h
-  linear_combination -h
-
-theorem snd_snd_algebraMap₂ (c : k) :
-    (algebraMap k (DualNumber (DualNumber k)) c).snd.snd = 0 := by
-  simp [algebraMap_eq_inl']
-
-theorem snd_snd_algebraMap₂_mul_eps₂ (c : k) :
-    (algebraMap k (DualNumber (DualNumber k)) c * eps₂).snd.snd = 0 := by
-  simp [algebraMap_eq_inl']
-
-theorem snd_snd_algebraMap₂_mul_del₂ (c : k) :
-    (algebraMap k (DualNumber (DualNumber k)) c * del₂).snd.snd = 0 := by
-  simp [algebraMap_eq_inl']
-
-theorem snd_snd_algebraMap₂_mul_eps₂_mul_del₂ (c : k) :
-    (algebraMap k (DualNumber (DualNumber k)) c * (eps₂ * del₂)).snd.snd = c := by
-  simp [algebraMap_eq_inl']
-
-theorem snd_snd_algebraMap₂_mul_del₂_mul_eps₂ (c : k) :
-    (algebraMap k (DualNumber (DualNumber k)) c * (del₂ * eps₂)).snd.snd = c := by
-  simp [algebraMap_eq_inl']
-
-/-- **The bracket in coordinates.** `D_{[v, w]} = C(v, w) - C(w, v)`. -/
-theorem tangentCoeff_tangentBracket (v w : pointsKer G aug₁) (a : stalkOne G) :
-    tangentCoeff (tangentBracket v w) a = mulCoeff v w a - mulCoeff w v a := by
-  have e : tangentMul (tangentBracket v w) * (tangentDel w * tangentEps v) =
-      tangentEps v * tangentDel w := by
-    rw [tangentMul_tangentBracket, commutatorElement_def]
-    group
-  have h := congrArg (fun p ↦ (kerHom p a).snd.snd) e
-  rw [kerHom_tangentMap_mul (eps₂ * del₂) aug₂_eps₂_mul_del₂ eps₂_mul_del₂_mul,
-    kerHom_tangentMap_mul_tangentMap, kerHom_tangentMap_mul_tangentMap] at h
-  simp only [snd_add, snd_snd_algebraMap₂, snd_snd_algebraMap₂_mul_eps₂,
-    snd_snd_algebraMap₂_mul_del₂, snd_snd_algebraMap₂_mul_eps₂_mul_del₂,
-    snd_snd_algebraMap₂_mul_del₂_mul_eps₂] at h
-  linear_combination h
-
-theorem tangentBracket_self (v : pointsKer G aug₁) : tangentBracket v v = 1 :=
-  tangent_ext fun a ↦ by rw [tangentCoeff_tangentBracket, sub_self, tangentCoeff_one]
-
-theorem commute_tangentMul (u : pointsKer G aug₁) (q : pointsKer G (aug₂ (k := k))) :
-    Commute (tangentMul u) q :=
-  commute_tangentMap (eps₂ * del₂) aug₂_eps₂_mul_del₂ eps₂_mul_del₂_mul u q
-
-theorem tangentBracket_mul_left (v v' w : pointsKer G aug₁) :
-    tangentBracket (v * v') w = tangentBracket v w * tangentBracket v' w := by
-  apply tangentMul_injective
-  rw [tangentMul_tangentBracket, show tangentEps (v * v') = tangentEps v * tangentEps v' from
-    map_mul _ _ _, show tangentMul (tangentBracket v w * tangentBracket v' w) =
-      tangentMul (tangentBracket v w) * tangentMul (tangentBracket v' w) from map_mul _ _ _,
-    tangentMul_tangentBracket, tangentMul_tangentBracket]
-  have e : ∀ a b c : pointsKer G (aug₂ (k := k)), ⁅a * b, c⁆ = a * ⁅b, c⁆ * a⁻¹ * ⁅a, c⁆ := by
-    intro a b c
-    simp only [commutatorElement_def]
-    group
-  rw [e, ← tangentMul_tangentBracket v' w, ← (commute_tangentMul _ _).eq, mul_inv_cancel_right,
-    ← tangentMul_tangentBracket v w]
-  exact (commute_tangentMul _ _).eq
-
-theorem tangentBracket_mul_right (v w w' : pointsKer G aug₁) :
-    tangentBracket v (w * w') = tangentBracket v w * tangentBracket v w' := by
-  apply tangentMul_injective
-  rw [tangentMul_tangentBracket, show tangentDel (w * w') = tangentDel w * tangentDel w' from
-    map_mul _ _ _, show tangentMul (tangentBracket v w * tangentBracket v w') =
-      tangentMul (tangentBracket v w) * tangentMul (tangentBracket v w') from map_mul _ _ _,
-    tangentMul_tangentBracket, tangentMul_tangentBracket]
-  have e : ∀ a b c : pointsKer G (aug₂ (k := k)), ⁅a, b * c⁆ = ⁅a, b⁆ * (b * ⁅a, c⁆ * b⁻¹) := by
-    intro a b c
-    simp only [commutatorElement_def]
-    group
-  rw [e, ← tangentMul_tangentBracket v w', ← (commute_tangentMul _ _).eq, mul_inv_cancel_right]
-/-! ### The Jacobi identity -/
-
-/-- The residue map of `k[α][β][γ]`. -/
-abbrev aug₃ : DualNumber (DualNumber (DualNumber k)) →ₐ[k] k :=
-  dualAug aug₂
-
-/-- The element `α` of `k[α][β][γ]`. -/
-abbrev alp₃ : DualNumber (DualNumber (DualNumber k)) :=
-  inl eps₂
-
-/-- The element `β` of `k[α][β][γ]`. -/
-abbrev bet₃ : DualNumber (DualNumber (DualNumber k)) :=
-  inl del₂
-
-/-- The element `γ` of `k[α][β][γ]`. -/
-abbrev gam₃ : DualNumber (DualNumber (DualNumber k)) :=
-  inr 1
-
-theorem alp₃_mul_self : alp₃ (k := k) * alp₃ (k := k) = 0 := by
-  ext <;> simp
-
-theorem bet₃_mul_self : bet₃ (k := k) * bet₃ (k := k) = 0 := by
-  ext <;> simp
-
-theorem gam₃_mul_self : gam₃ (k := k) * gam₃ (k := k) = 0 := by
-  ext <;> simp
-
-theorem aug₃_alp₃ : aug₃ (alp₃ (k := k)) = 0 := by
-  simp
-
-theorem aug₃_bet₃ : aug₃ (bet₃ (k := k)) = 0 := by
-  simp
-
-theorem aug₃_gam₃ : aug₃ (gam₃ (k := k)) = 0 := by
-  simp
-
-/-- The product `αβγ`, which kills the maximal ideal of `k[α][β][γ]`. -/
-abbrev mon₃ : DualNumber (DualNumber (DualNumber k)) :=
-  alp₃ (k := k) * bet₃ * gam₃
-
-theorem mon₃_mul (x : DualNumber (DualNumber (DualNumber k))) (hx : aug₃ x = 0) :
-    mon₃ (k := k) * x = 0 := by
-  have h : x.fst.fst.fst = 0 := hx
-  ext <;> simp [h]
-
-theorem aug₃_mon₃ : aug₃ (mon₃ (k := k)) = 0 := by
-  simp [mon₃]
-
-theorem liftElem_mon₃_injective :
-    Function.Injective (DualNumber.liftElem (R := k) (mon₃ : DualNumber (DualNumber
-      (DualNumber k))) (mon₃_mul _ aug₃_mon₃)) := by
-  intro x y h
-  have h1 := congrArg (fun z : DualNumber (DualNumber (DualNumber k)) ↦ z.fst.fst.fst) h
-  have h2 := congrArg (fun z : DualNumber (DualNumber (DualNumber k)) ↦ z.snd.snd.snd) h
-  simp only [DualNumber.liftElem_apply, algebraMap_eq_inl', fst_add, fst_mul, snd_add,
-    snd_mul, fst_inl, snd_inl, fst_inr, snd_inr, smul_eq_mul, op_smul_eq_mul, mul_zero,
-    zero_mul, add_zero, zero_add, mul_one] at h1 h2
-  exact TrivSqZeroExt.ext h1 h2
-
-/-- The points `u^{(αβγ)}`, as a homomorphism from the tangent vectors. -/
-noncomputable abbrev tangentMon (u : pointsKer G aug₁) : pointsKer G (aug₃ (k := k)) :=
-  tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) mon₃
-    (mon₃_mul _ aug₃_mon₃) aug₃_mon₃ u
-
-theorem tangentMon_injective : Function.Injective (tangentMon (G := G)) :=
-  kerMap_injective _ _ liftElem_mon₃_injective
-
-omit [IsLocalHom π.toRingHom] in
-theorem commutator_commutator_tangentMap (m₁ m₂ m₃ : A) (h₁ : m₁ * m₁ = 0) (h₂ : m₂ * m₂ = 0)
-    (h₃ : m₃ * m₃ = 0) (hπ₁ : π m₁ = 0) (hπ₂ : π m₂ = 0) (hπ₃ : π m₃ = 0) (m : A)
-    (hm : m * m = 0) (hπ : π m = 0) (h : m₁ * m₂ * m₃ = m) (x y z : pointsKer G aug₁) :
-    ⁅⁅tangentMap m₁ h₁ hπ₁ x, tangentMap m₂ h₂ hπ₂ y⁆, tangentMap m₃ h₃ hπ₃ z⁆ =
-      tangentMap m hm hπ (tangentBracket (tangentBracket x y) z) := by
-  rw [commutator_tangentMap, commutator_tangentMap, tangentMap_congr (G := G) h _ _ hm hπ]
-
-/-- The point `x^{(α)}` over `k[α][β][γ]`. -/
-noncomputable abbrev tangentAlp (x : pointsKer G aug₁) : pointsKer G (aug₃ (k := k)) :=
-  tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) alp₃ alp₃_mul_self
-    aug₃_alp₃ x
-
-/-- The point `x^{(β)}` over `k[α][β][γ]`. -/
-noncomputable abbrev tangentBet (x : pointsKer G aug₁) : pointsKer G (aug₃ (k := k)) :=
-  tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) bet₃ bet₃_mul_self
-    aug₃_bet₃ x
-
-/-- The point `x^{(γ)}` over `k[α][β][γ]`. -/
-noncomputable abbrev tangentGam (x : pointsKer G aug₁) : pointsKer G (aug₃ (k := k)) :=
-  tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) gam₃ gam₃_mul_self
-    aug₃_gam₃ x
-
-theorem tangentMon_conj (u : pointsKer G aug₁) (q : pointsKer G (aug₃ (k := k))) :
-    q * tangentMon u * q⁻¹ = tangentMon u := by
-  rw [← (commute_tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) mon₃
-    aug₃_mon₃ mon₃_mul u q).eq, mul_inv_cancel_right]
-
-set_option synthInstance.maxHeartbeats 200000 in
--- The instances on points over `k[α][β][γ]` are slow to synthesize.
-set_option maxHeartbeats 1000000 in
--- The Hall–Witt identity unfolds three iterated dual-number rings.
-/-- The Hall–Witt identity for tangent vectors: the Hall–Witt identity of the group of points
-over `k[α][β][γ]`, applied to `x^{(α)}`, `y^{(β)}` and `z^{(γ)}`. -/
-theorem tangentBracket_hallWitt (x y z : pointsKer G aug₁) :
-    tangentBracket (tangentBracket x⁻¹ y) z * tangentBracket (tangentBracket z⁻¹ x) y *
-      tangentBracket (tangentBracket y⁻¹ z) x = 1 := by
-  apply tangentMon_injective
-  have hw := conj_commutatorElement_left_commutatorElement_mul (tangentAlp x) (tangentBet y)
-    (tangentGam z)
-  have e₁ : ⁅⁅(tangentAlp x)⁻¹, tangentBet y⁆, tangentGam z⁆ =
-      tangentMon (tangentBracket (tangentBracket x⁻¹ y) z) := by
-    rw [← map_inv]
-    exact commutator_commutator_tangentMap _ _ _ _ _ _ _ _ _ _ _ _ rfl _ _ _
-  have e₂ : ⁅⁅(tangentGam z)⁻¹, tangentAlp x⁆, tangentBet y⁆ =
-      tangentMon (tangentBracket (tangentBracket z⁻¹ x) y) := by
-    rw [← map_inv]
-    exact commutator_commutator_tangentMap _ _ _ _ _ _ _ _ _ _ _ _
-      (by rw [mul_comm gam₃ alp₃, mul_right_comm]) _ _ _
-  have e₃ : ⁅⁅(tangentBet y)⁻¹, tangentGam z⁆, tangentAlp x⁆ =
-      tangentMon (tangentBracket (tangentBracket y⁻¹ z) x) := by
-    rw [← map_inv]
-    exact commutator_commutator_tangentMap _ _ _ _ _ _ _ _ _ _ _ _
-      (by rw [mul_comm _ alp₃, ← mul_assoc]) _ _ _
-  rw [e₁, e₂, e₃] at hw
-  have hc := tangentMon_conj (G := G)
-  have key : ∀ {P : Type u} [Group P] (a b c t₁ t₂ t₃ : P), a * t₁ * a⁻¹ = t₁ →
-      c * t₂ * c⁻¹ = t₂ → b * t₃ * b⁻¹ = t₃ →
-      a * t₁ * a⁻¹ * c * t₂ * c⁻¹ * b * t₃ * b⁻¹ = 1 → t₁ * t₂ * t₃ = 1 := by
-    intro P _ a b c t₁ t₂ t₃ h₁ h₂ h₃ h
-    rw [← h₁, ← h₂, ← h₃, ← h]
-    group
-  have := key _ _ _ _ _ _ (hc _ _) (hc _ _) (hc _ _) hw
-  simp only [tangentMon, map_mul, map_one] at this ⊢
-  exact this
-/-! ### The Lie algebra -/
-
-theorem tangentBracket_one_left (w : pointsKer G aug₁) : tangentBracket 1 w = 1 := by
-  have h := tangentBracket_mul_left (1 : pointsKer G aug₁) 1 w
-  rw [one_mul] at h
-  exact left_eq_mul.mp h
-
-theorem tangentBracket_inv_left (v w : pointsKer G aug₁) :
-    tangentBracket v⁻¹ w = (tangentBracket v w)⁻¹ := by
-  rw [eq_inv_iff_mul_eq_one, ← tangentBracket_mul_left, inv_mul_cancel,
-    tangentBracket_one_left]
-
-variable (G) in
-/-- The Lie algebra of `G` is the group of tangent vectors: `Lie(G) ≃ ker(G(k[ε]) → G(k))`. -/
-noncomputable def lieEquivTangent : Lie G ≃ pointsKer G (aug₁ (k := k)) :=
-  (lieEquiv G).symm.trans (infPointsEquivTangentGroup G).toEquiv
-
-theorem lieEquivTangent_add (x y : Lie G) :
-    lieEquivTangent G (x + y) = lieEquivTangent G x * lieEquivTangent G y := by
-  simp only [lieEquivTangent, Equiv.trans_apply, lieEquiv_symm_add, MulEquiv.toEquiv_eq_coe]
-  exact map_mul (infPointsEquivTangentGroup G) _ _
-
-theorem lieEquivTangent_symm_mul (p q : pointsKer G (aug₁ (k := k))) :
-    (lieEquivTangent G).symm (p * q) =
-      (lieEquivTangent G).symm p + (lieEquivTangent G).symm q :=
-  (lieEquivTangent G).injective (by simp [lieEquivTangent_add])
-
-theorem lieEquivTangent_symm_one : (lieEquivTangent G).symm 1 = 0 := by
-  have h := lieEquivTangent_symm_mul (G := G) 1 1
-  rw [one_mul] at h
-  exact left_eq_add.mp h
-
-/-- The Lie bracket on `Lie(G)` of a group scheme over a field: the mixed term `[v, w]` of the
-commutator `v_ε w_δ v_ε⁻¹ w_δ⁻¹` of two tangent vectors over `k[ε][δ]`.
-(blueprint: `sk-d-tangent`) -/
+private theorem mixed_comp_injective {Y : Scheme.{u}} (v w : S.dualNumbers ⟶ Y)
+    (h : S.dualNumbersMul ≫ v = S.dualNumbersMul ≫ w) : v = w := by
+  have hb : v.base = w.base := congrArg (fun f : S.dualNumbers.dualNumbers ⟶ Y ↦ f.base) h
+  rcases v with ⟨⟨⟨vb, vc⟩, vp⟩⟩
+  rcases w with ⟨⟨⟨wb, wc⟩, wp⟩⟩
+  change vb = wb at hb
+  subst wb
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  have e := Scheme.Hom.congr_app h U
+  simp only [Scheme.Hom.comp_app, eqToHom_op, eqToHom_map] at e
+  simp only [eqToHom_refl, Category.comp_id] at e
+  ext a : 2
+  have ea := ConcreteCategory.congr_hom e a
+  change DualNumber.mulRingHom (vc.app _ a) = DualNumber.mulRingHom (wc.app _ a) at ea
+  apply TrivSqZeroExt.ext
+  · simpa using congrArg (fun x ↦ x.fst.fst) ea
+  · simpa using congrArg (fun x ↦ x.snd.snd) ea
+
+private def compressRingHom {A R : Type u} [CommRing A] [CommRing R]
+    (f : A →+* DualNumber (DualNumber R))
+    (he : ∀ a, (f a).fst.snd = 0) (hd : ∀ a, (f a).snd.fst = 0) :
+    A →+* DualNumber R where
+  toFun a := inl (f a).fst.fst + inr (f a).snd.snd
+  map_one' := by ext <;> simp
+  map_zero' := by ext <;> simp
+  map_add' a b := by ext <;> simp
+  map_mul' a b := by
+    ext <;> simp [snd_mul, smul_eq_mul, he, hd]
+
+private theorem mixed_factorization {Y : Scheme.{u}}
+    (z : S.dualNumbers.dualNumbers ⟶ Y) (g : S ⟶ Y)
+    (he : S.dualNumbers.dualNumbersι ≫ z = S.dualNumbersProj ≫ g)
+    (hd : S.dualNumbersι.dualNumbers ≫ z = S.dualNumbersProj ≫ g) :
+    ∃ v : S.dualNumbers ⟶ Y, S.dualNumbersMul ≫ v = z ∧ S.dualNumbersι ≫ v = g := by
+  have hb : z.base = g.base :=
+    congrArg (fun f : S.dualNumbers ⟶ Y ↦ f.base) he
+  rcases z with ⟨⟨⟨zb, zc⟩, zp⟩⟩
+  rcases g with ⟨⟨⟨gb, gc⟩, gp⟩⟩
+  change zb = gb at hb
+  subst gb
+  have e (U : Y.Opens) := Scheme.Hom.congr_app he U
+  have d (U : Y.Opens) := Scheme.Hom.congr_app hd U
+  simp only [Scheme.Hom.comp_app, eqToHom_op, eqToHom_map] at e d
+  simp only [eqToHom_refl, Category.comp_id] at e d
+  have ef (U : Y.Opens) (a : Γ(Y, U)) : (zc.app (Opposite.op U) a).fst =
+      inl (gc.app (Opposite.op U) a) := by
+    exact ConcreteCategory.congr_hom (e U) a
+  have es (U : Y.Opens) (a : Γ(Y, U)) :
+      DualNumber.mapRingHom
+        (fstHom Γ(S, (TopologicalSpace.Opens.map zb).obj U)
+          Γ(S, (TopologicalSpace.Opens.map zb).obj U)
+          Γ(S, (TopologicalSpace.Opens.map zb).obj U)).toRingHom
+        (zc.app (Opposite.op U) a) =
+        inl (gc.app (Opposite.op U) a) := by
+    exact ConcreteCategory.congr_hom (d U) a
+  have ez (U : Y.Opens) (a : Γ(Y, U)) : (zc.app (Opposite.op U) a).fst.snd = 0 :=
+    (congrArg snd (ef U a)).trans (snd_inl _ _)
+  have dz (U : Y.Opens) (a : Γ(Y, U)) : (zc.app (Opposite.op U) a).snd.fst = 0 := by
+    simpa using congrArg snd (es U a)
+  let vc : Y.presheaf ⟶ (TopCat.Presheaf.pushforward CommRingCat zb).obj
+      S.dualNumbers.presheaf :=
+    { app := fun U ↦ CommRingCat.ofHom (compressRingHom (zc.app U).hom (ez U.unop)
+        (dz U.unop))
+      naturality := by
+        intro U V i
+        ext a : 2
+        have hn := ConcreteCategory.congr_hom (zc.naturality i) a
+        change zc.app V (Y.presheaf.map i a) =
+          DualNumber.mapRingHom (DualNumber.mapRingHom (S.presheaf.map
+            ((TopologicalSpace.Opens.map zb).map i.unop).op).hom) (zc.app U a) at hn
+        change inl (zc.app V (Y.presheaf.map i a)).fst.fst +
+            inr (zc.app V (Y.presheaf.map i a)).snd.snd =
+          DualNumber.mapRingHom (S.presheaf.map _).hom
+            (inl (zc.app U a).fst.fst + inr (zc.app U a).snd.snd)
+        apply TrivSqZeroExt.ext
+        · simp only [fst_add, fst_inl, fst_inr, add_zero, DualNumber.fst_mapRingHom]
+          have hn' := congrArg (fun x ↦ x.fst.fst) hn
+          change (zc.app V (Y.presheaf.map i a)).fst.fst =
+            (DualNumber.mapRingHom (DualNumber.mapRingHom (S.presheaf.map
+              ((TopologicalSpace.Opens.map zb).map i.unop).op).hom)
+              (zc.app U a)).fst.fst at hn'
+          rw [DualNumber.fst_mapRingHom, DualNumber.fst_mapRingHom] at hn'
+          exact hn'
+        · simp only [snd_add, snd_inl, snd_inr, zero_add, DualNumber.snd_mapRingHom]
+          have hn' := congrArg (fun x ↦ x.snd.snd) hn
+          change (zc.app V (Y.presheaf.map i a)).snd.snd =
+            (DualNumber.mapRingHom (DualNumber.mapRingHom (S.presheaf.map
+              ((TopologicalSpace.Opens.map zb).map i.unop).op).hom)
+              (zc.app U a)).snd.snd at hn'
+          rw [DualNumber.snd_mapRingHom, DualNumber.snd_mapRingHom] at hn'
+          exact hn' }
+  let v₀ : S.dualNumbers.toPresheafedSpace ⟶ Y.toPresheafedSpace := ⟨zb, vc⟩
+  have hι : S.dualNumbersι.toPshHom ≫ v₀ =
+      (⟨⟨⟨zb, gc⟩, gp⟩⟩ : S ⟶ Y).toPshHom := by
+    refine PresheafedSpace.ext _ _ rfl ?_
+    ext U a
+    simp only [Functor.comp_obj, Functor.op_obj, eqToHom_refl, Functor.whiskerRight_id',
+      TopCat.Presheaf.comp_app, TopCat.Presheaf.pushforward_obj_obj, NatTrans.id_app,
+      Category.comp_id]
+    change (inl (zc.app (Opposite.op U) a).fst.fst +
+      inr (zc.app (Opposite.op U) a).snd.snd).fst = gc.app _ a
+    simpa [compressRingHom] using congrArg fst (ef U a)
+  let v : S.dualNumbers ⟶ Y :=
+    { toHom := v₀
+      prop := fun x ↦ by
+        have h := PresheafedSpace.stalkMap.comp S.dualNumbersι.toPshHom v₀ x
+        rw [PresheafedSpace.stalkMap.congr_hom _ _ hι, eqToHom_refl,
+          Category.id_comp] at h
+        have hh := gp x
+        rw [h, CommRingCat.hom_comp] at hh
+        exact @isLocalHom_of_comp _ _ _ _ _ _ _ _ hh }
+  refine ⟨v, ?_, Scheme.Hom.ext' (LocallyRingedSpace.Hom.ext' hι)⟩
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  ext a : 2
+  change DualNumber.mulRingHom (inl (zc.app (Opposite.op U) a).fst.fst +
+    inr (zc.app (Opposite.op U) a).snd.snd) = zc.app _ a
+  apply TrivSqZeroExt.ext
+  · apply TrivSqZeroExt.ext
+    · simp
+    · simpa using (ez U a).symm
+  · apply TrivSqZeroExt.ext
+    · simpa using (dz U a).symm
+    · simp
+
+/-- `η ↦ εδ` identifies the infinitesimal points with the points over `S[ε][δ]` trivial for
+`ε = 0` and for `δ = 0`: such a point has `z^♯(a) = e^♯(a) + εδ d(a)` for a derivation `d`. -/
+theorem toMixed_bijective : Function.Bijective (toMixed G) := by
+  constructor
+  · intro v w h
+    apply Subtype.ext
+    apply Over.OverMorphism.ext
+    apply mixed_comp_injective
+    exact congrArg (fun z : mixedPoints G ↦ z.1.left) h
+  · intro z
+    have h₁ : (1 : Scheme.dualNumbersOver S ⟶ G).left =
+        S.dualNumbersProj ≫ unitSection G := by
+      simp [Hom.one_def, Over.toUnit_left, unitSection]
+    have he : S.dualNumbers.dualNumbersι ≫ z.1.left =
+        S.dualNumbersProj ≫ unitSection G :=
+      (congrArg (fun f ↦ f.left) ((mem_mixedPoints G).mp z.2).1).trans h₁
+    have hd : S.dualNumbersι.dualNumbers ≫ z.1.left =
+        S.dualNumbersProj ≫ unitSection G :=
+      (congrArg (fun f ↦ f.left) ((mem_mixedPoints G).mp z.2).2).trans h₁
+    obtain ⟨v, hv, hi⟩ := mixed_factorization z.1.left (unitSection G) he hd
+    have hbase : v ≫ G.hom = S.dualNumbersProj := by
+      apply mixed_comp_injective
+      rw [← Category.assoc, hv, Over.w z.1, Scheme.dualNumbersMul_comp_proj]
+      rfl
+    let a : Scheme.dualNumbersOver S ⟶ G := Over.homMk v hbase
+    have ha : a ∈ infPoints G := by
+      rw [mem_infPoints]
+      apply Over.OverMorphism.ext
+      exact hi.trans (one_left G).symm
+    refine ⟨⟨a, ha⟩, ?_⟩
+    apply Subtype.ext
+    apply Over.OverMorphism.ext
+    exact hv
+
+/-- The infinitesimal points are the mixed points, through `η ↦ εδ`. -/
+noncomputable def mixedEquiv : infPoints G ≃ mixedPoints G :=
+  Equiv.ofBijective _ (toMixed_bijective G)
+
+/-- The point `v_ε : S[ε][δ] ⟶ G` of an infinitesimal point `v`, through the projection
+forgetting `δ`. -/
+noncomputable def toε (v : infPoints G) : Scheme.dualNumbers₂Over S ⟶ G :=
+  Scheme.dualNumbersProjεOver S ≫ v.1
+
+/-- The point `v_δ : S[ε][δ] ⟶ G` of an infinitesimal point `v`, through the projection
+forgetting `ε`. -/
+noncomputable def toδ (v : infPoints G) : Scheme.dualNumbers₂Over S ⟶ G :=
+  Scheme.dualNumbersProjδOver S ≫ v.1
+
+/-- The commutator `v_ε w_δ v_ε⁻¹ w_δ⁻¹` of two infinitesimal points reduces to the identity both
+for `ε = 0` and for `δ = 0`. -/
+theorem commutator_mem_mixedPoints (v w : infPoints G) :
+    toε G v * toδ G w * (toε G v)⁻¹ * (toδ G w)⁻¹ ∈ mixedPoints G := by
+  have he : Scheme.dualNumbersιεOver S ≫ Scheme.dualNumbersProjδOver S =
+      CartesianMonoidalCategory.toUnit (Scheme.dualNumbersOver S) ≫
+        Scheme.dualNumbersιOver S := by
+    apply Over.OverMorphism.ext
+    simp [Scheme.dualNumbersιεOver, Scheme.dualNumbersProjδOver,
+      Scheme.dualNumbersιOver, Over.toUnit_left]
+  have hd : Scheme.dualNumbersιδOver S ≫ Scheme.dualNumbersProjεOver S =
+      CartesianMonoidalCategory.toUnit (Scheme.dualNumbersOver S) ≫
+        Scheme.dualNumbersιOver S := by
+    apply Over.OverMorphism.ext
+    simp [Scheme.dualNumbersιδOver, Scheme.dualNumbersProjεOver,
+      Scheme.dualNumbersιOver, Over.toUnit_left]
+  have hw : Scheme.dualNumbersιεOver S ≫ toδ G w = 1 := by
+    rw [toδ, ← Category.assoc, he, Category.assoc, (mem_infPoints G).mp w.2]
+    exact MonObj.comp_one _
+  have hv : Scheme.dualNumbersιδOver S ≫ toε G v = 1 := by
+    rw [toε, ← Category.assoc, hd, Category.assoc, (mem_infPoints G).mp v.2]
+    exact MonObj.comp_one _
+  rw [mem_mixedPoints]
+  constructor
+  · change pointsPrecomp G (Scheme.dualNumbersιεOver S) _ = 1
+    simp only [map_mul, map_inv, pointsPrecomp_apply, hw]
+    simp
+  · change pointsPrecomp G (Scheme.dualNumbersιδOver S) _ = 1
+    simp only [map_mul, map_inv, pointsPrecomp_apply, hv]
+    simp
+
+/-- The bracket of two infinitesimal points: the mixed term `εδ` of their group commutator
+`v_ε w_δ v_ε⁻¹ w_δ⁻¹` over `S[ε][δ]`. It is the restriction to the identity of the commutator
+`[ṽ, w̃]` of the left-invariant vector fields extending `v` and `w`. (blueprint: `sk-d-tangent`) -/
+noncomputable def infBracket (v w : infPoints G) : infPoints G :=
+  (mixedEquiv G).symm ⟨_, commutator_mem_mixedPoints G v w⟩
+
+/-- The Lie bracket on `Lie(G)`, transported from the infinitesimal points. -/
 noncomputable instance : Bracket (Lie G) (Lie G) where
-  bracket x y := (lieEquivTangent G).symm
-    (tangentBracket (lieEquivTangent G x) (lieEquivTangent G y))
+  bracket x y := lieEquiv G (infBracket G ((lieEquiv G).symm x) ((lieEquiv G).symm y))
 
 theorem lie_def (x y : Lie G) :
-    ⁅x, y⁆ = (lieEquivTangent G).symm
-      (tangentBracket (lieEquivTangent G x) (lieEquivTangent G y)) :=
+    ⁅x, y⁆ = lieEquiv G (infBracket G ((lieEquiv G).symm x) ((lieEquiv G).symm y)) :=
   rfl
 
-theorem lieEquivTangent_lie (x y : Lie G) :
-    lieEquivTangent G ⁅x, y⁆ = tangentBracket (lieEquivTangent G x) (lieEquivTangent G y) :=
-  (lieEquivTangent G).apply_symm_apply _
+private noncomputable def lieCoefficient (x : Lie G) :
+    ∀ U : G.left.Opens, AddMonoid.End Γ(G.left, U) :=
+  invariantCoefficient G ((lieEquiv G).symm x)
 
-theorem lie_add_left (x y z : Lie G) : ⁅x + y, z⁆ = ⁅x, z⁆ + ⁅y, z⁆ := by
-  rw [lie_def, lieEquivTangent_add, tangentBracket_mul_left, lieEquivTangent_symm_mul]
-  rfl
+private theorem lieCoefficient_injective : Function.Injective (lieCoefficient G) :=
+  (invariantCoefficient_faithful_additive G).1.comp (lieEquiv G).symm.injective
 
-theorem lie_add_right (x y z : Lie G) : ⁅x, y + z⁆ = ⁅x, y⁆ + ⁅x, z⁆ := by
-  rw [lie_def, lieEquivTangent_add, tangentBracket_mul_right, lieEquivTangent_symm_mul]
-  rfl
+private theorem lieCoefficient_add (x y : Lie G) :
+    lieCoefficient G (x + y) = lieCoefficient G x + lieCoefficient G y := by
+  unfold lieCoefficient
+  rw [lieEquiv_symm_add]
+  exact (invariantCoefficient_faithful_additive G).2.1 _ _
 
-theorem lie_self' (x : Lie G) : ⁅x, x⁆ = 0 := by
-  rw [lie_def, tangentBracket_self, lieEquivTangent_symm_one]
+private theorem lieCoefficient_zero : lieCoefficient G 0 = 0 := by
+  have h : (lieEquiv G).symm 0 = 1 :=
+    (lieEquiv G).injective (by rw [Equiv.apply_symm_apply, lieEquiv_one])
+  exact (congrArg (invariantCoefficient G) h).trans
+    (invariantCoefficient_faithful_additive G).2.2
 
-theorem lie_neg_left' (x y : Lie G) : ⁅-x, y⁆ = -⁅x, y⁆ := by
-  rw [eq_neg_iff_add_eq_zero, ← lie_add_left, neg_add_cancel, lie_def,
-    show lieEquivTangent G 0 = 1 by
-      rw [← lieEquivTangent_symm_one (G := G), Equiv.apply_symm_apply],
-    tangentBracket_one_left, lieEquivTangent_symm_one]
+private theorem lieCoefficient_bracket (x y : Lie G) :
+    lieCoefficient G ⁅x, y⁆ =
+      lieCoefficient G x * lieCoefficient G y - lieCoefficient G y * lieCoefficient G x := by
+  unfold lieCoefficient
+  rw [lie_def, Equiv.symm_apply_apply]
+  apply invariantCoefficient_of_mixed_commutator
+  exact congrArg Subtype.val ((mixedEquiv G).apply_symm_apply _)
 
-theorem lie_antisymm' (x y : Lie G) : ⁅x, y⁆ = -⁅y, x⁆ := by
-  have h := lie_self' (x + y)
-  rw [lie_add_left, lie_add_right, lie_add_right, lie_self', lie_self', zero_add, add_zero] at h
-  exact eq_neg_of_add_eq_zero_left h
+/-- The mixed-commutator bracket is additive in its first argument.
+Source: the Lie-ring paragraph of
+`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean`, blueprint `sk-d-tangent`.
 
-theorem lie_neg_right' (x y : Lie G) : ⁅x, -y⁆ = -⁅x, y⁆ := by
-  rw [lie_antisymm', lie_neg_left', neg_neg, lie_antisymm' x y, neg_neg]
+Proof: Put v = (lieEquiv G).symm x. Base change v along G → S and right-multiply the
+universal point of G by this infinitesimal point. The resulting automorphism of G[ε]
+reduces to the identity, so on every open its comorphism has the unique form
+f ↦ f + ε D_x(f). Multiplicativity makes D_x a relative derivation; restriction of
+comorphisms makes these derivations agree on overlaps. Associativity of multiplication
+makes D_x left invariant. Evaluation at the identity recovers x, so x ↦ D_x is
+injective. The product of two such automorphisms with the same ε has coefficient
+D_x + D_y, since ε² = 0. The identity has coefficient zero. Together with
+lieEquiv_mul and lieEquiv_one this gives D_(x+y) = D_x + D_y and D_0 = 0.
+For independent ε and δ the pullback of right multiplication by the commutator is
+(1+εD_x)(1+δD_y)(1-εD_x)(1-δD_y)
+= 1 + εδ(D_x D_y - D_y D_x). Here the derivations act coefficientwise, killing
+ε and δ; the inverse formulas use ε² = δ² = 0. The definition of infBracket and
+mixedEquiv, followed by evaluation at the identity, therefore identifies
+D_⁅x,y⁆ with D_x D_y - D_y D_x. These constructions are on the structure sheaf:
+no affineness, smoothness, or characteristic restriction is used.
+Now expand (D_x + D_y)D_z - D_z(D_x + D_y). Distributivity gives
+(D_x D_z - D_z D_x) + (D_y D_z - D_z D_y), which is the derivation attached to
+the right-hand side. Injectivity of the invariant extension proves the equality.
+(blueprint: lem-ag-lie-bracket-add) -/
+theorem lieBracket_add (x y z : Lie G) :
+    ⁅x + y, z⁆ = ⁅x, z⁆ + ⁅y, z⁆ := by
+  apply lieCoefficient_injective G
+  rw [lieCoefficient_add, lieCoefficient_bracket, lieCoefficient_bracket,
+    lieCoefficient_bracket, lieCoefficient_add]
+  noncomm_ring
 
-theorem lieEquivTangent_neg (x : Lie G) : lieEquivTangent G (-x) = (lieEquivTangent G x)⁻¹ := by
-  rw [eq_inv_iff_mul_eq_one, ← lieEquivTangent_add, neg_add_cancel,
-    ← lieEquivTangent_symm_one (G := G), Equiv.apply_symm_apply]
+/-- The mixed-commutator bracket is additive in its second argument.
+Source: the Lie-ring paragraph of
+`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean`, blueprint `sk-d-tangent`.
 
-theorem lie_jacobi' (x y z : Lie G) : ⁅⁅x, y⁆, z⁆ + ⁅⁅z, x⁆, y⁆ + ⁅⁅y, z⁆, x⁆ = 0 := by
-  have h := tangentBracket_hallWitt (lieEquivTangent G x) (lieEquivTangent G y)
-    (lieEquivTangent G z)
-  simp only [← lieEquivTangent_lie, ← lieEquivTangent_neg, ← lieEquivTangent_add] at h
-  have h' := congrArg (lieEquivTangent G).symm h
-  rw [Equiv.symm_apply_apply, lieEquivTangent_symm_one] at h'
-  simp only [lie_neg_left'] at h'
-  rw [← neg_add, ← neg_add, neg_eq_zero] at h'
-  exact h'
+Proof: Put v = (lieEquiv G).symm x. Base change v along G → S and right-multiply the
+universal point of G by this infinitesimal point. The resulting automorphism of G[ε]
+reduces to the identity, so on every open its comorphism has the unique form
+f ↦ f + ε D_x(f). Multiplicativity makes D_x a relative derivation; restriction of
+comorphisms makes these derivations agree on overlaps. Associativity of multiplication
+makes D_x left invariant. Evaluation at the identity recovers x, so x ↦ D_x is
+injective. The product of two such automorphisms with the same ε has coefficient
+D_x + D_y, since ε² = 0. The identity has coefficient zero. Together with
+lieEquiv_mul and lieEquiv_one this gives D_(x+y) = D_x + D_y and D_0 = 0.
+For independent ε and δ the pullback of right multiplication by the commutator is
+(1+εD_x)(1+δD_y)(1-εD_x)(1-δD_y)
+= 1 + εδ(D_x D_y - D_y D_x). Here the derivations act coefficientwise, killing
+ε and δ; the inverse formulas use ε² = δ² = 0. The definition of infBracket and
+mixedEquiv, followed by evaluation at the identity, therefore identifies
+D_⁅x,y⁆ with D_x D_y - D_y D_x. These constructions are on the structure sheaf:
+no affineness, smoothness, or characteristic restriction is used.
+Now expand D_x(D_y + D_z) - (D_y + D_z)D_x. Distributivity gives
+(D_x D_y - D_y D_x) + (D_x D_z - D_z D_x), which is the derivation attached to
+the right-hand side. Injectivity of the invariant extension proves the equality.
+(blueprint: lem-ag-lie-bracket-add-right) -/
+theorem lieBracket_add_right (x y z : Lie G) :
+    ⁅x, y + z⁆ = ⁅x, y⁆ + ⁅x, z⁆ := by
+  apply lieCoefficient_injective G
+  rw [lieCoefficient_add, lieCoefficient_bracket, lieCoefficient_bracket,
+    lieCoefficient_bracket, lieCoefficient_add]
+  noncomm_ring
 
-theorem leibniz_lie' (x y z : Lie G) : ⁅x, ⁅y, z⁆⁆ = ⁅⁅x, y⁆, z⁆ + ⁅y, ⁅x, z⁆⁆ := by
-  have j := lie_jacobi' x y z
-  have a₂ : ⁅⁅z, x⁆, y⁆ = ⁅y, ⁅x, z⁆⁆ := by
-    rw [lie_antisymm' z x, lie_neg_left', lie_antisymm' ⁅x, z⁆ y, neg_neg]
-  rw [lie_antisymm' x ⁅y, z⁆, ← a₂]
-  exact (eq_neg_of_add_eq_zero_left j).symm
+/-- The mixed-commutator bracket is alternating, in every characteristic.
+Source: the Lie-ring paragraph of
+`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean`, blueprint `sk-d-tangent`.
 
-/-- `Lie(G)` is a Lie ring. (blueprint: `sk-d-tangent`) -/
+Proof: Put v = (lieEquiv G).symm x. Base change v along G → S and right-multiply the
+universal point of G by this infinitesimal point. The resulting automorphism of G[ε]
+reduces to the identity, so on every open its comorphism has the unique form
+f ↦ f + ε D_x(f). Multiplicativity makes D_x a relative derivation; restriction of
+comorphisms makes these derivations agree on overlaps. Associativity of multiplication
+makes D_x left invariant. Evaluation at the identity recovers x, so x ↦ D_x is
+injective. The product of two such automorphisms with the same ε has coefficient
+D_x + D_y, since ε² = 0. The identity has coefficient zero. Together with
+lieEquiv_mul and lieEquiv_one this gives D_(x+y) = D_x + D_y and D_0 = 0.
+For independent ε and δ the pullback of right multiplication by the commutator is
+(1+εD_x)(1+δD_y)(1-εD_x)(1-δD_y)
+= 1 + εδ(D_x D_y - D_y D_x). Here the derivations act coefficientwise, killing
+ε and δ; the inverse formulas use ε² = δ² = 0. The definition of infBracket and
+mixedEquiv, followed by evaluation at the identity, therefore identifies
+D_⁅x,y⁆ with D_x D_y - D_y D_x. These constructions are on the structure sheaf:
+no affineness, smoothness, or characteristic restriction is used.
+For y = x the commutator derivation is D_x D_x - D_x D_x = 0 = D_0.
+Injectivity of the invariant extension proves the equality. This uses subtraction
+of an expression from itself, with no division by two, and also applies in characteristic two.
+(blueprint: lem-ag-lie-bracket-self) -/
+theorem lieBracket_self (x : Lie G) :
+    ⁅x, x⁆ = 0 := by
+  apply lieCoefficient_injective G
+  rw [lieCoefficient_bracket, lieCoefficient_zero, sub_self]
+
+/-- The mixed-commutator bracket satisfies the derivation form of the Jacobi identity.
+Source: the Lie-ring paragraph of
+`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean`, blueprint `sk-d-tangent`.
+
+Proof: Put v = (lieEquiv G).symm x. Base change v along G → S and right-multiply the
+universal point of G by this infinitesimal point. The resulting automorphism of G[ε]
+reduces to the identity, so on every open its comorphism has the unique form
+f ↦ f + ε D_x(f). Multiplicativity makes D_x a relative derivation; restriction of
+comorphisms makes these derivations agree on overlaps. Associativity of multiplication
+makes D_x left invariant. Evaluation at the identity recovers x, so x ↦ D_x is
+injective. The product of two such automorphisms with the same ε has coefficient
+D_x + D_y, since ε² = 0. The identity has coefficient zero. Together with
+lieEquiv_mul and lieEquiv_one this gives D_(x+y) = D_x + D_y and D_0 = 0.
+For independent ε and δ the pullback of right multiplication by the commutator is
+(1+εD_x)(1+δD_y)(1-εD_x)(1-δD_y)
+= 1 + εδ(D_x D_y - D_y D_x). Here the derivations act coefficientwise, killing
+ε and δ; the inverse formulas use ε² = δ² = 0. The definition of infBracket and
+mixedEquiv, followed by evaluation at the identity, therefore identifies
+D_⁅x,y⁆ with D_x D_y - D_y D_x. These constructions are on the structure sheaf:
+no affineness, smoothness, or characteristic restriction is used.
+Write A = D_x, B = D_y, C = D_z and use associative composition. The left
+side becomes ABC - ACB - BCA + CBA. The two terms on the right expand to
+ABC - BAC - CAB + CBA and BAC - BCA - ACB + CAB. Adding cancels BAC and CAB
+with their negatives and gives precisely the left side. Thus the associated
+derivations agree, and injectivity of the invariant extension proves the identity.
+(blueprint: lem-ag-lie-bracket-leibniz) -/
+theorem lieBracket_leibniz (x y z : Lie G) :
+    ⁅x, ⁅y, z⁆⁆ = ⁅⁅x, y⁆, z⁆ + ⁅y, ⁅x, z⁆⁆ := by
+  apply lieCoefficient_injective G
+  simp only [lieCoefficient_add, lieCoefficient_bracket]
+  noncomm_ring
+
+/-- `Lie(G)` is a Lie ring: the bracket is biadditive, alternating and satisfies the Jacobi
+identity, as the commutator of derivations of `𝒪_G`. (blueprint: `sk-d-tangent`) -/
 noncomputable instance : LieRing (Lie G) where
-  add_lie := lie_add_left
-  lie_add := lie_add_right
-  lie_self := lie_self'
-  leibniz_lie := leibniz_lie'
+  add_lie := lieBracket_add G
+  lie_add := lieBracket_add_right G
+  lie_self := lieBracket_self G
+  leibniz_lie := lieBracket_leibniz G
 
-theorem inr_mul_self (c : k) : (inr c : DualNumber k) * inr c = 0 := by
-  ext <;> simp
+/-! ### Rescaling infinitesimal points -/
 
-/-- The rescaling `v ↦ v^{(cε)}` of tangent vectors. -/
-noncomputable abbrev tangentScale (c : k) : pointsKer G aug₁ →* pointsKer G (aug₁ (k := k)) :=
-  tangentMap (A := DualNumber k) (π := aug₁) (inr c) (inr_mul_self c) (by simp)
+omit [GrpObj G] in
+/-- Multiplying the morphism attached to a derivation by a global function `r` multiplies the
+derivation by `r`. -/
+theorem homOfDerivation_comp_unitSmul (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) (r : Γ(S, ⊤)) :
+    homOfDerivation G g D ≫ Scheme.Modules.unitSmul r = homOfDerivation G g
+      (D.postcomp ((Scheme.Modules.pushforward g).map (Scheme.Modules.unitSmul r)).val) := by
+  rw [homOfDerivation, homOfDerivation, ← Adjunction.homEquiv_naturality_right_symm,
+    ← PresheafOfModules.Derivation.Universal.desc_comp]
+  exact congrArg _ (PresheafOfModules.sheafificationHomEquiv_symm_comp _ _ _).symm
 
-theorem lieEquivTangent_smul (c : k) (x : Lie G) :
-    lieEquivTangent G (c • x) = tangentScale c (lieEquivTangent G x) := by
+theorem dualNumbersScaleOver_comp_mem_infPoints (r : Γ(S, ⊤))
+    {v : Scheme.dualNumbersOver S ⟶ G} (hv : v ∈ infPoints G) :
+    Scheme.dualNumbersScaleOver S r ≫ v ∈ infPoints G := by
+  rw [mem_infPoints] at hv ⊢
+  rw [Scheme.dualNumbersιOver_comp_scaleOver_assoc, hv]
+
+/-- The rescaling `v ↦ v(rε)` of an infinitesimal point by a global function `r`. It is the
+multiplication by `r` on the Lie algebra (`toLie_infPointsScale`). -/
+noncomputable def infPointsScale (r : Γ(S, ⊤)) (v : infPoints G) : infPoints G :=
+  ⟨Scheme.dualNumbersScaleOver S r ≫ v.1, dualNumbersScaleOver_comp_mem_infPoints G r v.2⟩
+
+theorem toLie_infPointsScale (r : Γ(S, ⊤)) (v : infPoints G) :
+    toLie G (infPointsScale G r v) = r • toLie G v := by
+  rw [Scheme.Modules.homUnit_smul_def, toLie, toLie, Category.assoc, omegaHom_eq_homOfDerivation,
+    omegaHom_eq_homOfDerivation, homOfDerivation_comp_unitSmul]
+  refine pullbackCongr_inv_comp_homOfDerivation G _ _ _ _ fun {V} a ↦ heq_of_eq ?_
+  rw [PresheafOfModules.Derivation.postcomp_d_apply]
+  change (DualNumber.scale _ (v.1.left.app V.unop a)).snd =
+    (v.1.left.app V.unop a).snd * S.presheaf.map (homOfLE le_top).op r
+  rw [DualNumber.snd_scale, mul_comm]
+  rfl
+
+theorem lieEquiv_symm_smul (r : Γ(S, ⊤)) (x : Lie G) :
+    (lieEquiv G).symm (r • x) = infPointsScale G r ((lieEquiv G).symm x) := by
+  rw [Equiv.symm_apply_eq]
+  change _ = toLie G _
+  rw [toLie_infPointsScale]
+  exact congrArg (r • ·) ((lieEquiv G).apply_symm_apply x).symm
+
+/-- `Lie(G)` is a Lie algebra over `Γ(S, 𝒪_S)`. (blueprint: `sk-d-tangent`) -/
+noncomputable instance : LieAlgebra Γ(S, ⊤) (Lie G) where
+  lie_smul := by
+    intro r x y
+    have hs (v w : infPoints G) :
+        infBracket G v (infPointsScale G r w) = infPointsScale G r (infBracket G v w) := by
+      let d₀ := S.dualNumbers.dualNumbersScale (inl r)
+      have dbase : d₀ ≫ (S.dualNumbers.dualNumbersProj ≫ S.dualNumbersProj) =
+          S.dualNumbers.dualNumbersProj ≫ S.dualNumbersProj := by
+        simp [d₀]
+      let d : Scheme.dualNumbers₂Over S ⟶ Scheme.dualNumbers₂Over S := Over.homMk d₀ dbase
+      have he : d ≫ Scheme.dualNumbersProjεOver S = Scheme.dualNumbersProjεOver S := by
+        apply Over.OverMorphism.ext
+        exact S.dualNumbers.dualNumbersScale_comp_proj (inl r)
+      have hd : d ≫ Scheme.dualNumbersProjδOver S =
+          Scheme.dualNumbersProjδOver S ≫ Scheme.dualNumbersScaleOver S r := by
+        apply Over.OverMorphism.ext
+        change d₀ ≫ S.dualNumbersProj.dualNumbers =
+          S.dualNumbersProj.dualNumbers ≫ S.dualNumbersScale r
+        refine Scheme.Hom.ext rfl fun U ↦ ?_
+        simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+        erw [eqToHom_refl, Category.comp_id]
+        ext a : 2
+        let c := S.presheaf.map (homOfLE le_top : U ⟶ ⊤).op r
+        let c₀ := S.dualNumbers.presheaf.map (homOfLE le_top : U ⟶ ⊤).op (inl r)
+        change DualNumber.scale c₀ (DualNumber.mapRingHom (inlHom Γ(S, U) Γ(S, U)) a) =
+          DualNumber.mapRingHom (inlHom Γ(S, U) Γ(S, U)) (DualNumber.scale c a)
+        have hc₀ : c₀ = inl c := by
+          change DualNumber.mapRingHom (S.presheaf.map (homOfLE le_top : U ⟶ ⊤).op).hom
+            (inl r) = inl c
+          apply TrivSqZeroExt.ext <;> simp [c]
+        rw [hc₀]
+        apply TrivSqZeroExt.ext
+        · apply TrivSqZeroExt.ext
+          · simp only [DualNumber.mapRingHom, inlHom_apply, DualNumber.inr_eq_smul_eps,
+              RingHom.coe_mk, MonoidHom.coe_mk, OneHom.coe_mk, map_add, map_smul,
+              fst_add, DualNumber.fst_scale, fst_inl, fst_smul, DualNumber.fst_eps,
+              smul_eq_mul, mul_zero, add_zero, DualNumber.snd_scale, inl_mul]
+          · simp only [DualNumber.mapRingHom, inlHom_apply, DualNumber.inr_eq_smul_eps,
+              RingHom.coe_mk, MonoidHom.coe_mk, OneHom.coe_mk, map_add, map_smul,
+              fst_add, DualNumber.fst_scale, fst_inl, fst_smul, DualNumber.fst_eps,
+              smul_eq_mul, mul_zero, add_zero, snd_inl, DualNumber.snd_scale, inl_mul]
+        · apply TrivSqZeroExt.ext
+          · simp only [DualNumber.mapRingHom, inlHom_apply, DualNumber.inr_eq_smul_eps,
+              RingHom.coe_mk, MonoidHom.coe_mk, OneHom.coe_mk, map_add, map_smul,
+              snd_add, DualNumber.snd_scale, snd_inl, mul_zero, snd_smul, DualNumber.snd_eps,
+              mul_one, smul_eq_mul, zero_add, fst_mul, fst_inl, DualNumber.fst_scale, inl_mul]
+            exact mul_comm _ _
+          · simp only [DualNumber.mapRingHom, inlHom_apply, DualNumber.inr_eq_smul_eps,
+              RingHom.coe_mk, MonoidHom.coe_mk, OneHom.coe_mk, map_add, map_smul,
+              snd_add, DualNumber.snd_scale, snd_inl, mul_zero, snd_smul, DualNumber.snd_eps,
+              mul_one, smul_eq_mul, zero_add, snd_mul, fst_inl, smul_zero, add_zero,
+              DualNumber.fst_scale, inl_mul]
+      have hm : d ≫ Scheme.dualNumbersMulOver S =
+          Scheme.dualNumbersMulOver S ≫ Scheme.dualNumbersScaleOver S r := by
+        apply Over.OverMorphism.ext
+        change d₀ ≫ S.dualNumbersMul = S.dualNumbersMul ≫ S.dualNumbersScale r
+        refine Scheme.Hom.ext rfl fun U ↦ ?_
+        simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+        erw [eqToHom_refl, Category.comp_id]
+        ext a : 2
+        let c := S.presheaf.map (homOfLE le_top : U ⟶ ⊤).op r
+        let c₀ := S.dualNumbers.presheaf.map (homOfLE le_top : U ⟶ ⊤).op (inl r)
+        change DualNumber.scale c₀ (DualNumber.mulRingHom a) =
+          DualNumber.mulRingHom (DualNumber.scale c a)
+        have hc₀ : c₀ = inl c := by
+          change DualNumber.mapRingHom (S.presheaf.map (homOfLE le_top : U ⟶ ⊤).op).hom
+            (inl r) = inl c
+          apply TrivSqZeroExt.ext <;> simp [c]
+        rw [hc₀]
+        apply TrivSqZeroExt.ext
+        · rw [DualNumber.fst_scale, DualNumber.fst_mulRingHom, DualNumber.fst_mulRingHom,
+            DualNumber.fst_scale]
+        · rw [DualNumber.snd_scale, DualNumber.snd_mulRingHom, DualNumber.snd_mulRingHom,
+            DualNumber.snd_scale]
+          change (inl c : DualNumber Γ(S, U)) * inr a.snd = inr (c * a.snd)
+          rw [inl_mul_inr]
+          rfl
+      have hc (a b : infPoints G) :
+          Scheme.dualNumbersMulOver S ≫ (infBracket G a b).1 =
+            toε G a * toδ G b * (toε G a)⁻¹ * (toδ G b)⁻¹ :=
+        congrArg Subtype.val ((mixedEquiv G).apply_symm_apply _)
+      have hε : d ≫ toε G v = toε G v := by
+        rw [toε, ← Category.assoc, he]
+      have hδ : d ≫ toδ G w = toδ G (infPointsScale G r w) := by
+        rw [toδ, ← Category.assoc, hd, Category.assoc]
+        rfl
+      apply (mixedEquiv G).injective
+      apply Subtype.ext
+      change Scheme.dualNumbersMulOver S ≫ (infBracket G v (infPointsScale G r w)).1 =
+        Scheme.dualNumbersMulOver S ≫ Scheme.dualNumbersScaleOver S r ≫ (infBracket G v w).1
+      rw [← Category.assoc, ← hm, Category.assoc, hc, hc]
+      change _ = pointsPrecomp G d _
+      simp only [map_mul, map_inv, pointsPrecomp_apply, hε, hδ]
+    rw [lie_def, lieEquiv_symm_smul, hs, lie_def]
+    exact toLie_infPointsScale G r _
+
+/-! ### Functoriality -/
+
+variable {G} {H : Over S} [GrpObj H]
+
+theorem comp_mem_infPoints (f : G ⟶ H) [IsMonHom f] {v : Scheme.dualNumbersOver S ⟶ G}
+    (hv : v ∈ infPoints G) : v ≫ f ∈ infPoints H := by
+  rw [mem_infPoints] at hv ⊢
+  rw [← Category.assoc, hv, MonObj.one_comp]
+
+/-- A homomorphism of group schemes `f : G ⟶ H` maps infinitesimal points to infinitesimal
+points: `v ↦ v ≫ f`. -/
+noncomputable def infPointsMap (f : G ⟶ H) [IsMonHom f] : infPoints G →* infPoints H :=
+  ((IsMonHom.monoidHom f _).comp (infPoints G).subtype).codRestrict (infPoints H)
+    fun v ↦ comp_mem_infPoints f v.2
+
+@[simp]
+theorem coe_infPointsMap_apply (f : G ⟶ H) [IsMonHom f] (v : infPoints G) :
+    (infPointsMap f v : Scheme.dualNumbersOver S ⟶ H) = (v : Scheme.dualNumbersOver S ⟶ G) ≫ f :=
+  rfl
+
+/-- A homomorphism of group schemes preserves brackets of infinitesimal points: it preserves
+group commutators and commutes with `η ↦ εδ`. -/
+theorem infPointsMap_infBracket (f : G ⟶ H) [IsMonHom f] (v w : infPoints G) :
+    infPointsMap f (infBracket G v w) = infBracket H (infPointsMap f v) (infPointsMap f w) := by
+  apply (mixedEquiv H).injective
   apply Subtype.ext
-  change inv dualNumbersToSpecOver ≫ ((lieEquiv G).symm ((Scheme.ΓSpecIso (.of k)).inv c • x)).1 =
-    points.map G _ (inv dualNumbersToSpecOver ≫ ((lieEquiv G).symm x).1)
-  rw [lieEquiv_symm_smul, points.map]
-  change inv dualNumbersToSpecOver ≫ Scheme.dualNumbersScaleOver _ _ ≫ _ = _
-  have e : DualNumber.liftElem (R := k) (inr c) (inr_mul_self c) = DualNumber.scale c := by
-    ext <;> simp [DualNumber.liftElem_apply, algebraMap_eq_inl]
-  have key : inv dualNumbersToSpecOver ≫
-      Scheme.dualNumbersScaleOver (Spec (.of k)) ((Scheme.ΓSpecIso (.of k)).inv c) =
-      (Spec.map (CommRingCat.ofHom (DualNumber.liftElem (R := k) (inr c)
-        (inr_mul_self c)).toRingHom)).asOver (Spec (.of k)) ≫ inv dualNumbersToSpecOver := by
-    rw [e, IsIso.inv_comp_eq, ← Category.assoc, ← dualNumbersScaleOver_comp_dualNumbersToSpecOver,
-      Category.assoc, IsIso.hom_inv_id, Category.comp_id]
-  rw [← Category.assoc, key, Category.assoc]
+  change Scheme.dualNumbersMulOver S ≫ (infBracket G v w).1 ≫ f =
+    Scheme.dualNumbersMulOver S ≫
+      (infBracket H (infPointsMap f v) (infPointsMap f w)).1
+  have hc (K : Over S) [GrpObj K] (a b : infPoints K) :
+      Scheme.dualNumbersMulOver S ≫ (infBracket K a b).1 =
+        toε K a * toδ K b * (toε K a)⁻¹ * (toδ K b)⁻¹ := by
+    exact congrArg Subtype.val ((mixedEquiv K).apply_symm_apply _)
+  rw [← Category.assoc, hc G v w, hc H (infPointsMap f v) (infPointsMap f w)]
+  change (IsMonHom.monoidHom f _) _ = _
+  simp only [map_mul, map_inv]
+  rfl
 
-theorem tangentBracket_tangentScale (c : k) (v w : pointsKer G aug₁) :
-    tangentBracket v (tangentScale c w) = tangentScale c (tangentBracket v w) := by
-  apply tangentMul_injective
-  rw [tangentMul_tangentBracket]
-  have e₁ : tangentDel (tangentScale c w) = tangentMap (A := DualNumber (DualNumber k))
-      (π := aug₂) (algebraMap k _ c * del₂) (by ext <;> simp [algebraMap_eq_inl']) (by simp) w :=
-    kerMap_tangentMap _ _ _ _ _ _ _ _
-      (by simp [DualNumber.liftElem_apply, Algebra.smul_def, algebraMap_eq_inl]) w
-  have e₂ : tangentMul (tangentScale c (tangentBracket v w)) =
-      tangentMap (A := DualNumber (DualNumber k)) (π := aug₂) (algebraMap k _ c * (eps₂ * del₂))
-        (by ext <;> simp [algebraMap_eq_inl']) (by simp) (tangentBracket v w) :=
-    kerMap_tangentMap _ _ _ _ _ _ _ _
-      (by simp [DualNumber.liftElem_apply, Algebra.smul_def, algebraMap_eq_inl]) _
-  rw [e₁, e₂, commutator_tangentMap]
-  exact tangentMap_apply_congr (mul_left_comm _ _ _) _ _ _ _ _
+/-- Let `f : G ⟶ H` be a monomorphism of group schemes, a subgroup scheme of `H`. If the
+commutators of the points of `H` over `S[ε][δ]` factor through `G`, then the bracket of two
+infinitesimal points of `H` comes from `G`: the commutator `v_ε w_δ v_ε⁻¹ w_δ⁻¹` is `c ≫ f` for a
+point `c` of `G` over `S[ε][δ]`, which is a mixed point of `G` since `f` is a monomorphism, and
+its preimage under `η ↦ εδ` is an infinitesimal point of `G` mapping to `[v, w]`.
+(blueprint: `sk-i-restriction`) -/
+theorem infBracket_mem_range_infPointsMap (f : G ⟶ H) [IsMonHom f] [Mono f]
+    (hf : ∀ a b : Scheme.dualNumbers₂Over S ⟶ H, a * b * a⁻¹ * b⁻¹ ∈ (IsMonHom.monoidHom f _).range)
+    (v w : infPoints H) : infBracket H v w ∈ (infPointsMap f).range := by
+  obtain ⟨c, hc⟩ := hf (toε H v) (toδ H w)
+  change c ≫ f = toε H v * toδ H w * (toε H v)⁻¹ * (toδ H w)⁻¹ at hc
+  have hm : c ∈ mixedPoints G := by
+    rw [mem_mixedPoints]
+    have hh := (mem_mixedPoints H).mp (commutator_mem_mixedPoints H v w)
+    constructor
+    · apply (cancel_mono f).mp
+      rw [Category.assoc, hc, hh.1, MonObj.one_comp]
+    · apply (cancel_mono f).mp
+      rw [Category.assoc, hc, hh.2, MonObj.one_comp]
+  let a := (mixedEquiv G).symm ⟨c, hm⟩
+  refine ⟨a, ?_⟩
+  apply (mixedEquiv H).injective
+  apply Subtype.ext
+  have ha : Scheme.dualNumbersMulOver S ≫ a.1 = c :=
+    congrArg Subtype.val ((mixedEquiv G).apply_symm_apply ⟨c, hm⟩)
+  change Scheme.dualNumbersMulOver S ≫ a.1 ≫ f = _
+  rw [← Category.assoc, ha]
+  exact hc.trans (congrArg Subtype.val ((mixedEquiv H).apply_symm_apply
+    ⟨_, commutator_mem_mixedPoints H v w⟩)).symm
 
-theorem lie_smul' (c : k) (x y : Lie G) : ⁅x, c • y⁆ = c • ⁅x, y⁆ := by
-  apply (lieEquivTangent G).injective
-  rw [lieEquivTangent_lie, lieEquivTangent_smul, lieEquivTangent_smul, lieEquivTangent_lie,
-    tangentBracket_tangentScale]
+end GrpObj
 
-/-- `Lie(G)` is a Lie algebra over `k`. (blueprint: `sk-d-tangent`) -/
-noncomputable instance : LieAlgebra k (Lie G) where
-  lie_smul := lie_smul'
-end AlgebraicGeometry.GrpObj
+end InfPoints
+
+end AlgebraicGeometry

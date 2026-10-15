@@ -105,9 +105,7 @@ section Pairings
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {a : X ⟶ Y}
   [HasCompactification a] {d : ℕ}
-  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
-omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
 /-- Blueprint `prop-pod-degree-of-the-pairing`: Degree of the pairing.
 
 The *degreewise Poincaré pairing* of a Tate orientation `γ`, for `i + j = 2d`,
@@ -131,7 +129,6 @@ noncomputable def degreewisePoincarePairing (γ : TateOrientation Λ a d)
     (Linear.rightComp Λ _ ((shiftFunctorZero' (DerivedCategoryModule Λ Y) (i + (j - 2 * d))
       (by omega)).hom.app _))
 
-omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
 lemma degreewisePoincarePairing_apply (γ : TateOrientation Λ a d)
     (K : DerivedCategoryModule Λ X) (i j : ℤ) (hij : i + j = 2 * d)
     (x : 𝟙_ (DerivedCategoryModule Λ Y) ⟶ ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧)

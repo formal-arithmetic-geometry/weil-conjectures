@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected

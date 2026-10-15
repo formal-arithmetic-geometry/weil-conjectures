@@ -79,11 +79,7 @@ namespace ProEtale
 
 /-- The derived tensor product `- ⊗ᴸ - : D(X_proét) ⥤ D(X_proét) ⥤ D(X_proét)` on the unbounded
 derived category of `A`-valued pro-étale sheaves on `X`: the tensor product of the monoidal
-structure on `D(X_proét)` obtained from the K-flat left derivability structure. For
-`A = ModuleCat R` it is `K₁ ⊗ᴸ_R K₂ = P ⊗_R K₂` for a K-flat resolution `P → K₁`
-(`AlgebraicGeometry.ProEtale.isLeftDerivedFunctor₂_derivedTensor`).
-
-(blueprint: `def-weil-derived-tensor`) -/
+structure on `D(X_proét)` obtained from the K-flat left derivability structure. -/
 @[implicit_reducible]
 noncomputable def derivedTensor :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤

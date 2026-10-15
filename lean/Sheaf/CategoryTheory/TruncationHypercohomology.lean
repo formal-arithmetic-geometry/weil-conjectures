@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Sheaf.CategoryTheory.TruncationCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
-public import Sheaf.CategoryTheory.Filtration
+public import Sheaf.CategoryTheory.ImageFiltration
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import Sheaf.CategoryTheory.TruncationRawExact
 import Sheaf.CategoryTheory.TruncationQuadrantVanishing
@@ -235,11 +235,19 @@ theorem exists_truncationHypercohomology
   classical
   obtain ⟨hα, hf, hg⟩ := truncation_raw_exact F K
   let X : BigradedExactCouple B 0 := by
-    refine BigradedExactCouple.ofShifted (TruncationCouple.D F K) (TruncationCouple.E F K)
-      (TruncationCouple.alpha F K) (TruncationCouple.f F K)
-      (fun p q ↦ TruncationCouple.g F K p q ≫ eqToHom (by simp))
-      (fun p q ↦ (hα p q).choose) ?_ ?_
-      (fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (hα p q).choose_spec) ?_ ?_
+    refine
+      { D := TruncationCouple.D F K
+        E := TruncationCouple.E F K
+        alpha := TruncationCouple.alpha F K
+        f := TruncationCouple.f F K
+        g := fun p q ↦ TruncationCouple.g F K p q ≫ eqToHom (by simp)
+        alpha_f_zero := fun p q ↦ (hα p q).choose
+        f_g_zero := ?_
+        g_alpha_zero := ?_
+        exact_alpha := fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+          (hα p q).choose_spec
+        exact_f := ?_
+        exact_g := ?_ }
     · exact fun p q ↦ (hf p q).choose
     · exact fun p q ↦ (hg p q).choose
     · exact fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (hf p q).choose_spec

@@ -5,7 +5,7 @@ Authors: SHEAF group U2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
@@ -180,10 +180,7 @@ theorem exists_stalk_cardinality_bound_of_constructible
     (by simpa using hi)
   obtain ⟨c, hc, -⟩ := etaleSetInverseImageStalkGerm X (S.domain i)
     (S.immersion i) G _ t
-  have hfin : Finite (((pointSmallEtale t).sheafFiber).obj
-      ((etaleSetPullback (S.immersion i)).obj G)) :=
-    (ConcreteCategory.isFinitelyGenerated_iff_finite _).1
-      ((hS i).2.isFinitelyGenerated_sheafFiber _ t)
+  have hfin := (hS i).2 _ t
   have hfinG : Finite (((pointSmallEtale (t ≫ S.immersion i)).sheafFiber).obj G) :=
     @Finite.of_equiv _ _ hfin (Equiv.ofBijective c hc)
   have hcardG : Nat.card (((pointSmallEtale (t ≫ S.immersion i)).sheafFiber).obj G) ≤

@@ -10,10 +10,6 @@ public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitionIsIsoOfLower
 import Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage
 import Sheaf.AlgebraicGeometry.HigherDirectImageCoefficientSquare
 import Sheaf.AlgebraicGeometry.UpperStarCoefficientSquare
-import Sheaf.AlgebraicGeometry.BaseChangePullbackComparisonComp
-import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.TransitionComposition
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Naturality of the canonical target sheaf comparison
 

@@ -5,7 +5,7 @@ Authors: SHEAF group J2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLift
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction

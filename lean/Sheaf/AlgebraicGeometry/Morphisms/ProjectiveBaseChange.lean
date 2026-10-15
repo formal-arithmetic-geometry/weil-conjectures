@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
+public import Sheaf.AlgebraicGeometry.Morphisms.Projective
 import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 
 /-!

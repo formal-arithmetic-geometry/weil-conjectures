@@ -139,8 +139,10 @@ private theorem derivedCoupleMorphismStep {C : Type u} [Category.{v} C] [Abelian
   · intro p q
     have hx := (Classical.choice X.derivedMaps_exists).alpha_comm p q
     have hy := (Classical.choice Y.derivedMaps_exists).alpha_comm p q
-    rw [← derived_alpha] at hx
-    rw [← derived_alpha] at hy
+    change X.derived.alpha p q ≫ X.derivedDInclusion (p - 1) (q + 1) =
+      X.derivedDInclusion p q ≫ X.alpha p q at hx
+    change Y.derived.alpha p q ≫ Y.derivedDInclusion (p - 1) (q + 1) =
+      Y.derivedDInclusion p q ≫ Y.alpha p q at hy
     have : Mono (Y.derivedDInclusion (p - 1) (q + 1)) := by
       dsimp [derivedDInclusion]
       infer_instance
@@ -152,8 +154,10 @@ private theorem derivedCoupleMorphismStep {C : Type u} [Category.{v} C] [Abelian
   · intro p q
     have hx := (Classical.choice X.derivedMaps_exists).f_comm p q
     have hy := (Classical.choice Y.derivedMaps_exists).f_comm p q
-    rw [← derived_f] at hx
-    rw [← derived_f] at hy
+    change X.derivedEProjection p q ≫ X.derived.f p q ≫
+      X.derivedDInclusion (p + 2) (q - 1) = kernel.ι (X.d p q) ≫ X.f p q at hx
+    change Y.derivedEProjection p q ≫ Y.derived.f p q ≫
+      Y.derivedDInclusion (p + 2) (q - 1) = kernel.ι (Y.d p q) ≫ Y.f p q at hy
     have : Mono (Y.derivedDInclusion (p + 2) (q - 1)) := by
       dsimp [derivedDInclusion]
       infer_instance
@@ -171,8 +175,12 @@ private theorem derivedCoupleMorphismStep {C : Type u} [Category.{v} C] [Abelian
   · intro p q
     have hx := (Classical.choice X.derivedMaps_exists).g_comm p q
     have hy := (Classical.choice Y.derivedMaps_exists).g_comm p q
-    rw [← derived_g] at hx
-    rw [← derived_g] at hy
+    change factorThruImage (X.alpha (p + 1) (q - 1)) ≫ X.derived.g p q =
+      X.gToCycles (p + 1) (q - 1) ≫
+        X.derivedEProjection ((p + 1) + s) ((q - 1) - s) ≫ eqToHom _ at hx
+    change factorThruImage (Y.alpha (p + 1) (q - 1)) ≫ Y.derived.g p q =
+      Y.gToCycles (p + 1) (q - 1) ≫
+        Y.derivedEProjection ((p + 1) + s) ((q - 1) - s) ≫ eqToHom _ at hy
     have hc : tD (p + 1) (q - 1) ≫ Y.gToCycles (p + 1) (q - 1) =
         X.gToCycles (p + 1) (q - 1) ≫ k ((p + 1) + s) ((q - 1) - s) := by
       apply (cancel_mono (kernel.ι (Y.d ((p + 1) + s) ((q - 1) - s)))).mp

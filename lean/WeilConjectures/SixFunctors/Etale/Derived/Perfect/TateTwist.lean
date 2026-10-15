@@ -40,7 +40,6 @@ open Scheme
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ] (X : Scheme.{u})
-  [HasInvertibleExponent Λ X]
 
 /-- Blueprint `lem-sf-twist-interchange`: Internal Hom with an invertible twist.
 
