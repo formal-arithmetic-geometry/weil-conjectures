@@ -1,6 +1,6 @@
 # Work queue
 
-30 items; claim with `tools/claim.py next <group> [--stage N]`.
+28 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (30)
+## Stage 3: modules to prove (28)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -35,12 +35,10 @@
 | `Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 6 | 1 | proof |
-| `Sheaf.Algebra.Homology.FunctorialObjectResolution` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedCounit` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleClosedAbelianFilteredColimits` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSpecializationAffineCoordinates` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSpecializationUnitComparison` | 8 | 1 | proof |
-| `Sheaf.CategoryTheory.GeometricModuleConstruction` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
 Also listed above and claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
