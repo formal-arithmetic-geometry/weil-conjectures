@@ -824,6 +824,33 @@ noncomputable abbrev overlapSiteInverse {X : Scheme.{u}} (U : X.Opens) :
       SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) :=
   (Scheme.Modules.overEquiv U).inverse
 
+/-- Restriction on the localized open site commutes with returning to the
+scheme open, up to the unit of the smaller-open equivalence.
+Source: Stacks Project, Tags 08BV and 05RU. Underived overlap restriction is
+the inverse equivalence on the larger open, followed by over-site restriction
+and the forward equivalence on the smaller open. Inserting the smaller-open
+unit identifies over-site restriction after inverse equivalence with this
+composite followed by the smaller-open inverse equivalence. The exact-derived
+functor comparison transports that natural isomorphism to derived categories. -/
+noncomputable def openSiteOverlapIso (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
+    (overlapSiteInverse U).mapDerivedCategory ⋙
+      (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory ≅
+    (schemeOpenOverlapRestriction X i).mapDerivedCategory ⋙
+      (overlapSiteInverse W).mapDerivedCategory := by
+  let eW := Scheme.Modules.overEquiv W
+  let L := overlapSiteInverse U
+  let S := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i
+  let H := schemeOpenOverlapRestriction X i
+  let M := overlapSiteInverse W
+  let h : L ⋙ S ≅ H ⋙ M :=
+    (Functor.rightUnitor (L ⋙ S)).symm ≪≫
+      Functor.isoWhiskerLeft (L ⋙ S) eW.unitIso ≪≫
+        (Functor.associator (L ⋙ S) eW.functor eW.inverse).symm
+  exact (Functor.mapDerivedCategoryCompIso L S).symm ≪≫
+    Functor.mapDerivedCategoryNatIso h ≪≫
+      Functor.mapDerivedCategoryCompIso H M
+
+
 /-- Natural comparison between the canonical open-site overlap functor and the
 scheme pullback at the next stage. The open-site equivalence cancels by its
 counit; the remaining functors agree by the cartesian component equation and
