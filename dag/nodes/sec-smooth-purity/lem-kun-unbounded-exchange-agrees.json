@@ -3,38 +3,218 @@
  "blueprint": {
   "is": "lem-kun-unbounded-exchange-agrees",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The unbounded exchange extends the bounded exchange",
- "statement": "For $K\\in\\Dplus(X_{\\Et})$ the exchange morphism\n$\\Ex_{\\square,K}$ of [def-kun-unbounded-exchange] is the exchange\nmorphism of [def-weil-pbc-derived-exchange]; in particular for\nsheaves (complexes concentrated in degree $0$) with\n$\\Lambda$-module structure it agrees with the exchange morphism of\n[def-weil-pbc-underived-exchange].",
+ "statement": "Let $\\square$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$ and $g':X'\\to X$. Use the derived categories of [def-weil-pbc-derived-categories] and their full bounded below subcategories [def-weil-pbc-bounded-derived-subcategories]. Write $\\iota_T:D^+(T_{\\Et})\\hookrightarrow D(T_{\\Et})$ for the inclusions. For $K\\in D^+(X_{\\Et})$, the unbounded exchange $\\Ex^{\\mathrm{unb}}_{\\square,\\iota_XK}$ of [def-kun-unbounded-exchange] at coefficient ring $\\mathbf Z$ equals $\\iota_{Y'}(\\Ex^+_{\\square,K})$, where $\\Ex^+$ is the exchange of [def-weil-pbc-derived-exchange], under the canonical comparisons\n$$u^{-1}\\iota_V\\cong\\iota_Uu^{-1},\\qquad Ru_{*,\\mathrm{unb}}\\iota_U\\cong\\iota_VRu_{*,+}\\quad(u:U\\to V)\n$$\nfor the inverse images [def-weil-pbc-derived-inverse-image] and direct images [def-weil-pbc-direct-image]. These are the comparisons that compute both direct images on the same bounded below injective representative.\n\nFor any commutative ring $\\Lambda$ and any sheaf $F\\in\\Mod(X_{\\Et},\\Lambda)$, place $F$ in degree zero. Under the canonical degree-zero identifications\n$$\n\\mathcal H^0(g^{-1}Rf_*F[0])\\cong g^{-1}f_*F,\\qquad\n\\mathcal H^0(Rf'_*g'^{-1}F[0])\\cong f'_*g'^{-1}F,\n$$\nthe map $\\mathcal H^0(\\Ex^{\\mathrm{unb},\\Lambda}_{\\square,F[0]})$ is the $\\Lambda$-linear underived exchange. Here inverse image, direct image, and their adjunction are those on constant-ring module sheaves [prop-weil-pbc-inverse-image-modules-exact], [def-weil-pbc-direct-image]; the underived exchange is the mate of $g'^{-1}\\varepsilon_f\\circ\\theta_\\square$ in these module categories. Its underlying abelian morphism, through the canonical coefficient comparisons [lem-weil-pbc-module-abelian-underived-exchange], is the map of [def-weil-pbc-underived-exchange]. The identifications in this paragraph are induced by the augmentations into nonnegative injective resolutions. No assertion identifies the entire derived direct image of a sheaf with its ordinary direct image.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-unbounded-exchange-agrees.md",
   "place": "node lem-kun-unbounded-exchange-agrees, order 1667"
  },
  "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-bounded-derived-subcategories",
   "def-kun-unbounded-exchange",
   "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-module-abelian-underived-exchange",
   "def-weil-pbc-underived-exchange"
  ],
  "proof": [
   {
-   "text": "Both morphisms are defined as the same adjoint mate of the same\ncomposite and are independent of the K-injective model\n(lem:weil-pbc-derived-exchange-replacement), so they agree.",
-   "uses": [],
-   "elementary": null
+   "text": "Construct the comparison functors before comparing morphisms. Work either with abelian sheaves or with constant-ring $\\Lambda$-module sheaves. The latter have enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]. For $K\\in D^+$ choose a bounded below injective complex $I$ and $K\\cong QI$; $I$ is K-injective [lem-weil-pbc-dplus-injective-representative]. The bounded derived direct image is represented by $Q(u_*I)$ [def-weil-pbc-direct-image], The functor $Q\\circ C(u_*)$ on homotopy categories is triangulated: applying the additive $u_*$ to the finite direct-sum matrices defining a mapping cone gives the same cone, so cone triangles and their isomorphic copies are preserved. Every complex has a K-injective resolution [prop-weil-pbc-kinjective-resolutions-exist], so the unbounded one exists and has the same representative, with its right-derived comparison unit, by [lem-weil-pbc-kinjective-total-derived]. Comparison morphisms between K-injective representatives are unique up to homotopy and are homotopy equivalences when they represent isomorphisms [lem-weil-pbc-kinjective-hom-derived]. Applying the additive $u_*$ preserves a homotopy and a homotopy inverse (apply it to the equations defining them), so these identifications give natural comparison isomorphisms, not choices of unrelated objectwise isomorphisms. The complex $u_*I$ is still bounded below since $u_*0=0$. Inverse image is the restriction of its termwise unbounded functor [def-weil-pbc-derived-inverse-image]. Thus all endpoints of the exchange on a bounded below input lie in $D^+$, and both right derived functors and both inverse images are compared canonically.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-derived-inverse-image",
+    "prop-weil-pbc-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective), 070I (lemma-K-injective), 070K (lemma-enough-K-injectives-implies); exact inverse image: sites-cohomology.tex, Section 0735 (section-base-change-map)"
+   }
+  },
+  {
+   "text": "The adjunction comparison includes its unit and counit. For an edge $u$, use the exact adjunction $u^{-1}\\dashv u_*$ [prop-weil-pbc-inverse-image-modules-exact] (including $\\Lambda=\\mathbf Z$). If $I$ is K-injective, $u_*I$ is K-injective [lem-weil-pbc-right-adjoint-preserves-kinjective]. For every complex $M$, the canonical derived Hom bijection is computed as\n$$\n\\operatorname{Hom}_{D(V)}(QM,Q(u_*I))\n\\cong\\operatorname{Hom}_{K(V)}(M,u_*I)\n\\cong\\operatorname{Hom}_{K(U)}(u^{-1}M,I)\n\\cong\\operatorname{Hom}_{D(U)}(Q(u^{-1}M),QI).\n$$\nThe outside arrows are [lem-weil-pbc-kinjective-hom-derived], and the middle arrow is the inverse of the termwise adjunction of [lem-weil-pbc-termwise-adjunction-homotopy]. In particular the middle arrow sends $b$ to $\\varepsilon_I\\circ u^{-1}b$. The exact termwise inverse image is also its own left derived functor on $D$ and $D^+$ [lem-weil-pbc-exact-functor-derived-functor]. This is the canonical derived adjunction of [lem-pc-derived-adjoint-functors], computed through its exact left adjoint and K-injective right-adjoint model. On bounded below representatives exactly the same three arrows compute the bounded adjunction: $D^+$ is full [def-weil-pbc-bounded-derived-subcategories]. The identity of $Q(u_*I)$ therefore has transpose $Q(\\varepsilon_I)$ in both constructions. Likewise, if $u^{-1}M\\to J$ is a K-injective replacement, the transpose of its class is represented by $M\\xrightarrow{\\eta_M}u_*u^{-1}M\\to u_*J$. For abelian sheaves these are precisely the two characterizing properties of [prop-weil-pbc-derived-inverse-image-adjunction]. It follows that both units and counits coincide under the natural comparisons from step 1; this conclusion uses the displayed bijection, rather than uniqueness of right-adjoint objects without their adjunction data.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-pc-derived-adjoint-functors",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 070I (lemma-K-injective), 0DVC (lemma-pre-derived-adjoint-functors), 09T5 (lemma-derived-adjoint-functors); sites-cohomology.tex Tag 07A6 (lemma-adjoint)"
+   }
+  },
+  {
+   "text": "For abelian coefficients, the bounded square isomorphism is explicitly the restriction of the unbounded one, both being the localized termwise $\\theta_\\square$ [def-weil-pbc-derived-square-iso]. The unbounded square map used in [def-kun-unbounded-exchange] at $\\mathbf Z$ is this same map. Consequently, under step 1's endpoint comparisons, its transpose is\n$$\nf'^{-1}g^{-1}Rf_*K\\xrightarrow{\\theta^D_\\square}g'^{-1}f^{-1}Rf_*K\\xrightarrow{g'^{-1}\\varepsilon^D_{f,K}}g'^{-1}K.\n$$\nBy step 2 the counit here is the bounded counit, so this is exactly the transpose specified in [def-weil-pbc-derived-exchange]. The transpose correspondence is injective [def-weil-pbc-adjunction-mate], hence the two exchange morphisms agree. Equivalently substitute the same $\\eta_{f'}$, $\\theta^D_\\square$ and $\\varepsilon_f$ into the explicit unit-square-counit composite in the two definitions. This proves the first clause with the comparison isomorphisms included.",
+   "uses": [
+    "def-weil-pbc-derived-square-iso",
+    "def-kun-unbounded-exchange",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change), with Tag 0736 (lemma-base-change-map-flat-case); blueprint lem-kun-unbounded-exchange-agrees, Proof, same adjoint mate sentence"
+   }
+  },
+  {
+   "text": "Compute the unbounded module exchange in a form usable on a sheaf. Let $I$ be a K-injective representative of $K$ and let $j:g'^{-1}I\\to J$ be a quasi-isomorphism with $J$ K-injective. The underived transpose is specified by [def-weil-pbc-underived-exchange]; it is a module morphism by [lem-weil-pbc-underived-exchange-module-linear], and the module adjunction has the same unit and counit on underlying abelian sheaves by [prop-weil-pbc-inverse-image-modules-exact]. Apply this module mate $\\Ex^0$ termwise and put $e=f'_*(j)\\circ\\Ex^0_I:g^{-1}f_*I\\to f'_*J$. The module adjunction and square maps are natural [prop-weil-pbc-inverse-image-modules-exact], [def-kun-unbounded-exchange]; the mate definition [def-weil-pbc-adjunction-mate] consequently gives chain maps and, in the homotopy category,\n$$\n\\varepsilon_{f',J}\\circ f'^{-1}e\n=j\\circ\\varepsilon_{f',g'^{-1}I}\\circ f'^{-1}\\Ex^0_I\n=j\\circ g'^{-1}\\varepsilon_{f,I}\\circ\\theta_{\\square,f_*I}.\n$$\nThe first equality is naturality of the counit; the second is the defining transpose identity for the underived mate. Localize this equality. Step 2 computes the derived counit on $J$ and on $I$ by the displayed termwise counits, and [def-kun-unbounded-exchange] computes the square comparison termwise. Thus the transpose of $Q(e)$, using $Q(j)$ to identify $Q(g'^{-1}I)$ with $QJ$, is exactly the defining transpose of the unbounded exchange. Injectivity of the adjunction bijection proves that $Q(e)$ represents it. This argument works for all constant-ring module coefficients and does not assert that $g'^{-1}I$ is K-injective.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-underived-exchange-module-linear",
+    "def-kun-unbounded-exchange",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change), calculation of the adjoint; Tag 0736 (lemma-base-change-map-flat-case), comparison of resolutions"
+   }
+  },
+  {
+   "text": "Now let $K=F[0]$ in module sheaves. Choose nonnegative injective resolutions $s:F[0]\\to I$ and $t:g'^{-1}F[0]\\to J$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero], using enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]; both complexes are K-injective [lem-weil-pbc-dplus-injective-representative]. Exactness of $g'^{-1}$ [prop-weil-pbc-inverse-image-modules-exact] makes $g'^{-1}s$ a quasi-isomorphism: the natural comparison of [lem-weil-pbc-exact-functor-complex-cohomology] identifies its cohomology maps with the inverse images of the isomorphisms induced by $s$. The bijectivity for maps into $J$ in [lem-weil-pbc-kinjective-hom-derived] gives a homotopy class $j:g'^{-1}I\\to J$ whose localization is $Q(t)Q(g'^{-1}s)^{-1}$. Its composite with $g'^{-1}s$ is homotopic to $t$. In fact the equality $j\\circ g'^{-1}s=t$ is strict for any representative of this class: a homotopy from a map out of $g'^{-1}F[0]$ into the nonnegative complex $J$ has its only possible component in $J^{-1}=0$. The localized $j$ is invertible, so $j$ is a quasi-isomorphism. Thus this is an allowed choice in step 4, now with augmentations whose degree-zero behavior is specified.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective), 070I (lemma-K-injective)"
+   }
+  },
+  {
+   "text": "Naturality of the underived module mate gives\n$$\n\\Ex^0_I\\circ g^{-1}f_*s=f'_*g'^{-1}s\\circ\\Ex^0_F,\n\\qquad e\\circ g^{-1}f_*s=f'_*t\\circ\\Ex^0_F.\n$$\nFor completeness the naturality assertion follows by transposing the two sides of the first equality: naturality of $\\theta_\\square$ and $\\varepsilon_f$ makes both transposes $g'^{-1}(s\\circ\\varepsilon_{f,F})\\circ\\theta_{\\square,f_*F}$; the adjunction bijection is injective [def-weil-pbc-adjunction-mate]. The second equality uses $j g'^{-1}s=t$ from step 5. Since $f_*$ and $f'_*$ on modules are left exact [lem-weil-pbc-module-direct-image-left-exact], their augmentations induce the isomorphisms $f_*F\\cong\\mathcal H^0(f_*I)$ and $f'_*g'^{-1}F\\cong\\mathcal H^0(f'_*J)$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero]. Exactness of $g^{-1}$ [prop-weil-pbc-inverse-image-modules-exact] and the natural cohomology comparison [lem-weil-pbc-exact-functor-complex-cohomology] identify the first of these after $g^{-1}$ with $g^{-1}f_*F\\cong\\mathcal H^0(g^{-1}f_*I)$; the comparison respects the augmentation because it is induced on kernels. Taking $\\mathcal H^0$ of the second displayed equality therefore identifies $\\mathcal H^0(Qe)$ with $\\Ex^0_F$. Step 4 identifies $Qe$ with the unbounded exchange. Finally [lem-weil-pbc-module-abelian-underived-exchange] identifies this fixed module mate, after forgetting and the specified inverse/direct-image coefficient comparisons, with [def-weil-pbc-underived-exchange]. This proves precisely the degree-zero sheaf clause.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-underived-exchange-module-linear",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-module-abelian-underived-exchange",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TD (lemma-left-exact-higher-derived), part (3), the kernel computation; homology.tex Tag 010N (lemma-exact-functor); sites-cohomology.tex Tag 07A7 (remark-base-change)"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-derived-exchange-replacement"
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-derived-inverse-image",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pc-derived-adjoint-functors",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-pbc-derived-square-iso",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-abelian-underived-exchange",
+  "lem-weil-pbc-underived-exchange-module-linear",
+  "def-weil-pbc-underived-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-unbounded-exchange-agrees.md",
-  "place": "## Proof"
+  "place": "Proof, expanded same-mate argument; corrected sheaf clause by the explicit augmentation calculation of Stacks 05TD(3)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedBaseChangeMap|derivedPlus|derivedAdjunctionPlus",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no Mathlib declaration with these names"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of unbounded and bounded below derived base change transformations for sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unbounded derived base change exchange for etale sheaves restricts to the bounded below exchange and its zeroth cohomology is the underived base change map",
+   "results": "KaehlerDifferential.isBaseChange_of_formallyEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex; Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange; RingHom.Etale.isStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match: formally etale rings, Kaehler differential base change and algebraic cotangent complexes; not derived sheaf exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-16",
+   "verdict": "no match: generic mateEquiv and mate identities only; no comparison of the specified derived functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived adjunction between an exact functor and a right derived functor is compatible with the full inclusion of bounded below derived categories",
+   "results": "CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'; CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit; CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived'_counit",
+   "date": "2026-10-16",
+   "verdict": "no match: generic derived adjunctions, their counit formulas and exact-functor comparisons; not bounded versus unbounded exchange compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*[Pp]lus|[Bb]ase[Cc]hange.*[Uu]nbounded",
+   "results": "7 hits: Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/CartanCriterion.lean; Mathlib/Algebra/Lie/CartanCriterion.lean",
+   "date": "2026-10-15",
+   "verdict": "No exact match: seven hits, all in Lie solvability/Cartan criterion and referring to derived series under scalar extension, not derived categories of sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction obtained by deriving an exact left adjoint and a right adjoint has unit and counit compatible with restriction to bounded below complexes",
+   "results": "8 hits: CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived'_unit; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedε",
+   "date": "2026-10-15",
+   "verdict": "No exact match: generic derived adjunctions and their unit/counit factorization identities; these do not state the scheme exchange comparison or its degree-zero assertion. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "1 hits: CategoryTheory.Adjunction.derived_counit",
+   "date": "2026-10-15",
+   "verdict": "No exact match: derived_counit is a generic derived-adjunction counit identity, not the bounded/unbounded exchange comparison."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -62,5 +242,78 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-unbounded-exchange-agrees",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported sheaf clause equated derived morphisms with sheaf morphisms without taking H^0. Replaced it by the precise degree-zero assertion, made abelian versus module coefficients explicit, constructed canonical bounded/unbounded comparisons on common injective representatives, checked units and counits through Hom bijections, and calculated the augmented termwise mate. Reused existing generic infrastructure; no new nodes. No exact project declaration attaches: DerivedUnbounded.lean still lists restriction to D+ as a TODO.",
+  "blueprint": [
+   "Proof: same adjoint mate of the same composite; steps 1-3 supply the functor, adjunction and square comparisons hidden by that sentence.",
+   "Statement: in particular for sheaves; steps 4-6 prove the corrected H^0 assertion with constant-ring module coefficients.",
+   "Proof: independent of the K-injective model; step 1 proves compatibility using homotopy-unique comparison classes rather than relying on the imported replacement paragraph."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic resolution, exact-functor, adjunction, or coefficient-comparison tool used in the explicit common-model mate and degree-zero calculation; this Kunneth unit has no replacement for that infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic resolution, exact-functor, adjunction, or coefficient-comparison tool used in the explicit common-model mate and degree-zero calculation; this Kunneth unit has no replacement for that infrastructure."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic resolution, exact-functor, adjunction, or coefficient-comparison tool used in the explicit common-model mate and degree-zero calculation; this Kunneth unit has no replacement for that infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic resolution, exact-functor, adjunction, or coefficient-comparison tool used in the explicit common-model mate and degree-zero calculation; this Kunneth unit has no replacement for that infrastructure."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic resolution, exact-functor, adjunction, or coefficient-comparison tool used in the explicit common-model mate and degree-zero calculation; this Kunneth unit has no replacement for that infrastructure."
+   },
+   {
+    "node": "prop-weil-pbc-derived-inverse-image-adjunction",
+    "why": "Generic resolution, exact-functor, adjunction, or coefficient-comparison tool used in the explicit common-model mate and degree-zero calculation; this Kunneth unit has no replacement for that infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic resolution, exact-functor, adjunction, or coefficient-comparison tool used in the explicit common-model mate and degree-zero calculation; this Kunneth unit has no replacement for that infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-underived-exchange",
+    "why": "Generic resolution, exact-functor, adjunction, or coefficient-comparison tool used in the explicit common-model mate and degree-zero calculation; this Kunneth unit has no replacement for that infrastructure."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Generic existence of K-injective resolutions verifies the everywhere-defined hypothesis for the total-derived-functor comparison in step 1."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor derivability verifies that the termwise inverse image is the left derived functor in both adjunctions; no Kunneth-unit statement supplies this property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-kinjective-total-derived",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pc-derived-adjoint-functors",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-abelian-underived-exchange",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-4edf9df8f",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-4edf9df8f (reviewer sub-agent of L); spot-checked: The mathematical split and six proof steps check out, including the corrected H^0 formulation, cited Stacks sources, coefficient categories, edge cases, and duplicate/search checks. The statement contains a TeX/JSON escape defect in its first comparison: `\\\\nu^{-1}\\\\iota_V` is stored/rendered incorrectly; it must be `u^{-1}\\\\iota_V`. Corrected whole node: `fixes/dag/nodes/sec-smooth-purity/lem-kun-unbounded-exchange-agrees.json`. Full review: `review.md`.; 1 file(s) fixed by the reviewer"
+ }
 }
