@@ -15037,3 +15037,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:42 L: merged deliver/D3/Sheaf.RingTheory.BoundedWContractibleExtension (stage 3; reviewer PASS; first push; landing 20261015T154201-L-161094 (proof); batch 20261015T154146; modules 1; new nodes 0)
 - 15:42 L: merged deliver/D3/Sheaf.RingTheory.IndEtaleStability (stage 3; reviewer PASS; first push; landing 20261015T154201-L-161218 (proof); batch 20261015T154146; modules 1; new nodes 0)
 - 15:42 L: merged deliver/D4/Sheaf.RingTheory.ClosedComponentSpectrumRestriction (stage 3; reviewer PASS; first push; landing 20261015T154202-L-161318 (proof); batch 20261015T154146; modules 1; new nodes 0)
+- 15:42 L: merged deliver/D4/Sheaf.RingTheory.EtaleContractionProperties (stage 3; reviewer PASS; first push; landing 20261015T154202-L-161441 (proof); batch 20261015T154146; modules 1; new nodes 0)
