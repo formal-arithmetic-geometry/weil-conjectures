@@ -19,35 +19,30 @@
  },
  "proof": [
   {
-   "text": "Apply qcoh_ordinary_tensor_resolution_coordinates_witness to obtain the affine coordinate family c and, for every basic inclusion, one augmented semilinear tensor comparison satisfying the normalized section restriction equation.",
+   "text": "Apply CochainComplex.exists_isKFlatResolution to N[0], obtaining F, s, K-flatness and a quasi-isomorphism. This witness is used only in the theorem proof. Discard the unused termwise flatness and epimorphism conclusions.",
    "uses": [
-    "new-j1-qcoh-ordinary-tensor-resolution-coordinates-witness"
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false
   },
   {
-   "text": "Fix a supplied comparison b,a,k and the witness comparison b',a',k'. Injectivity of sN_V and their two section equations imply b=b'. Injectivity of sM_V and their augmentation equations imply that a and a' have the same augmentation. Restriction of scalars is exact. Apply the existing ModuleCat.augmented_lift_homotopy from QuotientTensorResolutionLiftHomotopy, now public, to these augmented lifts into the restricted exact resolution. The cited generic augmented lifting node states this helper exactly: the restricted target need not be projective. No duplicate augmented lifting induction is proved in this item.",
+   "text": "For each U take the existing, explicitly constructed tensorResolutionCoordinateSections for P_U, K and F. Apply tensorResolutionCoordinateSections_naturality to the supplied b,a,k and ha,hb,hk. Its fixed-coordinate equation is exactly the required restriction equation. The proof does not need comparison witnesses, their existence or homotopy independence.",
    "uses": [
-    "new-t4-augmented-resolution-lift-homotopy"
+    "new-g2-existing-qcoh-tensor-resolution-coordinate-naturality"
    ],
    "elementary": false
-  },
-  {
-   "text": "For each homotopy component form its semilinear tensor map with b using TensorProduct.map. On pure tensors the homotopy identity is the original identity tensored with b(y); use the supplied formulas for k and k' and tensor additivity. Use Mathlib Homotopy.prevD_chainComplex for the previous differential, and TensorProduct.ext for equality on all tensors. The private helper semilinear_tensor_resolution_lift_homotopy proves this construction without holes. Homotopy.homologyMap_eq identifies H_n(k) with H_n(k'). Substitute this equality into the witness restriction equation. No assumption on flatness of the ring map, boundedness of K, nonzero coefficients or n>0 enters this transfer.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "new-j1-qcoh-ordinary-tensor-resolution-coordinates-witness",
-  "new-t4-augmented-resolution-lift-homotopy"
+  "lem-pc-kflat-resolution",
+  "new-g2-existing-qcoh-tensor-resolution-coordinate-naturality"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "T4",
+  "group": "G2",
   "date": "2026-10-15",
-  "document": "https://stacks.math.columbia.edu/tag/00LS",
-  "place": "Tag 00LS(2). Repair of the 2026-10-15 duplicate-theorem return: reuse the existing generic augmented homotopy helper in its original module and Mathlib Homotopy.prevD_chainComplex; tensor the homotopy to transfer the existing normalized witness section square. Metadata repair for reviewer X-fe77b: attach the existing coordinate witness and the exact generic augmented lifting theorem as separate nodes, rather than cite the quotient-specialized theorem for generic lifting."
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), using K-flat replacement (06YS) and the existing normalized coordinate construction and fixed-coordinate naturality statement (06YT, 01I9). Second reading reuses these declarations rather than duplicating their chart API."
  },
  "mathlib_searches": [
   {
@@ -124,12 +119,12 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "X-26d46",
-  "group": "T4",
+  "reviewer": "X-294f5",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261015T034824-L-298475",
+  "landing": "20261015T052200-L-1265930",
   "kind": "interface",
-  "note": "independent Codex review: Matched four DAG signatures and proof dependencies with Lean, verified unchanged existing signatures, compiled both deliveries and all five direct importers, and checked axioms and original/adapted shared modules."
+  "note": "independent Codex review: Delivered Lean/DAG files matched the stated node changes; compilation passed, forced adaptation was necessary and minimal, and importer checks passed."
  },
  "lean_audit": {
   "master": {

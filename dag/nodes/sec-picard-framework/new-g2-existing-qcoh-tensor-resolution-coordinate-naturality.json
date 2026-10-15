@@ -1,0 +1,142 @@
+{
+ "id": "new-g2-existing-qcoh-tensor-resolution-coordinate-naturality",
+ "kind": "statement",
+ "title": "Restriction naturality of the existing normalized tensor-resolution coordinates",
+ "statement": "Let Y be a scheme [def-pc-scheme], M,N quasi-coherent module sheaves [pqf-def-coherent, def-weil-sheaf-of-modules-category], and choose affine coefficient modules MA_U,NA_U, section equivalences sM_U,sN_U and projective resolutions P_U. Let K,F be K-flat complexes [def-pc-kflat-complex] with quasi-isomorphisms q:K -> M[0], s:F -> N[0] [def-pc-quasi-iso-modules]. For n>=0, use the existing tensorResolutionCoordinateSections c_U:H_n(P_U tensor NA_U) -> Gamma(U,H^{-n}(Tot(K tensor N[0]))) [def-pc-tensor-complex-sheaves, def-weil-pbc-module-chain-complex-homology]. For any affine inclusion V subset U with restriction phi, let b:NA_U -> NA_V be phi-semilinear, a:P_U -> Res_phi(P_V) and k:P_U tensor NA_U -> Res_phi(P_V tensor NA_V) chain maps. If sM_V(pi_V(a_0 x))=res_M(sM_U(pi_U x)), sN_V(b y)=res_N(sN_U y), and k_j(x tensor y)=a_j(x) tensor b(y), then res(c_U x)=c_V(e(H_n(k)(x))) for every x, where e is the exact restriction-of-scalars homology comparison. This equation concerns the fixed constructed coordinates and requires no choice of comparison witnesses.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), affine tensor computation, with 06YT K-flat tensor invariance and 01I9 affine pullback. Existing declaration in QCohTensorResolutionCoordinateSectionsNaturality; metadata attachment only."
+ },
+ "proof": [
+  {
+   "text": "The augmentation equation ha identifies the sheafified degree-zero augmentation after restriction. Extend the resulting complex square degreewise, using the zero terms in positive cochain degrees. The coefficient equation hb identifies the normalized coefficient sheaf isomorphisms after restriction, by the affine tilde-Gamma unit and counit equations.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The formula hk identifies the sheafified tensor comparison with the tensor of the preceding maps: verify on pure tensors in every chain degree and use tensor extensionality, then pass through the chain-to-cochain extension and the total-tensor isomorphism.",
+   "uses": [
+    "lem-pc-affine-chart-total-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the two normalized tensor zigzags and compare them using a common K-flat roof for their first coefficients and the fixed second resolution F. Both augmentation equations give commuting squares; K-flat tensor invariance makes the zigzag legs quasi-isomorphisms. Homology therefore gives a commuting square after cancelling the invertible legs. Exact tilde homology, the chain-to-cochain homology identification, and affine sections units convert it to the displayed equation. Exact restriction of scalars supplies e. This works for n=0, unbounded K, zero coefficients, identity restrictions and empty affine opens.",
+   "uses": [
+    "lem-pc-open-kflat-tensor-homology-comparison",
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-open-kflat-tensor-homology-comparison",
+  "lem-pc-affine-chart-total-tensor",
+  "new-affine-derived-tilde-homology-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G2",
+  "date": "2026-10-15",
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Attach existing T3 proof obligation; its original docstring describes the naturality squares. Expanded here without relying on its two currently nonexistent helper names."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact sheafification identifies affine projective resolution tensor homology naturally under open restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "No exact Mathlib statement. Local source search found the already-stated Sheaf coordinate naturality theorem; attach and reuse it without a new Lean declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of affine tensor homology coordinates under restriction of quasi-coherent modules and augmented projective resolution maps",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Hom.naturality_assoc, PresheafOfModules.Monoidal.tensorObj_map_tmul, ModuleCat.Tilde.toOpen_res, SheafOfModules.Presentation.map_π_eq, PresheafOfModules.Monoidal.tensorHom, Rep.Tor_map, PresheafOfModules.Hom.naturality",
+   "date": "2026-10-15",
+   "verdict": "No exact Mathlib statement. Local source search found the already-stated Sheaf coordinate naturality theorem; attach and reuse it without a new Lean declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "mapExtendIso|map.*[Ee]xtend|extend.*[Ii]so",
+   "results": "Mathlib/Data/DFinsupp/Defs.lean, Mathlib/Data/ENNReal/Inv.lean, Mathlib/Data/ENNReal/Real.lean, Mathlib/Data/Fintype/Sum.lean, Mathlib/Data/FunLike/Equiv.lean, Mathlib/Data/FunLike/Equiv.lean, Mathlib/Data/FunLike/Equiv.lean, Mathlib/Data/FunLike/Equiv.lean",
+   "date": "2026-10-15",
+   "verdict": "No exact Mathlib statement. Local source search found the already-stated Sheaf coordinate naturality theorem; attach and reuse it without a new Lean declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\", \"naturality\"",
+   "results": "CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality, CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality_assoc, CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality_assoc, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality_assoc, CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality_assoc",
+   "date": "2026-10-15",
+   "verdict": "No exact Mathlib statement. Local source search found the already-stated Sheaf coordinate naturality theorem; attach and reuse it without a new Lean declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinatesFamily",
+  "date": "2026-10-15",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine self-Tor computation: the ordinary affine tensor-resolution homology and restriction square, before intrinsic derived-tensor transport and construction of quotient lifts.",
+   "via": [
+    "new-p1-derived-self-tor-affine-coordinates",
+    "new-b3-derived-self-tor-chosen-affine-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.QCohTensorResolutionCoordinateSectionsNaturality",
+  "declaration": "AlgebraicGeometry.tensorResolutionCoordinateSections_naturality",
+  "statement": "theorem tensorResolutionCoordinateSections_naturality\n    (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent]\n    (MA NA : ∀ U : Y.affineOpens, ModuleCat.{u} (Γ(Y, U.1) : Type u))\n    (sM : ∀ U : Y.affineOpens, MA U ≃ₗ[Γ(Y, U.1)] M.val.obj (op U.1))\n    (sN : ∀ U : Y.affineOpens, NA U ≃ₗ[Γ(Y, U.1)] N.val.obj (op U.1))\n    (P : ∀ U, ProjectiveResolution (MA U))\n    (K F : CochainComplex Y.Modules ℤ)\n    (q : K ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj M)\n    (s : F ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj N)\n    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K)\n    (hF : CochainComplex.IsKFlat (R := Y.sheaf) F)\n    (hq : QuasiIso q) (hs : QuasiIso s) (n : ℕ)\n    (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n    (b : NA U →ₛₗ[(Y.presheaf.map (homOfLE h).op).hom] NA V)\n    (a : (P U).complex ⟶ ((ModuleCat.restrictScalars\n      (Y.presheaf.map (homOfLE h).op).hom).mapHomologicalComplex (.down ℕ)).obj\n        (P V).complex)\n    (k : ((tensorRight (NA U)).mapHomologicalComplex (.down ℕ)).obj (P U).complex ⟶\n      ((ModuleCat.restrictScalars (Y.presheaf.map (homOfLE h).op).hom).mapHomologicalComplex\n        (.down ℕ)).obj\n        (((tensorRight (NA V)).mapHomologicalComplex (.down ℕ)).obj (P V).complex))\n    (ha : ∀ x : (P U).complex.X 0,\n      sM V ((P V).π.f 0 (a.f 0 x)) =\n        M.val.map (homOfLE h).op (sM U ((P U).π.f 0 x)))\n    (hb : ∀ y : NA U,\n      sN V (b y) = N.val.map (homOfLE h).op (sN U y))\n    (hk : ∀ (j : ℕ) (x : (P U).complex.X j) (y : NA U),\n      k.f j (x ⊗ₜ[Γ(Y, U.1)] y) =\n        (show (P V).complex.X j from a.f j x) ⊗ₜ[Γ(Y, V.1)] (b y)) :\n    letI := SheafOfModules.monoidalCategory Y.sheaf\n    let Q := (CochainComplex.mapBifunctor K\n      ((CochainComplex.singleFunctor Y.Modules 0).obj N)\n      (curriedTensor Y.Modules)).homology (-(n : ℤ))\n    let e := (((tensorRight (NA V)).mapHomologicalComplex (.down ℕ)).obj\n      (P V).complex).sc n |>.mapHomologyIso\n        (ModuleCat.restrictScalars (Y.presheaf.map (homOfLE h).op).hom)\n    ∀ x, Q.val.map (homOfLE h).op\n        (tensorResolutionCoordinateSections Y M N U (MA U) (NA U)\n          (sM U) (sN U) (P U) K F q s hK hF hq hs n x) =\n      tensorResolutionCoordinateSections Y M N V (MA V) (NA V)\n        (sM V) (sN V) (P V) K F q s hK hF hq hs n\n        (e.hom (HomologicalComplex.homologyMap k n x))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-15",
+  "note": "Existing public theorem, still sorry and held by T3. No Lean source or new hole is delivered for this attachment."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-294f5",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261015T052200-L-1265930",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-294f5",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261015T052200-L-1265930",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the stated node changes; compilation passed, forced adaptation was necessary and minimal, and importer checks passed."
+ }
+}
