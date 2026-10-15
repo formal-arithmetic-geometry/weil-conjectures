@@ -31,109 +31,85 @@
  ],
  "proof": [
   {
-   "text": "Work in the small sites and universes of [def-weil-pbc-proetale-site]. For each affine scheme $S=X,Z$, [lem-weil-pbc-ind-etale-basis] supplies cover-density of the full inclusion $\\mathcal B_S\\subset S_{\\mathrm{proet}}$ and finite basis refinements of coverings. Its topology is induced by this inclusion by [def-weil-pbc-ind-etale-basis]: a covering sieve in the full site has a basis refinement, and a basis cover is a full-site cover. Thus [lem-pc-fppf-dense-sheaf-equivalence], with values in sets (small structured-arrow limits exist as sets of compatible families), makes restriction $R_S$ an equivalence of sheaf categories. If $H$ is a sheaf on $Z_{\\mathrm{proet}}$, [def-weil-proetale-inverse-image] gives $(R_Xi_*H)(U)=H(U\\times_X Z)=(R_ZH)(u(U))$. Consequently the ordinary direct image is represented on these bases by precomposition with $u$.",
+   "text": "Use the already proved affine comparison instances from [lem-weil-pbc-ind-etale-basis]: restriction RX and RZ along the full affine basis inclusions are equivalences. By [lem-weil-pbc-affine-closed-site-functor-properties], v is cocontinuous and v is left adjoint to u, so u is continuous. Whisker the opposite adjunction on presheaves, compose with the sheafification adjunction [def-weil-pbc-sheafification], and restrict along the fully faithful inclusion of sheaves. This constructs L left adjoint to precomposition with u, where L is sheafification of precomposition with v. The base-change square gives the natural direct-image isomorphism beta: i_* followed by RX is isomorphic to RZ followed by u_*. Apply the proved generic inverse-mate lemma [lem-stage3-inverse-mate-equivalences] to beta and the ordinary inverse/direct-image adjunction [def-weil-proetale-inverse-image]. Its inverse supplies precisely the first natural isomorphism. No explicit left Kan extension or new equivalence proof is needed.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-ind-etale-basis",
     "lem-weil-pbc-ind-etale-basis",
-    "lem-pc-fppf-dense-sheaf-equivalence",
+    "lem-weil-pbc-affine-closed-site-functor-properties",
+    "def-weil-pbc-sheafification",
+    "lem-stage3-inverse-mate-equivalences",
     "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL, lemma-closed-immersion-affines-apply, opening paragraph; Tag 098X, lemma-affine-alternative"
+    "place": "Tag 09BL, lemma-closed-immersion-affines-apply, clauses (1) and (2)"
    }
   },
   {
-   "text": "By [lem-weil-pbc-affine-closed-site-functor-properties], $u$ is continuous and $v\\dashv u$. Apply [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] to $u$ and sets. Its left adjoint is $F\\mapsto(u_pR_XF)^\\#$, with $u_pR_XF(V)=\\operatorname{colim}_{(U,\\phi:V\\to u(U))^{\\mathrm{op}}}F(U)$. Let $\\eta: \\mathrm{id}\\to uv$ be the unit. Under the adjunction, each $\\phi$ corresponds to a unique $a:v(V)\\to U$ with $u(a)\\eta_V=\\phi$. The pair $(v(V),\\eta_V)$ is initial before taking the opposite. Explicitly the map on the colimit sends the class of $s\\in F(U)$ to $F(a)(s)\\in F(v(V))$; its inverse sends $t\\in F(v(V))$ to its class at $(v(V),\\eta_V)$. The colimit relation for $a$ makes these inverse, and uniqueness of $a$ makes the formula compatible with all transitions. Naturality of the adjunction gives compatibility with arrows $V'\\to V$ and with maps $F\\to F'$. This identifies $u_pR_XF$ with $G_F(V)=F(v(V))$. Both $R_Zi^{-1}F$ and $G_F^\\#$ represent the same functor $H\\mapsto\\operatorname{Hom}(R_XF,H\\circ u)$ on basis sheaves, by step 1 and the two adjunctions. The natural-Hom criterion [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] identifies them canonically, naturally in $F$. This proves the first clause without asserting that $v$ preserves fibre products.",
+   "text": "For P equal to precomposition of an affine-basis sheaf H with v, use Mathlib Presheaf.equalizerSieve_mem for the locally injective sheafification unit. Refine its covering sieve by a finite jointly surjective family using [lem-weil-pbc-ind-etale-basis]. Such a finite family belongs to the affine precoverage [def-weil-pbc-ind-etale-basis]: its scheme cover is quasi-compact by QuasiCompactCover.of_finite, and restriction of the full topology gives a covering generated sieve. By the covering-preservation clause of [lem-weil-pbc-affine-closed-site-functor-properties], its v-image covers. Separatedness of H proves equality of the original sections. This proves unit injectivity without a contractibility assumption.",
    "uses": [
+    "def-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-basis",
     "lem-weil-pbc-affine-closed-site-functor-properties",
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL, opening paragraph and proof of (1); Sites Tags 00XX/00XY, lemma-have-functor-other-way and lemma-have-functor-other-way-morphism"
-   }
-  },
-  {
-   "text": "For any covering $\\{V_j\\to V\\}$ of $\\mathcal B_Z$, its image $\\{v(V_j)\\to v(V)\\}$ is a covering by [lem-weil-pbc-affine-closed-site-functor-properties]. Since $F$ is a sheaf, two sections of $F(v(V))$ agreeing after these restrictions are equal. Thus $G_F$ is separated. The local-equality assertion of [lem-weil-pbc-site-sheafification-sections-local] now shows that the canonical map $\\theta:G_F\\to G_F^\\#$ is injective on every object: equality of images gives equality on some cover, and separatedness gives equality before restricting.",
-   "uses": [
-    "lem-weil-pbc-affine-closed-site-functor-properties",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "def-weil-pbc-sheafification"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL, proof of (2), separatedness paragraph; Sites Tag 00WK, lemma-sections-sheafification"
+    "place": "Tag 09BL, lemma-closed-immersion-affines-apply, clauses (1) and (2)"
    }
   },
   {
-   "text": "Finite disjoint unions remain in $\\mathcal B_Z$ and $\\mathcal B_X$. Indeed, present the finitely many coordinate algebras $B_j$ as filtered colimits of etale finite-presentation algebras $B_{j,\\alpha_j}$, using [def-weil-pbc-ind-etale-algebra]. The finite product of the indexing categories is filtered: choose an object in each coordinate for nonemptiness, a common upper object in each coordinate for two tuples, and a coordinatewise equalizer for parallel arrows. For each coordinate, forgetting the unused indices does not change its colimit: every representative can be completed by choosing unused indices, and common upper objects in those indices identify all choices. On this product indexing category the map $\\operatorname{colim}_{(\\alpha_j)}\\prod_jB_{j,\\alpha_j}\\to\\prod_jB_j$ is bijective by [lem-weil-pbc-filtered-colimits-commute-finite-limits] for sets. The filtered set colimits are the underlying sets of the algebra colimits: addition and multiplication are computed after moving finitely many representatives to a common index, and the algebra axioms and universal property follow at that index. Hence the displayed bijection respects all ring operations coordinatewise. Each stage is etale by [lem-weil-pbc-etale-algebra-finite-product] and finitely presented directly: take finite generators and relations for each coordinate, adjoin orthogonal idempotents $e_j$ with $\\sum_j e_j=1$, impose $e_jx=x$ on every generator of coordinate $j$, and multiply each coordinate relation by $e_j$. These finitely many relations present the product, since its $e_j$-summand has precisely the given presentation of $B_{j,\\alpha_j}$. This is an ind-etale presentation of the product; for the empty product the zero ring is already etale by the same cited node. The disjoint-union scheme is affine by [lem-weil-pbc-proetale-qcqs-finite-family-geometry], and its coordinate ring is this product (sections of a sheaf on finitely many disjoint open components are the product of their sections). The coproduct property holds in each basis since it is a full subcategory. For $W=\\coprod_jV_j$ and every $U\\in\\mathcal B_X$, the adjunction in [lem-weil-pbc-affine-closed-site-functor-properties] gives $\\operatorname{Hom}(v(W),U)=\\operatorname{Hom}(W,u(U))=\\prod_j\\operatorname{Hom}(V_j,u(U))=\\prod_j\\operatorname{Hom}(v(V_j),U)$. These bijections identify the arrows $v(V_j)\\to v(W)$ with coprojections, so $v(W)$ is canonically the finite disjoint union of the $v(V_j)$. Apply the sheaf evaluation clause of [lem-weil-pbc-proetale-qcqs-finite-family-geometry] to $F$: $G_F(W)=F(v(W))\\cong\\prod_jF(v(V_j))=\\prod_jG_F(V_j)$. For an empty family both values are singletons.",
+   "text": "Reuse the fully proved sigmaCover, sigmaCover_ext and exists_sigmaCover_glue from WeilConjectures.AlgebraicGeometry.ProEtale.SigmaCover. They construct finite disjoint unions in the affine basis [def-weil-pbc-ind-etale-basis] and identify sheaf sections with arbitrary families of sections. Apply them to the subcanonical topology's uliftYoneda sheaves to prove that the standard Cofan on sigmaCover is a coproduct (Cofan.IsColimit.ofBijective). A left adjoint preserves this coproduct. For the adjunction of [lem-weil-pbc-affine-closed-site-functor-properties], glue a family of sections on v(Uj) first on sigmaCover(v(Uj)), and restrict along the comparison arrow from v(sigmaCover(Uj)) supplied by the preserved coproduct. This proves leftAdjoint_sigmaCover_glue. It includes an empty indexing type. It requires no new filtered-colimit, finite-product or finite-family-geometry statement.",
    "uses": [
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "lem-weil-pbc-etale-algebra-finite-product",
-    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "def-weil-pbc-ind-etale-basis",
     "lem-weil-pbc-affine-closed-site-functor-properties"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL, proof of (2), finite disjoint-union paragraph"
+    "place": "Tag 09BL, lemma-closed-immersion-affines-apply, clauses (1) and (2)"
    }
   },
   {
-   "text": "Let $V$ be weakly contractible in $\\mathcal B_Z$. Every cover of $V$ can be refined by a finite basis cover by [lem-weil-pbc-ind-etale-basis]; for such a cover $\\{V_j\\to V\\}$ form $q:W=\\coprod_jV_j\\to V$. The arrow $q$ is ind-etale, hence weakly etale, by the relative-map clause of [lem-weil-pbc-ind-etale-stability], since its source and target are basis objects. This singleton is a cover: the original finite family is jointly surjective, and composing its component maps with the open-and-closed inclusions into $W$ gives the same image; for any affine open $O\\subset V=\\operatorname{Spec}R$, choose finitely many principal opens $D(f_a)$ of $V$ contained in $O$ and covering it (principal opens are a basis and $O$ is quasi-compact). Their inverse images in the affine scheme $W$ are the affine principal opens $D(q^*f_a)$ and their images cover $O$ by surjectivity of $q$. The pro-etale covering criterion is [def-weil-pbc-proetale-site]. The representables $h_W,h_V$ are sheaves on the basis: they are restrictions of full-site representable sheaves by the subcanonical clause of [lem-weil-pbc-proetale-qcqs-finite-family-geometry]. The arrow $h_q:h_W\\to h_V$ is an epimorphism. To check right cancellation, maps $h_V\\to T$ correspond to sections $T(V)$ by [lem-galois-yoneda-hom-bijection]; equality after $h_q$ is equality after restriction to $W$, hence equality by the sheaf condition for the singleton cover. The assumed surjectivity of evaluation at $V$ on epimorphisms of basis sheaves therefore makes $h_W(V)\\to h_V(V)$ surjective. A preimage of $\\mathrm{id}_V$ is a scheme arrow $\\sigma:V\\to W$ with $q\\sigma=\\mathrm{id}_V$. This proves the needed cover splitting directly, including the empty cover when $V$ is empty.",
+   "text": "The affine topology is subcanonical by restricting the full subcanonical pro-etale topology along the fully faithful basis inclusion. For a surjective affine-basis arrow q: W -> V, use the already proved generate_singleton_mem_topology from WeilConjectures.AlgebraicGeometry.ProEtale.Replete. The map uliftYoneda(q) is epi: use the sheaf Yoneda equivalence [lem-galois-yoneda-hom-bijection] to translate any two maps with equal precomposites into sections which agree after q, and conclude by separatedness for the singleton cover. The assumed surjectivity of evaluation on all epimorphisms lifts the identity of V to a section sigma of q. This is cover_split. For a finite jointly surjective family, source-library surjective_sigmaCoverπ supplies q. The empty case is included without any inhabitance assumption.",
    "uses": [
-    "lem-weil-pbc-ind-etale-basis",
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
-    "lem-galois-yoneda-hom-bijection",
-    "lem-weil-pbc-ind-etale-stability"
+    "def-weil-pbc-ind-etale-basis",
+    "lem-galois-yoneda-hom-bijection"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL, proof of (2), singleton-cover refinement paragraph; Sites Tag 090K, lemma-w-contractible, proof of (2) implies (1)"
+    "place": "Tag 09BL, lemma-closed-immersion-affines-apply, clauses (1) and (2)"
    }
   },
   {
-   "text": "Given $s\\in G_F^\\#(V)$, [lem-weil-pbc-site-sheafification-sections-local] gives a cover on which $s$ is the image of sections of $G_F$. Refine it to a finite basis cover $\\{V_j\\to V\\}$ by [lem-weil-pbc-ind-etale-basis], restricting the chosen sections to obtain $t_j\\in G_F(V_j)$. The product bijection of step 4 gives $t\\in G_F(W)$ with restrictions $t_j$. The two sections $\\theta_W(t)$ and $s|_W$ of the sheaf $G_F^\\#$ agree on the component cover $\\{V_j\\to W\\}$, so they are equal. Pull back along the section $\\sigma:V\\to W$ of step 5. Naturality of $\\theta$ gives $\\theta_V(G_F(\\sigma)t)=G_F^\\#(\\sigma)(s|_W)=s$, because $q\\sigma=\\mathrm{id}_V$. Thus $\\theta_V$ is surjective, and it is injective by step 3. Together with step 2 this yields $(i^{-1}F)(V)\\cong F(v(V))$. These isomorphisms are the inverses of the canonical evaluation maps $\\theta_V$ followed by the canonical identification in step 2; they therefore commute with maps of sheaves and with restrictions between weakly contractible basis objects. No choices of cover or section enter the resulting isomorphism.",
+   "text": "For any section s of sheafify(P) at a weakly contractible V, Mathlib Presheaf.imageSieve_mem for toSheafify gives a covering sieve of local lifts. Refine it finitely by [lem-weil-pbc-ind-etale-basis] and choose the lifts. Step 3 glues them to z in P(sigmaCover). Naturality of toSheafify and sigmaCover_ext show that the unit image of z equals the restriction of s along sigmaCoverπ. Step 4 supplies a section sigma of this map. Restrict z along sigma: functoriality and the section equation show its unit image is s. This is precomposition_unit_surjective. Pair this with step 2 for the restricted full-site sheaf RX(F). Together with step 1 these are exactly both clauses of affine_closed_inverseImage_evaluation, with its signature unchanged.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sheafification",
     "lem-weil-pbc-ind-etale-basis"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL, proof of (2), last paragraph; Sites Tag 00WK, lemma-sections-sheafification"
+    "place": "Tag 09BL, lemma-closed-immersion-affines-apply, clauses (1) and (2)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-ind-etale-basis",
   "lem-weil-pbc-ind-etale-basis",
-  "lem-pc-fppf-dense-sheaf-equivalence",
-  "def-weil-proetale-inverse-image",
   "lem-weil-pbc-affine-closed-site-functor-properties",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "def-weil-pbc-ind-etale-algebra",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-etale-algebra-finite-product",
-  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
-  "lem-galois-yoneda-hom-bijection",
-  "lem-weil-pbc-ind-etale-stability"
+  "def-weil-pbc-sheafification",
+  "lem-stage3-inverse-mate-equivalences",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-ind-etale-basis",
+  "lem-galois-yoneda-hom-bijection"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent D4",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09BL, lemma-closed-immersion-affines-apply, opening paragraph and proofs of (1),(2); local sections replace the equivalent plus-class presentation"
+  "place": "Tag 09BL, lemma-closed-immersion-affines-apply, clauses (1) and (2)",
+  "note": "Lean proof follows the finite-cover and splitting argument of 09BL. Existing affine comparison, SigmaCover and Replete APIs replace the planned auxiliary geometry and algebra proofs; the proved inverse-mate tool supplies the adjunction comparison."
  },
  "mathlib_searches": [
   {
@@ -300,5 +276,15 @@
   "by": "NE",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261015T181520-L-747932",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

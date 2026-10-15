@@ -15118,3 +15118,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:15 L: merged deliver/D3/Sheaf.Paper.CondensedPointBasisEvaluation (stage 3; reviewer PASS; first push; landing 20261015T181519-L-747552 (proof); batch 20261015T181519; modules 1; new nodes 0)
 - 18:15 L: merged deliver/D3/Sheaf.Paper.CondensedQcqsPushforwardContinuity (stage 3; reviewer PASS; first push; landing 20261015T181519-L-747666 (proof); batch 20261015T181519; modules 1; new nodes 0)
 - 18:15 L: merged deliver/D4/Sheaf.AlgebraicGeometry.AffineClosedSpecializationLocalization (stage 3; reviewer PASS; first push; landing 20261015T181520-L-747784 (proof); batch 20261015T181519; modules 1; new nodes 0)
+- 18:15 L: merged deliver/D4/Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation (stage 3; reviewer PASS; first push; landing 20261015T181520-L-747932 (proof); batch 20261015T181519; modules 1; new nodes 0)
