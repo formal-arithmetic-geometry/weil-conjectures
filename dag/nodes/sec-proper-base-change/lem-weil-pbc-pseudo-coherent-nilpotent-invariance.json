@@ -235,5 +235,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fa06bb430",
+  "group": "NN",
+  "result": "pass",
+  "note": "Wrote review.md. Immutable files and verbatim signature verified; source, dependencies, hypotheses, conclusions, universes, edge cases, docstrings and reports checked. Server-only compile reproduced cleanly in 1.2 seconds. No delivery errors or fixes required; no repository mutations performed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PseudoCoherentNilpotentInvariance",
+  "declaration": "DerivedCategory.isPseudoCoherent_iff_of_surjective_nilpotent_kernel",
+  "file": "lean/Sheaf/RingTheory/PseudoCoherentNilpotentInvariance.lean",
+  "statement": "theorem isPseudoCoherent_iff_of_surjective_nilpotent_kernel {A B : Type u} [CommRing A] [CommRing B] [HasDerivedCategory.{w} (ModuleCat.{max u v} A)] [HasDerivedCategory.{w} (ModuleCat.{max u v} B)] (φ : A →+* B) (hφ : Function.Surjective φ) (hnil : IsNilpotent (RingHom.ker φ)) (L : DerivedCategory (ModuleCat.{max u v} A) ⥤ DerivedCategory (ModuleCat.{max u v} B)) (ε : DerivedCategory.Qh ⋙ L ⟶ @Functor.mapHomotopyCategory _ _ _ _ _ _ _ (ModuleCat.extendScalars φ) (ModuleCat.extendRestrictScalarsAdj φ).left_adjoint_additive (.up ℤ) ⋙ DerivedCategory.Qh) [L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ModuleCat.{max u v} A) (.up ℤ))] (K' : DerivedCategory (ModuleCat.{max u v} A)) : IsPseudoCoherent (L.obj K') ↔ IsPseudoCoherent K'",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "L and its universal counit specify the total left derived functor of ModuleCat.extendScalars φ on the homotopy category; they name derived scalar extension, not an arbitrary functor. The general-site dependency is imported for the one-object-site construction, while the conclusion uses the recorded ModuleCat pseudo-coherence predicate."
  }
 }
