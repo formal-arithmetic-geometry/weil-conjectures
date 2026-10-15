@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **840**, closure **4**, holes in definitions **1**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **839**, closure **3**, holes in definitions **1**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -17,24 +17,24 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 614 | 4 |
+| Sheaf | 613 | 3 |
 | WeilConjectures | 226 | 0 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2214 | 228 | 1986 | 103 | 18 |
-| 660345513 (Application of proof-dependency imports) | library | 2168 | 226 | 1942 | 91 | 18 |
-| 660345513 (Application of proof-dependency imports) | closure | 1933 | 4 | 1929 | 57 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2214 | 227 | 1987 | 103 | 18 |
+| 660345513 (Application of proof-dependency imports) | library | 2168 | 225 | 1943 | 91 | 18 |
+| 660345513 (Application of proof-dependency imports) | closure | 1933 | 3 | 1930 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3381 |
+| proved | 3382 |
 | decomposed | 48 |
 | moved | 3920 |
 | pruned | 119 |
-| other | 530 |
+| other | 540 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -135,16 +135,15 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Y2 | 108 | 110 | 98 | 12 | 59/108 (54.6%) |
 | Y3 | 103 | 90 | 56 | 34 | 45/103 (43.7%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
-| launcher prover | 64 | 10 | 9 | 1 | 6/64 (9.4%) |
+| launcher prover | 75 | 11 | 9 | 2 | 6/75 (8.0%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
 
 | module | distance | holes | group |
 |---|---:|---:|---|
-| Sheaf.AlgebraicGeometry.CartesianChartLiftNaturality | 19 | 1 | — |
-| Sheaf.AlgebraicGeometry.RawDerivedClassAffineDescent | 19 | 1 | — |
+| Sheaf.AlgebraicGeometry.CartesianChartLiftNaturality | 19 | 1 | A2 |
+| Sheaf.AlgebraicGeometry.RawDerivedClassAffineDescent | 19 | 1 | A2 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 37 | 1 | E3 |
-| Sheaf.AlgebraicGeometry.QCohTensorResolutionChartHomologyNaturality | 51 | 1 | H3 |
 
 Modules pruned since the imports baseline:
 
