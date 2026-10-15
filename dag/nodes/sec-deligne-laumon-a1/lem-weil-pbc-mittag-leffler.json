@@ -224,5 +224,31 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-179fe0142 (reviewer sub-agent of L); spot-checked: Read the item, report, blueprint, unit/chapter, all cited node statements, and Stacks sources at Tags 02N0, 0597, 07KW, and 07KY. Verified each proof step, coefficient category, evaluated Milnor map, index conventions, edge cases, searches, duplicate candidates, and tool-use declarations. Wrote review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-90894d0b2",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Reviewed node, all dependencies, source/docstrings, exact Lean declarations, edge cases, and report sections. scompile.py passed cleanly; deliver2.py dry run returned OK. No substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteMittagLeffler",
+  "declaration": "CategoryTheory.finiteTower_mittagLeffler_vanishing",
+  "declarations": [
+   "CategoryTheory.firstDerivedLimitAb",
+   "CategoryTheory.finiteTower_mittagLeffler_vanishing",
+   "CategoryTheory.milnorMap_isIso_of_finite",
+   "CategoryTheory.milnorMap_single_isIso_of_finite",
+   "AlgebraicGeometry.ProEtale.completedMilnorMap_isIso_of_finite"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteMittagLeffler.lean",
+  "statement": "theorem finiteTower_mittagLeffler_vanishing (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (hA : ∀ n : ℕᵒᵖ, Finite (A.obj n)) : (A ⋙ forget AddCommGrpCat).IsMittagLeffler ∧ IsZero (firstDerivedLimitAb A)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The four theorems render the finite tower, D(Ab), degree-zero, and completed-coefficient clauses. The helper firstDerivedLimitAb only supplies canonical recorded instance parameters to the actual lim.rightDerived 1; it constructs no new limit notion. Canonical Milnor maps are characterized by all limit-projection equations. The completed clause uses the published CompletedAdicCoefficientDatum, SequentialDerivedInverseLimit and PbcRoosTriangle interfaces."
  }
 }
