@@ -15044,3 +15044,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:42 L: merged deliver/E1/Sheaf.RingTheory.PrincipalWLocalization (stage 3; reviewer PASS; first push; landing 20261015T154204-L-162090 (proof); batch 20261015T154146; modules 1; new nodes 0)
 - 15:42 L: merged deliver/E1/Sheaf.RingTheory.PrincipalWLocalizationPoints (stage 3; reviewer PASS; first push; landing 20261015T154204-L-162267 (interface); batch 20261015T154146; modules 3; new nodes 2)
 - 15:42 L: merged deliver/E1/Sheaf.RingTheory.RetainedLocalization (stage 3; reviewer PASS; first push; landing 20261015T154205-L-162436 (proof); batch 20261015T154146; modules 1; new nodes 0)
+- 15:42 L: merged deliver/E1/Sheaf.RingTheory.RetainedLocalizationProperties (stage 3; reviewer PASS; first push; landing 20261015T154205-L-162574 (interface); batch 20261015T154146; modules 1; new nodes 0; change records: coord/changes/retained-localization-redundant-scheme-import.md)
