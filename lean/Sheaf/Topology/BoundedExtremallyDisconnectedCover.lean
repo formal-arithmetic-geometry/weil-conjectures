@@ -8,7 +8,8 @@ module
 public import Mathlib.Topology.Category.Profinite.Basic
 public import Mathlib.Topology.ExtremallyDisconnected
 public import Mathlib.SetTheory.Cardinal.Basic
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+
+import Mathlib.Topology.Category.Stonean.Basic
 
 /-!
 # Bounded extremally disconnected covers of profinite spaces
@@ -48,6 +49,32 @@ theorem exists_bounded_extremallyDisconnected_cover (X : Profinite.{u}) (κ : Ca
     ∃ (T : Profinite.{u}) (u : ContinuousMap T X),
       Function.Surjective u ∧ ExtremallyDisconnected T ∧
         Cardinal.mk T ≤ (2 : Cardinal.{u}) ^ ((2 : Cardinal.{u}) ^ κ) := by
-  sorry
+  classical
+  -- The construction also works for finite bounds; retain the stated hypothesis.
+  have _ := hκ
+  let P := X.presentation
+  let f : ContinuousMap (Stonean.toProfinite.obj P) X :=
+    CategoryTheory.ConcreteCategory.hom (Profinite.presentation.π X)
+  refine ⟨Stonean.toProfinite.obj P, f, ?_, ?_, ?_⟩
+  · have h : CategoryTheory.Epi (Profinite.presentation.π X) := inferInstance
+    rw [Profinite.epi_iff_surjective] at h
+    exact h
+  · exact P.prop
+  · change Cardinal.mk (Ultrafilter X) ≤ (2 : Cardinal.{u}) ^ ((2 : Cardinal.{u}) ^ κ)
+    let g : Ultrafilter X → Set (Set X) := fun F ↦ (F : Filter (X : Type u)).sets
+    have hg : Function.Injective g := by
+      intro F G hFG
+      apply Ultrafilter.ext
+      intro A
+      simpa [g] using Set.ext_iff.mp hFG A
+    calc
+      Cardinal.mk (Ultrafilter X) ≤ Cardinal.mk (Set (Set X)) :=
+        Cardinal.mk_le_of_injective hg
+      _ = (2 : Cardinal.{u}) ^ ((2 : Cardinal.{u}) ^ Cardinal.mk X) := by
+        rw [Cardinal.mk_set, Cardinal.mk_set]
+      _ ≤ (2 : Cardinal.{u}) ^ ((2 : Cardinal.{u}) ^ κ) := by
+        apply Cardinal.power_le_power_left two_ne_zero
+        apply Cardinal.power_le_power_left two_ne_zero
+        exact hX
 
 end Profinite

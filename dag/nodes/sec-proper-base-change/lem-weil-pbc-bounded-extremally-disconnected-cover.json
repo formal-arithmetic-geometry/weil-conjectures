@@ -28,67 +28,21 @@
  ],
  "proof": [
   {
-   "text": "Take $S$ to be the underlying set of $X$, and set $T=\\mathcal U(S)$ with the topology of [lem-weil-pbc-ultrafilter-compact-hausdorff-basis]. This is a compact Hausdorff space, with clopen basic subsets $[A]$ for $A\\subseteq S$. For $s\\in S$, the family $p(s)=\\{A\\subseteq S:s\\in A\\}$ is a proper filter and is maximal: any strictly larger filter would contain a set omitting $s$, whose intersection with $\\{s\\}$ is empty. Thus $p(s)\\in T$, and $p(s)\\in[A]$ exactly when $s\\in A$.",
-   "uses": [
-    "lem-weil-pbc-ultrafilter-compact-hausdorff-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 090D, lemma-existence-projective-cover, first proof paragraph: take the underlying discrete set and its Stone-Cech compactification. Tag 0908, section-stone-cech supplies the abstract compactification; the concrete ultrafilter realization used here is supplied by Mathlib/Topology/Compactification/StoneCech.lean, lines 54-99."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-ultrafilter-continuous-extension] to the set map $f:S\\to X$, $f(s)=s$. Its target $X$ is compact Hausdorff by hypothesis. We obtain a continuous $u:T\\to X$ with $u(p(s))=s$ for every $s\\in X$, which proves surjectivity (also when $X$ is empty).",
-   "uses": [
-    "lem-weil-pbc-ultrafilter-continuous-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 090D, lemma-existence-projective-cover, first proof paragraph: factor the map from the underlying discrete set through its compactification"
-   }
-  },
-  {
-   "text": "We verify extremal disconnectedness directly from the basis of [lem-weil-pbc-ultrafilter-compact-hausdorff-basis]. For open $O\\subseteq T$ put $A=\\{s\\in S:p(s)\\in O\\}$. If $F\\in O$, choose $B\\in F$ with $F\\in[B]\\subseteq O$. Then $B\\subseteq A$ by the principal-ultrafilter membership formula, so $A\\in F$. Hence $O\\subseteq[A]$ and $\\overline O\\subseteq[A]$, since $[A]$ is closed. Conversely if $F\\in[A]$, every basic neighbourhood $[B]$ of $F$ has $A\\cap B\\in F$ and therefore $A\\cap B\\ne\\varnothing$. Choosing $s\\in A\\cap B$ gives $p(s)\\in O\\cap[B]$. Every neighbourhood of $F$ meets $O$, so $[A]\\subseteq\\overline O$. Thus $\\overline O=[A]$ is open. This includes $O=\\varnothing$.",
-   "uses": [
-    "lem-weil-pbc-ultrafilter-compact-hausdorff-basis"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 090C, example-stone-Cech-discrete: extremal disconnectedness of the discrete Stone-Cech compactification; direct basis calculation in place of the projectivity argument"
-   }
-  },
-  {
-   "text": "The same clopen basis implies total disconnectedness: if distinct ultrafilters $F,G\\in T$ lie in a subset $C$, some subset $A\\subseteq S$ belongs to exactly one of the two families. Then $C\\cap[A]$ and $C\\setminus[A]$ are disjoint nonempty relatively open subsets with union $C$. Therefore $C$ is disconnected. Every connected subset of $T$ consequently has at most one point. Together with compactness and Hausdorffness from step 1 this makes $T$ profinite.",
-   "uses": [
-    "lem-weil-pbc-ultrafilter-compact-hausdorff-basis"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 090C, example-stone-Cech-discrete, final sentence: discrete Stone-Cech compactification is profinite"
-   }
-  },
-  {
-   "text": "For the size estimate, each ultrafilter is literally a family of subsets of $S$, so $F\\mapsto F$ injects $T$ into $\\mathcal P(\\mathcal P(S))$. Choose a set $L$ with $|L|=\\lambda$ and an injection $j:S\\hookrightarrow L$, using $|X|\\leq\\lambda$. Direct image $A\\mapsto j(A)$ is injective on power sets, since $j^{-1}(j(A))=A$; taking direct images of families under this injection gives an injection $\\mathcal P(\\mathcal P(S))\\hookrightarrow\\mathcal P(\\mathcal P(L))$. Thus $|T|\\leq|\\mathcal P(\\mathcal P(L))|=2^{2^\\lambda}$, where the equality identifies subsets with their characteristic functions twice. This uses only the definitions of cardinal inequality and exponentiation, and not an additional dense-subspace cardinal estimate. The empty set gives no ultrafilters and satisfies the same inequality.",
+   "text": "Use the Mathlib Stonean presentation of a profinite space. Set P := X.presentation and take T := Stonean.toProfinite.obj P with its canonical morphism to X, viewed as a ContinuousMap. The presentation map is epi and hence surjective by Profinite.epi_iff_surjective; P.prop gives ExtremallyDisconnected T.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 090E, remark-size-projective-cover: double-power-set bound; direct counting in the concrete ultrafilter model rather than the minimal-cover argument"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For the cardinal estimate, unfold the presentation carrier to Ultrafilter X. Map an ultrafilter to the set of subsets represented by its underlying filter. Ultrafilter.ext proves this map injective. Cardinal.mk_le_of_injective and Cardinal.mk_set twice give #Ultrafilter X ≤ 2 ^ (2 ^ #X), and monotonicity of cardinal exponentiation together with hX gives the desired bound.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-ultrafilter-compact-hausdorff-basis",
-  "lem-weil-pbc-ultrafilter-continuous-extension"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/topology.tex",
-  "place": "Tags 0908/090C/090D/090E: same discrete-compactification route, implemented by the Mathlib ultrafilter model; direct clopen-basis and family-of-subsets calculations are written here rather than attributed verbatim to Stacks."
+  "by": "worker",
+  "document": "Mathlib Topology Category Stonean Basic and SetTheory Cardinal Order",
+  "place": "Profinite.presentation, presentation.epi_π, Stonean.toProfinite, Cardinal.mk_set, Cardinal.mk_le_of_injective, Cardinal.power_le_power_left"
  },
  "mathlib_searches": [
   {
@@ -243,5 +197,15 @@
   "by": "NS",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-bc329",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T154212-L-164702",
+  "kind": "interface",
+  "note": "independent Codex review: Lean theorem matches the node statement; proof and DAG route agree. Delivery and direct importer Sheaf.RingTheory.BoundedWContractibleExtension compile cleanly; axioms are only propext, Classical.choice, Quot.sound."
  }
 }
