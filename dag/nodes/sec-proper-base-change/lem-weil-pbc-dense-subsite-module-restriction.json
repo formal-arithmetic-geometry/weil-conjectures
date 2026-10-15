@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-dense-subsite-module-restriction",
+ "kind": "statement",
+ "title": "Module restriction lifts dense equivalences on sets and abelian groups",
+ "statement": "Let F:C→D be continuous for Grothendieck topologies J,K. Assume restriction on sheaves of sets and on sheaves of abelian groups is an equivalence and F is K-cover-dense. For every sheaf of rings R on (D,K), restriction with the identity scalar map induces an equivalence from R-module sheaves to module sheaves over the restricted R [def-weil-sheaf-of-modules-category]. Coefficient universe max(u₁,v₁,u₂,v₂,w) accommodates both sites.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.2.11: formal transport of algebraic coefficient structures across its sheaf equivalence"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Given a module sheaf on the smaller site, lift its underlying abelian sheaf through the assumed equivalence and use the actual equivalence counit. Conjugate the scalar-action map by this counit and lift it using fullness of set-sheaf restriction. Restriction of the lifted action is the original action under the counit.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check one_smul, mul_smul, smul_zero, smul_add, add_smul and zero_smul after restriction along every arrow from the cover-dense subsite. The counit is injective on each test object, and equality on that covering sieve detects equality of sections. The natural lifted action makes the abelian sheaf a sheaf of modules. The counit is linear, hence an isomorphism of module sheaves, giving essential surjectivity.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift a morphism using fullness on abelian sheaves. Check its compatibility with scalars by restricting both sides to the dense covering sieve; naturality and linearity of the given restricted morphism prove equality. This proves fullness, while faithfulness follows from faithfulness of abelian restriction and of the forgetful functor. Fullness, faithfulness and essential surjectivity give the desired equivalence for the identity scalar map.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.2.11: formal transport of algebraic coefficient structures across its sheaf equivalence; E4 implements the argument constructively from the cited source-library and Mathlib declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*(IsEquivalence|sheafEquiv)|isEquivalence_pushforward",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "Related generic interfaces only; no complete match. The used interfaces are named in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a dense subsite induces an equivalence of categories of sheaves of modules over a sheaf of rings",
+   "results": "8 hits: CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom",
+   "date": "2026-10-15",
+   "verdict": "Related generic interfaces only; no complete match. The used interfaces are named in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "12 hits: SheafOfModules.pushforwardId, SheafOfModules.pushforward, SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver, SheafOfModules.overPushforwardOverAdj, SheafOfModules.isLeftAdjoint_pushforward_of_isIso, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatTrans",
+   "date": "2026-10-15",
+   "verdict": "Related generic interfaces only; no complete match. The used interfaces are named in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a cover dense subsite gives an equivalence of sheaves of modules over a sheaf of rings if it is an equivalence on set and abelian sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricFieldProEtaleEvaluation",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-geometric-field-proetale-evaluation",
+   "place": "Proof of the profinite-site and coefficient equivalence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DenseSubsiteModuleRestriction",
+  "file": "lean/Sheaf/CategoryTheory/DenseSubsiteModuleRestriction.lean",
+  "declaration": "SheafOfModules.isEquivalence_pushforward_of_dense",
+  "statement": "theorem isEquivalence_pushforward_of_dense :\n    (pushforward.{max u₁ v₁ u₂ v₂ w} (F := F) (J := J) (𝟙\n      ((F.sheafPushforwardContinuous RingCat.{max u₁ v₁ u₂ v₂ w} J K).obj R))).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16",
+  "note": "The declaration has the section variables J, K, F, R, continuous F, equivalences on abelian and set sheaves, and F.IsCoverDense K. They are written explicitly above it in the module; the stored theorem signature is verbatim."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261015T201714-L-1447509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261015T201714-L-1447509",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

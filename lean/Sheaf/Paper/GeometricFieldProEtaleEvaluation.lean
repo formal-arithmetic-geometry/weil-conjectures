@@ -12,20 +12,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
-import Mathlib.CategoryTheory.Sites.LocallyInjective
-import Mathlib.CategoryTheory.Sites.Limits
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.RingTheory.IndPrincipalZariski
-import Sheaf.RingTheory.WeaklyEtaleField
-import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
-import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
-import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+import Sheaf.Paper.GeometricFieldProfiniteDenseSubsite
+import Sheaf.CategoryTheory.DenseSubsiteModuleRestriction
 
 /-!
 # Pro-etale evaluation over an algebraically closed field
@@ -171,6 +160,23 @@ noncomputable abbrev geometricFieldModuleRestriction (X : Scheme.{u})
     (J := coherentTopology Profinite.{u}) (K := Scheme.ProEt.topology X)
     (R := R) (𝟙 ((geometricFieldRestriction X RingCat.{u + 1}).obj R))
 
+private theorem geometricField_finalMap_isIso (X : Scheme.{u}) :
+    IsIso (geometricFieldTestFinalMap X) := by
+  have : PreservesFiniteLimits (profiniteToProEtOf X) :=
+    (profinite_test_object_functor X).1
+  have hs : IsTerminal (Profinite.of (ULift.{u, 0} PUnit.{1})) :=
+    IsTerminal.ofUniqueHom (fun _ ↦ ConcreteCategory.ofHom
+      ⟨fun _ ↦ default, continuous_const⟩) (fun _ _ ↦ by ext)
+  have ht : IsTerminal (Scheme.ProEt.mk (𝟙 X)) :=
+    IsTerminal.ofUniqueHom (fun U ↦ MorphismProperty.Over.homMk U.hom)
+      (fun U f ↦ by
+        apply MorphismProperty.Over.Hom.ext
+        change f.left = U.hom
+        have hw := MorphismProperty.Over.w f
+        change f.left ≫ 𝟙 X = U.hom at hw
+        exact (Category.comp_id f.left).symm.trans hw)
+  exact isIso_of_isTerminal (hs.isTerminalObj (profiniteToProEtOf X) _) ht _
+
 /-- Over an algebraically closed field, the specified restriction is the profinite-site
 identification, its left adjoint is the specified point inverse image, and evaluation
 at the scheme is evaluation at the singleton. This includes ring and module structures.
@@ -178,19 +184,15 @@ at the scheme is evaluation at the singleton. This includes ring and module stru
 Source: Bhatt--Scholze, Examples 4.1.10 and 4.2.11
 (blueprint: lem-weil-pbc-geometric-field-proetale-evaluation).
 
-Proof: (1) On the ind-etale affine basis, finitely generated subalgebras are finite etale
-and therefore finite products of K; coordinate idempotents identify their maps with maps
-of finite sets. Treat the zero algebra separately. (2) Take the inverse limit of the finite
-sets. Compactness and the finite intersection property give surjective projections.
-Locally constant function factorization identifies the algebra with LC(S,K), and Spec
-turns its filtered colimit into the test scheme. (3) Evaluation at each point identifies
-all algebra maps with precomposition, proving full faithfulness. The induced topology is
-finite joint surjectivity, so dense-subsite comparison gives the restriction equivalence.
-(4) The finite-partition tensor formula identifies K tensor LC(S,Z) with LC(S,K).
-The right adjoint of the specified point inverse image is therefore exactly restriction.
-Adjoint uniqueness identifies the left adjoint with its inverse. Restriction preserves
-operations and their equations, giving the ring and module versions. The singleton test
-scheme is terminal, giving the evaluation identification. -/
+Proof: The proved geometricFieldProfiniteDenseSubsite identifies the specified test
+functor with a dense subsite. Mathlib's comparison theorem gives restriction
+equivalences for sets, abelian groups and rings. The two specified point adjunctions
+therefore have invertible units and counits. Finite-limit preservation sends the
+singleton to a terminal pro-etale object, so its map to the final object is invertible.
+For an arbitrary ring sheaf, the proved module transport theorem lifts its scalar
+action through the set and abelian restriction equivalences and checks the module
+laws on the cover-dense subsite. This proves equivalence for the specified module
+restriction with its identity scalar map. -/
 theorem geometric_field_proetale_evaluation (K : Type u) [Field K] [IsAlgClosed K] :
     (geometricFieldRestriction (Spec (.of K)) (Type (u + 1))).IsEquivalence ∧
     (geometricFieldRestriction (Spec (.of K)) Ab.{u + 1}).IsEquivalence ∧
@@ -202,7 +204,26 @@ theorem geometric_field_proetale_evaluation (K : Type u) [Field K] [IsAlgClosed 
     IsIso (geometricFieldTestFinalMap (Spec (.of K))) ∧
     (∀ R : Sheaf (Scheme.ProEt.topology (Spec (.of K))) RingCat.{u + 1},
       (geometricFieldModuleRestriction (Spec (.of K)) R).IsEquivalence) := by
-  sorry
+  have : (profiniteToProEtOf (Spec (.of K))).IsDenseSubsite
+      (coherentTopology Profinite.{u}) (Scheme.ProEt.topology (Spec (.of K))) :=
+    geometricFieldProfiniteDenseSubsite K
+  have hset : (geometricFieldRestriction (Spec (.of K)) (Type (u + 1))).IsEquivalence :=
+    inferInstance
+  have hab : (geometricFieldRestriction (Spec (.of K)) Ab.{u + 1}).IsEquivalence :=
+    inferInstance
+  have hrings : (geometricFieldRestriction (Spec (.of K)) RingCat.{u + 1}).IsEquivalence :=
+    inferInstance
+  refine ⟨hset, hab, hrings, ?_, ?_, ?_, ?_, geometricField_finalMap_isIso _, ?_⟩
+  · infer_instance
+  · infer_instance
+  · infer_instance
+  · infer_instance
+  · intro R
+    have := Functor.IsDenseSubsite.isCoverDense (coherentTopology Profinite.{u})
+      (Scheme.ProEt.topology (Spec (.of K))) (profiniteToProEtOf (Spec (.of K)))
+    exact SheafOfModules.isEquivalence_pushforward_of_dense.{u + 1, u, u + 1, u, 0}
+      (coherentTopology Profinite.{u}) (Scheme.ProEt.topology (Spec (.of K)))
+      (profiniteToProEtOf (Spec (.of K))) R
 
 /-- The upstream site lemmas import the incompatible generic star API.
 This argument uses their lower-level weakly-etale section API directly. -/
