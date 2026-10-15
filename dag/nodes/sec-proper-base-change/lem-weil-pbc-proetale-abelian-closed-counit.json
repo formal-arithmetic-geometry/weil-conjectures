@@ -14,31 +14,30 @@
  ],
  "proof": [
   {
-   "text": "Invertibility of the counit is local for affine open coverings of X and their inverse images in Z. Direct image commutes with open restriction by its base-change formula on sections. Identify the inverse images by adjunction; the mate comparisons transport the actual counit. Thus take X=Spec A and identify the closed immersion with Spec(A/I)→Spec A.",
+   "text": "For a quotient immersion Spec(A/I) → Spec A, the closed-site adjunction v ⊣ b has invertible unit. Its opposite, whiskered into abelian-group-valued presheaves, has invertible counit. Thus precomposition with b.op is fully faithful. Cocontinuity of v gives continuity of b, so this precomposition restricts to sheaves. The fully faithful sheaf-to-presheaf inclusions show that the resulting pushforward on affine-basis sheaves is fully faithful.",
+   "uses": [
+    "lem-exc-closed-site-adjunction",
+    "lem-weil-pbc-affine-closed-site-functor-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to the affine ind-etale bases is an equivalence on sheaves, and the square comparing these restrictions with the actual direct image commutes by the base-change formula. Cancel the faithful restriction functor to deduce full faithfulness of actual direct image for the quotient immersion. Any closed immersion into an affine scheme is isomorphic to a quotient immersion, so composition and isomorphism invariance give the affine case. The counit of its actual adjunction is invertible by full faithfulness of the right adjoint.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a square with weakly etale horizontal arrows, form the restriction base-change map from Over.pullbackMapComparison. It is invertible when the square is cartesian. Its mate under the horizontal restriction/direct-image adjunctions is the canonical isomorphism comparing the two composites of direct images. This identity is checked on presheaf sections, using the unit and counit of the site map/pullback adjunction and the universal property of pullbacks. The double-mate identity therefore makes the corresponding inverse-image comparison invertible. The mate-counit identity expresses the restriction of the actual global counit as a composite of isomorphisms whenever the local vertical counit is invertible.",
    "uses": [
     "def-weil-proetale-inverse-image"
    ],
    "elementary": false
   },
   {
-   "text": "Use [lem-weil-pbc-ind-etale-basis] to replace both pro-etale sites by their ind-etale affine bases, with the actual restriction equivalences on sheaves. These commute with the base-change direct images. The cocontinuous lift v and base change u of [lem-weil-pbc-affine-closed-site-functor-properties] satisfy v⊣u and have invertible unit by [lem-exc-closed-site-adjunction]. The opposite adjunction computes left Kan extension along u.op as precomposition with v.op, since in each indexing category the adjunction supplies the universal stage. Its subsequent sheafification is therefore inverse image. The resulting inverse-image comparison is the mate of the direct-image comparison and preserves the canonical counit.",
-   "uses": [
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-affine-closed-site-functor-properties",
-    "lem-exc-closed-site-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a closed-basis abelian sheaf G the presheaf computing i*i_*G is V↦G(u(v(V))). The inverse of the site unit identifies it naturally with G, via the contravariant sheaf map. It is already a sheaf. The canonical sheafification comparison is invertible, and the adjunction triangle identity identifies the induced map with the actual counit. Thus that counit is invertible on the basis and hence on the affine pro-etale site. All maps are additive, so the argument works directly for abelian sheaves.",
-   "uses": [
-    "lem-exc-closed-site-adjunction",
-    "lem-weil-pbc-ind-etale-basis"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The affine inverse counits agree on overlaps by naturality and uniqueness of inverses. Glue them to an inverse of the global counit. The empty closed scheme and nonreduced closed thickenings are included: the site unit and sheafification argument use neither points nor a radical or finitely generated defining ideal.",
+   "text": "Pull back an affine open cover of X along i. Each local vertical closed immersion has affine target, so its counit is invertible by the affine case. The preceding cartesian-square calculation makes every open restriction of the global counit invertible. Apply the existing theorem AlgebraicGeometry.ProEtale.isIso_of_isIso_localizationRestriction from WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative. It is stated directly for continuous pushforward along the localization site functor, so is independent of either pullback API. These open restrictions are jointly conservative: on each weakly etale object use the covering sieve generated by the base changes of the open cover, and apply the sheaf-local criterion for an isomorphism. Hence every component of the global counit, and then the counit itself, is invertible. No quasi-compact complement, reducedness, or finite-presentation assumption is used; the empty closed scheme is included.",
    "uses": [
     "def-weil-proetale-inverse-image"
    ],
@@ -46,15 +45,15 @@
   }
  ],
  "proof_deps": [
-  "def-weil-proetale-inverse-image",
   "lem-exc-closed-site-adjunction",
   "lem-weil-pbc-affine-closed-site-functor-properties",
-  "lem-weil-pbc-ind-etale-basis"
+  "lem-weil-pbc-ind-etale-basis",
+  "def-weil-proetale-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09AA and 09BL: affine basis, opposite closed-site adjunction and sheafification of G∘u.op∘v.op; global counit by affine descent."
+  "place": "Tags 09AA, 09BL and 09BK. B3: full faithfulness via the opposite closed-site adjunction and affine restriction equivalences; global counit via restriction base change, double mates and open-cover conservativity. The categorical restriction calculation follows the proved library WeaklyEtale and OpenImmersion.Conservative modules, with the existing conservativity theorem reused through its API-independent restriction functor statement; the base-change calculation is specialized to the finite-coefficient API."
  },
  "mathlib_searches": [
   {
@@ -158,11 +157,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D3",
+  "reviewer": "X-e5032",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261015T192617-L-1080598",
+  "landing": "20261015T221610-L-2628303",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files against packet, changed-module compilation, original/adapted reader modules, signatures, DAG, and axioms"
  }
 }

@@ -6,9 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import WeilConjectures.Mathlib.CategoryTheory.NatIso
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.Mathlib.CategoryTheory.NatIso
 
 /-!
 # Restriction along a pro-étale cover is conservative
@@ -20,10 +18,11 @@ Let `g i : W i ⟶ X` be a pro-étale covering family, that is, a family of weak
 morphisms whose associated presieve lies in `AlgebraicGeometry.Scheme.proetalePrecoverage`.
 This file proves that a morphism of sheaves on the small pro-étale site of `X` which becomes
 invertible after restricting along every `g i` is itself invertible
-(`AlgebraicGeometry.ProEtale.isIso_of_isIso_localizationRestriction`). Here restriction is
-the functor `AlgebraicGeometry.ProEtale.localizationRestriction` of
-`WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs`, which for an open
-immersion is `AlgebraicGeometry.ProEtale.openImmersionRestriction`.
+(`AlgebraicGeometry.ProEtale.isIso_of_isIso_localizationRestriction`). Restriction is
+continuous sheaf pushforward along the localization site functor
+`MorphismProperty.Over.map`. Stating it directly this way avoids a dependency on a choice
+of inverse-image API. It is definitionally `AlgebraicGeometry.ProEtale.localizationRestriction`
+in either the ordinary or finite-coefficient lower-shriek definitions.
 
 Note the difference with the étale statement: joint surjectivity of the `g i` is *not*
 enough, since the pro-étale topology imposes a quasi-compactness condition on covers as
@@ -43,7 +42,7 @@ That objectwise statement holds because a weakly étale `X`-scheme `V` whose str
 morphism factors as `p ≫ g` is the image of the weakly étale `W`-scheme `p` under the
 localization functor along `g`. The sections of a restricted sheaf over a weakly étale
 `W`-scheme are by definition the sections of the original sheaf over its image
-(`AlgebraicGeometry.ProEtale.localizationRestriction_map_hom_app`), so invertibility
+(by the definition of `CategoryTheory.Functor.sheafPushforwardContinuous`), so invertibility
 of the restricted morphism transports back along `CategoryTheory.NatTrans.isIso_app_of_iso`.
 
 ## Main results
@@ -82,15 +81,21 @@ variable {X : Scheme.{u}} {G G' : Sheaf (Scheme.ProEt.topology X) A} (φ : G ⟶
 -/
 lemma ProEtale.isIso_app_of_isIso_localizationRestriction {W : Scheme.{u}} (g : W ⟶ X)
     [WeaklyEtale g]
-    (h : IsIso ((ProEtale.localizationRestriction A g inferInstance).map φ))
+    (h : IsIso ((Functor.sheafPushforwardContinuous
+      (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale g)) A (Scheme.ProEt.topology W)
+        (Scheme.ProEt.topology X)).map φ))
     (V : X.ProEt) (p : V.left ⟶ W) (hp : p ≫ g = V.hom) :
     IsIso (φ.hom.app (op V)) := by
   have hpweaklyEtale : WeaklyEtale p := by
     have : WeaklyEtale (p ≫ g) := hp ▸ V.prop
     exact MorphismProperty.of_postcomp (W := @WeaklyEtale) (W' := @WeaklyEtale) p g ‹_› ‹_›
-  have h1 : IsIso (((ProEtale.localizationRestriction A g inferInstance).map φ).hom.app
+  have h1 : IsIso (((Functor.sheafPushforwardContinuous
+      (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale g)) A (Scheme.ProEt.topology W)
+        (Scheme.ProEt.topology X)).map φ).hom.app
       (op (MorphismProperty.Over.mk ⊤ p hpweaklyEtale))) := inferInstance
-  rw [ProEtale.localizationRestriction_map_hom_app] at h1
+  change IsIso (φ.hom.app (op ((MorphismProperty.Over.map ⊤
+    (inferInstance : WeaklyEtale g)).obj
+      (MorphismProperty.Over.mk ⊤ p hpweaklyEtale)))) at h1
   have e : (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale g)).obj
       (MorphismProperty.Over.mk ⊤ p hpweaklyEtale) ≅ V :=
     MorphismProperty.Over.isoMk (Iso.refl _) (by simpa using hp.symm)
@@ -114,7 +119,10 @@ structure morphism of every member of the sieve they generate factors through on
 lemma ProEtale.isIso_of_isIso_localizationRestriction {ι : Type*} {W : ι → Scheme.{u}}
     (g : ∀ i, W i ⟶ X) [∀ i, WeaklyEtale (g i)]
     (hg : Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X)
-    (h : ∀ i, IsIso ((ProEtale.localizationRestriction A (g i) inferInstance).map φ)) :
+    (h : ∀ i, IsIso ((Functor.sheafPushforwardContinuous
+      (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale (g i))) A
+        (Scheme.ProEt.topology (W i))
+        (Scheme.ProEt.topology X)).map φ)) :
     IsIso φ := by
   refine Sheaf.isIso_of_isIso_app_of_mem _ φ fun V ↦
     ⟨_, Scheme.ProEt.ofArrows_baseChange_mem_topology V g hg, ?_⟩
