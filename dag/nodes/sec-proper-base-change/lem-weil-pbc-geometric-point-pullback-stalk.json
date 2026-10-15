@@ -78,6 +78,19 @@
     "document": "literature/stacks-project/etale-cohomology.tex",
     "place": "Lemma 03Q1 (lemma-stalk-pullback), assertion (3), and Remark 04JN"
    }
+  },
+  {
+   "text": "Canonical-map refinement for isIso_globalGerm_identity: a field is henselian, and the proved IsLocalRing.isSepClosed_residueField_of_isSepClosed_fractionRing applied to Omega as its own fraction field gives separably closed residue field. Thus Omega is strictly henselian. Apply strictlyHenselianSections_geometricStalk_isIso at the identity geometric point, which lies over the closed point because Spec Omega has a unique point, in coefficient universe u+1. For each abelian sheaf F its first clause makes the specific toPresheafFiber map an isomorphism. Unfold globalGerm: its component is the composite of the terminal-object global-sections comparison isomorphism with this specific germ. Therefore every component is invertible, and NatIso.isIso_of_isIso_app makes globalGerm invertible. The preceding four steps concern the original full equivalence and pullback-stalk clauses, retained by the public import of GeometricPointPullbackStalk.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-pbc-derived-global-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QO specialized to an algebraically closed field; Tags 04JN and 03Q1 (3), canonical germ comparison"
+   }
   }
  ],
  "proof_deps": [
@@ -90,12 +103,15 @@
   "lem-weil-pbc-inverse-image-stalk-germ",
   "def-weil-geometric-point",
   "lem-weil-pbc-constant-sheaf-sections-connected",
-  "def-weil-connected-scheme"
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-derived-global-germ"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 04JQ (lemma-equivalence-abelian-sheaves-point) and Remark 04JN (remark-stalk-pullback), using Lemma 03Q1"
+  "place": "Tags 04JQ, 04JN and 03Q1 for the original clauses; Tag 03QO for the canonical identity-point germ. C2 applies the already-proved strictly henselian sections-to-stalk theorem and the defining component formula of globalGerm."
  },
  "mathlib_searches": [
   {
@@ -205,5 +221,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The original theorem supplies only Nonempty of a natural isomorphism and does not identify its canonical germ. The new theorem exposes invertibility of the specific globalGerm at the identity geometric point. The original full equivalence, exactness, module and pullback-stalk clauses remain available through public import. This makes the derived fibre arrow canonical; no arbitrary isomorphism is chosen."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T154156-L-159784",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
