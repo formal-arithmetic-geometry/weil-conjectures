@@ -1,6 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartModel
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionTensorNaturality
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartTensorTail
 
 @[expose] public section
 universe u v
@@ -69,8 +70,6 @@ theorem tensorResolutionChartTensorIso_f {Y : Scheme.{u}}
             (Scheme.Modules.restrictFunctor U.2.fromSpec).map
               (HomologicalComplex.singleObjXSelf (.up ℤ) 0 N).inv)) ≫
         HomologicalComplex.ιMapBifunctor E B (curriedTensor _) (.up ℤ) i 0 i (by simp) := by
-  sorry
-/-
   dsimp only
   dsimp only [tensorResolutionChartTensorIso, Iso.trans_hom, Iso.symm_hom,
     HomologicalComplex.comp_f, Functor.mapIso_hom, Functor.mapHomologicalComplex_map_f,
@@ -94,80 +93,6 @@ theorem tensorResolutionChartTensorIso_f {Y : Scheme.{u}}
     tensorResolutionTildeTensorHom _ _ _ ≫ _ at ht
   change tilde.map ((tensorRight NA).map _) ≫ _ = _
   rw [reassoc_of% ht]
-  let E := (tensorResolutionChartComplex U MA P)
-  let eN := ((CochainComplex.singleFunctor (Spec Γ(Y, U.1)).Modules 0).map
-    (tensorResolutionChartModel N U NA sN).hom ≫
-    ((HomologicalComplex.singleMapHomologicalComplex
-      (Scheme.Modules.restrictFunctor U.2.fromSpec) (.up ℤ) 0).app N).inv)
-  dsimp only [Functor.map₂CochainComplex, Functor.map₂HomologicalComplex]
-  simp only [CochainComplex.mapBifunctorSingle₂Iso, Iso.trans_inv, Iso.symm_inv,
-    HomologicalComplex.comp_f]
-  have hflip := HomologicalComplex.mapBifunctorFlipIso_hom_naturality
-    (𝟙 E) eN (curriedTensor (Spec Γ(Y, U.1)).Modules) (.up ℤ)
-  have hflipf := congrArg (fun h ↦ h.f (-(j : ℤ))) hflip
-  have hflipf' := by simpa only [HomologicalComplex.comp_f] using hflipf
-  dsimp [E] at hflipf'
-  dsimp [tensorResolutionChartComplex]
-  simp only [Category.assoc]
-  erw [← hflipf']
-  rw [CochainComplex.mapBifunctorSingle₁Iso_inv_f]
-  simp only [Category.assoc]
-  have hi := HomologicalComplex.ι_mapBifunctorMap eN (𝟙 E)
-    (curriedTensor (Spec Γ(Y, U.1)).Modules).flip (.up ℤ) 0 (-(j : ℤ))
-      (-(j : ℤ)) (by simp)
-  dsimp [E] at hi
-  congr 1
-  unfold tensorResolutionChartComplex at hi
-  unfold tensorResolutionChartComplex
-  change
-      ((HomologicalComplex.single (Spec Γ(Y, U.1)).Modules (.up ℤ) 0).obj
-          (tilde NA)).ιMapBifunctor
-          (((tilde.functor Γ(Y, U.1)).mapHomologicalComplex (.up ℤ)).obj
-            (P.complex.extend ComplexShape.embeddingDownNat))
-          (curriedTensor (Spec Γ(Y, U.1)).Modules).flip (.up ℤ) 0 (-(j : ℤ))
-            (-(j : ℤ)) (by simp) ≫
-        (HomologicalComplex.mapBifunctorMap eN
-          (𝟙 (((tilde.functor Γ(Y, U.1)).mapHomologicalComplex (.up ℤ)).obj
-            (P.complex.extend ComplexShape.embeddingDownNat)))
-          (curriedTensor (Spec Γ(Y, U.1)).Modules).flip (.up ℤ)).f (-(j : ℤ)) = _ at hi
-  rw [reassoc_of% hi]
-  change ((curriedTensor (Spec Γ(Y, U.1)).Modules).map _).app _ ≫ _ = _
-  simp only [curriedTensor_map_app, Functor.flip_map_app, curriedTensor_obj_map,
-    CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp, Category.assoc]
-  erw [HomologicalComplex.ι_mapBifunctorFlipIso_hom]
-  have heN :
-      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (tilde NA)).inv ≫ eN.f 0 =
-        (tensorResolutionChartModel N U NA sN).hom ≫
-          (Scheme.Modules.restrictFunctor U.2.fromSpec).map
-            (HomologicalComplex.singleObjXSelf (.up ℤ) 0 N).inv := by
-    dsimp [eN]
-    simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
-      Functor.map_comp, HomologicalComplex.comp_f,
-      HomologicalComplex.singleMapHomologicalComplex_inv_app_self,
-      HomologicalComplex.single_map_f_self, Category.assoc]
-  rw [tensorHom_def]
-  simp only [← curriedTensor_map_app, ← curriedTensor_obj_map,
-    CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp,
-    one_smul, Category.assoc]
-  have hmap := ((curriedTensor (Spec Γ(Y, U.1)).Modules).obj
-      ((((tilde.functor Γ(Y, U.1)).mapHomologicalComplex (.up ℤ)).obj
-        (P.complex.extend ComplexShape.embeddingDownNat)).X (-(j : ℤ)))).map_comp
-    ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 (tilde NA)).inv) (eN.f 0)
-  rw [← reassoc_of% hmap, heN]
-  have hs : (ComplexShape.up ℤ).σ (ComplexShape.up ℤ) (ComplexShape.up ℤ)
-      (-(j : ℤ)) 0 = 1 := by simp [ComplexShape.σ]
-  rw [hs, one_smul]
-  change _ ≫ _ ≫ (𝟙 _ ≫ _) = _
-  rw [Category.id_comp]
-  have hfirst :
-      ((curriedTensor (Spec Γ(Y, U.1)).Modules).map
-        ((tilde.functor (CommRingCat.of (Γ(Y, U.1) : Type u))).map
-          (P.complex.extendXIso ComplexShape.embeddingDownNat
-            (i := j) (i' := -(j : ℤ)) rfl).inv)).app (tilde NA) =
-      ((curriedTensor (Spec Γ(Y, U.1)).Modules).map
-        (tilde.map (P.complex.extendXIso ComplexShape.embeddingDownNat
-          (i := j) (i' := -(j : ℤ)) rfl).inv)).app (tilde NA) := rfl
-  rw [hfirst]
--/
+  exact tensorResolutionChartTensor_tail N U MA NA sN P j
 
 end AlgebraicGeometry
