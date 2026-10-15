@@ -1,6 +1,6 @@
 # Work queue
 
-60 items; claim with `tools/claim.py next <group> [--stage N]`.
+51 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (60)
+## Stage 3: modules to prove (51)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -24,7 +24,6 @@
 | `Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus` | 4 | 1 | proof |
-| `Sheaf.CategoryTheory.ExtOneExtensionClassification` | 4 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIso` | 4 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluing` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 4 | proof |
@@ -53,10 +52,6 @@
 | `Sheaf.Paper.ProEtalePointComponentsMaps` | 6 | 1 | proof |
 | `Sheaf.Paper.ProEtaleSheafificationWcontractibleSections` | 6 | 1 | proof |
 | `Sheaf.RingTheory.ProEtale.ClosedLiftMap` | 6 | 3 | proof |
-| `WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing` | 6 | 1 | proof |
-| `WeilConjectures.WeilSheaf.Finiteness` | 6 | 2 | proof |
-| `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | 6 | 5 | proof |
-| `WeilConjectures.WeilSheaf.StalkExtensionByZero` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IndEtaleBasisWeaklyContractibleCover` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverGeometry` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductSections` | 7 | 1 | proof |
@@ -64,19 +59,13 @@
 | `Sheaf.RingTheory.ProEtale.ClosedLiftAdjunction` | 7 | 1 | proof |
 | `Sheaf.RingTheory.ProEtale.ClosedLiftUnits` | 7 | 1 | proof |
 | `WeilConjectures.RingTheory.ProEtale.ClosedLift` | 7 | 2 | proof |
-| `WeilConjectures.WeilSheaf.Cohomology` | 7 | 2 | proof |
-| `WeilConjectures.WeilSheaf.PoincareDuality` | 7 | 3 | proof |
 | `Sheaf.CategoryTheory.Sites.CoveringRepresentableCoequalizer` | 8 | 1 | proof |
-| `WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleRepresentableEpiLocalLifting` | 9 | 1 | proof |
-| `WeilConjectures.WeilSheaf.GrothendieckLefschetz` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
-Also listed above and claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
+Also listed above and claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
 | `Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp` | 1 | 2 |
-| `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | 6 | 5 |
-| `WeilConjectures.WeilSheaf.Cohomology` | 7 | 2 |
