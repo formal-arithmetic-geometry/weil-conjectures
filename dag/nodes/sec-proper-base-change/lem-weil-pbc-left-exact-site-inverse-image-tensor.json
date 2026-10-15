@@ -210,5 +210,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c12b2d855",
+  "group": "NE",
+  "result": "pass",
+  "note": "Full source and dependency review completed; immutable module compiled successfully via server-only scompile.py with no delivery errors."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteInverseImageTensor",
+  "declaration": "CategoryTheory.siteInverseImage_tensor",
+  "declarations": [
+   "CategoryTheory.siteInverseImage_tensor",
+   "CategoryTheory.siteInverseImage_tensor_coherence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiteInverseImageTensor.lean",
+  "statement": "theorem siteInverseImage_tensor {C D : Type (u + 1)} [Category.{u} C] [Small.{u} C] [EssentiallySmall.{u + 1} C] [Category.{u} D] [Small.{u} D] [EssentiallySmall.{u + 1} D] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (K : Precoverage D) [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] [HasFiniteLimits C] (U : C ⥤ D) [PreservesFiniteLimits U] (hUcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map U ∈ K (U.obj X)) : ∃ (hU : U.IsContinuous J.toGrothendieck K.toGrothendieck), Nonempty ((sheafPullback U (Type (u + 1)) J.toGrothendieck K.toGrothendieck) ⊣ (U.sheafPushforwardContinuous (Type (u + 1)) J.toGrothendieck K.toGrothendieck)) ∧ PreservesFiniteLimits (sheafPullback U (Type (u + 1)) J.toGrothendieck K.toGrothendieck) ∧ PreservesColimitsOfSize.{u + 1, u + 1} (sheafPullback U (Type (u + 1)) J.toGrothendieck K.toGrothendieck) ∧ Nonempty ((sheafPullback U AddCommGrpCat.{u + 1} J.toGrothendieck K.toGrothendieck) ⊣ (U.sheafPushforwardContinuous AddCommGrpCat.{u + 1} J.toGrothendieck K.toGrothendieck)) ∧ ∃ (_ : (sheafPullback U AddCommGrpCat.{u + 1} J.toGrothendieck K.toGrothendieck).Additive), PreservesFiniteLimits (sheafPullback U AddCommGrpCat.{u + 1} J.toGrothendieck K.toGrothendieck) ∧ PreservesFiniteColimits (sheafPullback U AddCommGrpCat.{u + 1} J.toGrothendieck K.toGrothendieck) ∧ (∀ S : ShortComplex (Sheaf J.toGrothendieck AddCommGrpCat.{u + 1}), S.ShortExact → (S.map (sheafPullback U AddCommGrpCat.{u + 1} J.toGrothendieck K.toGrothendieck) ).ShortExact) ∧ Nonempty (sheafPullback U (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) J.toGrothendieck K.toGrothendieck ⋙ sheafCompose K.toGrothendieck (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1}) ≅ sheafCompose J.toGrothendieck (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1}) ⋙ sheafPullback U AddCommGrpCat.{u + 1} J.toGrothendieck K.toGrothendieck) ∧ ∃ (mJ : MonoidalCategory (Sheaf J.toGrothendieck (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) (mK : MonoidalCategory (Sheaf K.toGrothendieck (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))), mJ = Sheaf.monoidalCategory J.toGrothendieck (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) ∧ mK = Sheaf.monoidalCategory K.toGrothendieck (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) ∧ ∃ (bJ : BraidedCategory (Sheaf J.toGrothendieck (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) (bK : BraidedCategory (Sheaf K.toGrothendieck (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))), HEq bJ (Sheaf.braidedCategory J.toGrothendieck (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) ∧ HEq bK (Sheaf.braidedCategory K.toGrothendieck (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) ∧ ∃ (mU : (sheafPullback U (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) J.toGrothendieck K.toGrothendieck).Monoidal), HEq mU.toOplaxMonoidal (sheafPullbackOplaxMonoidal U (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) J.toGrothendieck K.toGrothendieck) ∧ Nonempty (sheafPullback U (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) J.toGrothendieck K.toGrothendieck).Braided",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Two declarations cover all clauses: exact inverse image and its normalized strong symmetric tensor structure, then adjunction-compatible monoidal composition/identity. Abelian groups use their unique integer module action via ULift.ringEquiv; a natural isomorphism explicitly identifies the module and abelian inverse-image functors. No node statement changed."
  }
 }
