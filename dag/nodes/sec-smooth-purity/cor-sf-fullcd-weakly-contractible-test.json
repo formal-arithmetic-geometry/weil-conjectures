@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "cor-sf-fullcd-weakly-contractible-test",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "FullCD tested on affine weakly contractible objects",
- "statement": "In the setting of [def-weil-full-cohomological-dimension] the\ncondition $\\operatorname{FullCD}(p,A;c)$ is equivalent to the following:\nfor every sheaf $\\mathcal F$ of $A$-modules on\n$\\overline X_{\\Proet}$ and every affine weakly contractible object\n$W\\to Y$ of $Y_{\\Proet}$ the evaluations\n$\\mathcal H^r(Rp_*\\mathcal F)(W)$ vanish for $r>c$, and the same holds\nafter every pro-étale base change of $p$. In particular the test of\n$\\operatorname{FullCD}$ needs no computation of geometric-point stalks,\nand the failure of conservativity of the geometric-point stalks recorded in\nclause (4) of [lem-cbc-proetale-stalk-conservative] does not obstruct\nit.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, and an integer\n$n\\in\\mathbf Z_{\\geq1}$; put $A=A_{E,n}$ with the finite discrete coefficient convention\n[def-weil-finite-torsion-constructibility]. Let $S$ be a scheme on which\n$\\ell$ is invertible, let $Y$ and $\\overline X$ be finite-type [def-weil-scheme-morphism-properties] $S$-schemes,\nand let $p:\\overline X\\to Y$ be a proper $S$-morphism. Use the derived direct image\n[def-weil-derived-direct-image] on the small pro-etale sites\n[def-weil-pbc-proetale-site], and cohomology sheaves\n[def-weil-derived-cohomology-sheaves]. An object $W$ of a site is weakly\ncontractible if every epimorphism $G\\to H$ of sheaves of sets induces a\nsurjection $G(W)\\to H(W)$. For\n$c\\in\\mathbf Z_{\\geq0}$, the condition $\\operatorname{FullCD}(p,A;c)$ is\nequivalent to the following: for every sheaf $\\mathcal F$ of $A$-modules on\n$\\overline X_{\\Proet}$ and every affine weakly contractible object $W\\to Y$\nof $Y_{\\Proet}$, the evaluations $\\mathcal H^r(Rp_*\\mathcal F)(W)$ vanish\nfor $r\\in\\mathbf Z$, $r>c$, and, for every object $V\\to Y$ of $Y_{\\Proet}$, every sheaf $\\mathcal F$ of $A$-modules on $\\overline X_{\\Proet}$, and every affine weakly contractible object $W\\to V$ of\n$V_{\\Proet}$, the evaluations\n$\\mathcal H^r(R(p_V)_*(\\mathcal F|_{\\overline X\\times_YV}))(W)$ vanish\nfor $r\\in\\mathbf Z$, $r>c$, where $p_V:\\overline X\\times_YV\\to V$ is the base change of\n$p$. In particular the test of $\\operatorname{FullCD}$ needs no computation of\ngeometric-point stalks, and the failure of conservativity of the geometric-point\nstalks in general recorded in clause (4) of [lem-cbc-proetale-stalk-conservative] does not\nobstruct it.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/cor-sf-fullcd-weakly-contractible-test.md",
   "place": "node cor-sf-fullcd-weakly-contractible-test, order 1793"
@@ -16,29 +16,132 @@
   "def-weil-full-cohomological-dimension",
   "lem-cbc-proetale-stalk-conservative",
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-direct-image"
  ],
  "proof": [
   {
-   "text": "The cohomology sheaves $\\mathcal H^r(Rp_*\\mathcal F)$ vanish for $r>c$\nif and only if their evaluations at all affine weakly contractible objects\nof $Y_{\\Proet}$ vanish, by\n[lem-sf-proetale-vanishing-detection](i) applied on $Y_{\\Proet}$;\nthis is the first equivalence. The relative clause is the same statement\napplied to the base-changed morphisms $p_V$, with the same detection\ndevice on $V_{\\Proet}$, which is legitimate because the base change of a\nproper finite-type morphism is proper of finite type. The last sentence\nrestates the detection device used.",
+   "text": "Fix an arbitrary sheaf $\\mathcal F$ of $A$-modules on $\\overline X_{\\Proet}$ and an integer $r>c$. In the finite discrete coefficient convention of [def-weil-full-cohomological-dimension], put $Q=\\mathcal H^r(Rp_*\\mathcal F)$, a sheaf of $A$-modules on $Y_{\\Proet}$. Apply clause (i) of [lem-sf-proetale-vanishing-detection] with $\\Lambda=A$, $T=Y$, and $F=Q$. Its hypotheses hold because $A$ is a finite discrete ring and $Y$ is a scheme; it imposes no constructibility or etale-origin assumption on $Q$. It gives $Q=0$ if and only if $Q(W)=0$ for every affine weakly contractible object $W\\to Y$. Quantifying this equivalence over the same ambient sheaves $\\mathcal F$ and integers $r>c$ gives precisely the equivalence between the absolute FullCD clause and the absolute evaluation test.",
    "uses": [
+    "def-weil-full-cohomological-dimension",
     "lem-sf-proetale-vanishing-detection"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/cor-sf-fullcd-weakly-contractible-test.md",
+    "place": "Proof, first sentence: absolute vanishing equivalence"
+   }
+  },
+  {
+   "text": "Fix an arbitrary object $V\\to Y$ of $Y_{\\Proet}$, an arbitrary sheaf $\\mathcal F$ of $A$-modules on $\\overline X_{\\Proet}$, and an integer $r>c$. Put $Q_V=\\mathcal H^r(R(p_V)_*(\\mathcal F|_{\\overline X\\times_YV}))$, a sheaf of $A$-modules on $V_{\\Proet}$. Apply clause (i) of [lem-sf-proetale-vanishing-detection] with $\\Lambda=A$, $T=V$, and $F=Q_V$. An object $V$ of the small pro-etale site is a scheme, and the coefficient ring is the same finite discrete $A$. The lemma requires no finite-type or properness condition, so it applies even when $V$ and $\\overline X\\times_YV$ are not finite type over $S$. It gives $Q_V=0$ if and only if $Q_V(W)=0$ for every affine weakly contractible object $W\\to V$ of $V_{\\Proet}$. Quantifying over $V$, the original ambient sheaves $\\mathcal F$, and $r>c$ yields exactly the relative clause of [def-weil-full-cohomological-dimension] if and only if the relative evaluation test holds. In particular the sheaf is still $\\mathcal F|_{\\overline X\\times_YV}$; no quantifier over arbitrary sheaves on the fibre product has been substituted. Combining with step 1 proves the FullCD equivalence.",
+   "uses": [
+    "def-weil-full-cohomological-dimension",
+    "lem-sf-proetale-vanishing-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/cor-sf-fullcd-weakly-contractible-test.md",
+    "place": "Proof, relative-clause sentence: apply detection on V_proet"
+   }
+  },
+  {
+   "text": "Steps 1 and 2 use evaluations of the cohomology sheaves themselves. Neither step computes geometric-point stalks or replaces these evaluations by the cohomology of an ordinarily evaluated complex. Thus the geometric-stalk criterion is unnecessary. Clause (4) of [lem-cbc-proetale-stalk-conservative] states that geometric-point stalks are not conservative in general; this warning does not obstruct either equivalence. It makes no assertion of nonconservativity for every individual base scheme, in particular for the empty scheme.",
+   "uses": [
+    "lem-cbc-proetale-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/cor-sf-fullcd-weakly-contractible-test.md",
+    "place": "Proof, last sentence: evaluation detection does not use geometric-point stalks"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sf-proetale-vanishing-detection"
+  "def-weil-full-cohomological-dimension",
+  "lem-sf-proetale-vanishing-detection",
+  "lem-cbc-proetale-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/cor-sf-fullcd-weakly-contractible-test.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "FullCD cohomology sheaves vanish iff evaluations on affine weakly contractible pro-etale objects vanish, uniformly after base change",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; CategoryTheory.Sheaf.H; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; no FullCD or weakly-contractible detection declaration",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, Sheaf, cohomology, weakly contractible, base change",
+   "results": "0 hits; loogle rejected query with unknown identifier 'CategoryTheory'",
+   "date": "2026-10-15",
+   "verdict": "no match (query rejected)"
+  },
+  {
+   "tool": "grep",
+   "query": "weakly.contractible|FullCD|isStableUnderBaseChange [Mathlib/AlgebraicGeometry]",
+   "results": "no matches",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "FullCD cohomology sheaves vanish iff evaluations on affine weakly contractible pro-etale objects vanish",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- F(W) = 0, weakly contractible, sheaf",
+   "results": "0 hits; loogle parser error: expected end of input",
+   "date": "2026-10-15",
+   "verdict": "no match (query rejected)"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper.*pullback|isStableUnderBaseChange [Mathlib/AlgebraicGeometry/Morphisms]",
+   "results": "no matches",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf zero detected by evaluations on covering weakly contractible objects",
+   "results": "CategoryTheory.Sheaf.hasSeparator; CategoryTheory.Sheaf.IsConstant; CategoryTheory.Sheaf.isTerminalOfBotCover; CategoryTheory.Presheaf.isSeparated_iff_subsingleton; CategoryTheory.Sheaf.isSeparator; no exact weakly-contractible detection",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsZero.*(evaluation|sections)|isZero_iff.*(obj|sections)|[Ww]eakly[Cc]ontractible",
+   "results": "5 hits: Mathlib/CategoryTheory/Limits/Shapes/ZeroObjects.lean; Mathlib/RepresentationTheory/Rep/Res.lean; Mathlib/Topology/Sheaves/Abelian.lean; Mathlib/Topology/Sheaves/Abelian.lean; Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean",
+   "date": "2026-10-15",
+   "verdict": "no match: generic objectwise zero functor, regular-topology projectivity, or topological-space stalk criteria do not state the FullCD pro-etale weakly-contractible test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of projective objects covering a Grothendieck site detects zero sheaves by their sections",
+   "results": "8 hits: CategoryTheory.regularTopology.isSheaf_of_projective; CategoryTheory.regularTopology.isSheafFor_regular_of_projective; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp; CategoryTheory.Sheaf.hasSeparator; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp; CategoryTheory.Abelian.has_projective_separator; CategoryTheory.Sheaf.isSeparator; CategoryTheory.Sheaf.isSeparating",
+   "date": "2026-10-15",
+   "verdict": "no match: generic objectwise zero functor, regular-topology projectivity, or topological-space stalk criteria do not state the FullCD pro-etale weakly-contractible test"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isZero\", \"Sheaf\"",
+   "results": "3 hits: CategoryTheory.Sheaf.subsingleton_H_of_isZero; AlgebraicGeometry.Scheme.isZero_ellAdicSheaf_of_isEmpty; TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero",
+   "date": "2026-10-15",
+   "verdict": "no match: generic objectwise zero functor, regular-topology projectivity, or topological-space stalk criteria do not state the FullCD pro-etale weakly-contractible test"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -73,5 +176,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-fullcd-etale-origin"
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "cor-sf-fullcd-weakly-contractible-test",
+  "worker": "stage1",
+  "summary": "Revalidated the current detection statement after the return: clause (i) retains arbitrary schemes and finite discrete rings, while the stalk warning is qualified in general. Separated the two applications with explicit substitutions (Lambda,T,F)=(A,Y,Q) and (A,V,Q_V), checked their hypotheses and unchanged ambient-sheaf restriction quantifiers, and isolated the final warning. No new nodes; no proper-base-change theorem is needed.",
+  "blueprint": "Realizes the blueprint proof paragraph in three steps: its absolute equivalence, its application to each p_V, and its final observation about stalks. The properness-permanence aside is unnecessary for the cited detection lemma, whose current statement assumes only a scheme and a finite discrete ring. The in-general qualification follows the corrected cited warning.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-0057ce91c",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-0057ce91c (reviewer sub-agent of L); spot-checked: Read the full item, report, eight cited statements, blueprint route, and Stacks sources 090L, 0990, 0946, 0947, and 0991. All three steps preserve coefficients and FullCD quantifiers; no comparison theorem is assumed. No new nodes or repairs. Detailed checks written to review.md."
+ }
 }
