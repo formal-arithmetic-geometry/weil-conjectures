@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.CategoryTheory.FilteredTwoColimit
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.AlgebraicGeometry.CondensedDerivedTensorComparison
