@@ -226,5 +226,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-9d47be0ce (reviewer sub-agent of L); spot-checked: Read the item, cited statements, sources, and route in full. Added the existing constant-ring/ModuleCat equivalence citation and explicit transport of derived functors and canonical exchange maps. Statement unchanged; small cases and citation checks pass. Corrected JSON and concrete findings are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3cad60abf",
+  "group": "NC",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, source alignment, report sections, and server scompile verification all passed; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients",
+  "declaration": "AlgebraicGeometry.Etale.exchange_forget_coefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExchangeForgetCoefficients.lean",
+  "statement": "theorem exchange_forget_coefficients (Λ : Type (u + 1)) [CommRing Λ] {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : (∀ (T : Scheme.{u}) (i : ℤ), Nonempty (D+(moduleAbelianForget Λ T) ⋙ DerivedCategory.Plus.homologyFunctor (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) i ≅ DerivedCategory.Plus.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) i ⋙ moduleAbelianForget Λ T)) ∧ (∀ (T : Scheme.{u}), PreservesFiniteLimits (moduleAbelianForget Λ T) ∧ PreservesFiniteColimits (moduleAbelianForget Λ T)) ∧ IsIso (moduleAbelianUpperStarComparison Λ f) ∧ IsIso (moduleAbelianUpperStarComparison Λ f') ∧ IsIso (moduleAbelianUpperStarComparison Λ g) ∧ IsIso (moduleAbelianUpperStarComparison Λ g') ∧ IsIso (moduleAbelianDerivedLowerStarComparison Λ f) ∧ IsIso (moduleAbelianDerivedLowerStarComparison Λ f') ∧ (D+(moduleAbelianForget Λ Y').map ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) ≫ (moduleAbelianDerivedExchangeTargetIso Λ g' f' K).hom = (moduleAbelianDerivedExchangeSourceIso Λ f g K).hom ≫ (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app (D+(moduleAbelianForget Λ X).obj K)) ∧ (IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) ↔ IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app (D+(moduleAbelianForget Λ X).obj K)))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
