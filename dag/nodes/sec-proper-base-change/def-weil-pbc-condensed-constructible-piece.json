@@ -1,0 +1,100 @@
+{
+ "id": "def-weil-pbc-condensed-constructible-piece",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: preservation through the common-stage colimit; the single-sheaf Hom input is expanded into locally closed pieces and extensions.",
+   "via": [
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Locally closed locally finitely presented condensed pieces",
+ "statement": "Fix a prime $\\ell$, a finite intermediate field $E$ of $\\overline{\\mathbf Q}_\\ell$\n[def-weil-finite-subextension-directed-set], and a scheme $T$. Use the coefficient sheaves,\ninternal module categories $\\mathcal M_T^c(E)$ and their ordinary derived categories of\n[def-weil-pbc-condensed-e-module-category]. A module is locally finitely presented if it\nadmits a pro-etale covering on which it is a cokernel of a map between finite free modules.\nA module is constructible if it has a finite locally closed stratification with constructible\nunderlying strata on each of which its inverse image is locally finitely presented.\n\nA locally closed piece in $D(\\mathcal M_T^c(E))$ is an object isomorphic to\n$(i_*j_!P)[0]$, where $i:Z\\to T$ is a closed immersion, $j:U\\to Z$ is a quasi-compact open\nimmersion, and $P\\in\\mathcal M_U^c(E)$ is locally finitely presented. The two functors use\nexactly the coefficient comparisons of [def-weil-pbc-condensed-e-module-category]; $i_*$\nhere is ordinary sheaf pushforward and the resulting sheaf is placed in degree zero.\n",
+ "source": {
+  "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+  "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constructible condensed module has an open closed decomposition and a finite distinguished extension tower of locally finitely presented stratum pieces",
+   "date": "2026-10-16",
+   "results": "0 hits: ; service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible sheaf has a locally finitely presented restriction to a nonempty open with constructible restriction to its proper closed complement",
+   "date": "2026-10-16",
+   "results": "8 hits: Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, Topology.IsConstructible.isLocallyConstructible, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsLocallyConstructible.isConstructible, Topology.IsLocallyConstructible.iff_of_isOpenCover, AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsLocallyConstructible.of_isOpenCover, Topology.IsLocallyConstructible.of_isOpenCover'",
+   "verdict": "no exact match; the general Mathlib ingredients are used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleModuleObject|IsLocallyFinitelyPresented|extensionProductIter",
+   "date": "2026-10-16",
+   "results": "10 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean",
+   "verdict": "no exact match; the general Mathlib ingredients are used in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedSheafExtContinuity",
+  "date": "2026-10-16",
+  "group": "C4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedConstructiblePiece",
+  "file": "lean/Sheaf/Paper/CondensedConstructiblePiece.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedConstructiblePiece",
+  "statement": "def condensedConstructiblePiece (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) : ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E.val) T)))",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T192134-L-1051130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T192134-L-1051130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

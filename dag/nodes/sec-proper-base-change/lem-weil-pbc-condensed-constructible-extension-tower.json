@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-condensed-constructible-extension-tower",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: preservation through the common-stage colimit; the single-sheaf Hom input is expanded into locally closed pieces and extensions.",
+   "via": [
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite distinguished extension tower for a constructible module",
+ "statement": "Fix a prime $\\ell$, a finite intermediate field $E$ of $\\overline{\\mathbf Q}_\\ell$\n[def-weil-finite-subextension-directed-set], and a scheme $T$. Use the coefficient sheaves,\ninternal module categories $\\mathcal M_T^c(E)$ and their ordinary derived categories of\n[def-weil-pbc-condensed-e-module-category]. A module is locally finitely presented if it\nadmits a pro-etale covering on which it is a cokernel of a map between finite free modules.\nA module is constructible if it has a finite locally closed stratification with constructible\nunderlying strata on each of which its inverse image is locally finitely presented.\n\nSuppose the underlying space of $T$ is noetherian. Let $P$ be the property of being a piece\n[def-weil-pbc-condensed-constructible-piece]. Put $P^{*0}=P$ and define recursively\n$P^{*(r+1)}(B)$ to mean that there is a distinguished triangle $A\\to B\\to C\\to A[1]$\n[def-weil-triangulated-category] with $P(A)$ and $P^{*r}(C)$. For every constructible\n$M\\in\\mathcal M_T^c(E)$ there exists $r\\in\\mathbf N$ with $P^{*r}(M[0])$.\n",
+ "source": {
+  "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+  "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-condensed-constructible-piece",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Induct on closed subsets $C$ of the original noetherian $T$, simultaneously for all closed immersions $Z\\to T$ with image in $C$ and all constructible sheaves on $Z$. Closed subspaces remain noetherian and their strict-inclusion order is well founded.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Mathlib/Topology/NoetherianSpace.lean, WellFoundedLT (Closeds T)"
+   }
+  },
+  {
+   "text": "Apply the one-step decomposition on $Z$. A piece gives $r=0$. Otherwise the image of the proper closed subscheme $Z^\\prime$ in $T$ is strictly smaller than $C$: choose a point of $Z$ outside $Z^\\prime$ and use injectivity of $Z\\to T$. The induction hypothesis supplies a finite tower for the constructible sheaf on $Z^\\prime$.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-one-step"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "Exact closed pushforward maps distinguished triangles and commutes with the single functor. A pushed piece is a piece: compose its closed immersion with the new closed immersion, using the canonical ordinary pushforward composition isomorphism. Induction on the finite tower therefore pushes it to $Z$ without changing its length. Prepend the one-step triangle to add one extension.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-pbc-condensed-constructible-piece"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "Apply the simultaneous closed-support induction with $C=T$ and the identity immersion to obtain the stated tower for $M[0]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-constructible-piece",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-condensed-constructible-one-step"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+  "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constructible condensed module has an open closed decomposition and a finite distinguished extension tower of locally finitely presented stratum pieces",
+   "date": "2026-10-16",
+   "results": "0 hits: ; service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible sheaf has a locally finitely presented restriction to a nonempty open with constructible restriction to its proper closed complement",
+   "date": "2026-10-16",
+   "results": "8 hits: Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, Topology.IsConstructible.isLocallyConstructible, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsLocallyConstructible.isConstructible, Topology.IsLocallyConstructible.iff_of_isOpenCover, AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsLocallyConstructible.of_isOpenCover, Topology.IsLocallyConstructible.of_isOpenCover'",
+   "verdict": "no exact match; the general Mathlib ingredients are used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleModuleObject|IsLocallyFinitelyPresented|extensionProductIter",
+   "date": "2026-10-16",
+   "results": "10 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean",
+   "verdict": "no exact match; the general Mathlib ingredients are used in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedSheafExtContinuity",
+  "date": "2026-10-16",
+  "group": "C4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedConstructibleExtensionTower",
+  "file": "lean/Sheaf/Paper/CondensedConstructibleExtensionTower.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_condensedConstructible_extension_tower",
+  "statement": "theorem exists_condensedConstructible_extension_tower (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E.val) T)) (hM : IsConstructibleModuleObject (condensedRingObj (Profinite.continuousMapRingObj E.val) T) M) : ∃ r : ℕ, (condensedConstructiblePiece T ℓ E).extensionProductIter r ((DerivedCategory.singleFunctor _ 0).obj M)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T192134-L-1051130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T192134-L-1051130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

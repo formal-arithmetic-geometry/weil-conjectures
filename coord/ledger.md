@@ -15163,3 +15163,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:13 L: merged deliver/F1/WeilConjectures.WeilSheaf.Finiteness (stage 3; reviewer PASS; first push; landing 20261015T191323-L-1006997 (interface); batch 20261015T191319; modules 3; new nodes 1; change records: coord/changes/F1-finiteness-prune-duality.md)
 - 19:13 L: merged deliver/F2/Sheaf.CategoryTheory.Sites.LowerShriekCoveringGenerators (stage 3; reviewer PASS; first push; landing 20261015T191323-L-1007129 (interface); batch 20261015T191319; modules 2; new nodes 1)
 - 19:21 L: merged deliver/B4/Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed (stage 3; reviewer PASS; first push; landing 20261015T192133-L-1050943 (interface); batch 20261015T192132; modules 6; new nodes 5)
+- 19:21 L: merged deliver/C4/Sheaf.Paper.CondensedSheafExtContinuity (stage 3; reviewer PASS; first push; landing 20261015T192134-L-1051130 (interface); batch 20261015T192132; modules 6; new nodes 6)

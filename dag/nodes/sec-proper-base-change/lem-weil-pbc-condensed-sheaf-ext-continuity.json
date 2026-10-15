@@ -37,105 +37,48 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pur-ringed-site-grothendieck-abelian], filtered colimits of module sheaves are exact. Thus for a strict filtered diagram the termwise colimit carries objectwise quasi-isomorphisms to quasi-isomorphisms: its cohomology is the colimit of the kernels modulo the colimit of the images. Consequently good truncation at a common cohomological lower bound does not change the comparison being proved. Functorial K-injective resolutions exist by [prop-pur-kinjective-resolutions-exist]; replacing a strict diagram by these resolutions likewise leaves its termwise colimit quasi-isomorphic to the original one. After computing a derived functor with these models, good truncation at a common cohomological lower bound produces functorial bounded-below representatives; those truncated representatives need not themselves be injective. We prove the slightly more flexible assertion with a common cohomological lower bound, using such representatives throughout; this includes the stipulated termwise bound. The underlying noetherian space of $T$ is quasi-compact, and every open subset is quasi-compact, so intersections of affine opens are quasi-compact and $T$ is quasi-separated. The same applies to its locally closed subschemes.",
+   "text": "Construct the finite distinguished extension tower of $M[0]$ from the one-step open/closed decomposition by closed-support induction.",
    "uses": [
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "prop-pur-kinjective-resolutions-exist"
+    "lem-weil-pbc-condensed-constructible-extension-tower"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(2), proof"
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
    }
   },
   {
-   "text": "The locally free case is valid on any quasi-compact quasi-separated scheme $V$. Suppose $P$ is pro-etale locally free of finite rank. By [lem-weil-pbc-ringed-site-locally-free-derived-hom], maps from $P[0]$ into $K[n]$ are $H^nR\\Gamma(V,P^\\vee\\otimes K)$. Tensoring by $P^\\vee$ preserves the lower bound and commutes with the filtered colimit: on a trivializing cover it is a finite direct sum, and the canonical tensor-colimit map is therefore an isomorphism locally, hence globally. Apply the global-sections clause of [lem-weil-pbc-condensed-qcqs-pushforward-continuity] to $P^\\vee\\otimes K_i$. This proves the desired comparison for $P$ for every integer $n$, including negative $n$, and for arbitrary strict diagrams with a common cohomological lower bound.",
+   "text": "Every generator in this tower has shifted Hom continuity for the original diagram and the localization of its termwise colimit cocone.",
    "uses": [
-    "lem-weil-pbc-ringed-site-locally-free-derived-hom",
-    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+    "lem-weil-pbc-condensed-local-piece-hom-continuity"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(2), proof"
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
    }
   },
   {
-   "text": "For a closed immersion $i:Z\\hookrightarrow V$ with complementary quasi-compact open immersion $j$, use [lem-weil-pbc-condensed-open-closed-recollement] to write $i_*Ri^!K\\simeq\\operatorname{Cone}(K\\to Rj_*j^*K)[-1]$. The map here is the adjunction unit. Pullback $j^*$ is exact and preserves sheaf colimits. By [lem-weil-pbc-condensed-qcqs-pushforward-continuity] applied to the quasi-compact quasi-separated $j$, the filtered-colimit comparison for $Rj_*j^*K_i$ is a quasi-isomorphism. In functorial complex models, a cone has degree $r$ equal to the sum of the target's degree $r$ and the source's degree $r+1$, with differential built from the unit. Termwise colimits therefore commute with this cone and its differential; exact filtered colimits preserve the quasi-isomorphisms of models by step 1. Applying $i^*$ and $i^*i_*\\cong\\mathrm{id}$ now identifies the colimit of the $Ri^!K_i$ with $Ri^!K$ by a quasi-isomorphism. The same recollement statement gives the common lower bound $a$ for $Ri^!K_i$. Hence this new filtered diagram is an admissible second argument for the inductive assertion; no constructibility hypothesis on it has been used.",
+   "text": "Induct on the tower length. The base is generator continuity. In the successor case unpack its distinguished triangle and apply closure of filtered shifted Hom continuity under extensions. Evaluate the resulting property at $M[0]$ and the specified integer $n$. Unfolding cocone mapping gives exactly the original canonical colimit.desc, without replacing the comparison arrow.",
    "uses": [
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-    "lem-pur-ringed-site-grothendieck-abelian"
+    "lem-weil-pbc-hom-colimit-extension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(2), proof"
-   }
-  },
-  {
-   "text": "Proceed by noetherian induction on closed subspaces $V$ of $T$, with the assertion quantified over every constructible $E_V^c$-module $P$, every filtered diagram with a common cohomological lower bound, and every integer shift. The empty scheme has the zero module category, so is the base case. Let $(S_b)$ be a finite stratification as in [def-constructible-stratification]. For each $b$, the boundary $F_b=\\overline{S_b}\\setminus S_b$ is closed in $V$ because $S_b$ is locally closed. It has empty interior: a nonempty open contained in $F_b$ would be a nonempty relatively open subset of $\\overline{S_b}$ disjoint from its dense subset $S_b$. Set $U=V\\setminus\\bigcup_bF_b$. This is dense open, since a finite intersection of dense open subsets is dense (intersect a nonempty open with those dense opens one at a time). Each $S_b\\cap U=\\overline{S_b}\\cap U$ is closed in $U$, and its complement is the finite union of the other such closed pieces, so it is also open. Apply [lem-weil-pbc-condensed-lfp-local-triviality] on the noetherian strata and restrict its trivializations to these disjoint open pieces. Thus $P|_U$ is locally free of finite rank. The closed complement $Z=V\\setminus U$ is proper; intersecting the strata with $Z$ gives a finite locally closed stratification and inverse image preserves their presentations, since it preserves cokernels and finite free sheaves. Thus $i^*P$ is constructible on $Z$. This uses no frontier condition on the partition and no induction on a potentially unchanged count of strata. Exact restriction and its coefficient identifications are those of [lem-weil-pbc-condensed-open-closed-recollement]. If a chosen stratum has a different scheme structure from the corresponding open piece, its base change to that piece is a closed immersion with full set-theoretic support. Apply the first recollement triangle with empty open complement: restriction and closed pushforward are inverse, with the coefficient rings identified. Thus the locally free restriction is the same one on the open piece; nilpotent scheme structures are not silently identified.",
-   "uses": [
-    "def-constructible-stratification",
-    "lem-weil-pbc-condensed-lfp-local-triviality",
-    "lem-weil-pbc-condensed-open-closed-recollement"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(2), proof"
-   }
-  },
-  {
-   "text": "Use the first triangle of [lem-weil-pbc-condensed-open-closed-recollement] for $P[0]$: $j_!j^*P[0]\\to P[0]\\to i_*i^*P[0]\\to$. For the first term the adjunction $j_!\\dashv j^*$ identifies its shifted maps into $K_i$ with those from $j^*P[0]$ into $j^*K_i$; step 2 proves their filtered continuity. For the third term $i_*\\dashv Ri^!$ identifies the maps with those from $i^*P[0]$ into $Ri^!K_i$. Step 3 identifies the colimit of the latter targets with $Ri^!K$ and preserves a common lower bound. The noetherian induction hypothesis on the proper closed $Z$ therefore proves continuity for this third term for all shifts. The adjunction bijections identify these comparison arrows with the arrows induced by the original cocone.",
-   "uses": [
-    "lem-weil-pbc-condensed-open-closed-recollement"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(2), proof"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-hom-out-of-triangle-exact] and its rotations to the triangle of step 5 with targets $K_i[n]$ and $K[n]$. This gives the natural long exact Hom sequences in the first argument. Take filtered colimits of the first sequences, which remain exact by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. For each $n$, in the five-term window $\\operatorname{Hom}(j_!j^*P,K_i[n-1])\\to\\operatorname{Hom}(i_*i^*P,K_i[n])\\to\\operatorname{Hom}(P,K_i[n])\\to\\operatorname{Hom}(j_!j^*P,K_i[n])\\to\\operatorname{Hom}(i_*i^*P,K_i[n+1])$, the four comparisons away from the middle are isomorphisms by step 5. The middle comparison is an isomorphism by [lem-weil-pbc-five-lemma]. This completes the induction, and gives the claimed map for $V=T$ and $P=M$.",
-   "uses": [
-    "lem-weil-pbc-hom-out-of-triangle-exact",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-five-lemma"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Lemma 5.3(2), proof"
-   }
-  },
-  {
-   "text": "The arrow proved invertible is the canonical comparison, defined on a representative $f:M[0]\\to N_i[n]$ by $f\\mapsto (N_i[n]\\to N[n])\\circ f$. Precomposition with a map of first arguments and postcomposition with a map of filtered diagrams commute with this rule by associativity of composition. Replacing $n$ by $n+t$ gives exactly the shifted cocone rule, so shifts commute as well. This proves all requested naturalities; it does not require making the chosen stratification or noetherian induction functorial.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Canonical comparison and its naturality"
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-weil-pbc-ringed-site-locally-free-derived-hom",
-  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-  "lem-weil-pbc-condensed-open-closed-recollement",
-  "def-constructible-stratification",
-  "lem-weil-pbc-condensed-lfp-local-triviality",
-  "lem-weil-pbc-hom-out-of-triangle-exact",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-five-lemma",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-weil-pbc-condensed-constructible-extension-tower",
+  "lem-weil-pbc-condensed-local-piece-hom-continuity",
+  "lem-weil-pbc-hom-colimit-extension"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Lemma 5.3(2), expanded open/closed induction for the archived local-finite-presentation notion; local-triviality bridge is a separate unsplit input."
+  "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+  "place": "Stage-3 reduction: proved categorical five-lemma closure and closed-support tower induction; remaining geometric inputs are the initial open/closed step and one locally closed piece."
  },
  "mathlib_searches": [
   {
@@ -298,5 +241,15 @@
   "by": "NW",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T192134-L-1051130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

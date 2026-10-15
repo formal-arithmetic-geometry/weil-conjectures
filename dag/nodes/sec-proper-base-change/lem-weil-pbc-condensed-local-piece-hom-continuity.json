@@ -1,0 +1,163 @@
+{
+ "id": "lem-weil-pbc-condensed-local-piece-hom-continuity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: preservation through the common-stage colimit; the single-sheaf Hom input is expanded into locally closed pieces and extensions.",
+   "via": [
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Filtered derived Hom continuity for a locally closed piece",
+ "statement": "Fix a prime $\\ell$, a finite intermediate field $E$ of $\\overline{\\mathbf Q}_\\ell$\n[def-weil-finite-subextension-directed-set], and a scheme $T$. Use the coefficient sheaves,\ninternal module categories $\\mathcal M_T^c(E)$ and their ordinary derived categories of\n[def-weil-pbc-condensed-e-module-category]. A module is locally finitely presented if it\nadmits a pro-etale covering on which it is a cokernel of a map between finite free modules.\nA module is constructible if it has a finite locally closed stratification with constructible\nunderlying strata on each of which its inverse image is locally finitely presented.\n\nSuppose $T$ has noetherian underlying space, $I$ is a small filtered category and\n$N:I\\to C(\\mathcal M_T^c(E))$ is a diagram of cochain complexes with a common termwise\nlower bound: there is $a\\in\\mathbf Z$ such that $N_i^r=0$ for every $i$ and $r<a$.\nLet $Q$ be localization to the ordinary derived category [def-weil-abstract-derived-category], and apply $Q$ to the canonical termwise colimit cocone of $N$.\nEvery piece $K$ [def-weil-pbc-condensed-constructible-piece] satisfies the Hom continuity\nproperty [def-weil-pbc-hom-colimit-property] for this cocone: for every integer $n$, the\ncanonical map $\\varinjlim_i\\operatorname{Hom}(K,QN_i[n])\\to\n\\operatorname{Hom}(K,Q(\\varinjlim_iN_i)[n])$ is an isomorphism of abelian groups.\n",
+ "source": {
+  "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+  "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-condensed-constructible-piece",
+  "def-weil-pbc-hom-colimit-property",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Write the piece as $i_*j_!P[0]$ up to isomorphism. The closed source and its open subscheme are noetherian and qcqs. Local finite presentation over the finite field coefficients gives a pro-etale local finite free presentation of $P$.",
+   "uses": [
+    "def-weil-pbc-condensed-constructible-piece",
+    "lem-weil-pbc-condensed-lfp-local-triviality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "For a uniformly bounded-below diagram $L$ on that open, the derived Hom formula identifies Hom(P[0],L[n]) with degree-n derived sections of $P^\\vee\\otimes L$. The finite locally free dual tensor functor is exact, preserves the bound and filtered colimits. Apply qcqs derived global sections continuity. Transport between internal module objects and the ringed-site module presentation with the same coefficient sheaf; retain the evaluation normalization, so these are the canonical maps on Hom groups, not arbitrary group isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-locally-free-derived-hom",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "The closed adjunction and open extension-by-zero adjunction identify ambient Hom groups with Hom(P[0],j^*Ri^!N[n]). Recollement identifies $i_*Ri^!N$ with Cone(N\\to Rk_*k^*N)[-1], where $k$ is the complementary quasi-compact open. Qcqs pushforward continuity and exact filtered colimits give continuity of that cone and hence of $Ri^!$, using fully faithful exact closed pushforward. The costalk and exact open restriction preserve a common lower bound. Use functorial bounded injective representatives and good truncation to express these derived diagrams in the strict uniformly bounded-below form required in the previous step.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "Naturality of the adjunctions, evaluation and shifts identifies every map induced by a cocone leg with the original canonical colimit comparison. Transport along the isomorphism specifying the piece in the first argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-constructible-piece",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-ringed-site-locally-free-derived-hom",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+  "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Filtered derived Hom continuity for a locally finite free condensed module extended by zero along a locally closed immersion",
+   "date": "2026-10-16",
+   "results": "0 hits: ; service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered derived Hom continuity for extension by zero of a locally finite free condensed module on an open subscheme of a closed subscheme",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.res_const, ModuleCat.Tilde.res_apply, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.exists_const, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Modules.restrict",
+   "verdict": "no exact match; the general Mathlib ingredients are used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleModuleObject|IsLocallyFinitelyPresented|extensionProductIter",
+   "date": "2026-10-16",
+   "results": "10 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean",
+   "verdict": "no exact match; the general Mathlib ingredients are used in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedSheafExtContinuity",
+  "date": "2026-10-16",
+  "group": "C4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedLocalPieceHomContinuity",
+  "file": "lean/Sheaf/Paper/CondensedLocalPieceHomContinuity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_local_piece_hom_continuity",
+  "statement": "theorem condensed_local_piece_hom_continuity (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (N : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E.val) T)) ℤ) (hN : ∃ a : ℤ, ∀ (i : I) (r : ℤ), r < a → IsZero ((N.obj i).X r)) : condensedConstructiblePiece T ℓ E ≤ homColimitProperty (N ⋙ DerivedCategory.Q) (DerivedCategory.Q.mapCocone (colimit.cocone N))",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T192134-L-1051130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261015T192134-L-1051130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

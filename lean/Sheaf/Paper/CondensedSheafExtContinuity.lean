@@ -11,16 +11,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
-import Sheaf.Algebra.Homology.LocallyFreeDerivedHom
-import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-import Sheaf.Paper.CondensedOpenClosedRecollement
-import Sheaf.Paper.CondensedQcqsPushforwardContinuity
+import Sheaf.Paper.CondensedLocalPieceHomContinuity
+import Sheaf.Paper.CondensedConstructibleExtensionTower
 
 /-! # Filtered continuity for a constructible condensed module sheaf
 
@@ -44,13 +36,21 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the derived-module cocone needs extra typeclass and definitional equality work.
 /-- Derived Hom from a constructible condensed `E`-module sheaf commutes with a small
 filtered colimit of complexes with a common termwise lower bound, in every integer shift.
 Source: upstream ModuleObject/Colimit/TwoColimit.lean, Sorried input (Hom), sheaf base case;
 Hemo--Richarz--Scholbach, Lemma 5.3(2).
 (blueprint: lem-weil-pbc-condensed-sheaf-ext-continuity)
 
-Proof plan (the named inputs below are DAG nodes):
+Lean reduction: the open/closed one-step lemma gives a finite extension tower by
+noetherian induction on closed supports. Continuity holds for the locally closed pieces
+by the separate geometric lemma. Induction on the tower then uses the proved general
+closure of Hom continuity under distinguished extensions. This is the comparison for
+the original cocone, so no choice of a different colimit map is involved.
+
+Expanded geometric argument (the named inputs below are DAG nodes):
 1. By [lem-pur-ringed-site-grothendieck-abelian], filtered colimits of module sheaves are exact.
 Thus for a strict filtered diagram the termwise colimit carries objectwise quasi-isomorphisms to
 quasi-isomorphisms: its cohomology is the colimit of the kernels modulo the colimit of the images.
@@ -155,6 +155,20 @@ theorem isIso_constructible_condensed_sheaf_hom_colimit
       ((DerivedCategory.Q ⋙ shiftFunctor _ n ⋙
         preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor _ 0).obj M))).mapCocone
           (colimit.cocone N))) := by
-  sorry
+  obtain ⟨r, hr⟩ := exists_condensedConstructible_extension_tower T ℓ E M hM
+  let D := N ⋙ DerivedCategory.Q
+  let c := DerivedCategory.Q.mapCocone (colimit.cocone N)
+  have hP : condensedConstructiblePiece T ℓ E ≤ homColimitProperty D c :=
+    condensed_local_piece_hom_continuity T ℓ E N hN
+  have h : ∀ r : ℕ, (condensedConstructiblePiece T ℓ E).extensionProductIter r ≤
+      homColimitProperty D c := by
+    intro r
+    induction r with
+    | zero => exact hP
+    | succ r ih =>
+      rw [ObjectProperty.extensionProductIter_succ]
+      rintro K ⟨A, B, f, g, k, hdist, hA, hB⟩
+      exact homColimitProperty_extensions D c _ hdist (hP _ hA) (ih _ hB)
+  exact h r _ hr n
 
 end AlgebraicGeometry.ProEtale
