@@ -51,7 +51,7 @@ noncomputable def perfectOverlapCoreTransition
   derivedPullback (baseChangeMap s (overlapLimitArrow R c k))
 
 /-- The fixed composition comparison for the overlap transition. -/
-@[no_expose] noncomputable def perfectOverlapCoreBaseComparison
+noncomputable def perfectOverlapCoreBaseComparison
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     (i : I) (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i))
     [∀ Z : Scheme.{u},
@@ -60,17 +60,18 @@ noncomputable def perfectOverlapCoreTransition
     derivedPullback (pullback.fst s (Spec.map (c.ι.app i))) ≅
       derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE k.property)))) ⋙
         perfectOverlapCoreTransition R c i Y s k :=
-  let hX : pullback.fst s (Spec.map (c.ι.app i)) =
-      pullback.fst s (Over.mk (Spec.map (c.ι.app i))).hom := rfl
-  let hY : pullback.fst s (Spec.map (R.map (homOfLE k.property))) =
-      pullback.fst s (Over.mk (Spec.map (R.map (homOfLE k.property)))).hom := rfl
-  let eX := eqToIso (congrArg (fun f ↦ derivedPullback f) hX)
-  let eY := eqToIso (congrArg (fun f ↦ derivedPullback f) hY)
-  (by
-    simpa only [perfectOverlapCoreTransition] using
-      (eX ≪≫ perfectHomComparison s (overlapLimitArrow R c k) ≪≫
-        (Functor.isoWhiskerRight eY
-          (derivedPullback (baseChangeMap s (overlapLimitArrow R c k)))).symm))
+  perfectHomComparison s (overlapLimitArrow R c k)
+
+/-- The fixed overlap comparison is the composition comparison for the
+canonical arrow from the colimit to the finite stage. -/
+theorem perfectOverlapCoreBaseComparison_eq
+    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
+    (i : I) (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i))
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    (k : Set.Ici i) :
+    perfectOverlapCoreBaseComparison R c i Y s k =
+      perfectHomComparison s (overlapLimitArrow R c k) := rfl
 
 /-- Natural derived-pullback comparison for two cartesian identifications.
 Source: Stacks Project, Tag 0D5S. The two sides are pullbacks along the same
