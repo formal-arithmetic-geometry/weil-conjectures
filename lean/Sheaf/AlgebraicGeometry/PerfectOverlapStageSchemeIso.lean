@@ -36,6 +36,18 @@ open-scheme objects. Source: Stacks Project, Tag 08DW. -/
     (Scheme.Hom.preimage_inf g)).symm) ≪≫
       ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert h).isoPullback
 
+/-- The explicit open transport is judgmentally the raw cartesian iso after
+the preimage-intersection equality is applied. -/
+theorem perfectOverlapStageSchemeIso_eq_raw
+    {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
+    (pY : Y ⟶ S) (q : T ⟶ S) (h : IsPullback g pX pY q)
+    (U V : Y.Opens) :
+    perfectOverlapStageSchemeIso g pX pY q h U V =
+      ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert h).isoPullback := by
+  unfold perfectOverlapStageSchemeIso
+  simp only [Scheme.Hom.preimage_inf, eqToIso_refl,
+    Iso.refl_trans]
+
 /-- The transported cartesian scheme isomorphism has the expected first
 projection after restriction to either larger open. -/
 theorem perfectOverlapStageSchemeIso_inv_projection
