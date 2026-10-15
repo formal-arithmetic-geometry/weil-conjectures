@@ -146,4 +146,37 @@ theorem perfectOverlapApex_overlapReturn_comp_for
   have hCancel := perfectOverlapApex_siteReturn_comp g pX pY b hg U V E
   exact paste_return_triangle hTri hCancel
 
+/-- Nested restriction followed by the site counit and its inverse comparison
+reduces to the counit on the directly restricted object. Source: Stacks
+Project, Tags 08BT and 08BV. Apply naturality of the equivalence counit to
+the nested restriction isomorphism and cancel its inverse. -/
+theorem perfectOverlapApex_nestedCounit_cancel_for
+    {X Y S T : Scheme.{u}} (g : X ⟶ Y) (pX : X ⟶ T)
+    (pY : Y ⟶ S) (b : T ⟶ S) (hg : IsPullback g pX pY b)
+    (U V L : Y.Opens) (hWL : U ⊓ V ≤ L)
+    (E : schemeDerivedCategory X) :
+    let W := g ⁻¹ᵁ U ⊓ g ⁻¹ᵁ V
+    let Q := g ⁻¹ᵁ L
+    let i : W ⟶ Q := homOfLE (fun _ hx ↦ hWL hx)
+    let PQ := (schemeOpenRestriction X Q).mapDerivedCategory
+    let SQ := (schemeOpenOverlapRestriction X i).mapDerivedCategory
+    let PW := (schemeOpenRestriction X W).mapDerivedCategory
+    let σ := schemeDerivedOpenRestrictionCompIso X i
+    let eW : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W) ≌
+      SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) :=
+      Scheme.Modules.overEquiv W
+    let LW := eW.inverse.mapDerivedCategory
+    let cart := perfectOverlapStageEquivalence g pX pY b hg U V
+    let apex := perfectOverlapApexEquivalence g pX pY b hg U V
+    apex.functor.map (LW.map (σ.hom.app E)) ≫
+        cart.functor.map (eW.mapDerivedCategory.counitIso.hom.app (PW.obj E)) ≫
+          cart.functor.map (σ.inv.app E) =
+      cart.functor.map (eW.mapDerivedCategory.counitIso.hom.app
+        (SQ.obj (PQ.obj E))) := by
+  intro W Q i PQ SQ PW σ eW LW cart apex
+  have hc := congrArg cart.functor.map
+    (equivalence_counit_transport_cancel eW.mapDerivedCategory (σ.app E))
+  simp only [Functor.map_comp] at hc
+  exact hc
+
 end AlgebraicGeometry
