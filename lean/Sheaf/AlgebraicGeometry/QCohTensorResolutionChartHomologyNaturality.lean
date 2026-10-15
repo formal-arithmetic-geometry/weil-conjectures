@@ -2,6 +2,7 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartModel
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionTotalCoherence
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartHomologyNaturalityFromSquare
 import Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor
 
 /-! # Affine tensor-homology naturality
@@ -100,6 +101,40 @@ theorem tensorResolutionChartHomologyIso_naturality
               ((CochainComplex.singleFunctor Y.Modules 0).obj N)).hom) (-(n : ℤ)) =
       tensorResolutionSemilinearMap φ t ≫
         (tensorResolutionChartHomologyIso N V (MA V) (NA V) (sN V) (P V) n).hom := by
-  sorry
+  dsimp only
+  let φ := Y.presheaf.map (homOfLE h).op
+  let b' : (NA U) ⟶ (ModuleCat.restrictScalars φ.hom).obj (NA V) :=
+    ModuleCat.ofHom (X := NA U) (Y := (ModuleCat.restrictScalars φ.hom).obj (NA V))
+      { toFun := b
+        map_add' := b.map_add'
+        map_smul' := b.map_smul' }
+  have hb' : ∀ y : NA U,
+      sN V (b' y) = N.val.map (homOfLE h).op (sN U y) := by
+    intro y
+    exact hb y
+  have hk' : ∀ (j : ℕ) (x : (P U).complex.X j) (y : NA U),
+      k.f j (x ⊗ₜ[Γ(Y, U.1)] y) =
+        (show (P V).complex.X j from a.f j x) ⊗ₜ[Γ(Y, V.1)] (show NA V from b' y) := by
+    intro j x y
+    exact hk j x y
+  let EA := tensorResolutionChartComplex U (MA U) (P U)
+  let EB := tensorResolutionChartComplex V (MA V) (P V)
+  let N0 := (CochainComplex.singleFunctor Y.Modules 0).obj N
+  let RU := (Scheme.Modules.restrictFunctor U.2.fromSpec).mapHomologicalComplex (.up ℤ)
+  let RV := (Scheme.Modules.restrictFunctor V.2.fromSpec).mapHomologicalComplex (.up ℤ)
+  let a' := tensorResolutionSemilinearComplexMap φ (.up ℤ)
+    ((P U).complex.extend ComplexShape.embeddingDownNat)
+    ((P V).complex.extend ComplexShape.embeddingDownNat)
+    (tensorResolutionExtendSemilinear φ.hom ComplexShape.embeddingDownNat
+      (P U).complex (P V).complex a)
+  let l := tensorResolutionRestrictionTensorMap (Spec.map φ)
+    EA (RU.obj N0) EB (RV.obj N0) a'
+    (tensorResolutionChartRestrictionComplexIso Y V U h N0).hom
+  have hl := tensorResolutionChartTensorIso_naturality_of_pure_tensors
+    N V U h (MA U) (NA U) (MA V) (NA V) (sN U) (sN V)
+    (P U) (P V) b' a k hb' hk'
+  exact tensorResolutionChartHomologyIso_naturality_of_square
+    Y N V U h (MA U) (NA U) (MA V) (NA V) (sN U) (sN V)
+    (P U) (P V) n k l hl
 
 end AlgebraicGeometry
