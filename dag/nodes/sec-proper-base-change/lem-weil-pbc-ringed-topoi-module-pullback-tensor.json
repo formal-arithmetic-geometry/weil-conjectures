@@ -24,89 +24,26 @@
  ],
  "proof": [
   {
-   "text": "Put $L=u^{-1}$, $P=u_*$, $A=LR$, $X=LM$, $Y=LN$, and let $H$ be any $S$-module sheaf, also regarded as an $A$-module via $c$. Give $PH$ the $R$-action specified in the module adjunction node. That adjunction followed by the sheaf tensor universal property gives bijections $\\operatorname{Hom}_S(u^*(M\\otimes_RN),H)\\cong\\operatorname{Hom}_R(M\\otimes_RN,PH)\\cong\\mathrm{Bilin}_R(M\\times N,PH)$, natural in $H$. The hypotheses of the adjunction node are exactly the given geometric morphism and ring map.",
+   "text": "Apply the module pullback/pushforward adjunction to obtain the inverse-image module functor I, its underlying-sheaf comparison eI, the scalar-extension functor T, and the normalized insertion maps q. Then apply the isolated tensor-comparison tail theorem to these data. Its conjunction gives the tensor isomorphisms, simultaneous naturality, and the generalized pure-tensor equation required here.",
    "uses": [
     "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor-tail"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
-   }
-  },
-  {
-   "text": "Let $\\lambda_{V,W}:L(V\\times W)\\xrightarrow{\\sim}LV\\times LW$ be the finite-product comparison and $\\eta,\\varepsilon$ the set adjunction unit and counit. The group/ring lifting node identifies the operations on the inverse images with the images of the operations through these comparisons; the unit and counit respect the group/ring operations. For a sheaf map $b:M\\times N\\to PH$ define $\\beta=\\varepsilon_H\\circ Lb\\circ\\lambda_{M,N}^{-1}:X\\times Y\\to H$. Conversely send $\\beta$ to $P\\beta\\circ\\langle\\eta_M,\\eta_N\\rangle$. Naturality of $\\eta$ and the two triangle identities show that these are inverse: this is the set adjunction bijection for $M\\times N$, with $\\eta_{M\\times N}$ identified with the pair of units by its projections.",
-   "uses": [
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
-   }
-  },
-  {
-   "text": "This bijection restricts to bilinear maps. Indeed transpose the first additivity equation $b\\circ(+_M\\times\\mathrm{id}_N)=+_{PH}\\circ\\langle b\\circ(p_1,p_3),b\\circ(p_2,p_3)\\rangle$, whose domain is $M\\times M\\times N$. Preservation of this triple product and naturality of the counit turn it into $\\beta(x+x\\prime,y)=\\beta(x,y)+\\beta(x\\prime,y)$. The equation on $M\\times N\\times N$ gives second-variable additivity. Zero equations use the terminal-object comparison. For the scalar equation on $R\\times M\\times N$, transposition sends the $R$-action on $PH$ to the $A$-action on $H$: the former is induced by $R\\xrightarrow{\\eta_R}PA\\xrightarrow{Pc}PS$ and the latter by $c:A\\to S$, and $\\varepsilon_S\\circ L(Pc\\circ\\eta_R)=c$ by naturality and a triangle identity. Consequently $b(rm,n)=r b(m,n)$ transposes to $\\beta(ax,y)=c(a)\\beta(x,y)$, and the second-variable equation transposes in the same way. Because transposition is injective, these implications are equivalences. Thus $\\mathrm{Bilin}_R(M\\times N,PH)\\cong\\mathrm{Bilin}_A(X\\times Y,H)$, naturally in $H,M,N$. This calculation uses only the finite-product comparisons and operations supplied by the cited lifting statement, rather than assuming a module or bilinear version of that statement.",
-   "uses": [
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
-   }
-  },
-  {
-   "text": "An $A$-bilinear map $\\beta:X\\times Y\\to H$ extends uniquely to an $S$-bilinear map $\\widetilde\\beta:(S\\otimes_AX)\\times(S\\otimes_AY)\\to H$ by $\\widetilde\\beta(s\\otimes x,t\\otimes y)=st\\beta(x,y)$. The balancing relation in the first factor is respected because $sc(a)t\\beta(x,y)=st\\beta(ax,y)$; the second uses $stc(a)\\beta(x,y)=st\\beta(x,ay)$. Additivity follows from that of $\\beta$ and distributivity in $S$. For clarity, form the sectionwise presheaves $E(U)=S(U)\\otimes_{A(U)}X(U)$ and $F(U)=S(U)\\otimes_{A(U)}Y(U)$. The formula defines a restriction-compatible $S$-bilinear presheaf map $E\\times F\\to H$. Its sheafification gives the asserted bilinear map on $E^\\#\\times F^\\#$: sheafification of sets preserves products, so the universal set-sheafification map extends it uniquely, and sheafifying the addition and scalar equations preserves those equations. The underlying sets of the module sheafification are the set sheafification here: the sheafification notion explicitly permits sets and abelian groups, and the module-sheafification definition gives its unique induced action. Equivalently one may build the abelian sheafification by sheafifying the group-operation diagrams as in the lifting node. Thus by the definition of the sheaf tensor product $E^\\#=S\\otimes_AX$, $F^\\#=S\\otimes_AY$. Conversely restrict an $S$-bilinear map along $x\\mapsto1\\otimes x$, $y\\mapsto1\\otimes y$. The two operations are inverse by $S$-bilinearity and uniqueness in the tensor universal property. Commutativity of $S$ is used for the product $st$. Applying that property once more identifies these maps with $\\operatorname{Hom}_S(u^*M\\otimes_Su^*N,H)$.",
-   "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-sheafification-sets-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
-   }
-  },
-  {
-   "text": "Let $B=u^*(M\\otimes_RN)$ and $T=u^*M\\otimes_Su^*N$. Composing the preceding bijections gives $\\Phi_H:\\operatorname{Hom}_S(B,H)\\xrightarrow{\\sim}\\operatorname{Hom}_S(T,H)$ natural in $H$. Set $a=\\Phi_B(\\mathrm{id}_B):T\\to B$ and $d=\\Phi_T^{-1}(\\mathrm{id}_T):B\\to T$. Naturality gives $\\Phi_H(f)=f\\circ a$. Hence $d\\circ a=\\mathrm{id}_T$, and injectivity of $\\Phi_B$ applied to $a\\circ d$ and $\\mathrm{id}_B$ gives $a\\circ d=\\mathrm{id}_B$. Thus $d$ is the required $S$-linear isomorphism; no stalk or enough-points hypothesis is used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
-   }
-  },
-  {
-   "text": "Each bijection commutes with precomposition in $M,N$: the module adjunction is natural, tensor factorization is unique, set transposition uses natural unit/counit, and the extension formula sends $(s\\otimes x,t\\otimes y)$ to $st\\beta(x,y)$. Therefore for maps $f:M\\to M\\prime$, $g:N\\to N\\prime$ both composites of the comparison with $u^*(f\\otimes g)$ and with $u^*f\\otimes u^*g$ correspond to the same bilinear map. Explicitly the comparison is adjoint to $(m,n)\\mapsto(1\\otimes\\eta_M(m))\\otimes(1\\otimes\\eta_N(n))$, with the set units interpreted before extension of scalars; both routes replace $m,n$ by $f(m),g(n)$. The adjunction and tensor bijections detect equality, proving simultaneous naturality and fixing the canonical normalization.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
+    "place": "Tag 03EL, lemma-tensor-product-pullback, final tensor comparison"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-sheafification-sets-exact"
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor-tail"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker C2 stage 3",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EL, label lemma-tensor-product-pullback, proof (Hom/Bilin chain)"
+  "place": "Tag 03EL, lemma-tensor-product-pullback, Hom/Bilin construction and final comparison"
  },
  "mathlib_searches": [
   {
@@ -212,5 +149,15 @@
   "by": "NG",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T191322-L-1006878",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

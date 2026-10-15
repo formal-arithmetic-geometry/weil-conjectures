@@ -14,6 +14,7 @@ public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.ModulePullbackTensorIsoE
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -293,6 +294,18 @@ theorem module_pullback_tensor_iso
                     ((T.obj M).val ⊗ (T.obj N).val)).app W
                   ((L.map x ≫ (eI.inv.app (M) ≫ q (M))).hom.app W t ⊗ₜ[S.obj.obj W] (L.map y ≫
                     (eI.inv.app (N) ≫ q (N))).hom.app W t)) := by
-                  sorry
+  classical
+  obtain ⟨A, eR, addR, mulR, addA, mulA, h⟩ :=
+    module_pullback_pushforward_adjunction J K L V _adj R S
+  rcases h with ⟨haddR, hmulR, haddA, hmulA, hmapadd, hmapmul, hc⟩
+  refine ⟨A, eR, addR, mulR, addA, mulA, haddR, hmulR, haddA, hmulA,
+    hmapadd, hmapmul, ?_⟩
+  intro c
+  rcases hc c with ⟨I, P, eI, eP, hI, hP, hTdata⟩
+  rcases hTdata with ⟨T, hT, hTmap, hamq⟩
+  rcases hamq with ⟨am, q, hq, ham⟩
+  refine ⟨I, eI, hI, T, hT, hTmap, q, hq, ?_⟩
+  exact module_pullback_tensor_iso_tail J K L R S A c I eI T hT q hq
+
 
 end SheafOfModules

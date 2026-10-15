@@ -1,0 +1,104 @@
+{
+ "id": "lem-weil-pbc-ringed-topoi-module-pullback-tensor-tail",
+ "kind": "statement",
+ "title": "Tensor comparison tail for scalar-extended inverse-image modules",
+ "statement": "Given the inverse-image module functor, its underlying-sheaf comparison, a scalar-extension functor T identified objectwise with change of rings, and the normalized insertion maps q, there exist tensor comparison isomorphisms for T, natural simultaneously in both module variables, satisfying the generalized pure-tensor normalization.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, final tensor comparison"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the comparison on sectionwise pure tensors by inserting 1 in each scalar factor. The balancing relations and sheafification universal property produce the map; the reverse map contracts the two scalar factors. Tensor induction proves the inverse identities, and the same pure-tensor calculation proves simultaneous naturality and the displayed generalized-element equation.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "worker C2 stage 3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, final tensor comparison construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "changeOfRings tensor comparison naturality pure tensor",
+   "results": "Existing balanced tensor comparison supplies the sectionwise contraction and invertibility pattern; no single theorem has the full arbitrary-topos statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor comparison change of rings sheaf modules natural pure tensor",
+   "results": "Existing declarations balancedTensorComparison_isIso and tensor universal property are partial tools; no exact full match.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "for sheaf module change of rings tensor product comparison naturality",
+   "results": "No exact match; search service did not provide a declaration with the required arbitrary-site hypotheses.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ModulePullbackTensorIso",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+   "place": "final tensor comparison step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ModulePullbackTensorIsoE",
+  "file": "lean/Sheaf/CategoryTheory/ModulePullbackTensorIsoE.lean",
+  "declaration": "SheafOfModules.module_pullback_tensor_iso_tail",
+  "statement": "theorem module_pullback_tensor_iso_tail {C D : Type u} [Category.{u} C] [Category.{u} D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (L : Sheaf J (Type u) ⥤ Sheaf K (Type u)) (R : Sheaf J CommRingCat.{u}) (S : Sheaf K CommRingCat.{u}) (A : Sheaf K CommRingCat.{u}) (c : A ⟶ S) (I : ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⥤ ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A)) (eI : I ⋙ (toSheaf ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})) ≅ (toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})) ⋙ L) (T : ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⥤ ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) (hT : ∀ M, T.obj M = changeOfRings c (I.obj M)) (q : ∀ M, ((toSheaf ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.obj M)) ⟶ ((toSheaf ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⋙ sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})).obj (T.obj M))) (hq : ∀ (M : ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (W : Dᵒᵖ) (m : (I.obj M).val.obj W), (q M).hom.app W m = (eqToHom (hT M).symm).val.app W (((PresheafOfModules.sheafificationAdjunction (𝟙 ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj S).obj)).unit.app (changeOfRingsPresheaf.{u, u, u} c (I.obj M))).app W ((1 : S.obj.obj W) ⊗ₜ[A.obj.obj W,(c.hom.app W).hom] m))) : ∃ (e : ∀ M N : ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R), T.obj ((monoidalCategory R).tensorObj (M) (N)) ≅ ((monoidalCategory S).tensorObj (T.obj M) (T.obj N))), (∀ (M M' N N' : ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (f : M ⟶ M') (g : N ⟶ N'), T.map ((monoidalCategory R).tensorHom f g) ≫ (e M' N').hom = (e M N).hom ≫ (monoidalCategory S).tensorHom (T.map f) (T.map g)) ∧ ∀ (M N : ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (Z : Sheaf J (Type u)) (x : Z ⟶ ((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj (M))) (y : Z ⟶ ((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj (N))) (z : Z ⟶ ((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj (((monoidalCategory R).tensorObj (M) (N))))), (∀ (W : Cᵒᵖ) (t : Z.obj.obj W), z.hom.app W t = (tensorObjIsoSheafification (M) (N)).inv.val.app W (((PresheafOfModules.sheafificationAdjunction (𝟙 ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj)).unit.app ((M).val ⊗ (N).val)).app W (x.hom.app W t ⊗ₜ[R.obj.obj W] y.hom.app W t))) → ∀ (W : Dᵒᵖ) (t : (L.obj Z).obj.obj W), (L.map z ≫ (eI.inv.app (((monoidalCategory R).tensorObj (M) (N))) ≫ q (((monoidalCategory R).tensorObj (M) (N)))) ≫ (toSheaf ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⋙ sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})).map (e M N).hom).hom.app W t = (tensorObjIsoSheafification (T.obj M) (T.obj N)).inv.val.app W (((PresheafOfModules.sheafificationAdjunction (𝟙 ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj S).obj)).unit.app ((T.obj M).val ⊗ (T.obj N).val)).app W ((L.map x ≫ (eI.inv.app M ≫ q M)).hom.app W t ⊗ₜ[S.obj.obj W] (L.map y ≫ (eI.inv.app N ≫ q N)).hom.app W t))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T191322-L-1006878",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T191322-L-1006878",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
