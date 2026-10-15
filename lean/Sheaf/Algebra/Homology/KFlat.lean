@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
 
 /-!
 # K-flat complexes of modules on a ringed site
@@ -394,7 +396,11 @@ finite limits, so the transported left adjoint remains left exact. The adjunctio
 determines sheafification up to unique natural isomorphism. -/
 @[instance]
 theorem hasSheafify_coefficientUniverse : HasSheafify J AddCommGrpCat.{w} := by
-  sorry
+  letI : PreservesFilteredColimitsOfSize.{w, w}
+      (CategoryTheory.forget AddCommGrpCat.{w}) := preservesFilteredColimitsOfSize_shrink _
+  have : HasSheafify ((equivSmallModel.{w} C).inverse.inducedTopology J)
+      AddCommGrpCat.{w} := inferInstance
+  exact hasSheafifyEssentiallySmallSite J AddCommGrpCat.{w}
 
 /-- Locally bijective maps are exactly sheafification equivalences for abelian groups
 in any coefficient universe relative to which the site is essentially small.
@@ -408,6 +414,12 @@ sheafification equivalences are invariant under this equivalence. -/
 @[instance]
 theorem wEqualsLocallyBijective_coefficientUniverse :
     J.WEqualsLocallyBijective AddCommGrpCat.{w} := by
-  sorry
+  letI : PreservesFilteredColimitsOfSize.{w, w}
+      (CategoryTheory.forget AddCommGrpCat.{w}) := preservesFilteredColimitsOfSize_shrink _
+  have : ∀ X : Cᵒᵖ,
+      HasLimitsOfShape (StructuredArrow X (equivSmallModel.{w} C).inverse.op)
+        AddCommGrpCat.{w} := fun _ ↦ hasLimitsOfShape_of_essentiallySmall.{w} _ _
+  exact GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall
+    J (A := AddCommGrpCat.{w})
 
 end SheafOfModules
