@@ -216,5 +216,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fd6a23f26",
+  "group": "NS",
+  "result": "pass",
+  "note": "Wrote review.md. All statement clauses, dependencies, sources, universes, edge cases, docstrings, and verbatim signature checks pass. Server-only compilation reproduced cleanly. No delivery errors found; repositories and branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.DirectImageInjectiveEvaluationAcyclic",
+  "declaration": "CategoryTheory.ringedSite_directImage_injective_evaluation_isZero",
+  "file": "lean/Sheaf/CategoryTheory/Sites/DirectImageInjectiveEvaluationAcyclic.lean",
+  "statement": "theorem ringedSite_directImage_injective_evaluation_isZero {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] (F : C ⥤ D) (hcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map F ∈ K (F.obj X)) (hpullback : ∀ (X Y Z : C) (S : Presieve X), S ∈ J X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), S f → PreservesLimit (cospan f g) F) [F.IsContinuous J.toGrothendieck K.toGrothendieck] [PreservesFiniteLimits (sheafPullback F (Type u) J.toGrothendieck K.toGrothendieck)] [PreservesFiniteColimits (sheafPullback F (Type u) J.toGrothendieck K.toGrothendieck)] (R : Sheaf J.toGrothendieck RingCat.{u}) (S : Sheaf K.toGrothendieck RingCat.{u}) (rho : R ⟶ (F.sheafPushforwardContinuous RingCat.{u} J.toGrothendieck K.toGrothendieck).obj S) [EnoughInjectives (ringedSiteModules.{u} R)] [EnoughInjectives (ringedSiteModules.{u} S)] (I : ringedSiteModules.{u} S) [Injective I] (U : C) (q : ℕ) (hq : 0 < q) : IsZero (((SheafOfModules.forget.{u} R ⋙ PresheafOfModules.toPresheaf R.obj ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q).obj ((SheafOfModules.pushforward.{u} rho).obj I))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

@@ -220,5 +220,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-1f6960bf3 (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, and source passages. All six steps match Stacks 00WS; sheafification, local-surjectivity, and kernel-pair inputs apply to general set sheaves. Empty-cover and non-subcanonical cases pass. No duplicates, circular dependencies, target weakening, or repairs found. Accepted generic sheafification tool use; detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-610da473d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Reviewed immutable node, dependencies, source Tag 00WS, module, report sections, docstrings, universes, edge cases, and declarations. Reproduced server-only scompile successfully with no diagnostics; no findings or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CoveringRepresentableCoequalizer",
+  "declaration": "CategoryTheory.exists_coveringRepresentable_coequalizer",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CoveringRepresentableCoequalizer.lean",
+  "statement": "theorem exists_coveringRepresentable_coequalizer {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (E : Set C) (hE : ∀ U : C, ∃ R : Precoverage.ZeroHypercover.{max u w} J U, ∀ i : R.I₀, R.X i ∈ E) (H : Sheaf J.toGrothendieck (Type (max u w))) : ∃ (I₀ I₁ : Type (max u w)) (V₀ : I₀ → E) (V₁ : I₁ → E) (P₀ P₁ : Sheaf J.toGrothendieck (Type (max u w))) (ι₀ : ∀ j : I₀, (presheafToSheaf J.toGrothendieck (Type (max u w))).obj (uliftYoneda.{w}.obj (V₀ j).val) ⟶ P₀) (ι₁ : ∀ j : I₁, (presheafToSheaf J.toGrothendieck (Type (max u w))).obj (uliftYoneda.{w}.obj (V₁ j).val) ⟶ P₁), Nonempty (IsColimit (Cofan.mk P₀ ι₀)) ∧ Nonempty (IsColimit (Cofan.mk P₁ ι₁)) ∧ ∃ (d₀ d₁ : P₁ ⟶ P₀) (q : P₀ ⟶ H) (hq : d₀ ≫ q = d₁ ≫ q), Nonempty (IsColimit (Cofork.ofπ q hq))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

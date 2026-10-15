@@ -27,7 +27,8 @@
   "def-pc-base-change",
   "def-weil-pbc-normal-ring",
   "def-pc-field-extension",
-  "def-weil-pbc-separable-field-extension"
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-reduced-normalization"
  ],
  "proof": [
   {
@@ -289,5 +290,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-144517e6e",
+  "group": "NG",
+  "result": "pass",
+  "note": "Checked all statement clauses, dependencies, source places, constructions, universes, edge cases, records and docstrings. Both immutable modules passed server-only compilation. No fixes required; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange",
+  "declaration": "AlgebraicGeometry.reduced_algebraic_normalization_field_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedAlgebraicNormalizationFieldChange.lean",
+  "statement": "theorem reduced_algebraic_normalization_field_change {k : Type u} [Field k] (X : Scheme.{u}) (q : X ⟶ Spec (.of k)) [IsReduced X] [LocallyOfFiniteType q] [QuasiCompact q] : IsFinite X.fromReducedNormalization ∧ Surjective X.fromReducedNormalization ∧ (∃ N : X.Opens, (∀ x : X, x ∈ N ↔ IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) ∧ Dense (N : Set X) ∧ IsIso (X.fromReducedNormalization ∣_ N)) ∧ (∀ W : X.Opens, ∃! e : W.toScheme.reducedNormalization ≅ (X.fromReducedNormalization ⁻¹ᵁ W).toScheme, e.hom ≫ (X.fromReducedNormalization ∣_ W) = W.toScheme.fromReducedNormalization) ∧ (∀ (K : Type u) [Field K] [Algebra k K], Algebra.IsSeparableExtension k K → ∃! e : (pullback q (Spec.map (CommRingCat.ofHom (algebraMap k K)))).reducedNormalization ≅ pullback (X.fromReducedNormalization ≫ q) (Spec.map (CommRingCat.ofHom (algebraMap k K))), (e.hom ≫ pullback.fst _ _ ≫ X.fromReducedNormalization = (pullback q (Spec.map (CommRingCat.ofHom (algebraMap k K)))).fromReducedNormalization ≫ pullback.fst q (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ∧ (e.hom ≫ pullback.snd _ _ = (pullback q (Spec.map (CommRingCat.ofHom (algebraMap k K)))).fromReducedNormalization ≫ pullback.snd q (Spec.map (CommRingCat.ofHom (algebraMap k K))))) ∧ (IsAlgClosed k → ∀ (K : Type u) [Field K] [Algebra k K], ∃! e : (pullback q (Spec.map (CommRingCat.ofHom (algebraMap k K)))).reducedNormalization ≅ pullback (X.fromReducedNormalization ≫ q) (Spec.map (CommRingCat.ofHom (algebraMap k K))), (e.hom ≫ pullback.fst _ _ ≫ X.fromReducedNormalization = (pullback q (Spec.map (CommRingCat.ofHom (algebraMap k K)))).fromReducedNormalization ≫ pullback.fst q (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ∧ (e.hom ≫ pullback.snd _ _ = (pullback q (Spec.map (CommRingCat.ofHom (algebraMap k K)))).fromReducedNormalization ≫ pullback.snd q (Spec.map (CommRingCat.ofHom (algebraMap k K)))))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

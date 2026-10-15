@@ -1,0 +1,101 @@
+{
+ "id": "def-weil-pbc-slice-away-localization",
+ "kind": "definition",
+ "title": "Sectionwise localization presheaf on a slice site",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site with commutative structure rings [def-weil-sheaf-of-modules-category], $U\\in\\mathcal C$, and $f\\in\\mathcal O(U)$. A sectionwise localization presheaf at $f$ on $\\mathcal C/U$ [def-pur-localized-ringed-site] consists of a presheaf $L$ of $\\mathcal O_U$-modules [def-weil-presheaf-modules-sheafification] and, for every $V\\to U$, an $\\mathcal O(V)$-linear isomorphism $e_V:L(V/U)\\simeq\\mathcal O(V)[1/f|_V]$ [def-weil-ring-localization-away]. For every arrow $g:(W\\to U)\\to(V\\to U)$ and every $a\\in\\mathcal O(V)$ and $n\\geq0$, the coordinates satisfy $e_W(\\operatorname{res}_g(e_V^{-1}(a/(f|_V)^n)))=a|_W/(f|_W)^n$. Thus the coordinates identify $L$ with the presheaf of sectionwise localizations, including its restriction maps.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-ring-localization-away"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997 (lemma-hom-from-Af), proof: the displayed free resolution of \\mathcal O_f"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Presheaf of modules obtained by localizing a ring sheaf at a section",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "presheaf localization of rings at a global section",
+   "results": "8 hits: TopCat.Presheaf.instIsLocalizationCarrierObjOppositeOpensCarrierCommRingCatObjLocalizationPresheaf, TopCat.Presheaf.toTotalQuotientPresheaf, TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf, TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf_app, TopCat.Presheaf.totalQuotientPresheaf, TopCat.Presheaf.instAlgebraCarrierObjOppositeOpensCarrierCommRingCatLocalizationPresheaf, TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf, AlgebraicGeometry.StructureSheaf.const. TopCat declarations apply to opens of a space, not arbitrary slice sites.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "awayPresheaf|localizationPresheaf|SectionwiseLocalization|SectionwiseAway",
+   "results": "5 hits: Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean. TopCat declarations apply to opens of a space, not arbitrary slice sites.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-localization-free-resolution",
+  "date": "2026-10-15",
+  "group": "NO"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, final Stacks comparison: passage between complete coefficient categories, using preservation and reflection of the local Stacks condition in the proof of 099I.",
+   "via": [
+    "lem-weil-pbc-localization-free-resolution",
+    "lem-weil-pbc-local-hom-tower-criterion",
+    "lem-weil-pbc-restriction-local-completeness",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SliceAwayLocalization",
+  "declaration": "CategoryTheory.SliceAwayLocalization",
+  "file": "lean/Sheaf/CategoryTheory/SliceAwayLocalization.lean",
+  "statement": "structure SliceAwayLocalization {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] (O : Sheaf J CommRingCat.{u}) (U : C) (f : O.obj.obj (op U))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a56d85327",
+  "group": "NO",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a56d85327",
+  "group": "NO",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable nodes, dependencies, source clauses, formulas, universes, edge cases, docstrings, and verbatim signatures. Both delivered modules passed server-only compilation. No delivery faults found; no project or branch changes made."
+ }
+}

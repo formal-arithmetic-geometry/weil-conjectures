@@ -25,7 +25,8 @@
   "def-weil-abstract-derived-category",
   "def-pur-derived-internal-hom",
   "def-weil-derived-limit",
-  "def-weil-inverse-system"
+  "def-weil-inverse-system",
+  "def-weil-pbc-local-coefficient-localization"
  ],
  "proof": [
   {
@@ -210,5 +211,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fe5336407",
+  "group": "NO",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, source correspondence, dependencies, canonical constructions, universes, edge cases, and verbatim signatures. Both delivered modules passed server-only compilation without diagnostics. No delivery errors found; no project clones or branches changed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocalHomTowerCriterion",
+  "declaration": "CategoryTheory.localHom_zero_iff_multiplicationTower_zero",
+  "declarations": [
+   "CategoryTheory.localHom_zero_iff_multiplicationTower_zero"
+  ],
+  "file": "lean/Sheaf/Paper/LocalHomTowerCriterion.lean",
+  "statement": "theorem localHom_zero_iff_multiplicationTower_zero {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) (U : C) (f : R.obj.obj (op U)) [HasDerivedCategory.{w} (ringedSiteModules.{u} (localCoefficientRings R))] [HasDerivedCategory.{wSlice} (ringedSiteModules.{u} ((localCoefficientRings R).over U))] (K : DerivedCategory (ringedSiteModules.{u} (localCoefficientRings R))) [HasProduct (fun _ : ℕ ↦ (localCoefficientDerivedRestriction R U).obj K)] (T : DerivedCategory (ringedSiteModules.{u} ((localCoefficientRings R).over U))) (_hT : IsDerivedLimit (K := fun _ : ℕ ↦ (localCoefficientDerivedRestriction R U).obj K) (fun _ ↦ (localSectionDerivedMultiplication R U f).app K) T) : IsZero ((derivedInternalHom (J.over U) (R.over U)).obj (op ((DerivedCategory.singleFunctor _ 0).obj (localCoefficientLocalization R U f)), (localCoefficientDerivedRestriction R U).obj K)) ↔ IsZero T",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

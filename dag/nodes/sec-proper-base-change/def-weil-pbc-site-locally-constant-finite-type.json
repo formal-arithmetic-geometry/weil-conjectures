@@ -1,0 +1,127 @@
+{
+ "id": "def-weil-pbc-site-locally-constant-finite-type",
+ "kind": "definition",
+ "title": "Locally constant finite type module sheaves on a small site",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], let $B$ be a commutative ring, and let $F$ be a sheaf of modules [def-weil-sheaf-of-modules-category] over the constant ring sheaf $\\underline B$ [def-weil-pbc-constant-sheaf]. Say that $F$ is locally constant of finite type if for every object $V$ there is a covering sieve $S$ on $V$ such that for every arrow $U\\to V$ in $S$ there is a finitely generated $B$-module $M$ [def-weil-finitely-generated-module] with $F|_U\\cong\\underline M|_U$ as $\\underline B|_U$-modules. Restrictions are on localized ringed sites [def-pur-localized-ringed-site]. The constant module sheaf is obtained by sheafifying the constant module presheaf of [def-weil-pbc-strict-perfect-coefficient-package] along the constant-ring sheafification unit. Forgetting commutativity from that unit leaves it locally injective and locally surjective, so module sheafification is defined.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finitely-generated-module",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094H, lemma-locally-constant-tensor-product; locally constant finite type hypothesis, using Modules on Sites, Definition 093Q (definition-locally-constant)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*tensor|locally_constant.*tensor|constant.*SheafOfModules",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match: no general-site locally constant finite type module predicate; condensed and scheme-specific notions do not apply"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKFlat, CategoryTheory.constantSheaf",
+   "results": "0 hits | loogle: unknown identifier 'CochainComplex.IsKFlat'",
+   "date": "2026-10-15",
+   "verdict": "no match: no general-site locally constant finite type module predicate; condensed and scheme-specific notions do not apply"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally constant finite type sheaves of modules on an arbitrary small site",
+   "results": "0 hits | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant finite type sheaves of modules on an arbitrary small site",
+   "results": "CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstantModule.functor_obj_val; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier; LightCondMod.LocallyConstant.functor; CondensedMod.ofSheafCompHaus; LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-15",
+   "verdict": "no match: no general-site locally constant finite type module predicate; condensed and scheme-specific notions do not apply"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstantFiniteType|strictPerfectConstantPresheaf|locallyConstant.*[Tt]ensor",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match: no general-site locally constant finite type module predicate; condensed and scheme-specific notions do not apply"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstantFiniteType|locallyConstantFiniteType_derivedTensor in WeilConjectures and lean/Sheaf; locally constant finite type in dag/nodes; blueprint_refs.py search locally constant finite",
+   "results": "No declaration under these names in source or Sheaf. DAG text hits are statements, etale-specific notions or pro-etale-specific notions, not a definition of general-site local constancy of finite type; blueprint search: 0 blueprint nodes. strictPerfectConstantPresheaf is the existing constant-module construction and is reused.",
+   "date": "2026-10-15",
+   "verdict": "no matching general-site predicate"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-locally-constant-tensor",
+  "date": "2026-10-15",
+  "group": "NU"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): locally constant finite type cohomology in the tensor reduction",
+   "via": [
+    "lem-weil-pbc-locally-constant-tensor",
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.SiteLocallyConstantFiniteType",
+  "declaration": "SheafOfModules.IsLocallyConstantFiniteType",
+  "file": "lean/Sheaf/Paper/SiteLocallyConstantFiniteType.lean",
+  "statement": "def IsLocallyConstantFiniteType {C : Type u} [Category.{u} C] (J : GrothendieckTopology C) (B : Type u) [CommRing B] (F : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of B)))) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "SheafOfModules.IsLocallyConstantFiniteType",
+   "SheafOfModules.constantCommRingUnit_locallyInjective",
+   "SheafOfModules.constantCommRingUnit_locallySurjective"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-62a2f4883",
+  "group": "NU",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-62a2f4883",
+  "group": "NU",
+  "result": "pass",
+  "note": "Wrote review.md with clause-by-clause checks, dependency and construction audits, universe and edge-case checks. Both immutable Lean modules reproduced cleanly through server-only scompile.py. No H1–H13 errors found; branch and project clones unchanged."
+ }
+}

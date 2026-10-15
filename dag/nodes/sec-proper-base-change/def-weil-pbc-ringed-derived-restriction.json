@@ -1,0 +1,122 @@
+{
+ "id": "def-weil-pbc-ringed-derived-restriction",
+ "kind": "definition",
+ "title": "RingedDerivedRestriction",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small category with Grothendieck topology $J$, and let $\\mathcal O$ be a sheaf of commutative rings. Use its category of module sheaves [def-weil-sheaf-of-modules-category]. Use the unbounded derived category [def-weil-abstract-derived-category], with localization morphism universes chosen explicitly. The slice ring and module restriction are [def-pur-localized-ringed-site]. Define restriction $D(\\mathcal O)\\to D(\\mathcal O_U)$ by Mathlib’s functor induced on derived categories by the exact additive module-restriction functor. The comparison on the ring object in degree zero is induced by the canonical single-complex comparison and the localization factorization.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Modules on Sites Tag 03DJ; Cohomology on Sites Tag 08JB"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafified sectionwise localization on ringed sites, ideal sheaf local finite generators, extended Cech localization complex, derived restriction, internal Hom completion unit and locally derived complete objects",
+   "results": "UNAVAILABLE 0 hit(s): service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified sectionwise localization on ringed sites, ideal sheaf local finite generators, extended Cech localization complex, derived restriction, internal Hom completion unit and locally derived complete objects",
+   "results": "CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW; PresheafOfModules.instIsLocallyInjectiveToSheafify; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; PresheafOfModules.toPresheaf_map_toSheafify; PresheafOfModules.sheafifyHomEquiv'; PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective; PresheafOfModules.sheafificationCompToSheaf; PresheafOfModules.sheafification",
+   "date": "2026-10-15",
+   "verdict": "General sheafification is reused, but none supplies the indicated localization, finite generation, augmented Cech, completion-unit or local-completeness constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, localization",
+   "results": "OK 0 hit(s) | loogle: unknown identifier 'localization'",
+   "date": "2026-10-15",
+   "verdict": "No matching declaration found; source grep and LeanFinder also checked."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedSectionLocalization|IsRingedIdealGeneratingList|ringedExtendedCech|ringedDerivedRestriction|ringedCechCompletionUnit|IsLocallyDerivedRingedIdealComplete|HasLocalExtendedCechDescription",
+   "results": "msearch Mathlib: OK 0 hit(s); rg of slopmaster2 WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json: no hits. blueprint_refs.py search \"extended Cech\": 0 blueprint nodes. Existing DAG prose contains related statement nodes but no definition of these notions.",
+   "date": "2026-10-15",
+   "verdict": "No duplicate definition. Existing module sheaves, localization rings, sheafification, tensor complex and internal Hom are imported and reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unbounded derived category slice restriction of module sheaves on a ringed site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}",
+   "date": "2026-10-15",
+   "verdict": "The hits concern bounds, cohomology or scheme module categories. The existing exact-functor derived construction is reused and specialized to the slice restriction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-extended-cech-completion-model",
+  "date": "2026-10-15",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, final Stacks comparison: constant/completed coefficient equivalence, via the global augmented extended Čech construction and the completion unit used in the proof of 099I.",
+   "via": [
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedDerivedRestriction",
+  "declaration": "CategoryTheory.ringedDerivedRestriction",
+  "declarations": [
+   "CategoryTheory.ringedSiteDerived",
+   "CategoryTheory.ringedOverFunctor_additive",
+   "CategoryTheory.ringedOverFunctor_preservesFiniteLimits",
+   "CategoryTheory.ringedOverFunctor_preservesFiniteColimits",
+   "CategoryTheory.ringedDerivedRestriction",
+   "CategoryTheory.ringedOverRingIso",
+   "CategoryTheory.ringedRestrictionRingComplexIso",
+   "CategoryTheory.ringedDerivedRingRestrictionIso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedDerivedRestriction.lean",
+  "statement": "def ringedDerivedRestriction (U : C) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] [hU : HasDerivedCategory.{w'} (ringedSiteModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))] : ringedSiteDerived O ⥤ ringedSiteDerived (O.over U)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dae1d157f",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dae1d157f",
+  "group": "NE",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source correspondence, all dependencies and eight Lean modules, canonical constructions, edge cases, universes, records and docstrings. Immutable files match the commit; server-only compilation passed. No delivery errors found."
+ }
+}

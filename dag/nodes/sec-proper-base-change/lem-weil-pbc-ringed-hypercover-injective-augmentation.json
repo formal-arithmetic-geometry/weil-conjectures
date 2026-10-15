@@ -319,5 +319,24 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-2fcfd7574 (reviewer sub-agent of L); spot-checked: Mathematics and all eight proof steps check against Tags 01GE/01GW and cited DAG statements, including ringed-module coefficients, matching lifts, sheafification, injective dualization, scalar action, and edge cases. Corrected JSON narrows split_report.tool_uses to the six genuine auxiliary lemma tools; definition nodes are ordinary dependencies, not route-exempt tools. No statement or proof change.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e1fa7e7fe",
+  "group": "NN",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, matching conditions, exactness, universes, edge cases, docstrings, and verbatim signature. Server-only compilation reproduced cleanly. No delivery errors or fixes required; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedHypercoverInjectiveAugmentation",
+  "declaration": "CategoryTheory.ringedHypercover_injective_augmentation_exact",
+  "file": "lean/Sheaf/CategoryTheory/RingedHypercoverInjectiveAugmentation.lean",
+  "statement": "theorem ringedHypercover_injective_augmentation_exact {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [J.toGrothendieck.Subcanonical] (R : Sheaf J.toGrothendieck CommRingCat.{max u r}) (I : ringedSiteModules.{max u v r} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj R)) [Injective I] (W : C) (U : SimplicialObject C) (e : U ⟶ (Functor.const SimplexCategoryᵒᵖ).obj W) (hcover : ∀ (n : ℕ) (T : C) (w : T ⟶ W) (p : ∀ (Δ : SimplexCategory), Δ.len < n → (Δ ⟶ SimplexCategory.mk n) → (T ⟶ U.obj (op Δ))), (∀ (Δ : SimplexCategory) (h : Δ.len < n) (θ : Δ ⟶ SimplexCategory.mk n), p Δ h θ ≫ e.app (op Δ) = w) → (∀ (Δ Δ' : SimplexCategory) (h : Δ.len < n) (h' : Δ'.len < n) (α : Δ' ⟶ Δ) (θ : Δ ⟶ SimplexCategory.mk n), p Δ h θ ≫ U.map α.op = p Δ' h' (α ≫ θ)) → ∃ S : Sieve T, S ∈ J.toGrothendieck T ∧ ∀ (V : C) (f : V ⟶ T), S f → ∃ t : V ⟶ U _⦋n⦌, t ≫ e.app (op (SimplexCategory.mk n)) = f ≫ w ∧ ∀ (Δ : SimplexCategory) (h : Δ.len < n) (θ : Δ ⟶ SimplexCategory.mk n), t ≫ U.map θ.op = f ≫ p Δ h θ) : Function.Injective (I.val.map (e.app (op (SimplexCategory.mk 0))).op) ∧ Function.Exact (I.val.map (e.app (op (SimplexCategory.mk 0))).op) (fun s : I.val.obj (op (U _⦋0⦌)) ↦ ∑ j : Fin 2, (-1 : ℤ) ^ j.val • I.val.map (U.δ j).op s) ∧ ∀ n : ℕ, Function.Exact (fun s : I.val.obj (op (U _⦋n⦌)) ↦ ∑ j : Fin (n + 2), (-1 : ℤ) ^ j.val • I.val.map (U.δ j).op s) (fun s : I.val.obj (op (U _⦋n + 1⦌)) ↦ ∑ j : Fin (n + 3), (-1 : ℤ) ^ j.val • I.val.map (U.δ j).op s)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The explicit exact augmented sequence formulation in the node. Hypercover epimorphisms are rendered by the equivalent local lifting of matching sections, including degree zero. No second hypercover, complex, or module-sheaf definition."
  }
 }

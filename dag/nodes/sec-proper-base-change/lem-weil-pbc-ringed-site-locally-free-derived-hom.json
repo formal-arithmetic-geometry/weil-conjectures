@@ -302,5 +302,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0c4a36d87",
+  "group": "NC",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, evaluation normalization, shifts, universes, edge cases, docstrings, and signature fidelity. Server-only compile reproduced cleanly in 29.5 seconds. No delivery errors or repository changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocallyFreeDerivedHom",
+  "declaration": "CategoryTheory.locallyFree_derivedHom",
+  "declarations": [
+   "CategoryTheory.locallyFreeDualTensor",
+   "CategoryTheory.locallyFreeDualTensorMap",
+   "CategoryTheory.locallyFreeSections",
+   "CategoryTheory.locallyFreeTensorSections",
+   "CategoryTheory.locallyFreeEvaluate",
+   "CategoryTheory.locallyFreeSectionsComparison",
+   "CategoryTheory.locallyFree_derivedHom"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/LocallyFreeDerivedHom.lean",
+  "statement": "theorem locallyFree_derivedHom : ∃ e : ∀ (P : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (_ : P.IsFiniteLocallyFree) (K : CochainComplex (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (_ : CochainComplex.plus _ K), ((DerivedCategory.singleFunctor _ 0).obj P ⟶ DerivedCategory.Q.obj K) ≃+ (ringedSiteZerothHypercohomology J R).obj (DerivedCategory.Q.obj (((locallyFreeDualTensor J R P).mapHomologicalComplex (.up ℤ)).obj K)), (∀ (P P' : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (hP : P.IsFiniteLocallyFree) (hP' : P'.IsFiniteLocallyFree) (p : P' ⟶ P) (K L : CochainComplex (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (hK : CochainComplex.plus _ K) (hL : CochainComplex.plus _ L) (f : K ⟶ L) (t : ((locallyFreeDualTensor J R P).mapHomologicalComplex (.up ℤ)).obj K ⟶ ((locallyFreeDualTensor J R P').mapHomologicalComplex (.up ℤ)).obj L), (∀ i : ℤ, t.f i = locallyFreeDualTensorMap J R P P' (K.X i) (L.X i) p (f.f i)) → ∀ a : (DerivedCategory.singleFunctor _ 0).obj P ⟶ DerivedCategory.Q.obj K, e P' hP' L hL ((DerivedCategory.singleFunctor _ 0).map p ≫ a ≫ DerivedCategory.Q.map f) = (ringedSiteZerothHypercohomology J R).map (DerivedCategory.Q.map t) (e P hP K hK a)) ∧ (∀ (P : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (hP : P.IsFiniteLocallyFree) (K : CochainComplex (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (hK : CochainComplex.plus _ K) (_ : K.IsKInjective) (z : ((locallyFreeTensorSections J R P).obj K).cycles 0) (f : (CochainComplex.singleFunctor _ 0).obj P ⟶ K), (HomologicalComplex.singleObjXSelf (.up ℤ) 0 P).inv ≫ f.f 0 = locallyFreeEvaluate J R P (K.X 0) ((((locallyFreeTensorSections J R P).obj K).iCycles 0) z) → e P hP K hK (DerivedCategory.Q.map f) = locallyFreeSectionsComparison J R (((locallyFreeDualTensor J R P).mapHomologicalComplex (.up ℤ)).obj K) ((((locallyFreeTensorSections J R P).obj K).homologyπ 0) z))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

@@ -357,5 +357,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-36fd65d81",
+  "group": "NP",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, source passages, clauses, edge cases, universes, docstrings, and verbatim signature. Server-only compile reproduced cleanly. No delivery faults found; no repository or branch changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizationProjectiveComponents",
+  "declaration": "AlgebraicGeometry.normalization_projective_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizationProjectiveComponents.lean",
+  "statement": "theorem normalization_projective_components {k : Type u} [Field k] {C : Scheme.{u}} (p : C ⟶ Spec (.of k)) [IsHProjective p] {I : Type u} (Z : I → Scheme.{u}) [∀ i : I, IsIntegral (Z i)] (a : ∀ i : I, Z i ⟶ C) [∀ i : I, IsClosedImmersion (a i)] (hcomponents : ∀ i : I, Set.range (a i) ∈ irreducibleComponents C) (hindex : Function.Bijective (fun i : I ↦ (⟨Set.range (a i), hcomponents i⟩ : irreducibleComponents C))) (N : Scheme.{u}) (ι : ∀ i : I, (Z i).normalization ⟶ N) (hN : IsColimit (Cofan.mk N ι)) (ν : N ⟶ C) (hν : ∀ i : I, ι i ≫ ν = (Z i).fromNormalization ≫ a i) : Finite I ∧ IsFinite ν ∧ Surjective ν ∧ IsHProjective (ν ≫ p) ∧ IsProper (ν ≫ p) ∧ (∀ i : I, Nonempty (Z i).normalization ∧ (∀ x : (Z i).normalization, IsDomain ((Z i).normalization.presheaf.stalk x) ∧ IsIntegrallyClosed ((Z i).normalization.presheaf.stalk x)) ∧ IsIntegral (Z i).normalization ∧ IsOpenImmersion (ι i) ∧ IsClosed (Set.range (ι i)) ∧ IsHProjective ((Z i).fromNormalization ≫ a i ≫ p) ∧ IsProper ((Z i).fromNormalization ≫ a i ≫ p)) ∧ (topologicalKrullDim C ≤ 1 → ∀ i : I, topologicalKrullDim (Z i).normalization ≤ 1) ∧ (∃ (b : ∀ i : I, Z i ⟶ C.nilradical.subscheme) (νred : N ⟶ C.nilradical.subscheme), (∀ i : I, b i ≫ C.nilradical.subschemeι = a i) ∧ νred ≫ C.nilradical.subschemeι = ν ∧ ∀ i : I, ι i ≫ νred = (Z i).fromNormalization ≫ b i) ∧ (IsEmpty I ↔ IsEmpty C)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

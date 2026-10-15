@@ -31,7 +31,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-sp-injective-resolutions",
   "def-weil-pbc-site-cech-complex",
-  "def-sp-double-complex-total"
+  "def-sp-double-complex-total",
+  "def-weil-pbc-site-cech-edge-normalization"
  ],
  "proof": [
   {
@@ -311,5 +312,28 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-77ac55c1c (reviewer sub-agent of L); spot-checked: Read all nine steps, the new node, cited statements and source locations. Verified lifting hypotheses, total signs, roof cancellation, resolution independence and abelian pullback identification; checked edge cases, duplicates, route and archived target signatures. No mathematical faults found. Full findings and an inspection write-boundary mistake are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1f066d9ce",
+  "group": "NR",
+  "result": "pass",
+  "note": "Checked the immutable module, all six statement dependencies, source passages, exact signatures, normalization, universes and edge cases. Server-only compilation reproduced cleanly in 6.8 seconds. No H1–H13 or pilot-gate errors found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteCechRefinementSquare",
+  "declaration": "CategoryTheory.ringedSite_cech_refinement_square",
+  "declarations": [
+   "CategoryTheory.ringedSite_cech_refinement_square",
+   "CategoryTheory.ringedSite_cech_refinement_square_abelian"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteCechRefinementSquare.lean",
+  "statement": "theorem ringedSite_cech_refinement_square {C D : Type u} [SmallCategory C] [SmallCategory D] [HasFiniteLimits C] [HasFiniteLimits D] (J : Precoverage C) (K : Precoverage D) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] (u : C ⥤ D) [PreservesFiniteLimits u] (hcover : ∀ (Y : C) (S : Presieve Y), S ∈ J Y → S.map u ∈ K (u.obj Y)) [u.IsContinuous J.toGrothendieck K.toGrothendieck] [PreservesFiniteLimits (sheafPullback u (Type u) J.toGrothendieck K.toGrothendieck)] [PreservesFiniteColimits (sheafPullback u (Type u) J.toGrothendieck K.toGrothendieck)] (R : Sheaf J.toGrothendieck RingCat.{u}) (R' : Sheaf K.toGrothendieck RingCat.{u}) (ρ : R ⟶ (u.sheafPushforwardContinuous RingCat.{u} J.toGrothendieck K.toGrothendieck).obj R') [EnoughInjectives (ringedSiteModules.{u} R)] [EnoughInjectives (ringedSiteModules.{u} R')] (M : ringedSiteModules.{u} R) (N : ringedSiteModules.{u} R') (h : M ⟶ (SheafOfModules.pushforward.{u} ρ).obj N) {X : C} (hX : IsTerminal X) (huX : IsTerminal (u.obj X)) {I₀ I₁ : Type u} [Finite I₀] [Finite I₁] (U : I₀ → C) (v : ∀ i, U i ⟶ X) (V : I₁ → D) (w : ∀ j, V j ⟶ u.obj X) (hU : Presieve.ofArrows U v ∈ J X) (hV : Presieve.ofArrows V w ∈ K (u.obj X)) (S : SiteCechComplex U v) (T : SiteCechComplex V w) (r : I₁ → I₀) (a : ∀ j, V j ⟶ u.obj (U (r j))) (aTuple : ∀ (p : ℕ) (j : Fin (p + 1) → I₁), T.W p j ⟶ u.obj (S.W p (r ∘ j))) (haTuple : ∀ (p : ℕ) (j : Fin (p + 1) → I₁) (k : Fin (p + 1)), aTuple p j ≫ u.map (S.pr p (r ∘ j) k) = T.pr p j k ≫ a (j k)) : ∃! γ : S.complex M.val.presheaf ⟶ T.complex N.val.presheaf, (∀ (p : ℕ) (s : S.cochains M.val.presheaf p) (j : Fin (p + 1) → I₁), (γ.f p s) j = N.val.presheaf.map (aTuple p j).op ((h.val.app (op (S.W p (r ∘ j)))) (s (r ∘ j)))) ∧ ∀ q : ℕ, ∃! eM : (S.cohomologyFunctor q).obj M.val.presheaf ⟶ (((SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op X)).rightDerived q).obj M, S.IsNormalizedEdge (SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) q eM ∧ ∃! eN : (T.cohomologyFunctor q).obj N.val.presheaf ⟶ (((SheafOfModules.forget R' ⋙ PresheafOfModules.toPresheaf R'.obj) ⋙ (evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op (u.obj X))).rightDerived q).obj N, T.IsNormalizedEdge (SheafOfModules.forget R' ⋙ PresheafOfModules.toPresheaf R'.obj) q eN ∧ ∃! hH : (((SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op X)).rightDerived q).obj M ⟶ (((SheafOfModules.forget R' ⋙ PresheafOfModules.toPresheaf R'.obj) ⋙ (evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op (u.obj X))).rightDerived q).obj N, (∀ (IM : InjectiveResolution M) (IN : InjectiveResolution N), ∃ (L : CochainComplex (ringedSiteModules.{u} R) ℕ) (lam : ((SheafOfModules.pushforward.{u} ρ).mapHomologicalComplex (ComplexShape.up ℕ)).obj IN.cocomplex ⟶ L) (b : IM.cocomplex ⟶ L), (∀ n : ℕ, Injective (L.X n)) ∧ (∀ n : ℕ, Mono (lam.f n)) ∧ QuasiIso lam ∧ IM.ι.f 0 ≫ b.f 0 = h ≫ (SheafOfModules.pushforward.{u} ρ).map (IN.ι.f 0) ≫ lam.f 0) ∧ (∀ (IM : InjectiveResolution M) (IN : InjectiveResolution N) (L : CochainComplex (ringedSiteModules.{u} R) ℕ) (lam : ((SheafOfModules.pushforward.{u} ρ).mapHomologicalComplex (ComplexShape.up ℕ)).obj IN.cocomplex ⟶ L) (b : IM.cocomplex ⟶ L), (∀ n : ℕ, Injective (L.X n)) → (∀ n : ℕ, Mono (lam.f n)) → QuasiIso lam → IM.ι.f 0 ≫ b.f 0 = h ≫ (SheafOfModules.pushforward.{u} ρ).map (IN.ι.f 0) ≫ lam.f 0 → IsIso (HomologicalComplex.homologyMap ((((SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op X)).mapHomologicalComplex (ComplexShape.up ℕ)).map lam) q) ∧ hH ≫ (IN.isoRightDerivedObj ((SheafOfModules.forget R' ⋙ PresheafOfModules.toPresheaf R'.obj) ⋙ (evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op (u.obj X))) q).hom ≫ HomologicalComplex.homologyMap ((((SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op X)).mapHomologicalComplex (ComplexShape.up ℕ)).map lam) q = (IM.isoRightDerivedObj ((SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op X)) q).hom ≫ HomologicalComplex.homologyMap ((((SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op X)).mapHomologicalComplex (ComplexShape.up ℕ)).map b) q) ∧ eM ≫ hH = HomologicalComplex.homologyMap γ q ≫ eN",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The first theorem states the refinement square, all-resolution augmentation normalization and the resolved-direct-image roof; the second states the abelian-sheaf specialization of that roof and its equality to inverse-image cohomology pullback followed by the adjoint coefficient map. The normalized-edge definition is the already landed def-weil-pbc-site-cech-edge-normalization."
  }
 }

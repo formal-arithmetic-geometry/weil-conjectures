@@ -23,7 +23,8 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "def-pc-ring-hom-extension-shared-definitions"
  ],
  "proof": [
   {
@@ -283,5 +284,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8ad37c82b",
+  "group": "NP",
+  "result": "pass",
+  "note": "Checked immutable files, source, dependencies, every statement clause, universes, edge cases, docstrings and report. Signature matches verbatim; server-only compile passed in 1.8 seconds. No delivery errors found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.NilpotentDerivedUpperBound",
+  "declaration": "DerivedCategory.isZero_homology_of_nilpotent_derived_reduction",
+  "file": "lean/Sheaf/Algebra/Homology/NilpotentDerivedUpperBound.lean",
+  "statement": "theorem isZero_homology_of_nilpotent_derived_reduction {A : Type u} [CommRing A] (I : Ideal A) (N : ℕ) (hN : 1 ≤ N) (hI : I ^ N = ⊥) [HasDerivedCategory.{w} (RingSiteModules A)] [HasDerivedCategory.{w} (RingSiteModules (A ⧸ I))] (E : RingSiteModules A ⥤ RingSiteModules (A ⧸ I)) (hobjects : ∀ M : RingSiteModules A, E.obj M = SheafOfModules.changeOfRings (ringSiteMap (Ideal.Quotient.mk I)) M) (hmaps : ∀ {M M' : RingSiteModules A} (f : M ⟶ M'), E.map f = eqToHom (hobjects M) ≫ SheafOfModules.changeOfRingsHom (ringSiteMap (Ideal.Quotient.mk I)) M f ≫ eqToHom (hobjects M').symm) [E.Additive] (LF : DerivedCategory (RingSiteModules A) ⥤ DerivedCategory (RingSiteModules (A ⧸ I))) (ε : Qh ⋙ LF ⟶ E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ Qh) (hLF : LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (RingSiteModules A) (ComplexShape.up ℤ))) (C : DerivedCategory (RingSiteModules A)) (b : ℤ) (hred : ∀ i : ℤ, b < i → IsZero ((homologyFunctor (RingSiteModules (A ⧸ I)) i).obj (LF.obj C))) : ∀ i : ℤ, b < i → IsZero ((homologyFunctor (RingSiteModules A) i).obj C)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

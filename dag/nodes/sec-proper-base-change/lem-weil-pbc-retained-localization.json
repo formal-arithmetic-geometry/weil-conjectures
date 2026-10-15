@@ -207,5 +207,27 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-6a78d1ebf (reviewer sub-agent of L); spot-checked: Full mathematical and source review completed; review.md records checks for all seven steps, all three new nodes, cited sources, edge cases, route, and archived target coefficient/base-change data. No repairs or tool_uses accepted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f7c830111",
+  "group": "NK",
+  "result": "pass",
+  "note": "Wrote review.md. Immutable files, all statement dependencies, source, canonical maps, universes, edge cases, report sections and verbatim signature checked. Server-only compilation passed with the side overlay; no delivery errors or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RetainedLocalizationProperties",
+  "declaration": "PrincipalWLocalization.Retained.properties",
+  "declarations": [
+   "PrincipalWLocalization.Retained.structuralMap",
+   "PrincipalWLocalization.Retained.properties"
+  ],
+  "file": "lean/Sheaf/RingTheory/RetainedLocalizationProperties.lean",
+  "statement": "theorem properties (T : Set (PrimeSpectrum R)) (hT : IsClosed T) : @Algebra.IsIndPrincipalZariski R (algebra T hT) _ _ (structuralMap T hT).toAlgebra ∧ (∃ e : PrimeSpectrum (algebra T hT) ≃ {p : PrimeSpectrum R × PrimeSpectrum R // p.1 ∈ T ∧ p.2.asIdeal ≤ p.1.asIdeal}, (∀ q : PrimeSpectrum (algebra T hT), ∃ hq : (e q).val.2.asIdeal = q.asIdeal.comap (structuralMap T hT), Function.Bijective (Localization.localRingHom (e q).val.2.asIdeal q.asIdeal (structuralMap T hT) hq)) ∧ ((∀ x ∈ T, IsClosed ({x} : Set (PrimeSpectrum R))) → IsWLocalRing (algebra T hT) ∧ (∃ h : @Homeomorph T (closedPoints (PrimeSpectrum (algebra T hT))) (TopologicalSpace.induced Subtype.val (constructibleTopology (PrimeSpectrum R))) inferInstance, ∀ x : T, (e (h x).val).val = (x.val, x.val)))) ∧ ((∀ x ∈ T, IsClosed ({x} : Set (PrimeSpectrum R))) → ∀ J : Ideal R, T = PrimeSpectrum.zeroLocus (J : Set R) → Function.Bijective (Ideal.quotientMap (J.map (structuralMap T hT)) (structuralMap T hT) Ideal.le_comap_map))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

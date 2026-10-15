@@ -220,5 +220,27 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-0af48086f (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, unit/chapter route, and Stacks sources in full. The mathematics is valid, including unbounded complexes, module coefficients, derived coproducts, cone signs, and edge cases. Added the missing generic-tool declaration for lem-pc-cone-short-exact-quasi-iso in the corrected item JSON under fixes; concrete checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5669dd31d",
+  "group": "NM",
+  "result": "pass",
+  "note": "Reviewed immutable snapshot, all statement dependencies, sources, signatures, docstrings, edge cases and pilot gates. Server-only compile passed; no H1–H13 errors found."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit",
+  "declaration": "CategoryTheory.abelianSheaf_complex_colimit_homotopyColimit",
+  "declarations": [
+   "CategoryTheory.abelianSheaf_complex_colimit_homotopyColimit",
+   "CategoryTheory.moduleSheaf_complex_colimit_homotopyColimit"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ComplexColimitHomotopyColimit.lean",
+  "statement": "theorem abelianSheaf_complex_colimit_homotopyColimit {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [HasDerivedCategory.{w} (Sheaf J.toGrothendieck AddCommGrpCat.{u})] (E : ℕ ⥤ CochainComplex (Sheaf J.toGrothendieck AddCommGrpCat.{u}) ℤ) (B : Cofan (fun n : ℕ ↦ E.obj n)) (hB : IsColimit B) (L : Cocone E) (hL : IsColimit L) (u : B.pt ⟶ B.pt) (hu : ∀ n : ℕ, B.inj n ≫ u = B.inj n - E.map (homOfLE (Nat.le_succ n)) ≫ B.inj (n + 1)) (q : B.pt ⟶ L.pt) (hq : ∀ n : ℕ, B.inj n ≫ q = L.ι.app n) : ∃ p : mappingCone u ⟶ L.pt, mappingCone.inr u ≫ p = q ∧ (mappingCone.inl u).comp (Cochain.ofHom p) (add_zero _) = 0 ∧ QuasiIso p ∧ Nonempty (IsColimit (Cofan.mk (DerivedCategory.Q.obj B.pt) (fun n : ℕ ↦ DerivedCategory.Q.map (B.inj n)))) ∧ ∃ e : DerivedCategory.Q.obj (mappingCone u) ≅ DerivedCategory.Q.obj L.pt, e.hom = DerivedCategory.Q.map p ∧ DerivedCategory.Q.mapTriangle.obj (mappingCone.triangle u) ∈ distTriang (DerivedCategory (Sheaf J.toGrothendieck AddCommGrpCat.{u})) ∧ Triangle.mk (DerivedCategory.Q.map u) (DerivedCategory.Q.map q) (e.inv ≫ (DerivedCategory.Q.mapTriangle.obj (mappingCone.triangle u)).mor₃) ∈ distTriang (DerivedCategory (Sheaf J.toGrothendieck AddCommGrpCat.{u})) ∧ ∃ h : HasCountableCoproducts (DerivedCategory (Sheaf J.toGrothendieck AddCommGrpCat.{u})), @IsSequentialHomotopyColimit (DerivedCategory (Sheaf J.toGrothendieck AddCommGrpCat.{u})) _ _ _ _ _ _ _ h (fun n : ℕ ↦ DerivedCategory.Q.obj (E.obj n)) (fun n : ℕ ↦ DerivedCategory.Q.map (E.map (homOfLE (Nat.le_succ n)))) (DerivedCategory.Q.obj (mappingCone u)) ∧ @IsSequentialHomotopyColimit (DerivedCategory (Sheaf J.toGrothendieck AddCommGrpCat.{u})) _ _ _ _ _ _ _ h (fun n : ℕ ↦ DerivedCategory.Q.obj (E.obj n)) (fun n : ℕ ↦ DerivedCategory.Q.map (E.map (homOfLE (Nat.le_succ n)))) (DerivedCategory.Q.obj L.pt)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

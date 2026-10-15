@@ -319,5 +319,23 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-52903b5c8 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source places, and unit/chapter route. All six steps are valid: connected fibres saturate rank loci, properness gives clopen images, fixed-relative-dimension base change gives geometric purity, and finite closed-point fibres give quasi-finiteness. No new nodes, cycles, duplicates, weakened targets, or coefficient-category identifications. Accepted tool uses and edge-case checks are recorded in review.md; no fixes required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-38980e90e",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, dependencies, sources, docstrings, universes, edge cases and verbatim signature. Server-only compilation reproduced cleanly. No delivery errors found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSmoothConnectedFibreDimensionLoci",
+  "declaration": "AlgebraicGeometry.proper_smooth_connected_fibre_dimension_loci",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSmoothConnectedFibreDimensionLoci.lean",
+  "statement": "theorem proper_smooth_connected_fibre_dimension_loci {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProper f] [Smooth f] (d : ℕ) (hconnected : ∀ s : S, ConnectedSpace ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s))) (hbound : ∀ s : S, topologicalKrullDim ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)) ≤ (d : WithBot ℕ∞)) : ∃ U : Fin (d + 1) → S.Opens, (∀ i : Fin (d + 1), (U i : Set S) = {s : S | topologicalKrullDim ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s)) = (i.val : WithBot ℕ∞)}) ∧ (∀ i : Fin (d + 1), IsClosed (U i : Set S)) ∧ Pairwise (fun i j : Fin (d + 1) ↦ Disjoint (U i : Set S) (U j : Set S)) ∧ (⨆ i : Fin (d + 1), U i) = ⊤ ∧ (∀ i : Fin (d + 1), IsProper (pullback.snd f (U i).ι) ∧ Smooth (pullback.snd f (U i).ι) ∧ ∀ s : (U i).toScheme, Nonempty ((pullback.snd f (U i).ι).fiber s) ∧ GeometricallyConnected ((pullback.snd f (U i).ι).fiberToSpecResidueField s) ∧ (pullback (pullback.snd f (U i).ι) (Spec.map (CommRingCat.ofHom (algebraMap ((U i).toScheme.residueField s) (AlgebraicClosure ((U i).toScheme.residueField s)))) ≫ (U i).toScheme.fromSpecResidueField s)).IsPureDimension i.val) ∧ (pullback.snd f (U 0).ι).IsQuasiFinite",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

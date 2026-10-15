@@ -1,0 +1,116 @@
+{
+ "id": "def-asd-finite-etale-tate-sheaf",
+ "kind": "definition",
+ "title": "Signed finite Tate sheaves",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $A$ a commutative ring and $m\\in\\mathbb N$ with $mA=0$. On the small etale site [def-weil-pbc-etale-site], use the module-valued encoding [def-weil-pbc-etale-sheaves]. Extend the nonnegative twists $A_T(n)$ of [def-asd-finite-etale-tate-twist] to integers by keeping $A_T(n)$ for $n\\geq0$ and defining $A_T(-n-1)=\\mathcal Hom_A(A_T(n+1),A_T(0))$, using the sheaf Hom [def-pur-sheaf-hom]. The local pure-tensor generator in $A_T(1)$ attached to $a\\in A$ and $z\\in\\mu_{m,T}(U)$ is the image of $a\\otimes z$ under the sheafification unit of the scalar-extension construction.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-asd-finite-etale-tate-twist",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK, section-kummer; arbitrary coefficient extension and finite signed tensor powers on the small etale site"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite Tate twist sheaves are tensor powers and duals of roots of unity extended to a coefficient ring",
+   "results": "{\"t\": \"2026-10-15T07:49:16Z\", \"tool\": \"leansearch\", \"query\": \"Finite Tate twist sheaves are tensor powers and duals of roots of unity extended to a coefficient ring\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "Unavailable; no mathematical verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a finite Tate sheaf from roots of unity by scalar extension, tensor powers and sheaf duals",
+   "results": "{\"t\": \"2026-10-15T07:51:01Z\", \"tool\": \"leanfinder\", \"query\": \"Construct a finite Tate sheaf from roots of unity by scalar extension, tensor powers and sheaf duals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.ofSheafLightProfinite\", \"LightCondAb.ofSheafLightProfinite\", \"CondensedMod.ofSheafCompHaus\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"Condensed.finFree\"], \"digest\": \"4e3f1f772ffffe93\"}",
+   "date": "2026-10-15",
+   "verdict": "No finite Tate-sheaf construction is among the returned results."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteEtaleTate|rootsOfUnitySheaf|HasTateTwist",
+   "results": "{\"t\": \"2026-10-15T07:49:18Z\", \"tool\": \"grep\", \"query\": \"finiteEtaleTate|rootsOfUnitySheaf|HasTateTwist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "No finite Tate-sheaf construction is among the returned results."
+  },
+  {
+   "tool": "grep (source and side library)",
+   "query": "rg -n \"finiteTate|finiteTwist|etaleFiniteTwist|rootsOfUnity.*[Mm]odule|tateLine|TateLine|rootsOfUnitySheaf\" /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-newtargets-NJ/lean/Sheaf",
+   "results": "Current source/side-library search finds the published Sheaf.AlgebraicGeometry.FiniteEtaleTateTwist: finiteEtaleTateTwist and finiteEtaleTateLine. These give all nonnegative twists and are reused. HasTateTwist is assumed derived data. No signed sheaf extension is defined.",
+   "date": "2026-10-15",
+   "verdict": "Reuse the published nonnegative twists; add only the missing signed extension."
+  },
+  {
+   "tool": "grep (DAG and blueprint)",
+   "query": "python3 tools/blueprint_refs.py search \"finite Tate\"; rg -l \"finite.*Tate|Tate.*finite\" dag/nodes/sec-smooth-purity/def-*.json",
+   "results": "Blueprint search returns zero matches. DAG search now finds def-asd-finite-etale-tate-twist, a landed node giving nonnegative twists. The pro-etale twist nodes concern a different site. No node defines the signed small-etale sheaf extension.",
+   "date": "2026-10-15",
+   "verdict": "Cite def-asd-finite-etale-tate-twist; only signed extension is new."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-asd-etale-finite-twist-pullback",
+  "date": "2026-10-15",
+  "group": "NJ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Concrete coefficient root line and signed sheaf powers used in the finite-twist pullback lemma",
+   "via": [
+    "lem-asd-etale-finite-twist-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTateSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtaleTateSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTateSheaf.lean",
+  "statement": "def finiteEtaleTateSheaf (A : Type (u + 1)) [CommRing A] (m : ℕ) (T : Scheme.{u}) (hA : (m : A) = 0) : ℤ → Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteEtaleTateSheaf",
+   "AlgebraicGeometry.Scheme.finiteEtaleTateOneGenerator"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a5369426c",
+  "group": "NJ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a5369426c",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Checked all statement dependencies, sources, exact declarations, signatures, canonical comparisons, universes, edge cases, reports and pilot gates. Both server-only compiles reproduced cleanly. No corrections required."
+ }
+}

@@ -213,5 +213,23 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-12fdfc434 (reviewer sub-agent of L); spot-checked: Tag 04TR and all cited definitions support the arbitrary-site compatible-tuple construction, module structure, sheaf axiom, graph inverses, and overlap equation; edge cases and archived target coefficient categories were checked. Steps 3–5 are substantial descent arguments but are incorrectly marked elementary. Corrected full node is at fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-site-module-sheaf-gluing.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4b1647660",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all dependencies, source, docstrings, report sections, edge cases, universes, and verbatim signature. Server-only compile reproduced cleanly; no delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteModuleSheafGluing",
+  "declaration": "SheafOfModules.exists_moduleSheaf_of_cover",
+  "file": "lean/Sheaf/CategoryTheory/SiteModuleSheafGluing.lean",
+  "statement": "theorem exists_moduleSheaf_of_cover {C : Type uC} [Category.{vC} C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (U : C) (I : Type w) (Uᵢ : I → Over U) (hcover : Presieve.ofArrows (fun i ↦ (Uᵢ i).left) (fun i ↦ (Uᵢ i).hom) ∈ J U) (A : Sheaf (J.toGrothendieck.over U) RingCat.{uR}) (hcomm : ∀ (W : (Over U)ᵒᵖ) (r s : A.obj.obj W), r * s = s * r) (Fᵢ : ∀ i : I, ringedSiteModules.{max uC vC w v, uR, vC, max uC vC} (A.over (Uᵢ i))) (φ : ∀ (i j : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j), (Fᵢ i).val.obj (op (Over.mk (T := Over U) a)) ≃ₗ[A.obj.obj (op W)] (Fᵢ j).val.obj (op (Over.mk (T := Over U) b))) (hnatural : ∀ (i j : I) (W V : Over U) (k : V ⟶ W) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j) (x : (Fᵢ i).val.obj (op (Over.mk (T := Over U) a))), φ i j V (k ≫ a) (k ≫ b) ((Fᵢ i).val.map (Over.homMk (U := Over.mk (T := Over U) (k ≫ a)) (V := Over.mk (T := Over U) a) k rfl).op x) = (Fᵢ j).val.map (Over.homMk (U := Over.mk (T := Over U) (k ≫ b)) (V := Over.mk (T := Over U) b) k rfl).op (φ i j W a b x)) (hcocycle : ∀ (i j k : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j) (c : W ⟶ Uᵢ k) (x : (Fᵢ i).val.obj (op (Over.mk (T := Over U) a))), φ i k W a c x = φ j k W b c (φ i j W a b x)) : ∃ F : ringedSiteModules.{max uC vC w v, uR, vC, max uC vC} A, ∃ e : ∀ i : I, F.over (Uᵢ i) ≅ Fᵢ i, ∀ (i j : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j) (x : F.val.obj (op W)), φ i j W a b ((e i).hom.val.app (op (Over.mk (T := Over U) a)) x) = (e j).hom.val.app (op (Over.mk (T := Over U) b)) x",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

@@ -29,7 +29,8 @@
   "def-pc-scheme",
   "def-weil-pbc-category-colimit",
   "def-weil-affine-spectrum",
-  "pqf-def-affine-morphism"
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof": [
   {
@@ -323,5 +324,23 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-b5f8edfc5 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and sources. All nine steps pass, including filteredness, the tensor-model colimit and residue algebraicity at every prime. Checked edge cases, DAG reuse, unit route and exact upstream coefficient categories and exchange direction. Accepted all eight proposed tool uses. No repairs needed; details in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-21cba40cd",
+  "group": "NI",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, source passages, all statement dependencies, exact declarations, clause equivalence, edge cases, universes, report sections, and pilot gates. Signature matches verbatim. Server-only scompile.py passed cleanly in 1.6 seconds. No repairs needed; branch HEAD unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalAlgebraicResidueModels",
+  "declaration": "AlgebraicGeometry.Scheme.exists_strictLocal_algebraicResidue_models",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalAlgebraicResidueModels.lean",
+  "statement": "theorem exists_strictLocal_algebraicResidue_models {K : Type u} [Field K] (Y : Scheme.{u}) [Y.Over (Spec (.of K))] [LocallyOfFiniteType (Y ↘ Spec (.of K))] [QuasiCompact (Y ↘ Spec (.of K))] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) : ∃ U : Y.Opens, s (IsLocalRing.closedPoint Ω) ∈ U ∧ IsAffineOpen U ∧ ∃ (L : Type u) (_ : Field L) (_ : Algebra K L) (_ : IsSepClosed L), Algebra.trdeg K L = @Algebra.trdeg K (Y.residueField (s (IsLocalRing.closedPoint Ω))) _ _ (((Y ↘ Spec (.of K)).residueFieldAlgebraMap (s (IsLocalRing.closedPoint Ω))).toAlgebra) ∧ ∃ (I : Type u) (_ : SmallCategory I) (_ : IsCofiltered I) (D : I ⥤ Over U.toScheme) (p : ∀ i : I, (D.obj i).left ⟶ Spec (.of L)) (c : Cone D) (e : strictHenselizationScheme s ≅ c.pt.left), Nonempty (IsLimit c) ∧ e.hom ≫ c.pt.hom ≫ U.ι = strictHenselizationStructuralMap s ∧ (∀ i : I, Nonempty (D.obj i).left ∧ IsAffine (D.obj i).left ∧ LocallyOfFiniteType (p i) ∧ QuasiCompact (p i) ∧ (D.obj i).hom ≫ U.ι ≫ (Y ↘ Spec (.of K)) = p i ≫ Spec.map (CommRingCat.ofHom (algebraMap K L))) ∧ (∀ (i j : I) (a : i ⟶ j), IsAffineHom (D.map a).left) ∧ ∀ (i : I) (v : (D.obj i).left), @Algebra.IsAlgebraic (U.toScheme.residueField ((D.obj i).hom v)) ((D.obj i).left.residueField v) _ _ (((D.obj i).hom.residueFieldMap v).hom.toAlgebra)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

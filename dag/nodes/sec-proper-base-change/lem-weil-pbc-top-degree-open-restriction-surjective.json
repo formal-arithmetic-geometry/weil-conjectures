@@ -27,7 +27,8 @@
   "def-kun-topological-krull-dimension",
   "def-weil-open-immersion",
   "def-weil-sheaf-of-modules-category",
-  "pqf-def-cohomology"
+  "pqf-def-cohomology",
+  "def-weil-pbc-module-cohomology-fmap"
  ],
  "proof": [
   {
@@ -324,5 +325,23 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-727424e2d (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements, sources, and unit/chapter route in full. All ten steps agree with Stacks 0A3G, 0A3D, 01F1, 02UZ, and 01EB; restriction compatibility, dimension drop, coefficients, edge cases, duplicates, and cycles checked. Corrected only incomplete new-node metadata. Detailed checks and seven accepted tool_uses are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-69ba87482",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source clauses, dependency declarations, canonical restriction and scalar actions, universes, edge cases, report sections, and verbatim signature. Server compile reproduced cleanly; no delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TopDegreeOpenRestrictionSurjective",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.top_degree_open_restriction_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/TopDegreeOpenRestrictionSurjective.lean",
+  "statement": "theorem top_degree_open_restriction_surjective (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsLocallyNoetherian X] [CompactSpace X] (d : ℕ) (hdim : topologicalKrullDim X = (d : WithBot ℕ∞)) (V : Scheme.{u}) (j : V ⟶ X) [IsOpenImmersion j] [CompactSpace V] (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) : ∃ L : (ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ (X ↘ Spec (.of k)).appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace d).obj F) ⟶ (ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ (j ≫ (X ↘ Spec (.of k))).appTop).hom).obj ((RingedSpace.moduleCohomology V.toRingedSpace d).obj ((restrictFunctor j).obj F)), (forget₂ (ModuleCat.{u} k) AddCommGrpCat.{u}).map L = moduleCohomologyFMap j ((restrictAdjunction j).unit.app F) d ∧ Function.Surjective L",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

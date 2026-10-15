@@ -274,5 +274,23 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-36b71cf62 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements, Stacks sources, unit/chapter route, and exact master target interfaces. Repaired one C1/C4 citation gap in step 1 by citing the existing exact-forgetting theorem. Corrected whole-node JSON is under fixes/dag/nodes/; concrete checks are in review.md. Statements and targets remain unchanged; no new nodes, cycles, or major mathematical gaps found.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-645191cb4",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Full immutable delivery reviewed against Stacks 03FD and all statement dependencies. Canonical comparison and degree-zero normalization are correct; server compile passed cleanly. No delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison",
+  "declaration": "CategoryTheory.module_abelian_evaluation_comparison",
+  "file": "lean/Sheaf/CategoryTheory/ModuleAbelianEvaluationComparison.lean",
+  "statement": "theorem module_abelian_evaluation_comparison {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (R : Sheaf J.toGrothendieck RingCat.{u}) [EnoughInjectives (ringedSiteModules.{u} R)] (U : C) : ∃ e : ∀ q : ℕ, (SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))).rightDerived q ≅ SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q, ((SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))).toRightDerivedZero ≫ (e 0).hom = Functor.whiskerLeft (SheafOfModules.toSheaf R) ((sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).toRightDerivedZero)) ∧ ∀ (M : ringedSiteModules.{u} R) (I : InjectiveResolution M) (K : InjectiveResolution ((SheafOfModules.toSheaf R).obj M)) (φ : ((SheafOfModules.toSheaf R).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ K.cocomplex) (_hφ : (SheafOfModules.toSheaf R).map (I.ι.f 0) ≫ φ.f 0 = K.ι.f 0) (q : ℕ), (e q).hom.app M ≫ (K.isoRightDerivedObj (sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)) q).hom = (I.isoRightDerivedObj (SheafOfModules.toSheaf R ⋙ (sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))) q).hom ≫ HomologicalComplex.homologyMap (((sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).mapHomologicalComplex (.up ℕ)).map φ) q",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

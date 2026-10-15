@@ -26,7 +26,8 @@
   "def-weil-derived-cohomology-sheaves",
   "def-weil-pbc-sites-and-cohomology",
   "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-weil-pbc-site-locally-constant-finite-type"
  ],
  "proof": [
   {
@@ -341,5 +342,23 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-e42d9669a (reviewer sub-agent of L); spot-checked: Read both nodes and all proof steps in full against Stacks 094G/094H and cited infrastructure. Corrected truncation bounds are valid. Repaired missing local-sheafification citations, an inapplicable cochain-definition citation, and incomplete new-node metadata. Whole corrected JSON files and concrete source, edge-case, route, and coefficient-category checks are recorded in fixes/ and review.md. No targets weakened.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-62a2f4883",
+  "group": "NU",
+  "result": "pass",
+  "note": "Wrote review.md with clause-by-clause checks, dependency and construction audits, universe and edge-case checks. Both immutable Lean modules reproduced cleanly through server-only scompile.py. No H1–H13 errors found; branch and project clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocallyConstantTensor",
+  "declaration": "SheafOfModules.locallyConstantFiniteType_derivedTensor",
+  "file": "lean/Sheaf/Paper/LocallyConstantTensor.lean",
+  "statement": "theorem locallyConstantFiniteType_derivedTensor {C : Type u} [Category.{u} C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (B : Type u) [CommRing B] [IsNoetherianRing B] [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B))))] (K L : DerivedCategory (SheafOfModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B))))) (hK : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B)))) i).obj K)) (hL : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B)))) i).obj L)) (hKlc : ∀ i : ℤ, IsLocallyConstantFiniteType J.toGrothendieck B ((DerivedCategory.homologyFunctor (SheafOfModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B)))) i).obj K)) (hLlc : ∀ i : ℤ, IsLocallyConstantFiniteType J.toGrothendieck B ((DerivedCategory.homologyFunctor (SheafOfModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B)))) i).obj L)) (P Q : CochainComplex (SheafOfModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B)))) ℤ) (hP : CochainComplex.IsKFlat P) (hQ : CochainComplex.IsKFlat Q) (eP : DerivedCategory.Q.obj P ≅ K) (eQ : DerivedCategory.Q.obj Q ≅ L) : ∀ i : ℤ, IsLocallyConstantFiniteType J.toGrothendieck B ((CochainComplex.mapBifunctor P Q (@CategoryTheory.MonoidalCategory.curriedTensor _ _ (SheafOfModules.monoidalCategory ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B))))).homology i)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

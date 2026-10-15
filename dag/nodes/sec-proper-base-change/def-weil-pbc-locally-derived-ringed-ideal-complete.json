@@ -1,0 +1,117 @@
+{
+ "id": "def-weil-pbc-locally-derived-ringed-ideal-complete",
+ "kind": "definition",
+ "title": "LocallyDerivedRingedIdealComplete",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small category with Grothendieck topology $J$, and let $\\mathcal O$ be a sheaf of commutative rings. Use its category of module sheaves [def-weil-sheaf-of-modules-category]. Let $\\iota:\\mathcal I\\to\\mathcal O$ be an ideal subsheaf represented as in [def-weil-pbc-ringed-ideal-generators], and use slice derived restriction [def-weil-pbc-ringed-derived-restriction]. An object $E\\in D(\\mathcal O)$ is locally derived $\\mathcal I$-complete if for every object $U$ and every section $f\\in\\mathcal I(U)$ one has $R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f],E|_U)=0$. Localization is [def-weil-pbc-ringed-section-localization], and derived internal Hom is [def-pur-derived-internal-hom]. There is no boundedness condition on $E$.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-ideal-generators",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-ringed-section-localization",
+  "def-pur-derived-internal-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999 and 099F, local derived completeness"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafified sectionwise localization on ringed sites, ideal sheaf local finite generators, extended Cech localization complex, derived restriction, internal Hom completion unit and locally derived complete objects",
+   "results": "UNAVAILABLE 0 hit(s): service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified sectionwise localization on ringed sites, ideal sheaf local finite generators, extended Cech localization complex, derived restriction, internal Hom completion unit and locally derived complete objects",
+   "results": "CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW; PresheafOfModules.instIsLocallyInjectiveToSheafify; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; PresheafOfModules.toPresheaf_map_toSheafify; PresheafOfModules.sheafifyHomEquiv'; PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective; PresheafOfModules.sheafificationCompToSheaf; PresheafOfModules.sheafification",
+   "date": "2026-10-15",
+   "verdict": "General sheafification is reused, but none supplies the indicated localization, finite generation, augmented Cech, completion-unit or local-completeness constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, localization",
+   "results": "OK 0 hit(s) | loogle: unknown identifier 'localization'",
+   "date": "2026-10-15",
+   "verdict": "No matching declaration found; source grep and LeanFinder also checked."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedSectionLocalization|IsRingedIdealGeneratingList|ringedExtendedCech|ringedDerivedRestriction|ringedCechCompletionUnit|IsLocallyDerivedRingedIdealComplete|HasLocalExtendedCechDescription",
+   "results": "msearch Mathlib: OK 0 hit(s); rg of slopmaster2 WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json: no hits. blueprint_refs.py search \"extended Cech\": 0 blueprint nodes. Existing DAG prose contains related statement nodes but no definition of these notions.",
+   "date": "2026-10-15",
+   "verdict": "No duplicate definition. Existing module sheaves, localization rings, sheafification, tensor complex and internal Hom are imported and reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally derived complete ideal sheaf vanishing internal Hom from localizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) {U V : ↑X.affineOpens} (h : U ≤ V)\\n  (f : ↑(X.presheaf.obj (Opposite.op ↑V))),\\n  U = X.affineBasicOpen f →\\n    IsLocalization.Away ((Ideal.Quotient.mk (I.ideal V)) f) (↑(X.presheaf.obj (Opposite.op ↑U)) ⧸ I.ideal U)\", \"doc\": \"For affine open subsets $U \\\\subseteq V$ of a scheme $X$, the ideal $I(V)$ in the ring of sections $\\\\Gamma(V, \\\\mathcal{O}_X)$ is contained in the preimage of the ideal $I(U)$ in $\\\\Gamma(U, \\\\mathcal{O}_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, when constructing ideal sheaf data via the specified method using a family of ideals on affine open subsets, compatibility conditions under restriction to basic open subsets, and a s\"}\n  {\"name\": \"ModuleCat.Tilde.exists_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))),\\n  ∀ x ∈ U,\\n    ∃ V,\\n      ∃ (_ : x ∈ V),\\n        ∃ i f g,\\n          ∃ (hg : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl),\\n            Mo\", \"doc\": \"For any section $ s $ of the sheaf $ \\\\widetilde{M} $ over an open subset $ U \\\\subseteq \\\\operatorname{Spec}(R) $, and for any point $ x \\\\in U $, there exists an open neighborhood $ V \\\\subseteq U $ of $\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → Ideal ↑(X.presheaf.obj (Opposite.op ⊤)) → X.IdealSheafData\", \"doc\": \"Given a scheme $X$ and an ideal $I$ in the global sections of its structure sheaf over the entire space $X$, this constructor defines an ideal sheaf data on $X$ by restricting $I$ to affine open subse\"}\n  {\"name\": \"ModuleCat.Tilde.sectionsSubmodule\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      (U : (TopologicalSpace.Opens (PrimeSpectrum R))ᵒᵖ) →\\n        Submodule (↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj U))\\n          ((x : ↥(Opposite.unop U)) → ModuleCat.Tilde.Localizations M ↑x)\", \"doc\": \"For a commutative ring $ R $, module $ M $, and open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this is the submodule of the product $ \\\\prod_{\\\\mathfrak{p} \\\\in U} M_{\\\\mathfrak{p}} $ co\"}",
+   "date": "2026-10-15",
+   "verdict": "Scheme ideal localizations and ordinary local cohomology do not define the general ringed-site derived-completeness condition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-extended-cech-completion-model",
+  "date": "2026-10-15",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, final Stacks comparison: constant/completed coefficient equivalence, via the global augmented extended Čech construction and the completion unit used in the proof of 099I.",
+   "via": [
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete",
+  "declaration": "CategoryTheory.IsLocallyDerivedRingedIdealComplete",
+  "declarations": [
+   "CategoryTheory.IsLocallyDerivedRingedIdealComplete"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LocallyDerivedRingedIdealComplete.lean",
+  "statement": "def IsLocallyDerivedRingedIdealComplete {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))] (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) (E : ringedSiteDerived O) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dae1d157f",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dae1d157f",
+  "group": "NE",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source correspondence, all dependencies and eight Lean modules, canonical constructions, edge cases, universes, records and docstrings. Immutable files match the commit; server-only compilation passed. No delivery errors found."
+ }
+}

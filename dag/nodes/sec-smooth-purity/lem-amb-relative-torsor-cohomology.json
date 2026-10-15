@@ -23,7 +23,12 @@
   "def-sc-gm-torsor",
   "def-sc-contracted-product-presentation",
   "def-weil-pbc-etale-cohomology",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-amb-torsor-with-section",
+  "def-amb-relative-etale-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-etale-resolution-section-transfer"
  ],
  "proof": [
   {
@@ -527,5 +532,44 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-b79fbea5b (reviewer sub-agent of L); spot-checked: Read the full mathematics, all cited statements, source locations, and unit/chapter route. Verified all ten steps, repaired cone and boundary signs, arbitrary coefficient/pullback naturality, edge cases, and duplicate/cycle checks. Exact master target morphisms and coefficient categories remain distinct and unchanged. No fixes needed; review.md records the checks and accepted tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d38829693",
+  "group": "NP",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. Replaced inline tactic proofs with existing proof terms; signatures unchanged. Checked sources, all statement dependencies, clauses, universes, edge cases and report sections. All three corrected modules compile cleanly through server-only scompile.py. Snapshot and branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeTorsorCohomology",
+  "declaration": "AlgebraicGeometry.Etale.relative_torsor_cohomology",
+  "declarations": [
+   "AlgebraicGeometry.Etale.relativeSectionMap_square",
+   "AlgebraicGeometry.Etale.relativeSectionMap",
+   "AlgebraicGeometry.Etale.relativeTransfer_square",
+   "AlgebraicGeometry.Etale.relativeTransfer",
+   "AlgebraicGeometry.Etale.relativeForgetH1",
+   "AlgebraicGeometry.Etale.relative_torsor_cohomology",
+   "AlgebraicGeometry.Etale.relative_comparison_exists",
+   "AlgebraicGeometry.Etale.relativeTransfer_independent",
+   "AlgebraicGeometry.Etale.relativeSectionMap_comp_zero",
+   "AlgebraicGeometry.Etale.relativeShortComplex",
+   "AlgebraicGeometry.Etale.relativeShortComplex_shortExact",
+   "AlgebraicGeometry.Etale.relativeConnecting",
+   "AlgebraicGeometry.Etale.relativeAbsoluteShortComplex",
+   "AlgebraicGeometry.Etale.relativeAbsoluteShortComplex_shortExact",
+   "AlgebraicGeometry.Etale.relativeConnecting_forget",
+   "AlgebraicGeometry.Etale.relativeConnecting_pullback_naturality",
+   "AlgebraicGeometry.Etale.relative_coefficient_sequence",
+   "AlgebraicGeometry.Etale.relativeConnecting_coefficient_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTorsorCohomology.lean",
+  "statement": "theorem relative_torsor_cohomology : ∃ e : ∀ (T : Scheme.{u}) (W : T.Opens) (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G), Sheaf.Torsor.WithSection.Classes G (Scheme.Etale.mk W.ι) ≃ relativeCohomology T (Scheme.Etale.mk W.ι) I 1, (∀ T W G I, e T W G I (Quotient.mk _ ⟨Sheaf.Torsor.trivial G, @id (G.obj.obj (op (Scheme.Etale.mk W.ι))) 0⟩) = 0) ∧ (∀ T W G I (c : ResolutionSectionCanonicalComparison G I) (P : Sheaf.Torsor.WithSection G (Scheme.Etale.mk W.ι)), relativeForgetH1 T W G I c (e T W G I (Quotient.mk _ P)) = Sheaf.Torsor.classH1 G (MorphismProperty.Over.mkIdTerminal @Etale T) (Quotient.mk _ P.1)) ∧ (∀ (T : Scheme.{u}) (W : T.Opens) (G G' : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (f : G ⟶ G') (I : InjectiveResolution G) (J : InjectiveResolution G') (a : I.Hom J f) (P : Sheaf.Torsor.WithSection G (Scheme.Etale.mk W.ι)) (Q : Sheaf.Torsor G') (q : Sheaf.Torsor.ContractedProductPresentation.{u, u} T f P.1 Q), HomologicalComplex.homologyMap (relativeSectionMap T (Scheme.Etale.mk W.ι) a.hom) 1 (e T W G I (Quotient.mk _ P)) = e T W G' J (Quotient.mk _ ⟨Q, q.quotient (op (Scheme.Etale.mk W.ι)) P.2 0⟩)) ∧ (∀ (T T' : Scheme.{u}) (h : T' ⟶ T) (W : T.Opens) (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (G' : Sheaf T'.smallEtaleTopology AddCommGrpCat.{u + 1}) (f : G ⟶ (lowerStar AddCommGrpCat.{u + 1} h).obj G') (I : InjectiveResolution G) (J : InjectiveResolution G') (a : I.cocomplex ⟶ ((lowerStar AddCommGrpCat.{u + 1} h).mapHomologicalComplex (.up ℕ)).obj J.cocomplex) (_ha : I.ι.f 0 ≫ a.f 0 = f ≫ (lowerStar AddCommGrpCat.{u + 1} h).map (J.ι.f 0)) (P : Sheaf.Torsor.WithSection G (Scheme.Etale.mk W.ι)) (Q : Sheaf.Torsor G') (b : P.1.sheaf.obj ⟶ (MorphismProperty.Over.pullback @Etale ⊤ h).op ⋙ Q.sheaf.obj) (_hb : ∀ (A : T.Etaleᵒᵖ) (g : G.obj.obj A) (t : P.1.sheaf.obj.obj A), b.app A (P.1.vadd A g t) = Q.vadd (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj A.unop)) (f.hom.app A g) (b.app A t)), HomologicalComplex.homologyMap (relativeTransfer h W I.cocomplex J.cocomplex a) 1 (e T W G I (Quotient.mk _ P)) = e T' (h ⁻¹ᵁ W) G' J (Quotient.mk _ ⟨Q, Q.sheaf.obj.map (openSectionPullback h W).op (b.app (op (Scheme.Etale.mk W.ι)) P.2)⟩))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-d38829693"
  }
 }

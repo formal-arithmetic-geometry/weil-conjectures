@@ -245,5 +245,51 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-dfe87e1f2 (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited DAG statements, unit route, and source locations. All five steps and edge cases check; no new nodes or repairs are needed. Generic cross-unit tools are listed for merge recording."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-45a6bd0a3",
+  "group": "NH",
+  "result": "pass",
+  "note": "Immutable delivery fully reviewed; exact signature matches, canonical constructions and universe transport are sound, required report sections are present, and server-only compilation passed without warnings. No delivery errors or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImage",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleSheafInverseImage",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleBaseChange",
+   "AlgebraicGeometry.Scheme.proEtaleBaseChange_isContinuous",
+   "AlgebraicGeometry.Scheme.proEtaleBaseChange_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.proEtaleBaseChangeCoverPreserving",
+   "AlgebraicGeometry.Scheme.proEtaleSheafDirectImage",
+   "AlgebraicGeometry.Scheme.proEtaleSheafInverseImage",
+   "AlgebraicGeometry.Scheme.proEtaleSheafAdjunction",
+   "AlgebraicGeometry.Scheme.proEtaleConstantDirectImageMap",
+   "AlgebraicGeometry.Scheme.proEtaleConstantInverseImageMap",
+   "AlgebraicGeometry.Scheme.proEtaleSiteModel",
+   "AlgebraicGeometry.Scheme.proEtaleModelTopology",
+   "AlgebraicGeometry.Scheme.proEtaleModelUp_isContinuous",
+   "AlgebraicGeometry.Scheme.proEtaleModelBaseChange",
+   "AlgebraicGeometry.Scheme.proEtaleModelBaseChange_isContinuous",
+   "AlgebraicGeometry.Scheme.proEtaleModuleToModel",
+   "AlgebraicGeometry.Scheme.proEtaleModuleFromModel",
+   "AlgebraicGeometry.Scheme.proEtaleModelRingUnit",
+   "AlgebraicGeometry.Scheme.proEtaleModuleInverseImage",
+   "AlgebraicGeometry.Scheme.proEtaleInverseImageIndex",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRing",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientDirectImageMap",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientInverseImageMap",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModuleDirectImage",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModulePullback",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModulePullbackMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleInverseImage.lean",
+  "statement": "abbrev proEtaleSheafInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y) (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D] [HasWeakSheafify (ProEt.topology X) D] : Sheaf (ProEt.topology Y) D ⥤ Sheaf (ProEt.topology X) D",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Canonical constructions using the existing small pro-etale base-change functor and continuity, Mathlib left Kan extension and sheafification, and the recorded change-of-rings tensor. The module inverse image transports through AsSmall solely to use Mathlib module pullback at equal site object/Hom universes, then transports back to the original site. No scheme bound or coefficient category changes. All helper declarations belong to this construction and are listed here."
  }
 }

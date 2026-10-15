@@ -23,7 +23,8 @@
   "def-weil-spectral-space",
   "def-weil-pbc-topological-inverse-image",
   "def-sc-topological-abelian-cohomology",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-punctured-neighborhood-cohomology-diagram"
  ],
  "proof": [
   {
@@ -168,5 +169,26 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-bf55ca28e (reviewer sub-agent of L); spot-checked: Read the full item, sole new node, cited statements, sources and route. Stacks 0A3D(2) and 0A37 support the canonical abelian-sheaf comparison; all five steps satisfy their hypotheses. Duplicate, cycle, coefficient-map and edge-case checks passed. No repairs or tool_uses needed. Detailed checks written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2559056df",
+  "group": "NY",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, dependencies, canonical constructions, signatures, universes and edge cases. All three immutable Lean modules passed server-only compilation. Documented the snapshot extraction omission; the missing node record exists at the exact delivery commit."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.PuncturedNeighborhoodCohomologyColimit",
+  "declaration": "TopCat.puncturedNeighborhoodCohomology_colimit",
+  "declarations": [
+   "TopCat.puncturedNeighborhoodCohomology_colimit"
+  ],
+  "file": "lean/Sheaf/Topology/PuncturedNeighborhoodCohomologyColimit.lean",
+  "statement": "theorem puncturedNeighborhoodCohomology_colimit {T : Type u} [TopologicalSpace T] [SpectralSpace T] (Z : Set T) (hZ : IsClosed Z) (hU : IsCompact Zᶜ) (A : CategoryTheory.Sheaf (Opens.grothendieckTopology T) AddCommGrpCat.{u}) (p : ℕ) : IsFiltered (compactOpenNeighborhoods Z)ᵒᵖ ∧ IsIso (colimit.desc (puncturedNeighborhoodCohomologyDiagram Z hZ A p) (puncturedNeighborhoodCohomologyCocone Z hZ A p))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

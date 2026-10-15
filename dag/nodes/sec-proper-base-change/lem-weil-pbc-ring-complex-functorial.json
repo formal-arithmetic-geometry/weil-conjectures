@@ -143,7 +143,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-tensor-complex-sheaves",
   "def-pc-kflat-complex",
-  "lem-pc-kflat-resolution"
+  "lem-pc-kflat-resolution",
+  "def-pc-ring-hom-extension-shared-definitions"
  ],
  "mathlib_searches": [
   {
@@ -294,5 +295,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-965e27425",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Wrote review.md. All statement clauses, dependencies, canonical maps, universes, edge cases, metadata, and pilot gates pass. Snapshot server compile reproduced cleanly, including the side overlay. No fixes required; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingComplexFunctorial",
+  "declaration": "AlgebraicGeometry.exists_functorial_ringComplex",
+  "file": "lean/Sheaf/Paper/RingComplexFunctorial.lean",
+  "statement": "theorem exists_functorial_ringComplex [∀ A : CommRingCat.{u}, HasDerivedCategory.{w} (RingSiteModules A)] : ∃ (K : ∀ A : CommRingCat.{u}, {I : Ideal A // I.FG} → CochainComplex (RingSiteModules A) ℤ) (ε : ∀ (A : CommRingCat.{u}) (I : {I : Ideal A // I.FG}), K A I ⟶ (HomologicalComplex.single (RingSiteModules A) (ComplexShape.up ℤ) 0).obj (@id (RingSiteModules A) (SheafOfModules.unit.{u, u, u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf.{u} A))))) (m : ∀ (A B : CommRingCat.{u}) (φ : A →+* B) (I : {I : Ideal A // I.FG}) (J : {J : Ideal B // J.FG}), I.val.map φ = J.val → ∀ n : ℤ, ((K A I).X n).val.obj (op ⟨PUnit.unit⟩) →ₛₗ[φ] ((K B J).X n).val.obj (op ⟨PUnit.unit⟩)), (∀ (A B : CommRingCat.{u}) (φ : A →+* B) (I : {I : Ideal A // I.FG}) (J : {J : Ideal B // J.FG}) (h : I.val.map φ = J.val) (n k : ℤ) (x : ((K A I).X n).val.obj (op ⟨PUnit.unit⟩)), m A B φ I J h k (((K A I).d n k).val.app (op ⟨PUnit.unit⟩) x) = ((K B J).d n k).val.app (op ⟨PUnit.unit⟩) (m A B φ I J h n x)) ∧ (∀ (A B : CommRingCat.{u}) (φ : A →+* B) (I : {I : Ideal A // I.FG}) (J : {J : Ideal B // J.FG}) (h : I.val.map φ = J.val) (x : ((K A I).X 0).val.obj (op ⟨PUnit.unit⟩)), ((ε B J).f 0 ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 (SheafOfModules.unit.{u, u, u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf.{u} B)))).hom).val.app (op ⟨PUnit.unit⟩) (m A B φ I J h 0 x) = φ (((ε A I).f 0 ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 (SheafOfModules.unit.{u, u, u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf.{u} A)))).hom).val.app (op ⟨PUnit.unit⟩) x)) ∧ (∀ (A : CommRingCat.{u}) (I : {I : Ideal A // I.FG}) (h : I.val.map (RingHom.id A) = I.val) (n : ℤ) (x : ((K A I).X n).val.obj (op ⟨PUnit.unit⟩)), m A A (RingHom.id A) I I h n x = x) ∧ (∀ (A B D : CommRingCat.{u}) (φ : A →+* B) (ψ : B →+* D) (I : {I : Ideal A // I.FG}) (J : {J : Ideal B // J.FG}) (L : {L : Ideal D // L.FG}) (h : I.val.map φ = J.val) (h' : J.val.map ψ = L.val) (h'' : I.val.map (ψ.comp φ) = L.val) (n : ℤ) (x : ((K A I).X n).val.obj (op ⟨PUnit.unit⟩)), m B D ψ J L h' n (m A B φ I J h n x) = m A D (ψ.comp φ) I L h'' n x) ∧ (∀ (A B : CommRingCat.{u}) (φ : A →+* B) (I : {I : Ideal A // I.FG}) (J : {J : Ideal B // J.FG}) (h : I.val.map φ = J.val) (P : CochainComplex (RingSiteModules A) ℤ) (p : P ⟶ K A I), P.IsKFlat → QuasiIso p → ∃ (E : CochainComplex (RingSiteModules B) ℤ) (t : ∀ n : ℤ, E.X n ≅ SheafOfModules.changeOfRings.{u, u, u} (ringSiteMap.{u} φ) (P.X n)), (∀ n k : ℤ, E.d n k ≫ (t k).hom = (t n).hom ≫ SheafOfModules.changeOfRingsHom.{u, u, u} (ringSiteMap.{u} φ) (P.X n) (P.d n k)) ∧ ∃ χ : E ⟶ K B J, IsIso (DerivedCategory.Q.map χ) ∧ ∀ (n : ℤ) (x : (P.X n).val.obj (op ⟨PUnit.unit⟩)), (χ.f n).val.app (op ⟨PUnit.unit⟩) ((t n).inv.val.app (op ⟨PUnit.unit⟩) ((toSheafify ⊥ (SheafOfModules.changeOfRingsPresheaf (ringSiteMap.{u} φ) (P.X n)).presheaf).app (op ⟨PUnit.unit⟩) ((1 : B) ⊗ₜ[A, φ] x))) = m A B φ I J h n ((p.f n).val.app (op ⟨PUnit.unit⟩) x)) ∧ (∀ (A : CommRingCat.{u}) (I : {I : Ideal A // I.FG}) (r : ℕ) (f : Fin r → A), Ideal.span (Set.range f) = I.val → ∃ (C : CochainComplex (RingSiteModules A) ℤ) (a : C ⟶ (HomologicalComplex.single (RingSiteModules A) (ComplexShape.up ℤ) 0).obj (@id (RingSiteModules A) (SheafOfModules.unit.{u, u, u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf.{u} A))))) (e₀ : (C.X 0).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A] A) (e : ∀ q : ℕ, (C.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A] ((t : Fin (q + 1) ↪o Fin r) → Localization.Away (∏ i, f (t i)))) (l : ∀ (q : ℕ) (t : Fin (q + 2) ↪o Fin r) (j : Fin (q + 2)), Localization.Away (∏ i, f (t (Fin.succAboveOrderEmb j i))) →ₐ[A] Localization.Away (∏ i, f (t i))), (∀ n : ℤ, n < 0 → IsZero (C.X n)) ∧ (∀ (x : (C.X 0).val.obj (op ⟨PUnit.unit⟩)) (t : Fin 1 ↪o Fin r), e 0 ((C.d 0 1).val.app (op ⟨PUnit.unit⟩) x) t = algebraMap A (Localization.Away (∏ i, f (t i))) (e₀ x)) ∧ (∀ (q : ℕ) (x : (C.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩)) (t : Fin (q + 2) ↪o Fin r), e (q + 1) ((C.d ((q : ℤ) + 1) ((q : ℤ) + 2)).val.app (op ⟨PUnit.unit⟩) x) t = ∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val • l q t j (e q x ((Fin.succAboveOrderEmb j).trans t))) ∧ (∀ x : (C.X 0).val.obj (op ⟨PUnit.unit⟩), (a.f 0 ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 (SheafOfModules.unit.{u, u, u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf.{u} A)))).hom).val.app (op ⟨PUnit.unit⟩) x = e₀ x) ∧ ∃ α : DerivedCategory.Q.obj C ≅ DerivedCategory.Q.obj (K A I), α.hom ≫ DerivedCategory.Q.map (ε A I) = DerivedCategory.Q.map a)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

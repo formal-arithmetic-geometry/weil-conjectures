@@ -1,0 +1,121 @@
+{
+ "id": "def-weil-pbc-finite-type-locally-constant-module-sheaf",
+ "kind": "definition",
+ "title": "Finite type locally constant module sheaf on a small site",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and $B$ a commutative ring. Put $\\underline B$ equal to the constant ring sheaf [def-weil-pbc-constant-sheaf]. A sheaf $F$ of $\\underline B$-modules [def-weil-sheaf-of-modules-category] is locally constant of finite type if for every object $U$ there is a covering sieve $S$ such that for every $V\\to U$ in $S$ there is a finitely generated $B$-module $M$ [def-weil-finitely-generated-module] and an isomorphism $F|_V\\simeq\\underline M|_V$ of module sheaves on $\\mathcal C/V$. Here $\\underline M$ is the existing constant module sheafification functor of [def-weil-pbc-strict-perfect-coefficient-package]. No points or terminal object are required.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, lemma-kernel-finite-locally-constant (3)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally constant finite type sheaves of modules on an arbitrary site",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant finite type module sheaf on a site locally isomorphic to a constant finitely generated module",
+   "results": "CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstantModule.functor_obj_val; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; SheafOfModules.IsFiniteType; Condensed.finFree; LightCondMod.LocallyConstant.functor; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier",
+   "date": "2026-10-15",
+   "verdict": "no match: specialized condensed objects or finite type without local constancy"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, SheafOfModules",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant|WeakSerre|constantSheaf (Algebra/Category/ModuleCat via msearch.py)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg IsFiniteTypeLocallyConstant dag/nodes lean/Sheaf /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg constantSheaf.*RingCat|SheafOfModules.*constantSheaf|constantSheaf.*SheafOfModules|constantModuleSheaf lean/Sheaf /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "SheafOfModules.strictPerfectConstantSheaf in lean/Sheaf/Paper/StrictPerfectCoefficientPackage.lean:185; pro-etale specialization in Sheaf/Paper/ProEtaleLocallyConstantSheaf.lean",
+   "date": "2026-10-15",
+   "verdict": "reuse existing arbitrary-site constant-module construction; no arbitrary-site finite type locally constant predicate"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-locally-constant-derived-serre",
+  "date": "2026-10-15",
+  "group": "NA"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): finite lisse cohomology reductions on a single finite stratification",
+   "via": [
+    "lem-weil-pbc-locally-constant-derived-serre",
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteTypeLocallyConstantModuleSheaf",
+  "declaration": "SheafOfModules.IsFiniteTypeLocallyConstant",
+  "file": "lean/Sheaf/CategoryTheory/FiniteTypeLocallyConstantModuleSheaf.lean",
+  "statement": "def IsFiniteTypeLocallyConstant {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (B : Type u) [CommRing B] (F : CategoryTheory.ringedSiteModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of B))) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ba606ac03",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ba606ac03",
+  "group": "NA",
+  "result": "pass",
+  "note": "Verified immutable files, source, dependencies, all statement clauses, edge cases, verbatim signatures, docstrings and report sections. Server-only compilation reproduced successfully; no corrections required."
+ }
+}

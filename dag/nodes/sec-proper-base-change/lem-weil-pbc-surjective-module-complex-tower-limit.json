@@ -194,5 +194,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-766fe4efa",
+  "group": "NC",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical constructions, universes, edge cases, and maintainer gates. Signature matches verbatim; server-only compile reproduced cleanly in 1.3 seconds. No defects found; branch and project clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SurjectiveModuleComplexTowerLimit",
+  "declaration": "ModuleCat.surjective_moduleComplexTower_limit",
+  "declarations": [
+   "ModuleCat.restrictedComplexTower",
+   "ModuleCat.surjective_moduleComplexTower_limit"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/SurjectiveModuleComplexTowerLimit.lean",
+  "statement": "theorem surjective_moduleComplexTower_limit (A : ℕᵒᵖ ⥤ CommRingCat.{u}) (c : Cone A) (hc : IsLimit c) (P : ∀ n : ℕ, CochainComplex (ModuleCat.{v} (A.obj (Opposite.op n))) ℤ) (t : ∀ n : ℕ, P (n + 1) ⟶ ((restrictScalars (A.map (homOfLE (Nat.le_succ n)).op).hom).mapHomologicalComplex (ComplexShape.up ℤ)).obj (P n)) (ht : ∀ (n : ℕ) (i : ℤ), Function.Surjective ((t n).f i)) [HasDerivedCategory.{w} (ModuleCat.{v} c.pt)] : HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj ((restrictedComplexTower A c P t).obj (Opposite.op n))) ∧ ∀ [HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj ((restrictedComplexTower A c P t).obj (Opposite.op n)))], ∃ δ : (∏ᶜ fun n : ℕ ↦ DerivedCategory.Q.obj ((restrictedComplexTower A c P t).obj (Opposite.op n))) ⟶ (DerivedCategory.Q.obj (HomologicalComplex.coneOfHasLimitEval (restrictedComplexTower A c P t)).pt) ⟦(1 : ℤ)⟧, IsDerivedLimitTriangle (fun n : ℕ ↦ DerivedCategory.Q.map ((restrictedComplexTower A c P t).map (homOfLE (Nat.le_succ n)).op)) (DerivedCategory.Q.obj (HomologicalComplex.coneOfHasLimitEval (restrictedComplexTower A c P t)).pt) (Pi.lift (fun n : ℕ ↦ DerivedCategory.Q.map ((HomologicalComplex.coneOfHasLimitEval (restrictedComplexTower A c P t)).π.app (Opposite.op n)))) δ",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

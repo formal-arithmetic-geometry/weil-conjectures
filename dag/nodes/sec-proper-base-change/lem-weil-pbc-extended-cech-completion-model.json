@@ -22,7 +22,14 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-ideal-generators",
+  "def-weil-pbc-ringed-extended-cech",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-ringed-completion-unit",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-local-extended-cech-description"
  ],
  "proof": [
   {
@@ -226,5 +233,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dae1d157f",
+  "group": "NE",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source correspondence, all dependencies and eight Lean modules, canonical constructions, edge cases, universes, records and docstrings. Immutable files match the commit; server-only compilation passed. No delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "declaration": "CategoryTheory.exists_ringedExtendedCech_completion_model",
+  "declarations": [
+   "CategoryTheory.exists_ringedExtendedCech_completion_model"
+  ],
+  "file": "lean/Sheaf/Paper/ExtendedCechCompletionModel.lean",
+  "statement": "theorem exists_ringedExtendedCech_completion_model {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (O : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))] (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) [Mono ι] [I.IsFiniteType] : (∃ (K : ringedSiteComplex O) (ε : K ⟶ ringedSiteRingComplex O), HasLocalExtendedCechDescription O I ι K ε) ∧ ∀ (K : ringedSiteComplex O) (ε : K ⟶ ringedSiteRingComplex O), HasLocalExtendedCechDescription O I ι K ε → (∀ E : ringedSiteDerived O, IsLocallyDerivedRingedIdealComplete O I ι ((ringedCechCompletionFunctor O K).obj E)) ∧ (∀ (E E' : ringedSiteDerived O) (g : E ⟶ E'), ringedCechCompletionUnit O K ε E ≫ (ringedCechCompletionFunctor O K).map g = g ≫ ringedCechCompletionUnit O K ε E') ∧ (∀ (E L : ringedSiteDerived O), IsLocallyDerivedRingedIdealComplete O I ι L → Function.Bijective (fun h : (ringedCechCompletionFunctor O K).obj E ⟶ L ↦ ringedCechCompletionUnit O K ε E ≫ h)) ∧ (∀ E : ringedSiteDerived O, IsLocallyDerivedRingedIdealComplete O I ι E → IsIso (ringedCechCompletionUnit O K ε E))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

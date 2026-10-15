@@ -31,7 +31,9 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-constant-sheaf",
-  "def-constructible-locally-constant"
+  "def-constructible-locally-constant",
+  "def-weil-pbc-etale-module-stalk-specialization",
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof": [
   {
@@ -314,5 +316,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6fbae8e68",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical specialization, universes, edge cases, records and pilot gates. Both modules compiled cleanly through server-only scompile.py. No defects found; no repository changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleFiniteStalkSpecializationCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.finiteLocallyConstant_of_finite_stalks_of_bijective_specialization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFiniteStalkSpecializationCriterion.lean",
+  "statement": "theorem finiteLocallyConstant_of_finite_stalks_of_bijective_specialization {S : Scheme.{u}} [IsNoetherian S] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hfinite : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), Finite (↑((pointSmallEtale s).sheafFiber.obj G) : Type (u + 1))) (hsp : ∀ (Ω Ξ : Type u) [Field Ω] [IsAlgClosed Ω] [Field Ξ] [IsAlgClosed Ξ] (s : Spec (.of Ω) ⟶ S) (t : Spec (.of Ξ) ⟶ strictHenselizationScheme s), Function.Bijective (etaleModuleStalkSpecialization s t G)) : ∃ 𝒰 : Cover.{u} etalePrecoverage S, ∀ i : 𝒰.I₀, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧ Nonempty ((G.over (𝒰.etalePrecoverageToEtale i)) ≅ (constantSheaf (S.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} Λ)).obj M)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

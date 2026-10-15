@@ -350,5 +350,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-4dffaa356 (reviewer sub-agent of L); spot-checked: Read the item and all six steps, every cited statement, relevant sources, and chapter/unit route. Stacks 08JI hypotheses, finite diagonals, signs, injective replacement, and canonicity check out; the source’s reversed comparison arrow is correctly repaired. No new nodes or delivery-specific faults. Exact master target categories and base-change maps were checked without assuming seeded comparisons. Inherited DAG cycles are documented in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1a449571d",
+  "group": "NX",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all clauses, dependencies, sources, universes, edge cases, docstrings, and pilot gates. Signature matches verbatim; server-only compilation passed cleanly in 11.2 seconds. No delivery errors or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel",
+  "declaration": "CategoryTheory.ringedSite_boundedFree_rhom_model",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteBoundedFreeRHomModel.lean",
+  "statement": "theorem ringedSite_boundedFree_rhom_model {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] (P N : CochainComplex (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (a b : ℤ) (hP : ∀ i : ℤ, b < i → IsZero (P.X i)) (hN : ∀ j : ℤ, j < a → IsZero (N.X j)) (hfinite : ∀ i : ℤ, ∃ r : ℕ, ∃ s : P.X i ⟶ SheafOfModules.free (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin r)), ∃ t : SheafOfModules.free (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin r)) ⟶ P.X i, s ≫ t = 𝟙 (P.X i)) : Nonempty (DerivedCategory.Q.obj (homComplex (R := R) P N) ≅ (derivedInternalHom J R).obj (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj N)) ∧ (∀ (I : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) [I.IsKInjective] (α : N ⟶ I) [QuasiIso α], IsIso (DerivedCategory.Q.map (((homComplexFunctor (R := R)).obj (op P)).map α))) ∧ ∃ π : ∀ (n p q : ℤ), p + n = q → ((homComplex (R := R) P N).X n ⟶ SheafOfModules.homObj (R := R) (P.X p) (N.X q)), (∀ n : ℤ, Nonempty (IsLimit (Fan.mk ((homComplex (R := R) P N).X n) (fun p : ℤ ↦ π n p (p + n) rfl)))) ∧ (∀ (n m p q q' p' : ℤ) (_hnm : n + 1 = m) (hpq : p + m = q) (hq' : p + n = q') (hp' : p' + n = q), (homComplex (R := R) P N).d n m ≫ π m p q hpq = π n p q' hq' ≫ SheafOfModules.homObjMap (R := R) (𝟙 (P.X p)) (N.d q' q) - n.negOnePow • (π n p' q hp' ≫ SheafOfModules.homObjMap (R := R) (P.d p p') (𝟙 (N.X q)))) ∧ (∀ n : ℤ, ∃ ι : ∀ i : ↥(Finset.Icc (a - n) b), SheafOfModules.homObj (R := R) (P.X i) (N.X (i + n)) ⟶ (homComplex (R := R) P N).X n, Nonempty (IsColimit (Cofan.mk ((homComplex (R := R) P N).X n) ι)) ∧ ∀ (i : ↥(Finset.Icc (a - n) b)) (p : ℤ), ι i ≫ π n p (p + n) rfl = if h : (i : ℤ) = p then eqToHom (congrArg (fun k : ℤ ↦ SheafOfModules.homObj (R := R) (P.X k) (N.X (k + n))) h) else 0)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

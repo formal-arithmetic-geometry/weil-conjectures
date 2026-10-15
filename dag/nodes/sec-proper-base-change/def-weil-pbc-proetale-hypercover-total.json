@@ -1,0 +1,118 @@
+{
+ "id": "def-weil-pbc-proetale-hypercover-total",
+ "kind": "definition",
+ "title": "Signed total sections of an augmented pro-etale simplicial object",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with small pro-etale site and universes [def-weil-pbc-proetale-site] [def-weil-size-convention]. Let $R$ be a sheaf of commutative rings on this site and $W$ a site object. For an augmented simplicial object $U_\\bullet\\to W$ [def-weil-pbc-simplicial-object], and a sheaf of $R$-modules $F$ [def-weil-sheaf-of-modules-category], restriction of scalars along $R(W)\\to R(U_p)$ makes $F(U_p)$ an $R(W)$-module. Restrictions along the simplicial operators give a cosimplicial $R(W)$-module, functorial and additive in $F$. Its alternating coface complex has degree $p\\geq0$ term $F(U_p)$, differential $\\sum_{j=0}^{p+1}(-1)^j d_j^*$, and zero terms in negative degrees. For a cochain complex $E$ of module sheaves, apply this additive complex functor termwise and exchange the directions so that simplicial degree is first. Define $T_U(E)$ as its coproduct total complex [def-sp-double-complex-total]: degree $r$ is $\\bigoplus_{p+q=r,\\,p\\geq0}E^q(U_p)$ and differential is $\\delta+(-1)^p d_E$. Coefficient chain maps act componentwise, yielding a functor $T_U$. If $E^q=0$ for $q<N$, only $0\\leq p\\leq r-N$ contribute in degree $r$, so the effective sum is finite. No hypercover, affineness or contractibility condition is required to define this functor.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-double-complex-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, lemma-compute-cohomology, section bicomplex and total complex in the second proof paragraph"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Total complex of sections of a complex of sheaves of modules on an augmented simplicial object",
+   "results": "UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below complex of module sheaves on a site is computed by total sections of a weakly contractible hypercover",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.isSheaf_iff, CategoryTheory.Presheaf.isSheaf_iff_of_isGeneratedByOneHypercovers",
+   "date": "2026-10-15",
+   "verdict": "no matching augmented-simplicial module section-total functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicTopology.alternatingCofaceMapComplex, HomologicalComplex₂.total",
+   "results": "OK 0 hit(s)",
+   "date": "2026-10-15",
+   "verdict": "no match from search service; both constructions found by reading their source and reused"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover|derivedEvaluation|hypercoverTotal (Mathlib Algebra/Homology); hypercoverTotal|hypercoverSections|hypercoverSectionRows|alternatingCofaceMapComplex_additive (Mathlib, WeilConjectures, lean/Sheaf, dag/lean_names_upstream.json); blueprint_refs.py search \"hypercover total\"; total section|total complex.*sections|section.*total complex (dag/nodes)",
+   "results": "Mathlib Algebra/Homology: 0 hits. Proposed declaration names: 0 hits in Mathlib, source project and Sheaf. Blueprint search: 0 blueprint nodes match. DAG text search finds this item, open-cover Cech totals and other specialized Cech statements. def-sc-alternating-cech-total-complex is specific to finite open covers of ringed spaces, not augmented simplicial objects of a pro-etale site. The general Mathlib alternating-coface, extension, slice-section and signed-total constructions are reused.",
+   "date": "2026-10-15",
+   "verdict": "no existing definition of this functor"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+  "date": "2026-10-15",
+  "group": "NA"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof paragraph 1: the total section functor needed by bounded-below hypercover descent",
+   "via": [
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverTotal",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.hypercoverTotal",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.cosimplicialModulePreadditive",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverSections",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverSections_additive",
+   "AlgebraicGeometry.Scheme.ProEt.alternatingCofaceMapComplex_additive",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverSectionRows",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverSectionRows_additive",
+   "AlgebraicGeometry.Scheme.ProEt.hypercoverTotal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleHypercoverTotal.lean",
+  "statement": "def hypercoverTotal (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt) (U : SimplicialObject (Over W))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5b53399d7",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5b53399d7",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. Checked snapshot statements, dependencies, sources, constructions, universes, edge cases, docstrings, report sections, and verbatim signatures. Server-only per-file compilation reproduced cleanly against the side overlay. No H1–H13 defects found; no repository changes made."
+ }
+}

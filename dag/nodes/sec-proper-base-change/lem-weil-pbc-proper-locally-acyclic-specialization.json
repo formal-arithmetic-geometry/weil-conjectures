@@ -31,7 +31,8 @@
   "def-weil-pbc-local-acyclicity-abelian-sheaf",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-stalk-specialization"
  ],
  "proof": [
   {
@@ -301,5 +302,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-24efac3b2",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, source clauses, dependencies, canonical specialization, universes, edge cases, verbatim signatures and pilot gates. Both delivered modules reproduced cleanly through server-only scompile.py. No defects found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperLocallyAcyclicSpecialization",
+  "declaration": "AlgebraicGeometry.Etale.isIso_etaleStalkSpecialization_of_proper_locallyAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperLocallyAcyclicSpecialization.lean",
+  "statement": "theorem isIso_etaleStalkSpecialization_of_proper_locallyAcyclic {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : G.IsTorsion) (hf : IsLocallyAcyclicRelative f G) (q : ℕ) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω'] (t : Spec (.of Ω') ⟶ Scheme.strictHenselizationScheme s) : IsIso (etaleStalkSpecialization s t ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj G))))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

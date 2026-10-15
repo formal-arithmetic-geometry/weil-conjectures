@@ -1,0 +1,109 @@
+{
+ "id": "def-sf-site-constant-module-functor",
+ "kind": "definition",
+ "title": "Constant modules over the constant ring sheaf on a small site",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and let $\\Lambda$ be a commutative ring. The constant module functor sends a $\\Lambda$-module $M$ to a sheaf of modules [def-weil-sheaf-of-modules-category] over the constant ring sheaf $\\underline\\Lambda$ [def-weil-pbc-constant-sheaf]. Explicitly first form the constant module presheaf with value $M$, over the constant ring presheaf with value $\\Lambda$, with identity restriction maps; on linear maps use the same component at every object. Then apply module sheafification along the constant ring presheaf sheafification map [def-weil-pbc-sheafification]. The resulting underlying abelian sheaf is the sheafification of the constant abelian presheaf of $M$, and the action is the unique extension of the constant presheaf scalar action.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, module sheafification; Tag 093T, constant modules in lemma-locally-constant"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant module sheaf over the sheafification of the constant ring on a small site",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor sending a module to its constant sheaf as a module over the constant ring sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.unit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] → SheafOfModules R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, this constructs the canonical sheaf of $ R $-modules by assigning to each object $ X $ the free $ R(X) $-mo\"}\n  {\"name\": \"SheafOfModules.forgetToSheafModuleCat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        (X : Cᵒᵖ) →\\n          CategoryTheory.Limits.IsInitial X →\\n            CategoryTheory.Functor (SheafOfModules R) (CategoryTheory.Sheaf\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and an initial object $X$ in $\\\\mathcal{C}^\\\\text{op}$, this functor maps a sheaf of modules $M$ o\"}\n  {\"name\": \"ModuleCat.tilde\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → ModuleCat R → (AlgebraicGeometry.Spec { carrier := R, commRing := inst }).Modules\", \"doc\": \"Given a commutative ring $ R $ and an $ R $-module $ M $, the tilde sheaf $ \\\\widetilde{M} $ on $ \\\\operatorname{Spec}(R) $ is constructed by localizing $ M $ over open sets in the Zariski topology. Sec\"}\n  {\"name\": \"SheafOfModules.toSheaf\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        CategoryTheory.Functor (SheafOfModules R) (CategoryTheory.Sheaf J AddCommGrpCat)\", \"doc\": \"The functor that maps each sheaf of modules over a sheaf of rings $ R $ to its underlying sheaf of abelian groups, and each sheaf homomorphism to the corresponding morphism between their underlying sh\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ {P : TopCat → Prop} (R : Type (max u w)) [inst : Ring R] (X : ModuleCat R) (x : (CompHausLike P)ᵒᵖ),\\n  (((CompHausLike.LocallyConstantModule.functorToPresheaves R).obj X).obj x).isModule = LocallyConstant.instModule\", \"doc\": \"For any ring $R$ and compact Hausdorff-like space $S$, the module structure on the presheaf of locally constant functions $S \\to X$ induced by the functor coincides with the canonical $R$-module struct\"}\n  {\"name\": \"SheafOfModules.val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} → SheafOfModules R → PresheafOfModules R.val\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this function returns the underlying presheaf of modules of a sheaf of modules over $R$, defi\"}\n  {\"name\": \"SheafOfModules.forget\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) → CategoryTheory.Functor (SheafOfModules R) (PresheafOfModules R.val)\", \"doc\": \"The functor that sends each sheaf of modules over a sheaf of rings $ R $ to its underlying presheaf of modules over the presheaf of rings $ R $, and each sheaf homomorphism to its underlying presheaf \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.toPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Modules (TopCat.Presheaf Ab ↑X.toPresheafedSpace)\", \"doc\": \"The functor that maps each sheaf of modules over the structure sheaf of a scheme $X$ to its underlying presheaf of abelian groups, and each sheaf homomorphism to the corresponding natural transformati\"}\n",
+   "date": "2026-10-15",
+   "verdict": "no match: no general-site constant module sheafification functor"
+  },
+  {
+   "tool": "grep",
+   "query": "constantModule|[Cc]onstant.*[Mm]odule (Algebra/Category/ModuleCat)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-15",
+   "verdict": "no match: no general-site constant module sheafification functor"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Mm]odule|[Mm]odule.*[Cc]onstant; constantModule; siteConstantModule in WeilConjectures and lean/Sheaf; DAG titles; blueprint_refs.py search constant module",
+   "results": "Existing constant module material is site-specialized: AlgebraicGeometry.Scheme.etaleConstantModuleFunctor (small etale site); SheafOfModules.modulePresheafToConstantModules (opens of a topological space). No general-site constant-module sheafification functor. DAG def-weil-pbc-constant-sheaf is ordinary category-valued sheafification; lem-pc-sites-module-sheafification-interface gives the general extension of scalars API, not this specialization. blueprint_refs.py: 2 unrelated blueprint matches (lem-exc-constant-tensor, lem-fin-normal-open-lisse-image). siteConstantModule has no upstream or project hits.",
+   "date": "2026-10-15",
+   "verdict": "no match for the general-site constant module functor"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-site-constant-module-isom-sheaf",
+  "date": "2026-10-15",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proetale-constructible-origin",
+   "place": "Proof of constructible-origin, lisse comparison input in steps 1, 5(b), and 6: constant-module trivializations; Stacks 099Y, Isom paragraph, uses Modules on Sites 093T(2).",
+   "via": [
+    "lem-sf-site-constant-module-isom-sheaf",
+    "lem-sf-proetale-locally-constant-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteConstantModuleFunctor",
+  "declaration": "CategoryTheory.siteConstantModuleFunctor",
+  "declarations": [
+   "CategoryTheory.siteConstantModulePresheaf",
+   "CategoryTheory.siteConstantModuleFunctor"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiteConstantModuleFunctor.lean",
+  "statement": "def siteConstantModuleFunctor : ModuleCat.{u} Λ ⥤ SheafOfModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fe43fdcae",
+  "group": "NP",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fe43fdcae",
+  "group": "NP",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical comparison, universes, edge cases, definitions, docstrings, and report sections. Both snapshot modules reproduced cleanly through server-only scompile.py. No delivery errors or fixes required; branch head unchanged."
+ }
+}

@@ -334,5 +334,24 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-ff601f191 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, but the delivery omitted the existing exact node lem-weil-pbc-site-constant-restriction while using its canonical slice comparison. Added it to stmt_deps, Step 1 uses, and proof_deps in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-site-constant-morphism-local.json. Full review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f46f7a5a2",
+  "group": "NY",
+  "result": "fix",
+  "note": "Review written to review.md. H4: the upstream theorem already states the result; server checks confirmed all required instances infer automatically. Complete replacement record and report are in fixes/. The delivered module compiled cleanly; snapshot and branch head remain unchanged.; left out new module(s) lean/Sheaf/CategoryTheory/SiteConstantMorphismLocal.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver",
+  "declaration": "CategoryTheory.exists_mem_forall_exists_constantSheafOverHom_comp_map_eq",
+  "statement": "theorem exists_mem_forall_exists_constantSheafOverHom_comp_map_eq (M N : ModuleCat.{v'} Λ)\n    [Module.Finite Λ M]\n    (φ : (constantSheaf J (ModuleCat.{v'} Λ)).obj M ⟶ (constantSheaf J (ModuleCat.{v'} Λ)).obj N) :\n    ∃ S ∈ J T, ∀ ⦃U : C⦄ (g : U ⟶ T), S g → (⊥ : Sieve U) ∉ J U → ∃ f : M ⟶ N,\n      constantSheafOverHom J _ U M ≫ (J.overPullback _ U).map φ =\n        (constantSheaf (J.over U) _).map f ≫ constantSheafOverHom J _ U N",
+  "branch": "slopmaster2",
+  "by": "NY",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Maintainer H4 repair: use the existing upstream theorem, specializing J to the node's Precoverage.toGrothendieck, C to its recorded SmallCategory, and ring/module universes to the node's common universe u. Take T to be the arbitrary object U. No additional mathematical assumptions: HasWeakSheafify J (ModuleCat B), J.WEqualsLocallyBijective (ModuleCat B), and all slice HasWeakSheafify instances are inferred with Mathlib.CategoryTheory.Sites.PreservesSheafification, Mathlib.Algebra.Category.ModuleCat.FilteredColimits, Mathlib.Algebra.Category.ModuleCat.Limits and Mathlib.CategoryTheory.Sites.LeftExact. Server-only scompile.py verified these instances and the fully applied theorem in 1.6 s (nice 19, two threads, 60 s). The upstream constantSheafOverHom and the recorded Mathlib pushforwardContinuousSheafificationCompatibility.hom.app are the same canonical comparison: toSheafify_constantSheafOverHom_hom and toSheafify_pullbackSheafificationCompatibility give the identical restricted-unit composite, so the sheafification universal property identifies them. Thus every conclusion clause, including every sieve arrow and the memberwise empty-cover exception, agrees. Omit the duplicate delivered SiteConstantMorphismLocal.lean; no definition or theorem needs to be added.",
+  "fixed_by": "NT-stage2-Codex-f46f7a5a2"
  }
 }

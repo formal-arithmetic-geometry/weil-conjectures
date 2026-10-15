@@ -222,5 +222,23 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-41e6774e0 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, route, archived targets, and Stacks 08FC with supporting sources. All eight proof steps pass; finite-ring tests confirm expected flat and nonflat cases. No new nodes, duplicates, or cycles. Repaired missing LeanSearch evidence and an invalid Loogle query recorded as no match; only mathlib_searches changes. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ecbedd775",
+  "group": "NX",
+  "result": "pass",
+  "note": "Wrote review.md. Checked every statement clause, dependencies, Stacks 08FC, universes, edge cases, uniqueness, docstrings and verbatim signature. Server-only compilation reproduced cleanly. No delivery errors or repository changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion",
+  "declaration": "SheafOfModules.isFlat_iff_local_equationalCriterion",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatEquationalCriterion.lean",
+  "statement": "theorem isFlat_iff_local_equationalCriterion {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (A : Sheaf J.toGrothendieck CommRingCat.{u}) (M : ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj A)) : IsFlat M ↔ ∀ (U : C) (n : ℕ) (a : Fin n → A.obj.obj (op U)) (s : Fin n → M.val.obj (op U)), (∑ p : Fin n, a p • s p) = 0 → ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → ∃ (l : ℕ) (b : Fin n → Fin l → A.obj.obj (op V)) (t : Fin l → M.val.obj (op V)), (∀ p : Fin n, M.val.map f.op (s p) = ∑ q : Fin l, b p q • t q) ∧ (∀ q : Fin l, (∑ p : Fin n, A.obj.map f.op (a p) * b p q) = 0)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

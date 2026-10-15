@@ -290,5 +290,31 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-a6228cf92 (reviewer sub-agent of L); spot-checked: Read all four nodes and cited mathematics in full. Checked 09AW, 0CQF, 068V and 091W, all six proof steps, edge cases, duplicates, dependencies, unit route, and the exact archived condensed-coefficient target and exchange direction. No mathematical repair needed. Accepted both declared K-flat/change-of-rings tool uses. Detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-768b497a4",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, source and dependency declarations, all statement clauses, canonical maps, universes, edge cases, docstrings, and verbatim signature. Server-only compilation passed cleanly; no delivery errors found. Branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RlimPerfectComplete",
+  "declaration": "DerivedCategory.rlim_perfect_complete",
+  "declarations": [
+   "DerivedCategory.adicLevelRestriction",
+   "DerivedCategory.adicStepRestriction",
+   "DerivedCategory.adicRestrictionComp",
+   "DerivedCategory.adicTowerTransition",
+   "DerivedCategory.adicLimitReduction",
+   "DerivedCategory.rlim_perfect_complete"
+  ],
+  "file": "lean/Sheaf/RingTheory/RlimPerfectComplete.lean",
+  "statement": "theorem rlim_perfect_complete {A : Type u} [CommRing A] (I : Ideal A) [IsAdicComplete I A] [HasDerivedCategory.{u} (ModuleCat.{u} A)] [∀ n : ℕ, HasDerivedCategory.{u} (ModuleCat.{u} (A ⧸ I ^ (n + 1)))] (K : ∀ n : ℕ, DerivedCategory (ModuleCat.{u} (A ⧸ I ^ (n + 1)))) (t : ∀ n : ℕ, K (n + 1) ⟶ (adicStepRestriction I n).obj (K n)) (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} (A ⧸ I ^ (n + 1)))) (adj : ∀ n : ℕ, L n ⊣ adicLevelRestriction I n) (B : ∀ n : ℕ, DerivedCategory (ModuleCat.{u} (A ⧸ I ^ (n + 1 + 1))) ⥤ DerivedCategory (ModuleCat.{u} (A ⧸ I ^ (n + 1)))) (badj : ∀ n : ℕ, B n ⊣ adicStepRestriction I n) (hbase : ∀ n : ℕ, IsIso (((badj n).homEquiv (K (n + 1)) (K n)).symm (t n))) (hperfect : IsPerfect (K 0)) [HasProduct (fun n : ℕ ↦ (adicLevelRestriction I n).obj (K n))] (C : DerivedCategory (ModuleCat.{u} A)) (p : C ⟶ ∏ᶜ (fun n : ℕ ↦ (adicLevelRestriction I n).obj (K n))) (δ : ∏ᶜ (fun n : ℕ ↦ (adicLevelRestriction I n).obj (K n)) ⟶ C⟦(1 : ℤ)⟧) (hlim : IsDerivedLimitTriangle (adicTowerTransition I K t) C p δ) : IsPerfect C ∧ IsDerivedComplete I C ∧ (∀ n : ℕ, IsIso (adicLimitReduction I K L adj C p n)) ∧ ∀ n : ℕ, (adj (n + 1)).unit.app C ≫ (adicLevelRestriction I (n + 1)).map (adicLimitReduction I K L adj C p (n + 1)) ≫ adicTowerTransition I K t n = (adj n).unit.app C ≫ (adicLevelRestriction I n).map (adicLimitReduction I K L adj C p n)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

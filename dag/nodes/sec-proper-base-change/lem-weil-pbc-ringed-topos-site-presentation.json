@@ -22,7 +22,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism"
  ],
  "proof": [
   {
@@ -252,5 +253,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-44e49da1f (reviewer sub-agent of L); spot-checked: Read all mathematics and cited statements; checked Stacks 03CR, 03A1, 03CI, 03A2, 000X and archived target signatures. All seven steps and the new comparison lemma are sound. Added missing new-node metadata in fixes; review.md documents edge cases, accepted tool uses, and pre-existing dependency cycles.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-03f9b0863",
+  "group": "NC",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, dependency declarations, sources, ring transport, universes, edge cases, docstrings, and verbatim signature. Server-only compilation reproduced cleanly in 7.6 seconds. No delivery errors or required fixes found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedToposSitePresentation",
+  "declaration": "CategoryTheory.ringedTopos_sitePresentation",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposSitePresentation.lean",
+  "statement": "theorem ringedTopos_sitePresentation {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] (A : Sheaf J.toGrothendieck CommRingCat.{u}) (B : Sheaf K.toGrothendieck CommRingCat.{u}) (f : RingedToposMorphism ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj A) ((sheafCompose K.toGrothendieck (forget₂ CommRingCat RingCat)).obj B)) : ∃ (C' D' : Type u) (_ : SmallCategory C') (_ : SmallCategory D') (J' : Precoverage C') (K' : Precoverage D') (_ : J'.HasIsos) (_ : J'.IsStableUnderComposition) (_ : J'.IsStableUnderBaseChange) (_ : J'.HasPullbacks) (_ : K'.HasIsos) (_ : K'.IsStableUnderComposition) (_ : K'.IsStableUnderBaseChange) (_ : K'.HasPullbacks) (_ : HasFiniteLimits C') (_ : HasFiniteLimits D') (A' : Sheaf J'.toGrothendieck CommRingCat.{u}) (B' : Sheaf K'.toGrothendieck CommRingCat.{u}) (g : RingedToposMorphism ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj A) ((sheafCompose J'.toGrothendieck (forget₂ CommRingCat RingCat)).obj A')) (e : RingedToposMorphism ((sheafCompose K.toGrothendieck (forget₂ CommRingCat RingCat)).obj B) ((sheafCompose K'.toGrothendieck (forget₂ CommRingCat RingCat)).obj B')) (h : RingedToposMorphism ((sheafCompose J'.toGrothendieck (forget₂ CommRingCat RingCat)).obj A') ((sheafCompose K'.toGrothendieck (forget₂ CommRingCat RingCat)).obj B')) (v : D' ⥤ C') (_ : PreservesFiniteLimits v) (_ : v.IsContinuous K'.toGrothendieck J'.toGrothendieck) (a : (sheafCompose J'.toGrothendieck (forget CommRingCat)).obj A' ≅ g.direct.obj ((sheafCompose J.toGrothendieck (forget CommRingCat)).obj A)) (b : (sheafCompose K'.toGrothendieck (forget CommRingCat)).obj B' ≅ e.direct.obj ((sheafCompose K.toGrothendieck (forget CommRingCat)).obj B)) (alpha : e.inverse ⋙ f.inverse ≅ h.inverse ⋙ g.inverse), g.direct.IsEquivalence ∧ e.direct.IsEquivalence ∧ (∀ (T : D') (R : Presieve T), R ∈ K' T → R.map v ∈ J' (v.obj T)) ∧ h.direct = v.sheafPushforwardContinuous (Type u) K'.toGrothendieck J'.toGrothendieck ∧ g.ringMap = g.inverse.map a.hom ≫ g.adj.counit.app ((sheafCompose J.toGrothendieck (forget CommRingCat)).obj A) ∧ e.ringMap = e.inverse.map b.hom ≫ e.adj.counit.app ((sheafCompose K.toGrothendieck (forget CommRingCat)).obj B) ∧ f.inverse.map e.ringMap ≫ f.ringMap = alpha.hom.app ((sheafCompose K'.toGrothendieck (forget CommRingCat)).obj B') ≫ g.inverse.map h.ringMap ≫ g.ringMap",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

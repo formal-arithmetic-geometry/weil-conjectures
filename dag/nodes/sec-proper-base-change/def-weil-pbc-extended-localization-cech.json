@@ -1,0 +1,155 @@
+{
+ "id": "def-weil-pbc-extended-localization-cech",
+ "kind": "definition",
+ "title": "Extended localization Čech complexes and canonical coefficient comparisons",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small site and $\\mathcal O$ a sheaf of commutative rings. Work in its category of module sheaves [def-weil-sheaf-of-modules-category] and in cochain complexes indexed by $\\mathbf Z$ [def-weil-abstract-derived-category]. Given $r\\geq0$ and global sections $f_i$ for $i\\in\\{0,\\ldots,r-1\\}$, define $K_n^q=\\bigoplus_{|I|=q}\\mathcal O e_I$ for $n\\geq0$, with $d_n(e_I)=\\sum_{j\\notin I}(-1)^{|\\{i\\in I:i<j\\}|}f_j^{n+1}e_{I\\cup\\{j\\}}$ and transition $K_n\\to K_{n+1}$ given on $e_I$ by multiplication by $\\prod_{i\\in I}f_i$. Define the extended localization complex $C(\\mathcal O;f)=\\operatorname{colim}_{n\\geq0}K_n$. The fraction cocone $ae_I\\mapsto a/(\\prod_{i\\in I}f_i)^{n+1}$ identifies its degree $q$ with the finite product of $\\mathcal O[1/\\prod_{i\\in I}f_i]$ for $|I|=q$, its differential with alternating localization, and its degree zero with $\\mathcal O$. Other degrees are zero. Its augmentation to $\\mathcal O[0]$ is induced by the identity on the empty-subset summand and zero in other degrees; for $r=0$ it identifies the complex with $\\mathcal O[0]$. A morphism $\\varphi:\\mathcal O\\to\\mathcal B$ induces the coefficient comparison $C(\\mathcal O;f)\\to\\operatorname{Res}_{\\varphi}C(\\mathcal B;\\varphi f)$ [def-pc-sheaf-restrict-scalars] by $ae_I\\mapsto\\varphi(a)e_I$ at each Koszul stage, hence by the usual fraction formula. Also write the underlying module map of the quotient-ring-sheaf comparison as $\\operatorname{coker}(\\bigoplus_i\\mathcal O\\xrightarrow{(f_i)}\\mathcal O)\\to\\operatorname{Res}_{\\varphi}\\operatorname{coker}(\\bigoplus_i\\mathcal B\\xrightarrow{(\\varphi f_i)}\\mathcal B)$, induced by $\\varphi$.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0913 (lemma-extended-alternating-Cech-is-colimit-koszul); coefficient and quotient maps as in Algebraization, Tag 099H."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of ring sheaves isomorphism modulo ideal quasi isomorphism extended localization Cech complex",
+   "results": "Module.flat_of_isLocalized_span; Module.flat_of_localized_span; Module.flat_of_localized_maximal; Module.flat_iff_of_isLocalization; Module.Flat.of_isLocalizedModule; Module.flat_of_isLocalized_maximal; RingHom.Flat.ofLocalizationSpanTarget; RingHom.Flat.propertyIsLocal",
+   "date": "2026-10-15",
+   "verdict": "No matching ringed-site extended localization complex or coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.Away, CochainComplex, SheafOfModules",
+   "results": "No hits.",
+   "date": "2026-10-15",
+   "verdict": "No matching ringed-site extended localization complex or coefficient comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extended localization Cech complex of sheaves of rings as colimit of Koszul complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "extended.*[Cc]ech|[Kk]oszul [Algebra/Homology]",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-15",
+   "verdict": "No matching ringed-site extended localization complex or coefficient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extended alternating localization Cech complex on a ringed site defined as the sequential colimit of positive power Koszul complexes",
+   "results": "localCohomology.diagram; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃; localCohomology.ofDiagram; CategoryTheory.Sheaf.cohomologyPresheaf; SheafOfModules.Presentation.isColimit; CochainComplex.cm5b.I",
+   "date": "2026-10-15",
+   "verdict": "No matching ringed-site extended localization complex or coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "extended|[Cc]ech|[Čč]ech|Localization.*[Cc]omplex in lean/Sheaf and WeilConjectures; definition statements in dag/nodes; blueprint_refs.py search extended alternating",
+   "results": "Upstream CategoryTheory/Sites/CechComplex defines the ordered complex of a cover. Sheaf/AlgebraicGeometry/KoszulCechComparisonIsIso and related files concern principal affine covers and complexes of quasicoherent scheme modules. No definition node or declaration supplies the extended localization complex for an arbitrary ringed site. blueprint_refs search: 0 blueprint nodes match. grep of the item id in the upstream source: no hits.",
+   "date": "2026-10-15",
+   "verdict": "No matching notion; add a real explicit Koszul-colimit construction, not a replacement for an existing object."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-extended-cech-comparison",
+  "date": "2026-10-15",
+  "group": "NI"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Explicit extended localization Čech complex and its coefficient map in the flat comparison of Tag 099H.",
+   "via": [
+    "lem-weil-pbc-flat-extended-cech-comparison",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.ExtendedLocalizationCech",
+  "declaration": "SheafOfModules.LocalizationCech.complex",
+  "declarations": [
+   "SheafOfModules.LocalizationCech.rings",
+   "SheafOfModules.LocalizationCech.Indices",
+   "SheafOfModules.LocalizationCech.insert_degree",
+   "SheafOfModules.LocalizationCech.term",
+   "SheafOfModules.LocalizationCech.scalar",
+   "SheafOfModules.LocalizationCech.differential",
+   "SheafOfModules.LocalizationCech.differential_sq",
+   "SheafOfModules.LocalizationCech.koszul",
+   "SheafOfModules.LocalizationCech.subsetScalar",
+   "SheafOfModules.LocalizationCech.transitionTerm",
+   "SheafOfModules.LocalizationCech.transition_comm",
+   "SheafOfModules.LocalizationCech.transition",
+   "SheafOfModules.LocalizationCech.diagram",
+   "SheafOfModules.LocalizationCech.complex",
+   "SheafOfModules.LocalizationCech.restriction",
+   "SheafOfModules.LocalizationCech.mapSection_naturality",
+   "SheafOfModules.LocalizationCech.mapSection",
+   "SheafOfModules.LocalizationCech.unitMap_existsUnique",
+   "SheafOfModules.LocalizationCech.unitMap",
+   "SheafOfModules.LocalizationCech.comparisonTerm",
+   "SheafOfModules.LocalizationCech.comparison_comm",
+   "SheafOfModules.LocalizationCech.comparisonStage",
+   "SheafOfModules.LocalizationCech.comparisonCocone_naturality",
+   "SheafOfModules.LocalizationCech.comparisonCocone",
+   "SheafOfModules.LocalizationCech.comparison",
+   "SheafOfModules.LocalizationCech.idealRow",
+   "SheafOfModules.LocalizationCech.idealRow_comparison_zero",
+   "SheafOfModules.LocalizationCech.quotientComparison",
+   "SheafOfModules.LocalizationCech.degreeZeroFold",
+   "SheafOfModules.LocalizationCech.augmentation_incoming",
+   "SheafOfModules.LocalizationCech.augmentationStage",
+   "SheafOfModules.LocalizationCech.augmentation_naturality",
+   "SheafOfModules.LocalizationCech.augmentationCocone",
+   "SheafOfModules.LocalizationCech.augmentation"
+  ],
+  "file": "lean/Sheaf/Paper/ExtendedLocalizationCech.lean",
+  "statement": "def complex (R : Sheaf J CommRingCat.{u}) (r : ℕ) (f : Fin r → (unit (rings R)).sections) : CochainComplex (CategoryTheory.ringedSiteModules.{u} (rings R)) ℤ",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b35c3a2aa",
+  "group": "NI",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b35c3a2aa",
+  "group": "NI",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all dependencies, source texts, constructions, docstrings, signatures, universes, and edge cases. Both Lean modules reproduced cleanly through server-only scompile.py. No delivery defects found; branch head unchanged."
+ }
+}

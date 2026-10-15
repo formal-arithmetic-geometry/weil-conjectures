@@ -215,5 +215,35 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dd6be9055",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. All statement clauses, dependencies, docstrings, universes, edge cases, and verbatim signature checks passed. Server-only compilation reproduced cleanly in 8.0 seconds; no delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedInternalHomExactRestriction",
+  "declaration": "CategoryTheory.ringedInternalHom_tensor_adjunction",
+  "declarations": [
+   "CategoryTheory.ringedSite_overFunctor_additive",
+   "CategoryTheory.ringedSite_overFunctor_limits",
+   "CategoryTheory.ringedSite_overFunctor_colimits",
+   "CategoryTheory.ringedSite_overMap_additive",
+   "CategoryTheory.ringedSite_overMap_limits",
+   "CategoryTheory.ringedSite_overMap_colimits",
+   "CategoryTheory.ringedInternalHom_tensor_adjunction",
+   "CategoryTheory.ringedInternalHom_restriction",
+   "CategoryTheory.ringedInternalHom_exact"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedInternalHomExactRestriction.lean",
+  "statement": "theorem ringedInternalHom_tensor_adjunction {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))] (P : ObjectProperty (CochainComplex (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)) (hP : ∀ X, P X ↔ X.IsKFlat) (T : (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) × (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) ⥤ (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)))) (r : (P.ι.prod P.ι) ⋙ Functor.uncurry.obj ((@CategoryTheory.MonoidalCategory.curriedTensor (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) _ (SheafOfModules.monoidalCategory R)).map₂HomologicalComplex (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q ≅ ((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q)) ⋙ T) : ∃ e : ∀ K L M : (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))), (derivedInternalHom.{u, w} J R).obj (op K, (derivedInternalHom.{u, w} J R).obj (op L, M)) ≅ (derivedInternalHom.{u, w} J R).obj (op (T.obj (K, L)), M), ∀ (K L M K' L' M' : (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)))) (a : K' ⟶ K) (b : L' ⟶ L) (c : M ⟶ M'), (e K L M).hom ≫ (derivedInternalHom.{u, w} J R).map ((T.map (a, b)).op, c) = (derivedInternalHom.{u, w} J R).map (a.op, (derivedInternalHom.{u, w} J R).map (b.op, c)) ≫ (e K' L' M').hom",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The three statements ringedInternalHom_tensor_adjunction, ringedInternalHom_restriction and ringedInternalHom_exact jointly state the node. The six ringedSite_overFunctor/overMap supporting facts provide the additive and exact restriction instances needed to type its derived restriction functors. P, hP, T and r specify derived tensor by natural total tensor on precisely the K-flat complexes, as in the existing site-derived-tensor-descent interface."
  }
 }

@@ -32,7 +32,8 @@
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit",
   "lem-weil-pbc-strict-henselization-functoriality",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-weil-pbc-strict-henselization-point-evaluation"
  ],
  "proof": [
   {
@@ -286,5 +287,23 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-b778792bf (reviewer sub-agent of L); spot-checked: Read all mathematics and checked every step, cited statement, source, route, edge case, and master target coefficient category/morphism. The split agrees with 0GIP, 0GJS, and 0GJU; no duplicate, cycle, or mathematical gap found. Repaired the new node’s incomplete creator/date and empty audit fields. Detailed findings are in review.md; corrected JSON is under fixes/dag/nodes/sec-proper-base-change/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b6fd32c99",
+  "group": "NP",
+  "result": "pass",
+  "note": "Wrote review.md. Checked sources, all statement dependencies, canonical maps, every hypothesis and conclusion, edge cases, universes, docstrings, and verbatim signature. Server-only compile reproduced cleanly in 1.5 seconds. No delivery errors found; repositories and branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictBaseClosedPointLocalizations",
+  "declaration": "AlgebraicGeometry.Scheme.strictBaseClosedPointLocalizations",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictBaseClosedPointLocalizations.lean",
+  "statement": "theorem strictBaseClosedPointLocalizations {X S X' : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (p : X' ⟶ X) (f' : X' ⟶ strictHenselizationScheme s) (hcart : IsPullback p f' f (strictHenselizationStructuralMap s)) {Ξ : Type u} [Field Ξ] [IsAlgClosed Ξ] (x' : Spec (.of Ξ) ⟶ X') (a : Spec (.of Ξ) ⟶ Spec (.of Ω)) (hclosed : x' ≫ f' = a ≫ Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s))) (b : strictHenselizationScheme (x' ≫ f') ⟶ strictHenselizationScheme ((x' ≫ p) ≫ f)) (hb : b ≫ strictHenselizationStructuralMap ((x' ≫ p) ≫ f) = strictHenselizationStructuralMap (x' ≫ f') ≫ strictHenselizationStructuralMap s) (hbpoint : Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation (x' ≫ f'))) ≫ b = Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation ((x' ≫ p) ≫ f)))) (d : strictHenselizationScheme (x' ≫ p) ⟶ strictHenselizationScheme ((x' ≫ p) ≫ f)) (hd : d ≫ strictHenselizationStructuralMap ((x' ≫ p) ≫ f) = strictHenselizationStructuralMap (x' ≫ p) ≫ f) (hdpoint : Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation (x' ≫ p))) ≫ d = Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation ((x' ≫ p) ≫ f)))) (q : strictHenselizationScheme x' ⟶ strictHenselizationScheme (x' ≫ p)) (hq : q ≫ strictHenselizationStructuralMap (x' ≫ p) = strictHenselizationStructuralMap x' ≫ p) (hqpoint : Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation x')) ≫ q = Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation (x' ≫ p)))) : IsIso (strictHenselizationStructuralMap (x' ≫ f')) ∧ IsIso q ∧ ∃ e : strictHenselizationScheme s ≅ strictHenselizationScheme ((x' ≫ p) ≫ f), strictHenselizationStructuralMap (x' ≫ f') ≫ e.hom = b ∧ q ≫ d = (strictHenselizationStructuralMap x' ≫ f') ≫ e.hom ∧ ∀ (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω'] (t : Spec (.of Ω') ⟶ strictHenselizationScheme s), ∃ E : pullback (strictHenselizationStructuralMap x' ≫ f') t ≅ pullback d (t ≫ e.hom), E.hom ≫ pullback.fst d (t ≫ e.hom) = pullback.fst (strictHenselizationStructuralMap x' ≫ f') t ≫ q ∧ E.hom ≫ pullback.snd d (t ≫ e.hom) = pullback.snd (strictHenselizationStructuralMap x' ≫ f') t",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

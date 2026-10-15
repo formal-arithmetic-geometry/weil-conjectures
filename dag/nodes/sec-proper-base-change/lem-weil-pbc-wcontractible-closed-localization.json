@@ -263,5 +263,27 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-b05d46d52 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source passages, and unit/chapter route. Repaired C1 in step 4 by citing the existing affine fibre-product lemma and explicitly identifying the diagonal with multiplication. All seven steps and edge cases check out; no new nodes, cycles, or target weakening. Exact archived master morphism and coefficient distinctions checked. review.md and the whole corrected DAG JSON are written under the review directory.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c29a8ad83",
+  "group": "NS",
+  "result": "pass",
+  "note": "Wrote review.md. Checked snapshot statements, dependencies, sources, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. Server-only compile reproduced cleanly; no required corrections."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WContractibleClosedLocalization",
+  "declaration": "IsLocalization.wcontractible_closed_localization",
+  "declarations": [
+   "IsLocalization.closedLocalizationFamily",
+   "IsLocalization.wcontractible_closed_localization"
+  ],
+  "file": "lean/Sheaf/RingTheory/WContractibleClosedLocalization.lean",
+  "statement": "theorem wcontractible_closed_localization (R B : Type u) [CommRing R] [CommRing B] [Algebra R B] (I : Ideal R) [IsLocalization ((IsUnit.submonoid (R ⧸ I)).comap (Ideal.Quotient.mk I)) B] (r : ℕ) (f : Fin r → R) (hf : ∀ k, f k ∈ I) (hV : PrimeSpectrum.zeroLocus (I : Set R) = PrimeSpectrum.zeroLocus (Set.range f)) : Topology.IsEmbedding (PrimeSpectrum.comap (algebraMap R B)) ∧ Set.range (PrimeSpectrum.comap (algebraMap R B)) = {p | ∃ q : PrimeSpectrum R, I ≤ q.asIdeal ∧ p.asIdeal ≤ q.asIdeal} ∧ (∃ e : (B ⧸ I.map (algebraMap R B)) ≃+* (R ⧸ I), ∀ a : R, e (Ideal.Quotient.mk _ (algebraMap R B a)) = Ideal.Quotient.mk I a) ∧ (closedLocalizationFamily R B f).presieve₀ ∈ Scheme.proetalePrecoverage (Spec (.of R)) ∧ ((∀ (D : Type (max u v)) [CommRing D] (g : R →+* D), g.FaithfullyFlat → g.WeaklyEtale → ∃ t : D →+* R, t.comp g = RingHom.id R) → ∀ (D : Type (max u v)) [CommRing D] (g : B →+* D), g.FaithfullyFlat → g.WeaklyEtale → ∃ t : D →+* B, t.comp g = RingHom.id B)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

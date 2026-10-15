@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Closed-component retraction for an algebra map identifying stalks",
- "statement": "Let R and S be commutative rings with R and S w-local [def-weil-pbc-w-local], equipped with an R-algebra structure on S. Assume the algebra map R \\to S induces bijections on all prime stalks [def-weil-pbc-localization-at-prime], and every closed point of Spec S contracts to a closed point of Spec R. Let T be a closed subset of the connected-component space π₀(Spec S). If the map π₀(Spec S) \\to π₀(Spec R) induced by contraction is surjective and injective on T (equivalently, its restriction to T is bijective), then there exists a ring map f:S\\to R with f\\circ(R\\to S)=\\mathrm{id}_R.",
+ "statement": "Let R and S be commutative rings with R and S w-local [def-weil-pbc-w-local], equipped with an R-algebra structure on S. Assume the algebra map R \\to S induces bijections on all prime stalks [def-weil-pbc-localization-at-prime], and every closed point of Spec S contracts to a closed point of Spec R. Let T be a closed subset of the connected-component space π₀(Spec S). If the restriction to T of the map π₀(Spec S) \\to π₀(Spec R) induced by contraction is bijective, then there exists a ring map f:S\\to R with f\\circ(R\\to S)=\\mathrm{id}_R.",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 09AZ, proof of lemma-w-local-extremally-disconnected, implication (3) to (1), restriction to a closed component union; exact project attachment exists_retraction_of_isClosed_of_bijOn (WContractible.lean:511–628)"
@@ -90,5 +90,41 @@
    "open": []
   }
  },
- "merged_into": null
+ "merged_into": null,
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-090665ec2",
+  "group": "NX",
+  "result": "pass",
+  "note": "Reviewed immutable files, exact upstream declaration, dependencies, Tag 09AZ, correction and sole citer. Signature matches verbatim; all clauses and edge cases agree. Server-only probe passed in 1.6 seconds with standard axioms only. Written review.md; no repository changes.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "NX stage 2",
+  "old_statement": "Let R and S be commutative rings with R and S w-local [def-weil-pbc-w-local], equipped with an R-algebra structure on S. Assume the algebra map R \\to S induces bijections on all prime stalks [def-weil-pbc-localization-at-prime], and every closed point of Spec S contracts to a closed point of Spec R. Let T be a closed subset of the connected-component space π₀(Spec S). If the map π₀(Spec S) \\to π₀(Spec R) induced by contraction is surjective and injective on T (equivalently, its restriction to T is bijective), then there exists a ring map f:S\\to R with f\\circ(R\\to S)=\\mathrm{id}_R.",
+  "what": "The phrase \"is surjective and injective on T\" admits global surjectivity plus injectivity on T, which is not equivalent to bijectivity of the restriction to T. For R=S=F_2 and T empty, the global map is surjective and injective on T but the restriction is not surjective. Require surjectivity from T, as the source and the parent node do. This resolves the false parenthetical equivalence without changing the source-intended statement.",
+  "source": {
+   "document": "literature/stacks-project/proetale.tex",
+   "place": "Tag 09AZ, proof of lemma-w-local-extremally-disconnected, (3) to (1): the closed image T maps homeomorphically onto π₀(Spec A); exact attachment WContractible.lean:511–523."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-wlocal-closed-component-retraction",
+    "holds": true,
+    "note": "Its hypothesis already requires the restriction h|_T to be bijective; proof step 3 supplies precisely hsurjT and hinjT."
+   }
+  ]
+ },
+ "lean": {
+  "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
+  "declaration": "exists_retraction_of_isClosed_of_bijOn",
+  "statement": "theorem exists_retraction_of_isClosed_of_bijOn [IsWLocalRing R]\n    {S : Type u} [CommRing S] [Algebra R S] [IsWLocalRing S]\n    (hbos : (algebraMap R S).BijectiveOnStalks)\n    (hcl : ∀ y ∈ closedPoints (PrimeSpectrum S),\n      PrimeSpectrum.comap (algebraMap R S) y ∈ closedPoints (PrimeSpectrum R))\n    (T : Set (ConnectedComponents (PrimeSpectrum S))) (hT : IsClosed T)\n    (hsurjT : ∀ c : ConnectedComponents (PrimeSpectrum R), ∃ t ∈ T,\n      (PrimeSpectrum.continuous_comap (algebraMap R S)).connectedComponentsMap t = c)\n    (hinjT : ∀ t₁ ∈ T, ∀ t₂ ∈ T,\n      (PrimeSpectrum.continuous_comap (algebraMap R S)).connectedComponentsMap t₁ =\n        (PrimeSpectrum.continuous_comap (algebraMap R S)).connectedComponentsMap t₂ →\n      t₁ = t₂) :\n    ∃ f : S →+* R, f.comp (algebraMap R S) = RingHom.id R",
+  "branch": "slopmaster2",
+  "by": "NX",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Exact existing theorem after correcting the ambiguous component-surjectivity clause to surjectivity from T, as in Tag 09AZ and the upstream theorem. Section parameters are {R : Type u} [CommRing R]; S : Type u. The single universe is arbitrary and covers any pair of ring sizes by taking their maximum."
+ }
 }

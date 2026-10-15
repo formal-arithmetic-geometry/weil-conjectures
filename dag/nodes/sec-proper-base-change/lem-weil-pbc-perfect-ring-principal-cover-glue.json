@@ -304,5 +304,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-caa2ee185",
+  "group": "NP",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all statement dependencies, source, exact APIs, universes, edge cases, docstrings, and verbatim signature. No delivery errors found. Server-only compilation reproduced cleanly in 1.6 seconds; no project clone or branch was changed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PerfectPrincipalCoverGlue",
+  "declaration": "DerivedCategory.isPerfect_of_principal_cover",
+  "file": "lean/Sheaf/RingTheory/PerfectPrincipalCoverGlue.lean",
+  "statement": "theorem isPerfect_of_principal_cover {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)] (C : DerivedCategory (ModuleCat.{u} R)) (r : ℕ) (f : Fin r → R) [∀ i : Fin r, HasDerivedCategory.{u} (ModuleCat.{u} (Localization.Away (f i)))] (hf : ∃ v : Fin r → R, ∑ i : Fin r, v i * f i = 1) (L : ∀ i : Fin r, DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} (Localization.Away (f i)))) (ε : ∀ i : Fin r, Qh ⋙ L i ⟶ @Functor.mapHomotopyCategory _ _ _ _ _ _ _ (ModuleCat.extendScalars (algebraMap R (Localization.Away (f i)))) (ModuleCat.extendRestrictScalarsAdj (algebraMap R (Localization.Away (f i)))).left_adjoint_additive (.up ℤ) ⋙ Qh) [∀ i : Fin r, (L i).IsLeftDerivedFunctor (ε i) (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ))] (hlocal : ∀ i : Fin r, IsPerfect ((L i).obj C)) : IsPerfect C",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

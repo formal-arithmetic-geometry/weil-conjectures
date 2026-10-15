@@ -234,5 +234,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e251ca756",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Wrote review.md. Statement, dependencies, canonical helpers, universes, edge cases, docstrings, and report sections pass. Server-only compilation reproduced cleanly. No corrections or repository changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SequentialTowerEvaluationFull",
+  "declaration": "CategoryTheory.sequentialTowerEvaluation_full",
+  "declarations": [
+   "CategoryTheory.sequentialTowerDerivedEvaluation",
+   "CategoryTheory.sequentialTowerDerivedTransition",
+   "CategoryTheory.sequentialTowerEvaluation_full"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SequentialTowerEvaluationFull.lean",
+  "statement": "theorem sequentialTowerEvaluation_full (X Y : DerivedCategory (ℕᵒᵖ ⥤ ringedSiteModules.{u} R)) (f : ∀ n : ℕ, (sequentialTowerDerivedEvaluation R n).obj X ⟶ (sequentialTowerDerivedEvaluation R n).obj Y) (hf : ∀ n : ℕ, f (n + 1) ≫ (sequentialTowerDerivedTransition R n).app Y = (sequentialTowerDerivedTransition R n).app X ≫ f n) : (∃ g : X ⟶ Y, ∀ n : ℕ, (sequentialTowerDerivedEvaluation R n).map g = f n) ∧ (∀ g : X ⟶ Y, (∀ n : ℕ, (sequentialTowerDerivedEvaluation R n).map g = f n) → (∀ n : ℕ, IsIso (f n)) → IsIso g)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The two real-data helpers introduce precisely the derived evaluations and canonical adjacent transitions named by this statement, via exact evaluation and Localization.liftNatTrans. Natural index n represents positive index n+1. The isomorphism clause quantifies over every lift."
  }
 }

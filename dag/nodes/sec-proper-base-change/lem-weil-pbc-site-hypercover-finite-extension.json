@@ -171,5 +171,38 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1bfa15ae6",
+  "group": "NS",
+  "result": "pass",
+  "note": "Checked all statement clauses, dependencies, sources, definitions, universes, edge cases, docstrings and report sections. Signature matches verbatim; server-only compile passed in 1.0 s. No findings; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SiteHypercoverFiniteExtension",
+  "declaration": "CategoryTheory.FormalSplitAttachment.exists_split_truncated_extension",
+  "declarations": [
+   "CategoryTheory.FormalSplitAttachment.degree",
+   "CategoryTheory.FormalSplitAttachment.term",
+   "CategoryTheory.FormalSplitAttachment.operator",
+   "CategoryTheory.FormalSplitAttachment.IsNondegenerate",
+   "CategoryTheory.FormalSplitAttachment.Labels",
+   "CategoryTheory.FormalSplitAttachment.labelIndex",
+   "CategoryTheory.FormalSplitAttachment.IsSplit",
+   "CategoryTheory.FormalSplitAttachment.BoundaryCone",
+   "CategoryTheory.FormalSplitAttachment.IsMatching",
+   "CategoryTheory.FormalSplitAttachment.attachedFamily",
+   "CategoryTheory.FormalSplitAttachment.newInclusion",
+   "CategoryTheory.FormalSplitAttachment.oldInclusion",
+   "CategoryTheory.FormalSplitAttachment.exists_split_truncated_extension"
+  ],
+  "file": "lean/Sheaf/Paper/SiteHypercoverFiniteExtension.lean",
+  "statement": "theorem exists_split_truncated_extension [HasFiniteLimits D] (K : SimplicialObject.Truncated (FormalCoproduct.{w} D) n) (hfinite : ∀ q : Fin (n + 1), Finite (term K q).I) (hsplit : IsSplit K) {M : FormalCoproduct.{w} D} (c : BoundaryCone K M) (hc : IsMatching K c) (V : FormalCoproduct.{w} D) [Finite V.I] (v : V ⟶ M) : ∃ (L : SimplicialObject.Truncated (FormalCoproduct.{w} D) (n + 1)) (e : (SimplicialObject.Truncated.trunc (FormalCoproduct.{w} D) (n + 1) n (Nat.le_succ n)).obj L = K) (t : attachedFamily K V = term L ⟨n + 1, Nat.lt_succ_self _⟩) (b : term L ⟨n + 1, Nat.lt_succ_self _⟩ ⟶ M), IsSplit L ∧ (∀ q : Fin (n + 2), Finite (term L q).I) ∧ (∀ x : (term L ⟨n + 1, Nat.lt_succ_self _⟩).I, IsNondegenerate L ⟨n + 1, Nat.lt_succ_self _⟩ x ↔ ∃ j : V.I, (eqToHom t).f (Sum.inl j) = x) ∧ (∀ (q : Fin (n + 1)) (α : SimplexCategory.mk q.val ⟶ SimplexCategory.mk (n + 1)), b ≫ c.projection q α = operator L (q := ⟨q.val, Nat.lt_succ_of_lt q.isLt⟩) (r := ⟨n + 1, Nat.lt_succ_self _⟩) α ≫ (eqToHom e).app (op (degree q))) ∧ (newInclusion K V ≫ eqToHom t ≫ b = v) ∧ (∀ (a : Labels K (n + 1)) (i : Fin (n + 2)), oldInclusion K V a ≫ eqToHom t ≫ operator L (q := ⟨n, Nat.lt_succ_of_le (Nat.le_succ n)⟩) (r := ⟨n + 1, Nat.lt_succ_self _⟩) (SimplexCategory.δ i) ≫ (eqToHom e).app (op (degree ⟨n, Nat.lt_succ_self _⟩)) = FormalCoproduct.Hom.fromIncl a.2.2.val (𝟙 _) ≫ operator K (q := ⟨n, Nat.lt_succ_self _⟩) (SimplexCategory.δ i ≫ a.2.1.val))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

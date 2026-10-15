@@ -32,7 +32,9 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-strict-henselization-restriction",
+  "lem-weil-pbc-inverse-image-stalk-germ"
  ],
  "proof": [
   {
@@ -219,5 +221,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-281d01849",
+  "group": "NL",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all dependencies, canonical specialization map, source, edge cases, universes, docstrings, and report sections. Signature matches verbatim; server-only compilation reproduced cleanly in 3.2 seconds. No findings or repository changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProperPrimeSpecialization",
+  "declaration": "AlgebraicGeometry.Etale.isIso_strictLocalSpecialization_smooth_proper_prime",
+  "declarations": [
+   "AlgebraicGeometry.Etale.strictLocalSpecialization",
+   "AlgebraicGeometry.Etale.isIso_strictLocalSpecialization_smooth_proper_prime"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProperPrimeSpecialization.lean",
+  "statement": "theorem isIso_strictLocalSpecialization_smooth_proper_prime {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] [IsProper f] (ell : ℕ) [Fact ell.Prime] (hunit : ∀ x : S, IsUnit (ell : S.presheaf.stalk x)) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell)))) [Scheme.IsLocallyConstantSheaf F] (q : ℕ) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω'] (t : Spec (.of Ω') ⟶ Scheme.strictHenselizationScheme s) : IsIso (strictLocalSpecialization s t ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj ((sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell))) AddCommGrpCat.{u + 1})).obj F)))))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

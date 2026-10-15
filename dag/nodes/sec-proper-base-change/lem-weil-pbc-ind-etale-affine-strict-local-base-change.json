@@ -34,7 +34,8 @@
   "def-pc-fibre-product",
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit",
-  "lem-weil-pbc-strict-henselization-functoriality"
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-pbc-strict-henselization-point-evaluation"
  ],
  "proof": [
   {
@@ -187,5 +188,24 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-5cc867177 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. All four steps correctly prove the canonical strict-local comparison and both compatibilities without extra finiteness or algebraicity hypotheses. No new nodes, duplicate split, cycle, or repair required. Accepted the two declared strict-henselization tool uses; checked archived target arrows and coefficient categories. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-03e7e3d8e",
+  "group": "NM",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source passages, every statement dependency, canonical maps, all clauses, edge cases, universes, records and maintainer gates. Immutable module passed server-only scompile.py cleanly. No fixes required; branch and project clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IndEtaleAffineStrictLocalBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.indEtale_affine_strictLocal_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/IndEtaleAffineStrictLocalBaseChange.lean",
+  "statement": "theorem indEtale_affine_strictLocal_baseChange (A B C : CommRingCat.{u}) (f : A ⟶ B) (g : A ⟶ C) (hf : f.hom.IndEtale) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ pullback (Spec.map f) (Spec.map g)) (barB : Spec (.of Ω) ⟶ Spec B) (barC : Spec (.of Ω) ⟶ Spec C) (barA : Spec (.of Ω) ⟶ Spec A) (hbarB : barB = barY ≫ pullback.fst (Spec.map f) (Spec.map g)) (hbarC : barC = barY ≫ pullback.snd (Spec.map f) (Spec.map g)) (hbarA : barA = barB ≫ Spec.map f) : ∃ (u : strictHenselizationScheme barB ⟶ strictHenselizationScheme barA) (v : strictHenselizationScheme barC ⟶ strictHenselizationScheme barA) (hu : u ≫ strictHenselizationStructuralMap barA = strictHenselizationStructuralMap barB ≫ Spec.map f) (hv : v ≫ strictHenselizationStructuralMap barA = strictHenselizationStructuralMap barC ≫ Spec.map g), Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barB)) ≫ u = Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barA)) ∧ Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barC)) ≫ v = Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barA)) ∧ ∃ (l : strictHenselizationScheme barY ⟶ strictHenselizationScheme barB) (m : strictHenselizationScheme barY ⟶ strictHenselizationScheme barC), l ≫ strictHenselizationStructuralMap barB = strictHenselizationStructuralMap barY ≫ pullback.fst (Spec.map f) (Spec.map g) ∧ m ≫ strictHenselizationStructuralMap barC = strictHenselizationStructuralMap barY ≫ pullback.snd (Spec.map f) (Spec.map g) ∧ Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barY)) ≫ l = Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barB)) ∧ Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barY)) ≫ m = Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barC)) ∧ ∃! e : strictHenselizationScheme barY ≅ pullback u v, e.hom ≫ pullback.fst u v = l ∧ e.hom ≫ pullback.snd u v = m ∧ e.hom ≫ pullback.map u v (Spec.map f) (Spec.map g) (strictHenselizationStructuralMap barB) (strictHenselizationStructuralMap barC) (strictHenselizationStructuralMap barA) hu hv = strictHenselizationStructuralMap barY",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The four functorial maps are existentially supplied and characterized by structural-map and canonical geometric-point evaluation equations. The unique isomorphism is characterized by its two projections and its structural-map equation. The added statement dependency is the existing landed evaluation construction; no new notion is defined."
  }
 }

@@ -22,7 +22,8 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-localized-ringed-site"
+  "def-pur-localized-ringed-site",
+  "def-sf-site-constant-module-functor"
  ],
  "proof": [
   {
@@ -296,5 +297,26 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-c092ecec0 (reviewer sub-agent of L); spot-checked: Read the mathematics in full against Stacks 093T and the cited localization, module, and sheafification sources. All four steps correctly establish the canonical Isom comparison. Small cases pass; no new nodes, duplicate split, dependency cycle, unsupported use, or target weakening found. Accepted generic tool uses and source/category checks are documented in review.md. No repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fe43fdcae",
+  "group": "NP",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical comparison, universes, edge cases, definitions, docstrings, and report sections. Both snapshot modules reproduced cleanly through server-only scompile.py. No delivery errors or fixes required; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf",
+  "declaration": "CategoryTheory.siteConstantModule_isomSheaf",
+  "declarations": [
+   "CategoryTheory.siteConstantModule_isomSheaf"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiteConstantModuleIsomSheaf.lean",
+  "statement": "theorem siteConstantModule_isomSheaf {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (Λ : Type u) [CommRing Λ] (M N : ModuleCat.{u} Λ) [Module.FinitePresentation Λ M] [Module.FinitePresentation Λ N] : ∃ I : Cᵒᵖ ⥤ Type u, ∃ e : ∀ U : Cᵒᵖ, I.obj U ≃ (((siteConstantModuleFunctor J.toGrothendieck Λ).obj M).over U.unop ≅ ((siteConstantModuleFunctor J.toGrothendieck Λ).obj N).over U.unop), (∀ (U V : Cᵒᵖ) (f : U ⟶ V) (x : I.obj U), e V (I.map f x) = ((SheafOfModules.overFunctorMap ((constantSheaf J.toGrothendieck RingCat.{u}).obj (RingCat.of Λ)) f.unop).app ((siteConstantModuleFunctor J.toGrothendieck Λ).obj M)).symm ≪≫ (SheafOfModules.overMap ((constantSheaf J.toGrothendieck RingCat.{u}).obj (RingCat.of Λ)) f.unop).mapIso (e U x) ≪≫ (SheafOfModules.overFunctorMap ((constantSheaf J.toGrothendieck RingCat.{u}).obj (RingCat.of Λ)) f.unop).app ((siteConstantModuleFunctor J.toGrothendieck Λ).obj N)) ∧ ∃ hI : Presheaf.IsSheaf J.toGrothendieck I, ∃ comparison : (constantSheaf J.toGrothendieck (Type u)).obj (M ≅ N) ≅ ⟨I, hI⟩, ∀ (U : Cᵒᵖ) (a : M ≅ N), e U (comparison.hom.hom.app U ((toSheafify J.toGrothendieck ((Functor.const Cᵒᵖ).obj (M ≅ N))).app U a)) = (SheafOfModules.overFunctor ((constantSheaf J.toGrothendieck RingCat.{u}).obj (RingCat.of Λ)) U.unop).mapIso ((siteConstantModuleFunctor J.toGrothendieck Λ).mapIso a)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

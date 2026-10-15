@@ -1,0 +1,111 @@
+{
+ "id": "def-weil-pbc-local-coefficient-localization",
+ "kind": "definition",
+ "title": "Coefficient localization and local section multiplication on a ringed site",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small category with Grothendieck topology $J$, let $\\mathcal O$ be a sheaf of commutative rings, let $U\\in\\mathcal C$, and let $f\\in\\mathcal O(U)$. Use the category of module sheaves [def-weil-sheaf-of-modules-category] and the slice ringed site $\\mathcal C/U$ with ring sheaf $\\mathcal O_U$ [def-pur-localized-ringed-site]. For each $\\mathcal O_U$-module $M$, define $m_f(M):M\\to M$ by multiplication on sections over $a:V\\to U$ by $a^*f$. Define the coefficient localization $\\mathcal O_U[1/f]$ to be the colimit [def-weil-pbc-category-colimit] of the direct sequence $\\mathcal O_U\\xrightarrow{m_f}\\mathcal O_U\\xrightarrow{m_f}\\cdots$ in module sheaves; equivalently, this is the sheafification of the presheaf $a:V\\to U\\mapsto\\mathcal O(V)[1/a^*f]$. Let $j_U^*:D(\\mathcal O)\\to D(\\mathcal O_U)$ [def-weil-abstract-derived-category] be the functor induced by exact restriction of module sheaves. The maps $m_f(M|_U)$ form a natural endomorphism of module restriction; define $m_f:j_U^*\\to j_U^*$ as the natural transformation induced by its termwise action on complexes and localization at quasi-isomorphisms.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997 (lemma-hom-from-Af), coefficient localization and multiplication tower; slice restriction as in sites-modules.tex, Tags 03DI and 03DJ (lemma-extension-by-zero and lemma-extension-by-zero-exact)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a sheaf of rings at a section as colimit of multiplication on slice modules",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coefficient localization on a ringed site slice by a section colimit multiplication and derived restriction",
+   "results": "Eight hits. TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf and toLocalizationPresheaf concern topological spaces only; ModuleCat.Tilde.openToLocalization and toOpen concern affine schemes. None supplies localization on an arbitrary small ringed site. Read Mathlib/Topology/Sheaves/CommRingCat.lean:72-104.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localCoefficientLocalization|localSectionMultiplication|sectionsSMul",
+   "results": "No Mathlib hits. Direct project searches find PresheafOfModules.sectionsSMul and overSections in WeilConjectures/Algebra/Category/ModuleCat/Presheaf/InternalHom.lean:67-100,143-156; these are reused. No Sheaf module defines coefficient localization.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-local-hom-tower-criterion",
+  "date": "2026-10-15",
+  "group": "NO"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The final Stacks comparison uses RHom from the coefficient localization and the local scalar multiplication tower.",
+   "via": [
+    "lem-weil-pbc-local-hom-tower-criterion",
+    "lem-weil-pbc-restriction-local-completeness",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalCoefficientLocalization",
+  "declaration": "CategoryTheory.localCoefficientLocalization",
+  "declarations": [
+   "CategoryTheory.localCoefficientRings",
+   "CategoryTheory.localCoefficientOver_hasDerivedCategory",
+   "CategoryTheory.localSectionMultiplication",
+   "CategoryTheory.localCoefficientLocalization",
+   "CategoryTheory.localCoefficientRestriction_exact",
+   "CategoryTheory.localCoefficientDerivedRestriction",
+   "CategoryTheory.localSectionMultiplication_naturality",
+   "CategoryTheory.localSectionMultiplicationNatTrans",
+   "CategoryTheory.localSectionDerivedMultiplication"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LocalCoefficientLocalization.lean",
+  "statement": "def localCoefficientLocalization {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) (U : C) (f : R.obj.obj (op U)) : ringedSiteModules.{u} ((localCoefficientRings R).over U)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fe5336407",
+  "group": "NO",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fe5336407",
+  "group": "NO",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, source correspondence, dependencies, canonical constructions, universes, edge cases, and verbatim signatures. Both delivered modules passed server-only compilation without diagnostics. No delivery errors found; no project clones or branches changed."
+ }
+}

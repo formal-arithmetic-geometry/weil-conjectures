@@ -26,7 +26,8 @@
   "lem-weil-pbc-proetale-affine-acyclic-hypercover",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "lem-sc-bounded-below-injective-resolution"
+  "lem-sc-bounded-below-injective-resolution",
+  "def-weil-pbc-proetale-hypercover-total"
  ],
  "proof": [
   {
@@ -282,5 +283,26 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-3756ce0d9 (reviewer sub-agent of L); spot-checked: Read the full mathematics, all cited statements, sources and route. The eight-step argument and ringed-module analogue of Stacks 01GE/01GW are sound. Corrected missing definition citations and incomplete new-node metadata in fixes; review.md records source checks, edge cases, accepted tool uses and an inherited dependency cycle. No target or coefficient comparison was weakened or assumed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5b53399d7",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. Checked snapshot statements, dependencies, sources, constructions, universes, edge cases, docstrings, report sections, and verbatim signatures. Server-only per-file compilation reproduced cleanly against the side overlay. No H1–H13 defects found; no repository changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComplex",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.hypercover_computes_boundedBelow_complex",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.hypercover_computes_boundedBelow_complex"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleHypercoverComputesBoundedComplex.lean",
+  "statement": "theorem hypercover_computes_boundedBelow_complex (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt) (U : SimplicialObject (Over W)) [HasDerivedCategory.{w} (ModuleCat.{u + 1} (((sheafCompose (topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R).obj.obj (op W)))] (hweak : ∀ (n : ℕ) (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (U _⦋n⦌).left))) (hzero : Epi ((topology X).yoneda.map (U _⦋0⦌).hom)) (hone : ∃ c : Fan (fun _ : Fin 2 ↦ U _⦋0⦌), Nonempty (IsLimit c) ∧ ∃ μ : U _⦋1⦌ ⟶ c.pt, (∀ i : Fin 2, μ ≫ c.proj i = U.δ i) ∧ Epi ((topology X).yoneda.map μ.left)) (hhigher : ∀ n : ℕ, ∃ c : Cone (SimplicialObject.matchingBoundaryIndex U n).multicospan, Nonempty (IsLimit c) ∧ ∃ μ : U _⦋n + 2⦌ ⟶ c.pt, (∀ i : Fin (n + 3), μ ≫ c.π.app (WalkingMulticospan.left i) = U.δ i) ∧ Epi ((topology X).yoneda.map μ.left)) : (∃ c : ∀ (E J : CochainComplex.Plus (ringedSiteModules.{u + 1} ((sheafCompose (topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))), (∀ n : ℤ, Injective (J.obj.X n)) → (i : E.obj ⟶ J.obj) → QuasiIso i → (DerivedCategory.Q.obj ((hypercoverTotal X R W U).obj E.obj) ≅ DerivedCategory.Q.obj (((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (ComplexShape.up ℤ)).obj J.obj)), ∀ (E F J L : CochainComplex.Plus (ringedSiteModules.{u + 1} ((sheafCompose (topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))) (hJ : ∀ n : ℤ, Injective (J.obj.X n)) (hL : ∀ n : ℤ, Injective (L.obj.X n)) (i : E.obj ⟶ J.obj) (j : F.obj ⟶ L.obj) (hi : QuasiIso i) (hj : QuasiIso j) (f : E ⟶ F) (a : J ⟶ L), Nonempty (Homotopy (i ≫ a.hom) (f.hom ≫ j)) → DerivedCategory.Q.map ((hypercoverTotal X R W U).map f.hom) ≫ (c F L hL j hj).hom = (c E J hJ i hi).hom ≫ DerivedCategory.Q.map (((SheafOfModules.evaluation _ (op W)).mapHomologicalComplex (ComplexShape.up ℤ)).map a.hom)) ∧ (∀ (E F : CochainComplex.Plus (ringedSiteModules.{u + 1} ((sheafCompose (topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))) (f : E ⟶ F), QuasiIso f.hom → QuasiIso ((hypercoverTotal X R W U).map f.hom))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

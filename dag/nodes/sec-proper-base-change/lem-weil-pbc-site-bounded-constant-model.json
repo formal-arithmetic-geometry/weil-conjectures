@@ -379,5 +379,24 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-63ea6254b (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked all eight steps against Stacks 094G, 093S, 093U and the cited infrastructure. Added the missing exact-sheafification citation to Step 7; corrected JSON and review.md are written. No new nodes or statement changes. Coefficient categories remain distinct; no seeded comparison theorem was accepted as proved.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ec90100a9",
+  "group": "NO",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the source, all statement dependencies, exact Lean signature, docstrings, edge cases, universes and required report sections. Server-only compilation reproduced cleanly in 2.4 seconds. No delivery errors found; branch and project clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SiteBoundedConstantModel",
+  "declaration": "CategoryTheory.exists_site_bounded_constant_model",
+  "file": "lean/Sheaf/Paper/SiteBoundedConstantModel.lean",
+  "statement": "theorem exists_site_bounded_constant_model {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (X : C) (hX : IsTerminal X) (B : Type u) [CommRing B] [IsNoetherianRing B] [HasDerivedCategory.{w} (Sheaf J.toGrothendieck (ModuleCat.{u} B))] [∀ U : C, HasDerivedCategory.{w} (Sheaf (J.toGrothendieck.over U) (ModuleCat.{u} B))] (K : DerivedCategory (Sheaf J.toGrothendieck (ModuleCat.{u} B))) (a b : ℤ) (hab : a ≤ b) (hvan : ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor (Sheaf J.toGrothendieck (ModuleCat.{u} B)) q).obj K)) (hloc : ∀ (q : ℤ) (V : C), ∃ (I : Type u) (U : I → C) (f : ∀ i : I, U i ⟶ V), Presieve.ofArrows U f ∈ J V ∧ ∀ i : I, ∃ M : ModuleCat.{u} B, Module.Finite B M ∧ Nonempty ((J.toGrothendieck.overPullback (ModuleCat.{u} B) (U i)).obj ((DerivedCategory.homologyFunctor (Sheaf J.toGrothendieck (ModuleCat.{u} B)) q).obj K) ≅ (constantSheaf (J.toGrothendieck.over (U i)) (ModuleCat.{u} B)).obj M)) : ∃ (I : Type u) (U : I → C) (f : ∀ i : I, U i ⟶ X), Presieve.ofArrows U f ∈ J X ∧ ∀ i : I, ∃ M : CochainComplex (ModuleCat.{u} B) ℤ, (∀ q : ℤ, Module.Finite B (M.X q)) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero (M.X q)) ∧ Nonempty ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (J.toGrothendieck.overPullback (ModuleCat.{u} B) (U i)) (Functor.additive_of_preserves_binary_products _) _ ⟨fun _ _ _ ↦ PreservesColimitsOfSize.preservesColimitsOfShape (self := Adjunction.leftAdjoint_preservesColimits (Functor.sheafAdjunctionCocontinuous (Over.forget (U i)) (ModuleCat.{u} B) (J.toGrothendieck.over (U i)) J.toGrothendieck))⟩).obj K ≅ DerivedCategory.Q.obj ((Functor.mapHomologicalComplex (constantSheaf (J.toGrothendieck.over (U i)) (ModuleCat.{u} B)) (ComplexShape.up ℤ)).obj M))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Constant-coefficient module sheaves use the ModuleCat-valued sheaf encoding, as in the mathlib_match of lem-weil-pbc-site-constant-restriction. Slice restriction is Mathlib overPullback; its canonical derived functor uses additivity from finite products and colimit preservation from the continuous/cocontinuous adjunction, with no extra exactness hypotheses."
  }
 }

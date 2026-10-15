@@ -1,0 +1,110 @@
+{
+ "id": "def-weil-pbc-reduced-normalization",
+ "kind": "definition",
+ "title": "Componentwise normalization of a scheme",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. For each irreducible component $Z$ [def-weil-irreducible-components], give $Z$ its reduced induced closed subscheme structure [def-pc-reduced-scheme], defined by the vanishing ideal of $Z$. This scheme is integral. Define $X^\\nu$ to be the disjoint union, indexed by these components, of their function-field normalizations [def-sc-normalization]. The canonical map $\\nu:X^\\nu\\to X$ restricts on each summand to the normalization map followed by the closed inclusion of the component. The empty scheme gives the empty disjoint union.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components",
+  "def-pc-reduced-scheme",
+  "def-sc-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0CDV (lemma-normalization-in-terms-of-components); Schemes Tag 01J3 (lemma-reduced-closed-subscheme) for the reduced induced structure."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a scheme is the disjoint union of the normalizations of its reduced irreducible components",
+   "results": "UNAVAILABLE 0 hits: service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Disjoint union of normalizations of reduced irreducible components of a scheme",
+   "results": "8 hits: Scheme.Hom.normalization, instIsReducedNormalization, instIsIntegralNormalization, fromNormalization, toNormalization, normalizationOpenCover, normalizationDesc, isIntegral_iff_irreducibleSpace_and_isReduced. Relative normalization and the integral-scheme normalization do not define the componentwise absolute normalization.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.normalization, AlgebraicGeometry.Scheme.Hom.normalizationPullback",
+   "results": "0 hits: unknown identifier AlgebraicGeometry.Scheme.normalization",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPullback|normalLocus|reducedNormalization in Mathlib/AlgebraicGeometry; reducedNormalization|normalLocus|normalization.*separ|normalization.*[Cc]omponent in WeilConjectures and lean/Sheaf",
+   "results": "Mathlib: 7 hits for relative normalizationPullback in Normalization and ZariskisMainTheorem. Project/source: unrelated normalization-named declarations and reduced-curve modification existence, no componentwise normalization definition. Exact proposed names absent in Mathlib, source, lean/Sheaf and dag/lean_names_upstream.json.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "date": "2026-10-15",
+  "group": "NG"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-normalization-exact-sequence",
+   "place": "Definition of the normalization of the reduced curve, used in the componentwise geometric and field-change lemma.",
+   "via": [
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.reducedNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedNormalization.lean",
+  "statement": "def reducedNormalization (X : Scheme.{u}) : Scheme.{u}",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.reducedNormalizationComponent",
+   "AlgebraicGeometry.Scheme.isIntegral_reducedNormalizationComponent",
+   "AlgebraicGeometry.Scheme.reducedNormalization",
+   "AlgebraicGeometry.Scheme.fromReducedNormalization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-144517e6e",
+  "group": "NG",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-144517e6e",
+  "group": "NG",
+  "result": "pass",
+  "note": "Checked all statement clauses, dependencies, source places, constructions, universes, edge cases, records and docstrings. Both immutable modules passed server-only compilation. No fixes required; branch head unchanged."
+ }
+}

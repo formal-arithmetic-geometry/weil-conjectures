@@ -39,7 +39,8 @@
   "def-weil-pbc-direct-image",
   "lem-weil-pbc-strict-henselization-functoriality",
   "def-weil-finite-type-morphism",
-  "def-weil-quasi-separated-morphism"
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-strict-henselization-point-evaluation"
  ],
  "proof": [
   {
@@ -310,5 +311,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-38c6dd13b",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, canonical maps, universes, edge cases, exact signature, report and pilot gates. Server-only compilation reproduced cleanly in 2.8 seconds. No delivery errors; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExchangeStrictLocalCohomology",
+  "declaration": "AlgebraicGeometry.Etale.isIso_exchange_iff_strictLocalCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExchangeStrictLocalCohomology.lean",
+  "statement": "theorem isIso_exchange_iff_strictLocalCohomology {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) [QuasiCompact g] [QuasiSeparated g] (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : IsIso ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (IsPullback.of_hasPullback f g).toCommSq.flip).app ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) (a : Scheme.strictHenselizationRing (x ≫ f) ⟶ Scheme.strictHenselizationRing x) (_ : Scheme.strictHenselizationPointEvaluation (x ≫ f) = (Scheme.strictHenselizationPointEvaluation x).comp a.hom) (ha : Spec.map a ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) = Scheme.strictHenselizationStructuralMap x ≫ f), Function.Bijective (cohomologyMap (pullback.map (Scheme.strictHenselizationStructuralMap x ≫ f) g (Scheme.strictHenselizationStructuralMap (x ≫ f)) g (Spec.map a) (𝟙 T) (𝟙 S) ((Category.comp_id _).trans ha.symm) ((Category.comp_id g).trans (Category.id_comp g).symm)) ((upperStar AddCommGrpCat.{u + 1} (pullback.snd (Scheme.strictHenselizationStructuralMap (x ≫ f)) g)).obj F) q)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The degree-q exchange uses the recorded bounded-below abelian-sheaf presentation. Canonical strict-local ring maps are specified by the structural equation and equality of the canonical evaluations into Ω; these force locality and the specified residue inclusion, hence select exactly the unique functorial map. Sheaf.H and cohomologyMap are the existing recorded cohomology/pullback presentation."
  }
 }

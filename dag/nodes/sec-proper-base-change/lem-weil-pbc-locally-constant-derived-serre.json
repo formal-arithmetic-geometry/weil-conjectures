@@ -24,7 +24,8 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-finitely-generated-module"
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finite-type-locally-constant-module-sheaf"
  ],
  "proof": [
   {
@@ -346,5 +347,23 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-21bdea089 (reviewer sub-agent of L); spot-checked: Read the full mathematics against Stacks 093U, 093S, 093J, 00XR and Mathlib sources. Closure proof and both new statements hold, including nonsplit and degenerate cases. Corrected the mis-sourced restriction citation, restored new-node metadata, and recorded the verified local-morphism attachment. Statements remain unchanged. Detailed checks are in review.md; three corrected JSON files are under fixes/dag/nodes/sec-proper-base-change.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ba606ac03",
+  "group": "NA",
+  "result": "pass",
+  "note": "Verified immutable files, source, dependencies, all statement clauses, edge cases, verbatim signatures, docstrings and report sections. Server-only compilation reproduced successfully; no corrections required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre",
+  "declaration": "SheafOfModules.finiteTypeLocallyConstant_closedUnder_kernels_cokernels_extensions",
+  "file": "lean/Sheaf/CategoryTheory/FiniteTypeLocallyConstantSerre.lean",
+  "statement": "theorem finiteTypeLocallyConstant_closedUnder_kernels_cokernels_extensions {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (B : Type u) [CommRing B] [IsNoetherianRing B] : (∀ (F G : CategoryTheory.ringedSiteModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of B))) (f : F ⟶ G), IsFiniteTypeLocallyConstant J B F → IsFiniteTypeLocallyConstant J B G → IsFiniteTypeLocallyConstant J B (kernel f) ∧ IsFiniteTypeLocallyConstant J B (cokernel f)) ∧ (∀ S : ShortComplex (CategoryTheory.ringedSiteModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of B))), S.ShortExact → IsFiniteTypeLocallyConstant J B S.X₁ → IsFiniteTypeLocallyConstant J B S.X₃ → IsFiniteTypeLocallyConstant J B S.X₂)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

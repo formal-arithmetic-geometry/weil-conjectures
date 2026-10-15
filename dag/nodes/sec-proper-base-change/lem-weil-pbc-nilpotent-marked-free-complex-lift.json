@@ -313,5 +313,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bc73cef36",
+  "group": "NC",
+  "result": "fix",
+  "note": "Lean statement, dependencies, universes, marking equation, edge cases, and verbatim signature pass; server compile reproduced in 1.5 seconds. Complete replacement report in fixes corrects two Stacks citations from 0BC9 to 09AR. Details recorded in review.md; no Lean or node changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NilpotentMarkedFreeComplexLift",
+  "declaration": "DerivedCategory.exists_marked_finiteFree_lift_of_nilpotent",
+  "file": "lean/Sheaf/RingTheory/NilpotentMarkedFreeComplexLift.lean",
+  "statement": "theorem exists_marked_finiteFree_lift_of_nilpotent {R : Type u} [CommRing R] (I : Ideal R) (hnil : ∃ N : ℕ, 1 ≤ N ∧ I ^ N = 0) (hunits : ∀ x : I, IsUnit (1 + (x : R))) [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] [HasDerivedCategory.{w'} (ModuleCat.{max u v} (R ⧸ I))] (L : DerivedCategory (ModuleCat.{max u v} R) ⥤ DerivedCategory (ModuleCat.{max u v} (R ⧸ I))) (ε : DerivedCategory.Qh ⋙ L ⟶ @Functor.mapHomotopyCategory _ _ _ _ _ _ _ (ModuleCat.extendScalars (Ideal.Quotient.mk I)) (ModuleCat.extendRestrictScalarsAdj (Ideal.Quotient.mk I)).left_adjoint_additive (.up ℤ) ⋙ DerivedCategory.Qh) [L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ModuleCat.{max u v} R) (.up ℤ))] (K : DerivedCategory (ModuleCat.{max u v} R)) (hK : IsPseudoCoherent K) (F : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ) (b : ℤ) (hFbound : F.IsStrictlyLE b) (hFterms : ∀ i : ℤ, Module.Free (R ⧸ I) (F.X i) ∧ Module.Finite (R ⧸ I) (F.X i)) (α : L.obj K ≅ Q.obj F) : ∃ (P : CochainComplex (ModuleCat.{max u v} R) ℤ) (β : Q.obj P ≅ K) (θ : ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (.up ℤ)).obj P ≅ F), P.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i)) ∧ L.map β.hom ≫ α.hom = L.map ((quotientCompQhIso (ModuleCat.{max u v} R)).inv.app P) ≫ ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫ Qh.map ((@Functor.mapHomotopyCategoryFactors _ _ _ _ _ _ _ (ModuleCat.extendScalars (Ideal.Quotient.mk I)) (ModuleCat.extendRestrictScalarsAdj (Ideal.Quotient.mk I)).left_adjoint_additive (.up ℤ)).hom.app P) ≫ (quotientCompQhIso (ModuleCat.{max u v} (R ⧸ I))).hom.app _ ≫ Q.map θ.hom",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

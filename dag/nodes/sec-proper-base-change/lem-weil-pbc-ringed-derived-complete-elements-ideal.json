@@ -22,7 +22,8 @@
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-site-complete-element"
  ],
  "proof": [
   {
@@ -223,5 +224,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-e808ac126 (reviewer sub-agent of L); spot-checked: Read all six steps and cited statements against Stacks 0996–0998, 08J9–08JC, 00EJ and module-sheaf sources. Surjectivity, Hom-cone acyclicity and sheaf locality check out for unbounded complexes and varying coefficients. No new nodes, duplicates or repairs. review.md records edge cases, route checks and inherited cycles; no downstream target comparison is certified."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-273a488ca",
+  "group": "NH",
+  "result": "pass",
+  "note": "Wrote review.md. Statements, constructions, dependencies, edge cases, signatures, and maintainer gates pass; all four modules compile cleanly server-side. Two snapshot omissions were verified in the exact immutable commit. No delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal",
+  "declaration": "CategoryTheory.ringedSite_complete_elements_ideal",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteCompleteElementsIdeal.lean",
+  "statement": "theorem ringedSite_complete_elements_ideal {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))] (K : DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) : ∃ I : ∀ U : C, Ideal (R.obj.obj (op U)), (∀ (U : C) (f : R.obj.obj (op U)), f ∈ I U ↔ IsRingedSiteCompleteElement J R K U f) ∧ (∀ (U V : C) (a : V ⟶ U) (f : R.obj.obj (op U)), f ∈ I U → R.obj.map a.op f ∈ I V) ∧ (∀ (U : C) (S : Sieve U), S ∈ J U → ∀ f : R.obj.obj (op U), (∀ (V : C) (a : V ⟶ U), S a → R.obj.map a.op f ∈ I V) → f ∈ I U) ∧ (∀ (U : C) (S : Sieve U), S ∈ J U → ∀ x : R.obj.obj (op U), (∀ (V : C) (a : V ⟶ U), S a → ∃ (r : ℕ) (b : Fin r → R.obj.obj (op V)), (∀ i : Fin r, IsRingedSiteCompleteElement J R K V (b i)) ∧ R.obj.map a.op x ∈ Ideal.span (Set.range b)) → IsRingedSiteCompleteElement J R K U x)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

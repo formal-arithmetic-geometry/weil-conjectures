@@ -209,5 +209,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3d12eb84b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, every statement clause, dependencies, source proof, edge cases, docstrings, and verbatim signature. Server-only compilation passed in 1.3 seconds without diagnostics. No delivery errors or repository changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FreeComplexResidueDegreeCancellation",
+  "declaration": "CochainComplex.exists_localized_homotopyEquiv_zero_degree",
+  "file": "lean/Sheaf/Algebra/Homology/FreeComplexResidueDegreeCancellation.lean",
+  "statement": "theorem exists_localized_homotopyEquiv_zero_degree {R : Type u} [CommRing R] (p : Ideal R) [p.IsPrime] (i : ℤ) (P : CochainComplex (ModuleCat.{max u v} R) ℤ) (hfree : ∀ j : ℤ, Module.Free R (P.X j)) (hfinite : ∀ j : ℤ, Module.Finite R (P.X j)) (hresidue : IsZero (((Functor.mapHomologicalComplex (ModuleCat.extendScalars.{u, u, max u v} ((algebraMap (R ⧸ p) (FractionRing (R ⧸ p))).comp (Ideal.Quotient.mk p))) (ComplexShape.up ℤ)).obj P).homology i)) : ∃ (f : R), f ∉ p ∧ ∃ (Q : CochainComplex (ModuleCat.{max u v} (Localization.Away f)) ℤ), (∀ j : ℤ, Module.Free (Localization.Away f) (Q.X j)) ∧ (∀ j : ℤ, Module.Finite (Localization.Away f) (Q.X j)) ∧ Nonempty (HomotopyEquiv ((Functor.mapHomologicalComplex (ModuleCat.extendScalars.{u, u, max u v} (algebraMap R (Localization.Away f))) (ComplexShape.up ℤ)).obj P) Q) ∧ IsZero (Q.X i) ∧ (∀ j : ℤ, j ∉ ({i - 1, i, i + 1} : Set ℤ) → Q.X j = (ModuleCat.extendScalars.{u, u, max u v} (algebraMap R (Localization.Away f))).obj (P.X j)) ∧ (∀ j k : ℤ, j ∉ ({i - 1, i, i + 1} : Set ℤ) → k ∉ ({i - 1, i, i + 1} : Set ℤ) → HEq (Q.d j k) ((ModuleCat.extendScalars.{u, u, max u v} (algebraMap R (Localization.Away f))).map (P.d j k))) ∧ (∀ j : ℤ, j = i - 1 ∨ j = i + 1 → ∃ (a : Q.X j ⟶ (ModuleCat.extendScalars.{u, u, max u v} (algebraMap R (Localization.Away f))).obj (P.X j)) (b : (ModuleCat.extendScalars.{u, u, max u v} (algebraMap R (Localization.Away f))).obj (P.X j) ⟶ Q.X j), a ≫ b = 𝟙 (Q.X j)) ∧ (∀ j : ℤ, IsZero (P.X j) → IsZero (Q.X j))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

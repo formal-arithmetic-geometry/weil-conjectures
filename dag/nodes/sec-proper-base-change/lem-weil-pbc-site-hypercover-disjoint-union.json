@@ -23,7 +23,8 @@
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-formal-coproduct",
-  "def-weil-pbc-simplicial-object"
+  "def-weil-pbc-simplicial-object",
+  "lem-weil-pbc-simplicial-matching-object"
  ],
  "proof": [
   {
@@ -178,5 +179,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3df14c2ba",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, dependencies, sources, matching-arrow construction, universes, edge cases, docstrings and report sections. Signature matches verbatim. Server-only compilation reproduced successfully in 1.0 s with no diagnostics. No findings or fixes; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteHypercoverDisjointUnion",
+  "declaration": "CategoryTheory.SimplicialObject.site_hypercover_disjoint_union",
+  "declarations": [
+   "CategoryTheory.SimplicialObject.IsProperFaceMatchingArrow",
+   "CategoryTheory.SimplicialObject.site_hypercover_disjoint_union"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiteHypercoverDisjointUnion.lean",
+  "statement": "theorem site_hypercover_disjoint_union {C : Type u} [SmallCategory C] [HasPullbacks C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [J.toGrothendieck.Subcanonical] (T : C) (K : SimplicialObject (FormalCoproduct.{u} (Over T))) (hcover : ∀ (n : ℕ) (M : FormalCoproduct.{u} (Over T)) (μ : K _⦋n⦌ ⟶ M), IsProperFaceMatchingArrow K n M μ → ∀ j : M.I, Presieve.ofArrows (fun i : {i : (K _⦋n⦌).I // μ.f i = j} => ((K _⦋n⦌).obj i.val).left) (fun i => (μ.φ i.val ≫ eqToHom (congrArg M.obj i.property)).left) ∈ J (M.obj j).left) (a : ∀ n : ℕ, Cofan (K _⦋n⦌).obj) (ha : ∀ n : ℕ, IsColimit (a n)) (hsheaf : ∀ n : ℕ, IsColimit (Cofan.mk (J.toGrothendieck.yoneda.obj (a n).pt.left) (fun i : (K _⦋n⦌).I => J.toGrothendieck.yoneda.map ((a n).inj i).left))) : ∃ A : SimplicialObject (Over T), ∃ e : ∀ n : ℕ, A _⦋n⦌ ≅ (a n).pt, (∀ (m n : ℕ) (φ : SimplexCategory.mk m ⟶ SimplexCategory.mk n) (i : (K _⦋n⦌).I), (a n).inj i ≫ (e n).inv ≫ A.map φ.op ≫ (e m).hom = (K.map φ.op).φ i ≫ (a m).inj ((K.map φ.op).f i)) ∧ (∀ (n : ℕ) (M : Over (J.toGrothendieck.yoneda.obj T)) (μ : (A ⋙ Over.post J.toGrothendieck.yoneda) _⦋n⦌ ⟶ M), IsProperFaceMatchingArrow (A ⋙ Over.post J.toGrothendieck.yoneda) n M μ → Epi μ.left)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The helper characterizes the canonical matching arrow using the existing matchingBoundaryIndex diagram, including terminal and binary-product boundary cases. The coproduct hypothesis is expressed by its canonical Yoneda-image cocone universal property, and the simplicial coproduct construction is specified on every summand of every operator."
  }
 }

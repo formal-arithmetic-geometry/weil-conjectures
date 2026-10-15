@@ -24,7 +24,8 @@
   "def-weil-spectral-space",
   "def-weil-pbc-topological-inverse-image",
   "def-weil-pbc-category-colimit",
-  "def-sc-topological-abelian-cohomology"
+  "def-sc-topological-abelian-cohomology",
+  "lem-weil-pbc-site-cohomology-pullback-data"
  ],
  "proof": [
   {
@@ -238,5 +239,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ff96db09d",
+  "group": "NM",
+  "result": "pass",
+  "note": "Wrote review.md. All clauses, dependencies, canonical maps, edge cases, universes, and maintainer gates pass. Immutable module compiled cleanly server-only in 25.8 seconds. External context-clone HEAD movement is documented; no repository was modified."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralLimitCohomology",
+  "declaration": "TopCat.Sheaf.spectralLimit_cohomology",
+  "declarations": [
+   "TopCat.Sheaf.spectralLimitCohomologyMap",
+   "TopCat.Sheaf.spectralLimit_cohomology"
+  ],
+  "file": "lean/Sheaf/Topology/SpectralLimitCohomology.lean",
+  "statement": "theorem spectralLimit_cohomology {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (S : I → TopCat.{u}) [∀ i : I, SpectralSpace (S i)] (f : ∀ (i j : I), i ≤ j → (S j ⟶ S i)) (hf : ∀ (i j : I) (h : i ≤ j), IsSpectralMap (f i j h)) (hfid : ∀ i : I, f i i le_rfl = 𝟙 (S i)) (hfcomp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k), f j k hjk ≫ f i j hij = f i k (hij.trans hjk)) (X : TopCat.{u}) [SpectralSpace X] (p : ∀ i : I, X ⟶ S i) (hpcomp : ∀ (i j : I) (h : i ≤ j), p j ≫ f i j h = p i) (hlimit : ∀ a : ∀ i : I, S i, (∀ (i j : I) (h : i ≤ j), f i j h (a j) = a i) → ∃! x : X, ∀ i : I, p i x = a i) (htop : X.str = ⨅ i : I, TopologicalSpace.induced (p i) (S i).str) (F : ∀ i : I, (S i).Sheaf AddCommGrpCat.{u}) (α : ∀ (i j : I) (h : i ≤ j), F i ⟶ (pushforward AddCommGrpCat.{u} (f i j h)).obj (F j)) (hαid : ∀ (i : I) (U : Opens (S i)) (s : (F i).obj.obj (op U)), HEq ((α i i le_rfl).hom.app (op U) s) s) (hαcomp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (U : Opens (S i)) (s : (F i).obj.obj (op U)), HEq ((α i k (hij.trans hjk)).hom.app (op U) s) ((α j k hjk).hom.app (op ((Opens.map (f i j hij)).obj U)) ((α i j hij).hom.app (op U) s))) (P : I ⥤ X.Sheaf AddCommGrpCat.{u}) [HasColimit P] (eP : ∀ i : I, P.obj i ≅ (sheafPullback (Opens.map (p i)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).obj (F i)) (hP : ∀ (i j : I) (h : i ≤ j) (U : Opens (S i)) (s : (F i).obj.obj (op U)), HEq (((eP i).inv ≫ P.map (homOfLE h) ≫ (eP j).hom).hom.app (op ((Opens.map (p i)).obj U)) (((sheafAdjunctionContinuous (Opens.map (p i)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).unit.app (F i)).hom.app (op U) s)) (((sheafAdjunctionContinuous (Opens.map (p j)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S j)) (Opens.grothendieckTopology X)).unit.app (F j)).hom.app (op ((Opens.map (f i j h)).obj U)) ((α i j h).hom.app (op U) s))) (cf : ∀ (i j : I) (h : i ≤ j), SiteCohomologyFamily (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology (S j)) (Opens.map (f i j h))) (hcf : ∀ (i j : I) (h : i ≤ j), @SiteCohomologyFamily.IsPullback _ _ _ _ (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology (S j)) (Opens.map (f i j h)) inferInstance (@Adjunction.left_adjoint_additive _ _ _ _ _ _ _ _ (sheafAdjunctionContinuous (Opens.map (f i j h)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology (S j))) (Functor.additive_of_preserves_binary_products _)) inferInstance inferInstance (cf i j h)) (cp : ∀ i : I, SiteCohomologyFamily (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X) (Opens.map (p i))) (hcp : ∀ i : I, @SiteCohomologyFamily.IsPullback _ _ _ _ (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X) (Opens.map (p i)) inferInstance (@Adjunction.left_adjoint_additive _ _ _ _ _ _ _ _ (sheafAdjunctionContinuous (Opens.map (p i)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)) (Functor.additive_of_preserves_binary_products _)) inferInstance inferInstance (cp i)) (q : ℕ) : ∃ (H : I ⥤ AddCommGrpCat.{u}) (eH : ∀ i : I, H.obj i ≅ CategoryTheory.Sheaf.H' (F i) q ⊤), (∀ (i j : I) (h : i ≤ j), (eH i).inv ≫ H.map (homOfLE h) ≫ (eH j).hom = spectralLimitCohomologyMap (f i j h) (cf i j h) (α i j h) q) ∧ ∃ (c : Cocone H) (ec : c.pt ≅ CategoryTheory.Sheaf.H' (colimit P) q ⊤), (∀ i : I, c.ι.app i ≫ ec.hom = (eH i).hom ≫ spectralLimitCohomologyMap (p i) (cp i) ((sheafAdjunctionContinuous (Opens.map (p i)) AddCommGrpCat.{u} (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).homEquiv (F i) (colimit P) ((eP i).inv ≫ colimit.ι P i)) q) ∧ IsIso (colimit.desc H c ≫ ec.hom)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

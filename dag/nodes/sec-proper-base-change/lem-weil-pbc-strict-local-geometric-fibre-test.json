@@ -36,7 +36,9 @@
   "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-cohomology-pullback",
   "lem-weil-pbc-strict-henselization-functoriality",
-  "def-pc-separably-closed"
+  "def-pc-separably-closed",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-strict-henselization-point-evaluation"
  ],
  "proof": [
   {
@@ -381,5 +383,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e210c7ebb",
+  "group": "NV",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable modules, all statement dependencies, sources, canonical maps, hypotheses, edge cases, universes, records and inherited correction. Both signatures match verbatim; both modules compile cleanly through server-only scompile.py. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalGeometricFibreTest",
+  "declaration": "AlgebraicGeometry.Etale.strictLocalGeometricFibreTest",
+  "declarations": [
+   "AlgebraicGeometry.Etale.cohomologyPullbackOver",
+   "AlgebraicGeometry.Etale.strictLocalComparisonMorphism",
+   "AlgebraicGeometry.Etale.strictLocalGeometricFibreTest"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalGeometricFibreTest.lean",
+  "statement": "theorem strictLocalGeometricFibreTest {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) (K : Type u) [Field K] [IsSepClosed K] (u : Spec (.of K) ⟶ Scheme.strictHenselizationScheme (x ≫ f)) (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : Function.Bijective (cohomologyPullbackOver (strictLocalComparisonMorphism f x u) (pullback.snd (Scheme.strictHenselizationStructuralMap (x ≫ f)) (u ≫ Scheme.strictHenselizationStructuralMap (x ≫ f))) F q) ↔ ∀ v : Spec (.of K) ⟶ Scheme.strictHenselizationScheme (x ≫ f), v ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) = u ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) → Function.Bijective (cohomologyMap (pullback.snd (Scheme.strictHenselizationMap f x) v) F q)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

@@ -24,7 +24,8 @@
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
   "def-pur-localized-ringed-site",
-  "def-weil-presheaf-modules-sheafification"
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-slice-away-localization"
  ],
  "proof": [
   {
@@ -270,5 +271,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a56d85327",
+  "group": "NO",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable nodes, dependencies, source clauses, formulas, universes, edge cases, docstrings, and verbatim signatures. Both delivered modules passed server-only compilation. No delivery faults found; no project or branch changes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SliceAwayLocalizationFreeResolution",
+  "declaration": "CategoryTheory.sliceAwayLocalization_free_resolution",
+  "file": "lean/Sheaf/CategoryTheory/SliceAwayLocalizationFreeResolution.lean",
+  "statement": "theorem sliceAwayLocalization_free_resolution {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] (O : Sheaf J CommRingCat.{u}) (U : C) (f : O.obj.obj (op U)) [HasSheafify (J.over U) AddCommGrpCat.{u}] [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{u}] : ∃ L : SliceAwayLocalization O U f, ∃ d : (SheafOfModules.free (R := (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O).over U)) (ULift.{u} ℕ)) ⟶ (SheafOfModules.free (R := (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O).over U)) (ULift.{u} ℕ)), ∃ q : (SheafOfModules.free (R := (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O).over U)) (ULift.{u} ℕ)) ⟶ (PresheafOfModules.sheafification (𝟙 (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O).over U).obj)).obj L.val, (∃ h : d ≫ q = 0, (ShortComplex.mk (C := ringedSiteModules (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O).over U)) d q h).ShortExact) ∧ (∀ (V : (Over U)ᵒᵖ) (n : ℕ) (a : O.obj.obj (op V.unop.left)), d.val.app V ((SheafOfModules.ιFree (R := (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).over U)) (ULift.up n)).val.app V a) = (SheafOfModules.ιFree (R := (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O).over U)) (ULift.up n)).val.app V a - (SheafOfModules.ιFree (R := (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O).over U)) (ULift.up (n + 1))).val.app V (O.obj.map V.unop.hom.op f * a)) ∧ (∀ (V : (Over U)ᵒᵖ) (n : ℕ) (a : O.obj.obj (op V.unop.left)), q.val.app V ((SheafOfModules.ιFree (R := (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).over U)) (ULift.up n)).val.app V a) = ((PresheafOfModules.sheafificationAdjunction (𝟙 (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).over U).obj)).unit.app L.val).app V ((L.equiv V).symm (algebraMap _ _ a * IsLocalization.Away.invSelf (O.obj.map V.unop.hom.op f) ^ n)))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

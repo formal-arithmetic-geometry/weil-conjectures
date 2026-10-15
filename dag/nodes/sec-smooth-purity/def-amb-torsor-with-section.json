@@ -1,0 +1,115 @@
+{
+ "id": "def-amb-torsor-with-section",
+ "kind": "definition",
+ "title": "Torsors with a specified section and their isomorphism classes",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a category with Grothendieck topology $J$, let $G$ be an abelian sheaf and use the $G$-torsors of [def-sc-gm-torsor]. For an object $U$, a torsor with section is a pair $(P,s)$ with $s\\in P(U)$. Two such pairs are isomorphic if a $G$-equivariant sheaf isomorphism takes one specified section to the other. This is an equivalence relation; its quotient is the type of isomorphism classes of torsors with section over $U$.",
+ "stmt_deps": [
+  "def-sc-gm-torsor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, lemma-torsors-h1, relative refinement in lem-amb-relative-torsor-cohomology; compare cohomology.tex Tags 0G71 and 0G78"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative first cohomology classifies abelian sheaf torsors with a specified section on an open subset",
+   "results": "Actual search: 8 hits; top: CategoryTheory.PresheafOfGroups.H1, CategoryTheory.PresheafOfGroups.OneCocycle.class, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous, CategoryTheory.PresheafOfGroups.OneCocycle.class_eq_iff, CategoryTheory.PresheafOfGroups.instOneH1, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous.class_eq, CategoryTheory.PresheafOfGroups.OneCochain.ext; digest 5992209789a5d50a.",
+   "date": "2026-10-15",
+   "verdict": "No match: ordinary cover Cech H1 or generic mapping-cone API, not relative derived cohomology or torsors with a specified open section."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone",
+   "results": "Actual search: 12 hits; top: CochainComplex.mappingCone.fst, CochainComplex.mappingCone.snd, CochainComplex.mappingCone.inl, CochainComplex.mappingCone, CochainComplex.mappingCone.descCochain, CochainComplex.mappingCone.liftCochain, CochainComplex.mappingCone.liftCochain_snd, CochainComplex.mappingCone.inl_descCochain; digest b96be97e44e74ba2.",
+   "date": "2026-10-15",
+   "verdict": "No match: ordinary cover Cech H1 or generic mapping-cone API, not relative derived cohomology or torsors with a specified open section."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeCohomology|torsor.*section|WithSection",
+   "results": "Actual search: 0 hits; top: ; digest 4f53cda18c2baa0c.",
+   "date": "2026-10-15",
+   "verdict": "No match: ordinary cover Cech H1 or generic mapping-cone API, not relative derived cohomology or torsors with a specified open section."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Torsor under a sheaf of abelian groups with a specified section over an object, modulo section-preserving isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative cohomology is homology of the mapping cone of restriction of injective-resolution sections shifted by minus one",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-amb-relative-torsor-cohomology",
+  "date": "2026-10-15",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Proof, first two paragraphs: the line bundle with its specified open trivialization defines a relative degree-one cohomology class, computed by an injective resolution.",
+   "via": [
+    "lem-amb-relative-torsor-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.TorsorWithSection",
+  "declaration": "CategoryTheory.Sheaf.Torsor.WithSection",
+  "declarations": [
+   "CategoryTheory.Sheaf.Torsor.WithSection",
+   "CategoryTheory.Sheaf.Torsor.WithSection.IsIsomorphic",
+   "CategoryTheory.Sheaf.Torsor.WithSection.isIsomorphic_equivalence",
+   "CategoryTheory.Sheaf.Torsor.WithSection.setoid",
+   "CategoryTheory.Sheaf.Torsor.WithSection.Classes"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/TorsorWithSection.lean",
+  "statement": "def WithSection {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} (G : Sheaf J AddCommGrpCat.{w}) (U : C)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d38829693",
+  "group": "NP",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d38829693",
+  "group": "NP",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. Replaced inline tactic proofs with existing proof terms; signatures unchanged. Checked sources, all statement dependencies, clauses, universes, edge cases and report sections. All three corrected modules compile cleanly through server-only scompile.py. Snapshot and branch unchanged."
+ }
+}

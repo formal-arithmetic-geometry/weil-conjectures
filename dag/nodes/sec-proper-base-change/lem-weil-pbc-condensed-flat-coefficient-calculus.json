@@ -32,7 +32,8 @@
   "def-weil-abstract-derived-category",
   "def-pc-scheme",
   "def-pur-sheaf-tensor-product",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-condensed-coefficient-comparisons"
  ],
  "proof": [
   {
@@ -331,5 +332,29 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-6741e6f99 (reviewer sub-agent of L); spot-checked: Read the full item, report, unit/chapter route, every cited node statement, and the exact master and Stacks sources. The mathematics and coefficient category/base-change morphism agree with the sources. One citation gap was repaired: step 1 now cites def-weil-pbc-condensed-e-module-category for the normed/topological coefficient-field structure it uses. Corrected DAG JSON is under fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-condensed-flat-coefficient-calculus.json; review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-69a7d6ef1",
+  "group": "NV",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, exact source declarations, universes, edge cases, docstrings, records, and maintainer gates. Both server-only compiles passed without warnings in 28.5 s and 34.7 s. No delivery errors found; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedFlatCoefficientCalculus",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedFiniteCoefficientCalculus",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.condensedFiniteCoefficientCalculus",
+   "AlgebraicGeometry.ProEtale.condensedAlgClCoefficientCalculus",
+   "AlgebraicGeometry.ProEtale.condensedCoefficientCoherence",
+   "AlgebraicGeometry.ProEtale.condensedCoefficientTensorColimit"
+  ],
+  "file": "lean/Sheaf/Paper/CondensedFlatCoefficientCalculus.lean",
+  "statement": "theorem condensedFiniteCoefficientCalculus (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime] {E F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)} (h : E ≤ F) : Nonempty ((Mod.comap (padicSubfieldRingObjMap T ℓ h)).obj (Mod.regular (padicSubfieldRingObj T ℓ F)) ≅ Mod.finiteFree (padicSubfieldRingObj T ℓ E) (@Module.finrank E F inferInstance inferInstance (Module.compHom F (IntermediateField.inclusion h).toRingHom))) ∧ PreservesFiniteLimits (Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)) ∧ PreservesFiniteColimits (Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)) ∧ PreservesFiniteLimits (Mod.comap (padicSubfieldRingObjMap T ℓ h) : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ F) ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ E)) ∧ PreservesFiniteColimits (Mod.comap (padicSubfieldRingObjMap T ℓ h) : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ F) ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ E)) ∧ Nonempty ((Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)) ⊣ (Mod.comap (padicSubfieldRingObjMap T ℓ h))) ∧ Nonempty (DerivedCategory.Q ⋙ (Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)).leftDerivedFunctor ≅ (Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧ Nonempty ((Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)).leftDerivedFunctor ⊣ (Mod.comap (padicSubfieldRingObjMap T ℓ h)).mapDerivedCategory) ∧ Nonempty ((Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)).leftDerivedFunctor ≅ (Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)).mapDerivedCategory) ∧ (Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)).leftDerivedFunctor.IsTriangulated ∧ (∀ n : ℤ, Nonempty (shiftFunctor (DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ E))) n ⋙ (Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)).leftDerivedFunctor ≅ (Mod.extendScalars (padicSubfieldRingObjMap T ℓ h)).leftDerivedFunctor ⋙ shiftFunctor (DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (padicSubfieldRingObj T ℓ F))) n))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

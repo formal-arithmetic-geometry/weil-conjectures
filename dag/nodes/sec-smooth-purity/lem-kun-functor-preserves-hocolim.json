@@ -197,5 +197,23 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-ed2bc8251 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All five steps check, including the shift-compatible triangle completion and its invertibility. The correction of unsupported canonical uniqueness agrees with Stacks 090Z/014B. Edge cases and duplicate candidates checked; no new nodes, cycles, missing citations, or target weakening found. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-984e8394f",
+  "group": "NS",
+  "result": "pass",
+  "note": "Reviewed immutable files, sources, all statement dependencies, exact declarations, edge cases, records and pilot gates. Signature matches verbatim; server-only compilation passed cleanly. No findings. Written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FunctorPreservesSequentialHomotopyColimit",
+  "declaration": "CategoryTheory.Functor.preserves_sequentialHomotopyColimit",
+  "file": "lean/Sheaf/CategoryTheory/FunctorPreservesSequentialHomotopyColimit.lean",
+  "statement": "theorem Functor.preserves_sequentialHomotopyColimit {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] [Preadditive C] [Preadditive D] [HasZeroObject C] [HasZeroObject D] [HasShift C ℤ] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated C] [Pretriangulated D] [CategoryTheory.IsTriangulated C] [CategoryTheory.IsTriangulated D] [HasCountableCoproducts C] [HasCountableCoproducts D] (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] [PreservesColimitsOfShape (Discrete ℕ) F] (E : ℕ → C) (u : ∀ n : ℕ, E n ⟶ E (n + 1)) (H : C) (H' : D) (p : (∐ E) ⟶ H) (q : H ⟶ (∐ E)⟦(1 : ℤ)⟧) (p' : (∐ fun n : ℕ ↦ F.obj (E n)) ⟶ H') (q' : H' ⟶ (∐ fun n : ℕ ↦ F.obj (E n))⟦(1 : ℤ)⟧) (hT : Triangle.mk (𝟙 (∐ E) - Sigma.desc (fun n : ℕ ↦ u n ≫ Sigma.ι E (n + 1))) p q ∈ distTriang C) (hT' : Triangle.mk (𝟙 (∐ fun n : ℕ ↦ F.obj (E n)) - Sigma.desc (fun n : ℕ ↦ F.map (u n) ≫ Sigma.ι (fun k : ℕ ↦ F.obj (E k)) (n + 1))) p' q' ∈ distTriang D) : IsIso (sigmaComparison F E) ∧ (∃ c : H' ⟶ F.obj H, p' ≫ c = sigmaComparison F E ≫ F.map p ∧ c ≫ F.map q ≫ (F.commShiftIso (1 : ℤ)).hom.app (∐ E) = q' ≫ (shiftFunctor D (1 : ℤ)).map (sigmaComparison F E)) ∧ (∀ c : H' ⟶ F.obj H, p' ≫ c = sigmaComparison F E ≫ F.map p → c ≫ F.map q ≫ (F.commShiftIso (1 : ℤ)).hom.app (∐ E) = q' ≫ (shiftFunctor D (1 : ℤ)).map (sigmaComparison F E) → IsIso c) ∧ IsSequentialHomotopyColimit (fun n : ℕ ↦ F.obj (E n)) (fun n : ℕ ↦ F.map (u n)) (F.obj H)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-15",
+  "existing": false
  }
 }

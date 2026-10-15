@@ -26,7 +26,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-sc-zariski-flasque",
-  "def-sp-double-complex-total"
+  "def-sp-double-complex-total",
+  "def-sc-alternating-cech-total-complex"
  ],
  "proof": [
   {
@@ -270,5 +271,24 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-6ed4af985 (reviewer sub-agent of L); spot-checked: Read the item, dependencies, report, sources and blueprint route in full. Verified finite-cover induction, both total comparisons, transpose signs, supplied-map naturality and edge cases. No duplicate or mathematical gap found. Accepted lem-sc-first-quadrant-total-column-comparison as a generic tool; target coefficient categories remain distinct. Detailed checks are in review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-21e5bd366",
+  "group": "NH",
+  "result": "pass",
+  "note": "Checked immutable files, all statement dependencies, source clauses, exact declarations, edge cases, report sections and pilot gates. Signature matches verbatim; server-only compile reproduced cleanly. No delivery errors found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteOrderedFlasqueCechComparison",
+  "declaration": "AlgebraicGeometry.finiteOrderedFlasqueCechComparison",
+  "file": "lean/Sheaf/Paper/FiniteOrderedFlasqueCechComparison.lean",
+  "statement": "theorem finiteOrderedFlasqueCechComparison (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (e : (HomologicalComplex.single (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ) 0).obj F ⟶ G) [QuasiIso e] [G.IsStrictlyGE 0] (hfl : ∀ q : ℕ, TopCat.Sheaf.IsFlasque ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (G.X (q : ℤ)))) (r : ℕ) (V : Fin r → X.Opens) (hcover : iSup V = ⊤) (hsections : ∀ (p : ℕ) (t : Fin (p + 1) ↪o Fin r), QuasiIso (((SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙ PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op (alternatingCechIntersection V t))).mapHomologicalComplex (.up ℤ)).map e)) : QuasiIso (alternatingCechAugmentationMap V G) ∧ ∃ β : (alternatingCechModuleFunctor V).obj F ⟶ (alternatingCechTotalFunctor V).obj G, (∀ n : ℤ, β.f n = ((alternatingCechModuleFunctor V).map (e.f 0)).f n ≫ ((alternatingCechDoubleFunctor V).obj G).ιTotal (.up ℤ) n 0 n (Int.add_zero n)) ∧ QuasiIso β ∧ (RingedSpace.globalSectionsFunctor X.toRingedSpace).map (e.f 0) ≫ (alternatingCechAugmentationMap V G).f 0 = alternatingCechZero V F ≫ β.f 0 ∧ ∀ (Y : Scheme.{u}) (h : Y ⟶ X) (F' : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (G' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (e' : (HomologicalComplex.single (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ) 0).obj F' ⟶ G') [QuasiIso e'] [G'.IsStrictlyGE 0] (u : F ⟶ ((Scheme.Modules.pushforward h).obj F')) (v : G ⟶ (((Scheme.Modules.pushforward h).mapHomologicalComplex (.up ℤ)).obj G')), e.f 0 ≫ v.f 0 = u ≫ (Scheme.Modules.pushforward h).map (e'.f 0) → ∃ β' : (alternatingCechModuleFunctor V).obj ((Scheme.Modules.pushforward h).obj F') ⟶ (alternatingCechTotalFunctor V).obj (((Scheme.Modules.pushforward h).mapHomologicalComplex (.up ℤ)).obj G'), (∀ n : ℤ, β'.f n = ((alternatingCechModuleFunctor V).map ((Scheme.Modules.pushforward h).map (e'.f 0))).f n ≫ ((alternatingCechDoubleFunctor V).obj (((Scheme.Modules.pushforward h).mapHomologicalComplex (.up ℤ)).obj G')).ιTotal (.up ℤ) n 0 n (Int.add_zero n)) ∧ β ≫ (alternatingCechTotalFunctor V).map v = (alternatingCechModuleFunctor V).map u ≫ β' ∧ ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex (.up ℤ)).map v ≫ alternatingCechAugmentationMap V (((Scheme.Modules.pushforward h).mapHomologicalComplex (.up ℤ)).obj G') = alternatingCechAugmentationMap V G ≫ (alternatingCechTotalFunctor V).map v",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Uses the already landed ordered-tuple totalization of def-sc-alternating-cech-total-complex. Naturality is expressed on X with pushforward coefficients: sections and restrictions there are exactly those on the inverse-image indexed cover on Y, with global scalars restricted. Beta is existential with every component specified, rather than choosing any data from an unproved existence theorem."
  }
 }

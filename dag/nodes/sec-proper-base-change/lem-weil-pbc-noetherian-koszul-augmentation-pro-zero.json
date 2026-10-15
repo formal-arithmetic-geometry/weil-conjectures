@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-koszul-complex"
  ],
  "proof": [
   {
@@ -208,5 +209,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-695ea87f9",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, dependencies, sources, edge cases, universes, docstrings, and verbatim signature. Server-only compilation reproduced cleanly in 1.4 seconds. No delivery errors or fixes; branch and snapshot unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NoetherianKoszulAugmentationProZero",
+  "declaration": "ExteriorAlgebra.noetherian_koszul_augmentation_pro_zero",
+  "file": "lean/Sheaf/RingTheory/NoetherianKoszulAugmentationProZero.lean",
+  "statement": "theorem noetherian_koszul_augmentation_pro_zero (A : Type u) [CommRing A] [IsNoetherianRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)] (r : ℕ) (a : Fin r → A) : ∃ (ε : ∀ m : ℕ, koszulComplex A r (fun i ↦ a i ^ (m + 1)) ⟶ (ChainComplex.single₀ (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (m + 1)))) (t : ∀ m k : ℕ, m ≤ k → (koszulComplex A r (fun i ↦ a i ^ (k + 1)) ⟶ koszulComplex A r (fun i ↦ a i ^ (m + 1)))) (q : ∀ m k : ℕ, m ≤ k → ((ChainComplex.single₀ (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (k + 1))) ⟶ (ChainComplex.single₀ (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (m + 1))))), (∀ m, (ε m).f 0 = ModuleCat.ofHom (((Ideal.span (Set.range a)) ^ (m + 1)).mkQ.comp (_root_.exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap)) ∧ (∀ m k h n, (t m k h).f n = ModuleCat.ofHom (_root_.exteriorPower.map n (Finsupp.linearCombination A (fun i ↦ Finsupp.single i (a i ^ (k - m)))))) ∧ (∀ m k h, ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (k + 1)).mkQ ≫ (q m k h).f 0 = ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (m + 1)).mkQ) ∧ ∃ hc : ∀ m k h, HomologicalComplex.extendMap (t m k h) ComplexShape.embeddingDownNat ≫ HomologicalComplex.extendMap (ε m) ComplexShape.embeddingDownNat = HomologicalComplex.extendMap (ε k) ComplexShape.embeddingDownNat ≫ HomologicalComplex.extendMap (q m k h) ComplexShape.embeddingDownNat, ∀ m : ℕ, ∃ (k : ℕ) (h : m ≤ k), DerivedCategory.Q.map (HomologicalComplex.homotopyCofiber.mapArrowHom (HomologicalComplex.extendMap (ε k) ComplexShape.embeddingDownNat) (HomologicalComplex.extendMap (ε m) ComplexShape.embeddingDownNat) (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩) (Arrow.homMk (HomologicalComplex.extendMap (t m k h) ComplexShape.embeddingDownNat) (HomologicalComplex.extendMap (q m k h) ComplexShape.embeddingDownNat) (hc m k h))) = 0",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Uses the existing exterior Koszul model and extends its chain grading to negative cochain degrees. Exponent m+1 indexes all positive levels. Existential chain maps are uniquely specified by their components, with the strict square proof included so the cone transition is the induced strict map, not a chosen triangulated filler."
  }
 }

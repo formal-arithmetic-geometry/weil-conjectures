@@ -1,0 +1,127 @@
+{
+ "id": "def-weil-pbc-ringed-section-localization",
+ "kind": "definition",
+ "title": "RingedSectionLocalization",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small category with Grothendieck topology $J$, and let $\\mathcal O$ be a sheaf of commutative rings. Use its category of module sheaves [def-weil-sheaf-of-modules-category]. For a global section $s$ define $\\mathcal O[1/s]$ to be the module sheafification [def-weil-presheaf-modules-sheafification] of the actual presheaf $V\\mapsto\\mathcal O(V)[1/s|_V]$, with restriction maps given by localization lifts. Its canonical map from $\\mathcal O$ is the sheafified algebra map. For $f\\in\\mathcal O(U)$, restrict $f$ to a global section on the slice [def-pur-localized-ringed-site] and apply this same construction on the slice to define $\\mathcal O_U[1/f]$.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0996 and 099E"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafified sectionwise localization on ringed sites, ideal sheaf local finite generators, extended Cech localization complex, derived restriction, internal Hom completion unit and locally derived complete objects",
+   "results": "UNAVAILABLE 0 hit(s): service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified sectionwise localization on ringed sites, ideal sheaf local finite generators, extended Cech localization complex, derived restriction, internal Hom completion unit and locally derived complete objects",
+   "results": "CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW; PresheafOfModules.instIsLocallyInjectiveToSheafify; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; PresheafOfModules.toPresheaf_map_toSheafify; PresheafOfModules.sheafifyHomEquiv'; PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective; PresheafOfModules.sheafificationCompToSheaf; PresheafOfModules.sheafification",
+   "date": "2026-10-15",
+   "verdict": "General sheafification is reused, but none supplies the indicated localization, finite generation, augmented Cech, completion-unit or local-completeness constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, localization",
+   "results": "OK 0 hit(s) | loogle: unknown identifier 'localization'",
+   "date": "2026-10-15",
+   "verdict": "No matching declaration found; source grep and LeanFinder also checked."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedSectionLocalization|IsRingedIdealGeneratingList|ringedExtendedCech|ringedDerivedRestriction|ringedCechCompletionUnit|IsLocallyDerivedRingedIdealComplete|HasLocalExtendedCechDescription",
+   "results": "msearch Mathlib: OK 0 hit(s); rg of slopmaster2 WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json: no hits. blueprint_refs.py search \"extended Cech\": 0 blueprint nodes. Existing DAG prose contains related statement nodes but no definition of these notions.",
+   "date": "2026-10-15",
+   "verdict": "No duplicate definition. Existing module sheaves, localization rings, sheafification, tensor complex and internal Hom are imported and reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sectionwise localization module sheaf on a ringed site at a section",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.tildeInType\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → ModuleCat R → TopCat.Sheaf (Type u) (AlgebraicGeometry.PrimeSpectrum.Top R)\", \"doc\": \"The sheaf on the prime spectrum $\\\\operatorname{Spec}(R)$ with values in the category of types, constructed by applying the sheafification process to the local predicate that sections are locally expre\"}\n  {\"name\": \"ModuleCat.Tilde.const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      ↑M →\\n        (r : R) →\\n          (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) →\\n            (∀ x ∈ U, r ∈ x.asIdeal.primeCompl) → ↑(M.tildeInModuleCat.obj (Opposite.op U))\", \"doc\": \"Given an $R$-module $M$, an element $m \\\\in M$, an element $r \\\\in R$, and an open subset $U \\\\subseteq \\\\operatorname{Spec}(R)$ such that $r$ lies in the complement of every prime ideal corresponding to \"}\n  {\"name\": \"ModuleCat.Tilde.toOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) →\\n        ModuleCat.of R ↑M ⟶ M.tildeInModuleCat.obj (Opposite.op U)\", \"doc\": \"For an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the restriction map from the module $ M $ localized at $ U $ to the sections of the sheaf $ \\\\widetilde{M} $ over\"}\n  {\"name\": \"ModuleCat.Tilde.Localizations\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → ModuleCat R → ↑(AlgebraicGeometry.PrimeSpectrum.Top R) → Type u\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, this constructs the localization of the module $M$ with respect to the multiplicative set $\\\\m\"}\n  {\"name\": \"TopCat.Presheaf.instIsLocalizationCarrierObjOppositeOpensCarrierCommRingCatObjLocalizationPresheaf\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} {F : TopCat.Presheaf CommRingCat X} (G : F.SubmonoidPresheaf) (U : (TopologicalSpace.Opens ↑X)ᵒᵖ),\\n  IsLocalization (G.obj U) ↑(G.localizationPresheaf.obj U)\", \"doc\": \"For any open set $ U $ in a topological space $ X $, the localization of the submonoid $ \\\\mathcal{G}(U) $ in the ring $ \\\\mathcal{F}(U) $ satisfies the universal property of localization, where $ \\\\math\"}\n  {\"name\": \"ModuleCat.Tilde.openToLocalization\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      (U : TopologicalSpace.Opens (PrimeSpectrum R)) →\\n        (x : PrimeSpectrum R) →\\n          x ∈ U → (M.tildeInModuleCat.obj (Opposite.op U) ⟶ ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl ↑M))\", \"doc\": \"Given an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ containing a prime ideal $ \\\\mathfrak{p} $, this morphism maps sections of the sheaf $ \\\\widetilde{M} $ over $ U $ to the loca\"}\n  {\"name\": \"ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      (U : (TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))ᵒᵖ) →\\n        (x : ↥(Opposite.unop U)) →\\n          Module (↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj U)) (ModuleCat.Tilde.Localizations M ↑x)\", \"doc\": \"For any open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, and for any point $ x \\\\in U $ corresponding to a prime ideal $ \\\\mathfrak{p} $, the localization $ M\"}\n  {\"name\": \"ModuleCat.Tilde.isLocallyFraction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → (M : ModuleCat R) → TopCat.LocalPredicate (ModuleCat.Tilde.Localizations M)\", \"doc\": \"The local predicate on localized module sections over $\\\\operatorname{Spec}(R)$ obtained by sheafifying the prelocal predicate that a section is locally expressible as a fraction $m/s$ with $m \\\\in M$ a\"}",
+   "date": "2026-10-15",
+   "verdict": "The hits are tilde modules and affine-scheme localization presheaves; none defines localization on an arbitrary ringed site. Actual ring localization and sheafification are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-extended-cech-completion-model",
+  "date": "2026-10-15",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, final Stacks comparison: constant/completed coefficient equivalence, via the global augmented extended Čech construction and the completion unit used in the proof of 099I.",
+   "via": [
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSectionLocalization",
+  "declaration": "CategoryTheory.ringedSectionLocalization",
+  "declarations": [
+   "CategoryTheory.ringedSectionLocalizationCarrier",
+   "CategoryTheory.ringedSectionLocalization_isUnit",
+   "CategoryTheory.ringedSectionLocalizationMap",
+   "CategoryTheory.ringedSectionLocalizationMap_smul",
+   "CategoryTheory.ringedSectionLocalizationLinearMap",
+   "CategoryTheory.ringedSectionLocalizationLinearMap_id",
+   "CategoryTheory.ringedSectionLocalizationLinearMap_comp",
+   "CategoryTheory.ringedSectionLocalizationPresheaf",
+   "CategoryTheory.ringedSectionLocalization",
+   "CategoryTheory.ringedSectionLocalizationPresheaf_one_natural",
+   "CategoryTheory.ringedSectionLocalizationUnit",
+   "CategoryTheory.ringedSliceSection_natural",
+   "CategoryTheory.ringedSliceSection"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedSectionLocalization.lean",
+  "statement": "def ringedSectionLocalization (s : (O.obj ⋙ forget CommRingCat).sections) : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dae1d157f",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dae1d157f",
+  "group": "NE",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source correspondence, all dependencies and eight Lean modules, canonical constructions, edge cases, universes, records and docstrings. Immutable files match the commit; server-only compilation passed. No delivery errors found."
+ }
+}

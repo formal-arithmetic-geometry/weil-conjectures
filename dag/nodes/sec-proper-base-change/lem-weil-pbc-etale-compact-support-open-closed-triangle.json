@@ -281,5 +281,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0190dff39",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all ten dependencies, exact declarations, source, edge cases, docstrings, signature equality, and report sections. Server-only compilation passed cleanly. No repairs needed. Context clone advanced externally; this review used the immutable delivery and changed no branch."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportOpenClosedTriangle",
+  "declaration": "AlgebraicGeometry.Etale.exists_compactSupport_openClosed_triangle",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportOpenClosedTriangle.lean",
+  "statement": "theorem exists_compactSupport_openClosed_triangle (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U Z X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ X) [IsClosedImmersion i] (hij : Set.range i.base = (Set.range j.base)ᶜ) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (c_f : Compactification f) (c_g : Compactification (j ≫ f)) (c_h : Compactification (i ≫ f)) : ∃ T : Triangle (DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))), Nonempty (T.obj₁ ≅ ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c_g).obj (((upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus).obj K)).obj) ∧ Nonempty (T.obj₂ ≅ ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c_f).obj K).obj) ∧ Nonempty (T.obj₃ ≅ ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c_h).obj (((upperStar (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus).obj K)).obj) ∧ T ∈ distTriang _ ∧ ∀ q : ℤ, ∃ (z₂ : (DerivedCategory.homologyFunctor _ q).map T.mor₁ ≫ (DerivedCategory.homologyFunctor _ q).map T.mor₂ = 0) (z₃ : (DerivedCategory.homologyFunctor _ q).map T.mor₂ ≫ DerivedCategory.HomologySequence.δ T q (q + 1) = 0) (z₁ : DerivedCategory.HomologySequence.δ T q (q + 1) ≫ (DerivedCategory.homologyFunctor _ (q + 1)).map T.mor₁ = 0), (ShortComplex.mk _ _ z₂).Exact ∧ (ShortComplex.mk _ _ z₃).Exact ∧ (ShortComplex.mk _ _ z₁).Exact",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
