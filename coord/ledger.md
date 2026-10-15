@@ -15090,3 +15090,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: batch 20261015T161926 dependency take-out
 - 16:30 L: returned deliver/C3/Sheaf.AlgebraicGeometry.FiniteRangeComparison (reviewer RETURN: (reviewer X-d177f, head d177fd279) F/G1: In dag/nodes/sec-smooth-base-change/sbc-lem-finite-range-comparison.json, line )
 - 16:32 L: merged deliver/C4/Sheaf.CategoryTheory.TruncationCoupleExact (stage 3; reviewer PASS; after a return; landing 20261015T163234-L-339032 (proof); batch 20261015T163233; modules 1; new nodes 0)
+- 16:35 L: returned deliver/E4/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility (reviewer RETURN: (the landing tools, head b4d103aa6) the delivery did not land: refused by tools/import_prune_check.py for lean/WeilConje)
