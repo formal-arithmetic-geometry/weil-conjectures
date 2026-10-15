@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.CategoryTheory.DeltaFunctor
+public import WeilConjectures.CategoryTheory.DeltaFunctor
 import Sheaf.CategoryTheory.EffaceableDeltaFunctorSuccessor
 
 /-!

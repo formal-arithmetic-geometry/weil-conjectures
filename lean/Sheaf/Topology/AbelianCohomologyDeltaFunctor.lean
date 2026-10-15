@@ -8,7 +8,7 @@ module
 public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
-public import Sheaf.CategoryTheory.DeltaFunctor
+public import WeilConjectures.CategoryTheory.DeltaFunctor
 
 /-!
 # The canonical delta-functor of topological abelian sheaf cohomology

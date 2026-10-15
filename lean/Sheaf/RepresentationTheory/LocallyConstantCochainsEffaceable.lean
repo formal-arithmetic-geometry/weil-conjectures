@@ -8,7 +8,7 @@ public import Sheaf.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Category.Grp.Abelian
-public import Sheaf.CategoryTheory.DeltaFunctor
+public import WeilConjectures.CategoryTheory.DeltaFunctor
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
 public import Mathlib.Topology.Connected.TotallyDisconnected

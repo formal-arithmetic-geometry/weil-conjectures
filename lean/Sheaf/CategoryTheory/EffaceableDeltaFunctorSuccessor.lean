@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.CategoryTheory.DeltaFunctor
+public import WeilConjectures.CategoryTheory.DeltaFunctor
 import Sheaf.CategoryTheory.EffacingSequenceComparison
 import Sheaf.CategoryTheory.EffacingSequencePushout
 

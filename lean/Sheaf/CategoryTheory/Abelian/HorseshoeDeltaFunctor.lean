@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Homology.HomologySequence
-public import Sheaf.CategoryTheory.DeltaFunctor
+public import WeilConjectures.CategoryTheory.DeltaFunctor
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived

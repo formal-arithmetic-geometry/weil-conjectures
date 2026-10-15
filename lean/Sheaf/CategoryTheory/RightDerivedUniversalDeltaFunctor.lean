@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-public import Sheaf.CategoryTheory.DeltaFunctor
+public import WeilConjectures.CategoryTheory.DeltaFunctor
 import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 

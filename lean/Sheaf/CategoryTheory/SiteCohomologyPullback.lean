@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Sheaf.CategoryTheory.SitePullbackAbelianExact
 public import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 public import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-public import Sheaf.CategoryTheory.DeltaFunctor
+public import WeilConjectures.CategoryTheory.DeltaFunctor
 public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 public import Sheaf.CategoryTheory.SiteMorphismComposition
 

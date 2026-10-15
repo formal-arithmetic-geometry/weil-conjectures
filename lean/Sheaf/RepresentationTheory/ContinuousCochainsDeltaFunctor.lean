@@ -6,7 +6,7 @@ Authors: SHEAF worker E2
 module
 
 public import Sheaf.CategoryTheory.DiscreteModulesAbelian
-public import Sheaf.CategoryTheory.DeltaFunctor
+public import WeilConjectures.CategoryTheory.DeltaFunctor
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
