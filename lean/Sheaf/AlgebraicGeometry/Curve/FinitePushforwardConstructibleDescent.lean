@@ -36,21 +36,21 @@ Source: Stacks Project, Proposition 09BH (2)
 
 Proof: make the middle term a curve coefficient pair on the same curve. Apply
 `constructible_sub_quotient` to the given short exact sequence and take its quotient clause. -/
-theorem CurveCoefficientPair.constructible_of_short_exact
-    {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
+theorem CurveCoefficientPairSheaf.constructible_of_short_exact
+    {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPairSheaf k)
     (Fmid K : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hK : P.C.IsTorsionAbelianSheaf K)
     (hmidT : P.C.IsTorsionAbelianSheaf Fmid)
-    (hmid : CurveCoefficientPair.IsConstructible
+    (hmid : CurveCoefficientPairSheaf.IsConstructible
       ({ C := P.C, toSpec := P.toSpec, isCurve := P.isCurve, F := Fmid,
-         isTorsion := hmidT } : CurveCoefficientPair k))
+         isTorsion := hmidT } : CurveCoefficientPairSheaf k))
     (alpha : K ⟶ Fmid) (beta : Fmid ⟶ P.F) (w : alpha ≫ beta = 0)
     (hshort : (ShortComplex.mk alpha beta w).ShortExact) :
     P.IsConstructible := by
-  let Q : CurveCoefficientPair k :=
+  let Q : CurveCoefficientPairSheaf k :=
     { C := P.C, toSpec := P.toSpec, isCurve := P.isCurve, F := Fmid,
       isTorsion := hmidT }
-  exact (CurveCoefficientPair.constructible_sub_quotient Q K P.F hK P.isTorsion
+  exact (CurveCoefficientPairSheaf.constructible_sub_quotient Q K P.F hK P.isTorsion
     alpha beta w hshort hmid).2
 
 -- Keep the inherited compatibility binder; the counit construction does not need it.
@@ -77,21 +77,21 @@ Proof:
    injectivity. The torsion characterization makes K a torsion sheaf.
 5. The kernel inclusion and beta form the canonical exact kernel sequence. Its first
    arrow is mono and its second arrow is epi by step 3, hence it is short exact. -/
-theorem CurveCoefficientPair.finite_pushforward_data
-    {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
+theorem CurveCoefficientPairSheaf.finite_pushforward_data
+    {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPairSheaf k)
     {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g]
     (f : P.C ⟶ Y) [IsFinite f] (hf : f ≫ g = P.toSpec)
     (hT : Y.IsTorsionAbelianSheaf (Etale.lowerStar AddCommGrpCat.{u + 1} f |>.obj P.F))
-    (hC : CurveCoefficientPair.IsConstructible
+    (hC : CurveCoefficientPairSheaf.IsConstructible
       ({ C := Y, toSpec := g, isCurve := inferInstance,
          F := (Etale.lowerStar AddCommGrpCat.{u + 1} f).obj P.F, isTorsion := hT }
-        : CurveCoefficientPair k)) :
+        : CurveCoefficientPairSheaf k)) :
     ∃ (Fmid K : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})
       (hmidT : P.C.IsTorsionAbelianSheaf Fmid)
       (_hK : P.C.IsTorsionAbelianSheaf K)
-      (_hmid : CurveCoefficientPair.IsConstructible
+      (_hmid : CurveCoefficientPairSheaf.IsConstructible
         ({ C := P.C, toSpec := P.toSpec, isCurve := P.isCurve, F := Fmid,
-           isTorsion := hmidT } : CurveCoefficientPair k))
+           isTorsion := hmidT } : CurveCoefficientPairSheaf k))
       (alpha : K ⟶ Fmid) (beta : Fmid ⟶ P.F) (w : alpha ≫ beta = 0),
       (ShortComplex.mk alpha beta w).ShortExact := by
   classical
@@ -103,9 +103,9 @@ theorem CurveCoefficientPair.finite_pushforward_data
     (Scheme.isTorsionAbelianSheaf_characterizations Fmid).1.mpr
       (Etale.isTorsion_upperStar f
         ((Scheme.isTorsionAbelianSheaf_characterizations G).1.mp hT))
-  have hmid : CurveCoefficientPair.IsConstructible
+  have hmid : CurveCoefficientPairSheaf.IsConstructible
       ({ C := P.C, toSpec := P.toSpec, isCurve := P.isCurve, F := Fmid,
-         isTorsion := hmidT } : CurveCoefficientPair k) :=
+         isTorsion := hmidT } : CurveCoefficientPairSheaf k) :=
     Scheme.isConstructibleEtaleSheafOfSets_upperStar f G hC
   have hstalk (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ P.C) :
       Epi ((Scheme.pointSmallEtale s).sheafFiber.map beta) := by
@@ -159,22 +159,22 @@ forming the converse of Tag 095R
 Proof: obtain the torsion constructible inverse-image middle term and the kernel short
 exact sequence from `finite_pushforward_data`. Apply `constructible_of_short_exact`,
 which uses the quotient clause of `constructible_sub_quotient` (09BH (2)). -/
-theorem CurveCoefficientPair.isConstructible_of_finite_pushforward
-    {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
+theorem CurveCoefficientPairSheaf.isConstructible_of_finite_pushforward
+    {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPairSheaf k)
     {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g]
     (f : P.C ⟶ Y) [IsFinite f] (hf : f ≫ g = P.toSpec)
     (hT : Y.IsTorsionAbelianSheaf (Etale.lowerStar AddCommGrpCat.{u + 1} f |>.obj P.F)) :
-    (CurveCoefficientPair.IsConstructible
+    (CurveCoefficientPairSheaf.IsConstructible
       ({ C := Y
          toSpec := g
          isCurve := inferInstance
          F := (Etale.lowerStar AddCommGrpCat.{u + 1} f).obj P.F
-         isTorsion := hT } : CurveCoefficientPair k)) →
+         isTorsion := hT } : CurveCoefficientPairSheaf k)) →
       P.IsConstructible := by
   intro hC
   obtain ⟨Fmid, K, hmidT, hK, hmid, alpha, beta, hw, hshort⟩ :=
-    CurveCoefficientPair.finite_pushforward_data P g f hf hT hC
-  exact CurveCoefficientPair.constructible_of_short_exact P Fmid K hK hmidT hmid
+    CurveCoefficientPairSheaf.finite_pushforward_data P g f hf hT hC
+  exact CurveCoefficientPairSheaf.constructible_of_short_exact P Fmid K hK hmidT hmid
     alpha beta hw hshort
 
 end AlgebraicGeometry

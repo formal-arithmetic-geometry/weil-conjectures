@@ -47,7 +47,7 @@ injectives. It identifies cohomology on the source with cohomology of its direct
 The coefficient equivalence followed by forgetting has the original abelian sheaf as its
 underlying sheaf, so the same comparison applies to the sheaves in the curve assertions. -/
 theorem IsCurve.finite_pushforward_cohomology_comparison {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k) {Y : Scheme.{u}}
+    (P : CurveCoefficientPairSheaf k) {Y : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f]
     (_hf : f ≫ g = P.toSpec) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙

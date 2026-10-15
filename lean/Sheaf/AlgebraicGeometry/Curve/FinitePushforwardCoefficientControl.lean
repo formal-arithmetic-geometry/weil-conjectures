@@ -97,7 +97,7 @@ Proof:
    stratification to recover the module predicate. The equivalence adds no module data
    beyond the canonical Z action and preserves the underlying additive stalks. -/
 theorem IsCurve.finite_pushforward_coefficient_control {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k) {Y : Scheme.{u}}
+    (P : CurveCoefficientPairSheaf k) {Y : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f]
     (hf : f ≫ g = P.toSpec) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
@@ -184,7 +184,7 @@ theorem IsCurve.finite_pushforward_coefficient_control {k : Type u} [Field k] [I
       exact (Scheme.isTorsionAbelianSheaf_characterizations P.F).2.mp
         P.isTorsion Ω t.1 (φ x t)
     have hC := (Scheme.isConstructibleSheaf_integral_iff G hT).mp h
-    have hP := CurveCoefficientPair.isConstructible_of_finite_pushforward P g f hf hT hC
+    have hP := CurveCoefficientPairSheaf.isConstructible_of_finite_pushforward P g f hf hT hC
     exact (Scheme.isConstructibleSheaf_integral_iff P.F P.isTorsion).mpr hP
   · intro h
     change Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k))

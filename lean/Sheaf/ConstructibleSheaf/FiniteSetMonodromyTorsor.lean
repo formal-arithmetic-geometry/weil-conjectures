@@ -50,7 +50,7 @@ theorem exists_connected_torsor_constant_set_pullback
       (c : GaloisCover (ULift.{u + 1} Q) U) (_ : ConnectedSpace c.P),
       ((etaleSetPullback c.π).obj F).IsConstant c.P.smallEtaleTopology := by
   classical
-  obtain ⟨Φ, ⟨α⟩, -, -⟩ := exists_finiteEtale_flc_equivalence U
+  obtain ⟨Φ, ⟨α⟩, -, -⟩ := exists_finiteEtale_flc_equivalence_sheaf U
   let P := Φ.inverse.obj ⟨F, hF⟩
   let e : U.smallEtaleTopology.uliftYoneda.{u + 1}.obj P.obj ≅ F :=
     (α.app P).symm ≪≫ (ObjectProperty.ι _).mapIso (Φ.counitIso.app ⟨F, hF⟩)

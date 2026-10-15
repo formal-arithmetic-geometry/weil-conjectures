@@ -94,7 +94,7 @@ abelian stalks as P.F, and constructibility as a set sheaf makes these finite.
 Consequently H^0(Q) is finite, and the zero groups in positive degrees are finite.
 When Z is empty, its direct image is zero and the same conclusion holds. -/
 theorem dense_open_integral_boundary_finiteness {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k) (hP : P.IsConstructible)
+    (P : CurveCoefficientPairSheaf k) (hP : P.IsConstructible)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
       ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom

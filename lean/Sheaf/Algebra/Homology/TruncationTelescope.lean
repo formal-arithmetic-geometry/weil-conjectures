@@ -109,11 +109,11 @@ theorem quasiIso_hocolim_truncLE_and_filtered_colimit
     fun n ↦ D.map (homOfLE (Nat.le_succ n))
   have ht (n : ℕ) : t n ≫ K.ιTruncLE ((n + 1 : ℕ) : ℤ) =
       K.ιTruncLE (n : ℤ) := by simp [t, D]
-  have hs : telescopeShift R D =
+  have hs : telescopeShiftColimit R D =
       𝟙 (∐ E) - Sigma.desc (fun n ↦ t n ≫ Sigma.ι E (n + 1)) := by
     apply Sigma.hom_ext
     intro n
-    simp [telescopeShift, E, t, D, Preadditive.comp_sub]
+    simp [telescopeShiftColimit, E, t, D, Preadditive.comp_sub]
   obtain ⟨g, hg, hz, hq⟩ := quasiIso_telescopeColimit R D
   have hq' : QuasiIso (g ≫ e.hom) := by
     let _ := hq

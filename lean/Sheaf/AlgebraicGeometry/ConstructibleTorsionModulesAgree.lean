@@ -192,7 +192,7 @@ theorem constructible_torsion_modules_agree
     let U := sheafCompose C.smallEtaleTopology
       (forget₂ (ModuleCat.{v + 1} R) AddCommGrpCat.{v + 1})
     ∃ hT : C.IsTorsionAbelianSheaf F,
-      let P : CurveCoefficientPair k := ⟨C, f, inferInstance, F, hT⟩
+      let P : CurveCoefficientPairSheaf k := ⟨C, f, inferInstance, F, hT⟩
       ∃ (M : Sheaf C.smallEtaleTopology (ModuleCat.{v + 1} R)) (e : U.obj M ≅ F),
         (∀ (N : Sheaf C.smallEtaleTopology (ModuleCat.{v + 1} R)) (eN : U.obj N ≅ F),
           ∃! a : M ≅ N, U.mapIso a ≪≫ eN = e) ∧

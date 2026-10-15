@@ -10,7 +10,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 @[expose] public section
 universe u
 open CategoryTheory
-namespace AlgebraicGeometry.CurveCoefficientPair
+namespace AlgebraicGeometry.CurveCoefficientPairSheaf
 
 /-- A constructible torsion sheaf on a curve is killed by a positive integer.
 Source: Stacks Project, Definition 03RW and Lemma 095E; the finite-bound
@@ -27,7 +27,7 @@ The geometric cardinality bound is the remaining named theorem; the finite-group
 argument and the passage back to sheaf morphisms are proved here.
 (blueprint: lem-weil-pbc-curve-constructible-annihilator) -/
 theorem exists_annihilator_of_constructible {k : Type u} [Field k] [IsAlgClosed k]
-    (P : AlgebraicGeometry.CurveCoefficientPair k) (hF : P.IsConstructible) :
+    (P : AlgebraicGeometry.CurveCoefficientPairSheaf k) (hF : P.IsConstructible) :
     ∃ n : ℕ, 0 < n ∧ n • 𝟙 P.F = 0 := by
   have : IsCurve P.toSpec := P.isCurve
   have : CompactSpace P.C := QuasiCompact.compactSpace_of_compactSpace P.toSpec
@@ -47,4 +47,4 @@ theorem exists_annihilator_of_constructible {k : Type u} [Field k] [IsAlgClosed 
   change N.factorial • a = 0
   rw [hm, mul_nsmul, card_nsmul_eq_zero', nsmul_zero]
 
-end AlgebraicGeometry.CurveCoefficientPair
+end AlgebraicGeometry.CurveCoefficientPairSheaf

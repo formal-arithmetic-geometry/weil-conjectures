@@ -50,7 +50,7 @@ sheaf separatedness. Since ℓ is prime and does not divide d, the scalar d is n
 invertible in ℤ/ℓℤ and in its universe lift. Multiply the trace by its inverse to obtain r.
 Coefficient-linearity gives unit ≫ r = d⁻¹d times the identity, which is the identity.
 This construction applies also to the zero sheaf and to the degree-one cover. -/
-theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction
+theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction_sheaf
     {U V : Scheme.{u}} [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
     [IsFiniteLocallyConstantSheaf G] (v : V ⟶ U) [IsFinite v] [Etale v]

@@ -87,12 +87,12 @@ then injectivity of the section on source cohomology.
 invertible order to H in C6. Apply the surjectivity argument to the open immersion
 in degree two for C8. These are the eight fields of Assertions. -/
 theorem IsCurve.assertions_of_isIso_comp {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k)
+    (P : CurveCoefficientPairSheaf k)
     (H : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hH : P.C.IsTorsionAbelianSheaf H) (a : P.F ⟶ H) (b : H ⟶ P.F)
     [IsIso (a ≫ b)]
     (hconstructible : P.IsConstructible →
-      (⟨P.C, P.toSpec, P.isCurve, H, hH⟩ : CurveCoefficientPair k).IsConstructible) :
+      (⟨P.C, P.toSpec, P.isCurve, H, hH⟩ : CurveCoefficientPairSheaf k).IsConstructible) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
       ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom
     let G' := (sheafCompose P.C.smallEtaleTopology E).obj P.F

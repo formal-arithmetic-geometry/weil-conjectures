@@ -38,7 +38,7 @@ noncomputable def lowerStarRestrictScalarsIso :
 
 /-- Inverse image commutes with restriction of scalars: both composites are left
 adjoint to the same sectionwise composite of direct image and coextension of scalars. -/
-noncomputable def upperStarRestrictScalarsIso :
+noncomputable def upperStarRestrictScalarsIsoSheaf :
     Sheaf.restrictScalars W.smallEtaleTopology φ ⋙ (f)^*[ModuleCat.{u + 1} Λ] ≅
       (f)^*[ModuleCat.{u + 1} Λ'] ⋙ Sheaf.restrictScalars Z.smallEtaleTopology φ :=
   Adjunction.leftAdjointUniq
@@ -54,7 +54,7 @@ noncomputable def derivedUpperStarRestrictScalarsIso :
       D+((f)^*[ModuleCat.{u + 1} Λ']) ⋙
         (Sheaf.restrictScalars Z.smallEtaleTopology φ).mapDerivedCategoryPlus :=
   (Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryPlusNatIso (upperStarRestrictScalarsIso φ f) ≪≫
+    Functor.mapDerivedCategoryPlusNatIso (upperStarRestrictScalarsIsoSheaf φ f) ≪≫
     Functor.mapDerivedCategoryPlusCompIso _ _
 
 /-- The canonical derived direct-image coefficient comparison, defined by the

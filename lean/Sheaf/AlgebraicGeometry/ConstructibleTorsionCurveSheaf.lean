@@ -22,7 +22,7 @@ universe u
 
 open CategoryTheory
 
-namespace AlgebraicGeometry.CurveCoefficientPair
+namespace AlgebraicGeometry.CurveCoefficientPairSheaf
 
 /-- The torsion abelian sheaf of a curve coefficient pair is constructible if its underlying
 sheaf of sets admits a finite partition into constructible locally closed subschemes on which
@@ -33,8 +33,8 @@ notion, applied after forgetting the group structure. Source: blueprint
 Stacks Project, Definition 59.71.1 (Tag 03RW), Lemma 59.71.2 (Tag 095E)
 (blueprint: def-weil-pbc-constructible-torsion). -/
 def IsConstructible {k : Type u} [Field k] [IsAlgClosed k]
-    (P : AlgebraicGeometry.CurveCoefficientPair k) : Prop :=
+    (P : AlgebraicGeometry.CurveCoefficientPairSheaf k) : Prop :=
   Scheme.IsConstructibleEtaleSheafOfSets
     ((sheafCompose P.C.smallEtaleTopology (forget AddCommGrpCat.{u + 1})).obj P.F)
 
-end AlgebraicGeometry.CurveCoefficientPair
+end AlgebraicGeometry.CurveCoefficientPairSheaf

@@ -46,7 +46,7 @@ the locally constant group section acts on each of its open constant-value fibre
 The simply transitive map is carried to the corresponding sheaf map; local
 nonemptiness is surjectivity of the cover. Conversely the action descends by Yoneda,
 and the torsor map is an isomorphism since its sheaf map is an isomorphism. -/
-theorem exists_finiteEtale_flc_equivalence (Y : Scheme.{v}) :
+theorem exists_finiteEtale_flc_equivalence_sheaf (Y : Scheme.{v}) :
     ∃ Φ : Y.FiniteEtale ≌ Y.FLC,
       Nonempty (Φ.functor ⋙ ObjectProperty.ι _ ≅
         ObjectProperty.ι _ ⋙ Y.smallEtaleTopology.uliftYoneda.{v + 1}) ∧
@@ -113,7 +113,7 @@ representable sheaf. Its simply transitive action and local sections are the fie
 of this existing torsor. The Yoneda comparison identifies the image of `t` with that
 sheaf, and naturality at each action morphism identifies the actions. Thus the
 simply transitive action is carried to the same simply transitive sheaf action. -/
-theorem finiteEtale_flc_preserves_torsors {Y : Scheme.{v}}
+theorem finiteEtale_flc_preserves_torsors_sheaf {Y : Scheme.{v}}
     (Φ : Y.FiniteEtale ≌ Y.FLC)
     (α : Φ.functor ⋙ ObjectProperty.ι _ ≅
       ObjectProperty.ι _ ⋙ Y.smallEtaleTopology.uliftYoneda.{v + 1}) :

@@ -40,7 +40,7 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
 /-- The `1 - shift` endomorphism of the direct sum of a sequential system of
 complexes (Stacks, Derived Categories, Definition of derived colimits;
 blueprint: lem-pc-complex-hocolim-colimit). -/
-noncomputable def telescopeShift :
+noncomputable def telescopeShiftColimit :
     (∐ (fun n : ℕ => E.obj n)) ⟶ (∐ (fun n : ℕ => E.obj n)) :=
   Sigma.desc (fun n : ℕ =>
     Sigma.ι (fun n : ℕ => E.obj n) n -
@@ -55,9 +55,9 @@ noncomputable def telescopeToColimit :
 
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def telescope_cokernel
-    (h : telescopeShift R E ≫ telescopeToColimit R E = 0) :
+    (h : telescopeShiftColimit R E ≫ telescopeToColimit R E = 0) :
     IsColimit (CokernelCofork.ofπ (telescopeToColimit R E) h) := by
-  let cocone (s : CokernelCofork (telescopeShift R E)) : Cocone E :=
+  let cocone (s : CokernelCofork (telescopeShiftColimit R E)) : Cocone E :=
     { pt := s.pt
       ι :=
         { app := fun n ↦ Sigma.ι (fun n : ℕ ↦ E.obj n) n ≫ s.π
@@ -69,7 +69,7 @@ private noncomputable def telescope_cokernel
                   Sigma.ι (fun n : ℕ ↦ E.obj n) k ≫ s.π := by
               have hz := congrArg
                 (fun z ↦ Sigma.ι (fun n : ℕ ↦ E.obj n) k ≫ z) s.condition
-              simp only [telescopeShift, Sigma.ι_desc_assoc, Preadditive.sub_comp,
+              simp only [telescopeShiftColimit, Sigma.ι_desc_assoc, Preadditive.sub_comp,
                 Category.assoc, comp_zero] at hz
               exact (sub_eq_zero.mp hz).symm
             have hall (m : ℕ) (hnm : n ≤ m) :
@@ -110,19 +110,19 @@ contractible: in the notation of the source proof, the homotopy sends
 `(u(c), k)` to `(0, c)`. The long exact cohomology sequence of the resulting
 short exact sequence makes the projection a quasi-isomorphism. -/
 theorem quasiIso_telescopeColimit
-    : ∃ f : mappingCone (telescopeShift R E) ⟶ colimit E,
-      mappingCone.inr (telescopeShift R E) ≫ f = telescopeToColimit R E ∧
-      (mappingCone.inl (telescopeShift R E)).comp
+    : ∃ f : mappingCone (telescopeShiftColimit R E) ⟶ colimit E,
+      mappingCone.inr (telescopeShiftColimit R E) ≫ f = telescopeToColimit R E ∧
+      (mappingCone.inl (telescopeShiftColimit R E)).comp
         (Cochain.ofHom f) (add_zero _) = 0 ∧
       QuasiIso f := by
-  have h : telescopeShift R E ≫ telescopeToColimit R E = 0 := by
+  have h : telescopeShiftColimit R E ≫ telescopeToColimit R E = 0 := by
     apply Sigma.hom_ext
     intro n
-    simp [telescopeShift, telescopeToColimit, Preadditive.sub_comp,
+    simp [telescopeShiftColimit, telescopeToColimit, Preadditive.sub_comp,
       Category.assoc, colimit.w]
-  let S := ShortComplex.mk (telescopeShift R E) (telescopeToColimit R E) h
+  let S := ShortComplex.mk (telescopeShiftColimit R E) (telescopeToColimit R E) h
   have hc := telescope_cokernel R E h
-  have hmono : Mono (telescopeShift R E) := telescopeShift_mono R E
+  have hmono : Mono (telescopeShiftColimit R E) := telescopeShift_mono R E
   have hS : S.ShortExact :=
     { exact := S.exact_of_g_is_cokernel hc
       mono_f := hmono

@@ -181,7 +181,7 @@ same proofs. In characteristic zero there is no prime characteristic to test. Ne
 the constructibility hypothesis nor the torsion of P.F is needed by this argument.
 -/
 theorem IsCurve.dense_open_vanishing_comparison {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k) (hP : P.IsConstructible)
+    (P : CurveCoefficientPairSheaf k) (hP : P.IsConstructible)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
       ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom

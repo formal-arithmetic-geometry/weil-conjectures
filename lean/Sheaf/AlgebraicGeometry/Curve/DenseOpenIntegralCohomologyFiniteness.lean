@@ -54,7 +54,7 @@ finiteness of the boundary groups, not a separate higher-degree comparison theor
 No finite coefficient ring or ambient reducedness is required. Empty X and U=X
 are included in the same exact-sequence argument. -/
 theorem dense_open_integral_cohomology_finiteness {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k) (hP : P.IsConstructible)
+    (P : CurveCoefficientPairSheaf k) (hP : P.IsConstructible)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
       ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom

@@ -10,7 +10,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 @[expose] public section
 universe u
 open CategoryTheory
-namespace AlgebraicGeometry.CurveCoefficientPair
+namespace AlgebraicGeometry.CurveCoefficientPairSheaf
 /-- Constructibility of the quotient in the six step dévissage argument.
 Use the canonical integral-module comparison to transport the short exact sequence.
 The curve is Noetherian because it is of finite type over a field. The Noetherian
@@ -21,12 +21,12 @@ integral comparison to the torsion quotient. Source: Stacks Project, Tag 09BH (2
 with the integral coefficient comparison recorded in the imported library.
 (blueprint: lem-weil-pbc-curve-constructible-quot-part) -/
 theorem constructible_quot_part {k : Type u} [Field k] [IsAlgClosed k]
-    (P : AlgebraicGeometry.CurveCoefficientPair k)
+    (P : AlgebraicGeometry.CurveCoefficientPairSheaf k)
     (F₁ F₂ : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})
     (h₁ : P.C.IsTorsionAbelianSheaf F₁) (h₂ : P.C.IsTorsionAbelianSheaf F₂)
     (α : F₁ ⟶ P.F) (β : P.F ⟶ F₂) (w : α ≫ β = 0)
     (hS : (ShortComplex.mk α β w).ShortExact) (hF : P.IsConstructible) :
-    AlgebraicGeometry.CurveCoefficientPair.IsConstructible
+    AlgebraicGeometry.CurveCoefficientPairSheaf.IsConstructible
       { P with F := F₂, isTorsion := h₂ } := by
   have _ := h₁
   let := P.isCurve
@@ -56,4 +56,4 @@ theorem constructible_quot_part {k : Type u} [Field k] [IsAlgClosed k]
       ((Limits.cokernelIsCokernel (T.map α)).coconePointUniqueUpToIso hT.gIsCokernel)
   exact (Scheme.isConstructibleSheaf_integral_iff F₂ h₂).mp h₂'
 
-end AlgebraicGeometry.CurveCoefficientPair
+end AlgebraicGeometry.CurveCoefficientPairSheaf

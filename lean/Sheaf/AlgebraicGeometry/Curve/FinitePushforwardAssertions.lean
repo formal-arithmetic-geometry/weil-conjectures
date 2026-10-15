@@ -99,7 +99,7 @@ given class on the open of Y.
 8. The eight separate implications give the implication between their conjunctions,
 using def-weil-pbc-eight-curve-assertions. Together with step 1 this proves both clauses. -/
 theorem IsCurve.finite_pushforward_assertions {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k) {Y : Scheme.{u}}
+    (P : CurveCoefficientPairSheaf k) {Y : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f]
     (hf : f ≫ g = P.toSpec) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙

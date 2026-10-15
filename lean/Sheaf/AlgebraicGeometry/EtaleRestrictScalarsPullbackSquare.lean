@@ -458,11 +458,11 @@ private lemma coefficient_comp
     Functor.isoWhiskerLeft (Sheaf.restrictScalars S.smallEtaleTopology φ)
         (upperStarComp (ModuleCat.{u + 1} Λ) h p d hd) ≪≫
       (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (upperStarRestrictScalarsIso φ p) (h)^*[ModuleCat.{u + 1} Λ] ≪≫
+      Functor.isoWhiskerRight (upperStarRestrictScalarsIsoSheaf φ p) (h)^*[ModuleCat.{u + 1} Λ] ≪≫
       Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft (p)^*[ModuleCat.{u + 1} Λ'] (upperStarRestrictScalarsIso φ h) ≪≫
+      Functor.isoWhiskerLeft (p)^*[ModuleCat.{u + 1} Λ'] (upperStarRestrictScalarsIsoSheaf φ h) ≪≫
       (Functor.associator _ _ _).symm =
-    upperStarRestrictScalarsIso φ d ≪≫
+    upperStarRestrictScalarsIsoSheaf φ d ≪≫
       Functor.isoWhiskerRight (upperStarComp (ModuleCat.{u + 1} Λ') h p d hd)
         (Sheaf.restrictScalars Y.smallEtaleTopology φ) := by
   have := (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ).isRightAdjoint
@@ -490,7 +490,7 @@ private lemma coefficient_comp
   have hp := conjugate_unique (aS.comp b) (b'.comp aX)
   have hh := conjugate_unique (aX.comp c) (c'.comp aY)
   have hd' := conjugate_unique (aS.comp f) (f'.comp aY)
-  simp only [aS, aX, aY, b, c, f, b', c', f', upperStarRestrictScalarsIso] at hp hh hd' ⊢
+  simp only [aS, aX, aY, b, c, f, b', c', f', upperStarRestrictScalarsIsoSheaf] at hp hh hd' ⊢
   erw [hp, hh, hd']
   simp only [upperStarComp, Iso.symm_hom, conjugateIsoEquiv_symm_apply_inv,
     Iso.symm_inv, Equiv.apply_symm_apply]
@@ -507,9 +507,9 @@ private lemma coefficient_comp_app
     (hd : d = h ≫ p) (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
     (upperStarComp (ModuleCat.{u + 1} Λ) h p d hd).hom.app
         ((Sheaf.restrictScalars S.smallEtaleTopology φ).obj L) ≫
-      (h)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalarsIso φ p).hom.app L) ≫
-      (upperStarRestrictScalarsIso φ h).hom.app ((p)^*[ModuleCat.{u + 1} Λ'].obj L) =
-    (upperStarRestrictScalarsIso φ d).hom.app L ≫
+      (h)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalarsIsoSheaf φ p).hom.app L) ≫
+      (upperStarRestrictScalarsIsoSheaf φ h).hom.app ((p)^*[ModuleCat.{u + 1} Λ'].obj L) =
+    (upperStarRestrictScalarsIsoSheaf φ d).hom.app L ≫
       (Sheaf.restrictScalars Y.smallEtaleTopology φ).map
         ((upperStarComp (ModuleCat.{u + 1} Λ') h p d hd).hom.app L) := by
   have key := congr_app (congrArg Iso.hom (coefficient_comp φ h p d hd)) L
@@ -519,14 +519,14 @@ private lemma coefficient_square
     {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
     {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
     (sq : CommSq e h g p) (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
-    (h)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalarsIso φ p).hom.app L) ≫
-      (upperStarRestrictScalarsIso φ h).hom.app ((p)^*[ModuleCat.{u + 1} Λ'].obj L) ≫
+    (h)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalarsIsoSheaf φ p).hom.app L) ≫
+      (upperStarRestrictScalarsIsoSheaf φ h).hom.app ((p)^*[ModuleCat.{u + 1} Λ'].obj L) ≫
       (Sheaf.restrictScalars Y.smallEtaleTopology φ).map
         ((squareUpperStarIso (ModuleCat.{u + 1} Λ') sq).hom.app L) =
     (squareUpperStarIso (ModuleCat.{u + 1} Λ) sq).hom.app
         ((Sheaf.restrictScalars S.smallEtaleTopology φ).obj L) ≫
-      (e)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalarsIso φ g).hom.app L) ≫
-      (upperStarRestrictScalarsIso φ e).hom.app ((g)^*[ModuleCat.{u + 1} Λ'].obj L) := by
+      (e)^*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalarsIsoSheaf φ g).hom.app L) ≫
+      (upperStarRestrictScalarsIsoSheaf φ e).hom.app ((g)^*[ModuleCat.{u + 1} Λ'].obj L) := by
   rw [← cancel_epi ((upperStarComp (ModuleCat.{u + 1} Λ) h p (e ≫ g) sq.w).hom.app
     ((Sheaf.restrictScalars S.smallEtaleTopology φ).obj L))]
   simp only [squareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
@@ -584,16 +584,16 @@ theorem pullbackSquareComparison_restrictScalars
     (G' := (h)^*[ModuleCat.{u + 1} Λ'])
     (H' := (g)^*[ModuleCat.{u + 1} Λ'])
     (I' := (e)^*[ModuleCat.{u + 1} Λ'])
-    (a := upperStarRestrictScalarsIso φ p)
+    (a := upperStarRestrictScalarsIsoSheaf φ p)
     (aD := derivedUpperStarRestrictScalarsIso φ p)
     (haD := rfl)
-    (b := upperStarRestrictScalarsIso φ h)
+    (b := upperStarRestrictScalarsIsoSheaf φ h)
     (bD := derivedUpperStarRestrictScalarsIso φ h)
     (hbD := rfl)
-    (c := upperStarRestrictScalarsIso φ g)
+    (c := upperStarRestrictScalarsIsoSheaf φ g)
     (cD := derivedUpperStarRestrictScalarsIso φ g)
     (hcD := rfl)
-    (d := upperStarRestrictScalarsIso φ e)
+    (d := upperStarRestrictScalarsIsoSheaf φ e)
     (dD := derivedUpperStarRestrictScalarsIso φ e)
     (hdD := rfl)
     (t := (squareUpperStarIso (ModuleCat.{u + 1} Λ) sq).hom)

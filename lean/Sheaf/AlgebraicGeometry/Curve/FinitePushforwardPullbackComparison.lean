@@ -107,7 +107,7 @@ isomorphisms of underlying abelian sheaves and commutes with pullback, so it giv
 same identity for the converted coefficient sheaves. No curve condition on the scheme
 pulled back to is needed, so this applies to opens as well as field extensions. -/
 theorem IsCurve.finite_pushforward_pullback_comparison {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k) {Y : Scheme.{u}}
+    (P : CurveCoefficientPairSheaf k) {Y : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f]
     (_hf : f ≫ g = P.toSpec) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙

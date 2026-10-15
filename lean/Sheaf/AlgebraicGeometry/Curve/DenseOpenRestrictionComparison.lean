@@ -44,7 +44,7 @@ other horizontal equivalence give the required equality. Since a was arbitrary t
 proves exactly the equivalence of the two restriction predicates.
 -/
 theorem IsCurve.dense_open_restriction_comparison {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k) (hP : P.IsConstructible)
+    (P : CurveCoefficientPairSheaf k) (hP : P.IsConstructible)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
       ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom

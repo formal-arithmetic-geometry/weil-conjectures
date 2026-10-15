@@ -28,7 +28,7 @@ namespace AlgebraicGeometry
 nonempty, connected, smooth, proper, or one-dimensional: these are not part of the curve
 definition in `def-sc-curves`. Source: blueprint `sec-curve-estimates/sk-prop-cd`,
 def-weil-pbc-curve-setting (blueprint: def-weil-pbc-curve-setting). -/
-structure CurveCoefficientPair (k : Type u) [Field k] [IsAlgClosed k] where
+structure CurveCoefficientPairSheaf (k : Type u) [Field k] [IsAlgClosed k] where
   C : Scheme.{u}
   toSpec : C ⟶ Spec (.of k)
   isCurve : IsCurve toSpec

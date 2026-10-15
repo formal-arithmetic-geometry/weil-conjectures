@@ -226,7 +226,7 @@ lem-weil-pbc-pullback-cohomology-long-exact-ladder, def-weil-pbc-eight-curve-ass
 def-weil-pbc-primary-torsion.
 -/
 theorem IsCurve.dense_open_assertions {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k) (hP : P.IsConstructible)
+    (P : CurveCoefficientPairSheaf k) (hP : P.IsConstructible)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
       ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom

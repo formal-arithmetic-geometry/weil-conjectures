@@ -89,7 +89,7 @@ private theorem underived_mate
     {Z W : Scheme.{u}} (f : Z ⟶ W) :
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom)).natTrans =
         (lowerStarRestrictScalarsIso φ f).hom := by
   apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj Z.smallEtaleTopology φ)
     (Sheaf.restrictCoextendScalarsAdj W.smallEtaleTopology φ)).injective
@@ -97,9 +97,9 @@ private theorem underived_mate
     (Sheaf.restrictCoextendScalarsAdj W.smallEtaleTopology φ)
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom))).natTrans = _
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom))).natTrans = _
   rw [iterated_mateEquiv_conjugateEquiv]
-  simp only [upperStarRestrictScalarsIso, Adjunction.leftAdjointUniq, Iso.symm_hom,
+  simp only [upperStarRestrictScalarsIsoSheaf, Adjunction.leftAdjointUniq, Iso.symm_hom,
     conjugateIsoEquiv_symm_apply_inv, Iso.refl_inv, TwoSquare.mk]
   erw [Equiv.apply_symm_apply]
   ext M ⟨U⟩ x
@@ -122,7 +122,7 @@ private theorem derived_mate
   exact derived_mate_eq _ _ _ _ _ _
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
-    (upperStarRestrictScalarsIso φ f)
+    (upperStarRestrictScalarsIsoSheaf φ f)
 
 /-- The canonical coefficient comparisons preserve the unit and counit of a single
 bounded below inverse-image/direct-image adjunction.

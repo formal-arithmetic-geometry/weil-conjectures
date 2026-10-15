@@ -72,8 +72,8 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction {U : S
         (Etale.upperStarLowerStarAdjunction
           (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) v).unit.app G ≫ r = 𝟙 G := by
   obtain ⟨V, v, hf, he, hc, d, hd, hdeg, hfil⟩ :=
-    Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration ℓ G
-  obtain ⟨r, hr⟩ := Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction
+    Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration_sheaf ℓ G
+  obtain ⟨r, hr⟩ := Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction_sheaf
     ℓ G v d hd hdeg
   exact ⟨V, v, hf, he, hc, d, hd, hdeg, hfil, r, hr⟩
 

@@ -9,18 +9,18 @@ import Sheaf.AlgebraicGeometry.ConstructibleTorsionModulesAgree
 @[expose] public section
 universe u
 open CategoryTheory
-namespace AlgebraicGeometry.CurveCoefficientPair
+namespace AlgebraicGeometry.CurveCoefficientPairSheaf
 /-- Constructibility of the subobject in the six step dévissage argument.
 The proof is the finite torsion bound, cyclic module bridge, and the Noetherian
 constructible subobject theorem described in the parent blueprint node.
 (blueprint: lem-weil-pbc-curve-constructible-sub-part) -/
 theorem constructible_sub_part {k : Type u} [Field k] [IsAlgClosed k]
-    (P : AlgebraicGeometry.CurveCoefficientPair k)
+    (P : AlgebraicGeometry.CurveCoefficientPairSheaf k)
     (F₁ F₂ : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})
     (h₁ : P.C.IsTorsionAbelianSheaf F₁) (h₂ : P.C.IsTorsionAbelianSheaf F₂)
     (α : F₁ ⟶ P.F) (β : P.F ⟶ F₂) (w : α ≫ β = 0)
     (hS : (ShortComplex.mk α β w).ShortExact) (hF : P.IsConstructible) :
-    AlgebraicGeometry.CurveCoefficientPair.IsConstructible
+    AlgebraicGeometry.CurveCoefficientPairSheaf.IsConstructible
       { P with F := F₁, isTorsion := h₁ } := by
   have _hT₂ := h₂
   have : IsCurve P.toSpec := P.isCurve
@@ -65,4 +65,4 @@ theorem constructible_sub_part {k : Type u} [Field k] [IsAlgClosed k]
     infer_instance
   have hMc : Scheme.IsConstructibleEtaleModuleSheaf M := hM.mp hF
   exact hM₁.mpr (Scheme.isConstructibleEtaleModuleSheaf_of_mono_noetherian i hMc)
-end AlgebraicGeometry.CurveCoefficientPair
+end AlgebraicGeometry.CurveCoefficientPairSheaf

@@ -33,7 +33,7 @@ universe u
 
 open CategoryTheory
 
-namespace AlgebraicGeometry.CurveCoefficientPair
+namespace AlgebraicGeometry.CurveCoefficientPairSheaf
 
 /-- In a short exact sequence of torsion abelian sheaves on a curve, constructibility of
 its middle term implies constructibility of both outer terms. Source: Stacks Project,
@@ -66,15 +66,15 @@ Proof following the node's six steps:
 6. Apply `lem-weil-pbc-constructible-torsion-modules-agree` to both outer terms to
    return to `def-weil-pbc-constructible-torsion`, using their torsion curve pairs. -/
 theorem constructible_sub_quotient {k : Type u} [Field k] [IsAlgClosed k]
-    (P : AlgebraicGeometry.CurveCoefficientPair k)
+    (P : AlgebraicGeometry.CurveCoefficientPairSheaf k)
     (F₁ F₂ : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})
     (h₁ : P.C.IsTorsionAbelianSheaf F₁) (h₂ : P.C.IsTorsionAbelianSheaf F₂)
     (α : F₁ ⟶ P.F) (β : P.F ⟶ F₂) (w : α ≫ β = 0)
     (hS : (ShortComplex.mk α β w).ShortExact) (hF : P.IsConstructible) :
-    (AlgebraicGeometry.CurveCoefficientPair.IsConstructible { P with F := F₁, isTorsion := h₁ }) ∧
-      (AlgebraicGeometry.CurveCoefficientPair.IsConstructible
+    (AlgebraicGeometry.CurveCoefficientPairSheaf.IsConstructible { P with F := F₁, isTorsion := h₁ }) ∧
+      (AlgebraicGeometry.CurveCoefficientPairSheaf.IsConstructible
         { P with F := F₂, isTorsion := h₂ }) := by
   exact ⟨constructible_sub_part P F₁ F₂ h₁ h₂ α β w hS hF,
     constructible_quot_part P F₁ F₂ h₁ h₂ α β w hS hF⟩
 
-end AlgebraicGeometry.CurveCoefficientPair
+end AlgebraicGeometry.CurveCoefficientPairSheaf

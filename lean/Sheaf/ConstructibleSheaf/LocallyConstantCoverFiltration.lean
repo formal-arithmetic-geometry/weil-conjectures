@@ -61,7 +61,7 @@ with initial object zero, final object isomorphic to v*G, and cokernels isomorph
 constant coefficient sheaf. For M = 0 the flag has length zero. Extend the finite sequence
 W to all natural indices by its final object, with identity maps after the last index;
 only maps before that index occur in the conclusion. -/
-theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration
+theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration_sheaf
     {U : Scheme.{u}} [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
     [IsFiniteLocallyConstantSheaf G] :
