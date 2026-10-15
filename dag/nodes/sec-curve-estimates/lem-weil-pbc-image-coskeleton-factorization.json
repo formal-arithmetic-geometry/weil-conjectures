@@ -1,0 +1,183 @@
+{
+ "id": "lem-weil-pbc-image-coskeleton-factorization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-free-resolution",
+   "place": "proof, first paragraph: 'The matching-cover condition ... supplies a simplex with exactly those faces after an etale cover'",
+   "via": [
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Image-coskeleton factorization into an objectwise trivial Kan fibration and a local isomorphism",
+ "statement": "Let $J$ be a Grothendieck topology on a category $C$, let $n\\geq1$, and let $f:L\\to K$ be a morphism of simplicial presheaves of sets [def-weil-pbc-simplicial-object]. Suppose $f_i$ is an isomorphism for $i<n$, $f_n$ becomes an epimorphism after sheafification [def-weil-pbc-sheafification], and the canonical $n$-coskeleton units of $L$ and $K$ are isomorphisms [def-weil-pbc-simplicial-coskeleton]. Then there exist a simplicial presheaf $M$ and maps $p:L\\to M$, $q:M\\to K$ with $q\\circ p=f$, such that $p(V)$ is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration] for every object $V$ of $C$, and $q_i$ becomes an isomorphism after sheafification for every $i\\geq0$.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Hypercoverings, Lemma 01GD (lemma-acyclicity), proof, image-coskeleton construction and objectwise boundary-lifting paragraph; verified at https://stacks.math.columbia.edu/tag/01GD"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-coskeleton",
+  "def-weil-pbc-trivial-kan-fibration"
+ ],
+ "proof": [
+  {
+   "text": "Uncurry $f$ to a set-valued functor on the product of the opposite simplex category with $C^{op}$. Its range subfunctor, curried back, is a simplicial presheaf $S$ with projection $a:L\\to S$ and inclusion $b:S\\to K$. These are genuine constructions using Subfunctor.range, toRange, and curry. Componentwise $a$ is epic, $b$ is monic, and $b a=f$. For $i<n$, $b_i$ is also epic because $f_i$ is an isomorphism; balancedness of set-valued presheaves makes $b_i$ invertible, and then $a_i$ is invertible too.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Hypercoverings, Lemma 01GD (lemma-acyclicity), proof, image-coskeleton construction and objectwise boundary-lifting paragraph; verified at https://stacks.math.columbia.edu/tag/01GD"
+   }
+  },
+  {
+   "text": "Put $U=\\mathrm{trunc}_n S$, $T=\\mathrm{cosk}_n$, and $M=T(U)$. Define $p=\\eta_L;T(\\mathrm{trunc}_n a)$ and $q=T(\\mathrm{trunc}_n b);\\eta_K^{-1}$. Naturality of the adjunction unit and $a;b=f$ give $p;q=f$. Naturality of the counit and the left triangle identity give $\\mathrm{trunc}_n(p);\\varepsilon_U=\\mathrm{trunc}_n(a)$. The counit is an isomorphism since the truncated inclusion is fully faithful.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Hypercoverings, Lemma 01GD (lemma-acyclicity), proof, image-coskeleton construction and objectwise boundary-lifting paragraph; verified at https://stacks.math.columbia.edu/tag/01GD"
+   }
+  },
+  {
+   "text": "For any finite-limit-preserving functor $\\Phi$, apply [lem-weil-pbc-truncated-coskeleton-finite-limits] to obtain a coskeleton preserved by $\\Phi$. The uniqueness of right Kan extensions transfers this preservation to Mathlib's ran functor via PreservesRightKanExtension.mk_of_preserves_isRightKanExtension. Thus ranCompIsoOfPreserves gives the natural isomorphism commuting $T$ with $\\Phi$, and isCoskeletal_iff_isIso shows that $\\Phi$ preserves invertibility of coskeleton units.",
+   "uses": [
+    "lem-weil-pbc-truncated-coskeleton-finite-limits",
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Hypercoverings, Lemma 01GD (lemma-acyclicity), proof, image-coskeleton construction and objectwise boundary-lifting paragraph; verified at https://stacks.math.columbia.edu/tag/01GD"
+   }
+  },
+  {
+   "text": "Apply the preceding preservation to evaluation at $V$. The counit equation identifies $p_i$ with $a_i$ up to an isomorphism for $i\\leq n$. Hence $p(V)_i$ is bijective for $i<n$ and surjective for $i=n$. The source is $n$-coskeletal by hypothesis and preservation; the target is $n$-coskeletal because it is a coskeleton, again preserved by evaluation. Apply [lem-weil-pbc-coskeletal-map-trivial-kan] to get the objectwise trivial Kan fibration.",
+   "uses": [
+    "lem-weil-pbc-coskeletal-map-trivial-kan",
+    "lem-weil-pbc-truncated-coskeleton-finite-limits",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Hypercoverings, Lemma 01GD (lemma-acyclicity), proof, image-coskeleton construction and objectwise boundary-lifting paragraph; verified at https://stacks.math.columbia.edu/tag/01GD"
+   }
+  },
+  {
+   "text": "For sheafification $A$, $A(b_i)$ is an isomorphism below $n$. At $n$, left exactness preserves its monomorphism, and $A(a_n);A(b_n)=A(f_n)$ makes $A(b_n)$ epic. Balancedness of sheaves of sets makes it an isomorphism. Thus $A(\\mathrm{trunc}_n b)$ is invertible. Commuting $A$ with $T$ as above shows that $A(T(\\mathrm{trunc}_n b))$ is invertible. Since $\\eta_K$ is invertible, $A(q)$ is invertible, so every $A(q_i)$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-weil-pbc-sheaf-sets-mono-epi-iso",
+    "lem-weil-pbc-truncated-coskeleton-finite-limits",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Hypercoverings, Lemma 01GD (lemma-acyclicity), proof, image-coskeleton construction and objectwise boundary-lifting paragraph; verified at https://stacks.math.columbia.edu/tag/01GD"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Hypercoverings, Lemma 01GD (lemma-acyclicity), proof, image-coskeleton construction and objectwise boundary-lifting paragraph; verified at https://stacks.math.columbia.edu/tag/01GD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of n coskeletal simplicial presheaves factors through an objectwise trivial Kan fibration and a local isomorphism",
+   "results": "Service unavailable: Internal Server Error. Other searches and source inspection used.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Factor a map of coskeletal simplicial presheaves through the coskeleton of its degreewise image",
+   "results": "SimplicialObject.cosk, Truncated.cosk, isCoskeletal_iff, isoCoskOfIsCoskeletal. No image-coskeleton factorization.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightKanExtensionCompIsoOfPreserves\"",
+   "results": "Functor.rightKanExtensionCompIsoOfPreserves, ranCompIsoOfPreserves and component equations in Mathlib.CategoryTheory.Functor.KanExtension.Preserves supply the coskeleton-preservation interface, but not the image factorization.",
+   "date": "2026-10-16",
+   "verdict": "building blocks only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg imageCoskeleton|cosk.*range|range.*cosk in lean/Sheaf, lean/WeilConjectures, Mathlib/AlgebraicTopology; inspect Subfunctor/Image and Functor/KanExtension/Preserves",
+   "results": "No existing factorization theorem; Subfunctor.range/toRange and ranCompIsoOfPreserves implement the construction. Existing DAG has the parent comparison and finite-limit coskeleton theorem, but no separate factorization statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison",
+  "date": "2026-10-16",
+  "group": "S4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicTopology.ImageCoskeletonFactorization",
+  "file": "lean/Sheaf/AlgebraicTopology/ImageCoskeletonFactorization.lean",
+  "declaration": "CategoryTheory.SimplicialObject.exists_imageCoskeleton_factorization",
+  "statement": "theorem exists_imageCoskeleton_factorization\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (n : ℕ) (_hn : 1 ≤ n)\n    {L K : SimplicialObject (Cᵒᵖ ⥤ Type (max u v w))} (f : L ⟶ K)\n    (hlow : ∀ i : ℕ, i < n → IsIso (f.app (Opposite.op ⦋i⦌)))\n    (hsurj : Epi ((presheafToSheaf J (Type (max u v w))).map\n      (f.app (Opposite.op ⦋n⦌))))\n    (hL : IsIso ((coskAdj n).unit.app L))\n    (hK : IsIso ((coskAdj n).unit.app K)) :\n    ∃ (M : SimplicialObject (Cᵒᵖ ⥤ Type (max u v w)))\n      (p : L ⟶ M) (q : M ⟶ K), p ≫ q = f ∧\n      (∀ V : C, SSet.modelCategoryQuillen.I.rlp\n        (((whiskeringRight _ _ _).obj\n          ((evaluation (Cᵒᵖ) (Type (max u v w))).obj (Opposite.op V))).map p)) ∧\n      (∀ i : ℕ, IsIso ((presheafToSheaf J (Type (max u v w))).map\n        (q.app (Opposite.op ⦋i⦌))))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-16"
+ },
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-coskeleton",
+  "lem-weil-pbc-truncated-coskeleton-finite-limits",
+  "lem-weil-pbc-coskeletal-map-trivial-kan",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-sheaf-sets-mono-epi-iso",
+  "def-weil-pbc-sheafification"
+ ],
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261015T224110-L-2885618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261015T224110-L-2885618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
