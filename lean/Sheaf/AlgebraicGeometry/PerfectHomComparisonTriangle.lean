@@ -61,6 +61,19 @@ private theorem comparison_symm {X S : Scheme.{u}} (s : X ⟶ S)
     Iso.app_inv, Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, NatTrans.comp_app,
     eqToIso.hom, eqToIso.inv]
 
+/-- The inverse fixed base-change comparison is the pullback-composition
+comparison for its first projection. Source: Stacks Project, Tag 0D5S.
+
+Proof: Expand the definition of `perfectHomComparison` and invert its two
+factors. The projection equality is exactly `baseChangeMap_fst`. -/
+theorem perfectHomComparison_symm_eq_compositionTo
+    {X S : Scheme.{u}} (s : X ⟶ S) {T T' : Over S} (g : T' ⟶ T)
+    (P : schemeDerivedCategory X) :
+    ((perfectHomComparison s g).app P).symm =
+      (compositionTo (baseChangeMap s g) (pullback.fst s T.hom)
+        (pullback.fst s T'.hom) (baseChangeMap_fst s g)).app P :=
+  comparison_symm s g P
+
 /-- The projection comparisons satisfy the object triangle for two over-category arrows.
 Source: Stacks Project, Tag 0D5S, associativity of derived pullback.
 (blueprint: lem-pc-perfect-hom-comparison-triangle).
