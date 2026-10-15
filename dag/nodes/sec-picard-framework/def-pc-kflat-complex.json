@@ -139,14 +139,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "module": "Sheaf.Algebra.Homology.KFlat",
-  "declaration": "CochainComplex.IsKFlat",
+  "declaration": "CochainComplex.IsKFlatIndependentCoefficients",
   "file": "lean/Sheaf/Algebra/Homology/KFlat.lean",
-  "statement": "def IsKFlat (K : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) : Prop",
+  "statement": "def IsKFlatIndependentCoefficients (K : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : Prop",
   "branch": "newtargets-dag",
-  "by": "NC",
+  "by": "NZ",
   "date": "2026-10-15",
   "existing": false,
-  "note": "§1(B): compiling the scalar-extension consumer against the published artifact failed in IntegralReductionTower because IsKFlatResolution specialized coefficients to the site size. Supply the current recorded independent-universe KFlat source as a sibling overlay; the module documentation now names this consumer. Its definitions, theorem signatures, and proof plans are unchanged. This retains site object universe t+1, morphism universe t, and coefficient/module universe max u (t+1), without imposing an equality.",
+  "note": "§1(B), H10 repair: although the recorded source writes a coefficient universe w, elaboration of its implicit tensor instances specializes the legacy IsKFlat/IsKFlatResolution interface to the site universe. Supply IsKFlatIndependentCoefficients and IsKFlatResolutionIndependentCoefficients in the owning module, explicitly retaining the coefficient-universe sheafification, monoidal localization and zero-morphism interfaces. They state the same total-tensor acyclicity and quasi-isomorphism conjunction at an independent coefficient size. Keep the legacy declarations for existing finite-level users and rebuild the paired consumers.",
   "declarations": [
    "CochainComplex.IsKFlat",
    "CochainComplex.IsKFlatResolution",
@@ -154,16 +154,21 @@
    "SheafOfModules.preservesZeroMorphisms_curriedTensor",
    "SheafOfModules.preservesZeroMorphisms_curriedTensor_obj",
    "SheafOfModules.hasSheafify_coefficientUniverse",
-   "SheafOfModules.wEqualsLocallyBijective_coefficientUniverse"
+   "SheafOfModules.wEqualsLocallyBijective_coefficientUniverse",
+   "CochainComplex.independentCoefficients_isMonoidal",
+   "CochainComplex.independentCoefficients_preservesZeroMorphisms",
+   "CochainComplex.independentCoefficients_preservesZeroMorphisms_obj",
+   "CochainComplex.IsKFlatIndependentCoefficients",
+   "CochainComplex.IsKFlatResolutionIndependentCoefficients"
   ]
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-81f16667c",
-  "group": "NC",
+  "reviewer": "NT-stage2-Codex-26a22ba19",
+  "group": "NZ",
   "result": "pass",
-  "note": "Statement, dependencies, constructions, universes, edge cases, documentation, and per-file scompile evidence checked; no findings."
+  "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

@@ -22,7 +22,13 @@
   "lem-weil-integral-constructible-triangulated",
   "def-weil-integral-derived-reduction",
   "def-weil-proetale-tor-amplitude",
-  "def-weil-triangulated-subcategory"
+  "def-weil-triangulated-subcategory",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower"
  ],
  "proof": [
   {
@@ -194,5 +200,27 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-0dde332d7 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, unit/chapter route, and source passages. Exact reduction uses completed integral coefficients and lands in the finite constant-sheaf category; quantitative shift and extension bounds remain uniform in j. Checked edge cases, DAG reuse candidates, dependencies, and absence of circularity. No new nodes, fixes, or accepted tool_uses. Detailed review written to review.md; no target coefficient comparison is certified by this helper."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCtfTriangulated",
+  "declaration": "WeilConjectures.integral_ctf_isTriangulated",
+  "file": "lean/Sheaf/Paper/IntegralCtfTriangulated.lean",
+  "statement": "theorem integral_ctf_isTriangulated (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) [∀ y : Y, Invertible (l : Y.residueField y)] : ObjectProperty.IsClosedUnderIsomorphisms.{u + 2, u + 2} (integralCtfProperty D l hl E Y) ∧ @ObjectProperty.IsTriangulated.{u + 2, u + 2} (completedIntegralDerivedCategory l E Y D hl) inferInstance inferInstance inferInstance inferInstance (fun (n : ℤ) ↦ inferInstance) inferInstance (integralCtfProperty D l hl E Y)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.integralCtfProperty",
+   "WeilConjectures.integral_ctf_isTriangulated"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-26a22ba19",
+  "group": "NZ",
+  "result": "pass",
+  "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
  }
 }

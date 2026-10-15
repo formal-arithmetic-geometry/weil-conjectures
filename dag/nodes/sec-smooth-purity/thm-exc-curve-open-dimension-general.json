@@ -332,5 +332,23 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-48805cd70 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements, sources, and unit/chapter route. Checked all eight steps, coefficient comparisons, edge cases, duplicates, and cycles. No repairs needed. The unavailable strict-henselization reference is explicitly WANTED for the unsplit algebra lemma. Full findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveOpenDimensionGeneral",
+  "declaration": "AlgebraicGeometry.Etale.isZero_higherDirectImage_of_open_curve",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveOpenDimensionGeneral.lean",
+  "statement": "theorem isZero_higherDirectImage_of_open_curve (k : Type u) [Field k] (hk : Finite k ∨ ∃ k₀ : Subfield k, Finite k₀ ∧ IsAlgClosure k₀ k) {T U : Scheme.{u}} [T.Over (Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] (hdim : topologicalKrullDim T ≤ 1) (j : U ⟶ T) [IsOpenImmersion j] (A : Type (u + 1)) [CommRing A] [Finite A] (ℓ : ℕ) (hprime : ℓ.Prime) (hinv : IsUnit (ℓ : Γ(T, ⊤))) (hkill : ∃ n : ℕ, (ℓ ^ n : ℕ) • (1 : A) = 0) (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℤ) (hq : 1 < q) : IsZero ((DerivedCategory.Plus.homologyFunctor _ q).obj ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} A) j).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1888c5d7e",
+  "group": "N7",
+  "result": "pass",
+  "note": "Exact node/signature match; dependencies and universes verified; edge cases and docstrings checked; scompile.py passed with only intentional sorry."
  }
 }

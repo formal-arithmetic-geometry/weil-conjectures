@@ -99,26 +99,40 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction",
-  "declaration": "WeilConjectures.scalarReductionDerivedExtension",
+  "module": "Sheaf.Paper.IntegralDerivedReduction",
+  "declaration": "WeilConjectures.integralDerivedReduction",
   "declarations": [
-   "WeilConjectures.scalarReductionDerivedExtension",
-   "WeilConjectures.scalarReductionCounit",
-   "WeilConjectures.scalarReductionDerivedExistence"
+   "WeilConjectures.integralReductionSourceHasDerivedCategory",
+   "WeilConjectures.integralReductionTargetHasDerivedCategory",
+   "WeilConjectures.integralReductionSiteEssentiallySmall",
+   "WeilConjectures.integralReductionExistence",
+   "WeilConjectures.integralReductionChangeOfRings",
+   "WeilConjectures.integralReductionChangeOfRingsAdditive",
+   "WeilConjectures.integralReductionChangeOfRingsPreservesZeroMorphisms",
+   "WeilConjectures.integralReductionDerivedExistence",
+   "WeilConjectures.integralDerivedReduction",
+   "WeilConjectures.integralDerivedReductionCounit",
+   "WeilConjectures.integralDerivedReductionUniversal",
+   "WeilConjectures.integralDerivedReductionProjection_locallySurjective",
+   "WeilConjectures.integralDerivedReduction_exact",
+   "WeilConjectures.integralDerivedReduction_counit_isIso",
+   "WeilConjectures.integralDerivedReductionKFlatIso",
+   "WeilConjectures.integralDerivedReductionResolutionIso"
   ],
-  "statement": "def scalarReductionDerivedExtension :\n    DerivedCategory (scalarReductionSource l E Y) ⥤\n      DerivedCategory (scalarReductionTarget l E Y n)",
+  "file": "lean/Sheaf/Paper/IntegralDerivedReduction.lean",
+  "statement": "def integralDerivedReduction : completedIntegralDerivedCategory l E Y D hl ⥤ DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n))",
   "branch": "newtargets-dag",
-  "by": "Q29",
+  "by": "NZ",
   "date": "2026-10-15",
-  "existing": true,
-  "note": "§1(B): integralDerivedReduction requires a global finite-field datum and l != D.p absent from the arbitrary-field consumer. The already published scalarReductionDerivedExtension is the same universal derived change of rings along the actual completed coefficient projection, with the K-flat counit, for arbitrary schemes and with independent site/coefficient universes. Its index n is the positive exponent n+1, exactly as in the old interface. Read current server source through scompile.py --source."
+  "existing": false,
+  "note": "§1(B), H10 repair: explicitly use the independent IsKFlatIndependentCoefficients and IsKFlatResolutionIndependentCoefficients helpers at coefficient universe max u (t+1), and compile with the generalized K-flat and change-of-rings sources. This accepts the full completed coefficient sheaf universe without equating site universes. The canonical projection, universal derived reduction, counit, exactness and resolution comparison are retained."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-80772b1e6",
-  "group": "Q29",
+  "reviewer": "NT-stage2-Codex-26a22ba19",
+  "group": "NZ",
   "result": "pass",
-  "note": "Wrote review.md. Audited all eleven statement dependencies, five modules, canonical constructions, source correspondence, universes, edge cases, report sections, and verbatim signatures. All five immutable modules compiled cleanly through scompile.py. No fixes required; branch unchanged."
+  "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
  }
 }

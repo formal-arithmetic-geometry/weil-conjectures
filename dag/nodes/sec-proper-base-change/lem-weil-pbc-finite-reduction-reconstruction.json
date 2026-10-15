@@ -204,5 +204,29 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-1f357c6dc (reviewer sub-agent of L); spot-checked: Mathematics checked in full against the master blueprint, detailed source, Stacks 093J/093M/091Z/099M, all cited DAG statements, and small cases. The corrected completeness hypotheses, A_T coefficient category, counit argument, and finite-projective product comparison are sound. Repairs written: restore created.by/date on both new nodes, and record existing lemma-weil-pbc-adic-completion-reduction in the item's blueprint.same_as. Full review is in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteReductionReconstructionCompleted",
+  "declaration": "AlgebraicGeometry.Scheme.finiteReductionReconstructionCompleted",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedReconstructionEvaluation",
+   "AlgebraicGeometry.Scheme.completedReconstructionCounit",
+   "AlgebraicGeometry.Scheme.completedReconstructionProductComparison",
+   "AlgebraicGeometry.Scheme.finiteReductionReconstructionCompleted"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteReductionReconstructionCompleted.lean",
+  "statement": "theorem finiteReductionReconstructionCompleted {K : adicDatumDerived T d} (M : AdicDatumModel T d K) (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = d.ideal) (hcomplete : IsCompletedIntrinsicallyDerivedComplete T d r f hf M.complex M.realization) (L : CompletedSequentialDerivedLimit T d (adicDatumModelTower T d M)) (n : ℕ) : IsIso (completedReconstructionCounit T d M L n) ∧ IsIso (completedReconstructionProductComparison T d M n) ∧ ∀ {K' : adicDatumDerived T d} (N : AdicDatumModel T d K') (_hcomplete' : IsCompletedIntrinsicallyDerivedComplete T d r f hf N.complex N.realization) (L' : CompletedSequentialDerivedLimit T d (adicDatumModelTower T d N)) (v : K ⟶ K') (w : L.obj ⟶ L'.obj), (∀ a : ℕ, completedReconstructionEvaluation T d M L a ≫ (adicDatumReductionUnderlying T d a).map v = w ≫ completedReconstructionEvaluation T d N L' a) → completedReconstructionCounit T d M L n ≫ (adicDatumReduction T d n).map v = (adicDatumReduction T d n).map w ≫ completedReconstructionCounit T d N L' n",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-809a79c48",
+  "group": "Q22",
+  "result": "pass",
+  "note": "All four modules compile cleanly via scompile.py; statements, dependencies, universes, constructions, edge cases, source/docstring requirements, and report sections check out. No substantive or mechanical errors found."
  }
 }
