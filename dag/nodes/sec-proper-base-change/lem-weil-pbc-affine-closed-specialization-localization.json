@@ -28,57 +28,48 @@
  ],
  "proof": [
   {
-   "text": "The preimage of the units of $A/I$ contains $1$ and is closed under multiplication, so $S$ is a multiplicative subset. Apply [lem-weil-pbc-localization-ring-weakly-etale] with $M=S$. The ring/scheme equivalence in [def-weil-pbc-ind-etale-algebra] identifies its conclusion with weak etaleness of $h$.",
+   "text": "Use `Algebra.WeaklyEtale.of_isLocalization` for the localization algebra and `weaklyEtale_SpecMap_algebraMap_iff` to obtain weak etaleness of the affine spectrum map. The affine equivalence is the weakly-etale clause recorded in [def-weil-pbc-ind-etale-algebra]; its declaration is imported directly from its defining upstream module.",
    "uses": [
     "lem-weil-pbc-localization-ring-weakly-etale",
     "def-weil-pbc-ind-etale-algebra"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 096V, lemma-localization, construction of S; Tag 092B, sentence after definition-weakly-etale"
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092B, localization weakly-etale ring map, together with the affine spectrum equivalence in the project library"
    }
   },
   {
-   "text": "By [lem-weil-pbc-localization-spectrum-embedding], $h$ is an embedding onto the primes disjoint from $S$. It remains to identify that subset; this topological assertion applies to arbitrary multiplicative subsets, not just powers of one element.",
+   "text": "Use the Mathlib localization spectrum theorems, represented by `lem-weil-pbc-localization-spectrum-embedding`, to identify the range with primes disjoint from `S` and obtain the embedding.",
    "uses": [
     "lem-weil-pbc-localization-spectrum-embedding"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 096V, lemma-localization, proof of (1); Tag 00E3, lemma-spec-localization"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization"
    }
   },
   {
-   "text": "If $\\mathfrak p\\subseteq\\mathfrak q$ and $I\\subseteq\\mathfrak q$, then $\\mathfrak p\\cap S=\\varnothing$: for $s\\in S$ choose $t\\in A$ lifting an inverse modulo $I$, so $st-1\\in I$. If also $s\\in\\mathfrak p$, then $st$ and $st-1$ lie in $\\mathfrak q$, forcing $1\\in\\mathfrak q$, a contradiction.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 096V, lemma-localization, converse direction of (1)"
-   }
-  },
-  {
-   "text": "Conversely suppose $\\mathfrak p\\cap S=\\varnothing$. The ideal $J=\\mathfrak p+I$ is proper: if $1=a+i$ with $a\\in\\mathfrak p$, $i\\in I$, then $a\\bmod I=1$, so $a\\in\\mathfrak p\\cap S$. Apply [lem-weil-pbc-proper-ideal-contained-in-maximal] to $J$ to choose a maximal ideal $\\mathfrak q\\supseteq J$. It is prime: if $xy\\in\\mathfrak q$ and $x\\notin\\mathfrak q$, maximality gives $1=b+cx$ with $b\\in\\mathfrak q$; multiplying by $y$ gives $y\\in\\mathfrak q$. Thus this $\\mathfrak q$ contains both $\\mathfrak p$ and $I$. Together with the preceding step and the embedding this proves the asserted homeomorphism.",
+   "text": "If `p ≤ q` and `I ≤ q`, an element of `S` in `p` has a quotient inverse; lifting that inverse to `A` gives `a*b - 1 ∈ I`, and hence `1 ∈ q`, a contradiction. Conversely, if `p` is disjoint from `S`, `p ⊔ I` is proper: a decomposition of `1` would make the `p` summand a quotient unit. Put `p ⊔ I` in a maximal ideal using `Ideal.exists_le_maximal`, then regard that maximal ideal as a prime.",
    "uses": [
     "lem-weil-pbc-proper-ideal-contained-in-maximal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 096V, lemma-localization, forward direction of (1); Tag 00E0, lemma-Zariski-topology, proof of (8)"
+    "place": "Tag 096V, lemma-localization, identification of the image"
    }
   },
   {
-   "text": "Taking $\\mathfrak p=\\mathfrak q$ in the image description shows $C$ lies in the image. Given $x\\in\\operatorname{Spec}B$, choose $\\mathfrak q\\supseteq I$ containing $h(x)$ and choose $y$ with $h(y)=\\mathfrak q$, using that image description. To verify specialization within the source, apply [lem-weil-pbc-spec-localization-away-basic-open](i) to $B$. Every basic open containing $y$ is $D_B(a/s)=D_B(a/1)$, since $s/1$ is a unit. Then $a\\notin\\mathfrak q$ implies $a\\notin h(x)$, so $x$ belongs to this basic open. Thus every open neighbourhood of $y$ contains $x$, precisely $x\\rightsquigarrow y$. This proves the last clause, with no finiteness condition anywhere.",
+   "text": "Taking `p = q` proves the image contains `V(I)`. For a localization prime `x`, choose `q` above its contraction and then choose `y` over `q` from the image description. The inclusion of contracted ideals lifts to `x ≤ y` by `IsLocalization.under_le_under_iff`, hence `Specializes x y` by the spectrum specialization-order theorem.",
    "uses": [
-    "lem-weil-pbc-spec-localization-away-basic-open"
+    "lem-weil-pbc-localization-spectrum-embedding"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 096V, lemma-localization, (1); Tag 00E0, lemma-Zariski-topology, basic opens"
+    "place": "Tag 096V, specialization clause; Mathlib localization ideal order embedding"
    }
   }
  ],
@@ -86,13 +77,12 @@
   "lem-weil-pbc-localization-ring-weakly-etale",
   "def-weil-pbc-ind-etale-algebra",
   "lem-weil-pbc-localization-spectrum-embedding",
-  "lem-weil-pbc-proper-ideal-contained-in-maximal",
-  "lem-weil-pbc-spec-localization-away-basic-open"
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 096V, lemma-localization, proof of (1) specialized to f=1; Tag 092B for weak etaleness"
+  "by": "document and Mathlib",
+  "document": "literature/stacks-project/proetale.tex; Mathlib RingTheory/Localization/Ideal and Spectrum/Prime/Topology",
+  "place": "Tag 096V, specialized to quotient units, using the localization spectrum and ideal-order APIs"
  },
  "mathlib_searches": [
   {
@@ -219,5 +209,15 @@
   "by": "NQ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261015T181520-L-747784",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
