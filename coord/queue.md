@@ -1,6 +1,6 @@
 # Work queue
 
-39 items; claim with `tools/claim.py next <group> [--stage N]`.
+33 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (39)
+## Stage 3: modules to prove (33)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -31,25 +31,19 @@
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleShriekSpecializationZero` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections` | 5 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedOpenClosedRecollement` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 5 | proof |
 | `Sheaf.Paper.GeometricFieldProEtaleEvaluation` | 5 | 6 | proof |
-| `Sheaf.RingTheory.WContractibleClosedLocalization` | 5 | 1 | proof |
 | `Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits` | 6 | 1 | proof |
 | `Sheaf.NumberTheory.Padics.ExtensionIntegersDvr` | 6 | 1 | proof |
-| `Sheaf.Paper.PointLanAffineEvaluation` | 6 | 1 | proof |
 | `Sheaf.Paper.ProEtaleSheafificationWcontractibleSections` | 6 | 1 | proof |
-| `Sheaf.RingTheory.ProEtale.ClosedLiftMap` | 6 | 3 | proof |
-| `Sheaf.AlgebraicGeometry.IndEtaleBasisWeaklyContractibleCover` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverGeometry` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.LowerShriekCoveringGenerators` | 7 | 1 | proof |
-| `WeilConjectures.RingTheory.ProEtale.ClosedLift` | 7 | 2 | proof |
-| `Sheaf.CategoryTheory.Sites.CoveringRepresentableCoequalizer` | 8 | 1 | proof |
+| `Sheaf.Paper.PointLanFiniteProducts` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
 Also listed above and claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
