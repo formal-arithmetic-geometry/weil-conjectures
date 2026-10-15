@@ -311,5 +311,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9eada6bff",
+  "group": "NE",
+  "result": "pass",
+  "note": "Checked sources, all statement dependencies, exact declarations, universes, edge cases, docstrings, report sections, and verbatim statement. Reproduced clean scompile.py results: sandbox 8.5s, library 9.6s. No defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedOpenClosedRecollement",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensed_open_closed_recollement",
+  "file": "lean/Sheaf/Paper/CondensedOpenClosedRecollement.lean",
+  "statement": "theorem condensed_open_closed_recollement (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (hij : Set.range j = (Set.range i)ᶜ) : Exists fun [hclosed : PreservesFiniteColimits (lowerStar Λ i)] ↦ PreservesFiniteLimits (upperStar Λ j) ∧ PreservesFiniteColimits (upperStar Λ j) ∧ PreservesFiniteLimits (upperStar Λ i) ∧ PreservesFiniteColimits (upperStar Λ i) ∧ PreservesFiniteLimits (openImmersionLowerShriek Λ j) ∧ PreservesFiniteColimits (openImmersionLowerShriek Λ j) ∧ PreservesFiniteLimits (lowerStar Λ i) ∧ PreservesColimitsOfSize.{u + 1, u + 1} (upperStar Λ j) ∧ PreservesColimitsOfSize.{u + 1, u + 1} (upperStar Λ i) ∧ (lowerStar Λ i).Full ∧ (lowerStar Λ i).Faithful ∧ Nonempty (lowerStar Λ i ⋙ upperStar Λ i ≅ 𝟭 _) ∧ ∃ (ishriek : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤ Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)), Exists fun [hadd : ishriek.Additive] ↦ Exists fun [hleft : PreservesFiniteLimits ishriek] ↦ ∃ (ash : lowerStar Λ i ⊣ ishriek) (aj : D+(openImmersionLowerShriek Λ j) ⊣ D+(upperStar Λ j)) (bj : D+(upperStar Λ j) ⊣ (lowerStar Λ j).rightDerivedFunctorPlus) (ai : D+(upperStar Λ i) ⊣ D+(lowerStar Λ i)) (bi : D+(lowerStar Λ i) ⊣ ishriek.rightDerivedFunctorPlus), Exists fun [hjshift : (lowerStar Λ j).rightDerivedFunctorPlus.CommShift ℤ] ↦ Exists fun [hishift : ishriek.rightDerivedFunctorPlus.CommShift ℤ] ↦ aj = derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus Λ j ∧ bj = derivedUpperStarLowerStarAdjunctionPlus Λ j ∧ ai = (upperStarLowerStarAdjunction Λ i).mapDerivedCategoryPlusAdjunction ∧ bi = ash.derivedPlus ∧ aj.CommShift ℤ ∧ bj.CommShift ℤ ∧ ai.CommShift ℤ ∧ bi.CommShift ℤ ∧ (D+(lowerStar Λ i)).Full ∧ (D+(lowerStar Λ i)).Faithful ∧ (∀ K, IsIso (ai.counit.app K)) ∧ (∀ (K : DerivedCategory.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) (a : ℤ), K.IsGE a → (ishriek.rightDerivedFunctorPlus.obj K).IsGE a) ∧ ∃ (δ : D+(upperStar Λ i) ⋙ D+(lowerStar Λ i) ⟶ D+(upperStar Λ j) ⋙ D+(openImmersionLowerShriek Λ j) ⋙ shiftFunctor _ (1 : ℤ)) (ε : D+(upperStar Λ j) ⋙ (lowerStar Λ j).rightDerivedFunctorPlus ⟶ ishriek.rightDerivedFunctorPlus ⋙ D+(lowerStar Λ i) ⋙ shiftFunctor _ (1 : ℤ)), NatTrans.CommShift δ ℤ ∧ NatTrans.CommShift ε ℤ ∧ (∀ K, Triangle.mk (aj.counit.app K) (ai.unit.app K) (δ.app K) ∈ distTriang _) ∧ (∀ K, Triangle.mk (bi.counit.app K) (bj.unit.app K) (ε.app K) ∈ distTriang _) ∧ (∀ a : ℤ, ∃ (I : CochainComplex.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ⥤ CochainComplex.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) (α : CochainComplex.Plus.ι _ ⟶ I ⋙ CochainComplex.Plus.ι _), (∀ K, K.obj.IsGE a → QuasiIso (α.app K)) ∧ (∀ K, (I.obj K).obj.IsStrictlyGE a) ∧ (∀ (K) (n : ℤ), Injective ((I.obj K).obj.X n)) ∧ (∀ K, IsIso (ishriek.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient _).obj (I.obj K))))) ∧ (∀ a : ℤ, ∃ (I : CochainComplex.Plus (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)) ⥤ CochainComplex.Plus (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))) (α : CochainComplex.Plus.ι _ ⟶ I ⋙ CochainComplex.Plus.ι _), (∀ K, K.obj.IsGE a → QuasiIso (α.app K)) ∧ (∀ K, (I.obj K).obj.IsStrictlyGE a) ∧ (∀ (K) (n : ℤ), Injective ((I.obj K).obj.X n)) ∧ (∀ K, IsIso ((lowerStar Λ j).rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient _).obj (I.obj K)))))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
