@@ -181,5 +181,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-prp1901 (reviewer sub-agent of L); spot-checked: Read packet whole. Item vs lem-pc-proper-support-perfect-direct-image (0A1H): item is a special case (E=O_X, G in degree 0, coherent=fin. pres. on loc. Noetherian, projective=>proper support), not a restatement; the split proves it independently from Cech/finiteness/Noetherian-flat-perfect nodes and does not cite 0A1H; 0A1H is unsplit with no proof_deps and lem-pc-rf-perfect-base-change does not cite the item, so no cycle. Steps 1-3 hypotheses checked (projective => qc separated; relative flatness gives M_q flat over A_p; Cech cohomology = H^q finite). Tool use lem-pc-projective-coherent-finiteness accepted as generic finiteness tool. New node lem-pc-affine-sections-flat-over-base = Stacks 00HT(6), true, self-contained; not a duplicate of lem-weil-pbc-flat-map-local-criterion (ring map vs module). Mathlib grep (Mathlib/RingTheory/Flat/Localization.lean): Module.flat_of_isLocalized_maximal assumes M_P flat over R not R_p; node follows by it plus Flat.trans and IsLocalization.flat, so no exact one-declaration leaf; left unsplit. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveNoetherianDirectImagePerfect",
+  "declaration": "AlgebraicGeometry.isPerfect_projective_noetherian_derivedDirectImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveNoetherianDirectImagePerfect.lean",
+  "statement": "theorem isPerfect_projective_noetherian_derivedDirectImage {X S : Scheme.{u}} [IsLocallyNoetherian S] (f : X ⟶ S) [IsProjective f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [∀ U : S.Opens, HasDerivedCategory.{wS} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))] (G : X.Modules) (hGcoherent : RingedSpace.IsCoherent X.toRingedSpace G) (hGflat : Scheme.Modules.IsFlatOver G f) : Scheme.IsPerfect S ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-47bdba3a2",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, dependencies, source, definitions, edge cases, docstrings, report sections, and verbatim signature. Server-only compile reproduced cleanly in 2.3 seconds. No delivery errors found; branch head unchanged."
  }
 }
