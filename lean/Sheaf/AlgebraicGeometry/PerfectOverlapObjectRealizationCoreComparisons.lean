@@ -14,6 +14,7 @@ public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
+import Sheaf.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
 
 /-! # Core object comparison data (without the final Hom pin).
 
@@ -434,6 +435,38 @@ theorem openSiteReturn_overlap_triangle_app (X : Scheme.{u}) {W U : X.Opens}
     Functor.whiskerLeft_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Iso.symm_hom,
     Functor.comp_obj, Category.id_comp, Category.assoc] using h
+
+/-- Inverse component of the open-site restriction triangle. Invert the
+isomorphism equality from `openSiteReturn_overlap_triangle_app`, then cancel
+the return comparison at the smaller open. -/
+theorem openSiteReturn_overlap_triangle_inv_app (X : Scheme.{u}) {W U : X.Opens}
+    (i : W ⟶ U) (E : schemeDerivedCategory X) :
+    let PU := (schemeOpenRestriction X U).mapDerivedCategory
+    let LW := (overlapSiteInverse W).mapDerivedCategory
+    let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
+    let RU := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory
+    let RW := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
+    let τ : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso
+        (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
+    let σ := schemeDerivedOpenRestrictionCompIso X i
+    let ω := openSiteOverlapIso X i
+    (openSiteReturnIso X W).hom.app E ≫ τ.inv.app E ≫
+      SP.map ((openSiteReturnIso X U).inv.app E) =
+        LW.map (σ.inv.app E) ≫ ω.inv.app (PU.obj E) := by
+  intro PU LW SP RU RW τ σ ω
+  let a := SP.mapIso ((openSiteReturnIso X U).app E)
+  let b := τ.app E
+  let c := ω.app (PU.obj E)
+  let d := LW.mapIso (σ.app E)
+  let e := (openSiteReturnIso X W).app E
+  have hf : a.hom ≫ b.hom = c.hom ≫ d.hom ≫ e.hom := by
+    simpa only [a, b, c, d, e, Functor.mapIso_hom, Iso.app_hom] using
+      openSiteReturn_overlap_triangle_app X i E
+  have hc : e.hom ≫ b.inv ≫ a.inv = d.inv ≫ c.inv :=
+    iso_triangle_inverse_cancel a b c d e hf
+  simpa only [a, b, c, d, e, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv]
+    using hc
 
 
 
