@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-cover-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+   "place": "proof decomposition of the local-triviality argument",
+   "via": [
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Composition of local finite-free refinements",
+ "statement": "theorem exists_condensedQbar_refinement_of_local\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (P : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))\n    (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X)\n    (hC : ∀ (i : 𝒰.I₀), ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage (𝒰.X i),\n      ∀ (j : C.I₀), ∃ r : ℕ, Nonempty\n        ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)\n          (C.f j ≫ 𝒰.f i)).obj P ≅\n          Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (C.X j)) r)) :\n    ∃ 𝒲 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒲.I₀,\n      ∃ r : ℕ, Nonempty\n        ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (𝒲.f i)).obj P ≅\n          Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (𝒲.X i)) r)",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "covering composition axiom for a pretopology"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a local refinement cover over every member of the original cover and form the sigma-indexed family of composite morphisms. The indexed composition axiom makes this family a pro-etale cover, and each composite member carries the local finite-free isomorphism.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "covering composition axiom for a pretopology"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite presentation locally finite free bounded image condensed algebraic closure",
+   "results": "No exact result; search service returned only generic finite-presentation/free declarations.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitelyPresented local finite free pro-etale bounded-image coefficient matrix",
+   "results": "No direct match in pinned Mathlib; only generic finite-presentation declarations.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation matrix local finite free sheaf over condensed algebraic closure",
+   "results": "Returned generic AlgebraicGeometry.LocallyOfFinitePresentation and free-locus declarations; no coefficient-specific theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Mod.IsFinitelyPresented Mod.IsFree",
+   "results": "Generic module predicates only; no theorem connecting these predicates for the present coefficient object.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQbarLfpLocalTriviality",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQbarLfpCoverComposition",
+  "file": "lean/Sheaf/Paper/CondensedQbarLfpCoverComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_condensedQbar_refinement_of_local",
+  "statement": "theorem exists_condensedQbar_refinement_of_local\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (P : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))\n    (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X)\n    (hC : ∀ (i : 𝒰.I₀), ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage (𝒰.X i),\n      ∀ (j : C.I₀), ∃ r : ℕ, Nonempty\n        ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)\n          (C.f j ≫ 𝒰.f i)).obj P ≅\n          Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (C.X j)) r)) :\n    ∃ 𝒲 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒲.I₀,\n      ∃ r : ℕ, Nonempty\n        ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (𝒲.f i)).obj P ≅\n          Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (𝒲.X i)) r)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T201714-L-1447338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T201714-L-1447338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,20 +9,8 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Sheaf.Paper.ProfinitePointPullback
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.RingTheory.Ideal.GoingDown
-import Mathlib.Topology.NoetherianSpace
-import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
-import Sheaf.Paper.CondensedPointBasisEvaluation
-import Sheaf.Paper.GeometricFieldProEtaleEvaluation
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.CondensedQbarLfpMatrixRefinement
+import Sheaf.Paper.CondensedQbarLfpCoverComposition
 
 /-!
 # Local triviality for bounded-image condensed algebraic-closure coefficients
@@ -101,6 +89,10 @@ theorem condensedQbar_lfp_locally_free (ℓ : ℕ) [Fact ℓ.Prime]
       ∃ r : ℕ, Nonempty
         ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (𝒲.f i)).obj P ≅
           Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (𝒲.X i)) r) := by
-  sorry
+  classical
+  rcases hP with ⟨𝒰, h𝒰⟩
+  have h0 (i : 𝒰.I₀) := exists_condensedQbar_finiteFree_refinement ℓ X (𝒰.X i)
+    (𝒰.f i) (𝒰.forgetQc.map_prop i) P (h𝒰 i)
+  exact exists_condensedQbar_refinement_of_local ℓ X P 𝒰 h0
 
 end AlgebraicGeometry.ProEtale

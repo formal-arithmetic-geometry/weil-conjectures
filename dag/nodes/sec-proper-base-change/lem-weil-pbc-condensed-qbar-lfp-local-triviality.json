@@ -33,126 +33,36 @@
  ],
  "proof": [
   {
-   "text": "Refine the given presentation covering by affine weakly contractible objects $U$ using [lem-weil-pbc-proetale-affine-wcontractible-covering-family]. Inverse image is exact on abelian sheaves by [lem-weil-pbc-site-pullback-abelian-exact], exact forgetfulness is [lem-weil-pbc-module-sheaves-colimits-forgetful], and the monoidal coefficient comparisons of [lem-weil-pbc-profinite-point-pullback] identify restriction of $A_X$ with $A_U$. Thus each restricted presentation is still a cokernel of a finite matrix over $A_U(U)$. A map of finite free sheaves is determined by the images of its unit basis sections, so its entries really are sections on $U$. Apply [lem-weil-pbc-condensed-point-basis-evaluation] with $F=\\underline\\Omega$: $A_X(U)=\\underline\\Omega(\\pi_0(|U|))$. Each matrix entry is a continuous function with image in a finite intermediate field; directedness in [def-weil-finite-subextension-directed-set] puts the finitely many entries into a single finite field $E_U$. Consequently the matrix is the image of a matrix of sections of $E_U^c$ on $U$. Apply the canonical ring-sheaf identification in [lem-weil-pbc-condensed-lfp-local-triviality] with base $X$ and field $E_U$, and evaluate it on the site object $U$. Its noetherian-base hypothesis holds for $X$; it is not being applied with base $U$. Together with the coefficient composition comparison, it identifies these sections with continuous functions $|U|\\to E_U$. Only its coefficient-realization clause is used, not its local-freeness conclusion. On basis objects the map $E_U^c\\to A_U$ is the inclusion of these functions into the bounded-image functions, by naturality in $F$ of basis evaluation. In particular it is injective there.",
+   "text": "Extract the pro-etale presentation cover from hP. Each map of the cover is weakly etale by its map_prop in the underlying cover (𝒰.forgetQc.map_prop i). Supply this hypothesis to the finite-matrix refinement theorem for the fixed presentation h𝒰 i. This gives a finite-free refinement over that member.",
    "uses": [
-    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-condensed-point-basis-evaluation",
-    "def-weil-finite-subextension-directed-set",
-    "lem-weil-pbc-condensed-lfp-local-triviality"
+    "lem-weil-pbc-condensed-qbar-lfp-matrix-refinement"
    ],
    "elementary": false,
    "source": {
     "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-    "place": "Section 4, Lemma lem:point-eval and Proposition prop:Qbar-X; finite matrix refinement and ordinary cokernel restriction"
+    "place": "Section 4, finite matrix refinement and rank argument"
    }
   },
   {
-   "text": "For a geometric point $\\bar x:\\operatorname{Spec}K\\to X$, pull back $P$ and evaluate at $\\operatorname{Spec}K$. The coefficient comparisons of [lem-weil-pbc-profinite-point-pullback] and [lem-weil-pbc-geometric-field-proetale-evaluation] identify the coefficient ring of this evaluation with $\\underline\\Omega(*)=\\Omega$. The latter node says that evaluation preserves finite free modules and cokernels, that every covering of $\\operatorname{Spec}K$ has a section through one member, and that algebraically closed field extensions preserve this evaluation. The scheme inverse image of [def-weil-proetale-inverse-image] uses base change on site objects. The weakly etale arrows remain weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change], and the family remains fpqc by [lem-galois-fpqc-covering-base-change]. By [def-weil-pbc-proetale-site] it is a covering of $\\operatorname{Spec}K$. Choosing the section through one member and pulling its presentation back along that section therefore gives a finite presentation of the evaluated $\\Omega$-module. Define $r(x)$ to be its finite vector-space dimension. Algebraically closed representatives give the same dimension: embed an algebraic closure of $\\kappa(x)$ into each and apply the extension comparison. If $u\\in U$ maps to $x$, choose an algebraic closure of $\\kappa(u)$ and pull back the presentation on $U$ to this geometric point. Its evaluated matrix is $B_U(u)$, the pointwise value of the matrix of step 1. Indeed for each finite-field section, its continuous-function realization pulls back by composition; the coefficient comparison is natural in the inclusion $\\underline E_U\\to\\underline\\Omega$. This can also be seen directly on the profinite test object: the geometric point picks the component of $u$, and restriction of the representing function along the one-point profinite set gives its value at that component. Thus $r(x)=n_U-\\operatorname{rank}_{\\Omega}B_U(u)$. Since all entries are in $E_U$, rank over $\\Omega$ equals rank over $E_U$: a square minor is nonzero in one field exactly when it is nonzero in the other. Exactness of the inverse image used here is [lem-weil-pbc-site-pullback-abelian-exact]; no conservativity of geometric points is asserted.",
+   "text": "Compose the original presentation cover with the local refinements using the indexed composition axiom for the pro-etale precoverage. The composite maps and the local finite-free isomorphisms give the displayed cover and ranks.",
    "uses": [
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-geometric-field-proetale-evaluation",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-condensed-point-basis-evaluation",
-    "lem-weil-pbc-condensed-lfp-local-triviality",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-galois-fpqc-covering-base-change",
-    "def-weil-pbc-proetale-site"
+    "lem-weil-pbc-condensed-qbar-cover-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Example 4.2.11; Lemmas 4.2.12 and 4.2.13; intrinsic fibre rank argument supplied by the agent"
-   }
-  },
-  {
-   "text": "Let $x$ be a generalization of $y$ in $X$, and choose a presentation member $U$ and a point $u$ above $y$. Such a point exists because coverings are jointly surjective by [def-weil-pbc-proetale-site]. Its map to $X$ is flat: site objects are weakly etale, hence flat. By [def-weil-flat-morphism] the local ring map $\\mathcal O_{X,y}\\to\\mathcal O_{U,u}$ is flat. Apply [lem-sc-flat-going-down] to the prime of $\\mathcal O_{X,y}$ corresponding to $x$ and the maximal ideal of $\\mathcal O_{U,u}$. It gives a generalization $u'$ of $u$ above $x$. Every continuous entry of $B_U$ has equal values at $u$ and $u'$: continuous maps preserve specialization, and in the Hausdorff field $E_U$ a point specializes only to itself. The rank formula of step 2 now gives $r(x)=r(y)$. This uses flatness, not an unsupported claim that weakly etale morphisms are open.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-flat-morphism",
-    "lem-sc-flat-going-down"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00HS, lemma-flat-going-down; explicit specialization argument"
-   }
-  },
-  {
-   "text": "By [lem-sc-noetherian-finite-irreducible-components], the noetherian underlying space of $X$ has finitely many irreducible components $Z_1,\\ldots,Z_t$. By [lem-sc-scheme-sober] each has a generic point $\\eta_i$. Every $x\\in Z_i$ is a specialization of $\\eta_i$, so step 3 proves $r(x)=r(\\eta_i)$. For each value $a$ the level $X_a=\\{x:r(x)=a\\}$ is precisely the union of the components whose generic rank is $a$; if two components meet, their generic ranks agree by evaluating at a point of their intersection. Thus $X_a$ and its complement are finite unions of closed components. The finitely many nonempty rank levels are clopen and cover $X$. No noetherianity of the covering schemes is required.",
-   "uses": [
-    "lem-sc-noetherian-finite-irreducible-components",
-    "lem-sc-scheme-sober"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0052, lemma-Noetherian; schemes.tex Tag 01IS, lemma-scheme-sober; elementary finite union argument"
-   }
-  },
-  {
-   "text": "Fix one weakly contractible affine presentation member $U$, its finite field $E_U$, and a rank level $X_a$. On the open subscheme $V=U\\times_X X_a$ the restricted matrix $B$ has pointwise rank $s=n_U-a$, by step 2, and $0\\le s\\le\\min(m_U,n_U)$ when $V$ is nonempty. Its entries remain sections of $E_U^c$ and continuous $E_U$-valued functions by [lem-weil-pbc-condensed-lfp-local-triviality], applied on the noetherian base $X$ and evaluated on the site object $V$, with the coefficient composition comparison. Neither $U$ nor $V$ is assumed noetherian. Exactness [lem-weil-pbc-site-pullback-abelian-exact] and the coefficient isomorphisms [lem-weil-pbc-profinite-point-pullback], together with exact forgetfulness [lem-weil-pbc-module-sheaves-colimits-forgetful], preserve the cokernel presentation on $V$. For $s>0$, the nonvanishing loci of the $s$ by $s$ minors are open and cover $V$, because the minors are continuous functions into a field and some such minor is nonzero at each point. For $s=0$ use all of $V$. These are Zariski open covers, hence pro-etale covers as in [def-weil-pbc-proetale-site].",
-   "uses": [
-    "lem-weil-pbc-condensed-lfp-local-triviality",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-    "place": "Section 4, Proposition prop:continuous-X; open minor loci in the agent matrix argument"
-   }
-  },
-  {
-   "text": "On one nonvanishing-minor locus $W$, permute rows and columns to write $B=\\left(\\begin{smallmatrix}D&C\\cr F&H\\end{smallmatrix}\\right)$, where $D$ is $s$ by $s$. The entries of $D^{-1}=\\operatorname{adj}(D)/\\det D$ are continuous functions $|W|\\to E_U$. By the continuous-function coefficient realization in [lem-weil-pbc-condensed-lfp-local-triviality] evaluated on the site object $W$ over the original noetherian base $X$, these are sections of $E_U^c$ on $W$, and hence give sections of $A_W$ through the coefficient inclusion. In particular all inverses stay in the same finite field; no global finite-field bound on arbitrary $A_W$-sections is claimed. Over $E_U^c$, the invertible block operations give\n$\\left(\\begin{smallmatrix}D^{-1}&0\\cr -FD^{-1}&1\\end{smallmatrix}\\right)B\\left(\\begin{smallmatrix}1&-D^{-1}C\\cr 0&1\\end{smallmatrix}\\right)=\\left(\\begin{smallmatrix}1&0\\cr 0&H-FD^{-1}C\\end{smallmatrix}\\right)$.\nThe lower block is zero as a matrix of sections: pointwise rank is $s$, so any nonzero entry of that block would give a nonzero $(s+1)$ by $(s+1)$ minor of the displayed matrix; therefore every entry is the zero continuous function. The coefficient realization makes equality of functions equality of sections. Mapping the identity to $A_W$ thus identifies the original cokernel with $A_W^{n_U-s}=A_W^a$. For $s=0$, every entry of $B$ is pointwise zero in $E_U$, hence is the zero coefficient section, and the cokernel is $A_W^{n_U}$. This is an isomorphism of sheaves by explicit invertible matrices, not an inference from isomorphic geometric fibres.",
-   "uses": [
-    "lem-weil-pbc-condensed-lfp-local-triviality"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-    "place": "Section 4, Proposition prop:continuous-X; explicit Schur complement calculation supplied by the agent"
-   }
-  },
-  {
-   "text": "The open minor loci cover each inverse image of a rank level, the rank levels cover each presentation member, and the weakly contractible refinements cover the original presentation covering. Compose these coverings in the site [def-weil-pbc-proetale-site]. The resulting covering $\\{W_\\beta\\to X\\}$ and the isomorphisms of step 6 give exactly $P|_{W_\\beta}\\cong A_{W_\\beta}^{r_\\beta}$ with finite nonnegative ranks. Empty pieces can be omitted. For $X=\\varnothing$ take the empty covering; for zero columns, zero rows, or rank zero the same formulas use the empty blocks and require no inverse or basis lift. All restrictions and presentations used ordinary sheaf cokernels, and no derived completeness hypothesis has entered.",
-   "uses": [
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.3 gives the local-freeness meaning; covering composition and edge cases of the agent proof"
+    "document": "literature/stacks-project/sites.tex",
+    "place": "covering composition axiom; RefactorInstruction.tex Section 4, final composition step"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-condensed-point-basis-evaluation",
-  "def-weil-finite-subextension-directed-set",
-  "lem-weil-pbc-condensed-lfp-local-triviality",
-  "lem-weil-pbc-geometric-field-proetale-evaluation",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-galois-fpqc-covering-base-change",
-  "def-weil-pbc-proetale-site",
-  "def-weil-flat-morphism",
-  "lem-sc-flat-going-down",
-  "lem-sc-noetherian-finite-irreducible-components",
-  "lem-sc-scheme-sober"
+  "lem-weil-pbc-condensed-qbar-lfp-matrix-refinement",
+  "lem-weil-pbc-condensed-qbar-cover-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-  "place": "Section 4, basis coefficient formulas; intrinsic rank, specialization descent and matrix elimination are the agent argument, not a claim quoted from Definition 6.8.3"
+  "place": "Section 4; finite matrix/rank argument isolated and cover composition made explicit"
  },
  "mathlib_searches": [
   {
@@ -342,5 +252,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Reviewed all statement dependencies, exact declarations, sources, hypotheses, conclusions, universes, and edge cases. Signature matches verbatim; scompile.py passed both modes without warnings. No delivery errors found. Review recorded in review.md; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T201714-L-1447338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

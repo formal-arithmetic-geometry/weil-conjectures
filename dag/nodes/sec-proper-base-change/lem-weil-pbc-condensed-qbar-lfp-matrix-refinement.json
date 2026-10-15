@@ -1,0 +1,218 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-lfp-matrix-refinement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+   "place": "proof decomposition of the local-triviality argument",
+   "via": [
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-matrix refinement over one presentation member",
+ "statement": "theorem exists_condensedQbar_finiteFree_refinement\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (X Y : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (f : Y ⟶ X) (hf : WeaklyEtale f)\n    (P : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))\n    (hP : Mod.IsFinitelyPresented\n      ((upperStar Ab.{u + 1} f).obj (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))\n      (((upperStar Ab.{u + 1} f).mapMod\n        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)).obj P)) :\n    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage Y, ∀ i : C.I₀,\n      ∃ r : ℕ, Nonempty\n        ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (C.f i ≫ f)).obj P ≅\n          Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (C.X i)) r)",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4, finite matrix refinement, coefficient realization, rank descent and maximal-minor elimination"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-weakly-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write A_T for the bounded-image coefficient ring on T. The coefficient comparison (lem-weil-pbc-profinite-point-pullback) identifies f^* A_X with A_Y. Unpack hP as a cokernel of a map A_Y^m -> A_Y^n. Since hf makes Y an object of X_proet, use lem-weil-pbc-proetale-affine-wcontractible-covering-family to cover it by affine objects U weakly contractible on X_proet. Restriction preserves the presentation: inverse image preserves finite colimits by lem-weil-pbc-site-pullback-abelian-exact, and forgetfulness preserves cokernels by lem-weil-pbc-module-sheaves-colimits-forgetful. The monoidal comparisons identify the restricted free modules and their coefficients. A map between finite free module sheaves is a finite matrix of sections, by applying it to the global unit basis sections.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-weakly-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite matrix refinement, coefficient realization, rank descent and maximal-minor elimination"
+   }
+  },
+  {
+   "text": "On each U, lem-weil-pbc-condensed-point-basis-evaluation identifies these entries with bounded-image continuous functions on the profinite quotient pi_0(U). Each entry takes values in a finite extension of Q_l. Taking their finite compositum, using def-weil-finite-subextension-directed-set, gives one finite field E for all entries on U. For an empty matrix choose E = Q_l. Thus the matrix comes from E coefficient sections. Apply only the coefficient-realization clause of lem-weil-pbc-condensed-lfp-local-triviality with the original noetherian base X, evaluated at the site object U. It identifies the E sections with continuous functions |U| -> E. Naturality of basis evaluation in the inclusion E -> Qbar_l identifies their images with the original entries. This comparison is natural under restriction, so the E sections on any open W of U are C(|W|, E), still using base X. Neither U nor W is assumed noetherian.",
+   "uses": [
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "def-weil-finite-subextension-directed-set",
+    "lem-weil-pbc-condensed-lfp-local-triviality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite matrix refinement, coefficient realization, rank descent and maximal-minor elimination"
+   }
+  },
+  {
+   "text": "Let S = f(|Y|), with its subspace topology. For x in S, pull P to a geometric representative Spec K -> X above x and evaluate at Spec K. By lem-weil-pbc-geometric-field-proetale-evaluation and the coefficient comparisons, the coefficient ring is Qbar_l and this evaluation preserves cokernels and finite free modules. Choose y above x and an algebraic closure of its residue field. Pulling hP to that geometric point gives a finite-dimensional Qbar_l-vector space. Its dimension r(x) is independent of the choice: an algebraic closure of kappa(x) embeds over kappa(x) into every algebraically closed representative, and the extension comparison of the geometric-evaluation node preserves evaluation. For u in U above x, evaluation of the restricted presentation is therefore the cokernel of B_U(u), and r(x) = n - rank_E(B_U(u)). Evaluation of a coefficient function is its value at u by the naturality in steps 1 and 2. The rank is unchanged on extending E to Qbar_l, since a minor is nonzero in one field exactly when it is nonzero in the other. The original presentation need not exist outside S, and no rank function on all of X is asserted.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite matrix refinement, coefficient realization, rank descent and maximal-minor elimination"
+   }
+  },
+  {
+   "text": "The maps U -> Y -> X are flat: hf supplies flatness of f and the refinement maps are weakly etale. Given a specialization x_g -> x_s in X and u_s in U above x_s, flat going-down (lem-sc-flat-going-down, def-weil-flat-morphism) gives a generalization u_g of u_s above x_g. Explicitly, apply going-down to the flat local map O_(X,x_s) -> O_(U,u_s), the prime corresponding to x_g and the maximal ideal upstairs. Each continuous E-valued matrix entry has the same value at u_g and u_s: continuous maps preserve specialization and E is Hausdorff. The lift puts x_g in S; the rank formula then gives r(x_g) = r(x_s). Since the U cover Y, the same lifting shows that S is stable under generalization.",
+   "uses": [
+    "def-weil-weakly-etale-morphism",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-flat-morphism",
+    "lem-sc-flat-going-down",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite matrix refinement, coefficient realization, rank descent and maximal-minor elimination"
+   }
+  },
+  {
+   "text": "The subspace S is noetherian: an ascending chain of its opens is obtained by intersecting S with an ascending chain of finite unions of opens of X, which stabilizes. Its irreducible components have generic points in S. Indeed, for any nonempty irreducible closed subset Z of S, its closure in X is irreducible and has a generic point eta by lem-sc-scheme-sober. Choose z in Z; eta generalizes z, so eta lies in S by step 4. Since Z is closed in S, closure_X(Z) intersect S = Z, giving eta in Z and closure_S({eta}) = Z. Apply lem-sc-noetherian-finite-irreducible-components to S. Step 4 makes r constant on each component, since its generic point generalizes every point of it. Intersecting components have equal ranks. Each rank level in S and its complement are therefore finite unions of closed components, hence are clopen in S. Their inverse images in U are clopen because U -> X factors continuously through S. These inverse images give an open cover of U; no assertion that S is open in X or that the rank levels extend to clopen subsets of X is needed.",
+   "uses": [
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite matrix refinement, coefficient realization, rank descent and maximal-minor elimination"
+   }
+  },
+  {
+   "text": "On a nonempty piece V of U over the rank level r = a, the matrix has constant rank s = n - a, with s <= min(m,n). If s > 0, the nonvanishing loci of its s by s minors are open, since E minus {0} is open, and cover V by the rank criterion. Fix such a locus W and permute rows and columns so that B = [[D,C],[F,H]], with D the chosen invertible s by s block. Its inverse adj(D)/det(D) has continuous E-valued entries on W. By the coefficient realization of step 2 these are actual E coefficient sections, hence A_W sections; all inverses stay in the same finite field. Invertible block row and column operations give [[D^(-1),0],[-F D^(-1),1]] B [[1,-D^(-1) C],[0,1]]   = [[1,0],[0,H - F D^(-1) C]]. Pointwise rank s forces the Schur complement to vanish: any nonzero entry would give a nonzero (s+1) by (s+1) minor in this block diagonal matrix. Each entry is thus the zero continuous function, hence the zero E coefficient section. Mapping this equality to A_W and using the explicit invertible operations identifies the cokernel with A_W^(n-s) = A_W^a. This is an isomorphism of module sheaves, rather than an inference of isomorphism from the fibres.",
+   "uses": [
+    "lem-weil-pbc-condensed-lfp-local-triviality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite matrix refinement, coefficient realization, rank descent and maximal-minor elimination"
+   }
+  },
+  {
+   "text": "If s = 0, every entry is the zero E-valued function, hence the matrix is zero as a matrix of coefficient sections. Its cokernel is A_V^n; use V itself as the minor locus, with no inverse. This also handles m = 0 or n = 0, with the appropriate empty blocks and free rank n. Omit empty rank pieces and minor loci. If Y is empty, take its empty covering. Otherwise the weakly contractible cover, the open rank pieces, and the open minor covers compose to a pro-etale cover of Y by def-weil-pbc-proetale-site. Exact restriction preserves the cokernel on every piece. The coefficient and inverse-image composition comparisons identify its pullback with (CondensedRing.upperStar Qbar_l (C.f i >> f)).obj P, giving precisely the displayed finite-free isomorphisms. All cokernels are ordinary; no derived completeness assumption is used.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite matrix refinement, coefficient realization, rank descent and maximal-minor elimination"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "def-weil-finite-subextension-directed-set",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-flat-morphism",
+  "lem-sc-flat-going-down",
+  "def-weil-pbc-proetale-site",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-scheme-sober"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4 coefficient realization; agent intrinsic rank argument on f(|Y|), flat going-down using WeaklyEtale f, and explicit maximal-minor elimination; repair of reviewer X-c7b77 E1 and H8/E5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite presentation locally finite free bounded image condensed algebraic closure",
+   "results": "No exact result; search service returned only generic finite-presentation/free declarations.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitelyPresented local finite free pro-etale bounded-image coefficient matrix",
+   "results": "No direct match in pinned Mathlib; only generic finite-presentation declarations.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation matrix local finite free sheaf over condensed algebraic closure",
+   "results": "Returned generic AlgebraicGeometry.LocallyOfFinitePresentation and free-locus declarations; no coefficient-specific theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Mod.IsFinitelyPresented Mod.IsFree",
+   "results": "Generic module predicates only; no theorem connecting these predicates for the present coefficient object.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQbarLfpLocalTriviality",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQbarLfpMatrixRefinement",
+  "file": "lean/Sheaf/Paper/CondensedQbarLfpMatrixRefinement.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_condensedQbar_finiteFree_refinement",
+  "statement": "theorem exists_condensedQbar_finiteFree_refinement\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (X Y : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (f : Y ⟶ X) (hf : WeaklyEtale f)\n    (P : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))\n    (hP : Mod.IsFinitelyPresented\n      ((upperStar Ab.{u + 1} f).obj (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))\n      (((upperStar Ab.{u + 1} f).mapMod\n        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)).obj P)) :\n    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage Y, ∀ i : C.I₀,\n      ∃ r : ℕ, Nonempty\n        ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (C.f i ≫ f)).obj P ≅\n          Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (C.X i)) r)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T201714-L-1447338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T201714-L-1447338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
