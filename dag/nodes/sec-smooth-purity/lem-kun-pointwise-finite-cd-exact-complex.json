@@ -1,0 +1,116 @@
+{
+ "id": "lem-kun-pointwise-finite-cd-exact-complex",
+ "kind": "statement",
+ "title": "Pointwise finite cohomological dimension preserves exact acyclic-term complexes",
+ "statement": "Let C,D be abelian categories [def-sp-abelian], with injective resolutions in C, and let F:C→D be additive and left exact [def-sp-left-exact-additive]. Let (r_i:D→E_i) be a family of functors, where each E_i has zero morphisms, each r_i preserves monomorphisms, and an object M of D is zero whenever every r_i(M) is zero. Suppose d_i∈ℕ and r_i(R^qF(X))=0 for every i, X∈C and q>d_i. For every exact unbounded cochain complex K in C [def-weil-abstract-derived-category] whose terms are F-acyclic [def-sp-acyclic], the termwise image F(K) is exact.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FiniteCohomologicalDimension.lean",
+  "place": "Pointwise variant of the finite-dimension argument in 07K7; source theorem Acyclic.map_of_rightAcyclic_of_forall_isZero and its complete dimension-shifting proof."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-acyclic",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For an exact K write the short exact cycle sequences 0→Z^{m-1}→K^{m-1}→Z^m→0. Since K^{m-1} is F-acyclic, the right-derived long exact sequence gives a monomorphism R^{q+1}F(Z^m)→R^{q+2}F(Z^{m-1}) for q≥0. Apply r_i, which preserves monomorphisms, and iterate d_i times. The target vanishes by the bound, so r_i(R^{q+1}F(Z^m))=0. Joint detection of zero objects implies that every cycle is F-acyclic.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply F to each cycle sequence. Left exactness and the vanishing of R^1F of its leftmost cycle make the image sequence short exact. Its epimorphism onto F(Z^m) followed by the monomorphic image of Z^m→K^m identifies the image of the differential with its kernel. Thus F(K) is exact in every degree. The empty detecting family is allowed only when every object of D is zero, in which case the conclusion still holds.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FiniteCohomologicalDimension.lean",
+  "place": "Pointwise variant of the finite-dimension argument in 07K7; source theorem Acyclic.map_of_rightAcyclic_of_forall_isZero and its complete dimension-shifting proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive left exact functor with pointwise finite cohomological dimension sends exact complexes of acyclic objects to exact complexes",
+   "results": "Service unavailable: Internal Server Error; no results.",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unbounded derived base change map is invertible when underived exchange is invertible and pulled back injectives are acyclic",
+   "results": "8 hits: CochainComplex.IsKInjective.Qh_map_bijective, CochainComplex.IsKProjective.Qh_map_bijective, DerivedCategory.instIsIsoMapCochainComplexIntQ, and localization/exact-functor infrastructure.",
+   "date": "2026-10-15",
+   "verdict": "No matching Mathlib theorem; the source library already proves the tools attached here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAcyclic\"",
+   "results": "0 hits.",
+   "date": "2026-10-15",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "map_of_rightAcyclic_of_forall_isZero|isIso_derivedBaseChangeMap_of_isIso_baseChangeMap|isZero_higherDirectImage_of_two_mul_lt",
+   "results": "0 Mathlib hits. Local source search finds all three declarations in WeilConjectures.",
+   "date": "2026-10-15",
+   "verdict": "Use existing source-library proofs; no duplicate Lean theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperUnboundedBaseChangeModN",
+  "date": "2026-10-15",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0c",
+   "place": "Pointwise variant of the finite-dimension argument in 07K7; source theorem Acyclic.map_of_rightAcyclic_of_forall_isZero and its complete dimension-shifting proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension",
+  "declaration": "HomologicalComplex.Acyclic.map_of_rightAcyclic_of_forall_isZero",
+  "statement": "theorem Acyclic.map_of_rightAcyclic_of_forall_isZero {K : CochainComplex C ℤ}\n    (hK : K.Acyclic) (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]\n    {ι : Type*} {E : ι → Type*} [∀ i, Category* (E i)] [∀ i, HasZeroMorphisms (E i)]\n    (r : ∀ i, D ⥤ E i)\n    [∀ i, (r i).PreservesMonomorphisms] (hr : ∀ M : D, (∀ i, IsZero ((r i).obj M)) → IsZero M)\n    (d : ι → ℕ) (hF : ∀ i (X : C) (q : ℕ), d i < q → IsZero ((r i).obj ((F.rightDerived q).obj X)))\n    (hK' : ∀ n, F.rightAcyclic (K.X n)) :\n    ((F.mapHomologicalComplex _).obj K).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261015T050322-L-1054718",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261015T050322-L-1054718",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -14977,3 +14977,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 12:10 L: batch 20261015T040626 dependency take-out
 - 04:13 L: merged deliver/G2/Sheaf.AlgebraicGeometry.CartesianHigherImageSingleRawClassVanishing (stage 3; reviewer PASS; first push; landing 20261015T041333-L-536434 (interface); batch 20261015T041332; modules 2; new nodes 2; change records: coord/changes/G2-single-raw-class-proof-local.md)
+- 05:03 L: merged deliver/G3/Sheaf.AlgebraicGeometry.ProperUnboundedBaseChangeModN (stage 3; reviewer PASS; after a return; landing 20261015T050322-L-1054718 (proof); batch 20261015T050321; modules 1; new nodes 3)

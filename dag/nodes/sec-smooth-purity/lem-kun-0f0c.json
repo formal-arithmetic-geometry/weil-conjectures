@@ -20,123 +20,85 @@
  ],
  "proof": [
   {
-   "text": "First prove the assertion when $Y$ and $Y^{\\prime}$ are quasi-compact. The morphism $f^{\\prime}$ is proper by [lem-weil-pbc-proper-base-change]. Proper morphisms are of finite type by [def-weil-proper-morphism]. Apply [lem-fin-finite-type-fibre-dimension-bound] separately to $f$ and $f^{\\prime}$, obtaining bounds $d,d^{\\prime}\\geq0$ for their ordinary fibre dimensions. Apply [lem-kun-proper-torsion-cd-bound] to conclude that their higher direct images of every torsion abelian sheaf vanish above $2d,2d^{\\prime}$, respectively. This uses no finite-type structure over a field.",
+   "text": "Put Λ=ULift(ZMod n). Positivity of n supplies NeZero n, so Λ is finite and\nisAddTorsion_of_finite shows that Λ is additively torsion. Every Λ-module sheaf is\ntherefore a torsion module sheaf. For the fibre base-change input, apply the full\nabelian torsion-assembly theorem to the underlying abelian sheaf, then transport its\nsingle-object derived exchange through the forgetful and restriction-of-scalars\ncoefficient comparisons to Λ. This is the finite cyclic coefficient comparison;\nno prime-field statement is used.",
    "uses": [
-    "lem-weil-pbc-proper-base-change",
-    "def-weil-proper-morphism",
-    "lem-fin-finite-type-fibre-dimension-bound",
-    "lem-kun-proper-torsion-cd-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0C, lemma-proper-base-change-mod-n, first three sentences (0A3V and 095U)"
-   }
-  },
-  {
-   "text": "Work in one sufficiently large universe so the small etale sites and coefficient sheaves are small. Their $\\Lambda$-module sheaf categories are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck]; the functors $f_*,f^{\\prime}_*$ on these categories are additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Every $\\Lambda$-module sheaf is annihilated by $n$, hence has torsion underlying abelian sheaf. Taking cohomology of the comparison $b_u$ of [lem-kun-unbounded-abelian-exchange-comparison] at a sheaf in degree zero identifies its module higher direct images with its abelian higher direct images after forgetting. Exactness and conservativity of forgetting therefore carry the two bounds of step 1 to all module sheaves. Thus [lem-kun-finite-cd-acyclic-complex] applies to $f_*$ and $f^{\\prime}_*$.",
-   "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-kun-unbounded-abelian-exchange-comparison",
-    "lem-kun-finite-cd-acyclic-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0C, lemma-proper-base-change-mod-n, finite cohomological dimension paragraph; coefficient comparison 0D6J(3)"
-   }
-  },
-  {
-   "text": "Choose a representative of $K$ and a quasi-isomorphism to a K-injective complex $I^{\\bullet}$ of $\\Lambda$-module sheaves with every $I^r$ injective, by [lem-pur-kinjective-degreewise-existence] applied to the Grothendieck category in step 2. By [def-kun-unbounded-exchange], $Rf_*K$ is represented by $f_*I^{\\bullet}$; inverse images are exact termwise functors by [prop-weil-pbc-inverse-image-modules-exact]. In particular $(g^{\\prime})^{-1}I^{\\bullet}$ represents $(g^{\\prime})^{-1}K$.",
-   "uses": [
-    "lem-pur-kinjective-degreewise-existence",
-    "def-kun-unbounded-exchange",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0C, lemma-proper-base-change-mod-n, choice of the degreewise-injective K-injective representative (079P)"
-   }
-  },
-  {
-   "text": "For each $r$, [lem-sbc-restrict-scalars-injective-direct-image-acyclic] applied to $\\mathbf Z\\to\\Lambda$ gives $R^q f_*(I^r_{ab})=0$ for $q>0$; applied to $\\Lambda\\to\\Lambda$ it also gives module $f_*$-acyclicity of $I^r$. The sheaf $I^r_{ab}$ is torsion. Apply [lemma-weil-pbc-torsion-assembly] to it: the canonical abelian sheaf base-change maps $g^{-1}R^qf_*I^r_{ab}\\to R^qf^{\\prime}_*(g^{\\prime})^{-1}I^r_{ab}$ are isomorphisms for all $q$. Therefore $R^qf^{\\prime}_*(g^{\\prime})^{-1}I^r_{ab}=0$ for $q>0$. Comparison $b_{f^{\\prime}}$ in [lem-kun-unbounded-abelian-exchange-comparison], together with its exact conservative forgetting, gives the same vanishing in module sheaves. In degree zero, the same abelian theorem says that the underived sheaf exchange is an isomorphism. The module adjunction has the underlying abelian unit and counit by [prop-weil-pbc-inverse-image-modules-exact]. Its underived mate $c^r:g^{-1}f_*I^r\\to f^{\\prime}_*(g^{\\prime})^{-1}I^r$ therefore has exactly that underlying abelian exchange, so is an isomorphism: the inverse of a bijective module map is module-linear.",
-   "uses": [
-    "lem-sbc-restrict-scalars-injective-direct-image-acyclic",
     "lemma-weil-pbc-torsion-assembly",
-    "lem-kun-unbounded-abelian-exchange-comparison",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-kun-proper-base-change-forgetful",
+    "lem-weil-pbc-module-abelian-derived-exchange-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0C, lemma-proper-base-change-mod-n, usual proper base change on each injective term (095T)"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $L^{\\bullet}=(g^{\\prime})^{-1}I^{\\bullet}$. All its terms are $f^{\\prime}_*$-acyclic by step 4. The comparison $\\alpha_L:Q(f^{\\prime}_*L^{\\bullet})\\to Rf^{\\prime}_*(QL^{\\bullet})$ is an isomorphism by [lem-kun-finite-cd-acyclic-complex]. Choose a K-injective replacement $r:L^{\\bullet}\\to J^{\\bullet}$ with injective terms by [lem-pur-kinjective-degreewise-existence]. Its terms are $f^{\\prime}_*$-acyclic by the identity-coefficient case used in step 4, so $\\alpha_J$ is also an isomorphism. Naturality of $\\alpha$ gives $Rf^{\\prime}_*(Qr)\\alpha_L=\\alpha_J Q(f^{\\prime}_*r)$. Here $Qr$ and both comparisons are isomorphisms, so $Q(f^{\\prime}_*r)$ is an isomorphism. This proves the needed computation for the unbounded complex; no unbounded spectral-sequence convergence is presumed.",
+   "text": "Geometric-point inverse images jointly detect zero sheaves. Indeed apply isIso_of_isIso_upperStar_map_of_jointlySurjective to 0→M and the geometric points associated to all scheme points. Each point has a lift of its underlying scheme point. The target and source of every pulled-back map are zero, so it is invertible. Conservativity makes 0→M invertible. The proof is also valid for the empty scheme.",
    "uses": [
-    "lem-kun-finite-cd-acyclic-complex",
-    "lem-pur-kinjective-degreewise-existence"
+    "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0C, lemma-proper-base-change-mod-n, application of 07K7 to the pulled-back complex"
-   }
+   "elementary": false
   },
   {
-   "text": "For clarity identify the canonical arrow, not just its endpoints. The sheaf adjunction of [prop-weil-pbc-inverse-image-modules-exact] defines each $c^r$ as the transpose of $f^{\\prime,-1}g^{-1}f_*I^r\\xrightarrow{\\theta}g^{\\prime,-1}f^{-1}f_*I^r\\xrightarrow{g^{\\prime,-1}\\varepsilon_f}L^r$. Naturality in $I^r$ makes these maps a cochain isomorphism $c:g^{-1}f_*I^{\\bullet}\\to f^{\\prime}_*L^{\\bullet}$. Its composite $f^{\\prime}_*(r)c$ has chain-level transpose $r\\,g^{\\prime,-1}\\varepsilon_f\\,\\theta$. The right adjoint $f_*$ of the exact $f^{-1}$ preserves K-injective complexes by [lem-weil-pbc-right-adjoint-preserves-kinjective], and maps into $I,J,f_*I$ are computed in the homotopy category by [lem-weil-pbc-kinjective-hom-derived]. Consequently the chain-level adjunction computes the canonical derived adjunction on these representatives. The displayed transpose is precisely the transpose defining [def-kun-unbounded-exchange] after identifying $K$ with $QI$ and $(g^{\\prime})^{-1}K$ with $QJ$ via $Qr$. Uniqueness of adjoint transposes therefore identifies $\\Ex_{\\square,K}$ with $Q(f^{\\prime}_*r)Q(c)$. Step 5 and degreewise invertibility of $c$ show this composite is an isomorphism.",
+   "text": "For a proper map p:S→T and a point t of T, base change to x:Spec(algClosure κ(t))→T. Its fibre projection is proper, hence finite type over this algebraically closed field. exists_topologicalKrullDim_le supplies d bounding the fibre dimension. Apply the relative torsion-module direct-image dimension bound to the fibre projection and the identity of Spec(algClosure κ(t)), giving vanishing for q>2d.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-kun-unbounded-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0C, lemma-proper-base-change-mod-n, final sentence, explicit canonical-mate calculation"
-   }
-  },
-  {
-   "text": "Remove quasi-compactness as follows. Cover $Y$ by affine opens $V$. For each $V$, cover $g^{-1}(V)$ by affine opens $U$; all the $U$ together cover $Y^{\\prime}$. Apply [sbc-lem-etale-locality](2) in the orientation $X_{\\mathrm{there}}=Y^{\\prime}$, $S_{\\mathrm{there}}=Y$, $T_{\\mathrm{there}}=X$, with $U_i=U$ and $V_i=V$, to the underlying abelian complex $U_XK$. Each restricted square has proper vertical map by [lem-weil-pbc-proper-base-change], and both bases $V,U$ are quasi-compact, so steps 1--6 give its module exchange as an isomorphism. The exchange comparison equation of [lem-kun-unbounded-abelian-exchange-comparison] makes each corresponding abelian exchange an isomorphism. Locality then gives the global abelian exchange as an isomorphism. The same equation and conservativity of forgetting give the original global module exchange as an isomorphism. No quasi-compactness of $g^{-1}(V)$ is needed, since it is covered by the individual affine opens $U$.",
-   "uses": [
-    "sbc-lem-etale-locality",
     "lem-weil-pbc-proper-base-change",
-    "lem-kun-unbounded-abelian-exchange-comparison"
+    "lem-kun-dimension-finite-type",
+    "lem-kun-relative-torsion-direct-image-dimension-bound"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0C, lemma-proper-base-change-mod-n, first sentence: reduction to quasi-compact bases, using 0EZR(2)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the full torsion-assembly theorem to the underlying abelian sheaf G[0] in the\nfibre square. Its derived exchange is an isomorphism. The explicit coefficient\ncomparison through restriction of scalars from ULift ℤ to Λ, together with the\nmodule/abelian derived exchange compatibility, transports this conclusion to the\nΛ-coefficient map used below. The composite of homologyRightDerivedFunctorPlusObjSingleFunctorIso,\nmapDerivedCategoryPlusHomologyFunctorIso, homology of this exchange isomorphism, and\nmapDerivedCategoryPlusSingleFunctor identifies the resulting geometric-point pullback\nwith the fibre higher direct image.",
+   "uses": [
+    "lemma-weil-pbc-torsion-assembly",
+    "lem-kun-proper-base-change-forgetful",
+    "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map f′ is proper by base-change stability. For each point of Y′ choose its bound from the preceding step. Exact geometric-point inverse images preserve monomorphisms, and step 2 says they jointly detect zero. Apply the pointwise finite-cohomological-dimension exact-complex theorem to f′_*. It shows that f′_* sends exact unbounded complexes of f′_*-acyclic sheaves to exact complexes, with no uniform global bound or quasi-compactness assumption on Y′.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-kun-pointwise-finite-cd-exact-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source HasTorsionBaseChange.hasInjectiveAcyclicity applied to the bounded torsion\nbase-change property of f gives that every pulled-back injective torsion module sheaf\nis f′_*-acyclic. The torsion input is the full torsion-assembly theorem, transported\nthrough the same module/abelian and restriction-of-scalars coefficient comparisons;\nunderived proper exchange is supplied separately. Since Λ is torsion, this applies to\nevery injective Λ-module sheaf.",
+   "uses": [
+    "lemma-weil-pbc-torsion-assembly",
+    "lem-kun-proper-base-change-forgetful",
+    "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+    "lemma-weil-pbc-property-iff-acyclicity",
+    "lemma-weil-pbc-proper-underived-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isIso_derivedBaseChangeMap_of_isIso_baseChangeMap to the underived exchange isomorphism, exact-complex preservation from step 5 and pulled-injective acyclicity from step 6. This criterion computes the specified unbounded adjunction mate, so it proves invertibility of the original canonical derivedBaseChangeMap as a natural transformation, with exactly the original hypotheses.",
+   "uses": [
+    "lem-kun-unbounded-exchange-acyclic-criterion"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proper-base-change",
-  "def-weil-proper-morphism",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-kun-proper-torsion-cd-bound",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-kun-unbounded-abelian-exchange-comparison",
-  "lem-kun-finite-cd-acyclic-complex",
-  "lem-pur-kinjective-degreewise-existence",
-  "def-kun-unbounded-exchange",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-sbc-restrict-scalars-injective-direct-image-acyclic",
   "lemma-weil-pbc-torsion-assembly",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "sbc-lem-etale-locality"
+  "lem-kun-proper-base-change-forgetful",
+  "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-proper-base-change",
+  "lem-kun-dimension-finite-type",
+  "lem-kun-relative-torsion-direct-image-dimension-bound",
+  "prop-weil-pbc-inverse-image-exact",
+  "def-weil-pbc-direct-image",
+  "lem-kun-pointwise-finite-cd-exact-complex",
+  "lemma-weil-pbc-property-iff-acyclicity",
+  "lemma-weil-pbc-proper-underived-exchange",
+  "lem-kun-unbounded-exchange-acyclic-criterion"
  ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0F0C, lemma-proper-base-change-mod-n, proof; expanded coefficient comparisons and canonical-mate identification"
- },
+ "proof_origin": "Repair: the fibre derived base-change input is obtained from the full torsion-assembly theorem and transported through the abelian/module and restriction-of-scalars coefficient comparisons used explicitly in the Lean proof.",
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -299,13 +261,13 @@
   "note": "Realizes the existing finite cyclic-coefficient statement; no duplicate integer-coefficient node is introduced."
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261014T214024-L-3378178",
-  "kind": "interface",
+  "landing": "20261015T050322-L-1054718",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

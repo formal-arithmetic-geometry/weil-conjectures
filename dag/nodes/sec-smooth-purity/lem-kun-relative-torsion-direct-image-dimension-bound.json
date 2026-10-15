@@ -1,0 +1,131 @@
+{
+ "id": "lem-kun-relative-torsion-direct-image-dimension-bound",
+ "kind": "statement",
+ "title": "Relative torsion-module direct-image bound over a separably closed field",
+ "statement": "Let k be a separably closed field, Λ a commutative ring in the coefficient universe whose additive group is torsion, and let X,Y be schemes over k. Let f:X→Y be quasi-compact and locally of finite type, a_X:X→Spec(k) and a_Y:Y→Spec(k), with a_Y locally of finite type and f followed by a_Y equal to a_X. Suppose dim(X)≤d for d∈ℕ [def-kun-topological-krull-dimension]. For every étale sheaf M of Λ-modules [def-weil-sheaf-of-modules-category], the higher direct image R^q f_* M [def-weil-pbc-direct-image] is zero whenever q>2d. There is no constructibility, invertibility or properness assumption.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/DirectImageVanishingTorsion.lean",
+  "place": "Geometric-fibre vanishing input in 0F0C/095U; source theorem isZero_higherDirectImage_of_two_mul_lt and its quasi-compact variant."
+ },
+ "stmt_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-direct-image",
+  "def-kun-separably-closed"
+ ],
+ "proof": [
+  {
+   "text": "The compatibility with a_Y and the locally finite type assumptions imply that a_X is locally of finite type. Choose m>0 annihilating 1∈Λ; then m annihilates every section of every Λ-module sheaf, so its underlying abelian sheaf and all its restrictions are torsion.",
+   "uses": [
+    "def-weil-pbc-torsion-etale-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict coefficients to ULift ℤ. Its forgetful functor to abelian sheaves is an equivalence, so the underlying abelian sheaf of an injective ULift ℤ-module sheaf is injective and has no positive cohomology. For each affine étale W→Y put V=W×_Y X. Quasi-compactness of f makes V quasi-compact; it is étale over X and locally finite type over k, hence finite type over k, and dim V≤dim X≤d. The finite-type torsion bound over the separably closed field gives H^q(V,M|_V)=0 for q>2d. The source subsingleton_ext_freeSheaf_of_subsingleton_H_of_acyclic identifies this vanishing with vanishing of the corresponding module Ext group from the free sheaf on V. The free-sheaf pullback identity and derived adjunction identify this Ext group with the value over W of the higher-direct-image presheaf. That presheaf is locally bijective to the higher-direct-image sheaf. Affine étale objects are cover-dense: every local presheaf class is zero on such objects, hence every sheaf section is locally zero and therefore zero. Thus the higher direct image with ULift ℤ coefficients vanishes. This proof also applies to empty V.",
+   "uses": [
+    "thm-sc-finite-type-torsion-cd",
+    "lem-kun-03qu-sep-closed",
+    "lem-weil-pbc-derived-functor-injective-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source restriction-of-scalars higher-direct-image isomorphism transfers this vanishing to the forgotten image of R^qf_*M. Restriction of scalars is faithful: if its image of the identity is zero, the identity itself is zero. Hence R^qf_*M is zero. This is the proof of the source quasi-compact variant, which the attached theorem applies after the first step.",
+   "uses": [
+    "lem-sbc-higher-direct-image-forget-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-torsion-etale-sheaf",
+  "thm-sc-finite-type-torsion-cd",
+  "lem-kun-03qu-sep-closed",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-sbc-higher-direct-image-forget-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/DirectImageVanishingTorsion.lean",
+  "place": "Geometric-fibre vanishing input in 0F0C/095U; source theorem isZero_higherDirectImage_of_two_mul_lt and its quasi-compact variant."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive left exact functor with pointwise finite cohomological dimension sends exact complexes of acyclic objects to exact complexes",
+   "results": "Service unavailable: Internal Server Error; no results.",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unbounded derived base change map is invertible when underived exchange is invertible and pulled back injectives are acyclic",
+   "results": "8 hits: CochainComplex.IsKInjective.Qh_map_bijective, CochainComplex.IsKProjective.Qh_map_bijective, DerivedCategory.instIsIsoMapCochainComplexIntQ, and localization/exact-functor infrastructure.",
+   "date": "2026-10-15",
+   "verdict": "No matching Mathlib theorem; the source library already proves the tools attached here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAcyclic\"",
+   "results": "0 hits.",
+   "date": "2026-10-15",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "map_of_rightAcyclic_of_forall_isZero|isIso_derivedBaseChangeMap_of_isIso_baseChangeMap|isZero_higherDirectImage_of_two_mul_lt",
+   "results": "0 Mathlib hits. Local source search finds all three declarations in WeilConjectures.",
+   "date": "2026-10-15",
+   "verdict": "Use existing source-library proofs; no duplicate Lean theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperUnboundedBaseChangeModN",
+  "date": "2026-10-15",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0c",
+   "place": "Geometric-fibre vanishing input in 0F0C/095U; source theorem isZero_higherDirectImage_of_two_mul_lt and its quasi-compact variant.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion",
+  "declaration": "AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt",
+  "statement": "theorem Etale.isZero_higherDirectImage_of_two_mul_lt (hΛ : IsAddTorsion Λ) {k : Type u}\n    [Field k] [IsSepClosed k] {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f]\n    [QuasiCompact f] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]\n    (hf : f ≫ aY = aX) (d : ℕ) (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))\n    (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (hq : (2 * d : ℤ) < q) :\n    IsZero (Etale.higherDirectImage Λ f q M)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261015T050322-L-1054718",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261015T050322-L-1054718",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
