@@ -15286,3 +15286,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:15 L: returned deliver/F1/Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality (reviewer RETURN: (the landing tools, head 3f9167606) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 23:15 L: merged deliver/H2/Sheaf.Paper.FiniteSplitHypercoverRefinement (stage 3; reviewer PASS; first push; landing 20261015T231531-L-3178029 (interface); batch 20261015T231529; modules 2; new nodes 1)
 - 23:15 L: merged deliver/T1/Sheaf.CategoryTheory.MatchingObjectCoskeleton (stage 3; reviewer PASS; first push; landing 20261015T231531-L-3178151 (interface); batch 20261015T231529; modules 3; new nodes 2)
+- 23:17 L: returned deliver/C1/Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin (reviewer RETURN: (reviewer X-a0498, head a04987a1c) C4: In dag/nodes/sec-picard-framework/lem-pc-perfect-overlap-projection-composition-c)
