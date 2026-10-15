@@ -24,36 +24,37 @@
  ],
  "proof": [
   {
-   "text": "Choose a tower $E_n,t_n,q_n$ from [lem-pc-flat-truncation-tower]. Each $E_n$ is bounded above with flat terms, and $q_n:E_n\\to\\tau_{\\le n}G$ is a degreewise epimorphic quasi-isomorphism. The compositions $q_n\\iota_n$ commute strictly with $t_n$.",
+   "text": "Supply the hypotheses of the source generic flat-resolution theorem for sheaves of modules. Construct the tensor-hom adjunction using currying of presheaf-linear maps and the sheafification adjunction. Sheafifications of free presheaves on representables form a separating family; filtered colimits are exact because the forgetful functor to sheaves of abelian groups preserves them and reflects exactness. The free presheaf on the underlying sections of a module is sectionwise free, hence tensor-flat. The monoidal sheafification adjunction transfers this flatness to its sheafification. Evaluation followed by the counit is an epimorphism, naturally in the module, giving a functorial flat resolution. All these constructions are proved locally in the Lean module, with separate object and morphism universes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved generic declaration CochainComplex.exists_quasiIso_flat_kFlat, whose attachment is [lem-pc-source-module-kflat-resolution], to obtain P and p:P to G, with p a quasi-isomorphism, P termwise flat, and P categorically K-flat. Although that node describes the module-category specialization, its attached Lean theorem is generic and applies directly with the hypotheses constructed in step 1.",
    "uses": [
-    "lem-pc-flat-truncation-tower"
+    "lem-pc-source-module-kflat-resolution"
    ],
    "elementary": false
   },
   {
-   "text": "Let $B=\\bigoplus_nE_n$, $\\phi=1-\\operatorname{shift}_t$, and $s=\\sum_nq_n\\iota_n:B\\to G$. Coproduct extensionality and the strict compatibility give $\\phi s=0$. The mapping-cone desc construction, with zero shifted component and unshifted component $s$, therefore gives $f:\\operatorname{Cone}(\\phi)\\to G$. By [lem-pc-kflat-closure], each bounded-above flat $E_n$ is K-flat and its telescope is K-flat. Evaluation preserves coproducts, so each $B^i$ is flat by the coproduct clause of that same lemma. Each cone term is isomorphic to $B^{i+1}\\oplus B^i$, hence flat by the same clause for a two-element indexing set. Transport flatness across the tensor-right isomorphism. Reindex the small indexing types by ULift into the site universe when applying the countable coproduct clause.",
-   "uses": [
-    "lem-pc-kflat-closure"
-   ],
-   "elementary": false
+   "text": "Choose a flat epimorphism q_i:Q_i to G^i for every integer i. Explicitly construct D with D^i=Q_i direct-sum Q_(i-1) and differential from the first summand identically into the next second summand. Sending the second summand back to the preceding first summand is a contracting homotopy. The maps [q_i,q_(i-1) followed by d_G] define a chain map a:D to G which is epi in each degree. Set K=P direct-sum D and f=[p,a]. Inclusion and projection, together with this contracting homotopy, exhibit P and K as homotopy equivalent, and the inclusion followed by f is p. Consequently f is a quasi-isomorphism and is epi in every degree. Finite sums of flat objects are flat, so all terms of K are flat. These formulas and identities are proved directly, without a boundedness assumption.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply [lem-pc-flat-truncation-telescope-comparison] to $f$, whose restrictions to the shifted and unshifted summands are those of the cone desc construction. This makes $f$ a quasi-isomorphism. In a fixed degree $i$, choose $n=i_{\\ge0}+1$ so that $i<n$. The component of the truncation inclusion $\\iota_n$ in degree $i$ is an isomorphism. Hence $q_n^i\\iota_n^i$ is epi. It factors through $f^i$ by the coproduct inclusion followed by the unshifted cone inclusion, so $f^i$ is epi. These give all four asserted properties of the explicitly constructed telescope.",
-   "uses": [
-    "lem-pc-flat-truncation-telescope-comparison"
-   ],
-   "elementary": false
+   "text": "Categorical K-flatness descends to the homotopy category, hence transfers from P to K along the homotopy equivalence of step 3. For any acyclic Z, the map from the zero complex to Z is a quasi-isomorphism. Tensoring it on the right with K remains a quasi-isomorphism by categorical K-flatness. Its source is zero because tensoring is additive, so its target is acyclic. This is exactly the IsKFlat assertion in the statement; the right half of categorical termwise flatness is exactly the required exactness of tensorRight.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-flat-truncation-tower",
-  "lem-pc-kflat-closure",
-  "lem-pc-flat-truncation-telescope-comparison"
+  "lem-pc-source-module-kflat-resolution"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemmas 06YS and 077J, using the telescope comparison of Derived Categories, Lemma 0949; formal assembly by T2"
+  "by": "worker",
+  "group": "B2",
+  "date": "2026-10-15",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "CochainComplex.exists_quasiIso_flat_kFlat, applied to sheaves of modules using explicitly proved category hypotheses; contractible disk augmentation as in Stacks Derived Categories Tag 06XX; implements the General specialization of the resolution node."
  },
  "mathlib_searches": [
   {
@@ -148,7 +149,7 @@
   "by": "NB",
   "date": "2026-10-15",
   "existing": false,
-  "note": "After supplying KFlat, the compiler selected a live source for this module whose artifact was not published: DerivedChangeOfRingsIndependentCoefficients reported that KFlatResolutionIndependentCoefficients.olean does not exist. Supply its current published independent-coefficient interface as a sibling, retaining all four resolution properties and every signature and proof, with documentation of the derived-completeness application. This is the same theorem, without a site universe equality or an extra assumption."
+  "note": "The recorded coefficient universe max(site-object,site-morphism) cannot accommodate independently sized coefficient fields. Retain all four resolution properties with independent coefficient universe, using the now-published CochainComplex.IsKFlat and the standard relative-smallness convention, without any equality on site universes."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
@@ -159,13 +160,13 @@
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, and all seven per-file scompile checks passed; no fixes required."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T2",
+  "reviewer": "X-cb8de",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T085341-L-40495",
+  "landing": "20261015T154150-L-158307",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged General theorem signature and four conclusions matched the delivered proof and recorded route; compilation is clean and axioms are exactly propext, Classical.choice, Quot.sound."
  }
 }
