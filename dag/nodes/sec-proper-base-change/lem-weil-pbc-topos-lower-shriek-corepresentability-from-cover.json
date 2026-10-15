@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-topos-lower-shriek-corepresentability-from-cover",
+ "kind": "statement",
+ "title": "Corepresentability of all sheaves from covering generators",
+ "statement": "Let C and D be small sites with the stated precoverage stability hypotheses. Let R : Sh(C) → Sh(D) be a functor. Let E be a set of objects of D covering every object, and suppose that for every V ∈ E there is G_V in Sh(C) with a natural bijection Hom(G_V,F) ≅ (R F)(V). Then for every H in Sh(D), the functor F ↦ Hom(H,R F) is corepresentable in Sh(C).",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YX, construction after the covering representable coequalizer presentation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For V in E, compose the assumed natural Hom-to-evaluation isomorphism with the inverse uliftYonedaEquiv and the inverse sheafification adjunction homEquiv. Naturality of all three factors gives CorepresentableBy G for Hom(h_V#, R(-)), hence leftAdjointObjIsDefined for each sheafified representable.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 09YX, first paragraph"
+   }
+  },
+  {
+   "text": "Convert the covering presieves to zero hypercovers by indexing each presieve by its arrows and lifting its index universe. Apply exists_coveringRepresentable_coequalizer to H. Apply Mathlib Functor.leftAdjointObjIsDefined_of_isColimit to each of its two coproduct cofans, using the generator property at every discrete index. Apply that theorem once more to the coequalizer cofork, by cases on WalkingParallelPair. The required colimits in the source sheaf category exist by Mathlib sheafification.",
+   "uses": [
+    "lem-weil-pbc-sheaf-covering-representable-coequalizer-presentation",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WS and Tag 09YX, coequalizer presentation and final equalizer argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-sheaf-covering-representable-coequalizer-presentation"
+ ],
+ "proof_origin": {
+  "by": "document and Mathlib",
+  "document": "literature/stacks-project/sites.tex; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean",
+  "place": "Tags 00WS and 09YX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointObjIsDefined_of_isColimit leftAdjointObjIsDefined_colimit",
+   "results": "Mathlib PartialAdjoint provides closure under colimits and the top-property criterion.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftAdjointObjIsDefined_of_isColimit",
+   "results": "Exact Mathlib declaration found.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "corepresentability closed under colimits partial left adjoint",
+   "results": "Mathlib PartialAdjoint declarations found; no more specialized theorem.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "corepresentability of all sheaves from covering representables and partial left adjoint colimits",
+   "results": "No exact theorem; Mathlib PartialAdjoint colimit closure is the applicable generic result.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Corepresentable functors Hom out of colimits coproducts and coequalizers partial adjoint",
+   "results": "Functor.leftAdjointObjIsDefined_of_isColimit and corepresentableByCompCoyonedaObjOfIsColimit supply the generic closure step; no sheaf-specific criterion.",
+   "date": "2026-10-16",
+   "verdict": "generic match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CorepresentableBy\", \"sheaf\"",
+   "results": "Only PresheafOfModules.pushforwardCompCoyonedaFreeYonedaCorepresentableBy; not this set-valued sheaf criterion.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "corepresent|adjoint.*cover|cover.*adjoint|sheafif.*[Yy]oneda",
+   "results": "Read CoveringRepresentableCoequalizer and searched lean/Sheaf/CategoryTheory, upstream category-theory modules, and Mathlib Yoneda, PartialAdjoint and Sites. No duplicate theorem; the covering presentation is already proved and closes the remaining reduction.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.LowerShriekCoveringGenerators",
+  "date": "2026-10-16",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-topos-lower-shriek-existence-on-covering-generators",
+   "place": "Proof steps 1-6, isolating the representability of arbitrary sheaves before functorial assembly"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.LowerShriekCorepresentability",
+  "file": "lean/Sheaf/CategoryTheory/Sites/LowerShriekCorepresentability.lean",
+  "declaration": "CategoryTheory.leftAdjointObjIsDefined_of_covering_corepresentable_evaluations",
+  "statement": "theorem leftAdjointObjIsDefined_of_covering_corepresentable_evaluations\n    {C : Type u} [SmallCategory C] {D : Type v} [SmallCategory D]\n    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]\n    [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    (K : Precoverage D) [K.HasIsos] [K.IsStableUnderComposition]\n    [K.IsStableUnderBaseChange] [K.HasPullbacks]\n    (R : Sheaf J.toGrothendieck (Type (max u v w)) ⥤\n      Sheaf K.toGrothendieck (Type (max u v w)))\n    (E : Set D)\n    (hcover : ∀ V : D, ∃ S : Presieve V, S ∈ K V ∧\n      ∀ (W : D) (g : W ⟶ V), S g → W ∈ E)\n    (hrep : ∀ V ∈ E, ∃ G : Sheaf J.toGrothendieck (Type (max u v w)),\n      Nonempty (coyoneda.obj (op G) ≅\n        R ⋙ (sheafSections K.toGrothendieck (Type (max u v w))).obj (op V))) :\n    ∀ H : Sheaf K.toGrothendieck (Type (max u v w)),\n      R.leftAdjointObjIsDefined H",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261015T191323-L-1007129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261015T191323-L-1007129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

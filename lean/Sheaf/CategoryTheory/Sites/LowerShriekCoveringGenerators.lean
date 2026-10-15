@@ -10,10 +10,8 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Mathlib.CategoryTheory.Yoneda
-import Sheaf.CategoryTheory.Sites.SheafificationPlusTheorem
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Sheaf.CategoryTheory.Sites.CoveringRepresentableCoequalizer
+import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
+import Sheaf.CategoryTheory.Sites.LowerShriekCorepresentability
 
 /-!
 # A left adjoint from corepresentable evaluations on covering generators
@@ -77,6 +75,17 @@ theorem exists_leftAdjoint_of_covering_corepresentable_evaluations
         R ⋙ (sheafSections K.toGrothendieck (Type (max u v w))).obj (op V))) :
     ∃ L : Sheaf K.toGrothendieck (Type (max u v w)) ⥤
       Sheaf J.toGrothendieck (Type (max u v w)), Nonempty (L ⊣ R) := by
-  sorry
+  have _ := hadj
+  have hdefined : ∀ H : Sheaf K.toGrothendieck (Type (max u v w)),
+      R.leftAdjointObjIsDefined H :=
+    leftAdjointObjIsDefined_of_covering_corepresentable_evaluations
+      J K R E hcover hrep
+  have htop : R.leftAdjointObjIsDefined = ⊤ := by
+    ext H
+    simp only [Pi.top_apply, Prop.top_eq_true, iff_true]
+    exact hdefined H
+  have : R.IsRightAdjoint :=
+    Functor.isRightAdjoint_of_leftAdjointObjIsDefined_eq_top htop
+  exact ⟨R.leftAdjoint, ⟨Adjunction.ofIsRightAdjoint R⟩⟩
 
 end CategoryTheory
