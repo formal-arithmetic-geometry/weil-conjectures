@@ -13,6 +13,6 @@
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CartesianHigherImageSingleRawClassVanishing` | 16 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CartesianRawClassChartRepresentative` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 37 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohTensorResolutionCoordinateSectionsNaturality` | 51 | 1 | proof |
