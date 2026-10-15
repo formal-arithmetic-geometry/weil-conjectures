@@ -14995,3 +14995,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:52 L: returned deliver/C3/Sheaf.AlgebraicGeometry.FiniteRangeComparison (reviewer RETURN: (reviewer X-b6496, head b6496bde7) 6 (nodes agree): in dag/nodes/sec-smooth-base-change/sbc-lem-finite-range-comparison.)
 - 15:14 L: returned deliver/F4/Sheaf.RingTheory.WLocalStalkIsomorphismRetraction (reviewer RETURN: (reviewer X-87bd9, head 87bd9dac7) 6: In dag/nodes/sec-proper-base-change/lem-weil-pbc-wlocal-stalk-isomorphism-retracti)
 - 15:41 L: returned deliver/C2/Sheaf.AlgebraicGeometry.HypercohomologyFiltrations (reviewer RETURN: (the landing tools, head 9106d80cb) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 15:41 L: returned deliver/C4/Sheaf.CategoryTheory.ExactFunctorCouple (reviewer RETURN: (the landing tools, head f3b7f3250) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
