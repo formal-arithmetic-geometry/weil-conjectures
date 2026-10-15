@@ -7,8 +7,6 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import Mathlib.CategoryTheory.Localization.Predicate
 
 /-!
@@ -39,11 +37,11 @@ identifications in the termwise comparison and the right-derived comparison. The
 postcomposition hypothesis is the right-derived universal property with its localized unit.
 
 Proof:
-1. Apply the identity-fraction Hom formula of `preDerivedAdjunctionGeneral` to the termwise
-underived unit and identity denominators. The triangle identity identifies its adjunct
-with the identity; hence the derived unit is the localized underived unit followed by
-`γ`. Exactness identifies the left derived comparison with `mapDerivedCategoryFactors`,
-by `exactFunctor_derivedFunctor`. Repeat for the second adjunction.
+1. Specialize the given canonical Hom formula `hcan` to the identity of the complex
+`C(L)X`. The formula `homEquiv_unit` identifies the derived unit followed by `RR` of
+`mapDerivedCategoryFactors.hom` with the localized underived unit followed by `γ`.
+Compose with `RR` of the inverse factorization to express the derived unit itself.
+Repeat for the second adjunction using `hcan0`.
 2. Specialize `hc` to the identity of `L.obj M`. It identifies the underived units through
 `a.inv` and `c.hom`. Apply this degreewise, localize, and use `hb` and naturality of `γ0`
 for the complex isomorphism induced by `a.inv`. Step 1 gives the derived-unit equation
@@ -143,6 +141,137 @@ theorem derived_adjoint_square_comparison
       V.mapDerivedCategory.map (d.counit.app N) =
         aD.hom.app (RR.obj N) ≫ L0.mapDerivedCategory.map (b.app N) ≫
           d0.counit.app (V.mapDerivedCategory.obj N)) := by
-  sorry
+  have _ := hR
+  have _ := hR0
+  have hη (X : CochainComplex B ℤ) :
+      d.unit.app (DerivedCategory.Q.obj X) ≫ RR.map (L.mapDerivedCategoryFactors.hom.app X) =
+        DerivedCategory.Q.map ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).unit.app X) ≫
+          γ.app ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj X) := by
+    simpa [homEquiv_unit] using
+      hcan X ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj X) (𝟙 _)
+  have hη0 (X : CochainComplex B0 ℤ) :
+      d0.unit.app (DerivedCategory.Q.obj X) ≫ RR0.map (L0.mapDerivedCategoryFactors.hom.app X) =
+        DerivedCategory.Q.map ((adj0.mapHomologicalComplex (ComplexShape.up ℤ)).unit.app X) ≫
+          γ0.app ((L0.mapHomologicalComplex (ComplexShape.up ℤ)).obj X) := by
+    simpa [homEquiv_unit] using
+      hcan0 X ((L0.mapHomologicalComplex (ComplexShape.up ℤ)).obj X) (𝟙 _)
+  have hcC (X : CochainComplex B ℤ) :
+      (W.mapHomologicalComplex (ComplexShape.up ℤ)).map
+          ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).unit.app X) ≫
+        (c.hom.mapHomologicalComplex (ComplexShape.up ℤ)).app
+          ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj X) =
+      (adj0.mapHomologicalComplex (ComplexShape.up ℤ)).unit.app
+          ((W.mapHomologicalComplex (ComplexShape.up ℤ)).obj X) ≫
+        (R0.mapHomologicalComplex (ComplexShape.up ℤ)).map
+          ((a.inv.mapHomologicalComplex (ComplexShape.up ℤ)).app X) := by
+    ext n
+    change W.map (adj.unit.app (X.X n)) ≫ c.hom.app (L.obj (X.X n)) =
+      adj0.unit.app (W.obj (X.X n)) ≫ R0.map (a.inv.app (X.X n))
+    simpa [homEquiv_unit] using
+      (hc (X.X n) (L.obj (X.X n)) (𝟙 _)).symm
+  have hη' (X : CochainComplex B ℤ) :
+      d.unit.app (DerivedCategory.Q.obj X) =
+        DerivedCategory.Q.map ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).unit.app X) ≫
+          γ.app ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj X) ≫
+          RR.map (L.mapDerivedCategoryFactors.inv.app X) := by
+    rw [← Category.assoc, ← hη X]
+    simp [Category.assoc, ← Functor.map_comp]
+  have haDi (X : CochainComplex B ℤ) :
+      L0.mapDerivedCategory.map (W.mapDerivedCategoryFactors.hom.app X) ≫
+        L0.mapDerivedCategoryFactors.hom.app
+          ((W.mapHomologicalComplex (ComplexShape.up ℤ)).obj X) ≫
+        DerivedCategory.Q.map ((a.inv.mapHomologicalComplex (ComplexShape.up ℤ)).app X) ≫
+        V.mapDerivedCategoryFactors.inv.app
+          ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj X) ≫
+        V.mapDerivedCategory.map (L.mapDerivedCategoryFactors.inv.app X) =
+      aD.inv.app (DerivedCategory.Q.obj X) := by
+    have h := congrArg (fun f ↦ aD.inv.app (DerivedCategory.Q.obj X) ≫ f ≫
+      DerivedCategory.Q.map ((a.inv.mapHomologicalComplex (ComplexShape.up ℤ)).app X) ≫
+      V.mapDerivedCategoryFactors.inv.app
+        ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj X) ≫
+      V.mapDerivedCategory.map (L.mapDerivedCategoryFactors.inv.app X)) (haD X)
+    have hac : (a.hom.mapHomologicalComplex (ComplexShape.up ℤ)).app X ≫
+        (a.inv.mapHomologicalComplex (ComplexShape.up ℤ)).app X = 𝟙 _ := by
+      ext n
+      exact a.hom_inv_id_app (X.X n)
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
+      ← Functor.map_comp_assoc, hac] at h
+    erw [Functor.map_id] at h
+    simpa [Category.assoc, ← Functor.map_comp] using h
+  have hq (X : CochainComplex B ℤ) :
+      W.mapDerivedCategory.map (d.unit.app (DerivedCategory.Q.obj X)) ≫
+          b.app (L.mapDerivedCategory.obj (DerivedCategory.Q.obj X)) =
+        d0.unit.app (W.mapDerivedCategory.obj (DerivedCategory.Q.obj X)) ≫
+          RR0.map (aD.inv.app (DerivedCategory.Q.obj X)) := by
+    rw [hη' X]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [show W.mapDerivedCategory.map (RR.map (L.mapDerivedCategoryFactors.inv.app X)) ≫
+        b.app (L.mapDerivedCategory.obj (DerivedCategory.Q.obj X)) =
+      b.app (DerivedCategory.Q.obj ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj X)) ≫
+        RR0.map (V.mapDerivedCategory.map (L.mapDerivedCategoryFactors.inv.app X)) from
+      b.naturality (L.mapDerivedCategoryFactors.inv.app X)]
+    have hw : W.mapDerivedCategory.map (DerivedCategory.Q.map
+          ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).unit.app X)) =
+        W.mapDerivedCategoryFactors.hom.app X ≫
+          DerivedCategory.Q.map ((W.mapHomologicalComplex (ComplexShape.up ℤ)).map
+            ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).unit.app X)) ≫
+          W.mapDerivedCategoryFactors.inv.app
+            ((R.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+              ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj X)) := by
+      have h := congrArg (fun f ↦ f ≫ W.mapDerivedCategoryFactors.inv.app
+        ((R.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+          ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj X)))
+        (W.mapDerivedCategoryFactors.hom.naturality
+          ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).unit.app X))
+      simpa [Category.assoc] using h
+    rw [hw]
+    simp only [Category.assoc]
+    rw [reassoc_of% hb ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj X)]
+    rw [← DerivedCategory.Q.map_comp_assoc, hcC X, DerivedCategory.Q.map_comp]
+    simp only [Category.assoc]
+    erw [reassoc_of% γ0.naturality
+      ((a.inv.mapHomologicalComplex (ComplexShape.up ℤ)).app X)]
+    erw [← reassoc_of% hη0 ((W.mapHomologicalComplex (ComplexShape.up ℤ)).obj X)]
+    erw [← reassoc_of% d0.unit_naturality (W.mapDerivedCategoryFactors.hom.app X)]
+    simpa only [RR0.map_comp, Category.assoc] using
+      congrArg (fun f ↦ d0.unit.app (W.mapDerivedCategory.obj (DerivedCategory.Q.obj X)) ≫
+        RR0.map f) (haDi X)
+  have hu : ∀ M : DerivedCategory B,
+      W.mapDerivedCategory.map (d.unit.app M) ≫ b.app (L.mapDerivedCategory.obj M) =
+        d0.unit.app (W.mapDerivedCategory.obj M) ≫ RR0.map (aD.inv.app M) := by
+    let τ : W.mapDerivedCategory ⟶ L.mapDerivedCategory ⋙ V.mapDerivedCategory ⋙ RR0 :=
+      Functor.whiskerRight d.unit W.mapDerivedCategory ≫
+        Functor.whiskerLeft L.mapDerivedCategory b
+    let σ : W.mapDerivedCategory ⟶ L.mapDerivedCategory ⋙ V.mapDerivedCategory ⋙ RR0 :=
+      Functor.whiskerLeft W.mapDerivedCategory d0.unit ≫ Functor.whiskerRight aD.inv RR0
+    have heq : τ = σ := Localization.natTrans_ext DerivedCategory.Q
+      (HomologicalComplex.quasiIso B (ComplexShape.up ℤ)) hq
+    intro M
+    exact congrArg (fun t ↦ t.app M) heq
+  have hh : ∀ (M : DerivedCategory B) (N : DerivedCategory A)
+      (t : L.mapDerivedCategory.obj M ⟶ N),
+      d0.homEquiv (W.mapDerivedCategory.obj M) (V.mapDerivedCategory.obj N)
+          (aD.inv.app M ≫ V.mapDerivedCategory.map t) =
+        W.mapDerivedCategory.map (d.homEquiv M N t) ≫ b.app N := by
+    intro M N t
+    rw [homEquiv_unit, homEquiv_unit, Functor.map_comp, Functor.map_comp]
+    simp only [Category.assoc]
+    rw [← Category.assoc, ← hu M, Category.assoc]
+    congr 1
+    exact (b.naturality t).symm
+  refine ⟨hh, hu, ?_⟩
+  intro N
+  have h := hh (RR.obj N) N (d.counit.app N)
+  have he : d.homEquiv (RR.obj N) N (d.counit.app N) = 𝟙 _ := by
+    simp [homEquiv_unit]
+  rw [he, Functor.map_id, Category.id_comp] at h
+  have h' := (d0.homEquiv _ _).symm_apply_eq.mpr h.symm
+  rw [homEquiv_counit] at h'
+  calc
+    V.mapDerivedCategory.map (d.counit.app N) =
+        aD.hom.app (RR.obj N) ≫
+          (aD.inv.app (RR.obj N) ≫ V.mapDerivedCategory.map (d.counit.app N)) := by
+      simp
+    _ = _ := by rw [← h']
 
 end CategoryTheory.Adjunction

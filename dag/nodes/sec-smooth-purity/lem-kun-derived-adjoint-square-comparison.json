@@ -27,19 +27,16 @@
  ],
  "proof": [
   {
-   "text": "Write $u,u_0$ for the underived units, to distinguish them from $\\eta,\\eta_0$. Exactness of $L,L_0$ and [lem-weil-pbc-exact-functor-derived-functor] identify their left derived functors, including the comparison maps, with $D(L),D(L_0)$. For a complex $X$, naturality of $u$ with respect to each differential gives $R(L(d_X^i))u_{X^i}=u_{X^{i+1}}d_X^i$, so $C(u)_X$ is a chain map. Additive functors preserve the equation defining a chain homotopy, so these maps and the termwise adjunction descend to the homotopy categories used in [lem-pc-pre-derived-adjoint-functors-general]. In its canonical Hom formula, take $K=C(L)X$, $M=X$, both quasi-isomorphisms $s,t$ to be identities, and $f=C(u)_X:X\\to C(R)C(L)X$. The representing right-derived cocone at the identity is $\\gamma_{C(L)X}$; the left-derived cone at the identity is the exact localization identification. The underived adjunct of $f$ is $1_{C(L)X}$ (the triangle identity, degree by degree). Thus the inverse of the canonical Hom bijection sends $1_{D(L)Q_{\\mathcal B}X}$ to $\\gamma_{C(L)X}Q_{\\mathcal B}(C(u)_X)$. By the definition of the unit of an adjunction this proves\n$$\\eta_{Q_{\\mathcal B}X}=\\gamma_{C(L)X}Q_{\\mathcal B}(C(u)_X).$$\nThe same substitution for $L_0\\dashv R_0$ gives $\\eta_{0,Q_{\\mathcal B_0}Y}=\\gamma^0_{C(L_0)Y}Q_{\\mathcal B_0}(C(u_0)_Y)$. All formulas use the exact-functor localization identifications fixed in the statement.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-pc-pre-derived-adjoint-functors-general"
-   ],
-   "elementary": false,
+   "text": "Specialize the given canonical Hom compatibility hcan to the identity of C(L)X. The formula homEquiv_unit and functoriality give η_QX followed by RR of the exact factorization hom = Q(C(u)_X) followed by γ_C(L)X. Do the same with hcan0. The factorization is invertible, so composing the first equality with RR of its inverse also expresses η_QX itself. These calculations use the canonicality hypotheses already in the statement, without constructing another derived adjunction or invoking a general derived-functor existence theorem.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
     "place": "Tags 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 0FND (lemma-pre-derived-adjoint-functors-general); agent square calculation from their canonical Hom formula"
    }
   },
   {
-   "text": "Apply the stipulated underived adjunct compatibility to $t=1_{LM}$. Since its adjunct is $u_M$, and the adjunct under $L_0\\dashv R_0$ of $a_M^{-1}:L_0WM\\to VLM$ is $R_0(a_M^{-1})u_{0,WM}$, it gives $c_{LM}W(u_M)=R_0(a_M^{-1})u_{0,WM}$. Apply this equality in every degree of a complex $X$ of $\\mathcal B$ and localize. Using Step 1 and the defining equation for $b$ at $P=C(L)X$, the left side of the desired derived-unit equation is\n$$b_{D(L)QX}D(W)(\\eta_{QX})=\\gamma^0_{C(V)C(L)X}Q_{\\mathcal B_0}(C(c)_{C(L)X})Q_{\\mathcal B_0}(C(W)C(u)_X)$$\n$$=\\gamma^0_{C(V)C(L)X}Q_{\\mathcal B_0}(C(R_0)(C(a)_X^{-1}))Q_{\\mathcal B_0}(C(u_0)_{C(W)X})$$\n$$=RR_0(Q_{\\mathcal A_0}(C(a)_X^{-1}))\\gamma^0_{C(L_0)C(W)X}Q_{\\mathcal B_0}(C(u_0)_{C(W)X})$$\n$$=RR_0((a^D_{QX})^{-1})\\eta_{0,D(W)QX}.$$\nHere $Q=Q_{\\mathcal B}$ in subscripts. The third equality is precisely naturality of $\\gamma^0$ for the complex isomorphism $C(a)_X^{-1}:C(L_0)C(W)X\\to C(V)C(L)X$, and the last equality is Step 1 for $Y=C(W)X$. This is an equality of composites, not cancellation of $\\gamma$ or an assumption that it is invertible.",
+   "text": "Specialize hc to the identity of LM to obtain W(u_M) followed by c_LM = u0_WM followed by R0(a_M inverse). Apply this degreewise: extensionality of chain maps proves hcC. From haD, compose with aD inverse on the left and with Q(C(a inverse)), the V factorization inverse and V of the L factorization inverse on the right; cancelling only isomorphisms gives haDi. Expand η_QX using Step 1. Naturality of b moves RR of the L factorization inverse to the right. Naturality of the W factorization moves W(Q(C(u))) through its localization identification. Now hb at C(L)X applies. Combine the two consecutive Q maps and use hcC; naturality of γ0 for C(a inverse) moves that map to the right. Step 1 for the second adjunction and naturality of its unit then reduce the remaining composite to RR0(haDi). This is precisely the derived-unit equality at QX. Neither γ nor b is cancelled or assumed invertible.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -59,10 +56,8 @@
    }
   },
   {
-   "text": "For $t:D(L)M\\to N$, the adjunctions of [lem-pc-derived-adjoint-functors] give $t^\\sharp=RR(t)\\eta_M$. The adjunct under the second adjunction of $D(V)(t)(a^D_M)^{-1}$ is consequently\n$$RR_0(D(V)(t))RR_0((a^D_M)^{-1})\\eta_{0,D(W)M}\n=RR_0(D(V)(t))b_{D(L)M}D(W)(\\eta_M)\n=b_ND(W)(RR(t))D(W)(\\eta_M)=b_ND(W)(t^\\sharp).$$\nThe first equality uses Step 3, and the second uses naturality of $b$ for $t$. The adjunct formula itself follows from the definition of the unit and functoriality of the Hom bijection.",
-   "uses": [
-    "lem-pc-derived-adjoint-functors"
-   ],
+   "text": "For t:D(L)M→N, rewrite both adjuncts by homEquiv_unit. Expand the functor maps of composites, substitute the derived-unit identity of Step 3, and use naturality of b at t. This proves the asserted Hom compatibility for arbitrary derived objects.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
@@ -80,15 +75,12 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-pc-derived-adjoint-functors"
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors), 0FND (lemma-pre-derived-adjoint-functors-general); agent square calculation from their canonical Hom formula"
+  "place": "Tags 09T5, 0DVC and 0FND; H2 direct square calculation from the canonical Hom formulas assumed as hcan and hcan0, 2026-10-16"
  },
  "mathlib_searches": [
   {
@@ -275,5 +267,15 @@
   "by": "NY",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261015T205051-L-1693720",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
