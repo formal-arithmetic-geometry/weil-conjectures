@@ -14,34 +14,51 @@
  ],
  "proof": [
   {
-   "text": "Insert the common augmentation into the resolution-degree-zero total summands, using extension isomorphisms. The horizontal augmentation square proves the horizontal cochain equation; the vertical equation vanishes, so the totalization sign gives no extra term. Negative source terms are zero. The two comparison augmentation squares imply naturality degreewise.",
+   "text": "Construct the augmentation explicitly in every integer degree. Apply G to the bicomplex augmentation, using singleMapHomologicalComplex to identify its source with single degree zero of GF(J). Extend each mapped column by zero. Insert its degree-zero augmentation into the (n,0) total summand. The cochain equation follows from the horizontal augmentation square and from the vanishing vertical composite; the horizontal total sign is one. Compose with the inverse mapExtendIso for F followed by G to get the required extended source. The component calculation uses the explicit inverse component of mapExtendIso. No data is chosen from an existence theorem.",
    "uses": [
     "def-sp-cartan-eilenberg-presentation",
     "def-sp-double-complex-total"
    ],
+   "elementary": true
+  },
+  {
+   "text": "For each integer horizontal degree s, the term of the extended injective resolution is injective, including negative degrees where it is zero. The composite acyclicity hypothesis therefore makes F of that term G-acyclic. The source column is concentrated in vertical degree zero; its other terms are zero and hence G-acyclic. All target column terms are injective by term_injective and therefore G-acyclic. Apply the natural-indexed version of the Leray quasi-isomorphism preservation lemma to column_quasiIso. Precomposition by the single-complex comparison isomorphism gives quasi-isomorphisms for the mapped augmentation columns.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-composite-acyclicity",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+   ],
    "elementary": false
   },
   {
-   "text": "Each column resolves F(J^p) by injectives. Injective acyclicity makes its mapped positive cohomology zero and identifies degree zero with GF(J^p). The column spectral sequence of the augmentation cone has zero terms and zero abutment: first-quadrant support makes the filtration finite in each total degree. Thus the cone is acyclic and the augmentation is a quasi-isomorphism.",
+   "text": "The mapped columns vanish in horizontal degrees below zero. Compose the constructed total augmentation with totalFlipIso.inv. Its (0,n) component is the component required by cartanEilenberg_augmentation_quasiIso because the symmetry sign at (n,0) is one. Apply the exact augmented columns theorem, then cancel the total symmetry isomorphism to obtain a quasi-isomorphism to the unflipped total. Precomposition by the mapExtendIso inverse preserves this property.",
    "uses": [
-    "def-sp-composite-acyclicity",
-    "thm-sp-double-complex-spectral-sequences",
-    "lem-sp-derived-well-defined"
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-double-complex-total",
+    "lem-sp-cartan-eilenberg-augmentation-quasi-iso"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove naturality for the column total augmentation degreewise using the total-map coprojection identity and extendMap_f. Apply G to Comparison.comm_e to supply the required degree-zero square. Naturality of mapExtendIso then transports that square to the prescribed extended GF source. The calculation holds in every integer degree and consequently covers all negative source terms without a separate choice.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-cartan-eilenberg-presentation",
   "def-sp-composite-acyclicity",
   "def-sp-double-complex-total",
-  "lem-sp-derived-well-defined",
-  "thm-sp-double-complex-spectral-sequences"
+  "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Derived Categories",
-  "place": "Tags 015N (Grothendieck spectral sequence), 015J (CE spectral sequences), 015K (functoriality); acyclic-column argument; expanded and formalized by T3"
+  "document": "Stacks Project, Derived Categories and Homology",
+  "place": "Tags 015N and 015K; acyclic-column reduction using Leray acyclicity (015E) and the exact augmented-column total theorem (0133, 015J). Explicit construction and Lean proof by N1, 2026-10-16."
  },
  "mathlib_searches": [
   {
@@ -136,14 +153,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
+  "reviewer": "X-639fc",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T095924-L-324917",
+  "landing": "20261015T212922-L-2070439",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module and node proof fields matched against packet and published clone; all files and direct importer compiled cleanly, with theorem axioms limited to propext, Classical.choice, and Quot.sound."
  },
  "lean_audit": {
   "master": {
