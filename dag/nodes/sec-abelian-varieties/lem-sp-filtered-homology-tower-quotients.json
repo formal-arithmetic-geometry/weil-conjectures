@@ -16,34 +16,36 @@
  ],
  "proof": [
   {
-   "text": "For each s, the graded inclusion of Z_(s+1) has zero graded differential because s+1>=1. Its unique factorization through the monic graded-cycle inclusion defines j. After constructing t by the finite-cycle formula below, the tower projection at zero is its subobject arrow. Epic cancellation in hH identifies its composite as pi eH e0 inverse. Thus this composite is epic and has exactly the first boundary kernel, by cokernel exactness in an abelian category.",
+   "text": "Factor every graded cycle inclusion through graded cycles. Monotonicity of filtered cycles reduces the square-zero condition to the first-page kernel formula. This defines the normalized j family uniquely. After the normalized t family is constructed, use hH and epic cancellation to identify the stage-zero composite with pi followed by eH and the inverse initial E isomorphism. Cokernel exactness gives the epic quotient and its boundary kernel.",
    "uses": [
+    "def-sp-abelian",
     "def-sp-filtered-complex-subquotients",
     "def-sp-filtered-homology-exact-couple",
     "def-sp-convergence",
-    "def-sp-abelian"
+    "lem-sp-filtered-complex-first-page-cycles-boundaries"
    ],
    "elementary": false
   },
   {
-   "text": "Construct the entire normalized t family before the quotient induction. By finiteCycle_formula, T.Z s is the inverse image under initial f of the incoming s-fold alpha image. For an (s+1)-cycle representative a, the initial connecting class is represented by da in F^(p+s+1); inclusion into F^(p+1) induces precisely that alpha iterate. This gives the required factorization on an epic representative cover. The initial E class vanishes on its kernel, so the factorization descends to the graded cycle object. The monic tower inclusion determines t uniquely at each stage. This argument requires neither epimorphy of t nor a page quotient comparison. It supplies all stages before applying the differential lemma, avoiding an existential-family assumption during an inductive construction.",
+   "text": "Construct all t before the quotient induction. Identify alphaIter with homology of filtration inclusions, and initial f with the connecting morphism. The connecting-morphism representative formula sends an (s+1)-cycle representative to its differential in F^(p+s+1). The differential is a cycle because d squared vanishes. Its homology class, followed by the incoming alpha inclusion, represents the initial connecting class. Thus the initial E class factors through the finite-cycle-formula pullback on an epic cycle-representative cover. Invariance of image under epic precomposition gives the same factorization on the graded cycle subobject itself. Factor through the monic canonical tower inclusion to obtain t and its normalization at every stage.",
    "uses": [
     "lem-sp-finite-cycle-formula",
+    "lem-sp-filtered-complex-representative-epis",
     "def-sp-filtered-homology-couple-data",
     "def-sp-filtered-complex-subquotients"
    ],
    "elementary": false
   },
   {
-   "text": "Inductively suppose the normalized t maps at stage s give the stated epic quotients with boundary kernels. Their cokernel universal properties identify this stage with the concrete quotient page. Choose the unique concrete representative differential, and use the tower differential calculation on an epic representative cover to identify the outgoing and incoming canonical differentials with that differential. Successor graded cycles cover its outgoing kernel by the successor-cycle cover lemma. Its incoming image pulls back to exactly successor boundaries by the successor-boundary image lemma. Consequently the successor map through derivedEProjection is epic with kernel B_(s+2). The normalized t family has already been constructed at every stage by the finite-cycle formula; it is not chosen by this induction. The cycleLift_comm and projection_succ equations identify its composite projection with the preceding kernel-to-homology map and preserve the initial-homology normalization. This proves all four assertions at s+1. Equivalently the kernel calculation says that quotienting the outgoing kernel by its incoming image gives Z_(s+2)/B_(s+2).",
+   "text": "Induct on the epic quotient and boundary kernel assertions only. At stage s their cokernel universal property supplies normalized isomorphisms to concrete quotient pages. Choose the uniquely normalized representative differential. The tower differential formula on an epic representative cover identifies both incoming and outgoing differentials after reindexing. Kernel and cokernel universal properties transport the canonical derived E quotient to the homology of this concrete page. Use filteredComplex_normalized_homology, which already packages the successor-cycle cover and successor-boundary image, to identify that homology with the successor quotient, normalized on successor cycles. Monic normalization of j and t identifies their transition maps. The canonical cycleLift_comm and projection_succ equations then identify the successor Q followed by this isomorphism with the concrete cokernel projection. Epimorphy and the boundary kernel follow from this equation and cokernel exactness.",
    "uses": [
     "lem-sp-filtered-homology-tower-differential",
     "lem-sp-filtered-complex-differential-representatives-cover",
     "lem-sp-filtered-complex-page-differential",
-    "lem-sp-filtered-complex-successor-cycles-cover",
-    "lem-sp-filtered-complex-successor-boundaries-image",
+    "lem-sp-filtered-complex-normalized-homology",
     "def-sp-convergence",
-    "def-sp-exact-couple"
+    "def-sp-exact-couple",
+    "def-sp-abelian"
    ],
    "elementary": false
   }
@@ -56,9 +58,10 @@
   "def-sp-filtered-homology-couple-data",
   "def-sp-filtered-homology-exact-couple",
   "lem-sp-filtered-complex-differential-representatives-cover",
+  "lem-sp-filtered-complex-first-page-cycles-boundaries",
+  "lem-sp-filtered-complex-normalized-homology",
   "lem-sp-filtered-complex-page-differential",
-  "lem-sp-filtered-complex-successor-boundaries-image",
-  "lem-sp-filtered-complex-successor-cycles-cover",
+  "lem-sp-filtered-complex-representative-epis",
   "lem-sp-filtered-homology-tower-differential",
   "lem-sp-finite-cycle-formula"
  ],
@@ -66,7 +69,7 @@
   "by": "agent",
   "document": "Stacks Project, Homological Algebra",
   "place": "Tags 012K and 011R",
-  "note": "V2 componentwise expansion of the parent induction, with unique monic normalizations and canonical tower recurrence. Second reading: construct the full normalized family first via finiteCycle_formula, then induct only on epimorphy and kernels."
+  "note": "T3: compiled implementation of the normalized-family construction followed by quotient induction. Uses the existing normalized-homology comparison for the successor cycle/boundary calculation; generic kernel/cokernel transport and all index bookkeeping are proved locally. No new admitted statements."
  },
  "mathlib_searches": [
   {
@@ -145,13 +148,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T100200-L-2496979",
-  "kind": "interface",
+  "landing": "20261015T212935-L-2072344",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
