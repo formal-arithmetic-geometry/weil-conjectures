@@ -6,7 +6,7 @@ Authors: SHEAF group S3
 module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
-public import Sheaf.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Sites.Sieves
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 

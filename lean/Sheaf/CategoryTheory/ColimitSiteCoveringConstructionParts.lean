@@ -2,8 +2,8 @@ module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
-public import Sheaf.CategoryTheory.ArrowsFunctor
-public import Sheaf.CategoryTheory.FinitePrecoverage
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Sheaf.CategoryTheory.FilteredColimitPreservesPullback
 import Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsHasPullbacks

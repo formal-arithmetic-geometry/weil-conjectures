@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Algebra.Category.Grp.FilteredColimits

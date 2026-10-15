@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.CategoryTheory.FilteredColimitCategories
-public import Sheaf.CategoryTheory.FinitePrecoverage
+public import WeilConjectures.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Algebra.Category.Grp.Limits

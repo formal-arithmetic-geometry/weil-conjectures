@@ -6,8 +6,8 @@ Authors: SHEAF group U3
 module
 
 public import Sheaf.CategoryTheory.ColimitSiteAbelianStageImage
-public import Sheaf.CategoryTheory.ArrowsFunctor
-public import Sheaf.CategoryTheory.FinitePrecoverage
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.FinitePrecoverage
 import Sheaf.CategoryTheory.ColimitSiteAbelianStageMatchingLift
 
 /-! # Stage-image descent on a filtered colimit of sites

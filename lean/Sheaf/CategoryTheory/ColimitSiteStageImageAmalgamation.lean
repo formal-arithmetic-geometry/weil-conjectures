@@ -5,8 +5,8 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.CategoryTheory.ArrowsFunctor
-public import Sheaf.CategoryTheory.FinitePrecoverage
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.FinitePrecoverage
 public import Sheaf.CategoryTheory.ColimitSiteStageImage
 import all Sheaf.CategoryTheory.ColimitSiteSetSectionEventualEquality
 import Sheaf.CategoryTheory.StageSectionTransitionExistence

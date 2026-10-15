@@ -5,8 +5,8 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.CategoryTheory.ArrowsFunctor
-public import Sheaf.CategoryTheory.FinitePrecoverage
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
 import Mathlib.CategoryTheory.Filtered.Final

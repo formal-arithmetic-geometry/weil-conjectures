@@ -5,7 +5,7 @@ Authors: SHEAF workers F1, B3
 -/
 module
 
-public import Sheaf.Algebra.Homology.ZigzagModule
+public import WeilConjectures.Algebra.Homology.ZigzagModule
 
 /-!
 # Functoriality of zig-zag modules

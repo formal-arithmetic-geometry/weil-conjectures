@@ -5,7 +5,7 @@ Authors: SHEAF worker H1
 -/
 module
 
-public import Sheaf.Algebra.Homology.ZigzagModule
+public import WeilConjectures.Algebra.Homology.ZigzagModule
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Homology.ShortComplex.Exact

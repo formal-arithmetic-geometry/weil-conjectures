@@ -6,8 +6,8 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.CategoryTheory.ColimitSiteAbelianStageImage
-public import Sheaf.CategoryTheory.ArrowsFunctor
-public import Sheaf.CategoryTheory.FinitePrecoverage
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.FinitePrecoverage
 import Sheaf.CategoryTheory.ColimitSiteAbelianFiniteFamilyStabilizationNonempty
 
 /-! # Stabilization of finite abelian stage families

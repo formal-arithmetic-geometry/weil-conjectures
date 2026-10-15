@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
-public import Sheaf.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 import Sheaf.CategoryTheory.ColimitSiteCoveringFamiliesAtStage
 import Sheaf.CategoryTheory.FilteredColimitPreservesPullback

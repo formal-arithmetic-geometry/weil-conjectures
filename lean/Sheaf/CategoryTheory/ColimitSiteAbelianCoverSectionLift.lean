@@ -6,7 +6,7 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.CategoryTheory.ColimitSiteAbelianStageImage
-public import Sheaf.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
 import Sheaf.CategoryTheory.ColimitSiteAbelianFiniteObjectSectionLift
 
 /-! # Individual stage lifts on a finite cover

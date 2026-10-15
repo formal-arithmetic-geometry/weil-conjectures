@@ -5,7 +5,7 @@ Authors: SHEAF group S3
 -/
 module
 
-public import Sheaf.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Functor.KanExtension.Basic
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 public import Mathlib.Algebra.Category.Grp.Colimits

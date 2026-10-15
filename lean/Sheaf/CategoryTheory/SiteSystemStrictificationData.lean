@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Category.Cat
 public import Mathlib.CategoryTheory.Comma.Arrow
 public import Mathlib.CategoryTheory.Category.Preorder
-public import Sheaf.CategoryTheory.FinitePrecoverage
+public import WeilConjectures.CategoryTheory.FinitePrecoverage
 import Sheaf.CategoryTheory.SiteSystemStrictificationCategory
 import Sheaf.CategoryTheory.SiteSystemFiniteSheafTransport
 

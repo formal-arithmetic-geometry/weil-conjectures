@@ -6,7 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
-public import Sheaf.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 

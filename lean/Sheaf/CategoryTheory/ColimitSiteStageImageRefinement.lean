@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.ColimitSiteStageImage
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 

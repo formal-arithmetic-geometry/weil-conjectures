@@ -1,8 +1,8 @@
 module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
-public import Sheaf.CategoryTheory.ArrowsFunctor
-public import Sheaf.CategoryTheory.FinitePrecoverage
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.FinitePrecoverage
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 import Sheaf.CategoryTheory.FilteredColimitPreservesPullback
 

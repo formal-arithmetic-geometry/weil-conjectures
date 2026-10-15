@@ -5,7 +5,7 @@ Authors: SHEAF group G2
 -/
 module
 
-public import Sheaf.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Limits.Types.Filtered
 import Sheaf.CategoryTheory.FilteredColimitFiberOperations
 import Sheaf.CategoryTheory.FilteredColimitFiberLaws

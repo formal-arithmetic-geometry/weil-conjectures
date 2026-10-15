@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.Algebra.Homology.ZigzagModule
+public import WeilConjectures.Algebra.Homology.ZigzagModule
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 import Sheaf.Algebra.Homology.ZigzagModuleFunctorial
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat

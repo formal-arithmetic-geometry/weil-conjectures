@@ -5,7 +5,7 @@ Authors: SHEAF group E2
 -/
 module
 
-public import Sheaf.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 
 /-! # Fibers of the filtered arrow colimit

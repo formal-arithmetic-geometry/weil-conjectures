@@ -6,7 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import Sheaf.CategoryTheory.ColimitSiteAbelianStageImage
-public import Sheaf.CategoryTheory.ArrowsFunctor
+public import WeilConjectures.CategoryTheory.ArrowsFunctor
 import all Sheaf.CategoryTheory.ColimitSiteAbelianSectionDiagram
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.Types.Filtered

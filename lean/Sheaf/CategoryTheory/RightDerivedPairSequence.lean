@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Exact.Basic
 import Sheaf.CategoryTheory.RightDerivedInjectiveSequence
-import Sheaf.CategoryTheory.RightDerivedBinaryProduct
+import WeilConjectures.CategoryTheory.RightDerivedBinaryProduct
 
 /-!
 # Derived sequence from a sequence exact on injectives
