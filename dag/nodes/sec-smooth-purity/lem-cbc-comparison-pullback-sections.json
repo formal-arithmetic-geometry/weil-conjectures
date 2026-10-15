@@ -23,7 +23,8 @@
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-site-comparison-morphism",
   "def-weil-pbc-etale-sheaf-of-sets",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-sets-terminal-transport"
  ],
  "proof": [
   {
@@ -317,5 +318,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-59ec1bb3b",
+  "group": "NK",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, dependencies, source, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py reproduced cleanly. No findings or fixes; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections",
+  "declaration": "AlgebraicGeometry.proEtaleComparisonPullbackSections",
+  "declarations": [
+   "AlgebraicGeometry.proEtaleComparisonSectionRestriction",
+   "AlgebraicGeometry.proEtaleComparisonEtaleSection",
+   "AlgebraicGeometry.proEtaleComparisonPullbackSections"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleComparisonPullbackSections.lean",
+  "statement": "theorem proEtaleComparisonPullbackSections (X : Scheme.{u}) : ∃ A : Sheaf X.smallEtaleTopology (Type (u + 1)) ⥤ Sheaf (Scheme.ProEt.topology X) (Type (u + 1)), ∃ e : ∀ (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (Y : X.ProEt), (A.obj F).obj.obj (op Y) ≃ ((Scheme.etaleSetPullback Y.hom).obj F).obj.obj (op (Scheme.Etale.mk (𝟙 Y.left))), ∃ p : Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X) (Type (u + 1)) X.smallEtaleTopology (Scheme.ProEt.topology X) ≅ A, (∀ (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (Y Z : X.ProEt) (g : Z ⟶ Y) (s : (A.obj F).obj.obj (op Y)), e F Z ((A.obj F).obj.map g.op s) = proEtaleComparisonSectionRestriction F g (e F Y s)) ∧ (∀ (F F' : Sheaf X.smallEtaleTopology (Type (u + 1))) (ψ : F ⟶ F') (Y : X.ProEt) (s : (A.obj F).obj.obj (op Y)), e F' Y ((A.map ψ).hom.app (op Y) s) = ((Scheme.etaleSetPullback Y.hom).map ψ).hom.app (op (Scheme.Etale.mk (𝟙 Y.left))) (e F Y s)) ∧ (∀ (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (U : X.Etale), Function.Bijective (proEtaleComparisonEtaleSection F U)) ∧ (∀ (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (U : X.Etale) (s : F.obj.obj (op U)), e F ((Scheme.toProEt X).obj U) ((p.hom.app F).hom.app (op ((Scheme.toProEt X).obj U)) (((Scheme.proEtaleSiteComparison X).unit.app F).hom.app (op U) s)) = proEtaleComparisonEtaleSection F U s)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
