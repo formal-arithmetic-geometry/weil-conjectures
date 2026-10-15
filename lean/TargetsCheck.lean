@@ -5,13 +5,17 @@ Authors: SHEAF maintainer L
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk
+public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
+public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
+public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 
 /-!
 # Library target statements
 
-The Proper module imports the six current target declarations and the corrected abelian
-and torsion-ring main statements. `tools/target_types.sh check` compares their elaborated
+Imports the modules of the six target declarations of `Challenge` and nothing else; what this
+file reaches is what the targets need. `tools/target_types.sh check` compares their elaborated
 types with Challenge and prints their axioms. See `coord/target-migration.md`.
 -/
 

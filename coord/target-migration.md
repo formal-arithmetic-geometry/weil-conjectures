@@ -86,3 +86,13 @@ constants (Lean caches such proof terms under whichever declaration it elaborate
 A standalone single-file check against the completed upstream build confirmed all six target
 type/universe hashes and all three definition type/body hashes agree; both specification
 modules compile separately within the 60-second limit.
+
+## Correction, 2026-10-15 (launcher, with the human)
+
+The sync of 2026-10-15 made `TargetsCheck` import the whole module `BaseChangeTheorems.Proper`. That put
+the route by which Proper proves the main theorems into the targets' closure, three sorried modules no
+target declaration needs (`Sheaf.AlgebraicGeometry.ProperUnboundedBaseChangeForgetful`,
+`...ModN`, and `WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension`). The import of our
+`Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange` in Proper was added by that sync; upstream's Proper
+uses its own sorry-free `BaseChange.DerivedUnbounded`. The targets did not change: `TargetsCheck` imports
+again only the modules of the six target declarations of `Challenge`.
