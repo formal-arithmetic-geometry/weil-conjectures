@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-pur-triangle-meaning",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Canonicality, functoriality and etale base change of the triangle",
@@ -14,14 +14,74 @@
  },
  "stmt_deps": [
   "def-pur-support-triangle",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-weil-etale-morphism",
+  "def-pc-base-change",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Definition of canonicality functoriality and etale base change compatibility of the support localization triangle of complexes of sheaves",
+   "results": "Eight hits including CategoryTheory.Functor.isHomological_of_localization and CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle/complete_distinguished_triangle_morphism. These concern abstract categorical localization and triangle completion, not the three support-sheaf compatibility definitions.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle",
+   "results": "Twelve hits including Triangle, TriangleMorphism, triangleMorphismId, triangleCategory and the three projections in Mathlib.CategoryTheory.Triangulated.Basic. Read Basic.lean:44,104,137,146. These define abstract triangles and their maps only.",
+   "date": "2026-10-16",
+   "verdict": "partial generic notions, already supplied by the support-triangle derived-category dependencies; no whole-definition match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportLocalization|localizationTriangle|etale.*triangle|triangle.*etale",
+   "results": "0 hits in the pinned Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical support localization triangle independent of injective resolution functorial in complexes compatible with etale pullback",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Independence of injective resolution and naturality of distinguished triangles for sheaves supported on a closed subscheme",
+   "results": "Eight hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, InjectiveResolution.toRightDerivedZero' and its naturality/comp_iCycles/associativity lemmas, InjectiveResolution.Hom.ι'_comp_hom' and its associativity lemma, and CochainComplex.cm5b. General resolution machinery; none defines all three support-triangle compatibilities.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole definition on a second phrasing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural distinguished triangle for sections with support, invariant under replacement of a complex by a quasi-isomorphic injective complex and restriction to an open subscheme",
+   "results": "Eight hits, all in DerivedCategory/TStructure: TStructure.t, instIsGEObjCochainComplexIntQOfIsGE, instIsLEObjCochainComplexIntQOfIsLE, exists_iso_Q_obj_of_isGE_of_isLE, isGE_Q_obj_iff, IsGE, instIsGEObjSingleFunctor, isLE_Q_obj_iff. These describe cohomological bounds, not the three support-localization compatibility meanings.",
+   "date": "2026-10-16",
+   "verdict": "no match; independent second-reader phrasing"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*triangle|triangle.*support|locali[sz]ation.*triangle",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match in the categorical source searched"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TriangleMorphism\"",
+   "results": "Twelve hits in Mathlib.CategoryTheory.Triangulated.Basic, including TriangleMorphism, triangleMorphismId, TriangleMorphism.comp, and their components. Read Basic.lean:104,124,137,146: these give generic maps of triangles and their category, not resolution independence or compatibility of support triangles with scheme pullback.",
+   "date": "2026-10-16",
+   "verdict": "generic ingredients only; no exact match for this definition"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +107,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-pur-triangle-meaning",
+  "worker": "NO",
+  "summary": "Repair rebased on the current DAG: preserve the definition verbatim and the reviewed support-triangle construction. Make the etale-morphism, fibre-product base-change, and pro-etale inverse-image notions explicit statement dependencies; remove stale sandbox-only stage-2 Lean metadata. The current support prerequisite is pro-etale, so etale Lean wrappers are not evidence of an attachment. No new nodes or proof steps.",
+  "blueprint": "Realizes the three clauses of blueprint def-pur-triangle-meaning: independence under resolution comparison, identity/composition compatibility for triangle maps, and comparison after etale pullback of the closed/open pair. The definition has no theorem proof steps; the etale notion is supplied by the existing def-weil-etale-morphism node."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-5c72044d2",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-5c72044d2 (reviewer sub-agent of L); spot-checked: Read the full delivery, DAG instructions, pinned blueprint source, unit/chapter route, every dependency statement, and recorded Mathlib searches. The definition matches blueprint node/order 1932 exactly; dependencies correctly provide support triangle, étale maps, fibre products, and pro-étale pullback. No proof steps or new nodes exist, no duplicates or weakened hypotheses were found, and edge cases including zero complexes, empty/full support, empty schemes, identity étale maps, and n=1 coefficients check out. Wrote review.md."
+ }
 }
