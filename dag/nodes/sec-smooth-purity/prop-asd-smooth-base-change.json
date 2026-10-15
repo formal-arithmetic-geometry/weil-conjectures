@@ -449,5 +449,30 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-9e9ce4264 (reviewer sub-agent of L); spot-checked: Read all nine steps and both new nodes; checked SGA XVII 5.2.2/6.2.11, XVIII 3.2.5, Stacks citations, coefficient categories, canonical maps, and edge cases. Corrected one B7 fault: invalid Loogle query recorded as no match instead of unavailable. Review and corrected JSON saved. Inherited graph issues documented separately.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.smooth_exceptional_base_change",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smooth_exceptional_base_change",
+   "AlgebraicGeometry.Etale.smoothExceptionalBaseChangeMap",
+   "AlgebraicGeometry.Etale.smoothDualizingBaseChangeMap",
+   "AlgebraicGeometry.Etale.smoothSquarePullbackIso",
+   "AlgebraicGeometry.Etale.smoothDualityTensorBaseChangeIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothExceptionalBaseChange.lean",
+  "statement": "theorem smooth_exceptional_base_change (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) {X S S' : Scheme.{u}} [IsNoetherian X] [IsNoetherian S] [IsNoetherian S'] (hInvertible : ∀ s : S, IsUnit (N : S.presheaf.stalk s)) (f : X ⟶ S) [IsSeparated f] [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f] (g : S' ⟶ S) : (∀ K : DerivedCategoryModule A S, IsIso (smoothExceptionalBaseChangeMap A f g K)) ∧ IsIso (smoothDualizingBaseChangeMap A f g) ∧ ∀ K : DerivedCategoryModule A S, (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map (smoothTensorDualityMap (ModuleCat.{u + 1} A) f (isIso_projectionMap_of_finite A f) K) ≫ smoothExceptionalBaseChangeMap A f g K = (smoothDualityTensorBaseChangeIso A f g K).hom ≫ ((derivedTensor (ModuleCat.{u + 1} A) (pullback f g)).obj ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.obj ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K))).map (smoothDualizingBaseChangeMap A f g) ≫ smoothTensorDualityMap (ModuleCat.{u + 1} A) (pullback.snd f g) (isIso_projectionMap_of_finite A (pullback.snd f g)) ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ce2ba6ca5",
+  "group": "NC",
+  "result": "pass",
+  "note": "Wrote review.md. All hypotheses, canonical maps, dependencies, universes, edge cases, and docstrings checked; statement field matches verbatim. Immutable module compiles cleanly through scompile.py in both modes. No delivery faults or fixes; branch unchanged."
  }
 }
