@@ -19,6 +19,7 @@
 | `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 3 | 5 | proof |
 | `Sheaf.Paper.IntegralFiniteExchangeComparison` | 3 | 1 | proof |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 1 | proof |
@@ -26,7 +27,6 @@
 | `Sheaf.Paper.CondensedLocalPieceHomContinuity` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 6 | proof |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 4 | 1 | proof |
 | `Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients` | 5 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 5 | 1 | proof |
 | `Sheaf.Algebra.Homology.SiteDerivedTensorDescent` | 5 | 1 | proof |
