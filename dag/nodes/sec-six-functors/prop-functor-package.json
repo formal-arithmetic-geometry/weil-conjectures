@@ -71,6 +71,19 @@
     "fix-prop-coherence"
    ],
    "elementary": false
+  },
+  {
+   "text": "Source-library Weil-complex implementation (F1, stage 3): the actual exact extension by zero has identity open restriction and zero restriction on any disjoint subscheme, by the existing adic extension-by-zero APIs [def-weil-extension-by-zero]. The counit of j* ⊣ Rj* is invertible. The fibre and cone of its unit are closed-supported; closed-support essential image and adjunction give Hom(K,W) = 0 when i*K = 0 and j*W = 0. Exactness of Hom along these triangles makes restriction on Hom out of K bijective. Thus an isomorphism of open restrictions lifts uniquely, naturally for functors, and conservativity of the open and closed restrictions detects invertibility [prop-sf-localization-all-stages]. The same Hom bijection and the identity restriction prove the adjunction of exact extension by zero with pullback, independently of compact-support base change. Its composition comparison follows by uniqueness of left adjoints to the composite pullback. Proper cases of compact-support base change [thm-cbc-qbar], with the proved proper comparison [cor-cbc-proper-coincidence], and the support comparison exchange a proper direct image with extension by zero in a cartesian proper/open square. Its identity-source instance gives invariance under cartesian proper refinement; a common refinement gives independence of compactification [prop-compactification-refinement]. Comparing with the identity-target compactification identifies Rj! with exact extension by zero, including its value on a sheaf in degree zero. For the attached weakened Weil open-closed triangle, take a fibre triangle of K → Ri*i*K; its first vertex is zero on Z and restricts to j*K on U, hence is Rj!j*K by the support comparison. Choose a compatible triangle of compactifications [lem-weil-pbc-compatible-compactification-triangle], exchange its middle proper/open pair, compose the exact extensions and the proper direct images, and identify with the chosen compactifications. This proves the attached Weil compact-support composition claim. Applying triangulated Rf! [lem-compact-support-direct-image-triangulated] and the composition isomorphisms, together with Ri! ≅ Ri*, gives the image triangle. Compact-support base change remains the sole named source-library obligation. Its later proof must establish proper exchange independently of the comparisons in this file that use it. This paragraph describes only the attached source-library Weil claims; the other coefficient-stage clauses above retain their stated proofs.",
+   "uses": [
+    "thm-cbc-qbar",
+    "prop-sf-localization-all-stages",
+    "def-weil-extension-by-zero",
+    "prop-compactification-refinement",
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "lem-compact-support-direct-image-triangulated",
+    "cor-cbc-proper-coincidence"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -110,12 +123,16 @@
   "thm-coef-qbar-verdier",
   "lem-coef-finite-exceptional",
   "prop-coef-integral-exceptional-adjoint",
-  "fix-prop-coherence"
+  "fix-prop-coherence",
+  "prop-sf-localization-all-stages",
+  "def-weil-extension-by-zero",
+  "prop-compactification-refinement",
+  "lem-weil-pbc-compatible-compactification-triangle"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.md",
-  "place": "## Proof"
+  "place": "Original proof, with F1 source-library Weil-complex reduction recorded in the last step (2026-10-16)."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -273,5 +290,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); 2026-10-12 sync with the source at 60c0bc866: the source removed AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso (sheaf level, per degree) and states the base change on complexes as AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso (WeilConjectures.WeilSheaf.LowerShriekFunctoriality, still sorry); record re-pointed; 2026-10-13 sync: upperStar/higherLowerShriek sheaf API replaced upstream by WeilComplex derivedLowerShriek."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261015T190717-L-966338",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
