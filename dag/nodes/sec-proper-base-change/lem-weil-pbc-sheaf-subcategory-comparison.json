@@ -23,7 +23,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-indexed-covering-class"
  ],
  "proof": [
   {
@@ -239,5 +240,28 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-f5d6f536a (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited statements; checked Stacks 03A1, 03A0, 000X and supporting sources. Comparison hypotheses, direct-image Hom formula, empty covers and repeated arrows check out. Corrected creation metadata and step 2’s elementary flag. Accepted local-sheafification tool use; no new cycle or duplicate. Details in review.md and corrected JSON under fixes/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafSubcategoryComparison",
+  "declaration": "CategoryTheory.sheafSubcategory_comparison",
+  "declarations": [
+   "CategoryTheory.sheafSubcategoryEpimorphicFamilies",
+   "CategoryTheory.sheafSubcategoryNerve",
+   "CategoryTheory.sheafSubcategory_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafSubcategoryComparison.lean",
+  "statement": "theorem sheafSubcategory_comparison {C : Type u} [SmallCategory C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) {E : Type v} [Category.{u} E] (F : E ⥤ Sheaf J.toGrothendieck (Type u)) [F.Full] [F.Faithful] (hrep : ∀ U : C, ∃ A : E, Nonempty (F.obj A ≅ (presheafToSheaf J.toGrothendieck (Type u)).obj (yoneda.obj U))) (hpb : ∀ (A B T : E) (f : A ⟶ T) (g : B ⟶ T), ∃ (P : E) (p : P ⟶ A) (q : P ⟶ B), IsPullback (F.map p) (F.map q) (F.map f) (F.map g)) (Cov₀ : Set (Σ A : E, PreZeroHypercover.{max u v w} A)) (hsmall : Small.{max u v w} Cov₀) (hsub : Cov₀ ⊆ sheafSubcategoryEpimorphicFamilies F) : (∀ (A : E) (R : PreZeroHypercover.{max u v w} A), (⟨A, R⟩ ∈ sheafSubcategoryEpimorphicFamilies F ↔ ∀ (U : C) (a : (F.obj A).obj.obj (op U)), Sieve.generate (fun (V : C) (f : V ⟶ U) ↦ ∃ (i : R.I₀) (b : (F.obj (R.X i)).obj.obj (op V)), (F.map (R.f i)).hom.app (op V) b = (F.obj A).obj.map f.op a) ∈ J.toGrothendieck U)) ∧ ∃ (Cov' : Set (Σ A : E, PreZeroHypercover.{max u v w} A)) (K : Precoverage E) (hK : K.toGrothendieck.Subcanonical) (e : Sheaf J.toGrothendieck (Type u) ≌ Sheaf K.toGrothendieck (Type u)), Small.{max u v w} Cov' ∧ Cov₀ ⊆ Cov' ∧ Cov' ⊆ sheafSubcategoryEpimorphicFamilies F ∧ PreZeroHypercover.IsCoveringClass Cov' ∧ K.IsSiteForCoverings ∧ (∀ (A : E) (R : PreZeroHypercover.{max u v w} A), ⟨A, R⟩ ∈ sheafSubcategoryEpimorphicFamilies F → ∃ R' : PreZeroHypercover.{max u v w} A, ⟨A, R'⟩ ∈ Cov' ∧ R.presieve₀ = R'.presieve₀) ∧ (∀ (A : E) (S : Presieve A), S ∈ K A ↔ ∃ R : PreZeroHypercover.{max u v w} A, ⟨A, R⟩ ∈ Cov' ∧ S = R.presieve₀) ∧ Nonempty (e.functor ⋙ sheafToPresheaf K.toGrothendieck (Type u) ≅ sheafSubcategoryNerve F) ∧ Nonempty (F ⋙ e.functor ⋙ sheafToPresheaf K.toGrothendieck (Type u) ≅ yoneda) ∧ Nonempty ((@GrothendieckTopology.yoneda E _ K.toGrothendieck hK) ⋙ e.inverse ≅ F)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-12f20d0ed",
+  "group": "NH",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable node, sources, dependencies, hypotheses, conclusions, universes, edge cases, docstrings, and signature. Per-file scompile.py compilation passed cleanly. No faults or fixes; branch unchanged."
  }
 }
