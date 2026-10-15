@@ -1,6 +1,9 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionCoordinateSections
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionCanonicalComparison
+import Sheaf.AlgebraicGeometry.AffineChartTotalTensor
+import Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
+import Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison
 
 @[expose] public section
 universe u
