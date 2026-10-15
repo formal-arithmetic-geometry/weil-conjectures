@@ -59,6 +59,20 @@ theorem natIso_inv_map_hom
   rw [← Category.assoc, ← h, Category.assoc]
   simp only [Iso.inv_hom_id_app, Category.comp_id]
 
+/-- The inverse associator followed by right whiskering has the mapped
+component of the original natural isomorphism. -/
+theorem associator_symm_whiskerRight_hom_app
+    {A B C D : Type*} [Category* A] [Category* B]
+    [Category* C] [Category* D]
+    (F : A ⥤ B) (G : B ⥤ C) (H : C ⥤ D) (J : A ⥤ C)
+    (α : F ⋙ G ≅ J) (X : A) :
+    ((Functor.associator F G H).symm ≪≫
+      Functor.isoWhiskerRight α H).hom.app X =
+        H.map (α.hom.app X) := by
+  simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
+    Functor.associator_inv_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.comp_obj, Category.id_comp]
+
 /-- A return unit followed by an equivalence counit cancels across any comparison.
 Proof: The triangle identity identifies the image of the inverse unit with
 the counit on the image object. Naturality moves that counit across the
