@@ -5,11 +5,11 @@ public import Sheaf.AlgebraicGeometry.QCohTensorResolutionTotalSummandNaturality
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
-noncomputable local instance (X : Scheme.{u}) : MonoidalCategory X.Modules :=
+noncomputable local instance trTotalPrecompMonoidal (X : Scheme.{u}) : MonoidalCategory X.Modules :=
   SheafOfModules.monoidalCategory X.sheaf
-local instance (X : Scheme.{u}) : (curriedTensor X.Modules).PreservesZeroMorphisms :=
+local instance trTotalPrecompZero (X : Scheme.{u}) : (curriedTensor X.Modules).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
-local instance (X : Scheme.{u}) (L : X.Modules) :
+local instance trTotalPrecompObjZero (X : Scheme.{u}) (L : X.Modules) :
     ((curriedTensor X.Modules).obj L).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf L
 

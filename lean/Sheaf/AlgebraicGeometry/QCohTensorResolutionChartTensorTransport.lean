@@ -13,11 +13,11 @@ set_option maxHeartbeats 800000
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-noncomputable local instance (X : Scheme.{u}) : MonoidalCategory X.Modules :=
+noncomputable local instance trChartTransportMonoidal (X : Scheme.{u}) : MonoidalCategory X.Modules :=
   SheafOfModules.monoidalCategory X.sheaf
-local instance (X : Scheme.{u}) : (curriedTensor X.Modules).PreservesZeroMorphisms :=
+local instance trChartTransportZero (X : Scheme.{u}) : (curriedTensor X.Modules).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
-local instance (X : Scheme.{u}) (L : X.Modules) :
+local instance trChartTransportObjZero (X : Scheme.{u}) (L : X.Modules) :
     ((curriedTensor X.Modules).obj L).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf L
 
