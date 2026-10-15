@@ -529,6 +529,51 @@ noncomputable abbrev overlapSiteInverse {X : Scheme.{u}} (U : X.Opens) :
       SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) :=
   (Scheme.Modules.overEquiv U).inverse
 
+/-- Natural comparison between the canonical open-site overlap functor and the
+scheme pullback at the next stage. The open-site equivalence cancels by its
+counit; the remaining functors agree by the cartesian component equation and
+the fixed composition comparisons for derived pullback. -/
+noncomputable def perfectOverlapNaturalComparisonOfSquare
+    {X Y K C T S : Scheme.{u}}
+    (g : X ⟶ Y) (f : K ⟶ Y)
+    (pX : X ⟶ C) (pK : K ⟶ T) (pY : Y ⟶ S)
+    (b : C ⟶ S) (q : T ⟶ S)
+    (hg : IsPullback g pX pY b) (hf : IsPullback f pK pY q)
+    (U V : Y.Opens)
+    (r : (g ⁻¹ᵁ (U ⊓ V)).toScheme ⟶ (f ⁻¹ᵁ (U ⊓ V)).toScheme)
+    (m : pullback ((U ⊓ V).ι ≫ pY) b ⟶
+      pullback ((U ⊓ V).ι ≫ pY) q)
+    (hmap :
+      ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert hg).isoPullback.inv ≫ r =
+        m ≫ ((isPullback_morphismRestrict f (U ⊓ V)).paste_vert hf).isoPullback.inv) :
+    (derivedPullback r ⋙
+        (overlapSiteInverse (g ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory) ⋙
+      (perfectOverlapApexEquivalence g pX pY b hg U V).functor ≅
+    (perfectOverlapStageEquivalence f pK pY q hf U V).functor ⋙
+      derivedPullback m := by
+  let Wg := g ⁻¹ᵁ (U ⊓ V)
+  let eY := ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert hg).isoPullback
+  let eK := ((isPullback_morphismRestrict f (U ⊓ V)).paste_vert hf).isoPullback
+  letI := openComparisonOverModuleAbelian X.toRingedSpace Wg
+  letI := openComparisonModuleAbelian Wg.toScheme.toRingedSpace
+  let site : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over Wg) ≌
+      SheafOfModules.{u} (moduleRings Wg.toScheme.toRingedSpace) :=
+    Scheme.Modules.overEquiv Wg
+  letI : site.functor.IsEquivalence := site.isEquivalence_functor
+  letI : site.inverse.IsEquivalence := site.isEquivalence_inverse
+  letI : site.functor.Additive := Functor.additive_of_preserves_binary_products _
+  letI : site.inverse.Additive := Functor.additive_of_preserves_binary_products _
+  let cancel := site.mapDerivedCategory.counitIso
+  change (derivedPullback r ⋙ site.inverse.mapDerivedCategory) ⋙
+    (site.functor.mapDerivedCategory ⋙ derivedPullback eY.inv) ≅
+    derivedPullback eK.inv ⋙ derivedPullback m
+  exact Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (derivedPullback r) (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerLeft (derivedPullback r)
+      (Functor.isoWhiskerRight cancel (derivedPullback eY.inv)) ≪≫
+    Functor.isoWhiskerLeft (derivedPullback r) (Functor.leftUnitor _) ≪≫
+    perfectOverlapDerivedPullbackTransport r eY eK m hmap
+
 /-- Exact restriction followed by the inverse site equivalence returns to the over-site.
 Use the derived site equivalence's unit and the exact-functor composition comparison. -/
 noncomputable def openSiteReturnIso (X : Scheme.{u}) (U : X.Opens) :
