@@ -1,0 +1,134 @@
+{
+ "id": "lem-sp-ce-derived-truncation-cohomology",
+ "kind": "statement",
+ "title": "Derived cohomology of upper truncations from CE totals",
+ "statement": "Let A,B,C be abelian, B,C Grothendieck abelian with derived categories, F:A to B additive, G:B to C additive left exact, and P a CE presentation. For any integer q, any bounded-below complex wrapper Kq whose underlying complex is the upper smart truncation of F(P.J), and any integer n, the cohomology H^n(RG(Kq)) is isomorphic to H^n of the unflipped total of G applied to the horizontal smart truncation of P.I at q. There is no acyclicity hypothesis on F or P.J for G.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Stacks Tag 015X, Remark 13.26.15 (derived truncation computation by filtered injective resolutions); Tag 0156, Lemma 13.20.1 (injective-resolution computation)."
+ },
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-left-exact-additive",
+  "def-sp-kinjective-bridge"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved unique CE truncation resolution. Regard its total as a bounded-below complex of injectives, with the displayed quasi-isomorphism from Kq.",
+   "uses": [
+    "lem-sp-ce-truncation-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved acyclic-resolution computation nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso_of_quasiIso. The total terms are injective and therefore G-acyclic. This computes RG(Kq) by termwise G on the truncated total.",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mapped-total isomorphism commutes G with the finite diagonal sums. Compose with totalFlipIso on both sides to retain the original total convention, then apply the homology functor to this complex isomorphism.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-mapped-total"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ce-truncation-resolution",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-sp-cartan-eilenberg-mapped-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Stacks Tag 015X, Remark 13.26.15 (derived truncation computation by filtered injective resolutions); Tag 0156, Lemma 13.20.1 (injective-resolution computation).",
+  "note": "Expanded into Lean from the parent construction plan and the cited representative formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered cochain complex gives a canonical functorial spectral sequence with quotient cycle boundary pages",
+   "results": "Unavailable: Internal Server Error. The service failure was recorded; other search kinds were completed.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered map of cochain complexes induces maps on all spectral sequence pages and canonical homology isomorphisms",
+   "results": "8 hits, chiefly CochainComplex.ConnectData homology comparisons and mapping-cone functor comparisons; no filtered sequence functor or CE/truncation comparison.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.ιTotalOrZero_map",
+   "results": "1 hit: HomologicalComplex₂.ιTotalOrZero_map, Mathlib.Algebra.Homology.TotalComplex. Used in the filtered-total-lift proof. This is only the summand naturality step.",
+   "date": "2026-10-16",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "decalage|Decalage|filtered.*truncation",
+   "results": "0 Mathlib hits. Repository search finds only the existing CE comparison docstrings; there is no decalage/truncation comparison implementation.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison",
+  "date": "2026-10-16",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "second spectral sequence: filtered Cartan--Eilenberg realization and naturality",
+   "via": [
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergDerivedTruncationCohomology",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergDerivedTruncationCohomology.lean",
+  "declaration": "CategoryTheory.cartanEilenberg_derived_truncation_cohomology",
+  "statement": "theorem cartanEilenberg_derived_truncation_cohomology\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C]\n    [HasDerivedCategory B] [HasDerivedCategory C]\n    (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] [PreservesFiniteLimits G]\n    (P : CartanEilenbergPresentation F) (q : ℤ) (Kq : CochainComplex.Plus B)\n    (hKq : Kq.obj = CochainComplex.truncLE\n      ((F.mapHomologicalComplex (.up ℤ)).obj\n        (P.J.cocomplex.extend ComplexShape.embeddingUpNat)) q) (n : ℤ) :\n    Nonempty ((DerivedCategory.Plus.homologyFunctor C n).obj\n      (G.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Q.obj Kq)) ≅\n      (((CartanEilenbergPresentation.mappedFunctor G).obj\n        (CochainComplex.truncLE P.I q)).total (.up ℤ)).homology n)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "blueprint": "Realizes a component of the second spectral sequence construction and its filtered comparison. Whole imported blueprint searches for filtered truncation and filtered complex quotient found no matching blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

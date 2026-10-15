@@ -1,0 +1,144 @@
+{
+ "id": "lem-sp-filtered-complex-canonical-sequence",
+ "kind": "definition",
+ "title": "Canonical normalized quotient spectral sequence functor",
+ "statement": "For an abelian category C [def-sp-abelian], construct a functor from all filtered integer cochain complexes [def-sp-filtration] to cohomological spectral sequences starting at page two [def-sp-spectral-sequence]. Its pages are the concrete boundary quotients [def-sp-filtered-complex-subquotients], its differentials are uniquely specified on cycle representatives, its successor isomorphisms are uniquely normalized by the successor-cycle quotient, and its maps are uniquely specified by the filtration, graded, cycle and cokernel squares. No global finite-filtration bound is assumed.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 012K, Lemmas 12.24.2 and 12.24.4; https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Choose the uniquely specified representative differentials and uniquely normalized successor homology isomorphisms, then assemble the page-one sequence. All choices determine their data uniquely.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-normalized-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The successor-cycle cover proves the coherence law on arbitrary test representatives. Coherent quotient descent supplies each sequence map, and representative epimorphisms identify its components with the concrete cokernel maps.",
+   "uses": [
+    "def-weil-pbc-filtered-quotient-coherence",
+    "lem-sp-filtered-complex-successor-cycles-cover",
+    "lem-weil-pbc-filtered-quotient-map",
+    "lem-sp-filtered-complex-representative-epis",
+    "lem-sp-filtered-quotient-page-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel cycle covers and quotient projections to prove uniqueness, identity and composition. Restrict the explicit page-one functor to pages at least two.",
+   "uses": [
+    "lem-sp-filtered-quotient-page-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-normalized-homology",
+  "def-weil-pbc-filtered-quotient-coherence",
+  "lem-sp-filtered-complex-successor-cycles-cover",
+  "lem-weil-pbc-filtered-quotient-map",
+  "lem-sp-filtered-complex-representative-epis",
+  "lem-sp-filtered-quotient-page-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 012K, Lemmas 12.24.2 and 12.24.4; https://stacks.math.columbia.edu/tag/012K",
+  "note": "Expanded into Lean from the parent construction plan and the cited representative formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered cochain complex gives a canonical functorial spectral sequence with quotient cycle boundary pages",
+   "results": "Unavailable: Internal Server Error. The service failure was recorded; other search kinds were completed.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered map of cochain complexes induces maps on all spectral sequence pages and canonical homology isomorphisms",
+   "results": "8 hits, chiefly CochainComplex.ConnectData homology comparisons and mapping-cone functor comparisons; no filtered sequence functor or CE/truncation comparison.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.ιTotalOrZero_map",
+   "results": "1 hit: HomologicalComplex₂.ιTotalOrZero_map, Mathlib.Algebra.Homology.TotalComplex. Used in the filtered-total-lift proof. This is only the summand naturality step.",
+   "date": "2026-10-16",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "decalage|Decalage|filtered.*truncation",
+   "results": "0 Mathlib hits. Repository search finds only the existing CE comparison docstrings; there is no decalage/truncation comparison implementation.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison",
+  "date": "2026-10-16",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "second spectral sequence: filtered Cartan--Eilenberg realization and naturality",
+   "via": [
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexCanonicalSequence",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexCanonicalSequence.lean",
+  "declaration": "CategoryTheory.filteredComplexCanonicalPageTwoFunctor",
+  "statement": "def filteredComplexCanonicalPageTwoFunctor :\n    FilteredObject (CochainComplex C ℤ) ⥤ E₂CohomologicalSpectralSequence C",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "blueprint": "Realizes a component of the second spectral sequence construction and its filtered comparison. Whole imported blueprint searches for filtered truncation and filtered complex quotient found no matching blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

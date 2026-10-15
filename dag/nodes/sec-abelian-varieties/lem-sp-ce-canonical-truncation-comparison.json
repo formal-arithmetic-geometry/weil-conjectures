@@ -1,0 +1,145 @@
+{
+ "id": "lem-sp-ce-canonical-truncation-comparison",
+ "kind": "statement",
+ "title": "Normalized canonical CE quotient sequence versus truncation",
+ "statement": "Let A,B,C be Grothendieck abelian with derived categories, and F:A to B and G:B to C additive left exact. For any family L of second filtrations on mapped CE totals [def-sp-cartan-eilenberg-presentation], the fixed normalized canonical quotient-image model [lem-sp-filtered-complex-canonical-model] has objectwise spectral-sequence isomorphisms to the truncation spectral sequences of the Grothendieck spectral objects. Their canonical page-two comparisons to the interval cohomology objects are natural for every presentation comparison and every filtered lift of its specified total map. No arbitrary external sequence functor E is present, and only page-two naturality is asserted.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 015X, Remark 13.26.15 (second filtration and filtered injective resolution); Tag 015K, Remark 13.21.4 (naturality); Tag 012K (cycle/boundary page construction)."
+ },
+ "stmt_deps": [
+  "def-sp-left-exact-additive",
+  "def-sp-cartan-eilenberg-presentation",
+  "lem-sp-filtered-complex-canonical-model",
+  "lem-sp-spectral-object-page-two-functor"
+ ],
+ "proof": [
+  {
+   "text": "The proved unique functorial decalage construction is available for arbitrary filtered complexes. Before applying G, decalage of the second filtration gives Dec(V)^a Tot(I)^n = V^(a+n) intersect inverse-image under d of V^(a+n+1). Identify its step at -q with the total of the horizontal smart truncation at q, using left exactness when applying G. The proved unique truncation-resolution theorem supplies the augmentations, total coordinates, quasi-isomorphisms, and K-injectivity. Their monic inclusion and coordinate equations give compatibility with the inclusions and comparisons.",
+   "uses": [
+    "lem-sp-ce-truncation-resolution",
+    "lem-sp-filtered-complex-decalage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved left-exact truncation isomorphism identifies the boundary cycles after G. The proved mapped-total isomorphism commutes G with the finite diagonal totals. Apply the injective comparison theorem to the truncated resolutions and their proved augmentation squares. This is compatible with all step inclusions and presentation comparisons, up to the homotopies preserved by additive G. The cycle/boundary formulas for decalage shift pages by one. The representative differential and normalized quotient homology comparisons identify the fixed canonical sequence from page two with the derived truncation sequence. The proved derived-truncation cohomology theorem supplies the objectwise RG computations in every integer degree.",
+   "uses": [
+    "lem-sp-filtered-complex-canonical-model",
+    "lem-sp-left-exact-truncation-iso",
+    "lem-sp-cartan-eilenberg-mapped-total",
+    "lem-sp-ce-derived-truncation-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At page two the split horizontal cohomology computation identifies comparison maps with interval cohomology of the truncation spectral object. The sign (-1)^(q*j) normalizes the resolution differential. Naturality of kernels and cokernels in the augmented comparison diagrams proves the displayed page-two square. The equations hL transport the construction to any specified family of second filtrations.",
+   "uses": [
+    "lem-sp-cart-eilenberg-left-exact-cohomology",
+    "lem-sp-spectral-object-page-two-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ce-truncation-resolution",
+  "lem-sp-filtered-complex-decalage",
+  "lem-sp-filtered-complex-canonical-model",
+  "lem-sp-left-exact-truncation-iso",
+  "lem-sp-cartan-eilenberg-mapped-total",
+  "lem-sp-ce-derived-truncation-cohomology",
+  "lem-sp-cart-eilenberg-left-exact-cohomology",
+  "lem-sp-spectral-object-page-two-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 015X, Remark 13.26.15 (second filtration and filtered injective resolution); Tag 015K, Remark 13.21.4 (naturality); Tag 012K (cycle/boundary page construction).",
+  "note": "Expanded into Lean from the parent construction plan and the cited representative formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered cochain complex gives a canonical functorial spectral sequence with quotient cycle boundary pages",
+   "results": "Unavailable: Internal Server Error. The service failure was recorded; other search kinds were completed.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered map of cochain complexes induces maps on all spectral sequence pages and canonical homology isomorphisms",
+   "results": "8 hits, chiefly CochainComplex.ConnectData homology comparisons and mapping-cone functor comparisons; no filtered sequence functor or CE/truncation comparison.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.ιTotalOrZero_map",
+   "results": "1 hit: HomologicalComplex₂.ιTotalOrZero_map, Mathlib.Algebra.Homology.TotalComplex. Used in the filtered-total-lift proof. This is only the summand naturality step.",
+   "date": "2026-10-16",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "decalage|Decalage|filtered.*truncation",
+   "results": "0 Mathlib hits. Repository search finds only the existing CE comparison docstrings; there is no decalage/truncation comparison implementation.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison",
+  "date": "2026-10-16",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "second spectral sequence: filtered Cartan--Eilenberg realization and naturality",
+   "via": [
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergCanonicalTruncationComparison",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergCanonicalTruncationComparison.lean",
+  "declaration": "CategoryTheory.cartanEilenberg_canonical_truncation_comparison",
+  "statement": "theorem cartanEilenberg_canonical_truncation_comparison\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C]\n    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C]\n    (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteLimits G]\n    (L : ∀ P : CartanEilenbergPresentation F, DecreasingFiltration (P.total G))\n    (hL : ∀ (P : CartanEilenbergPresentation F) (p n : ℤ),\n      (L P).complexStep p n =\n        ((((CartanEilenbergPresentation.mappedFunctor G).obj P.I).secondFiltration n).step p)) :\n    ∃ e : ∀ P : CartanEilenbergPresentation F,\n      (filteredComplexCanonicalModel C).S.obj\n          (⟨P.total G, L P⟩ : FilteredObject (CochainComplex C ℤ)) ≅\n        (F.grothendieckSpectralObject G P.X).E₂SpectralSequence,\n      ∀ (P Q : CartanEilenbergPresentation F) (d : P.Comparison Q)\n        (t : (⟨P.total G, L P⟩ : FilteredObject (CochainComplex C ℤ)) ⟶\n          (⟨Q.total G, L Q⟩ : FilteredObject (CochainComplex C ℤ))),\n        t.hom = HomologicalComplex₂.total.map\n          ((CartanEilenbergPresentation.mappedFunctor G).map d.α) (ComplexShape.up ℤ) →\n        ∀ p q : ℤ,\n          (((filteredComplexCanonicalModel C).S.map t).hom 2).f (p, q) ≫\n              (Abelian.SpectralObject.pageTwoComparison\n                (F.grothendieckSpectralObject G Q.X) (e Q) p q (p + q) rfl).hom =\n            (Abelian.SpectralObject.pageTwoComparison\n              (F.grothendieckSpectralObject G P.X) (e P) p q (p + q) rfl).hom ≫\n              (((F.grothendieckSpectralObjectFunctor G).map d.f).hom (p + q)).app\n                (ComposableArrows.mk₁\n                  (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt))))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "blueprint": "Realizes a component of the second spectral sequence construction and its filtered comparison. Whole imported blueprint searches for filtered truncation and filtered complex quotient found no matching blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

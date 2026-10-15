@@ -1,0 +1,158 @@
+{
+ "id": "lem-sp-filtered-complex-canonical-model",
+ "kind": "definition",
+ "title": "The canonical quotient-image page-two model",
+ "statement": "For an abelian category C [def-sp-abelian], construct a FilteredPageTwoModel C [def-sp-filtered-page-two-model] whose sequence functor is the normalized canonical quotient sequence [lem-sp-filtered-complex-canonical-sequence]. Its quotient-complex maps are actual cokernel descents and its page comparisons are uniquely normalized by cycle representatives. Its differentials and naturality equations are the representative differential and induced homology-image map, for arbitrary filtered complexes.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 012K, representative quotient-image formula and induced differential; https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtered-page-two-model",
+  "lem-sp-filtered-complex-canonical-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Construct the quotient map by the cokernel universal property; its source substep is killed by the target projection.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The quotient-image comparison theorem and representative epis give an isomorphism uniquely determined by its representative equation. Choose this uniquely specified isomorphism.",
+   "uses": [
+    "lem-sp-filtered-complex-quotient-image-comparison",
+    "lem-sp-filtered-complex-representative-epis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the differential of an unquotiented representative through the next filtration step. Square zero puts that lift in the target representative object. The canonical representative differential equation and homology projection naturality prove the model differential axiom.",
+   "uses": [
+    "lem-sp-filtered-complex-canonical-sequence",
+    "lem-sp-filtered-complex-representative-epis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the two quotient maps from the generic restriction/projection squares. Restrict the representative map and cancel its monic inclusions to obtain the two representative naturality equations. The normalized image naturality lemma proves the model map axiom.",
+   "uses": [
+    "lem-sp-filtered-quotient-page-maps",
+    "lem-sp-filtered-quotient-map-restrictions",
+    "lem-sp-filtered-quotient-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble the functor and the named proved field equations into FilteredPageTwoModel.",
+   "uses": [
+    "lem-sp-filtered-complex-canonical-sequence",
+    "def-sp-filtered-page-two-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-quotient-image-comparison",
+  "lem-sp-filtered-complex-representative-epis",
+  "lem-sp-filtered-complex-canonical-sequence",
+  "lem-sp-filtered-quotient-page-maps",
+  "lem-sp-filtered-quotient-map-restrictions",
+  "lem-sp-filtered-quotient-comparisons",
+  "def-sp-filtered-page-two-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 012K, representative quotient-image formula and induced differential; https://stacks.math.columbia.edu/tag/012K",
+  "note": "Expanded into Lean from the parent construction plan and the cited representative formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered cochain complex gives a canonical functorial spectral sequence with quotient cycle boundary pages",
+   "results": "Unavailable: Internal Server Error. The service failure was recorded; other search kinds were completed.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered map of cochain complexes induces maps on all spectral sequence pages and canonical homology isomorphisms",
+   "results": "8 hits, chiefly CochainComplex.ConnectData homology comparisons and mapping-cone functor comparisons; no filtered sequence functor or CE/truncation comparison.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.ιTotalOrZero_map",
+   "results": "1 hit: HomologicalComplex₂.ιTotalOrZero_map, Mathlib.Algebra.Homology.TotalComplex. Used in the filtered-total-lift proof. This is only the summand naturality step.",
+   "date": "2026-10-16",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "decalage|Decalage|filtered.*truncation",
+   "results": "0 Mathlib hits. Repository search finds only the existing CE comparison docstrings; there is no decalage/truncation comparison implementation.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison",
+  "date": "2026-10-16",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "second spectral sequence: filtered Cartan--Eilenberg realization and naturality",
+   "via": [
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexCanonicalModel",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexCanonicalModel.lean",
+  "declaration": "CategoryTheory.filteredComplexCanonicalModel",
+  "statement": "def filteredComplexCanonicalModel (C : Type u) [Category.{v} C] [Abelian C] :\n    FilteredPageTwoModel C",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "blueprint": "Realizes a component of the second spectral sequence construction and its filtered comparison. Whole imported blueprint searches for filtered truncation and filtered complex quotient found no matching blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

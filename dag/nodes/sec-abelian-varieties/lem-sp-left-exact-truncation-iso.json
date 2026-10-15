@@ -1,0 +1,120 @@
+{
+ "id": "lem-sp-left-exact-truncation-iso",
+ "kind": "statement",
+ "title": "Left exact functors commute with upper smart truncation",
+ "statement": "Let B and C be abelian and T:B to C additive and left exact [def-sp-left-exact-additive]. For every integer cochain complex K and integer q, there is a unique complex isomorphism from T(truncLE(K,q)) to truncLE(T(K),q) commuting with their inclusions into T(K). Only kernels, finite limits, and zero objects are used; neither exactness nor preservation of cokernels is assumed.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Mathlib.Algebra.Homology.Embedding.CochainComplex (upper smart truncation), HomologicalComplex.cyclesIsKernel and preservation of kernel forks; Stacks Tag 015X, Remark 13.26.15."
+ },
+ "stmt_deps": [
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "Below q use the original complex coordinates; at q use the cycles kernel and preservation of its kernel fork; above q both complexes are zero. The resulting degreewise isomorphisms respect the truncation inclusions.",
+   "uses": [
+    "lem-weil-pbc-upper-step-quotient-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The truncation inclusion is degreewise monic. Cancel it to deduce the differential equation from naturality of the original inclusion. Assemble the complex isomorphism and cancel the same monic inclusion to prove uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-upper-step-quotient-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Mathlib.Algebra.Homology.Embedding.CochainComplex (upper smart truncation), HomologicalComplex.cyclesIsKernel and preservation of kernel forks; Stacks Tag 015X, Remark 13.26.15.",
+  "note": "Expanded into Lean from the parent construction plan and the cited representative formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive left exact functor commutes with upper smart truncation of cochain complexes; the decalage filtration is the intersection with a differential preimage",
+   "results": "Service unavailable: Internal Server Error. Recorded by msearch.py.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive left exact functor commutes with the upper smart truncation of cochain complexes via preservation of kernels",
+   "results": "8 hits. The closest is CochainComplex.shortComplexTruncLE_shortExact; the others concern homological functors and triangulated truncation additivity, not termwise functor/truncation comparison.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapTruncLE|map_truncLE|truncLE.*preserv|preserv.*truncLE in Mathlib/Algebra/Homology",
+   "results": "0 hits. Used cyclesIsKernel, isLimitForkMapOfIsLimit and isoCyclesOfIsLimit instead.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison",
+  "date": "2026-10-16",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "second spectral sequence: filtered Cartan--Eilenberg realization and naturality",
+   "via": [
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.LeftExactTruncationIso",
+  "file": "lean/Sheaf/CategoryTheory/LeftExactTruncationIso.lean",
+  "declaration": "CategoryTheory.leftExact_truncation_iso",
+  "statement": "theorem leftExact_truncation_iso (K : CochainComplex B ℤ) (q : ℤ) :\n    ∃! e : (T.mapHomologicalComplex (.up ℤ)).obj (CochainComplex.truncLE K q) ≅\n      CochainComplex.truncLE ((T.mapHomologicalComplex (.up ℤ)).obj K) q,\n      e.hom ≫ CochainComplex.ιTruncLE _ q =\n        (T.mapHomologicalComplex (.up ℤ)).map (K.ιTruncLE q)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "blueprint": "Realizes a component of the second spectral sequence construction and its filtered comparison. Whole imported blueprint searches for filtered truncation and filtered complex quotient found no matching blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

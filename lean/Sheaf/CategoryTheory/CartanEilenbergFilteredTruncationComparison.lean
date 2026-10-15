@@ -9,9 +9,8 @@ public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
 public import Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor
-import Sheaf.Algebra.Homology.FilteredComplexZBDescription
-import Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence
-import Sheaf.Paper.CartanEilenbergLeftExactCohomology
+import Sheaf.CategoryTheory.CartanEilenbergFilteredTotalLifts
+import Sheaf.CategoryTheory.CartanEilenbergCanonicalTruncationComparison
 
 /-! # Filtered Cartan--Eilenberg comparison with truncation
 
@@ -26,6 +25,20 @@ universe uA vA uB vB uC vC
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
+
+private theorem spectralSequence_hom_ext_page_two
+    {C : Type uC} [Category.{vC} C] [Abelian C]
+    {E E' : E₂CohomologicalSpectralSequence C} {f g : E ⟶ E'}
+    (h : f.hom 2 = g.hom 2) : f = g := by
+  apply SpectralSequence.hom_ext
+  intro r hr
+  induction r, hr using Int.leInduction with
+  | base => exact h
+  | succ r hr ih =>
+    apply HomologicalComplex.Hom.ext
+    funext pq
+    apply (cancel_epi (E.iso r (r + 1) pq rfl hr).hom).1
+    rw [← f.comm r (r + 1) pq rfl hr, ← g.comm r (r + 1) pq rfl hr, ih]
 
 /-- Realize a fixed functorial truncation spectral sequence by the second filtration
 of mapped Cartan--Eilenberg totals. Only the filtered comparison is asserted here;
@@ -89,6 +102,31 @@ theorem exists_cartanEilenberg_filtered_truncation_comparison
             (⟨Q.total G, L Q⟩ : FilteredObject (CochainComplex C ℤ)),
           t.hom = HomologicalComplex₂.total.map
             ((CartanEilenbergPresentation.mappedFunctor G).map d.α) (ComplexShape.up ℤ) ∧
-          E.map d.f ≫ (s Q).hom = (s P).hom ≫ M.S.map t) := by sorry
+          E.map d.f ≫ (s Q).hom = (s P).hom ≫ M.S.map t) := by
+  obtain ⟨L, hL, hlifts⟩ := cartanEilenberg_filtered_total_lifts F G
+  obtain ⟨e, he⟩ := cartanEilenberg_canonical_truncation_comparison F G L hL
+  let s := fun P : CartanEilenbergPresentation F ↦ c P.X ≪≫ (e P).symm
+  refine ⟨filteredComplexCanonicalModel C, L, s, hL, ?_⟩
+  intro P Q d
+  obtain ⟨t, ht⟩ := hlifts P Q d
+  refine ⟨t, ht, ?_⟩
+  apply spectralSequence_hom_ext_page_two
+  apply HomologicalComplex.Hom.ext
+  funext pq
+  obtain ⟨p, q⟩ := pq
+  have hc' := hc P.X Q.X d.f p q
+  have he' := he P Q d t ht p q
+  apply (cancel_mono (Abelian.SpectralObject.pageTwoComparison
+    (F.grothendieckSpectralObject G Q.X) (e Q) p q (p + q) rfl).hom).1
+  dsimp only [s, Iso.trans_hom, Iso.symm_hom, SpectralSequence.comp_hom,
+    HomologicalComplex.comp_f, Abelian.SpectralObject.pageTwoComparison,
+    Iso.trans_hom, Functor.mapIso_hom] at *
+  simp only [HomologicalComplex.eval, SpectralSequence.pageFunctor, Category.assoc] at hc' he' ⊢
+  have hP := congrArg (fun k ↦ (k.hom 2).f (p, q)) (e P).inv_hom_id
+  have hQ := congrArg (fun k ↦ (k.hom 2).f (p, q)) (e Q).inv_hom_id
+  simp only [SpectralSequence.comp_hom, HomologicalComplex.comp_f,
+    SpectralSequence.id_hom, HomologicalComplex.id_f] at hP hQ
+  rw [reassoc_of% hQ, he', reassoc_of% hP]
+  exact hc'
 
 end CategoryTheory

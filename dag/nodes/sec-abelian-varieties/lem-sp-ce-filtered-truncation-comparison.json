@@ -15,48 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Construct the quotient-image spectral sequence on all filtered complexes by the three adjacent total-degree kernel/image constructions, with differential induced by the original complex differential. The kernel/cokernel equations produce coherent homology isomorphisms and natural maps, yielding M. Use the second filtration and comparison independence to obtain the required filtrations and filtered total lifts.",
+   "text": "Use the explicitly constructed canonical normalized quotient-image model, with differential and naturality axioms proved on representatives. Obtain second filtrations and filtered total lifts directly from the finite-image-sum filtration; homotopy independence and abutment data are unnecessary.",
    "uses": [
-    "lem-sp-filtered-complex-ZB-description",
-    "lem-sp-cartan-eilenberg-comparison-independence"
+    "lem-sp-filtered-complex-canonical-model",
+    "lem-sp-ce-filtered-total-lifts"
    ],
    "elementary": false
   },
   {
-   "text": "Before G is applied, put Dec(V)^a Tot(I)^n = V^(a+n) intersect d^{-1}(V^(a+n+1)). The augmentation of tau_{<=q} F(J) lies in Dec(V)^(-q), by resolution degree zero below q and the cycle condition at q. The CE cycle, boundary and cohomology resolutions identify its graded augmentation as a quasi-isomorphism. Injectivity splits the horizontal cycle/boundary sequences; finite sums of their terms give injective graded Dec terms and split steps, hence a filtered injective resolution of the truncation filtration.",
+   "text": "Apply the normalized canonical CE/truncation comparison. It identifies this fixed model with the truncation spectral sequence and gives its page-two naturality square.",
    "uses": [
-    "def-sp-cartan-eilenberg-presentation",
-    "lem-sp-cart-eilenberg-left-exact-cohomology"
+    "lem-sp-ce-canonical-truncation-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the filtered injective comparison of Stacks 015X to this filtered injective resolution. Additivity of G preserves comparison homotopies. The Dec cycle and boundary formulas shift pages once, and reindexing gives the second-filtration spectral sequence from page two. Original complex differentials on representatives and quotient homology compute both constructions, so the comparison respects the spectral-sequence differentials and homology isomorphisms.",
+   "text": "For each presentation set s_P = c_(P.X) followed by the inverse canonical comparison. Evaluate on page two; cancel the comparison isomorphism and use its naturality square and hc. Spectral-sequence maps are determined by page two: induct on integer pages using the epi successor isomorphism and naturality of homology. This gives equality on all pages and the required full sequence-map equation.",
    "uses": [
-    "lem-sp-filtered-complex-ZB-description"
+    "def-sp-spectral-sequence",
+    "lem-sp-spectral-object-page-two-functor"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The split horizontal cohomology computation identifies page-two comparison maps with the maps of the truncation spectral object; (-1)^(q*j) normalizes resolution differential signs. The assumed naturality of c gives the page-two square with E(f). Inductively, spectral-sequence morphisms are determined by page two through their successor-page homology isomorphisms, so that square holds on every page. Compose with c to obtain s; use the filtered lift already constructed for each presentation comparison.",
-   "uses": [
-    "lem-sp-cart-eilenberg-left-exact-cohomology",
-    "def-sp-spectral-sequence"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sp-filtered-complex-ZB-description",
-  "lem-sp-cartan-eilenberg-comparison-independence",
-  "def-sp-cartan-eilenberg-presentation",
-  "lem-sp-cart-eilenberg-left-exact-cohomology",
-  "def-sp-spectral-sequence"
+  "lem-sp-filtered-complex-canonical-model",
+  "lem-sp-ce-filtered-total-lifts",
+  "lem-sp-ce-canonical-truncation-comparison",
+  "def-sp-spectral-sequence",
+  "lem-sp-spectral-object-page-two-functor"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project, Derived Categories, Tags 015K and 015X",
-  "place": "finite kernel/image construction and filtered comparison"
+  "by": "agent",
+  "document": "Stacks Project, Tags 012K, 015K and 015X",
+  "place": "Explicit normalized quotient construction, direct filtered total lifts, and page-two extensionality. One remaining strict comparison component is isolated."
  },
  "mathlib_searches": [
   {
@@ -179,12 +171,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261012T085355-L-45989",
+  "landing": "20261015T232824-L-3301267",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

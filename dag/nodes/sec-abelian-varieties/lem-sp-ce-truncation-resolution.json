@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-ce-truncation-resolution",
+ "kind": "statement",
+ "title": "Unique injective CE resolutions of upper smart truncations",
+ "statement": "Let A,B be abelian, B Grothendieck abelian, F:A to B additive, and P a CE presentation [def-sp-cartan-eilenberg-presentation]. Put K=F(P.J), extended by zero. For every integer q, horizontal smart truncation I_q=truncLE(P.I,q) has a unique augmentation from single-zero(truncLE(K,q)) commuting with the truncation inclusions. Its unflipped, zero-extended total has a unique augmentation specified on the resolution-degree-zero summands, which is a quasi-isomorphism. Both augmentation maps commute with every CE presentation comparison. The total vanishes below zero, has injective terms, and is K-injective [def-sp-kinjective-bridge]. The uniqueness includes the augmentation square and total coordinates, rather than choosing an arbitrary resolution witness.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 015K, Remark 13.21.4 (CE horizontal cycles resolve the cycles of the augmented complex); Tag 015X, Remark 13.26.15 (upper truncation filtered resolution); Mathlib HomologicalComplex₂.totalFlipIso for the total sign convention."
+ },
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-kinjective-bridge"
+ ],
+ "proof": [
+  {
+   "text": "An exact additive functor commutes with upper smart truncation: below q use the ordinary coordinate isomorphisms; at q use preservation of cycles; above q both sides are zero. Cancel the monic truncation inclusion to prove the differential equation. Specialize to the exact single-zero functor.",
+   "uses": [
+    "lem-sp-left-exact-truncation-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The horizontally truncated CE rows are the original rows below q, the horizontal cycle row at q, and zero above q. The CE term and cycle hypotheses prove rowwise injectivity and quasi-isomorphism. Smart truncation preserves negative vanishing.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved bounded-below augmented-total theorem to obtain the augmentation, its coordinate formula, quasi-isomorphism, and K-injectivity. Independently use the finite diagonal coproduct to exhibit injectivity of every total term and vanishing below zero. Compose with the Mathlib total flip isomorphism to restore the unflipped total convention; its degree-zero resolution sign is one.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-total-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the monic truncation inclusion to prove uniqueness of the bicomplex augmentation. Degreewise extensionality and the total coordinate equation prove uniqueness of the total augmentation. A CE comparison commutes with the original augmentation in every degree because positive resolution degrees of its source vanish. Cancel the monic truncation inclusion for the truncated square. Total-summand naturality and the augmentation coordinates then prove the total square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-left-exact-truncation-iso",
+  "def-sp-cartan-eilenberg-presentation",
+  "lem-sp-cartan-eilenberg-total-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 015K, Remark 13.21.4 (CE horizontal cycles resolve the cycles of the augmented complex); Tag 015X, Remark 13.26.15 (upper truncation filtered resolution); Mathlib HomologicalComplex₂.totalFlipIso for the total sign convention.",
+  "note": "Expanded into Lean from the parent construction plan and the cited representative formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered cochain complex gives a canonical functorial spectral sequence with quotient cycle boundary pages",
+   "results": "Unavailable: Internal Server Error. The service failure was recorded; other search kinds were completed.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered map of cochain complexes induces maps on all spectral sequence pages and canonical homology isomorphisms",
+   "results": "8 hits, chiefly CochainComplex.ConnectData homology comparisons and mapping-cone functor comparisons; no filtered sequence functor or CE/truncation comparison.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.ιTotalOrZero_map",
+   "results": "1 hit: HomologicalComplex₂.ιTotalOrZero_map, Mathlib.Algebra.Homology.TotalComplex. Used in the filtered-total-lift proof. This is only the summand naturality step.",
+   "date": "2026-10-16",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "decalage|Decalage|filtered.*truncation",
+   "results": "0 Mathlib hits. Repository search finds only the existing CE comparison docstrings; there is no decalage/truncation comparison implementation.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison",
+  "date": "2026-10-16",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "second spectral sequence: filtered Cartan--Eilenberg realization and naturality",
+   "via": [
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergTruncationResolution",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergTruncationResolution.lean",
+  "declaration": "CategoryTheory.cartanEilenberg_truncation_resolution",
+  "statement": "theorem cartanEilenberg_truncation_resolution [IsGrothendieckAbelian.{vB} B]\n    (P : CartanEilenbergPresentation F) (q : ℤ) :\n    let K := (F.mapHomologicalComplex (.up ℤ)).obj\n      (P.J.cocomplex.extend ComplexShape.embeddingUpNat)\n    let I := CochainComplex.truncLE P.I q\n    let T := (CartanEilenbergPresentation.mappedFunctor (𝟭 B)).obj I\n    ∃! a : ((CochainComplex.single₀ B).mapHomologicalComplex (.up ℤ)).obj\n        (CochainComplex.truncLE K q) ⟶ I,\n      a ≫ CochainComplex.ιTruncLE P.I q =\n        ((CochainComplex.single₀ B).mapHomologicalComplex (.up ℤ)).map\n          (CochainComplex.ιTruncLE K q) ≫ P.e ∧\n      ∃! aug : CochainComplex.truncLE K q ⟶ T.total (.up ℤ),\n        (∀ n : ℤ, aug.f n = (a.f n).f 0 ≫\n          (HomologicalComplex.extendXIso\n            (((𝟭 B).mapHomologicalComplex (.up ℕ)).obj (I.X n))\n            ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫\n          T.ιTotal (.up ℤ) n 0 n (add_zero n)) ∧\n        QuasiIso aug ∧ (∀ n : ℤ, Injective ((T.total (.up ℤ)).X n)) ∧\n        CochainComplex.IsStrictlyGE (T.total (.up ℤ)) 0 ∧\n        CochainComplex.IsKInjective (T.total (.up ℤ)) ∧\n        ∀ (Q : CartanEilenbergPresentation F) (d : P.Comparison Q),\n          let KQ := (F.mapHomologicalComplex (.up ℤ)).obj\n            (Q.J.cocomplex.extend ComplexShape.embeddingUpNat)\n          let IQ := CochainComplex.truncLE Q.I q\n          let TQ := (CartanEilenbergPresentation.mappedFunctor (𝟭 B)).obj IQ\n          let k := (F.mapHomologicalComplex (.up ℤ)).map\n            (HomologicalComplex.extendMap d.β ComplexShape.embeddingUpNat)\n          let u := CochainComplex.truncLEMap d.α q\n          ∀ (aQ : ((CochainComplex.single₀ B).mapHomologicalComplex (.up ℤ)).obj\n              (CochainComplex.truncLE KQ q) ⟶ IQ),\n            aQ ≫ CochainComplex.ιTruncLE Q.I q =\n              ((CochainComplex.single₀ B).mapHomologicalComplex (.up ℤ)).map\n                (CochainComplex.ιTruncLE KQ q) ≫ Q.e →\n            ∀ (augQ : CochainComplex.truncLE KQ q ⟶ TQ.total (.up ℤ)),\n              (∀ n : ℤ, augQ.f n = (aQ.f n).f 0 ≫\n                (HomologicalComplex.extendXIso\n                  (((𝟭 B).mapHomologicalComplex (.up ℕ)).obj (IQ.X n))\n                  ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫\n                TQ.ιTotal (.up ℤ) n 0 n (add_zero n)) →\n              a ≫ u = ((CochainComplex.single₀ B).mapHomologicalComplex (.up ℤ)).map\n                  (CochainComplex.truncLEMap k q) ≫ aQ ∧\n                aug ≫ HomologicalComplex₂.total.map\n                    ((CartanEilenbergPresentation.mappedFunctor (𝟭 B)).map u) (.up ℤ) =\n                  CochainComplex.truncLEMap k q ≫ augQ",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "blueprint": "Realizes a component of the second spectral sequence construction and its filtered comparison. Whole imported blueprint searches for filtered truncation and filtered complex quotient found no matching blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261015T232824-L-3301267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
