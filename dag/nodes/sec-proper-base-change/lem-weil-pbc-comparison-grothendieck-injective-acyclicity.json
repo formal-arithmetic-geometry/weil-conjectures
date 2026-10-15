@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-comparison-grothendieck-injective-acyclicity",
+ "kind": "statement",
+ "title": "Comparison pullbacks of injective module sheaves are direct-image acyclic",
+ "statement": "Let $X$ be any scheme and let $\\Lambda$ be a finite ring in the common larger universe of its small sites. Form the canonical comparison adjunction $\\nu_X^*\\dashv\\nu_{X,*}$ on sheaves of left $\\Lambda$-modules by [def-weil-pbc-site-comparison-morphism]. For every injective etale module sheaf $I$ and every $n\\geq0$, one has $R^{n+1}\\nu_{X,*}(\\nu_X^*I)=0$. There are no affineness or quasi-compactness hypotheses on $X$.",
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Comparison/LowerStarAcyclic.lean",
+  "place": "Proof paragraphs 3-4 of prop-weil-pbc-site-comparison-finite-level; existing source theorem rightAcyclic_comparisonUpperStar_obj_of_injective, lines 107-121"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit of the etale proetale comparison adjunction is an isomorphism for Grothendieck abelian coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pro etale comparison inverse image exact fully faithful unit injective direct image acyclic",
+   "results": "8 hits, including Scheme.Etale.forgetFullyFaithful, Scheme.smallEtaleTopology, and generic dense-subsite results; no exact comparison acyclicity theorem in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match in Mathlib; exact generic source-library theorem found by rg"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*etale|etale.*proetale",
+   "results": "5 hits in Mathlib/AlgebraicGeometry/Sites/Proetale.lean, concerning precoverages; no coefficient comparison theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match in Mathlib; source library reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel",
+  "date": "2026-10-16",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-site-comparison-finite-level",
+   "place": "Proof paragraphs 3-4 of prop-weil-pbc-site-comparison-finite-level; existing source theorem rightAcyclic_comparisonUpperStar_obj_of_injective, lines 107-121",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic",
+  "declaration": "AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective",
+  "statement": "theorem rightAcyclic_comparisonUpperStar_obj_of_injective (X : Scheme.{u})\n    (I : Sheaf X.smallEtaleTopology A)\n    [Injective I] : ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-16",
+  "note": "Existing generic Grothendieck abelian coefficient theorem. Specialize A to ModuleCat.{u + 1} Λ; all coefficient-category instances are inferred. No new Lean statement or proof hole is introduced."
+ },
+ "proof": [
+  {
+   "text": "Take a module injective resolution of the pro-etale comparison pullback of I using Grothendieckness and enough injectives. Apply comparison direct image to the resolution. Its underlying presheaf complex evaluates at W as the complex of sections of the resolution over W. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels, so exactness of sheafification identifies its cohomology sheaf with the sheafification of its presheaf cohomology. Its degree-(n+1) higher direct image is the sheafification of derived evaluation over etale objects. On an affine etale object W over X, etale restriction preserves injectives by its exact left adjoint. Comparison pullback commutes with restriction. Localization identifies derived evaluation over W with derived global sections on W. The affine comparison injective-vanishing theorem makes this zero for the restricted injective etale sheaf on W. Every etale object has an affine open cover. Each section of the cohomology presheaf thus restricts to zero on a covering, so its sheafification is zero. This proves the assertion for arbitrary X. The attached generic theorem already exists with a sorry in its source module; this node records the module specialization needed here. The pre-existing lem-cbc-abelian-comparison-injective-acyclicity records only the abelian-group specialization of this same Lean declaration.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-comparison-injective-acyclicity",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "def-sp-left-exact-additive",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-comparison-injective-acyclicity",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "def-sp-left-exact-additive",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sp-grothendieck-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Comparison/LowerStarAcyclic.lean",
+  "place": "Proof paragraphs 3-4 of prop-weil-pbc-site-comparison-finite-level; existing source theorem rightAcyclic_comparisonUpperStar_obj_of_injective, lines 107-121"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261015T212944-L-2073357",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261015T212944-L-2073357",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

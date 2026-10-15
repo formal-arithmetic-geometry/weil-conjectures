@@ -1,0 +1,102 @@
+{
+ "id": "lem-weil-pbc-comparison-grothendieck-unit",
+ "kind": "statement",
+ "title": "The comparison unit for Grothendieck abelian coefficients",
+ "statement": "Let $X$ be a scheme and let $A$ be a Grothendieck abelian category in the common larger universe of its small sites. For the canonical comparison adjunction $\\nu_X^*\\dashv\\nu_{X,*}$ of [def-weil-pbc-site-comparison-morphism], formed by the same Kan extension and sheafification with values in $A$, the natural transformation $\\mathrm{id}\\to\\nu_{X,*}\\nu_X^*$ is invertible. In particular this holds for left modules over any ring in that universe.",
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Comparison/FullyFaithful.lean",
+  "place": "Proof paragraph 2 of prop-weil-pbc-site-comparison-finite-level; existing source theorem isIso_comparisonAdjunction_unit, lines 202-221 (Stacks 099T)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit of the etale proetale comparison adjunction is an isomorphism for Grothendieck abelian coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of the etale proetale comparison adjunction is an isomorphism for Grothendieck abelian coefficients",
+   "results": "8 hits, including CategoryTheory.Adjunction.isIso_unit_of_iso and unrelated condensed adjunction unit results; none identifies the pro-etale comparison unit.",
+   "date": "2026-10-16",
+   "verdict": "no match in Mathlib; exact source-library theorem found by rg"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*etale|etale.*proetale",
+   "results": "5 hits in Mathlib/AlgebraicGeometry/Sites/Proetale.lean, concerning precoverages; no coefficient comparison theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match in Mathlib; source library reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel",
+  "date": "2026-10-16",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-site-comparison-finite-level",
+   "place": "Proof paragraph 2 of prop-weil-pbc-site-comparison-finite-level; existing source theorem isIso_comparisonAdjunction_unit, lines 202-221 (Stacks 099T)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit",
+  "statement": "theorem isIso_comparisonAdjunction_unit (X : Scheme.{u}) :\n    IsIso (comparisonAdjunction A X).unit",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-16",
+  "note": "Existing generic Grothendieck abelian coefficient theorem. Specialize A to ModuleCat.{u + 1} Λ; all coefficient-category instances are inferred. No new Lean statement or proof hole is introduced."
+ },
+ "proof": [
+  {
+   "text": "Use the existing source-library proof of isIso_comparisonAdjunction_unit. Restriction to the dense affine etale subsite reflects isomorphisms. The comparison unit is the composite of the left Kan extension unit and restriction of the sheafification map. The first is invertible because the etale inclusion is fully faithful. The Kan extension restricted to the affine pro-etale basis is already a sheaf: its sections on a presented affine object are filtered colimits of etale sections, filtered colimits in A are exact, and coverings descend to a finite presentation stage. Dense-subsite sheafification therefore does not change those sections. In particular its restriction to affine etale objects is invertible. Both factors of the restricted unit are invertible, and reflection along affine etale restriction gives the claimed natural transformation isomorphism. This is the proof already present in the recorded module, rather than a new theorem to prove.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Comparison/FullyFaithful.lean",
+  "place": "Proof paragraph 2 of prop-weil-pbc-site-comparison-finite-level; existing source theorem isIso_comparisonAdjunction_unit, lines 202-221 (Stacks 099T)"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261015T212944-L-2073357",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261015T212944-L-2073357",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,14 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
-import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
-import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-!
@@ -69,6 +63,13 @@ theorem siteComparison_finiteLevel (T : Scheme.{u})
       (q : ℕ), 0 < q →
       IsZero (((comparisonLowerStar (ModuleCat.{u + 1} Λ) T).rightDerived q).obj
         ((comparisonUpperStar (ModuleCat.{u + 1} Λ) T).obj I))) := by
-  sorry
+  refine ⟨inferInstance, inferInstance, ?_, ?_⟩
+  · intro F
+    change IsIso ((comparisonAdjunction (ModuleCat.{u + 1} Λ) T).unit.app F)
+    have := isIso_comparisonAdjunction_unit (ModuleCat.{u + 1} Λ) T
+    infer_instance
+  · intro I hI q hq
+    obtain ⟨n, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hq)
+    exact rightAcyclic_comparisonUpperStar_obj_of_injective (ModuleCat.{u + 1} Λ) T I n
 
 end AlgebraicGeometry.ProEtale

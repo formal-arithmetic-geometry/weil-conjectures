@@ -17,80 +17,37 @@
  ],
  "proof": [
   {
-   "text": "By [def-weil-pbc-site-comparison-morphism], the module inverse image preserves finite limits and is a left adjoint. Kernels are finite limits, and cokernels are coequalizers of a map and zero; thus it preserves both. The module operations in that definition show that the functor is additive, so it is exact.",
+   "text": "Specialize the existing comparisonUpperStar finite-limit preservation instance to ModuleCat Λ. Its comparisonAdjunction left adjoint structure gives preservation of finite colimits. These are exactly the first two conjuncts.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-site-comparison-finite-level.md",
-    "place": "## Proof, first paragraph"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $v:W\\to T$ be any affine etale object. By [lem-weil-pbc-comparison-pullback], restriction of $\\nu_T^*F$ to $W_{\\Proet}$ is $\\nu_W^*(v^{-1}F)$. Apply [lem-weil-pbc-comparison-sections] with affine base $X=W$ and the singleton inverse system $U=W$: its sections on $W$ are $(v^{-1}F)(W)=F(W)$, since etale restriction is restriction to the slice. The unit sends $s\\in F(W)$ to the comma-colimit representative $(W,\\mathrm{id}_W,s)$ in [def-weil-pbc-site-comparison-morphism]; the displayed section identification sends this representative back to $s$. Therefore the unit is bijective on every affine etale object. Restriction to the affine etale site is an equivalence by [lem-weil-pbc-affine-etale-site-topos], hence detects isomorphisms of underlying abelian sheaves and therefore of module sheaves.",
+   "text": "Apply the existing Grothendieck abelian coefficient comparison unit theorem [lem-weil-pbc-comparison-grothendieck-unit] with A = ModuleCat Λ and take its component at F. The definition proEtaleSiteComparisonModules is comparisonAdjunction, so the component is precisely the unit in the statement.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-comparison-sections",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-affine-etale-site-topos"
+    "lem-weil-pbc-comparison-grothendieck-unit",
+    "def-weil-pbc-site-comparison-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-site-comparison-finite-level.md",
-    "place": "## Proof, second paragraph: affine localization and unit on sections"
-   }
+   "elementary": true
   },
   {
-   "text": "Fix injective $I$ and an affine etale $v:W\\to T$. By [lem-weil-pbc-etale-restriction-injectives], $v^{-1}I$ is injective on $W_{\\Et}$. By [lem-weil-pbc-comparison-pullback], $(\\nu_T^*I)|_{W_{\\Proet}}\\cong\\nu_W^*(v^{-1}I)$. The object $W/W$ belongs to $\\mathcal B_W$ of [def-weil-pbc-ind-etale-basis], since its identity ring map is etale and hence ind-etale. Apply [lem-weil-pbc-comparison-injective-acyclicity] with affine base $W$ and basis object $W/W$. It gives $H^q(W_{\\Proet},(\\nu_T^*I)|_W)=0$ for every $q>0$.",
+   "text": "For the injective I and q > 0, write q = n + 1 by Nat.exists_eq_succ_of_ne_zero. Apply [lem-weil-pbc-comparison-grothendieck-injective-acyclicity] with A = ModuleCat Λ to I and n. By the definition of rightAcyclic its conclusion is exactly the last conjunct. Combine the four clauses by conjunction introduction.",
    "uses": [
-    "lem-weil-pbc-etale-restriction-injectives",
-    "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-comparison-injective-acyclicity"
+    "lem-weil-pbc-comparison-grothendieck-injective-acyclicity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-site-comparison-finite-level.md",
-    "place": "## Proof, third paragraph: restrict to an affine etale object and apply affine vanishing"
-   }
-  },
-  {
-   "text": "Put $G=\\nu_T^*I$. The small-site module category is Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], so [lem-sp-grothendieck-enough-injectives] supplies a module injective resolution $G\\to J^\\bullet$. By [def-sp-left-exact-additive], $R^q\\nu_{T,*}G=\\mathcal H^q(\\nu_{T,*}J^\\bullet)$. By [def-weil-pbc-site-comparison-morphism], $(\\nu_{T,*}J^n)(W)=J^n(W)$. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels by [def-weil-sheaf-of-modules-category]; consequently this cohomology sheaf is the sheafification of $W\\mapsto H^q(J^\\bullet(W))$. By [lem-weil-pbc-proetale-restriction-injectives], this last group is $H^q(W_{\\Proet},G|_W)$. Step 3 makes it zero on every affine etale $W$ when $q>0$. Every section of this sheafification is locally represented by a section of the presheaf; refine those neighborhoods by affine etale objects, where all representatives are zero. Thus the sheafification is zero locally, and the affine-etale equivalence [lem-weil-pbc-affine-etale-site-topos] gives $R^q\\nu_{T,*}G=0$.",
-   "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-sp-grothendieck-enough-injectives",
-    "def-sp-left-exact-additive",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "lem-weil-pbc-affine-etale-site-topos"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-site-comparison-finite-level.md",
-    "place": "## Proof, third paragraph: injective resolution and sheafification of section cohomology"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-left-exact-additive",
-  "def-weil-pbc-ind-etale-basis",
   "def-weil-pbc-site-comparison-morphism",
-  "def-weil-sheaf-of-modules-category",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-comparison-injective-acyclicity",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-comparison-sections",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-ring-sheaves-grothendieck"
+  "lem-weil-pbc-comparison-grothendieck-injective-acyclicity",
+  "lem-weil-pbc-comparison-grothendieck-unit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-site-comparison-finite-level.md",
-  "place": "## Proof"
+  "document": "lean/Sheaf/AlgebraicGeometry/ProEtaleSiteComparisonFiniteLevel.lean",
+  "place": "siteComparison_finiteLevel, specialization and assembly of existing upstream comparison theorems (T4, 2026-10-16)"
  },
  "mathlib_searches": [
   {
@@ -191,5 +148,15 @@
   "by": "NL",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261015T212944-L-2073357",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
