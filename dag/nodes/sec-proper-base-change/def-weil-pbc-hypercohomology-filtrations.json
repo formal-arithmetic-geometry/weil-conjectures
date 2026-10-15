@@ -1,331 +1,291 @@
 {
- "id": "def-weil-pbc-hypercohomology-filtrations",
- "blueprint": {
-  "is": "def-weil-pbc-hypercohomology-filtrations",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Hypercohomology filtrations",
- "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$. Let $K\\in\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories] have torsion cohomology (the construction below does not use this hypothesis) and choose $a$ with $\\mathcal H^q(K)=0$ for $q<a$. Represent $K$ by a complex $K^\\bullet$ of abelian sheaves with $K^i=0$ for $i<a$ [def-sbc-standard-tstructure-derived-category], and let $\\tau_{\\leq q}K^\\bullet$ be its canonical truncations, with the truncation triangles $\\tau_{\\leq q-1}K\\to\\tau_{\\leq q}K\\to\\mathcal H^q(K)[-q]\\to$ of [def-sp-truncation-couple]. Pages are indexed as in [def-sp-exact-couple]: the first page of the spectral sequence of a couple is $E_2=E$.\n\n1. **The first truncation spectral sequence (on $Y$).** $(D,E)$ is the truncation couple [def-sp-truncation-couple] of $K^\\bullet$ for the left exact functor $v=f_*:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ [def-weil-pbc-direct-image], read through the dictionary [def-sp-etale-dictionary] (so $Rv=Rf_*$):\n$$D^{p,q}=\\mathcal H^{p+q}(Rf_*\\tau_{\\leq q}K),\\qquad E^{p,q}=\\mathcal H^{p+q}\\bigl(Rf_*(\\mathcal H^q(K)[-q])\\bigr),$$\nand $(E_r,d_r)_{r\\geq2}$ is the spectral sequence of this couple. By [thm-sp-truncation-e2] it is\n$$E_2^{p,q}=R^pf_*\\mathcal H^q(K)\\Longrightarrow\\mathcal H^{p+q}(Rf_*K),$$\nthe abutment $\\mathcal H^n(Rf_*K)$ carrying the image filtration [def-sp-image-filtration] $F^p\\mathcal H^n(Rf_*K)=\\operatorname{im}\\bigl(\\mathcal H^n(Rf_*\\tau_{\\leq n-p}K)\\to\\mathcal H^n(Rf_*K)\\bigr)$ [def-sp-filtration], finite, with only $a\\leq q\\leq n$ in total degree $n$, and convergent in the sense of [def-sp-convergence].\n\n2. **Its base change along $g$ (the first sequence of Step 4 of [thm-weil-pbc-bounded-below]).** $g^{-1}(D,E)$ is the couple obtained by applying the exact functor $g^{-1}:\\Ab(Y_{\\Et})\\to\\Ab(Y'_{\\Et})$ [def-weil-pbc-inverse-image], [prop-weil-pbc-inverse-image-exact] to every term and structure map of (1). Through the natural isomorphisms $\\mathcal H^m(g^{-1}L)\\cong g^{-1}\\mathcal H^m(L)$ for $L\\in\\Dplus(Y_{\\Et})$ [lem-weil-pbc-exact-functor-bounded-below], $g^{-1}$ being the derived inverse image [def-weil-pbc-derived-inverse-image], it is the couple obtained by applying $\\mathcal H^*$ of the triangulated functor $g^{-1}Rf_*$ to the truncation triangles,\n$$D_A^{p,q}=\\mathcal H^{p+q}(g^{-1}Rf_*\\tau_{\\leq q}K),\\qquad E_A^{p,q}=\\mathcal H^{p+q}\\bigl(g^{-1}Rf_*(\\mathcal H^q(K)[-q])\\bigr),$$\nand by [lem-sp-exact-functor-couple] its spectral sequence is $g^{-1}$ applied to that of (1):\n$$E_2^{p,q}=g^{-1}R^pf_*\\mathcal H^q(K)\\Longrightarrow\\mathcal H^{p+q}(g^{-1}Rf_*K)=g^{-1}\\mathcal H^{p+q}(Rf_*K),$$\nwith the filtration $g^{-1}F^p$, which is the image filtration of the maps $\\mathcal H^n(g^{-1}Rf_*\\tau_{\\leq n-p}K)\\to\\mathcal H^n(g^{-1}Rf_*K)$. This is the sequence called the first spectral sequence wherever the morphism to (3) is formed ([def-weil-pbc-truncation-exact-couples]): it is defined after $g^{-1}$ is applied.\n\n3. **The second truncation spectral sequence (on $Y'$).** $(D',E')$ is the truncation couple of the complex $g'^{-1}K^\\bullet$ (terms $g'^{-1}K^i$, zero for $i<a$; it represents $g'^{-1}K$ [def-weil-pbc-derived-inverse-image], has $\\tau_{\\leq q}(g'^{-1}K^\\bullet)=g'^{-1}\\tau_{\\leq q}K^\\bullet$ and $\\mathcal H^q(g'^{-1}K)\\cong g'^{-1}\\mathcal H^q(K)$) for $v=f'_*:\\Ab(X'_{\\Et})\\to\\Ab(Y'_{\\Et})$:\n$$D'^{p,q}=\\mathcal H^{p+q}(Rf'_*g'^{-1}\\tau_{\\leq q}K),\\qquad E'^{p,q}=\\mathcal H^{p+q}\\bigl(Rf'_*g'^{-1}(\\mathcal H^q(K)[-q])\\bigr),$$\nwith spectral sequence, by [thm-sp-truncation-e2],\n$$E_2'^{p,q}=R^pf'_*g'^{-1}\\mathcal H^q(K)\\Longrightarrow\\mathcal H^{p+q}(Rf'_*g'^{-1}K),$$\nthe filtration of $\\mathcal H^n(Rf'_*g'^{-1}K)$ being the image filtration of the maps $\\mathcal H^n(Rf'_*g'^{-1}\\tau_{\\leq n-p}K)\\to\\mathcal H^n(Rf'_*g'^{-1}K)$, finite with only $a\\leq q\\leq n$ in degree $n$.\n\nThe *hypercohomology filtrations* are the filtrations of the abutments in (1), (2) and (3).",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
-  "place": "node def-weil-pbc-hypercohomology-filtrations, order 1315"
- },
- "stmt_deps": [
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-derived-categories",
-  "def-sbc-standard-tstructure-derived-category",
-  "def-sp-truncation-couple",
-  "def-sp-exact-couple",
-  "def-weil-pbc-direct-image",
-  "def-sp-etale-dictionary",
-  "thm-sp-truncation-e2",
-  "def-sp-image-filtration",
-  "def-sp-filtration",
-  "def-sp-convergence",
-  "def-weil-pbc-inverse-image",
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-weil-pbc-exact-functor-bounded-below",
-  "def-weil-pbc-derived-inverse-image",
-  "lem-sp-exact-functor-couple"
- ],
- "proof": [
-  {
-   "text": "Exactness of the cohomological couple. Apply the chosen triangulated functor to each distinguished truncation triangle. Use the three exactness assertions of DerivedCategory.HomologySequence, transport their source and target indices by the displayed equalities, and extract both the zero composites and image-kernel equalities. This proves hypercohomology_maps_exact directly, without importing the raw-complex truncation-couple exactness theorem.",
-   "uses": [
-    "def-sp-truncation-couple",
-    "def-sbc-standard-tstructure-derived-category"
-   ],
-   "elementary": false,
-   "source": {
+  "id": "def-weil-pbc-hypercohomology-filtrations",
+  "blueprint": {
+    "is": "def-weil-pbc-hypercohomology-filtrations",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "definition",
+  "title": "Hypercohomology filtrations",
+  "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$. Let $K\\in\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories] have torsion cohomology (the construction below does not use this hypothesis) and choose $a$ with $\\mathcal H^q(K)=0$ for $q<a$. Represent $K$ by a complex $K^\\bullet$ of abelian sheaves with $K^i=0$ for $i<a$ [def-sbc-standard-tstructure-derived-category], and let $\\tau_{\\leq q}K^\\bullet$ be its canonical truncations, with the truncation triangles $\\tau_{\\leq q-1}K\\to\\tau_{\\leq q}K\\to\\mathcal H^q(K)[-q]\\to$ of [def-sp-truncation-couple]. Pages are indexed as in [def-sp-exact-couple]: the first page of the spectral sequence of a couple is $E_2=E$.\n\n1. **The first truncation spectral sequence (on $Y$).** $(D,E)$ is the truncation couple [def-sp-truncation-couple] of $K^\\bullet$ for the left exact functor $v=f_*:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ [def-weil-pbc-direct-image], read through the dictionary [def-sp-etale-dictionary] (so $Rv=Rf_*$):\n$$D^{p,q}=\\mathcal H^{p+q}(Rf_*\\tau_{\\leq q}K),\\qquad E^{p,q}=\\mathcal H^{p+q}\\bigl(Rf_*(\\mathcal H^q(K)[-q])\\bigr),$$\nand $(E_r,d_r)_{r\\geq2}$ is the spectral sequence of this couple. By [thm-sp-truncation-e2] it is\n$$E_2^{p,q}=R^pf_*\\mathcal H^q(K)\\Longrightarrow\\mathcal H^{p+q}(Rf_*K),$$\nthe abutment $\\mathcal H^n(Rf_*K)$ carrying the image filtration [def-sp-image-filtration] $F^p\\mathcal H^n(Rf_*K)=\\operatorname{im}\\bigl(\\mathcal H^n(Rf_*\\tau_{\\leq n-p}K)\\to\\mathcal H^n(Rf_*K)\\bigr)$ [def-sp-filtration], finite, with only $a\\leq q\\leq n$ in total degree $n$, and convergent in the sense of [def-sp-convergence].\n\n2. **Its base change along $g$ (the first sequence of Step 4 of [thm-weil-pbc-bounded-below]).** $g^{-1}(D,E)$ is the couple obtained by applying the exact functor $g^{-1}:\\Ab(Y_{\\Et})\\to\\Ab(Y'_{\\Et})$ [def-weil-pbc-inverse-image], [prop-weil-pbc-inverse-image-exact] to every term and structure map of (1). Through the natural isomorphisms $\\mathcal H^m(g^{-1}L)\\cong g^{-1}\\mathcal H^m(L)$ for $L\\in\\Dplus(Y_{\\Et})$ [lem-weil-pbc-exact-functor-bounded-below], $g^{-1}$ being the derived inverse image [def-weil-pbc-derived-inverse-image], it is the couple obtained by applying $\\mathcal H^*$ of the triangulated functor $g^{-1}Rf_*$ to the truncation triangles,\n$$D_A^{p,q}=\\mathcal H^{p+q}(g^{-1}Rf_*\\tau_{\\leq q}K),\\qquad E_A^{p,q}=\\mathcal H^{p+q}\\bigl(g^{-1}Rf_*(\\mathcal H^q(K)[-q])\\bigr),$$\nand by [lem-sp-exact-functor-couple] its spectral sequence is $g^{-1}$ applied to that of (1):\n$$E_2^{p,q}=g^{-1}R^pf_*\\mathcal H^q(K)\\Longrightarrow\\mathcal H^{p+q}(g^{-1}Rf_*K)=g^{-1}\\mathcal H^{p+q}(Rf_*K),$$\nwith the filtration $g^{-1}F^p$, which is the image filtration of the maps $\\mathcal H^n(g^{-1}Rf_*\\tau_{\\leq n-p}K)\\to\\mathcal H^n(g^{-1}Rf_*K)$. This is the sequence called the first spectral sequence wherever the morphism to (3) is formed ([def-weil-pbc-truncation-exact-couples]): it is defined after $g^{-1}$ is applied.\n\n3. **The second truncation spectral sequence (on $Y'$).** $(D',E')$ is the truncation couple of the complex $g'^{-1}K^\\bullet$ (terms $g'^{-1}K^i$, zero for $i<a$; it represents $g'^{-1}K$ [def-weil-pbc-derived-inverse-image], has $\\tau_{\\leq q}(g'^{-1}K^\\bullet)=g'^{-1}\\tau_{\\leq q}K^\\bullet$ and $\\mathcal H^q(g'^{-1}K)\\cong g'^{-1}\\mathcal H^q(K)$) for $v=f'_*:\\Ab(X'_{\\Et})\\to\\Ab(Y'_{\\Et})$:\n$$D'^{p,q}=\\mathcal H^{p+q}(Rf'_*g'^{-1}\\tau_{\\leq q}K),\\qquad E'^{p,q}=\\mathcal H^{p+q}\\bigl(Rf'_*g'^{-1}(\\mathcal H^q(K)[-q])\\bigr),$$\nwith spectral sequence, by [thm-sp-truncation-e2],\n$$E_2'^{p,q}=R^pf'_*g'^{-1}\\mathcal H^q(K)\\Longrightarrow\\mathcal H^{p+q}(Rf'_*g'^{-1}K),$$\nthe filtration of $\\mathcal H^n(Rf'_*g'^{-1}K)$ being the image filtration of the maps $\\mathcal H^n(Rf'_*g'^{-1}\\tau_{\\leq n-p}K)\\to\\mathcal H^n(Rf'_*g'^{-1}K)$, finite with only $a\\leq q\\leq n$ in degree $n$.\n\nThe *hypercohomology filtrations* are the filtrations of the abutments in (1), (2) and (3).",
+  "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
     "place": "node def-weil-pbc-hypercohomology-filtrations, order 1315"
-   }
   },
-  {
-   "text": "The image filtration is decreasing. For i <= j, factor the inclusion of the truncation at n-j through the truncation at n-i, using the inverse of the smaller truncation inclusion and truncLEMap. Apply the composite Q, the triangulated functor and H^n. The image of a composite is contained in the image of its second factor. This proves hypercohomology_images_antitone.",
-   "uses": [
-    "def-sp-truncation-couple"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
-    "place": "node def-weil-pbc-hypercohomology-filtrations, order 1315"
-   }
-  },
-  {
-   "text": "Lower bounds and stabilization. Transport the given vanishing of H^q(K) to the representing complex. Right derived functors preserve the lower cohomological bound by the source-library isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE theorem and rightDerivedFunctorPlusCompatibility. Exact derived functors preserve the same bound. A truncation below a is zero in the derived category; a single cohomology object in degree q stays in degrees >= q. Finally the cone of tau<=n K -> K lies in degrees >= n+1, so applying any of the three functors makes its H^n map an isomorphism. These facts give the lower bound for D, the quadrant bound for E and the canonical stabilized abutment map for each sequence.",
-   "uses": [
-    "def-sp-truncation-couple",
+  "stmt_deps": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-derived-categories",
     "def-sbc-standard-tstructure-derived-category",
-    "lem-weil-pbc-derived-functor-negative-vanishing",
-    "src-right-derived-functor-plus-compatibility",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
-    "place": "node def-weil-pbc-hypercohomology-filtrations, order 1315"
-   }
-  },
-  {
-   "text": "Convergence with the prescribed filtration. Apply halfPlaneConvergence to each of the three exact couples. The diagonal maps to H^n(FK) are the actual truncation inclusions followed by cohomology. Prove their compatibility and normalize the iterated alpha maps by induction. The map with truncation index n is an isomorphism by the previous step. Apply abutment_image_filtration to identify the finite limiting filtration with the actual images defining hypercohomologyFiltration, including its stated range and all-page vanishing. This uses the general convergence theorem directly rather than the raw-complex truncation hypercohomology theorem.",
-   "uses": [
-    "thm-sp-half-plane-convergence",
-    "lem-sp-abutment-image-filtration",
-    "def-sp-truncation-couple"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
-    "place": "node def-weil-pbc-hypercohomology-filtrations, order 1315"
-   }
-  },
-  {
-   "text": "Bridge and E2 identifications. For the first sequence, conjugate the recorded TruncationCouple.alpha, f and g by the existing bridgeIso, cancel the inverse bridge factors and normalize the cohomological indices. This supplies exactly the three required bridge equations. Identify a single object in degree q with its shift from degree zero, commute the triangulated functor and cohomology with that shift, then use homologyRightDerivedFunctorObjSingleFunctorIso to obtain R^p f_* H^q(K). For the other sequences use the natural exact-functor cohomology comparison and mapDerivedCategorySingleFunctor, respectively.",
-   "uses": [
     "def-sp-truncation-couple",
-    "def-sp-kinjective-bridge",
+    "def-sp-exact-couple",
     "def-weil-pbc-direct-image",
-    "src-right-derived-functor-plus-compatibility",
+    "def-sp-etale-dictionary",
+    "thm-sp-truncation-e2",
+    "def-sp-image-filtration",
+    "def-sp-filtration",
+    "def-sp-convergence",
+    "def-weil-pbc-inverse-image",
+    "prop-weil-pbc-inverse-image-exact",
     "lem-weil-pbc-exact-functor-bounded-below",
-    "lem-sf-exact-functor-derived-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
-    "place": "node def-weil-pbc-hypercohomology-filtrations, order 1315"
-   }
-  },
-  {
-   "text": "Termwise inverse-image compatibility. An exact additive functor preserves the zero terms and the cohomology of a complex. Construct the truncation comparison with the inverse of the truncation inclusion on the already truncated mapped complex, followed by truncLEMap of the mapped inclusion. Below the truncation degree it is an isomorphism by cancellation; above it both objects are zero. At the top degree, use exactness of the boundary-cycles-homology sequence to show that the cycles map is an isomorphism. Thus the comparison is an isomorphism of complexes and it commutes with the specified inclusions. This proves the existential truncation clause without choosing arbitrary data from an unproved existence statement.",
-   "uses": [
-    "def-sp-truncation-couple",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "lem-sf-exact-functor-derived-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
-    "place": "node def-weil-pbc-hypercohomology-filtrations, order 1315"
-   }
-  },
-  {
-   "text": "Canonical transport of every page and differential. The fixed mapDerivedCategoryHomologyFunctorIso gives the comparisons of D and E. Its ordinary naturality gives compatibility with alpha and g; its shift compatibility, followed by naturality for the triangle boundary, gives compatibility with f. Apply exactFunctor_couple to the first couple. Apply coupleMorphism to the resulting comparison and its inverse, and prove by induction that the page maps are inverses, cancelling the cycle inclusion and the epimorphic homology projection at each successor stage. Compose these page isomorphisms with those supplied by exactFunctor_couple. Their page-zero normalization and all differential squares are the ones required in hypercohomologyFiltrations_spec.",
-   "uses": [
-    "lem-sp-exact-functor-couple",
-    "lem-sp-couple-morphism",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "lem-sf-exact-functor-derived-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
-    "place": "node def-weil-pbc-hypercohomology-filtrations, order 1315"
-   }
-  },
-  {
-   "text": "Canonical transport of the filtration. Precompose the mapped image inclusion by the mapped epimorphism onto the image; this does not change the image. Replace the resulting composite by the mapped actual abutment map, use naturality of mapDerivedCategoryHomologyFunctorIso, and cancel its isomorphism on the source. The resulting image is definitionally the second hypercohomology filtration. Combine the finite bounds, convergence, bridge equations, E2 identifications, termwise compatibility and canonical page and filtration comparisons to prove the original specification without changing its statement.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "def-sp-truncation-couple"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
-    "place": "node def-weil-pbc-hypercohomology-filtrations, order 1315"
-   }
-  }
- ],
- "proof_deps": [
-  "def-sp-truncation-couple",
-  "def-sbc-standard-tstructure-derived-category",
-  "lem-weil-pbc-derived-functor-negative-vanishing",
-  "src-right-derived-functor-plus-compatibility",
-  "lem-weil-pbc-exact-functor-bounded-below",
-  "def-weil-pbc-direct-image",
-  "thm-sp-half-plane-convergence",
-  "lem-sp-abutment-image-filtration",
-  "def-sp-kinjective-bridge",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-sp-exact-functor-couple",
-  "lem-sp-couple-morphism"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
-  "place": "C2 stage-3 proof, 2026-10-15: direct cohomological exactness, generic lower-bound and half-plane convergence arguments, explicit bridge and canonical exact-functor transport; Stacks Tags 0DDE and 015J as in the original source. Internal helpers are all proved; no new obligations."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject; read the module docstrings",
-   "results": "SpectralSequence/Basic.lean: structure SpectralSequence C c r0 (pages and homology isos) and Hom; SpectralObject/{Basic,Page,Differentials,Homology,HasSpectralSequence,SpectralSequence,FirstPage}.lean: abelian spectral objects indexed by EInt and Abelian.SpectralObject.spectralSequence with the E2 cohomological shape coreE2Cohomological (object at (p,q) on page r is E^{p+q}(q-r+2<=q<=q+1<=q+r-1)). No exact couples, no abutment/convergence statement, no hypercohomology spectral sequence of a derived functor",
-   "date": "2026-10-09",
-   "verdict": "no match (the spectral-sequence machinery exists, not this sequence)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -n 'def \\|lemma ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean; grep -rn 'mapTriangulatedSpectralObject\\|IsHomological' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated",
-   "results": "TStructure.spectralObject X : Triangulated.SpectralObject C EInt (all truncations of X for a t-structure, functorial: spectralObjectFunctor) and Functor.mapTriangulatedSpectralObject (image under a triangulated functor, e.g. Rf_* or g^{-1}Rf_*); Functor.IsHomological in HomologicalFunctor.lean. The step from a triangulated spectral object and a homological functor to an abelian spectral object is listed as a TODO in Triangulated/SpectralObject.lean, so the truncation spectral sequence of Rf_*K is not assembled",
-   "date": "2026-10-09",
-   "verdict": "no match (ingredients: TStructure.spectralObject, mapTriangulatedSpectralObject, Abelian.SpectralObject.spectralSequence; missing: homological functor to abelian spectral object, convergence)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'truncLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Embedding/CochainComplex.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
-   "results": "CochainComplex.truncLE K n (canonical truncation of a cochain complex, Embedding/CochainComplex.lean:42) with ιTruncLE and truncLEMap; DerivedCategory.TStructure.t (the standard t-structure, built from K.truncLE 0 / K.truncGE 1, TStructure.lean:68) and TStructure.triangleLEGE_distinguished (TStructure/TruncLEGT.lean): the canonical truncation of a bounded below complex and its truncation triangles exist",
-   "date": "2026-10-09",
-   "verdict": "no match for the spectral sequence; match for the ingredient canonical truncation (already a Mathlib leaf: def-sbc-standard-tstructure-derived-category, lem-sf-derived-truncation-triangle)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -n 'rightDerivedFunctorPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
-   "results": "Functor.rightDerivedFunctorPlus : DerivedCategory.Plus C => DerivedCategory.Plus D for a functor between abelian categories with enough injectives (the Rf_* of the definition); no spectral sequence attached to it",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "hypercohomology spectral sequence E_2^{p,q} = R^p F (H^q K) converging to R^{p+q} F K",
-   "results": "CategoryTheory.Sheaf.H (Sites.SheafCohomology.Basic), HomotopyCategory.spectralObjectMappingCone (Algebra.Homology.HomotopyCategory.SpectralObject), groupCohomology/ContinuousCohomology items",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "spectral sequence of a spectral object converges, E_infinity page, filtration on the abutment, first quadrant stabilization",
-   "results": "DerivedCategory.isZero_of_isLE, isZero_of_isGE, CochainComplex.isLE_iff, isGE_iff, exactAt_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "exact couple morphism spectral sequence",
-   "results": "Triangulated.SpectralObject.δ, SpectralObject.Hom (Triangulated.SpectralObject), HomotopyCategory.spectralObjectMappingCone_δ'_app",
-   "date": "2026-10-09",
-   "verdict": "no match: no exact couples in Mathlib"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n \"converge|abutment|EInfty|pageInfinity\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence",
-   "results": "only docstrings of HasSpectralSequence.lean:393,435 (first/third quadrant E₂ spectral sequences of a spectral object); no exact couples, no truncation spectral sequence of a derived functor, no abutment filtration",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form"
- ],
- "blueprint_kind": "definition",
- "blueprint_order": 1315,
- "blueprint_uses": [
-  "def-sp-etale-dictionary",
-  "def-sp-truncation-couple",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-direct-image",
-  "lem-sp-finite-filtration-induction",
-  "lem-sp-shift-identification",
-  "thm-sp-truncation-e2"
- ],
- "uses_not_cited": [
-  "def-sp-etale-dictionary",
-  "def-sp-truncation-couple",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-direct-image",
-  "lem-sp-finite-filtration-induction",
-  "lem-sp-shift-identification",
-  "thm-sp-truncation-e2"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_sketch": [
-  {
-   "statement": "Let $K\\in D^+(X_{\\mathrm{et}})$ have torsion cohomology sheaves and choose\n$a$ with $\\mathcal H^q(K)=0$ for $q<a$. The canonical truncation tower\n$\\tau_{\\leq q}K$ defines spectral sequences\n\n$$\nE_2^{p,q}=R^pf_*\\mathcal H^q(K)\\Longrightarrow\n\\mathcal H^{p+q}(Rf_*K),\n$$\n\nand\n\n$$\n{E'}_2^{p,q}=R^pf'_*g'^{-1}\\mathcal H^q(K)\\Longrightarrow\n\\mathcal H^{p+q}(Rf'_*g'^{-1}K).\n$$\n\nTheir filtration in total degree $n$ is the image filtration induced by\n$\\mathcal H^n(Rf_*\\tau_{\\leq q}K)\\to\\mathcal H^n(Rf_*K)$; the second\nfiltration is induced by\n$\\mathcal H^n(Rf'_*g'^{-1}\\tau_{\\leq q}K)\\to \\mathcal H^n(Rf'_*g'^{-1}K)$.",
-   "proof": "",
-   "cites": []
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-pbc-hypercohomology-filtrations",
-  "worker": "stage1",
-  "summary": "Checked against Stacks 0DDE (etale-cohomology.tex, proof: the spectral sequences of Derived Categories 015J) and the blueprint's truncation-couple chapter (def-sp-truncation-couple, lem-sp-truncation-couple-exact, thm-sp-truncation-e2, thm-sp-half-plane-convergence), and against Steps 4-6 of thm-weil-pbc-bounded-below. The statement now names its square and its objects and defines three sequences: (1) the truncation spectral sequence of Rf_*K on Y, (2) its image under the exact g^{-1}, identified with the couple of g^{-1}Rf_* applied to the truncation triangles (E_2=g^{-1}R^pf_*H^q(K) => H^{p+q}(g^{-1}Rf_*K)); this is the first sequence of the target's Step 4, so the first sequence is used after g^{-1}, and (3) the truncation spectral sequence of g'^{-1}K for f'_*. Stmt_deps: removed def-weil-pbc-derived-exchange (the definition uses only the square, now def-weil-pbc-cartesian-square), lem-sp-finite-filtration-induction (not used: it is Step 6 of the target) and lem-sp-shift-identification (used only inside thm-sp-truncation-e2, a pointer here); kept thm-sp-truncation-e2 (a real dependency: it gives E_2, abutment, image filtration and convergence); added the derived inverse image, sheaf inverse image and its exactness, the cohomology-commutes-with-exact-functor lemma, the standard t-structure (bounded below representative), image filtration, filtration, convergence, exact couple. The claims are written as five steps; the one argument no node had (an exact functor carries an exact couple, its pages and its half-plane filtration to those of the image couple) is the new node lem-sp-exact-functor-couple. Mathlib has abelian spectral objects, their spectral sequences, the t-structure spectral object and canonical truncation, but no homological-functor-to-spectral-object step, no exact couples and no convergence: no match."
- },
- "tool_uses": [
-  "lem-sp-couple-morphism"
- ],
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "lem-sp-couple-morphism (sk-prop-av-pqf-finite) accepted as a tool use; the three sequences and the choice \"after g^{-1}\" match Step 4 of the target"
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.HypercohomologyFiltrations",
-  "declaration": "AlgebraicGeometry.Etale.hypercohomologyFiltrations",
-  "declarations": [
-   "CategoryTheory.hypercohomologyD",
-   "CategoryTheory.hypercohomologyE",
-   "CategoryTheory.hypercohomologyAlpha",
-   "CategoryTheory.hypercohomologyG",
-   "CategoryTheory.hypercohomologyBoundary",
-   "CategoryTheory.hypercohomology_maps_exact",
-   "CategoryTheory.hypercohomologyCouple",
-   "CategoryTheory.hypercohomologyAbutmentMap",
-   "CategoryTheory.hypercohomology_images_antitone",
-   "CategoryTheory.hypercohomologyFiltration",
-   "AlgebraicGeometry.Etale.hypercohomologyFirstFunctor",
-   "AlgebraicGeometry.Etale.hypercohomologyBaseChangeFunctor",
-   "AlgebraicGeometry.Etale.hypercohomologySecondFunctor",
-   "AlgebraicGeometry.Etale.hypercohomologyFiltrations",
-   "AlgebraicGeometry.Etale.hypercohomologyFiltrations_spec"
+    "def-weil-pbc-derived-inverse-image",
+    "lem-sp-exact-functor-couple"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/HypercohomologyFiltrations.lean",
-  "statement": "def hypercohomologyFiltrations (n : ℤ) : DecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyFirstFunctor f).obj (DerivedCategory.Q.obj K.obj))) × DecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyBaseChangeFunctor f g).obj (DerivedCategory.Q.obj K.obj))) × DecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologySecondFunctor f' g').obj (DerivedCategory.Q.obj K.obj)))",
-  "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-11",
-  "existing": false,
-  "note": "Definitions give all three image filtrations and explicit cohomological truncation couples (the couple of a triangulated functor applied to the truncation triangles of def-sp-truncation-couple; the form def-weil-pbc-truncation-exact-couples needs). hypercohomologyFiltrations_spec states the E2 terms, finite bounds, convergence, termwise inverse-image compatibility, canonical base-change comparisons, and ties the first couple to the recorded TruncationCouple.alpha/f/g through TruncationCouple.bridgeIso. The cartesian square is an IsPullback witness (STATE CARTESIAN SQUARES); reviewer R-hcf.",
-  "fixed_by": "R-hcf"
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "R-hcf",
-  "group": "C1",
-  "result": "fix",
-  "note": "three filtrations = node's image filtrations F^p H^n = im(H^n(Phi tau<=n-p K) -> H^n(Phi K)) for Phi = Rf_*, g^-1 Rf_*, Rf'_* g'^-1; couples D,E,alpha,f,g match node displays; spec: E2 terms, bounds a<=q<=n, finiteness, ConvergesTo tied to abutment maps, termwise g'^-1 truncation, g^-1 comparison of all pages and filtration; fixed: CartesianSquare structure (H13, re-recorded existing node) -> IsPullback per STATE, reverted node and dropped module; added bridgeIso clauses tying couple (1) to recorded TruncationCouple.alpha/f/g; reverted the delivery's change of existing node(s) def-weil-pbc-cartesian-square (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/EtaleCartesianSquare.lean (--drop-files, or a record fixed to existing: true)"
- },
- "reviewed_proof": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "X-a3649",
-  "group": "C2",
-  "result": "pass",
-  "landing": "20261015T161928-L-300627",
-  "kind": "interface",
-  "note": "independent Codex review: All 15 existing public signatures and definition bodies are unchanged; the three proofs match the node, compile cleanly, and pass axiom checks. DAG changes are confined to proof metadata."
- }
+  "proof": [
+    {
+      "text": "**The representing complex.** $K$ has $\\mathcal H^q(K)=0$ for $q<a$, so $K\\in D(X_{\\Et})^{\\geq a}$, which by [def-sbc-standard-tstructure-derived-category] consists of the objects isomorphic to a complex $K^\\bullet$ with $K^i=0$ for $i<a$. Such a $K^\\bullet$ is in $\\operatorname{Ch}^+(\\Ab(X_{\\Et}))$, so [def-sp-truncation-couple] applies to it, and $\\tau_{\\leq q}K^\\bullet=0$ for $q<a$. (The objects $\\tau_{\\leq q}K$ of $\\Dplus(X_{\\Et})$ do not depend on the choice: two such complexes are isomorphic in the derived category and canonical truncation is a functor on it.)",
+      "uses": [
+        "def-sbc-standard-tstructure-derived-category",
+        "def-sp-truncation-couple"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
+        "place": "## Proof"
+      }
+    },
+    {
+      "text": "**Sequence (1).** The substitutions of [def-sp-etale-dictionary] satisfy the hypotheses of [def-sp-truncation-couple]: $\\Ab(X_{\\Et})$ and $\\Ab(Y_{\\Et})$ are Grothendieck abelian [def-weil-pbc-etale-sheaves], $f_*$ is additive and left exact [def-weil-pbc-direct-image], and $Rf_*$ of [def-weil-pbc-direct-image] is $f_*$ applied to a K-injective resolution, which is $Rv$ of [def-sp-kinjective-bridge] for $v=f_*$. So $(D,E)$ is the truncation couple of $K^\\bullet$ for $v=f_*$; it is an exact couple by [lem-sp-truncation-couple-exact], and [thm-sp-truncation-e2] gives its spectral sequence $E_2^{p,q}=R^pf_*\\mathcal H^q(K)\\Rightarrow\\mathcal H^{p+q}(Rf_*K)$ with the image filtration of $\\mathcal H^n(Rf_*\\tau_{\\leq q}K)\\to\\mathcal H^n(Rf_*K)$, the range $a\\leq q\\leq n$ in degree $n$, and unconditional convergence. Indexing: in the notation of [thm-sp-half-plane-convergence] used inside [thm-sp-truncation-e2], $F^pA^n=G_{n-p}A^n=\\operatorname{im}(D^{p,n-p}\\to A^n)$ with $D^{p,n-p}=\\mathcal H^n(Rf_*\\tau_{\\leq n-p}K)$, which is the formula in the statement.",
+      "uses": [
+        "def-sp-etale-dictionary",
+        "def-weil-pbc-etale-sheaves",
+        "def-weil-pbc-direct-image",
+        "def-sp-kinjective-bridge",
+        "lem-sp-truncation-couple-exact",
+        "thm-sp-truncation-e2"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
+        "place": "## Proof"
+      }
+    },
+    {
+      "text": "**Sequence (2): identification of $g^{-1}(D,E)$ with the couple of $g^{-1}Rf_*$.** $g^{-1}$ is exact on sheaves [prop-weil-pbc-inverse-image-exact], and on $\\Dplus$ it is applied termwise [def-weil-pbc-derived-inverse-image]; it is triangulated, so it commutes with the shift and carries each distinguished triangle $Rf_*\\tau_{\\leq q-1}K\\to Rf_*\\tau_{\\leq q}K\\to Rf_*(\\mathcal H^q(K)[-q])\\xrightarrow{\\delta}$ to a distinguished triangle with third map $g^{-1}\\delta$ [lem-sf-exact-functor-derived-triangulated]. The isomorphisms $c_L:\\mathcal H^m(g^{-1}L)\\cong g^{-1}\\mathcal H^m(L)$ are natural in $L$ [lem-weil-pbc-exact-functor-bounded-below]; both sides are computed termwise on a representing complex, so $c$ is compatible with $\\mathcal H^m(L[1])=\\mathcal H^{m+1}(L)$. Naturality applied to the first two maps of each triangle shows that $c$ commutes with the structure maps $\\alpha$ and $g$ of the two couples; naturality applied to $\\delta:L_3\\to L_1[1]$ together with the compatibility with the shift shows that it commutes with the boundary $f$. Hence $c$ is an isomorphism of exact couples $(D_A,E_A)\\cong g^{-1}(D,E)$, and $(D_A,E_A)$ is an exact couple.",
+      "uses": [
+        "prop-weil-pbc-inverse-image-exact",
+        "def-weil-pbc-derived-inverse-image",
+        "lem-sf-exact-functor-derived-triangulated",
+        "lem-weil-pbc-exact-functor-bounded-below"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
+        "place": "## Proof"
+      }
+    },
+    {
+      "text": "**Sequence (2): pages, abutment and filtration.** By [lem-sp-exact-functor-couple] applied to $\\Phi=g^{-1}$ and the couple of (1), $g^{-1}(D,E)$ is an exact couple whose spectral sequence is $g^{-1}$ of that of (1), so $E_2^{p,q}=g^{-1}R^pf_*\\mathcal H^q(K)$; the half-plane hypotheses ($D^{p,q}=0$ for $q<a$; $E_2^{p,q}=0$ unless $p\\geq0$, $q\\geq a$, which hold for (1) by [thm-sp-truncation-e2]) carry over, the abutment is $g^{-1}\\mathcal H^n(Rf_*K)$ with the filtration $g^{-1}F^p$ and $E_\\infty\\cong\\operatorname{gr}$ is $g^{-1}$ of the one of (1). Transporting along the isomorphism of couples of the previous step [lem-sp-couple-morphism] (applied to it and to its inverse) gives the same for $(D_A,E_A)$, with abutment $\\mathcal H^n(g^{-1}Rf_*K)\\cong g^{-1}\\mathcal H^n(Rf_*K)$ ($c_{Rf_*K}$). Since $g^{-1}$ is exact it preserves images, so $g^{-1}F^p=\\operatorname{im}\\bigl(g^{-1}\\mathcal H^n(Rf_*\\tau_{\\leq n-p}K)\\to g^{-1}\\mathcal H^n(Rf_*K)\\bigr)$, which under $c$ (natural in $\\tau_{\\leq n-p}K\\to K$) is the image of $\\mathcal H^n(g^{-1}Rf_*\\tau_{\\leq n-p}K)\\to\\mathcal H^n(g^{-1}Rf_*K)$.",
+      "uses": [
+        "lem-sp-exact-functor-couple",
+        "thm-sp-truncation-e2",
+        "lem-sp-couple-morphism",
+        "prop-weil-pbc-inverse-image-exact",
+        "lem-weil-pbc-exact-functor-bounded-below"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
+        "place": "## Proof"
+      }
+    },
+    {
+      "text": "**Sequence (3).** By [def-weil-pbc-derived-inverse-image] the complex $g'^{-1}K^\\bullet=(g'^{-1}K^i)_i$ represents $g'^{-1}K$, and its terms vanish for $i<a$. As $g'^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], $g'^{-1}\\ker(d^q)=\\ker(g'^{-1}d^q)$, so $\\tau_{\\leq q}(g'^{-1}K^\\bullet)=g'^{-1}(\\tau_{\\leq q}K^\\bullet)$ as subcomplexes, and $\\mathcal H^q(g'^{-1}K)\\cong g'^{-1}\\mathcal H^q(K)$ [lem-weil-pbc-exact-functor-bounded-below], which vanishes for $q<a$. Step 2 applied to $f':X'\\to Y'$ and the complex $g'^{-1}K^\\bullet$ ([def-sp-etale-dictionary], [def-weil-pbc-etale-sheaves], [lem-sp-truncation-couple-exact], [thm-sp-truncation-e2]) gives the exact couple $(D',E')$ with $D'^{p,q}=\\mathcal H^{p+q}(Rf'_*\\tau_{\\leq q}g'^{-1}K)=\\mathcal H^{p+q}(Rf'_*g'^{-1}\\tau_{\\leq q}K)$ and spectral sequence $E_2'^{p,q}=R^pf'_*\\mathcal H^q(g'^{-1}K)\\Rightarrow\\mathcal H^{p+q}(Rf'_*g'^{-1}K)$ with the stated image filtration and range; applying the functor $R^pf'_*$ [def-weil-pbc-direct-image] to $\\mathcal H^q(g'^{-1}K)\\cong g'^{-1}\\mathcal H^q(K)$ rewrites $E_2'^{p,q}=R^pf'_*g'^{-1}\\mathcal H^q(K)$.",
+      "uses": [
+        "def-weil-pbc-derived-inverse-image",
+        "prop-weil-pbc-inverse-image-exact",
+        "lem-weil-pbc-exact-functor-bounded-below",
+        "def-sp-etale-dictionary",
+        "def-weil-pbc-etale-sheaves",
+        "lem-sp-truncation-couple-exact",
+        "thm-sp-truncation-e2",
+        "def-weil-pbc-direct-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
+        "place": "## Proof"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-sp-truncation-couple",
+    "def-sp-etale-dictionary",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-direct-image",
+    "def-sp-kinjective-bridge",
+    "lem-sp-truncation-couple-exact",
+    "thm-sp-truncation-e2",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-sp-exact-functor-couple",
+    "lem-sp-couple-morphism"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-hypercohomology-filtrations.md",
+    "place": "## Proof (the truncation-couple construction of the spectral-sequence chapter); the statement is Stacks Lemma 0DDE (literature/stacks-project/etale-cohomology.tex, lemma-proper-base-change, proof), whose spectral sequences are those of Stacks Lemma 015J (derived.tex, lemma-two-ss-complex-functor, the second sequence ''E_2^{p,q}=R^pF(H^q(K))), built there from a Cartan-Eilenberg resolution rather than from the truncation couple"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject; read the module docstrings",
+      "results": "SpectralSequence/Basic.lean: structure SpectralSequence C c r0 (pages and homology isos) and Hom; SpectralObject/{Basic,Page,Differentials,Homology,HasSpectralSequence,SpectralSequence,FirstPage}.lean: abelian spectral objects indexed by EInt and Abelian.SpectralObject.spectralSequence with the E2 cohomological shape coreE2Cohomological (object at (p,q) on page r is E^{p+q}(q-r+2<=q<=q+1<=q+r-1)). No exact couples, no abutment/convergence statement, no hypercohomology spectral sequence of a derived functor",
+      "date": "2026-10-09",
+      "verdict": "no match (the spectral-sequence machinery exists, not this sequence)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'def \\|lemma ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean; grep -rn 'mapTriangulatedSpectralObject\\|IsHomological' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated",
+      "results": "TStructure.spectralObject X : Triangulated.SpectralObject C EInt (all truncations of X for a t-structure, functorial: spectralObjectFunctor) and Functor.mapTriangulatedSpectralObject (image under a triangulated functor, e.g. Rf_* or g^{-1}Rf_*); Functor.IsHomological in HomologicalFunctor.lean. The step from a triangulated spectral object and a homological functor to an abelian spectral object is listed as a TODO in Triangulated/SpectralObject.lean, so the truncation spectral sequence of Rf_*K is not assembled",
+      "date": "2026-10-09",
+      "verdict": "no match (ingredients: TStructure.spectralObject, mapTriangulatedSpectralObject, Abelian.SpectralObject.spectralSequence; missing: homological functor to abelian spectral object, convergence)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'truncLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Embedding/CochainComplex.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+      "results": "CochainComplex.truncLE K n (canonical truncation of a cochain complex, Embedding/CochainComplex.lean:42) with ιTruncLE and truncLEMap; DerivedCategory.TStructure.t (the standard t-structure, built from K.truncLE 0 / K.truncGE 1, TStructure.lean:68) and TStructure.triangleLEGE_distinguished (TStructure/TruncLEGT.lean): the canonical truncation of a bounded below complex and its truncation triangles exist",
+      "date": "2026-10-09",
+      "verdict": "no match for the spectral sequence; match for the ingredient canonical truncation (already a Mathlib leaf: def-sbc-standard-tstructure-derived-category, lem-sf-derived-truncation-triangle)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'rightDerivedFunctorPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+      "results": "Functor.rightDerivedFunctorPlus : DerivedCategory.Plus C => DerivedCategory.Plus D for a functor between abelian categories with enough injectives (the Rf_* of the definition); no spectral sequence attached to it",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "hypercohomology spectral sequence E_2^{p,q} = R^p F (H^q K) converging to R^{p+q} F K",
+      "results": "CategoryTheory.Sheaf.H (Sites.SheafCohomology.Basic), HomotopyCategory.spectralObjectMappingCone (Algebra.Homology.HomotopyCategory.SpectralObject), groupCohomology/ContinuousCohomology items",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "spectral sequence of a spectral object converges, E_infinity page, filtration on the abutment, first quadrant stabilization",
+      "results": "DerivedCategory.isZero_of_isLE, isZero_of_isGE, CochainComplex.isLE_iff, isGE_iff, exactAt_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "exact couple morphism spectral sequence",
+      "results": "Triangulated.SpectralObject.δ, SpectralObject.Hom (Triangulated.SpectralObject), HomotopyCategory.spectralObjectMappingCone_δ'_app",
+      "date": "2026-10-09",
+      "verdict": "no match: no exact couples in Mathlib"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n \"converge|abutment|EInfty|pageInfinity\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence",
+      "results": "only docstrings of HasSpectralSequence.lean:393,435 (first/third quadrant E₂ spectral sequences of a spectral object); no exact couples, no truncation spectral sequence of a derived functor, no abutment filtration",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1315,
+  "blueprint_uses": [
+    "def-sp-etale-dictionary",
+    "def-sp-truncation-couple",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-direct-image",
+    "lem-sp-finite-filtration-induction",
+    "lem-sp-shift-identification",
+    "thm-sp-truncation-e2"
+  ],
+  "uses_not_cited": [
+    "def-sp-etale-dictionary",
+    "def-sp-truncation-couple",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-direct-image",
+    "lem-sp-finite-filtration-induction",
+    "lem-sp-shift-identification",
+    "thm-sp-truncation-e2"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_sketch": [
+    {
+      "statement": "Let $K\\in D^+(X_{\\mathrm{et}})$ have torsion cohomology sheaves and choose\n$a$ with $\\mathcal H^q(K)=0$ for $q<a$. The canonical truncation tower\n$\\tau_{\\leq q}K$ defines spectral sequences\n\n$$\nE_2^{p,q}=R^pf_*\\mathcal H^q(K)\\Longrightarrow\n\\mathcal H^{p+q}(Rf_*K),\n$$\n\nand\n\n$$\n{E'}_2^{p,q}=R^pf'_*g'^{-1}\\mathcal H^q(K)\\Longrightarrow\n\\mathcal H^{p+q}(Rf'_*g'^{-1}K).\n$$\n\nTheir filtration in total degree $n$ is the image filtration induced by\n$\\mathcal H^n(Rf_*\\tau_{\\leq q}K)\\to\\mathcal H^n(Rf_*K)$; the second\nfiltration is induced by\n$\\mathcal H^n(Rf'_*g'^{-1}\\tau_{\\leq q}K)\\to \\mathcal H^n(Rf'_*g'^{-1}K)$.",
+      "proof": "",
+      "cites": []
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-pbc-hypercohomology-filtrations",
+    "worker": "stage1",
+    "summary": "Checked against Stacks 0DDE (etale-cohomology.tex, proof: the spectral sequences of Derived Categories 015J) and the blueprint's truncation-couple chapter (def-sp-truncation-couple, lem-sp-truncation-couple-exact, thm-sp-truncation-e2, thm-sp-half-plane-convergence), and against Steps 4-6 of thm-weil-pbc-bounded-below. The statement now names its square and its objects and defines three sequences: (1) the truncation spectral sequence of Rf_*K on Y, (2) its image under the exact g^{-1}, identified with the couple of g^{-1}Rf_* applied to the truncation triangles (E_2=g^{-1}R^pf_*H^q(K) => H^{p+q}(g^{-1}Rf_*K)); this is the first sequence of the target's Step 4, so the first sequence is used after g^{-1}, and (3) the truncation spectral sequence of g'^{-1}K for f'_*. Stmt_deps: removed def-weil-pbc-derived-exchange (the definition uses only the square, now def-weil-pbc-cartesian-square), lem-sp-finite-filtration-induction (not used: it is Step 6 of the target) and lem-sp-shift-identification (used only inside thm-sp-truncation-e2, a pointer here); kept thm-sp-truncation-e2 (a real dependency: it gives E_2, abutment, image filtration and convergence); added the derived inverse image, sheaf inverse image and its exactness, the cohomology-commutes-with-exact-functor lemma, the standard t-structure (bounded below representative), image filtration, filtration, convergence, exact couple. The claims are written as five steps; the one argument no node had (an exact functor carries an exact couple, its pages and its half-plane filtration to those of the image couple) is the new node lem-sp-exact-functor-couple. Mathlib has abelian spectral objects, their spectral sequences, the t-structure spectral object and canonical truncation, but no homological-functor-to-spectral-object step, no exact couples and no convergence: no match."
+  },
+  "tool_uses": [
+    "lem-sp-couple-morphism"
+  ],
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "lem-sp-couple-morphism (sk-prop-av-pqf-finite) accepted as a tool use; the three sequences and the choice \"after g^{-1}\" match Step 4 of the target"
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.HypercohomologyFiltrations",
+    "declaration": "AlgebraicGeometry.Etale.hypercohomologyFiltrations",
+    "declarations": [
+      "CategoryTheory.hypercohomologyD",
+      "CategoryTheory.hypercohomologyE",
+      "CategoryTheory.hypercohomologyAlpha",
+      "CategoryTheory.hypercohomologyG",
+      "CategoryTheory.hypercohomologyBoundary",
+      "CategoryTheory.hypercohomology_maps_exact",
+      "CategoryTheory.hypercohomologyCouple",
+      "CategoryTheory.hypercohomologyAbutmentMap",
+      "CategoryTheory.hypercohomology_images_antitone",
+      "CategoryTheory.hypercohomologyFiltration",
+      "AlgebraicGeometry.Etale.hypercohomologyFirstFunctor",
+      "AlgebraicGeometry.Etale.hypercohomologyBaseChangeFunctor",
+      "AlgebraicGeometry.Etale.hypercohomologySecondFunctor",
+      "AlgebraicGeometry.Etale.hypercohomologyFiltrations",
+      "AlgebraicGeometry.Etale.hypercohomologyFiltrations_spec"
+    ],
+    "file": "lean/Sheaf/AlgebraicGeometry/HypercohomologyFiltrations.lean",
+    "statement": "def hypercohomologyFiltrations (n : ℤ) : DecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyFirstFunctor f).obj (DerivedCategory.Q.obj K.obj))) × DecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyBaseChangeFunctor f g).obj (DerivedCategory.Q.obj K.obj))) × DecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologySecondFunctor f' g').obj (DerivedCategory.Q.obj K.obj)))",
+    "branch": "sheaf-dag",
+    "by": "C1",
+    "date": "2026-10-11",
+    "existing": false,
+    "note": "Definitions give all three image filtrations and explicit cohomological truncation couples (the couple of a triangulated functor applied to the truncation triangles of def-sp-truncation-couple; the form def-weil-pbc-truncation-exact-couples needs). hypercohomologyFiltrations_spec states the E2 terms, finite bounds, convergence, termwise inverse-image compatibility, canonical base-change comparisons, and ties the first couple to the recorded TruncationCouple.alpha/f/g through TruncationCouple.bridgeIso. The cartesian square is an IsPullback witness (STATE CARTESIAN SQUARES); reviewer R-hcf.",
+    "fixed_by": "R-hcf"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-hcf",
+    "group": "C1",
+    "result": "fix",
+    "note": "three filtrations = node's image filtrations F^p H^n = im(H^n(Phi tau<=n-p K) -> H^n(Phi K)) for Phi = Rf_*, g^-1 Rf_*, Rf'_* g'^-1; couples D,E,alpha,f,g match node displays; spec: E2 terms, bounds a<=q<=n, finiteness, ConvergesTo tied to abutment maps, termwise g'^-1 truncation, g^-1 comparison of all pages and filtration; fixed: CartesianSquare structure (H13, re-recorded existing node) -> IsPullback per STATE, reverted node and dropped module; added bridgeIso clauses tying couple (1) to recorded TruncationCouple.alpha/f/g; reverted the delivery's change of existing node(s) def-weil-pbc-cartesian-square (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/EtaleCartesianSquare.lean (--drop-files, or a record fixed to existing: true)"
+  }
 }
