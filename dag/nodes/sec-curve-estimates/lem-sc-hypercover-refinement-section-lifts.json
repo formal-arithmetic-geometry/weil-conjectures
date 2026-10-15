@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-hypercover-refinement-section-lifts",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-hypercover-cohomology",
+   "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex.",
+   "via": [
+    "thm-weil-pbc-hypercover-cohomology-module-part",
+    "thm-weil-pbc-hypercover-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite refinement gives section lifts and vertical primitives on whole terms",
+ "statement": "Let X be qcqs, U a finite split etale hypercover [def-weil-pbc-finite-split-hypercover], R any ring, and p:F to G an epimorphism of R-module sheaves [def-weil-sheaf-of-modules-category]. Given finitely many sections s_j of G(U_{n_j}) in degrees at most r, there is one finite split refinement f:V to U on whose whole terms V_{n_j} every restricted section lifts through p. Consequently, if S is an exact short complex of module sheaves and s in S.X2(U_n) has S.g(s)=0, then after a finite split refinement its restriction is S.f(t) for a section t of S.X1 on the whole refined term V_n. Empty requirements, empty constituents, the zero ring and the empty base are included.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "For each section take the image sieve of p. Mathlib sheaf-epimorphism local surjectivity makes it a covering sieve. Apply the finite simultaneous-refinement theorem to these covering sieves.",
+   "uses": [
+    "lem-weil-pbc-hypercover-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the actual scheme disjoint union of the finite constituent objects, prove its cofan is colimiting in the small etale category, and identify it with the given cofan point by the colimit universal property. The coprojections cover; equal-component arrows cancel and distinct-component common sources are empty. The sheaf axiom therefore glues arbitrary constituent sections uniquely. Naturality of p and uniqueness of gluing give the required image.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation preserves kernels. Thus a section killed by S.g gives an actual kernel-sheaf section, using the canonical preserved-kernel isomorphism. Exactness makes kernel.lift S.g S.f an epimorphism. Apply the section-lifting theorem with one requirement, then compose with kernel inclusion and use naturality.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-hypercover-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneously lift finitely many sections through a sheaf epimorphism after a finite hypercover refinement",
+   "results": "CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.lift; CategoryTheory.GrothendieckTopology.OneHypercover.amalgamate; CategoryTheory.GrothendieckTopology.OneHypercover.arrowsCompatible; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc; CategoryTheory.GrothendieckTopology.OneHypercover.map_amalgamate; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.hom_ext",
+   "date": "2026-10-16",
+   "verdict": "No exact matching theorem; relevant API inspected and used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"imageSieve_mem\"",
+   "results": "CategoryTheory.Presheaf.IsLocallySurjective.imageSieve_mem; CategoryTheory.Presheaf.imageSieve_mem; CategoryTheory.Functor.functorPushforward_imageSieve_mem; CategoryTheory.Functor.IsLocallyFull.functorPushforward_imageSieve_mem; CategoryTheory.Functor.IsDenseSubsite.imageSieve_mem",
+   "date": "2026-10-16",
+   "verdict": "No exact matching theorem; relevant API inspected and used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "imageSieve_mem|hom_ext_ofArrows|amalgamateOfArrows",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf.lean; Mathlib/Topology/Sheaves/LocallySurjective.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact matching theorem; relevant API inspected and used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite refinement of a hypercover solves finitely many local section lifting problems",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.HypercoverCohomologyModule",
+  "date": "2026-10-16",
+  "group": "N3"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.HypercoverRefinementSectionLifts",
+  "file": "lean/Sheaf/Paper/HypercoverRefinementSectionLifts.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.exists_refinement_primitive",
+  "statement": "theorem exists_refinement_primitive {X : Scheme.{u}} [CompactSpace X]\n    [QuasiSeparatedSpace X] (U : FiniteSplitEtaleHypercover X)\n    (R : Type (u + 1)) [Ring R]\n    (S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)))\n    (hS : S.Exact) (n : ℕ)\n    (s : S.X₂.obj.obj (op (U.simplicial.obj (op (SimplexCategory.mk n)))))\n    (hs : S.g.hom.app _ s = 0) :\n    ∃ (V : FiniteSplitEtaleHypercover X) (f : V.Refinement U)\n      (t : S.X₁.obj.obj (op (V.simplicial.obj (op (SimplexCategory.mk n))))),\n      S.f.hom.app _ t = S.X₂.obj.map (f.app (op (SimplexCategory.mk n))).op s",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.exists_refinement_lifting_sections",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.exists_refinement_primitive"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f5655",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261015T233749-L-3369289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f5655",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261015T233749-L-3369289",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against node statements, recorded interface changes, original signatures, proof dependencies, axiom probes, and all seven direct importers."
+ }
+}

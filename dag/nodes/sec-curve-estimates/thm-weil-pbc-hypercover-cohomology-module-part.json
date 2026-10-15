@@ -17,9 +17,10 @@
   "place": "Proof split into abelian and module coefficient clauses"
  },
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
-  "place": "Proof steps 1-5"
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex.",
+  "note": "N3 proved the explicit natural comparison, arbitrary-ring injective rows, whole-term section lifting, finite cochain descent and module-colimit universal property. This delivery closes the original hole and introduces no new sorry. The existing finite simultaneous-refinement theorem is used as a dependency."
  },
  "mathlib_searches": [
   {
@@ -63,29 +64,38 @@
  ],
  "proof": [
   {
-   "text": "The corresponding coefficient-category comparison follows by the injective-resolution double-complex argument, successive finite refinement corrections, and the colimit universal property described in the parent theorem.",
+   "text": "Dualize Mathlib simplicial chain homotopy to the alternating coface complex of module sections. Homotopic refinements induce identical cohomology transformations; extend to the generated homotopy equivalence relation.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use the actual injective-resolution comparison and arbitrary-ring injective-row acyclicity to construct the natural refinement-compatible cocone to derived terminal sections, then transport it through the canonical etale-cohomology isomorphism.",
    "uses": [
-    "lem-weil-pbc-hypercover-free-resolution",
-    "lem-weil-pbc-hypercover-refinement",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "thm-sp-double-complex-spectral-sequences",
-    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+    "lem-sc-hypercover-resolution-comparison",
+    "lem-sc-hypercover-injective-module-row"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Bottom-row finite-refinement descent gives surjectivity onto every comparison cohomology class and local killing of every comparison kernel.",
+   "uses": [
+    "lem-sc-hypercover-bottom-refinement-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given an arbitrary compatible cocone, choose a representative for a class. Common refinements and local kernel killing show the chosen image is independent of the representative. Common refinements also prove addition and scalar compatibility. This defines an R-linear map; representative coverage proves its uniqueness and all cocone equations.",
+   "uses": [
+    "lem-weil-pbc-hypercover-refinement"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-hypercover-free-resolution",
-  "lem-weil-pbc-hypercover-refinement",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "thm-sp-double-complex-spectral-sequences",
-  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+  "lem-sc-hypercover-bottom-refinement-descent",
+  "lem-sc-hypercover-injective-module-row",
+  "lem-sc-hypercover-resolution-comparison",
+  "lem-weil-pbc-hypercover-refinement"
  ],
  "lean": {
   "module": "Sheaf.Paper.HypercoverCohomologyModule",
@@ -108,14 +118,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D2",
+  "reviewer": "X-f5655",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T044740-L-2033312",
+  "landing": "20261015T233749-L-3369289",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean against node statements, recorded interface changes, original signatures, proof dependencies, axiom probes, and all seven direct importers."
  },
  "lean_audit": {
   "master": {

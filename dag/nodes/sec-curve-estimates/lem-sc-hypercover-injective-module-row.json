@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-hypercover-injective-module-row",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-hypercover-cohomology",
+   "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex.",
+   "via": [
+    "thm-weil-pbc-hypercover-cohomology-module-part",
+    "thm-weil-pbc-hypercover-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Injective module-valued hypercover rows are acyclic over any ring",
+ "statement": "For a qcqs scheme X, a finite split etale hypercover U [def-weil-pbc-finite-split-hypercover], a ring R, and an injective sheaf F of left R-modules [def-sp-injective-resolutions] [def-weil-sheaf-of-modules-category], the actual terminal-section augmentation [lem-sc-hypercover-resolution-comparison] from F(X) concentrated in degree zero to the alternating section complex C(U,F) is a quasi-isomorphism. No commutativity, affineness, weak contractibility, nonzero-ring or nonempty-base hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-hypercover",
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-hypercover-resolution-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Replace the small etale category by ULiftHom to put homs and objects in one small-category universe. Its induced topology is subcanonical, and the topology-generated precoverage gives the same Grothendieck topology. Hypercover matching universal properties turn its surjective etale matching maps into locally solvable lower-simplex lifting families.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Realize F as a module sheaf over the sheafified constant ring. The scalar equivalence leaves the section abelian presheaf unchanged and transports injectivity. Apply arbitrary-ring injective hypercover exactness on the equivalent small site.",
+   "uses": [
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "lem-sc-ringed-hypercover-injective-augmentation-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the displayed alternating sums with the alternating coface differential. Degree-zero exactness and injectivity prove quasi-isomorphism in degree zero; positive exactness proves all positive cohomology groups vanish.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-hypercover-injective-augmentation-ring",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Injective module valued sheaf hypercover augmented cochain complex quasi isomorphism over a noncommutative ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*[Hh]ypercover|[Hh]ypercover.*[Qq]uasi[Ii]so",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "No exact matching theorem; relevant API inspected and used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmentation of a hypercover section complex with injective coefficients in modules over any ring is a quasi-isomorphism",
+   "results": "CategoryTheory.InjectiveResolution.instQuasiIsoIntι'; CochainComplex.cm5b.instQuasiIsoIntP; CategoryTheory.InjectiveResolution.quasiIso; Rep.standardComplex.quasiIso_forget₂_εToSingle₀; Rep.standardComplex.instQuasiIsoNatεToSingle₀; CochainComplex.isKInjective_of_injective; CochainComplex.isKInjective_iff_of_iso; CochainComplex.isKInjective_of_iso",
+   "date": "2026-10-16",
+   "verdict": "No exact matching theorem; relevant API inspected and used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.HypercoverCohomologyModule",
+  "date": "2026-10-16",
+  "group": "N3"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.HypercoverInjectiveModuleRow",
+  "file": "lean/Sheaf/Paper/HypercoverInjectiveModuleRow.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.injective_module_row_quasiIso",
+  "statement": "theorem injective_module_row_quasiIso (U : FiniteSplitEtaleHypercover X)\n    (R : Type (u + 1)) [Ring R]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) [Injective F] :\n    QuasiIso (sectionAugmentation R U F)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f5655",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261015T233749-L-3369289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f5655",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261015T233749-L-3369289",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against node statements, recorded interface changes, original signatures, proof dependencies, axiom probes, and all seven direct importers."
+ }
+}

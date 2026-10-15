@@ -1,0 +1,161 @@
+{
+ "id": "lem-sc-hypercover-resolution-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-hypercover-cohomology",
+   "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex.",
+   "via": [
+    "thm-weil-pbc-hypercover-cohomology-module-part",
+    "thm-weil-pbc-hypercover-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Explicit hypercover injective-resolution bicomplex and natural comparison",
+ "statement": "Let X be a qcqs scheme and U a finite split etale hypercover [def-weil-pbc-finite-split-hypercover]. For a ring R and a sheaf F of left R-modules [def-weil-sheaf-of-modules-category], evaluate a nonnegative injective resolution [def-sp-injective-resolutions] I in each hypercover degree to form D(U,I)^{p,q}=I^q(U_p), with alternating restriction differential horizontally and resolution differential vertically, totalized with sign (-1)^p [def-sp-double-complex-total]. There are actual chain maps C(U,F) to Tot D(U,I) and Gamma(X,I) to Tot D(U,I). If every injective-coefficient row augmentation is a quasi-isomorphism, the second map is a quasi-isomorphism. Its inverse on homology followed by the canonical resolution computation defines comparisons H^q(C(U,F)) to R^q Gamma(X,F). These comparisons are natural in F and compatible with refinements. The canonical bounded-below/unbounded derived comparison identifies R^q Gamma with etale cohomology of a sheaf concentrated in degree zero [def-weil-pbc-etale-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate sheaves on the cosimplicial hypercover and apply alternating cofaces. Map the actual resolution to complexes and flip. Terminal restrictions and the degree-zero resolution inclusion define the two augmentations. The coface cancellation and resolution chain-map identities prove their chain-map laws.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply first-quadrant column augmentation to the injective-coefficient row maps; each is a quasi-isomorphism by the stated row hypothesis. This proves the terminal-section augmentation is a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert only the isomorphism on homology. Compose with Mathlib InjectiveResolution.isoRightDerivedObj. Explicit commuting squares for resolution maps and refinement maps prove naturality. InjectiveResolution.desc supplies the coefficient comparison chain map, without arbitrary existence witnesses.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical derived terminal-section isomorphism and compatibility of bounded-below and unbounded derived functors to identify the target with the given etale-cohomology functor.",
+   "uses": [
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-first-quadrant-column-augmentation",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison from hypercover cohomology through an injective resolution double complex to derived global sections",
+   "results": "CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc; CategoryTheory.GrothendieckTopology.OneHypercover.glueMorphisms; CategoryTheory.GrothendieckTopology.OneHypercover.exists_nonempty_homotopy; CategoryTheory.GrothendieckTopology.OneHypercover.arrowsCompatible; CategoryTheory.GrothendieckTopology.OneHypercover.map_amalgamate; CategoryTheory.GrothendieckTopology.HOneHypercover",
+   "date": "2026-10-16",
+   "verdict": "No exact matching theorem; relevant API inspected and used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj|rightDerivedFunctorPlusCompatibility",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact matching theorem; relevant API inspected and used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural injective resolution double complex comparison for hypercover cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.HypercoverCohomologyModule",
+  "date": "2026-10-16",
+  "group": "N3"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.HypercoverResolutionModel",
+  "file": "lean/Sheaf/Paper/HypercoverResolutionModel.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.comparisonNat",
+  "statement": "def comparisonNat\n    (hrow : ∀ (U : FiniteSplitEtaleHypercover X)\n      (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)),\n      Injective F → QuasiIso (sectionAugmentation R U F))\n    (U : FiniteSplitEtaleHypercover X) (q : ℕ) :\n    cohomologyFunctor (ModuleCat.{u + 1} R) U q ⟶ (terminalSections R).rightDerived q",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionComplexFunctor",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.resolutionDoubleComplex",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.terminalSections",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionResolution",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.restrictionToZero",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.restrictionToZero_d",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.resolutionAugmentation",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.bottomInclusion",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionAugmentation",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.resolutionAugmentation_quasiIso",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.resolutionMap",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.resolutionAugmentation_naturality",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.bottomInclusion_naturality",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionRefinement",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.totalRefinement",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.resolutionAugmentation_refinement",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.bottomInclusion_refinement",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.derivedSingleIso",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.totalComparisonAt",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.totalComparisonAt_refinement",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.comparisonAt",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.comparisonAt_naturality",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.comparisonNat",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.comparisonNat_refinement"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f5655",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261015T233749-L-3369289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f5655",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261015T233749-L-3369289",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against node statements, recorded interface changes, original signatures, proof dependencies, axiom probes, and all seven direct importers."
+ }
+}

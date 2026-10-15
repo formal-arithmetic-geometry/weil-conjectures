@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-hypercover-bottom-refinement-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-hypercover-cohomology",
+   "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex.",
+   "via": [
+    "thm-weil-pbc-hypercover-cohomology-module-part",
+    "thm-weil-pbc-hypercover-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bottom-row cohomology descent by finite hypercover refinements",
+ "statement": "For X qcqs, R any ring, a sheaf F of R-modules, a nonnegative injective resolution I of F [def-sp-injective-resolutions] [def-weil-sheaf-of-modules-category], a finite split etale hypercover U [def-weil-pbc-finite-split-hypercover], and q in N, use the explicit total bicomplex and bottom inclusion b_U:C(U,F) to Tot D(U,I) [lem-sc-hypercover-resolution-comparison]. Every class y in H^q(Tot D(U,I)) restricts along some finite split refinement f:V to U to a class b_V(x) with x in H^q(C(V,F)). Every x in H^q(C(U,F)) with b_U(x)=0 becomes zero after some finite split refinement. These assertions concern the actual chain maps; they do not assert the natural comparison or its colimit universal property.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex."
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-finite-split-hypercover",
+  "lem-sc-hypercover-resolution-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Represent a total q-class by a cocycle. Starting at its largest positive resolution degree, the total-cycle equation gives a vertical cycle in the corresponding exact resolution short complex. Obtain a vertical primitive on the whole corresponding refined term.",
+   "uses": [
+    "lem-sc-hypercover-refinement-section-lifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Work with resolution degree first. Induct on the largest supported positive resolution degree. Include the chosen primitive into total degree q-1 and subtract its total differential; explicit total projections show the top component is killed and support decreases. Compose refinements and add the transported corrections. At resolution degree zero, evaluation preserves the resolution kernel, so lift uniquely to F; monicity of F to I0 gives the horizontal cocycle equation. Quotient by boundaries to obtain the representative. The signed total-flip isomorphism identifies this calculation with the comparison model; its sign is one on the bottom row, and its naturality transports all refinement maps.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For a bottom class mapping to zero, choose a bounding total (q-1)-cochain. Its differential lies entirely in the bottom row. Run the same corrections above that row, again using whole-term vertical primitives. The corrected bound lifts to a cochain of F whose differential is the refined original cocycle. For q=0 there is no negative term; injectivity of F to I0 makes the original cocycle zero. Only degrees through q+1 are used.",
+   "uses": [
+    "lem-sc-hypercover-refinement-section-lifts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hypercover-refinement-section-lifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01H0, theorem-cohomology-hypercoverings, first proof using an injective-resolution double complex.",
+  "note": "The finite descending cochain induction, kernel lift, passage to homology, degree-zero kernel case and signed-transposition compatibilities are all proved in Lean. No remaining hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The bottom row inclusion into a hypercover injective resolution double complex induces cohomology isomorphisms after refinement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover.*refinement|refinement.*hypercover",
+   "results": "Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean; Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean; Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean; Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean; Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean; Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean; Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean; Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact matching theorem; relevant API inspected and used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bottom row inclusion into a hypercover injective resolution double complex induces cohomology isomorphisms after refinement",
+   "results": "CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc; CategoryTheory.InjectiveResolution.Hom.hom'_f; CategoryTheory.InjectiveResolution.instQuasiIsoIntι'; CategoryTheory.InjectiveResolution.quasiIso; CategoryTheory.InjectiveResolution.cochainComplexXIso; CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self; CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc; CategoryTheory.InjectiveResolution.ι'_f_zero",
+   "date": "2026-10-16",
+   "verdict": "No exact matching theorem; relevant API inspected and used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hypercover\"",
+   "results": "CategoryTheory.PreZeroHypercover; CategoryTheory.PreZeroHypercover.empty; CategoryTheory.Precoverage.ZeroHypercover; CategoryTheory.PreZeroHypercover.HasPullbacks; CategoryTheory.PreZeroHypercover.I₀; CategoryTheory.PreZeroHypercover.instCategory; CategoryTheory.PreZeroHypercover.presieve₀; CategoryTheory.PreZeroHypercover.shrink",
+   "date": "2026-10-16",
+   "verdict": "No exact matching theorem; relevant API inspected and used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.HypercoverCohomologyModule",
+  "date": "2026-10-16",
+  "group": "N3"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.HypercoverBottomRefinement",
+  "file": "lean/Sheaf/Paper/HypercoverBottomRefinement.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.bottom_refinement_descent",
+  "statement": "theorem bottom_refinement_descent {X : Scheme.{u}} [CompactSpace X]\n    [QuasiSeparatedSpace X] (R : Type (u + 1)) [Ring R]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (I : InjectiveResolution F)\n    (U : FiniteSplitEtaleHypercover X) (q : ℕ) :\n    (∀ y : ((resolutionDoubleComplex R U I.cocomplex).total (.up ℕ)).homology q,\n      ∃ (V : FiniteSplitEtaleHypercover X) (f : V.Refinement U)\n        (x : ((sectionComplexFunctor R V).obj F).homology q),\n      HomologicalComplex.homologyMap (bottomInclusion R V I) q x =\n        HomologicalComplex.homologyMap (totalRefinement R f I.cocomplex) q y) ∧\n    (∀ x : ((sectionComplexFunctor R U).obj F).homology q,\n      HomologicalComplex.homologyMap (bottomInclusion R U I) q x = 0 →\n      ∃ (V : FiniteSplitEtaleHypercover X) (f : V.Refinement U),\n        (cohomologyRefinement (ModuleCat R) f q).app F x = 0)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f5655",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261015T233749-L-3369289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-f5655",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261015T233749-L-3369289",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against node statements, recorded interface changes, original signatures, proof dependencies, axiom probes, and all seven direct importers."
+ }
+}
