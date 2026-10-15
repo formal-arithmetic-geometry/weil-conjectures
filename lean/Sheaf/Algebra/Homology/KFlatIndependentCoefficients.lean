@@ -74,6 +74,14 @@ def IsKFlatIndependentCoefficients
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ,
     F.Acyclic → (mapBifunctor F K (curriedTensor _)).Acyclic
 
+/-- A quasi-isomorphism from a K-flat complex, with independent coefficient and site
+universes. Source: Stacks Project, Tag 06YS. -/
+def IsKFlatResolutionIndependentCoefficients
+    {K G : CochainComplex (SheafOfModules.{w} ((sheafCompose J
+      (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ}
+    (f : K ⟶ G) : Prop :=
+  QuasiIso f ∧ K.IsKFlatIndependentCoefficients
+
 /-- In the live K-flat universe, the independent predicate is the live predicate.
 The two definitions use the same total tensor and differ only in how its instances
 are supplied. -/
@@ -83,6 +91,17 @@ theorem isKFlatIndependentCoefficients_iff_isKFlat
     (K : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J
       (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) :
     IsKFlatIndependentCoefficients K ↔ IsKFlat K := by
+  sorry
+
+/-- The independent resolution predicate specializes to the live resolution predicate
+when the coefficient universe is the maximum of the site universes. -/
+theorem isKFlatResolutionIndependentCoefficients_iff_isKFlatResolution
+    {C : Type u} [Category.{v} C] [EssentiallySmall.{max u v} C]
+    {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{max u v}}
+    {K G : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J
+      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ}
+    (f : K ⟶ G) :
+    IsKFlatResolutionIndependentCoefficients f ↔ IsKFlatResolution f := by
   sorry
 
 end CochainComplex
