@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "obl-fin-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The comparison and finitude of proper direct images",
@@ -15,44 +15,136 @@
  "stmt_deps": [
   "sbc-def-coefficient-conventions",
   "cor-weil-pbc-geometric-fiber-finite",
+  "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-scheme-conventions"
  ],
  "proof": [
   {
-   "text": "Constructibility follows from\n[thm-fin-proper-constructibility-complete], applied to the given\nproper morphism and constructible coefficient sheaf.\nFor every geometric point $\\bar s$, proper base change\n[cor-weil-pbc-geometric-fiber-finite] identifies\n\n$$\n(R^qf_*F)_{\\bar s}=H^q(X_{\\bar s},F|_{X_{\\bar s}}).\n$$",
+   "text": "First, $X$ is of finite type over $k$. Indeed, properness includes finite type by [def-weil-pbc-scheme-conventions]. Choose a finite affine cover $S=\\bigcup_i\\operatorname{Spec}A_i$, with each $A_i$ finitely generated over $k$, and finite affine covers $f^{-1}(\\operatorname{Spec}A_i)=\\bigcup_j\\operatorname{Spec}B_{ij}$, with each $B_{ij}$ finitely generated over $A_i$. The images of generators of $A_i$ together with generators of $B_{ij}$ over $A_i$ generate $B_{ij}$ over $k$. These finitely many affine opens cover $X$, proving finite type directly from the definition. Since $N$ is prime to the characteristic of $k$, it is invertible on these $k$-schemes, as required by the coefficient conventions. Thus [thm-fin-proper-constructibility-complete] applies to $f$ and gives $\\mathcal C(f)$. Unfolding [def-finrepair-property-c], every $R^qf_*F$ is constructible on $S_{{\\mathrm{et}}}$.",
    "uses": [
     "thm-fin-proper-constructibility-complete",
-    "cor-weil-pbc-geometric-fiber-finite"
+    "def-finrepair-property-c",
+    "def-weil-pbc-scheme-conventions",
+    "sbc-def-coefficient-conventions"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/obl-fin-comparison.md",
+    "place": "## Proof, first paragraph (constructibility)"
+   }
   },
   {
-   "text": "The right side is zero above twice the specified fibre-dimension\nbound by [fin4-lem-fibrewise-cohomological-dimension].\nGeometric stalk conservativity\n[lemma-weil-pbc-geometric-stalk-conservative] proves the sheaf vanishing.\nEach fibre group is finite because constructible sheaves have finite\nstalks by [def-weil-pbc-constructible-complexes].\nThe constructibility proof uses finite resolutions and proper\nmodifications; the sharp bound is obtained separately from this\ngeometric-fibre calculation.",
+   "text": "By [lem-weil-pbc-constructible-module-finite-stalks], every geometric stalk of $F$ is finite. Thus $F$ is a finite sheaf in exactly the sense of [def-constructible-finite], so the finite-sheaf clause of [cor-weil-pbc-geometric-fiber-finite] applies to the proper morphism $f$. For every geometric point $\\bar s$ and every $q\\geq0$ it gives the canonical comparison isomorphism $(R^qf_*F)_{\\bar s}\\xrightarrow{\\sim}H^q(X_{\\bar s},F|_{X_{\\bar s}})$. Apply [lem-weil-pbc-constructible-module-finite-stalks] again, now to $R^qf_*F$, which is constructible by step 1: its stalk at $\\bar s$ is finite. The displayed $\\Lambda$-linear isomorphism therefore proves that the fibre-cohomology group is a finite $\\Lambda$-module.",
    "uses": [
-    "fin4-lem-fibrewise-cohomological-dimension",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-weil-pbc-constructible-complexes"
+    "lem-weil-pbc-constructible-module-finite-stalks",
+    "def-constructible-finite",
+    "cor-weil-pbc-geometric-fiber-finite"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/obl-fin-comparison.md",
+    "place": "## Proof, first paragraph (proper base change and finite fibres)"
+   }
+  },
+  {
+   "text": "Write $\\bar s:\\operatorname{Spec}\\Omega\\to S$, with $\\Omega$ algebraically closed. By clause (b) of [lem-weil-pbc-proper-fp-permanence], the base change $X_{\\bar s}\\to\\operatorname{Spec}\\Omega$ is proper; hence it is of finite type by [def-weil-pbc-scheme-conventions]. Its dimension is at most $d$ by the hypothesis on every geometric fibre, and $N$ remains invertible over the field extension $k\\to\\Omega$. Apply [prop-constructible-pullback] to $i_{\\bar s}:X_{\\bar s}\\to X$: the inverse image $i_{\\bar s}^{-1}F=F|_{X_{\\bar s}}$ is constructible. All hypotheses of [fin4-lem-fibrewise-cohomological-dimension] now hold with $k'=\\Omega$, so $H^q(X_{\\bar s},F|_{X_{\\bar s}})=0$ for every $q>2d$. Under the comparison isomorphism of step 2, its zero target forces $(R^qf_*F)_{\\bar s}=0$ for every geometric point $\\bar s$ and every $q>2d$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-pbc-scheme-conventions",
+    "prop-constructible-pullback",
+    "fin4-lem-fibrewise-cohomological-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/obl-fin-comparison.md",
+    "place": "## Proof, second paragraph (fibrewise cohomological dimension)"
+   }
+  },
+  {
+   "text": "For $q>2d$, apply [lemma-weil-pbc-geometric-stalk-conservative] to the underlying abelian-sheaf morphism of $0\\to R^qf_*F$. By step 3 its map on every geometric stalk is an isomorphism (both source and target stalks are zero), so this is an isomorphism of abelian sheaves. Its inverse respects the $\\Lambda$-action: for a local section $s$ and scalar $a$, applying the original injective $\\Lambda$-linear map to the inverse image of $as$ and to $a$ times the inverse image of $s$ gives $as$ in both cases. Hence the inverse is $\\Lambda$-linear and $R^qf_*F=0$ as a module sheaf. Step 1 already supplied constructibility for every $q\\ge0$ and step 2 supplied the finite fibre groups.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/obl-fin-comparison.md",
+    "place": "## Proof, second paragraph (geometric-stalk conservativity)"
+   }
   }
  ],
  "proof_deps": [
-  "thm-fin-proper-constructibility-complete",
   "cor-weil-pbc-geometric-fiber-finite",
+  "def-constructible-finite",
+  "def-finrepair-property-c",
+  "def-weil-pbc-scheme-conventions",
   "fin4-lem-fibrewise-cohomological-dimension",
+  "lem-weil-pbc-constructible-module-finite-stalks",
+  "lem-weil-pbc-proper-fp-permanence",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "def-weil-pbc-constructible-complexes"
+  "prop-constructible-pullback",
+  "sbc-def-coefficient-conventions",
+  "thm-fin-proper-constructibility-complete"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/obl-fin-comparison.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper morphism of finite type schemes with constructible finite-coefficient etale sheaf has constructible higher direct images, proper base change comparison, finite geometric fibre cohomology, and vanishing above twice fibre dimension",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.LocallyQuasiFinite; AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.locallyOfFiniteType_of_comp; AlgebraicGeometry.instIsProperOfIsFinite; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified. These concern constructible subsets, morphism properties, or etale structure, not higher etale direct-image finiteness or the stated bound.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsProper, constructible, R^q, Etale, base change",
+   "results": "No hits; loogle reported unknown identifier 'IsProper'.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*higher.*direct|higher.*direct.*constructible|proper.*base.*change (Mathlib/AlgebraicGeometry)",
+   "results": "25 hits, mostly MorphismProperty and site pretopology files; no constructible higher direct-image theorem or proper etale cohomology bound.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct images of constructible finite coefficient etale sheaves under proper morphisms are constructible and vanish above twice fibre dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper map of schemes the derived pushforward of a torsion constructible etale sheaf is constructible, and its cohomology stalk is the cohomology of the geometric fiber",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Condensed.lanSheafProfinite, CompHausLike.LocallyConstantModule.functor, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp. No declaration for the stated higher etale direct-image comparison/finitude theorem.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"sheaf\"",
+   "results": "0 hits; no declarations returned. No declaration for the stated higher etale direct-image comparison/finitude theorem.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|proper.base.change|cohomological.dimension",
+   "results": "0 hits; no declarations returned. No declaration for the stated higher etale direct-image comparison/finitude theorem.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -86,5 +178,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "obl-fin-comparison",
+  "worker": "stage1",
+  "summary": "Repair after the disk-space landing refusal: re-read every current statement dependency and proof dependency, checked the four-step proof against the blueprint and Stacks sources, refreshed every citation to a literal source substring, and made explicit why abelian-sheaf stalk conservativity gives module-sheaf vanishing. The statement and the source route are retained. No new nodes or Mathlib leaves; delivery is rebuilt on the current DAG by the required no-push tool.",
+  "blueprint": "Step 1 realizes the constructibility paragraph of the blueprint proof; step 2 realizes its proper-base-change and finite-fibre sentence; step 3 realizes the fibrewise cohomological-dimension sentence; step 4 realizes geometric-stalk conservativity and the sheaf vanishing conclusion.",
+  "tool_uses": [
+   {
+    "node": "cor-weil-pbc-geometric-fiber-finite",
+    "why": "Finite-coefficient proper base change is a generic theorem from the proper-base-change unit; this compact-support comparison unit has no replacement for geometric-fibre stalk comparison."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-finite-stalks",
+    "why": "The constructible-module finite-stalk lemma supplies the finite-sheaf input to proper base change and finiteness of the stalks of the constructible direct images; no node of this unit states that generic stalk fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-weil-pbc-constructible-module-finite-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q01-b0de72232",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-b0de72232 (reviewer sub-agent of L); spot-checked: Read all required instructions, packet/report, blueprint item and unit route, the immutable item and every cited DAG statement, plus the cited Stacks locations. Verified all four proof steps, hypotheses, exact comparison morphism, coefficient category, source route, acyclicity, duplicate/generalization checks, and edge cases including d=0, q=0, empty fibres, zero sheaf, identity map, boundary q=2d, and N=1. No new nodes or repairs were needed. Review written to review.md."
+ }
 }
