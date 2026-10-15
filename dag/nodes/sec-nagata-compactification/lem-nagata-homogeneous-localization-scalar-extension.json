@@ -212,5 +212,23 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-9f6e3a3cc (reviewer sub-agent of L); spot-checked: Read the complete item, cited definition, report, unit/chapter route, and Stacks 01N2/01M4 sources. All four fraction/tensor calculations are valid without flatness or cancellation; checked nilpotent denominators, zero rings, zero-divisors, and nonflat base change killing f. No duplicate statement, circular dependency, new node, or required repair found. Detailed checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7407b026a",
+  "group": "NS",
+  "result": "pass",
+  "note": "Checked immutable files, source, dependencies, exact signature, universes, edge cases, report sections and maintainer gates. Server-only compile passed cleanly in 1.1 seconds; no project files or branch heads changed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HomogeneousLocalizationScalarExtension",
+  "declaration": "HomogeneousLocalization.exists_away_scalarExtension_equiv",
+  "file": "lean/Sheaf/RingTheory/HomogeneousLocalizationScalarExtension.lean",
+  "statement": "theorem exists_away_scalarExtension_equiv {R : Type u} {S : Type v} {A : Type w} [CommRing R] [CommRing S] [CommRing A] [Algebra R S] [Algebra R A] (𝒜 : ℕ → Submodule R A) [GradedAlgebra 𝒜] {d : ℕ} (hd : 0 < d) {f : A} (hf : f ∈ 𝒜 d) : ∃ e : (S ⊗[R] Away 𝒜 f) ≃ₐ[S] Away (fun n ↦ (𝒜 n).baseChange S) (1 ⊗ₜ[R] f), ∀ (s : S) (m : ℕ) (a : A) (ha : a ∈ 𝒜 (m • d)), e (s ⊗ₜ[R] Away.mk 𝒜 hf m a ha) = Away.mk (fun n ↦ (𝒜 n).baseChange S) (Submodule.tmul_mem_baseChange_of_mem 1 hf) m (s ⊗ₜ[R] a) (Submodule.tmul_mem_baseChange_of_mem s ha)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
