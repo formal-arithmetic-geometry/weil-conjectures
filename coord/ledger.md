@@ -15088,3 +15088,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:20 L: returned deliver/E4/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible (reviewer RETURN: (reviewer X-78da5, head 78da571da) E2: The unchanged sorried statements `boundedConstructible_rightDerivedLowerStar_obj`)
 
 - 00:25 L: batch 20261015T161926 dependency take-out
+- 16:30 L: returned deliver/C3/Sheaf.AlgebraicGeometry.FiniteRangeComparison (reviewer RETURN: (reviewer X-d177f, head d177fd279) F/G1: In dag/nodes/sec-smooth-base-change/sbc-lem-finite-range-comparison.json, line )
