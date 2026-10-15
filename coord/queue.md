@@ -1,6 +1,6 @@
 # Work queue
 
-29 items; claim with `tools/claim.py next <group> [--stage N]`.
+30 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (29)
+## Stage 3: modules to prove (30)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -33,10 +33,11 @@
 | `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections` | 6 | 1 | proof |
-| `Sheaf.NumberTheory.Padics.ExtensionIntegersDvr` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedOpenClosedRecollement` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 6 | 5 | proof |
 | `Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution` | 7 | 1 | proof |
+| `Sheaf.NumberTheory.Padics.ExtensionIntegersDvrCore` | 7 | 1 | proof |
+| `Sheaf.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique` | 7 | 1 | proof |
 | `Sheaf.Paper.PointLanFiniteProducts` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.GeometricModuleConstruction` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.LowerShriekCoveringGenerators` | 8 | 1 | proof |
