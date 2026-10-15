@@ -188,5 +188,23 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-6dc5aed8b (reviewer sub-agent of L); spot-checked: Read the full delivery, DAG instructions, unit/chapter route, report, item, new node, cited statements, Stacks sources, and Mathlib declarations. Verified all five proof steps, hypotheses, coefficient/base-change typing, skeleton correction, edge cases, duplicate searches, and blueprint route. Wrote review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d4a335bab",
+  "group": "NF",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all four clauses, dependencies, sources, docstrings, universes, edge cases, and verbatim signature. Server-only compilation passed cleanly against the side overlay. No delivery errors found; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.weaklyEtale_localization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleWeaklyEtaleLocalization.lean",
+  "statement": "theorem weaklyEtale_localization (X : Scheme.{u}) (W : X.ProEt) (A : CommRingCat.{u + 1}) : (∀ V : W.left.ProEt, WeaklyEtale (V.hom ≫ W.hom)) ∧ (∀ T : Over W, WeaklyEtale T.hom.left) ∧ (∃ e : Over W ≌ W.left.ProEt, (∀ T : Over W, (e.functor.obj T).left = T.left.left) ∧ (∀ T : Over W, HEq (e.functor.obj T).hom T.hom.left) ∧ (∀ (T T' : Over W) (f : T ⟶ T'), HEq (e.functor.map f).left f.left.left) ∧ (∀ V : W.left.ProEt, (e.inverse.obj V).left.left = V.left) ∧ (∀ V : W.left.ProEt, HEq (e.inverse.obj V).hom.left V.hom) ∧ (∀ (V V' : W.left.ProEt) (f : V ⟶ V'), HEq (e.inverse.map f).left.left f.left) ∧ (∀ (V : W.left.ProEt) (S : Sieve V), S ∈ topology W.left V ↔ S.functorPushforward e.inverse ∈ (topology X).over W (e.inverse.obj V)) ∧ (∀ (D : Type v) [Category.{w} D], ∃ s : Sheaf ((topology X).over W) D ≌ Sheaf (topology W.left) D, s.functor ⋙ sheafToPresheaf _ D = sheafToPresheaf _ D ⋙ (Functor.whiskeringLeft _ _ D).obj e.inverse.op) ∧ (∃ (R : Sheaf (topology W.left) RingCat.{u + 1}) (hR : R.obj = e.inverse.op ⋙ (((constantSheaf (topology X) RingCat.{u + 1}).obj (RingCat.of A)).over W).obj) (c : (constantSheaf (topology W.left) RingCat.{u + 1}).obj (RingCat.of A) ≅ R), (∀ V : W.left.ProEt, HEq ((toSheafify (topology W.left) ((Functor.const W.left.ProEtᵒᵖ).obj (RingCat.of A))).app (op V) ≫ c.hom.hom.app (op V)) ((toSheafify (topology X) ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of A))).app (op (e.inverse.obj V).left))) ∧ (∀ f : (constantSheaf (topology W.left) RingCat.{u + 1}).obj (RingCat.of A) ⟶ R, (∀ V : W.left.ProEt, HEq ((toSheafify (topology W.left) ((Functor.const W.left.ProEtᵒᵖ).obj (RingCat.of A))).app (op V) ≫ f.hom.app (op V)) ((toSheafify (topology X) ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of A))).app (op (e.inverse.obj V).left))) → f = c.hom) ∧ (∃ q : ringedSiteModules.{u + 1} (((constantSheaf (topology X) RingCat.{u + 1}).obj (RingCat.of A)).over W) ≌ ringedSiteModules.{u + 1} ((constantSheaf (topology W.left) RingCat.{u + 1}).obj (RingCat.of A)), q.functor ⋙ SheafOfModules.forget _ = SheafOfModules.forget _ ⋙ PresheafOfModules.pushforward (F := e.inverse) (c.hom.hom ≫ eqToHom hR)))) ∧ (IsOpenImmersion W.hom → Mono W.hom ∧ (∀ V : X.ProEt, Subsingleton (V ⟶ W)) ∧ (∀ V : X.ProEt, (Nonempty (V ⟶ W) ↔ ∃ a : V.left ⟶ W.left, a ≫ W.hom = V.hom) ∧ (Nonempty (V ⟶ W) ↔ Set.range V.hom ⊆ Set.range W.hom)))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
