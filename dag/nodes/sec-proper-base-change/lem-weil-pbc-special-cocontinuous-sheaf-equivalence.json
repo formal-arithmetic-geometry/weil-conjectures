@@ -115,7 +115,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-special-cocontinuous-functor",
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
  ],
  "mathlib_searches": [
   {
@@ -208,5 +209,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-582a45024",
+  "group": "NS",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, source clauses, dependency repairs, universes, edge cases, docstrings, and verbatim signatures. All three modules compiled cleanly through scompile.py. No substantive or landing faults found; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpecialCocontinuousSheafEquivalence",
+  "declaration": "CategoryTheory.specialCocontinuous_sheafEquivalence",
+  "file": "lean/Sheaf/CategoryTheory/SpecialCocontinuousSheafEquivalence.lean",
+  "statement": "theorem specialCocontinuous_sheafEquivalence {C : Type u} [SmallCategory C] {D : Type u} [SmallCategory D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (f : C ⥤ D) (hf : f.IsSpecialCocontinuousForCoverings J K) : ∃ e : Sheaf K.toGrothendieck (Type u) ≌ Sheaf J.toGrothendieck (Type u), Nonempty (e.functor ⋙ sheafToPresheaf J.toGrothendieck (Type u) ≅ sheafToPresheaf K.toGrothendieck (Type u) ⋙ (Functor.whiskeringLeft _ _ (Type u)).obj f.op)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "H3 repair: both sites use the repaired site predicate, without strict indexed composition. The repaired adjunction is added as a statement dependency to identify restriction with the associated inverse image."
  }
 }
