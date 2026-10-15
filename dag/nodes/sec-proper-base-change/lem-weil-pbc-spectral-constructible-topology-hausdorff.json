@@ -30,51 +30,47 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (an open set separating $x$ and $y$).* Let $x\\ne y$ in $X$. The space $X$ is sober [def-weil-spectral-space]: every irreducible closed subset has exactly one generic point. The singleton $\\{x\\}$ is irreducible [def-weil-irreducible-components] (it is nonempty, and if $\\{x\\}=Z_1\\cup Z_2$ with $Z_1,Z_2$ closed in $\\{x\\}$ then one of them contains $x$ and equals $\\{x\\}$), so its closure $\\overline{\\{x\\}}$ is an irreducible closed subset of $X$ [lem-weil-pbc-irreducible-closure], and likewise $\\overline{\\{y\\}}$. Suppose $x\\in\\overline{\\{y\\}}$ and $y\\in\\overline{\\{x\\}}$. Then $\\overline{\\{x\\}}\\subseteq\\overline{\\{y\\}}$ and $\\overline{\\{y\\}}\\subseteq\\overline{\\{x\\}}$, so $Z=\\overline{\\{x\\}}=\\overline{\\{y\\}}$ is an irreducible closed subset with the two generic points $x$ and $y$, and uniqueness gives $x=y$, a contradiction. Hence $x\\notin\\overline{\\{y\\}}$ or $y\\notin\\overline{\\{x\\}}$. Exchanging the names of $x$ and $y$ if necessary (the conclusion is symmetric in $x,y$: swap $A$ and $B$ at the end), assume $x\\notin\\overline{\\{y\\}}$. Then $U_0=X\\setminus\\overline{\\{y\\}}$ is open in $X$, $x\\in U_0$ and $y\\notin U_0$. (This is Stacks' 'Since $X$ is sober, there is an open subset $U$ containing exactly one of the two points $x,y$. Say $x\\in U$.', written out.)",
-   "uses": [
-    "def-weil-spectral-space",
-    "def-weil-irreducible-components",
-    "lem-weil-pbc-irreducible-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma Tag 0901 (lemma-constructible-hausdorff-quasi-compact, line 4305), proof, first paragraph"
-   }
-  },
-  {
-   "text": "*Step 2 (a quasi-compact open).* The quasi-compact open subsets of $X$ form a basis of its topology [def-weil-spectral-space], so there is a quasi-compact open $U\\subseteq X$ with $x\\in U\\subseteq U_0$; since $y\\notin U_0$, also $y\\notin U$, i.e. $y\\in X\\setminus U$.",
+   "text": "For distinct points x and y, the T₀ property of a spectral space gives an open set O containing exactly one of them, via `exists_isOpen_xor_mem`. If x is in O, take a compact open U with x ∈ U ⊆ O from the compact-open basis; if y is in O, exchange x and y and make the same choice.",
    "uses": [
     "def-weil-spectral-space"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma Tag 0901 (lemma-constructible-hausdorff-quasi-compact, line 4305), proof, first paragraph"
+    "document": "Mathlib/Topology/Separation/Basic.lean",
+    "place": "`exists_isOpen_xor_mem` and Mathlib.Topology.Spectral.Prespectral basis lemma"
    }
   },
   {
-   "text": "*Step 3 (conclusion).* $U$ is a quasi-compact open subset of $X$, so $U$ and $X\\setminus U$ both belong to the subbase of the constructible topology [def-weil-pbc-constructible-topology] and are therefore open in it. Put $A=U$ and $B=X\\setminus U$ (with the roles of $A$ and $B$ exchanged if $x$ and $y$ were renamed in Step 1). Then $A$ and $B$ are open in the constructible topology, $A\\cap B=\\emptyset$, $x\\in A$ and $y\\in B$. As $x\\ne y$ were arbitrary, $X$ with its constructible topology is Hausdorff.",
+   "text": "The compact open U is open in the constructible topology by `IsCompact.isOpen_constructibleTopology_of_isOpen`; its complement is open there by `IsCompact.isOpen_constructibleTopology_of_isClosed`, since the complement has compact complement U and is closed in the original topology.",
    "uses": [
     "def-weil-pbc-constructible-topology"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma Tag 0901 (lemma-constructible-hausdorff-quasi-compact, line 4305), proof, first paragraph"
+    "document": "Mathlib/Topology/Spectral/ConstructibleTopology.lean",
+    "place": "lemmas `IsCompact.isOpen_constructibleTopology_of_isOpen` and `IsCompact.isOpen_constructibleTopology_of_isClosed`"
+   }
+  },
+  {
+   "text": "U and its complement are disjoint, and the chosen membership and containment prove that they contain x and y respectively (exchanging the two sets in the second T₀ case). This supplies the pair of disjoint constructible open neighbourhoods required by `T2Space`.",
+   "uses": [
+    "def-weil-pbc-constructible-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Topology/Separation/Hausdorff.lean",
+    "place": "definition `T2Space`"
    }
   }
  ],
  "proof_deps": [
   "def-weil-spectral-space",
-  "def-weil-irreducible-components",
-  "lem-weil-pbc-irreducible-closure",
   "def-weil-pbc-constructible-topology"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/topology.tex",
-  "place": "Topology, Lemma Tag 0901 (label lemma-constructible-hausdorff-quasi-compact, line 4305), proof, first paragraph (Hausdorff part); the deduction 'sober implies an open set contains exactly one of x, y' (Step 1) is written out by the agent where Stacks states it in one clause"
+  "by": "library",
+  "document": "Mathlib/Topology/Separation/Basic.lean; Mathlib/Topology/Spectral/Prespectral.lean; Mathlib/Topology/Spectral/ConstructibleTopology.lean",
+  "place": "The proof follows the Mathlib T₀ separation lemma and compact-open basis, then the constructible subbasis lemmas."
  },
  "mathlib_searches": [
   {
@@ -180,5 +176,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T154153-L-159002",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
