@@ -122,7 +122,7 @@ def handoff_return(who, m):
 
 def _delivered(who, m):
     import subprocess
-    return subprocess.run(["git", "rev-parse", "-q", "--verify", f"refs/heads/deliver/{who}/{m}"], cwd=str(ROOT) if "ROOT" in globals() else None,
+    return subprocess.run(["git", "rev-parse", "-q", "--verify", f"refs/heads/deliver/{who}/{m}"], cwd=str(li.ROOT),
                           capture_output=True).returncode == 0
 
 def take(who, m, quiet=False) -> bool:
