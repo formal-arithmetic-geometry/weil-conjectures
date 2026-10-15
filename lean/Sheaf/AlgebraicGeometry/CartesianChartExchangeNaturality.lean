@@ -107,21 +107,6 @@ theorem cartesianChartCohomologyLift_exchange
     l hl₁ hl₂ wl F q V U r hr z z'
     (cartesianChartRestrictedRawClass_eq f D c F q i V U r hr j x hl₂)
   have hR := cartesianChartRestrictedCohomologyMap_eval f D c F q i V U r hr j x hl₂
-  let _ := isIso_rawRestrictedCohomologyComparison h q G V
-  let e := asIso (rawRestrictedCohomologyComparison h q G V)
-  have ez : z = e.inv x :=
-    rawRestrictedCohomologyClass.eq_def h q G V x
-  have hs₀ := congrArg
-    (fun y ↦ (cartesianChartRawAdjunctionIso f (D.obj i).hom (D.map j.hom).left
-      (D.obj j.left).hom (Over.w (D.map j.hom)).symm F q V).hom y) ez.symm
-  have hs := congrArg
-    (fun y ↦ cartesianChartClassPullback (B := (D.obj i).left)
-      (T := (D.obj j.left).left) (T' := c.pt.left) (D.map j.hom).left (c.π.app j.left).left
-      (c.π.app i).left (congrArg (fun t ↦ t.left) (c.w j.hom)).symm V U r hr _ (q : ℤ) y ≫
-      (shiftFunctor _ (q : ℤ)).map
-        (cartesianDerivedImageMap f (D.obj j.left).hom c.pt.hom
-          (c.π.app j.left).left (Over.w (c.π.app j.left)).symm
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) hs₀
-  exact hs.trans (hm.trans hR.symm)
+  exact hm.trans hR.symm
 
 end AlgebraicGeometry.Etale

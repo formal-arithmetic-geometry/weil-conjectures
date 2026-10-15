@@ -40,7 +40,8 @@ private theorem chartClassPullback_postcomp {B T T' : Scheme.{u}}
         (shiftFunctor _ q).map ((D+((b)^*[AddCommGrpCat.{u + 1}])).map e) =
       cartesianChartClassPullback a b a' ha W V r hr L q
         (y ≫ (shiftFunctor _ q).map e) := by
-  simp only [cartesianChartClassPullback, Functor.map_comp, Category.assoc]
+  simp only [cartesianChartClassPullback, cartesianChartClassPullbackCore,
+    Functor.map_comp, Category.assoc]
   rw [Functor.commShiftIso_hom_naturality]
 
 /-- Stage exchange turns a raw finite-stage representative into a chart class.
@@ -111,7 +112,7 @@ theorem exists_cartesianRawClass_chart_data
   refine ⟨j, W, hW, r, hr, l, b, x, ?_⟩
   rw [Functor.map_comp, ← Category.assoc, hy]
   rw [chartClassPullback_postcomp]
-  unfold cartesianChartCohomologyLift
+  unfold cartesianChartCohomologyLift rawRestrictedCohomologyClass
   congr 1
   symm
   change A.hom ((asIso (rawRestrictedCohomologyComparison h q G W)).inv

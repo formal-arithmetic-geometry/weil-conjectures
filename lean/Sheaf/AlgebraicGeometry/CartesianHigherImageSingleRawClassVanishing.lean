@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 import Sheaf.AlgebraicGeometry.CartesianRawClassChartRepresentative
+import Sheaf.AlgebraicGeometry.CartesianChartClassPullbackZero
 import Sheaf.AlgebraicGeometry.RestrictedOverAbelianCohomologyPresentation
 import Sheaf.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
 import Mathlib.Algebra.Category.Grp.FilteredColimits
@@ -138,7 +139,7 @@ theorem exists_cartesianHigherImage_single_raw_class_eq_zero
     (q : ℤ) (cartesianChartDiagram f D j) (cartesianChartCone f D c j) hchart W l x hx
   refine ⟨m.left, a.left ≫ b, ?_⟩
   rw [htrans m a, ha]
-  simp only [cartesianChartCohomologyLift, map_zero, cartesianChartClassPullback,
-    Functor.map_zero, Limits.comp_zero, Limits.zero_comp]
+  simp only [cartesianChartCohomologyLift, rawRestrictedCohomologyClass,
+    map_zero, cartesianChartClassPullback_zero]
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,113 @@
+{
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03CB and 0EYM, canonical inverse-image composition and chart comparison square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical pullback of a shifted derived Hom class with exact inverse image single functor and composition comparisons",
+   "date": "2026-10-15",
+   "results": "8 hits; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.PullbackShift.functor",
+   "verdict": "Supporting exact-functor and shift facts only; use the explicit library construction and coherence lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.commShiftIso_comp_hom_app",
+   "date": "2026-10-15",
+   "results": "0 hits; loogle: unknown identifier 'Functor.commShiftIso_comp_hom_app'",
+   "verdict": "Supporting exact-functor and shift facts only; use the explicit library construction and coherence lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlusSingleFunctor|commShiftIso_comp_hom_app",
+   "date": "2026-10-15",
+   "results": "20 hits; Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Triangulated/Opposite/OpOp.lean",
+   "verdict": "Supporting exact-functor and shift facts only; use the explicit library construction and coherence lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical pullback of a derived cohomology class commutes with composition, shift comparison, and inverse image adjunction.",
+   "date": "2026-10-15",
+   "results": "Service unavailable: Internal Server Error. This attempted search is recorded in searches.jsonl; no mathematical verdict is drawn."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianChartLiftNaturality",
+  "date": "2026-10-15",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "The chart transport used in the second proof of Tag 0EYM.",
+   "via": [
+    "stage3-cartesian-higher-image-single-raw-class-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "id": "def-sc-cartesian-chart-class-pullback-core",
+ "kind": "definition",
+ "title": "Canonical derived pullback of a class with pulled-back source",
+ "statement": "Let B,T,T' be schemes [def-weil-pbc-scheme-conventions], h:T→B, a:T'→T and s:T'→B with s=a≫h. Let M be an abelian etale sheaf on B [def-weil-pbc-etale-sheaves], K a bounded-below derived object on T [def-weil-pbc-derived-categories], q any integer and z:single(h^*M)→K[q]. Define the class on T' as single(upperStarComp(a,h,s).hom_M), followed by the inverse exact-inverse-image single comparison, then D+(a^*).map z, then the shift comparison. This is a map single(s^*M)→D+(a^*)K[q]. No data are selected from existence. The chart pullback is the free-source pullback-square comparison followed by this construction.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Form the four displayed canonical maps. Their source and target match by the single and shift comparisons. The definition is exactly their composite; the chart pullback precomposes it with the original free-source comparison. No data are chosen from existence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "A3",
+  "document": "Stacks Project",
+  "place": "Tags 03CB and 0EYM; factor the unchanged explicit construction so equality transports retain a named head."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianChartClassPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianChartClassPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.cartesianChartClassPullbackCore",
+  "declarations": [
+   "AlgebraicGeometry.Etale.cartesianChartClassPullbackCore"
+  ],
+  "statement": "def cartesianChartClassPullbackCore {B T T' : Scheme.{u}} (h : T ⟶ B) (a : T' ⟶ T) (s : T' ⟶ B) (hs : s = a ≫ h) (M : Sheaf B.smallEtaleTopology AddCommGrpCat.{u + 1}) (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) (q : ℤ) (z : (DerivedCategory.Plus.singleFunctor _ 0).obj (((h)^*[AddCommGrpCat.{u + 1}]).obj M) ⟶ K⟦q⟧) : (DerivedCategory.Plus.singleFunctor _ 0).obj (((s)^*[AddCommGrpCat.{u + 1}]).obj M) ⟶ ((D+((a)^*[AddCommGrpCat.{u + 1}])).obj K)⟦q⟧",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-8207b",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261015T161927-L-300524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-8207b",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261015T161927-L-300524",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations and proof routes with all three DAG nodes, existing public signatures, original constructions, forced-adaptation failures, importer checks and axiom results."
+ }
+}

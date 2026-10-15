@@ -31,6 +31,7 @@ lemma chartClassPullback_postcomp {B T T' : Scheme.{u}}
       (DerivedCategory.Plus.singleFunctor _ 0).map
         (abelianFreeRepresentablePullbackSquareIso a' V U r hr).hom ≫ s := by
   dsimp only [cartesianChartClassPullback]
+  unfold cartesianChartClassPullbackCore
   simpa only [Category.assoc] using congrArg
     ((DerivedCategory.Plus.singleFunctor _ 0).map
       (abelianFreeRepresentablePullbackSquareIso a' V U r hr).hom ≫ ·) h

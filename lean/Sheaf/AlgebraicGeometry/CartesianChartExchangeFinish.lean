@@ -25,7 +25,8 @@ lemma chartExchange_finish
     (z : (abelianHigherDirectImageRawPresheaf
       (pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) ≫
         pullback.snd f (D.obj i).hom) q
-      (((pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
+      (((pullback.snd (D.map j.hom).left
+          (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
         (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F))).obj (op V))
     (z' : (abelianHigherDirectImageRawPresheaf
       (pullback.snd (c.π.app i).left (pullback.snd f (D.obj i).hom) ≫
@@ -35,7 +36,8 @@ lemma chartExchange_finish
     (hz : rawRestrictedCohomologyComparison
       (pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) ≫
         pullback.snd f (D.obj i).hom) q
-      (((pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
+      (((pullback.snd (D.map j.hom).left
+          (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
         (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) V z = x)
     (hn : restrictedOverCohomologyMap (pullback.snd f (D.obj i).hom)
       (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)
@@ -43,7 +45,8 @@ lemma chartExchange_finish
       rawRestrictedCohomologyComparison
         (pullback.snd (c.π.app i).left (pullback.snd f (D.obj i).hom) ≫
           pullback.snd f (D.obj i).hom) q
-        (((pullback.snd (c.π.app i).left (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
+        (((pullback.snd (c.π.app i).left
+            (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
           (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) V z')
     (hraw : cartesianChartClassPullback (D.map j.hom).left (c.π.app j.left).left
         (c.π.app i).left (congrArg (fun t ↦ t.left) (c.w j.hom)).symm
@@ -68,22 +71,32 @@ lemma chartExchange_finish
       (restrictedOverCohomologyMap (pullback.snd f (D.obj i).hom)
         (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)
         (q : ℤ) ((cartesianChartCone f D c i).π.app j) V x) := by
-  letI := isIso_rawRestrictedCohomologyComparison
+  let := isIso_rawRestrictedCohomologyComparison
     (pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) ≫
       pullback.snd f (D.obj i).hom) q
     (((pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
       (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) V
-  have hzinv :
-      (asIso (rawRestrictedCohomologyComparison
-        (pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) ≫
-          pullback.snd f (D.obj i).hom) q
-        (((pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
-          (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) V)).inv x = z := by
-    rw [← hz]
-    exact Iso.hom_inv_id_apply _ z
+  have hzinv : rawRestrictedCohomologyClass
+      (pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) ≫
+        pullback.snd f (D.obj i).hom) q
+      (((pullback.snd (D.map j.hom).left
+        (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
+        (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) V x = z := by
+    apply (ConcreteCategory.bijective_of_isIso (rawRestrictedCohomologyComparison
+      (pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) ≫
+        pullback.snd f (D.obj i).hom) q
+      (((pullback.snd (D.map j.hom).left
+        (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
+        (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) V)).1
+    exact (rawRestrictedCohomologyClass_spec
+      (pullback.snd (D.map j.hom).left (pullback.snd f (D.obj i).hom) ≫
+        pullback.snd f (D.obj i).hom) q
+      (((pullback.snd (D.map j.hom).left
+        (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
+        (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)) V x).trans hz.symm
   rw [hn]
   dsimp only [cartesianChartCohomologyLift]
-  rw [hzinv]
+  erw [hzinv]
   erw [chartCohomologyIso_eval f (D.obj i).hom (c.π.app i).left c.pt.hom
     (Over.w (c.π.app i)).symm F q V U r hr]
   exact hraw

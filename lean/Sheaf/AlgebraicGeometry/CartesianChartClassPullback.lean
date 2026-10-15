@@ -5,6 +5,8 @@ Authors: SHEAF group V1
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyClass
+
 public import Sheaf.AlgebraicGeometry.CartesianChartRawTransport
 public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
 public import Sheaf.AlgebraicGeometry.CartesianHigherImageChartSystem
@@ -20,6 +22,26 @@ universe u
 open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
+
+/-- The derived inverse-image action on a class with a pulled-back source.
+All factors are the canonical composition, single and shift comparisons.
+Source: Stacks Project, Tags 03CB and 0EYM.
+(blueprint: def-sc-cartesian-chart-class-pullback-core). -/
+@[irreducible]
+noncomputable def cartesianChartClassPullbackCore {B T T' : Scheme.{u}}
+    (h : T ⟶ B) (a : T' ⟶ T) (s : T' ⟶ B) (hs : s = a ≫ h)
+    (M : Sheaf B.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (q : ℤ) (z : (DerivedCategory.Plus.singleFunctor _ 0).obj
+      (((h)^*[AddCommGrpCat.{u + 1}]).obj M) ⟶ K⟦q⟧) :
+    (DerivedCategory.Plus.singleFunctor _ 0).obj
+      (((s)^*[AddCommGrpCat.{u + 1}]).obj M) ⟶
+        ((D+((a)^*[AddCommGrpCat.{u + 1}])).obj K)⟦q⟧ :=
+  (DerivedCategory.Plus.singleFunctor _ 0).map
+      ((upperStarComp AddCommGrpCat.{u + 1} a h s hs).hom.app M) ≫
+    (((a)^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusSingleFunctor 0).inv.app _ ≫
+    (D+((a)^*[AddCommGrpCat.{u + 1}])).map z ≫
+    (D+((a)^*[AddCommGrpCat.{u + 1}]).commShiftIso q).hom.app K
 
 /-- Pull back a chart class, with the free-sheaf source transported from a given
 pullback test object. All factors are the specified composition, single-functor,
@@ -38,12 +60,7 @@ noncomputable def cartesianChartClassPullback {B T T' : Scheme.{u}}
       ((D+((b)^*[AddCommGrpCat.{u + 1}])).obj K)⟦q⟧ :=
   (DerivedCategory.Plus.singleFunctor _ 0).map
       (abelianFreeRepresentablePullbackSquareIso a' V U r hr).hom ≫
-    (DerivedCategory.Plus.singleFunctor _ 0).map
-      ((upperStarComp AddCommGrpCat.{u + 1} b a a' ha).hom.app
-        ((abelianComparisonFree B).obj V)) ≫
-    (((b)^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlusSingleFunctor 0).inv.app _ ≫
-    (D+((b)^*[AddCommGrpCat.{u + 1}])).map z ≫
-    (D+((b)^*[AddCommGrpCat.{u + 1}]).commShiftIso q).hom.app K
+    cartesianChartClassPullbackCore a b a' ha ((abelianComparisonFree B).obj V) K q z
 
 /-- The actual stage lift for the chart diagram; it uses the inverse of the
 canonical raw cohomology comparison, the chart adjunction, and pullback of the
@@ -69,8 +86,7 @@ noncomputable def cartesianChartCohomologyLift
   let G := (((pullback.snd ((D.map j.hom).left)
       (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
     (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F))
-  letI := isIso_rawRestrictedCohomologyComparison h q G V
-  let z := (asIso (rawRestrictedCohomologyComparison h q G V)).inv x
+  let z := rawRestrictedCohomologyClass h q G V x
   exact cartesianChartClassPullback (D.map j.hom).left (c.π.app j.left).left
     (c.π.app i).left (congrArg (fun t ↦ t.left) (c.w j.hom)).symm V U r hr _ (q : ℤ)
     ((cartesianChartRawAdjunctionIso f (D.obj i).hom (D.map j.hom).left
