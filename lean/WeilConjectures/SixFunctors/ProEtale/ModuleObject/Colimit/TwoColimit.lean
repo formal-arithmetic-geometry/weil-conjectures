@@ -10,9 +10,9 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.AlgebraicGeometry.CondensedDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars
+import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import Sheaf.AlgebraicGeometry.SplitCoefficientDerivedFaithful
 import Sheaf.CategoryTheory.DirectedTriangulatedImage
-import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import Sheaf.Paper.CondensedFinitePresentationDescent
