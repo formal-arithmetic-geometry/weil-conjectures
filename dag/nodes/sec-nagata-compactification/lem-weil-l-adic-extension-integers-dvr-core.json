@@ -35,12 +35,23 @@
  "statement": "The valuation ring and maximal ideal in the first fourteen clauses of [lem-weil-l-adic-extension-integers-dvr] exist with all displayed ring, DVR, fraction-field and finite-residue properties, through the existence of a generator of the maximal ideal.",
  "proof": [
   {
-   "text": "Apply the proper finite-dimensional valued-field criterion and identify the integer and maximal-ideal predicates with the absolute-value inequalities; the standard proper-valued-field theorem supplies the DVR and finite residue field, and elementary unit and fraction-field arguments supply the remaining displayed clauses.",
+   "text": "Equip E with abv.toNormedField. The extension identity makes E a normed Q_l-algebra, hence ultrametric, and supplies a norm greater than one from Q_l. FiniteDimensional.proper makes E proper. Its valuation integer ring is the closed unit ball, so is compact.",
    "uses": [
-    "lem-weil-l-adic-extension-proper",
+    "lem-weil-l-adic-extension-proper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the compact-integer-ring version of the proper rank-one valued-field criterion, Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField, to the valuation defined by the norm. This gives a DVR of integers and a finite residue field. Take O to be this integer subring and m to be its canonical maximal ideal.",
+   "uses": [
     "lem-weil-l-adic-extension-dvr-finite-residue"
    ],
    "elementary": false
+  },
+  {
+   "text": "The integer-ring API identifies membership with abv <= 1 and units with abv = 1; nonunits therefore give membership in m exactly when abv < 1. The local-ring, fraction-ring and DVR APIs give the remaining ring properties. A nonzero prime ideal in a PID is maximal and hence equals m. Choose an irreducible rho in O, which generates m. Valuation divisibility says x divides y exactly when abv(y) <= abv(x), so equality of the two principal ideals is equivalent to equality of their generator absolute values. Set r = abv(rho). Membership in (rho) bounds abv by r, and rho itself attains r. Any generator of m is irreducible and nonzero; conversely an element of absolute value r has the same principal ideal as rho. These are precisely the last two clauses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -48,9 +59,11 @@
   "lem-weil-l-adic-extension-dvr-finite-residue"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
-  "place": "order 411"
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-16",
+  "document": "Serre, Local Fields, Chapter II, §2, Proposition 3; Mathlib/Topology/Algebra/Valued/LocallyCompact.lean",
+  "place": "The existing properness/DVR route, implemented via compactness of the closed unit ball and valuation divisibility."
  },
  "lean": {
   "existing": false,
@@ -99,10 +112,10 @@
   "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261015T190212-L-946793",
-  "kind": "interface",
+  "landing": "20261015T193108-L-1105921",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
