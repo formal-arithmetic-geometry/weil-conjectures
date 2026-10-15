@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeDescentDataCategory
+public import WeilConjectures.AlgebraicGeometry.SchemeDescentDataCategory
 import Sheaf.AlgebraicGeometry.FpqcCanonicalPullbackDatum
 
 /-! Auxiliary steps for Stacks Project, Descent, Lemma 0241. -/
