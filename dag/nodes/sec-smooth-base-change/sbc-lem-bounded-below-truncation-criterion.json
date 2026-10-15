@@ -22,70 +22,49 @@
  ],
  "proof": [
   {
-   "text": "Choose $a$ with $H^q(K)=0$ for $q<a$ and a bounded below representative $K^\\bullet$ vanishing below $a$, using [def-sbc-standard-tstructure-derived-category]. Read [def-weil-pbc-hypercohomology-filtrations] with its $(f,f',g,g')$ renamed to our $(g,h,f,e)$. It supplies the three truncation spectral sequences with pages $R^pg_*H^q(K)$, $f^{-1}R^pg_*H^q(K)$, and $R^ph_*e^{-1}H^q(K)$. Their nonzero terms in total degree $n$ satisfy $a\\le q\\le n$: $p\\ge0$ and $p+q=n$ force $q\\le n$. This proves the contribution assertion, including $n<a$, when there are no such terms.",
+   "text": "The total derived direct image Rg_* preserves every lower cohomology bound. For E in D^{>=a}, regard E as an object Eplus of D^+ and apply [lem-weil-pbc-derived-functor-negative-vanishing]. Transport the zero cohomology objects to the total derived functor by the existing natural isomorphism rightDerivedFunctorPlusCompatibility. Exact inverse image preserves the same bound by [lem-weil-pbc-exact-functor-bounded-below], with the exactness instances for upperStar. Consequently all three functors of [def-weil-pbc-hypercohomology-filtrations] preserve D^{>=a}.",
    "uses": [
-    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-pbc-derived-inverse-image",
     "def-weil-pbc-hypercohomology-filtrations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-bounded-below-truncation-criterion.md",
-    "place": "## Proof; spectral-sequence and pullback argument (made explicit)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [thm-sp-truncation-e2] to $v=g_*$ and $K^\\bullet$. The hypotheses and identifications are supplied by [def-sp-etale-dictionary]: the sheaf categories are Grothendieck abelian, $g_*$ is left exact additive, and $Rv=Rg_*$ is computed by K-injective resolutions. Part 5 identifies the canonical map $c_n:H^n(Rg_*\\tau_{\\le n}K)\\to H^n(Rg_*K)$ induced by the inclusion as an isomorphism. This is the first claimed map; convergence and the finite diagonal alone would not justify its injectivity without this canonical-map assertion.",
+   "text": "For any of the three functors F, apply F to the canonical distinguished triangle tau_{<=n}E -> E -> tau_{>n}E of [def-sbc-standard-tstructure-derived-category]. The third object has lower bound n+1, and step 1 gives the same bound after F. Its cohomology in degrees n-1 and n is zero. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] therefore makes H^n of the first arrow an isomorphism, exactly the canonical map in the conclusion. In Lean this is DerivedCategory.isIso_homologyMap_mor₁, applied to the image triangle. The triangulated structures are the existing structures of the total derived direct image and of the exact inverse image, not an additional spectral-sequence convergence assumption.",
    "uses": [
-    "thm-sp-truncation-e2",
-    "def-sp-etale-dictionary"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-bounded-below-truncation-criterion.md",
-    "place": "## Proof; spectral-sequence and pullback argument (made explicit)"
-   }
-  },
-  {
-   "text": "By [prop-weil-pbc-inverse-image-exact], $f^{-1}$ is exact. By [lem-weil-pbc-exact-functor-bounded-below], the natural isomorphisms $H^n(f^{-1}L)\\cong f^{-1}H^n(L)$ identify the second claimed map with $f^{-1}(c_n)$. Every functor takes an inverse to an inverse, so $f^{-1}(c_n)$ is an isomorphism.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-exact-functor-bounded-below"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-bounded-below-truncation-criterion.md",
-    "place": "## Proof; spectral-sequence and pullback argument (made explicit)"
-   }
-  },
-  {
-   "text": "The functor $e^{-1}$ is exact by [prop-weil-pbc-inverse-image-exact], and it is applied termwise by [def-weil-pbc-derived-inverse-image]. Thus $e^{-1}K^\\bullet$ vanishes below $a$. Exactness gives $e^{-1}\\ker(d^n)=\\ker(e^{-1}d^n)$, so the termwise formula for canonical truncation in [def-sbc-standard-tstructure-derived-category] identifies $e^{-1}\\tau_{\\le n}K^\\bullet$ with $\\tau_{\\le n}(e^{-1}K^\\bullet)$, including their inclusions into $e^{-1}K^\\bullet$. Apply part 5 of [thm-sp-truncation-e2] to this complex and $v=h_*$, with the Grothendieck, left exactness and derived-functor identifications of [def-sp-etale-dictionary]. Its canonical map $c_n$ is exactly the third claimed map under that identification, hence is invertible. This application needs only bounded below abelian sheaves, not a separate torsion-preservation assertion.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-exact",
-    "def-weil-pbc-derived-inverse-image",
     "def-sbc-standard-tstructure-derived-category",
-    "thm-sp-truncation-e2",
-    "def-sp-etale-dictionary"
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-pbc-hypercohomology-filtrations",
+    "def-weil-pbc-derived-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-bounded-below-truncation-criterion.md",
-    "place": "## Proof; spectral-sequence and pullback argument (made explicit)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The E term in [def-weil-pbc-hypercohomology-filtrations] is H^{p+q}(F(Q(H^q(L)[-q]))); the single complex cohomologyComplex of [def-sp-truncation-couple] has lower bound q. Step 1 then makes this E term zero for p<0. By the defining recurrence of [def-sp-exact-couple], each successor E term is a cokernel of a map to the kernel of the differential out of the preceding term. A subobject of zero is zero (IsZero.of_mono), and its cokernel quotient is zero (IsZero.of_epi). Induction on pageCouple therefore proves vanishing on every page. Finally n<q gives p=n-q<0. This argument works for every bounded-below representative L, without choosing a resolution or using the supplied representative isomorphism.",
+   "uses": [
+    "def-weil-pbc-hypercohomology-filtrations",
+    "def-sp-truncation-couple",
+    "def-sp-exact-couple"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sbc-standard-tstructure-derived-category",
-  "def-weil-pbc-hypercohomology-filtrations",
-  "thm-sp-truncation-e2",
-  "def-sp-etale-dictionary",
-  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
   "lem-weil-pbc-exact-functor-bounded-below",
-  "def-weil-pbc-derived-inverse-image"
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "def-sp-truncation-couple",
+  "def-sp-exact-couple"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-bounded-below-truncation-criterion.md",
-  "place": "## Proof"
+  "place": "Proof, spectral-sequence diagonal support and truncation comparison; A4 implements the shorter left-t-exact truncation-triangle argument from existing negative vanishing (2026-10-15)."
  },
  "mathlib_searches": [
   {
@@ -232,5 +211,15 @@
   "by": "NM",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261015T154149-L-158007",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
