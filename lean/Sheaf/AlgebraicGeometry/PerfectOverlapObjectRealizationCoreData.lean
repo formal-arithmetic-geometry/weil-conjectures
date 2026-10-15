@@ -12,6 +12,7 @@ public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 
 /-! # Core object comparison data (without the final Hom pin).
 
@@ -30,6 +31,13 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u w v h v' h'
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+
+private theorem cancel_iso_pasting {C : Type*} [Category C]
+    {A B D E : C} (f : A ⟶ B) (s : D ≅ B)
+    (g : D ⟶ E) (h : E ⟶ D) (gh : g ≫ h = 𝟙 D) :
+    f = 𝟙 A ≫ f ≫ s.inv ≫ g ≫ 𝟙 E ≫ h ≫ s.hom := by
+  simp only [Category.id_comp, Category.comp_id,
+    ← Category.assoc, gh, Category.comp_id, Iso.inv_hom_id]
 
 /-- The fixed pullback from a finite overlap stage to the colimit overlap. -/
 noncomputable def perfectOverlapCoreTransition
@@ -824,33 +832,6 @@ noncomputable abbrev overlapSiteInverse {X : Scheme.{u}} (U : X.Opens) :
       SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) :=
   (Scheme.Modules.overEquiv U).inverse
 
-/-- Restriction on the localized open site commutes with returning to the
-scheme open, up to the unit of the smaller-open equivalence.
-Source: Stacks Project, Tags 08BV and 05RU. Underived overlap restriction is
-the inverse equivalence on the larger open, followed by over-site restriction
-and the forward equivalence on the smaller open. Inserting the smaller-open
-unit identifies over-site restriction after inverse equivalence with this
-composite followed by the smaller-open inverse equivalence. The exact-derived
-functor comparison transports that natural isomorphism to derived categories. -/
-noncomputable def openSiteOverlapIso (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
-    (overlapSiteInverse U).mapDerivedCategory ⋙
-      (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory ≅
-    (schemeOpenOverlapRestriction X i).mapDerivedCategory ⋙
-      (overlapSiteInverse W).mapDerivedCategory := by
-  let eW := Scheme.Modules.overEquiv W
-  let L := overlapSiteInverse U
-  let S := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i
-  let H := schemeOpenOverlapRestriction X i
-  let M := overlapSiteInverse W
-  let h : L ⋙ S ≅ H ⋙ M :=
-    (Functor.rightUnitor (L ⋙ S)).symm ≪≫
-      Functor.isoWhiskerLeft (L ⋙ S) eW.unitIso ≪≫
-        (Functor.associator (L ⋙ S) eW.functor eW.inverse).symm
-  exact (Functor.mapDerivedCategoryCompIso L S).symm ≪≫
-    Functor.mapDerivedCategoryNatIso h ≪≫
-      Functor.mapDerivedCategoryCompIso H M
-
-
 /-- Natural comparison between the canonical open-site overlap functor and the
 scheme pullback at the next stage. The open-site equivalence cancels by its
 counit; the remaining functors agree by the cartesian component equation and
@@ -909,6 +890,95 @@ noncomputable def openSiteReturnIso (X : Scheme.{u}) (U : X.Opens) :
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ e.mapDerivedCategory.unitIso.symm ≪≫
     Functor.rightUnitor _
+
+/-- The open-site overlap comparison can be pinned to the ambient restriction
+triangle. Source: Stacks Project, Tags 08BT and 08BV. Restriction to an open is
+a localization, so its precomposition is fully faithful on functor categories.
+Descend the pasting of the two site-return maps, the over-site comparison and
+the nested scheme restriction comparison. The descent equation is the asserted
+triangle and holds also for the empty open. -/
+theorem openSiteOverlapIso_exists (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
+    let PU := (schemeOpenRestriction X U).mapDerivedCategory
+    let LU := (overlapSiteInverse U).mapDerivedCategory
+    let LW := (overlapSiteInverse W).mapDerivedCategory
+    let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
+    let SU := (schemeOpenOverlapRestriction X i).mapDerivedCategory
+    let RU := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory
+    let RW := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
+    let siteU := openSiteReturnIso X U
+    let siteW := openSiteReturnIso X W
+    let τ : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso
+        (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
+    let σ := schemeDerivedOpenRestrictionCompIso X i
+    ∃ ω : LU ⋙ SP ≅ SU ⋙ LW,
+      Functor.isoWhiskerRight siteU SP ≪≫ τ =
+        Functor.associator PU LU SP ≪≫
+          Functor.isoWhiskerLeft PU ω ≪≫
+            (Functor.associator PU SU LW).symm ≪≫
+              Functor.isoWhiskerRight σ LW ≪≫ siteW := by
+  intro PU LU LW SP SU RU RW siteU siteW τ σ
+  let alpha : PU ⋙ (LU ⋙ SP) ≅ PU ⋙ (SU ⋙ LW) :=
+    (Functor.associator PU LU SP).symm ≪≫
+      Functor.isoWhiskerRight siteU SP ≪≫ τ ≪≫ siteW.symm ≪≫
+        Functor.isoWhiskerRight σ.symm LW ≪≫ Functor.associator PU SU LW
+  obtain ⟨ω, hω⟩ := Scheme.derived_open_restriction_iso_descent X U
+    (LU ⋙ SP) (SU ⋙ LW) alpha
+  refine ⟨ω, ?_⟩
+  rw [hω]
+  dsimp only [alpha]
+  apply Iso.ext
+  ext K
+  have hσ : LW.map (σ.inv.app K) ≫ LW.map (σ.hom.app K) = 𝟙 _ := by
+    rw [← LW.map_comp, Iso.inv_hom_id_app, LW.map_id]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.assoc, Category.id_comp]
+  simpa only [PU, LU, SU, Functor.comp_obj, Category.assoc,
+    Iso.app_hom, Iso.app_inv] using
+    (cancel_iso_pasting
+      (SP.map (siteU.hom.app K) ≫ τ.hom.app K) (siteW.app K)
+      (LW.map (σ.inv.app K)) (LW.map (σ.hom.app K)) hσ)
+
+/-- The natural open-site overlap comparison pinned by restriction descent. -/
+noncomputable def openSiteOverlapIso (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
+    (overlapSiteInverse U).mapDerivedCategory ⋙
+      (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory ≅
+    (schemeOpenOverlapRestriction X i).mapDerivedCategory ⋙
+      (overlapSiteInverse W).mapDerivedCategory :=
+  Classical.choose (openSiteOverlapIso_exists X i)
+
+/-- The site-return comparison is coherent with nested open restriction.
+Source: Stacks Project, Tags 08BV and 05RU. Both composites insert the same
+equivalence unit on the larger open, apply the over-site restriction comparison,
+and cancel the smaller-open equivalence by its unit. Exact derivation preserves
+these associators and natural isomorphisms. -/
+theorem openSiteReturn_overlap_triangle (X : Scheme.{u}) {W U : X.Opens}
+    (i : W ⟶ U) :
+    let PU := (schemeOpenRestriction X U).mapDerivedCategory
+    let PW := (schemeOpenRestriction X W).mapDerivedCategory
+    let LU := (overlapSiteInverse U).mapDerivedCategory
+    let LW := (overlapSiteInverse W).mapDerivedCategory
+    let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
+    let SU := (schemeOpenOverlapRestriction X i).mapDerivedCategory
+    let RU := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory
+    let RW := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
+    let siteU := openSiteReturnIso X U
+    let siteW := openSiteReturnIso X W
+    let τ : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso
+        (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)
+    let σ := schemeDerivedOpenRestrictionCompIso X i
+    let ω := openSiteOverlapIso X i
+    Functor.isoWhiskerRight siteU SP ≪≫ τ =
+      Functor.associator PU LU SP ≪≫
+        Functor.isoWhiskerLeft PU ω ≪≫
+          (Functor.associator PU SU LW).symm ≪≫
+            Functor.isoWhiskerRight σ LW ≪≫ siteW := by
+  intro PU PW LU LW SP SU RU RW siteU siteW τ σ ω
+  exact Classical.choose_spec (openSiteOverlapIso_exists X i)
+
 
 /-- The two paths around an open-restriction square agree by pullback composition.
 Use the fixed composition comparisons and the constructed open-pullback comparisons. -/
