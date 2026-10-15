@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-normal-open-lisse-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A lisse sheaf on a normal open has constructible direct image",
@@ -14,47 +14,226 @@
  },
  "stmt_deps": [
   "def-sbc-normal-dominant-galois",
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-constructible-finite-locally-constant",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "Choose a finite etale surjective $p:P\\to V$ trivializing\n$L$, by [fin2-lem-lisse-trivialized-finite-etale].\nWrite $P=\\coprod P_a$ for its finitely many connected\ncomponents and write the corresponding constant module as\n$M_a$. The adjunction unit\n$L\\to p_*p^*L$ is injective: the finite stalk formula\nof [lemma-weil-pbc-finite-stalk-formula] identifies it\nwith a diagonal into a nonempty finite product of copies\nof the original stalk. Direct image is left exact, so\n\n$$\nk_*L\\hookrightarrow\\prod_a(kp_a)_*\\underline{M_a}.\n$$",
+   "text": "Write $\\Lambda$ for the finite commutative coefficient ring (as in the constructibility convention). The field is Noetherian, since its only ideals are zero and the whole field. Thus $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its open $V$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]; in particular it is quasi-compact. In an affine finite-type chart $\\operatorname{Spec}A$ of $X$, the principal opens $D(f)$ contained in $V$ cover its intersection with $V$. Their rings $A_f=A[t]/(ft-1)$ are finite-type algebras over the field. Quasi-compactness of $V$ selects finitely many such opens, proving that $V$ is of finite type over the field. Choose a finite etale surjective $p:P\\to V$ and finite modules trivializing $p^*L$ on its connected components by [fin2-lem-lisse-trivialized-finite-etale]. A finite algebra is of finite type (its module generators also generate it as an algebra), so $P$ is of finite type over the field and is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-fin-etale-normal-components] to $P\\to V$: write $P=\\coprod_{a=1}^r P_a$ with $P_a$ nonempty open-and-closed normal integral schemes. They are the connected components, so $p^*L|_{P_a}\\cong\\underline{M_a}$ for finite $\\Lambda$-modules $M_a$. The restrictions $p_a:P_a\\to V$ remain finite etale: on an affine base, restriction to an open-and-closed component is passage to an idempotent factor of the finite algebra.",
    "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "fin2-lem-lisse-trivialized-finite-etale",
-    "lemma-weil-pbc-finite-stalk-formula"
+    "lem-fin-etale-normal-components"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
+    "place": "Proof, first paragraph: choose the trivializing cover and its components"
+   }
   },
   {
-   "text": "Extend $P_a$ to the normalization $g_a:Y_a\\to X$\nusing [lem-fin-normalization-extends-cover], and let\n$v_a:P_a\\hookrightarrow Y_a$ be the resulting nonempty\nopen. The source $Y_a$ is normal integral. By\n[lem-fin-normal-constant-open-image],\n$v_{a,*}\\underline{M_a}=\\underline{M_a}_{Y_a}$.\nDirect-image composition, evaluated on objects as in\n[def-weil-pbc-direct-image], therefore gives\n$(kp_a)_*\\underline{M_a}=g_{a,*}\\underline{M_a}$.\nEach of these sheaves is constructible by\n[lem-fin-finite-constant-pushforward]; so is their\nfinite product, by a common finite lisse partition.\nThe subobject theorem\n[lem-weil-pbc-constructible-subobjects-noetherian]\nnow proves constructibility of $k_*L$.",
+   "text": "Let $L_{\\mathrm{ab}}$ denote the underlying abelian sheaf. By [lem-weil-pbc-module-direct-image-left-exact](1) and [lem-weil-pbc-module-abelian-inverse-image-comparison], the underlying morphism of the module adjunction unit $L\\to p_*p^*L$ is the abelian adjunction unit, using its canonical inverse-image comparison. For a geometric point $\\bar v$ of $V$, [lemma-weil-pbc-finite-stalk-formula] identifies its target with $\\prod_{\\bar z\\in P_{\\bar v}}(p^{-1}L_{\\mathrm{ab}})_{\\bar z}$. The germ compatibility in [lem-weil-pbc-inverse-image-stalk-germ] identifies every component of the unit with the identity on $(L_{\\mathrm{ab}})_{\\bar v}$. Hence the stalk map is $m\\mapsto(m)_{\\bar z}$. The fibre is nonempty because $p$ is surjective, so this map is injective. By [lem-weil-pbc-geometric-stalks-detect-mono] the underlying abelian unit is monic. It is therefore also monic as a module morphism: equality of module morphisms can be tested after forgetting the action.",
    "uses": [
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-geometric-stalks-detect-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
+    "place": "Proof, first paragraph: the adjunction unit is a stalkwise diagonal injection"
+   }
+  },
+  {
+   "text": "Each $p_a$ is surjective. Indeed its nonempty image is open by [lem-weil-pbc-etale-morphism-open-map] and closed by [lem-weil-pbc-finite-closed-map-finite-fibres]; the nonempty open $V$ of the integral $X$ is irreducible, so its only nonempty open-and-closed subset is $V$. Put $K=k(X)=k(V)$. The generic fibre of $p_a$ is a nonzero finite-dimensional domain over $K$: over a nonempty affine $\\operatorname{Spec}B\\subseteq V$, write its inverse image as $\\operatorname{Spec}D$. This inverse image is nonempty by surjectivity and is an open of the integral $P_a$, so $D$ is a domain. The ring map $B\\to D$ is injective: surjectivity on spectra implies its kernel is contained in every prime ideal of $B$, hence in the nilradical; $B$ is a domain because $V$ is integral, so this nilradical is zero. Also $D$ is finite over $B$. Thus $(B\\setminus\\{0\\})^{-1}D$ is a nonzero finite-dimensional domain over $K=\\operatorname{Frac}B$. Every nonzero element of a finite-dimensional domain over a field is invertible, because multiplication by it is an injective endomorphism of a finite-dimensional vector space and hence surjective. Thus this generic fibre is the field $K_a=k(P_a)$ and $K_a/K$ is finite.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
+    "place": "Proof, second paragraph: the function fields used to extend the connected covers"
+   }
+  },
+  {
+   "text": "Let $g_a:Y_a\\to X$ be the normalization in $K_a$ of [def-fin-normalization-extension]. By [lem-fin-normalization-extends-cover] its restriction over $V$ is $p_a:P_a\\to V$; hence $P_a=g_a^{-1}(V)$ is a nonempty open subscheme of $Y_a$, with inclusion $v_a$, and $g_av_a=kp_a$. The finite-extension hypothesis needed by [lem-fin-normalization-extension-finite] holds by step 3, so $g_a$ is finite. To justify normality independently of the proof of the cover-extension node, first $X$ is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Apply [lem-weil-pbc-normalization-in-residue-field-extension] at its generic point with residue field $K$ and extension $K_a$: its specified normalization is normal integral with function field $K_a$, and is the same normalization just defined (both have the integral closure of each affine coordinate ring in $K_a$). Finally $Y_a$ is of finite type over the field, since $g_a$ is finite, so [lem-weil-pbc-finite-type-over-noetherian] makes $Y_a$ Noetherian.",
+   "uses": [
+    "def-fin-normalization-extension",
     "lem-fin-normalization-extends-cover",
+    "lem-fin-normalization-extension-finite",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
+    "place": "Proof, second paragraph: extend each component by finite normal integral normalization"
+   }
+  },
+  {
+   "text": "Apply [lem-fin-normal-constant-open-image] to the Noetherian normal integral $Y_a$, its nonempty open $v_a:P_a\\hookrightarrow Y_a$, and the finite module $M_a$. It gives $v_{a,*}\\underline{M_a}\\cong\\underline{M_a}_{Y_a}$. The section formula of [def-weil-pbc-direct-image] then gives $(kp_a)_*\\underline{M_a}\\cong g_{a,*}\\underline{M_a}_{Y_a}$: both compositions of direct images evaluate on an etale object by successive fibre products, canonically the fibre product with the composite map. All maps respect $\\Lambda$-actions. Applying the left-exact functor $k_*$ of [lem-weil-pbc-module-direct-image-left-exact] to step 2 and using the sheaf axiom on the finite disjoint union $P=\\coprod_aP_a$ now gives a monomorphism\n$$k_*L\\lhook\\joinrel\\longrightarrow\\prod_a g_{a,*}\\underline{M_a}_{Y_a}.$$\nFor the disjoint union $Y=\\coprod_aY_a$, define $E$ on an etale object $W\\to Y$ by $E(W)=\\prod_a\\underline{M_a}_{Y_a}(W\\times_Y Y_a)$, with componentwise restriction and module operations. Each component satisfies the sheaf condition, so this formula defines a module sheaf; restricting to $Y_a$ gives $\\underline{M_a}$, since the other fibre products are empty and a module sheaf has zero sections on the empty scheme. Let $g:Y\\to X$ restrict to $g_a$. On every etale object, sections on this disjoint union are the corresponding finite product, so the right hand side is $g_*E$. The morphism $g$ is finite: above an affine $\\operatorname{Spec}B\\subseteq X$ it is the spectrum of the finite product of the finite $B$-algebras for the $g_a$; embed each component algebra's finite module generating set in its factor, with zero in all other factors; the union of these embedded sets generates the product as a $B$-module.",
+   "uses": [
     "lem-fin-normal-constant-open-image",
     "def-weil-pbc-direct-image",
-    "lem-fin-finite-constant-pushforward",
+    "lem-weil-pbc-module-direct-image-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
+    "place": "Proof, second paragraph: constant open image, composition, and the finite product of finite direct images"
+   }
+  },
+  {
+   "text": "The finite clopen partition $Y=\\coprod_aY_a$ and its constant finite module restrictions witness constructibility of $E$ by [def-weil-pbc-etale-constructible-sheaf]. Each stratum is constructible: a clopen subset is retrocompact, since its intersection with any quasi-compact open is closed in that open and hence quasi-compact. The same immersed partition witnesses [def-constructible-constructible] in the coefficient category of $\\Lambda$-modules, which is the precise constructibility hypothesis of the finite-pushforward theorem below; finite constant values are finitely generated modules, and the displayed constant charts provide their local constancy. These constant charts also show that all its geometric stalks are finite by [lem-weil-pbc-finite-locally-constant-module-values](1) implies (2). For the underlying set sheaf these stalks have the same finite values. Explicitly, the set stalk and the underlying set of the module stalk have the same representatives (sections over pointed etale neighbourhoods) and the same eventual-equality relation, by [lem-weil-pbc-filtered-colimit-sets-elementwise] and [lem-weil-pbc-filtered-colimit-modules-elementwise]. The canonical map sending each set germ to the same module germ is therefore bijective. This argument applies also to separably closed points, so finiteness obtained for set stalks below is finiteness of module stalks as sets. Apply [lem-galois-finite-stalks-comparison] to this underlying set sheaf to obtain finiteness also at every separably closed geometric point, as required by the next theorem; no algebraic-closedness hypothesis is silently substituted for separable closedness. Apply [lem-weil-pbc-finite-pushforward-finite-stalk-module] to $g$, $E$, and the Noetherian target $X$ established in step 1. Its finite-stalk hypothesis, as well as constructibility as a module sheaf, has just been checked. It gives that $g_*E$ is constructible as a $\\Lambda$-module sheaf. This uses a module-valued finite-pushforward statement, rather than treating the abelian-valued statement of lem-fin-finite-constant-pushforward as if it already asserted module constructibility.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-constructible-constructible",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "lem-galois-finite-stalks-comparison",
+    "lem-weil-pbc-finite-pushforward-finite-stalk-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
+    "place": "Proof, second paragraph: constructibility of the finite direct images; module-valued version"
+   }
+  },
+  {
+   "text": "The monomorphism $k_*L\\hookrightarrow g_*E$ from step 5 has constructible target by step 6. Apply [lem-weil-pbc-constructible-subobjects-noetherian], with the Noetherian scheme $X$ and the given finite commutative ring $\\Lambda$, to conclude that $k_*L$ is constructible.",
+   "uses": [
     "lem-weil-pbc-constructible-subobjects-noetherian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
+    "place": "Proof, final sentence: apply the Noetherian subobject theorem"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "fin2-lem-lisse-trivialized-finite-etale",
+  "lem-fin-etale-normal-components",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
   "lemma-weil-pbc-finite-stalk-formula",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-geometric-stalks-detect-mono",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-fin-normalization-extension",
   "lem-fin-normalization-extends-cover",
+  "lem-fin-normalization-extension-finite",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
   "lem-fin-normal-constant-open-image",
   "def-weil-pbc-direct-image",
-  "lem-fin-finite-constant-pushforward",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-constructible-constructible",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-galois-finite-stalks-comparison",
+  "lem-weil-pbc-finite-pushforward-finite-stalk-module",
   "lem-weil-pbc-constructible-subobjects-noetherian"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-  "place": "## Proof"
+  "place": "Proof, both paragraphs; expanded hypotheses, unit compatibility, and module-valued finite-pushforward argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(lowerStar|pushforward|direct.image)|normal.*open.*constant",
+   "results": "0 hits; subdirectory AlgebraicGeometry",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct image of a finite locally constant etale module sheaf along a normal nonempty open immersion into an integral finite type scheme over a field is constructible",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; PrimeSpectrum.isConstructible_range_comap; PrimeSpectrum.isConstructible_comap_image; PrimeSpectrum.exists_range_eq_of_isConstructible; Topology.IsConstructible.image_of_isOpenEmbedding; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; Topology.isConstructible_preimage_iff_of_isOpenEmbedding",
+   "date": "2026-10-15",
+   "verdict": "no match: hits concern constructible subsets of schemes, not constructible etale sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"Sheaf\"",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pushforward of a finite locally constant etale sheaf from a normal open subscheme is constructible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of locally constant sheaf by open immersion is constructible for schemes of finite type over a field",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; Topology.IsConstructible.image_of_isOpenEmbedding; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; Topology.isConstructible_preimage_iff_of_isOpenEmbedding; Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding; Topology.IsConstructible.preimage_of_isOpenEmbedding; PrimeSpectrum.exists_range_eq_of_isConstructible",
+   "date": "2026-10-15",
+   "verdict": "no match: hits concern constructible subsets of schemes, not constructible etale sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|locallyConstant",
+   "results": "0 hits; subdirectory CategoryTheory/Sites",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of modules are preserved by direct image along a finite morphism of Noetherian schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.Hom.isConstructible_image; PrimeSpectrum.isConstructible_comap_image; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; PrimeSpectrum.isConstructible_range_comap; SheafOfModules.IsFiniteType; AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian; PrimeSpectrum.ConstructibleSetData.map",
+   "date": "2026-10-16",
+   "verdict": "no match: subset constructibility, finite-type module sheaves and source Noetherianity do not assert constructibility of direct images of etale sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleSheaf|isConstructibleSheaf|IsFiniteLocallyConstant",
+   "results": "0 hits in Mathlib/",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"sheaf\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ConstructibleSheaf|constructibleSheaf|finite.*etale.*pushforward",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constructible\"",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -90,5 +269,104 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-fin-normal-open-lisse-image",
+  "worker": "stage1",
+  "summary": "Expanded the two imported paragraphs into seven checked steps. Reused existing nodes for finite-type Noetherianity, normal integral components, unit/stalk comparisons, finite normalizations and module-valued finite pushforward. Combined the finite factors into one finite map from their disjoint union. Statement unchanged; no new nodes. Current-DAG repair after an unrelated landing-lock timeout: reread all 26 distinct proof citations and six statement dependencies; every saved proof-citation statement is unchanged. Expanded the affine kernel argument in step 3 to use reducedness of the integral base explicitly.",
+  "blueprint": "Steps 1-2 realize paragraph 1 (finite etale trivialization and diagonal unit); step 3 checks the implicit generic-field extension; steps 4-6 realize paragraph 2 (finite normalizations, constant extension and finite constructible images); step 7 is its final subobject argument.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic normality and finite clopen integral decomposition for the finite etale trivializing cover; the current unit does not state the normality ascent result."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic left exactness and abelian forgetful compatibility of module direct images; used for the adjunction unit and its pushforward."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "why": "Generic canonical comparison carrying the module adjunction unit to its abelian counterpart; necessary for the finite abelian stalk formula."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic finite stalk formula for the unit injection, exactly as in the blueprint proof."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic inverse-image stalk isomorphism with germ compatibility to identify the components of the unit with identity maps."
+   },
+   {
+    "node": "lem-weil-pbc-etale-morphism-open-map",
+    "why": "Generic openness tool, establishing surjectivity of each nonempty connected finite etale component."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic closedness of finite maps, paired with openness to prove componentwise surjectivity."
+   },
+   {
+    "node": "lem-fin-normalization-extension-finite",
+    "why": "Generic finiteness of normalization in a finite function-field extension; not included in the statement of the unit cover-extension lemma."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic quasi-separatedness tool to check the normalization-in-residue-field-extension hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Generic normality and integrality of the explicitly specified normalization; not taken from the proof of the cover-extension node."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-constant-module-values",
+    "why": "Generic finite-constant-chart versus finite-stalk equivalence for module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-finite-stalk-module",
+    "why": "Generic module-valued finite-pushforward theorem, used in place of the unit abelian-valued constant-pushforward statement; preserves the same finite-pushforward route."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-subobjects-noetherian",
+    "why": "Generic Noetherian constructible subobject theorem, used at the last step exactly as in the blueprint."
+   },
+   {
+    "node": "lem-galois-finite-stalks-comparison",
+    "why": "Generic comparison of finite algebraically closed stalks with the separably closed stalks required by the module-valued finite-pushforward theorem."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "why": "Generic representative and eventual-equality description of filtered colimits; identifies set stalks with the underlying sets of module stalks in step 6."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "why": "Generic representative and eventual-equality description of filtered colimits; identifies set stalks with the underlying sets of module stalks in step 6."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-etale-normal-components",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-fin-normalization-extension-finite",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-finite-pushforward-finite-stalk-module",
+  "lem-weil-pbc-constructible-subobjects-noetherian",
+  "lem-galois-finite-stalks-comparison",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q36-86d21fd99",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-86d21fd99 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources, and unit/chapter route in full. All seven steps are sound, including canonical unit compatibility, finite normalization hypotheses, and module-valued constructibility. Checked edge cases, generalization candidates, dependency cycles, and exact archived target categories. No new nodes or repairs. Concrete audit and accepted tool uses recorded in review.md."
+ }
 }
