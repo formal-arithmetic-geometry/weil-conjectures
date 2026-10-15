@@ -3,28 +3,98 @@
  "blueprint": {
   "is": "def-kun-kunneth-map",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The Kunneth map",
- "statement": "Consider a\ncartesian square in the\ncategory of schemes\n\n$$\n\\begin{array}{ccc}\nX\\times_SY&\\xrightarrow{\\;q\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle p}&&\\Big\\downarrow{\\scriptstyle g}\\\\\nX&\\xrightarrow{\\;f\\;}&S\n\\end{array}\n$$\n\nand set $c=f\\circ p=g\\circ q$. Let $\\Lambda$ be a commutative ring\nand let $E\\in D(X_{\\Et},\\Lambda)$, $K\\in D(Y_{\\Et},\\Lambda)$; here\nderived direct images are computed by the K-injective resolutions of\n[prop-weil-pbc-kinjective-resolutions-exist], so they are defined\non the unbounded derived categories. The *Kunneth map* (or\n*external product*) is the morphism\n\n$$\n\\kappa_{E,K}:\\quad\nRf_*E\\kunotimes{\\Lambda}Rg_*K\\longrightarrow\nRc_*\\bigl(p^{-1}E\\kunotimes{\\Lambda}q^{-1}K\\bigr)\n$$\n\nin $D(S_{\\Et},\\Lambda)$ which is adjoint (under the adjunction\n$c^{-1}\\dashv Rc_*$ of [def-weil-pbc-inverse-image]) to the\ncomposite\n\n$$\nc^{-1}\\bigl(Rf_*E\\kunotimes{\\Lambda}Rg_*K\\bigr)\n\\;\\cong\\;\np^{-1}f^{-1}Rf_*E\\kunotimes{\\Lambda}q^{-1}g^{-1}Rg_*K\n\\xrightarrow{\\ \\varepsilon_f\\otimes\\varepsilon_g\\ }\np^{-1}E\\kunotimes{\\Lambda}q^{-1}K,\n$$\n\nwhere the first isomorphism is the monoidality isomorphism of\n[lem-kun-inverse-image-monoidal] for the inverse image functors\ntogether with the canonical identifications\n$c^{-1}\\cong p^{-1}f^{-1}$ and $c^{-1}\\cong q^{-1}g^{-1}$, and\n$\\varepsilon_f$, $\\varepsilon_g$ are the derived counits of\n[def-weil-pbc-inverse-image].",
+ "statement": "Let $X,Y,S$ be schemes and let\n$$\n\\begin{array}{ccc}\nZ=X\\times_SY&\\xrightarrow{\\;q\\;}&Y\\\\\np\\downarrow&&\\downarrow g\\\\\nX&\\xrightarrow{\\;f\\;}&S\n\\end{array}\n$$\nbe a cartesian square [def-weil-pbc-cartesian-square], with $c=f\\circ p=g\\circ q$. Fix a commutative ring $\\Lambda$. Work on small representatives of the small etale sites in a universe large enough for the module sheaves [def-weil-size-convention], with the unbounded categories $D(T_{\\Et},\\Lambda)$ of [def-weil-pbc-derived-categories]. All tensor products below are the ordinary uncompleted derived tensor product [def-kun-derived-tensor], acting on pairs of morphisms through the bifunctor of [lem-weil-pbc-site-derived-tensor-descent].\n\nFor every scheme morphism $u:U\\to V$ in the diagram, use the inverse image of [def-weil-pbc-inverse-image] on constant-coefficient module sheaves. It is additive, exact and left adjoint to $u_*$ [prop-weil-pbc-inverse-image-modules-exact]. Denote its termwise descent to the unbounded derived categories again by $u^{-1}$ [lem-weil-pbc-exact-functor-derived-factorization]. For a representing complex $C$ and a K-injective resolution $C\\to I$ [def-weil-pbc-kinjective-resolutions], [prop-weil-pbc-kinjective-resolutions-exist], use $Ru_*(QC)=Q(u_*I)$, the total right derived functor supplied by [lem-weil-pbc-kinjective-total-derived]. Use the canonical adjunction $u^{-1}\\dashv Ru_*$, with unit $\\eta_u$ and counit $\\varepsilon_u$. Its Hom bijection is the composite\n$$\n\\operatorname{Hom}_{D(U_{\\Et},\\Lambda)}(u^{-1}QM,QI)\n\\cong\\operatorname{Hom}_{K(U_{\\Et},\\Lambda)}(u^{-1}M,I)\n\\cong\\operatorname{Hom}_{K(V_{\\Et},\\Lambda)}(M,u_*I)\n\\cong\\operatorname{Hom}_{D(V_{\\Et},\\Lambda)}(QM,Q(u_*I)),\n$$\nwhere $K(T_{\\Et},\\Lambda)$ denotes the category of cochain complexes modulo chain homotopy. These are the K-injective Hom bijections [lem-weil-pbc-kinjective-hom-derived] and the termwise adjunction [lem-weil-pbc-termwise-adjunction-homotopy]; $u_*I$ is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective], since its left adjoint is exact.\n\nUse the canonical composition identifications\n$$\n\\gamma_{f,p}:c^{-1}\\xrightarrow{\\sim}p^{-1}f^{-1},\\qquad\n\\gamma_{g,q}:c^{-1}\\xrightarrow{\\sim}q^{-1}g^{-1}.\n$$\nThey are the inverses of the sheaf composition isomorphisms of [lem-weil-pbc-inverse-image-composition], with their canonical constant-coefficient module lifts supplied by clause (2) of [lem-weil-pbc-inverse-image-composition-module-linear], then applied termwise and descended by clause (2) of [lem-weil-pbc-localization-universal-property]. The cited module-linearity lemma states that these very sheaf composition maps respect the module actions of [prop-weil-pbc-inverse-image-modules-exact] and the composite-adjunction units. Naturality also makes them commute with the differentials of complexes; exactness makes both composite functors preserve quasi-isomorphisms. Thus this construction uses unbounded module categories, without invoking a bounded-below composition assertion.\n\nLet $E\\in D(X_{\\Et},\\Lambda)$ and $K\\in D(Y_{\\Et},\\Lambda)$, and put\n$$\nA=Rf_*E\\kunotimes{\\Lambda}Rg_*K,\\qquad\nB=p^{-1}E\\kunotimes{\\Lambda}q^{-1}K.\n$$\nWrite $\\mu^c_{L,M}:c^{-1}L\\kunotimes{\\Lambda}c^{-1}M\\xrightarrow{\\sim}c^{-1}(L\\kunotimes{\\Lambda}M)$ for the canonical comparison of [lem-kun-inverse-image-monoidal]. Define $\\alpha_{E,K}:c^{-1}A\\to B$ to be the composite\n$$\n\\begin{aligned}\nc^{-1}A\n&\\xrightarrow{(\\mu^c_{Rf_*E,Rg_*K})^{-1}}\nc^{-1}Rf_*E\\kunotimes{\\Lambda}c^{-1}Rg_*K\\\\\n&\\xrightarrow{\\gamma_{f,p,Rf_*E}\\kunotimes{\\Lambda}\\gamma_{g,q,Rg_*K}}\np^{-1}f^{-1}Rf_*E\\kunotimes{\\Lambda}q^{-1}g^{-1}Rg_*K\\\\\n&\\xrightarrow{p^{-1}(\\varepsilon_{f,E})\\kunotimes{\\Lambda}q^{-1}(\\varepsilon_{g,K})}\np^{-1}E\\kunotimes{\\Lambda}q^{-1}K=B.\n\\end{aligned}\n$$\nThe *Kunneth map* (or *external product map*) is the morphism in $D(S_{\\Et},\\Lambda)$ defined by\n$$\n\\kappa_{E,K}: A\\xrightarrow{\\eta_{c,A}}Rc_*c^{-1}A\n\\xrightarrow{Rc_*(\\alpha_{E,K})}Rc_*B.\n$$\nEquivalently, it is the morphism adjoint to $\\alpha_{E,K}$ under $c^{-1}\\dashv Rc_*$. This definition imposes no boundedness, properness, finite-type or torsion assumption and includes no assertion that $\\kappa_{E,K}$ is an isomorphism.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-kunneth-map.md",
   "place": "node def-kun-kunneth-map, order 1740"
  },
  "stmt_deps": [
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-weil-pbc-inverse-image",
-  "lem-kun-inverse-image-monoidal",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-size-convention",
+  "def-weil-pbc-derived-categories",
   "def-kun-derived-tensor",
-  "def-weil-pbc-cartesian-square"
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-inverse-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-pbc-kinjective-resolutions",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-kun-inverse-image-monoidal"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kunneth|externalProduct",
+   "results": "Mathlib/CategoryTheory/Limits/Sifted.lean; Mathlib/CategoryTheory/Limits/Sifted.lean; Mathlib/CategoryTheory/Limits/Sifted.lean; Mathlib/CategoryTheory/Limits/Sifted.lean; Mathlib/CategoryTheory/Limits/Sifted.lean; Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract monoidal-adjunction operations, external products of diagrams and degreewise Tor do not state this derived etale morphism for two different scheme maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kunneth\"",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract monoidal-adjunction operations, external products of diagrams and degreewise Tor do not state this derived etale morphism for two different scheme maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth external product morphism from tensor of derived direct images to derived direct image of external tensor, adjoint to tensor of counits",
+   "results": "CategoryTheory.Tor_map; CategoryTheory.Tor'_obj_map; CategoryTheory.Tor'_map_app; CategoryTheory.Tor'; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; CategoryTheory.MonoidalCategory.externalProductCompDiagIso; CategoryTheory.Tor_obj",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract monoidal-adjunction operations, external products of diagrams and degreewise Tor do not state this derived etale morphism for two different scheme maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical Kunneth map in unbounded derived categories of etale sheaves defined by the inverse image direct image adjunction",
+   "results": "none; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|Künneth|derivedTensor|tensorDerived",
+   "results": "none (subdirectory AlgebraicGeometry)",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract monoidal-adjunction operations, external products of diagrams and degreewise Tor do not state this derived etale morphism for two different scheme maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Monoidal, Adjunction",
+   "results": "none; loogle: unknown identifier 'Functor.Monoidal'",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: query rejected because Functor.Monoidal is unknown; valid searches also recorded"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lax monoidal right adjoint comparison tensor pushforward objects to pushforward tensor pullback objects obtained as mate of counits",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.frobeniusMorphism; CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.tensorRightAdjunction; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.frobeniusMorphism_mate",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract monoidal-adjunction operations, external products of diagrams and degreewise Tor do not state this derived etale morphism for two different scheme maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"tensor\"",
+   "results": "CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc; AlgCat.tensorAlgebraAdj; CategoryTheory.tensorLeftAdjunction; CategoryTheory.tensorRightAdjunction; CategoryTheory.Types.tensorProductAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract monoidal-adjunction operations, external products of diagrams and degreewise Tor do not state this derived etale morphism for two different scheme maps"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -53,5 +123,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-kun-kunneth-map",
+  "worker": "stage1",
+  "summary": "Split the definition into existing construction dependencies, making the unbounded constant-coefficient derived adjunction explicit through K-injective Hom bijections, descending the sheaf composition isomorphisms to module complexes, and writing the inverse monoidality comparison and the unit/direct-image formula with all types. No hypotheses or mathematical map changed; no new nodes. No exact project attachment or Mathlib match found. Maintainer-reader citation repair: cite the existing module-linearity lemma for the canonical composition maps, rather than infer compatibility of the pulled-back coefficient identifications from naturality alone.",
+  "blueprint": "The cartesian-square paragraph, displayed Kunneth morphism, displayed adjoint composite and final monoidality/composition/counit sentence of def-kun-kunneth-map are realized. This definition has no proof steps; its construction ingredients are statement dependencies."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-7d87367bb",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-7d87367bb (reviewer sub-agent of L); spot-checked: Read the complete definition, all cited node statements, source passages, and unit/chapter route. Formula agrees with Stacks 0F1E; unbounded ordinary étale coefficients and adjunction directions check out. Repaired one composition-module citation using the existing module-linearity lemma. Corrected whole JSON is under fixes/dag/nodes; concrete checks are in review.md. No new nodes, cycles, target weakening, or major gaps found.; 1 file(s) fixed by the reviewer"
+ }
 }
