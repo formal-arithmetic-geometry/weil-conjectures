@@ -271,5 +271,28 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-6d7a917f1 (reviewer sub-agent of L); spot-checked: Read all six steps, cited statements, blueprint route and source locations. Repaired step 2 by citing the existing proper-open-identification statement, which identifies the restriction composite with the specified theta; removed the unsupported separate base-change normalization claim. Statement unchanged, no new nodes, corrected dependency closure acyclic. Concrete checks and accepted tool_uses are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b5b244ef8",
+  "group": "NN",
+  "result": "pass",
+  "note": "Reviewed immutable snapshot, source, all statement dependencies, canonical declarations, universes, edge cases, docstrings, and verbatim signature. Per-file scompile.py reproduction passed cleanly. No findings or fixes; review.md written and branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenComparisonComposition",
+  "declaration": "AlgebraicGeometry.Etale.properOpenComparison_comp",
+  "declarations": [
+   "AlgebraicGeometry.Etale.properOpenDirectImageCompIso",
+   "AlgebraicGeometry.Etale.properOpenComparison_comp",
+   "AlgebraicGeometry.Etale.properOpenComparison_id"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenComparisonComposition.lean",
+  "statement": "theorem properOpenComparison_comp (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {T₁ T₂ T₃ X : Scheme.{u}} (f : T₁ ⟶ T₂) (g : T₂ ⟶ T₃) [IsProper f] [IsProper g] (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) (j₃ : X ⟶ T₃) [IsOpenImmersion j₁] [IsOpenImmersion j₂] [IsOpenImmersion j₃] (hf : j₁ ≫ f = j₂) (hg : j₂ ≫ g = j₃) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : properOpenComparison Λ (f ≫ g) j₁ j₃ ((Category.assoc j₁ f g).symm.trans ((congrArg (· ≫ g) hf).trans hg)) K = properOpenComparison Λ g j₂ j₃ hg K ≫ (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) g).map (properOpenComparison Λ f j₁ j₂ hf K) ≫ (properOpenDirectImageCompIso Λ f g).hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
