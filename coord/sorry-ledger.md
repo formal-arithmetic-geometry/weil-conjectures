@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **827**, closure **7**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **826**, closure **6**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -21,13 +21,13 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 | root | library | closure |
 |---|---:|---:|
 | Sheaf | 616 | 6 |
-| WeilConjectures | 211 | 1 |
+| WeilConjectures | 210 | 0 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2179 | 83 | 2096 | 6 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 2121 | 81 | 2040 | 6 | 1 |
-| 660345513 (Application of proof-dependency imports) | closure | 1980 | 6 | 1974 | 4 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2179 | 83 | 2096 | 7 | 1 |
+| 660345513 (Application of proof-dependency imports) | library | 2121 | 81 | 2040 | 7 | 1 |
+| 660345513 (Application of proof-dependency imports) | closure | 1980 | 6 | 1974 | 5 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
@@ -35,7 +35,7 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 |---|---:|
 | proved | 3374 |
 | decomposed | 48 |
-| moved | 3909 |
+| moved | 3910 |
 | pruned | 119 |
 | other | 474 |
 
@@ -138,14 +138,13 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Y2 | 108 | 110 | 98 | 12 | 59/108 (54.6%) |
 | Y3 | 103 | 90 | 56 | 34 | 45/103 (43.7%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
-| launcher prover | 6 | 5 | 2 | 3 | 2/6 (33.3%) |
+| launcher prover | 7 | 6 | 3 | 3 | 3/7 (42.9%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
 
 | module | distance | holes | group |
 |---|---:|---:|---|
-| WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty | 0 | 1 | ORCHESTRA |
-| Sheaf.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalVanishing | 14 | 1 | C4 |
+| Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawClassVanishing | 15 | 1 | — |
 | Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality | 16 | 1 | F3 |
 | Sheaf.AlgebraicGeometry.PicardH1ProductSpanningBypass | 16 | 1 | — |
 | Sheaf.AlgebraicGeometry.PicardDerivedFibreResidueBridge | 24 | 1 | X2 |
