@@ -308,6 +308,46 @@ noncomputable def perfectOverlapNaturalComparisonOfSquare
     Functor.isoWhiskerLeft (derivedPullback r) (Functor.leftUnitor _) ≪≫
     perfectOverlapDerivedPullbackTransport r eY eK m hmap
 
+/-- The component of the natural overlap comparison is the site counit
+followed by the cartesian pullback transport. -/
+theorem perfectOverlapNaturalComparisonOfSquare_hom_app
+    {X Y K C T S : Scheme.{u}}
+    (g : X ⟶ Y) (f : K ⟶ Y)
+    (pX : X ⟶ C) (pK : K ⟶ T) (pY : Y ⟶ S)
+    (b : C ⟶ S) (q : T ⟶ S)
+    (hg : IsPullback g pX pY b) (hf : IsPullback f pK pY q)
+    (U V : Y.Opens)
+    (r : (g ⁻¹ᵁ (U ⊓ V)).toScheme ⟶ (f ⁻¹ᵁ (U ⊓ V)).toScheme)
+    (m : pullback ((U ⊓ V).ι ≫ pY) b ⟶
+      pullback ((U ⊓ V).ι ≫ pY) q)
+    (hmap :
+      ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert hg).isoPullback.inv ≫ r =
+        m ≫ ((isPullback_morphismRestrict f (U ⊓ V)).paste_vert hf).isoPullback.inv)
+    (M : schemeDerivedCategory (f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V).toScheme) :
+    let W := g ⁻¹ᵁ (U ⊓ V)
+    let site : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W) ≌
+      SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) :=
+      Scheme.Modules.overEquiv W
+    let eY := ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert hg).isoPullback
+    let eK := ((isPullback_morphismRestrict f (U ⊓ V)).paste_vert hf).isoPullback
+    (perfectOverlapNaturalComparisonOfSquare g f pX pK pY b q hg hf U V r m hmap).hom.app M =
+      (derivedPullback eY.inv).map
+        (site.mapDerivedCategory.counitIso.hom.app ((derivedPullback r).obj M)) ≫
+      (perfectOverlapDerivedPullbackTransport r eY eK m hmap).hom.app M := by
+  intro W site eY eK
+  letI := openComparisonOverModuleAbelian X.toRingedSpace W
+  letI := openComparisonModuleAbelian W.toScheme.toRingedSpace
+  letI : site.functor.IsEquivalence := site.isEquivalence_functor
+  letI : site.inverse.IsEquivalence := site.isEquivalence_inverse
+  letI : site.functor.Additive := Functor.additive_of_preserves_binary_products _
+  letI : site.inverse.Additive := Functor.additive_of_preserves_binary_products _
+  unfold perfectOverlapNaturalComparisonOfSquare
+  exact counit_comparison_component (derivedPullback r)
+    site.inverse.mapDerivedCategory site.functor.mapDerivedCategory
+    (derivedPullback eY.inv) (derivedPullback eK.inv ⋙ derivedPullback m)
+    site.mapDerivedCategory.counitIso
+    (perfectOverlapDerivedPullbackTransport r eY eK m hmap) M
+
 /-- Exact restriction followed by the inverse site equivalence returns to the over-site.
 Use the derived site equivalence's unit and the exact-functor composition comparison. -/
 noncomputable def openSiteReturnIso (X : Scheme.{u}) (U : X.Opens) :
