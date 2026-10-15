@@ -20,11 +20,11 @@
    "elementary": true
   },
   {
-   "text": "Construct a null homotopy of a-a' inductively. Lift its degree-zero term through the first differential using projectivity of P_0. At each subsequent degree lift the remaining defect, whose composition with the differential vanishes by the chain-map equation and the preceding homotopy equation. Use ShortComplex.Exact.liftFromProjective and Homotopy.mkInductive; the target terms need not be projective. This is the projective lifting property [def-weil-pbc-projective-module].",
+   "text": "Apply ModuleCat.augmented_lift_homotopy to P and the restricted exact augmented R-complex with the common augmentation equation from the preceding step. The generic helper gives a homotopy between a and a_prime without projectivity of the target terms. Its projective lifting induction is recorded in its own node, not asserted by the quotient-specialized statement.",
    "uses": [
-    "def-weil-pbc-projective-module"
+    "new-t4-augmented-resolution-lift-homotopy"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
    "text": "For each component H_j define the semilinear tensor map H_j tensor psi by TensorProduct.map and view it as A-linear into restriction of scalars. Quotient compatibility proves that psi is varphi-semilinear. The component vanishes when H_j does. Evaluate the differential identity on pure tensors, use the two equations for k and k', and distribute tensor over the sum in H.comm. TensorProduct.ext proves the full homotopy identity. All these steps are implemented in Lean with no remaining hole.",
@@ -34,7 +34,7 @@
  ],
  "proof_deps": [
   "def-weil-pbc-exact-sequence",
-  "def-weil-pbc-projective-module"
+  "new-t4-augmented-resolution-lift-homotopy"
  ],
  "proof_origin": {
   "by": "worker",
@@ -129,7 +129,11 @@
   "statement": "theorem quotient_tensor_resolution_lift_homotopy\n    {A C : Type u} [CommRing A] [CommRing C]\n    (I : Ideal A) (J : Ideal C) (φ : A →+* C)\n    (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)))\n    (R : ProjectiveResolution (ModuleCat.of C (C ⧸ J))) :\n    let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ)\n    let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex (.down ℕ)\n    ∀ (ψ : (A ⧸ I) →+* (C ⧸ J))\n      (a a' : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n        (.down ℕ)).obj R.complex)\n      (k k' : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n        (.down ℕ)).obj (TC.obj R.complex)),\n      (∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x)) →\n      (∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x)) →\n      (∀ x : P.complex.X 0, R.π.f 0 (a'.f 0 x) = ψ (P.π.f 0 x)) →\n      (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n        k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)) →\n      (∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),\n        k'.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a'.f j x) ⊗ₜ[C] (ψ y)) →\n      Nonempty (Homotopy k k')",
   "branch": "sheaf-dag",
   "by": "H2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "declarations": [
+   "ModuleCat.quotient_tensor_resolution_lift_homotopy"
+  ],
+  "note": "The existing public generic helper is attached separately to new-t4-augmented-resolution-lift-homotopy. This node states and attaches only the quotient-specialized tensor homotopy theorem; no signature or proof body changes in the metadata repair."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -142,14 +146,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H2",
+  "reviewer": "X-26d46",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261014T040540-L-999989",
+  "landing": "20261015T034824-L-298475",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched four DAG signatures and proof dependencies with Lean, verified unchanged existing signatures, compiled both deliveries and all five direct importers, and checked axioms and original/adapted shared modules."
  },
  "lean_audit": {
   "master": {

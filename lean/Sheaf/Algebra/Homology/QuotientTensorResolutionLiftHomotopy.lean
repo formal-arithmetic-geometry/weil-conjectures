@@ -30,7 +30,18 @@ private theorem prevD_chain
   change t j ((ComplexShape.down ℕ).prev j) ≫ M.d ((ComplexShape.down ℕ).prev j) j = _
   rw [ChainComplex.prev]
 
-private theorem augmented_lift_homotopy
+/-- Augmented lifts from a projective resolution into an exact augmented complex
+are homotopic. The terms of the target complex need not be projective.
+
+Source: Stacks Project, Tag 00LS(2), projective lifting proof.
+(blueprint: new-t4-augmented-resolution-lift-homotopy).
+
+Proof: Subtract the two lifts. Lift the degree-zero difference through the
+augmentation kernel using projectivity of the source. At each following degree,
+subtract the homotopy term already constructed. The chain-map equation makes
+this residual morphism a cycle, and exactness and projectivity lift it through
+the next differential. Homotopy.mkInductive assembles these lifts. -/
+theorem augmented_lift_homotopy
     {D : Type*} [Category D] [Abelian D] {M N : D}
     (P : ProjectiveResolution M) (K : ChainComplex D ℕ) (π : K.X 0 ⟶ N)
     (hz : K.d 1 0 ≫ π = 0)

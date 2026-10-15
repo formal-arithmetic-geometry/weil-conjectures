@@ -19,59 +19,35 @@
  },
  "proof": [
   {
-   "text": "On each affine U, use the tilde adjunction counit and the supplied coefficient section linear equivalences sM_U,sN_U to identify M|U,N|U with associated sheaves of MA_U,NA_U. Sheafify the projective-resolution augmentation P_U -> MA_U[0] and extend chain degree j to cochain degree -j. Exact tilde preserves the quasi-isomorphism. Projective terms are flat, so bounded-above flat K-flatness and preservation by tilde and chart restriction make the resulting L_U K-flat.",
+   "text": "Apply qcoh_ordinary_tensor_resolution_coordinates_witness to obtain the affine coordinate family c and, for every basic inclusion, one augmented semilinear tensor comparison satisfying the normalized section restriction equation.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-affine-tilde-kflat",
-    "lem-pc-kflat-open-restriction",
-    "new-affine-derived-tilde-homology-comparison"
+    "new-j1-qcoh-ordinary-tensor-resolution-coordinates-witness"
    ],
    "elementary": false
   },
   {
-   "text": "Exact open restriction preserves K-flatness of the supplied K. Compare K|U -> M|U[0] and L_U -> M|U[0] after tensoring with N|U[0]. Take a K-flat resolution L_N of N|U[0]; the zigzag through K|U tensor L_N and L_U tensor L_N uses the two augmentations and quasi-isomorphisms that are preserved after tensoring by a K-flat factor. This is the cone-and-commuting-square argument of Tag 06YT, implemented by the existing open K-flat tensor homology comparison. Taking homology and inverting the isomorphism legs gives the chart comparison to L_U tensor N|U[0].",
+   "text": "Fix a supplied comparison b,a,k and the witness comparison b',a',k'. Injectivity of sN_V and their two section equations imply b=b'. Injectivity of sM_V and their augmentation equations imply that a and a' have the same augmentation. Restriction of scalars is exact. Apply the existing ModuleCat.augmented_lift_homotopy from QuotientTensorResolutionLiftHomotopy, now public, to these augmented lifts into the restricted exact resolution. The cited generic augmented lifting node states this helper exactly: the restricted target need not be projective. No duplicate augmented lifting induction is proved in this item.",
    "uses": [
-    "lem-pc-open-kflat-tensor-homology-comparison"
+    "new-t4-augmented-resolution-lift-homotopy"
    ],
    "elementary": false
   },
   {
-   "text": "The affine chart total-tensor comparison identifies L_U tensor N|U[0] with tilde of (P_U tensor NA_U), extended by j -> -j. Only the (-j,0) summand occurs, so the differential is d tensor id. HomologicalComplex.extendHomologyIso at -n identifies cochain homology with chain homology at n. Exact tilde homology and the affine section unit give c_U, with normalization from sM_U and sN_U.",
-   "uses": [
-    "lem-pc-affine-chart-total-tensor",
-    "new-affine-derived-tilde-homology-comparison",
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For supplied a,b,k on a basic inclusion V subset U, scalar extension and the tilde adjunction associate their semilinear maps to sheaf maps on V. The first augmentation equation identifies the map induced by a with restriction of M. The sN equation identifies b with restriction of N. The pure tensor equation identifies k with their tensor map. Restrict the U zigzag to V and compare with the V zigzag, replacing the second coefficient resolution by a common K-flat refinement. Tensor functoriality and the augmentation equations make each square commute. Take homology, cancel its invertible legs, and use naturality of extension homology, exact tilde homology and the section unit. This proves the stated equation for every supplied comparison; no lift is constructed. The same argument applies to unbounded K, zero coefficients, zero rings, n=0 and empty basic opens.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-pc-open-kflat-tensor-homology-comparison",
-    "lem-pc-affine-chart-total-tensor",
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
-   "elementary": false
+   "text": "For each homotopy component form its semilinear tensor map with b using TensorProduct.map. On pure tensors the homotopy identity is the original identity tensored with b(y); use the supplied formulas for k and k' and tensor additivity. Use Mathlib Homotopy.prevD_chainComplex for the previous differential, and TensorProduct.ext for equality on all tensors. The private helper semilinear_tensor_resolution_lift_homotopy proves this construction without holes. Homotopy.homologyMap_eq identifies H_n(k) with H_n(k'). Substitute this equality into the witness restriction equation. No assumption on flatness of the ring map, boundedness of K, nonzero coefficients or n>0 enters this transfer.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-chart-total-tensor",
-  "lem-pc-affine-tilde-kflat",
-  "lem-pc-kflat-open-restriction",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pc-open-kflat-tensor-homology-comparison",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "new-affine-derived-tilde-homology-comparison"
+  "new-j1-qcoh-ordinary-tensor-resolution-coordinates-witness",
+  "new-t4-augmented-resolution-lift-homotopy"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "J1",
-  "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/08DX",
-  "place": "Ordinary representative comparison underlying (2); explicit common-resolution zigzag and naturality assembly using 06YT and 01I9."
+  "by": "worker",
+  "group": "T4",
+  "date": "2026-10-15",
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Tag 00LS(2). Repair of the 2026-10-15 duplicate-theorem return: reuse the existing generic augmented homotopy helper in its original module and Mathlib Homotopy.prevD_chainComplex; tensor the homotopy to transfer the existing normalized witness section square. Metadata repair for reviewer X-fe77b: attach the existing coordinate witness and the exact generic augmented lifting theorem as separate nodes, rather than cite the quotient-specialized theorem for generic lifting."
  },
  "mathlib_searches": [
   {
@@ -146,14 +122,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J1",
+  "reviewer": "X-26d46",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261014T084701-L-89097",
+  "landing": "20261015T034824-L-298475",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched four DAG signatures and proof dependencies with Lean, verified unchanged existing signatures, compiled both deliveries and all five direct importers, and checked axioms and original/adapted shared modules."
  },
  "lean_audit": {
   "master": {

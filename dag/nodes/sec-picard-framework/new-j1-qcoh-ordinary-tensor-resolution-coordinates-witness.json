@@ -1,0 +1,167 @@
+{
+ "id": "new-j1-qcoh-ordinary-tensor-resolution-coordinates-witness",
+ "kind": "statement",
+ "title": "Affine ordinary tensor homology coordinates with one normalized comparison per basic inclusion",
+ "statement": "Let Y be a scheme [def-pc-scheme], M and N quasi-coherent O_Y-modules [pqf-def-coherent, def-weil-sheaf-of-modules-category], and, for every affine open U, let MA_U and NA_U be modules over A_U=Gamma(Y,U), with specified A_U-linear equivalences sM_U:MA_U -> Gamma(U,M) and sN_U:NA_U -> Gamma(U,N). Let P_U be a nonnegative projective resolution of MA_U. Let K be an arbitrary, possibly unbounded, K-flat complex [def-pc-kflat-complex] of O_Y-modules, with a quasi-isomorphism q:K -> M[0] [def-pc-quasi-iso-modules], and let n be a natural number. Put Q=H^{-n}(Tot(K tensor N[0])) [def-pc-tensor-complex-sheaves, def-weil-pbc-module-chain-complex-homology]. There is a family of A_U-linear equivalences c_U:H_n(P_U tensor NA_U) -> Gamma(U,Q) such that for every basic inclusion V subset U, with restriction phi:A_U -> A_V, there exist a phi-semilinear coefficient map b:NA_U -> NA_V, a chain map a:P_U -> Res_phi(P_V), and a chain map k:(P_U tensor NA_U) -> Res_phi(P_V tensor NA_V), satisfying all four conditions: sM_V(pi_V(a_0 x))=res_M(sM_U(pi_U x)); sN_V(b y)=res_N(sN_U y); k_j(x tensor y)=a_j(x) tensor b(y) for every j,x,y; and res_Q(c_U x)=c_V(e(H_n(k)(x))) for every homology class x, where e is the canonical exact restriction-of-scalars homology isomorphism. The maps b,a,k are existential witnesses for each inclusion; the statement does not assert the section square for every augmented comparison.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), affine derived tensor calculation; Tag 08DV, associated sheaf of a K-flat complex; Tag 06YT, comparison using a common K-flat resolution; Tag 01I9, functorial associated-sheaf pullback. Attach the chartwise comparison already stated in QCohOrdinaryTensorResolutionCoordinatesFamily."
+ },
+ "proof": [
+  {
+   "text": "For each affine U, use the tilde-Gamma adjunction and the supplied section equivalences sM_U and sN_U to identify the associated sheaves of MA_U and NA_U with M restricted to U and N restricted to U. Normalize these isomorphisms by the actual section equations toOpen(m) maps to sM_U(m), and analogously for N. The affine unit and quasi-coherent counit are isomorphisms. Sheafify P_U and its augmentation and place chain degree j in cochain degree -j; exact associated sheaf preserves the augmentation quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The terms of P_U are projective, hence flat, and its cochain extension is bounded above, so it is K-flat by the bounded-flat criterion. Associated sheaf preserves K-flatness. The supplied K remains K-flat after restricting to U. Choose a K-flat resolution of the second coefficient N restricted to U. The two tensor zigzags through this common resolution compare the ordinary tensors computed using K restricted to U and the sheafified P_U; each leg is a quasi-isomorphism by K-flat tensor invariance. Use the open tensor-homology comparison to identify their homology.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-affine-tilde-kflat",
+    "lem-pc-kflat-open-restriction",
+    "lem-pc-open-kflat-tensor-homology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the sheafified tensor complex with the associated sheaf of P_U tensor NA_U using the affine chart total-tensor isomorphism. Apply the natural exact tilde homology comparison, the degree -n cochain-extension identification with chain homology in degree n, and the affine sections unit. Compose with the previous tensor-homology comparison to obtain c_U, with the prescribed coefficient normalization.",
+   "uses": [
+    "lem-pc-affine-chart-total-tensor",
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a basic inclusion V subset U, define b using restriction of N conjugated by sN_U and sN_V. Define the analogous semilinear map on MA by restriction of M conjugated by sM. Restrict P_V along phi; exact restriction of scalars keeps its augmentation exact. Projectivity of each P_U term lifts the induced augmentation map successively through these exact differentials, giving a. The degree-zero lift has the stated sM augmentation equation. Define k on pure tensors by a_j(x) tensor b(y); the balancing relation, the chain-map equation for a and additivity give the tensor chain map and its displayed formula. These are constructions inside the existence proof, not data taken from an unproved existence theorem in a definition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict both chart tensor zigzags to V and compare them using a common K-flat resolution of the second coefficient. The normalized sM augmentation equation identifies the sheafification of a with restriction of M after augmentation, and the normalized sN equation does the same for b and N. The pure tensor formula identifies k with their tensor comparison. Functoriality of tensor and of the common-resolution zigzag gives the commuting comparison squares. Apply homology and cancel their invertible legs. Naturality of the affine chart total-tensor isomorphism, exact tilde homology and the affine sections unit gives res_Q(c_U x)=c_V(e(H_n(k)(x))). This is the geometric naturality obligation for the one constructed comparison; independence from every other comparison is deliberately left to the parent coordinate theorem. No boundedness of K, flatness of phi, positive-degree assumption, or nonzero ring or module assumption is used.",
+   "uses": [
+    "lem-pc-open-kflat-tensor-homology-comparison",
+    "lem-pc-affine-chart-total-tensor",
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-kflat-open-restriction",
+  "lem-pc-open-kflat-tensor-homology-comparison",
+  "lem-pc-affine-chart-total-tensor",
+  "new-affine-derived-tilde-homology-comparison"
+ ],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), affine derived tensor calculation; Tag 08DV, associated sheaf of a K-flat complex; Tag 06YT, comparison using a common K-flat resolution; Tag 01I9, functorial associated-sheaf pullback. Attach the chartwise comparison already stated in QCohOrdinaryTensorResolutionCoordinatesFamily.",
+  "by": "worker",
+  "group": "T4",
+  "date": "2026-10-15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine ordinary tensor homology coordinates of a quasi coherent sheaf K flat resolution compatible with one semilinear projective resolution comparison on each basic inclusion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveResolution\", \"homology\"",
+   "results": "12 hits: CategoryTheory.ProjectiveResolution.hasHomology, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extLinearEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_neg",
+   "date": "2026-10-15",
+   "verdict": "No exact Mathlib theorem found; attach the already stated chart witness rather than duplicating it."
+  },
+  {
+   "tool": "grep",
+   "query": "qcoh.*tensor.*resolution|tensor.*resolution.*coordinates",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "No exact Mathlib theorem found; attach the already stated chart witness rather than duplicating it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates",
+  "date": "2026-10-15",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine self-Tor computation: normalized ordinary affine tensor-resolution coordinates and one basic-restriction comparison square, before independence of the chosen augmented comparison.",
+   "via": [
+    "new-j1-qcoh-ordinary-tensor-resolution-coordinates",
+    "new-p1-derived-self-tor-affine-coordinates",
+    "new-b3-derived-self-tor-chosen-affine-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinatesFamily",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCohOrdinaryTensorResolutionCoordinatesFamily.lean",
+  "declaration": "AlgebraicGeometry.qcoh_ordinary_tensor_resolution_coordinates_witness",
+  "statement": "theorem qcoh_ordinary_tensor_resolution_coordinates_witness\n    (Y : Scheme.{u}) (M N : SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n    [M.IsQuasicoherent] [N.IsQuasicoherent]\n    (MA NA : ∀ U : Y.affineOpens, ModuleCat.{u} (Γ(Y, U.1) : Type u))\n    (sM : ∀ U : Y.affineOpens, MA U ≃ₗ[Γ(Y, U.1)] M.val.obj (op U.1))\n    (sN : ∀ U : Y.affineOpens, NA U ≃ₗ[Γ(Y, U.1)] N.val.obj (op U.1))\n    (P : ∀ U : Y.affineOpens, ProjectiveResolution (MA U))\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (q : K ⟶ (CochainComplex.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M)\n    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) (hq : QuasiIso q) (n : ℕ) :\n    letI := SheafOfModules.monoidalCategory Y.sheaf\n    let S := CochainComplex.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let Q := (CochainComplex.mapBifunctor K (S.obj N)\n      (curriedTensor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).homology\n        (-(n : ℤ))\n    ∃ c : ∀ U : Y.affineOpens,\n        ((((tensorRight (NA U)).mapHomologicalComplex (.down ℕ)).obj\n          (P U).complex).homology n) ≃ₗ[Γ(Y, U.1)] Q.val.obj (op U.1),\n      ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n        (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1),\n        let φ := (Y.presheaf.map (homOfLE h).op).hom\n        let TA := (tensorRight (NA U)).mapHomologicalComplex (.down ℕ)\n        let TC := (tensorRight (NA V)).mapHomologicalComplex (.down ℕ)\n        ∃ (b : NA U →ₛₗ[φ] NA V)\n          (a : (P U).complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n            (.down ℕ)).obj (P V).complex)\n          (k : TA.obj (P U).complex ⟶\n            ((ModuleCat.restrictScalars φ).mapHomologicalComplex (.down ℕ)).obj\n              (TC.obj (P V).complex)),\n          (∀ x : (P U).complex.X 0,\n            sM V ((P V).π.f 0 (a.f 0 x)) =\n              M.val.map (homOfLE h).op (sM U ((P U).π.f 0 x))) ∧\n          (∀ y : NA U, sN V (b y) = N.val.map (homOfLE h).op (sN U y)) ∧\n          (∀ (j : ℕ) (x : (P U).complex.X j) (y : NA U),\n            k.f j (x ⊗ₜ[Γ(Y, U.1)] y) =\n              (show (P V).complex.X j from a.f j x) ⊗ₜ[Γ(Y, V.1)] (b y)) ∧\n          let e := ((TC.obj (P V).complex).sc n).mapHomologyIso\n            (ModuleCat.restrictScalars φ)\n          ∀ x, Q.val.map (homOfLE h).op (c U x) =\n            c V (e.hom (HomologicalComplex.homologyMap k n x))",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-15",
+  "note": "Attachment to the existing declaration in its existing module; no duplicate Lean theorem or new proof obligation is introduced by this node."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-26d46",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261015T034824-L-298475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-26d46",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261015T034824-L-298475",
+  "kind": "interface",
+  "note": "independent Codex review: Matched four DAG signatures and proof dependencies with Lean, verified unchanged existing signatures, compiled both deliveries and all five direct importers, and checked axioms and original/adapted shared modules."
+ }
+}

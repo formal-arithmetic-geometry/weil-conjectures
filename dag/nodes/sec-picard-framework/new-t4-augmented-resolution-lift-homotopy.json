@@ -1,0 +1,124 @@
+{
+ "id": "new-t4-augmented-resolution-lift-homotopy",
+ "kind": "statement",
+ "title": "Augmented lifts from a projective resolution into an exact complex are homotopic",
+ "statement": "Let D be an abelian category [def-sp-abelian], and let M,N be objects of D. Let P be a projective resolution of M: a nonnegative chain complex of projective objects with an exact augmentation to M. Let K be any nonnegative chain complex in D and pi:K_0 -> N a morphism. Suppose d_1 followed by pi is zero, K_1 -> K_0 -> N is exact, and K_{n+2} -> K_{n+1} -> K_n is exact for every natural n [def-weil-pbc-exact-sequence]. If a,a_prime:P -> K are chain maps and their degree-zero components have equal composites with pi, then there exists a chain homotopy from a to a_prime. The terms of K need not be projective, and pi need not be an epimorphism.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Tag 00LS(2), proof comparing augmented lifts into an arbitrary resolution. The existing Lean proof generalizes the free-module induction to projective objects in an abelian category via ShortComplex.Exact.liftFromProjective; target projectivity and surjectivity of pi are not used."
+ },
+ "proof": [
+  {
+   "text": "Put f=a-a_prime. The augmentation equality gives f_0 followed by pi equal to zero. Exactness of K_1 -> K_0 -> N and projectivity of P_0 give s_0:P_0 -> K_1 with s_0 followed by d_1 equal to f_0, using ShortComplex.Exact.liftFromProjective and liftFromProjective_comp. This is the degree-zero null-homotopy equation; no epimorphism assumption on pi enters.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The chain-map equation for f and the equation for s_0 show that f_1 minus d_P followed by s_0 vanishes after K_1 -> K_0. Exactness of K_2 -> K_1 -> K_0 and projectivity of P_1 lift this residual morphism to s_1:P_1 -> K_2. Rearrange its lift equation as the sum of the two homotopy terms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Inductively, suppose the two preceding components satisfy the homotopy equation. Compose the next residual f_{n+2} minus d_P followed by the last component with d_K. The chain-map equation, the preceding homotopy equation and d_P squared equal to zero make this composite vanish. Exactness at K_{n+2} and projectivity of P_{n+2} produce the next component by ShortComplex.Exact.liftFromProjective. Its composition formula is exactly the next homotopy equation after rearranging subtraction. Homotopy.mkInductive assembles the two initial lifts and this inductive construction into Homotopy f 0. Homotopy.equivSubZero converts it into Homotopy a a_prime. The implemented proof is complete, including degree zero and zero objects.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Tag 00LS(2), proof comparing augmented lifts into an arbitrary resolution. The existing Lean proof generalizes the free-module induction to projective objects in an abelian category via ShortComplex.Exact.liftFromProjective; target projectivity and surjectivity of pi are not used.",
+  "by": "worker",
+  "group": "T4",
+  "date": "2026-10-15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Chain maps from a projective resolution into an exact augmented complex with the same augmentation are chain homotopic",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftHomotopy\"",
+   "results": "12 hits: CochainComplex.mappingCone.liftHomotopy, CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp, CategoryTheory.ProjectiveResolution.liftHomotopyZero, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp_assoc, CategoryTheory.ProjectiveResolution.liftHomotopy, CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc",
+   "date": "2026-10-15",
+   "verdict": "Mathlib supplies projective-target liftHomotopy and the lifting/induction primitives; the existing public helper covers an arbitrary exact target. Attach it in place."
+  },
+  {
+   "tool": "grep",
+   "query": "liftHomotopy|liftFromProjective|mkInductive",
+   "results": "11 hits: Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+   "date": "2026-10-15",
+   "verdict": "Mathlib supplies projective-target liftHomotopy and the lifting/induction primitives; the existing public helper covers an arbitrary exact target. Attach it in place."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates",
+  "date": "2026-10-15",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine self-Tor computation: comparison-independence step for two normalized augmented resolution lifts, prior to tensoring their homotopy with the fixed coefficient map.",
+   "via": [
+    "new-j1-qcoh-ordinary-tensor-resolution-coordinates",
+    "new-p1-derived-self-tor-affine-coordinates",
+    "new-b3-derived-self-tor-chosen-affine-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.QuotientTensorResolutionLiftHomotopy",
+  "file": "lean/Sheaf/Algebra/Homology/QuotientTensorResolutionLiftHomotopy.lean",
+  "declaration": "ModuleCat.augmented_lift_homotopy",
+  "statement": "theorem augmented_lift_homotopy\n    {D : Type*} [Category D] [Abelian D] {M N : D}\n    (P : ProjectiveResolution M) (K : ChainComplex D ℕ) (π : K.X 0 ⟶ N)\n    (hz : K.d 1 0 ≫ π = 0)\n    (hzero : (ShortComplex.mk (K.d 1 0) π hz).Exact)\n    (hsucc : ∀ n : ℕ,\n      (ShortComplex.mk (K.d (n + 2) (n + 1)) (K.d (n + 1) n)\n        (K.d_comp_d _ _ _)).Exact)\n    (a a' : P.complex ⟶ K) (haug : a.f 0 ≫ π = a'.f 0 ≫ π) :\n    Nonempty (Homotopy a a')",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-15",
+  "note": "Attachment to the existing declaration in its existing module; no duplicate Lean theorem or new proof obligation is introduced by this node."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-26d46",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261015T034824-L-298475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-26d46",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261015T034824-L-298475",
+  "kind": "interface",
+  "note": "independent Codex review: Matched four DAG signatures and proof dependencies with Lean, verified unchanged existing signatures, compiled both deliveries and all five direct importers, and checked axioms and original/adapted shared modules."
+ }
+}
