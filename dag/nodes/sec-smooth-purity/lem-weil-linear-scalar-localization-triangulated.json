@@ -224,5 +224,23 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-aa530a648 (reviewer sub-agent of L); spot-checked: Read the full item, report, all cited statements, primary-source passages, and chapter/unit route. All seven proof steps pass, including both Ore squares, MS6, arbitrary-functor localization, and zero/nilpotent scalar cases. Corrected step 6’s universal-property source from Tag 04VC to 04VG (lemma-properties-left-localization). Whole corrected JSON and review.md written; no new nodes, target weakening, or coefficient-category identification.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-12f913639",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Verified statement clauses, dependencies, canonical shift and exactness, edge cases, independent universes, docstrings, report sections, and verbatim signature. Server-only compilation reproduced cleanly. No delivery errors or repository changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationTriangulated",
+  "declaration": "CategoryTheory.ScalarLocalization.exists_triangulated_scalarLocalization",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationTriangulated.lean",
+  "statement": "theorem exists_triangulated_scalarLocalization (R : Type r) [CommRing R] (C : Type u) [Category.{v} C] [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [(shiftFunctor C (1 : ℤ)).Linear R] (p : R) : ∃ z : HasZeroObject (ScalarLocalization R C p), (fun [zeroInst : HasZeroObject (ScalarLocalization R C p)] ↦ ∃ s : HasShift (ScalarLocalization R C p) ℤ, (fun [shiftInst : HasShift (ScalarLocalization R C p) ℤ] ↦ shiftFunctor (ScalarLocalization R C p) (1 : ℤ) = map R C p (shiftFunctor C (1 : ℤ)) ∧ ∃ a : ∀ n : ℤ, (shiftFunctor (ScalarLocalization R C p) n).Additive, (fun [addInst : ∀ n : ℤ, (shiftFunctor (ScalarLocalization R C p) n).Additive] ↦ ∃ q : (localization R C p).CommShift ℤ, (fun [commInst : (localization R C p).CommShift ℤ] ↦ (∀ X : C, HEq (((localization R C p).commShiftIso (1 : ℤ)).hom.app X) (𝟙 ((localization R C p).obj ((shiftFunctor C (1 : ℤ)).obj X)))) ∧ ∃ t : Pretriangulated (ScalarLocalization R C p), (fun [triInst : Pretriangulated (ScalarLocalization R C p)] ↦ IsTriangulated (ScalarLocalization R C p) ∧ (localization R C p).IsTriangulated ∧ ∀ T : Triangle (ScalarLocalization R C p), T ∈ distTriang (ScalarLocalization R C p) ↔ ∃ T' : Triangle C, T' ∈ distTriang C ∧ Nonempty (T ≅ (localization R C p).mapTriangle.obj T')) (triInst := t)) (commInst := q)) (addInst := a)) (shiftInst := s)) (zeroInst := z)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
