@@ -217,5 +217,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit",
+  "declaration": "CategoryTheory.ringedStrictTowerHomotopyLimit",
+  "file": "lean/Sheaf/CategoryTheory/RingedStrictTowerHomotopyLimit.lean",
+  "statement": "theorem ringedStrictTowerHomotopyLimit {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J RingCat.{u}) (_hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} R)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u, u, u, u} R)] : ∃ (RF : DerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u, u, u, u} R) ⥤ DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} R)) (η : (lim : (ℕᵒᵖ ⥤ ringedSiteModules.{u, u, u, u} R) ⥤ ringedSiteModules.{u, u, u, u} R).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ RF), RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{u, u, u, u} R) (ComplexShape.up ℤ)) ∧ (∀ I, CochainComplex.IsKInjective I → IsIso (η.app I)) ∧ (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{u, u, u, u} R) ℤ), ∃ (I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{u, u, u, u} R) ℤ) (j : X ⟶ I), I.IsKInjective ∧ QuasiIso j) ∧ ∃ (_hshift : RF.CommShift ℤ) (_hproducts : HasCountableProducts (DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} R))) (E : DerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u, u, u, u} R) ⥤ (ℕᵒᵖ ⥤ DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} R))) (_ε : DerivedCategory.Q.{w} ⋙ E ≅ HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙ (Functor.whiskeringRight ℕᵒᵖ (CochainComplex (ringedSiteModules.{u, u, u, u} R) ℤ) (DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} R))).obj DerivedCategory.Q.{w}) (p : ∀ Z, RF.obj Z ⟶ ∏ᶜ (fun n : ℕ ↦ (E.obj Z).obj (op n))) (δ : ∀ Z, (∏ᶜ (fun n : ℕ ↦ (E.obj Z).obj (op n))) ⟶ (RF.obj Z)⟦(1 : ℤ)⟧), RF.IsTriangulated ∧ (∀ Z, IsDerivedLimitTriangle (fun n : ℕ ↦ (E.obj Z).map (homOfLE (Nat.le_succ n)).op) (RF.obj Z) (p Z) (δ Z)) ∧ (∀ {Z W} (v : Z ⟶ W), RF.map v ≫ p W = p Z ≫ Limits.Pi.map (fun n : ℕ ↦ (E.map v).app (op n))) ∧ (∀ {Z W} (v : Z ⟶ W), Limits.Pi.map (fun n : ℕ ↦ (E.map v).app (op n)) ≫ δ W = δ Z ≫ (RF.map v)⟦(1 : ℤ)⟧') ∧ (∀ Z, (∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m), (E.obj Z).map (homOfLE h).op = 0) → IsZero (RF.obj Z)) ∧ (∀ (X Y : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{u, u, u, u} R) ℤ) (v : X ⟶ Y), (∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m), (E.obj (DerivedCategory.Q.{w}.obj (CochainComplex.mappingCone v))).map (homOfLE h).op = 0) → IsIso (RF.map (DerivedCategory.Q.{w}.map v)))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e9f45d306",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, eight dependencies, sources, edge cases, docstrings, and verbatim signature. Server-only compile reproduced cleanly in 3.7 seconds. No delivery errors found; branch and project clones unchanged."
  }
 }
