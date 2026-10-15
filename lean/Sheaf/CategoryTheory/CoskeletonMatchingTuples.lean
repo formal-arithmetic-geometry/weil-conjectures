@@ -69,6 +69,73 @@ theorem exists_coskeleton_matching_tuples
           (e W' (g ≫ h)).val k α = g ≫ (e W h).val k α) ∧
         (∀ (k : SimplexCategory.Truncated m) (α : i.obj k ⟶ SimplexCategory.mk n),
           (e (K _⦋n⦌) (c.app (op (SimplexCategory.mk n)))).val k α = K.map α.op) := by
-  sorry
+  classical
+  dsimp
+  obtain ⟨R, ε, hR, hpoint, _⟩ :=
+    truncatedCoskeletonFiniteLimits.{u, v, 0, 0} C (n - 1)
+  let i := SimplexCategory.Truncated.inclusion (n - 1)
+  let V := (truncation (n - 1)).obj K
+  let L := R.obj V
+  let ε' := ε.app V
+  let : L.IsRightKanExtension ε' := hR V
+  let c : K ⟶ L := Functor.liftOfIsRightKanExtension _ ε' K (𝟙 V)
+  have hc : (truncation (n - 1)).map c ≫ ε' = 𝟙 V :=
+    Functor.liftOfIsRightKanExtension_fac _ ε' K (𝟙 V)
+  let F := fun W : C ↦
+    {x : ∀ (k : SimplexCategory.Truncated (n - 1)),
+        (i.obj k ⟶ SimplexCategory.mk n) → (W ⟶ K.obj (op (i.obj k))) //
+      ∀ (k' k : SimplexCategory.Truncated (n - 1)) (ψ : k' ⟶ k)
+        (α : i.obj k ⟶ SimplexCategory.mk n),
+        x k α ≫ K.map (i.map ψ).op = x k' (i.map ψ ≫ α)}
+  let J := StructuredArrow (op (SimplexCategory.mk n)) i.op
+  let D : J ⥤ C := StructuredArrow.proj _ i.op ⋙ V
+  let t := (Functor.RightExtension.mk L ε').coneAt (op (SimplexCategory.mk n))
+  let ht : IsLimit t := (hpoint V).some _
+  let coneOf : ∀ W : C, F W → Cone D := fun W x ↦
+    { pt := W
+      π :=
+        { app := fun j ↦ x.val j.right.unop j.hom.unop
+          naturality := by
+            intro j j' f
+            dsimp
+            rw [Category.id_comp]
+            have hw := congrArg Quiver.Hom.unop (StructuredArrow.w f)
+            dsimp at hw
+            rw [← hw]
+            exact (x.property _ _ f.right.unop j.hom.unop).symm } }
+  let family : ∀ W : C, (W ⟶ L _⦋n⦌) → F W := fun W h ↦
+    ⟨fun k α ↦ h ≫ L.map α.op ≫ ε'.app (op k), by
+      intro k' k ψ α
+      have hh := ε'.naturality ψ.op
+      change L.map (i.map ψ).op ≫ ε'.app (op k') =
+        ε'.app (op k) ≫ K.map (i.map ψ).op at hh
+      simp only [op_comp, L.map_comp, Category.assoc, hh]⟩
+  let e : ∀ W : C, (W ⟶ L _⦋n⦌) ≃ F W := fun W ↦
+    { toFun := family W
+      invFun := fun x ↦ ht.lift (coneOf W x)
+      left_inv := by
+        intro h
+        apply ht.hom_ext
+        intro j
+        rw [ht.fac]
+        rfl
+      right_inv := by
+        intro x
+        apply Subtype.ext
+        funext k α
+        exact ht.fac (coneOf W x) (StructuredArrow.mk α.op) }
+  refine ⟨L, ε', hR V, c, hc, e, ?_, ?_, ?_⟩
+  · intro W h k α
+    rfl
+  · intro W' W g h k α
+    change (g ≫ h) ≫ L.map α.op ≫ ε'.app (op k) =
+      g ≫ h ≫ L.map α.op ≫ ε'.app (op k)
+    rw [Category.assoc]
+  · intro k α
+    change c.app (op (SimplexCategory.mk n)) ≫ L.map α.op ≫ ε'.app (op k) = K.map α.op
+    have hck := NatTrans.congr_app hc (op k)
+    change c.app (op (i.obj k)) ≫ ε'.app (op k) = 𝟙 _ at hck
+    rw [← Category.assoc, ← c.naturality, Category.assoc]
+    exact (congrArg (fun f ↦ K.map α.op ≫ f) hck).trans (Category.comp_id _)
 
 end CategoryTheory.SimplicialObject

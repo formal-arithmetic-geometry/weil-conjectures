@@ -26,32 +26,31 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-truncated-coskeleton-finite-limits] (1) to $m=n-1$ and $U=V=\\mathrm{sk}_{n-1}K$ [def-weil-pbc-simplicial-coskeleton]. It gives an $(n-1)$-coskeleton $(L,\\varepsilon)$ with $L_j=\\lim V(j)$ and an isomorphism $\\varepsilon:\\mathrm{sk}_{n-1}L\\to V$. The indexing category has one object for each order-preserving $\\alpha:[k]\\to[j]$ with $k\\leq n-1$, and an arrow $\\alpha'\\to\\alpha$ for each order-preserving $\\psi:[k']\\to[k]$ with $\\alpha'=\\alpha\\circ\\psi$. Write $p_{j,\\alpha}:L_j\\to K_k$ for its cone projections. The stated description of the simplicial maps induced by postcomposition gives $p_{k,\\mathrm{id}}\\circ L(\\alpha)=p_{n,\\alpha}$ for $\\alpha:[k]\\to[n]$. For $k\\leq n-1$, $\\mathrm{id}_{[k]}$ is terminal in $(\\Delta/[k])_{\\leq n-1}$: every $\\beta:[j]\\to[k]$ has the unique arrow $\\beta\\to\\mathrm{id}_{[k]}$ given by $\\beta$. Hence it is initial in the opposite indexing category and $p_{k,\\mathrm{id}}:L_k\\to K_k$ is an isomorphism, with inverse determined by the cone $(K(\\beta):K_k\\to K_j)_\\beta$. For $\\psi:[k']\\to[k]$ between degrees at most $n-1$, the induced-map equation and the cone equation give $p_{k',\\mathrm{id}}\\circ L(\\psi)=p_{k,\\psi}=K(\\psi)\\circ p_{k,\\mathrm{id}}$. Thus $p_{.,\\mathrm{id}}:\\mathrm{sk}_{n-1}L\\to V$ is a natural isomorphism. Put $a=\\varepsilon\\circ p_{.,\\mathrm{id}}^{-1}$, a natural automorphism of $V$. Then $\\varepsilon_k\\circ L(\\alpha)\\circ h=a_k\\circ p_{n,\\alpha}\\circ h$ for every $h:W\\to L_n$.",
+   "text": "Apply [lem-weil-pbc-truncated-coskeleton-finite-limits] to V = sk_(n-1) K. Take L = R(V), epsilon = epsilon_V, and the supplied pointwise right Kan extension structure. Its coneAt([n]) is limiting, indexed by StructuredArrow([n]^op, inclusion.op), with projection L(alpha.op) followed by epsilon_k. The canonical morphism c is liftOfIsRightKanExtension of the identity of V, and its counit equation is the factorization equation [def-weil-pbc-simplicial-coskeleton].",
    "uses": [
     "lem-weil-pbc-truncated-coskeleton-finite-limits",
-    "def-weil-pbc-simplicial-coskeleton",
-    "def-weil-pbc-simplicial-object"
+    "def-weil-pbc-simplicial-coskeleton"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0183 (lemma-existence-cosk), finite-limit formula and the induced simplicial maps"
+    "place": "Simplicial, Lemma 0183 (lemma-existence-cosk): the coskeleton cosk_{n-1} of an (n-1)-truncated simplicial object exists when the category has finite limits, with maps W -> L_n corresponding to compatible families over all order-preserving alpha : [k] -> [n], k <= n-1 (the node states this 0183 form; the earlier text named 0186). The comparison with the face tuples of 0186 is lem-weil-pbc-matching-object-proper-faces."
    }
   },
   {
-   "text": "By the defining universal property of the limit [def-galois-finite-limits-colimits], $h\\mapsto(p_{n,\\alpha}\\circ h)_\\alpha$ is a bijection from $\\operatorname{Hom}_{\\mathcal C}(W,L_n)$ to cones over $V(n)$. A family $(x_\\alpha:W\\to K_k)_\\alpha$ is such a cone exactly when $K(\\psi)\\circ x_\\alpha=x_{\\alpha\\circ\\psi}$ for each order-preserving $\\psi:[k']\\to[k]$. Since $a$ from Step 1 is a natural automorphism of $V$, $K(\\psi)\\circ a_k=a_{k'}\\circ K(\\psi)$; therefore $(x_\\alpha)_\\alpha\\mapsto(a_k\\circ x_\\alpha)_\\alpha$ maps compatible families bijectively to compatible families, with inverse given by $a^{-1}$. The equation at the end of Step 1 shows that the composite bijection sends $h$ to $(\\varepsilon_k\\circ L(\\alpha)\\circ h)_\\alpha$. Both the limit bijection and postcomposition by $a$ commute with precomposition by $g:W'\\to W$, so their composite is natural in $W$.",
+   "text": "A compatible family gives a cone with component x(k, alpha) at the structured arrow alpha.op. Unopping the structured-arrow morphism equation identifies its naturality condition with the stated compatibility. Conversely h gives the family h followed by L(alpha.op) and epsilon_k, compatible by naturality of epsilon and functoriality of L [def-weil-pbc-simplicial-object]. The inverse sends a family to the lift into coneAt([n]); IsLimit.hom_ext and IsLimit.fac [def-galois-finite-limits-colimits] prove the inverse laws. Precomposition naturality is associativity. No comparison with a separately chosen projection cone or natural automorphism is needed.",
    "uses": [
-    "def-galois-finite-limits-colimits",
-    "lem-weil-pbc-truncated-coskeleton-finite-limits"
+    "def-weil-pbc-simplicial-object",
+    "def-galois-finite-limits-colimits"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0183 (lemma-existence-cosk), proof, maps into the limit as compatible families"
+    "place": "Simplicial, Lemma 0183 (lemma-existence-cosk): the coskeleton cosk_{n-1} of an (n-1)-truncated simplicial object exists when the category has finite limits, with maps W -> L_n corresponding to compatible families over all order-preserving alpha : [k] -> [n], k <= n-1 (the node states this 0183 form; the earlier text named 0186). The comparison with the face tuples of 0186 is lem-weil-pbc-matching-object-proper-faces."
    }
   },
   {
-   "text": "Let $c:K\\to L$ be the canonical morphism [def-weil-pbc-simplicial-coskeleton]. Its defining equation $\\varepsilon\\circ\\mathrm{sk}_{n-1}c=\\mathrm{id}_{\\mathrm{sk}_{n-1}K}$ gives $\\varepsilon_k\\circ c_k=\\mathrm{id}_{K_k}$ for $k\\leq n-1$. For every $\\alpha:[k]\\to[n]$, simplicial naturality [def-weil-pbc-simplicial-object] gives $L(\\alpha)\\circ c_n=c_k\\circ K(\\alpha)$. Thus the $\\alpha$-component of the family of $c_n$ is $\\varepsilon_k\\circ L(\\alpha)\\circ c_n=\\varepsilon_k\\circ c_k\\circ K(\\alpha)=K(\\alpha)$. The family is compatible because $K$ is a contravariant functor: $K(\\psi)\\circ K(\\alpha)=K(\\alpha\\circ\\psi)$.",
+   "text": "Evaluate the counit equation for c at k. Naturality of c at alpha.op rewrites c_n followed by L(alpha.op) as K(alpha.op) followed by c_k. Composing with epsilon_k and using c_k followed by epsilon_k = identity proves that the associated family is K(alpha.op).",
    "uses": [
     "def-weil-pbc-simplicial-coskeleton",
     "def-weil-pbc-simplicial-object"
@@ -59,7 +58,7 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0183 (lemma-existence-cosk), proof, the canonical map under the coskeleton adjunction"
+    "place": "Simplicial, Lemma 0183 (lemma-existence-cosk): the coskeleton cosk_{n-1} of an (n-1)-truncated simplicial object exists when the category has finite limits, with maps W -> L_n corresponding to compatible families over all order-preserving alpha : [k] -> [n], k <= n-1 (the node states this 0183 form; the earlier text named 0186). The comparison with the face tuples of 0186 is lem-weil-pbc-matching-object-proper-faces."
    }
   }
  ],
@@ -72,7 +71,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/simplicial.tex",
-  "place": "Lemma 0183 (lemma-existence-cosk), statement and proof; expanded from a separate local copy because the literature checkout is absent"
+  "place": "Lemma 0183 (lemma-existence-cosk), checked at https://stacks.math.columbia.edu/tag/0183; Lean proof uses the supplied pointwise right Kan extension cone and Mathlib IsLimit.fac/hom_ext directly (Y2, 2026-10-16)."
  },
  "mathlib_searches": [
   {
@@ -151,5 +150,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261015T220328-L-2472750",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
