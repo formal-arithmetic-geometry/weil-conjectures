@@ -25,7 +25,10 @@
   "def-pur-kinjective-complex",
   "def-weil-derived-limit",
   "def-pur-derived-internal-hom",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-ringed-ideal-generators"
  ],
  "proof": [
   {
@@ -206,5 +209,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-83538c607",
+  "group": "NL",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, all statement dependencies, source correspondence, canonical tower and unit, edge cases, universes, docstrings, substantive report sections, and verbatim statement field. Snapshot module compiles cleanly through scompile.py with the local overlay. No repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedKoszulCompletionReflector",
+  "declaration": "CategoryTheory.ringedKoszulCompletionReflector",
+  "file": "lean/Sheaf/CategoryTheory/RingedKoszulCompletionReflector.lean",
+  "statement": "theorem ringedKoszulCompletionReflector {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u}) (r : ℕ) (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))] (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) [Mono ι] (_hgen : ∀ U : C, IsRingedIdealGeneratingList O I ι U r (fun i ↦ (b i).val (op U))) : ∃ D : RingedKoszulLimitPresentation O r b, (∀ N : ringedSiteDerived O, IsLocallyDerivedRingedIdealComplete O I ι (D.completion.obj N)) ∧ (∀ (N L : ringedSiteDerived O), IsLocallyDerivedRingedIdealComplete O I ι L → Function.Bijective (fun a : D.completion.obj N ⟶ L ↦ D.unit N ≫ a)) ∧ (∀ N : ringedSiteDerived O, IsIso (D.unit N) ↔ IsLocallyDerivedRingedIdealComplete O I ι N) ∧ (∀ (N N' : ringedSiteDerived O) (a : N ⟶ N'), D.unit N ≫ D.completion.map a = a ≫ D.unit N')",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
