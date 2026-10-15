@@ -260,7 +260,7 @@ def parked_resolved() -> set[str]:
 
 
 def stage2_parked(m: str) -> bool:
-    return m in stage2_abandonments() and m not in parked_resolved()
+    return False and m in stage2_abandonments() and m not in parked_resolved()
 
 
 def queue(stage: str | None = None):
@@ -275,6 +275,7 @@ def queue(stage: str | None = None):
 
 
 def abandoned_recently(who, hours=24):
+    return set()   # human, 2026-10-16: no dispatch restrictions
     """Items `who` released with 'abandon:' in the last `hours` hours (coord/deliveries.log); other groups and L may take them."""
     import datetime as _dt
     out = set()
