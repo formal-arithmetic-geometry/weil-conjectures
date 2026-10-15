@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Coherent comparison of etale and pro-etale inverse images

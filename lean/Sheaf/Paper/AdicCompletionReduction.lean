@@ -15,6 +15,13 @@ import Sheaf.Paper.StrictPerfectCoefficientPackage
 import Sheaf.Paper.IntrinsicKoszulCompletion
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedTensor
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
+import Sheaf.Paper.KoszulQuotientLimit
 
 /-!
 # Reduction of adic completion

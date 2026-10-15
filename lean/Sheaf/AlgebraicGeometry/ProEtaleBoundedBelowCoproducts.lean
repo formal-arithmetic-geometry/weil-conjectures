@@ -23,6 +23,7 @@ import Sheaf.Paper.SiteSheafificationSectionsLocal
 import Sheaf.CategoryTheory.DerivedModuleDirectSums
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 
 /-!
 # Pro-etale direct image and uniformly bounded-below coproducts

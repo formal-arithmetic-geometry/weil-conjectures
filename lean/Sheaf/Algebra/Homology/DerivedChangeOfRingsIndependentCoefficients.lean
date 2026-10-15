@@ -13,6 +13,8 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.Algebra.Homology.KFlat
 
 /-!
 # Derived change of rings on a ringed site

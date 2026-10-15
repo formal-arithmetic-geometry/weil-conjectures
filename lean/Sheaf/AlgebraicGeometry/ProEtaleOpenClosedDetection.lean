@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Mathlib.Algebra.Homology.ExactSequence
+import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 
 /-!
 # Detection by open and closed pro-etale restrictions

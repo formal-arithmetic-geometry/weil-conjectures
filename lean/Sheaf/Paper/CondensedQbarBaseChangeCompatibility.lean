@@ -19,6 +19,7 @@ import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
 import Sheaf.AlgebraicGeometry.ProEtaleBoundedBelowCoproducts
 import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 
 /-!
 # Condensed finite-to-algebraic-closure coefficient change and exchange

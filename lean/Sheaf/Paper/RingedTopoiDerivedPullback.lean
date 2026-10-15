@@ -18,6 +18,8 @@ public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.KFlatRingedToposPullback
 
 /-!
 # Derived pullback on ringed topoi

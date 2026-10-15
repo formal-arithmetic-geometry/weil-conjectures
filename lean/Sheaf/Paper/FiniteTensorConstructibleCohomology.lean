@@ -17,6 +17,8 @@ import Sheaf.Paper.LocallyConstantTensor
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Mathlib.Topology.Algebra.Valued.LocallyCompact
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.Paper.ProEtaleConstructibleSheaf
 
 /-!
 # Constructible cohomology of finite-coefficient derived tensors

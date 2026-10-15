@@ -12,6 +12,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 
 /-!
 # Independence of the augmented integral reduction tower

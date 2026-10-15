@@ -15,6 +15,7 @@ import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
 import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import Sheaf.Paper.EtaleFlatKFlatResolution
 
 /-!
 # Derived tensor products of étale sheaves preserve direct sums

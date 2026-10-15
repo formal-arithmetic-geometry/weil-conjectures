@@ -17,6 +17,8 @@ import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.Paper.RingedTopoiDerivedPullback
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.KFlatRingedToposPullback
 
 /-!
 # Canonical representative comparison for tensor pullback

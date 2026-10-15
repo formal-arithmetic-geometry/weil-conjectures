@@ -19,6 +19,7 @@ import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 import Sheaf.RingTheory.NilpotentTorsionDerivedLimitComplete
 import Sheaf.RingTheory.PseudoCoherentInverseRingReconstruction
 import Sheaf.RingTheory.PseudoCoherentMaximalFibrePerfect
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 
 /-!
 # Perfect inverse-limit reconstruction over a complete ring

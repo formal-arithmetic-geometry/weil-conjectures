@@ -27,6 +27,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.AlgebraicGeometry.ProEtaleRingInverseImage
 import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
+import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 
 /-!
 # Bounded constructible pro-etale complexes form a triangulated subcategory

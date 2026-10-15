@@ -21,6 +21,8 @@ import Sheaf.Algebra.Homology.TorAmplitudeFlatModel
 import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 import Sheaf.Algebra.Homology.TorAmplitudePrincipalCover
 import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-!
 # Perfect complexes glue over finite principal covers

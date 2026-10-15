@@ -13,6 +13,8 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Sheaf.RingTheory.NoetherianKoszulAugmentationProZero
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
+import Sheaf.Algebra.Homology.DerivedTensor
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-!
 # The augmentation comparison of Koszul and quotient completions

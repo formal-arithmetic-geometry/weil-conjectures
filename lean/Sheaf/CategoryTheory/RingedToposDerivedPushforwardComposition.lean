@@ -19,6 +19,8 @@ import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.Paper.RingedTopoiDerivedPullback
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.KFlatRingedToposPullback
 
 /-!
 # Composition of unbounded derived direct images of ringed topoi

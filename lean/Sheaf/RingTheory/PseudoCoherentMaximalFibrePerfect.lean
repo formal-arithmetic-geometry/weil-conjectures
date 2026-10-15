@@ -17,6 +17,7 @@ import Mathlib.RingTheory.Ideal.Maximal
 import Sheaf.Algebra.Homology.FreeComplexResidueDegreeCancellation
 import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 import Sheaf.RingTheory.PerfectPrincipalCoverGlue
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 
 /-!
 # Perfectness detected by uniformly bounded maximal residue fibres

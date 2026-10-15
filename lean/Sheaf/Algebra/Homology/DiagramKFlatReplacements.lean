@@ -14,6 +14,8 @@ import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.CategoryTheory.DiagramSiteRealization
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.KFlatRingedToposPullback
 
 /-!
 # K-flat replacements of strict diagrams

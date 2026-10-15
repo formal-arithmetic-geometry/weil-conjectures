@@ -18,6 +18,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatQuotientTensorSES
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.Algebra.Homology.FlatTruncationTower
 import Sheaf.Algebra.Homology.AcyclicKFlatCyclesFlat
+import Sheaf.Algebra.Homology.KFlat
 /-!
 # Ringed-topos pullback preserves K-flat complexes with flat terms
 Source: Stacks Project, Cohomology on Sites, Tag 0G7E, lemma-pullback-K-flat

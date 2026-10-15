@@ -15,6 +15,7 @@ import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.Flat.Basic
 import Sheaf.Algebra.Homology.KFlatModuleBaseChange
 import Sheaf.RingTheory.HomologyVanishingLocalizationSpan
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-!
 # Tor amplitude descends from a finite principal cover

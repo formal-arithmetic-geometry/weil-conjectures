@@ -20,6 +20,8 @@ public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
 import Sheaf.Paper.LocallyConstantTensor
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-! # Lissity propagates through powers of a coefficient ideal
 

@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.ComplexLiftConeCokernel
 import Sheaf.AlgebraicGeometry.ProjectiveClassReducedSplitting
 import Sheaf.RingTheory.FiniteProjectiveFreeModIdeal
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 
 /-!
 # Lifting a marked finite free complex across a nilpotent quotient

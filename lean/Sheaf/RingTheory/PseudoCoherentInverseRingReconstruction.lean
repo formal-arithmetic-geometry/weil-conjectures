@@ -19,6 +19,7 @@ import Mathlib.CategoryTheory.Triangulated.Triangulated
 import Sheaf.Algebra.Homology.SurjectiveModuleComplexTowerLimit
 import Sheaf.RingTheory.NilpotentMarkedFreeComplexLift
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 
 /-!
 # Pseudo-coherent reconstruction over a tower of nilpotent quotients
