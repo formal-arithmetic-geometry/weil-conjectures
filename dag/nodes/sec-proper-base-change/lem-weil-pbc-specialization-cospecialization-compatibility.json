@@ -45,7 +45,8 @@
   "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
   "def-weil-pbc-derived-exchange",
   "lem-weil-pbc-geometric-point-pullback-stalk",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-specialization-cospecialization-arrows"
  ],
  "proof": [
   {
@@ -308,5 +309,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpecializationCospecializationCompatibility",
+  "declaration": "AlgebraicGeometry.Etale.specialization_cospecialization_compatibility",
+  "declarations": [
+   "AlgebraicGeometry.Etale.specialization_cospecialization_compatibility"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpecializationCospecializationCompatibility.lean",
+  "statement": "theorem specialization_cospecialization_compatibility {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : IsLocallyAcyclicRelative f G) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω'] (t : Spec (.of Ω') ⟶ Scheme.strictHenselizationScheme s) : (derivedEtaleStalkSpecialization s t).app ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj G)) ≫ strictBaseSheafFiberMap f G s t ≫ etaleCospecialization f G hG s t = closedStrictBaseSheafFiberMap f G s",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4435b5965",
+  "group": "NH",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all dependencies, canonical arrows, source clauses, universes, edge cases, docstrings, and verbatim signatures. All five modules compiled cleanly through scompile.py’s local side overlay. No findings or repository changes."
  }
 }

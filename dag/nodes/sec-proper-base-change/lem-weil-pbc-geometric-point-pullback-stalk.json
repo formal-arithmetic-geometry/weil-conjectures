@@ -187,19 +187,23 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-bcae2beb3",
-  "group": "ND",
+  "reviewer": "NT-stage2-Codex-4435b5965",
+  "group": "NH",
   "result": "pass",
-  "note": "Statement, dependencies, source tags, docstrings, edge cases, conventions, report sections, and required server scompile verified."
+  "note": "Wrote review.md. Checked immutable statements, all dependencies, canonical arrows, source clauses, universes, edge cases, docstrings, and verbatim signatures. All five modules compiled cleanly through scompile.py’s local side overlay. No findings or repository changes."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk",
-  "declaration": "AlgebraicGeometry.Scheme.geometricPoint_pullback_stalk",
-  "file": "lean/Sheaf/AlgebraicGeometry/GeometricPointPullbackStalk.lean",
-  "statement": "theorem geometricPoint_pullback_stalk (Ω : Type u) [Field Ω] [IsAlgClosed Ω] : ((sheafSections (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj (op (Etale.mk (𝟙 (Spec (.of Ω)))))).IsEquivalence ∧ PreservesFiniteLimits ((sheafSections (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj (op (Etale.mk (𝟙 (Spec (.of Ω)))))) ∧ PreservesFiniteColimits ((sheafSections (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj (op (Etale.mk (𝟙 (Spec (.of Ω)))))) ∧ (∀ (Λ : Type (u + 1)) [Ring Λ], ((sheafSections (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op (Etale.mk (𝟙 (Spec (.of Ω)))))).IsEquivalence ∧ PreservesFiniteLimits ((sheafSections (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op (Etale.mk (𝟙 (Spec (.of Ω)))))) ∧ PreservesFiniteColimits ((sheafSections (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op (Etale.mk (𝟙 (Spec (.of Ω))))))) ∧ (∀ (Y : Scheme.{u}) (y : Spec (.of Ω) ⟶ Y), Nonempty (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} y ⋙ (sheafSections (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj (op (Etale.mk (𝟙 (Spec (.of Ω))))) ≅ (pointSmallEtale y).sheafFiber))",
+  "module": "Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm",
+  "declaration": "AlgebraicGeometry.Etale.isIso_globalGerm_identity",
+  "declarations": [
+   "AlgebraicGeometry.Etale.isIso_globalGerm_identity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricPointCanonicalGerm.lean",
+  "statement": "theorem isIso_globalGerm_identity (Ω : Type u) [Field Ω] [IsAlgClosed Ω] : IsIso (globalGerm (𝟙 (Spec (.of Ω))))",
   "branch": "newtargets-dag",
-  "by": "ND",
+  "by": "NH",
   "date": "2026-10-15",
-  "existing": false
+  "existing": false,
+  "note": "The original theorem supplies only Nonempty of a natural isomorphism and does not identify its canonical germ. The new theorem exposes invertibility of the specific globalGerm at the identity geometric point. The original full equivalence, exactness, module and pullback-stalk clauses remain available through public import. This makes the derived fibre arrow canonical; no arbitrary isomorphism is chosen."
  }
 }

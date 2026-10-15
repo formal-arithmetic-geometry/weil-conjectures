@@ -214,28 +214,26 @@
   "note": "clause (1) corrected (uniqueness characterized by compatibility with the canonical maps to the neighbourhoods); 4 new nodes, one Mathlib leaf (separableClosure)"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap",
-  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationMap_existsUnique",
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationClosedLift_over",
   "declarations": [
-   "AlgebraicGeometry.Scheme.strictHenselizationMap_existsUnique",
-   "AlgebraicGeometry.Scheme.strictHenselizationMap",
-   "AlgebraicGeometry.Scheme.strictHenselizationMap_over"
+   "AlgebraicGeometry.Scheme.strictHenselizationClosedLift_over"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationCanonicalMap.lean",
-  "statement": "theorem strictHenselizationMap_existsUnique {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) : ∃! h : strictHenselizationScheme x ⟶ strictHenselizationScheme (x ≫ f), h ≫ strictHenselizationStructuralMap (x ≫ f) = strictHenselizationStructuralMap x ≫ f ∧ Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation x)) ≫ h = Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation (x ≫ f)))",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationClosedLift.lean",
+  "statement": "theorem strictHenselizationClosedLift_over {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s)) ≫ strictHenselizationStructuralMap s = s",
   "branch": "newtargets-dag",
-  "by": "NV",
+  "by": "NH",
   "date": "2026-10-15",
   "existing": false,
-  "note": "The previous residue-parametrized theorem is retained through its public import, including all four original clauses. Its interface does not expose the canonical strict-local morphism without supplying residue-field identifications. This module packages exactly its unique pointed map over f, using the canonical point evaluation, and defines strictHenselizationMap from uniqueness (not from mere existence). No additional assumption is imposed on callers."
+  "note": "The recorded map interface does not expose the factorization of the original geometric point through its canonical evaluation lift, required for transporting the source of the closed fibre map. This module states exactly this factorization from clause (1). All original functoriality clauses and canonical maps remain publicly imported."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e210c7ebb",
-  "group": "NV",
+  "reviewer": "NT-stage2-Codex-4435b5965",
+  "group": "NH",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable modules, all statement dependencies, sources, canonical maps, hypotheses, edge cases, universes, records and inherited correction. Both signatures match verbatim; both modules compile cleanly through server-only scompile.py. No fixes required."
+  "note": "Wrote review.md. Checked immutable statements, all dependencies, canonical arrows, source clauses, universes, edge cases, docstrings, and verbatim signatures. All five modules compiled cleanly through scompile.py’s local side overlay. No findings or repository changes."
  },
  "reviewed_proof": {
   "date": "2026-10-12",
