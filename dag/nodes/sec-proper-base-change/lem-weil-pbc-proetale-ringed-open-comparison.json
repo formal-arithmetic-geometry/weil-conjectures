@@ -16,9 +16,24 @@
  ],
  "proof": [
   {
-   "text": "Use the site and arbitrary sheaf-category equivalences of weakly-etale localization. On an object over U, the inverse-image colimit has the corresponding slice object as terminal index. This identifies the actual inverse-image ring with the restricted ring, including multiplication. Transport module actions along this ring isomorphism and the site equivalence to obtain q and the natural module comparison.",
+   "text": "Let G be composition with U.hom on the small pro-etale sites and B its base-change right adjoint. Mathlib MorphismProperty.Over.mapPullbackAdj supplies G left adjoint to B. Both are continuous. Lift this adjunction to commutative-ring sheaves by Adjunction.sheafPushforwardContinuous. The actual ring inverse image of [def-weil-proetale-inverse-image] is another left adjoint to the identical direct image, so Adjunction.leftAdjointUniq gives c from the actual inverse-image ring to G-precomposition of A. Forget commutativity. The unit identity of leftAdjointUniq gives H1, compatibility of c with the actual ring unit.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved sliceEquiv, sliceDense and module_transport helpers of [lem-weil-proetale-weakly-etale-localization], now with the arbitrary ring sheaf R.over U and the ring isomorphism c. They give an equivalence q from slice modules to modules over the actual inverse-image ring, with q.functor after forgetting equal to precomposition with sliceEquiv.inverse and restriction of scalars along c. Since sliceEquiv.inverse followed by the slice forgetful functor is G, full faithfulness of the forgetful functor gives t: overFunctor R U followed by q.functor is naturally isomorphic to pushforward c.hom.",
    "uses": [
     "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual ring-unit map psi is the scalar map for module direct image. H1 is the first compatibility hypothesis of SheafOfModules.pushforwardPushforwardAdj. For H2, cancel the invertible component of c, use naturality of c at the site-adjunction unit, substitute H1 at G(V), and combine the two restriction maps using the left triangle identity of G left adjoint to B. Mathlib pushforwardPushforwardAdj therefore gives pushforward c.hom left adjoint to pushforward psi. The proved proEtaleModuleInverseImageAdjunction helper of [def-weil-pbc-proetale-operations] identifies the specified small-model module inverse image as another left adjoint of pushforward psi. Uniqueness of left adjoints gives e from actual module inverse image to pushforward c.hom. Compose e with t inverse, whisker with q.inverse, and cancel q.functor followed by q.inverse using q.unitIso inverse. The equivalence required in the statement is q.symm.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
     "def-weil-proetale-inverse-image",
     "def-weil-sheaf-of-modules-category"
    ],
@@ -26,14 +41,15 @@
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-proetale-operations",
   "def-weil-proetale-inverse-image",
   "def-weil-sheaf-of-modules-category",
   "lem-weil-proetale-weakly-etale-localization"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09BN and 00XZ; parent proof step 1."
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Sites Section 00XZ (localization); Modules on Sites Tag 03D3 (module adjunction). H2 uses uniqueness of left adjoints instead of explicitly calculating the inverse-image colimit. The site equivalence and module-action transport are the already proved localization helpers."
  },
  "mathlib_searches": [
   {
@@ -112,10 +128,10 @@
   "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261015T192133-L-1050943",
-  "kind": "interface",
+  "landing": "20261015T201715-L-1447634",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
