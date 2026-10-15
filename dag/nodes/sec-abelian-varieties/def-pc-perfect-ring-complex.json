@@ -110,14 +110,18 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "lean": {
-  "module": "WeilConjectures.CategoryTheory.DerivedCategory.Perfect",
-  "declaration": "DerivedCategory.IsPerfect",
-  "statement": "def IsPerfect (C : DerivedCategory (ModuleCat.{u} R)) : Prop",
-  "branch": "slopmaster2",
-  "by": "J1",
-  "date": "2026-10-11",
-  "existing": true,
-  "note": "The existing upstream definition is for every commutative ring; the Poincare-duality node def-pod-perfect-point-complex restricts its statement to its fixed coefficient setting. The scheme node def-pc-perfect-complex concerns D(O_X), not D(R). No definition is duplicated."
+  "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral",
+  "declaration": "DerivedCategory.IsPerfectRingComplex",
+  "declarations": [
+   "DerivedCategory.IsPerfectRingComplex"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectRingComplexGeneral.lean",
+  "statement": "def IsPerfectRingComplex {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)] (C : DerivedCategory (ModuleCat.{u} R)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The recorded upstream IsPerfect requires the localization universe to equal the module universe. HasDerivedCategory.standard on ModuleCat uses the larger object universe, so that interface cannot express the degree-zero quotients here. This module states the identical bounded finite projective model predicate with an independent localization universe."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -128,12 +132,12 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "R-apz1456",
-  "group": "J1",
+  "reviewer": "NT-stage2-Codex-24ba6f6eb",
+  "group": "NF",
   "result": "pass",
-  "note": "Both modules compiled combined in L sandbox, #check matches record; R CommRing Type v; p prime; K bounded-above (IsStrictlyLE) finite free termwise; hsurj Epi of new cohomologyBaseChange (adjoint of H(unit), B=p.ResidueField); f∉p; split via Q.obj truncLE 0 ⊞ truncGE 1 of extend R R_f; bounded finite projective rep in [1,b]; upstream IsPerfect (HasDerivedCategory.{v}, ModuleCat.{v}, matches TorAmplitudeFlatModel universe); Tor-amp [1,∞) as ∀ N, IsGE 1 of ⊗ single N (half of upstream torAmplitudeIn); no let/notation; correction def-pc-perfect-complex (D(O_X)) -> ring perfect justified; no DAG node of general ring perfectness (def-pod-perfect-point-complex is fixed-setting); cohomology base-change map not in landed RingTensorCohomology (flat-only) or BaseDerivedTensorCohomologyModel"
+  "note": "Wrote review.md. Verified all statement clauses, dependencies, universe repairs, canonical maps, edge cases, signatures, report sections, and pilot gates. All four delivered modules reproduced cleanly through server-only scompile.py. No delivery errors found; branch unchanged."
  },
  "reviewed_proof": {
   "date": "2026-10-14",
