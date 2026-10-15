@@ -39,11 +39,10 @@
    }
   },
   {
-   "text": "The map of (1) lands in the tuples. Let $(x_\\delta)_\\delta$ be a family as in (1), on an object $W$, and put $x_i=x_{\\delta_i}:W\\to K_{n-1}$. For $n=1$ there is no condition on $(x_0,x_1)$ ([lem-weil-pbc-simplicial-matching-object] (2)). For $n\\geq2$ and $0\\leq i<j\\leq n$, [lem-weil-pbc-simplex-face-face-identity] (in degree $n$) gives $\\delta_i\\circ\\delta_{j-1}=\\delta_j\\circ\\delta_i=:\\delta_{i,j}:[n-2]\\to[n]$, an injective map, hence an object of $\\mathcal I_n$, and $\\delta_{j-1}:\\delta_{i,j}\\to\\delta_i$, $\\delta_i:\\delta_{i,j}\\to\\delta_j$ are morphisms of $\\mathcal I_n$ (here $\\delta_{j-1},\\delta_i:[n-2]\\to[n-1]$). With $d_m=K(\\delta_m)$ [def-weil-pbc-simplicial-object] the compatibility of the family gives $d_{j-1}\\circ x_i=K(\\delta_{j-1})\\circ x_{\\delta_i}=x_{\\delta_i\\circ\\delta_{j-1}}=x_{\\delta_j\\circ\\delta_i}=K(\\delta_i)\\circ x_{\\delta_j}=d_i\\circ x_j$, as in the displayed computation of the proof of 0186.",
+   "text": "The map of (1) lands in the tuples. Let $(x_\\delta)_\\delta$ be a family as in (1), on an object $W$, and put $x_i=x_{\\delta_i}:W\\to K_{n-1}$. For $n=1$ there is no condition on $(x_0,x_1)$ (there are no lower-dimensional face-pair equations). For $n\\geq2$ and $0\\leq i<j\\leq n$, [lem-weil-pbc-simplex-face-face-identity] (in degree $n$) gives $\\delta_i\\circ\\delta_{j-1}=\\delta_j\\circ\\delta_i=:\\delta_{i,j}:[n-2]\\to[n]$, an injective map, hence an object of $\\mathcal I_n$, and $\\delta_{j-1}:\\delta_{i,j}\\to\\delta_i$, $\\delta_i:\\delta_{i,j}\\to\\delta_j$ are morphisms of $\\mathcal I_n$ (here $\\delta_{j-1},\\delta_i:[n-2]\\to[n-1]$). With $d_m=K(\\delta_m)$ [def-weil-pbc-simplicial-object] the compatibility of the family gives $d_{j-1}\\circ x_i=K(\\delta_{j-1})\\circ x_{\\delta_i}=x_{\\delta_i\\circ\\delta_{j-1}}=x_{\\delta_j\\circ\\delta_i}=K(\\delta_i)\\circ x_{\\delta_j}=d_i\\circ x_j$, as in the displayed computation of the proof of 0186.",
    "uses": [
     "lem-weil-pbc-simplex-face-face-identity",
-    "def-weil-pbc-simplicial-object",
-    "lem-weil-pbc-simplicial-matching-object"
+    "def-weil-pbc-simplicial-object"
    ],
    "elementary": false,
    "source": {
@@ -87,21 +86,17 @@
    }
   },
   {
-   "text": "Proof of (2). By [lem-weil-pbc-simplicial-matching-object] (2) applied to $\\mathrm{id}_{M_n(K)}$, the tuple $(\\mathrm{pr}_0,\\dots,\\mathrm{pr}_n)$ satisfies $d_{j-1}\\circ\\mathrm{pr}_i=d_i\\circ\\mathrm{pr}_j$ for $i<j$. Applying Steps 3 and 4 with $W=M_n(K)$ and $x_i=\\mathrm{pr}_i$: $\\pi_\\delta=K(\\varepsilon)\\circ\\mathrm{pr}_i$ does not depend on the factorization $\\delta=\\delta_i\\circ\\varepsilon$, and $(\\pi_\\delta)_\\delta$ is compatible, i.e. a cone on $P_n(K)$ with vertex $M_n(K)$. For an object $W$, the map $g\\mapsto(\\pi_\\delta\\circ g)_\\delta$ from morphisms $W\\to M_n(K)$ to cones on $P_n(K)$ with vertex $W$ (the compatible families of (1)) is the composite of the bijection $g\\mapsto(\\mathrm{pr}_i\\circ g)_i$ of [lem-weil-pbc-simplicial-matching-object] (2) and the inverse bijection of (1) (Step 3 sends $(\\mathrm{pr}_i\\circ g)_i$ to $(K(\\varepsilon)\\circ\\mathrm{pr}_i\\circ g)_\\delta=(\\pi_\\delta\\circ g)_\\delta$). So every cone on $P_n(K)$ factors through $(M_n(K),(\\pi_\\delta))$ by exactly one morphism, which is the definition of a limit cone of the finite diagram $P_n(K)$ [def-galois-finite-limits-colimits] ($\\mathcal I_n$ is finite: finitely many injective maps $[k]\\to[n]$, $k<n$, and finitely many maps between them). This is the statement 'the limit represents the functor of systems $(f_\\alpha)$' of the proof of 0186, with the functor of the lemma represented by $M_n(K)$.",
-   "uses": [
-    "lem-weil-pbc-simplicial-matching-object",
-    "def-galois-finite-limits-colimits"
-   ],
-   "elementary": false,
+   "text": "Proof of (2), for the arbitrary boundary cone c, its limit witness hc, and its matching map supplied in the Lean hypotheses. In degree one its two projections are an arbitrary pair. In degree at least two, the cone equations for the explicitly defined matchingBoundaryIndex give the pairwise compatibility of its projections (Mathlib Multifork.condition); no existence theorem is used. Apply Steps 3 and 4 to these projections to construct the natural family on the same vertex, with component $\\pi_\\delta=K(\\varepsilon)\\circ\\mathrm{pr}_i$ for every factorization $\\delta=\\delta_i\\circ\\varepsilon$. Given any cone on the proper-face diagram, restrict its family to the codimension-one faces. In degree one the limit witness hc supplies the unique lift of this pair (Mathlib Fan.IsLimit.lift); in higher degrees Step 2 gives the compatibility needed for Mathlib Multifork.IsLimit.lift hc. The lift has every proper-face component by Step 1 and naturality of the original family. Uniqueness follows by restriction to the codimension-one faces and the hom_ext consequence of hc. These are the lift, factorization, and uniqueness fields of IsLimit. Finite-limit existence is not invoked: the required boundary limit is already a hypothesis. This realizes the representing-functor argument of Stacks 0186 directly for the supplied limiting cone.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
     "place": "Lemma 0186 (lemma-formula-limit), proof"
    }
   },
   {
-   "text": "Proof of (3). For an object $\\delta$ and a factorization $\\delta=\\delta_i\\circ\\varepsilon$, [lem-weil-pbc-simplicial-matching-object] (3) gives $\\mathrm{pr}_i\\circ\\mu_n=d_i=K(\\delta_i)$, so $\\pi_\\delta\\circ\\mu_n=K(\\varepsilon)\\circ K(\\delta_i)=K(\\delta_i\\circ\\varepsilon)=K(\\delta)$ ($K$ contravariant, [def-weil-pbc-simplicial-object]). The family $(K(\\delta))_\\delta$ is a cone on $P_n(K)$ with vertex $K_n$ (for $\\varepsilon:\\delta'\\to\\delta$, $K(\\varepsilon)\\circ K(\\delta)=K(\\delta\\circ\\varepsilon)=K(\\delta')$), so by the limit property of Step 6 there is exactly one morphism $K_n\\to M_n(K)$ with $\\delta$-components $K(\\delta)$, and $\\mu_n$ is it.",
+   "text": "Proof of (3). The hypothesis hμ says $\\mathrm{pr}_i\\circ\\mu_n=d_i=K(\\delta_i)$. For an object $\\delta$ choose a factorization $\\delta=\\delta_i\\circ\\varepsilon$ by Step 1. The component formula of Step 6 and contravariant functoriality [def-weil-pbc-simplicial-object] give $\\pi_\\delta\\circ\\mu_n=K(\\varepsilon)\\circ K(\\delta_i)=K(\\delta)$. Any other morphism with all these components has the same codimension-one projections by the component formula with the identity factor, hence is equal to μ by Fan.IsLimit.hom_ext hc or Multifork.IsLimit.hom_ext hc. Thus the supplied matching map is uniquely characterized, without invoking the unfinished matching-object existence theorem.",
    "uses": [
-    "lem-weil-pbc-simplicial-matching-object",
     "def-weil-pbc-simplicial-object"
    ],
    "elementary": true,
@@ -115,14 +110,12 @@
   "lem-weil-pbc-simplex-face-factorization",
   "def-weil-pbc-simplicial-set",
   "lem-weil-pbc-simplex-face-face-identity",
-  "def-weil-pbc-simplicial-object",
-  "lem-weil-pbc-simplicial-matching-object",
-  "def-galois-finite-limits-colimits"
+  "def-weil-pbc-simplicial-object"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/simplicial.tex",
-  "place": "Lemma 0186 (lemma-formula-limit) and its proof, restricted to injective maps $[k]\\to[n]$, $k<n$; the relations of Lemma 0167 (1) and the factorization of the proof of Lemma 0166; the verification that the two constructions are mutually inverse and natural, left to the reader in the source, is written out (Step 5)"
+  "place": "Lemma 0186 (lemma-formula-limit) and its proof, restricted to injective maps $[k]\\to[n]$, $k<n$; the relations of Lemma 0167 (1) and the factorization of the proof of Lemma 0166; the verification that the two constructions are mutually inverse and natural, left to the reader in the source, is written out (Step 5); stage-3 realization: Steps 2, 6 and 7 use the supplied boundary cone, its IsLimit witness and matching-map equations directly via Mathlib Fan/Multifork APIs, not matching-object existence or finite-limit existence"
  },
  "mathlib_searches": [
   {
@@ -203,5 +196,15 @@
   "group": "C1",
   "result": "pass",
   "note": "C finite limits, K SimplicialObject; I_n = full subcat of Over [n] (len<n, injective), arrows = commuting triangles; P_n = (iota>>forget).op>>K; (1) cones from W = landed matchingBoundaryIndex tuples via restriction to delta_i, natural in W; (2) one pi on the same vertex, component pr_i>>K(eps) for every factorization, limit; (3) mu components K(delta) + uniqueness; n=1 Fan case; boundary cone/mu bound as in landed MatchingObjectCoskeleton"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-e4db2",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261015T154200-L-160887",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered proofs matched unchanged Lean signatures, the node’s three conclusions and proof metadata; verified permitted axioms, clean compilation, and all five direct importers against the delivered module."
  }
 }
