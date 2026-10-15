@@ -1,6 +1,6 @@
 # Work queue
 
-86 items; claim with `tools/claim.py next <group> [--stage N]`.
+87 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (86)
+## Stage 3: modules to prove (87)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -29,6 +29,7 @@
 | `Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HypercohomologyFiltrations` | 2 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleBoundedBelowCoproducts` | 2 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction` | 2 | 1 | proof |
 | `Sheaf.NumberTheory.Padics.FiniteCoefficientFields` | 2 | 1 | proof |
 | `Sheaf.Paper.CohomologyInWeakSerreSubcategory` | 2 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 2 | 14 | proof |
