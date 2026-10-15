@@ -7,14 +7,10 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Category.Grp.AB
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedCounit
-import Mathlib.CategoryTheory.Sites.LocallyInjective
 import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 
 /-!
 # Closed support for abelian pro-etale sheaves
