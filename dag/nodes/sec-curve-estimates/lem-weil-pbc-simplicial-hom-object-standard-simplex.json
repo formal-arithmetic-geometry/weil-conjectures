@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "For fixed m and n, the set of order-preserving maps $\\lbrack m\\rbrack\\to\\lbrack n\\rbrack$ is finite (it is determined by the finite nondecreasing sequence of $m+1$ values in $\\lbrack n\\rbrack$) and is nonempty (for example, a constant map). A map is nondegenerate in the standard simplex exactly when it is injective: a noninjective nondecreasing map factors through a proper surjection $\\lbrack m\\rbrack\\to\\lbrack r\\rbrack$ and hence is a degeneracy, while an injective map cannot factor through a set of smaller cardinality. There are only finitely many injective maps between the finite ordered sets $\\lbrack m\\rbrack$ and $\\lbrack n\\rbrack$, and no injective map exists for $m>n$, so $\\Delta[n]$ has finitely many nondegenerate simplices. If $n\\geq1$, the boundary consists of a subset of these finite sets and is nonempty in every degree because a constant map $\\lbrack m\\rbrack\\to\\lbrack n\\rbrack$ is non-surjective; its nondegenerate simplices are the injective non-surjective maps, again a finite set. The empty boundary in degree $n=0$ is immediate since every map to $\\lbrack0\\rbrack$ is surjective.",
+   "text": "For each degree, use Mathlib's finite standard-simplex instance and the inherited finite boundary instance. Constant maps give nonempty simplex degrees; for a positive-dimensional boundary, the constant map with value zero misses vertex one, and hence belongs to the boundary in every degree. Mathlib's standard-simplex nondegenerate characterization identifies the nondegenerate simplices with the injective monotone maps. Its finite-simplicial-set instance supplies global finiteness, inherited by the boundary.",
    "uses": [
     "def-weil-pbc-simplicial-set"
    ],
@@ -36,7 +36,7 @@
    }
   },
   {
-   "text": "For part (a), let $W$ be an object of $\\mathrm{SR}(X)$. The maps $K(\\varphi):K_n\\to K_m$ indexed by $\\varphi\\in\\Delta[n]_m$ form a $\\Delta[n]$-family because $K$ is contravariant: for $\\psi:\\lbrack l\\rbrack\\to\\lbrack m\\rbrack$, $K(\\psi)$ composed with $K(\\varphi)$ equals $K(\\varphi\\circ\\psi)$, which is the component indexed by $\\Delta[n](\\psi)(\\varphi)=\\varphi\\circ\\psi$. Given any $\\Delta[n]$-family $(f_\\varphi)$ over $W$, take $g=f_{\\mathrm{id}_{[n]}}$. The family relation for the simplex $\\mathrm{id}_{[n]}$ gives $f_\\varphi=K(\\varphi)\\circ g$, so $g$ is the only morphism producing the family. Conversely, for any $g:W\\to K_n$, the family $(K(\\varphi)\\circ g)_\\varphi$ satisfies the same relations by functoriality. The universal property in def-weil-pbc-simplicial-hom-object therefore identifies $K_n$, with this family, with $\\operatorname{Hom}(\\Delta[n],K)_0$.",
+   "text": "Construct the standard-simplex family explicitly as K.map of each simplex operator. Functoriality proves compatibility. Evaluate any compatible family at the identity simplex: its compatibility equation gives every other component. This evaluation is inverse to precomposition with the constructed family, so the latter represents the family functor. The identity-component equation also proves the separately stated existence and uniqueness of the morphism.",
    "uses": [
     "def-weil-pbc-simplicial-hom-object",
     "def-weil-pbc-simplicial-object"
@@ -48,14 +48,13 @@
    }
   },
   {
-   "text": "For $n\\geq1$, boundary families are naturally the same as compatible tuples of codimension-one faces. Restriction sends a boundary family $(f_\\varphi)$ to $x_i=f_{\\delta_i}$. Conversely, let $(x_0,\\ldots,x_n)$ satisfy $d_{j-1}\\circ x_i=d_i\\circ x_j$ for $i<j$. For a non-surjective $\\varphi:\\lbrack m\\rbrack\\to\\lbrack n\\rbrack$, choose $i$ outside its image and use lem-weil-pbc-simplex-face-factorization to write $\\varphi=\\delta_i\\circ\\psi$; define $f_\\varphi=K(\\psi)\\circ x_i$. If $i<j$ are two omitted values, then $j-1$ is omitted from the image of $\\psi$, so factor $\\psi=\\delta_{j-1}\\circ\\xi$. The face identity of lem-weil-pbc-simplex-face-face-identity gives $\\delta_i\\circ\\delta_{j-1}=\\delta_j\\circ\\delta_i$, and the tuple relation gives $K(\\psi)\\circ x_i=K(\\delta_i\\circ\\xi)\\circ x_j$, so $f_\\varphi$ is independent of the omitted value. Functoriality of $K$ gives $K(\\alpha)\\circ f_\\varphi=f_{\\varphi\\circ\\alpha}$ for every $\\alpha$, hence these maps form a boundary family. The two constructions are inverse (use $\\delta_i=\\delta_i\\circ\\mathrm{id}$ for the codimension-one components) and commute with precomposition in $W$. The tuple is therefore identified with the morphism to $M_n(K)$ by lem-weil-pbc-simplicial-matching-object (2), equivalently by the compatible-face description of lem-weil-pbc-matching-object-proper-faces (1).",
+   "text": "For a boundary simplex, use the face-factorization lemma to factor its nonsurjective operator through a codimension-one face. For a compatible tuple of face maps, define its component by composing that face map with K of the factor. If two distinct vertices are omitted, factor again through the face omitting both vertices; the face-face identity and the matching equation identify the two composites. For equal omitted vertices, cancel the monomorphic face map. In degree one all operators into degree zero are equal, and cancellation of their epimorphism gives equality of the omitted vertices. These arguments cover degenerate simplices as well. Apply this construction to the product projections in degree one and the multiequalizer projections in higher degrees. Factorization independence and functoriality prove a boundary family on the concrete matching object. Any boundary family satisfies the matching equations by applying its compatibility to the common codimension-two face; the product or multiequalizer lift therefore supplies a map to that same matching object.",
    "uses": [
     "def-weil-pbc-simplicial-hom-object",
     "def-weil-pbc-simplicial-object",
     "lem-weil-pbc-simplex-face-factorization",
     "lem-weil-pbc-simplex-face-face-identity",
-    "lem-weil-pbc-simplicial-matching-object",
-    "lem-weil-pbc-matching-object-proper-faces"
+    "def-weil-pbc-semi-representable-object"
    ],
    "elementary": false,
    "source": {
@@ -64,10 +63,10 @@
    }
   },
   {
-   "text": "Let $(u_\\varphi)$ be the universal boundary family. Its codimension-one components $u_{\\delta_i}$ satisfy the matching relations, so the universal property in lem-weil-pbc-simplicial-matching-object gives a unique morphism $\\theta:\\operatorname{Hom}(\\partial\\Delta[n],K)_0\\to M_n(K)$ with $\\mathrm{pr}_i\\circ\\theta=u_{\\delta_i}$. Conversely, apply the boundary-family construction of the preceding step to the tuple $(\\mathrm{pr}_i)$ on $M_n(K)$; the representing property of $\\operatorname{Hom}(\\partial\\Delta[n],K)_0$ gives a morphism $\\eta:M_n(K)\\to\\operatorname{Hom}(\\partial\\Delta[n],K)_0$. The composite $\\theta\\circ\\eta$ has all projections $\\mathrm{pr}_i$, hence is the identity by the matching-object universal property. The composite $\\eta\\circ\\theta$ has the same universal boundary family as the identity, because both have the same $\\delta_i$-components and the extension from codimension-one components is unique; it is therefore the identity by the universal property of $\\operatorname{Hom}(\\partial\\Delta[n],K)_0$. Thus $\\theta$ is the unique isomorphism claimed in (b), and its projection equations hold by construction.",
+   "text": "Given a representing boundary family u on H, lift its codimension-one components into the concrete matching object to obtain a. The universal boundary family on that matching object pulls back along a to u, since both agree on the codimension-one components and factorization determines all components. Representability of u supplies b in the reverse direction. Evaluation of these family equations, injectivity of the representing bijection, and extensionality of matching projections show a followed by b is the identity of H and b followed by a is the identity of the matching object. Thus a and b form the required isomorphism. Its uniqueness follows from the same projection extensionality. This uses the product and multiequalizer APIs directly, without the separate proper-face-category or abstract matching-object theorems.",
    "uses": [
     "def-weil-pbc-simplicial-hom-object",
-    "lem-weil-pbc-simplicial-matching-object"
+    "def-weil-pbc-semi-representable-object"
    ],
    "elementary": false,
    "source": {
@@ -76,10 +75,10 @@
    }
   },
   {
-   "text": "For (c), the maps $K(\\varphi):K_n\\to K_m$ for boundary simplices form a boundary family, so def-weil-pbc-simplicial-hom-object gives the unique restriction morphism $\\rho:K_n\\to\\operatorname{Hom}(\\partial\\Delta[n],K)_0$ with $u_\\varphi\\circ\\rho=K(\\varphi)$. For each $i$, $\\mathrm{pr}_i\\circ\\theta\\circ\\rho=u_{\\delta_i}\\circ\\rho=K(\\delta_i)=d_i$, while $\\mathrm{pr}_i\\circ\\mu_n=d_i$ by the definition of the matching morphism. The matching-object universal property therefore forces $\\theta\\circ\\rho=\\mu_n$.",
+   "text": "The operators K of boundary simplices form an explicit compatible family on K_(n+1). The representing bijection of u gives the unique restriction morphism rho with all the stated components. For any comparison isomorphism theta with the prescribed face components, compute each matching projection of rho followed by theta: the restriction equation gives K(delta_i), which is the corresponding face map. The concrete matching map has exactly those projections by its product or multiequalizer lift formula. Extensionality of these projections gives rho followed by theta equal to the canonical matching map.",
    "uses": [
     "def-weil-pbc-simplicial-hom-object",
-    "lem-weil-pbc-simplicial-matching-object"
+    "def-weil-pbc-semi-representable-object"
    ],
    "elementary": true,
    "source": {
@@ -94,13 +93,12 @@
   "def-weil-pbc-simplicial-object",
   "lem-weil-pbc-simplex-face-factorization",
   "lem-weil-pbc-simplex-face-face-identity",
-  "lem-weil-pbc-simplicial-matching-object",
-  "lem-weil-pbc-matching-object-proper-faces"
+  "def-weil-pbc-semi-representable-object"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/simplicial.tex",
-  "place": "Lemmas 0177 (lemma-simplex-map) and 018V (lemma-cosk-shriek), with Lemma 0186 (lemma-formula-limit) for the explicit matching-object description"
+  "place": "Lemmas 0177 (lemma-simplex-map), 018V (lemma-cosk-shriek) and 0186 (lemma-formula-limit). W3 formalizes the factorization construction directly using the concrete product and multiequalizer definitions of semiRepresentableMatchingObject, without the auxiliary proper-face-category comparison."
  },
  "mathlib_searches": [
   {
@@ -189,5 +187,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261015T220304-L-2469160",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
