@@ -10,21 +10,53 @@ arithmetically in terms of integer polynomials and their complex roots.
 
 ## Blueprint
 
-A browsable blueprint (chapters, statement/proof dependencies, dependency
-graph, progress summary) is written in LaTeX under `blueprint/src/` and
-built with [leanblueprint](https://github.com/PatrickMassot/leanblueprint).
+The informal blueprint is maintained in
+[formal-arithmetic-geometry/weil-conjectures-blueprint](https://github.com/formal-arithmetic-geometry/weil-conjectures-blueprint)
+and included at `blueprint/` as a Git submodule pinned to a specific commit.
+Its Markdown nodes live under `blueprint/blueprint/`, with configuration in
+`blueprint/blueprint.toml`.
 
-The content lives in `blueprint/src/content.tex` and is currently empty.
-
-Building locally requires a TeX distribution, Graphviz and
-`pip install leanblueprint`; then, from the repository root:
+Clone this project with the submodule:
 
 ```bash
-leanblueprint web   # writes the site to blueprint/web/
-leanblueprint pdf   # writes blueprint/print/print.pdf
+git clone --recurse-submodules https://github.com/formal-arithmetic-geometry/weil-conjectures
 ```
 
-No workflow builds or publishes the blueprint: it is a local-only build.
+For an existing checkout, run this from the project root after pulling or
+switching branches to initialize or update the submodule to the pinned commit:
+
+```bash
+git submodule update --init --recursive
+```
+
+See [the blueprint README](blueprint/README.md) for local build instructions;
+run its Lake commands from `blueprint/`. Blueprint content changes belong in
+the blueprint repository; after they are committed and pushed there, update
+and commit the submodule pointer here. The blueprint repository builds and
+publishes its site independently of this project's Lean CI.
+
+## Where the mathematics lives
+
+Before stating a result, check whether this repository already proves it:
+
+* the zeta function `Z(X, t)` is `AlgebraicGeometry.Scheme.Hom.zetaSeries`,
+  defined in `Comparator/Weil/Definitions.lean`, with its theory in
+  `WeilConjectures/ZetaSeries.lean`;
+* the two headline statements are
+  `AlgebraicGeometry.Scheme.zetaSeries_rational` and
+  `AlgebraicGeometry.Scheme.weil_conjectures` in
+  `WeilConjectures/Statement.lean`;
+* Nagata compactification is `AlgebraicGeometry.NagataCompactification` in
+  `WeilConjectures/Compactification/NagataCompactification.lean`, built on
+  the rest of `WeilConjectures/Compactification/`;
+* the six operations on the étale and pro-étale derived categories are
+  constructed in `WeilConjectures/SixFunctors/`.
+
+New declarations are named and namespaced as if they were headed for Mathlib
+(`AlgebraicGeometry.*`, `CategoryTheory.*`, ...) and go into the topic tree
+they belong to, not into a tree named after a document's sectioning. A file
+under `WeilConjectures/Mathlib/` must mirror a file that already exists in
+Mathlib.
 
 ## GitHub configuration
 

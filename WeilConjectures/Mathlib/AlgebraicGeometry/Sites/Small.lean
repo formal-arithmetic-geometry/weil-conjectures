@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import Mathlib.AlgebraicGeometry.Sites.Small
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-!
@@ -156,51 +157,14 @@ lemma coverPreserving_overMap (hQP : Q ≤ P) :
       ⟨Z, g, 𝟙 _, hSg, (Category.id_comp _).symm⟩, hgl, hgz⟩
 
 omit [Q.IsMultiplicative] [Q.IsStableUnderBaseChange] [P.IsStableUnderBaseChange] in
-/-- The localization functor preserves compatible families of elements. -/
+/-- The localization functor preserves compatible families of elements. This is the case
+`K = U.smallGrothendieckTopology Q` of
+`CategoryTheory.MorphismProperty.Over.compatiblePreserving_map`, which holds for an
+arbitrary topology on `P.Over ⊤ U`. -/
 lemma compatiblePreserving_overMap :
     CompatiblePreserving.{w} (U.smallGrothendieckTopology Q (Q := P))
-      (MorphismProperty.Over.map ⊤ h) where
-  compatible := by
-    intro ℱ Z T x hx Y₁ Y₂ T' f₁ f₂ g₁ g₂ hg₁ hg₂ hcomp
-    have hleft : f₁.left ≫ g₁.left = f₂.left ≫ g₂.left := by
-      have h' : (f₁ ≫ (MorphismProperty.Over.map ⊤ h).map g₁).left =
-          (f₂ ≫ (MorphismProperty.Over.map ⊤ h).map g₂).left := by
-        rw [hcomp]
-      exact h'
-    have hw : f₂.left ≫ Y₂.hom = f₁.left ≫ Y₁.hom := by
-      have w₁ : g₁.left ≫ Z.hom = Y₁.hom := MorphismProperty.Over.w g₁
-      have w₂ : g₂.left ≫ Z.hom = Y₂.hom := MorphismProperty.Over.w g₂
-      rw [← w₁, ← w₂, ← Category.assoc, ← Category.assoc, hleft]
-    -- `f₁.left` satisfies `P` since it is a morphism between `P`-schemes over `U`.
-    have hf₁P : P f₁.left := by
-      apply P.of_postcomp (W' := P) f₁.left
-        ((MorphismProperty.Over.map ⊤ h).obj Y₁).hom (MorphismProperty.Comma.prop _)
-      rw [MorphismProperty.Over.w f₁]
-      exact MorphismProperty.Comma.prop _
-    let W' : P.Over ⊤ V := MorphismProperty.Over.mk ⊤ (f₁.left ≫ Y₁.hom)
-      (P.comp_mem _ _ hf₁P Y₁.prop)
-    let g₁' : W' ⟶ Y₁ := MorphismProperty.Over.homMk f₁.left rfl
-    let g₂' : W' ⟶ Y₂ := MorphismProperty.Over.homMk f₂.left hw
-    have hcomm : g₁' ≫ g₁ = g₂' ≫ g₂ := by
-      apply MorphismProperty.Over.Hom.ext
-      show f₁.left ≫ g₁.left = f₂.left ≫ g₂.left
-      exact hleft
-    have hT' : 𝟙 T'.left ≫ (f₁.left ≫ Y₁.hom) ≫ f = T'.hom := by
-      simp only [Category.id_comp, Category.assoc]
-      exact MorphismProperty.Over.w f₁
-    let e : T' ⟶ (MorphismProperty.Over.map ⊤ h).obj W' :=
-      MorphismProperty.Over.homMk (𝟙 T'.left) hT'
-    have hf₁ : f₁ = e ≫ (MorphismProperty.Over.map ⊤ h).map g₁' := by
-      apply MorphismProperty.Over.Hom.ext
-      show f₁.left = 𝟙 T'.left ≫ f₁.left
-      exact (Category.id_comp _).symm
-    have hf₂ : f₂ = e ≫ (MorphismProperty.Over.map ⊤ h).map g₂' := by
-      apply MorphismProperty.Over.Hom.ext
-      show f₂.left = 𝟙 T'.left ≫ f₂.left
-      exact (Category.id_comp _).symm
-    have key := hx g₁' g₂' hg₁ hg₂ hcomm
-    rw [hf₁, hf₂, op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply]
-    exact congrArg (ℱ.obj.map e.op) key
+      (MorphismProperty.Over.map ⊤ h) :=
+  MorphismProperty.Over.compatiblePreserving_map h _
 
 /-- For `Q ≤ P` the localization functor is continuous for the small `Q`-topologies. -/
 lemma isContinuous_overMap (hQP : Q ≤ P) :

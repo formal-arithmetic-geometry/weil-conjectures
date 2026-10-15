@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
@@ -20,7 +21,8 @@ category is equivalent to a category of sheaves on a small site, which is Grothe
 abelian. Since the site has `Hom`-types in `u`, the sheaf category again has `Hom`-types in
 `u + 1`.
 
-The small étale site is essentially small in `u + 1`, so this applies to it.
+The small étale site and the small pro-étale site are essentially small in `u + 1`, so this
+applies to both.
 
 -/
 
@@ -35,8 +37,8 @@ namespace CategoryTheory.GrothendieckTopology
 /-- The category of `A`-valued sheaves on an essentially small site is Grothendieck
 abelian, for a Grothendieck abelian coefficient category `A` with `Hom`-types in the
 universe `u + 1`, one above the universe `u` of the base schemes: the site is equivalent to
-a small one, and sheafification is available on both by `hasSheafify_essentiallySmall`. -/
-instance (priority := high) isGrothendieckAbelian_sheaf_essentiallySmall (A : Type u')
+a small one, and sheafification is available on both by `hasSheafify_of_essentiallySmall`. -/
+instance (priority := high) isGrothendieckAbelian_sheaf_of_essentiallySmall (A : Type u')
     [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) :
@@ -49,6 +51,13 @@ the instance above applied to the essentially small small étale site. -/
 instance (priority := high) isGrothendieckAbelian_sheaf_smallEtaleTopology (A : Type u')
     [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] (X : Scheme.{u}) :
     IsGrothendieckAbelian.{u + 1} (Sheaf X.smallEtaleTopology A) :=
+  inferInstance
+
+/-- The category of `A`-valued sheaves on the small pro-étale site is Grothendieck abelian:
+the instance above applied to the essentially small small pro-étale site. -/
+instance (priority := high) isGrothendieckAbelian_sheaf_proEtTopology (A : Type u')
+    [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] (X : Scheme.{u}) :
+    IsGrothendieckAbelian.{u + 1} (Sheaf (Scheme.ProEt.topology X) A) :=
   inferInstance
 
 end CategoryTheory.GrothendieckTopology
