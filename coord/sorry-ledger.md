@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **840**, closure **4**, holes in definitions **1**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **839**, closure **3**, holes in definitions **1**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -17,24 +17,24 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 614 | 4 |
+| Sheaf | 613 | 3 |
 | WeilConjectures | 226 | 0 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2217 | 224 | 1993 | 96 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2171 | 222 | 1949 | 84 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1936 | 4 | 1932 | 50 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2214 | 227 | 1987 | 103 | 18 |
+| 660345513 (Application of proof-dependency imports) | library | 2168 | 225 | 1943 | 91 | 18 |
+| 660345513 (Application of proof-dependency imports) | closure | 1933 | 3 | 1930 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3380 |
+| proved | 3381 |
 | decomposed | 48 |
 | moved | 3919 |
 | pruned | 119 |
-| other | 516 |
+| other | 523 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -69,7 +69,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | H1 | 130 | 128 | 105 | 23 | 73/130 (56.2%) |
 | H2 | 109 | 106 | 88 | 18 | 64/109 (58.7%) |
 | H3 | 119 | 134 | 94 | 40 | 65/119 (54.6%) |
-| H4 | 55 | 52 | 41 | 11 | 30/55 (54.5%) |
+| H4 | 56 | 53 | 41 | 12 | 30/56 (53.6%) |
 | J1 | 122 | 129 | 75 | 54 | 53/122 (43.4%) |
 | J2 | 102 | 104 | 70 | 34 | 51/102 (50.0%) |
 | J3 | 117 | 123 | 77 | 46 | 54/117 (46.2%) |
@@ -135,15 +135,14 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Y2 | 108 | 110 | 98 | 12 | 59/108 (54.6%) |
 | Y3 | 103 | 90 | 56 | 34 | 45/103 (43.7%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
-| launcher prover | 49 | 9 | 7 | 2 | 5/49 (10.2%) |
+| launcher prover | 56 | 9 | 7 | 2 | 5/56 (8.9%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
 
 | module | distance | holes | group |
 |---|---:|---:|---|
 | Sheaf.AlgebraicGeometry.CartesianRawClassChartRepresentative | 17 | 1 | R4 |
-| Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 37 | 1 | E4 |
-| Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonNaturality | 51 | 1 | H4 |
+| Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData | 37 | 1 | E3 |
 | Sheaf.AlgebraicGeometry.QCohTensorResolutionChartHomologyNaturality | 51 | 1 | H3 |
 
 Modules pruned since the imports baseline:
@@ -262,6 +261,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.FiniteAffineFibreSections`
 - `Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen`
 - `Sheaf.AlgebraicGeometry.FiniteDiscreteSeparatedAffine`
+- `Sheaf.AlgebraicGeometry.FiniteEtaleDescentData`
 - `Sheaf.AlgebraicGeometry.FiniteEtaleTrace`
 - `Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree`
 - `Sheaf.AlgebraicGeometry.FiniteFlatDualityEvaluation`
