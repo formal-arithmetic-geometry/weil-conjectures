@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
 public import Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle
+public import Sheaf.AlgebraicGeometry.SingleComplexOpenSquareComparison
 
 /-! # The restricted composite uses the fixed pullback comparison -/
 
@@ -40,5 +41,22 @@ theorem perfectOverlapCompositeLocalIso_eq_compositionTo
   intro hP j hj
   unfold perfectOverlapCompositeLocalIso compositionTo
   rfl
+
+/-- A pinned square comparison is the forward fixed comparison for one path
+followed by the inverse comparison for the other. Source: Stacks Project,
+Tag 0D5S. Expand both definitions and use the component equation of the
+equality transport. -/
+theorem singleComplexOpenSquareComparison_app_eq_compositionTo
+    {X X' S S' : Scheme.{u}}
+    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
+    (h : g' ≫ f = f' ≫ g) (M : schemeDerivedCategory S) :
+    (singleComplexOpenSquareComparison f f' g g' h).app M =
+      (compositionTo f' g (g' ≫ f) h.symm).hom.app M ≫
+        (compositionTo g' f (g' ≫ f) rfl).inv.app M := by
+  simp only [singleComplexOpenSquareComparison, compositionTo,
+    NatTrans.comp_app, Iso.trans_hom, Iso.trans_inv, eqToIso.hom,
+    eqToIso.inv, eqToHom_app, eqToHom_refl, NatTrans.id_app,
+    Category.id_comp, Category.assoc, singleComplexOpenPinnedComposition,
+    perfectHomComposition]
 
 end AlgebraicGeometry
