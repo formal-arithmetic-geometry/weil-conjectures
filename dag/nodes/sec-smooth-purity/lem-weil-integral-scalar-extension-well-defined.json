@@ -31,7 +31,10 @@
   "lem-pc-kflat-resolution",
   "def-weil-derived-limit",
   "lem-weil-linear-abelian-derived-category",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-reduction-tower"
  ],
  "proof": [
   {
@@ -288,5 +291,51 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-fadceda85 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, route, and source passages in full. Checked all eight steps, ramified quotients, cone/homotopy signs, localization, shift compatibility, and scalar linearity. No new nodes, duplicates, or dependency cycles found. Target condensed categories and base-change maps remain distinct comparison obligations. Detailed checks and accepted tool_uses are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralScalarExtensionWellDefined",
+  "declaration": "WeilConjectures.integralScalarExtensionWellDefined",
+  "declarations": [
+   "WeilConjectures.integralScalar_absoluteValue",
+   "WeilConjectures.integralScalar_integer_mem",
+   "WeilConjectures.integralScalarIntegerInclusion",
+   "WeilConjectures.integralScalar_quotient_kernel",
+   "WeilConjectures.integralScalarQuotientMap",
+   "WeilConjectures.integralScalarQuotientMap_transition",
+   "WeilConjectures.integralScalarQuotientSheafMap",
+   "WeilConjectures.integralScalarRho",
+   "WeilConjectures.integralScalarReductionWitness",
+   "WeilConjectures.integralScalarReduction",
+   "WeilConjectures.integralScalarReduction_additive",
+   "WeilConjectures.integralScalarFiniteComplex",
+   "WeilConjectures.integralScalarLevel",
+   "WeilConjectures.integralScalarTensorSection",
+   "WeilConjectures.integralScalarTransition_existsUnique",
+   "WeilConjectures.integralScalarTransition",
+   "WeilConjectures.integralScalarTowerFunctor",
+   "WeilConjectures.integralScalarComplexFunctor",
+   "WeilConjectures.integralScalarOnGood",
+   "WeilConjectures.integralScalarFiniteConstant",
+   "WeilConjectures.integralScalarConstant_existsUnique",
+   "WeilConjectures.integralScalarConstant",
+   "WeilConjectures.integralScalarChainAction_existsUnique",
+   "WeilConjectures.integralScalarChainAction",
+   "WeilConjectures.integralScalarDerivedAction",
+   "WeilConjectures.integralScalarExtensionWellDefined"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralScalarExtensionWellDefined.lean",
+  "statement": "theorem integralScalarExtensionWellDefined : (∀ (P P' : (integralOperationsGoodComplex l E Y).FullSubcategory) (f : P.obj ⟶ P'.obj), QuasiIso f → (∀ n : ℕ, QuasiIso ((integralScalarFiniteComplex l E L ι Y n).map f)) ∧ QuasiIso ((integralScalarComplexFunctor l E L ι Y).map f)) ∧ ∃ (F : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l L Y)) (e : integralOperationsGoodLocalization l E Y ⋙ F ≅ integralScalarOnGood l E L ι Y), F.Additive ∧ Nonempty (F.CommShift ℤ) ∧ (∀ (F' : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l L Y)) (e' : integralOperationsGoodLocalization l E Y ⋙ F' ≅ integralScalarOnGood l E L ι Y), ∃! α : F ≅ F', isoWhiskerLeft (integralOperationsGoodLocalization l E Y) α ≪≫ e' = e) ∧ (∀ (K : DerivedCategory (integralTowerModules l E Y)) (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (_q : DerivedCategory.Q.obj P.obj ≅ K), Nonempty (F.obj K ≅ DerivedCategory.Q.obj ((integralScalarComplexFunctor l E L ι Y).obj P.obj)) ∧ integralOperationsDerivedLimitProperty l L Y ((integralScalarTowerFunctor l E L ι Y).obj P.obj) (F.obj K)) ∧ (∀ (a : Padic.coefficientExtensionIntegers l E) (K K' : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ K'), F.map ((integralScalarDerivedAction l E Y a).app K ≫ f) = (integralScalarDerivedAction l L Y (integralScalarIntegerInclusion l E L ι a)).app (F.obj K) ≫ F.map f)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-81f16667c",
+  "group": "NC",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, universes, edge cases, documentation, and per-file scompile evidence checked; no findings."
  }
 }
