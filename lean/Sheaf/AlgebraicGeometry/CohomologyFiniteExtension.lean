@@ -28,7 +28,7 @@ scalars restricted from global functions to a Noetherian ring.
 Source: Stacks Project, Cohomology of Schemes, proof of Proposition 30.19.1, Tag 02O5:
 the long exact sequence and closure of finite modules under submodules and extensions.
 (blueprint: lem-pc-e2-cohomology-finite-extension) -/
-theorem finite_H_of_shortExact {X : Scheme.{u}} (R : Type v) [CommRing R]
+theorem finite_H_of_shortExact_middle {X : Scheme.{u}} (R : Type v) [CommRing R]
     [IsNoetherianRing R] (σ : R →+* Γ(X, ⊤))
     (S : ShortComplex X.Modules) (hS : S.ShortExact) (q : ℕ) :
     letI : Module R (S.X₁.H q) := Module.compHom _ σ
