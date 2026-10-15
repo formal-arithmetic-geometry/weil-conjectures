@@ -16,16 +16,15 @@
  ],
  "proof": [
   {
-   "text": "Identify the localized small pro-etale site with the small site of V.left. Set-sheaves there are the slice topos at the representable V. Its forgetful functor preserves epimorphisms. Lift a section over the identity of V by the given evaluation property, so that the terminal object in the slice is projective. Transport along V.left.isoSpec and the affine-basis restriction equivalence; its evaluation at the identity is unchanged.",
+   "text": "For an epimorphism of sheaves on the affine pro-etale basis, use the single-surjective-cover characterization of local surjectivity. Compose the resulting affine cover with the affine coordinate isomorphism and the structure map to X. The pro-etale Yoneda sheaf of this cover is an epimorphism by separatedness and the singleton-cover criterion. The hypothesis at V lifts the identity section to a section of the cover; restricting the local lift along that section proves evaluation surjectivity at the identity affine object. The singleton-cover section argument is proved locally as split_affine_proetale_cover using Hom.singleton_mem_propQCPrecoverage and uliftYonedaEquiv.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-pc-fppf-dense-sheaf-equivalence"
+    "lem-weil-pbc-affine-proetale-single-cover-local-surjectivity",
+    "lem-weil-pbc-proetale-subcanonical"
    ],
    "elementary": false
   },
   {
-   "text": "The closed base change is affine with surjective global-sections map. Its quotient by the displayed kernel is its actual coordinate ring, by the first isomorphism theorem. The resulting spectrum isomorphism commutes with the projection. Transport the given specialization by V.left.isoSpec and this spectrum isomorphism, and identify the pullback of the identity with Spec(A/I). Empty schemes give the zero ring and a vacuous point condition.",
+   "text": "The closed base change projection is a closed immersion and is affine with surjective global-sections map. Its quotient by the displayed kernel is identified with its coordinate ring by RingHom.quotientKerEquivOfSurjective. Naturality of toSpecΓ gives the commuting spectrum map. Push the assumed specialization forward along V.left.isoSpec.hom and lift its endpoint along the pullback of the quotient spectrum over the identity.",
    "uses": [
     "lem-weil-pbc-closed-immersion-base-change",
     "def-weil-closed-immersion"
@@ -35,15 +34,14 @@
  ],
  "proof_deps": [
   "def-weil-closed-immersion",
-  "lem-pc-fppf-dense-sheaf-equivalence",
+  "lem-weil-pbc-affine-proetale-single-cover-local-surjectivity",
   "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-weil-pbc-proetale-subcanonical"
  ],
  "proof_origin": {
-  "by": "D2 second reader",
+  "by": "B4",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09AC, 09BK and 09BL; explicit localization and counit calculation"
+  "place": "Tag 09AC first reduction and Tag 01IH affine closed immersions; Lean API proof uses the single-cover local-surjectivity criterion and explicit kernel quotient"
  },
  "mathlib_searches": [
   {
@@ -117,10 +115,10 @@
   "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261015T194212-L-1174644",
-  "kind": "interface",
+  "landing": "20261015T201714-L-1447240",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

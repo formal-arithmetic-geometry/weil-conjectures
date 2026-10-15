@@ -3,8 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteLift
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
+import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 
 @[expose] public section
 
@@ -12,31 +11,103 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
+set_option backward.isDefEq.respectTransparency false in
+-- A section of a surjective affine cover is obtained by lifting the Yoneda identity.
+private theorem split_affine_proetale_cover {X : Scheme.{u}} (V W : X.ProEt)
+    [IsAffine V.left] [IsAffine W.left]
+    (hV : ∀ (P Q : Sheaf (ProEt.topology X) (Type (u + 1))) (φ : P ⟶ Q),
+      Epi φ → Function.Surjective (φ.hom.app (op V)))
+    (q : W ⟶ V) [Surjective q.left] : ∃ s : V ⟶ W, s ≫ q = 𝟙 V := by
+  let J := ProEt.topology X
+  let H := J.uliftYoneda.{u + 1}
+  have hcover : Sieve.generate (Presieve.singleton q) ∈ J V := by
+    apply Precoverage.generate_mem_toGrothendieck
+    rw [ProEt.mem_precoverage_iff, Presieve.map_singleton]
+    change Presieve.singleton q.left ∈ proetalePrecoverage V.left
+    exact Hom.singleton_mem_propQCPrecoverage (inferInstance : WeaklyEtale q.left)
+  have hepi : Epi (H.map q) := by
+    constructor
+    intro T a b hab
+    apply J.uliftYonedaEquiv.injective
+    have hsep := ((isSheaf_iff_isSheaf_of_type J T.obj).mp T.property).isSheafFor
+      (Presieve.singleton q) hcover |>.isSeparatedFor
+    apply hsep.ext
+    rintro Y f ⟨⟩
+    rw [J.uliftYonedaEquiv_naturality, J.uliftYonedaEquiv_naturality]
+    exact congrArg J.uliftYonedaEquiv hab
+  obtain ⟨s, hs⟩ := hV _ _ (H.map q) hepi (ULift.up (𝟙 V))
+  exact ⟨s.down, congrArg ULift.down hs⟩
+
+set_option backward.isDefEq.respectTransparency false in
+-- Use the kernel quotient map explicitly; no arbitrary quotient presentation is chosen.
+private theorem quotient_specialization {T Y : Scheme.{u}} [IsAffine Y]
+    (f : T ⟶ Y) [IsClosedImmersion f]
+    (hspec : ∀ x : Y, ∃ z : T, Specializes x (f z)) :
+    ∀ x : Spec Γ(Y, ⊤), ∃ z : ↥(pullback (𝟙 (Spec Γ(Y, ⊤)))
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (RingHom.ker f.appTop.hom))))),
+      Specializes x ((pullback.fst (𝟙 (Spec Γ(Y, ⊤)))
+        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (RingHom.ker f.appTop.hom))))) z) := by
+  have hsurj : Function.Surjective f.appTop :=
+    (IsClosedImmersion.isAffine_surjective_of_isAffine f).2
+  let e := f.appTop.hom.quotientKerEquivOfSurjective hsurj
+  let g : T ⟶ Spec (.of (Γ(Y, ⊤) ⧸ RingHom.ker f.appTop.hom)) :=
+    T.toSpecΓ ≫ Spec.map (CommRingCat.ofHom e.toRingHom)
+  have he : CommRingCat.ofHom (Ideal.Quotient.mk (RingHom.ker f.appTop.hom)) ≫
+    CommRingCat.ofHom e.toRingHom = f.appTop := by
+    ext a
+    exact RingHom.quotientKerEquivOfSurjective_apply_mk hsurj a
+  have hg : g ≫ Spec.map (CommRingCat.ofHom
+    (Ideal.Quotient.mk (RingHom.ker f.appTop.hom))) = f ≫ Y.isoSpec.hom := by
+    change (T.toSpecΓ ≫ Spec.map _) ≫ Spec.map _ = f ≫ Y.toSpecΓ
+    rw [Category.assoc, ← Spec.map_comp, he]
+    exact (Scheme.toSpecΓ_naturality f).symm
+  intro x
+  obtain ⟨z, hz⟩ := hspec (Y.isoSpec.inv x)
+  let j := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (RingHom.ker f.appTop.hom)))
+  let l : Spec (.of (Γ(Y, ⊤) ⧸ RingHom.ker f.appTop.hom)) ⟶
+    pullback (𝟙 (Spec Γ(Y, ⊤))) j := pullback.lift j (𝟙 _) (by simp)
+  refine ⟨l (g z), ?_⟩
+  have hz' := hz.map Y.isoSpec.hom.continuous
+  have hx : Y.isoSpec.hom (Y.isoSpec.inv x) = x :=
+    congrArg (fun k : Spec Γ(Y, ⊤) ⟶ Spec Γ(Y, ⊤) ↦ k x)
+    Y.isoSpec.inv_hom_id
+  have hgz : Spec.map (CommRingCat.ofHom
+    (Ideal.Quotient.mk (RingHom.ker f.appTop.hom))) (g z) =
+    Y.isoSpec.hom (f z) := congrArg (fun k : T ⟶ _ ↦ k z) hg
+  rw [hx] at hz'
+  have hlhom : l ≫ pullback.fst (𝟙 _) j = j := pullback.lift_fst _ _ _
+  have hl : (pullback.fst (𝟙 _) j) (l (g z)) = j (g z) :=
+    congrArg (fun k : Spec (.of (Γ(Y, ⊤) ⧸ RingHom.ker f.appTop.hom)) ⟶
+      Spec Γ(Y, ⊤) ↦ k (g z)) hlhom
+  change Specializes (x : Spec Γ(Y, ⊤)) ((pullback.fst (𝟙 _) j) (l (g z)))
+  rw [hl, hgz]
+  exact hz'
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Affine coordinates transport projectivity of evaluation and the closed-fibre
 specialization condition. The ideal is the actual kernel of the global-sections
 map of the closed base change, rather than an ideal selected from existence.
 
-Source: Stacks Project, Tag 09AC, first reduction; Tags 09A5 and 03CF for
-localization, and Tag 01R8 for the affine closed immersion
+Source: Stacks Project, Tag 09AC, first reduction, and Tag 01IH for closed
+immersions into affine schemes. The single-cover lifting criterion is
+`AffineProEt.isLocallySurjective_iff_of_isSheaf` in the source library.
 (blueprint: new-lem-weil-pbc-specialization-affine-coordinates).
 
-Proof. Localize the pro-etale site at V. Its sheaf category is the slice topos
-at the sheaf represented by V; projectivity of that representable says that the
-terminal object of this slice is projective. Explicitly, the forgetful functor
-from the slice preserves epimorphisms, so the identity of the representable
-lifts through any epimorphism to it. The equivalence with the small site of
-V.left preserves this property and evaluates it at the identity object.
-Transport along V.left.isoSpec, then restrict along the dense affine ind-etale
-basis. Restriction is an equivalence, preserves epimorphisms, and keeps the
-identity object's sections. This proves the first clause.
-The closed base change is affine and its global-sections map is surjective.
-The first isomorphism theorem identifies its ring with A/I, for the displayed
-kernel I. The resulting Spec isomorphism commutes with its map to V.left.
-Continuous isomorphisms preserve specialization; transport the given point and
-its specialization through these isomorphisms. Finally use the pullback along
-the identity to express the closed point as a point of the displayed pullback.
-If V is empty, A is the zero ring, both spectra are empty, and the geometric
-clause is vacuous. -/
+Proof. An epimorphism of sheaves on the affine basis lifts any given section
+along a single surjective affine cover. Compose that cover with the affine
+coordinate isomorphism and the structure map to X. Subcanonical Yoneda sends
+this cover to an epimorphism of set sheaves on X.ProEt: maps agreeing after
+the cover agree by separatedness. The hypothesis at V lifts the identity
+section to a section of the cover. Transport it to affine coordinates and
+restrict the local lift along it. Naturality and the section equation give
+a preimage of the original section.
+The closed base change has a surjective global-sections map. Its quotient by
+the displayed kernel maps to the coordinate ring by the first isomorphism
+theorem. Composing its spectrum map with the canonical toSpecΓ map gives a
+map from the closed fibre to the quotient spectrum, commuting with the
+projection by naturality. Push the assumed specialization forward along
+V.left.isoSpec.hom and lift its closed endpoint to the pullback along the
+identity. All constructions include empty schemes and the zero ring. -/
 theorem specialization_affine_coordinates
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]
@@ -53,6 +124,46 @@ theorem specialization_affine_coordinates
         (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))),
       Specializes x ((pullback.fst B.hom
         (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) z)) := by
-  sorry
+  dsimp only
+  constructor
+  · let B := AffineProEt.ofEtale (𝟙 (Spec Γ(V.left, ⊤)))
+    intro P Q φ hφ y
+    have hlocal : Sheaf.IsLocallySurjective φ :=
+      (Sheaf.isLocallySurjective_iff_epi φ).mpr hφ
+    obtain ⟨W, q, hq, z, hz⟩ :=
+      (AffineProEt.isLocallySurjective_iff_of_isSheaf φ.hom P.property Q.property).mp hlocal B y
+    let w : W.left ⟶ V.left := W.hom ≫ V.left.isoSpec.inv
+    have hW : WeaklyEtale W.hom := proAffineEtale_le_weaklyEtale _ W.prop
+    have hw : WeaklyEtale w := by dsimp [w]; infer_instance
+    let W' : X.ProEt := ProEt.mk (w ≫ V.hom)
+    let q' : W' ⟶ V := MorphismProperty.Over.homMk w rfl
+    have hqleft : q.left = W.hom := by
+      have h := MorphismProperty.Over.w q
+      change q.left ≫ 𝟙 _ = W.hom at h
+      simpa only [Category.comp_id] using h
+    have hW' : IsAffine W'.left := inferInstanceAs (IsAffine W.left)
+    have hq' : Surjective q'.left := by
+      change Surjective (W.hom ≫ V.left.isoSpec.inv)
+      rw [← hqleft]
+      infer_instance
+    obtain ⟨s, hs⟩ := split_affine_proetale_cover V W' hweak q'
+    have hsleft : s.left ≫ w = 𝟙 V.left :=
+      congrArg (fun k : V ⟶ V ↦ k.left) hs
+    let t : B ⟶ W := MorphismProperty.Over.homMk (V.left.isoSpec.inv ≫ s.left) (by
+      apply (cancel_mono V.left.isoSpec.inv).mp
+      change (V.left.isoSpec.inv ≫ s.left) ≫ W.hom ≫ V.left.isoSpec.inv =
+        (𝟙 _) ≫ V.left.isoSpec.inv
+      change V.left.isoSpec.inv ≫ (s.left ≫ w) = (𝟙 _) ≫ V.left.isoSpec.inv
+      rw [hsleft, Category.comp_id, Category.id_comp])
+    have ht : t ≫ q = 𝟙 B := by
+      apply MorphismProperty.Over.Hom.ext
+      change (V.left.isoSpec.inv ≫ s.left) ≫ q.left = 𝟙 _
+      rw [hqleft]
+      exact MorphismProperty.Over.w t
+    refine ⟨P.obj.map t.op z, ?_⟩
+    rw [NatTrans.naturality_apply, hz, ← Functor.map_comp_apply, ← op_comp, ht]
+    exact Q.obj.map_id_apply _ y
+  · exact quotient_specialization (Y := V.left) (pullback.fst V.hom i) hspec
 
 end AlgebraicGeometry.Scheme
+

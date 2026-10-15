@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-affine-proetale-single-cover-local-surjectivity",
+ "kind": "statement",
+ "title": "Single affine cover criterion for local surjectivity",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $\\mathcal B_S$ be its affine pro-etale site [def-weil-pbc-ind-etale-basis]. Let $F,G$ be sheaves of sets [def-weil-pbc-sites-and-cohomology] on $\\mathcal B_S$, and let $\\phi:F\\to G$ be a morphism. Then $\\phi$ is locally surjective if and only if, for every object $U$ and section $y\\in G(U)$, there exist an arrow $q:W\\to U$ in $\\mathcal B_S$ whose underlying scheme map is surjective and a section $x\\in F(W)$ such that $\\phi_W(x)=G(q)(y)$. Here locally surjective means that, for every $U,y$, the sieve of arrows along which $y$ lifts is covering.",
+ "source": {
+  "document": "WeilConjectures/AlgebraicGeometry/ProEtale/Replete.lean",
+  "place": "isLocallySurjective_iff_of_isSheaf, lines 62-84; finite disjoint union of local lifting covers"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For local surjectivity, take the covering image sieve of y. Refine it by a finite jointly surjective affine-basis family and choose each local lift. The source-library sigmaCover is their finite disjoint union; exists_sigmaCover_glue glues the chosen sections with no overlap constraints. surjective_sigmaCoverπ supplies the single surjective arrow, and sigmaCover_ext with naturality proves its section has the required image. This is exactly the existing Lean proof. Empty schemes and empty finite families are included.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely, the sieve of local lifts contains the singleton q. A surjective affine-basis arrow is a covering by generate_singleton_mem_topology; upward closure makes the image sieve covering. This is the reverse direction of the same existing Lean proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ind-etale-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "WeilConjectures/AlgebraicGeometry/ProEtale/Replete.lean",
+  "place": "Existing proved characterization isLocallySurjective_iff_of_isSheaf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isLocallySurjective_iff_epi|uliftYonedaEquiv_naturality",
+   "results": "11 hits: Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean",
+   "date": "2026-10-16",
+   "verdict": "Generic local-surjectivity and sheaf APIs; the exact affine single-cover criterion is already proved in the source library Replete.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On the affine pro-etale site, a sheaf epimorphism lifts every section after restriction along one surjective morphism of affine schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of sheaves on the affine pro-etale site is locally surjective if and only if sections lift after a single surjective affine cover",
+   "results": "8 hits: TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, CategoryTheory.Presheaf.isLocallySurjective_of_surjective, CategoryTheory.Sheaf.isLocallySurjective_sheafToPresheaf_map_iff, CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.locallySurjective, CategoryTheory.GrothendieckTopology.W.isLocallySurjective, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite, CategoryTheory.Sheaf.IsLocallySurjective",
+   "date": "2026-10-16",
+   "verdict": "Generic local-surjectivity and sheaf APIs; the exact affine single-cover criterion is already proved in the source library Replete.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallySurjective\"",
+   "results": "12 hits: CategoryTheory.Presheaf.IsLocallySurjective, CategoryTheory.Sheaf.IsLocallySurjective, CategoryTheory.Sheaf.instIsLocallySurjectiveFunToImage, CategoryTheory.Presheaf.instIsLocallySurjectiveFunToRangeSheafify, CategoryTheory.Presheaf.isLocallySurjective_toSheafify', CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Presheaf.isLocallySurjective_of_iso, CategoryTheory.Sheaf.isLocallySurjective_iff_epi",
+   "date": "2026-10-16",
+   "verdict": "Generic local-surjectivity and sheaf APIs; the exact affine single-cover criterion is already proved in the source library Replete.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleSpecializationAffineCoordinates",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-specialization-restriction-sections",
+   "place": "Tag 09AC first reduction: affine coordinates and weak contractibility",
+   "via": [
+    "new-lem-weil-pbc-specialization-affine-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ProEtale.Replete",
+  "declaration": "AlgebraicGeometry.Scheme.AffineProEt.isLocallySurjective_iff_of_isSheaf",
+  "statement": "lemma isLocallySurjective_iff_of_isSheaf {F G : S.AffineProEtᵒᵖ ⥤ Type w} (φ : F ⟶ G)\n    (hF : Presheaf.IsSheaf (topology S) F) (hG : Presheaf.IsSheaf (topology S) G) :\n    Presheaf.IsLocallySurjective (topology S) φ ↔\n      ∀ (X : S.AffineProEt) (y : G.obj (op X)), ∃ (W : S.AffineProEt) (q : W ⟶ X)\n        (_ : Surjective q.left) (x : F.obj (op W)), φ.app (op W) x = G.map q.op y",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T201714-L-1447240",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T201714-L-1447240",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
