@@ -226,5 +226,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-9ff61d34e (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full. Repaired three small faults: missing canonical module base-change definition, missing local derived-pullback comparison citation, and Loogle failure misclassified as no match. Statement unchanged; no new or dropped nodes. Review and corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveNoetherianPerfectBaseChange",
+  "declaration": "AlgebraicGeometry.projectiveNoetherian_perfect_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveNoetherianPerfectBaseChange.lean",
+  "statement": "theorem projectiveNoetherian_perfect_baseChange [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X S T : Scheme.{u}} [IsLocallyNoetherian S] (f : X ⟶ S) [IsProjective f] (G : X.Modules) (hG : RingedSpace.IsCoherent X.toRingedSpace G) (hflat : Scheme.Modules.IsFlatOver G f) (g : T ⟶ S) [(Scheme.Modules.tensorPullback (pullback.fst f g)).Additive] [∀ U : T.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U))] : Scheme.IsPerfect T ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G))) ∧ Scheme.IsPerfect T ((schemeDerivedDirectImage (pullback.snd f g)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) 0).obj ((Scheme.Modules.tensorPullback (pullback.fst f g)).obj G))) ∧ ∀ φ : (derivedPullback g).obj ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G)) ⟶ (schemeDerivedDirectImage (pullback.snd f g)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) 0).obj ((Scheme.Modules.tensorPullback (pullback.fst f g)).obj G)), IsDerivedModuleBaseChangeMap f g G φ → IsIso φ",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1fca0df51",
+  "group": "NO",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, source, exact declarations, hypotheses, conclusions, edge cases, docstrings, and verbatim statement field. Server-only compile reproduced cleanly in 2.5 seconds. No delivery defects found; branch and clones unchanged."
  }
 }
