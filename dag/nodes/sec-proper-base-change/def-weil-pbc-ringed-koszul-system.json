@@ -1,0 +1,153 @@
+{
+ "id": "def-weil-pbc-ringed-koszul-system",
+ "kind": "definition",
+ "title": "The finite strict Koszul system and its derived-limit presentations",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small site with topology $J$ and commutative ring sheaf $\\mathcal O$. Use module sheaves [def-weil-sheaf-of-modules-category], the ring complex $\\mathcal O[0]$ of [def-weil-pbc-ringed-extended-cech], and total tensor [def-pc-tensor-complex-sheaves]. For $r\\geq0$ and global sections $b:\\{0,\\ldots,r-1\\}\\to\\Gamma(\\mathcal C,\\mathcal O)$, define the strict forward diagram $P_m$ as the ordered total tensor of $[\\mathcal O\\xrightarrow{b_i^{m+1}}\\mathcal O]$ in degrees $0,1$, with maps $(1,b_i)$ in each factor. Its degree-zero projections give a cocone to $\\mathcal O[0]$; the empty tensor is the constant diagram $\\mathcal O[0]$. Define the strict inverse dual tower $Q_m=\\mathcal Hom^\\bullet(P_m,\\mathcal O[0])$ by [def-pur-hom-complex] and its unit by dualizing that projection and evaluation at one [def-weil-pbc-ringed-completion-unit]. Define the strict tower complex $T(N)_m=\\operatorname{Tot}(N\\otimes Q_m)$, with its actual tensor transition maps, by transposing this diagram of complexes degreewise into a complex in $\\operatorname{Fun}(\\mathbf N^{op},\\operatorname{Mod}(\\mathcal O))$. The compatible degree-zero maps give a chain map $N\\to\\lim_m T(N)_m$ by the degreewise limit universal property. Restrict global sections to every slice by their compatible section families [def-weil-pbc-ringed-derived-restriction]. A derived-limit presentation consists of a functor $T:D(\\mathcal O)\\to D(\\operatorname{Tow}(\\mathcal O))$ with specified localization factorization $QT\\cong T(-)Q_{Tow}$, and a total right derived inverse-limit functor with its defining comparison, satisfying the right-derived universal property and computed by inverse limit on K-injective tower complexes [lem-weil-pbc-ringed-strict-tower-homotopy-limit] [def-weil-abstract-derived-category]. Its completion functor is the composite; its unit is the preceding ordinary-limit chain map followed by the derived-functor comparison, transported by the specified tensor factorization and representative isomorphisms. Further slice restriction is the exact functor induced by Mathlib overMap, with its canonical overFunctorMap composition isomorphism; its exactness is [lem-weil-pbc-ringed-internal-hom-exact-restriction].",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-extended-cech",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "def-weil-pbc-ringed-completion-unit",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0913 (lemma-extended-alternating-Cech-is-colimit-koszul), with sites-cohomology.tex Tags 0A0A and 0941 for the dual strict tower and derived inverse-limit convention."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict finite Koszul tensor towers on a ringed site and their dual limit comparison",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extended Cech complex as colimit of Koszul complexes and derived Hom as inverse limit of duals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId\", \"module\": \"Mathlib/Algebra/Homology/Double\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        {ι : Type u_2} →\\n          {c : ComplexShape ι} →\\n            {i₀ i₁ : ι} →\\n              (hi₀₁ : c.Rel i₀ i₁)\", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms and a zero object, indices $i_0 \\\\neq i_1$, and a homological complex $K$, the composition of the evaluation functor at $i_0$ with the Coyoneda embeddin\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.π'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Extend\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroObject C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        {X : C} →\\n          (R : CategoryTheory.ProjectiveResolution X) → R.cochainComplex ⟶ (CochainComplex.singleFunctor C 0).obj X\", \"doc\": \"The morphism $\\\\pi'$ is constructed by first extending the canonical projection $\\\\pi$ from the projective resolution's cochain complex to the single-term complex at degree 0 via the embedding of the do\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"{R : Type u_1} →\\n  [inst : Ring R] →\\n    {C : Type u_2} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.EnoughProjectives C] →\\n              {X : C} →\\n       \", \"doc\": \"For a ring $ R $, an abelian $ R $-linear category $ \\\\mathcal{C} $, an object $ X $ with projective resolution $ P $, natural number $ n $, and object $ Y $, there is an isomorphism between the $ n $-\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            {X : C} →\\n              (P : CategoryTheory.ProjectiveRe\", \"doc\": \"Given a projective resolution $ P $ of an object $ X $ in an abelian category $ \\\\mathcal{C} $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ to another abelian category $ \\\\mathcal{D} $, \"}\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentable\", \"module\": \"Mathlib/Algebra/Homology/Double\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        {ι : Type u_2} →\\n          (c : ComplexShape ι) →\\n            [c.HasNoLoop] →\\n              (X : C) →\\n        \", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms, index type $\\\\iota$, complex shape $c$, object $X \\\\in \\\\mathcal{C}$, and index $j \\\\in \\\\iota$, the composition of the evaluation functor at $j$ with the \"}\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle\", \"module\": \"Mathlib/Algebra/Homology/Double\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        {ι : Type u_2} →\\n          (c : ComplexShape ι) →\\n            (i : ι) →\\n              [inst_3 : DecidableEq ι]\", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms, index type $\\\\iota$, complex shape $c$, and index $i \\\\in \\\\iota$ with no outgoing relations, the composition of the evaluation functor at $i$ with the C\"}\n",
+   "date": "2026-10-15",
+   "verdict": "No matching construction; Mathlib double and total tensor are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctor, SheafOfModules.free",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-15",
+   "verdict": "No matching diagram."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul|extended.*Cech; ringedKoszulDiagram|ringedKoszulDualTower; blueprint_refs.py search Koszul",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"45\", \"text\": \"    * the characterization as the limit of Koszul homology\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean\", \"line\": \"16\", \"text\": \"This file defines covariant derivatives (aka Koszul connections) on vector bundles over manifolds.\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"line\": \"21\", \"text\": \"TODO: Koszul regular sequences, `H_1`-regular sequences, quasi-regular sequences, depth.\"}\n",
+   "date": "2026-10-15",
+   "verdict": "No duplicate general finite ringed-site Koszul system."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+  "date": "2026-10-15",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The finite Koszul model and strict dual tower in the final derived-completion comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedKoszulSystem",
+  "declaration": "CategoryTheory.ringedKoszulDiagram",
+  "declarations": [
+   "CategoryTheory.ringedKoszulScalar",
+   "CategoryTheory.ringedKoszulFactor",
+   "CategoryTheory.ringedKoszulFactorStepF",
+   "CategoryTheory.ringedKoszulFactorStepF_comm",
+   "CategoryTheory.ringedKoszulFactorStep",
+   "CategoryTheory.ringedKoszulTensor",
+   "CategoryTheory.ringedKoszulFactors",
+   "CategoryTheory.ringedKoszulDiagram",
+   "CategoryTheory.ringedKoszulDualTower",
+   "CategoryTheory.ringedKoszulFactorProjectionF",
+   "CategoryTheory.ringedKoszulFactorProjectionF_comm",
+   "CategoryTheory.ringedKoszulFactorProjection",
+   "CategoryTheory.ringedKoszulUnitTensorIso",
+   "CategoryTheory.ringedKoszulProjection",
+   "CategoryTheory.ringedKoszulProjection_naturality",
+   "CategoryTheory.ringedKoszulAugmentationCocone",
+   "CategoryTheory.ringedKoszulTensorTower",
+   "CategoryTheory.ringedKoszulTensorTower_d_comp",
+   "CategoryTheory.ringedKoszulTensorTowerComplex",
+   "CategoryTheory.ringedKoszulTensorTowerComplexMapF",
+   "CategoryTheory.ringedKoszulTensorTowerComplexMapF_comm",
+   "CategoryTheory.ringedKoszulTensorTowerComplexMap",
+   "CategoryTheory.ringedKoszulTensorTowerComplexMap_id",
+   "CategoryTheory.ringedKoszulTensorTowerComplexMap_comp",
+   "CategoryTheory.ringedKoszulTensorTowerFunctor",
+   "CategoryTheory.ringedKoszulDualUnit",
+   "CategoryTheory.ringedKoszulRightUnitIso",
+   "CategoryTheory.ringedKoszulTensorUnitComponent",
+   "CategoryTheory.ringedKoszulTensorUnitComponent_naturality",
+   "CategoryTheory.ringedKoszulTensorUnitCone",
+   "CategoryTheory.ringedKoszulLimitUnitF",
+   "CategoryTheory.ringedKoszulLimitUnitF_comm",
+   "CategoryTheory.ringedKoszulLimitUnit",
+   "CategoryTheory.ringedKoszulSliceSection",
+   "CategoryTheory.ringedKoszulDerivedOverMap",
+   "CategoryTheory.ringedKoszulDerivedOverComparison",
+   "CategoryTheory.RingedKoszulLimitPresentation",
+   "CategoryTheory.RingedKoszulLimitPresentation.completion",
+   "CategoryTheory.RingedKoszulLimitPresentation.unitOnComplex",
+   "CategoryTheory.RingedKoszulLimitPresentation.unit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedKoszulSystem.lean",
+  "statement": "def ringedKoszulDiagram : (r : ℕ) → (Fin r → (O.obj ⋙ forget CommRingCat).sections) → ℕ ⥤ ringedSiteComplex O",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d5e916ad8",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d5e916ad8",
+  "group": "NN",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source statements, dependencies, definitions, universes, edge cases, records, and docstrings. Both modules compile cleanly through scompile.py; confirmed the exact compiled telescope definition. No corrections required; branch unchanged."
+ }
+}

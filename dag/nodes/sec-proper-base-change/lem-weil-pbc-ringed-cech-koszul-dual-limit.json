@@ -24,7 +24,8 @@
   "def-weil-abstract-derived-category",
   "def-pc-tensor-complex-sheaves",
   "def-pur-derived-internal-hom",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-pbc-ringed-koszul-system"
  ],
  "proof": [
   {
@@ -285,5 +286,27 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-1fac0ded1 (reviewer sub-agent of L); spot-checked: Full mathematical and source review passed. One route defect remains: step 3 cites off-unit split node lem-pc-complex-hocolim-colimit without declaring it in split_report.tool_uses. Added the complete corrected DAG JSON under fixes/dag/nodes/sec-proper-base-change/. Review written to review.md; no statement or proof weakening.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d5e916ad8",
+  "group": "NN",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source statements, dependencies, definitions, universes, edge cases, records, and docstrings. Both modules compile cleanly through scompile.py; confirmed the exact compiled telescope definition. No corrections required; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedCechKoszulDualLimit",
+  "declaration": "CategoryTheory.ringed_cech_koszul_dual_limit",
+  "declarations": [
+   "CategoryTheory.RingedKoszulCechComparison",
+   "CategoryTheory.ringed_cech_koszul_dual_limit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedCechKoszulDualLimit.lean",
+  "statement": "theorem ringed_cech_koszul_dual_limit : (∃ alpha : colimit (ringedKoszulDiagram O r b) ≅ (ringedExtendedCech O r b).1, alpha.hom ≫ (ringedExtendedCech O r b).2 = colimit.desc _ (ringedKoszulAugmentationCocone O r b) ∧ ∃ t : CochainComplex.mappingCone (CochainComplex.telescopeShiftColimit O (ringedKoszulDiagram O r b)) ⟶ (ringedExtendedCech O r b).1, CochainComplex.mappingCone.inr _ ≫ t = CochainComplex.telescopeToColimit O (ringedKoszulDiagram O r b) ≫ alpha.hom ∧ QuasiIso t) ∧ (∀ m : ℕ, CochainComplex.IsKFlat ((ringedKoszulDualTower O r b).obj (op m))) ∧ Nonempty (RingedKoszulCechComparison O r b)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
