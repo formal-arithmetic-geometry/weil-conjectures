@@ -20,47 +20,14 @@
  ],
  "proof": [
   {
-   "text": "Fix the square and $u:K\\to K'$. Unpack [sbc-def-base-change-map] as functors $F_0=Lf^*Rg_*$, $F_1=Lf^*Rg_*Re_*Le^*$, $F_2=Lf^*R(ge)_*Le^*$, $F_3=Lf^*Rf_*Rh_*Le^*$, $F_4=Rh_*Le^*$. Write $a_K=Lf^*Rg_*(\\eta_{e,K})$, $b_K:F_1K\\to F_2K$ and $c_K:F_2K\\to F_3K$ for the two canonical functor identifications, and $d_K=\\varepsilon_{f,F_4K}$. Thus $\\operatorname{BC}_{f,g}(K)=d_K\\circ c_K\\circ b_K\\circ a_K$. Here juxtaposition of functors denotes ordinary functional order, not Lean's diagrammatic order.",
+   "text": "Apply the naturality equation of the module-coefficient natural transformation `derivedBaseChangeMap` recorded in [sbc-def-base-change-map], using its original declaration in `WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded`, to `v` for the commutative square `sq.toCommSq.flip`. The two displayed composites are the maps of the composed functors; simplifying `Functor.comp_map` gives exactly the stated equality.",
    "uses": [
     "sbc-def-base-change-map"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-bc-naturality.md",
-    "place": "Proof, 1: expanded defining naturality and composition equations"
-   }
-  },
-  {
-   "text": "The unit in [sbc-def-base-change-map] is a morphism of functors: its defining naturality equation is $Re_*Le^*(u)\\circ\\eta_{e,K}=\\eta_{e,K'}\\circ u$. Apply the functor $Lf^*Rg_*$ and its composition law to obtain $F_1(u)\\circ a_K=a_{K'}\\circ F_0(u)$. This is just the unit's naturality axiom (Stacks 0037, categories-definition-adjoint, following paragraph); no geometric base-change theorem is used.",
-   "uses": [
-    "sbc-def-base-change-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-bc-naturality.md",
-    "place": "Proof, 2: expanded defining naturality and composition equations"
-   }
-  },
-  {
-   "text": "The canonical identifications in [sbc-def-base-change-map] are isomorphisms of the indicated composite functors, so their defining naturality equations at $u$ give $F_2(u)\\circ b_K=b_{K'}\\circ F_1(u)$ and $F_3(u)\\circ c_K=c_{K'}\\circ F_2(u)$. The counit's naturality axiom, evaluated at $F_4(u)$, gives $F_4(u)\\circ d_K=d_{K'}\\circ F_3(u)$. These are instances of the definition of a morphism of functors (Stacks 001I, categories-definition-transformation-functors) and of the counit of the given adjunction (Stacks 0037, categories-definition-adjoint).",
-   "uses": [
-    "sbc-def-base-change-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-bc-naturality.md",
-    "place": "Proof, 3: expanded defining naturality and composition equations"
-   }
-  },
-  {
-   "text": "Substitute the three equations of the preceding step and then the unit equation, using associativity:\n$$F_4(u)\\circ d_K\\circ c_K\\circ b_K\\circ a_K\n=d_{K'}\\circ F_3(u)\\circ c_K\\circ b_K\\circ a_K\n=d_{K'}\\circ c_{K'}\\circ F_2(u)\\circ b_K\\circ a_K\n=d_{K'}\\circ c_{K'}\\circ b_{K'}\\circ F_1(u)\\circ a_K\n=d_{K'}\\circ c_{K'}\\circ b_{K'}\\circ a_{K'}\\circ F_0(u).$$\nBy the composite defining [sbc-def-base-change-map], this reads $Rh_*Le^*(u)\\circ\\operatorname{BC}_{f,g}(K)=\\operatorname{BC}_{f,g}(K')\\circ Lf^*Rg_*(u)$, precisely the displayed commutative square.",
-   "uses": [
-    "sbc-def-base-change-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-bc-naturality.md",
-    "place": "Proof, 4: expanded defining naturality and composition equations"
+    "place": "Proof, direct naturality of the recorded derived base-change natural transformation"
    }
   }
  ],
@@ -68,9 +35,9 @@
   "sbc-def-base-change-map"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-lem-bc-naturality.md",
-  "place": "Proof; elementary expansion checked against categories.tex, Tags 001I and 0037"
+  "by": "worker",
+  "document": "lean/WeilConjectures/SixFunctors/BaseChange/DerivedUnbounded.lean",
+  "place": "The definition derivedBaseChangeMap is a natural transformation; its naturality field proves the statement directly."
  },
  "mathlib_searches": [
   {
@@ -183,5 +150,15 @@
   "group": "NU",
   "result": "fix",
   "note": "H1: delivery omitted report.md; complete replacement report supplied under fixes/ with Worker report and Second reading by NU sections."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-be4e6",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261015T154154-L-159201",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivery to packet, unchanged theorem signature to its node, and proof to naturality; delivered module and sole direct importer BoundedBelowDerivedSmoothBaseChange compile cleanly; axioms are only propext, Classical.choice, Quot.sound."
  }
 }

@@ -4,14 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedBaseChangeNaturality
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
-public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
-import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 
 /-! # Statements of the new targets (batch 2) about `DerivedBaseChangeNaturality`
 
-Kept in their own module so that `Sheaf.AlgebraicGeometry.DerivedBaseChangeNaturality`, which the first task's targets use, is unchanged.
+Kept in their own module so that `Sheaf.AlgebraicGeometry.DerivedBaseChangeNaturality`,
+which the first task's targets use, is unchanged.
 -/
 
 @[expose] public section
@@ -51,7 +50,8 @@ theorem derivedBaseChangeMap_naturality
       (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).app K ≫
         (R((h)_*[ModuleCat.{u + 1} Λ])).map
           ((L((e)^*[ModuleCat.{u + 1} Λ])).map v) := by
-  sorry
+  simpa only [Functor.comp_map] using
+    (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).naturality v
 
 end AlgebraicGeometry.Etale
 
