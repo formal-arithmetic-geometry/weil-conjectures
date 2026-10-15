@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-directed-triangulated-image",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "The Qbar descent formula in thm-weil-pbc-qbar, made precise by step 6 of prop-weil-pbc-qbar-condensed-two-colimit: triangulated closure of finite coefficient models",
+   "via": [
+    "prop-weil-pbc-qbar-condensed-two-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Morphism descent makes the union of triangulated essential images triangulated",
+ "statement": "Let I be a nonempty preorder and let C_i and D be pretriangulated categories with integer shifts and additive shift functors [def-weil-triangulated-category]. For each i<=j give a functor T_ij:C_i -> C_j; give triangulated functors Phi_i:C_i -> D and natural isomorphisms T_ij composed with Phi_j -> Phi_i. Suppose every arrow Phi_i(X) -> Phi_j(Y) is, after conjugation by these isomorphisms, the Phi_k image of some arrow T_ik(X) -> T_jk(Y) for some k>=i,j. Then the object property P(Y): there exists i with Y in the essential image of Phi_i is a triangulated subcategory of D. No coherence assumption on the transition functors is required.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "P is closed under isomorphisms by composition of the witnessing isomorphisms. It is closed under every integer shift by applying the shift to a chosen model and using Phi_i.commShiftIso. The image of zero at any index gives a zero object in P.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+   }
+  },
+  {
+   "text": "Given a distinguished triangle whose first two vertices have models, conjugate its first morphism by the chosen model isomorphisms. The morphism-descent hypothesis supplies an arrow at a common stage k. Complete that arrow to a distinguished triangle in C_k and apply Phi_k. The image triangle and the given triangle have isomorphic first arrows. isoTriangleOfIso12 extends these isomorphisms to an isomorphism of triangles, so their third vertices are isomorphic. This proves cone closure.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+   }
+  },
+  {
+   "text": "Cone closure together with all integer shifts implies extension closure by rotation. Combine it with the zero object from the first step to obtain ObjectProperty.IsTriangulated.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "A2 formal proof, 2026-10-15; The Qbar descent formula in thm-weil-pbc-qbar, made precise by step 6 of prop-weil-pbc-qbar-condensed-two-colimit: triangulated closure of finite coefficient models"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The union of essential images of triangulated functors in a directed cocone is a triangulated subcategory if every morphism descends to a later stage",
+   "results": "8 hits: CategoryTheory.Functor.essImageDistTriang, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Functor.essImageDistTriang_mem_of_iso, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Functor.contractible_mem_essImageDistTriang, CategoryTheory.ObjectProperty.instIsCompatibleWithTriangulationTrWOfIsTriangulatedOfIsTriangulated",
+   "date": "2026-10-15",
+   "verdict": "no exact match; ingredients used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated, CategoryTheory.Functor.essImage",
+   "results": "1 hits: CategoryTheory.ObjectProperty.instIsTriangulatedEssImageOfIsTriangulatedOfFull",
+   "date": "2026-10-15",
+   "verdict": "no exact match; ingredients used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*IsTriangulated|IsTriangulated.*essImage|HomSurj",
+   "results": "25 hits: Mathlib/Algebra/Module/LinearMap/Defs.lean, Mathlib/Algebra/Ring/Prod.lean, Mathlib/Algebra/Ring/Prod.lean, Mathlib/Algebra/Module/SpanRank.lean, Mathlib/Algebra/Module/SpanRank.lean, Mathlib/Algebra/Module/SpanRank.lean, Mathlib/Algebra/Module/SpanRank.lean, Mathlib/Algebra/Module/SpanRank.lean",
+   "date": "2026-10-15",
+   "verdict": "no exact match; ingredients used in the Lean proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Union of triangulated essential images with morphism descent is a triangulated subcategory",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit",
+  "date": "2026-10-15",
+  "group": "A2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DirectedTriangulatedImage",
+  "file": "lean/Sheaf/CategoryTheory/DirectedTriangulatedImage.lean",
+  "declaration": "CategoryTheory.CategoryCocone.isTriangulated_exists_essImage",
+  "statement": "theorem isTriangulated_exists_essImage (hc : c.HomSurj) :\n    ObjectProperty.IsTriangulated (fun Y ↦ ∃ i, (c.Φ i).essImage Y)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-31737",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T172429-L-539049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-31737",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T172429-L-539049",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs and helper signatures with their DAG nodes, unchanged published interfaces, axiom checks, and successful compilation of all five modules and three direct importers."
+ }
+}

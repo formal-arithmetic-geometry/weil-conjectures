@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "The Qbar descent formula in thm-weil-pbc-qbar, made precise by step 2 of prop-weil-pbc-qbar-condensed-two-colimit: preservation of bounded constructibility",
+   "via": [
+    "prop-weil-pbc-qbar-condensed-two-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exact scalar extension preserves bounded constructible internal module complexes",
+ "statement": "Let X be a scheme [def-pc-scheme]. Let R and S be commutative ring objects in the abelian category of abelian sheaves on its pro-etale site, and let phi:R -> S be a ring-object morphism. Define bounded constructibility as in [def-weil-pbc-condensed-e-module-category]: bounded cohomology with every cohomology module finitely presented locally on the pieces of a finite stratification. Suppose extension of scalars Mod.extendScalars(phi) preserves finite limits. Then its total left derived functor sends every bounded constructible R-complex to a bounded constructible S-complex. No noetherian assumption on X is needed.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "An additive right-exact functor carrying the regular module to the regular module preserves finite presentations: map the cokernel presentation and conjugate by the canonical finite-biproduct isomorphisms. Scalar extension has these properties; the regular-module isomorphism is the bimodule right unitor.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+   }
+  },
+  {
+   "text": "For each scheme map g, inverse image of modules commutes with scalar extension. Both composites are left adjoints, and their right adjoints agree via naturality of the inverse-image adjunction unit and compatibility of mapMod with restriction of scalars. The uniqueness isomorphism of left adjoints gives the required comparison. Consequently the original presentation covers on each original stratum also prove constructibility after extension.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+   }
+  },
+  {
+   "text": "An exact additive functor commutes with derived cohomology, using leftDerivedFunctorHomologyFunctorIso. Transport the constructibility obtained in the previous step along this isomorphism. Preservation of zero objects keeps the original cohomological bounds.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "A2 formal proof, 2026-10-15; The Qbar descent formula in thm-weil-pbc-qbar, made precise by step 2 of prop-weil-pbc-qbar-condensed-two-colimit: preservation of bounded constructibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of module objects along a ring sheaf morphism preserves constructible sheaves and bounded constructible complexes if extension of scalars is exact",
+   "results": "8 hits: CondensedMod.IsSolid, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondMod, LightCondensed.instMonoidalClosedLightCondMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-15",
+   "verdict": "no exact match; ingredients used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, CategoryTheory.Functor.mapMod",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Functor.mapMod'",
+   "date": "2026-10-15",
+   "verdict": "no exact match; ingredients used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleModuleObject|IsLocallyFinitelyPresented|boundedConstructible.*extendScalars|mapModComapIso",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no exact match; ingredients used in the Lean proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar extension of module sheaves preserves bounded constructible derived complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit",
+  "date": "2026-10-15",
+  "group": "A2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedConstructibleExtendScalars.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.boundedConstructible_leftDerivedExtendScalars_obj",
+  "statement": "theorem boundedConstructible_leftDerivedExtendScalars_obj\n    [PreservesFiniteLimits (Mod.extendScalars φ)]\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R))\n    (hK : boundedConstructible R K) :\n    boundedConstructible S ((Mod.extendScalars φ).leftDerivedFunctor.obj K)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-31737",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T172429-L-539049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-31737",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T172429-L-539049",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs and helper signatures with their DAG nodes, unchanged published interfaces, axiom checks, and successful compilation of all five modules and three direct importers."
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-condensed-coefficient-derived-faithful",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "The Qbar descent formula in thm-weil-pbc-qbar, made precise by the Hom-injectivity clause of prop-weil-pbc-qbar-condensed-two-colimit; a shorter split-unit argument replaces filtered Hom injectivity",
+   "via": [
+    "prop-weil-pbc-qbar-condensed-two-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Scalar extension to the condensed algebraic closure is derived faithful",
+ "statement": "Let X be any scheme [def-pc-scheme], ell a prime, Omega the algebraic closure of Q_ell [def-weil-l-adic-numbers, def-weil-algebraic-closure], and E a finite intermediate field [def-weil-finite-subextension-directed-set]. Use the condensed coefficient rings on the pro-etale site of X of [def-weil-pbc-condensed-e-module-category], in particular the finite-subfield-valued continuous-function condensed Omega. The total left derived extension of scalars from E_X to Omega_X is a faithful functor on the entire unbounded derived categories of internal module objects.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "The injective E-linear inclusion E -> Omega has an algebraic E-linear left inverse r, by LinearMap.leftInverse. Restrict r to any finite intermediate field F and regard it as Q_ell-linear. Finite-dimensionality makes this restriction continuous (LinearMap.continuous_of_finiteDimensional). Every section of the specified condensed Omega takes values in one F, so postcomposition defines a continuous E-valued section and a natural additive section projection. Its E-linearity and retraction equation are pointwise identities.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+   }
+  },
+  {
+   "text": "Transfer the pointwise linearity equation through monoidal sheafification and its counit isomorphisms. Apply the strong monoidal inverse image from the profinite point; naturality of its tensor comparison transfers both linearity and the splitting equation to the pro-etale coefficient rings.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+   }
+  },
+  {
+   "text": "For a module M, the map S tensor M -> M, s tensor m -> r(s)m, is balanced over R. Its descent is R-linear and natural in M. The scalar-extension unit followed by this retraction is the identity, by r(phi(1))=1. Apply localization to these transformations of complexes: liftNatTrans preserves composition and identities, so the derived identity is a retract of derived extension followed by derived restriction. A retract of a faithful functor in this sense is faithful, as follows immediately from naturality. Exactness from [lem-weil-pbc-condensed-flat-coefficient-calculus] identifies levelwise derived extension with total left derived extension.",
+   "uses": [
+    "lem-weil-pbc-condensed-flat-coefficient-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "A2 formal proof, 2026-10-15; The Qbar descent formula in thm-weil-pbc-qbar, made precise by the Hom-injectivity clause of prop-weil-pbc-qbar-condensed-two-colimit; a shorter split-unit argument replaces filtered Hom injectivity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact extension of scalars along a split linear inclusion of ring objects is faithful on derived categories. A linear projection from the p-adic algebraic closure is continuous on finite subfields.",
+   "results": "8 hits: PadicComplex.instAlgebraPadic, IsDedekindDomain.HeightOneSpectrum.instFaithfulSMulSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, BDeRhamPlus, Valued.instFaithfulSMulCompletionOfUniformContinuousConstSMul, PadicComplex.instIsScalarTowerPadicPadicAlgCl, PadicAlgCl, PadicComplex, AdicCompletion.map_exact",
+   "date": "2026-10-15",
+   "verdict": "no exact match; ingredients used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.leftInverse, LinearMap.continuous_of_finiteDimensional",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no exact match; ingredients used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "Faithful.*mapDerivedCategory|mapDerivedCategory.*Faithful|leftInverse_apply_of_inj",
+   "results": "6 hits: Mathlib/LinearAlgebra/Basis/VectorSpace.lean, Mathlib/LinearAlgebra/Basis/VectorSpace.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/RepresentationTheory/Maschke.lean, Mathlib/Analysis/Normed/Module/ContinuousInverse.lean, Mathlib/Analysis/Normed/Operator/Banach.lean",
+   "date": "2026-10-15",
+   "verdict": "no exact match; ingredients used in the Lean proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linear retraction of a ring inclusion splits the derived extension restriction unit and implies derived faithfulness",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit",
+  "date": "2026-10-15",
+  "group": "A2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SplitCoefficientDerivedFaithful",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitCoefficientDerivedFaithful.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.faithful_leftDerivedExtendScalarsToPadicAlgCl",
+  "statement": "theorem faithful_leftDerivedExtendScalarsToPadicAlgCl\n    (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) :\n    (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).leftDerivedFunctor.Faithful",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-31737",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T172429-L-539049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-31737",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T172429-L-539049",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs and helper signatures with their DAG nodes, unchanged published interfaces, axiom checks, and successful compilation of all five modules and three direct importers."
+ }
+}

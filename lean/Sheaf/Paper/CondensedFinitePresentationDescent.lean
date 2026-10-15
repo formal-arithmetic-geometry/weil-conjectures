@@ -21,7 +21,6 @@ import Sheaf.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus
 import Sheaf.CategoryTheory.ExtOneExtensionClassification
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.CategoryTheory.SiteModuleSheafGluing
-import Sheaf.Paper.CondensedFlatCoefficientCalculus
 import Sheaf.Paper.CondensedSheafExtContinuity
 import Sheaf.Paper.ProfinitePointPullback
 

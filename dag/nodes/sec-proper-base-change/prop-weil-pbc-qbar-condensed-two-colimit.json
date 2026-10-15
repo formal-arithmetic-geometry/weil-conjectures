@@ -39,17 +39,15 @@
    }
   },
   {
-   "text": "Work in the larger universe of [def-weil-size-convention], so the poset of finite overfields and the pro-etale site skeleton are small. The finite fields are nonempty and directed by compositum [def-weil-finite-subextension-directed-set]. Use the coefficient colimit established in the preceding elementary step. The exactness and termwise derived tensor computations of [lem-weil-pbc-condensed-flat-coefficient-calculus] give $H^q(T_{E,B}K)=B_T^c\\otimes_{E_T^c}H^q(K)$ for $B=F,\\Omega$. On every stratum, tensoring a finite presentation $E^m\\to E^n\\to M\\to0$ gives $B^m\\to B^n\\to B\\otimes_E M\\to0$. Thus these functors preserve precisely the stated bounded constructible categories. Their comparisons are tensor multiplication; on a pure tensor $g\\otimes(f\\otimes k)$ each composite sends it to $gf\\otimes k$, and the unit sends $1\\otimes k$ to $k$. The coherence and shift comparisons in the calculus node therefore restrict to these full subcategories.",
+   "text": "The fully proved generic lemma [lem-weil-pbc-bounded-constructible-exact-scalar-extension], applied with the exactness instances already in Compatibility.lean, proves both scalar-preservation clauses. Derived tensor transitivity and its restriction to the full constructible categories are the existing definitions derivedExtendScalarsCompIso and constructibleToPadicAlgClCompIso. This uses no new axioms and no special choice of stratification.",
    "uses": [
-    "def-weil-size-convention",
-    "def-weil-finite-subextension-directed-set",
-    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
     "lem-weil-pbc-condensed-flat-coefficient-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "ExtendScalars and Constructible sections; Compatibility.lean A0.2"
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
    }
   },
   {
@@ -81,7 +79,7 @@
    }
   },
   {
-   "text": "Before descending objects, check cones at finite and algebraically closed coefficients. By [lem-sf-derived-homology-long-exact], for a triangle $A\\to B\\to C\\to A[1]$ the sheaf $H^q(C)$ is an extension of $\\operatorname{coker}(H^q(A)\\to H^q(B))$ by $\\ker(H^{q+1}(A)\\to H^{q+1}(B))$. If $A,B$ are bounded constructible, the Serre closure node makes both pieces and their extension constructible. The same exact sequence shows vanishing outside the union of the two finite cohomological intervals, with one endpoint shifted by one. Shifts preserve the condition by reindexing cohomology. Thus any cone or rotated cone used below is still in the actual condensed bounded constructible category.",
+   "text": "For the actual finite-field and finite-subfield-valued Omega coefficients, obtain kernel, cokernel and extension closure from [lem-weil-pbc-condensed-constructible-serre]. The parent proves isomorphism closure directly from presentations and covers, and proves zero constructible using the rank-zero presentation and trivial stratification. Turn these assertions into the weak-Serre ObjectProperty instances. The fully proved library theorem DerivedCategory.homologyProperty_isTriangulated (whose proof is the long exact homology sequence [lem-sf-derived-homology-long-exact]) makes the property of constructible homology triangulated. Intersect it with t.bounded. These specific triangulated instances are used locally in the object-descent proof. In particular the argument does not use the original overgeneral generic isTriangulated_boundedConstructible instance. That upstream instance has since been corrected to require coefficient closure explicitly; the present direct construction from those closure properties remains valid.",
    "uses": [
     "lem-sf-derived-homology-long-exact",
     "lem-weil-pbc-condensed-constructible-serre"
@@ -93,31 +91,30 @@
    }
   },
   {
-   "text": "Let $K$ over $\\Omega_T^c$ have cohomology in $[a,b]$. Induct on $q$ to descend $\\tau_{\\leq q}K$. For $q<a$ choose the zero object over the base field. Suppose $A=\\tau_{\\leq q-1}K$ has been descended over $E$; descend the single constructible sheaf $H^q(K)$ by [lem-weil-pbc-condensed-finite-presentation-descent], and enlarge to a compositum so both descended objects $A_E$ and $M_E=H^q(K)_E[-q]$ are over $E$. Their scalar extensions are still bounded constructible by step 2. In the truncation triangle $A\\to\\tau_{\\leq q}K\\to H^q(K)[-q]\\xrightarrow{\\delta}A[1]$, conjugate $\\delta$ by the two chosen descent isomorphisms. Step 4 with shifted target $A_E[1]$ gives a finite $H\\supseteq E$ and an arrow $\\delta_H:T_{E,H}M_E\\to T_{E,H}A_E[1]$ whose scalar extension is that conjugate. Complete $-\\delta_H$ to a cone triangle and inverse-rotate (TR2), so its last arrow is $\\delta_H$: the middle object is $B_H=\\operatorname{Cone}(-\\delta_H)[-1]$ in a triangle $T_{E,H}A_E\\to B_H\\to T_{E,H}M_E\\to T_{E,H}A_E[1]$. Step 5 makes $B_H$ bounded constructible. Step 2 carries this to a triangle over $\\Omega$ with boundary $\\delta$. TR3 applied to the rotated triangles extends the endpoint isomorphisms; Hom exactness and the five lemma show the third arrow is an isomorphism (test Hom from every object), hence $T_{H,\\Omega}B_H\\cong\\tau_{\\leq q}K$. This completes the induction. At $q=b$ the truncation is $K$ since its higher cohomology vanishes, proving object descent without assuming compatibility of unexamined differentials.",
+   "text": "Use the already proved DerivedCategory.prop_of_bounded (WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure): every bounded object belongs to a triangulated isomorphism-closed property if its cohomology objects, put in degree zero, do. Let Q be the union of the essential images of the finite coefficient constructible categories in the ambient derived Omega category. The Hom-surjectivity obligation supplies the hypothesis of [lem-weil-pbc-directed-triangulated-image], so Q is triangulated. For a constructible sheaf M use [lem-weil-pbc-condensed-finite-presentation-descent] to choose E and a constructible M_E whose scalar extension is M. The singleFunctorCompLeftDerivedFunctorIso identifies the image of M_E[0] with M[0]; the single complex is bounded constructible by its standard homology formula. Apply prop_of_bounded to K and lift its resulting ambient isomorphism through the fully faithful inclusion of bounded constructible complexes. All this glue is proved in the parent, with no new sorry.",
    "uses": [
+    "lem-weil-pbc-directed-triangulated-image",
     "lem-weil-pbc-condensed-finite-presentation-descent",
-    "def-weil-finite-subextension-directed-set",
-    "lem-weil-pbc-truncation-triangle",
-    "def-weil-triangulated-category",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-weil-pbc-five-lemma"
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-triangulated-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "Sorried input (Obj), explicit Postnikov induction"
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
    }
   },
   {
-   "text": "For objects over different $E,F$, first extend both to the compositum $E_0=EF$. Step 4 with $n=0$ identifies the colimit of their Hom groups over $H\\supseteq E_0$ with the desired Hom group over $\\Omega$. By the elementwise filtered-colimit node every arrow there has a representative at some $H$, proving Hom-surjectivity. If two arrows have equal images, move their representatives to a common finite stage; injectivity of the comparison of step 4 and the same elementwise node imply their equality after one further extension, proving Hom-injectivity. This applies also to shifted targets. Only the condensed categories defined in this item are involved.",
+   "text": "Hom-surjectivity remains the single original sorry constructibleCocone_homSurj; its planned proof is steps 3-4 and the representative-surjectivity part of [lem-weil-pbc-filtered-colimit-sets-elementwise], after enlarging two coefficient fields to their compositum. Hom-injectivity is now proved independently: [lem-weil-pbc-condensed-coefficient-derived-faithful] implies that two arrows with the same image over Omega are already equal at their original finite stage. Choose that same stage as the eventual-equality witness. No filtered Hom comparison or elementwise colimit injectivity is used in this clause.",
    "uses": [
     "def-weil-finite-subextension-directed-set",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-condensed-coefficient-derived-faithful"
    ],
    "elementary": false,
    "source": {
     "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-    "place": "TwoColimit section, HomSurj and HomInj"
+    "place": "module docstring, scalar preservation, object descent, and Hom-injectivity paragraphs"
    }
   },
   {
@@ -137,7 +134,7 @@
   "def-weil-finite-subextension-directed-set",
   "def-weil-pbc-condensed-e-module-category",
   "lem-weil-pbc-profinite-point-pullback",
-  "def-weil-size-convention",
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
   "lem-weil-pbc-condensed-flat-coefficient-calculus",
   "lem-weil-pbc-condensed-sheaf-ext-continuity",
   "def-sbc-standard-tstructure-derived-category",
@@ -147,15 +144,16 @@
   "lem-weil-pbc-five-lemma",
   "lem-sf-derived-homology-long-exact",
   "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-directed-triangulated-image",
   "lem-weil-pbc-condensed-finite-presentation-descent",
   "def-weil-triangulated-category",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-condensed-coefficient-derived-faithful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-  "place": "module docstring (Obj), (Hom), and TwoColimit section"
+  "place": "A2 2026-10-15: four original holes closed; exact scalar preservation, triangulated image devissage, and split-unit faithfulness; steps 3-4 retain the plan for the sole original Hom-surjectivity hole; use the correct specific condensed-field Serre inputs for triangulated closure, independently of the original unsupported arbitrary-ring instance (now corrected upstream)"
  },
  "mathlib_searches": [
   {
@@ -420,5 +418,15 @@
    "AlgebraicGeometry.ProEtale.constructibleCocone_isFilteredTwoColimit"
   ],
   "note": "attached by the lead's tool attach.py --stage2; source and statement checked by L; rests_on_sorry by sorry-map.jsonl.gz: Checked ell prime and topologically noetherian T, padicAlgClRingObj with finite-subextension-valued continuous functions, bounded constructible module categories without completeness, derived scalar extensions, preservation and tensor-transitivity comparisons of constructibleCocone. CategoryCocone.IsFilteredTwoColimit is exactly object descent and eventual Hom surjectivity/injectivity as stated. The three upstream descent proofs remain sorry; the assembly theorem rests on them."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-31737",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T172429-L-539049",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs and helper signatures with their DAG nodes, unchanged published interfaces, axiom checks, and successful compilation of all five modules and three direct importers."
  }
 }
