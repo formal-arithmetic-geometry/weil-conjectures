@@ -3,44 +3,181 @@
  "blueprint": {
   "is": "lem-kun-colim-gbl-gen",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Filtered colimits of globally generated sheaves",
- "statement": "A filtered colimit of globally generated sheaves of abelian groups on\na site is globally generated.",
+ "statement": "Let $\\mathcal C$ be a site and $\\mathrm{Ab}(\\mathcal C)$ its category of sheaves of abelian groups [def-weil-pbc-sites-and-cohomology]. Write $S=\\underline{\\mathbf Z}$ for the constant abelian sheaf [def-weil-pbc-constant-sheaf]. For an abelian sheaf $G$, a global section is a compatible family $(s_U\\in G(U))_{U\\in\\mathcal C}$ under every restriction map; equivalently it is a morphism $s:S\\to G$. Say that $G$ is globally generated if the evaluation morphism\n$$\n e_G:\\bigoplus_{s\\in\\operatorname{Hom}(S,G)}S\\longrightarrow G,\n \\qquad e_G\\circ j_s=s,\n$$\nis an epimorphism [def-galois-epi-final], where $j_s$ is the coproduct injection. This is the evaluation definition of [def-kun-global-generated] for abelian sheaves, written for a general site; on a site with a final object the compatible families are its global sections.\n\nLet $I$ be a small filtered category and $(F_i)_{i\\in I}$ a diagram in $\\mathrm{Ab}(\\mathcal C)$ [def-weil-pbc-category-colimit]. If every $F_i$ is globally generated, then the sheaf colimit $F=\\varinjlim_{i\\in I}F_i$ is globally generated.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-colim-gbl-gen.md",
   "place": "node lem-kun-colim-gbl-gen, order 1706"
  },
  "stmt_deps": [
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-galois-epi-final",
+  "def-kun-global-generated",
+  "def-weil-pbc-category-colimit"
  ],
  "proof": [
   {
-   "text": "Let $F=\\varinjlim_iF_i$. By [prop-weil-pbc-geometric-stalks-exact]\nand the commutativity of stalks with filtered colimits\n([lem-kun-stalks-commute-colimits]),\n$F_{\\bar x}=\\varinjlim_i(F_i)_{\\bar x}$, each $(F_i)_{\\bar x}$ being\nmapped onto by $H^0(T_{\\Et},F_i)$; filtered colimits of abelian\ngroups preserve surjection, so the evaluation map of\n[def-kun-global-generated] is surjective on every stalk, and\nstalkwise surjectivity is global generation by\n[lem-kun-global-generated-stalkwise].",
+   "text": "First check the general-site interpretation of global sections in the statement. By [def-weil-pbc-constant-sheaf], $S$ is the sheafification of the constant presheaf $\\mathbf Z$. A compatible family $(s_U)$ defines a morphism from this presheaf to $G$ by $n\\mapsto n s_U$ on $U$. Conversely any such presheaf morphism is determined by the images of $1$, which form a compatible family. The universal property in [def-weil-pbc-sheafification] extends it uniquely to $S\\to G$. For a site with final object $T$, such families are uniquely obtained by restricting $s_T\\in G(T)$. Thus on $T_{\\Et}$ the evaluation above is exactly that of [def-kun-global-generated] with $\\Lambda=\\mathbf Z$.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-kun-stalks-commute-colimits",
-    "def-kun-global-generated",
-    "lem-kun-global-generated-stalkwise"
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-kun-global-generated"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-colim-gbl-gen.md",
+    "place": "Statement: general-site meaning of global generation; comparison with the evaluation morphism used in ## Proof"
+   }
+  },
+  {
+   "text": "All small colimits in $\\mathrm{Ab}(\\mathcal C)$ exist by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact], using only its existence clause. In particular form $F$ with its cocone maps $c_i:F_i\\to F$ and, for $G=F$ and every $G=F_i$, form $E_G=\\bigoplus_{s:S\\to G}S$. By the coproduct universal property of [def-weil-pbc-category-colimit] (a coproduct is a discrete colimit), the maps $s:S\\to G$ define $e_G:E_G\\to G$ with $e_Gj_s=s$. The hypothesis says that each $e_{F_i}$ is an epimorphism.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CO, lemma-limits-colimits-abelian-sheaves, (1); coproduct construction uses Categories Tag 002F, definition-colimit"
+   }
+  },
+  {
+   "text": "For each $i$, define $h_i:E_{F_i}\\to E_F$ by sending the summand indexed by $s:S\\to F_i$ to the summand indexed by $c_i\\circ s:S\\to F$, using the identity on $S$. The coproduct universal property [def-weil-pbc-category-colimit] defines this map and gives\n$$\n e_F\\circ h_i=c_i\\circ e_{F_i}:\n E_{F_i}\\longrightarrow F,\n$$\nbecause both composites, after precomposition with the summand injection indexed by $s$, equal $c_i\\circ s$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit, applied to discrete coproduct diagrams"
+   }
+  },
+  {
+   "text": "To test whether $e_F$ is epi, take any abelian sheaf $H$ and maps $a,b:F\\to H$ with $a\\circ e_F=b\\circ e_F$. Precompose this equality with $h_i$ and use step 3 to obtain\n$$\n (a\\circ c_i)\\circ e_{F_i}=(b\\circ c_i)\\circ e_{F_i}.\n$$\nSince $e_{F_i}$ is epi, its right-cancellation property [def-galois-epi-final] yields $a\\circ c_i=b\\circ c_i$ for every $i$.",
+   "uses": [
+    "def-galois-epi-final"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003B, definition-mono-epi, epimorphism clause"
+   }
+  },
+  {
+   "text": "By the uniqueness clause in the colimit universal property [def-weil-pbc-category-colimit], two maps out of $F$ agreeing after every $c_i$ are equal: they are both factorizations of the same cocone $F_i\\xrightarrow{a c_i}H$. Hence $a=b$. The definition [def-galois-epi-final] now says that $e_F$ is an epimorphism, which is exactly global generation in the statement. This proves the required filtered-colimit assertion; the cancellation argument does not require filteredness.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-galois-epi-final"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 002F (definition-colimit) and 003B (definition-mono-epi)"
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-kun-stalks-commute-colimits",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
   "def-kun-global-generated",
-  "lem-kun-global-generated-stalkwise"
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "def-weil-pbc-category-colimit",
+  "def-galois-epi-final"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-colim-gbl-gen.md",
-  "place": "## Proof"
+  "place": "Replacement of the scheme-specific stalk argument in ## Proof by an explicit evaluation/cancellation argument on the arbitrary site of the statement; categorical ingredients: Stacks 03CO, 002F and 003B."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimits of globally generated sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.hasFilteredColimitsOfSize, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, SheafOfModules.isColimitFreeCofan, AlgebraicGeometry.Scheme.Modules.instHasColimits, SheafOfModules.Presentation.isColimit, CategoryTheory.Sheaf.instHasFiniteColimits, CategoryTheory.Sheaf.instHasColimitsOfShape",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic infrastructure or different generated-object notion only"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesColimitsOfShape, globally generated sheaf, sheafFiber",
+   "results": "loogle: unknown identifier 'PreservesColimitsOfShape'; 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic infrastructure or different generated-object notion only"
+  },
+  {
+   "tool": "grep",
+   "query": "globally generated|global generation|Preserves.*Colimit",
+   "results": "0 hits: ; wrong subdirectory: this selected nested Mathlib/Mathlib and is not evidence of absence; corrected grep searches follow",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope; superseded by correctly scoped searches",
+   "subdirectory": "Mathlib/"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of globally generated sheaves remains globally generated",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a category the objects that are quotients of coproducts of a fixed object are closed under all small colimits",
+   "results": "8 hits: CategoryTheory.Limits.ClosedUnderColimitsOfShape, CategoryTheory.ObjectProperty.colimitsClosure, CategoryTheory.ObjectProperty.le_colimitsClosure, CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape, CategoryTheory.ObjectProperty.isClosedUnderColimitsOfShape_iff, CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape.colimitsOfShape_le, CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeColimitsClosure, CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeColimitsCardinalClosureCategoryFamily",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic infrastructure or different generated-object notion only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGeneratedBy\"",
+   "results": "12 hits: CategoryTheory.GrothendieckTopology.IsGeneratedByOneHypercovers, CategoryTheory.GrothendieckTopology.instIsGeneratedByOneHypercovers, CategoryTheory.Presheaf.isSheaf_iff_of_isGeneratedByOneHypercovers, CategoryTheory.PresheafIsGeneratedBy, CategoryTheory.Subfunctor.IsGeneratedBy, CategoryTheory.yoneda_obj_isGeneratedBy, CategoryTheory.Subfunctor.isGeneratedBy_of_isFinite, CategoryTheory.Subfunctor.IsGeneratedBy.isFinite",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic infrastructure or different generated-object notion only"
+  },
+  {
+   "tool": "grep",
+   "query": "globally.?generated|global.?generation|IsGeneratedBy|isSeparator.*colimit|colimit.*isSeparator",
+   "results": "25 hits: Mathlib/Topology/Convenient/HomSpace.lean, Mathlib/Topology/Convenient/HomSpace.lean, Mathlib/Topology/Convenient/HomSpace.lean, Mathlib/Topology/Convenient/GeneratedBy.lean, Mathlib/Topology/Convenient/GeneratedBy.lean, Mathlib/Topology/Convenient/GeneratedBy.lean, Mathlib/Topology/Convenient/GeneratedBy.lean, Mathlib/Topology/Convenient/GeneratedBy.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic infrastructure or different generated-object notion only"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitFreeCofan|def free|freeHomEquiv",
+   "results": "19 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic infrastructure or different generated-object notion only",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "globally.?generated|global.?generation|IsGeneratedBy|isSeparator.*colimit|colimit.*isSeparator",
+   "results": "20 hits: Mathlib/CategoryTheory/Generator/HomologicalComplex.lean, Mathlib/CategoryTheory/Generator/Basic.lean, Mathlib/CategoryTheory/Generator/Basic.lean, Mathlib/CategoryTheory/Generator/Basic.lean, Mathlib/CategoryTheory/Generator/Basic.lean, Mathlib/CategoryTheory/Generator/Basic.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Subfunctor/Finite.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic infrastructure or different generated-object notion only",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "globally.?generated|global.?generation|GeneratingSections.*[Cc]olimit|[Cc]olimit.*GeneratingSections",
+   "results": "3 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic infrastructure or different generated-object notion only",
+   "subdirectory": "Algebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneratingSections\"",
+   "results": "12 hits: SheafOfModules.GeneratingSections, SheafOfModules.GeneratingSections.I, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.GeneratingSections.s, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.GeneratingSections.IsFiniteType.mk, SheafOfModules.GeneratingSections.equivOfIso, SheafOfModules.GeneratingSections.π",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic infrastructure or different generated-object notion only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +206,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-colim-gbl-gen",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-site, abelian-sheaf, filtered-colimit conclusion. Made its global-generation meaning explicit by the same evaluation formula, using Hom from the constant integer sheaf to describe global sections without assuming a terminal site object. The imported proof uses geometric points of a scheme and so does not prove its general-site statement. Replaced it with five steps: identify global sections via sheafification, form evaluation maps, factor every stage evaluation through the colimit evaluation, cancel the stage epimorphisms, and apply colimit uniqueness. All needed facts already have DAG nodes, so no new nodes or Mathlib leaves were created.",
+  "blueprint": "The blueprint proof has one paragraph: stalk-colimit identification, stage global sections mapping onto stalks, and stalkwise detection. These scheme-specific sentences are replaced by steps 2–5, which prove their intended general-site surjectivity conclusion by the universal properties. Step 1 specifies the definition needed at the blueprint statement’s generality. The unit has no proof steps, and its statement and route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q08-1576949a6",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-1576949a6 (reviewer sub-agent of L); spot-checked: Read the item, unit route, all cited DAG statements, blueprint, and Stacks sources. The corrected general-site formulation is valid; all five proof steps are complete, hypotheses and edge cases check, and no duplicates or repairs are needed. Review written to review.md."
+ }
 }
