@@ -38,11 +38,9 @@
  ],
  "proof": [
   {
-   "text": "First make restriction precise. For every scheme map $h:S\\to T$, the coefficient comparison $h^{-1}p_T^*\\cong p_S^*$ in [lem-weil-pbc-profinite-point-pullback] applies to $\\underline E$ and to the bounded-image sheaf $\\underline\\Omega$. Thus module restriction is inverse image with an invertible coefficient map, not tensoring along a noninvertible ring map. The underlying abelian inverse image is exact by [lem-weil-pbc-site-pullback-abelian-exact]; the exact forgetful functor in [lem-weil-pbc-module-sheaves-colimits-forgetful] therefore proves that module restriction preserves kernels, cokernels and short exact sequences. Its additivity and coefficient comparison identify the inverse image of $A_T^n$ with $A_S^n$. In particular a finite presentation remains a finite presentation after restriction. For the base-change functor $u_h$ of the current [def-weil-proetale-inverse-image], [lem-weil-pbc-weakly-etale-composition-base-change] makes each base-changed site object and covering arrow weakly etale, and [lem-galois-fpqc-covering-base-change] makes the base-changed covering fpqc. By the covering definition in [def-weil-pbc-proetale-site], it is therefore a pro-etale cover. This proves that a presentation cover restricts to a presentation cover for arbitrary $h$, including a stratum immersion; no weakly etale hypothesis on $h$ is needed.",
+   "text": "Restriction is the actual source-library functor upperStar(Ab,h).mapMod(R). Its finite-limit and finite-colimit preservation follow from the proved upperStar exactness instances and Functor.preservesFiniteLimits_mapMod / preservesFiniteColimits_mapMod. Additivity, mapBiproduct and PreservesCokernel.iso transport finite presentations. Composition is handled by upperStarComp and mapModCompIso; scalar comap along an isomorphism preserves and reflects finite freeness and finite presentation. Use the monoidality of the composition comparison from [lem-weil-pbc-profinite-point-pullback]. Pull back presentation covers using Scheme.Cover.pullback₁ and compose using bind; [def-weil-proetale-inverse-image], [lem-weil-pbc-weakly-etale-composition-base-change], [lem-galois-fpqc-covering-base-change] and [def-weil-pbc-proetale-site] give the actual pro-etale base-change framework.",
    "uses": [
     "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "def-weil-proetale-inverse-image",
     "lem-weil-pbc-weakly-etale-composition-base-change",
     "lem-galois-fpqc-covering-base-change",
@@ -55,7 +53,7 @@
    }
   },
   {
-   "text": "For the two constructible sheaves under consideration choose finite stratifications as in [def-constructible-stratification] and a common refinement as in [lemma-constructible-common-refinement]. Ensure actual maps to both original stratum schemes by taking the fibre products $S_{ab}=Z_a\\times_T W_b$. The base-change assertion in [lem-weil-pbc-immersion-base-change-lft] gives their projections as immersions. To check that $S_{ab}\\to T$ is an immersion with image the intersection, restrict to the intersection of open neighborhoods in which $Z_a$ and $W_b$ are closed: on an affine chart with ideals $I,J$ the fibre product is $\\operatorname{Spec}(R/(I+J))$, whose primes are exactly those containing both ideals. These charts show it is closed in that open intersection. Thus the finitely many $S_{ab}$ partition $T$ and factor through both original schemes; mere set-theoretic containment is not used as a factorization. Their topological spaces are noetherian: any ascending sequence of opens of a subspace is the intersection with the ascending sequence of cumulative unions of corresponding ambient opens, so it stabilizes. Step 1 restricts both sheaves to locally finitely presented modules on each $S_{ab}$. It is enough to prove the three closure assertions on such a topologically noetherian scheme $S$ and then use this finite stratification.",
+   "text": "Use the already proved fibre-product stratification Scheme.Stratification.inter of [lemma-constructible-common-refinement], with its actual projections to both original stratum schemes. Its construction uses [lem-weil-pbc-immersion-base-change-lft]. Pulling back local finite presentations along these projections gives both modules locally finitely presented on every common stratum. Each stratum has noetherian space because its immersion is a topological embedding into the noetherian base. No new stratification is defined; [def-constructible-stratification] is the existing predicate used by the item.",
    "uses": [
     "def-constructible-stratification",
     "lemma-constructible-common-refinement",
@@ -68,11 +66,10 @@
    }
   },
   {
-   "text": "On any such $S$, every locally finitely presented coefficient module $Q$ is pro-etale locally finite free. At a finite intermediate $E$ this is precisely [lem-weil-pbc-condensed-lfp-local-triviality]; at $\\Omega$ it is [lem-weil-pbc-condensed-qbar-lfp-local-triviality]. Denote this implication by (LF). It is used only for modules defined on $S$, whose underlying space is noetherian. A covering object of $S_{\\mathrm{proet}}$ need not itself be noetherian. Finite collections of the trivializing covers can be combined by [lem-weil-pbc-site-coverings-common-refinement].",
+   "text": "Apply [lem-weil-pbc-condensed-lfp-local-triviality] for finite coefficients and [lem-weil-pbc-condensed-qbar-lfp-local-triviality] for closure coefficients, always over the noetherian stratum. For the finite theorem, lift the small field E to ULift E in the scheme universe and construct the sectionwise ring-sheaf isomorphism by continuous ULift.up/down; transport finite presentations and freeness along its pullback. For closure coefficients, remove extendScalars along the invertible condensedPullbackHom via Mod.extendScalarsIsoComapInv. For arbitrary stratum coefficient pullbacks, transport through condensedPullbackHom and the comap equivalence. Common free covers are constructed directly as U.bind (V.pullback₁(U.f i)); there is no use of the separate common-cover-refinement theorem.",
    "uses": [
     "lem-weil-pbc-condensed-lfp-local-triviality",
-    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
-    "lem-weil-pbc-site-coverings-common-refinement"
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality"
    ],
    "elementary": false,
    "source": {
@@ -81,26 +78,22 @@
    }
   },
   {
-   "text": "Let $f:F\\to G$ be a morphism of locally finitely presented modules on $S$. By (LF), take a common covering on which $F=A^m$ and $G=A^n$. Step 1 identifies $C=\\operatorname{coker} f$ restricted to each member with the cokernel of this finite matrix, which is itself a finite presentation. Thus $C$ is locally finitely presented on $S$, proving the cokernel clause immediately. Apply (LF) to this globally defined $C$ to trivialize it, and combine covers with those of $G$. Write $q:G\\twoheadrightarrow C$. By [lem-weil-pbc-module-sheaves-colimits-forgetful], its underlying abelian-sheaf map is epic, and by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] each of the finitely many unit basis sections of the now free $C$ lifts after a further covering. Refine these finitely many covers using [lem-weil-pbc-site-coverings-common-refinement]. The lifts define a module map $s:C\\to G$ with $qs=1$: on sections send $(a_i)$ to the sum of $a_i$ times the chosen lifts. Set $e=1_G-sq$. Then $e^2=e$, $qe=0$, and $e$ is the identity on $I=\\ker q=\\operatorname{im}f$. Sectionwise, the map $e:G\\to I$ is surjective and its kernel is $\\operatorname{im}(1-e)$; hence $I\\cong\\operatorname{coker}(1-e:G\\to G)$. Since $G$ is finite free on the chosen cover, this is a finite presentation of $I$. The local presentations show that the globally defined sheaf $I$ is locally finitely presented on $S$. All sheaf kernels and cokernels here are those of [def-weil-sheaf-of-modules-category].",
+   "text": "First prove local splitting for any epimorphism q:M→N whose target is finite free over an arbitrary commutative ring object on X_proet. Exactness of the source-library Mod.forget makes q.hom epic. By [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective], the image sieve of a section over X contains a covering. A section at the terminal object defines a morphism from the abelian unit (lifted Z), using integer multiples and sheafification adjunction. Comparison of inverse image with localization restriction converts its local lifts to unit morphisms, then Mod.regularLift converts them to R-linear maps. Restrict the cover index using the proved Precoverage.Small instance for propQCPrecoverage. To lift all n basis sections simultaneously, apply this construction once to biproduct.map(q) and the single regular-module map into the biproduct of N containing every basis vector. The resulting biproduct.desc gives a section after conjugation by the free-target isomorphism. Rank zero is included by the empty biproduct. Finally, on a common free cover a morphism is a finite matrix, so its cokernel is finitely presented by its defining presentation; exact inverse image identifies this cokernel with the restricted global cokernel.",
    "uses": [
     "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-coverings-common-refinement",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-pbc-proetale-site"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03CN (lemma-abelian-abelian), parts (2), (4), (5); explicit idempotent calculation, not a quoted coherence theorem"
    }
   },
   {
-   "text": "Apply (LF) on $S$ to $I$ from step 4, and refine with a cover trivializing $F$. Write $p:F\\twoheadrightarrow I$. By [lem-weil-pbc-module-sheaves-colimits-forgetful] its underlying abelian-sheaf map is epic. On each member where $I=A^r$, apply [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] separately to each of its $r$ unit basis sections. Combine these $r$ covers using [lem-weil-pbc-site-coverings-common-refinement]. On each resulting member choose lifts $x_1,\\ldots,x_r$ and define $t:A^r\\to F$ on every further object by $(a_j)\\mapsto\\sum_j a_j x_j$, restricting the $x_j$ to that object. This formula commutes with restriction, is $A$-linear, and satisfies $pt=1_I$ because $p(x_j)$ is the $j$th unit basis section. For $r=0$, take the unique map from the zero module and no additional cover. Then $pt=1_I$, and $d=1_F-tp$ is an idempotent with image $K=\\ker p=\\ker f$. Its action is the identity on $K$ and it kills the image of $tp$; explicitly $d(x)=x-tp(x)$, while $d(x)=0$ implies $x=tp(x)$. Thus $K\\cong\\operatorname{coker}(tp:F\\to F)$ on this cover. Because $F$ is finite free there, this is a finite presentation. It follows that $\\ker f$ is locally finitely presented on $S$, proving the kernel clause. Neither (LF) nor a noetherian hypothesis has been applied to the covering schemes.",
+   "text": "For an epimorphism f between locally free modules, refine a common free cover by the local splitting just proved. If s is its section, explicitly construct kernel(f)≅cokernel(f≫s): the inverse is induced by id-f≫s, and the universal properties of kernel and cokernel prove the two inverse identities. This cokernel has a finite presentation because source and target are finite free. For an arbitrary f, first its cokernel is locally finitely presented by step 4. Apply local triviality on the noetherian base to that globally defined cokernel and use the epimorphism cokernel.π f to prove Abelian.image f=kernel(cokernel.π f) locally finitely presented. Transfer along Abelian.imageIsoImage, trivialize this global image, and apply the same epimorphism argument to factorThruImage f. The proved kernelFactorThruImage identifies its kernel with kernel f. Local triviality is never applied to a covering object.",
    "uses": [
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-coverings-common-refinement",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality"
    ],
    "elementary": true,
    "source": {
@@ -109,13 +102,8 @@
    }
   },
   {
-   "text": "For a short exact sequence $0\\to M\\xrightarrow{i}P\\xrightarrow{v}N\\to0$ on $S$ with locally finitely presented outer terms, apply (LF) to $M$ and $N$ and take a common trivializing cover. Exact forgetfulness and [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] lift the finitely many basis sections of $N$ along $v$; [lem-weil-pbc-site-coverings-common-refinement] combines the resulting covers. The lifts define $u:N\\to P$ with $vu=1_N$. The map $M\\oplus N\\to P$, $(m,n)\\mapsto i(m)+u(n)$, has inverse $z\\mapsto (i^{-1}(z-u(vz)),vz)$, where $i^{-1}$ means the unique inverse to $i:M\\xrightarrow{\\sim}\\ker v$, valid sectionwise by exactness. Hence $P$ is finite free on this cover, and in particular locally finitely presented on $S$. When $N$ has rank zero the empty list of lifts needs no refinement. This establishes the extension clause directly; no torsor is introduced and no finiteness of the group of splittings is claimed.",
-   "uses": [
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-coverings-common-refinement",
-    "def-weil-sheaf-of-modules-category"
-   ],
+   "text": "For a short exact complex Q, take a common cover making Q.X₁ and Q.X₃ finite free, then use step 4 on the restricted epimorphism Q.g and compose the covers. Exact inverse image preserves short exactness. ShortComplex.Splitting.ofExactOfSection identifies the restricted Q.X₂ with the biproduct of the outer terms. Construct the isomorphism finiteFree(m)⊞finiteFree(n)≅finiteFree(m+n) using Fin.castAdd, Fin.natAdd and Fin.addCases. A finite free module is finitely presented as the cokernel of the zero endomorphism. Thus the globally defined Q.X₂ is locally finitely presented. Empty ranks require no separate hypothesis.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
@@ -123,10 +111,9 @@
    }
   },
   {
-   "text": "Apply steps 4 and 5 on every stratum of the common refinement for a morphism, and step 6 on every stratum for a short exact sequence. Exact restriction from step 1 identifies these local kernels and cokernels with the restrictions of the global ones. Each of the finitely many strata therefore has the presentations required in the item, so the global sheaves are constructible. Empty strata and the empty scheme contribute the zero module category and require no generators. Zero source or target and zero ranks are covered by the same idempotent formulas. This proves all three clauses for both coefficient rings, with ordinary sheaf presentations throughout and no derived completeness condition.",
+   "text": "Apply the locally finitely presented Serre argument on each stratum of the common refinement. PreservesKernel.iso and PreservesCokernel.iso identify the restrictions of global kernels and cokernels with the local constructions; ShortExact.map_of_exact handles extensions. Witness constructibility by this same finite stratification. The two stated theorems are then obtained by specializing the single proved coefficient-ring argument to continuous finite-field coefficients and to bounded-image algebraic-closure coefficients. This proves exactly both original Lean signatures, with no new hypotheses, no new axioms and no new sorry declarations.",
    "uses": [
-    "def-constructible-stratification",
-    "def-weil-sheaf-of-modules-category"
+    "def-constructible-stratification"
    ],
    "elementary": true,
    "source": {
@@ -137,8 +124,6 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "def-weil-proetale-inverse-image",
   "lem-weil-pbc-weakly-etale-composition-base-change",
   "lem-galois-fpqc-covering-base-change",
@@ -148,14 +133,12 @@
   "lem-weil-pbc-immersion-base-change-lft",
   "lem-weil-pbc-condensed-lfp-local-triviality",
   "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
-  "lem-weil-pbc-site-coverings-common-refinement",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "def-weil-sheaf-of-modules-category"
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Section 6.8, Lemma 6.8.7 and Corollary 6.8.9, adapted explicitly to archived local finite presentations and bounded-image algebraic-closure coefficients"
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CN, explicit finite-basis local splitting and finite cokernel presentations; Bhatt-Scholze 6.8.7/6.8.9. B3 implemented the entire seven-step route in Lean, using the existing local-triviality declarations. The abelian-unit lifting argument is ported to current finite-coefficient inverse-image APIs from source WeilConjectures/SixFunctors/ProEtale/Adic/Extension.lean; no import of that legacy module is needed. Repair of the duplicate-helper refusal: finite-presentation isomorphism transport is proved for internal modules in any suitable abelian monoidal category, and local-finite-presentation transport for arbitrary suitable coefficient categories; both generalize the downstream private Ab-specialized lemmas in place."
  },
  "mathlib_searches": [
   {
@@ -328,5 +311,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Two theorems give kernel, cokernel and extension closure for finite intermediate-field coefficients and bounded-image algebraic-closure coefficients respectively. All coefficient rings, module objects and constructibility predicates are existing framework declarations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-c41f5",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T191321-L-1006542",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and unchanged signatures matched the node statement, proof metadata, import-change record, report, and prior repair requirement."
  }
 }
