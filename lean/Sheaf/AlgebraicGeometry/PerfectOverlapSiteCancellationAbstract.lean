@@ -27,6 +27,27 @@ theorem iso_triangle_inverse_cancel
   rw [hi]
   simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
 
+/-- The component of a comparison obtained by cancelling an equivalence
+pair is its counit component followed by the remaining comparison. -/
+theorem counit_comparison_component
+    {A B C D : Type*} [Category* A] [Category* B]
+    [Category* C] [Category* D]
+    (R : A ⥤ B) (I : B ⥤ C) (F : C ⥤ B) (P : B ⥤ D) (Q : A ⥤ D)
+    (η : I ⋙ F ≅ 𝟭 B)
+    (α : R ⋙ P ≅ Q)
+    (X : A) :
+    (Functor.associator R I (F ⋙ P) ≪≫
+      Functor.isoWhiskerLeft R (Functor.associator I F P).symm ≪≫
+      Functor.isoWhiskerLeft R (Functor.isoWhiskerRight η P) ≪≫
+      Functor.isoWhiskerLeft R (Functor.leftUnitor P) ≪≫ α).hom.app X =
+      P.map (η.hom.app (R.obj X)) ≫ α.hom.app X := by
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.leftUnitor_hom_app, Functor.comp_obj, Functor.id_obj,
+    Category.id_comp]
+
 /-- A return unit followed by an equivalence counit cancels across any comparison.
 Proof: The triangle identity identifies the image of the inverse unit with
 the counit on the image object. Naturality moves that counit across the
