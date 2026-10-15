@@ -7,10 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
-import Sheaf.AlgebraicGeometry.EtaleSectionsFpqcDescent
-import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionFunctor
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionAdjunction
+import Sheaf.AlgebraicGeometry.EtaleSetTerminalRestriction
 
 /-!
 # Sections of the etale-to-pro-etale inverse image
@@ -65,6 +64,45 @@ noncomputable def proEtaleComparisonEtaleSection {X : Scheme.{u}}
         (MorphismProperty.Over.pullback @Etale ⊤ U.hom) (Type (u + 1))
         (X.smallGrothendieckTopology @Etale)
         (U.left.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op U) s)
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma comparisonEtaleSection_eq
+    {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (U : X.Etale) :
+    proEtaleComparisonEtaleSection F U = (etaleSetTerminalRestriction F U).hom := by
+  let : (MorphismProperty.Over.pullback @Etale ⊤ U.hom).IsContinuous
+      (X.smallGrothendieckTopology @Etale)
+      (U.left.smallGrothendieckTopology @Etale) :=
+    Scheme.isContinuous_overPullback @Etale @Etale le_rfl U.hom
+  let ρ := Classical.choose (etaleSetInverseImageRestriction U.hom)
+  let d : Scheme.Etale.mk (𝟙 U.left) ⟶
+      (MorphismProperty.Over.pullback @Etale ⊤ U.hom).obj U :=
+    MorphismProperty.Over.homMk
+      (pullback.lift (𝟙 U.left) (𝟙 U.left) (by simp)) (by simp)
+  let η := ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.pullback @Etale ⊤ U.hom) (Type (u + 1))
+    (X.smallGrothendieckTopology @Etale)
+    (U.left.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op U)
+  suffices h : η ≫ ((Scheme.etaleSetPullback U.hom).obj F).obj.map d.op =
+      (etaleSetTerminalRestriction F U).hom by
+    funext s
+    exact ConcreteCategory.congr_hom h s
+  apply (cancel_mono ((ρ.hom.app F).hom.app (op (Scheme.Etale.mk (𝟙 U.left))))).1
+  rw [Category.assoc, (ρ.hom.app F).hom.naturality d.op, ← Category.assoc]
+  have hu : η ≫ (ρ.hom.app F).hom.app
+        (op ((MorphismProperty.Over.pullback @Etale ⊤ U.hom).obj U)) =
+      F.obj.map ((MorphismProperty.Over.mapPullbackAdj @Etale ⊤ U.hom
+        inferInstance trivial).counit.app U).op := by
+    ext t
+    exact Classical.choose_spec (etaleSetInverseImageRestriction U.hom) F U t
+  rw [hu]
+  change F.obj.map _ ≫ F.obj.map _ = _
+  simp only [ρ, etaleSetTerminalRestriction, Iso.trans_hom, Functor.mapIso_hom, Iso.op_hom,
+    Iso.symm_hom, asIso_inv, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  rw [← F.obj.map_comp]
+  congr 1
+  apply Quiver.Hom.unop_inj
+  apply MorphismProperty.Over.Hom.ext
+  simp [d, MorphismProperty.Over.mapPullbackAdj]
 
 /-- Source: Stacks Project, Tag 0GLZ, lemma-describe-pullback-from-etale; Tag 099R
 (blueprint: lem-cbc-comparison-pullback-sections).
@@ -126,6 +164,18 @@ theorem proEtaleComparisonPullbackSections (X : Scheme.{u}) :
           ((p.hom.app F).hom.app (op ((Scheme.toProEt X).obj U))
             (((Scheme.proEtaleSiteComparison X).unit.app F).hom.app (op U) s)) =
           proEtaleComparisonEtaleSection F U s) := by
-  sorry
+  obtain ⟨A, e, hres, hfun⟩ := proEtaleComparisonSectionFunctor X
+  obtain ⟨adj, hunit⟩ := proEtaleComparisonSectionAdjunction X A e hres hfun
+  refine ⟨A, e, (Scheme.proEtaleSiteComparison X).leftAdjointUniq adj,
+    hres, hfun, ?_, ?_⟩
+  · intro F U
+    rw [comparisonEtaleSection_eq]
+    exact (ConcreteCategory.bijective_of_isIso (etaleSetTerminalRestriction F U).hom)
+  · intro F U s
+    have hu := Adjunction.unit_leftAdjointUniq_hom_app
+      (Scheme.proEtaleSiteComparison X) adj F
+    have hs := congrArg (fun f ↦ f.hom.app (op U) s) hu
+    change e F ((Scheme.toProEt X).obj U) _ = _
+    exact (congrArg (e F ((Scheme.toProEt X).obj U)) hs).trans (hunit F U s)
 
 end AlgebraicGeometry

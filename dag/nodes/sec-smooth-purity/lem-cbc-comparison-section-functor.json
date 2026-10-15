@@ -1,0 +1,132 @@
+{
+ "id": "lem-cbc-comparison-section-functor",
+ "kind": "statement",
+ "title": "Construct the section-valued comparison sheaf functor",
+ "statement": "For a scheme X there is a functor A from etale set sheaves on X to pro-etale set sheaves on X, with equivalences A(F)(Y) ≃ Gamma(Y_et,Y.hom^*F). These equivalences intertwine restrictions with the specified inverse-image unit and terminal transport, and intertwine coefficient morphisms with inverse-image morphisms on terminal sections. This statement constructs the functor and its laws; it asserts no comparison-inverse-image isomorphism or adjunction.\nConventions: small etale sites [def-weil-pbc-etale-site]; small pro-etale sites [def-weil-pbc-proetale-site]; sheaves of sets [def-weil-pbc-etale-sheaf-of-sets]; inverse images, their units and composition isomorphisms [lem-weil-pbc-sets-etale-inverse-image-composition-units]; terminal section transport [def-weil-pbc-sets-terminal-transport].",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-sets-terminal-transport"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0GLZ, presheaf construction and first proof paragraph"
+ },
+ "proof": [
+  {
+   "text": "Use values of Y.hom^*F at the pullback of the terminal etale X-object. Define maps by etaleSetSectionComparison. Its identity and composition equations prove the presheaf laws.",
+   "uses": [
+    "lem-weil-pbc-sets-section-comparison-identity",
+    "lem-weil-pbc-sets-section-comparison-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The second pullback projection identifies these values with terminal sections. Unit and composition-map naturality, with uniqueness of maps to a terminal object, identifies the restriction maps with the required terminal transport formula.",
+   "uses": [
+    "def-weil-pbc-sets-terminal-transport",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the single-presheaf descent theorem to obtain sheaves. Coefficient maps are evaluation of inverse-image morphisms; unit naturality and composition-isomorphism naturality prove they define natural transformations, and inverse-image functor laws give A functor laws.",
+   "uses": [
+    "lem-cbc-comparison-section-descent",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-section-comparison-identity",
+  "lem-weil-pbc-sets-section-comparison-composition",
+  "def-weil-pbc-sets-terminal-transport",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-cbc-comparison-section-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0GLZ, presheaf construction and first proof paragraph; explicit Lean reduction by V4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Functor sheafPullback adjunction unit bijective sections",
+   "results": "loogle: Unknown identifier `sheafPullback`; ",
+   "date": "2026-10-16",
+   "verdict": "No matching comparison-sections theorem. Used existing library inverse-image coherence, terminal restriction, fpqc descent, and Mathlib adjunction uniqueness instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image sections etale proetale bijective",
+   "results": "; StandardEtalePresentation.lift_bijective, RingHom.Etale.of_bijective, StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv, Algebra.FormallyEtale.comp_bijective, AlgebraicGeometry.IsEtale.of_comp, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-16",
+   "verdict": "No matching comparison-sections theorem. Used existing library inverse-image coherence, terminal restriction, fpqc descent, and Mathlib adjunction uniqueness instead."
+  },
+  {
+   "tool": "grep",
+   "query": "terminal.*pullback|pullback.*terminal",
+   "results": "; Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Topos/Sheaf.lean, Mathlib/CategoryTheory/Topos/Sheaf.lean, Mathlib/CategoryTheory/Topos/Sheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "No matching comparison-sections theorem. Used existing library inverse-image coherence, terminal restriction, fpqc descent, and Mathlib adjunction uniqueness instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image from etale sheaves to proetale sheaves has sections on a weakly etale scheme equal to sections of the etale inverse image, by fpqc descent and uniqueness of left adjoints",
+   "results": "service unavailable: Internal Server Error; ",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections",
+  "date": "2026-10-16",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-comparison-pullback-sections",
+   "place": "Tag 0GLZ, presheaf construction and first proof paragraph",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionFunctor",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleComparisonSectionFunctor.lean",
+  "declaration": "AlgebraicGeometry.proEtaleComparisonSectionFunctor",
+  "statement": "theorem proEtaleComparisonSectionFunctor (X : Scheme.{u}) :\n    ∃ A : Sheaf X.smallEtaleTopology (Type (u + 1)) ⥤\n        Sheaf (Scheme.ProEt.topology X) (Type (u + 1)),\n      ∃ e : ∀ (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (Y : X.ProEt),\n        (A.obj F).obj.obj (op Y) ≃\n          ((Scheme.etaleSetPullback Y.hom).obj F).obj.obj\n            (op (Scheme.Etale.mk (𝟙 Y.left))),\n      (∀ (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n        (Y Z : X.ProEt) (g : Z ⟶ Y) (s : (A.obj F).obj.obj (op Y)),\n        e F Z ((A.obj F).obj.map g.op s) =\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @Etale ⊤ g.left) (Type (u + 1))\n            (Y.left.smallGrothendieckTopology @Etale)\n            (Z.left.smallGrothendieckTopology @Etale)).unit.app\n              ((Scheme.etaleSetPullback Y.hom).obj F)).hom.app\n                (op (Scheme.Etale.mk (𝟙 Y.left))) ≫\n            (etaleSetTerminalTransport Y.hom g.left Z.hom (MorphismProperty.Over.w g) F).inv) (e F\n              Y s)) ∧\n      (∀ (F F' : Sheaf X.smallEtaleTopology (Type (u + 1))) (ψ : F ⟶ F')\n        (Y : X.ProEt) (s : (A.obj F).obj.obj (op Y)),\n        e F' Y ((A.map ψ).hom.app (op Y) s) =\n          ((Scheme.etaleSetPullback Y.hom).map ψ).hom.app\n            (op (Scheme.Etale.mk (𝟙 Y.left))) (e F Y s))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261015T224110-L-2885764",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261015T224110-L-2885764",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
