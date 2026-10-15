@@ -19,10 +19,15 @@ DEFS=(AlgebraicGeometry.Etale.shiftedHomFunctor AlgebraicGeometry.Etale.finalObj
 ALL_NAMES=("${NAMES[@]}" "${DEFS[@]}")
 LIST=$(printf '`%s, ' "${ALL_NAMES[@]}"); LIST=${LIST%, }
 D="$SHEAF_LEAN/.sandbox/_sheaf"; mkdir -p "$D"
+# 2026-10-16 (launcher): the library side imports the first task's target modules (coord/batch1-targets.txt), not all of
+# TargetsCheck: a non-module file importing TargetsCheck also loads the private imports of the batch-2 targets, where
+# two batch-2 modules declare the same name, and the check could not run.
+LIBIMPORTS=$(grep -v '^#' "$SHEAF_ROOT/coord/batch1-targets.txt" | grep . | sed 's/^/import /')
 for side in Challenge TargetsCheck; do
+  if [ "$side" = Challenge ]; then IMPORTS="import Challenge"; else IMPORTS="$LIBIMPORTS"; fi
   cat > "$D/Types_$side.lean" <<LEAN
 import Lean
-import $side
+$IMPORTS
 open Lean in
 #eval show CoreM Unit from do
   let env ← getEnv
