@@ -17,84 +17,66 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal N=\\mathcal N_A(\\overline C)$ with the objects and all compatible algebra maps of the cited definition. The identity $\\operatorname{Spec}A\\to\\operatorname{Spec}A$ is an open immersion, hence etale by clause (1) of the composition node. The presentation $A=A[\\,]/(\\,)$ has zero variables and zero relations. Thus $(A,A\\to\\overline C)$ is an object, even if $A$ or $\\overline C$ is the zero ring, so $\\mathcal N$ is nonempty. In the literal presentation model take $E=A[\\,]/(\\,)$ with evaluation isomorphism $e:E\\xrightarrow{\\sim}A$ and map $E\\xrightarrow{e}A\\to\\overline C$.",
+   "text": "An etale A-algebra B has a finite polynomial-quotient presentation by Algebra.FinitePresentation.iff. Transport etaleness and a specified map B -> C across the presentation isomorphism. This is the private helper exists_index, and will be applied to every successor constructed below. Applying it to B=A and the structural map A -> C proves nonemptiness, including zero rings.",
    "uses": [
     "def-exc-ind-etale-closed-lift",
-    "def-weil-pbc-finitely-presented-algebra",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GP, lemma-open-immersion-etale; nonemptiness in blueprint proof paragraph 1"
-   }
-  },
-  {
-   "text": "For objects $(B,q),(B\\prime,q\\prime)$ set $P=B\\otimes_A B\\prime$. The affine fibre-product node identifies $\\operatorname{Spec}P\\to\\operatorname{Spec}B\\prime$ with the base change of $\\operatorname{Spec}B\\to\\operatorname{Spec}A$. It is etale by clause (1) of the base-change node, and its composite to $\\operatorname{Spec}A$ is etale by clause (2) of the composition node. If $B=A[x_1,\\ldots,x_n]/(F_1,\\ldots,F_r)$ and $B\\prime=A[y_1,\\ldots,y_m]/(G_1,\\ldots,G_s)$, the tensor universal property gives $P=A[x_1,\\ldots,x_n,y_1,\\ldots,y_m]/(F_1,\\ldots,F_r,G_1,\\ldots,G_s)$: maps from each presentation to any algebra are precisely pairs of maps from $B,B\\prime$. Hence $P/A$ is finitely presented. The tensor node supplies $p:P\\to\\overline C$, $p(b\\otimes b\\prime)=q(b)q\\prime(b\\prime)$, with $p(b\\otimes1)=q(b)$ and $p(1\\otimes b\\prime)=q\\prime(b\\prime)$. These inclusions are the required arrows to the common successor. Precisely, let $E$ be the displayed polynomial quotient and $e:E\\xrightarrow{\\sim}P$ its $A$-algebra isomorphism. Use $(E,p\\circ e)$ as the small-model object, with arrows $e^{-1}\\circ\\iota_B$ and $e^{-1}\\circ\\iota_{B\\prime}$. Their composites with $p\\circ e$ are $q$ and $q\\prime$, respectively.",
-   "uses": [
-    "def-exc-ind-etale-closed-lift",
-    "def-weil-pbc-finitely-presented-algebra",
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 02GO (lemma-base-change-etale), 02GN (lemma-composition-etale); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes); blueprint paragraph 1"
-   }
-  },
-  {
-   "text": "Let $f,g:(B,q)\\rightrightarrows(B\\prime,q\\prime)$ be parallel arrows. Put $T_0=B\\otimes_A B$ and $\\mu:T_0\\to B$, $\\mu(b_1\\otimes b_2)=b_1b_2$. Step 2, applied to the pair $B,B$, shows that $T_0/A$ is etale. Both $\\operatorname{Spec}B$ and $\\operatorname{Spec}T_0$ are therefore etale over $\\operatorname{Spec}A$, so clause (3) of the composition-cancellation node makes $\\operatorname{Spec}\\mu$ etale. The tensor node defines $h:T_0\\to B\\prime$, $h(b_1\\otimes b_2)=f(b_1)g(b_2)$. This is the ring map corresponding to the pair $(\\operatorname{Spec}f,\\operatorname{Spec}g)$ against which the blueprint pulls back the diagonal.",
-   "uses": [
-    "def-exc-ind-etale-closed-lift",
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GW, lemma-etale-permanence; blueprint proof paragraph 2, diagonal before pullback"
-   }
-  },
-  {
-   "text": "Choose the finite generators $x_1,\\ldots,x_n$ of $B$ in its presentation and let $J=(f(x_1)-g(x_1),\\ldots,f(x_n)-g(x_n))\\subseteq B\\prime$. Put $Q=B\\prime/J$ with quotient $\\pi$. The maps $\\pi f$ and $\\pi g$ agree on $A$ and on the $x_i$, hence on every polynomial in them, so they agree on all of $B$. For any commutative $A$-algebra $D_0$, maps $B\\prime\\otimes_{T_0}B\\to D_0$ correspond by the tensor universal property to maps $u:B\\prime\\to D_0$ and $v:B\\to D_0$ satisfying $u h=v\\mu$. Evaluating on $b\\otimes1$ and $1\\otimes b$ forces $v=uf=ug$; conversely $uf=ug$ implies the required identity on every pure tensor, and thus everywhere. Such $u$ are exactly those killing $J$, and factor uniquely through $Q$. These inverse universal correspondences identify $Q\\cong B\\prime\\otimes_{T_0}B$, compatibly with $\\pi$ and $\\mu$. In particular $J$ is also the ideal generated by all differences $f(b)-g(b)$, as in the blueprint.",
-   "uses": [
-    "def-weil-pbc-finitely-presented-algebra",
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+    "def-weil-pbc-finitely-presented-algebra"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01I4, lemma-fibre-product-affine-schemes, tensor universal property in its proof; explicit quotient calculation for blueprint paragraph 2"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale"
    }
   },
   {
-   "text": "By the affine fibre-product node and step 4, $\\operatorname{Spec}Q\\to\\operatorname{Spec}B\\prime$ is the base change of the etale map $\\operatorname{Spec}\\mu$ along $\\operatorname{Spec}h$. Clause (1) of the base-change node and clause (2) of the composition node make $\\operatorname{Spec}Q\\to\\operatorname{Spec}A$ etale. Write each $f(x_i)-g(x_i)$ as a polynomial $H_i(y_1,\\ldots,y_m)$ in the finite presentation of $B\\prime$ from step 2. Then $Q=A[y_1,\\ldots,y_m]/(G_1,\\ldots,G_s,H_1,\\ldots,H_n)$, so it is finitely presented over $A$. Since the arrows are compatible, $q\\prime f=q=q\\prime g$, and $q\\prime$ kills $J$. It descends uniquely to $r:Q\\to\\overline C$, $r\\pi=q\\prime$. Thus $(Q,r)$ is an object up to its displayed presentation: if $E$ is that polynomial quotient and $e:E\\xrightarrow{\\sim}Q$ its isomorphism, take $(E,r\\circ e)$ and the arrow $a=e^{-1}\\circ\\pi:B\\prime\\to E$. Then $(r\\circ e)a=q\\prime$ and $af=ag$, as required in the literal small model. No injectivity of $q\\prime$ and no nonzero-ring hypothesis has been used.",
+   "text": "For X,Y take B=X.alg tensor_A Y.alg with map productMap X.toC Y.toC. Algebra.Etale.baseChange followed by Algebra.Etale.comp gives Etale A B. Choose its presentation using exists_index. Conjugating includeLeft and includeRight by the inverse presentation isomorphism gives compatible arrows from X and Y to this object.",
    "uses": [
     "def-exc-ind-etale-closed-lift",
-    "def-weil-pbc-finitely-presented-algebra",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-etale-ring-base-change",
     "lem-weil-pbc-etale-composition-cancellation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 02GO (lemma-base-change-etale), 02GN (lemma-composition-etale); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes); blueprint paragraph 2"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale"
    }
   },
   {
-   "text": "Steps 1, 2 and 5 give respectively an object, a common successor of every pair of objects, and an arrow equalizing every pair of parallel arrows. These are precisely the three conditions defining a filtered category, as recalled in the cited colimit definition (Stacks Tag 002V, definition-directed). The small presentation model retains all compatible algebra maps, so the explicitly conjugated arrows from steps 2 and 5 are morphisms of that model. Therefore $\\mathcal N_A(\\overline C)$ is filtered.",
+   "text": "For parallel f,g:X -> Y put h=productMap f.hom g.hom, K=ker(lmul:X.alg tensor_A X.alg -> X.alg), and J=K.map h. Etaleness makes Omega[X.alg/A] zero. Its identification with K/K^2 and Ideal.cotangent_subsingleton_iff give K*K=K; Ideal.map_mul gives J*J=J. KaehlerDifferential.ideal_fg and finite generation of ideal images give J.FG. These are the direct Mathlib calculations hK, hJ and hJfg.",
+   "uses": [
+    "lem-sc-kahler-differentials-diagonal-ideal",
+    "def-exc-ind-etale-closed-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale"
+   }
+  },
+  {
+   "text": "Set Q=Y.alg/J. Algebra.FinitePresentation.quotient gives finite presentation over Y.alg. Algebra.FormallyEtale.iff_of_surjective identifies formal etaleness of the quotient map with idempotence of its kernel, which is J by Ideal.mk_ker. Thus Q is etale over Y.alg, and Algebra.Etale.comp gives etaleness over A. This is the ring calculation of the diagonal pullback in the original proof.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale"
+   }
+  },
+  {
+   "text": "Compatibility of f and g gives Y.toC.comp h = X.toC.comp lmul, checked on both tensor inclusions. Hence Y.toC kills J and descends to q:Q -> C by Ideal.Quotient.lift_a (liftₐ in Lean). For every x the tensor x tensor 1 - 1 tensor x lies in K, so f(x)-g(x) lies in J. The quotient therefore equalizes f and g. Apply exists_index to Q and conjugate the quotient map to obtain a compatible arrow Y -> Z in the literal small model. Extensionality of Index.Hom proves the required equality of composites. Together with nonemptiness and common successors these are the fields of IsFiltered.",
    "uses": [
     "def-exc-ind-etale-closed-lift",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 002V, definition-directed"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale"
    }
   }
  ],
@@ -102,15 +84,15 @@
   "def-exc-ind-etale-closed-lift",
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-finitely-presented-algebra",
+  "lem-sc-kahler-differentials-diagonal-ideal",
   "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "lem-weil-pbc-etale-base-change-finite-limits",
   "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-fibre-product-affine-spectra"
+  "lem-weil-pbc-etale-ring-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-closed-lift-filtered.md",
-  "place": "Proof paragraphs 1-2, expanded using Stacks Tags 01I4, 02GP, 02GO, 02GN, 02GW and 002V"
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 097P, filteredness paragraph; E3 Lean proof uses the diagonal-ideal quotient calculation in place of the scheme pullback calculation, 2026-10-16"
  },
  "mathlib_searches": [
   {
@@ -217,5 +199,15 @@
   "date": "2026-10-15",
   "existing": true,
   "note": "Exact existing statement for the indexing category reused by def-exc-ind-etale-closed-lift. The declaration has a sorry proof; this is a stage-2 statement attachment, not a closed-proof claim. The construction and filteredness depend only on the induced A-algebra C, not on its quotient-algebra or ind-etale presentation."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-d3879",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T182203-L-785410",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery packet, Lean/DAG changes, six direct importers, full lcompile build, and axiom probes all match the stage-3 review requirements."
  }
 }

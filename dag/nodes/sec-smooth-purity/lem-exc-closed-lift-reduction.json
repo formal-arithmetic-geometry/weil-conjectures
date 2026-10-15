@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Write $C=H_A(\\overline C)$ and $\\epsilon:C\\to\\overline C$ for the cocone map of [def-exc-ind-etale-closed-lift]. Since the structural map $A\\to\\overline C$ factors through $A/I$, $\\epsilon$ kills every product $ac$ with $a\\in I$, and hence kills $IC$. Thus it factors uniquely through a ring map $r:R=C/IC\\to\\overline C$, the specified reduction map. The indexing category is small by its presentation model and filtered by [lem-exc-closed-lift-filtered]; its terms are etale of finite presentation, so $C/A$ is ind-etale by [def-weil-pbc-ind-etale-algebra].",
+   "text": "Use the existing construction H=ClosedLift A C, J=I.map(algebraMap A H), R=H/J, and its specified reduction map. The quotient scalar-tower instances make it an A/I-algebra map r:R -> C; its commutation with A/I is checked on quotient representatives. Filteredness gives the existing indEtale instance for H.",
    "uses": [
     "def-exc-ind-etale-closed-lift",
     "lem-exc-closed-lift-filtered",
@@ -27,25 +27,26 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097P, lemma-lift-ind-etale, construction of C and induced quotient map"
+    "place": "Tag 097P, lemma-lift-ind-etale"
    }
   },
   {
-   "text": "Choose a small filtered presentation $\\overline C=\\varinjlim_i\\overline B_i$ by etale finite-presentation $A/I$-algebras, using [def-weil-pbc-ind-etale-algebra]. The algebra colimit is also the ring colimit: a compatible family of ring maps has a common restriction from $A/I$ because the filtered category is nonempty and every two indices have a common successor. Give the target ring this common $A/I$-algebra structure; the algebra universal property gives the unique induced ring map, since any ring map extending the cocone respects that structure. By [lem-pc-filtered-colimit-commrings-elementwise], each $z\\in\\overline C$ is the image of some $\\overline b\\in\\overline B_i$. By [lem-exc-etale-algebra-lift], choose an etale finite-presentation $A$-algebra $B_i$ and the specified isomorphism $B_i/IB_i\\cong\\overline B_i$. Choose $b\\in B_i$ reducing to $\\overline b$. Write $q_i:B_i\\to\\overline B_i\\to\\overline C$ for the composite. Finite presentation gives a presentation-model algebra $P_i$ and an $A$-algebra isomorphism $u:P_i\\to B_i$. Then $(P_i,q_i\\circ u)$ is an object of the indexing category in [def-exc-ind-etale-closed-lift]. Its structure map sends $u^{-1}(b)$ to an element of $C$ whose image under $\\epsilon$ is $q_i(u(u^{-1}(b)))=z$. Hence $\\epsilon$, and therefore $r$, is surjective.",
+   "text": "For c in C choose a representative b in an etale stage P_i of an ind-etale presentation of C. Apply Algebra.exists_etale_coefficientLift to obtain an etale A-algebra L.LiftRing, reduction L.reduction and its specified quotient isomorphism e. Choose a quotient representative a of e.symm b. Regard L.reduction as an A-algebra map by checking coefficients using polynomialReduction; compose with P_i -> C. Present L.LiftRing by exists_index, so a gives an element of H mapping to c. The private helper surjective_toAlgHom proves this; taking its class in R proves surjectivity of r.",
    "uses": [
     "def-weil-pbc-ind-etale-algebra",
     "lem-pc-filtered-colimit-commrings-elementwise",
     "lem-exc-etale-algebra-lift",
+    "def-weil-pbc-finitely-presented-algebra",
     "def-exc-ind-etale-closed-lift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097P, lemma-lift-ind-etale, third proof paragraph: lift the etale stages and obtain surjectivity"
+    "place": "Tag 097P, lemma-lift-ind-etale"
    }
   },
   {
-   "text": "The base change of $A\\to C$ along $A\\to A/I$ is $A/I\\to R$: the isomorphism $C\\otimes_A(A/I)\\cong C/IC$ sends $c\\otimes\\overline a$ to $ac\\bmod IC$, with inverse $c\\bmod IC\\mapsto c\\otimes1$; these are well-defined inverse ring maps by balancing and the quotient relations. Base-change stability in [lem-weil-pbc-ind-etale-stability] makes $R$ ind-etale over $A/I$. The target $\\overline C$ is ind-etale over $A/I$ by hypothesis, and $r$ is an $A/I$-algebra map. The relative-map clause of that same node makes $r$ ind-etale, hence weakly etale. By the explicit flatness clause in [def-weil-pbc-ind-etale-algebra], $\\overline C$ is flat as an $R$-module via $r$.",
+   "text": "Base change of H to A/I is ind-etale by RingHom.IndEtale.isStableUnderBaseChange.tensorProduct. Transport this along Algebra.TensorProduct.quotIdealMapEquivQuotTensor to R via ObjectProperty.ind.prop_of_iso. Both R and C are now ind-etale over A/I. RingHom.IndEtale.of_comp and r.commutes make r ind-etale. Algebra.IndEtale.weaklyEtale then gives flatness of C as an R-module for the algebra structure induced by r. These are the existing library base-change, relative-map and weak-etaleness clauses, without importing the bundled principal-Zariski stability theorem.",
    "uses": [
     "lem-weil-pbc-ind-etale-stability",
     "def-weil-pbc-ind-etale-algebra"
@@ -53,46 +54,63 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097P, lemma-lift-ind-etale, third proof paragraph: permanence and flatness"
+    "place": "Tag 097P, lemma-lift-ind-etale"
    }
   },
   {
-   "text": "Put $J=\\ker r$. Surjectivity gives an $R$-linear ring isomorphism $R/J\\to\\overline C$, $[a]\\mapsto r(a)$: its inverse sends $z$ to the class of any preimage, independently of the choice since two preimages differ by $J$. Thus $R/J$ is flat over $R$: for any injection of $R$-modules, tensoring this isomorphism identifies the induced tensor map with that for the flat module $\\overline C$. Apply [lem-exc-flat-quotient-element-equation] to obtain, for each $x\\in J$, an $e\\in J$ with $x=xe$.",
+   "text": "Let K=ker r. By surjectivity, Ideal.quotientKerAlgEquivOfSurjective identifies R/K with C as R-algebras. Transport flatness with Module.Flat.of_linearEquiv, so K is pure. Ideal.exists_eq_mul_of_pure gives, for each x in K, an e in K with x=x*e.",
    "uses": [
     "lem-exc-flat-quotient-element-equation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097P, lemma-lift-ind-etale, third proof paragraph; Algebra Tag 04PS, implication (1) => (5)"
+    "place": "Tag 097P, lemma-lift-ind-etale"
    }
   },
   {
-   "text": "For such $e$, choose $\\widetilde e\\in C$ with image $e$ in $R=C/IC$. Since $e\\in\\ker r$, $\\epsilon(\\widetilde e)=0$ and $\\epsilon(1-\\widetilde e)=1$. By [lem-exc-closed-lift-units], $1-\\widetilde e$ is invertible in $C$. Reducing its inverse modulo $IC$ shows that $1-e$ is invertible in $R$. But $x=xe$ implies $x(1-e)=0$; multiplication by that inverse gives $x=0$. Thus $\\ker r=0$. Together with surjectivity this proves that the specified map $r$ is an isomorphism.",
+   "text": "Prove the required unit-lifting property locally, since the existing ClosedLiftUnits module imports ClosedLift and cannot be imported here. For y in H whose image is a unit, take a representative b in an etale stage X. The map X.alg -> C extends to Localization.Away b via IsLocalization.Away.liftAlgHom. This localization is etale over A and hence has a presentation-model object Y by exists_index. The localization map conjugated by that presentation is an arrow X -> Y. The colimit cocone equation identifies y with the image of b/1 at Y; since b/1 is a unit there, y is a unit. This is the complete private helper isUnit_of_isUnit_image, valid for every input A-algebra C.",
    "uses": [
-    "lem-exc-closed-lift-units"
+    "lem-exc-closed-lift-filtered",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "def-weil-pbc-finitely-presented-algebra"
    ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097P, lemma-lift-ind-etale"
+   }
+  },
+  {
+   "text": "Lift e from step 4 to y in H. Since r(e)=0, toAlgHom(y)=0 and toAlgHom(1-y)=1. Step 5 makes 1-y a unit in H, hence 1-e a unit in R. The equation x=x*e gives x*(1-e)=0, and IsUnit.mul_left_eq_zero gives x=0. Thus r is injective and, with step 2, bijective. All constructions include the zero ring and arbitrary ideals; no nilpotence or nontriviality is assumed.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097P, lemma-lift-ind-etale, third proof paragraph: invert the kernel annihilator"
+    "place": "Tag 097P, lemma-lift-ind-etale"
    }
   }
  ],
  "proof_deps": [
   "def-exc-ind-etale-closed-lift",
-  "lem-exc-closed-lift-filtered",
+  "def-weil-pbc-finitely-presented-algebra",
   "def-weil-pbc-ind-etale-algebra",
-  "lem-pc-filtered-colimit-commrings-elementwise",
+  "def-weil-ring-localization-away",
+  "lem-exc-closed-lift-filtered",
   "lem-exc-etale-algebra-lift",
-  "lem-weil-pbc-ind-etale-stability",
   "lem-exc-flat-quotient-element-equation",
-  "lem-exc-closed-lift-units"
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-ring-localization-universal-property"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 097P, lemma-lift-ind-etale, construction and third proof paragraph; flat-quotient kernel equation from Algebra Tag 04PS"
+  "place": "Tag 097P, surjectivity, relative flatness and localization argument, with Tag 04PS (1) => (5); E3 complete Lean combination and local unit proof, 2026-10-16"
  },
  "mathlib_searches": [
   {
@@ -198,5 +216,15 @@
   "group": "NS",
   "result": "pass",
   "note": "Wrote review.md. Exact statement, dependencies, hypotheses, edge cases, reports, and maintainer gates checked. Server-only compile passed in 2.4 seconds. Immutable delivery ref unchanged; no repository modifications or fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-d3879",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T182203-L-785410",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery packet, Lean/DAG changes, six direct importers, full lcompile build, and axiom probes all match the stage-3 review requirements."
  }
 }
