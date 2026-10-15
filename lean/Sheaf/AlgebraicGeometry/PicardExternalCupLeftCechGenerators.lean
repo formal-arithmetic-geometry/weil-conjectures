@@ -50,8 +50,7 @@ projections are surjective). The Kunneth cycle formula represents e of their
 pure tensor by the total tensor cycle. Refinement compatibility identifies its
 image under theta with pullback of the factor classes followed by Cech cup.
 Cech cup comparison identifies this with sheaf cup; the scalar Ext comparisons
-identify (-1)^(p*q) times its compared image with externalCup. This proves
-the generator
+identify it with externalCup. This proves precisely the displayed generator
 formula, with the cast implementing p+q=n. This uses neither invertibility of
 external cup nor any normalization or existence of scalar-total cochain maps.
 For zero coefficients or empty schemes all relevant spaces are zero. Degree zero
@@ -74,8 +73,7 @@ theorem picardExternalCup_left_cech_generators
           ∀ (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n})
             (x : (picardScalarModel f F).homology (i.val.1 : ℤ))
             (y : (picardScalarModel g G).homology (i.val.2 : ℤ)),
-            (-1 : ℤ) ^ (i.val.1 * i.val.2) •
-              picardScalarModelEquiv (pullback.fst f g ≫ f)
+            picardScalarModelEquiv (pullback.fst f g ≫ f)
                 (externalCupCoefficients f g F G) n
               (b.hom (HomologicalComplex.homologyMap (θ.app F) (n : ℤ)
                 (e (DirectSum.lof k _ _ i (x ⊗ₜ[k] y))))) =
@@ -97,8 +95,7 @@ theorem picardExternalCup_left_cech_generators
   obtain ⟨u, rfl⟩ := (ModuleCat.epi_iff_surjective (A.homologyπ _)).mp inferInstance x
   obtain ⟨v, rfl⟩ := (ModuleCat.epi_iff_surjective (B.homologyπ _)).mp inferInstance y
   obtain ⟨z, hz, hez⟩ := he i u v
-  change (-1 : ℤ) ^ (i.val.1 * i.val.2) •
-    picardScalarModelEquiv (pullback.fst f g ≫ f)
+  change picardScalarModelEquiv (pullback.fst f g ≫ f)
     (externalCupCoefficients f g F G) n
     ((b n).hom (HomologicalComplex.homologyMap (θ.app F) (n : ℤ)
       ((a n).inv (e (DirectSum.lof k _ _ i

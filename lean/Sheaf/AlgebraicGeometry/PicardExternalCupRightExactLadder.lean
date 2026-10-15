@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Homology.ExactSequence
 
-import Sheaf.AlgebraicGeometry.PicardExternalCupHomologyUnique
+import Sheaf.Algebra.Homology.TensorKunnethNat
 import Sheaf.AlgebraicGeometry.PicardExternalCupRightCechDiagram
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 
@@ -36,11 +36,34 @@ private theorem normalized_homology_unique
     (hd : IsPicardExternalCupCochain f g F G d) (n : ℕ) :
     HomologicalComplex.homologyMap c (n : ℤ) =
       HomologicalComplex.homologyMap d (n : ℤ) := by
-  exact picardExternalCupHomology_unique f g F G
-    (fun j ↦ HomologicalComplex.homologyMap c (j : ℤ))
-    (fun j ↦ HomologicalComplex.homologyMap d (j : ℤ))
-    (by intro j i a b z hz; exact hc j i a b z hz)
-    (by intro j i a b z hz; exact hd j i a b z hz) n
+  classical
+  let A := picardScalarModel f F
+  let B := picardScalarModel g G
+  obtain ⟨e, he⟩ := HomologicalComplex.tensor_kunneth_nat A B
+    (picardScalarModel_negative f F) (picardScalarModel_negative g G) n
+  apply ModuleCat.hom_ext
+  apply (LinearMap.cancel_right e.surjective).mp
+  apply DirectSum.linearMap_ext
+  intro i
+  apply TensorProduct.ext'
+  intro a b
+  obtain ⟨a, rfl⟩ := (ModuleCat.epi_iff_surjective (A.homologyπ (i.val.1 : ℤ))).mp
+    inferInstance a
+  obtain ⟨b, rfl⟩ := (ModuleCat.epi_iff_surjective (B.homologyπ (i.val.2 : ℤ))).mp
+    inferInstance b
+  obtain ⟨z, hz, hez⟩ := he i a b
+  change HomologicalComplex.homologyMap c (n : ℤ)
+      (e (DirectSum.lof k _ _ i
+        (TensorProduct.tmul k (A.homologyπ (i.val.1 : ℤ) a)
+          (B.homologyπ (i.val.2 : ℤ) b)))) =
+    HomologicalComplex.homologyMap d (n : ℤ)
+      (e (DirectSum.lof k _ _ i
+        (TensorProduct.tmul k (A.homologyπ (i.val.1 : ℤ) a)
+          (B.homologyπ (i.val.2 : ℤ) b))))
+  rw [hez]
+  apply (picardScalarModelEquiv (pullback.fst f g ≫ f)
+    (externalCupCoefficients f g F G) n).injective
+  exact (hc n i a b z hz).trans (hd n i a b z hz).symm
 
 /-- The external-cup comparison gives an exact five-term homology ladder for a
 short exact sequence of right coefficients. Its middle vertical arrow is the

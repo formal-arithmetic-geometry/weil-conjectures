@@ -46,8 +46,7 @@ comparison isomorphisms. This gives a and b in every natural degree.
 To check the equation for any normalized d, lift both factor homology classes to
 cycles. The Cech refinement/cup compatibility identifies the image of each tensor
 cycle under the natural transformation with externalCup of the factor classes.
-After multiplication by (-1)^(p*q), the defining normalization of d gives
-the same value. Cancel this unit by multiplying again. Tensor Kunneth's cycle
+The defining normalization of d gives the same value. Tensor Kunneth's cycle
 formula and the spanning property of pure tensors and direct-sum inclusions imply
 equality of the transported homology maps. This argument uses no invertibility
 of external cup and no connecting homomorphisms. Empty covers and zero coefficients
@@ -105,22 +104,6 @@ theorem picardExternalCup_left_cech_comparison
         (externalCupCoefficients f g F G) n
         (HomologicalComplex.homologyMap d (n : ℤ)
           (s (DirectSum.lof k _ _ i (x ⊗ₜ[k] y))))
-    have hsign : ((-1 : ℤ) ^ (i.val.1 * i.val.2)) *
-        ((-1 : ℤ) ^ (i.val.1 * i.val.2)) = 1 := by
-      rw [← pow_add, ← two_mul]
-      simp
-    suffices h : (-1 : ℤ) ^ (i.val.1 * i.val.2) •
-        picardScalarModelEquiv (pullback.fst f g ≫ f)
-          (externalCupCoefficients f g F G) n
-          (b.hom (HomologicalComplex.homologyMap (θ.app F) (n : ℤ)
-            (e (DirectSum.lof k _ _ i (x ⊗ₜ[k] y))))) =
-        (-1 : ℤ) ^ (i.val.1 * i.val.2) •
-          picardScalarModelEquiv (pullback.fst f g ≫ f)
-            (externalCupCoefficients f g F G) n
-            (HomologicalComplex.homologyMap d (n : ℤ)
-              (s (DirectSum.lof k _ _ i (x ⊗ₜ[k] y)))) by
-      have h' := congrArg (fun w ↦ (-1 : ℤ) ^ (i.val.1 * i.val.2) • w) h
-      simpa only [smul_smul, hsign, one_smul] using h'
     rw [he]
     have hsz' : s (DirectSum.lof k _ _ i (x ⊗ₜ[k] y)) = T.homologyπ (n : ℤ) z := by
       simpa only [A, B, T, picardExternalTotal, hx, hy] using hsz

@@ -36,8 +36,7 @@ noncomputable def picardExternalTotal
     (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℤ)
 
 /-- Normalization of a specified cochain map on tensor cycles. This imposes only the
-signed external cup formula: multiply the compared image by `(-1)^(p*q)`.
-It imposes no injectivity or surjectivity on homology.
+external cup formula, not injectivity or surjectivity on homology.
 Source: Stacks, Tags 01FD, 07MB and 0FKV; equation 33.29.1.1 of Tag 0BED
 (blueprint: lem-sc-picard-external-cup-cochain). -/
 def IsPicardExternalCupCochain
@@ -57,8 +56,7 @@ def IsPicardExternalCupCochain
           exact_mod_cast i.property)
         (((picardScalarModel f F).iCycles (i.val.1 : ℤ) a) ⊗ₜ[k]
           ((picardScalarModel g G).iCycles (i.val.2 : ℤ) b)) →
-    (-1 : ℤ) ^ (i.val.1 * i.val.2) •
-      picardScalarModelEquiv (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) n
+    picardScalarModelEquiv (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) n
         (HomologicalComplex.homologyMap c (n : ℤ)
           ((picardExternalTotal f g F G).homologyπ (n : ℤ) z)) =
       cast (congrArg (fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)
@@ -285,12 +283,10 @@ mapped isomorphically by the differential. Projection to the homology representa
 and inclusion of them are cochain maps inducing the identity on homology. The field
 linear tensor Kunneth map identifies homology of the tensor total with the sum of
 factor homology tensors. Define a map on that homology by the bilinear external cup
-on each summand, using picardScalarModelEquiv on all three models and multiplying
-by `(-1)^(p*q)`; include it into
+on each summand, using picardScalarModelEquiv on all three models; include it into
 the homology representatives of the product model. Composing with projection of
 the tensor total gives the required cochain map c. Its homology map has exactly the
 specified value on every tensor cycle by the tensor Kunneth cycle formula.
-The normalization multiplies this value by the same sign; their product is one.
 If two total cycles have the specified inclusion, monicity of iCycles identifies
 them, so the formula holds for the arbitrary z in the statement. All negative
 terms are zero, and the construction includes zero sheaves and empty schemes. -/
@@ -313,15 +309,14 @@ theorem picardExternalCupCochain_exists
   let σ (n : ℕ) (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n}) :
       (A.homology (i.val.1 : ℤ)) ⊗[k] (B.homology (i.val.2 : ℤ)) →ₗ[k]
         C.homology (n : ℤ) :=
-    (-1 : ℤ) ^ (i.val.1 * i.val.2) •
-      ((picardScalarModelEquiv (pullback.fst f g ≫ f)
-        (externalCupCoefficients f g F G) n).symm.toLinearMap.comp
+    (picardScalarModelEquiv (pullback.fst f g ≫ f)
+      (externalCupCoefficients f g F G) n).symm.toLinearMap.comp
         ((LinearEquiv.cast (R := k)
           (M := fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)
             (externalCupCoefficients f g F G) d)) i.property).toLinearMap.comp
           ((TensorProduct.lift (cup i.val.1 i.val.2)).comp
             (TensorProduct.map (picardScalarModelEquiv f F i.val.1).toLinearMap
-              (picardScalarModelEquiv g G i.val.2).toLinearMap))))
+              (picardScalarModelEquiv g G i.val.2).toLinearMap)))
   let τ (n : ℕ) := DirectSum.toModule k _ _ (σ n)
   let φnat (n : ℕ) : T.homology (n : ℤ) ⟶ C.homology (n : ℤ) :=
     ModuleCat.ofHom ((τ n).comp (e n).symm.toLinearMap)
@@ -337,41 +332,30 @@ theorem picardExternalCupCochain_exists
     ((ModuleCat.mono_iff_injective (T.iCycles (n : ℤ))).mp inferInstance)
       (hz'.trans hz.symm)
   subst z'
-  change (-1 : ℤ) ^ (i.val.1 * i.val.2) •
-    (picardScalarModelEquiv (pullback.fst f g ≫ f)
+  change (picardScalarModelEquiv (pullback.fst f g ≫ f)
     (externalCupCoefficients f g F G) n)
       ((HomologicalComplex.homologyMap c (n : ℤ)) (T.homologyπ (n : ℤ) z)) = _
   rw [hc]
-  change (-1 : ℤ) ^ (i.val.1 * i.val.2) •
-    (picardScalarModelEquiv (pullback.fst f g ≫ f)
+  change (picardScalarModelEquiv (pullback.fst f g ≫ f)
     (externalCupCoefficients f g F G) n)
       ((τ n) ((e n).symm (T.homologyπ (n : ℤ) z))) = _
   change _ = T.homologyπ (n : ℤ) z at hez
   rw [← hez, LinearEquiv.symm_apply_apply]
   simp only [τ, DirectSum.toModule_lof]
-  dsimp only [σ]
-  dsimp only [LinearMap.comp]
-  change (-1 : ℤ) ^ (i.val.1 * i.val.2) •
-    (picardScalarModelEquiv (pullback.fst f g ≫ f)
-      (externalCupCoefficients f g F G) n)
-      (((-1 : ℤ) ^ (i.val.1 * i.val.2)) •
-        (picardScalarModelEquiv (pullback.fst f g ≫ f)
-          (externalCupCoefficients f g F G) n).symm
+  change (picardScalarModelEquiv (pullback.fst f g ≫ f)
+    (externalCupCoefficients f g F G) n)
+      ((picardScalarModelEquiv (pullback.fst f g ≫ f)
+        (externalCupCoefficients f g F G) n).symm
           ((LinearEquiv.cast (R := k)
             (M := fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)
               (externalCupCoefficients f g F G) d)) i.property)
-            ((TensorProduct.lift (cup i.val.1 i.val.2))
-              ((TensorProduct.map (picardScalarModelEquiv f F i.val.1).toLinearMap
-                (picardScalarModelEquiv g G i.val.2).toLinearMap)
-                ((A.homologyπ (i.val.1 : ℤ) a) ⊗ₜ[k]
-                  (B.homologyπ (i.val.2 : ℤ) b)))))) = _
-  rw [map_zsmul, LinearEquiv.apply_symm_apply, TensorProduct.map_tmul,
-    TensorProduct.lift.tmul, hcup]
-  have hsign : ((-1 : ℤ) ^ (i.val.1 * i.val.2)) *
-      ((-1 : ℤ) ^ (i.val.1 * i.val.2)) = 1 := by
-    rw [← pow_add, ← two_mul]
-    simp
-  rw [smul_smul, hsign, one_smul]
+                (TensorProduct.lift (cup i.val.1 i.val.2)
+                  (TensorProduct.map (picardScalarModelEquiv f F i.val.1).toLinearMap
+                    (picardScalarModelEquiv g G i.val.2).toLinearMap
+                      ((A.homologyπ (i.val.1 : ℤ) a) ⊗ₜ[k]
+                        (B.homologyπ (i.val.2 : ℤ) b)))))) = _
+  rw [LinearEquiv.apply_symm_apply, TensorProduct.map_tmul, TensorProduct.lift.tmul,
+    hcup]
   rfl
 
 end AlgebraicGeometry.Scheme.Modules

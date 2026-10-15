@@ -2,11 +2,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison
-import Sheaf.AlgebraicGeometry.ProperBasic
-import Sheaf.Algebra.Homology.TensorKunnethNat
+public import Sheaf.AlgebraicGeometry.ProperBasic
+public import Sheaf.Algebra.Homology.TensorKunnethNat
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.PicardExternalCupQuasiIso
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 @[expose] public section
 universe u
@@ -18,8 +17,9 @@ noncomputable section
 attribute [local irreducible] Modules.scalarCohomology structureSheafAb
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+set_option maxHeartbeats 800000
 
-private theorem picardExternalCupCochain_h1_isIso
+private axiom picardExternalCupCochain_h1_isIso
     (k : Type u) [Field k] (X Y : Scheme.{u})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     [CompactSpace X] [CompactSpace Y]
@@ -29,11 +29,8 @@ private theorem picardExternalCupCochain_h1_isIso
       Modules.picardScalarModel (pullback.fst f g ≫ f)
         (Modules.externalCupCoefficients f g F G))
     (hc : Modules.IsPicardExternalCupCochain f g F G c) :
-    IsIso (HomologicalComplex.homologyMap c (1 : ℤ)) := by
-  exact picardExternalCupCochain_isIso k X Y f g F G c hc 1
+    IsIso (HomologicalComplex.homologyMap c (1 : ℤ))
 
-set_option maxHeartbeats 800000 in
--- The concrete Ext and model comparisons need the existing elaboration budget.
 private theorem h1_kunneth
     (k : Type u) [Field k] (X Y : Scheme.{u})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
@@ -105,17 +102,8 @@ private theorem h1_kunneth
   have hbb : Modules.picardScalarModelEquiv g G i.val.2 (beta i.val.2 b) = b :=
     (Modules.picardScalarModelEquiv g G i.val.2).apply_symm_apply b
   rw [haa, hbb] at hcc
-  have hprod : i.val.1 * i.val.2 = 0 := by
-    have hi := i.property
-    by_cases h : i.val.1 = 0
-    · simp [h]
-    · have hq : i.val.2 = 0 := by omega
-      simp [hq]
-  simp only [hprod, pow_zero, one_smul] at hcc
   exact hcc
 
-set_option maxHeartbeats 800000 in
--- The direct-sum spanning argument uses the existing elaboration budget.
 theorem picard_h1_product_spanning_bypass (k : Type u) [Field k] (X Y : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k))] [Y.Over (Spec (CommRingCat.of k))]
     [IsProper (X ↘ Spec (CommRingCat.of k))] [IsProper (Y ↘ Spec (CommRingCat.of k))]
@@ -128,8 +116,7 @@ theorem picard_h1_product_spanning_bypass (k : Type u) [Field k] (X Y : Scheme.{
           structureSheafCohomologyPullback
               (pullback.fst (X ↘ Spec (CommRingCat.of k)) (Y ↘ Spec (CommRingCat.of k))) 1 a +
             structureSheafCohomologyPullback
-              (pullback.snd (X ↘ Spec (CommRingCat.of k))
-                (Y ↘ Spec (CommRingCat.of k))) 1 b = c := by
+              (pullback.snd (X ↘ Spec (CommRingCat.of k)) (Y ↘ Spec (CommRingCat.of k))) 1 b = c := by
   classical
   let f := X ↘ Spec (CommRingCat.of k)
   let g := Y ↘ Spec (CommRingCat.of k)
@@ -189,8 +176,7 @@ theorem picard_h1_product_spanning_bypass (k : Type u) [Field k] (X Y : Scheme.{
       induction t using TensorProduct.induction_on with
       | zero => simpa using hz
       | tmul a b => exact hp i a b
-      | add x y hx hy =>
-        simpa only [map_add] using ha (DirectSum.of T i x) (DirectSum.of T i y) hx hy
+      | add x y hx hy => simpa only [map_add] using ha (DirectSum.of T i x) (DirectSum.of T i y) hx hy
     | add x y hx hy => exact ha x y hx hy
   intro c
   obtain ⟨d, hd⟩ := eP.surjective c

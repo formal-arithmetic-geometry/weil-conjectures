@@ -1,145 +1,122 @@
 {
- "id": "new-sc-scalar-cup-resolution-class-compatibility",
- "kind": "statement",
- "title": "Scalar cup on a paired resolution class",
- "statement": "For a field k, a scheme X over Spec k, a module cup resolution pairing D of F and G, and cycles a, b, c in degrees p, q, and p+q with c.val = D.pair p q ⊤ a.val b.val, the scalar cohomology cup of D.left.class p a and D.right.class q b equals (-1)^(p*q) times D.target.class (p+q) c.",
- "stmt_deps": [
-  "def-sc-field-linear-module-cohomology-operations",
-  "def-sc-module-cup-resolution-data"
- ],
- "source": {
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 01F7 and 0FKV, resolution cup comparison"
- },
- "proof": [
-  {
-   "text": "Choose injective comparisons for the three computing acyclic resolutions. Identify their class maps with scalar Ext representatives using the cohomology/Ext comparison. Expand the left-then-right Yoneda tensor product. Pulling the left shift out before the right shift contributes (-1)^(p*q) on the (p,q) tensor summand. The restriction-of-scalars coefficient morphism evaluates on pure sections as D.pair. The Leibniz identity makes the paired section a cocycle; hc identifies it with c. Naturality of the comparison maps then gives the stated signed equality. This complete comparison remains unformalized in the original named theorem; no equivalent scalarized hole is introduced.",
-   "uses": [
+  "id": "new-sc-scalar-cup-resolution-class-compatibility",
+  "kind": "statement",
+  "title": "Scalar cup on a paired resolution class",
+  "statement": "For a field k, a scheme X over Spec k, a module cup resolution pairing D of F and G, and cycles a, b, c in degrees p, q, and p+q with c.val = D.pair p q ⊤ a.val b.val, the scalar cohomology cup of D.left.class p a and D.right.class q b equals D.target.class (p+q) c.",
+  "stmt_deps": [
     "def-sc-field-linear-module-cohomology-operations",
     "def-sc-module-cup-resolution-data"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-sc-field-linear-module-cohomology-operations",
-  "def-sc-module-cup-resolution-data"
- ],
- "proof_origin": {
-  "by": "K1 second reader",
-  "document": "Stacks Project",
-  "place": "Tags 01F7 and 0FKV; signed injective-resolution comparison, still open",
-  "date": "2026-10-15",
-  "group": "K1"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "scalar Ext cup resolution class compatibility",
-   "results": "service unavailable",
-   "verdict": "unavailable",
-   "date": "2026-10-14"
-  },
-  {
-   "tool": "loogle",
-   "query": "scalarCohomologyCup resolution class",
-   "results": "No match",
-   "verdict": "no match",
-   "date": "2026-10-14"
-  },
-  {
-   "tool": "grep",
-   "query": "scalarCohomologyCup.*D.target.class",
-   "results": "No match",
-   "verdict": "no match",
-   "date": "2026-10-14"
-  }
- ],
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility",
-  "date": "2026-10-14",
-  "group": "W4"
- },
- "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-scalar-cup-module-cup-compatibility",
-   "place": "Resolution-representative comparison step in the target proof",
-   "via": []
-  },
-  "same_as": []
- },
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility",
-  "file": "lean/Sheaf/AlgebraicGeometry/ScalarCupResolutionClassCompatibility.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCup_resolution_class_compatibility",
-  "statement": "theorem scalarCup_resolution_class_compatibility\n    {k : Type w} [Field k] {X : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (F G : X.Modules) (p q : ℕ)\n    (D : CupResolutionPairing F G)\n    (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)\n    (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K)\n    (c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K)\n    (hc : c.val = D.pair p q ⊤ a.val b.val) :\n    scalarCohomologyCup f F G p q (D.left.class p a) (D.right.class q b) =\n      (-1 : ℤ) ^ (p * q) • D.target.class (p + q) c",
-  "branch": "sheaf-dag",
-  "by": "W4",
-  "date": "2026-10-14"
- },
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W4",
-  "result": "pass",
-  "landing": "20261014T171841-L-2711344",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "X-09592",
-  "group": "K1",
-  "result": "pass",
-  "landing": "20261015T040627-L-472947",
-  "kind": "interface",
-  "note": "independent Codex review: Matched 15 delivered Lean modules with 16 node records, declared interface corrections, original callers, required importers, sources, and axiom probes."
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "statement_change": {
-  "date": "2026-10-15",
-  "by": "K1 stage 2",
-  "old_statement": "For a field k, a scheme X over Spec k, a module cup resolution pairing D of F and G, and cycles a, b, c in degrees p, q, and p+q with c.val = D.pair p q ⊤ a.val b.val, the scalar cohomology cup of D.left.class p a and D.right.class q b equals D.target.class (p+q) c.",
-  "what": "The old unsigned normalization omits the Koszul factor. scalarExtCup composes the left class first, so extracting the left shift before the right shift on the (p,q) tensor summand contributes (-1)^(p*q). The prior module's private scalarCup_yoneda_order and oddShiftTensor_component proofs verify the order and the (1,1) sign; oddTensorSummand_ne_neg and oddShiftTensor_not_unsigned show that the sign is nontrivial over the rationals. With the resolution and front/back Cech pairings kept unsigned, the scalar cup is (-1)^(p*q) times their class. Equivalently, the Cech-to-scalar comparison has (-1)^(i.val.1*i.val.2) multiplying its left-hand side. This is a normalization correction, with no new hypotheses; p=0 or q=0, even p*q, characteristic two, and zero classes reduce to the prior formula.",
-  "source": {
-   "document": "literature/stacks-project/cohomology.tex",
-   "place": "Tags 01F7, 07MB (cohomology-equation-needs-signs) and 0FKV; Varieties Tag 0BED; Mathlib CochainComplex.ι_mapBifunctorShift₁Iso_hom_f_assoc and CochainComplex.ι_mapBifunctorShift₂Iso_hom_f; launcher sign-correction instruction 2026-10-15 and reviewer X-8bf90, H2/H3/H7."
-  },
-  "citers": [
-   {
-    "id": "lem-sc-scalar-cup-module-cup-compatibility",
-    "holds": false,
-    "note": "The unsigned conclusion of this citer must change. This delivery gives scalarCup_moduleCup_compatibility the same factor (-1)^(p*q) and retains its cocycle-lifting proof."
-   }
   ],
-  "old_proof": [
-   {
-    "text": "Choose injective-resolution comparisons for the three acyclic resolutions. The cocycle formula for moduleExtEquiv identifies each resolution class with the scalar Ext class obtained by evaluating the unit at 1. Restriction to k carries the signed Yoneda tensor construction to the sectionwise pairing D.pair, and scalarTensorCoefficient sends pure tensors to D.pair. The Leibniz equation identifies the resulting target cocycle with c. Naturality of Ext composition and homotopy independence of resolution comparisons then give the displayed equality, including degree zero, zero coefficients and empty schemes.",
-    "uses": [
-     "def-sc-field-linear-module-cohomology-operations",
-     "def-sc-module-cup-resolution-data"
+  "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 01F7 and 0FKV, resolution cup comparison"
+  },
+  "proof": [
+    {
+      "text": "Choose injective-resolution comparisons for the three acyclic resolutions. The cocycle formula for moduleExtEquiv identifies each resolution class with the scalar Ext class obtained by evaluating the unit at 1. Restriction to k carries the signed Yoneda tensor construction to the sectionwise pairing D.pair, and scalarTensorCoefficient sends pure tensors to D.pair. The Leibniz equation identifies the resulting target cocycle with c. Naturality of Ext composition and homotopy independence of resolution comparisons then give the displayed equality, including degree zero, zero coefficients and empty schemes.",
+      "uses": [
+        "def-sc-field-linear-module-cohomology-operations",
+        "def-sc-module-cup-resolution-data"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-sc-module-cup-resolution-data"
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "document": "Stacks Project",
+    "place": "Tags 01F7 and 0FKV, compatible injective-resolution comparison for scalar and module cups"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "scalar Ext cup resolution class compatibility",
+      "results": "service unavailable",
+      "verdict": "unavailable",
+      "date": "2026-10-14"
+    },
+    {
+      "tool": "loogle",
+      "query": "scalarCohomologyCup resolution class",
+      "results": "No match",
+      "verdict": "no match",
+      "date": "2026-10-14"
+    },
+    {
+      "tool": "grep",
+      "query": "scalarCohomologyCup.*D.target.class",
+      "results": "No match",
+      "verdict": "no match",
+      "date": "2026-10-14"
+    }
+  ],
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility",
+    "date": "2026-10-14",
+    "group": "W4"
+  },
+  "chapter": "sec-abelian-varieties",
+  "unit": "sk-prop-av-cube",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-scalar-cup-module-cup-compatibility",
+      "place": "Resolution-representative comparison step in the target proof",
+      "via": []
+    },
+    "same_as": []
+  },
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility",
+    "file": "lean/Sheaf/AlgebraicGeometry/ScalarCupResolutionClassCompatibility.lean",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCup_resolution_class_compatibility",
+    "statement": "theorem scalarCup_resolution_class_compatibility\n    {k : Type w} [Field k] {X : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (F G : X.Modules) (p q : ℕ)\n    (D : CupResolutionPairing F G)\n    (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)\n    (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K)\n    (c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K)\n    (hc : c.val = D.pair p q ⊤ a.val b.val) :\n    scalarCohomologyCup f F G p q (D.left.class p a) (D.right.class q b) =\n      D.target.class (p + q) c",
+    "branch": "sheaf-dag",
+    "by": "W4",
+    "date": "2026-10-14"
+  },
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "W4",
+    "result": "pass",
+    "landing": "20261014T171841-L-2711344",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "X-80bc1",
+    "group": "W4",
+    "result": "pass",
+    "landing": "20261014T213613-L-3318171",
+    "kind": "interface",
+    "note": "independent Codex review: Delivered module and report matched against the packet, node statement, repository version, direct importer, and lcompile checks",
+    "sorry_before": [
+      "AlgebraicGeometry.Scheme.Modules.scalarCup_resolution_class_compatibility"
     ],
-    "elementary": false
-   }
-  ]
- }
+    "sorry_after": [
+      "AlgebraicGeometry.Scheme.Modules.scalarCup_resolution_class_compatibility"
+    ]
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  }
 }

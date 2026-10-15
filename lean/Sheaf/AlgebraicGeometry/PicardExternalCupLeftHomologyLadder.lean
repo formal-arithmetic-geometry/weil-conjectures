@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Homology.ExactSequence
 
 import Sheaf.AlgebraicGeometry.PicardExternalCupLeftComparisonComplexes
-import Sheaf.AlgebraicGeometry.PicardExternalCupHomologyUnique
+import Sheaf.Algebra.Homology.TensorKunnethNat
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 
 /-! # The external-cup five-term homology ladder in the left coefficient
@@ -36,11 +36,33 @@ private theorem normalized_homology_eq
     (hd : IsPicardExternalCupCochain f g F G d) (n : ℕ) :
     HomologicalComplex.homologyMap c (n : ℤ) =
       HomologicalComplex.homologyMap d (n : ℤ) := by
-  exact picardExternalCupHomology_unique f g F G
-    (fun j ↦ HomologicalComplex.homologyMap c (j : ℤ))
-    (fun j ↦ HomologicalComplex.homologyMap d (j : ℤ))
-    (by intro j i a b z hz; exact hc j i a b z hz)
-    (by intro j i a b z hz; exact hd j i a b z hz) n
+  classical
+  obtain ⟨e, he⟩ := HomologicalComplex.tensor_kunneth_nat
+    (picardScalarModel f F) (picardScalarModel g G)
+    (picardScalarModel_negative f F) (picardScalarModel_negative g G) n
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  obtain ⟨x, rfl⟩ := e.surjective x
+  have H :
+      (HomologicalComplex.homologyMap c (n : ℤ)).hom.comp e.toLinearMap =
+        (HomologicalComplex.homologyMap d (n : ℤ)).hom.comp e.toLinearMap := by
+    apply DirectSum.linearMap_ext
+    intro i
+    ext a b
+    obtain ⟨a, rfl⟩ := (ModuleCat.epi_iff_surjective
+      ((picardScalarModel f F).homologyπ (i.val.1 : ℤ))).mp inferInstance a
+    obtain ⟨b, rfl⟩ := (ModuleCat.epi_iff_surjective
+      ((picardScalarModel g G).homologyπ (i.val.2 : ℤ))).mp inferInstance b
+    obtain ⟨z, hz, hez⟩ := he i a b
+    change HomologicalComplex.homologyMap c (n : ℤ) (e (DirectSum.lof k _ _ i _)) =
+      HomologicalComplex.homologyMap d (n : ℤ) (e (DirectSum.lof k _ _ i _))
+    simp only [TensorProduct.mk_apply] at *
+    rw [hez]
+    apply (picardScalarModelEquiv (pullback.fst f g ≫ f)
+      (externalCupCoefficients f g F G) n).injective
+    exact (hc n i a b z hz).trans (hd n i a b z hz).symm
+  exact LinearMap.congr_fun H x
 
 private theorem isIso_of_comparison_square
     {k : Type w} [Field k] {A B C D : ModuleCat.{w} k}

@@ -43,8 +43,7 @@ total with the total of the extended complexes identifies their summand cycles.
 On a pair of factor cycles, the prescribed front/back tuple coordinates are the
 refinement maps along the two projections followed by Cech cup. Compatibility
 of refinement with pullback and Cech cup with sheaf cup identifies its image under
-b, multiplied by `(-1)^(p*q)`, with externalCup of the factor classes.
-The factor comparisons in a give these
+b with externalCup of the factor classes. The factor comparisons in a give these
 same classes for the scalar-model tensor cycle. Lift factor homology classes
 through their surjective homology projections; tensor Kunneth and pure-tensor
 spanning extend this identity to every tensor-cycle representative in the stated
@@ -101,14 +100,12 @@ theorem picardRightCechCup_homology
       rw [← hsz']
       change e n ((s n).symm (s n _)) = _
       rw [LinearEquiv.symm_apply_apply]
-    change (-1 : ℤ) ^ (i.val.1 * i.val.2) •
-      picardScalarModelEquiv (pullback.fst f g ≫ f)
+    change picardScalarModelEquiv (pullback.fst f g ≫ f)
       (externalCupCoefficients f g F G) n
       ((b n).hom (HomologicalComplex.homologyMap (θ.app G) (n : ℤ)
         ((a n).inv (T.homologyπ (n : ℤ) z)))) = _
     rw [hpre]
-    simpa only [smul_eq_mul] using he n i (A.homologyπ (i.val.1 : ℤ) x)
-      (B.homologyπ (i.val.2 : ℤ) y)
+    exact he n i (A.homologyπ (i.val.1 : ℤ) x) (B.homologyπ (i.val.2 : ℤ) y)
 
 
 end AlgebraicGeometry.Scheme.Modules
