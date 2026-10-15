@@ -30,9 +30,65 @@
   "lem-weil-pbc-limit-affine-transition",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The continuous image f(X) is quasi-compact. Choose affine open neighbourhoods in S of its points and a finite subcover of this image, and let S0 be their union. Then S0 is quasi-compact, and is quasi-separated as an open subscheme of the quasi-separated S. The map f factors through f0:X→S0. This map is locally of finite type by the affine-local definition (the restriction to any affine in S0 is the same restriction as for f). By [lem-weil-pbc-qcqs-morphism-permanence](1), f0 is quasi-compact and quasi-separated. Thus X and S0 satisfy the qcqs hypotheses of [def-nagata-finite-type-fp-model-system]. If X is empty take S0 empty; the same argument and construction apply.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-nagata-finite-type-fp-model-system",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09ZQ: reduction to a quasi-compact open base containing the image; schemes.tex Tags 03GI and 01KV"
+   }
+  },
+  {
+   "text": "Form the system FP(X/S0) of [def-nagata-finite-type-fp-model-system]. Its index is the set of finite-type quasi-coherent subideals of the defining ideal of the closed immersion into the chosen ambient model, ordered by inclusion as in [def-nagata-closed-subscheme-fp-system]. This set contains the zero ideal, and the sum of any two such subideals is again finite type and is an upper bound, so the index is nonempty and directed. Apply the property theorem [lemma-nagata-finite-type-fp-model-system], with base S0, to obtain models Xi→S0 of finite presentation, closed-immersion transition maps and projections X→Xi, and X as their inverse limit in schemes. Since S0 is qcqs, each Xi is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](2). The definition is used only to specify the system and index; the property theorem supplies its existence and limit properties.",
+   "uses": [
+    "def-nagata-finite-type-fp-model-system",
+    "def-nagata-closed-subscheme-fp-system",
+    "lemma-nagata-finite-type-fp-model-system",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-fp-models/lemma-nagata-finite-type-fp-model-system.md",
+    "place": "property theorem, with the system definitions def-nagata-finite-type-fp-model-system and def-nagata-closed-subscheme-fp-system"
+   }
+  },
+  {
+   "text": "The open inclusion j:S0→S is locally of finite presentation: near any point of S0 choose an affine open contained in S0, also an open of S, on which j is the identity and the ring map is finitely presented. It is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](1), since S0 is qcqs and S is quasi-separated. Thus it is of finite presentation by [def-weil-pbc-scheme-conventions]. By [lem-weil-pbc-proper-fp-permanence](d), the composites Xi→S0→S are of finite presentation. Regard the unchanged inverse diagram as S-schemes through j. Its transition maps, projections, qcqs model schemes and inverse limit in schemes are unchanged; the structural maps to S agree by composition. This proves every clause over the original, possibly non-quasi-compact S.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TP (finite presentation) and 01TR (composition); affine-local verification for the open inclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-nagata-finite-type-fp-model-system",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-nagata-closed-subscheme-fp-system",
+  "lemma-nagata-finite-type-fp-model-system",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 09ZQ; finite qcqs open-base reduction, existing Nagata qcqs approximation system, and composition with the fp open inclusion"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,7 +141,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-closed-fp-approximation",
   "by": "worker",
@@ -104,5 +160,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-weil-pbc-lft-limit-closed-fp",
+  "worker": "stage1",
+  "summary": "Reviewer repair 2026-10-15: S is only quasi-separated, so first restrict to a finite union of affine opens containing f(X). Apply the existing qcqs model-system theorem over this open, then compose with its finite-presentation open inclusion. The system definition supplies the index, not a missing existence theorem. No new nodes or statement change.",
+  "blueprint": "Realizes the Tag 09ZQ finite-type-as-limit-finite-presentation argument via the existing Nagata model-system lemma and definition.",
+  "tool_uses": [
+   {
+    "node": "def-nagata-finite-type-fp-model-system",
+    "why": "Generic qcqs finite-presentation approximation system applied only after reducing to a qcqs open base; it supplies the closed system, not a replacement for any proper-base-change route."
+   },
+   {
+    "node": "def-nagata-closed-subscheme-fp-system",
+    "why": "Generic qcqs finite-presentation approximation system applied only after reducing to a qcqs open base; it supplies the closed system, not a replacement for any proper-base-change route."
+   },
+   {
+    "node": "lemma-nagata-finite-type-fp-model-system",
+    "why": "Generic qcqs finite-presentation approximation system applied only after reducing to a qcqs open base; it supplies the closed system, not a replacement for any proper-base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-nagata-finite-type-fp-model-system",
+  "def-nagata-closed-subscheme-fp-system",
+  "lemma-nagata-finite-type-fp-model-system"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-f8041bdb9",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-f8041bdb9 (reviewer sub-agent of L); spot-checked: L full review: repaired missing qc base hypothesis using finite affine-union S0 containing f(X), existing qcqs Nagata system theorem, nonempty ideal index, and fp open inclusion; empty X checked; exact Tag 09ZQ statement preserved.; 1 file(s) fixed by the reviewer"
  }
 }
