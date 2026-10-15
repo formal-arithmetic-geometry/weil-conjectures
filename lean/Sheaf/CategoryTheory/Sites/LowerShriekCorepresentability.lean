@@ -6,6 +6,7 @@ module
 
 public import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Sites.Sheaf
 import Sheaf.CategoryTheory.Sites.CoveringRepresentableCoequalizer
 
 /-!
