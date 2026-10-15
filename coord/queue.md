@@ -1,6 +1,6 @@
 # Work queue
 
-31 items; claim with `tools/claim.py next <group> [--stage N]`.
+30 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (31)
+## Stage 3: modules to prove (30)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -17,7 +17,7 @@
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedConstructibleSerre` | 3 | 2 | proof |
 | `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 4 | proof |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 4 | 3 | proof |
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 4 | proof |
 | `Sheaf.Paper.CondensedLfpCoefficientModel` | 4 | 1 | proof |
@@ -40,7 +40,6 @@
 | `Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.GeometricModuleConstruction` | 7 | 1 | proof |
 | `Sheaf.Paper.PointLanFiniteProducts` | 7 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverGeometry` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.LowerShriekCoveringGenerators` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
