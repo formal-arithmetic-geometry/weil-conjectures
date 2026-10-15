@@ -59,4 +59,18 @@ theorem paste_return_triangle
     _ = p ≫ q ≫ (r ≫ c) := by simp only [Category.assoc]
     _ = p ≫ q ≫ s := by rw [hcancel]
 
+/-- An equivalence counit is invariant under transport to an isomorphic object.
+Proof: Naturality of the counit moves the isomorphism through the counit;
+its inverse then cancels. This is the object-level cancellation for nested
+open restrictions after the first return triangle. -/
+theorem equivalence_counit_transport_cancel
+    {C D : Type*} [Category* C] [Category* D]
+    (e : C ≌ D) {X Y : D} (α : X ≅ Y) :
+    e.functor.map (e.inverse.map α.hom) ≫ e.counitIso.hom.app Y ≫ α.inv =
+      e.counitIso.hom.app X := by
+  have hn := e.counitIso.hom.naturality α.hom
+  simp only [Functor.comp_map, Functor.id_map] at hn
+  rw [← Category.assoc, hn]
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+
 end AlgebraicGeometry
