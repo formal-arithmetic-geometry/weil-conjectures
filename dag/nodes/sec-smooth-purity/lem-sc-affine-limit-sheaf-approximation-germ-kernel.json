@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-affine-limit-sheaf-approximation-germ-kernel",
+ "kind": "statement",
+ "title": "Eventual vanishing of a germ in an approximation counit kernel",
+ "statement": "Let I be small and cofiltered, D:I→Sch have qcqs objects and affine transition maps, and let s exhibit X as its limit. Let F be an abelian etale sheaf and A its approximation diagram [def-sc-affine-limit-sheaf-approximation]. For x∈X let P be the geometric stalk at Spec(AlgebraicClosure κ(x))→X. If i∈I^op and t∈P(A_i) has zero image under the approximation counit P(A_i)→P(F), then there exist j∈I^op and f:i→j with P(A(f))(t)=0. No torsion or cohomology bound is assumed.",
+ "stmt_deps": [
+  "def-sc-affine-limit-sheaf-approximation",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md",
+  "place": "Proof step 1: Eventual vanishing of a germ in an approximation counit kernel"
+ },
+ "proof": [
+  {
+   "text": "The stalk isomorphism for inverse image represents t by a section a of F on p_i^*V_i, where V_i is a pointed etale neighbourhood on D_i. The source-library stalk-of-transpose identity (Etale.upperStarCompSheafFiberIso_inv_app_comp_sheafFiber_map) identifies the counit image with the germ of a. Since it is zero, the filtered-stalk equality criterion gives a pointed etale W→p_i^*V_i where a restricts to zero. Shrink W to an affine pointed neighbourhood.",
+   "uses": [
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reindex the overcategory Over i by a final directed poset. Empty finite-diagram descent produces a qcqs model W_j over a stage j→i. The base-change cone is a limit. Apply Mathlib Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation to the map from that limit to V_i over D_i. The hypotheses hold because the model and its affine base changes are qcqs and V_i→D_i is etale. This descends the representing map to a further stage. Pullback composition identifies its limit pullback with the original map W→p_i^*V_i.",
+   "uses": [
+    "lem-weil-pbc-etale-limit-finite-diagram-descent",
+    "lem-weil-pbc-scheme-over-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the defining transpose formula for the approximation transition on V_i. Its restriction along the descended map equals the inverse-image unit applied to the restricted section of F. This follows from naturality of the unit and the pullback composition isomorphisms on sections. That restricted section is zero; hence its unit image is zero. Naturality of germs transports this zero germ to P(A(f))(t).",
+   "uses": [
+    "def-sc-affine-limit-sheaf-approximation",
+    "lem-weil-pbc-direct-image-composition-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-etale-limit-finite-diagram-descent",
+  "lem-weil-pbc-scheme-over-limit",
+  "def-sc-affine-limit-sheaf-approximation",
+  "lem-weil-pbc-direct-image-composition-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md",
+  "place": "Proof step 1, formalized from the finite-data reconstruction argument; existing library adjunction, stalk and Mathlib limit APIs supply the glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An abelian etale sheaf on a cofiltered affine limit of qcqs schemes is the filtered colimit of the pullbacks of its direct images, with transition maps defined by adjunction",
+   "results": "Service unavailable: Internal Server Error; no mathematical conclusion drawn.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian etale sheaf on a cofiltered affine inverse limit is the filtered colimit of the inverse images of its direct images to finite stages; germs in the counit kernel eventually vanish",
+   "results": "Eight hits: affine-transition-limit global-section vanishing/equality lemmas, nonempty_isColimit_Γ_mapCocone, and a condensed locally constant presheaf theorem; no matching etale sheaf reconstruction theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.counit",
+   "results": "Twelve adjunction API results, including left_triangle_components, right_triangle_components, and unit_comp_map_eq_iff. These provide elementary adjunction identities; none is the scheme-limit approximation diagram or its reconstruction theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*pullback|pullback.*colimit|inverse.*limit.*sheaf",
+   "results": "Twenty-five hits, in module sheaf pullback/free constructions, condensed sequences, topological stalks, and categorical pullback/colimit shape lemmas. No matching etale sheaf inverse-limit approximation theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit",
+  "date": "2026-10-16",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cd-affine-limit",
+   "place": "Proof step 1: Eventual vanishing of a germ in an approximation counit kernel",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Sites.AffineLimitSheafApproximationGermKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/AffineLimitSheafApproximationGermKernel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineLimitSheafApproximation_germ_eventually_zero",
+  "statement": "theorem affineLimitSheafApproximation_germ_eventually_zero {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u}) [∀ i : I, CompactSpace (D.obj i)] [∀ i : I, QuasiSeparatedSpace (D.obj i)] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Cone D) (hs : IsLimit s) (F : Sheaf s.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (x : s.pt) : let A := Etale.AffineLimitSheafApproximation.approximationDiagram D s F let P : Sheaf s.pt.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤ AddCommGrpCat.{u + 1} := (pointSmallEtale (s.pt.algClosurePoint x)).sheafFiber ∀ (i : Iᵒᵖ) (t : P.obj (A.obj i)), P.map ((Etale.AffineLimitSheafApproximation.approximationCocone D s F).ι.app i) t = 0 → ∃ (j : Iᵒᵖ) (f : i ⟶ j), P.map (A.map f) t = 0",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261015T225534-L-3017543",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261015T225534-L-3017543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

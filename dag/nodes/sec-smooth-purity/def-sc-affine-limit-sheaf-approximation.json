@@ -1,0 +1,135 @@
+{
+ "id": "def-sc-affine-limit-sheaf-approximation",
+ "kind": "definition",
+ "title": "The pull-push approximation diagram and its counit cocone",
+ "statement": "Let I be a small category, D:I→Sch a diagram, s a cone with vertex X and projections p_i:X→D_i, and F an abelian etale sheaf [def-weil-pbc-etale-sheaves]. Use the inverse/direct image adjunctions [def-weil-pbc-inverse-image; def-weil-pbc-direct-image]. Define A:I^op→Ab(X_et) by A_i=p_i^*p_i*F. For f:j→i, its map A_i→A_j is the adjunction transpose of p_i*F→p_ji*p_j*F→p_ji*p_j*p_j^*p_j*F→p_i*p_j^*p_j*F, using direct-image composition and the unit at p_j*F. These maps satisfy identity and composition. The counits A_i→F form a cocone, and q:colim A→F denotes its comparison map.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md",
+  "place": "Proof step 1: The pull-push approximation diagram and its counit cocone"
+ },
+ "proof": [
+  {
+   "text": "Define the transition by the displayed adjunction transpose. Its transpose formula is the hom-equivalence inverse identity.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose equality with the counit and use the triangle identity to obtain compatibility of the counits. The right-unit coherence of direct-image composition gives identity maps. For composition, transpose both composites, use naturality of the composition isomorphism, then its associativity coherence; the two transposes agree.",
+   "uses": [
+    "lem-weil-pbc-direct-image-composition-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use these equations as the functor and cocone laws. Define the comparison by colimit.desc; no choice from an existence theorem or unfinished data construction is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-direct-image-composition-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md",
+  "place": "Proof step 1, formalized from the finite-data reconstruction argument; existing library adjunction, stalk and Mathlib limit APIs supply the glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An abelian etale sheaf on a cofiltered affine limit of qcqs schemes is the filtered colimit of the pullbacks of its direct images, with transition maps defined by adjunction",
+   "results": "Service unavailable: Internal Server Error; no mathematical conclusion drawn.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian etale sheaf on a cofiltered affine inverse limit is the filtered colimit of the inverse images of its direct images to finite stages; germs in the counit kernel eventually vanish",
+   "results": "Eight hits: affine-transition-limit global-section vanishing/equality lemmas, nonempty_isColimit_Γ_mapCocone, and a condensed locally constant presheaf theorem; no matching etale sheaf reconstruction theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.counit",
+   "results": "Twelve adjunction API results, including left_triangle_components, right_triangle_components, and unit_comp_map_eq_iff. These provide elementary adjunction identities; none is the scheme-limit approximation diagram or its reconstruction theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*pullback|pullback.*colimit|inverse.*limit.*sheaf",
+   "results": "Twenty-five hits, in module sheaf pullback/free constructions, condensed sequences, topological stalks, and categorical pullback/colimit shape lemmas. No matching etale sheaf inverse-limit approximation theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit",
+  "date": "2026-10-16",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cd-affine-limit",
+   "place": "Proof step 1: The pull-push approximation diagram and its counit cocone",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Sites.AffineLimitSheafApproximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/AffineLimitSheafApproximation.lean",
+  "declaration": "AlgebraicGeometry.Etale.AffineLimitSheafApproximation.approximationDiagram",
+  "statement": "def approximationDiagram : Iᵒᵖ ⥤ Sheaf s.pt.smallEtaleTopology AddCommGrpCat.{u + 1}",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.Etale.AffineLimitSheafApproximation.approximationMap",
+   "AlgebraicGeometry.Etale.AffineLimitSheafApproximation.approximationMap_transpose",
+   "AlgebraicGeometry.Etale.AffineLimitSheafApproximation.approximationMap_counit",
+   "AlgebraicGeometry.Etale.AffineLimitSheafApproximation.approximationMap_id",
+   "AlgebraicGeometry.Etale.AffineLimitSheafApproximation.approximationMap_comp",
+   "AlgebraicGeometry.Etale.AffineLimitSheafApproximation.approximationCocone",
+   "AlgebraicGeometry.Etale.AffineLimitSheafApproximation.approximationComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261015T225534-L-3017543",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261015T225534-L-3017543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -18,64 +18,47 @@
  ],
  "proof": [
   {
-   "text": "First check that $X$ is quasi-compact and quasi-separated. By [lem-weil-pbc-limit-cone-affine-projections-opens], each projection $p_i:X\\to X_i$ is affine. Fix a stage and a finite affine open cover of $X_i$. Its inverse images are affine and cover $X$, proving quasi-compactness. Each intersection of two members of the stage cover is quasi-compact by [lem-weil-pbc-quasi-separated-affine-cover-criterion], hence has a finite affine open cover. Pulling this latter cover back along the affine projection gives a finite affine cover of the corresponding intersection in $X$. The converse in that criterion proves quasi-separatedness of $X$.\n\nWrite $p_i^*$ for the abelian-sheaf inverse image of [def-weil-pbc-inverse-image], with direct image as in [def-weil-pbc-direct-image]. For $j\\geq i$, the counit of $p_{ji}^*\\dashv p_{ji*}$ applied to $F_j=p_{j*}F$, together with $p_{ji*}F_j=F_i$, gives the stated transition. Its compatibility under composition follows by adjunction from the identity of the composite direct-image functors, which is the associative fibre-product identity on sections. The counits to $F$ form a compatible cocone.\n\nLet $p_i:X\\to X_i$, and first let $F$ be killed by a fixed\ninteger $n>0$. Set $F_i=p_{i*}F$; for $j\\geq i$\nthe adjunction maps give transition arrows\n$p_{ji}^*F_i\\to F_j$, and hence arrows\n$p_i^*F_i\\to p_j^*F_j$ on $X$.\nThe canonical map $\\varinjlim_i p_i^*F_i\\to F$ is an\nisomorphism. To verify it, use quasi-compact etale objects\nof finite presentation: every such object and every morphism\nbetween two of them descends to a stage of the inverse system.\nA section of $F$ on a descended object is, by definition,\na section of $p_{i*}F$ on that object at stage $i$, proving\nsurjectivity locally. If two representatives agree after\npullback, their equality is witnessed on a finite covering family of etale maps;\nthe covering and the finitely many maps in it descend to a\nlater stage. This proves injectivity after sheafification.\nThe object, morphism, relation and covering descent used here are the clauses of [lem-weil-pbc-etale-finite-data-descent], rather than an appeal to the proof of continuity.\nMore explicitly, affine etale objects cover every etale object. Since $X$ is quasi-separated, an affine etale object is of finite presentation over $X$ by [lem-weil-pbc-qcqs-morphism-permanence](1), so the object descent theorem applies to this basis. Inverse-image sheafification means that locally each representative in $p_i^*F_i$ is given by an etale object $V_i$ over $X_i$, a map into its base change to $X$, and a section of $F_i(V_i)=F((V_i)_X)$. Restrict to affine neighbourhoods in these objects; on a quasi-compact basis object the necessary local covers have finite affine refinements by [lem-weil-pbc-etale-qcqs-cofinal-finite-coverings]. The finitely many objects and maps then descend by finite-data descent. For injectivity it suffices to consider a representative whose image in $F$ is zero. After descending its representing map to stage $j$, its restriction becomes a section of $F_j(U_j)=F((U_j)_X)$ on a descended object. This section is zero by the assumed equality in $F$, and its image in $p_j^*F_j$ is therefore zero. A finite cover handles representatives given only locally. Applying this to the difference of two representatives proves injectivity. No arbitrary section of $F$ is asserted to descend as a sheaf on a stage.",
+   "text": "Mathlib compactSpace_of_isLimit and isAffineHom_π_app make X quasi-compact and its projection affine; quasiSeparatedSpace_of_quasiSeparated then makes X quasi-separated. For a sheaf G killed by a positive integer n, use the constructed pull-push diagram and its reconstruction colimit. This implements the original proof step 1 by adjunction and finite-data descent.",
    "uses": [
-    "lem-weil-pbc-etale-finite-data-descent",
-    "lem-weil-pbc-limit-cone-affine-projections-opens",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings"
+    "lem-sc-affine-limit-sheaf-reconstruction",
+    "lem-weil-pbc-limit-cone-affine-projections-opens"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md",
-    "place": "## Proof, paragraph 1 (expanded using the cited node statements)"
-   }
+   "elementary": false
   },
   {
-   "text": "The direct-image sheaf $F_i=p_{i*}F$ is killed by $n$: on an etale object $U_i$ its sections are $F(U_i\\times_{X_i}X)$, so multiplication by $n$ is zero. Its inverse images $p_{ji}^*F_i$ are also killed by $n$, hence torsion. Apply [lemma-weil-pbc-etale-cohomology-continuity] to $F_i$. The uniform bound at every later stage gives\n$$H^q(X,p_i^*F_i)=\\varinjlim_{j\\geq i}H^q(X_j,p_{ji}^*F_i)=0\\quad(q>c).$$",
+   "text": "Additivity of p_i* shows n annihilates G_i=p_i*G, hence G_i is torsion. By cohomology continuity every class of H^q(X,p_i^*G_i) is the pullback of a class of H^q(D_j,p_ji^*G_i) for a later stage j→i. Inverse image preserves torsion. Compare Sheaf.H with derived etale cohomology; the uniform stagewise dimension bound makes that group a subsingleton, so the class is zero.",
    "uses": [
+    "def-weil-pbc-direct-image",
     "lemma-weil-pbc-etale-cohomology-continuity",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image"
+    "lem-weil-pbc-inverse-image-torsion",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md",
-    "place": "## Proof, paragraph 2 (expanded using the cited node statements)"
-   }
+   "elementary": false
   },
   {
-   "text": "For each fixed exponent $n$, apply [lem-weil-pbc-cohomology-filtered-colimit] to the isomorphism from Step 1. Since every term $H^q(X,p_i^*F_i)$ vanishes for $q>c$ by Step 2, this gives $H^q(X,F)=0$ for $q>c$. For an arbitrary torsion sheaf $F$, [lemma-weil-pbc-torsion-filtered-union] writes $F$ as the filtered colimit of the subsheaves $F[n]$. Apply the same fixed-exponent argument to each $F[n]$, then apply [lem-weil-pbc-cohomology-filtered-colimit] once more to obtain $H^q(X,F)=0$ for $q>c$.",
+   "text": "Filtered-colimit commutation for Sheaf.H applied to reconstruction makes H^q(X,G) a subsingleton for every G killed by n>0. Apply the existing bounded-exponent torsion vanishing reduction, whose factorial-torsion filtration implements original step 3, to obtain the same result for every torsion F. The natural isomorphism with derived etale cohomology gives exactly the unchanged dimension bound.",
    "uses": [
     "lem-weil-pbc-cohomology-filtered-colimit",
-    "lemma-weil-pbc-torsion-filtered-union"
+    "lem-sc-torsion-bounded-exponent-vanishing",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md",
-    "place": "## Proof, paragraph 3 (expanded using the cited node statements)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-finite-data-descent",
+  "lem-sc-affine-limit-sheaf-reconstruction",
   "lem-weil-pbc-limit-cone-affine-projections-opens",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
   "lemma-weil-pbc-etale-cohomology-continuity",
+  "lem-weil-pbc-inverse-image-torsion",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
   "lem-weil-pbc-cohomology-filtered-colimit",
-  "lemma-weil-pbc-torsion-filtered-union"
+  "lem-sc-torsion-bounded-exponent-vanishing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md",
-  "place": "## Proof"
+  "place": "Proof steps 1-3, formalized by G4: geometric-stalk finite-data reconstruction, continuity, then the existing factorial bounded-exponent reduction. No unit-level step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -220,5 +203,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statement, dependencies, sources, docstrings, edge cases, universes, verbatim signature and pilot gates. Fresh server scompile passed cleanly; no corrections needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261015T225534-L-3017543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
