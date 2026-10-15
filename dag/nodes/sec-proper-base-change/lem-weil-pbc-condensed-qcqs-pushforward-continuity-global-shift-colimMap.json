@@ -1,0 +1,102 @@
+{
+ "id": "lem-weil-pbc-condensed-qcqs-pushforward-continuity-global-shift-colimMap",
+ "kind": "statement",
+ "title": "Shifted global sections continuity colimit map",
+ "statement": "For a sheaf of commutative condensed rings Λ, a quasi-compact and quasi-separated scheme X, a small filtered category I, and a diagram D : I ⥤ CochainComplex of Λ_X-module sheaves whose homology vanishes below a, for every integers s and q the colimit map induced by the shifted truncated cocone under Q ⋙ (condensedModuleSections Λ X).rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ q is an isomorphism.",
+ "stmt_deps": [
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), shifted or representative comparison step"
+ },
+ "proof": [
+  {
+   "text": "Use the bounded-below hypercover calculation, reindexing by the integral shift or applying homology to the representative leg equation. Exact filtered colimits identify cycles and boundaries, and the canonical comparison is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "condensedContinuityComparison homologyMap colimMap",
+   "results": "No existing declaration matching the split statement was found in lean/ or Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"condensedContinuityComparison\" \"homologyMap\"",
+   "results": "No matching pro-etale continuity theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit pro-etale pushforward continuity homology map",
+   "results": "Returned only generic colimit and homology declarations; none matches this statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardContinuity",
+  "date": "2026-10-16",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+   "place": "Proof step 6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQcqsPushforwardContinuity",
+  "file": "lean/Sheaf/Paper/CondensedQcqsPushforwardContinuity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_qcqs_globalSections_continuity_shift_colimMap",
+  "statement": "theorem condensed_qcqs_globalSections_continuity_shift_colimMap\n    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]\n    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]\n    (D : I ⥤ CochainComplex\n      (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})\n        (condensedRingObj Λ X)) ℤ)\n    (a : ℤ) (ha : ∀ (i : I) (n : ℤ), n < a → IsZero ((D.obj i).homology n))\n    (s q : ℤ) :\n    IsIso (colimMap (((DerivedCategory.Q ⋙ (condensedModuleSections Λ X).rightDerivedFunctor ⋙\n      DerivedCategory.homologyFunctor _ q).mapCocone\n        ((shiftFunctor _ s).mapCocone (condensedContinuityCocone D a))).ι))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T190717-L-966474",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T190717-L-966474",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

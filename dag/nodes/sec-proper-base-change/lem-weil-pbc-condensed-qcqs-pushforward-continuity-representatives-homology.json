@@ -1,0 +1,102 @@
+{
+ "id": "lem-weil-pbc-condensed-qcqs-pushforward-continuity-representatives-homology",
+ "kind": "statement",
+ "title": "Representative continuity homology map",
+ "statement": "For Abelian categories A and B with derived categories, a filtered diagram D of complexes in A with lower truncation a, a functor F : DerivedCategory A ⥤ DerivedCategory B, a diagram P of complexes in B with colimit, a complex L, isomorphisms e : D ⋙ Q ⋙ F ≅ P ⋙ Q and ε : F.obj (Q.obj (condensedContinuityCocone D a).pt) ≅ Q.obj L, and a cocone map ι satisfying the displayed leg equation, if every homology-level condensed continuity comparison for F is an isomorphism, then for every q the homology map of colimit.desc P (Cocone.mk L ι) is an isomorphism.",
+ "stmt_deps": [
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), shifted or representative comparison step"
+ },
+ "proof": [
+  {
+   "text": "Use the bounded-below hypercover calculation, reindexing by the integral shift or applying homology to the representative leg equation. Exact filtered colimits identify cycles and boundaries, and the canonical comparison is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "condensedContinuityComparison homologyMap colimMap",
+   "results": "No existing declaration matching the split statement was found in lean/ or Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"condensedContinuityComparison\" \"homologyMap\"",
+   "results": "No matching pro-etale continuity theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit pro-etale pushforward continuity homology map",
+   "results": "Returned only generic colimit and homology declarations; none matches this statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardContinuity",
+  "date": "2026-10-16",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+   "place": "Proof step 6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQcqsPushforwardContinuity",
+  "file": "lean/Sheaf/Paper/CondensedQcqsPushforwardContinuity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedContinuityComparison_representatives_homology",
+  "statement": "theorem condensedContinuityComparison_representatives_homology\n    {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{w} A]\n    {B : Type u} [Category.{z} B] [Abelian B] [HasDerivedCategory.{z} B]\n    {I : Type x} [Category.{y} I] [IsFiltered I]\n    [HasColimitsOfShape I B] [HasExactColimitsOfShape I B]\n    (D : I ⥤ CochainComplex A ℤ) (a : ℤ)\n    [HasColimit (D ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor A)]\n    (F : DerivedCategory A ⥤ DerivedCategory B)\n    [∀ q : ℤ, HasColimit (D ⋙ (DerivedCategory.Q ⋙ F ⋙\n      DerivedCategory.homologyFunctor B q))]\n    (h : ∀ q : ℤ, IsIso (condensedContinuityComparison D a\n      (DerivedCategory.Q ⋙ F ⋙ DerivedCategory.homologyFunctor B q)))\n    (P : I ⥤ CochainComplex B ℤ) [HasColimit P] (L : CochainComplex B ℤ)\n    (e : D ⋙ DerivedCategory.Q ⋙ F ≅ P ⋙ DerivedCategory.Q)\n    (ε : F.obj (DerivedCategory.Q.obj (condensedContinuityCocone D a).pt) ≅\n      DerivedCategory.Q.obj L)\n    (ι : P ⟶ (Functor.const I).obj L)\n    (hι : ∀ i : I, e.hom.app i ≫ DerivedCategory.Q.map (ι.app i) =\n      F.map (DerivedCategory.Q.map ((condensedContinuityCocone D a).ι.app i)) ≫ ε.hom) :\n    ∀ q : ℤ, IsIso (HomologicalComplex.homologyMap (colimit.desc P (Cocone.mk L ι)) q)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T190717-L-966474",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T190717-L-966474",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
