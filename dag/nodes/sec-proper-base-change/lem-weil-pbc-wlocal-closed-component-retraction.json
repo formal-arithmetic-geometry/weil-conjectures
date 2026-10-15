@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Equip S with the R-algebra structure induced by g. The w-local hypotheses are exactly the hypotheses recorded in [def-weil-pbc-w-local]. The resulting algebra map is g, so its contraction map on prime spectra and on connected components is the given map h.",
+   "text": "Lift R and S to ULift.{v} R and ULift.{u} S in their common maximum universe, using the canonical ring equivalences eR and eS. Their spectra are homeomorphic to the original spectra and hence have bijective maps cR and cS on connected components. The lifted rings are w-local by transport along the surjective inverse equivalences [def-weil-pbc-w-local]. Equip the lifted S with the algebra structure induced by the lifted map g′ = eS.symm ∘ g ∘ eR; its algebra map is g′.",
    "uses": [
     "def-weil-pbc-w-local"
    ],
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "For each prime q of S, the assumed bijection of the canonical localization map R_{g⁻¹(q)} → S_q is precisely bijectivity on the prime stalks of this algebra map. Thus the auxiliary theorem’s stalk hypothesis holds.",
+   "text": "Ring equivalences are bijective on prime stalks, and this property is stable under composition. Thus the stalk bijectivity of g [def-weil-pbc-localization-at-prime] transports to g′, giving the auxiliary theorem’s stalk hypothesis.",
    "uses": [
     "def-weil-pbc-localization-at-prime"
    ],
@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "The assumed closed-point contraction condition is exactly the auxiliary closed-point hypothesis. Since h|_T is bijective, for every component of Spec R there is a component in T mapping to it, and two components in T with the same image are equal; these are the auxiliary surjectivity and injectivity conditions.",
+   "text": "The spectrum homeomorphisms preserve closed points, and the comap square commutes, so the closed-point hypothesis transports to g′. Set T′ = cS⁻¹(T); continuity of cS makes T′ closed. The commuting square on components and bijectivity of cR and cS transport the given bijection on T to a bijection on T′. Its surjectivity and injectivity supply precisely the two component hypotheses of the auxiliary theorem.",
    "uses": [
     "def-weil-pbc-w-local"
    ],
@@ -64,7 +64,7 @@
    }
   },
   {
-   "text": "Apply the closed-component retraction theorem to the algebra map, T, and the three verified hypotheses. It yields a ring map s:S→R with s∘g=id_R.",
+   "text": "Apply the closed-component retraction theorem [lem-weil-pbc-wlocal-isClosed-bijOn-retraction] to g′ and T′ in the common universe. It yields s′ with s′ ∘ g′ = id. The explicit composite s = eR ∘ s′ ∘ eS.symm satisfies s ∘ g = id by evaluating this identity at ULift.up r and applying ULift.down.",
    "uses": [
     "lem-weil-pbc-wlocal-isClosed-bijOn-retraction"
    ],
@@ -162,5 +162,15 @@
   "by": "NU",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T154206-L-163299",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
