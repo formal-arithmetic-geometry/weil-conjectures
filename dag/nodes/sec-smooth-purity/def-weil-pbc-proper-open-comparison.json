@@ -127,5 +127,29 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-b3cb2d4c2 (reviewer sub-agent of L); spot-checked: Read the definition, all cited statements, source passages, report, and unit/chapter route. Geometry, cartesianness, the three-isomorphism composite, derived adjunction, coefficient category, and edge cases check out. No dependency cycle, duplicate new node, or target weakening found. No repairs or tool_uses accepted; detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenComparison",
+  "declaration": "AlgebraicGeometry.Etale.properOpenComparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.properOpenSection",
+   "AlgebraicGeometry.Etale.properOpenSectionGeometry",
+   "AlgebraicGeometry.Etale.properOpenIdentification",
+   "AlgebraicGeometry.Etale.properOpenComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenComparison.lean",
+  "statement": "def properOpenComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f] (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂] (h : j₁ ≫ f = j₂) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₂).mapDerivedCategoryPlus.obj K ⟶ (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1bbbb3954",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all 21 dependencies, source, canonical constructions, universes, edge cases, docstrings, report sections and verbatim signature. Immutable module compiled cleanly through scompile.py. No findings or repairs; no branch changes."
  }
 }

@@ -235,5 +235,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-2852a676b (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited statements; checked Stacks 06YS, 08FZ, 0GMW, 03EI, 00WJ, 03ER and 0117. All four steps, edge cases, coefficient distinctions and DAG dependencies check out. Accepted four generic tool uses; no new nodes or repairs. Exact master target categories and base-change maps checked. Detailed findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleResidueTorTest",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_torAmplitude_iff_residue_tensor",
+  "file": "lean/Sheaf/Paper/ProEtaleResidueTorTest.lean",
+  "statement": "theorem proEtale_torAmplitude_iff_residue_tensor (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u}) [∀ x : T, Invertible (l : T.residueField x)] (K P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T (Padic.coefficientExtensionRing l E n))) ℤ) (f : P ⟶ K) (hf : QuasiIso f) (hP : CochainComplex.IsKFlat.{u + 1, u} (R := proEtaleConstantRing T (Padic.coefficientExtensionRing l E n)) P) (_hK : intrinsicFiniteTorsionConstructible l E n hn T (DerivedCategory.Q.obj K)) (a b : ℤ) (_hab : a ≤ b) : HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E n) (DerivedCategory.Q.obj K) a b ↔ ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T (Padic.coefficientExtensionRing l E n))) i).obj (derivedTensorRing T (Padic.coefficientExtensionRing l E n) (Padic.coefficientExtensionRing l E n ⧸ Ideal.span {Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n) (Padic.coefficientExtensionUniformizer l E)}) (Ideal.Quotient.mk _) K P f hf hP))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e564b10f7",
+  "group": "NM",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, exact declarations, universes, edge cases, docstrings, report sections, and verbatim signature. Snapshot compilation passed through scompile.py's local side overlay without diagnostics. No defects found; no clone or branch-head changes made."
  }
 }
