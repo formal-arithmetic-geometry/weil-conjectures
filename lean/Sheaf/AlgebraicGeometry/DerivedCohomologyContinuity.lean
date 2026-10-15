@@ -24,6 +24,7 @@ import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
 import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.CategoryTheory.TruncationTriangle
+import WeilConjectures.AlgebraicGeometry.HypercoverCohomology
 
 /-!
 # Continuity for bounded-below étale complexes
