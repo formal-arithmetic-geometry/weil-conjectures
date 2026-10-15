@@ -3,51 +3,216 @@
  "blueprint": {
   "is": "lem-kun-bc-kunneth-compat",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology of the base change map through the Kunneth identification",
- "statement": "Let $K$ be a separably closed field, let $j:U\\to X$ be an open\nimmersion of schemes of finite type over $K$, let $Y$ be a\nprojective scheme over $K$, and let\n$F$ be a sheaf of $\\kunZn$-modules on $U_{\\Et}$ with $n$\ninvertible in $K$. Consider the diagram\n\n$$\n\\begin{array}{ccc}\nY\\times_KX&\\xleftarrow{\\;h\\;}&Y\\times_KU\\\\\n\\Big\\downarrow{\\scriptstyle q}&&\\Big\\downarrow{\\scriptstyle p}\\\\\nX&\\xleftarrow{\\;j\\;}&U .\n\\end{array}\n$$\n\nThen $\\RGamma$ of the base change map\n$q^{-1}Rj_*F\\to Rh_*p^{-1}F$ of\n[def-kun-unbounded-exchange], under the Kunneth isomorphisms of\n[lem-kun-0f14b] (applied to the pairs $(Y,X)$ and $(Y,U)$\nwith the constant coefficient $\\underline{\\kunZn}$) and the Leray\nidentification of [lem-kun-leray-bdd], is identified with the\nidentity of\n$\\RGamma(Y_{\\Et},\\underline{\\kunZn})\\kunotimes{\\kunZn}\\RGamma(U_{\\Et},F)$.",
+ "statement": "Let $K$ be a separably closed field [def-kun-separably-closed], let $n\\geq1$ be an integer invertible in $K$, and put $A=\\mathbf Z/n\\mathbf Z$. Let $j:U\\to X$ be an open immersion [def-weil-open-immersion] of schemes of finite type over $K$ [def-weil-finite-type-morphism], let $Y$ be projective over $K$ [def-kun-projective], and let $F$ be a sheaf of $A$-modules on $U_{\\mathrm{et}}$, viewed in degree zero in the ordinary module derived category [def-weil-pbc-derived-categories]. Put $Z=Y\\times_KX$ and $W=Y\\times_KU$ [def-pc-fibre-product], with projections $r:Z\\to Y$, $q:Z\\to X$, $s:W\\to Y$, $p:W\\to U$, and $h=1_Y\\times j:W\\to Z$. Thus $qh=jp$ and $rh=s$.\n\nWrite $\\Ex:q^{-1}Rj_*F\\to Rh_*p^{-1}F$ for the exchange of [def-kun-unbounded-exchange]. All tensor products below are derived over $A$ [def-kun-derived-tensor]. Let $E=\\underline A_Y$ [def-kun-constant-sheaf]. The external-product maps of [def-kun-kunneth-map], with the pullback-of-constant and tensor-unit identifications, give the Kunneth isomorphisms [lem-kun-0f14b]\n$$\n k_Z:R\\Gamma(Y,E)\\otimes_A^{\\mathbf L}R\\Gamma(X,Rj_*F)\\xrightarrow{\\sim}R\\Gamma(Z,q^{-1}Rj_*F),\n$$\n$$\n k_W:R\\Gamma(Y,E)\\otimes_A^{\\mathbf L}R\\Gamma(U,F)\\xrightarrow{\\sim}R\\Gamma(W,p^{-1}F).\n$$\nLet $\\lambda_j:R\\Gamma(X,Rj_*F)\\xrightarrow{\\sim}R\\Gamma(U,F)$ and $\\lambda_h:R\\Gamma(Z,Rh_*p^{-1}F)\\xrightarrow{\\sim}R\\Gamma(W,p^{-1}F)$ be the canonical module-valued Leray comparisons: the inverses of the derived direct-image composition comparisons of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], normalized by the composite adjunction as in [lem-cat-right-adjoint-composition]. Then\n$$\n \\lambda_h\\circ R\\Gamma(Z,\\Ex)\\circ k_Z\n =k_W\\circ(1_{R\\Gamma(Y,E)}\\otimes_A^{\\mathbf L}\\lambda_j).\n$$\nEquivalently, under these two Kunneth identifications and the Leray identifications, $R\\Gamma(Z,\\Ex)$ is the identity of $R\\Gamma(Y,\\underline A_Y)\\otimes_A^{\\mathbf L}R\\Gamma(U,F)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bc-kunneth-compat.md",
   "place": "node lem-kun-bc-kunneth-compat, order 1770"
  },
  "stmt_deps": [
+  "def-kun-separably-closed",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-kun-projective",
+  "def-weil-pbc-derived-categories",
+  "def-pc-fibre-product",
   "def-kun-unbounded-exchange",
+  "def-kun-derived-tensor",
+  "def-kun-constant-sheaf",
+  "def-kun-kunneth-map",
   "lem-kun-0f14b",
-  "lem-kun-leray-bdd",
-  "def-kun-projective"
+  "lem-kun-pullback-constant",
+  "lem-kun-tensor-unit",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cat-right-adjoint-composition"
  ],
  "proof": [
   {
-   "text": "By [def-kun-unbounded-exchange] the base change map is adjoint to\nthe counit composite\n$p^{-1}j^{-1}Rj_*F\\to p^{-1}F$ under\n$h^{-1}\\dashv Rh_*$ (using the cartesian identification\n$h^{-1}q^{-1}\\cong p^{-1}j^{-1}$). By [lem-kun-tensor-unit] we\nhave $q^{-1}Rj_*F\\cong \\pr_1^{-1}\\underline{\\kunZn}\\kunotimes{\\kunZn}\\pr_2^{-1}Rj_*F$, and\napplying $\\RGamma$ to the base change map gives, through the\nKunneth maps of [def-kun-kunneth-map] (which are isomorphisms here by [lem-kun-0f14b]), the map\n\n$$\n\\RGamma(Y_{\\Et},\\underline{\\kunZn})\\kunotimes{\\kunZn}\n\\RGamma(X_{\\Et},Rj_*F)\n\\longrightarrow\n\\RGamma(Y_{\\Et},\\underline{\\kunZn})\\kunotimes{\\kunZn}\n\\RGamma(U_{\\Et},F)\n$$\n\ninduced by the counit $j^{-1}Rj_*F\\to F$. Since\n$\\RGamma(X_{\\Et},Rj_*F)=\\RGamma(U_{\\Et},F)$ through the Leray\nidentification of [lem-kun-leray-bdd] (the direct image\n$j_*$ is the identity on $U$-sections, see\n[lem-kun-open-immersion-restriction]; on the derived level the\ninduced map is the Leray identification by functoriality of the\nadjunction and of [lem-kun-leray-bdd]), this induced map is the\nidentity, as asserted.",
+   "text": "Put $S=\\operatorname{Spec}K$. The point category causes no change of coefficients. Indeed [lem-weil-pbc-etale-algebra-over-field-product] and [def-kun-separably-closed] say that each affine scheme etale over $K$ is a finite disjoint union of copies of $S$. Such affine opens cover every etale $K$-scheme; its points are open copies of $S$. The sheaf axiom therefore identifies a sheaf on $S_{\\mathrm{et}}$ with the rule $V\\mapsto M^{\\pi_0(V)}$, where $M$ is its value at $S$, and morphisms with maps of $M$. For module sheaves take $M$ an $A$-module, with every operation componentwise. Evaluation at $S$ and the constant-sheaf functor are thus inverse exact equivalences between $A$-module sheaves on $S_{\\mathrm{et}}$ and $A$-modules. Their tensor comparison is the identity at $S$, hence is an isomorphism of sheaves; termwise application gives the corresponding equivalence of derived categories. We may consequently write $Ra_{T*}=R\\Gamma(T,-)$ for a structure map $a_T:T\\to S$. This is an identification of module categories, not forgetting the $A$-action.",
    "uses": [
-    "def-kun-unbounded-exchange",
-    "lem-kun-tensor-unit",
-    "def-kun-kunneth-map",
-    "lem-kun-0f14b",
-    "lem-kun-leray-bdd",
-    "lem-kun-open-immersion-restriction"
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "def-kun-separably-closed"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3, label lemma-etale-over-field; elementary sheaf-gluing specialization to a separably closed field"
+   }
+  },
+  {
+   "text": "Write $a:Y\\to S$, $b:X\\to S$, $c=bj:U\\to S$, $d=bq:Z\\to S$, and $e=dh=cp:W\\to S$. Set $H=Rj_*F$, $P=Ra_*E$, $B=Rb_*H$, and $C=Rc_*F$. Use the inverse composition isomorphisms of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] for $(j,b)$ and $(h,d)$ to define $\\lambda_j:B\\to C$ and $\\lambda_h:Rd_*Rh_*p^{-1}F\\to Re_*p^{-1}F$. The sites may be replaced by small representatives in a larger universe; the ring on each is the constant $A$, and the structural ring maps are the pullback-of-constant isomorphisms. All derived inverse-image/direct-image adjunctions are those fixed by [def-kun-unbounded-exchange]. The normalization in the composition statement agrees with the right-adjoint comparison as follows. For either inner map $f=j$ or $f=h$, if $I$ is K-injective, then $f_*I$ is K-injective: for an acyclic complex $N$, the adjunction identifies $\\operatorname{Hom}^\\bullet(N,f_*I)$ with $\\operatorname{Hom}^\\bullet(f^{-1}N,I)$, which is acyclic because $f^{-1}$ is exact. Thus in the normalization one may take $J=f_*I$ and the resolution map to be the identity. On these representatives, the comparison is the ordinary direct-image composition identification and its adjunction is the composite of the two ordinary Hom bijections. Consequently [lem-cat-right-adjoint-composition] identifies its counit with the pasted counit. Naturality of the resolution identifications gives this normalization for every derived object. With the canonical inverse-image composition identifications understood, this gives the two typed identities\n$$\n \\varepsilon_{c,F}\\circ c^{-1}(\\lambda_j)\n =\\varepsilon_{j,F}\\circ j^{-1}(\\varepsilon_{b,H})\n :c^{-1}B\\longrightarrow F,\n$$\n$$\n \\varepsilon_{e,p^{-1}F}\\circ e^{-1}(\\lambda_h)\n =\\varepsilon_{h,p^{-1}F}\\circ h^{-1}(\\varepsilon_{d,Rh_*p^{-1}F}).\n$$\nThese formulas fix the actual Leray maps and their directions, not just isomorphisms of their endpoints.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cat-right-adjoint-composition",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, label lemma-derived-pushforward-composition; counit formula: categories.tex, Tag 0DV0, label lemma-compose-counits"
+   }
+  },
+  {
+   "text": "By [lem-kun-projective-implies-proper], $Y$ is proper over $K$. Thus [lem-kun-0f14b] applies to $(Y,X,E,H)$ and $(Y,U,E,F)$: $K$ is separably closed, $n$ is invertible, $X$ and $U$ are finite type, and both $H$ and $F$ belong to the stated unbounded $A$-module categories. No constructibility or separatedness of $X$ is required. By [lem-kun-pullback-constant], $r^{-1}E=A_Z$ and $s^{-1}E=A_W$ canonically. The left unit constraints of [lem-kun-tensor-unit] therefore give isomorphisms\n$$u_Z:r^{-1}E\\otimes_A^{\\mathbf L}q^{-1}H\\to q^{-1}H,\n\\qquad u_W:s^{-1}E\\otimes_A^{\\mathbf L}p^{-1}F\\to p^{-1}F.$$\nIn the notation of [def-kun-kunneth-map], the maps in the statement are precisely $k_Z=Rd_*(u_Z)\\circ\\kappa_{E,H}$ and $k_W=Re_*(u_W)\\circ\\kappa_{E,F}$. Both are invertible. The current definition fixes the comparison\n$$\n t_Z=(\\gamma_{a,r,P}\\otimes_A^{\\mathbf L}\\gamma_{b,q,B})\\circ(\\mu^d_{P,B})^{-1}\n :d^{-1}(P\\otimes_A^{\\mathbf L}B)\\longrightarrow r^{-1}a^{-1}P\\otimes_A^{\\mathbf L}q^{-1}b^{-1}B.\n$$\nHere $\\gamma_{a,r}:d^{-1}\\to r^{-1}a^{-1}$ and $\\gamma_{b,q}:d^{-1}\\to q^{-1}b^{-1}$ are exactly its termwise-descended constant-coefficient module composition maps. Thus the transpose of $k_Z$ is\n$$u_Z\\circ(r^{-1}\\varepsilon_{a,E}\\otimes_A^{\\mathbf L}q^{-1}\\varepsilon_{b,H})\\circ t_Z.$$\nFor any $L,M\\in D(S_{\\mathrm{et}},A)$ put\n$$t_W(L,M)=(\\gamma_{a,s,L}\\otimes_A^{\\mathbf L}\\gamma_{c,p,M})\\circ(\\mu^e_{L,M})^{-1}.\n$$\nThe transpose of $k_W$ is\n$$u_W\\circ(s^{-1}\\varepsilon_{a,E}\\otimes_A^{\\mathbf L}p^{-1}\\varepsilon_{c,F})\\circ t_W(P,C).$$ These are the maps obtained from the definition's explicit unit-then-direct-image formula for $\\kappa$, under its canonical K-injective Hom bijection.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-kun-0f14b",
+    "lem-kun-pullback-constant",
+    "lem-kun-tensor-unit",
+    "def-kun-kunneth-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F14, label lemma-kunneth-one-proper, part (2); blueprint proof: tensor-unit identification before the display"
+   }
+  },
+  {
+   "text": "We make the tensor identifications used in the comparison explicit. Use the inverses of the bifunctorial comparisons $\\mu^u$ of [lem-kun-inverse-image-monoidal] to distribute every inverse image over a derived tensor. Use the specific comparisons $\\gamma$ constructed in [def-kun-kunneth-map] by the canonical module-linear sheaf composition maps, applied termwise and descended to the unbounded derived categories, to use $rh=s$ and $qh=jp$. Their module structures and composite-adjunction normalization are part of the current definition; the following calculation concerns these maps. In particular, put $D=P\\otimes_A^{\\mathbf L}B$, let $\\rho=\\gamma_{r,h}^{-1}:h^{-1}r^{-1}\\to s^{-1}$, and let $\\sigma=\\gamma_{j,p}\\circ\\gamma_{q,h}^{-1}:h^{-1}q^{-1}\\to p^{-1}j^{-1}$. The exact coherence equality needed below is\n$$\n\\begin{aligned}\n &(\\rho_{a^{-1}P}\\otimes\\sigma_{b^{-1}B})\n \\circ(\\mu^h_{r^{-1}a^{-1}P,q^{-1}b^{-1}B})^{-1}\n \\circ h^{-1}(t_Z)\\circ\\gamma_{d,h,D}\\\\\n &\\qquad=(1_{s^{-1}a^{-1}P}\\otimes p^{-1}\\gamma_{b,j,B})\\circ t_W(P,B),\n\\end{aligned}\n$$\nwhere both sides go from $e^{-1}D$ to $s^{-1}a^{-1}P\\otimes_A^{\\mathbf L}p^{-1}j^{-1}b^{-1}B$. The comparisons also commute with the unit maps $u_Z,u_W$. On sheaf generators the composition comparison sends a pulled-back pair of labels $(x,y)$ to the same pair along the composite, in either order. The constant and left-unit comparisons send $a\\otimes m$ to $am$, so also commute with those compositions. On K-flat flat-term representatives the equality is the same in each bidegree, and it commutes with $d\\otimes1+(-1)^i1\\otimes d$. The uniqueness clause of [lem-weil-pbc-site-derived-tensor-descent] extends this equality to the derived tensor bifunctors. Hence in the next step all displays have the canonical monoidal and composition comparisons of [def-kun-kunneth-map]; they do not choose new identifications or introduce a symmetry or Koszul sign.",
+   "uses": [
+    "lem-kun-inverse-image-monoidal",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-kun-kunneth-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, label lemma-pullback-tensor-product, construction on K-flat flat-term models; blueprint proof: the Kunneth comparison"
+   }
+  },
+  {
+   "text": "Let $D=P\\otimes_A^{\\mathbf L}B$. We compare the two asserted maps $D\\to Re_*p^{-1}F$ under the bijection $\\operatorname{Hom}(D,Re_*p^{-1}F)=\\operatorname{Hom}(e^{-1}D,p^{-1}F)$. By [def-kun-kunneth-map], the adjoint of $k_Z$ is $u_Z\\circ(r^{-1}\\varepsilon_{a,E}\\otimes q^{-1}\\varepsilon_{b,H})\\circ t_Z$, with $t_Z$ fixed in step 3. By [def-kun-unbounded-exchange], $\\varepsilon_h\\circ h^{-1}\\Ex=p^{-1}\\varepsilon_{j,F}$, after the specified square comparison. Use the second counit identity in step 2 and naturality of $\\varepsilon_d$ to transpose the left side. It is exactly\n$$\n e^{-1}(P\\otimes_A^{\\mathbf L}B)\n \\cong s^{-1}a^{-1}P\\otimes_A^{\\mathbf L}p^{-1}j^{-1}b^{-1}B\n \\xrightarrow{\\ s^{-1}\\varepsilon_{a,E}\\otimes p^{-1}j^{-1}\\varepsilon_{b,H}\\ }\n s^{-1}E\\otimes_A^{\\mathbf L}p^{-1}j^{-1}H\n \\xrightarrow{\\ 1\\otimes p^{-1}\\varepsilon_{j,F}\\ }\n s^{-1}E\\otimes_A^{\\mathbf L}p^{-1}F\n \\xrightarrow{u_W}p^{-1}F.\n$$\nFor clarity, the naturality used here is\n$\\varepsilon_{d,Rh_*p^{-1}F}\\circ d^{-1}Rd_*(\\Ex)=\\Ex\\circ\\varepsilon_{d,q^{-1}H}$; the equality for the adjoint of $\\Ex$ then removes $h^{-1}\\Ex$. Thus the outer Leray comparison is accounted for explicitly. On the right side, the adjoint of $k_W\\circ(1_P\\otimes\\lambda_j)$ is\n$$\nu_W\\circ(s^{-1}\\varepsilon_{a,E}\\otimes p^{-1}\\varepsilon_{c,F})\n\\circ t_W(P,C)\\circ e^{-1}(1_P\\otimes\\lambda_j).\n$$\nNaturality of $\\mu^e$ and $\\gamma_{c,p}$ gives the typed equality\n$$\nt_W(P,C)\\circ e^{-1}(1_P\\otimes\\lambda_j)\n=(1_{s^{-1}a^{-1}P}\\otimes p^{-1}c^{-1}\\lambda_j)\\circ t_W(P,B).\n$$\nThus this adjoint equals\n$$\nu_W\\circ\\bigl(s^{-1}\\varepsilon_{a,E}\\otimes\np^{-1}(\\varepsilon_{c,F}\\circ c^{-1}\\lambda_j)\\bigr)\\circ t_W(P,B).\n$$\nSubstitute the first counit identity from step 2. Bifunctoriality of tensor makes this exactly the preceding three-arrow composite, with the comparisons checked in step 4. Injectivity of the adjunction bijection proves the displayed equality in the statement. This calculation uses only the adjoint descriptions and pasted counits, not a base-change isomorphism theorem.",
+   "uses": [
+    "def-kun-kunneth-map",
+    "def-kun-unbounded-exchange",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bc-kunneth-compat.md",
+    "place": "Proof, sentence beginning “applying RGamma to the base change map gives”: expanded double-adjoint calculation; pasted counits as in Stacks Tag 0DV0"
+   }
+  },
+  {
+   "text": "The common source can now be identified with $P\\otimes_A^{\\mathbf L}C$ by $1_P\\otimes\\lambda_j$. The equality of step 5 reads\n$$k_W^{-1}\\circ\\lambda_h\\circ R\\Gamma(Z,\\Ex)\\circ k_Z\\circ(1_P\\otimes\\lambda_j)^{-1}=1_{P\\otimes_A^{\\mathbf L}C}.$$\nEvery inverse exists by steps 2 and 3. This is the claimed identity on $R\\Gamma(Y,\\underline A_Y)\\otimes_A^{\\mathbf L}R\\Gamma(U,F)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bc-kunneth-compat.md",
+    "place": "Proof, final sentence: “this induced map is the identity, as asserted”"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "def-kun-separably-closed",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cat-right-adjoint-composition",
   "def-kun-unbounded-exchange",
+  "lem-kun-projective-implies-proper",
+  "lem-kun-0f14b",
+  "lem-kun-pullback-constant",
   "lem-kun-tensor-unit",
   "def-kun-kunneth-map",
-  "lem-kun-0f14b",
-  "lem-kun-leray-bdd",
-  "lem-kun-open-immersion-restriction"
+  "lem-kun-inverse-image-monoidal",
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bc-kunneth-compat.md",
-  "place": "## Proof"
+  "place": "Proof, counit/exterior-product argument expanded; Stacks 00U3, 0D6E, 0DV0, 07A4 and 0F14 supply the cited ingredients"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Kunneth exterior product in etale cohomology commutes with the base change map for an open immersion and a proper product projection",
+   "results": "8 displayed hits: AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Scheme.Hom.comp_appIso, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app",
+   "date": "2026-10-15",
+   "verdict": "No match: projective pullback and open restriction identities, not an etale derived Kunneth compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 displayed hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-15",
+   "verdict": "No match: abstract monoidal adjunction infrastructure; no etale exterior-product comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|künneth|baseChange.*[Tt]ensor",
+   "results": "25 displayed hits: Mathlib/LinearAlgebra/Dimension/Localization.lean, Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "date": "2026-10-15",
+   "verdict": "No match: ordinary algebraic base change and tensor identities; no derived etale Kunneth map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of Kunneth exterior product with etale derived base change and Leray composition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The external cup product on derived global sections is natural for pullback and counits of derived direct image adjunctions",
+   "results": "8 displayed hits: CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.ExponentiableMorphism.ev_naturality, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, SheafOfModules.pullbackComp",
+   "date": "2026-10-15",
+   "verdict": "No match: slice-category adjunction and module-sheaf pullback identities; no derived etale exterior-product equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 displayed hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-15",
+   "verdict": "No match: generic mate correspondence, not a construction or compatibility of etale Kunneth maps."
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|künneth|external[Pp]roduct|exterior[Pp]roduct",
+   "results": "25 displayed hits: Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean; subdirectory Mathlib/CategoryTheory",
+   "date": "2026-10-15",
+   "verdict": "No match: external product of ordinary functor diagrams and Day convolution, not derived sheaf cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|künneth|external[Pp]roduct|exterior[Pp]roduct",
+   "results": "0 displayed hits; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-15",
+   "verdict": "No match: no hits in AlgebraicGeometry."
+  },
+  {
+   "tool": "grep",
+   "query": "externalProduct.*naturality|counit.*tensor|tensor.*counit",
+   "results": "25 displayed hits: Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/AlgCat/TensorAlgebra.lean, Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean, Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean, Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean, Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean, Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean",
+   "date": "2026-10-15",
+   "verdict": "No exact match: ordinary coalgebra counits, monoidal adjunction identities, and functor-diagram external products; the relevant generic counit identity at Mathlib/CategoryTheory/Monoidal/Functor.lean:1036 does not state the geometric square compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived external cup product commutes with the mate of a cartesian square after composing right adjoints",
+   "results": "8 displayed hits: CategoryTheory.frobeniusMorphism_mate, CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.mateEquiv_apply, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.mateEquiv, CategoryTheory.rightAdjointMate_comp, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+   "date": "2026-10-15",
+   "verdict": "No exact match: generic Frobenius maps, mate correspondences, and tensor counit identities; these require the instantiated geometric and derived comparisons proved in the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "1 displayed hits: CategoryTheory.Adjunction.comp_counit_app",
+   "date": "2026-10-15",
+   "verdict": "Generic composite-counit formula, already covered by the existing lem-cat-right-adjoint-composition leaf; not a new geometric compatibility leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the exterior product of derived global sections with respect to the adjunction mate of a pullback square",
+   "date": "2026-10-16",
+   "results": "8 displayed hits: CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.ev_naturality, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.coev_ev_assoc",
+   "verdict": "No match: evaluation/coevaluation naturality and ordinary scheme module pullback composition do not state this derived etale exterior-product equality."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -78,5 +243,43 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-bc-kunneth-compat",
+  "worker": "stage1",
+  "summary": "Expanded the imported one-paragraph argument into a coefficient-typed point identification, canonical module Leray maps with pasted counits, Kunneth invertibility, explicit tensor-comparison check, double-adjoint equality and final conjugation. Corrected the imported reference to abelian-valued bounded Leray: the statement now specifies the canonical module-valued comparisons from existing general ringed-topos composition and adjoint-composition nodes. Hypotheses and mathematical conclusion are unchanged. No new nodes or Mathlib leaves. Returned-delivery repair: rebased protected item metadata onto the current DAG, re-read all cited statements, and revalidated the revised def-kun-kunneth-map. Steps 3–5 now explicitly use its inverse monoidality map, module-linear composition maps and canonical K-injective adjunction; all three obsolete quotes of that definition were replaced by its current statement. Fresh second reading: wrote the W tensor comparison and the full right-hand adjoint transpose, including its naturality equation; no statement change.",
+  "blueprint": [
+   "Proof: the exchange is adjoint to the pulled-back counit (steps 2 and 5).",
+   "Proof: the tensor-unit and Kunneth identifications (steps 1, 3 and 4).",
+   "Proof: the induced map is the Leray comparison and hence becomes the identity (steps 2, 5 and 6)."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Generic classification of etale algebras over a field, used only to spell out the coefficient-preserving point equivalence implicit in absolute Kunneth; the unit has no statement of this classification."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "General canonical module-valued Leray comparison on unbounded ringed sites; the unit Leray statement is only for bounded-below abelian sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic uniqueness of extension from K-flat flat-term tensor models; verifies the canonical comparisons, not a replacement Kunneth proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q07-8c9bc895d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-8c9bc895d (reviewer sub-agent of L); spot-checked: Read the item, all six steps, cited statements and source passages in full. Verified module-valued Leray normalization, current Künneth comparisons, exchange-mate transposes, hypotheses and edge cases against Stacks 00U3, 0D6E, 0DV0, 01WC, 07A4 and 0F14. No new nodes, duplicates, cycles or repairs required. Accepted generic tool uses and detailed checks are recorded in review.md; no target-category bridge is inferred."
+ }
 }
