@@ -88,11 +88,21 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-def-bc",
  "lean": {
+  "module": "WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity",
+  "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id",
+  "statement": "lemma Etale.derivedBaseChangeMapPlus_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) :\n    Etale.derivedBaseChangeMapPlus A sq =\n      Functor.whiskerLeft (f)_*[A].rightDerivedFunctorPlus (Etale.upperStarIdDerivedPlus A Y).hom ≫\n        (Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv ≫\n        Functor.whiskerRight (Etale.upperStarIdDerivedPlus A X).inv\n          (f)_*[A].rightDerivedFunctorPlus",
   "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id",
-   "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-15 20:20 UTC for group NL, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_7d675a26.jsonl.gz: the first gives the identity clause and the second gives the horizontal base-change composition cl"
+  "by": "NU",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "The identity clause is declared directly in WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity. The composition clause is the existing declaration AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz in WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal; the stage-2 existing-record schema accepts one direct module, so it is documented here and verified separately by scompile.py. The umbrella DerivedPasting module imports both but does not directly declare either theorem, so it cannot satisfy the preflight direct-declaration check."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-edc64e045",
+  "group": "NU",
+  "result": "pass",
+  "note": "Canonical identity and horizontal composition declarations match the node and source; dependencies, universes, edge cases, docstrings, report sections, and scompile evidence checked. No findings."
  }
 }
