@@ -27,113 +27,44 @@
  ],
  "proof": [
   {
-   "text": "Apply the ringed-site presentation to the given morphism $u$, obtaining the commuting square with ringed equivalences $g,e$ and a site morphism $h$ induced by $v:\\mathcal D'\\to\\mathcal C'$ preserving finite limits. Write $A=\\mathcal O_{\\mathcal D'}$, $B=\\mathcal O_{\\mathcal C'}$ and $M=e_*F$.",
+   "text": "Apply inverse-image preservation of flatness to the algebraic inverse-image lift I and F. This proves that G=I.modules.obj F is flat over RI before the coefficient map c is applied.",
    "uses": [
-    "lem-weil-pbc-ringed-topos-site-presentation"
+    "lem-weil-pbc-flat-algebraic-inverse-image-universes"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 05VD (lemma-pullback-flat), opening paragraph; Tag 03CR (lemma-morphism-ringed-topoi-comes-from-morphism-ringed-sites)"
-   }
+   "elementary": true
   },
   {
-   "text": "An equivalence of sheaf topoi preserves kernels, cokernels, and the universal property of balanced bilinear maps, hence induces an exact equivalence of ring-module categories preserving their tensor products. Thus the functor $-\\otimes_A M$ is the conjugate by $e_*$ of $-\\otimes_{\\mathcal O}F$, and is exact. The ringed commuting square identifies $g_*(u^*F)$ with $h^*M$; exactness and tensor preservation for $g$ reduce the conclusion to flatness of $h^*M$.",
+   "text": "The module-to-abelian-sheaf functor preserves finite colimits: apply the module sheafification adjunction to a diagram of underlying presheaves; the invertible counit identifies its sheafified diagram with the original one, and forgetting sheafification is abelian sheafification. It preserves and reflects finite limits and reflects finite colimits. Restriction of scalars has the same underlying abelian sheaf functor, hence preserves finite limits and colimits.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-flat-sheaf-modules"
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 05VD, opening paragraph: intrinsic flatness"
-   }
+   "elementary": true
   },
   {
-   "text": "For a sheaf $T$ on $\\mathcal D'$, put $P_T(U)=\\varinjlim_{(V,\\phi:U\\to v(V))\\in\\mathcal I_U^{\\mathrm{op}}}T(V)$, first on underlying sets. This index is filtered since $v$ preserves finite limits, and $h^{-1}T=P_T^\\#$. Finite-product preservation defines addition, multiplication and scalar action on these colimits from their stage maps. Sheafification gives $A'=h^{-1}A=P_A^\\#$ and $G=h^{-1}M=P_M^\\#$ with their ring and module structures; the algebraic sheafification statements identify their underlying sheaves of sets with the set sheafifications.",
+   "text": "Use the natural scalar tensor comparison with M=G. The source comparison functor is restriction of scalars, followed by the exact tensor functor of G, followed by forgetting; it therefore preserves finite limits and colimits. Transfer these properties through the natural isomorphism and reflect them through forgetting on the S-module side. This proves IsFlatOnSite of changeOfRingsOfUniverses c G.",
    "uses": [
-    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-pc-sites-module-sheafification-interface"
+    "lem-weil-pbc-scalar-tensor-comparison-universes",
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 05VD, site-case paragraph; Sites Tags 00X3 (lemma-directed), 00WX (lemma-adjoint-sheaves)"
-   }
-  },
-  {
-   "text": "Fix $U$, $n\\geq0$, $a_p\\in A'(U)$ and $s_p\\in G(U)$ with $\\sum_p a_ps_p=0$. Local sheafification first lifts all these finitely many sections to $a'_p\\in P_A(U)$ and $s'_p\\in P_M(U)$, after successive covering refinements; its local equality assertion then makes $\\sum_p a'_ps'_p=0$ in $P_M(U)$ on another refinement. Filteredness and the elementwise colimit statements put all representatives at a common pair $(V,\\phi)$, and eventual equality puts the zero relation at a later pair. Denote the final representatives $a''_p\\in A(V)$ and $s''_p\\in M(V)$: $\\sum_p a''_ps''_p=0$. Transition maps preserve sums and scalar products, so this relation has exactly the original images. For $n=0$, choose the pair given by the final object of $\\mathcal D'$; the relation is the empty zero sum.",
-   "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-pc-sites-module-sheafification-interface"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 05VD, finite sections and coefficients represented at a common stage"
-   }
-  },
-  {
-   "text": "Since $M$ is flat, the local equational criterion gives a covering $\\{V_i\\to V\\}$, sections $b''_{ipq}\\in A(V_i)$ and $t''_{iq}\\in M(V_i)$ such that $s''_p|_{V_i}=\\sum_q b''_{ipq}t''_{iq}$ and $\\sum_p a''_p|_{V_i}b''_{ipq}=0$.",
-   "uses": [
-    "lem-weil-pbc-site-flat-equational-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 05VD, application of Tag 08FC (lemma-flat-eq), (1) implies (2)"
-   }
-  },
-  {
-   "text": "Set $U_i=U\\times_{\\phi,v(V)}v(V_i)$. Continuity sends the covering to $\\{v(V_i)\\to v(V)\\}$, and the site base-change axiom makes $\\{U_i\\to U\\}$ a covering. The pair $(V_i,U_i\\to v(V_i))$ gives sections $b_{ipq}$ and $t_{iq}$ of $A'$ and $G$ on $U_i$. Their maps preserve sums and scalar products, and the defining equality of the fibre product identifies the image of $s''_p|_{V_i}$ with $s_p|_{U_i}$ and that of $a''_p|_{V_i}$ with $a_p|_{U_i}$. Consequently $s_p|_{U_i}=\\sum_q b_{ipq}t_{iq}$ and $\\sum_p a_p|_{U_i}b_{ipq}=0$. The reverse implication of the criterion proves that $G$ is flat over $A'$.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-flat-equational-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 05VD, final fibre-product covering and matrix-factorization paragraph"
-   }
-  },
-  {
-   "text": "For every $B$-module sheaf $N$ the balanced tensor universal property gives $(G\\otimes_{A'}B)\\otimes_B N\\cong G\\otimes_{A'}\\operatorname{Res}N$: on local pure tensors $(g\\otimes b)\\otimes n\\mapsto g\\otimes bn$, with inverse $g\\otimes n\\mapsto(g\\otimes1)\\otimes n$. Restriction of scalars leaves underlying abelian sheaves, kernels and cokernels unchanged, so is exact. Exactness of a sequence of $B$-module sheaves is detected on its underlying abelian sheaves, by the same kernel and cokernel descriptions. Thus composing restriction of scalars with the exact tensor functor of $G$ and using the displayed comparison shows $G\\otimes_{A'}B=h^*M$ is flat over $B$. Step 2 then proves flatness of $u^*F$ without a flatness hypothesis on the coefficient map.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 05VD, change-of-rings reduction; Tag 05V4 (lemma-flat-change-of-rings)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-topos-site-presentation",
+  "lem-weil-pbc-flat-algebraic-inverse-image-universes",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-scalar-tensor-comparison-universes",
   "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-flat-equational-criterion"
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 05VD (sites-modules-lemma-pullback-flat), proof"
+  "place": "Tags 05VD and 05V4. M2 formalizes the full scalar-extension step using tensor descent through sheafification and exactness reflected on abelian sheaves; inverse-image flatness is isolated as the strictly smaller pre-scalar-extension step."
  },
  "mathlib_searches": [
   {
@@ -240,5 +171,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Reviewed the immutable node, dependencies, source, Lean declarations, docstrings, edge cases, and report sections. Recompiled all four delivered modules via scompile.py successfully; no substantive or mechanical faults found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb0f3",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261015T224109-L-2885323",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled cleanly; the target signature is unchanged, the sole importer compiles, DAG/report/decomposition agree, and no mechanical or forbidden-declaration faults were found."
  }
 }

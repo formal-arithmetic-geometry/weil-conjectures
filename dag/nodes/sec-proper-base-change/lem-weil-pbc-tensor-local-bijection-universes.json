@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-tensor-local-bijection-universes",
+ "kind": "statement",
+ "title": "Tensoring a local module bijection commutes with sheafification in independent universes",
+ "statement": "Let C be a category, J a Grothendieck topology on C, R a presheaf of commutative rings whose underlying ring presheaf is a J-sheaf, and P,Q,N presheaves of R-modules [def-weil-sheaf-of-modules-category]. All site, ring and module universes are independent. Suppose $f:P\\to Q$ is locally injective and locally surjective for J. Assume weak sheafification of abelian-group-valued presheaves in the module universe and that J-local equivalences of such presheaves are exactly the locally bijective maps. Then the module sheafification [def-weil-presheaf-modules-sheafification] of f tensor id_N, for the sectionwise tensor product [def-pur-sheaf-tensor-product], is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (tensor product universal property) and 05V4 (tensor comparison through sheafification)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "A locally bijective map of presheaves of sets induces bijections of maps to each sheaf of sets. Given a map from its source, choose local lifts of each target section, apply the map, and glue. Local injectivity and separatedness show independence and compatibility; uniqueness proves naturality. This argument places no relation between the site and value universes.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The product of a locally bijective set-presheaf map with the identity of another presheaf is again locally bijective: use the equalizer sieve for the first coordinates for injectivity, and restrict the second coordinate along the image sieve of the first for surjectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a map g:P tensor N→H into a module sheaf, apply the first two steps to its bilinear pairing. The descended pairing on Q times N is additive and homogeneous in each variable: check the equations on the intersection of the finitely many image covering sieves, where all operands lift, and use separatedness of H. The tensor universal property gives a unique map Q tensor N→H factoring g. Injectivity follows by the same covering-sieve argument on pure tensors.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the sheafification adjunction to identify the preceding bijections with precomposition by the sheafification of f tensor id_N on maps into every module sheaf. The coyoneda criterion implies that this morphism is invertible.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (tensor product universal property) and 05V4 (tensor comparison through sheafification); explicit local descent and categorical details formalized by M2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a locally bijective morphism of presheaves of modules becomes an isomorphism after sheafification.",
+   "results": "{\"t\": \"2026-10-15T21:18:36Z\", \"tool\": \"leansearch\", \"query\": \"Tensoring a locally bijective morphism of presheaves of modules becomes an isomorphism after sheafification.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a locally bijective map of presheaves of modules induces an isomorphism after sheafification",
+   "results": "{\"t\": \"2026-10-15T21:00:54Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a locally bijective map of presheaves of modules induces an isomorphism after sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.homEquivOfIsLocallyBijective\", \"PresheafOfModules.homEquivOfIsLocallyBijective_apply\", \"SheafOfModules.bijective_pushforwardSections\", \"PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"CategoryTheory.Sheaf.monoidalCategory\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\"], \"digest\": \"93d837e032dcaabe\"}",
+   "date": "2026-10-16",
+   "verdict": "Related local-bijection descent and module sheafification declarations exist, but no tensor-local-bijection theorem in the independent-universe API."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafification",
+   "results": "{\"t\": \"2026-10-15T21:00:54Z\", \"tool\": \"loogle\", \"query\": \"PresheafOfModules.sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafification\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.sheafificationCompToSheaf\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\"], \"digest\": \"9d2f1efcbe443551\"}",
+   "date": "2026-10-16",
+   "verdict": "Found the adjunction and sheafification API used in the proof, not the asserted tensor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocally.*[Tt]ensor|[Tt]ensor.*IsLocally",
+   "results": "{\"t\": \"2026-10-15T21:00:53Z\", \"tool\": \"grep\", \"query\": \"IsLocally.*[Tt]ensor|[Tt]ensor.*IsLocally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback",
+  "date": "2026-10-16",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first strict-tower pullback functor: flatness of pulled-back terms; Tensoring a local module bijection commutes with sheafification in independent universes",
+   "via": [
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/TensorSheafificationOfUniverses.lean",
+  "declaration": "PresheafOfModules.sheafification_tensorHom_isIso",
+  "statement": "theorem sheafification_tensorHom_isIso\n    (hR : Presheaf.IsSheaf J (R ⋙ forget₂ CommRingCat RingCat))\n    [J.WEqualsLocallyBijective AddCommGrpCat.{w}]\n    [HasWeakSheafify J AddCommGrpCat.{w}] :\n    IsIso ((sheafification (R := ⟨_, hR⟩) (𝟙 (R ⋙ forget₂ CommRingCat RingCat))).map\n      (SheafOfModules.siteTensorHom f N))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb0f3",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261015T224109-L-2885323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb0f3",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261015T224109-L-2885323",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled cleanly; the target signature is unchanged, the sole importer compiles, DAG/report/decomposition agree, and no mechanical or forbidden-declaration faults were found."
+ }
+}

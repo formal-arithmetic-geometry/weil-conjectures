@@ -8,14 +8,10 @@ module
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.AlgebraicInverseImageOfUniverses
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-public import Mathlib.Algebra.Category.Grp.FilteredColimits
-public import Mathlib.CategoryTheory.Sites.PreservesSheafification
-import Sheaf.CategoryTheory.RingedToposSitePresentation
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion
-import Sheaf.Paper.SiteSheafificationSectionsLocal
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 
 /-!
 # Pullback of flat modules along morphisms of ringed topoi
@@ -31,6 +27,110 @@ universe uC vC uD vD r m
 open CategoryTheory CategoryTheory.Limits
 
 namespace SheafOfModules
+
+section ScalarExtension
+
+variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
+  [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max r m}]
+  [HasWeakSheafify J AddCommGrpCat.{max r m}]
+  {R S : Sheaf J CommRingCat.{r}} (c : R ⟶ S)
+  (M : SheafOfModules.{max r m}
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
+
+omit [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] in
+private theorem forget_preserves_colimits (A : Sheaf J RingCat.{r}) :
+    PreservesFiniteColimits (toSheaf.{max r m} A) := by
+  constructor
+  intro K _ _
+  constructor
+  intro F
+  let L := PresheafOfModules.sheafification.{max r m} (𝟙 A.obj)
+  let adj := PresheafOfModules.sheafificationAdjunction.{max r m} (𝟙 A.obj)
+  let G := F ⋙ (SheafOfModules.forget A ⋙ PresheafOfModules.restrictScalars (𝟙 A.obj))
+  let e : G ⋙ L ≅ F := Functor.isoWhiskerLeft F (asIso adj.counit) ≪≫ F.rightUnitor
+  have : PreservesColimitsOfShape K (presheafToSheaf J AddCommGrpCat.{max r m}) :=
+    (sheafificationAdjunction J AddCommGrpCat.{max r m}).leftAdjoint_preservesColimits
+      |>.preservesColimitsOfShape
+  have : PreservesColimit G (L ⋙ toSheaf.{max r m} A) :=
+    preservesColimit_of_natIso G (PresheafOfModules.sheafificationCompToSheaf (𝟙 A.obj)).symm
+  let hc := colimit.isColimit G
+  have : PreservesColimit (G ⋙ L) (toSheaf.{max r m} A) :=
+    preservesColimit_of_preserves_colimit_cocone (isColimitOfPreserves L hc)
+      (isColimitOfPreserves (L ⋙ toSheaf.{max r m} A) hc)
+  exact preservesColimit_of_iso_diagram (toSheaf.{max r m} A) e
+
+private theorem restrict_exact :
+    exactFunctor _ _ (restrictScalars.{max r m}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map c)) := by
+  let R' := (sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R
+  let S' := (sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj S
+  let res := restrictScalars.{max r m}
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map c)
+  have := forget_preserves_colimits.{uC, vC, r, m} R'
+  have := forget_preserves_colimits.{uC, vC, r, m} S'
+  have : PreservesFiniteLimits (res ⋙ toSheaf R') :=
+    inferInstanceAs (PreservesFiniteLimits (toSheaf.{max r m} S'))
+  have : PreservesFiniteColimits (res ⋙ toSheaf R') :=
+    inferInstanceAs (PreservesFiniteColimits (toSheaf.{max r m} S'))
+  have : ReflectsFiniteColimits (toSheaf.{max r m} R') :=
+    inferInstance
+  exact ⟨preservesFiniteLimits_of_reflects_of_preserves res (toSheaf R'),
+    preservesFiniteColimits_of_reflects_of_preserves res (toSheaf R')⟩
+
+private theorem scalarFlat_of_tensorComparison
+    (e : restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map c) ⋙
+      siteSheafTensorRight M ⋙
+        toSheaf.{max r m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R) ≅
+      siteSheafTensorRight (changeOfRingsOfUniverses c M) ⋙
+        toSheaf.{max r m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj S))
+    (hM : IsFlatOnSite M) : IsFlatOnSite (changeOfRingsOfUniverses c M) := by
+  have hres := restrict_exact.{uC, vC, r, m} c
+  have := forget_preserves_colimits.{uC, vC, r, m}
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
+  have := forget_preserves_colimits.{uC, vC, r, m}
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj S)
+  let res := restrictScalars.{max r m}
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map c)
+  have : PreservesFiniteLimits res := hres.1
+  have : PreservesFiniteColimits res := hres.2
+  have : PreservesFiniteLimits (siteSheafTensorRight M) := hM.1
+  have : PreservesFiniteColimits (siteSheafTensorRight M) := hM.2
+  have : PreservesFiniteLimits (res ⋙ siteSheafTensorRight M) :=
+    comp_preservesFiniteLimits res (siteSheafTensorRight M)
+  have : PreservesFiniteColimits (res ⋙ siteSheafTensorRight M) :=
+    comp_preservesFiniteColimits res (siteSheafTensorRight M)
+  have : PreservesFiniteLimits
+      (restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map c) ⋙
+        siteSheafTensorRight M ⋙
+          toSheaf.{max r m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
+    comp_preservesFiniteLimits (res ⋙ siteSheafTensorRight M)
+      (toSheaf.{max r m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
+  have : PreservesFiniteColimits
+      (restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map c) ⋙
+        siteSheafTensorRight M ⋙
+          toSheaf.{max r m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
+    comp_preservesFiniteColimits (res ⋙ siteSheafTensorRight M)
+      (toSheaf.{max r m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
+  have : PreservesFiniteLimits (siteSheafTensorRight (changeOfRingsOfUniverses c M) ⋙
+      toSheaf.{max r m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj S)) :=
+    preservesFiniteLimits_of_natIso e
+  have : PreservesFiniteColimits (siteSheafTensorRight (changeOfRingsOfUniverses c M) ⋙
+      toSheaf.{max r m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj S)) :=
+    preservesFiniteColimits_of_natIso e
+  have : ReflectsFiniteColimits
+      (toSheaf.{max r m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj S)) :=
+    inferInstance
+  exact ⟨preservesFiniteLimits_of_reflects_of_preserves _
+    (toSheaf.{max r m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj S)),
+    preservesFiniteColimits_of_reflects_of_preserves _
+    (toSheaf.{max r m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj S))⟩
+private theorem isFlat_changeOfRingsOfUniverses (hM : IsFlatOnSite M) :
+    IsFlatOnSite (changeOfRingsOfUniverses c M) := by
+  obtain ⟨e⟩ := nonempty_scalarTensorComparisonOfUniverses c M
+  exact scalarFlat_of_tensorComparison c M e hM
+
+end ScalarExtension
 
 /-- Pullback along an arbitrary morphism of ringed topoi preserves flat module sheaves.
 The algebraic inverse-image presentation specifies transport of all ring and module
@@ -80,6 +180,8 @@ theorem isFlat_ringedToposPullback
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
     (hF : IsFlatOnSite F) : IsFlatOnSite (changeOfRingsOfUniverses (J := K) c (I.modules.obj F))
       := by
-  sorry
+  -- The inverse-image lemma isolates steps 1–6; scalar extension is proved above.
+  exact isFlat_changeOfRingsOfUniverses c (I.modules.obj F)
+    (isFlat_algebraicInverseImageOfUniverses uInv uPush adj I F hF)
 
 end SheafOfModules

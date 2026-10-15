@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-scalar-tensor-comparison-universes",
+ "kind": "statement",
+ "title": "Scalar-extension tensor associativity on underlying abelian sheaves in independent universes",
+ "statement": "Let C be a category with Grothendieck topology J, R,S sheaves of commutative rings, $c:R\\to S$ a ring-sheaf map, and M an R-module sheaf [def-weil-sheaf-of-modules-category], with the ring universe r and module universe max(r,m). Assume J.HasSheafCompose for forgetting commutative rings to rings, weak abelian sheafification [def-weil-presheaf-modules-sheafification] in universe max(r,m), and that abelian local equivalences are exactly locally bijective maps. There exists a natural isomorphism of functors from S-module sheaves to abelian sheaves: restriction of scalars Res_c [def-pc-sheaf-restrict-scalars] followed by tensoring on the right with M followed by forgetting is naturally isomorphic to tensoring on the right with S tensor_R M followed by forgetting, with both tensors and scalar extension given by [def-pur-sheaf-tensor-product]. No flatness of M or c is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05V4 (lemma-flat-change-of-rings), displayed tensor identity; Tag 03EK"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "For each S-module sheaf N use the standard base-change tensor equivalence sectionwise: n tensor m maps to n tensor (1 tensor m), and n tensor (s tensor m) maps back to (s n) tensor m. The pure-tensor formulas commute with restrictions, so these are inverse isomorphisms of underlying abelian presheaves.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The module sheafification unit of the scalar-extension presheaf P=S tensor_R M is locally bijective. Use symmetry to tensor this unit in the first variable and apply the local-bijection tensor sheafification theorem, then symmetry again. This gives an isomorphism after sheafification from N tensor_S P to N tensor_S a(P).",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-tensor-local-bijection-universes",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Combine the sectionwise base-change isomorphism and the preceding unit map before sheafification. Their composite is natural in N: on a pure tensor both sides of the naturality equation are f(n) tensor η(1 tensor m). Sheafify this natural transformation of abelian presheaves. Every component is invertible by the preceding two steps, and module sheafification commutes with forgetting to abelian sheaves.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-tensor-local-bijection-universes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-tensor-local-bijection-universes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05V4 (lemma-flat-change-of-rings), displayed tensor identity; Tag 03EK; explicit local descent and categorical details formalized by M2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with tensor products of sheaves of modules.",
+   "results": "{\"t\": \"2026-10-15T21:18:36Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension commutes with tensor products of sheaves of modules.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with tensor product of sheaves of modules by the tensor associativity comparison",
+   "results": "{\"t\": \"2026-10-15T21:00:54Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension commutes with tensor product of sheaves of modules by the tensor associativity comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendScalarsComp_hom_app_one_tmul\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"PresheafOfModules.Monoidal.tensorObj\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"PresheafOfModules.monoidalCategory\", \"PresheafOfModules.monoidalCategoryStruct\", \"ModuleCat.ExtendScalars.map_tmul\"], \"digest\": \"2a9cf70529be8c85\"}",
+   "date": "2026-10-16",
+   "verdict": "Related sectionwise and monoidal declarations exist; no natural comparison for this independent-universe sheaf tensor API."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.cancelBaseChange",
+   "results": "{\"t\": \"2026-10-15T21:00:54Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.cancelBaseChange_self_eq_lid\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul\", \"TensorProduct.AlgebraTensorModule.ker_baseChange_comp_cancelBaseChange_symm\", \"TensorProduct.AlgebraTensorModule.baseChange_comp_cancelBaseChange_symm_self\", \"LinearMap.baseChange_baseChange\", \"TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange\"], \"digest\": \"eafcfd3fbdce44cc\"}",
+   "date": "2026-10-16",
+   "verdict": "The sectionwise tensor equivalence is an ingredient, used directly; it does not include sheafification or naturality of this sheaf functor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*[Tt]ensor.*[Ss]calar|[Ss]calar.*[Tt]ensor.*[Ss]heaf",
+   "results": "{\"t\": \"2026-10-15T21:00:53Z\", \"tool\": \"grep\", \"query\": \"SheafOfModules.*[Tt]ensor.*[Ss]calar|[Ss]calar.*[Tt]ensor.*[Ss]heaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback",
+  "date": "2026-10-16",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first strict-tower pullback functor: flatness of pulled-back terms; Scalar-extension tensor associativity on underlying abelian sheaves in independent universes",
+   "via": [
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ScalarTensorComparisonOfUniverses.lean",
+  "declaration": "SheafOfModules.nonempty_scalarTensorComparisonOfUniverses",
+  "statement": "theorem nonempty_scalarTensorComparisonOfUniverses :\n    Nonempty (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map c) ⋙\n      siteSheafTensorRight M ⋙\n        toSheaf ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ≅\n      siteSheafTensorRight (changeOfRingsOfUniverses c M) ⋙\n        toSheaf ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb0f3",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261015T224109-L-2885323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb0f3",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261015T224109-L-2885323",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled cleanly; the target signature is unchanged, the sole importer compiles, DAG/report/decomposition agree, and no mechanical or forbidden-declaration faults were found."
+ }
+}

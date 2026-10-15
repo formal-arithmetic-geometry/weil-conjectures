@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+ "kind": "statement",
+ "title": "Flatness under algebraic inverse image before scalar extension",
+ "statement": "Let C,D be categories with Grothendieck topologies J,K, with independent object and morphism universes. Let R be a sheaf of commutative rings on J and RI one on K, in universe r. Let $uInv:\\operatorname{Sh}(J,\\operatorname{Type}_{\\max(r,m)})\\to\\operatorname{Sh}(K,\\operatorname{Type}_{\\max(r,m)})$ have a right adjoint and preserve finite limits. Let I be an algebraic inverse image [def-weil-pbc-algebraic-inverse-image] with its ring and module operation graph equations and underlying-sheaf isomorphisms, on module sheaves [def-weil-sheaf-of-modules-category] in universe max(r,m). On each site assume that composition preserves sheaves for the forgetful functor from commutative rings to rings, for the forgetful functor from commutative rings to sets followed by ULift to universe max(r,m), and for the forgetful functor from abelian groups in universe max(r,m) to sets followed by ULift by r. Assume weak sheafification of abelian presheaves in universe max(r,m) on each site, and that local equivalences of such abelian presheaves are exactly locally bijective maps. Use the sheaf tensor product [def-pur-sheaf-tensor-product] to define flatness. If F is a flat R-module sheaf [def-pc-flat-sheaf-modules], then I.modules.obj F is a flat RI-module sheaf. This assertion precedes any further coefficient map or scalar extension.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD (lemma-pullback-flat), inverse-image part of the proof, with Tag 08FC (local equational criterion) and Tag 03CR (site presentation)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Present the geometric morphism by a continuous finite-limit-preserving functor between sites with finite limits, up to equivalences of sheaf topoi. Transport rings and modules using their algebraic operations. Equivalences preserve balanced tensor products and finite limits and colimits, so flatness is intrinsic and can be tested on the presenting sites.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-flat-sheaf-modules",
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For that site functor the inverse image is the sheafification of the filtered colimit over pairs (V,U→v(V)). A finite relation in the inverse-image module locally lifts to the colimit, and locally its sum is zero there. Filteredness puts every coefficient and module element at one common stage, and eventual equality makes their relation zero at a later common stage. The operations induced from the stage maps agree with I because its generalized-section graph equations prescribe addition, zero and scalar multiplication.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the forward local equational criterion to the flat source module at that stage. It supplies a covering and a finite matrix factorization s_p=Σ_q b_pq t_q with Σ_p a_p b_pq=0. Pull this covering back along U→v(V). Continuity and the covering-sieve axioms make it a covering of U. The stage maps preserve the two matrix identities, giving the factorization of the original relation. The empty relation uses the empty matrix and maximal sieve.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The reverse local equational criterion makes the inverse-image module flat over the inverse-image ring. Transport this assertion back through the presenting equivalences and the underlying-sheaf and operation identifications specified by I.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD (lemma-pullback-flat), inverse-image part of the proof, with Tag 08FC (local equational criterion) and Tag 03CR (site presentation); independent-universe adaptation, formalization still open"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Algebraic inverse image along a geometric morphism preserves flat sheaves of modules over the inverse image ring.",
+   "results": "{\"t\": \"2026-10-15T21:18:36Z\", \"tool\": \"leansearch\", \"query\": \"Algebraic inverse image along a geometric morphism preserves flat sheaves of modules over the inverse image ring.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic inverse image along a geometric morphism of sheaf topoi preserves flat module sheaves over the inverse image ring",
+   "results": "{\"t\": \"2026-10-15T21:00:54Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraic inverse image along a geometric morphism of sheaf topoi preserves flat module sheaves over the inverse image ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"CategoryTheory.compatiblePreservingOfFlat\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"0a0f85b4a3f0dcb9\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: hits concern scheme flatness and ordinary ring modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"flat\"",
+   "results": "{\"t\": \"2026-10-15T21:00:54Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]lat.*[Ii]nverseImage|[Ii]nverseImage.*[Ff]lat",
+   "results": "{\"t\": \"2026-10-15T21:00:53Z\", \"tool\": \"grep\", \"query\": \"[Ff]lat.*[Ii]nverseImage|[Ii]nverseImage.*[Ff]lat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback",
+  "date": "2026-10-16",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first strict-tower pullback functor: flatness of pulled-back terms; Flatness under algebraic inverse image before scalar extension",
+   "via": [
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatAlgebraicInverseImageOfUniverses.lean",
+  "declaration": "SheafOfModules.isFlat_algebraicInverseImageOfUniverses",
+  "statement": "theorem isFlat_algebraicInverseImageOfUniverses\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]\n    [K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]\n    [J.HasSheafCompose (CategoryTheory.forget CommRingCat.{r} ⋙ uliftFunctor.{max r m, r})]\n    [K.HasSheafCompose (CategoryTheory.forget CommRingCat.{r} ⋙ uliftFunctor.{max r m, r})]\n    [J.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{max r m} ⋙ uliftFunctor.{r, max r m})]\n    [K.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{max r m} ⋙ uliftFunctor.{r, max r m})]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max r m}] [HasWeakSheafify J AddCommGrpCat.{max r m}]\n    [K.WEqualsLocallyBijective AddCommGrpCat.{max r m}]\n    [HasWeakSheafify K AddCommGrpCat.{max r m}]\n    {R : Sheaf J CommRingCat.{r}} {RI : Sheaf K CommRingCat.{r}}\n    (uInv : Sheaf J (Type (max r m)) ⥤ Sheaf K (Type (max r m)))\n    (uPush : Sheaf K (Type (max r m)) ⥤ Sheaf J (Type (max r m)))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]\n    (I : AlgebraicInverseImageOfUniverses uInv R RI)\n    (F : ringedSiteModules.{max r m, r, vC, uC}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))\n    (hF : IsFlatOnSite F) : IsFlatOnSite (I.modules.obj F)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb0f3",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261015T224109-L-2885323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-cb0f3",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261015T224109-L-2885323",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled cleanly; the target signature is unchanged, the sole importer compiles, DAG/report/decomposition agree, and no mechanical or forbidden-declaration faults were found."
+ }
+}
