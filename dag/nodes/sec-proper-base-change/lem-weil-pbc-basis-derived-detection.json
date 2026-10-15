@@ -216,5 +216,32 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-5392b3de2 (reviewer sub-agent of L); spot-checked: Reviewed the sole item and all cited nodes and sources, checked all six proof steps, edge cases, duplicate candidates, tool uses, exact target morphisms, and coefficient categories. Wrote review.md; no repair needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.BasisDerivedDetection",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.isIso_of_isIso_basis_derivedEvaluation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.smallConstantRing",
+   "AlgebraicGeometry.Scheme.ProEt.smallModules",
+   "AlgebraicGeometry.Scheme.ProEt.smallModulesEnoughInjectives",
+   "AlgebraicGeometry.Scheme.ProEt.smallDerivedPlus",
+   "AlgebraicGeometry.Scheme.ProEt.smallDerivedEvaluation",
+   "AlgebraicGeometry.Scheme.ProEt.isIso_of_isIso_basis_derivedEvaluation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/BasisDerivedDetection.lean",
+  "statement": "theorem isIso_of_isIso_basis_derivedEvaluation (X : Scheme.{u}) [IsAffine X] (R : Type u) [CommRing R] {K L : smallDerivedPlus X R} (f : K ⟶ L) (h : ∀ W : X.AffineProEt, IsIso ((smallDerivedEvaluation X R ((AffineProEt.toProEt X).obj W)).map f)) : IsIso f",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Reuses Scheme.proEtaleSiteModel and proEtaleModelTopology for the node's chosen small presentation without equating the original site's object and morphism universes. The recorded constant coefficient sheaf is transported by continuous pushforward along AsSmall.down; derived evaluation is the existing rightDerivedFunctorPlus, with enough injectives supplied by the existing small-ringed-site theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1e13f442e",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Wrote review.md. Immutable files, all statement dependencies, source proof, exact definitions, universes, edge cases, docstrings, and verbatim signature checked. Both scompile.py checks passed without diagnostics (5.9 s and 5.8 s). No fixes required; documented the existing stage-3 import limitation."
  }
 }
