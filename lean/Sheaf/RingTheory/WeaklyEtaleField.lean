@@ -8,18 +8,7 @@ module
 public import Sheaf.RingTheory.IndPrincipalZariski
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.FieldTheory.Separable
-import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
 import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleField
-import Sheaf.RingTheory.IndEtaleStability
-import Mathlib.RingTheory.Ideal.Pure
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-import Sheaf.RingTheory.FiniteTypeAlgebraFiniteSpectrum
-import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
-import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
-import Sheaf.RingTheory.WeaklyEtaleTor
 
 /-! # Weakly étale algebras over a field
 
@@ -83,6 +72,28 @@ theorem weaklyEtale_field
       (∀ p : PrimeSpectrum B,
         Algebra.IsSeparable k p.asIdeal.ResidueField ∧
           Algebra.IsAlgebraic k p.asIdeal.ResidueField) := by
-  sorry
+  set_option linter.style.haveILetI false in
+    letI : Ring.AbsolutelyFlat B :=
+    Ring.AbsolutelyFlat.of_flat_lmul' k B (Algebra.WeaklyEtale.flat_lmul' k B)
+  set_option linter.style.haveILetI false in
+    letI : Algebra.IndEtale k B := Algebra.WeaklyEtale.indEtale_field k B
+  refine ⟨?_, inferInstance, inferInstance, ?_⟩
+  · intro A hA
+    have hEt : Algebra.Etale k A := Algebra.WeaklyEtale.etale_of_fg A hA
+    set_option linter.style.haveILetI false in
+      letI : Algebra.Etale k A := hEt
+    set_option linter.style.haveILetI false in
+      letI : Algebra.FiniteType k A := hA.finiteType
+    set_option linter.style.haveILetI false in
+      letI : Module.Free k A := Module.Free.of_divisionRing k A
+    set_option linter.style.haveILetI false in
+      letI : Module.Finite k A := Algebra.FormallyUnramified.finite_of_free k A
+    exact ⟨inferInstance, hEt⟩
+  · intro p
+    have hsep : Algebra.IsSeparable k p.asIdeal.ResidueField :=
+      Algebra.IndEtale.isSeparable_residueField_of_field p.asIdeal
+    set_option linter.style.haveILetI false in
+      letI : Algebra.IsSeparable k p.asIdeal.ResidueField := hsep
+    exact ⟨hsep, Algebra.IsSeparable.isAlgebraic k p.asIdeal.ResidueField⟩
 
 end Algebra
