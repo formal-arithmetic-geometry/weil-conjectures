@@ -199,5 +199,24 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-f24a841d6 (reviewer sub-agent of L); spot-checked: Repaired item JSON adds per-step sources and complete proof dependencies, handles the omitted d=0 étale case, cites smooth relative-dimension permanence under base change, and corrects the locality/composition attribution. Review written in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8ef68083c",
+  "group": "NE",
+  "result": "fix",
+  "note": "Reviewed the statement, dependencies, sources, universes and edge cases. Mathematics is sound. Complete fixes replace the duplicate theorem with the exact upstream declaration, whose import and #check passed scompile.py, and correct the report. review.md records findings and compiler evidence; branch unchanged.; left out new module(s) lean/Sheaf/SixFunctors/Etale/SmoothBaseChange/Theorem.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem",
+  "declaration": "AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth",
+  "statement": "theorem Etale.isIso_baseChangeHomologyMap_of_smooth (p : X ⟶ S) [Smooth p] (g : T ⟶ S) (e : Y ⟶ T) (h : Y ⟶ X) [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p) (q : ℤ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheafOfInvertibleOrder S F] : IsIso (Etale.baseChangeHomologyMap Λ sq q F)",
+  "branch": "slopmaster2",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "H4 repair by the independent maintainer reader: use the exact published upstream theorem, not a duplicate side statement. Import and #check reproduced successfully through scompile.py with the local side overlay on 2026-10-15; the previously reported FiniteTypeIdealModule collision did not reproduce. The signature has the same canonical map, scheme, smoothness, qcqs, degree, coefficient and stalkwise invertible-order torsion binders as the delivered statement.",
+  "fixed_by": "NT-stage2-Codex-8ef68083c"
  }
 }
