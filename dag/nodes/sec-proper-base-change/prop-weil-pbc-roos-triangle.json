@@ -270,5 +270,35 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-bdfdff0e5 (reviewer sub-agent of L); spot-checked: Read the item, all seven steps, cited statements and sources in full; no new nodes. Corrected step 6 to factor the boundary through coker(h_{i-1}). Cone signs, localization, exact evaluation, naturality, edge cases and acyclicity check out. Review and whole corrected JSON written. Acceptance does not certify comparison with the master targets’ condensed coefficient categories.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PbcRoosTriangle",
+  "declaration": "AlgebraicGeometry.ProEtale.pbcRoosTriangle",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.pbcMilnorTests",
+   "AlgebraicGeometry.ProEtale.pbcTowerProduct",
+   "AlgebraicGeometry.ProEtale.pbcCohomologyPresheaf",
+   "AlgebraicGeometry.ProEtale.pbcProductCohomologyComparison",
+   "AlgebraicGeometry.ProEtale.pbcRoosConnecting",
+   "AlgebraicGeometry.ProEtale.pbcCohomologyTowers",
+   "AlgebraicGeometry.ProEtale.pbcFirstDerivedLimit",
+   "AlgebraicGeometry.ProEtale.pbcMilnorLeft",
+   "AlgebraicGeometry.ProEtale.pbcMilnorRight",
+   "AlgebraicGeometry.ProEtale.pbcRoosTriangle"
+  ],
+  "file": "lean/Sheaf/Paper/PbcRoosTriangle.lean",
+  "statement": "theorem pbcRoosTriangle (d : Scheme.AdicCoefficientDatum A) : ∃ (RF : DerivedCategory (Scheme.CompletedAdicTowers T d) ⥤ DerivedCategory (Scheme.CompletedAdicModules T d)) (p : RF ⟶ pbcTowerProduct T d) (δ : pbcTowerProduct T d ⟶ RF ⋙ shiftFunctor (DerivedCategory (Scheme.CompletedAdicModules T d)) (1 : ℤ)), (∀ M : DerivedCategory (Scheme.CompletedAdicTowers T d), IsDerivedLimitTriangle (fun n : ℕ ↦ ((pbcDerivedEvaluation T d).obj M).map (homOfLE (Nat.le_succ n)).op) (RF.obj M) (p.app M) (δ.app M)) ∧ ∀ i : ℤ, ∃ (a : pbcMilnorLeft T d i ⟶ RF ⋙ pbcCohomologyPresheaf T d i) (b : RF ⋙ pbcCohomologyPresheaf T d i ⟶ pbcMilnorRight T d i), ∀ (M : DerivedCategory (Scheme.CompletedAdicTowers T d)) (U : (pbcMilnorTests T).FullSubcategory), (∃ hz : (a.app M).app (op U) ≫ (b.app M).app (op U) = 0, (ShortComplex.mk ((a.app M).app (op U)) ((b.app M).app (op U)) hz).ShortExact) ∧ (∃ e : pbcFirstDerivedLimit.obj (((pbcCohomologyTowers T d (i - 1)).obj M).obj (op U)) ≅ cokernel (roosMap (((pbcCohomologyTowers T d (i - 1)).obj M).obj (op U))), pbcProductCohomologyComparison T d (i - 1) M U ≫ cokernel.π (roosMap (((pbcCohomologyTowers T d (i - 1)).obj M).obj (op U))) ≫ e.inv ≫ (a.app M).app (op U) = pbcRoosConnecting T d i (δ.app M) U) ∧ ∀ n : ℕ, (b.app M).app (op U) ≫ limit.π (((pbcCohomologyTowers T d i).obj M).obj (op U)) (op n) = ((pbcCohomologyPresheaf T d i).map (p.app M ≫ Pi.π (fun n : ℕ ↦ ((pbcDerivedEvaluation T d).obj M).obj (op n)) n)).app (op U)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c44f488d5",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Wrote review.md. Audited immutable files, dependencies, sources, exact signatures, canonical maps, universes, edge cases, and maintainer gates. Both delivered Lean modules compile cleanly through scompile.py’s local side overlay. No fixes required."
  }
 }

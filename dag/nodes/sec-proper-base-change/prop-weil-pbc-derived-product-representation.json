@@ -202,5 +202,33 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-5ad0a629c (reviewer sub-agent of L); spot-checked: Read the full item, cited nodes, unit/chapter route, blueprint, Stacks Tags 07KC/0BK6/015F, Bhatt–Scholze propositions, and coefficient definitions. The corrected proof uses the correct category Mod(T_Proet,A_T), exact countable products, levelwise evaluation, and the 07KC termwise-product theorem. Edge cases and duplicate candidates check out; no new nodes or repairs are needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PbcDerivedProductRepresentation",
+  "declaration": "AlgebraicGeometry.ProEtale.pbcDerivedProductRepresentation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.pbcComplexEvaluation",
+   "AlgebraicGeometry.ProEtale.pbcComplexEvaluation_inverts",
+   "AlgebraicGeometry.ProEtale.pbcDerivedEvaluation",
+   "AlgebraicGeometry.ProEtale.pbcEvaluationFactors",
+   "AlgebraicGeometry.ProEtale.pbcRepresentativeProductFan",
+   "AlgebraicGeometry.ProEtale.pbcDerivedProductRepresentation",
+   "AlgebraicGeometry.ProEtale.pbcDerived_hasCountableProducts"
+  ],
+  "file": "lean/Sheaf/Paper/PbcDerivedProductRepresentation.lean",
+  "statement": "theorem pbcDerivedProductRepresentation (d : Scheme.AdicCoefficientDatum A) : HasCountableProducts (DerivedCategory (Scheme.CompletedAdicModules T d)) ∧ ∀ (M : DerivedCategory (Scheme.CompletedAdicTowers T d)) (I : CochainComplex (Scheme.CompletedAdicTowers T d) ℤ) (_hI : I.IsKInjective) (e : DerivedCategory.Q.obj I ≅ M), Nonempty (IsLimit (pbcRepresentativeProductFan T d M I e))",
+  "note": "The dependency had no product-representation declaration. Use the landed CompletedAdicCoefficientDatum construction, and state its evaluated-tower product fan and countable-product theorem; canonical evaluation is localization of termwise evaluation.",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c44f488d5",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Wrote review.md. Audited immutable files, dependencies, sources, exact signatures, canonical maps, universes, edge cases, and maintainer gates. Both delivered Lean modules compile cleanly through scompile.py’s local side overlay. No fixes required."
  }
 }
