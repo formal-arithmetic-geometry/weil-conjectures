@@ -1,6 +1,6 @@
 # Work queue
 
-68 items; claim with `tools/claim.py next <group> [--stage N]`.
+66 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (68)
+## Stage 3: modules to prove (66)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -63,7 +63,6 @@
 | `Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SheafSubcategoryComparison` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleSpecializationUnitComparison` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedSliceExtensionExactness` | 9 | 1 | proof |
@@ -72,7 +71,6 @@
 | `WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionLimit` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergAcyclicAugmentation` | 10 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence` | 10 | 1 | proof |
-| `Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility` | 10 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFunctors` | 10 | 1 | proof |
 | `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence` | 11 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy` | 12 | 1 | proof |
