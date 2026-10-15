@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-proetale-ringed-closed-counit",
+ "kind": "statement",
+ "title": "Closed ringed counit is invertible",
+ "statement": "Let i:Z to X be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion] and A a sheaf of commutative rings on the small pro-etale site. Form actual module inverse image [def-weil-proetale-inverse-image] and the direct image given by base-change evaluation with action through the inverse-image ring unit [def-weil-sheaf-of-modules-category]. For every adjunction between these specified functors, its counit at every module sheaf is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA and 09BK/09BL; parent proof step 2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Work Zariski locally on $X$, so $X$ and $Z$ are affine. Use the affine ind-etale basis equivalence and the closed-site lift $v$ with base-change functor $u$. The closed-site adjunction node identifies $u(v(W))$ with $W$ for every basis object $W$. Here the inverse-image formula needs no additional lemma: for a basis object $W$, the adjunction gives $\\operatorname{Hom}(W,u(V))=\\operatorname{Hom}(v(W),V)$, naturally in $V$. Thus $(v(W),W\\to u(v(W)))$ is initial among the pairs indexing the formula, so it is terminal in their opposite category used for the colimit. Every $F(V)$ maps to $F(v(W))$ by restriction along that unique arrow, and these maps identify the colimit with $F(v(W))$, naturally in $W$ and $F$. Sheafification is then exactly the inverse-image definition. Applied to $F=i_*H$, this gives the sheafification of the presheaf $W\\mapsto(i_*H)(v(W))=H(u(v(W)))=H(W)$. This is already the restriction of the sheaf $H$ to the basis. The counit is the displayed evaluation map, so its sheafification is the identity. It follows that $i^{-1}i_*H\\to H$ is an isomorphism on the basis and hence on the full site, and the counit commutes with restriction to every object over an intersection of affine opens by its naturality. Hence the local isomorphisms are restrictions of one global counit, which is an isomorphism because those opens cover. This argument is for underlying abelian sheaves. Inverse image carries the $A$-action to an $i^{-1}A$-action, and direct image uses $A\\to i_*i^{-1}A$; the counit commutes with these actions by naturality of the adjunction with respect to multiplication. Its inverse is consequently linear, proving $i^{-1}i_*\\cong\\mathrm{id}$ for arbitrary coefficients. Any adjunction on the same functors has invertible counit by uniqueness of adjoints.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-exc-closed-site-adjunction",
+    "def-exc-closed-site-lift",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-proetale-module-inverse-image-underlying"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-exc-closed-site-lift",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-proetale-inverse-image",
+  "lem-exc-closed-site-adjunction",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-proetale-module-inverse-image-underlying"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA and 09BK/09BL; parent proof step 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open closed localization for module sheaves on a proetale site: invertible units and counits, the localization exact sequence, and closed direct image commuting with filtered colimits",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion of pro etale sites direct image exact and open closed localization of sheaves of modules",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.etaleTopology",
+   "verdict": "No exact match. The inspected hits are general categorical or algebraic constructions; the geometric pro-etale assertion is absent. Generic colimit and adjunction APIs are used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion direct image on proetale abelian sheaves preserves filtered colimits; module forgetful functor preserves and reflects colimits",
+   "date": "2026-10-16",
+   "results": "8 hits: instHasColimitsCondensedMod, AlgebraicGeometry.Scheme.IsLocallyDirected.instPreservesColimitLocallyRingedSpaceForgetToLocallyRingedSpace, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, AlgebraicGeometry.Scheme.Modules.instHasColimits, PresheafOfModules.toPresheaf_preservesColimit, AlgebraicGeometry.LocallyRingedSpace.instPreservesColimitsOfShapeSheafedSpaceCommRingCatDiscreteForgetToSheafedSpace, AlgebraicGeometry.instPreservesColimitOverSchemeTopMorphismPropertyOverForget, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat",
+   "verdict": "No exact match. The inspected hits are general categorical or algebraic constructions; the geometric pro-etale assertion is absent. Generic colimit and adjunction APIs are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*(filtered|colimit)|[Ii]sIso.*(unit|counit)|[Ee]xtension[Bb]y[Zz]ero",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean",
+   "verdict": "No exact match. The inspected hits are general categorical or algebraic constructions; the geometric pro-etale assertion is absent. Generic colimit and adjunction APIs are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: descent formula; localization and open-closed sheaf decomposition before the source (Obj) Postnikov induction. More specifically: Tags 09AA and 09BK/09BL; parent proof step 2.",
+   "via": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingedClosedCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingedClosedCounit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_ringed_closed_counit",
+  "statement": "theorem proEtale_ringed_closed_counit {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (ai : proEtaleModuleInverseImage i A ⊣\n      (SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange i)\n      (J := ProEt.topology X) (K := ProEt.topology Z)\n      (S := ((sheafCompose (ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) (R := ((sheafCompose (ProEt.topology Z)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj A)))\n      ⟨Functor.whiskerRight\n        ((proEtaleSheafAdjunction i CommRingCat.{u + 1}).unit.app A).hom\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩)) :\n    ∀ H, IsIso (ai.counit.app H)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T192133-L-1050943",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T192133-L-1050943",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

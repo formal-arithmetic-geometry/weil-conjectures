@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-proetale-ringed-filtered-colimits",
+ "kind": "statement",
+ "title": "Transfer closed filtered-colimit preservation to arbitrary module coefficients",
+ "statement": "For a closed immersion i:Z to X with X qcqs [def-pc-scheme, def-weil-closed-immersion, def-weil-pbc-scheme-conventions], and every sheaf A of commutative rings, the direct-image module functor given by base-change evaluation and scalar restriction along the actual inverse-image ring unit [def-weil-proetale-inverse-image, def-weil-sheaf-of-modules-category] preserves colimits of every small filtered diagram shape [def-weil-pbc-category-colimit, def-weil-size-convention].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Formal deduction from Tag 0738 (4) and Modules on Sites Tags 03DA/03DB; module part of parent proof step 5."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "For source and target module categories, the underlying abelian-sheaf functor preserves colimits and reflects isomorphisms, and therefore reflects colimits. Module direct image composed with this functor is definitionally equal to source forgetting followed by actual abelian direct image. The latter preserves filtered colimits by the abelian closed-direct-image theorem. Composition and reflection of colimits therefore prove the assertion without constructing module-colimit representatives again.",
+   "uses": [
+    "lem-weil-pbc-proetale-closed-abelian-filtered-colimits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-proetale-closed-abelian-filtered-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Formal deduction from Tag 0738 (4) and Modules on Sites Tags 03DA/03DB; module part of parent proof step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open closed localization for module sheaves on a proetale site: invertible units and counits, the localization exact sequence, and closed direct image commuting with filtered colimits",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion of pro etale sites direct image exact and open closed localization of sheaves of modules",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.etaleTopology",
+   "verdict": "No exact match. The inspected hits are general categorical or algebraic constructions; the geometric pro-etale assertion is absent. Generic colimit and adjunction APIs are used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion direct image on proetale abelian sheaves preserves filtered colimits; module forgetful functor preserves and reflects colimits",
+   "date": "2026-10-16",
+   "results": "8 hits: instHasColimitsCondensedMod, AlgebraicGeometry.Scheme.IsLocallyDirected.instPreservesColimitLocallyRingedSpaceForgetToLocallyRingedSpace, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, AlgebraicGeometry.Scheme.Modules.instHasColimits, PresheafOfModules.toPresheaf_preservesColimit, AlgebraicGeometry.LocallyRingedSpace.instPreservesColimitsOfShapeSheafedSpaceCommRingCatDiscreteForgetToSheafedSpace, AlgebraicGeometry.instPreservesColimitOverSchemeTopMorphismPropertyOverForget, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat",
+   "verdict": "No exact match. The inspected hits are general categorical or algebraic constructions; the geometric pro-etale assertion is absent. Generic colimit and adjunction APIs are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*(filtered|colimit)|[Ii]sIso.*(unit|counit)|[Ee]xtension[Bb]y[Zz]ero",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean",
+   "verdict": "No exact match. The inspected hits are general categorical or algebraic constructions; the geometric pro-etale assertion is absent. Generic colimit and adjunction APIs are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: descent formula; localization and open-closed sheaf decomposition before the source (Obj) Postnikov induction. More specifically: Formal deduction from Tag 0738 (4) and Modules on Sites Tags 03DA/03DB; module part of parent proof step 5.",
+   "via": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingedFilteredColimits",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingedFilteredColimits.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_ringed_filtered_colimits",
+  "statement": "theorem proEtale_ringed_filtered_colimits {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] :\n    PreservesColimitsOfShape I (SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange i)\n      (J := ProEt.topology X) (K := ProEt.topology Z)\n      (S := ((sheafCompose (ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) (R := ((sheafCompose (ProEt.topology Z)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj A)))\n      ⟨Functor.whiskerRight\n        ((proEtaleSheafAdjunction i CommRingCat.{u + 1}).unit.app A).hom\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T192133-L-1050943",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261015T192133-L-1050943",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
