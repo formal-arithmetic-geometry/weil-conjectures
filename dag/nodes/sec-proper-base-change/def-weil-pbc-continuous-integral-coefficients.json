@@ -1,0 +1,135 @@
+{
+ "id": "def-weil-pbc-continuous-integral-coefficients",
+ "kind": "definition",
+ "title": "Continuous integral coefficient ring and its reduction and rationalization maps",
+ "statement": "Let ℓ be prime and E a normed field with a normed ℚ_ℓ-algebra structure. Define O_E as the valuation ring {x : E | ‖x‖ ≤ 1}, with its subspace topology, and A=O_E/(ℓ), with its quotient topology. The ideal (ℓ) is open, so A is discrete; if E is finite dimensional over ℚ_ℓ, A is finite. Define condensed integral and residue coefficients by continuous functions on profinite sets. The actual continuous inclusion O_E→E and quotient O_E→A induce morphisms of condensed ring objects, and after pulling coefficients to a scheme X, their derived scalar-extension functors. Denote them integralScalarExtension and integralReduction. integralConstructible is the existing full subcategory of bounded complexes with locally finitely presented cohomology on a finite stratification, for the integral coefficient ring. E is the algebraic localization O_E[1/ℓ], and on every compact topological space S the actual postcomposition map C(S,O_E)→C(S,E) is localization at the constant function ℓ. Continuous A-valued functions on any topological space lift continuously through the quotient. The sequence of underlying condensed abelian groups O_E --ℓ--> O_E → A is short exact. The residue quotient is an actual morphism from the regular integral module to the restricted regular residue module; multiplication by ℓ and this map form a short exact sequence of internal integral module objects.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, integral coefficient construction used before rationalizing"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct O_E as NormedField.valuation.integer after the ultrametric instance induced by ℚ_ℓ. Use the inherited subring topology. Form the quotient by Ideal.span {ℓ}, its continuous quotient map and the continuous subtype inclusion. Apply continuousMapRingSheafMap and the existing sheaf coefficientMap, and take the existing left derived extension-of-scalars functors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The ideal (ℓ) contains the open ball of radius ‖ℓ‖: divide its elements by ℓ, whose norm is nonzero and whose quotient has norm at most one. Therefore the quotient ring is discrete. For finite E the closed unit ball is compact by finite-dimensional properness over ℚ_ℓ. Its quotient is compact and discrete, hence finite. These are actual proofs, with no chosen witness from a holed theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For E, norm powers of ℓ tend to zero, so multiplication by a power clears any denominator. For a continuous E-valued function on compact S, choose a single power using its bounded supremum norm; the scaled function is integral and continuous, proving localization uniformly, even for empty S. The quotient is discrete, so a set-theoretic section is continuous and lifts every continuous A-valued function. Its kernel is the image of multiplication by ℓ: divide a kernel section by ℓ in E; pointwise divisibility ensures that its values lie in O_E, and division is continuous. Nonzero ℓ makes multiplication injective. This proves short exactness on every profinite section. Exact sheafification and its counit isomorphism imply short exactness as condensed abelian sheaves.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the quotient as an integral-linear morphism using IsMonHom.mul_hom and tensorHom_def'. Form its short complex with multiplication by ℓ on the regular integral module. Under the forgetful functor this is definitionally the proved condensed abelian short exact sequence. Exactness and faithfulness of the forgetful functor reflect short exactness back to internal integral modules. Thus this is a concrete two-term finite free resolution, rather than a chosen witness of existence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, integral coefficient construction used before rationalizing",
+  "note": "A2 specialization to the concrete internal module objects and coefficient maps. The source argument and all additional realization identifications are recorded in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the quotient of the ring of integers of a finite extension of p-adic numbers by a nonzero principal ideal is finite",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "finite_of_compact_of_discrete",
+   "date": "2026-10-16",
+   "results": "finite_of_compact_of_discrete",
+   "verdict": "No exact match; use the stated specialization and the recorded generic lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*quotient",
+   "date": "2026-10-16",
+   "results": "Mathlib/Topology/Algebra/SeparationQuotient/FiniteDimensional.lean; Mathlib/Topology/Algebra/SeparationQuotient/FiniteDimensional.lean; Mathlib/Topology/Algebra/Ring/Compact.lean; Mathlib/Topology/Algebra/Ring/Compact.lean; Mathlib/Topology/Algebra/Ring/Compact.lean; Mathlib/Topology/Algebra/Ring/Compact.lean; Mathlib/Topology/Algebra/Ring/Compact.lean; Mathlib/Topology/Algebra/ClopenNhdofOne.lean",
+   "verdict": "No exact match; use the stated specialization and the recorded generic lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Section 6.8, integral coefficient construction used before rationalizing",
+   "via": [
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralCoefficients",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralCoefficients.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousIntegers",
+  "statement": "def continuousIntegers : Subring E",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousIntegers",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousIntegers_isLocalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousIntegralFunctions_isLocalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralCoeff",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_discreteTopology",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_finite",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_functions_surjective",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralReductionMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralReduction_comp_zero",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralReductionSequence",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralReductionSequence_shortExact",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidueDerived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructible",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralReduction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralScalarMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralScalarExtension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralQuotientLinear",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralModuleReductionSequence",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralModuleReductionSequence_shortExact"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T201713-L-1447129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T201713-L-1447129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

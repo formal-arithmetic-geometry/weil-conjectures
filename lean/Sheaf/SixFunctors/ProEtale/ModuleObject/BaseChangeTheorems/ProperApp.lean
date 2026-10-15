@@ -6,6 +6,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 import Sheaf.Paper.CondensedQbarBaseChangeCompatibility
 
+import Sheaf.Paper.IntegralReductionConservative
+import Sheaf.Paper.IntegralExchangeReduction
+import Sheaf.Paper.ContinuousExchangeIntegralModel
+
 @[expose] public section
 
 universe u
@@ -48,7 +52,23 @@ theorem isIso_boundedConstructibleBaseChange_continuousMap_app
     ∀ K : _,
       IsIso ((boundedConstructibleBaseChange
         (Profinite.continuousMapRingObj E) ℓ k sq.toCommSq).app K) := by
-  sorry
+  intro K
+  let : IsNoetherian (Spec (.of k)) := {}
+  let : IsNoetherian Y' := AlgebraicGeometry.isNoetherian_of_locallyOfFiniteType
+    (Y' ↘ Spec (.of k))
+  let : TopologicalSpace.NoetherianSpace Y' := by infer_instance
+  obtain ⟨M, ⟨e⟩⟩ := continuousExchange_integral_model ℓ E k sq K
+  have hred := integralExchange_reduction_isIso ℓ E k sq M
+  have hM : IsIso ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k
+      sq.toCommSq).app M) :=
+    integralReduction_reflects_isIso ℓ E Y' _ hred
+  have hscalar : IsIso ((integralScalarExtension ℓ E Y').map
+      ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq.toCommSq).app M).hom) :=
+    inferInstance
+  have hE : IsIso ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k
+      sq.toCommSq).app K).hom :=
+    ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff e).1 hscalar
+  exact (ObjectProperty.isIso_hom_iff _).mp hE
 
 /-- Pointwise proper base change for the condensed algebraic-closure coefficient.
 

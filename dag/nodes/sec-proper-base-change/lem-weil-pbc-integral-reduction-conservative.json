@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-integral-reduction-conservative",
+ "kind": "statement",
+ "title": "Integral derived reduction detects isomorphisms",
+ "statement": "For ℓ and finite normed E/ℚ_ℓ, use the coefficient rings and scalar functors of [def-weil-pbc-continuous-integral-coefficients]. Let X be any scheme with noetherian underlying space and M,N bounded constructible complexes of internal O_E coefficient modules. If derived reduction of a morphism φ:M→N along O_E→O_E/(ℓ) is invertible in the full residue derived category, then φ is invertible. No properness or exchange assumption is made.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3), integral constructibility and derived Nakayama"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Identify finite presentations of the pulled continuous integral coefficient ring with the integral constructible sheaves of Proposition 6.8.11(3), using the coefficient realization on pro-etale neighborhoods. Establish closure under kernels, cokernels and extensions for these particular integral coefficients: noetherianity of the scheme is not by itself sufficient. The stratified finite presentation description and the DVR structure imply these coefficient-dependent closure assertions.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cone C of φ is bounded constructible by the weak Serre class criterion. Derived tensor reduction takes it to the cone of the reduced morphism, which is zero.",
+   "uses": [
+    "prop-weil-pbc-module-bounded-constructible-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each stratum, top-degree right exactness of derived tensor identifies H^b(C⊗^L A) with H^b(C)⊗ A whenever C has no cohomology above b. This zero reduction forces the locally finite O_E-module H^b(C) to be zero, since ℓ belongs to the maximal ideal and Nakayama applies. Repeat through the finite interval of possible cohomology. All cohomology vanishes, so C=0 and φ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "prop-weil-pbc-module-bounded-constructible-triangulated",
+  "lem-weil-pbc-nakayama-jacobson"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3), integral constructibility and derived Nakayama",
+  "note": "A2 specialization to the concrete internal module objects and coefficient maps. The source argument and all additional realization identifications are recorded in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived Nakayama: reduction modulo a prime detects isomorphisms of bounded complexes with finitely presented cohomology over a complete discrete valuation ring",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isIso_iff",
+   "date": "2026-10-16",
+   "results": "DerivedCategory.isIso_iff",
+   "verdict": "No exact match; use the stated specialization and the recorded generic lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "Nakayama|nakayama|reduction.*reflect",
+   "date": "2026-10-16",
+   "results": "No hits.",
+   "verdict": "No exact match; use the stated specialization and the recorded generic lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Proposition 6.8.11(3), integral constructibility and derived Nakayama",
+   "via": [
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionConservative",
+  "file": "lean/Sheaf/Paper/IntegralReductionConservative.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralReduction_reflects_isIso",
+  "statement": "theorem integralReduction_reflects_isIso (X : Scheme.{u})\n    [TopologicalSpace.NoetherianSpace X]\n    {M N : ProEtale.BoundedConstructible (condensedRingObj (integralCoeff ℓ E) X)}\n    (φ : M ⟶ N)\n    (hφ : IsIso ((integralReduction ℓ E X).map φ.hom)) : IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T201713-L-1447129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T201713-L-1447129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

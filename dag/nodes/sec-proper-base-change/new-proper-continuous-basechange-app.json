@@ -16,20 +16,31 @@
  },
  "proof": [
   {
-   "text": "Descend the bounded constructible object to the finite-coefficient realization, apply finite-coefficient proper base change, and transport the inverse through the coefficient-change comparison isomorphisms and the filtered two-colimit presentation.",
+   "text": "Choose a bounded constructible integral model M of the continuous E exchange at K, retaining the actual Arrow isomorphism with its E scalar extension.",
    "uses": [
-    "lem-weil-pbc-condensed-e-realization",
-    "thm-weil-pbc-finite-extension",
-    "prop-weil-pbc-qbar-condensed-two-colimit"
+    "lem-weil-pbc-continuous-exchange-integral-model"
    ],
    "elementary": false
+  },
+  {
+   "text": "The integral exchange at M becomes invertible after residue reduction by proper torsion base change. The scheme Y′ is noetherian because it is of finite type over a field, so integral reduction conservativity makes the integral exchange itself invertible.",
+   "uses": [
+    "lem-weil-pbc-integral-exchange-reduction",
+    "lem-weil-pbc-integral-reduction-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derived E scalar extension preserves isomorphisms. Transport invertibility through the Arrow isomorphism of step 1 and reflect it from the ambient full subcategory morphism to the bounded constructible morphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_origin": {
-  "by": "A2",
-  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
-  "place": "Componentwise reduction in the proper base-change proof",
-  "note": "The component theorem is isolated because the finite-stage realization and coefficient-change compatibility are not yet completed Lean declarations."
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 6.7--6.8; integral reduction and rationalization proof specialized to actual exchange components",
+  "note": "A2 proved the categorical assembly and finite torsion reduction, retaining three strictly smaller realization/conservativity obligations. The qbar filtered two-colimit is not used in the finite-E component proof."
  },
  "mathlib_searches": [
   {
@@ -63,9 +74,9 @@
  ],
  "stmt_deps": [],
  "proof_deps": [
-  "lem-weil-pbc-condensed-e-realization",
-  "thm-weil-pbc-finite-extension",
-  "prop-weil-pbc-qbar-condensed-two-colimit"
+  "lem-weil-pbc-continuous-exchange-integral-model",
+  "lem-weil-pbc-integral-exchange-reduction",
+  "lem-weil-pbc-integral-reduction-conservative"
  ],
  "created": {
   "by": "worker",
@@ -104,15 +115,8 @@
   "reviewer": "COMPILER",
   "group": "A2",
   "result": "pass",
-  "landing": "20261015T175721-L-667108",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_continuousMap_app",
-   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_padicAlgCl_app"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_continuousMap_app"
-  ]
+  "landing": "20261015T201713-L-1447129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

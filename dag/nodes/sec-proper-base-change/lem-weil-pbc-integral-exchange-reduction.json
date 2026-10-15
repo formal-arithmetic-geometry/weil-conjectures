@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-integral-exchange-reduction",
+ "kind": "statement",
+ "title": "Proper integral exchange is invertible after residue reduction",
+ "statement": "Use the coefficient construction [def-weil-pbc-continuous-integral-coefficients] and the same separated finite-type k-square and finite normed E/ℚ_ℓ hypotheses as in [lem-weil-pbc-integral-finite-exchange-comparison]. If f:X→Y is proper and the square is Cartesian, then for every bounded constructible integral complex M the derived reduction of its specified integral boundedConstructibleBaseChange component is invertible in the residue derived category.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.7, finite torsion proper base change, with Section 6.8 coefficient reduction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the etale bounded-below complex L, functor F and arrow comparison from the finite exchange realization.",
+   "uses": [
+    "lem-weil-pbc-integral-finite-exchange-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The residue ring is finite, so every element of ULift A has finite additive order. Apply Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring to the Cartesian square. This is the existing bounded-below torsion theorem, retaining the projective-line, prime and torsion assembly route of the blueprint unit.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients",
+    "thm-weil-pbc-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A component of an invertible natural transformation is invertible, and every functor preserves isomorphisms. Transport that property from F applied to the etale component across the obtained Arrow isomorphism, using MorphismProperty.arrow_mk_iso_iff.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-finite-exchange-comparison",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "thm-weil-pbc-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.7, finite torsion proper base change, with Section 6.8 coefficient reduction",
+  "note": "A2 specialization to the concrete internal module objects and coefficient maps. The source argument and all additional realization identifications are recorded in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper base change for bounded below etale sheaves of modules over an additive torsion ring",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.arrow_mk_iso_iff",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.MorphismProperty.arrow_mk_iso_iff",
+   "verdict": "No exact match; use the stated specialization and the recorded generic lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*baseChange|baseChange.*proper",
+   "date": "2026-10-16",
+   "results": "Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/AffineSpace.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/Affine.lean; Mathlib/AlgebraicGeometry/OpenImmersion.lean; Mathlib/AlgebraicGeometry/OpenImmersion.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean",
+   "verdict": "No exact match; use the stated specialization and the recorded generic lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Section 6.7, finite torsion proper base change, with Section 6.8 coefficient reduction",
+   "via": [
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralExchangeReduction",
+  "file": "lean/Sheaf/Paper/IntegralExchangeReduction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralExchange_reduction_isIso",
+  "statement": "theorem integralExchange_reduction_isIso [IsProper f]\n    (sq : IsPullback g' f' f g)\n    (M : integralConstructible ℓ E X) :\n    IsIso ((integralReduction ℓ E Y').map\n      ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq.toCommSq).app M).hom)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T201713-L-1447129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261015T201713-L-1447129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
