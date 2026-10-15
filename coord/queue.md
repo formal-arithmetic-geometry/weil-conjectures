@@ -1,6 +1,6 @@
 # Work queue
 
-79 items; claim with `tools/claim.py next <group> [--stage N]`.
+70 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (79)
+## Stage 3: modules to prove (70)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -41,11 +41,7 @@
 | `Sheaf.Paper.RingedTopoiDerivedPullback` | 5 | 1 | proof |
 | `Sheaf.Paper.RingedTopoiDerivedTensorPullback` | 5 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic` | 5 | 1 | proof |
-| `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatQuotientTensorSES` | 6 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback` | 6 | 1 | proof |
-| `Sheaf.Algebra.Homology.AcyclicKFlatCyclesFlat` | 6 | 1 | proof |
-| `Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution` | 6 | 1 | proof |
-| `Sheaf.Algebra.Homology.KFlatIndependentCoefficients` | 6 | 5 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishing` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 6 | 1 | proof |
@@ -66,12 +62,10 @@
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleOpenCohomologyRestrictionCompatibility` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSpecializationUnitComparison` | 8 | 1 | proof |
-| `Sheaf.CategoryTheory.DerivedCategory.AdjointSquareComparison` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SheafSubcategoryComparison` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation` | 9 | 1 | proof |
-| `Sheaf.CategoryTheory.ContinuousCocontinuousToposAdjunctionForCoverings` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedSliceExtensionExactness` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedSliceExtensionTensor` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.SmallSetOfCoveringFamilies` | 9 | 1 | proof |
@@ -81,12 +75,9 @@
 | `Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence` | 10 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility` | 10 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFunctors` | 10 | 1 | proof |
-| `Sheaf.Paper.CartanEilenbergLeftExactCohomology` | 10 | 1 | proof |
-| `Sheaf.CategoryTheory.CartanEilenbergComparisonHomotopy` | 11 | 1 | proof |
 | `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence` | 11 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy` | 12 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy` | 13 | 1 | proof |
-| `Sheaf.CategoryTheory.HorizontalComparisonLift` | 13 | 1 | proof |
 | `Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly` | 14 | 1 | proof |
 | `Sheaf.CategoryTheory.FilteredHomologyTowerDifferential` | 19 | 1 | proof |
 | `Sheaf.CategoryTheory.FilteredHomologyTowerQuotients` | 19 | 1 | proof |
