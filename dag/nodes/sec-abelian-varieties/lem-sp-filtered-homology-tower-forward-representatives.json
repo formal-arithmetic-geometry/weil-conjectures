@@ -1,0 +1,137 @@
+{
+ "id": "lem-sp-filtered-homology-tower-forward-representatives",
+ "kind": "statement",
+ "title": "Forward derived-couple map on filtered representatives",
+ "statement": "Let C be an abelian category [def-sp-abelian] and U=(K,F) a finite filtered cochain complex [def-sp-filtration]. Let X be its homology exact couple [def-sp-filtered-homology-exact-couple] and T its canonical tower [def-sp-convergence]. Suppose families j_s and t_s map the filtered cycle subobjects [def-sp-filtered-complex-subquotients] into graded-complex cycles and T.Z, with j_s iCycles equal to the cycle-subobject inclusion and t_s T.Z.arrow EIso.hom=j_s homologyπ. Let I_n:pageCouple(n).D(P,Q)->X.D(P,Q) be monic, I_0=id and I_(n+1)=derivedDInclusion followed by I_n. For s natural and p,q integers put p'=p+s+1, q'=q-s, P=2p'+q', Q=-p', n'=p'+q'=p+q+1. Let e:X.D(P,Q)->pageCouple(s).D(P-s,Q+s) satisfy e followed by I_s=alphaIter_s. For any object A, a:A->F^p K in degree p+q, b:A->cycles(F^p' K,n'), and x:A->Z_(s+1)^(p,q), assume that da is the ambient inclusion of b and x's graded inclusion is a's graded projection. Then x followed by t_s, T.projection, page f and the equality transport to page D(P-s,Q+s) equals b followed by homologyπ, the equality transport to X.D(P,Q), and e. This is an identity into the derived D object before applying g.",
+ "source": {
+  "document": "Stacks Project, Homology",
+  "place": "Tag 012K, representative differential formula preceding Lemma 12.24.2; Tag 011R, derived forward-map restriction equation"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtered-homology-exact-couple",
+  "def-sp-convergence",
+  "def-sp-exact-couple"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the page number. At zero use the identity projection and hI0. At a successor use projection_succ, hIs, the derived-f restriction equation and cycleLift_comm. This gives projection followed by page f followed by I equals the original cycle inclusion followed by original f. This is the generic calculation also used privately in FiniteCycleFormula.",
+   "uses": [
+    "def-sp-convergence",
+    "def-sp-exact-couple"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold the filtered exact couple: the original f, conjugated by the initial homology isomorphism, is the connecting map of F^(p+1) into F^p onto gr^p. Apply Mathlib ShortComplex.ShortExact.δ_eq with the supplied graded cycle x followed by j and lift a. The equation ha identifies its differential with the inclusion of the cycle b. Thus the result is the class of b under the homology map of F^(p+s+1) into F^(p+1).",
+   "uses": [
+    "def-sp-filtered-homology-couple-data",
+    "def-sp-filtered-homology-exact-couple",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on s, using functoriality of homologyMap and the composition law for subobject inclusions, to identify alphaIter with the homology map of the same filtration inclusion. The equation he now identifies the right-hand side after I with the computed connecting class. Cancel the monomorphism hImono. Integer arithmetic identifies the degrees and the equality transports.",
+   "uses": [
+    "def-sp-convergence",
+    "def-sp-filtered-homology-couple-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-exact-couple",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtered-homology-couple-data",
+  "def-sp-filtered-homology-exact-couple"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homology; Mathlib; existing Sheaf calculations",
+  "place": "Tags 012K and 011R; ShortComplex.ShortExact.δ_eq; private calculations in FilteredHomologyTowerQuotients and FiniteCycleFormula",
+  "note": "Repair of the duplicate-helper return. The five existing private helper proofs are relocated unchanged from FilteredHomologyTowerQuotients into FilteredHomologyTowerForwardRepresentatives. The quotient module imports this single implementation through a proof-only import all, avoiding both duplicate statements and an import cycle. Every helper and the forward identity are completely proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*forward|f_comm|alphaIter",
+   "date": "2026-10-15",
+   "results": "{\"t\": \"2026-10-15T22:40:15Z\", \"tool\": \"grep\", \"query\": \"derived.*forward|f_comm|alphaIter\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Embedding/Connect.lean\", \"Mathlib/Algebra/Homology/Embedding/Connect.lean\", \"Mathlib/Algebra/Homology/Embedding/Connect.lean\", \"Mathlib/Algebra/Homology/Embedding/Connect.lean\", \"Mathlib/Algebra/Homology/Embedding/Connect.lean\"], \"digest\": \"c4abf812d28c3885\"}",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.δ_eq",
+   "date": "2026-10-15",
+   "results": "{\"t\": \"2026-10-15T22:40:15Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ShortComplex.ShortExact.δ_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.δ_eq\"], \"digest\": \"8ae9b987d3a742c9\"}",
+   "verdict": "use δ_eq for the initial connecting calculation; no exact filtered tower theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forward map of derived exact couple sends filtered representative to lifted connecting homology class in image of iterated filtration inclusion",
+   "date": "2026-10-15",
+   "results": "{\"t\": \"2026-10-15T22:40:15Z\", \"tool\": \"leanfinder\", \"query\": \"forward map of derived exact couple sends filtered representative to lifted connecting homology class in image of iterated filtration inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.δ_eq'\", \"CategoryTheory.ShortComplex.ShortExact.δ_apply'\", \"CategoryTheory.ShortComplex.ShortExact.δ_apply\", \"HomologicalComplex.HomologySequence.composableArrows₅\", \"CategoryTheory.ShortComplex.ShortExact.δ_eq\", \"HomologicalComplex.HomologySequence.mapComposableArrows₅\", \"DerivedCategory.HomologySequence.δ_comp\", \"DerivedCategory.HomologySequence.comp_δ\"], \"digest\": \"ba4bf9090dca210b\"}",
+   "verdict": "use δ_eq for the initial connecting calculation; no exact filtered tower theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The forward map in the iterated derived exact couple of a filtered cochain complex takes a graded cycle representative to its lifted connecting homology class in the iterated image of the filtration inclusion",
+   "date": "2026-10-15",
+   "results": "{\"t\": \"2026-10-15T22:57:19Z\", \"tool\": \"leansearch\", \"query\": \"The forward map in the iterated derived exact couple of a filtered cochain complex takes a graded cycle representative to its lifted connecting homology class in the iterated image of the filtration inclusion\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredHomologyTowerDifferential",
+  "date": "2026-10-16",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-filtered-homology-tower-differential",
+   "place": "forward f half of the representative differential calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredHomologyTowerForwardRepresentatives",
+  "file": "lean/Sheaf/CategoryTheory/FilteredHomologyTowerForwardRepresentatives.lean",
+  "declaration": "CategoryTheory.filteredHomology_tower_forward_representatives",
+  "statement": "theorem filteredHomology_tower_forward_representatives\n    (C : Type u) [Category.{v} C] [Abelian C]\n    (U : ObjectProperty.FullSubcategory\n          (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite))\n    (j : ∀ (s : ℕ) (p q : ℤ),\n      (U.obj.filtration.complexCycles p (p + q) (s + 1) : C) ⟶\n        (U.obj.filtration.gradedPiece p).cycles (p + q))\n    (tQ : ∀ (s : ℕ) (p q : ℤ),\n      (U.obj.filtration.complexCycles p (p + q) (s + 1) : C) ⟶\n        ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).cycleBoundaryTower.Z\n          s (2 * p + q) (-p) : C))\n    (hj : ∀ (s : ℕ) (p q : ℤ),\n      j s p q ≫ (U.obj.filtration.gradedPiece p).iCycles (p + q) =\n        (U.obj.filtration.complexCycles p (p + q) (s + 1)).arrow)\n    (ht : ∀ (s : ℕ) (p q : ℤ),\n      tQ s p q ≫\n          ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).cycleBoundaryTower.Z\n            s (2 * p + q) (-p)).arrow ≫\n          (filteredHomologyEIso U.obj.obj U.obj.filtration p q).hom =\n        j s p q ≫ (U.obj.filtration.gradedPiece p).homologyπ (p + q))\n    (I : ∀ (n : ℕ) (P Q : ℤ),\n      ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple n).D P Q ⟶\n        (filteredHomologyExactCouple U.obj.obj U.obj.filtration).D P Q)\n    (hI0 : ∀ P Q : ℤ, I 0 P Q = 𝟙 _)\n    (hIs : ∀ (n : ℕ) (P Q : ℤ), I (n + 1) P Q =\n      ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple n).derivedDInclusion\n        P Q ≫ I n P Q)\n    (hImono : ∀ (n : ℕ) (P Q : ℤ), Mono (I n P Q))\n    (s : ℕ) (p q : ℤ)\n    (e : (filteredHomologyExactCouple U.obj.obj U.obj.filtration).D\n        (2 * (p + (s + 1)) + (q - (s + 1) + 1)) (-(p + (s + 1))) ⟶\n      ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple s).D\n        (2 * (p + (s + 1)) + (q - (s + 1) + 1) - s) (-(p + (s + 1)) + s))\n    (he : e ≫ I s (2 * (p + (s + 1)) + (q - (s + 1) + 1) - s)\n        (-(p + (s + 1)) + s) =\n      (filteredHomologyExactCouple U.obj.obj U.obj.filtration).alphaIter s\n        (2 * (p + (s + 1)) + (q - (s + 1) + 1)) (-(p + (s + 1))))\n    (A : C)\n    (a : A ⟶ (U.obj.filtration.step p : CochainComplex C ℤ).X (p + q))\n    (b : A ⟶ (U.obj.filtration.step (p + (s + 1)) : CochainComplex C ℤ).cycles\n      (p + (s + 1) + (q - (s + 1) + 1)))\n    (x : A ⟶ (U.obj.filtration.complexCycles p (p + q) (s + 1) : C))\n    (ha : a ≫ (U.obj.filtration.step p).arrow.f (p + q) ≫\n        U.obj.obj.d (p + q) (p + (s + 1) + (q - (s + 1) + 1)) =\n      b ≫ (U.obj.filtration.step (p + (s + 1)) : CochainComplex C ℤ).iCycles\n        (p + (s + 1) + (q - (s + 1) + 1)) ≫\n          (U.obj.filtration.step (p + (s + 1))).arrow.f\n            (p + (s + 1) + (q - (s + 1) + 1)))\n    (hx : x ≫ (U.obj.filtration.complexCycles p (p + q) (s + 1)).arrow =\n      a ≫ (U.obj.filtration.complexQuotientπ p (p + 1) (by omega)).f (p + q)) :\n    x ≫ tQ s p q ≫\n        (filteredHomologyExactCouple U.obj.obj U.obj.filtration).cycleBoundaryTower.projection\n          s (2 * p + q) (-p) ≫\n        ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple s).f\n          (2 * p + q) (-p) ≫\n        eqToHom (show\n          ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple s).D\n              (2 * p + q + 2) (-p - 1) =\n            ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple s).D\n              (2 * (p + (s + 1)) + (q - (s + 1) + 1) - s)\n              (-(p + (s + 1)) + s) by congr 1 <;> omega) =\n      b ≫ (U.obj.filtration.step (p + (s + 1)) : CochainComplex C ℤ).homologyπ\n          (p + (s + 1) + (q - (s + 1) + 1)) ≫\n        eqToHom (by\n          change (U.obj.filtration.step (p + (s + 1)) : CochainComplex C ℤ).homology\n              (p + (s + 1) + (q - (s + 1) + 1)) =\n            (U.obj.filtration.step (-(-(p + (s + 1)))) : CochainComplex C ℤ).homology\n              (2 * (p + (s + 1)) + (q - (s + 1) + 1) + -(p + (s + 1)))\n          rw [neg_neg]\n          congr 1; omega) ≫ e",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-1e9fe",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518739",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-1e9fe",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261015T235420-L-3518739",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered mirror compiles cleanly; original Quotients against changed dependencies and adapted importer compile; signatures, DAG, proofs, and axioms satisfy the stage-3 brief."
+ }
+}

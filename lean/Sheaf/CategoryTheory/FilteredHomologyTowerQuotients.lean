@@ -13,6 +13,7 @@ import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
 import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
 import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
 import Sheaf.CategoryTheory.FilteredHomologyTowerDifferential
+import all Sheaf.CategoryTheory.FilteredHomologyTowerForwardRepresentatives
 import Sheaf.CategoryTheory.FiniteCycleFormula
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
@@ -28,81 +29,6 @@ set_option backward.isDefEq.respectTransparency false
 universe u v
 open CategoryTheory.Limits
 namespace CategoryTheory
-
-private theorem inclusion_homology_heq
-    {C : Type u} [Category.{v} C] [Abelian C]
-    (K : CochainComplex C ℤ) (F : DecreasingFiltration K)
-    (a b a' b' n n' : ℤ) (h : b ≤ a) (h' : b' ≤ a')
-    (ha : a = a') (hb : b = b') (hn : n = n') :
-    HomologicalComplex.homologyMap
-        (Subobject.ofLE (F.step a) (F.step b) (F.antitone_step h)) n ≍
-      HomologicalComplex.homologyMap
-        (Subobject.ofLE (F.step a') (F.step b') (F.antitone_step h')) n' := by
-  subst a' b' n'
-  rfl
-
-private theorem filtered_alphaIter
-    {C : Type u} [Category.{v} C] [Abelian C]
-    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (s : ℕ) (P Q : ℤ) :
-    (filteredHomologyExactCouple K F).alphaIter s P Q ≍
-      HomologicalComplex.homologyMap
-        (Subobject.ofLE (F.step (-Q)) (F.step (-(Q + (s : ℤ))))
-          (F.antitone_step (by omega))) (P + Q) := by
-  induction s generalizing P Q with
-  | zero =>
-    simp only [BigradedExactCouple.alphaIter]
-    apply (eqToHom_heq_id_dom _ _ _).trans
-    have hh : HomologicalComplex.homologyMap
-        (Subobject.ofLE (F.step (-Q)) (F.step (-Q)) le_rfl) (P + Q) = 𝟙 _ := by
-      simp
-    apply (heq_of_eq hh).symm.trans
-    exact inclusion_homology_heq K F _ _ _ _ _ _ le_rfl (by omega) rfl (by omega) rfl
-  | succ s ih =>
-    let l := Subobject.ofLE (F.step (-Q)) (F.step (-(Q + 1)))
-      (F.antitone_step (by omega))
-    let m := Subobject.ofLE (F.step (-(Q + 1))) (F.step (-(Q + 1 + (s : ℤ))))
-      (F.antitone_step (by omega))
-    have h : (filteredHomologyExactCouple K F).alphaIter (s + 1) P Q ≍
-        HomologicalComplex.homologyMap l (P + Q) ≫
-          HomologicalComplex.homologyMap m (P + Q) := by
-      simp only [BigradedExactCouple.alphaIter, filteredHomologyExactCouple,
-        BigradedExactCouple.ofShifted_alpha]
-      simp only [filteredHomologyAlpha, Category.assoc]
-      apply heq_comp rfl rfl (by
-        change (F.step (-(Q + (s + 1 : ℕ))) : CochainComplex C ℤ).homology
-          (P - (s + 1 : ℕ) + (Q + (s + 1 : ℕ))) = _
-        apply congrArg₂ (fun a n ↦ (F.step a : CochainComplex C ℤ).homology n) <;> omega)
-        HEq.rfl
-      simp only [eqToHom_comp_heq_iff, comp_eqToHom_heq_iff]
-      apply (ih (P - 1) (Q + 1)).trans
-      exact inclusion_homology_heq K F _ _ _ _ _ _ (by omega) (by omega)
-        rfl rfl (by omega)
-    apply h.trans
-    rw [← HomologicalComplex.homologyMap_comp]
-    dsimp only [l, m]
-    rw [Subobject.ofLE_comp_ofLE]
-    exact inclusion_homology_heq K F _ _ _ _ _ _ (by omega) (by omega)
-      rfl (by omega) rfl
-
-private theorem connecting_heq
-    {C : Type u} [Category.{v} C] [Abelian C]
-    (K : CochainComplex C ℤ) (F : DecreasingFiltration K)
-    (p n p' n' : ℤ) (hp : p = p') (hn : n = n') :
-    (filteredStep_shortExact K F p).δ n (n + 1) rfl ≍
-      (filteredStep_shortExact K F p').δ n' (n' + 1) rfl := by
-  subst p' n'
-  rfl
-
-private theorem filtered_initial_f
-    {C : Type u} [Category.{v} C] [Abelian C]
-    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (p q : ℤ) :
-    (filteredHomologyEIso K F p q).inv ≫
-        (filteredHomologyExactCouple K F).f (2 * p + q) (-p) ≍
-      (filteredStep_shortExact K F p).δ (p + q) (p + q + 1) rfl := by
-  simp only [filteredHomologyEIso, eqToIso, filteredHomologyExactCouple,
-    BigradedExactCouple.ofShifted_f, filteredHomologyF,
-    eqToHom_comp_heq_iff, comp_eqToHom_heq_iff]
-  exact connecting_heq K F _ _ _ _ (by omega) (by omega)
 
 private theorem filtered_incoming_alpha
     {C : Type u} [Category.{v} C] [Abelian C]
@@ -180,67 +106,6 @@ private theorem epi_quotient_iso
   let e := hc.coconePointUniqueUpToIso (cokernelIsCokernel b)
   exact ⟨e, hc.comp_coconePointUniqueUpToIso_hom (cokernelIsCokernel b)
     WalkingParallelPair.one⟩
-
-private theorem connecting_representative
-    {C : Type u} [Category.{v} C] [Abelian C]
-    (K : CochainComplex C ℤ) (F : DecreasingFiltration K)
-    (p n r : ℤ) (hr : 1 ≤ r) {A : C}
-    (a : A ⟶ (F.step p : CochainComplex C ℤ).X n)
-    (a' : A ⟶ (F.step (p + r) : CochainComplex C ℤ).X (n + 1))
-    (g : A ⟶ (F.gradedPiece p).cycles n)
-    (ha : a ≫ (F.step p).arrow.f n ≫ K.d n (n + 1) =
-      a' ≫ (F.step (p + r)).arrow.f (n + 1))
-    (hg : g ≫ (F.gradedPiece p).iCycles n =
-      a ≫ (F.complexQuotientπ p (p + 1) (by omega)).f n) :
-    ∃ z : A ⟶ (F.step (p + r) : CochainComplex C ℤ).cycles (n + 1),
-      z ≫ (F.step (p + r) : CochainComplex C ℤ).iCycles (n + 1) = a' ∧
-      g ≫ (F.gradedPiece p).homologyπ n ≫
-          (filteredStep_shortExact K F p).δ n (n + 1) rfl =
-        z ≫ (F.step (p + r) : CochainComplex C ℤ).homologyπ (n + 1) ≫
-          HomologicalComplex.homologyMap
-            (Subobject.ofLE (F.step (p + r)) (F.step (p + 1))
-              (F.antitone_step (by omega))) (n + 1) := by
-  let l := Subobject.ofLE (F.step (p + r)) (F.step (p + 1))
-    (F.antitone_step (by omega))
-  have hz : a' ≫ (F.step (p + r) : CochainComplex C ℤ).d (n + 1) (n + 2) = 0 := by
-    apply (cancel_mono ((F.step (p + r)).arrow.f (n + 2))).mp
-    rw [Category.assoc, ← (F.step (p + r)).arrow.comm, ← Category.assoc,
-      ← ha, Category.assoc, Category.assoc, K.d_comp_d, comp_zero, comp_zero,
-      zero_comp]
-  let z := (F.step (p + r) : CochainComplex C ℤ).liftCycles a' (n + 2) (by simp; omega) hz
-  have hzi : z ≫ (F.step (p + r) : CochainComplex C ℤ).iCycles (n + 1) = a' :=
-    HomologicalComplex.liftCycles_i _ _ _ _ _
-  have hb : (a' ≫ l.f (n + 1)) ≫
-      (Subobject.ofLE (F.step (p + 1)) (F.step p) (F.antitone_step (by omega))).f
-        (n + 1) = a ≫ (F.step p : CochainComplex C ℤ).d n (n + 1) := by
-    apply (cancel_mono ((F.step p).arrow.f (n + 1))).mp
-    simp only [Category.assoc, ← HomologicalComplex.comp_f, Subobject.ofLE_arrow]
-    simp only [l, Subobject.ofLE_arrow]
-    rw [← (F.step p).arrow.comm]
-    exact ha.symm
-  have hδ := (filteredStep_shortExact K F p).δ_eq n (n + 1) rfl
-    (g ≫ (F.gradedPiece p).iCycles n)
-    (by
-      change (g ≫ (F.gradedPiece p).iCycles n) ≫ (F.gradedPiece p).d n (n + 1) = 0
-      simp only [Category.assoc, HomologicalComplex.iCycles_d, comp_zero])
-    a hg.symm (a' ≫ l.f (n + 1)) hb (n + 2) (by simp; omega)
-  dsimp only at hδ
-  have hg' : (F.gradedPiece p).liftCycles
-      (g ≫ (F.gradedPiece p).iCycles n) (n + 1) (by simp) (by simp) = g := by
-    apply (cancel_mono ((F.gradedPiece p).iCycles n)).mp
-    simp
-  have hz' : (F.step (p + 1) : CochainComplex C ℤ).liftCycles
-      (a' ≫ l.f (n + 1)) (n + 2) (by simp; omega) (by
-        rw [Category.assoc, l.comm, ← Category.assoc, hz, zero_comp]) =
-        z ≫ HomologicalComplex.cyclesMap l (n + 1) := by
-    apply (cancel_mono ((F.step (p + 1) : CochainComplex C ℤ).iCycles (n + 1))).mp
-    rw [HomologicalComplex.liftCycles_i, Category.assoc,
-      HomologicalComplex.cyclesMap_i, ← Category.assoc, hzi]
-  refine ⟨z, hzi, ?_⟩
-  erw [hg', hz'] at hδ
-  simpa only [l, DecreasingFiltration.complexQuotient,
-    DecreasingFiltration.gradedPiece, DecreasingFiltration.gr, Category.assoc,
-    HomologicalComplex.homologyπ_naturality] using hδ
 
 private theorem cycles_antitone
     {C : Type u} [Category.{v} C] [Abelian C]

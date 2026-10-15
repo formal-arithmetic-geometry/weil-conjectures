@@ -16,22 +16,42 @@
  ],
  "proof": [
   {
-   "text": "The equations with the monic graded-cycle inclusions determine j uniquely. Likewise T.Z.arrow and e0 are monic, so the normalization determines t uniquely. Composing the normalization with an unquotiented representative expresses its initial E class as its graded homology class. At s=0, T.projection is its subobject arrow. The definition of X.f is the connecting map of F^(p+1)->F^p->gr^p. The homology-sequence kernel/cokernel construction computes this map by applying the ambient differential to a lift a. The equation on a and aprime therefore identifies its value with the homology class of aprime in F^(p+1). Applying X.g projects to gr^(p+1), giving the stated equation for r=1.",
+   "text": "The differential of aprime vanishes after the monic filtration inclusion since d squared is zero. Construct its unique lift b to the cycles of F^(p+s+1).",
    "uses": [
-    "def-sp-filtered-homology-exact-couple",
-    "def-sp-filtered-homology-couple-data",
-    "def-sp-convergence",
     "def-sp-filtered-complex-subquotients"
    ],
    "elementary": false
   },
   {
-   "text": "For the successor, a representative whose differential lies in F^(p+s+2) belongs to the previous differential kernel. In the derived couple, f is the factorization of the previous f through the image of alpha, and g is induced by lifting along alpha and then projecting the previous g to homology. Factor the inclusion of F^(p+s+2) through F^(p+s+1); the differential equation for a says exactly that its connecting class has this lift. The defining equations of these two derived maps identify the successor differential with the class of aprime. The canonical tower projection recurrence is cycleLift followed by derivedEProjection; it makes this calculation agree with t at the successor through the monic normalization. Induction gives the equation at every s. Pullbacks along epimorphisms implement any representative lifts in the abelian category; no map from a projective object is required. The target equalities are 2p+q+2+s=2(p+s+1)+(q-s) and -p-1-s=-(p+s+1).",
+   "text": "Choose the canonical derived-D inclusions I from pageCouple_image_prefix and the concrete comparisonLift of alphaIter (the recursive image lift used in the finite-cycle comparison). Its inclusion equation is comparisonLift_inclusion.",
    "uses": [
-    "def-sp-exact-couple",
-    "def-sp-convergence",
-    "def-sp-filtered-complex-subquotients",
-    "def-sp-filtered-homology-exact-couple"
+    "lem-sp-derived-couple-image-prefix",
+    "lem-sp-finite-cycle-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved forward-representative identity to a and b to calculate page f of the projected class x.",
+   "uses": [
+    "lem-sp-filtered-homology-tower-forward-representatives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-cycle pullback formula and initial g followed by f equals zero show that initial g factors through the canonical tower cycle subobject. Apply finiteCycle_derived_comparison to identify the lifted class followed by page g with that factorization followed by the tower projection.",
+   "uses": [
+    "lem-sp-finite-cycle-formula",
+    "lem-sp-finite-cycle-derived-comparison",
+    "def-sp-exact-couple"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold filteredHomologyG and the initial homology isomorphism. Naturality of homology projection for the graded quotient, monicity of graded cycle inclusions, hy, hj and ht identify the class of b under the initial-g factorization with y followed by tQ. Compose the forward identity with page g; d=f followed by g, and equality transports normalize the bidegrees.",
+   "uses": [
+    "def-sp-filtered-homology-couple-data",
+    "def-sp-filtered-homology-exact-couple",
+    "def-sp-convergence"
    ],
    "elementary": false
   }
@@ -41,13 +61,17 @@
   "def-sp-exact-couple",
   "def-sp-filtered-complex-subquotients",
   "def-sp-filtered-homology-couple-data",
-  "def-sp-filtered-homology-exact-couple"
+  "def-sp-filtered-homology-exact-couple",
+  "lem-sp-derived-couple-image-prefix",
+  "lem-sp-filtered-homology-tower-forward-representatives",
+  "lem-sp-finite-cycle-derived-comparison",
+  "lem-sp-finite-cycle-formula"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Homological Algebra",
-  "place": "Tags 012K and 011R",
-  "note": "V2 componentwise expansion of the parent induction, with unique monic normalizations and canonical tower recurrence."
+  "document": "Stacks Project, Homology; Mathlib homology sequence API",
+  "place": "Tags 012K and 011R; ShortComplex.ShortExact.δ_eq",
+  "note": "T2 second reading replaced an equivalent existential cover split by a completely proved forward-map calculation and the existing finiteCycle_derived_comparison. No new proof holes."
  },
  "mathlib_searches": [
   {
@@ -126,14 +150,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-15",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "X-1e9fe",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T100200-L-2496979",
+  "landing": "20261015T235420-L-3518739",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered mirror compiles cleanly; original Quotients against changed dependencies and adapted importer compile; signatures, DAG, proofs, and axioms satisfy the stage-3 brief."
  },
  "lean_audit": {
   "master": {
