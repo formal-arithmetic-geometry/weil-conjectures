@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-compactification-affine",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compactification of an affine scheme",
@@ -13,31 +13,159 @@
   "place": "node lem-kun-compactification-affine, order 1746"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-scheme-conventions"
+  "def-pc-scheme",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-nagata-relative-affine-space",
+  "def-nagata-scheme-theoretic-closure",
+  "def-kun-projective",
+  "def-kun-dimension"
  ],
  "proof": [
   {
-   "text": "Write $X=\\Spec(B)$ with $B$ a finitely generated $K$-algebra,\nfix a surjection $K[T_1,\\ldots,T_n]\\twoheadrightarrow B$, giving a\nclosed immersion $X\\hookrightarrow\\mathbf A^n_K$ ($\\mathbf A^n_K=\\Spec(K[T_1,\\ldots,T_n])$); the open immersion\n$\\mathbf A^n_K\\hookrightarrow\\mathbf P^n_K$ identifies the\ncomplement of the hyperplane at infinity. Let $\\bar X$ be the\nscheme-theoretic closure of $X$ in $\\mathbf P^n_K$; then\n$\\bar X$ is a closed subscheme of $\\mathbf P^n_K$, hence\nprojective over $K$ by [def-kun-projective], and $X= \\bar X\\cap\\mathbf A^n_K$ is open dense in $\\bar X$. The generic\npoints of $\\bar X$ lie in the open subset $X$, so\n$\\kundim\\bar X=\\kundim X$ by\n[def-kun-dimension].",
+   "text": "Apply [lem-chow-affine-immersion] with $Y=\\operatorname{Spec}K$ and $U=X$. It supplies a finite number $n$ of algebra generators, the closed immersion $e:X\\hookrightarrow\\mathbf A^n_K$ induced by the corresponding polynomial-algebra surjection, and its composite immersion $j:X\\hookrightarrow\\mathbf P^n_K$ through the standard open $D_+(x_0)=\\mathbf A^n_K$. All these maps are over $K$.",
+   "uses": [
+    "lem-chow-affine-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-compactification-affine.md",
+    "place": "Proof, first sentence: polynomial presentation and the standard affine chart; compare Stacks Tag 0200, proof step 3"
+   }
+  },
+  {
+   "text": "The finite-type hypothesis makes $X\\to\\operatorname{Spec}K$ quasi-compact by [def-weil-finite-type-morphism]; taking the preimage of the entire affine base shows that $X$ is quasi-compact. The base $\\operatorname{Spec}K$ is affine by [def-weil-affine-spectrum]. Thus [lem-chow-closed-model] applies to the immersion $j$ of step 1. Set $\\bar X=\\operatorname{SIm}(j)$, the scheme-theoretic closure in $\\mathbf P^n_K$ supplied by the closed-model statement. The cited closed-model statement gives the factorization $X\\xrightarrow{a}\\bar X\\xrightarrow{i}\\mathbf P^n_K$, with $a$ a scheme-theoretically dense open immersion, $i$ a closed immersion, and $\\bar X\\to\\operatorname{Spec}K$ proper. Its structure morphism is the composite with the projective-space projection, so $a$ is over $K$. Properness of $\\bar X\\to\\operatorname{Spec}K$ includes separatedness by [def-weil-proper-morphism]. In the commutative triangle $X\\xrightarrow{a}\\bar X\\to\\operatorname{Spec}K$, the source structure map is of finite type and $a$ is an open immersion. Therefore [lemma-nagata-open-immersion-qc-over-separated-target] makes $a$ quasi-compact, checking the hypothesis of the density definition used in step 3.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum",
+    "lem-chow-closed-model",
+    "def-weil-proper-morphism",
+    "lemma-nagata-open-immersion-qc-over-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RG, lemma-quasi-compact-immersion; Tag 01WC, lemma-locally-projective-proper; blueprint proof, closure sentence"
+   }
+  },
+  {
+   "text": "The scheme-theoretic density in step 2 means that $\\mathcal O_{\\bar X}\\to a_*\\mathcal O_X$ is injective, as specified in [def-nagata-scheme-theoretically-dense-open]. This implies topological density directly: if the complement of the closure of $a(X)$ were nonempty, choose a nonempty affine open $W=\\operatorname{Spec}A$ inside that complement, using the local affine description of schemes [def-pc-scheme]. Then $a^{-1}(W)=\\varnothing$, so injectivity on sections would give an injective map $A=\\Gamma(W,\\mathcal O_{\\bar X})\\to\\Gamma(\\varnothing,\\mathcal O_X)=0$. Hence $A=0$, whose spectrum is empty by [def-weil-affine-spectrum], contradicting the choice of $W$. Thus $a(X)$ is dense in $\\bar X$. This is also the topological-density conclusion of Stacks Tag 01RG, proved here rather than assumed from a definition.",
+   "uses": [
+    "def-nagata-scheme-theoretically-dense-open",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RG, lemma-quasi-compact-immersion, final assertion (elementary implication from the supplied sheaf injection)"
+   }
+  },
+  {
+   "text": "The closed immersion $i:\\bar X\\hookrightarrow\\mathbf P^n_K$ of step 2, followed by its structural projection to $\\operatorname{Spec}K$, is exactly the finite-projective-space embedding required by [def-kun-projective]. Consequently $\\bar X$ is projective over $K$. Its properness was supplied in step 2; by [def-weil-proper-morphism], properness includes finite type. In particular $\\bar X$ is of finite type over the same field $K$, as needed for the dimension assertion.",
    "uses": [
     "def-kun-projective",
-    "def-kun-dimension"
+    "def-weil-proper-morphism"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-compactification-affine.md",
+    "place": "Proof, closed-subscheme hence projective sentence; Stacks Tag 01W1, definition-proper"
+   }
+  },
+  {
+   "text": "Apply the dense-open clause of [lem-kun-dimension-extension] to the finite-type $K$-scheme $\\bar X$ from step 4 and the open immersion $a:X\\hookrightarrow\\bar X$ from step 2, whose topological density was proved in step 3. It gives $\\kundim X=\\kundim\\bar X$. Reversing this equality proves the last clause of the item. Together with the construction and projectivity above this proves every assertion, including the indicated choice of the scheme-theoretic closure.",
+   "uses": [
+    "lem-kun-dimension-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic, items (3) and (8); blueprint proof, final dimension sentence"
+   }
   }
  ],
  "proof_deps": [
+  "lem-chow-affine-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "lem-chow-closed-model",
+  "def-weil-proper-morphism",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "def-nagata-scheme-theoretically-dense-open",
+  "def-pc-scheme",
   "def-kun-projective",
-  "def-kun-dimension"
+  "lem-kun-dimension-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-compactification-affine.md",
-  "place": "## Proof"
+  "place": "Proof paragraph, with closure facts checked against Stacks Tags 01RG and 01WC and dimension checked against Tag 0A21"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectiveClosure|projectiveCompactification|compactification|IsHProjective",
+   "results": "No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every affine scheme of finite type over a field has a dense open immersion into a projective scheme of the same Krull dimension",
+   "results": "Returned AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι. Read Proj/Proper.lean:138-147 and 372: these concern properness and finite type of absolute Proj; the other hits concern affine space or general Proj maps.",
+   "date": "2026-10-16",
+   "verdict": "no match: no dense projective completion of an arbitrary finite-type affine scheme with the stated dimension equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsHProjective, IsOpenImmersion",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsHProjective'",
+   "date": "2026-10-16",
+   "verdict": "unavailable: query rejected because the identifier is unknown; no absence inference from this query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine scheme of finite type over a field embeds as a dense open subscheme of a projective scheme of equal dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Pp]rojective|[Pp]rojective.*[Cc]losure|[Pp]rojective.*[Cc]ompletion",
+   "results": "No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projective\", \"immersion\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type affine scheme admits a projective completion by taking its scheme theoretic closure in projective space",
+   "results": "Returned AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.AffineSpace.instIsAffine. Read Proj/Proper.lean:138-147 and 372: these concern properness and finite type of absolute Proj; the other hits concern affine space or general Proj maps.",
+   "date": "2026-10-16",
+   "verdict": "no match: no dense projective completion of an arbitrary finite-type affine scheme with the stated dimension equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine algebraic variety over an arbitrary field has a projective compactification with the original scheme as an open dense subscheme",
+   "results": "Eight hits: Proj, Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, Proj.toSpecZero, Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, Proj.fromOfGlobalSections, Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, Proj.valuativeCriterion_existence (all AlgebraicGeometry). They construct or give properties of Proj, not the arbitrary affine scheme embedding and dense completion of equal dimension.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +194,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-compactification-affine",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and its projective-closure route. Reused existing affine immersion and closed-model nodes, proved topological density from the stated structure-sheaf injection, extracted finite type from the stated properness, and applied the existing dense-open dimension theorem. Replaced unused derived-category and bundled conventions dependencies by the exact definitions used. No new nodes or Mathlib leaves; source and Mathlib search audit is in report.md. Second reading explicitly checked quasi-compactness of the dense open immersion with the existing separated-target lemma; the closed-model statement itself supplies the closure, so no redundant application of the restricted closure definition is needed.",
+  "blueprint": "Realizes all sentences of the blueprint proof: polynomial presentation and standard chart in step 1, scheme-theoretic closure and its factorization in step 2, density in step 3, projectivity in step 4, and dimension in step 5. The definition-only dimension citation was replaced by the actual existing dense-open theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-chow-affine-immersion",
+    "why": "Provides the affine finite-type to projective-space immersion used in step 1; this geometric construction is from the Chow unit, while the present Künneth unit has no route step supplying it."
+   },
+   {
+    "node": "lem-chow-closed-model",
+    "why": "Provides the scheme-theoretic closure factorization, dense open, closed immersion and properness used in step 2; this closure theorem is from the Chow unit and is not supplied by the present route."
+   },
+   {
+    "node": "lemma-nagata-open-immersion-qc-over-separated-target",
+    "why": "Checks quasi-compactness of the closure open immersion in step 2; this Nagata compactification tool is outside the present Künneth unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-chow-affine-immersion",
+  "lem-chow-closed-model",
+  "lemma-nagata-open-immersion-qc-over-separated-target"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q21-840d8d008",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-840d8d008 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. Added required split_report.tool_uses for three off-unit geometric tools in fixes/dag/nodes/sec-smooth-purity/lem-kun-compactification-affine.json; review.md records all checks.; 1 file(s) fixed by the reviewer"
+ }
 }
