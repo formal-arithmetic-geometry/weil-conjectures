@@ -14,6 +14,7 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.AlgebraicGeometry.QcqsHigherImagesPrimeTorsion
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-!
 # Bounded allowable-torsion smooth base change
