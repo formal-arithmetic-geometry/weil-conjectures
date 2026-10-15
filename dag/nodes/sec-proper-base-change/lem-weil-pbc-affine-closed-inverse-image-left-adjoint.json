@@ -27,49 +27,51 @@
  ],
  "proof": [
   {
-   "text": "For $S=X,Z$, let $R_S$ be restriction to $S_{\\mathrm{app}}=\\mathcal B_S$. The inclusion is fully faithful because the basis is a full subcategory [def-weil-pbc-ind-etale-basis]. Every full-site object has a basis cover, and every cover of a basis object has a basis refinement, by [lem-weil-pbc-ind-etale-basis]. Thus it is cover-dense and its topology is induced: a full-site covering sieve contains a basis covering refinement, while a basis covering is a full-site covering. In the fixed small skeletons [def-weil-pbc-proetale-site], sets have all the required structured-arrow limits (compatible tuples in products). Apply [lem-pc-fppf-dense-sheaf-equivalence] with sets to obtain restriction equivalences $R_S$; choose quasi-inverses $E_S$, with $R_SE_S\\cong\\mathrm{id}$ and $E_SR_S\\cong\\mathrm{id}$.",
+   "text": "First handle the quotient immersion q: Spec(A/I) -> Spec(A). Keep sheaves on the full source site X_proet and restrict only the target to Z_app. The restriction res_Z is an equivalence by the existing affine basis and dense-subsite comparison. Put R = q^{-1} followed by res_Z; its right adjoint is res_Z^{-1} followed by q_*, by composition of the ordinary adjunction with the equivalence adjunction.",
    "uses": [
+    "def-weil-proetale-inverse-image",
     "def-weil-pbc-ind-etale-basis",
     "lem-weil-pbc-ind-etale-basis",
-    "def-weil-pbc-proetale-site",
     "lem-pc-fppf-dense-sheaf-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098X, lemma-affine-alternative; dense-subsite comparison"
+    "place": "Tag 09BL proof of (3), and Tag 098X dense-subsite comparison"
    }
   },
   {
-   "text": "Use the canonical $u,v$ of [lem-weil-pbc-affine-closed-site-functor-properties], with $v$ defined by the universal ring lift. Throughout, $i$ means the ordinary base-change morphism [def-weil-proetale-inverse-image], not an unidentified morphism induced by $v$. Put $T=R_Z i^{-1}E_X$. The evaluation statement [lem-weil-pbc-affine-closed-inverse-image-evaluation] applies to this ordinary $i^{-1}$ and identifies $T(F)(V)$ with $E_X(F)(v(V))\\cong F(v(V))$ for every weakly contractible $V$ in $Z_{\\mathrm{app}}$; the last identification is the component of $R_XE_X\\cong\\mathrm{id}$ from step 1. All identifications are natural in $F$. The functor $T$ is an inverse image of a morphism of topoi on the basis categories: a right adjoint is $R_Xi_*E_Z$, since the Hom bijections for the two equivalences and $i^{-1}\\dashv i_*$ compose to this adjunction. Equivalences preserve limits by their universal property, and $i^{-1}$ preserves finite limits, so $T$ does also.",
+   "text": "R preserves finite limits. To verify this for the actual constructed q^{-1}, transport the full sites through AsSmall to small categories. The transported base-change functor preserves finite limits. Mathlib lan_preservesFiniteLimits_of_flat and sheafification give left exactness of its sheaf pullback. The transported direct image agrees sectionwise with the original direct image. Uniqueness of left adjoints identifies the transported pullback with the ordinary inverse image. Equivalences and res_Z preserve limits.",
    "uses": [
-    "lem-weil-pbc-affine-closed-site-functor-properties",
     "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL first assertion; morphism of sites and transport through equivalent sites"
+   }
+  },
+  {
+   "text": "For weakly contractible V in Z_app, use the sheafified universe-lifted representable of the full-site object v(V). Sheafification adjunction followed by uliftYonedaEquiv gives a natural isomorphism Hom(h_{v(V)}#, F) = F(v(V)). The two clauses of affine_closed_inverseImage_evaluation give the natural comparison between R and sheafified evaluation along v, and bijectivity of the evaluated sheafification unit at V. Hence this unit is an isomorphism of evaluation functors and represents R(-)(V).",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection",
     "lem-weil-pbc-affine-closed-inverse-image-evaluation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09BK and 09BL first assertion and clauses (1),(2)"
+    "place": "Tag 09BL proof of (3), using clauses (1),(2); sites.tex Tag 00WH"
    }
   },
   {
-   "text": "For a weakly contractible $V$ in $Z_{\\mathrm{app}}$, let $h_{v(V)}$ be the representable presheaf on $X_{\\mathrm{app}}$ and $G_V=h_{v(V)}^\\#$. For any sheaf $F$ on $X_{\\mathrm{app}}$, the universal property [def-weil-pbc-sheafification] gives $\\operatorname{Hom}(G_V,F)\\cong\\operatorname{Hom}(h_{v(V)},F)$. The general presheaf Yoneda bijection [lem-galois-yoneda-hom-bijection] identifies the latter with $F(v(V))$, naturally in $F$. Combining with step 2 gives $\\operatorname{Hom}(G_V,F)\\cong T(F)(V)$, with exactly the naturality required by the criterion in step 4. No subcanonicity assertion is needed.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "lem-galois-yoneda-hom-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL proof of (3); categories.tex Tag 001P; sites.tex Tag 00WH"
-   }
-  },
-  {
-   "text": "Take $E$ to be all weakly contractible objects of the chosen small skeleton of $Z_{\\mathrm{app}}$, hence a set. By [lem-weil-pbc-ind-etale-basis-wcontractible-cover], every object of $Z_{\\mathrm{app}}$ has a covering by objects of this $E$, weakly contractible in this very basis site. Apply [lem-weil-pbc-topos-lower-shriek-existence-on-covering-generators] with $\\mathcal C=X_{\\mathrm{app}}$, $\\mathcal D=Z_{\\mathrm{app}}$ and inverse image $T$. Step 2 gives the topos morphism, step 3 gives the representing $G_V$, and the cited cover theorem gives its covering hypothesis. Obtain $L:\\operatorname{Sh}(Z_{\\mathrm{app}})\\to\\operatorname{Sh}(X_{\\mathrm{app}})$ and $L\\dashv T$.",
+   "text": "Let E be the set of weakly contractible objects in Z_app. The stated weakly contractible covering theorem supplies covers by E; their generated sieves cover for the restricted topology by its definition. Apply the existing covering-corepresentable-evaluations criterion. Its SmallCategory interface is handled by ULiftHom: transport the sites, adjunction, finite-limit preservation, covering presieves, and representing sheaves along the explicit equivalences. The canonical precoverage of each transported topology generates that topology; the sites have pullbacks, so all precoverage hypotheses hold. After obtaining a left adjoint of the transported R, cancel the two equivalences to conclude R.IsRightAdjoint. Cancel res_Z to obtain the extra left adjoint of q^{-1}.",
    "uses": [
     "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
-    "lem-weil-pbc-topos-lower-shriek-existence-on-covering-generators"
+    "lem-weil-pbc-topos-lower-shriek-existence-on-covering-generators",
+    "lem-pc-fppf-dense-sheaf-equivalence"
    ],
    "elementary": false,
    "source": {
@@ -78,16 +80,20 @@
    }
   },
   {
-   "text": "Define $i^{\\mathrm{Sh}}_!=E_XLR_Z$. For $G$ on $Z_{\\mathrm{proet}}$ and $F$ on $X_{\\mathrm{proet}}$, full faithfulness of $R_X$, then $L\\dashv T$, then $E_XR_XF\\cong F$ and full faithfulness of $R_Z$, give $\\operatorname{Hom}(E_XLR_ZG,F)\\cong\\operatorname{Hom}(LR_ZG,R_XF)\\cong\\operatorname{Hom}(R_ZG,TR_XF)\\cong\\operatorname{Hom}(R_ZG,R_Zi^{-1}F)\\cong\\operatorname{Hom}(G,i^{-1}F)$. Each bijection is natural in $G,F$ by the equivalence and adjunction identities. This proves the required adjunction, with domain the Z-sheaves and codomain the X-sheaves.",
-   "uses": [],
+   "text": "For an arbitrary affine closed immersion i: Z -> X, compose with X.isoSpec.hom and use Mathlib IsClosedImmersion.Spec_iff to write this composite as e.hom followed by a quotient immersion q. Thus i = e.hom followed by q followed by X.isoSpec.inv. The inverse-image functor of a composite is isomorphic to the composite of inverse images in reverse order: compose the ordinary adjunctions and use the existing direct-image composition isomorphism and left-adjoint uniqueness. For a scheme isomorphism its inverse image is isomorphic to the inverse direct image, by the direct-image equivalence and the same uniqueness. Therefore the two outside inverse images are equivalences, while q^{-1} is a right adjoint by the preceding steps. Their composite, hence i^{-1}, is a right adjoint. Its IsRightAdjoint witness supplies the required functor L and adjunction.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-proetale-inverse-image"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BL clause (3), transport of the constructed adjunction"
+    "place": "Tag 09BL clause (3), affine quotient presentation and categorical transport"
    }
   }
  ],
  "proof_deps": [
+  "def-weil-closed-immersion",
   "def-weil-pbc-ind-etale-basis",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-sheafification",
@@ -95,7 +101,6 @@
   "lem-galois-yoneda-hom-bijection",
   "lem-pc-fppf-dense-sheaf-equivalence",
   "lem-weil-pbc-affine-closed-inverse-image-evaluation",
-  "lem-weil-pbc-affine-closed-site-functor-properties",
   "lem-weil-pbc-ind-etale-basis",
   "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
   "lem-weil-pbc-topos-lower-shriek-existence-on-covering-generators"
@@ -103,7 +108,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09BK and 09BL, with the lower-shriek criterion of sites.tex Tag 09YX"
+  "place": "Tag 09BL (3) with 09BL (1),(2), 0990 and sites.tex 09YX; E1 formalization keeps the full source site, restricts only the target basis, and makes all small-model and affine-coordinate transports explicit."
  },
  "mathlib_searches": [
   {
@@ -209,5 +214,15 @@
   "by": "NE",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261015T181521-L-748057",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
