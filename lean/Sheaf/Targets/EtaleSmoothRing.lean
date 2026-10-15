@@ -7,21 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
-import Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
-import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
-import Sheaf.AlgebraicGeometry.AllowableTorsionDerivedCategories
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
-import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
-import Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 
 /-!
 # Smooth base change with ring-order-invertible coefficients
@@ -75,7 +62,33 @@ theorem Etale.isIso_baseChange_of_smooth_of_ring_order_invertible
     {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
     [QuasiCompact f] [QuasiSeparated f] [Smooth g]
     (sq : IsPullback g' f' f g) (htor : ∀ a : Λ, IsUnit (addOrderOf a : Γ(Y, ⊤))) :
-    IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
-  sorry
+    IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
+  have : ∀ K : DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
+    fun K ↦ by
+      let N := addOrderOf (1 : Λ)
+      by_cases hN : N = 0
+      · have hzero : IsUnit (0 : Γ(Y, ⊤)) := by
+          simpa [N, hN] using htor (1 : Λ)
+        have hsub : Subsingleton Γ(Y, ⊤) :=
+          subsingleton_of_zero_eq_one (isUnit_zero_iff.mp hzero)
+        have : IsEmpty Y := Scheme.isEmpty_of_subsingleton_Γ hsub
+        apply Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder
+          Λ g sq K
+        intro j
+        refine ⟨?_⟩
+        intro Ω _ _ s x
+        exact isEmptyElim (f.base (s.base (IsLocalRing.closedPoint Ω)))
+      · have hNΛ : (N : Λ) = 0 := by
+          dsimp [N]
+          simpa only [nsmul_eq_mul, mul_one] using addOrderOf_nsmul_eq_zero (1 : Λ)
+        have hNY : IsUnit (N : Γ(Y, ⊤)) := by
+          simpa [N] using htor (1 : Λ)
+        apply Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder
+          Λ g sq K
+        intro j
+        exact Scheme.IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ N hN hNΛ hNY _
+  exact NatIso.isIso_of_isIso_app _
 
 end AlgebraicGeometry
