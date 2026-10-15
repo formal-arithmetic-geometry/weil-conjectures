@@ -6,7 +6,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
 open Scheme.Modules
-noncomputable local instance (X : Scheme.{u}) : MonoidalCategory X.Modules :=
+noncomputable local instance trRestrictionTensorComposeMonoidal
+    (X : Scheme.{u}) : MonoidalCategory X.Modules :=
   SheafOfModules.monoidalCategory X.sheaf
 
 /-- Naturality of restriction tensor followed by maps on both factors. -/
