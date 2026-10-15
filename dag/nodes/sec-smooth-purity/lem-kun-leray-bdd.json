@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-leray-bdd",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Leray: composition of derived functors",
@@ -17,27 +17,47 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-injective resolution $E\\to I$\n([prop-weil-pbc-kinjective-resolutions-exist]). Then\n$Rf_*E=f_*I$, and by [def-kun-rgamma-unbounded] and\n[def-weil-pbc-direct-image]\n\n$$\n\\RGamma(X_{\\Et},E)=\\Gamma(X_{\\Et},I)=\\Gamma(Y_{\\Et},f_*I),\n$$\n\nwhile $\\RGamma(Y_{\\Et},Rf_*E)=\\Gamma(Y_{\\Et},J)$ for any K-injective\nmodel $J$ of $f_*I$; these objects are independent of the chosen\nK-injective models by [lem-kun-rgamma-unbounded-well-defined], and\nfor the bounded-below object $E$ they agree with the derived global\nsections of [def-weil-pbc-etale-cohomology] by\n[lem-kun-rgamma-unbounded-bounded]. Both\n$\\Gamma(Y_{\\Et},f_*I)$ and\n$\\Gamma(Y_{\\Et},J)$ compute the derived functors of the composite\n$\\Gamma(Y_{\\Et},-)\\circ f_*=\\Gamma(X_{\\Et},-)$: this is the\nGrothendieck spectral sequence of\n[lem-weil-pbc-grothendieck-spectral-sequence] applied to the\ncomposite, whose $E_2$-page involves $R^qf_*$ and the higher direct\nimages of $\\Gamma(Y_{\\Et},-)$, and which computes the right derived\nfunctors of the composite functor. Hence the comparison\n$\\Gamma(Y_{\\Et},f_*I)\\to\\Gamma(Y_{\\Et},J)$ is a quasi-isomorphism,\nand the canonical map $\\RGamma(X_{\\Et},E)\\to \\RGamma(Y_{\\Et},Rf_*E)$ is an isomorphism, natural in $E$ and\ncompatible with the functorialities.",
+   "text": "Choose an integer a below the cohomology of E. The abelian-sheaf categories on X and Y have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. By [lem-weil-pbc-dplus-injective-representative] choose E ≅ QI with I a complex of injective abelian sheaves, I^r=0 for r<a. The complex I is K-injective. By [lem-weil-pbc-direct-image-preserves-injectives], every f_*I^r is injective; additivity of f_* [def-weil-pbc-direct-image] preserves zero objects, so f_*I is bounded below by a and is K-injective by the same representative lemma. By the derived-direct-image definition, Rf_*E ≅ Q(f_*I).",
    "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "def-kun-rgamma-unbounded",
-    "def-weil-pbc-direct-image",
-    "lem-kun-rgamma-unbounded-well-defined",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [def-weil-pbc-etale-cohomology], derived global sections on X are represented by Γ(X,I) and those of Rf_*E on Y by Γ(Y,f_*I), since both I and f_*I are K-injective. In degree r, the direct-image formula gives Γ(Y,f_*I^r)=I^r(Y×_Y X). The projection Y×_Y X→X is an isomorphism: its inverse is the unique map with projections f and id_X, and both inverse identities follow from the universal property [def-pc-fibre-product]. Restriction along this isomorphism gives I^r(Y×_Y X)≅I^r(X). Naturality of restriction in sheaf morphisms makes these maps commute with I's differentials. Thus they form a chain isomorphism Γ(Y,f_*I)≅Γ(X,I). Its inverse in Dplus(Z) is the asserted comparison.",
+   "uses": [
     "def-weil-pbc-etale-cohomology",
-    "lem-kun-rgamma-unbounded-bounded",
-    "lem-weil-pbc-grothendieck-spectral-sequence"
+    "def-weil-pbc-global-sections-functor",
+    "def-weil-pbc-direct-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a morphism E→E', choose bounded-below injective representatives I,I'. By [lem-weil-pbc-kinjective-hom-derived] it has a unique representing homotopy class h:I→I'. The derived-direct-image definition computes Rf_* on this class by f_*h. The degreewise sections isomorphism in Step 2 commutes with h, since both paths apply h to the same restricted section. Additive termwise global sections and direct image respect homotopies, so this square descends to the derived category. A change of injective representative is a homotopy equivalence by the same bijection (represent the inverse derived isomorphism and use injectivity of Q on Hom); the square just proved identifies the comparisons for the two choices. Hence the comparison is canonical and natural in E. For composable scheme maps X→Y→Z, the two sections identifications restrict along the iterated fibre product projections. The unique isomorphism between Z×_Z(Y×_Y X) and X preserves these projections [def-pc-fibre-product], so the composite restriction is the single restriction to X. For an identity scheme map that projection is the identity. Applying these equalities degreewise to I proves composition and identity compatibility. If RGamma is taken in its unbounded convention, [lem-kun-rgamma-unbounded-bounded] identifies both computations naturally with that convention.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-global-sections-functor",
+    "def-pc-fibre-product",
+    "lem-kun-rgamma-unbounded-bounded"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-kun-rgamma-unbounded",
+  "def-pc-fibre-product",
   "def-weil-pbc-direct-image",
-  "lem-kun-rgamma-unbounded-well-defined",
   "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-global-sections-functor",
   "lem-kun-rgamma-unbounded-bounded",
-  "lem-weil-pbc-grothendieck-spectral-sequence"
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
  ],
  "proof_origin": {
   "by": "agent",
@@ -46,7 +66,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -78,5 +98,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-kun-leray-bdd",
+  "worker": "stage1",
+  "summary": "Second reader removed two unnecessary new nodes; computed both sides on one bounded-below injective representative and checked naturality, choice independence, identity and composition explicitly.",
+  "blueprint": "The blueprint proof paragraph: compose bounded-below derived direct image and global sections, then identify the underived composite with global sections on X.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-d9405131f",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-d9405131f (reviewer sub-agent of L); spot-checked: L full review: injective models, ordinary section comparison via fibre-product universal property, homotopy naturality and identity/composition; coefficient Z; empty scheme and zero complex checked; no new nodes."
+ }
 }
