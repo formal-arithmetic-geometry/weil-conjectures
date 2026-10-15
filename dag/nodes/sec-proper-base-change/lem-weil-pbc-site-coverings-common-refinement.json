@@ -26,58 +26,21 @@
  ],
  "proof": [
   {
-   "text": "*Pull back the second covering along each member of the first.* For every $i\\in I$, apply axiom (iii) of the site [def-weil-pbc-sites-and-cohomology] to the covering $\\{V_j\\to U\\}_{j\\in J}$ and the morphism $U_i\\to U$. Choose the resulting fibre products $W_{ij}=V_j\\times_UU_i$ with projections $q_{ij}:W_{ij}\\to U_i$ and $p_{ij}:W_{ij}\\to V_j$. For each fixed $i$, the family $\\{q_{ij}:W_{ij}\\to U_i\\}_{j\\in J}$ is a covering.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma 00W6 and proof: the first sentence, applying the base-change axiom to \\{V_j\\to U\\} along each U_i\\to U"
-   }
+   "text": "Use Mathlib's `ZeroHypercover.inter` to form the canonical pairwise intersection. Its `mem₀` field gives the covering presieve. For each supplied pullback square, flip it and use `IsPullback.isoPullback` to build an isomorphism from the supplied family to this canonical intersection; `PreZeroHypercover.mem_iff_of_iso` transports covering membership. The two refinement morphisms are assembled directly from the supplied projections and the pullback commutativity equation.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*Compose the pulled-back coverings.* Apply axiom (ii) of [def-weil-pbc-sites-and-cohomology] to the covering $\\{U_i\\to U\\}_{i\\in I}$ and the covering $\\{q_{ij}:W_{ij}\\to U_i\\}_{j\\in J}$ for each $i$. The family $\\{W_{ij}\\to U\\}_{(i,j)\\in I\\times J}$, whose maps are the composites $W_{ij}\\xrightarrow{q_{ij}}U_i\\to U$, is therefore a covering of $U$.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma 00W6 and proof: the second sentence, applying the composition axiom to the pulled-back families"
-   }
-  },
-  {
-   "text": "*Refinement maps.* The projection $q_{ij}:W_{ij}\\to U_i$ together with the index map $(i,j)\\mapsto i$ is a morphism of coverings from $\\mathcal W$ to $\\mathcal U$ over $\\mathrm{id}_U$, because $(U_i\\to U)\\circ q_{ij}$ is the structure map of $W_{ij}$. Likewise $p_{ij}:W_{ij}\\to V_j$ and $(i,j)\\mapsto j$ define a morphism from $\\mathcal W$ to $\\mathcal V$ over $\\mathrm{id}_U$. These are precisely the canonical projections of the fibre products, so $\\mathcal W$ is a common refinement.",
-   "uses": [
-    "def-weil-pbc-site-plus-construction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma 00W6 (00W6) and the definition of morphism of coverings in Definition 00VT"
-   }
-  },
-  {
-   "text": "*Finitely many coverings.* Iterating the binary construction gives a common refinement for any finite list of coverings: refine the first two, then refine the result with the third, and so on. The induction uses only the just-proved binary case and the transitivity of morphisms of coverings [def-weil-pbc-site-plus-construction] (b).",
-   "uses": [
-    "def-weil-pbc-site-plus-construction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma 00W6; finite-family assertion is the immediate finite induction on the binary common-refinement construction"
-   }
+   "text": "For a finite index type, apply `Finite.induction_empty_option`. The empty case is the singleton identity `ZeroHypercover`; the option case intersects the inductive common refinement with the new covering and composes `PreZeroHypercover.interFst` with each inductive refinement, while `interSnd` handles the new member.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-site-plus-construction",
-  "def-weil-pbc-sites-and-cohomology"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Sites, Lemma 00W6 (Lemma 7.10.5), proof"
+  "by": "agent",
+  "document": "Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Defs.lean; literature/stacks-project/sites.tex",
+  "place": "Stacks Tag 00W6 (lemma-common-refinement), implemented using ZeroHypercover.inter (Zero.lean:749), PreZeroHypercover.isoMk (315) and mem_iff_of_iso (411), with IsPullback.isoPullback (Defs.lean:194) and isoPullback_hom_fst (200). Finite iteration uses Finite.induction_empty_option, ZeroHypercover.singleton (712), PreZeroHypercover.interFst (509), interSnd (518), and Hom.comp (287)."
  },
  "mathlib_searches": [
   {
@@ -181,5 +144,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T174646-L-626700",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
