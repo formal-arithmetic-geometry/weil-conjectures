@@ -16,7 +16,8 @@
   "def-weil-pbc-derived-categories",
   "def-asd-compactifiable",
   "def-amb-etale-compact-support",
-  "def-weil-pbc-proper-open-comparison"
+  "def-weil-pbc-proper-open-comparison",
+  "lem-weil-pbc-etale-shriek-compactification-independence"
  ],
  "proof": [
   {
@@ -314,5 +315,39 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-69b70753a (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, blueprint route, Stacks 0F7B–D/I–K, and exact master target sources. Repaired one C1 omission: step 1 now cites derived-pushforward composition and step 3’s coherence calculation. No new nodes remain. Five-step mathematics passes for finite-ring D+ coefficients. review.md records source checks, edge cases, accepted tool uses, and inherited unbounded-caller and graph gaps; no target was weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons",
+  "declaration": "AlgebraicGeometry.Etale.etaleCompactSupport_refinementComparison_eq",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleCompactSupport_refinementComparison_eq",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso_id",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso_comp",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso_eq_refinementIso",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso_refl",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso_trans",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekPlus",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso_hom_eq",
+   "AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso_assoc"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportComparisons.lean",
+  "statement": "theorem etaleCompactSupport_refinementComparison_eq (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] {c d : Compactification f} (r : c.Refinement d) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : (rightDerivedLowerShriekOfCompactificationPlusRefinementIso Λ r).hom.app K = (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) d.g).map (properOpenComparison Λ r.hom c.i d.i r.i_hom K) ≫ ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).pfComp' r.hom d.g c.g r.hom_g).inv.app ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).mapDerivedCategoryPlus.obj K)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Mixed record: the new theorem identifies the specified properOpenComparison alpha, after ambient proper pushforward and canonical pfComp identification, with the upstream canonical refinement isomorphism for arbitrary refinements (no Cartesian or density assumption). The existing declarations in WeilConjectures.SixFunctors.Etale.Derived.LowerShriek, LowerShriekCoherence, and LowerShriekComposition provide respectively the D+ restriction, refinement identity/composition and independent cocycles, and the canonical choice-independent associative composition isomorphism. Specialize these declarations to finite commutative Λ and Noetherian schemes, with IsNoetherian equivalent to the finite affine Noetherian-cover condition. No duplicate comparison or composition construction is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d6df19514",
+  "group": "NN",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, source passages, exact declarations, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py compilation passed cleanly in sandbox and library forms. No defects or repairs; branch unchanged."
  }
 }
