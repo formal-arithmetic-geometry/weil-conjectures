@@ -22,6 +22,8 @@ A node's route is its unit and the units its unit cites, transitively. The route
 unit U may use a statement of another unit only if U cites that unit (transitively); definitions, Mathlib leaves and finished nodes (closed Lean) are notions or tools, not route. A proof dependency outside the route is reported: an error for a split and reviewed node, a count for an imported one,
 unless the lead accepted it as a tool use (`tool_uses` on the node, SETUP.md), which is counted separately.
 A unit with no proof and no `uses` (a remark, an assembly) constrains nothing.
+Reachability also honors a unit's explicit `realized` binding when all its statement and proof-step nodes
+are reached, even if those nodes' source paths place them in another unit. Empty or partial bindings do not count.
 """
 from __future__ import annotations
 import collections, json, pathlib, re, sys
@@ -184,6 +186,17 @@ def check(nodes=None, verbose=True) -> list[str]:
                 continue
             reach.add(x); st += g.deps(x, "all")
         hit = {nodes[x].get("unit") for x in reach if x in nodes}
+        # A sketch may be expanded by nodes located in a different blueprint unit.
+        # Preserve their source-based unit stamp and honor the explicit binding only
+        # when the entire statement and every proof step have been reached.
+        for v, vrec in units.items():
+            vr = vrec.get("realized") or {}
+            statements, steps = vr.get("statement") or [], vr.get("steps") or []
+            if not statements or len(steps) != len(vrec.get("steps") or []) or not all(steps):
+                continue
+            carriers = set(statements + [x for step in steps for x in step])
+            if carriers <= reach:
+                hit.add(v)
         for v in rec.get("uses", []):
             if v in units and v not in hit:
                 errs.append(f"units: {u} cites {v}, which its nodes do not reach")
