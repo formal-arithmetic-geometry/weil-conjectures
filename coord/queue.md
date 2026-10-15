@@ -18,7 +18,7 @@
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates` | 50 | 1 | proof |
 
-Waiting, not claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
+Also listed above and claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
