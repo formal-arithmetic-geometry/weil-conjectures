@@ -32,9 +32,54 @@
   "lem-pc-right-derived-functor-triangulated",
   "lem-pc-pre-derived-adjoint-functors-general"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For ProEtaleOperations, package the prescribed tensor maps as a presheaf scalar-extension functor followed by sheafification. Functoriality is the composite functor law. Evaluate a tensor morphism on 1 tensor m; invert this map sectionwise by scalar-extension adjunction, and use the sheafification hom equivalence. The resulting natural hom equivalence proves the extension/restriction adjunction. Transport Mathlib module pullback/pushforward adjunction through the up/down model-site equivalences; both right functors agree sectionwise. Compose to obtain the prescribed module adjunction. Direct image is additive sectionwise, so left adjunction proves pullback additive.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-scalar-extension-hom",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the underlying-abelian inverse-image comparison to prove left exactness: base change preserves finite limits, hence is representably flat, so abelian sheaf inverse image preserves finite limits. The module forgetful functor preserves and reflects finite limits. Scalar restriction along c is an equivalence; uniqueness of left adjoints identifies scalar extension with its inverse equivalence. Thus scalar extension preserves finite limits. The composite module pullback preserves finite limits, and its left adjunction gives finite colimits. This proves the complete conjunction proEtaleRingModuleOperations_properties from the comparison.",
+   "uses": [
+    "lem-weil-pbc-proetale-module-inverse-image-underlying",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the up/down model-site equivalence for module sheaves. On the small model apply SheafOfModules.isGrothendieckAbelian, transfer the Grothendieck property across the equivalence, then apply the source instance Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian. For a K-flat resolution only its quasi-isomorphism clause is needed: the exact pullback instance preserves quasi-isomorphisms. The K-injective right-derived unit is invertible by the source derivability instance. Finally apply Adjunction.mapDerivedCategoryRightDerivedAdjunction to the proved module adjunction, yielding the exact termwise pullback/right-derived direct-image adjunction. This handles the declarations in ProEtaleOperations; the separate canonical-normalization theorem in ProEtaleOperationsCanonicalAdjunction is untouched.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-proetale-module-inverse-image-underlying",
+  "lem-weil-pbc-scalar-extension-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "date": "2026-10-15",
+  "note": "Stage-3 implementation in ProEtaleOperations: five original holes proved using source/Mathlib APIs; the combined module-operations theorem reduced to the new underlying-abelian comparison. The supplementary canonical-adjunction normalization remains separate.",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 04JC; the source Lean APIs for Grothendieck K-injective resolutions and exact/right-derived adjunction"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -139,5 +184,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The previous interface exposed only Nonempty adjunctions. The supplementary module imports all existing operations unchanged and uniquely normalizes the module adjunction by the model-site Hom correspondence and the tensor sheafification unit, then induces the canonical unbounded derived adjunction. This supplies the actual adjunction required for the coefficient-change mate identity without arbitrary choice."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261015T161024-L-259909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

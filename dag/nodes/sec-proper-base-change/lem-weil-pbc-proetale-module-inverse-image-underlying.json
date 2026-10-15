@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-proetale-module-inverse-image-underlying",
+ "kind": "statement",
+ "title": "Underlying abelian sheaf of the pro-etale module inverse image",
+ "statement": "Let $f:X\\to Y$ be any morphism of schemes [def-pc-scheme], with their small pro-etale sites [def-weil-pbc-proetale-site]. Let $R$ be a sheaf of commutative rings on $Y_{\\mathrm{proet}}$ and put $R_I=f^{-1}R$ for the constructed commutative-ring inverse image. Write $C_Y,C_X$ for the equivalent small site models, $p_Y:C_Y\\to Y_{\\mathrm{proet}}$ and $p_X:C_X\\to X_{\\mathrm{proet}}$ for their down functors, and $g=p_Y;u_f;\\operatorname{up}_X$ for the transported base-change functor, with the transported topologies [def-weil-proetale-inverse-image]. Forget commutativity and put $A=p_{Y,*}R$, $B=p_{X,*}R_I$. Let $\\phi:A\\to g_*B$ be the original ring adjunction unit precomposed with $p_Y^{\\mathrm{op}}$, and let $L=\\operatorname{SheafOfModules.pullback}(\\phi):\\operatorname{Mod}(A)\\to\\operatorname{Mod}(B)$ be the chosen module left adjoint to scalar-restricted pushforward [def-weil-proetale-inverse-image, def-weil-sheaf-of-modules-category]. Let $U_A,U_B$ forget module actions to abelian sheaves and let $g^{-1}_{\\mathrm{Ab}}$ be abelian sheaf pullback on these model sites. There exist isomorphisms $U_B(L(M))\\cong g^{-1}_{\\mathrm{Ab}}(U_A(M))$, natural in every $A$-module sheaf $M$. No flatness, nonempty-scheme, nonzero-ring, constructibility or boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D3, labels lemma-pullback-module and lemma-adjoint-push-pull-modules; identifying the chosen left adjoint with the transported-action construction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "On the small model sites, lift the set inverse image to additive and ring operations by the product comparisons. The abelian lift is naturally isomorphic to abelian sheaf pullback, since both are left adjoint to abelian precomposition. The ring lift is likewise the commutative-ring sheaf pullback: identify right lifts with sectionwise precomposition, then use uniqueness of left adjoints. This identifies both the ring and its adjunction unit with the ring used by proEtaleModelRingUnit. The down functors commute with precomposition and their equivalences identify the model ring pullback with the down transport of the original ring pullback, by uniqueness of left adjoints; their unit equation identifies the ring map with phi.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-site-pullback-abelian-underlying"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the module lift of inverse image by applying the product preserving set inverse image to the scalar action. The module axioms are the images of the original action equations. For an abelian alpha with adjunct beta, transpose the two action composites: their mates are beta after the original action and direct image of the target action after the pair (ring unit,beta). Naturality and the product components of the unit prove the two formulas. Injectivity of the hom correspondence makes alpha linear if and only if beta is linear. This is the module adjunction with direct image restricted along the original ring unit; it is the identity-coefficient case of the general module pullback adjunction.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chosen Mathlib module pullback on the model sites is also left adjoint to this same scalar-restricted pushforward. Apply uniqueness of left adjoints and forget to abelian sheaves. Compose with the underlying-abelian comparison in the first step to obtain the displayed natural comparison on the model sites. Naturality follows from the naturality of the adjunction comparisons. Transport of finite-limit preservation back to the original sites is proved separately in the importing item, using the up/down module equivalences.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-site-pullback-abelian-underlying"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D3, labels lemma-pullback-module and lemma-adjoint-push-pull-modules; identifying the chosen left adjoint with the transported-action construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*(toSheaf|preservesFiniteLimits)|toSheaf.*pullback",
+   "results": "Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/Topology/Sheaves/Functors.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "date": "2026-10-15",
+   "verdict": "No exact match for module inverse image over the inverse-image ring. Constant-ring module-valued sheaf pullback comparisons do not identify this varying-ring module Kan extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The underlying abelian sheaf of inverse image of modules over the inverse image ring is the inverse image of the underlying abelian sheaf",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.pushforwardNatIso_inv; SheafOfModules.pushforwardSections; SheafOfModules.pushforwardCongr_symm; SheafOfModules.fullyFaithfulForget_preimage_val; SheafOfModules.restrictScalars_obj_val; SheafOfModules.toSheaf_map_val; SheafOfModules.pushforward_obj_val",
+   "date": "2026-10-15",
+   "verdict": "No exact match for module inverse image over the inverse-image ring. Constant-ring module-valued sheaf pullback comparisons do not identify this varying-ring module Kan extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf",
+   "results": "SheafOfModules.toSheaf; SheafOfModules.instFaithfulSheafAddCommGrpCatToSheaf; SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf; SheafOfModules.toSheaf_obj_obj; SheafOfModules.toSheafCompSheafToPresheafIso; SheafOfModules.toSheaf_map_hom; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+   "date": "2026-10-15",
+   "verdict": "No exact match for module inverse image over the inverse-image ring. Constant-ring module-valued sheaf pullback comparisons do not identify this varying-ring module Kan extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The underlying abelian sheaf of pullback of modules over an inverse image sheaf of rings is naturally isomorphic to abelian sheaf inverse image",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleOperations",
+  "date": "2026-10-15",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-proetale-operations",
+   "place": "Statement paragraph beginning The inverse image is exact: forgetting its module action gives the exact inverse image on abelian sheaves; identifies that underlying inverse image for the chosen model-site module left adjoint.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleInverseImageUnderlying.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleModelModuleInverseImage_underlying",
+  "statement": "theorem proEtaleModelModuleInverseImage_underlying {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :\n    let A := (sheafCompose (ProEt.topology Y)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R\n    let B := (sheafCompose (ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)\n    let A' := ((AsSmall.down : proEtaleSiteModel Y ⥤ Y.ProEt).sheafPushforwardContinuous\n      RingCat.{u + 1} (proEtaleModelTopology Y) (ProEt.topology Y)).obj A\n    let B' := ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous\n      RingCat.{u + 1} (proEtaleModelTopology X) (ProEt.topology X)).obj B\n    Nonempty (SheafOfModules.pullback.{u + 1} (proEtaleModelRingUnit f R) ⋙\n      SheafOfModules.toSheaf B' ≅\n      SheafOfModules.toSheaf A' ⋙\n        Functor.sheafPullbackConstruction.sheafPullback (proEtaleModelBaseChange f)\n          AddCommGrpCat.{u + 1} (proEtaleModelTopology Y) (proEtaleModelTopology X))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261015T161024-L-259909",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261015T161024-L-259909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
