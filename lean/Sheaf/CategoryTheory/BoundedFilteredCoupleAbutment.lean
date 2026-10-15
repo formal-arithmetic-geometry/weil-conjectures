@@ -227,9 +227,11 @@ theorem boundedFilteredComplex_coupleAbutment
     rw [hi, show p + n - n = p by omega]
   have hGfinite (n : ℤ) : (G n).IsFinite := by
     refine ⟨a, b, ?_, ?_⟩
-    · rw [hG]
+    · change (G n).step a = ⊤
+      rw [hG]
       exact homology_image_top _ ha n
-    · rw [hG]
+    · change (G n).step b = ⊥
+      rw [hG]
       exact homology_image_bot _ hb n
   refine ⟨G, L, A, fun n ↦ Iso.refl _, hG, ?_, ?_, ?_, ?_⟩
   · intro n
