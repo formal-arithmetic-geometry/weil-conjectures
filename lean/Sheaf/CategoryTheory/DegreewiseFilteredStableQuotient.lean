@@ -107,6 +107,8 @@ theorem degreewiseFiltered_stable_quotient
   refine ⟨H, ?_, ?_, ?_⟩
   · intro n
     obtain ⟨lo, hi, hlo, hhi⟩ := L.cohomologyImage_isFinite hfinite n
+    change (L.cohomologyImage n).step lo = ⊤ at hlo
+    change (L.cohomologyImage n).step hi = ⊥ at hhi
     refine ⟨lo, hi, ?_, ?_⟩
     · change imageSubobject (((L.cohomologyImage n).step lo).arrow ≫ (c n).hom) = ⊤
       rw [← Subobject.exists_obj_eq_imageSubobject, hlo, Subobject.exists_iso_map, Subobject.map_top]
