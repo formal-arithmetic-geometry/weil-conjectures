@@ -175,5 +175,24 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-06c7b3c5c (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, master blueprint, unit/chapter route, and Stacks 010N/015F. All three steps correctly establish the canonical comparison for unbounded derived abelian sheaves. Checked edge cases, duplicate/generalization candidates, and archived target coefficient categories and morphism directions. No new nodes, missing dependencies, cycles, or repairs. Concrete checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d60b31b1b",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Review written to review.md. Complete fixes repair H3: geometric points require IsAlgClosed Ω, not merely IsSepClosed Ω; the Lean record and report are corrected. Original and replacement modules passed server-only compilation in 1.6 seconds each with no diagnostics. Repository heads unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricStalkCohomology",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_geometricStalk_cohomology_iso",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricStalkCohomology.lean",
+  "statement": "theorem nonempty_geometricStalk_cohomology_iso {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) (Q : _root_.DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) (q : ℤ) : Nonempty ((((Scheme.pointSmallEtale t).ulift.{u + 1}).sheafFiber (A := AddCommGrpCat.{u + 1})).obj ((_root_.DerivedCategory.homologyFunctor _ q).obj Q) ≅ (((Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).ulift.{u + 1}).sheafFiber (A := AddCommGrpCat.{u + 1})).obj ((_root_.DerivedCategory.homologyFunctor _ q).obj ((upperStar AddCommGrpCat.{u + 1} t).mapDerivedCategory.obj Q)))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-15",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-d60b31b1b"
  }
 }
