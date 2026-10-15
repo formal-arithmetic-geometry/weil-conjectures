@@ -3,40 +3,159 @@
  "blueprint": {
   "is": "lem-kun-kunneth-map-natural",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Naturality of the Kunneth map",
- "statement": "Let\n\n$$\n\\begin{array}{ccc}\nX\\times_SY&\\xrightarrow{\\;q\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle p}&&\\Big\\downarrow{\\scriptstyle g}\\\\\nX&\\xrightarrow{\\;f\\;}&S\n\\end{array}\n$$\n\nbe a cartesian square, $\\Lambda$ a commutative ring, and let\n$E\\to E'$ and $K\\to K'$ be morphisms in\n$D(X_{\\Et},\\Lambda)$, respectively $D(Y_{\\Et},\\Lambda)$. Then the\nsquare\n\n$$\n\\begin{array}{ccc}\nRf_*E\\kunotimes{\\Lambda}Rg_*K&\\xrightarrow{\\ \\kappa_{E,K}\\ }&\nRc_*\\bigl(p^{-1}E\\kunotimes{\\Lambda}q^{-1}K\\bigr)\\\\\n\\Big\\downarrow{\\scriptstyle Rf_*(\\varphi)\\otimes Rg_*(\\psi)}&&\n\\Big\\downarrow{\\scriptstyle Rc_*(p^{-1}\\varphi\\otimes q^{-1}\\psi)}\\\\\nRf_*E'\\kunotimes{\\Lambda}Rg_*K'&\\xrightarrow{\\ \\kappa_{E',K'}\\ }&\nRc_*\\bigl(p^{-1}E'\\kunotimes{\\Lambda}q^{-1}K'\\bigr)\n\\end{array}\n$$\n\ncommutes; that is, $\\kappa$ is natural in $E$ and in $K$.",
+ "statement": "Let\n\n$$\n\\begin{array}{ccc}\nX\\times_SY&\\xrightarrow{\\;q\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle p}&&\\Big\\downarrow{\\scriptstyle g}\\\\\nX&\\xrightarrow{\\;f\\;}&S\n\\end{array}\n$$\n\nbe a cartesian square [def-weil-pbc-cartesian-square], set\n$c=f\\circ p=g\\circ q$, let $\\Lambda$ be a commutative ring, and let\n$\\varphi:E\\to E'$ and $\\psi:K\\to K'$ be morphisms in\n$D(X_{\\Et},\\Lambda)$, respectively $D(Y_{\\Et},\\Lambda)$. Use the ordinary unbounded derived categories and derived tensor of\n[def-kun-derived-tensor], and the Kunneth map of [def-kun-kunneth-map]. Then the\nsquare\n\n$$\n\\begin{array}{ccc}\nRf_*E\\kunotimes{\\Lambda}Rg_*K&\\xrightarrow{\\ \\kappa_{E,K}\\ }&\nRc_*\\bigl(p^{-1}E\\kunotimes{\\Lambda}q^{-1}K\\bigr)\\\\\n\\Big\\downarrow{\\scriptstyle Rf_*(\\varphi)\\otimes Rg_*(\\psi)}&&\n\\Big\\downarrow{\\scriptstyle Rc_*(p^{-1}\\varphi\\otimes q^{-1}\\psi)}\\\\\nRf_*E'\\kunotimes{\\Lambda}Rg_*K'&\\xrightarrow{\\ \\kappa_{E',K'}\\ }&\nRc_*\\bigl(p^{-1}E'\\kunotimes{\\Lambda}q^{-1}K'\\bigr)\n\\end{array}\n$$\n\ncommutes; that is, $\\kappa$ is natural in $E$ and in $K$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-natural.md",
   "place": "node lem-kun-kunneth-map-natural, order 1741"
  },
  "stmt_deps": [
-  "def-weil-pbc-cartesian-square"
+  "def-weil-pbc-cartesian-square",
+  "def-kun-derived-tensor",
+  "def-kun-kunneth-map"
  ],
  "proof": [
   {
-   "text": "By [def-kun-kunneth-map] the map $\\kappa_{E,K}$ is the mate,\nunder the fixed adjunction $c^{-1}\\dashv Rc_*$ of\n[def-weil-pbc-inverse-image], of a composite whose constituents\nare the fixed identification $c^{-1}\\cong p^{-1}f^{-1}\\cong q^{-1}g^{-1}$, the monoidal comparison, and the counits\n$\\varepsilon_f$, $\\varepsilon_g$; every constituent is natural in\n$E$ and $K$. The mate of a composite natural in these variables\nunder a fixed adjunction is natural, hence the displayed square\ncommutes.",
+   "text": "Work with the cartesian square and its chosen pullback identification from [def-weil-pbc-cartesian-square]. Work with small representatives of the small etale sites in the larger universe of [def-weil-size-convention]. Apply [lem-weil-pbc-site-derived-tensor-descent] on each site with its constant sheaf of commutative rings $\\Lambda_T$; this supplies the ordinary unbounded derived tensor bifunctor, denoted $\\otimes^L$ below. Use the unbounded module adjunction conventions of [def-kun-unbounded-exchange] for $u=f,g,c$: each morphism $u:U\\to V$ occurs as a vertical edge of the cartesian square with horizontal arrows $\\mathrm{id}_U,\\mathrm{id}_V$ and both vertical arrows $u$. Write $L=c^{-1}$, $R=Rc_*$ and $\\eta:\\mathrm{id}\\to RL$. Put $M=Rf_*E\\otimes^L Rg_*K$, $N=p^{-1}E\\otimes^L q^{-1}K$, and use primes for the corresponding objects at $(E',K')$. Set $A=Rf_*(\\varphi)\\otimes^L Rg_*(\\psi):M\\to M'$ and $B=p^{-1}\\varphi\\otimes^L q^{-1}\\psi:N\\to N'$. By [def-kun-kunneth-map], the transpose of $\\kappa_{E,K}$ is $a=d\\circ\\chi:LM\\to N$, where $\\chi:LM\\xrightarrow{\\sim}p^{-1}f^{-1}Rf_*E\\otimes^L q^{-1}g^{-1}Rg_*K$ is its specified comparison and $d=p^{-1}\\varepsilon_{f,E}\\otimes^L q^{-1}\\varepsilon_{g,K}$. Define $a',d',\\chi'$ analogously.",
    "uses": [
-    "def-kun-kunneth-map",
-    "def-weil-pbc-inverse-image"
+    "def-weil-pbc-cartesian-square",
+    "def-weil-size-convention",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-kun-unbounded-exchange",
+    "def-kun-kunneth-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-natural.md",
+    "place": "Proof, fixed adjunction and the composite defining the transpose; unbounded module conventions made explicit"
+   }
+  },
+  {
+   "text": "Let $H=p^{-1}f^{-1}Rf_*(\\varphi)\\otimes^L q^{-1}g^{-1}Rg_*(\\psi)$. The bifunctorial monoidality isomorphism of [lem-kun-inverse-image-monoidal], used at $c$, and the canonical identifications of inverse-image functors specified in [def-kun-kunneth-map] give $\\chi'\\circ L(A)=H\\circ\\chi$. To check the direction, put $J=c^{-1}Rf_*(\\varphi)\\otimes^L c^{-1}Rg_*(\\psi)$ and write $m:c^{-1}Rf_*E\\otimes^L c^{-1}Rg_*K\\to LM$ for the canonical monoidal comparison. Its naturality equation is $L(A)\\circ m=m'\\circ J$; multiplication by $(m')^{-1}$ and $m^{-1}$ gives $(m')^{-1}\\circ L(A)=J\\circ m^{-1}$. The natural identifications $c^{-1}\\cong p^{-1}f^{-1}$ and $c^{-1}\\cong q^{-1}g^{-1}$ carry $J$ to $H$ and $m^{-1}$ to $\\chi$, giving the claimed equation.",
+   "uses": [
+    "lem-kun-inverse-image-monoidal",
+    "def-kun-kunneth-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; naturality of the canonical comparison"
+   }
+  },
+  {
+   "text": "The counits of the fixed unbounded adjunctions in [def-kun-unbounded-exchange] are natural transformations. Consequently $\\varepsilon_{f,E'}\\circ f^{-1}Rf_*(\\varphi)=\\varphi\\circ\\varepsilon_{f,E}$ and $\\varepsilon_{g,K'}\\circ g^{-1}Rg_*(\\psi)=\\psi\\circ\\varepsilon_{g,K}$. Applying the functors $p^{-1}$ and $q^{-1}$ gives $p^{-1}\\varepsilon_{f,E'}\\circ p^{-1}f^{-1}Rf_*(\\varphi)=p^{-1}\\varphi\\circ p^{-1}\\varepsilon_{f,E}$ and $q^{-1}\\varepsilon_{g,K'}\\circ q^{-1}g^{-1}Rg_*(\\psi)=q^{-1}\\psi\\circ q^{-1}\\varepsilon_{g,K}$. These are simply the defining naturality squares of the two counits, followed by functors.",
+   "uses": [
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph: unit and counit are morphisms of functors"
+   }
+  },
+  {
+   "text": "Use the bifunctor in [lem-weil-pbc-site-derived-tensor-descent] to tensor the two equations of step 3. Its preservation of composition gives $d'\\circ H=B\\circ d$. Combining this with step 2 and the transpose formula in [def-kun-kunneth-map], associativity gives $a'\\circ L(A)=d'\\circ\\chi'\\circ L(A)=d'\\circ H\\circ\\chi=B\\circ d\\circ\\chi=B\\circ a$. This proves the required compatibility before transposing; no assertion that a Kunneth map is invertible has been used.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-kun-kunneth-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and its preceding construction; composition in the derived tensor bifunctor"
+   }
+  },
+  {
+   "text": "By the adjunct formula of [lem-weil-pbc-adjunct-counit-identity], the definition [def-kun-kunneth-map] gives $\\kappa_{E,K}=R(a)\\circ\\eta_M$ and $\\kappa_{E',K'}=R(a')\\circ\\eta_{M'}$. Naturality of the unit of $L\\dashv R$ from [def-kun-unbounded-exchange] says $\\eta_{M'}\\circ A=RL(A)\\circ\\eta_M$. Thus the equation of step 4 yields\n$$\n\\kappa_{E',K'}\\circ A\n=R(a')\\circ\\eta_{M'}\\circ A\n=R(a')\\circ RL(A)\\circ\\eta_M\n=R(a'\\circ L(A))\\circ\\eta_M\n=R(B\\circ a)\\circ\\eta_M\n=R(B)\\circ R(a)\\circ\\eta_M\n=R(B)\\circ\\kappa_{E,K}.\n$$\nThis is exactly the stated commutative square. Taking either $\\varphi$ or $\\psi$ to be an identity also gives naturality in each variable separately.",
+   "uses": [
+    "lem-weil-pbc-adjunct-counit-identity",
+    "def-kun-kunneth-map",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph: transpose equals right-adjoint map after unit; expanded blueprint final sentence"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-size-convention",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-kun-unbounded-exchange",
   "def-kun-kunneth-map",
-  "def-weil-pbc-inverse-image"
+  "lem-kun-inverse-image-monoidal",
+  "lem-weil-pbc-adjunct-counit-identity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-natural.md",
-  "place": "## Proof"
+  "place": "Proof: expanded all naturality equations and the fixed-adjunction mate argument; Stacks Tags 0037, 06YU, 07A4 supply the categorical and tensor conventions"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exterior product Kunneth morphism from the derived tensor product of two derived direct images to the derived direct image on a scheme fibre product is natural in both coefficient complexes",
+   "results": "8 displayed hits: AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pullbackObjFreeIso_hom_naturality.",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pullbacks, sheaf pushforwards, or scheme module comparisons; none states naturality of this derived etale Kunneth map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kunneth\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|künneth|externalProduct",
+   "results": "25 displayed hits: Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean. Read Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean:32-82: external products of functors, not the derived etale Kunneth map.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Kunneth external product map on unbounded derived categories of etale sheaves is natural in both variables",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|künneth",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the transpose of a morphism under an adjunction in both source and target, compatibility of homEquiv with precomposition and postcomposition",
+   "results": "8 displayed hits: CategoryTheory.Adjunction.homEquiv_naturality_left_square, CategoryTheory.Adjunction.homEquiv_naturality_right, CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.homEquiv_naturality_right_square, CategoryTheory.Adjunction.homEquiv_naturality_left_square_assoc, CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff, CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_two. Read Mathlib/CategoryTheory/Adjunction/Basic.lean:226-275: generic naturality of homEquiv.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: this supplies the final abstract mate calculation only; naturality of the specific monoidal-comparison/counit composite still has to be proved"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cup product of pushforwards of two sheaf complexes is a natural transformation in both complexes, obtained by adjunction from pullback tensor comparison and counits",
+   "results": "8 displayed hits: SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardNatTrans_app_val_app, SheafOfModules.pushforwardNatTrans, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafPushforwardContinuousNatTrans, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardNatTrans_comp.",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pullbacks, sheaf pushforwards, or scheme module comparisons; none states naturality of this derived etale Kunneth map"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_square",
+   "results": "1 displayed hits: CategoryTheory.Adjunction.homEquiv_naturality_left_square. Read Mathlib/CategoryTheory/Adjunction/Basic.lean:226-275: generic naturality of homEquiv.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: this supplies the final abstract mate calculation only; naturality of the specific monoidal-comparison/counit composite still has to be proved"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +182,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-kunneth-map-natural",
+  "worker": "stage1",
+  "summary": "Expanded the imported mate-naturality paragraph into five typed steps: unbounded module conventions, naturality of the monoidal comparison, naturality of both derived counits, tensoring the equations, and an explicit unit calculation. Reused existing nodes only. Added the missing statement dependencies and bound c, phi and psi explicitly. Avoided the underived-only adjunction citation and the pro-etale-only tensor-functoriality node.",
+  "blueprint": "The complete proof paragraph: steps 1-2 realize the fixed identification and monoidal comparison; step 3 realizes both counits; step 4 realizes naturality of their composite; step 5 expands the sentence that its mate is natural.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Supplies the unbounded derived tensor bifunctor for an arbitrary small ringed site, applied to the small etale sites with constant Lambda; the unit has no separate node stating tensor bifunctoriality on morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q45-f5f39563c",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-f5f39563c (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, master blueprint sources, Stacks locations, and unit/chapter route. All five steps prove the exact unbounded étale naturality square; comparison directions and adjunction equations check out. Small cases, duplicate candidates, and dependency cycles checked. Accepted tensor-descent tool use; no repairs needed. Details written to review.md."
+ }
 }
