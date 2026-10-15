@@ -29,92 +29,77 @@
  ],
  "proof": [
   {
-   "text": "Let $a:A\\to B$ be an epimorphism of module sheaves. By the cokernel description, the presheaf $Q(V)=B(V)/a(A(V))$ has zero sheafification. Underlying-set sheafification and local equality therefore show that every $b\\in B(V)$ locally belongs to $a(A)$. The underlying map of sheaves of sets is an epimorphism: if two maps out of $B$ agree after $a$, local lifts make them agree on a cover for every section of $B$, and separatedness makes them agree globally. This verifies the set-sheaf epimorphism hypothesis needed to use weak contractibility, rather than assuming module epimorphisms are sectionwise surjective.",
+   "text": "Apply weaklyContractible_evaluation_preservesHomology to the given weak contractibility hypothesis. Evaluation is additive by its sectionwise definition, so Functor.preservesFiniteLimits_of_preservesHomology and Functor.preservesFiniteColimits_of_preservesHomology give finite-limit and finite-colimit preservation.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex",
-    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits), 00WK (lemma-sections-sheafification), 00WB (theorem-plus)"
-   }
-  },
-  {
-   "text": "Weak contractibility of $W$ now makes $A(W)\\to B(W)$ surjective for each module epimorphism. Evaluation is additive and preserves kernels by sectionwise limits. For any $a:A\\to B$, factor it as $A\\twoheadrightarrow I\\hookrightarrow B$, where $I=\\ker(B\\to\\operatorname{coker}a)$. Applying the just-proved surjectivity to $A\\twoheadrightarrow I$ and $B\\twoheadrightarrow\\operatorname{coker}a$, and sectionwise kernels to both inclusions, gives $\\operatorname{coker}(a(W))=(\\operatorname{coker}a)(W)$. The same argument applied to a short exact sequence gives exactness of evaluation in $R(W)$-modules.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0946 (lemma-w-contractible), (1), with Tag 03DA (lemma-abelian)"
+    "place": "Tag 0946 (1), exact evaluation."
    }
   },
   {
-   "text": "Let $(M_i)_{i\\in I}$ be any small family and put $P(V)=\\bigoplus_i M_i(V)$. Its sheafification is the sheaf coproduct, by the sectionwise-colimit description. For $s\\in P^\\#(W)$, underlying-set sheafification and local representation give a covering $V_a\\to W$ and representatives $p_a\\in P(V_a)$. By the covering definition on the pro-etale site, since $W$ itself is affine, choose finitely many affine opens $T_b\\subset V_{a(b)}$ whose maps form a covering of $W$. Restrict the representatives to these $T_b$. Their supports have finite union $E\\subset I$. This is the only use of affineness: a finite refinement exists even if the original covering is infinite.",
+   "text": "Every covering sieve on an affine pro-etale object contains a finite covering family. Extract a covering presieve using precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition, map its zero-hypercover to schemes, and use QuasiCompactCover.exists_hom for a finite affine refinement. Lift the refinement back to the pro-etale over-category; each composite still lies in the original sieve.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local",
     "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
-    "place": "Tag 0935 (lemma-sections-over-quasi-compact), (2), expanded using the fpqc covering definition"
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0935 (2), finite refinement of an fpqc cover over an affine scheme."
    }
   },
   {
-   "text": "For each $i\\in E$, the $i$-coordinates of these representatives agree on $T_b\\times_W T_c$: their images in $P^\\#$ agree there, so local equality after sheafification makes the coordinates locally equal, and separatedness of $M_i$ makes them equal on the overlap. Glue them to $m_i\\in M_i(W)$. The finitely supported tuple $(m_i)$ maps to $s$, since this holds over every $T_b$. Conversely, if a finitely supported tuple maps to zero in $P^\\#(W)$, local equality makes every coordinate locally zero, hence zero by separatedness. Thus the canonical $R(W)$-linear comparison $\\bigoplus_i M_i(W)\\to(\\bigoplus_i M_i)(W)$ is bijective. For $I=\\varnothing$ the source and target are zero, by the same argument.",
-   "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": true,
+   "text": "For any small diagram of module sheaves, its presheaf-colimit comparison to the sheaf colimit is locally surjective. Apply PresheafOfModules.sheafificationAdjunction to the presheaf colimit. The left adjoint preserves this colimit, and its counit identifies the sheafified diagram with the original diagram. Uniqueness of colimits identifies the comparison with the sheafification unit followed by an isomorphism; the triangle identity verifies the identification on every inclusion. The unit is locally surjective by Mathlib’s WEqualsLocallyBijective instance.",
+   "uses": [],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex",
-    "place": "Tag 0935 (lemma-sections-over-quasi-compact), (2); Tag 00WB (theorem-plus), local equality"
+    "place": "Tags 03DB and 00WK, colimits as sheafifications and local representatives."
    }
   },
   {
-   "text": "For any small diagram $D:J\\to\\operatorname{Mod}(R)$ form $B=\\bigoplus_{j\\in\\operatorname{Ob}J}D(j)$ and $A=\\bigoplus_{\\alpha:j\\to k}D(j)$. Define $d:A\\to B$ on the $\\alpha$-summand by the inclusion of $D(j)$ minus the inclusion of $D(k)$ composed with $D(\\alpha)$. Maps from $B$ annihilating $d$ are exactly families $u_j:D(j)\\to N$ satisfying $u_j=u_kD(\\alpha)$, so $\\operatorname{coker}d$ with its inclusions is the colimit, by its universal property. Both sums are small in the stipulated universes. Applying the direct-sum and cokernel comparisons proved above gives exactly the same presentation in $R(W)$-modules, hence the canonical colimit comparison is an isomorphism for every small $J$. This argument also covers the empty category.",
+   "text": "Express a coproduct as the filtered colimit of its finite subcoproducts using isColimitFiniteSubproductsCocone. Local surjectivity supplies presheaf representatives on a covering, and presheaf evaluation followed by the module forgetful functor preserves this filtered colimit. Thus each local representative comes from a finite subcoproduct. Take a finite covering refinement and the union of those finite supports. The coproduct projection onto this union fixes each local representative. Naturality and separatedness show that it fixes the original section globally. Hence every section over W factors through a finite subcoproduct.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0935 (2), finite-support descent; projection replaces coordinate-by-coordinate gluing."
+   }
+  },
+  {
+   "text": "Additivity makes evaluation preserve finite coproducts, so every finite sigmaComparison is invertible. The finite-support result proves surjectivity of the arbitrary sigmaComparison. For injectivity, express an element in the source coproduct as an element of a finite subcoproduct using the filtered-colimit presentation in ModuleCat. The inclusion of the corresponding finite sheaf coproduct has a projection retraction. Applying this retraction to a vanishing comparison shows that the finite comparison of the element is zero, hence the element itself is zero. ConcreteCategory.isIso_iff_bijective and PreservesCoproduct.of_iso_comparison now give arbitrary coproduct preservation. Empty supports and empty coproducts are included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0935 (2), preservation of arbitrary direct sums."
+   }
+  },
+  {
+   "text": "Finite-colimit preservation supplies preservation of coequalizers. Apply Mathlib preservesColimits_of_preservesCoequalizers_and_coproducts, whose universal-property construction presents an arbitrary small colimit as a coequalizer of two coproducts. This gives PreservesColimitsOfSize in exactly the section universe, including the empty diagram. The filtered comparison is therefore an isomorphism. Its naturality is Mathlib colimit.map_post applied to the natural transformation and evaluation functor.",
+   "uses": [
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/categories.tex",
-    "place": "Tag 03DB (lemma-limits-colimits); Tag 002F (definition-colimit), explicit cokernel presentation"
-   }
-  },
-  {
-   "text": "The comparisons just obtained commute with each diagram-object inclusion by construction. For a natural transformation $D\\to D\\prime$, both composites in the comparison square therefore have equal composites with every inclusion $D(j)(W)$; the colimit universal property makes them equal. This proves naturality in diagrams. Specializing the arbitrary small indexing category to a filtered one gives the stated filtered-colimit comparison without additional hypotheses.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 002F (definition-colimit), uniqueness clause"
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DB and 002F, coproduct/coequalizer presentation and naturality of colimit comparison."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex",
-  "place": "Tag 0946 (1), Tag 0935 (2): expanded finite-support descent proof and explicit cokernel presentation of arbitrary colimits"
+  "place": "E1 Lean proof, 2026-10-16: reuse existing exact evaluation; finite covering refinement, sheafification-adjunction comparison, finite-support projection, bijective coproduct comparison, Mathlib coproduct/coequalizer construction and colimit.map_post. The generic comparison proof and finite-support strategy adapt the proved private arguments of Sheaf.AlgebraicGeometry.CompactFlatGeneratorCover to the pro-etale site."
  },
  "mathlib_searches": [
   {
@@ -247,5 +232,15 @@
   "by": "NU",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-c0bb5",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261015T183130-L-811621",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet, compiled cleanly, preserved the theorem signature, and all three direct importers compiled against the changed interface."
  }
 }
