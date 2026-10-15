@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-delta-proper-pushforward",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The double-dual morphism under a proper push-forward",
@@ -12,46 +12,189 @@
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-proper-pushforward.md",
   "place": "node lem-weil-delta-proper-pushforward, order 2123"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-derived-internal-hom",
+  "lem-weil-duality-pairing"
+ ],
  "proof": [
   {
-   "text": "Composition of the ambient right adjoints of\n[thm-amb-etale-exceptional-adjoint] gives\n$f^{\\times}\\omega_Y=\\omega_X$. As $f$ is proper,\n$Rf_!=Rf_*$; the ambient internal adjunction of\n[prop-asd-internal-adjunction], valid for arbitrary complexes,\ntherefore gives $D_YRf_*\\cong Rf_*D_X$.",
+   "text": "Use the ordinary unbounded small-etale module categories throughout. Write $s=\\operatorname{Spec}k$, $a_T:T\\to s$, $F=Rf_*$ and $H=f^{-1}$. A field is Noetherian (its only ideals are $0$ and $k$), so [pqf-lem-locnoeth-lft] makes the finite-type $k$-schemes locally Noetherian; their finite affine covers, part of finite type [def-weil-finite-type-morphism], make them Noetherian. The structure maps are compactifiable by [def-asd-compactifiable]; $f$ has compactification $(\\operatorname{id}_X,f)$. For every chosen compactification $T\\hookrightarrow\\overline T\\to B$ here, the proper map $\\overline T\\to B$ is finite type. Applying the same locally-Noetherian theorem over the Noetherian base $B$, and taking finite affine covers over a finite affine cover of $B$, also makes $\\overline T$ Noetherian. Thus [thm-amb-etale-exceptional-adjoint] supplies all three ambient right adjoints, and [def-amb-etale-compact-support] identifies $Rf_!$ with $F$ on that proper model. Apply [lem-sf-unbounded-compact-support-proper-composition] to $g=a_Y$ to obtain $Ra_{Y,!}F\\cong Ra_{X,!}$ on the whole unbounded category. This is the needed left-adjoint composition, rather than a bounded-below composition used outside its domain.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "def-weil-finite-type-morphism",
+    "def-asd-compactifiable",
+    "thm-amb-etale-exceptional-adjoint",
+    "def-amb-etale-compact-support",
+    "lem-sf-unbounded-compact-support-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-proper-pushforward.md",
+    "place": "Proof, first paragraph; Stacks 0F7H–0F7J, ordinary torsion-ring unbounded specialization"
+   }
+  },
+  {
+   "text": "The adjunctions in Step 1 give, naturally in a test complex $P$ on $X$ and $B$ on $s$,\n$$\\operatorname{Hom}_X(P,f^\\times a_Y^\\times B)\\cong\\operatorname{Hom}_Y(FP,a_Y^\\times B)\\cong\\operatorname{Hom}_s(Ra_{Y,!}FP,B)\\cong\\operatorname{Hom}_X(P,a_X^\\times B).$$\nFor completeness, a natural family of bijections $\\Phi_P:\\operatorname{Hom}(P,U)\\cong\\operatorname{Hom}(P,V)$ gives inverse arrows $\\Phi_U(1_U):U\\to V$ and $\\Phi_V^{-1}(1_V):V\\to U$: naturality says both families are postcomposition with these arrows, and the inverse-family identities give their two composites equal to identities. Applied here at $B=A_s$, it identifies $f^\\times\\omega_Y$ with $\\omega_X$. Transport the counit of $F\\dashv f^\\times$ along this identification and call it $t:F\\omega_X\\to\\omega_Y$. The construction uses only the three stated ambient adjunctions and the composition of Step 1, without a constructible exceptional-adjoint hypothesis.",
    "uses": [
     "thm-amb-etale-exceptional-adjoint",
-    "prop-asd-internal-adjunction"
+    "lem-sf-unbounded-compact-support-proper-composition"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-proper-pushforward.md",
+    "place": "Proof, first paragraph: composition of right adjoints"
+   }
   },
   {
-   "text": "Push forward the evaluation of [lem-weil-duality-pairing] and\ncompose with the projection morphism of\n[lem-amb-proper-coproducts-projection] and the exceptional counit.\nThe resulting pairing is\n\n$$\nRf_*K\\otimes_A^LRf_*D_XK\n\\longrightarrow Rf_*(K\\otimes_A^LD_XK)\n\\longrightarrow Rf_*\\omega_X\\longrightarrow\\omega_Y.\n$$",
+   "text": "We will use the tensor–Hom adjunction on arbitrary complexes, with no perfectness condition. The first assertion of [lem-weil-pbc-ringed-internal-hom-exact-restriction] and [lem-pur-rhom-global-sections], applied to the constant ring sheaf $A_T$, give\n$$\\operatorname{Hom}(Q,R\\mathcal Hom(L,N))\\cong H^0(T_{\\mathrm{et}},R\\mathcal Hom(Q,R\\mathcal Hom(L,N)))\\cong H^0(T_{\\mathrm{et}},R\\mathcal Hom(Q\\otimes^L L,N))\\cong\\operatorname{Hom}(Q\\otimes^L L,N).$$\nHere $H^0(T_{\\mathrm{et}},-)$ means zeroth hypercohomology, computed by global sections of a K-injective representative as in [lem-pur-rhom-global-sections]; it is an abelian group, not a cohomology sheaf. Evaluation is the inverse transpose of the identity. Set $e_L:D_XL\\otimes^L L\\to\\omega_X$ and $e'_V:D_YV\\otimes^L V\\to\\omega_Y$. By [lem-weil-duality-pairing], $\\delta_L$ is the transpose of $e_L\\sigma_{L,D_XL}$, so the defining equation is\n$$e_{D_XL}(\\delta_L\\otimes1_{D_XL})=e_L\\sigma_{L,D_XL}.$$\nThe identical equation holds on $Y$. All symmetries below are those of [lem-kun-tensor-sym], with the signed symmetry fixed by [def-kun-derived-tensor].",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "lem-weil-duality-pairing",
+    "lem-kun-tensor-sym",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-proper-pushforward.md",
+    "place": "Proof, second and third paragraphs; Stacks 08J9 (lemma-internal-hom)"
+   }
+  },
+  {
+   "text": "Let $\\epsilon_U:HFU\\to U$ be the ordinary counit of $H\\dashv F$, as specified in [def-kun-projection-formula-map]. For complexes $U,V$ on $X$ define\n$$\\mu_{U,V}:FU\\otimes^L FV\\longrightarrow F(U\\otimes^L V)$$\nto be the adjoint of $\\epsilon_U\\otimes\\epsilon_V$ after the canonical monoidal identification of [lem-kun-inverse-image-monoidal]. Equivalently, it is the projection map $FU\\otimes FV\\to F(U\\otimes HFV)$ followed by $F(1\\otimes\\epsilon_V)$. Define\n$$b_L=t\\,F(e_L)\\mu_{D_XL,L}:FD_XL\\otimes FL\\to\\omega_Y,$$\nand let $\\theta_L:FD_XL\\to D_YFL$ be its transpose under Step 3. To check both its invertibility and that it is the canonical internal-adjunction map [prop-asd-internal-adjunction], apply that adjunction construction explicitly to a test object $Q$:\n$$\\operatorname{Hom}(Q,FD_XL)\\cong\\operatorname{Hom}(HQ,D_XL)\\cong\\operatorname{Hom}(HQ\\otimes L,\\omega_X)\\cong\\operatorname{Hom}(F(HQ\\otimes L),\\omega_Y)\\cong\\operatorname{Hom}(Q\\otimes FL,\\omega_Y)\\cong\\operatorname{Hom}(Q,D_YFL).$$\nThe penultimate bijection is precomposition with the invertible proper projection map of [lem-amb-proper-coproducts-projection]. The other bijections are the two adjunctions already specified and Step 3. Write $\\lambda_{Q,L}:Q\\otimes FL\\to F(HQ\\otimes L)$ for that projection isomorphism. Its $H\\dashv F$-adjunct is $1_{HQ}\\otimes\\epsilon_L$, after the monoidal identification. Following $q:Q\\to FD_XL$ through the bijections gives\n$$tF(e_L)F((\\epsilon_{D_XL}Hq)\\otimes1_L)\\lambda_{Q,L}.$$\nIndeed its first adjunct is $\\epsilon_{D_XL}Hq$, tensor–Hom gives $e_L((\\epsilon_{D_XL}Hq)\\otimes1)$, and $F\\dashv f^\\times$ sends this to $t$ composed with its $F$-image. To compare with $b_L(q\\otimes1)$, the two maps\n$$F((\\epsilon_{D_XL}Hq)\\otimes1_L)\\lambda_{Q,L},\\qquad \\mu_{D_XL,L}(q\\otimes1_{FL})$$\nfrom $Q\\otimes FL$ to $F(D_XL\\otimes L)$ have the same $H\\dashv F$-adjunct. The first adjunct is $((\\epsilon_{D_XL}Hq)\\otimes1_L)(1_{HQ}\\otimes\\epsilon_L)$, while the second is $(\\epsilon_{D_XL}\\otimes\\epsilon_L)(Hq\\otimes1_{HFL})$; both equal $(\\epsilon_{D_XL}Hq)\\otimes\\epsilon_L$. Here the canonical monoidal identifications are inserted and their naturality is used. Adjunction injectivity gives equality, so the displayed pairing is exactly $b_L(q\\otimes1)$. Thus this natural family is postcomposition with $\\theta_L$, rather than an unspecified isomorphism of the same objects. The inverse-family-at-identities argument of Step 2 makes $\\theta_L$ an isomorphism. This also verifies its canonical mate normalization without taking a formula from the proof of a cited node.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-kun-inverse-image-monoidal",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-amb-proper-coproducts-projection",
+    "prop-asd-internal-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-proper-pushforward.md",
+    "place": "Proof, first and second paragraphs: explicit canonical internal-adjunction mate"
+   }
+  },
+  {
+   "text": "Here are the naturality and symmetry identities needed in the evaluation calculation, with their verification. For $u:U\\to U'$ and $v:V\\to V'$, counit naturality gives $\\epsilon_{U'}HFu=u\\epsilon_U$ and $\\epsilon_{V'}HFv=v\\epsilon_V$. Hence the adjoints of the two sides of\n$$\\mu_{U',V'}(Fu\\otimes Fv)=F(u\\otimes v)\\mu_{U,V}$$\nare both $(u\\epsilon_U)\\otimes(v\\epsilon_V)$; the adjunction is injective. For the symmetry identity, the adjoints of the two sides of\n$$\\mu_{V,U}\\sigma_{FU,FV}=F(\\sigma_{U,V})\\mu_{U,V}$$\nare both $\\sigma_{U,V}(\\epsilon_U\\otimes\\epsilon_V)$, by naturality of the canonical signed tensor symmetry and the monoidal inverse image. These are the definition of $\\mu$ in Step 4 and [lem-kun-inverse-image-monoidal], [lem-kun-tensor-sym], not an additional coherence theorem. In bidegree $(p,q)$ both interchanges have the sign $(-1)^{pq}$ of [def-kun-derived-tensor].",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-tensor-sym",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-proper-pushforward.md",
+    "place": "Proof, third paragraph: naturality of projection and tensor symmetry written out"
+   }
+  },
+  {
+   "text": "Put $L=K$. We prove the well-typed identity\n$$\\theta_{D_XK}\\,F\\delta_K=D_Y(\\theta_K)\\,\\delta_{FK}:FK\\longrightarrow D_Y(FD_XK).$$\nUnder the tensor–Hom bijection of Step 3, the left side corresponds to the following pairing on $FK\\otimes FD_XK$:\n$$\\begin{aligned}\nb_{D_XK}(F\\delta_K\\otimes1)\n&=tF(e_{D_XK})\\mu_{D_XD_XK,D_XK}(F\\delta_K\\otimes1)\\\\\n&=tF(e_{D_XK}(\\delta_K\\otimes1))\\mu_{K,D_XK}\\\\\n&=tF(e_K\\sigma_{K,D_XK})\\mu_{K,D_XK}\\\\\n&=b_K\\sigma_{FK,FD_XK}.\n\\end{aligned}$$\nThe second equality is Step 5 naturality, the third is the defining double-evaluation equation of Step 3, and the last is Step 5 symmetry. For the right side, contravariant internal Hom acts by precomposition, so its pairing is\n$$e'_{D_YFK}(\\delta_{FK}\\otimes\\theta_K)=e'_{FK}(\\theta_K\\otimes1_{FK})\\sigma_{FK,FD_XK}=b_K\\sigma_{FK,FD_XK}.$$\nThe first equality is the same defining double-evaluation equation on $Y$ followed by naturality of symmetry; the second is the definition of $\\theta_K$. Both pairings are equal, so injectivity of the adjunction bijection proves the stated identity. This supplies the two-transpose argument and its signs explicitly; no invertibility of either $\\delta$ has been used.",
    "uses": [
     "lem-weil-duality-pairing",
-    "lem-amb-proper-coproducts-projection"
+    "def-pur-derived-internal-hom",
+    "lem-kun-tensor-sym"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-proper-pushforward.md",
+    "place": "Proof, third paragraph: the double-transpose equality"
+   }
   },
   {
-   "text": "The isomorphism of [prop-asd-internal-adjunction] is exactly the\nadjoint of this pairing. Transpose evaluation twice. Its first\ntranspose is the double-dual arrow by definition, while its second\ntranspose is evaluation for the dual precomposed with that arrow.\nTensor symmetry includes its Koszul signs. Naturality of the\nprojection morphism and counit therefore identifies the two\ntransposes after push-forward with the same transposes of the\ndisplayed pairing. Equivalently, the canonical composite\n\n$$\nRf_*D_XD_XK\\cong D_YRf_*D_XK\n\\cong D_YD_YRf_*K\n$$\n\ncarries $Rf_*\\delta_K$ to $\\delta_{Rf_*K}$. Both comparison\nmaps are isomorphisms independently of biduality, proving the last\nassertion as well.",
+   "text": "Both $\\theta_K$ and $\\theta_{D_XK}$ are isomorphisms by Step 4, which was valid for arbitrary $L$. The contravariant functor $D_Y$ sends inverse pairs to inverse pairs, hence $D_Y(\\theta_K)$ is invertible. Therefore\n$$c_K=D_Y(\\theta_K)^{-1}\\theta_{D_XK}:FD_XD_XK\\xrightarrow{\\sim}D_YD_YFK$$\nis the double-dual comparison, and Step 6 gives $c_KF\\delta_K=\\delta_{FK}$. If $\\delta_{FK}$ is invertible, $F\\delta_K=c_K^{-1}\\delta_{FK}$ is invertible, with inverse $\\delta_{FK}^{-1}c_K$. This proves precisely the claimed implication for the pushed-forward arrow, without claiming that $F$ reflects isomorphisms. None of the argument restricts to a constructible subcategory or invokes geometric biduality.",
    "uses": [
-    "prop-asd-internal-adjunction"
+    "def-pur-derived-internal-hom"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-proper-pushforward.md",
+    "place": "Proof, final displayed comparison and last assertion"
+   }
   }
  ],
  "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "def-weil-finite-type-morphism",
+  "def-asd-compactifiable",
   "thm-amb-etale-exceptional-adjoint",
-  "prop-asd-internal-adjunction",
+  "def-amb-etale-compact-support",
+  "lem-sf-unbounded-compact-support-proper-composition",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
   "lem-weil-duality-pairing",
-  "lem-amb-proper-coproducts-projection"
+  "lem-kun-tensor-sym",
+  "def-kun-derived-tensor",
+  "def-kun-projection-formula-map",
+  "lem-kun-inverse-image-monoidal",
+  "lem-amb-proper-coproducts-projection",
+  "prop-asd-internal-adjunction",
+  "def-pur-derived-internal-hom"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-proper-pushforward.md",
-  "place": "## Proof"
+  "place": "Proof, all three paragraphs expanded; unbounded composition justified by Stacks 0F7H–0F7J and tensor–Hom by 08J9"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|verdier|dual.*pushforward",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean. Read the returned types: no hit states proper etale Verdier exchange with compatibility of the canonical double-dual morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward preserves the double dual morphism under the canonical Verdier duality exchange isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image commutes with Verdier duality and preserves the canonical double dual evaluation morphism on arbitrary complexes of etale sheaves",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, SheafOfModules.pushforwardNatIso, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, SheafOfModules.pushforwardNatIso_hom, TopCat.Sheaf.pushforwardForgetIso, TopCat.Sheaf.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafPushforwardContinuous_obj_val_map, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom. Read the returned types: no hit states proper etale Verdier exchange with compatibility of the canonical double-dual morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dual\", \"map\"",
+   "results": "12 hits: WithBot.map_ofDual, WithTop.map_ofDual, WithBot.map_toDual, WithTop.map_toDual, WithBot.toDual_map, WithTop.toDual_map, WithBot.ofDual_map, WithTop.ofDual_map. Read the returned types: no hit states proper etale Verdier exchange with compatibility of the canonical double-dual morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toIhomIhom|bidual|doubleDual|VerdierDual",
+   "results": "0 hits: . Read the returned types: no hit states proper etale Verdier exchange with compatibility of the canonical double-dual morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric lax monoidal functor with trace compatible internal Hom comparison preserves the canonical map from an object to its double dual",
+   "results": "8 hits: CategoryTheory.frobeniusMorphism_mate, CategoryTheory.coev_expComparison, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight. Read the returned types: no hit states proper etale Verdier exchange with compatibility of the canonical double-dual morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"map\"",
+   "results": "12 hits: AddActionSemiHomClass.map_vaddₛₗ, MulActionSemiHomClass.map_smulₛₗ, SemilinearMapClass.distribMulActionSemiHomClass, SemilinearMapClass.toMulActionSemiHomClass, NonUnitalAlgHomClass.instSemilinearMapClassOfNonUnitalAlgSemiHomClassOfClassRingHom, CategoryTheory.MonoidalClosed.curry'_ihom_map, CategoryTheory.MonoidalClosed.uncurry_ihom_map, CategoryTheory.MonoidalClosed.pre_comm_ihom_map. Read the returned types: no hit states proper etale Verdier exchange with compatibility of the canonical double-dual morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -76,5 +219,64 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-delta-proper-pushforward",
+  "worker": "stage1",
+  "summary": "Expanded the canonical mate and two-transpose argument into explicit Hom bijections and an equality of evaluation pairings. Added one strictly auxiliary unbounded proper compact-support composition statement because the existing composition nodes are bounded below. Reused generic ordinary etale/ringed-site nodes, avoiding the pro-etale tensor-Hom scope mismatch. Statement unchanged. Second reading corrected the global-hypercohomology notation, checked compactification Noetherianity, and expanded the test-arrow counit computation.",
+  "blueprint": "Step 1–2 realize the first paragraph (including the previously missing unbounded compact-support composition); Step 3–4 realize the pairing and canonical exchange; Step 5–7 realize the third paragraph and the final implication. The containing unit has no prescribed proof steps and this is not its key node.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic locally Noetherian finite-type tool verifies the Noetherian hypotheses of ambient adjoints; it replaces no geometric biduality step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site internal-Hom currying for arbitrary complexes supplies tensor–Hom adjunction on the ordinary etale site; the unit has no such general statement."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic identification of zeroth derived sections of internal Hom with derived-category Hom completes the currying bijection."
+   },
+   {
+    "node": "lem-kun-tensor-sym",
+    "why": "Generic signed symmetry of unbounded ordinary etale derived tensor, needed for the double-evaluation equation."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic strong monoidality of ordinary constant-coefficient inverse image identifies the adjoints defining the product map."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Proper projection isomorphism on arbitrary unbounded ordinary etale complexes is exactly the formal input prescribed by the blueprint."
+   },
+   {
+    "node": "prop-asd-internal-adjunction",
+    "why": "Canonical ambient internal-adjunction isomorphism is the exchange prescribed by the blueprint; its mate formula is checked explicitly in the item."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Unconditional ordinary etale ambient exceptional adjunction is precisely the blueprint input; no constructible admissibility is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-kun-tensor-sym",
+  "lem-kun-inverse-image-monoidal",
+  "lem-amb-proper-coproducts-projection",
+  "prop-asd-internal-adjunction",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-feff4537f",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-feff4537f (reviewer sub-agent of L); spot-checked: Read both nodes and all seven proof steps in full. Verified canonical exchange, double-evaluation signs, hypotheses, and unbounded torsion-coefficient scope against Stacks 0F7B/0F7H–0F7J and 08J9–08JA. No duplicate or delivery-introduced cycle found. Accepted eight declared tool uses. Concrete checks and unrelated baseline graph issues are recorded in review.md; no repairs needed."
+ }
 }
