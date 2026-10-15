@@ -27,7 +27,8 @@
   "def-weil-size-convention",
   "def-weil-pbc-proetale-site",
   "def-pc-scheme",
-  "lem-weil-pbc-profinite-point-pullback"
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-point-lan-affine-evaluation"
  ],
  "proof": [
   {
@@ -154,5 +155,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedPointBasisEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_point_basis_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.pointBasisRingInverseImage",
+   "AlgebraicGeometry.ProEtale.PointBasisEvaluationProperty",
+   "AlgebraicGeometry.ProEtale.condensed_point_basis_evaluation"
+  ],
+  "file": "lean/Sheaf/Paper/CondensedPointBasisEvaluation.lean",
+  "statement": "theorem condensed_point_basis_evaluation (X : Scheme.{u}) : PointBasisEvaluationProperty X (Type (u + 1)) (profinitePointSetSchemeInverseImage X) ∧ PointBasisEvaluationProperty X AddCommGrpCat.{u + 1} (upperStarFromPoint X) ∧ PointBasisEvaluationProperty X CommRingCat.{u + 1} (pointBasisRingInverseImage X) ∧ (∀ (U : X.ProEt) (hU : IsAffine U.left) (wU : PointLanWeaklyContractible X U), CompactSpace (pointLanComponents X U hU wU) ∧ T2Space (pointLanComponents X U hU wU) ∧ TotallyDisconnectedSpace (pointLanComponents X U hU wU) ∧ ∀ s : Set (ConnectedComponents U.left), IsOpen s ↔ IsOpen (ConnectedComponents.mk ⁻¹' s))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Uses the landed point-Lan node for its weak-contractibility predicate and actual profinite connected-component quotient. The property packages simultaneous naturality in each coefficient category; the ring inverse-image abbreviation is the actual composite of the two sheafified Kan extensions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-084983a04",
+  "group": "NF",
+  "result": "pass",
+  "note": "Audited node, dependencies, source, declarations, docstrings, edge cases, report sections, and universes. Immutable module compiled via scompile.py in sandbox and library modes without diagnostics; no substantive or mechanical faults found. Review recorded in review.md."
  }
 }
