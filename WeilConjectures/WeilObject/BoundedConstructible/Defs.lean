@@ -17,7 +17,7 @@ Let `ℓ` be a prime and `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ` the con
 `X` be a scheme with an automorphism `e : X ≅ X`. The *Frobenius pullback* on the bounded
 constructible derived category `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` of `ℚ̄_ℓ`-sheaves, the module objects over
 `ℚ̲̄_ℓ,X = p_X^* ℚ̲̄_ℓ`, is the restricted derived pullback
-`Φ_X := Le^* = boundedConstructibleUpperStar ℚ̲̄_ℓ ℓ k e.hom`. The coefficients are kept fixed by
+`Φ_X := Le^* = boundedConstructibleUpperStar ℚ̲̄_ℓ ℓ e.hom`. The coefficients are kept fixed by
 construction: the pullback on module objects is the extension of scalars along the coefficient
 isomorphism `α_e : e^* ℚ̲̄_ℓ,X ≅ ℚ̲̄_ℓ,X`, and the preservation of bounded constructibility is the
 input `boundedConstructible_leftDerivedUpperStar_obj`.
@@ -39,16 +39,16 @@ the transport of algebras along the inclusion, using the compatibility isomorphi
 The setting is that of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`, specialized to
 the coefficient ring `ℚ̲̄_ℓ`: a prime `ℓ`, a field `k` of characteristic `p > 0` with `p ≠ ℓ`,
-and `X` separated and of finite type over `Spec k`. The automorphism `e` is required to be a
-morphism over `Spec k` (`[e.hom.IsOver (Spec (.of k))]`), as is every morphism to which the
-bounded constructible pullback applies.
+and `X` separated and of finite type over `Spec k`. The automorphism `e : X ≅ X` is an
+isomorphism of `Over (Spec (.of k))`, the bounded constructible pullback being defined for
+morphisms of `Over (Spec (.of k))` only.
 
 ## Implementation notes
 
 The geometric Galois Frobenius `Scheme.Hom.geometricFrobenius` of the geometric fiber of a
 scheme over a finite field `𝔽_q` is semilinear over `k̄ = 𝔽̄_q`, not a morphism over
-`Spec k̄`, and the geometric fiber is not of finite type over `𝔽_q`. It therefore does not fit
-the hypothesis `[e.hom.IsOver (Spec (.of k))]` for either choice of `k`. Applying the present
+`Spec k̄`, and the geometric fiber is not of finite type over `𝔽_q`. It therefore does not give
+an isomorphism of `Over (Spec (.of k))` for either choice of `k`. Applying the present
 definitions to it requires extending the bounded constructible pullback beyond `k`-morphisms, or
 a Frobenius-twist interface; this is not done here.
 
@@ -75,41 +75,41 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
-  {X : Scheme.{u}} [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
-  [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
-  (e : X ≅ X) [e.hom.IsOver (Spec (.of k))]
+  {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom]
+  (e : X ≅ X)
 
 /-- A *Weil object* of the bounded constructible derived category `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` of
 `ℚ̄_ℓ`-sheaves for an automorphism `e : X ≅ X` over `Spec k` is an object `K` together with an
-isomorphism `φ_K : Le^* K ≅ K`, where `Le^* = boundedConstructibleUpperStar ℚ̲̄_ℓ ℓ k e.hom` is
+isomorphism `φ_K : Le^* K ≅ K`, where `Le^* = boundedConstructibleUpperStar ℚ̲̄_ℓ ℓ e.hom` is
 the restricted derived pullback along `e`. The isomorphism `φ_K` is structure data, and
 morphisms are morphisms of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` commuting with the structure isomorphisms. -/
 abbrev WeilBoundedConstructible : Type _ :=
-  IsoAlgebra (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k e.hom)
+  IsoAlgebra (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom)
 
 namespace WeilBoundedConstructible
 
 /-- The forgetful functor from Weil objects of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` to `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, discarding the
 Frobenius structure isomorphisms. -/
 noncomputable def forget :
-    WeilBoundedConstructible ℓ k e ⥤ Dᵇc(X)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  IsoAlgebra.forget (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k e.hom)
+    WeilBoundedConstructible ℓ e ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  IsoAlgebra.forget (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom)
 
 /-- A Weil object of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` is a Weil object of the ambient derived category
 `D(Mod_{ℚ̲̄_ℓ,X})` for the derived pullback `L((e.hom)^*⟦ℚ̲̄_ℓ⟧)`: the transport of algebras along
 the inclusion, the structure isomorphism of `K` being
 `L((e.hom)^*⟦ℚ̲̄_ℓ⟧) K ≅ Le^* K ≅ K` through `boundedConstructibleUpperStarCompatibility`. -/
 noncomputable def toDerivedCategory :
-    WeilBoundedConstructible ℓ k e ⥤
-      IsoAlgebra L((e.hom)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+    WeilBoundedConstructible ℓ e ⥤
+      IsoAlgebra L((e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   IsoAlgebra.mapOfNatIso
-    (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ k e.hom).symm
+    (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ e.hom).symm
 
 @[simp]
-lemma toDerivedCategory_obj_carrier (K : WeilBoundedConstructible ℓ k e) :
-    ((toDerivedCategory ℓ k e).obj K).carrier = K.carrier.obj :=
+lemma toDerivedCategory_obj_carrier (K : WeilBoundedConstructible ℓ e) :
+    ((toDerivedCategory ℓ e).obj K).carrier = K.carrier.obj :=
   rfl
 
 end WeilBoundedConstructible

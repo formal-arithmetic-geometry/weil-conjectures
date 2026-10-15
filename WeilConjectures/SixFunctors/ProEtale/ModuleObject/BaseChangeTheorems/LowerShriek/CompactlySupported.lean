@@ -41,9 +41,10 @@ morphism `p` of a compactification `c : X ⟶[i] Z ⟶[p] Y` of `f`.
 As for the bounded constructible six functors
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), all schemes are
 separated and of finite type over a field `k` of characteristic `p > 0` with `p ≠ ℓ`, and all
-morphisms are morphisms over `Spec k`. The compactification `Z` of `f` and its base change
-`Z ×_Y Y'` are then separated and of finite type over `k` as well
-(`WeilConjectures.Compactification.Over`).
+morphisms are morphisms of `Over (Spec (.of k))`; in particular the cartesian square `sq` is a
+cartesian square of `Over (Spec (.of k))`. The compactification `Z` of `f.left` and its base
+change `Z ×_Y Y'` are then objects of `Over (Spec (.of k))`, separated and of finite type over
+`k` as well (`Compactification.overObj` of `WeilConjectures.Compactification.Over`).
 
 ## Main statements
 
@@ -68,19 +69,13 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-  (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
-  [X'.Over (Spec (.of k))] [Y'.Over (Spec (.of k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-  [IsSeparated (X ↘ Spec (.of k))]
-  [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
-  [IsSeparated (Y ↘ Spec (.of k))]
-  [LocallyOfFiniteType (X' ↘ Spec (.of k))] [QuasiCompact (X' ↘ Spec (.of k))]
-  [IsSeparated (X' ↘ Spec (.of k))]
-  [LocallyOfFiniteType (Y' ↘ Spec (.of k))] [QuasiCompact (Y' ↘ Spec (.of k))]
-  [IsSeparated (Y' ↘ Spec (.of k))]
-  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} [f.IsOver (Spec (.of k))]
-  [g.IsOver (Spec (.of k))] [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {X Y X' Y' : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+
 
 /-! ### For a compactification -/
 
@@ -92,10 +87,10 @@ isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`: in the defin
 exchange is an isomorphism by proper base change for the proper structure morphism `p` of `c`,
 and the extension-by-zero exchange is an isomorphism by base change for extension by zero. -/
 theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
-    (c : Compactification f) (sq : IsPullback g' f' f g) :
+    (c : Compactification f.left) (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
-      (Profinite.continuousMapRingObj E) ℓ k c sq) := by
-  have := isIso_boundedConstructibleBaseChange_of_isProper ℓ E k (c.baseChange_isPullback_g sq)
+      (Profinite.continuousMapRingObj E) ℓ c sq) := by
+  have := isIso_boundedConstructibleBaseChange_of_isProper ℓ E (c.overBaseChange_isPullback_g sq)
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
   infer_instance
 
@@ -104,11 +99,11 @@ compactification** of bounded constructible `ℚ̄_ℓ`-sheaves: for a compactif
 the compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.baseChange sq}` is
 an isomorphism of functors `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`. -/
 theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_padicAlgCl
-    (c : Compactification f) (sq : IsPullback g' f' f g) :
+    (c : Compactification f.left) (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
-      (Profinite.padicAlgClRingObj ℓ) ℓ k c sq) := by
-  have := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ k
-    (c.baseChange_isPullback_g sq)
+      (Profinite.padicAlgClRingObj ℓ) ℓ c sq) := by
+  have := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ
+    (c.overBaseChange_isPullback_g sq)
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq]
   infer_instance
 
@@ -130,9 +125,9 @@ the compact-support base-change morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'
 isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`, where `Rf_!` and `Rf'_!` are the lower
 shrieks `boundedConstructibleLowerShriek`. -/
 theorem isIso_boundedConstructibleLowerShriekBaseChange (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleLowerShriekBaseChange ℓ E k sq) := by
-  have := isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E k
-    (compactificationOverField k f) sq
+    IsIso (boundedConstructibleLowerShriekBaseChange ℓ E sq) := by
+  have := isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting ℓ E
+    (compactificationOverField f) sq
   rw [boundedConstructibleLowerShriekBaseChange_eq]
   infer_instance
 
@@ -142,9 +137,9 @@ compact-support base-change morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` 
 functors `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, where `Rf_!` and `Rf'_!` are the lower shrieks
 `boundedConstructibleLowerShriek`. -/
 theorem isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ k sq) := by
-  have := isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_padicAlgCl ℓ k
-    (compactificationOverField k f) sq
+    IsIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq) := by
+  have := isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_padicAlgCl ℓ
+    (compactificationOverField f) sq
   rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq]
   infer_instance
 
