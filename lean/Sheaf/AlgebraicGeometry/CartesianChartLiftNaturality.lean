@@ -9,6 +9,10 @@ import all Sheaf.AlgebraicGeometry.CartesianChartExchangeComparison
 import all Sheaf.AlgebraicGeometry.AbelianRawPullbackComposition
 import all Sheaf.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift
 import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality
+import Sheaf.AlgebraicGeometry.CartesianChartExchangeMapNaturality
+import Sheaf.AlgebraicGeometry.CartesianChartExchangeConclusion
+import Sheaf.AlgebraicGeometry.CartesianChartExchangeFinal
+import Sheaf.AlgebraicGeometry.CartesianChartExchangeObjects
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-! # Chart lifts commute with stage transitions
@@ -140,7 +144,7 @@ private theorem chart_pull_comp {B T T' T'' : Scheme.{u}}
     (fun t ↦ (DerivedCategory.Plus.singleFunctor _ 0).map
       (abelianFreeRepresentablePullbackSquareIso s W V r hr).hom ≫ t) e
 
-private theorem chartClassPullback_postcomp {B T T' : Scheme.{u}}
+private theorem chartClassPullback_postcomp' {B T T' : Scheme.{u}}
     (a : T ⟶ B) (b : T' ⟶ T) (a' : T' ⟶ B) (ha : a' = b ≫ a)
     (W : B.Etale) (V : T'.Etale) (r : V.left ⟶ W.left)
     (hr : IsPullback r V.hom W.hom a')
@@ -155,8 +159,6 @@ private theorem chartClassPullback_postcomp {B T T' : Scheme.{u}}
         (y ≫ (shiftFunctor _ q).map e) := by
   simp only [cartesianChartClassPullback, Functor.map_comp, Category.assoc]
   rw [Functor.commShiftIso_hom_naturality]
-
-
 
 private theorem rawComparison_inv_naturality {S Y Y' : Scheme.{u}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (q : ℕ)
@@ -220,7 +222,7 @@ private theorem chartPull_adj_naturality {S X B T T' : Scheme.{u}}
         ((cartesianChartRawAdjunctionIso f g a' g'' w' F n W).hom z') := by
   rw [Functor.map_comp, ← Category.assoc]
   rw [chart_pull_comp a b τ σ hσ a' ha ρ hρ W V r hr]
-  rw [chartClassPullback_postcomp]
+  rw [chartClassPullback_postcomp']
   congr 1
   simpa only [Category.assoc] using
     chartRawAdj_pullback f g a g' w b a' ha g'' w' wb l hl₁ hl₂ hw F n W z z' hz'
@@ -266,6 +268,129 @@ theorem cartesianChartCohomologyLift_naturality
         (restrictedOverCohomologyMap (pullback.snd f (D.obj j).hom)
           (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)
           (q : ℤ) ((cartesianChartDiagram f D j).map a) W x) := by
-  sorry
+  let k := pullback.snd f (D.obj j).hom
+  let Bl := (cartesianChartDiagram f D j).obj l
+  let Bm := (cartesianChartDiagram f D j).obj m
+  let F₀ := ((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F
+  let h := Bl.hom ≫ k
+  let h' := Bm.hom ≫ k
+  let G := restrictedOverCoefficient F₀ Bl
+  let G' := restrictedOverCoefficient F₀ Bm
+  let l' : pullback (D.map m.hom).left k ⟶ pullback (D.map l.hom).left k :=
+    ((cartesianChartDiagram f D j).map a).left
+  let l₀ : pullback (D.map m.hom).left k ⟶ pullback (D.map l.hom).left k :=
+    pullback.lift
+      (pullback.fst (D.map m.hom).left k ≫ (D.map a.left).left)
+      (pullback.snd (D.map m.hom).left k)
+      (by
+        rw [Category.assoc, ← pullback.condition]
+        congr 1
+        rw [← Over.comp_left, ← D.map_comp, Over.w])
+  have hmap : l' = l₀ := by
+    constructor <;> intro hh <;> simpa using hh
+  have hBl_hom : Bl.hom = pullback.snd (D.map l.hom).left k := by
+    exact chartDiagram_obj_hom f D j l
+  have hBm_hom : Bm.hom = pullback.snd (D.map m.hom).left k := by
+    exact chartDiagram_obj_hom f D j m
+  letI := isIso_rawRestrictedCohomologyComparison h q G W
+  letI := isIso_rawRestrictedCohomologyComparison h' q G' W
+  let z := (asIso (rawRestrictedCohomologyComparison h q G W)).inv x
+  let z' := (asIso (rawRestrictedCohomologyComparison h' q G' W)).inv
+    (restrictedOverCohomologyMap (pullback.snd f (D.obj j).hom)
+      (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)
+      (q : ℤ) ((cartesianChartDiagram f D j).map a) W x)
+  have hraw := restrictedOverCohomologyMap_raw_naturality_canonical
+    (pullback.snd f (D.obj j).hom)
+    (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)
+    q ((cartesianChartDiagram f D j).map a) W (by
+      rw [← Category.assoc, Over.w]) x
+  have hl1₀ : l₀ ≫ pullback.fst (D.map l.hom).left k =
+      pullback.fst (D.map m.hom).left k ≫ (D.map a.left).left := by
+    dsimp only [l₀]
+    exact pullback.lift_fst _ _ _
+  have hl2₀ : l₀ ≫ pullback.snd (D.map l.hom).left k =
+      pullback.snd (D.map m.hom).left k := by
+    dsimp only [l₀]
+    exact pullback.lift_snd _ _ _
+  have hl1 : l' ≫ pullback.fst (D.map l.hom).left k =
+      pullback.fst (D.map m.hom).left k ≫ (D.map a.left).left := by
+    rw [hmap]
+    exact hl1₀
+  have hl2 : l' ≫ pullback.snd (D.map l.hom).left k =
+      pullback.snd (D.map m.hom).left k := by
+    rw [hmap]
+    exact hl2₀
+  have hwh : l' ≫ h = h' := by
+    dsimp only [h, h', Bl, Bm]
+    change l' ≫ (pullback.snd (D.map l.hom).left k ≫ k) =
+      pullback.snd (D.map m.hom).left k ≫ k
+    rw [← Category.assoc, hl2]
+  have hcomp_eq : Bm.hom = l' ≫ Bl.hom := by
+    rw [hBm_hom, hBl_hom]
+    exact hl2.symm
+  have hraw' : rawRestrictedCohomologyComparison h' q G' W
+      (abelianHigherDirectImageRawPullback l' h h' hwh q G G'
+        ((upperStarComp AddCommGrpCat.{u + 1} l'
+          Bl.hom Bm.hom hcomp_eq).inv.app F₀) W z) =
+      (restrictedOverCohomologyMap (pullback.snd f (D.obj j).hom)
+        F₀ (q : ℤ) ((cartesianChartDiagram f D j).map a) W x) := by
+    have hraw0 := hraw.symm
+    simp only [h, h', G, G', Bl, Bm, F₀, k, l', restrictedOverCoefficient] at hraw0
+    change rawRestrictedCohomologyComparison h' q G' W
+        (abelianHigherDirectImageRawPullback l' h h' hwh q G G'
+          ((upperStarComp AddCommGrpCat.{u + 1} l'
+            Bl.hom Bm.hom hcomp_eq).inv.app F₀) W z) = _ at hraw0
+    simpa only [hBl_hom, hBm_hom] using hraw0
+  have hz' : z' = abelianHigherDirectImageRawPullback
+      l' h h' hwh q G G'
+      ((upperStarComp AddCommGrpCat.{u + 1} l'
+        Bl.hom Bm.hom hcomp_eq).inv.app
+        F₀) W z := by
+    dsimp only [z']
+    exact (congrArg (fun y ↦ (asIso
+      (rawRestrictedCohomologyComparison h' q G' W)).inv y) hraw'.symm).trans
+      (Iso.hom_inv_id_apply (asIso
+        (rawRestrictedCohomologyComparison h' q G' W)) _)
+  have hw : l' ≫ (pullback.snd (D.map l.hom).left k ≫ k) =
+      pullback.snd (D.map m.hom).left k ≫ k := by
+    rw [← Category.assoc, hl2]
+  have hz'' : z' = abelianHigherDirectImageRawPullback l'
+      (pullback.snd (D.map l.hom).left k ≫ k)
+      (pullback.snd (D.map m.hom).left k ≫ k) hw q
+      (((pullback.snd (D.map l.hom).left k)^*[AddCommGrpCat.{u + 1}]).obj F₀)
+      (((pullback.snd (D.map m.hom).left k)^*[AddCommGrpCat.{u + 1}]).obj F₀)
+      ((upperStarComp AddCommGrpCat.{u + 1} l'
+        (pullback.snd (D.map l.hom).left k)
+        (pullback.snd (D.map m.hom).left k) hl2.symm).inv.app F₀) W z := by
+    have hz0 := hz'
+    simp only [h, h', G, G', Bl, Bm, F₀, k, restrictedOverCoefficient] at hz0
+    change z' = abelianHigherDirectImageRawPullback l'
+        (pullback.snd (D.map l.hom).left k ≫ k)
+        (pullback.snd (D.map m.hom).left k ≫ k) hw q
+        (((pullback.snd (D.map l.hom).left k)^*[AddCommGrpCat.{u + 1}]).obj F₀)
+        (((pullback.snd (D.map m.hom).left k)^*[AddCommGrpCat.{u + 1}]).obj F₀)
+        ((upperStarComp AddCommGrpCat.{u + 1} l'
+          (pullback.snd (D.map l.hom).left k)
+          (pullback.snd (D.map m.hom).left k) hl2.symm).inv.app F₀) W z at hz0
+    simpa only [hBl_hom, hBm_hom] using hz0
+  have hcomp := chartPull_adj_naturality
+    f (D.obj j).hom (D.map l.hom).left (D.obj l.left).hom
+      (Over.w (D.map l.hom)).symm (D.map a.left).left
+      (D.map m.hom).left (by
+        calc
+          (D.map m.hom).left = (D.map (a.left ≫ l.hom)).left := by
+            exact congrArg (fun t ↦ (D.map t).left) (Over.w a).symm
+          _ = (D.map a.left ≫ D.map l.hom).left := by
+            rw [D.map_comp])
+      (D.obj m.left).hom (Over.w (D.map m.hom)).symm (by
+        exact (Over.w (D.map a.left)).symm) l' hl1 hl2 hw
+      (c.π.app l.left).left (c.π.app m.left).left
+        (congrArg (fun t ↦ t.left) (c.w a.left)).symm
+      (c.π.app j).left
+        (congrArg (fun t ↦ t.left) (c.w l.hom)).symm F q W V r hr z z'
+      hz''
+  unfold cartesianChartCohomologyLift
+  dsimp only [z, z']
+  exact hcomp
 
 end AlgebraicGeometry.Etale
