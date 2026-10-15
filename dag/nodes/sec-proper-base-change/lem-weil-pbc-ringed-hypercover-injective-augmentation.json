@@ -30,124 +30,56 @@
  ],
  "proof": [
   {
-   "text": "For every object $A$ put $P_A(V)=R(V)[\\operatorname{Hom}(V,A)]$, the direct sum of copies of $R(V)$ with basis $[a]$, and let $F_A=P_A^\\#$ in $\\operatorname{Mod}(R)$. Restrictions send $r[a]$ to $r|_{V\\prime}[a|_{V\\prime}]$. These are the represented free module presheaves of [lem-weil-pbc-free-yoneda-presheaf-module], sheafified by [def-weil-presheaf-modules-sheafification]. Put $P_p=P_{U_p}$ for $p\\geq0$, $P_{-1}=P_W$, $P_{-2}=0$, and $\\partial_p=\\sum_{j=0}^{p}(-1)^j(d_j)_*$ for $p\\geq1$, with $\\partial_0$ induced by the augmentation and $\\partial_{-1}=0$. The identities $d_i d_j=d_{j-1}d_i$ for $i<j$ pair the terms with opposite signs in $\\partial_{p-1}\\partial_p$; augmentation compatibility gives $\\partial_0\\partial_1=0$. Thus $P_\\bullet$, and its sheafification $F_\\bullet$, are augmented chain complexes.",
+   "text": "Construct the represented free module presheaf explicitly as P_A(V)=R(V)[ULift Hom(V,A)] with restriction of both labels and coefficients. Sheafify to F_A. The explicit additive Yoneda equivalence sends a map P_A→M to its value on the identity generator; its inverse sends a generator [a] to restriction along a. Compose with the module-sheafification adjunction to obtain Hom(F_A,I) ≃+ I(A). Verify that precomposition with F(f) is section restriction and with an alternating boundary is the stated alternating sum. Use Mathlib’s alternating-face complex for the square-zero identities, and augmentation naturality for the augmented square-zero identity. The explicit construction handles module and coefficient universes which differ.",
    "uses": [
-    "lem-weil-pbc-free-yoneda-presheaf-module",
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-simplicial-object"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 01GA, definition-homology; Tag 01GW, lemma-injective-trivial-cech; ringed analogue using Modules on Sites 03CY"
-   }
-  },
-  {
-   "text": "Fix $V$, an integer $n\\geq-1$, and a cycle $z\\in P_n(V)$. Its support, together with all iterated faces and their augmentations, gives finite sets $S_k\\subseteq\\operatorname{Hom}(V,U_k)$ for $0\\leq k\\leq n$ and $S_{-1}\\subseteq\\operatorname{Hom}(V,W)$ closed under faces (when $n=-1$ just take the support in $S_{-1}$). We construct cones locally, keeping these original sets as labels throughout. For each $w\\in S_{-1}$ the epimorphism $h_{U_0}\\to h_W$ supplies local lifts $c_{-1}(w)\\in h_{U_0}$ by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]. Make all finitely many choices on a common covering by successively pulling back the next covering to each member of the preceding one and composing coverings, using the axioms of [def-weil-pbc-sites-and-cohomology]. No infinite intersection of coverings is taken.",
-   "uses": [
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 01GE, lemma-acyclic-hypercover-sheaves, hypotheses (1)-(3); explicit finite-support cone argument written by NA"
-   }
-  },
-  {
-   "text": "Inductively assume cones $c_{k-1}$ have been chosen for the labels of degrees below $k$, on each member $V\\prime\\to V$ of a covering, satisfying $d_0c_{j}(s)=s|_{V\\prime}$ and $d_i c_j(s)=c_{j-1}(d_{i-1}s)$ for $i>0$ (in degree zero, $d_0s$ here means augmentation). For $s\\in S_k$, prescribe the faces of an element of $h_{U_{k+1}}$ as $b_0=s|_{V\\prime}$ and $b_i=c_{k-1}(d_{i-1}s)$ for $1\\leq i\\leq k+1$. For $0<i<j$, $d_i b_j=c_{k-2}(d_{i-1}d_{j-1}s)=c_{k-2}(d_{j-2}d_{i-1}s)=d_{j-1}b_i$; for $i=0<j$, both sides equal $(d_{j-1}s)|_{V\\prime}$. In dimension one their augmentations agree because $c_{-1}$ lifts the augmentation of $s$. These are therefore compatible proper faces over $W$. The finite sheaf matching limit is computed sectionwise by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], so this tuple is a matching section. The assumed epimorphism $h_{U_{k+1}}\\to M_{k+1}$ and [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] lift it locally to $c_k(s)$. Refine finitely many times as in step 2 for all $s\\in S_k$. Induction through $k=n$ is finite and establishes the cone identities on a covering of $V$.",
-   "uses": [
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
     "def-weil-pbc-simplicial-object",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 01GE, lemma-acyclic-hypercover-sheaves; explicit matching-boundary induction written by NA"
-   }
-  },
-  {
-   "text": "On a final covering member $V\\prime$, extend $[s]\\mapsto[c_k(s)]$ additively and semilinearly from the free $R(V)$-modules on the ORIGINAL finite label sets $S_k$ to $P_{k+1}(V\\prime)$; call these maps $h_k$. Denote restriction on the same labelled modules by $r$. The cone identities give $\\partial_{k+1}h_k([s])=[s|_{V\\prime}]+\\sum_{i=1}^{k+1}(-1)^i[c_{k-1}(d_{i-1}s)]=r([s])-h_{k-1}\\partial_k([s])$, hence $\\partial h+h\\partial=r$. At $k=-1$ the identity is $\\partial_0h_{-1}=r$. Since $\\partial_n z=0$, $z|_{V\\prime}=\\partial_{n+1}h_n(z)$. This calculation allows different original labels to restrict to the same simplex: we never define $h$ on the quotient of the labels after restriction. Thus every sectionwise cycle is locally a boundary, in every degree $n\\geq-1$, with arbitrary coefficients in $R(V)$.",
-   "uses": [
-    "def-weil-pbc-simplicial-object"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 01GE, lemma-acyclic-hypercover-sheaves; explicit alternating cone identity, ringed version"
-   }
-  },
-  {
-   "text": "Forget the $R$-action temporarily and apply [lem-weil-pbc-site-r-module-presheaf-sheafification-exact] with its FIXED ring equal to $\\mathbf Z$: it applies to the underlying abelian presheaf complex $P_\\bullet$, whose restrictions are group homomorphisms. Its homology presheaf is $V\\mapsto\\ker\\partial_n(V)/\\operatorname{im}\\partial_{n+1}(V)$, and sheafification commutes with this homology. Step 4 shows that every section of this presheaf becomes zero on a covering. By [lem-pc-sites-sheafification-underlying-sets] its abelian sheafification has the underlying set sheafification, and [lem-weil-pbc-site-sheafification-sections-local] says every section of that sheaf is locally represented by such presheaf sections. They are locally zero, so separatedness forces the section to be zero. Therefore every homology sheaf vanishes. By [def-weil-presheaf-modules-sheafification] the underlying abelian sheaf of $F_A$ is precisely $P_A^\\#$; and by [def-weil-sheaf-of-modules-category] kernels and sheafified cokernels in $\\operatorname{Mod}(R)$ have the corresponding underlying abelian sheaves. Consequently $\\cdots\\to F_{U_1}\\to F_{U_0}\\to F_W\\to0$ is exact in $\\operatorname{Mod}(R)$. The fixed-ring theorem was not applied with the variable ring sheaf $R$.",
-   "uses": [
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local",
     "def-weil-presheaf-modules-sheafification",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Tag 03EI, lemma-sheafification-exact; Sites Tags 00WK, 00WB"
-   }
+   "elementary": true
   },
   {
-   "text": "The sheafification adjunction of [def-weil-presheaf-modules-sheafification] and [lem-weil-pbc-free-yoneda-presheaf-module] give $\\operatorname{Hom}_R(F_A,I)=\\operatorname{Hom}_{\\mathrm{PMod}(R)}(P_A,I)=I(A)$. Explicitly a morphism corresponds to its value on $[\\mathrm{id}_A]$, and its value on $[a:V\\to A]$ is the restriction of that section along $a$. Precomposing with $F_{U_{p+1}}\\to F_{U_p}$ therefore sends $s\\in I(U_p)$ to $\\sum_j(-1)^j d_j^*s$; precomposing with $F_{U_0}\\to F_W$ gives $I(W)\\to I(U_0)$. Thus the dual augmented complex is exactly the one in the statement, including its canonical augmentation.",
+   "text": "For a positive-degree finite-support cycle, apply [lem-weil-pbc-ringed-hypercover-finite-local-cones] to its nonempty original support; the zero cycle is immediate. Extend its two cone functions additively, changing coefficients by restriction. On each generator the alternating sum gives ∂c+b∂=restriction: split the finite sum at index zero, then pair successor signs with the preceding boundary sum. Add over the original support. Since the original boundary is zero, the restricted cycle is a boundary. Cone functions remain indexed by original labels even when restriction coalesces them.",
+   "uses": [
+    "lem-weil-pbc-ringed-hypercover-finite-local-cones",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For degree zero, choose a representative vertex in each augmentation fibre. The kernel of the map on free presheaves is generated by differences between a vertex and its fibre representative: mapping the coefficient vector to representatives factors through its zero augmentation. The proved degree-one local_edge specialization of [lem-weil-pbc-ringed-hypercover-finite-local-cones] fills each difference. Induction on the finitely supported vector and finite intersections of covers make the original degree-zero cycle locally a boundary.",
+   "uses": [
+    "lem-weil-pbc-ringed-hypercover-finite-local-cones"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove directly that sheafification of a locally surjective module-presheaf map is epi. Under the adjunction, two maps out of its sheafification agree on every local lift, and sheaf separatedness makes them equal. For a short complex with local boundaries, apply this to its kernel lift. Module-presheaf kernels are sectionwise; sheafification preserves finite limits, so its kernel comparison is an isomorphism. Its sheafified kernel lift is therefore epi, which is Mathlib’s exact_iff_epi_kernel_lift criterion. This proves all free-sheaf short complexes exact without a separate lemma about locally represented sheafification sections.",
    "uses": [
     "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-free-yoneda-presheaf-module"
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 01GW, lemma-injective-trivial-cech, equation-identify-cech; Modules on Sites equation-map-lower-shriek-OU-into-module (after Tag 03DI)"
-   }
+   "elementary": true
   },
   {
-   "text": "Write $A_{-1}=F_W$ and $A_p=F_{U_p}$, with the differentials of step 5. For $p\\geq0$ a dual cocycle $f:A_p\\to I$ kills $\\operatorname{im}\\partial_{p+1}=\\ker\\partial_p$, so factors uniquely through $\\operatorname{im}\\partial_p\\hookrightarrow A_{p-1}$. Injectivity in [def-sp-injective-resolutions] extends this factor to $g:A_{p-1}\\to I$. Then $f=g\\partial_p$, which is exactly a dual boundary. This also works for $p=0$, when $A_{p-1}=F_W$. Since $\\partial_0:A_0\\to A_{-1}$ is epi, precomposition $\\operatorname{Hom}(A_{-1},I)\\to\\operatorname{Hom}(A_0,I)$ is injective by the defining cancellation property of an epimorphism. The entire dual augmented sequence is therefore exact.",
+   "text": "Degree-zero matching lifts over W show that F(U_0)→F(W) is epi: use the Yoneda equivalence and separatedness to cancel it. For any exact short complex and injective I, a dual cocycle kills the first map. Apply ShortComplex.Exact.descToInjective to extend it across the last object; comp_descToInjective proves it is a dual boundary. The short-complex zero relation proves every dual boundary is a cocycle. Transport this exactness through the additive Yoneda equivalences and the verified alternating-boundary comparison. Epi cancellation gives injectivity of the augmentation. The target’s original function-level statement follows with every binder and universe unchanged.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 01GW, lemma-injective-trivial-cech, final paragraph; injective Hom argument written explicitly"
-   }
-  },
-  {
-   "text": "For $a\\in R(W)$ and any $s\\in I(U_p)$, semilinearity of restrictions gives $d_j^*((a|_{U_p})s)=(a|_{U_{p+1}})d_j^*s$, since the face maps commute with the maps to $W$. The augmentation is $R(W)$-linear for the same reason. For each $A=U_p$ or $W$, with structure map $e_A:A\\to W$, define an endomorphism $m_a$ of $P_A$ by $[t:V\\to A]\\mapsto (a|_{e_A t})[t]$. It is $R(V)$-linear and commutes with restriction, hence sheafifies to an endomorphism of $F_A$. Precomposition with $m_a$ defines the $R(W)$-action on $\\operatorname{Hom}_R(F_A,I)$. Evaluating on $[\\mathrm{id}_A]$ shows that step 6 identifies this action with multiplication by $a|_A$ on $I(A)$. Exactness of a sequence of modules is equality of the same kernel and image subgroups, so step 7 proves exactness as $R(W)$-modules. Removing the left augmentation gives $H^0(C^\\bullet(U,I))\\cong I(W)$ via the canonical restriction and $H^p=0$ for $p>0$; negative degrees are zero. By [def-weil-abstract-derived-category] this is the asserted quasi-isomorphism.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Tag 01GW, lemma-injective-trivial-cech; explicit ringed-module scalar compatibility"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-injective-resolutions",
-  "def-weil-abstract-derived-category",
   "def-weil-pbc-simplicial-object",
-  "def-weil-pbc-sites-and-cohomology",
   "def-weil-presheaf-modules-sheafification",
   "def-weil-sheaf-of-modules-category",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-ringed-hypercover-finite-local-cones",
+  "def-sp-injective-resolutions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/hypercovering.tex",
-  "place": "Tag 01GE, lemma-acyclic-hypercover-sheaves and Tag 01GW, lemma-injective-trivial-cech; NA supplies finite-support matching-cone proof for a variable ring sheaf instead of the source coskeleton comparison"
+  "place": "Tags 01GE and 01GW; D2 formalizes the finite-cone route completely, with direct kernel-lift sheafification and injective Hom arguments"
  },
  "mathlib_searches": [
   {
@@ -338,5 +270,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The explicit exact augmented sequence formulation in the node. Hypercover epimorphisms are rendered by the equivalent local lifting of matching sections, including degree zero. No second hypercover, complex, or module-sheaf definition."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-64146",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T154159-L-160685",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compiled cleanly; target signature, DAG metadata, proofs, imports, and interface review matched the packet."
  }
 }

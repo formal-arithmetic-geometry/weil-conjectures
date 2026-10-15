@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-ringed-hypercover-finite-local-cones",
+ "kind": "statement",
+ "title": "Compatible local cones on finite hypercover simplex labels",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof paragraph 1: scalar-compatible finite-stage exchange maps; coefficient-extension coproduct continuity in the 09A3 argument, as expanded by lem-weil-pbc-proetale-bounded-below-coproducts; the injective-coefficient rows in the hypercover total-complex model; finite-support cone construction in steps 2–3 of lem-weil-pbc-ringed-hypercover-injective-augmentation",
+   "via": [
+    "lem-weil-pbc-ringed-hypercover-injective-augmentation",
+    "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "statement": "Let C be a small category [def-weil-size-convention], J a Grothendieck topology [def-weil-pbc-sites-and-cohomology], and U a simplicial object augmented to W [def-weil-pbc-simplicial-object]. Assume every compatible lower-simplex matching family over W lifts on a J-covering sieve, including degree zero. Given n ≥ 0, an object T, and a nonempty finite set A of original arrows T → U_(n+1), there is a covering sieve K on T such that for each f:V→T in K there are functions c:Hom(T,U_(n+1))→Hom(V,U_(n+2)) and b:Hom(T,U_n)→Hom(V,U_(n+1)) satisfying c(a) d_0 = f a and c(a) d_(i+1) = b(a d_i) for every a in A and 0≤i≤n+1. Universe lifts of the indexing sets are allowed. These functions retain the original labels; no equality condition is imposed on distinct labels which become equal only after restriction.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01GE, lemma-acyclic-hypercover-sheaves, matching-surjectivity hypotheses; finite-support matching-cone argument in steps 2–3 of lem-weil-pbc-ringed-hypercover-injective-augmentation"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof": [
+  {
+   "text": "A map from a lower-dimensional simplex misses a vertex. Factor through that codimension-one face using SimplexCategory.factor_δ. If two vertices are missed, factor through their common codimension-two face. The face-pair equation and the simplicial face identity prove independence of the omitted vertex. This constructs a natural full matching family from a compatible face tuple. Its augmentation is the common augmentation of the faces. Apply the given matching lifting condition to lift the tuple locally.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Finitely many local lifting predicates hold on a common cover: induct on the finite set, intersecting its covering sieves. On each covering member, choose witnesses on the finite set and use one chosen witness as a default outside it. Nonemptiness supplies this default.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For n=0, form the finite set of vertices of the original edges. Choose one original vertex in each augmentation fibre (each such fibre is already inhabited). Degree-one matching gives local edges from each vertex to its chosen base vertex. Refine finitely for these edges. Each original edge together with its two vertex cones is a compatible triangle boundary: the two zeroth-face equations give the first two matching equations, and equality of the augmentation fibres gives the third. Degree-two matching gives local triangle cones. Bind this refinement to the vertex-cone cover. These triangle cones and vertex cones are the required functions.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on n. The faces of the given finite family form a nonempty finite family in the preceding dimension. Apply the induction hypothesis. Over each member of its cover, prescribe the next cone faces to be the original simplex at index zero and the old cones on its faces at successor indices. The old zeroth-face equations and face-face identity verify all matching equations. The old zeroth-face equation and naturality of the augmentation verify the common augmentation. Lift these boundaries locally, intersect finitely, and bind the resulting refinements to the preceding cover using transitivity. Restrict the old cones along the refining arrows. The two adjacent cone functions now satisfy exactly the asserted equations.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01GE and the original item’s finite-support plan; D2 gives the explicit finite-face induction, formalized completely in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite set of simplices in a hypercover admits local cones compatible with faces",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.OneHypercoverFamily, CategoryTheory.GrothendieckTopology.OneHypercover, CategoryTheory.GrothendieckTopology.Cover.oneHypercover, CategoryTheory.GrothendieckTopology.Cover.preOneHypercover, CategoryTheory.GrothendieckTopology.HOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsGenerating, CategoryTheory.GrothendieckTopology.OneHypercover.toZeroHypercover, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.exists_oneHypercover",
+   "date": "2026-10-15",
+   "verdict": "no match: finite-degree hypercovers, pre-existing extra degeneracies, or unrelated cones; none constructs compatible local cones on arbitrary finite original simplex labels"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExtraDegeneracy\"",
+   "results": "12 hits: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy, SSet.Augmented.StandardSimplex.extraDegeneracy, SSet.Augmented.StandardSimplex.nonempty_extraDegeneracy_stdSimplex, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.ofIso, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map, CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'",
+   "date": "2026-10-15",
+   "verdict": "no match: finite-degree hypercovers, pre-existing extra degeneracies, or unrelated cones; none constructs compatible local cones on arbitrary finite original simplex labels"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*cone|hypercover.*contract|local.*contract.*simplic",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/Ideal/Asymptotics.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean",
+   "date": "2026-10-15",
+   "verdict": "no match: finite-degree hypercovers, pre-existing extra degeneracies, or unrelated cones; none constructs compatible local cones on arbitrary finite original simplex labels"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite families of simplices in a locally trivial simplicial hypercover admit compatible local cones",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedHypercoverInjectiveAugmentation",
+  "date": "2026-10-15",
+  "group": "D2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedHypercoverFiniteCones",
+  "file": "lean/Sheaf/CategoryTheory/RingedHypercoverFiniteCones.lean",
+  "declaration": "CategoryTheory.RingedHypercover.finite_local_cones",
+  "statement": "theorem finite_local_cones (W : C) (U : SimplicialObject C)\n    (e : U ⟶ (Functor.const SimplexCategoryᵒᵖ).obj W)\n    (hcover : HasLocalLifts J W U e) (n : ℕ) (T : C)\n    (A : Finset (ULift.{v} (T ⟶ U _⦋n + 1⦌))) (hA : A.Nonempty) :\n    ∃ K : Sieve T, K ∈ J T ∧ ∀ (V : C) (f : V ⟶ T), K f →\n      ∃ (c : ULift.{v} (T ⟶ U _⦋n + 1⦌) → (V ⟶ U _⦋n + 2⦌))\n        (b : ULift.{v} (T ⟶ U _⦋n⦌) → (V ⟶ U _⦋n + 1⦌)),\n        ∀ a ∈ A, c a ≫ U.δ 0 = f ≫ a.down ∧\n          ∀ i : Fin (n + 2), c a ≫ U.δ i.succ = b (ULift.up (a.down ≫ U.δ i))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-15",
+  "note": "Fully proved. HasLocalLifts writes the item’s matching hypothesis verbatim; local_edge is its proved degree-one specialization. All other helpers are private and proved."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-64146",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T154159-L-160685",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-64146",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T154159-L-160685",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compiled cleanly; target signature, DAG metadata, proofs, imports, and interface review matched the packet."
+ }
+}
