@@ -3,47 +3,208 @@
  "blueprint": {
   "is": "lem-cbc-exact-functor-rlim",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Exact functors commute with derived limits of towers",
- "statement": "Let $F$ be a triangulated functor between the derived categories of\npro-etale module sheaves which is exact, commutes with the\nlevelwise evaluation of\n[def-weil-pbc-derived-inverse-limit], and commutes with the\n*countable* derived products of the tower category, i.e. the\ncanonical maps\n$F(R\\prod_nM_n)\\to R\\prod_nF(M_n)$ are isomorphisms for every\nfamily $(M_n)_n$ (a triangulated functor preserves finite\nproducts, hence only finite, not countable, products in general).\nThen for every tower $M_\\bullet\\in D(\\operatorname{Tow}(T))$ the\ncanonical map\n\n$$\nF\\bigl(\\Rlim M_\\bullet\\bigr)\\xrightarrow{\\ \\sim\\ }\\Rlim F(M_\\bullet)\n$$\n\nis an isomorphism.",
+ "statement": "Use the pro-etale module-sheaf and tower categories of [def-weil-pbc-adic-coefficient-datum] for two coefficient data on schemes $T$ and $S$. Write $\\mathcal D_T=D(\\operatorname{Mod}(A_T))$ and $\\mathcal D_S=D(\\operatorname{Mod}(B_S))$, with derived categories as in [def-weil-abstract-derived-category]. Let $F:\\mathcal D_T\\to\\mathcal D_S$ be an exact additive triangulated functor [def-weil-triangulated-category], with shift comparison $\\xi_K:F(K[1])\\xrightarrow{\\sim}F(K)[1]$. Its compatibility with levelwise evaluation means that an action $\\widetilde F:D(\\operatorname{Tow}_A(T))\\to D(\\operatorname{Tow}_B(S))$ is supplied, together with natural isomorphisms $\\operatorname{ev}_n\\widetilde F\\cong F\\operatorname{ev}_n$ that respect the transition maps. Assume that for every countable family $(K_n)$ in $\\mathcal D_T$ the canonical product comparison\n$$\\phi_{(K_n)}:F(\\prod_n K_n)\\longrightarrow\\prod_nF(K_n),\\qquad \\mathrm{pr}'_n\\phi_{(K_n)}=F(\\mathrm{pr}_n),$$\nis an isomorphism; the products here are products in the derived categories [def-weil-category-product], not products of abelian sheaves before derivation.\n\nLet $M_\\bullet\\in D(\\operatorname{Tow}_A(T))$, put $M_n=\\operatorname{ev}_nM_\\bullet$, and put $N_\\bullet=\\widetilde F(M_\\bullet)$. Use the evaluation isomorphisms to write $N_n=F(M_n)$, with transitions $F(t_n)$ for $t_n:M_{n+1}\\to M_n$. Choose Roos triangles for $L=\\Rlim M_\\bullet$ and $L'=\\Rlim N_\\bullet$ as in [def-weil-pbc-derived-inverse-limit, def-weil-derived-limit]:\n$$L\\xrightarrow p P\\xrightarrow{1-s}P\\xrightarrow\\delta L[1],\\qquad L'\\xrightarrow{p'}P'\\xrightarrow{1-s'}P'\\xrightarrow{\\delta'}L'[1],$$\nwhere $P=\\prod_nM_n$, $P'=\\prod_nF(M_n)$ and $s,s'$ are the shifts of [def-weil-tower-transition-endomorphism]. Write $\\phi=\\phi_{(M_n)}$. Then applying $F$ to the first triangle and identifying $F(P)$ with $P'$ via $\\phi$ gives a Roos triangle for the evaluated image tower. In particular $F(L)$ is a derived limit of $(F(M_n),F(t_n))$. There exists a morphism $c:F(L)\\to L'$ such that\n$$p'c=\\phi F(p),\\qquad c[1]\\xi_LF(\\delta)=\\delta'\\phi,$$\nand every such $c$ is an isomorphism. Thus $F(\\Rlim M_\\bullet)\\cong\\Rlim\\widetilde F(M_\\bullet)$ as objects, compatibly with the Roos triangles. The bare triangulated data assert neither a unique comparison $c$ nor a canonical choice of it; any independently specified comparison satisfying these two equations is an isomorphism.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-exact-functor-rlim.md",
   "place": "node lem-cbc-exact-functor-rlim, order 1586"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-inverse-limit"
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-category-product",
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-derived-limit",
+  "def-weil-tower-transition-endomorphism"
  ],
  "proof": [
   {
-   "text": "By [prop-weil-pbc-roos-triangle], $M_\\bullet$ sits in the\ndistinguished triangle\n\n$$\n\\Rlim M_\\bullet\\to R\\!\\prod_nM_n\\xrightarrow{1-s}R\\!\\prod_nM_n\n\\to(\\Rlim M_\\bullet)[1].\n$$",
-   "uses": [
-    "prop-weil-pbc-roos-triangle"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The functor $F$ is exact, so applying $F$ produces a\ndistinguished triangle with third vertex $F(\\Rlim M_\\bullet)$;\non the two derived products $F$ is computed levelwise, because\n$F$ commutes with the evaluations of\n[def-weil-pbc-derived-inverse-limit] and with the countable\nproducts of the Roos triangle representation, so the image of\n$1-s$ is $1-F(s)$. Hence $F(\\Rlim M_\\bullet)$ is a cone of\n$1-F(s)$ over the tower $F(M_\\bullet)$; and\n[prop-weil-pbc-roos-triangle] applied to $F(M_\\bullet)$\nexhibits $\\Rlim F(M_\\bullet)$ as a cone of $1-F(s)$ as well.\nCones of a fixed morphism in a triangulated category are\ncanonically isomorphic, and the canonical map of the statement is\nthat comparison, so it is an isomorphism.",
+   "text": "By [def-weil-pbc-derived-inverse-limit], evaluating $M_\\bullet$ gives the inverse system $(M_n,t_n)$ in $\\mathcal D_T$. The transition-compatible evaluation identifications for $\\widetilde F$ give $(F(M_n),F(t_n))$ for $N_\\bullet$. Apply the triangle clause of [prop-weil-pbc-roos-triangle] to $M_\\bullet$ and to $N_\\bullet$: it gives exactly the two distinguished triangles displayed in the statement, with $L$ and $L'$ in their first positions. Denote the projections of $P$ and $P'$ by $\\pi_n$ and $\\rho_n$.",
    "uses": [
     "def-weil-pbc-derived-inverse-limit",
     "prop-weil-pbc-roos-triangle"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit); the functorial strict-tower Roos triangle is the stated input prop-weil-pbc-roos-triangle."
+   }
+  },
+  {
+   "text": "The product comparison has $\\rho_n\\phi=F(\\pi_n)$, and the shifts satisfy $\\pi_ns=t_n\\pi_{n+1}$ and $\\rho_ns'=F(t_n)\\rho_{n+1}$ by [def-weil-tower-transition-endomorphism]. Hence $\\rho_n\\phi F(s)=F(\\pi_ns)=F(t_n)F(\\pi_{n+1})=\\rho_ns'\\phi$ for every $n$. Product uniqueness [def-weil-category-product] gives $\\phi F(s)=s'\\phi$. Since exact functors here are additive by [def-weil-triangulated-category], $F(1-s)=1-F(s)$, and therefore $\\phi F(1-s)=(1-s')\\phi$. This verifies the middle square using all transition maps, rather than just identifying the two product objects.",
+   "uses": [
+    "def-weil-tower-transition-endomorphism",
+    "def-weil-category-product",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit), formula for the transition endomorphism; Tag 014V (definition-exact-functor-triangulated-categories)."
+   }
+  },
+  {
+   "text": "Exactness in [def-weil-triangulated-category] sends the source Roos triangle to the distinguished triangle $F(L)\\xrightarrow{F(p)}F(P)\\xrightarrow{F(1-s)}F(P)\\xrightarrow{\\xi_LF(\\delta)}F(L)[1]$. Set $a=\\phi F(p)$ and $b=\\xi_LF(\\delta)\\phi^{-1}$. Step 2 and these definitions make $(\\mathrm{id}_{F(L)},\\phi,\\phi)$ an isomorphism from this triangle to $F(L)\\xrightarrow aP'\\xrightarrow{1-s'}P'\\xrightarrow bF(L)[1]$. The latter triangle is distinguished by TR1, and so [def-weil-derived-limit] says precisely that $F(L)$, with these maps, is a derived limit of the image sequence. No identification of cones has been chosen here.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014V (definition-exact-functor-triangulated-categories), 0145 (definition-triangulated-category), and 08TC (definition-derived-limit)."
+   }
+  },
+  {
+   "text": "Rotate the triangle of step 3 and the target Roos triangle once, using TR2 of [def-weil-triangulated-category]. They become $P'\\xrightarrow{1-s'}P'\\xrightarrow bF(L)[1]\\xrightarrow{-a[1]}P'[1]$ and $P'\\xrightarrow{1-s'}P'\\xrightarrow{\\delta'}L'[1]\\xrightarrow{-p'[1]}P'[1]$. Apply TR3 to the identity maps on the first two vertices. It gives $u:F(L)[1]\\to L'[1]$ satisfying $ub=\\delta'$ and $p'[1]u=a[1]$. Since the shift is an automorphism, write $u=c[1]$ and unshift the second equality to obtain $p'c=a$. Substitute the definitions of $a,b$ and multiply $c[1]b=\\delta'$ on the right by $\\phi$ to obtain exactly the two comparison equations in the statement. This establishes existence, without asserting uniqueness.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145 (definition-triangulated-category), TR2 and TR3; Tag 0H9J (remark-functoriality-derived-limit), completion of a product square without uniqueness."
+   }
+  },
+  {
+   "text": "For any $c$ satisfying the two comparison equations, step 2 supplies the remaining square. Thus $(c,\\phi,\\phi)$ is a morphism from the distinguished image under $F$ of the source triangle to the distinguished target triangle, including the connecting-map square with $c[1]$. Both product components are isomorphisms by hypothesis. Apply [lem-sf-triangle-morphism-iso] to conclude that its first component $c$ is an isomorphism. This applies to the comparison produced in step 4 and to every other comparison satisfying the displayed equations.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014A (lemma-third-isomorphism-triangle), applied to the first component."
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-derived-inverse-limit",
   "prop-weil-pbc-roos-triangle",
-  "def-weil-pbc-derived-inverse-limit"
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-category-product",
+  "def-weil-triangulated-category",
+  "def-weil-derived-limit",
+  "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-exact-functor-rlim.md",
-  "place": "## Proof"
+  "place": "Proof paragraphs 1-2, repaired using Stacks derived.tex Tags 08TC, 014V, 0145, 014A and 0H9J; the product-projection calculation is written out."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Roos|Milnor|derived inverse limit|homotopy limit",
+   "results": "0 hits: ; Mathlib subdirectory Algebra/Homology",
+   "date": "2026-10-15",
+   "verdict": "no match: returned declarations supply generic exact-functor, mapping-cone, finite-product or triangle operations; none states the complete tower comparison assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact triangulated functor preserving countable products commutes with the derived inverse limit of a tower",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory homotopy limit exact functor countable product",
+   "results": "0 hits: ; loogle: Unknown identifier `homotopy`",
+   "date": "2026-10-15",
+   "verdict": "invalid query: no conclusion drawn; later valid quoted-name Loogle queries were run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors commute with derived inverse limits of countable towers via the Roos triangle",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-15",
+   "verdict": "no match: returned declarations supply generic exact-functor, mapping-cone, finite-product or triangle operations; none states the complete tower comparison assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone|productTriangle|distinguished.*triangle",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean; Mathlib subdirectory CategoryTheory/Triangulated",
+   "date": "2026-10-15",
+   "verdict": "no match: returned declarations supply generic exact-functor, mapping-cone, finite-product or triangle operations; none states the complete tower comparison assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Roos triangle exact functor derived limit",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_distinguished exact triangulated product",
+   "results": "0 hits: ; loogle: Unknown identifier `exact`",
+   "date": "2026-10-15",
+   "verdict": "invalid query: no conclusion drawn; later valid quoted-name Loogle queries were run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor preserving countable products sends the Roos cone triangle to the Roos cone triangle",
+   "results": "8 hits: CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair, CategoryTheory.Functor.instPreservesLimitsOfShapeDiscreteWalkingPairOfIsHomological, CategoryTheory.Functor.distTriang_iff, CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.map_distinguished, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.IsTriangulated.map_distinguished",
+   "date": "2026-10-15",
+   "verdict": "no match: returned declarations supply generic exact-functor, mapping-cone, finite-product or triangle operations; none states the complete tower comparison assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\"",
+   "results": "12 hits: CategoryTheory.IsTriangulated, CategoryTheory.IsTriangulated.mk, CategoryTheory.IsTriangulated.octahedron_axiom, CategoryTheory.IsTriangulated.mk', CategoryTheory.Functor.IsTriangulated.instId, CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsTriangulated.instAdditive, CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair",
+   "date": "2026-10-15",
+   "verdict": "no match: returned declarations supply generic exact-functor, mapping-cone, finite-product or triangle operations; none states the complete tower comparison assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyLimit\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: returned declarations supply generic exact-functor, mapping-cone, finite-product or triangle operations; none states the complete tower comparison assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsHomotopyLimit|IsDerivedLimit|towerShift",
+   "results": "0 hits: ; Mathlib subdirectory CategoryTheory",
+   "date": "2026-10-15",
+   "verdict": "no match: returned declarations supply generic exact-functor, mapping-cone, finite-product or triangle operations; none states the complete tower comparison assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive triangulated functor preserving countable products carries a homotopy inverse limit Roos triangle to a homotopy inverse limit triangle and any triangle comparison is an isomorphism",
+   "results": "8 hits: CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.distTriang_iff, CochainComplex.mappingCone.mapTrianglehIso, CategoryTheory.Functor.map_distinguished, CategoryTheory.Functor.map_distinguished_iff, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.IsTriangulated.map_distinguished",
+   "date": "2026-10-15",
+   "verdict": "no match: returned declarations supply generic exact-functor, mapping-cone, finite-product or triangle operations; none states the complete tower comparison assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving products and distinguished triangles preserves the homotopy limit of a sequence",
+   "results": "8 hits: CategoryTheory.Functor.instPreservesLimitsOfShapeDiscreteWalkingPairOfIsHomological, CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.hoFunctor.preservesBinaryProducts, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.map_distinguished_exact, CochainComplex.mappingCone.mapTrianglehIso, CategoryTheory.hoFunctor.preservesBinaryProduct",
+   "date": "2026-10-15",
+   "verdict": "Second-reader search: no match for the complete assertion. Read Functor.lean:175-243 and HomotopyCategory/Pretriangulated.lean:452-462: returned declarations concern distinguished-triangle images, binary products, or cones of complex maps, not sequential derived-limit comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso₁_of_isIso₂₃\"",
+   "results": "1 hits: CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃",
+   "date": "2026-10-15",
+   "verdict": "Second-reader search: exact match for the FIRST-component instance of the existing cited lem-sf-triangle-morphism-iso, not the whole item. Read Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:526-529. Report attachment candidate without changing another node."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?[Ll]imit|Milnor.?[Tt]riangle|Roos",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "Second-reader search: no match in Mathlib for homotopy limits, Milnor triangles, or Roos by these spellings. The project declaration IsHomotopyLimit.map was separately read and already belongs to lem-pc-homotopy-limit-map."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +227,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-cbc-exact-functor-rlim",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: a triangulated functor alone does not specify a canonical comparison between chosen Roos cones. Repaired the type of the evaluation compatibility by spelling out the tower action, and replaced the unsupported canonical-choice assertion by existence of a Roos-triangle comparison and invertibility of every such comparison. Five steps use only existing nodes: the Roos triangle, an explicit product-projection identity, exact image and isomorphism of triangles, TR2/TR3 completion, and the two-out-of-three triangle theorem. No new nodes; all original blueprint/import fields preserved.",
+  "blueprint": "Original proof paragraph 1 is step 1. Original paragraph 2, applying F and identifying 1-s, is steps 2-3. Its final false sentence about canonical cone isomorphisms is repaired by steps 4-5. The compact-support unit route through finite reductions and Roos triangles is retained.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-roos-triangle",
+    "why": "Generic distinguished Roos triangle for a coherent pro-etale tower; this is already the blueprint input and does not replace any compact-support base-change step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-roos-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q21-03d7036a5",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-03d7036a5 (reviewer sub-agent of L); spot-checked: Read the full item, all five steps, every cited statement, and relevant master/Stacks sources. Product compatibility, shift signs, TR3 comparison, and invertibility are correct. Accepted the documented cone-canonicity source correction and Roos-triangle tool use. No new nodes or repairs. Downstream canonical-map and coefficient-category comparisons remain separate obligations. Detailed checks written to review.md."
+ }
 }
