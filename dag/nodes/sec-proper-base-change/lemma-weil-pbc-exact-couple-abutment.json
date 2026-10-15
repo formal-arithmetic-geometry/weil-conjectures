@@ -25,11 +25,10 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (the hypotheses of the half-plane theorem; claim 1).** For $q<a$ the complex $\\tau_{\\leq q}K$ has $\\mathcal H^i(\\tau_{\\leq q}K)=\\mathcal H^i(K)=0$ for $i\\leq q$ and $=0$ for $i>q$, so $\\tau_{\\leq q}K\\cong0$ in $\\Dplus(X_{\\Et})$ and $D^{p,q}=\\mathcal H^{p+q}(\\Phi(0))=0$, $D'^{p,q}=0$; likewise $\\mathcal H^q(K)[-q]=0$ gives $E^{p,q}=E'^{p,q}=0$ for $q<a$. Now let $q$ be arbitrary: the complex $\\mathcal H^q(K)[-q]$ has its only cohomology in degree $q$, so $\\mathcal H^i=0$ for $i<q$. For $\\Phi$: by [lem-weil-pbc-derived-functor-negative-vanishing] for the left exact functor $v=f_*$ on the Grothendieck abelian category $\\Ab(X_{\\Et})$ [def-sp-etale-dictionary] (whose derived functor is $Rf_*$ of [def-weil-pbc-direct-image]), $\\mathcal H^j(Rf_*(\\mathcal H^q(K)[-q]))=0$ for $j<q$, and since $g^{-1}$ is induced by an exact functor [def-weil-pbc-derived-inverse-image], $\\mathcal H^j(g^{-1}L)\\cong g^{-1}\\mathcal H^j(L)$ [lem-weil-pbc-exact-functor-bounded-below], so $E^{p,q}=\\mathcal H^{p+q}(g^{-1}Rf_*(\\mathcal H^q(K)[-q]))=0$ when $p+q<q$, i.e. $p<0$. For $\\Phi'$: $g'^{-1}(\\mathcal H^q(K)[-q])$ again has $\\mathcal H^i=g'^{-1}\\mathcal H^i(\\mathcal H^q(K)[-q])=0$ for $i<q$ [lem-weil-pbc-exact-functor-bounded-below], and [lem-weil-pbc-derived-functor-negative-vanishing] for $v=f'_*$ gives $E'^{p,q}=0$ for $p<0$. The two couples are exact couples by their construction [def-weil-pbc-truncation-exact-couples]. Hence both satisfy the hypotheses of [thm-sp-half-plane-convergence] with the same $a$, which supplies, for each couple, the stabilization of every entry, the finite, exhaustive and separated filtration $F^pA^n=G_{n-p}A^n$ of $A^n=D^{0,n}$ with $G_qA^n=\\operatorname{im}(\\alpha^{n-q}:D^{n-q,q}\\to D^{0,n})$ for $q\\leq n$ and $G_qA^n=A^n$ for $q\\geq n$, and $E_\\infty^{p,q}\\cong F^pA^{p+q}/F^{p+1}A^{p+q}$.",
+   "text": "Step 1 (vanishing and convergence). For either additive composite F, lower cohomological bounds are preserved: right derived direct image has negative vanishing, and exact inverse image commutes with cohomology. For q<a the upper truncation is zero, since its cohomology vanishes both above q and below a; the layer H^q(K)[-q] is also zero. For p<0, the layer is bounded below by q, so H^(p+q) of its F-image vanishes. Transport these statements through the supplied D/E identifications and apply halfPlaneConvergence to P and Q. Retain its actual limiting subobjects, normalized diagonal colimits, convergence, finite exhaustive separated filtrations, and canonical infinite-page comparisons.",
    "uses": [
     "def-weil-pbc-truncation-exact-couples",
     "lem-weil-pbc-derived-functor-negative-vanishing",
-    "def-sp-etale-dictionary",
     "def-weil-pbc-direct-image",
     "def-weil-pbc-derived-inverse-image",
     "lem-weil-pbc-exact-functor-bounded-below",
@@ -37,87 +36,86 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05TC (lemma-negative-vanishing), with the blueprint proof (## Detailed form, Proof, sentences 1-4) for the vanishing of the couple terms"
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-exact-couple-abutment.md",
+    "place": "node lemma-weil-pbc-exact-couple-abutment, order 1318"
    }
   },
   {
-   "text": "**Step 2 (the abutments are the cohomology of the whole complexes; first half of claim 2).** Let $c_n:\\tau_{\\leq n}K\\to K$ be the canonical map; $\\mathcal H^i(c_n)$ is an isomorphism for $i\\leq n$, and a monomorphism for $i=n+1$ because $\\mathcal H^{n+1}(\\tau_{\\leq n}K)=0$. For $\\Phi$: by [lem-weil-pbc-derived-functor-truncation-iso] for $v=f_*$, $\\mathcal H^n(Rf_*c_n)$ is an isomorphism; applying the exact functor $g^{-1}$ and the natural isomorphism $\\mathcal H^n(g^{-1}L)\\cong g^{-1}\\mathcal H^n(L)$ [lem-weil-pbc-exact-functor-bounded-below], $\\iota_n=\\mathcal H^n(\\Phi c_n)$ is an isomorphism. For $\\Phi'$: $\\mathcal H^i(g'^{-1}c_n)\\cong g'^{-1}\\mathcal H^i(c_n)$ naturally [lem-weil-pbc-exact-functor-bounded-below], which is an isomorphism for $i\\leq n$ and, $g'^{-1}$ being exact on sheaves [prop-weil-pbc-inverse-image-exact], a monomorphism for $i=n+1$; so [lem-weil-pbc-derived-functor-truncation-iso] for $v=f'_*$ applied to $g'^{-1}c_n$ shows that $\\iota'_n=\\mathcal H^n(Rf'_*g'^{-1}c_n)$ is an isomorphism.",
+   "text": "Step 2 (canonical abutment isomorphisms). Apply the already proved source-library theorem DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app from WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage to each composite, using the lower-bound preservation proved in Step 1. The maps H^n(F(truncLE_(n-p) K)) -> H^n(F K), with the total-degree transports, form a diagonal cocone: compatibility is the truncation inclusion equation followed by functoriality. The diagonal colimit gives its universal map. Its composite with the normalized zeroth cocone leg is the canonical truncation map, which is an isomorphism; the zeroth leg is itself an isomorphism by normalization. Thus the universal map is an isomorphism, heterogeneously equal to the canonical map, with the required formula at every leg.",
    "uses": [
-    "lem-weil-pbc-derived-functor-truncation-iso",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "prop-weil-pbc-inverse-image-exact",
-    "def-weil-pbc-derived-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05TC (lemma-negative-vanishing), part (2); the blueprint proof (## Detailed form, Proof: 'Both functors carry $\\tau_{\\geq n+1}K$ to complexes with no cohomology in degrees $\\leq n$')"
-   }
-  },
-  {
-   "text": "**Step 3 (the filtrations; second half of claim 2).** For $q\\leq n$ let $j_{q,n}:\\tau_{\\leq q}K\\to\\tau_{\\leq n}K$ be the composite of the maps $\\tau_{\\leq r}K\\to\\tau_{\\leq r+1}K$; then $\\alpha^{n-q}:D^{n-q,q}\\to D^{0,n}$ is $\\mathcal H^n(\\Phi j_{q,n})$ by functoriality of $\\mathcal H^n\\circ\\Phi$ (definition of $\\alpha$, Step 1), and $c_n\\circ j_{q,n}=c_q$. Hence $\\iota_n(G_qA^n)=\\operatorname{im}(\\mathcal H^n(\\Phi c_n)\\circ\\mathcal H^n(\\Phi j_{q,n}))=\\operatorname{im}\\mathcal H^n(\\Phi c_q)$. For $q\\geq n$, $c_n=c_q\\circ j_{n,q}$ and $\\mathcal H^n(\\Phi c_n)$ is surjective (Step 2), so $\\operatorname{im}\\mathcal H^n(\\Phi c_q)=\\mathcal H^n(\\Phi K)=\\iota_n(A^n)=\\iota_n(G_qA^n)$. With $F^p=G_{n-p}$ this gives $\\iota_n(F^pA^n)=\\operatorname{im}(\\mathcal H^n(\\Phi\\tau_{\\leq n-p}K)\\to\\mathcal H^n(\\Phi K))$ for every $p$, i.e. $F^p\\mathcal H^n(\\Phi K)$ is the image filtration [def-sp-image-filtration] of $(A^n,F)$ along the isomorphism $\\iota_n$; the same computation with $\\Phi'$ and $\\iota'_n$ gives the claim for $\\Phi'$. Finally, the natural isomorphism $\\mathcal H^n(g^{-1}L)\\cong g^{-1}\\mathcal H^n(L)$ [lem-weil-pbc-exact-functor-bounded-below] is natural in $L$, hence carries $\\operatorname{im}\\mathcal H^n(g^{-1}Rf_*c_q)$ to $\\operatorname{im}g^{-1}\\mathcal H^n(Rf_*c_q)=g^{-1}\\operatorname{im}\\mathcal H^n(Rf_*c_q)$, an exact functor preserving images [prop-weil-pbc-inverse-image-exact]: this is $g^{-1}$ of the image filtration of [def-weil-pbc-hypercohomology-filtrations] on $\\mathcal H^n(Rf_*K)$.",
-   "uses": [
-    "thm-sp-half-plane-convergence",
     "def-weil-pbc-truncation-exact-couples",
-    "def-sp-image-filtration",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
     "lem-weil-pbc-exact-functor-bounded-below",
-    "prop-weil-pbc-inverse-image-exact",
-    "def-weil-pbc-hypercohomology-filtrations"
+    "thm-sp-half-plane-convergence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-exact-couple-abutment.md",
-    "place": "## Detailed form, Proof"
+    "place": "node lemma-weil-pbc-exact-couple-abutment, order 1318"
    }
   },
   {
-   "text": "**Step 4 (the abutment map is $\\mathcal H^n(\\Ex_{\\square,K})$; claim 3).** By [def-weil-pbc-truncation-exact-couples], $t_D^{0,n}=\\mathcal H^n(\\Ex_{\\square,\\tau_{\\leq n}K})$. Since $\\Ex_\\square:\\Phi\\to\\Phi'$ is a natural transformation [def-weil-pbc-derived-exchange], its naturality square for $c_n$ reads $\\Ex_{\\square,K}\\circ\\Phi(c_n)=\\Phi'(c_n)\\circ\\Ex_{\\square,\\tau_{\\leq n}K}$; applying $\\mathcal H^n$ gives $\\mathcal H^n(\\Ex_{\\square,K})\\circ\\iota_n=\\iota'_n\\circ t_D^{0,n}$. As $\\iota_n,\\iota'_n$ are isomorphisms (Step 2), $\\mathcal H^n(\\Ex_{\\square,K})=\\iota'_n\\circ t_D^{0,n}\\circ\\iota_n^{-1}$, with source $\\mathcal H^n(g^{-1}Rf_*K)\\cong g^{-1}\\mathcal H^n(Rf_*K)$ [lem-weil-pbc-exact-functor-bounded-below].",
+   "text": "Step 3 (transported image filtrations). Define U and V as the images of the diagonal image filtrations under the abutment isomorphisms. The image of image(A.ι p) followed by i is image(A.ι p followed by i), since factorThruImageSubobject is epic. Substitute the cocone-leg formulas from Step 2 and remove the isomorphisms on the sources; this gives precisely the canonical truncation-image formulas for every integer p, including negative p. Naturality of the inverse-image/cohomology isomorphism identifies the first formula with the image under the exact inverse-image functor. Factor the original cohomology map through its image, and use preservation of epimorphisms and functoriality to identify that image with inverse image of its original image subobject.",
    "uses": [
-    "def-weil-pbc-truncation-exact-couples",
-    "def-weil-pbc-derived-exchange",
+    "def-sp-image-filtration",
+    "def-sp-filtration",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-derived-inverse-image",
     "lem-weil-pbc-exact-functor-bounded-below"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-exact-couple-abutment.md",
-    "place": "## Detailed form, Proof"
+    "place": "node lemma-weil-pbc-exact-couple-abutment, order 1318"
    }
   },
   {
-   "text": "**Step 5 (filtrations and graded pieces; claim 4).** By Step 1 both couples satisfy the hypotheses of [thm-sp-half-plane-convergence], so [lem-sp-couple-morphism] applies to the morphism $(t_D,t_E)$: $t_D^{0,n}:A^n\\to A'^n$ maps $F^pA^n$ into $F^pA'^n$ for every $p$, and the induced map $\\operatorname{gr}^pA^n\\to\\operatorname{gr}^pA'^n$ corresponds, under $E_\\infty^{p,n-p}\\cong\\operatorname{gr}^pA^n$ and $E'^{p,n-p}_\\infty\\cong\\operatorname{gr}^pA'^n$, to the map $E_\\infty^{p,n-p}\\to E'^{p,n-p}_\\infty$ induced by the morphism of couples. By Step 3, $\\iota_n(F^pA^n)=F^p\\mathcal H^n(\\Phi K)$ and $\\iota'_n(F^pA'^n)=F^p\\mathcal H^n(\\Phi'K)$, so $\\iota_n$, $\\iota'_n$ are isomorphisms of filtered objects [def-sp-filtration] and induce isomorphisms $\\operatorname{gr}^p\\iota_n$, $\\operatorname{gr}^p\\iota'_n$ of graded pieces. By Step 4, $\\mathcal H^n(\\Ex_{\\square,K})=\\iota'_n\\circ t_D^{0,n}\\circ\\iota_n^{-1}$ therefore maps $F^p\\mathcal H^n(\\Phi K)$ into $F^p\\mathcal H^n(\\Phi'K)$, and its map on $\\operatorname{gr}^p$ is $\\operatorname{gr}^p\\iota'_n\\circ\\operatorname{gr}^p(t_D^{0,n})\\circ(\\operatorname{gr}^p\\iota_n)^{-1}$, which is the $E_\\infty$-map under the composite identifications $E_\\infty^{p,n-p}\\cong\\operatorname{gr}^pA^n\\cong\\operatorname{gr}^p\\mathcal H^n(\\Phi K)$ and their primed versions.",
+   "text": "Step 4 (exchange and filtration maps). Transport the canonical tD and tE through the supplied D/E equalities. The three squares in truncation_exchange_couple_morphism produce a CoupleMorphism from P to Q, using the supplied heterogeneous identifications of alpha, f and g. Naturality of exchange at each canonical truncation inclusion gives (A.ι p followed by i) followed by H^n(exchange_K) = tD followed by (B.ι p followed by j). At p=0, normalize the two cocone legs to obtain the required abutment square. At every p, imageSubobjectMap of this square gives the map U.step p -> V.step p. Monicity of the target step inclusion proves compatibility with the successive-step inclusions; cokernel.map then gives the stated graded maps and their cokernel equations.",
    "uses": [
-    "lem-sp-couple-morphism",
-    "thm-sp-half-plane-convergence",
+    "lem-weil-pbc-truncation-couple-morphism",
+    "def-weil-pbc-truncation-exact-couples",
+    "def-weil-pbc-derived-exchange",
+    "def-sp-image-filtration",
     "def-sp-filtration"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-exact-couple-abutment.md",
-    "place": "## Detailed form, Proof"
+    "place": "node lemma-weil-pbc-exact-couple-abutment, order 1318"
+   }
+  },
+  {
+   "text": "Step 5 (limiting cycles and graded compatibility). Apply derivedCoupleFunctoriality to the CoupleMorphism of Step 4 and to the same limiting subobjects L and M chosen in Step 1. Its maps on limiting cycles and their cokernels give z and tInf with the required inclusion and quotient equations. By the factor-through-cycle equation and the g square, toPageInfinity followed by tInf equals tD followed by toPageInfinity. The isomorphism i induces isomorphisms on every filtration step, hence cokernel.mapIso gives an isomorphism on every graded piece; likewise j. Compose these with the canonical infinite-page comparisons of Step 1, transporting p+(n-p)=n, to obtain e and e-prime with their prescribed comparison formulas. Cancel the epimorphism toPageInfinity supplied by convergence. The resulting square is the factorThruImageSubobject form of the naturality square in Step 4, followed by the quotient map, so it commutes by the image-map and cokernel-map equations. This proves the final graded compatibility.",
+   "uses": [
+    "lem-sp-derived-couple-functoriality",
+    "thm-sp-half-plane-convergence",
+    "def-sp-image-filtration",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-exact-couple-abutment.md",
+    "place": "node lemma-weil-pbc-exact-couple-abutment, order 1318"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-truncation-exact-couples",
   "lem-weil-pbc-derived-functor-negative-vanishing",
-  "def-sp-etale-dictionary",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-derived-inverse-image",
   "lem-weil-pbc-exact-functor-bounded-below",
   "thm-sp-half-plane-convergence",
-  "lem-weil-pbc-derived-functor-truncation-iso",
-  "prop-weil-pbc-inverse-image-exact",
   "def-sp-image-filtration",
-  "def-weil-pbc-hypercohomology-filtrations",
+  "def-sp-filtration",
+  "lem-weil-pbc-truncation-couple-morphism",
   "def-weil-pbc-derived-exchange",
-  "lem-sp-couple-morphism",
-  "def-sp-filtration"
+  "lem-sp-derived-couple-functoriality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-exact-couple-abutment.md",
-  "place": "## Detailed form, Proof; the omitted details of Stacks Lemma 0DDE (literature/stacks-project/etale-cohomology.tex, lemma-proper-base-change: 'using the spectral sequences ... Some details omitted'), with Stacks 05TC (derived.tex, lemma-negative-vanishing) for Steps 1-2 and Stacks 011Q(2) (homology.tex, definition-exact-couple: morphism of exact couples) for the morphism"
+  "place": "Detailed form, Proof, implemented by D2 with the proved PlusDevissage canonical truncation criterion and derivedCoupleFunctoriality on the limiting subobjects supplied by halfPlaneConvergence; image-subobject and cokernel universal properties supply the remaining glue."
  },
  "mathlib_searches": [
   {
@@ -244,5 +242,15 @@
   "group": "R1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261015T154159-L-160491",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
