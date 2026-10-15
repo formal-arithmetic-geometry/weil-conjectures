@@ -4,14 +4,14 @@
   "is": null,
   "from": {
    "node": "def-weil-frobenius-coefficient-twists",
-   "place": "its statement (a notion the statement uses)",
+   "place": "The natural Weil isomorphism induced by geometric Frobenius, made precise in def-weil-frobenius-coefficient-twists clause 5: theta_{K(m)}=(theta_K tensor theta_m) after the derived pullback/tensor comparison.",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived pullback commutes with derived tensor product on the constructible categories",
- "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$ in an algebraic closure $\\Qlb$, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$ and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension], and $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$. Let $f:X\\to Y$ be a morphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties], with the constructible categories $D^b_c(-,\\Lambda)$ [def-weil-finite-torsion-constructibility, def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients] and the derived pullback $Lf^*$ and derived tensor product $\\otimes^L_\\Lambda$ of [def-weil-derived-pullback-tensor-hom]. Then for $M,N\\in D^b_c(Y,\\Lambda)$ there is an isomorphism\n\n$$\n \\mu_{f;M,N}:Lf^*(M\\otimes^L_\\Lambda N)\\xrightarrow{\\ \\sim\\ }Lf^*M\\otimes^L_\\Lambda Lf^*N\n$$\n\nin $D^b_c(X,\\Lambda)$, natural in $M$ and $N$; at finite level it is the canonical isomorphism of derived pullback of a morphism of ringed topoi with the derived tensor product; at integral level it is the derived limit over $n$ of the finite-level isomorphisms for the reductions $M\\otimes^L_{\\mathcal O_E}A_{E,n}$, $N\\otimes^L_{\\mathcal O_E}A_{E,n}$; at the rational and $\\Qlb$ levels it is the image of the integral isomorphism, resp. the stagewise one composed with the scalar-extension isomorphisms. It is compatible with the associativity, commutativity and unit isomorphisms of $\\otimes^L_\\Lambda$, with composition of morphisms ($\\mu_{f\\circ h}$ is $\\mu_h$ after $Lh^*\\mu_f$, up to the composition isomorphism of pullbacks), and with finite reduction and scalar extension.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$ inside $\\Qlb$, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a morphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]. Use the coefficient categories and operations of [def-weil-derived-pullback-tensor-hom], with the finite bounded constructible category of [def-weil-finite-torsion-constructibility], the derived-complete integral category of [def-weil-derived-complete-integral-detailed], the rationalization of [def-weil-rationalization-karoubi], and the common-stage category of [def-weil-algebraically-closed-coefficients].\n\nFor $\\Lambda=A_{E,n}$ and arbitrary $M,N\\in D(Y_{\\mathrm{proet}},A_{E,n})$, there is a canonical isomorphism\n$$\n \\mu_{f;M,N}:Lf^*(M\\otimes^L_\\Lambda N)\\xrightarrow{\\sim}Lf^*M\\otimes^L_\\Lambda Lf^*N\n$$\nin the ambient derived category $D(X_{\\mathrm{proet}},A_{E,n})$. In particular this applies to $M,N\\in D^b_c(Y,A_{E,n})$, without asserting that their derived tensor product is bounded.\n\nFor $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$ and $M,N\\in D^b_c(Y,\\Lambda)$, the same formula is an isomorphism in $D^b_c(X,\\Lambda)$; the integral tensor product is the completed derived tensor product specified in [def-weil-derived-pullback-tensor-hom]. At finite level $\\mu$ is the canonical tensor comparison for the morphism of ringed topoi induced by $f$. At integral level it is the functorial derived inverse limit of the finite comparisons on $M_n=M\\otimes^L_{\\mathcal O_E}A_{E,n}$ and $N_n=N\\otimes^L_{\\mathcal O_E}A_{E,n}$, using the canonical reduction identifications for completed pullback and tensor. At rational level it is the image of the integral comparison; at the $\\Qlb$ level it is represented by the rational comparison over any common finite coefficient field, composed with the scalar-extension comparisons of [lem-pur-integral-operations-scalar-extension].\n\nThese isomorphisms are natural in $M,N$, compatible with associativity, the signed commutativity and the unit isomorphisms of derived tensor, and compatible with composition: for $h:Z\\to X$, $\\mu_{f\\circ h;M,N}$ is $\\mu_{h;Lf^*M,Lf^*N}\\circ Lh^*(\\mu_{f;M,N})$ under the canonical composition identifications of pullbacks. They commute with finite reduction (including the derived change of coefficients $A_{E,m}\\to A_{E,n}$ for $m\\geq n$) and with scalar extension through finite coefficient field extensions and into $\\Qlb$.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma 21.18.4 (Tag 07A4, label lemma-pullback-tensor-product), for the morphism of ringed topoi (X_proet, (A_{E,n})_X) -> (Y_proet, (A_{E,n})_Y); the integral, rational and Qlbar levels follow the level-by-level definitions of the operations in def-weil-derived-pullback-tensor-hom"
@@ -23,11 +23,155 @@
   "def-weil-derived-complete-integral-detailed",
   "def-weil-rationalization-karoubi",
   "def-weil-algebraically-closed-coefficients",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-integral-operations-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At finite level choose compatible small representatives of the pro-etale sites as in [def-weil-proetale-inverse-image]. The inverse image and its constant-ring map make $f_n$ a morphism of ringed topoi. By [prop-weil-pbc-proetale-constant-exact], module pullback is exact and agrees with inverse image with the coefficient action transported through $f^{-1}(A_{E,n})_Y\\cong(A_{E,n})_X$. Thus its derived functor is precisely the finite operation in [def-weil-derived-pullback-tensor-hom]. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] with $R=(A_{E,n})_Y$ and $S=(A_{E,n})_X$. Its displayed isomorphism, natural in both arguments, is $\\mu_{f;M,N}$. That theorem is unbounded, so it applies to all the finite-level inputs claimed here; no finite Tor dimension of $A_{E,n}$ is assumed.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), applied to the small pro-etale ringed topoi"
+   }
+  },
+  {
+   "text": "Check the finite comparison and its coherences on K-flat resolutions $P,Q$ with flat terms, supplied by [lem-pc-kflat-resolution]. Tensor totals stay in the resolving class: for an acyclic test complex $H$, the total of $H\\otimes(P\\otimes Q)$ identifies, by reindexing the direct sums and the signed differentials, with the total of $(H\\otimes P)\\otimes Q$; it is acyclic by K-flatness twice [def-pc-kflat-complex]. Each $P^p\\otimes Q^q$ is flat because tensoring with it is a composite of two exact tensor functors, and the countable sums in each total degree are flat by [lem-pc-kflat-closure]. Thus iterated tensors below compute the iterated derived tensors. The comparison is obtained by totalizing the module comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor]: in extension-of-scalars notation its degree-$(p,q)$ map is $s\\otimes(x\\otimes y)\\mapsto(s\\otimes x)\\otimes(1\\otimes y)$, with inverse $(s\\otimes x)\\otimes(t\\otimes y)\\mapsto st\\otimes(x\\otimes y)$. These are balanced maps of sheaves. The total differential is $d_P\\otimes1+(-1)^p1\\otimes d_Q$ by [def-pc-tensor-complex-sheaves], so both maps commute with it. For three homogeneous factors, both associativity paths send $s\\otimes((x\\otimes y)\\otimes z)$ to $(s\\otimes x)\\otimes((1\\otimes y)\\otimes(1\\otimes z))$. Both symmetry paths introduce the same $(-1)^{pq}$ and interchange $x,y$; both unit paths multiply the scalar coefficient. For $h:Z\\to X$, the inverse-image composition identification comes from the adjunctions of [def-weil-proetale-inverse-image]: the two right adjoints evaluate on canonically identical iterated fibre products, so their left adjoints have the unique adjunction-compatible identification. After this identification both tensor-composition paths have the displayed formula with the same coefficient $s$ in the final ring. Finally, for a coefficient map $A\\to B$, the two change-of-rings paths both take $b\\otimes(x\\otimes y)$ to $(b\\otimes x)\\otimes(1\\otimes y)$; this includes all quotient maps and their composites. Equalities on these pure tensors give equalities on the sheaf tensor products and hence on their direct-sum totals. The resolving-class equivalence and uniqueness of extension in [lem-weil-pbc-site-derived-tensor-descent] descend the maps and these equalities, one variable at a time, to arbitrary derived inputs. This proves finite associativity, signed symmetry, unit, composition and coefficient compatibility, rather than assuming that naturality alone supplies them.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), its total-complex construction; Tag 06YS (lemma-K-flat-resolution); explicit tensor identities"
+   }
+  },
+  {
+   "text": "For integral $M,N$, choose K-flat resolutions $P,Q$ with flat terms over $R_Y=\\widehat{\\mathcal O}_{E,Y}$, and put $P_n=P\\otimes_{R_Y}(A_{E,n})_Y$ and $Q_n=Q\\otimes_{R_Y}(A_{E,n})_Y$. By [lem-pur-kflat-change-of-rings] these are K-flat with flat terms. Use the actual quotient chain maps of [def-pur-integral-derived-operations], not merely inverse systems in the homotopy category. Set $T_n=\\operatorname{Tot}(P_n\\otimes_{A_{E,n}}Q_n)$, $U_n=f_n^*P_n$, $V_n=f_n^*Q_n$ and $W_n=\\operatorname{Tot}(U_n\\otimes_{A_{E,n}}V_n)$. The $U_n,V_n$ are K-flat with flat terms by [lem-weil-pbc-ringed-pullback-preserves-kflat]. All four are coherent towers of the kind in [def-coef-normalized-dvr-tower]: for $m\\geq n$, associating ordinary quotient tensors identifies $P_m\\otimes^L_{A_{E,m}}A_{E,n}$ with $P_n$, and likewise for $Q$; step 2 and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], also applied to the identity topos and the ring map $A_{E,m}\\to A_{E,n}$, give the corresponding normalization isomorphisms for $T,U,V,W$. The chain maps are induced by quotient homomorphisms, whose composites are the direct quotients, so the normalization cocycles and strict tower data are present. By [lem-coef-normalized-dvr-effectivity] the derived limits of these towers have canonically and coherently these finite reductions. In particular the reductions of $M\\widehat\\otimes^L N$, $Lf^*M$ and $Lf^*N$ are $T_n,U_n,V_n$, respectively, with their quotient maps.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "def-pur-integral-derived-operations",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "def-coef-normalized-dvr-tower",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-coef-normalized-dvr-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product); coherent quotient towers and normalized DVR effectivity"
+   }
+  },
+  {
+   "text": "The degreewise comparison of step 2 gives a strict isomorphism of the towers $f_n^*T_n\\to W_n$: the maps and their inverses commute with all quotient transitions by the same tensor formula. Restrict scalars to $R_X=\\widehat{\\mathcal O}_{E,X}$ and apply the functor $R\\lim:D(\\operatorname{Tow}(\\operatorname{Mod}(R_X)))\\to D(R_X)$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. A functor carries an isomorphism and its inverse to inverse maps. Here the identifications with the composite operations use whole coherent reduction towers. Put $K=R\\lim T_\\bullet$, $F=R\\lim U_\\bullet$ and $G=R\\lim V_\\bullet$. The canonical coherent counits in [lem-coef-normalized-dvr-effectivity], used in step 3, identify the reduction towers of $K,F,G$ with $T_\\bullet,U_\\bullet,V_\\bullet$, respectively. Apply finite pullback to the first coherent comparison; its exactness from step 1 gives the comparison of pullback towers. Apply finite derived tensor to the latter two comparisons, computed using their flat-term K-flat representatives from step 3; this gives the comparison of tensor towers with $W_\\bullet$. These are coherent comparisons in the derived tower categories, so applying $R\\lim$ gives the identifications with $Lf^*K$ and $F\\widehat\\otimes^L G$ prescribed by [def-pur-integral-derived-operations]. Consequently the source is $Lf^*(M\\widehat\\otimes^L N)$ and the target is $Lf^*M\\widehat\\otimes^L Lf^*N$; these identifications do not use independently chosen levelwise isomorphisms. This defines the integral $\\mu$ and proves that it is the derived limit stipulated in the statement. Its construction on representatives descends naturally and independently of resolutions by [lem-pur-integral-operations-well-defined]. Finally [lem-pur-integral-operations-preserve-constructible] puts both source and target in $D^b_c(X,\\mathcal O_E)$: apply its tensor assertion on $Y$, its pullback assertion, and its tensor assertion on $X$ to the two pulled-back objects. Since this is a full subcategory, the ambient isomorphism and its inverse belong to it.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-coef-normalized-dvr-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); functorial tower realization; Bhatt--Scholze Definition 3.4.10 and Lemma 6.5.5"
+   }
+  },
+  {
+   "text": "The integral coherences are images of coherent tower diagrams, not conclusions inferred merely from equality of isolated reduction maps. For example, resolve three inputs by $P,Q,H$. At index $n$ the two associativity paths are exactly the two triple-tensor maps computed in step 2; their equality is compatible with the transition $n+1\\to n$, since that transition applies the coefficient quotient to each displayed scalar. For signed symmetry, a homogeneous tensor $s\\otimes(x\\otimes y)$, with degrees $p,q$, is sent by either path to $(-1)^{pq}(s\\otimes y)\\otimes(1\\otimes x)$; the coefficient quotient changes $s$ but neither degree nor sign, so this equality is an equality of maps of towers. For the unit, the two paths both multiply the coefficient by the unit-factor scalar; quotient homomorphisms preserve that multiplication and $1$. For composition, the coherent reduction of $Lh^*Lf^*M$ is $h_n^*f_n^*M_n$; the adjunction-compatible finite identification with $(f\\circ h)_n^*M_n$ from step 2 identifies both composite tensor maps at the level of these coherent quotient models: each distributes $s\\otimes(x\\otimes y)$ as $(s\\otimes x)\\otimes(1\\otimes y)$ after the iterated inverse images are identified. For the transition from index $n+1$ to $n$, each factor is reduced by the coefficient quotient, so distributing before or after that transition has the identical displayed value. Thus the composition equality also holds as a map of towers. Apply the functor in [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to these diagrams and use the canonical coherent counit comparisons of [lem-coef-normalized-dvr-effectivity]. This gives the integral associativity, symmetry, unit and composition equations. Applying the same counit comparisons to the strict map $f_n^*T_n\\to W_n$ identifies its derived reduction with the finite $\\mu_{f_n;M_n,N_n}$, proving compatibility with finite reduction. This uses the coherent normalization in step 3, with no claim that separate finite-reduction functors are faithful on morphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-coef-normalized-dvr-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); canonical coherent reduction counits; tensor identities of step 2"
+   }
+  },
+  {
+   "text": "Let $E\\subset L$ be finite coefficient fields and write $B_m=\\mathcal O_L/\\varpi_L^m$. By [def-weil-integral-scalar-extension] the maps $A_{E,m}\\to B_m$ exist and commute with transitions, even for ramified extensions; scalar extension is the derived limit of the strict towers $P\\otimes_{R_Y}(B_m)_Y$. For normalization, the change-of-rings lemma used in step 3 makes each quotient complex $P\\otimes_{R_Y}(B_m)_Y$ K-flat with flat terms over $B_m$. Derived change of rings along $B_m\\to B_n$ is consequently computed by ordinary tensor on that quotient complex. Associating the two tensors identifies it with $P\\otimes_{R_Y}(B_n)_Y$. The transition is induced by the actual quotient $B_m\\to B_n$, and two successive quotient maps equal the direct quotient, giving the normalization cocycle. Hence [lem-coef-normalized-dvr-effectivity] for the coefficient field $L$ supplies the coherent reductions of the limit. The existence of natural pullback and tensor scalar-extension isomorphisms, with identity and composition compatibility, is supplied by [lem-pur-integral-operations-scalar-extension]. Choose their canonical quotient-model representatives as follows. For any derived-complete object $K$, associate derived change of rings through $A_{E,m}$ and use its coherent reduction counit to identify the $B_m$ reduction after scalar extension with $K_m\\otimes^L_{A_{E,m}}B_m$. For pullback, apply the finite change-of-rings formula of step 2 to identify this model for $Lf_E^*K$ with $f_L^*(K_m\\otimes^L_{A_{E,m}}B_m)$. For tensor, that formula identifies $(M_m\\otimes^L_{A_{E,m}}N_m)\\otimes^L_{A_{E,m}}B_m$ with $(M_m\\otimes^L_{A_{E,m}}B_m)\\otimes^L_{B_m}(N_m\\otimes^L_{A_{E,m}}B_m)$. The quotient formulas commute with transitions, so their derived limits give the indicated comparison isomorphisms; the formulas for the identity ring map and a composite ring map give their identity and composition compatibility. To check compatibility of $\\mu$ with these comparisons, compute using the indicated quotient models: the $B_m$ model of the first input is $P_m\\otimes_{A_{E,m}}B_m$ and the $B_m$ model of the second input is $Q_m\\otimes_{A_{E,m}}B_m$, by tensor associativity. The $B_m$ models of the two tensor/pullback paths are identified by the change-of-rings formulas of step 2; both take $b\\otimes(x\\otimes y)$ to $(b\\otimes x)\\otimes(1\\otimes y)$. These formulas commute with $B_{m+1}\\to B_m$ and also with any further coefficient extension. Applying [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to the resulting commuting diagrams of quotient towers gives the integral scalar-extension compatibility square for $\\mu$. The coherent counit comparisons identify the vertices with the integral operations, as in step 4. Thus the calculation checks the comparisons used by the coefficient constructions, and does not deduce a compatibility assertion solely from the existence of some scalar-extension isomorphisms.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Compatible quotient scalar-extension construction of def-weil-integral-scalar-extension; Tag 07A4 tensor formula and Tag 0941 functorial derived limit"
+   }
+  },
+  {
+   "text": "By [def-weil-rationalization-karoubi], every rational object is an integral object and every morphism is a finite sum of $u\\otimes a$, with $u$ integral and $a\\in E$. Define $\\mu^E$ to be the image $\\mu^{\\mathcal O_E}\\otimes1$; its inverse is the image of the integral inverse. The operations on rational morphisms are the scalar extensions specified in [def-weil-derived-pullback-tensor-hom]. The integral naturality identity for $u,v$, multiplied by the corresponding scalars, gives rational naturality; add the resulting identities for sums. Every integral coherence equation remains an equality after tensoring Hom groups with $E$, so the rational associativity, symmetry, unit and composition equations follow. The scalar-extension square of step 6 likewise remains commutative, since the rational scalar-extension functor is the one induced from the integral scalar-extension functor.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "The raw scalar-localization definition: Hom tensor E; all identities are images of the integral identities"
+   }
+  },
+  {
+   "text": "For objects $(E,M),(E',N)$ at the algebraically closed level, choose a common finite coefficient field $L$ and form the rational comparison there, conjugated by the scalar-extension comparisons as prescribed in [def-weil-derived-pullback-tensor-hom]. Represent the inverse by the inverse rational comparison with the inverse conjugating comparisons. In [def-weil-algebraically-closed-coefficients], morphisms are classes over common finite fields, and two representatives agree if they agree after passage to a further common field. Step 6 after rationalization says precisely that passing from $L$ to any larger field sends this comparison to the same comparison there; hence the class and its inverse are independent of $L$. Represent any finite naturality or coherence diagram over a single common finite field; the rational identity proved in step 7 gives its equality in the colimit Hom group. This proves all the asserted compatibilities at $\\Qlb$, including scalar extension into $\\Qlb$.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "The common-stage Hom colimit and equality rule; finite-stage definition of the operations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-integral-derived-operations",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-scalar-extension",
+  "def-weil-proetale-inverse-image",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pc-kflat-closure",
+  "lem-pc-kflat-resolution",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), with explicit coherence calculations and the compatible quotient-tower constructions; Bhatt--Scholze Definition 3.4.10 and Section 6.5 for the integral conventions"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +186,87 @@
    "results": "SheafOfModules.pullback (underived, along continuous functors) and the presheaf monoidal structure; no compatibility of pullback with tensor products, derived or not",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image of sheaves of modules on ringed sites commutes with derived tensor product and is symmetric monoidal",
+   "results": "8 hits: SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardNatIso_hom, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, SheafOfModules.pushforwardCongr_symm",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary sheaf pullback, Tor on the abelian category, scheme fibre products, or localization infrastructure; no statement of the finite/adic tensor-pullback comparison with the claimed coefficient stages"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"tensor\"",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary sheaf pullback, Tor on the abelian category, scheme fibre products, or localization infrastructure; no statement of the finite/adic tensor-pullback comparison with the claimed coefficient stages"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ensor|[Tt]ensor.*derived|[Mm]onoidal",
+   "results": "0 hits: ; scope Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary sheaf pullback, Tor on the abelian category, scheme fibre products, or localization infrastructure; no statement of the finite/adic tensor-pullback comparison with the claimed coefficient stages"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of sheaves commutes with derived tensor product",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total left derived functor of inverse image is a strong symmetric monoidal functor and its tensor comparison commutes with coefficient reduction",
+   "results": "8 hits: CategoryTheory.Tor_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor', CategoryTheory.Tor'_obj_map, CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Localization.Monoidal.tensorBifunctorIso",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary sheaf pullback, Tor on the abelian category, scheme fibre products, or localization infrastructure; no statement of the finite/adic tensor-pullback comparison with the claimed coefficient stages"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"derived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary sheaf pullback, Tor on the abelian category, scheme fibre products, or localization infrastructure; no statement of the finite/adic tensor-pullback comparison with the claimed coefficient stages"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor|tensor.*pullback|derivedTensor|leftDerivedTensorComparison",
+   "results": "0 hits: ; scope Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary sheaf pullback, Tor on the abelian category, scheme fibre products, or localization infrastructure; no statement of the finite/adic tensor-pullback comparison with the claimed coefficient stages"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal functor induced by localization of chain complexes at quasi isomorphisms preserves tensor products of K flat resolutions",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, CategoryTheory.Localization.Monoidal.tensorBifunctor",
+   "date": "2026-10-15",
+   "verdict": "no match: Tor is abelian-category valued; localization and ordinary ring base-change results do not state the four coefficient-stage comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"tensor\"",
+   "results": "12 hits: IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.Away.tensorRight, IsLocalization.Away.tensor, IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.algebraTensorEquiv, IsLocalization.tensorProduct_compatibleSMul, IsLocalization.Away.tensorRightEquiv",
+   "date": "2026-10-15",
+   "verdict": "no match: Tor is abelian-category valued; localization and ordinary ring base-change results do not state the four coefficient-stage comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|derived.*monoidal|monoidal.*derived",
+   "results": "0 hits: ; scope Mathlib/Algebra",
+   "date": "2026-10-15",
+   "verdict": "no match: Tor is abelian-category valued; localization and ordinary ring base-change results do not state the four coefficient-stage comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left derived inverse image is compatible with the total tensor product of complexes of module sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +286,69 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv"
+ "unit": "sk-def-purity-conv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-derived-pullback-tensor-iso",
+  "worker": "stage1",
+  "summary": "Corrected the false finite-level boundedness assertion, retaining the tensor/pullback isomorphism for all ambient finite-level complexes and all original integral/rational/common-stage clauses. Gave eight steps using existing ringed-topos and normalized-tower statements, including explicit tensor identities for coherence and functorial derived-limit maps. No new nodes. Checked sources, existing Lean, all cited statements, ramified coefficient changes, and the sole citer (which uses only E and Qlbar). Resumption audit made tensor-total K-flatness explicit from the definition and cited flatness of countable sums, added direct change-of-rings citations to step 6, and restored proposed generic tool uses in the authorized split_report field. Fresh second reading clarified the coherent tower identifications for composite integral operations in step 4, added its direct effectivity citation, and independently repeated Mathlib searches with different vocabulary.",
+  "blueprint": "Realizes the tensor compatibility needed to define the natural Frobenius structure on twists in def-weil-frobenius-coefficient-twists; the current expanded ancestor clause 5 displays this very comparison. The unit sk-def-purity-conv has no proof steps and already uses finite-Tor coefficients; its statement and the chapter route are untouched.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Arbitrary ringed-topos tensor/pullback and coefficient-change comparison supplies the finite-stage maps; no geometric step of the conventions unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Arbitrary ringed-topos ordinary tensor comparison supplies the chain maps whose coherence is calculated explicitly; the unit has no ordinary module lemma."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic resolving-class localization descends natural transformations and their identities from K-flat models; the conventions unit has no localization theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic K-flat and flat-term preservation permits the finite pullback models; no geometric argument is replaced."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exactness for arbitrary finite constant coefficients identifies finite derived pullback with termwise inverse image; no purity theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "The derived-limit functor on coherent strict towers gives actual maps and preserves diagram identities, which the Roos-triangle definition alone does not supply."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "Generic normalized DVR tower effectivity supplies coherent reductions of completed operations; it does not replace the unit route or assume constructibility."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolutions on ringed sites supply representatives; the conventions unit has no resolution construction."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Only the generic clause that countable sums of flat sheaves are flat is used for the terms of a tensor total; K-flatness of that total is proved directly from the definition in step 2."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-d70026343",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-d70026343 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and sources; review.md records checks of all eight steps. The finite boundedness correction is justified, integral tower/coherence arguments match their dependencies, and all nine generic tool uses are accepted. No new nodes, cycles, or repairs. No condensed-coefficient comparison is inferred for the targets."
+ }
 }
