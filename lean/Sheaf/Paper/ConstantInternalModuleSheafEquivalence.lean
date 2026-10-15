@@ -4,9 +4,7 @@ Authors: SHEAF group C2 -/
 module
 
 public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
-public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Monoidal.Mod
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import Sheaf.Paper.InternalModuleAbEquivalence
 
