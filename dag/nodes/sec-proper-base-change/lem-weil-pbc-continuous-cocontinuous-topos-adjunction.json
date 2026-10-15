@@ -347,5 +347,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ContinuousCocontinuousToposAdjunction",
+  "declaration": "CategoryTheory.continuousCocontinuous_toposAdjunction",
+  "file": "lean/Sheaf/CategoryTheory/ContinuousCocontinuousToposAdjunction.lean",
+  "statement": "theorem continuousCocontinuous_toposAdjunction {C : Type u} [SmallCategory C] {D : Type u} [SmallCategory D] (J : Precoverage C) (K : Precoverage D) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] (f : C ⥤ D) (hcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map f ∈ K (f.obj X)) (hpullback : ∀ (X Y Z : C) (S : Presieve X), S ∈ J X → ∀ (a : Y ⟶ X) (b : Z ⟶ X), S a → PreservesLimit (cospan a b) f) [f.IsCocontinuous J.toGrothendieck K.toGrothendieck] : ∃ (L : Sheaf K.toGrothendieck (Type u) ⥤ Sheaf J.toGrothendieck (Type u)) (eL : L ⋙ sheafToPresheaf J.toGrothendieck (Type u) ≅ sheafToPresheaf K.toGrothendieck (Type u) ⋙ (Functor.whiskeringLeft _ _ (Type u)).obj f.op) (adj : L ⊣ f.sheafPushforwardCocontinuous (Type u) J.toGrothendieck K.toGrothendieck), PreservesFiniteLimits L ∧ ∃ e : ∀ (F : Sheaf J.toGrothendieck (Type u)) (V : D), ((f.sheafPushforwardCocontinuous (Type u) J.toGrothendieck K.toGrothendieck).obj F).obj.obj (op V) ≃ {s : ∀ (A : C), (f.obj A ⟶ V) → F.obj.obj (op A) // ∀ (A B : C) (a : B ⟶ A) (ψ : f.obj A ⟶ V), F.obj.map a.op (s A ψ) = s B (f.map a ≫ ψ)}, (∀ (F : Sheaf J.toGrothendieck (Type u)) (V V' : D) (h : V' ⟶ V) (s : ((f.sheafPushforwardCocontinuous (Type u) J.toGrothendieck K.toGrothendieck).obj F).obj.obj (op V)) (A : C) (ψ : f.obj A ⟶ V'), (e F V' (((f.sheafPushforwardCocontinuous (Type u) J.toGrothendieck K.toGrothendieck).obj F).obj.map h.op s)).val A ψ = (e F V s).val A (ψ ≫ h)) ∧ (∀ (F F' : Sheaf J.toGrothendieck (Type u)) (α : F ⟶ F') (V : D) (s : ((f.sheafPushforwardCocontinuous (Type u) J.toGrothendieck K.toGrothendieck).obj F).obj.obj (op V)) (A : C) (ψ : f.obj A ⟶ V), (e F' V (((f.sheafPushforwardCocontinuous (Type u) J.toGrothendieck K.toGrothendieck).map α).hom.app (op V) s)).val A ψ = α.hom.app (op A) ((e F V s).val A ψ)) ∧ (∀ (F : Sheaf J.toGrothendieck (Type u)) (U : C) (s : ((f.sheafPushforwardCocontinuous (Type u) J.toGrothendieck K.toGrothendieck).obj F).obj.obj (op (f.obj U))), (adj.counit.app F).hom.app (op U) (((eL.inv.app _).app (op U)) s) = (e F (f.obj U) s).val U (𝟙 _)) ∧ (∀ (G : Sheaf K.toGrothendieck (Type u)) (V : D) (t : G.obj.obj (op V)) (A : C) (ψ : f.obj A ⟶ V), (eL.hom.app G).app (op A) ((e (L.obj G) V ((adj.unit.app G).hom.app (op V) t)).val A ψ) = G.obj.map ψ.op t)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-56522273b",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, source, dependencies, every statement clause, edge cases, uniqueness, docstrings, and verbatim signature. Server compile reproduced cleanly in 1.1 seconds. No H1–H13 errors; no repository or branch changes."
  }
 }
