@@ -1,0 +1,161 @@
+{
+ "id": "lem-weil-pbc-affine-contractible-extension-full-site",
+ "kind": "statement",
+ "title": "An affine contractible extension valid on every full small pro-etale site",
+ "statement": "Let A be a commutative ring in universe u. There exist a commutative ring D in the same universe and a ring homomorphism phi : A -> D such that the singleton Spec(D) -> Spec(A) is a pro-etale covering [def-weil-pbc-proetale-covering]. Moreover, for every scheme X [def-pc-scheme] and every weakly etale map g : Spec(D) -> X [def-weil-weakly-etale-morphism], every epimorphism F -> G of sheaves valued in Type (u+1) on the full small pro-etale site of X [def-weil-pbc-proetale-site] is surjective on evaluation at Spec(D) -> X. Spectra are as in [def-weil-affine-spectrum], with universes as in [def-weil-size-convention].",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/WeaklyContractible.lean",
+  "place": "Stacks Tags 0983, 098H and 0990, source-library exists_isWContractibleRing in RingTheory/ProEtale/WContractible.lean and isWeaklyContractible_of_iso in AlgebraicGeometry/ProEtale/WeaklyContractible.lean"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved source-library theorem exists_isWContractibleRing to A. It gives a commutative ring D : Type u, an A-algebra structure, ind-etaleness, faithful flatness and IsWContractibleRing D. Set phi = algebraMap A D. No cardinal arithmetic is needed: this theorem constructs D in the same universe as A. This source theorem was checked by #print axioms to use only propext, Classical.choice and Quot.sound.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/RingTheory/ProEtale/WContractible.lean",
+    "place": "exists_isWContractibleRing, lines 800-811 (Stacks Tag 0983)"
+   }
+  },
+  {
+   "text": "RingHom.IndEtale.weaklyEtale and WeaklyEtale.Spec_iff make Spec(phi) weakly etale. The faithfully-flat spectrum criterion makes Spec(phi) surjective. Its source and target are affine, so it is quasi-compact. Hom.singleton_mem_propQCPrecoverage now proves that the singleton spectrum map is in proetalePrecoverage. This argument also applies to the zero ring.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-weakly-etale-morphism",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/WeaklyContractible.lean",
+    "place": "exists_isWeaklyContractible_cover, spectrum cover clause (Stacks Tag 0990)"
+   }
+  },
+  {
+   "text": "Let X be any scheme and g : Spec D to X any weakly etale map. Apply the already proved isWeaklyContractible_of_iso to the identity isomorphism of Spec D, with its IsWContractibleRing instance. The resulting IsWeaklyContractible predicate is for sheaves on the full small pro-etale site of X, in Type (u+1). Sheaf.isLocallySurjective_iff_epi turns an arbitrary epimorphism e into the local-surjectivity hypothesis of that predicate, giving surjectivity on evaluation at ProEt.mk g. The proof uses no nontriviality assumption. The source theorem was checked by #print axioms to use only the three allowed axioms.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-proetale-site",
+    "def-weil-weakly-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/WeaklyContractible.lean",
+    "place": "isWeaklyContractible_of_iso (Stacks Tags 098H and 0990)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-affine-spectrum",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-pbc-proetale-covering",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/WeaklyContractible.lean",
+  "place": "The already proved ring extension and affine weak-contractibility construction; apply their APIs, then Mathlib singleton-cover and sheaf-epi criteria."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every commutative ring has a faithfully flat ind etale w contractible extension whose spectrum is weakly contractible in the small pro etale site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every commutative ring admits a faithfully flat ind etale weakly contractible extension",
+   "results": "8 hits including Algebra.Etale.exists_subalgebra_fg and Algebra.Smooth.flat; none assert existence of w-contractible extensions.",
+   "date": "2026-10-15",
+   "verdict": "No Mathlib match. The source library already proves the two inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "contractible|Contractible in Mathlib AlgebraicGeometry/Sites and RingTheory/Etale; exists_isWContractibleRing|isWeaklyContractible_of_iso|exists_isWeaklyContractible_cover in WeilConjectures; blueprint_refs search w-contractible, 0983 and 0990",
+   "results": "No matching Mathlib theorem and no matching imported blueprint node. Found source-library exists_isWContractibleRing at RingTheory/ProEtale/WContractible.lean:801 and isWeaklyContractible_of_iso at AlgebraicGeometry/ProEtale/WeaklyContractible.lean:130. The source existence-of-cover theorem only asserts topology membership, while this helper retains a singleton in the precoverage and quantifies over every structural map to every base. The existing bounded extension node has an additional cardinal bound; the retraction-evaluation node has a different ring hypothesis.",
+   "date": "2026-10-15",
+   "verdict": "Reuse the closed source theorems; this proved helper packages only the affine step needed by the target."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover",
+  "date": "2026-10-15",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, sole paragraph: finite-stage isomorphism; the affine contractible extension step serving the subordinate pro-etale covering-family construction.",
+   "via": [
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAffineContractibleExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAffineContractibleExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.exists_affine_contractible_extension",
+  "statement": "theorem exists_affine_contractible_extension (A : Type u) [CommRing A] :\n    ∃ (D : Type u) (_ : CommRing D) (φ : A →+* D),\n      Presieve.singleton (Spec.map (CommRingCat.ofHom φ)) ∈\n        proetalePrecoverage (Spec (CommRingCat.of A)) ∧\n      (∀ (X : Scheme.{u}) (g : Spec (CommRingCat.of D) ⟶ X) [WeaklyEtale g]\n        (F G : Sheaf (topology X) (Type (u + 1))) (e : F ⟶ G),\n        Epi e → Function.Surjective (e.hom.app (op (ProEt.mk g))))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T154151-L-158503",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T154151-L-158503",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

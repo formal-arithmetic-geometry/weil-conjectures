@@ -6,11 +6,7 @@ Authors: SHEAF group NU
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.RingTheory.IndEtaleStability
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.WContractibleAffineEvaluation
-import Sheaf.RingTheory.BoundedWContractibleExtension
+import Sheaf.AlgebraicGeometry.ProEtaleAffineContractibleExtension
 
 /-!
 # Affine weakly contractible covering families on the small pro-etale site
@@ -64,6 +60,30 @@ theorem exists_affine_weaklyContractible_covering_family
       (∀ i : I, IsAffine (V i).left) ∧
       (∀ (i : I) (F G : Sheaf (topology X) (Type (u + 1))) (e : F ⟶ G),
         Epi e → Function.Surjective (e.hom.app (op (V i)))) := by
-  sorry
+  classical
+  let A := U.left.affineOpenCover
+  choose D hD φ hcover hcontract using
+    fun j : A.I₀ ↦ exists_affine_contractible_extension (A.X j)
+  let (j : A.I₀) : CommRing (D j) := hD j
+  let p (j : A.I₀) := Spec.map (CommRingCat.ofHom (φ j))
+  let C := A.openCover.weaken
+    (zariskiPrecoverage_le_propQCPrecoverage (P := @WeaklyEtale))
+  let E (j : A.I₀) : Scheme.Cover.{0} proetalePrecoverage (Spec (A.X j)) :=
+    .singleton (p j) (hcover j)
+  let B := (C.bind E).reindex (Equiv.ulift : ULift.{u + 1} _ ≃ _)
+  have hB (i : B.I₀) : WeaklyEtale (B.f i) := Scheme.Cover.map_prop (Scheme.Cover.forgetQc B) i
+  let V (i : B.I₀) : X.ProEt := ProEt.mk (B.f i ≫ U.hom)
+  let f (i : B.I₀) : V i ⟶ U := MorphismProperty.Over.homMk (B.f i)
+  refine ⟨B.I₀, V, f, ?_, ?_, ?_⟩
+  · change (Presieve.ofArrows V f).map (ProEt.forget X ⋙ Over.forget X) ∈
+      proetalePrecoverage U.left
+    rw [Presieve.map_ofArrows]
+    change B.presieve₀ ∈ proetalePrecoverage U.left
+    exact B.mem₀
+  · intro i
+    change IsAffine (Spec (CommRingCat.of (D i.down.1)))
+    infer_instance
+  · intro i F G e he
+    exact hcontract i.down.1 X (B.f i ≫ U.hom) F G e he
 
 end AlgebraicGeometry.Scheme.ProEt

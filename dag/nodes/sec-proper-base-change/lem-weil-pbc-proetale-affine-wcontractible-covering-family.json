@@ -28,105 +28,54 @@
  ],
  "proof": [
   {
-   "text": "Let $u:U\\to X$ be the object in the statement. Choose an arbitrary affine open cover $U=\\bigcup_{j\\in J}T_j$, writing $T_j=\\operatorname{Spec}A_j$. The affine basis property follows from the locally affine definition of a scheme [def-pc-scheme]: restrict an affine chart around each point to principal opens contained in a prescribed neighborhood. Take $J$ to be a set of such opens of the $\\mathcal U$-small scheme $U$. There is no finiteness assertion for $J$.",
+   "text": "Take A = U.left.affineOpenCover. Its index is small and its members are spectra of rings, with open-immersion arrows covering U.left. Apply lem-weil-pbc-affine-contractible-extension-full-site separately to each A.X j, obtaining D j, phi j, singleton pro-etale coverings p j and the full-site evaluation property for every structural map out of Spec(D j).",
    "uses": [
     "def-pc-scheme",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01IT, lemma-basis-affine-opens"
-   }
-  },
-  {
-   "text": "For each $j$ choose an infinite $\\mathcal U$-small cardinal $\\kappa_j\\geq |A_j|$. Apply [lem-weil-pbc-wcontractible-ring-extension] to obtain $A_j\\to D_j$, and set $V_j=\\operatorname{Spec}D_j$ with the induced map $p_j:V_j\\to T_j$. Retain all clauses: $p_j$ is a one-member pro-etale covering, $D_j$ has the splitting property, and $|D_j|\\leq\\kappa_j^{2^{2^{2^{\\kappa_j}}}}$.",
-   "uses": [
-    "lem-weil-pbc-wcontractible-ring-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 0983, proposition-find-w-contractible, and 0984, remark-size-w-contractible"
-   }
-  },
-  {
-   "text": "The bound in step 2 is $\\mathcal U$-small: Grothendieck universes are closed under power sets and function sets, so the iterated powers and cardinal exponentiation remain below the universe bound [def-weil-size-convention]. Replace $D_j$ by an isomorphic ring on a subset of a set of that bounded cardinality. Its prime ideals are subsets of $D_j$, and the topology and structure sheaf are built from subsets, localizations (quotients of pairs), and sets of functions; all these sets lie in $\\mathcal U$. Hence $V_j$ is a $\\mathcal U$-small affine scheme [def-weil-affine-spectrum]. The family indexed by $J$ is formed inside $\\mathcal V$. Use representatives in the chosen skeleton, conjugating every map by the representing isomorphisms. This uses the bounded witness explicitly, rather than an arbitrary existential witness.",
-   "uses": [
-    "def-weil-size-convention",
     "def-weil-affine-spectrum",
-    "lem-weil-pbc-wcontractible-ring-extension"
+    "lem-weil-pbc-affine-contractible-extension-full-site"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0984, remark-size-w-contractible; Tag 098I, lemma-get-many-weakly-contractible, size paragraph (universe form of its bound argument)"
-   }
+   "elementary": false
   },
   {
-   "text": "The open immersion $i_j:T_j\\to U$ is etale by [lem-weil-pbc-open-immersion-etale], hence flat by [def-weil-etale-morphism]. Its diagonal is an isomorphism: the fibre product of an open subset with itself over $U$ is that open subset, by the open-subscheme definition [def-weil-open-immersion]. An isomorphism is flat since its local-ring maps are isomorphisms. Thus $i_j$ is weakly etale by [def-weil-weakly-etale-morphism]. By [lem-weil-pbc-ind-etale-stability], $p_j$ is weakly etale and the composites $i_jp_j$ and $u i_jp_j$ are weakly etale. Step 3 and the definition [def-weil-pbc-proetale-site] now make $V_j\\to X$ an object of the full small site and $V_j\\to U$ a morphism there.",
+   "text": "Weaken the affine open cover to the big pro-etale precoverage using Mathlib zariskiPrecoverage_le_propQCPrecoverage, and bind it with the singleton covers p j. Precoverage.ZeroHypercover.bind proves that the composites form a pro-etale precoverage covering; its proof already supplies the finite-open refinements required in the original plan. Reindex with Equiv.ulift to obtain an index in Type (u+1). This works for an arbitrary scheme, without quasi-compactness of U, and the empty scheme gives the empty indexed cover.",
    "uses": [
-    "lem-weil-pbc-open-immersion-etale",
-    "def-weil-etale-morphism",
-    "def-weil-open-immersion",
+    "def-weil-pbc-proetale-covering",
+    "def-weil-size-convention"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each composite in the resulting cover B is weakly etale, by the morphism-property clause of the pro-etale precoverage (Cover.forgetQc and Cover.map_prop). Compose it with U.hom and use Mathlib weak-etale composition stability to form V i = ProEt.mk (B.f i >> U.hom). Form f i : V i -> U with MorphismProperty.Over.homMk. The definition of the small-site precoverage as a comap and Presieve.map_ofArrows identify the desired covering assertion with B.mem_0.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
     "def-weil-weakly-etale-morphism",
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-wcontractible-ring-extension",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098I, lemma-get-many-weakly-contractible, construction; composition: more-morphisms.tex Tag 094T, lemma-composition-weakly-etale"
-   }
-  },
-  {
-   "text": "Fix an affine open $W\\subseteq U$. Cover $W$ by affine opens $W_a$ subordinate to the open cover $(W\\cap T_j)_j$: the affine basis gives $W_a\\subseteq W\\cap T_{j(a)}$. The affine scheme $W$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so finitely many of these OPEN subsets $W_a$ cover $W$. Apply the one-member covering clause of [lem-weil-pbc-wcontractible-ring-extension] to $p_{j(a)}$ and the affine open $W_a\\subseteq T_{j(a)}$. The definition [def-weil-pbc-proetale-covering] gives finitely many affine opens $Z_{a,b}\\subseteq V_{j(a)}$ whose images under $p_{j(a)}$ have union exactly $W_a$. Taking all these finitely many $Z_{a,b}$, their images under the composites have union $W$. Together with step 4 this is precisely the pro-etale covering criterion for $(V_j\\to U)_j$. Neither $W\\cap T_j$ nor an arbitrary image upstairs is assumed affine or open. If $W$ is empty, take no witnesses.",
-   "uses": [
-    "def-pc-scheme",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-wcontractible-ring-extension",
     "def-weil-pbc-proetale-covering"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098I, lemma-get-many-weakly-contractible; Tag 0989, definition-fpqc-covering; affine quasi-compactness: algebra.tex Tag 00E8, lemma-quasi-compact"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $j$, the splitting clause for $D_j$ from [lem-weil-pbc-wcontractible-ring-extension] and the already verified full-site object $V_j\\to X$ satisfy all hypotheses of [lem-weil-pbc-wcontractible-affine-weakly-contractible]. Therefore every sheaf epimorphism $F\\to G$ on $X_{\\mathrm{proet}}$ is surjective on evaluation at $V_j$. Each $V_j$ is affine, and step 5 gives a covering family in this same site. This proves the requested statement for arbitrary $U$. The empty object is covered by the empty family.",
+   "text": "The source scheme of V i is definitionally Spec(D i.down.1), hence affine. Apply the full-site evaluation clause supplied in step 1 to the structural map B.f i >> U.hom and the given sheaf epimorphism. This gives exactly the last clause of the statement on the site of X. All witness selection occurs inside this existential theorem proof, and introduces no definition depending on unproved data.",
    "uses": [
-    "lem-weil-pbc-wcontractible-ring-extension",
-    "lem-weil-pbc-wcontractible-affine-weakly-contractible",
-    "def-weil-pbc-proetale-site"
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-affine-contractible-extension-full-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 098H, lemma-w-contractible-is-weakly-contractible, (1) implies (2); Tag 0990, lemma-proetale-enough-w-contractible"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-scheme",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-wcontractible-ring-extension",
-  "def-weil-size-convention",
   "def-weil-affine-spectrum",
-  "lem-weil-pbc-open-immersion-etale",
-  "def-weil-etale-morphism",
-  "def-weil-open-immersion",
-  "def-weil-weakly-etale-morphism",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-contractible-extension-full-site",
   "def-weil-pbc-proetale-covering",
-  "lem-weil-pbc-wcontractible-affine-weakly-contractible"
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-weil-weakly-etale-morphism"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 0983, 0984, 098H, 098I and 0990; expanded finite affine-open witness argument and Grothendieck-universe version of the size argument"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/WeaklyContractible.lean",
+  "place": "Same affine-chart route as Stacks 0990, using the closed source-library ring extension and affine weak-contractibility theorems through the proved affine-contractible-extension-full-site helper. Precoverage.ZeroHypercover.bind retains precoverage membership, stronger than the topology-only source cover API."
  },
  "mathlib_searches": [
   {
@@ -227,5 +176,15 @@
   "by": "NU",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261015T154151-L-158503",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
