@@ -3,30 +3,66 @@
  "blueprint": {
   "is": "def-pur-support-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Cohomology with support",
- "statement": "Let $X$ be a scheme, let\n$i:Z\\hookrightarrow X$ be a closed subscheme with open complement\n$j:U\\hookrightarrow X$, and let $F$ be a torsion etale sheaf on the\nsmall etale site of $X$. For\n$q\\geq0$, write $H^q_Z(X,F)$ for the $q$-th right derived functor of\nthe functor of sections with support in $Z$. The same notation is used\nfor bounded-below complexes with torsion cohomology in the\nderived categories, and on\nthe small pro-etale site for finite-torsion coefficients, with the\nfunctor of sections with support understood in the corresponding\ntopology.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], meaning a locally ringed space\nlocally isomorphic to spectra of commutative rings, and let\n$i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion] with open complement\n$j:U\\hookrightarrow X$ [def-weil-open-immersion], and let $F$ be a torsion abelian sheaf\n[def-weil-pbc-torsion-etale-sheaf] on the small etale site of $X$\n[def-weil-pbc-etale-site]. For any abelian sheaf $G$ on this site\n[def-weil-pbc-abelian-etale-sheaves], define\nits group of sections with support in $Z$ by\n\n$$\n \\Gamma_Z(X,G)=\\ker\\bigl(G(X)\\xrightarrow{\\mathrm{res}_{X,U}}G(U)\\bigr).\n$$\n\nThe arrow is restriction along $j$; a morphism $G\\to G'$ acts by its\nmap on sections over $X$, restricted to these kernels. Thus\n$\\Gamma_Z(X,-):\\textit{Ab}(X_{\\mathrm{et}})\\to\\textit{Ab}$ is a\nfunctor to abelian groups. For $q\\geq0$,\nwrite $H^q_Z(X,F)=R^q\\Gamma_Z(X,-)(F)$ for the right derived functors\n[def-sp-left-exact-additive], computed from an injective resolution\n[def-sp-injective-resolutions] in the category of abelian sheaves, which has enough injectives\n[lem-weil-pbc-site-sheaves-enough-injectives]:\n\n$$\n H^q_Z(X,F)=H^q\\bigl(\\Gamma_Z(X,I^\\bullet)\\bigr)\n \\qquad(F\\longrightarrow I^\\bullet).\n$$\n\nFor a bounded-below complex $K$ with torsion cohomology in the derived\ncategories [def-weil-pbc-derived-categories], the same notation means\n$H^q_Z(X,K)=H^q(R\\Gamma_Z(X,K))$, where $R\\Gamma_Z$ is the bounded-below\nright derived functor of the displayed functor\n[lem-weil-pbc-right-derived-plus-injective]; here $q$ may be any integer.\nOn the small pro-etale site [def-weil-pbc-proetale-site] with finite-torsion\ncoefficients in the conventions of [def-coefficient-twists-detailed],\nuse the identical kernel-of-restriction construction and its right\nderived functor in that topology. Cohomology of complexes is taken in\nthe corresponding derived category [def-weil-abstract-derived-category].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-pur-support-cohomology.md",
   "place": "node def-pur-support-cohomology, order 1891"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
   "def-coefficient-twists-detailed",
-  "def-sbc-smooth-morphisms",
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-pbc-abelian-etale-sheaves"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf local cohomology groups defined by deriving the kernel of evaluation at the terminal object to evaluation on an open subobject",
+   "results": "8 hits, including CategoryTheory.Sheaf.H and cohomologyPresheaf (ordinary sheaf cohomology), HasGlobalSectionsFunctor, sheafFiber, skyscraperSheaf, localCohomology.diagram, and Sheaf.instIsGrothendieckAbelian. Read SheafCohomology/Basic.lean:18-37,61-64,80-97 and Algebra/Homology/LocalCohomology.lean:18-45,94-99,163-169: none defines derived supported sections on an etale or pro-etale site.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"support\"",
+   "results": "12 returned hits, all AlgebraicGeometry.Scheme.IdealSheafData support and vanishingIdeal declarations; none about cohomology with support. This successful quoted-name query replaces the earlier unknown-identifier query.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|supportedSections|sectionsWithSupport|cohomologyWithSupport|cohomology.with.support",
+   "results": "5 returned hits in Mathlib/Algebra/Homology/LocalCohomology.lean. Read lines 18-45,94-99,163-169: localCohomology is a colimit of module Ext functors for ideals of a commutative ring; its own TODO leaves comparison with right-derived functors open. No definition of supported etale/pro-etale sheaf cohomology.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right derived functor of the kernel of restricting sections of an abelian sheaf to an open complement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -62,5 +98,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv"
+ "unit": "sk-def-purity-conv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-pur-support-cohomology",
+  "worker": "stage1",
+  "summary": "Made the group-valued kernel-of-restriction functor explicit, with injective-resolution and bounded-below derived-complex formulas and existing dependencies. Independent second reading checked the archived blueprint, Stacks 09XP/04FS, every dependency statement, edge cases, nearby project constructions, and Mathlib candidates; added the direct abelian-sheaf definition and functor type and replaced invalid/limited searches by successful independent searches. No new nodes or proof steps.",
+  "blueprint": "Realizes the sole definition clause: H^q_Z(X,F) is the right derived functor of sections with support, with the same notation for bounded-below torsion complexes and finite-torsion coefficients on the small pro-etale site."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-78e5c9f12",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-78e5c9f12 (reviewer sub-agent of L); spot-checked: Reviewed and wrote review.md. The definition matches the blueprint and Stacks sources, all 14 dependencies are valid, edge cases and coefficient scopes check out, and no repairs or tool uses are needed."
+ }
 }

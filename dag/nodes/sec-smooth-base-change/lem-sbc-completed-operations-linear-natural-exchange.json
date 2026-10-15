@@ -1,0 +1,147 @@
+{
+ "id": "lem-sbc-completed-operations-linear-natural-exchange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-e-coefficient-smooth-base-change",
+   "place": "Proof, central sentence: 'central localization (inverting multiplication by the uniformizer) ... gives it for K_E, independent of the admissible lattice'; the integral linear functors and natural exchange needed before localizing.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Linearity and naturality of completed pullback, direct image, and exchange",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be finite, and put $A=\\mathcal O_E$, $I=(\\varpi)$ and $P_n=A/\\varpi^n$ for a uniformizer $\\varpi$ and $n\\geq1$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$, use the completed coefficient sheaf $A_W=\\varprojlim_n(P_n)_W$ and $D(W_{\\mathrm{proet}},A)=D(\\operatorname{Mod}(A_W))$ of [def-weil-pbc-adic-coefficient-datum]. Let $\\mathcal C_W$ be its full subcategory of derived $I$-complete objects [def-weil-pbc-intrinsic-completion], with the $A$-linear structure [def-weil-linear-category] induced by constant sections of $A_W$.\n\nFor every morphism of schemes $u:U\\to V$, the canonical map $u^{-1}A_V\\to A_U$ is the isomorphism of [lem-weil-pbc-profinite-coefficient-inverse-image]. Derived module direct image [def-weil-pbc-proetale-operations] along $u^{-1}A_V\\to A_U$ restricts to a functor $D_u=Ru_*:\\mathcal C_U\\to\\mathcal C_V$. Completed pullback [def-weil-pbc-completed-pullback] is a functor $P_u=Lu^*_{\\mathrm{comp}}:\\mathcal C_V\\to\\mathcal C_U$. Both functors are additive and $A$-linear [def-weil-linear-functor], and $P_u\\dashv D_u$. For a second morphism $v:Z\\to U$, the canonical composition isomorphism $P_vP_u\\cong P_{u\\circ v}$ is natural.\n\nFor any cartesian square of schemes $f:X\\to S$, $g:T\\to S$, $h:Y\\to X$, $e:Y\\to T$ with $f h=g e$ [sbc-def-base-change-square], these composition comparisons give $\\theta:P_hP_f\\xrightarrow{\\sim}P_eP_g$. Write $\\eta_h$ for the unit of $P_h\\dashv D_h$ and $\\varepsilon_g$ for the counit of $P_g\\dashv D_g$. The canonical integral completed exchange is the natural transformation with components\n$$\n \\alpha_K=D_h(P_e(\\varepsilon_{g,K}))\\circ D_h(\\theta_{D_gK})\\circ\\eta_{h,P_fD_gK}:\n P_fD_gK\\longrightarrow D_hP_eK\\qquad(K\\in\\mathcal C_T).\n$$\nIn particular, for every $a:K\\to K'$ in $\\mathcal C_T$,\n$$D_hP_e(a)\\circ\\alpha_K=\\alpha_{K'}\\circ P_fD_g(a).$$\nUnder the canonical finite-reduction comparisons [lemma-weil-pbc-completed-pullback-reduction, prop-weil-pbc-direct-image-limits] and direct-image/derived-limit comparisons [prop-weil-pbc-direct-image-limits], this specified mate is the completed exchange obtained from the finite-level exchange transformations. This assertion imposes no smoothness, properness or constructibility hypothesis and asserts no invertibility of $\\alpha_K$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N, lemma-pushforward-Noetherian-case, clauses (1)-(5); linear and natural-mate refinement for the completed coefficient sheaves, using the comparison of lem-weil-pbc-constant-completion-equivalence. The linear-functor convention is Tag 09MK, dga.tex, definition-functor-linear-categories. The ringed-topos completed adjunction is also Tag 099K, algebraization.tex, lemma-pushforward-derived-complete-adjoint; its ideal hypothesis holds because the coefficient map sends the constant section varpi to varpi."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-linear-functor",
+  "sbc-def-base-change-square",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-proetale-operations",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-linear-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete sheaves of modules completed pullback direct image adjunction linear functors and natural base change transformation",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackIso, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-16",
+   "verdict": "no match for completed-coefficient derived adjunctions and their specified natural exchange; ordinary module-sheaf adjunctions and exact-functor linearity only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Adjunction",
+   "results": "1 hits: CategoryTheory.Adjunction.extLinearEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match for completed-coefficient derived adjunctions and their specified natural exchange; ordinary module-sheaf adjunctions and exact-functor linearity only"
+  },
+  {
+   "tool": "grep",
+   "query": "completedPullback|derivedComplete.*[Aa]djunction|[Aa]djunction.*derivedComplete|complete.*[Ll]inear",
+   "results": "0 hits: none; searched Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match for completed-coefficient derived adjunctions and their specified natural exchange; ordinary module-sheaf adjunctions and exact-functor linearity only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed pullback and derived pushforward of module sheaves are linear adjoint functors on derived complete categories",
+   "results": "service unavailable: Internal Server Error; 0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linearity of derived pushforward and completion of derived inverse image for sheaves of modules over a discrete valuation ring",
+   "results": "8 hits: SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardNatTrans_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match for completed-coefficient derived adjunctions and their specified natural exchange; ordinary module-sheaf adjunctions and exact-functor linearity only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LeftDerived, CategoryTheory.Functor.Linear",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.LeftDerived'; 0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.Functor.LeftDerived'"
+  },
+  {
+   "tool": "grep",
+   "query": "isLinear|\\.Linear|linear_",
+   "results": "14 hits: Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; searched Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match for completed-coefficient derived adjunctions and their specified natural exchange; ordinary module-sheaf adjunctions and exact-functor linearity only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adic completion of the inverse image is left adjoint to pushforward on the category of complete sheaves, with linear maps on Hom modules",
+   "results": "8 hits: LightCondensed.freeForgetAdjunction, SheafOfModules.PullbackConstruction.adjunction, Condensed.freeForgetAdjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary module-sheaf adjunctions and generic adjunction identities do not supply derived completion, completed linear functors, or their exchange comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.map",
+   "results": "12 hits: CategoryTheory.Adjunction.comp_map_bijective_iff, CategoryTheory.Adjunction.left_triangle_components, CategoryTheory.Adjunction.map_comp_bijective_iff, CategoryTheory.Adjunction.right_triangle_components, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.unit_naturality, CategoryTheory.Adjunction.left_triangle_components_assoc, CategoryTheory.Adjunction.right_triangle_components_assoc",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary module-sheaf adjunctions and generic adjunction identities do not supply derived completion, completed linear functors, or their exchange comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "adic|completion|complete|baseChange",
+   "results": "0 hits: ; searched Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary module-sheaf adjunctions and generic adjunction identities do not supply derived completion, completed linear functors, or their exchange comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed derived pullback is linear and left adjoint to derived direct image on adically complete sheaves of modules, and the base change mate is natural",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackIso, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackComp, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary module-sheaf pullback adjunctions supply neither derived completion nor the specified completed exchange comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|pullbackComp",
+   "results": "20 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; searched Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary module-sheaf pullback adjunctions supply neither derived completion nor the specified completed exchange comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extLinearEquiv",
+   "results": "0 hits: ; searched Mathlib/Algebra/Homology",
+   "date": "2026-10-15",
+   "verdict": "no match: ordinary module-sheaf pullback adjunctions supply neither derived completion nor the specified completed exchange comparison; extLinearEquiv returned by remote Loogle is absent from the pinned Mathlib source"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "sbc-thm-e-coefficient-smooth-base-change",
+  "by": "worker",
+  "date": "2026-10-15"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
