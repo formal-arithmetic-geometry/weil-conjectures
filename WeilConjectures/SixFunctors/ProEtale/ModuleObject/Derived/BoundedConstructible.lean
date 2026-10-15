@@ -50,9 +50,14 @@ through the object `c.overObj` and the morphisms `c.overI` and `c.overG` of
 | `- ⊗ᴸ -` | `boundedConstructibleTensor` |
 | `RHom(-, -)` | `boundedConstructibleHom` |
 
-Each restriction is the `ObjectProperty.lift` of the composite of the inclusion with the functor
-on the ambient derived category, so it is compatible with the inclusions by construction
-(`ObjectProperty.liftCompιIso`).
+The pullback, the pushforward and the extension by zero are the `ObjectProperty.lift` of the
+composite of the inclusion with the functor on the ambient derived category, so they are
+compatible with the inclusions by construction (`ObjectProperty.liftCompιIso`). The derived
+tensor product and the derived hom are instead the monoidal closed structure of the full
+subcategory `Dᵇc(X)⟦Λ⟧` (`ObjectProperty.fullMonoidalSubcategory`,
+`ObjectProperty.fullMonoidalClosedSubcategory`), given by the instances
+`isMonoidal_boundedConstructible` and `isMonoidalClosed_boundedConstructible`; they are again
+compatible with the inclusions, the inclusion being strict monoidal (`ObjectProperty.monoidalι`).
 
 The derived lower shriek is not a restriction: it is assembled on bounded constructible
 complexes out of the functors above. For a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`,
@@ -63,10 +68,11 @@ complexes out of the functors above. For a compactification `c = (X ⟶[i] Z ⟶
 (`boundedConstructibleLowerShriekOfCompactificationCompatibility`,
 `boundedConstructibleLowerShriekCompatibility`).
 
-The adjunctions `Lf^* ⊣ Rf_*`, `j_! ⊣ j^*` and
-`K ⊗ᴸ - ⊣ RHom(K, -)` restrict along the fully faithful inclusions
+The adjunctions `Lf^* ⊣ Rf_*` and `j_! ⊣ j^*` restrict along the fully faithful inclusions
 (`Adjunction.restrictFullyFaithful`), and so does the composition isomorphism
-`L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`).
+`L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`). The adjunction
+`- ⊗ᴸ - ⊣₂ RHom(-, -)` is the tensor-hom adjunction of the monoidal closed category
+`Dᵇc(X)⟦Λ⟧` (`boundedConstructibleTensorHomAdjunction₂`).
 
 The exceptional inverse image `Rf^!` is not the restriction of a functor on the ambient derived
 category: it is constructed on bounded constructible complexes directly, for the `ℓ`-adic
@@ -76,9 +82,10 @@ coefficient rings `E̲` and `ℚ̲̄_ℓ`, in
 ## Sorried input
 
 That the six functors preserve bounded constructible complexes is `sorry`ed:
-`boundedConstructible_leftDerivedUpperStar_obj`, `boundedConstructible_rightDerivedLowerStar_obj`,
-`boundedConstructible_openImmersionLowerShriek_obj`, `boundedConstructible_derivedTensor_obj` and
-`boundedConstructible_derivedHom_obj`.
+`boundedConstructible_leftDerivedUpperStar_obj`, `boundedConstructible_rightDerivedLowerStar_obj`
+and `boundedConstructible_openImmersionLowerShriek_obj`, and the instances
+`isMonoidal_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` contains `Λ_X` and is stable under `- ⊗ᴸ -`) and
+`isMonoidalClosed_boundedConstructible` (`Dᵇc(X)⟦Λ⟧` is stable under `RHom(-, -)`).
 
 These are theorems for the `ℓ`-adic coefficient rings, the condensed rings `E̲` of a finite
 extension `E` of `ℚ_ℓ` and `ℚ̲̄_ℓ` (Deligne's finiteness theorems, Bhatt–Scholze, Section 6.8);
@@ -92,7 +99,7 @@ universe u
 
 open scoped CategoryTheory.Obj
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Limits MonoidalCategory Opposite
 
 open scoped CategoryTheory.Functor
 
@@ -315,74 +322,69 @@ end Shriek
 
 section TensorHom
 
-include ℓ k
+variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom]
 
-variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom]
-
-/-- The derived tensor product of module objects over `Λ` preserves bounded constructible
-complexes. -/
-lemma boundedConstructible_derivedTensor_obj
-    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj Λ X.left))}
-    (hK : boundedConstructible (condensedRingObj Λ X.left) K)
-    (hL : boundedConstructible (condensedRingObj Λ X.left) L) :
-    boundedConstructible (condensedRingObj Λ X.left) (((-⊗ᴸ-(X.left)⟦Λ⟧).obj K).obj L) :=
+/-- The bounded constructible complexes of module objects over `Λ` form a monoidal
+subcategory of `D(Mod_{Λ_X})` for the derived tensor product: they contain the unit `Λ_X`
+and are stable under `- ⊗ᴸ -`. -/
+instance isMonoidal_boundedConstructible :
+    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal :=
   sorry
 
-/-- The derived hom of module objects over `Λ` preserves bounded constructible
-complexes. -/
-lemma boundedConstructible_derivedHom_obj
-    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj Λ X.left))}
-    (hK : boundedConstructible (condensedRingObj Λ X.left) K)
-    (hL : boundedConstructible (condensedRingObj Λ X.left) L) :
-    boundedConstructible (condensedRingObj Λ X.left) (((RHom(X.left)⟦Λ⟧).obj (op K)).obj L) :=
+/-- The bounded constructible complexes of module objects over `Λ` are stable under the derived
+hom `RHom(-, -)`, the internal hom of `D(Mod_{Λ_X})`. -/
+instance isMonoidalClosed_boundedConstructible :
+    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed :=
   sorry
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded
-constructible complexes: the restriction of `-⊗ᴸ-(X)⟦Λ⟧` in both variables. -/
-noncomputable def boundedConstructibleTensor : Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
-  Functor.curry.obj ((boundedConstructible _).lift
-    (((boundedConstructible _).ι.prod (boundedConstructible _).ι) ⋙
-      Functor.uncurry.obj -⊗ᴸ-(X.left)⟦Λ⟧)
-    fun KL ↦ boundedConstructible_derivedTensor_obj Λ ℓ X KL.1.property KL.2.property)
+constructible complexes: the tensor product of the monoidal structure on the full subcategory
+`Dᵇc(X)⟦Λ⟧` (`ObjectProperty.fullMonoidalSubcategory`), the restriction of `-⊗ᴸ-(X)⟦Λ⟧` in
+both variables. -/
+noncomputable def boundedConstructibleTensor :
+    Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
+  curriedTensor _
 
 /-- The derived hom `RHom(-, -) : Dᵇc(X)⟦Λ⟧ᵒᵖ ⥤ Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible
-complexes: the restriction of `RHom(X)⟦Λ⟧` in both variables. -/
-noncomputable def boundedConstructibleHom : (Dᵇc(X.left)⟦Λ⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
-  Functor.curry.obj ((boundedConstructible _).lift
-    (((boundedConstructible _).ι.op.prod (boundedConstructible _).ι) ⋙
-      Functor.uncurry.obj RHom(X.left)⟦Λ⟧)
-    fun KL ↦ boundedConstructible_derivedHom_obj Λ ℓ X KL.1.unop.property KL.2.property)
+complexes: the internal hom of the monoidal closed structure on the full subcategory
+`Dᵇc(X)⟦Λ⟧` (`ObjectProperty.fullMonoidalClosedSubcategory`), the restriction of `RHom(X)⟦Λ⟧`
+in both variables. -/
+noncomputable def boundedConstructibleHom :
+    (Dᵇc(X.left)⟦Λ⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
+  MonoidalClosed.internalHom
 
 variable {X}
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
 inclusions. -/
 noncomputable def boundedConstructibleTensorObjCompatibility (K : Dᵇc(X.left)⟦Λ⟧) :
-    (boundedConstructibleTensor Λ ℓ X).obj K ⋙ (boundedConstructible _).ι ≅
+    (boundedConstructibleTensor Λ X).obj K ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (-⊗ᴸ-(X.left)⟦Λ⟧).obj K.obj :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp [boundedConstructibleTensor]
+    simp [boundedConstructibleTensor, derivedTensor]
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the restricted functor `RHom(K, -)` is compatible with the
 inclusions. -/
 noncomputable def boundedConstructibleHomObjCompatibility (K : Dᵇc(X.left)⟦Λ⟧) :
-    (boundedConstructibleHom Λ ℓ X).obj (op K) ⋙ (boundedConstructible _).ι ≅
+    (boundedConstructibleHom Λ X).obj (op K) ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (RHom(X.left)⟦Λ⟧).obj (op K.obj) :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp [boundedConstructibleHom]
+    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+    rfl
+
+/-- The adjunction with a parameter `- ⊗ᴸ - ⊣₂ RHom(-, -)` on bounded constructible complexes:
+the tensor-hom adjunction of the monoidal closed structure on `Dᵇc(X)⟦Λ⟧`. -/
+noncomputable def boundedConstructibleTensorHomAdjunction₂ :
+    boundedConstructibleTensor Λ X ⊣₂ boundedConstructibleHom Λ X :=
+  MonoidalClosed.internalHomAdjunction₂
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` on bounded constructible
-complexes: the restriction of `ProEtale.CondensedRing.derivedTensorHomAdjunction` along the
-fully faithful inclusions. -/
+complexes: the tensor-hom adjunction `ihom.adjunction K` of the monoidal closed structure on
+`Dᵇc(X)⟦Λ⟧`. -/
 noncomputable def boundedConstructibleTensorHomAdjunction (K : Dᵇc(X.left)⟦Λ⟧) :
-    (boundedConstructibleTensor Λ ℓ X).obj K ⊣ (boundedConstructibleHom Λ ℓ X).obj (op K) :=
-  Adjunction.restrictFullyFaithful (derivedTensorHomAdjunction Λ K.obj)
-    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
-    (boundedConstructibleTensorObjCompatibility Λ ℓ K).symm
-    (boundedConstructibleHomObjCompatibility Λ ℓ K).symm
+    (boundedConstructibleTensor Λ X).obj K ⊣ (boundedConstructibleHom Λ X).obj (op K) :=
+  (boundedConstructibleTensorHomAdjunction₂ Λ).adj K
 
 end TensorHom
 
