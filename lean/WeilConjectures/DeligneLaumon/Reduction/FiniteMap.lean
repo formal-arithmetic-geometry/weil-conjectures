@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
-public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 
 /-!
