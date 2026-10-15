@@ -34,7 +34,8 @@
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-sheaves"
  ],
  "proof": [
   {
@@ -243,5 +244,23 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-6cbeded73 (reviewer sub-agent of L); spot-checked: Read the full item, six steps, cited statements and source passages. Canonical-map compatibility, set descent, unbounded K-injective localization, and single-degree detection check out. No new nodes or repairs. review.md records accepted tools and unchanged baseline dependency issues; no coefficient comparison or target completion is claimed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalityBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.etale_locality_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalityBaseChange.lean",
+  "statement": "theorem etale_locality_baseChange {X Y S T : Scheme.{u}} {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S} (sq : ChosenCartesianSquare h e f g) {ι : Type w} {U V T' Y' : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X) [∀ i, AlgebraicGeometry.Etale (a i)] (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x) (fi : ∀ i, U i ⟶ V i) (b : ∀ i, V i ⟶ S) [∀ i, AlgebraicGeometry.Etale (b i)] (wfactor : ∀ i, fi i ≫ b i = a i ≫ f) (c : ∀ i, T' i ⟶ T) (gi : ∀ i, T' i ⟶ V i) (hc : ∀ i, IsPullback (c i) (gi i) g (b i)) (ei : ∀ i, Y' i ⟶ T' i) (hi : ∀ i, Y' i ⟶ U i) (localSquare : ∀ i, ChosenCartesianSquare (hi i) (ei i) (fi i) (gi i)) : (∀ F : Sheaf T.smallEtaleTopology (Type (u + 1)), (∀ i, IsIso (setBaseChangeArrow (localSquare i) ((Scheme.etaleSetPullback (c i)).obj F))) → IsIso (setBaseChangeArrow sq F)) ∧ (∀ K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}), (∀ i, IsIso (abelianDerivedBaseChangeArrow (localSquare i) (D(upperStar AddCommGrpCat.{u + 1} (c i)).obj K))) → IsIso (abelianDerivedBaseChangeArrow sq K)) ∧ (∀ (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ), (∀ i, IsIso ((DerivedCategory.homologyFunctor _ q).map (abelianDerivedBaseChangeArrow (localSquare i) ((DerivedCategory.singleFunctor _ 0).obj ((upperStar AddCommGrpCat.{u + 1} (c i)).obj F))))) → IsIso ((DerivedCategory.homologyFunctor _ q).map (abelianDerivedBaseChangeArrow sq ((DerivedCategory.singleFunctor _ 0).obj F))))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a96db4bb7",
+  "group": "NM",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, canonical arrows, clauses, universes, edge cases, records and pilot gates. Both modules compiled cleanly through scompile.py with the local side overlay. No findings or fixes; branch heads unchanged."
  }
 }

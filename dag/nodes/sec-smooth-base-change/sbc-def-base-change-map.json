@@ -152,24 +152,26 @@
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e25dc9e5a",
-  "group": "NG",
+  "reviewer": "NT-stage2-Codex-a96db4bb7",
+  "group": "NM",
   "result": "pass",
-  "note": "Wrote review.md. Checked all 23 dependencies, source formulas, exact declarations and signature, universes, edge cases, report sections, and pilot gates. Server-only compile reproduced cleanly. No delivery errors or fixes; repositories and branch head unchanged."
+  "note": "Wrote review.md. Checked source, all statement dependencies, canonical arrows, clauses, universes, edge cases, records and pilot gates. Both modules compiled cleanly through scompile.py with the local side overlay. No findings or fixes; branch heads unchanged."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded",
-  "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMap",
-  "declarations": [
-   "AlgebraicGeometry.Etale.derivedBaseChangeMap",
-   "AlgebraicGeometry.Etale.derivedSquareUpperStarIso",
-   "AlgebraicGeometry.Etale.derivedUpperStar_map_derivedBaseChangeMap_app_counit"
-  ],
-  "statement": "noncomputable def derivedBaseChangeMap (sq : CommSq g' f' f g) :\n    R((f)_*[A]) ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ R((f')_*[A])",
-  "branch": "slopmaster2",
-  "by": "NG",
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets",
+  "declaration": "AlgebraicGeometry.Etale.abelianDerivedBaseChangeArrow",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeMapAbelianAndSets.lean",
+  "statement": "def abelianDerivedBaseChangeArrow {X Y S T : Scheme.{u}} {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S} (sq : ChosenCartesianSquare h e f g) (K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) : D(upperStar AddCommGrpCat.{u + 1} f).obj (R(lowerStar AddCommGrpCat.{u + 1} g).obj K) ⟶ R(lowerStar AddCommGrpCat.{u + 1} h).obj (D(upperStar AddCommGrpCat.{u + 1} e).obj K)",
+  "branch": "newtargets-dag",
+  "by": "NM",
   "date": "2026-10-15",
-  "existing": true,
-  "note": "Existing unbounded exchange, applied with A = ModuleCat.{u+1} Λ and source square (g', f', f, g) = (e, h, g, f), i.e. the exchanged ChosenCartesianSquare h e f g. The degree-q clause is H^q of its component at F[0]; its existing bounded-below presentation is AlgebraicGeometry.Etale.baseChangeHomologyMap in WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs (no qcqs hypothesis on the definition). For the unbounded abelian-sheaf clause use ModuleCat (ULift.{u+1} ℤ) to respect the coefficient universe, and transport along the canonical equivalence with abelian sheaves; direct specialization to AddCommGrpCat lacks the required monoidal instance. The exchanged commutative square is sq.toCommSq.flip. The mate determines the same map as the unit-e/counit-f formula when pushforward composition is normalized by conjugation. No duplicate map is introduced. See report for precise clause mapping and the outstanding comparison-proof distinction."
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.setUpperLowerAdjunction",
+   "AlgebraicGeometry.Etale.setBaseChangeArrow",
+   "AlgebraicGeometry.Etale.abelianDerivedBaseChangeArrow",
+   "AlgebraicGeometry.Etale.derivedBaseChangeMap"
+  ],
+  "note": "Interface repair under brief-stage2 §1(B): the recorded derivedBaseChangeMap requires monoidal coefficients; it does not specialize directly to AddCommGrpCat, and supplies no set-valued exchange. The original module-coefficient map is retained by importing its original module, not redefined. This module adds the canonical set exchange, its standard inverse-image adjunction, and the unbounded abelian exchange using exact termwise inverse image and total right derived direct image. Both arrows use the unit-e/composition/counit-f formula of the node, with canonical (conjugate-normalized in the derived case) direct-image composition comparisons. No arbitrary map, coefficient restriction, or boundedness assumption is introduced."
  }
 }

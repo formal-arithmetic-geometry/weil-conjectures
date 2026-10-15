@@ -352,5 +352,23 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-d77acc60c (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, report, and unit/chapter route. Repaired one C1/C4 citation gap by explicitly citing the existing canonical module/abelian derived direct-image comparison. Statement unchanged; descent, reduction, induction, edge cases, and dependency cycles checked. Corrected JSON is under fixes/dag/nodes; detailed findings are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveCurveConstant",
+  "declaration": "AlgebraicGeometry.isConstructibleEtaleModuleSheaf_higherDirectImage_prime_of_projective_curve",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveCurveConstant.lean",
+  "statement": "theorem isConstructibleEtaleModuleSheaf_higherDirectImage_prime_of_projective_curve (k : Type u) [Field k] (X S : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] (f : X ⟶ S) [IsProjective f.left] (hdim : ∀ s : S.left, topologicalKrullDim (pullback f.left (Spec.map (CommRingCat.ofHom (algebraMap (S.left.residueField s) (AlgebraicClosure (S.left.residueField s)))) ≫ S.left.fromSpecResidueField s) : Scheme.{u}) ≤ 1) (ℓ : ℕ) [Fact ℓ.Prime] (hinv : IsUnit (ℓ : Γ(S.left, ⊤))) (q : ℤ) : Scheme.IsConstructibleEtaleModuleSheaf ((DerivedCategory.Plus.homologyFunctor (Sheaf S.left.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) q).obj ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) f.left).obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) 0).obj ((constantSheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj (ModuleCat.of (ULift.{u + 1} (ZMod ℓ)) (ULift.{u + 1} (ZMod ℓ)))))))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a8e734d4a",
+  "group": "NP",
+  "result": "pass",
+  "note": "Reviewed immutable statements, all eight dependencies, sources, docstrings, edge cases and universes. Signature matches verbatim; scompile.py passed both checks cleanly. Legacy proof-import caveat is documented and nonblocking. Findings written to review.md."
  }
 }
