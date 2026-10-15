@@ -131,10 +131,10 @@ noncomputable def AlgebraicGeometry.Etale.unitComparison {R S T : Scheme.{u}} (h
       (h₁₂)_*[AddCommGrpCat.{u + 1}].map
         ((upperStarComp AddCommGrpCat.{u + 1} h₁ h₂ h₁₂ hh₁₂).inv.app G)
 
-/-- Target 4: verbatim upstream signature at `ffb7b9060`.
+/-- Target 4: verbatim upstream signature at `2104a988e` (upstream changed `J : Type u` to `J : Type (u + 1)` after `ffb7b9060`; we follow upstream, the human 2026-10-15).
 (blueprint: `lem-weil-pbc-cohomology-filtered-colimit`) -/
 theorem AlgebraicGeometry.Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject (Z : Scheme.{u})
-    [CompactSpace Z] [QuasiSeparatedSpace Z] (q : ℤ) (J : Type u) [SmallCategory J]
+    [CompactSpace Z] [QuasiSeparatedSpace Z] (q : ℤ) (J : Type (u + 1)) [SmallCategory J]
     [IsFiltered J] :
     PreservesColimitsOfShape J
       (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) q) :=
