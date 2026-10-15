@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Homology.Homotopy
 import Sheaf.AlgebraicGeometry.AlternatingCechSortedContraction
 import Sheaf.AlgebraicGeometry.AlternatingCechSortingBoundaryTransport
 import Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingIdentity
-import Sheaf.CategoryTheory.SiteCechComplex
+import WeilConjectures.CategoryTheory.SiteCechComplex
 
 /-!
 # The second Čech sorting identity

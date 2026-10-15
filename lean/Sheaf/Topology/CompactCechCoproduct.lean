@@ -6,7 +6,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Spaces
 public import Mathlib.CategoryTheory.Sites.Sheafification
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 
 /-!
 # Coproducts and finite compact Čech complexes

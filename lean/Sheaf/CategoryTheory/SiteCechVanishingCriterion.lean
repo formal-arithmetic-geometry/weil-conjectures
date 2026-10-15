@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic

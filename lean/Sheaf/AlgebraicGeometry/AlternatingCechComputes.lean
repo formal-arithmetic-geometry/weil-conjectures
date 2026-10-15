@@ -6,7 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Algebra.Homology.HomologicalComplex
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Mathlib.Algebra.Category.Grp.EpiMono
 import Sheaf.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
 

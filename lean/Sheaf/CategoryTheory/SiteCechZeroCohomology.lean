@@ -4,7 +4,7 @@ Released under Apache 2.0 license.
 -/
 module
 
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 public import Mathlib.CategoryTheory.Sites.Sheaf
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck

@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 

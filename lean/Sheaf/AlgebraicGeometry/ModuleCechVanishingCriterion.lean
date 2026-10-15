@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.Paper.PQFCohomology
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
 import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 import Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1

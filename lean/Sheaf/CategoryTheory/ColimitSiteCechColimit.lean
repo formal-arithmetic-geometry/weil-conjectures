@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.CategoryTheory.ColimitSites
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.CategoryTheory.ColimitSiteCechCoconeConstruction
 import Sheaf.CategoryTheory.ColimitSiteFiniteProductSections
 import Mathlib.Algebra.Homology.HomologicalComplexLimits

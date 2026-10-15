@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.CategoryTheory.ColimitSites
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.CategoryTheory.ColimitSiteCechTransport
 import Sheaf.CategoryTheory.ColimitSiteCechColimit
 

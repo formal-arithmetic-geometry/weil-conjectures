@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Scheme
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 
 @[expose] public section
 set_option autoImplicit false

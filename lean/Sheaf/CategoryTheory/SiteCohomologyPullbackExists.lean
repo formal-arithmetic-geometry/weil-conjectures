@@ -5,7 +5,7 @@ Authors: SHEAF group T2
 -/
 module
 
-public import Sheaf.CategoryTheory.SiteCohomologyPullbackData
+public import WeilConjectures.CategoryTheory.SiteCohomologyPullbackData
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 

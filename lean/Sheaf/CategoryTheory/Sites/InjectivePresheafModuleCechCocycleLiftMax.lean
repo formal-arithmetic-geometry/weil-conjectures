@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact
 import Mathlib.CategoryTheory.Category.ULift
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward

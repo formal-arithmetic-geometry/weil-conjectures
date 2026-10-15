@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.AlgebraicGeometry.Scheme
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 public import Mathlib.GroupTheory.Perm.Sign
 import Sheaf.AlgebraicGeometry.CechDifferentialRepeatedDecomposition
 import Sheaf.AlgebraicGeometry.CechDifferentialRepeatedCancellation

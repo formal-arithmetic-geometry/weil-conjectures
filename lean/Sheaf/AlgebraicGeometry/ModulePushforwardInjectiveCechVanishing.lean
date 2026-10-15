@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
 
 @[expose] public section

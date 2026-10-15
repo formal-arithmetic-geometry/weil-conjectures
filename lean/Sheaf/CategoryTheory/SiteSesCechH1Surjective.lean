@@ -6,7 +6,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 

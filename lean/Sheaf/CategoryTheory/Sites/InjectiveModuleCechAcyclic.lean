@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Sheaf.CategoryTheory.InjectiveModulePresheaf

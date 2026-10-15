@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.Topology.RingedSpaceModuleCohomology
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Algebra.Category.Grp.EpiMono
 import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic

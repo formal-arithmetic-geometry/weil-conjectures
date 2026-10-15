@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Scheme
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 public import Mathlib.GroupTheory.Perm.Sign
 import Mathlib.GroupTheory.Perm.Fin
 

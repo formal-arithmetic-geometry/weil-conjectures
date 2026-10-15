@@ -2,7 +2,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 import WeilConjectures.Topology.Sheaves.CechFlasque
 

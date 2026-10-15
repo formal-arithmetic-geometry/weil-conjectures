@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Algebra.Category.ModuleCat.Basic
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
 import Mathlib.Data.Finset.Sort
 import Mathlib.Order.Interval.Finset.Fin

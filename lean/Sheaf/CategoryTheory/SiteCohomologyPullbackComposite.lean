@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
-import Sheaf.CategoryTheory.SiteCohomologyPullbackData
+import WeilConjectures.CategoryTheory.SiteCohomologyPullbackData
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences

@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.CategoryTheory.Sites.Spaces
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.Topology.AbelianSectionsFilteredColimit
 import all Sheaf.CategoryTheory.DirectedColimitHomology
 

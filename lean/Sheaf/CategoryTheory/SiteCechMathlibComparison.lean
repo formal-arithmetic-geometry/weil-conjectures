@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 import Mathlib.Algebra.Category.Grp.Biproducts
-public import Sheaf.CategoryTheory.SiteCechComplex
+public import WeilConjectures.CategoryTheory.SiteCechComplex
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 
