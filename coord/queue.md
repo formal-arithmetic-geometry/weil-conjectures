@@ -21,7 +21,7 @@
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 14 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying` | 5 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreOfData` | 38 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
 Also listed above and claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
 
