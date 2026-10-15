@@ -193,5 +193,41 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-e4e07f29e (reviewer sub-agent of L); spot-checked: Read the item, all ten cited statements, sources and unit/chapter route in full. Verified adjunction orientation, coefficient actions, identity/composition coherence and the specified square isomorphism; edge cases pass. No new nodes or repairs. Acceptance covers fixed finite discrete coefficients, not a seeded comparison with condensed target categories. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-97ed59370",
+  "group": "NE",
+  "result": "pass",
+  "note": "Reviewed immutable files, dependencies, sources, canonical constructions, coherence clauses, universes and edge cases. Signature matches verbatim; scompile.py reproduced clean sandbox and library compiles. No findings. Review written to review.md; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.comparison_pullback_coherent",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.etaleComparisonPullback",
+   "AlgebraicGeometry.ProEtale.etaleComparisonAdjunction",
+   "AlgebraicGeometry.ProEtale.etaleComparisonId",
+   "AlgebraicGeometry.ProEtale.etaleComparisonComp",
+   "AlgebraicGeometry.ProEtale.etaleComparisonSquare",
+   "AlgebraicGeometry.ProEtale.proEtaleComparisonPullback",
+   "AlgebraicGeometry.ProEtale.proEtaleComparisonAdjunction",
+   "AlgebraicGeometry.ProEtale.proEtaleComparisonId",
+   "AlgebraicGeometry.ProEtale.proEtaleComparisonComp",
+   "AlgebraicGeometry.ProEtale.proEtaleComparisonSquare",
+   "AlgebraicGeometry.ProEtale.comparisonCoefficientPullback",
+   "AlgebraicGeometry.ProEtale.comparisonCoefficientAdjunction",
+   "AlgebraicGeometry.ProEtale.comparisonCoefficientPullbackIso",
+   "AlgebraicGeometry.ProEtale.ComparisonPullbackCoherent",
+   "AlgebraicGeometry.ProEtale.comparison_pullback_coherent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonPullbackCoherence.lean",
+  "statement": "theorem comparison_pullback_coherent : ComparisonPullbackCoherent (Type (u + 1)) ∧ ComparisonPullbackCoherent AddCommGrpCat.{u + 1} ∧ ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], ComparisonPullbackCoherent (ModuleCat.{u + 1} Λ)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The comparison is constructed by conjugating the existing restriction/base-change isomorphism; the theorem states all identity, composite and chosen Cartesian-square equations, for sets, abelian groups and finite fixed-ring modules. Auxiliary interfaces use the existing Kan extension and sheafification construction without requiring abelian coefficients. The pro-etale inverse-image dependency is consumed through its definitionally identical upstream construction: importing its ring module as well would collide with the reorganized FiniteCoefficient copy of UpperLowerStar.Defs."
  }
 }

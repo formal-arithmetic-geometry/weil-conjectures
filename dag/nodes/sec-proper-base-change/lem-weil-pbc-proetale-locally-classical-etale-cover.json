@@ -221,5 +221,31 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-0a16ac6b6 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources and unit/chapter route. Verified all four steps and edge cases against Bhatt–Scholze Lemmas 5.1.1–5.1.4 and Proposition 6.8.4(6). Repaired two missing citations: pro-étale localization and ind-étale stability. Accepted localization as a generic tool use. Statement and targets unchanged; corrected JSON and concrete findings are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-deae23132",
+  "group": "NL",
+  "result": "pass",
+  "note": "Wrote review.md. Checked snapshot statements, dependencies, sources, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. scompile.py passed both checks without errors or warnings. No findings; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_locallyClassical_etaleCover",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtale_locallyClassical_etaleCover",
+   "AlgebraicGeometry.Scheme.proEtaleSetRestriction",
+   "AlgebraicGeometry.Scheme.IsProEtaleClassical",
+   "AlgebraicGeometry.Scheme.IsProEtaleLocallyClassical",
+   "AlgebraicGeometry.Scheme.IsProEtaleLocallyConstant"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLocallyClassicalEtaleCover.lean",
+  "statement": "theorem proEtale_locallyClassical_etaleCover (X : Scheme.{u}) (F : Sheaf (ProEt.topology X) (Type (u + 1))) : (IsProEtaleLocallyClassical X F → IsProEtaleClassical X F) ∧ (IsProEtaleLocallyConstant X F → IsProEtaleLocallyClassical X F ∧ IsProEtaleClassical X F) ∧ (IsProEtaleLocallyClassical X F → (∃ (I : Type (u + 1)) (U : I → X.ProEt), (ProEt.topology X).CoversTop U ∧ ∀ i : I, Nonempty (F.obj.obj (op (U i)))) → ∃ (I : Type (u + 1)) (Y : I → X.Etale), X.smallEtaleTopology.CoversTop Y ∧ ∀ i : I, Nonempty (F.obj.obj (op ((toProEt X).obj (Y i)))))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The theorem renders all three conclusions. Supporting declarations spell out the classical/local notions introduced in this same node and their canonical slice restriction, reusing upstream localization, Mathlib constant sheaves and the recorded comparison inverse image. No statement correction."
  }
 }

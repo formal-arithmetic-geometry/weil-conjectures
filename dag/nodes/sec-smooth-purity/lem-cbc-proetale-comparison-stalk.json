@@ -356,5 +356,28 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-19b88fd63 (reviewer sub-agent of L); spot-checked: Read both nodes, all seven steps, cited statements and source passages, unit/chapter route, and exact archived target declarations. The stalk comparison is sound for sets, abelian groups and arbitrary fixed-ring modules; it does not establish condensed-coefficient base change. Corrected the new node’s missing created.by/date in fixes. Full checks, duplicate searches, edge cases and inherited dependency cycles are documented in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5da5e395b",
+  "group": "NK",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all six dependencies, source passages, canonical germ normalization, universes, edge cases, docstrings and verbatim signature. Per-file scompile.py reproduced cleanly. No findings; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleComparisonStalk",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_comparison_stalk",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.HasCanonicalProEtaleStalkComparison",
+   "AlgebraicGeometry.Scheme.proEtale_comparison_stalk"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleComparisonStalk.lean",
+  "statement": "theorem proEtale_comparison_stalk (T : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) : HasCanonicalProEtaleStalkComparison T Ω t (Type (u + 1)) (Functor.sheafPullbackConstruction.sheafPullback (toProEt T) (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T)) (proEtaleSiteComparison T).unit ∧ HasCanonicalProEtaleStalkComparison T Ω t AddCommGrpCat.{u + 1} (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T) (ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T).unit ∧ ∀ (Λ : Type (u + 1)) [Ring Λ], HasCanonicalProEtaleStalkComparison T Ω t (ModuleCat.{u + 1} Λ) (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T) (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) T).unit",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The three coefficient clauses assert natural isomorphisms characterized by their action on unit germs. The helper predicate only expands this conclusion. Arbitrary-ring modules use the existing comparisonUpperStar without Finite or CommRing assumptions; the canonical Kan extension/sheafification realizes inverse image on the underlying algebraic operations."
  }
 }
