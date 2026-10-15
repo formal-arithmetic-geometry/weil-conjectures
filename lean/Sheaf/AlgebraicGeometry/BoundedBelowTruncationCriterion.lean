@@ -8,11 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.AlgebraicGeometry.AllowableTorsionDerivedCategories
 public import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
-public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-!
 # Bounded-below truncation criterion

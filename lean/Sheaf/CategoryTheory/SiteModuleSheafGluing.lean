@@ -6,10 +6,7 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.Algebra.Module.Equiv.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.SiteModuleSheafGluingAux
 
 /-!

@@ -6,11 +6,7 @@ Authors: SHEAF group NU
 module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
-public import Mathlib.CategoryTheory.Adjunction.Basic
-public import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
 import Sheaf.CategoryTheory.Sites.LowerShriekCorepresentability
 
 /-!

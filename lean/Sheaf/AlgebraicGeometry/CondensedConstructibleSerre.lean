@@ -8,15 +8,12 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 import Mathlib.Algebra.Field.ULift
 import Mathlib.CategoryTheory.Sites.EpiMono
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.ConstructibleSheaf.Refinement
 import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 import Sheaf.Paper.CondensedQbarLfpLocalTriviality
-import Sheaf.Paper.ProfinitePointPullback
 
 /-!
 # Serre closure for constructible condensed field module sheaves
