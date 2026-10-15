@@ -18,7 +18,14 @@
  },
  "stmt_deps": [
   "def-weil-derived-complete-integral-detailed",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-derived-reduction",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "def-weil-integral-reduction-tower",
+  "def-weil-derived-complete"
  ],
  "proof": [
   {
@@ -353,5 +360,28 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-b667269de (reviewer sub-agent of L); spot-checked: Read the full item, all 26 cited statements, chapter/unit route, report, and cited literature passages. All eight proof steps check out, including completion-unit compatibility, finite-coefficient reduction, and uniform bounds. Repaired one C8 omission by declaring the tower-core triangle theorem as an accepted generic tool. Corrected JSON and detailed source/edge-case checks are in fixes/ and review.md. No targets changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bcc2bf354",
+  "group": "NB",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, declarations, docstrings, edge cases, universes, and report. All nine sibling modules compile cleanly via scompile.py with the paired side overlay; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstructibleTriangulated",
+  "declaration": "WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleTriangulated.lean",
+  "statement": "theorem boundedConstructibleDerivedCompleteIntegral_isTriangulated (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) : ObjectProperty.IsClosedUnderIsomorphisms.{u + 2, u + 2} (C := completedIntegralDerivedCategory.{d, u, u} l E Y D hl) (boundedConstructibleDerivedCompleteIntegral.{d, u} D l hl E Y) ∧ ObjectProperty.IsTriangulated.{u + 2, u + 2} (C := completedIntegralDerivedCategory.{d, u, u} l E Y D hl) (boundedConstructibleDerivedCompleteIntegral.{d, u} D l hl E Y)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.integralConstructibleAbSheafify",
+   "WeilConjectures.integralConstructibleAbLocallyBijective",
+   "WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated"
+  ]
  }
 }
