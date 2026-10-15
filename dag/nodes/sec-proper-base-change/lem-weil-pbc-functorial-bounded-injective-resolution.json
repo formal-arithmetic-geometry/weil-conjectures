@@ -28,108 +28,28 @@
  ],
  "proof": [
   {
-   "text": "Normalize the supplied embedding once, independently of any complex. Put $r_A=J(A\\to0)$ and $s_A=J(0\\to A)$, so $r_As_A=1$. Put $J_0(A)=\\ker r_A$ with inclusion $k_A$. The morphism $1-s_Ar_A$ factors through $k_A$, giving $t_A:J(A)\\to J_0(A)$ with $k_At_A=1-s_Ar_A$. Since $r_Ak_A=0$, we have $k_At_Ak_A=k_A$; cancellation of the monomorphism $k_A$ gives $t_Ak_A=1$. Naturality gives $r_A\\eta_A=\\eta_0(A\\to0)=0$, so $\\eta_A$ factors uniquely as $k_A\\eta^0_A$ and $\\eta^0_A$ is monic. For $f:A\\to B$, the identity $r_BJ(f)=r_A$ gives the unique induced map $J_0(f)$ on kernels. Kernel uniqueness proves identity, composition and naturality of $\\eta^0$. This uses kernels and the zero object of [def-sp-abelian].",
+   "text": "Obtain the functorial objectwise injective resolution E and augmentation ε from the supplied functorial embedding using the normalization and recursive cokernel construction.",
    "uses": [
-    "def-sp-abelian"
+    "lem-weil-pbc-functorial-object-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141 (lemma-functorial-injective-resolutions), proof, normalization of $J(0)$"
-   }
+   "elementary": false
   },
   {
-   "text": "Each $J_0(A)$ is injective by [def-sp-injective-resolutions]: for a monomorphism $M\\to N$ and a map $M\\to J_0(A)$, compose with $k_A$, extend to $N\\to J(A)$ by the given injectivity, and compose with $t_A$. The composite extends the original map since $t_Ak_A=1$. Also $J_0(0)=\\ker(1_{J(0)})$ is a zero object. Consequently $J_0$ sends every zero morphism to zero: factor a zero morphism through the zero object and use that $J_0(0)$ is zero. No additivity of $J$ or $J_0$ is asserted or needed.",
+   "text": "Apply the totalization theorem to E and ε. It constructs one functor on all bounded-below complexes, a natural quasi-isomorphism, injective terms, and preservation of every lower bound by finite diagonal totalization and the first-quadrant column augmentation criterion.",
    "uses": [
-    "def-sp-abelian",
-    "def-sp-injective-resolutions"
+    "lem-weil-pbc-functorial-bounded-injective-resolution-totalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141 (lemma-functorial-injective-resolutions), proof, normalization and preservation of zero morphisms"
-   }
-  },
-  {
-   "text": "Fix kernels and cokernels throughout. Recursively define object functors $Q_0=\\mathrm{id}$, $E_q=J_0Q_q$, and $Q_{q+1}(A)=\\operatorname{coker}(\\eta^0_{Q_q(A)})$ for $q\\ge0$, with quotient $\\pi_{q,A}:E_q(A)\\to Q_{q+1}(A)$. For $f:A\\to B$, define $Q_{q+1}(f)$ by $Q_{q+1}(f)\\pi_{q,A}=\\pi_{q,B}E_q(f)$. Naturality of $\\eta^0$ proves existence; uniqueness against the cokernel quotient proves preservation of identities and composition. Induction shows every $Q_q,E_q$ sends zero objects to zero objects, and hence zero morphisms to zero morphisms. Define $v_{q,A}=\\eta^0_{Q_{q+1}(A)}\\pi_{q,A}:E_q(A)\\to E_{q+1}(A)$; the displayed equations make $v_q$ natural.",
-   "uses": [
-    "def-sp-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141 (lemma-functorial-injective-resolutions), proof, recursive cokernel construction; omitted functoriality verification"
-   }
-  },
-  {
-   "text": "For each object $A$, the augmented sequence $0\\to A\\xrightarrow{\\eta^0_A}E_0(A)\\xrightarrow{v_0}E_1(A)\\xrightarrow{v_1}\\cdots$ is exact. Indeed $\\pi_{q+1,A}\\eta^0_{Q_{q+1}(A)}=0$, giving $v_{q+1}v_q=0$. Since $\\eta^0_{Q_{q+1}(A)}$ is monic, $\\ker v_q=\\ker\\pi_{q,A}=\\operatorname{im}\\eta^0_{Q_q(A)}$; for $q>0$ this is $\\operatorname{im}v_{q-1}$ since $\\pi_{q-1,A}$ is epic. For $q=0$ it is the image of $A$. These are the kernel/cokernel properties of [def-sp-abelian]. All $E_q(A)$ are injective by Step 2.",
-   "uses": [
-    "def-sp-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141 (lemma-functorial-injective-resolutions), proof, exactness of the augmented columns"
-   }
-  },
-  {
-   "text": "For an integer-indexed complex $K$ of [def-weil-abstract-derived-category], form $D_K^{q,p}=E_q(K^p)$ for $q\\ge0$, extending by zero for $q<0$. The first differential is $v_{q,K^p}$ and the second is $E_q(d_K^p)$. The second squares to zero because $E_q$ preserves composition and zero morphisms; the first squares to zero by Step 4; they commute by naturality of $v_q$. A chain map $f:K\\to L$ gives $D_f^{q,p}=E_q(f^p)$, commuting with both differentials by functoriality and naturality. The maps $\\eta^0_{K^p}:K^p\\to D_K^{0,p}$ commute with the second differential and are killed by the first differential. If $K^p=0$ for $p<a$, every $D_K^{q,p}$ is zero for $p<a$ by Step 3. This proves each required bicomplex identity directly, without choosing $a$ in the construction.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141 (lemma-functorial-injective-resolutions), proof, construction of the double complex, with indices exchanged"
-   }
-  },
-  {
-   "text": "Define $I(K)^n=\\bigoplus_{q+p=n}D_K^{q,p}$ and use the total differential $v+(-1)^q E_q(d_K)$ of [def-sp-double-complex-total], extending its formula to these integer indices. Existence needs only finite biproducts of [def-sp-abelian]: for any lower bound $a$ the only nonzero terms lie at $0\\le q\\le n-a$, so their finite biproduct is a coproduct of the entire diagonal by assigning zero maps from the omitted zero objects. Choose a coproduct of this entire diagonal for each $K,n$; the universal property defines $I(f)$ uniquely from the components $E_q(f^p)$, so identity and composition follow by checking coprojections. The differential squares to zero: the two mixed terms have coefficients $(-1)^{q+1}$ and $(-1)^q$ and cancel. On the summand $D_K^{q,p}$ the resolution components of $d_{I(L)}I(f)$ and $I(f)d_{I(K)}$ agree because $v_{q,L^p}E_q(f^p)=E_{q+1}(f^p)v_{q,K^p}$. Their complex components agree because $E_q(d_L^p)E_q(f^p)=E_q(f^{p+1})E_q(d_K^p)$, and both carry the coefficient $(-1)^q$. Equality on every coprojection therefore proves that $I(f)$ is a chain map. Let $\\alpha_K^n$ be $\\eta^0_{K^n}$ followed by the $(0,n)$ inclusion. Its first differential is zero, and the second has sign $+1$ there, so $\\alpha_K$ is a chain map. Naturality follows from $E_0(f^n)\\eta^0_{K^n}=\\eta^0_{L^n}f^n$ and the defining equation of $I(f)$ on that inclusion.",
-   "uses": [
-    "def-sp-abelian",
-    "def-sp-double-complex-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141 (lemma-functorial-injective-resolutions), proof, associated total complex and the omitted functoriality verification"
-   }
-  },
-  {
-   "text": "To prove $\\alpha_K$ is a quasi-isomorphism, choose a lower bound $a$ only for this verification, and set $A^r=K^{a+r}$ and $B^{q,r}=D_K^{q,a+r}$ for $q,r\\ge0$. These form a first-quadrant bicomplex, with augmentation $A\\to B^{0,\\bullet}$. Step 5 verifies its chain-map equation and annihilation by the first differential. Step 4 shows that for every $r$ the resolution column $B^{\\bullet,r}$ has cohomology $A^r$ in degree zero and zero in positive degrees; thus its augmented single-object map is a quasi-isomorphism. The map $b:A\\to\\operatorname{Tot}(B)$ is exactly the augmentation followed by the $(0,r)$ inclusion and is a chain map by Step 6. Apply [lem-sc-first-quadrant-column-augmentation], whose hypotheses are precisely these, to obtain that $b$ is a quasi-isomorphism. Reindex degree $m$ of its total to degree $a+m$ of $I(K)$: the diagonal bijection $(q,r)\\mapsto(q,a+r)$ gives a canonical isomorphism of the chosen coproducts by their universal properties. Its components are identities on the matching summands, so it commutes with both differentials, including the unchanged sign $(-1)^q$, and takes $b$ to $\\alpha_K$. These chain isomorphisms induce isomorphisms of kernels and images and hence of cohomology in the relabelled degrees, proving the claim in all degrees $n\\ge a$. In degrees $n<a$ both complexes are zero, so their cohomology is zero as well.",
-   "uses": [
-    "lem-sc-first-quadrant-column-augmentation",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141 (lemma-functorial-injective-resolutions), proof, application of Homology Tag 0133 (lemma-double-complex-gives-resolution), via its first-quadrant variant"
-   }
-  },
-  {
-   "text": "Every $I(K)^n$ is injective: it is a finite biproduct of the injective objects $E_q(K^p)$. For a monomorphism $M\\to N$ and a map into this biproduct, extend each of its finitely many component maps using [def-sp-injective-resolutions] and assemble the extensions by the biproduct universal property. The empty biproduct is zero and is injective by the same lifting definition. For every lower bound $a$ of $K$, no pair $q\\ge0$, $p\\ge a$ has $q+p=n<a$, so $I(K)^n=0$ below $a$. The functors $Q_q,E_q$, the entire-diagonal coproduct choices and their morphisms were fixed before using a lower bound; $a$ enters only the proofs of finite support and quasi-isomorphism. Thus there is one functor $I$ and one natural transformation $\\alpha$, valid for every bound. For any diagram $F$ of bounded-below complexes, compose with $I$; the naturality equality proved in Step 6 supplies the augmentation of diagrams, without a common bound for all objects.",
-   "uses": [
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141 (lemma-functorial-injective-resolutions), proof, finite diagonals, lower bound and functoriality"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-abelian",
-  "def-sp-double-complex-total",
-  "def-sp-injective-resolutions",
-  "def-weil-abstract-derived-category",
-  "lem-sc-first-quadrant-column-augmentation"
+  "lem-weil-pbc-functorial-object-resolution",
+  "lem-weil-pbc-functorial-bounded-injective-resolution-totalization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "D4 stage 3 decomposition",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 0141 (lemma-functorial-injective-resolutions), assertion (1); omitted functoriality supplied explicitly; Tag 0133 applied through the existing first-quadrant augmentation node"
+  "place": "Tag 0141, split into objectwise resolution and totalization steps"
  },
  "mathlib_searches": [
   {
@@ -287,5 +207,15 @@
   "by": "NK",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-5078e",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261015T190716-L-966222",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered Lean/DAG files, and direct importer matched; all compiled successfully."
  }
 }

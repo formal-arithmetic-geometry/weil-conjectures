@@ -6,10 +6,10 @@ Authors: SHEAF group NK
 module
 
 public import Mathlib.Algebra.Homology.CochainComplexPlus
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Sheaf.CategoryTheory.DoubleComplexTotal
 import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
+import Sheaf.Algebra.Homology.FunctorialObjectResolution
 
 /-!
 # Functorial injective resolutions preserving every lower bound
@@ -22,9 +22,36 @@ Source: Stacks Project, Derived Categories, Tag 0141, assertion (1) and its cons
 
 universe v u
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits ZeroObject
 
 namespace CochainComplex
+
+/-- Totalize a supplied functorial objectwise injective resolution.
+
+Source: Stacks Project, Derived Categories, Tag 0141, assertion (1) and its construction.
+(blueprint: lem-weil-pbc-functorial-bounded-injective-resolution-totalization).
+
+Apply the supplied nonnegative augmented resolutions termwise to an integer-indexed
+bounded-below complex, form the first-quadrant bicomplex, and take finite diagonal
+biproducts with the signed total differential.  The first-quadrant column augmentation
+criterion proves the augmentation is a quasi-isomorphism after choosing a lower bound only
+for verification.  Finite biproducts of injectives give injective total terms, and the
+vanishing of all columns below the chosen bound gives preservation of every lower bound.
+-/
+theorem exists_functorial_bounded_injective_resolution_of_object_resolution
+    {C : Type u} [Category.{v} C] [Abelian C]
+    (E : C ⥤ CochainComplex C ℕ)
+    (ε : (CochainComplex.single₀ C) ⟶ E)
+    (hε : ∀ A : C, QuasiIso (ε.app A))
+    (hEzero : ∀ (A B : C), E.map (0 : A ⟶ B) = 0)
+    (hEobjzero : IsZero (E.obj (0 : C)))
+    (hE : ∀ (A : C) (n : ℕ), Injective ((E.obj A).X n)) :
+    ∃ (I : Plus C ⥤ Plus C) (α : Plus.ι C ⟶ I ⋙ Plus.ι C),
+      (∀ K : Plus C, QuasiIso (α.app K)) ∧
+      (∀ (K : Plus C) (n : ℤ), Injective (((I.obj K).obj).X n)) ∧
+      (∀ (K : Plus C) (a : ℤ), K.obj.IsStrictlyGE a →
+        (I.obj K).obj.IsStrictlyGE a) := by
+  sorry
 
 /-- A functorial injective embedding gives one injective replacement functor on all
 bounded-below complexes, preserving every termwise lower bound simultaneously.
@@ -75,6 +102,9 @@ theorem exists_functorial_bounded_injective_resolution
       (∀ K : Plus C, QuasiIso (α.app K)) ∧
       (∀ (K : Plus C) (n : ℤ), Injective (((I.obj K).obj).X n)) ∧
       (∀ (K : Plus C) (a : ℤ), K.obj.IsStrictlyGE a → (I.obj K).obj.IsStrictlyGE a) := by
-  sorry
+  obtain ⟨E, ε, hε, hEzero, hEobjzero, hE⟩ :=
+    exists_functorial_object_injective_resolution J η hη hJ
+  exact exists_functorial_bounded_injective_resolution_of_object_resolution E ε hε hEzero
+    hEobjzero hE
 
 end CochainComplex
