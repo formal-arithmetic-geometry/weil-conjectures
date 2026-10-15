@@ -92,7 +92,12 @@ def prune(m, imports, memo):
 
 def commit(done):
     if not done: return
-    for m, new in done.items(): path(m).write_text(new)
+    import hashlib
+    ok = {}
+    for m, v in done.items():   # only if the file is still the one that was pruned (a landing may have changed it since)
+        if path(m).is_file() and hashlib.sha1(path(m).read_text().encode()).hexdigest() == v["old"]: path(m).write_text(v["new"]); ok[m] = v
+    done = ok
+    if not done: return
     files = [str(path(m).relative_to(R)) for m in done]
     msg = f"Prune unused imports of {len(done)} finished module(s) (tools/prune_imports.py)\n\n" + "\n".join(f"- {m}" for m in done) + "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
     r = subprocess.run(["flock", "-w", "300", "coord/.merge.lock", "git", "-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m", msg, "--", *files],
@@ -104,10 +109,11 @@ def run(mods, do_commit):
     _, imports = li.scan(); memo = {}; done = {}
     for m in mods:
         if not path(m).is_file(): continue
+        before = path(m).read_text()
         try: new, why = prune(m, imports, memo)
         except Exception as e: new, why = None, repr(e)[:150]
         log(m, "|", why)
-        if new: done[m] = new
+        if new: done[m] = {"old": __import__("hashlib").sha1(before.encode()).hexdigest(), "new": new}
     if do_commit: commit(done)
     return done
 
@@ -132,9 +138,28 @@ def loop():
                     if x in seen or x not in imports: continue
                     seen.add(x); stack.extend(imports[x])
                 backlog = sorted(seen)
-            batch = [m for m in recent if path(m).is_file()] + backlog[:40]
-            backlog = backlog[40:]
-            run(batch, True)
+            # A changed import list rebuilds every downstream module in the global build: modules with more than 30
+            # dependents are left for a quiet hour (state "heavy"), so pruning does not delay the verification of landings.
+            _, imports = li.scan(); rev = {}
+            for x, ys in imports.items():
+                for y in ys: rev.setdefault(y, set()).add(x)
+            def dependents(m):
+                seen, stack = set(), [m]
+                while stack and len(seen) <= 30:
+                    for y in rev.get(stack.pop(), ()):
+                        if y not in seen: seen.add(y); stack.append(y)
+                return len(seen)
+            batch = [m for m in recent + backlog[:60] if path(m).is_file()]
+            light = [m for m in batch if dependents(m) <= 30]
+            st.setdefault("heavy", []); st["heavy"] = sorted(set(st["heavy"]) | (set(batch) - set(light)))
+            backlog = backlog[60:]
+            done = run(light, False)
+            pend = st.get("pending", {}); pend.update(done)
+            if pend and time.time() - st.get("last_commit", 0) > 7200:
+                commit(pend); pend = {}; st["last_commit"] = time.time()
+            st["pending"] = pend
+            STATE.write_text(json.dumps(dict(st, head=head, backlog=backlog, t=time.time())))
+            time.sleep(1200); continue
             STATE.write_text(json.dumps({"head": head, "backlog": backlog, "t": time.time()}))
         except Exception as e:
             log("loop error", repr(e)[:300])
