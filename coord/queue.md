@@ -1,6 +1,6 @@
 # Work queue
 
-67 items; claim with `tools/claim.py next <group> [--stage N]`.
+68 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (67)
+## Stage 3: modules to prove (68)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -18,34 +18,35 @@
 | `Sheaf.AlgebraicGeometry.CondensedCoefficientComplexPresentation` | 3 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
 | `Sheaf.Paper.IntegralFiniteExchangeComparison` | 3 | 1 | proof |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedLfpCoefficientModel` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedLocalPieceHomContinuity` | 4 | 1 | proof |
+| `Sheaf.Paper.CondensedStratumModelAssembly` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 4 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarLfpCoverComposition` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarLfpMatrixRefinement` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 5 | proof |
-| `Sheaf.Paper.CondensedStratumModelInductionStep` | 5 | 1 | proof |
+| `Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleRingedClosedCounit` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleRingedLocalizationSequence` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.AffineToGlobalTorsionCohomologicalDimension` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.UnboundedCoefficientForgetfulAux` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedCounit` | 7 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation` | 7 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleRingedClosedCounit` | 7 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleRingedLocalizationSequence` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleOpenCohomologyRestrictionCompatibility` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleSpecializationUnitComparison` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedCategory.AdjointSquareComparison` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition` | 8 | 1 | proof |
 | `Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients` | 9 | 1 | proof |
 | `Sheaf.Algebra.Homology.SiteDerivedTensorDescent` | 9 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleSpecializationUnitComparison` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation` | 9 | 1 | proof |
 | `Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor` | 9 | 1 | proof |
