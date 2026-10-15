@@ -142,5 +142,33 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-d1e79aa3b (reviewer sub-agent of L); spot-checked: Read the complete definition, cited statements, report, and unit/chapter route. Bhatt–Scholze 7.3.1(1), Stacks 0H7J, 00Y0 and 04IX support coverwise constancy, constant modules and slice restriction. Arbitrary module coefficients and edge cases are preserved. No new nodes, duplicates, missing dependencies or cycles; no repairs or tool_uses needed. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7a84b96d3",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all dependencies and declarations, sources, edge cases, uniqueness, docstrings, and report sections. Server-only compile reproduced cleanly in 3.4 seconds; no delivery errors or missing framework dependencies found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleLocallyConstantSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleModuleSheaf",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantModulePresheaf",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingUnit_locallyBijective",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModuleSheaf",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingUnit_over_locallyBijective",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModuleSheafOver",
+   "AlgebraicGeometry.Scheme.IsConstantProEtaleModuleSheaf",
+   "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleModuleSheaf"
+  ],
+  "file": "lean/Sheaf/Paper/ProEtaleLocallyConstantSheaf.lean",
+  "statement": "def IsLocallyConstantProEtaleModuleSheaf (Y : Scheme.{t}) (A : Type t) [CommRing A] (F : SheafOfModules.{t + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj ((constantSheaf (ProEt.topology Y) CommRingCat.{t + 1}).obj (CommRingCat.of (ULift.{t + 1, t} A))))) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Includes explicit constant module presheaf and sheaf constructions, the localized construction, global constancy, and two named local-bijectivity proof obligations needed by module sheafification. The ring and universe conventions are those of proEtaleDerivedCategory."
  }
 }
