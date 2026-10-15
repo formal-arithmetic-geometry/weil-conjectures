@@ -17,6 +17,7 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Finite-free projection formula

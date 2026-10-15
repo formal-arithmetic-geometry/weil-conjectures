@@ -20,6 +20,7 @@ import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Paper.ProjectionFormulaProjectiveSummand
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Signed totalization of the perfect projection formula
