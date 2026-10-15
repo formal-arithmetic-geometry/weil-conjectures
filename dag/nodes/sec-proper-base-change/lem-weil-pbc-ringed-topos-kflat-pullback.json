@@ -309,5 +309,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8d5763009",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, source, canonical constructions, universes, edge cases, docstrings, and report sections. Both delivered modules compiled cleanly through scompile.py. No delivery faults found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KFlatRingedToposPullback",
+  "declaration": "SheafOfModules.isKFlat_ringedToposPullback",
+  "file": "lean/Sheaf/Paper/KFlatRingedToposPullback.lean",
+  "statement": "theorem isKFlat_ringedToposPullback {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{w} C] [EssentiallySmall.{w} D] {JC : GrothendieckTopology C} {JD : GrothendieckTopology D} {R : Sheaf JC CommRingCat.{w}} {S RI : Sheaf JD CommRingCat.{w}} (uInv : Sheaf JC (Type (w)) ⥤ Sheaf JD (Type (w))) (uPush : Sheaf JD (Type (w)) ⥤ Sheaf JC (Type (w))) (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S) (uStar : ringedSiteModules.{w} ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⥤ ringedSiteModules.{w} ((sheafCompose JD (forget₂ CommRingCat.{w} RingCat.{w})).obj S)) (hobj : ∀ M : ringedSiteModules.{w} ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R), uStar.obj M = changeOfRings c (I.modules.obj M)) (hmap : ∀ {M N : ringedSiteModules.{w} ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R)} (a : M ⟶ N), uStar.map a = eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm) [uStar.Additive] (P : CochainComplex (ringedSiteModules.{w} ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) (hP : P.IsKFlat) (hflat : ∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n)) : CochainComplex.IsKFlat ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧ ∀ n : ℤ, IsFlatOnSite (J := JD) (R := S) (((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The apparent existing match ringedPullbackPreservesKFlat does not elaborate even with the current generalized KFlat overlay: its target IsFlat implicit ring cannot be inferred. State the exact 0G7E assertion with the currently recorded IsFlatOnSite and explicit source/target rings; do not import the unusable module."
  }
 }
