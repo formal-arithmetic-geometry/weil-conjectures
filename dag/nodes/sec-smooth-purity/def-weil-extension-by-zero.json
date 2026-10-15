@@ -92,5 +92,24 @@
   "result": "pass"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3673e85d8",
+  "group": "NX",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all seven dependencies, source construction, exact declarations, signature, universes, edge cases, docstrings and framework alternatives. Server-only compilation passed cleanly in 1.8 seconds. No delivery errors or repository changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleExtensionByZero",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleExtensionByZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleExtensionByZero.lean",
+  "statement": "def proEtaleExtensionByZero (X : Scheme.{u}) (U : X.ProEt) [IsOpenImmersion U.hom] (A : CommRingCat.{u + 1}) [Finite A] : ringedSiteModules.{u + 1} (((constantSheaf (ProEt.topology X) RingCat.{u + 1}).obj (RingCat.of A)).over U) ⥤ ringedSiteModules.{u + 1} ((constantSheaf (ProEt.topology X) RingCat.{u + 1}).obj (RingCat.of A))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Uses the localized-ringed-site presentation expressly specified in the node: U : X.ProEt with [IsOpenImmersion U.hom] packages the two schemes and j, and the domain is modules over A_X.over U. ProEt.weaklyEtale_localization identifies this with modules over A_U on U.left.ProEt. No equivalence is chosen from a sorry theorem; the presheaf and sheafification are concrete existing constructions."
+ }
 }
