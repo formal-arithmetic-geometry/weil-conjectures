@@ -15218,3 +15218,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:29 L: merged deliver/T3/Sheaf.CategoryTheory.FilteredHomologyTowerQuotients (stage 3; reviewer PASS; first push; landing 20261015T212935-L-2072344 (proof); batch 20261015T212858; modules 1; new nodes 0)
 - 21:29 L: merged deliver/T4/Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel (stage 3; reviewer PASS; first push; landing 20261015T212944-L-2073357 (proof); batch 20261015T212858; modules 1; new nodes 2)
 - 21:29 L: merged deliver/U3/Sheaf.AlgebraicGeometry.ProEtaleComparisonSections (stage 3; reviewer PASS; first push; landing 20261015T212950-L-2073991 (proof); batch 20261015T212858; modules 1; new nodes 0)
+- 21:36 L: returned deliver/H1/Sheaf.AlgebraicGeometry.ProEtaleRingedLocalizationSequence (reviewer RETURN: (the landing tools, head 0fb95beeb) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
