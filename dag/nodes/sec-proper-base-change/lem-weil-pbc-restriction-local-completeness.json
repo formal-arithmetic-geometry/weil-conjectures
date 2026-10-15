@@ -23,7 +23,9 @@
   "def-weil-abstract-derived-category",
   "def-weil-sheaf-of-modules-category",
   "def-pur-derived-internal-hom",
-  "def-pc-sheaf-restrict-scalars"
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-ringed-site-ideal",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete"
  ],
  "proof": [
   {
@@ -156,5 +158,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b2e977499",
+  "group": "NV",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, all statement clauses and dependencies, sources, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py compilation passed cleanly. No delivery errors found; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RestrictionLocalCompleteness",
+  "declaration": "CategoryTheory.restrictScalars_locallyDerivedComplete_iff",
+  "declarations": [
+   "CategoryTheory.restrictScalars_locallyDerivedComplete_iff"
+  ],
+  "file": "lean/Sheaf/Paper/RestrictionLocalCompleteness.lean",
+  "statement": "theorem restrictScalars_locallyDerivedComplete_iff {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R B : Sheaf J CommRingCat.{u}) (φ : R ⟶ B) (I : RingedSiteIdeal R) (IB : RingedSiteIdeal B) (hIB : ∀ (U : C) (b : B.obj.obj (op U)), b ∈ IB.sections U ↔ ∃ S : Sieve U, S ∈ J U ∧ ∀ (V : C) (g : V ⟶ U), S g → B.obj.map g.op b ∈ Ideal.map (φ.hom.app (op V)).hom (I.sections V)) [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))] [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (R.over U)))] [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (B.over U)))] (M : DerivedCategory (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))) : IsLocallyDerivedRingedIdealComplete R I.module I.inclusion (DerivedCategory.Q.obj (((SheafOfModules.restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (DerivedCategory.Q.objPreimage M))) ↔ IsLocallyDerivedRingedIdealComplete B IB.module IB.inclusion M",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
