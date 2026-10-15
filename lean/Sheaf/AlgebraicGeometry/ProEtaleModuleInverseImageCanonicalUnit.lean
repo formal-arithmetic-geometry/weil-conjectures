@@ -2,6 +2,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleModelRingPresentation
 import Sheaf.CategoryTheory.ModuleInverseImageAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite

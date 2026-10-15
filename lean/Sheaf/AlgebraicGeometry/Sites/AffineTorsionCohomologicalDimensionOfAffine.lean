@@ -42,6 +42,9 @@ import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
+import Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound
+import Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk
 
 /-!
 # The affine torsion cohomological dimension bound

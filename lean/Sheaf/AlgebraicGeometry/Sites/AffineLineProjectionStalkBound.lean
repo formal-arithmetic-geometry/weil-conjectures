@@ -11,6 +11,18 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 public import WeilConjectures.AlgebraicGeometry.Sites.SupportDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
+import Sheaf.AlgebraicGeometry.Sites.ArbitraryCurveCohomologicalDimension
+import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
+import Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModel
+import Sheaf.CategoryTheory.GrothendieckSpectralSequence
+import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+import WeilConjectures.SixFunctors.Finite.Stalk
 
 /-! # Higher direct image stalks of an affine-line projection
 
