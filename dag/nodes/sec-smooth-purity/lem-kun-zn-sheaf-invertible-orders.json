@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-kun-zn-sheaf-invertible-orders",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Modules over $\\kunZn$ have invertible orders",
- "statement": "Let $K$ be a field and $n\\in I_K$ an integer invertible in $K$\n([def-kun-torsion-invertible]). For every scheme $T$ over $K$,\nevery sheaf of $\\kunZn$-modules on the small etale site of $T$,\n[def-weil-pbc-etale-site], has orders invertible in $K$.",
+ "statement": "Let $K$ be a field and $n\\in I_K$ an integer invertible in $K$\n([def-kun-torsion-invertible]), and put $\\Lambda=\\mathbf Z/n\\mathbf Z$\n(the coefficient ring denoted $\\kunZn$). For every scheme $T$ over $K$,\nevery sheaf of $\\Lambda$-modules on the small etale site of $T$\n[def-weil-pbc-etale-site], in the sense of [def-weil-pbc-etale-sheaves],\nhas orders invertible in $K$ as defined in [def-kun-torsion-invertible].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-zn-sheaf-invertible-orders.md",
   "place": "node lem-kun-zn-sheaf-invertible-orders, order 1681"
@@ -19,24 +19,186 @@
  ],
  "proof": [
   {
-   "text": "Let $F$ be a sheaf of $\\kunZn$-modules on $T_{\\Et}$. The ring\n$\\kunZn$ is annihilated by $n$, so multiplication by $n$ is the\nzero endomorphism of $F$: every section of $F$, hence every\nelement of every geometric stalk, is killed by $n$. As $n\\in I_K$,\nthe condition defining orders invertible in $K$ of\n[def-kun-torsion-invertible] is satisfied.",
+   "text": "Let $F$ be the given sheaf of $\\Lambda$-modules. Write $\\mathcal O=\\Lambda_T$ for the constant sheaf of rings. By [def-weil-pbc-etale-sheaves] and [def-weil-sheaf-of-modules-category], each $F(U)$ is an $\\mathcal O(U)$-module. The canonical constant-section ring homomorphism $\\Lambda\\to\\mathcal O(U)$ given by the sheafification morphism of [def-weil-pbc-sheafification] applied to the constant presheaf in [def-weil-pbc-constant-sheaf] sends $1$ to $1$. Since $n\\cdot1_\\Lambda=0$, it follows that $n\\cdot1_{\\mathcal O(U)}=0$. The module axioms now give, for every section $s\\in F(U)$,\n$$n s=(n\\cdot1_{\\mathcal O(U)})s=0s=0.$$\nHere the first equality is obtained by adding $1s=s$ to itself $n$ times; no assertion about exactness or preservation of colimits is used.",
    "uses": [
-    "def-kun-torsion-invertible"
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-zn-sheaf-invertible-orders.md",
+    "place": "## Proof, first two sentences: the coefficient ring and every section are killed by n; elementary expansion"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar t$ of $T$ and use the abelian-group colimit defining $F_{\\bar t}$ in [def-weil-pbc-geometric-stalks]. Its cocone maps $\\iota_U:F(U)\\to F_{\\bar t}$ are additive. For an additive map $f:A\\to B$, induction on $n$ gives $f(na)=nf(a)$: the case $0$ is $f(0)=0$, and the successor case follows from $f(na+a)=f(na)+f(a)$. Thus multiplication by $n$ is an abelian-group endomorphism of the stalk and, for every section $s\\in F(U)$, step 1 gives\n$$[n]_{F_{\\bar t}}(\\iota_U(s))=\\iota_U(ns)=\\iota_U(0)=0.$$\nThe endomorphisms $[n]_{F_{\\bar t}}$ and $0$ therefore have identical composites with every map of the defining cocone. The uniqueness clause of that colimit's universal property gives $[n]_{F_{\\bar t}}=0$, so every stalk element is killed by $n$.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-zn-sheaf-invertible-orders.md",
+    "place": "## Proof, second sentence: every geometric-stalk element is killed by n; elementary colimit calculation"
+   }
+  },
+  {
+   "text": "By [def-kun-torsion-invertible], $n\\in I_K$ includes $n\\geq1$ and $n\\cdot1_K\\ne0$. The sectionwise annihilation in step 1 makes the underlying abelian sheaf torsion in the sense of [def-weil-pbc-etale-sheaves]: for each section take the identity covering and the positive annihilator $n$. For every geometric point and every stalk element, step 2 supplies the annihilator $n\\in I_K$. This is precisely the definition in [def-kun-torsion-invertible] of having orders invertible in $K$.",
+   "uses": [
+    "def-kun-torsion-invertible",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-zn-sheaf-invertible-orders.md",
+    "place": "## Proof, last sentence: apply the definition of orders invertible in K"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-geometric-stalks",
   "def-kun-torsion-invertible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-zn-sheaf-invertible-orders.md",
-  "place": "## Proof"
+  "place": "## Proof; elementary expansion checked by the second reader against the original blueprint at /home/ubuntu/work-bp/sheaf/literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-zn-sheaf-invertible-orders.md."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of Z/nZ modules has all geometric stalk elements annihilated by n; if n is invertible in a field K its orders are invertible in K",
+   "results": "Eight Tilde/localization and rank-at-stalk hits, including ModuleCat.Tilde.smul_stalk_no_nonzero_divisor and ModuleCat.Tilde.isUnit_toStalk; these concern quasi-coherent Zariski stalks, not arbitrary etale sheaves with invertible orders.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; elementary algebraic candidates only"
+  },
+  {
+   "tool": "loogle",
+   "query": "ZMod, Module",
+   "results": "Twelve hits including ZModModule.char_nsmul_eq_zero and ZMod.instSubsingletonModule. The annihilation lemma gives the algebraic calculation only, not the sheaf/order assertion.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; elementary algebraic candidates only"
+  },
+  {
+   "tool": "grep",
+   "query": "ZMod.*(nsmul|annihilat)|[Hh]asInvertibleExponent|[Ii]nvertible.*[Oo]rders",
+   "results": "Nine hits. Mathlib/Data/ZMod/Basic.lean:1226 states ZModModule.char_nsmul_eq_zero. Read lines 1210-1233: it proves n • x = 0 for a ZMod n module by the scalar axioms. Other hits are uses or quotient constructions; no invertible-order etale-sheaf theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; elementary algebraic candidates only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every sheaf of modules over Z/nZ is n torsion and has orders invertible in a field where n is a unit",
+   "results": "HTTP Internal Server Error: service unavailable.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a module over ZMod n multiplication by the natural number n annihilates every element, and this also holds for germs of a sheaf of such modules",
+   "results": "Eight hits including Filter.Germ.instModule, Filter.Germ.instModule' and PresheafOfModules.Sheafify.zero_smul. These give filter germs or module/sheafification structures, not the item.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; elementary algebraic candidates only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"char_nsmul_eq_zero\"",
+   "results": "One hit: ZModModule.char_nsmul_eq_zero, Mathlib.Data.ZMod.Basic, states n • x = 0 for every x in a ZMod n module. This is only step 1 of the item.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; elementary algebraic candidates only"
+  },
+  {
+   "tool": "grep",
+   "query": "char_nsmul_eq_zero|torsion.*sheaf|sheaf.*torsion",
+   "results": "Five hits, all ZModModule.char_nsmul_eq_zero or its uses. Read Mathlib/Data/ZMod/Basic.lean:1226-1227; no theorem about allowable orders of arbitrary etale sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; elementary algebraic candidates only"
+  },
+  {
+   "tool": "grep",
+   "query": "char_nsmul_eq_zero|IsTorsionSheafOfInvertibleOrder",
+   "results": "Five hits: Mathlib/Data/ZMod/Basic.lean:1226 (ZModModule.char_nsmul_eq_zero), its uses at 1233, 1243, 1251, and Mathlib/GroupTheory/PGroup.lean:487. No IsTorsionSheafOfInvertibleOrder declaration in Mathlib.",
+   "date": "2026-10-15",
+   "verdict": "no exact match; elementary algebraic candidate only"
+  },
+  {
+   "tool": "loogle",
+   "query": "ZMod n, _ • _ = 0",
+   "results": "Actual tool response: [loogle] OK 0 hit(s) | loogle: Unknown identifier `n`. This query was rejected and provides no absence evidence.",
+   "date": "2026-10-15",
+   "verdict": "invalid query; no mathematical conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category a colimit of abelian groups killed by the natural number n is killed by n, since multiplication by n agrees with zero on the colimit injections.",
+   "results": "Eight hits: AddCommGrpCat.hasColimit, AddCommGrpCat.hasColimit_of_small_quot, AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit, AddCommGrpCat.FilteredColimits.colimitAddCommGroup, AddCommGrpCat.FilteredColimits.colimit, instHasFilteredColimitsAddCommGrpCat, CategoryTheory.Limits.Concrete.colimit_rep_eq_zero, AddCommGrpCat.Colimits.colimitCoconeIsColimit. These provide colimit constructions or relations, not the invertible-order sheaf assertion.",
+   "date": "2026-10-15",
+   "verdict": "no exact match; colimit infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "ZMod, _ = 0",
+   "results": "Twelve hits, including ZMod.natCast_self and ZModModule.char_nsmul_eq_zero. Read Mathlib/Data/ZMod/Basic.lean:1210-1233. The latter is the sectionwise algebraic calculation only, not the sheaf assertion.",
+   "date": "2026-10-15",
+   "verdict": "no exact match; elementary algebraic candidate only"
+  },
+  {
+   "tool": "grep",
+   "query": "char_nsmul_eq_zero|IsTorsionSheafOfInvertibleOrder|invertibleOrders",
+   "results": "Five hits: Mathlib/Data/ZMod/Basic.lean:1226 (ZModModule.char_nsmul_eq_zero), its uses at 1233, 1243, 1251, and Mathlib/GroupTheory/PGroup.lean:487. Reopened Basic.lean:1208-1235; no IsTorsionSheafOfInvertibleOrder or invertibleOrders declaration in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; elementary algebraic calculation or unrelated infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"char_nsmul_eq_zero\"",
+   "results": "One hit: ZModModule.char_nsmul_eq_zero, Mathlib.Data.ZMod.Basic, with [AddCommGroup G] [Module (ZMod n) G], concludes n • x = 0. This is the elementary scalar calculation, not the whole sheaf statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; elementary algebraic calculation or unrelated infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules over the constant ring sheaf Z/nZ is annihilated by n on sections and geometric stalks, so its orders are invertible over any field in which n is a unit",
+   "results": "Eight hits: ModuleCat.Tilde.smul_stalk_no_nonzero_divisor, ModuleCat.Tilde.exists_const, ModuleCat.Tilde.isUnit_toStalk, PresheafOfModules.Sheafify.instSubsingletonSMulCandidate, Module.isLocallyConstant_rankAtStalk_freeLocus, ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType, PresheafOfModules.Sheafify.instNonemptySMulCandidate, Module.isLocallyConstant_rankAtStalk. They concern quasi-coherent Zariski stalks, sheafification scalar structures, and ranks; none states the asserted allowed annihilators for arbitrary etale sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; elementary algebraic calculation or unrelated infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of ZMod n modules is torsion with orders invertible in a field when n is invertible in that field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Sheaf.*(ZMod|[Tt]orsion)|([Cc]har[Pp]|[Ii]nvertible).*Sheaf|char_nsmul_eq_zero",
+   "results": "Five actual hits: Mathlib/Data/ZMod/Basic.lean:1226,1233,1243,1251 and Mathlib/GroupTheory/PGroup.lean:487. Read Basic.lean:1208-1236; this is scalar annihilation and its uses, with no theorem asserting the whole etale-sheaf invertible-order condition.",
+   "date": "2026-10-15",
+   "verdict": "no exact match; elementary scalar fact or unrelated infrastructure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every abelian group object in modules over a constant finite characteristic ring sheaf is annihilated by the characteristic on its fibers",
+   "results": "Eight actual hits: condensed-module and scheme-module abelian structures, ZModModule.char_nsmul_eq_zero, a Tilde additive-group instance, a locally constant module instance, AddCommGroup.zmodModule, and a LightCondensed Grothendieck instance. The only relevant forward annihilation statement is the elementary scalar calculation, not the whole sheaf/order assertion.",
+   "date": "2026-10-15",
+   "verdict": "no exact match; elementary scalar fact or unrelated infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module, ZMod, _ • _ = 0",
+   "results": "Four actual hits: ZModModule.char_nsmul_eq_zero, AddCommMonoid.zmodModule, AddCommGroup.zmodModule, and ModN.liftEquiv'. Read Basic.lean:1226-1227 for the forward annihilation calculation; the other declarations construct module structures or lift maps. None states the sheaf/order assertion.",
+   "date": "2026-10-15",
+   "verdict": "no exact match; elementary scalar fact or unrelated infrastructure"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +225,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-zn-sheaf-invertible-orders",
+  "worker": "stage1",
+  "summary": "Expanded the imported one-paragraph proof into sectionwise annihilation using the actual constant-ring-sheaf module definition, a colimit-universal-property calculation for geometric stalks, and the torsion/invertible-order definition. All three arguments are elementary, so no new nodes are needed. Made the coefficient notation explicit, preserved the mathematical statement and all imported metadata, and ran the item Mathlib searches in two phrasings. The second reader located and read the original blueprint and Stacks sources in /home/ubuntu/work-bp/sheaf/literature, checked the three-step expansion against the original proof, and added the explicit sheafification-morphism citation. The expansion remains agent-written. Repair after the merge-lock return: reread all current statement and proof dependencies and verified every citation against their current statements. Expanded the additivity argument in step 2 explicitly; retained the defining stalk colimit without claiming a separate large-index colimit-existence theorem. The return contains no mathematical objection to this item; the Bhatt-Scholze metadata quoted in the lock-holder command concerns another delivery and is not a dependency here.",
+  "blueprint": "Realizes the complete imported proof: n annihilates the coefficient ring and every section (step 1), hence every geometric stalk (step 2), and n in I_K witnesses orders invertible in K (step 3). The unit sk-prop-sf-kunneth-ordinary has no numbered steps, and this coefficient lemma does not replace its Kunneth/projection-formula route."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-36e54866d",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-36e54866d (reviewer sub-agent of L); spot-checked: Read the required instructions, item/report, chapter/unit route, exact blueprint and dependency sources. The statement and all three proof steps are correct; hypotheses, coefficient category, base-change/sheafification maps, stalk colimit argument, searches, duplicates, route, and edge cases all check. No new nodes or repairs are needed."
+ }
 }
