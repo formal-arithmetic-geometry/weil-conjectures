@@ -97,6 +97,86 @@ theorem exactFunctor_derivedFunctor
           F.mapCochainComplexPlus ⋙ DerivedCategory.Plus.Q),
         LF.IsRightKanExtension ε →
         ∀ (K : CochainComplex.Plus A), IsIso (ε.app K)) := by
-  sorry
+  let hF := F.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso
+    (ComplexShape.up ℤ)
+  have hright : FD.IsRightDerivedFunctor φ.inv
+      (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)) := by
+    exact Functor.isRightDerivedFunctor_of_inverts
+      (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)) FD φ
+  have hleft : FD.IsLeftDerivedFunctor φ.hom
+      (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)) := by
+    exact Functor.isLeftDerivedFunctor_of_inverts
+      (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)) FD φ
+  refine ⟨hright, hleft, ?_, ?_, ?_⟩
+  · intro RF α hRF K
+    have : IsIso α := Functor.isIso_of_isRightDerivedFunctor_of_inverts RF α hF
+    infer_instance
+  · intro LF ε hLF K
+    have : IsIso ε := Functor.isIso_of_isLeftDerivedFunctor_of_inverts LF ε hF
+    infer_instance
+  · let δ : FD ≅ F.mapDerivedCategory :=
+      Localization.liftNatIso DerivedCategory.Q
+        (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
+        (DerivedCategory.Q ⋙ FD) (DerivedCategory.Q ⋙ F.mapDerivedCategory)
+        FD F.mapDerivedCategory (φ ≪≫ F.mapDerivedCategoryFactors.symm)
+    have hplus : ∀ X : DerivedCategory.Plus A,
+        DerivedCategory.TStructure.t.plus (FD.obj X.obj) := by
+      rintro ⟨X, n, hn⟩
+      have := F.isGE_mapDerivedCategory_obj X n
+      exact ⟨n, DerivedCategory.TStructure.t.isGE_of_iso (δ.app X).symm n⟩
+    let Fplus : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B :=
+      DerivedCategory.TStructure.t.plus.lift (DerivedCategory.Plus.ι ⋙ FD) hplus
+    let cA : DerivedCategory.Plus.Q ⋙ DerivedCategory.Plus.ι ≅
+        CochainComplex.Plus.ι A ⋙ DerivedCategory.Q :=
+      NatIso.ofComponents (fun K ↦ (DerivedCategory.quotientCompQhIso A).app K.obj)
+        (fun f ↦ (DerivedCategory.quotientCompQhIso A).hom.naturality f.hom)
+    let cB : DerivedCategory.Plus.Q ⋙ DerivedCategory.Plus.ι ≅
+        CochainComplex.Plus.ι B ⋙ DerivedCategory.Q :=
+      NatIso.ofComponents (fun K ↦ (DerivedCategory.quotientCompQhIso B).app K.obj)
+        (fun f ↦ (DerivedCategory.quotientCompQhIso B).hom.naturality f.hom)
+    let ψ : (DerivedCategory.Plus.Q ⋙ Fplus) ⋙ DerivedCategory.Plus.ι ≅
+        (F.mapCochainComplexPlus ⋙ DerivedCategory.Plus.Q) ⋙ DerivedCategory.Plus.ι :=
+      isoWhiskerRight cA FD ≪≫ isoWhiskerLeft (CochainComplex.Plus.ι A) φ ≪≫
+        isoWhiskerLeft F.mapCochainComplexPlus cB.symm
+    let φplus : DerivedCategory.Plus.Q ⋙ Fplus ≅
+        F.mapCochainComplexPlus ⋙ DerivedCategory.Plus.Q :=
+      Functor.fullyFaithfulCancelRight DerivedCategory.Plus.ι ψ
+    have hloc : (DerivedCategory.Plus.Q (C := A)).IsLocalization
+        (CochainComplex.Plus.quasiIso A) := by
+      dsimp only [DerivedCategory.Plus.Q]
+      infer_instance
+    have hright := Functor.isRightDerivedFunctor_of_inverts
+      (CochainComplex.Plus.quasiIso A) Fplus φplus
+    have hleft := Functor.isLeftDerivedFunctor_of_inverts
+      (CochainComplex.Plus.quasiIso A) Fplus φplus
+    have hF : (CochainComplex.Plus.quasiIso A).IsInvertedBy
+        (F.mapCochainComplexPlus ⋙ DerivedCategory.Plus.Q) := by
+      apply (MorphismProperty.IsInvertedBy.iff_of_iso
+        (CochainComplex.Plus.quasiIso A) φplus).mp
+      exact MorphismProperty.IsInvertedBy.of_comp _ _
+        (Localization.inverts _ (CochainComplex.Plus.quasiIso A)) Fplus
+    refine ⟨Fplus, Iso.refl _, φplus, ?_, ?_, ?_, ?_, ?_⟩
+    · intro K
+      dsimp only [φplus]
+      rw [Functor.fullyFaithfulCancelRight_hom_app, Functor.map_preimage]
+      change ψ.hom.app K ≫ (cB.hom.app (F.mapCochainComplexPlus.obj K)) = _
+      simp only [ψ, Iso.trans_hom, NatTrans.comp_app, isoWhiskerRight_hom,
+        whiskerRight_app, isoWhiskerLeft_hom, whiskerLeft_app, cA, cB,
+        NatIso.ofComponents_hom_app, Iso.symm_hom, NatIso.ofComponents_inv_app,
+        Iso.app_hom, Iso.app_inv, Iso.refl_hom, NatTrans.id_app,
+        Category.id_comp, Category.assoc, Iso.inv_hom_id_app]
+      exact congrArg (fun f ↦
+        FD.map ((DerivedCategory.quotientCompQhIso A).hom.app K.obj) ≫ f)
+        (Category.comp_id (φ.hom.app K.obj))
+    · exact hright.isLeftKanExtension
+    · exact hleft.isRightKanExtension
+    · intro RF α hRF K
+      have : RF.IsRightDerivedFunctor α (CochainComplex.Plus.quasiIso A) := ⟨hRF⟩
+      have : IsIso α := Functor.isIso_of_isRightDerivedFunctor_of_inverts RF α hF
+      infer_instance
+    · intro LF ε hLF K
+      have : LF.IsLeftDerivedFunctor ε (CochainComplex.Plus.quasiIso A) := ⟨hLF⟩
+      have : IsIso ε := Functor.isIso_of_isLeftDerivedFunctor_of_inverts LF ε hF
+      infer_instance
 
 end CategoryTheory.Functor

@@ -15029,3 +15029,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:41 L: merged deliver/C4/Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry (stage 3; reviewer PASS; first push; landing 20261015T154158-L-160293 (proof); batch 20261015T154146; modules 1; new nodes 0)
 - 15:41 L: merged deliver/C4/Sheaf.CategoryTheory.SiteInverseImageTensor (stage 3; reviewer PASS; first push; landing 20261015T154158-L-160393 (interface); batch 20261015T154146; modules 1; new nodes 0; change records: coord/changes/site-inverse-image-tensor-imports.md)
 - 15:41 L: merged deliver/D2/Sheaf.AlgebraicGeometry.TruncationExchangeAbutment (stage 3; reviewer PASS; first push; landing 20261015T154159-L-160491 (proof); batch 20261015T154146; modules 1; new nodes 0)
+- 15:41 L: merged deliver/D2/Sheaf.CategoryTheory.ExactFunctorDerivedFunctor (stage 3; reviewer PASS; first push; landing 20261015T154159-L-160588 (proof); batch 20261015T154146; modules 1; new nodes 0)
