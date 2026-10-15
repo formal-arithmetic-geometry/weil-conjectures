@@ -19,43 +19,42 @@
  },
  "proof": [
   {
-   "text": "The augmentation equation ha identifies the sheafified degree-zero augmentation after restriction. Extend the resulting complex square degreewise, using the zero terms in positive cochain degrees. The coefficient equation hb identifies the normalized coefficient sheaf isomorphisms after restriction, by the affine tilde-Gamma unit and counit equations.",
+   "text": "Apply affine tensor-homology naturality using hb and hk, and common K-flat comparison naturality using ha. Compose the two squares using functoriality and associativity; this is the direct associativity calculation in the proof.",
+   "uses": [
+    "new-t3-qcoh-tensor-resolution-chart-homology-naturality",
+    "new-t3-qcoh-tensor-resolution-chart-comparison-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Rewrite the canonical coordinate isomorphisms using their factorization formula.",
+   "uses": [
+    "new-t3-qcoh-tensor-resolution-coordinate-factorization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply naturality of the affine associated-sheaf sections unit and restriction adjunction, implemented by tensorResolutionSection_naturality. The map on coefficient homology is H_n(k) followed by exact restriction-of-scalars homology, so this is the required equation on sections.",
    "uses": [
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The formula hk identifies the sheafified tensor comparison with the tensor of the preceding maps: verify on pure tensors in every chain degree and use tensor extensionality, then pass through the chain-to-cochain extension and the total-tensor isomorphism.",
-   "uses": [
-    "lem-pc-affine-chart-total-tensor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restrict the two normalized tensor zigzags and compare them using a common K-flat roof for their first coefficients and the fixed second resolution F. Both augmentation equations give commuting squares; K-flat tensor invariance makes the zigzag legs quasi-isomorphisms. Homology therefore gives a commuting square after cancelling the invertible legs. Exact tilde homology, the chain-to-cochain homology identification, and affine sections units convert it to the displayed equation. Exact restriction of scalars supplies e. This works for n=0, unbounded K, zero coefficients, identity restrictions and empty affine opens.",
-   "uses": [
-    "lem-pc-open-kflat-tensor-homology-comparison",
-    "new-affine-derived-tilde-homology-comparison",
     "lem-weil-pbc-spec-module-tilde-sections"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "new-t3-qcoh-tensor-resolution-chart-homology-naturality",
+  "new-t3-qcoh-tensor-resolution-chart-comparison-naturality",
+  "new-t3-qcoh-tensor-resolution-coordinate-factorization",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-pc-open-kflat-tensor-homology-comparison",
-  "lem-pc-affine-chart-total-tensor",
-  "new-affine-derived-tilde-homology-comparison"
+  "lem-weil-pbc-spec-module-tilde-sections"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "G2",
-  "date": "2026-10-15",
   "document": "https://stacks.math.columbia.edu/tag/08DX",
-  "place": "Attach existing T3 proof obligation; its original docstring describes the naturality squares. Expanded here without relying on its two currently nonexistent helper names."
+  "place": "Tag 08DX(2), affine derived tensor calculation; Tag 08DV, associated sheaf of a K-flat complex; Tag 06YT, comparison using a common K-flat resolution; Tag 01I9, functorial associated-sheaf pullback. Attach the chartwise comparison already stated in QCohOrdinaryTensorResolutionCoordinatesFamily.",
+  "by": "worker",
+  "group": "T3",
+  "date": "2026-10-15"
  },
  "mathlib_searches": [
   {
@@ -132,11 +131,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "X-294f5",
-  "group": "G2",
+  "reviewer": "X-a207d",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261015T052200-L-1265930",
+  "landing": "20261015T065832-L-2599491",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean/DAG files matched the stated node changes; compilation passed, forced adaptation was necessary and minimal, and importer checks passed."
+  "note": "independent Codex review: Matched all four Lean signatures to their nodes, verified the unchanged existing signature and permitted DAG edits; all four delivered modules and direct importer QCohOrdinaryTensorResolutionCoordinates compile cleanly; axioms match the two documented remaining holes."
  }
 }

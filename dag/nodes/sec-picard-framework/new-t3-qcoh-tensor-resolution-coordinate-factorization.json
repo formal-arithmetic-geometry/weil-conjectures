@@ -1,0 +1,118 @@
+{
+ "id": "new-t3-qcoh-tensor-resolution-coordinate-factorization",
+ "kind": "lemma",
+ "title": "Factorization formula for the canonical coordinate sheaf isomorphism",
+ "statement": "Let Y be a scheme [def-pc-scheme], M,N quasi-coherent O_Y-modules [pqf-def-coherent, def-weil-sheaf-of-modules-category], U an affine open, MA,NA modules over Gamma(Y,U) with specified section equivalences sM,sN, P a projective resolution of MA, and K,F K-flat cochain complexes with quasi-isomorphisms q:K -> M[0], s:F -> N[0] [def-pc-kflat-complex, def-pc-quasi-iso-modules]. For n in N, the canonical coordinate sheaf isomorphism is the composite of the chart tensor-homology isomorphism, the chart K-flat comparison isomorphism, and inverse normalized restriction-homology isomorphism. This is equality of the specified isomorphisms, not just existence.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), affine derived tensor calculation; Tag 08DV, associated sheaf of a K-flat complex; Tag 06YT, comparison using a common K-flat resolution; Tag 01I9, functorial associated-sheaf pullback. Attach the chartwise comparison already stated in QCohOrdinaryTensorResolutionCoordinatesFamily."
+ },
+ "proof": [
+  {
+   "text": "Unfold tensorResolutionCoordinateSheafIso. Its defining expression is exactly the displayed composite of three isomorphisms; reflexivity proves the equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX(2), affine derived tensor calculation; Tag 08DV, associated sheaf of a K-flat complex; Tag 06YT, comparison using a common K-flat resolution; Tag 01I9, functorial associated-sheaf pullback. Attach the chartwise comparison already stated in QCohOrdinaryTensorResolutionCoordinatesFamily.",
+  "by": "worker",
+  "group": "T3",
+  "date": "2026-10-15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of affine associated sheaf tensor projective resolution homology comparison with a K-flat resolution",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.Presentation.map_π_eq, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality_assoc, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left, SheafOfModules.ιFree_mapFree_inv_assoc, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm",
+   "date": "2026-10-15",
+   "verdict": "No matching affine tensor coordinate naturality theorem; use the existing functorial homology API."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap\", \"mapHomologyIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "No matching affine tensor coordinate naturality theorem; use the existing functorial homology API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorResolution.*naturality",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "No matching affine tensor coordinate naturality theorem; use the existing functorial homology API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of homology of associated sheaf tensor complexes under affine restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCohTensorResolutionCoordinateSectionsNaturality",
+  "date": "2026-10-15",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine self-Tor computation: normalized ordinary affine tensor-resolution coordinates and the basic-restriction comparison square; the naturality substep of new-j1-qcoh-ordinary-tensor-resolution-coordinates-witness.",
+   "via": [
+    "new-j1-qcoh-ordinary-tensor-resolution-coordinates-witness",
+    "new-j1-qcoh-ordinary-tensor-resolution-coordinates",
+    "new-p1-derived-self-tor-affine-coordinates",
+    "new-b3-derived-self-tor-chosen-affine-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QCohTensorResolutionCoordinateFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCohTensorResolutionCoordinateFactorization.lean",
+  "declaration": "AlgebraicGeometry.tensorResolutionCoordinateSheafIso_factors",
+  "statement": "theorem tensorResolutionCoordinateSheafIso_factors\n    (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent]\n    (U : Y.affineOpens) (MA NA : ModuleCat.{u} (Γ(Y, U.1) : Type u))\n    (sM : MA ≃ₗ[Γ(Y, U.1)] M.val.obj (op U.1))\n    (sN : NA ≃ₗ[Γ(Y, U.1)] N.val.obj (op U.1))\n    (P : ProjectiveResolution MA) (K F : CochainComplex Y.Modules ℤ)\n    (q : K ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj M)\n    (s : F ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj N)\n    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K)\n    (hF : CochainComplex.IsKFlat (R := Y.sheaf) F)\n    (hq : QuasiIso q) (hs : QuasiIso s) (n : ℕ) :\n    tensorResolutionCoordinateSheafIso Y M N U MA NA sM sN P K F q s hK hF hq hs n =\n      (tensorResolutionChartHomologyIso N U MA NA sN P n ≪≫\n        tensorResolutionChartComparisonIso Y M N U MA sM P K F q s hK hF hq hs (-(n : ℤ)) ≪≫\n        (tensorResolutionNormalizedRestrictHomologyIso U.2.fromSpec K\n          ((CochainComplex.singleFunctor Y.Modules 0).obj N) (-(n : ℤ))).symm)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-a207d",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261015T065832-L-2599491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-a207d",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261015T065832-L-2599491",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean signatures to their nodes, verified the unchanged existing signature and permitted DAG edits; all four delivered modules and direct importer QCohOrdinaryTensorResolutionCoordinates compile cleanly; axioms match the two documented remaining holes."
+ }
+}
