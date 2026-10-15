@@ -15,84 +15,82 @@
  ],
  "proof": [
   {
-   "text": "Put $S(A)=A[0]$ and let $\\mathcal H$ be the standard heart in $D(\\mathcal A)$. By [def-sbc-standard-tstructure-derived-category], its objects have cohomology only in degree zero. The objects $S(A)$ belong to it by direct computation of single-complex cohomology. By [lem-sf-derived-concentrated-single] every object of $\\mathcal H$ is isomorphic to some $S(A)$. The Hom maps are bijective by [lem-weil-pbc-derived-single-fully-faithful]. Thus $S:\\mathcal A\\to\\mathcal H$ is an additive equivalence. It preserves and reflects short exact sequences: the kernel and cokernel universal properties transfer along these Hom bijections and the essential surjectivity. We may consequently use the heart short-exact-sequence criterion on sequences from $\\mathcal A$.",
+   "text": "The single functor is fully faithful. For n < 0, Hom(S(X), S(Y)[n]) vanishes by standard t-structure orthogonality: S(X) is <= 0 and S(Y)[n] is >= -n > 0. This is the private Lean lemma single_shift_negative_zero.",
    "uses": [
     "def-sbc-standard-tstructure-derived-category",
-    "lem-sf-derived-concentrated-single",
     "lem-weil-pbc-derived-single-fully-faithful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Example 1.2.1; Example 1.3.2(i); standard heart identification; also Stacks 06XS(2)"
-   }
+   "elementary": false
   },
   {
-   "text": "For a short exact sequence $E=(0\\to P\\xrightarrow uB\\xrightarrow vQ\\to0)$, apply [lem-weil-pbc-complex-ses-triangle] to the corresponding degreewise short exact sequence of single complexes. It gives a distinguished triangle $S(P)\\xrightarrow{S(u)}S(B)\\xrightarrow{S(v)}S(Q)\\xrightarrow{\\delta_E}S(P)[1]$. By [def-pc-ext] its last arrow is an element of $\\operatorname{Ext}^1_{\\mathcal A}(Q,P)$. For an endpoint-identity isomorphism of extensions the naturality equation of the same node is $\\mathrm{id}_{S(P)[1]}\\delta_E=\\delta_{E'}\\mathrm{id}_{S(Q)}$. Hence the assignment descends to the stated isomorphism classes.",
+   "text": "For a distinguished triangle S(P) -> S(B) -> S(Q) -> S(P)[1], the negative-shift vanishing and full faithfulness identify the first map as a kernel of the second, and the second as a cokernel of the first. Indeed Hom exactness gives existence of each factorization; uniqueness follows by applying the preceding negative-shift vanishing to the adjacent shifted endpoint. Mathlib AbelianSubcategory.isLimitKernelForkOfDistTriang and isColimitCokernelCoforkOfDistTriang package exactly these universal properties. The first arrow is mono, the second epi, and the kernel property gives exactness. This is shortExact_of_single_triangle, so no equivalence with an independently constructed abelian heart is needed.",
    "uses": [
-    "lem-weil-pbc-complex-ses-triangle",
-    "def-pc-ext"
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "def-sbc-standard-tstructure-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0152, lemma-derived-canonical-delta-functor; Tag 06XV"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\xi:S(Q)\\to S(P)[1]$. TR1 and inverse rotation (TR2) of [def-weil-triangulated-category] give a distinguished triangle $S(P)\\to M\\to S(Q)\\xrightarrow{\\xi}S(P)[1]$. More explicitly, complete $\\xi$ to $S(Q)\\xrightarrow{\\xi}S(P)[1]\\xrightarrow aC\\xrightarrow bS(Q)[1]$. Two inverse rotations give $S(P)\\xrightarrow{-a[-1]}C[-1]\\xrightarrow{-b[-1]}S(Q)\\xrightarrow{\\xi}S(P)[1]$, so take $M=C[-1]$; its last arrow is exactly $\\xi$. Both endpoints lie in the standard heart, so its extension closure, clause (2) of [lem-weil-heart-short-exact-triangles], puts $M$ in that heart. Step 1 identifies $M$ with $S(B)$, and fullness lifts the first two arrows to $u:P\\to B$ and $v:B\\to Q$. Clause (4) of the heart lemma makes this a short exact sequence in the heart, hence in $\\mathcal A$ by step 1. Its canonical boundary from step 2 equals $\\xi$ by the uniqueness assertion in clause (4). This proves surjectivity without assuming enough injectives or projectives.",
+   "text": "For two distinguished triangles with the same single terms and first two maps, TR3 with identities on the first two terms gives c on the third with b;c=b and delta=c;deltaPrime. Hom(-,S(Q)) exactness gives c-id=delta;w. Since S(P)[1] is <= -1 and S(Q) is >= 0, w=0 by orthogonality; thus c=id and the boundaries agree. This is the proved private lemma single_triangle_boundary_unique.",
    "uses": [
     "def-weil-triangulated-category",
-    "lem-weil-heart-short-exact-triangles",
-    "lem-weil-pbc-derived-single-fully-faithful"
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "def-sbc-standard-tstructure-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Sections 1.2.3, 1.3.4 and 1.3.6; Stacks 0145 TR1-TR2; triangulated proof of the conclusion of 06XV"
-   }
+   "elementary": false
   },
   {
-   "text": "Suppose $\\delta_E=\\delta_{E'}$. Rotate the two triangles of step 2 twice, so their first arrows are the common map $S(Q)\\xrightarrow{\\delta_E}S(P)[1]$. TR3 of [def-weil-triangulated-category], with identity maps on these two vertices, completes to a morphism of these rotated triangles. By [lem-sf-triangle-morphism-iso] its remaining component $S(B)[1]\\to S(B')[1]$ is an isomorphism. Writing this component as $t$, the rotated arrows are $-S(u)[1]$ and $-S(v)[1]$. The triangle squares are $t\\circ(-S(u)[1])=-S(u\\prime)[1]$ and $(-S(v\\prime)[1])\\circ t=-S(v)[1]$. Cancelling minus signs and applying $[-1]$ yields $b:S(B)\\xrightarrow{\\sim}S(B')$ with $bS(u)=S(u')$ and $S(v')b=S(v)$. Fullness in [lem-weil-pbc-derived-single-fully-faithful] lifts $b$ and $b^{-1}$ to $h$ and $k$ in $\\mathcal A$; faithfulness applied to their composites gives $kh=\\mathrm{id}$ and $hk=\\mathrm{id}$, and applied to the squares gives $hu=u'$ and $v'h=v$. This is exactly an endpoint-identity isomorphism of extensions, proving injectivity.",
+   "text": "Given an Ext-one class xi, use its derived Hom representative and distinguished_cocone_triangle₂ (TR1 and inverse rotation) to obtain S(P) -> M -> S(Q) with boundary exactly xi.hom. Standard t-structure extension closure (Mathlib isLE₂ and isGE₂, proved from Hom exactness and orthogonality) puts M in degree zero. Concentration gives e:M≅S(B). Lift f;e.hom and e.inv;g through the fully faithful single functor to a and b. Faithfulness and the triangle zero-composite give a;b=0. Transport the triangle along identities and e to single terms. Step 2 makes the lifted complex short exact; its canonical single triangle from the short-exact-complex construction has boundary equal to xi.hom by step 3. Ext.homEquiv injectivity yields h.extClass=xi.",
    "uses": [
+    "def-pc-ext",
+    "def-weil-triangulated-category",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-sf-derived-concentrated-single",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If two short exact complexes have equal Ext classes, their single triangles have equal boundaries by extClass_hom. complete_distinguished_triangle_morphism₂ (TR3 after rotation) completes the identities on the first and third objects to a triangle map. Its middle component is an isomorphism by the two-isomorphisms criterion. The fully faithful single functor lifts this isomorphism to B≅BPrime and faithfulness gives a;e.hom=aPrime and e.hom;bPrime=b. Conversely an endpoint-identity isomorphism defines a morphism of short complexes; extClass_naturality reduces to equality because both endpoint maps are identities.",
+   "uses": [
+    "def-pc-ext",
+    "lem-weil-pbc-complex-ses-triangle",
     "def-weil-triangulated-category",
     "lem-sf-triangle-morphism-iso",
     "lem-weil-pbc-derived-single-fully-faithful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0145 TR2-TR3; Tag 014A, lemma-third-isomorphism-triangle; triangulated proof of the conclusion of 06XV"
-   }
+   "elementary": false
   },
   {
-   "text": "The boundary in step 2 and the canonical cone boundary used by [lem-weil-pbc-exact-functor-ses-triangle-image] both complete the same two maps to distinguished triangles. All three terms belong to the standard heart, so clause (4) of [lem-weil-heart-short-exact-triangles] identifies these boundaries. For an exact additive $F:\\mathcal A\\to\\mathcal B$, use [lem-weil-pbc-exact-functor-ses-triangle-image] on $E$. With its single-complex comparisons $\\varphi_A:D(F)(A[0])\\xrightarrow{\\sim}F(A)[0]$ and shift comparison $c$, it states $\\varphi_P[1]\\circ c_{P[0]}\\circ D(F)(\\delta_E)=\\delta_{F(E)}\\circ\\varphi_Q$. Equivalently $\\delta_{F(E)}=\\varphi_P[1]\\circ c_{P[0]}\\circ D(F)(\\delta_E)\\circ\\varphi_Q^{-1}$, which is precisely the image of the derived Hom class under $D(F)$. Exactness supplies the image short exact sequence; the displayed equation proves the required compatibility, with both endpoint and shift comparisons explicit.",
+   "text": "For every exact additive functor F, apply Mathlib Abelian.Ext.mapExactFunctor_extClass F h. This is the single-triangle exact-functor comparison expressed through Ext.homEquiv and includes the endpoint and shift comparisons. It is precisely the third clause.",
    "uses": [
     "lem-weil-pbc-exact-functor-ses-triangle-image",
-    "lem-weil-heart-short-exact-triangles"
+    "def-pc-ext"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0151 and 0152; exact functors commute with the cone construction"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sbc-standard-tstructure-derived-category",
-  "lem-sf-derived-concentrated-single",
   "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-weil-pbc-complex-ses-triangle",
-  "def-pc-ext",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
   "def-weil-triangulated-category",
-  "lem-weil-heart-short-exact-triangles",
+  "def-pc-ext",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-complex-ses-triangle",
   "lem-sf-triangle-morphism-iso",
   "lem-weil-pbc-exact-functor-ses-triangle-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-  "place": "Triangulated argument using 1.2.3 and 1.3.4--1.3.6; same classification as Stacks 06XV, with exact-functor cone compatibility 0152. The proof is not the roof argument of 06XU."
+  "document": "Mathlib.Algebra.Homology.DerivedCategory.TStructure; Mathlib.CategoryTheory.Triangulated.TStructure.AbelianSubcategory; literature/stacks-project/derived.tex",
+  "place": "C2 stage-3 proof, 2026-10-16: direct standard-t-structure argument using Mathlib kernel/cokernel universal properties, TR1/TR3 and the two-isomorphisms criterion. Same triangulated argument as the original plan (BBD 1.3.4--1.3.6 and Stacks 06XV); exact-functor clause is Mathlib Ext.mapExactFunctor_extClass. Avoids the unrelated FormalSteps attachment and the full abstract-heart theorem."
  },
  "mathlib_searches": [
   {
@@ -261,5 +259,15 @@
   "by": "NE",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-83242",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T175451-L-658071",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signature matches the unchanged node; proof and DAG agree; delivery and sole direct importer Sheaf.Paper.CondensedFinitePresentationDescent compile cleanly; axioms are exactly propext, Classical.choice, Quot.sound."
  }
 }
