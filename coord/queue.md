@@ -18,13 +18,13 @@
 | `Sheaf.AlgebraicGeometry.CondensedCoefficientComplexPresentation` | 3 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
 | `Sheaf.Paper.IntegralFiniteExchangeComparison` | 3 | 1 | proof |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedLfpCoefficientModel` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedLocalPieceHomContinuity` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelAssembly` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 4 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocallyFreeDerivedHom` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarLfpCoverComposition` | 5 | 1 | proof |
