@@ -91,5 +91,23 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-b7e019ae1 (reviewer sub-agent of L); spot-checked: Definition and dependencies are mathematically correct and fully source-checked. Fixed stale uses_not_cited metadata by writing corrected DAG JSON under fixes/dag/nodes/sec-smooth-purity/def-galois-object.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Mathlib.CategoryTheory.Galois.GaloisObjects",
+  "declaration": "CategoryTheory.PreGaloisCategory.IsGalois",
+  "statement": "class IsGalois {C : Type u₁} [Category.{u₂, u₁} C] [GaloisCategory C] (X : C) : Prop\n    extends IsConnected X",
+  "branch": "mathlib",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Use IsGalois specialized to P : Y.FiniteEtale with Y connected. Import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic for the GaloisCategory instance and isGalois_iff; import FundamentalGroup.Connected for isConnected_of_connectedSpace and connectedSpace_of_isConnected. Together these identify IsGalois P exactly with connectedness of P.obj.left and bijective evaluation of Aut P on each geometric fibre point. A geometric point is Spec Ω → Y with Field Ω and IsAlgClosed Ω; the existing fibre functor and characterization apply through the IsSepClosed instance. No duplicate definition or chosen point parameter is needed in this intrinsic predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-36d2a8af3",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, sources, dependency declarations, exact signature, all clauses, edge cases, universes, and pilot gates. Independent server-only probe compiled cleanly in 1.8 seconds. No delivery faults or fixes required; no repository modified."
  }
 }
