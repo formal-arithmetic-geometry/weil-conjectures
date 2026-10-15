@@ -177,5 +177,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-b1c76cff7 (reviewer sub-agent of L); spot-checked: Read the item, report, cited DAG statements, master blueprint, unit/chapter route, and Stacks Tag 09AH in full. Verified arbitrary ring-sheaf coefficients, inverse-image base-change maps, quasi-compact open-complement hypotheses, the localization sequence, zero-end-term argument, edge cases, searches, route, and duplicate/cycle checks. No new nodes or repairs are needed; review.md records the detailed checks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenClosedDetection",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingModule_isZero_of_open_closed",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenClosedDetection.lean",
+  "statement": "theorem proEtaleRingModule_isZero_of_open_closed {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] (hU : Set.range j = (Set.range i)ᶜ) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (Ri : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) (Rj : Sheaf (ProEt.topology U) CommRingCat.{u + 1}) (ci : (proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R ≅ Ri) (cj : (proEtaleSheafInverseImage j CommRingCat.{u + 1}).obj R ≅ Rj) (F : proEtaleRingModules X R) (hj : IsZero ((proEtaleRingModulePullback j R Rj cj).obj F)) (hi : IsZero ((proEtaleRingModulePullback i R Ri ci).obj F)) : IsZero F",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-95028528a",
+  "group": "NE",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statement, dependencies, sources, docstrings, universes, edge cases, and exact signature. Per-file scompile.py reproduction passed without warnings. No delivery errors or fixes; branch unchanged."
  }
 }
