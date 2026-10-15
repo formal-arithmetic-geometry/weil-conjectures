@@ -24,48 +24,45 @@
  ],
  "proof": [
   {
-   "text": "Write $H=H_A(\\overline C)$ and $\\epsilon=\\epsilon_{\\overline C}$. By [lem-exc-closed-lift-filtered] the small indexing category in [def-exc-ind-etale-closed-lift] is filtered; its objects are etale algebras of finite presentation. Thus its colimit $H$ is ind-etale by [def-weil-pbc-ind-etale-algebra]. Reduction is base change along $A\\to A/I$: the quotient $D/ID$ has the universal property of $(A/I)\\otimes_A D$, because algebra maps to an $A/I$-algebra are exactly the $A$-algebra maps killing $ID$. The base-change clause of [lem-weil-pbc-ind-etale-stability] therefore makes reduction a functor on ind-etale algebras. For any $f:D\\to H$, the composite $\\epsilon f$ kills $ID$: for $a\\in I$ and $d\\in D$, its value on $ad$ is the image of $a$ in $\\overline C$ times $\\epsilon f(d)$, hence zero. The quotient universal property gives the specified map $\\beta_{D,\\overline C}(f):D/ID\\to\\overline C$.",
+   "text": "Reduction of D is ind-etale by the base-change clause of [lem-weil-pbc-ind-etale-stability], using the proved source-library RingHom.IndEtale.isStableUnderBaseChange directly rather than importing the bundled Sheaf theorem. Identify D/ID as the pushout of A -> D along A -> A/I using [lem-weil-pbc-tensor-quotient-base-change], implemented by the proved source-library CommRingCat.isPushout_quotient. For every A-algebra map q:D -> C, q kills ID because the A-algebra structure on C factors through A/I. Ideal.Quotient.lift therefore gives an A/I-algebra map D/ID -> C. Conversely precompose such a map with the quotient map; quotient representatives show these constructions are inverse. This constructs quotientHomEquiv without any lifting hypothesis on C.",
    "uses": [
-    "lem-exc-closed-lift-filtered",
-    "def-exc-ind-etale-closed-lift",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-ind-etale-stability"
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-tensor-quotient-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
+    "place": "Tag 097P, lemma-lift-ind-etale, final two proof paragraphs; uniqueness expanded using finite presentability and colimit universal properties"
    }
   },
   {
-   "text": "First assume $D$ is etale of finite presentation. Given $u:D/ID\\to\\overline C$, let $q:D\\to\\overline C$ be its composite with the quotient. By [def-exc-ind-etale-closed-lift], $(D,q)$ is an indexing object and its coprojection gives a map $\\ell(q):D\\to H$ with $\\epsilon\\ell(q)=q$. In the small presentation model, choose a presentation isomorphism $s:P\\xrightarrow{\\sim}D$ supplied by [def-weil-pbc-finitely-presented-algebra] and define $\\ell(q)=\\iota_{(P,qs)}s^{-1}$. For another presentation $t:Q\\xrightarrow{\\sim}D$, the compatible isomorphism $t^{-1}s:P\\to Q$ is an indexing morphism, so the cocone relation gives $\\iota_{(P,qs)}=\\iota_{(Q,qt)}t^{-1}s$. Thus the map is independent of the chosen presentation and $\\beta(\\ell(q))=u$.",
+   "text": "For any indexing object X of [def-exc-ind-etale-closed-lift], its underlying algebra is etale and hence finitely presented [def-weil-pbc-finitely-presented-algebra]. Use the factorization principle [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] in its categorical form: CommAlgCat.finitePresentation_le_isFinitelyPresentable and IsFinitelyPresentable.exists_hom_of_isColimit. Filteredness [lem-exc-closed-lift-filtered] supplies its filtered colimit hypothesis. A map f:X.alg -> H factors as the coprojection of Y after g:X.alg -> Y.alg. If epsilon f=X.toC, the retained-map identity gives Y.toC g=X.toC, so g is an indexing morphism X -> Y. The cocone relation identifies f with the coprojection at X. This is index_hom_unique and avoids passing to underlying rings or elements.",
    "uses": [
     "def-exc-ind-etale-closed-lift",
-    "def-weil-pbc-finitely-presented-algebra"
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-exc-closed-lift-filtered"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
+    "place": "Tag 097P, lemma-lift-ind-etale, final two proof paragraphs; uniqueness expanded using finite presentability and colimit universal properties"
    }
   },
   {
-   "text": "For uniqueness in the finite-presentation case, suppose $f:D\\to H$ satisfies $\\beta(f)=u$, equivalently $\\epsilon f=q$. By [lem-exc-closed-lift-filtered] the indexing category is small and filtered, and clause (1) of [lem-weil-pbc-filtered-colimit-algebras-elementwise] says that its algebra colimit is also a colimit of the underlying rings. Apply [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] with $R=A$, this diagram, $\\Lambda=H$, and $g=fs:P\\to H$ for the presentation $s:P\\xrightarrow{\\sim}D$ of [def-weil-pbc-finitely-presented-algebra]. It gives an object $(B,q_B)$ and an $A$-algebra map $h:P\\to B$ such that $fs=\\iota_{(B,q_B)}h$. Applying $\\epsilon$ gives $qs=q_Bh$. Hence $h:(P,qs)\\to(B,q_B)$ is a morphism of [def-exc-ind-etale-closed-lift], and the cocone relation gives $fs=\\iota_{(P,qs)}$. Therefore $f=\\ell(q)$, proving the finite-presentation bijection.",
+   "text": "If D is etale over A, choose a polynomial quotient presentation e:P -> D using [def-weil-pbc-finitely-presented-algebra]. For q:D -> C, form the indexing object (P,q e) of [def-exc-ind-etale-closed-lift]. Compose its coprojection with e inverse to obtain f:D -> H, and the retained-map identity gives epsilon f=q. If another f has this property, step 2 identifies f e with that same coprojection, so f equals the constructed lift after composition with e inverse. Thus etale_lift_unique proves existence and uniqueness; the proof itself proves independence of all presentation choices.",
    "uses": [
-    "lem-exc-closed-lift-filtered",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
     "def-weil-pbc-finitely-presented-algebra",
     "def-exc-ind-etale-closed-lift"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
+    "place": "Tag 097P, lemma-lift-ind-etale, final two proof paragraphs; uniqueness expanded using finite presentability and colimit universal properties"
    }
   },
   {
-   "text": "For arbitrary ind-etale $D$, choose a small filtered colimit presentation $D=\\varinjlim_a D_a$ with etale finite-presentation terms and coprojections $k_a$ using [def-weil-pbc-ind-etale-algebra]. Given $u:D/ID\\to\\overline C$, put $q(d)=u([d])$ and $q_a=qk_a$. Steps 2 and 3 give the unique lift $\\ell_a:D_a\\to H$ with $\\epsilon\\ell_a=q_a$. For every transition $r:D_a\\to D_b$, both $\\ell_br$ and $\\ell_a$ compose with $\\epsilon$ to $q_a$, so step 3 gives $\\ell_br=\\ell_a$. The universal property of [def-weil-pbc-category-colimit] now gives a unique $\\ell:D\\to H$ with $\\ell k_a=\\ell_a$. The maps $\\epsilon\\ell$ and $q$ agree after every $k_a$, hence are equal by the same universal property, so $\\beta(\\ell)=u$. Any other lift agrees with $\\ell$ after every $k_a$ by step 3, and is therefore equal to $\\ell$. This proves the full bijection without assuming that a map out of an arbitrary ind-etale algebra factors through one finite stage.",
+   "text": "For ind-etale D choose its filtered colimit presentation P by etale algebras [def-weil-pbc-ind-etale-algebra]. For each stage choose the unique lift of q composed with its coprojection, using step 3; this choice is determined uniquely by that equation. Uniqueness makes these stage lifts compatible with every transition, so [def-weil-pbc-category-colimit] descends their cocone to f:D -> H. Colimit hom-extensionality proves epsilon f=q. Any other lift agrees at every stage by step 3 and is equal by the same hom-extensionality. This is indEtale_lift_unique, so postcomposition with epsilon is bijective. Compose its Equiv.ofBijective with quotientHomEquiv of step 1 to construct closedHomEquiv. Its value on a quotient representative is definitionally epsilon(f(d)).",
    "uses": [
     "def-weil-pbc-ind-etale-algebra",
     "def-weil-pbc-category-colimit"
@@ -73,48 +70,38 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
+    "place": "Tag 097P, lemma-lift-ind-etale, final two proof paragraphs; uniqueness expanded using finite presentability and colimit universal properties"
    }
   },
   {
-   "text": "For an $A$-algebra map $r:D'\\to D$, the formula on quotient classes gives $\\beta_{D',\\overline C}(fr)=\\beta_{D,\\overline C}(f)\\overline r$, where $\\overline r([d'])=[r(d')]$. For $\\phi:\\overline C\\to\\overline C'$, the component formula for $H_A(\\phi)$ in [def-exc-ind-etale-closed-lift] gives $\\epsilon_{\\overline C'}H_A(\\phi)\\iota_{(B,q)}=\\phi q=\\phi\\epsilon_{\\overline C}\\iota_{(B,q)}$. The universal property of [def-weil-pbc-category-colimit] gives $\\epsilon_{\\overline C'}H_A(\\phi)=\\phi\\epsilon_{\\overline C}$, and consequently $\\beta_{D,\\overline C'}(H_A(\\phi)f)=\\phi\\beta_{D,\\overline C}(f)$. The same component formula gives $H_A(\\mathrm{id})=\\mathrm{id}$ and $H_A(\\psi\\phi)=H_A(\\psi)H_A(\\phi)$ by equality on all coprojections. Thus $H_A$ is a functor and the bijections are natural in both variables; their inverses are natural too by uniqueness in step 4.",
+   "text": "For phi:C -> C-prime, use iota_map and iota_toAlgHom from [def-exc-ind-etale-closed-lift] to prove epsilon-prime H(phi)=phi epsilon on every coprojection, hence globally by [def-weil-pbc-category-colimit]. The representative formula of step 4 gives contravariant naturality by substitution and covariant naturality by evaluating this equality at f(d). Finally H is ind-etale by [lem-exc-closed-lift-filtered] and [def-weil-pbc-ind-etale-algebra]. Apply step 4 uniqueness with source H to deduce preservation of identities and composition from the retained-map equality. These facts and step 1 establish every conjunct of exists_natural_homEquiv. No assertion about the counit being an isomorphism occurs in this theorem, so lem-exc-closed-lift-reduction is unnecessary.",
    "uses": [
     "def-exc-ind-etale-closed-lift",
-    "def-weil-pbc-category-colimit"
+    "def-weil-pbc-category-colimit",
+    "lem-exc-closed-lift-filtered",
+    "def-weil-pbc-ind-etale-algebra"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
-   }
-  },
-  {
-   "text": "An adjunction between these categories means a natural family of bijections $\\operatorname{Hom}_{A/I}(D/ID,\\overline C)\\cong\\operatorname{Hom}_A(D,H_A(\\overline C))$. The inverses of the bijections proved above give exactly this family, so reduction is left adjoint to $H_A$. Its counit at $\\overline C$ is the image of $\\mathrm{id}_{H_A(\\overline C)}$ under $\\beta$, namely $[h]\\mapsto\\epsilon_{\\overline C}(h)$; this is precisely the specified reduction map, an isomorphism by [lem-exc-closed-lift-reduction]. No full-faithfulness theorem is needed for the claimed adjunction.",
-   "uses": [
-    "lem-exc-closed-lift-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097P, lemma-lift-ind-etale, proof: Hom equality and final adjunction paragraphs; uniqueness expanded using Algebra Tags 00QO and 07C3"
+    "place": "Tag 097P, lemma-lift-ind-etale, final two proof paragraphs; uniqueness expanded using finite presentability and colimit universal properties"
    }
   }
  ],
  "proof_deps": [
-  "lem-exc-closed-lift-filtered",
-  "def-exc-ind-etale-closed-lift",
-  "def-weil-pbc-ind-etale-algebra",
   "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "def-exc-ind-etale-closed-lift",
   "def-weil-pbc-finitely-presented-algebra",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
   "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-  "def-weil-pbc-category-colimit",
-  "lem-exc-closed-lift-reduction"
+  "lem-exc-closed-lift-filtered",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 097P, lemma-lift-ind-etale, final two proof paragraphs; expanded uniqueness via algebra.tex Tags 00QO (lemma-characterize-finite-presentation) and 07C3 (lemma-when-colimit)"
+  "place": "E3 stage-3 Lean proof, 2026-10-16, following Tag 097P final two proof paragraphs; categorical finite presentability replaces underlying-ring factorization, and the counit-isomorphism detour is pruned. Quotient base change uses the proved source-library pushout theorem. Second reading uses the direct source-library ind-etale base-change theorem and prunes the bundled stability import."
  },
  "mathlib_searches": [
   {
@@ -234,5 +221,15 @@
   "group": "NS",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, sources, dependencies, all statement clauses, edge cases, docstrings and verbatim signature. Server-only compilation reproduced cleanly. No H1–H13 findings; no repository or branch changes made by this reviewer."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T181522-L-748290",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

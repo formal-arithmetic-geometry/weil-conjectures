@@ -8,13 +8,7 @@ module
 public import Sheaf.RingTheory.ProEtale.ClosedLiftMap
 public import Sheaf.RingTheory.IndPrincipalZariski
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Sheaf.RingTheory.IndEtaleStability
-import Mathlib.Algebra.Category.Ring.FinitePresentation
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import WeilConjectures.RingTheory.ProEtale.ClosedLift
+import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 
 /-! # The closed-lift adjunction on ind-etale algebras
 
@@ -35,6 +29,195 @@ universe u
 open CategoryTheory
 
 namespace Algebra.ClosedLift
+
+-- A finite-presentation source factors through a stage; compatibility is an indexing morphism.
+private theorem index_hom_unique {A C : Type u} [CommRing A] [CommRing C]
+    [Algebra A C] (X : Index A C) (f : X.alg →ₐ[A] ClosedLift A C)
+    (hf : (toAlgHom A C).comp f = X.toC) :
+    f = (Limits.colimit.ι (diagram A C) X).hom := by
+  have : IsFinitelyPresentable.{u} (CommAlgCat.of A X.alg) :=
+    CommAlgCat.finitePresentation_le_isFinitelyPresentable A _
+      (RingHom.finitePresentation_algebraMap.mpr inferInstance)
+  obtain ⟨Y, g, hg⟩ := IsFinitelyPresentable.exists_hom_of_isColimit
+    (Limits.colimit.isColimit (diagram A C)) (CommAlgCat.ofHom f)
+  have hgf : (Limits.colimit.ι (diagram A C) Y).hom.comp g.hom = f :=
+    congrArg CommAlgCat.Hom.hom hg
+  let r : X ⟶ Y := ⟨g.hom, by rw [← ι_toAlgHom Y, AlgHom.comp_assoc, hgf, hf]⟩
+  have hw := Limits.colimit.w (diagram A C) r
+  exact hgf.symm.trans (congrArg CommAlgCat.Hom.hom hw)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem etale_lift_unique {A C D : Type u} [CommRing A] [CommRing C]
+    [CommRing D] [Algebra A C] [Algebra A D] [Algebra.Etale A D]
+    (q : D →ₐ[A] C) : ∃! f : D →ₐ[A] ClosedLift A C, (toAlgHom A C).comp f = q := by
+  obtain ⟨n, J, e, _⟩ := Algebra.FinitePresentation.iff.mp
+    (inferInstance : Algebra.FinitePresentation A D)
+  have he : Algebra.Etale A (MvPolynomial (Fin n) A ⧸ J) :=
+    Algebra.Etale.of_equiv e.symm
+  let X : Index A C := ⟨n, J, he, q.comp e.toAlgHom⟩
+  refine ⟨(Limits.colimit.ι (diagram A C) X).hom.comp e.symm.toAlgHom, ?_, ?_⟩
+  · change (toAlgHom A C).comp
+      ((Limits.colimit.ι (diagram A C) X).hom.comp e.symm.toAlgHom) = q
+    rw [← AlgHom.comp_assoc, ι_toAlgHom]
+    ext d
+    exact congrArg q (e.apply_symm_apply d)
+  · intro f hf
+    have h := index_hom_unique X (f.comp e.toAlgHom) (by
+      rw [← AlgHom.comp_assoc, hf])
+    ext d
+    have hd := DFunLike.congr_fun h (e.symm d)
+    change f (e (e.symm d)) = _ at hd
+    change f d = (Limits.colimit.ι (diagram A C) X).hom (e.symm d)
+    exact (congrArg f (e.apply_symm_apply d)).symm.trans hd
+
+-- Lift each etale stage uniquely, and use uniqueness to make the lifts a cocone.
+private theorem indEtale_lift_unique {A C D : Type u} [CommRing A] [CommRing C]
+    [CommRing D] [Algebra A C] [Algebra A D] [Algebra.IndEtale A D]
+    (q : D →ₐ[A] C) : ∃! f : D →ₐ[A] ClosedLift A C, (toAlgHom A C).comp f = q := by
+  classical
+  obtain ⟨J, _, _, P, hP⟩ := Algebra.IndEtale.exists_colimitPresentation (R := A) (S := D)
+  have (j : J) : Algebra.Etale A (P.diag.obj j) := hP j
+  have h (j : J) := etale_lift_unique (q.comp (P.ι.app j).hom)
+  let l (j : J) := (h j).choose
+  have hl (j : J) : (toAlgHom A C).comp (l j) = q.comp (P.ι.app j).hom :=
+    (h j).choose_spec.1
+  have hu (j : J) (f : P.diag.obj j →ₐ[A] ClosedLift A C)
+      (hf : (toAlgHom A C).comp f = q.comp (P.ι.app j).hom) : f = l j :=
+    (h j).choose_spec.2 f hf
+  let c : Limits.Cocone P.diag :=
+    { pt := CommAlgCat.of A (ClosedLift A C)
+      ι :=
+        { app j := CommAlgCat.ofHom (l j)
+          naturality {i j} r := by
+            apply CommAlgCat.hom_ext
+            change (l j).comp (P.diag.map r).hom = (l i).comp (AlgHom.id A _)
+            rw [AlgHom.comp_id]
+            apply hu
+            rw [← AlgHom.comp_assoc, hl, AlgHom.comp_assoc]
+            exact congrArg (q.comp ·) (congrArg CommAlgCat.Hom.hom (P.cocone.w r)) } }
+  let f : D →ₐ[A] ClosedLift A C := (P.isColimit.desc c).hom
+  have hf (j : J) : f.comp (P.ι.app j).hom = l j :=
+    congrArg CommAlgCat.Hom.hom (P.isColimit.fac c j)
+  have he : (toAlgHom A C).comp f = q := by
+    suffices hh : CommAlgCat.ofHom ((toAlgHom A C).comp f) = CommAlgCat.ofHom q from
+      congrArg CommAlgCat.Hom.hom hh
+    apply P.isColimit.hom_ext
+    intro j
+    apply CommAlgCat.hom_ext
+    change ((toAlgHom A C).comp f).comp (P.ι.app j).hom = q.comp (P.ι.app j).hom
+    rw [AlgHom.comp_assoc, hf, hl]
+  refine ⟨f, he, ?_⟩
+  intro g hg
+  suffices hh : CommAlgCat.ofHom g = CommAlgCat.ofHom f from
+    congrArg CommAlgCat.Hom.hom hh
+  apply P.isColimit.hom_ext
+  intro j
+  apply CommAlgCat.hom_ext
+  change g.comp (P.ι.app j).hom = f.comp (P.ι.app j).hom
+  rw [hf]
+  apply hu
+  rw [← AlgHom.comp_assoc, hg]
+
+private noncomputable def quotientHomEquiv (A : Type u) [CommRing A] (I : Ideal A)
+    (D C : CommAlgCat.{u} A) [Algebra (A ⧸ I) C] [IsScalarTower A (A ⧸ I) C] :
+    (D →ₐ[A] C) ≃ @AlgHom (A ⧸ I) (D ⧸ I.map (algebraMap A D)) C _ _ _
+      (Ideal.Quotient.algebraQuotientOfLEComap Ideal.le_comap_map) _ := by
+  let : Algebra (A ⧸ I) (D ⧸ I.map (algebraMap A D)) :=
+    Ideal.Quotient.algebraQuotientOfLEComap Ideal.le_comap_map
+  let q (f : D →ₐ[A] C) : D ⧸ I.map (algebraMap A D) →ₐ[A ⧸ I] C :=
+    { __ := Ideal.Quotient.lift _ f.toRingHom (by
+        change I.map (algebraMap A D) ≤ RingHom.ker f.toRingHom
+        rw [Ideal.map_le_iff_le_comap]
+        intro a ha
+        change f (algebraMap A D a) = 0
+        rw [f.commutes, IsScalarTower.algebraMap_apply A (A ⧸ I) C,
+          Ideal.Quotient.algebraMap_eq, Ideal.Quotient.eq_zero_iff_mem.mpr ha, map_zero])
+      commutes' := by
+        intro a
+        obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective a
+        exact (f.commutes a).trans (IsScalarTower.algebraMap_apply A (A ⧸ I) C a) }
+  let p (g : D ⧸ I.map (algebraMap A D) →ₐ[A ⧸ I] C) : D →ₐ[A] C :=
+    { __ := g.toRingHom.comp (Ideal.Quotient.mk _)
+      commutes' := by
+        intro a
+        exact (g.commutes (Ideal.Quotient.mk I a)).trans
+          (IsScalarTower.algebraMap_apply A (A ⧸ I) C a).symm }
+  exact
+    { toFun := q
+      invFun := p
+      left_inv f := by ext d; rfl
+      right_inv g := by
+        ext d
+        obtain ⟨d, rfl⟩ := Ideal.Quotient.mk_surjective d
+        rfl }
+
+private noncomputable def closedHomEquiv (A : Type u) [CommRing A] (I : Ideal A)
+    (D C : CommAlgCat.{u} A) [Algebra (A ⧸ I) C] [IsScalarTower A (A ⧸ I) C]
+    [Algebra.IndEtale A D] :
+    (D →ₐ[A] ClosedLift A C) ≃
+      @AlgHom (A ⧸ I) (D ⧸ I.map (algebraMap A D)) C _ _ _
+        (Ideal.Quotient.algebraQuotientOfLEComap Ideal.le_comap_map) _ :=
+  (Equiv.ofBijective (fun f : D →ₐ[A] ClosedLift A C ↦ (toAlgHom A C).comp f)
+    ((Function.bijective_iff_existsUnique _).mpr indEtale_lift_unique)).trans
+      (quotientHomEquiv A I D C)
+
+private theorem closedHomEquiv_apply (A : Type u) [CommRing A] (I : Ideal A)
+    (D C : CommAlgCat.{u} A) [Algebra (A ⧸ I) C] [IsScalarTower A (A ⧸ I) C]
+    [Algebra.IndEtale A D] (f : D →ₐ[A] ClosedLift A C) (d : D) :
+    closedHomEquiv A I D C f (Ideal.Quotient.mk _ d) = toAlgHom A C (f d) := rfl
+
+private theorem toAlgHom_map {A C C' : Type u} [CommRing A] [CommRing C] [CommRing C']
+    [Algebra A C] [Algebra A C'] (φ : C →ₐ[A] C') :
+    (toAlgHom A C').comp (map φ) = φ.comp (toAlgHom A C) := by
+  suffices hh : CommAlgCat.ofHom ((toAlgHom A C').comp (map φ)) =
+      CommAlgCat.ofHom (φ.comp (toAlgHom A C)) from congrArg CommAlgCat.Hom.hom hh
+  apply Limits.colimit.hom_ext
+  intro X
+  apply CommAlgCat.hom_ext
+  change ((toAlgHom A C').comp (map φ)).comp (Limits.colimit.ι (diagram A C) X).hom =
+    (φ.comp (toAlgHom A C)).comp (Limits.colimit.ι (diagram A C) X).hom
+  rw [AlgHom.comp_assoc, ι_map, ι_toAlgHom, AlgHom.comp_assoc, ι_toAlgHom]
+  rfl
+
+private theorem closed_map_id {A C : Type u} [CommRing A] [CommRing C] [Algebra A C] :
+    map (AlgHom.id A C) = AlgHom.id A (ClosedLift A C) := by
+  have h := indEtale_lift_unique (toAlgHom A C)
+  exact ((h.choose_spec.2 _ (by
+      change (toAlgHom A C).comp (map (AlgHom.id A C)) = _
+      rw [toAlgHom_map, AlgHom.id_comp])).trans
+    (h.choose_spec.2 _ (by
+      change (toAlgHom A C).comp (AlgHom.id A (ClosedLift A C)) = _
+      rw [AlgHom.comp_id])).symm)
+
+private theorem closed_map_comp {A C C' C'' : Type u} [CommRing A]
+    [CommRing C] [CommRing C'] [CommRing C'']
+    [Algebra A C] [Algebra A C'] [Algebra A C'']
+    (φ : C →ₐ[A] C') (ψ : C' →ₐ[A] C'') :
+    map (ψ.comp φ) = (map ψ).comp (map φ) := by
+  have h := indEtale_lift_unique ((ψ.comp φ).comp (toAlgHom A C))
+  exact ((h.choose_spec.2 _ (toAlgHom_map _)).trans
+    (h.choose_spec.2 _ (by
+      change (toAlgHom A C'').comp ((map ψ).comp (map φ)) = _
+      rw [← AlgHom.comp_assoc, toAlgHom_map, AlgHom.comp_assoc, toAlgHom_map,
+        ← AlgHom.comp_assoc])).symm)
+
+private theorem quotient_indEtale (A : Type u) [CommRing A] (I : Ideal A)
+    (D : CommAlgCat.{u} A) [Algebra.IndEtale A D] :
+    @Algebra.IndEtale (A ⧸ I) (D ⧸ I.map (algebraMap A D)) _ _
+      (Ideal.Quotient.algebraQuotientOfLEComap Ideal.le_comap_map) := by
+  let : Algebra (A ⧸ I) (D ⧸ I.map (algebraMap A D)) :=
+    Ideal.Quotient.algebraQuotientOfLEComap Ideal.le_comap_map
+  have : IsScalarTower A (A ⧸ I) (D ⧸ I.map (algebraMap A D)) :=
+    IsScalarTower.of_algebraMap_eq' rfl
+  have : Algebra.IsPushout A (A ⧸ I) D (D ⧸ I.map (algebraMap A D)) :=
+    CommRingCat.isPushout_iff_isPushout.mp
+      (CommRingCat.isPushout_quotient (CommRingCat.ofHom (algebraMap A D)) I)
+  have : Algebra.IsPushout A D (A ⧸ I) (D ⧸ I.map (algebraMap A D)) :=
+    (inferInstance : Algebra.IsPushout A (A ⧸ I) D _).symm
+  exact (RingHom.IndEtale.algebraMap_iff _ _).mp
+    (RingHom.IndEtale.isStableUnderBaseChange A D (A ⧸ I)
+      (D ⧸ I.map (algebraMap A D))
+      ((RingHom.IndEtale.algebraMap_iff _ _).mpr inferInstance))
 
 /-- Reduction is left adjoint to the closed lift, expressed as a natural Hom equivalence.
 Source: Stacks Project, Tag 097P, final two proof paragraphs
@@ -100,6 +283,18 @@ theorem exists_natural_homEquiv (A : Type u) [CommRing A] (I : Ideal A) :
         [Algebra.IndEtale (A ⧸ I) C'']
         (φ : C →ₐ[A ⧸ I] C') (ψ : C' →ₐ[A ⧸ I] C''),
         map ((ψ.comp φ).restrictScalars A) =
-          (map (ψ.restrictScalars A)).comp (map (φ.restrictScalars A))) := sorry
+          (map (ψ.restrictScalars A)).comp (map (φ.restrictScalars A))) := by
+  refine ⟨fun D C _ _ _ _ ↦ closedHomEquiv A I D C, ?_⟩
+  intro D C _ _ _ _
+  refine ⟨quotient_indEtale A I D, closedHomEquiv_apply A I D C, ?_, ?_,
+    closed_map_id, ?_⟩
+  · intro D' _ r f d
+    rw [closedHomEquiv_apply, closedHomEquiv_apply]
+    rfl
+  · intro C' _ _ _ φ f d
+    rw [closedHomEquiv_apply, closedHomEquiv_apply]
+    exact DFunLike.congr_fun (toAlgHom_map (φ.restrictScalars A)) (f d)
+  · intro C' C'' _ _ _ _ _ _ φ ψ
+    exact closed_map_comp (φ.restrictScalars A) (ψ.restrictScalars A)
 
 end Algebra.ClosedLift

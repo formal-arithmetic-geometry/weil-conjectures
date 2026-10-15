@@ -15121,3 +15121,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:15 L: merged deliver/D4/Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation (stage 3; reviewer PASS; first push; landing 20261015T181520-L-747932 (proof); batch 20261015T181519; modules 1; new nodes 0)
 - 18:15 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageLeftAdjoint (stage 3; reviewer PASS; first push; landing 20261015T181521-L-748057 (proof); batch 20261015T181519; modules 1; new nodes 0)
 - 18:15 L: merged deliver/E2/Sheaf.Paper.ProEtalePointComponentsMaps (stage 3; reviewer PASS; first push; landing 20261015T181521-L-748175 (proof); batch 20261015T181519; modules 1; new nodes 1)
+- 18:15 L: merged deliver/E3/Sheaf.RingTheory.ProEtale.ClosedLiftAdjunction (stage 3; reviewer PASS; first push; landing 20261015T181522-L-748290 (proof); batch 20261015T181519; modules 1; new nodes 0)
