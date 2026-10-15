@@ -24,7 +24,8 @@
   "def-weil-pbc-proetale-site",
   "def-weil-size-convention",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-simplicial-object"
+  "def-weil-pbc-simplicial-object",
+  "lem-weil-pbc-simplicial-matching-object"
  ],
  "proof": [
   {
@@ -187,5 +188,23 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-ba9c48dd0 (reviewer sub-agent of L); spot-checked: Read the item and all four new nodes in full against Stacks 09A1, 0F4P, 094K, 0DB1/2 and supporting sources. The construction and matching objects over h_W are sound; no duplicate found. Added the missing simplicial-object definition citation and dependency in fixes. Checked master target hypotheses, condensed coefficients, and exchange direction. Concrete checks and inherited DAG-cycle findings are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8300a673d",
+  "group": "NM",
+  "result": "pass",
+  "note": "Checked all statement clauses, dependencies, sources, universes, edge cases, docstrings, sorry-only proof and verbatim signature. Server-only compile passed in 1.4 seconds; no H1–H13 defects found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercover",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.exists_affine_weaklyContractible_hypercover",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAffineAcyclicHypercover.lean",
+  "statement": "theorem exists_affine_weaklyContractible_hypercover (X : Scheme.{u}) (W : X.ProEt) [CompactSpace W.left] [QuasiSeparatedSpace W.left] : ∃ U : SimplicialObject (Over W), (∀ n : ℕ, IsAffine (U _⦋n⦌).left.left) ∧ (∀ (n : ℕ) (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (U _⦋n⦌).left))) ∧ Epi ((topology X).yoneda.map (U _⦋0⦌).hom) ∧ (∃ c : Fan (fun _ : Fin 2 ↦ U _⦋0⦌), Nonempty (IsLimit c) ∧ ∃ μ : U _⦋1⦌ ⟶ c.pt, (∀ i : Fin 2, μ ≫ c.proj i = U.δ i) ∧ Epi ((topology X).yoneda.map μ.left)) ∧ (∀ n : ℕ, ∃ c : Cone (SimplicialObject.matchingBoundaryIndex U n).multicospan, Nonempty (IsLimit c) ∧ ∃ μ : U _⦋n + 2⦌ ⟶ c.pt, (∀ i : Fin (n + 3), μ ≫ c.π.app (WalkingMulticospan.left i) = U.δ i) ∧ Epi ((topology X).yoneda.map μ.left))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
