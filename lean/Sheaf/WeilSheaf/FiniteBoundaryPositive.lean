@@ -8,6 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.LowerShriek
 import Sheaf.Paper.ZeroDimensionalCohomology
 import WeilConjectures.WeilSheaf.Category
+import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 
 @[expose] public section
 

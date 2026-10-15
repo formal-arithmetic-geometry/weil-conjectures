@@ -11,6 +11,7 @@ public import Sheaf.CategoryTheory.FilteredPageTwoModel
 public import Mathlib.Algebra.Homology.Homotopy
 import Sheaf.CategoryTheory.FiniteFiltrationInduction
 import Sheaf.CategoryTheory.FilteredCohomologyImage
+import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
 
 /-!
 # Filtered homotopies and spectral sequences

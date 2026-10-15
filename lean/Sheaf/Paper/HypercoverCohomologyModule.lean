@@ -8,6 +8,7 @@ import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Paper.FiniteSplitHypercoverRefinement
 import Sheaf.Paper.HypercoverFreeResolution
 import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import WeilConjectures.AlgebraicGeometry.HypercoverFreeResolution
 
 @[expose] public section
 

@@ -3,6 +3,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import Mathlib.AlgebraicGeometry.LimitsOver
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.Paper.EtaleFiniteDataDescent
 @[expose] public section
 universe w
 open CategoryTheory CategoryTheory.Limits Opposite

@@ -41,6 +41,7 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Free
 import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
 
 /-!
 # The affine torsion cohomological dimension bound
