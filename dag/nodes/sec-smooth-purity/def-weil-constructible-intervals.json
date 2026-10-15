@@ -3,25 +3,127 @@
  "blueprint": {
   "is": "def-weil-constructible-intervals",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Constructible cohomological intervals",
- "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and a scheme $Y$ on which $\\ell$ is invertible, as well as\nintegers $a,b\\in\\mathbf Z$ with $a\\leq b$. Put $A=A_{E,n}$, and use the\nderived cohomology sheaves [def-weil-derived-cohomology-sheaves] $\\mathcal\nH^r$. Define\n\n$$\nD_c^{[a,b]}(Y,A)=\n\\{K\\in D^b_c(Y,A):\n\\mathcal H^r(K)=0\\text{ for every }\nr\\in\\mathbf Z\\setminus[a,b]\\}.\n$$\n\nHere $D^b_c(Y,A)$ is the bounded category with the finite-torsion\nconstructibility condition [def-weil-finite-torsion-constructibility].",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and a scheme $Y$ on which $\\ell$ is invertible, as well as\nintegers $a,b\\in\\mathbf Z$ with $a\\leq b$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$ with the coefficient convention [def-weil-l-adic-coefficient-extension], and use the\nderived cohomology sheaves [def-weil-derived-cohomology-sheaves] $\\mathcal\nH^r$. Define\n\n$$\nD_c^{[a,b]}(Y,A)=\n\\{K\\in D^b_c(Y,A):\n\\mathcal H^r(K)=0\\text{ for every }\nr\\in\\mathbf Z\\setminus[a,b]\\}.\n$$\n\nHere $D^b_c(Y,A)$ is the bounded category with the finite-torsion\nconstructibility condition [def-weil-finite-torsion-constructibility].\n\nThe interval is the inclusive integer interval $[a,b]=\\{r\\in\\mathbf Z:a\\leq r\\leq b\\}$. Thus the displayed vanishing condition is cohomological amplitude in $[a,b]$ [def-weil-derived-category-cohomological-support]. We regard $D_c^{[a,b]}(Y,A)$ as the full subcategory on these objects [def-sf-induced-category]: for any two such objects $K,L$ its morphisms are exactly $\\operatorname{Hom}_{D^b_c(Y,A)}(K,L)$, with the inherited identities and composition.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-constructible-intervals.md",
   "place": "node def-weil-constructible-intervals, order 1466"
  },
  "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-finite-torsion-constructibility"
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-category-cohomological-support",
+  "def-sf-induced-category"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of bounded constructible complexes of pro-etale sheaves of finite torsion modules whose cohomology vanishes outside an integer interval",
+   "results": "DerivedCategory.IsGE, IsLE and isGE_iff/isLE_iff (Mathlib/Algebra/Homology/DerivedCategory/TStructure); bounds only, no intrinsic constructibility.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "Topology.IsConstructible and IsLocallyConstructible and their set-theoretic lemmas (Mathlib.Topology.Constructible), not constructible sheaves or complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleIn|boundedConstructible|constructible.*(complex|sheaf)",
+   "results": "Four mentions of constructible sets in Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean:27,33,798,799; no sheaf or complex definition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible derived complexes with cohomology concentrated in a specified interval",
+   "results": "Internal Server Error; LeanSearch unavailable.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define a full subcategory by requiring constructible cohomology sheaves and vanishing homology below a and above b",
+   "results": "DerivedCategory.IsGE, IsLE, TStructure.t, isGE_Q_obj_iff, isLE_Q_obj_iff and exists_iso_Q_obj_of_isGE_of_isLE; general interval machinery only.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsGE, DerivedCategory.IsLE",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE and exists_iso_Q_obj_of_isGE_of_isLE (Mathlib.Algebra.Homology.DerivedCategory.TStructure); no constructibility condition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def (IsGE|IsLE)|theorem is(GE|LE)_iff|def FullSubcategory",
+   "results": "No hits for this pattern in Algebra/Homology/DerivedCategory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isGE_iff|isLE_iff|class IsGE|class IsLE",
+   "results": "The file-scoped grep returns line-prefixed hits (the wrapper treats the leading number as a file): isGE_iff at TStructure.lean:90, isLE_iff at :107; source read at lines 74-118. These characterize vanishing outside the bounds but do not impose constructibility.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersection of an object property with lower and upper cohomology bounds defining a full subcategory of a derived category",
+   "results": "DerivedCategory.IsGE, IsLE, TStructure.t, instIsLEObjCochainComplexIntQOfIsLE, exists_iso_Q_obj_of_isGE_of_isLE, isLE_Q_obj_iff, instIsGEObjCochainComplexIntQOfIsGE and isGE_Q_obj_iff. General cohomological bounds only; none includes intrinsic finite-stratification constructibility.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyConcentratedIn|constructibleHomology|constructibleIn|FullSubcategory",
+   "results": "25 returned hits, mostly uses of ObjectProperty.FullSubcategory; includes Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:15. This broad output is capped, so it does not establish absence of constructibility. Read FullSubcategory.lean:24-95: generic object-property category and inherited morphisms, already covered by def-sf-induced-category.",
+   "date": "2026-10-16",
+   "verdict": "no exact match among returned hits"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|homologyConcentratedIn",
+   "results": "No hits in Algebra/Homology/DerivedCategory. The IsGE/IsLE general bounds were read independently in TStructure.lean:82-118; no intrinsic constructibility predicate is supplied by those bounds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Object property of derived objects with finite locally constant cohomology on a finite stratification, restricted to degrees in Set.Icc a b",
+   "results": "Eight hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE (TStructure.lean:180-188, independently read), exists_iso_Q_obj_of_isGE/of_isLE, isGE_Q_obj_iff and related cohomological bound results. No returned declaration imposes intrinsic finite-stratification constructibility.",
+   "date": "2026-10-16",
+   "verdict": "no exact match among returned hits"
+  },
+  {
+   "tool": "grep",
+   "query": "constructib|stratif|locallyConstant",
+   "results": "No hits in Mathlib/Algebra/Homology/DerivedCategory. This scoped search does not by itself establish absence elsewhere.",
+   "date": "2026-10-16",
+   "verdict": "no match in searched directory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FullSubcategory\"",
+   "results": "CategoryTheory.ObjectProperty.FullSubcategory and category/morphism declarations; read Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:24-105. Generic full-subcategory machinery is already represented by def-sf-induced-category; no intrinsic constructibility predicate.",
+   "date": "2026-10-16",
+   "verdict": "no exact match for item; generic construction already represented"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +145,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-weil-constructible-intervals",
+  "worker": "stage1",
+  "summary": "Read the original definition and intrinsic finite-torsion constructibility definition from the local literature archive; preserved the hypotheses and the inclusive interval condition. Made the coefficient quotient, cohomological amplitude and full-subcategory interpretation explicit, reusing existing definition nodes and Mathlib leaves. No new nodes or proof obligations arise from this definition. Tagged slopmaster2 candidates are not exact attachments: the etale candidate uses another site, while the pro-etale candidate defines bounded constructibility by etale origin rather than the intrinsic finite-stratification predicate used here. Searched Mathlib in two phrasings; only generic bounds and constructible subsets occurred; LeanSearch was unavailable.",
+  "blueprint": "Realizes the entire definition def-weil-constructible-intervals (order 1466), its coefficient convention and displayed set of objects; this is a notion within sk-def-sf-operations, not that unit's key node. No proof route or unit realization changes."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-7ca6498be",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-7ca6498be (reviewer sub-agent of L); spot-checked: Read the item, packet/report, required stage and coordination documents, exact blueprint sources, every cited dependency, and relevant Mathlib definitions. The statement preserves all hypotheses and the inclusive cohomological interval; coefficient quotient, cohomology, constructibility, amplitude, and inherited full-subcategory interpretations are correct. No proof steps or new nodes exist, searches and route metadata are valid, edge cases pass, and no base-change morphism is present to verify. Review written to review.md; no Lean/build/compiler actions performed."
+ }
 }
