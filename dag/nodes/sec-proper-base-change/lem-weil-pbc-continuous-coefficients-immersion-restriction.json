@@ -33,7 +33,8 @@
   "def-weil-pbc-constant-sheaf",
   "pqf-def-locnoeth",
   "def-weil-pbc-quasi-compact-scheme",
-  "def-pur-sheaf-inverse-limit"
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
  ],
  "proof": [
   {
@@ -232,5 +233,56 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientImmersionRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.continuousCoefficientImmersionRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.continuousMapPresheafCommRing",
+   "AlgebraicGeometry.Scheme.continuousMapPresheafCommRing_isSheaf",
+   "AlgebraicGeometry.Scheme.continuousCoefficientSheaf",
+   "AlgebraicGeometry.Scheme.coefficientExtensionNormedField",
+   "AlgebraicGeometry.Scheme.integralCoefficientSheaf",
+   "AlgebraicGeometry.Scheme.rationalCoefficientSheaf",
+   "AlgebraicGeometry.Scheme.finiteCoefficientRing",
+   "AlgebraicGeometry.Scheme.finiteCoefficientRingMap",
+   "AlgebraicGeometry.Scheme.finiteCoefficientTower_map_id",
+   "AlgebraicGeometry.Scheme.finiteCoefficientTower_map_comp",
+   "AlgebraicGeometry.Scheme.finiteCoefficientTower",
+   "AlgebraicGeometry.Scheme.finiteCoefficientLimit",
+   "AlgebraicGeometry.Scheme.continuousMapRestrictionRingHom",
+   "AlgebraicGeometry.Scheme.localizedContinuousMapRestriction",
+   "AlgebraicGeometry.Scheme.localizedContinuousMap_map_id",
+   "AlgebraicGeometry.Scheme.localizedContinuousMap_map_comp",
+   "AlgebraicGeometry.Scheme.localizedContinuousMapPresheaf",
+   "AlgebraicGeometry.Scheme.localizedContinuousCoefficientSheaf",
+   "AlgebraicGeometry.Scheme.integralCoefficientLocalization",
+   "AlgebraicGeometry.Scheme.finiteContinuousCoefficientSheaf",
+   "AlgebraicGeometry.Scheme.continuousCoefficientValue",
+   "AlgebraicGeometry.Scheme.integralCoefficientValue",
+   "AlgebraicGeometry.Scheme.rationalCoefficientValue",
+   "AlgebraicGeometry.Scheme.finiteContinuousCoefficientValue",
+   "AlgebraicGeometry.Scheme.continuousCoefficientRestrictionNormalized",
+   "AlgebraicGeometry.Scheme.integralCoefficientRestrictionNormalized",
+   "AlgebraicGeometry.Scheme.rationalCoefficientRestrictionNormalized",
+   "AlgebraicGeometry.Scheme.integralRationalCoefficientNormalized",
+   "AlgebraicGeometry.Scheme.integralCoefficientLocalizationNormalized",
+   "AlgebraicGeometry.Scheme.continuousCoefficientImmersionRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientImmersionRestriction.lean",
+  "statement": "theorem continuousCoefficientImmersionRestriction (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) [AlgebraicGeometry.IsLocallyNoetherian X] [CompactSpace X] {Z : Scheme.{u}} (h : Z ⟶ X) [AlgebraicGeometry.IsImmersion h] : ∃ (i : integralCoefficientSheaf l X E ≅ finiteCoefficientLimit l X E) (b : integralCoefficientLocalization l X E ≅ rationalCoefficientSheaf l X E) (cA : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj (integralCoefficientSheaf l X E) ≅ integralCoefficientSheaf l Z E) (cE : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj (rationalCoefficientSheaf l X E) ≅ rationalCoefficientSheaf l Z E), (∀ n : ℕ, ∃ q : (CategoryTheory.constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj (finiteCoefficientRing l E n) ≅ finiteContinuousCoefficientSheaf l X E n, (∀ (U : X.ProEtᵒᵖ) (a : finiteCoefficientRing l E n) (x : U.unop.left), finiteContinuousCoefficientValue l E X n U (q.hom.hom.app U ((CategoryTheory.toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj (finiteCoefficientRing l E n))).app U a)) x = a) ∧ (∀ (U : X.ProEtᵒᵖ) (s : (integralCoefficientSheaf l X E).obj.obj U) (x : U.unop.left), (finiteContinuousCoefficientValue l E X n U ((i.hom ≫ CategoryTheory.Limits.limit.π (finiteCoefficientTower l X E) (Opposite.op n) ≫ q.hom).hom.app U s) x).down = Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) (integralCoefficientValue l E X U s x))) ∧ integralCoefficientLocalizationNormalized l E X b.hom ∧ integralCoefficientRestrictionNormalized l E h cA.hom ∧ rationalCoefficientRestrictionNormalized l E h cE.hom ∧ (∃ (aX : integralCoefficientSheaf l X E ⟶ rationalCoefficientSheaf l X E) (aZ : integralCoefficientSheaf l Z E ⟶ rationalCoefficientSheaf l Z E), integralRationalCoefficientNormalized l E X aX ∧ integralRationalCoefficientNormalized l E Z aZ ∧ (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map aX ≫ cE.hom = cA.hom ≫ aZ) ∧ (∀ (W : Scheme.{u}) (k : W ⟶ Z) [AlgebraicGeometry.IsImmersion k], ∃ (dA : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj (integralCoefficientSheaf l Z E) ≅ integralCoefficientSheaf l W E) (dE : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj (rationalCoefficientSheaf l Z E) ≅ rationalCoefficientSheaf l W E) (eA : (proEtaleSheafInverseImage (k ≫ h) CommRingCat.{u + 1}).obj (integralCoefficientSheaf l X E) ≅ integralCoefficientSheaf l W E) (eE : (proEtaleSheafInverseImage (k ≫ h) CommRingCat.{u + 1}).obj (rationalCoefficientSheaf l X E) ≅ rationalCoefficientSheaf l W E), integralCoefficientRestrictionNormalized l E k dA.hom ∧ rationalCoefficientRestrictionNormalized l E k dE.hom ∧ integralCoefficientRestrictionNormalized l E (k ≫ h) eA.hom ∧ rationalCoefficientRestrictionNormalized l E (k ≫ h) eE.hom ∧ eA.hom = (proEtaleRingInverseImageComp k h).hom.app (integralCoefficientSheaf l X E) ≫ (proEtaleSheafInverseImage k CommRingCat.{u + 1}).map cA.hom ≫ dA.hom ∧ eE.hom = (proEtaleRingInverseImageComp k h).hom.app (rationalCoefficientSheaf l X E) ≫ (proEtaleSheafInverseImage k CommRingCat.{u + 1}).map cE.hom ≫ dE.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Second reading: canonical maps are characterized on sections, the coefficient square and composition are explicit equations; no natural-language statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-744f26a18",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Reviewed the full packet, node, dependencies, source references, declarations, report, edge cases, universes, canonical restriction/localization formulas, and docstrings. Reproduced scompile.py successfully in sandbox and library modes with no diagnostics; no repairs needed."
  }
 }
