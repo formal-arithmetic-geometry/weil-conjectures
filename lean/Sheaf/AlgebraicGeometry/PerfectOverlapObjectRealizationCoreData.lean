@@ -81,6 +81,50 @@ noncomputable def perfectOverlapDerivedPullbackTransport
     eqToIso (congrArg (fun f ↦ derivedPullback f) h) ≪≫
       (perfectHomComposition m d.inv).symm
 
+attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverModuleAbelian
+
+/-- The derived equivalence between the localized module site and its open scheme. -/
+@[irreducible] noncomputable def perfectOverlapOpenSiteDerivedEquiv
+    (X : Scheme.{u}) (W : X.Opens)
+    [∀ T : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u}
+      ((moduleRings X.toRingedSpace).over W))] :
+    DerivedCategory (SheafOfModules.{u}
+      ((moduleRings X.toRingedSpace).over W)) ≌ schemeDerivedCategory W.toScheme := by
+  let e : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W) ≌
+      SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) :=
+    Scheme.Modules.overEquiv W
+  letI : e.functor.IsEquivalence := e.isEquivalence_functor
+  letI : e.inverse.IsEquivalence := e.isEquivalence_inverse
+  letI : e.functor.Additive := Functor.additive_of_preserves_binary_products _
+  letI : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
+  exact e.mapDerivedCategory
+
+/-- The natural comparison after returning from the open site to its scheme.
+The site counit removes the inverse/direct equivalence pair. The resulting two
+pullback compositions agree by the given geometric square. -/
+noncomputable def perfectOverlapNaturalComparisonFromGeometry
+    {X Z A B : Scheme.{u}} (W : X.Opens)
+    [∀ T : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u}
+      ((moduleRings X.toRingedSpace).over W))]
+    (r : W.toScheme ⟶ Z) (e : W.toScheme ≅ A) (d : Z ≅ B)
+    (m : A ⟶ B) (h : e.inv ≫ r = m ≫ d.inv) :
+    (derivedPullback r ⋙ (perfectOverlapOpenSiteDerivedEquiv X W).inverse) ⋙
+      ((perfectOverlapOpenSiteDerivedEquiv X W).functor ⋙
+        derivedPullback e.inv) ≅
+      derivedPullback d.inv ⋙ derivedPullback m := by
+  let site := perfectOverlapOpenSiteDerivedEquiv X W
+  let cancel := site.counitIso
+  exact Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (derivedPullback r) (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerLeft (derivedPullback r)
+      (Functor.isoWhiskerRight cancel (derivedPullback e.inv)) ≪≫
+    Functor.isoWhiskerLeft (derivedPullback r) (Functor.leftUnitor _) ≪≫
+    perfectOverlapDerivedPullbackTransport r e d m h
+
 /-- Geometric object comparisons and their natural compatibility with apex pullback.
 The transition functors and their fixed conjugation formula are recorded explicitly;
 the Hom pin will be derived from naturality, rather than included as a field.
