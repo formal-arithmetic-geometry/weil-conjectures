@@ -1,0 +1,158 @@
+{
+ "id": "new-j1-qcoh-ordinary-tensor-resolution-comparison-independence",
+ "kind": "statement",
+ "title": "Independence of affine ordinary tensor resolution comparison maps",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], and let $M,N$ be quasi-coherent $\\mathcal O_Y$-modules [pqf-def-coherent, def-weil-sheaf-of-modules-category]. For each affine open $U$ set $A_U=\\Gamma(Y,U)$, choose $A_U$-modules $MA_U,NA_U$ and $A_U$-linear equivalences $sM_U:MA_U\\simeq\\Gamma(U,M)$ and $sN_U:NA_U\\simeq\\Gamma(U,N)$, and choose a projective resolution $P_U\\to MA_U$ [def-weil-pbc-projective-module, def-weil-pbc-module-chain-complex-homology]. Fix a K-flat cochain complex $K$ and a quasi-isomorphism $q:K\\to M[0]$ [def-pc-cochain-complex-modules, def-pc-kflat-complex, def-pc-quasi-iso-modules]. For $n\\ge0$ set $Q=H^{-n}(\\operatorname{Tot}(K\\otimes N[0]))$ [def-pc-tensor-complex-sheaves]. Suppose $c_U:H_n(P_U\\otimes_{A_U}NA_U)\\simeq\\Gamma(U,Q)$ are $A_U$-linear equivalences. Assume that for every inclusion $V\\subseteq U$ of affine opens such that $V=D(f)$ for some $f\\in A_U$, with restriction $\\varphi:A_U\\to A_V$, there exist a $\\varphi$-semilinear map $b:NA_U\\to NA_V$, a chain map $a:P_U\\to\\operatorname{Res}_\\varphi(P_V)$, and a chain map $k:P_U\\otimes_{A_U}NA_U\\to\\operatorname{Res}_\\varphi(P_V\\otimes_{A_V}NA_V)$ satisfying $sM_V(\\pi_Va_0x)=\\operatorname{res}_M(sM_U(\\pi_Ux))$, $sN_V(by)=\\operatorname{res}_N(sN_Uy)$, $k_j(x\\otimes y)=a_j(x)\\otimes b(y)$, and $\\operatorname{res}_Q(c_Uz)=c_V(e(H_n(k)(z)))$ for every $z$. Here $\\pi_U$ and $\\pi_V$ are the augmentations, and $e:H_n(\\operatorname{Res}_\\varphi(P_V\\otimes_{A_V}NA_V))\\simeq\\operatorname{Res}_\\varphi H_n(P_V\\otimes_{A_V}NA_V)$ is the exact restriction-of-scalars homology comparison. Then this last restriction equation holds for every supplied $b,a,k$ satisfying those same augmentation, coefficient and pure-tensor equations, for every such inclusion and every $z$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Tag 00LS(2), algebra.tex, lemma-compare-resolutions: inductive comparison homotopy; projective version proved with the same lifting property, then tensoring its components. Mathlib Homotopy.homologyMap_eq supplies homology invariance."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose the witnessed b0,a0,k0 for the fixed basic inclusion. The two coefficient equations have the same right-hand side. Injectivity of sN_V therefore gives b0=b. Likewise injectivity of sM_V makes pi_V a0_0 = pi_V a_0. These cancellations are written directly in the public theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict the augmented P_V complex along phi. Exactness of restriction of scalars preserves its exact short complexes at degree zero and every positive degree. Subtract the two maps a0 and a. Their degree-zero difference vanishes under the augmentation. Lift it through d_1 by projectivity of (P_U)_0. At step j subtract the previously constructed homotopy component composed with d_j; the chain-map and preceding homotopy equations imply that the remainder lands in ker(d_j). Exactness and projectivity of (P_U)_j lift it through d_(j+1). The local augmented_lift_homotopy helper implements this induction using ShortComplex.Exact.liftFromProjective and Homotopy.mkInductive. The restricted target terms need not be projective. This is the argument of Tag 00LS(2) with projectivity in place of freeness.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each homotopy component H_jl use TensorProduct.map to define x tensor y -> H_jl(x) tensor b(y), viewed as an A_U-linear map into restriction of scalars. Both factors are phi-semilinear, so the map is balanced. Its vanishing outside the homotopy degree follows from H.zero and zero tensor y=0. On pure tensors, the differential identity reduces to H.comm followed by (x+xprime) tensor y=x tensor y+xprime tensor y. TensorProduct.ext extends the equality to all elements. Thus the local tensor_resolution_lift_homotopy helper gives a homotopy k0~k, completely proved from Mathlib. The differential calculation uses Mathlib Homotopy.prevD_chainComplex directly; the duplicate local prevD_chain helper was removed in the repair.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Homotopy.homologyMap_eq gives H_n(k0)=H_n(k). Substitute this equality in the witnessed naturality equation. The same restriction-of-scalars homology comparison e and the same coordinate c_V occur on both sides, so the required equation follows immediately.",
+   "uses": [
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F4",
+  "date": "2026-10-15",
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Tag 00LS(2); generalizes the fully proved private induction and quotient tensor calculation in Sheaf.Algebra.Homology.QuotientTensorResolutionLiftHomotopy to arbitrary semilinear coefficient maps. No unproved theorem used. Repair of the duplicate-helper return: use Mathlib Homotopy.prevD_chainComplex directly, already available through the existing imports, rather than restating the chain-complex differential identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "liftHomotopy|homotopy.*lift|tensor.*homotopy",
+   "results": "5 hits: Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean",
+   "date": "2026-10-15",
+   "verdict": "Supporting Mathlib projective-resolution homotopy API; the semilinear tensor comparison is proved locally."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two lifts of the same map between modules to projective resolutions are homotopic and remain homotopic after tensoring with a semilinear coefficient map",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.liftHomotopy, CategoryTheory.ProjectiveResolution.liftCompHomotopy, CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc, CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne, CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne_comp, CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc_comp, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero, CategoryTheory.ProjectiveResolution.liftHomotopyZero",
+   "date": "2026-10-15",
+   "verdict": "Supporting Mathlib projective-resolution homotopy API; the semilinear tensor comparison is proved locally."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two augmented chain maps from a projective resolution to an exact resolution are chain homotopic",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftHomotopy\"",
+   "results": "12 hits: CochainComplex.mappingCone.liftHomotopy, CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp, CategoryTheory.ProjectiveResolution.liftHomotopyZero, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp_assoc, CategoryTheory.ProjectiveResolution.liftHomotopy, CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc",
+   "date": "2026-10-15",
+   "verdict": "Supporting Mathlib projective-resolution homotopy API; the semilinear tensor comparison is proved locally."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"prevD_chainComplex\"",
+   "results": "1 hit: Homotopy.prevD_chainComplex in Mathlib.Algebra.Homology.Homotopy; the explicit type agrees with the removed private prevD_chain helper.",
+   "date": "2026-10-15",
+   "verdict": "Use this existing Mathlib theorem directly in the tensor homotopy calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionNaturality",
+  "date": "2026-10-15",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The affine self-Tor calculation: independence of supplied augmented tensor-resolution comparisons in the restriction square, below the ordinary affine coordinate construction.",
+   "via": [
+    "new-j1-qcoh-ordinary-tensor-resolution-coordinates",
+    "new-p1-derived-self-tor-affine-coordinates",
+    "new-b3-derived-self-tor-chosen-affine-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCohOrdinaryTensorResolutionNaturality.lean",
+  "declaration": "AlgebraicGeometry.qcoh_ordinary_tensor_resolution_comparison_independence",
+  "statement": "theorem qcoh_ordinary_tensor_resolution_comparison_independence\n    (Y : Scheme.{u}) (M N : SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n    [M.IsQuasicoherent] [N.IsQuasicoherent]\n    (MA NA : ∀ U : Y.affineOpens, ModuleCat.{u} (Γ(Y, U.1) : Type u))\n    (sM : ∀ U : Y.affineOpens, MA U ≃ₗ[Γ(Y, U.1)] M.val.obj (op U.1))\n    (sN : ∀ U : Y.affineOpens, NA U ≃ₗ[Γ(Y, U.1)] N.val.obj (op U.1))\n    (P : ∀ U : Y.affineOpens, ProjectiveResolution (MA U))\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (q : K ⟶ (CochainComplex.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M)\n    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) (hq : QuasiIso q) (n : ℕ) :\n    letI := SheafOfModules.monoidalCategory Y.sheaf\n    let S := CochainComplex.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let Q := (CochainComplex.mapBifunctor K (S.obj N)\n      (curriedTensor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).homology\n        (-(n : ℤ))\n    ∀ c : ∀ U : Y.affineOpens,\n        ((((tensorRight (NA U)).mapHomologicalComplex (.down ℕ)).obj\n          (P U).complex).homology n) ≃ₗ[Γ(Y, U.1)] Q.val.obj (op U.1),\n      (∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n        (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1),\n        let φ := (Y.presheaf.map (homOfLE h).op).hom\n        let TA := (tensorRight (NA U)).mapHomologicalComplex (.down ℕ)\n        let TC := (tensorRight (NA V)).mapHomologicalComplex (.down ℕ)\n        ∃ (b : NA U →ₛₗ[φ] NA V)\n          (a : (P U).complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n            (.down ℕ)).obj (P V).complex)\n          (k : TA.obj (P U).complex ⟶\n            ((ModuleCat.restrictScalars φ).mapHomologicalComplex (.down ℕ)).obj\n              (TC.obj (P V).complex)),\n          (∀ x : (P U).complex.X 0,\n            sM V ((P V).π.f 0 (a.f 0 x)) =\n              M.val.map (homOfLE h).op (sM U ((P U).π.f 0 x))) ∧\n          (∀ y : NA U, sN V (b y) = N.val.map (homOfLE h).op (sN U y)) ∧\n          (∀ (j : ℕ) (x : (P U).complex.X j) (y : NA U),\n            k.f j (x ⊗ₜ[Γ(Y, U.1)] y) =\n              (show (P V).complex.X j from a.f j x) ⊗ₜ[Γ(Y, V.1)] (b y)) ∧\n          let e := ((TC.obj (P V).complex).sc n).mapHomologyIso\n            (ModuleCat.restrictScalars φ)\n          ∀ x, Q.val.map (homOfLE h).op (c U x) =\n            c V (e.hom (HomologicalComplex.homologyMap k n x))) →\n      ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n        (_hbasic : ∃ f : Γ(Y, U.1), Y.basicOpen f = V.1),\n        let φ := (Y.presheaf.map (homOfLE h).op).hom\n        let TA := (tensorRight (NA U)).mapHomologicalComplex (.down ℕ)\n        let TC := (tensorRight (NA V)).mapHomologicalComplex (.down ℕ)\n        ∀ (b : NA U →ₛₗ[φ] NA V)\n          (a : (P U).complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex\n            (.down ℕ)).obj (P V).complex)\n          (k : TA.obj (P U).complex ⟶\n            ((ModuleCat.restrictScalars φ).mapHomologicalComplex (.down ℕ)).obj\n              (TC.obj (P V).complex)),\n          (∀ x : (P U).complex.X 0,\n            sM V ((P V).π.f 0 (a.f 0 x)) =\n              M.val.map (homOfLE h).op (sM U ((P U).π.f 0 x))) →\n          (∀ y : NA U, sN V (b y) = N.val.map (homOfLE h).op (sN U y)) →\n          (∀ (j : ℕ) (x : (P U).complex.X j) (y : NA U),\n            k.f j (x ⊗ₜ[Γ(Y, U.1)] y) =\n              (show (P V).complex.X j from a.f j x) ⊗ₜ[Γ(Y, V.1)] (b y)) →\n          let e := ((TC.obj (P V).complex).sc n).mapHomologyIso\n            (ModuleCat.restrictScalars φ)\n          ∀ x, Q.val.map (homOfLE h).op (c U x) =\n            c V (e.hom (HomologicalComplex.homologyMap k n x))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T024706-L-3831989",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261015T024706-L-3831989",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
