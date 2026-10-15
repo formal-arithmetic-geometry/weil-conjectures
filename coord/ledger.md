@@ -15187,3 +15187,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:23 L: batch 20261015T202023 dependency take-out
 - 20:37 L: merged deliver/P3/Sheaf.Algebra.Homology.SiteFlatOpcyclesTorCriterion (stage 3; reviewer PASS; first push; landing 20261015T203757-L-1608376 (proof); batch 20261015T203756; modules 1; new nodes 0)
 - 20:50 L: returned deliver/E2/Sheaf.CategoryTheory.ModulePullbackTensorIsoE (reviewer RETURN: (reviewer X-a2b58, head a2b58316d) E2: Replace `module_pullback_tensor_iso_tail` and node `lem-weil-pbc-ringed-topoi-mod)
+- 20:50 L: returned deliver/A3/Sheaf.Paper.CondensedQbarExchangeEquality (reviewer RETURN: (the landing tools, head 0fafe0747) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
