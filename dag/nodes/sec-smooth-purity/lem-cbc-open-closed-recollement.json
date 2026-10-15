@@ -204,5 +204,23 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-67af5730b (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. Stacks 095L, 0152 and 015F support the specified étale triangle and connecting-map naturality. Checked localization, coefficient hypotheses, edge cases and DAG duplicates; no cycles or new nodes. Accepted all three proposed tool uses. No repairs; detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenClosedRecollement",
+  "declaration": "AlgebraicGeometry.Etale.exists_functorial_distTriang_openClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenClosedRecollement.lean",
+  "statement": "theorem exists_functorial_distTriang_openClosed (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i] (hij : Set.range i.base = (Set.range j.base)ᶜ) : ∃ δ : ∀ K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), (lowerStar (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.obj ((upperStar (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.obj K) ⟶ ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.obj ((upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.obj K))⟦(1 : ℤ)⟧, (∀ K, Triangle.mk ((derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus (ModuleCat.{u + 1} Λ) j).counit.app K) ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlusAdjunction.unit.app K) (δ K) ∈ distTriang _) ∧ (∀ (K K' : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (f : K ⟶ K'), (lowerStar (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.map ((upperStar (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.map f) ≫ δ K' = δ K ≫ (shiftFunctor _ (1 : ℤ)).map ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.map ((upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.map f)))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-72d6c2708",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all six statement dependencies, sources, exact declarations, naturality, edge cases, and maintainer gates. Server-only compilation reproduced successfully with no diagnostics. No findings or fixes; no repository mutations performed."
  }
 }
