@@ -1,6 +1,6 @@
 # Work queue
 
-51 items; claim with `tools/claim.py next <group> [--stage N]`.
+50 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,12 +8,12 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (51)
+## Stage 3: modules to prove (50)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `Sheaf.CategoryTheory.SiteCoveringsCommonRefinement` | 4 | 0 | repair |
-| `Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp` | 1 | 2 | proof |
+| `Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp` | 1 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 5 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedConstructibleSerre` | 3 | 2 | proof |
@@ -46,7 +46,6 @@
 | `Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageLeftAdjoint` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits` | 6 | 1 | proof |
-| `Sheaf.CategoryTheory.KInjectiveTotalDerived` | 6 | 1 | proof |
 | `Sheaf.NumberTheory.Padics.ExtensionIntegersDvr` | 6 | 1 | proof |
 | `Sheaf.Paper.PointLanAffineEvaluation` | 6 | 1 | proof |
 | `Sheaf.Paper.ProEtalePointComponentsMaps` | 6 | 1 | proof |
@@ -68,4 +67,4 @@ Also listed above and claimable: 1 modules whose proof uses a node that has no L
 
 | module | distance to a target | sorry |
 |---|---|---|
-| `Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp` | 1 | 2 |
+| `Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp` | 1 | 1 |
