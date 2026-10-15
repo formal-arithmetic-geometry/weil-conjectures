@@ -14,24 +14,61 @@
  ],
  "proof": [
   {
-   "text": "Apply the pre-derived adjunction theorem at each pair of complexes; essential constancy and the derived-functor comparison properties identify the supplied maps with the canonical maps, and bifunctoriality assembles the resulting equivalences.",
+   "text": "For the pro denominator system at X, apply lem-pur-left-derived-defined-pointwise-kan-bridge to obtain a limit cone pi on (QX downarrow Q), with its supplied denominator legs. Apply any functor H to the retraction and common-stage equations of the essential-constancy witness. These equations give an essential-constancy witness for F followed by H. Apply the same bridge again to obtain pi-prime. For an arbitrary structured arrow choose a right fraction: naturality expresses its leg as the denominator leg followed by the image of the numerator, so pi-prime equals H applied to pi. Thus H preserves this limit.",
    "uses": [
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "def-pc-essentially-constant-ind-diagram",
-    "def-pc-essentially-constant-pro-diagram"
+    "def-pc-essentially-constant-pro-diagram",
+    "lem-pur-left-derived-defined-pointwise-kan-bridge",
+    "lem-pc-right-fraction-representation"
    ],
    "elementary": false
+  },
+  {
+   "text": "Dually construct the ind-system colimit on (Q downarrow QX). For a costructured arrow represented by a left fraction (f,s), define its leg to be F(f) followed by p_s. Equality of left fractions gives a common refinement; cocone naturality and equality of the refined numerators identify the two legs, proving independence and naturality. On inverse denominators the leg is p_s. The denominator cocone is a colimit: its descent to v is r followed by v at the split stage j0; common-stage factorization proves the leg equations, and r followed by p_j0 equal to the identity proves uniqueness. Restrict any costructured-arrow cocone to inverse denominators and descend there. Each fraction numerator gives a morphism to its inverse denominator, proving every leg equation and uniqueness on the whole comma diagram. Apply H to p and r and to their equations and repeat this construction. Fraction naturality identifies the new cocone with H of the old cocone. Thus H preserves the comma colimit.",
+   "uses": [
+    "def-pc-essentially-constant-ind-diagram",
+    "lem-pc-left-localization-fraction-representation",
+    "lem-pc-left-localization-fraction-equality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For quasi-isomorphisms in the two homotopy categories, lem-pc-quasi-isomorphisms-multiplicative-system supplies both calculus-of-fractions instances and the localization hypotheses needed above. Every localization functor is essentially surjective. Transfer the pointwise Kan extensions at QX to every localized object along the chosen preimage isomorphisms. Mathlib uniqueness of Kan extensions identifies any given Kan extension with the pointwise one. The preservation results in Steps 1 and 2 therefore prove PreservesRightKanExtension and PreservesLeftKanExtension for arbitrary H. Specialize H to RF and LG to get the two composite derived-functor properties required by Adjunction.derived.",
+   "uses": [
+    "def-pc-essentially-constant-ind-diagram",
+    "def-pc-essentially-constant-pro-diagram",
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply CategoryTheory.Adjunction.derived to the homotopy adjunction, the given comparison maps alpha and beta, their derived-functor properties, and the two composite properties of Step 3. This constructs d : LG left adjoint to RF with exactly the given functors and comparison maps.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the adjunction constructed in Step 4, its unit is definitionally Adjunction.derivedη. Mathlib Adjunction.derivedη_fac_app (Derived/Adjunction.lean, lines 102-108) gives unit_M followed by RF(alpha_M) = Q(unit_M) followed by beta_GM. Postcompose with RF(Q(f)); naturality of beta rewrites beta_GM followed by RF(Q(f)) as Q(F(f)) followed by beta_K. Functoriality of Q and the ordinary adjunction unit formula give exactly the displayed Hom-equivalence formula. This is a direct three-line application of the Mathlib unit-factorization equation, naturality, and functoriality; it does not use the counit clause of lem-sc-derived-adjunction-from-underived.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-pre-derived-adjoint-functors-general",
+  "def-pc-essentially-constant-pro-diagram",
+  "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "lem-pc-right-fraction-representation",
   "def-pc-essentially-constant-ind-diagram",
-  "def-pc-essentially-constant-pro-diagram"
+  "lem-pc-left-localization-fraction-representation",
+  "lem-pc-left-localization-fraction-equality",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-sc-derived-adjunction-from-underived"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Definition 05S9 and Lemma 09T5"
+  "document": "literature/stacks-project/categories.tex; literature/stacks-project/derived.tex; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+  "place": "Definition 05PU, Definition 05S9 and Lemma 05SA: explicit fraction and split-cone proof of absoluteness; Adjunction.derived and derivedη_fac_app for the adjunction and its normalization (alternative proof of 09T5)"
  },
  "mathlib_searches": [
   {
@@ -120,13 +157,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-15",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T194109-L-454392",
-  "kind": "interface",
+  "landing": "20261015T211846-L-1947334",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
