@@ -263,5 +263,28 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-1e0992838 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired one C1/C4 citation gap by citing the existing module base-change construction and theorem and verifying its transpose; corrected JSON and review.md are written. Exactness, boundedness, naturality, identity and both pasting directions check out. No target weakened or coefficient comparison assumed. Two pre-existing dependency cycles are documented.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-deabfb7d4",
+  "group": "NH",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, source clauses, canonical maps, both pasting laws, universes, edge cases, docstrings and signature. Immutable module compiled cleanly through scompile.py. No findings; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.derivedExtensionZeroBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.extensionZeroBaseChangeDerivedPlusIso",
+   "AlgebraicGeometry.Etale.extensionZeroCompDerivedPlusIso",
+   "AlgebraicGeometry.Etale.derivedExtensionZeroBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Etale/DerivedExtensionZeroBaseChange.lean",
+  "statement": "theorem derivedExtensionZeroBaseChange [Finite Λ] : (∀ {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'} {j : U ⟶ X} {g : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback gU j' j g), (∀ K : _root_.DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsIso ((extensionZeroBaseChangeDerivedPlusIso Λ sq).hom.app K)) ∧ (∀ (K L : _root_.DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (t : K ⟶ L), (((j)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙ ((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus).map t ≫ (extensionZeroBaseChangeDerivedPlusIso Λ sq).hom.app L = (extensionZeroBaseChangeDerivedPlusIso Λ sq).hom.app K ≫ (((gU)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙ ((j')_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus).map t)) ∧ (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (K : _root_.DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))), (extensionZeroBaseChangeDerivedPlusIso Λ (IsPullback.id_horiz j)).hom.app K ≫ ((j)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map ((upperStarIdDerivedPlus (ModuleCat.{u + 1} Λ) U).hom.app K) = (upperStarIdDerivedPlus (ModuleCat.{u + 1} Λ) X).hom.app (((j)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K)) ∧ (∀ {U' U X' X U'' X'' : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'} {j : U ⟶ X} {g : X' ⟶ X} {hU : U'' ⟶ U'} {j'' : U'' ⟶ X''} {h : X'' ⟶ X'} [IsOpenImmersion j] [IsOpenImmersion j'] [IsOpenImmersion j''] (sq : IsPullback gU j' j g) (sq' : IsPullback hU j'' j' h) (K : _root_.DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))), (extensionZeroBaseChangeDerivedPlusIso Λ (sq'.paste_horiz sq)).hom.app K = (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) h g).hom.app (((j)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K) ≫ ((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map ((extensionZeroBaseChangeDerivedPlusIso Λ sq).hom.app K) ≫ (extensionZeroBaseChangeDerivedPlusIso Λ sq').hom.app (((gU)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K) ≫ ((j'')_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map ((upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) hU gU).inv.app K)) ∧ (∀ {V' V U' U X' X : Scheme.{u}} {gV : V' ⟶ V} {k' : V' ⟶ U'} {k : V ⟶ U} {gU : U' ⟶ U} {j' : U' ⟶ X'} {j : U ⟶ X} {g : X' ⟶ X} [IsOpenImmersion k] [IsOpenImmersion k'] [IsOpenImmersion j] [IsOpenImmersion j'] (sqk : IsPullback gV k' k gU) (sqj : IsPullback gU j' j g) (K : _root_.DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))), (extensionZeroBaseChangeDerivedPlusIso Λ (sqk.paste_vert sqj)).hom.app K = ((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map ((extensionZeroCompDerivedPlusIso Λ k j).inv.app K) ≫ (extensionZeroBaseChangeDerivedPlusIso Λ sqj).hom.app (((k)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K) ≫ ((j')_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map ((extensionZeroBaseChangeDerivedPlusIso Λ sqk).hom.app K) ≫ (extensionZeroCompDerivedPlusIso Λ k' j').hom.app (((gV)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj K))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-15",
+  "existing": false
  }
 }
