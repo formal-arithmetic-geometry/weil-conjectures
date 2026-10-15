@@ -17,9 +17,29 @@
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
   "place": "TwoColimit.lean ExtendScalars, derivedExtendScalarsCompIso; ModuleObjects/ExtendScalars.lean Compatibilities; exact-functor comparison with termwise derivation"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "For condensedCoefficientMap_comp, unfold the coefficient inclusions via their abbreviations and rewrite by coefficientMap_comp and Profinite.padicSubfieldRingObjMap_comp. For condensedCoefficientMap_id, rewrite by Profinite.padicSubfieldRingObjMap_id and coefficientMap_id. These are applications of the existing functoriality identities, valid also for equal coefficient fields.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For condensedCoefficientCompositeExact, use the preceding equality of coefficient maps to form Mod.extendScalarsIsoOfEq. Apply preservesFiniteLimits_of_natIso to its inverse, with the existing CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap instance on the direct inclusion. This is only a transport of that upstream instance, whose proof obligation remains open; it does not prove finite-field flatness anew.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Keep the existing data constructions: condensedCoefficientCompIso is the inverse exact-functor derived-composition comparison followed by derivation of Mod.extendScalarsComp and transport along the coefficient-map equality. The unit derives Mod.extendScalarsId after identity transport and identifies the derived identity. Both shift structures are transported from the exact termwise derived functors along leftDerivedFunctorIsoMapDerivedCategory. No new existence witness or comparison data is chosen.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/CondensedCoefficientComparisons.lean",
+  "place": "Proofs of condensedCoefficientMap_comp, condensedCoefficientMap_id and condensedCoefficientCompositeExact, following their existing docstrings; direct upstream identities in ChangeOfCoefficients.lean and FiniteSubextension.lean, and the exactness transport already used in TwoColimit.lean, derivedExtendScalarsCompIso."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -135,5 +155,15 @@
   "group": "NV",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, dependencies, exact source declarations, universes, edge cases, docstrings, records, and maintainer gates. Both server-only compiles passed without warnings in 28.5 s and 34.7 s. No delivery errors found; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261015T165258-L-417043",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -39,7 +39,7 @@ theorem condensedCoefficientMap_comp
     (h : E ≤ F) (k : F ≤ G) :
     padicSubfieldRingObjMap T ℓ h ≫ padicSubfieldRingObjMap T ℓ k =
       padicSubfieldRingObjMap T ℓ (h.trans k) := by
-  sorry
+  rw [← coefficientMap_comp, ← Profinite.padicSubfieldRingObjMap_comp]
 
 /-- Identity coefficient inclusion.
 Source: Compatibility.lean, RingObj
@@ -49,7 +49,8 @@ identity on the point, and `coefficientMap_id` preserves that identity. -/
 theorem condensedCoefficientMap_id
     (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) :
     padicSubfieldRingObjMap T ℓ (le_refl E) = 𝟙 _ := by
-  sorry
+  change coefficientMap (Profinite.padicSubfieldRingObjMap ℓ (le_refl E)) T = _
+  rw [Profinite.padicSubfieldRingObjMap_id, coefficientMap_id]
 
 /-- Exactness of the composite finite coefficient extension.
 Source: TwoColimit.lean, ExtendScalars
@@ -63,7 +64,8 @@ theorem condensedCoefficientCompositeExact
     PreservesFiniteLimits
       (Mod.extendScalars (padicSubfieldRingObjMap T ℓ h ≫
         padicSubfieldRingObjMap T ℓ k)) := by
-  sorry
+  exact preservesFiniteLimits_of_natIso
+    (Mod.extendScalarsIsoOfEq (condensedCoefficientMap_comp T ℓ h k)).symm
 
 attribute [instance] condensedCoefficientCompositeExact
 
