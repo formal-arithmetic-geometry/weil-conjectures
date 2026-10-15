@@ -8,9 +8,6 @@ module
 public import Mathlib.CategoryTheory.Sites.ConcreteSheafification
 public import Mathlib.CategoryTheory.Sites.Hypercover.Zero
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.CategoryTheory.SiteCoveringsCommonRefinement
-import Sheaf.Paper.SiteCoveringMorphismsSameH0Map
-import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-! # The plus construction is a presheaf
 
@@ -25,6 +22,60 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory.GrothendieckTopology
+
+private theorem meq_map {C : Type u} [SmallCategory C]
+    {K : GrothendieckTopology C} {P : Cᵒᵖ ⥤ Type (max u w)}
+    {U : C} {S : K.Cover U} (x : Meq P S) (I : S.Arrow)
+    {V : C} (f : V ⟶ I.Y) :
+    P.map f.op (x I) = x (I.precomp f) := by
+  have h := (x.condition (Cover.Relation.mk' (I.precompRelation f))).symm
+  change P.map f.op (x I) = P.map (𝟙 V).op (x (I.precomp f)) at h
+  simpa using h
+
+private theorem meq_map_eq {C : Type u} [SmallCategory C]
+    {K : GrothendieckTopology C} {P : Cᵒᵖ ⥤ Type (max u w)}
+    {U : C} {S : K.Cover U} (x : Meq P S) (I : S.Arrow)
+    {V : C} (f : V ⟶ I.Y) (g : V ⟶ U) (hg : S g) (h : f ≫ I.f = g) :
+    P.map f.op (x I) = x ⟨V, g, hg⟩ :=
+  (meq_map x I f).trans (x.congr_apply h _)
+
+private theorem meq_ext_on_generators {C : Type u} [SmallCategory C]
+    {K : GrothendieckTopology C} {P : Cᵒᵖ ⥤ Type (max u w)}
+    {U : C} (E : PreZeroHypercover.{max u w} U) (hE : E.sieve₀ ∈ K U)
+    (x y : Meq P ⟨E.sieve₀, hE⟩)
+    (h : ∀ i, x ⟨E.X i, E.f i, E.sieve₀_f i⟩ =
+      y ⟨E.X i, E.f i, E.sieve₀_f i⟩) : x = y := by
+  ext I
+  obtain ⟨i, c, hc⟩ := (Sieve.mem_ofArrows_iff (Y := E.X) (f := E.f) I.f).mp I.hf
+  have hx := meq_map_eq x ⟨E.X i, E.f i, E.sieve₀_f i⟩ c I.f I.hf hc.symm
+  have hy := meq_map_eq y ⟨E.X i, E.f i, E.sieve₀_f i⟩ c I.f I.hf hc.symm
+  exact hx.symm.trans ((congrArg (P.map c.op) (h i)).trans hy)
+
+private theorem exists_family_refinement {C : Type u} [SmallCategory C]
+    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
+    [J.IsStableUnderBaseChange] [J.HasPullbacks] {U : C}
+    (S : J.toGrothendieck.Cover U) :
+    ∃ (E : Precoverage.ZeroHypercover.{max u w} J U), E.sieve₀ ≤ S.1 := by
+  obtain ⟨R, hR, hRS⟩ :=
+    (J.mem_toGrothendieck_iff_of_isStableUnderComposition).mp S.2
+  obtain ⟨E₀, rfl⟩ := Precoverage.mem_iff_exists_zeroHypercover.mp hR
+  let E := E₀.reindex (Equiv.ulift : ULift.{w} E₀.I₀ ≃ E₀.I₀)
+  refine ⟨E, ?_⟩
+  rw [Sieve.generate_le_iff, Presieve.ofArrows_le_iff]
+  intro i
+  exact hRS _ _ ⟨Equiv.ulift i⟩
+
+private theorem exists_cover_hom {C : Type u} [SmallCategory C]
+    {J : Precoverage C} {U : C}
+    (W E : Precoverage.ZeroHypercover.{max u w} J U)
+    (h : W.sieve₀ ≤ E.sieve₀) : Nonempty (W ⟶ E) := by
+  classical
+  have hfac (i : W.I₀) : ∃ (j : E.I₀) (g : W.X i ⟶ E.X j), g ≫ E.f j = W.f i := by
+    obtain ⟨j, g, hg⟩ := (Sieve.mem_ofArrows_iff (Y := E.X) (f := E.f) (W.f i)).mp
+      (h _ (W.sieve₀_f i))
+    exact ⟨j, g, hg.symm⟩
+  choose j g hg using hfac
+  exact ⟨{ s₀ := j, h₀ := g, w₀ := hg }⟩
 
 /-- The plus construction, with representatives on covering families.
 
@@ -42,28 +93,27 @@ Restriction gives a bijection between these matching families and
 arbitrary covering sieve in the statement. The class of the family is `Plus.mk x`,
 as in the definition node's recorded colimit-coprojection convention.
 
-Proof, following the node's six steps:
-1. Pass from the category of covering families to its refinement preorder.
-Morphisms over the same base map induce the same H⁰ map
-(lem-weil-pbc-site-covering-morphisms-same-h0-map). The two diagrams have the
-same cocones (def-weil-pbc-category-colimit). The preorder is filtered: it
-contains the identity cover and has common refinements
-(lem-weil-pbc-site-coverings-common-refinement).
-2. Apply lem-weil-pbc-filtered-colimit-sets-elementwise to obtain
-representatives and the common-refinement equality criterion.
-3. Specialize to the identity covering. Its unique refinement maps restrict
-a section componentwise, giving the stated criterion for equality under θ.
-4. A covering morphism over h factors through the fibre-product covering.
-The cocone identity identifies its pulled-back family with the restriction
-of the original class (def-weil-pbc-site-plus-construction).
-5. Apply that formula to any other fibre-product choices; representatives
-exhaust the colimit, so the maps agree. For h factoring through a member of E,
-apply the same formula to the identity cover of its domain, obtaining θ of
-the restricted component.
-6. Apply the formula to identity morphisms and composites of covering
-morphisms, then use representative existence for the presheaf laws. Apply
-the factorization case to the identity cover to obtain naturality of θ.
-The bundled `plusObj` and `toPlus` already carry these laws. -/
+Proof using the recorded sieve-based plus construction:
+1. Every covering sieve for the generated topology contains an actual covering
+presieve, by `mem_toGrothendieck_iff_of_isStableUnderComposition`. Its associated
+zero hypercover, reindexed by `ULift`, has the required index universe. Apply
+`Plus.exists_rep` and refine its matching family to this generated covering sieve.
+2. Apply `Plus.eq_mk_iff_exists` and refine its witnessing sieve to an actual
+covering family. Sieve inclusions give covering morphisms by choosing a
+factorization of each generator. Compatibility identifies their pulled-back
+components with the matching-family values. Conversely, equality on the
+refining family's generators extends to its generated sieve by compatibility,
+and the same Mathlib equality criterion identifies the classes.
+3. Write images under θ as `Plus.mk (Meq.mk ⊤ _)` and apply the sieve equality
+criterion. Refine its witness to a covering family. Conversely, componentwise
+equality extends to the generated sieve and `Plus.toPlus_mk` identifies the images.
+4. A covering morphism over h gives an inclusion of its domain's generated
+sieve into the pullback of the target's. Use `Plus.res_mk_eq_mk_pullback` and
+`Plus.eq_mk_iff_exists`; compatibility and the given component identities show
+equality after this refinement.
+5. `Plus.toPlus_apply` gives the restriction formula along each covering arrow.
+Compose with c and use naturality of `toPlus`. The bundled `plusObj` and `toPlus`
+already carry the presheaf and natural-transformation laws. -/
 theorem plus_construction_presheaf
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
@@ -101,6 +151,98 @@ theorem plus_construction_presheaf
       (J.toGrothendieck.plusObj P).map (c ≫ E.f i).op (Plus.mk x) =
         (J.toGrothendieck.toPlus P).app (op V)
           (P.map c.op (x ⟨E.X i, E.f i, E.sieve₀_f i⟩))) := by
-  sorry
+  constructor
+  · intro U a
+    obtain ⟨S, y, rfl⟩ := Plus.exists_rep (J := J.toGrothendieck) (P := P) a
+    obtain ⟨E, hTS⟩ := exists_family_refinement.{u, w} J S
+    let T : J.toGrothendieck.Cover U := ⟨E.sieve₀, J.generate_mem_toGrothendieck E.mem₀⟩
+    let e : T ⟶ S := homOfLE hTS
+    refine ⟨E, y.refine e, ?_⟩
+    rw [Plus.eq_mk_iff_exists]
+    exact ⟨T, e, 𝟙 _, by rfl⟩
+  · refine ⟨?_, ?_, ?_, ?_⟩
+    · intro U E F x y
+      constructor
+      · intro h
+        obtain ⟨S, h₁, h₂, hxy⟩ := (Plus.eq_mk_iff_exists x y).mp h
+        obtain ⟨W, hWS⟩ := exists_family_refinement.{u, w} J S
+        obtain ⟨f⟩ := exists_cover_hom W E (hWS.trans (leOfHom h₁))
+        obtain ⟨g⟩ := exists_cover_hom W F (hWS.trans (leOfHom h₂))
+        refine ⟨W, f, g, ?_⟩
+        intro i
+        have hi := congrArg (fun z : Meq P S ↦ z ⟨W.X i, W.f i,
+          hWS _ (W.sieve₀_f i)⟩) hxy
+        dsimp at hi
+        have hx := meq_map_eq x ⟨E.X (f.s₀ i), E.f (f.s₀ i), E.sieve₀_f _⟩
+          (f.h₀ i) (W.f i) (f.sieve₀_le_sieve₀ _ (W.sieve₀_f i)) (f.w₀ i)
+        have hy := meq_map_eq y ⟨F.X (g.s₀ i), F.f (g.s₀ i), F.sieve₀_f _⟩
+          (g.h₀ i) (W.f i) (g.sieve₀_le_sieve₀ _ (W.sieve₀_f i)) (g.w₀ i)
+        exact hx.trans (hi.trans hy.symm)
+      · rintro ⟨W, f, g, h⟩
+        let S : J.toGrothendieck.Cover U :=
+          ⟨W.sieve₀, J.generate_mem_toGrothendieck W.mem₀⟩
+        let h₁ : S ⟶ ⟨E.sieve₀, J.generate_mem_toGrothendieck E.mem₀⟩ :=
+          homOfLE f.sieve₀_le_sieve₀
+        let h₂ : S ⟶ ⟨F.sieve₀, J.generate_mem_toGrothendieck F.mem₀⟩ :=
+          homOfLE g.sieve₀_le_sieve₀
+        apply (Plus.eq_mk_iff_exists x y).mpr
+        refine ⟨S, h₁, h₂, ?_⟩
+        ext I
+        obtain ⟨i, c, hc⟩ :=
+          (Sieve.mem_ofArrows_iff (Y := W.X) (f := W.f) I.f).mp I.hf
+        have hi := congrArg (P.map c.op) (h i)
+        dsimp [Meq.refine]
+        have hx := meq_map_eq x ⟨E.X (f.s₀ i), E.f (f.s₀ i), E.sieve₀_f _⟩
+          (f.h₀ i) (W.f i) (f.sieve₀_le_sieve₀ _ (W.sieve₀_f i)) (f.w₀ i)
+        have hy := meq_map_eq y ⟨F.X (g.s₀ i), F.f (g.s₀ i), F.sieve₀_f _⟩
+          (g.h₀ i) (W.f i) (g.sieve₀_le_sieve₀ _ (W.sieve₀_f i)) (g.w₀ i)
+        rw [hx, hy] at hi
+        have hx' := meq_map_eq x ⟨W.X i, W.f i,
+          f.sieve₀_le_sieve₀ _ (W.sieve₀_f i)⟩ c I.f ((leOfHom h₁) _ I.hf) hc.symm
+        have hy' := meq_map_eq y ⟨W.X i, W.f i,
+          g.sieve₀_le_sieve₀ _ (W.sieve₀_f i)⟩ c I.f ((leOfHom h₂) _ I.hf) hc.symm
+        exact hx'.symm.trans (hi.trans hy')
+    · intro U a b
+      constructor
+      · intro h
+        rw [Plus.toPlus_eq_mk (J := J.toGrothendieck),
+          Plus.toPlus_eq_mk (J := J.toGrothendieck)] at h
+        obtain ⟨S, h₁, h₂, hab⟩ := (Plus.eq_mk_iff_exists _ _).mp h
+        obtain ⟨E, hES⟩ := exists_family_refinement.{u, w} J S
+        refine ⟨E, ?_⟩
+        intro i
+        exact congrArg (fun z : Meq P S ↦ z ⟨E.X i, E.f i,
+          hES _ (E.sieve₀_f i)⟩) hab
+      · rintro ⟨E, hab⟩
+        let S : J.toGrothendieck.Cover U :=
+          ⟨E.sieve₀, J.generate_mem_toGrothendieck E.mem₀⟩
+        rw [Plus.toPlus_mk (P := P) S a, Plus.toPlus_mk (P := P) S b]
+        apply congrArg Plus.mk
+        apply meq_ext_on_generators E.toPreZeroHypercover
+        exact hab
+    · intro V U h E W g x y hy
+      let S : J.toGrothendieck.Cover U :=
+        ⟨E.sieve₀, J.generate_mem_toGrothendieck E.mem₀⟩
+      let T : J.toGrothendieck.Cover V :=
+        ⟨W.sieve₀, J.generate_mem_toGrothendieck W.mem₀⟩
+      have hle : W.sieve₀ ≤ E.sieve₀.pullback h := by
+        rw [Sieve.generate_le_iff, Presieve.ofArrows_le_iff]
+        intro i
+        change E.sieve₀ (W.f i ≫ h)
+        rw [← show g.h₀ i ≫ E.f (g.s₀ i) = W.f i ≫ h from g.w₀ i]
+        exact E.sieve₀.downward_closed (E.sieve₀_f (g.s₀ i)) (g.h₀ i)
+      let e : T ⟶ (J.toGrothendieck.pullback h).obj S := homOfLE hle
+      rw [Plus.res_mk_eq_mk_pullback, Plus.eq_mk_iff_exists]
+      refine ⟨T, e, 𝟙 _, ?_⟩
+      apply meq_ext_on_generators W.toPreZeroHypercover
+      intro i
+      have hx := meq_map_eq x ⟨E.X (g.s₀ i), E.f (g.s₀ i), E.sieve₀_f _⟩
+        (g.h₀ i) (W.f i ≫ h) (hle _ (W.sieve₀_f i)) (g.w₀ i)
+      exact hx.symm.trans (hy i).symm
+    · intro V U E x i c
+      rw [op_comp, Functor.map_comp, types_comp_apply,
+        ← Plus.toPlus_apply _ x ⟨E.X i, E.f i, E.sieve₀_f i⟩]
+      exact (congrArg (fun f ↦ f (x ⟨E.X i, E.f i, E.sieve₀_f i⟩))
+        ((J.toGrothendieck.toPlus P).naturality c.op)).symm
 
 end CategoryTheory.GrothendieckTopology
