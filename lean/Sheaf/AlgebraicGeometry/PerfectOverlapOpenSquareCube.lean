@@ -37,4 +37,20 @@ theorem openPullbackRestrictionIso_inv_app_eq_square
   simp only [Category.assoc, perfectHomComposition,
     singleComplexOpenPinnedComposition]
 
+/-- The forward named restriction comparison is the inverse pinned open
+square component. This is the inverse of the preceding component equality. -/
+theorem openPullbackRestrictionIso_hom_app_eq_square_inv
+    {X Y : Scheme.{u}} (g : X ⟶ Y) (P : X.Opens) (U : Y.Opens)
+    (h : P ≤ g ⁻¹ᵁ U) (M : schemeDerivedCategory Y) :
+    (openPullbackRestrictionIso g P U h).hom.app M =
+      (singleComplexOpenPullbackSquareIso g U P (g.resLE U P h)
+        (Scheme.Hom.resLE_comp_ι g h)).inv.app M := by
+  have he : (openPullbackRestrictionIso g P U h).symm.app M =
+      (singleComplexOpenPullbackSquareIso g U P (g.resLE U P h)
+        (Scheme.Hom.resLE_comp_ι g h)).app M := by
+    apply Iso.ext
+    exact openPullbackRestrictionIso_inv_app_eq_square g P U h M
+  have := congrArg Iso.symm he
+  exact congrArg Iso.hom this
+
 end AlgebraicGeometry
