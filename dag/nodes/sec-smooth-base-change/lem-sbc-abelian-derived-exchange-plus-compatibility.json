@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-abelian-derived-exchange-plus-compatibility",
+ "kind": "statement",
+ "title": "The unbounded abelian exchange restricts to the bounded-below exchange",
+ "statement": "Let h:Y -> X, e:Y -> T, f:X -> S and g:T -> S form a chosen Cartesian square sq as in [sbc-def-base-change-square]. Write Df and De for termwise exact inverse image on the unbounded derived categories of abelian etale sheaves, Rg and Rh for unbounded derived direct images, and R+g, R+h for their bounded-below counterparts [def-weil-pbc-derived-categories]. Let iota denote the fully faithful bounded-below inclusion, and let c_g:R+g followed by iota ~= iota followed by Rg and c_h be the canonical comparison isomorphisms. For each bounded-below abelian complex K on T, the canonical arrow [sbc-def-base-change-map] satisfies BC_unbounded(K.obj) = Df(c_g.inv(K)) followed by iota(BC_plus(K)) followed by c_h.hom(De_plus(K)), where BC_plus is [def-weil-pbc-derived-exchange]. No smoothness, qcqs, torsion or bounded-above hypotheses are required.",
+ "stmt_deps": [
+  "sbc-def-base-change-square",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-derived-categories"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-def-base-change-map.md",
+  "place": "Canonical derived exchange as the mate of the inverse-image square; bounded-below restriction of the derived-adjunction construction (Stacks Project Tag 0D6G)."
+ },
+ "proof": [
+  {
+   "text": "Restrict each unbounded exact-left-adjoint/right-derived-right-adjoint adjunction along the fully faithful bounded-below inclusions. Its unit formula on homotopy-category representatives agrees with the directly constructed derivedPlus unit, using the right-derived comparison factorization. Adjunction.ext identifies the adjunctions. Their counits therefore agree after applying the inclusion and the direct-image comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The termwise inverse-image composition comparison restricts to its bounded-below analogue: apply the inclusion formulas for mapDerivedCategoryPlusNatIso and mapDerivedCategoryPlusCompIso. Composing the comparison and its inverse proves compatibility of the inverse-image square isomorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The mate of the bounded-below inverse-image square is the library derivedBaseChangeMapPlus: use its universal property on complexes and derivedPlus_mateEquiv_app_fac. For both bounded-below and unbounded exchanges the adjoint transpose is the inverse-image square comparison followed by inverse image of the direct-image counit. The counit formula from step 1 and square formula from step 2 identify these transposes by naturality. Injectivity of the adjunction hom-equivalence identifies the two exchanges after the source comparison.",
+   "uses": [
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The defining abelianDerivedBaseChangeArrow is the unbounded mate of the flipped inverse-image square. Cancel the invertible source direct-image comparison in step 3, giving the displayed formula. Iterated mates and adjunction conjugation also prove equality with the original unit/direct-image-comparison/counit presentation.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-def-base-change-map.md",
+  "place": "Canonical mate construction and its restriction along fully faithful bounded-below inclusions, proved in Lean by B2; same source as the canonical exchange."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation obtained as a mate of an adjunction square is compatible with restricting the adjunctions to full subcategories",
+   "results": "8 hits, including Adjunction.restrictFullyFaithful, its unit/counit formulas, and mateEquiv; no derived-exchange compatibility statement.",
+   "date": "2026-10-15",
+   "verdict": "Relevant generic APIs; no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "6 hits for restriction and its unit/counit APIs; no derived-exchange comparison.",
+   "date": "2026-10-15",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*restrict|restrict.*mateEquiv",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-15",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mate of a derived adjunction square is compatible with restricting to bounded below derived categories",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundedAllowableTorsionSmoothBaseChange",
+  "date": "2026-10-15",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-bounded-allowable-torsion",
+   "place": "Identification of the canonical unbounded exchange with the bounded-below exchange used in finite truncation devissage.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianDerivedExchangePlusCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianDerivedExchangePlusCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Etale.abelianDerivedBaseChangeArrow_eq_plus",
+  "statement": "theorem abelianDerivedBaseChangeArrow_eq_plus {X Y S T : Scheme.{u}}\n    {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S}\n    (sq : ChosenCartesianSquare h e f g)\n    (K : _root_.DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) :\n    abelianDerivedBaseChangeArrow sq K.obj =\n      D(upperStar AddCommGrpCat.{u + 1} f).map\n        ((lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctorPlusCompatibility.inv.app K) ≫\n        _root_.DerivedCategory.Plus.ι.map\n          ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq.flip).app K) ≫\n        (lowerStar AddCommGrpCat.{u + 1} h).rightDerivedFunctorPlusCompatibility.hom.app\n          (D+(upperStar AddCommGrpCat.{u + 1} e).obj K)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-15"
+ },
+ "proof_deps": [
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-adjunction-mate",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-85906",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261015T174646-L-626596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-85906",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261015T174646-L-626596",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules compile cleanly; target and existing signatures are preserved, proofs and DAG nodes agree, adaptations are minimal, and no mechanical findings remain."
+ }
+}

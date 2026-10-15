@@ -39,9 +39,25 @@
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-localization-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Keep the set-valued unit/composition/counit construction. For abelian complexes form the termwise inverse-image square comparison and take its mate along the unbounded inverse-image/right-derived-direct-image adjunctions. Iterating mates identifies its direct-image mate with the composite of rightDerivedLowerStarComp, rightDerivedLowerStarCongr and the inverse composition comparison, because these comparisons are adjunction conjugates. The inverse-mate component formula therefore gives exactly the previously specified unit/direct-image-comparison/counit arrow. This equivalent presentation avoids expensive definitional comparison of generated derived-adjunction instance proofs. The equality with the original formula is proved in the private abelianDerivedBaseChangeArrow_eq_pushforward_formula helper of AbelianDerivedExchangePlusCompatibility. Repair after the A4 landing: keep the public abelianDerivedBaseChangeTransformation signature and define it by this mate; keep abelianDerivedBaseChangeArrow exactly its component. The private abelianDerivedBaseChangeTransformation_eq_pushforward theorem identifies the mate with the entire natural-transformation composite landed by A4, so its naturality interface is preserved.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-bc/sbc-def-base-change-map.md",
+  "place": "Same canonical exchange construction, using iterated mates and conjugate composition comparisons; B2 equivalent definitional presentation, verified by a Lean equality with the original formula."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -178,11 +194,11 @@
  "reviewed_proof": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "X-4e293",
-  "group": "A4",
+  "reviewer": "X-85906",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261015T154149-L-157907",
+  "landing": "20261015T174646-L-626596",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures, canonical exchange construction, truncation proof and torsion typing matched the node statements and updated proof dependencies; delivered modules and all direct importers compile."
+  "note": "independent Codex review: Delivered Lean modules compile cleanly; target and existing signatures are preserved, proofs and DAG nodes agree, adaptations are minimal, and no mechanical findings remain."
  }
 }

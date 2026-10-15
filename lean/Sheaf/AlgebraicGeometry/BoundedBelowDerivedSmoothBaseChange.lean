@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.AllowableTorsionDerivedCategories
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 import Sheaf.AlgebraicGeometry.BoundedBelowTruncationCriterion
 import Sheaf.AlgebraicGeometry.BoundedAllowableTorsionSmoothBaseChange
+import Sheaf.AlgebraicGeometry.AllowableTorsionInverseImage
 import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
 import Sheaf.AlgebraicGeometry.QcqsHigherImagesPrimeTorsion
 
@@ -89,17 +90,6 @@ private lemma rightDerived_isGE {U V : Scheme.{u}} (g : U ⟶ V)
     (lowerStar AddCommGrpCat.{u + 1} g) L a hq).of_iso
     ((DerivedCategory.homologyFunctor _ q).mapIso
       ((lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctorPlusCompatibility.app L)).symm
-
-private lemma allowable_upperStar {U V : Scheme.{u}} (f : U ⟶ V) (P : Set ℕ)
-    (F : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (hF : allowableTorsionSheafProperty V P F) :
-    allowableTorsionSheafProperty U P ((upperStar AddCommGrpCat.{u + 1} f).obj F) := by
-  intro Ω _ _ s x
-  let j := (upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} f s).app F
-  obtain ⟨n, hn, hp, hx⟩ := hF Ω (s ≫ f) (j.hom.hom x)
-  refine ⟨n, hn, hp, ?_⟩
-  apply (ConcreteCategory.bijective_of_isIso j.hom).1
-  simpa only [map_nsmul, map_zero] using hx
 
 private lemma allowable_derived_upperStar {U V : Scheme.{u}} (f : U ⟶ V) (P : Set ℕ)
     (K : DerivedCategory (Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}))

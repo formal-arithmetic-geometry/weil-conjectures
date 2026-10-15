@@ -1,0 +1,112 @@
+{
+ "id": "lem-sbc-allowable-torsion-upper-star",
+ "kind": "statement",
+ "title": "Inverse image preserves allowable torsion",
+ "statement": "Let U and V be schemes, let f:U → V be a morphism, let P be any set of natural numbers, and let F be an abelian sheaf on the small étale site of V. If F has allowable torsion with prime divisors in P in the sense of [sbc-def-derived-categories-with-allowable-torsion], then the étale inverse image f⁻¹F has the same allowable-torsion property on U. There are no smoothness, quasi-compactness, or quasi-separatedness assumptions on f.",
+ "stmt_deps": [
+  "sbc-def-derived-categories-with-allowable-torsion",
+  "lemma-openclosed-stalk-upperstar"
+ ],
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/BoundedBelowDerivedSmoothBaseChange.lean",
+  "place": "Existing private lemma allowable_upperStar, moved unchanged to a shared module so both bounded and bounded-below smooth base change reuse it."
+ },
+ "proof": [
+  {
+   "text": "At any geometric point s:Spec Ω → U, use [lemma-openclosed-stalk-upperstar] to identify the stalk of f⁻¹F additively with the stalk of F at s ≫ f. Choose the positive allowable annihilator n of the image of the given stalk element. Additivity preserves multiplication by n and zero; injectivity of the comparison gives n times the original element equal to zero. Its positivity and allowed prime divisors are unchanged. This also covers P empty, where only the zero stalk elements can satisfy the hypothesis.",
+   "uses": [
+    "sbc-def-derived-categories-with-allowable-torsion",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sbc-def-derived-categories-with-allowable-torsion",
+  "lemma-openclosed-stalk-upperstar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/BoundedBelowDerivedSmoothBaseChange.lean",
+  "place": "Reuse of the already proved allowable_upperStar lemma; the proof body is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torsion.*(pullback|inverse.image)|(pullback|inverse.image).*torsion",
+   "results": "1 hits; Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean",
+   "date": "2026-10-16",
+   "verdict": "No match for the project-specific allowable torsion property. The exact result already exists in the project as allowable_upperStar; it is moved and reused, not reproved."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiberComapIso\"",
+   "results": "3 hits; CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app",
+   "date": "2026-10-16",
+   "verdict": "Generic stalk-comparison API; the existing project allowable_upperStar lemma uses its étale specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of an etale sheaf preserves stalkwise torsion with allowable prime divisors",
+   "results": "8 hits; Algebra.basicOpen_subset_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.FormallyEtale.localization_base, Algebra.FormallyEtale.localization_map, Algebra.mem_etaleLocus_iff, Algebra.exists_etale_of_isEtaleAt, Algebra.FormallyEtale.instLocalization, Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-16",
+   "verdict": "No match for the project-specific allowable torsion property. The exact result already exists in the project as allowable_upperStar; it is moved and reused, not reproved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image preserves allowable prime torsion of etale abelian sheaves",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundedAllowableTorsionSmoothBaseChange",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-bounded-allowable-torsion",
+   "place": "Allowable-torsion preservation by inverse image in the bounded-output clause.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AllowableTorsionInverseImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/AllowableTorsionInverseImage.lean",
+  "declaration": "AlgebraicGeometry.Etale.allowable_upperStar",
+  "statement": "theorem allowable_upperStar {U V : Scheme.{u}} (f : U ⟶ V) (P : Set ℕ)\n    (F : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hF : allowableTorsionSheafProperty V P F) :\n    allowableTorsionSheafProperty U P ((upperStar AddCommGrpCat.{u + 1} f).obj F)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-85906",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261015T174646-L-626596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-85906",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261015T174646-L-626596",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules compile cleanly; target and existing signatures are preserved, proofs and DAG nodes agree, adaptations are minimal, and no mechanical findings remain."
+ }
+}

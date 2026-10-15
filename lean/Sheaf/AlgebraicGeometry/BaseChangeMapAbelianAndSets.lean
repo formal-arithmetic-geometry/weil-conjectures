@@ -52,36 +52,26 @@ noncomputable def setBaseChangeArrow {X Y S T : Scheme.{u}}
       (lowerStarComp (Type (u + 1)) h f (e ≫ g) sq.w.symm).inv.app _) ≫
     (setUpperLowerAdjunction f).counit.app _
 
-/-- The unbounded abelian exchange as a natural transformation. The unit for e,
-pushforward composition comparisons, and counit for f are composed as natural
-transformations, so naturality does not require expanding any derived functor.
+/-- The unbounded abelian exchange as a natural transformation, constructed as the
+mate of the inverse-image square comparison. Iterating mates gives the equivalent
+unit for `e`, pushforward composition comparisons, and counit for `f`. This presentation
+retains naturality without expanding derived functors and permits efficient restriction
+to bounded-below derived categories.
 Source: blueprint sk-def-bc; Stacks Project, Tags 0EZR and 0D6G
 (blueprint: sbc-def-base-change-map). -/
 noncomputable def abelianDerivedBaseChangeTransformation {X Y S T : Scheme.{u}}
     {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S}
     (sq : ChosenCartesianSquare h e f g) :
     R(lowerStar AddCommGrpCat.{u + 1} g) ⋙ D(upperStar AddCommGrpCat.{u + 1} f) ⟶
-      D(upperStar AddCommGrpCat.{u + 1} e) ⋙ R(lowerStar AddCommGrpCat.{u + 1} h) := by
-  let E := D(upperStar AddCommGrpCat.{u + 1} e)
-  let U := R(lowerStar AddCommGrpCat.{u + 1} e)
-  let G := R(lowerStar AddCommGrpCat.{u + 1} g)
-  let H := R(lowerStar AddCommGrpCat.{u + 1} h)
-  let Q := R(lowerStar AddCommGrpCat.{u + 1} f)
-  let F := D(upperStar AddCommGrpCat.{u + 1} f)
-  let c : U ⋙ G ⟶ H ⋙ Q :=
-    (rightDerivedLowerStarComp AddCommGrpCat.{u + 1} e g).hom ≫
-      (rightDerivedLowerStarCongr AddCommGrpCat.{u + 1} sq.w.symm).hom ≫
-      (rightDerivedLowerStarComp AddCommGrpCat.{u + 1} h f).inv
-  let β : G ⟶ E ⋙ (H ⋙ Q) :=
-    (Functor.leftUnitor G).inv ≫
-      Functor.whiskerRight
-        (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} e).unit G ≫
-      (Functor.associator E U G).hom ≫ Functor.whiskerLeft E c
-  exact Functor.whiskerRight β F ≫ (Functor.associator E (H ⋙ Q) F).hom ≫
-    Functor.whiskerLeft E ((Functor.associator H Q F).hom ≫
-      Functor.whiskerLeft H
-        (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).counit ≫
-      (Functor.rightUnitor H).hom)
+      D(upperStar AddCommGrpCat.{u + 1} e) ⋙ R(lowerStar AddCommGrpCat.{u + 1} h) :=
+  (mateEquiv (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g)
+    (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h)
+    (TwoSquare.mk _ _ _ _
+      (((Functor.mapDerivedCategoryNatIso
+          (upperStarComp AddCommGrpCat.{u + 1} h f (e ≫ g) sq.w.symm) ≪≫
+          Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        (Functor.mapDerivedCategoryNatIso (upperStarComp AddCommGrpCat.{u + 1} e g) ≪≫
+          Functor.mapDerivedCategoryCompIso _ _)).hom))).natTrans
 
 /-- The unbounded abelian exchange arrow. Exact inverse image is applied termwise;
 right direct image is the total K-injective derived functor. The composition comparisons
