@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
 
 /-! # Core object comparison data (without the final Hom pin).
 
