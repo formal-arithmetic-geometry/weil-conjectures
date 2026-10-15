@@ -24,7 +24,18 @@
  ],
  "proof": [
   {
-   "text": "Notation. By [def-weil-pbc-semi-representable-object] (3), a morphism $(\\alpha,f_i):\\{U_i\\}_{i\\in I}\\to\\{V_j\\}_{j\\in J}$ of $\\mathrm{SR}(X)$ is a covering iff for every $j\\in J$ the family $\\{f_i:U_i\\to V_j\\}_{i\\in I,\\,\\alpha(i)=j}$ is a covering family of $X_{\\Et}$, and by [def-weil-pbc-etale-site] a covering family of $X_{\\Et}$ is a family of etale morphisms (between objects etale over $X$, the morphisms being $X$-morphisms) which is jointly surjective onto its target. Composition in $\\mathrm{SR}(X)$ is $(\\beta,b_j)\\circ(\\alpha,a_i)=(\\beta\\circ\\alpha,(b_{\\alpha(i)}\\circ a_i)_{i})$ [def-weil-pbc-semi-representable-object] (1).",
+   "text": "Write S(a,j) for the sieve in the definition of a semi-representable covering [def-weil-pbc-semi-representable-object]. For an etale object T and h:T\\to L_j, membership h\\in S(a,j) is equivalent to the existence of a morphism t:\\{T\\}\\to K with t\\gg a=\\{j,h\\} (here \\gg denotes composition in Lean order, first the left map and then the right map). Indeed, membership in a generated sieve is exactly a factorization h=r\\gg(a_i followed by the equality transport) for some i with a.f(i)=j; this defines t with index i and component r. Conversely, evaluate the equality t\\gg a=\\{j,h\\} on the unique source index to obtain that index equality and the required factorization. The private Lean helper componentSieve_mem_iff proves this equivalence directly using Sieve.mem_ofArrows_iff and FormalCoproduct.hom_ext_iff.",
+   "uses": [
+    "def-weil-pbc-semi-representable-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01G4 (lemma-covering-permanence), parts (1) and (2)"
+   }
+  },
+  {
+   "text": "For composition fix a target index n of M, and let R=S(a\\gg b,n). The sieve S(b,n) is covering. Apply transitivity of the Grothendieck topology [def-weil-pbc-etale-site]. If h:T\\to M_n belongs to S(b,n), step 1 gives t:\\{T\\}\\to L with t\\gg b=\\{n,h\\}. Put i=t.f(*) and t_0=t.\\varphi(*). The pullback of the covering sieve S(a,i) along t_0 covers T. This pullback is contained in R.pullback(h): for any k:Z\\to T in it, step 1 gives s:\\{Z\\}\\to K with s\\gg a=\\{i,k\\gg t_0\\}. The latter is the composite of the one-component morphism induced by k with t. Therefore s\\gg(a\\gg b)=\\{n,k\\gg h\\}, so step 1 proves k\\gg h\\in R. Upward closure makes R.pullback(h) covering, and transitivity makes R covering. Lean uses GrothendieckTopology.transitive, pullback_stable and superset_covering, without any separate etale-covering composition theorem.",
    "uses": [
     "def-weil-pbc-semi-representable-object",
     "def-weil-pbc-etale-site"
@@ -32,60 +43,32 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Definition 01G0 (definition-SR) and Definition 01G3 (definition-covering-SR)"
+    "place": "Lemma 01G4 (lemma-covering-permanence), parts (1) and (2)"
    }
   },
   {
-   "text": "Proof of (1) (Stacks: 'immediate from the axioms of a site', written out). Write $K=\\{K_i\\}_{i\\in I}$, $L=\\{L_j\\}_{j\\in J}$, $M=\\{M_n\\}_{n\\in N}$, $a=(\\alpha,a_i)$, $b=(\\beta,b_j)$. Fix $n\\in N$. Since $b$ is a covering, $\\{b_j:L_j\\to M_n\\}_{j\\in J,\\,\\beta(j)=n}$ is a jointly surjective family of etale morphisms; since $a$ is a covering, for each such $j$ the family $\\{a_i:K_i\\to L_j\\}_{i\\in I,\\,\\alpha(i)=j}$ is a jointly surjective family of etale morphisms (step 1). By [lem-weil-pbc-etale-covering-composition] (with $T=M_n$, the $f$'s the $b_j$ and, over $L_j$, the $g$'s the $a_i$ with $\\alpha(i)=j$), the family $\\{b_j\\circ a_i:K_i\\to M_n\\}$ indexed by the pairs $(j,i)$ with $\\beta(j)=n$, $\\alpha(i)=j$ consists of etale morphisms and is jointly surjective. The map $i\\mapsto(\\alpha(i),i)$ is a bijection from $\\{i\\in I:\\beta(\\alpha(i))=n\\}$ onto this set of pairs (inverse $(j,i)\\mapsto i$), under which $b_j\\circ a_i=b_{\\alpha(i)}\\circ a_i$ is the $i$-th component of $b\\circ a$ (step 1); the composites are $X$-morphisms between objects of $X_{\\Et}$. Hence $\\{b_{\\alpha(i)}\\circ a_i:K_i\\to M_n\\}_{i:\\,\\beta\\alpha(i)=n}$ is a covering family of $X_{\\Et}$ for every $n$, i.e. $b\\circ a$ is a covering.",
+   "text": "For base change let P=L\\prime\\times_L K with first projection p; its existence is supplied by [lem-weil-pbc-semi-representable-finite-limits]. Fix j\\in L\\prime.I. By the pullback axiom of the small etale topology [def-weil-pbc-etale-site], S(a,c.f(j)).pullback(c.\\varphi(j)) covers L\\prime_j. It is contained in S(p,j): if h:T\\to L\\prime_j belongs to the former, step 1 gives t:\\{T\\}\\to K with t\\gg a=\\{c.f(j),h\\gg c.\\varphi(j)\\}=\\{j,h\\}\\gg c. The pullback universal property gives u= pullback.lift(\\{j,h\\},t):\\{T\\}\\to P, and u\\gg p=\\{j,h\\}. Step 1 gives h\\in S(p,j). Upward closure (GrothendieckTopology.superset_covering) proves S(p,j) covering. This works for the chosen categorical pullback directly; no explicit reindexing or separate etale-covering base-change theorem is required.",
    "uses": [
     "def-weil-pbc-semi-representable-object",
     "def-weil-pbc-etale-site",
-    "lem-weil-pbc-etale-covering-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Lemma 01G4 (lemma-covering-permanence), proof, 'Part (1) is immediate from the axioms of a site'; the final sentence (SR(C, X) = SR(C/X))"
-   }
-  },
-  {
-   "text": "Proof of (2), the fibre product. Write $K,L,L',a,c$ as in the statement. $X_{\\Et}$ has a final object $\\mathrm{id}_X$ and fibre products, computed as fibre products of schemes [def-weil-pbc-etale-site]. Hence by [lem-weil-pbc-semi-representable-finite-limits] (2) applied to $\\mathcal C=X_{\\Et}$, the family $P=\\{P_{(l,i)}\\}$, $P_{(l,i)}=L'_l\\times_{c_l,L_{\\gamma(l)},a_i}K_i$ for $(l,i)\\in J'\\times I$ with $\\gamma(l)=\\alpha(i)$, with the projections $p'=((l,i)\\mapsto l,\\ \\mathrm{pr}_1)$ to $L'$ and $p=((l,i)\\mapsto i,\\ \\mathrm{pr}_2)$ to $K$, is a fibre product $L'\\times_LK$ in $\\mathrm{SR}(X)$; each $P_{(l,i)}$ is the scheme-theoretic fibre product, an object of $X_{\\Et}$.",
-   "uses": [
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-semi-representable-finite-limits",
-    "def-weil-pbc-semi-representable-object"
+    "lem-weil-pbc-semi-representable-finite-limits"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Lemma 01G4 (lemma-covering-permanence), proof, 'Part (2) follows by the construction of fibre products in SR(C) in the proof of Lemma 01G1 (lemma-coprod-prod-SR)', with that proof, part (3) and the paragraph on SR(C, X)"
-   }
-  },
-  {
-   "text": "Proof of (2), the covering. Fix $l\\in J'$ and put $j=\\gamma(l)$. The members of $P$ over $l$ are indexed by $\\{(l,i): \\alpha(i)=j\\}$, i.e. by $\\{i\\in I:\\alpha(i)=j\\}$, and the corresponding components of $p'$ are the first projections $\\mathrm{pr}_1:L'_l\\times_{c_l,L_j,a_i}K_i\\to L'_l$. Since $a$ is a covering, $\\{a_i:K_i\\to L_j\\}_{\\alpha(i)=j}$ is a jointly surjective family of etale morphisms (step 1). By [lem-weil-pbc-etale-covering-base-change] (with $Y=L_j$, $V_i=K_i$, $g=c_l:L'_l\\to L_j$), the projections $L'_l\\times_{L_j}K_i\\to L'_l$, $\\alpha(i)=j$, are etale and jointly surjective; they are $X$-morphisms between objects of $X_{\\Et}$ (step 3). So for every $l\\in J'$ the family of components of $p'$ over $l$ is a covering family of $X_{\\Et}$, i.e. $p':L'\\times_LK\\to L'$ is a covering [def-weil-pbc-semi-representable-object] (3). (This is the Stacks requirement that the morphisms of a covering are representable: in $X_{\\Et}$ every fibre product exists.)",
-   "uses": [
-    "def-weil-pbc-semi-representable-object",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-etale-covering-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Lemma 01G4 (lemma-covering-permanence), proof, 'and the requirement that the morphisms in a covering of C are representable'"
+    "place": "Lemma 01G4 (lemma-covering-permanence), parts (1) and (2)"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-semi-representable-object",
   "def-weil-pbc-etale-site",
-  "lem-weil-pbc-etale-covering-composition",
-  "lem-weil-pbc-semi-representable-finite-limits",
-  "lem-weil-pbc-etale-covering-base-change"
+  "lem-weil-pbc-semi-representable-finite-limits"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/hypercovering.tex",
-  "place": "Lemma 01G4 (lemma-covering-permanence), parts (1), (2) and the final sentence, with the fibre product from the proof of Lemma 01G1 (lemma-coprod-prod-SR), part (3) and the SR(C, X) paragraph"
+  "place": "Lemma 01G4 (lemma-covering-permanence), parts (1) and (2); site axioms for composition, with the base-change argument expressed through the categorical pullback universal property and the sieve pullback axiom"
  },
  "mathlib_searches": [
   {
@@ -157,5 +140,15 @@
   "group": "G1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261015T220203-L-2456156",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
