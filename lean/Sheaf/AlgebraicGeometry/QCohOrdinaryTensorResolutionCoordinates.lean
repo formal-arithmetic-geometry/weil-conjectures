@@ -5,23 +5,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.CategoryTheory.Abelian.Projective.Resolution
-import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
-import Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison
-import Sheaf.AlgebraicGeometry.AffineChartTotalTensor
-import Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
-import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
-import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinatesFamily
+import Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionNaturality
 
 /-! # Affine ordinary tensor coordinates for quasi-coherent coefficients
 
@@ -38,6 +30,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+set_option maxHeartbeats 800000 in
+-- Combining the two dependent coordinate statements needs additional elaboration fuel.
 /-- Affine algebraic resolutions compute ordinary tensor homology of a supplied
 K-flat resolution of a quasi-coherent sheaf, naturally for supplied augmented lifts.
 This statement concerns only complexes and ordinary homology. It neither constructs
@@ -113,6 +107,12 @@ theorem exists_qcoh_ordinary_tensor_resolution_coordinates
           let e := ((TC.obj (P V).complex).sc n).mapHomologyIso
             (ModuleCat.restrictScalars φ)
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
-            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by sorry
+            c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
+  dsimp only
+  obtain ⟨c, hc⟩ := qcoh_ordinary_tensor_resolution_coordinates_witness
+    Y M N MA NA sM sN P K q hK hq n
+  refine ⟨c, ?_⟩
+  exact qcoh_ordinary_tensor_resolution_comparison_independence
+    Y M N MA NA sM sN P K q hK hq n c hc
 
 end AlgebraicGeometry
