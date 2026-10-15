@@ -63,7 +63,10 @@ precomposition along the simplicial object preserves that componentwise equality
 theorem hypercoverSections_additive (X : Scheme.{u})
     (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)
     (U : SimplicialObject (Over W)) : (hypercoverSections X R W U).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  ext n x
+  rfl
 
 attribute [instance] hypercoverSections_additive
 
@@ -75,7 +78,10 @@ additivity follows degreewise from addition in the module category. -/
 theorem alternatingCofaceMapComplex_additive
     (A : Type (u + 1)) [Ring A] :
     (AlgebraicTopology.alternatingCofaceMapComplex (ModuleCat.{u + 1} A)).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  ext n
+  rfl
 
 attribute [instance] alternatingCofaceMapComplex_additive
 
@@ -97,7 +103,8 @@ Proof: compose additivity of sections, alternating cofaces, and extension by zer
 theorem hypercoverSectionRows_additive (X : Scheme.{u})
     (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)
     (U : SimplicialObject (Over W)) : (hypercoverSectionRows X R W U).Additive := by
-  sorry
+  unfold hypercoverSectionRows
+  infer_instance
 
 attribute [instance] hypercoverSectionRows_additive
 
