@@ -200,5 +200,23 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-e8cfcd8d5 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, master blueprint route, and Stacks sources 01HE/01IO, 01JP/001V, 01JY, 01W1, and 01KT. All five steps are valid; open-subscheme factorization and sheaf-map cancellation are explicit. Edge cases pass. No new nodes, circular dependency, target weakening, or coefficient-category identification. Detailed checks written to review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenSection",
+  "declaration": "AlgebraicGeometry.Etale.properOpenSectionProperties",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenSection.lean",
+  "statement": "theorem properOpenSectionProperties {T₁ T₂ X : Scheme.{u}} (u : T₁ ⟶ T₂) [IsProper u] (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂] (h : j₁ ≫ u = j₂) : IsOpenImmersion (properOpenSection u j₁ j₂ h) ∧ properOpenSection u j₁ j₂ h ≫ (pullback.snd u j₂) = 𝟙 X ∧ IsClopen (Set.range (properOpenSection u j₁ j₂ h).base) ∧ Set.range (properOpenSection u j₁ j₂ h).base = (pullback.fst u j₂).base ⁻¹' Set.range j₁.base ∧ IsOpenImmersion (pullback.fst u j₂) ∧ Set.range (pullback.fst u j₂) = (u.base ⁻¹' Set.range j₂.base)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5ee343a83",
+  "group": "NO",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, exact declarations, hypotheses, conclusions, edge cases, universes, docstrings, report sections and verbatim signature. Immutable module compiled cleanly through scompile.py. No findings or repairs; branch head unchanged."
  }
 }
