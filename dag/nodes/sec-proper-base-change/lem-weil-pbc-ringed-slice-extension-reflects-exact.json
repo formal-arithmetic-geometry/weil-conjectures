@@ -1,0 +1,131 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8G (lemma-j-shriek-reflects-exactness)."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-slice-extension-preserves-exact"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive faithful functor between abelian categories reflects exactness of short complexes",
+   "results": "CategoryTheory.Functor.reflects_exact_of_faithful (Mathlib.CategoryTheory.Abelian.Exact); CategoryTheory.ShortComplex.exact_map_iff_of_faithful; CategoryTheory.Functor.exact_tfae. Read the first signature: it needs faithfulness and preservation of zero morphisms.",
+   "verdict": "Generic reflection is available, but no result supplies faithfulness of this concrete slice-extension functor.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct sum extension from sheaves on Over U followed by sheafification preserves monomorphisms and colimits",
+   "results": "SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.isColimitFreeCofan, CategoryTheory.Sheaf.isColimitSheafifyCocone, and other general sheaf colimit results; no slice-extension result.",
+   "verdict": "No direct match. The concrete adjunction and preservation of monos still need construction.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reflects_exact\"",
+   "results": "CategoryTheory.Functor.reflects_exact_of_faithful; Module.FaithfullyFlat.lTensor_reflects_exact; Module.FaithfullyFlat.rTensor_reflects_exact.",
+   "verdict": "Generic faithful-functor reflection is useful after proving the monic-unit/faithfulness property; tensor results concern a different functor.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "grep",
+   "query": "reflects_exact_of_faithful|extensionByZero|sheafificationCompToSheaf",
+   "results": "msearch returned Mathlib.CategoryTheory.Abelian.Exact:216 and Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification:72, plus uses of those declarations. Independent rg of lean/Sheaf and lean/WeilConjectures found LocalizedModuleAdjunctionExact, SiteExtensionByZeroExact and the current item. The first two require SmallCategory and a precoverage with pullback conditions; neither matches the arbitrary Category/GrothendieckTopology signature.",
+   "verdict": "No duplicate for either half at the universes and topology of this item.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of a direct sum extension from a slice site is exact and faithful on sheaves of modules",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict was inferred; independent LeanFinder/Loogle and grep searches were completed.",
+   "date": "2026-10-16"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-slice-extension-exactness",
+   "place": "Decomposition of the preservation/reflection proof in Tag 0E8G.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSliceExtensionExactness",
+  "date": "2026-10-16",
+  "group": "S1"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8G, monic-unit and zero-cokernel argument, with the middle homology quotient made explicit. Reviewed against https://stacks.math.columbia.edu/tag/0E8G on 2026-10-16. Uses Mathlib local injectivity for covering sieves directly, without precoverage or pullback hypotheses."
+ },
+ "id": "lem-weil-pbc-ringed-slice-extension-reflects-exact",
+ "title": "Ringed-slice extension reflects exactness",
+ "statement": "Let C be a category with object universe u and morphism universe v, J a Grothendieck topology, O a sheaf of commutative rings with values in universe max u v, and U an object. Write R for its underlying ring sheaf, and L for the direct-sum extension from R.over U-module sheaves followed by module sheafification, all module values in universe max u v, as in [lem-weil-pbc-ringed-slice-extension-preserves-exact]. For every short complex S of R.over U-module sheaves, imageSubobject (L.map S.f) = kernelSubobject (L.map S.g) implies S.Exact.",
+ "proof": [
+  {
+   "text": "Construct the natural unit by including a section over (V, φ) into the φ summand and then sheafifying. If its image is zero, local injectivity of the sheafification unit gives a covering sieve where it is zero. Coordinate projection and sheaf separatedness on the slice show the original section is zero, including for empty covers. Thus the unit is monic and L detects zero objects.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The preservation half implies L is exact. Factor S.f through ker S.g and take the cokernel H. Exactness identifies L(H) with the corresponding quotient for the extended complex; the hypothesis makes it zero. Detection of zero gives H = 0, so the factorization is epic and S.Exact. Alternatively the monic natural unit makes L faithful and Mathlib Functor.reflects_exact_of_faithful applies.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-preserves-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero-presheaf",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-ringed-slice-extension-preserves-exact"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSliceExtensionReflectsExact",
+  "file": "lean/Sheaf/CategoryTheory/RingedSliceExtensionReflectsExact.lean",
+  "declaration": "SheafOfModules.ringedSliceExtension_reflects_exact",
+  "statement": "theorem ringedSliceExtension_reflects_exact\n    {C : Type u} [Category.{v} C]\n    (J : GrothendieckTopology C)\n    (O : Sheaf J CommRingCat.{max u v}) (U : C)\n    (S : ShortComplex (ringedSiteModules.{max u v} (((sheafCompose J\n      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj O).over U)))\n    (hS : let R := (sheafCompose J\n      (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj O\n      let L := extensionByZeroPresheaf.{max u v} R U ⋙\n        PresheafOfModules.sheafification.{max u v} (𝟙 R.obj)\n      imageSubobject (L.map S.f) = kernelSubobject (L.map S.g)) :\n    S.Exact",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261015T221736-L-2646180",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261015T221736-L-2646180",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -28,71 +28,28 @@
  ],
  "proof": [
   {
-   "text": "Write $J=j_{U!}$. The cited ringed-site adjunction lemma gives that $J$ is exact for the very sheafified direct-sum construction in the statement. Thus, if $\\operatorname{im}(a)=\\ker(b)$, applying $J$ preserves this equality: kernels are finite limits, cokernels are finite colimits, and the image of $a$ is the kernel of its cokernel. This proves the forward implication without assuming that epimorphisms are surjective on sections.",
+   "text": "Rewrite exactness of S as imageSubobject S.f = kernelSubobject S.g using Mathlib’s exactness criterion. Apply the preservation half to obtain equality for the sheafified direct-sum extension.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-ringed-slice-extension-preserves-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8G (lemma-j-shriek-reflects-exactness), first paragraph; lemma-extension-by-zero-exact"
-   }
+   "elementary": false
   },
   {
-   "text": "For any $\\mathcal O_U$-module $\\mathcal G$ define $\\eta_{\\mathcal G}:\\mathcal G\\to (J\\mathcal G)|_U$ as follows. At $(V,\\varphi:V\\to U)$ send $s$ into the $\\varphi$-summand of $P_{\\mathcal G}(V)$ and then into its sheafification. Under $h:V^{\\prime}\\to V$ this summand maps to the $\\varphi h$-summand, so the maps commute with restriction and are module-linear. Suppose $\\eta_{\\mathcal G}(s)=0$. The module sheafification interface identifies its underlying abelian sheaf with abelian sheafification; the underlying-sets comparison therefore permits the local-equality criterion for set sheafification. There is a cover $\\{h_i:V_i\\to V\\}$ on which the element supported in the $\\varphi h_i$-summand is zero in $P_{\\mathcal G}(V_i)$. Inclusion into a direct sum is injective (project back to that coordinate), so $s|_{(V_i,\\varphi h_i)}=0$. These maps cover $(V,\\varphi)$ in the localized topology; separatedness of the sheaf $\\mathcal G$ gives $s=0$. Consequently $\\eta_{\\mathcal G}$ is sectionwise injective, hence a monomorphism. This also works for an empty cover, because a sheaf has only the zero section on an object covered by the empty family.",
+   "text": "Apply the reflection half directly to the displayed image-kernel equality for the extension, obtaining S.Exact, and rewrite S.Exact as imageSubobject S.f = kernelSubobject S.g.",
    "uses": [
-    "def-weil-extension-by-zero-presheaf",
-    "def-pur-localized-ringed-site",
-    "lem-pc-sites-module-sheafification-interface",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-ringed-slice-extension-reflects-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8G (lemma-j-shriek-reflects-exactness), unit-injection paragraph, filling the omitted details; Tag 03CY; sites.tex Tags 00YR and 00WK"
-   }
-  },
-  {
-   "text": "The preceding injection detects zero objects: if $J\\mathcal H=0$, restriction is zero sectionwise, so the injection $\\eta_{\\mathcal H}:\\mathcal H\\to (J\\mathcal H)|_U=0$ forces every section of $\\mathcal H$ to vanish, hence $\\mathcal H=0$. No assertion that the unit is an isomorphism is needed.",
-   "uses": [
-    "def-pur-localized-ringed-site",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8G (lemma-j-shriek-reflects-exactness), final paragraph"
-   }
-  },
-  {
-   "text": "For the converse put $\\mathcal K=\\ker(b)$ and let $\\bar a:\\mathcal G_1\\to\\mathcal K$ be the factorization of $a$ (which exists because $ba=0$). Let $\\mathcal H=\\operatorname{coker}(\\bar a)$, so the original complex is exact precisely when $\\mathcal H=0$. Exactness of $J$ identifies $J\\mathcal K$ with $\\ker(Jb)$, identifies $J\\bar a$ with the factorization of $Ja$ through that kernel, and identifies $J\\mathcal H$ with its cokernel. If the extended complex is exact, that factorization is an epimorphism, so $J\\mathcal H=0$. Step 3 gives $\\mathcal H=0$, and hence $\\operatorname{im}(a)=\\ker(b)$.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8G (lemma-j-shriek-reflects-exactness), reflection argument, expressed through the middle homology quotient"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-extension-by-zero-presheaf",
-  "def-pur-localized-ringed-site",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-ringed-slice-extension-preserves-exact",
+  "lem-weil-pbc-ringed-slice-extension-reflects-exact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 0E8G (lemma-j-shriek-reflects-exactness), with explicit local proof of the unit injection and middle-homology quotient argument"
+  "place": "Tag 0E8G; the target proof is reduced to the preservation and reflection halves recorded as new nodes."
  },
  "mathlib_searches": [
   {
@@ -234,5 +191,15 @@
   "by": "NB",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261015T221736-L-2646180",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

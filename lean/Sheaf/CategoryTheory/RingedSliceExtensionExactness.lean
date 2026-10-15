@@ -11,9 +11,8 @@ public import Mathlib.Algebra.Homology.ShortComplex.Basic
 public import Mathlib.CategoryTheory.Subobject.Limits
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 public import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
-import Sheaf.Paper.SiteSheafificationSectionsLocal
-import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Sheaf.CategoryTheory.RingedSliceExtensionPreservesExact
+import Sheaf.CategoryTheory.RingedSliceExtensionReflectsExact
 
 /-!
 # Exactness detected by extension from a ringed-site slice
@@ -76,6 +75,8 @@ theorem ringedSliceExtension_exact_iff
             PresheafOfModules.sheafification.{max u v}
               (𝟙 ((sheafCompose J
                 (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj O).obj)).map S.g) := by
-  sorry
+  rw [← ShortComplex.exact_iff_image_eq_kernel S]
+  exact ⟨ringedSliceExtension_preserves_exact J O U S,
+    ringedSliceExtension_reflects_exact J O U S⟩
 
 end SheafOfModules
