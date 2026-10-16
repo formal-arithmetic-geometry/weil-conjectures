@@ -28,9 +28,123 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-system-localization-universal] to the nerve of $\\mathcal M$ with system $W$. Identities and composition belong to $W$ by the model axioms; in an ordinary nerve closure under homotopy is automatic. This gives $q:N\\mathcal M\\to\\mathcal C$ with precisely the functor-category universal property in the statement. The same construction applies to any ordinary diagram category with objectwise weak equivalences. All categories and Hom sets are taken in a fixed larger universe while the indexing category and coproducts remain $\\mathcal U$-small. The functor $q$ is essentially surjective. Indeed let $\\mathcal C'$ be the full subcategory on objects equivalent to some $qX$. Its factorization $q':N\\mathcal M\\to\\mathcal C'$ inverts $W$, so the universal property extends it to $r:\\mathcal C\\to\\mathcal C'$. For the inclusion $j:\\mathcal C'\\to\\mathcal C$, full faithfulness of restriction gives $jr\\simeq1_{\\mathcal C}$ from $jrq\\simeq q$; hence every object lies in $\\mathcal C'$ up to equivalence.",
+   "uses": [
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Section 7.1, localization universal property; Section 7.9, fixed universe convention."
+   }
+  },
+  {
+   "text": "Construct limits and colimits of $I$-diagrams pointwise: the map at an arrow of $I$ is the unique map induced by the corresponding family of maps on the limiting or colimiting components. The component universal properties give the universal property for natural transformations, so $\\mathcal A=\\mathcal M^I$ is complete and cocomplete. For $i\\in I$ define $E_i(A)_j=\\coprod_{\\alpha:i\\to j}A$, with an arrow $j\\to k$ sending the summand $\\alpha$ to its composite summand. A natural map $E_i(A)\\to D$ is determined by $A\\to D_i$ on the identity summand, its $\\alpha$-component being the composite with $D(\\alpha)$. Thus $E_i\\dashv\\operatorname{ev}_i$. Let $K,J$ be the given sets generating respectively the cofibration/trivial-fibration and trivial-cofibration/fibration weak factorization systems of $\\mathcal M$. Put $K_I=\\{E_i k\\}$ and $J_I=\\{E_i j\\}$. Lifting squares under this explicit adjunction show that $K_I^{\\square}$ consists exactly of objectwise trivial fibrations and $J_I^{\\square}$ of objectwise fibrations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Section 2.3.10, projective classes; explicit free-evaluation adjunction and pointwise universal properties."
+   }
+  },
+  {
+   "text": "For every domain $A$ of a map of $K$ or $J$, [lem-coef-object-presentability-rank] supplies an infinite regular presentability cardinal $\\tau_A$. Bound the small family of these cardinals by one infinite regular $\\lambda>\\tau_A$ using [lem-coef-small-family-regular-bound], applied to the disjoint union of sets of cardinalities $\\tau_A$. A continuous $\\lambda$-chain is $\\tau_A$-filtered: any fewer than $\\tau_A$ stages have an upper bound below $\\lambda$ by regularity. Thus $\\operatorname{Hom}_{\\mathcal A}(E_iA,-)=\\operatorname{Hom}_{\\mathcal M}(A,\\operatorname{ev}_i(-))$ preserves its colimit, since evaluation computes colimits pointwise. Apply [lem-coef-small-object-cell-factorization] separately to $K_I$ and $J_I$. It gives functorial factorizations into a relative cell map and a map in the respective right lifting class, and identifies each left lifting class with retracts of the corresponding relative cell maps. This checks smallness in $\\mathcal A$ directly; no unproved assertion that a functor category is locally presentable is needed.",
+   "uses": [
+    "lem-coef-object-presentability-rank",
+    "lem-coef-small-family-regular-bound",
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Section 2.4, small object argument; projective generation expanded with the cited cardinal-smallness statements."
+   }
+  },
+  {
+   "text": "Write $L_K={}^{\\square}(K_I^{\\square})$, $L_J={}^{\\square}(J_I^{\\square})$. The factorizations and retract characterization in [lem-coef-small-object-cell-factorization] give the two weak factorization systems $(L_K,K_I^{\\square})$ and $(L_J,J_I^{\\square})$. At each object, an $E_i(j)$ is a coproduct of copies of the trivial cofibration $j$. Coproducts, pushouts and continuous transfinite compositions of maps left orthogonal to fibrations remain left orthogonal to fibrations: choose the lift on each coproduct summand, extend a lift across each successor pushout, and take its uniquely induced map at a limit stage. Retracts preserve lifts by composing a lift with the retract maps. Hence evaluating a $J_I$-cell map, or its retract, gives a trivial cofibration in $\\mathcal M$. Consequently $L_J\\subset W_I$; also $L_J\\subset L_K$ since objectwise trivial fibrations are objectwise fibrations. Conversely, if $a\\in L_K\\cap W_I$, factor $a=pj$ with $j\\in L_J$ and $p$ an objectwise fibration. Two-out-of-three gives $p\\in W_I$, so $p\\in K_I^{\\square}$. A lift in the square with left map $a$, right map $p$, top map $j$ and bottom identity exhibits $a$ as an arrow retract of $j$. Thus $a\\in L_J$. We have proved $L_J=L_K\\cap W_I$. Since $W_I$ is retract closed and has two-out-of-three componentwise, these two functorial weak factorization systems are exactly the required projective model structure. This includes $I=\\varnothing$.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Section 2.3.10 and Section 2.4; direct verification of projective model axioms from the cellular factorizations."
+   }
+  },
+  {
+   "text": "Let $F=\\operatorname{colim}_I:\\mathcal A\\to\\mathcal M$ and $G=\\Delta_I$. Their adjunction sends $h:FD\\to Y$ to the cocone with components $h\\iota_i$. The right adjoint $G$ preserves fibrations and trivial fibrations because projective right classes are objectwise; equivalently, the explicit adjunction on lifting squares shows that $F$ preserves cofibrations and trivial cofibrations. It preserves weak equivalences between cofibrant diagrams as follows. For such a weak equivalence $a$, [lem-coef-brown-split-factorizations] gives $a=pi$ with $i,s$ cofibrations, $p$ a trivial fibration and $ps=1$. Two-out-of-three makes $i,s$ trivial cofibrations. Therefore $Fi,Fs$ are weak equivalences; $Fp\\,Fs=1$ gives $Fp$ a weak equivalence, and so $Fa=Fp\\,Fi$ is a weak equivalence. Notice that $G$ preserves all weak equivalences, not just those with fibrant endpoints.",
+   "uses": [
+    "lem-coef-brown-split-factorizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Paragraph 2.3.14 and the Brown factorization argument of Section 2.3."
+   }
+  },
+  {
+   "text": "Choose a functorial projective cofibrant replacement $p:Q\\to1_{\\mathcal A}$ with each $p_D$ a trivial fibration. Naturality and two-out-of-three imply that $Q$ preserves $W_I$. Write $\\mathcal A_c$ for the full cofibrant subcategory. Its inclusion $i$ and $Q:\\mathcal A\\to\\mathcal A_c$ are relative functors; $iQ\\xrightarrow{p}1_{\\mathcal A}$ and $Qi\\xrightarrow{p}1_{\\mathcal A_c}$ have weak-equivalence components. By the full functor-category assertion of [lem-coef-system-localization-universal], these functors and transformations localize. Componentwise equivalence detection from [lem-cbc-enhanced-functor-cone-calculus] makes the localized transformations equivalences, so $\\mathcal A_c[W_I^{-1}]_\\infty\\simeq\\mathcal A[W_I^{-1}]_\\infty$. The relative functor $F|_{\\mathcal A_c}$ of step 5 therefore defines $H$ on the latter localization, with $H(D)=qFQD$; $G$ localizes directly. Let $u:1\\to GF$ and $v:FG\\to1$ be the ordinary unit and counit. Localizing their indicated restrictions defines coherent natural transformations\n$$\\eta_D=u_{QD}\\,p_D^{-1}:D\\longrightarrow GH(D),\\qquad \\epsilon_Y=v_Y\\,F(p_{GY}):HG(Y)\\longrightarrow Y.$$\nThese are transformations between relative functors before the inverses of $p$ are inserted; restriction along localization is fully faithful on their entire functor categories, so their naturality diagrams descend as well.",
+   "uses": [
+    "lem-coef-system-localization-universal",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Sections 7.1 and 7.5.25, explicit left replacement construction; agent expansion of the unit and counit."
+   }
+  },
+  {
+   "text": "Verify the two triangles and their effect on mapping spaces rather than invoking the existing model-derived-adjunction node. Naturality of $u$ and $vG\\circ Gu=1_G$ give\n$$G\\epsilon_Y\\,\\eta_{GY}=Gv_Y\\,GF(p_{GY})\\,u_{QGY}\\,p_{GY}^{-1}=Gv_Y\\,u_{GY}=1.$$\nThe other composite simplifies, using naturality of $p$ at $u_{QD}$ and $vF\\circ Fu=1_F$, to\n$$\\epsilon_{HD}\\,H\\eta_D=F(p_{QD})\\,F(Qp_D)^{-1}.$$\nNaturality of $p$ at $p_D$ gives $p_Dp_{QD}=p_DQp_D$. Cancel the equivalence $p_D$ in $\\mathcal A[W_I^{-1}]_\\infty$. Both remaining arrows are between cofibrant diagrams; the fully faithful localized inclusion from step 6 identifies them also in $\\mathcal A_c[W_I^{-1}]_\\infty$. Applying the localized $F|_{\\mathcal A_c}$ shows that the last display is $1$. All cancellations here are homotopies of the displayed natural transformations. Thus for arbitrary localized $D,Y$, the maps of spaces\n$$h\\longmapsto G(h)\\eta_D,\\qquad a\\longmapsto\\epsilon_Y H(a)$$\nare mutual homotopy inverses: naturality rewrites their composites as $G\\epsilon_Y\\,\\eta_{GY}\\,a$ and $h\\,\\epsilon_{HD}\\,H\\eta_D$. This proves a natural equivalence $\\operatorname{Map}_{\\mathcal C}(qFQD,qY)\\simeq\\operatorname{Map}_{\\mathcal A[W_I^{-1}]_\\infty}(D,GY)$, with the forward map induced by the specified replacement cocone. It is a mapping-space equivalence, not merely a bijection on components.",
+   "uses": [
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.30, elementary unit/counit computation spelling out its specialization without citing a cyclic DAG dependency."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-small-diagram-model-rectification] to $\\mathcal M$ and $I$. It identifies $\\mathcal A[W_I^{-1}]_\\infty$ with $\\operatorname{Fun}(N(I),\\mathcal C)$, its object $D$ with $qD$, and $GY$ with $\\Delta_{N(I)}qY$, including transformations. The forward mapping-space equivalence of step 7 is therefore postcomposition of the localized colimit cocone with a map $qFQD\\to qY$, after the identification $qQD\\simeq qD$. The dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] says exactly that this cocone is colimiting. The test includes every object of $\\mathcal C$ by the essential-surjectivity argument in step 1. For completeness, given any specified projectively cofibrant replacement $e:E\\to D$, lift $e$ against the trivial fibration $p_D:QD\\to D$, obtaining $b:E\\to QD$ over $D$. Two-out-of-three makes $b$ a weak equivalence between cofibrant diagrams. Step 5 makes $Fb$ a weak equivalence, and the two cocones commute with $b$ and $Fb$ by the ordinary colimit universal property. Their images are consequently equivalent cocones, so the conclusion holds for the specified replacement, not only for the functorially chosen one.",
+   "uses": [
+    "lem-coef-small-diagram-model-rectification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.9.8 and Remark 7.9.10, dual colimit interpretation, including the cocone maps."
+   }
+  },
+  {
+   "text": "For a span diagram $D$, a model homotopy pushout cocone $D\\to\\Delta P$ has, by hypothesis, a weak equivalence $c:FE\\to P$ from the colimit of a projectively cofibrant replacement. Its localized cocone is obtained from the colimiting cocone of step 8 by the equivalence $q(c)$ on the apex and the replacement equivalence on the boundary. For any $Y$, precomposition with $q(c)$ is an equivalence of mapping spaces, so the same cocone mapping-space criterion proves that this is a pushout. The argument uses projective cofibrancy of the replacement only; neither simplicial enrichment of $\\mathcal M$ nor objectwise cofibrancy of $D$ has been introduced.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Example 2.3.21 and Definition 2.3.22; mapping-space cocone criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-object-presentability-rank",
+  "lem-coef-small-diagram-model-rectification",
+  "lem-coef-small-family-regular-bound",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-system-localization-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Foundational expansion of paragraph 2: projective generators, replacement localization and explicit adjunction mapping-space calculation. Cisinski Sections 2.3 and 7.9 checked online; not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +173,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-16",
    "verdict": "no match: ordinary-category localizations and ordinary colimit cocones do not identify coherent-localization colimits with model homotopy colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy colimit of a diagram in a combinatorial model category is a colimit in its infinity categorical localization including its cocone",
+   "results": "{\"t\": \"2026-10-16T17:10:12Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy colimit of a diagram in a combinatorial model category is a colimit in its infinity categorical localization including its cocone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\"], \"digest\": \"e30f9500b4e9f7b1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-category colimit and derived-adjunction statements do not assert the coherent model-localization comparison. The affine-Zariski localization grep hit concerns rings on an algebraic-geometric site, not homotopy colimits. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T17:10:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-category colimit and derived-adjunction statements do not assert the coherent model-localization comparison. The affine-Zariski localization grep hit concerns rings on an algebraic-geometric site, not homotopy colimits. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyColimit|hocolim|projectiveModel|localization.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-16T17:10:02Z\", \"tool\": \"grep\", \"query\": \"homotopyColimit|hocolim|projectiveModel|localization.*[Cc]olimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\"], \"digest\": \"158577c300b2843a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-category colimit and derived-adjunction statements do not assert the coherent model-localization comparison. The affine-Zariski localization grep hit concerns rings on an algebraic-geometric site, not homotopy colimits. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy colimit cocones give colimits in infinity categorical localizations of combinatorial model categories",
+   "results": "{\"t\": \"2026-10-16T17:10:02Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy colimit cocones give colimits in infinity categorical localizations of combinatorial model categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.colimitCoconeIsColimit\", \"CategoryTheory.Limits.isColimitOfConeRightOpOfCocone\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.IsPushout.isColimit\", \"CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone\", \"CategoryTheory.Limits.Bicone.IsBilimit.isColimit\", \"CategoryTheory.Limits.isColimitOfConeOfCoconeUnop\", \"HomotopicalAlgebra.AttachCells.isColimit₁\"], \"digest\": \"44d8a087e3d0e4d2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-category colimit and derived-adjunction statements do not assert the coherent model-localization comparison. The affine-Zariski localization grep hit concerns rings on an algebraic-geometric site, not homotopy colimits. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left derived colimit is left adjoint to the constant diagram functor on the infinity localization of a combinatorial model category",
+   "results": "{\"t\": \"2026-10-16T17:11:33Z\", \"tool\": \"leanfinder\", \"query\": \"A left derived colimit is left adjoint to the constant diagram functor on the infinity localization of a combinatorial model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit\", \"CategoryTheory.ObjectProperty.isLocalization_isColocal\", \"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_colimit\", \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\"], \"digest\": \"cd3faebfc5679032\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-category colimit and derived-adjunction statements do not assert the coherent model-localization comparison. The affine-Zariski localization grep hit concerns rings on an algebraic-geometric site, not homotopy colimits. Both semantic phrasings were inspected."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-nerve-comparison",
@@ -70,5 +219,29 @@
   "group": "Q62"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-model-colimit-localization-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement. Constructed the projective model structure explicitly from existing presentability/small-object nodes and proved the coherent colimit universal property by localizing the cofibrant restriction and computing both unit/counit triangles. One new statement-only node supplies arbitrary-small ordinary diagram rectification, which is absent from the existing finite-Reedy and simplicially enriched statements. Avoided the cycle through the existing derived-adjunction node. No Lean work or compiler invocation.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction and inverse-limit calculation with its following naturality/triangle-identity sentences: technical colimit foundation beneath lem-coef-coherent-nerve-comparison. Steps 1-4 provide model and size infrastructure, steps 5-8 preserve the actual cocone and coherent universal property, and step 9 gives its span instance.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent functor/cocone and mapping-space calculus for proving the localized colimit universal property; it does not replace a geometric step of the coefficient unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the item, its new node and every cited node's statement in full. Item statement kept and not weakened. Steps: (1) the system hypotheses hold in N(M): isomorphisms are in F∩W by lifting, composition by 2-of-3, homotopy closure is trivial in an ordinary nerve; the essential-surjectivity argument is correct. (2) E_i ⊣ ev_i is elementary. (3) presentability-rank, regular-bound and small-object-cell nodes are applied with matching hypotheses (λ-chains are τ_A-filtered; evaluation preserves colimits). (4) Projective structure: L_J ⊂ W_I and the retract argument give L_J = L_K∩W_I. (5) Brown factorization gives that colim preserves weak equivalences between cofibrant objects. (6) The localized functors and transformations descend; ε = v∘F(p_G) descends as a single transformation, so FG need not be relative. (7) I recomputed both triangle identities, including cancelling p_D through the fully faithful cofibrant inclusion; the mapping-space equivalence follows. (8) Θ sends η_D to the localized colimit cocone and GY to Δ qY; the dual cone-calculus criterion applies, and arbitrary cofibrant replacements are handled by lifting against p_D. (9) Pushout case. New node lem-coef-small-diagram-model-rectification is statement-only, self-contained, and a true standard theorem (Cisinski HCHA 7.9.8/7.9.10). Tested on I = ∅, a point, discrete I and BG. It is strictly more general than lem-coef-finite-reedy-localization and differs from the enriched/simplicial/dg rectification nodes; it restates no clause of the item or of its parent. Acyclicity checked by traversal: no dependency reaches the item. The worker's reported cycle through lem-coef-model-infinity-derived-adjunction is real, so avoiding that node was correct. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc, used only as a generic cocone criterion). No SGA. Cisinski and Lurie are not archived locally (WANTED); proof_origin is honestly by agent. No fixes."
+ }
 }
