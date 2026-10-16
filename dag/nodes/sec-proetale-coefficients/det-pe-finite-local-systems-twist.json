@@ -27,153 +27,205 @@
   "def-sc-finitely-presented-module",
   "det-pe-classical-definition-continuity-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [det-pe-finite-local-systems-type] to $F$: choose a set of representatives $M$ of finitely presented $\\Lambda$-modules, and obtain the disjoint open and closed decomposition $X=\\coprod_M X_M$ with $E_M=F|_{X_M}$ locally isomorphic to $\\underline M$. Such a representative set can be chosen among cokernels of finite matrices over $\\Lambda$, so it is a set in the universes of [def-weil-size-convention]. By [lem-weil-pbc-open-immersion-etale] the $X_M\\to X$ form an etale covering. Interpret restriction on each pro-etale site by [lem-weil-proetale-weakly-etale-localization]. Use throughout the constant-model identification $\\underline N=\\nu_S^*N_{S,\\Et}$ of [det-pe-finite-local-systems-hom], on each scheme $S$ encountered; the coefficient-ring identification and module functors for this arbitrary discrete ring are those of [det-pe-classical-sheaves-modules]. The two meanings of a constant model agree. For a scheme $S$, a $\\Lambda$-module $N$ and a $\\Lambda_S$-module sheaf $G$ on $S_{\\mathrm{proet}}$, the module adjunction of [det-pe-classical-sheaves-modules] and $(\\nu_{S,*}G)(U)=G(U)$ on etale objects [def-weil-pbc-site-comparison-morphism] give $\\operatorname{Hom}(\\nu_S^*N_{S,\\Et},G)\\cong\\operatorname{Hom}(N_{S,\\Et},\\nu_{S,*}G)\\cong\\operatorname{Hom}_\\Lambda(N,G(S))$: by the universal property of sheafification [def-weil-pbc-sheafification], a map out of the constant sheaf [def-weil-pbc-constant-sheaf] is a map out of the constant presheaf, and such a map is determined by its component at the final object $S$, which may be any $\\Lambda$-linear map. The same two facts on $S_{\\mathrm{proet}}$ give $\\operatorname{Hom}(\\underline N_S,G)\\cong\\operatorname{Hom}_\\Lambda(N,G(S))$ for the pro-etale constant module sheaf of [def-weil-proetale-locally-constant-sheaf]. By the Yoneda lemma $\\nu_S^*N_{S,\\Et}\\cong\\underline N_S$, naturally in $N$, by the isomorphism carrying the constant section $n$ to the constant section $n$; for $N=\\Lambda$ (in rings) this is the ring identification $\\Lambda_S=\\nu_S^*\\Lambda_{S,\\Et}$ of [det-pe-classical-sheaves-modules]. Every identification of constant models used below fixes constant sections, so any two of them agree.",
+   "uses": [
+    "det-pe-finite-local-systems-type",
+    "def-weil-size-convention",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-proetale-weakly-etale-localization",
+    "det-pe-finite-local-systems-hom",
+    "det-pe-classical-sheaves-modules",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-proetale-locally-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, first paragraph of proof; constant-model notation"
+   }
+  },
+  {
+   "text": "On $X_M$ define $T_M(U)=\\operatorname{Isom}_{\\Lambda_{X_M}|_U}(\\underline M|_U,E_M|_U)$ on slice sites [def-pur-localized-ringed-site]. This is a sheaf: for compatible local isomorphisms, apply the sheaf equalizer condition [def-weil-pbc-sites-and-cohomology] to the images of each section of $\\underline M$ and to the images under the inverse maps of each section of $E_M$. They glue uniquely; naturality, additivity, scalar-linearity and the two inverse identities hold because they hold after restriction to the covering [def-weil-sheaf-of-modules-category]. Let $H_M=\\mathcal Aut_{\\Lambda}(\\underline M)$. The formula $h\\cdot\\varphi=\\varphi\\circ h^{-1}$ defines an action. Given two sections $\\varphi,\\psi$, the unique $h$ with $h\\cdot\\varphi=\\psi$ is $h=\\psi^{-1}\\varphi$. Local trivializations of $E_M$ give local sections of $T_M$, also after pullback to every object. Hence $T_M$ is an $H_M$-torsor: these are the clauses of [def-constructible-torsor] (a group action, simple transitivity where sections exist, local sections on a covering of every object), read on the pro-etale site, which is the torsor notion used in step 3.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category",
+    "def-constructible-torsor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, second paragraph: construction of the Isom torsor; equalizer verification expanded"
+   }
+  },
+  {
+   "text": "The module $M$ is finitely presented, so clause (3) of [det-pe-finite-local-systems-hom] identifies $H_M$ with $\\nu_{X_M}^*H_{M,0}$, where $H_{M,0}=\\operatorname{Aut}_{\\Lambda}(M)_{X_M,\\Et}$. Apply [det-pe-torsor-comparison-glue] to $T_M$. It has a trivializing etale covering $\\{V_{M,a}\\to X_M\\}$, and its sections are module isomorphisms $e_{M,a}:\\underline M|_{V_{M,a}}\\xrightarrow{\\sim}E_M|_{V_{M,a}}$. The group need not be finite or abelian: the cited torsor comparison permits an arbitrary sheaf of groups.",
+   "uses": [
+    "det-pe-finite-local-systems-hom",
+    "det-pe-torsor-comparison-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, second paragraph: constant automorphism group and torsor comparison"
+   }
+  },
+  {
+   "text": "Regard the $V_{M,a}$ as objects over $X$ using [lem-weil-pbc-etale-site-localization-open] for $X_M\\to X$. By composition of covering families [def-weil-pbc-sites-and-cohomology], they give one set-indexed etale covering $\\{V_i\\to X\\}_{i\\in I}$. Write $M_i$ for its model and $e_i:\\underline{M_i}|_{V_i}\\xrightarrow{\\sim}F|_{V_i}$ for its trivialization; put $W_{ij}=V_i\\times_XV_j$ and $W_{ijk}=V_i\\times_XV_j\\times_XV_k$. For every object $W$ of $X_{\\Et}$, apply [lem-weil-pbc-slice-site-localization] to the continuous inclusion defining $\\nu_X$ [def-weil-pbc-site-comparison-morphism] and to $W$. Under the slice identifications [lem-weil-pbc-etale-site-localization-open] and part (1) of [lem-weil-proetale-weakly-etale-localization], the localized inclusion is the inclusion defining $\\nu_W$, so the lemma gives natural isomorphisms $r_{W,G}:(\\nu_X^*G)|_W\\xrightarrow{\\sim}\\nu_W^*(G|_W)$, where both restrictions are slice restrictions. These isomorphisms commute with addition and with every scalar endomorphism by naturality, and the comparison inverse image acts on module sheaves through exactly these structure maps [def-weil-pbc-site-comparison-morphism]; hence they are linear over the constant coefficient ring (linearity for locally represented constant scalars is checked after restriction and then by separatedness). For $Z\\to W\\to X$ in $X_{\\Et}$, $r^X_{Z,G}=r^W_{Z,G|_W}\\circ(r^X_{W,G})|_Z$ under the sectionwise relocalization identification of [def-pur-localized-ringed-site]: the inclusion and the slice functors commute, and both sides are adjunction mates of that commuting square. By [lem-weil-pbc-site-constant-restriction] on both sites and step 1, the restriction of a constant model to $W$ is the constant model on $W$, and $r$ carries $(\\nu_X^*N_{X,\\Et})|_W$ to $\\nu_W^*N_{W,\\Et}$, all maps fixing constant sections. On $W_{ij}$ the transition $t_{ij}=e_j^{-1}e_i$ is a pro-etale module isomorphism from the restriction of $\\underline{M_i}$ to that of $\\underline{M_j}$, hence a map $\\nu_{W_{ij}}^*(M_i)_{W_{ij},\\Et}\\to\\nu_{W_{ij}}^*(M_j)_{W_{ij},\\Et}$. Full faithfulness on $W_{ij}$ from [det-pe-classical-sheaves-modules] gives a unique etale map $\\phi_{ij}$ with $\\nu_{W_{ij}}^*\\phi_{ij}=t_{ij}$. Lift $t_{ij}^{-1}$ too; faithfulness shows that the two composites are identities. Thus $\\phi_{ij}$ is an isomorphism. On each $W_{ijk}$, naturality of $r$ and the relocalization identity identify the pullbacks of $\\phi_{jk}\\phi_{ij}$ and $\\phi_{ik}$ (restricted to $W_{ijk}$) with the restrictions of $(e_k^{-1}e_j)(e_j^{-1}e_i)=e_k^{-1}e_i$; faithfulness on $W_{ijk}$ gives the cocycle identity $\\phi_{ik}=\\phi_{jk}\\phi_{ij}$, including repeated indices.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-slice-site-localization",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-site-constant-restriction",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, final sentence: descent of the etale-local constant models; explicit cocycle construction"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-module-sheaf-gluing] on $X_{\\Et}$ over its final object $X$, with ring sheaf $\\Lambda_{X,\\Et}$, covering $\\{V_i\\to X\\}$ and local constant module sheaves $M_i$. The local coefficient rings are their restrictions, as identified in step 4; all indices and overlap objects lie in the fixed site universe. Step 4 gives precisely the required linear overlap isomorphisms and triple cocycle. Obtain $F_0$ and isomorphisms $d_i:F_0|_{V_i}\\xrightarrow{\\sim}(M_i)_{V_i,\\Et}$ satisfying $\\phi_{ij}d_i=d_j$. In particular $F_0$ is an etale local system with finitely presented models.",
+   "uses": [
+    "lem-weil-pbc-site-module-sheaf-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, final sentence; gluing via Stacks Tag 04TR, sites-lemma-glue-sheaves"
+   }
+  },
+  {
+   "text": "By step 4, $\\nu^*d_i\\circ r_{V_i,F_0}$ is an isomorphism from $(\\nu_X^*F_0)|_{V_i}$ to $\\underline{M_i}|_{V_i}$, with $r$ from [lem-weil-pbc-slice-site-localization] and the slice identifications [lem-weil-pbc-etale-site-localization-open], [lem-weil-proetale-weakly-etale-localization]. Compose with $e_i$ to obtain $b_i=e_i\\circ\\nu^*d_i\\circ r_{V_i,F_0}$. On $W_{ij}$, after restricting and using the naturality of $r$ and its relocalization identity from step 4 [def-pur-localized-ringed-site], the equations $e_i=e_j\\nu^*\\phi_{ij}$ and $d_j=\\phi_{ij}d_i$ give $b_i=b_j$. The etale covering is a pro-etale covering by [sk-def-pe-site]. For every pro-etale object, pull back this covering and glue the images of a section under the $b_i$ using the equalizer condition [def-weil-pbc-sites-and-cohomology]. Uniqueness makes the resulting maps natural and linear. The local inverse maps agree as well and glue by the same equalizer; both composites are identities after restriction and hence globally. This gives $\\nu_X^*F_0\\cong F$.",
+   "uses": [
+    "lem-weil-pbc-slice-site-localization",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-localized-ringed-site",
+    "sk-def-pe-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, final sentence; explicit gluing of the comparison isomorphism"
+   }
+  },
+  {
+   "text": "By [det-pe-classical-sheaves-modules], the isomorphism of step 6 makes $F$ classical and identifies $F_0\\cong\\nu_{X,*}F$. Conversely an etale local system $G$ with finitely presented constant models on an etale covering $\\{U_k\\to X\\}$ pulls back to a pro-etale local system: the same covering is pro-etale by [sk-def-pe-site], and $(\\nu_X^*G)|_{U_k}\\cong\\nu_{U_k}^*(G|_{U_k})\\cong\\nu_{U_k}^*(N_k)_{U_k,\\Et}\\cong\\underline{N_k}$ by the isomorphism $r$ of [lem-weil-pbc-slice-site-localization] (linear, as in step 4) and the constant-model identification of step 1, which is the convention of [det-pe-finite-local-systems-hom]. Thus comparison inverse image restricts to the stated local-system categories. It is fully faithful by [det-pe-classical-sheaves-modules] and essentially surjective by steps 1--6. The unit and counit of that node's equivalence onto classical module sheaves restrict to these subcategories, since $\\nu_{X,*}F\\cong F_0$ is an etale local system. They give the asserted quasi-inverse equivalence. The covering $\\{V_i\\to X\\}$ from step 4 already trivializes $F$, with the same finitely presented models.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "sk-def-pe-site",
+    "lem-weil-pbc-slice-site-localization",
+    "det-pe-finite-local-systems-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y, lemma-compare-locally-constant, equivalence assertion; classicality via module comparison"
+   }
+  },
+  {
+   "text": "Finally let $A$ be a finite ring and $M$ a finite $A$-module. The map $q:A^{M}\\to M$ sending the basis vector indexed by $m$ to $m$ is a surjection from a free module with finitely many generators. Its kernel $K$ is a subset of the finite set $A^{M}$, so $K$ is finite. The map $A^{K}\\to A^{M}$ sending the basis vector indexed by $k$ to $k$ has image exactly $K$. Therefore $A^{K}\\to A^{M}\\to M\\to0$ is a finite presentation in the sense of [def-sc-finitely-presented-module]. Apply this to each finite local model. The argument also includes $A=0$ and $M=0$.",
+   "uses": [
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-finite-local-systems/sk-prop-pe-finite-local-systems-twist.proof.md",
+    "place": "Finite-ring clause of the blueprint twist detail, proved directly from the finite-presentation definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-finite-local-systems-type",
+  "def-weil-size-convention",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-proetale-weakly-etale-localization",
+  "det-pe-finite-local-systems-hom",
+  "det-pe-classical-sheaves-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-constructible-torsor",
+  "det-pe-torsor-comparison-glue",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-slice-site-localization",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "sk-def-pe-site",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, label lemma-compare-locally-constant"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "etale proetale local systems",
-   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.etaleTopology",
-   "date": "2026-10-16",
-   "verdict": "no match for the etale/pro-etale local-system comparison"
-  },
-  {
-   "tool": "loogle",
-   "query": "IsLocallyConstant",
-   "results": "IsLocallyConstant and basic topology lemmas (Mathlib.Topology.LocallyConstant.Basic); no sheaf local-system comparison",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "IsLocallyConstant in Mathlib/",
-   "results": "The first-worker receipt reported 0 hits with subdirectory Mathlib/, which doubles the source path (Mathlib/Mathlib). This is not valid absence evidence; superseded by the second-reader source-root and AlgebraicGeometry/Sites searches.",
-   "date": "2026-10-16",
-   "verdict": "invalid search path; no absence verdict"
-  },
-  {
-   "tool": "leansearch",
-   "query": "etale proetale local systems",
-   "results": "RingHom.Etale.propertyIsLocal; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.etaleTopology; Algebra.Etale.formallyEtale; no local-system comparison",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "locallyConstant|IsLocallyConstant|comparisonUpperStar",
-   "results": "25 hits: Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/LocallyConstant.lean; Mathlib/Condensed/Discrete/LocallyConstant.lean; Mathlib/Condensed/Discrete/LocallyConstant.lean",
-   "date": "2026-10-16",
-   "verdict": "no match: returned condensed locally constant functors and topological predicates, not comparison of local systems on scheme sites"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"locallyConstant\", \"Sheaf\"",
-   "results": "12 hits: CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction; CompHausLike.LocallyConstant.presheaf_ext; Condensed.locallyConstantPresheaf; LightCondensed.locallyConstantPresheaf; LightCondensed.isColimitLocallyConstantPresheafDiagram; Condensed.isColimitLocallyConstantPresheaf; Condensed.isColimitLocallyConstantPresheafDiagram; LightCondensed.isColimitLocallyConstantPresheaf",
-   "date": "2026-10-16",
-   "verdict": "no match: returned condensed locally constant functors and topological predicates, not comparison of local systems on scheme sites"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Equivalence of categories of locally constant finitely presented sheaves of modules on two scheme sites",
-   "results": "8 hits: LightCondMod.LocallyConstant.functorIsoDiscreteAux₂; LightCondMod.LocallyConstant.functorIsoDiscrete; CondensedMod.LocallyConstant.functorIsoDiscrete; CondensedMod.LocallyConstant.fullyFaithfulFunctor; LightCondMod.LocallyConstant.fullyFaithfulFunctor; CondensedMod.LocallyConstant.functorIsoDiscreteAux₂; LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf",
-   "date": "2026-10-16",
-   "verdict": "no match: returned condensed locally constant functors and topological predicates, not comparison of local systems on scheme sites"
-  },
-  {
-   "tool": "grep",
-   "query": "locally.*constant|comparisonUpperStar|equivalence",
-   "results": "6 hits in AlgebraicGeometry/Sites: Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean",
-   "date": "2026-10-16",
-   "verdict": "no match: AffineEtale.lean:105-119 compares the affine etale basis with the full etale site; no etale/pro-etale local-system comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Descent of locally constant module sheaves with finite presentations along a morphism of topoi",
-   "results": "8 hits: SheafOfModules.Presentation.map; CompHausLike.LocallyConstantModule.functor_map_val; CompHausLike.LocallyConstantModule.functor; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.isFinitePresentation; CompHausLike.LocallyConstantModule.functor_obj_val; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.IsFinitePresentation",
-   "date": "2026-10-16",
-   "verdict": "No match: the inspected SheafOfModules.Presentation.map and finite-presentation predicates concern presentations on a general ringed site; CompHausLike.LocallyConstantModule.functor concerns the coherent site of compact Hausdorff spaces. None gives descent from a scheme pro-etale site to its etale site."
+   "query": "Locally constant finitely presented module sheaves descend from the pro-etale site to the etale site",
+   "results": "8 hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.isFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, LightCondMod.ofSheafLightProfinite, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation. Receipt 3f619be0cc6fe577.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned general finite-presentation predicates, condensed sheaves, topology predicates or etale ring-map properties; none proves descent of finitely presented local systems between the two small scheme sites"
   },
   {
    "tool": "loogle",
    "query": "\"constantSheaf\", \"equivalence\"",
-   "results": "0 hits",
-   "date": "2026-10-16",
-   "verdict": "No match: the service returned zero declarations for this pattern."
+   "results": "0 hits: none. Receipt 4f53cda18c2baa0c.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned general finite-presentation predicates, condensed sheaves, topology predicates or etale ring-map properties; none proves descent of finitely presented local systems between the two small scheme sites"
   },
   {
    "tool": "grep",
-   "query": "proetale|pro.etale|locallyConstantModule|IsFinitePresentation",
-   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; subdirectory AlgebraicGeometry",
-   "date": "2026-10-16",
-   "verdict": "No match: inspected AlgebraicGeometry/Sites/Proetale.lean, which defines the pro-etale topology and small site, and the ElladicCohomology.lean hits, which define ell-adic coefficient sheaves. No local-system comparison declaration is present."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A locally constant sheaf of finitely presented modules descends from the pro etale topology to the etale topology",
-   "results": "8 hits; LightCondMod.ofSheafLightProfinite; SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation; CondensedMod.ofSheafProfinite; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor; SheafOfModules.QuasicoherentData.IsFinitePresentation; CondensedMod.ofSheafCompHaus. Actual receipt baa288ce57331be4.",
-   "date": "2026-10-16",
-   "verdict": "no match: condensed-module constructors and local finite-presentation predicates do not compare the small etale and pro-etale sites of a scheme"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"locallyConstant\", \"ModuleCat\"",
-   "results": "12 hits; CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor; CondensedMod.LocallyConstant.instFullModuleCatFunctor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; LightCondMod.LocallyConstant.instFaithfulModuleCatFunctor; LightCondMod.LocallyConstant.instFullModuleCatFunctor; LightCondMod.LocallyConstant.instFaithfulModuleCatLightCondensedDiscrete; LightCondMod.LocallyConstant.instFullModuleCatLightCondensedDiscrete; LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf. Actual receipt 6f33da4303f153d5.",
-   "date": "2026-10-16",
-   "verdict": "no match: condensed-module constructors and local finite-presentation predicates do not compare the small etale and pro-etale sites of a scheme"
-  },
-  {
-   "tool": "grep",
-   "query": "localSystem|LocallyConstantModule|comparisonUpperStar",
-   "results": "0 hits; no declarations. Actual receipt 4f53cda18c2baa0c.",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "locallyConstant.*(equiv|full|faithful)|pro[Ee]tale|proétale",
+   "query": "proetale|locallyConstant|IsLocallyConstant",
    "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean. Receipt 72abfb007d5a831c. Subdirectory AlgebraicGeometry/Sites.",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected general sheaf-module pullback/free-module isomorphisms, condensed-module constructions, and scheme-site topology definitions; none descends finitely presented local systems between the two small scheme sites"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsLocallyConstant\", \"Sheaf\"",
-   "results": "0 hits: . Receipt 4f53cda18c2baa0c.",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected general sheaf-module pullback/free-module isomorphisms, condensed-module constructions, and scheme-site topology definitions; none descends finitely presented local systems between the two small scheme sites"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Pullback from the etale to the proetale topos is an equivalence on locally constant finitely presented module sheaves",
-   "results": "8 hits: LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, LightCondMod.ofSheafLightProfinite. Receipt 6a78cf48246f886d.",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected general sheaf-module pullback/free-module isomorphisms, condensed-module constructions, and scheme-site topology definitions; none descends finitely presented local systems between the two small scheme sites"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Equivalence of locally constant module sheaves under change from etale to weakly etale topology",
-   "results": "8 hits; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂; CondensedMod.LocallyConstant.functorIsoDiscreteAux₂; CondensedMod.LocallyConstant.functorIsoDiscrete; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; CondensedMod.LocallyConstant.functorIsoDiscreteComponents; LightCondMod.LocallyConstant.functorIsoDiscreteComponents; LightCondMod.LocallyConstant.functorIsoDiscrete; CompHausLike.LocallyConstantModule.functor_obj_val. Receipt d155a034ab62e0aa.",
-   "date": "2026-10-16",
-   "verdict": "no match: the semantic hits concern condensed-module functors or general finite-type/presentation predicates, not scheme-site local-system descent or affine-local constructible stratifications; Loogle and the scheme-site grep return no declarations for these patterns"
+   "date": "2026-10-17",
+   "verdict": "no match: returned general finite-presentation predicates, condensed sheaves, topology predicates or etale ring-map properties; none proves descent of finitely presented local systems between the two small scheme sites"
   },
   {
    "tool": "grep",
-   "query": "constructible|LocallyConstant",
-   "results": "0 hits; no declarations returned. Receipt 4f53cda18c2baa0c. Subdirectory AlgebraicGeometry/Sites.",
-   "date": "2026-10-16",
-   "verdict": "no match: the semantic hits concern condensed-module functors or general finite-type/presentation predicates, not scheme-site local-system descent or affine-local constructible stratifications; Loogle and the scheme-site grep return no declarations for these patterns"
+   "query": "locallyConstant|IsLocallyConstant|localSystem|comparisonUpperStar",
+   "results": "25 hits: Mathlib/Geometry/Manifold/Complex.lean, Mathlib/Geometry/Manifold/Complex.lean, Mathlib/Geometry/Manifold/Complex.lean, Mathlib/Geometry/Manifold/Complex.lean, Mathlib/Geometry/Manifold/Complex.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean. Receipt 99a39c6bd2f6df26.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned general finite-presentation predicates, condensed sheaves, topology predicates or etale ring-map properties; none proves descent of finitely presented local systems between the two small scheme sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of locally constant finitely presented module sheaves on etale and proetale sites",
+   "results": "8 hits: CondensedMod.isDiscrete_tfae, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CondensedSet.LocallyConstant.functorFullyFaithful, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, CategoryTheory.Equivalence.sheafCongrPrecoherent. Receipt 1a3e421eb55c79d9.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned general finite-presentation predicates, condensed sheaves, topology predicates or etale ring-map properties; none proves descent of finitely presented local systems between the two small scheme sites"
   },
   {
    "tool": "loogle",
-   "query": "\"constructible\", \"Sheaf\"",
-   "results": "0 hits; no declarations returned. Receipt 4f53cda18c2baa0c.",
-   "date": "2026-10-16",
-   "verdict": "no match: the semantic hits concern condensed-module functors or general finite-type/presentation predicates, not scheme-site local-system descent or affine-local constructible stratifications; Loogle and the scheme-site grep return no declarations for these patterns"
+   "query": "\"locallyConstant\", \"Sheaf\"",
+   "results": "12 hits: CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.LocallyConstant.presheaf_ext, Condensed.locallyConstantPresheaf, LightCondensed.locallyConstantPresheaf, LightCondensed.isColimitLocallyConstantPresheafDiagram, Condensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheafDiagram, LightCondensed.isColimitLocallyConstantPresheaf. Receipt 10cd9704d02286a9.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned general finite-presentation predicates, condensed sheaves, topology predicates or etale ring-map properties; none proves descent of finitely presented local systems between the two small scheme sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of topology from weakly etale to etale preserves and reflects local systems with finitely presented modules",
+   "results": "8 hits: RingHom.Etale.propertyIsLocal, Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.toAlgebra, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale. Receipt 1b254d2878f0de05.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned general finite-presentation predicates, condensed sheaves, topology predicates or etale ring-map properties; none proves descent of finitely presented local systems between the two small scheme sites"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-pe-constructible-comparison",
@@ -181,5 +233,49 @@
   "group": "Q47"
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-finite-local-systems"
+ "unit": "sk-prop-pe-finite-local-systems",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-pe-finite-local-systems-twist",
+  "worker": "stage1",
+  "summary": "Checked Stacks 099Y and the main-20261015 finite-local-systems unit and twist detail. Proved all clauses using the existing type decomposition, automorphism comparison, arbitrary-group torsor comparison and general module-sheaf gluing. Expanded the Isom sheaf, transition maps, cocycle, glued comparison isomorphism and quasi-inverse restrictions. Used a direct finite-set presentation for finite coefficients. No statement change or new nodes. Repeated all Mathlib search kinds with actual receipts; no match. Maintainer-reader repair (2026-10-17): the pro-etale restriction compatibility now uses the generic slice-localization lemma instead of base-change inverse image, the agreement of the two constant-model conventions is proved in step 1, and the torsor definition is cited in step 2.",
+  "blueprint": "Realizes the Isom-torsor and twisting/descent clause of sk-prop-pe-finite-local-systems step 1 and the four paragraphs of its twist proof. The explicit descent cocycle constructs the same etale twist by local models. This supplies the single-stratum etale model used in sk-thm-pe-constructible-comparison proof part (1), the recorded ancestor; historical blueprint ancestry is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic equivalence of a scheme small etale site with its slice; carries local modules and transitions onto the site used by gluing."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic pro-etale slice equivalence and constant coefficient restriction, used to interpret the local trivializations."
+   },
+   {
+    "node": "lem-weil-pbc-site-constant-restriction",
+    "why": "Generic restriction of constant module sheaves to slice sites; identifies the overlap models."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-sheaf-gluing",
+    "why": "Generic effective descent of module sheaves on a covering. This makes the unit's twisting descent explicit; no node in the unit states this general gluing tool."
+   },
+   {
+    "node": "lem-weil-pbc-slice-site-localization",
+    "why": "Generic localization of a morphism of sites at an object; applied to the comparison inclusion it gives (nu_X^*G)|_W = nu_W^*(G|_W) for etale W, the restriction compatibility used for transitions, cocycle, gluing and the forward direction (as in det-pe-torsor-comparison-glue step 1)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "lem-weil-pbc-slice-site-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-b7df71b42",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-b7df71b42 (reviewer sub-agent of L); spot-checked: I read all of it: Stacks 099Y and 099X, the main-20261015 twist, type and Hom details, the unit, every cited statement, and all 8 steps. The statement matches 099Y and the blueprint, with arbitrary X, discrete commutative Lambda, finitely presented models and the finite-ring clause. Nothing is added or weakened. The coefficient category and nu_X agree with det-pe-classical-sheaves-modules and def-weil-pbc-site-comparison-morphism. The mathematics is sound: the torsor action h=psi^{-1}phi, the lift and cocycle by full faithfulness on non-affine overlaps, gluing via lem-weil-pbc-site-module-sheaf-gluing, the b_i=b_j direction, the restricted equivalence, and the finite presentation A^K->A^M->M. Edge cases checked: empty X, Lambda=0, infinite Aut(M), varying models. Duplicates: the existing 099Y-based nodes (lem-sf-proetale-*, lem-weil-pbc-proetale-finite-model-*) are all finite-Lambda special cases, not duplicates. There are no new nodes. I repaired three citation faults in fixes/.../det-pe-finite-local-systems-twist.json; the statement is unchanged. (1) C4, step 1: the identification nu^*N_Et = sheafified proetale constant N was taken from the Hom node's notation. I added a Yoneda argument via the module adjunction and the sheafification universal property. (2) C4, steps 4, 6 and 7: the steps treated proetale base-change inverse image along etale W->X as slice restriction, and lem-weil-proetale-weakly-etale-localization does not say that. I replaced the route through sk-thm-pe-direct-image-comparison and lem-weil-pbc-etale-inverse-image-restriction with lem-weil-pbc-slice-site-localization, applied to the comparison inclusion, plus the mates argument for relocalization. This is the same step as det-pe-torsor-comparison-glue step 1. (3) Step 2 now cites def-constructible-torsor. proof_deps is updated. Accepted tool_uses: lem-weil-pbc-etale-site-localization-open, lem-weil-proetale-weakly-etale-localization, lem-weil-pbc-site-constant-restriction, lem-weil-pbc-site-module-sheaf-gluing and lem-weil-pbc-slice-site-localization. The worker's two declared uses of the direct-image comparison and the etale restriction lemma are withdrawn. No SGA and no cycle.; 1 file(s) fixed by the reviewer"
+ }
 }
