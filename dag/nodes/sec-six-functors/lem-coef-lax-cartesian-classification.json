@@ -29,9 +29,119 @@
   "lem-coef-cartesian-operadic-envelope",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\Gamma^{\\times}$ be the ordinary category of pairs $(\\langle n\\rangle,S)$ and arrows over $\\alpha$ with $\\alpha^{-1}(T)\\subseteq S$, and let $v:N(\\Gamma^{\\times})\\to N(\\mathsf{Fin}_*)$ be its cartesian fibration. Form the relative exponential $q:Q\\to N(\\mathsf{Fin}_*)$ whose simplices over $\\sigma:\\Delta^k\\to N(\\mathsf{Fin}_*)$ are maps $\\Delta^k\\times_{N(\\mathsf{Fin}_*)}N(\\Gamma^{\\times})\\to\\mathcal D$. By [lem-cbc-enhanced-relative-exponential], $Q$ is a quasicategory, $q$ is cocartesian, and its fiber over $\\langle n\\rangle$ is $\\operatorname{Fun}(N(B_n),\\mathcal D)$, with the stated cocartesian-edge criterion. Let $P\\subset Q$ be the full product-diagram subcategory. The recognition statement [lem-coef-cartesian-envelope-product-diagram-recognition] identifies $P\\to N(\\mathsf{Fin}_*)$ over the base with the cartesian symmetric monoidal infinity category $\\mathcal D^{\\times}$ of [lem-coef-cartesian-operadic-envelope], including its inert cocartesian arrows, mapping spaces, composition, and all higher simplices. Thus we may work with the relative-exponential model $P$ while retaining the canonical target.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-coef-cartesian-envelope-product-diagram-recognition",
+    "lem-coef-cartesian-operadic-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.4.1.4 and Proposition 2.4.1.5, together with HTT Corollary 3.2.2.13; the product-diagram recognition is the explicit identification of the full subcategory with the cartesian envelope."
+   }
+  },
+  {
+   "text": "Put $X=\\mathcal C^{\\otimes}\\times_{N(\\mathsf{Fin}_*)}N(\\Gamma^{\\times})$. The relative-exponential universal property in [lem-cbc-enhanced-relative-exponential] gives, naturally in every simplicial parameter, $$\\operatorname{Hom}_{/N(\\mathsf{Fin}_*)}(K,Q)=\\operatorname{Hom}(K\\times_{N(\\mathsf{Fin}_*)}N(\\Gamma^{\\times}),\\mathcal D).$$ Consequently a functor $H:\\mathcal C^{\\otimes}\\to P\\subset Q$ over $N(\\mathsf{Fin}_*)$ is exactly a coherent diagram $G:X\\to\\mathcal D$ whose restriction $S\\mapsto G(c,S)$ lies in the product-diagram subcategory $P_n$ for every tuple $c$; the equivalence is on simplices, so it retains all higher homotopies. The full-subset section $A\\subset X$ is canonically $\\mathcal C^{\\otimes}$, since every pointed map has inverse image of the full target subset contained in the full source subset. Evaluation on this section is therefore $F=G|_A$, the underlying functor used in the classification.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-coef-cartesian-envelope-product-diagram-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 2.4.1.2, Remark 2.4.1.3, Construction 2.4.1.4, and proof of Proposition 2.4.1.7, identification of the relative-exponential diagram categories."
+   }
+  },
+  {
+   "text": "Fix $x=(c,S)\\in X$. Choose an $r$-cocartesian edge $u_S:c\\to c_S$ over the inert selector $\\sigma_S:\\langle n\\rangle\\to S_*$, which keeps precisely the elements of $S$; $S_*$ may be identified with the corresponding standard pointed set. It defines $\\widetilde u_S:(c,S)\\to(c_S,S)$ with target in $A$. This is initial in $A_{x/}$. In fact, an object of that comma category is an arrow $x\\to(d,\\{1,\\ldots,m\\})$ over some $\\alpha$ with $\\alpha^{-1}\\{1,\\ldots,m\\}\\subseteq S$. There is exactly one pointed map $\\beta:S_*\\to\\langle m\\rangle$ with $\\alpha=\\beta\\sigma_S$. The cocartesian mapping-space criterion in [lem-coef-cocartesian-straightening] says that the space of factorizations of the given edge through $u_S$, over this $\\beta$ and with its specified comparison homotopy, is contractible. This is exactly the mapping space from $\\widetilde u_S$ to that comma object. This proof works for $S=\\varnothing$ and for the full subset, where the selector is the identity.",
+   "uses": [
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.7, initial object of the comma category C_(C,S)/; explicit cocartesian mapping-space verification."
+   }
+  },
+  {
+   "text": "Let $F:A\\to\\mathcal D$ be any functor. The opposite-category application of [lem-coef-infinity-final-index-colimit] to the initial object just found shows that its diagram on $A_{x/}$ has a limit $F(c_S)$. Apply the right-hand dual in [lem-coef-infinity-relative-kan-existence] to $A\\subseteq X$ and $\\mathcal D\\to *$. The latter is an isofibration because $\\mathcal D$ is a quasicategory and the identity equivalence of the point lifts to an identity at every object. The local limits therefore give a coherent right Kan extension $G:X\\to\\mathcal D$ with $G|_A=F$, and the cone comparison $G(c,S)\\to F(c_S)$ is an equivalence. These local limits also show that an extension is a right Kan extension precisely when it takes every $\\widetilde u_S$ to an equivalence: a cone on a category with an initial object is limiting exactly when its component at that initial object is an equivalence. To check this last criterion, compare to the limit at the initial value furnished by the cited final-index lemma and use the defining uniqueness of a limiting cone. Finally [lem-coef-infinity-kan-mapping-restriction] makes restriction fully faithful on right Kan extensions, since the target of any pair has the required limiting cones. Thus extensions exist and their coherent transformations are determined by restriction; no completeness of $\\mathcal D$ beyond the local limits is invoked.",
+   "uses": [
+    "lem-coef-infinity-final-index-colimit",
+    "lem-coef-infinity-relative-kan-existence",
+    "lem-coef-infinity-kan-mapping-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.7, right Kan extension and HTT 4.3.2.15; here expanded through the existing Kan existence and mapping-restriction nodes."
+   }
+  },
+  {
+   "text": "Suppose $F$ has the product-cone property in the statement and $G$ is its right Kan extension. Step 4 gives $G(c,S)\\simeq F(c_S)$ and $G(c,\\{i\\})\\simeq F(c_i)$. Applying the product-cone hypothesis to the tuple $c_S$ therefore shows that every $G(c,S)\\to\\prod_{i\\in S}G(c,\\{i\\})$ is an equivalence, with the actual restriction cone maps. Hence $G$ defines $H$ by step 2. For an inert cocartesian edge $v:c\\to d$ over $\\alpha$ and any subset $T$ of the output coordinates, the composite selector to $d_T$ is cocartesian and selects exactly $\\alpha^{-1}T$ in $c$. The composite is cocartesian because a composite of cocartesian edges is cocartesian [lem-coef-infinity-cocartesian-composition-initiality] (equivalently, by pasting the homotopy-pullback squares of [lem-coef-cocartesian-straightening]). Since $\\alpha$ is inert it restricts to a bijection $\\alpha^{-1}T\\to T$, and $\\sigma_T\\alpha$ is $\\sigma_{\\alpha^{-1}T}$ followed by the induced isomorphism $(\\alpha^{-1}T)_*\\cong T_*$. Composing the selector from $c$ to $c_{\\alpha^{-1}T}$ with a cocartesian lift of this isomorphism (an equivalence) gives another cocartesian lift of $\\sigma_T\\alpha$; cocartesian lifts are initial in the lift category of [lem-coef-infinity-cocartesian-composition-initiality], so the two are identified by an equivalence over the identity, and the composite selector is the selector of $\\alpha^{-1}T$ up to this relabelling. Right Kan extension sends both selector arrows to equivalences, so two-out-of-three makes $G(c,\\alpha^{-1}T)\\to G(d,T)$ an equivalence. For singletons these are exactly the component equivalences characterizing an inert cocartesian arrow of the target [lem-coef-cartesian-operadic-envelope]. Thus $H$ is lax symmetric monoidal.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.7, implication (1′),(2′) to (1),(2), including empty subsets."
+   }
+  },
+  {
+   "text": "Conversely let $H$ be lax symmetric monoidal and let $G$ be its subset diagram. The fiberwise product condition holds by construction of the model in step 1. Its preservation of inert cocartesian arrows makes $G(c,S)\\to G(c_S,S)$ an equivalence for every selector, using the component-equivalence criterion in [lem-coef-cartesian-operadic-envelope]. The case of a subset with several elements follows from the singleton cases by the product-cone comparisons, and the empty case is the unique map between terminal objects. Step 4 therefore says that $G$ is the right Kan extension of $F=G|_A$. Moreover $G(c,\\{1,\\ldots,n\\})\\simeq\\prod_iG(c,\\{i\\})\\simeq\\prod_iG(c_i,\\{i\\})$, and the maps are the images under $F$ of the inert projections. This is exactly the desired product-cone condition on $F$, including the empty product. Steps 5 and 6 identify the lax functor diagrams with the right Kan extensions of precisely those $F$. Their equivalence on all transformations and higher homotopies follows from the mapping-space restriction equivalence in [lem-coef-infinity-kan-mapping-restriction], rather than from an objectwise coherence assertion.",
+   "uses": [
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-infinity-kan-mapping-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.7, implication (1),(2) to (1′),(2′), and equivalence on full functor categories."
+   }
+  },
+  {
+   "text": "Evaluation at $\\langle1\\rangle$ is evaluation of the subset diagram at its sole nonempty subset, so the underlying functor of $H$ is $F|_{\\mathcal C}$. For a cocartesian lift $\\mu:c\\to\\bigotimes_i c_i$ of the fold map, its target's only nonempty subset has inverse image the full source subset. The block map of $H(\\mu)$ is therefore exactly $F(c)\\to F(\\bigotimes_i c_i)$. Identifying $F(c)$ with $\\prod_iF(c_i)$ by its given cone gives the displayed comparison, in the required direction. With no inputs its source is $G(c,\\varnothing)=F(())$, terminal; this supplies the nullary comparison. These identifications are identities of evaluation and restriction in the subset-diagram model, so they retain the functor's entire coherent simplex data.",
+   "uses": [
+    "lem-coef-cartesian-operadic-envelope"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.4.1.7, evaluation on the full-subset section; Ramzi 2209.12569v2 Theorem 2.1, and Remark 2.2 for the operation formula."
+   }
+  },
+  {
+   "text": "Fix a product-cone functor $F$ and include its specified identification in the lifting data. Existence is step 4 followed by step 5. For any two such lifted diagrams, [lem-coef-infinity-kan-mapping-restriction] identifies their full transformation mapping space with that of their restrictions. Taking the homotopy fiber over the specified identity of $F$ therefore gives a contractible space. Its points are equivalences: lifting the inverse identity gives an inverse, and lifting the two identity composites gives the inverse homotopies. The same mapping-space fibers retain all their higher homotopies. Thus the nonempty space of lifts with identification has contractible paths and higher path spaces, and is contractible. This proves the final uniqueness assertion without importing Proposition 2.4.1.7 itself as an uncited black box.",
+   "uses": [
+    "lem-coef-infinity-kan-mapping-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.7, contractible right Kan extension choices (equivalence consequence of the trivial Kan fibration)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-relative-exponential",
+  "lem-coef-cartesian-envelope-product-diagram-recognition",
+  "lem-coef-cartesian-operadic-envelope",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-infinity-relative-kan-existence",
+  "lem-coef-infinity-kan-mapping-restriction",
+  "lem-coef-infinity-cocartesian-composition-initiality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra Construction 2.4.1.4 and proof of Proposition 2.4.1.7, printed pp. 284 and 290–291, read online. Expanded through existing finite-poset, cocartesian-straightening, and right Kan extension nodes; the source is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -88,10 +198,52 @@
    "results": "{\"t\": \"2026-10-16T16:42:11Z\", \"tool\": \"grep\", \"query\": \"LaxCartesian|laxCartesian|Straightening|Unstraightening|CartesianOperad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading. Cech nerves, ordinary product diagrams and nerve maps do not classify infinity-operad maps. Ordinary LaxMonoidal has ordinary category inputs (Mathlib/CategoryTheory/Monoidal/Functor.lean:50-69)."
+  },
+  {
+   "tool": "grep",
+   "query": "LaxCartesian|lax.cartesian|inert|Operad.*Functor",
+   "results": "{\"t\": \"2026-10-16T18:07:55Z\", \"tool\": \"grep\", \"query\": \"LaxCartesian|lax.cartesian|inert|Operad.*Functor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the hits; ordinary CartesianMonoidalCategory/LaxMonoidal and StrictSegal right Kan extensions of Set-valued simplicial objects do not classify infinity-operad maps. Read Mathlib/CategoryTheory/Monoidal/Functor.lean:50–90, Monoidal/Cartesian/Basic.lean:14–36, and AlgebraicTopology/SimplicialSet/Coskeletal.lean (StrictSegal statements)."
+  },
+  {
+   "tool": "loogle",
+   "query": "LaxMonoidal, CartesianMonoidalCategory, inert",
+   "results": "{\"t\": \"2026-10-16T18:07:56Z\", \"tool\": \"loogle\", \"query\": \"LaxMonoidal, CartesianMonoidalCategory, inert\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'LaxMonoidal'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the hits; ordinary CartesianMonoidalCategory/LaxMonoidal and StrictSegal right Kan extensions of Set-valued simplicial objects do not classify infinity-operad maps. Read Mathlib/CategoryTheory/Monoidal/Functor.lean:50–90, Monoidal/Cartesian/Basic.lean:14–36, and AlgebraicTopology/SimplicialSet/Coskeletal.lean (StrictSegal statements)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "classification of lax Cartesian infinity operad maps by product cone functors",
+   "results": "{\"t\": \"2026-10-16T18:07:56Z\", \"tool\": \"leansearch\", \"query\": \"classification of lax Cartesian infinity operad maps by product cone functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Cat.prodCone\", \"CategoryTheory.Cat.isLimitProdCone\", \"CategoryTheory.Limits.Pi.cone\", \"CategoryTheory.Functor.chosenProd.isLimit\", \"CategoryTheory.Limits.SequentialProduct.cone\", \"CategoryTheory.Pi.laxMonoidalPi'\", \"CategoryTheory.Limits.PullbackCone.map\", \"CategoryTheory.Functor.LaxMonoidal.prod'\"], \"digest\": \"6f4405e49a14ce32\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the hits; ordinary CartesianMonoidalCategory/LaxMonoidal and StrictSegal right Kan extensions of Set-valued simplicial objects do not classify infinity-operad maps. Read Mathlib/CategoryTheory/Monoidal/Functor.lean:50–90, Monoidal/Cartesian/Basic.lean:14–36, and AlgebraicTopology/SimplicialSet/Coskeletal.lean (StrictSegal statements)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lax symmetric monoidal functors from a symmetric monoidal infinity category to a Cartesian target correspond to product-cone preserving functors from the total operad",
+   "results": "{\"t\": \"2026-10-16T18:07:58Z\", \"tool\": \"leanfinder\", \"query\": \"Lax symmetric monoidal functors from a symmetric monoidal infinity category to a Cartesian target correspond to product-cone preserving functors from the total operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.OplaxMonoidal.δ_of_cartesianMonoidalCategory\", \"CategoryTheory.Functor.Monoidal.μ_of_cartesianMonoidalCategory\", \"CategoryTheory.Functor.OplaxMonoidal.ofChosenFiniteProducts\", \"CategoryTheory.Functor.instLaxMonoidalProdProd\", \"CategoryTheory.Functor.Monoidal.lift_μ\", \"CategoryTheory.Functor.OplaxMonoidal.instSubsingleton\", \"CategoryTheory.monoidalOfHasFiniteProducts.δ_eq\", \"CategoryTheory.monoidalOfHasFiniteProducts.η_eq\"], \"digest\": \"fe58b9f70e2ef79c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the hits; ordinary CartesianMonoidalCategory/LaxMonoidal and StrictSegal right Kan extensions of Set-valued simplicial objects do not classify infinity-operad maps. Read Mathlib/CategoryTheory/Monoidal/Functor.lean:50–90, Monoidal/Cartesian/Basic.lean:14–36, and AlgebraicTopology/SimplicialSet/Coskeletal.lean (StrictSegal statements)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaxMonoidal\", \"inert\"",
+   "results": "{\"t\": \"2026-10-16T18:24:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"LaxMonoidal\\\", \\\"inert\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the hits; ordinary CartesianMonoidalCategory/LaxMonoidal and StrictSegal right Kan extensions of Set-valued simplicial objects do not classify infinity-operad maps. Read Mathlib/CategoryTheory/Monoidal/Functor.lean:50–90, Monoidal/Cartesian/Basic.lean:14–36, and AlgebraicTopology/SimplicialSet/Coskeletal.lean (StrictSegal statements)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor from infinity operad into finite product infinity category lifts by right Kan extension on finite subset diagrams preserving inert morphisms",
+   "results": "{\"t\": \"2026-10-16T18:24:58Z\", \"tool\": \"leanfinder\", \"query\": \"Functor from infinity operad into finite product infinity category lifts by right Kan extension on finite subset diagrams preserving inert morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\"], \"digest\": \"7432eb550cd82024\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the hits; ordinary CartesianMonoidalCategory/LaxMonoidal and StrictSegal right Kan extensions of Set-valued simplicial objects do not classify infinity-operad maps. Read Mathlib/CategoryTheory/Monoidal/Functor.lean:50–90, Monoidal/Cartesian/Basic.lean:14–36, and AlgebraicTopology/SimplicialSet/Coskeletal.lean (StrictSegal statements)."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-monoidal-straightening",
@@ -99,5 +251,29 @@
   "group": "Q57"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-lax-cartesian-classification",
+  "worker": "stage1",
+  "summary": "Repaired the returned central reduction: step 1 now constructs the relative exponential and invokes the new product-diagram recognition node to identify its full subcategory with the cartesian envelope; step 2 now uses the relative-exponential Hom universal property for the coherent diagram dictionary. Steps 3-8 retain the checked selector and right-Kan arguments.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: coherent external products require the lax-Cartesian classification; the repaired first two steps realize the relative-exponential/product-diagram construction underlying that classification.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-relative-exponential",
+    "why": "Step 1 uses its relative-exponential universal property and cocartesian-edge criterion; this generic quasicategory construction is supplied by another unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-relative-exponential"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-3122f2e97",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-3122f2e97 (reviewer sub-agent of L); spot-checked: The mathematics is correct and complete; checked against HA §2.4.1 (Def 2.4.1.1, Construction 2.4.1.4, Props 2.4.1.5 and 2.4.1.7). HA is not archived, so proof_origin agent is correct and the WANTED lines stand. Item statement: symmetric monoidal special case of HA 2.4.1.7, not weakened; tested n=0 (F(()) terminal), n=1 and the binary fold direction. New node lem-coef-cartesian-envelope-product-diagram-recognition is true: fibers n=0 and n=1 checked, the block mapping-space formula Map(f∘α^{-1},g)≃∏_j Map(∏_{α(i)=j} f_i,g_j) checked, and the inert criterion matches the relative-exponential edge criterion. It is not a restatement of the item or of the envelope node; grep over dag/nodes and the blueprint snapshots found no duplicate. Steps 1–8 checked against the cited statements: the relative-exponential hypotheses hold (v cartesian, small base). The initiality of the selector in step 3 holds because σ_S is surjective and cocartesian lifts have contractible factorization spaces; empty and full S are fine. In step 4, D→* is an isofibration, the local limits come from the initial object, and the right-Kan criterion is the leg at that initial object. Steps 6–8 follow from mapping restriction and existence. The tool use of lem-cbc-enhanced-relative-exponential (unit sk-prop-sf-cbc) is accepted. Three fixes: (1) the new node's unit was sk-thm-sf-package; set to the item's unit sk-prop-sf-biduality-general, since the old value reversed the route. (2) The new node used the relative exponential without citing it inline and carried an unused stmt_dep, lem-coef-infinity-finite-poset-kan-extension; the citation is added and stmt_deps corrected. (3) Step 5 attributed cocartesian composition and lift uniqueness to the straightening node, and said the composite selects exactly α^{-1}T, which is only true up to the inert bijection (α^{-1}T)_*≅T_*. It now cites lem-coef-infinity-cocartesian-composition-initiality (same unit, no cycle), writes out the relabelling, and proof_deps is recomputed. No nodes dropped, no statement changed, no SGA source used.; 2 file(s) fixed by the reviewer"
+ }
 }

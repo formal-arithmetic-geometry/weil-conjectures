@@ -31,9 +31,157 @@
   "lem-coef-spaces-small-colimits-universe",
   "lem-coef-space-transport-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first compute the colimit of a space-valued diagram from its left fibration. Let $F:I\\to\\mathcal S$ be a diagram on a small quasicategory and choose its small left-fibration representative $q:E\\to I$ using [lem-coef-space-transport-classification]. For each small Kan complex $X$, its constant diagram is represented by $I\\times X\\to I$. The same node's mapping-space formula gives\n$$\\operatorname{Map}_{\\operatorname{Fun}(I,\\mathcal S)}(F,\\Delta_I X)\\simeq\\operatorname{Fun}_{/I}(E,I\\times X)\\cong\\operatorname{Fun}(E,X).$$\nThe last isomorphism sends an over-map to its $X$-coordinate, with inverse $h\\mapsto(q,h)$, in every simplicial degree. All these comparisons are natural in $X$ and respect composition. With base a point, the same classification identifies $\\operatorname{Map}_{\\mathcal S}(R,X)$ with $\\operatorname{Fun}(R,X)$ for Kan $R,X$.",
+   "uses": [
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05RR",
+    "place": "Proposition 7.4.3.6; elementary over-map calculation from the full transport mapping-space statement."
+   }
+  },
+  {
+   "text": "Factor $E\\to\\Delta^0$ in the small Kan model structure of [lem-coef-kan-quillen-right-proper] as a trivial cofibration $r:E\\to R$ followed by a fibration. Thus $R$ is a small Kan complex and $r$ is a weak homotopy equivalence. For Kan $X$, every edge in $X$ is an equivalence (the inverse edge and inverse triangles are obtained by filling the outer two-dimensional horns), so [lem-cbc-simplicial-groupoid-localization] identifies restriction $r^*:\\operatorname{Fun}(R,X)\\to\\operatorname{Fun}(E,X)$ as an equivalence. Both functor simplicial sets are Kan: step 1 identifies the second with the Kan over-map complex of two left fibrations over $I$, while the classification over a point identifies the first with the Kan over-map complex of $R$ and $X$. Here the cited localization is an equivalence of spaces, not merely a bijection on components. Under step 1, the over-map $(q,r):E\\to I\\times R$ supplies a coherent cocone $F\\to\\Delta_I R$. Composition with this cocone is, for every $X$, precisely\n$$\\operatorname{Map}_{\\mathcal S}(R,X)\\simeq\\operatorname{Fun}(R,X)\\xrightarrow{r^*}\\operatorname{Fun}(E,X)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(I,\\mathcal S)}(F,\\Delta_I X).$$\nIt is an equivalence. The cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] proves that this particular cocone is colimiting. Consequently $\\operatorname{colim}_I F$ has the weak homotopy type of $E$, and it is contractible if and only if $E\\to\\Delta^0$ is a weak homotopy equivalence, by two-out-of-three with $r$. This also treats empty $E$: the empty simplicial set is Kan and is not weakly contractible.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-cbc-simplicial-groupoid-localization",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05RR",
+    "place": "Proposition 7.4.3.6; agent proof via Kan replacement, groupoid localization and the explicit cocone mapping-space test."
+   }
+  },
+  {
+   "text": "For fixed $b\\in B$, [lem-coef-space-transport-classification] identifies $H_B(b,-)$ with the source-fixed arrow left fibration $E_b=\\{b\\}\\times_{B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B)\\to B$. Its pullback along $u$ classifies $a\\mapsto H_B(b,u(a))$, by the pullback clause of that node. The pullback total simplicial set is exactly the displayed $(b\\downarrow u)$, including all operators, rather than its set of objects or its core. It is small, since all factors are formed from small simplicial sets, and is a quasicategory: fill an inner horn in $A$ and lift the filling simplex through the left fibration. Step 2 applied to this left fibration says that the space in (4) is contractible exactly when this total simplicial set is weakly contractible. This proves (3)$\\Leftrightarrow$(4).",
+   "uses": [
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02NZ",
+    "place": "Remark 7.2.3.2, oriented comma model; transport pullback and the total-space computation proved in steps 1-2."
+   }
+  },
+  {
+   "text": "For every $b\\in B$, the canonical cocone $H_B(b,-)\\to\\Delta_B *$ is colimiting. Indeed the covariant evaluation assertion of [lem-coef-infinity-pointwise-yoneda-evaluation] gives\n$$\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal S)}(H_B(b,-),\\Delta_B X)\\simeq X,$$\nby evaluation at $1_b$, for every small space $X$. The space-transport comparison over a point gives $\\operatorname{Map}_{\\mathcal S}(*,X)\\simeq X$. Under these identifications composition with the canonical cocone sends $x\\in X$ to the constant transformation and then evaluates it at $1_b$, hence is the identity of $X$, including parameter simplices. The cocone criterion therefore proves the claim, with the specified cocone, and in particular $\\operatorname{colim}_B H_B(b,-)\\simeq *$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05RS",
+    "place": "Example 7.4.3.7; direct universal-property proof from covariant Yoneda evaluation instead of an uncited contractibility-of-coslices theorem."
+   }
+  },
+  {
+   "text": "Assume (1). Every small-space diagram has a colimit by [lem-coef-spaces-small-colimits-universe]. Restrict its colimit cocone along $u$. It is colimiting by the definition of finality, so it and the chosen colimit cocone of $Du$ are initial objects of the same coherent cocone category. Their comparison maps are inverse up to homotopy: each composite and the identity are points in the same contractible outgoing mapping space. Evaluation at the apex preserves these inverse witnesses. Thus the canonical comparison in (2), which is induced by the restricted cocone, is an equivalence. This proves (1)$\\Rightarrow$(2).",
+   "uses": [
+    "lem-coef-spaces-small-colimits-universe",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/04K3",
+    "place": "Proposition 7.4.3.11, universal-colimit implication; elementary uniqueness of an initial cocone."
+   }
+  },
+  {
+   "text": "Assume (2) and substitute the coherent space-valued diagram $D=H_B(b,-)$, for each $b$. Its colimit over $B$ is the point with its canonical cocone by step 4, so (2) makes $\\operatorname{colim}_A H_B(b,u(-))$ contractible. Hence (2)$\\Rightarrow$(4). This uses the full covariant corepresentable, not an ordinary set-valued Hom functor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/04K3",
+    "place": "Proposition 7.4.3.11, space-test to corepresentable-test implication, using the calculation already proved in step 4."
+   }
+  },
+  {
+   "text": "We prove the converse by a presheaf calculation. Put $\\mathcal P(B)=\\operatorname{Fun}(B^{\\mathrm{op}},\\mathcal S)$ and $y(b)=H_B(-,b)$. By [lem-coef-infinity-presheaf-free-cocompletion], this presheaf category has all small colimits. Form\n$$W_A=\\operatorname{colim}_{a\\in A}y(u(a)),\\qquad W_B=\\operatorname{colim}_{b\\in B}y(b).$$\nRestricting the second cocone gives a canonical map $c:W_A\\to W_B$. The pointwise colimit assertion of [lem-coef-infinity-yoneda-presheaf-limits] identifies\n$$W_A(b)\\simeq\\operatorname{colim}_{a\\in A}H_B(b,u(a)),\\qquad W_B(b)\\simeq\\operatorname{colim}_{b'\\in B}H_B(b,b').$$\nThese identify $c(b)$ with the usual comparison: on the $a$th leg it is the $u(a)$th leg of the second cocone. In particular step 4 makes every $W_B(b)$ contractible; assuming (4), every $W_A(b)$ is contractible too. Thus every $c(b)$ is an equivalence (compose its source and target with the point and use two-out-of-three), and [lem-cbc-enhanced-functor-cone-calculus] makes $c$ an equivalence in $\\mathcal P(B)$.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/04K3",
+    "place": "Agent presheaf proof of the corepresentable-test converse: construct the colimit of representables and use pointwise detection. No finality theorem is invoked."
+   }
+  },
+  {
+   "text": "For any $Q:B^{\\mathrm{op}}\\to\\mathcal S$, the colimit mapping-space criterion and coherent Yoneda evaluation give natural equivalences\n$$\\operatorname{Map}_{\\mathcal P(B)}(W_A,Q)\\simeq\\lim_{a\\in A^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal P(B)}(y(u(a)),Q)\\simeq\\lim_{a\\in A^{\\mathrm{op}}}Q(u(a)),$$\n$$\\operatorname{Map}_{\\mathcal P(B)}(W_B,Q)\\simeq\\lim_{b\\in B^{\\mathrm{op}}}Q(b).$$\nUnder these equivalences precomposition with $c$ is exactly restriction of the limiting compatible families along $u^{\\mathrm{op}}$: on each $a$ component, precomposition by its colimit leg followed by $c$ is precomposition by the $u(a)$ leg of $W_B$. Evaluation at the relevant identity is the Yoneda map in [lem-coef-infinity-yoneda-evaluation]; its stated coherent naturality proves this identification also on all higher simplices. Under (4), $c$ is an equivalence by step 7, so its precomposition map is an equivalence, with inverse induced by an inverse of $c$. We have therefore proved that the actual restriction\n$$\\lim_{B^{\\mathrm{op}}}Q\\longrightarrow\\lim_{A^{\\mathrm{op}}}Q u^{\\mathrm{op}}$$\nis an equivalence, not merely that these limits have equivalent homotopy types.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/04K3",
+    "place": "Agent presheaf proof: apply the cited mapping-space colimit formula and the full Yoneda evaluation theorem; identify the map on every colimit leg."
+   }
+  },
+  {
+   "text": "The preceding conclusion applies to presheaves valued in any containing universe of spaces, even though (4) was assumed only for the fixed small spaces. To see this without strengthening that assumption, view $W_A,W_B$ and their cocones in $\\operatorname{Fun}(B^{\\mathrm{op}},\\mathcal S_{\\mathcal V})$ for a larger universe $\\mathcal V$. The universe inclusion of [lem-coef-spaces-small-colimits-universe] preserves every small colimit appearing in step 7. Pointwise colimit detection then says that these image cocones are still the colimits of the same representables. Their image comparison is still an equivalence, since any functor carries a chosen inverse and its inverse witnesses to inverse witnesses. Apply step 8 in $\\mathcal V$, using Yoneda there and the unchanged representables (their small mapping spaces are the same Kan complexes). It follows that the restriction of limits is an equivalence for every $Q:B^{\\mathrm{op}}\\to\\mathcal S_{\\mathcal V}$. Only $A$ and $B$ index the colimits, so both remain small in the original universe.",
+   "uses": [
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/04K3",
+    "place": "Agent universe check for the presheaf argument; uses preservation of small-space colimits under universe enlargement, not an all-cardinals hypothesis."
+   }
+  },
+  {
+   "text": "Assume (4). Let $D:B\\to\\mathcal E$ be any coherent diagram and let $\\lambda:D\\to\\Delta_B L$ be any colimiting cocone; no other colimits in $\\mathcal E$ are assumed. For each $T\\in\\mathcal E$ choose a containing universe $\\mathcal V$ for $\\mathcal E$ and its mapping spaces. The coherent mapping bifunctor of [lem-coef-space-transport-classification] supplies the presheaf $Q_T(b)=\\operatorname{Map}_{\\mathcal E}(D(b),T)$ in that universe. The colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits] and step 9 give\n$$\\operatorname{Map}_{\\mathcal E}(L,T)\\xrightarrow{\\sim}\\lim_{B^{\\mathrm{op}}}Q_T\\xrightarrow{\\sim}\\lim_{A^{\\mathrm{op}}}Q_T u^{\\mathrm{op}}.$$\nThe composite is induced by the restricted cocone $\\lambda u$: on its $a$ leg it sends $f:L\\to T$ to $f\\lambda_{u(a)}$, and the cited naturality identifies the corresponding higher compatibility data. The same colimit criterion therefore makes $\\lambda u$ colimiting, with its original vertex $L$. This proves (4)$\\Rightarrow$(1) for arbitrary target quasicategories. Together with steps 3, 5 and 6 it proves all four equivalences.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/04K3",
+    "place": "Conclusion of the agent presheaf proof; explicit mapping-space test for every specified colimit cocone in an arbitrary target."
+   }
+  },
+  {
+   "text": "For an ordinary $v:I\\to J$ and $j\\in J$, compute the comma simplicial set in each degree using [def-cbc-enhanced-diagrams-cones]. An $n$-simplex of its arrow factor is a functor $[n]\\times[1]\\to J$, since a simplicial map $N([n]\\times[1])\\to N(J)$ specifies images of objects and arrows with precisely their composition relations. Fixing its source to be constantly $j$ and its target to be $v$ of a functor $[n]\\to I$ gives objects $(i_r,\\alpha_r:j\\to v(i_r))$ and arrows $i_r\\to i_s$ with $v(i_r\\to i_s)\\alpha_r=\\alpha_s$. These are exactly the functors $[n]\\to(j\\downarrow v)$. Faces restrict the chain and degeneracies repeat its objects and identities, so the identification commutes with every simplicial operator. The comma simplicial set is therefore canonically $N(j\\downarrow v)$, not merely equivalent on objects. Its map to a point is the same map under this identification; hence the last assertion follows directly.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02NZ",
+    "place": "Elementary degreewise computation for ordinary nerves and their oriented comma categories."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-small-colimits-universe"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/04K3",
+  "place": "Agent mapping-space and presheaf proof of the four tests in Proposition 7.4.3.11, with the comma model of Remark 7.2.3.2. Total-space colimits follow the assertion of 05RR but are proved here from transport and groupoid localization. Online sources read; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -83,10 +231,73 @@
    "results": "{\"t\": \"2026-10-16T20:25:40Z\", \"tool\": \"leanfinder\", \"query\": \"A functor of quasicategories is right cofinal exactly when every undercategory over an object of the target is weakly contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final\", \"CategoryTheory.Functor.Final.out\", \"CategoryTheory.Functor.final_of_final_costructuredArrowToOver\", \"CategoryTheory.Functor.Initial.out\", \"CategoryTheory.Functor.Final.instNonemptyStructuredArrow\", \"CategoryTheory.Functor.Final.induction\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.Join.instFinalInclRightOfIsConnected\"], \"digest\": \"b2d3b16b6ec95b57\"}",
    "date": "2026-10-16",
    "verdict": "no match: read CategoryTheory.Functor.Final and Final.out, and Mathlib/CategoryTheory/Limits/Final.lean:476-492. These concern ordinary categories and connected StructuredArrow categories; they do not assert weak contractibility of coherent comma categories or the space-valued cofinality test."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cofinal functor of quasicategories detected by space valued colimits and weakly contractible comma quasicategories",
+   "results": "8 hits: CategoryTheory.Functor.Final; SSet.Quasicategory; SSet.hasColimits; SSet.QCat; instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex; CategoryTheory.Nerve.quasicategory; SSet.Truncated.hasColimits; SSet.StrictSegal.isPointwiseRightKanExtension",
+   "date": "2026-10-17",
+   "verdict": "no match; Read Mathlib/CategoryTheory/Limits/Final.lean:86-104,476-515: Final assumes ordinary Category instances and connected StructuredArrow categories; the corepresentable test concerns Type-valued ordinary colimits. Returned ofCorepresentableBy and Comma results likewise have ordinary Category instances. SSet.hasColimits and horn colimits are strict simplicial-set colimits. None asserts coherent colimit finality in arbitrary quasicategories, space-valued tests or weakly contractible comma quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Final, colimit, Quasicategory",
+   "results": "0 hits; loogle: unknown identifier 'Functor.Final'",
+   "date": "2026-10-17",
+   "verdict": "no match: query parsing reported an unknown identifier; the quoted full-name query below was then run"
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|final.*space|weakly contractible",
+   "results": "0 hits in AlgebraicTopology/Quasicategory",
+   "date": "2026-10-17",
+   "verdict": "no match; Read Mathlib/CategoryTheory/Limits/Final.lean:86-104,476-515: Final assumes ordinary Category instances and connected StructuredArrow categories; the corepresentable test concerns Type-valued ordinary colimits. Returned ofCorepresentableBy and Comma results likewise have ordinary Category instances. SSet.hasColimits and horn colimits are strict simplicial-set colimits. None asserts coherent colimit finality in arbitrary quasicategories, space-valued tests or weakly contractible comma quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimit of the coherent corepresentable over a quasicategory is the weak realization of the comma quasicategory",
+   "results": "8 hits: CategoryTheory.Limits.IsColimit.ofCorepresentableBy; CategoryTheory.Functor.corepresentableByCompCoyonedaObjOfIsColimit; SSet.hasColimits; instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex; CategoryTheory.Nerve.quasicategory; CategoryTheory.Limits.IsColimit.corepresentableBy; CategoryTheory.Limits.IndObjectPresentation.coconeIsColimit; SSet.horn.isColimit",
+   "date": "2026-10-17",
+   "verdict": "no match; Read Mathlib/CategoryTheory/Limits/Final.lean:86-104,476-515: Final assumes ordinary Category instances and connected StructuredArrow categories; the corepresentable test concerns Type-valued ordinary colimits. Returned ofCorepresentableBy and Comma results likewise have ordinary Category instances. SSet.hasColimits and horn colimits are strict simplicial-set colimits. None asserts coherent colimit finality in arbitrary quasicategories, space-valued tests or weakly contractible comma quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "Quasicategory comma colimit left fibration",
+   "results": "0 hits; loogle: Unknown identifier `Quasicategory`",
+   "date": "2026-10-17",
+   "verdict": "no match: query parsing reported an unknown identifier; the quoted full-name query below was then run"
+  },
+  {
+   "tool": "grep",
+   "query": "comma|left fibration|colimit",
+   "results": "0 hits in AlgebraicTopology/Quasicategory",
+   "date": "2026-10-17",
+   "verdict": "no match; Read Mathlib/CategoryTheory/Limits/Final.lean:86-104,476-515: Final assumes ordinary Category instances and connected StructuredArrow categories; the corepresentable test concerns Type-valued ordinary colimits. Returned ofCorepresentableBy and Comma results likewise have ordinary Category instances. SSet.hasColimits and horn colimits are strict simplicial-set colimits. None asserts coherent colimit finality in arbitrary quasicategories, space-valued tests or weakly contractible comma quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The colimit in spaces of a corepresentable functor pulled back along u is equivalent to the comma quasicategory b downarrow u",
+   "results": "8 hits, including CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape, CategoryTheory.Limits.IsColimit.ofCorepresentableBy, CategoryTheory.Comma.hasColimit and CategoryTheory.Presheaf.colimitOfRepresentable; all returned signatures use ordinary Category instances.",
+   "date": "2026-10-17",
+   "verdict": "no match; Read Mathlib/CategoryTheory/Limits/Final.lean:86-104,476-515: Final assumes ordinary Category instances and connected StructuredArrow categories; the corepresentable test concerns Type-valued ordinary colimits. Returned ofCorepresentableBy and Comma results likewise have ordinary Category instances. SSet.hasColimits and horn colimits are strict simplicial-set colimits. None asserts coherent colimit finality in arbitrary quasicategories, space-valued tests or weakly contractible comma quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Functor.Final\"",
+   "results": "12 hits: CategoryTheory.Functor.Final; final_fromPUnit_of_isTerminal; Final.lift; final_of_isRightAdjoint; Final.instNonemptyStructuredArrow; final_of_adjunction; Final.hasColimitsOfShape_of_final; Final.mk; Final.out; final_of_initial_op; final_op_of_initial; Final.homToLift (names after the first have prefix CategoryTheory.Functor)",
+   "date": "2026-10-17",
+   "verdict": "no match; Read Mathlib/CategoryTheory/Limits/Final.lean:86-104,476-515: Final assumes ordinary Category instances and connected StructuredArrow categories; the corepresentable test concerns Type-valued ordinary colimits. Returned ofCorepresentableBy and Comma results likewise have ordinary Category instances. SSet.hasColimits and horn colimits are strict simplicial-set colimits. None asserts coherent colimit finality in arbitrary quasicategories, space-valued tests or weakly contractible comma quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "class Final|def Final|final_iff_isIso_colimit_pre|final_of_colimit_comp_coyoneda_iso_pUnit",
+   "results": "5 hits in CategoryTheory/Limits/Final.lean at lines 44,96,476,494,499",
+   "date": "2026-10-17",
+   "verdict": "no match; Read Mathlib/CategoryTheory/Limits/Final.lean:86-104,476-515: Final assumes ordinary Category instances and connected StructuredArrow categories; the corepresentable test concerns Type-valued ordinary colimits. Returned ofCorepresentableBy and Comma results likewise have ordinary Category instances. SSet.hasColimits and horn colimits are strict simplicial-set colimits. None asserts coherent colimit finality in arbitrary quasicategories, space-valued tests or weakly contractible comma quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-sifted-nerve-index-calculus",
@@ -94,5 +305,34 @@
   "group": "NH"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cofinality-space-test",
+  "worker": "stage1",
+  "summary": "Retained the statement and all three statement dependencies. Proved the equivalences using existing coherent transport, Kan replacement, groupoid localization, Yoneda, pointwise colimits and cocone criteria. The presheaf colimit of y_B u is terminal under condition (4); its mapping spaces give actual restriction maps of limits, including larger target universes. No new node, clause restatement, or appeal to an uncited finality theorem is introduced. The ordinary comma nerve is identified degreewise.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 of the main-20261015 proof: the finite-level derived mapping-complex adjunction before R lim, through the fixed-object dg model and associative-algebra sifted-localization ancestry. These steps supply the generic finality test used in the parent sifted-index argument; no chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "The generic coherent cocone criterion and objectwise detection of transformation equivalences are needed in steps 2, 4 and 7; no node of this unit replaces this foundational coherent-diagram interface."
+   },
+   {
+    "node": "lem-cbc-simplicial-groupoid-localization",
+    "why": "Step 2 uses its full functor-category localization property for a Kan replacement E -> R to compute maps from the homotopy type of the left-fibration total space; this is a generic groupoid-localization tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-groupoid-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N6-dc9d83cc3",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-dc9d83cc3 (reviewer sub-agent of L); spot-checked: I read the whole delivery: all 11 steps of the item, which creates no new nodes, the full statements of all 10 cited nodes, the unit sk-prop-sf-biduality-general, and Kerodon online (04K3 = Proposition 7.4.3.11, 02NY = Theorem 7.2.3.1; tags and labels match). The statement matches 04K3 together with 02NY. The comma is oriented (b->u(a)), as colimits require. Restricting (2) to the small spaces of the fixed universe is equivalent to Kerodon's S_{<kappa} test, and the target is not weakened. Small cases check out: A empty, both empty, Delta^0->Delta^1 at either vertex, the identity, and a discrete B. Logic of the proof: step 5 gives (1)=>(2); step 6 gives (2)=>(4) using step 4, the corepresentable colimit computed by covariant Yoneda; step 3 gives (3)<=>(4) via the pullback of the source-fixed arrow left fibration, whose total space is exactly the displayed comma, plus step 2, where Kan replacement, groupoid localization and the cocone criterion give the colimit the homotopy type of the total space; steps 7-10 give (4)=>(1) through the presheaf comparison W_A->W_B, which is an objectwise equivalence. That yields restriction of limits, then universe enlargement, then the mapping-space criterion for an arbitrary E with no other colimits assumed. Step 11 identifies the ordinary comma nerve degreewise. There is no cycle: a closure walk over the 313 nodes the item reaches does not return to it and finds no missing or merged ids. The two off-unit tool uses, lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-groupoid-localization, are generic black boxes already accepted for sibling nodes in this unit, and I accept them here. No SGA source is used. Notes, none of them faults: (a) steps 9-10 read the U-in-U' nodes as holding for any pair of universes; (b) the existing unsplit lem-coef-infinity-cofinal-comma-criterion states (3)=>(1) in a homotopy-pullback comma model and is a merge candidate for the maintainer; the worker's duplicate list missed it; (c) the N6 second reading says it rewrote created to N6, but the branch correctly keeps NH's created field. No fixes were written."
+ }
 }
