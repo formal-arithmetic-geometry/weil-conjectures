@@ -3,56 +3,246 @@
  "blueprint": {
   "is": "thm-coef-integral-verdier",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integral Verdier biduality",
- "statement": "Set\n\n$$\nD_{X,R}K=R\\mathcal Hom_R(K,\\omega_{X,R}).\n$$\n\nThis is an exact contravariant anti-equivalence of\n$D^b_c(X,R)=D^b_{ctf}(X,R)$. Its canonical comparisons satisfy\n\n$$\n(D_{X,R}K)\\otimes_R^L A_n\\cong D_{X,n}K_n,\n\\qquad D_{X,R}K\\cong R\\varprojlim_n\\operatorname{Res}_nD_{X,n}K_n.\n$$\n\nIf $\\dim X\\leq d$ and the reductions of $K$ have Tor interval\n$[a,b]$, those of $D_{X,R}K$ have interval\n$[-b-2d,-a]$. The comparisons preserve evaluation and identify\nthe reduction of the actual double-dual map\n$\\delta_K:K\\to D_{X,R}D_{X,R}K$ with $\\delta_{K_n}$.\nIn particular $\\delta_K$ is an isomorphism.",
+ "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Put $A_n=R/(\\varpi^n)$ for $n\\geq1$, and let $X$ be a separated finite-type $k$-scheme [def-weil-finite-type-morphism, def-weil-proper-morphism]. Work on the small pro-etale site with the completed coefficient sheaf $\\widehat R_X=\\varprojlim_n(A_n)_X$ and $D(X_{\\mathrm{proet}},R)=D(\\widehat R_X)$ [def-weil-completed-integral-coefficients]. Use the derived-complete integral category $D^b_c(X,R)$ of [def-weil-derived-complete-integral-detailed] and its uniform finite-Tor subcategory $D^b_{ctf}(X,R)$ [def-weil-finite-tor-amplitude]. Write $K_n=K\\otimes^L_{\\widehat R_X}(A_n)_X$ [def-weil-integral-derived-reduction], and let $\\operatorname{Res}_n$ be derived restriction of scalars [def-weil-integral-derived-restriction-of-scalars].\n\nLet $a_X:X\\to\\operatorname{Spec}k$ be the structure morphism and let $\\omega_{X,n}=Ra_{X,n}^!A_n$ be its finite pro-etale dualizing object at coefficient level $n$ [def-weil-exceptional-inverse-image] and let $\\omega_{X,R}$ be the derived-complete integral dualizing object with its reductions $\\omega_{X,R}\\otimes_R^L A_n\\cong\\omega_{X,n}$ [prop-coef-integral-dualizing]. Set\n$$\nD_{X,R}K=R\\mathcal Hom_{\\widehat R_X}(K,\\omega_{X,R}),\\qquad\nD_{X,n}M=R\\mathcal Hom_{(A_n)_X}(M,\\omega_{X,n}),\n$$\nusing the ambient derived internal Hom [def-pur-derived-internal-hom]. Then $D^b_c(X,R)=D^b_{ctf}(X,R)$, and $D_{X,R}$ restricts to an exact contravariant anti-equivalence of this category. For every $K$ in it the canonical evaluation-defined reduction comparisons are isomorphisms, and the output is reconstructed from those reductions:\n$$\n(D_{X,R}K)\\otimes_R^L A_n\\xrightarrow{\\sim}D_{X,n}K_n,\n\\qquad\nD_{X,R}K\\cong R\\varprojlim_{n\\geq1}\\operatorname{Res}_nD_{X,n}K_n.\n$$\nHere $\\otimes_R^L A_n$ means the displayed derived reduction over $\\widehat R_X$. The second formula means the derived-completeness Roos triangle of [def-weil-derived-complete], with reduction maps to the finite duals identified by the first comparisons and transition maps induced by finite evaluation and the dualizing reduction maps. In accordance with [def-weil-derived-limit], it asserts reconstruction as a derived limit; it does not specify an isomorphism to an independently chosen model of that limit.\n\nFor an integer $d\\geq0$, if $\\dim X\\leq d$ [def-kun-topological-krull-dimension], and all $K_n$ have Tor amplitude in $[a,b]$ for integers $a\\leq b$, all reductions of $D_{X,R}K$ have Tor amplitude in $[-b-2d,-a]$. The first comparisons preserve evaluation and its transposes. In particular they identify the reduction of the actual evaluation-defined double-dual map\n$$\n\\delta_K:K\\longrightarrow D_{X,R}D_{X,R}K\n$$\nwith the finite double-dual map $\\delta_{K_n}$ [lem-weil-duality-pairing]. The map $\\delta_K$ is an isomorphism, natural in $K$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-integral-verdier.md",
   "place": "node thm-coef-integral-verdier, order 2146"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-derived-restriction-of-scalars",
+  "prop-coef-integral-dualizing",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-complete",
+  "def-weil-derived-limit",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-duality-pairing"
+ ],
  "proof": [
   {
-   "text": "The dualizing object and its reductions are\n[prop-coef-integral-dualizing]. Apply\n[lem-coef-integral-hom-reduction]; it proves both displayed\nidentifications and completeness of the ambient internal Hom.\nBy [lem-coef-integral-residue-tor], all input reductions are\nfinite-Tor constructible. The finite bound\n[lem-weil-verdier-preservation-strata] and the comparison\n[lem-weil-finite-duality-site-comparison] prove constructibility\nand the uniform interval stated for every reduction of the output.\nThis establishes preservation in the actual integral category.",
+   "text": "Let $K\\in D^b_c(X,R)$. Its residue reduction $K_1$ is bounded by the definition of this category, so choose integers $a\\leq b$ containing its cohomological support. Lemma [lem-coef-integral-residue-tor] gives Tor amplitude $[a,b]$ for every $K_n$, not just boundedness separately at each level. Thus every object of $D^b_c(X,R)$ belongs to $D^b_{ctf}(X,R)$ by [def-weil-finite-tor-amplitude]; the reverse inclusion is the definition of that full subcategory. For subsequent uniform bounds choose $d\\geq0$ with $\\dim X\\leq d$, possible by [lem-kun-dimension-finite-type]; the empty scheme allows $d=0$.",
    "uses": [
-    "prop-coef-integral-dualizing",
-    "lem-coef-integral-hom-reduction",
+    "def-weil-derived-complete-integral-detailed",
     "lem-coef-integral-residue-tor",
-    "lem-weil-verdier-preservation-strata",
-    "lem-weil-finite-duality-site-comparison"
+    "def-weil-finite-tor-amplitude",
+    "lem-kun-dimension-finite-type"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-integral-verdier.md",
+    "place": "Proof, first paragraph: input reductions"
+   }
   },
   {
-   "text": "Apply the internal-Hom comparison twice. Its evaluation\ncompatibility identifies the reduction of $\\delta_K$, defined by\nthe tensor–Hom evaluation as in [lem-weil-duality-pairing],\nwith the canonical finite double-dual map. Those maps are\nisomorphisms by [thm-fix-general-biduality].\nThe cone of $\\delta_K$ is derived complete and all its\nreductions are zero. Its reconstruction in\n[def-weil-derived-complete] is therefore zero.\nThus $\\delta_K$ is an isomorphism. The evaluation identity\n$D_{X,R}(\\delta_K)\\circ\\delta_{D_{X,R}K}=\\operatorname{id}$\nshows that these natural isomorphisms exhibit the stated\nanti-equivalence. The argument proves a property of ambient\ninternal Hom, not a replacement definition of that functor.",
+   "text": "Put $H=R\\mathcal Hom_{\\widehat R_X}(K,\\omega_{X,R})$. The object $\\omega_{X,R}$ is derived complete and its reductions are $\\omega_{X,n}$ by [prop-coef-integral-dualizing]. Apply [lem-coef-integral-hom-reduction] with $L=\\omega_{X,R}$. It says that $H$ is derived complete and that the actual evaluation-defined comparison identifies $H_n$ with $R\\mathcal Hom_{A_n}(K_n,\\omega_{X,n})=D_{X,n}K_n$. In particular this is a property of the ambient internal Hom, with no assumption that $K$ is site-perfect.",
    "uses": [
+    "prop-coef-integral-dualizing",
+    "lem-coef-integral-hom-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-integral-verdier.md",
+    "place": "Proof, first paragraph: the dualizing object and internal-Hom reduction"
+   }
+  },
+  {
+   "text": "For each $n$, [lem-sf-proetale-constructible-origin](ii) supplies a bounded constructible etale complex $K'_n$ with $\\nu_X^*K'_n\\cong K_n$. By [lem-sf-comparison-tor-amplitude](ii), $K'_n$ has the same Tor interval $[a,b]$ as $K_n$. Apply [lem-weil-verdier-preservation-strata] on the etale site: $D_{X,\\mathrm{et}}K'_n$ is bounded constructible and has Tor amplitude $[-b-2d,-a]$, independent of $n$. The same preservation theorem applied to the constant rank-one input gives bounded constructibility of the etale dualizing object, since $R\\mathcal Hom_{A_n}((A_n)_X,\\omega)=\\omega$; the input is constructible and Tor concentrated in degree zero. Thus the second variable required by [lem-weil-finite-duality-site-comparison] is bounded constructible. Its internal-Hom and dualizing-object comparisons identify the pullback with $D_{X,n}K_n$. Clause (i) of [lem-sf-comparison-tor-amplitude] therefore gives constructibility and the same Tor bound on the pro-etale site. By step 2 these are the reductions of $H$. Taking the degree-zero module sheaf $(A_n)_X$ in the definition of Tor amplitude shows that their cohomology is in this one interval. Together with completeness, these facts are precisely [def-weil-derived-complete-integral-detailed], so $H\\in D^b_c(X,R)$. The argument works for any uniform input interval $[a,b]$, proving the stated quantitative bound.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-weil-verdier-preservation-strata",
+    "lem-weil-finite-duality-site-comparison",
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-integral-verdier.md",
+    "place": "Proof, first paragraph: finite preservation and uniform interval"
+   }
+  },
+  {
+   "text": "Use the reduction tower with its actual maps defined in [def-weil-integral-reduction-tower]. Since $H$ is derived complete, [def-weil-derived-complete] gives a distinguished triangle $H\\to\\prod_n\\operatorname{Res}_nH_n\\xrightarrow{1-s}\\prod_n\\operatorname{Res}_nH_n\\to H[1]$, whose first map has the actual reduction maps as components. Put $F_n=D_{X,n}K_n$ and write $b_n:\\operatorname{Res}_nH_n\\xrightarrow{\\sim}\\operatorname{Res}_nF_n$ for the comparisons of step 2 after restriction of scalars. The finite-dual transition $u_n:\\operatorname{Res}_{n+1}F_{n+1}\\to\\operatorname{Res}_nF_n$ is adjoint to finite evaluation followed by the dualizing transition $\\operatorname{Res}_{n+1}\\omega_{X,n+1}\\to\\operatorname{Res}_n\\omega_{X,n}$, after reducing the input. The evaluation/transposition compatibility of [lem-coef-integral-hom-reduction] says that $u_n b_{n+1}$ and $b_n t_n^H$ have that same transpose, so $u_n b_{n+1}=b_n t_n^H$, or explicitly $u_n=b_n t_n^H b_{n+1}^{-1}$, in the single ambient category $D(\\widehat R_X)$. Hence $B=\\prod_n b_n$ satisfies $(1-s_F)B=B(1-s_H)$, as is checked on the $n$-th projection by this equation. Replacing the two product vertices by $B$ gives a distinguished Roos triangle for $H$ and $(\\operatorname{Res}_nF_n,u_n)$; its first arrow has components $b_nc_n^H$. This is precisely reconstruction in [def-weil-derived-limit]. No interchange of cohomology with an ordinary limit is used.",
+   "uses": [
+    "def-weil-derived-complete",
+    "def-weil-integral-reduction-tower",
+    "lem-coef-integral-hom-reduction",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-integral-verdier.md",
+    "place": "Proof, first paragraph: reconstruction from completeness"
+   }
+  },
+  {
+   "text": "Take the small skeleton supplied by [def-weil-pbc-proetale-site] in its fixed larger universe. Internal Hom on the ringed site $(X_{\\mathrm{proet}},\\widehat R_X)$ is contravariantly exact in its first variable by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Its restriction to $D^b_c(X,R)$ is exact because step 3 proves preservation and [lem-weil-integral-constructible-triangulated] supplies the inherited triangulated structure. Define $\\mathrm{ev}_K:DK\\otimes^L K\\to\\omega_{X,R}$ to be evaluation and define $\\delta_K$ as the transpose of $\\mathrm{ev}_K$ with the two factors interchanged. This tensor-Hom adjunction is available for this ring sheaf: combine the currying isomorphism in [lem-weil-pbc-ringed-internal-hom-exact-restriction] with [lem-pur-rhom-global-sections], which identifies degree-zero global Hom with derived-category morphisms. Write $\\sigma_{P,Q}:P\\otimes^LQ\\to Q\\otimes^LP$ for tensor symmetry. On K-flat models it is the sheaf tensor symmetry of [lem-pc-sheaf-modules-tensor-closed] multiplied by $(-1)^{ij}$ on the summand $P^i\\otimes Q^j$; substitution in the differential of [def-pc-tensor-complex-sheaves] verifies that it is a chain map and that $\\sigma_{Q,P}\\sigma_{P,Q}=1$. The defining transpose equation is $\\mathrm{ev}_{DK}\\circ(\\delta_K\\otimes1_{DK})=\\mathrm{ev}_K\\circ\\sigma_{K,DK}$. For $u:K\\to L$, the transposes of $D^2(u)\\delta_K$ and $\\delta_Lu$ both equal $\\mathrm{ev}_K\\circ(Du\\otimes1_K)\\circ\\sigma_{K,DL}$, by naturality of evaluation. Injectivity of the adjunction bijection therefore proves $D^2(u)\\delta_K=\\delta_Lu$. Thus this is the actual ambient double-dual transformation.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-pur-rhom-global-sections",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-integral-verdier.md",
+    "place": "Proof, second paragraph: the evaluation-defined double dual; exactness made explicit"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-integral-hom-reduction] first to $K,\\omega_{X,R}$ and then to $DK,\\omega_{X,R}$; step 3 ensures that $DK$ is again in the integral category. The two comparisons identify $(D^2K)_n$ with $D_{X,n}^2K_n$. Because they preserve evaluation and transposes, they carry the reduction of the transpose defining $\\delta_K$ to the transpose of finite evaluation, namely $\\delta_{K_n}$ as specified in [lem-weil-duality-pairing]. By [thm-fix-general-biduality] this finite map is an isomorphism on the pro-etale site: step 1 already checked the required constructibility and finite Tor amplitude. This identifies a specified map, rather than merely producing an unspecified isomorphism between the same objects.",
+   "uses": [
+    "lem-coef-integral-hom-reduction",
     "lem-weil-duality-pairing",
-    "thm-fix-general-biduality",
+    "thm-fix-general-biduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-integral-verdier.md",
+    "place": "Proof, second paragraph: reduction of the actual double-dual map"
+   }
+  },
+  {
+   "text": "Take a distinguished triangle $K\\xrightarrow{\\delta_K}D^2K\\to C\\to K[1]$. Since the first two objects lie in $D^b_c(X,R)$, [lem-weil-integral-constructible-triangulated] (with shifts/rotation) puts $C$ there; in particular $C$ is derived complete. Derived reduction is exact by [lem-pur-derived-change-of-rings], applied to $\\widehat R_X\\to(A_n)_X$. By step 6 and [lem-kun-distinguished-cone-zero], every $C_n$ is zero. In the Roos triangle for $C$ from [def-weil-derived-complete], both products are consequently zero objects. Apply [lem-kun-distinguished-cone-zero] to its rotation $0\\to0\\to C[1]\\to0$: the arrow $0\\to0$ is an isomorphism, hence $C[1]$ and $C$ are zero. Apply the same cone criterion to the original triangle to conclude that $\\delta_K$ is an isomorphism. This uses completeness of the cone, not a Nakayama assertion for a different integral coefficient category.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-pur-derived-change-of-rings",
+    "lem-kun-distinguished-cone-zero",
     "def-weil-derived-complete"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-integral-verdier.md",
+    "place": "Proof, second paragraph: the derived-complete cone is zero"
+   }
+  },
+  {
+   "text": "Use the adjunction of [lem-weil-pbc-ringed-internal-hom-exact-restriction] and [lem-pur-rhom-global-sections], with the symmetry of step 5 [lem-pc-sheaf-modules-tensor-closed]. Suppressing the subscript $X,R$, uncurrying $D(\\delta_K)\\circ\\delta_{DK}$ gives the following maps $DK\\otimes^L K\\to\\omega_{X,R}$:\n$$\n\\begin{aligned}\n\\mathrm{ev}_K\\circ((D\\delta_K\\circ\\delta_{DK})\\otimes1_K)\n&=\\mathrm{ev}_{D^2K}\\circ(\\delta_{DK}\\otimes\\delta_K)\\\\\n&=\\mathrm{ev}_{DK}\\circ(\\delta_K\\otimes1_{DK})\\circ\\sigma_{DK,K}\\\\\n&=\\mathrm{ev}_K.\n\\end{aligned}\n$$\nThe first equality is evaluation naturality for $\\delta_K$; the second is the defining transpose equation for $\\delta_{DK}$ and naturality of $\\sigma$; the third is the defining equation for $\\delta_K$ and $\\sigma_{K,DK}\\sigma_{DK,K}=1$. Since the identity of $DK$ also uncurries to $\\mathrm{ev}_K$, injectivity of the adjunction bijection proves $D(\\delta_K)\\circ\\delta_{DK}=1_{DK}$. All $\\delta_K$ are invertible by step 7, so $D\\delta_K=\\delta_{DK}^{-1}$. For $u:K\\to L$, naturality gives $u=\\delta_L^{-1}\\circ D(Du)\\circ\\delta_K$, proving injectivity on morphisms. For $v:DL\\to DK$ set $u=\\delta_L^{-1}\\circ Dv\\circ\\delta_K$. Naturality at $v$ states $D^2v\\circ\\delta_{DL}=\\delta_{DK}\\circ v$, and hence\n$$\nDu=D\\delta_K\\circ D^2v\\circ D(\\delta_L^{-1})\n=\\delta_{DK}^{-1}\\circ D^2v\\circ\\delta_{DL}=v.\n$$\nThis proves full faithfulness. For every $L$, the isomorphism $\\delta_L:L\\xrightarrow{\\sim}D(DL)$ exhibits $L$ as an object of the essential image, since $DL$ is in the category by step 3. Together with exactness from step 5 this proves the exact anti-equivalence and its natural biduality.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-integral-verdier.md",
+    "place": "Proof, second paragraph: evaluation identity and anti-equivalence"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "lem-coef-integral-residue-tor",
+  "def-weil-finite-tor-amplitude",
+  "lem-kun-dimension-finite-type",
   "prop-coef-integral-dualizing",
   "lem-coef-integral-hom-reduction",
-  "lem-coef-integral-residue-tor",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
   "lem-weil-verdier-preservation-strata",
   "lem-weil-finite-duality-site-comparison",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "def-weil-derived-limit",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-rhom-global-sections",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-tensor-complex-sheaves",
   "lem-weil-duality-pairing",
   "thm-fix-general-biduality",
-  "def-weil-derived-complete"
+  "lem-pur-derived-change-of-rings",
+  "lem-kun-distinguished-cone-zero"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-integral-verdier.md",
-  "place": "## Proof"
+  "place": "Proof, both paragraphs, expanded using existing ringed-site and coefficient comparison interfaces; Stacks Tag 08TC (derived-definition-derived-limit) for the Roos interpretation."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality for derived complete integral constructible sheaves and reduction modulo powers of a uniformizer",
+   "results": "8 hits: CondensedMod.IsSolid, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, localCohomology.isoSelfLERadical, BDeRhamPlus, localCohomology.ofSelfLERadical, localCohomology, localCohomology.diagram, BDeRham",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state integral constructible Verdier duality or its reduction and evaluation clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "12 hits: CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state integral constructible Verdier duality or its reduction and evaluation clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|verdierDual|derivedComplete.*[Dd]ual",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/SpectralObject/Basic.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean, Mathlib/Algebra/Homology/SpectralObject/EpiMono.lean, Mathlib/Algebra/Homology/SpectralObject/Differentials.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state integral constructible Verdier duality or its reduction and evaluation clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier biduality on derived complete integral constructible complexes",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived dual with respect to a dualizing complex gives an exact contravariant equivalence on bounded constructible adic sheaves",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, localCohomology.diagram, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CondensedMod.IsSolid, Condensed.instAB5CondensedMod, CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint, instAbelianCondensedMod, CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state integral constructible Verdier duality or its reduction and evaluation clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|bidual.*[Cc]onstructible|[Cc]onstructible.*bidual|[Dd]erived[Cc]omplete",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state integral constructible Verdier duality or its reduction and evaluation clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom duality for constructible sheaves of modules over an adic complete valuation ring",
+   "results": "8 hits: localCohomology.diagram, LightCondensed.ihomPoints, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, LightCondensed.freeForgetAdjunction, LightCondensed.instMonoidalClosedLightCondMod, Condensed.freeForgetAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state integral constructible Verdier duality or its reduction and evaluation clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|dualizingComplex|bidual.*[Cc]onstructible",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state integral constructible Verdier duality or its reduction and evaluation clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state integral constructible Verdier duality or its reduction and evaluation clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -81,5 +271,49 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-coef-integral-verdier",
+  "worker": "stage1",
+  "summary": "Second reading made the structure morphism and integer dimension bound explicit, wrote the transition square and product conjugation, and expanded the signed evaluation and full-faithfulness calculations. Made the implicit finite-field/DVR/pro-etale/completed-ring hypotheses explicit, typed all reductions, and interpreted reconstruction by the existing Roos definition rather than a canonical isomorphism to an unspecified limit model. Expanded the two imported paragraphs into eight steps: uniform residue Tor bounds, actual Hom reduction, explicit etale-origin and Tor transport, reconstruction, ringed-site exactness/evaluation, finite biduality of the specified map, complete-cone conservativity, and the elementary anti-equivalence argument. No new nodes; all non-elementary tools are existing statements.",
+  "blueprint": "Steps 1-4 realize the first proof paragraph; steps 5-8 realize the second. This is the integral coefficient transport prescribed by sk-prop-sf-biduality-general, not a replacement route. The unit has no proof steps and its realized statement list already includes this item, so no unit record is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "General ringed-site internal-Hom currying and exactness, applied to the completed coefficient sheaf. The etale-only lem-sf-hom-triangulated does not cover that ringed site."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-dimensionality of a finite-type scheme over a field supplies a single dimension bound; the unit has no such dimension lemma."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic finite-coefficient etale-origin equivalence supplies K prime at each level before the etale preservation theorem is applied; the unit has no other origin statement."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic ringed-site identification of degree-zero global internal Hom with morphisms, used for the evaluation adjunction; it proves no geometric or integral duality."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic symmetry of tensor on modules over any sheaf of rings supplies the symmetry used in transposing evaluation; it proves no duality theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-proetale-constructible-origin",
+  "lem-pur-rhom-global-sections",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N8-aefccbf32",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-aefccbf32 (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, report, all cited node statements and sources, and Stacks Tags 08TC, 08J9, 08JA, 08JC. Verified all eight proof steps, hypotheses, coefficient/base-change typing, Roos reconstruction, finite-level duality, edge cases including R/(π), duplicate/cycle checks, and Mathlib searches. No new nodes or unresolved faults. Review written to review.md."
+ }
 }
