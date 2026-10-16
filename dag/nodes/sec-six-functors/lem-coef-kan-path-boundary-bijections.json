@@ -264,5 +264,40 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b978852c",
+  "group": "NW",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: relative homotopy classes over the whole boundary, with degree 0 as vertices modulo edges via boundary 0 = ⊥; strict fibres P_xK (preimage of ofSimplex x under ev_0) and Ω_xK; Fibration(endpoint) as RLP against all horns; Kan conjuncts for P_xK and Ω_xK; boundary lifting for all m including 0; δ : homotopySet(j+1) ≃ loop homotopySet j, pointed, fixed by the last-face formula for every α and γ; naturality with p and l pinned by equations against monic inclusions. No extra hypotheses or universe restriction; edge cases j=0, m=0, empty and disconnected K checked. Gates: 11 defs with real data; the 3 sorries are named theorems, with true membership helpers allowed by H5; docstrings carry source, blueprint tag and the 8 proof steps; lines ≤100; only the node's lean field changed; lean.statement verbatim; one commit, 3 files; Worker report and Second reading by NW sections present. nt_compile.py --json (path form refuses non-side files) compiled the module in 1.7 s, exit 0, no errors or warnings; a control error was detected. Minor, not changed: homotopySet is a def rather than an abbrev. Hovey PDF not opened; relied on the stage-1-reviewed node text."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanPathBoundaryBijections",
+  "declaration": "SSet.KanPathBoundary.path_boundary_bijections",
+  "declarations": [
+   "SSet.KanPathBoundary.homotopySet",
+   "SSet.KanPathBoundary.simplexClass",
+   "SSet.KanPathBoundary.baseClass",
+   "SSet.KanPathBoundary.homotopySetMap",
+   "SSet.KanPathBoundary.pathSubcomplex",
+   "SSet.KanPathBoundary.basedPath",
+   "SSet.KanPathBoundary.endpoint",
+   "SSet.KanPathBoundary.loopSubcomplex",
+   "SSet.KanPathBoundary.basedLoop",
+   "SSet.KanPathBoundary.constantPath_mem",
+   "SSet.KanPathBoundary.constantPath",
+   "SSet.KanPathBoundary.constantLoop_mem",
+   "SSet.KanPathBoundary.constantLoop",
+   "SSet.KanPathBoundary.path_boundary_bijections"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/KanPathBoundaryBijections.lean",
+  "statement": "theorem path_boundary_bijections : ∃ δ : ∀ (K : SSet.{u}) [K.KanComplex] (x : K _⦋0⦌) (j : ℕ), homotopySet K x (j + 1) ≃ homotopySet (basedLoop K x) (constantLoop K x) j, (∀ (K : SSet.{u}) [K.KanComplex] (x : K _⦋0⦌), Fibration (endpoint K x) ∧ (basedPath K x).KanComplex ∧ (basedLoop K x).KanComplex ∧ (∀ m : ℕ, HasLiftingProperty (boundary m).ι (stdSimplex.isTerminalObj₀.from (basedPath K x))) ∧ (∀ j : ℕ, δ K x j (baseClass K x (j + 1)) = baseClass (basedLoop K x) (constantLoop K x) j) ∧ (∀ (j : ℕ) (α : K.PtSimplex (j + 1) x) (γ : Δ[j + 1] ⟶ basedPath K x), γ ≫ endpoint K x = α.map → (horn (j + 1) (Fin.last (j + 1))).ι ≫ γ = SSet.const (constantPath K x) → ∃ β : (basedLoop K x).PtSimplex j (constantLoop K x), β.map ≫ (loopSubcomplex K x).ι = stdSimplex.δ (Fin.last (j + 1)) ≫ γ ∧ δ K x j (simplexClass α) = simplexClass β)) ∧ (∀ (K L : SSet.{u}) [K.KanComplex] [L.KanComplex] (x : K _⦋0⦌) (y : L _⦋0⦌) (f : K ⟶ L) (hf : f.app _ x = y), ∃ (p : basedPath K x ⟶ basedPath L y) (l : basedLoop K x ⟶ basedLoop L y) (hl : l.app _ (constantLoop K x) = constantLoop L y), p ≫ (pathSubcomplex L y).ι = (pathSubcomplex K x).ι ≫ (ihom Δ[1]).map f ∧ p ≫ endpoint L y = endpoint K x ≫ f ∧ p.app _ (constantPath K x) = constantPath L y ∧ l ≫ (loopSubcomplex L y).ι = (loopSubcomplex K x).ι ≫ p ∧ ∀ (j : ℕ) (a : homotopySet K x (j + 1)), δ L y j (homotopySetMap f x y hf (j + 1) a) = homotopySetMap l (constantLoop K x) (constantLoop L y) hl j (δ K x j a))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses Mathlib relative homotopy classes and pointed simplices, and the recorded enhanced internal-Hom evaluation. The existential family of equivalences is constrained by its last-face lift formula for every representative and lift; the induced fibre maps are constrained by their actual internal-Hom postcomposition. All helper constructions belong to the notions explicitly introduced by this node. The two ancillary membership theorems supply only proofs for the actual constant-path data."
  }
 }

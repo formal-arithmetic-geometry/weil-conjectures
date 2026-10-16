@@ -182,14 +182,24 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-41e6774e0 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, route, archived targets, and Stacks 08FC with supporting sources. All eight proof steps pass; finite-ring tests confirm expected flat and nonflat cases. No new nodes, duplicates, or cycles. Repaired missing LeanSearch evidence and an invalid Loogle query recorded as no match; only mathlib_searches changes. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-ecbedd775",
-  "group": "NX",
+  "reviewer": "NT-stage2-cc-e9ea89b28",
+  "group": "Q116",
   "result": "pass",
-  "note": "Wrote review.md. Checked every statement clause, dependencies, Stacks 08FC, universes, edge cases, uniqueness, docstrings and verbatim signature. Server-only compilation reproduced cleanly. No delivery errors or repository changes."
+  "note": "Clause-by-clause check against node and Stacks 08FC (1)<=>(2) is exact: Precoverage plus recorded IsSiteForCoverings, CommRingCat sheaf A, ringedSiteModules.{u} M (pp.universes confirms the first universe parameter is the module universe; whole statement in one universe u, IsFlatOnSite.{u,u,u,u}, no metavariables), iff, finite relation, covering presieve, factorization s_p|V = sum b_pq t_q and column condition sum a_p|V b_pq = 0. Edge cases n=0, l=0, empty cover/category, zero ring/module admitted. Only the lean block of the node changes; dependency nodes identical to side clone; lean.statement verbatim; single theorem with sorry; source/blueprint docstrings carry the six proof steps; report has Worker report and Second reading by Q116. nt_compile: delivered file clean; importers SmallFlatSubsheaf, RingedToposFlatPullback, SmallFlatSubextension rc=0; FlatFinitePresentationRetract fails only in unrelated pre-existing ProjectionMateExact.lean (identical 16 errors without this delivery). Distinct node FlatEquationalCriterionOfUniverses (sieve conclusion, general universes) is not a duplicate. No findings."
  },
- "lean": {},
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion",
+  "declaration": "SheafOfModules.isFlat_iff_local_equationalCriterion",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatEquationalCriterion.lean",
+  "statement": "theorem isFlat_iff_local_equationalCriterion {C : Type u} [SmallCategory C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (A : Sheaf J.toGrothendieck CommRingCat.{u}) (M : ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj A)) : IsFlatOnSite (J := J.toGrothendieck) (R := A) M ↔ ∀ (U : C) (n : ℕ) (a : Fin n → A.obj.obj (op U)) (s : Fin n → M.val.obj (op U)), (∑ p : Fin n, a p • s p) = 0 → ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → ∃ (l : ℕ) (b : Fin n → Fin l → A.obj.obj (op V)) (t : Fin l → M.val.obj (op V)), (∀ p : Fin n, M.val.map f.op (s p) = ∑ q : Fin l, b p q • t q) ∧ (∀ q : Fin l, (∑ p : Fin n, A.obj.map f.op (a p) * b p q) = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Restates the withdrawn stage-2 interface using the current recorded IsFlatOnSite and IsSiteForCoverings dependencies. The old isolated monoidal interface and stronger covering-composition classes are not imposed. The mathematical statement is unchanged."
+ },
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",

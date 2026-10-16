@@ -256,5 +256,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3331bdff0",
+  "group": "NA",
+  "result": "pass",
+  "note": "Every hypothesis of the node has its own Lean clause (terminal object, isos in W and F, all three 2-out-of-3 implications, F closed under composition, maps to the terminal object in F, both pullback clauses, factorization), none stronger: the existential pullbacks are equivalent to every pullback by iso closure; no model structure, cofibrations or universe equality. Conclusion: FiniteReedy.IsLocalization (definition read: quasicategory, inverts W, precomposition an equivalence onto W-inverting functors), finite limits over every finite SSet shape via the dependency's coneCategory/IsLimiting, terminal object q(one), and IsLimitEdge for the canonical transformation of the given pullback cone with its apex, so naturality is automatic. Edge cases: empty shape, isos, independent universes u v t. No definitions, only a sorry proof, module and theorem docstrings with source, blueprint id and all 13 steps, imports used, lines <= 100, only the lean record changed, statement verbatim, report has Worker report and Second reading by NA. nt_compile --json: rc=0 with no diagnostics; a planted error gave rc=1 with the message, so the clean result is real. Non-blocking: stmt_deps does not cite the landed def-coef-coherent-localization-interface whose declarations the statement uses (acyclic, maintainer bookkeeping, a stage-2 fix cannot change it); helper definitions come from the finite-reedy module as in kan-quillen-right-proper; the docstring omits Prop 7.1.3."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BrownFibrantLocalizationPullbacks",
+  "declaration": "HomotopicalAlgebra.brown_fibrant_localization_pullbacks",
+  "file": "lean/Sheaf/CategoryTheory/BrownFibrantLocalizationPullbacks.lean",
+  "statement": "theorem brown_fibrant_localization_pullbacks (C : Type u) [Category.{v} C] (one : C) (W F : MorphismProperty C) (hone : IsTerminal one) (hWiso : ∀ {X Y : C} (f : X ⟶ Y), IsIso f → W f) (hFiso : ∀ {X Y : C} (f : X ⟶ Y), IsIso f → F f) (hWthree : ∀ {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z), W f → W g → W (f ≫ g)) (hWcancel : ∀ {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z), W f → W (f ≫ g) → W g) (hWcancel' : ∀ {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z), W g → W (f ≫ g) → W f) (hFcomp : ∀ {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z), F f → F g → F (f ≫ g)) (hFterminal : ∀ (X : C) (f : X ⟶ one), F f) (hpullback : ∀ {X Y Z : C} (p : Y ⟶ Z) (f : X ⟶ Z), F p → ∃ (P : C) (a : P ⟶ Y) (b : P ⟶ X), IsPullback a b p f ∧ F b) (hpullback_trivial : ∀ {X Y Z : C} (p : Y ⟶ Z) (f : X ⟶ Z), F p → W p → ∃ (P : C) (a : P ⟶ Y) (b : P ⟶ X), IsPullback a b p f ∧ F b ∧ W b) (hfactor : ∀ {X Y : C} (f : X ⟶ Y), ∃ (Z : C) (w : X ⟶ Z) (p : Z ⟶ Y), W w ∧ F p ∧ w ≫ p = f) : ∃ (L : SSet.{max u v t}) (q : largeNerve.{u, v, t} C ⟶ L), FiniteReedy.IsLocalization W q ∧ (∀ (K : SSet.{max u v t}) (_ : K.Finite) (D : K ⟶ L), ∃ c : (SSet.Enhanced.coneCategory D) _⦋0⦌, SSet.Enhanced.IsLimiting D c) ∧ SSet.Enhanced.IsTerminal L (object q one) ∧ (∀ {X Y Z : C} (p : Y ⟶ Z) (f : X ⟶ Z) (P : C) (a : P ⟶ Y) (b : P ⟶ X), (hP : IsPullback a b p f) → F p → IsLimitEdge (diagram q (cospan p f)) (object q P) (transformation q hP.cone.π) )",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
