@@ -1,0 +1,104 @@
+{
+ "id": "new-integral-residue-mate-pasting",
+ "kind": "statement",
+ "title": "Inverse mates preserve square pasting",
+ "statement": "Given three adjunctions E_i left adjoint to R_i, two successive pairs of functors F,G and F-prime,G-prime, composite functors H,H-prime, squares qf,qg,qh and comparison maps c,c-prime satisfying the restriction-square composition equation, their inverse mates satisfy the corresponding extension-square composition equation.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "unit_mateEquiv_symm and the adjunction hom equivalence"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Transpose both sides under the last adjunction and use injectivity of its hom equivalence. Use unit_mateEquiv_symm for each square, naturality of the units and squares, and the assumed restriction-square composition equation. Both transposes coincide.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "B2: flat-resolution computation, exact derived-square transport, and proved inverse-mate pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|iso)|pullback.*(tensor|scalar)",
+   "date": "2026-10-16",
+   "results": "17 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "verdict": "Checked for a shorter route. These are generic ingredients, not this specialized statement; the applicable library results are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-16",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit_symm",
+   "verdict": "Checked for a shorter route. These are generic ingredients, not this specialized statement; the applicable library results are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse mate of the scalar restriction pullback square for derived sheaves of modules is invertible and compatible with composition without flatness of the coefficient change",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackComp, ModuleCat.restrictScalarsComp'_inv_app, SheafOfModules.pullbackObjFreeIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjUnitToUnit",
+   "verdict": "Checked for a shorter route. These are generic ingredients, not this specialized statement; the applicable library results are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse mate of exact scalar restriction and pullback is an isomorphism commuting with composition of derived sheaf pullbacks",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.restrictScalarsId'App_inv_naturality, SheafOfModules.restrictScalars, ModuleCat.restrictScalarsComp'App_inv_naturality, PresheafOfModules.restrictScalars, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackComp, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "verdict": "Checked for a shorter route. These are generic ingredients, not this specialized statement; the applicable library results are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResiduePullSquare",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-integral-residue-derived-pull-square",
+   "place": "Inverse mates preserve square pasting",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueMatePasting",
+  "file": "lean/Sheaf/Paper/IntegralResidueMatePasting.lean",
+  "declaration": "CategoryTheory.inverseMate_pasting",
+  "statement": "theorem inverseMate_pasting\n    (hq : ∀ N : B₀,\n      c.app (R₀.obj N) ≫ G.map (qf.app N) ≫ qg.app (F'.obj N) =\n        qh.app N ≫ R₂.map (c'.app N)) (K : A₀) :\n    E₂.map (c.app K) ≫\n        ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ qg)).natTrans.app (F.obj K) ≫\n        G'.map (((mateEquiv a₀ a₁).symm (TwoSquare.mk _ _ _ _ qf)).natTrans.app K) =\n      ((mateEquiv a₀ a₂).symm (TwoSquare.mk _ _ _ _ qh)).natTrans.app K ≫\n        c'.app (E₀.obj K)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0c017",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T151821-L-177787",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0c017",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T151821-L-177787",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with DAG statements and baseline interfaces; all eight modules and both direct importers compile cleanly within 60 seconds; axiom checks show only standard axioms and sorryAx from the two documented residual obligations."
+ }
+}

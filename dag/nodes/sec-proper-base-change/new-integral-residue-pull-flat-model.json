@@ -1,0 +1,117 @@
+{
+ "id": "new-integral-residue-pull-flat-model",
+ "kind": "statement",
+ "title": "Compute the residue pull mate on flat-resolution complexes",
+ "statement": "For every scheme map f and integral complex P that is K-flat and is an integer-indexed colimit of bounded-above flat complexes, the reduction counit on f*P is invertible. On H, the homotopy image of P, the composite of the integral pull counit, reduction counit and localized ordinary pullIso equals p_f followed by the reduction and residue pull counits, with all maps as in [new-integral-residue-pull-square-data].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "new-integral-residue-pull-square-data"
+ ],
+ "proof": [
+  {
+   "text": "Pullback preserves flat modules: the local relation criterion for flatness is preserved by inverse image, and extension along the coefficient pullback isomorphism preserves flatness. Pullback preserves colimits. Hence the given colimit presentation maps to a colimit of bounded-above flat complexes, which is K-flat. The reduction counit on it is invertible.",
+   "uses": [
+    "new-integral-residue-pull-square-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the desired equality under derived scalar extension/restriction. The derived unit and counit factorization identities reduce it to the ordinary scalar pull square on P. Check that ordinary pullIso transposes to comapUpperStarIso by the balanced-tensor presentation epimorphism and the action identities. Apply the equation degreewise, pass to homotopy categories, and localize. This gives exactly the equality in the declaration.",
+   "uses": [
+    "new-integral-residue-pull-square-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-pull-square-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "B2: flat-resolution computation, exact derived-square transport, and proved inverse-mate pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|iso)|pullback.*(tensor|scalar)",
+   "date": "2026-10-16",
+   "results": "17 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "verdict": "Checked for a shorter route. These are generic ingredients, not this specialized statement; the applicable library results are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-16",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit_symm",
+   "verdict": "Checked for a shorter route. These are generic ingredients, not this specialized statement; the applicable library results are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse mate of the scalar restriction pullback square for derived sheaves of modules is invertible and compatible with composition without flatness of the coefficient change",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackComp, ModuleCat.restrictScalarsComp'_inv_app, SheafOfModules.pullbackObjFreeIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjUnitToUnit",
+   "verdict": "Checked for a shorter route. These are generic ingredients, not this specialized statement; the applicable library results are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse mate of exact scalar restriction and pullback is an isomorphism commuting with composition of derived sheaf pullbacks",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.restrictScalarsId'App_inv_naturality, SheafOfModules.restrictScalars, ModuleCat.restrictScalarsComp'App_inv_naturality, PresheafOfModules.restrictScalars, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackComp, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "verdict": "Checked for a shorter route. These are generic ingredients, not this specialized statement; the applicable library results are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResiduePullSquare",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-integral-residue-derived-pull-square",
+   "place": "Compute the residue pull mate on flat-resolution complexes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResiduePullFlatModel",
+  "file": "lean/Sheaf/Paper/IntegralResiduePullFlatModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePull_flatModel",
+  "statement": "theorem residueExchangePull_flatModel\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : CochainComplex\n      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n        (condensedRingObj (integralCoeff ℓ E) Y)) ℤ)\n    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)\n    (hcolim : ObjectProperty.flat.cochainComplexMinus.colimitsOfShape ℤ P) :\n    let H := (HomotopyCategory.quotient _ (.up ℤ)).obj P\n    IsIso ((residueExchangeReductionCounit ℓ E X).app\n        ((((f)^*⟦integralCoeff ℓ E⟧).mapHomotopyCategory (.up ℤ)).obj H)) ∧\n    (residueExchangeReduction ℓ E X).map\n        ((residueExchangeUpperStarCounit (integralCoeff ℓ E) f).app H) ≫\n      (residueExchangeReductionCounit ℓ E X).app\n          ((((f)^*⟦integralCoeff ℓ E⟧).mapHomotopyCategory (.up ℤ)).obj H) ≫\n      DerivedCategory.Qh.map\n        ((NatTrans.mapHomotopyCategory\n          (pullIso (integralReductionMap ℓ E) f).hom (.up ℤ)).app H) =\n    (residueExchangePullHom ℓ E f).app (DerivedCategory.Qh.obj H) ≫\n      (residueExchangeUpperStar\n        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).map\n          ((residueExchangeReductionCounit ℓ E Y).app H) ≫\n      ((residueExchangeUpperStarCounit\n        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).app\n          (((Mod.extendScalars\n            (coefficientMap (integralReductionMap ℓ E) Y)).mapHomotopyCategory\n              (.up ℤ)).obj H))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0c017",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T151821-L-177787",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0c017",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T151821-L-177787",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with DAG statements and baseline interfaces; all eight modules and both direct importers compile cleanly within 60 seconds; axiom checks show only standard axioms and sorryAx from the two documented residual obligations."
+ }
+}

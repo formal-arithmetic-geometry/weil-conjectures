@@ -12,33 +12,38 @@
  ],
  "proof": [
   {
-   "text": "Construct q_f using derivedComapUpperStarIso and exact-pullback comparisons, and p_f as its inverse adjunction mate. Apply mateEquiv_counit_symm to prove its scalar-counit identity.",
+   "text": "Use the explicitly constructed restriction square, inverse mate and its counit identity.",
    "uses": [
-    "def-weil-pbc-residue-exchange-comparison-interface"
+    "new-integral-residue-pull-square-data"
    ],
    "elementary": false
   },
   {
-   "text": "Apply scalar tensor associativity on flat resolutions. Inverse image preserves the balanced tensor coequalizers and the coefficient-pullback isomorphisms identify the base rings. The inverse mate p_f is the resulting derived scalar comparison, hence invertible. For composable maps the two composites multiply the same three scalar factors; associativity and coefficient-map composition give precisely the displayed composition identity.",
+   "text": "Use the proved flat-resolution cancellation argument for invertibility.",
    "uses": [
-    "def-weil-pbc-residue-exchange-comparison-interface"
+    "new-integral-residue-derived-pull-square-isIso"
    ],
    "elementary": false
   },
   {
-   "text": "Use asIso only after the IsIso property; its inverse is uniquely determined. Assemble c using the proved composition property, and derive the scalar-counit identity for c from that for p_f.",
-   "uses": [],
-   "elementary": true
+   "text": "Use the proved mate-pasting argument for composition and combine the two conclusions. Construct the coherent isomorphism family with asIso; the counit identity follows from that of the constructed mate.",
+   "uses": [
+    "new-integral-residue-derived-pull-square-comp",
+    "new-integral-residue-pull-square-data"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-residue-exchange-comparison-interface"
+  "new-integral-residue-pull-square-data",
+  "new-integral-residue-derived-pull-square-isIso",
+  "new-integral-residue-derived-pull-square-comp"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-  "note": "D3 explicit construction and proof reduction of integral residue projection normalization; source argument specialized to the actual internal-module functors."
+  "note": "B2: actual flat-resolution cancellation and inverse-mate pasting, leaving the flat-model computation and ordinary restriction-square composition as separate obligations."
  },
  "mathlib_searches": [
   {
@@ -105,10 +110,6 @@
   "by": "D3",
   "date": "2026-10-16",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeRestriction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeRestrictPullIso",
-   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullHom",
-   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullHom_counit",
    "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_pullSquare",
    "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullComparisons",
    "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullComparisons_counit"
@@ -127,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-56663",
-  "group": "D3",
+  "reviewer": "X-0c017",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261016T101204-L-2230257",
+  "landing": "20261016T151821-L-177787",
   "kind": "interface",
-  "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
+  "note": "independent Codex review: Matched delivered Lean with DAG statements and baseline interfaces; all eight modules and both direct importers compile cleanly within 60 seconds; axiom checks show only standard axioms and sorryAx from the two documented residual obligations."
  }
 }
