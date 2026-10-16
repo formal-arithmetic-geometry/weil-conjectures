@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-base-field-cd-inflation",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Inflation between finite cyclic groups",
- "statement": "For $m\\geq1$ let $C_m=\\langle\\sigma\\rangle$ be cyclic of order $m$ and\n$N_m=1+\\sigma+\\dots+\\sigma^{m-1}\\in\\mathbf Z[C_m]$. Let $r\\geq1$, let\n$\\pi\\colon C_{rm}\\to C_m$ send a generator $\\sigma'$ to $\\sigma$, and let $M$ be a\n$C_m$-module, regarded as a $C_{rm}$-module through $\\pi$. Then the inflation map\n$H^s(C_m,M)\\to H^s(C_{rm},M)$ is multiplication by $r^{\\lfloor s/2\\rfloor}$ under\nthe identifications of both sides with the cohomology of the periodic complexes\n$M\\xrightarrow{\\sigma-1}M\\xrightarrow{N_m}M\\xrightarrow{\\sigma-1}\\cdots$. In\nparticular, if $rM=0$, inflation is zero in all degrees $s\\geq2$.",
+ "statement": "For $m\\geq1$ let $C_m=\\langle\\sigma\\rangle$ be cyclic of order $m$ and $N_m=1+\\sigma+\\dots+\\sigma^{m-1}\\in\\mathbf Z[C_m]$. Let $r\\geq1$, let $\\pi\\colon C_{rm}\\to C_m$ send a generator $\\sigma'$ to $\\sigma$, and let $M$ be an abelian group with a $C_m$-action by group automorphisms (a $C_m$-module), regarded as a $C_{rm}$-module through $\\pi$. For every integer $s\\geq0$, the inflation map $H^s(C_m,M)\\to H^s(C_{rm},M)$ is multiplication by $r^{\\lfloor s/2\\rfloor}$ under the identifications of the source with the cohomology of the periodic complex $M\\xrightarrow{\\sigma-1}M\\xrightarrow{N_m}M\\xrightarrow{\\sigma-1}\\cdots$ and the target with the cohomology of $M\\xrightarrow{\\sigma-1}M\\xrightarrow{rN_m}M\\xrightarrow{\\sigma-1}\\cdots$. Here the scalar description means that the cohomology class represented by $x$ is sent to the class represented by $r^{\\lfloor s/2\\rfloor}x$ in the target complex. Group cohomology $H^s(G,M)$ is the cohomology of the inhomogeneous group-cochain complex of functions $G^q\\to M$, with differential $(da)(g_1,\\ldots,g_{q+1})=g_1a(g_2,\\ldots,g_{q+1})+\\sum_{j=1}^{q}(-1)^j a(g_1,\\ldots,g_jg_{j+1},\\ldots,g_{q+1})+(-1)^{q+1}a(g_1,\\ldots,g_q)$; inflation is the map induced by pulling these functions back along $\\pi$ in every argument. In particular, if $rM=0$, inflation is zero in all degrees $s\\geq2$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.md",
   "place": "node det-base-field-cd-inflation, order None"
@@ -15,30 +15,104 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "*The periodic resolution.* Let $P(m)$ be the complex of free\n$\\mathbf Z[C_m]$-modules $P_s=\\mathbf Z[C_m]$ ($s\\geq0$) with differentials\n$P_{2k+1}\\to P_{2k}$ multiplication by $\\sigma-1$ and $P_{2k+2}\\to P_{2k+1}$\nmultiplication by $N_m$, augmented by the sum of coefficients\n$P_0\\to\\mathbf Z$. It is exact: the image of $\\sigma-1$ consists of the elements\nwith coefficient sum zero, which is the kernel of the augmentation and also the\nkernel of $N_m$ (since $N_m\\cdot x=(\\text{coefficient sum of }x)N_m$); and the\nkernel of $\\sigma-1$ is the set of elements with all coefficients equal, i.e.\n$\\mathbf ZN_m$, which is the image of $N_m$. Hence\n$H^s(C_m,M)=H^s(\\Hom_{C_m}(P(m),M))$, and $\\Hom_{C_m}(P_s,M)=M$, with\ndifferentials alternately $\\sigma-1$ and $N_m$.",
-   "uses": [],
-   "elementary": null
+   "text": "For each positive integer $n$, [lem-sfb-cyclic-periodic-resolution] gives the free periodic resolution of the trivial $\\mathbf Z[C_n]$-module and identifies the cochain complex computing $H^s(C_n,M)$ with alternating maps $\\sigma-1$ and $N_n$. For $n=m$ this is $M\\xrightarrow{\\sigma-1}M\\xrightarrow{N_m}M\\to\\cdots$; for $n=rm$, the action of $\\sigma'$ on $M$ is the action of $\\sigma$, while the norm is $N_{rm}$ acting through $\\pi$, namely $\\sum_{a=0}^{r-1}\\sum_{b=0}^{m-1}\\sigma^{am+b}=rN_m$, so the target complex is $M\\xrightarrow{\\sigma-1}M\\xrightarrow{rN_m}M\\to\\cdots$.",
+   "uses": [
+    "lem-sfb-cyclic-periodic-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+    "place": "The periodic resolution paragraph."
+   }
   },
   {
-   "text": "*A chain map over $\\pi$.* Define $f_s\\colon P(rm)_s\\to P(m)_s$ by\n$f_s=c_s\\,\\pi$ with $c_s=r^{\\lfloor s/2\\rfloor}$, where $\\pi$ also denotes the ring\nmap $\\mathbf Z[C_{rm}]\\to\\mathbf Z[C_m]$. Then $\\pi(\\sigma'-1)=\\sigma-1$ and\n$\\pi(N_{rm})=rN_m$. Commutation with the odd differentials requires\n$c_{2k}=c_{2k+1}$, and with the even ones $c_{2k+2}=rc_{2k+1}$; both hold. In\ndegree $0$ it is compatible with the augmentations. So $f$ is a\n$\\pi$-equivariant chain map lifting $\\mathrm{id}_{\\mathbf Z}$.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $P(m)$ and $P(rm)$ be the resolutions from Step 1 and let $\\pi: \\mathbf Z[C_{rm}]\\to\\mathbf Z[C_m]$ be the induced ring map. Set $c_s=r^{\\lfloor s/2\\rfloor}$ and define $f_s=c_s\\pi$. For $g'\\in C_{rm}$ and $a\\in\\mathbf Z[C_{rm}]$, $f_s(g'a)=c_s\\pi(g')\\pi(a)=\\pi(g')f_s(a)$, so $f_s$ is $\\pi$-equivariant. Since $\\pi(\\sigma'-1)=\\sigma-1$ and $\\pi(N_{rm})=rN_m$, commutation with odd differentials is the equality $c_{2k}=c_{2k+1}$ and commutation with even differentials is $c_{2k+2}=rc_{2k+1}$; both hold. The degree-zero augmentation also commutes because $c_0=1$. Thus $f$ is a $\\pi$-equivariant chain map lifting the identity of $\\mathbf Z$.",
+   "uses": [
+    "lem-sfb-cyclic-periodic-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+    "place": "The chain-map paragraph."
+   }
   },
   {
-   "text": "*It computes inflation.* Inflation is induced on cochains by any\n$\\pi$-equivariant chain map between projective resolutions lifting\n$\\mathrm{id}_{\\mathbf Z}$: any two such maps are chain homotopic, by constructing\nthe homotopy recursively using projectivity of the source terms and exactness of\nthe target resolution, and the bar resolutions give the cochain description of\ninflation. Applying $\\Hom(-,M)$ to $f$ gives in degree $s$ the map $M\\to M$,\n$x\\mapsto c_sx$. Hence inflation on $H^s$ is multiplication by\n$r^{\\lfloor s/2\\rfloor}$. If $rM=0$ and $s\\geq2$, then $\\lfloor s/2\\rfloor\\geq1$ and\nthis is zero.",
+   "text": "Apply [lem-sfb-resolution-inflation-comparison] with $G=C_m$, $G'=C_{rm}$, the quotient $\\pi$, and the chain map from Step 2. Both complexes are projective resolutions by [lem-sfb-cyclic-periodic-resolution], and Step 2 verifies the required augmentation equation. A cochain corresponding to $x\\in M$ is the module map $h_x$ with $h_x(1)=x$. Precomposition sends it to $h_x\\circ f_s$, whose value at $1$ is $h_x(c_s\\pi(1))=c_sx$. Hence a source cocycle represented by $x$ is sent to the target cocycle represented by $r^{\\lfloor s/2\\rfloor}x$; this is the asserted formula for inflation.",
+   "uses": [
+    "lem-sfb-resolution-inflation-comparison",
+    "lem-sfb-cyclic-periodic-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+    "place": "The ‘It computes inflation’ paragraph."
+   }
+  },
+  {
+   "text": "If $rM=0$ and $s\\geq2$, then $\\lfloor s/2\\rfloor\\geq1$, so multiplication by $r^{\\lfloor s/2\\rfloor}$ is zero on $M$ and hence on the cohomology groups.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+    "place": "The final sentence of the ‘It computes inflation’ paragraph."
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sfb-cyclic-periodic-resolution",
+  "lem-sfb-resolution-inflation-comparison"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+  "place": "The three proof paragraphs, with the target norm complex corrected to use rN_m for C_{rm}."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inflation between finite cyclic groups is multiplication by powers of the index on group cohomology",
+   "results": "{\"t\": \"2026-10-16T11:08:15Z\", \"tool\": \"leansearch\", \"query\": \"inflation between finite cyclic groups is multiplication by powers of the index on group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.H1InfRes_exact\", \"groupCohomology.infNatTrans\", \"groupCohomology.H1InfRes\", \"groupCohomology.instMonoModuleCatFH1InfRes\", \"groupCohomology.infNatTrans_app\", \"groupCohomology.H1InfRes_f\", \"IsCyclic.index_powMonoidHom_ker\", \"groupCohomology.coe_mapCocycles₁\"], \"digest\": \"8b964bb406487dec\"}",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: finite cyclic cohomology computations and infNatTrans define the ingredients but do not assert the scalar r^(floor(s/2)) formula; source read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inflation from a finite cyclic quotient to a larger finite cyclic group on group cohomology",
+   "results": "{\"t\": \"2026-10-16T11:08:26Z\", \"tool\": \"leanfinder\", \"query\": \"Inflation from a finite cyclic quotient to a larger finite cyclic group on group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.infNatTrans\", \"Rep.FiniteCyclicGroup.groupCohomologyπEven\", \"Rep.FiniteCyclicGroup.groupCohomologyπOdd\", \"groupCohomology.H1InfRes_X₁\", \"groupCohomology.H1InfRes\", \"groupCohomology.H1InfRes_f\", \"groupCohomology.H1InfRes_X₂\", \"groupCohomology.infNatTrans_app\"], \"digest\": \"84351e7ac2355736\"}",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: finite cyclic cohomology computations and infNatTrans define the ingredients but do not assert the scalar r^(floor(s/2)) formula; source read."
+  },
+  {
+   "tool": "grep",
+   "query": "resolution_quasiIso|GroupCohomology|inflation|FiniteCyclic",
+   "results": "{\"t\": \"2026-10-16T11:08:26Z\", \"tool\": \"grep\", \"query\": \"resolution_quasiIso|GroupCohomology|inflation|FiniteCyclic\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"55e41920b0700625\"}",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: finite cyclic cohomology computations and infNatTrans define the ingredients but do not assert the scalar r^(floor(s/2)) formula; source read."
+  },
+  {
+   "tool": "grep",
+   "query": "inflation|infNatTrans|map.*[Rr]esolution|[Rr]esolution.*map",
+   "results": "{\"t\": \"2026-10-16T11:47:19Z\", \"tool\": \"grep\", \"query\": \"inflation|infNatTrans|map.*[Rr]esolution|[Rr]esolution.*map\", \"sub\": \"RepresentationTheory/Homological/GroupCohomology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean\"], \"digest\": \"53d72e389c2188a7\"}",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: finite cyclic cohomology computations and infNatTrans define the ingredients but do not assert the scalar r^(floor(s/2)) formula; source read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"infNatTrans\"",
+   "results": "{\"t\": \"2026-10-16T11:47:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"infNatTrans\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"groupCohomology.infNatTrans\", \"groupCohomology.infNatTrans_app\", \"groupHomology.coinfNatTrans\", \"groupHomology.coinfNatTrans_app\"], \"digest\": \"89b07bdc80ce89cf\"}",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: finite cyclic cohomology computations and infNatTrans define the ingredients but do not assert the scalar r^(floor(s/2)) formula; source read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inflation for a finite cyclic quotient is represented on periodic resolution cochains by index to the floor of half the degree",
+   "results": "{\"t\": \"2026-10-16T11:47:30Z\", \"tool\": \"leanfinder\", \"query\": \"Inflation for a finite cyclic quotient is represented on periodic resolution cochains by index to the floor of half the degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.homResolutionIso\", \"Rep.FiniteCyclicGroup.resolution.π_f\", \"Rep.FiniteCyclicGroup.resolution_π\", \"Rep.FiniteCyclicGroup.homResolutionIso_inv_f_hom_apply_hom_hom_apply\", \"Rep.FiniteCyclicGroup.moduleCatCochainComplex\", \"Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_iff\", \"Rep.FiniteCyclicGroup.resolution.π\", \"Rep.FiniteCyclicGroup.groupCohomologyπEven\"], \"digest\": \"61c1b9a92155859a\"}",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: finite cyclic cohomology computations and infNatTrans define the ingredients but do not assert the scalar r^(floor(s/2)) formula; source read."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -47,5 +121,21 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-base-field-cd"
+ "unit": "sk-lem-base-field-cd",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-base-field-cd-inflation",
+  "worker": "stage1",
+  "summary": "Corrected the target periodic-complex clause: for C_{rm} acting through C_m, N_{rm} acts as rN_m, so the two complexes are not both the N_m-complex. Split off the Mathlib periodic-resolution computation and a statement-only comparison lemma identifying a resolution chain map lifting the identity with inflation. The remaining chain-map scalar calculation and annihilation conclusion are explicit proof steps. The source error is documented by the explicit case m=1, r=2, M=ℤ; all comparison hypotheses and cochain evaluation maps were checked.",
+  "blueprint": "The steps realize the periodic-resolution paragraph, the chain-map paragraph, and the ‘It computes inflation’ paragraph of blueprint node det-base-field-cd-inflation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N6-b9b16b8db",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-b9b16b8db (reviewer sub-agent of L); spot-checked: Read the mathematics in full; all four steps and both new nodes check against the current blueprint, Mathlib, and Stacks 00LS. The target norm correction to rN_m is necessary. Completed three omitted metadata fields in both new nodes; corrected JSON files and detailed review.md are written. No mathematical changes, duplicates, cycles, or accepted tool_uses.; 2 file(s) fixed by the reviewer"
+ }
 }

@@ -1,0 +1,87 @@
+{
+ "id": "lem-sfb-resolution-inflation-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-base-field-cd-inflation",
+   "place": "Proof paragraph 3, “It computes inflation”: a quotient-equivariant map of projective resolutions lifting the identity induces the standard inflation map on group cohomology.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Resolution maps compute inflation in group cohomology",
+ "statement": "Let $\\pi\\colon G'\\to G$ be a surjective homomorphism of groups, and let $M$ be an abelian group with a $G$-action by automorphisms, regarded as a $G'$-module by $g' x=\\pi(g')x$. Let $P_\\bullet\\xrightarrow{\\varepsilon}\\mathbf Z$ and $P'_\\bullet\\xrightarrow{\\varepsilon'}\\mathbf Z$ be projective resolutions of the trivial modules over $\\mathbf Z[G]$ and $\\mathbf Z[G']$, respectively: exact augmented nonnegative chain complexes [def-weil-pbc-module-chain-complex-homology] whose terms are projective (every module homomorphism from such a term lifts through any surjective module homomorphism). Write $\\operatorname{Res}_{\\pi}P_\\bullet$ for $P_\\bullet$ with the $G'$-action restricted along $\\pi$. If $f\\colon P'_\\bullet\\to\\operatorname{Res}_{\\pi}P_\\bullet$ is a $\\mathbf Z[G']$-linear chain map satisfying $\\varepsilon\\circ f_0=\\varepsilon'$, then precomposition with $f$ induces, under the canonical projective-resolution identifications, the inflation map $H^s(G,M)\\to H^s(G',M)$ for every $s\\geq0$. Here $H^s(G,M)$ is the cohomology of the cochain complex of functions $G^q\\to M$ with differential $(da)(g_1,\\ldots,g_{q+1})=g_1a(g_2,\\ldots,g_{q+1})+\\sum_{j=1}^q(-1)^ja(g_1,\\ldots,g_jg_{j+1},\\ldots,g_{q+1})+(-1)^{q+1}a(g_1,\\ldots,g_q)$, and inflation sends a cochain $a$ to $a\\circ\\pi^q$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-inflation.proof.md",
+  "place": "Paragraph 3, “It computes inflation”. Generic comparison ingredient of the agent-written proof. For the recursive uniqueness homotopy see literature/stacks-project/algebra.tex, Tag 00LS (lemma-compare-resolutions), part (2), lines 17500–17561; for cochain pullback see Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean:52–60,139–143. Tag 00LS supplies comparison, not the whole group-cohomology assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "infNatTrans|cochainsMap|def map",
+   "results": "{\"t\": \"2026-10-16T11:47:19Z\", \"tool\": \"grep\", \"query\": \"infNatTrans|cochainsMap|def map\", \"sub\": \"RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"22\", \"52\", \"63\", \"64\", \"68\"], \"digest\": \"efebf8d8ba404b6f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "inflation|infNatTrans|map.*[Rr]esolution|[Rr]esolution.*map",
+   "results": "{\"t\": \"2026-10-16T11:47:19Z\", \"tool\": \"grep\", \"query\": \"inflation|infNatTrans|map.*[Rr]esolution|[Rr]esolution.*map\", \"sub\": \"RepresentationTheory/Homological/GroupCohomology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean\"], \"digest\": \"53d72e389c2188a7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any equivariant map of projective resolutions lifting the identity computes pullback along a group homomorphism in group cohomology",
+   "results": "{\"t\": \"2026-10-16T11:47:19Z\", \"tool\": \"leansearch\", \"query\": \"Any equivariant map of projective resolutions lifting the identity computes pullback along a group homomorphism in group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.liftHomotopy\", \"groupCohomology.map_id\", \"groupCohomology.cochainsMap_id_f_hom_eq_compLeft\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"groupCohomology.H1Map_id\", \"Rep.FiniteCyclicGroup.homResolutionIso\", \"groupCohomology.cochainsMap_id\", \"CategoryTheory.ProjectiveResolution.liftIdHomotopy\"], \"digest\": \"37d573ccbe651270\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftHomotopy\"",
+   "results": "{\"t\": \"2026-10-16T11:47:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"liftHomotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.liftHomotopy\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZero\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp_assoc\", \"CategoryTheory.ProjectiveResolution.liftHomotopy\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc\"], \"digest\": \"5851bd1161da94bc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chain map between projective resolutions lifting the identity induces the inflation map on group cohomology",
+   "results": "{\"t\": \"2026-10-16T11:42:19Z\", \"tool\": \"leanfinder\", \"query\": \"A chain map between projective resolutions lifting the identity induces the inflation map on group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"groupCohomologyIso\", \"groupCohomology.coindIso\", \"groupCohomology.π_comp_H1Iso_hom\", \"groupCohomology.isoCocycles₁_inv_comp_iCocycles\", \"groupCohomology.isoShortComplexH1_hom\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply\", \"groupCohomology.π_comp_H0Iso_hom\"], \"digest\": \"4431b9b53cb9619a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the projective resolution isomorphism for group cohomology under a quotient group homomorphism",
+   "results": "{\"t\": \"2026-10-16T11:47:30Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of the projective resolution isomorphism for group cohomology under a quotient group homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.infNatTrans\", \"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"groupCohomology.map_H0Iso_hom_f\", \"groupCohomology.π_comp_H1Iso_hom\", \"groupCohomology.map_H0Iso_hom_f_apply\", \"groupCohomology.H1π_comp_map_apply\", \"groupCohomology.H1π_comp_map\", \"groupCohomology.π_comp_H2Iso_hom\"], \"digest\": \"b6c77e4e9b7e47fd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: groupCohomologyIso computes objects; liftHomotopy compares resolutions in one category; infNatTrans and cochainsMap define pullback on standard cochains. Shapiro restricts to subgroups, whereas the present comparison is along a quotient. Reading Basic.lean:205–216, Functoriality.lean:52–60,139–143,558–565 and Shapiro.lean:41–65 finds no arbitrary semilinear projective-resolution comparison with that cochain pullback."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-base-field-cd-inflation",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-base-field-cd",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

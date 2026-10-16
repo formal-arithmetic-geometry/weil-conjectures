@@ -3,46 +3,218 @@
  "blueprint": {
   "is": "det-sp-tower-shriek-levels",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compactly supported direct image of towers is computed levelwise",
- "statement": "Let $f=\\bar f\\circ j:X\\to Y$ be a compactification. Put\n$Rf_{!,\\bullet}=R\\bar f_{*,\\bullet}\\circ j_{!,\\bullet}$ on\n$D^+(\\operatorname{Tow}(X,\\mathcal O_E))$. Then:\n\n1. $(Rf_{!,\\bullet}C_\\bullet)_n\\simeq Rf_{!,\\mathcal O_E/\\ell^n}C_n$ in\n   $D^+(Y_{\\mathrm{proét}},\\mathcal O_E/\\ell^n)$, naturally in $C_\\bullet$;\n2. the projection formula, proper base change and the localization triangles\n   hold for towers (with tensor products over $\\mathcal O_{E,T}/\\ell^\\bullet$ and\n   levelwise twists), the tower maps evaluating at each level to the finite\n   ones;\n3. a morphism of towers is an isomorphism in $D(\\operatorname{Tow})$ if and only if it\n   is an isomorphism at every level.",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension]. Write $\\ell=u\\varpi_E^e$ with $u$ a unit and $e\\geq1$, so $R_n=\\mathcal O_E/\\ell^n=A_{E,en}$. Use the varying-coefficient tower category and its derived evaluations of [det-sp-coefficient-towers-abelian]. Let $c=(j,p)$ be a compactification $f=pj:X\\to Y$ [def-weil-compactifications-refinements], and define $F_f=Rp_{*,\\bullet}j_{!,\\bullet}$ on $D^+(\\operatorname{Tow}(X,\\mathcal O_E))$. Then:\n\n1. There is a natural comparison $(F_fC)_n\\simeq Rp_{*,R_n}j_{!,R_n}C_n=Rf_{!,R_n}^{c}C_n$ for every bounded-below tower complex $C$.\n2. The following specified operations and maps exist in the ordinary derived categories of varying-coefficient towers and evaluate to the finite operations and maps. Tensor means derived tensor over the ring system $(R_{n,T})_n$; no completed tensor or condensed coefficient identification is meant.\n   (a) In the global field setting $k=\\overline{\\mathbf F}_{p_0}$, $\\ell\\ne p_0$ [def-weil-finite-field-fiber], let $f$ be a morphism of separated finite-type $k$-schemes. For bounded-below towers $K$ on $X$ and $L$ on $Y$ whose levels are pro-etale realizations of bounded constructible finite-Tor complexes, with specified etale-origin witnesses at each level [def-weil-finite-tor-amplitude, def-weil-pbc-etale-origin-witness], the compactification projection map\n   $F_fK\\otimes^L_{R_{\\bullet,Y}}L\\longrightarrow F_f(K\\otimes^L_{R_{\\bullet,X}}f^{-1}L)$\n   is an isomorphism. Both $K_n$ and $L_n$ are required to satisfy the finite-Tor hypothesis. The formula is formed in the ambient unbounded tower derived category using the total derived operations; on the bounded-below domain $F_f$ is the functor above.\n   (b) For a cartesian compact-support square [def-cbc-compact-support-square], with separated finite-type $f$, arbitrary $g:Y'\\to Y$, and compactification $c'=(j',p')$ obtained by base change from $c$, the specified exchange\n   $g^{-1}F_fC\\longrightarrow F_{f'}g'^{-1}C$\n   is an isomorphism for $C\\in D^+(\\operatorname{Tow}(X,\\mathcal O_E))$ whose every level has an etale-origin witness. There is no requirement that the chosen witnesses themselves be a compatible tower.\n   (c) For a closed immersion $i:Z\\hookrightarrow T$ with complementary quasi-compact open immersion $a:U\\hookrightarrow T$, and every $C\\in D^+(\\operatorname{Tow}(T,\\mathcal O_E))$, the open counit and closed unit fit into a distinguished triangle\n   $a_{!,\\bullet}a^{-1}C\\to C\\to i_{*,\\bullet}i^{-1}C\\to a_{!,\\bullet}a^{-1}C[1]$.\n   This evaluates to the finite open–closed triangle. The exact immersion operations in this formula are applied termwise. On schemes where $\\ell$ is invertible, the same evaluation assertions include tensoring with specified coefficient-twist towers, that is, towers whose levels are the finite Tate twists with their quotient transitions [def-coefficient-twists-detailed].\n3. A morphism in $D(\\operatorname{Tow}(T,\\mathcal O_E))$ is an isomorphism if and only if all its derived evaluations are isomorphisms. This assertion is for the unbounded ordinary derived category and asserts conservativity, not faithfulness or existence of lifts of arbitrary families of derived maps.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.md",
   "place": "node det-sp-tower-shriek-levels, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-compactifications-refinements",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-etale-origin-witness",
+  "def-cbc-compact-support-square",
+  "def-coefficient-twists-detailed"
+ ],
  "proof": [
   {
-   "text": "(1) $j_{!,\\bullet}$ is levelwise extension by zero, exact, so\n$(j_{!,\\bullet}C_\\bullet)_n=j_!C_n$. By [det-sp-tower-injective-components],\n$(R\\bar f_{*,\\bullet}D_\\bullet)_n\\simeq R\\bar f_*D_n$ for every bounded below\n$D_\\bullet$; apply it to $D_\\bullet=j_{!,\\bullet}C_\\bullet$.",
+   "text": "For clause 1, [lem-cbc-proetale-extension-zero] gives exact degreewise pro-etale $j_!$ and its compatibility with restriction of finite coefficients. Thus it acts on strict towers and complexes with $(j_{!,\\bullet}C)_n=j_!C_n$. Its exactness follows componentwise from [det-sp-coefficient-towers-abelian], so it preserves the lower bound. Apply [det-sp-tower-injective-components] to the bounded-below complex $j_{!,\\bullet}C$: its derived direct-image comparison gives $(Rp_{*,\\bullet}j_{!,\\bullet}C)_n\\simeq Rp_*j_!C_n$. This is exactly clause 1, naturally in $C$.",
    "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "det-sp-coefficient-towers-abelian",
     "det-sp-tower-injective-components"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+    "place": "(1): exact extension by zero followed by the injective-components comparison"
+   }
   },
   {
-   "text": "(3) Evaluation functors are exact and jointly conservative on the abelian\ncategory of towers (kernels and cokernels are levelwise), so a map of complexes\nof towers is a quasi-isomorphism iff it is so at every level, i.e. iff its cone\nis acyclic at every level.",
-   "uses": [],
-   "elementary": null
+   "text": "Prove clause 3 before using it. Exact derived evaluation is triangulated by [lem-sf-exact-functor-derived-triangulated]. For an actual derived tower morphism $v$, let $D$ be a cone. If every $v_n$ is invertible, its evaluated distinguished triangle has zero third term by [lem-kun-distinguished-cone-zero], so $\\mathcal H^r(D)_n=0$ for every $r,n$. Evaluation commutes with cohomology because kernels and cokernels are levelwise and evaluation is exact [det-sp-coefficient-towers-abelian]. Therefore every cohomology tower of $D$ is zero, hence $D$ is the zero object of the derived category and the same cone criterion makes $v$ invertible. Conversely, a functor sends a morphism and its inverse to mutually inverse maps. This detects isomorphisms of already constructed morphisms; it is not an assertion that evaluation is faithful.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+    "place": "(3): cone argument for arbitrary derived morphisms"
+   }
   },
   {
-   "text": "(2) Each of these maps is defined in the tower category by the same recipe as\nin the finite case (transposes of units and counits of the levelwise adjunctions,\nassociativity of tensor products — flatness and tensor products of towers being\nlevelwise), so by (1) and exactness of evaluation it evaluates at level $n$ to\nthe corresponding finite map, which is an isomorphism; by (3) the tower map is\nan isomorphism. For the localization triangle, the levelwise sequences\n$0\\to j_!j^*C_n\\to C_n\\to i_*i^*C_n\\to0$ are exact and compatible with the\ntransitions, giving a short exact sequence of towers and hence a triangle.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the fixed small pro-etale sites underlying [det-sp-coefficient-towers-abelian] and the strict ring systems $B_n=(R_n)_T$, with the actual quotient homomorphisms. Its tower category is exactly $\\mathscr S(B)$ of [lem-coef-semilinear-derived-sections]: both have $B_n$-modules and semilinear transitions, not modules over a fixed ring. That node identifies its enhanced localization with coherent semilinear sections, over all evaluations, and gives simultaneous derived tensor, inverse image, right derived direct image, open extension, units and counits on these section models. In particular its scope is all unbounded complexes, without flat quotient maps and without normalized inputs. For $m\\geq n$, write $T_{mn}=-\\otimes^L_{B_m}B_n$ and $t^C_{mn}:T_{mn}C_m\\to C_n$ for the transition adjunct. The tensor transition is $T_{mn}(K_m\\otimes^L L_m)\\simeq T_{mn}K_m\\otimes^LT_{mn}L_m\\xrightarrow{t^K_{mn}\\otimes t^L_{mn}}K_n\\otimes^LL_n$. The associator is the derived tensor/pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the identity underlying topos and the ring quotient. The coherent models in the section lemma supply the composition homotopies for all $m\\geq n\\geq r$. Thus evaluation of the actual derived tower tensor is $K_n\\otimes^L_{R_n}L_n$, including its transition data, rather than merely evaluation of the underived tensor. This also applies when one input is a specified twist tower.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+    "place": "(2): levelwise flatness/tensor assertion replaced by the coherent varying-ring derived calculus"
+   }
+  },
+  {
+   "text": "Construct the specified maps using [lem-coef-semilinear-derived-sections], not by lifting a family of finite derived maps. For a geometric inverse image $V=u^{-1}$ with right derived adjoint $G=Ru_*$, its coefficient comparison $b_{mn}:T_{mn}G_m\\to G_nT_{mn}$ is the counit transpose of $V_nT_{mn}G_m\\simeq T_{mn}V_mG_m\\xrightarrow{T_{mn}\\varepsilon_m}T_{mn}$; hence the transition of $G(C)$ is $G_n(t^C_{mn})b_{mn}$. The section lemma gives this specified counit transpose, the coherent section adjunction, and evaluation of its units and counits. Form the projection transformation by the compactification formula of [def-exchange-projection]: the proper counit-tensor transpose $\\pi_p$ followed by $Rp_*$ of the canonical open tensor comparison. Only that definition's projection clause is used (take its auxiliary $g=\\operatorname{id}_Y$); its extra finite-type assumption on that auxiliary map imposes no restriction on the arbitrary base map in part (b). Form the compact-support exchange by the formula in [def-cbc-exchange-map]: $\\eta_{p'}$, then $Rp'_*$ of the pullback square identification, then $Rp'_*\\bar g'^{-1}\\varepsilon_p$, followed by $Rp'_*$ of the open base-change comparison. The section lemma explicitly supplies coherent models for these mates, open-adjunction comparisons and composites. Its preservation of evaluation, composition and transposes says that evaluating these exact formulas yields the finite specified $\\operatorname{PF}^c$ and $\\operatorname{Ex}_!^c$, including their adjunction normalization. Coefficient-transition compatibility thus comes from the coherent geometric constructions just cited, rather than from naturality at one fixed coefficient ring. The derived tower direct image here restricts to $Rp_{*,\\bullet}$ on $D^+$: it is the right adjoint of the same exact termwise inverse image, with the canonical derived adjunction, and clause 1 identifies its finite evaluations.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-exchange-projection",
+    "def-cbc-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+    "place": "(2): construction and evaluation of the projection and base-change mates"
+   }
+  },
+  {
+   "text": "At each level of part (a), the ring is the finite ring $R_n=A_{E,en}$, and BOTH inputs are bounded constructible finite-Tor etale realizations with witnesses. Thus [sk-thm-sf-pf-proetale] makes the evaluated projection transformation invertible. At each level of part (b), exact evaluation preserves bounded-below inputs; the ring is finite commutative, $f$ is separated finite type, the square is cartesian with arbitrary $g$, and the input has its specified etale-origin witness. Therefore [thm-cbc-finite-level-proetale] makes the evaluated exchange invertible. These theorems are applied only after step 4 constructs the actual tower maps and identifies their evaluations. Clause 3 (step 2) now makes each tower map invertible. No compatibility of the witnesses is used to build the maps, since those were constructed from geometric tower adjunctions before witnesses were used to test invertibility.",
+   "uses": [
+    "sk-thm-sf-pf-proetale",
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+    "place": "(2): finite-level invertibility and joint conservativity"
+   }
+  },
+  {
+   "text": "For part (c), choose ONE bounded-below representative complex $C^\\cdot$ in the abelian category of towers. For every degree $q$ and level $n$, apply [lem-weil-pbc-proetale-ringed-open-closed] with ring sheaf $(R_n)_T$ to $C_n^q$, using the assumed quasi-compactness of $a$. It gives $0\\to a_!a^{-1}C_n^q\\to C_n^q\\to i_*i^{-1}C_n^q\\to0$, whose maps are the open counit and closed unit. They commute with the differentials by naturality. They also commute with the semilinear transitions: restriction of the scalar action does not change the underlying inverse/direct image maps or these topoi units and counits; open extension commutes with finite-ring restriction of scalars by [lem-cbc-proetale-extension-zero]. Applying naturality to $C_m^q\\to\\operatorname{Res}_{m,n}C_n^q$ therefore gives the transition squares. By [det-sp-coefficient-towers-abelian] these are a degreewise short exact sequence of complexes of towers. [lem-weil-pbc-complex-ses-triangle] produces its distinguished triangle. The immersion functors here are exact (open extension and closed direct image by the ringed open–closed lemma, inverse images by [def-weil-pbc-proetale-operations]); [lem-weil-pbc-exact-functor-derived-functor] identifies their derived operations with these termwise ones. Finally, exact evaluation is triangulated by [lem-sf-exact-functor-derived-triangulated], so it carries this triangle, with its counit and unit, to the same finite open–closed triangle. No short exact sequence of abstract derived objects, or gluing of unrelated distinguished triangles, is asserted.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-cbc-proetale-extension-zero",
+    "det-sp-coefficient-towers-abelian",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+    "place": "(2): localization on one representative complex; Stacks proetale.tex Tags 09AH (lemma-ses-associated-to-open) and 09BM (lemma-closed-immersion-complement-retrocompact-exact) and the ringed open–closed statement"
+   }
   }
  ],
  "proof_deps": [
-  "det-sp-tower-injective-components"
+  "def-cbc-exchange-map",
+  "def-exchange-projection",
+  "def-weil-pbc-proetale-operations",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-tower-injective-components",
+  "lem-cbc-proetale-extension-zero",
+  "lem-coef-semilinear-derived-sections",
+  "lem-kun-distinguished-cone-zero",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-thm-sf-pf-proetale",
+  "thm-cbc-finite-level-proetale"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "Paragraphs (1), (3), (2), expanded using existing coherent varying-ring section and ringed-site tools"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compactly supported direct image of coefficient towers computed levelwise; tower projection formula proper base change localization triangles",
+   "results": "8 hits including localCohomology.diagram and generic triangulated localization declarations; no theorem about coefficient towers or compact-support operations",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, DerivedCategory, evaluation functor, tower",
+   "results": "0 hits; loogle reported Unknown identifier evaluation",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; not evidence of absence (corrected searches below)"
+  },
+  {
+   "tool": "grep",
+   "query": "projection formula|proper base change|localization triangle|tower",
+   "results": "0 hits in Mathlib/CategoryTheory; the invocation supplied Mathlib/CategoryTheory as subdirectory, so the helper searched Mathlib/Mathlib/CategoryTheory, a nonexistent directory. Not evidence of absence; corrected searches below.",
+   "date": "2026-10-16",
+   "verdict": "invalid directory: not evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compactly supported direct image of towers computed levelwise",
+   "results": "8 hits for compact support topology and generic AlgebraicGeometry declarations; no tower direct-image theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsIso, CategoryTheory.Limits.IsLimit, CategoryTheory.DerivedCategory",
+   "results": "0 hits; unknown identifier CategoryTheory.DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived coefficient tower operations have coherent transition maps and levelwise evaluation of tensor and adjunction mates",
+   "results": "8 hits: CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor(_assoc), unit_app_tensor_comp_map_δ(_assoc), and rigid-category adjoint-mate identities. These are ordinary monoidal-category identities, not varying-ring derived tower operations.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection formula|adjunction mate|derived tensor",
+   "results": "0 hits in Mathlib/CategoryTheory; the invocation supplied Mathlib/CategoryTheory as subdirectory, so the helper searched Mathlib/Mathlib/CategoryTheory, a nonexistent directory. Not evidence of absence; corrected searches below.",
+   "date": "2026-10-16",
+   "verdict": "invalid directory: not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Functor",
+   "results": "12 hits: Functor.map_isIso, map_inv, map_hom_inv, map_inv_hom and variants, IsIso.hom_inv_id_map, inv_hom_id_map, NatTrans.naturality_inv and variants in Mathlib.CategoryTheory.Iso and Functor.Category. Generic functoriality of invertibility, not the tower operations theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits: Adjunction, isLeftAdjoint, isRightAdjoint, mkOfHomEquiv, mkOfUnitCounit, ofIsLeftAdjoint, ofIsRightAdjoint and related in Mathlib.CategoryTheory.Adjunction.Basic. Generic adjunction data, not derived varying-coefficient tower calculus.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "map_isIso|mkOfUnitCounit|unit_app_tensor_comp_map_δ|leftAdjointMate_comp_evaluation",
+   "results": "0 printed hits; invalid subdirectory Mathlib/CategoryTheory (doubled Mathlib path); corrected below.",
+   "date": "2026-10-16",
+   "verdict": "invalid directory: not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "projection formula|proper base change|localization triangle|tower",
+   "results": "9 hits in CategoryTheory: Mathlib/CategoryTheory/Comma/Over/OverClass.lean:102,104,107,108,110 (IsOverTower), and Limits/Shapes/SequentialProduct.lean:19,25,120,163 (tower of partial products). These concern ordinary over-objects and sequential product limits, not varying-coefficient derived compact support.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction|leftAdjointMate_comp_evaluation|map_isIso",
+   "results": "25 printed hits in CategoryTheory/Monoidal, including Closed/Functor.lean:51,56,82,113 (ordinary Frobenius morphism and mates), Closed/Types.lean:36,38,44,47,54 (type-category tensor adjunction), and braided/commutative monoid adjunctions. No derived coefficient tower compact-support theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -55,5 +227,99 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-lem-sp-tower-bound"
+ "unit": "sk-lem-sp-tower-bound",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sp-tower-shriek-levels",
+  "worker": "stage1",
+  "summary": "Repair of returned head 253042477b50: explicitly state both finite-Tor hypotheses and the finite projection geometric domain; replace fixed-ring naturality by the existing coherent varying-coefficient section calculus, with explicit tensor and direct-image transition formulas and normalized mates; construct localization from one strict complex and its degreewise ringed sequence; correct the cone test and blueprint/Mathlib search records. STATEMENT-DISPUTED: the literal unrestricted D+ tensor claim is ill-typed for the residue-field tower over Z/ell^2 (unbounded negative Tor); the repaired projection domain is the finite-Tor domain of the parent unit. General clause 1 and unbounded conservativity are retained.",
+  "blueprint": "Realizes operations.proof.md (1), (3), and (2), in this order; steps 3–5 supply the missing derived tensor and coherent mate justification in paragraph (2), and step 6 supplies its degreewise localization construction. Source clause (2) needs a tensor domain: residue-field self-tensor at level 2 lies outside D+. No chapter/unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-exchange-map",
+    "why": "Specified compactification exchange formula for arbitrary base change."
+   },
+   {
+    "node": "def-exchange-projection",
+    "why": "Specified finite compactification projection formula, used only for the projection construction with auxiliary g=id."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Varying-ring abelian tower description and exact evaluation, following the blueprint tower route."
+   },
+   {
+    "node": "det-sp-tower-injective-components",
+    "why": "Bounded-below finite evaluation of the derived direct image, the original unit route."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Exact pro-etale open extension and compatibility with restriction of finite scalars, required before the compactification composite."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic varying-ring coherent derived operations, transitions, units/counits, tensor and mate evaluation; the unit itself does not supply their construction."
+   },
+   {
+    "node": "lem-kun-distinguished-cone-zero",
+    "why": "Generic cone criterion for invertibility of an actual derived tower morphism."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic exact-functor triangulation used for evaluation and localization."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic short-exact-complex triangle theorem applied in the actual tower abelian category."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Exact immersion functors have their termwise derived models."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "General ringed pro-etale sheaf-level exact counit–unit sequence for a quasi-compact complementary open."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Derived strong monoidal coefficient extension, used in the explicit tensor transition formula."
+   },
+   {
+    "node": "sk-thm-sf-pf-proetale",
+    "why": "Finite projection invertibility after the coherent tower map has been constructed and evaluated; both finite-Tor hypotheses are retained."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Finite compact-support base-change invertibility on etale-origin inputs, with arbitrary base map."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Exact identified-coefficient inverse images and their underlying module actions, used to identify the localization functors and semilinear transition squares."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-exchange-map",
+  "def-exchange-projection",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-tower-injective-components",
+  "lem-cbc-proetale-extension-zero",
+  "lem-coef-semilinear-derived-sections",
+  "lem-kun-distinguished-cone-zero",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-thm-sf-pf-proetale",
+  "thm-cbc-finite-level-proetale",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q57-e183e5e06",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q57-e183e5e06 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and source passages. All six steps check out, including nonflat varying-coefficient constructions, arbitrary-base exchange, both projection Tor hypotheses, and localization. No new nodes or repairs. Accepted tool uses and target coefficient distinctions are documented in review.md."
+ }
 }

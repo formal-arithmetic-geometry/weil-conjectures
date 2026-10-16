@@ -3,41 +3,125 @@
  "blueprint": {
   "is": "def-sfb-derived-tensor-modules",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived tensor product of module objects",
- "statement": "Let $\\mathcal C$ be a closed symmetric monoidal Grothendieck abelian category whose tensor\nproduct is additive and which has functorial flat resolutions, and let $R$ be a\ncommutative ring object of $\\mathcal C$. The derived category $D(\\Mod_R(\\mathcal C))$ is\nmonoidal for the *derived tensor product* $K\\otimes^{\\mathrm L}_RL$. This is the monoidal\nstructure of [lem-sfb-derived-monoidal] for the relative tensor product $\\otimes_R$ of\nmodule objects. In particular, for a commutative condensed ring $\\Lambda$ and a scheme\n$X$, with $\\Lambda_X=p_X^*\\Lambda$, it is the functor\n$$\n-\\otimes^{\\mathrm L}_{\\Lambda_X}-\\colon D(\\Mod_{\\Lambda_X})\\times D(\\Mod_{\\Lambda_X})\\to D(\\Mod_{\\Lambda_X}).\n$$",
+ "statement": "Let $\\mathcal C$ be a closed symmetric monoidal Grothendieck abelian category whose tensor\nproduct is additive and which has functorial flat resolutions, and let $R$ be a\ncommutative ring object of $\\mathcal C$. The derived category $D(\\Mod_R(\\mathcal C))$ is\nmonoidal for the *derived tensor product* $K\\otimes^{\\mathrm L}_RL$. This is the monoidal\nstructure of [lem-sfb-derived-monoidal] for the relative tensor product $\\otimes_R$ of\nmodule objects. In particular, for a commutative condensed ring $\\Lambda$ and a scheme\n$X$, with $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], it is the functor\n$$\n-\\otimes^{\\mathrm L}_{\\Lambda_X}-\\colon D(\\Mod_{\\Lambda_X})\\times D(\\Mod_{\\Lambda_X})\\to D(\\Mod_{\\Lambda_X}).\n$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/def-sfb-derived-tensor-modules.md",
   "place": "node def-sfb-derived-tensor-modules, order 1621"
  },
  "stmt_deps": [
   "lem-sfb-derived-monoidal",
-  "sk-def-sfb-condensed-ring"
+  "def-sfb-modobj-relative-tensor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients"
  ],
  "proof": [
   {
-   "text": "By [sk-prop-sfb-module-category], $\\Mod_R(\\mathcal C)$ is a closed symmetric monoidal\nGrothendieck abelian category for $\\otimes_R$, with functorial flat resolutions, so\n[lem-sfb-derived-monoidal] applies. For $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$, the ring\nobject $R=\\Lambda_X$ of [sk-def-sfb-pulled-back-coefficients] is commutative.",
+   "text": "Set $\\mathcal M=\\Mod_R(\\mathcal C)$. It is Grothendieck abelian by [lem-sfb-modobj-grothendieck]. Closedness and symmetry of $\\mathcal C$ make tensoring on either side a left adjoint, so [lem-weil-pbc-left-adjoint-preserves-colimits] gives preservation of colimits; in particular coequalizers exist and are preserved, as required by [def-sfb-modobj-relative-tensor]. That node supplies the relative monoidal structure, and [def-sfb-modobj-internal-hom] identifies this structure as symmetric and closed. Its tensor functors are therefore left adjoints and preserve finite coproducts by [lem-weil-pbc-left-adjoint-preserves-colimits]. A functor between abelian categories preserving zero and finite coproducts preserves the biproduct injections and projections, hence the diagonal and codiagonal; the identity $f+g=\\nabla\\circ(f\\oplus g)\\circ\\Delta$ then proves its additivity. The functorial flat resolution of $\\mathcal C$ induces one for $\\mathcal M$ by [lem-sfb-modobj-flat-resolutions]. All hypotheses of [lem-sfb-derived-monoidal] now hold for $\\mathcal M$ with its relative tensor product. Its conclusion supplies precisely the asserted derived monoidal structure, the two-variable left derived tensor, and lax monoidal localization.",
    "uses": [
-    "lem-sfb-derived-monoidal",
-    "sk-def-sfb-pulled-back-coefficients"
+    "lem-sfb-modobj-grothendieck",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-sfb-modobj-relative-tensor",
+    "def-sfb-modobj-internal-hom",
+    "lem-sfb-modobj-flat-resolutions",
+    "lem-sfb-derived-monoidal"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/def-sfb-derived-tensor-modules.proof.md",
+    "place": "First sentence: hypotheses of the module category and application of the derived-monoidal lemma"
+   }
+  },
+  {
+   "text": "For the specialization, put $\\mathcal S=\\Sh(X_{\\mathrm{proét}},\\Ab)$, with the sheafified $\\otimes_{\\mathbf Z}$ of [sk-def-sfb-sheaf-tensor]. Use the small skeleton in [def-weil-pbc-proetale-site]. Applying [lem-weil-pbc-sheaf-tensor-closed] with $\\mathcal A=\\Ab$ shows that $\\mathcal S$ is Grothendieck abelian and closed symmetric monoidal with additive tensor. The abelian group $\\mathbf Z$ is a flat separator: $\\mathbf Z\\otimes_{\\mathbf Z}-$ is the identity and maps from $\\mathbf Z$ detect unequal homomorphisms by evaluation at $1$. Hence [lem-weil-pbc-sheaf-flat-separator] gives a flat separator $G$ of $\\mathcal S$. Define $P(M)=\\coprod_{f:G\\to M}G$ and let $\\pi_M:P(M)\\to M$ have component $f$ on the summand indexed by $f$. A map $u:M\\to N$ sends this summand identically to the summand indexed by $uf$, giving a functor and a natural $\\pi$. If $a,b:M\\to N$ satisfy $a\\pi_M=b\\pi_M$, their restrictions to every summand give $af=bf$ for every $f:G\\to M$, so $a=b$ by the separator property; thus $\\pi_M$ is epic. By [lem-weil-pbc-flat-coproduct], $P(M)$ is flat, so tensoring with $P(M)$ preserves finite limits. Since [lem-weil-pbc-sheaf-tensor-closed] makes tensoring a left adjoint, it also preserves finite colimits; hence tensoring with $P(M)$ is exact, and symmetry gives exactness in the other variable. This constructs the functorial flat resolution required for $\\mathcal S$, without assuming $X$ nonempty or its coefficients finite.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-weil-pbc-sheaf-flat-separator",
+    "lem-weil-pbc-flat-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/def-sfb-derived-tensor-modules.proof.md",
+    "place": "Second sentence: verification of the sheaf-category hypotheses implicit in the specialization; expanded by the agent using the flat-separator construction"
+   }
+  },
+  {
+   "text": "For a commutative condensed ring $\\Lambda$, [sk-def-sfb-pulled-back-coefficients] gives a commutative ring object $R=\\Lambda_X=p_X^*\\Lambda$ in $\\mathcal S$. The notation $\\Mod_{\\Lambda_X}$ means exactly $\\Mod_{\\Lambda_X}(\\mathcal S)$ by [det-def-sfb-module-objects-sheaves]. Step 2 verifies all assumptions on $\\mathcal S$, so step 1 with $(\\mathcal C,R)=(\\mathcal S,\\Lambda_X)$ defines the displayed bifunctor on $D(\\Mod_{\\Lambda_X})$. Its underived tensor is the relative module tensor used in step 1, so the subscript $\\Lambda_X$ specifies this same construction.",
+   "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "det-def-sfb-module-objects-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/def-sfb-derived-tensor-modules.proof.md",
+    "place": "Second sentence and the displayed condensed-coefficient bifunctor in the statement"
+   }
   }
  ],
  "proof_deps": [
+  "lem-sfb-modobj-grothendieck",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-modobj-internal-hom",
+  "lem-sfb-modobj-flat-resolutions",
   "lem-sfb-derived-monoidal",
-  "sk-def-sfb-pulled-back-coefficients"
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-weil-pbc-sheaf-flat-separator",
+  "lem-weil-pbc-flat-coproduct",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-def-sfb-module-objects-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/def-sfb-derived-tensor-modules.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor product on the derived category of modules over a commutative ring object in a Grothendieck monoidal category",
+   "results": "8 hits including CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor), DerivedCategory.instLinear, CategoryTheory.Tor and Tor'; none states the two-variable K-flat derived monoidal structure for module objects.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derivedMonoidalCategory, derivedTensor, IsLeftDerivedFunctor₂",
+   "results": "0 hits; unknown identifier derivedMonoidalCategory.",
+   "date": "2026-10-16",
+   "verdict": "query rejected: unknown identifier; no absence conclusion from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedMonoidalCategory|derivedTensor|leftDerived.*tensor Mathlib/CategoryTheory",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor product of module objects over a commutative monoid in a Grothendieck abelian category",
+   "results": "8 hits including ModuleCat.MonoidalCategory.tensorObj, CategoryTheory.Tor and tensor-product declarations; these concern ordinary ModuleCat tensor products or Tor and do not state the categorical K-flat construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived category of internal modules over a commutative monoid has a monoidal structure via K-flat complexes",
+   "results": "8 hits: LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, ModuleCat.monoidalCategory, LightCondensed.instMonoidalClosedLightCondMod, ModuleCat.MonoidalCategory.instMonoidalCategoryStruct, HomologicalComplex.monoidalCategory, HomologicalComplex.monoidalCategoryStruct, DerivedCategory.instLinearCochainComplexIntQ. The types give underived condensed/modules structures, complexes, or linearity; none gives the requested derived monoidal structure for internal modules.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -65,5 +149,44 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-derived-tensor-hom"
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-derived-tensor-modules",
+  "worker": "stage1",
+  "summary": "Second reading expanded the generic hypothesis check, including colimit preservation and additivity of relative tensor, and supplied the missing sheaf-category hypotheses for the condensed specialization via existing closed sheaf tensor, flat separator, and flat coproduct statements. The natural copower epimorphism is written explicitly. No new nodes or statement changes.",
+  "blueprint": "Step 1 realizes the first sentence of def-sfb-derived-tensor-modules.proof.md. Steps 2 and 3 expand its second sentence: establish the hypotheses of Sh(X_proet,Ab), construct its functorial flat resolution from a flat separator, and specialize to the commutative coefficient ring Lambda_X. The sheaf-flat-separator argument is the construction described in the categories-of-the-table paragraph of sk-def-sfb-derived-categories.proof.md, without citing that proof as a statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic sheaf-category structure supplies the hypotheses omitted in the blueprint specialization; no node in this unit states these underived hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-flat-separator",
+    "why": "Transfers the flat separator Z to abelian sheaves, enabling the explicit natural copower epimorphism."
+   },
+   {
+    "node": "lem-weil-pbc-flat-coproduct",
+    "why": "Certifies flatness of each source of that natural copower epimorphism."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Standard adjoint-colimit theorem verifies preservation hypotheses and relative-tensor additivity without adding any assumptions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-weil-pbc-sheaf-flat-separator",
+  "lem-weil-pbc-flat-coproduct",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N7-5a774ee38",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-5a774ee38 (reviewer sub-agent of L); spot-checked: The statement and all three proof steps match the current blueprint and cited DAG nodes. Step 2 had a repairable gap: flatness gives finite-limit preservation, while colimit preservation gives finite-colimit preservation; the delivered text only asserted exactness from colimits and symmetry. A corrected whole DAG JSON is in fixes/dag/nodes/sec-proetale-coefficients/def-sfb-derived-tensor-modules.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

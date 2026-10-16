@@ -3,31 +3,60 @@
  "blueprint": {
   "is": "det-pe-left-complete-truncation-tower",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology of the truncation tower",
- "statement": "Let $K$ be a complex of $\\mathcal R$-modules on $X_{\\mathrm{proét}}$ and let\n$\\tau_{\\geq-n}K$ be its canonical truncations, with the quotient maps\n$K\\to\\tau_{\\geq-n}K$ and $\\tau_{\\geq-(n+1)}K\\to\\tau_{\\geq-n}K$. Fix $q\\in\\mathbf Z$.\n\n1. $H^q(\\tau_{\\geq-n}K)=0$ for $n<-q$, and for $n\\geq-q$ the map\n   $H^q(K)\\to H^q(\\tau_{\\geq-n}K)$ is an isomorphism; the transition maps\n   $H^q(\\tau_{\\geq-(n+1)}K)\\to H^q(\\tau_{\\geq-n}K)$ are identities (under these\n   isomorphisms) for $n\\geq-q$ and maps to $0$ for $n<-q$. In particular they are all\n   epimorphisms.\n2. $R^1\\varprojlim_nH^q(\\tau_{\\geq-n}K)=0$ and\n   $H^q(K)\\to\\varprojlim_nH^q(\\tau_{\\geq-n}K)$ is an isomorphism.",
+ "statement": "Let $X$ be a scheme with small pro-étale site $X_{\\mathrm{proét}}$ [sk-def-pe-site], let $\\mathcal R$ be a sheaf of rings on this site, and let $K$ be a cochain complex of sheaves of left $\\mathcal R$-modules [sk-def-sfb-module-objects; def-weil-abstract-derived-category]. For canonical truncations use [def-kun-truncations], and write $R^1\\varprojlim$ for the degree-one cohomology of the derived inverse limit of a module tower [det-pe-milnor-sequence]. For each integer $n\\geq0$, let\n$\\tau_{\\geq-n}K$ be its canonical truncation, with the quotient maps\n$K\\to\\tau_{\\geq-n}K$ and $\\tau_{\\geq-(n+1)}K\\to\\tau_{\\geq-n}K$. Fix $q\\in\\mathbf Z$.\n\n1. $H^q(\\tau_{\\geq-n}K)=0$ for $n<-q$, and for $n\\geq-q$ the map\n   $H^q(K)\\to H^q(\\tau_{\\geq-n}K)$ is an isomorphism; the transition maps\n   $H^q(\\tau_{\\geq-(n+1)}K)\\to H^q(\\tau_{\\geq-n}K)$ are identities (under these\n   isomorphisms) for $n\\geq-q$ and maps to $0$ for $n<-q$. In particular they are all\n   epimorphisms.\n2. $R^1\\varprojlim_{n\\geq0}H^q(\\tau_{\\geq-n}K)=0$ and\n   $H^q(K)\\to\\varprojlim_{n\\geq0}H^q(\\tau_{\\geq-n}K)$ is an isomorphism.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-truncation-tower.md",
   "place": "node det-pe-left-complete-truncation-tower, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-pe-site",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-kun-truncations",
+  "det-pe-milnor-sequence"
+ ],
  "proof": [
   {
-   "text": "*1.* The canonical truncation $\\tau_{\\geq-n}K$ is the complex\n$0\\to K^{-n}/\\operatorname{im}d^{-n-1}\\to K^{-n+1}\\to K^{-n+2}\\to\\cdots$, a quotient of $K$.\nIts cohomology is $H^q(K)$ for $q\\geq-n$, via the quotient map, and $0$ for $q<-n$. The\ntransition map is compatible with the quotient maps from $K$, so for $n\\geq-q$ it is the\nidentity of $H^q(K)$ under these identifications, and for $n<-q$ its target is $0$.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $a=-n$. By the canonical truncation definition [def-kun-truncations], $\\tau_{\\geq a}K$ is zero below degree $a$, equals $\\operatorname{coker}d^{a-1}$ in degree $a$, and equals $K^i$ above it. Thus its cohomology is zero below $a$. In degree $a$, the kernel of the induced map $K^a/\\operatorname{im}d^{a-1}\\to K^{a+1}$ is $\\ker d^a/\\operatorname{im}d^{a-1}$; in degree $a+1$ the image of the incoming differential is still $\\operatorname{im}d^a$, and all higher kernel/image quotients are unchanged. These are precisely the cohomology objects of [def-weil-abstract-derived-category]. Consequently $u_n=H^q(K\\to\\tau_{\\geq-n}K)$ is an isomorphism when $n\\geq-q$ and its target is zero otherwise.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, label section-truncations (external cross-reference homology-section-truncations), canonical cochain truncation (fourth item)"
+   }
   },
   {
-   "text": "*2.* By 1 the tower $(H^q(\\tau_{\\geq-n}K))_n$ has epimorphic transitions, so\n$R^1\\varprojlim=0$ by [det-pe-milnor-epimorphic]. Its limit is the limit of a tower that is\nconstant equal to $H^q(K)$ with identity maps from $n=\\max(0,-q)$ on, hence $H^q(K)$, the\nidentification being induced by the maps $K\\to\\tau_{\\geq-n}K$.",
+   "text": "Write $M_n=H^q(\\tau_{\\geq-n}K)$ and $t_n:M_{n+1}\\to M_n$. The quotient maps of complexes satisfy $(K\\to\\tau_{\\geq-(n+1)}K)\\mathbin{;} (\\tau_{\\geq-(n+1)}K\\to\\tau_{\\geq-n}K)=(K\\to\\tau_{\\geq-n}K)$: this is the identity in degrees above $-n$, the quotient in degree $-n$, and the unique map to zero below it. Functoriality gives $t_nu_{n+1}=u_n$. For $n\\geq-q$, both $u_n$ and $u_{n+1}$ are isomorphisms, so $u_n^{-1}t_nu_{n+1}=1$; otherwise $M_n=0$. Hence every $t_n$ is epimorphic. Apply [det-pe-milnor-epimorphic] to this tower of sheaves of $\\mathcal R$-modules to obtain $R^1\\varprojlim_n M_n=0$.",
    "uses": [
+    "def-weil-abstract-derived-category",
     "det-pe-milnor-epimorphic"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-truncation-tower.proof.md",
+    "place": "Proof, steps 1–2: compatibility of quotient maps and the epimorphic Milnor statement"
+   }
+  },
+  {
+   "text": "Let $N=\\max(0,-q)$. The maps $u_n:H^q(K)\\to M_n$ form a cone. For any other cone $(f_n:A\\to M_n)_n$, put $f=u_N^{-1}f_N:A\\to H^q(K)$. If $n<N$, then $M_n=0$ and $u_nf=f_n$. If $n\\geq N$, compatibility with the composite transition $t_{n,N}$ gives $t_{n,N}f_n=f_N$ and $t_{n,N}u_n=u_N$; since $t_{n,N}$ is an isomorphism, $u_nf=f_n$. Uniqueness follows from the component at $N$. Thus this cone is a limit cone, proving that the canonical map $H^q(K)\\to\\varprojlim_{n\\geq0}M_n$ is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-truncation-tower.proof.md",
+    "place": "Proof, step 2, final sentence; expanded universal-property argument"
+   }
   }
  ],
  "proof_deps": [
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
   "det-pe-milnor-epimorphic"
  ],
  "proof_origin": {
@@ -35,9 +64,143 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-left-complete/det-pe-left-complete-truncation-tower.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of canonical truncation tau_ge and inverse limit tower",
+   "results": "CochainComplex.truncGE; CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE; CochainComplex.πTruncGE; CochainComplex.quasiIso_πTruncGE_iff; HomologicalComplex.quasiIsoAt_πTruncGE; HomologicalComplex.truncGEXIsoOpcycles; HomologicalComplex.truncGE'XIsoOpcycles",
+   "date": "2026-10-16",
+   "verdict": "partial matches only; no match for the full truncation-tower and derived-limit statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.truncGE, homologyFunctor, IsIso",
+   "results": "No hits; loogle: unknown identifier 'DerivedCategory.truncGE'",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier; inconclusive, followed by valid-name and semantic searches"
+  },
+  {
+   "tool": "grep",
+   "query": "truncGE.*homology|homology.*truncGE",
+   "results": "No hits; searched subdirectory Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: subdirectory/path was incorrect; corrected searches recorded below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical t-structure cohomology of truncation vanishes below cutoff and isomorphic above cutoff",
+   "results": "CochainComplex.isIso_πTruncGE_iff; CategoryTheory.Triangulated.TStructure.truncLT; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished; CochainComplex.truncate; CategoryTheory.Triangulated.TStructure.shift_ge; CategoryTheory.Triangulated.TStructure.triangleLTGE_obj_obj₁; CategoryTheory.Triangulated.TStructure.truncGE",
+   "date": "2026-10-16",
+   "verdict": "partial matches only; no match for the full truncation-tower and derived-limit statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "H^q truncGE map isomorphism vanishing below truncation degree",
+   "results": "CochainComplex.quasiIso_truncGEMap_iff; CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE; HomologicalComplex.truncGEXIso; CochainComplex.isIso_πTruncGE_iff; HomologicalComplex.instQuasiIsoAtπTruncGEF; HomologicalComplex.truncGE'XIsoOpcycles; HomologicalComplex.quasiIso_truncGEMap_iff; CochainComplex.instQuasiIsoIntπTruncGEOfIsGE",
+   "date": "2026-10-16",
+   "verdict": "partial matches only; no match for the full truncation-tower and derived-limit statement"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_of_isGE|isIso_homologyFunctor_map_truncGEπ_app",
+   "results": "No hits; searched subdirectory Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: subdirectory/path was incorrect; corrected searches recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_homologyFunctor_map_truncGEπ_app|isZero_of_isGE",
+   "results": "No hits; searched subdirectory Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: subdirectory/path was incorrect; corrected searches recorded below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit of an eventually constant epimorphic tower and truncation cohomology",
+   "results": "LightCondensed.epi_π_app_zero_of_epi; HomologicalComplex.instEpiFπTruncGE; HomologicalComplex.instEpiπTruncGE; HomologicalComplex.quasiIsoAt_πTruncGE; CochainComplex.πTruncGE; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE; CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; HomologicalComplex.epi_homologyMap_shortComplexTruncLE_g",
+   "date": "2026-10-16",
+   "verdict": "partial matches only; no match for the full truncation-tower and derived-limit statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isZero_of_isGE, DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app",
+   "results": "No hits; loogle: unknown identifier 'DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app'",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier; inconclusive, followed by valid-name and semantic searches"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIsoAt_πTruncGE|isZero_homology|IsStrictlyGE",
+   "results": "No hits; searched subdirectory Algebra/Homology/TruncGE.lean",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: subdirectory/path was incorrect; corrected searches recorded below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of an eventually constant tower is its stable value and its higher derived limits vanish",
+   "results": "CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit; CategoryTheory.Functor.IsEventuallyConstantTo.hasLimit; CategoryTheory.IsCofiltered.instHasLimitOfIsEventuallyConstant; CategoryTheory.Functor.IsEventuallyConstantTo.cone_pt; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'; CategoryTheory.Functor.IsEventuallyConstantFrom.cocone_pt; CategoryTheory.Functor.IsEventuallyConstantFrom.cocone; InverseSystem.isNatEquiv_piEquivLim",
+   "date": "2026-10-16",
+   "verdict": "partial matches only; no match for the full truncation-tower and derived-limit statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.quasiIsoAt_πTruncGE",
+   "results": "HomologicalComplex.quasiIsoAt_πTruncGE",
+   "date": "2026-10-16",
+   "verdict": "partial matches only; no match for the full truncation-tower and derived-limit statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of canonical truncations forms an eventually constant tower with zero first derived inverse limit",
+   "results": "CochainComplex.truncGE; CochainComplex.truncLE; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE; CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; HomologicalComplex.quasiIsoAt_πTruncGE; CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE; CochainComplex.shortComplexTruncLE; CochainComplex.quasiIso_ιTruncLE_iff",
+   "date": "2026-10-16",
+   "verdict": "partial matches only; no match for the full truncation-tower and derived-limit statement"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIsoAt_πTruncGE|isZero_homology|IsStrictlyGE",
+   "results": "173; 199; searched subdirectory Algebra/Homology/Embedding/TruncGEHomology.lean",
+   "date": "2026-10-16",
+   "verdict": "partial matches only; no match for the full truncation-tower and derived-limit statement"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.constant|IsEventuallyConstantTo|derived.*lim",
+   "results": "12; 15; 18; 35; 38; searched subdirectory CategoryTheory/Limits/Constructions/EventuallyConstant.lean",
+   "date": "2026-10-16",
+   "verdict": "partial matches only; no match for the full truncation-tower and derived-limit statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "first right derived inverse limit vanishes for an eventually constant system of cohomology sheaves",
+   "results": "CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheaf; DerivedCategory.isZero_of_isLE; CategoryTheory.Sheaf.cohomologyPresheafFunctor; DerivedCategory.isZero_of_isGE; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; CochainComplex.IsKInjective",
+   "date": "2026-10-16",
+   "verdict": "partial matches only; no match for the full truncation-tower and derived-limit statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse systems of good truncations have eventually stationary homology and vanishing lim1",
+   "results": "HomologicalComplex.truncGE'.homologyData; HomologicalComplex.truncGE'.isLimitKernelFork; HomologicalComplex.truncGE.instHasHomology; HomologicalComplex.truncGE'.truncGE'_hasHomology; HomologicalComplex.instHasHomologyTruncLE; HomologicalComplex.truncLE'.truncLE'_hasHomology; HomologicalComplex.truncGE'.homologyι_truncGE'XIsoOpcycles_inv_d; HomologicalComplex.quasiIsoAt_πTruncGE",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: truncation homology constructions only; no declaration states the full tower and derived-limit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "lim1|limOne|derivedLimit|rightDerived.*lim|lim.*rightDerived",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search in CategoryTheory: the sole hit concerns colimits and pointwise right derived functors, not inverse limits of module towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of connective covers forms a stationary inverse sequence with vanishing first derived limit",
+   "results": "CochainComplex.cm5b.instIsStrictlyGEI; CochainComplex.HomComplex.Cochain.InductionUp.limitSequence; CochainComplex.cm5b.I; CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo; CochainComplex.isKInjective_of_injective; AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace; CochainComplex.cm5b; CochainComplex.cm5b.I_d",
+   "date": "2026-10-16",
+   "verdict": "Independent current second-reader search: returned injective replacements, inductive cochain constructions, and unrelated singular homology; no full truncation-tower and derived-limit statement."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -50,5 +213,22 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-left-complete"
+ "unit": "sk-prop-pe-left-complete",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-left-complete-truncation-tower",
+  "worker": "stage1",
+  "summary": "Verified the current blueprint and Stacks Tag 0118 (homology-section-truncations); expanded the boundary-degree cohomology computation, quotient-map compatibility, and inverse-limit universal property. Reused existing definition and Milnor nodes, and recorded the actual Mathlib search log without new nodes.",
+  "blueprint": "Steps 1–2 realize blueprint proof paragraph 1; step 2 applies the epimorphic Milnor node in paragraph 2; step 3 expands its final eventual-constancy assertion.",
+  "tool_uses": [],
+  "statement_change": "Made the source-implied scheme, ring sheaf, and n≥0 indexing explicit and linked existing definitions; no hypothesis or conclusion changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-faa2c800f",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-faa2c800f (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, blueprint route, and Stacks Tag 0118. All three proof steps, coefficient hypotheses, boundary indices, Milnor application, and canonical limit map check out. No new nodes, duplicate theorem, circular dependency, target weakening, or forbidden SGA use found. Concrete source checks and edge cases are recorded in review.md; no repairs needed."
+ }
 }
