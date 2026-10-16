@@ -3,39 +3,174 @@
  "blueprint": {
   "is": "def-sfb-compactification-over-field",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The chosen compactification over a field",
- "statement": "Let $k$ be a field. Let $X$ be separated and of finite type over $k$, let $Y$ be separated and\nquasi-compact over $k$, and let $f\\colon X\\to Y$ be a morphism of $k$-schemes. The *chosen\ncompactification* $c_f=(X\\xrightarrow{i_f}Z_f\\xrightarrow{p_f}Y)$ of $f$ is one compactification\nof $f$ ([sk-def-nagata-sketch-data]), fixed once and for all by choice from the nonempty set of\ncompactifications of $f$ given by [lem-sfb-compactification-over-base] with\n$S=\\operatorname{Spec}k$.",
+ "statement": "Let $k$ be a field and write $S=\\operatorname{Spec}k$ [def-weil-affine-spectrum]. Let $X$ and $Y$ be $k$-schemes, and let $f\\colon X\\to Y$ be a morphism of $k$-schemes [def-weil-scheme-over-base]. Suppose that the structure morphism $X\\to S$ is separated [def-weil-proper-morphism] and of finite type [def-weil-finite-type-morphism], and that $Y\\to S$ is separated and quasi-compact [def-weil-finite-type-morphism]. The chosen compactification $c_f=(X\\xrightarrow{i_f}Z_f\\xrightarrow{p_f}Y)$ is one compactification of $f$ [sk-def-nagata-sketch-data], fixed once and for all by classical choice from the nonempty type of compactifications supplied by [lem-sfb-compactification-over-base] with $S=\\operatorname{Spec}k$. Thus $p_f\\circ i_f=f$, $i_f$ is a quasi-compact open immersion, and $p_f$ is proper. No uniqueness or functoriality of this choice is asserted.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/def-sfb-compactification-over-field.md",
   "place": "node def-sfb-compactification-over-field, order 1776"
  },
  "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-scheme-over-base",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
   "sk-def-nagata-sketch-data",
   "lem-sfb-compactification-over-base"
  ],
  "proof": [
   {
-   "text": "The scheme $\\operatorname{Spec}k$ is affine, hence quasi-compact and quasi-separated. So\n[lem-sfb-compactification-over-base] applies, and the set of compactifications of $f$ is\nnonempty.",
+   "text": "Put $S=\\operatorname{Spec}k$. This is an affine scheme by [def-weil-affine-spectrum]. Apply [lem-weil-pbc-affine-scheme-qcqs] to $S$ to obtain both quasi-compactness and quasi-separatedness. This verifies exactly the base hypothesis of the compactification existence lemma.",
    "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/def-sfb-compactification-over-field.md",
+    "place": "last sentence: specialization to S = Spec k; base hypothesis checked using the cited affine-scheme lemma"
+   }
+  },
+  {
+   "text": "Regard the given $k$-schemes and $k$-morphism as $S$-schemes and an $S$-morphism, as defined in [def-weil-scheme-over-base]: their structure morphisms satisfy $a_X=a_Y\\circ f$. The hypotheses say that $X\\to S$ is separated and of finite type, and that $Y\\to S$ is separated and quasi-compact. With the qcqs property of $S$ from step 1, [lem-sfb-compactification-over-base] therefore gives a compactification of $f$. In particular its type of compactifications is nonempty; no finite-type hypothesis on $Y\\to S$ is used.",
+   "uses": [
+    "def-weil-scheme-over-base",
     "lem-sfb-compactification-over-base"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/def-sfb-compactification-over-field.md",
+    "place": "last sentence: nonempty compactifications given by lem-sfb-compactification-over-base"
+   }
+  },
+  {
+   "text": "Apply classical choice to the nonempty type in step 2 and denote the selected datum by $c_f=(X\\xrightarrow{i_f}Z_f\\xrightarrow{p_f}Y)$. Reading the fields of a compactification in [sk-def-nagata-sketch-data] gives $p_f\\circ i_f=f$, a quasi-compact open immersion $i_f$, and a proper $p_f$. Fix this value for the given data. This is selection of one datum, with no claim that two selections agree or that selection commutes with base change.",
+   "uses": [
+    "sk-def-nagata-sketch-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/def-sfb-compactification-over-field.md",
+    "place": "definition: one compactification fixed once and for all by choice"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-compactification-over-base"
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-scheme-over-base",
+  "lem-sfb-compactification-over-base",
+  "sk-def-nagata-sketch-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/def-sfb-compactification-over-field.md",
-  "place": "## Proof"
+  "place": "definition, specialization to Spec k and classical choice; expanded verification of its existing dependencies"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactification|HasCompactification",
+   "results": "No hits in Mathlib/AlgebraicGeometry. Search directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Compactification",
+   "results": "No hits; Loogle reports unknown identifier AlgebraicGeometry.Compactification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chosen compactification of a morphism of schemes over a field",
+   "results": "Eight hits: compactSpace_of_universallyClosed, Scheme.Hom.isCompact_preimage, quasiCompact_over_affine_iff, QuasiCompact.mk, IsProper.mk, QuasiCompact.compactSpace_of_compactSpace, quasiCompact_iff_isSpectralMap, quasiCompact_iff. These are compactness/properness properties, not a choice of algebraic compactification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose a compactification of a morphism of schemes over a field with separated finite type source and separated quasi compact target",
+   "results": "Eight hits: Scheme.RationalMap.ofFunctionField, Scheme.Hom.toNormalization, IsProper.of_valuativeCriterion, Scheme.Hom.instQuasiCompactToNormalization, Scheme.RationalMap.fromFunctionField_ofFunctionField, Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver, Scheme.RationalMap.fromFunctionField, Scheme.PartialMap.fromFunctionField. None constructs a compactification under the item hypotheses.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata compactification separated finite type morphism open immersion proper morphism classical choice",
+   "results": "Eight hits: instHasOfPostcompPropertySchemeIsProperIsSeparated, IsProper.of_valuativeCriterion, instIsProperOfIsFinite, IsFinite.instHasOfPostcompPropertySchemeIsSeparated, IsProper.instOfIsFinite, IsSeparated, isProper_eq, isProper_iff. These are morphism-property results, not Nagata compactification or a chosen compactification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Nagata|compactif",
+   "results": "Twenty-five displayed hits concern topological Stone-Cech or one-point compactification (plus imports and documentation), not compactification of scheme morphisms.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|HasCompactification",
+   "results": "Retry: no hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Compactification",
+   "results": "Retry: no hits; Loogle reports unknown identifier 'AlgebraicGeometry.Compactification'.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chosen compactification of a morphism of schemes over a field",
+   "results": "Retry: compactSpace_of_universallyClosed, Scheme.Hom.isCompact_preimage, quasiCompact_over_affine_iff, QuasiCompact.mk, IsProper.mk, QuasiCompact.compactSpace_of_compactSpace, quasiCompact_iff_isSpectralMap, quasiCompact_iff. These state compactness and morphism properties, not the chosen algebraic compactification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose a compactification of a morphism of schemes over a field with separated finite type source and separated quasi compact target",
+   "results": "Retry: Scheme.PartialMap.fromFunctionField, IsProper, Scheme.Hom.normalization, Scheme.RationalMap.exists_rep, QuasiCompact, Scheme.RationalMap.fromFunctionField, Scheme.Hom.toNormalization, Scheme.Hom.fromNormalization. These give definitions, rational-map representatives and normalization, not a factorization with a proper ambient morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactif|Nagata",
+   "results": "Current retry: no hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated morphism of finite type to a quasi compact quasi separated scheme admits a factorization as an open immersion followed by a proper morphism",
+   "results": "Current retry: IsFinite.instHasOfPostcompPropertySchemeIsSeparated; instHasOfPostcompPropertySchemeIsProperIsSeparated; instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty; instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated; isProper_iff; IsImmersion.isImmersion_iff_exists_of_quasiCompact; IsSeparated.instIsMultiplicativeScheme; isProper_eq. These concern descent of morphism properties or factorization of a morphism already assumed to be an immersion. None constructs a proper compactification of an arbitrary separated finite-type morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Nonempty.*Compactification|Compactification.*Nonempty",
+   "results": "Second reader: zero hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonempty type of factorizations of a scheme morphism into a quasi compact open immersion and a proper morphism",
+   "results": "Second reader: eight hits: QuasiSeparated, IsPreimmersion, UniversallyClosed, IsImmersion.isImmersion_iff_exists_of_quasiCompact, QuasiCompact, LocallyQuasiFinite, IsProper, IsFinite. The factorization equivalence assumes IsImmersion f; the other hits are property definitions. None supplies the required compactification or its choice.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -47,5 +182,20 @@
   "sk-def-nagata-sketch-data"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-compactification-over-field",
+  "worker": "stage1",
+  "summary": "Expanded the definition into its existing notions and the verification that its classical choice is defined: Spec k is qcqs by the existing affine-scheme Mathlib leaf, the existing over-base lemma supplies nonemptiness with exactly the stated hypotheses, and choice selects the compactification data. Added only definition references and explicit projections, without changing hypotheses. No new nodes and no attachment: the field-specific declaration is present only in upstream master.",
+  "blueprint": "Realizes the body of def-sfb-compactification-over-field in sk-def-sfb-dc-setting: the last sentence supplies nonemptiness over Spec k (steps 1-2), and the first sentence fixes the chosen compactification (step 3). It does not add the stricter characteristic or finite-type-target assumptions of the surrounding setting."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q47-a40dafe06",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q47-a40dafe06 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, current blueprint route and cited source passages in full. All three steps preserve the exact hypotheses and correctly select a compactification over Y. Edge cases, whole-DAG reuse candidates and dependency cycles checked; no repair or additional tool_uses needed. Detailed findings are in review.md."
+ }
 }

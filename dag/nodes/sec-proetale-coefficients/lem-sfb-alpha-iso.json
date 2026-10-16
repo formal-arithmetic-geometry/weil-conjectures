@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-alpha-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\alpha_f$ is an isomorphism for every $f$",
@@ -17,14 +17,20 @@
  ],
  "proof": [
   {
-   "text": "By definition, $\\alpha_f$ is the component at $\\Lambda$ of the natural\nisomorphism $f^*\\circ p_Y^*\\cong p_X^*$ of\n[def-sfb-pullback-from-point-comp-iso]. Components of natural isomorphisms\nare isomorphisms.",
+   "text": "Let $c_f\\colon f^*\\circ p_Y^*\\cong p_X^*$ be the natural isomorphism of\n[def-sfb-pullback-from-point-comp-iso]. By [def-sfb-alpha],\n$\\alpha_f=(c_f)_{\\Lambda}$. Put $\\beta_f=(c_f^{-1})_{\\Lambda}$.\nEvaluating $c_f^{-1}\\circ c_f=\\mathrm{id}$ and\n$c_f\\circ c_f^{-1}=\\mathrm{id}$ at $\\Lambda$ gives\n$\\beta_f\\circ\\alpha_f=\\mathrm{id}_{f^*\\Lambda_Y}$ and\n$\\alpha_f\\circ\\beta_f=\\mathrm{id}_{\\Lambda_X}$, respectively.\nThus $\\beta_f$ is a two-sided inverse to $\\alpha_f$.",
    "uses": [
+    "def-sfb-alpha",
     "def-sfb-pullback-from-point-comp-iso"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-alpha-iso.proof.md",
+    "place": "paragraph 1"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-alpha",
   "def-sfb-pullback-from-point-comp-iso"
  ],
  "proof_origin": {
@@ -32,9 +38,52 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-alpha-iso.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical pullback of a coefficient ring sheaf along any morphism of schemes is an isomorphism",
+   "results": "8 hits: AlgebraicGeometry.isIso_toSpecΓ; AlgebraicGeometry.Scheme.IdealSheafData.comapIso; AlgebraicGeometry.Scheme.SpecΓIdentity_app; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; AlgebraicGeometry.Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme; AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc; AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc; AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine. None states the condensed coefficient morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "condensedPullbackHom|isIso_condensedPullbackHom [SixFunctors/ProEtale]",
+   "results": "0 hits in Mathlib source search.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical pullback of a coefficient ring object along any scheme morphism is an isomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; AlgebraicGeometry.Scheme.arrowStalkMapSpecIso; AlgebraicGeometry.pullbackRestrictIsoRestrict; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme; AlgebraicGeometry.pullbackSpecIso; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal. None states the condensed coefficient morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every component of a natural isomorphism of functors is an isomorphism",
+   "results": "8 hits, including CategoryTheory.NatIso.hom_app_isIso, CategoryTheory.Iso.app, CategoryTheory.NatIso.isIso_app_of_isIso, and CategoryTheory.NatTrans.isIso_iff_isIso_app. The first gives the generic elementary component argument; it does not define the project-specific coefficient morphism. Read Mathlib/CategoryTheory/NatIso.lean lines 99-101.",
+   "date": "2026-10-16",
+   "verdict": "match for elementary component fact"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hom_app_isIso\"",
+   "results": "1 hit: CategoryTheory.NatIso.hom_app_isIso, Mathlib/CategoryTheory/NatIso.lean lines 99-101: for a natural isomorphism α and any object X, IsIso (α.hom.app X). Matches the generic elementary component fact.",
+   "date": "2026-10-16",
+   "verdict": "match for elementary component fact"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(hom|inv).*app|(hom|inv).*app.*isIso",
+   "results": "25 hits in CategoryTheory, including Mathlib/CategoryTheory/NatIso.lean line 100, instance hom_app_isIso. Read lines 55-101, including the two component inverse identities.",
+   "date": "2026-10-16",
+   "verdict": "match for elementary component fact"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -52,5 +101,21 @@
   "AlgebraicGeometry.ProEtale.isIso_condensedPullbackHom"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-alpha-iso",
+  "worker": "stage1",
+  "summary": "Checked the canonical coefficient morphism against the current blueprint. No new nodes are needed: alpha_f is the component of the existing pullback-from-the-point comparison, and evaluating its inverse identities at Lambda supplies an explicit two-sided inverse.",
+  "blueprint": "Realizes the single paragraph of lem-sfb-alpha-iso.proof.md: alpha_f is the component of the natural isomorphism and components of natural isomorphisms are isomorphisms.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N0-a004cee1d",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-a004cee1d (reviewer sub-agent of L); spot-checked: Reviewed item, cited nodes, blueprint route, exact master morphism/category, hypotheses, edge cases, searches, duplicates, and DAG dependencies. No new nodes, repairs, route violations, or accepted tool uses; review.md written."
+ }
 }

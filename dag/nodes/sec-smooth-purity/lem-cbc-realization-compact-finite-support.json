@@ -23,9 +23,81 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the characteristic maps and unique nondegenerate interior representatives of [lem-cbc-realization-cw-subcomplex]. Suppose that the image of $a$ meets infinitely many distinct nondegenerate cells. Choose one image point $x_j$ in each of an infinite collection of these cells, and put $D=\\{x_j\\}$. For any subset $E\\subseteq D$, each nondegenerate characteristic map has at most one inverse-image point in the interior of its simplex, because its interior is injective and the selected points lie in distinct cells.",
+   "uses": [
+    "lem-cbc-realization-cw-subcomplex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kerodon.pdf",
+    "place": "WANTED: archived Kerodon, Proposition 3.6.1.11 and Lemma 3.6.1.13; online originals read on 2026-10-16. Agent expansion of the closed-discrete contradiction and continuous factorization."
+   }
+  },
+  {
+   "text": "We prove that every subset $E\\subseteq D$ is closed, by strong induction on $n$ for the claim that $q_\\tau^{-1}(E)$ is closed for every $n$-simplex $\\tau$. At $n=0$ each inverse image is empty or a singleton. For a degenerate $n$-simplex, [lem-cbc-realization-cw-subcomplex] gives $\\tau=K(\\alpha)(\\sigma)$ with $\\sigma$ nondegenerate of dimension $m<n$ and $q_\\tau=q_\\sigma\\circ\\alpha_*$. Hence $q_\\tau^{-1}(E)=\\alpha_*^{-1}(q_\\sigma^{-1}(E))$ is closed by induction and continuity of the finite coordinate sums defining $\\alpha_*$. For a nondegenerate $n$-simplex and each face injection $\\delta_i:[n-1]\\hookrightarrow[n]$, the realization relation in that node gives $q_\\tau\\circ(\\delta_i)_*=q_{K(\\delta_i)(\\tau)}$. The map $(\\delta_i)_*$ inserts a zero coordinate and is a homeomorphism onto the closed face $F_i=\\{t_i=0\\}$, with inverse deleting that coordinate. Thus $q_\\tau^{-1}(E)\\cap F_i$ is closed in $F_i$ by induction, and therefore in the whole simplex. The boundary inverse image is the finite union of these closed sets. The remaining inverse image is empty or a single interior point by step 1, and such a singleton is closed in the Euclidean simplex. Their union is $q_\\tau^{-1}(E)$, so it is closed. The cited node's closed-set criterion now makes $E$ closed in $|K|$.",
+   "uses": [
+    "lem-cbc-realization-cw-subcomplex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kerodon.pdf",
+    "place": "WANTED: archived Kerodon, Proposition 3.6.1.11 and Lemma 3.6.1.13; online originals read on 2026-10-16. Agent expansion of the closed-discrete contradiction and continuous factorization."
+   }
+  },
+  {
+   "text": "For $X=|K|$, step 2 makes $U_*=X\\setminus D$ and $U_j=X\\setminus(D\\setminus\\{x_j\\})$ open. These sets cover $X$: outside $D$ use $U_*$, and $x_j$ lies in $U_j$. Their inverse images under $a$ form an open cover of the compact space $T$, hence admit a finite subcover. But $U_*$ covers no selected point and each $U_j$ covers only its own selected point, while every $x_j$ is in $a(T)$. A finite subcover is impossible for infinitely many selected points. Thus only finitely many nondegenerate cells meet $a(T)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kerodon.pdf",
+    "place": "WANTED: archived Kerodon, Proposition 3.6.1.11 and Lemma 3.6.1.13; online originals read on 2026-10-16. Agent expansion of the closed-discrete contradiction and continuous factorization."
+   }
+  },
+  {
+   "text": "For each of these finitely many cells, with simplex $\\sigma\\in K_n$, take the image of the simplicial map $\\Delta^n\\to K$ which sends an $m$-simplex $\\beta:[m]\\to[n]$ to $K(\\beta)(\\sigma)$ (compatibility with operators is functoriality), and let $A$ be the finite union of these images. Each image is a simplicial subset. It has only finitely many nondegenerate simplices: a simplex indexed by an order-preserving map $[m]\\to[n]$ is degenerate if that map is not injective, by factoring it as a surjection followed by an injection; only finitely many injections into $[n]$ exist. A nondegenerate simplex in the finite union is nondegenerate in any image containing it, so $A$ is finite as well. Unique interior representatives and the image description in [lem-cbc-realization-cw-subcomplex] show $a(T)\\subseteq|A|$. The empty image gives $A=\\varnothing$.",
+   "uses": [
+    "lem-cbc-realization-cw-subcomplex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/kerodon.pdf",
+    "place": "WANTED: archived Kerodon, Proposition 3.6.1.11 and Lemma 3.6.1.13; online originals read on 2026-10-16. Agent expansion of the closed-discrete contradiction and continuous factorization."
+   }
+  },
+  {
+   "text": "By [lem-cbc-realization-cw-subcomplex], $e=|\\iota_A|$ is a homeomorphism from $|A|$ onto its image $Y\\subseteq|K|$. Corestrict $a$ to $Y$: a relatively open set $V\\cap Y$ has inverse image $a^{-1}(V)$, which is open in $T$, so the corestriction is continuous. Compose it with the continuous inverse $Y\\to|A|$ of $e$ to define $a_A$. Then $a_A$ is continuous and $e\\circ a_A=a$.",
+   "uses": [
+    "lem-cbc-realization-cw-subcomplex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/kerodon.pdf",
+    "place": "WANTED: archived Kerodon, Proposition 3.6.1.11 and Lemma 3.6.1.13; online originals read on 2026-10-16. Agent expansion of the closed-discrete contradiction and continuous factorization."
+   }
+  },
+  {
+   "text": "For an integer $n\\geq0$, equip $\\mathbb R^{n+1}$ with its Euclidean norm. Since $\\|x\\|^2=\\sum_i x_i^2$ and norms are nonnegative, the sphere $S^n$ in the statement is exactly $\\{x:\\|x\\|=1\\}$. Its compactness follows from [lem-cbc-euclidean-sphere-compact]. It is Hausdorff: for distinct points at Euclidean distance $d>0$, the balls of radius $d/3$ about them are disjoint by the triangle inequality, and intersecting these balls with the sphere gives disjoint relatively open neighborhoods. Thus the preceding factorization applies, including $n=0$.",
+   "uses": [
+    "lem-cbc-euclidean-sphere-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/kerodon.pdf",
+    "place": "WANTED: archived Kerodon, Proposition 3.6.1.11 and Lemma 3.6.1.13; online originals read on 2026-10-16. Agent expansion of the closed-discrete contradiction and continuous factorization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-realization-cw-subcomplex",
+  "lem-cbc-euclidean-sphere-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Opening compactification choice, expanded through the finite nerve contraction. The compactness argument follows online Kerodon Proposition 3.6.1.11 and expands Lemma 3.6.1.13; its archive is WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,12 +157,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-filtered-nerve-weak-contractibility",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-cbc-realization-compact-finite-support",
+  "worker": "stage1",
+  "summary": "Proved finite support by choosing image points in distinct cells, proving every selected subset closed via an explicit dimension induction, and contradicting compactness with an explicit open cover. Only realization cell presentation/subset embedding remains as a non-elementary topology node. Euclidean sphere compactness is a Mathlib leaf.",
+  "blueprint": "The proof opening of thm-cbc-finite-level-proetale asks to choose a compactification; the inherited ancestry expands coherence of that choice via local compact-support extension and filtered-nerve contraction. Steps 1--5 prove the finite-support input of that contraction, and step 6 supplies its compact sphere test. No claim is made that the blueprint itself writes out this topology argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q65-78c2c118c",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q65-78c2c118c (reviewer sub-agent of L); spot-checked: Read and checked all six proof steps, both new nodes, cited statements, Kerodon sources, Mathlib leaf, blueprint route and archived target typing. Edge cases, duplicate candidates and dependency closure checked; no mathematical gap or repair needed. Detailed findings recorded in review.md."
+ }
 }
