@@ -344,5 +344,34 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-7033e9887 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; all nine steps and the new helper are acceptable. Completed the helper’s missing provenance/audit metadata in fixes/. review.md records source checks, edge cases, accepted tool_uses, and a pre-existing dependency cycle not introduced by this delivery. No target comparison is implicitly accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9b278db75",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Reviewed all statements, dependencies, sources, canonical maps and edge cases. Removed one duplicate helper (H4); complete replacements are in fixes/. Original and corrected modules compile cleanly through scompile.py. Full findings and evidence are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ECoefficientSmoothBaseChange",
+  "declaration": "WeilConjectures.eCoefficientSmoothBaseChange",
+  "declarations": [
+   "WeilConjectures.sbcRationalLeft",
+   "WeilConjectures.sbcRationalRight",
+   "WeilConjectures.sbcRationalExchange",
+   "WeilConjectures.sbcCompleteRationalize",
+   "WeilConjectures.sbcTransportedExchange",
+   "WeilConjectures.SbcConstructibleExchangeRepresentation",
+   "WeilConjectures.sbcPrimeUnitOnSource",
+   "WeilConjectures.eCoefficientSmoothBaseChange"
+  ],
+  "file": "lean/Sheaf/Paper/ECoefficientSmoothBaseChange.lean",
+  "statement": "theorem eCoefficientSmoothBaseChange [IsNoetherian X] [IsNoetherian S] [IsNoetherian T] [IsNoetherian Y] [Smooth f] [QuasiCompact g] [QuasiSeparated g] (_hX : ∃ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (_hT : ∃ d : ℕ, topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (_hl : IsUnit (l : Γ(S, ⊤))) (K : PbcRationalConstructible l E T) (L : IntegralLattice l E T _hT (sbcPrimeUnitOnSource l g _hl) K) (_hL : L.IsFiniteLevelEtaleAdmissible l E T _hT (sbcPrimeUnitOnSource l g _hl)) : IsIso ((sbcRationalExchange l E sq).app ((pbcRationalInclusion l E T).obj K)) ∧ (sbcTransportedExchange l E sq _hT (sbcPrimeUnitOnSource l g _hl) L = (sbcRationalExchange l E sq).app ((pbcRationalInclusion l E T).obj K)) ∧ (∀ L' : IntegralLattice l E T _hT (sbcPrimeUnitOnSource l g _hl) K, L'.IsFiniteLevelEtaleAdmissible l E T _hT (sbcPrimeUnitOnSource l g _hl) → sbcTransportedExchange l E sq _hT (sbcPrimeUnitOnSource l g _hl) L' = sbcTransportedExchange l E sq _hT (sbcPrimeUnitOnSource l g _hl) L) ∧ (L.IsSquareConstructiblyAdmissible l E T _hT (sbcPrimeUnitOnSource l g _hl) sq → SbcConstructibleExchangeRepresentation l E sq _hT (sbcPrimeUnitOnSource l g _hl) L)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Second reader reused the landed IntegralLattice and both published admissibility predicates, the same raw scalar localization and completed coefficient categories, and the canonical strict-tower completed operations. The four original conclusions and the natural-language statement are unchanged."
  }
 }
