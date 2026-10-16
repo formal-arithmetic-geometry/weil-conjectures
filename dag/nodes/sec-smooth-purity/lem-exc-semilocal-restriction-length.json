@@ -359,5 +359,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SemilocalRestrictionLength",
+  "declaration": "semilocal_restriction_length",
+  "declarations": [
+   "semilocal_restriction_length"
+  ],
+  "file": "lean/Sheaf/RingTheory/SemilocalRestrictionLength.lean",
+  "statement": "theorem semilocal_restriction_length (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsLocalRing A] [Algebra A B] (X : Finset (MaximalSpectrum B)) (hX : ∀ q : MaximalSpectrum B, q ∈ X) (hcon : ∀ q : MaximalSpectrum B, q.asIdeal.comap (algebraMap A B) = IsLocalRing.maximalIdeal A) (hdeg : ∀ q : MaximalSpectrum B, q ∈ X → @Module.Finite (IsLocalRing.maximalIdeal A).ResidueField q.asIdeal.ResidueField _ _ (Module.compHom q.asIdeal.ResidueField (Ideal.ResidueField.map (IsLocalRing.maximalIdeal A) q.asIdeal (algebraMap A B) (hcon q).symm))) (M : Type w) [AddCommGroup M] [Module B M] (hM : IsFiniteLength B M) : @IsFiniteLength A _ M _ (@Module.compHom B A M _ _ (inferInstance : Module B M) _ (algebraMap A B)) ∧ @Module.length A M _ _ (@Module.compHom B A M _ _ (inferInstance : Module B M) _ (algebraMap A B)) = ∑ q ∈ X, @Module.finrank (IsLocalRing.maximalIdeal A).ResidueField q.asIdeal.ResidueField _ _ (Module.compHom q.asIdeal.ResidueField (Ideal.ResidueField.map (IsLocalRing.maximalIdeal A) q.asIdeal (algebraMap A B) (hcon q).symm)) * Module.length (Localization.AtPrime q.asIdeal) (LocalizedModule q.asIdeal.primeCompl M)",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2f640899",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Clause-by-clause match against node and Stacks 02M0 (algebra.tex lemma-pushdown-module): local A via IsLocalRing; k and B/q as Ideal.ResidueField (recorded in def-weil-pbc-localization-at-prime, canonically the quotient fields at maximal ideals); X : Finset (MaximalSpectrum B) with hX covering all maximal ideals; hcon is the comap condition; hdeg/finrank use Module.compHom along the canonical Ideal.ResidueField.map (compatibility with A and B checked by a compiled example); M : Type w with IsFiniteLength B M; Localization.AtPrime/LocalizedModule from the recorded deps; both conclusions (finite A-length and the weighted sum in ℕ∞) with the A-action forced by compHom. No extra hypotheses; universes u v w all bound; edge cases M=0, B=0/X empty and finite degrees covered. No helpers or definitions, one theorem with a single sorry; docstrings carry source, blueprint id and 7 proof steps; lean.statement verbatim; commit touches only node, module and report; report has Worker report and Second reading by Q128. nt_compile.py --json: clean, exit 0; #print axioms shows sorryAx; a deliberately broken copy errors as expected. No Mathlib match (IsLocalRing.length_restrictScalars needs B local). Only nit: the Worker report narrative is stale but explicitly superseded."
  }
 }
