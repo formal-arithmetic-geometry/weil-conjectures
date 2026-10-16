@@ -15621,7 +15621,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/K1/Sheaf.CategoryTheory.ExactFunctorHalfPlane (stage 3; reviewer PASS; first push; landing 20261016T221614-L-1616409 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/K2/Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTorsion (stage 3; reviewer PASS; first push; landing 20261016T221615-L-1616737 (interface); batch 20261016T221550; modules 3; new nodes 0; change records: coord/changes/K2-second-adic-torsion-cokernel-restoration.md)
 - 22:16 L: merged deliver/K4/Sheaf.AlgebraicGeometry.Sites.FieldHigherDirectImageStalk (stage 3; reviewer PASS; first push; landing 20261016T221617-L-1617064 (proof); batch 20261016T221550; modules 1; new nodes 0)
-- 22:16 L: merged deliver/M1/Sheaf.AlgebraicGeometry.TorsionLocalModelRestriction (stage 3; reviewer PASS; first push; landing 20261016T221617-L-1617167 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/M1/Sheaf.Paper.FiniteDiscreteEncodedPresentation (stage 3; reviewer PASS; first push; landing 20261016T221618-L-1617312 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/M2/Sheaf.Paper.ContinuousModuleEncodingScalarExtension (stage 3; reviewer PASS; first push; landing 20261016T221618-L-1617414 (proof); batch 20261016T221550; modules 1; new nodes 0; change records: coord/changes/M2-continuous-module-scalar-extension-repair.md)
 - 22:16 L: merged deliver/M3/Sheaf.AlgebraicGeometry.StrictHenselizationModuleFibreFactorization (stage 3; reviewer PASS; first push; landing 20261016T221619-L-1617525 (proof); batch 20261016T221550; modules 1; new nodes 0)
@@ -15674,3 +15673,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:06 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
 
 - 07:07 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
+
+- 07:18 L: red global build after the upstream sync to slopmaster2 e47efb5a5: does not compile against the source; rebase onto sheaf-dag and deliver again
