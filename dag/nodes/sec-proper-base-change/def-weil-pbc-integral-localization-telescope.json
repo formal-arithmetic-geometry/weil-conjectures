@@ -1,0 +1,116 @@
+{
+ "id": "def-weil-pbc-integral-localization-telescope",
+ "kind": "definition",
+ "title": "The scalar localization unit telescope",
+ "statement": "For an integral derived coefficient object K, define the diagram K --ℓ--> K --ℓ--> ⋯ and its cocone with vertex restriction of derived scalar extension of K. Its nth leg is the extension unit followed by restriction of the nth power of the inverse of multiplication by ℓ. Also define the same diagram and cocone after reindexing by ULift ℕ, and the identity-component comparison under any additive functor. Definitions and notation: [def-weil-pbc-continuous-integral-coefficients].",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), referring to Bhatt–Scholze Lemma 6.8.2; scalar localization telescope"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Multiplication by ℓ is invertible on the extended object. Centrality of scalar multiplication, additivity of restriction, and cancellation of ℓ against its inverse verify adjacent cocone compatibility. Identity components and additivity give the comparison of sequences under an additive functor. Reindex by the order equivalence ULift ℕ ≃ ℕ. Scalar invertibility reuses the existing module_nsmul_isIso or derived_nsmul_isIso theorem from ContinuousConstructibleIntegralImage, made public without changing its type or proof.",
+   "uses": [
+    "lem-weil-pbc-continuous-constructible-integral-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-constructible-integral-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1); Bhatt–Scholze Lemma 6.8.2",
+  "note": "B2 second reading: expose the existing module_nsmul_isIso and derived_nsmul_isIso without changing their types or proofs; reuse existing tensor-unit helpers through import all. No target or existing mathematical statement is changed; all new auxiliary proofs are complete."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of sheaves of modules as the colimit of scalar multiplication and compatibility with exact derived adjunction units",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of sheaves of modules is the filtered colimit of multiplication by a scalar, compatibly with the derived adjunction unit",
+   "date": "2026-10-16",
+   "results": "Eight hits, primarily presheaf module sheafification; no theorem proving this scalar telescope. Existing exact-derived functor and colimit APIs used below.",
+   "verdict": "No direct matching theorem; use the verified existing functor, adjunction and colimit APIs in the explicit proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, CategoryTheory.Adjunction.unit",
+   "date": "2026-10-16",
+   "results": "No hits; use explicit categorical constructions and existing unit factorization lemmas.",
+   "verdict": "No direct matching theorem; use the verified existing functor, adjunction and colimit APIs in the explicit proof."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|unit_mateEquiv|isColimitOfEval",
+   "date": "2026-10-16",
+   "results": "Mathlib CategoryTheory/Adjunction/Unique.lean, Adjunction/Mates.lean and Algebra/Homology/HomologicalComplexLimits.lean supply the categorical building blocks. No direct coefficient localization statement.",
+   "verdict": "No direct matching theorem; use the verified existing functor, adjunction and colimit APIs in the explicit proof."
+  },
+  {
+   "tool": "grep",
+   "query": "module_nsmul_isIso|derived_nsmul_isIso|extendUnit_tensor|extendComapTensorIso",
+   "date": "2026-10-16",
+   "results": "ContinuousConstructibleIntegralImage contains both scalar-invertibility statements without finite dimensionality; ContinuousConstructibleIntegralDenominators contains the extension tensor isomorphism and unit identity.",
+   "verdict": "Expose and reuse the existing scalar theorems; reuse the tensor helpers through import all. Remove the two duplicate modules and the local tensor-unit proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousIntegralPushComparison",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-continuous-integral-push-comparison",
+   "place": "Localization telescope and degreewise qcqs continuity argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralLocalization",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralLocalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralLocalizationCocone",
+  "statement": "def integralLocalizationCocone (X : Scheme.{u})\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) X))) :\n    Cocone (integralLocalizationSequence ℓ K)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-dfba3",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T064220-L-581729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-dfba3",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T064220-L-581729",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and twelve node records matched against the packet, published interfaces, importer compilations, and 23 axiom checks."
+ }
+}

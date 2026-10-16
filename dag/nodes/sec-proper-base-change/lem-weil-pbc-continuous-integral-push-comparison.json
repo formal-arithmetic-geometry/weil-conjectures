@@ -14,33 +14,38 @@
  ],
  "proof": [
   {
-   "text": "The compact-test localization and exact inverse image identify scalar extension with the ℓ-localization telescope. Exactness allows termwise calculation on a good truncation of a representative of K. The sequential diagram has one uniform lower cohomological bound.",
+   "text": "The lower derived pushforward preserves bounded-below objects: apply the existing lower-degree homology vanishing theorem for its bounded-below derived functor and transport through rightDerivedFunctorPlusCompatibility. Both the localization cocone of Rf_*K and the image under Rf_* of the localization cocone of K become colimit cocones on every cohomology sheaf, by the localization homology theorem and qcqs localization continuity respectively.",
    "uses": [
-    "def-weil-pbc-continuous-integral-coefficients",
-    "lem-weil-pbc-continuous-integral-scalar-exact"
+    "lem-weil-pbc-integral-localization-homology-colimit",
+    "lem-weil-pbc-integral-localization-push-continuity"
    ],
    "elementary": false
   },
   {
-   "text": "Apply condensed_qcqs_pushforward_continuity degree by degree. Its canonical cohomology map is the restriction of derivedPushHom: on each localization leg the adjoint definition is the same unit map followed by division by ℓⁿ. Homology detects isomorphisms, and exact faithful restriction reflects them.",
+   "text": "Compose restriction of the specified scalar-extension/pushforward mate with the restriction-pushforward comparison. The adjunction mate identity verifies its zeroth localization leg. Multiplication by ℓ is invertible at its target. The localization cocone comparison theorem makes every cohomology of this composite invertible. Scalar invertibility reuses the existing module_nsmul_isIso or derived_nsmul_isIso theorem from ContinuousConstructibleIntegralImage, made public without changing its type or proof.",
    "uses": [
-    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-    "def-weil-pbc-condensed-e-module-category"
+    "lem-weil-pbc-integral-localization-mate",
+    "lem-weil-pbc-continuous-constructible-integral-image"
    ],
    "elementary": false
+  },
+  {
+   "text": "Derived cohomology detects isomorphisms. Cancel the restriction-pushforward comparison isomorphism. Restriction reflects isomorphisms: module restriction has the same underlying morphism, and the derived homology factorization reduces derived reflection to module reflection. Thus the specified mate itself is invertible.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-continuous-integral-coefficients",
-  "lem-weil-pbc-continuous-integral-scalar-exact",
-  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-  "def-weil-pbc-condensed-e-module-category"
+  "lem-weil-pbc-integral-localization-homology-colimit",
+  "lem-weil-pbc-integral-localization-push-continuity",
+  "lem-weil-pbc-integral-localization-mate",
+  "lem-weil-pbc-continuous-constructible-integral-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
   "place": "Lemma 5.3(1); Bhatt–Scholze Lemma 6.8.2, localization telescope",
-  "note": "A2: the Lean proof and remaining named obligations follow these steps, using the actual integral coefficient functor. No proper base change assumption is used."
+  "note": "B2 second reading: expose the existing module_nsmul_isIso and derived_nsmul_isIso without changing their types or proofs; reuse existing tensor-unit helpers through import all. No target or existing mathematical statement is changed; all new auxiliary proofs are complete."
  },
  "mathlib_searches": [
   {
@@ -108,13 +113,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "X-dfba3",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261015T224107-L-2884881",
+  "landing": "20261016T064220-L-581729",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean proofs and twelve node records matched against the packet, published interfaces, importer compilations, and 23 axiom checks."
  }
 }

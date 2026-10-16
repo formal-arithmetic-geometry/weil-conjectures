@@ -96,7 +96,12 @@ private theorem point_nsmul_isIso :
   exact isIso_of_reflects_iso _
     (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
-private theorem module_nsmul_isIso (X : Scheme.{u})
+/-- Multiplication by ℓ is invertible on every continuous E-module.
+Source: Bhatt--Scholze, Lemma 6.8.2.
+(blueprint: lem-weil-pbc-continuous-constructible-integral-image).
+Proof. Transport division by ℓ from the point to the regular coefficient module,
+then tensor with the given module and conjugate by the left unitor. -/
+theorem module_nsmul_isIso (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X)) :
     IsIso (ℓ • 𝟙 M) := by
@@ -120,7 +125,12 @@ private theorem module_nsmul_isIso (X : Scheme.{u})
     exact isIso_of_reflects_iso _ (Mod.forget R)
   exact nsmul_isIso_of_unit ℓ (by assumption) M
 
-private theorem derived_nsmul_isIso (X : Scheme.{u})
+/-- Multiplication by ℓ is invertible on every derived continuous E-module.
+Source: Bhatt--Scholze, Lemma 6.8.2.
+(blueprint: lem-weil-pbc-continuous-constructible-integral-image).
+Proof. Additive cohomology carries the map to scalar multiplication on each
+cohomology module; the module result and detection by cohomology conclude. -/
+theorem derived_nsmul_isIso (X : Scheme.{u})
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))) :
     IsIso (ℓ • 𝟙 K) := by

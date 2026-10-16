@@ -1,0 +1,105 @@
+{
+ "id": "lem-weil-pbc-integral-localization-colimit-transport",
+ "kind": "statement",
+ "title": "Colimit transport through a strict localization model",
+ "statement": "For any abelian category A and scalar telescope cocone c of K in its derived category, suppose m is a strict complex localization model for c. If a functor F sends every strictly bounded-below complex telescope, computed by the indicated good truncation, to a colimit cocone, then F sends the lifted cocone c to a colimit cocone. Definitions and notation: [lem-weil-pbc-integral-localization-complex-model].",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), referring to Bhatt–Scholze Lemma 6.8.2; scalar localization telescope"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-integral-localization-complex-model"
+ ],
+ "proof": [
+  {
+   "text": "Whisker the representative isomorphism in the model to identify the scalar sequence diagrams. The model comparison isomorphism and its leg equations identify the resulting cocones. Transport the assumed colimit through these two isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1); Bhatt–Scholze Lemma 6.8.2",
+  "note": "B2: explicit scalar telescope construction and categorical compatibility. This auxiliary declaration is proved in the delivery, not a new assumption."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of sheaves of modules as the colimit of scalar multiplication and compatibility with exact derived adjunction units",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of sheaves of modules is the filtered colimit of multiplication by a scalar, compatibly with the derived adjunction unit",
+   "date": "2026-10-16",
+   "results": "Eight hits, primarily presheaf module sheafification; no theorem proving this scalar telescope. Existing exact-derived functor and colimit APIs used below.",
+   "verdict": "No direct matching theorem; use the verified existing functor, adjunction and colimit APIs in the explicit proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, CategoryTheory.Adjunction.unit",
+   "date": "2026-10-16",
+   "results": "No hits; use explicit categorical constructions and existing unit factorization lemmas.",
+   "verdict": "No direct matching theorem; use the verified existing functor, adjunction and colimit APIs in the explicit proof."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|unit_mateEquiv|isColimitOfEval",
+   "date": "2026-10-16",
+   "results": "Mathlib CategoryTheory/Adjunction/Unique.lean, Adjunction/Mates.lean and Algebra/Homology/HomologicalComplexLimits.lean supply the categorical building blocks. No direct coefficient localization statement.",
+   "verdict": "No direct matching theorem; use the verified existing functor, adjunction and colimit APIs in the explicit proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousIntegralPushComparison",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-continuous-integral-push-comparison",
+   "place": "Localization telescope and degreewise qcqs continuity argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralLocalizationColimitTransport",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralLocalizationColimitTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.localizationCocone_isColimit_of_model",
+  "statement": "theorem localizationCocone_isColimit_of_model\n    {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory A]\n    [HasColimitsOfShape (ULift.{x} ℕ) A]\n    (K : DerivedCategory A) (c : Cocone (integralLocalizationSequence ℓ K))\n    (m : IntegralLocalizationComplexModel.{v, w, x} ℓ K c)\n    {B : Type y} [Category.{z} B] (F : DerivedCategory A ⥤ B)\n    (hcont : ∀ (C : CochainComplex A ℤ) (a : ℤ), C.IsStrictlyGE a →\n      Nonempty (IsColimit ((DerivedCategory.Q ⋙ F).mapCocone\n        (condensedContinuityCocone\n          (integralLocalizationLiftedSequence.{max v w, w, x} ℓ C) a)))) :\n    Nonempty (IsColimit (F.mapCocone (c.whisker\n      (ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor)))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-dfba3",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T064220-L-581729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-dfba3",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T064220-L-581729",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and twelve node records matched against the packet, published interfaces, importer compilations, and 23 axiom checks."
+ }
+}

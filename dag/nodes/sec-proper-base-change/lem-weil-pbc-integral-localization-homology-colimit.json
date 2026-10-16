@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-integral-localization-homology-colimit",
+ "kind": "statement",
+ "title": "Cohomology preserves the bounded-below localization unit telescope",
+ "statement": "For a bounded-below derived integral coefficient object K on X and q∈ℤ, qth derived cohomology sends the canonical lifted localization unit cocone of K to a colimit cocone. Definitions and notation: [def-weil-pbc-integral-localization-telescope].",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), referring to Bhatt–Scholze Lemma 6.8.2; scalar localization telescope"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-localization-telescope"
+ ],
+ "proof": [
+  {
+   "text": "Use the strict complex localization model and colimit transport. The good truncation is already an isomorphism on every term because C is strictly bounded below. Filtered colimits of module sheaves are exact, so complex cohomology preserves the termwise colimit. The standard factorization of derived cohomology through Q yields the mapped cocone colimit.",
+   "uses": [
+    "lem-weil-pbc-integral-localization-complex-model",
+    "lem-weil-pbc-integral-localization-colimit-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-localization-complex-model",
+  "lem-weil-pbc-integral-localization-colimit-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1); Bhatt–Scholze Lemma 6.8.2",
+  "note": "B2: explicit scalar telescope construction and categorical compatibility. This auxiliary declaration is proved in the delivery, not a new assumption."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of sheaves of modules as the colimit of scalar multiplication and compatibility with exact derived adjunction units",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of sheaves of modules is the filtered colimit of multiplication by a scalar, compatibly with the derived adjunction unit",
+   "date": "2026-10-16",
+   "results": "Eight hits, primarily presheaf module sheafification; no theorem proving this scalar telescope. Existing exact-derived functor and colimit APIs used below.",
+   "verdict": "No direct matching theorem; use the verified existing functor, adjunction and colimit APIs in the explicit proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, CategoryTheory.Adjunction.unit",
+   "date": "2026-10-16",
+   "results": "No hits; use explicit categorical constructions and existing unit factorization lemmas.",
+   "verdict": "No direct matching theorem; use the verified existing functor, adjunction and colimit APIs in the explicit proof."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|unit_mateEquiv|isColimitOfEval",
+   "date": "2026-10-16",
+   "results": "Mathlib CategoryTheory/Adjunction/Unique.lean, Adjunction/Mates.lean and Algebra/Homology/HomologicalComplexLimits.lean supply the categorical building blocks. No direct coefficient localization statement.",
+   "verdict": "No direct matching theorem; use the verified existing functor, adjunction and colimit APIs in the explicit proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousIntegralPushComparison",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-continuous-integral-push-comparison",
+   "place": "Localization telescope and degreewise qcqs continuity argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralLocalizationHomology",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralLocalizationHomology.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralLocalization_homology_isColimit",
+  "statement": "theorem integralLocalization_homology_isColimit (X : Scheme.{u})\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) X)))\n    (hK : DerivedCategory.TStructure.t.plus K) (q : ℤ) :\n    Nonempty (IsColimit ((DerivedCategory.homologyFunctor\n        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n          (condensedRingObj (integralCoeff ℓ E) X)) q).mapCocone\n      (integralLocalizationLiftedCocone.{u, u + 1} ℓ E X K)))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-dfba3",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T064220-L-581729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-dfba3",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T064220-L-581729",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and twelve node records matched against the packet, published interfaces, importer compilations, and 23 axiom checks."
+ }
+}
