@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-derived-nakayama-resolution",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The two-term resolution of the finite coefficient sheaves",
@@ -12,42 +12,177 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.md",
   "place": "node det-pe-derived-nakayama-resolution, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-sfb-derived-tensor-modules",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-derived-categories"
+ ],
  "proof": [
   {
-   "text": "*On the point.* For a profinite set $S$ the sequence\n$0\\to C(S,\\mathcal O_E)\\xrightarrow{\\pi_E^n}C(S,\\mathcal O_E)\\to\nC(S,\\mathcal O_E/\\pi_E^n)\\to0$ is exact: $\\pi_E^n$ is injective on\n$\\mathcal O_E$; a continuous function divisible by $\\pi_E^n$ pointwise has a\ncontinuous quotient, since division by $\\pi_E^n$ is a homeomorphism\n$\\pi_E^n\\mathcal O_E\\to\\mathcal O_E$; and a continuous, i.e. locally constant,\nfunction $S\\to\\mathcal O_E/\\pi_E^n$ lifts to a locally constant function to\n$\\mathcal O_E$ by lifting its finitely many values. So the sequence of condensed\n$\\underline{\\mathcal O_E}$-modules is exact ([sk-def-sfb-condensed-ring]).",
+   "text": "Put $A=\\mathcal O_E$, $a=\\pi_E$ and $B_r=A/a^rA$. The absolute-value/subspace topology is that of [sk-def-sfb-condensed-ring]. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a subring of $E$, $a\\ne0$, and $0<|a|<1$. In particular multiplication by $a^r$ is injective, and division by $a^r$ on $a^rA$ is continuous: it is restriction of multiplication by the fixed element $a^{-r}$ of the topological field $E$, with values in the subspace $A$. The ordinary augmented complex $[A\\xrightarrow{a^r}A]\\to B_r[0]$ is a finite free resolution, and $B_r$ is a finite set, by [lem-weil-pbc-standard-quotients-perfect]. The quotient topology on $B_r$ is discrete. Indeed, if $|x|<|a|^r$, then $|x/a^r|<1$, so $x\\in a^rA$; hence $a^rA$ contains a neighbourhood of zero and is open (translate that neighbourhood at each of its points). Every coset is open, which is the assertion of discreteness. These observations hold for every $r\\ge1$.",
    "uses": [
-    "sk-def-sfb-condensed-ring"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*On $X$.* The pullback $p_X^*$ of module objects is exact\n([sk-prop-sfb-module-pullback-exact]) and carries\n$\\underline{\\mathcal O_E}$, $\\underline{\\mathcal O_E/\\pi_E^n}$ to $\\mathcal O_{E,X}$,\n$(\\mathcal O_E/\\pi_E^n)_X$ ([sk-def-sfb-pulled-back-coefficients]), so the\ndisplayed sequence is exact. It is a resolution of $(\\mathcal O_E/\\pi_E^n)_X$ by\nfree modules of rank one, hence K-flat; this is the sheaf version of\n[lem-weil-pbc-standard-quotients-perfect]. Tensoring $K$ with it gives\n$K_n\\simeq\\operatorname{cone}(\\pi_E^n\\colon K\\to K)$, naturally in $K$.",
-   "uses": [
-    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-condensed-ring",
+    "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-pbc-standard-quotients-perfect"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On the point: topology, injectivity and finite quotients"
+   }
   },
   {
-   "text": "*Triangles.* The sequence\n$0\\to\\mathcal O_E/\\pi_E^m\\xrightarrow{\\pi_E^n}\\mathcal O_E/\\pi_E^{n+m}\\to\n\\mathcal O_E/\\pi_E^n\\to0$ is exact (multiplication by $\\pi_E^n$ is injective modulo\n$\\pi_E^{n+m}$ on $\\mathcal O_E/\\pi_E^m$ because $\\mathcal O_E$ is a discrete\nvaluation ring), and after pullback it is an exact sequence of\n$\\mathcal O_{E,X}$-modules, by the same argument on the point. Applying the\ntriangulated functor $K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}-$ gives the\ntriangle $K_m\\to K_{n+m}\\to K_n\\to$.",
+   "text": "For every profinite set $S$, [sk-def-sfb-condensed-ring] identifies sections of $\\underline A$ and $\\underline{B_r}$ with $C(S,A)$ and $C(S,B_r)$. Multiplication by $a^r$ is injective on sections. If $f:S\\to A$ reduces to zero, the quotient $s\\mapsto a^{-r}f(s)$ is continuous by step 1 and is the unique section mapping to $f$. Given $g:S\\to B_r$, choose a lift $b_t\\in A$ of each of its finitely many values $t$; its fibres are open and closed, and the function equal to $b_t$ on $g^{-1}(t)$ is a continuous lift. Thus the section sequence is short exact for every $S$, including the empty set. It follows that $0\\to\\underline A\\xrightarrow{a^r}\\underline A\\to\\underline{B_r}\\to0$ is short exact as abelian sheaves: kernels are sectionwise and the cokernel is the sheafification of the sectionwise cokernel, by [lem-weil-pbc-sheafification-exact]. All maps are $\\underline A$-linear for pointwise operations.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On the point: the three sectionwise exactness checks"
+   }
+  },
+  {
+   "text": "Here is the precise exact-pullback input, replacing the nonexistent imported module-exactness citation. Use small site models in a universe below that of the coefficient sheaves. In [sk-def-sfb-pullback-from-point], $u:*_{\\mathrm{proet}}\\to(\\operatorname{Spec}\\mathbf Z)_{\\mathrm{proet}}$ preserves finite limits and coverings, and $p_X^*=\\pi_X^*p^*$, where $p^*$ is sheafified left Kan extension along $u^{op}$. Profinite sets have finite limits (the closed inverse-image subsets giving finite products and equalizers), so [lem-weil-pbc-left-exact-site-inverse-image-tensor], Tag 00X6, applies to $u$ and makes $p^*$ exact on abelian sheaves. The other factor $\\pi_X^*$ is exact by [lem-sfb-finite-upper-star-exact]. Hence $p_X^*$ preserves the short exact sequence of step 2. Its strong monoidal structure transports the scalar actions, and [sk-def-sfb-pulled-back-coefficients] identifies the resulting ring and quotient with $R=A_X$ and $B_{r,X}$. The maps remain multiplication by $a^r$ and reduction, since their scalar-action diagrams are the images of the original diagrams under this monoidal functor. For these essentially small sites, [lem-weil-pbc-sheaf-tensor-closed], applied to abelian groups, supplies exact sheafification and its strong symmetric monoidal structure, including tensor stability of its local equivalences; thus the sheafification hypotheses of the following equivalence hold. Internal modules may be read as sectionwise module sheaves via [def-weil-pbc-internal-abelian-sheaf-module-equivalence], with underlying sheaves unchanged; [def-weil-sheaf-of-modules-category] computes their kernels sectionwise and cokernels by sheafification. Thus underlying abelian exactness proves exactly the asserted short exact sequence of $R$-modules. No constant/completed coefficient identification or invertibility of $\\ell$ on $X$ is used.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-sfb-finite-upper-star-exact",
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-sheaf-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: exact inverse image and transported coefficient actions"
+   }
+  },
+  {
+   "text": "Let $P_r$ be the complex with $R$ in degrees $-1,0$, differential $a^r$, and augmentation the reduction $R\\to B_{r,X}$ in degree zero. Step 3 says $H^{-1}(P_r)=0$, $H^0(P_r)=B_{r,X}$, and all its other cohomology sheaves vanish, so its augmentation is a quasi-isomorphism. Its terms are free of rank one, and are flat: $R\\otimes_R M\\to M$, $b\\otimes m\\mapsto bm$, has inverse $m\\mapsto1\\otimes m$, hence tensor by $R$ is the identity functor and is exact, as required by [def-pc-flat-sheaf-modules]. Apply [lem-weil-pbc-independent-bounded-flat-kflat], Tag 06YQ, to this bounded-above flat complex on the essentially small pro-etale site. It is K-flat. This establishes the actual sheaf resolution rather than treating the ordinary $A$-module resolution as a sheaf theorem.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the augmented rank-one free resolution is K-flat"
+   }
+  },
+  {
+   "text": "Use the layer-B notation of [sk-def-sfb-derived-categories]: $D(X_{\\mathrm{proét}},\\mathcal O_E)=D(\\Mod_{\\mathcal O_{E,X}})$ for the pulled-back condensed ring, rather than the constant-ring notation in the site definition. For an arbitrary, possibly unbounded $K$, choose a K-flat flat-term representative $C$ by [lem-pc-kflat-resolution]. The two-variable model and descent statement [lem-weil-pbc-site-derived-tensor-descent] computes $P_r\\otimes_R^{\\mathbf L}K$ by $\\operatorname{Tot}(P_r\\otimes_R C)$. Since $P_r\\simeq B_{r,X}[0]$, the model for $K_r=K\\otimes_R^{\\mathbf L}B_{r,X}$ is $\\operatorname{Tot}(C\\otimes_RP_r)$. The interchange $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ for $x\\in C^p$, $y\\in P_r^q$ is a chain isomorphism from this complex to $\\operatorname{Tot}(P_r\\otimes_RC)$: it is balanced because $R$ is commutative, and substituting in the total differential gives the same signs on both sides. Its inverse is the same signed interchange. Thus the latter complex computes precisely $K_r$. The degree-$q$ term is $C^q\\oplus C^{q+1}$ after the unit identifications $R\\otimes_R C^j=C^j$; the differential is $(x,y)\\mapsto(d_Cx+a^ry,-d_Cy)$, directly from [def-pc-tensor-complex-sheaves], because the first-factor degree of the second summand is $-1$. This is the cone differential of [def-weil-abstract-derived-category] for $a^r:C\\to C$. The identification commutes with every chain map $C\\to C'$: it is the identity on these two summands. The tensor-model descent and uniqueness in [lem-weil-pbc-site-derived-tensor-descent] therefore extend these identifications to a natural isomorphism in $K$; the cone here means this fixed two-term tensor/cone model, not a choice of a cone made separately for each morphism in a triangulated category.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: compute the derived reduction and its natural cone model"
+   }
+  },
+  {
+   "text": "For $m,n\\ge1$ consider $i:B_m\\to B_{n+m}$, $[x]\\mapsto[a^nx]$, and $q:B_{n+m}\\to B_n$, $[y]\\mapsto[y]$. These are $A$-linear. Changing $x$ by $a^mz$ changes $a^nx$ by $a^{n+m}z$, so $i$ is well defined. If $a^nx=a^{n+m}z$ in $A\\subset E$, cancel the nonzero $a^n$ to get $x=a^mz$, proving injectivity. The kernel of $q$ consists exactly of classes $[a^nx]$, and $q$ is surjective by choosing a representative in $A$. This gives $0\\to B_m\\xrightarrow{i}B_{n+m}\\xrightarrow{q}B_n\\to0$. For a profinite $S$, a continuous function into any of these finite discrete rings is locally constant. A function to $B_n$ lifts along $q$ by choosing one value above each value of the function; a function to $B_{n+m}$ in its kernel has a unique locally constant preimage under $i$, since the image is finite discrete. Hence the condensed sequence is sectionwise short exact just as in step 2. Applying the exact $p_X^*$ established in step 3 gives $0\\to B_{m,X}\\xrightarrow{i_X}B_{n+m,X}\\xrightarrow{q_X}B_{n,X}\\to0$. This computation uses only cancellation and the finite discrete topology already proved; it does not invoke a separate quotient-power lemma.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "Triangles: explicit quotient-power maps, kernel and surjectivity"
+   }
+  },
+  {
+   "text": "Place the last sequence of step 6 in degree zero. By [lem-weil-pbc-complex-ses-triangle], Tag 0152, it gives a distinguished triangle $B_{m,X}\\to B_{n+m,X}\\to B_{n,X}\\to B_{m,X}[1]$ in $D(R)$. Tensor by $K$ preserves this triangle: choose the K-flat representative of step 5 and apply [lem-sc-source-kflat-tensor-left-triangulated] to the abelian monoidal category of $R$-modules, with its sheaf relative tensor and K-flat derived tensor model from [def-sfb-derived-tensor-modules] and [lem-weil-pbc-site-derived-tensor-descent]. The required flat-term resolving localization is exactly the equivalence in the latter statement, so no boundedness of $K$ or enough-projectives hypothesis is needed. The three vertices identify with $K_m,K_{n+m},K_n$, and the two arrows are $1_K\\otimes^{\\mathbf L}i_X$ and $1_K\\otimes^{\\mathbf L}q_X$. Thus the notation $\\pi_E^n$ on the first arrow means the map induced by $[x]\\mapsto[\\pi_E^nx]$ between the two different coefficient quotients. Restrict to $1\\le m\\le n$ as in the statement and then put $m=1$ to obtain the final displayed triangle.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sc-source-kflat-tensor-left-triangulated",
+    "def-sfb-derived-tensor-modules",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "Triangles: the short-exact-sequence triangle and exact derived tensor"
+   }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-condensed-ring",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-pbc-sheafification-exact",
+  "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-sfb-finite-upper-star-exact",
   "sk-def-sfb-pulled-back-coefficients",
-  "lem-weil-pbc-standard-quotients-perfect"
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "def-sfb-derived-tensor-modules",
+  "sk-def-sfb-derived-categories"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+  "place": "All three blueprint proof paragraphs, expanded with Stacks Tags 00X6, 06YQ, 06YS, 06YU and 0152"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension of the l-adic numbers, the quotient of the pulled-back condensed integer ring by a power of its uniformizer has a two-term free resolution and derived reductions form triangles",
+   "results": "8 hits; ; candidates: BDeRhamPlus, instCommRingBDeRhamPlus, BDeRham, AdicCompletion.map_exact, WittVector.factorPowSucc_comp_fontaineThetaModPPow, PreTilt.exists_smodEq_untiltAux, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, localCohomology.diagram",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits are BDeRham constructions, ordinary adic-completion exactness and a local-cohomology diagram, not the condensed pro-etale sheaf resolution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient sheaf by a nonzero divisor has a two term free resolution and derived tensor is a mapping cone",
+   "results": "8 hits; ; candidates: QuotSMulTop.algebraMapTensorEquivTensorQuotSMulTop, TensorProduct.quotientTensorQuotientEquiv, TensorProduct.tensorQuotientEquiv, TensorProduct.quotientTensorEquiv, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, Ideal.qoutMapEquivTensorQout, DerivedCategory.quotientCompQhIso, lTensor_mkQ",
+   "date": "2026-10-16",
+   "verdict": "No match: ordinary module tensor/quotient equivalences and the derived localization comparison do not state the coefficient-sheaf resolution or its quotient-power triangles."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformizer|two.term|derivedTensor",
+   "results": "0 hits; ; candidates: ",
+   "date": "2026-10-16",
+   "verdict": "No match: no hits for uniformizer, two-term or derivedTensor in Mathlib/Condensed."
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, ShortComplex.ShortExact",
+   "results": "0 hits; loogle: unknown identifier 'ShortComplex.ShortExact'; candidates: ",
+   "date": "2026-10-16",
+   "verdict": "No match: zero hits; Loogle reports unknown identifier ShortComplex.ShortExact, so this query is inconclusive and the semantic searches and source grep decide absence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of rings modulo a power of a regular element is represented by the mapping cone of multiplication, and derived tensor preserves the quotient power triangles",
+   "results": "8 hits; ; candidates: localCohomology.diagram, DerivedCategory.left_fac_of_isStrictlyGE, CategoryTheory.Tor, CategoryTheory.Tor_obj, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Tor'",
+   "date": "2026-10-16",
+   "verdict": "No match: local-cohomology diagrams, ordinary Tor and derived-category fractions do not state this ring-sheaf result."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -63,5 +198,79 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-lem-pe-derived-nakayama"
+ "unit": "sk-lem-pe-derived-nakayama",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-derived-nakayama-resolution",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and all imported metadata. Expanded the three blueprint paragraphs into seven steps. Replaced a nonexistent module-exactness citation by exact abelian inverse image with explicit transported scalar actions, distinguished the ordinary-module resolution from the sheaf resolution, supplied generic K-flat and derived triangle inputs, and made the finite-quotient maps and natural cone model explicit. All supporting statements already exist; no new nodes or attachment.",
+  "blueprint": "On the point is realized by steps 1-2; On X by steps 3-5; Triangles by steps 6-7. The unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Supplies the standard finite local-field valuation facts used on the point; the unit presupposes its coefficient ring and has no replacement valuation theorem."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Explicit unit-route citation: the ordinary augmented free resolution supplies injectivity and finite quotient sets; no coefficient-category identification is taken from it."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Generic sheaf kernel/cokernel and exact sheafification facts for the pointwise exactness argument."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic exact inverse-image theorem used for the blueprint-prescribed pullback from the point; replaces the missing imported citation without changing the route."
+   },
+   {
+    "node": "lem-sfb-finite-upper-star-exact",
+    "why": "Exactness of the scheme inverse-image factor in the prescribed composite p_X^*."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic underlying-sheaf-preserving module equivalence, to apply the ringed-site K-flat tools to the same module objects."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic bounded-flat K-flatness for the rank-one sheaf resolution."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site K-flat resolution existence for unbounded K; no assertion special to schemes or quasi-coherent modules is used."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic two-variable ringed-site tensor models and natural descent; no node of the unit supplies this construction."
+   },
+   {
+    "node": "lem-sc-source-kflat-tensor-left-triangulated",
+    "why": "Generic abelian-monoidal K-flat tensor exactness used to apply the unit-prescribed triangulated tensor functor; this is not the scheme-only tensor theorem."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic exact and monoidal abelian sheafification theorem verifying the module-equivalence hypotheses on the small pro-etale sites."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-sfb-finite-upper-star-exact",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q56-add9f73e4",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q56-add9f73e4 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and route; checked all seven steps, tensor signs, quotient maps, and edge cases. Repaired one missing coefficient-category citation by adding sk-def-sfb-derived-categories. Statement unchanged. Corrected JSON and detailed review.md written; no new nodes or target weakening.; 1 file(s) fixed by the reviewer"
+ }
 }
