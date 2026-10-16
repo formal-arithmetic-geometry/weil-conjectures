@@ -172,4 +172,120 @@ theorem perfectOverlapNestedOpenSquarePasting
         Functor.map_comp, Category.assoc, (derivedPullback r).map_id,
         Category.id_comp, Category.comp_id] using hn'
 
+/-- Pinned nested-square pasting for specified restricted opens and maps.
+Source: Stacks Project, Tag 0D5S. The five-arrow composition cube gives
+the square after identifying restriction with inclusion pullback. Naturality
+of the open-square comparison transports the endpoint isomorphisms, and the
+inverse pairs cancel. -/
+theorem perfectOverlapNestedOpenSquarePastingOfData
+    {X K : Scheme.{u}} (gk : X ⟶ K) (U W : K.Opens) (P Q : X.Opens)
+    (hWU : W ≤ U) (hPU : P ≤ gk ⁻¹ᵁ U)
+    (hQ : Q ≤ gk ⁻¹ᵁ W) (hQP : Q ≤ P)
+    (F : schemeDerivedCategory K) :
+    let iK : W ⟶ U := homOfLE hWU
+    let iX : Q ⟶ P := homOfLE hQP
+    let r := gk.resLE W Q hQ
+    let j := gk.resLE U P hPU
+    let SU := (schemeOpenOverlapRestriction K iK).mapDerivedCategory
+    let SX := (schemeOpenOverlapRestriction X iX).mapDerivedCategory
+    let z := (schemeDerivedOpenRestrictionCompIso K iK).hom.app F
+    let cW := singleComplexOpenPullbackSquareIso gk W Q r
+      (Scheme.Hom.resLE_comp_ι gk hQ)
+    let cU := singleComplexOpenPullbackSquareIso gk U P j
+      (Scheme.Hom.resLE_comp_ι gk hPU)
+    let hs : r ≫ K.homOfLE hWU = X.homOfLE hQP ≫ j := by
+      dsimp only [r, j]
+      apply (cancel_mono U.ι).1
+      simp only [Category.assoc, Scheme.homOfLE_ι,
+        Scheme.Hom.resLE_comp_ι]
+      rw [← Category.assoc, Scheme.homOfLE_ι]
+    let αK := overlapOpenInclusionPullbackIso K iK
+    let αX := overlapOpenInclusionPullbackIso X iX
+    (derivedPullback r).map z ≫ cW.hom.app F ≫
+        (schemeDerivedOpenRestrictionCompIso X iX).inv.app ((derivedPullback gk).obj F) ≫
+          SX.map (cU.inv.app F) =
+      (derivedPullback r).map (αK.inv.app
+        ((schemeOpenRestriction K U).mapDerivedCategory.obj F)) ≫
+        (singleComplexOpenSquareComparison j r (K.homOfLE hWU)
+          (X.homOfLE hQP) hs.symm).app
+          ((schemeOpenRestriction K U).mapDerivedCategory.obj F) ≫
+            αX.hom.app ((derivedPullback j).obj
+              ((schemeOpenRestriction K U).mapDerivedCategory.obj F)) := by
+  intro iK iX r j SU SX z cW cU hs αK αX
+  let RU := (schemeOpenRestriction K U).mapDerivedCategory
+  let RX := (schemeOpenRestriction X P).mapDerivedCategory
+  have hnX := αX.inv.naturality (cU.inv.app F)
+  have hnX' : SX.map (cU.inv.app F) ≫
+      αX.inv.app ((derivedPullback j).obj (RU.obj F)) =
+    αX.inv.app (RX.obj ((derivedPullback gk).obj F)) ≫
+      (derivedPullback (X.homOfLE hQP)).map (cU.inv.app F) := by
+    simpa only [Functor.comp_obj, SX, RX, RU] using hnX
+  apply (cancel_mono
+    (αX.inv.app ((derivedPullback j).obj (RU.obj F)))).1
+  apply (cancel_epi
+    ((derivedPullback r).map (αK.hom.app (RU.obj F)))).1
+  simp only [Category.assoc]
+  rw [hnX']
+  dsimp only [RU, RX]
+  simp only [Category.assoc, ← Functor.map_comp_assoc,
+    Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
+    Iso.hom_inv_id_app_assoc, Category.comp_id]
+  rw [overlapOpenInclusionPullbackIso_hom_comp K iK F]
+  dsimp only [αX]
+  slice_lhs 3 4 =>
+    exact overlapOpenInclusionPullbackIso_inv_comp X iX ((derivedPullback gk).obj F)
+  dsimp only [cW, cU]
+  rw [singleComplexOpenPullbackSquareIso_hom_app_eq_compositionTo gk W Q r
+    (Scheme.Hom.resLE_comp_ι gk hQ) F,
+    singleComplexOpenPullbackSquareIso_inv_app_eq_compositionTo gk U P j
+      (Scheme.Hom.resLE_comp_ι gk hPU) F]
+  simp only [Category.assoc, ← Functor.map_comp_assoc,
+    Iso.hom_inv_id_app, Iso.inv_hom_id_app, Functor.map_id,
+    Category.id_comp, Category.comp_id]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
+    ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    Functor.map_id, Category.id_comp]
+  simp only [← Functor.map_comp, Category.assoc,
+    Iso.hom_inv_id_app_assoc, Category.id_comp]
+  let iK' := K.homOfLE hWU
+  let iX' := X.homOfLE hQP
+  have hi : iK' ≫ U.ι = W.ι := Scheme.homOfLE_ι K hWU
+  have hr : r ≫ W.ι = Q.ι ≫ gk := Scheme.Hom.resLE_comp_ι gk hQ
+  have hq : iX' ≫ P.ι = Q.ι := Scheme.homOfLE_ι X hQP
+  have hj' : j ≫ U.ι = P.ι ≫ gk := Scheme.Hom.resLE_comp_ι gk hPU
+  have H := perfectOverlapCompositionCube r iK' U.ι W.ι Q.ι gk
+    iX' P.ι j hi hr hq hj' hs F
+  have Hhom := congrArg Iso.hom H
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom] at Hhom
+  let q0 := singleComplexOpenSquareComparison j r iK' iX' hs.symm
+  let o := singleComplexOpenPullbackIso K U
+  have hn := q0.naturality (o.inv.app F)
+  simp only [Functor.comp_map] at hn
+  have hn' := congrArg (fun z => z ≫
+    (derivedPullback iX').map ((derivedPullback j).map (o.hom.app F))) hn
+  simp only [Category.assoc, ← Functor.map_comp_assoc,
+    Iso.inv_hom_id_app, Functor.map_id, Category.id_comp] at hn'
+  simp only [← Functor.map_comp, Iso.inv_hom_id_app,
+    Functor.map_id, Category.comp_id] at hn'
+  dsimp only [q0] at hn'
+  rw [singleComplexOpenSquareComparison_app_eq_compositionTo] at hn'
+  rw [(derivedPullback j).map_id,
+    (derivedPullback iX').map_id] at hn'
+  have Hhom' := congrArg (fun z =>
+    (derivedPullback r).map ((derivedPullback iK').map (o.inv.app F)) ≫ z ≫
+      (derivedPullback iX').map ((derivedPullback j).map (o.hom.app F))) Hhom
+  simp only [compositionTo, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
+    Iso.app_hom, Iso.app_inv, NatTrans.comp_app, Functor.map_comp,
+    Category.assoc] at Hhom'
+  simp only [compositionTo, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
+    Iso.app_hom, Iso.app_inv, NatTrans.comp_app, Functor.map_comp,
+    Category.assoc]
+  calc
+    _ = _ := Hhom'
+    _ = _ := by
+      simpa only [compositionTo, Iso.trans_hom, Iso.trans_inv,
+        Iso.symm_hom, Iso.app_hom, Iso.app_inv, NatTrans.comp_app,
+        Functor.map_comp, Category.assoc, (derivedPullback r).map_id,
+        Category.id_comp, Category.comp_id] using hn'
+
 end AlgebraicGeometry
