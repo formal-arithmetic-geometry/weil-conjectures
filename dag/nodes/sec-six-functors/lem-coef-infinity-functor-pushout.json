@@ -211,5 +211,53 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-4f835306c (reviewer sub-agent of L); spot-checked: Read the complete item, both new nodes, report, route documents, delivery errors A–F, blueprint source, Scholze Lecture II, and all cited HTT locations. Verified every proof step, hypotheses, universe and fibrancy arguments, path-object construction, edge cases, duplicate search, Mathlib searches, and route compliance. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityFunctorPushout",
+  "declaration": "SSet.Enhanced.infinity_functor_pushout",
+  "declarations": [
+   "SSet.Enhanced.FunctorPushoutCocone",
+   "SSet.Enhanced.functorPushoutLiftCylinder",
+   "SSet.Enhanced.functorPushoutPath",
+   "SSet.Enhanced.functorPushoutGluingSubcomplex",
+   "SSet.Enhanced.functorPushoutGluing",
+   "SSet.Enhanced.functorPushoutLeft",
+   "SSet.Enhanced.functorPushoutRight",
+   "SSet.Enhanced.functorPushoutOverlap",
+   "SSet.Enhanced.IsFunctorPushoutRestriction",
+   "SSet.Enhanced.IsFunctorPushout",
+   "SSet.Enhanced.functorPushoutEndpointPath",
+   "SSet.Enhanced.functorPushoutFullPath",
+   "SSet.Enhanced.functorPushoutNerveHom",
+   "SSet.Enhanced.functorPushoutNerveObject",
+   "SSet.Enhanced.functorPushoutNerveEdge",
+   "SSet.Enhanced.functorPushoutNerveTriangle",
+   "SSet.Enhanced.functorPushoutSpanShape",
+   "SSet.Enhanced.functorPushoutCoconeCylinder",
+   "SSet.Enhanced.FunctorPushoutNerveCocone",
+   "SSet.Enhanced.FunctorPushoutMap",
+   "SSet.Enhanced.functorPushoutExchange",
+   "SSet.Enhanced.functorPushoutTestCore",
+   "SSet.Enhanced.functorPushoutSpacePath",
+   "SSet.Enhanced.functorPushoutPostcomposePath",
+   "SSet.Enhanced.FunctorPushoutPullbackTest",
+   "SSet.Enhanced.InfinityFunctorPushoutStatement",
+   "SSet.Enhanced.infinity_functor_pushout"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityFunctorPushout.lean",
+  "statement": "theorem infinity_functor_pushout : Nonempty InfinityFunctorPushoutStatement.{u, v}",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The single postponed theorem supplies small colimits in the recorded marked-model coherent nerve, canonical Cartesian currying, the full equivalence-path pullback and its mapping-space universal property, the actual restriction comparison in arbitrary enlarged target universes, and naturality on all target transformation simplices and source model presentations with weak-equivalence invariance. Concrete helper data use existing internal hom, equivalenceDiagrams, core and comma cocones; the pushout mapping test is explicitly identified with the recorded IsColimiting predicate for its normalized actual coherent-nerve cocone. No dependency is restated or repaired."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dff1ae810",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Read the node, both stmt_dep modules (EnhancedDiagramsCones, MarkedPointCartesianModel incl. every CartesianModelStatement field), the full 558-line module and the report (Worker report and Second reading by Q117 present). Clause by clause: IsFunctorPushout is exactly the mapping-space pushout (restriction pinned by its three coordinates and core monos; core of the isofibration gluing is the homotopy pullback), tested only on u-small E, and bridged to the dependency's IsColimiting through a fully pinned nerve cocone (all 4 triangles and their orientations checked). The conclusion is IsFunctorEquivalence on the full ihom for all E in max u v with v independent. The gluing keeps non-invertible transformations; the pullback test comparison is pinned and true; target, coherent-target and span naturality (strict presentations, invariance under objectwise equivalences) are true and pinned; colimit clauses have no shape restriction. Edge cases (empty K/A, terminal or non-groupoidal E, overlap loops, v=0) are covered. Gates: no hollow defs, one sorry (main theorem, 8-step proof docstring), source/blueprint docstrings, all 27 declarations listed, lean.statement verbatim, node changed only in lean, dependency nodes identical. nt_compile.py run twice: exit 0, no errors or warnings, 3.6 s. Non-blocking: functorPushoutSpacePath duplicates simplicialHomotopyPullback from a non-dependency lemma module (H2 forbids importing it); the report's HTT numbers were replaced by 'the project server' (cosmetic); cartesian_closed is nearly tautological but adequate."
  }
 }
