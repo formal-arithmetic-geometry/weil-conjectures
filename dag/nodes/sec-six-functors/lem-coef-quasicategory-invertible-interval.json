@@ -28,9 +28,97 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every simplex of $J$ is a word of vertices $(a_0,\\ldots,a_n)$ with $a_i\\in\\{0,1\\}$; a face deletes an entry and a degeneracy repeats one. The edges $u:0\\to1$ and $v:1\\to0$ have triangles $(0,1,0)$ and $(1,0,1)$ with degenerate long edges. A simplicial map $J\\to S$ therefore takes each edge of $J$ to an equivalence edge whenever $S$ is a quasicategory, directly by the inverse-triangle definition in [def-cbc-enhanced-diagrams-cones]. In particular, for a map to $D$ with the specified endpoints, the defining triangle relations in $hD$ give $[v][u]=1_{d_0}$ and $[u][v]=1_{d_1}$. Thus such a map implies the required isomorphism of vertices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent-written nerve-word calculation; compare Section 1.6 and Corollary 1.6.8."
+   }
+  },
+  {
+   "text": "Conversely, let $\\alpha:d_0\\to d_1$ be an isomorphism in $hD$. The edge-representative clause of [lem-coef-homotopy-category-triangle-calculus] gives edges $f:d_0\\to d_1$ and $g:d_1\\to d_0$ representing $\\alpha$ and $\\alpha^{-1}$. Its composition-equation clause applied to $[g][f]=[s_0d_0]$ and $[f][g]=[s_0d_1]$ gives actual triangles with spines $(f,g)$ and $(g,f)$ and degenerate long edges. Hence $f$ is an equivalence edge in the precise inverse-triangle sense of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-homotopy-category-triangle-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 1.6.6 and Corollary 1.6.8, printed pp. 24-25; passage from an ordinary inverse to inverse triangles."
+   }
+  },
+  {
+   "text": "Here is the explicit horn filtration used twice below. A nondegenerate simplex of $J$ is exactly an alternating word. Fix $\\varepsilon\\in\\{0,1\\}$ and let $w_n=(\\varepsilon,1-\\varepsilon,\\varepsilon,\\ldots)$ be the alternating $n$-simplex starting at $\\varepsilon$. Start with $J_0=\\{\\varepsilon\\}$ and, for $n\\geq1$, adjoin $w_n$ and its missing face $d_0w_n$; denote the generated simplicial subset by $J_n$. All faces $d_iw_n$ for $i>0$ are already in $J_{n-1}$: the last is $w_{n-1}$, and the interior faces have adjacent equal entries and are degeneracies of shorter alternating words. Every proper face of $d_0w_n$ is also already there, by the same deletion calculation. The only new nondegenerate simplices are $w_n$ and $d_0w_n$, so $J_{n-1}\\to J_n$ is exactly the attachment along $\\Lambda_0^n\\hookrightarrow\\Delta^n$. For $n=1$ this attaches the other vertex and the forward edge. Both alternating words in every dimension eventually occur, so $\\bigcup_nJ_n=J$. With $\\varepsilon=0$, $J_1$ is the forward $\\Delta^1\\subseteq J$, and starting the same filtration at $n=2$ gives $\\Delta^1\\hookrightarrow J$. Therefore a Kan fibration lifts both endpoint inclusions and $\\Delta^1\\hookrightarrow J$: choose its horn lift at each stage and take the compatible degreewise union. This is a direct application of horn lifting, including the one-dimensional horn, rather than an appeal to a model structure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent-written alternating-word filtration of the walking-isomorphism nerve; the horn condition is the Kan condition used in Section 3.5."
+   }
+  },
+  {
+   "text": "The terminal map $D\\to\\Delta^0$ is an isofibration: inner horns fill by the quasicategory hypothesis, and the only equivalence of the point lifts at any vertex to its degenerate identity edge. The core theorem [lem-coef-infinity-core-kan-fibration] makes $D^\\simeq\\to\\Delta^0$ a Kan fibration, so $D^\\simeq$ is Kan. The edge $f$ from step 2 factors through $D^\\simeq$, since it is an equivalence. Apply the $\\Delta^1\\hookrightarrow J$ filtration of step 3 to extend $f$ to $J\\to D^\\simeq\\hookrightarrow D$. The endpoints stay $d_0,d_1$. This proves the reverse implication without any use of Joyal-model fibrancy.",
+   "uses": [
+    "lem-coef-infinity-core-kan-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 3.5.3, printed p. 107, with the explicit interval horn filtration of step 3."
+   }
+  },
+  {
+   "text": "Fix $m\\geq0$ and a lifting problem for endpoint evaluation with boundary data $a:\\partial\\Delta^m\\to\\operatorname{Fun}(J,C)$ and $b:\\Delta^m\\to C$ satisfying $e_\\varepsilon^*a=b|_{\\partial\\Delta^m}$. Set $K=\\partial\\Delta^m$, $L=\\Delta^m$. Transposing $a$ gives $\\widetilde a:J\\to\\operatorname{Fun}(K,C)$, whose value at $\\varepsilon$ is $b|_K$. The terminal map $C\\to\\Delta^0$ is an isofibration: inner horns fill by the quasicategory condition, and the unique equivalence of $\\Delta^0$ lifts at each vertex to the degenerate identity edge. Since $K\\hookrightarrow L$ is degreewise injective, [lem-coef-infinity-isofibration-exponentiation] applied to this terminal map makes the restriction $r:\\operatorname{Fun}(L,C)\\to\\operatorname{Fun}(K,C)$ an isofibration between quasicategories. The core theorem [lem-coef-infinity-core-kan-fibration] makes $q=r^\\simeq$ a Kan fibration. Step 1, applied to $\\widetilde a$, shows that every edge of $J$ is carried to an equivalence in $\\operatorname{Fun}(K,C)$; hence every simplex of $\\widetilde a$ belongs to its core. The simplex $b$ is a vertex of $\\operatorname{Fun}(L,C)$, and every vertex belongs to its core. Thus these data form the genuine lifting square $\\{\\varepsilon\\}\\to\\operatorname{Fun}(L,C)^\\simeq$ over $J\\to\\operatorname{Fun}(K,C)^\\simeq$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-core-kan-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 3.5.11 and Corollaries 3.5.12-3.5.13, printed pp. 110-112; restriction to cores and transposition of the lifting problem."
+   }
+  },
+  {
+   "text": "Lift the square of step 5 along $q$ using the endpoint filtration of step 3. This produces $\\widetilde c:J\\to\\operatorname{Fun}(L,C)^\\simeq$ restricting to $b$ at $\\varepsilon$ and mapping under $q$ to $\\widetilde a$. Forget its core inclusion and transpose to $c:L\\to\\operatorname{Fun}(J,C)$. The two triangle equalities of the lifting square say exactly $c|_K=a$ and $e_\\varepsilon^*c=b$. For $m=0$, $K=\\varnothing$, its functor category is the one-point simplicial set, and the same construction gives a preimage of every vertex $b$; there is no dimension-zero nonemptiness assumption. For $m\\geq1$ it gives all boundary fillers. This is precisely the definition of a trivial Kan fibration in [def-weil-pbc-trivial-kan-fibration], so both endpoint evaluations have the required property.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Direct transposed lifting proof of the specialization of Corollary 3.5.13 to the walking-isomorphism nerve; dimension zero included."
+   }
+  },
+  {
+   "text": "All constructions take place in the input universe. The word nerve has finite degree sets, the filtration is countable, and its extensions and degreewise unions involve only simplicial sets of that universe. The core and restriction theorems apply there to the small $K,L$ just used. If $D$ is empty there are no pairs of vertices to check. If $C$ is empty, $\\operatorname{Fun}(J,C)$ is empty because $J\\times\\Delta^m$ has vertices for every $m$; evaluation is the identity of the empty simplicial set, which satisfies all boundary lifting conditions vacuously. Thus neither assertion drops the empty case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent-written size and empty-input verification of the preceding constructions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-homotopy-category-triangle-calculus",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "def-weil-pbc-trivial-kan-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Online, not archived: Cisinski Section 1.6 and Section 3.5. The proof specializes the model-independent core/restriction route by an explicit alternating-word horn filtration. No Joyal model-structure, rigidification or interval-extension clause is assumed."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -101,10 +189,31 @@
    "results": "{\"t\": \"2026-10-16T19:41:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"coherentIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.coherentIso\", \"SSet.coherentIso.hom\", \"SSet.coherentIso.inv\", \"SSet.coherentIso.invStructHom\", \"SSet.coherentIso.homInvId\", \"SSet.coherentIso.invHomId\", \"SSet.coherentIso.invStructHom_inv\", \"SSet.coherentIso.x₀\"], \"digest\": \"7a23bc43fb23b080\"}",
    "date": "2026-10-17",
    "verdict": "no match: CoherentIso.lean:143-199 defines the walking-isomorphism nerve and extracts inverse data from a map out of it. It provides neither extension from an arbitrary equivalence edge nor endpoint evaluation as a trivial Kan fibration. The Quillen and nerve declarations returned by LeanFinder likewise do not state either assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial map from the nerve of the walking isomorphism into a quasicategory is a coherent isomorphism, and endpoint evaluation lifts boundaries",
+   "results": "{\"t\": \"2026-10-16T20:09:27Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial map from the nerve of the walking isomorphism into a quasicategory is a coherent isomorphism, and endpoint evaluation lifts boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.nerve.homEquiv_symm_apply\", \"SSet.stdSimplex.isoNerve_inv_app_apply\", \"CategoryTheory.nerve.homEquiv_edgeMk\", \"CategoryTheory.nerve.homEquiv_apply\"], \"digest\": \"66be371aa2e82155\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CoherentIso.lean:143-199, especially invStructOfEqMapHom:190, which gives only the forward inverse-triangle implication. No extension over coherentIso or endpoint evaluation boundary lifting appears. The returned nerve and strict-Segal declarations do not state these assertions. TwoTruncated.lean supplies edge quotients, not the comparison needed for the specified hD presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherentIso\"",
+   "results": "{\"t\": \"2026-10-16T20:09:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"coherentIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.coherentIso\", \"SSet.coherentIso.hom\", \"SSet.coherentIso.inv\", \"SSet.coherentIso.invStructHom\", \"SSet.coherentIso.homInvId\", \"SSet.coherentIso.invHomId\", \"SSet.coherentIso.invStructHom_inv\", \"SSet.coherentIso.x₀\"], \"digest\": \"7a23bc43fb23b080\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CoherentIso.lean:143-199, especially invStructOfEqMapHom:190, which gives only the forward inverse-triangle implication. No extension over coherentIso or endpoint evaluation boundary lifting appears. The returned nerve and strict-Segal declarations do not state these assertions. TwoTruncated.lean supplies edge quotients, not the comparison needed for the specified hD presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "coherentIso|endpoint.*(trivial|fibration)|isIso.*homMk",
+   "results": "{\"t\": \"2026-10-16T20:09:22Z\", \"tool\": \"grep\", \"query\": \"coherentIso|endpoint.*(trivial|fibration)|isIso.*homMk\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\"], \"digest\": \"cabe5ca4a86c2bd6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CoherentIso.lean:143-199, especially invStructOfEqMapHom:190, which gives only the forward inverse-triangle implication. No extension over coherentIso or endpoint evaluation boundary lifting appears. The returned nerve and strict-Segal declarations do not state these assertions. TwoTruncated.lean supplies edge quotients, not the comparison needed for the specified hD presentation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-joyal-model-structure",
@@ -112,5 +221,21 @@
   "group": "Q65"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-quasicategory-invertible-interval",
+  "worker": "stage1",
+  "summary": "Kept the complete statement unchanged. Added only generic homotopy-category edge/triangle calculus, after checking the Mathlib quotient/presentation comparison TODO. Proved both interval conclusions using inverse triangles, an explicit alternating-word horn filtration, and the existing isofibration-exponentiation and core-Kan statements. The transposed core lifting argument includes boundary dimension zero and empty inputs; no dependency cycle or off-unit theorem tool use.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, finite mapping-complex adjunction before R lim; realizes the Joyal-model supporting interval input through the historical ancestry recorded in blueprint.from, without changing the six-functor coefficient route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-144216eb9",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-144216eb9 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-homotopy-category-triangle-calculus and every cited statement in full: def-cbc-enhanced-diagrams-cones, def-weil-pbc-trivial-kan-fibration, lem-coef-infinity-core-kan-fibration and lem-coef-infinity-isofibration-exponentiation. Compared with the side-DAG base, the item's statement, stmt_deps, source and blueprint fields are unchanged. Step 1: the triangles (0,1,0) and (1,0,1) have degenerate long edges and are exactly the inverse-triangle witnesses for an equivalence. Step 2: the triangle criterion of the new node, applied with h equal to the degenerate edges s0 d0 and s0 d1, gives an equivalence edge. Step 3: I recomputed the alternating-word filtration. d_0 w_n is the only new face, the preimage of J_{n-1} under w_n is Lambda^n_0, the n=1 case is the outer horn Lambda^1_0, and for epsilon=0 the filtration starts at the forward Delta^1. Step 4: D to the point is an isofibration in the core node's sense, so the core of D is Kan, and the step-3 filtration extends f to a map J to D with the right endpoints. Step 5: the 'in particular' clause of isofibration-exponentiation makes restriction an isofibration, and the core node then makes its core map q a Kan fibration. The transposition is correct and the transposed boundary data lands in the core by step 1. Step 6 matches the trivial Kan fibration definition exactly, including m=0 through Fun(empty,C)=point. Step 7 handles the empty and universe cases correctly. Both theorems used are in the item's own unit, so tool_uses is empty. The cited nodes' dependency closures do not contain the item, so there is no cycle. The new node's statement is true; I tested it on ordinary nerves, Kan complexes, empty D and degenerate edges. It is statement-only, self-contained and strictly smaller than the item (not D1), with LeanSearch, LeanFinder, Loogle and grep searches recorded. It is not a duplicate: lem-coef-infinity-mapping-composition uses a different hD (components of mapping spaces) and states only the forward triangle direction, not the converse criterion. The Cisinski source is not archived locally, so I could not read it at the cited places; the proof is correctly marked agent-written with a WANTED line, and I checked every step directly instead. No fixes were made."
+ }
 }

@@ -29,9 +29,65 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $M=\\operatorname{Map}_E(x,y)$ and $N=\\operatorname{Map}_B(p(x),p(y))$. Define $q:M\\to N$ in degree $n$ by $q_n(\\sigma)=p\\circ\\sigma$. The whole initial face of $p\\sigma$ is constant at $p(x)$ and its last vertex is $p(y)$, so this is defined. For each monotone $\\alpha:[m]\\to[n]$, let $\\alpha^+:[m+1]\\to[n+1]$ extend $\\alpha$ by sending the new last vertex to the new last vertex. Then $p(\\sigma\\alpha^+)=(p\\sigma)\\alpha^+$. Thus $q$ is precisely the induced simplicial map of the statement, with the operators of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 2.4.4.1, printed p.130: the map on right mapping spaces; explicit postcomposition and operator calculation."
+   }
+  },
+  {
+   "text": "We prove that $q$ is a right fibration, meaning that it lifts $\\Lambda_i^n\\hookrightarrow\\Delta^n$ for $n\\geq1$ and $0<i\\leq n$. Fix such a square with upper map $a:\\Lambda_i^n\\to M$ and bottom simplex $\\beta:\\Delta^n\\to N$. Regard $\\beta$ as a simplex $\\bar\\beta:\\Delta^{n+1}\\to B$ with initial face constant at $p(x)$ and last vertex $p(y)$. For every $j\\neq i$, $0\\leq j\\leq n$, the face of $a$ opposite $j$ is a map $\\Delta^n\\to E$ with initial face constant at $x$ and last vertex $y$; prescribe it on the face $d_j\\Delta^n$ of $\\Delta^{n+1}$. Prescribe on the remaining face $d_{n+1}\\Delta^n$ the constant simplex at $x$. The prescribed coned faces agree on intersections because $a$ is simplicial, and their intersections with $d_{n+1}\\Delta^n$ are constant at $x$ by the mapping-space definition. They are exactly the faces of $\\Lambda_i^{n+1}$. Their composites with $p$ agree with $\\bar\\beta$ by commutativity of the original square. Since $0<i<n+1$, [def-coef-infinity-fibrations] supplies an inner-horn lift $\\sigma:\\Delta^{n+1}\\to E$ over $\\bar\\beta$. Its initial face remains constant at $x$ and its last vertex remains $y$, so $\\sigma$ is an $n$-simplex of $M$ giving the required lift of the original square. This is one application of the assumed inner-horn property after identifying its faces, using [def-cbc-enhanced-diagrams-cones]. In the smallest case $n=1,i=1$, the two prescribed faces are the initial constant edge and the given edge ending at $y$, and the horn is $\\Lambda_1^2$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 2.4.4.1, first two proof sentences; explicit singleton-slice face calculation replacing the invocation of Proposition 2.1.2.1."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-slice-right-fibration] with $\\mathcal C=B$, $K=\\Delta^0$, target vertex $t=p(y)$ and fiber vertex $p(x)$. Its last clause identifies that degreewise slice fiber with the same right-pinched simplicial set $N$ and says it is a Kan complex. The only hypothesis here is that $B$ is a quasicategory, which is assumed; no vertex of $N$, hence no arrow $p(x)\\to p(y)$, is required.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L0",
+    "place": "Proposition 4.6.5.5 and Construction 4.6.5.1 (01KX); the Kan-mapping-space input of HTT Lemma 2.4.4.1."
+   }
+  },
+  {
+   "text": "Use the first assertion of [lem-cbc-right-fibration-space-fiber] on $q:M\\to N$. Step 2 gives exactly its right-horn lifting range $n\\geq1$, $0<i\\leq n$, and Step 3 gives its Kan-base hypothesis. All these simplicial sets lie in the fixed sufficiently large universe of [def-cbc-enhanced-diagrams-cones]. The cited assertion supplies the missing $i=0$ horns as well, so $q$ lifts every positive-dimensional horn. This is the Kan-fibration conclusion in the statement. In particular the proof does not assume that an arbitrary map between Kan complexes is a Kan fibration.",
+   "uses": [
+    "lem-cbc-right-fibration-space-fiber",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NV",
+    "place": "Corollary 4.4.3.8, implication (3) to (1); equivalently the right-handed version of HTT Lemma 2.1.3.3, the last sentence of the proof of Lemma 2.4.4.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-cbc-right-fibration-space-fiber"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma 2.4.4.1, printed p.130 (PDF page 148): expand its relative-slice/right-fibration argument face by face and reuse existing Kan-mapping and right-fibration-over-Kan nodes. HTT is not archived under literature/; see report WANTED. Kerodon 01L0 and 01NV were also read online."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +144,59 @@
    "results": "{\"t\": \"2026-10-16T19:40:03Z\", \"tool\": \"grep\", \"query\": \"marked|coanodyne|cocartesian\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reading search. Returned ordinary CategoryTheory cocartesian hom-set facts, unmarked simplicial sets or path objects, or StrictSegal statements; none states this marked/quasicategorical assertion. Source grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inner fibration between quasicategories induces a Kan fibration on right-pinched mapping spaces",
+   "results": "8 hits: SSet.modelCategoryQuillen.J, instCategoryWithFibrations, fibrations_eq, instHasLiftingPropertyιHornHAddNatOfNatOfFibration, instCategoryWithCofibrations, HomotopicalAlgebra.PathObject.instFibrationP₀, SSet.instQuasicategoryOfKanComplex, SSet.modelCategoryQuillen.fibration_iff.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-100 and Basic.lean:33-65, and SimplicialSet/CategoryWithFibrations.lean:38-103. Returned declarations define inner fibrations, all-horn fibrations and Kan quasicategories; none asserts the induced fixed-endpoint right-pinched mapping map is a Kan fibration. RightHomotopyRel and StrictSegal Kan-extension hits have different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed endpoint right Hom simplicial sets of an inner fibration form a right fibration over a Kan complex",
+   "results": "8 hits: SSet.modelCategoryQuillen.J, SSet.StrictSegal.isPointwiseRightKanExtension, SSet.modelCategoryQuillen.instCategoryWithFibrations, SSet.modelCategoryQuillen.I, SSet.StrictSegal.isRightKanExtension, SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration, SSet.StrictSegal.isPointwiseRightKanExtensionAt, SSet.Truncated.rightExtensionInclusion.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-100 and Basic.lean:33-65, and SimplicialSet/CategoryWithFibrations.lean:38-103. Returned declarations define inner fibrations, all-horn fibrations and Kan quasicategories; none asserts the induced fixed-endpoint right-pinched mapping map is a Kan fibration. RightHomotopyRel and StrictSegal Kan-extension hits have different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.InnerFibration\", \"SSet.KanComplex\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-100 and Basic.lean:33-65, and SimplicialSet/CategoryWithFibrations.lean:38-103. Returned declarations define inner fibrations, all-horn fibrations and Kan quasicategories; none asserts the induced fixed-endpoint right-pinched mapping map is a Kan fibration. RightHomotopyRel and StrictSegal Kan-extension hits have different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "innerFibration|mappingSpace|right.?pinch",
+   "results": "AlgebraicTopology/Quasicategory: 5 hits in Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:64,68,70,71,73, defining innerFibrations, InnerFibration and mem_innerFibrations; no mapping-space hit.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-100 and Basic.lean:33-65, and SimplicialSet/CategoryWithFibrations.lean:38-103. Returned declarations define inner fibrations, all-horn fibrations and Kan quasicategories; none asserts the induced fixed-endpoint right-pinched mapping map is a Kan fibration. RightHomotopyRel and StrictSegal Kan-extension hits have different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An inner fibration of infinity categories induces Kan fibrations between right mapping spaces",
+   "results": "8 hits: HomotopicalAlgebra.fibrations, SSet.modelCategoryQuillen.fibration_iff, instCategoryWithFibrations, HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations, SSet.modelCategoryQuillen.fibrations_eq, instHasLiftingPropertyιHornHAddNatOfNatOfFibration, HomotopicalAlgebra.Fibration, HomotopicalAlgebra.cofibrations_rlp.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-100 and Basic.lean:33-65, and SimplicialSet/CategoryWithFibrations.lean:38-103. Returned declarations define inner fibrations, all-horn fibrations and Kan quasicategories; none asserts the induced fixed-endpoint right-pinched mapping map is a Kan fibration. RightHomotopyRel and StrictSegal Kan-extension hits have different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "HomR|[Mm]apping[Ss]pace|[Pp]inched",
+   "results": "AlgebraicTopology: 23 hits, all HomRel/RightHomotopyRel/LeftHomotopyRel and simplex-generator homRel declarations, including RightHomotopy.lean:198 and LeftHomotopy.lean:195. No right-pinched mapping-space declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-100 and Basic.lean:33-65, and SimplicialSet/CategoryWithFibrations.lean:38-103. Returned declarations define inner fibrations, all-horn fibrations and Kan quasicategories; none asserts the induced fixed-endpoint right-pinched mapping map is a Kan fibration. RightHomotopyRel and StrictSegal Kan-extension hits have different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "InnerFibration, Quasicategory, mapping space, Kan fibration",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'InnerFibration'",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected this query because InnerFibration is unqualified; this is not evidence of absence. Retried with the qualified quoted-name query recorded above, which completed with zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-pointwise-cocartesian-transport",
@@ -99,5 +204,29 @@
   "group": "Q22"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-inner-mapping-fiber",
+  "worker": "stage1",
+  "summary": "Kept the statement and all maintainer fields unchanged. No project attachment or Mathlib match was found. Wrote the induced simplicial map and the nonzero-index horn lift explicitly, then reused the existing slice mapping-space Kan clause and the right-fibration-over-Kan theorem for the remaining outer horn. No new nodes. Read HTT Lemma 2.4.4.1 and Kerodon 01NV; verified each cited statement and all small cases.",
+  "blueprint": "Realizes the inherited ancestry at prop-coef-integral-exceptional-adjoint, proof paragraph 2: coherent finite-coefficient mapping-complex adjunction before derived inverse limit, via pointwise cocartesian transport and its mapping-space fiber formula. Steps 1-2 give the relative mapping-space right fibration; Steps 3-4 turn it into a Kan fibration, as needed by transport Step 4. No change of coefficient categories or target morphisms.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Generic simplicial theorem: a right fibration over a Kan complex lifts the remaining zero-index horns. The same-unit slice and mapping-space nodes give the Kan base, but none states this implication. Only its first assertion is used, not its strict/homotopy-fiber comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-right-fibration-space-fiber"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-c8945f95f",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-c8945f95f (reviewer sub-agent of L); spot-checked: I read all of it: the item with its 4 steps, the full statements of the 4 cited nodes (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, lem-coef-infinity-slice-right-fibration, lem-cbc-right-fibration-space-fiber), the citer lem-coef-infinity-pointwise-cocartesian-transport, the unit record and the main-20261015 proof of prop-coef-integral-exceptional-adjoint. The statement is HTT Lemma 2.4.4.1 with exactly its hypotheses (inner fibration of quasicategories, two vertices), and the right-pinched mapping space matches HTT's Hom^R. HTT is not archived in literature/, and the report records it as WANTED. Step 1: the postcomposition map is simplicial. Step 2: checked face by face; the faces d_j (j<=n, j!=i) plus the constant face d_{n+1} form exactly the horn Lambda^{n+1}_i, which is inner because 0<i<=n<n+1. The pieces agree where they meet: d_j and d_{n+1} share the initial face, which is constant at x. The filler keeps the last vertex y. Checked n=1,i=1 (Lambda^2_1) and i=n. Step 3 uses the last clause of the slice lemma with K=Delta^0 (the fibre is exactly Map_B(px,py) and is Kan). Step 4 uses the first assertion of the right-fibration-over-Kan lemma, and its hypotheses are exactly Steps 2 and 3. Its 'small' condition is ordinary universe bookkeeping and adds no hypothesis. Edge cases checked: empty fibres, p=id, B a point, nerves of ordinary categories, x=y. Searches by rg and blueprint grep found no duplicate; near misses checked and found different. No cycle: the closures of the cited nodes do not contain the item. No new nodes, so no restated clause. I accept the declared tool use of lem-cbc-right-fibration-space-fiber (sk-prop-sf-cbc): it is a generic black box, no same-unit node gives it, and same-unit nodes already use it as a tool. No target, coefficient category or base-change morphism is involved, and no SGA source is used. The Mathlib searches cover all three kinds, and Mathlib has only the definitions. No fixes."
+ }
 }
