@@ -28,6 +28,6 @@
 | `Sheaf.Paper.RingedTopoiTensorComparisonConstruction` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing` | 11 | 1 | proof |
 | `Sheaf.Algebra.Homology.RingedToposAdaptedFlatResolution` | 12 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.GrothendieckEtaleRelativeSectionColimit` | 15 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.GrothendieckAffineGlobalSectionColimit` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
