@@ -17,10 +17,100 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "First prove the final-edge converse without using any forward implication. Suppose $u:X\\to Y$ has the stated $\\Lambda_n^n$ extension property. The $\\Lambda_2^2$ with vertices $(Y,X,Y)$ and edges $02=\\mathrm{id}_Y$, $12=u$ fills to a triangle $\\tau$ with $01=v:Y\\to X$ and $uv\\simeq\\mathrm{id}_Y$. On vertices $(X,Y,X,Y)$ prescribe faces $d_0=\\tau$, $d_1=s_0u$ and $d_2=s_1u$. Their common edges agree: the edges $13$ and $03$ are $\\mathrm{id}_Y$ and $u$, respectively, and $23=u$. They therefore define a map on $\\Lambda_3^3$, with final edge $u$. Its filler has missing face $d_3$ with edges $(u,v,\\mathrm{id}_X)$, giving $vu\\simeq\\mathrm{id}_X$. Thus the same $v$ supplies both inverse triangles required by [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/019F",
+    "place": "Proof of (3) implies (1), with the three tetrahedral faces written explicitly; face gluing is degreewise gluing of the horn union."
+   }
+  },
+  {
+   "text": "Use the join and the weakly saturated class of inner anodyne maps defined in [lem-coef-infinity-pushout-join-saturation]. A quasicategory $Q$ extends maps across every inner anodyne inclusion. Indeed it extends across the generating inner horns by [def-cbc-enhanced-diagrams-cones]. Extension is preserved by pushout: glue the old map and the extension on the attached piece. It is preserved by transfinite composition: choose an extension at each successor and use the degreewise colimit at each limit ordinal. For an arrow retract $i:A\\to B$ of $j:A^\\prime\\to B^\\prime$, write its section as $(s_A,s_B)$ and retraction as $(r_A,r_B)$, so $r_As_A=\\mathrm{id}_A$ and $s_Bi=js_A$. Given $f:A\\to Q$, extend $fr_A$ across $j$ to $g:B^\\prime\\to Q$; then $gs_Bi=gjs_A=fr_As_A=f$. Thus $gs_B$ is the extension across $i$. Isomorphisms are immediate. These arguments prove the required closure directly, without a model structure or an outer-horn theorem.",
+   "uses": [
+    "lem-coef-infinity-pushout-join-saturation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Meaning of inner anodyneness in the proof of Proposition 4.3.6.4; elementary extension-closure argument."
+   }
+  },
+  {
+   "text": "Fix a left horn $k:\\Lambda_i^m\\hookrightarrow\\Delta^m$, where $m\\geq1$ and $0\\leq i<m$. For the boundary inclusion $a:\\partial\\Delta^p\\hookrightarrow\\Delta^p$, $p\\geq0$, the pushout-join $\\theta_{a,k}$ of [lem-coef-infinity-pushout-join-saturation] is exactly $\\Lambda_{p+1+i}^{p+m+1}\\hookrightarrow\\Delta^{p+m+1}$. To check this, order the $p+1$ vertices of the first factor before those of the second. The first summand of the attaching union supplies all faces omitting a first-factor vertex; the second supplies all faces omitting a second-factor vertex except vertex $p+1+i$. This accounts for every included simplex as well, since each is characterized by its omitted vertices. The omitted index is inner: $0<p+1+i<p+m+1$. For $p=0$ the first boundary is empty and the same face calculation holds. For this fixed $k$, the cited saturation lemma says that the class of monomorphisms $a$ making $\\theta_{a,k}$ inner anodyne is weakly saturated. The boundary-cell decomposition of [lem-coef-infinity-monomorphism-boundary-cells] consequently puts every monomorphism $a:A\\hookrightarrow B$ in this class: well-order each set of attached cells, attach them successively by pushouts, and take the union over dimensions. Hence $(A\\star\\Delta^m)\\cup_{A\\star\\Lambda_i^m}(B\\star\\Lambda_i^m)\\hookrightarrow B\\star\\Delta^m$ is inner anodyne for every such $a$ and $k$.",
+   "uses": [
+    "lem-coef-infinity-pushout-join-saturation",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, left-horn version of the generating calculation and weak-saturation reduction; boundary generation is 0077."
+   }
+  },
+  {
+   "text": "For a small simplicial set $K$ and $f:K\\to Q$, define the coslice $Q_{f/}$ by $(Q_{f/})_r=\\{h:K\\star\\Delta^r\\to Q\\mid h|_K=f\\}$, with operators precomposition on the second join factor. For a nonempty simplicial set $T$, a map $T\\to Q_{f/}$ is equivalently a map $K\\star T\\to Q$ fixed as $f$ on $K$: its maps $K\\star\\Delta^r\\to Q$ for each simplex of $T$ agree on all faces and degeneracies and glue degree by degree by the displayed join formula; restriction to each simplex gives the inverse construction. Let $K_0\\subseteq K$ and $f_0=f|_{K_0}$. A lifting square for restriction $\\rho:Q_{f/}\\to Q_{f_0/}$ against $\\Lambda_i^m\\subseteq\\Delta^m$ specifies precisely a map on $(K_0\\star\\Delta^m)\\cup(K\\star\\Lambda_i^m)$ restricting to $f$ on $K$. Steps 2 and 3 extend this map to $K\\star\\Delta^m$ when $0\\leq i<m$, and the extension still restricts to $f$. Thus $\\rho$ is a left fibration, meaning it lifts these horns over the prescribed base simplex. Taking $K_0=\\varnothing$ gives a left fibration $Q_{f/}\\to Q$, since $\\varnothing\\star\\Delta^r=\\Delta^r$. Each coslice is a quasicategory: fill the image of an inner horn in $Q$, then lift that chosen filler along its projection. This proves the coslice facts needed below inside this proof, rather than citing the much larger cone-calculus theorem.",
+   "uses": [
+    "lem-coef-infinity-pushout-join-saturation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01BZ",
+    "place": "Proposition 4.3.6.8, absolute coslice restriction, proved here using its pushout-join lifting argument; projection is the empty-subset case (018F)."
+   }
+  },
+  {
+   "text": "Here are the two left-fibration consequences used below, with actual inverse triangles. Let $p:E\\to B$ lift the horns $\\Lambda_i^m$ with $0\\leq i<m$, and let $E,B$ be quasicategories. Suppose $a:x\\to y$ maps to an equivalence. Choose an inverse $b:p(y)\\to p(x)$. Lift its triangle $b\\,p(a)\\simeq\\mathrm{id}_{p(x)}$ using $\\Lambda_0^2$ with edges $01=a$, $02=\\mathrm{id}_x$, obtaining a triangle $\\tau=(a,c,\\mathrm{id}_x)$ with $p(c)=b$. Repeat with $c$ and an inverse triangle for $b$ to get $\\sigma=(c,e,\\mathrm{id}_y)$ for some $e:x\\to y$. To obtain the second inverse triangle for the SAME $c$, use three inner tetrahedral horns in $E$. On vertices $(x,y,x,y)$ prescribe $d_0=\\sigma$, $d_1=s_0e$, $d_3=\\tau$ and fill $\\Lambda_2^3$; its face $H=d_2$ has edges $(a,\\mathrm{id}_y,e)$. On $(x,y,y,y)$ prescribe $d_0$ constant at $y$, $d_2=s_1a$, $d_3=H$ and fill $\\Lambda_1^3$; its face $H'=d_1$ has edges $(e,\\mathrm{id}_y,a)$. On $(y,x,y,y)$ prescribe $d_0=H'$, $d_1$ constant at $y$, $d_3=\\sigma$ and fill $\\Lambda_2^3$; its face $d_2$ has edges $(c,a,\\mathrm{id}_y)$. In each horn the displayed triangles have identical edges on their pairwise overlaps. Together with $\\tau$, this proves that $a$ is an equivalence, so $p$ reflects equivalences. Separately, if $v:b_0\\to p(y)$ is an equivalence and $y\\in E$ is prescribed, lift an inverse $v^{-1}$ starting at $y$ using $\\Lambda_0^1=\\{0\\}$, obtaining $t:y\\to z$. Lift the inverse triangle $v v^{-1}\\simeq\\mathrm{id}_{p(y)}$ using $\\Lambda_0^2$ with edges $01=t$, $02=\\mathrm{id}_y$. Its edge $12:z\\to y$ lies exactly over $v$. This gives the needed lift with prescribed target, without claiming target lifts for arbitrary base edges.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/019K",
+    "place": "Proposition 4.4.2.11, two lifted left-inverse triangles. The three displayed inner tetrahedral horns expand the homotopy cancellation into actual inverse-triangle witnesses. Specified-target lifting is a left 1- and 2-horn calculation."
+   }
+  },
+  {
+   "text": "Now let $\\sigma_0:\\Lambda_n^n\\to Q$, $n\\geq2$, have equivalence final edge $u$. Put $K=\\Delta^{\\{0,\\ldots,n-2\\}}$, $K_0=\\partial K$, and $f=\\sigma_0|_K$. Here $\\partial\\Delta^0=\\varnothing$. In the ordered join $K\\star\\Delta^{\\{n-1,n\\}}=\\Delta^n$, the given horn is the union $(K\\star\\{n\\})\\cup(K_0\\star\\Delta^{\\{n-1,n\\}})$. Indeed its faces are all those omitting a vertex $j<n$: $j=n-1$ gives the first piece, and $j<n-1$ gives the second. The first restriction of $\\sigma_0$ defines an object $Y$ of $Q_{f/}$. The second defines an edge $\\bar v:\\bar X\\to\\rho(Y)$ in $Q_{f_0/}$, with image $u$ under the projection to $Q$. By step 4, both $\\rho:Q_{f/}\\to Q_{f_0/}$ and this projection are left fibrations between quasicategories. Step 5 makes $\\bar v$ an equivalence, then lifts it along $\\rho$ with target exactly $Y$. By the definition in step 4, the lifted edge is a map $K\\star\\Delta^1\\to Q$ agreeing with $\\sigma_0$ on both pieces of the displayed union. It is the required filler on $\\Delta^n$. For $n=2$, the union is the two edges $02$ and $12$, the base coslice is $Q$ itself, and the same construction applies.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pushout-join-saturation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01H0",
+    "place": "Proof of Proposition 4.4.2.13 specialized to Q -> point, with the horn union and prescribed-target lift expanded. The actual left-fibration and conservativity assertions were proved in steps 2-5."
+   }
+  },
+  {
+   "text": "Finally reverse the simplex orders. Explicitly the involution on the simplex category takes $\\alpha:[r]\\to[s]$ to $\\alpha^{\\mathrm{rev}}(j)=s-\\alpha(r-j)$; precomposition defines $Q^{\\mathrm{op}}$. On standard simplices this changes face $i$ to face $n-i$, and therefore identifies the opposite of $\\Lambda_0^n\\subseteq\\Delta^n$ with $\\Lambda_n^n\\subseteq\\Delta^n$. Inner indices remain inner, so $Q^{\\mathrm{op}}$ is a quasicategory. An inverse edge and its two inverse triangles become an inverse edge and the two reversed triangles, so equivalence is preserved and reflected. Apply the final-horn forward implication of step 6 in $Q^{\\mathrm{op}}$ and reverse again to fill every initial horn in $Q$ whose edge $01$ is an equivalence. Apply the final-horn converse of step 1 in $Q^{\\mathrm{op}}$ to obtain the initial-horn converse in $Q$. This supplies both orientations and both converses for all $n\\geq2$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/019F",
+    "place": "The proof says the initial-edge version is analogous; explicit order-reversal realizes that duality without any extra categorical theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-pushout-join-saturation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/019F",
+  "place": "Theorem 4.4.2.6 via Proposition 4.4.2.13 (01H0); the coslice lifting argument is expanded using 018J, 0077 and 01BZ. Reflection follows 019K with its inverse algebra expanded into three inner tetrahedral horns. Online sources read; archival copies WANTED in report.md."
+ },
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-enhanced-functor-cone-calculus",
@@ -70,6 +160,107 @@
    "results": "{\"t\": \"2026-10-16T13:06:49Z\", \"tool\": \"grep\", \"query\": \"outerHorn|outer.horn|equivalence.*horn|horn.*equivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: the primitive inner-horn filler at Quasicategory/Basic.lean:39-58 does not give outer-horn fillers along an equivalence or the converse criterion. Ordinary IsIso/lifting lemmas concern ordinary categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invertible edges in infinity categories are characterized by outer horn extension",
+   "results": "{\"t\": \"2026-10-16T16:57:49Z\", \"tool\": \"leansearch\", \"query\": \"Invertible edges in infinity categories are characterized by outer horn extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.horn.edge\", \"CategoryTheory.nerve.homEquiv_symm_apply\", \"CategoryTheory.Limits.Fork.ext_inv\", \"CategoryTheory.MorphismProperty.FunctorsInverting\", \"CategoryTheory.Join.mkNatIso_inv\", \"CategoryTheory.Limits.Cocones.extendId_inv_hom\", \"CategoryTheory.MorphismProperty.StableUnderInverse\"], \"digest\": \"907b5aa4b4a9e023\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected the returned hits. Primitive inner-horn fillers do not assert outer-horn lifting; Quillen fibrations lift all horns and do not assert coslice restriction. Ordinary overcategory and truncated homotopy-category declarations do not prove this statement. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-55, SimplicialSet/CategoryWithFibrations.lean:44-49,71-89, and ModelCategory/Over.lean:68-79."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence edge of a quasicategory allows filling every outer horn with that initial or final edge",
+   "results": "{\"t\": \"2026-10-16T16:58:00Z\", \"tool\": \"leanfinder\", \"query\": \"An equivalence edge of a quasicategory allows filling every outer horn with that initial or final edge\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.quasicategory_of_filler\", \"SSet.Truncated.Quasicategory₂.fill21\", \"SSet.Truncated.Quasicategory₂.fill31\", \"SSet.Truncated.Quasicategory₂.fill32\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\"], \"digest\": \"5076275e1a331432\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected the returned hits. Primitive inner-horn fillers do not assert outer-horn lifting; Quillen fibrations lift all horns and do not assert coslice restriction. Ordinary overcategory and truncated homotopy-category declarations do not prove this statement. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-55, SimplicialSet/CategoryWithFibrations.lean:44-49,71-89, and ModelCategory/Over.lean:68-79."
+  },
+  {
+   "tool": "grep",
+   "query": "coslice|[Ss]lice.*[Ff]ibration|[Ff]ibration.*[Ss]lice|leftFibration|LeftFibration",
+   "results": "{\"t\": \"2026-10-16T16:58:17Z\", \"tool\": \"grep\", \"query\": \"coslice|[Ss]lice.*[Ff]ibration|[Ff]ibration.*[Ss]lice|leftFibration|LeftFibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected the returned hits. Primitive inner-horn fillers do not assert outer-horn lifting; Quillen fibrations lift all horns and do not assert coslice restriction. Ordinary overcategory and truncated homotopy-category declarations do not prove this statement. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-55, SimplicialSet/CategoryWithFibrations.lean:44-49,71-89, and ModelCategory/Over.lean:68-79."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of coslice infinity categories along an inclusion of simplicial sets is a left fibration",
+   "results": "{\"t\": \"2026-10-16T16:58:17Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of coslice infinity categories along an inclusion of simplicial sets is a left fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.cofibrations_over_iff\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"SSet.modelCategoryQuillen.fibration_iff\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion_left\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\"], \"digest\": \"7e962c634ad57130\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected the returned hits. Primitive inner-horn fillers do not assert outer-horn lifting; Quillen fibrations lift all horns and do not assert coslice restriction. Ordinary overcategory and truncated homotopy-category declarations do not prove this statement. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-55, SimplicialSet/CategoryWithFibrations.lean:44-49,71-89, and ModelCategory/Over.lean:68-79."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"slice\"",
+   "results": "{\"t\": \"2026-10-16T16:58:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"slice\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected the returned hits. Primitive inner-horn fillers do not assert outer-horn lifting; Quillen fibrations lift all horns and do not assert coslice restriction. Ordinary overcategory and truncated homotopy-category declarations do not prove this statement. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-55, SimplicialSet/CategoryWithFibrations.lean:44-49,71-89, and ModelCategory/Over.lean:68-79."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simplicial subset A of B and a diagram f in a quasicategory Q, restriction of join coslices Q under f to Q under f on A is a left fibration",
+   "results": "{\"t\": \"2026-10-16T16:58:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial subset A of B and a diagram f in a quasicategory Q, restriction of join coslices Q under f to Q under f on A is a left fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory.hornFilling\", \"SSet.quasicategory_of_filler\"], \"digest\": \"7ca8f1a14c9c360a\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected the returned hits. Primitive inner-horn fillers do not assert outer-horn lifting; Quillen fibrations lift all horns and do not assert coslice restriction. Ordinary overcategory and truncated homotopy-category declarations do not prove this statement. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-55, SimplicialSet/CategoryWithFibrations.lean:44-49,71-89, and ModelCategory/Over.lean:68-79."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coslice restriction along a monomorphism for a quasi category has the left horn lifting property",
+   "results": "{\"t\": \"2026-10-16T16:58:47Z\", \"tool\": \"leanfinder\", \"query\": \"Coslice restriction along a monomorphism for a quasi category has the left horn lifting property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\"], \"digest\": \"b528621c9ccd353e\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected the returned hits. Primitive inner-horn fillers do not assert outer-horn lifting; Quillen fibrations lift all horns and do not assert coslice restriction. Ordinary overcategory and truncated homotopy-category declarations do not prove this statement. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-55, SimplicialSet/CategoryWithFibrations.lean:44-49,71-89, and ModelCategory/Over.lean:68-79."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism in the homotopy category of a simplicial quasicategory fills initial and terminal outer horns",
+   "results": "{\"t\": \"2026-10-16T16:58:49Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism in the homotopy category of a simplicial quasicategory fills initial and terminal outer horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_of_edge\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopicR\"], \"digest\": \"f9a92b01fee0ae1a\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: inspected the returned hits. Primitive inner-horn fillers do not assert outer-horn lifting; Quillen fibrations lift all horns and do not assert coslice restriction. Ordinary overcategory and truncated homotopy-category declarations do not prove this statement. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-55, SimplicialSet/CategoryWithFibrations.lean:44-49,71-89, and ModelCategory/Over.lean:68-79."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a simplicial quasicategory an invertible morphism has the right lifting property for terminal horns with fixed last edge",
+   "results": "{\"t\": \"2026-10-16T17:12:27Z\", \"tool\": \"leanfinder\", \"query\": \"In a simplicial quasicategory an invertible morphism has the right lifting property for terminal horns with fixed last edge\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Truncated.HomotopicR\", \"SSet.quasicategory_of_filler\", \"SSet.Truncated.Quasicategory₂\", \"SSet.Truncated.Quasicategory₂.fill21\"], \"digest\": \"59331a49986445dc\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read Quasicategory/Basic.lean:34-54 and TwoTruncated.lean:41-72. hornFilling and hornFilling' are inner-horn fillers; fill21 and the two tetrahedral properties do not state outer-horn fillers in arbitrary dimension. Quillen I/J are generating sets, not this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.Truncated.HomotopyCategory\"",
+   "results": "{\"t\": \"2026-10-16T17:12:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.Truncated.HomotopyCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.HomotopyCategory₂.homMk_id\", \"SSet.Truncated.HomotopyCategory₂.mk\", \"SSet.Truncated.HomotopyCategory₂.pt\", \"SSet.Truncated.HomotopyCategory₂.mk_surjective\", \"SSet.Truncated.HomotopyCategory₂.homMk\"], \"digest\": \"870e4dfb0e936a6c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read Quasicategory/TwoTruncated.lean:225-275. HomotopyCategory₂, homMk and its quotient relations define homotopy classes of edges; none states extension across outer horns in every dimension."
+  },
+  {
+   "tool": "grep",
+   "query": "horn.*(iso|invert)|([Ii]so|[Ii]nvert).*horn|[Ll]eft[Ff]ibration|[Cc]oslice",
+   "results": "{\"t\": \"2026-10-16T17:13:24Z\", \"tool\": \"grep\", \"query\": \"horn.*(iso|invert)|([Ii]so|[Ii]nvert).*horn|[Ll]eft[Ff]ibration|[Cc]oslice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Horn.lean\", \"Mathlib/CategoryTheory/Comma/Basic.lean\"], \"digest\": \"abf80f368db8a435\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read SimplicialSet/Horn.lean:145-150 and AnodyneExtensions/RelativeCellComplex.lean:398-410. IsIso here concerns a morphism in the simplex category and exclusion from a horn, not an equivalence edge of Q. HornColimits hits are subcomplex isomorphisms; Comma hits are ordinary-category coslices."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-equivalence-outer-horn-filling",
+  "worker": "stage1",
+  "summary": "Kept the statement exactly. Proved the converse with explicit 2- and 3-horns, derived coslice left fibrations from existing pushout-join saturation and boundary cells, constructed the final-horn filler through a prescribed-target equivalence lift, and reversed simplex orders for the initial version. No new nodes. Sources, source-repository declarations, all cited statements and the cycle-free tool closure were checked. The shared snapshot lacked this newly landed node, so its unchanged base was read from the isolated project on the Weil server. Second reading clarifies the arrow-retract extension maps and the coslice join-gluing bijection, checks all tetrahedral face overlaps independently, and records three further Mathlib searches. No statement change or new node.",
+  "blueprint": "Realizes the agent-added enhanced-category foundation of the opening compactification choice of thm-cbc-finite-level-proetale, via lem-cbc-enhanced-functor-cone-calculus. It leaves the unit route and all coefficient/base-change statements unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-infinity-pushout-join-saturation",
+    "why": "Generic combinatorial weak saturation of pushout-joins, used to prove coslice left-horn lifting; no node of sk-prop-sf-cbc gives this lower combinatorics. The larger anodyne-cocone theorem would create a dependency cycle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-infinity-pushout-join-saturation"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote review.md; no fixes were needed. The item matches Kerodon 019F (Thm 4.4.2.6, Joyal) clause by clause, read online since Kerodon is not archived: Q a quasicategory, both outer orientations, n>=2, converse for every such horn. Kerodon's 'isomorphism' is the item's equivalence edge with two witness triangles. Step 6 is the proof of 01H0 (Prop 4.4.2.13) with D a point; step 5's prescribed-target lift stands in for the isofibration input. Checked by hand: the Lambda^3_3 faces in step 1 agree on edges 23/13/03 and d3=(u,v,id_X). In step 3 the generator is Lambda^{p+m+1}_{p+1+i} with an inner index, including p=0 and m=1. The coslice lifting square in step 4 is exactly the cited pushout-join. All three tetrahedral horns in step 5 have matching overlaps and give (c,a,id_y). The target lift is correct. The horn union in step 6 is correct, including n=2. The face reversal i->n-i in step 7 is correct. Edge cases tested: Q=Delta^0, and N(0->1), where the non-invertible arrow fails the converse. No new nodes, no cycle (dependency closure has 6 nodes), no duplicate: lem-cbc-invertible-prism-extension only generalizes the forward Lambda_0 clause, and slice-right-fibration is the dual absolute statement. The parent cone-calculus node uses the item as stated. I accept tool_uses: lem-coef-infinity-pushout-join-saturation as a generic black-box tool from sk-prop-sf-biduality-general; boundary-cells is a Mathlib leaf. The unit route is unchanged, there is no SGA citation, and this is not a target node."
+ }
 }
