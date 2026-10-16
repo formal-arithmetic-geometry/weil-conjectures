@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-grothendieck-etale-local-epimorphism",
+ "kind": "statement",
+ "title": "Local lifting families detect zero maps with Grothendieck coefficients",
+ "statement": "Let X be a qcqs scheme and A a Grothendieck abelian category [def-sp-grothendieck-abelian, def-weil-pbc-etale-sheaves]. Let p:F→G be an epimorphism of A-valued small-etale sheaves, W a qcqs object of the small etale site, B,T objects of A, x:B→G(W), and g:B→T. Suppose that for every source map π:B′→B and every covering sieve R on W, if for every f:Z→W in R the map πx restricted to Z lifts through p(Z), then πg=0. Then g=0. No compatibility of the local lifts is required and no fixed source object is assumed projective.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 1, local lifting for the hypercover computation; Stacks Tags 00WL and 01H0",
+  "external": [
+   {
+    "document": "Stacks Project, Sites and Sheaves",
+    "place": "Tag 00WL, especially Lemmas 7.11.2 and 7.11.3"
+   },
+   {
+    "document": "Stacks Project, Hypercoverings",
+    "place": "Tag 01H0, local lifting step"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the qcqs etale basis via its sheaf equivalence, preserving epimorphisms. Let Q be the pointwise image of p. For each finite cover C=(W_i→W), let L_C⊆G(W) be the pullback of ∏Q(W_i) along restriction to ∏G(W_i). Their distinct subobjects form a small directed poset under cover refinement, by well-poweredness. The union L is a subsheaf of G: for a fixed finite basis cover W_i→W, its matching object is the kernel of the difference of the two restriction maps from ∏L(W_i) to the finite product of G on overlaps. By AB5 this is the filtered colimit of the kernels obtained by replacing L(W_i) by L_{C_i}(W_i), indexed by finite tuples of covers. Glue each such matching kernel in G and compose the covers C_i to get its factorization through L_C(W). The colimit universal property gives the inverse matching map. No arbitrary source is assumed to factor through a stage of a union. It contains the image of p, so p being epic forces L=G.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull this filtered union back along x. AB5 gives a filtered family B_C⊆B with union B. Pull back the finite product of image epimorphisms F(W_i)→Q(W_i) to obtain an epimorphism P_C→B_C. The composites P_C→B have lifts on the chosen covers and hence on their generated covering sieves.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The hypothesis kills g on each P_C. Cancel the epimorphism to B_C and use the union B_C=B to obtain g=0. Empty W is covered by the empty family, whose zero lifts test π=id_B; zero source and zero coefficients are immediate.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Agent-written categorical coefficient generalization of the local image and local primitive arguments in Stacks Tags 00WL and 01H0. Those sources themselves concern set-valued and abelian sheaves, respectively. Finite matching diagrams and AB5 provide the general-coefficient argument recorded here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an epimorphism of sheaves valued in a Grothendieck abelian category on a coherent site, morphisms with locally liftable restrictions form a jointly epimorphic family on each quasi compact object",
+   "results": "Returned: CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.Sheaf.epi_of_isLocallySurjective, CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.IsLocallySurjective, CategoryTheory.Sheaf.locallySurjective, CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify, CategoryTheory.GrothendieckTopology.W. These concern concrete coefficient categories, gluing, or general sheaf infrastructure; no match for this categorical statement.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical local surjectivity of epimorphisms of sheaves with general Grothendieck abelian coefficients on a quasi compact quasi separated etale object: locally liftable maps jointly detect zero maps",
+   "results": "Returned: CategoryTheory.Sheaf.isLocallySurjective_iff_epi', CategoryTheory.Sheaf.epi_of_isLocallySurjective, CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.isLocallySurjective_iff_epi, CategoryTheory.Sheaf.instEpiAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, Condensed.epi_iff_locallySurjective_on_compHaus, CategoryTheory.coherentTopology.isLocallySurjective_iff. These concern concrete coefficient categories, gluing, or general sheaf infrastructure; no match for this categorical statement.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "locally.*epi.*Grothendieck|Grothendieck.*locally.*surj|sheaf.*epi.*imageSubobject",
+   "results": "Returned: Mathlib/FieldTheory/AxGrothendieck.lean. No relevant result; the returned matches are unrelated to this categorical statement.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckHypercoverBottomColimit",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 1: finite hypercover computation, local exactness step",
+   "via": [
+    "lem-weil-pbc-grothendieck-hypercover-local-primitives",
+    "lem-weil-pbc-grothendieck-hypercover-bottom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalEpimorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckEtaleLocalEpimorphism.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.eq_zero_of_locally_liftable_maps",
+  "statement": "theorem eq_zero_of_locally_liftable_maps\n    {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G) [Epi p]\n    (W : X.Etale) [CompactSpace W.left] [QuasiSeparatedSpace W.left]\n    (B T : A) (x : B ⟶ G.obj.obj (op W)) (g : B ⟶ T)\n    (hkill : ∀ (B' : A) (π : B' ⟶ B) (R : Sieve W), R ∈ X.smallEtaleTopology W →\n      (∀ (Z : X.Etale) (f : Z ⟶ W), R f →\n        ∃ l : B' ⟶ F.obj.obj (op Z), l ≫ p.hom.app (op Z) = π ≫ x ≫ G.obj.map f.op) →\n      π ≫ g = 0) : g = 0",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ca2e2",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T062622-L-449034",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ca2e2",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T062622-L-449034",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, DAG nodes, change record, and report matched against the packet and published clone; all delivered modules and the direct importer compile successfully."
+ }
+}

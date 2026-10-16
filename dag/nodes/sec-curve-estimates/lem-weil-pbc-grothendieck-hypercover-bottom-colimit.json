@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "Use the already constructed section bicomplex and canonical comparison cocone. The resolution augmentation is a quasi-isomorphism by the proved injective-row theorem.",
+   "text": "Use the explicit injective-resolution section bicomplex and its canonical comparison cocone. Flip the total-complex convention with the signed totalFlipIso and check both bottom and refinement compatibility. Injective-row acyclicity makes every total comparison invertible.",
    "uses": [
     "lem-weil-pbc-grothendieck-hypercover-resolution",
     "lem-weil-pbc-grothendieck-injective-hypercover-row",
@@ -31,14 +31,19 @@
    "elementary": false
   },
   {
-   "text": "Filter the first-quadrant total complex by resolution degree. In total degree q, work only through q+1. Exactness of the resolution is local on the finitely many hypercover constituents. Refine their matching covers to obtain local lifting diagrams and carry out the finite descending staircase: subtract boundaries to remove positive resolution-degree components. This proves local surjectivity of the bottom comparison. Apply the same finite staircase to a primitive to prove local vanishing of its kernel. These are statements about categorical images, kernels, and finite sums in A, not an assumption that A has a projective generator. This is the categorical form of the finite correction argument in [lem-sc-hypercover-bottom-refinement-descent].",
+   "text": "Prove a finite descending staircase for arbitrary source objects in A. At each leading resolution degree apply detection by local primitives to the exact resolution differential pair. Subtract the total differential of the primitive; the highest component disappears and no higher component is created. An induction combines these detection statements, without choosing a uniform refinement. When only resolution degree zero remains, the evaluated initial resolution kernel lifts it uniquely to F.",
    "uses": [
-    "lem-sc-hypercover-bottom-refinement-descent"
+    "lem-weil-pbc-grothendieck-hypercover-local-primitives"
    ],
    "elementary": false
   },
   {
-   "text": "The cohomology diagram, rather than the raw complex diagram, is filtered after homotopy quotienting. Apply AB5 to the resulting image/kernel statements and conclude the canonical colimit mediator is both mono and epi, hence an isomorphism.",
+   "text": "Apply the staircase to cycles to show the supremum of canonical comparison images is top. Apply it to a bounding cochain to put every degree≥2 comparison kernel below the supremum of refinement-map kernels. Prove degree-one monicity directly: a degree-zero bounding cochain lifts through the initial kernel and bottom inclusion is monic in degree one.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the filtered homotopy cohomology diagram, exactness of the colimit functor sends the comparison-kernel natural transformation to zero, since all refinement kernels die in the colimit. The colimit of the constant target is the target by connectedness. Thus the colimit mediator is monic. Its image contains all comparison images, hence is top, so it is epic and therefore invertible.",
    "uses": [
     "lem-weil-pbc-grothendieck-hypercover-model"
    ],
@@ -49,13 +54,13 @@
   "lem-weil-pbc-grothendieck-hypercover-resolution",
   "lem-weil-pbc-grothendieck-injective-hypercover-row",
   "lem-weil-pbc-grothendieck-hypercover-comparison-cocone",
-  "lem-sc-hypercover-bottom-refinement-descent",
+  "lem-weil-pbc-grothendieck-hypercover-local-primitives",
   "lem-weil-pbc-grothendieck-hypercover-model"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
-  "place": "Detailed proof, paragraph 1: hypercover computation, finite staircase through degree q+1; Stacks Tag 01H0 first proof; generalization from abelian groups to Grothendieck abelian coefficients using the categorical constructions described in the proof. The cited Stacks result itself is for abelian sheaves."
+  "place": "Finite categorical staircase implemented in the Lean proof, following the local correction route of the blueprint and Stacks Tag 01H0. Detection by local primitives is proved from finite refinement and a separately stated categorical local epimorphism lemma, the remaining coefficient-general hole. Degree one uses the evaluated initial kernel; the colimit argument uses AB5 on the actual homotopy cohomology diagram."
  },
  "mathlib_searches": [
   {
@@ -137,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "X-ca2e2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261016T032812-L-1930622",
+  "landing": "20261016T062622-L-449034",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean files, DAG nodes, change record, and report matched against the packet and published clone; all delivered modules and the direct importer compile successfully."
  }
 }

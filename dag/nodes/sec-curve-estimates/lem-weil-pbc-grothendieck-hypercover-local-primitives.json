@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-grothendieck-hypercover-local-primitives",
+ "kind": "statement",
+ "title": "Detection by local primitives on finite split refinements",
+ "statement": "Let X be qcqs, A a Grothendieck abelian category, S an exact short complex of A-valued small-etale sheaves, U a finite split etale hypercover, n≥0, and x:B→S.X₂(U_n) a cycle [def-sp-grothendieck-abelian, def-weil-pbc-etale-sheaves, def-weil-pbc-finite-split-hypercover]. If a morphism g:B→T is zero after precomposition with every π:B′→B for which, on some finite split refinement f:V→U, the restricted πx has a primitive l:B′→S.X₁(V_n), then g=0.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 1, local lifting for the hypercover computation; Stacks Tags 00WL and 01H0",
+  "external": [
+   {
+    "document": "Stacks Project, Sites and Sheaves",
+    "place": "Tag 00WL, especially Lemmas 7.11.2 and 7.11.3"
+   },
+   {
+    "document": "Stacks Project, Hypercoverings",
+    "place": "Tag 01H0, local lifting step"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-finite-split-hypercover"
+ ],
+ "proof": [
+  {
+   "text": "The finite splitting and finite qcqs nondegenerate cofans show U_n is qcqs. Evaluation preserves the kernel of S.g, so x is a map into (ker S.g)(U_n), and exactness makes p:S.X₁→ker S.g epic.",
+   "uses": [
+    "def-weil-pbc-finite-split-hypercover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the categorical local epimorphism detector to p. For any source map π with lifts on a covering sieve R, apply finite refinement to the single degree-n requirement R. Its finite colimiting cofan in V_n has each composite in R.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-etale-local-epimorphism",
+    "lem-weil-pbc-hypercover-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify this cofan with a scheme coproduct. Its inclusions form an etale cover. The sheaf axiom glues morphisms from B′ on the disjoint pieces uniquely; intersections of different summands have empty source and same-summand equalities follow from monicity. Glue the primitives. Naturality of p and uniqueness of gluing identify their image with restricted πx, first in the kernel sheaf and then in S.X₂. The hypothesis kills πg; the detector concludes g=0, including empty cofans and zero coefficients.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-split-hypercover",
+  "lem-weil-pbc-grothendieck-etale-local-epimorphism",
+  "lem-weil-pbc-hypercover-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Agent-written categorical coefficient generalization of the local image and local primitive arguments in Stacks Tags 00WL and 01H0. Those sources themselves concern set-valued and abelian sheaves, respectively. Finite matching diagrams and AB5 provide the general-coefficient argument recorded here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a Grothendieck abelian category, local primitives of an exact complex of sheaves on finite hypercover refinements jointly detect maps from arbitrary source objects",
+   "results": "Returned: CategoryTheory.Sheaf.instIsGrothendieckAbelian, HomologicalComplex.isGrothendieckAbelian, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.lift.congr_simp, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac, CategoryTheory.Sheaf.instHasFunctorialFactorizationLocallySurjectiveLocallyInjective, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.lift, CategoryTheory.GrothendieckTopology.W. These concern concrete coefficient categories, gluing, or general sheaf infrastructure; no match for this categorical statement.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact short complex of sheaves admits locally lifting families whose images generate each source of a cycle, after finite hypercover refinement",
+   "results": "Returned: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.lift, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex. These concern concrete coefficient categories, gluing, or general sheaf infrastructure; no match for this categorical statement.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*primitive|local.*lift.*[Gg]rothendieck|iSup.*image.*sheaf",
+   "results": "Returned: . No relevant result; the returned matches are unrelated to this categorical statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckHypercoverBottomColimit",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 1: finite hypercover computation, local exactness step",
+   "via": [
+    "lem-weil-pbc-grothendieck-hypercover-bottom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckHypercoverLocalPrimitives",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckHypercoverLocalPrimitives.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.eq_zero_of_refinement_primitives",
+  "statement": "theorem eq_zero_of_refinement_primitives\n    (S : ShortComplex (Sheaf X.smallEtaleTopology A)) (hS : S.Exact)\n    (U : FiniteSplitEtaleHypercover X) (n : ℕ) (B T : A)\n    (x : B ⟶ S.X₂.obj.obj (op (U.simplicial.obj (op (SimplexCategory.mk n)))))\n    (hx : x ≫ S.g.hom.app _ = 0) (g : B ⟶ T)\n    (hkill : ∀ (V : FiniteSplitEtaleHypercover X) (f : V.Refinement U) (B' : A)\n      (π : B' ⟶ B)\n      (l : B' ⟶ S.X₁.obj.obj (op (V.simplicial.obj (op (SimplexCategory.mk n))))),\n      l ≫ S.f.hom.app _ = π ≫ x ≫ S.X₂.obj.map\n        (f.app (op (SimplexCategory.mk n))).op → π ≫ g = 0) :\n    g = 0",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ca2e2",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T062622-L-449034",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ca2e2",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T062622-L-449034",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, DAG nodes, change record, and report matched against the packet and published clone; all delivered modules and the direct importer compile successfully."
+ }
+}
