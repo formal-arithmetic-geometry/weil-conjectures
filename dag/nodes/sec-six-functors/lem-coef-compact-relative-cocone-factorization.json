@@ -31,9 +31,108 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=N(I)^{\\triangleright}$. This is the nerve of the poset obtained by adjoining a new greatest element $\\infty$ to $I$: a simplex in either description is exactly a chain with an initial block in $I$ and a final block at $\\infty$. The nerve $N(I)$ is a quasicategory: an inner horn in dimension two specifies $i_0\\leq i_1\\leq i_2$, and transitivity supplies its missing edge; in dimensions at least three every adjacent edge is already in the horn, so the chain on the given vertices is the filler. All supplied faces agree with it because a poset simplex is determined by its ordered vertices. The nerve $N(I)$ is $\\kappa$-filtered. Indeed, a map from a $\\kappa$-small simplicial set $A$ has fewer than $\\kappa$ vertex images. Choose an upper bound $j$ for those images. On each simplex the order arrows from its vertex images to $j$ define the extension to $A\\star\\{j\\}$; uniqueness of a chain with fixed ordered vertices makes these extensions agree on all faces and degeneracies. Precomposing with $A\\times\\Delta^1\\to A^{\\triangleright}$ gives the required coherent cocone. For $A=\\varnothing$, use nonemptiness of $I$. Thus the given induced cocone of $\\bar p$ is a small $\\kappa$-filtered colimit of the required kind.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-coef-infinity-relative-cone",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.13, the filtered poset used in the relative construction; elementary nerve check; source read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "For $q'=q|_{K'}$, form the join coslices $\\mathcal E_{q/}$ and $\\mathcal E_{q'/}$ of [lem-cbc-relative-coslice-left-fibration], working in a containing universe in which $\\mathcal E$ is small. Specialize that node to the inner fibration $\\mathcal E\\to\\Delta^0$ and the inclusion $K_0=K'\\subseteq K$; all coslices of the terminal target are terminal, so its map $\\rho$ is exactly $\\mathcal E_{q/}\\to\\mathcal E_{q'/}$. Specializing instead to $K_0=\\varnothing$ gives the absolute projections to $\\mathcal E$, since the empty-diagram coslice is $\\mathcal E$ degreewise. Pull back their projections along $\\bar p:B\\to\\mathcal E$, and write $X=B\\times_{\\mathcal E}\\mathcal E_{q/}$ and $X'=B\\times_{\\mathcal E}\\mathcal E_{q'/}$. The projections to $B$ and the restriction $f:X\\to X'$ are left fibrations: the first two are base changes of the coslice projections, and the third is a base change of coslice restriction. A horn lifting problem in a pullback is solved in its original fibration with the prescribed base simplex, and the pair gives a lift in the pullback. Under [lem-coef-space-transport-classification] their classified diagrams are the restrictions of $G_q,G_{q'}$ along $\\bar p$. Both are colimit diagrams of spaces by [lem-coef-compact-diagram-cocone-transport] and Step 1. Its hypotheses hold for $K'$ as well as $K$: a simplicial subset has no more nondegenerate simplices, and its vertex values are among the compact values of $q$. Denote these two classified diagrams on $B$ by $G,G'$.",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration",
+    "lem-coef-space-transport-classification",
+    "lem-coef-compact-diagram-cocone-transport",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.4.14 and Lemma 5.5.4.13, the two left fibrations X and X prime; source read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "The map $r:K'\\star B\\to\\mathcal E$ is exactly a section $s:B\\to X'$: on an $m$-simplex $\\sigma$ of $B$ its coslice component is $r\\circ(\\operatorname{id}_{K'}\\star\\sigma)$. These components respect simplicial operators by precomposition. Define the strict pullback $Y=B\\times_{s,X',f}X$. By [lem-coef-left-fibration-section-homotopy-pullback], its projection to $B$ is a left fibration and its classified diagram $H$ is naturally the pointwise homotopy pullback $G\\times^h_{G'}1_B$. The comparison preserves the actual maps and restrictions. The given $u$ is a vertex $y_\\infty$ of $Y$ over $\\infty$: its restriction to $K'$ is exactly $s(\\infty)$ by the agreement assumption, and its apex is the prescribed $c$. Thus the strict, rather than merely up-to-equivalence, fiber contains the required vertex.",
+   "uses": [
+    "lem-coef-left-fibration-section-homotopy-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.13, displayed pullback Y and the specified vertex v over the cone point; source read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "The span shape $\\{a\\to d\\leftarrow b\\}$ has three vertices and two nondegenerate edges, hence is $\\kappa$-small even when $\\kappa=\\aleph_0$. Apply [lem-coef-spaces-kappa-limit-filtered-colimit] to this shape and $N(I)$, using the coherent span $G\\to G'\\leftarrow1_B$ from Step 3. The empty-shape clause of that same lemma identifies the filtered colimit of terminal spaces with a terminal space. Steps 2 and 3 therefore give the canonical comparison\n$$\\operatorname{colim}_{i\\in I}H(i)\\simeq (\\operatorname{colim}_{i\\in I}G(i))\\times^h_{\\operatorname{colim}_{i\\in I}G'(i)}(\\operatorname{colim}_{i\\in I}*)\\simeq G(\\infty)\\times^h_{G'(\\infty)}*\\simeq H(\\infty).$$\nEvery map in this comparison is induced by the original cocone maps, the restriction $f$ and the section $s$; the naturality in Step 3 shows that its legs are the legs of $H$. Hence the actual induced coherent cocone of $H:B\\to\\mathcal S$ is colimiting. Apply the spaces lemma in a containing universe for these spaces; $I$ and $\\kappa$ remain small there, so no larger indexing category is introduced.",
+   "uses": [
+    "lem-coef-spaces-kappa-limit-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.13, the assertion that the pullback Y is classified by a colimit diagram; filtered homotopy-pullback interchange expanded; source read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "By [lem-coef-left-fibration-colimit-realization] applied to $Y\\to B$ and the colimit diagram $H$ of Step 4, the inclusion $Y_0=Y\\times_B N(I)\\hookrightarrow Y$ is a weak homotopy equivalence. In particular it is surjective on path components of realizations. Choose a point of $|Y_0|$ whose image is in the component of $y_\\infty$, then choose a vertex $y_0$ of a simplex representing that point; the straight segment inside that simplex joins the point to $y_0$. The vertices $y_0,y_\\infty$ are joined by a finite zigzag of edges of $Y$. To see the last assertion without replacing an edge by an unspecified homotopy, partition vertices by the equivalence relation generated by unoriented edges. Every simplex has all vertices in one class, and each such class gives an open-and-closed union of whole simplex summands in the quotient description of realization. Thus a continuous path cannot change class. Membership in the generated relation is precisely a finite edge zigzag. Since $y_0\\in Y_0$, its base is a vertex $i\\in I$.",
+   "uses": [
+    "lem-coef-left-fibration-colimit-realization",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.4.5 and Lemma 5.5.4.13, printed p. 480; component-to-edge-zigzag argument written explicitly; source read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "Compress this finite zigzag into an incoming edge to the specified vertex $y_\\infty$, using only the horn lifting property of the left fibration $Y\\to B$ from Step 3. Work backwards from its final vertex, starting with the degenerate edge of $y_\\infty$. If a zigzag edge is $a\\to b$ and an edge $b\\to y_\\infty$ has been constructed, lift the horn $\\Lambda^2_1$ on those two edges to get $a\\to y_\\infty$. If the zigzag edge instead is $b\\to a$, lift the horn $\\Lambda^2_0$ consisting of $b\\to a$ and $b\\to y_\\infty$ to obtain $a\\to y_\\infty$. The base triangles exist exactly: $B$ is the nerve of a poset with greatest element $\\infty$, so use the chain of the given edge followed by the unique arrow to $\\infty$. Both horn indices $0,1$ are permitted for a left fibration in dimension two. Induction on the finite zigzag gives a single edge $e:y_0\\to y_\\infty$ over the unique edge $i\\to\\infty$. Its target remains the original vertex throughout.",
+   "uses": [
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.13, the incoming edge e; elementary two-dimensional horn construction made explicit; source read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "By the degreewise definition of the coslice, the $X$-component of $e$ is a map $v:K\\star\\Delta^1\\to\\mathcal E$ with $v|_K=q$. The face at $1$ is the coslice component of its target $y_\\infty$, so $v|_{K\\star\\{1\\}}=u$ exactly. Its restriction to $\\Delta^1$ is its base edge under $\\bar p$, hence is $\\bar p(i\\to\\infty)$. Finally the equality defining the simplicial pullback $Y$ says that the image of the entire edge $e$ in $X'$ is $s(i\\to\\infty)$. By the explicit section formula of Step 3, this equality is precisely\n$$v|_{K'\\star\\Delta^1}=r\\circ(\\operatorname{id}_{K'}\\star\\iota_i).$$\nThese are all the required restrictions, with the original $q$, $u$, $r$ and $\\bar p$. No colimit of $q$ or $q'$ was formed.",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.13, printed p. 480, decoding the edge as the required relative extension; source read online, not archived in literature/"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "def-coef-infinity-relative-cone",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-coef-space-transport-classification",
+  "lem-coef-compact-diagram-cocone-transport",
+  "def-coef-infinity-fibrations",
+  "lem-coef-left-fibration-section-homotopy-pullback",
+  "lem-coef-spaces-kappa-limit-filtered-colimit",
+  "lem-coef-left-fibration-colimit-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Corollary 5.3.4.14 and relative construction in Lemma 5.5.4.13, pp. 479-480, read online; unarchived source. Agent expansion of filtered homotopy-pullback stability, components and exact horn-lift edge extraction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -118,10 +217,45 @@
    "results": "{\"t\": \"2026-10-16T20:42:45Z\", \"tool\": \"grep\", \"query\": \"cofinal|Cofinal|homotopyColimit|HomotopyColimit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "Second reader: no coherent match. Read Mathlib/CategoryTheory/Filtered/Final.lean:479-493 and Presentable/Basic.lean:286-311. Ordinary final functors and Hom-set presentability do not state the corresponding arbitrary-quasicategory assertion; the AlgebraicTopology source search has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative coherent cocone factorization for a compact valued quasicategory diagram through a filtered colimit stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits\", \"type\": \"{X : SSet} →\\n  {A : X.Subcomplex} →\\n    {ι : Type u_1} →\\n      {U : ι → X.Subcomplex} →\\n        {V : ι → ι → X.Subcomplex} →\\n          (h : A.MulticoequalizerDiagram U V) →\\n            [inst : LinearOrder ι] →\\n              CategoryTheory.Limits.IsColimit\\n                ((CompleteLattice.Multicoequ\", \"doc\": \"Given a category $\\\\mathcal{C}$, a linearly ordered set $\\\\iota$, a multispan index $I$ with symmetric structure $h$, and a colimit multiequalizer cocone $c$ for the diagram $I$, the transformation of $\"}\n  {\"name\": \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits\", \"type\": \"{X : SSet} →\\n  {A : X.Subcomplex} →\\n    {ι : Type u_1} →\\n      {U : ι → X.Subcomplex} →\\n        {V : ι → ι → X.Subcomplex} →\\n          (h : A.MulticoequalizerDiagram U V) →\\n            CategoryTheory.Limits.IsColimit\\n              ((CompleteLattice.MulticoequalizerDiagram.multicofork h).map SSet.Sub\", \"doc\": \"For any simplicial set $X$ and a diagram of subcomplexes $A$ indexed by $\\\\iota$, if $A$ satisfies multicoequalizer conditions at each simplicial degree $n$ (i.e., the object mappings form suprema and \"}\n  {\"name\": \"SSet.horn.isColimit\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits\", \"type\": \"{n : ℕ} →\\n  (i : Fin (n + 1)) →\\n    CategoryTheory.Limits.IsColimit\\n      ((CompleteLattice.MulticoequalizerDiagram.multicofork ⋯).toLinearOrder.map SSet.Subcomplex.toSSetFunctor)\", \"doc\": \"The colimit property of the multicoequalizer diagram constructing the n-dimensional horn Λ[n, i] is preserved under transformation to a linear order context via the subcomplex-to-simplicial-set functo\"}\n  {\"name\": \"LightProfinite.Extend.cocone\", \"module\": \"Mathlib/Topology/Category/LightProfinite/Extend\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    (G : CategoryTheory.Functor LightProfiniteᵒᵖ C) →\\n      (S : LightProfinite) →\\n        CategoryTheory.Limits.Cocone\\n          ((CategoryTheory.CostructuredArrow.proj FintypeCat.toLightProfinite.op (Opposite.op S)).comp\\n          \", \"doc\": \"For a fixed object $ S $ in the category of light profinite spaces and a functor $ G: \\\\text{LightProfinite}^{\\\\text{op}} \\\\to \\\\mathcal{C} $, this cocone is constructed from the projection functor of a c\"}\n  {\"name\": \"Profinite.Extend.cocone\", \"module\": \"Mathlib/Topology/Category/Profinite/Extend\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    (G : CategoryTheory.Functor Profiniteᵒᵖ C) →\\n      (S : Profinite) →\\n        CategoryTheory.Limits.Cocone\\n          ((CategoryTheory.CostructuredArrow.proj FintypeCat.toProfinite.op (Opposite.op S)).comp\\n            (FintypeCat.t\", \"doc\": \"For a profinite space $ S $, this constructs a cocone for the diagram formed by composing the projection functor from the costructured arrow category $ \\\\text{CostructuredArrow}(\\\\text{FintypeCat.toProf\"}\n  {\"name\": \"CategoryTheory.SmallObject.SuccStruct.ofCocone_map_to_top\", \"module\": \"Mathlib/CategoryTheory/SmallObject/Iteration/FunctorOfCocone\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {J : Type u} [inst_1 : LinearOrder J] {j : J}\\n  {F : CategoryTheory.Functor (↑(Set.Iio j)) C} (c : CategoryTheory.Limits.Cocone F) (i : J) (hi : i < j),\\n  (CategoryTheory.SmallObject.SuccStruct.ofCocone c).map (CategoryTheory.homOfLE ⋯) \", \"doc\": \"For a cocone $ c $ over a diagram $ F : \\\\mathcal{J}_{< j} \\\\to \\\\mathcal{C} $ indexed by a linearly ordered set $ J $, the action of the functor $ \\\\text{ofCocone } c $ on the morphism $ i \\\\to j $ (induc\"}\n  {\"name\": \"CategoryTheory.SmallObject.SuccStruct.ofCocone_map_assoc\", \"module\": \"Mathlib/CategoryTheory/SmallObject/Iteration/FunctorOfCocone\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {J : Type u} [inst_1 : LinearOrder J] {j : J}\\n  {F : CategoryTheory.Functor (↑(Set.Iio j)) C} (c : CategoryTheory.Limits.Cocone F) (i₁ i₂ : J) (hi : i₁ ≤ i₂)\\n  (hi₂ : i₂ < j) {Z : C} (h : (CategoryTheory.SmallObject.SuccStruct.ofCocone c\", \"doc\": \"For a cocone $c$ over a diagram $F : \\\\mathcal{J}_{< j} \\\\to \\\\mathcal{C}$ in a category $\\\\mathcal{C}$, and indices $i_1 \\\\leq i_2 < j$ in the linearly ordered set $\\\\mathcal{J}$, the associativity of the \"}\n  {\"name\": \"LightProfinite.Extend.cocone_ι_app\", \"module\": \"Mathlib/Topology/Category/LightProfinite/Extend\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (G : CategoryTheory.Functor LightProfiniteᵒᵖ C)\\n  (S : LightProfinite) (i : CategoryTheory.CostructuredArrow FintypeCat.toLightProfinite.op (Opposite.op S)),\\n  (LightProfinite.Extend.cocone G S).ι.app i = G.map i.hom\", \"doc\": \"For any category $\\\\mathcal{C}$, functor $G : \\\\text{LightProfinite}^{\\\\text{op}} \\\\to \\\\mathcal{C}$, object $S$ in $\\\\text{LightProfinite}$, and object $i$ in the costructured arrow category involving fini\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Presentable.Basic.lean:286-302 gives ordinary arrow factorization, not a map K star Delta1 with exact coherent boundary; SubcomplexColimits concerns colimits of simplicial sets, not colimits inside a quasicategory. Read Quasicategory.Basic.lean:34-46 and CategoryWithFibrations.lean:40-78: horn predicates do not supply this compactness theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cocone on a kappa small diagram of compact objects in an infinity category factors through a filtered colimit relative to a subdiagram",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"[IsCardinalPresentable X κ] {J : Type u₂} [Category.{v₂} J] [EssentiallySmall.{w} J] [IsCardinalFiltered J κ]\\n  {F : J ⥤ C} {c : Cocone F} (hc : IsColimit c) (f : X ⟶ c.pt) : ∃ (j : J) (f' : X ⟶ F.obj j), f' ≫ c.ι.app j = f\", \"doc\": \"Let $\\\\kappa$ be a regular cardinal, $X$ a $\\\\kappa$-presentable object in a category $\\\\mathcal{C}$, $J$ a $\\\\kappa$-filtered category, and $F : J \\\\to \\\\mathcal{C}$ a functor with colimit cocone $c$. For \"}\n  {\"name\": \"CommGrpCat.FilteredColimits.colimitCocone\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \": Cocone F\", \"doc\": \"The cocone for a filtered diagram $ F : \\\\mathcal{J} \\\\to \\\\mathsf{CommGrp} $, constructed by composing with the forgetful functor to groups, taking the filtered colimit in the category of groups, and li\"}\n  {\"name\": \"HasCardinalLT.Set.isColimitCocone\", \"module\": \"Mathlib.CategoryTheory.Presentable.Type\", \"type\": \"(hκ : Cardinal.aleph0 ≤ κ) : IsColimit (cocone X κ)\", \"doc\": \"Given a cardinal $\\\\kappa \\\\geq \\\\aleph_0$, the cocone with apex $X$ formed by all subsets $S \\\\subseteq X$ with $|S| < \\\\kappa$ satisfies the universal property of a colimit. This follows because: (1) eve\"}\n  {\"name\": \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Presentable.Finite\", \"type\": \"{J : Type w} [SmallCategory J] [IsFiltered J] {D : J ⥤ C} {c : Cocone D} (hc : IsColimit c) {X : C}\\n  [IsFinitelyPresentable.{w} X] (f : X ⟶ c.pt) : ∃ (j : J) (p : X ⟶ D.obj j), p ≫ c.ι.app j = f\", \"doc\": \"Let $\\\\mathcal{J}$ be a small filtered category, $D : \\\\mathcal{J} \\\\to \\\\mathcal{C}$ a diagram, and $c$ a colimit cocone for $D$. If $X$ is a finitely presentable object in $\\\\mathcal{C}$ and $f : X \\\\to c\"}\n  {\"name\": \"CommMonCat.FilteredColimits.colimitCocone\", \"module\": \"Mathlib.Algebra.Category.MonCat.FilteredColimits\", \"type\": \": Cocone F\", \"doc\": \"The cocone for a filtered diagram $ F : \\\\mathcal{J} \\\\to \\\\mathsf{CommMonCat} $, constructed by first forming the colimit in the category of monoids via a forgetful functor (which forgets commutativity)\"}\n  {\"name\": \"AddMonCat.FilteredColimits.colimitCocone\", \"module\": \"Mathlib.Algebra.Category.MonCat.FilteredColimits\", \"type\": \"{J : Type v} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    (F : CategoryTheory.Functor J AddMonCat) → [CategoryTheory.IsFiltered J] → CategoryTheory.Limits.Cocone F\", \"doc\": \"Given a filtered diagram $F : \\\\mathcal{J} \\\\to \\\\text{AddMonCat}$ where $\\\\mathcal{J}$ is a small filtered category, this constructs the cocone with apex the filtered colimit $\\\\varinjlim F$ and morphisms\"}\n  {\"name\": \"MonCat.FilteredColimits.colimitCocone\", \"module\": \"Mathlib.Algebra.Category.MonCat.FilteredColimits\", \"type\": \": Cocone F\", \"doc\": \"The cocone for a filtered diagram $ F : \\\\mathcal{J} \\\\to \\\\text{MonCat} $, constructed by taking the colimit in the category of types (as a quotient of the disjoint union of underlying sets) and equippi\"}\n  {\"name\": \"AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \"{J : Type v} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    [inst_1 : CategoryTheory.IsFiltered J] →\\n      (F : CategoryTheory.Functor J AddCommGrpCat) →\\n        CategoryTheory.Limits.IsColimit (AddCommGrpCat.FilteredColimits.colimitCocone F)\", \"doc\": \"For any filtered diagram $F : \\\\mathcal{J} \\\\to \\\\text{AddCommGrpCat}$ indexed by a small filtered category $\\\\mathcal{J}$, the cocone with apex the filtered colimit $\\\\varinjlim F$ satisfies the universal\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Presentable.Basic.lean:286-302 gives ordinary arrow factorization, not a map K star Delta1 with exact coherent boundary; SubcomplexColimits concerns colimits of simplicial sets, not colimits inside a quasicategory. Read Quasicategory.Basic.lean:34-46 and CategoryWithFibrations.lean:40-78: horn predicates do not supply this compactness theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalPresentable\", \"exists_hom\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} (κ : Cardinal.{w}) [Fact κ.IsRegular] {J : Type u_1} [CategoryTheory.Category.{v_1, u_1} J] [CategoryTheory.IsCardinalPresentable X κ] [CategoryTheory.EssentiallySmall.{w, v_1, u_1} J] [CategoryTheory.IsCardinalFiltered J κ] {F : CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsCardinalPresentable.exists_hom₂_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} (κ : Cardinal.{w}) [Fact κ.IsRegular] {J : Type u_1} [CategoryTheory.Category.{v_1, u_1} J] [CategoryTheory.IsCardinalPresentable X κ] [CategoryTheory.EssentiallySmall.{w, v_1, u_1} J] [CategoryTheory.IsCardinalFiltered J κ] {F : CategoryTh\", \"doc\": \"\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Presentable.Basic.lean:286-302 gives ordinary arrow factorization, not a map K star Delta1 with exact coherent boundary; SubcomplexColimits concerns colimits of simplicial sets, not colimits inside a quasicategory. Read Quasicategory.Basic.lean:34-46 and CategoryWithFibrations.lean:40-78: horn predicates do not supply this compactness theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*cocone|cocone.*factor|compact.*cocone",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"240\", \"text\": \"def coconeOfHasStrongEpiMonoFactorisation (F : J ⥤ MonoOver Y) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"259\", \"text\": \"/-- The cocone `coconeOfHasStrongEpiMonoFactorisation F` is a colimit -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"260\", \"text\": \"def isColimitCoconeOfHasStrongEpiMonoFactorisation (F : J ⥤ MonoOver Y) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"261\", \"text\": \"    IsColimit (coconeOfHasStrongEpiMonoFactorisation F) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"269\", \"text\": \"      ⟨coconeOfHasStrongEpiMonoFactorisation F, isColimitCoconeOfHasStrongEpiMonoFactorisation F⟩⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"line\": \"809\", \"text\": \"  apply mono_inl_of_isColimit _ _ (PushoutCocone.isColimitOfFactors _ _ _ _ _ hf hg t ht)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"line\": \"211\", \"text\": \"/-- If `E` is a colimit cocone of presheaves, over a diagram factoring through sheaves,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"line\": \"118\", \"text\": \"@[to_dual /-- Noncomputably make a colimit cocone from the existence of unique factorizations. -/]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Equalizers.lean\", \"line\": \"557\", \"text\": \"/-- Noncomputably make a colimit cocone from the existence of unique factorizations. -/\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Presentable.Basic.lean:286-302 gives ordinary arrow factorization, not a map K star Delta1 with exact coherent boundary; SubcomplexColimits concerns colimits of simplicial sets, not colimits inside a quasicategory. Read Quasicategory.Basic.lean:34-46 and CategoryWithFibrations.lean:40-78: horn predicates do not supply this compactness theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftFibration|left.fibration|Quasicategory",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"31\", \"text\": \"  complex for every pair of objects `X Y : C`, is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"32\", \"text\": \"* Define the quasicategory of anima as the simplicial nerve of the simplicial category of\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"14\", \"text\": \"We define 2-truncated quasicategories `Quasicategory₂` by three horn-filling properties,\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"21\", \"text\": \"For a 2-truncated quasicategory `A`, we define a category `HomotopyCategory₂ A` whose\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"44\", \"text\": \"A 2-truncated quasicategory is a 2-truncated simplicial set with the properties:\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"54\", \"text\": \"class Quasicategory₂ (X : Truncated 2) where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"100\", \"text\": \"lemma HomotopicL.symm [Quasicategory₂ X] {x y : X _⦋0⦌₂} {f g : Edge x y} (hfg : HomotopicL f g) :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"51\", \"text\": \"abbrev QCat := ObjectProperty.FullSubcategory Quasicategory\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"15\", \"text\": \"We show that every Kan complex is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"17\", \"text\": \"In `Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean`,\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"18\", \"text\": \"we show that the nerve of a category is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"34\", \"text\": \"/-- A simplicial set `S` is a *quasicategory* if it satisfies the following horn-filling condition:\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"39\", \"text\": \"class Quasicategory (S : SSet) : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"11\", \"text\": \"# The nerve of a category is a quasicategory\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"13\", \"text\": \"In `AlgebraicTopology.Quasicategory.StrictSegal`, we show that any\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"14\", \"text\": \"strict Segal simplicial set is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"19\", \"text\": \"a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"19\", \"text\": \"condition is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"33\", \"text\": \"/-- Any `StrictSegal` simplicial set is a `Quasicategory`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"34\", \"text\": \"theorem quasicategory {X : SSet.{u}} (sx : StrictSegal X) : Quasicategory X := by\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"35\", \"text\": \"  apply quasicategory_of_filler X\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.Basic\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Presentable.Basic.lean:286-302 gives ordinary arrow factorization, not a map K star Delta1 with exact coherent boundary; SubcomplexColimits concerns colimits of simplicial sets, not colimits inside a quasicategory. Read Quasicategory.Basic.lean:34-46 and CategoryWithFibrations.lean:40-78: horn predicates do not supply this compactness theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-filtered-presentation-common-refinement",
@@ -141,5 +275,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-compact-relative-cocone-factorization",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and its exact simplicial restrictions. Split through compact join-coslice transport, a strict section pullback, filtered-space homotopy-pullback interchange, total left-fibration realization and an explicit two-horn compression of an edge zigzag. Created three generic statement-only foundation nodes, reused the existing relative-coslice theorem and spaces limit/filtered-colimit theorem, and found no project attachment or Mathlib leaf.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, mapping-complex adjunction infrastructure through lem-coef-presentable-infinity-adjoints, lem-coef-small-saturated-arrow-accessibility and lem-coef-filtered-presentation-common-refinement; HTT Lemma 5.5.4.13, relative lifting construction on printed pp. 479-480; Steps 1-7 expand this relative compact-cocone lifting input without changing the coefficient adjunction route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "Generic inner-fibration join-coslice theorem, specialized to the terminal target to give absolute projection and relative restriction left fibrations. No node of this unit supplies relative restriction; this uses a foundation tool, not the smooth-base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-38f388e59",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-38f388e59 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited node statement and the parent's application in full. The statement is unchanged and matches its use in lem-coef-filtered-presentation-common-refinement. Step checks: S1 (the poset nerve is a quasicategory and kappa-filtered; the empty shape uses nonemptiness of I). S2 (lem-cbc-relative-coslice-left-fibration with target Delta^0 gives restriction E_{q/}->E_{q'/}, and with K_0 empty gives the projection; base change; base-pullback compatibility of the classification; compact transport for K and K'). S3 (r is exactly a section s of X'; f is itself a left fibration; u lies in the strict fiber Y over infinity). S4 (the span is kappa-small even for aleph_0; the empty-shape clause gives colim * = *; the comparison is induced by the actual cocone maps). S5 (Y_0->Y is a weak equivalence; components of |Y| are the classes generated by edges, proved inline from the realization quotient). S6 (Lambda^2_1 lifts forward edges and Lambda^2_0 reversed edges; base chains end at the greatest element infinity; the endpoint stays y_inf). S7 (exact decoding of the edge e gives all four restrictions of v). proof_deps equals the union of uses. New nodes: compact-diagram-cocone-transport is true because G_q is a kappa-small limit of Map(q(l),-), which commutes with kappa-filtered colimits (HTT 5.3.4.13/14); it is not compact-small-colimits (that node assumes a colimit of q), not accessible-compact-cocones (beta-accessibility), and not compact-stage-factorization (pi_0 only). left-fibration-colimit-realization is HTT 3.3.4.5 and is true; L empty means the apex is initial iff Z is empty. section-homotopy-pullback is true: it is a covariant-model pullback along a fibration between fibrant objects, and pointwise the fibre of a Kan fibration (HTT 2.1.3.3). All three are statement-only, with exact via/from, same_as [], eight searches covering all three kinds, and none restates the item. Tool use accepted: lem-cbc-relative-coslice-left-fibration (unit sk-prop-sf-cbc, outside the transitive route of sk-prop-sf-biduality-general), a generic join-coslice left-fibration theorem (HTT 2.1.2.1) used as a black box, with no same-unit alternative. Not a target node, so no base-change or coefficient-category check applies. No SGA is cited. Reservation: HTT is unarchived and the network is blocked, so the HTT place numbers were not checked against the PDF; the mathematics was checked independently and the WANTED line is recorded. No fixes."
  }
 }

@@ -30,9 +30,114 @@
   "lem-coef-reedy-model-structure",
   "lem-coef-segal-dk-diagonal-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard $W$ as a bisimplicial set and use the division objects of [lem-coef-bisimplicial-reedy-division-calculus]. Thus $(U\\backslash W)_q=\\operatorname{Hom}_{\\mathrm{ss}}(U\\boxtimes\\Delta^q,W)$ and $(W/T)_p=\\operatorname{Hom}_{\\mathrm{ss}}(\\Delta^p\\boxtimes T,W)=\\operatorname{Hom}_{\\mathrm{sSet}}(T,W_p)$; the last bijection sends a natural transformation to its value at the identity $p$-simplex, with inverse given by restriction along each simplex of $\\Delta^p$. For every monomorphism $a:A\\hookrightarrow B$, vertical Reedy fibrancy gives a Kan fibration $a\\backslash W:B\\backslash W\\to A\\backslash W$. In particular $W_p$ is Kan (take $A=\\varnothing$, $B=\\Delta^p$), and both endpoint maps $W_1\\to W_0$ are Kan fibrations (take either vertex inclusion).",
+   "uses": [
+    "lem-coef-bisimplicial-reedy-division-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Section 2, Proposition 2.5 and the division notation preceding Proposition 2.1; read online, not archived. The expansion is agent-written."
+   }
+  },
+  {
+   "text": "For $m\\geq2$ let $I_m\\subseteq\\Delta^m$ be the union of the consecutive-edge subsimplices $[j,j+1]$, $0\\leq j<m$. Let $P_m=W_1\\times_{W_0}\\cdots\\times_{W_0}W_1$ have $m$ factors and let $H_m$ be the iterated path-model homotopy pullback in [lem-coef-segal-dk-diagonal-equivalence]. The canonical constant-path map $P_m\\to H_m$ is a weak homotopy equivalence. Here are the hypotheses and induction: $P_1=H_1=W_1$; each $P_m=P_{m-1}\\times_{W_0}W_1$ is Kan. Indeed, project a horn in $P_m$ to $P_{m-1}$ and fill it there; compose this filler with the last-target map to $W_0$. The given horn in the last $W_1$ factor lies over this base simplex, so the Kan fibration $s:W_1\\to W_0$ supplies a compatible last-edge filler. The pair is a filler in $P_m$. The map from this strict pullback to the path pullback of $P_{m-1}\\to W_0\\leftarrow W_1$ is a weak equivalence by [lem-coef-kan-pullback-path-comparison]. Replacing $P_{m-1}$ by $H_{m-1}$ in that path pullback is a weak equivalence by [lem-coef-kan-homotopy-pullback-invariance]. The induction map commutes with the last endpoint, since both comparisons keep the last $W_1$ coordinate. Thus their composite is precisely $P_m\\to H_m$. The homotopy Segal hypothesis makes $W_m\\to H_m$ a weak equivalence; it factors as the strict consecutive-edge map $W_m\\to P_m$ followed by $P_m\\to H_m$. Two-out-of-three makes $W_m\\to P_m$ a weak equivalence. Finally $I_m\\backslash W=P_m$: maps from the union of consecutive edges are exactly compatible edge maps, degree by degree. Hence each spine restriction $W_m\\to I_m\\backslash W$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-segal-dk-diagonal-equivalence",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Section 3, Definition 3.1; expansion relating the item’s homotopy Segal convention to the strict Segal map; read online, not archived. The expansion is agent-written."
+   }
+  },
+  {
+   "text": "Let $\\mathcal A$ consist of the monomorphisms $a:A\\hookrightarrow B$ for which $a\\backslash W$ is a weak homotopy equivalence. Step 1 says this restriction is always a Kan fibration. Consequently membership in $\\mathcal A$ is equivalent to $a\\backslash W$ being a trivial Kan fibration, hence to its lifting against every boundary inclusion. These implications use the Kan model structure and the model-category meaning of trivial fibration. For monomorphisms $u:A\\hookrightarrow B$, $v:B\\hookrightarrow C$, the restriction identity $(vu)\\backslash W=(u\\backslash W)\\circ(v\\backslash W)$ shows by two-out-of-three that $u,vu\\in\\mathcal A$ imply $v\\in\\mathcal A$. This is right cancellation among monomorphisms.",
+   "uses": [
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proof of Proposition 3.4, class of monomorphisms inducing weak equivalences under left division; read online, not archived. The expansion is agent-written."
+   }
+  },
+  {
+   "text": "For $\\delta_q:\\partial\\Delta^q\\hookrightarrow\\Delta^q$, Step 3 and the division lifting bijection give $a\\in\\mathcal A$ exactly when $a$ is monic and $a\\pitchfork(W/\\delta_q)$ for every $q\\geq0$. Left lifting classes contain identities and are closed under pushouts, composition and arrow retracts by [lem-coef-lifting-class-closure], and under small continuous transfinite compositions by [lem-coef-transfinite-left-lifting]. They are closed under small coproducts as well: restrict a lifting square to each summand, choose its filler and assemble the fillers by the coproduct universal property. Isomorphisms have the lifting property by using their inverse. Monomorphisms retain these closures degreewise: pushout identifies only the prescribed common subset, coproducts preserve injections, a continuous ordinal chain of injections embeds every stage into its union, and a retract of an injective function is injective. Intersections of classes having these closures retain them. Thus $\\mathcal A$ has every saturation property of the spine-cancellation criterion used in Step 5, including the $q=0$ boundary test.",
+   "uses": [
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proof of Proposition 3.4, saturation via Proposition 2.1 and boundary lifting; read online, not archived. The expansion is agent-written."
+   }
+  },
+  {
+   "text": "Step 2 puts every spine inclusion $I_m\\hookrightarrow\\Delta^m$, $m\\geq2$, in $\\mathcal A$. Steps 3–4 verify right cancellation and saturation. Apply [lem-coef-spine-cancellation-inner-horns] to this class. Every inner horn $h:\\Lambda_i^n\\hookrightarrow\\Delta^n$ therefore lies in $\\mathcal A$, so its restriction $h\\backslash W:W_n\\to\\Lambda_i^n\\backslash W$ is a trivial Kan fibration by Step 3.",
+   "uses": [
+    "lem-coef-spine-cancellation-inner-horns"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Lemma 3.5 applied as in the proof of Proposition 3.4, implication (i) to (ii); read online, not archived. The expansion is agent-written."
+   }
+  },
+  {
+   "text": "Fix $v:S\\hookrightarrow T$ and a square with inner horn $h:\\Lambda_i^n\\hookrightarrow\\Delta^n$ on the left and $W/v:W/T\\to W/S$ on the right. The division lifting bijection turns this into the square with $v$ on the left and $h\\backslash W:W_n\\to\\Lambda_i^n\\backslash W$ on the right: its horizontal maps are $S\\to W_n$ and $T\\to\\Lambda_i^n\\backslash W$. Step 5 makes the latter right arrow a trivial Kan fibration; the Kan model structure has monomorphisms as cofibrations, so it has a filler $T\\to W_n$. Transpose this filler back. The result is a map $\\Delta^n\\to W/T$ extending the prescribed horn and restricting to the prescribed simplex of $W/S$. This proves the claimed inner-fibration property for every monomorphism $v$.",
+   "uses": [
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proof of Proposition 3.4, implication (ii) to (v); equivalently Proposition 3.10 with terminal target; read online, not archived. The expansion is agent-written."
+   }
+  },
+  {
+   "text": "Apply Step 6 to the monomorphism $\\varnothing\\hookrightarrow T$. There is exactly one map from the empty simplicial set into each $W_p$, so $W/\\varnothing$ is the terminal simplicial set. Each inner horn in $W/T$ fits into a unique square over this terminal object and hence has a filler. This is precisely the quasicategory condition of [def-cbc-enhanced-diagrams-cones]. The same argument with $S$ gives the asserted quasicategory for every $S$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Corollary 3.6; read online, not archived. The expansion is agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-reedy-division-calculus",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-segal-dk-diagonal-equivalence",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-transfinite-left-lifting",
+  "lem-coef-spine-cancellation-inner-horns",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/math/0607820",
+  "place": "Online Joyal–Tierney, Proposition 3.4 and Corollary 3.6, with Lemma 3.5 as a separate combinatorial node; archive WANTED. Strict/path Segal comparison expanded using existing DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -82,10 +187,59 @@
    "results": "{\"t\": \"2026-10-16T21:47:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\"], \"digest\": \"7ad685949eb87375\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85,139-154, Quasicategory/StrictSegal.lean:12-35, SimplicialSet/StrictSegal.lean:39-56, and SimplicialSet/CategoryWithFibrations.lean:35-103. The internal-Hom result assumes a quasicategory in one simplicial variable; W/T here is built from a bisimplicial Segal space by Hom(T,W_p) in the other variable. StrictSegal.quasicategory assumes uniquely determined spines, whereas W only has homotopy Segal maps. Neither supplies the assertion by one-line specialization; the remaining hits give Kan fibrations or definitions of inner fibrations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The horizontal simplicial set of maps from any simplicial set into the vertical levels of a Segal space is a quasicategory",
+   "results": "{\"t\": \"2026-10-16T22:59:23Z\", \"tool\": \"leansearch\", \"query\": \"The horizontal simplicial set of maps from any simplicial set into the vertical levels of a Segal space is a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.quasicategory\", \"SSet.StrictSegal.quasicategory'\", \"SSet.quasicategory_of_filler\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.Quasicategory\", \"CategoryTheory.SimplicialCategory.sHom\", \"SSet.Quasicategory.mk\", \"SSet.StrictSegal.isCoskeletal'\"], \"digest\": \"43dd967fc690e554\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictSegal.lean:30-37 and SimplicialSet/StrictSegal.lean:39-56: strict Segal means uniquely determined spines in a single simplicial set, stronger than the homotopy Segal hypothesis here. Read SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85: its internal-Hom restriction assumes an inner fibration of simplicial sets, and does not assert this mixed bisimplicial conclusion. CategoryWithFibrations.lean:35-103 gives Kan generating classes, not Segal spaces or inner fibrations of these division objects. Neither semantic phrasing supplies an exact or one-line match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\"",
+   "results": "{\"t\": \"2026-10-16T22:59:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerFibrations\", \"SSet.instIsStableUnderBaseChangeInnerFibrations\", \"SSet.instIsStableUnderRetractsInnerFibrations\", \"SSet.instRespectsIsoInnerFibrations\", \"SSet.innerFibrations\", \"SSet.InnerFibration\", \"SSet.mem_innerFibrations\", \"SSet.quasicategory_of_innerFibration\"], \"digest\": \"ebf28d57693d0971\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictSegal.lean:30-37 and SimplicialSet/StrictSegal.lean:39-56: strict Segal means uniquely determined spines in a single simplicial set, stronger than the homotopy Segal hypothesis here. Read SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85: its internal-Hom restriction assumes an inner fibration of simplicial sets, and does not assert this mixed bisimplicial conclusion. CategoryWithFibrations.lean:35-103 gives Kan generating classes, not Segal spaces or inner fibrations of these division objects. Neither semantic phrasing supplies an exact or one-line match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Reedy fibrant bisimplicial Segal space W and a monomorphism of vertical simplicial sets S into T the restriction Hom(T,W) to Hom(S,W) in outer degrees is an inner fibration",
+   "results": "{\"t\": \"2026-10-16T22:59:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a Reedy fibrant bisimplicial Segal space W and a monomorphism of vertical simplicial sets S into T the restriction Hom(T,W) to Hom(S,W) in outer degrees is an inner fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal\"], \"digest\": \"2295ec3a7e75fcee\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictSegal.lean:30-37 and SimplicialSet/StrictSegal.lean:39-56: strict Segal means uniquely determined spines in a single simplicial set, stronger than the homotopy Segal hypothesis here. Read SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85: its internal-Hom restriction assumes an inner fibration of simplicial sets, and does not assert this mixed bisimplicial conclusion. CategoryWithFibrations.lean:35-103 gives Kan generating classes, not Segal spaces or inner fibrations of these division objects. Neither semantic phrasing supplies an exact or one-line match."
+  },
+  {
+   "tool": "grep",
+   "query": "SegalSpace|CompleteSegal|Rezk|innerFibration",
+   "results": "{\"t\": \"2026-10-16T22:59:27Z\", \"tool\": \"grep\", \"query\": \"SegalSpace|CompleteSegal|Rezk|innerFibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"68f9223828c07882\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictSegal.lean:30-37 and SimplicialSet/StrictSegal.lean:39-56: strict Segal means uniquely determined spines in a single simplicial set, stronger than the homotopy Segal hypothesis here. Read SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85: its internal-Hom restriction assumes an inner fibration of simplicial sets, and does not assert this mixed bisimplicial conclusion. CategoryWithFibrations.lean:35-103 gives Kan generating classes, not Segal spaces or inner fibrations of these division objects. Neither semantic phrasing supplies an exact or one-line match."
+  },
+  {
+   "tool": "grep",
+   "query": "SegalSpace|CompleteSegal|Rezk|bisimplicial",
+   "results": "{\"t\": \"2026-10-16T23:00:11Z\", \"tool\": \"grep\", \"query\": \"SegalSpace|CompleteSegal|Rezk|bisimplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\"], \"digest\": \"815092eb62aa2ccf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictSegal.lean:30-37 and SimplicialSet/StrictSegal.lean:39-56: strict Segal means uniquely determined spines in a single simplicial set, stronger than the homotopy Segal hypothesis here. Read SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85: its internal-Hom restriction assumes an inner fibration of simplicial sets, and does not assert this mixed bisimplicial conclusion. CategoryWithFibrations.lean:35-103 gives Kan generating classes, not Segal spaces or inner fibrations of these division objects. Neither semantic phrasing supplies an exact or one-line match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rows and vertical map sets of a homotopy Segal bisimplicial set are quasicategories and vertical monomorphisms induce inner fibrations",
+   "results": "{\"t\": \"2026-10-16T23:00:11Z\", \"tool\": \"leanfinder\", \"query\": \"Rows and vertical map sets of a homotopy Segal bisimplicial set are quasicategories and vertical monomorphisms induce inner fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Quasicategory\", \"SSet.StrictSegalCore\", \"SSet.quasicategory_of_filler\", \"SSet.StrictSegal.quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\"], \"digest\": \"fabd61eea17db35c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictSegal.lean:30-37 and SimplicialSet/StrictSegal.lean:39-56: strict Segal means uniquely determined spines in a single simplicial set, stronger than the homotopy Segal hypothesis here. Read SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85: its internal-Hom restriction assumes an inner fibration of simplicial sets, and does not assert this mixed bisimplicial conclusion. CategoryWithFibrations.lean:35-103 gives Kan generating classes, not Segal spaces or inner fibrations of these division objects. Neither semantic phrasing supplies an exact or one-line match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\"",
+   "results": "{\"t\": \"2026-10-16T23:00:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\"], \"digest\": \"7ad685949eb87375\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Quasicategory/StrictSegal.lean:30-37 and SimplicialSet/StrictSegal.lean:39-56: strict Segal means uniquely determined spines in a single simplicial set, stronger than the homotopy Segal hypothesis here. Read SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85: its internal-Hom restriction assumes an inner fibration of simplicial sets, and does not assert this mixed bisimplicial conclusion. CategoryWithFibrations.lean:35-103 gives Kan generating classes, not Segal spaces or inner fibrations of these division objects. Neither semantic phrasing supplies an exact or one-line match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-rezk-local-model",
@@ -93,5 +247,20 @@
   "group": "Q05"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-vertical-restriction-inner",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Expanded the mixed inner-horn lifting argument through division, the strict/path Segal comparison, a saturated right-cancellative class of monomorphisms, the generic spine-to-horn criterion, and explicit transposition of fillers. One new statement-only combinatorial node; all other ingredients reuse existing statements. No Lean attachment or Mathlib match; no completeness or Kan hypothesis added on vertical parameters.",
+  "blueprint": "Proof paragraph 2, displayed finite-coefficient derived mapping-complex adjunction before R lim; through the recorded enriched localization ancestry and the complete-Segal/quasicategory comparison, the inner-horn part of the mixed box lifting argument (Joyal–Tierney Proposition 3.10 with the terminal target). Steps 1–7 supply the inner-horn part of the mixed box argument in the recorded ancestry. The finite coefficient derived adjunction and the unit route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-16afd24a3",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-16afd24a3 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the source in full. The source is Joyal–Tierney arXiv math/0607820, which is not archived and is listed as WANTED; I read it online. Their right cancellation (u and vu in A imply v in A) and Lemma 3.5 (spines I_n give all mid anodyne maps, so all inner horns) agree with the new node. The new node's saturation hypotheses are stronger than Definition 7.4: it adds coproducts and asks for arrow retracts instead of codomain retracts. Proposition 3.4(v), Corollary 3.6 and Proposition 3.10 at X->1 give the item exactly, with no completeness or Kan condition on S or T. Steps: (1) the division node's 'vertical Reedy fibration iff a\\f Kan for every monomorphism a', taken at W->*, gives Kan W_p and endpoint fibrations. (2) P_m is Kan by the explicit horn argument; path-comparison with d_1 as the fibrant leg, invariance with identity on W_1 and W_0, and two-out-of-three make W_m -> I_m\\W a weak equivalence. The homotopy product is read as left-bracketed, which is harmless. (3) Kan fibration plus weak equivalence is a trivial fibration, so lifting against delta_q, q>=0, characterises the class; (vu)\\W=(u\\W)(v\\W) gives right cancellation in the correct direction. (4) The division bijection and two Mathlib leaves give the closures. (5) The new node applies. (6) The transpose lifts against a trivial fibration. (7) W/empty = *. Small cases: n=2, and n=3 with i=1,2 by attaching triangles along their spines; also empty W, empty T, S=T, and discrete nerves. No duplicate in the DAG: lem-cbc-spine-inner-anodyne is the reverse implication. No cycle (the closure of 257 nodes does not contain the item). Everything is in the unit or is a definition or Mathlib leaf, so there are no tool_uses. No SGA. One form fault, B/brief §3: the new node lacked lean_audit. The fix adds master and slopmaster2 state none in fixes/dag/nodes/sec-six-functors/lem-coef-spine-cancellation-inner-horns.json.; 1 file(s) fixed by the reviewer"
+ }
 }
