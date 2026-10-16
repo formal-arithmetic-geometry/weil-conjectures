@@ -41,12 +41,14 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-rationalization",
  "lean": {
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization",
+  "declaration": "CategoryTheory.Rationalization.W",
+  "statement": "def W : MorphismProperty C :=",
   "branch": "slopmaster2",
-  "declarations": [
-   "CategoryTheory.Rationalization.W",
-   "CategoryTheory.Rationalization"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 18:37 UTC for group NK, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: W gives the distinguished-triangle class with M-torsion cone, and Rationalization gives its Verdier localization where these morphisms are inverted."
+  "by": "NC",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The existing reducible definition is (torsion M C).trW. Mathlib ObjectProperty.trW expands exactly to the existence of Z, g : Y ⟶ Z, h : Z ⟶ X⟦1⟧ and a distinguished Triangle.mk f g h with torsion M C Z. The latter is ∃ m ∈ M, m • 𝟙 Z = 0. The same upstream module defines Rationalization M C as (W M C).Localization and its canonical functor Q, so W is precisely the defining class inverted in the Verdier quotient. The current source path is DerivedCategory/Complete/Rationalization.lean, replacing the stale path in the inherited attachment. No new definition or module is needed."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -76,5 +78,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64323b803",
+  "group": "NC",
+  "result": "pass",
+  "note": "Existing-declaration delivery: node lean record only (module Complete.Rationalization, decl CategoryTheory.Rationalization.W, statement 'def W : MorphismProperty C :=' verbatim, existing:true); report has real Worker report and Second reading by NC. Blueprint source equals node statement verbatim. W := (torsion M C).trW checked by Iff.rfl to be exactly ∃ Z g h, Triangle.mk f g h distinguished ∧ ∃ m∈M, m•𝟙Z=0 (existential cone, f first arrow). Situation matches landed lem-sfb-torsion-triangulated; no IsTriangulated or other extra assumption; universes w,u,v independent; edge cases 0∈M, M=⊥, zero object, zero ring, shift 0 fine. Dropping Rationalization from declarations is correct (separate node def-sfb-rationalization-quotient). nt_compile.py --json against side overlay compiled module and check file cleanly; axioms propext/Classical.choice/Quot.sound. Informational: lean_audit keeps stale DerivedCategory.Rationalization path (maintainer field)."
  }
 }
