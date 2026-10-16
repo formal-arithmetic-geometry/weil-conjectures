@@ -29,9 +29,96 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every small simplicial set $L$, the definitions give a bijection between maps $e:L\\to S_y$ and maps $F:L\\star\\Delta^0\\to\\mathcal C$ taking the apex to $y$. Explicitly, on a pure $L$-simplex $a\\in L_n$ put $F(a)=d_{n+1}e_n(a)$, and on a pure apex simplex use the constant simplex at $y$. On a mixed $r$-simplex with initial block $a\\in L_p$ and final nonempty apex block, use the pullback of $e_p(a)$ along the monotone map $[r]\\to[p+1]$ which is the identity on the first $p+1$ vertices and sends the remaining vertices to $p+1$. Restricting an ordered block commutes with this formula, by the $\\alpha^+$ operators of $S_y$; when the initial block disappears it gives the constant simplex at $y$. Conversely set $e_n(a)=F\\circ(a\\star\\operatorname{id}_{\\Delta^0})$ on $\\Delta^{n+1}$. These two operations are inverse: every mixed simplex is a degeneracy in the apex block of one with a single final apex vertex. The formulas also show that the bijection commutes with precomposition by every map $L'\\to L$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01KV",
+    "place": "Universal property of the join slice specialized to a point; explicit degreewise verification."
+   }
+  },
+  {
+   "text": "The simplicial set $S_y$ is a quasicategory, without invoking the slice-arrow comparison that uses the present item. Indeed a horn $\\Lambda_i^n\\to S_y$, $0<i<n$, corresponds by the preceding formulas and facewise gluing to a map $\\Lambda_i^n\\star\\Delta^0\\to\\mathcal C$. Restrict to the initial horn $\\Lambda_i^n$ and fill it in $\\mathcal C$. Adjoining this initial $n$-simplex to the prescribed joined horn gives a map from $\\Lambda_i^{n+1}$: its faces with indices $j\\ne i$, $j\\leq n$, are the joined prescribed faces, and its last face is the just chosen simplex. Their intersections agree by construction. Since $0<i<n+1$, fill this second inner horn in $\\mathcal C$. The filler has last vertex $y$ and so defines the required $n$-simplex in $S_y$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01KV",
+    "place": "Direct two-inner-horn proof of the quasicategory hypothesis in Lemma 4.6.4.25."
+   }
+  },
+  {
+   "text": "Factor the fold map $J\\amalg J\\to J$ by the cofibration--trivial-fibration factorization of [lem-coef-joyal-model-structure] as $J\\amalg J\\hookrightarrow\\overline J\\xrightarrow{\\pi}J$. Let $s_0,s_1$ be its restrictions to the two copies. The factorization equation gives $\\pi s_i=\\operatorname{id}_J$, the first map is degreewise injective, and the trivial fibration $\\pi$ is a categorical equivalence. Thus these data satisfy precisely the definition of a categorical mapping cylinder for $J$ relative to the empty subset in [lem-coef-relative-categorical-cylinder-criterion]. All objects remain small in the fixed universe, by the cited factorization statement.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-relative-categorical-cylinder-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KV",
+    "place": "Choice of a categorical mapping cylinder; Definition 4.6.3.3 (01K5), using the Joyal factorization."
+   }
+  },
+  {
+   "text": "Put $B=J\\star\\Delta^0$, $A=\\{*\\}$, $\\overline B=\\overline J\\star\\Delta^0$, $s'_i=s_i\\star\\operatorname{id}_{\\Delta^0}$ and $\\pi'=\\pi\\star\\operatorname{id}_{\\Delta^0}$. The map $\\pi'$ is a categorical equivalence by [lem-coef-join-preserves-categorical-equivalences], since $\\pi$ and the identity are categorical equivalences. We have $\\pi's'_i=\\operatorname{id}_B$, and both sections agree on $A$. Moreover $B\\amalg_A B\\to\\overline B$ is degreewise injective: on each pure $J$ summand or mixed summand it is the corresponding injection from one copy of $J_p$ into $\\overline J_p$; the two images are disjoint because $J\\amalg J\\hookrightarrow\\overline J$ is injective. Their only common summand is the pure apex, already identified in the gluing. Hence these joined data are a categorical mapping cylinder for $B$ relative to $A$, with exactly the hypotheses of [lem-coef-relative-categorical-cylinder-criterion].",
+   "uses": [
+    "lem-coef-join-preserves-categorical-equivalences",
+    "lem-coef-relative-categorical-cylinder-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KV",
+    "place": "The joined cylinder relative to the apex; Corollary 4.6.2.9 (01HW) and the degreewise injection check."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-relative-categorical-cylinder-criterion] with domain $J$, subset $\\varnothing$, target $Q=S_y$ (a quasicategory by Step 2), and the cylinder of Step 3. It says that an equivalence edge between $e_0,e_1$ in $\\operatorname{Fun}(J,S_y)$ exists exactly when there is $\\overline e:\\overline J\\to S_y$ with $\\overline e s_i=e_i$ for $i=0,1$.",
+   "uses": [
+    "lem-coef-relative-categorical-cylinder-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KV",
+    "place": "Condition (1) reformulated as (1 prime), by Corollary 4.6.3.11 (01KD)."
+   }
+  },
+  {
+   "text": "Apply the same criterion with domain $B=J\\star\\Delta^0$, subset $A=\\{*\\}$, target $Q=\\mathcal C$, common restriction $f_A(*)=y$, diagrams $F_{e_0},F_{e_1}$, and the cylinder of Step 4. The relative functor simplicial set in that criterion is exactly $\\mathcal A_J$: in degree $r$ the restriction to $\\{*\\}\\times\\Delta^r$ is the constant simplex at $y$, with precisely the same operators. It follows that an equivalence edge between $F_{e_0},F_{e_1}$ in $\\mathcal A_J$ exists exactly when there is $\\overline F:\\overline J\\star\\Delta^0\\to\\mathcal C$ with $\\overline F s'_i=F_{e_i}$ for $i=0,1$. Any such extension already fixes the apex, since the apex belongs to each section image.",
+   "uses": [
+    "lem-coef-relative-categorical-cylinder-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KV",
+    "place": "Condition (2) reformulated as (2 prime), in the strict relative diagram category, by 01KD."
+   }
+  },
+  {
+   "text": "Use Step 1 for $L=\\overline J$. It identifies the two extension conditions in Steps 5 and 6. In one direction $\\overline e s_i=e_i$ implies $F_{\\overline e}(s_i\\star\\operatorname{id})=F_{e_i}$ by the explicit precomposition formula. Conversely any $\\overline F$ of Step 6 takes its apex to $y$, and so determines $\\overline e$; restricting $\\overline F$ along $s'_i$ and applying the inverse formula gives $\\overline e s_i=e_i$. Combining the two equivalences of existence conditions proves the required if and only if, with equivalence edges throughout understood by their inverse and both triangle witnesses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01KV",
+    "place": "Final universal-property identification of (1 prime) and (2 prime)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-relative-categorical-cylinder-criterion",
+  "lem-coef-join-preserves-categorical-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01KV",
+  "place": "Lemma 4.6.4.25 specialized to the one-point diagram; its categorical-mapping-cylinder argument is expanded explicitly. Online source is not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +175,45 @@
    "results": "{\"t\": \"2026-10-16T14:42:09Z\", \"tool\": \"grep\", \"query\": \"functorEquiv|def coneEquiv|def ofDiagEquivalence\", \"sub\": \"CategoryTheory/Comma/Over/Basic.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"1258\", \"1269\", \"1277\", \"1286\", \"1372\"], \"digest\": \"32eba4eb39dce12a\"}",
    "date": "2026-10-16",
    "verdict": "no match: source-line lookup in CategoryTheory/Comma/Over/Basic.lean; read the signatures and definitions at the returned lines. These declarations concern ordinary categories or ordinary nerves, rather than equivalence relations between diagrams in arbitrary quasicategorical slices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of diagrams in a quasicategorical slice is equivalent to equivalence of their right cone diagrams fixing the cone vertex",
+   "results": "{\"t\": \"2026-10-16T18:33:54Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence of diagrams in a quasicategorical slice is equivalent to equivalence of their right cone diagrams fixing the cone vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cones.functorialityEquivalence\", \"CategoryTheory.WithTerminal.coneEquiv\", \"CategoryTheory.Limits.Cones.whiskeringEquivalence\", \"CategoryTheory.Limits.Cones.postcomposeEquivalence\", \"CategoryTheory.Limits.Cones.functorialityEquivalence_functor\", \"CategoryTheory.Over.ConstructProducts.conesEquiv_functor\", \"CategoryTheory.Over.ConstructProducts.conesEquiv\", \"CategoryTheory.Limits.Cones.whiskeringEquivalence_functor\"], \"digest\": \"f3f83cb4743c5f3d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/WithTerminal/Cone.lean:100-122 and CategoryTheory/Join/Basic.lean:624-653. These concern ordinary categories and their cone categories, not arbitrary quasicategories or strict relative functor simplicial sets. Focused simplicial-source grep returned no matches; both semantic phrasings give only ordinary-category cone statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"join\"",
+   "results": "{\"t\": \"2026-10-16T18:33:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"disjoint_nhdsSet_principal\", \"disjoint_principal_nhdsSet\", \"SeparatedNhds.disjoint_nhdsSet\", \"IsCompact.disjoint_nhdsSet_left\", \"IsCompact.disjoint_nhdsSet_right\", \"nhdsSet_prod_le_of_disjoint_cocompact\", \"prod_nhdsSet_le_of_disjoint_cocompact\", \"IsCompact.disjoint_nhdsSet_nhds\"], \"digest\": \"f4b4f5f75c1ca3f3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/WithTerminal/Cone.lean:100-122 and CategoryTheory/Join/Basic.lean:624-653. These concern ordinary categories and their cone categories, not arbitrary quasicategories or strict relative functor simplicial sets. Focused simplicial-source grep returned no matches; both semantic phrasings give only ordinary-category cone statements."
+  },
+  {
+   "tool": "grep",
+   "query": "slice.*diagram|diagram.*slice|join.*equivalen|equivalen.*join",
+   "results": "{\"t\": \"2026-10-16T18:33:44Z\", \"tool\": \"grep\", \"query\": \"slice.*diagram|diagram.*slice|join.*equivalen|equivalen.*join\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/WithTerminal/Cone.lean:100-122 and CategoryTheory/Join/Basic.lean:624-653. These concern ordinary categories and their cone categories, not arbitrary quasicategories or strict relative functor simplicial sets. Focused simplicial-source grep returned no matches; both semantic phrasings give only ordinary-category cone statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural equivalences between diagrams in an infinity categorical slice correspond to relative equivalences of cone diagrams",
+   "results": "{\"t\": \"2026-10-16T18:33:45Z\", \"tool\": \"leansearch\", \"query\": \"Natural equivalences between diagrams in an infinity categorical slice correspond to relative equivalences of cone diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.ConstructProducts.conesEquivFunctor\", \"CategoryTheory.WithInitial.coconeEquiv\", \"CategoryTheory.WithInitial.coconeEquiv_functor_obj_ι_app_of\", \"CategoryTheory.Limits.IsLimit.ofConeEquiv\", \"CategoryTheory.Over.ConstructProducts.conesEquiv\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.WithTerminal.isLimitEquiv\", \"CategoryTheory.Over.ConstructProducts.conesEquivInverse\"], \"digest\": \"162d83c868d6c935\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/WithTerminal/Cone.lean:100-122 and CategoryTheory/Join/Basic.lean:624-653. These concern ordinary categories and their cone categories, not arbitrary quasicategories or strict relative functor simplicial sets. Focused simplicial-source grep returned no matches; both semantic phrasings give only ordinary-category cone statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two maps into a slice infinity category are isomorphic exactly when the corresponding cone extensions are isomorphic relative to the apex",
+   "results": "{\"t\": \"2026-10-16T18:34:06Z\", \"tool\": \"leanfinder\", \"query\": \"Two maps into a slice infinity category are isomorphic exactly when the corresponding cone extensions are isomorphic relative to the apex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cones.extendIso\", \"CategoryTheory.LiftableCone.mk.inj\", \"CategoryTheory.Limits.Cones.instIsIsoConeExtend\", \"CategoryTheory.Limits.Cones.cone_iso_of_hom_iso\", \"CategoryTheory.Limits.Cone.mk.inj\", \"CategoryTheory.Limits.Cones.extendIso_hom_hom\", \"CategoryTheory.Limits.Wedge.ext_hom_hom\", \"CategoryTheory.Limits.Cones.extendIso_inv_hom\"], \"digest\": \"55a3d9bcb04dd6c9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/WithTerminal/Cone.lean:100-122 and CategoryTheory/Join/Basic.lean:624-653. These concern ordinary categories and their cone categories, not arbitrary quasicategories or strict relative functor simplicial sets. Focused simplicial-source grep returned no matches; both semantic phrasings give only ordinary-category cone statements."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-slice-arrow-equivalence",
@@ -99,5 +221,21 @@
   "group": "Q53"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-join-slice-diagram-isomorphisms",
+  "worker": "stage1",
+  "summary": "Verified Kerodon 01KV, 01KD, 01K5 and 01HW online. Kept the statement unchanged; expanded the slice/cone correspondence and its naturality, supplied a direct two-inner-horn proof that S_y is a quasicategory to avoid a dependency cycle, and constructed the ordinary and relative joined cylinders. Two new general statement-only lemmas isolate categorical join invariance and the relative cylinder criterion. No project Lean attachment or Mathlib match was found.",
+  "blueprint": "Realizes the diagram-isomorphism step of Kerodon Theorem 4.6.4.19 within the coherent enhancement supporting the displayed derived coefficient adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint; retains the inherited ancestry and unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N2-12b47d201",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-12b47d201 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the cited statements (def-cbc-enhanced-diagrams-cones, lem-coef-joyal-model-structure), the citer lem-coef-infinity-slice-arrow-equivalence, the ancestor prop-coef-integral-exceptional-adjoint, the unit and the chapter, all in full. The Kerodon sources (01KV, 01HW, 01K5, 01KD, 016M, 016X, 016Y) are not archived under literature/, so I could not open them here. They are recorded as WANTED and proof_origin is agent, so I checked each statement and step on its own mathematics. Item: the statement is unchanged and true; the strict fiber over y fixes the whole apex simplex, and no hypothesis was added or weakened. Step 1: the join-slice bijection holds for pure and mixed simplices, deleting the whole L-block gives the degenerate simplex at y, and the bijection is natural in L. Step 2: Λ^n_i⋆Δ^0 together with the initial face is exactly Λ^{n+1}_i with 0<i<n+1, so two inner fillings show S_y is a quasicategory without the cyclic slice lemma; the cited nodes do not depend on the item. Step 3: the Joyal factorization of the fold map gives an injective J⊔J→J̄, πs_i=id and π a categorical equivalence. Step 4: π⋆id is a categorical equivalence by the join node, and B⊔_A B→J̄⋆Δ^0 is injective degree by degree, with the two images disjoint except on the apex. Steps 5 and 6: the criterion applies with (∅, J, S_y) and with (apex, J^▷, C); Fun_{f_A} equals A_J degree by degree. Step 7: the extension conditions correspond by naturality of the bijection, and every extension sends the apex to y. proof_deps equals the union of uses. Join node: true for arbitrary simplicial sets; empty factors are fine; not a duplicate of the blunt/sharp join nodes; Mathlib's isEquivalenceMapPair is for ordinary categories only. Cylinder criterion: I checked it independently through the model structure under A, using the (B×J)⊔_{A×J}A cylinder, the invertible-interval node and the any-good-cylinder test; the cases A=B and A=∅ work. It is not a duplicate of lem-coef-localized-good-homotopy-test or lem-coef-model-localization-homotopy-classes, which do not identify homotopy classes with equivalence edges in a strict relative fiber. All nodes are in the same unit, so no tool_uses are needed. No SGA is used, no target is involved, and I made no changes."
+ }
 }
