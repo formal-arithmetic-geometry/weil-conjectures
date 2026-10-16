@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-dc-proper-pushforward-left-adjoint-oe",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$Rp_*$ on $D_{\\mathrm{cons}}(-,\\cO_E)$ is a left adjoint for proper $p$",
@@ -36,24 +36,145 @@
  ],
  "proof": [
   {
-   "text": "This is the first part of the argument in the proof of\n[lem-sfb-dc-proper-pushforward-left-adjoint-e]. On each level $\\cO_E/\\varpi^n$, the étale $Rp^!$\nexists (SGA 4, XVIII) and preserves bounded constructible complexes (SGA 4½,\n*Th. finitude*). The levels are compatible with reduction, and their derived limit is right\nadjoint to $Rp_*$ on $D_{\\mathrm{cons}}(-,\\underline{\\cO}_E)$ (Bhatt–Scholze, §6.8).",
+   "text": "Put $\\Lambda=\\underline{\\cO}_E$. Both $D_{\\mathrm{cons}}(T,\\Lambda)$ of [sk-def-sfb-bounded-constructible] and $\\Dbc(T,\\cO_E)$ of [sk-def-sfb-constructible] are the full subcategory of the derived category of $\\Lambda_T$-modules consisting of bounded complexes with constructible cohomology, for $T=Z,Y$. Thus these are the same categories with the same morphisms; no change to discrete constant coefficients is made. For integral coefficients [sk-lem-integral-models] gives $\\Dctf(T,\\cO_E)=\\Dbc(T,\\cO_E)$. Write $\\mathcal C_T$ for this common category.",
    "uses": [
-    "lem-sfb-dc-proper-pushforward-left-adjoint-e"
+    "sk-def-sfb-bounded-constructible",
+    "sk-def-sfb-constructible",
+    "sk-lem-integral-models"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+    "place": "Opening equality Dctf=Dbc; definitions of Dcons and Dbc"
+   }
+  },
+  {
+   "text": "The coefficient $\\cO_E$ is admissible in the explicit list of [sk-def-localizing-closure], since $E/\\mathbf Q_\\ell$ is finite. By the setting [sk-def-sfb-dc-setting], $Z$ and $Y$ are separated finite-type schemes over the standing field $k$, of characteristic different from $\\ell$, and $p$ is a morphism of these schemes. Apply [sk-thm-existence] (2)--(4) with $f=p$ and integral coefficients. On $\\mathcal T_T=\\Loc(\\mathcal C_T)$ it supplies a functor $F=Rp_!$ and an exact right adjoint $G=p^!$, with $F(\\mathcal C_Z)\\subseteq\\mathcal C_Y$ and $G(\\mathcal C_Y)\\subseteq\\mathcal C_Z$. In particular both restrictions are functors; preservation by the right adjoint is part (4), not a consequence of Brown representability alone.",
+   "uses": [
+    "sk-def-localizing-closure",
+    "sk-def-sfb-dc-setting",
+    "sk-thm-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/_section.md",
+    "place": "Parts (2)--(4), integral coefficient case"
+   }
+  },
+  {
+   "text": "For proper $p$, clause (1) of [det-cor-existence-ii-restriction] gives a natural isomorphism $F\\cong Rp_*|_{\\mathcal T_Z}$. This is the proper compactification comparison: $Z\\xrightarrow{\\mathrm{id}}Z\\xrightarrow{p}Y$ is an admissible compactification and its extension-by-zero factor is the identity. The cited clause supplies the comparison with the chosen compactification, so equality is not inferred merely by substituting a different choice into a definition. On $\\mathcal C_Z$ the resulting restricted ambient pushforward is exactly the functor of [def-sfb-dc-lower-star].",
+   "uses": [
+    "det-cor-existence-ii-restriction",
+    "def-sfb-dc-lower-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.md",
+    "place": "Clause (1): proper lower shriek is restricted ambient direct image"
+   }
+  },
+  {
+   "text": "Define $Rp^!:=G|_{\\mathcal C_Y}$. For $K\\in\\mathcal C_Z$ and $L\\in\\mathcal C_Y$, the full inclusions from [sk-def-localizing-closure] and Step 1, the natural isomorphism in Step 3, and the adjunction in [sk-thm-existence] (3) give\n$$\n\\operatorname{Hom}_{\\mathcal C_Y}(Rp_*K,L)\n=\\operatorname{Hom}_{\\mathcal T_Y}(Rp_*K,L)\n\\cong\\operatorname{Hom}_{\\mathcal T_Y}(FK,L)\n\\cong\\operatorname{Hom}_{\\mathcal T_Z}(K,GL)\n=\\operatorname{Hom}_{\\mathcal C_Z}(K,Rp^!L).\n$$\nEvery bijection is natural in $K,L$: the middle ones come from a natural functor isomorphism and an adjunction, and the equalities are those of full subcategories. These bijections are precisely an adjunction for the stated $Rp_*$ and $Rp^!$ on $D_{\\mathrm{cons}}$.",
+   "uses": [
+    "sk-def-localizing-closure",
+    "sk-thm-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.md",
+    "place": "Proof, part (2): natural Hom bijection along full inclusions"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-dc-proper-pushforward-left-adjoint-e"
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-constructible",
+  "sk-lem-integral-models",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-dc-setting",
+  "sk-thm-existence",
+  "det-cor-existence-ii-restriction",
+  "def-sfb-dc-lower-star"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/lem-sfb-dc-proper-pushforward-left-adjoint-oe.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii.proof.md",
+  "place": "Opening proper identity-compactification argument, parts (3)--(4) of sk-thm-existence, and detailed restriction in sk-cor-existence-ii-restriction"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "right adjoint|Derived.*pushforward|proper.*push",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean, Mathlib/CategoryTheory/Category/Cat/Adjunction.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Bousfield.lean (directory CategoryTheory/)",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not establish proper derived pushforward as a left adjoint on the bounded constructible condensed integral category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pushforward for a proper morphism on constructible condensed O_E complexes has a right adjoint",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafAdjunctionContinuous",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not establish proper derived pushforward as a left adjoint on the bounded constructible condensed integral category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsRightAdjoint, DerivedCategory",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.IsRightAdjoint'",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern: loogle: unknown identifier 'CategoryTheory.IsRightAdjoint'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pushforward for a proper morphism on constructible condensed O_E complexes has a right adjoint",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not establish proper derived pushforward as a left adjoint on the bounded constructible condensed integral category"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|exceptional|[Pp]roper.*[Aa]djoint",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean (directory AlgebraicGeometry/)",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not establish proper derived pushforward as a left adjoint on the bounded constructible condensed integral category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image of bounded constructible complexes over a condensed l-adic valuation ring admits an exceptional inverse image as right adjoint",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat, CategoryTheory.Functor.rightAdjoint, PresheafOfModules.instIsRightAdjointPushforward, Topology.IsInducing.adjunction, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not establish proper derived pushforward as a left adjoint on the bounded constructible condensed integral category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftAdjoint, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not establish proper derived pushforward as a left adjoint on the bounded constructible condensed integral category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image of bounded constructible complexes over a condensed l-adic valuation ring admits an exceptional inverse image as right adjoint",
+   "results": "8 hits: CondensedMod.LocallyConstant.adjunction, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, LightCondMod.LocallyConstant.adjunction, Condensed.profiniteSolid, Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, LightCondSet.LocallyConstant.adjunction, CondensedSet.LocallyConstant.adjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not establish proper derived pushforward as a left adjoint on the bounded constructible condensed integral category"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsRightAdjointPushforward|def rightAdjoint|IsLeftAdjoint|def pullbackPushforwardAdjunction",
+   "results": "12 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean (directory Algebra/Category/ModuleCat/Sheaf/)",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not establish proper derived pushforward as a left adjoint on the bounded constructible condensed integral category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pushforward for a proper morphism on constructible condensed O_E complexes has a right adjoint",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, Condensed.profiniteSolid, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, TopCat.Sheaf.instIsRightAdjointPushforward, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not establish proper derived pushforward as a left adjoint on the bounded constructible condensed integral category"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -67,5 +188,29 @@
   "sk-def-sfb-condensed-ring"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-dc-proper-pushforward-left-adjoint-oe",
+  "worker": "stage1",
+  "summary": "Replaced the prior draft, whose integral exceptional theorem required an algebraically closed finite-field base and whose constant/completed comparison did not identify the condensed category. Followed the enclosing unit: identify Dcons=Dbc=Dctf with the same pulled-back condensed coefficients; use the existing exceptional existence theorem and its preservation clause; use the proper comparison; write the natural Hom bijection. No new nodes.",
+  "blueprint": "Realizes the enclosing sk-cor-existence-ii proof, opening sentence and its reference to sk-thm-existence (3)--(4), with the detailed full-subcategory argument of det-cor-existence-ii-restriction. The node-level imported torsion-limit/Sources route is replaced under the human route lock.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-integral-models",
+    "why": "Uses only the integral equality Dctf=Dbc to identify the coefficient categories before the unit's own exceptional-existence argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-integral-models"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-bbb287d4b",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-bbb287d4b (reviewer sub-agent of L); spot-checked: Read the item, all cited statements and source places, and chapter/unit route. All four steps are supported; coefficient categories, proper comparison, preservation, naturality, edge cases, and dependency paths check out. Accepted integral-model tool use. No new nodes. review.md records inherited source metadata contradicting the report’s cleanup claim; the replacement proof uses no SGA source."
+ }
 }
