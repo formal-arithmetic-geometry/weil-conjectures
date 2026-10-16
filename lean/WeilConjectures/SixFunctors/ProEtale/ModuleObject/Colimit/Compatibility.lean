@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 import WeilConjectures.ConstructibleSheaf.FreeLifting
 import WeilConjectures.CategoryTheory.ModuleObjects.Free
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Sheaf.CategoryTheory.CoefficientPushCopowerCriterion
 
 /-!
 
@@ -780,39 +781,35 @@ private lemma isIso_of_unitDesc {I : Type} [Finite I]
     [IsIso (biproduct.desc fun i ↦ adj_C.unit.app M ≫ R_C.map (e i))]
     [IsIso (biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i))] :
     IsIso (β.app M) := by
-  set β' := mateEquiv adj_C adj_D β
-  have : IsIso β' := hκ
-  have hu := unit_mateEquiv adj_C adj_D β M
-  dsimp at hu
-  -- the comparison `⨁ G M ⟶ G (⨁ M)` is invertible, `G` being additive
-  have hc : IsIso (biproduct.desc fun i ↦ G.map (biproduct.ι (fun _ : I ↦ M) i)) := by
-    have h : (biproduct.desc fun i ↦ G.map (biproduct.ι (fun _ : I ↦ M) i)) =
-        (G.mapBiproduct fun _ : I ↦ M).inv := by
-      ext i
-      simp [Functor.mapBiproduct]
+  rename_i hsrc htgt
+  have hC : IsIso (Sigma.desc fun i ↦ (show M ⟶ R_C.obj (N_C.obj M) from
+          adj_C.unit.app M) ≫ R_C.map (e i)) := by
+    have h : (Sigma.desc fun i ↦ (show M ⟶ R_C.obj (N_C.obj M) from
+          adj_C.unit.app M) ≫ R_C.map (e i)) =
+        (biproduct.isoCoproduct (fun _ : I ↦ M)).inv ≫
+          (biproduct.desc fun i ↦ (show M ⟶ R_C.obj (N_C.obj M) from
+          adj_C.unit.app M) ≫ R_C.map (e i)) := by
+      apply Sigma.hom_ext
+      intro i
+      simp
     rw [h]
-    infer_instance
-  have key : (biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i)) ≫
-      R_D.map (β.app M) =
-      (biproduct.desc fun i ↦ G.map (biproduct.ι (fun _ : I ↦ M) i)) ≫
-        G.map (biproduct.desc fun i ↦ adj_C.unit.app M ≫ R_C.map (e i)) ≫
-          β'.app (N_C.obj M) := by
-    ext i
-    simp only [biproduct.ι_desc_assoc, Category.assoc, ← G.map_comp_assoc, biproduct.ι_desc]
-    rw [← R_D.map_comp, he, R_D.map_comp, ← reassoc_of% hu, G.map_comp, Category.assoc]
-    congr 1
-    exact (β'.naturality (e i)).symm
-  have : IsIso (R_D.map (β.app M)) := by
-    have : IsIso ((biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i)) ≫
-        R_D.map (β.app M)) := by
-      have : IsIso (β'.app (N_C.obj M)) := NatIso.isIso_app_of_isIso (β' : NatTrans _ _) _
-      rw [key]
-      have h2 : IsIso (G.map (biproduct.desc fun i ↦ adj_C.unit.app M ≫ R_C.map (e i))) :=
-        Functor.map_isIso _ _
-      exact @IsIso.comp_isIso _ _ _ _ _ _ _ hc (@IsIso.comp_isIso _ _ _ _ _ _ _ h2 this)
-    exact IsIso.of_isIso_comp_left
-      (biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i)) _
-  exact isIso_of_reflects_iso _ R_D
+    exact @IsIso.comp_isIso _ _ _ _ _ _ _ (inferInstance) hsrc
+  have hD : IsIso (Sigma.desc fun i ↦
+      (show G.obj M ⟶ R_D.obj (N_D.obj (G.obj M)) from
+          adj_D.unit.app (G.obj M)) ≫ R_D.map (e' i)) := by
+    have h : (Sigma.desc fun i ↦ (show G.obj M ⟶ R_D.obj (N_D.obj (G.obj M)) from
+          adj_D.unit.app (G.obj M)) ≫ R_D.map (e' i)) =
+        (biproduct.isoCoproduct (fun _ : I ↦ G.obj M)).inv ≫
+          (biproduct.desc fun i ↦ (show G.obj M ⟶ R_D.obj (N_D.obj (G.obj M)) from
+          adj_D.unit.app (G.obj M)) ≫ R_D.map (e' i)) := by
+      apply Sigma.hom_ext
+      intro i
+      simp
+    rw [h]
+    exact @IsIso.comp_isIso _ _ _ _ _ _ _ (inferInstance) htgt
+  apply (isIso_iff_unitCoproductComparison adj_C adj_D β hκ M I e e' he).2
+  have : PreservesColimit (Discrete.functor (fun _ : I ↦ M)) G := inferInstance
+  exact inferInstanceAs (IsIso (sigmaComparison G (fun _ : I ↦ M)))
 
 end CategoryTheory.Adjunction
 
@@ -1344,6 +1341,15 @@ by
 /-- **(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` and `f` *proper*, on all unbounded objects: `Rf_*`
 then admits a right adjoint `Rf^!`, hence commutes with the coproducts through which the derived
 extension of scalars along the flat `E_X ⟶ ℚ̄_ℓ,X` is computed. See the module docstring. -/
+/- STATEMENT-DISPUTED: the asserted all-unbounded scope is stronger than the available
+bounded-below continuity input. The proposed ambient right adjoint is not supplied by
+ModuleObject.Derived.UpperShriek, which constructs an adjoint only on bounded constructible
+categories with additional geometric hypotheses. AmbientCounterexampleCoproducts disproves the
+analogous ambient coproduct claim for ordinary coefficient sheaves; transferring that example
+to these exact internal condensed modules remains to be formalized. The finite-basis argument
+above is valid, but an infinite basis additionally needs the copower comparison isolated in
+CategoryTheory.Adjunction.isIso_iff_unitCoproductComparison. No claim of a Lean-certified
+counterexample to this exact coefficient instance is made here. -/
 instance isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper [IsProper f]
     (E : FiniteIntermediateField ℓ) :
     IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=

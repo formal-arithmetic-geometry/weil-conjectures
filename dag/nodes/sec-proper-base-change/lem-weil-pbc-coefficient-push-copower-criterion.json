@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-coefficient-push-copower-criterion",
+ "kind": "statement",
+ "title": "A coefficient push mate is invertible exactly when its basis copower comparison is",
+ "statement": "Let A,B,A′,B′ be categories, N_C : A → B and N_D : A′ → B′ left adjoints with right adjoints R_C and R_D. Let G : A → A′ and G′ : B → B′ be functors, and β : G N_D → N_C G′ a natural transformation, written with Lean's left-to-right composition convention. Suppose R_D reflects isomorphisms and the right mate of β is invertible. Fix M in A and an indexing type I, with the I-copowers of M and G(M) existing. For each i let e_i be an endomorphism of N_C(M) and e′_i an endomorphism of N_D(G(M)), satisfying e′_i ≫ β_M = β_M ≫ G′(e_i). Assume that the morphisms from the respective copowers with components unit_C,M ≫ R_C(e_i) and unit_D,G(M) ≫ R_D(e′_i) are invertible. Then β_M is invertible if and only if the canonical comparison from the I-copower of G(M) to G of the I-copower of M is invertible. No finiteness, additivity or preservation of coproducts is assumed.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/Adjunction/ProjectionMapMate.lean",
+  "place": "BaseChange section, isIso_mateEquiv_app_of_isIso_biproductDesc, generalized from finite biproducts to arbitrary copowers with the comparison explicit"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Let β′ be the invertible right mate. Apply the unit-mate identity to M. Check on every coprojection that the target basis morphism followed by R_D(β_M) equals the canonical copower comparison followed by G of the source basis morphism and β′ at N_C(M). Compatibility of e_i with β_M and naturality of β′ give the component equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The image under G of the source basis morphism and the component of β′ are invertible. Both basis morphisms are invertible by hypothesis. Cancelling these factors in the equality shows that R_D(β_M) is invertible exactly when the copower comparison is. Reflection of isomorphisms by R_D gives the equivalence. The same calculation covers the empty indexing type whenever the stipulated isomorphisms exist.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/CategoryTheory/CoefficientPushCopowerCriterion.lean",
+  "place": "Fully proved unit-mate calculation, generalizing the existing finite-basis proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For adjoint functors the unit mate identity identifies scalar extension comparison with coproduct comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv|isIso.*Coproduct|sigmaComparison",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-16",
+   "verdict": "Mate identity used, no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_mateEquiv",
+   "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.unit_mateEquiv'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mate coefficient scalar extension comparison invertible if and only if the functor preserves copowers",
+   "results": "CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit; CategoryTheory.Monoidal.Reflective.isIso_tfae; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.RestrictionCoextensionAdj.unit'; CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom; ModuleCat.homEquiv_extendScalarsComp; CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction; CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso",
+   "date": "2026-10-16",
+   "verdict": "Mate identity used, no complete match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation is an isomorphism if and only if the coproduct comparison is an isomorphism by the adjunction mate unit formula",
+   "results": "8 hits including Limits.instIsIsoSigmaComparison, Limits.coprodComparisonNatIso and Adjunction.isIso_unit_of_iso. These concern preservation or an invertible unit, not the equivalence under basis decompositions.",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.sigmaComparison",
+   "results": "11 hits, including sigmaComparison_map_desc and PreservesCoproduct.of_iso_comparison. These give the comparison API, not the scalar-compatible mate criterion.",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "unitCoproduct|unitDesc|copower.*mate|mate.*copower|unit.*[Cc]oproduct in lean/Sheaf, lean/WeilConjectures/CategoryTheory and Mathlib/CategoryTheory/Adjunction; isIso_mateEquiv_app_of_isIso_biproductDesc in ProjectionMapMate.lean",
+   "results": "No arbitrary-family criterion. ProjectionMapMate.isIso_mateEquiv_app_of_isIso_biproductDesc uses finite biproducts and a base-change transformation from additional adjunctions. Mathlib unit_mateEquiv supplies the component equation used here.",
+   "date": "2026-10-16",
+   "verdict": "Second reader: new criterion needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility",
+  "group": "G1",
+  "date": "2026-10-16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-qbar-condensed-basechange-compatibility",
+   "place": "Its imported proper coefficient push comparison: identify the exact additional continuity input in the infinite-basis argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CoefficientPushCopowerCriterion",
+  "file": "lean/Sheaf/CategoryTheory/CoefficientPushCopowerCriterion.lean",
+  "declaration": "CategoryTheory.Adjunction.isIso_iff_unitCoproductComparison",
+  "statement": "theorem isIso_iff_unitCoproductComparison {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B] {A' : Type uA'} [Category.{vA'} A'] {B' : Type uB'} [Category.{vB'} B'] {N_C : A ⥤ B} {R_C : B ⥤ A} (adj_C : N_C ⊣ R_C) {N_D : A' ⥤ B'} {R_D : B' ⥤ A'} (adj_D : N_D ⊣ R_D) {G : A ⥤ A'} {G' : B ⥤ B'} [R_D.ReflectsIsomorphisms] (β : G ⋙ N_D ⟶ N_C ⋙ G') (hκ : IsIso (mateEquiv adj_C adj_D β)) (M : A) (I : Type w) [HasCoproduct (fun _ : I ↦ M)] [HasCoproduct (fun _ : I ↦ G.obj M)] (e : I → (N_C.obj M ⟶ N_C.obj M)) (e' : I → (N_D.obj (G.obj M) ⟶ N_D.obj (G.obj M))) (he : ∀ i, e' i ≫ β.app M = β.app M ≫ G'.map (e i)) [IsIso (Sigma.desc fun i ↦ (show M ⟶ R_C.obj (N_C.obj M) from adj_C.unit.app M) ≫ R_C.map (e i))] [IsIso (Sigma.desc fun i ↦ (show G.obj M ⟶ R_D.obj (N_D.obj (G.obj M)) from adj_D.unit.app (G.obj M)) ≫ R_D.map (e' i))] : IsIso (β.app M) ↔ IsIso (Sigma.desc fun i ↦ G.map (Sigma.ι (fun _ : I ↦ M) i))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d3b52",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T054835-L-157249",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d3b52",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261016T054835-L-157249",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the new criterion’s Lean signature and proof with its DAG node and finite specialization; both modules compile cleanly, with standard axioms for the proved results and no existing interface changes."
+ }
+}
