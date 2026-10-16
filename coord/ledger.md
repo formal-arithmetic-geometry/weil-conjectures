@@ -15618,7 +15618,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/E2/Sheaf.Paper.StrictHenselizationPointEvaluation (stage 3; reviewer PASS; first push; landing 20261016T221606-L-1613499 (interface); batch 20261016T221550; modules 1; new nodes 0; change records: coord/changes/strictHenselizationPointEvaluation-E2.md)
 - 22:16 L: merged deliver/E3/Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison (stage 3; reviewer PASS; first push; landing 20261016T221607-L-1613839 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/E3/Sheaf.Paper.StrictHenselizationPointEvaluationComparison (stage 3; reviewer PASS; first push; landing 20261016T221607-L-1614019 (proof); batch 20261016T221550; modules 1; new nodes 0)
-- 22:16 L: merged deliver/E3/WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal (stage 3; reviewer PASS; first push; landing 20261016T221608-L-1614192 (interface); batch 20261016T221550; modules 1; new nodes 0; change records: coord/changes/E3-MapModMonoidal-comapCoreMonoidal.md, coord/changes/E3-MapModMonoidal-mapModCoreMonoidal.md)
 - 22:16 L: merged deliver/F1/Sheaf.Paper.ContinuousModuleEncodingSliceFreeness (stage 3; reviewer PASS; first push; landing 20261016T221609-L-1614686 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/F2/Sheaf.Paper.StrictHenselizationFunctoriality (stage 3; reviewer PASS; first push; landing 20261016T221609-L-1614880 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/F3/WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifUpperShriek (stage 3; reviewer PASS; first push; landing 20261016T221610-L-1615087 (interface); batch 20261016T221550; modules 1; new nodes 0; change records: coord/changes/proetale-compactif-upper-shriek-withdrawal.md)
@@ -15664,3 +15663,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:52 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
 
 - 06:54 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
+
+- 06:55 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
