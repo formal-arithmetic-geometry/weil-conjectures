@@ -15,52 +15,51 @@
  ],
  "proof": [
   {
-   "text": "Present the geometric morphism by a continuous finite-limit-preserving functor between sites with finite limits, up to equivalences of sheaf topoi. Transport rings and modules using their algebraic operations. Equivalences preserve balanced tensor products and finite limits and colimits, so flatness is intrinsic and can be tested on the presenting sites.",
+   "text": "Use the independent-universe local equational criterion to express source and target flatness by local finite relation factorizations.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-site-flat-equational-criterion-universes",
+    "def-pc-flat-sheaf-modules",
     "def-pur-sheaf-tensor-product",
-    "def-pc-flat-sheaf-modules",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each n construct a sheaf of coefficient/module tuples satisfying a single finite relation, as an equalizer in a finite product of the underlying ring and module sheaves. Preservation of finite limits by the inverse image lifts a target relation to a generalized section of the inverse image of this relation sheaf. The algebraic inverse-image equations identify the lifted zero, addition, multiplication and scalar operations.",
+   "uses": [
     "def-weil-pbc-algebraic-inverse-image"
    ],
    "elementary": true
   },
   {
-   "text": "For that site functor the inverse image is the sheafification of the filtered colimit over pairs (V,U→v(V)). A finite relation in the inverse-image module locally lifts to the colimit, and locally its sum is zero there. Filteredness puts every coefficient and module element at one common stage, and eventual equality makes their relation zero at a later common stage. The operations induced from the stage maps agree with I because its generalized-section graph equations prescribe addition, zero and scalar multiplication.",
+   "text": "For each witness length l construct the sheaf of a relation tuple, a coefficient matrix, and module entries satisfying the factorization and annihilation equations. The source local criterion says that the witness projections, indexed by l, form a jointly locally surjective family. The left adjoint carries this family to a jointly locally surjective family on the target.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-algebraic-inverse-image"
+    "lem-weil-pbc-site-flat-equational-criterion-universes",
+    "lem-weil-pbc-inverse-image-local-families"
    ],
    "elementary": true
   },
   {
-   "text": "Apply the forward local equational criterion to the flat source module at that stage. It supplies a covering and a finite matrix factorization s_p=Σ_q b_pq t_q with Σ_p a_p b_pq=0. Pull this covering back along U→v(V). Continuity and the covering-sieve axioms make it a covering of U. The stage maps preserve the two matrix identities, giving the factorization of the original relation. The empty relation uses the empty matrix and maximal sieve.",
+   "text": "Locally lift the target generalized relation to one mapped witness sheaf. Its defining finite equalities are preserved by finite limits, and the operation graph equations identify them with the desired matrix factorization and coefficient annihilation in the target ring and module. Apply the reverse local equational criterion to conclude flatness.",
    "uses": [
-    "def-pc-flat-sheaf-modules",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "The reverse local equational criterion makes the inverse-image module flat over the inverse-image ring. Transport this assertion back through the presenting equivalences and the underlying-sheaf and operation identifications specified by I.",
-   "uses": [
-    "def-pc-flat-sheaf-modules",
-    "def-weil-sheaf-of-modules-category",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-algebraic-inverse-image"
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-weil-pbc-site-flat-equational-criterion-universes"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-site-flat-equational-criterion-universes",
   "def-pc-flat-sheaf-modules",
-  "def-weil-pbc-algebraic-inverse-image"
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-weil-pbc-inverse-image-local-families"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 05VD (lemma-pullback-flat), inverse-image part of the proof, with Tag 08FC (local equational criterion) and Tag 03CR (site presentation); independent-universe adaptation, formalization still open"
+  "place": "Tag 05VD via Tag 08FC; direct finite relation/witness sheaf argument by D4, avoiding site presentation and filtered colimits"
  },
  "mathlib_searches": [
   {
@@ -135,13 +134,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-cb0f3",
-  "group": "M2",
+  "reviewer": "X-92a0f",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261015T224109-L-2885323",
+  "landing": "20261016T020325-L-854160",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compiled cleanly; the target signature is unchanged, the sole importer compiles, DAG/report/decomposition agree, and no mechanical or forbidden-declaration faults were found."
+  "note": "independent Codex review: Delivered Lean declarations and proofs matched their DAG records, unchanged published signature, cited sources, clean compilations, and permitted axiom closures."
  }
 }

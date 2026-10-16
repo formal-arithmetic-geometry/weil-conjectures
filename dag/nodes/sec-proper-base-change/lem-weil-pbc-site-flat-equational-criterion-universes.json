@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-site-flat-equational-criterion-universes",
+ "kind": "statement",
+ "title": "Local equational criterion for flatness in independent universes",
+ "statement": "Under the ring, site, universe, weak abelian sheafification, and local-bijectivity hypotheses of [lem-weil-pbc-flat-local-relations-universes], an R-module sheaf M [def-weil-sheaf-of-modules-category] is flat [def-pc-flat-sheaf-modules], for the tensor [def-pur-sheaf-tensor-product], if and only if every finite relation sum_i a_i s_i=0 locally on a covering sieve has a finite factorization s_i=sum_q b_iq t_q with sum_i a_i b_iq=0. The module universe is max(r,m); the site-object and site-morphism universes are unrestricted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08FC; Algebra Tag 04VX for finite tensor witnesses"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-flat-local-relations-universes",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The forward implication is the finite local relation theorem.",
+   "uses": [
+    "lem-weil-pbc-flat-local-relations-universes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the converse, induct on the number of rows of a finite relation matrix. Apply the one-row condition to its first row, substitute its factorization in the remaining rows, apply the induction hypothesis on a covering refinement, and compose the two factorization matrices. Covering-sieve transitivity combines the refinements.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A finite tensor sum killed by an injective presheaf map has a finite coefficient witness for its vanishing after mapping. Apply the matrix condition to the auxiliary relations among its module entries. The witness identities and injectivity imply each column has zero first-factor coefficient, so the tensor sum is locally zero. Thus tensoring a presheaf monomorphism is locally injective. Reuse TensorProduct.exists_relations_with_coefficients from the forward local-relations module; do not restate or reprove its finite witness theorem.",
+   "uses": [
+    "lem-weil-pbc-flat-local-relations-universes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Sheafify the locally injective tensor map to obtain a monomorphism. The forgetful functor to abelian sheaves is faithful, so tensor of module sheaves preserves monomorphisms.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Sectionwise tensor preserves colimits because each ordinary module tensor functor is left adjoint to linear Hom. Evaluation jointly reflects these colimits. The isomorphism between associated tensor and tensor of associated sheaves transports finite-colimit preservation to sheaves.",
+   "uses": [
+    "lem-weil-pbc-tensor-local-bijection-universes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The existing weak abelian sheafification is left exact, hence module sheaves form an abelian category. The tensor functor is additive by right exactness, preserves monomorphisms and finite colimits, hence preserves short exact sequences and finite limits. It is therefore exact, as required for flatness.",
+   "uses": [
+    "lem-sc-weak-sheafify-addcommgrp-left-exact",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-relations-universes",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-tensor-local-bijection-universes",
+  "lem-sc-weak-sheafify-addcommgrp-left-exact",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08FC; Algebra Tag 04VX for finite tensor witnesses; direct independent-universe proof by D4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flatness of sheaves of modules is equivalent to local triviality of finite relations between sections",
+   "results": "{\"t\": \"2026-10-15T23:55:13Z\", \"tool\": \"leansearch\", \"query\": \"Flatness of sheaves of modules is equivalent to local triviality of finite relations between sections\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules over a sheaf of rings is flat if and only if each finite relation between sections locally factors through a finite free module with zero coefficient relation",
+   "results": "{\"t\": \"2026-10-15T23:09:14Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf of modules over a sheaf of rings is flat if and only if each finite relation between sections locally factors through a finite free module with zero coefficient relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.flat_of_localized_span\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.iff_forall_exists_factorization\", \"SheafOfModules.IsFinitePresentation\", \"Module.Flat.of_forall_isTrivialRelation\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"f5bc0065f55224bf\"}",
+   "date": "2026-10-16",
+   "verdict": "No existing result has this statement and universe generality; the available elementary API is used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"flat\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-15T23:09:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"flat\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\"], \"digest\": \"0f8be8cd4d6347c3\"}",
+   "date": "2026-10-16",
+   "verdict": "No existing result has this statement and universe generality; the available elementary API is used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "equational|locally.*trivial.*relations|local.*flat",
+   "results": "{\"t\": \"2026-10-15T23:09:13Z\", \"tool\": \"grep\", \"query\": \"equational|locally.*trivial.*relations|local.*flat\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No existing result has this statement and universe generality; the available elementary API is used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses",
+  "date": "2026-10-16",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+   "place": "Local equational criterion and preservation of its finite witness covers",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatEquationalCriterionOfUniverses.lean",
+  "declaration": "SheafOfModules.isFlatOnSite_iff_local_equationalCriterion",
+  "statement": "theorem isFlatOnSite_iff_local_equationalCriterion\n    {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max r m}] [HasWeakSheafify J AddCommGrpCat.{max r m}]\n    (R : Sheaf J CommRingCat.{r})\n    (M : ringedSiteModules.{max r m}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :\n    IsFlatOnSite M ↔\n      ∀ (U : C) (n : ℕ) (a : Fin n → R.obj.obj (op U))\n        (s : Fin n → M.val.obj (op U)),\n        (∑ p : Fin n, a p • s p) = 0 →\n        ∃ S : Sieve U, S ∈ J U ∧\n          ∀ (V : C) (f : V ⟶ U), S f →\n            ∃ (l : ℕ) (b : Fin n → Fin l → R.obj.obj (op V))\n              (t : Fin l → M.val.obj (op V)),\n              (∀ p : Fin n, M.val.map f.op (s p) = ∑ q : Fin l, b p q • t q) ∧\n              (∀ q : Fin l, (∑ p : Fin n, R.obj.map f.op (a p) * b p q) = 0)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-92a0f",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T020325-L-854160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-92a0f",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T020325-L-854160",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean declarations and proofs matched their DAG records, unchanged published signature, cited sources, clean compilations, and permitted axiom closures."
+ }
+}
