@@ -308,5 +308,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1cf6e8f71",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Read node, its 12 proof steps, dependency def-cbc-enhanced-diagrams-cones and its module (uses Mathlib SSet, horn and nerve), the module and Mathlib innerAnodyneExtensions, nerve, nerveMap and Codiscrete.functorOfFun. Statement matches clause by clause: Finset A in any universe, a∈A (nonempty), b∉A, b≠a derived inside the statement, G_A = nerve of Codiscrete A, canonical pushout.desc map, inner anodyne = Mathlib's class (coproducts reduce to transfinite composites of pushouts). No extra instances or universe restriction. Gluing map has real data and depends on no sorry; only the main theorem is sorry. Docstrings have source and blueprint markers; node lean.statement is verbatim and the node differs only in its lean field; report has both required sections. nt_compile --json: clean, 1.2 s. No duplicate found in Mathlib, Sheaf or the DAG. Cosmetic only: report says no warnings despite the expected sorry warning."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoarseNerveGluing",
+  "declaration": "SSet.innerAnodyne_coarseNerve_gluing",
+  "declarations": [
+   "SSet.coarseNerve",
+   "SSet.coarseNerveMap",
+   "SSet.coarseNerveGluingMap",
+   "SSet.innerAnodyne_coarseNerve_gluing"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoarseNerveGluing.lean",
+  "statement": "theorem innerAnodyne_coarseNerve_gluing {α : Type u} (A : Finset α) (a : α) (ha : a ∈ A) (b : α) (hb : b ∉ A) : innerAnodyneExtensions (coarseNerveGluingMap A a ha b hb (by intro h apply hb simpa [h] using ha))",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations specialize Mathlib codiscrete nerves and inclusion maps and construct the canonical degreewise pushout map with pushout.desc; finite sets use Mathlib singleton and Finset.cons directly. The theorem states the unchanged inner-anodyne gluing assertion."
  }
 }
