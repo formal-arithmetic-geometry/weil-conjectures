@@ -18,79 +18,69 @@
  },
  "proof": [
   {
-   "text": "Use the supplied relative-affine-line identification to embed the explicitly presented polynomial source as the standard affine chart of Y=P^1_B, where B=A^(d-1)_K. The infinity section is the closed complement. Its second chart supplies the nonzero boundary coordinate. The two polynomial charts show that Y is smooth, integral and of dimension d over K.",
+   "text": "Extend the supplied geometric point to its algebraic closure. The single point covers the spectrum of the original field, so the jointly faithful geometric fibre family and the inverse-image/stalk isomorphism reflect vanishing. This uses no separate equivalence theorem for purely inseparable extensions.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q=2, cardinal cancellation gives n+1<=residue transcendence degree. Apply [lem-sc-polynomial-generic-strict-localization-field]. The pullback of the polynomial projection, identified with the relative affine line by the supplied hAffineLine, is an affine line over that separably closed field. The existing proved source-library theorem IsCurve.hasTorsionCohomologicalDimensionLE_of_isSepClosed bounds its torsion cohomological dimension by one. The supplied hStalk gives zero stalk.",
+   "uses": [
+    "lem-sc-polynomial-generic-strict-localization-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q>2, compactify using hAffineLine and the existing projective-line affine chart. The infinity section is a closed immersion since its composite with the separated projective-line projection is the identity. The projective line over the polynomial base is smooth, integral and of dimension n+2: use the relative-dimension-one instance, smoothness and dimension of polynomial affine space, base change of geometric connectedness, and regularity.",
    "uses": [
     "sbc-lem-affine-space-smooth",
     "lemma-nagata-projective-space-base-change-proper",
-    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-    "def-sc-etale-torsion-cd",
-    "def-weil-pbc-inverse-image"
+    "def-weil-regular-scheme"
    ],
    "elementary": false
   },
   {
-   "text": "At a boundary point y, let a=trdeg_K kappa(y). The infinity section identifies its residue field with that of its image in B, so a<=d-1. In the infinity chart the divisor is cut out by the affine coordinate h. Its image in the strict henselization is in the maximal ideal and is nonzero: smoothness gives the regular strict-local domain and the coordinate remains a nonzerodivisor under the flat strict-local map. The supplied punctured strict-local bound hCartier gives cd_tor(Spec R[1/h])<=d-a. The pullback of j to this strict localization is Spec R[1/h]. The supplied comparison hStalk therefore gives zero stalks of R^r j_*M for r>d-a. Away from the boundary these positive direct images vanish, since open restriction is exact, preserves injectives, and identifies j with the identity.",
+   "text": "Apply [lem-sc-affine-line-infinity-strict-local-model] at the extended point. Its a and h satisfy all the supplied hCartier conditions, with canonical scalar maps built directly from the structural morphisms. The given cardinal inequality implies n+2-a<q. Thus the strict-local pullback has zero degree-q cohomology, and hStalk gives zero boundary stalk of R^q j_*M.",
    "uses": [
-    "lem-sc-smooth-strict-local-field-model",
-    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-sc-affine-line-infinity-strict-local-model",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse image commutes with right-derived objects. The open immersion counit identifies restriction of j_* with the identity, whose positive derived functors vanish by [lem-sc-exact-functor-higher-derived-vanishing]. The existing closed-support theorem Etale.mem_essImage_lowerStar_of_isZero_upperStar therefore writes R^q j_*M as i_*N. The closed immersion counit and g i=id identify its boundary stalk and the base stalk of g_*R^q j_*M with the stalk of N. This replaces the finite-stalk formula.",
+   "uses": [
+    "lem-sc-exact-functor-higher-derived-vanishing",
     "lemma-openclosed-stalk-upperstar"
    ],
    "elementary": false
   },
   {
-   "text": "For r>0, the closed-support equivalence gives R^r j_*M=i_*N_r: restrict to the affine chart to get zero, then use the closed immersion unit and geometric-stalk conservativity. The supplied hBoundary gives R^p g_*R^r j_*M=0 for p>0,r>0. Additivity preserves the annihilator N, including on j_*M; since N is positive, j_*M is locally torsion. The supplied hP1 gives R^p g_*j_*M=0 for p>2.",
+   "text": "Additivity preserves the given positive annihilator through j_*, making j_*M torsion. On the Leray diagonal of total degree q, positive-positive terms vanish by the supplied hBoundary, the zero second-coordinate term vanishes by hP1, and the zero first-coordinate term vanishes by the preceding boundary calculation and geometric-point conservativity. The supplied hLeray and derived-degree-zero isomorphisms finish the proof. No Grothendieck spectral-sequence construction or preservation-of-injectives lemma is needed inside this item.",
    "uses": [
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lemma-openclosed-stalk-upperstar",
-    "lemma-weil-pbc-finite-stalk-formula"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For r>2 apply the supplied exact-inverse-image Leray diagonal-vanishing statement. Diagonal terms with p,q positive vanish by the supplied mixed-degree boundary acyclicity; q=0 vanishes by the supplied projective-line bound; p=0 vanishes at the chosen point by the boundary strict-local calculation and finite-stalk formula. Thus the projected higher direct image vanishes at this point.",
-   "uses": [
-    "thm-sp-grothendieck",
-    "lem-weil-pbc-direct-image-preserves-injectives",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lemma-openclosed-stalk-upperstar"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "In degree r=2, the inequality forces the base point to have maximal residue transcendence degree d-1, hence to be the generic point: a nonzero prime of the polynomial ring imposes a nonzero relation among the d-1 coordinate residues. The smooth strict-local field model at the generic point gives a zero-dimensional regular local domain, which is its separably closed residue field. The pullback of f to this strict localization is the affine line over that field. Its torsion cohomological dimension is at most one by the affine curve theorem, so H^2 vanishes. Apply hStalk to get the generic stalk vanishing. Finally, for a separably closed geometric field Omega, extend to its algebraic closure. This purely inseparable extension induces an equivalence of etale topoi; the geometric-stalk/inverse-image comparison transports the vanishing back to s^*R^r f_*M.",
-   "uses": [
-    "lem-sc-smooth-strict-local-field-model",
-    "def-weil-regular-scheme",
-    "def-kun-transcendence-degree",
-    "lem-sc-arbitrary-curve-cd",
-    "lemma-openclosed-stalk-upperstar",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-sc-polynomial-generic-strict-localization-field",
   "sbc-lem-affine-space-smooth",
   "lemma-nagata-projective-space-base-change-proper",
-  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-  "def-sc-etale-torsion-cd",
-  "def-weil-pbc-inverse-image",
-  "lem-sc-smooth-strict-local-field-model",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lemma-openclosed-stalk-upperstar",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "thm-sp-grothendieck",
-  "lem-weil-pbc-direct-image-preserves-injectives",
   "def-weil-regular-scheme",
-  "def-kun-transcendence-degree",
-  "lem-sc-arbitrary-curve-cd"
+  "lem-sc-affine-line-infinity-strict-local-model",
+  "def-sc-etale-torsion-cd",
+  "lem-sc-exact-functor-higher-derived-vanishing"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P1",
+  "group": "C4",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-  "place": "Proof steps 5-10; global induction and local algebra are proved in the calling source module"
+  "place": "Proof steps 4-10; complete Lean assembly and two proved geometric helpers. Closed-support adjunctions replace finite-stalk computation; conservative singleton geometric point replaces a purely inseparable equivalence argument."
  },
  "mathlib_searches": [
   {
@@ -162,12 +152,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261015T233749-L-3369427",
+  "landing": "20261016T015245-L-721167",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

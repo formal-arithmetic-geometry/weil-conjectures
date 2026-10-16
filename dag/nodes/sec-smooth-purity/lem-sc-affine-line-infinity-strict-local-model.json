@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-affine-line-infinity-strict-local-model",
+ "kind": "statement",
+ "title": "The principal open in the strict localization at infinity",
+ "statement": "Let K:Type u be an algebraically closed field and n a natural number. Put B=Spec K[x_0,...,x_n], b:B->Spec K, Y=P^1_B [def-nagata-projective-space-base-change], g:Y->B, and i:B->Y the infinity section. Let e:Spec K[x_0,...,x_(n+1)] ~= A^1_B be any scheme isomorphism, and j=e followed by the ordinary affine chart. For an algebraically closed field Omega:Type u and s:Spec Omega->B, put t=s followed by i and y=t(closedPoint Omega). Use the strict localization R=O^sh_(Y,t), rho:Spec R->Y from [def-weil-pbc-strict-henselization-limit] and [def-weil-pbc-strict-henselization-structural-map], and the canonical K-algebra structure on kappa(y) induced by g followed by b. There exist a natural number a<n+2 and h in R such that both trdeg_K kappa(s) and trdeg_K kappa(y) [def-kun-transcendence-degree] equal a, h is a nonzero element of the maximal ideal of R, and the pullback of j along rho is isomorphic to Spec R[1/h].",
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-kun-transcendence-degree",
+  "def-nagata-projective-space-base-change"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Proof steps 4-6: compactification and boundary strict-local equation"
+ },
+ "proof": [
+  {
+   "text": "For a point of polynomial (n+1)-space, [lem-sc-closed-irreducible-dimension-trdeg] identifies its residue transcendence degree with the finite dimension a of its closure. This is at most n+1, the dimension of the polynomial spectrum. The infinity section is a closed immersion, so [lem-weil-pbc-closed-immersion-residue-field-iso] identifies its residue field with that of the base point; composition naturality shows the isomorphism respects K.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-weil-pbc-closed-immersion-residue-field-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The infinity chart is Spec A[z], where A is the polynomial base ring. The strict localization has closed point over infinity by [lem-weil-pbc-strict-henselization-local-structure]. Every point of a local spectrum specializes to its closed point, so rho factors through this chart. Pull z back along the induced explicit ring map alpha:A[z]->R to define h.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chart map is ind-etale by [lem-weil-pbc-strict-henselization-affine-chart-ind-etale]. Its filtered etale presentation is a filtered colimit of flat algebras, so it is flat. The variable z is regular in A[z], hence h is regular in the nonzero ring R and h is not zero. The two projective-line charts meet in D(z), so rho inverse-image of the ordinary chart is D(h). Infinity lies outside that chart, so the closed point lies outside D(h), giving h in the maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pullback open immersion and Spec R[1/h]->Spec R have the same range D(h). Mathlib IsOpenImmersion.isoOfRangeEq identifies their sources. Transport along e by the pullback universal property. All constructions work at nonclosed base points and at n=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C4",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Proof steps 4-6: compactification and boundary strict-local equation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "local equation at infinity in the projective line compactification strict henselization complement principal open",
+   "results": "8 hits about valuations at infinity, Laurent series, Proj standard opens, and Dedekind completions.",
+   "date": "2026-10-16",
+   "verdict": "No strict-local projective-line principal-open theorem; use the existing two-chart formulas and affine strict-local ind-etaleness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"Localization.Away\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization.*[Aa]way|[Aa]way.*strictHenselization",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Blueprint searches for strict localization at infinity and generic strict localization also gave no existing node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The complement of the infinity divisor in a strict localization of the projective line is a principal open with nonzero equation",
+   "date": "2026-10-16",
+   "status": "unavailable",
+   "results": "Service unavailable: Internal Server Error; no verdict recorded."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound",
+  "date": "2026-10-16",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-affine-torsion-cd",
+   "place": "Proof steps 4-6: compactification and boundary strict-local equation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Sites.AffineLineInfinityStrictLocalModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/AffineLineInfinityStrictLocalModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineLine_infinity_strictLocal_model",
+  "statement": "theorem affineLine_infinity_strictLocal_model\n    (K : Type u) [Field K] [IsAlgClosed K] (n : ℕ)\n    (e : Spec (.of (MvPolynomial (Fin (n + 2)) K)) ≅\n      AffineSpace PUnit.{u + 1} (Spec (.of (MvPolynomial (Fin (n + 1)) K))))\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (s : Spec (.of Ω) ⟶ Spec (.of (MvPolynomial (Fin (n + 1)) K))) :\n    let B := Spec (.of (MvPolynomial (Fin (n + 1)) K))\n    let b := Spec.map (CommRingCat.ofHom (algebraMap K (MvPolynomial (Fin (n + 1)) K)))\n    let Y := AlgebraicGeometry.ProjectiveLine B\n    let g := Y ↘ B\n    let j := e.hom ≫ ProjectiveLine.affineChart B\n    let t := s ≫ ProjectiveLine.infinity B\n    let y := t (IsLocalRing.closedPoint Ω)\n    letI : Algebra K (Y.residueField y) := ((g ≫ b).residueFieldAlgebraMap y).toAlgebra\n    ∃ a : ℕ, a < n + 2 ∧\n      residueFieldTrdeg b (s (IsLocalRing.closedPoint Ω)) = (a : Cardinal.{u}) ∧\n      Algebra.trdeg K (Y.residueField y) = (a : Cardinal.{u}) ∧\n      ∃ h : strictHenselizationRing t, h ∈ IsLocalRing.maximalIdeal _ ∧ h ≠ 0 ∧\n        Nonempty (pullback j (strictHenselizationStructuralMap t) ≅\n          Spec (.of (Localization.Away h)))",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261016T015245-L-721167",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261016T015245-L-721167",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
