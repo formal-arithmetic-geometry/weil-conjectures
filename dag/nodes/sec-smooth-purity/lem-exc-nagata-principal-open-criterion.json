@@ -116,11 +116,17 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian",
+  "declaration": "Ideal.exists_notMem_forall_of_isNoetherianRing",
   "declarations": [
    "Ideal.exists_notMem_forall_of_isNoetherianRing"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 03:29 UTC for group ND, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_7d675a26.jsonl.gz: The declaration supplies the exact generalization-stability and local principal-neighborhood hypotheses and the resulting principal-open conclusion."
+  "statement": "theorem Ideal.exists_notMem_forall_of_isNoetherianRing {S : Type*} [CommRing S]\n    [IsNoetherianRing S] (U : Ideal S → Prop)\n    (hgen : ∀ P Q : Ideal S, P.IsPrime → Q.IsPrime → Q ≤ P → U P → U Q)\n    (hloc : ∀ P : Ideal S, P.IsPrime → U P →\n      ∃ g ∉ P, ∀ Q : Ideal S, Q.IsPrime → P ≤ Q → g ∉ Q → U Q)\n    (P : Ideal S) [P.IsPrime] (hP : U P) :\n    ∃ g ∉ P, ∀ Q : Ideal S, Q.IsPrime → g ∉ Q → U Q",
+  "branch": "slopmaster2",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The source declaration is exactly Nagata’s principal-open criterion (Stacks Tag 0541): it uses a predicate U on ideals of a commutative Noetherian ring, generalization stability hgen, the local principal-neighborhood hypothesis hloc, and concludes a principal neighborhood D(g) on which U holds. The theorem’s explicit prime-ideal typeclass [P.IsPrime] and all quantified clauses match the node statement."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -140,5 +146,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2953df6eb",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, every statement clause, dependency and Stacks sources, verbatim signature, edge cases, and reuse gates. Independent scompile.py compilation passed without diagnostics. No fixes required; branch head unchanged."
  }
 }
