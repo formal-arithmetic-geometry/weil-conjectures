@@ -26,9 +26,77 @@
   "def-weil-pbc-free-module",
   "def-pc-module-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary acyclic complex $A$. Write $Q_m=C_{m+1}/C_m$ and choose a basis $(e_{m,q,b})_{b\\in B_{m,q}}$ of each $Q_m^q$ using [def-weil-pbc-free-module]. The signed total tensor convention [def-pc-tensor-complex-sheaves], specialized to modules, gives\n$$\\operatorname{Tot}(A\\otimes_R Q_m)^n\\cong\\bigoplus_{q\\in\\mathbf Z}\\ \\bigoplus_{b\\in B_{m,q}} A^{n-q}.$$\nThe map sends $a\\otimes e_{m,q,b}$ to $a$ in coordinate $(q,b)$; its inverse sums these pure tensors, and balancing and the unique finite basis expansion verify the two inverse identities. Since $d_{Q_m}=0$, the differential on each coordinate is exactly $d_A$. A cycle therefore has finitely many nonzero coordinates, each a cycle of $A$; choose a preimage under $d_A$ for each of these coordinates and put zero elsewhere. This gives a finite-support boundary preimage in total degree $n-1$. Thus $\\operatorname{Tot}(A\\otimes_R Q_m)$ is acyclic for every $m$, even with unbounded degrees and infinite basis sets.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H7X, lemma-resolution-filtered-complex, proof of (2): the zero-differential free-complex assertion, with its omitted coordinate argument supplied."
+   }
+  },
+  {
+   "text": "For each degree $q$, let $i:C_m^q\\to C_{m+1}^q$ be inclusion, $r$ its assumed retraction, and $\\pi:C_{m+1}^q\\to Q_m^q$ the quotient. The formula $s(\\pi x)=x-i(r x)$ is well-defined because replacing $x$ by $x+i(u)$ leaves it unchanged; it is linear, $\\pi s=1$, and $i r+s\\pi=1$. Tensoring these identities with $A^p$ shows directly that $0\\to A^p\\otimes C_m^q\\to A^p\\otimes C_{m+1}^q\\to A^p\\otimes Q_m^q\\to0$ is split exact. Taking direct sums over $p+q=n$ preserves these splitting identities coordinatewise. The resulting inclusion and quotient maps commute with both terms $d_A\\otimes1$ and $(-1)^p1\\otimes d_C$ of [def-pc-tensor-complex-sheaves], since the original inclusion and quotient are chain maps. Hence\n$$0\\to T_m\\to T_{m+1}\\to\\operatorname{Tot}(A\\otimes_R Q_m)\\to0,\\qquad T_m=\\operatorname{Tot}(A\\otimes_R C_m),$$\nis degreewise short exact. The maps $r,s$ need not commute with differentials; only degreewise splitting is used.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYH, lemma-K-flat-two-out-of-three-ses, first proof paragraph; degreewise splitting replaces the flat-quotient exactness argument."
+   }
+  },
+  {
+   "text": "We prove $T_m$ acyclic by induction on $m$. For $m=0$, $C_0=0$ gives $T_0=0$. Assume $T_m$ acyclic. Apply [lem-weil-pbc-complex-ses-homology-long-exact] to the degreewise short exact sequence in step 2, in the abelian category of $R$-modules and with integer cochain indices. Its exact segment is\n$$H^n(T_m)\\longrightarrow H^n(T_{m+1})\\longrightarrow H^n(\\operatorname{Tot}(A\\otimes_R Q_m)).$$\nThe outside terms vanish by the induction hypothesis and step 1, so exactness forces $H^n(T_{m+1})=0$ for every $n$. This proves the inductive claim for every finite stage.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYH, lemma-K-flat-two-out-of-three-ses, final sentence; Tag 0H7X, proof of (2), induction on the stages; Homology Tag 0117."
+   }
+  },
+  {
+   "text": "The increasing union hypothesis identifies $C$ with the degreewise colimit of $(C_m)_{m\\in\\mathbf N}$: a compatible family of linear maps on the $C_m^q$ has the unique extension sending $x\\in C^q$ to its value in any stage containing $x$; a common later stage proves independence and linearity. Since every inclusion is a chain map, this extension commutes with differentials. Apply [lem-pc-module-filtered-colimits-tensor] on the site with one object, its identity morphism and only the maximal covering sieve, with ring sheaf $R$. A module sheaf on this small site is exactly an $R$-module, so both its exactness clause and its total-tensor colimit comparison apply to our small filtered index category $\\mathbf N$. Its displayed comparison is for the varying first factor; for our varying second factor use the signed symmetry $a\\otimes c\\mapsto(-1)^{pq}c\\otimes a$ in bidegree $(p,q)$. With the differential of [def-pc-tensor-complex-sheaves], the $d_A$ terms have signs $(-1)^{(p+1)q}$ and $(-1)^{pq+q}$, and the $d_C$ terms have signs $(-1)^{p+p(q+1)}$ and $(-1)^{pq}$, respectively, so symmetry is a chain isomorphism. It is its own inverse and commutes with all stage maps. We obtain\n$$T:=\\operatorname{Tot}(A\\otimes_R C)\\cong\\varinjlim_m T_m.$$\nFor completeness, exactness of that filtered colimit implies acyclicity here as follows. Let $Z_m^n=\\ker d_{T_m}^n$. Step 3 gives compatible short exact sequences $0\\to Z_m^n\\to T_m^n\\to Z_m^{n+1}\\to0$. Their colimits remain short exact, and $\\varinjlim_m Z_m^{n+1}\\to\\varinjlim_m T_m^{n+1}$ is injective. Factoring the colimit differential through this injection shows that its kernel in degree $n$ and the image from degree $n-1$ are both $\\varinjlim_m Z_m^n$. Thus $T$ is acyclic.",
+   "uses": [
+    "lem-pc-module-filtered-colimits-tensor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y3, lemma-colimit-K-flat, complete proof; ordinary modules obtained from the general ringed-site tensor/filtered-colimit statement (Tags 03DB and 03EP)."
+   }
+  },
+  {
+   "text": "The complex $A$ in step 1 was arbitrary among acyclic complexes of $R$-modules. Step 4 proves acyclicity of $\\operatorname{Tot}(A\\otimes_R C)$ for every such $A$, which is precisely K-flatness in [def-pc-module-kflat-complex]. The only finiteness used was the finite support of an individual direct-sum element, not any bound on cochain degrees or free ranks.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06XZ, definition-K-flat; Tag 0H7X, proof of (2), conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-free-module",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0H7X, proof of (2), 0BYH and 06Y3. Follows the finite-stage induction and filtered-colimit route; supplies the free-coordinate and degreewise-splitting calculations explicitly. Source read in /home/ubuntu/c1-stacks-review/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,15 +153,74 @@
    "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"43\", \"text\": \"Suppose we have a cofiltered diagram of nonempty quasi-compact schemes,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"381\", \"text\": \"Given a cofiltered diagram `D` of quasi-compact `S`-schemes with affine transition maps,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"681\", \"text\": \"Given a cofiltered diagram `D` of quasi-compact `S`-schemes with affine transition maps,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"986\", \"text\": \"lemma Scheme.exists_isQuasiAffine_of_isLimit [IsCofiltered I]\"}\n",
    "date": "2026-10-16",
    "verdict": "No match: the four hits concern cofiltered diagrams of quasi-compact schemes in AffineTransitionLimit.lean, not K-flat complexes or associated graded quasi-isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exhaustive increasing union of degreewise split subcomplexes with free zero differential successive quotients is K-flat",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SimplicialObject.Splitting.nondegComplex\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X : CategoryTheory.SimplicialObject C} →\\n      SimplicialObject.Splitting X → [inst_1 : CategoryTheory.Preadditive C] → ChainComplex C ℕ\", \"doc\": \"The non-degenerate complex associated to a split simplicial object in a preadditive category $\\\\mathcal{C}$, constructed as a chain complex indexed by natural numbers $\\\\mathbb{N}$. It is defined using \"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.splitting\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n        (K : ChainComplex C ℕ) → SimplicialObject.Splitting (AlgebraicTopology.DoldKan.Γ₀.obj K)\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts, this defines a splitting of the simplicial object $ \\\\Gamma_0(K) $ constructed by the Γ₀ functor. The splitti\"}\n  {\"name\": \"SimplicialObject.Splitting.nondegComplex_X\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X : CategoryTheory.SimplicialObject C}\\n  (s : SimplicialObject.Splitting X) [inst_1 : CategoryTheory.Preadditive C] (a : ℕ), s.nondegComplex.X a = s.N a\", \"doc\": \"For any natural number $a$, the object at index $a$ in the non-degenerate complex associated to a split simplicial object $X$ is equal to the $a$-th component $s.N(a)$ of the splitting $s$.\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (K : ChainComplex C ℕ) (n : ℕ),\\n  AlgebraicTopology.DoldKan.HigherFacesVanish (n + 1)\\n    (((AlgebraicTopology.DoldKan.Γ₀.splitting K).cofan\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts and any natural number $ n $, the higher face maps $ \\\\delta^{j+1} $ (for $ j \\\\in \\\\{0, 1, \\\\dots, n\\\\} $) acting\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      ChainComplex C ℕ → (Δ : SimplexCategoryᵒᵖ) → SimplicialObject.Splitting.IndexSet Δ → C\", \"doc\": \"For an object $\\\\Delta$ in the opposite simplex category and a splitting index $A = (\\\\Delta', \\\\alpha)$ where $\\\\Delta' \\\\in \\\\Delta^\\\\text{op}$ and $\\\\alpha: \\\\Delta.\\\\text{unop} \\\\to \\\\Delta'.\\\\text{unop}$ is a\"}\n  {\"name\": \"SimplicialObject.Split.nondegComplexFunctor_obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (S : SimplicialObject.Split C), SimplicialObject.Split.nondegComplexFunctor.obj S = S.s.nondegComplex\", \"doc\": \"For any preadditive category $\\\\mathcal{C}$ and split simplicial object $S$ in $\\\\mathcal{C}$, the object mapping of the non-degenerate complex functor assigns to $S$ the non-degenerate chain complex $s\"}\n  {\"name\": \"SimplicialObject.Splitting.cofan_inj_comp_PInfty_eq_zero\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {X : CategoryTheory.SimplicialObject C} (s : SimplicialObject.Splitting X) {n : ℕ}\\n  (A : SimplicialObject.Splitting.IndexSet (Opposite.op (SimplexCategory.mk n))),\\n  ¬A.EqId →\\n    CategoryTheory\", \"doc\": \"For a simplicial object $X$ in a category $\\\\mathcal{C}$ with a splitting $s$, and for any natural number $n$ and index $A$ in the splitting's index set for $[n]$ that is not the identity morphism, the\"}\n  {\"name\": \"SimplicialObject.Splitting.comp_PInfty_eq_zero_iff\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X : CategoryTheory.SimplicialObject C}\\n  (s : SimplicialObject.Splitting X) [inst_1 : CategoryTheory.Preadditive C] {Z : C} {n : ℕ}\\n  (f : Z ⟶ X.obj (Opposite.op (SimplexCategory.mk n))),\\n  CategoryTheory.CategoryStruct.comp f (Algebrai\", \"doc\": \"For a simplicial object $X$ in a category $\\\\mathcal{C}$ with zero morphisms, given a splitting $s$ of $X$ and a morphism $f: Z \\\\to X_n$, the composition $f \\\\circ PInfty.f(n)$ is zero if and only if th\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern Dold-Kan splittings of simplicial objects, not acyclicity of tensors with a filtered module complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Lean.mkFlatCtorOfStructCtorName\", \"module\": \"Lean.Structure\", \"type\": \" (structCtorName : Lean.Name) : Lean.Name\", \"doc\": \"Gets the name for a structure constructor where the fields have been fully flattened.\\nThis constructor simulates a flat representation for structures,\\nand it is used by structure instance notation whe\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Lean.mkFlatCtorOfStructCtorName concerns Lean structure constructors."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?free|cellular|kFlat|k_flat|K-flat",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Topology/CWComplex/Abstract/Basic.lean\", \"line\": \"38\", \"text\": \"* [R. Fritsch and R. Piccinini, *Cellular Structures in Topology*][fritsch-piccinini1990]\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the only hit is a CW-complex bibliography entry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semi-free complexes are K-flat",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_projective\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Projective R M] : Flat R M\", \"doc\": \"Every projective module over a commutative semiring is flat. Specifically, if $ M $ is a projective module over a commutative semiring $ R $, then $ M $ satisfies the flatness condition, meaning tenso\"}\n  {\"name\": \"Module.Flat.of_free\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Free R M] : Flat R M\", \"doc\": \"Every free module over a commutative semiring is flat.\"}\n  {\"name\": \"Module.FaithfullyFlat.instOfNontrivialOfFree\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"[Nontrivial M] [Module.Free R M] : FaithfullyFlat R M\", \"doc\": \"Every nontrivial free module over a commutative ring is faithfully flat. That is, if $ R $ is a commutative ring and $ M $ is an $ R $-module that is both nontrivial (contains at least two distinct el\"}\n  {\"name\": \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \"(K : CochainComplex C ℤ) :\\n  K.IsKProjective ↔ (HomotopyCategory.subcategoryAcyclic C).leftOrthogonal ((HomotopyCategory.quotient _ _).obj K)\", \"doc\": \"A cochain complex $ K $ in an abelian category is K-projective if and only if it is left orthogonal to the full subcategory of acyclic complexes in the homotopy category, meaning every morphism from $\"}\n  {\"name\": \"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"module\": \"Mathlib.RingTheory.Flat.TorsionFree\", \"type\": \"[IsDedekindDomain R] [IsTorsionFree R M] : Flat R M\", \"doc\": \"Every torsion-free module over a Dedekind domain is flat.\"}\n  {\"name\": \"Module.FaithfullyFlat.toFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"∀ {R : Type u} {M : Type v} {inst : CommRing R} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : Module.FaithfullyFlat R M], Module.Flat R M\", \"doc\": \"If $ M $ is a faithfully flat module over a commutative ring $ R $, then $ M $ is flat over $ R $. Faithful flatness implies flatness as a module property.\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Flat R M] (C : ShortComplex <| ModuleCat R) (hC : C.Exact) : C.map (tensorRight M) |>.Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.free_of_flat_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R P] [Flat R P] : Free R P\", \"doc\": \"Let $ R $ be a local ring and $ P $ a finitely generated flat $ R $-module. Then $ P $ is a free $ R $-module.\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern flatness of modules, tensor-exactness with one module, or K-projectivity; none states K-flatness for the specified filtration. Read Flat/Basic.lean (of_projective, of_free) and HomotopyCategory/KProjective.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cochain complex filtered by direct sums of shifts of a commutative ring preserves acyclicity under tensor products",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    ∀ (n : ℤ), HomologicalComplex.ExactAt K n\", \"doc\": \"A cochain complex $ K $ in the homotopy category belongs to the acyclic subcategory if and only if it is exact at every integer index $ n $, meaning the image of the differential at each degree equals\"}\n  {\"name\": \"CochainComplex.IsKInjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A cochain complex $ X $ in an abelian category $ \\\\mathcal{C} $ is K-injective if for every acyclic cochain complex $ A $, every morphism $ A \\\\to X $ is null-homotopic. This characterizes complexes tha\"}\n  {\"name\": \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ),\\n  K.IsKProjective ↔\\n    (HomotopyCategory.subcategoryAcyclic C).leftOrthogonal ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K)\", \"doc\": \"A cochain complex $ K $ in an abelian category is K-projective if and only if it is left orthogonal to the full subcategory of acyclic complexes in the homotopy category, meaning every morphism from $\"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    HomologicalComplex.Acyclic K\", \"doc\": \"For a cochain complex $ K $ in a preadditive category $ C $ with integer indices, the image of $ K $ under the quotient functor to the homotopy category belongs to the acyclic subcategory (consisting \"}\n  {\"name\": \"CochainComplex.isKInjective_iff_rightOrthogonal\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (L : CochainComplex C ℤ),\\n  L.IsKInjective ↔\\n    (HomotopyCategory.subcategoryAcyclic C).rightOrthogonal ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj L)\", \"doc\": \"A cochain complex $ L $ in an abelian category $ \\\\mathcal{C} $ is K-injective if and only if it is right orthogonal to the full subcategory of acyclic complexes in the homotopy category $ K(\\\\mathcal{C\"}\n  {\"name\": \"CochainComplex.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n : ℤ), K.IsLE n ↔ ∀ (i : ℤ), n < i → HomologicalComplex.ExactAt K i\", \"doc\": \"For a cochain complex $ K $ and integer $ n $, the predicate $ K $ is supported under the embedding from the downward complex shape on natural numbers to the upward complex shape on integers at positi\"}\n  {\"name\": \"CochainComplex.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n : ℤ), K.IsGE n ↔ ∀ i < n, HomologicalComplex.ExactAt K i\", \"doc\": \"For a cochain complex $ K $, the condition $ K.\\\\text{IsGE}(n) $ holds if and only if $ K $ is exact at every integer index $ i $ satisfying $ i < n $. Exactness means the image of the differential $ d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: K-projective/K-injective predicates and acyclicity/truncation criteria do not state the asserted tensor preservation for split cell filtrations. Read HomotopyCategory/KProjective.lean; no general semi-free K-flat theorem found."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-finite-filtered-kflat-replacement",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-split-cell-complex-kflat",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Expanded the Stacks cell-filtration K-flatness argument into the zero-differential free-quotient calculation, split tensor short exact sequences, explicit induction using the existing long exact sequence leaf, and exact filtered-colimit passage using the existing ringed-site tool on the one-point site. No new nodes. Checked the unbounded and infinite-rank cases without assuming a chain-level splitting.",
+  "blueprint": "Realizes the preliminary integral tensor calculation in lem-kun-0f0f, paragraph beginning \"Since Z has global dimension 1\", through the cell-attachment K-flatness prerequisite of step 5 of lem-kun-finite-filtered-kflat-replacement. The unit has no proof steps, and its ordinary Kunneth/projection-formula route is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Its general small ringed-site statement, specialized to the one-point site, supplies exact filtered colimits and the total-tensor comparison for ordinary modules. The same-unit K-flat criteria concern etale module sheaves on schemes rather than arbitrary R-module complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-filtered-colimits-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q34-590bec080",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-590bec080 (reviewer sub-agent of L); spot-checked: Read the full item, cited nodes, Stacks sources, unit/chapter route, and delivery instructions. Verified all five proof steps, coefficient category, base-change tensor symmetry, unbounded and infinite-rank edge cases, searches, and absence of duplicates or cycles. No repairs required; review.md written."
+ }
 }
