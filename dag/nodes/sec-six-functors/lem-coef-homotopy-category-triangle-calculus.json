@@ -291,5 +291,23 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-157daac1b (reviewer sub-agent of L); spot-checked: I read all six item steps and the new Mathlib leaf against Mathlib TwoTruncated.lean (read in full) and found no mathematical fault. HomotopicL at 78-79 is the triangle (f,1_y,f'), which matches step 3. The other clauses are instSetoidEdge 203, Hom/CategoryStruct 213-225, Category 300, homMk_id 252 and CompStruct.nonempty_iff 295. Quasicategory₂ fill21/31/32 at 54-71 are exactly the Λ²₁, Λ³₁ and Λ³₂ inner horns. F: hD→H is well defined because degenerate edges go to identities and triangles go to composites (iff). G(q f)=[f] is well defined because the (f,1_y,f') triangle gives [f']=[f], and it preserves composition through the chosen filler. GF=id and FG=id hold on generators. Arrows are represented by single edges, and the triangle criterion comes from F plus the iff with the exact boundary edges. Small cases checked: empty, Δ⁰, nerves (where ∼L is equality), homotopic edges in a Kan complex, and degenerate edges. def-cbc-enhanced-diagrams-cones supplies all the notions. proof_deps equal the union of the step uses, and there is no cycle. The node is a foundational tool under prop-coef-integral-exceptional-adjoint paragraph 2, with no target node, base change or coefficient category involved. The leaf is strictly smaller than the item and does not restate an item clause: Mathlib line 28 leaves the word comparison TODO. An rg duplicate search found no node stating it. Cisinski §1.6 is not archived, so I did not verify its pages; the agent-written proof does not depend on it. The NR node lem-coef-quasicategory-edge-triangle-presentation states the same theorem. In this snapshot it is already split and cites this item, so it needs maintainer consolidation but is not a fault of this delivery. FIX: in the leaf I rewrote only mathlib_match.how. It now names Quasicategory.hornFilling (Basic.lean:44) and horn₂₁.isPushout/horn₃₁.exists_desc/horn₃₂.exists_desc (HornColimits.lean:87/332/420) as the source of fill21/31/32, since Mathlib has no Quasicategory₂ instance for the truncation. It also names comp_unique (169) and homotopyCategory₂_fac (274) for the two independence clauses. No tool_uses and no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.HomotopyCategoryTriangleCalculus",
+  "declaration": "SSet.homotopyCategory_triangle_calculus",
+  "file": "lean/Sheaf/AlgebraicTopology/HomotopyCategoryTriangleCalculus.lean",
+  "statement": "theorem homotopyCategory_triangle_calculus (D : SSet.{u}) [Quasicategory D] : (∀ (x y : D _⦋0⦌) (a : Truncated.HomotopyCategory.mk (V := (truncation 2).obj D) x ⟶ Truncated.HomotopyCategory.mk (V := (truncation 2).obj D) y), ∃ f : Edge x y, Truncated.HomotopyCategory.homMk f.toTruncated = a) ∧ (∀ (x y z : D _⦋0⦌) (f : Edge x y) (g : Edge y z) (h : Edge x z), (Truncated.HomotopyCategory.homMk f.toTruncated ≫ Truncated.HomotopyCategory.homMk g.toTruncated = Truncated.HomotopyCategory.homMk h.toTruncated) ↔ Nonempty (Edge.CompStruct f g h))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-945b9b4fc",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Theorem SSet.homotopyCategory_triangle_calculus matches the node clause by clause. hD is Mathlib's edge-and-triangle presentation (Truncated.HomotopyCategory on the 2-truncation: FreeRefl identifies degenerate edges with identities, HoRel₂ imposes the triangle relations), not HomotopyCategory₂. Clause 1: every arrow mk x ⟶ mk y is homMk of an edge. Clause 2: homMk f ≫ homMk g = homMk h iff Nonempty (Edge.CompStruct f g h), with all three faces fixed exactly. Only Mathlib's Quasicategory instance and one universe u; the empty, degenerate-edge and identity cases are covered. The statement is true (Cisinski Thm 1.6.6 / Lemma 1.6.2). The only proof is sorry; no definitions; docstrings have the source place, blueprint tag and six-step plan. lean.statement matches the file verbatim; the node differs from the side clone only in lean; no statement change. The report has a real Worker report and Second reading by Q20. nt_compile.py --json (local side overlay): rc=0, 1.2 s, no diagnostics. Maintainer note: consolidate with the NR duplicate lem-coef-quasicategory-edge-triangle-presentation, which has no Lean declaration and cites this item."
  }
 }

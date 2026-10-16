@@ -34,7 +34,8 @@
   "lem-weil-pbc-etale-shriek-base-change-modules",
   "def-kun-unbounded-exchange",
   "def-kun-projection-formula-map",
-  "lem-pur-etale-open-derived-tensor"
+  "lem-pur-etale-open-derived-tensor",
+  "lem-asd-etale-compact-support-normalization"
  ],
  "proof": [
   {
@@ -573,5 +574,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSupportMapCompatibility",
+  "declaration": "AlgebraicGeometry.Etale.etaleSupportMapCompatibility",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleSupportExactUpperTensorIso",
+   "AlgebraicGeometry.Etale.etaleSupportSumProjectionReverse",
+   "AlgebraicGeometry.Etale.etaleSupportMapCompatibility"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSupportMapCompatibility.lean",
+  "statement": "theorem etaleSupportMapCompatibility (A : Type (u + 1)) [CommRing A] [Finite A] : ∃ (a : ∀ {V T : Scheme.{u}} [IsLocallyNoetherian V] [CompactSpace V] [IsLocallyNoetherian T] [CompactSpace T] (e : V ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e), etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance ⟶ openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙ lowerStar (ModuleCat.{u + 1} A) c.g), ∃ (n : ∀ {V T : Scheme.{u}} [IsLocallyNoetherian V] [CompactSpace V] [IsLocallyNoetherian T] [CompactSpace T] (e : V ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e), rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ≅ (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory), ∃ (p : ∀ {V T : Scheme.{u}} [IsLocallyNoetherian V] [CompactSpace V] [IsLocallyNoetherian T] [CompactSpace T] (e : V ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e], (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory ⋙ derivedTensor (ModuleCat.{u + 1} A) T ≅ (Functor.postcompose₂.obj (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory).obj ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory).obj (derivedTensor (ModuleCat.{u + 1} A) V))), (∀ {V T : Scheme.{u}} [IsLocallyNoetherian V] [CompactSpace V] [IsLocallyNoetherian T] [CompactSpace T] (e : V ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e), IsIso (a e c) ∧ (∀ M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A), (a e c).app M ≫ (compactificationSheafToDirectImage A c).app M = etaleLowerShriekToLowerStar (ModuleCat.{u + 1} A) e M) ∧ (∀ P : HomotopyCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) (ComplexShape.up ℤ), (n e c).inv.app (DerivedCategory.Qh.obj P) = compactSupportComparisonOnHomotopy A e c (a e c) P)) ∧ (∀ {V T : Scheme.{u}} [IsLocallyNoetherian V] [CompactSpace V] [IsLocallyNoetherian T] [CompactSpace T] (e : V ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e], (p e).inv = etaleSupportSumProjectionReverse A e) ∧ (∀ {V T T' : Scheme.{u}} [IsLocallyNoetherian V] [CompactSpace V] [IsLocallyNoetherian T] [CompactSpace T] [IsLocallyNoetherian T'] [CompactSpace T'] (e : V ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e) (g : T' ⟶ T), exactCompactSupportExchange A c g ≫ Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} A) (pullback.snd g e)).mapDerivedCategory (n (pullback.fst g e) (c.ofIsPullback (IsPullback.of_hasPullback g e).flip)).hom = Functor.whiskerRight (n e c).hom (upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory ≫ (exactEtaleSumExchange A e g).hom) ∧ (∀ {V T : Scheme.{u}} [IsLocallyNoetherian V] [CompactSpace V] [IsLocallyNoetherian T] [CompactSpace T] (e : V ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e) (M : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A))) (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))), ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app K ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map (((derivedTensor (ModuleCat.{u + 1} A) V).obj M).map ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e).hom.app K)) ≫ (n e c).hom.app (((derivedTensor (ModuleCat.{u + 1} A) V).obj M).obj ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K)) = ((derivedTensor (ModuleCat.{u + 1} A) T).map ((n e c).hom.app M)).app K ≫ ((p e).hom.app M).app K) ∧ (∀ {V T : Scheme.{u}} [IsLocallyNoetherian V] [CompactSpace V] [IsLocallyNoetherian T] [CompactSpace T] (e : V ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (c d : Compactification e) (_r : c.Refinement d), (rightDerivedLowerShriekOfCompactificationIso A c d).hom ≫ (n e d).hom = (n e c).hom)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Canonical comparisons are characterized simultaneously by the graph-normalized sheaf map and its derived-unit formula on every homotopy representative. The sum projection is uniquely characterized by its inverse adjunction projection mate. Reuses the landed graph/derived-unit and exchange helpers of lem-asd-etale-compact-support-normalization; no second compact-support or sum-extension construction. Noetherian schemes are expressed by the equivalent IsLocallyNoetherian and CompactSpace instances, so base-changed sources elaborate without extra assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37e6c8810",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read node, report (real Worker report + Second reading by N5), module, and source of every declaration used. a is uniquely fixed by a ≫ compactificationSheafToDirectImage = etaleLowerShriekToLowerStar (Tag 0F4L graph map; target map is a mono), plus IsIso. n.inv is fixed on every Qh P by compactSupportComparisonOnHomotopy (lem-sfb's δ_c). p.inv = Adjunction.projectionMap of D(e_Σ!) ⊣ D(e^*) with the canonical exact pullback-tensor iso, i.e. the inverse of (s,m)⊗k ↦ (s,m⊗s^*k). Clause (1): arbitrary g, Noetherian T'; exactCompactSupportExchange = Rr'_*(inverse open base change) ∘ Ex_r and exactEtaleSumExchange.hom = inverse etale base-change map, direction as in the node. Clause (2): projectionMapOfCompactification = π_r then Rr_*(inverse open projection iso) with j^*r^*=e^*, L→D transport, all unbounded M,K. Refinement clause has the same form as lem-sfb. Hypotheses: finite CommRing A in Type (u+1) (project convention); IsLocallyNoetherian+CompactSpace = IsNoetherian; finite type = LocallyOfFiniteType+QuasiCompact; no finiteness on the proper part. Only change to the node: lean record plus the already-landed stmt_dep lem-asd (allowed, no cycle). lean.statement verbatim; no name collisions. Helpers have real data and source/blueprint docstrings; the only proof is sorry; no pro-etale. nt_compile.py --json on the snapshot module: rc=0, no errors or warnings, 5.1 s, reproduced twice. Minor: unused _r binder, harmless."
  }
 }
