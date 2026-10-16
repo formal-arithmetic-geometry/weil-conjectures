@@ -31,9 +31,131 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal I=\\operatorname{Ind}_\\kappa(\\mathcal C)$ and $u:\\mathcal I\\hookrightarrow\\mathcal P(\\mathcal C)$. First put the possibly non-cocomplete target in a cocomplete category. Choose an auxiliary universe $\\mathcal V$ containing $\\mathcal D$ and its mapping spaces, without changing the meaning of small ($\\mathcal U$-small), and form $\\widehat{\\mathcal D}=\\operatorname{Fun}(\\mathcal D,\\mathcal S_{\\mathcal V})^{\\mathrm{op}}$ in a still larger ambient universe. Opposite Yoneda $e(d)=\\operatorname{Map}_{\\mathcal D}(d,-)$ is fully faithful by [lem-coef-infinity-yoneda-presheaf-limits], applied to $\\mathcal D^{\\mathrm{op}}$ in the auxiliary universes. The same node supplies objectwise small limits in the functor category, hence small colimits in its opposite. For any existing small colimit cocone in $\\mathcal D$, its image under $e$ is colimiting: at each testing object this says that a contravariant representable takes that colimit to a limit. Conversely, if its image is colimiting, evaluation at every $d$ gives exactly the mapping-space criterion for that cocone to be colimiting in $\\mathcal D$. Replace $\\mathcal D$ by its replete full essential image under $e$, using [lem-coef-infinity-full-essential-image] to transport along the equivalence when necessary. This image is closed under every small colimit that exists in $\\mathcal D$, in particular under small $\\kappa$-filtered colimits. Only the ambient universe is enlarged; no larger filtered colimits in the original target are assumed.",
+   "uses": [
+    "lem-coef-ind-kappa-presentability",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.3.5.7, printed p. 405; opposite Yoneda construction, expanded using Propositions 5.1.2.2 and 5.1.3.2."
+   }
+  },
+  {
+   "text": "For $f:\\mathcal C\\to\\mathcal D$, [lem-coef-infinity-presheaf-free-cocompletion] supplies a small-colimit-preserving $H:\\mathcal P(\\mathcal C)\\to\\widehat{\\mathcal D}$ and $Hj\\simeq ef$. Given $X\\in\\mathcal I$, choose a small $\\kappa$-filtered presentation $X\\simeq\\operatorname{colim}_{i\\in J}j(c_i)$ from [lem-coef-ind-kappa-presentability]. Then $H(X)\\simeq\\operatorname{colim}_i e f(c_i)\\simeq e(\\operatorname{colim}_i f(c_i))$, by preservation by $H$ and by $e$ from step 1. Thus every vertex of $Hu$ lies in the replete full image of $e$. Fullness makes this a coherent factorization, not just a choice of vertex values: every simplex of $Hu$ has its vertices in that full subcategory. Its quasi-inverse from [lem-coef-infinity-full-essential-image] gives $F:\\mathcal I\\to\\mathcal D$ and $eF\\simeq Hu$, with $Fj\\simeq f$. For any small $\\kappa$-filtered colimit cocone in $\\mathcal I$, $u$ preserves it by [lem-coef-ind-kappa-presentability] and $H$ preserves it. Hence $eF$ preserves it; reflection by $e$ from step 1 proves that $F$ preserves it as well.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-ind-kappa-presentability",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.3.5.8(1) and its proof, printed pp. 405-406; extension into the auxiliary cocomplete target and restriction to the Ind subcategory."
+   }
+  },
+  {
+   "text": "Let $G:\\mathcal I\\to\\mathcal D$ be any small-$\\kappa$-filtered-colimit-preserving functor. Apply [lem-coef-infinity-intermediate-presheaf-kan] with intermediate full subcategory $\\mathcal I$, cocomplete target $\\widehat{\\mathcal D}$, extension $H$ of step 2, and functor $eG$. It identifies the full space of transformations $Hu\\to eG$ with the space of transformations $ef\\to eGj$. Passing through the equivalence of $\\mathcal D$ with its full image identifies these spaces with $\\operatorname{Map}(F,G)$ and $\\operatorname{Map}(f,Gj)$ respectively: for a literal full subcategory the equality of the transformation simplicial sets follows degree by degree from the definition of $\\operatorname{Fun}$, since all vertices of $\\mathcal I\\times\\Delta^n$ land in that subcategory. Now take $f=Gj$. The identity on $Gj$ extends to a comparison $\\alpha:F\\to G$. Each $X$ has the filtered presentation in step 2, and both functors preserve its cocone, so $\\alpha_X$ is the map of colimits induced by the pointwise equivalence $\\alpha_{j(c_i)}$. It is an equivalence. Pointwise detection from [lem-cbc-enhanced-functor-cone-calculus], in a sufficiently large ambient universe, makes $\\alpha$ a functor equivalence. Therefore every filtered-colimit-preserving functor is equivalent to a constructed $F$, and the displayed mapping-space equivalence proves full faithfulness of restriction for every pair of such functors. Step 2 proves essential surjectivity. Applying [lem-coef-infinity-full-essential-image] to restriction yields the asserted equivalence of coherent functor categories. Its fiber over $f$ is consequently contractible, giving essential uniqueness with the comparison $Fj\\simeq f$ included.",
+   "uses": [
+    "lem-coef-infinity-intermediate-presheaf-kan",
+    "lem-coef-infinity-full-essential-image",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-ind-kappa-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.3.5.8(2) and Proposition 5.3.5.10, printed p. 406; the Kan-extension mapping property and the filtered-generation comparison."
+   }
+  },
+  {
+   "text": "Suppose now that $f$ is fully faithful and its values are $\\kappa$-compact. Present $X\\simeq\\operatorname{colim}_{i\\in J}j(c_i)$ and $Y\\simeq\\operatorname{colim}_{t\\in L}j(d_t)$ with $J,L$ small and $\\kappa$-filtered. The mapping-space colimit criterion in [lem-coef-infinity-yoneda-presheaf-limits], compactness of $j(c_i)$ in [lem-coef-ind-kappa-presentability], and compactness of $f(c_i)$ as defined in [def-coef-presentable-infinity-category] give\n$$\\operatorname{Map}_{\\mathcal I}(X,Y)\\simeq\\lim_{i\\in J^{\\mathrm{op}}}\\operatorname{colim}_{t\\in L}\\operatorname{Map}_{\\mathcal C}(c_i,d_t),\\qquad\n\\operatorname{Map}_{\\mathcal D}(FX,FY)\\simeq\\lim_{i\\in J^{\\mathrm{op}}}\\operatorname{colim}_{t\\in L}\\operatorname{Map}_{\\mathcal D}(f(c_i),f(d_t)).$$\nHere $F$ preserves the two chosen colimits by step 2, and $j$ is fully faithful by [lem-coef-ind-kappa-presentability]. Under these natural identifications the comparison induced by $F$ is the limit of the colimits of the comparisons induced by $f$. Those comparisons are equivalences by full faithfulness of $f$; functors on spaces preserve equivalences. Hence $F$ is fully faithful. There is no interchange of a limit with a colimit in this argument.",
+   "uses": [
+    "lem-coef-ind-kappa-presentability",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.11(1), printed p. 407; the two successive compact-generator reductions written as a mapping-space formula."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-full-essential-image], the fully faithful $F$ of step 4 induces an equivalence $\\mathcal I\\simeq\\mathcal D_0$, where $\\mathcal D_0$ is its replete full essential image. If every object $d$ of $\\mathcal D$ is a small $\\kappa$-filtered colimit of values $f(c)$, the entire diagram presenting $d$ factors through $\\mathcal D_0$: it is a full subcategory and every vertex belongs to it. Compose this coherent diagram with a quasi-inverse $\\mathcal D_0\\to\\mathcal I$, take its small $\\kappa$-filtered colimit in $\\mathcal I$ (which exists by [lem-coef-ind-kappa-presentability]), and apply $F$. Preservation from step 2 shows that the result is equivalent to $d$. Thus $\\mathcal D_0=\\mathcal D$ and $F$ is an equivalence. This also explains why objectwise membership in the image suffices here: fullness and its quasi-inverse supply the whole lifted diagram.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image",
+    "lem-coef-ind-kappa-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.11(2), printed pp. 407-408; lift the generating diagram to the full essential image before taking its colimit."
+   }
+  },
+  {
+   "text": "For the last clause assume that $\\mathcal C$ has all $\\kappa$-small colimits, that $\\mathcal D$ is presentable, and that $f$ preserves those colimits. Fix $d\\in\\mathcal D$ and form the coherent small-space-valued presheaf $R_d(c)=\\operatorname{Map}_{\\mathcal D}(f(c),d)$. The coherent representable presheaf in [lem-coef-infinity-pointwise-yoneda-evaluation], precomposed with $f^{\\mathrm{op}}$, supplies this presheaf; local smallness gives its small values. For a $\\kappa$-small colimit cocone $q\\to c$ in $\\mathcal C$, preservation by $f$ and [lem-coef-infinity-yoneda-presheaf-limits] give $R_d(c)\\simeq\\lim R_d(q(-))$. For the empty shape this says $R_d(0_{\\mathcal C})\\simeq *$, since $f(0_{\\mathcal C})$ is initial. Thus the exact condition (2) of [lem-coef-infinity-presheaf-ind-criterion] holds, and $R_d$ is an object of $\\mathcal I$. No compactness or full faithfulness of $f$ is used in this final clause.",
+   "uses": [
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-presheaf-ind-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.5.4, printed p. 404, implication (3) to (1); apply to the presheaf of maps from f(-) to d, including the empty limit."
+   }
+  },
+  {
+   "text": "There is a canonical natural comparison\n$$\\tau_{X,d}:\\operatorname{Map}_{\\mathcal D}(FX,d)\\longrightarrow\\operatorname{Map}_{\\mathcal P(\\mathcal C)}(X,R_d).$$\nTo specify it, [lem-coef-infinity-pointwise-yoneda-evaluation] identifies a map $FX\\to d$ with a coherent transformation $h_{FX}\\to h_d$ on $\\mathcal D$. Precompose it with $f^{\\mathrm{op}}$ and then with the transformation $h_X\\circ j^{\\mathrm{op}}\\to h_{FX}\\circ f^{\\mathrm{op}}$ induced by $F$ and $Fj\\simeq f$. By [lem-coef-infinity-yoneda-evaluation], $h_X\\circ j^{\\mathrm{op}}\\simeq X$, naturally in $X$. This specifies $\\tau$ coherently on the full mapping spaces and makes it natural in $X$ and $d$. For $X=j(c)$ it is the Yoneda equivalence $\\operatorname{Map}_{\\mathcal P(\\mathcal C)}(j(c),R_d)\\simeq R_d(c)$, with its direction reversed. For $X\\simeq\\operatorname{colim}_i j(c_i)$ as in step 2, both sides take this colimit to the limit of their values on the $j(c_i)$: the left side by preservation by $F$ and the representable-colimit formula; the right side because the inclusion $\\mathcal I\\subseteq\\mathcal P(\\mathcal C)$ preserves these colimits. The natural map $\\tau_{X,d}$ is therefore a limit of equivalences and is an equivalence. Fullness of $\\mathcal I$ identifies its right side with $\\operatorname{Map}_{\\mathcal I}(X,R_d)$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-ind-kappa-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.5.4 and the mapping-space proof of Proposition 5.3.5.11, printed pp. 404 and 407; agent-expanded canonical comparison for the all-colimit clause."
+   }
+  },
+  {
+   "text": "By [lem-coef-ind-kappa-presentability], the hypothesis on $\\mathcal C$ implies that $\\mathcal I$ admits all small colimits. Let $p:J\\to\\mathcal I$ be any small coherent diagram and let $p\\to X$ be a colimit cocone. For every $d\\in\\mathcal D$, the natural equivalence of step 7 and [lem-coef-infinity-yoneda-presheaf-limits] give\n$$\\operatorname{Map}_{\\mathcal D}(FX,d)\\simeq\\operatorname{Map}_{\\mathcal I}(X,R_d)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal I}(p(j),R_d)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal D}(Fp(j),d).$$\nNaturality of $\\tau$ identifies this equivalence with the comparison induced by the actual image cocone $Fp\\to FX$. The mapping-space colimit criterion therefore proves that this image cocone is colimiting. This holds for every small shape, including the empty one, and proves that $F$ preserves all small colimits.",
+   "uses": [
+    "lem-coef-ind-kappa-presentability",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.5.4, printed p. 404, with the representable mapping-space colimit criterion; all-colimit consequence used in Proposition 5.5.1.9, printed pp. 461-462."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-ind-kappa-presentability",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-intermediate-presheaf-kan",
+  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-presheaf-ind-criterion",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-presheaf-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded proof following HTT Lemmas 5.3.5.7-5.3.5.8 and Propositions 5.3.5.10-5.3.5.11; final all-colimit clause via Corollary 5.3.5.4. Read online; reference copy retained only in the worker sandbox."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +191,80 @@
    "results": "{\"t\": \"2026-10-16T20:54:57Z\", \"tool\": \"leansearch\", \"query\": \"Ind kappa functor extension preserves filtered colimits Yoneda fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCardinalAccessible.preservesColimitOfShape\", \"CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible\", \"CategoryTheory.Limits.fullyFaithful_reflectsColimits\", \"CategoryTheory.createsColimitOfFullyFaithfulOfLift'\", \"CategoryTheory.Ind.yoneda.fullyFaithful\", \"CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible_of_essentiallySmall\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Limits.PreservesFilteredColimits\"], \"digest\": \"6327afb12ca4ce82\"}",
    "date": "2026-10-16",
    "verdict": "No match: read returned signatures. CategoryTheory.Ind uses ordinary categories and set-valued presheaves; presentability hits use Hom sets. Quasicategory grep hits concern horns only. None states coherent mapping-space compactness, infinity-category Ind extensions or their colimit preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ind kappa functor extension preserves filtered colimits Yoneda fully faithful",
+   "results": "Returned CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall, isIndObject_iff, isIndObject_yoneda, IsIndObject.isFiltered, CategoryTheory.instRepresentablyCoflatIndYoneda, CategoryTheory.Ind.yoneda, and ordinary cardinal-presentable Yoneda.",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned CategoryTheory.Ind declarations use ordinary categories and Type-valued presheaves (Category.lean lines 65-113 read); the quasicategory hits only concern horns. These do not state the coherent, space-valued kappa-Ind universal property or the compact-generator and all-colimit clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ind\", \"yoneda\"",
+   "results": "Returned 12 ordinary-category declarations, including CategoryTheory.Limits.isIndObject_yoneda, IndObjectPresentation.yoneda, and IndizationClosedUnderFilteredColimitsAux.compYonedaColimitIsoColimitCompYoneda.",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned CategoryTheory.Ind declarations use ordinary categories and Type-valued presheaves (Category.lean lines 65-113 read); the quasicategory hits only concern horns. These do not state the coherent, space-valued kappa-Ind universal property or the compact-generator and all-colimit clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "Ind|accessible|compact|colimit",
+   "results": "Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean:72,75 and InnerFibration.lean:31,38,39; only grind and inductive horn definitions.",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned CategoryTheory.Ind declarations use ordinary categories and Type-valued presheaves (Category.lean lines 65-113 read); the quasicategory hits only concern horns. These do not state the coherent, space-valued kappa-Ind universal property or the compact-generator and all-colimit clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal property of infinity categorical Ind completion filtered colimit preserving functor extension",
+   "results": "Returned ordinary PreservesFilteredColimits, isFinitelyAccessible_iff_preservesFilteredColimits, Ind.lim, IndObjectPresentation.ofCocone and ordinary Ind creates/preserves colimit instances.",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned CategoryTheory.Ind declarations use ordinary categories and Type-valued presheaves (Category.lean lines 65-113 read); the quasicategory hits only concern horns. These do not state the coherent, space-valued kappa-Ind universal property or the compact-generator and all-colimit clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor from a small quasicategory extends to its infinity categorical Ind completion with compact generators",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Ind.inclusion\", \"module\": \"Mathlib/CategoryTheory/Limits/Indization/Category\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Functor (CategoryTheory.Ind C) (CategoryTheory.Functor Cᵒᵖ (Type v))\", \"doc\": \"The canonical inclusion functor from the ind-category $\\\\mathrm{Ind}(\\\\mathcal{C})$ to the category of functors $\\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathrm{Type}\\\\, v$, constructed as the composition of the equ\"}\n  {\"name\": \"CategoryTheory.Ind\", \"module\": \"Mathlib/CategoryTheory/Limits/Indization/Category\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max u (v + 1))\", \"doc\": \"The category of ind-objects in $\\\\mathcal{C}$, constructed as the full subcategory of functors $\\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathrm{Type}\\\\, u$ that satisfy the ind-object condition, with hom-sets shrun\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"CategoryTheory.Ind.isIndObject_inclusion_obj\", \"module\": \"Mathlib/CategoryTheory/Limits/Indization/Category\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.Ind C),\\n  CategoryTheory.Limits.IsIndObject ((CategoryTheory.Ind.inclusion C).obj X)\", \"doc\": \"For any object $X$ in the ind-category $\\\\mathrm{Ind}(\\\\mathcal{C})$, the image of $X$ under the canonical inclusion functor into the functor category $\\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathrm{Type}\\\\, v$ sat\"}\n  {\"name\": \"SSet.hoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"CategoryTheory.Functor SSet CategoryTheory.Cat\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, constructed as the composition of the 2-truncation functor and the homotopy category functor for 2-truncated simpl\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.lift\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{V : SSet.Truncated 2} →\\n  {D : Type u_1} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} D] →\\n      (obj : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._proof_1 }) → D) →\\n        (map :\\n            {x y : V.obj (Opposite.op { obj := SimplexCategory.mk 0, proper\", \"doc\": \"Given a 2-truncated simplicial set $ V $ and a category $ D $, if a functor from the free reflexive quiver of $ V $'s 0-simplices to $ D $ preserves identities and compositions, this constructs a func\"}\n  {\"name\": \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SingularSet\", \"type\": \"SSet.toTop.IsLeftKanExtension SSet.toTopSimplex.inv\", \"doc\": \"The geometric realization functor from simplicial sets to topological spaces satisfies the left Kan extension property along the standard simplex cosimplicial object, verified via the inverse of the n\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.lift_obj_mk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ {V : SSet.Truncated 2} {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D]\\n  (obj : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._proof_1 }) → D)\\n  (map :\\n    {x y : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._pro\", \"doc\": \"For a 2-truncated simplicial set $ V $, if $ F $ is a functor from its homotopy category to another category $ D $, then applying $ F $ to the equivalence class $[x]$ of a 0-simplex $ x $ in $ V $'s h\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned CategoryTheory.Ind declarations use ordinary categories and Type-valued presheaves (Category.lean lines 65-113 read); the quasicategory hits only concern horns. These do not state the coherent, space-valued kappa-Ind universal property or the compact-generator and all-colimit clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "def Ind|def Ind.yoneda|Ind.yoneda.fullyFaithful",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"line\": \"71\", \"text\": \"def Ind : Type (max u (v + 1)) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"line\": \"81\", \"text\": \"noncomputable def Ind.equivalence :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"line\": \"87\", \"text\": \"protected noncomputable def Ind.inclusion : Ind C ⥤ Cᵒᵖ ⥤ Type v :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"line\": \"97\", \"text\": \"protected noncomputable def Ind.inclusion.fullyFaithful : (Ind.inclusion C).FullyFaithful :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"line\": \"101\", \"text\": \"protected noncomputable def Ind.yoneda : C ⥤ Ind C :=\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned CategoryTheory.Ind declarations use ordinary categories and Type-valued presheaves (Category.lean lines 65-113 read); the quasicategory hits only concern horns. These do not state the coherent, space-valued kappa-Ind universal property or the compact-generator and all-colimit clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ind\", \"IsLeftKanExtension\"",
+   "results": "{\"t\": \"2026-10-16T22:38:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ind\\\", \\\"IsLeftKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: second reader read the returned signatures. LeanFinder returns horn filling, QCat and ordinary homotopy-category declarations; LeanSearch returns ordinary functor/Ind colimit statements with Category instances and Type-valued presheaves; Loogle and the CategoryTheory grep return zero hits. None states the space-valued quasicategorical Ind universal property. Mathlib/CategoryTheory/Limits/Indization/Category.lean:65-113 was read independently."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal property of the free completion of a quasicategory under filtered homotopy colimits",
+   "results": "{\"t\": \"2026-10-16T22:38:49Z\", \"tool\": \"leanfinder\", \"query\": \"The universal property of the free completion of a quasicategory under filtered homotopy colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.QCat\", \"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.HomotopyCategory.lift\", \"SSet.hoFunctor\", \"SSet.Truncated.HomotopyCategory.quotientFunctor\", \"SSet.cosk\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_eq_strictMap\"], \"digest\": \"c0241ef8e0213dca\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: second reader read the returned signatures. LeanFinder returns horn filling, QCat and ordinary homotopy-category declarations; LeanSearch returns ordinary functor/Ind colimit statements with Category instances and Type-valued presheaves; Loogle and the CategoryTheory grep return zero hits. None states the space-valued quasicategorical Ind universal property. Mathlib/CategoryTheory/Limits/Indization/Category.lean:65-113 was read independently."
+  },
+  {
+   "tool": "grep",
+   "query": "Ind.*[Kk]an|[Kk]an.*Ind|[Qq]uasicategory.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-16T22:39:01Z\", \"tool\": \"grep\", \"query\": \"Ind.*[Kk]an|[Kk]an.*Ind|[Qq]uasicategory.*[Cc]olimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: second reader read the returned signatures. LeanFinder returns horn filling, QCat and ordinary homotopy-category declarations; LeanSearch returns ordinary functor/Ind colimit statements with Category instances and Type-valued presheaves; Loogle and the CategoryTheory grep return zero hits. None states the space-valued quasicategorical Ind universal property. Mathlib/CategoryTheory/Limits/Indization/Category.lean:65-113 was read independently."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor category equivalence for free completion under filtered colimits of infinity categories",
+   "results": "{\"t\": \"2026-10-16T22:39:02Z\", \"tool\": \"leansearch\", \"query\": \"Functor category equivalence for free completion under filtered colimits of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.instIsIPCFunctor\", \"CategoryTheory.Limits.instHasFilteredColimitsOfSizeFunctor\", \"CategoryTheory.Functor.isFinitelyAccessible_iff_preservesFilteredColimits\", \"CategoryTheory.Ind.leftExactFunctorEquivalence\", \"CategoryTheory.Functor.IsFinitelyAccessible\", \"CategoryTheory.Ind.lim\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Limits.colimitLimitIso\"], \"digest\": \"b1ce86e4e095126a\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: second reader read the returned signatures. LeanFinder returns horn filling, QCat and ordinary homotopy-category declarations; LeanSearch returns ordinary functor/Ind colimit statements with Category instances and Type-valued presheaves; Loogle and the CategoryTheory grep return zero hits. None states the space-valued quasicategorical Ind universal property. Mathlib/CategoryTheory/Limits/Indization/Category.lean:65-113 was read independently."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-ind-colimit-extension",
@@ -92,5 +284,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ind-kappa-extension",
+  "worker": "stage1",
+  "summary": "Kept the statement; expanded the auxiliary cocomplete embedding, coherent extension and restriction equivalence, two filtered mapping-space reductions, diagram lifting into the full essential image, and the all-colimit clause via continuous presheaves. Reused existing nodes throughout; created none. Checked actual cited statements, smallness, the empty shapes, and both compactness hypotheses.",
+  "blueprint": "Supporting infrastructure for the paragraph beginning For K in D^b_c(X,R) in current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, through the retained created-item ancestry. No Ind argument is asserted to be explicit in that paragraph. Steps 1-3 realize the supporting filtered extension argument; steps 4-5 its compact-generator criterion; steps 6-8 the all-colimit consequence.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Pointwise detection of coherent natural equivalences and equivalences on mapping spaces, used in step 3; the current unit has no separate pointwise functor-equivalence criterion. This is a generic quasicategorical tool, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-1763f6b46",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-1763f6b46 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 8 steps, and the full statements of all 11 cited nodes. The statement matches HTT Prop. 5.3.5.10 (restriction equivalence on functors preserving kappa-filtered colimits) and 5.3.5.11(1)/(2) (fully faithful when f is fully faithful with kappa-compact values; an equivalence when f(C) generates). The final all-colimit clause is the standard consequence via Cor. 5.3.5.4 and the right adjoint d->Map(f(-),d). Local smallness and presentability of D are extra hypotheses, which the parent lem-coef-accessible-ind-colimit-extension supplies. Nothing is weakened and no SGA source is used. Base-change and coefficient checks do not apply: this is generic infinity-categorical infrastructure, not a target. Step 1: opposite Yoneda into Fun(D,S)^op is fully faithful, the target is cocomplete, and existing colimits are preserved and reflected (yoneda-presheaf-limits, full-essential-image). Step 2: free cocompletion; H(X) lies in e(D) because D has kappa-filtered colimits; the factorization comes from fullness; colimit preservation is reflected back. Step 3: the intermediate-presheaf-kan hypotheses hold (replete intermediate subcategory, H preserves colimits, target cocomplete). The comparison alpha is pointwise an equivalence on filtered presentations. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus for detecting equivalences componentwise; no node of the unit gives this. Step 4: lim-colim formulas from compactness of j(c_i) and f(c_i), with no exchange of limit and colimit. Step 5: lift the presenting diagram through the quasi-inverse. Step 6: the presheaf-ind-criterion(2) hypotheses hold, including the empty shape (f(0) is initial). Step 7: I checked the variance of tau and that it is an equivalence on representables and on filtered presentations. Step 8: the representable cocone criterion gives preservation of all small colimits. Edge cases: C empty (Ind empty, D forced empty, last clause vacuous), C terminal (f(*) must be initial, which is consistent), kappa = aleph_0. proof_deps equals the union of uses, all cited ids exist and are unmerged, and a BFS over the closure (360 nodes) shows no cycle. There are no new nodes. The duplicate search (HTT 5.3.5.10/11 and Ind-extension wording) found only nodes with different statements, so same_as=[] stands. No fixes were needed."
  }
 }

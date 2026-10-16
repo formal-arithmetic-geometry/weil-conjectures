@@ -31,9 +31,188 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=\\mathcal P(\\mathcal C)$ and $D=\\operatorname{Ind}_\\kappa(\\mathcal C)$. The presheaf free-cocompletion statement gives local smallness of $P$ and existence of all small colimits; the pointwise-colimit statement identifies these colimits objectwise. Yoneda evaluation gives $\\operatorname{Map}_P(jc,jd)\\simeq\\operatorname{Map}_{\\mathcal C}(c,d)$, so Yoneda is fully faithful. Each $jc$ belongs to $D$: the one-object terminal indexing quasicategory is small and $\\kappa$-filtered and the identity cocone is colimiting. Fullness of $D\\subseteq P$ then gives local smallness and full faithfulness into $D$. Moreover $\\operatorname{Map}_P(jc,-)\\simeq\\operatorname{ev}_c$ preserves all small colimits by pointwise computation. It therefore preserves small $\\kappa$-filtered colimits, including as a functor into larger-universe spaces because change of universe preserves these colimits. Thus each $jc$ is $\\kappa$-compact in $P$.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-spaces-small-colimits-universe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.1.3.1, Lemma 5.1.5.2, Corollary 5.1.2.4; preliminary size and compactness calculation."
+   }
+  },
+  {
+   "text": "For a small quasicategory $B$ and a right fibration $Z\\to B$ classifying $H:B^{\\mathrm{op}}\\to\\mathcal S_{\\mathcal U}$, the terminal-space constant presheaf is classified by $B\\to B$. Transport classification therefore identifies the section space with $\\operatorname{Map}_{\\operatorname{Fun}(B^{\\mathrm{op}},\\mathcal S)}(\\Delta *,H)$. The limit universal property identifies this with $\\operatorname{Map}_{\\mathcal S}(*,\\lim H)$. This is $\\lim H$: in the Kan model, an $n$-simplex of the mapping complex from a point is an $n$-simplex of the target; the coherent-nerve comparison identifies that mapping complex with the mapping space of $\\mathcal S$. All these identifications are natural under pullback and in $H$.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.3.3.4, opposite/sections calculation, expanded from classification and the limit universal property."
+   }
+  },
+  {
+   "text": "For $X\\in P$ choose a small right fibration $q_X:E_X\\to\\mathcal C$ classifying $X$. The mapping-space formula in transport classification identifies maps $X\\to Y$ with maps $E_X\\to E_Y$ over $\\mathcal C$. Degreewise these maps are exactly sections of $E_X\\times_{\\mathcal C}E_Y\\to E_X$, which classifies $Yq_X^{\\mathrm{op}}$. Step 2 gives $\\operatorname{Map}_P(X,Y)\\simeq\\lim_{e\\in E_X^{\\mathrm{op}}}Y(q_X(e))$. Yoneda evaluation identifies the right-fibration pullback $\\mathcal C\\times_P P_{/X}\\to\\mathcal C$ with the classifier of $X$; hence it is equivalent over $\\mathcal C$ to $E_X$. Its arrows $j(q_X(e))\\to X$ give the tautological cocone. Under evaluation, postcomposing this cocone with $X\\to Y$ is exactly the section just described. The mapping-space colimit criterion consequently proves $X\\simeq\\operatorname{colim}_{E_X}j q_X$, with this specified cocone. This establishes canonical density, rather than taking a particular indexing category from the proof of an existence-only density node.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.3 and Corollary 5.3.5.4: canonical density derived from transport and evaluation."
+   }
+  },
+  {
+   "text": "Suppose $X\\in D$, with a small $\\kappa$-filtered presentation by representables. Reindex it by a small $\\kappa$-filtered poset using the cofinal-poset statement, applied in the cocomplete category $P$. For a $\\kappa$-small diagram $K\\to E_X$, its projection $q:K\\to\\mathcal C$ and tautological arrows give a coherent cocone $jq\\to X$. The vertices of $jq$ are $\\kappa$-compact in $P$ by Step 1. Apply relative cocone factorization in $P$ to this presentation, with $K'=\\varnothing$: it supplies a stage $j(c)$, a cocone $jq\\to j(c)$ and its full compatibility with the original cocone to $X$. For the lift through Yoneda, let $h$ be the coherent inverse on its full essential image and let $\\epsilon:hj\\simeq1_{\\mathcal C}$ be its natural equivalence. If $\\lambda:jq\\to\\Delta_K j(c)$ is the factorized cocone, the composite $q\\xrightarrow{\\epsilon_q^{-1}}hjq\\xrightarrow{h\\lambda}\\Delta_K hj(c)\\xrightarrow{\\Delta_K\\epsilon_c}\\Delta_Kc$ is a coherent cocone in $\\mathcal C$. The natural equivalences for $jh$ identify its Yoneda image with $\\lambda$, including the triangle to $X$ supplied by factorization. Under the classifier identification of Step 3, these data give a cocone on the original $K\\to E_X$; the join/cone comparison is taken with this boundary fixed. For $K=\\varnothing$, the presentation index is nonempty, so choose a stage $j(c)\\to X$; it is a vertex of $E_X$. Thus $E_X$ is $\\kappa$-filtered. Conversely, if $E_X$ is $\\kappa$-filtered, Step 3 is the required small filtered presentation by representables, so $X\\in D$. In applying the factorization theorem its join cocone model and the coherent-transformation model are identified by the join/cone comparison; replacing an indexing category by an equivalent classifier does not change the existence of a cone. Apply the left-cone comparison in the opposite quasicategory; the opposite/cone equivalences in [lem-coef-infinity-relative-cone-equivalence] identify it with the required right cocone and preserve the fixed-boundary data.",
+   "uses": [
+    "lem-coef-infinity-cofinal-kappa-poset",
+    "lem-coef-compact-relative-cocone-factorization",
+    "lem-coef-infinity-full-essential-image",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.5.4, equivalence of (1) and (2), with filteredness proved using Corollary 5.3.4.14 and the relative lifting construction in the proof of Lemma 5.5.4.13 (printed pp. 479-480)."
+   }
+  },
+  {
+   "text": "Let $F:I\\to D$ be a small $\\kappa$-filtered diagram and form its colimit $X$ in $P$. Reindex by a small $\\kappa$-filtered poset, which does not change that colimit in $P$. Given $K\\to E_X$ with $K$ $\\kappa$-small, use relative cocone factorization with $K'=\\varnothing$ and the $\\kappa$-compact vertices $jq(k)$ to factor its tautological cocone through one $F(i)$. This yields a diagram $K\\to E_{F(i)}$ whose cocone to $X$ is the original one, including all coherence. Step 4 says $E_{F(i)}$ is $\\kappa$-filtered, so this diagram has a cocone with representable apex; postcomposing with $F(i)\\to X$ gives a cocone in $E_X$. For empty $K$, choose $i$ in the nonempty presentation index, then a vertex of the nonempty $E_{F(i)}$ supplied by Step 4. Its arrow $j(c)\\to F(i)\\to X$ is a vertex of $E_X$. Step 4 therefore implies $X\\in D$. Finally, fullness gives $\\operatorname{Map}_D(X,Z)=\\operatorname{Map}_P(X,Z)$ for $Z\\in D$, and $\\operatorname{Map}_D(F(i),Z)=\\operatorname{Map}_P(F(i),Z)$ for each $i$; the colimit universal property in $P$ restricts to $D$. This proves existence of small $\\kappa$-filtered colimits in $D$ and preservation by its inclusion.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-cofinal-kappa-poset",
+    "lem-coef-compact-relative-cocone-factorization",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.3: closure under filtered colimits, via the canonical-elements criterion and compact relative factorization."
+   }
+  },
+  {
+   "text": "For a small $\\kappa$-filtered diagram $F:I\\to D$, Step 5 identifies its colimit with its presheaf colimit. Yoneda evaluation now gives $\\operatorname{Map}_D(jc,\\operatorname{colim}_I F)\\simeq(\\operatorname{colim}_I F)(c)\\simeq\\operatorname{colim}_I F(i)(c)\\simeq\\operatorname{colim}_I\\operatorname{Map}_D(jc,F(i))$, with the canonical cocone maps. Change of universe preserves the colimit of these small spaces. Thus $jc$ is $\\kappa$-compact in $D$. Its full essential image is essentially small since $\\mathcal C$ is small and Yoneda is fully faithful. By the definition of $D$, every object has a small $\\kappa$-filtered representable presentation in $P$, and by Step 5 that cocone is also colimiting in $D$. These statements are precisely $\\kappa$-accessibility.",
+   "uses": [
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-full-essential-image",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.5 and Proposition 5.4.2.2; accessibility from the specified generators."
+   }
+  },
+  {
+   "text": "Let $p:K\\to\\mathcal C$ have a colimiting cocone to $c$, with $K$ $\\kappa$-small, and let $X\\in D$. Write $X=\\operatorname{colim}_{i\\in I}j(c_i)$ in $P$. Each representable $j(c_i)$ takes this cocone in $\\mathcal C$ to a limit diagram, by the mapping-space colimit criterion. Pointwise presheaf colimits and the limit/filtered-colimit interchange in spaces give $X(c)\\simeq\\operatorname{colim}_i\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal C}(p(k),c_i)\\simeq\\lim_{k\\in K^{\\mathrm{op}}}X(p(k))$. By Yoneda evaluation this is the actual comparison $\\operatorname{Map}_D(jc,X)\\to\\lim_{K^{\\mathrm{op}}}\\operatorname{Map}_D(jp(k),X)$. It is an equivalence for every $X$, so the mapping-space criterion proves that $j$ sends the given cocone to a colimiting cocone in $D$. For empty $K$, the same interchange includes the terminal limit, so existing initial objects are preserved as well.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.14, using the direct evaluation/interchange calculation instead of right-exactness terminology."
+   }
+  },
+  {
+   "text": "Assume now that $\\mathcal C$ admits all $\\kappa$-small colimits. A pushout diagram $F:N(A)\\to D$ has $A=\\{0,1,2\\}$ with $0<1$ and $0<2$, a finite poset. The finite-poset realization statement gives a small $\\kappa$-filtered index $I$ and diagrams $G_i:N(A)\\to\\mathcal C$ whose Yoneda images have pointwise presheaf colimit $F$. By Step 5 they also have pointwise colimit $F$ in $D$. Choose $c_i=\\operatorname{colim}_{N(A)}G_i$ in $\\mathcal C$. The opposite universal-arrow theorem for the constant-diagram functor assembles these colimits and their cocones coherently into $c:I\\to\\mathcal C$. By Step 7, $jc_i$ is the pushout of $jG_i$ in $D$. Form $L=\\operatorname{colim}_I jc_i$ in $D$, using Step 5. For every $Z\\in D$, the universal properties give $\\operatorname{Map}_D(L,Z)\\simeq\\lim_{i\\in I^{\\mathrm{op}}}\\lim_{a\\in N(A)^{\\mathrm{op}}}\\operatorname{Map}_D(jG_i(a),Z)\\simeq\\lim_{a\\in N(A)^{\\mathrm{op}}}\\operatorname{Map}_D(F(a),Z)$. The exchange is of two limits: a coherent cone on either iterated diagram is exactly a coherent cone on their product, so the two universal properties coincide. The equivalences respect the cocone legs. The mapping-space colimit criterion makes $L$ a pushout of $F$.",
+   "uses": [
+    "lem-coef-ind-finite-poset-realization",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.15, finite span application, and Theorem 5.5.1.1(4): direct construction of pushouts."
+   }
+  },
+  {
+   "text": "Let $(X_s)_{s\\in S}$ be a family in $D$ with $|S|<\\kappa$. Reindex each chosen presentation as $X_s=\\operatorname{colim}_{a\\in A_s}j p_s(a)$, with $A_s$ a small nonempty $\\kappa$-filtered poset. The product poset $A=\\prod_{s\\in S}A_s$ is small and $\\kappa$-filtered: choose an upper bound separately in each coordinate for any set of fewer than $\\kappa$ tuples; the empty set is included. Each projection $A\\to A_s$ is cofinal. Indeed its comma poset over $b\\in A_s$ is the product of $(A_s)_{b/}$ and the remaining $A_t$; choose its $s$-coordinate above $b$ and choose any point in each other nonempty factor to get an object. For any fewer than $\\kappa$ such objects, choose an upper bound in each coordinate, including $b$ in the set to be bounded in the $s$-coordinate. This gives an upper bound inside the comma poset, so it is $\\kappa$-filtered and the weak-contractibility clause of the coslice-colimit statement applies. Apply the cofinal-comma statement in $P$. Consequently the discrete diagrams $s\\mapsto j p_s(a_s)$ have pointwise filtered colimit $s\\mapsto X_s$. The $<\\kappa$-fold coproducts $c_a=\\coprod_{s\\in S}p_s(a_s)$ exist in $\\mathcal C$ and assemble coherently by universal arrows. Step 7 makes $jc_a$ their coproducts in $D$. Form $L_S=\\operatorname{colim}_{a\\in A}jc_a$ in $D$. For every $Z$, $\\operatorname{Map}_D(L_S,Z)\\simeq\\lim_{a\\in A^{\\mathrm{op}}}\\prod_{s\\in S}\\operatorname{Map}_D(jp_s(a_s),Z)\\simeq\\prod_{s\\in S}\\operatorname{Map}_D(X_s,Z)$. Both orders of limits represent the space of coherent cones on the diagram $(a,s)\\mapsto\\operatorname{Map}_D(jp_s(a_s),Z)$ indexed by $N(A)^{\\mathrm{op}}\\times S$, where $S$ is discrete. The resulting equivalence preserves the projections to each pair $(a,s)$, so it identifies the specified coproduct legs. Thus $L_S$ is a coproduct. If $S=\\varnothing$, use $A=*$ and the initial object of $\\mathcal C$; this also proves existence of the empty coproduct in $D$.",
+   "uses": [
+    "lem-coef-infinity-cofinal-kappa-poset",
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-coslice-colimit-formula",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 5.5.1.1(4): explicit <kappa coproduct construction by simultaneous filtered presentations."
+   }
+  },
+  {
+   "text": "For an arbitrary small set $S$, let $B$ be the poset of subsets $T\\subseteq S$ of cardinality less than $\\kappa$. It is small and $\\kappa$-filtered: regularity of $\\kappa$ ensures that the union of fewer than $\\kappa$ such subsets still has size less than $\\kappa$ and is an upper bound, and $\\varnothing\\in B$. View the discrete simplicial set $S$ as the directed union of the discrete subsets $T$. Step 9 supplies colimiting cocones on every restriction of the family to $T$. The directed-union local-colimits statement assembles these apices $L_T$ coherently and identifies the space of cocones on $T\\mapsto L_T$ with the space of cocones on the entire family, without assuming cocompleteness of $D$. Since $N(B)$ is small and $\\kappa$-filtered, Step 5 supplies its colimit. The same assembly statement says its cocone is colimiting on the whole family. This constructs all small coproducts in $D$, including the empty one. Notice that at $\\kappa=\\aleph_0$ only discrete finite subsets are used, so no countability assumption on general finite-generated simplicial subsets enters.",
+   "uses": [
+    "lem-coef-infinity-directed-union-local-colimits",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 4.2.3.11/Theorem 5.5.1.1(4), direct directed assembly of discrete coproducts."
+   }
+  },
+  {
+   "text": "Steps 8 and 10 give pushouts and all small coproducts in $D$. The small-colimit generation theorem therefore gives colimits of every small simplicial diagram. Step 6 has already proved $\\kappa$-accessibility, so the definition of presentability makes $D$ presentable. This final argument uses no adjoint-functor theorem or presheaf-localization theorem, whose current DAG dependencies lead back to the present item.",
+   "uses": [
+    "lem-coef-infinity-small-colimit-generation",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 5.5.1.1(4) conclusion, obtained here by the coproduct-and-pushout criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-compact-relative-cocone-factorization",
+  "lem-coef-ind-finite-poset-realization",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-cofinal-kappa-poset",
+  "lem-coef-infinity-coslice-colimit-formula",
+  "lem-coef-infinity-directed-union-local-colimits",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-small-colimit-generation",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-kappa-limit-filtered-colimit",
+  "lem-coef-spaces-small-colimits-universe"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT §§5.1.5 and 5.3.5, Proposition 5.3.5.15 and Theorem 5.5.1.1(4), read online, not archived in literature/. Direct compact-factorization and coproduct/pushout argument supplied to avoid a cycle through the existing localization infrastructure."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +248,122 @@
    "results": "{\"t\": \"2026-10-16T20:54:57Z\", \"tool\": \"leansearch\", \"query\": \"A small infinity category with kappa small colimits has an accessible Ind completion with all small colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instHasColimitsIndOfHasFiniteColimits\", \"CategoryTheory.IsCardinalLocallyPresentable.toHasColimitsOfSize\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.instHasFilteredColimitsInd\", \"CategoryTheory.Ind\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.instCategoryInd\", \"CategoryTheory.instCreatesColimitsOfShapeIndFunctorOppositeTypeInclusionOfIsFiltered\"], \"digest\": \"fd309fdea08ad362\"}",
    "date": "2026-10-16",
    "verdict": "No match: read returned signatures. CategoryTheory.Ind uses ordinary categories and set-valued presheaves; presentability hits use Hom sets. Quasicategory grep hits concern horns only. None states coherent mapping-space compactness, infinity-category Ind extensions or their colimit preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda category of elements canonical colimit resolution of a space valued presheaf on a small infinity category",
+   "results": "{\"t\": \"2026-10-16T22:26:07Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda category of elements canonical colimit resolution of a space valued presheaf on a small infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone'\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom\", \"CategoryTheory.Limits.IndObjectPresentation.yoneda\", \"AlgebraicGeometry.PresheafedSpace.componentwiseDiagram\", \"AlgebraicGeometry.PresheafedSpace.componentwiseDiagram_obj\", \"CategoryTheory.Ind.colimitPresentationCompYoneda\"], \"digest\": \"575afcbd44403771\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Presheaf\", \"isColimitTautologicalCocone\"",
+   "results": "{\"t\": \"2026-10-16T22:26:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Presheaf\\\", \\\"isColimitTautologicalCocone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone'\"], \"digest\": \"774c2096699fc302\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right fibration of elements of a space valued presheaf indexes its canonical Yoneda colimit",
+   "results": "{\"t\": \"2026-10-16T22:26:42Z\", \"tool\": \"leansearch\", \"query\": \"The right fibration of elements of a space valued presheaf indexes its canonical Yoneda colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Limits.Cocone.isColimitYonedaEquiv\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone\", \"CategoryTheory.Limits.colimitYonedaHomIsoLimitRightOp_π_apply\", \"CategoryTheory.yonedaYonedaColimit\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber\", \"CategoryTheory.Limits.PushoutCocone.isColimitYonedaEquiv\"], \"digest\": \"ba7a50a557b4f58d\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every presheaf on a quasicategory is the colimit of representables indexed by its right fibration of elements",
+   "results": "{\"t\": \"2026-10-16T22:26:43Z\", \"tool\": \"leanfinder\", \"query\": \"Every presheaf on a quasicategory is the colimit of representables indexed by its right fibration of elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isColimitTautologicalCocone'\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Limits.IndObjectPresentation.isColimit\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_isColimit\", \"CategoryTheory.Limits.IndObjectPresentation.coconeIsColimit\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom\", \"CategoryTheory.Limits.IndObjectPresentation.yoneda\"], \"digest\": \"5d4adb64488a0fd4\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitTautologicalCocone|colimitOfRepresentable",
+   "results": "{\"t\": \"2026-10-16T22:26:43Z\", \"tool\": \"grep\", \"query\": \"isColimitTautologicalCocone|colimitOfRepresentable\", \"sub\": \"CategoryTheory/Limits/Presheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitTautologicalCocone|colimitOfRepresentable",
+   "results": "{\"t\": \"2026-10-16T22:27:39Z\", \"tool\": \"grep\", \"query\": \"isColimitTautologicalCocone|colimitOfRepresentable\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\"], \"digest\": \"52d452ebfb695ae7\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ind kappa completion of small infinity category has compact Yoneda generators preserves kappa small colimits and is presentable if generators have kappa small colimits",
+   "results": "{\"t\": \"2026-10-16T22:27:41Z\", \"tool\": \"leanfinder\", \"query\": \"Ind kappa completion of small infinity category has compact Yoneda generators preserves kappa small colimits and is presentable if generators have kappa small colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeTypeObjUliftYonedaOfHasColimitsOfSize\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.presentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\", \"CategoryTheory.IsCardinalLocallyPresentable\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.essentiallySmall_isPresentable\", \"CategoryTheory.isCardinalPresentable\"], \"digest\": \"e8f01fe3718afacf\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ind\", \"yoneda\"",
+   "results": "{\"t\": \"2026-10-16T22:27:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ind\\\", \\\"yoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isIndObject_yoneda\", \"CategoryTheory.Limits.IndObjectPresentation.yoneda\", \"CategoryTheory.Limits.IndObjectPresentation.yoneda_I\", \"CategoryTheory.Limits.IndObjectPresentation.yoneda_ℐ\", \"CategoryTheory.Limits.IndObjectPresentation.yoneda_F\", \"CategoryTheory.Limits.IndObjectPresentation.instFinalICostructuredArrowFunctorOppositeTypeYonedaToCostructuredArrow\", \"CategoryTheory.Limits.isIndObject_limit_comp_yoneda\", \"CategoryTheory.Limits.IndObjectPresentation.yoneda_ι_app\"], \"digest\": \"2db5e5a242b79fca\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "grep",
+   "query": "Ind|accessible|compact|colimit",
+   "results": "{\"t\": \"2026-10-16T22:27:42Z\", \"tool\": \"grep\", \"query\": \"Ind|accessible|compact|colimit\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"ccdef2f42ce134af\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagram indexed by a finite partially ordered set in the infinity categorical Ind kappa completion is a kappa filtered colimit of diagrams of representables",
+   "results": "{\"t\": \"2026-10-16T22:28:03Z\", \"tool\": \"leanfinder\", \"query\": \"A diagram indexed by a finite partially ordered set in the infinity categorical Ind kappa completion is a kappa filtered colimit of diagrams of representables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IndObjectPresentation.hI\", \"CategoryTheory.Limits.IndObjectPresentation.instIsFilteredI\", \"CategoryTheory.Limits.HasIterationOfShape\", \"CategoryTheory.Functor.instIsWellOrderContinuousFin\", \"CategoryTheory.IsFiltered.exists_directed\", \"CategoryTheory.IsFiltered\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.D₄\", \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\"], \"digest\": \"88c747da84b6a422\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ind\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-16T22:28:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ind\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.inducedFunctor\", \"CategoryTheory.fullyFaithfulInducedFunctor\", \"CategoryTheory.inducedFunctor_obj\", \"CategoryTheory.inducedFunctor_map\", \"CategoryTheory.Equivalence.essSurjInducedFunctor\", \"CategoryTheory.Equivalence.inducedFunctorOfEquiv\", \"CategoryTheory.Equivalence.induced_functor\", \"CategoryTheory.Limits.Cocone.equivalenceOfReindexing_functor\"], \"digest\": \"959580ca6d517381\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite poset diagrams of space valued ind presheaves are filtered colimits of diagrams in the original infinity category",
+   "results": "{\"t\": \"2026-10-16T22:28:05Z\", \"tool\": \"leansearch\", \"query\": \"Finite poset diagrams of space valued ind presheaves are filtered colimits of diagrams in the original infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isIndObject_colimit\", \"PartOrdEmb.Limits.instHasFilteredColimitsOfSize\", \"CategoryTheory.instHasColimitsOfShapeDiscreteIndOfFinite\", \"CategoryTheory.Ind.lim\", \"CategoryTheory.Limits.IndObjectPresentation.mk\", \"CategoryTheory.Limits.IndObjectPresentation.hI\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.instCreatesColimitsOfShapeIndFunctorOppositeTypeInclusionOfIsFiltered\"], \"digest\": \"c25d7e424e421cda\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate a coherent finite direct diagram of filtered colimits of representable presheaves by a single filtered system of finite direct diagrams in a quasicategory",
+   "results": "{\"t\": \"2026-10-16T22:28:07Z\", \"tool\": \"leanfinder\", \"query\": \"Approximate a coherent finite direct diagram of filtered colimits of representable presheaves by a single filtered system of finite direct diagrams in a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.exists_nonempty_limit_obj_of_isColimit\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_ℐ\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_I\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"CategoryTheory.Limits.IndObjectPresentation.hI\", \"CategoryTheory.Limits.IsIndObject.isFiltered\"], \"digest\": \"e7cc2e83d3341b89\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "grep",
+   "query": "Ind|finite|poset|diagram",
+   "results": "{\"t\": \"2026-10-16T22:28:07Z\", \"tool\": \"grep\", \"query\": \"Ind|finite|poset|diagram\", \"sub\": \"CategoryTheory/Limits/Indization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\"], \"digest\": \"3449335a8211dd5a\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory|Ind|Yoneda",
+   "results": "{\"t\": \"2026-10-16T22:28:37Z\", \"tool\": \"grep\", \"query\": \"Quasicategory|Ind|Yoneda\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"e5ae869a7f17b4e8\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda embedding of a quasicategory into its kappa filtered space valued presheaves preserves existing small colimits below kappa",
+   "results": "{\"t\": \"2026-10-16T22:28:42Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda embedding of a quasicategory into its kappa filtered space valued presheaves preserves existing small colimits below kappa\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.preservesColimitsOfShape_of_isCardinalPresentable\", \"CategoryTheory.preservesColimitsOfShape_of_isCardinalPresentable_of_essentiallySmall\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.preservesColimit\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeTypeObjUliftYonedaOfHasColimitsOfSize\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.instPreservesFiniteColimitsIndYoneda\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\", \"CategoryTheory.isCardinalPresentable_of_isColimit\"], \"digest\": \"8d6f210bfaea4075\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The returned IndObjectPresentation, IndParallelPairPresentation and presheaf colimit declarations concern ordinary categories and Type-valued presheaves; read CategoryTheory/Limits/Indization/Category.lean:18-25,74-94, ParallelPair.lean:33-57, and Limits/Presheaf.lean:290. The quasicategory hits concern horn fillers and nerves, not coherent space-valued presheaf diagram realizations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-ind-colimit-extension",
@@ -92,5 +383,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ind-kappa-presentability",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved the canonical-elements density formula from transport classification and evaluation, filteredness and closure via compact relative cocone factorization, compactness/accessibility and existing-colimit preservation directly. Constructed all colimits by pushouts and coproducts, adding only the finite-poset simultaneous-realization lemma and avoiding the existing localization theorem because its DAG would create a cycle. Searched project Lean, the whole DAG/blueprint and Mathlib; no exact attachment or infinity-category Mathlib leaf exists.",
+  "blueprint": "Supports the inherited auxiliary Ind infrastructure in the derived coefficient-adjunction paragraph of current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, via the preserved ancestor chain. This foundational HTT argument is below the unit route, not a replacement of any geometric unit step. Steps 1-7 realize compact filtered completion; steps 8-11 construct its colimits and presentability.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent mapping-space universal-property tool underlying the cited infinity-category constructions; no coefficient-unit statement supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-8d38b343c",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-8d38b343c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-ind-finite-poset-realization, all 20 cited lemma statements and 3 definitions, the unit record and the blueprint ancestor paragraph. I checked the sources against the public HTT PDF (Lurie 2017), reading Def 5.3.5.1, Props 5.3.5.3, 5.3.5.5, 5.3.5.14, 5.3.5.15 with its proof, Warning 5.3.5.16 and Thm 5.5.1.1. The item's statement is unchanged and every clause matches HTT: preservation covers only the colimits that exist in C, and presentability is claimed only when C admits all κ-small colimits (5.5.1.1(4)). Steps 3-5 prove that the filtered-representable definition agrees with HTT's right-fibration definition (Cor 5.3.5.4), so the two are not silently identified. The new node is exactly the essential-surjectivity part of 5.3.5.15: it assumes no colimits in C and keeps the finite-poset restriction that Warning 5.3.5.16 requires. It is statement-only and self-contained, has three kinds of Mathlib search (no match: the candidates are ordinary Type-valued categories), correct blueprint fields, and does not restate any clause of the item. I checked each step against the cited statements. The compact-relative-cocone-factorization hypotheses hold: K'=∅, the representable vertices are κ-compact, and the index is a cofinal κ-poset in the cocomplete P. Step 7 checks preservation inside D, not P, and handles empty K. Step 8 assembles the stage pushouts via the left-adjoint form of parametric-universal-arrows and exchanges two limits. Step 9's product poset is κ-filtered by regularity, and its comma posets are weakly contractible. Step 10 meets the finite-upper-bound hypothesis of directed-union-local-colimits. Step 11 uses small-colimit-generation. Step 2 is elementary and Step 6 is acceptable as elementary. Small cases checked: C empty or terminal, κ=ω with finite-dimensional vector spaces, and for the new node A empty, a point, an arrow, a span. There are no duplicates in the DAG (rg for 5.3.5.15, Ind, finite poset; lem-sfb-ind-arrow-presentation, lem-coef-infinity-finite-poset-kan-extension and lem-coef-accessible-diagram-presentations read). The dependency closure has 370 nodes and no cycle. I accept the declared tool_use lem-cbc-enhanced-functor-cone-calculus as a generic tool; it is already an accepted tool_use on 102 nodes of this unit. No SGA is used. No fixes."
  }
 }

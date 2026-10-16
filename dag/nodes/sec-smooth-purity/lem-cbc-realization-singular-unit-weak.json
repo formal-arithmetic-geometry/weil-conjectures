@@ -26,48 +26,156 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=|X|$ and $A=\\operatorname{Sing}(T)$. Define $\\epsilon:|A|\\to T$ by $\\epsilon([\\sigma,t])=\\sigma(t)$. Precomposition gives $\\epsilon([\\sigma\\alpha_*,t])=\\sigma(\\alpha_*t)$, so this is well-defined on the realization relation and continuous by its quotient topology. The same relation gives $(u_Xx)\\alpha_*=u_X(X(\\alpha)x)$, so the characteristic maps form a simplicial map. On every representative, $\\epsilon(|u_X|([x,t]))=\\epsilon([u_Xx,t])=[x,t]$; hence $\\epsilon\\circ|u_X|=\\mathrm{id}_T$. It remains to compute the maps induced by this particular $\\epsilon$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.6.7, proof, printed p. 99: evaluation map; explicit quotient and triangle-identity calculation supplied here. The item itself is Kerodon Tag 0142."
+   }
+  },
+  {
+   "text": "The simplicial set $A$ is Kan. Indeed, the realization/singular adjunction of [lem-coef-realization-finite-limits] sends a horn map $\\Lambda_i^m\\to A$ to a continuous map $|\\Lambda_i^m|\\to T$. For $m\\geq1$ its realized pair is $(D^{m-1}\\times[0,1],D^{m-1}\\times\\{0\\})$. Projection to the bottom face, conjugated by this homeomorphism of pairs, is a continuous retraction $r:|\\Delta^m|\\to|\\Lambda_i^m|$. Composing the adjoint horn map with $r$ and transposing back gives a filler, since $r$ restricts to the identity. The adjunction applies because $T$ is a k-space by the same node. This handles all inner and outer horns, including $m=1$, without requiring $T$ to be nonempty.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Section 3.1 adjunction; realized horn pair before Proposition 3.2.3; Theorem 3.6.7 uses fibrancy of Sing. The retraction argument is written out."
+   }
+  },
+  {
+   "text": "Fix $t_0\\in T$ and $n\\geq1$. Write $Q_n=\\Delta^n/\\partial\\Delta^n$, pointed at the collapsed boundary. By the adjunction and preservation of colimits in [lem-coef-realization-finite-limits], a pointed map $Q_n\\to A$ is exactly a continuous $a:|\\Delta^n|\\to T$ constant at $t_0$ on $|\\partial\\Delta^n|$. The realized simplex pair is $(D^n,S^{n-1})$. Use the same pair identification as in the realization comparison [lem-coef-kan-realization-serre]; equivalently change from ball to cube by the radial homeomorphism along rays from their centers. Thus these $a$, modulo homotopies constant on the boundary, give the underlying set of $\\pi_n(T,t_0)$ in the cubical convention. This identifies representatives, rather than asserting a comparison of homotopy groups without checking homotopies.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-kan-realization-serre",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00VR",
+    "place": "Example 3.2.2.7 (Tag 00VR), with the simplex-pair and representative conventions of Hovey Proposition 3.6.3."
+   }
+  },
+  {
+   "text": "The correspondence in step 3 identifies exactly the two homotopy relations. A pointed simplicial homotopy $h:Q_n\\times\\Delta^1\\to A$ is adjoint to a continuous map $|Q_n\\times\\Delta^1|\\to T$; the homeomorphism of [lem-coef-simplicial-realization-cylinder] turns this into $|Q_n|\\times[0,1]\\to T$, constant at $t_0$ on the basepoint cylinder. Conversely, given a boundary-fixed continuous homotopy $H:|\\Delta^n|\\times[0,1]\\to T$, assign to a $k$-simplex $(\\alpha:[k]\\to[n],\\theta:[k]\\to[1])$ the singular simplex $z\\mapsto H(\\alpha_*z,\\sum_{\\theta(j)=1}z_j)$. If $\\alpha$ lies in the boundary this is constant at $t_0$, so the formula descends to $Q_n\\times\\Delta^1$; coordinate sums under precomposition prove the simplicial identities. At the two ends it gives the two original representatives. Hence it descends both ways to a bijection $\\Phi_n:\\pi_n^s(A,t_0)\\to\\pi_n(T,t_0)$ of underlying sets, also when simplicial homotopy is defined as its generated equivalence relation.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-simplicial-realization-cylinder",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00VR",
+    "place": "Example 3.2.2.7 (Tag 00VR); explicit expansion of the homotopy assertion in Hovey Theorem 3.6.7, printed p. 99."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-realization-serre] to the Kan complex $A$ of step 2. Its stated comparison is an isomorphism $\\rho_n:\\pi_n^s(A,t_0)\\to\\pi_n(|A|,t_0)$ induced by realizing representatives. Evaluation on a representative gives $\\epsilon([a,z])=a(z)$, so $\\epsilon_{*,t_0}\\rho_n=\\Phi_n$. The preceding bijection and the bijectivity of $\\rho_n$ imply that $\\epsilon_{*,t_0}$ is bijective. Postcomposition commutes with concatenation of cubes, so it is a group homomorphism and therefore a group isomorphism. This avoids any choice between opposite conventions for multiplication on simplicial fundamental groups. For components, the same cited node identifies $\\pi_0(|A|)$ with vertices modulo edges. Vertices of $A$ are exactly points of $T$ and its edges are exactly continuous paths in $T$ (parametrize $|\\Delta^1|$ by its second coordinate). Thus evaluation induces a bijection $\\pi_0(|A|)\\to\\pi_0(T)$.",
+   "uses": [
+    "lem-coef-kan-realization-serre",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.3 and Theorem 3.6.7, printed pp. 97–99; the latter computes evaluation on homotopy groups using the adjunction. Component and group-law checks expanded here."
+   }
+  },
+  {
+   "text": "Here are explicit maps needed to extend the calculation from singular vertices to an arbitrary point $y\\in|A|$. Represent $y=[\\sigma,z]$ and choose a vertex $e_0$ of that simplex. Set $v=[\\sigma,e_0]$ and $\\gamma(s)=[\\sigma,(1-s)e_0+sz]$, a continuous path from $v$ to $y$. Form the quotient spaces $E=(|A|\\amalg[0,1])/(1\\sim y)$ and $F=(T\\amalg[0,1])/(1\\sim\\epsilon(y))$, pointed at the new endpoint $0$. Define $r_E:E\\to|A|$ to be the identity on $|A|$ and constant $y$ on the interval, and $h_E:E\\to|A|$ to be the identity on $|A|$ and $\\gamma$ on the interval. Define $r_F,h_F$ using $\\epsilon(y)$ and $\\epsilon\\gamma$. These maps are continuous by the quotient universal property, since the two coproduct branches agree at the attachment. Let $i_E:|A|\\hookrightarrow E$ be inclusion. A homotopy from $1_E$ to $i_Er_E$ fixes $|A|$ and sends an interval point $s$ at parameter $a$ to $s+a(1-s)$ in the attached interval. A homotopy from $1_E$ to $i_Eh_E$ fixes $|A|$ and sends $s$ to $s+2a(1-s)$ for $0\\leq a\\leq\\tfrac12$, while for $\\tfrac12\\leq a\\leq1$ it sends $s$ to $\\gamma(1-(2a-1)(1-s))$ in the original summand. The two formulas agree at $a=\\tfrac12$ (both are the attachment point $y$) and at $s=1$; their endpoints are respectively $1_E$ and $i_Eh_E$. The same formulas, with $\\epsilon\\gamma$ and $\\epsilon(y)$, give homotopies for $r_F$ and $h_F$. Joint continuity on each quotient follows by transposing in the compact, locally compact parameter interval with [lem-coef-compact-open-currying], descending the continuous transposes, and evaluating again. Thus all four maps are homotopy equivalences, with no stationary-basepoint assumption.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Section 4.1, printed pp. 341–342, basepoint transport. The attached-interval construction and both homotopies are an explicit agent expansion; currying justifies product topology on quotient homotopies."
+   }
+  },
+  {
+   "text": "Define $\\epsilon^+:E\\to F$ by $\\epsilon$ on the original space and the identity on the attached interval. The quotient formulas give strictly $r_F\\epsilon^+=\\epsilon r_E$ and $h_F\\epsilon^+=\\epsilon h_E$, with all maps pointed at the indicated images of the new endpoint. By [lem-coef-homotopy-equivalence-weak] the four maps $r_E,r_F,h_E,h_F$ induce group isomorphisms in every positive degree at that endpoint. Step 5 already makes $\\epsilon_{*,v}$ an isomorphism. The second equality therefore makes $(\\epsilon^+)_{*,0}$ an isomorphism, and the first equality then makes $\\epsilon_{*,y}$ an isomorphism. These deductions are cancellation in two commutative squares of group homomorphisms, so no uncited change-of-basepoint theorem is being invoked. Together with step 5, evaluation is bijective on components and isomorphic on all homotopy groups at every point of $|A|$.",
+   "uses": [
+    "lem-coef-homotopy-equivalence-weak",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Section 4.1, printed p. 342, homotopy equivalences and nonstationary basepoints; explicit attached-interval cancellation applies the statement of lem-coef-homotopy-equivalence-weak."
+   }
+  },
+  {
+   "text": "For every $x\\in|X|$, the identity of step 1 induces $\\epsilon_{*,|u_X|(x)}\\circ(|u_X|)_{*,x}=\\mathrm{id}_{\\pi_n(|X|,x)}$. The first factor is an isomorphism by step 7, so $(|u_X|)_{*,x}$ is its inverse. On path components the identical equation and the bijection of step 5 show that $|u_X|$ induces the inverse bijection. This proves all clauses of the statement. If $X$ is empty, then $|X|$, its singular set and its iterated realization are empty, the component functions are the unique bijections, and no based assertion is required. No step imposed Kan, finiteness or connectedness on $X$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0142",
+    "place": "Theorem 3.6.4.1 (Tag 0142), with the evaluation–unit identity checked in step 1; elementary cancellation of the computed maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-kan-realization-serre",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-compact-open-currying",
+  "lem-coef-homotopy-equivalence-weak"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Theorem 3.6.7, proof, printed p. 99, using the existing Proposition 3.6.3 comparison node; explicit horn fillers, homotopy correspondence, attached-interval basepoint argument and triangle cancellation supplied here. Sources read online, archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For every simplicial set X the unit map X to the singular simplicial set of its geometric realization is a weak homotopy equivalence",
-   "results": "{\"t\": \"2026-10-16T20:55:26Z\", \"tool\": \"leanfinder\", \"query\": \"For every simplicial set X the unit map X to the singular simplicial set of its geometric realization is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor.unitHomEquiv\", \"SSet.hoFunctor.unitHomEquiv_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"sSetTopAdj\", \"SSet.unitHomEquiv\", \"SSet.Subcomplex.topIso\", \"TopCat.toSSetObjEquiv\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\"], \"digest\": \"b8db4b9eb394f089\"}",
+   "query": "For every simplicial set X the unit X to the singular complex of its geometric realization is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-16T22:23:18Z\", \"tool\": \"leanfinder\", \"query\": \"For every simplicial set X the unit X to the singular complex of its geometric realization is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor.unitHomEquiv\", \"SSet.hoFunctor.unitHomEquiv_eq\", \"SSet.unitHomEquiv\", \"sSetTopAdj\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"TopCat.toSSetObjEquiv\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"SSet.toTop\"], \"digest\": \"2770ef67b88e186a\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read SingularSet.lean:14-119. sSetTopAdj:78 constructs the adjunction and sSetTopAdj_unit_app_app_down:99 gives its unit on simplices; neither asserts a weak equivalence. The semantic hits about units of abstract adjunctions, SSet.hoFunctor and products do not assert a comparison on realized homotopy groups. Quillen equivalence is explicitly a TODO at lines 34-37."
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SingularSet.lean:14–119. sSetTopAdj:78 constructs only the adjunction; sSetTopAdj_unit_app_app_down:99 gives only its characteristic-simplex formula. TopCat.toSSetObjEquiv:60 identifies singular simplices. Neither they nor the hoFunctor/monoidal unit hits assert realization weak equivalence. Quillen equivalence is a TODO at lines 34–37."
   },
   {
    "tool": "loogle",
    "query": "\"sSetTopAdj\"",
-   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"sSetTopAdj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"sSetTopAdj\", \"sSetTopAdj_unit_app_app_down\", \"sSetTopAdj_homEquiv_stdSimplex_zero\"], \"digest\": \"3eb136ad4c87db46\"}",
+   "results": "{\"t\": \"2026-10-16T22:24:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"sSetTopAdj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"sSetTopAdj\", \"sSetTopAdj_unit_app_app_down\", \"sSetTopAdj_homEquiv_stdSimplex_zero\"], \"digest\": \"3eb136ad4c87db46\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read SingularSet.lean:14-119. sSetTopAdj:78 constructs the adjunction and sSetTopAdj_unit_app_app_down:99 gives its unit on simplices; neither asserts a weak equivalence. The semantic hits about units of abstract adjunctions, SSet.hoFunctor and products do not assert a comparison on realized homotopy groups. Quillen equivalence is explicitly a TODO at lines 34-37."
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SingularSet.lean:14–119. sSetTopAdj:78 constructs only the adjunction; sSetTopAdj_unit_app_app_down:99 gives only its characteristic-simplex formula. TopCat.toSSetObjEquiv:60 identifies singular simplices. Neither they nor the hoFunctor/monoidal unit hits assert realization weak equivalence. Quillen equivalence is a TODO at lines 34–37."
   },
   {
    "tool": "grep",
    "query": "(unit|weakEquivalence).*(toSSet|toTop|sSetTopAdj)|(toSSet|toTop|sSetTopAdj).*(unit|weakEquivalence)",
-   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"grep\", \"query\": \"(unit|weakEquivalence).*(toSSet|toTop|sSetTopAdj)|(toSSet|toTop|sSetTopAdj).*(unit|weakEquivalence)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\"], \"digest\": \"ed6170b61119cbcc\"}",
+   "results": "{\"t\": \"2026-10-16T22:24:05Z\", \"tool\": \"grep\", \"query\": \"(unit|weakEquivalence).*(toSSet|toTop|sSetTopAdj)|(toSSet|toTop|sSetTopAdj).*(unit|weakEquivalence)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\"], \"digest\": \"ed6170b61119cbcc\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read SingularSet.lean:14-119. sSetTopAdj:78 constructs the adjunction and sSetTopAdj_unit_app_app_down:99 gives its unit on simplices; neither asserts a weak equivalence. The semantic hits about units of abstract adjunctions, SSet.hoFunctor and products do not assert a comparison on realized homotopy groups. Quillen equivalence is explicitly a TODO at lines 34-37."
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SingularSet.lean:14–119. sSetTopAdj:78 constructs only the adjunction; sSetTopAdj_unit_app_app_down:99 gives only its characteristic-simplex formula. TopCat.toSSetObjEquiv:60 identifies singular simplices. Neither they nor the hoFunctor/monoidal unit hits assert realization weak equivalence. Quillen equivalence is a TODO at lines 34–37."
   },
   {
    "tool": "leansearch",
-   "query": "The unit of the realization singular complex adjunction is a weak equivalence for every simplicial set",
-   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"leansearch\", \"query\": \"The unit of the realization singular complex adjunction is a weak equivalence for every simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"sSetTopAdj\", \"CategoryTheory.Adjunction.unit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit\", \"CategoryTheory.Adjunction.unitAsIsoOfIso\", \"CategoryTheory.Adjunction.adjunctionOfEquivRight_unit_app\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.Equivalence.toAdjunction_unit\", \"CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence\"], \"digest\": \"d7f037362cfb9afc\"}",
+   "query": "The unit of geometric realization and singular simplices induces isomorphisms on all homotopy groups",
+   "results": "{\"t\": \"2026-10-16T22:24:09Z\", \"tool\": \"leansearch\", \"query\": \"The unit of geometric realization and singular simplices induces isomorphisms on all homotopy groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"sSetTopAdj\", \"SSet.toTop\", \"SSet.opEquivalence_unitIso\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.hoFunctor.terminalIso\", \"SSet.hoFunctor.unitHomEquiv\", \"TopCat.toSSet\", \"SSet.unitHomEquiv\"], \"digest\": \"7d2c7850e0170bdc\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read SingularSet.lean:14-119. sSetTopAdj:78 constructs the adjunction and sSetTopAdj_unit_app_app_down:99 gives its unit on simplices; neither asserts a weak equivalence. The semantic hits about units of abstract adjunctions, SSet.hoFunctor and products do not assert a comparison on realized homotopy groups. Quillen equivalence is explicitly a TODO at lines 34-37."
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SingularSet.lean:14–119. sSetTopAdj:78 constructs only the adjunction; sSetTopAdj_unit_app_app_down:99 gives only its characteristic-simplex formula. TopCat.toSSetObjEquiv:60 identifies singular simplices. Neither they nor the hoFunctor/monoidal unit hits assert realization weak equivalence. Quillen equivalence is a TODO at lines 34–37."
   },
   {
    "tool": "leanfinder",
-   "query": "Milnor theorem the natural comparison from a simplicial set to singular simplices on its realization induces isomorphisms on homotopy groups and components",
-   "results": "{\"t\": \"2026-10-16T20:55:56Z\", \"tool\": \"leanfinder\", \"query\": \"Milnor theorem the natural comparison from a simplicial set to singular simplices on its realization induces isomorphisms on homotopy groups and components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.isIso_prodComparison\", \"SSet.toTopSimplex\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"TopCat.toSSetObjEquiv\", \"TopCat.toSSetIsoConst\", \"SSet.hoFunctor.unitHomEquiv\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"SSet.hoFunctor\"], \"digest\": \"5f447552b383eda6\"}",
+   "query": "Milnor theorem the characteristic simplex map into singular simplices on its realization induces isomorphisms on homotopy groups and components",
+   "results": "{\"t\": \"2026-10-16T22:25:15Z\", \"tool\": \"leanfinder\", \"query\": \"Milnor theorem the characteristic simplex map into singular simplices on its realization induces isomorphisms on homotopy groups and components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.toSSetObjEquiv\", \"TopCat.toSSetIsoConst\", \"SSet.toTopSimplex\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"homotopyGroupEquivFundamentalGroup\", \"SimplexCategory.toTopMap\"], \"digest\": \"f1286b0c53d76df9\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read SingularSet.lean:14-119. sSetTopAdj:78 constructs the adjunction and sSetTopAdj_unit_app_app_down:99 gives its unit on simplices; neither asserts a weak equivalence. The semantic hits about units of abstract adjunctions, SSet.hoFunctor and products do not assert a comparison on realized homotopy groups. Quillen equivalence is explicitly a TODO at lines 34-37."
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SingularSet.lean:14–119. sSetTopAdj:78 constructs only the adjunction; sSetTopAdj_unit_app_app_down:99 gives only its characteristic-simplex formula. TopCat.toSSetObjEquiv:60 identifies singular simplices. Neither they nor the hoFunctor/monoidal unit hits assert realization weak equivalence. Quillen equivalence is a TODO at lines 34–37."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-kan-realization-mapping-classes",
@@ -87,5 +195,49 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-realization-singular-unit-weak",
+  "worker": "stage1",
+  "summary": "Zero-new-node split through the existing Kan homotopy-group realization comparison. Computes singular representatives and based homotopies explicitly, proves evaluation is a weak equivalence at all basepoints using attached intervals and the existing homotopy-equivalence theorem, then cancels the evaluation–unit identity. Statement unchanged. Searched the project, DAG, whole blueprint and Mathlib. Avoided existing gluing and basepoint-change nodes because their transitive dependency graphs reach this item.",
+  "blueprint": "Opening proof sentence of thm-cbc-finite-level-proetale: \"Choose a compactification\"; technical realization comparison in the recorded refinement/groupoid-localization ancestry. Input to the comparison: the characteristic-map unit is a weak equivalence, before taking maps out of K. This supplies exactly the unit weak-equivalence input in lem-cbc-kan-realization-mapping-classes; main-20261015 places the historical ancestor in sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md. Only this technical node-level proof is chosen; the compact-support base-change unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-realization-finite-limits",
+    "why": "Its k-space realization/singular adjunction and realized simplex/horn pairs supply explicit fillers and the representative calculation; the cbc unit has no replacement for these topological tools."
+   },
+   {
+    "node": "lem-coef-simplicial-realization-cylinder",
+    "why": "Its ordinary-product cylinder homeomorphism identifies based simplicial and continuous homotopies; no cbc unit node states it."
+   },
+   {
+    "node": "lem-coef-kan-realization-serre",
+    "why": "Its realization map on the homotopy groups of any Kan complex is applied only to Sing(|X|); this generic topological comparison does not depend on the item."
+   },
+   {
+    "node": "lem-coef-compact-open-currying",
+    "why": "Its transpose/evaluation bijection for a locally compact interval makes the explicit attached-interval quotient homotopies jointly continuous; no cbc unit node provides this topological tool."
+   },
+   {
+    "node": "lem-coef-homotopy-equivalence-weak",
+    "why": "Its conclusion for arbitrary, possibly moving basepoints is applied to four explicit homotopy equivalences of attached-interval spaces; no cbc unit node provides that conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-realization-finite-limits",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-kan-realization-serre",
+  "lem-coef-compact-open-currying",
+  "lem-coef-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-c0558b1d3",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-c0558b1d3 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, plus the full statements of the six cited nodes and the only citer, lem-cbc-kan-realization-mapping-classes. I checked the statement against Kerodon Tag 0142 (Thm 3.6.4.1), fetched online. Kerodon proves it by filtered colimits and cell induction; the split follows the classical Hovey 3.6.7 route instead (evaluation is a weak equivalence, then the triangle identity), and I checked that route myself. Hovey and Hatcher are not archived, so proof_origin=agent is correct. The statement is unchanged and not weakened: weak equivalence is read through realization, as def-cbc-enhanced-diagrams-cones defines it, and no Kan, nonemptiness or connectedness hypothesis is assumed. Checks by step: (1) evaluation is well defined on the realization relation, and eps∘|u_X|=id. (2) The horn filler f∘r comes from the horn-pair homeomorphism and the k-space adjunction, with m=1 and outer horns included. (3,4) Pointed maps Q_n→A correspond to boundary-constant maps; I verified that the barycentric formula H(alpha_*z, Σ_{theta(j)=1} z_j) is simplicial, descends to Q_n×Δ^1 and has the right ends, and the forward direction uses the cylinder node. (5) The Serre node's realization isomorphism for the Kan complex A gives eps_*∘rho_n=Phi_n; pi_0 holds because vertices of A are points and edges are paths. (6,7) I verified the attached-interval maps, both homotopies with every endpoint and the gluing at a=1/2, joint continuity via the currying node with I locally compact, and that both squares commute strictly. The moving-basepoint clause of lem-coef-homotopy-equivalence-weak then gives two genuine cancellations, so there is no 'transports' gap (E5). (8) Cancellation at every x, on pi_0, and in the empty case. No step cycles back to the item: none of the six dependency closures reaches it, and I confirmed the two nodes the worker avoided (lem-coef-homotopy-groups-basepoint-change, lem-coef-sset-gluing-filtered-equivalences) do reach it. A scan of the DAG found no node already stating this theorem. I accept the five declared tool_uses: generic topology nodes of sk-prop-sf-biduality-general used as black boxes, with no cbc route step replaced. No SGA source is cited, there are no new nodes, and the blueprint fields are filled. No fixes were made; review.md is written."
  }
 }
