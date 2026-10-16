@@ -161,6 +161,65 @@ theorem sheafHEquivContinuousMonoidHom_map (φ : M →+ M')
     sheafHEquivContinuousMonoidHom_classH1, ht']
   rfl
 
+variable (M) in
+/-- Blueprint `lem-wf-finite-constant-h1-pi1`: Finite constant torsors and the etale fundamental
+group, additivity.
+
+The identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)` turns the sum of classes into the
+pointwise sum of characters. Writing the pair `(e x, e y)` of characters as the image of a class
+`z ∈ H¹(Y_ét, M × M)`, the classes `x` and `y` are the images of `z` under the projections, by
+naturality in the coefficients (`sheafHEquivContinuousMonoidHom_map`), so `x + y` is the image of
+`z` under the sum map `M × M → M`, as `H¹` and the constant sheaf functor are additive. -/
+theorem sheafHEquivContinuousMonoidHom_add
+    (x y : Sheaf.H ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M)) 1) :
+    sheafHEquivContinuousMonoidHom M s G (x + y) =
+      sheafHEquivContinuousMonoidHom M s G x * sheafHEquivContinuousMonoidHom M s G y := by
+  set e := sheafHEquivContinuousMonoidHom M s G
+  let ψ : G →ₜ* Multiplicative (M × M) :=
+    { toFun g := Multiplicative.ofAdd ((e x g).toAdd, (e y g).toAdd)
+      map_one' := by simp
+      map_mul' a b := by simp; rfl
+      continuous_toFun := continuous_of_discreteTopology.comp
+        ((continuous_toAdd.comp (e x).continuous).prodMk (continuous_toAdd.comp (e y).continuous)) }
+  let z := (sheafHEquivContinuousMonoidHom (M × M) s G).symm ψ
+  let c (φ : M × M →+ M) := (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+    (AddCommGrpCat.ofHom φ)
+  have hz (φ : M × M →+ M) (g : G) : (e (Sheaf.H.map (c φ) 1 z) g).toAdd = φ (ψ g).toAdd := by
+    rw [sheafHEquivContinuousMonoidHom_map, Equiv.apply_symm_apply]
+  have hx : Sheaf.H.map (c (AddMonoidHom.fst M M)) 1 z = x :=
+    e.injective (ContinuousMonoidHom.ext fun g ↦ Multiplicative.toAdd.injective (hz _ g))
+  have hy : Sheaf.H.map (c (AddMonoidHom.snd M M)) 1 z = y :=
+    e.injective (ContinuousMonoidHom.ext fun g ↦ Multiplicative.toAdd.injective (hz _ g))
+  have hc : c (AddMonoidHom.fst M M + AddMonoidHom.snd M M) =
+      c (AddMonoidHom.fst M M) + c (AddMonoidHom.snd M M) :=
+    (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).map_add
+  rw [← hx, ← hy, ← Sheaf.H.map_add_apply, ← hc]
+  refine ContinuousMonoidHom.ext fun g ↦ Multiplicative.toAdd.injective ?_
+  rw [ContinuousMonoidHom.mul_apply, toAdd_mul, hz, hz, hz]
+  rfl
+
+variable (M) in
+/-- Blueprint `lem-wf-finite-constant-h1-pi1`: Finite constant torsors and the etale fundamental
+group.
+
+The group isomorphism `H¹(Y_ét, M) ≃+ Hom_cont(π₁(Y, s), M)` underlying the bijection
+`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom`: the class of a torsor is
+sent to its monodromy character, and sums of classes to products of characters
+(`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom_add`). -/
+noncomputable def sheafHAddEquivContinuousMonoidHom :
+    Sheaf.H ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M)) 1 ≃+ Additive (G →ₜ* Multiplicative M) where
+  toEquiv := (sheafHEquivContinuousMonoidHom M s G).trans Additive.ofMul
+  map_add' x y := congrArg Additive.ofMul (sheafHEquivContinuousMonoidHom_add M s G x y)
+
+@[simp]
+lemma toMul_sheafHAddEquivContinuousMonoidHom_apply
+    (x : Sheaf.H ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M)) 1) :
+    (sheafHAddEquivContinuousMonoidHom M s G x).toMul = sheafHEquivContinuousMonoidHom M s G x :=
+  rfl
+
 end Monodromy
 
 end EtaleTorsor
