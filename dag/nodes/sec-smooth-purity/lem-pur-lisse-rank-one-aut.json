@@ -303,5 +303,27 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-7477a435b (reviewer sub-agent of L); spot-checked: Read the complete mathematics, all cited statements, source passages, and unit/chapter route. All seven steps check out; finite coefficients and the comparison unit match their sources. Both declared tool uses are accepted. No new nodes, duplicate, or cycle through this item. Inherited source-metadata issues are documented in review.md; no delivery repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ddcd14958",
+  "group": "NK",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement dependencies, sources, exact declarations, hypotheses, conclusions, edge cases, universes, docstrings, and verbatim signature. No defects found. scompile.py passed both checks cleanly (13.1 s, 5.2 s). Branch and project clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseRankOneAut",
+  "declaration": "WeilConjectures.lisse_rank_one_aut",
+  "declarations": [
+   "WeilConjectures.rankOneScalarMap",
+   "WeilConjectures.lisse_rank_one_aut"
+  ],
+  "file": "lean/Sheaf/Paper/LisseRankOneAut.lean",
+  "statement": "theorem lisse_rank_one_aut (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) [T.Over (Spec (.of P.field.k))] [IsSeparated (T ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (T ↘ Spec (.of P.field.k))] [QuasiCompact (T ↘ Spec (.of P.field.k))] (L M : proEtaleRingModules T (proEtaleConstantRing T P.Ring)) (_hL : IsLocallyConstantProEtaleModuleSheaf T P.Ring L) (_hM : IsLocallyConstantProEtaleModuleSheaf T P.Ring M) [L.IsFiniteLocallyFreeOfRank 1] [M.IsFiniteLocallyFreeOfRank 1] : IsIso (rankOneScalarMap L) ∧ ∃ (eL : LocallyConstant T P.Coefficient ≃+* End L) (eM : LocallyConstant T P.Coefficient ≃+* End M) (gL : LocallyConstant T P.Coefficientˣ ≃* Aut L) (gM : LocallyConstant T P.Coefficientˣ ≃* Aut M), (∀ (f : LocallyConstant T P.Coefficient) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ T) (x : (finiteCoefficientModuleStalkFunctor y P.Ring).obj L), ((finiteCoefficientModuleStalkFunctor y P.Ring).map (eL f)).hom x = f (y (IsLocalRing.closedPoint Ω)) • x) ∧ (∀ (f : LocallyConstant T P.Coefficient) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ T) (x : (finiteCoefficientModuleStalkFunctor y P.Ring).obj M), ((finiteCoefficientModuleStalkFunctor y P.Ring).map (eM f)).hom x = f (y (IsLocalRing.closedPoint Ω)) • x) ∧ (∀ u₀ : LocallyConstant T P.Coefficientˣ, (gL u₀).hom = eL (LocallyConstant.map (fun a : P.Coefficientˣ ↦ (a : P.Coefficient)) u₀)) ∧ (∀ u₀ : LocallyConstant T P.Coefficientˣ, (gM u₀).hom = eM (LocallyConstant.map (fun a : P.Coefficientˣ ↦ (a : P.Coefficient)) u₀)) ∧ (∀ φ ψ : L ≅ M, ∃! u₀ : LocallyConstant T P.Coefficientˣ, ψ = φ ≪≫ gM u₀) ∧ (∀ (φ : L ≅ M) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ T) (v₀ : P.Coefficientˣ), ∃ ψ : L ≅ M, ψ = φ ≪≫ gM (LocallyConstant.const T v₀) ∧ ∀ x : (finiteCoefficientModuleStalkFunctor y P.Ring).obj L, ((finiteCoefficientModuleStalkFunctor y P.Ring).map ψ.hom).hom x = (v₀ : P.Coefficient) • ((finiteCoefficientModuleStalkFunctor y P.Ring).map φ.hom).hom x)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
