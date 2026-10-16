@@ -18,7 +18,9 @@
   "def-weil-sheaf-of-modules-category",
   "det-pe-milnor-sequence",
   "def-weil-abstract-derived-category",
-  "def-pur-sheaf-inverse-limit"
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-tower-transition-endomorphism",
+  "lem-weil-proetale-surjective-tower-derived-limit"
  ],
  "proof": [
   {
@@ -190,5 +192,30 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-3fa405b72 (reviewer sub-agent of L); spot-checked: Read the item, all five steps, every cited dependency statement, and cited sources in full. Verified module-valued evaluation, recursion, exactness detection, Milnor cohomology, cone signs, and the canonical comparison. Edge cases pass; no duplicate replacement, missing dependency, or cycle found. No repairs or off-route tool uses needed. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic",
+  "declaration": "AlgebraicGeometry.ProEtale.milnor_epimorphic",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.milnorLimitProjection",
+   "AlgebraicGeometry.ProEtale.milnorLimitComparison_condition",
+   "AlgebraicGeometry.ProEtale.milnorLimitComparison",
+   "AlgebraicGeometry.ProEtale.milnor_epimorphic"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleMilnorEpimorphic.lean",
+  "statement": "theorem milnor_epimorphic (X : Scheme.{t}) (R : Sheaf (Scheme.ProEt.topology X) RingCat.{max u (t + 1)}) [HasDerivedCategory.{w} (ringedSiteModules.{max u (t + 1)} R)] (M : ℕᵒᵖ ⥤ ringedSiteModules.{max u (t + 1)} R) (ht : ∀ n : ℕ, Epi (M.map (homOfLE (Nat.le_succ n)).op)) : Epi (towerTransitionEndomorphism (K := fun n : ℕ ↦ M.obj (op n)) (fun n : ℕ ↦ M.map (homOfLE (Nat.le_succ n)).op)) ∧ IsZero ((WeilConjectures.integralOperationsRoos (Scheme.ProEt.milnorSingleTower M)).homology 1) ∧ IsIso (DerivedCategory.Q.{w}.map (milnorLimitComparison M))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The canonical comparison has real data in the exact integralOperationsRoos model used by det-pe-milnor-sequence; its named cocycle-condition theorem supplies only a proof. The surjective-tower module supplies the existing large-universe sheafification instances; its commutative-coefficient theorem is not used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-91da4b054",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Full second reading completed; no substantive or mechanical defects found."
  }
 }
