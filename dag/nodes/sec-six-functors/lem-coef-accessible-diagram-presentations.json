@@ -29,9 +29,130 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal F=\\operatorname{Fun}(K,\\mathcal C)$, a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. By [lem-coef-infinity-yoneda-presheaf-limits], every small $\\kappa$-filtered diagram in $\\mathcal F$ has a colimit computed at each vertex: the needed colimits exist in $\\mathcal C$ by $\\kappa$-accessibility [def-coef-presentable-infinity-category]. Restriction to every simplicial subset of K preserves these colimits. The local-smallness clause of [lem-coef-functor-spine-tower-mapping-descent] shows that $\\mathcal F$ is locally small.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-functor-spine-tower-mapping-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.1.2.2; beginning of the proof of Proposition 5.4.4.3 (online, not archived)"
+   }
+  },
+  {
+   "text": "We prove pointwise $\\kappa$-compactness implies compactness of a diagram, retaining an arbitrary small $\\kappa$-filtered index I. For an arrow $a:c_0\\to c_1$, [lem-coef-infinity-arrow-morphism-square] expresses $\\operatorname{Map}(a,b)$ as the homotopy pullback of $\\operatorname{Map}(c_0,b_0)$ and $\\operatorname{Map}(c_1,b_1)$ over $\\operatorname{Map}(c_0,b_1)$. If both $c_i$ are $\\kappa$-compact, each of these three functors preserves I-colimits. The finite-limit case of [lem-coef-spaces-kappa-limit-filtered-colimit] makes the pullback preserve them too. For $\\Delta^n$, use the spine equivalence of [lem-coef-functor-spine-tower-mapping-descent]. Build the spine by successively adjoining its n edges along their shared vertices. At each adjoining, [lem-coef-infinity-mapping-excision] gives a homotopy pullback of mapping spaces. Its terms preserve I-colimits by the arrow case and induction, and the same finite-limit comparison completes the induction. For n=0 this is precisely compactness of the single vertex. Thus all simplex-shaped pointwise compact diagrams are compact.",
+   "uses": [
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-coef-functor-spine-tower-mapping-descent",
+    "lem-coef-infinity-mapping-excision"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.4.13, proof (1)-(3), and Lemma 5.3.4.9 (online, not archived)"
+   }
+  },
+  {
+   "text": "Extend Step 2 by induction on dimension to every $\\kappa$-small finite-dimensional simplicial set L. For dimension zero, its functor category is a product over its fewer than $\\kappa$ vertices; its mapping space is the corresponding product, directly from the internal-functor definition. Such products preserve I-colimits by [lem-coef-spaces-kappa-limit-filtered-colimit]. At dimension n, attach the coproduct of the nondegenerate n-simplices to the (n-1)-skeleton along their boundary coproduct. The boundary diagrams are compact by induction, the simplex diagrams by Step 2, and the coproducts of mapping spaces are products of fewer than $\\kappa$ spaces. Apply [lem-coef-infinity-mapping-excision] to this pushout and [lem-coef-spaces-kappa-limit-filtered-colimit] to its products and homotopy pullback. This proves compactness at dimension n. Here the attaching square is a degreewise pushout: by [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], every simplex outside the (n-1)-skeleton is uniquely a degeneracy of one of the attached nondegenerate n-simplices. Distinct such cells meet only in the skeleton, and their boundary maps land there. This proves the stated pushout without requiring a finiteness assumption on the set of cells. Finally $K=\\bigcup_n\\operatorname{sk}_nK$. The tower formula of [lem-coef-functor-spine-tower-mapping-descent] expresses its mapping space as the limit of the mapping spaces on these skeleta. Since $\\kappa$ is uncountable, $N(\\mathbb N^{\\mathrm{op}})$ is $\\kappa$-small. Its limit commutes with I-colimits by [lem-coef-spaces-kappa-limit-filtered-colimit]. Naturality of the mapping formulas and pointwise colimits in Step 1 identify the resulting comparison with the compactness comparison for K. This proves the last clause of the item, including the empty shape (whose mapping space is terminal).",
+   "uses": [
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-coef-infinity-mapping-excision",
+    "lem-coef-functor-spine-tower-mapping-descent",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.4.13, proof (4)-(6) (online, not archived)"
+   }
+  },
+  {
+   "text": "Let $D\\subseteq\\mathcal C$ be the replete full subcategory of all $\\kappa$-compact objects. By [lem-coef-accessible-compact-slice-density], D is essentially small and every $D_{/x}$ is essentially small and $\\kappa$-filtered, with its canonical source diagram having colimit x. The category $\\mathcal C$ admits every small $\\lambda$-filtered colimit by its $\\lambda$-accessibility [def-coef-presentable-infinity-category]. Hence for every $\\kappa$-small $\\lambda$-filtered shape J, the colimit in $\\mathcal C$ of a J-diagram in D exists. It remains $\\kappa$-compact by [lem-coef-compact-small-colimits], so lies in D. The slice-colimit clause of [lem-coef-infinity-relative-slice-sections] now proves that $D_{/x}$ admits these colimits, computed on sources, and that postcomposition along every $x\\to y$ preserves them. This verifies separately the smaller-filtered-colimit hypotheses that the section theorem needs; $\\kappa$-accessibility alone would not supply them.",
+   "uses": [
+    "lem-coef-accessible-compact-slice-density",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-compact-small-colimits",
+    "lem-coef-infinity-relative-slice-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.4.3, fiber hypotheses for Lemma 5.4.4.2; Corollary 5.3.4.15 (online, not archived)"
+   }
+  },
+  {
+   "text": "Fix $p:K\\to\\mathcal C$ and apply [lem-coef-infinity-relative-slice-sections] to D and p. Its fibration $E_D\\to K$ has fibers $D_{/p(v)}$, with transports given by postcomposition. Step 4 gives $\\kappa$-filtered fibers and all $\\kappa$-small $\\lambda$-filtered colimits preserved by transport. The hypotheses on $\\lambda<\\kappa$ and on K are exactly those of [lem-coef-filtered-cocartesian-section-cofinality]. Therefore the category B of all sections is $\\kappa$-filtered, and every evaluation $B\\to D_{/p(v)}$ is cofinal. The relative-slice statement identifies B with pairs $(d,\\alpha:d\\to p)$ and says it is essentially small. In particular it includes the full coherent transformations; no truncation to the homotopy category or to sets of arrows is made.",
+   "uses": [
+    "lem-coef-infinity-relative-slice-sections",
+    "lem-coef-filtered-cocartesian-section-cofinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.4.3, relative-slice construction and application of Lemma 5.4.4.2 (online, not archived)"
+   }
+  },
+  {
+   "text": "Choose a small quasicategory $B_0$ and a functor equivalence $e:B_0\\to B$; it exists because B is essentially small [lem-coef-infinity-relative-slice-sections]. Projecting a pair $(d,\\alpha)$ to d and composing with e gives $r:B_0\\to\\mathcal F$ and a coherent cocone $r\\to p$. For each vertex v its evaluation is the source diagram on $D_{/p(v)}$ precomposed with $\\operatorname{ev}_v\\circ e:B_0\\to D_{/p(v)}$, with the tautological cocone legs. By Step 5 every comma quasicategory of $\\operatorname{ev}_v$ is weakly contractible, so by [lem-coef-infinity-cofinal-colimit-restriction] (with $w$ the identity) every comma quasicategory of $\\operatorname{ev}_v\\circ e$ is weakly contractible. The quasicategories $B_0$ and $D_{/p(v)}$ fit in the larger universe of [def-coef-presentable-infinity-category]; apply [lem-coef-infinity-cofinality-space-test] with that universe as its fixed universe and $\\mathcal C$ in a containing one: its condition (3) gives (1), so restriction along $\\operatorname{ev}_v\\circ e$ carries colimiting cocones in $\\mathcal C$ to colimiting cocones. The canonical source cocone has colimit $p(v)$ by [lem-coef-accessible-compact-slice-density]. Thus $r\\to p$ is colimiting at every vertex, and hence in $\\mathcal F$ by [lem-coef-infinity-yoneda-presheaf-limits], since $B_0$ is small. If K is empty this last assertion still applies: its functor category is terminal and the pointwise test has no components. Every r-value is a diagram valued in D, hence compact by Steps 2-3.",
+   "uses": [
+    "lem-coef-infinity-relative-slice-sections",
+    "lem-coef-infinity-cofinal-colimit-restriction",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-cofinality-space-test",
+    "lem-coef-accessible-compact-slice-density",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.4.3, final paragraph: evaluationwise density and cofinality (online, not archived)"
+   }
+  },
+  {
+   "text": "The small quasicategory $B_0$ is $\\kappa$-filtered, being equivalent to the $\\kappa$-filtered B of Step 5 (a cocone of a $\\kappa$-small diagram in $B_0$ is transported along e and a quasi-inverse). By [lem-coef-infinity-cofinal-kappa-poset] choose a small $\\kappa$-filtered poset A and a cofinal functor $u:N(A)\\to B_0$. Its cofinality is stated for all cocomplete target quasicategories; in particular, with target the small spaces, it gives condition (2) of [lem-coef-infinity-cofinality-space-test], hence condition (1): restriction along u carries every existing colimiting cocone, in any quasicategory, to a colimiting cocone. Composing with r and restricting the cocone of Step 6 gives the requested $q:N(A)\\to\\mathcal F$ with colimit p. Each $q(a)$ has values in D. The subcategory $\\operatorname{Fun}(K,D)$ is essentially small by [lem-coef-infinity-relative-slice-sections], is full in $\\mathcal F$ by the definition of a full subcategory in [def-cbc-enhanced-diagrams-cones], and its objects are compact by Steps 2-3. Step 6 says they generate every object by a small $\\kappa$-filtered colimit. Together with local smallness and existence of such colimits from Step 1, these are all the clauses of $\\kappa$-accessibility in [def-coef-presentable-infinity-category]. This proves the first clause as well as the poset-presentation clause.",
+   "uses": [
+    "lem-coef-infinity-cofinal-kappa-poset",
+    "lem-coef-infinity-cofinality-space-test",
+    "lem-coef-infinity-relative-slice-sections",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.1.18 and completion of Proposition 5.4.4.3 (online, not archived)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-functor-spine-tower-mapping-descent",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-spaces-kappa-limit-filtered-colimit",
+  "lem-coef-infinity-mapping-excision",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "lem-coef-accessible-compact-slice-density",
+  "lem-coef-compact-small-colimits",
+  "lem-coef-infinity-relative-slice-sections",
+  "lem-coef-filtered-cocartesian-section-cofinality",
+  "lem-coef-infinity-cofinal-colimit-restriction",
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-coef-infinity-cofinal-kappa-poset",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded proof of Proposition 5.4.4.3 with Proposition 5.3.4.13 and Proposition 5.3.1.18. Source read online but absent from literature/: the proof is marked agent-origin under the standing brief."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +202,45 @@
    "results": "{\"t\": \"2026-10-16T19:43:36Z\", \"tool\": \"leansearch\", \"query\": \"Objects in a small family in a presentable infinity category are compact for a common larger regular cardinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isCardinalPresentable_of_le\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.MorphismProperty.smallObjectκ\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"CategoryTheory.MorphismProperty.HasSmallObjectArgument.exists_cardinal\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.locallySmall\"], \"digest\": \"2256ca109f353e30\"}",
    "date": "2026-10-16",
    "verdict": "Second reading: no match. Hits concern ordinary CategoryTheory Hom-set compactness, ordinary Ind objects, or the ambient category SSet; none states the coherent infinity-category assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "accessible|compact|filtered",
+   "results": "{\"t\": \"2026-10-16T20:12:26Z\", \"tool\": \"grep\", \"query\": \"accessible|compact|filtered\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned CategoryTheory declarations assume ordinary categories with set-valued Hom. Inspected Presentable/Dense.lean and Presentable/Directed.lean; they do not cover arbitrary quasicategories, coherent slices or mapping-space colimits. Quasicategory/StrictSegal.lean proves the horn property for strict Segal simplicial sets, not coherent functor mapping descent. No exact infinity-categorical assertion or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalAccessibleCategory\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-16T20:12:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalAccessibleCategory\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned CategoryTheory declarations assume ordinary categories with set-valued Hom. Inspected Presentable/Dense.lean and Presentable/Directed.lean; they do not cover arbitrary quasicategories, coherent slices or mapping-space colimits. Quasicategory/StrictSegal.lean proves the horn property for strict Segal simplicial sets, not coherent functor mapping descent. No exact infinity-categorical assertion or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Accessibility and compact generation of functor quasicategories",
+   "results": "{\"t\": \"2026-10-16T20:12:26Z\", \"tool\": \"leansearch\", \"query\": \"Accessibility and compact generation of functor quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsAccessible\", \"CategoryTheory.Functor.IsAccessible.mk\", \"SSet.Quasicategory\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.Functor.IsCardinalAccessible.mk\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.Adjunction.isCardinalAccessibleCategory\"], \"digest\": \"9d52d34627b52105\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned CategoryTheory declarations assume ordinary categories with set-valued Hom. Inspected Presentable/Dense.lean and Presentable/Directed.lean; they do not cover arbitrary quasicategories, coherent slices or mapping-space colimits. Quasicategory/StrictSegal.lean proves the horn property for strict Segal simplicial sets, not coherent functor mapping descent. No exact infinity-categorical assertion or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise compact coherent diagrams in an accessible infinity category generate its functor category under filtered colimits",
+   "results": "{\"t\": \"2026-10-16T20:12:30Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise compact coherent diagrams in an accessible infinity category generate its functor category under filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.Functor.IsAccessible\", \"CategoryTheory.IsPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredGenerator\", \"CategoryTheory.Functor.IsFinitelyAccessible\", \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone\"], \"digest\": \"99837d9473ad9a4c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned CategoryTheory declarations assume ordinary categories with set-valued Hom. Inspected Presentable/Dense.lean and Presentable/Directed.lean; they do not cover arbitrary quasicategories, coherent slices or mapping-space colimits. Quasicategory/StrictSegal.lean proves the horn property for strict Segal simplicial sets, not coherent functor mapping descent. No exact infinity-categorical assertion or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An accessible quasicategory has compact pointwise approximations of diagrams indexed by a small simplicial set",
+   "results": "{\"t\": \"2026-10-16T20:12:31Z\", \"tool\": \"leanfinder\", \"query\": \"An accessible quasicategory has compact pointwise approximations of diagrams indexed by a small simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.QCat\", \"SSet.Truncated.Quasicategory₂\", \"SSet.Quasicategory.hornFilling\", \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.Finite.instIsFinitelyPresentable\"], \"digest\": \"a0fe465a761409ae\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned CategoryTheory declarations assume ordinary categories with set-valued Hom. Inspected Presentable/Dense.lean and Presentable/Directed.lean; they do not cover arbitrary quasicategories, coherent slices or mapping-space colimits. Quasicategory/StrictSegal.lean proves the horn property for strict Segal simplicial sets, not coherent functor mapping descent. No exact infinity-categorical assertion or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-saturated-arrow-accessibility",
@@ -92,5 +248,39 @@
   "group": "Q23"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-accessible-diagram-presentations",
+  "worker": "stage1",
+  "summary": "Checked the online HTT proof, the cardinal hypotheses, exact coherent versus ordinary categories, all cited node statements, source-size bounds and empty shapes. Expanded compactness by skeletal mapping-space descent and generation by compact-source slices with cofinal evaluation; created five general statement-only tools and reused the existing mapping-excision, arrow-square, colimit and nondegenerate-simplex decomposition nodes. No project attachment or Mathlib match. Statement unchanged. Second reading removed the duplicated poset-replacement clause, reused lem-coef-infinity-cofinal-kappa-poset, and kept the general comma/cofinality criterion as a separate smaller tool. Maintainer reader (2026-10-17): the comma/finality criterion duplicated the existing lem-coef-infinity-cofinality-space-test; steps 6-7 now cite it, and lem-coef-infinity-cofinal-colimit-restriction is narrowed to the transfer of comma contractibility along equivalences needed to pass to small representatives.",
+  "blueprint": "Realizes the filtered diagram presentations used in proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through the finite-coefficient mapping-complex adjunction and the small-saturated-arrow accessibility argument recorded in blueprint.from. No replacement of the biduality unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent mapping-space or simplicial-cell calculus used in the compactness proof; this unit supplies no replacement, and no geometric or coefficient route is changed."
+   },
+   {
+    "node": "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "why": "Generic coherent mapping-space or simplicial-cell calculus used in the compactness proof; this unit supplies no replacement, and no geometric or coefficient route is changed."
+   },
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic coherent mapping-space or simplicial-cell calculus used in the compactness proof; this unit supplies no replacement, and no geometric or coefficient route is changed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NV-490de2deb",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-490de2deb (reviewer sub-agent of L); spot-checked: I read the item, all five new nodes, every cited statement, the unit and the brief documents A–F in full. HTT is not archived (it is WANTED), so I checked against the standard text of HTT 5.4.4.3, 5.4.4.2, 5.3.4.13, 5.3.1.18, 1.2.13.8 and §4.1. The item statement is unchanged against the live node and nothing is weakened; λ<κ with μ^ν<κ is HTT's κ≪τ, and uncountable κ is needed for the N(ℕ^op) tower. Steps 1–5 check out: objectwise colimits, the arrow square with the Λ²₂ commutation, spine excision, the skeletal pushout using unique degeneracy, products over fewer than κ cells, the countable tower, closure of compacts under κ-small λ-filtered colimits, and the relative-slice hypotheses (ii)–(iii) for the section lemma. Small cases (empty K, empty C, λ=ω, a point base, a constant tower) hold. Four new nodes are true, statement-only and not duplicates; compact-slice density is not lem-coef-infinity-compact-approximation, which only chooses cardinals existentially. One fault: as delivered, lem-coef-infinity-cofinal-colimit-restriction duplicated the existing lem-coef-infinity-cofinality-space-test (same unit, same comma model, (3)⇔(1)/(2)), which the second reader missed. I narrowed that node to the content the existing node lacks: weakly contractible commas survive composing with functor equivalences (so equivalences have contractible commas). I rewrote steps 6–7 to cite the space-test node, with the small representative B₀ explicit; proof_deps is again the union of uses, and the fixed DAG is acyclic. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (generic Fun(K,C) quasicategory and mapping-space calculus). Fixes are in fixes/dag/nodes/sec-six-functors/ (item and narrowed node).; 2 file(s) fixed by the reviewer"
+ }
 }
