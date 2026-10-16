@@ -120,26 +120,30 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-46a940cf0",
-  "group": "N2",
+  "reviewer": "NT-stage2-Codex-c674583d0",
+  "group": "Q19",
   "result": "pass",
-  "note": "Wrote review.md. Checked all statement clauses, dependencies, canonical constructions, universes, edge cases, signatures, report sections, and pilot gates. All three immutable modules passed scompile.py without diagnostics. No fixes needed; branch unchanged."
+  "note": "Wrote review.md. Checked immutable modules, all eight dependencies, sources, canonical maps, universes, edge cases, verbatim signatures, and report sections. All four sibling modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
  },
  "lean": {
   "module": "Sheaf.Paper.StrictPerfectPackageOnSite",
-  "declaration": "SheafOfModules.StrictPerfectCoefficientPackageOnSite",
+  "declaration": "AlgebraicGeometry.Scheme.IsProEtaleSitePerfect",
   "declarations": [
    "SheafOfModules.StrictPerfectCoefficientPackageOnSite",
+   "AlgebraicGeometry.Scheme.strictPerfectSliceSheafify",
+   "AlgebraicGeometry.Scheme.strictPerfectSliceLocallyBijective",
+   "AlgebraicGeometry.Scheme.IsProEtaleLocallyStrictPerfect",
+   "AlgebraicGeometry.Scheme.IsProEtaleSitePerfect",
    "SheafOfModules.IsLocallyStrictPerfectComplexOnSite",
    "SheafOfModules.IsPerfectOnSmallRingedSite",
    "SheafOfModules.SiteStrictPerfectCoefficientRepresentation"
   ],
   "file": "lean/Sheaf/Paper/StrictPerfectPackageOnSite.lean",
-  "statement": "structure StrictPerfectCoefficientPackageOnSite {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r}) (F : CochainComplex (SheafOfModules.{r} R) ℤ)",
+  "statement": "def IsProEtaleSitePerfect (X : Scheme.{u}) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (Q : DerivedCategory (proEtaleRingModules X R)) : Prop",
   "branch": "newtargets-dag",
-  "by": "N2",
+  "by": "Q19",
   "date": "2026-10-16",
   "existing": false,
-  "note": "§1(B), repair of immutable head 3431f587f57d: the published StrictPerfectCoefficientPackageOnSite already supplies the correct independent-universe degreewise splitting structure, so this delivery retains it verbatim and extends its owning module rather than introducing another package. The reexported IsPerfectOnRingedSite still fixes equal site object and morphism universes and cannot type the small pro-etale site. The additional predicates and localized representation use the published splitting structure at site objects u+1, morphisms u, and coefficients u+1, with cover-dependent bounds and ranks. Both consuming modules now import this exact recorded module directly."
+  "note": "The recorded package equates site object, morphism, and coefficient universes and cannot instantiate the original small pro-etale site. Reexport it, generalize exactly its splitting data to independent universes, and give its actual-site locally bounded covering-sieve and perfect derived-object predicates. Bounds and ranks vary with the cover member. Return repair L: retain the published IsLocallyStrictPerfectComplexOnSite, IsPerfectOnSmallRingedSite, and SiteStrictPerfectCoefficientRepresentation interfaces unchanged; the pro-etale predicates specialize these generic definitions. This preserves the imports used by PerfectProjectionFormula and ProjectionFormulaIdentityCompactification."
  }
 }

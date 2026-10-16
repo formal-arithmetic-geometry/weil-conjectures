@@ -206,21 +206,20 @@
    "SheafOfModules.localizedModuleAdjunctionIndependent",
    "SheafOfModules.localizedModuleDerivedAdjunction"
   ],
-  "file": "lean/Sheaf/CategoryTheory/LocalizedModuleExactIndependent.lean",
-  "statement": "theorem localizedModuleExactIndependent : (localizedModuleExtension R U).Additive ∧ PreservesFiniteLimits (localizedModuleExtension R U) ∧ PreservesFiniteColimits (localizedModuleExtension R U) ∧ (localizedModuleRestriction R U).Additive ∧ PreservesFiniteLimits (localizedModuleRestriction R U) ∧ PreservesFiniteColimits (localizedModuleRestriction R U)",
+  "statement": "theorem localizedModuleExactIndependent :\n    (localizedModuleExtension R U).Additive ∧\n      PreservesFiniteLimits (localizedModuleExtension R U) ∧\n      PreservesFiniteColimits (localizedModuleExtension R U) ∧\n      (localizedModuleRestriction R U).Additive ∧\n      PreservesFiniteLimits (localizedModuleRestriction R U) ∧\n      PreservesFiniteColimits (localizedModuleRestriction R U)",
   "branch": "newtargets-dag",
-  "by": "NG",
+  "by": "Q19",
   "date": "2026-10-16",
-  "existing": false,
-  "note": "Section 1(B): the recorded theorem only treats SmallCategory C and coefficients in that same universe, and does not expose a canonical adjunction. This module retains the actual extensionByZeroPresheaf followed by sheafification and overFunctor, at object universe u+1 and Hom universe u. It states their exactness and the unique adjunction normalized by direct-sum insertion and the sheafification unit, then constructs its termwise derived adjunction by localization. The former module is publicly reexported."
+  "existing": true,
+  "note": "Section 1(B): the recorded SmallCategory interface cannot instantiate the actual pro-etale site with unequal object/Hom universes. Use the already published Sheaf.CategoryTheory.LocalizedModuleExactIndependent module, confirmed byte-for-byte by scompile.py --source on 2026-10-16. It provides the actual direct-sum extension/sheafification, overFunctor restriction, both exactness clauses, uniquely section-normalized adjunction and exact termwise derived adjunction. The identical module is already on the delivery base, so this is an existing declaration record and no module is redelivered."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-b43a96c08",
-  "group": "NG",
+  "reviewer": "NT-stage2-Codex-c674583d0",
+  "group": "Q19",
   "result": "pass",
-  "note": "Wrote review.md. Checked all three immutable modules, dependency declarations, sources, normalization, universes, edge cases, and pilot gates. All three files passed scompile.py with server confirmation after a stale local-overlay failure. No delivery faults found."
+  "note": "Wrote review.md. Checked immutable modules, all eight dependencies, sources, canonical maps, universes, edge cases, verbatim signatures, and report sections. All four sibling modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

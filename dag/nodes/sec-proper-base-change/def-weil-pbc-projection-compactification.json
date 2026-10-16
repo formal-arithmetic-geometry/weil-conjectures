@@ -41,12 +41,12 @@
    "AlgebraicGeometry.Scheme.proEtaleRingDerivedOpenExtension",
    "AlgebraicGeometry.Scheme.proEtaleRingCompactSupportImage"
   ],
-  "statement": "def proEtaleRingCompactSupportImage {Y : Scheme.{u}} {f : X ⟶ Y} (d : Compactification f) [QuasiCompact d.i] (RY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (RZ : Sheaf (ProEt.topology d.Z) CommRingCat.{u + 1}) (RX : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (cp : (proEtaleSheafInverseImage d.g CommRingCat.{u + 1}).obj RY ≅ RZ) (cj : (proEtaleSheafInverseImage d.i CommRingCat.{u + 1}).obj RZ ≅ RX) : DerivedCategory (proEtaleRingModules X RX) ⥤ DerivedCategory (proEtaleRingModules Y RY)",
+  "statement": "def proEtaleRingCompactSupportImage {Y : Scheme.{u}} {f : X ⟶ Y}\n    (d : Compactification f) [QuasiCompact d.i]\n    (RY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (RZ : Sheaf (ProEt.topology d.Z) CommRingCat.{u + 1})\n    (RX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (cp : (proEtaleSheafInverseImage d.g CommRingCat.{u + 1}).obj RY ≅ RZ)\n    (cj : (proEtaleSheafInverseImage d.i CommRingCat.{u + 1}).obj RZ ≅ RX) :\n    DerivedCategory (proEtaleRingModules X RX) ⥤ DerivedCategory (proEtaleRingModules Y RY)",
   "branch": "newtargets-dag",
-  "by": "Q01",
+  "by": "Q19",
   "date": "2026-10-16",
   "existing": true,
-  "note": "Return 2e6c6ef0fcde, duplicate-declaration repair: reuse the now-published ringed pro-etale compact-support construction in Sheaf.Paper.ProjectionCompactification exactly. Its quasi-compact open hypothesis follows from the item’s QuasiCompact f by Compactification.quasiCompact_openImmersion. The old fixed-coefficient etale record is superseded; no replacement open extension or compact-support functor is delivered."
+  "note": "The recorded etale fixed-coefficient functor cannot express arbitrary sheaves of commutative pro-etale rings. Reuse the reviewed Q09 representing left adjoint to actual open restriction, exact termwise derived extension, and its Rp_* composite. Its adjoint universal property determines the extension up to the unique compatible isomorphism. Published unchanged since preparation: scompile.py --source confirmed the current server source on 2026-10-16 (only its printed final newline differs). Reuse this exact existing module on newtargets-dag; no source is redelivered."
  },
  "blueprint_lean": [
   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification"
@@ -118,9 +118,9 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-96fd79354",
-  "group": "Q01",
+  "reviewer": "NT-stage2-Codex-c674583d0",
+  "group": "Q19",
   "result": "pass",
-  "note": "Statement, dependencies, canonical constructions, docstrings, edge cases, reports, and compiler evidence checked; no substantive or mechanical defects found."
+  "note": "Wrote review.md. Checked immutable modules, all eight dependencies, sources, canonical maps, universes, edge cases, verbatim signatures, and report sections. All four sibling modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
  }
 }

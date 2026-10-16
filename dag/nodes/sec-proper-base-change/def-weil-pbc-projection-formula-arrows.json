@@ -119,10 +119,10 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-ac491448d",
-  "group": "Q09",
+  "reviewer": "NT-stage2-Codex-c674583d0",
+  "group": "Q19",
   "result": "pass",
-  "note": "Wrote review.md. Audited immutable files, sources, dependencies, canonical arrows, hypotheses, universes, signatures, and edge cases. All three modules passed scompile.py without warnings or errors. No repairs needed."
+  "note": "Wrote review.md. Checked immutable modules, all eight dependencies, sources, canonical maps, universes, edge cases, verbatim signatures, and report sections. All four sibling modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
  },
  "lean": {
   "module": "Sheaf.Paper.ProEtaleProjectionFormulaArrows",
@@ -134,12 +134,11 @@
    "AlgebraicGeometry.Scheme.proEtaleMixedTensor",
    "AlgebraicGeometry.Scheme.proEtalePerfectProjectionInverse"
   ],
-  "file": "lean/Sheaf/Paper/ProEtaleProjectionFormulaArrows.lean",
-  "statement": "def proEtalePerfectProjectionInverse (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S) (E : DerivedCategory (proEtaleRingModules X S)) (K : CochainComplex (proEtaleRingModules X S) ℤ) (hK : K.IsKInjective) (rep : E ≅ DerivedCategory.Q.obj K) (F : CochainComplex (proEtaleRingModules Y R) ℤ) (P : SheafOfModules.StrictPerfectCoefficientPackageOnSite ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) F) (hb : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (F.X r)) : (proEtaleRingDerivedDirectImage f R S c).obj (b.tensor.obj (E, (proEtaleRingDerivedPullback f R S c).obj (DerivedCategory.Q.obj F))) ⟶ a.tensor.obj ((proEtaleRingDerivedDirectImage f R S c).obj E, DerivedCategory.Q.obj F)",
+  "statement": "def proEtalePerfectProjectionInverse\n    (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)\n    (E : DerivedCategory (proEtaleRingModules X S))\n    (K : CochainComplex (proEtaleRingModules X S) ℤ) (hK : K.IsKInjective)\n    (rep : E ≅ DerivedCategory.Q.obj K)\n    (F : CochainComplex (proEtaleRingModules Y R) ℤ)\n    (P : SheafOfModules.StrictPerfectCoefficientPackageOnSite\n      ((sheafCompose (ProEt.topology Y)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) F)\n    (hb : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (F.X r)) :\n    (proEtaleRingDerivedDirectImage f R S c).obj\n      (b.tensor.obj (E, (proEtaleRingDerivedPullback f R S c).obj (DerivedCategory.Q.obj F))) ⟶\n    a.tensor.obj ((proEtaleRingDerivedDirectImage f R S c).obj E, DerivedCategory.Q.obj F)",
   "branch": "newtargets-dag",
-  "by": "Q09",
+  "by": "Q19",
   "date": "2026-10-16",
-  "existing": false,
-  "note": "The recorded ringed arrow interface identifies site object and morphism universes. Reexport it and supply its finite-total inverse on the original small pro-etale sites using the already published canonical tensor and adjunction interfaces. Unit and mixed representative comparisons retain full unique normalization; rho is Q of the specified finite-total chain inverse, never an arbitrary map. The 2026-10-16 repair uses the landed SheafOfModules.StrictPerfectCoefficientPackageOnSite directly; no pro-etale duplicate splitting structure is introduced."
+  "existing": true,
+  "note": "The recorded ringed-arrow interface equates site object and morphism universes. Reuse the reviewed Q09 original-small-site specialization with the published tensor and adjunction models. Its inverse is Q of the specified finite-total chain map between uniquely normalized mixed/K-injective representatives; the general original interface is reexported. Published unchanged since preparation: scompile.py --source confirmed the current server source on 2026-10-16 (only its printed final newline differs). Reuse this exact existing module on newtargets-dag; no source is redelivered."
  }
 }
