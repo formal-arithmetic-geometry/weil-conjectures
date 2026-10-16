@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-def-sfb-sheaf-tensor-closed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The tensor product of sheaves is closed and right exact",
@@ -19,24 +19,152 @@
  ],
  "proof": [
   {
-   "text": "Using the adjunction $a\\dashv$ (inclusion), the presheaf adjunction of\n[det-def-sfb-sheaf-tensor-presheaf], and full faithfulness of the inclusion of sheaves,\n$$\n\\Hom_{\\Sh}\\bigl(a(\\mathcal F\\otimes_p\\mathcal G),\\mathcal H\\bigr)\\cong\\Hom_{\\mathrm{PSh}}(\\mathcal F\\otimes_p\\mathcal G,\\mathcal H)\\cong\\Hom_{\\mathrm{PSh}}(\\mathcal G,[\\mathcal F,\\mathcal H])=\\Hom_{\\Sh}(\\mathcal G,[\\mathcal F,\\mathcal H]),\n$$\nthe last because $[\\mathcal F,\\mathcal H]$ is a sheaf. Each step is natural. So\n$\\mathcal F\\otimes-$ is left adjoint to $\\mathcal{H}om(\\mathcal F,-)$ and preserves all\ncolimits; by the symmetry, so does $-\\otimes\\mathcal F$. A colimit-preserving functor between\nabelian categories preserves finite biproducts and cokernels, so it is additive and right exact.",
+   "text": "Write $\\iota$ for the inclusion of sheaves into presheaves and $a$ for sheafification. For fixed $\\mathcal F$, the presheaf functor $[\\iota\\mathcal F,-]$ takes $\\iota\\mathcal H$ to a sheaf by [det-def-sfb-sheaf-tensor-hom-sheaf]. Its maps are the internal-hom maps of [det-def-sfb-sheaf-tensor-presheaf]; since the sheaf category is full, these maps are also sheaf morphisms. Thus $Q_{\\mathcal F}(\\mathcal H)=[\\iota\\mathcal F,\\iota\\mathcal H]$ defines a sheaf-valued functor. The same construction is contravariantly functorial in $\\mathcal F$.",
    "uses": [
-    "det-def-sfb-sheaf-tensor-presheaf"
+    "det-def-sfb-sheaf-tensor-presheaf",
+    "det-def-sfb-sheaf-tensor-hom-sheaf"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-hom-sheaf.md",
+    "place": "Statement: internal hom into a sheaf is a sheaf"
+   }
+  },
+  {
+   "text": "For sheaves $\\mathcal F,\\mathcal G,\\mathcal H$, the definition of the tensor product in [det-def-sfb-sheaf-tensor-structure], the universal property of [def-weil-pbc-sheafification], and the adjunction stated in [det-def-sfb-sheaf-tensor-presheaf] give\n$$\\operatorname{Hom}_{\\mathrm{Sh}}(\\mathcal F\\otimes\\mathcal G,\\mathcal H)\n=\\operatorname{Hom}_{\\mathrm{Sh}}(a(\\iota\\mathcal F\\otimes_p \\iota\\mathcal G),\\mathcal H)\n\\cong\\operatorname{Hom}_{\\mathrm{PSh}}(\\iota\\mathcal F\\otimes_p \\iota\\mathcal G,\\iota\\mathcal H)\n\\cong\\operatorname{Hom}_{\\mathrm{PSh}}(\\iota\\mathcal G,[\\iota\\mathcal F,\\iota\\mathcal H])\n=\\operatorname{Hom}_{\\mathrm{Sh}}(\\mathcal G,Q_{\\mathcal F}\\mathcal H).$$\nThe last equality uses fullness and [det-def-sfb-sheaf-tensor-hom-sheaf]. The two adjunction bijections are natural, and the first and last identifications simply retain the same underlying morphisms. Their composite is therefore natural in all three variables, including the contravariant variable $\\mathcal F$. This is the required adjunction $\\mathcal F\\otimes-\\dashv Q_{\\mathcal F}$. Together with the symmetric monoidal structure already given in [det-def-sfb-sheaf-tensor-structure], it proves closed symmetric monoidality with the specified internal hom.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-weil-pbc-sheafification",
+    "det-def-sfb-sheaf-tensor-presheaf",
+    "det-def-sfb-sheaf-tensor-hom-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-closed.md",
+    "place": "Statement: displayed tensor-hom bijection and closedness clause; explicit adjunction argument"
+   }
+  },
+  {
+   "text": "All colimits here are small in the coefficient universe, with the size convention on $C$ of [det-def-sfb-sheaf-tensor-presheaf]. The hypothesis that $\\mathcal A$ is Grothendieck abelian supplies small colimits by [def-sp-grothendieck-abelian]. For a small sheaf diagram $D:I\\to\\mathrm{Sh}(C,\\mathcal A)$, form the presheaf $P$ with $P(U)=\\operatorname{colim}_{i\\in I}(\\iota D_i)(U)$; its restriction maps are induced uniquely by the restriction maps of the diagram. For each presheaf $T$, a map $P\\to T$ is exactly a compatible family $\\iota D_i\\to T$: the objectwise colimit property gives the components, and their naturality follows by uniqueness after precomposition with every colimit map. By [def-weil-pbc-sheafification], maps $aP\\to\\mathcal H$ are therefore exactly compatible sheaf maps $D_i\\to\\mathcal H$. This is the universal property of [def-weil-pbc-category-colimit], so $aP$ is the colimit of $D$. This also applies to the empty diagram and to every finite diagram.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-presheaf",
+    "def-sp-grothendieck-abelian",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 002F (definition-colimit), universal property; elementary application of sheafification"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to the adjunction of step 2. It proves that $\\mathcal F\\otimes-$ preserves every small colimit constructed in step 3. The symmetry from [det-def-sfb-sheaf-tensor-structure] also gives a natural bijection\n$$\\operatorname{Hom}_{\\mathrm{Sh}}(\\mathcal G\\otimes\\mathcal F,\\mathcal H)\\cong\\operatorname{Hom}_{\\mathrm{Sh}}(\\mathcal F\\otimes\\mathcal G,\\mathcal H)\\cong\\operatorname{Hom}_{\\mathrm{Sh}}(\\mathcal G,Q_{\\mathcal F}\\mathcal H),$$\nwhere the first map is precomposition with the symmetry $\\mathcal F\\otimes\\mathcal G\\to\\mathcal G\\otimes\\mathcal F$. Hence $-\\otimes\\mathcal F$ is also left adjoint to $Q_{\\mathcal F}$ and the same cited theorem proves preservation of every small colimit for it.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "det-def-sfb-sheaf-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact, part (1) and its proof"
+   }
+  },
+  {
+   "text": "The sheaf category is additive, as needed for the last clause. Indeed, the abelian-category hypothesis on $\\mathcal A$ in [det-def-sfb-sheaf-tensor-presheaf] supplies the structures listed in [def-sp-abelian]. Sums and negatives of sheaf morphisms are taken componentwise and remain natural because composition in $\\mathcal A$ is bilinear. The zero presheaf is a sheaf. The pointwise biproduct $B(U)=\\mathcal G(U)\\oplus\\mathcal H(U)$ is also a sheaf: for any test object $A\\in\\mathcal A$, maps $A\\to B(U)$ are pairs of maps to the two factors; matching pairs glue uniquely coordinate by coordinate because $\\mathcal G$ and $\\mathcal H$ are sheaves. The pointwise inclusions and projections are natural and satisfy $p_ri_s=\\delta_{rs}$ and $i_1p_1+i_2p_2=1$. They are thus a biproduct in the sense of [def-weil-additive-category].",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-presheaf",
+    "def-sp-abelian",
+    "def-weil-additive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section Additive categories: pointwise verification of zero object, preadditivity and biproduct identities"
+   }
+  },
+  {
+   "text": "Let $T$ be either tensor functor. Step 4 says that $T$ preserves zero objects and binary coproducts. Under the canonical coproduct identification $T(X\\oplus Y)\\cong T(X)\\oplus T(Y)$, it carries inclusions to inclusions. A zero morphism factors through the zero object, so $T(0)=0$ on morphisms; consequently it carries the projections to projections as well, by their compositions with the two inclusions. It then carries diagonals to diagonals, codiagonals to codiagonals, and $f\\oplus g$ to $T(f)\\oplus T(g)$, by these same component identities. Applying $T$ to\n$$f+g=\\nabla_Y\\circ(f\\oplus g)\\circ\\Delta_X$$\ntherefore gives $T(f+g)=T(f)+T(g)$, exactly additivity as defined in [def-weil-pbc-additive-functor]. Finally every finite diagram is a small diagram, so step 4 says that $T$ preserves all finite colimits. This is right exactness (Stacks Tag 0034, definition-exact), including preservation of cokernels. Thus both tensor functors are additive and right exact.",
+   "uses": [
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0DLP, lemma-additive-functor, proof of (2) implies (1); categories.tex Tag 0034, definition-exact"
+   }
   }
  ],
  "proof_deps": [
-  "det-def-sfb-sheaf-tensor-presheaf"
+  "det-def-sfb-sheaf-tensor-presheaf",
+  "det-def-sfb-sheaf-tensor-hom-sheaf",
+  "det-def-sfb-sheaf-tensor-structure",
+  "def-weil-pbc-sheafification",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sp-abelian",
+  "def-weil-additive-category",
+  "def-weil-pbc-additive-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-closed.md",
-  "place": "## Proof"
+  "place": "Closedness and exactness clauses; the imported adjunction argument expanded, with Stacks 0038 and the explicit biproduct calculation of 0DLP"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "MonoidalClosed|monoidalClosed|preservesColimits.*tensor|tensor.*preservesColimits",
+   "results": "25 hits; returned top entries: Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Category/Cat/CartesianClosed.lean, Mathlib/CategoryTheory/Preadditive/Projective/Internal.lean, Mathlib/CategoryTheory/Preadditive/Projective/Internal.lean, Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean, Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for all clauses with the specified internal hom: cartesian sheaf and light condensed special cases do not apply to arbitrary non-cartesian coefficients; generic monoidal/reflection tools require the adjunction identification supplied in this split"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of sheaves is monoidal closed and tensor product is right exact",
+   "results": "8 hits; returned top entries: instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.Sheaf.cartesianMonoidalCategory, CategoryTheory.Functor.functorCategoryClosed, CategoryTheory.Sheaf.instCategorySheaf, TopCat.instCategorySheaf, CategoryTheory.Sheaf.instInhabitedHom, CategoryTheory.Sheaf.tensorProd_isSheaf",
+   "date": "2026-10-16",
+   "verdict": "no match for all clauses with the specified internal hom: cartesian sheaf and light condensed special cases do not apply to arbitrary non-cartesian coefficients; generic monoidal/reflection tools require the adjunction identification supplied in this split"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalClosed, Sheaf",
+   "results": "0 hits; returned top entries: ; loogle: unknown identifier 'MonoidalClosed'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: the unqualified identifier MonoidalClosed was not recognized; no absence conclusion; repeated with qualified names"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves valued in a closed symmetric monoidal abelian category have a closed tensor product and tensoring preserves colimits",
+   "results": "8 hits; returned top entries: instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.monoidalCategory, instMonoidalClosedCondensedSet, CategoryTheory.Sheaf.symmetricCategory, CategoryTheory.sheafToPresheafMonoidal, CategoryTheory.Sheaf.tensorProd_isSheaf, CategoryTheory.GrothendieckTopology.W.monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match for all clauses with the specified internal hom: cartesian sheaf and light condensed special cases do not apply to arbitrary non-cartesian coefficients; generic monoidal/reflection tools require the adjunction identification supplied in this split"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.MonoidalClosed",
+   "results": "2 hits; returned top entries: instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match for all clauses with the specified internal hom: cartesian sheaf and light condensed special cases do not apply to arbitrary non-cartesian coefficients; generic monoidal/reflection tools require the adjunction identification supplied in this split"
+  },
+  {
+   "tool": "grep",
+   "query": "Closed|Colimits",
+   "results": "5 hits in CategoryTheory/Sites/Monoidal.lean: import at line 8, documentation at lines 16, 25 and 28, namespace open at line 42. Lines 25-30 explicitly leave identification of the sheaf internal hom with the presheaf internal hom as a TODO, while noting abstract closedness by reflection.",
+   "date": "2026-10-16",
+   "verdict": "no match for all clauses with the specified internal hom: cartesian sheaf and light condensed special cases do not apply to arbitrary non-cartesian coefficients; generic monoidal/reflection tools require the adjunction identification supplied in this split"
+  },
+  {
+   "tool": "grep",
+   "query": "Abelian|PreservesFiniteColimits",
+   "results": "5 hits in CategoryTheory/Abelian/Exact.lean concerning exactness within abelian categories; no sheaf tensor-hom identification.",
+   "date": "2026-10-16",
+   "verdict": "no match; the split instead uses the finite-colimit definition of right exactness and writes out the additive-functor argument"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -51,5 +179,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-sheaf-tensor"
+ "unit": "sk-def-sfb-sheaf-tensor",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sfb-sheaf-tensor-closed",
+  "worker": "stage1",
+  "summary": "Expanded the sheafification/presheaf tensor-hom adjunction into a natural sheaf adjunction; reused the existing left-adjoint colimit theorem; constructed sheaf colimits and finite biproducts by their universal properties and wrote out the addition calculation. No new nodes or statement changes. All proof citations were checked against their actual statements.",
+  "blueprint": "Realizes clause (2) of sk-def-sfb-sheaf-tensor/_section.md and the displayed Hom formula and closedness/colimit/additivity/right-exactness clauses of det-def-sfb-sheaf-tensor-closed; retains the sheafification and presheaf adjunction route. The imported node has no chapter/unit fields and the corresponding chapter/unit JSON records are absent, so their source _section.md files were read without changing maintainer metadata.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q41-8e2d19002",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-8e2d19002 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, current blueprint route and cited source passages in full. All six steps check out; no new nodes, missing mathematical inputs or cycles. review.md records source locations, edge cases and the harmless report error about the chapter JSON's existence. No fixes or additional tool_uses."
+ }
 }
