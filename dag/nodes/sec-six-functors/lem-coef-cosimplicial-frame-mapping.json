@@ -306,12 +306,6 @@
  "lean": {
   "module": "Sheaf.CategoryTheory.CosimplicialFrameMapping",
   "declaration": "CategoryTheory.cosimplicial_frame_mapping",
-  "file": "lean/Sheaf/CategoryTheory/CosimplicialFrameMapping.lean",
-  "statement": "theorem cosimplicial_frame_mapping (C : Type u) [Category.{v} C] [HasLimits C] [HasColimits C] [ModelCategory C] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations C) (fibrations C)] [MorphismProperty.HasFunctorialFactorization (cofibrations C) (trivialFibrations C)] (K : SSet.{max u v u' v' t}) (q : FiniteReedy.largeNerve.{u, v, max u v u' v' t} C ⟶ K) (hq : FiniteReedy.IsLocalization (weakEquivalences C) q) : ∃ M : CosimplicialFrameMappingData C K q, FrameKanPullbacksAndProducts.{max u v u' v' t} ∧ ∀ (D : Type u') [Category.{v'} D] [HasLimits D] [HasColimits D] [ModelCategory D] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations D) (fibrations D)] [MorphismProperty.HasFunctorialFactorization (cofibrations D) (trivialFibrations D)] (L : SSet.{max u v u' v' t}) (r : FiniteReedy.largeNerve.{u', v', max u v u' v' t} D ⟶ L), FiniteReedy.IsLocalization (weakEquivalences D) r → FrameLeftQuillenClause.{u, v, t, u', v'} M D L r",
-  "branch": "newtargets-dag",
-  "by": "N9",
-  "date": "2026-10-16",
-  "existing": false,
   "declarations": [
    "CategoryTheory.FrameLatchingIndex",
    "CategoryTheory.frameLatchingDiagram",
@@ -341,14 +335,20 @@
    "CategoryTheory.FrameLeftQuillenClause",
    "CategoryTheory.cosimplicial_frame_mapping"
   ],
-  "note": "Second reading replaces arbitrary Prop fields and arbitrary latching arrows by the actual colimits, function complexes, coherent localization interface, normalized space comparisons, canonical naturality spans, fibrant-leg pullback comparison, products, and the induced left-Quillen mapping action. Object and morphism universes remain independent."
+  "file": "lean/Sheaf/CategoryTheory/CosimplicialFrameMapping.lean",
+  "statement": "theorem cosimplicial_frame_mapping (C : Type u) [Category.{v} C] [HasLimits C] [HasColimits C] [ModelCategory C] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations C) (fibrations C)] [MorphismProperty.HasFunctorialFactorization (cofibrations C) (trivialFibrations C)] (K : SSet.{max u v u' v' t}) (q : FiniteReedy.largeNerve.{u, v, max u v u' v' t} C ⟶ K) (hq : FiniteReedy.IsLocalization (weakEquivalences C) q) : ∃ M : CosimplicialFrameMappingData C K q, FrameKanPullbacksAndProducts.{max u v u' v' t} ∧ ∀ (D : Type u') [Category.{v'} D] [HasLimits D] [HasColimits D] [ModelCategory D] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations D) (fibrations D)] [MorphismProperty.HasFunctorialFactorization (cofibrations D) (trivialFibrations D)] (L : SSet.{max u v u' v' t}) (r : FiniteReedy.largeNerve.{u', v', max u v u' v' t} D ⟶ L), FiniteReedy.IsLocalization (weakEquivalences D) r → FrameLeftQuillenClause.{u, v, t, u', v'} M D L r",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of return for immutable head b04b56508301: this existing prerequisite has no lean record or mathlib_match on the shared base. Deliver its full statement and concrete frame/mapping constructions together with the consumer, preserving the interface available through the live source lookup. Only lean is changed. The explicit BrownLemma import supplies its stated Mathlib proof dependency; no other DAG node is stated."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e1948ddd5",
-  "group": "N9",
+  "reviewer": "NT-stage2-Codex-7f9122883",
+  "group": "Q37",
   "result": "pass",
-  "note": "Audited node, dependencies, source declarations, module, report, edge cases, docstrings, exact theorem signature, and scompile evidence; no findings."
+  "note": "Wrote review.md. Audited both modules, dependency interfaces, sources, hypotheses, conclusions, universes, edge cases and docstrings. Both statement fields match verbatim; both snapshot modules compile cleanly through scompile.py. No corrections needed."
  }
 }

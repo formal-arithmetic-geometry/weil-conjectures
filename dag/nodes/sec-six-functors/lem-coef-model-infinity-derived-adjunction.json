@@ -29,7 +29,9 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-cosimplicial-frame-mapping"
  ],
  "proof": [
   {
@@ -173,5 +175,32 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-238253656 (reviewer sub-agent of L); spot-checked: Read the item, all six proof steps, cited frame node, unit/chapter route, master exceptional-adjoint target, and Cisinski/Hinich sources. Verified hypotheses, replacement directions, mapping-space coherence, unit/counit and triangles, direct-localization cases, edge cases, duplication, Mathlib searches, and coefficient/base-change route. No new nodes survive and no repairs are needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModelInfinityDerivedAdjunction",
+  "declaration": "HomotopicalAlgebra.ModelInfinity.quillenAdjunctionInfinityLocalization",
+  "declarations": [
+   "HomotopicalAlgebra.ModelInfinity.diagramObject",
+   "HomotopicalAlgebra.ModelInfinity.edgeClass",
+   "HomotopicalAlgebra.ModelInfinity.Represents",
+   "HomotopicalAlgebra.ModelInfinity.CoherentAdjunction",
+   "HomotopicalAlgebra.ModelInfinity.ReplacementAdjunction",
+   "HomotopicalAlgebra.ModelInfinity.quillenAdjunctionInfinityLocalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ModelInfinityDerivedAdjunction.lean",
+  "statement": "theorem quillenAdjunctionInfinityLocalization {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D] [ModelCategory C] [ModelCategory D] [HasLimits C] [HasColimits C] [HasLimits D] [HasColimits D] [(cofibrations C).HasFunctorialFactorization (trivialFibrations C)] [(trivialCofibrations C).HasFunctorialFactorization (fibrations C)] [(cofibrations D).HasFunctorialFactorization (trivialFibrations D)] [(trivialCofibrations D).HasFunctorialFactorization (fibrations D)] (L : C ⥤ D) (U : D ⥤ C) (adj : L ⊣ U) (hL : ∀ {X Y : C} (f : X ⟶ Y), Cofibration f → Cofibration (L.map f)) (hLt : ∀ {X Y : C} (f : X ⟶ Y), Cofibration f → WeakEquivalence f → Cofibration (L.map f) ∧ WeakEquivalence (L.map f)) (M N : SSet.{max u v u' v' w}) [SSet.Quasicategory M] [SSet.Quasicategory N] (qM : FiniteReedy.largeNerve.{u, v, max u v u' v' w} C ⟶ M) (qN : FiniteReedy.largeNerve.{u', v', max u v u' v' w} D ⟶ N) (hM : FiniteReedy.IsLocalization.{u, v, max u v u' v' w} (weakEquivalences C) qM) (hN : FiniteReedy.IsLocalization.{u', v', max u v u' v' w} (weakEquivalences D) qN) (Q : C ⥤ C) (e : Q ⟶ 𝟭 C) (hQ : ∀ X : C, IsCofibrant (Q.obj X) ∧ WeakEquivalence (e.app X)) (T : D ⥤ D) (t : 𝟭 D ⟶ T) (hT : ∀ Y : D, IsFibrant (T.obj Y) ∧ WeakEquivalence (t.app Y)) : (∀ {X Y : D} (f : X ⟶ Y), Fibration f → Fibration (U.map f)) ∧ (∀ {X Y : D} (f : X ⟶ Y), Fibration f → WeakEquivalence f → Fibration (U.map f) ∧ WeakEquivalence (U.map f)) ∧ (∀ {X Y : C} (f : X ⟶ Y), IsCofibrant X → IsCofibrant Y → WeakEquivalence f → WeakEquivalence (L.map f)) ∧ (∀ {X Y : D} (f : X ⟶ Y), IsFibrant X → IsFibrant Y → WeakEquivalence f → WeakEquivalence (U.map f)) ∧ Nonempty (ReplacementAdjunction.{u, v, u', v', w} adj Q e T t qM qN)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of return for immutable head b04b56508301: the existing prerequisite lem-coef-cosimplicial-frame-mapping is included as a dependency module and lean-only node binding in this delivery. The item uses its frameLargeNerveMap and the public FiniteReedy largeNerve, IsLocalization and transformation primitives. The item theorem, coherent adjunction definitions, replacements and unit/counit clauses are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7f9122883",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Wrote review.md. Audited both modules, dependency interfaces, sources, hypotheses, conclusions, universes, edge cases and docstrings. Both statement fields match verbatim; both snapshot modules compile cleanly through scompile.py. No corrections needed."
  }
 }
