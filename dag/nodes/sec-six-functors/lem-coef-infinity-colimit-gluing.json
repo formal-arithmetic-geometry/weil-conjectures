@@ -17,17 +17,93 @@
  },
  "kind": "statement",
  "title": "Gluing coherent colimits along a monomorphism of indexing simplicial sets",
- "statement": "An infinity category means a simplicial set with fillers for every inner horn, where an inner horn is the union of the faces of the standard simplex except one face other than the first or last. The standard simplex $\\Delta^n$ is the nerve of $\\{0<\\cdots<n\\}$ [def-weil-pbc-simplicial-set]. Colimits are understood in the coherent mapping-space sense: a cocone with vertex $L$ is a colimit when, for every object $T$, composition induces an equivalence from $\\operatorname{Map}(L,T)$ to the space of coherent cocones with vertex $T$. Let $A\\to B$ and $A\\to D$ be maps of simplicial sets, with $A\\to D$ degreewise injective, and let $K=B\\amalg_A D$ be their pushout in simplicial sets. Let $p:K\\to\\mathcal C$ be a diagram in an infinity category. Suppose its restrictions to $B,A,D$ have colimits $X,Y,Z$, respectively, equipped with colimit cocones. Restriction of cocones induces a coherent span $X\\leftarrow Y\\to Z$, determined up to a contractible space of choices. If this span has a pushout $P$ in $\\mathcal C$, then $p$ has a colimit, and $P$ with its induced cocone is such a colimit. No finiteness condition on $A,B,D$ and no existence of other colimits in $\\mathcal C$ is assumed.",
+ "statement": "An infinity category means a simplicial set with fillers for every inner horn, where an inner horn is the union of the faces of the standard simplex except one face other than the first or last. The standard simplex $\\Delta^n$ is the nerve of $\\{0<\\cdots<n\\}$ [def-weil-pbc-simplicial-set]. Colimits are understood in the coherent mapping-space sense: a cocone with vertex $L$ is a colimit when, for every object $T$, composition induces an equivalence from $\\operatorname{Map}(L,T)$ to the space of coherent cocones with vertex $T$. Let $A\\to B$ and $A\\to D$ be maps of simplicial sets, with $A\\to D$ degreewise injective, and let $K=B\\amalg_A D$ be their pushout in simplicial sets. Let $p:K\\to\\mathcal C$ be a diagram in an infinity category. Suppose its restrictions to $B,A,D$ have colimits $X,Y,Z$, respectively, equipped with colimit cocones. Restriction of cocones induces a coherent span $X\\leftarrow Y\\to Z$, determined up to a contractible space of choices. If this span has a pushout $P$ in $\\mathcal C$, then $p$ has a colimit, and $P$ with its induced cocone is such a colimit. No finiteness condition on $A,B,D$ and no existence of other colimits in $\\mathcal C$ is assumed. The coherent functor categories, mapping spaces and cocones are those of [def-cbc-enhanced-diagrams-cones], in a fixed universe large enough to contain the displayed simplicial sets.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
   "place": "Higher Topos Theory, Proposition 4.4.2.2 and Remark 4.4.2.3, p. 296. Online text read; not archived in literature/. No Stacks tag states this coherent result; Stacks simplicial.tex 018R (lemma-glue-simplex) concerns only the indexing pushout."
  },
  "stmt_deps": [
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $H=A,B,D,K$ and $T\\in\\mathcal C$ put $E_H(T)=\\operatorname{Map}_{\\operatorname{Fun}(H,\\mathcal C)}(p|_H,\\Delta_HT)$, the space of coherent cocones with vertex $T$. These are Kan complexes by [lem-cbc-enhanced-functor-cone-calculus]. Write the three given colimit cocones as $\\lambda_A,\\lambda_B,\\lambda_D$, with vertices $Y,X,Z$. By the assumed universal properties, composition with these cocones gives equivalences $e_A(T):\\operatorname{Map}(Y,T)\\simeq E_A(T)$, $e_B(T):\\operatorname{Map}(X,T)\\simeq E_B(T)$ and $e_D(T):\\operatorname{Map}(Z,T)\\simeq E_D(T)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 4.4.2.2 and Remark 4.4.2.3, printed p. 296 (online statement); agent mapping-space proof expanding the coherent gluing and choice assertions."
+   }
+  },
+  {
+   "text": "In the cocone quasicategory of $p|_A$, $\\lambda_A$ is initial. The cocone restrictions $\\lambda_B|_A$ and $\\lambda_D|_A$ are objects of this category. The cocone mapping-space formula and the initial-object criterion in [lem-cbc-enhanced-functor-cone-calculus] identify the space of pairs $(f:Y\\to X,h_X:f\\lambda_A\\simeq\\lambda_B|_A)$ with the contractible mapping space from $\\lambda_A$ to $\\lambda_B|_A$. Likewise $(g:Y\\to Z,h_Z:g\\lambda_A\\simeq\\lambda_D|_A)$ has contractible choice space. Choosing these two points gives the coherent span $q=(X\\xleftarrow fY\\xrightarrow gZ)$. Its indexing nerve has only the two nonidentity arrows and no composable pair of nonidentity arrows, so no additional compatibility between $f$ and $g$ is required. The product of the two contractible choice spaces is contractible: pair their contraction homotopies. This asserts contractibility with the comparison homotopies retained, not contractibility of the full space of all bare arrows $Y\\to X$ or $Y\\to Z$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 4.4.2.2 and Remark 4.4.2.3, printed p. 296 (online statement); agent mapping-space proof expanding the coherent gluing and choice assertions."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-mapping-excision] to the arbitrary pair of diagrams $p,\\Delta_KT$ on $K=B\\amalg_A D$. Its injectivity hypothesis is exactly the assumed injectivity of $A\\to D$; nothing is required of $A\\to B$. It gives an equivalence, natural under postcomposition in $T$,\n$$r_T:E_K(T)\\simeq E_B(T)\\times^h_{E_A(T)}E_D(T).$$\nIn particular the path in the homotopy pullback is retained; agreement in the set of homotopy classes would not give this conclusion.",
+   "uses": [
+    "lem-coef-infinity-mapping-excision"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 4.4.2.2 and Remark 4.4.2.3, printed p. 296 (online statement); agent mapping-space proof expanding the coherent gluing and choice assertions."
+   }
+  },
+  {
+   "text": "The comparison homotopies from Step 2 make the three maps $e_B(T),e_A(T),e_D(T)$ a map of cospans of spaces. Explicitly $e_B(T)(u)|_A=u(\\lambda_B|_A)\\simeq uf\\lambda_A=e_A(T)(uf)$ using $u h_X$ in reverse, and $e_D(T)(v)|_A\\simeq vg\\lambda_A=e_A(T)(vg)$ using $v h_Z$ in reverse. Thus they induce\n$$s_T:\\operatorname{Map}(X,T)\\times^h_{\\operatorname{Map}(Y,T)}\\operatorname{Map}(Z,T)\\simeq E_B(T)\\times^h_{E_A(T)}E_D(T).$$\nOn a triple $(u,v,\\gamma:uf\\simeq vg)$ the new path is the concatenation $(u h_X)^{-1}$, followed by $e_A(T)(\\gamma)$, followed by $v h_Z$. This is an equivalence: choose homotopy inverses of the three $e_H(T)$ and use their inverse homotopies to give the reverse map on triples; the two composites reduce to the identity by those inverse homotopies and cancellation of a path with its inverse. For a family of path triples parameterized by any simplex, apply the displayed concatenation to the entire parameter-dependent paths. Its restrictions to faces and degeneracies are the concatenations for the restricted families, since the three equivalences and whiskering commute with these restrictions. The inverse homotopies just described are also homotopies of these parameterized families, so their cancellation verifies the two composites as maps of spaces. Consequently Steps 3 and 4 identify $E_K(T)$ with the displayed homotopy pullback of mapping spaces, naturally under postcomposition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 4.4.2.2 and Remark 4.4.2.3, printed p. 296 (online statement); agent mapping-space proof expanding the coherent gluing and choice assertions."
+   }
+  },
+  {
+   "text": "For completeness, compute the coherent cocone space of the span $q$. Its indexing nerve $S$ is the pushout of the two arrow simplices $Y\\to X$ and $Y\\to Z$ along their common source vertex. This is a degreewise pushout: its nondegenerate simplices are precisely three vertices and these two edges. Apply [lem-coef-infinity-mapping-excision] to $q,\\Delta_ST$. By the $n=1$ and $n=0$ clauses of [lem-coef-infinity-final-index-colimit], a cocone on either arrow is represented by its target and a cocone on the source vertex is represented by $Y$. Under these identifications the restriction maps are $u\\mapsto uf$ and $v\\mapsto vg$: the standard-arrow colimit cocone has source edge $f$ or $g$ and target edge an identity. Hence the space of coherent cocones on $q$ with vertex $T$ is\n$$H(T)=\\operatorname{Map}(X,T)\\times^h_{\\operatorname{Map}(Y,T)}\\operatorname{Map}(Z,T).$$\nIf $P$ is the assumed pushout, its colimit universal property is therefore the equivalence $\\operatorname{Map}(P,T)\\simeq H(T)$ induced by its legs $a:X\\to P$, $b:Z\\to P$ and its specified compatibility $af\\simeq bg$.",
+   "uses": [
+    "lem-coef-infinity-mapping-excision",
+    "lem-coef-infinity-final-index-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 4.4.2.2 and Remark 4.4.2.3, printed p. 296 (online statement); agent mapping-space proof expanding the coherent gluing and choice assertions."
+   }
+  },
+  {
+   "text": "Use the triple $(a,b,af\\simeq bg)\\in H(P)$ and the equivalences $s_P,r_P$ from Steps 3 and 4 to choose a cocone $\\lambda\\in E_K(P)$ whose restricted data, including the path on $A$, are equivalent to $s_P(a,b,af\\simeq bg)$. Such a lift exists since $r_P$ is an equivalence. This is the induced cocone: it comes with equivalences from its restrictions to the composites $a\\lambda_B$ and $b\\lambda_D$, together with the compatibility on $A$ specified in Step 4. These equivalences are the components of the path from $r_P(\\lambda)$ to $s_P(a,b,af\\simeq bg)$ in the homotopy pullback; no strict equality of restricted cocones is required. For every $T$, the composition map $\\operatorname{Map}(P,T)\\to E_K(T)$ for this particular $\\lambda$ becomes, after $r_T$, the composite of the equivalence $\\operatorname{Map}(P,T)\\simeq H(T)$ of Step 5 with $s_T$. Indeed postcomposing the chosen data at $P$ by $w:P\\to T$ gives $(wa,wb,w(af\\simeq bg))$, and naturality of restriction and of the comparison homotopies is exactly the formula in Step 4. Thus that composition map is an equivalence. By the stated mapping-space definition, $\\lambda$ is a colimit cocone for $p$ with vertex $P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 4.4.2.2 and Remark 4.4.2.3, printed p. 296 (online statement); agent mapping-space proof expanding the coherent gluing and choice assertions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-excision",
+  "lem-coef-infinity-final-index-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, stable enhancement foundation for the derived coefficient adjunction; agent mapping-space expansion of HTT Proposition 4.4.2.2 and Remark 4.4.2.3. WANTED: archived HTT and Kerodon foundations, read online only."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,10 +160,45 @@
    "results": "{\"t\": \"2026-10-16T08:28:10Z\", \"tool\": \"grep\", \"query\": \"colimit|cocone|cofinal|[Ff]inal|[Tt]erminal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"3efce81aadfc41e5\"}",
    "date": "2026-10-16",
    "verdict": "no match: eight hits concern an ordinary terminal simplicial set as codomain of an inner fibration or lifting problem (Quasicategory/Basic.lean:70-84 and InnerFibration.lean:77-89, read); none concerns terminal objects inside a quasicategory or its coherent colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing colimits in an infinity category for a pushout of simplicial indexing sets along a monomorphism",
+   "results": "{\"t\": \"2026-10-16T08:50:00Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing colimits in an infinity category for a pushout of simplicial indexing sets along a monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\", \"CategoryTheory.SmallObject.ιFunctorObj\", \"SSet.hasColimits\", \"CategoryTheory.SmallObject.πFunctorObj\", \"CategoryTheory.SmallObject.ρFunctorObj\", \"CategoryTheory.SmallObject.functorObj_isPushout\"], \"digest\": \"2b7046e628ddaf60\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.hasColimits and monomorphism stability refer to the ordinary category of simplicial sets. The ordinary IsColimit, PushoutCocone and cell-attachment declarations do not give coherent colimits in an arbitrary quasicategory. Quasicategory-directory grep found no colimit, cocone or pushout declaration; its Basic.lean:34-42 only defines inner-horn fillers."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit|cocone|pushout",
+   "results": "{\"t\": \"2026-10-16T08:50:13Z\", \"tool\": \"grep\", \"query\": \"colimit|cocone|pushout\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.hasColimits and monomorphism stability refer to the ordinary category of simplicial sets. The ordinary IsColimit, PushoutCocone and cell-attachment declarations do not give coherent colimits in an arbitrary quasicategory. Quasicategory-directory grep found no colimit, cocone or pushout declaration; its Basic.lean:34-42 only defines inner-horn fillers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout of colimits of diagrams in a quasicategory indexed by a union of simplicial sets",
+   "results": "{\"t\": \"2026-10-16T08:50:13Z\", \"tool\": \"leansearch\", \"query\": \"Pushout of colimits of diagrams in a quasicategory indexed by a union of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum\", \"CategoryTheory.Limits.pushoutIsPushout\", \"CategoryTheory.Limits.PushoutCocone.IsColimit.mk\", \"CategoryTheory.Limits.PushoutCocone.isColimitAux\", \"CategoryTheory.IsPushout.isColimit\", \"CategoryTheory.IsPushout.isLimitFork\", \"CategoryTheory.IsPushout.isColimit'\", \"CategoryTheory.Limits.PushoutCocone.IsColimit.desc'\"], \"digest\": \"ba519370eceb165c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.hasColimits and monomorphism stability refer to the ordinary category of simplicial sets. The ordinary IsColimit, PushoutCocone and cell-attachment declarations do not give coherent colimits in an arbitrary quasicategory. Quasicategory-directory grep found no colimit, cocone or pushout declaration; its Basic.lean:34-42 only defines inner-horn fillers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T08:50:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.hasColimits and monomorphism stability refer to the ordinary category of simplicial sets. The ordinary IsColimit, PushoutCocone and cell-attachment declarations do not give coherent colimits in an arbitrary quasicategory. Quasicategory-directory grep found no colimit, cocone or pushout declaration; its Basic.lean:34-42 only defines inner-horn fillers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent colimits of a union of shapes computed as pushout of colimits",
+   "results": "{\"t\": \"2026-10-16T08:50:14Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent colimits of a union of shapes computed as pushout of colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.attachCellsιFunctorObjOfSmall\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\", \"CategoryTheory.SmallObject.πFunctorObj\", \"CategoryTheory.SmallObject.functorObj_isPushout\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj_isColimit₂\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj_isColimit₁\", \"CategoryTheory.Limits.isColimitOfIsPushoutOfIsConnected\", \"CategoryTheory.Limits.Cofan.isColimitTrans\"], \"digest\": \"cefb0b8dec07cabc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.hasColimits and monomorphism stability refer to the ordinary category of simplicial sets. The ordinary IsColimit, PushoutCocone and cell-attachment declarations do not give coherent colimits in an arbitrary quasicategory. Quasicategory-directory grep found no colimit, cocone or pushout declaration; its Basic.lean:34-42 only defines inner-horn fillers."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-finite-shape-generation",
   "by": "worker",
@@ -106,5 +217,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-colimit-gluing",
+  "worker": "stage1",
+  "summary": "No project attachment found. Preserve arbitrary simplicial indexing shapes and the one-sided monomorphism hypothesis. Construct the coherent span with its comparison homotopies, glue its cocone spaces using one new general mapping-space excision node, compute span cocones using the existing standard-simplex colimit node, and check the actual induced cocone universal property. Reuse existing coherent-diagram definitions and cone calculus.",
+  "blueprint": "Realizes the generic coherent-colimit gluing needed in the finite-shape/stability foundation under proof paragraph 2 of prop-coef-integral-exceptional-adjoint; no change to the geometric unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory functor/cone calculus provides Kan mapping spaces and the mapping-fiber and initial-object criterion; this unit has no duplicate of that foundation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-93d9a111d",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-93d9a111d (reviewer sub-agent of L); spot-checked: Read both nodes and all six proof steps in full; checked HTT 4.4.2.2–3, exact Kerodon foundations, cited statements, route, duplicates, edge cases and archived target declarations. Mathematics accepted. Corrected the new node’s incomplete created record and missing initial lean_audit in fixes/. Detailed checks and accepted cone-calculus tool use are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
