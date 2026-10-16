@@ -4,12 +4,12 @@
   "is": null,
   "from": {
    "node": "def-weil-global-geometric-frobenius",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, the first ordinary-cohomology transport arrow RGamma(Y,For K) ≅ RGamma(Y,Lg_Y^* For K), whose isomorphism assertion is delegated to lem-weil-frobenius-cohomology-transport-iso",
    "via": [
     "lem-weil-frobenius-cohomology-transport-iso"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived pullback along an isomorphism of schemes is an equivalence of ambient derived categories",
@@ -25,9 +25,87 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-proetale-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(A_Y)$ and $\\mathcal B=\\operatorname{Mod}(A_X)$, the categories of module sheaves of [def-weil-sheaf-of-modules-category]. The small-skeleton and universe conventions in [def-weil-pbc-proetale-site] ensure that these categories are abelian. Write $F=g^{-1}:\\mathcal A\\to\\mathcal B$ and $G=g_*:\\mathcal B\\to\\mathcal A$. Parts (2) and (3) of [lem-weil-proetale-isomorphism-inverse-image] give an exact equivalence on these module categories, with coefficients identified through the specified isomorphism $c^g_A$. More explicitly, extension of scalars in the module pullback of [def-weil-proetale-inverse-image] along $c^g_A$ is naturally isomorphic to the identity after identifying the rings: $m\\otimes a\\mapsto am$, with inverse $m\\mapsto m\\otimes1$. Thus the module pullback is $F$. Choose adjoint-equivalence data for the equivalence in part (2), with unit $\\eta:\\mathrm{id}_{\\mathcal A}\\xrightarrow{\\sim}GF$ and counit $\\varepsilon:FG\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal B}$, satisfying the triangle identities. The functor $G$ is exact as well: an equivalence carries the universal diagrams for kernels and cokernels to the corresponding universal diagrams, and its inverse does the same. Both functors are additive because they act on the underlying sheaves of abelian groups and on module homomorphisms.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism (Functoriality of the pro-etale site); specialization to an isomorphism via lem-weil-proetale-isomorphism-inverse-image(2)-(3), with coefficient-ring identification written out."
+   }
+  },
+  {
+   "text": "Let $Q_Y,Q_X$ be the derived localizations of cochain complexes of $\\mathcal A,\\mathcal B$ [def-weil-abstract-derived-category]. Apply [lem-weil-pbc-exact-functor-derived-factorization] to both exact functors in step 1. This gives $F_D:D(\\mathcal A)\\to D(\\mathcal B)$ and $G_D:D(\\mathcal B)\\to D(\\mathcal A)$, with natural isomorphisms $F_DQ_Y\\cong Q_XC(F)$ and $G_DQ_X\\cong Q_YC(G)$; $C(F),C(G)$ denote termwise application. Both termwise functors preserve quasi-isomorphisms, with no boundedness assumption. The finite-level clause of [def-weil-derived-pullback-tensor-hom] identifies the specified $Lg^*$ with $F_D$: the derived pullback is inverse image applied termwise to every representative. On morphisms this is the same identification, since the factorization is a natural isomorphism of functors, and the uniqueness clause of [lem-weil-pbc-localization-universal-property] makes the identification independent of the factorization choices.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, Lemma lemma-right-derived-exact-functor; agent-written assembly using the existing localization universal-property node (Categories, Tag 04VG, lemma-properties-left-localization)."
+   }
+  },
+  {
+   "text": "Apply $\\eta$ and $\\varepsilon$ in each degree of a complex. Naturality with respect to its differentials makes these chain isomorphisms $\\eta^C:\\mathrm{id}\\xrightarrow{\\sim}C(G)C(F)$ and $\\varepsilon^C:C(F)C(G)\\xrightarrow{\\sim}\\mathrm{id}$. Their triangle identities hold degree by degree, using the triangle identities of the equivalence data in step 1, obtained from [lem-weil-proetale-isomorphism-inverse-image](2). Write $p_K:F_DQ_YK\\xrightarrow{\\sim}Q_XC(F)K$ and $q_L:G_DQ_XL\\xrightarrow{\\sim}Q_YC(G)L$ for the factorization isomorphisms of [lem-weil-pbc-exact-functor-derived-factorization]. Put $a_K=q_{C(F)K}\\circ G_D(p_K)$ and $b_L=p_{C(G)L}\\circ F_D(q_L)$, so that $a_K:G_DF_DQ_YK\\xrightarrow{\\sim}Q_YC(G)C(F)K$ and $b_L:F_DG_DQ_XL\\xrightarrow{\\sim}Q_XC(F)C(G)L$. Part (2) of [lem-weil-pbc-localization-universal-property] lifts the natural isomorphisms to $\\eta^D:\\mathrm{id}\\xrightarrow{\\sim}G_DF_D$ and $\\varepsilon^D:F_DG_D\\xrightarrow{\\sim}\\mathrm{id}$ with components $\\eta^D_{Q_YK}=a_K^{-1}\\circ Q_Y(\\eta^C_K)$ and $\\varepsilon^D_{Q_XL}=Q_X(\\varepsilon^C_L)\\circ b_L$. Their inverses lift by the same part, and the lifted composites are identities because lifting respects composition. For the first triangle, substitution of these formulas and naturality of $p,q,\\varepsilon^D$ give\n$$\np_K\\circ\\bigl(\\varepsilon^D_{F_DQ_YK}\\circ F_D(\\eta^D_{Q_YK})\\bigr)\\circ p_K^{-1}\n=Q_X\\bigl(\\varepsilon^C_{C(F)K}\\circ C(F)(\\eta^C_K)\\bigr)=\\mathrm{id}.\n$$\nFor the second triangle, substitution and naturality of $p,q,\\eta^D$ give\n$$\nq_L\\circ\\bigl(G_D(\\varepsilon^D_{Q_XL})\\circ\\eta^D_{G_DQ_XL}\\bigr)\\circ q_L^{-1}\n=Q_Y\\bigl(C(G)(\\varepsilon^C_L)\\circ\\eta^C_{C(G)L}\\bigr)=\\mathrm{id}.\n$$\nThe final equalities are the degreewise triangle identities. Cancelling $p_K,q_L$ proves the triangles after precomposition with $Q_Y,Q_X$, respectively; part (3) of the localization node therefore proves the two triangle identities on the derived categories. Thus these are a unit and counit for an equivalence with functor $F_D$ and inverse $G_D$.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, Lemma lemma-right-derived-exact-functor; agent-written assembly using the existing localization universal-property node (Categories, Tag 04VG, lemma-properties-left-localization)."
+   }
+  },
+  {
+   "text": "Here is the fully faithful and essentially surjective conclusion explicitly. For $K,L\\in D(\\mathcal A)$ and $v:F_DK\\to F_DL$, set $u=(\\eta^D_L)^{-1}\\circ G_D(v)\\circ\\eta^D_K$. Naturality of $\\varepsilon^D$ and the triangle identity $\\varepsilon^D_{F_DK}\\circ F_D(\\eta^D_K)=\\mathrm{id}$ give $F_D(u)=v$. Conversely, for $u:K\\to L$, naturality of $\\eta^D$ gives $(\\eta^D_L)^{-1}\\circ G_D(F_D(u))\\circ\\eta^D_K=u$, so this is a two-sided inverse to the map on Hom sets. For every $M\\in D(\\mathcal B)$, the component $\\varepsilon^D_M:F_DG_DM\\xrightarrow{\\sim}M$ supplies a preimage up to isomorphism. Consequently $Lg^*\\cong F_D$ is fully faithful and essentially surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, Lemma lemma-right-derived-exact-functor; agent-written assembly using the existing localization universal-property node (Categories, Tag 04VG, lemma-properties-left-localization)."
+   }
+  },
+  {
+   "text": "Finally let $h:Y\\to X$ be the inverse scheme isomorphism. The direct-image formula of [def-weil-proetale-inverse-image] gives $(G\\mathcal M)(V\\xrightarrow{v}Y)=\\mathcal M(X\\times_YV\\to X)$. The fibre product here is canonically the object $(V\\xrightarrow{h\\circ v}X)$: its map to $X\\times_YV$ is $(h\\circ v,\\mathrm{id}_V)$ and its inverse is the projection to $V$; the two inverse identities follow from $gh=\\mathrm{id}_Y$ and $hg=\\mathrm{id}_X$. Part (1) of [lem-weil-proetale-isomorphism-inverse-image], applied to $h$, therefore identifies $G$ with $h^{-1}$, naturally in $V$ and $\\mathcal M$. Part (3), applied to $h$, identifies the constant coefficient rings. Under the fibre-product identification, the two coefficient maps from $A_Y$ to $GA_X$ agree: their composites with the constant presheaf send every $a\\in A$ to the same constant section $a$, so the defining uniqueness of $\\rho^g_A$ in [def-weil-proetale-inverse-image] makes them equal as sheaf maps. Thus for every object $V$ and every $s\\in A_Y(V)$, the two $A_Y(V)$-actions are restriction along this same coefficient map; the comparison on module sections commutes with that action because the fibre-product comparison acts by a module-sheaf restriction isomorphism. This proves an isomorphism of module functors, naturally on objects and morphisms. Apply it degreewise and descend the resulting natural isomorphism by [lem-weil-pbc-localization-universal-property](2). The finite-level clause of [def-weil-derived-pullback-tensor-hom], now applied to $h$, identifies the resulting termwise functor with $Lh^*$. Hence the quasi-inverse $G_D$ constructed above is termwise $g_*$ and is naturally isomorphic to $L(g^{-1})^*$, as asserted.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism (Functoriality of the pro-etale site); inverse-isomorphism specialization and explicit fibre-product comparison, followed by localization (Categories, Tag 04VG, lemma-properties-left-localization)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (lemma-right-derived-exact-functor), combined with proetale.tex Tag 09A5 (section-morphism, Functoriality of the pro-etale site) and categories.tex Tag 04VG (lemma-properties-left-localization); explicit unit/counit descent written by the worker. Local Stacks sources are absent; official online tags, the corresponding upstream Stacks TeX labels, and the cited node statements were read."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +120,80 @@
    "results": "none (Mathlib has no pro-etale site)",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|[Pp]ro[Ee]tale",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36,41 constructs the termwise derived functor and its factorization. The returned Ext/Map declarations do not assert an equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of abelian categories induces an equivalence of unbounded derived categories",
+   "results": "LeanSearch returned Internal Server Error; no absence conclusion was drawn from this service.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", CategoryTheory.Functor.IsEquivalence",
+   "results": "Loogle returned no hit for the expected mapDerivedCategory equivalence pattern.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along an isomorphism of schemes is an equivalence on unbounded derived categories of sheaves of modules on the pro-etale site",
+   "results": "The eight hits concern underived SheafOfModules pullback, composition and free-module comparisons; none states derived equivalence along a scheme isomorphism.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Equivalence|mapDerivedCategory|ProEtale",
+   "results": "The site grep finds affine-etale comparison equivalences and proetalePrecoverage, but no derived pullback equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"fullyFaithfulWhiskeringLeft\"",
+   "results": "Localization.fullyFaithfulWhiskeringLeft gives descent of natural transformations. It does not establish a pro-etale sheaf equivalence.",
+   "date": "2026-10-16",
+   "verdict": "ingredient only; no match for item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive exact equivalence between abelian categories gives mutually inverse termwise functors on their unbounded derived categories",
+   "results": "The second semantic query returns Functor.mapDerivedCategory, Factors, Factorsh, SingleFunctor and triangulated/shift instances. These concern exact functors, without asserting that the specific pro-etale pullback is an equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Ee]quivalence|[Ee]quivalence.*mapDerivedCategory|[Ii]sEquivalence.*[Ll]ocalization",
+   "results": "Two hits in Mathlib/CategoryTheory/Localization/Predicate.lean, lines 56 and 417: the equivalence in the localization definition and stability of a localization under postcomposition with an equivalence. Neither states the geometric derived-pullback result.",
+   "date": "2026-10-16",
+   "verdict": "ingredient only; no match for item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of abelian categories localizes at quasi-isomorphisms to an equivalence of derived categories",
+   "results": "Eight hits for DerivedCategory.Q and Qh localization instances, HasDerivedCategory and its standard construction, HomologicalComplexUpToQuasiIso localization instances, and quotientCompQhIso. None asserts the geometric derived-pullback equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"IsEquivalence\"",
+   "results": "Loogle returned zero hits. The pinned Mathlib ExactFunctor.lean and the separate project extension were also read.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +213,29 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation"
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-isomorphism-derived-pullback-equivalence",
+  "worker": "stage1",
+  "summary": "Kept every hypothesis and clause. Reused the existing pro-etale isomorphism inverse-image lemma, exact-functor factorization and localization universal property; wrote out descent of the termwise adjunction isomorphisms, the Hom-set inverse, essential surjectivity and the identification of termwise direct image with derived inverse-isomorphism pullback. No new nodes. The broader project derived topological-invariance theorem rests on a sorry, so does not give an attachment.",
+  "blueprint": "Realizes the derived-equivalence ingredient in the first ordinary-cohomology transport arrow of def-weil-global-geometric-frobenius through lem-weil-frobenius-cohomology-transport-iso; it supplies the same geometric-isomorphism route, without changing the unit or chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic exact equivalence of pro-etale module sheaves along a scheme isomorphism; this local categorical ingredient is not stated by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q01-106c72402",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-106c72402 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and chapter/unit route. All five proof steps check, including localization triangles and coefficient-linear identification of the quasi-inverse. No new nodes or repairs needed. Accepted the declared geometric sheaf-equivalence tool use. Master target coefficient categories remain distinct. Detailed checks and two pre-existing missing dependency IDs are recorded in review.md."
+ }
 }
